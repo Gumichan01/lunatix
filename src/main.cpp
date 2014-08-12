@@ -40,8 +40,8 @@ int main ( int argc, char** argv )
     graphics = new TX_graphics(1024,768,32);
     ttf = new TX_ttf(font_file,24,&color, graphics->getScreen());
 
-    bmp = graphics->load_BMP(name);
-    //bmp = graphics->load_image(name);
+    bmp = graphics->load_BMP(name);         // for the bmp images
+    //bmp = graphics->load_image(name);     // for the other image types
 
     graphics->put_transparency(bmp,0,0,0);
 
@@ -88,9 +88,8 @@ int main ( int argc, char** argv )
         graphics->clear();
         graphics->put_image(bmp,NULL,&dstrect);
 
-        //ttf->draw_SolidText("GumichanO1 Target Xplosion アカツキアライヴァル", &pos);
-        //ttf->draw_ShadedText("GumichanO1 Target Xplosion", &pos);
-        ttf->draw_BlendedText("Gumichan01's TX_engine", &pos1);
+        //ttf->draw_SolidText("GumichanO1 アカツキアライヴァル", &pos);   // test the japanese characters
+        ttf->draw_BlendedText("Gumichan01's LunatiX-engine", &pos1);
         ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop ", &pos2);
 
         //ttf->draw_BlendedText_WithSize("Gumichan01 Target Xplosion アカツキアライヴァル", 38, &pos);
@@ -104,13 +103,6 @@ int main ( int argc, char** argv )
     delete audio;
     delete ttf;
     delete graphics;
-
-
-
-
-
-
-
 
 
 
@@ -155,5 +147,5 @@ int main ( int argc, char** argv )
     }
 
 
-    return 0;
+    return EXIT_SUCCESS;
 }
