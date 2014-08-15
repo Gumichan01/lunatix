@@ -28,8 +28,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-#include "LX_error.h"
-
+//#include "LX_error.h"
+#include "LX_window.h"
 
 /**
 *   @class LX_graphics
@@ -40,11 +40,8 @@
 class LX_graphics{
 
     SDL_Surface *screen;    /**< The main surface (for the window creation)*/
-    int LX_width;           /**< The width of the window*/
-    int LX_height;          /**< The height of the window*/
-    int LX_bpp;             /**< The format (bits per pixel) of the window*/
 
-    public:
+
 
 /**
 *
@@ -57,42 +54,23 @@ class LX_graphics{
 *   @param bpp : bits per pixels
 *
 */
-    LX_graphics(unsigned int width, unsigned int height, unsigned int bpp)
+    LX_graphics()
     {
-        LX_width = width;
-        LX_height = height;
-        LX_bpp = bpp;
+        LX_window *win = LX_window::getInstance();
 
-        if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) == -1)
+        if(win != NULL)
         {
-            fprintf(stderr,"\nException occured in LX_graphics constructor, SDL_Init : %s \n", SDL_GetError());
-            throw LX_SDL_INIT_ERROR;
+            screen = win->getWindow();
         }
 
-
-        int flag= IMG_INIT_JPG|IMG_INIT_PNG|IMG_INIT_TIF ;
-
-        if( IMG_Init(flag) != flag)
-        {
-            fprintf(stderr,"\nException occured in LX_graphics constructor, IMG_Init : %s \n", IMG_GetError());
-            SDL_Quit();
-            throw LX_IMG_INIT_ERROR;
-        }
-
-        screen=SDL_SetVideoMode(width,height,bpp,SDL_HWSURFACE|SDL_DOUBLEBUF/*|SDL_FULLSCREEN*/);
-        //screen=SDL_SetVideoMode(width,height,bpp,SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
-
-        if(screen == NULL)
-        {
-            fprintf(stderr,"\nException occured in LX_graphics constructor, SDL_SetVideoMode : %s \n", SDL_GetError());
-            IMG_Quit();
-            SDL_Quit();
-            throw LX_SCREEN_ERROR;
-        }
-
-    SDL_WM_SetCaption("Target Xplosion prototype (v 0.1)", NULL);
-
+        delete win;
     }
+
+    public:
+
+    //get the instance
+    static LX_graphics * getInstance();
+
 
     // The static functions
 
@@ -109,17 +87,12 @@ class LX_graphics{
 
     void clear();
 
-    //the getter, for the LX_TTF class
-    SDL_Surface * getScreen();
 
-    int getWidth();
-    int getHeight();
-    int getBPP();
+    SDL_Surface * getScreen(){return screen;}
 
-    ~LX_graphics(){
-
-        IMG_Quit();
-        SDL_Quit();
+    ~LX_graphics()
+    {
+        delete screen;
     }
 
 };

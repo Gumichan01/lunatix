@@ -23,6 +23,31 @@
 */
 #include "LX_graphics.h"
 
+
+
+/**
+*   @fn LX_graphics * LX_graphics::getInstance()
+*
+*   Get the unique instance of the LX_graphics class
+*
+*   @return the instance of LX_graphics
+*
+*/
+LX_graphics * LX_graphics::getInstance()
+{
+    static LX_graphics *instance = NULL;
+
+    if(instance == NULL)
+    {
+        instance = new LX_graphics();
+    }
+
+    return instance;
+}
+
+
+
+
 /**
 *
 *   @fn SDL_Surface * LX_graphics::load_BMP(char *filename)
@@ -146,6 +171,16 @@ bool LX_graphics::put_image(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 {
    int err;
 
+    if(image == NULL)
+    {
+        std::cout << "image NULL" << std::endl;
+    }
+
+    if(screen == NULL)
+    {
+        std::cout << "screen NULL" << std::endl;
+    }
+
    err = SDL_BlitSurface(image,area,screen,pos);
 
     if(err != 0)
@@ -182,61 +217,10 @@ void LX_graphics::clear()
 }
 
 
-/**
-*
-*   @fn SDL_Surface * LX_graphics::getScreen()
-*
-*   Get the window
-*
-*/
-SDL_Surface * LX_graphics::getScreen()
-{
-    return screen;
-}
 
 
 
-/**
-*   @fn int LX_graphics::getWidth()
-*
-*   Return the width of the current screen
-*
-*   @return the width
-*
-*/
-int LX_graphics::getWidth()
-{
-    return LX_width;
-}
 
-
-
-/**
-*   @fn int LX_graphics::getHeight()
-*
-*   Return the height of the current screen
-*
-*   @return the height
-*
-*/
-int LX_graphics::getHeight()
-{
-    return LX_height;
-}
-
-
-/**
-*   @fn int LX_graphics::getBPP()
-*
-*   Return the format of the current screen
-*
-*   @return the bpp
-*
-*/
-int LX_graphics::getBPP()
-{
-    return LX_bpp;
-}
 
 
 

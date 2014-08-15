@@ -2,57 +2,63 @@
 
 #include <iostream>
 
-#include "engine/TX_graphics.h"
-#include "engine/TX_audio.h"
-#include "engine/TX_ttf.h"
-#include "engine/TX_physics.h"
+#include "engine/LX_lib.h"
+#include "engine/LX_graphics.h"
+#include "engine/LX_ttf.h"
+#include "engine/LX_audio.h"
+#include "engine/LX_physics.h"
+
+/// @todo modify the music library + commit
 
 int main ( int argc, char** argv )
 {
 
-
-    TX_Audio *audio = NULL;
-
-    TX_graphics *graphics = NULL;
-    TX_ttf *ttf = NULL;
+    int error;
+    SDL_Rect pos = {300,300,10,10};
+    SDL_Rect pos1 = {100,200,10,10};
+    SDL_Rect pos2 = {100,250,10,10};
     SDL_Color color = {255,255,255};
 
-    SDL_Surface *bmp = NULL;
+    bool err;
 
-    SDL_Rect dstrect;
-    dstrect.x = 200;
-    dstrect.y = 300;
 
-    SDL_Rect pos1;
-    pos1.x = 100;
-    pos1.y = 200;
-
-    SDL_Rect pos2;
-    pos2.x = 100;
-    pos2.y = 250;
+    SDL_Surface *sf = NULL;
+    SDL_Surface *txt = NULL;
 
     std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
-
-    //std::string font_file = "Japonesa.ttf";
+    std::string sample = "data/Prototype Princess v1_01.wav";
     std::string font_file = "data/AozoraMinchoMedium.ttf";
+    std::string engine_name = "LunatiX_engine";
 
-    graphics = new TX_graphics(1024,768,32);
-    ttf = new TX_ttf(font_file,24,&color, graphics->getScreen());
+    LX_window *win;
+    LX_graphics *graphics;
+    LX_ttf *ttf;
+    LX_Audio *audio;
 
-    bmp = graphics->load_BMP(name);         // for the bmp images
-    //bmp = graphics->load_image(name);     // for the other image types
+    err = LX_Init();
 
-    graphics->put_transparency(bmp,0,0,0);
+    if(!err)
+    {
+        std::cout << "ERREUR" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    std::cout << "LX_Init returns true value" << std::endl;
+
+    /// GRAPHICS + TTF
+    graphics = LX_graphics::getInstance();
+    ttf = new LX_ttf(font_file,28,&color);
+    audio = new LX_Audio();
 
 
-    audio = new TX_Audio();
+    sf = graphics->load_BMP("data/cb.bmp");
 
     audio->load_music(mus);
 
-
-    SDL_Event event;
     bool game = true;
+    SDL_Event event;
+
 
     while(game)
     {
@@ -86,66 +92,33 @@ int main ( int argc, char** argv )
         }
 
         graphics->clear();
-        graphics->put_image(bmp,NULL,&dstrect);
 
-        //ttf->draw_SolidText("GumichanO1 アカツキアライヴァル", &pos);   // test the japanese characters
-        ttf->draw_BlendedText("Gumichan01's LunatiX-engine", &pos1);
-        ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop ", &pos2);
-
-        //ttf->draw_BlendedText_WithSize("Gumichan01 Target Xplosion アカツキアライヴァル", 38, &pos);
+        graphics->put_image(sf,NULL,&pos);
+        graphics->put_image(ttf->draw_BlendedText(engine_name),NULL,&pos1);
+        graphics->put_image(ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop"),NULL,&pos2);
 
         graphics->update();
-
 
         SDL_Delay(33);
     }
 
+
+    SDL_FreeSurface(sf);
     delete audio;
     delete ttf;
     delete graphics;
+    //delete win;
 
-
-
-    TX_Circle cir = {500,350,50,50*50};
-    TX_Circle cir2 = {500,301,50,50*50};
-    TX_AABB re = {484,306,32,32};
-    TX_AABB re1 = {500,302,32,32};
-
-    TX_physics phy;
-
-    if(phy.collision( &cir, &re))
-    {
-        std::cout << "COLLISION" << std::endl;
-    }
-    else
-    {
-        std::cout << "FAUX" << std::endl;
-    }
-
-    // COLLISION AABB/AABB
-    std::cout << "AABB/AAB" << std::endl;
-
-    if(phy.collision( &re, &re1))
-    {
-        std::cout << "COLLISION" << std::endl;
-    }
-    else
-    {
-        std::cout << "FAUX" << std::endl;
-    }
-
-    // COLLISION CIRCLE/CIRCLE
-    std::cout << "circle *2" << std::endl;
-
-    if(phy.collision( &cir, &cir2))
-    {
-        std::cout << "COLLISION" << std::endl;
-    }
-    else
-    {
-        std::cout << "FAUX" << std::endl;
-    }
-
+    LX_Quit();
 
     return EXIT_SUCCESS;
 }
+
+
+
+
+
+
+
+
+

@@ -26,119 +26,54 @@
 
 /**
 *
-*   @fn bool LX_ttf::draw_SolidText(char *string, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_SolidText(std::string text)
 *
-*   Render the UTF-8 encoded text in solid mode
+*   Create an  UTF-8 encoded text in solid mode
 *
 *   @param text the text you want to display
-*   @param pos the position of the text on the screen
 *
-*   @return TRUE if it is ok, FALSE otherwise
+*   @return the new SDL_surface , NULL otherwise
 *
 */
-bool LX_ttf::draw_SolidText(std::string text, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_SolidText(std::string text)
 {
-    SDL_Surface *loaded;
-    int err;
-
-    loaded = TTF_RenderUTF8_Solid(font,text.c_str(), font_color);
-
-    if( loaded == NULL)
-    {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_SolidText : %s \n", TTF_GetError());
-        return false;
-    }
-
-    err = SDL_BlitSurface(loaded,NULL,screen,pos);
-
-    if(err)
-    {
-        fprintf(stderr,"\nError occurred in LX_ttf::draw_SolidText : %s",SDL_GetError());
-        return false;
-    }
-
-    SDL_FreeSurface(loaded);
-
-    return true;
+    return TTF_RenderUTF8_Solid(font,text.c_str(), font_color);
 }
 
 
 /**
 *
-*   @fn bool LX_ttf::draw_ShadedText(std::string text, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_ShadedText(std::string text)
 *
-*   Render the UTF-8 encoded text in shaded mode
+*   Create an UTF-8 encoded text in shaded mode
 *
 *   @param text the text you want to display
-*   @param pos the position of the text on the screen
 *
-*   @return TRUE if it is ok, FALSE otherwise
+*   @return the new SDL_surface , NULL otherwise
 *
 */
-bool LX_ttf::draw_ShadedText(std::string text, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_ShadedText(std::string text)
 {
-    SDL_Surface *loaded;
-    int err;
     SDL_Color grey={127,127,127};
 
-    loaded = TTF_RenderUTF8_Shaded(font,text.c_str(), font_color, grey);
-
-    if( loaded == NULL)
-    {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_ShadedText : %s \n", TTF_GetError());
-        return false;
-    }
-
-    err = SDL_BlitSurface(loaded,NULL,screen,pos);
-
-    if(err)
-    {
-        fprintf(stderr,"\nError occurred in LX_ttf::draw_ShadedText : %s",SDL_GetError());
-        return false;
-    }
-
-    SDL_FreeSurface(loaded);
-
-    return true;
+    return TTF_RenderUTF8_Shaded(font,text.c_str(), font_color, grey);
 }
 
 
 /**
 *
-*   @fn bool LX_ttf::draw_BlendedText(std::string text, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
 *
-*   Render the UTF-8 encoded text in blended mode
+*   Create an UTF-8 encoded text surface in blended mode
 *
 *   @param text the text you want to display
-*   @param pos the position of the text on the screen
 *
-*   @return TRUE if it is ok, FALSE otherwise
+*   @return the new SDL_surface , NULL otherwise
 *
 */
-bool LX_ttf::draw_BlendedText(std::string text, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
 {
-    SDL_Surface *loaded;
-    int err;
-
-    loaded = TTF_RenderUTF8_Blended(font,text.c_str(), font_color);
-
-    if( loaded == NULL)
-    {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_BlendedText : %s \n", TTF_GetError());
-        return false;
-    }
-
-    err = SDL_BlitSurface(loaded,NULL,screen,pos);
-
-    if(err)
-    {
-        fprintf(stderr,"\nError occurred in LX_ttf::draw_BlendedText : %s",SDL_GetError());
-        return false;
-    }
-
-    SDL_FreeSurface(loaded);
-
-    return true;
+    return TTF_RenderUTF8_Blended(font,text.c_str(), font_color);
 }
 
 /**
@@ -296,12 +231,6 @@ bool LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_
 
     return true;
 }
-
-
-
-
-
-
 
 
 

@@ -111,7 +111,42 @@ void LX_Audio::stop_music()
 }
 
 
+/**
+*   @fn Mix_Chunk * LX_Audio::load_sample(std::string filename)
+*
+*   Load the sample
+*
+*   @param filename the name of the sample file
+*
+*   @return The sample if it is OK, NULL otherwise
+*
+*/
+Mix_Chunk * LX_Audio::load_sample(std::string filename)
+{
+    Mix_Chunk *sample = NULL;
 
+    sample = Mix_LoadWAV(filename.c_str());
+
+    if(sample ==NULL)
+    {
+        fprintf(stderr,"\nException occured in LX_Audio::load_sample / Mix_LoadWAV :  %s \n", Mix_GetError());
+    }
+
+    return sample;
+}
+
+/**
+*   @fn void LX_Audio::play_sample(Mix_Chunk *sample)
+*
+*   Load the sample
+*
+*   @param sample the sample
+*
+*/
+void LX_Audio::play_sample(Mix_Chunk *sample)
+{
+    Mix_PlayChannel(-1,sample,0);
+}
 
 
 

@@ -25,13 +25,45 @@
 *
 */
 
-#include <SDL/SDL_ttf.h>
+
 #include <cstring>
 #include <string>
 
-#include "LX_error.h"
+#include <iostream>
+#include <exception>
+
+#include<SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 
 #define DEFAULT_FONT_SIZE 24    /**<The default value of the font size*/
+
+
+
+/**
+*   @class LX_OpenFont_exception
+*   @brief The LX_OpenFont_exception class.
+*
+*   This class describes the exception occured when the font loading fails.
+*
+*/
+class LX_OpenFont_exception : public std::exception
+{
+    public :
+
+    std::string str_err;                        /**< The string where the error message will be conteined*/
+
+    LX_OpenFont_exception( std::string err)
+    {
+        str_err = err;
+    }
+
+    const char * what() const throw() {return str_err.c_str() ;}
+
+    ~LX_OpenFont_exception() throw(){}
+};
+
+
+
 
 /**
 *   @class LX_ttf
@@ -48,55 +80,50 @@ class LX_ttf{
     unsigned int size_font;
     SDL_Color font_color;
 
-    TTF_Font *font;
-
     SDL_Surface *screen;
+
+    TTF_Font *font;
 
     public:
 
 /**
 *
-*   @fn LX_ttf(std::string ttf_filename, unsigned int size, SDL_Color *color, SDL_Surface *window )
+*   @fn LX_ttf(std::string ttf_filename, unsigned int size, SDL_Color *color)
 *
-*   This constructor initializes The SDL_TTF plugin.
+*   This constructor initializes The LX_TTF module.
 *
 *   @param ttf_filename the name of the .ttf file
 *   @param size the default size of the font when it will be displayed
 *   @param color the default color font
-*   @param window the window where will be put the font, generally the LX_graphics object's screen
 *
-*   @note If you do not need to specify the font file name, you may put NULL instaed of the file name
+*   @note If you do not need to specify the font file name, you may put NULL instead of the file name
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
 *   @note If the size value is 0, size get the default value, defined by DEFAULT_FONT_SIZE
 *
 *   @warning If you put NULL in window, a LX_FONT_SCREEN_ERROR exception will be occured
 *
 */
-    LX_ttf(std::string ttf_filename, unsigned int size, SDL_Color *color, SDL_Surface *window )
+    LX_ttf(std::string ttf_filename, unsigned int size, SDL_Color *color)
     {
-
-        if(TTF_Init() == -1)
-        {
-            fprintf(stderr,"\nException occured in LX_graphics constructor, TTF_Init : %s \n", SDL_GetError());
-            throw LX_TTF_INIT_ERROR;
-        }
-
-        if(!ttf_filename.empty())
-            font_str.assign(ttf_filename);
 
         if(size != 0)
             size_font = size;
         else
             size_font = DEFAULT_FONT_SIZE;
 
-
-        font = TTF_OpenFont(font_str.c_str(), size_font);
-
-        if(font == NULL)
+        if(!ttf_filename.empty())
         {
-            fprintf(stderr,"\nException occured in LX_graphics constructor, TTF_OpenFont : %s \n", TTF_GetError());
-            throw LX_FONT_ERROR;
+            font_str.assign(ttf_filename);
+
+            font = TTF_OpenFont(font_str.c_str(), size_font);
+
+            if(font == NULL)
+            {
+                throw LX_OpenFont_exception(TTF_GetError());
+            }
         }
+
+        std::cout << " str : " << font_str.c_str() << std::endl;
 
         if( color != NULL )
         {
@@ -105,26 +132,14 @@ class LX_ttf{
             font_color.b = color->b;
         }
 
-
-        if(window ==NULL)
-        {
-            fprintf(stderr,"\nException occured in LX_graphics constructor : No screen has been defined \n");
-            TTF_CloseFont(font);
-            TTF_Quit();
-
-            throw LX_FONT_SCREEN_ERROR;
-        }
-
-        screen = window;
-
         SDL_EnableUNICODE(SDL_ENABLE);
     }
 
 
 
-    bool draw_SolidText(std::string text, SDL_Rect *pos);
-    bool draw_ShadedText(std::string text, SDL_Rect *pos);
-    bool draw_BlendedText(std::string text, SDL_Rect *pos);
+    SDL_Surface * draw_SolidText(std::string text);
+    SDL_Surface * draw_ShadedText(std::string text);
+    SDL_Surface * draw_BlendedText(std::string text);
 
     bool draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
     bool draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
@@ -138,8 +153,6 @@ class LX_ttf{
         SDL_EnableUNICODE(SDL_DISABLE);
 
         TTF_CloseFont(font);
-
-        TTF_Quit();
     }
 
 };
