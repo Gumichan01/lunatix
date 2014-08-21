@@ -57,7 +57,7 @@ function getVideo()
 
 	end
 
-
+	file:close();
 
 	return video_val;
 
@@ -105,7 +105,7 @@ function getTTF()
 
 	end
 
-
+	file:close();
 
 	return ttf_val;
 
@@ -152,7 +152,7 @@ function getAudio()
 
 	end
 
-
+	file:close();
 
 	return audio_val;
 
@@ -200,7 +200,7 @@ function getJoystick()
 
 	end
 
-
+	file:close();
 
 	return joystick_val;
 
@@ -248,7 +248,7 @@ function getOpenGL()
 
 	end
 
-
+	file:close();
 
 	return opengl_val;
 
@@ -297,7 +297,7 @@ function getFont()
 
 	end
 
-
+	file:close();
 
 	return font_val;
 
@@ -344,7 +344,7 @@ function getFontSize()
 
 	end
 
-
+	file:close();
 
 	return size_val;
 
@@ -392,7 +392,7 @@ function getWidth()
 
 	end
 
-
+	file:close();
 
 	return width_val;
 
@@ -441,7 +441,7 @@ function getHeight()
 
 	end
 
-
+	file:close();
 
 	return height_val;
 
@@ -490,7 +490,7 @@ function getFullscreen()
 
 	end
 
-
+	file:close();
 
 	return fullscreen_val;
 
