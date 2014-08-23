@@ -55,6 +55,36 @@ LX_window * LX_window::getInstance()
 
 
 /**
+*   @fn void LX_window::setTitle(std::string title)
+*
+*   Set the title on the window sidebar
+*
+*   @param title : The title
+*
+*/
+void LX_window::setTitle(std::string title)
+{
+    SDL_WM_SetCaption(title.c_str(), NULL);
+}
+
+
+/**
+*   @fn void LX_window::setTitle(std::string title, std::string icon)
+*
+*   Set the title and te icon on the window sidebar
+*
+*   @param title : The title
+*   @param icon : The icon
+*
+*/
+void LX_window::setTitle(std::string title, std::string icon)
+{
+    SDL_WM_SetCaption(title.c_str(), icon.c_str());
+}
+
+
+
+/**
 *
 *   @fn SDL_Surface * LX_window::getWindow()
 *

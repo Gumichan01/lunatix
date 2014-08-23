@@ -96,13 +96,13 @@ class LX_window
         LX_height = 2;
         LX_bpp = 0;
 
-        SDL_WM_SetCaption("LunatiX_engine", NULL);
-
     }
 
     public:
 
     static LX_window * getInstance();
+    static void setTitle(std::string title);
+    static void setTitle(std::string title, std::string icon);
 
     SDL_Surface * getWindow();
 
