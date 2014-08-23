@@ -28,12 +28,13 @@
 
 #include <cstring>
 #include <string>
-
 #include <iostream>
 #include <exception>
 
 #include<SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+
+#include "LX_config.h"
 
 #define DEFAULT_FONT_SIZE 24    /**<The default value of the font size*/
 
@@ -103,34 +104,36 @@ class LX_ttf{
 *   @warning If you put NULL in window, a LX_FONT_SCREEN_ERROR exception will be occured
 *
 */
-    LX_ttf(std::string ttf_filename, unsigned int size, SDL_Color *color)
+    LX_ttf(SDL_Color *color)
     {
+        // load the configuration
+        LX_configuration *ttf_config = LX_configuration::getInstance();
 
-        if(size != 0)
-            size_font = size;
-        else
-            size_font = DEFAULT_FONT_SIZE;
+        font_str = ttf_config->getFontFile();
+        size_font = ttf_config->getFontSize();
 
-        if(!ttf_filename.empty())
+        if(size_font == 0)
         {
-            font_str.assign(ttf_filename);
-
-            font = TTF_OpenFont(font_str.c_str(), size_font);
-
-            if(font == NULL)
-            {
-                throw LX_OpenFont_exception(TTF_GetError());
-            }
+             size_font = DEFAULT_FONT_SIZE;
         }
 
-        std::cout << " str : " << font_str.c_str() << std::endl;
+        font = TTF_OpenFont(font_str.c_str(), size_font);
 
+        if(font == NULL)
+        {
+            //std::cerr << "exception occured in LX_window constructor : " << TTF_GetError() << std::endl;
+            throw LX_OpenFont_exception(TTF_GetError());
+        }
+
+        //put color if it is not null
         if( color != NULL )
         {
             font_color.r = color->r;
             font_color.g = color->g;
             font_color.b = color->b;
         }
+
+        delete ttf_config;
 
         SDL_EnableUNICODE(SDL_ENABLE);
     }

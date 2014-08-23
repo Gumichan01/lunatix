@@ -29,8 +29,6 @@
 #include <exception>
 
 #include <Lua/lua.hpp>
-//#include <Lua/lualib.h>
-//#include <Lua/lauxlib.h>
 
 #define LUA_CONFIG_FILE "script/LX_config.lua"   /**< The lua file the engine uses for the configuration loading*/
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading*/
@@ -69,28 +67,28 @@ class LX_configuration_exception : public std::exception
 class LX_configuration
 {
 
-    int videoTag;
-    int ttf_Tag;
-    int audioTag;
-    int joystickTag;
-    int openglTag;
+    int videoFlag;
+    int ttf_Flag;
+    int audioFlag;
+    int joystickFlag;
+    int openglFlag;
     std::string font_file;
     int font_size;
     int width;
     int height;
-    int fullscreenTag;
+    int fullscreenFlag;
 
     // private functions
-    void setVideoTag();
-    void setTTF_Tag();
-    void setAudioTag();
-    void setJoystickTag();
-    void setOpenGL_Tag();
+    void setVideoFlag();
+    void setTTF_Flag();
+    void setAudioFlag();
+    void setJoystickFlag();
+    void setOpenGL_Flag();
     void setFontFile();
     void setFontSize();
     void setWinWidth();
     void setWinHeight();
-    void setFullscreenTag();
+    void setFullscreenFlag();
 
 
 
@@ -98,27 +96,27 @@ class LX_configuration
     LX_configuration()
     {
         //initialize the variables at the default values
-        videoTag = 0;
-        ttf_Tag = 0;
-        audioTag = 0;
-        joystickTag = 0;
-        openglTag = 0;
+        videoFlag = 0;
+        ttf_Flag = 0;
+        audioFlag = 0;
+        joystickFlag = 0;
+        openglFlag = 0;
         font_size = 0;
         width = 800;
         height = 600;
-        fullscreenTag = 0;
+        fullscreenFlag = 0;
 
         //loading configuration
-        setVideoTag();
-        setTTF_Tag();
-        setAudioTag();
-        setJoystickTag();
-        setOpenGL_Tag();
+        setVideoFlag();
+        setTTF_Flag();
+        setAudioFlag();
+        setJoystickFlag();
+        setOpenGL_Flag();
         setFontFile();
         setFontSize();
         setWinWidth();
         setWinHeight();
-        setFullscreenTag();
+        setFullscreenFlag();
 
     }
 
@@ -127,16 +125,16 @@ class LX_configuration
     static LX_configuration * getInstance();
 
 
-    int getVideoTag();
-    int getTTF_Tag();
-    int getAudioTag();
-    int getJoystickTag();
-    int getOpenGL_Tag();
+    int getVideoFlag();
+    int getTTF_Flag();
+    int getAudioFlag();
+    int getJoystickFlag();
+    int getOpenGL_Flag();
     const char * getFontFile();
     int getFontSize();
     int getWinWidth();
     int getWinHeight();
-    int getFullscreenTag();
+    int getFullscreenFlag();
 
 
     ~LX_configuration(){}

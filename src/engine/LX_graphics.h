@@ -28,7 +28,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-//#include "LX_error.h"
 #include "LX_window.h"
 
 /**
@@ -40,7 +39,6 @@
 class LX_graphics{
 
     SDL_Surface *screen;    /**< The main surface (for the window creation)*/
-
 
 
 /**
@@ -57,6 +55,7 @@ class LX_graphics{
     LX_graphics()
     {
         LX_window *win = LX_window::getInstance();
+
 
         if(win != NULL)
         {
@@ -96,13 +95,6 @@ class LX_graphics{
     }
 
 };
-
-
-
-
-
-
-
 
 
 #endif // LX_GRAPHICS_H_INCLUDED

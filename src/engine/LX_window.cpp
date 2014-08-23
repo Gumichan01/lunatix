@@ -45,7 +45,7 @@ LX_window * LX_window::getInstance()
         }
         catch(std::exception & ex)
         {
-            std::cerr << "exception occured : " << ex.what() << std::endl;
+            std::cerr << "exception occured in LX_window::getInstance : " << ex.what() << std::endl;
             return NULL;
         }
     }

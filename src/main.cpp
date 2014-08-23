@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "engine/LX_lib.h"
+#include "engine/LX_config.h"
 #include "engine/LX_graphics.h"
 #include "engine/LX_ttf.h"
 #include "engine/LX_audio.h"
@@ -47,10 +48,23 @@ int main ( int argc, char** argv )
     std::cout << "LX_Init returns true value" << std::endl;
 
     /// GRAPHICS + TTF
+
     graphics = LX_graphics::getInstance();
-    ttf = new LX_ttf(font_file,28,&color);
+
+    try
+    {
+        ttf = new LX_ttf(&color);
+    }
+    catch(std::exception & e )
+    {
+        std::cout << "exception occurred in LX_ttf constructor: " << e.what() << std::endl;
+        return -16;
+    }
+
+
     audio = new LX_Audio();
 
+    LX_window::setTitle("LunatiX_engine");
 
     sf = graphics->load_BMP("data/cb.bmp");
 
@@ -69,6 +83,9 @@ int main ( int argc, char** argv )
 
                 case SDL_KEYDOWN :  switch(event.key.keysym.sym)
                                     {
+                                        case SDLK_ESCAPE:   game = false;
+                                                            break;
+
                                         case SDLK_SPACE:    audio->pause_music();
                                                             break;
 
@@ -110,6 +127,42 @@ int main ( int argc, char** argv )
     //delete win;
 
     LX_Quit();
+
+
+
+    /// load configuration
+    /*LX_configuration *configuration;
+
+    configuration = LX_configuration::getInstance();
+
+
+    int video = configuration->getVideoFlag();
+    int ttfont = configuration->getTTF_Flag();
+    int sound = configuration->getAudioFlag();
+    int gamepad = configuration->getJoystickFlag();
+    int opengl = configuration->getOpenGL_Flag();
+    std::string font = configuration->getFontFile();
+    int size = configuration->getFontSize();
+    int w = configuration->getWinWidth();
+    int h = configuration->getWinHeight();
+    int f = configuration->getFullscreenFlag();
+
+
+    std::cout << "video : " << video << std::endl;
+    std::cout << "true type font : " << ttfont << std::endl;
+    std::cout << "audio : " << sound << std::endl;
+    std::cout << "gamepad : " << gamepad << std::endl;
+    std::cout << "opengl : " << opengl << std::endl;
+    std::cout << "font : " << font << std::endl;
+    std::cout << "size : " << size << std::endl;
+    std::cout << "width : " << w << std::endl;
+    std::cout << "height : " << h << std::endl;
+    std::cout << "fullscreen : " << f << std::endl;
+
+
+    delete configuration;*/
+
+
 
     return EXIT_SUCCESS;
 }

@@ -30,6 +30,10 @@
 
 #include <SDL/SDL.h>
 
+#include "LX_config.h"
+
+
+#define BPP 32      /**< The bits per pixel*/
 
 
 /**
@@ -45,7 +49,7 @@ class LX_window_exception : public std::exception
 
     std::string str_err;                    /**< The string where the error message will be conteined*/
 
-    LX_window_exception( std::string err)
+    LX_window_exception(std::string err)
     {
         str_err = err;
     }
@@ -83,18 +87,29 @@ class LX_window
 */
     LX_window()
     {
+        Uint32 fullscreen_flag = 0x00000000;
+        LX_configuration *win_config = LX_configuration::getInstance();     // load the configuration
 
-        window=SDL_SetVideoMode(1024,768,32,SDL_HWSURFACE|SDL_DOUBLEBUF/*|SDL_FULLSCREEN*/);
-        //window=SDL_SetVideoMode(width,height,bpp,SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
+        LX_width = win_config->getWinWidth();
+        LX_height = win_config->getWinHeight();
+        LX_bpp = BPP;
+
+        // check the fullscreen flag
+        if(win_config->getFullscreenFlag() == 1)
+        {
+            fullscreen_flag = SDL_FULLSCREEN;
+        }
+
+        //window=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
+        window=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF);
 
         if(window == NULL )
         {
+            std::cerr << "exception occured in LX_window constructor : " << std::endl;
             throw LX_window_exception(SDL_GetError());
         }
 
-        LX_width = 1;
-        LX_height = 2;
-        LX_bpp = 0;
+        delete win_config;
 
     }
 

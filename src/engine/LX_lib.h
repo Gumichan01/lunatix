@@ -27,7 +27,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-#include<SDL/SDL_mixer.h>
+#include <SDL/SDL_mixer.h>
 
 
 #define LX_AUDIO_STEREO_SOUND 2             /**< The stereo variable the mix module */
@@ -35,7 +35,7 @@
 #define LX_AUDIO_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
 
 
-// #include "LX_config.h"  /// @todo create a configuration library
+#include "LX_config.h"
 
 
 bool LX_Init(void);

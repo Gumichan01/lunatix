@@ -39,7 +39,17 @@ LX_graphics * LX_graphics::getInstance()
 
     if(instance == NULL)
     {
-        instance = new LX_graphics();
+        try
+        {
+            instance = new LX_graphics();
+        }
+        catch(std::exception & g_ex)
+        {
+            std::cerr << "exception occured in LX_graphics::getInstance : " << g_ex.what() << std::endl;
+            return NULL;
+        }
+
+
     }
 
     return instance;

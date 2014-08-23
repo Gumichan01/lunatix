@@ -61,12 +61,12 @@ LX_configuration * LX_configuration::getInstance()
 
 /**
 *
-*   @fn void LX_configuration::setVideoTag()
+*   @fn void LX_configuration::setVideoFlag()
 *
 *   Set the video flag
 *
 */
-void LX_configuration::setVideoTag()
+void LX_configuration::setVideoFlag()
 {
     //State
     lua_State *state;
@@ -79,7 +79,7 @@ void LX_configuration::setVideoTag()
     //Opening of the Lua file
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
-        std::cerr << "Error occured in LX_configuration::setVideoTag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_configuration::setVideoFlag : " << lua_tostring(state,-1) << std::endl;
 
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
@@ -89,7 +89,7 @@ void LX_configuration::setVideoTag()
 
     if(!lua_isfunction(state,-1))
     {
-        std::cerr << "Error occured in LX_configuration::setVideoTag : The Lua function getVideo does not exist" << std::endl;
+        std::cerr << "Error occured in LX_configuration::setVideoFlag : The Lua function getVideo does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getVideo does not exist");
 
@@ -100,7 +100,7 @@ void LX_configuration::setVideoTag()
         lua_call(state,0,1);
 
         //Getting the returned value
-        videoTag = (int) lua_tonumber(state, -1);
+        videoFlag = (int) lua_tonumber(state, -1);
 
     }
 
@@ -111,12 +111,12 @@ void LX_configuration::setVideoTag()
 
 /**
 *
-*   @fn void LX_configuration::setTTF_Tag()
+*   @fn void LX_configuration::setTTF_Flag()
 *
 *   Set the true type font (TTF) flag
 *
 */
-void LX_configuration::setTTF_Tag()
+void LX_configuration::setTTF_Flag()
 {
     //State
     lua_State *state;
@@ -129,7 +129,7 @@ void LX_configuration::setTTF_Tag()
     //Opening of the Lua file
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
-        std::cerr << "Error occured in LX_configuration::setTTF_Tag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_configuration::setTTF_Flag : " << lua_tostring(state,-1) << std::endl;
 
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
@@ -140,7 +140,7 @@ void LX_configuration::setTTF_Tag()
     if(!lua_isfunction(state,-1))
     {
         //Ce n'est pas une fonction
-        std::cerr << "Error occured in LX_configuration::setTTF_Tag : The Lua function getTTF does not exist" << std::endl;
+        std::cerr << "Error occured in LX_configuration::setTTF_Flag : The Lua function getTTF does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getTTF does not exist");
 
@@ -151,7 +151,7 @@ void LX_configuration::setTTF_Tag()
         lua_call(state,0,1);
 
         //Getting the returned value
-        ttf_Tag = (int) lua_tonumber(state, -1);
+        ttf_Flag = (int) lua_tonumber(state, -1);
 
     }
 
@@ -162,12 +162,12 @@ void LX_configuration::setTTF_Tag()
 
 /**
 *
-*   @fn void LX_configuration::setAudioTag()
+*   @fn void LX_configuration::setAudioFlag()
 *
 *   Set the audio flag
 *
 */
-void LX_configuration::setAudioTag()
+void LX_configuration::setAudioFlag()
 {
     //State
     lua_State *state;
@@ -180,7 +180,7 @@ void LX_configuration::setAudioTag()
     //Opening of the Lua file
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
-        std::cerr << "Error occured in LX_configuration::setAudioTag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_configuration::setAudioFlag : " << lua_tostring(state,-1) << std::endl;
 
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
@@ -191,7 +191,7 @@ void LX_configuration::setAudioTag()
     if(!lua_isfunction(state,-1))
     {
         //Ce n'est pas une fonction
-        std::cerr << "Error occured in LX_configuration::setAudioTag : The Lua function getAudio does not exist" << std::endl;
+        std::cerr << "Error occured in LX_configuration::setAudioFlag : The Lua function getAudio does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getAudio does not exist");
 
@@ -202,7 +202,7 @@ void LX_configuration::setAudioTag()
         lua_call(state,0,1);
 
         //Getting the returned value
-        audioTag = (int) lua_tonumber(state, -1);
+        audioFlag = (int) lua_tonumber(state, -1);
 
     }
 
@@ -213,12 +213,12 @@ void LX_configuration::setAudioTag()
 
 /**
 *
-*   @fn void LX_configuration::setJoystickTag()
+*   @fn void LX_configuration::setJoystickFlag()
 *
 *   Set the Joystick flag
 *
 */
-void LX_configuration::setJoystickTag()
+void LX_configuration::setJoystickFlag()
 {
     //State
     lua_State *state;
@@ -231,7 +231,7 @@ void LX_configuration::setJoystickTag()
     //Opening of the Lua file
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
-        std::cerr << "Error occured in LX_configuration::setJoystickTag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_configuration::setJoystickFlag : " << lua_tostring(state,-1) << std::endl;
 
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
@@ -242,7 +242,7 @@ void LX_configuration::setJoystickTag()
     if(!lua_isfunction(state,-1))
     {
         //Ce n'est pas une fonction
-        std::cerr << "Error occured in LX_configuration::setJoystickTag : The Lua function getJoystick does not exist" << std::endl;
+        std::cerr << "Error occured in LX_configuration::setJoystickFlag : The Lua function getJoystick does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getJoystick does not exist");
 
@@ -253,7 +253,7 @@ void LX_configuration::setJoystickTag()
         lua_call(state,0,1);
 
         //Getting the returned value
-        joystickTag = (int) lua_tonumber(state, -1);
+        joystickFlag = (int) lua_tonumber(state, -1);
 
     }
 
@@ -265,12 +265,12 @@ void LX_configuration::setJoystickTag()
 
 /**
 *
-*   @fn void LX_configuration::setOpenGL_Tag()
+*   @fn void LX_configuration::setOpenGL_Flag()
 *
 *   Set the OpenGL flag
 *
 */
-void LX_configuration::setOpenGL_Tag()
+void LX_configuration::setOpenGL_Flag()
 {
     //State
     lua_State *state;
@@ -283,7 +283,7 @@ void LX_configuration::setOpenGL_Tag()
     //Opening of the Lua file
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
-        std::cerr << "Error occured in LX_configuration::setOpenGL_Tag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_configuration::setOpenGL_Flag : " << lua_tostring(state,-1) << std::endl;
 
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
@@ -294,7 +294,7 @@ void LX_configuration::setOpenGL_Tag()
     if(!lua_isfunction(state,-1))
     {
         //Ce n'est pas une fonction
-        std::cerr << "Error occured in LX_configuration::setOpenGL_Tag : The Lua function getOpenGL does not exist" << std::endl;
+        std::cerr << "Error occured in LX_configuration::setOpenGL_Flag : The Lua function getOpenGL does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getOpenGL does not exist");
 
@@ -305,7 +305,7 @@ void LX_configuration::setOpenGL_Tag()
         lua_call(state,0,1);
 
         //Getting the returned value
-        openglTag = (int) lua_tonumber(state, -1);
+        openglFlag = (int) lua_tonumber(state, -1);
 
     }
 
@@ -525,12 +525,12 @@ void LX_configuration::setWinHeight()
 
 /**
 *
-*   @fn void LX_configuration::setFullscreenTag()
+*   @fn void LX_configuration::setFullscreenFlag()
 *
 *   Set the window height
 *
 */
-void LX_configuration::setFullscreenTag()
+void LX_configuration::setFullscreenFlag()
 {
     //State
     lua_State *state;
@@ -543,7 +543,7 @@ void LX_configuration::setFullscreenTag()
     //Opening of the Lua file
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
-        std::cerr << "Error occured in LX_configuration::setFullscreenTag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_configuration::setFullscreenFlag : " << lua_tostring(state,-1) << std::endl;
 
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
@@ -554,7 +554,7 @@ void LX_configuration::setFullscreenTag()
     if(!lua_isfunction(state,-1))
     {
         //Ce n'est pas une fonction
-        std::cerr << "Error occured in LX_configuration::setFullscreenTag : The Lua function getFullscreen does not exist" << std::endl;
+        std::cerr << "Error occured in LX_configuration::setFullscreenFlag : The Lua function getFullscreen does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getFullscreen does not exist");
 
@@ -565,7 +565,7 @@ void LX_configuration::setFullscreenTag()
         lua_call(state,0,1);
 
         //Getting the returned value
-        fullscreenTag = (int) lua_tonumber(state, -1);
+        fullscreenFlag = (int) lua_tonumber(state, -1);
 
     }
 
@@ -578,77 +578,77 @@ void LX_configuration::setFullscreenTag()
 
 /**
 *
-*   @fn int LX_configuration::getVideoTag()
+*   @fn int LX_configuration::getVideoFlag()
 *
 *   Get the video flag
 *
 *   @return the video configuration
 *
 */
-int LX_configuration::getVideoTag()
+int LX_configuration::getVideoFlag()
 {
-    return videoTag;
+    return videoFlag;
 }
 
 
 /**
 *
-*   @fn int LX_configuration::getTTF_Tag()
+*   @fn int LX_configuration::getTTF_Flag()
 *
 *   Get the ttf flag
 *
 *   @return the ttf configuration
 *
 */
-int LX_configuration::getTTF_Tag()
+int LX_configuration::getTTF_Flag()
 {
-    return ttf_Tag;
+    return ttf_Flag;
 }
 
 
 /**
 *
-*   @fn int LX_configuration::getAudioTag()
+*   @fn int LX_configuration::getAudioFlag()
 *
 *   Get the audio flag
 *
 *   @return the audio configuration
 *
 */
-int LX_configuration::getAudioTag()
+int LX_configuration::getAudioFlag()
 {
-    return audioTag;
+    return audioFlag;
 }
 
 
 
 /**
 *
-*   @fn int LX_configuration::getJoystickTag()
+*   @fn int LX_configuration::getJoystickFlag()
 *
 *   Get the audio flag
 *
 *   @return the joystick configuration
 *
 */
-int LX_configuration::getJoystickTag()
+int LX_configuration::getJoystickFlag()
 {
-    return joystickTag;
+    return joystickFlag;
 }
 
 
 /**
 *
-*   @fn int LX_configuration::getOpenGL_Tag()
+*   @fn int LX_configuration::getOpenGL_Flag()
 *
 *   Get the opengl flag
 *
 *   @return the opengl configuration
 *
 */
-int LX_configuration::getOpenGL_Tag()
+int LX_configuration::getOpenGL_Flag()
 {
-    return openglTag;
+    return openglFlag;
 }
 
 
@@ -717,16 +717,16 @@ int LX_configuration::getWinHeight()
 
 /**
 *
-*   @fn int LX_configuration::getFullscreenTag()
+*   @fn int LX_configuration::getFullscreenFlag()
 *
 *   Get the fullscreen tag
 *
 *   @return the fullscreen tag
 *
 */
-int LX_configuration::getFullscreenTag()
+int LX_configuration::getFullscreenFlag()
 {
-    return fullscreenTag;
+    return fullscreenFlag;
 }
 
 
