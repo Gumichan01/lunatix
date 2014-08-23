@@ -14,7 +14,8 @@
 
 ]]
 
-
+local SDL_CONFIG_FILE = "config/sdl_conf.cfg";
+local WINDOW_CONFIG_FILE = "config/window.cfg";
 
 
 --	@fn function getVideo()
@@ -26,7 +27,7 @@
 
 function getVideo()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local video_str = "video";
 	local video_val = 0;
@@ -74,7 +75,7 @@ end
 
 function getTTF()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local ttf_str = "ttf";
 	local ttf_val = 0;
@@ -121,7 +122,7 @@ end
 
 function getAudio()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local audio_str = "audio";
 	local audio_val = 0;
@@ -169,7 +170,7 @@ end
 
 function getJoystick()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local joystick_str = "joystick";
 	local joystick_val = 0;
@@ -217,7 +218,7 @@ end
 
 function getOpenGL()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local opengl_str = "opengl";
 	local opengl_val = 0;
@@ -265,7 +266,7 @@ end
 
 function getFont()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local font_str = "font";
 	local rep = font_str .."/";
@@ -313,7 +314,7 @@ end
 
 function getFontSize()
 
-	local file = assert(io.open("sdl_conf.cfg", "r"));
+	local file = assert(io.open(SDL_CONFIG_FILE, "r"));
 
 	local size_str = "size";
 	local size_val = 0;
@@ -361,7 +362,7 @@ end
 
 function getWidth()
 
-	local file = assert(io.open("window.cfg", "r"));
+	local file = assert(io.open(WINDOW_CONFIG_FILE, "r"));
 
 	local width_str = "width";
 	local width_val = 0;
@@ -410,7 +411,7 @@ end
 
 function getHeight()
 
-	local file = assert(io.open("window.cfg", "r"));
+	local file = assert(io.open(WINDOW_CONFIG_FILE, "r"));
 
 	local height_str = "height";
 	local height_val = -1;
@@ -459,7 +460,7 @@ end
 
 function getFullscreen()
 
-	local file = assert(io.open("window.cfg", "r"));
+	local file = assert(io.open(WINDOW_CONFIG_FILE, "r"));
 
 	local fullscreen_str = "fullscreen";
 	local fullscreen_val = 0;
@@ -502,7 +503,7 @@ end
 
 -- For debug
 
---print("video : "..getVideo())
+print("video : "..getVideo())
 --print("ttf : "..getTTF())
 --print("audio : "..getAudio())
 --print("joystick : "..getJoystick())
@@ -512,31 +513,4 @@ end
 --print("window width : "..getWidth())
 --print("window height : "..getHeight())
 --print("fullscreen : "..getFullscreen())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

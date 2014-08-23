@@ -12,8 +12,8 @@
 */
 
 /**
-*	@file LX_lua_layer.cpp
-*	@brief The LunatiX_engine Lua layer
+*	@file LX_config.cpp
+*	@brief The LunatiX_engine configuration class
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
 *	@date August 20th, 2014
@@ -38,18 +38,20 @@ LX_configuration * LX_configuration::getInstance()
 {
     static LX_configuration *instance = NULL;
 
+
     if(instance == NULL)
     {
         try
         {
             instance = new LX_configuration();
         }
-        catch(std::exception & ex)
+        catch(std::exception & ex_conf)
         {
-            std::cerr << "exception occured : " << ex.what() << std::endl;
-            return NULL;
+            std::cerr << "Exception occurred at LX_configuration constructor : " << ex_conf.what() << std::endl;
+            instance = NULL;
         }
     }
+
 
     return instance;
 }
@@ -87,7 +89,6 @@ void LX_configuration::setVideoTag()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setVideoTag : The Lua function getVideo does not exist" << std::endl;
 
         throw LX_configuration_exception("The Lua function getVideo does not exist");

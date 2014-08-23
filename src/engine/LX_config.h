@@ -15,8 +15,8 @@
 */
 
 /**
-*	@file LX_lua_layer.h
-*	@brief The LunatiX_engine Lua layer
+*	@file LX_config.h
+*	@brief The LunatiX_engine configuration class
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
 *	@date August 20th, 2014
@@ -29,10 +29,11 @@
 #include <exception>
 
 #include <Lua/lua.hpp>
-#include <Lua/lualib.h>
-#include <Lua/lauxlib.h>
+//#include <Lua/lualib.h>
+//#include <Lua/lauxlib.h>
 
-#define LUA_CONFIG_FILE "LX_config.lua" /**< The lua file the engine uses for the configuration loading*/
+#define LUA_CONFIG_FILE "script/LX_config.lua"   /**< The lua file the engine uses for the configuration loading*/
+#define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading*/
 
 /**
 *   @class LX_configuration_exception
@@ -107,26 +108,17 @@ class LX_configuration
         height = 600;
         fullscreenTag = 0;
 
-
-        try
-        {
-            //loading configuration
-            setVideoTag();
-            setTTF_Tag();
-            setAudioTag();
-            setJoystickTag();
-            setOpenGL_Tag();
-            setFontFile();
-            setFontSize();
-            setWinWidth();
-            setWinHeight();
-            setFullscreenTag();
-
-        }
-        catch(LX_configuration_exception & ex_conf)
-        {
-            std::cerr << "Exception occurred at LX_configuration constructor" << ex_conf.what() << std::endl;
-        }
+        //loading configuration
+        setVideoTag();
+        setTTF_Tag();
+        setAudioTag();
+        setJoystickTag();
+        setOpenGL_Tag();
+        setFontFile();
+        setFontSize();
+        setWinWidth();
+        setWinHeight();
+        setFullscreenTag();
 
     }
 
