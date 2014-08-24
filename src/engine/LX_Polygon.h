@@ -23,9 +23,48 @@
 *
 */
 
-#include<new>
+#include <new>
+#include <exception>
+#include <iostream>
 
 #include "LX_Point.h"
+
+
+/**
+*   @class LX_Polygon_Point_exception
+*   @brief The LX_Polygon_Point_exception class.
+*
+*   This class describes the exception occured when the font loading fails.
+*
+*/
+class LX_Polygon_Point_exception : public std::exception
+{
+    public :
+
+    std::string str_err;                        /**< The string where the error message will be conteined*/
+
+/**
+*   @fn LX_Polygon_Point_exception(std::string err)
+*   Build the LX_Polygon_Point_exception class
+*   @param err the error string
+*/
+    LX_Polygon_Point_exception(std::string err)
+    {
+        str_err = err;
+    }
+
+/**
+*   @fn const char * what() const throw()
+*   Get the error string
+*   @return the error string
+*/
+    const char * what() const throw() {return str_err.c_str() ;}
+
+    ~LX_Polygon_Point_exception() throw(){}
+};
+
+
+
 
 /**
 *
@@ -36,32 +75,31 @@
 */
 class LX_Polygon{
 
-        LX_Point *list_points;     /**<The list of all the points of the polygon*/
-        unsigned int size;      /**<The size of the list*/
-        unsigned int cursor;    /**<The curssor which keep the information of the position of the first available position*/
+        LX_Point *list_points;      /**<The list of all the points of the polygon*/
+        unsigned int size;          /**<The size of the list*/
+        unsigned int cursor;        /**<The curssor which keep the information of the position of the first available position*/
 
     public :
 
 /**
 *
-*	@fn LX_Polygon(int nbLX_Points)
+*	@fn LX_Polygon(int nb_Points)
 *
 *	The LX_Polygon constructor
 *
-*   @param nbLX_Points : the points number
+*   @param nb_Points : the points number
 *
 */
-        LX_Polygon(unsigned int nbLX_Points)
+        LX_Polygon(unsigned int nb_Points)
         {
-            list_points = new (std::nothrow) LX_Point[nbLX_Points];
+            list_points = new (std::nothrow) LX_Point[nb_Points];
 
             if(list_points == NULL)
             {
-                perror("Error occured in the Poly_Hit_box constructor while creating the points list ");
-                delete this;        /// @todo put an exception class for Polygon
+                throw LX_Polygon_Point_exception("The points list initialization fails");
             }
 
-            size = nbLX_Points;
+            size = nb_Points;
             cursor = 0;
         }
 
