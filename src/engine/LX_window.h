@@ -25,12 +25,9 @@
 *
 */
 
-#include <iostream>
-#include <exception>
+#include "LX_config.h"
 
 #include <SDL/SDL.h>
-
-#include "LX_config.h"
 
 
 #define BPP 32      /**< The bits per pixel*/
@@ -49,11 +46,21 @@ class LX_window_exception : public std::exception
 
     std::string str_err;                    /**< The string where the error message will be conteined*/
 
+/**
+*   @fn LX_window_exception(std::string err)
+*   Build the LX_window_exception class
+*   @param err the error string
+*/
     LX_window_exception(std::string err)
     {
         str_err = err;
     }
 
+/**
+*   @fn const char * what() const throw()
+*   Get the error string
+*   @return the error string
+*/
     const char * what() const throw() {return str_err.c_str() ;}
 
     ~LX_window_exception() throw(){}
@@ -68,10 +75,11 @@ class LX_window_exception : public std::exception
 *   This class describes the window.
 *
 *   @warning The LX_window class must be defined only after you initialized the LX_engine (calling LX_Init())
+*   @warning A LX_window_exception will be occured if the window fcreation fails
 *
 */
-class LX_window
-{
+class LX_window{
+
     SDL_Surface *window;    /**< The main surface (for the window creation)*/
 
     int LX_width;           /**< The width of the window*/

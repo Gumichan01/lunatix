@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['getaudioflag',['getAudioFlag',['../class_l_x__configuration.html#a45699f205bb1d580511e84beace6b413',1,'LX_configuration']]],
+  ['getfontfile',['getFontFile',['../class_l_x__configuration.html#a0d9bc80287dc83020817e3d1f2d0b555',1,'LX_configuration']]],
+  ['getfontsize',['getFontSize',['../class_l_x__configuration.html#aa755d70b957f93d6ea3909abfaa3f3ad',1,'LX_configuration']]],
+  ['getfullscreenflag',['getFullscreenFlag',['../class_l_x__configuration.html#a9ac51c61c732e48a9715c3fd0a5cfd0f',1,'LX_configuration']]],
+  ['getheight',['getHeight',['../class_l_x__window.html#afdd47b1bad08dd1fad94149a1f091302',1,'LX_window']]],
+  ['getinstance',['getInstance',['../class_l_x__configuration.html#aaed851873fcdc457c4eb92878e14cb3a',1,'LX_configuration::getInstance()'],['../class_l_x__graphics.html#adb7ccd09eb23b76930b3bd79438d66ac',1,'LX_graphics::getInstance()'],['../class_l_x__window.html#a1df187c1b91caa80760aeb07a9b59dcc',1,'LX_window::getInstance()']]],
+  ['getjoystickflag',['getJoystickFlag',['../class_l_x__configuration.html#ae92c5f33bf5638bb70ff35b0624fc40b',1,'LX_configuration']]],
+  ['getlx_5fpointat',['getLX_PointAt',['../class_l_x___polygon.html#a958be58d3715cee25b81524241b38a7a',1,'LX_Polygon']]],
+  ['getopengl_5fflag',['getOpenGL_Flag',['../class_l_x__configuration.html#a9710a07c681d4b0f6366a60326254fe2',1,'LX_configuration']]],
+  ['getscreen',['getScreen',['../class_l_x__graphics.html#aada5c26b1378b3727d8aac7cbd37afbf',1,'LX_graphics']]],
+  ['getsize',['getSize',['../class_l_x___polygon.html#a1db37ab28c5491ecd1f7ba8ad9567f8e',1,'LX_Polygon']]],
+  ['getttf_5fflag',['getTTF_Flag',['../class_l_x__configuration.html#a2e34f3009fecdd86fb7509476e962b47',1,'LX_configuration']]],
+  ['getvideoflag',['getVideoFlag',['../class_l_x__configuration.html#add0b9c9f231a0cdffb4329ca7b3c362b',1,'LX_configuration']]],
+  ['getwidth',['getWidth',['../class_l_x__window.html#aae57cdc49c0f79fe5658eb92109b2296',1,'LX_window']]],
+  ['getwindow',['getWindow',['../class_l_x__window.html#a67db5648ac299ab2ccb9e77af7b377ba',1,'LX_window']]],
+  ['getwinheight',['getWinHeight',['../class_l_x__configuration.html#ada6f07fae321cdf25adb51c263d4d0e6',1,'LX_configuration']]],
+  ['getwinwidth',['getWinWidth',['../class_l_x__configuration.html#aca8251a8a676c3cf09753732c548131c',1,'LX_configuration']]]
+];

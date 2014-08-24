@@ -129,7 +129,7 @@ Mix_Chunk * LX_Audio::load_sample(std::string filename)
 
     sample = Mix_LoadWAV(filename.c_str());
 
-    if(sample ==NULL)
+    if(sample == NULL)
     {
         fprintf(stderr,"\nException occured in LX_Audio::load_sample / Mix_LoadWAV :  %s \n", Mix_GetError());
     }

@@ -25,8 +25,12 @@
 *
 */
 
-#include "LX_Hitbox.h"
+#include <cmath>
+#include <iostream>
+
 #include "LX_Polygon.h"
+#include "LX_Hitbox.h"
+
 
 #define RECT_SIDES 4    /**<The number of the AABB sides*/
 
@@ -35,7 +39,7 @@
 /**
 *
 *   @class LX_physics
-*   @brief The Target_Xplosion physic engine
+*   @brief The LunatiX_engine physic engine
 *
 *   This class describes the LX_physics, a LunatiX_engine physics module. It mainly calculates collisions so far.
 *

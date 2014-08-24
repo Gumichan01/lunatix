@@ -1,0 +1,5 @@
+<map id="LX_physics::collision" name="LX_physics::collision">
+<area shape="rect" id="node2" href="$class_l_x___polygon.html#a1db37ab28c5491ecd1f7ba8ad9567f8e" title="LX_Polygon::getSize" alt="" coords="215,5,357,32"/>
+<area shape="rect" id="node3" href="$class_l_x___polygon.html#a958be58d3715cee25b81524241b38a7a" title="LX_Polygon::getLX_PointAt" alt="" coords="196,56,376,83"/>
+<area shape="rect" id="node4" href="$class_l_x__physics.html#a35f51905fde2cd7205c89a1db530a3f2" title="LX_physics::collision" alt="" coords="215,107,357,133"/>
+</map>

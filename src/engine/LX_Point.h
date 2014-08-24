@@ -25,7 +25,7 @@
 #define POINT_H_INCLUDED
 
 #include<cstdio>
-#include<new>
+
 
 /**
 *   @struct LX_Point

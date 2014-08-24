@@ -23,35 +23,25 @@
 *
 *
 */
-#include<iostream>
-
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 
 #include "LX_window.h"
+
+#include <SDL/SDL_image.h>
+
 
 /**
 *   @class LX_graphics
 *   @brief The LunatiX_engine graphic module.
 *
 *   This class describes the LX_graphics engine.
+*
+*   @note : The LX_graphics class uses an instance of LX_window to get the screen
+*   @warning Because of the LX_window use, LX_graphics class must be built only after you initialized the LX_engine (calling LX_Init())
 */
 class LX_graphics{
 
     SDL_Surface *screen;    /**< The main surface (for the window creation)*/
 
-
-/**
-*
-*   @fn LX_graphics(unsigned int width, unsigned int height, unsigned int bpp)
-*
-*   This constructor initializes The SDL subsystems and create the window of the game
-*
-*   @param width : The width of the future window
-*   @param height : the height of the future window
-*   @param bpp : bits per pixels
-*
-*/
     LX_graphics()
     {
         LX_window *win = LX_window::getInstance();

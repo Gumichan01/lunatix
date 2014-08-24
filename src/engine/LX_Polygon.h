@@ -23,7 +23,6 @@
 *
 */
 
-#include<cstdlib>
 #include<new>
 
 #include "LX_Point.h"
@@ -59,7 +58,7 @@ class LX_Polygon{
             if(list_points == NULL)
             {
                 perror("Error occured in the Poly_Hit_box constructor while creating the points list ");
-                delete this;
+                delete this;        /// @todo put an exception class for Polygon
             }
 
             size = nbLX_Points;

@@ -27,7 +27,7 @@
 /**
 *   @fn bool LX_Init(void)
 *
-*   Initializes all SDL systems
+*   Initializes all SDL systems according to the configuration files
 *
 *   @return TRUE if all systems were init, FALSE otherwise
 *

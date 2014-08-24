@@ -30,7 +30,7 @@
 *
 *   Get the unique instance of the LX_graphics class
 *
-*   @return the instance of LX_graphics
+*   @return the unique instance of LX_graphics
 *
 */
 LX_graphics * LX_graphics::getInstance()
@@ -49,7 +49,6 @@ LX_graphics * LX_graphics::getInstance()
             return NULL;
         }
 
-
     }
 
     return instance;
@@ -66,9 +65,9 @@ LX_graphics * LX_graphics::getInstance()
 *
 *   @param filename : the .bmp file name which describe the image
 *
-*   @return the surface loaded and optimized, NULL otherwise
+*   @return the loaded and optimized surface if there is no problem, NULL otherwise
 *
-*   @warning If you try to load an other imge file with this function, it will fail.
+*   @warning If you try to load an other image file with this function, it will fail.
 *
 */
 SDL_Surface * LX_graphics::load_BMP(std::string filename)
@@ -100,12 +99,13 @@ SDL_Surface * LX_graphics::load_BMP(std::string filename)
 *
 *   @param filename : the file name which describe the image
 *
-*   @return the surface loaded and optimized, NULL otherwise
+*   @return the loaded and optimized surface if there is no problem, NULL otherwise
 *
-*   @note You may use this function instead of load_BMP to load a non BMP surface.
-*   @warning 1. When you call this function, the format optimization includes the alpha canal.
+*   @note You may use this function instead of load_BMP() to load a non .bmp file
+*   @note If you want to load a .bmp file and use the transparency, please use load_BMP() and put_transparency()
+*
+*   @warning When you call this function, the format optimization includes the alpha canal.
 *                   No transparency can be put on the surface after that
-*   @warning 2. If you want to load a bmp file and use the transparency, you should call load_BMP() instead of it and put_transparency()
 *
 */
 SDL_Surface * LX_graphics::load_image(std::string filename)
@@ -136,11 +136,11 @@ SDL_Surface * LX_graphics::load_image(std::string filename)
 *   This function put the transparency on a SDL_surface
 *
 *   @param image : the surface
-*   @param red : the the red color canal which go to be transparent
-*   @param green : the the green color canal which go to be transparent
-*   @param blue : the the blue color canal which go to be transparent
+*   @param red : the the red color canal of the future transparent color
+*   @param green : the the green color canal of the future transparent color
+*   @param blue : the the blue color canal of the future transparent color
 *
-*   @return TRUE if all was done without problem, FALSE otherwise
+*   @return TRUE if the transparency was done without problem, FALSE otherwise
 *
 *   @note You may use any format for values (hexadecimal, digital,...).
 *
@@ -175,7 +175,7 @@ bool LX_graphics::put_transparency(SDL_Surface *image,unsigned int red, unsigned
 *
 *   @note If you do not need to determine the area parameter of the surface, put NULL
 *
-*   @return TRUE if all is ok, FALSE otherwise
+*   @return TRUE if the image was put with success, FALSE otherwise
 */
 bool LX_graphics::put_image(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 {
@@ -217,13 +217,12 @@ void LX_graphics::update()
 *
 *   @fn void LX_graphics::clear()
 *
-*   This function clear the screen
+*   This function clears the screen
 *
 */
 void LX_graphics::clear()
 {
     SDL_FillRect(screen,NULL, SDL_MapRGB(screen->format,0,0,0));
-    //SDL_FillRect(screen,NULL, SDL_MapRGB(screen->format,100,100,100));
 }
 
 

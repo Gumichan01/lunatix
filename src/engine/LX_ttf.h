@@ -26,17 +26,12 @@
 */
 
 
-#include <cstring>
-#include <string>
-#include <iostream>
-#include <exception>
-
-#include<SDL/SDL.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 
 #include "LX_config.h"
 
-#define DEFAULT_FONT_SIZE 24    /**<The default value of the font size*/
+#define DEFAULT_FONT_SIZE 24    /**<The default value of the font size, used when the size defined in the configuration file is 0*/
 
 
 
@@ -53,11 +48,21 @@ class LX_OpenFont_exception : public std::exception
 
     std::string str_err;                        /**< The string where the error message will be conteined*/
 
-    LX_OpenFont_exception( std::string err)
+/**
+*   @fn LX_OpenFont_exception(std::string err)
+*   Build the LX_OpenFont_exception class
+*   @param err the error string
+*/
+    LX_OpenFont_exception(std::string err)
     {
         str_err = err;
     }
 
+/**
+*   @fn const char * what() const throw()
+*   Get the error string
+*   @return the error string
+*/
     const char * what() const throw() {return str_err.c_str() ;}
 
     ~LX_OpenFont_exception() throw(){}
@@ -72,52 +77,47 @@ class LX_OpenFont_exception : public std::exception
 *
 *   This class describes the LX_ttf library. It manages the True type Font.
 *
-*   @note This class supports UTF-8
+*   @note This class supports the UTF-8 format
 *
 */
 class LX_ttf{
 
-    std::string font_str;
-    unsigned int size_font;
-    SDL_Color font_color;
+    std::string font_str;       /**< The font file*/
+    unsigned int font_size;     /**< The font size*/
+    SDL_Color font_color;       /**< The font color*/
 
-    SDL_Surface *screen;
-
-    TTF_Font *font;
+    TTF_Font *font;             /**< The font structure created*/
 
     public:
 
 /**
 *
-*   @fn LX_ttf(std::string ttf_filename, unsigned int size, SDL_Color *color)
+*   @fn LX_ttf(SDL_Color *color)
 *
 *   This constructor initializes The LX_TTF module.
 *
-*   @param ttf_filename the name of the .ttf file
-*   @param size the default size of the font when it will be displayed
 *   @param color the default color font
 *
-*   @note If you do not need to specify the font file name, you may put NULL instead of the file name
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
-*   @note If the size value is 0, size get the default value, defined by DEFAULT_FONT_SIZE
-*
-*   @warning If you put NULL in window, a LX_FONT_SCREEN_ERROR exception will be occured
+*   @warning A LX_OpenFont_exception will be occured if the filename or the font size given by the configuration file is invalid
 *
 */
     LX_ttf(SDL_Color *color)
     {
+        font = NULL;
+
         // load the configuration
         LX_configuration *ttf_config = LX_configuration::getInstance();
 
         font_str = ttf_config->getFontFile();
-        size_font = ttf_config->getFontSize();
+        font_size = ttf_config->getFontSize();
 
-        if(size_font == 0)
+        if(font_size == 0)
         {
-             size_font = DEFAULT_FONT_SIZE;
+             font_size = DEFAULT_FONT_SIZE;
         }
 
-        font = TTF_OpenFont(font_str.c_str(), size_font);
+        font = TTF_OpenFont(font_str.c_str(), font_size);
 
         if(font == NULL)
         {
@@ -144,9 +144,9 @@ class LX_ttf{
     SDL_Surface * draw_ShadedText(std::string text);
     SDL_Surface * draw_BlendedText(std::string text);
 
-    SDL_Surface * draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
-    SDL_Surface * draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
-    SDL_Surface * draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
+    SDL_Surface * draw_SolidText_WithSize(std::string text, unsigned int size);
+    SDL_Surface * draw_ShadedText_WithSize(std::string text, unsigned int size);
+    SDL_Surface * draw_BlendedText_WithSize(std::string text, unsigned int size);
 
     bool setTTF_filename(std::string ttf_filename);
     bool setColor(SDL_Color *color);
@@ -159,8 +159,6 @@ class LX_ttf{
     }
 
 };
-
-
 
 
 #endif // LX_TTF_H_INCLUDED

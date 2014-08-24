@@ -76,20 +76,20 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
     return TTF_RenderUTF8_Blended(font,text.c_str(), font_color);
 }
 
+
 /**
 *
-*   @fn SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
 *   @param text the text you want to display
 *   @param size the size defined by the user
-*   @param pos the position of the text on the screen
 *
 *   @return the new SDL_surface , NULL otherwise
 *
 */
-SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size)
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
@@ -122,18 +122,17 @@ SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int siz
 
 /**
 *
-*   @fn SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
 *   @param text the text you want to display
 *   @param size the size defined by the user
-*   @param pos the position of the text on the screen
 *
 *   @return the new SDL_surface , NULL otherwise
 *
 */
-SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size)
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
@@ -165,18 +164,17 @@ SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int si
 
 /**
 *
-*   @fn SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
 *   @param text the text you want to display
 *   @param size the size defined by the user
-*   @param pos the position of the text on the screen
 *
 *   @return the new SDL_surface , NULL otherwise
 *
 */
-SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size)
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;

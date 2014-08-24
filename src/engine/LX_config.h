@@ -45,12 +45,21 @@ class LX_configuration_exception : public std::exception
     public :
 
     std::string str_err;                    /**< The string where the error message will be conteined*/
-
-    LX_configuration_exception( std::string err)
+/**
+*   @fn LX_configuration_exception(std::string err)
+*   Build the LX_configuration_exception class
+*   @param err the error string
+*/
+    LX_configuration_exception(std::string err)
     {
         str_err = err;
     }
 
+/**
+*   @fn const char * what() const throw()
+*   Get the error string
+*   @return the error string
+*/
     const char * what() const throw() {return str_err.c_str() ;}
 
     ~LX_configuration_exception() throw(){}
@@ -89,8 +98,6 @@ class LX_configuration
     void setWinWidth();
     void setWinHeight();
     void setFullscreenFlag();
-
-
 
 
     LX_configuration()
