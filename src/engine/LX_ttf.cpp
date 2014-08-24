@@ -78,7 +78,7 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
 
 /**
 *
-*   @fn bool LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
@@ -86,10 +86,10 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
 *   @param size the size defined by the user
 *   @param pos the position of the text on the screen
 *
-*   @return TRUE if it is ok, FALSE otherwise
+*   @return the new SDL_surface , NULL otherwise
 *
 */
-bool LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
@@ -113,25 +113,16 @@ bool LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Re
         return false;
     }
 
-    err = SDL_BlitSurface(loaded,NULL,screen,pos);
-
-    if(err)
-    {
-        fprintf(stderr,"\nError occurred in LX_ttf::draw_SolidText_WithSize : %s",SDL_GetError());
-        return false;
-    }
-
-    SDL_FreeSurface(loaded);
     TTF_CloseFont(ttf);
 
-    return true;
+    return loaded;
 }
 
 
 
 /**
 *
-*   @fn bool bool LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
@@ -139,10 +130,10 @@ bool LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Re
 *   @param size the size defined by the user
 *   @param pos the position of the text on the screen
 *
-*   @return TRUE if it is ok, FALSE otherwise
+*   @return the new SDL_surface , NULL otherwise
 *
 */
-bool LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
@@ -166,24 +157,15 @@ bool LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_R
         return false;
     }
 
-    err = SDL_BlitSurface(loaded,NULL,screen,pos);
-
-    if(err)
-    {
-        fprintf(stderr,"\nError occurred in LX_ttf::draw_ShadedText_WithSize : %s",SDL_GetError());
-        return false;
-    }
-
-    SDL_FreeSurface(loaded);
     TTF_CloseFont(ttf);
 
-    return true;
+    return loaded;
 }
 
 
 /**
 *
-*   @fn bool LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+*   @fn SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
@@ -191,10 +173,10 @@ bool LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_R
 *   @param size the size defined by the user
 *   @param pos the position of the text on the screen
 *
-*   @return TRUE if it is ok, FALSE otherwise
+*   @return the new SDL_surface , NULL otherwise
 *
 */
-bool LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
+SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos)
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
@@ -218,18 +200,9 @@ bool LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_
         return false;
     }
 
-    err = SDL_BlitSurface(loaded,NULL,screen,pos);
-
-    if(err)
-    {
-        fprintf(stderr,"\nError occurred in LX_ttf::draw_SolidText_WithSize : %s",SDL_GetError());
-        return false;
-    }
-
-    SDL_FreeSurface(loaded);
     TTF_CloseFont(ttf);
 
-    return true;
+    return loaded;
 }
 
 

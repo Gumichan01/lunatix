@@ -144,9 +144,9 @@ class LX_ttf{
     SDL_Surface * draw_ShadedText(std::string text);
     SDL_Surface * draw_BlendedText(std::string text);
 
-    bool draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
-    bool draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
-    bool draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
+    SDL_Surface * draw_SolidText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
+    SDL_Surface * draw_ShadedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
+    SDL_Surface * draw_BlendedText_WithSize(std::string text, unsigned int size, SDL_Rect *pos);
 
     bool setTTF_filename(std::string ttf_filename);
     bool setColor(SDL_Color *color);
