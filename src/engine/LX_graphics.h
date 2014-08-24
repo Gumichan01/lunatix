@@ -81,7 +81,7 @@ class LX_graphics{
 
     ~LX_graphics()
     {
-        delete screen;
+        SDL_FreeSurface(screen);
     }
 
 };
