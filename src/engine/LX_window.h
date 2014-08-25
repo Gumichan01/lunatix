@@ -108,8 +108,7 @@ class LX_window{
             fullscreen_flag = SDL_FULLSCREEN;
         }
 
-        //window=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
-        window=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF);
+        window=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
 
         if(window == NULL )
         {
