@@ -25,7 +25,6 @@
 #include "LX_config.h"
 
 
-
 /**
 *   @fn LX_configuration * LX_configuration::getInstance()
 *
@@ -80,7 +79,6 @@ void LX_configuration::setVideoFlag()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setVideoFlag : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
@@ -90,9 +88,7 @@ void LX_configuration::setVideoFlag()
     if(!lua_isfunction(state,-1))
     {
         std::cerr << "Error occured in LX_configuration::setVideoFlag : The Lua function getVideo does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getVideo does not exist");
-
     }
     else
     {
@@ -101,11 +97,9 @@ void LX_configuration::setVideoFlag()
 
         //Getting the returned value
         videoFlag = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -130,7 +124,6 @@ void LX_configuration::setTTF_Flag()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setTTF_Flag : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
@@ -139,11 +132,8 @@ void LX_configuration::setTTF_Flag()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setTTF_Flag : The Lua function getTTF does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getTTF does not exist");
-
     }
     else
     {
@@ -152,11 +142,9 @@ void LX_configuration::setTTF_Flag()
 
         //Getting the returned value
         ttf_Flag = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -181,7 +169,6 @@ void LX_configuration::setAudioFlag()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setAudioFlag : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
@@ -190,11 +177,8 @@ void LX_configuration::setAudioFlag()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setAudioFlag : The Lua function getAudio does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getAudio does not exist");
-
     }
     else
     {
@@ -203,11 +187,9 @@ void LX_configuration::setAudioFlag()
 
         //Getting the returned value
         audioFlag = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -232,7 +214,6 @@ void LX_configuration::setJoystickFlag()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setJoystickFlag : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
@@ -241,11 +222,8 @@ void LX_configuration::setJoystickFlag()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setJoystickFlag : The Lua function getJoystick does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getJoystick does not exist");
-
     }
     else
     {
@@ -254,11 +232,9 @@ void LX_configuration::setJoystickFlag()
 
         //Getting the returned value
         joystickFlag = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -293,11 +269,8 @@ void LX_configuration::setOpenGL_Flag()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setOpenGL_Flag : The Lua function getOpenGL does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getOpenGL does not exist");
-
     }
     else
     {
@@ -306,11 +279,9 @@ void LX_configuration::setOpenGL_Flag()
 
         //Getting the returned value
         openglFlag = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -345,11 +316,8 @@ void LX_configuration::setFontFile()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setFontFile : The Lua function getFont does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getFont does not exist");
-
     }
     else
     {
@@ -362,7 +330,6 @@ void LX_configuration::setFontFile()
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -397,9 +364,7 @@ void LX_configuration::setFontSize()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setFontSize : The Lua function getFontSize does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getFontSize does not exist");
 
     }
@@ -410,11 +375,9 @@ void LX_configuration::setFontSize()
 
         //Getting the returned value
         font_size = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -440,7 +403,6 @@ void LX_configuration::setWinWidth()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setWinWidth : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
@@ -449,11 +411,8 @@ void LX_configuration::setWinWidth()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setWinWidth : The Lua function getWidth does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getWidth does not exist");
-
     }
     else
     {
@@ -462,11 +421,9 @@ void LX_configuration::setWinWidth()
 
         //Getting the returned value
         width = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -492,7 +449,6 @@ void LX_configuration::setWinHeight()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setWinHeight : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
@@ -501,11 +457,8 @@ void LX_configuration::setWinHeight()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setWinHeight : The Lua function getHeight does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getHeight does not exist");
-
     }
     else
     {
@@ -514,11 +467,9 @@ void LX_configuration::setWinHeight()
 
         //Getting the returned value
         height = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
@@ -553,9 +504,7 @@ void LX_configuration::setFullscreenFlag()
 
     if(!lua_isfunction(state,-1))
     {
-        //Ce n'est pas une fonction
         std::cerr << "Error occured in LX_configuration::setFullscreenFlag : The Lua function getFullscreen does not exist" << std::endl;
-
         throw LX_configuration_exception("The Lua function getFullscreen does not exist");
 
     }
@@ -566,11 +515,9 @@ void LX_configuration::setFullscreenFlag()
 
         //Getting the returned value
         fullscreenFlag = (int) lua_tonumber(state, -1);
-
     }
 
     lua_pop(state,1);
-
 }
 
 
