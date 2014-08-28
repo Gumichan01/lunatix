@@ -69,7 +69,7 @@ bool LX_Init(void)
     //Init SDL
     if(SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
     {
-        fprintf(stderr,"\nError occured in SDL_Init : %s \n", SDL_GetError());
+        std::cerr << "Error occurred in SDL_Init : " << SDL_GetError() << std::endl;
         return false;
     }
 
@@ -79,20 +79,22 @@ bool LX_Init(void)
         //Init SDL_Image
         if( IMG_Init(img_flags) != img_flags)
         {
-            fprintf(stderr,"\nError occured in IMG_Init : %s \n", SDL_GetError());
+            std::cerr << "Error occurred in IMG_Init : " << SDL_GetError() << std::endl;
             SDL_Quit();
             return false;
         }
     }
 
-
-    //Init SDL_ttf
-    if(TTF_Init() == -1)
+    if(configuration->getTTF_Flag() == 1)
     {
-        fprintf(stderr,"\nError occured in TTF_Init : %s \n", SDL_GetError());
-        IMG_Quit();
-        SDL_Quit();
-        return false;
+        //Init SDL_ttf
+        if(TTF_Init() == -1)
+        {
+            std::cerr << "Error occurred in TTF_Init : " << SDL_GetError() << std::endl;
+            IMG_Quit();
+            SDL_Quit();
+            return false;
+        }
     }
 
 
@@ -103,7 +105,7 @@ bool LX_Init(void)
 
         if(err == -1)
         {
-            fprintf(stderr,"\nError occured in Mix_Init : %s \n", SDL_GetError());
+            std::cerr << "Error occurred in Mix_Init : " << SDL_GetError() << std::endl;
             TTF_Quit();
             IMG_Quit();
             SDL_Quit();
@@ -114,7 +116,7 @@ bool LX_Init(void)
 
         if( err < 0)
         {
-            fprintf(stderr,"\nError occured in Mix_OpenAudio : %s \n", SDL_GetError());
+            std::cerr << "Error occurred in Mix_OpenAudio : " << SDL_GetError() << std::endl;
             Mix_Quit();
             TTF_Quit();
             IMG_Quit();

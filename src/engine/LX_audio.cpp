@@ -43,7 +43,7 @@ bool LX_Audio::load_music(std::string filename)
 
     if(music == NULL)
     {
-        fprintf(stderr,"\nException occured in LX_Audio::load_music / Mix_LoadMUS :  %s \n", Mix_GetError());
+        std::cerr << "Error occured in LX_Audio::load_music / Mix_LoadMUS : " << Mix_GetError() << std::endl;
         return false;
     }
 
@@ -67,7 +67,7 @@ bool LX_Audio::play_music()
 
     if(err == -1)
     {
-        fprintf(stderr,"\nException occured in LX_Audio::load_music / Mix_PlayMusic :  %s \n", Mix_GetError());
+        std::cerr << "Error occured in LX_Audio::load_music / Mix_PlayMusic : " << Mix_GetError() << std::endl;
         return false;
     }
 
@@ -131,7 +131,7 @@ Mix_Chunk * LX_Audio::load_sample(std::string filename)
 
     if(sample == NULL)
     {
-        fprintf(stderr,"\nException occured in LX_Audio::load_sample / Mix_LoadWAV :  %s \n", Mix_GetError());
+        std::cerr << "Error occured in LX_Audio::load_sample / Mix_LoadWAV : " << Mix_GetError() << std::endl;
     }
 
     return sample;
@@ -147,7 +147,7 @@ Mix_Chunk * LX_Audio::load_sample(std::string filename)
 */
 void LX_Audio::play_sample(Mix_Chunk *sample)
 {
-    Mix_PlayChannel(-1,sample,0);
+    Mix_PlayChannel(-1,sample,LX_AUDIO_NOLOOP);
 }
 
 

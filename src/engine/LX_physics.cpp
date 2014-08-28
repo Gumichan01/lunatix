@@ -283,7 +283,7 @@ bool LX_physics::collision(const LX_Circle *circle, LX_Polygon *polygon)
 
         if(tmp == NULL)
         {
-            fprintf(stderr,"ERROR occured in LX_physics::collision(Circle *circle, LX_Polygon *polygon) \n");
+            std::cerr << "Error occurred in LX_physics::collision(Circle *circle, LX_Polygon *polygon) : " << SDL_GetError() << std::endl;
             return false;
         }
 
@@ -303,7 +303,7 @@ bool LX_physics::collision(const LX_Circle *circle, LX_Polygon *polygon)
             B.y = tmp->y;
         }
 
-        //free(tmp);
+        delete tmp;
 
         if(collision(circle,&A,&B))
             return true;

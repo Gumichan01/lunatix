@@ -9,7 +9,6 @@
 #include "engine/LX_audio.h"
 #include "engine/LX_physics.h"
 
-/// @todo modify the music library + commit
 
 int main ( int argc, char** argv )
 {
@@ -30,7 +29,6 @@ int main ( int argc, char** argv )
     std::string mus = "data/Prototype Princess v1_01.wav";
     std::string sample = "data/Prototype Princess v1_01.wav";
     std::string font_file = "data/AozoraMinchoMedium.ttf";
-    std::string engine_name = "LunatiX_engine";
 
     LX_window *win;
     LX_graphics *graphics;
@@ -111,7 +109,7 @@ int main ( int argc, char** argv )
         graphics->clear();
 
         graphics->put_image(sf,NULL,&pos);
-        graphics->put_image(ttf->draw_BlendedText(engine_name),NULL,&pos1);
+        graphics->put_image(ttf->draw_BlendedText("LunatiX_engine"),NULL,&pos1);
         graphics->put_image(ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop"),NULL,&pos2);
 
         graphics->update();
@@ -124,7 +122,6 @@ int main ( int argc, char** argv )
     delete audio;
     delete ttf;
     delete graphics;
-    //delete win;
 
     LX_Quit();
 

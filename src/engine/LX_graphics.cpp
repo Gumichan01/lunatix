@@ -79,7 +79,7 @@ SDL_Surface * LX_graphics::load_BMP(std::string filename)
 
     if(loaded == NULL)
     {
-        fprintf(stderr,"\nException occurred in LX_graphics::load_BMP : %s",SDL_GetError());
+        std::cerr << "Error occurred in LX_graphics::load_BMP : " << SDL_GetError() << std::endl;
         return NULL;
     }
 
@@ -117,7 +117,7 @@ SDL_Surface * LX_graphics::load_image(std::string filename)
 
     if(loaded == NULL)
     {
-        fprintf(stderr,"\nException occurred in LX_graphics::load_image : %s",SDL_GetError());
+        std::cerr << "Error occurred in LX_graphics::load_image : " << SDL_GetError() << std::endl;
         return NULL;
     }
 
@@ -154,7 +154,7 @@ bool LX_graphics::put_transparency(SDL_Surface *image,unsigned int red, unsigned
 
     if(err == -1)
     {
-        fprintf(stderr,"\nException occurred in LX_graphics::put_transparency : I cannot load the image : %s",SDL_GetError());
+        std::cerr << "Error occurred in LX_graphics::put_transparency : " << SDL_GetError() << std::endl;
         return false;
     }
 
@@ -195,7 +195,7 @@ bool LX_graphics::put_image(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 
     if(err != 0)
     {
-        fprintf(stderr,"\nException occurred in LX_graphics::put_image : %s",SDL_GetError());
+        std::cerr << "Error occurred in LX_graphics::put_image : " << SDL_GetError() << std::endl;
         return false;
     }
     return true;

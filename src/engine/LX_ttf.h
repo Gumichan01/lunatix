@@ -99,7 +99,9 @@ class LX_ttf{
 *   @param color the default color font
 *
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
-*   @warning A LX_OpenFont_exception will be occured if the filename or the font size given by the configuration file is invalid
+*   @warning You must initialize the SDL_TTF library putting the ttf flag to 1 in sdl_conf.cfg.
+*            Otherwise, a LX_OpenFont_exception will be occured.
+*   @warning A LX_OpenFont_exception may also be occured if thefilename or the font size is invalid
 *
 */
     LX_ttf(SDL_Color *color)
@@ -112,6 +114,8 @@ class LX_ttf{
         font_str = ttf_config->getFontFile();
         font_size = ttf_config->getFontSize();
 
+        delete ttf_config;
+
         if(font_size == 0)
         {
              font_size = DEFAULT_FONT_SIZE;
@@ -121,7 +125,6 @@ class LX_ttf{
 
         if(font == NULL)
         {
-            //std::cerr << "exception occured in LX_window constructor : " << TTF_GetError() << std::endl;
             throw LX_OpenFont_exception(TTF_GetError());
         }
 
@@ -132,8 +135,6 @@ class LX_ttf{
             font_color.g = color->g;
             font_color.b = color->b;
         }
-
-        delete ttf_config;
 
         SDL_EnableUNICODE(SDL_ENABLE);
     }
@@ -154,7 +155,6 @@ class LX_ttf{
     ~LX_ttf()
     {
         SDL_EnableUNICODE(SDL_DISABLE);
-
         TTF_CloseFont(font);
     }
 

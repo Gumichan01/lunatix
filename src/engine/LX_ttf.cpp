@@ -100,7 +100,7 @@ SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int siz
 
     if(ttf == NULL)
     {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_SolidText_WithSize, sorry, I cannot open the font : %s \n", TTF_GetError());
+        std::cerr << "Error occurred in LX_ttf::draw_SolidText_WithSize : " << TTF_GetError() << std::endl;
         return false;
     }
 
@@ -109,7 +109,7 @@ SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int siz
 
     if( loaded == NULL)
     {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_SolidText_WithSize : %s \n", TTF_GetError());
+        std::cerr << "Error occurred in LX_ttf::draw_SolidText_WithSize : " << TTF_GetError() << std::endl;
         return false;
     }
 
@@ -143,7 +143,7 @@ SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int si
 
     if(ttf == NULL)
     {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_ShadedText_WithSize, sorry, I cannot open the font : %s \n", TTF_GetError());
+        std::cerr << "Error occurred in LX_ttf::draw_ShadedText_WithSize : " << TTF_GetError() << std::endl;
         return false;
     }
 
@@ -152,7 +152,7 @@ SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int si
 
     if( loaded == NULL)
     {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_ShadedText_WithSize : %s \n", TTF_GetError());
+        std::cerr << "Error occurred in LX_ttf::draw_ShadedText_WithSize : " << TTF_GetError() << std::endl;
         return false;
     }
 
@@ -185,7 +185,7 @@ SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int s
 
     if(ttf == NULL)
     {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_SolidText_WithSize, sorry, I cannot open the font : %s \n", TTF_GetError());
+        std::cerr << "Error occurred in LX_ttf::draw_SolidText_WithSize : " << TTF_GetError() << std::endl;
         return false;
     }
 
@@ -194,7 +194,7 @@ SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int s
 
     if( loaded == NULL)
     {
-        fprintf(stderr,"\nError occured in LX_ttf::draw_SolidText_WithSize : %s \n", TTF_GetError());
+        std::cerr << "Error occurred in LX_ttf::draw_SolidText_WithSize : " << TTF_GetError() << std::endl;
         return false;
     }
 
