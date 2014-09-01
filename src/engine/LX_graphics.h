@@ -52,13 +52,13 @@ class LX_graphics{
             screen = win->getWindow();
         }
 
-        delete win;
     }
 
     public:
 
     //get the instance
     static LX_graphics * getInstance();
+    static void destroy();
 
 
     // The static functions
@@ -76,7 +76,11 @@ class LX_graphics{
 
     void clear();
 
-
+/**
+*   @fn SDL_Surface * getScreen()
+*   Returns the screen
+*   @return the screen
+**/
     SDL_Surface * getScreen(){return screen;}
 
     ~LX_graphics()

@@ -19,7 +19,6 @@
 *	@date August 14, 2014
 *
 *
-*
 */
 
 #include "LX_lib.h"
@@ -125,7 +124,7 @@ bool LX_Init(void)
         }
     }
 
-    delete configuration;
+    configuration->destroy();
 
     return true;
 

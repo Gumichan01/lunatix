@@ -114,7 +114,7 @@ class LX_ttf{
         font_str = ttf_config->getFontFile();
         font_size = ttf_config->getFontSize();
 
-        delete ttf_config;
+        ttf_config->destroy();
 
         if(font_size == 0)
         {

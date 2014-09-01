@@ -19,11 +19,11 @@
 *	@date August 14th, 2014
 *
 *
-*
 */
 
 #include "LX_window.h"
 
+static LX_window *win_instance = NULL;
 
 /**
 *   @fn LX_window * LX_window::getInstance()
@@ -35,13 +35,11 @@
 */
 LX_window * LX_window::getInstance()
 {
-    static LX_window *instance = NULL;
-
-    if(instance == NULL)
+    if(win_instance == NULL)
     {
         try
         {
-            instance = new LX_window();
+            win_instance = new LX_window();
         }
         catch(std::exception & ex)
         {
@@ -50,7 +48,23 @@ LX_window * LX_window::getInstance()
         }
     }
 
-    return instance;
+    return win_instance;
+}
+
+
+/**
+*
+*   @fn void LX_window::destroy()
+*
+*   Destroy the unique instance
+*
+*   @warning you must call this function to prevent a memory leak if you called LX_window::getInstances()
+*
+*/
+void LX_window::destroy()
+{
+    delete win_instance;
+    win_instance = NULL;
 }
 
 

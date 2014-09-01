@@ -127,10 +127,11 @@ class LX_configuration
 
     }
 
+
     public :
 
     static LX_configuration * getInstance();
-
+    static void destroy();
 
     int getVideoFlag();
     int getTTF_Flag();
@@ -142,7 +143,6 @@ class LX_configuration
     int getWinWidth();
     int getWinHeight();
     int getFullscreenFlag();
-
 
     ~LX_configuration(){}
 

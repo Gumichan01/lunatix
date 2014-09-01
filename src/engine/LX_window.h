@@ -22,7 +22,6 @@
 *	@date August 14th, 2014
 *
 *
-*
 */
 
 #include "LX_config.h"
@@ -102,6 +101,8 @@ class LX_window{
         LX_height = win_config->getWinHeight();
         LX_bpp = BPP;
 
+
+
         // check the fullscreen flag
         if(win_config->getFullscreenFlag() == 1)
         {
@@ -116,13 +117,15 @@ class LX_window{
             throw LX_window_exception(SDL_GetError());
         }
 
-        delete win_config;
+        win_config->destroy();
 
     }
 
     public:
 
     static LX_window * getInstance();
+    static void destroy();
+
     static void setTitle(std::string title);
     static void setTitle(std::string title, std::string icon);
 

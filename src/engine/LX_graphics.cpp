@@ -19,11 +19,11 @@
 *	@date July 13th, 2014
 *
 *
-*
 */
 #include "LX_graphics.h"
 
 
+static LX_graphics *gInstance = NULL;
 
 /**
 *   @fn LX_graphics * LX_graphics::getInstance()
@@ -35,25 +35,37 @@
 */
 LX_graphics * LX_graphics::getInstance()
 {
-    static LX_graphics *instance = NULL;
-
-    if(instance == NULL)
+    if(gInstance == NULL)
     {
         try
         {
-            instance = new LX_graphics();
+            gInstance = new LX_graphics();
         }
         catch(std::exception & g_ex)
         {
             std::cerr << "exception occured in LX_graphics::getInstance : " << g_ex.what() << std::endl;
             return NULL;
         }
-
     }
 
-    return instance;
+    return gInstance;
 }
 
+
+/**
+*
+*   @fn void LX_graphics::destroy()
+*
+*   Destroy the unique instance
+*
+*   @warning you must call this function to prevent a memory leak if you called LX_graphics::getInstances()
+*
+*/
+void LX_graphics::destroy()
+{
+    delete gInstance;
+    gInstance = NULL;
+}
 
 
 

@@ -19,11 +19,12 @@
 *	@date August 20th, 2014
 *
 *
-*
 */
 
 #include "LX_config.h"
 
+// unique instance
+static LX_configuration *instance;
 
 /**
 *   @fn LX_configuration * LX_configuration::getInstance()
@@ -32,16 +33,18 @@
 *
 *   @return the instance of LX_configuration
 *
+*   @note If no instance exists, a new unique instance will be created and returned
+*   @note otherwise, a current instance will be returned
+*
 */
 LX_configuration * LX_configuration::getInstance()
 {
-    static LX_configuration *instance = NULL;
-
 
     if(instance == NULL)
     {
         try
         {
+            std::cout << " config NULL" << std::endl;
             instance = new LX_configuration();
         }
         catch(std::exception & ex_conf)
@@ -51,10 +54,25 @@ LX_configuration * LX_configuration::getInstance()
         }
     }
 
-
     return instance;
 }
 
+
+
+/**
+*
+*   @fn void LX_configuration::destroy()
+*
+*   Destroy the unique instance
+*
+*   @warning you must call this function to prevent a memory leak if you called LX_configuration::getInstances()
+*
+*/
+void LX_configuration::destroy()
+{
+    delete instance;
+    instance = NULL;
+}
 
 
 
@@ -675,20 +693,6 @@ int LX_configuration::getFullscreenFlag()
 {
     return fullscreenFlag;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
