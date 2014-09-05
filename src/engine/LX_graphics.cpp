@@ -191,19 +191,13 @@ bool LX_graphics::put_transparency(SDL_Surface *image,unsigned int red, unsigned
 */
 bool LX_graphics::put_image(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 {
-   int err;
+    int err;
+    SDL_Rect offset;
 
-    if(image == NULL)
-    {
-        std::cout << "image NULL" << std::endl;
-    }
+    offset.x = pos->x;
+    offset.y = pos->y;
 
-    if(screen == NULL)
-    {
-        std::cout << "screen NULL" << std::endl;
-    }
-
-   err = SDL_BlitSurface(image,area,screen,pos);
+   err = SDL_BlitSurface(image,area,screen,&offset);
 
     if(err != 0)
     {
