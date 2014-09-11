@@ -1,6 +1,0 @@
-<map id="LX_ttf::LX_ttf" name="LX_ttf::LX_ttf">
-<area shape="rect" id="node2" href="$class_l_x__configuration.html#aaed851873fcdc457c4eb92878e14cb3a" title="LX_configuration::getInstance" alt="" coords="150,5,341,32"/>
-<area shape="rect" id="node3" href="$class_l_x__configuration.html#a0d9bc80287dc83020817e3d1f2d0b555" title="LX_configuration::getFontFile" alt="" coords="151,56,340,83"/>
-<area shape="rect" id="node4" href="$class_l_x__configuration.html#aa755d70b957f93d6ea3909abfaa3f3ad" title="LX_configuration::getFontSize" alt="" coords="148,107,343,133"/>
-<area shape="rect" id="node5" href="$class_l_x__configuration.html#a89dbd6669b5a45e070788f15196768b1" title="LX_configuration::destroy" alt="" coords="162,157,329,184"/>
-</map>

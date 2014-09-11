@@ -1,7 +1,0 @@
-<map id="LX_Point.h" name="LX_Point.h">
-<area shape="rect" id="node2" href="$_l_x__euclide_8h.html" title="The library includes different non&#45;standard mathemetic operation. " alt="" coords="5,80,100,107"/>
-<area shape="rect" id="node3" href="$_l_x___polygon_8h.html" title="The polygon hitbox Library. " alt="" coords="125,80,226,107"/>
-<area shape="rect" id="node4" href="$_l_x__physics_8h.html" title="The LX_physics Library, it will be linked with the SDL library. " alt="" coords="61,155,159,181"/>
-<area shape="rect" id="node6" href="$_l_x___polygon_8cpp.html" title="The LX_Polygon file. " alt="" coords="183,155,298,181"/>
-<area shape="rect" id="node5" href="$_l_x__physics_8cpp.html" title="The LX_physics file. It contains all definitions of member functions. " alt="" coords="53,229,167,256"/>
-</map>
