@@ -39,7 +39,7 @@ var searchData=
   ['lx_5fpolygon_2eh',['LX_Polygon.h',['../_l_x___polygon_8h.html',1,'']]],
   ['lx_5fpolygon_5fpoint_5fexception',['LX_Polygon_Point_exception',['../class_l_x___polygon___point__exception.html',1,'LX_Polygon_Point_exception'],['../class_l_x___polygon___point__exception.html#a9c9bfb7eb84824dac8cb22dfbb378d0c',1,'LX_Polygon_Point_exception::LX_Polygon_Point_exception()']]],
   ['lx_5fquit',['LX_Quit',['../_l_x__lib_8cpp.html#acf0ccfa799307990a3dc28484abf3c01',1,'LX_Quit(void):&#160;LX_lib.cpp'],['../_l_x__lib_8h.html#acf0ccfa799307990a3dc28484abf3c01',1,'LX_Quit(void):&#160;LX_lib.cpp']]],
-  ['lx_5fttf',['LX_ttf',['../class_l_x__ttf.html',1,'LX_ttf'],['../class_l_x__ttf.html#af3c0f6bbb80afe53b29b17744f7d6063',1,'LX_ttf::LX_ttf()']]],
+  ['lx_5fttf',['LX_ttf',['../class_l_x__ttf.html',1,'']]],
   ['lx_5fttf_2ecpp',['LX_ttf.cpp',['../_l_x__ttf_8cpp.html',1,'']]],
   ['lx_5fttf_2eh',['LX_ttf.h',['../_l_x__ttf_8h.html',1,'']]],
   ['lx_5fwindow',['LX_window',['../class_l_x__window.html',1,'']]],

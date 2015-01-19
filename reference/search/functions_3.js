@@ -5,7 +5,7 @@ var searchData=
   ['getfontsize',['getFontSize',['../class_l_x__configuration.html#aa755d70b957f93d6ea3909abfaa3f3ad',1,'LX_configuration']]],
   ['getfullscreenflag',['getFullscreenFlag',['../class_l_x__configuration.html#a9ac51c61c732e48a9715c3fd0a5cfd0f',1,'LX_configuration']]],
   ['getheight',['getHeight',['../class_l_x__window.html#afdd47b1bad08dd1fad94149a1f091302',1,'LX_window']]],
-  ['getinstance',['getInstance',['../class_l_x__configuration.html#aaed851873fcdc457c4eb92878e14cb3a',1,'LX_configuration::getInstance()'],['../class_l_x__graphics.html#adb7ccd09eb23b76930b3bd79438d66ac',1,'LX_graphics::getInstance()'],['../class_l_x__window.html#a1df187c1b91caa80760aeb07a9b59dcc',1,'LX_window::getInstance()']]],
+  ['getinstance',['getInstance',['../class_l_x__configuration.html#aaed851873fcdc457c4eb92878e14cb3a',1,'LX_configuration::getInstance()'],['../class_l_x__graphics.html#adb7ccd09eb23b76930b3bd79438d66ac',1,'LX_graphics::getInstance()'],['../class_l_x__ttf.html#a6d2c40ebe12003ab8f82808f39898578',1,'LX_ttf::getInstance()'],['../class_l_x__window.html#a1df187c1b91caa80760aeb07a9b59dcc',1,'LX_window::getInstance()']]],
   ['getjoystickflag',['getJoystickFlag',['../class_l_x__configuration.html#ae92c5f33bf5638bb70ff35b0624fc40b',1,'LX_configuration']]],
   ['getlx_5fpointat',['getLX_PointAt',['../class_l_x___polygon.html#a958be58d3715cee25b81524241b38a7a',1,'LX_Polygon']]],
   ['getopengl_5fflag',['getOpenGL_Flag',['../class_l_x__configuration.html#a9710a07c681d4b0f6366a60326254fe2',1,'LX_configuration']]],

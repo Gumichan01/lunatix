@@ -88,8 +88,6 @@ class LX_ttf{
 
     TTF_Font *font;             /**< The font structure created*/
 
-    public:
-
 /**
 *
 *   @fn LX_ttf(SDL_Color *color)
@@ -140,6 +138,11 @@ class LX_ttf{
     }
 
 
+    public:
+
+    //get the instance
+    static LX_ttf * getInstance();
+    static void destroy();
 
     SDL_Surface * draw_SolidText(std::string text);
     SDL_Surface * draw_ShadedText(std::string text);

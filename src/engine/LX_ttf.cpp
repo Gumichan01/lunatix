@@ -24,6 +24,54 @@
 
 #include "LX_ttf.h"
 
+
+static LX_ttf *tInstance = NULL;
+
+
+/**
+*   @fn LX_ttf * LX_ttf::getInstance()
+*
+*   Get the unique instance of the LX_ttf class
+*
+*   @return the unique instance of LX_ttf
+*
+*/
+LX_ttf * LX_ttf::getInstance()
+{
+
+    if(tInstance == NULL)
+    {
+        try
+        {
+            SDL_Color color = {255,255,255};
+            tInstance = new LX_ttf(&color);
+        }
+        catch(std::exception & t_ex)
+        {
+            std::cerr << "exception occured in LX_ttf::getInstance : " << t_ex.what() << std::endl;
+            return NULL;
+        }
+    }
+
+    return tInstance;
+}
+
+
+/**
+*
+*   @fn void LX_ttf::destroy()
+*
+*   Destroy the unique instance
+*
+*   @warning you must call this function to prevent a memory leak if you called LX_ttf::getInstance()
+*
+*/
+void LX_ttf::destroy()
+{
+    delete tInstance;
+    tInstance = NULL;
+}
+
 /**
 *
 *   @fn SDL_Surface * LX_ttf::draw_SolidText(std::string text)
@@ -54,7 +102,7 @@ SDL_Surface * LX_ttf::draw_SolidText(std::string text)
 */
 SDL_Surface * LX_ttf::draw_ShadedText(std::string text)
 {
-    SDL_Color grey={127,127,127};
+    SDL_Color grey = {127,127,127};
 
     return TTF_RenderUTF8_Shaded(font,text.c_str(), font_color, grey);
 }

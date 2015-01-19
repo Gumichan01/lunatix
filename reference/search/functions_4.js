@@ -12,6 +12,5 @@ var searchData=
   ['lx_5fpolygon',['LX_Polygon',['../class_l_x___polygon.html#af2e7afa55afd7109397997536b5ed6ac',1,'LX_Polygon']]],
   ['lx_5fpolygon_5fpoint_5fexception',['LX_Polygon_Point_exception',['../class_l_x___polygon___point__exception.html#a9c9bfb7eb84824dac8cb22dfbb378d0c',1,'LX_Polygon_Point_exception']]],
   ['lx_5fquit',['LX_Quit',['../_l_x__lib_8cpp.html#acf0ccfa799307990a3dc28484abf3c01',1,'LX_Quit(void):&#160;LX_lib.cpp'],['../_l_x__lib_8h.html#acf0ccfa799307990a3dc28484abf3c01',1,'LX_Quit(void):&#160;LX_lib.cpp']]],
-  ['lx_5fttf',['LX_ttf',['../class_l_x__ttf.html#af3c0f6bbb80afe53b29b17744f7d6063',1,'LX_ttf']]],
   ['lx_5fwindow_5fexception',['LX_window_exception',['../class_l_x__window__exception.html#aba0c34af8131fc023fed636f466ed32f',1,'LX_window_exception']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['default_5ffont_5fsize',['DEFAULT_FONT_SIZE',['../_l_x__ttf_8h.html#acde9ec8712f62632c6a8fcacfe6800c4',1,'LX_ttf.h']]],
-  ['destroy',['destroy',['../class_l_x__configuration.html#a89dbd6669b5a45e070788f15196768b1',1,'LX_configuration::destroy()'],['../class_l_x__graphics.html#a36924159c3aa391ccd90f309b9ff51ec',1,'LX_graphics::destroy()'],['../class_l_x__window.html#aa19e8ed2e46cc4e2d24a4c953404e3f0',1,'LX_window::destroy()']]],
+  ['destroy',['destroy',['../class_l_x__configuration.html#a89dbd6669b5a45e070788f15196768b1',1,'LX_configuration::destroy()'],['../class_l_x__graphics.html#a36924159c3aa391ccd90f309b9ff51ec',1,'LX_graphics::destroy()'],['../class_l_x__ttf.html#a9d2df0d8fc120eee9a5fb74ed163f966',1,'LX_ttf::destroy()'],['../class_l_x__window.html#aa19e8ed2e46cc4e2d24a4c953404e3f0',1,'LX_window::destroy()']]],
   ['draw_5fblendedtext',['draw_BlendedText',['../class_l_x__ttf.html#a95386634bbff4a1924b8b3622a5d20a6',1,'LX_ttf']]],
   ['draw_5fblendedtext_5fwithsize',['draw_BlendedText_WithSize',['../class_l_x__ttf.html#ae7091de915e4a381f690b0a10b231582',1,'LX_ttf']]],
   ['draw_5fshadedtext',['draw_ShadedText',['../class_l_x__ttf.html#a1bba84427e1022b65f554b03c1ae76be',1,'LX_ttf']]],

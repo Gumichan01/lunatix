@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">LunatiX_engine
-   &#160;<span id="projectnumber">0.1.35</span>
+   &#160;<span id="projectnumber">0.1.39</span>
    </div>
    <div id="projectbrief">The free SDL-based game engine</div>
   </td>
@@ -86,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_l_x__ttf-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">LX_ttf Class Reference</div>  </div>
@@ -99,8 +100,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af3c0f6bbb80afe53b29b17744f7d6063"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_x__ttf.html#af3c0f6bbb80afe53b29b17744f7d6063">LX_ttf</a> (SDL_Color *color)</td></tr>
-<tr class="separator:af3c0f6bbb80afe53b29b17744f7d6063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a563528ca4d0f2438b7e2048612c9e"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_x__ttf.html#a35a563528ca4d0f2438b7e2048612c9e">draw_SolidText</a> (std::string text)</td></tr>
 <tr class="separator:a35a563528ca4d0f2438b7e2048612c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bba84427e1022b65f554b03c1ae76be"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_x__ttf.html#a1bba84427e1022b65f554b03c1ae76be">draw_ShadedText</a> (std::string text)</td></tr>
@@ -119,56 +118,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a169f6eb24776fff2d1d4cc30e368454a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbb9c2e8dc16289c5a6be57cf578503a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_x__ttf.html#adbb9c2e8dc16289c5a6be57cf578503a">~LX_ttf</a> ()</td></tr>
 <tr class="separator:adbb9c2e8dc16289c5a6be57cf578503a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a6d2c40ebe12003ab8f82808f39898578"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_l_x__ttf.html">LX_ttf</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_x__ttf.html#a6d2c40ebe12003ab8f82808f39898578">getInstance</a> ()</td></tr>
+<tr class="separator:a6d2c40ebe12003ab8f82808f39898578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d2df0d8fc120eee9a5fb74ed163f966"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_x__ttf.html#a9d2df0d8fc120eee9a5fb74ed163f966">destroy</a> ()</td></tr>
+<tr class="separator:a9d2df0d8fc120eee9a5fb74ed163f966"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The LunatiX_engine True type Font (TTF) module. </p>
 <p>This class describes the <a class="el" href="class_l_x__ttf.html" title="The LunatiX_engine True type Font (TTF) module. ">LX_ttf</a> library. It manages the True type Font.</p>
 <dl class="section note"><dt>Note</dt><dd>This class supports the UTF-8 format </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="af3c0f6bbb80afe53b29b17744f7d6063"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">LX_ttf::LX_ttf </td>
-          <td>(</td>
-          <td class="paramtype">SDL_Color *&#160;</td>
-          <td class="paramname"><em>color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>This constructor initializes The LX_TTF module.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">color</td><td>the default color font</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>If you do not need to specify the font color, you may put NULL instead of this color </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>You must initialize the SDL_TTF library putting the ttf flag to 1 in sdl_conf.cfg. Otherwise, a <a class="el" href="class_l_x___open_font__exception.html" title="The LX_OpenFont_exception class. ">LX_OpenFont_exception</a> will be occured. </dd>
-<dd>
-A <a class="el" href="class_l_x___open_font__exception.html" title="The LX_OpenFont_exception class. ">LX_OpenFont_exception</a> may also be occured if thefilename or the font size is invalid </dd></dl>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_l_x__ttf_af3c0f6bbb80afe53b29b17744f7d6063_cgraph.png" border="0" usemap="#class_l_x__ttf_af3c0f6bbb80afe53b29b17744f7d6063_cgraph" alt=""/></div>
-<map name="class_l_x__ttf_af3c0f6bbb80afe53b29b17744f7d6063_cgraph" id="class_l_x__ttf_af3c0f6bbb80afe53b29b17744f7d6063_cgraph">
-<area shape="rect" id="node2" href="class_l_x__configuration.html#aaed851873fcdc457c4eb92878e14cb3a" title="LX_configuration::getInstance" alt="" coords="150,5,341,32"/><area shape="rect" id="node3" href="class_l_x__configuration.html#a0d9bc80287dc83020817e3d1f2d0b555" title="LX_configuration::getFontFile" alt="" coords="151,56,340,83"/><area shape="rect" id="node4" href="class_l_x__configuration.html#aa755d70b957f93d6ea3909abfaa3f3ad" title="LX_configuration::getFontSize" alt="" coords="148,107,343,133"/><area shape="rect" id="node5" href="class_l_x__configuration.html#a89dbd6669b5a45e070788f15196768b1" title="LX_configuration::destroy" alt="" coords="162,157,329,184"/></map>
-</div>
-</p>
-
-</div>
-</div>
 <a class="anchor" id="adbb9c2e8dc16289c5a6be57cf578503a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -193,6 +155,31 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9d2df0d8fc120eee9a5fb74ed163f966"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LX_ttf::destroy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Destroy the unique instance</p>
+<dl class="section warning"><dt>Warning</dt><dd>you must call this function to prevent a memory leak if you called <a class="el" href="class_l_x__ttf.html#a6d2c40ebe12003ab8f82808f39898578">LX_ttf::getInstance()</a> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a95386634bbff4a1924b8b3622a5d20a6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -370,6 +357,31 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a6d2c40ebe12003ab8f82808f39898578"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_l_x__ttf.html">LX_ttf</a> * LX_ttf::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the unique instance of the <a class="el" href="class_l_x__ttf.html" title="The LunatiX_engine True type Font (TTF) module. ">LX_ttf</a> class</p>
+<dl class="section return"><dt>Returns</dt><dd>the unique instance of <a class="el" href="class_l_x__ttf.html" title="The LunatiX_engine True type Font (TTF) module. ">LX_ttf</a> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a169f6eb24776fff2d1d4cc30e368454a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -425,7 +437,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 2 2014 01:13:56 for LunatiX_engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 11 2014 12:50:50 for LunatiX_engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
