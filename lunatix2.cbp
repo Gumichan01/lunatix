@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="lunatix-engine-sdl2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\Projet_SDL2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-pg" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg -lgmon" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\Projet_SDL2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add directory=".\include" />
+		</Compiler>
+		<Linker>
+			<Add library="libmingw32.a" />
+			<Add library="libSDL2main.a" />
+			<Add library="libSDL2.a" />
+			<Add library="libSDL2.dll.a" />
+			<Add library="lib\libSDL2_image.a" />
+			<Add library="lib\libSDL2_image.dll.a" />
+			<Add library="lib\libSDL2_mixer.a" />
+			<Add library="lib\libSDL2_mixer.dll.a" />
+			<Add library="lib\libSDL2_ttf.a" />
+			<Add library="lib\libSDL2_ttf.dll.a" />
+			<Add directory=".\lib" />
+		</Linker>
+		<Unit filename="config\sdl_conf.cfg" />
+		<Unit filename="config\window.cfg" />
+		<Unit filename="data\Comptroller - Galactic Hero.mp3" />
+		<Unit filename="data\Prototype Princess v1_01.wav" />
+		<Unit filename="data\black_rock_shooter-HD.jpg" />
+		<Unit filename="data\cb.bmp" />
+		<Unit filename="font\AozoraMinchoMedium.ttf" />
+		<Unit filename="script\LX_config.lua" />
+		<Unit filename="src\engine\LX_Hitbox.h" />
+		<Unit filename="src\engine\LX_Point.h" />
+		<Unit filename="src\engine\LX_Polygon.cpp" />
+		<Unit filename="src\engine\LX_Polygon.h" />
+		<Unit filename="src\engine\LX_audio.cpp" />
+		<Unit filename="src\engine\LX_audio.h" />
+		<Unit filename="src\engine\LX_config.cpp" />
+		<Unit filename="src\engine\LX_config.h" />
+		<Unit filename="src\engine\LX_euclide.h" />
+		<Unit filename="src\engine\LX_graphics.cpp" />
+		<Unit filename="src\engine\LX_graphics.h" />
+		<Unit filename="src\engine\LX_lib.cpp" />
+		<Unit filename="src\engine\LX_lib.h" />
+		<Unit filename="src\engine\LX_physics.cpp" />
+		<Unit filename="src\engine\LX_physics.h" />
+		<Unit filename="src\engine\LX_ttf.cpp" />
+		<Unit filename="src\engine\LX_ttf.h" />
+		<Unit filename="src\engine\LX_window.cpp" />
+		<Unit filename="src\engine\LX_window.h" />
+		<Unit filename="src\engine\LX_windowManager.h" />
+		<Unit filename="src\main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

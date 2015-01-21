@@ -1,0 +1,15 @@
+
+
+The SDL library (Version 1.2) is under the LGPL license
+
+
+
+Music :
+
+ Title : Prototype Princess
+ Author : FoxSynergy
+
+ http://opengameart.org/content/prototype-princess
+
+This song is under creative commons Attribution 3.0 Unported (CC BY 3.0)
+http://creativecommons.org/licenses/by/3.0/
