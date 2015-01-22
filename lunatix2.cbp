@@ -38,16 +38,17 @@
 			<Add directory=".\include" />
 		</Compiler>
 		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer" />
 			<Add library="libmingw32.a" />
 			<Add library="libSDL2main.a" />
 			<Add library="libSDL2.a" />
 			<Add library="libSDL2.dll.a" />
 			<Add library="lib\libSDL2_image.a" />
 			<Add library="lib\libSDL2_image.dll.a" />
-			<Add library="lib\libSDL2_mixer.a" />
-			<Add library="lib\libSDL2_mixer.dll.a" />
 			<Add library="lib\libSDL2_ttf.a" />
 			<Add library="lib\libSDL2_ttf.dll.a" />
+			<Add library="lib\libSDL2_mixer.a" />
+			<Add library="lib\libSDL2_mixer.dll.a" />
 			<Add directory=".\lib" />
 		</Linker>
 		<Unit filename="config\sdl_conf.cfg" />

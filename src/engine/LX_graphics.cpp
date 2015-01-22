@@ -78,9 +78,12 @@ LX_graphics::LX_graphics()
 {
     mainWindow = new LX_window();
 
-    window = mainWindow->getWindow();
-    surface = mainWindow->getSurface();
-    renderer = mainWindow->getRenderer();
+    //window = mainWindow->getWindow();
+    //surface = mainWindow->getSurface();
+    renderer = SDL_CreateRenderer(mainWindow->getWindow(),-1,SDL_RENDERER_ACCELERATED);
+
+    if(renderer == NULL)
+        std::cerr << "renderer is not set : " << SDL_GetError() << std::endl;
 
 }
 
@@ -95,10 +98,7 @@ LX_graphics::~LX_graphics()
 {
     delete mainWindow;
     mainWindow = NULL;
-    // It is not necessary but i want to be sure
-    /*SDL_DestroyWindow(window);
-    SDL_FreeSurface(surface);
-    SDL_DestroyRenderer(renderer);*/
+
 }
 
 
@@ -130,7 +130,7 @@ SDL_Surface * LX_graphics::loadSurfaceFromBMP(std::string filename)
     }
 
     //optimized = SDL_DisplayFormat(loaded);
-    optimized = SDL_ConvertSurface(loaded,surface->format,0x00000000);
+    optimized = SDL_ConvertSurface(loaded,mainWindow->getSurface()->format,0x00000000);
 
     SDL_FreeSurface(loaded);
 
@@ -169,8 +169,9 @@ SDL_Surface * LX_graphics::loadSurface(std::string filename)
         return NULL;
     }
 
+    //std::cerr << "optimize " << std::endl;
     //optimized = SDL_DisplayFormatAlpha(loaded);
-    optimized = SDL_ConvertSurface(loaded,surface->format,0x00000000);
+    optimized = SDL_ConvertSurface(loaded,mainWindow->getSurface()->format,0x00000000);
 
     SDL_FreeSurface(loaded);
 
@@ -190,9 +191,9 @@ SDL_Surface * LX_graphics::loadSurface(std::string filename)
 *   @note : if target is NULL, the fonction returns immediately a NULL value
 *
 */
-/*SDL_Texture * LX_graphics::loadTextureFromSurface(SDL_Surface *target)
+SDL_Texture * LX_graphics::loadTextureFromSurface(SDL_Surface *target)
 {
-    std::cout << "loading the texture" << std::endl;
+    SDL_Texture *newTexture = NULL;
 
     if( target == NULL)
     {
@@ -200,15 +201,16 @@ SDL_Surface * LX_graphics::loadSurface(std::string filename)
         return NULL;
     }
 
-    SDL_Texture newTexture = NULL;
+    newTexture = SDL_CreateTextureFromSurface(renderer,target);
 
-    if(( newTexture = SDL_CreateTextureFromSurface(target) ) == NULL )
+    if( newTexture == NULL )
     {
         std::cerr << "Error occurred in LX_graphics::loadTextureFromSurface : " << SDL_GetError() << std::endl;
+        return NULL;
     }
 
-    return ( (target == NULL) ? NULL :  );
-}*/
+    return newTexture;
+}
 
 
 
@@ -256,9 +258,10 @@ bool LX_graphics::set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blu
 *            -1 if win is NULL, or -2 if an internal problem occurs
 *
 */
-int LX_graphics::addWindow(LX_window *win)
+int LX_graphics::addSDLWindow(LX_window *win)
 {   ///@todo [vector] Implement the window insertion
-    return 0;
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,"LX_graphics::addSDLWindow","Not implemented yet",NULL);
+    return -1;
 }
 
 
@@ -274,7 +277,9 @@ bool LX_graphics::destroySDLWindow(unsigned int wd)
 {
     ///@todo [vector] Implement the window destruction
 
-    return true;
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,"LX_graphics::destroySDLWindow","Not implemented yet",NULL);
+
+    return false;
 }
 
 
@@ -282,21 +287,19 @@ bool LX_graphics::destroySDLWindow(unsigned int wd)
 *
 *   @fn void LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *
-*   This function puts the surface on the screen according to its position and the area to put on it
+*   This function puts the surface on the main surface according to its position and the area to put on it
 *
 *   @param image : the surface to put
 *   @param area : the area of the surface to put on the screen
 *   @param pos : the position of what you want to put
 *
 *   @note If you do not need to determine the area parameter of the surface, put NULL
-*   @warning It seems the call of SDL_BlitSurface on a surface created by a SDL_TTF function
-*               occurs a segmentation fault.
 *
 *   @return TRUE if the image was put with success, FALSE otherwise
 */
 bool LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
-{   ///@todo there is a bug in this function
-    int err;
+{
+    int err = 0;
     SDL_Rect offset;
 
     // I check if the image or the position is NULL
@@ -306,9 +309,14 @@ bool LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
         return false;
     }
 
-    if(pos == NULL)
+    /*if(surface == NULL)
     {
-        std::cout << "The position is NULL" << std::endl;
+        std::cerr << "Error occurred in LX_graphics::put_surface :  the main surface is NULL" << std::endl;
+        return false;
+    }*/
+
+    if(pos == NULL)
+    {   // The texture will be set on the top-left of the main surface
         offset.x = 0;
         offset.y = 0;
     }
@@ -318,16 +326,8 @@ bool LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
         offset.y = pos->y;
     }
 
-    if(surface == NULL)
-    {
-        std::cerr << "Error occurred in LX_graphics::put_surface :  the main surface is NULL" << std::endl;
-        return false;
-    }
-    else
-        std::cout << "OK for the surface" << std::endl;
+    err = SDL_BlitSurface(image,area,mainWindow->getSurface(),&offset);
 
-    err = SDL_BlitSurface(image,area,surface,&offset);
-    std::cout << "END BLIT" << std::endl;
     if(err < 0)
     {
         std::cerr << "Error occurred in LX_graphics::put_surface : " << SDL_GetError() << std::endl;
@@ -336,28 +336,69 @@ bool LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     return true;
 }
 
+
+/**
+*   @fn bool LX_graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
+*
+*   This function puts the texture on the main window according to its position and the area to put on it
+*
+*   @param origin : the texture to put
+*   @param area : the area of the surface to put on the renderer
+*   @param pos : the position of what you want to put
+*
+*   @note If you do not need to determine the area parameter of the surface, put NULL
+*   @warning The width and the height defined in the SDL_Rect are important, the function uses it
+*               to display the texture according to its dimension
+*
+*   @return TRUE if the texture was put with success, FALSE otherwise
+**/
+bool LX_graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
+{
+    if(SDL_RenderCopy(renderer,origin,area,pos) < 0)
+    {
+        std::cerr << "Error in LX_graphics::putTexture: " << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+
+
+/**
+*   @fn void LX_graphics::updateMainRenderer()
+*
+*   Updates the main renderer
+*
+*/
+void LX_graphics::updateMainRenderer()
+{
+    SDL_RenderPresent(renderer);
+}
+
+
 /**
 *
 *   @fn void LX_graphics::updateMainWindow()
 *
-*   This function update the main window
+*   This function updates the main window
 *
 */
 void LX_graphics::updateMainWindow()
 {
-    SDL_UpdateWindowSurface(window);
+    SDL_UpdateWindowSurface(mainWindow->getWindow());
 }
 
 /**
 *
-*   @fn void LX_graphics::clearWindow()
+*   @fn void LX_graphics::clearMainWindow()
 *
 *   This function clears the main window
 *
 */
-void LX_graphics::clearWindow()
+void LX_graphics::clearMainWindow()
 {
-    SDL_FillRect(surface,NULL, SDL_MapRGB(surface->format,0,0,0));
+    SDL_FillRect(mainWindow->getSurface(),NULL, SDL_MapRGB(mainWindow->getSurface()->format,0,0,0));
 }
 
 

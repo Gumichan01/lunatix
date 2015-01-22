@@ -34,7 +34,7 @@
 */
 void LX_window::setTitle(std::string title)
 {
-    SDL_SetWindowTitle(window,title.c_str());
+    SDL_SetWindowTitle(lxWindow,title.c_str());
 }
 
 
@@ -49,7 +49,8 @@ void LX_window::setTitle(std::string title)
 */
 SDL_Renderer * LX_window::getRenderer()
 {
-    return SDL_GetRenderer(window);
+    //return lxRenderer;
+    return SDL_GetRenderer(lxWindow);
 }
 
 
@@ -64,7 +65,7 @@ SDL_Renderer * LX_window::getRenderer()
 */
 SDL_Surface * LX_window::getSurface()
 {
-    return SDL_GetWindowSurface(window);
+    return SDL_GetWindowSurface(lxWindow);
 }
 
 
@@ -79,7 +80,7 @@ SDL_Surface * LX_window::getSurface()
 */
 SDL_Window * LX_window::getWindow()
 {
-    return window;
+    return lxWindow;
 }
 
 
@@ -95,7 +96,7 @@ SDL_Window * LX_window::getWindow()
 int LX_window::getWidth()
 {
     int w;
-    SDL_GetWindowSize(window,&w,NULL);
+    SDL_GetWindowSize(lxWindow,&w,NULL);
 
     return w;
 }
@@ -113,7 +114,7 @@ int LX_window::getWidth()
 int LX_window::getHeight()
 {
     int h;
-    SDL_GetWindowSize(window,NULL,&h);
+    SDL_GetWindowSize(lxWindow,NULL,&h);
 
     return h;
 }

@@ -31,18 +31,6 @@
 #include "engine/LX_physics.h"
 
 
-/*int main(int argc, char **argv)
-{
-   LX_configuration *config = NULL;
-
-    config = LX_configuration::getInstance();
-
-    std::cout << "OK for the conficguration" << std::endl;
-
-    LX_configuration::destroy();
-
-    return 0;
-}*/
 
 int main ( int argc, char** argv )
 {
@@ -95,7 +83,7 @@ int main ( int argc, char** argv )
     audio = new LX_Audio();
 
 
-    sf = graphics->loadSurfaceFromBMP("data/cb.bmp");
+    sf = graphics->loadSurfaceFromBMP(name.c_str());
 
     if(sf == NULL)
     {
@@ -107,6 +95,8 @@ int main ( int argc, char** argv )
     bool game = true;
     SDL_Event event;
 
+    SDL_Surface *tmp1 = ttf->draw_BlendedText("LunatiX_engine");
+    SDL_Surface *tmp2 = ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop");
 
     while(game)
     {
@@ -142,46 +132,75 @@ int main ( int argc, char** argv )
             }
         }
 
-        std::cout << "clear" << std::endl;
-        graphics->clearWindow();
+
+        graphics->clearMainWindow();
 
         if(sf != NULL)
             graphics->put_surface(sf,NULL,&pos);
 
-        ///@todo fix this bug. Check the return pointer of draw_BlendedText
-        std::cout << "draw 1" << std::endl;
-        SDL_Surface *tmp1 = ttf->draw_BlendedText("LunatiX_engine");
-        std::cout << "result 1" << std::endl;
 
         if(tmp1 == NULL)
         {
-            std::cout << "err 1" << std::endl;
             std::cerr << "LX_ttf::drawBlendedText : " << IMG_GetError() << std::endl;
         }
         else
         {
-            std::cout << "OK 1" << std::endl;
-            //graphics->put_surface(tmp1,NULL,&pos1);
+            graphics->put_surface(tmp1,NULL,&pos1);
         }
-        std::cout << "draw 2" << std::endl;
-        SDL_Surface *tmp2 = ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop");
-        std::cout << "result 2" << std::endl;
+
 
         if(tmp2 == NULL)
         {
             std::cerr << "LX_ttf::drawBlendedText : " << IMG_GetError() << std::endl;
         }
         else
-            //graphics->put_surface(tmp2,NULL,&pos2);
+        {
+            graphics->put_surface(tmp2,NULL,&pos2);
+        }
 
 
-        //graphics->updateMainWindow();
+        //graphics->updateMainRenderer();
+        graphics->updateMainWindow();
 
         SDL_Delay(33);
     }
 
+    SDL_Texture *t1 = graphics->loadTextureFromSurface(tmp1);
+    SDL_Texture *t2 = graphics->loadTextureFromSurface(tmp2);
+
+
+    if(t1 == NULL)
+    {
+        std::cout << " t1 is NULL" << std::endl;
+    }
+    else
+    {
+        std::cout << " t1 exists" << std::endl;
+        SDL_DestroyTexture(t1);
+    }
+
+    if(t2 == NULL)
+    {
+        std::cout << " t2 is NULL" << std::endl;
+    }
+    else
+    {
+        std::cout << " t2 exists" << std::endl;
+        SDL_DestroyTexture(t2);
+    }
+
+    if(graphics->loadTextureFromSurface(NULL) == NULL)
+    {
+        std::cout << " The result is NULL : OK" << std::endl;
+    }
+    else
+        std::cout << "What the hell ? " << std::endl;
+
 
     SDL_FreeSurface(sf);
+    SDL_FreeSurface(tmp1);
+    SDL_FreeSurface(tmp2);
+
     delete audio;
     ttf->destroy();
     graphics->destroy();
@@ -190,8 +209,8 @@ int main ( int argc, char** argv )
 
 
 
-    /** Load configuration */
-    /*LX_configuration *configuration;
+    // Load configuration
+    LX_configuration *configuration;
 
     configuration = LX_configuration::getInstance();
 
@@ -207,7 +226,7 @@ int main ( int argc, char** argv )
     int h = configuration->getWinHeight();
     int f = configuration->getFullscreenFlag();
 
-
+    std::cout << "\nLunatiX engine configuration : " << video << std::endl;
     std::cout << "video : " << video << std::endl;
     std::cout << "true type font : " << ttfont << std::endl;
     std::cout << "audio : " << sound << std::endl;
@@ -220,12 +239,113 @@ int main ( int argc, char** argv )
     std::cout << "fullscreen : " << f << std::endl;
 
 
-    delete configuration;*/
+    delete configuration;
 
 
 
     return EXIT_SUCCESS;
 }
+
+
+/*int main(int argc,char **argv)
+{
+    SDL_Surface *s = NULL;
+    SDL_Texture *t = NULL;
+
+    SDL_Rect r = {100,100,400,100};
+
+    LX_graphics *graphics = NULL;
+    LX_ttf *ttf = NULL;
+    LX_Audio *audio = NULL;
+
+    bool err;
+
+    err = LX_Init();
+
+    if(!err)
+    {
+        std::cerr << "ERREUR" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    try
+    {
+        graphics = LX_graphics::getInstance();
+        ttf = LX_ttf::getInstance();
+    }
+    catch(std::exception & e )
+    {
+        std::cerr << "exception occurred : " << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    audio = new LX_Audio();
+
+
+    //s = graphics->loadSurfaceFromBMP("data/cb.bmp");
+    //s = graphics->loadSurface("data/explosion.png");
+
+    s = ttf->draw_BlendedText("LunatiX engine");
+
+    if(s == NULL)
+    {
+        std::cerr << "hum " << std::endl;
+        delete audio;
+        delete ttf;
+        delete graphics;
+        LX_Quit();
+        return EXIT_FAILURE;
+    }
+
+    t = graphics->loadTextureFromSurface(s);
+
+    if(t == NULL)
+        std::cout << "NULL " << std::endl;
+    else
+        std::cout << "YES" << std::endl;
+
+    graphics->putTexture(t,NULL,&r);
+    graphics->updateMainRenderer();
+
+    SDL_Delay(2000);
+
+    SDL_FreeSurface(s);
+    SDL_DestroyTexture(t);
+    delete audio;
+    delete ttf;
+    delete graphics;
+    LX_Quit();
+
+    return EXIT_SUCCESS;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

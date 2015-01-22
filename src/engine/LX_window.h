@@ -82,9 +82,9 @@ class LX_window_exception : public std::exception
 */
 class LX_window{
 
-    SDL_Window *window;    /**< The main surface (for the window creation)*/
+    SDL_Window *lxWindow;    /**< The main surface (for the window creation)*/
 
-    int LX_width;           /**< The width of the window*/
+    int LX_width;           /**< The width of the lxWindow*/
     int LX_height;          /**< The height of the window*/
     int LX_bpp;             /**< The format (bits per pixel) of the window*/
 
@@ -109,14 +109,13 @@ class LX_window{
         LX_bpp = BPP;
 
 
-
         // check the fullscreen flag
         if(win_config->getFullscreenFlag() == 1)
         {
             fullscreen_flag = SDL_WINDOW_FULLSCREEN;
         }
 
-        //window=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
+        //lxWindow=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
 
         // Is the fullscreen mode active
         if(fullscreen_flag == SDL_WINDOW_FULLSCREEN)
@@ -124,11 +123,11 @@ class LX_window{
         else
             position_flag = SDL_WINDOWPOS_CENTERED;
 
-        window = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,LX_width,LX_height,SDL_WINDOW_SHOWN|fullscreen_flag);
+        lxWindow = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,LX_width,LX_height,SDL_WINDOW_SHOWN|fullscreen_flag);
 
-        if(window == NULL )
+        if(lxWindow == NULL )
         {
-            std::cerr << "exception occured in LX_window constructor : " << std::endl;
+            std::cerr << "exception occured in LX_window constructor during the window creation : " << std::endl;
             throw LX_window_exception(SDL_GetError());
         }
 
@@ -154,13 +153,14 @@ class LX_window{
     {
         Uint32 fullscreen_flag = (( full_flag == true ) ? SDL_WINDOW_FULLSCREEN : 0x00000000);
 
-        window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|fullscreen_flag);
+        lxWindow = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|fullscreen_flag);
 
-        if(window == NULL )
+        if(lxWindow == NULL )
         {
-            std::cerr << "exception occured in LX_window constructor : " << std::endl;
+            std::cerr << "exception occured in LX_window constructor during the render creation : " << std::endl;
             throw LX_window_exception(SDL_GetError());
         }
+
     }
 
 /**
@@ -194,7 +194,7 @@ class LX_window{
 
     ~LX_window()
     {
-        SDL_DestroyWindow(window);
+        SDL_DestroyWindow(lxWindow);
     }
 };
 

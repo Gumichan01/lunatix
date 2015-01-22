@@ -37,19 +37,21 @@
 *
 *   This class describes the LX_graphics engine.
 *
-*   @note : The LX_graphics class uses an instance of LX_window to get the screen
+*   @note : The LX_graphics class uses an instance of LX_window to get the main window information
 *   @warning Because of the LX_window use, LX_graphics class must be built only after you initialized the LX_engine (calling LX_Init())
 */
 class LX_graphics{
 
-    SDL_Window *window;
-    SDL_Surface *surface;    /**< The main surface */
-    SDL_Renderer *renderer; /**< The main renderer */
+    //SDL_Window *window;     /**< Th main SDL_window */
+    //SDL_Surface *surface;   /**< The main surface */
 
-    LX_window *mainWindow;                      /**< The main window*/
+    LX_window *mainWindow;  /**< The main window */
+    SDL_Renderer *renderer; /**< The main renderer */
     //std::vector<LX_window *> vectorWindows;    /**< The vector of other windows*/
+
     ///@todo [vector] Implement the vectorWindow
     LX_graphics();
+
 
     public:
 
@@ -62,12 +64,12 @@ class LX_graphics{
     SDL_Surface * loadSurfaceFromBMP(std::string filename);
     SDL_Surface * loadSurface(std::string filename);
 
-    //SDL_Texture * loadTextureFromSurface(SDL_Surface *target);   /// @todo implements the texture creation
+    SDL_Texture * loadTextureFromSurface(SDL_Surface *target);   /// @todo implements the texture creation
     //SDL_Texture * loadTextureFromFile(std::string filename);
 
     bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 
-    int addWindow(LX_window *win);
+    int addSDLWindow(LX_window *win);
     bool destroySDLWindow(unsigned int wd);
     // End static functions
 
@@ -77,13 +79,14 @@ class LX_graphics{
 
     // the update and clearing functions
     void updateMainWindow();
-    //void updateMainRenderer();
+    void updateMainRenderer();
 
     /// @todo [vector] define the update function on other windows
     // void updateWindow(int wd);
-    // void updateRenderer(int wd);
+    //void updateRenderer(int wd);
 
-    void clearWindow();
+    void clearMainWindow();
+    void clearMainRenderer();
 
 /**
 *   @fn SDL_Surface * getMainSurface()
@@ -93,7 +96,7 @@ class LX_graphics{
 *   @return the main surface
 *
 **/
-    SDL_Surface * getMainSurface(){return surface;}
+    SDL_Surface * getMainSurface(){return mainWindow->getSurface();}
 
 
     ~LX_graphics();
