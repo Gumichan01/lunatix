@@ -75,8 +75,8 @@ bool LX_Init(void)
     if(configuration->getVideoFlag() == 1)
     {
         int res = IMG_Init(img_flags);
-        std::cout << "res : " << res << "flag : " << img_flags << std::endl;
-        std::cout << "op : " << (res & img_flags) << std::endl;
+        //std::cout << "res : " << res << "flag : " << img_flags << std::endl;
+        //std::cout << "op : " << (res & img_flags) << std::endl;
         //Init SDL_Image
         /*if( res != img_flags)
         {

@@ -52,6 +52,7 @@ class LX_graphics{
     ///@todo [vector] Implement the vectorWindow
     LX_graphics();
 
+    bool isBMPFile(std::string filename);
 
     public:
 
@@ -64,8 +65,8 @@ class LX_graphics{
     SDL_Surface * loadSurfaceFromBMP(std::string filename);
     SDL_Surface * loadSurface(std::string filename);
 
-    SDL_Texture * loadTextureFromSurface(SDL_Surface *target);   /// @todo implements the texture creation
-    //SDL_Texture * loadTextureFromFile(std::string filename);
+    SDL_Texture * loadTextureFromSurface(SDL_Surface *target);
+    SDL_Texture * loadTextureFromFile(std::string filename);
 
     bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 
@@ -75,7 +76,7 @@ class LX_graphics{
 
     // put the sprite on the screen
     bool put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
-    bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos); /// @todo implement the texture blit
+    bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
 
     // the update and clearing functions
     void updateMainWindow();

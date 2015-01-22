@@ -20,11 +20,36 @@
 *
 *
 */
+
+#include <string>
+
 #include "LX_graphics.h"
 #include "LX_windowManager.h"
 
 
 static LX_graphics *gInstance = NULL;
+
+
+
+/**
+*   @fn bool LX_graphics::isBMPFile(std::string filename)
+*
+*   Checks if the filename seems to be a BMP file
+*
+*   @param filename : the filename
+*
+*   @return TRUE if the file is a BMP file , FALSE otherwise
+*
+*   @warning This function does not use the SDL library to check the nature of the file.
+*               It just looks for the ".bmp" string a the end of the file.
+*   @todo test LX_graphics::isBMPFile
+*/
+bool LX_graphics::isBMPFile(std::string filename)
+{
+    return ( filename.empty() && (filename.find(".bmp",filename.length(),4) != std::string::npos) );
+}
+
+
 
 /**
 *   @fn LX_graphics * LX_graphics::getInstance()
@@ -213,6 +238,29 @@ SDL_Texture * LX_graphics::loadTextureFromSurface(SDL_Surface *target)
 }
 
 
+/**
+*   @fn SDL_Texture * LX_graphics::loadTextureFromFile(std::string filename)
+*
+*   Load a new texture from a file
+*
+*   @param filename :  the name of the file you need to use for the texture creation
+*
+*   @return a pointer to a SDL_Texture the loading works, NULL otherwise
+*   @todo test LX_graphics::loadTextureFromFile
+*/
+SDL_Texture * LX_graphics::loadTextureFromFile(std::string filename)
+{
+    SDL_Surface *tmpS = NULL;
+    SDL_Texture *tmpT = NULL;
+
+    tmpS = ((isBMPFile(filename) == true) ? loadSurfaceFromBMP(filename) : loadSurface(filename) );
+    tmpT = loadTextureFromSurface(tmpS);
+
+    SDL_FreeSurface(tmpS);  // We do not need that anymore
+
+    return tmpT;
+}
+
 
 /**
 *
@@ -354,6 +402,7 @@ bool LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 **/
 bool LX_graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 {
+
     if(SDL_RenderCopy(renderer,origin,area,pos) < 0)
     {
         std::cerr << "Error in LX_graphics::putTexture: " << SDL_GetError() << std::endl;
@@ -373,6 +422,7 @@ bool LX_graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 */
 void LX_graphics::updateMainRenderer()
 {
+    //std::cout << "UPDATE " << std::endl;
     SDL_RenderPresent(renderer);
 }
 
@@ -401,6 +451,19 @@ void LX_graphics::clearMainWindow()
     SDL_FillRect(mainWindow->getSurface(),NULL, SDL_MapRGB(mainWindow->getSurface()->format,0,0,0));
 }
 
+
+/**
+*
+*   @fn void LX_graphics::clearMainRenderer()
+*
+*   This function clears the main renderer
+*
+*/
+void LX_graphics::clearMainRenderer()
+{
+    //std::cout << "CLEAN " << std::endl;
+    SDL_RenderClear(renderer);
+}
 
 
 

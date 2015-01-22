@@ -35,9 +35,9 @@
 int main ( int argc, char** argv )
 {
 
-    SDL_Rect pos = {400,200,10,10};
-    SDL_Rect pos1 = {100,200,10,10};
-    SDL_Rect pos2 = {100,250,10,10};
+    SDL_Rect pos = {400,200,150,120};
+    SDL_Rect pos1 = {100,200,256,32};
+    SDL_Rect pos2 = {100,250,768,32};
 
     SDL_Color color = {255,255,255};
 
@@ -45,13 +45,13 @@ int main ( int argc, char** argv )
 
 
     SDL_Surface *sf = NULL;
+    SDL_Texture *st = NULL;
     SDL_Surface *txt = NULL;
     SDL_Surface *background = NULL;
 
     std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
-    std::string sample = "data/Prototype Princess v1_01.wav";
-    std::string font_file = "data/AozoraMinchoMedium.ttf";
+
 
     LX_graphics *graphics;
     LX_ttf *ttf;
@@ -65,7 +65,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
-    std::cout << "LX_Init returns true value" << std::endl;
+    //std::cout << "LX_Init returns true value" << std::endl;
 
     // initialization
 
@@ -82,10 +82,10 @@ int main ( int argc, char** argv )
 
     audio = new LX_Audio();
 
+    // Load the texture from the data file
+    st = graphics->loadTextureFromFile(name.c_str());
 
-    sf = graphics->loadSurfaceFromBMP(name.c_str());
-
-    if(sf == NULL)
+    if(st == NULL)
     {
         std::cerr << "LX_graphics::load_surface : " << SDL_GetError() <<std::endl;
     }
@@ -97,6 +97,9 @@ int main ( int argc, char** argv )
 
     SDL_Surface *tmp1 = ttf->draw_BlendedText("LunatiX_engine");
     SDL_Surface *tmp2 = ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop");
+
+    SDL_Texture *t1 = graphics->loadTextureFromSurface(tmp1);
+    SDL_Texture *t2 = graphics->loadTextureFromSurface(tmp2);
 
     while(game)
     {
@@ -132,44 +135,37 @@ int main ( int argc, char** argv )
             }
         }
 
+        graphics->clearMainRenderer();
 
-        graphics->clearMainWindow();
+        graphics->putTexture(st,NULL,&pos); //graphics->put_surface(sf,NULL,&pos);
 
-        if(sf != NULL)
-            graphics->put_surface(sf,NULL,&pos);
-
-
-        if(tmp1 == NULL)
+        if(t1 == NULL)
         {
             std::cerr << "LX_ttf::drawBlendedText : " << IMG_GetError() << std::endl;
         }
         else
         {
-            graphics->put_surface(tmp1,NULL,&pos1);
+            graphics->putTexture(t1,NULL,&pos1);
         }
 
 
-        if(tmp2 == NULL)
+        if(t2 == NULL)
         {
             std::cerr << "LX_ttf::drawBlendedText : " << IMG_GetError() << std::endl;
         }
         else
         {
-            graphics->put_surface(tmp2,NULL,&pos2);
+            graphics->putTexture(t2,NULL,&pos2);
         }
 
 
-        //graphics->updateMainRenderer();
-        graphics->updateMainWindow();
+        graphics->updateMainRenderer();
 
         SDL_Delay(33);
     }
 
-    SDL_Texture *t1 = graphics->loadTextureFromSurface(tmp1);
-    SDL_Texture *t2 = graphics->loadTextureFromSurface(tmp2);
 
-
-    if(t1 == NULL)
+    /*if(t1 == NULL)
     {
         std::cout << " t1 is NULL" << std::endl;
     }
@@ -194,10 +190,13 @@ int main ( int argc, char** argv )
         std::cout << " The result is NULL : OK" << std::endl;
     }
     else
-        std::cout << "What the hell ? " << std::endl;
+        std::cout << "What the hell ? " << std::endl;*/
 
 
     SDL_FreeSurface(sf);
+    SDL_DestroyTexture(st);
+    SDL_DestroyTexture(t1);
+    SDL_DestroyTexture(t2);
     SDL_FreeSurface(tmp1);
     SDL_FreeSurface(tmp2);
 
