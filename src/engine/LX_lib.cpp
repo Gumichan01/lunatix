@@ -35,7 +35,7 @@ bool LX_Init(void)
 {
     int err = 0;
     Uint32 sdl_flags = 0x00000000;                                  // the SDL flag for SDL_Init
-    Uint32 img_flags = IMG_INIT_PNG;      // the IMG flag for SDL_Image
+    Uint32 img_flags = IMG_INIT_PNG| IMG_INIT_JPG;      // the IMG flag for SDL_Image
 
 
     // Load the configuration
@@ -74,16 +74,13 @@ bool LX_Init(void)
 
     if(configuration->getVideoFlag() == 1)
     {
-        int res = IMG_Init(img_flags);
-        //std::cout << "res : " << res << "flag : " << img_flags << std::endl;
-        //std::cout << "op : " << (res & img_flags) << std::endl;
         //Init SDL_Image
-        /*if( res != img_flags)
+        if( IMG_Init(img_flags) != img_flags)
         {
             std::cerr << "Error occurred in IMG_Init : " << IMG_GetError() << std::endl;
             SDL_Quit();
             return false;
-        }*/
+        }
     }
 
     if(configuration->getTTF_Flag() == 1)
