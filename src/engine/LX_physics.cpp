@@ -79,12 +79,13 @@ int LX_physics::euclide_distance( int x1, int y1, int x2, int y2)
 bool LX_physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 {
 
-    if( x_pos <= rect->x || y_pos >= (rect->y + rect->h) ||
+    if( rect == NULL || x_pos <= rect->x || y_pos >= (rect->y + rect->h) ||
             y_pos <= rect->y || x_pos >= (rect->x + rect->w) )
+    {
         return false;
+    }
 
     return true;
-
 }
 
 
@@ -104,8 +105,12 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 {
 
-    if (euclide_square_distance( x_pos,y_pos, circle->xCenter, circle->yCenter) > (circle->square_radius) )
+    if( circle == NULL ||
+        euclide_square_distance( x_pos,y_pos, circle->xCenter, circle->yCenter)
+            > (circle->square_radius) )
+    {
         return false;
+    }
 
     return true;
 }
@@ -127,9 +132,12 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 bool LX_physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 {
 
-    if( (rect1->x >= (rect2->x + rect2->w) ) || ( rect1->y >= (rect2->y + rect2->h) ) ||
-        ( (rect1->x + rect1->w ) <= rect2->x ) || ( (rect1->y + rect1->h ) <= rect2->y ) )
+    if( rect1 == NULL || rect2 == NULL ||
+       (rect1->x >= (rect2->x + rect2->w) ) || ( rect1->y >= (rect2->y + rect2->h) ) ||
+        ( (rect1->x + rect1->w) <= rect2->x ) || ( (rect1->y + rect1->h) <= rect2->y ) )
+    {
         return false;
+    }
 
     return true;
 }
@@ -254,63 +262,6 @@ bool LX_physics::collision(const LX_Circle *circle, const LX_AABB *rect)
     return false;
 }
 
-
-/**
-*
-*	@fn bool LX_physics::collision(const LX_Circle *circle, LX_Polygon *polygon)
-*
-*	Check the collision between a circle and a polygon
-*
-*	@param	circle the circle
-*   @param	polygon the LX_Polygon
-*
-*	@return TRUE if there is a collision, FALSE otherwise
-*
-*/
-bool LX_physics::collision(const LX_Circle *circle, LX_Polygon *polygon)
-{
-    /// @todo Check the circle into the polygon
-
-    int size = polygon->getSize();
-
-    LX_Point A;
-    LX_Point B;
-    LX_Point *tmp=NULL;
-
-    for(int i=0; i<size;i++)
-    {
-        tmp = polygon->getLX_PointAt(i);
-
-        if(tmp == NULL)
-        {
-            std::cerr << "Error occurred in LX_physics::collision(Circle *circle, LX_Polygon *polygon) : " << SDL_GetError() << std::endl;
-            return false;
-        }
-
-        A.x = tmp->x;
-        A.y = tmp->y;
-
-        if(i == size-1 )
-        {
-            tmp = polygon->getLX_PointAt(0);
-            B.x = tmp->x;
-            B.y = tmp->y;
-        }
-        else
-        {
-            tmp = polygon->getLX_PointAt(i+1);
-            B.x = tmp->x;
-            B.y = tmp->y;
-        }
-
-        delete tmp;
-
-        if(collision(circle,&A,&B))
-            return true;
-    }
-
-    return false;
-}
 
 
 

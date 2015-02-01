@@ -19,7 +19,7 @@
 *	@brief This file will contain a structure which contain different windows
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
-*	@date January 18 th, 2015
+*	@date January 28 th, 2015
 *
 *
 *

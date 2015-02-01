@@ -59,7 +59,6 @@ class LX_physics{
         static bool collision(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
         static bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
         static bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
-        static bool collision(const LX_Circle *circle, LX_Polygon *polygon);                       // collision circle/polygon
 
         ~LX_physics(){}
 };

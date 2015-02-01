@@ -35,7 +35,7 @@ bool LX_Init(void)
 {
     int err = 0;
     Uint32 sdl_flags = 0x00000000;                                  // the SDL flag for SDL_Init
-    Uint32 img_flags = IMG_INIT_PNG| IMG_INIT_JPG;      // the IMG flag for SDL_Image
+    int img_flags = IMG_INIT_PNG| IMG_INIT_JPG;      // the IMG flag for SDL_Image
 
 
     // Load the configuration

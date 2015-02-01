@@ -66,13 +66,18 @@ class LX_Audio{
     }
 
     bool load_music(std::string filename);
-    bool play_music();
+    void play_music();
+    void play_music(int loops);
     void pause_music();
     void stop_music();
 
     Mix_Chunk * load_sample(std::string filename);
     void play_sample(Mix_Chunk *sample);
+    void play_sample(int channel,Mix_Chunk *sample,int loops);
 
+    int musicVolume(int volume);
+    int chunkVolume(Mix_Chunk *chunk,int volume);
+    int channelVolume(int channel,int volume);
 
     ~LX_Audio()
     {

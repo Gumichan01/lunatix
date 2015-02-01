@@ -141,7 +141,6 @@ SDL_Surface * LX_ttf::draw_SolidText_WithSize(std::string text, unsigned int siz
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
-    int err;
 
 
     ttf = TTF_OpenFont(font_str.c_str(), size);
@@ -184,7 +183,6 @@ SDL_Surface * LX_ttf::draw_ShadedText_WithSize(std::string text, unsigned int si
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
-    int err;
     SDL_Color grey={127,127,127};
 
     ttf = TTF_OpenFont(font_str.c_str(), size); //Open the font
@@ -226,7 +224,6 @@ SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int s
 {
     TTF_Font *ttf;
     SDL_Surface *loaded;
-    int err;
 
 
     ttf = TTF_OpenFont(font_str.c_str(), size);

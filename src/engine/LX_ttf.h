@@ -36,24 +36,24 @@
 
 
 /**
-*   @class LX_OpenFont_exception
-*   @brief The LX_OpenFont_exception class.
+*   @class LX_TTF_exception
+*   @brief The LX_TTF_exception class.
 *
 *   This class describes the exception occured when the font loading fails.
 *
 */
-class LX_OpenFont_exception : public std::exception
+class LX_TTF_exception : public std::exception
 {
     public :
 
     std::string str_err;                        /**< The string where the error message will be conteined*/
 
 /**
-*   @fn LX_OpenFont_exception(std::string err)
-*   Build the LX_OpenFont_exception class
+*   @fn LX_TTF_exception(std::string err)
+*   Build the LX_TTF_exception class
 *   @param err the error string
 */
-    LX_OpenFont_exception(std::string err)
+    LX_TTF_exception(std::string err)
     {
         str_err = err;
     }
@@ -65,7 +65,7 @@ class LX_OpenFont_exception : public std::exception
 */
     const char * what() const throw() {return str_err.c_str() ;}
 
-    ~LX_OpenFont_exception() throw(){}
+    ~LX_TTF_exception() throw(){}
 };
 
 
@@ -98,8 +98,8 @@ class LX_ttf{
 *
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
 *   @warning You must initialize the SDL_TTF library putting the ttf flag to 1 in sdl_conf.cfg.
-*            Otherwise, a LX_OpenFont_exception will be occured.
-*   @warning A LX_OpenFont_exception may also be occured if thefilename or the font size is invalid
+*            Otherwise, a LX_TTF_exception will be occured.
+*   @warning A LX_TTF_exception may also be occured if the filename or the font size is invalid
 *
 */
     LX_ttf(SDL_Color *color)
@@ -108,6 +108,11 @@ class LX_ttf{
 
         // load the configuration
         LX_configuration *ttf_config = LX_configuration::getInstance();
+
+        if(ttf_config->getTTF_Flag() == 0)
+        {
+            throw LX_TTF_exception("exception occurred in the LX_ttf constructor : ");
+        }
 
         font_str = ttf_config->getFontFile();
         font_size = ttf_config->getFontSize();
@@ -123,7 +128,7 @@ class LX_ttf{
 
         if(font == NULL)
         {
-            throw LX_OpenFont_exception(TTF_GetError());
+            throw LX_TTF_exception(TTF_GetError());
         }
 
         //put color if it is not null

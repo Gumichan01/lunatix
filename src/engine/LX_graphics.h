@@ -19,7 +19,7 @@
 *	@brief The LX_graphics library, it will be linked with the SDL library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
-*	@date January 18th, 2015
+*	@date January 28th, 2015
 *
 *
 */
@@ -49,7 +49,7 @@ class LX_graphics{
     SDL_Renderer *renderer; /**< The main renderer */
     //std::vector<LX_window *> vectorWindows;    /**< The vector of other windows*/
 
-    ///@todo [vector] Implement the vectorWindow
+    ///@todo [vector] Implement the windowVector
     LX_graphics();
 
     bool isBMPFile(std::string filename);
@@ -62,21 +62,32 @@ class LX_graphics{
 
 
     // The static functions
-    SDL_Surface * loadSurfaceFromBMP(std::string filename);
+    //SDL_Surface * loadSurfaceFromBMP(std::string filename);
     SDL_Surface * loadSurface(std::string filename);
 
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target);
     SDL_Texture * loadTextureFromFile(std::string filename);
 
+    /// @todo [vector] implement the texture creation for a specific window
+    // If wd == -1 > main window
+    //SDL_Texure * laodTextureFomFile(std::string filename, int wd);
+
     bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 
-    int addSDLWindow(LX_window *win);
+    /// @todo [vector] implement the main operation on LX_window and SDL_Window
+    int addLXWindow(LX_window *win);
+    //int addSDLWindow(SDL_Window *win);
     bool destroySDLWindow(unsigned int wd);
     // End static functions
 
     // put the sprite on the screen
     bool put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
     bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
+
+    /// @todo [vector] define the surface and texture blit on other windows
+    // If wd == -1 > main window
+    //bool put_surfaceOn(int wd,SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
+    //bool putTextureOn(int wd,SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
 
     // the update and clearing functions
     void updateMainWindow();

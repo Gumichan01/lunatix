@@ -60,7 +60,7 @@ class LX_configuration_exception : public std::exception
 *   Get the error string
 *   @return the error string
 */
-    const char * what() const throw() {return str_err.c_str() ;}
+    const char * what() const throw() {return str_err.c_str();}
 
     ~LX_configuration_exception() throw(){}
 };

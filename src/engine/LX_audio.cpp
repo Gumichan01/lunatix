@@ -52,26 +52,38 @@ bool LX_Audio::load_music(std::string filename)
 
 
 /**
+*   @fn bool LX_Audio::play_music(int loops)
+*
+*   Play the music specified in the LX_Audio class
+*
+*   @param loops the loops constant
+*
+*   @return TRUE if it is OK, FALSE otherwise
+*
+*/
+void LX_Audio::play_music(int loops)
+{
+
+    if(Mix_PlayMusic(music,LX_AUDIO_LOOP) == -1)
+    {
+        std::cerr << "Error occured in LX_Audio::play_music : " << Mix_GetError() << std::endl;
+    }
+}
+
+
+/**
 *   @fn bool LX_Audio::play_music()
 *
 *   Play the music specified in the LX_Audio class
 *
-*   @return TRUE if all is OK, FALSE otherwise
+*   @return TRUE if it is OK, FALSE otherwise
+*
+*   @note This function internally calls play_music(int loops)
 *
 */
-bool LX_Audio::play_music()
+void LX_Audio::play_music()
 {
-    int err;
-
-    err = Mix_PlayMusic(music,LX_AUDIO_LOOP);
-
-    if(err == -1)
-    {
-        std::cerr << "Error occured in LX_Audio::load_music / Mix_PlayMusic : " << Mix_GetError() << std::endl;
-        return false;
-    }
-
-    return true;
+    return play_music(LX_AUDIO_LOOP);
 }
 
 
@@ -137,6 +149,9 @@ Mix_Chunk * LX_Audio::load_sample(std::string filename)
     return sample;
 }
 
+
+
+
 /**
 *   @fn void LX_Audio::play_sample(Mix_Chunk *sample)
 *
@@ -144,11 +159,117 @@ Mix_Chunk * LX_Audio::load_sample(std::string filename)
 *
 *   @param sample the sample
 *
+*   @note This function plays the sample on the first unserved channel with no loop option
+*           If you want to select a channel and/or play the sample with the loop option
+*           you may use the other function
+*
+*/
+void LX_Audio::play_sample(int channel,Mix_Chunk *sample,int loops)
+{
+    if(Mix_PlayChannel(channel,sample,loops) == -1)
+    {
+        std::cerr << "Error occured in LX_Audio::play_sample : " << Mix_GetError() << std::endl;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/**
+*   @fn void LX_Audio::play_sample(Mix_Chunk *sample)
+*
+*   Load the sample
+*
+*   @param sample the sample
+*
+*   @note This function plays the sample on the first unserved channel with no loop option
+*           If you want to select a channel and/or play the sample with the loop option
+*           you may use the other function
+*
 */
 void LX_Audio::play_sample(Mix_Chunk *sample)
 {
-    Mix_PlayChannel(-1,sample,LX_AUDIO_NOLOOP);
+    play_sample(-1,sample,LX_AUDIO_LOOP);
 }
+
+
+/**
+*   @fn int LX_Audio::musicVolume()
+*
+*   Set the music volume to volume, from 0 to 128
+*
+*   @param volume
+*
+*   @return the previous volume setting
+*
+*   @note If the volume is equals to -1, then the previous volume is the current volume
+*   @note If the new volume is greater than 128, the volume is set to 128
+*   @note Ths value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
+*
+*/
+int LX_Audio::musicVolume(int volume)
+{
+    return Mix_VolumeMusic(volume);
+}
+
+
+
+
+/**
+*   @fn int LX_Audio::chunkVolume(Mix_Chunk *chunk,int volume)
+*
+*   Set the chunk volume to volume, from 0 to 128
+*
+*   @param chunk the chunk to set the volume in
+*   @param volume
+*
+*   @return the previous volume setting
+*
+*   @note If the volume is less than 0, then the previous volume is the current volume
+*           and there is no change
+*   @note If the new volume is greater than 128, the volume is set to 128
+*   @note Ths value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
+*
+*/
+int LX_Audio::chunkVolume(Mix_Chunk *chunk,int volume)
+{
+    return Mix_VolumeChunk(chunk,volume);
+}
+
+
+
+/**
+*   @fn int LX_Audio::channelVolume(int channel,int volume)
+*
+*   Set the channel volume to volume, from 0 to 128
+*
+*   @param channel the channel to set the volume in
+*   @param volume
+*
+*   @return the previous volume setting
+*
+*   @note if the channel is -1, all channels will be set to the volume
+*   @note If the volume is equals to -1, then the average volume is returned
+*   @note If the new volume is greater than 128, the volume is set to 128
+*   @note Ths value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
+*
+*/
+int LX_Audio::channelVolume(int channel,int volume)
+{
+    return Mix_Volume(channel,volume);
+}
+
+
+
+
+
+
 
 
 

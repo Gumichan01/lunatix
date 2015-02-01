@@ -19,7 +19,7 @@
 *	@brief The LX_window library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
-*	@date January 18th, 2015
+*	@date January 28th, 2015
 *
 *
 */
@@ -82,107 +82,17 @@ class LX_window_exception : public std::exception
 */
 class LX_window{
 
-    SDL_Window *lxWindow;    /**< The main surface (for the window creation)*/
-
-    int LX_width;           /**< The width of the lxWindow*/
-    int LX_height;          /**< The height of the window*/
-    int LX_bpp;             /**< The format (bits per pixel) of the window*/
-
+    SDL_Window *lxWindow;   /**< The main surface (for the window creation)*/
 
 
     public :
 
-/**
-*   @fn LX_window()
-*
-*   Create the window with the default configuration
-*
-*/
-    LX_window()
-    {
-        Uint32 fullscreen_flag = 0x00000000;
-        Uint32 position_flag = 0x00000000;
-        LX_configuration *win_config = LX_configuration::getInstance();     // load the configuration
-
-        LX_width = win_config->getWinWidth();
-        LX_height = win_config->getWinHeight();
-        LX_bpp = BPP;
-
-
-        // check the fullscreen flag
-        if(win_config->getFullscreenFlag() == 1)
-        {
-            fullscreen_flag = SDL_WINDOW_FULLSCREEN;
-        }
-
-        //lxWindow=SDL_SetVideoMode(LX_width,LX_height,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
-
-        // Is the fullscreen mode active
-        if(fullscreen_flag == SDL_WINDOW_FULLSCREEN)
-            position_flag = SDL_WINDOWPOS_UNDEFINED;
-        else
-            position_flag = SDL_WINDOWPOS_CENTERED;
-
-        lxWindow = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,LX_width,LX_height,SDL_WINDOW_SHOWN|fullscreen_flag);
-
-        if(lxWindow == NULL )
-        {
-            std::cerr << "exception occured in LX_window constructor during the window creation : " << std::endl;
-            throw LX_window_exception(SDL_GetError());
-        }
-
-        win_config->destroy();  // we do not need the LX_configuration instance anymore
-
-    }
-
-/**
-*   @fn LX_window(std::string title, int posX, int posY, int w, int h, bool full_flag)
-*
-*   Create the window with custom configuration
-*
-*   @param title the title of the window
-*   @param posX : the X position of the window on the monitor
-*   @param posY : the Y position of the window on the monitor
-*   @param w : the width of the window
-*   @param h : the height of the window
-*   @param full_flag : a boolean tha said if you want the fullscreen mode
-*
-*   @note This constructor does not use the LX_config class
-*/
-    LX_window(std::string title, int posX, int posY, int w, int h, bool full_flag)
-    {
-        Uint32 fullscreen_flag = (( full_flag == true ) ? SDL_WINDOW_FULLSCREEN : 0x00000000);
-
-        lxWindow = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|fullscreen_flag);
-
-        if(lxWindow == NULL )
-        {
-            std::cerr << "exception occured in LX_window constructor during the render creation : " << std::endl;
-            throw LX_window_exception(SDL_GetError());
-        }
-
-    }
-
-/**
-*   @fn LX_window(std::string title, int w, int h, bool full_flag)
-*
-*   Create the window with only the name and te fullscreen flag
-*
-*   @param title : the title of the window
-*   @param w : the width of the window
-*   @param h : the height of the window
-*   @param full_flag : a boolean tha said if you want the fullscreen mode
-*
-*   @note This constructor does not use also the LX_config class
-*/
-    LX_window(std::string title, int w, int h, bool full_flag)
-    {
-        LX_window(title,SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,full_flag);
-    }
-
+    LX_window();
+    LX_window(SDL_Window *sdlWin);
+    LX_window(std::string title, int posX, int posY, int w, int h, bool screen_flag);
+    LX_window(std::string title, int w, int h, bool full_flag);
 
     void setTitle(std::string title);
-
 
     SDL_Renderer * getRenderer();
     SDL_Surface * getSurface();
@@ -197,16 +107,6 @@ class LX_window{
         SDL_DestroyWindow(lxWindow);
     }
 };
-
-
-
-
-
-
-
-
-
-
 
 
 

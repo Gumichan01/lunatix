@@ -16,7 +16,7 @@
 *	@brief The LunatiX_engine graphic module
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
-*	@date January 18th, 2015
+*	@date January 28th, 2015
 *
 *
 */
@@ -24,7 +24,7 @@
 #include <string>
 
 #include "LX_graphics.h"
-#include "LX_windowManager.h"
+//#include "LX_windowManager.h"
 
 
 static LX_graphics *gInstance = NULL;
@@ -141,7 +141,7 @@ LX_graphics::~LX_graphics()
 *   @warning If you try to load an other image file with this function, it will fail.
 *
 */
-SDL_Surface * LX_graphics::loadSurfaceFromBMP(std::string filename)
+/*SDL_Surface * LX_graphics::loadSurfaceFromBMP(std::string filename)
 {
     SDL_Surface *loaded = NULL;
     SDL_Surface *optimized = NULL;
@@ -160,7 +160,7 @@ SDL_Surface * LX_graphics::loadSurfaceFromBMP(std::string filename)
     SDL_FreeSurface(loaded);
 
     return optimized;
-}
+}*/
 
 
 /**
@@ -246,14 +246,15 @@ SDL_Texture * LX_graphics::loadTextureFromSurface(SDL_Surface *target)
 *   @param filename :  the name of the file you need to use for the texture creation
 *
 *   @return a pointer to a SDL_Texture the loading works, NULL otherwise
-*   @todo test LX_graphics::loadTextureFromFile
+*
 */
 SDL_Texture * LX_graphics::loadTextureFromFile(std::string filename)
 {
     SDL_Surface *tmpS = NULL;
     SDL_Texture *tmpT = NULL;
 
-    tmpS = ((isBMPFile(filename) == true) ? loadSurfaceFromBMP(filename) : loadSurface(filename) );
+    //tmpS = ((isBMPFile(filename) == true) ? loadSurfaceFromBMP(filename) : loadSurface(filename) );
+    tmpS = loadSurface(filename);
     tmpT = loadTextureFromSurface(tmpS);
 
     SDL_FreeSurface(tmpS);  // We do not need that anymore
@@ -306,9 +307,11 @@ bool LX_graphics::set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blu
 *            -1 if win is NULL, or -2 if an internal problem occurs
 *
 */
-int LX_graphics::addSDLWindow(LX_window *win)
-{   ///@todo [vector] Implement the window insertion
+int LX_graphics::addLXWindow(LX_window *win)
+{
+    ///@todo [vector] Implement the window insertion
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,"LX_graphics::addSDLWindow","Not implemented yet",NULL);
+
     return -1;
 }
 
@@ -324,7 +327,6 @@ int LX_graphics::addSDLWindow(LX_window *win)
 bool LX_graphics::destroySDLWindow(unsigned int wd)
 {
     ///@todo [vector] Implement the window destruction
-
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,"LX_graphics::destroySDLWindow","Not implemented yet",NULL);
 
     return false;
@@ -356,12 +358,6 @@ bool LX_graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
         std::cerr << "Error occurred in LX_graphics::put_surface : the surface to blit is NULL " << std::endl;
         return false;
     }
-
-    /*if(surface == NULL)
-    {
-        std::cerr << "Error occurred in LX_graphics::put_surface :  the main surface is NULL" << std::endl;
-        return false;
-    }*/
 
     if(pos == NULL)
     {   // The texture will be set on the top-left of the main surface
@@ -422,7 +418,6 @@ bool LX_graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 */
 void LX_graphics::updateMainRenderer()
 {
-    //std::cout << "UPDATE " << std::endl;
     SDL_RenderPresent(renderer);
 }
 
@@ -461,7 +456,6 @@ void LX_graphics::clearMainWindow()
 */
 void LX_graphics::clearMainRenderer()
 {
-    //std::cout << "CLEAN " << std::endl;
     SDL_RenderClear(renderer);
 }
 

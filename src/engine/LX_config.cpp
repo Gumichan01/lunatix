@@ -512,7 +512,6 @@ void LX_configuration::setFullscreenFlag()
     if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
     {
         std::cerr << "Error occured in LX_configuration::setFullscreenFlag : " << lua_tostring(state,-1) << std::endl;
-
         throw LX_configuration_exception("The lua file does not exist or is corrupted");
     }
 
