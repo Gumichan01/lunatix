@@ -15,20 +15,51 @@
 *	@file LX_window.cpp
 *	@brief The LX_window class
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
-*	@date January 28th, 2015
+*	@version 0.2
+*	@date February 7th, 2015
 *
 *
 */
 
+#include "LX_config.h"
 #include "LX_window.h"
 
 
+
 /**
-*   @fn LX_window()
+*   @fn LX_window_exception::LX_window_exception(std::string err)
+*
+*   Build the LX_window_exception class
+*
+*   @param err the error string
+*
+*/
+LX_window_exception::LX_window_exception(std::string err)
+{
+    str_err = err;
+}
+
+
+/**
+*   @fn const char * LX_window_exception::what() const throw()
+*   Get the error string
+*   @return the error string
+*/
+const char * LX_window_exception::what() const throw()
+{
+    return str_err.c_str();
+}
+
+
+LX_window_exception::~LX_window_exception() throw(){}
+
+
+/**
+*   @fn LX_window::LX_window()
 *
 *   Create the window with the default configuration
 *
+*   @exception LX_window_exception
 */
 LX_window::LX_window()
 {
@@ -37,13 +68,13 @@ LX_window::LX_window()
 
     int lxWidth = 0;
     int lxHeight = 0;
-    int lxBitsPerPixel = 0;
+    //int lxBitsPerPixel = 0;
 
     LX_configuration *win_config = LX_configuration::getInstance();     // load the configuration
 
     lxWidth = win_config->getWinWidth();
     lxHeight = win_config->getWinHeight();
-    lxBitsPerPixel = BPP;
+    //lxBitsPerPixel = BPP;
 
 
     // check the fullscreen flag
@@ -74,7 +105,7 @@ LX_window::LX_window()
 
 
 /**
-*   @fn LX_window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
+*   @fn LX_window::LX_window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
 *
 *   Create the window with an already set window
 *
@@ -87,10 +118,11 @@ LX_window::LX_window(SDL_Window *sdlWin)
     if(sdlWin == NULL)
         throw LX_window_exception("exception occured in LX_window : NULL value \n");
 
+    lxWindow = sdlWin;
 }
 
 /**
-*   @fn LX_window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
+*   @fn LX_window::LX_window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
 *
 *   Create the window with custom configuration
 *
@@ -119,9 +151,9 @@ LX_window::LX_window(std::string title, int posX, int posY, int w, int h, bool s
 
 
 /**
-*   @fn LX_window(std::string title, int w, int h, bool full_flag)
+*   @fn LX_window::LX_window(std::string title, int w, int h, bool full_flag)
 *
-*   Create the window with only the name and te fullscreen flag
+*   Create the window with only the name and the fullscreen flag
 *
 *   @param title : the title of the window
 *   @param w : the width of the window
@@ -135,8 +167,17 @@ LX_window::LX_window(std::string title, int w, int h, bool full_flag)
     LX_window(title,SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,full_flag);
 }
 
-
-
+/**
+*
+*   @fn LX_window::~LX_window()
+*
+*   Destroy the window instance
+*
+*/
+LX_window::~LX_window()
+{
+    SDL_DestroyWindow(lxWindow);
+}
 
 /**
 *   @fn void LX_window::setTitle(std::string title)

@@ -22,6 +22,12 @@
 */
 
 #include <iostream>
+#include <cstdio>
+
+//#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+/*#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>*/
 
 #include "engine/LX_lib.h"
 #include "engine/LX_config.h"
@@ -46,8 +52,6 @@ int main ( int argc, char** argv )
 
     SDL_Surface *sf = NULL;
     SDL_Texture *st = NULL;
-    SDL_Surface *txt = NULL;
-    SDL_Surface *background = NULL;
 
     std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
@@ -71,8 +75,8 @@ int main ( int argc, char** argv )
 
     try
     {
-        graphics = LX_graphics::getInstance();
-        ttf = LX_ttf::getInstance();
+        graphics = LX_graphics::createInstance();
+        ttf = new LX_ttf(&color);
     }
     catch(std::exception & e )
     {
@@ -100,6 +104,9 @@ int main ( int argc, char** argv )
 
     SDL_Texture *t1 = graphics->loadTextureFromSurface(tmp1);
     SDL_Texture *t2 = graphics->loadTextureFromSurface(tmp2);
+
+    audio->musicVolume(MIX_MAX_VOLUME/2);
+    std::cout << "Volume : " << audio->musicVolume(-1) <<std::endl;
 
     while(game)
     {
@@ -165,34 +172,6 @@ int main ( int argc, char** argv )
     }
 
 
-    /*if(t1 == NULL)
-    {
-        std::cout << " t1 is NULL" << std::endl;
-    }
-    else
-    {
-        std::cout << " t1 exists" << std::endl;
-        SDL_DestroyTexture(t1);
-    }
-
-    if(t2 == NULL)
-    {
-        std::cout << " t2 is NULL" << std::endl;
-    }
-    else
-    {
-        std::cout << " t2 exists" << std::endl;
-        SDL_DestroyTexture(t2);
-    }
-
-    if(graphics->loadTextureFromSurface(NULL) == NULL)
-    {
-        std::cout << " The result is NULL : OK" << std::endl;
-    }
-    else
-        std::cout << "What the hell ? " << std::endl;*/
-
-
     SDL_FreeSurface(sf);
     SDL_DestroyTexture(st);
     SDL_DestroyTexture(t1);
@@ -201,7 +180,7 @@ int main ( int argc, char** argv )
     SDL_FreeSurface(tmp2);
 
     delete audio;
-    ttf->destroy();
+    delete ttf;
     graphics->destroy();
 
     LX_Quit();
@@ -240,7 +219,15 @@ int main ( int argc, char** argv )
 
     delete configuration;
 
+    SDL_version compiled;
+    SDL_version linked;
 
+    SDL_VERSION(&compiled);
+    SDL_GetVersion(&linked);
+    printf("We compiled against SDL version %d.%d.%d ...\n",
+                compiled.major, compiled.minor, compiled.patch);
+    printf("But we linked against SDL version %d.%d.%d.\n",
+                linked.major, linked.minor, linked.patch);
 
     return EXIT_SUCCESS;
 }
@@ -250,6 +237,7 @@ int main ( int argc, char** argv )
 {
     SDL_Surface *s = NULL;
     SDL_Texture *t = NULL;
+    SDL_Texture *tt = NULL;
 
     SDL_Rect r = {100,100,400,100};
 
@@ -281,8 +269,8 @@ int main ( int argc, char** argv )
     audio = new LX_Audio();
 
 
-    //s = graphics->loadSurfaceFromBMP("data/cb.bmp");
-    //s = graphics->loadSurface("data/explosion.png");
+    s = graphics->loadSurface("data/cb.bmp");
+    s = graphics->loadSurface("data/explosion.png");
 
     s = ttf->draw_BlendedText("LunatiX engine");
 
@@ -304,6 +292,7 @@ int main ( int argc, char** argv )
         std::cout << "YES" << std::endl;
 
     graphics->putTexture(t,NULL,&r);
+    graphics->putTexture(s,NULL,&r);
     graphics->updateMainRenderer();
 
     SDL_Delay(2000);
@@ -317,9 +306,6 @@ int main ( int argc, char** argv )
 
     return EXIT_SUCCESS;
 }*/
-
-
-
 
 
 

@@ -25,10 +25,6 @@
 *
 */
 
-#include <cmath>
-#include <iostream>
-
-#include "LX_Polygon.h"
 #include "LX_Hitbox.h"
 
 
@@ -48,10 +44,12 @@ class LX_physics{
 
     public :
 
-        LX_physics(){}
+        //LX_physics(){}
 
         static int euclide_square_distance( int x1, int y1, int x2, int y2);
         static int euclide_distance( int x1, int y1, int x2, int y2);
+        static int euclide_square_distance( LX_Point *p1, LX_Point *p2);
+        static int euclide_distance( LX_Point *p1, LX_Point *p2);
 
         static bool collision(int x_pos, int y_pos, const LX_AABB *rect);                          // collision point/AABB
         static bool collision(int x_pos, int y_pos, const LX_Circle *circle);                      // collision point/circle
@@ -60,7 +58,7 @@ class LX_physics{
         static bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
         static bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
 
-        ~LX_physics(){}
+        //~LX_physics(){}
 };
 
 #endif // PHYSICS_H_INCLUDED

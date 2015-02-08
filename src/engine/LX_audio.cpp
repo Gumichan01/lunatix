@@ -25,6 +25,53 @@
 #include "LX_Audio.h"
 
 
+
+/**
+*   @fn LX_Audio::LX_Audio()
+*
+*   Load the LX_Audio manager
+*
+*/
+LX_Audio::LX_Audio()
+{
+    music = NULL;
+}
+
+
+/**
+*   @fn LX_Audio::LX_Audio(Mix_Music *mus)
+*
+*   Load the LX_Audio manager with a Mix_Music
+*
+*   @param mus the Mix_Music
+*
+*/
+LX_Audio::LX_Audio(Mix_Music *mus)
+{
+    music = mus;
+}
+
+
+/**
+*   @fn LX_Audio::LX_Audio(std::string filename)
+*
+*   Load the LX_Audio manager with a Mix_Music
+*
+*   @param filename the music filename you want to load
+*
+*/
+LX_Audio::LX_Audio(std::string filename)
+{
+    music = NULL;   // If you remove this code line, you will have a segmentation fault
+
+    if(load_music(filename.c_str()))
+    {
+        music = NULL;
+    }
+}
+
+
+
 /**
 *   @fn bool LX_Audio::load_music(std::string filename)
 *
@@ -63,7 +110,6 @@ bool LX_Audio::load_music(std::string filename)
 */
 void LX_Audio::play_music(int loops)
 {
-
     if(Mix_PlayMusic(music,LX_AUDIO_LOOP) == -1)
     {
         std::cerr << "Error occured in LX_Audio::play_music : " << Mix_GetError() << std::endl;
@@ -174,13 +220,6 @@ void LX_Audio::play_sample(int channel,Mix_Chunk *sample,int loops)
 
 
 
-
-
-
-
-
-
-
 /**
 *   @fn void LX_Audio::play_sample(Mix_Chunk *sample)
 *
@@ -266,8 +305,18 @@ int LX_Audio::channelVolume(int channel,int volume)
 }
 
 
+void LX_Audio::setDistance(Uint8 distance)
+{
+    setDistance(MIX_CHANNEL_POST,distance);
+}
 
-
+void LX_Audio::setDistance(int channel,Uint8 distance)
+{
+    if(Mix_SetDistance(channel,distance))
+    {
+        std::cerr << "distance setting failed : " << Mix_GetError() << std::endl;
+    }
+}
 
 
 

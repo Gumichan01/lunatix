@@ -15,12 +15,18 @@
 *	@file LX_lib.cpp
 *	@brief The LX_lib file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
-*	@date August 14, 2014
+*	@version 0.2
+*	@date February 7th, 2015
 *
 *
 */
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+
+#include "LX_config.h"
 #include "LX_lib.h"
 
 /**
@@ -36,7 +42,6 @@ bool LX_Init(void)
     int err = 0;
     Uint32 sdl_flags = 0x00000000;                                  // the SDL flag for SDL_Init
     int img_flags = IMG_INIT_PNG| IMG_INIT_JPG;      // the IMG flag for SDL_Image
-
 
     // Load the configuration
     LX_configuration *configuration = LX_configuration::getInstance();

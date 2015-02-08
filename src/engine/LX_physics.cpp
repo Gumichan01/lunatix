@@ -19,6 +19,9 @@
 *	@date July 14th, 2014
 *
 */
+
+#include <cmath>
+
 #include "LX_physics.h"
 
 
@@ -60,6 +63,43 @@ int LX_physics::euclide_distance( int x1, int y1, int x2, int y2)
 {
     return sqrt(euclide_square_distance(x1,y1,x2,y2));
 }
+
+
+/**
+*
+*	@fn int LX_physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+*
+*	This function calculates the Euclide square distance
+*
+*	@param	p1 The first point
+*   @param	p2 The second point
+*
+*	@return an integer value
+*
+*/
+int LX_physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+{
+    return euclide_square_distance(p1->x,p1->y,p2->x,p2->y);
+}
+
+
+/**
+*
+*	@fn int LX_physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+*
+*	This function calculates the Euclide square distance
+*
+*	@param	p1 The first point
+*   @param	p2 The second point
+*
+*	@return an integer value
+*
+*/
+int LX_physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+{
+    return sqrt(euclide_square_distance(p1,p2));
+}
+
 
 
 
@@ -114,7 +154,6 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 
     return true;
 }
-
 
 
 /**

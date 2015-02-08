@@ -31,8 +31,9 @@
 
 #include "LX_config.h"
 
-#define DEFAULT_FONT_SIZE 24    /**<The default value of the font size, used when the size defined in the configuration file is 0*/
-
+#define DEFAULT_FONT_SIZE 24    /**< The default value of the font size, used when the size defined in the configuration file is 0*/
+#define WHITE_COLOR 255
+#define BLACK_COLOR 0
 
 
 /**
@@ -48,26 +49,12 @@ class LX_TTF_exception : public std::exception
 
     std::string str_err;                        /**< The string where the error message will be conteined*/
 
-/**
-*   @fn LX_TTF_exception(std::string err)
-*   Build the LX_TTF_exception class
-*   @param err the error string
-*/
-    LX_TTF_exception(std::string err)
-    {
-        str_err = err;
-    }
+    LX_TTF_exception(std::string err);
 
-/**
-*   @fn const char * what() const throw()
-*   Get the error string
-*   @return the error string
-*/
-    const char * what() const throw() {return str_err.c_str() ;}
+    const char * what() const throw();
 
-    ~LX_TTF_exception() throw(){}
+    ~LX_TTF_exception() throw();
 };
-
 
 
 
@@ -88,71 +75,13 @@ class LX_ttf{
 
     TTF_Font *font;             /**< The font structure created*/
 
-/**
-*
-*   @fn LX_ttf(SDL_Color *color)
-*
-*   This constructor initializes The LX_TTF module.
-*
-*   @param color the default color font
-*
-*   @note If you do not need to specify the font color, you may put NULL instead of this color
-*   @warning You must initialize the SDL_TTF library putting the ttf flag to 1 in sdl_conf.cfg.
-*            Otherwise, a LX_TTF_exception will be occured.
-*   @warning A LX_TTF_exception may also be occured if the filename or the font size is invalid
-*
-*/
-    LX_ttf(SDL_Color *color)
-    {
-        font = NULL;
-
-        // load the configuration
-        LX_configuration *ttf_config = LX_configuration::getInstance();
-
-        if(ttf_config->getTTF_Flag() == 0)
-        {
-            throw LX_TTF_exception("exception occurred in the LX_ttf constructor : ");
-        }
-
-        font_str = ttf_config->getFontFile();
-        font_size = ttf_config->getFontSize();
-
-        ttf_config->destroy();
-
-        if(font_size == 0)
-        {
-             font_size = DEFAULT_FONT_SIZE;
-        }
-
-        font = TTF_OpenFont(font_str.c_str(), font_size);
-
-        if(font == NULL)
-        {
-            throw LX_TTF_exception(TTF_GetError());
-        }
-
-        //put color if it is not null
-        if( color != NULL )
-        {
-            font_color.r = color->r;
-            font_color.g = color->g;
-            font_color.b = color->b;
-        }
-        else
-        {
-            font_color.r = 127;
-            font_color.g = 127;
-            font_color.b = 127;
-        }
-
-    }
-
+    void init(std::string font_file, SDL_Color *color, int size);
 
     public:
 
-    //get the instance
-    static LX_ttf * getInstance();
-    static void destroy();
+    LX_ttf(SDL_Color *color);
+    LX_ttf(std::string font_file, SDL_Color *color);
+    LX_ttf(std::string font_file, SDL_Color *color, int size);
 
     SDL_Surface * draw_SolidText(std::string text);
     SDL_Surface * draw_ShadedText(std::string text);
@@ -162,13 +91,10 @@ class LX_ttf{
     SDL_Surface * draw_ShadedText_WithSize(std::string text, unsigned int size);
     SDL_Surface * draw_BlendedText_WithSize(std::string text, unsigned int size);
 
-    bool setTTF_filename(std::string ttf_filename);
-    bool setColor(SDL_Color *color);
+    void setTTF_filename(std::string ttf_filename);
+    void setColor(SDL_Color *color);
 
-    ~LX_ttf()
-    {
-        TTF_CloseFont(font);
-    }
+    ~LX_ttf();
 
 };
 

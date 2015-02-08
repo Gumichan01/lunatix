@@ -18,18 +18,14 @@
 *	@file LX_window.h
 *	@brief The LX_window library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
-*	@date January 28th, 2015
+*	@version 0.2
+*	@date February 7th, 2015
 *
 *
 */
 
-#include "LX_config.h"
-
 #include <SDL2/SDL.h>
 
-
-#define BPP 32      /**< The bits per pixel*/
 
 
 /**
@@ -45,24 +41,11 @@ class LX_window_exception : public std::exception
 
     std::string str_err;                    /**< The string where the error message will be conteined*/
 
-/**
-*   @fn LX_window_exception(std::string err)
-*   Build the LX_window_exception class
-*   @param err the error string
-*/
-    LX_window_exception(std::string err)
-    {
-        str_err = err;
-    }
+    LX_window_exception(std::string err);
 
-/**
-*   @fn const char * what() const throw()
-*   Get the error string
-*   @return the error string
-*/
-    const char * what() const throw() {return str_err.c_str() ;}
+    const char * what() const throw();
 
-    ~LX_window_exception() throw(){}
+    ~LX_window_exception() throw();
 };
 
 
@@ -87,7 +70,7 @@ class LX_window{
 
     public :
 
-    LX_window();
+    LX_window();                    // The default constructor with default parameters
     LX_window(SDL_Window *sdlWin);
     LX_window(std::string title, int posX, int posY, int w, int h, bool screen_flag);
     LX_window(std::string title, int w, int h, bool full_flag);
@@ -102,10 +85,7 @@ class LX_window{
     int getHeight();
 
 
-    ~LX_window()
-    {
-        SDL_DestroyWindow(lxWindow);
-    }
+    ~LX_window();
 };
 
 

@@ -18,35 +18,19 @@
 *	@file LX_lib.h
 *	@brief The LX_lib file. It manages the SDL systems
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
-*	@date August 14th, 2014
+*	@version 0.2
+*	@date February 7th, 2015
 *
 *
 */
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
-
 
 #define LX_AUDIO_STEREO_SOUND 2             /**< The stereo variable the mix module */
 #define LX_AUDIO_MONO_SOUND 1               /**< The mono variable for the mix module */
 #define LX_AUDIO_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
 
 
-#include "LX_config.h"
-
-
 bool LX_Init(void);
-
 void LX_Quit(void);
-
-
-
-
-
-
 
 
 #endif // LX_LIB_H_INCLUDED

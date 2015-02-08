@@ -25,18 +25,7 @@
 #define POINT_H_INCLUDED
 
 
-/**
-*   @struct LX_Point
-*   @brief The point structure
-*
-*   This point is described by the x and y field
-*/
-typedef struct LX_Point{
 
-    int x;      /**<The x position of the point*/
-    int y;      /**<The y position of the point*/
-
-}LX_Point;      /**< */
 
 #endif
 

@@ -21,7 +21,10 @@
 *
 */
 
+#include <iostream>
 #include <string>
+
+#include <SDL2/SDL_image.h>
 
 #include "LX_graphics.h"
 //#include "LX_windowManager.h"
@@ -30,36 +33,15 @@
 static LX_graphics *gInstance = NULL;
 
 
-
 /**
-*   @fn bool LX_graphics::isBMPFile(std::string filename)
-*
-*   Checks if the filename seems to be a BMP file
-*
-*   @param filename : the filename
-*
-*   @return TRUE if the file is a BMP file , FALSE otherwise
-*
-*   @warning This function does not use the SDL library to check the nature of the file.
-*               It just looks for the ".bmp" string a the end of the file.
-*   @todo test LX_graphics::isBMPFile
-*/
-bool LX_graphics::isBMPFile(std::string filename)
-{
-    return ( filename.empty() && (filename.find(".bmp",filename.length(),4) != std::string::npos) );
-}
-
-
-
-/**
-*   @fn LX_graphics * LX_graphics::getInstance()
+*   @fn LX_graphics * LX_graphics::createInstance()
 *
 *   Get the unique instance of the LX_graphics class
 *
 *   @return the unique instance of LX_graphics
 *
 */
-LX_graphics * LX_graphics::getInstance()
+LX_graphics * LX_graphics::createInstance()
 {
     if(gInstance == NULL)
     {
@@ -79,7 +61,51 @@ LX_graphics * LX_graphics::getInstance()
 
 
 /**
+*   @fn LX_graphics * LX_graphics::createInstance(SDL_Window * win)
 *
+*   Get the unique instance of the LX_graphics class setting the SDL_Window
+*
+*   @param win the main SDL_window you want to use
+*
+*   @return the unique instance of LX_graphics
+*
+*/
+LX_graphics * LX_graphics::createInstance(LX_window * win)
+{
+    if(gInstance == NULL)
+    {
+        try
+        {
+            gInstance = new LX_graphics(win);
+        }
+        catch(std::exception & g_ex)
+        {
+            std::cerr << "exception occured in LX_graphics::getInstance : " << g_ex.what() << std::endl;
+            return NULL;
+        }
+    }
+
+    return gInstance;
+}
+
+
+
+/**
+*   @fn LX_graphics * LX_graphics::getInstance()
+*
+*   Get the unique instance of the LX_graphics class
+*
+*   @return the unique instance of LX_graphics
+*
+*/
+LX_graphics * LX_graphics::getInstance()
+{
+    return gInstance;
+}
+
+
+
+/**
 *   @fn void LX_graphics::destroy()
 *
 *   Destroy the unique instance
@@ -94,23 +120,49 @@ void LX_graphics::destroy()
 }
 
 
+
 /**
 *   @fn LX_graphics::LX_graphics()
 *
 *   Create the instance
+*
 */
 LX_graphics::LX_graphics()
 {
     mainWindow = new LX_window();
 
-    //window = mainWindow->getWindow();
-    //surface = mainWindow->getSurface();
     renderer = SDL_CreateRenderer(mainWindow->getWindow(),-1,SDL_RENDERER_ACCELERATED);
 
     if(renderer == NULL)
-        std::cerr << "renderer is not set : " << SDL_GetError() << std::endl;
+        std::cerr << "LX_graphics : renderer is not set : " << SDL_GetError() << std::endl;
 
 }
+
+
+
+/**
+*   @fn LX_graphics::LX_graphics(LX_window *win)
+*
+*   Create the instance
+*
+*   @param win the LX_window you created before
+*
+*/
+LX_graphics::LX_graphics(LX_window *win)
+{
+    if(win == NULL)
+    {
+        throw new LX_window_exception("Invalid LX_window instance : NULL");
+    }
+
+    mainWindow = win;
+    renderer = SDL_CreateRenderer(mainWindow->getWindow(),-1,SDL_RENDERER_ACCELERATED);
+
+    if(renderer == NULL)
+        std::cerr << "LX_graphics : renderer is not set : " << SDL_GetError() << std::endl;
+
+}
+
 
 
 /**
@@ -161,6 +213,7 @@ LX_graphics::~LX_graphics()
 
     return optimized;
 }*/
+
 
 
 /**
@@ -460,6 +513,18 @@ void LX_graphics::clearMainRenderer()
 }
 
 
+/**
+*   @fn SDL_Surface * LX_graphics::getMainSurface()
+*
+*   Returns the surface of the main window
+*
+*   @return the main surface
+*
+**/
+SDL_Surface * LX_graphics::getMainSurface()
+{
+    return mainWindow->getSurface();
+}
 
 
 

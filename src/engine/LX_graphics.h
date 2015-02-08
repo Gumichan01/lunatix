@@ -26,9 +26,13 @@
 
 #include "LX_window.h"
 
-#include <SDL2/SDL_image.h>
+/// @todo [fullscreen] implement the fullscreen resolution
 
-//struct LX_windowManager;
+
+#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP
+#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN
+#define LX_GRAPHICS_NO_FULLSCREEN 0
+
 
 
 /**
@@ -42,21 +46,21 @@
 */
 class LX_graphics{
 
-    //SDL_Window *window;     /**< Th main SDL_window */
-    //SDL_Surface *surface;   /**< The main surface */
-
     LX_window *mainWindow;  /**< The main window */
     SDL_Renderer *renderer; /**< The main renderer */
     //std::vector<LX_window *> vectorWindows;    /**< The vector of other windows*/
 
     ///@todo [vector] Implement the windowVector
     LX_graphics();
+    LX_graphics(LX_window *win);
 
     bool isBMPFile(std::string filename);
 
     public:
 
     //get the instance
+    static LX_graphics * createInstance();
+    static LX_graphics * createInstance(LX_window * win);
     static LX_graphics * getInstance();
     static void destroy();
 
@@ -100,16 +104,8 @@ class LX_graphics{
     void clearMainWindow();
     void clearMainRenderer();
 
-/**
-*   @fn SDL_Surface * getMainSurface()
-*
-*   Returns the surface of the main window
-*
-*   @return the main surface
-*
-**/
-    SDL_Surface * getMainSurface(){return mainWindow->getSurface();}
 
+    SDL_Surface * getMainSurface();
 
     ~LX_graphics();
 

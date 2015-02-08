@@ -33,7 +33,7 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wextra" />
+			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
 			<Add directory=".\include" />
 		</Compiler>
@@ -53,21 +53,13 @@
 		</Linker>
 		<Unit filename="config\sdl_conf.cfg" />
 		<Unit filename="config\window.cfg" />
-		<Unit filename="data\Comptroller - Galactic Hero.mp3" />
-		<Unit filename="data\Prototype Princess v1_01.wav" />
-		<Unit filename="data\black_rock_shooter-HD.jpg" />
-		<Unit filename="data\cb.bmp" />
-		<Unit filename="font\AozoraMinchoMedium.ttf" />
 		<Unit filename="script\LX_config.lua" />
 		<Unit filename="src\engine\LX_Hitbox.h" />
 		<Unit filename="src\engine\LX_Point.h" />
-		<Unit filename="src\engine\LX_Polygon.cpp" />
-		<Unit filename="src\engine\LX_Polygon.h" />
 		<Unit filename="src\engine\LX_audio.cpp" />
 		<Unit filename="src\engine\LX_audio.h" />
 		<Unit filename="src\engine\LX_config.cpp" />
 		<Unit filename="src\engine\LX_config.h" />
-		<Unit filename="src\engine\LX_euclide.h" />
 		<Unit filename="src\engine\LX_graphics.cpp" />
 		<Unit filename="src\engine\LX_graphics.h" />
 		<Unit filename="src\engine\LX_lib.cpp" />

@@ -29,7 +29,8 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_mixer.h>
 
-/// @todo Support of 2D sound effects
+/// @todo [LX_audio] Support of 2D sound effects (panning, fade in/out, 3D audio, stereo reverse)
+
 
 #define LX_AUDIO_STEREO_SOUND 2             /**< The stereo variable the mix module */
 #define LX_AUDIO_MONO_SOUND 1               /**< The mono variable for the mix module */
@@ -51,33 +52,32 @@ class LX_Audio{
 
     Mix_Music *music;      /**<The music you want to play (note : LX_Audio only plays one music)*/
 
-
     public:
 
-/**
-*   @fn LX_Audio()
-*
-*   Load the LX_Audio library
-*
-**/
-    LX_Audio()
-    {
-        music = NULL;
-    }
+    LX_Audio();
+    LX_Audio(Mix_Music *mus);
+    LX_Audio(std::string filename);
 
+    // Music
     bool load_music(std::string filename);
     void play_music();
     void play_music(int loops);
     void pause_music();
     void stop_music();
 
+    // Samples
     Mix_Chunk * load_sample(std::string filename);
     void play_sample(Mix_Chunk *sample);
     void play_sample(int channel,Mix_Chunk *sample,int loops);
 
+    // Volumes
     int musicVolume(int volume);
     int chunkVolume(Mix_Chunk *chunk,int volume);
     int channelVolume(int channel,int volume);
+
+    // Effects
+    void setDistance(Uint8 distance);
+    void setDistance(int channel,Uint8 distance);
 
     ~LX_Audio()
     {
