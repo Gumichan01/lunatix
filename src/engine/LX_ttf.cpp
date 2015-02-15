@@ -23,7 +23,7 @@
 */
 
 #include "LX_ttf.h"
-
+#include "LX_graphics.h"
 
 /**
 *   @fn LX_TTF_exception(std::string err)
@@ -374,20 +374,34 @@ SDL_Surface * LX_ttf::draw_BlendedText_WithSize(std::string text, unsigned int s
 
 /**
 *
-*   @fn void LX_ttf::setTTF_filename(std::string ttf_filename)
+*   @fn void LX_ttf::setTTF_Font(std::string ttf_filename)
 *
-*   This function sets the name of the ttf file which will be used.
+*   This function resets the font replacing the filen ame and the font.
 *
-*   @param ttf_filename the new name
+*   @param ttf_filename the new fil name you want to create the font from
 *
 */
-void LX_ttf::setTTF_filename(std::string ttf_filename)
+void LX_ttf::setTTF_Font(std::string ttf_filename)
 {
-    if(!ttf_filename.empty() )
+    TTF_Font *newFont = NULL;
+
+    if(!ttf_filename.empty())
     {
-        font_str.clear();
-        font_str.assign(ttf_filename);
+        if((newFont = TTF_OpenFont(ttf_filename.c_str(),font_size)) != NULL)
+        {
+            std::cerr << "Error occurred in LX_ttf::setTTF_Font : "
+                        << TTF_GetError() << std::endl;
+        }
+        else
+        {
+            font_str.clear();
+            font_str.assign(ttf_filename);
+
+            TTF_CloseFont(font);
+            font = newFont;
+        }
     }
+
 }
 
 
