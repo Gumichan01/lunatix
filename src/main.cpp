@@ -33,8 +33,7 @@
 #include "engine/LX_config.h"
 #include "engine/LX_graphics.h"
 #include "engine/LX_ttf.h"
-#include "engine/LX_Mixer.h"
-#include "engine/LX_Music.h"
+#include "engine/LX_audio.h"
 #include "engine/LX_physics.h"
 
 
@@ -60,7 +59,7 @@ int main ( int argc, char** argv )
 
     LX_graphics *graphics;
     LX_ttf *ttf;
-    LX_Music *audio;
+    LX_Audio *audio;
 
     err = LX_Init();
 
@@ -85,7 +84,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
-    audio = new LX_Music();
+    audio = new LX_Audio();
 
     // Load the texture from the data file
     st = graphics->loadTextureFromFile(name.c_str());
@@ -95,7 +94,7 @@ int main ( int argc, char** argv )
         std::cerr << "LX_graphics::load_surface : " << SDL_GetError() <<std::endl;
     }
 
-    audio->load(mus);
+    audio->load_music(mus);
 
     bool game = true;
     SDL_Event event;
@@ -121,13 +120,13 @@ int main ( int argc, char** argv )
                                         case SDLK_ESCAPE:   game = false;
                                                             break;
 
-                                        case SDLK_SPACE:    audio->pause();
+                                        case SDLK_SPACE:    audio->pause_music();
                                                             break;
 
-                                        case SDLK_RETURN:   audio->play();
+                                        case SDLK_RETURN:   audio->play_music();
                                                             break;
 
-                                        case SDLK_BACKSPACE:    audio->stop();
+                                        case SDLK_BACKSPACE:    audio->stop_music();
                                                                 break;
 
                                         default :   break;
@@ -244,7 +243,7 @@ int main ( int argc, char** argv )
 
     LX_graphics *graphics = NULL;
     LX_ttf *ttf = NULL;
-    LX_Music *audio = NULL;
+    LX_Audio *audio = NULL;
 
     bool err;
 
@@ -267,7 +266,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
-    audio = new LX_Music();
+    audio = new LX_Audio();
 
 
     s = graphics->loadSurface("data/cb.bmp");
