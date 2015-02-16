@@ -387,7 +387,7 @@ void LX_ttf::setTTF_Font(std::string ttf_filename)
 
     if(!ttf_filename.empty())
     {
-        if((newFont = TTF_OpenFont(ttf_filename.c_str(),font_size)) != NULL)
+        if((newFont = TTF_OpenFont(ttf_filename.c_str(),font_size)) == NULL)
         {
             std::cerr << "Error occurred in LX_ttf::setTTF_Font : "
                         << TTF_GetError() << std::endl;
