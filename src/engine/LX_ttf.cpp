@@ -218,15 +218,34 @@ SDL_Surface * LX_ttf::draw_SolidText(std::string text)
 *   Create an UTF-8 encoded text in shaded mode
 *
 *   @param text the text you want to display
+*   @param bg the background color
 *
-*   @return the new SDL_surface , NULL otherwise
+*   @return the new SDL_surface , NULL otherwise on errors
 *
 */
-SDL_Surface * LX_ttf::draw_ShadedText(std::string text)
+SDL_Surface * LX_ttf::draw_ShadedText(std::string text, SDL_Color bg)
 {
-    SDL_Color grey = {127,127,127};
+    return TTF_RenderUTF8_Shaded(font,text.c_str(), font_color, bg);
+}
 
-    return TTF_RenderUTF8_Shaded(font,text.c_str(), font_color, grey);
+
+/**
+*
+*   @fn SDL_Surface * LX_ttf::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+*
+*   Create an UTF-8 encoded text in shaded mode
+*
+*   @param text the text you want to display
+*   @param r the red channel
+*   @param g the green channel
+*   @param b the blue channel
+*
+*   @return the new SDL_surface , NULL otherwise on errors
+*
+*/
+SDL_Surface * LX_ttf::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+{
+    return draw_ShadedText(text.c_str(),{r,g,b});
 }
 
 
