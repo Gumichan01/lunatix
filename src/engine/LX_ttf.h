@@ -83,6 +83,9 @@ class LX_ttf{
     LX_ttf(std::string font_file, SDL_Color *color);
     LX_ttf(std::string font_file, SDL_Color *color, int size);
 
+    int sizeOfText(std::string text, int *w, int *h);
+    int sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h);
+
     SDL_Surface * draw_SolidText(std::string text);
     SDL_Surface * draw_ShadedText(std::string text, SDL_Color bg);
     SDL_Surface * draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b);

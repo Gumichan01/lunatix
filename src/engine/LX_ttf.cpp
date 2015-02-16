@@ -193,6 +193,45 @@ LX_ttf::~LX_ttf()
 }
 
 
+/**
+*   @fn int LX_ttf::sizeOfText(std::string text, int *w, int *h)
+*
+*   Calculate the resulting surface size of the text rendererd using the default font
+*
+*   @param text the texte string to size up
+*   @param w the pointer to int in which to fille the text width
+*   @param h he pointer to int in which to fille the text height
+*
+*   @warning If the default font in LX_ttf is NULL, then a segmentation fault will occur
+*
+*/
+int LX_ttf::sizeOfText(std::string text, int *w, int *h)
+{
+    return sizeOfText(font,text.c_str(),w,h);
+}
+
+
+/**
+*   @fn int LX_ttf::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
+*
+*   Calculate the resulting surface size of the text rendererd using the font
+*   given in in parameter
+*
+*   @param ttf the font you use for the text
+*   @param text the texte string to size up
+*   @param w the pointer to int in which to fille the text width
+*   @param h he pointer to int in which to fille the text height
+*
+*   @warning If the ttf font is NULL, then a segmentation fault will occur
+*
+*/
+int LX_ttf::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
+{
+    return TTF_SizeUTF8(ttf,text.c_str(),w,h);
+}
+
+
+
 
 /**
 *
