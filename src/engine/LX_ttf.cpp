@@ -363,9 +363,6 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
 }
 
 
-
-
-
 /**
 *   @fn SDL_Surface * LX_ttf::drawText(Uint8 type,std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 *
@@ -383,7 +380,6 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
 */
 SDL_Surface * LX_ttf::drawText(Uint8 type,std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 {
-    /// @todo Test drawText
     TTF_Font *ttf = NULL;
     SDL_Surface *loaded = NULL;
 

@@ -136,6 +136,8 @@ LX_graphics::LX_graphics()
     if(renderer == NULL)
         std::cerr << "LX_graphics : renderer is not set : " << SDL_GetError() << std::endl;
 
+    originalWidth = mainWindow->getWidth();
+    originalHeight = mainWindow->getHeight();
 }
 
 
@@ -161,6 +163,8 @@ LX_graphics::LX_graphics(LX_window *win)
     if(renderer == NULL)
         std::cerr << "LX_graphics : renderer is not set : " << SDL_GetError() << std::endl;
 
+    originalWidth = mainWindow->getWidth();
+    originalHeight = mainWindow->getHeight();
 }
 
 
@@ -175,44 +179,7 @@ LX_graphics::~LX_graphics()
 {
     delete mainWindow;
     mainWindow = NULL;
-
 }
-
-
-
-/**
-*
-*   @fn SDL_Surface * LX_graphics::loadSurfaceFromBMP(std::string filename)
-*
-*   This function loads an SDL_Surface from a .bmp file an optimizes its format
-*
-*   @param filename : the .bmp file name which describe the image
-*
-*   @return the loaded and optimized surface if there is no problem, NULL otherwise
-*
-*   @warning If you try to load an other image file with this function, it will fail.
-*
-*/
-/*SDL_Surface * LX_graphics::loadSurfaceFromBMP(std::string filename)
-{
-    SDL_Surface *loaded = NULL;
-    SDL_Surface *optimized = NULL;
-
-    loaded = SDL_LoadBMP(filename.c_str());
-
-    if(loaded == NULL)
-    {
-        std::cerr << "Error occurred in LX_graphics::load_surfaceFromBMP : " << SDL_GetError() << std::endl;
-        return NULL;
-    }
-
-    //optimized = SDL_DisplayFormat(loaded);
-    optimized = SDL_ConvertSurface(loaded,mainWindow->getSurface()->format,0x00000000);
-
-    SDL_FreeSurface(loaded);
-
-    return optimized;
-}*/
 
 
 
@@ -296,9 +263,9 @@ SDL_Texture * LX_graphics::loadTextureFromSurface(SDL_Surface *target)
 *
 *   Load a new texture from a file
 *
-*   @param filename :  the name of the file you need to use for the texture creation
+*   @param filename : the name of the file you need to use for the texture creation
 *
-*   @return a pointer to a SDL_Texture the loading works, NULL otherwise
+*   @return a pointer to a SDL_Texture if the loading works, NULL otherwise
 *
 */
 SDL_Texture * LX_graphics::loadTextureFromFile(std::string filename)
@@ -306,7 +273,6 @@ SDL_Texture * LX_graphics::loadTextureFromFile(std::string filename)
     SDL_Surface *tmpS = NULL;
     SDL_Texture *tmpT = NULL;
 
-    //tmpS = ((isBMPFile(filename) == true) ? loadSurfaceFromBMP(filename) : loadSurface(filename) );
     tmpS = loadSurface(filename);
     tmpT = loadTextureFromSurface(tmpS);
 
@@ -460,6 +426,44 @@ bool LX_graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 
     return true;
 }
+
+
+/**
+*   @fn void LX_graphics::setWindowSize(int w, int h)
+*
+*   Set the size of the main window
+*
+*   @param w the width of the window
+*   @param h the height of the window
+*
+*/
+void LX_graphics::setWindowSize(int w, int h)
+{
+    SDL_SetWindowSize(mainWindow->getWindow(),w,h);
+}
+
+
+/**
+*   @fn void LX_graphics::setFullscreen(Uint32 flag)
+*
+*   Set the fullscreen to the main window
+*
+*   @param flag the flag you want to use in this function
+*
+*/
+void LX_graphics::setFullscreen(Uint32 flag)
+{
+    if(SDL_SetWindowFullscreen(mainWindow->getWindow(),flag) < 0)
+    {
+        std::cerr << "Error occured in LX_Graphics::setFullscreen : " << SDL_GetError << std::endl;
+    }
+
+    if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
+    {
+        setWindowSize(originalWidth,originalHeight);
+    }
+}
+
 
 
 

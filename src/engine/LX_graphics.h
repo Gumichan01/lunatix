@@ -26,8 +26,6 @@
 
 #include "LX_window.h"
 
-/// @todo [fullscreen] implement the fullscreen resolution
-
 
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN
@@ -42,13 +40,16 @@
 *   This class describes the LX_graphics engine.
 *
 *   @note : The LX_graphics class uses an instance of LX_window to get the main window information
-*   @warning Because of the LX_window use, LX_graphics class must be built only after you initialized the LX_engine (calling LX_Init())
+*   @warning Because of the LX_window and SDL functions use, LX_graphics class must be built only after you initialized the LX_engine (calling LX_Init())
 */
 class LX_graphics{
 
     LX_window *mainWindow;  /**< The main window */
     SDL_Renderer *renderer; /**< The main renderer */
     //std::vector<LX_window *> vectorWindows;    /**< The vector of other windows*/
+
+    int originalWidth;
+    int originalHeight;
 
     ///@todo [vector] Implement the windowVector
     LX_graphics();
@@ -66,7 +67,6 @@ class LX_graphics{
 
 
     // The static functions
-    //SDL_Surface * loadSurfaceFromBMP(std::string filename);
     SDL_Surface * loadSurface(std::string filename);
 
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target);
@@ -92,6 +92,9 @@ class LX_graphics{
     // If wd == -1 > main window
     //bool put_surfaceOn(int wd,SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
     //bool putTextureOn(int wd,SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
+
+    void setWindowSize(int w, int h);
+    void setFullscreen(Uint32 flag);
 
     // the update and clearing functions
     void updateMainWindow();
