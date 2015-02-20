@@ -29,6 +29,8 @@
 #include<SDL2/SDL_mixer.h>
 
 
+class LX_Sound;
+
 
 /**
 *   @class LX_Music
@@ -37,7 +39,7 @@
 *   This clas is a wrapper of the Mix_Music type
 *
 **/
-class LX_Music{
+class LX_Music : public LX_Sound{
 
     Mix_Music *music;      /**<The music you want to play (note : LX_Music only plays one music)*/
 

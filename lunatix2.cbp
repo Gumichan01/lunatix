@@ -62,6 +62,7 @@
 		<Unit filename="src\engine\LX_Music.cpp" />
 		<Unit filename="src\engine\LX_Music.h" />
 		<Unit filename="src\engine\LX_Point.h" />
+		<Unit filename="src\engine\LX_Sound.h" />
 		<Unit filename="src\engine\LX_config.cpp" />
 		<Unit filename="src\engine\LX_config.h" />
 		<Unit filename="src\engine\LX_graphics.cpp" />

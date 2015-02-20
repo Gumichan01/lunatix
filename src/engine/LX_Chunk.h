@@ -27,11 +27,11 @@
 
 
 struct Mix_Chunk;
+class LX_Sound;
 
-class LX_Chunk{
+class LX_Chunk : LX_Sound{
 
     Mix_Chunk *chunk;
-
 
     public:
 

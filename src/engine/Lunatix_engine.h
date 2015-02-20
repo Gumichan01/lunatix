@@ -33,6 +33,8 @@
 #include "LX_config.h"
 #include "LX_graphics.h"
 #include "LX_ttf.h"
+#include "LX_Mixer.h"
+#include "LX_Sound.h"
 #include "LX_Chunk.h"
 #include "LX_Music.h"
 #include "LX_physics.h"
