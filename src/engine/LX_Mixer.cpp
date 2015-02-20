@@ -219,6 +219,76 @@ void LX_Mixer::setDistance(Uint8 distance)
 
 
 /**
+*   @fn void LX_Mixer::setPosition(Sint16 angle, int distance)
+*
+*   Set the virtuel position of the audio source according to the channel.
+*
+*   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
+*
+*/
+void LX_Mixer::setPosition(Sint16 angle)
+{
+    setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE);
+}
+
+
+/**
+*   @fn void LX_Mixer::setPosition(Sint16 angle, int distance)
+*
+*   Set the virtuel position of the audio source according to the channel.
+*
+*   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
+*   @param distance the distance between the source and the listener
+*
+*/
+void LX_Mixer::setPosition(Sint16 angle, int distance)
+{
+    setPosition(MIX_CHANNEL_POST,angle,distance);
+}
+
+
+
+/**
+*   @fn void LX_Mixer::setPosition(int channel, Sint16, int distance)
+*
+*   Set the virtuel position of the audio source according to the channel.
+*   This function emulates a 3D audio effect.
+*
+*   @param channel the channel you want to register the effect on
+*   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
+*   @param distance the distance between the source and the listener
+*
+*   @note the distance is the same as the distance you can specified with LX_Mixer::setDistance()
+*
+*/
+void LX_Mixer::setPosition(int channel, Sint16 angle, int distance)
+{
+    if(Mix_SetPosition(channel,angle,distance) == 0)
+    {
+        std::cerr << "Error occured in LX_Mixer::setPosition / Mix_setPosition : "
+                        << Mix_GetError() << std::endl;
+    }
+}
+
+
+
+/**
+*   @fn void LX_Mixer::resetPosition(int channel)
+*
+*   Reset the virtuel position of the audio source according to the channel.
+*
+*   @param channel the channel you want to unregister the effect on
+*
+*/
+void LX_Mixer::resetPosition(int channel)
+{
+    setPosition(channel,LX_MIXER_EFFECT_NO_ANGLE,LX_MIXER_EFFECT_NO_DISTANCE);
+}
+
+
+
+
+/**
 *   @fn void LX_Mixer::setDistance(int channel,Uint8 distance)
 *
 *   Set the distance
@@ -236,3 +306,17 @@ void LX_Mixer::setDistance(int channel,Uint8 distance)
         std::cerr << "distance setting failed : " << Mix_GetError() << std::endl;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

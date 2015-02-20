@@ -40,6 +40,9 @@
 
 #define LX_MIXER_EFFECT_LOUD 255            /**< Loud (for effect functions) */
 #define LX_MIXER_EFFECT_SILENCE 0           /**< Silence (for effect functions) */
+#define LX_MIXER_EFFECT_NO_DISTANCE 0       /**< The distance between the source and the listener*/
+#define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle bteween the source and the front */
+
 
 /// @todo [LX_Mixer] Support of 2D sound effects (panning, fade in/out, 3D audio, stereo reverse)
 
@@ -58,7 +61,7 @@ class LX_Mixer{
 
     public :
 
-    // Music
+    /* == Music and chunk == */
     LX_Music * loadMusic(std::string filename);
     LX_Music * loadMusic(Mix_Music *mus);
 
@@ -67,13 +70,23 @@ class LX_Mixer{
 
     int channelVolume(int channel,int volume);
 
-    // Effects
+    /* == Effects == */
+
+    // Fading
     void fadeInMusic(LX_Music *music,int ms);
     void fadeOutMusic(int ms);
 
+    // Panning
     void setPanning(int channel,Uint8 left,Uint8 right);
     void removePanning(int channel);
 
+    // 3D Position
+    void setPosition(Sint16 angle);
+    void setPosition(Sint16 angle, int distance);
+    void setPosition(int channel, Sint16 angle, int distance);
+    void resetPosition(int channel);
+
+    // Distance
     void setDistance(Uint8 distance);
     void setDistance(int channel,Uint8 distance);
 
