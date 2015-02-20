@@ -86,6 +86,9 @@ class LX_Mixer{
     void setPosition(int channel, Sint16 angle, int distance);
     void resetPosition(int channel);
 
+    // Reverse stereo
+    void reverseStereo(int channel,int flip);
+
     // Distance
     void setDistance(Uint8 distance);
     void setDistance(int channel,Uint8 distance);

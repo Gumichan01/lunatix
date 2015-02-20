@@ -286,6 +286,26 @@ void LX_Mixer::resetPosition(int channel)
 }
 
 
+/**
+*   @fn int LX_Mixer::reverseStereo(int channel, int flip)
+*
+*   Reverse the left and right channel sound
+*
+*   @param channel the channel to register the effect
+*   @param flip this must a non-zero value to register the reverse effect
+*
+*   @note If you want want to unregister the effect on a channel, set 0 as flip
+*
+*/
+void LX_Mixer::reverseStereo(int channel, int flip)
+{
+    if(Mix_SetReverseStereo(channel,flip) == 0)
+    {
+         std::cerr << "Error occured in LX_Mixer::reverseStereo / Mix_setReverseStereo : "
+                        << Mix_GetError() << std::endl;
+    }
+}
+
 
 
 /**
