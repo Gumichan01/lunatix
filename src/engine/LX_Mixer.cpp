@@ -162,6 +162,48 @@ void LX_Mixer::fadeOutMusic(int ms)
     }
 }
 
+
+/**
+*   @fn void LX_Mixer::setPanning(int channel,Uint8 left,Uint8 right)
+*
+*   Set the panning on a channel, increasing of decreasing
+*   the volume on this channel
+*
+*   @param channel the channel
+*   @param left the volume of the left channel (0 - 255)
+*   @param right the volume of the right channel (0 - 255)
+*
+*   @note This function only works on stereo audio.
+*   @note It is possible the call fail if you do it on a mono audio.
+*   @note To unregister tyhe effect, use this function with 255 as left and right value
+*           or use LX_MixerremovePanning().
+*
+*/
+void LX_Mixer::setPanning(int channel,Uint8 left,Uint8 right)
+{
+    if(Mix_SetPanning(channel,left,right) == 0)
+    {
+        std::cerr << "Error occured in LX_Mixer::setPanning / Mix_setPanning : "
+                        << Mix_GetError() << std::endl;
+    }
+}
+
+
+/**
+*   @fn void LX_Mixer::removePanning(int channel)
+*
+*   Remove the panning on a channel
+*
+*   @param channel the channel you want to remove the panning on
+*
+*/
+void LX_Mixer::removePanning(int channel)
+{
+    setPanning(channel,LX_MIXER_EFFECT_LOUD,LX_MIXER_EFFECT_LOUD);
+}
+
+
+
 /**
 *   @fn void LX_Mixer::setDistance(Uint8 distance)
 *
@@ -189,7 +231,7 @@ void LX_Mixer::setDistance(Uint8 distance)
 */
 void LX_Mixer::setDistance(int channel,Uint8 distance)
 {
-    if(Mix_SetDistance(channel,distance))
+    if(Mix_SetDistance(channel,distance) == 0)
     {
         std::cerr << "distance setting failed : " << Mix_GetError() << std::endl;
     }

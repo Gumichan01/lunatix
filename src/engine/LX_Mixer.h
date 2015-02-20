@@ -35,10 +35,11 @@
 #define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
 #define LX_MIXER_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
 
-#define LX_MIXER_LOOP -1                    /**< Activate the loop*/
+#define LX_MIXER_LOOP -1                    /**< Activate the loop */
 #define LX_MIXER_NOLOOP 0                   /**< No loop is activated */
 
-
+#define LX_MIXER_EFFECT_LOUD 255            /**< Loud (for effect functions) */
+#define LX_MIXER_EFFECT_SILENCE 0           /**< Silence (for effect functions) */
 
 /// @todo [LX_Mixer] Support of 2D sound effects (panning, fade in/out, 3D audio, stereo reverse)
 
@@ -66,10 +67,13 @@ class LX_Mixer{
 
     int channelVolume(int channel,int volume);
 
+    // Effects
     void fadeInMusic(LX_Music *music,int ms);
     void fadeOutMusic(int ms);
 
-    // Effects
+    void setPanning(int channel,Uint8 left,Uint8 right);
+    void removePanning(int channel);
+
     void setDistance(Uint8 distance);
     void setDistance(int channel,Uint8 distance);
 
