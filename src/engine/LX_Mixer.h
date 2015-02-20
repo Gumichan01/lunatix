@@ -41,7 +41,6 @@
 
 
 /// @todo [LX_Mixer] Support of 2D sound effects (panning, fade in/out, 3D audio, stereo reverse)
-/// @todo [LX_Mixer] Create a LX_Chunk class. It will manage the Mix_Chunk structures
 
 class LX_Music;
 class LX_Chunk;
@@ -55,7 +54,6 @@ class LX_Chunk;
 **/
 class LX_Mixer{
 
-    LX_Mixer(){}
 
     public :
 
@@ -68,6 +66,9 @@ class LX_Mixer{
 
     int channelVolume(int channel,int volume);
 
+    void fadeInMusic(LX_Music *music,int ms);
+    void fadeOutMusic(int ms);
+
     // Effects
     void setDistance(Uint8 distance);
     void setDistance(int channel,Uint8 distance);
@@ -75,7 +76,6 @@ class LX_Mixer{
     ~LX_Mixer(){}
 
 };
-
 
 
 

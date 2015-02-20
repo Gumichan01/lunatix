@@ -1,14 +1,14 @@
 
 
 /*
-*
 *	Copyright (C) 2014-2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
+*	The LunatiX-engine is a SDL-based game engine.
+*	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*	Luxon Jean-Pierre (Gumichan01)
+*   Luxon Jean-Pierre (Gumichan01)
 *	luxon.jean.pierre@gmail.com
-*
 */
 
 /**
@@ -117,6 +117,50 @@ int LX_Mixer::channelVolume(int channel,int volume)
 }
 
 
+/**
+*   @fn void LX_Mixer::fadeInMusic(LX_Music *music,int ms)
+*
+*   Fade in the loaded Music over some milliseconds of time
+*
+*   @param music The LX
+*   @param ms Milliseconds for the fade-in effect to complete
+*
+*   @note fadeInMusic starts playing the music with the fade-in effec.
+*           So if you use this fuction, you do not need
+*               to call the LX_Music::play() yourself
+*   @note Any previous music will be halted, or if it is fading out
+*           it will wait (blocking) for the fade to complete
+*
+*/
+void LX_Mixer::fadeInMusic(LX_Music *music,int ms)
+{
+    if(Mix_FadeInMusic(music->getMusic(),LX_MIXER_NOLOOP,ms) == -1)
+    {
+        std::cerr << "Error occured in LX_Mixer::fadeInMusic / Mix_FadeInMusic : "
+                        << Mix_GetError() << std::endl;
+    }
+}
+
+
+/**
+*   @fn void LX_Mixer::fadeOutMusic(int ms)
+*
+*   Fade out the loaded Music over some milliseconds of time
+*
+*   @param ms Milliseconds for the fade-out effect to complete
+*
+*   @note This functions works only when music is playing and
+*           no fading is already set to fade out
+*
+*/
+void LX_Mixer::fadeOutMusic(int ms)
+{
+    if(Mix_FadeOutMusic(ms) == 0)
+    {
+        std::cerr << "Error occured in LX_Mixer::fadeOutMusic / Mix_FadeOutMusic : "
+                        << Mix_GetError() << std::endl;
+    }
+}
 
 /**
 *   @fn void LX_Mixer::setDistance(Uint8 distance)

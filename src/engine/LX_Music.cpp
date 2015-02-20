@@ -198,8 +198,18 @@ int LX_Music::volume(int newVolume)
 
 
 
-
-
+/**
+*   @fn Mix_Music * LX_Music::getMusic()
+*
+*   Return the instance to the SDL_Music structure
+*
+*   @return the Mix_Music
+*
+*/
+Mix_Music * LX_Music::getMusic()
+{
+    return music;
+}
 
 
 
