@@ -24,10 +24,6 @@
 *
 */
 
-#define LX_AUDIO_STEREO_SOUND 2             /**< The stereo variable the mix module */
-#define LX_AUDIO_MONO_SOUND 1               /**< The mono variable for the mix module */
-#define LX_AUDIO_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
-
 
 bool LX_Init(void);
 void LX_Quit(void);

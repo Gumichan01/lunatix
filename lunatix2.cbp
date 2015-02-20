@@ -54,10 +54,14 @@
 		<Unit filename="config\sdl_conf.cfg" />
 		<Unit filename="config\window.cfg" />
 		<Unit filename="script\LX_config.lua" />
+		<Unit filename="src\engine\LX_Chunk.cpp" />
+		<Unit filename="src\engine\LX_Chunk.h" />
 		<Unit filename="src\engine\LX_Hitbox.h" />
+		<Unit filename="src\engine\LX_Mixer.cpp" />
+		<Unit filename="src\engine\LX_Mixer.h" />
+		<Unit filename="src\engine\LX_Music.cpp" />
+		<Unit filename="src\engine\LX_Music.h" />
 		<Unit filename="src\engine\LX_Point.h" />
-		<Unit filename="src\engine\LX_audio.cpp" />
-		<Unit filename="src\engine\LX_audio.h" />
 		<Unit filename="src\engine\LX_config.cpp" />
 		<Unit filename="src\engine\LX_config.h" />
 		<Unit filename="src\engine\LX_graphics.cpp" />
@@ -71,6 +75,7 @@
 		<Unit filename="src\engine\LX_window.cpp" />
 		<Unit filename="src\engine\LX_window.h" />
 		<Unit filename="src\engine\LX_windowManager.h" />
+		<Unit filename="src\engine\Lunatix_engine.h" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
 			<code_completion />

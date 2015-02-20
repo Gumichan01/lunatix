@@ -28,6 +28,7 @@
 
 #include "LX_config.h"
 #include "LX_lib.h"
+#include "LX_Mixer.h"
 
 /**
 *   @fn bool LX_Init(void)
@@ -115,7 +116,7 @@ bool LX_Init(void)
             return false;
         }
 
-        err = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,LX_AUDIO_STEREO_SOUND,LX_AUDIO_DEFAULT_CHUNKSIZE);
+        err = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE);
 
         if( err < 0)
         {

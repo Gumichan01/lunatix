@@ -24,31 +24,19 @@
 #include <iostream>
 #include <cstdio>
 
-//#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-/*#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>*/
-
-#include "engine/LX_lib.h"
-#include "engine/LX_config.h"
-#include "engine/LX_graphics.h"
-#include "engine/LX_ttf.h"
-#include "engine/LX_audio.h"
-#include "engine/LX_physics.h"
-
-
+#include "engine/Lunatix_engine.h"
 
 int main ( int argc, char** argv )
 {
 
     SDL_Rect pos = {400,200,150,120};
-    SDL_Rect pos1 = {100,200,256,32};
+    SDL_Rect pos1 = {100,200,178,32};
     SDL_Rect pos2 = {100,250,768,32};
 
     SDL_Color color = {255,255,255};
 
-    bool err;
-
+    bool err, game = true;
+    int wt, ht;
 
     SDL_Surface *sf = NULL;
     SDL_Texture *st = NULL;
@@ -57,9 +45,12 @@ int main ( int argc, char** argv )
     std::string mus = "data/Prototype Princess v1_01.wav";
 
 
-    LX_graphics *graphics;
-    LX_ttf *ttf;
-    LX_Audio *audio;
+    LX_graphics *graphics = NULL;
+    LX_ttf *ttf = NULL;
+    LX_Music *audio = NULL;
+
+    SDL_Event event;
+
 
     err = LX_Init();
 
@@ -68,8 +59,6 @@ int main ( int argc, char** argv )
         std::cout << "ERREUR" << std::endl;
         return EXIT_FAILURE;
     }
-
-    //std::cout << "LX_Init returns true value" << std::endl;
 
     // initialization
 
@@ -84,7 +73,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
-    audio = new LX_Audio();
+    audio = new LX_Music(mus);
 
     // Load the texture from the data file
     st = graphics->loadTextureFromFile(name.c_str());
@@ -94,10 +83,9 @@ int main ( int argc, char** argv )
         std::cerr << "LX_graphics::load_surface : " << SDL_GetError() <<std::endl;
     }
 
-    audio->load_music(mus);
+    ttf->sizeOfText("LunatiX_engine",&wt,&ht);
+    std::cout << "[TEST TTF]Size of the text \"LunatiX_engine\" - w : " << wt << "; h : " << ht << std::endl;
 
-    bool game = true;
-    SDL_Event event;
 
     SDL_Surface *tmp1 = ttf->draw_BlendedText("LunatiX_engine");
     SDL_Surface *tmp2 = ttf->draw_BlendedText("RETURN : play music, SPACE : pause/resume, BACKSPACE : stop");
@@ -105,8 +93,9 @@ int main ( int argc, char** argv )
     SDL_Texture *t1 = graphics->loadTextureFromSurface(tmp1);
     SDL_Texture *t2 = graphics->loadTextureFromSurface(tmp2);
 
-    audio->musicVolume(MIX_MAX_VOLUME/2);
-    std::cout << "Volume : " << audio->musicVolume(-1) <<std::endl;
+    audio->volume(MIX_MAX_VOLUME/2);
+    std::cout << "Volume : " << audio->volume(-1) <<std::endl;
+
 
     while(game)
     {
@@ -117,17 +106,25 @@ int main ( int argc, char** argv )
 
                 case SDL_KEYDOWN :  switch(event.key.keysym.sym)
                                     {
-                                        case SDLK_ESCAPE:   game = false;
+                                        case SDLK_ESCAPE :   game = false;
                                                             break;
 
-                                        case SDLK_SPACE:    audio->pause_music();
+                                        case SDLK_SPACE :    audio->pause();
                                                             break;
 
-                                        case SDLK_RETURN:   audio->play_music();
+                                        case SDLK_RETURN :   audio->play();
                                                             break;
 
-                                        case SDLK_BACKSPACE:    audio->stop_music();
+                                        case SDLK_BACKSPACE :    audio->stop();
                                                                 break;
+                                        case SDLK_d :   graphics->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
+                                                        break;
+
+                                        case SDLK_f :   graphics->setFullscreen(LX_GRAPHICS_FULLSCREEN);
+                                                        break;
+
+                                        case SDLK_g :   graphics->setFullscreen(LX_GRAPHICS_NO_FULLSCREEN);
+                                                        break;
 
                                         default :   break;
                                     }
@@ -204,7 +201,7 @@ int main ( int argc, char** argv )
     int h = configuration->getWinHeight();
     int f = configuration->getFullscreenFlag();
 
-    std::cout << "\nLunatiX engine configuration : " << video << std::endl;
+    std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
     std::cout << "video : " << video << std::endl;
     std::cout << "true type font : " << ttfont << std::endl;
     std::cout << "audio : " << sound << std::endl;
@@ -243,7 +240,7 @@ int main ( int argc, char** argv )
 
     LX_graphics *graphics = NULL;
     LX_ttf *ttf = NULL;
-    LX_Audio *audio = NULL;
+    LX_Music *audio = NULL;
 
     bool err;
 
@@ -266,7 +263,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
-    audio = new LX_Audio();
+    audio = new LX_Music();
 
 
     s = graphics->loadSurface("data/cb.bmp");
