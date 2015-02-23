@@ -31,10 +31,11 @@
 
 #include "LX_config.h"
 
-#define DEFAULT_FONT_SIZE 24    /**< The default value of the font size, used when the size defined in the configuration file is 0*/
-#define WHITE_COLOR 255
-#define BLACK_COLOR 0
+#define LX_DEFAULT_FONT_SIZE 24    /**< The default value of the font size, used when the size defined in the configuration file is 0*/
+#define LX_WHITE_COLOR 255
+#define LX_BLACK_COLOR 0
 
+typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 
 /**
 *   @class LX_TTF_exception
@@ -56,7 +57,7 @@ class LX_TTF_exception : public std::exception
     ~LX_TTF_exception() throw();
 };
 
-
+/// @todo [LX_ttf]Load a texture from a files
 
 /**
 *   @class LX_ttf
@@ -69,18 +70,15 @@ class LX_TTF_exception : public std::exception
 */
 class LX_ttf{
 
-    std::string font_str;       /**< The font file*/
-    unsigned int font_size;     /**< The font size*/
-    SDL_Color font_color;       /**< The font color*/
+    std::string font_str;       /**< The font file */
+    unsigned int font_size;     /**< The font size */
+    SDL_Color font_color;       /**< The font color */
 
-    TTF_Font *font;             /**< The font structure created*/
+    TTF_Font *font;             /**< The font structure created */
 
-    static const Uint8 LX_TTF_SOLID = 0;
-    static const Uint8 LX_TTF_SHADED = 1;
-    static const Uint8 LX_TTF_BLENDED = 2;
 
     void init(std::string font_file, SDL_Color *color, int size);
-    SDL_Surface * drawText(Uint8 type,std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
+    SDL_Surface * drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
 
     public:
 

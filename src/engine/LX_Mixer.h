@@ -44,7 +44,6 @@
 #define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle bteween the source and the front */
 
 
-/// @todo [LX_Mixer] Support of 2D sound effects (panning, fade in/out, 3D audio, stereo reverse)
 
 class LX_Music;
 class LX_Chunk;

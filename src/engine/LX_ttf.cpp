@@ -154,7 +154,7 @@ void LX_ttf::init(std::string font_file, SDL_Color *color, int size)
 
     if(size <= 0)
     {
-         size = DEFAULT_FONT_SIZE;
+         size = LX_DEFAULT_FONT_SIZE;
     }
 
     font = TTF_OpenFont(font_file.c_str(), size);
@@ -173,9 +173,9 @@ void LX_ttf::init(std::string font_file, SDL_Color *color, int size)
     }
     else
     {
-        font_color.r = WHITE_COLOR;
-        font_color.g = WHITE_COLOR;
-        font_color.b = WHITE_COLOR;
+        font_color.r = LX_WHITE_COLOR;
+        font_color.g = LX_WHITE_COLOR;
+        font_color.b = LX_WHITE_COLOR;
     }
 }
 
@@ -364,7 +364,7 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
 
 
 /**
-*   @fn SDL_Surface * LX_ttf::drawText(Uint8 type,std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+*   @fn SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 *
 *   Create a text according to the type, the color bakground, if necessary, and its size
 *
@@ -378,13 +378,16 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
 *   @warning If the ttf font is NULL, then a segmentation fault will occur
 *
 */
-SDL_Surface * LX_ttf::drawText(Uint8 type,std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 {
     TTF_Font *ttf = NULL;
     SDL_Surface *loaded = NULL;
 
 
-    ttf = TTF_OpenFont(font_str.c_str(), size);
+    if(size != LX_DEFAULT_FONT_SIZE)
+        ttf = TTF_OpenFont(font_str.c_str(), size);
+    else
+        ttf = font;
 
     if(ttf == NULL)
     {
@@ -414,7 +417,10 @@ SDL_Surface * LX_ttf::drawText(Uint8 type,std::string text, Uint8 r, Uint8 g, Ui
         std::cerr << "Error occurred in LX_ttf::drawText : " << TTF_GetError() << std::endl;
     }
 
-    TTF_CloseFont(ttf);
+    if(size != LX_DEFAULT_FONT_SIZE)
+        TTF_CloseFont(ttf);
+    else
+        ttf = NULL;
 
     return loaded;
 }
