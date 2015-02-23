@@ -109,6 +109,7 @@ class LX_graphics{
 
 
     SDL_Surface * getMainSurface();
+    SDL_Renderer * getMainRenderer();
 
     ~LX_graphics();
 

@@ -154,7 +154,7 @@ void LX_ttf::init(std::string font_file, SDL_Color *color, int size)
 
     if(size <= 0)
     {
-         size = LX_DEFAULT_FONT_SIZE;
+         size = LX_TTF_DEFAULT_FONT_SIZE;
     }
 
     font = TTF_OpenFont(font_file.c_str(), size);
@@ -239,7 +239,7 @@ int LX_ttf::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
 *
 *   @param text the text you want to display
 *
-*   @return the new SDL_surface , NULL otherwise
+*   @return a SDL_surface on success , NULL otherwise
 *
 */
 SDL_Surface * LX_ttf::draw_SolidText(std::string text)
@@ -257,7 +257,7 @@ SDL_Surface * LX_ttf::draw_SolidText(std::string text)
 *   @param text the text you want to display
 *   @param size the size defined by the user
 *
-*   @return the new SDL_surface, NULL otherwise
+*   @return a SDL_surface on success, NULL otherwise
 *
 */
 SDL_Surface * LX_ttf::draw_SolidText(std::string text, unsigned int size)
@@ -276,7 +276,7 @@ SDL_Surface * LX_ttf::draw_SolidText(std::string text, unsigned int size)
 *   @param text the text you want to display
 *   @param bg the background color
 *
-*   @return the new SDL_surface , NULL otherwise on errors
+*   @return a SDL_surface on success , NULL otherwise on errors
 *
 */
 SDL_Surface * LX_ttf::draw_ShadedText(std::string text, SDL_Color bg)
@@ -296,7 +296,7 @@ SDL_Surface * LX_ttf::draw_ShadedText(std::string text, SDL_Color bg)
 *   @param g the green channel
 *   @param b the blue channel
 *
-*   @return the new SDL_surface , NULL otherwise on errors
+*   @return a SDL_surface on success , NULL otherwise on errors
 *
 */
 SDL_Surface * LX_ttf::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
@@ -317,7 +317,7 @@ SDL_Surface * LX_ttf::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 
 *   @param b the blue color of the background
 *   @param size the size defined by the user
 *
-*   @return the new SDL_surface, NULL otherwise
+*   @return a SDL_surface on success, NULL otherwise
 *
 */
 SDL_Surface * LX_ttf::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
@@ -335,7 +335,7 @@ SDL_Surface * LX_ttf::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 
 *
 *   @param text the text you want to display
 *
-*   @return the new SDL_surface , NULL otherwise
+*   @return a SDL_surface on success , NULL otherwise
 *
 */
 SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
@@ -354,7 +354,7 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text)
 *   @param text the text you want to display
 *   @param size the size defined by the user
 *
-*   @return the new SDL_surface, NULL otherwise
+*   @return a SDL_surface on success, NULL otherwise
 *
 */
 SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
@@ -366,7 +366,7 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
 /**
 *   @fn SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 *
-*   Create a text according to the type, the color bakground, if necessary, and its size
+*   Create a text surface according to the type, the color bakground, if necessary, and its size
 *
 *   @param type the type of the text(Solid, Shaded, or Blended)
 *   @param text the string you want to draw
@@ -375,7 +375,7 @@ SDL_Surface * LX_ttf::draw_BlendedText(std::string text, unsigned int size)
 *   @param b the blue color of the background
 *   @param size the size of the text on the window
 *
-*   @warning If the ttf font is NULL, then a segmentation fault will occur
+*   @return a SDL_surface on success, NULL otherwise
 *
 */
 SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
@@ -384,7 +384,7 @@ SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, 
     SDL_Surface *loaded = NULL;
 
 
-    if(size != LX_DEFAULT_FONT_SIZE)
+    if(size != font_size)
         ttf = TTF_OpenFont(font_str.c_str(), size);
     else
         ttf = font;
@@ -417,7 +417,7 @@ SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, 
         std::cerr << "Error occurred in LX_ttf::drawText : " << TTF_GetError() << std::endl;
     }
 
-    if(size != LX_DEFAULT_FONT_SIZE)
+    if(size != font_size)
         TTF_CloseFont(ttf);
     else
         ttf = NULL;
@@ -425,6 +425,42 @@ SDL_Surface * LX_ttf::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, 
     return loaded;
 }
 
+
+/**
+*   @fn SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size)
+*
+*   Create a Texture from a text according to the type and the size
+*
+*   @param type the type of the text(Solid, Shaded, or Blended)
+*   @param text the string you want to draw
+*   @param size the size of the text on the window
+*
+*   @return a SDL_Texture on success, NULL otherwise
+*
+*/
+SDL_Texture * LX_ttf::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size)
+{
+    SDL_Surface *surface =  NULL;
+    SDL_Texture *texture = NULL;
+
+    surface = drawText(type,text.c_str(),0,0,0,size);   // Get the surface
+
+    if(surface == NULL)
+        return texture;
+
+    // Get the texture
+    texture = SDL_CreateTextureFromSurface(LX_graphics::getInstance()->getMainRenderer(),surface);
+
+    if(texture == NULL)
+    {
+        std::cerr << "Error occurred in LX_ttf::drawTextToTexture / SDL_CreateTextureFromSurface "
+                        << SDL_GetError() << std::endl;
+    }
+
+    SDL_FreeSurface(surface);   // Clean the surface
+
+    return texture;
+}
 
 
 /**

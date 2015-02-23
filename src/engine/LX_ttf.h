@@ -31,11 +31,11 @@
 
 #include "LX_config.h"
 
-#define LX_DEFAULT_FONT_SIZE 24    /**< The default value of the font size, used when the size defined in the configuration file is 0*/
+#define LX_TTF_DEFAULT_FONT_SIZE 24    /**< The default value of the font size, used when the size defined in the configuration file is 0*/
 #define LX_WHITE_COLOR 255
 #define LX_BLACK_COLOR 0
 
-typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
+typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED,LX_TTF_FAIL} LX_TTF_TypeText;
 
 /**
 *   @class LX_TTF_exception
@@ -57,7 +57,7 @@ class LX_TTF_exception : public std::exception
     ~LX_TTF_exception() throw();
 };
 
-/// @todo [LX_ttf]Load a texture from a files
+
 
 /**
 *   @class LX_ttf
@@ -98,6 +98,8 @@ class LX_ttf{
 
     SDL_Surface * draw_BlendedText(std::string text);
     SDL_Surface * draw_BlendedText(std::string text, unsigned int size);
+
+    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size);
 
     void setTTF_Font(std::string ttf_filename);
     void setColor(SDL_Color *color);

@@ -27,7 +27,6 @@
 #include <SDL2/SDL_image.h>
 
 #include "LX_graphics.h"
-//#include "LX_windowManager.h"
 
 
 static LX_graphics *gInstance = NULL;
@@ -531,6 +530,18 @@ SDL_Surface * LX_graphics::getMainSurface()
 }
 
 
+/**
+*   @fn SDL_Renderer * LX_graphics::getMainRenderer()
+*
+*   Returns the renderer of the main window
+*
+*   @return the main renderer
+*
+*/
+SDL_Renderer * LX_graphics::getMainRenderer()
+{
+    return mainWindow->getRenderer();
+}
 
 
 
