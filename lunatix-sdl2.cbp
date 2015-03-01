@@ -75,6 +75,7 @@
 		<Unit filename="src\engine\LX_ttf.h" />
 		<Unit filename="src\engine\LX_window.cpp" />
 		<Unit filename="src\engine\LX_window.h" />
+		<Unit filename="src\engine\LX_windowManager.h" />
 		<Unit filename="src\engine\Lunatix_engine.h" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
