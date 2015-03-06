@@ -17,8 +17,8 @@
 
 /**
 *
-*	@file LX_physics.h
-*	@brief The LX_physics Library, it will be linked with the SDL library
+*	@file LX_Physics.h
+*	@brief The LX_Physics Library, it will be linked with the SDL library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
 *	@date July 14th, 2014
@@ -34,17 +34,17 @@
 
 /**
 *
-*   @class LX_physics
+*   @class LX_Physics
 *   @brief The LunatiX_engine physic engine
 *
-*   This class describes the LX_physics, a LunatiX_engine physics module. It mainly calculates collisions so far.
+*   This class describes the LX_Physics, a LunatiX_engine physics module. It mainly calculates collisions so far.
 *
 */
-class LX_physics{
+class LX_Physics{
 
     public :
 
-        //LX_physics(){}
+        //LX_Physics(){}
 
         static int euclide_square_distance( int x1, int y1, int x2, int y2);
         static int euclide_distance( int x1, int y1, int x2, int y2);
@@ -58,7 +58,7 @@ class LX_physics{
         static bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
         static bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
 
-        //~LX_physics(){}
+        //~LX_Physics(){}
 };
 
 #endif // PHYSICS_H_INCLUDED

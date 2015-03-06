@@ -29,14 +29,14 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "LX_lib.h"
-#include "LX_config.h"
-#include "LX_graphics.h"
-#include "LX_ttf.h"
+#include "LX_Library.h"
+#include "LX_Config.h"
+#include "LX_Graphics.h"
+#include "LX_TrueTypeFont.h"
 #include "LX_Mixer.h"
 #include "LX_Sound.h"
 #include "LX_Chunk.h"
 #include "LX_Music.h"
-#include "LX_physics.h"
+#include "LX_Physics.h"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED

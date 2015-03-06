@@ -12,8 +12,8 @@
 */
 
 /**
-*	@file LX_physics.cpp
-*	@brief The LX_physics file. It contains all definitions of member functions
+*	@file LX_Physics.cpp
+*	@brief The LX_Physics file. It contains all definitions of member functions
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.1
 *	@date July 14th, 2014
@@ -22,12 +22,12 @@
 
 #include <cmath>
 
-#include "LX_physics.h"
+#include "LX_Physics.h"
 
 
 /**
 *
-*	@fn int LX_physics::euclide_square_distance( int x1, int y1, int x2, int y2)
+*	@fn int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 *
 *	This function calculates the Euclide square distance
 *
@@ -39,7 +39,7 @@
 *	@return an integer value
 *
 */
-int LX_physics::euclide_square_distance( int x1, int y1, int x2, int y2)
+int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 {
     return( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
@@ -47,7 +47,7 @@ int LX_physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 
 /**
 *
-*	@fn int LX_physics::euclide_distance( int x1, int y1, int x2, int y2)
+*	@fn int LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 *
 *	This function calculates the Euclide distance
 *
@@ -59,7 +59,7 @@ int LX_physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 *	@return an integer value
 *
 */
-int LX_physics::euclide_distance( int x1, int y1, int x2, int y2)
+int LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 {
     return sqrt(euclide_square_distance(x1,y1,x2,y2));
 }
@@ -67,7 +67,7 @@ int LX_physics::euclide_distance( int x1, int y1, int x2, int y2)
 
 /**
 *
-*	@fn int LX_physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+*	@fn int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 *
 *	This function calculates the Euclide square distance
 *
@@ -77,7 +77,7 @@ int LX_physics::euclide_distance( int x1, int y1, int x2, int y2)
 *	@return an integer value
 *
 */
-int LX_physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 {
     return euclide_square_distance(p1->x,p1->y,p2->x,p2->y);
 }
@@ -85,7 +85,7 @@ int LX_physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 
 /**
 *
-*	@fn int LX_physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+*	@fn int LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 *
 *	This function calculates the Euclide square distance
 *
@@ -95,7 +95,7 @@ int LX_physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 *	@return an integer value
 *
 */
-int LX_physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+int LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 {
     return sqrt(euclide_square_distance(p1,p2));
 }
@@ -105,7 +105,7 @@ int LX_physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 
 /**
 *
-*	@fn bool LX_physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
+*	@fn bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 *
 *	Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
@@ -116,7 +116,7 @@ int LX_physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
+bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 {
 
     if( rect == NULL || x_pos <= rect->x || y_pos >= (rect->y + rect->h) ||
@@ -131,7 +131,7 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 
 /**
 *
-*	@fn bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
+*	@fn bool LX_Physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 *
 *	Check the collision between a point and a circle
 *
@@ -142,7 +142,7 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
+bool LX_Physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 {
 
     if( circle == NULL ||
@@ -158,7 +158,7 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 
 /**
 *
-*	@fn bool LX_physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
+*	@fn bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 *
 *	Check the collision between two Axis Aligned Bouding Box (AABB)
 *
@@ -168,7 +168,7 @@ bool LX_physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
+bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 {
 
     if( rect1 == NULL || rect2 == NULL ||
@@ -183,7 +183,7 @@ bool LX_physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 
 /**
 *
-*	@fn bool LX_physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
+*	@fn bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 *
 *	Check the collision between two circles
 *
@@ -193,7 +193,7 @@ bool LX_physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
+bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 {
     if (euclide_square_distance( circle1->xCenter, circle1->yCenter, circle2->xCenter, circle2->yCenter) > circle1->square_radius )
         return false;
@@ -204,7 +204,7 @@ bool LX_physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 
 /**
 *
-*	@fn bool LX_physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
+*	@fn bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
 *
 *	Check the collision between a circle and the [AB] segment
 *
@@ -215,7 +215,7 @@ bool LX_physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
+bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
 {
     LX_Point O= {circle->xCenter, circle->yCenter};
 
@@ -255,7 +255,7 @@ bool LX_physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 
 /**
 *
-*	@fn bool LX_physics::collision(const LX_Circle *circle, const LX_AABB *rect)
+*	@fn bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 *
 *	Check the collision between a circle and a AABB
 *
@@ -265,7 +265,7 @@ bool LX_physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_physics::collision(const LX_Circle *circle, const LX_AABB *rect)
+bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 {
     //check if the circle is completly into the AABB
     if( collision(circle->xCenter, circle->yCenter,rect))
