@@ -1,0 +1,8 @@
+<map id="LX_Init" name="LX_Init">
+<area shape="rect" id="node2" href="$de/d76/class_l_x___configuration.html#abd5c52de995711f1c004510ed88a9dd2" title="LX_Configuration::getInstance" alt="" coords="125,5,319,32"/>
+<area shape="rect" id="node3" href="$de/d76/class_l_x___configuration.html#a9f61c7ed7e589ee17b6d0032c8a3f1f6" title="LX_Configuration::getVideoFlag" alt="" coords="121,56,323,83"/>
+<area shape="rect" id="node4" href="$de/d76/class_l_x___configuration.html#af778d1c16e3fb1a868b7828ef78abee5" title="LX_Configuration::getAudioFlag" alt="" coords="121,107,323,133"/>
+<area shape="rect" id="node5" href="$de/d76/class_l_x___configuration.html#a51e9662c7cd18938c98799a09a021e19" title="LX_Configuration::getJoystickFlag" alt="" coords="113,157,331,184"/>
+<area shape="rect" id="node6" href="$de/d76/class_l_x___configuration.html#a1f74b1d33f0590bb6a450fa179c54d8b" title="LX_Configuration::getTTF_Flag" alt="" coords="123,208,321,235"/>
+<area shape="rect" id="node7" href="$de/d76/class_l_x___configuration.html#adbc92d984b2d2c62275a50cd21f75748" title="LX_Configuration::destroy" alt="" coords="137,259,307,285"/>
+</map>
