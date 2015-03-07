@@ -18,7 +18,7 @@
 *	@file LX_Music.h
 *	@brief The LX_Music library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date February 11th, 2014
 *
 */
@@ -36,7 +36,7 @@ class LX_Sound;
 *   @class LX_Music
 *   @brief The audio class
 *
-*   This clas is a wrapper of the Mix_Music type
+*   This class is a wrapper of the Mix_Music type
 *
 **/
 class LX_Music : public LX_Sound{

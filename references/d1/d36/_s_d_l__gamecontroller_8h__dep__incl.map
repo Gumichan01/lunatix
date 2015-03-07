@@ -1,0 +1,18 @@
+<map id="include/SDL2/SDL_gamecontroller.h" name="include/SDL2/SDL_gamecontroller.h">
+<area shape="rect" id="node2" href="$d9/d42/_s_d_l__events_8h.html" title="include/SDL2/SDL_events.h" alt="" coords="749,80,932,107"/>
+<area shape="rect" id="node3" href="$de/ddc/_s_d_l_8h.html" title="include/SDL2/SDL.h" alt="" coords="706,155,844,181"/>
+<area shape="rect" id="node4" href="$d5/d9d/_s_d_l__image_8h.html" title="include/SDL2/SDL_image.h" alt="" coords="139,237,320,263"/>
+<area shape="rect" id="node5" href="$d0/d5a/_lunatix__engine_8h.html" title="The Lunatix engine header. " alt="" coords="162,408,290,449"/>
+<area shape="rect" id="node8" href="$df/d43/_l_x___library_8cpp.html" title="The LX_Library file. " alt="" coords="244,326,415,353"/>
+<area shape="rect" id="node9" href="$dd/d3b/_s_d_l__test_8h.html" title="include/SDL2/SDL_test.h" alt="" coords="898,415,1066,442"/>
+<area shape="rect" id="node10" href="$dc/dc7/_s_d_l__test__common_8h.html" title="include/SDL2/SDL_test\l_common.h" alt="" coords="1044,319,1202,360"/>
+<area shape="rect" id="node11" href="$d4/d55/_s_d_l__test__images_8h.html" title="include/SDL2/SDL_test\l_images.h" alt="" coords="812,229,970,271"/>
+<area shape="rect" id="node12" href="$d8/d59/_s_d_l__test__compare_8h.html" title="include/SDL2/SDL_test\l_compare.h" alt="" coords="762,319,919,360"/>
+<area shape="rect" id="node13" href="$dc/d92/_s_d_l__ttf_8h.html" title="include/SDL2/SDL_ttf.h" alt="" coords="503,237,660,263"/>
+<area shape="rect" id="node15" href="$d3/de9/_l_x___true_type_font_8cpp.html" title="The LunatiX_engine True type Font (TTF) modules. " alt="" coords="551,415,762,442"/>
+<area shape="rect" id="node16" href="$dd/d6b/_l_x___physics_8cpp.html" title="The LX_Physics file. It contains all definitions of member functions. " alt="" coords="1095,237,1274,263"/>
+<area shape="rect" id="node17" href="$d3/db2/_l_x___window_8cpp.html" title="The LX_Window class. " alt="" coords="1298,237,1476,263"/>
+<area shape="rect" id="node7" href="$d1/d87/_l_x___graphics_8cpp.html" title="The LunatiX_engine graphic module. " alt="" coords="36,326,220,353"/>
+<area shape="rect" id="node6" href="$df/d0a/main_8cpp.html" title="the main function which use the new LunatiX engine " alt="" coords="177,497,274,524"/>
+<area shape="rect" id="node14" href="$d0/d8b/_l_x___true_type_font_8h.html" title="The LX_TrueTypeFont library. " alt="" coords="490,326,687,353"/>
+</map>

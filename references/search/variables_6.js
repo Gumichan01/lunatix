@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['g',['g',['../d0/d93/struct_s_d_l___message_box_color.html#a5820adab0b32aa3eade101ea36ed6b4a',1,'SDL_MessageBoxColor::g()'],['../d5/dcc/struct_s_d_l___color.html#ae29d881bf740cfa7078b36e07f85d298',1,'SDL_Color::g()']]],
+  ['gestureid',['gestureId',['../d7/dec/struct_s_d_l___dollar_gesture_event.html#a68968438eae9e58208b14e8c954dec31',1,'SDL_DollarGestureEvent']]],
+  ['gl_5faccelerated',['gl_accelerated',['../d8/d8d/struct_s_d_l_test___common_state.html#a2dca523be403a9ff6fe2dd7b1808baba',1,'SDLTest_CommonState']]],
+  ['gl_5faccum_5falpha_5fsize',['gl_accum_alpha_size',['../d8/d8d/struct_s_d_l_test___common_state.html#ab6dddf75a40c53343199fe724a2af32b',1,'SDLTest_CommonState']]],
+  ['gl_5faccum_5fblue_5fsize',['gl_accum_blue_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a3d23ac90e722af5098e7869a7302c119',1,'SDLTest_CommonState']]],
+  ['gl_5faccum_5fgreen_5fsize',['gl_accum_green_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a4c20729a710f51ed67bdd1910da1a16b',1,'SDLTest_CommonState']]],
+  ['gl_5faccum_5fred_5fsize',['gl_accum_red_size',['../d8/d8d/struct_s_d_l_test___common_state.html#ae9d55cebbc3f4e486f4f77a35de4e4dd',1,'SDLTest_CommonState']]],
+  ['gl_5falpha_5fsize',['gl_alpha_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a2b6e86fd695d84f12db148dcf3b2fcb5',1,'SDLTest_CommonState']]],
+  ['gl_5fblue_5fsize',['gl_blue_size',['../d8/d8d/struct_s_d_l_test___common_state.html#aff43a763af98b8eb651c41ec931e5d93',1,'SDLTest_CommonState']]],
+  ['gl_5fbuffer_5fsize',['gl_buffer_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a7e7ea32a3ba51db836b3aa7f31163921',1,'SDLTest_CommonState']]],
+  ['gl_5fdebug',['gl_debug',['../d8/d8d/struct_s_d_l_test___common_state.html#a2710657ef2a0c8aabebc5fceb01c71b5',1,'SDLTest_CommonState']]],
+  ['gl_5fdepth_5fsize',['gl_depth_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a9a16800e0ec09d4b9b55e9e6bb973abc',1,'SDLTest_CommonState']]],
+  ['gl_5fdouble_5fbuffer',['gl_double_buffer',['../d8/d8d/struct_s_d_l_test___common_state.html#a74c88cb0dcd1e968db763152e0b1e068',1,'SDLTest_CommonState']]],
+  ['gl_5fgreen_5fsize',['gl_green_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a716c97e5b80ee96018b014afec2d19ff',1,'SDLTest_CommonState']]],
+  ['gl_5fmajor_5fversion',['gl_major_version',['../d8/d8d/struct_s_d_l_test___common_state.html#a766e471516e0a39d0bb8c14ea2042bdf',1,'SDLTest_CommonState']]],
+  ['gl_5fminor_5fversion',['gl_minor_version',['../d8/d8d/struct_s_d_l_test___common_state.html#a5a50c65004454c791da21a3473388608',1,'SDLTest_CommonState']]],
+  ['gl_5fmultisamplebuffers',['gl_multisamplebuffers',['../d8/d8d/struct_s_d_l_test___common_state.html#a083f7381809b23f0ac3a9a8de562f70c',1,'SDLTest_CommonState']]],
+  ['gl_5fmultisamplesamples',['gl_multisamplesamples',['../d8/d8d/struct_s_d_l_test___common_state.html#a96718b47862d4962e4a7ae9a62ce4a30',1,'SDLTest_CommonState']]],
+  ['gl_5fred_5fsize',['gl_red_size',['../d8/d8d/struct_s_d_l_test___common_state.html#a33772305944410d726908efb5e0663ce',1,'SDLTest_CommonState']]],
+  ['gl_5fretained_5fbacking',['gl_retained_backing',['../d8/d8d/struct_s_d_l_test___common_state.html#a5fa59e7aa6210fcde02940536eea9c12',1,'SDLTest_CommonState']]],
+  ['gl_5fstencil_5fsize',['gl_stencil_size',['../d8/d8d/struct_s_d_l_test___common_state.html#af27830ef5d5ed9cc8e90088a69f4d78f',1,'SDLTest_CommonState']]],
+  ['gl_5fstereo',['gl_stereo',['../d8/d8d/struct_s_d_l_test___common_state.html#a39177b165c6a9c2164937c82402e2d4f',1,'SDLTest_CommonState']]],
+  ['gloss',['Gloss',['../de/d29/struct_s_d_l___pixel_format.html#a94469768d8436e631a13d68623ff663f',1,'SDL_PixelFormat']]],
+  ['gmask',['Gmask',['../de/d29/struct_s_d_l___pixel_format.html#a3d07a81b430202c6ea0089d8df8f4e15',1,'SDL_PixelFormat']]],
+  ['gshift',['Gshift',['../de/d29/struct_s_d_l___pixel_format.html#a6045012f994c02a86bdc4a91b28d2a3c',1,'SDL_PixelFormat']]]
+];

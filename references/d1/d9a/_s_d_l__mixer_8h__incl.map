@@ -1,0 +1,16 @@
+<map id="include/SDL2/SDL_mixer.h" name="include/SDL2/SDL_mixer.h">
+<area shape="rect" id="node2" href="$d9/d24/_s_d_l__stdinc_8h.html" title="SDL_stdinc.h" alt="" coords="566,379,666,405"/>
+<area shape="rect" id="node5" href="$d1/d90/begin__code_8h.html" title="begin_code.h" alt="" coords="484,677,583,704"/>
+<area shape="rect" id="node6" href="$d0/d2e/close__code_8h.html" title="close_code.h" alt="" coords="1116,677,1215,704"/>
+<area shape="rect" id="node11" href="$d6/d73/_s_d_l__rwops_8h.html" title="SDL_rwops.h" alt="" coords="457,229,556,256"/>
+<area shape="rect" id="node13" href="$d3/d78/_s_d_l__audio_8h.html" title="SDL_audio.h" alt="" coords="611,80,707,107"/>
+<area shape="rect" id="node14" href="$d0/d2b/_s_d_l__endian_8h.html" title="SDL_endian.h" alt="" coords="1227,304,1330,331"/>
+<area shape="rect" id="node18" href="$d7/dd5/_s_d_l__version_8h.html" title="SDL_version.h" alt="" coords="43,304,149,331"/>
+<area shape="rect" id="node3" href="$d1/d8f/_s_d_l__config_8h.html" title="SDL_config.h" alt="" coords="675,453,773,480"/>
+<area shape="rect" id="node4" href="$d4/d81/_s_d_l__platform_8h.html" title="SDL_platform.h" alt="" coords="693,603,803,629"/>
+<area shape="rect" id="node7" href="$d1/df8/_s_d_l__config__minimal_8h.html" title="SDL_config_minimal.h" alt="" coords="673,528,823,555"/>
+<area shape="rect" id="node12" href="$df/d2d/_s_d_l__error_8h.html" title="SDL_error.h" alt="" coords="632,304,723,331"/>
+<area shape="rect" id="node15" href="$d2/d09/_s_d_l__mutex_8h.html" title="SDL_mutex.h" alt="" coords="1040,229,1141,256"/>
+<area shape="rect" id="node16" href="$d8/ded/_s_d_l__thread_8h.html" title="SDL_thread.h" alt="" coords="760,155,861,181"/>
+<area shape="rect" id="node17" href="$d6/d97/_s_d_l__atomic_8h.html" title="SDL_atomic.h" alt="" coords="899,304,1003,331"/>
+</map>

@@ -28,6 +28,13 @@ struct Mix_Chunk;
 class LX_Sound;
 
 
+/**
+*   @class LX_Chunk
+*   @brief The chunk class
+*
+*   This class is a wrapper of the Mix_Chunk type
+*
+**/
 class LX_Chunk : LX_Sound{
 
     Mix_Chunk *chunk;

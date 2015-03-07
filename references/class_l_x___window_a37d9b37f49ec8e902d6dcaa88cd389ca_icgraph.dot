@@ -1,0 +1,14 @@
+digraph "LX_Window::getWindow"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="LX_Window::getWindow",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="LX_Graphics::setWindowSize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___graphics.html#a0ed4890593ee6f85e146c4bec9cd29ea"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="LX_Graphics::setFullscreen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___graphics.html#a9cc5b92d8d6d7808749a4d3231812177"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="LX_Graphics::updateWindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___graphics.html#a04a19ef725ce7bd8daf6aa148fd9ed78"];
+}

@@ -1,0 +1,5 @@
+<map id="LX_Graphics::loadTextureFromFile" name="LX_Graphics::loadTextureFromFile">
+<area shape="rect" id="node2" href="$de/dd0/class_l_x___graphics.html#aeb8e8fd7f4d90e151bb9539b4c2530f1" title="LX_Graphics::loadSurface" alt="" coords="224,5,395,32"/>
+<area shape="rect" id="node4" href="$de/dd0/class_l_x___graphics.html#ae36a78d61d378f721aed61bd7be84822" title="LX_Graphics::loadTexture\lFromSurface" alt="" coords="224,57,395,98"/>
+<area shape="rect" id="node3" href="$dc/dbd/class_l_x___window.html#a2bcf302f26eadb7284f45efd34af26e1" title="LX_Window::getSurface" alt="" coords="443,5,601,32"/>
+</map>

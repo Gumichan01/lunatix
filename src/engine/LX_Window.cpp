@@ -102,7 +102,7 @@ LX_Window::LX_Window()
 
 
 /**
-*   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
+*   @fn LX_Window::LX_Window(SDL_Window *sdlWin)
 *
 *   Create the window with an already set window
 *
@@ -153,26 +153,6 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, bool s
 
 }
 
-
-/**
-*   @fn LX_Window::LX_Window(std::string title, int w, int h, bool full_flag)
-*
-*   Create the window with only the name and the fullscreen flag
-*
-*   @param title : the title of the window
-*   @param w : the width of the window
-*   @param h : the height of the window
-*   @param full_flag : a boolean tha said if you want the fullscreen mode
-*
-*   @note This constructor does not use the LX_config class
-*
-*   @exception LX_WindowException If the window initialisation fails.
-*
-*/
-LX_Window::LX_Window(std::string title, int w, int h, bool full_flag)
-{
-    LX_Window(title,SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,full_flag);
-}
 
 /**
 *

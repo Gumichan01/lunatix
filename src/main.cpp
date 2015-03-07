@@ -15,7 +15,7 @@
 *	@file main.cpp
 *	@brief the main function which use the new LunatiX engine
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date January 18th, 2015
 *
 *
@@ -41,12 +41,11 @@ int main ( int argc, char** argv )
     SDL_Surface *sf = NULL;
     SDL_Texture *st = NULL;
 
-    std::string name = "data/cb.mp";
+    std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
     LX_Graphics *graphics = NULL;
     LX_TrueTypeFont *ttf = NULL;
-    LX_Mixer *mixer = NULL;
     LX_Music *audio = NULL;
 
     SDL_Event event;
@@ -74,7 +73,6 @@ int main ( int argc, char** argv )
     }
 
     ttf = new LX_TrueTypeFont(&color);
-    mixer = new LX_Mixer();
     audio = new LX_Music(mus);
 
     // Load the texture from the data file
@@ -95,9 +93,9 @@ int main ( int argc, char** argv )
 
     //audio->volume(MIX_MAX_VOLUME/2);
     std::cout << "Volume : " << audio->volume(-1) <<std::endl;
-    std::cout << "Allocated channels : " << mixer->allocateChannels(16) <<std::endl;
+    std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(16) <<std::endl;
 
-    mixer->fadeInMusic(audio,4000);
+    LX_Mixer::fadeInMusic(audio,4000);
 
     while(game)
     {
@@ -117,7 +115,7 @@ int main ( int argc, char** argv )
                                         case SDLK_RETURN :   audio->play();
                                                             break;
 
-                                        case SDLK_BACKSPACE :   mixer->fadeOutMusic(4000); //audio->stop();
+                                        case SDLK_BACKSPACE :   LX_Mixer::fadeOutMusic(4000); //audio->stop();
                                                                 break;
                                         case SDLK_d :   graphics->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
                                                         break;
@@ -128,13 +126,13 @@ int main ( int argc, char** argv )
                                         case SDLK_g :   graphics->setFullscreen(LX_GRAPHICS_NO_FULLSCREEN);
                                                         break;
 
-                                        case SDLK_LEFT :    mixer->setPanning(MIX_CHANNEL_POST,255,0);
+                                        case SDLK_LEFT :    LX_Mixer::setPanning(MIX_CHANNEL_POST,255,0);
                                                             break;
 
-                                        case SDLK_RIGHT :    mixer->setPanning(MIX_CHANNEL_POST,0,255);
+                                        case SDLK_RIGHT :    LX_Mixer::setPanning(MIX_CHANNEL_POST,0,255);
                                                             break;
 
-                                        case SDLK_UP :  mixer->setPanning(MIX_CHANNEL_POST,255,255);
+                                        case SDLK_UP :  LX_Mixer::setPanning(MIX_CHANNEL_POST,255,255);
                                                         break;
 
                                         default :   break;
@@ -168,11 +166,10 @@ int main ( int argc, char** argv )
     SDL_DestroyTexture(t2);
 
     delete audio;
-    delete mixer;
     delete ttf;
     graphics->destroy();
 
-    std::cout << "Allocated channels : " << mixer->allocateChannels(0) <<std::endl;
+    std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(0) <<std::endl;
     LX_Quit();
 
 

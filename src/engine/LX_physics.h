@@ -20,7 +20,7 @@
 *	@file LX_Physics.h
 *	@brief The LX_Physics Library, it will be linked with the SDL library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date July 14th, 2014
 *
 */

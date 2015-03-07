@@ -26,6 +26,13 @@
 
 #include <iostream>
 
+/**
+*   @class LX_Sound
+*   @brief The sound interface
+*
+*   This virtual class gathers common functions
+*
+**/
 class LX_Sound{
 
 

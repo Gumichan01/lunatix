@@ -161,7 +161,7 @@ int LX_Mixer::channelVolume(int channel,int volume)
 *
 *   Pause the channel
 *
-*   @param Channel the channel to pause
+*   @param channel the channel to pause
 *
 *   @note If channel is -1, then all channels will be paused
 *
@@ -242,7 +242,7 @@ int LX_Mixer::isPlaying(int channel)
 
 
 /**
-*   @fn int LX_Mixer::isPlaying(int channel)
+*   @fn int LX_Mixer::isPaused(int channel)
 *
 *   Check if the channel is paused
 *

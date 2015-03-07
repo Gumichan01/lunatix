@@ -17,7 +17,7 @@
 *	@file LX_Music.cpp
 *	@brief The LunatiX_engine sound module
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date July 23th, 2014
 *
 */
@@ -71,6 +71,12 @@ LX_Music::LX_Music(std::string filename)
 }
 
 
+/**
+*   @fn LX_Music::~LX_Music()
+*
+*   Destroy the instance
+*
+*/
 LX_Music::~LX_Music()
 {
     Mix_FreeMusic(music);
@@ -169,11 +175,11 @@ void LX_Music::stop()
 
 
 /**
-*   @fn int LX_Music::volume()
+*   @fn int LX_Music::volume(int newVolume)
 *
-*   Set the music volume to volume, from 0 to 128
+*   Set the music volume to newVolume, from 0 to 128
 *
-*   @param volume
+*   @param newVolume
 *
 *   @return the previous volume setting
 *

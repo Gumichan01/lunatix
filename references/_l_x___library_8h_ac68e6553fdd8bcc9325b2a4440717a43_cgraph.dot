@@ -1,0 +1,19 @@
+digraph "LX_Init"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="LX_Init",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="LX_Configuration::getInstance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___configuration.html#abd5c52de995711f1c004510ed88a9dd2"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="LX_Configuration::getVideoFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___configuration.html#a9f61c7ed7e589ee17b6d0032c8a3f1f6"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="LX_Configuration::getAudioFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___configuration.html#af778d1c16e3fb1a868b7828ef78abee5"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="LX_Configuration::getJoystickFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___configuration.html#a51e9662c7cd18938c98799a09a021e19"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="LX_Configuration::getTTF_Flag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___configuration.html#a1f74b1d33f0590bb6a450fa179c54d8b"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="LX_Configuration::destroy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_l_x___configuration.html#adbc92d984b2d2c62275a50cd21f75748"];
+}

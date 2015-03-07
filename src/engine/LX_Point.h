@@ -16,7 +16,7 @@
 *	@file LX_Point.h
 *	@brief The LX_Point file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date July 14th, 2014
 *
 */

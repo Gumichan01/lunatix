@@ -1,0 +1,6 @@
+<map id="SDL_CreateTextureFromSurface" name="SDL_CreateTextureFromSurface">
+<area shape="rect" id="node2" href="$de/dd0/class_l_x___graphics.html#ae36a78d61d378f721aed61bd7be84822" title="LX_Graphics::loadTexture\lFromSurface" alt="" coords="263,8,433,49"/>
+<area shape="rect" id="node5" href="$d3/dbe/class_l_x___true_type_font.html#ac2fe2df7de580f8986b59664e1bfd5e7" title="LX_TrueTypeFont::drawText\lToTexture" alt="" coords="481,71,664,112"/>
+<area shape="rect" id="node3" href="$de/dd0/class_l_x___graphics.html#a700d97a87541ce0ba7993366953b10cc" title="LX_Graphics::loadTexture\lFromFile" alt="" coords="487,5,658,47"/>
+<area shape="rect" id="node4" href="$df/d0a/main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="712,46,763,73"/>
+</map>

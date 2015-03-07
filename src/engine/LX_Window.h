@@ -74,7 +74,6 @@ class LX_Window{
     LX_Window();                    // The default constructor with default parameters
     LX_Window(SDL_Window *sdlWin);
     LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag);
-    LX_Window(std::string title, int w, int h, bool full_flag);
 
     void setTitle(std::string title);
 

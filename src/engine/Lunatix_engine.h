@@ -18,7 +18,7 @@
 *	@file Lunatix_engine.h
 *	@brief The Lunatix engine header
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date February 20th, 2015
 *
 *
@@ -26,8 +26,6 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "LX_Library.h"
 #include "LX_Config.h"

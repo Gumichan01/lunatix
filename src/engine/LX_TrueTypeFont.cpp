@@ -15,7 +15,7 @@
 *	@file LX_TrueTypeFont.cpp
 *	@brief The LunatiX_engine True type Font (TTF) modules.
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date July 15th, 2014
 *
 *
@@ -240,7 +240,7 @@ SDL_Surface * LX_TrueTypeFont::draw_SolidText(std::string text, unsigned int siz
 
 /**
 *
-*   @fn SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text)
+*   @fn SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text, SDL_Color bg)
 *
 *   Create an UTF-8 encoded text in shaded mode
 *
@@ -278,7 +278,7 @@ SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text, Uint8 r, Uint8 
 
 /**
 *
-*   @fn SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text, unsigned int size)
+*   @fn SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 *
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
 *
@@ -388,7 +388,7 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
 
 
 /**
-*   @fn SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size)
+*   @fn SDL_Texture * LX_TrueTypeFont::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size)
 *
 *   Create a Texture from a text according to the type and the size
 *

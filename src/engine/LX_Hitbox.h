@@ -19,7 +19,7 @@
 *	@file LX_Hitbox.h
 *	@brief The hitbox library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date July 28th, 2014
 *
 *

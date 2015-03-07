@@ -1,0 +1,12 @@
+digraph "LX_Chunk.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="LX_Chunk.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Lunatix_engine.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_lunatix__engine_8h.html",tooltip="The Lunatix engine header. "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="LX_Chunk.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_l_x___chunk_8cpp.html",tooltip="The SDL_Chunk wrapper. "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="LX_Mixer.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_l_x___mixer_8cpp.html",tooltip="The mixer library. "];
+}

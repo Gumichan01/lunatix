@@ -18,7 +18,7 @@
 *	@file LX_Graphics.h
 *	@brief The LX_Graphics library, it will be linked with the SDL library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date January 28th, 2015
 *
 *

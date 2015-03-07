@@ -24,6 +24,7 @@
 *
 */
 
+#include <SDL2/SDL_mixer.h>
 
 #define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable the mix module */
 #define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
@@ -43,16 +44,14 @@ class LX_Music;
 class LX_Chunk;
 
 /**
-*   @class LX_Mixer
+*   @namespace LX_Mixer
 *   @brief The LunatiX_engine sound module
 *
 *   This SDL_Mixer-based sound engine will load and read a various audio files
 *
 **/
-class LX_Mixer{
+namespace LX_Mixer{
 
-
-    public :
 
     /* == Music and chunk == */
     LX_Music * loadMusic(std::string filename);
@@ -94,8 +93,6 @@ class LX_Mixer{
     // Distance
     void setDistance(Uint8 distance);
     void setDistance(int channel,Uint8 distance);
-
-    ~LX_Mixer(){}
 
 };
 

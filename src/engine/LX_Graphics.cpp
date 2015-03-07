@@ -15,7 +15,7 @@
 *	@file LX_Graphics.cpp
 *	@brief The LunatiX_engine graphic module
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date January 28th, 2015
 *
 *
@@ -34,7 +34,7 @@ static LX_Graphics *gInstance = NULL;
 
 
 /**
-*   @fn LX_Graphics * LX_Graphics::createInstance()
+*   @fn static LX_Graphics * LX_Graphics::createInstance()
 *
 *   Get the unique instance of the LX_Graphics class
 *
@@ -53,7 +53,7 @@ LX_Graphics * LX_Graphics::createInstance()
 
 
 /**
-*   @fn LX_Graphics * LX_Graphics::createInstance(SDL_Window * win)
+*   @fn static LX_Graphics * LX_Graphics::createInstance(LX_Window * win)
 *
 *   Get the unique instance of the LX_Graphics class setting the SDL_Window
 *

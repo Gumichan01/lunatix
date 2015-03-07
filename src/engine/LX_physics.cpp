@@ -15,7 +15,7 @@
 *	@file LX_Physics.cpp
 *	@brief The LX_Physics file. It contains all definitions of member functions
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.1
+*	@version 0.2
 *	@date July 14th, 2014
 *
 */

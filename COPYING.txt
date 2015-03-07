@@ -1,6 +1,6 @@
 
-LunatiX_engine 
-Copyright (C) 2014 Luxon Jean-Pierre
+LunatiX Engine 
+Copyright (C) 2015 Luxon Jean-Pierre
 
 This software is provided 'as-is', without any express or implied 
 warranty. In no event will the authors be held liable for any damages
