@@ -27,38 +27,33 @@
 
 #include "LX_Hitbox.h"
 
-
 #define RECT_SIDES 4    /**<The number of the AABB sides*/
 
 // todo : gravity, wind, strengh, friction
 
 /**
 *
-*   @class LX_Physics
+*   @namespace LX_Physics
 *   @brief The LunatiX_engine physic engine
 *
-*   This class describes the LX_Physics, a LunatiX_engine physics module. It mainly calculates collisions so far.
+*   This namespace describes the LX_Physics, the physics module of the Lunatix engine.
 *
 */
-class LX_Physics{
+namespace LX_Physics{
 
-    public :
 
-        //LX_Physics(){}
+        int euclide_square_distance( int x1, int y1, int x2, int y2);
+        int euclide_distance( int x1, int y1, int x2, int y2);
+        int euclide_square_distance( LX_Point *p1, LX_Point *p2);
+        int euclide_distance( LX_Point *p1, LX_Point *p2);
 
-        static int euclide_square_distance( int x1, int y1, int x2, int y2);
-        static int euclide_distance( int x1, int y1, int x2, int y2);
-        static int euclide_square_distance( LX_Point *p1, LX_Point *p2);
-        static int euclide_distance( LX_Point *p1, LX_Point *p2);
+        bool collision(int x_pos, int y_pos, const LX_AABB *rect);                          // collision point/AABB
+        bool collision(int x_pos, int y_pos, const LX_Circle *circle);                      // collision point/circle
+        bool collision(const LX_AABB *rect1, const LX_AABB *rect2);                         // collision AABB/AABB
+        bool collision(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
+        bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
+        bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
 
-        static bool collision(int x_pos, int y_pos, const LX_AABB *rect);                          // collision point/AABB
-        static bool collision(int x_pos, int y_pos, const LX_Circle *circle);                      // collision point/circle
-        static bool collision(const LX_AABB *rect1, const LX_AABB *rect2);                         // collision AABB/AABB
-        static bool collision(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
-        static bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
-        static bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
-
-        //~LX_Physics(){}
 };
 
 #endif // PHYSICS_H_INCLUDED

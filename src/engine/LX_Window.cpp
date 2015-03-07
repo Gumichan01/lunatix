@@ -21,6 +21,8 @@
 *
 */
 
+#include <SDL2/SDL.h>
+
 #include "LX_Config.h"
 #include "LX_Window.h"
 
@@ -68,22 +70,17 @@ LX_Window::LX_Window()
 
     int lxWidth = 0;
     int lxHeight = 0;
-    //int lxBitsPerPixel = 0;
 
     LX_Configuration *win_config = LX_Configuration::getInstance();     // load the configuration
 
     lxWidth = win_config->getWinWidth();
     lxHeight = win_config->getWinHeight();
-    //lxBitsPerPixel = BPP;
-
 
     // check the fullscreen flag
     if(win_config->getFullscreenFlag() == 1)
     {
         fullscreen_flag = SDL_WINDOW_FULLSCREEN;
     }
-
-    //lxWindow=SDL_SetVideoMode(lxWidth,lxHeight,BPP,SDL_HWSURFACE|SDL_DOUBLEBUF|fullscreen_flag);
 
     // Is the fullscreen mode active
     if(fullscreen_flag == SDL_WINDOW_FULLSCREEN)
@@ -109,9 +106,13 @@ LX_Window::LX_Window()
 *
 *   Create the window with an already set window
 *
-*   @param sdlWin the SDL_Window (must be a non-NUL pointer)
+*   @param sdlWin the SDL_Window (must be a non-NULL pointer)
 *
+*   @note This constructor does not use the LX_config class
 *   @warning If you contruct the LX_Window object with a NULL pointer, an exception will occur.
+*
+*   @exception LX_WindowException If sdlWin is NULL
+*
 */
 LX_Window::LX_Window(SDL_Window *sdlWin)
 {
@@ -134,6 +135,9 @@ LX_Window::LX_Window(SDL_Window *sdlWin)
 *   @param screen_flag : a boolean that said if you want the fullscreen mode
 *
 *   @note This constructor does not use the LX_config class
+*
+*   @exception LX_WindowException If the window initialisation fails.
+*
 */
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
 {
@@ -160,7 +164,10 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, bool s
 *   @param h : the height of the window
 *   @param full_flag : a boolean tha said if you want the fullscreen mode
 *
-*   @note This constructor does not use also the LX_config class
+*   @note This constructor does not use the LX_config class
+*
+*   @exception LX_WindowException If the window initialisation fails.
+*
 */
 LX_Window::LX_Window(std::string title, int w, int h, bool full_flag)
 {

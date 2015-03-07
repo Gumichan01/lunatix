@@ -25,12 +25,6 @@
 */
 
 
-
-#include<iostream>
-
-#include<SDL2/SDL_mixer.h>
-
-
 #define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable the mix module */
 #define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
 #define LX_MIXER_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */

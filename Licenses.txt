@@ -1,6 +1,6 @@
 
 
-The SDL library (Version 1.2) is under the LGPL license
+The SDL library (Version 2.0) is under the ZLIB license
 
 
 

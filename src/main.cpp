@@ -41,7 +41,7 @@ int main ( int argc, char** argv )
     SDL_Surface *sf = NULL;
     SDL_Texture *st = NULL;
 
-    std::string name = "data/cb.bmp";
+    std::string name = "data/cb.mp";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
     LX_Graphics *graphics = NULL;
@@ -65,7 +65,7 @@ int main ( int argc, char** argv )
     try
     {
         graphics = LX_Graphics::createInstance();
-        ttf = new LX_TrueTypeFont(&color);
+
     }
     catch(std::exception & e )
     {
@@ -73,6 +73,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
+    ttf = new LX_TrueTypeFont(&color);
     mixer = new LX_Mixer();
     audio = new LX_Music(mus);
 
@@ -81,7 +82,7 @@ int main ( int argc, char** argv )
 
     if(st == NULL)
     {
-        std::cerr << "LX_Graphics::load_surface : " << SDL_GetError() <<std::endl;
+        std::cerr << "[MAIN] LX_Graphics::load_surface : " << SDL_GetError() <<std::endl;
     }
 
     ttf->sizeOfText("LunatiX_engine",&wt,&ht);
@@ -149,13 +150,13 @@ int main ( int argc, char** argv )
             }
         }
 
-        graphics->clearMainRenderer();
+        graphics->clearRenderer();
 
         graphics->putTexture(st,NULL,&pos);
         graphics->putTexture(t1,NULL,&pos1);
         graphics->putTexture(t2,NULL,&pos2);
 
-        graphics->updateMainRenderer();
+        graphics->updateRenderer();
 
         SDL_Delay(33);
     }

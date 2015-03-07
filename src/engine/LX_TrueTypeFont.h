@@ -26,36 +26,27 @@
 */
 
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "LX_Config.h"
 
-#define LX_TTF_DEFAULT_FONT_SIZE 24    /**< The default value of the font size, used when the size defined in the configuration file is 0*/
+struct SDL_Surface;
+struct SDL_Texture;
+struct SDL_Color;
+
+
+#define LX_TTF_DEFAULT_FONT_SIZE 24    /**< The default value of the font size*/
 #define LX_WHITE_COLOR 255
 #define LX_BLACK_COLOR 0
 
-typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED,LX_TTF_FAIL} LX_TTF_TypeText;
 
 /**
-*   @class LX_TTF_exception
-*   @brief The LX_TTF_exception class.
+*   @enum LX_TTF_TypeText
+*   @brief The LX_TTF_TypeText enumeration
 *
-*   This class describes the exception occured when the font loading fails.
+*   This enumeration describes the type of the text you want to draw.
 *
 */
-class LX_TTF_exception : public std::exception
-{
-    public :
-
-    std::string str_err;                        /**< The string where the error message will be conteined*/
-
-    LX_TTF_exception(std::string err);
-
-    const char * what() const throw();
-
-    ~LX_TTF_exception() throw();
-};
+typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 
 
 

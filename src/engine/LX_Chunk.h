@@ -23,11 +23,10 @@
 *
 */
 
-#include<iostream>
-
 
 struct Mix_Chunk;
 class LX_Sound;
+
 
 class LX_Chunk : LX_Sound{
 
@@ -40,9 +39,9 @@ class LX_Chunk : LX_Sound{
     LX_Chunk(std::string filename);
 
     bool load(std::string filename);
-    void play();
-    void play(int channel);
-    void play(int channel,int ticks);
+    int play();
+    int play(int channel);
+    int play(int channel,int ticks);
 
     int volume(int newVolume);
 

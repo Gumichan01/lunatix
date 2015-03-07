@@ -27,6 +27,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "LX_Graphics.h"
+#include "LX_Window.h"
 
 
 static LX_Graphics *gInstance = NULL;
@@ -44,15 +45,7 @@ LX_Graphics * LX_Graphics::createInstance()
 {
     if(gInstance == NULL)
     {
-        try
-        {
-            gInstance = new LX_Graphics();
-        }
-        catch(std::exception & g_ex)
-        {
-            std::cerr << "exception occured in LX_Graphics::getInstance : " << g_ex.what() << std::endl;
-            return NULL;
-        }
+        gInstance = new LX_Graphics();
     }
 
     return gInstance;
@@ -71,17 +64,9 @@ LX_Graphics * LX_Graphics::createInstance()
 */
 LX_Graphics * LX_Graphics::createInstance(LX_Window * win)
 {
-    if(gInstance == NULL)
+    if(gInstance == NULL && win != NULL)
     {
-        try
-        {
-            gInstance = new LX_Graphics(win);
-        }
-        catch(std::exception & g_ex)
-        {
-            std::cerr << "exception occured in LX_Graphics::getInstance : " << g_ex.what() << std::endl;
-            return NULL;
-        }
+        gInstance = new LX_Graphics(win);
     }
 
     return gInstance;
@@ -129,14 +114,7 @@ void LX_Graphics::destroy()
 LX_Graphics::LX_Graphics()
 {
     mainWindow = new LX_Window();
-
-    renderer = SDL_CreateRenderer(mainWindow->getWindow(),-1,SDL_RENDERER_ACCELERATED);
-
-    if(renderer == NULL)
-        std::cerr << "LX_Graphics : renderer is not set : " << SDL_GetError() << std::endl;
-
-    originalWidth = mainWindow->getWidth();
-    originalHeight = mainWindow->getHeight();
+    init();
 }
 
 
@@ -151,19 +129,8 @@ LX_Graphics::LX_Graphics()
 */
 LX_Graphics::LX_Graphics(LX_Window *win)
 {
-    if(win == NULL)
-    {
-        throw new LX_WindowException("Invalid LX_Window instance : NULL");
-    }
-
     mainWindow = win;
-    renderer = SDL_CreateRenderer(mainWindow->getWindow(),-1,SDL_RENDERER_ACCELERATED);
-
-    if(renderer == NULL)
-        std::cerr << "LX_Graphics : renderer is not set : " << SDL_GetError() << std::endl;
-
-    originalWidth = mainWindow->getWidth();
-    originalHeight = mainWindow->getHeight();
+    init();
 }
 
 
@@ -178,6 +145,20 @@ LX_Graphics::~LX_Graphics()
 {
     delete mainWindow;
     mainWindow = NULL;
+}
+
+/**
+*   @fn void LX_Graphics::init()
+*
+*   Initialise the window
+*
+*/
+void LX_Graphics::init()
+{
+    renderer = SDL_CreateRenderer(mainWindow->getWindow(),-1,SDL_RENDERER_ACCELERATED);
+
+    originalWidth = mainWindow->getWidth();
+    originalHeight = mainWindow->getHeight();
 }
 
 
@@ -209,12 +190,9 @@ SDL_Surface * LX_Graphics::loadSurface(std::string filename)
 
     if(loaded == NULL)
     {
-        std::cerr << "Error occurred in LX_Graphics::load_surface : " << SDL_GetError() << std::endl;
         return NULL;
     }
 
-    //std::cerr << "optimize " << std::endl;
-    //optimized = SDL_DisplayFormatAlpha(loaded);
     optimized = SDL_ConvertSurface(loaded,mainWindow->getSurface()->format,0x00000000);
 
     SDL_FreeSurface(loaded);
@@ -232,28 +210,10 @@ SDL_Surface * LX_Graphics::loadSurface(std::string filename)
 *
 *   @return  a new pointer to the texture if the loading is successful, NULL otherwise
 *
-*   @note : if target is NULL, the fonction returns immediately a NULL value
-*
 */
 SDL_Texture * LX_Graphics::loadTextureFromSurface(SDL_Surface *target)
 {
-    SDL_Texture *newTexture = NULL;
-
-    if( target == NULL)
-    {
-        std::cerr << "LX_Graphics::loadTextureFromSurface : the surface is NULL" << std::endl;
-        return NULL;
-    }
-
-    newTexture = SDL_CreateTextureFromSurface(renderer,target);
-
-    if( newTexture == NULL )
-    {
-        std::cerr << "Error occurred in LX_Graphics::loadTextureFromSurface : " << SDL_GetError() << std::endl;
-        return NULL;
-    }
-
-    return newTexture;
+    return SDL_CreateTextureFromSurface(renderer,target);
 }
 
 
@@ -275,7 +235,7 @@ SDL_Texture * LX_Graphics::loadTextureFromFile(std::string filename)
     tmpS = loadSurface(filename);
     tmpT = loadTextureFromSurface(tmpS);
 
-    SDL_FreeSurface(tmpS);  // We do not need that anymore
+    SDL_FreeSurface(tmpS);
 
     return tmpT;
 }
@@ -298,57 +258,13 @@ SDL_Texture * LX_Graphics::loadTextureFromFile(std::string filename)
 *
 */
 bool LX_Graphics::set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
-{   // It is better to deal with Uint8 variables instead of an unsigned int
-
-    Uint32 colorkey = SDL_MapRGB(image->format,red,green,blue);
-
-    int err = SDL_SetColorKey(image,SDL_TRUE, colorkey);    // SDL_TRUE replaced the old flags
-
-    if(err == -1)
-    {
-        std::cerr << "Error occurred in LX_Graphics::set_alpha : " << SDL_GetError() << std::endl;
+{
+    if(SDL_SetColorKey(image,SDL_TRUE, SDL_MapRGB(image->format,red,green,blue)) == -1)
         return false;
-    }
 
     return true;
 }
 
-
-/**
-*   @fn int LX_Graphics::addWindow(SDL_Window *win)
-*
-*   Adds a SDL_Window to the window manager
-*
-*   @param win : the window you want to add
-*
-*   @return a positive value that match with the index of the window in the vector,
-*            -1 if win is NULL, or -2 if an internal problem occurs
-*
-*/
-int LX_Graphics::addLXWindow(LX_Window *win)
-{
-    ///@todo [vector] Implement the window insertion
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,"LX_Graphics::addSDLWindow","Not implemented yet",NULL);
-
-    return -1;
-}
-
-
-/**
-*   @fn int bool LX_Graphics::destroySDLWindow(int wd)
-*
-*   @param win : The window descriptor
-*
-*   @return true if there no problem, false otherwise
-*
-*/
-bool LX_Graphics::destroySDLWindow(unsigned int wd)
-{
-    ///@todo [vector] Implement the window destruction
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,"LX_Graphics::destroySDLWindow","Not implemented yet",NULL);
-
-    return false;
-}
 
 
 /**
@@ -372,29 +288,28 @@ bool LX_Graphics::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 
     // I check if the image or the position is NULL
     if(image == NULL)
-    {
-        std::cerr << "Error occurred in LX_Graphics::put_surface : the surface to blit is NULL " << std::endl;
         return false;
-    }
 
     if(pos == NULL)
     {   // The texture will be set on the top-left of the main surface
         offset.x = 0;
         offset.y = 0;
+        offset.w = 0;
+        offset.h = 0;
     }
     else
     {
         offset.x = pos->x;
         offset.y = pos->y;
+        offset.w = pos->w;
+        offset.h = pos->h;
     }
 
     err = SDL_BlitSurface(image,area,mainWindow->getSurface(),&offset);
 
     if(err < 0)
-    {
-        std::cerr << "Error occurred in LX_Graphics::put_surface : " << SDL_GetError() << std::endl;
         return false;
-    }
+
     return true;
 }
 
@@ -418,10 +333,7 @@ bool LX_Graphics::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 {
 
     if(SDL_RenderCopy(renderer,origin,area,pos) < 0)
-    {
-        std::cerr << "Error in LX_Graphics::putTexture: " << SDL_GetError() << std::endl;
         return false;
-    }
 
     return true;
 }
@@ -452,10 +364,7 @@ void LX_Graphics::setWindowSize(int w, int h)
 */
 void LX_Graphics::setFullscreen(Uint32 flag)
 {
-    if(SDL_SetWindowFullscreen(mainWindow->getWindow(),flag) < 0)
-    {
-        std::cerr << "Error occured in LX_Graphics::setFullscreen : " << SDL_GetError << std::endl;
-    }
+    SDL_SetWindowFullscreen(mainWindow->getWindow(),flag);
 
     if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
     {
@@ -467,12 +376,12 @@ void LX_Graphics::setFullscreen(Uint32 flag)
 
 
 /**
-*   @fn void LX_Graphics::updateMainRenderer()
+*   @fn void LX_Graphics::updateRenderer()
 *
 *   Updates the main renderer
 *
 */
-void LX_Graphics::updateMainRenderer()
+void LX_Graphics::updateRenderer()
 {
     SDL_RenderPresent(renderer);
 }
@@ -480,24 +389,24 @@ void LX_Graphics::updateMainRenderer()
 
 /**
 *
-*   @fn void LX_Graphics::updateMainWindow()
+*   @fn void LX_Graphics::updateWindow()
 *
 *   This function updates the main window
 *
 */
-void LX_Graphics::updateMainWindow()
+void LX_Graphics::updateWindow()
 {
     SDL_UpdateWindowSurface(mainWindow->getWindow());
 }
 
 /**
 *
-*   @fn void LX_Graphics::clearMainWindow()
+*   @fn void LX_Graphics::clearWindow()
 *
 *   This function clears the main window
 *
 */
-void LX_Graphics::clearMainWindow()
+void LX_Graphics::clearWindow()
 {
     SDL_FillRect(mainWindow->getSurface(),NULL, SDL_MapRGB(mainWindow->getSurface()->format,0,0,0));
 }
@@ -505,40 +414,40 @@ void LX_Graphics::clearMainWindow()
 
 /**
 *
-*   @fn void LX_Graphics::clearMainRenderer()
+*   @fn void LX_Graphics::clearRenderer()
 *
 *   This function clears the main renderer
 *
 */
-void LX_Graphics::clearMainRenderer()
+void LX_Graphics::clearRenderer()
 {
     SDL_RenderClear(renderer);
 }
 
 
 /**
-*   @fn SDL_Surface * LX_Graphics::getMainSurface()
+*   @fn SDL_Surface * LX_Graphics::getSurface()
 *
 *   Returns the surface of the main window
 *
 *   @return the main surface
 *
 **/
-SDL_Surface * LX_Graphics::getMainSurface()
+SDL_Surface * LX_Graphics::getSurface()
 {
     return mainWindow->getSurface();
 }
 
 
 /**
-*   @fn SDL_Renderer * LX_Graphics::getMainRenderer()
+*   @fn SDL_Renderer * LX_Graphics::getRenderer()
 *
 *   Returns the renderer of the main window
 *
 *   @return the main renderer
 *
 */
-SDL_Renderer * LX_Graphics::getMainRenderer()
+SDL_Renderer * LX_Graphics::getRenderer()
 {
     return mainWindow->getRenderer();
 }

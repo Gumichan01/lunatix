@@ -325,11 +325,7 @@ void LX_Mixer::fadeOutMusic(int ms)
 */
 void LX_Mixer::setPanning(int channel,Uint8 left,Uint8 right)
 {
-    if(Mix_SetPanning(channel,left,right) == 0)
-    {
-        std::cerr << "Error occured in LX_Mixer::setPanning / Mix_setPanning : "
-                        << Mix_GetError() << std::endl;
-    }
+    Mix_SetPanning(channel,left,right);
 }
 
 
@@ -407,11 +403,7 @@ void LX_Mixer::setPosition(Sint16 angle, int distance)
 */
 void LX_Mixer::setPosition(int channel, Sint16 angle, int distance)
 {
-    if(Mix_SetPosition(channel,angle,distance) == 0)
-    {
-        std::cerr << "Error occured in LX_Mixer::setPosition / Mix_setPosition : "
-                        << Mix_GetError() << std::endl;
-    }
+    Mix_SetPosition(channel,angle,distance);
 }
 
 
@@ -443,11 +435,7 @@ void LX_Mixer::resetPosition(int channel)
 */
 void LX_Mixer::reverseStereo(int channel, int flip)
 {
-    if(Mix_SetReverseStereo(channel,flip) == 0)
-    {
-         std::cerr << "Error occured in LX_Mixer::reverseStereo / Mix_setReverseStereo : "
-                        << Mix_GetError() << std::endl;
-    }
+    Mix_SetReverseStereo(channel,flip);
 }
 
 
@@ -465,10 +453,7 @@ void LX_Mixer::reverseStereo(int channel, int flip)
 */
 void LX_Mixer::setDistance(int channel,Uint8 distance)
 {
-    if(Mix_SetDistance(channel,distance) == 0)
-    {
-        std::cerr << "distance setting failed : " << Mix_GetError() << std::endl;
-    }
+    Mix_SetDistance(channel,distance);
 }
 
 

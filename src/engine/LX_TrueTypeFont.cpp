@@ -22,32 +22,11 @@
 *
 */
 
-#include "LX_TrueTypeFont.h"
+#include <SDL2/SDL.h>
+
+#include "LX_Config.h"
 #include "LX_Graphics.h"
-
-/**
-*   @fn LX_TTF_exception(std::string err)
-*   Build the LX_TTF_exception class
-*   @param err the error string
-*/
-LX_TTF_exception::LX_TTF_exception(std::string err)
-{
-    str_err = err;
-}
-
-
-/**
-*   @fn const char * what() const throw()
-*   Get the error string
-*   @return the error string
-*/
-const char * LX_TTF_exception::what() const throw()
-{
-    return str_err.c_str();
-}
-
-
-LX_TTF_exception::~LX_TTF_exception() throw(){}
+#include "LX_TrueTypeFont.h"
 
 
 
@@ -62,24 +41,24 @@ LX_TTF_exception::~LX_TTF_exception() throw(){}
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
 *   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
-*   @warning An LX_TTF_exception may also be occured if the filename or the font size is invalid
 *
 */
 LX_TrueTypeFont::LX_TrueTypeFont(SDL_Color *color)
 {
-
     // load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
 
-    if( ttf_config == NULL || ttf_config->getTTF_Flag() == 0)
+    if( ttf_config == NULL)
     {
-        throw LX_TTF_exception("exception occurred in the LX_TrueTypeFont constructor : unable to get the instance or invalid flag");
+        font_str = "";
+        font_size = LX_TTF_DEFAULT_FONT_SIZE;
     }
-
-    font_str = ttf_config->getFontFile();
-    font_size = ttf_config->getFontSize();
-
-    ttf_config->destroy();
+    else
+    {
+        font_str = ttf_config->getFontFile();
+        font_size = ttf_config->getFontSize();
+        ttf_config->destroy();
+    }
 
     init(font_str,color,font_size);
 }
@@ -98,7 +77,6 @@ LX_TrueTypeFont::LX_TrueTypeFont(SDL_Color *color)
 *   @note If you do not need to specify the font color, you may put NULL
 *   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
-*   @warning An LX_TTF_exception may also be occured if the filename or the font size is invalid
 *
 */
 LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color)
@@ -121,7 +99,6 @@ LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color)
 *   @note If you do not need to specify the size, put 0
 *   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
-*   @warning An LX_TTF_exception may also be occured if the filename or the font size is invalid
 *
 */
 LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color, int size)
@@ -145,7 +122,6 @@ LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color, int si
 *   @note If you do not need to specify the size, put 0
 *   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
-*   @warning An LX_TTF_exception may also be occured if the filename or the font size is invalid
 *
 */
 void LX_TrueTypeFont::init(std::string font_file, SDL_Color *color, int size)
@@ -158,11 +134,6 @@ void LX_TrueTypeFont::init(std::string font_file, SDL_Color *color, int size)
     }
 
     font = TTF_OpenFont(font_file.c_str(), size);
-
-    if(font == NULL)
-    {
-        throw LX_TTF_exception(TTF_GetError());
-    }
 
     //put color if it is not null
     if( color != NULL )
@@ -391,7 +362,6 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
 
     if(ttf == NULL)
     {
-        std::cerr << "Error occurred in LX_TrueTypeFont::drawText : " << TTF_GetError() << std::endl;
         return loaded;
     }
 
@@ -407,20 +377,11 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
         case LX_TTF_BLENDED : loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(), font_color);
                               break;
 
-        default :   std::cerr << "Error LX_TrueTypeFont::drawText :  invalid type - "
-                                << type << std::endl;
-                    break;
-    }
-
-    if(loaded == NULL)
-    {
-        std::cerr << "Error occurred in LX_TrueTypeFont::drawText : " << TTF_GetError() << std::endl;
+        default : break;
     }
 
     if(size != font_size)
         TTF_CloseFont(ttf);
-    else
-        ttf = NULL;
 
     return loaded;
 }
@@ -449,13 +410,7 @@ SDL_Texture * LX_TrueTypeFont::drawTextToTexture(LX_TTF_TypeText type,std::strin
         return texture;
 
     // Get the texture
-    texture = SDL_CreateTextureFromSurface(LX_Graphics::getInstance()->getMainRenderer(),surface);
-
-    if(texture == NULL)
-    {
-        std::cerr << "Error occurred in LX_TrueTypeFont::drawTextToTexture / SDL_CreateTextureFromSurface "
-                        << SDL_GetError() << std::endl;
-    }
+    texture = SDL_CreateTextureFromSurface(LX_Graphics::getInstance()->getRenderer(),surface);
 
     SDL_FreeSurface(surface);   // Clean the surface
 
@@ -478,12 +433,7 @@ void LX_TrueTypeFont::setTTF_Font(std::string ttf_filename)
 
     if(!ttf_filename.empty())
     {
-        if((newFont = TTF_OpenFont(ttf_filename.c_str(),font_size)) == NULL)
-        {
-            std::cerr << "Error occurred in LX_TrueTypeFont::setTTF_Font : "
-                        << TTF_GetError() << std::endl;
-        }
-        else
+        if((newFont = TTF_OpenFont(ttf_filename.c_str(),font_size)) != NULL)
         {
             font_str.clear();
             font_str.assign(ttf_filename);

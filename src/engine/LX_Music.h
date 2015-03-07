@@ -28,8 +28,8 @@
 
 #include<SDL2/SDL_mixer.h>
 
-
 class LX_Sound;
+
 
 
 /**
@@ -51,8 +51,8 @@ class LX_Music : public LX_Sound{
 
     // Music
     bool load(std::string filename);
-    void play();
-    void play(int loops);
+    int play();
+    int play(int loops);
     void pause();
     void stop();
 

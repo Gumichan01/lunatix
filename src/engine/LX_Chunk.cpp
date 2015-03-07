@@ -20,9 +20,11 @@
 *
 */
 
+#include<SDL2/SDL_mixer.h>
+
 #include "LX_Sound.h"
 #include "LX_Chunk.h"
-#include "LX_Mixer.h"
+
 
 /**
 *   @fn LX_Chunk::LX_Chunk()
@@ -63,10 +65,7 @@ LX_Chunk::LX_Chunk(std::string filename)
 {
     chunk = NULL;   // Chnuk must be set to NULL before the call of load()
 
-    if(!load(filename.c_str()))
-    {
-        std::cerr << "Error occured in LX_Chunk::load_sample / Mix_LoadWAV : " << Mix_GetError() << std::endl;
-    }
+    load(filename.c_str());
 }
 
 
@@ -98,39 +97,33 @@ bool LX_Chunk::load(std::string filename)
     chunk = Mix_LoadWAV(filename.c_str());
 
     if(chunk == NULL)
-    {
-        std::cerr << "Error occured in LX_Chunk::load_sample / Mix_LoadWAV : " << Mix_GetError() << std::endl;
         return false;
-    }
 
     return true;
-
 }
 
 
 
 /**
-*   @fn void LX_Chunk::play()
+*   @fn int LX_Chunk::play()
 *
 *   Play the current sample
 *
 *   @note This function plays the sample on the first unserved channel
 *         with the no loop option
 *
+*   @return 0 on success, -1 otherwise
+*
 */
-void LX_Chunk::play()
+int LX_Chunk::play()
 {
-    if(Mix_PlayChannel(-1,chunk,LX_MIXER_NOLOOP) == -1)
-    {
-        std::cerr << "Error occured in LX_Chunk::load / Mix_PlayChannel : "
-                        << Mix_GetError() << std::endl;
-    }
+    return play(-1);
 }
 
 
 
 /**
-*   @fn void LX_Chunk::play(int channel)
+*   @fn int LX_Chunk::play(int channel)
 *
 *   Play the current sample
 *
@@ -139,20 +132,18 @@ void LX_Chunk::play()
 *   @note This function plays the sample on the first unserved channel
 *         with the no loop option
 *
+*   @return 0 on success, -1 otherwise
+*
 */
-void LX_Chunk::play(int channel)
+int LX_Chunk::play(int channel)
 {
-    if(Mix_PlayChannel(channel,chunk,LX_MIXER_NOLOOP) == -1)
-    {
-        std::cerr << "Error occured in LX_Chunk::load / Mix_PlayChannel : "
-                        << Mix_GetError() << std::endl;
-    }
+    return Mix_PlayChannel(channel,chunk,0);
 }
 
 
 
 /**
-*   @fn void LX_Chunk::play(int channel,int ticks)
+*   @fn int LX_Chunk::play(int channel,int ticks)
 *
 *   Play the current sample during a moment
 *
@@ -162,14 +153,12 @@ void LX_Chunk::play(int channel)
 *   @note This function plays the sample on the first unserved channel
 *         with the no loop option
 *
+*   @return 0 on success, -1 otherwise
+*
 */
-void LX_Chunk::play(int channel,int ticks)
+int LX_Chunk::play(int channel,int ticks)
 {
-    if(Mix_PlayChannelTimed(channel,chunk,LX_MIXER_NOLOOP, ticks) == -1)
-    {
-        std::cerr << "Error occured in LX_Chunk::load / Mix_PlayChannelTimed : "
-                        << Mix_GetError() << std::endl;
-    }
+    return Mix_PlayChannelTimed(channel,chunk,0, ticks);
 }
 
 
@@ -186,6 +175,8 @@ void LX_Chunk::play(int channel,int ticks)
 *           and there is no change
 *   @note If the new volume is greater than 128, the volume is set to 128
 *   @note 128 is the maximum value defined by the MIX_MAX_VOLUME macro
+*
+*   @return 0 on success, -1 otherwise
 *
 */
 int LX_Chunk::volume(int newVolume)

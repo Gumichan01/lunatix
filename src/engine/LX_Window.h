@@ -24,9 +24,10 @@
 *
 */
 
-#include <SDL2/SDL.h>
 
-
+struct SDL_Window;
+struct SDL_Renderer;
+struct SDL_Surface;
 
 /**
 *   @class LX_WindowException
@@ -65,7 +66,7 @@ class LX_WindowException : public std::exception
 */
 class LX_Window{
 
-    SDL_Window *lxWindow;   /**< The main surface (for the window creation)*/
+    SDL_Window *lxWindow;   /**< The internal window structure*/
 
 
     public :

@@ -132,7 +132,6 @@ bool LX_Init(void)
     configuration->destroy();
 
     return true;
-
 }
 
 

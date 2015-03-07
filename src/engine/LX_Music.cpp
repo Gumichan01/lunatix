@@ -22,9 +22,10 @@
 *
 */
 
+
 #include "LX_Sound.h"
 #include "LX_Music.h"
-#include "LX_Mixer.h"
+
 
 
 
@@ -64,12 +65,9 @@ LX_Music::LX_Music(Mix_Music *mus)
 */
 LX_Music::LX_Music(std::string filename)
 {
-    music = NULL;   // If you remove this code line, you will have a segmentation fault
+    music = NULL;
 
-    if(!load(filename.c_str()))
-    {
-        music = NULL;
-    }
+    load(filename.c_str());
 }
 
 
@@ -87,7 +85,7 @@ LX_Music::~LX_Music()
 *
 *   @param filename the file you want to open
 *
-*   @return TRUE if all is OK, FALSE otherwise
+*   @return TRUE on success, FALSE otherwise
 *
 */
 bool LX_Music::load(std::string filename)
@@ -97,47 +95,41 @@ bool LX_Music::load(std::string filename)
     music = Mix_LoadMUS(filename.c_str());
 
     if(music == NULL)
-    {
-        std::cerr << "Error occured in LX_Music::load / Mix_LoadMUS : " << Mix_GetError() << std::endl;
         return false;
-    }
 
     return true;
 }
 
 
 /**
-*   @fn bool LX_Music::play(int loops)
+*   @fn int LX_Music::play(int loops)
 *
 *   Play the music specified in the LX_Music class
 *
 *   @param loops the loops constant
 *
-*   @return TRUE if it is OK, FALSE otherwise
+*   @return 0 on success, -1 otherwise
 *
 */
-void LX_Music::play(int loops)
+int LX_Music::play(int loops)
 {
-    if(Mix_PlayMusic(music,loops) == -1)
-    {
-        std::cerr << "Error occured in LX_Music::play : " << Mix_GetError() << std::endl;
-    }
+    return Mix_PlayMusic(music,loops);
 }
 
 
 /**
-*   @fn bool LX_Music::play()
+*   @fn int LX_Music::play()
 *
 *   Play the music specified in the LX_Music class
 *
-*   @return TRUE if it is OK, FALSE otherwise
+*   @return 0 on success, -1 otherwise
 *
 *   @note This function internally calls play(int loops) with the no loop option
 *
 */
-void LX_Music::play()
+int LX_Music::play()
 {
-    return play(LX_MIXER_NOLOOP);
+    return play(0);
 }
 
 
@@ -173,7 +165,6 @@ void LX_Music::stop()
         Mix_HaltMusic();
     }
 }
-
 
 
 

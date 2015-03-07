@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wextra" />
 					<Add option="-pg" />
 					<Add option="-g" />
 				</Compiler>
@@ -34,7 +35,6 @@
 		</Build>
 		<Compiler>
 			<Add option="-std=c++0x" />
-			<Add option="-Wall" />
 			<Add directory=".\include" />
 		</Compiler>
 		<Linker>

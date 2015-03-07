@@ -32,7 +32,7 @@ class LX_Sound{
     public:
 
     virtual bool load(std::string filename) = 0;
-    virtual void play() = 0;
+    virtual int play() = 0;
     virtual int volume(int newVolume) = 0;
 
     ~LX_Sound(){};

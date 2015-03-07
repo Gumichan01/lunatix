@@ -25,15 +25,8 @@
 *
 */
 
-#include <SDL2/SDL.h>
 
-/*
-typedef struct SDL_Rect{
-
-    short x,y,w,h;
-
-}LX_AABB;*/
-
+struct SDL_Rect;
 typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect)*/
 
 

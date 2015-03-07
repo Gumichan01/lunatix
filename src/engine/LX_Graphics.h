@@ -24,7 +24,12 @@
 *
 */
 
-#include "LX_Window.h"
+
+struct SDL_Window;
+struct SDL_Renderer;
+struct SDL_Surface;
+
+class LX_Window;
 
 
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP
@@ -46,16 +51,14 @@ class LX_Graphics{
 
     LX_Window *mainWindow;  /**< The main window */
     SDL_Renderer *renderer; /**< The main renderer */
-    //std::vector<LX_Window *> vectorWindows;    /**< The vector of other windows*/
 
     int originalWidth;
     int originalHeight;
 
-    ///@todo [vector] Implement the windowVector
     LX_Graphics();
     LX_Graphics(LX_Window *win);
 
-    bool isBMPFile(std::string filename);
+    void init();
 
     public:
 
@@ -66,50 +69,29 @@ class LX_Graphics{
     static void destroy();
 
 
-    // The static functions
     SDL_Surface * loadSurface(std::string filename);
 
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target);
     SDL_Texture * loadTextureFromFile(std::string filename);
 
-    /// @todo [vector] implement the texture creation for a specific window
-    // If wd == -1 > main window
-    //SDL_Texure * laodTextureFomFile(std::string filename, int wd);
-
     bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
-
-    /// @todo [vector] implement the main operation on LX_Window and SDL_Window
-    int addLXWindow(LX_Window *win);
-    //int addSDLWindow(SDL_Window *win);
-    bool destroySDLWindow(unsigned int wd);
-    // End static functions
 
     // put the sprite on the screen
     bool put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
     bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
 
-    /// @todo [vector] define the surface and texture blit on other windows
-    // If wd == -1 > main window
-    //bool put_surfaceOn(int wd,SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
-    //bool putTextureOn(int wd,SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
-
     void setWindowSize(int w, int h);
     void setFullscreen(Uint32 flag);
 
     // the update and clearing functions
-    void updateMainWindow();
-    void updateMainRenderer();
+    void updateWindow();
+    void updateRenderer();
 
-    /// @todo [vector] define the update function on other windows
-    // void updateWindow(int wd);
-    //void updateRenderer(int wd);
+    void clearWindow();
+    void clearRenderer();
 
-    void clearMainWindow();
-    void clearMainRenderer();
-
-
-    SDL_Surface * getMainSurface();
-    SDL_Renderer * getMainRenderer();
+    SDL_Surface * getSurface();
+    SDL_Renderer * getRenderer();
 
     ~LX_Graphics();
 
