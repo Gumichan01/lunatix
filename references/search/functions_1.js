@@ -1,8 +1,0 @@
-var searchData=
-[
-  ['channelvolume',['channelVolume',['../d0/d16/namespace_l_x___mixer.html#a3ce2d3c2989cce9ce2539ae1a5491d38',1,'LX_Mixer']]],
-  ['clearrenderer',['clearRenderer',['../de/dd0/class_l_x___graphics.html#a6e383901370253480ebf0802e7b7d35b',1,'LX_Graphics']]],
-  ['clearwindow',['clearWindow',['../de/dd0/class_l_x___graphics.html#a8d0cb9401aaf50646679454bc412ba80',1,'LX_Graphics']]],
-  ['collision',['collision',['../dc/d19/namespace_l_x___physics.html#aedf6c059347545b928642da796cf556b',1,'LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)'],['../dc/d19/namespace_l_x___physics.html#a85cdbafd6e06e76276d248f40da1b066',1,'LX_Physics::collision(int x_pos, int y_pos, const LX_Circle *circle)'],['../dc/d19/namespace_l_x___physics.html#a10ededb4de9414ee985d33ed2faf060a',1,'LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)'],['../dc/d19/namespace_l_x___physics.html#a30ea39a193f4f882e1ee3c87e6805ef1',1,'LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)'],['../dc/d19/namespace_l_x___physics.html#aaa4303907dcee3ac53565061d9b30936',1,'LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)'],['../dc/d19/namespace_l_x___physics.html#a347e2217e3a19c96a657aea97804a816',1,'LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)']]],
-  ['createinstance',['createInstance',['../de/dd0/class_l_x___graphics.html#a387f242a375f31e354c00abb9a4c8c70',1,'LX_Graphics::createInstance()'],['../de/dd0/class_l_x___graphics.html#a076f5e36e7e61b29034503b90e03f09c',1,'LX_Graphics::createInstance(LX_Window *win)']]]
-];

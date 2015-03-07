@@ -1,7 +1,0 @@
-<map id="LX_Quit" name="LX_Quit">
-<area shape="rect" id="node2" href="$da/d1d/_s_d_l__mixer_8h.html#a2cb071e94923956f4c3ca4d3998669e7" title="Mix_CloseAudio" alt="" coords="120,5,236,32"/>
-<area shape="rect" id="node3" href="$da/d1d/_s_d_l__mixer_8h.html#a136e5586b53fe0e3e752e2174bd7bb70" title="Mix_Quit" alt="" coords="141,56,215,83"/>
-<area shape="rect" id="node4" href="$dc/d92/_s_d_l__ttf_8h.html#aa215d7d4fe202960904507a6ad4e6097" title="TTF_Quit" alt="" coords="141,107,215,133"/>
-<area shape="rect" id="node5" href="$d5/d9d/_s_d_l__image_8h.html#a8e5db0b68bf88958f87b189a8960e39c" title="IMG_Quit" alt="" coords="139,157,217,184"/>
-<area shape="rect" id="node6" href="$de/ddc/_s_d_l_8h.html#afdabaf714781099083592051f2d9ac11" title="SDL_Quit" alt="" coords="139,208,217,235"/>
-</map>

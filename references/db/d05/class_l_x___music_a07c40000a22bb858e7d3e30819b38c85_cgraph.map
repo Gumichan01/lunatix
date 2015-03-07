@@ -1,5 +1,0 @@
-<map id="LX_Music::pause" name="LX_Music::pause">
-<area shape="rect" id="node2" href="$da/d1d/_s_d_l__mixer_8h.html#a6366b72369e1217ed7f45d2c0d5acb1d" title="Mix_PausedMusic" alt="" coords="177,5,306,32"/>
-<area shape="rect" id="node3" href="$da/d1d/_s_d_l__mixer_8h.html#aa45edeb5e03075593c4567e197565979" title="Mix_ResumeMusic" alt="" coords="175,56,308,83"/>
-<area shape="rect" id="node4" href="$da/d1d/_s_d_l__mixer_8h.html#abe25a71474eae91d3ad725eb4ad8ed39" title="Mix_PauseMusic" alt="" coords="180,107,303,133"/>
-</map>

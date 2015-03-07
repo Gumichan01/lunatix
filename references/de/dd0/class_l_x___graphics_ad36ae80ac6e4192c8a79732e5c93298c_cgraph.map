@@ -1,4 +1,0 @@
-<map id="LX_Graphics::set_alpha" name="LX_Graphics::set_alpha">
-<area shape="rect" id="node2" href="$d4/d6d/_s_d_l__surface_8h.html#a4cbe831b210dc900cb93101352357b73" title="Sets the color key (transparent pixel) in a blittable surface. " alt="" coords="212,5,339,32"/>
-<area shape="rect" id="node3" href="$d8/d6a/_s_d_l__pixels_8h.html#a157cf64c250c578722b939ea11a85b39" title="Maps an RGB triple to an opaque pixel value for a given pixel format. " alt="" coords="222,56,329,83"/>
-</map>
