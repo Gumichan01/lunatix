@@ -193,7 +193,7 @@ SDL_Surface * LX_Graphics::loadSurface(std::string filename)
         return NULL;
     }
 
-    optimized = SDL_ConvertSurface(loaded,mainWindow->getSurface()->format,0x00000000);
+    optimized = SDL_ConvertSurfaceFormat(loaded,SDL_PIXELFORMAT_RGBA4444,0x00000000);
 
     SDL_FreeSurface(loaded);
 
@@ -232,7 +232,13 @@ SDL_Texture * LX_Graphics::loadTextureFromFile(std::string filename)
     SDL_Surface *tmpS = NULL;
     SDL_Texture *tmpT = NULL;
 
-    tmpS = loadSurface(filename);
+    tmpS = loadSurface(filename.c_str());
+
+    if(tmpS == NULL)
+    {
+        return NULL;
+    }
+
     tmpT = loadTextureFromSurface(tmpS);
 
     SDL_FreeSurface(tmpS);

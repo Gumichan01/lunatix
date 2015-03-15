@@ -348,6 +348,8 @@ SDL_Surface * LX_TrueTypeFont::draw_BlendedText(std::string text, unsigned int s
 *
 *   @return a SDL_surface on success, NULL otherwise
 *
+*   @note : if size is 0, then the font_size is used
+*
 */
 SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 {
@@ -355,7 +357,7 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
     SDL_Surface *loaded = NULL;
 
 
-    if(size != font_size)
+    if(size != font_size && size != 0)
         ttf = TTF_OpenFont(font_str.c_str(), size);
     else
         ttf = font;
@@ -380,7 +382,7 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
         default : break;
     }
 
-    if(size != font_size)
+    if(size != font_size && size != 0)
         TTF_CloseFont(ttf);
 
     return loaded;
