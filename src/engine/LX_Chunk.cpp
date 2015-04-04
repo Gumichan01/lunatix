@@ -22,8 +22,8 @@
 
 #include<SDL2/SDL_mixer.h>
 
-#include "LX_Sound.h"
-#include "LX_Chunk.h"
+#include "LX_Sound.hpp"
+#include "LX_Chunk.hpp"
 
 
 /**

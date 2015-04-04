@@ -23,7 +23,7 @@
 #include <cmath>
 #include <SDL2/SDL.h>
 
-#include "LX_Physics.h"
+#include "LX_Physics.hpp"
 
 
 /**

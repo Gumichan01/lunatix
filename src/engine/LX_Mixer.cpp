@@ -21,10 +21,10 @@
 *
 */
 
-#include "LX_Sound.h"
-#include "LX_Music.h"
-#include "LX_Chunk.h"
-#include "LX_Mixer.h"
+#include "LX_Sound.hpp"
+#include "LX_Music.hpp"
+#include "LX_Chunk.hpp"
+#include "LX_Mixer.hpp"
 
 
 /**

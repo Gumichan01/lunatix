@@ -23,8 +23,8 @@
 */
 
 
-#include "LX_Sound.h"
-#include "LX_Music.h"
+#include "LX_Sound.hpp"
+#include "LX_Music.hpp"
 
 
 

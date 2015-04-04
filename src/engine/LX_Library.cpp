@@ -26,9 +26,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "LX_Config.h"
-#include "LX_Library.h"
-#include "LX_Mixer.h"
+#include "LX_Config.hpp"
+#include "LX_Library.hpp"
+#include "LX_Mixer.hpp"
 
 /**
 *   @fn bool LX_Init(void)

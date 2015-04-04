@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_Graphics.h
+*	@file LX_Graphics.hpp
 *	@brief The LX_Graphics library, it will be linked with the SDL library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2

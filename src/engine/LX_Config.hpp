@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_Config.h
+*	@file LX_Config.hpp
 *	@brief The LunatiX_engine configuration class
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2

@@ -16,7 +16,7 @@
 */
 
 /**
-*	@file LX_Hitbox.h
+*	@file LX_Hitbox.hpp
 *	@brief The hitbox library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2

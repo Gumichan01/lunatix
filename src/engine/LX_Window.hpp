@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_Window.h
+*	@file LX_Window.hpp
 *	@brief The LX_Window library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2

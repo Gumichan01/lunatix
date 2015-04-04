@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_TrueTypeFont.h
+*	@file LX_TrueTypeFont.hpp
 *	@brief The LX_TrueTypeFont library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2

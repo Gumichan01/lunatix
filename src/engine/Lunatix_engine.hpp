@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file Lunatix_engine.h
+*	@file Lunatix_engine.hpp
 *	@brief The Lunatix engine header
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2
@@ -27,14 +27,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "LX_Library.h"
-#include "LX_Config.h"
-#include "LX_Graphics.h"
-#include "LX_TrueTypeFont.h"
-#include "LX_Mixer.h"
-#include "LX_Sound.h"
-#include "LX_Chunk.h"
-#include "LX_Music.h"
-#include "LX_Physics.h"
+#include "LX_Library.hpp"
+#include "LX_Config.hpp"
+#include "LX_Graphics.hpp"
+#include "LX_TrueTypeFont.hpp"
+#include "LX_Mixer.hpp"
+#include "LX_Sound.hpp"
+#include "LX_Chunk.hpp"
+#include "LX_Music.hpp"
+#include "LX_Physics.hpp"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED

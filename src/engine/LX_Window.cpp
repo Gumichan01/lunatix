@@ -23,8 +23,8 @@
 
 #include <SDL2/SDL.h>
 
-#include "LX_Config.h"
-#include "LX_Window.h"
+#include "LX_Config.hpp"
+#include "LX_Window.hpp"
 
 
 

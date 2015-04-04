@@ -24,7 +24,7 @@
 #include <iostream>
 #include <cstdio>
 
-#include "engine/Lunatix_engine.h"
+#include "engine/Lunatix_engine.hpp"
 
 int main ( int argc, char** argv )
 {

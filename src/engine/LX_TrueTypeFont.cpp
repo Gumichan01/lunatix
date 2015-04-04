@@ -24,9 +24,9 @@
 
 #include <SDL2/SDL.h>
 
-#include "LX_Config.h"
-#include "LX_Graphics.h"
-#include "LX_TrueTypeFont.h"
+#include "LX_Config.hpp"
+#include "LX_Graphics.hpp"
+#include "LX_TrueTypeFont.hpp"
 
 
 

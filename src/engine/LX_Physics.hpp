@@ -17,7 +17,7 @@
 
 /**
 *
-*	@file LX_Physics.h
+*	@file LX_Physics.hpp
 *	@brief The LX_Physics Library, it will be linked with the SDL library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2
@@ -25,7 +25,7 @@
 *
 */
 
-#include "LX_Hitbox.h"
+#include "LX_Hitbox.hpp"
 
 #define RECT_SIDES 4    /**<The number of the AABB sides*/
 

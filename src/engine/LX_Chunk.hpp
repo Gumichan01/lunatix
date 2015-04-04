@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_Chunk.h
+*	@file LX_Chunk.hpp
 *	@brief The wrapper of the SDL_Chunk structure
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2

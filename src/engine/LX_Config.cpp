@@ -27,7 +27,7 @@
 
 #include <Lua/lua.hpp>
 
-#include "LX_Config.h"
+#include "LX_Config.hpp"
 
 // unique instance
 static LX_Configuration *instance;

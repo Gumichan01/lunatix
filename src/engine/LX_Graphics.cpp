@@ -26,8 +26,8 @@
 
 #include <SDL2/SDL_image.h>
 
-#include "LX_Graphics.h"
-#include "LX_Window.h"
+#include "LX_Graphics.hpp"
+#include "LX_Window.hpp"
 
 
 static LX_Graphics *gInstance = NULL;
