@@ -69,7 +69,6 @@
 		<Unit filename="src\engine\LX_Music.h" />
 		<Unit filename="src\engine\LX_Physics.cpp" />
 		<Unit filename="src\engine\LX_Physics.h" />
-		<Unit filename="src\engine\LX_Point.h" />
 		<Unit filename="src\engine\LX_Sound.h" />
 		<Unit filename="src\engine\LX_TrueTypeFont.cpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.h" />
