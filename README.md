@@ -11,7 +11,7 @@
  At the moment, the engine only works on windows. The Linux support will be done soon.
 
  
- You can find the library reference in the repository or [here](http://gumichan01.olympe.in/reference/lunatix-engine/)
+ You can find the library reference [here](http://gumichan01.olympe.in/reference/lunatix-engine/)
 
  Lunatix Engine (new version with SDL2), is available [here](https://drive.google.com/open?id=0BzqOweb9HuKBLTNGV0hiRmFLb0E&authuser=0)
  
