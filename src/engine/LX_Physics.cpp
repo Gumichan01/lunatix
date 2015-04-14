@@ -7,7 +7,7 @@
 *	LunatiX-engine is a SDL-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*   Luxon Jean-Pierre (Gumichan01)
+*	Luxon Jean-Pierre (Gumichan01)
 *	luxon.jean.pierre@gmail.com
 */
 
@@ -25,7 +25,6 @@
 
 #include "LX_Physics.hpp"
 
-
 /**
 *
 *	@fn int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
@@ -33,9 +32,9 @@
 *	This function calculates the Euclide square distance
 *
 *	@param	x1 The x location of the first hitbox
-*   @param  y1 The y location of the first hitbox
+*	@param  y1 The y location of the first hitbox
 *	@param	x2 The x location of the second hitbox
-*   @param	y2 The y location of the second hitbox
+*	@param	y2 The y location of the second hitbox
 *
 *	@return an integer value
 *
@@ -53,9 +52,9 @@ int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 *	This function calculates the Euclide distance
 *
 *	@param	x1 The x location of the first hitbox
-*   @param  y1 The y location of the first hitbox
+*	@param  y1 The y location of the first hitbox
 *	@param	x2 The x location of the second hitbox
-*   @param	y2 The y location of the second hitbox
+*	@param	y2 The y location of the second hitbox
 *
 *	@return an integer value
 *
@@ -73,7 +72,7 @@ int LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 *	This function calculates the Euclide square distance
 *
 *	@param	p1 The first point
-*   @param	p2 The second point
+*	@param	p2 The second point
 *
 *	@return an integer value
 *
@@ -91,7 +90,7 @@ int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 *	This function calculates the Euclide square distance
 *
 *	@param	p1 The first point
-*   @param	p2 The second point
+*	@param	p2 The second point
 *
 *	@return an integer value
 *
@@ -111,8 +110,8 @@ int LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 *	Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
 *	@param	x_pos the x position of the point
-*   @param  y_pos the y position of the point
-*   @param	rect the AABB
+*	@param  y_pos the y position of the point
+*	@param	rect the AABB
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
@@ -137,8 +136,8 @@ bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 *	Check the collision between a point and a circle
 *
 *	@param	x_pos the x position of the point
-*   @param  y_pos the y position of the point
-*   @param	circle the circle
+*	@param  y_pos the y position of the point
+*	@param	circle the circle
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
@@ -164,7 +163,7 @@ bool LX_Physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
 *	Check the collision between two Axis Aligned Bouding Box (AABB)
 *
 *	@param	rect1 the first AABB
-*   @param	rect2 the second AABB
+*	@param	rect2 the second AABB
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
@@ -189,7 +188,7 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 *	Check the collision between two circles
 *
 *	@param	circle1 the circle
-*   @param	circle2 the circle
+*	@param	circle2 the circle
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
@@ -210,8 +209,8 @@ bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 *	Check the collision between a circle and the [AB] segment
 *
 *	@param	circle the circle
-*   @param	A one of the two point segment
-*   @param	B another one of the two point segment
+*	@param	A one of the two point segment
+*	@param	B another one of the two point segment
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
@@ -261,7 +260,7 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 *	Check the collision between a circle and a AABB
 *
 *	@param	circle the circle
-*   @param	rect the AABB
+*	@param	rect the AABB
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
