@@ -206,6 +206,7 @@ void LX_Configuration::setVideoFlag()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -251,6 +252,7 @@ void LX_Configuration::setTTF_Flag()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -296,6 +298,7 @@ void LX_Configuration::setAudioFlag()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -341,6 +344,7 @@ void LX_Configuration::setJoystickFlag()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -388,6 +392,7 @@ void LX_Configuration::setOpenGL_Flag()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -436,6 +441,7 @@ void LX_Configuration::setFontFile()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -484,6 +490,7 @@ void LX_Configuration::setFontSize()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -530,6 +537,7 @@ void LX_Configuration::setWinWidth()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -576,6 +584,7 @@ void LX_Configuration::setWinHeight()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
@@ -623,6 +632,7 @@ void LX_Configuration::setFullscreenFlag()
     }
 
     lua_pop(state,1);
+    lua_close(state);
 }
 
 
