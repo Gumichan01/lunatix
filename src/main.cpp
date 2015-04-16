@@ -167,7 +167,7 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-    graphics->destroy();
+    LX_Graphics::destroy();
 
     std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(0) <<std::endl;
     LX_Quit();
@@ -204,7 +204,7 @@ int main ( int argc, char** argv )
     std::cout << "fullscreen : " << f << std::endl;
 
 
-    delete configuration;
+    LX_Configuration::destroy();
 
     SDL_version compiled;
     SDL_version linked;
