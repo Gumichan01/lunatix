@@ -7,7 +7,7 @@
 *	Copyright (C) 2014-2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX-engine is a SDL-based game engine.
+*	The LunatiX-engine is a SDL-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_TrueTypeFont.hpp
+*	@file LX_TrueTypeFont.h
 *	@brief The LX_TrueTypeFont library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2
@@ -65,8 +65,6 @@ class LX_TrueTypeFont{
     unsigned int font_size;     /**< The font size */
     SDL_Color font_color;       /**< The font color */
 
-    TTF_Font *font;             /**< The font structure created */
-
 
     void init(std::string font_file, SDL_Color *color, int size);
     SDL_Surface * drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
@@ -92,7 +90,6 @@ class LX_TrueTypeFont{
 
     SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size);
 
-    void setTTF_Font(std::string ttf_filename);
     void setColor(SDL_Color *color);
 
     ~LX_TrueTypeFont();

@@ -4,7 +4,7 @@
 *	Copyright (C) 2014-2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX-engine is a SDL-based game engine.
+*	The LunatiX-engine is a SDL-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -126,16 +126,13 @@ LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color, int si
 */
 void LX_TrueTypeFont::init(std::string font_file, SDL_Color *color, int size)
 {
-    font = NULL;
 
     if(size <= 0)
     {
          size = LX_TTF_DEFAULT_FONT_SIZE;
     }
 
-    font = TTF_OpenFont(font_file.c_str(), size);
-
-    //put color if it is not null
+    // Put color if it is not null
     if( color != NULL )
     {
         font_color.r = color->r;
@@ -160,7 +157,7 @@ void LX_TrueTypeFont::init(std::string font_file, SDL_Color *color, int size)
 */
 LX_TrueTypeFont::~LX_TrueTypeFont()
 {
-    TTF_CloseFont(font);
+    //TTF_CloseFont(font);
 }
 
 
@@ -178,7 +175,18 @@ LX_TrueTypeFont::~LX_TrueTypeFont()
 */
 int LX_TrueTypeFont::sizeOfText(std::string text, int *w, int *h)
 {
-    return sizeOfText(font,text.c_str(),w,h);
+    TTF_Font *ttf = NULL;
+    int sz;
+
+    ttf = TTF_OpenFont(font_str.c_str(),font_size);
+
+    if(ttf == NULL)
+        return -1;
+
+    sz = sizeOfText(ttf,text.c_str(),w,h);
+
+    TTF_CloseFont(ttf);
+    return sz;
 }
 
 
@@ -215,7 +223,7 @@ int LX_TrueTypeFont::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
 */
 SDL_Surface * LX_TrueTypeFont::draw_SolidText(std::string text)
 {
-    return TTF_RenderUTF8_Solid(font,text.c_str(), font_color);
+    return draw_SolidText(text.c_str(),font_size);
 }
 
 
@@ -252,7 +260,7 @@ SDL_Surface * LX_TrueTypeFont::draw_SolidText(std::string text, unsigned int siz
 */
 SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text, SDL_Color bg)
 {
-    return TTF_RenderUTF8_Shaded(font,text.c_str(), font_color, bg);
+    return draw_ShadedText(text.c_str(), bg.r, bg.g, bg.b);
 }
 
 
@@ -311,7 +319,7 @@ SDL_Surface * LX_TrueTypeFont::draw_ShadedText(std::string text, Uint8 r, Uint8 
 */
 SDL_Surface * LX_TrueTypeFont::draw_BlendedText(std::string text)
 {
-    return TTF_RenderUTF8_Blended(font,text.c_str(), font_color);
+    return draw_BlendedText(text.c_str(),font_size);
 }
 
 
@@ -357,10 +365,11 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
     SDL_Surface *loaded = NULL;
 
 
-    if(size != font_size && size != 0)
-        ttf = TTF_OpenFont(font_str.c_str(), size);
+    if(size != font_size && size <= 0)
+        ttf = TTF_OpenFont(font_str.c_str(), font_size);
     else
-        ttf = font;
+        ttf = TTF_OpenFont(font_str.c_str(), size);
+
 
     if(ttf == NULL)
     {
@@ -382,7 +391,6 @@ SDL_Surface * LX_TrueTypeFont::drawText(LX_TTF_TypeText type, std::string text, 
         default : break;
     }
 
-    if(size != font_size && size != 0)
         TTF_CloseFont(ttf);
 
     return loaded;
@@ -417,34 +425,6 @@ SDL_Texture * LX_TrueTypeFont::drawTextToTexture(LX_TTF_TypeText type,std::strin
     SDL_FreeSurface(surface);   // Clean the surface
 
     return texture;
-}
-
-
-/**
-*
-*   @fn void LX_TrueTypeFont::setTTF_Font(std::string ttf_filename)
-*
-*   This function resets the font replacing the filen ame and the font.
-*
-*   @param ttf_filename the new fil name you want to create the font from
-*
-*/
-void LX_TrueTypeFont::setTTF_Font(std::string ttf_filename)
-{
-    TTF_Font *newFont = NULL;
-
-    if(!ttf_filename.empty())
-    {
-        if((newFont = TTF_OpenFont(ttf_filename.c_str(),font_size)) != NULL)
-        {
-            font_str.clear();
-            font_str.assign(ttf_filename);
-
-            TTF_CloseFont(font);
-            font = newFont;
-        }
-    }
-
 }
 
 
