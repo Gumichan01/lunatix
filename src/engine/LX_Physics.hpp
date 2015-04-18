@@ -34,7 +34,7 @@
 /**
 *
 *   @namespace LX_Physics
-*   @brief The LunatiX_engine physic engine
+*   @brief The LunatiX_engine physics engine
 *
 *   This namespace describes the LX_Physics, the physics module of the Lunatix engine.
 *

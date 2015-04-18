@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_TrueTypeFont.h
+*	@file LX_TrueTypeFont.hpp
 *	@brief The LX_TrueTypeFont library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2
@@ -34,9 +34,9 @@ struct SDL_Texture;
 struct SDL_Color;
 
 
-#define LX_TTF_DEFAULT_FONT_SIZE 24    /**< The default value of the font size*/
-#define LX_WHITE_COLOR 255
-#define LX_BLACK_COLOR 0
+#define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
+#define LX_WHITE_COLOR 255              /**< The white color value */
+#define LX_BLACK_COLOR 0                /**< The black color value */
 
 
 /**

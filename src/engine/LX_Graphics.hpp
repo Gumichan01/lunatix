@@ -36,9 +36,9 @@ struct SDL_Surface;
 class LX_Window;
 
 
-#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP
-#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN
-#define LX_GRAPHICS_NO_FULLSCREEN 0
+#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /** < Fullscreen with desktop resolution */
+#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /** < Just fullscreen mode with original resolution */
+#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /** < Original resolution in window */
 
 
 

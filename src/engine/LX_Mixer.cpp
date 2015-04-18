@@ -359,7 +359,7 @@ void LX_Mixer::setDistance(Uint8 distance)
 
 
 /**
-*   @fn void LX_Mixer::setPosition(Sint16 angle, int distance)
+*   @fn void LX_Mixer::setPosition(Sint16 angle)
 *
 *   Set the virtuel position of the audio source according to the channel.
 *
