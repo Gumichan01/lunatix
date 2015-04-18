@@ -44,7 +44,7 @@ int main ( int argc, char** argv )
     std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
-    LX_Graphics *graphics = NULL;
+    LX_Graphics::LX_Renderer *graphics = NULL;
     LX_TrueTypeFont *ttf = NULL;
     LX_Music *audio = NULL;
 
@@ -63,7 +63,7 @@ int main ( int argc, char** argv )
 
     try
     {
-        graphics = LX_Graphics::createInstance();
+        graphics = LX_Graphics::LX_Renderer::createInstance();
 
     }
     catch(std::exception & e )
@@ -80,7 +80,7 @@ int main ( int argc, char** argv )
 
     if(st == NULL)
     {
-        std::cerr << "[MAIN] LX_Graphics::load_surface : " << SDL_GetError() <<std::endl;
+        std::cerr << "[MAIN] LX_Graphics::LX_Renderer::load_surface : " << SDL_GetError() <<std::endl;
     }
 
     ttf->sizeOfText("LunatiX_engine",&wt,&ht);
@@ -167,7 +167,7 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-    LX_Graphics::destroy();
+    LX_Graphics::LX_Renderer::destroy();
 
     std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(0) <<std::endl;
     LX_Quit();

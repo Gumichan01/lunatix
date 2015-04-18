@@ -25,7 +25,7 @@
 #include <SDL2/SDL.h>
 
 #include "LX_Config.hpp"
-#include "LX_Graphics.hpp"
+#include "LX_Renderer.hpp"
 #include "LX_TrueTypeFont.hpp"
 
 
@@ -420,7 +420,7 @@ SDL_Texture * LX_TrueTypeFont::drawTextToTexture(LX_TTF_TypeText type,std::strin
         return texture;
 
     // Get the texture
-    texture = SDL_CreateTextureFromSurface(LX_Graphics::getInstance()->getRenderer(),surface);
+    texture = SDL_CreateTextureFromSurface(LX_Graphics::LX_Renderer::getInstance()->getRenderer(),surface);
 
     SDL_FreeSurface(surface);   // Clean the surface
 

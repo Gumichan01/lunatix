@@ -20,7 +20,7 @@ DEBUG=no
 
 CC=g++
 MAIN_OBJ=main.o
-OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o \
+OBJS=LX_Chunk.o LX_Config.o LX_Renderer.o LX_Library.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o
 
 # Path to main file directory
@@ -87,12 +87,12 @@ LX_Library.o : $(LUNATIX_PATH)LX_Library.cpp $(LUNATIX_PATH)LX_Library.hpp $(LUN
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Graphics.o : $(LUNATIX_PATH)LX_Graphics.cpp $(LUNATIX_PATH)LX_Window.hpp
+LX_Renderer.o : $(LUNATIX_PATH)LX_Renderer.cpp $(LUNATIX_PATH)LX_Window.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_PATH)LX_TrueTypeFont.hpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Config.hpp
+LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_PATH)LX_TrueTypeFont.hpp $(LUNATIX_PATH)LX_Renderer.hpp $(LUNATIX_PATH)LX_Config.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 

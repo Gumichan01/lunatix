@@ -59,8 +59,6 @@
 		<Unit filename="src\engine\LX_Chunk.hpp" />
 		<Unit filename="src\engine\LX_Config.cpp" />
 		<Unit filename="src\engine\LX_Config.hpp" />
-		<Unit filename="src\engine\LX_Graphics.cpp" />
-		<Unit filename="src\engine\LX_Graphics.hpp" />
 		<Unit filename="src\engine\LX_Hitbox.hpp" />
 		<Unit filename="src\engine\LX_Library.cpp" />
 		<Unit filename="src\engine\LX_Library.hpp" />
@@ -70,6 +68,8 @@
 		<Unit filename="src\engine\LX_Music.hpp" />
 		<Unit filename="src\engine\LX_Physics.cpp" />
 		<Unit filename="src\engine\LX_Physics.hpp" />
+		<Unit filename="src\engine\LX_Renderer.cpp" />
+		<Unit filename="src\engine\LX_Renderer.hpp" />
 		<Unit filename="src\engine\LX_Sound.hpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.cpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.hpp" />
