@@ -39,7 +39,7 @@
 *   @param color the default color font
 *
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
-*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
+*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in lxsdl.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
 *
 */
@@ -75,7 +75,7 @@ LX_TrueTypeFont::LX_TrueTypeFont(SDL_Color *color)
 *   @param color the default color font
 *
 *   @note If you do not need to specify the font color, you may put NULL
-*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
+*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in lxsdl.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
 *
 */
@@ -97,7 +97,7 @@ LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color)
 *
 *   @note If you do not need to specify the font color, you may put NULL instead of this color
 *   @note If you do not need to specify the size, put 0
-*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
+*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in lxsdl.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
 *
 */
@@ -120,7 +120,7 @@ LX_TrueTypeFont::LX_TrueTypeFont(std::string font_file, SDL_Color *color, int si
 *
 *   @note If you do not need to specify the font color, you may put NULL
 *   @note If you do not need to specify the size, put 0
-*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in sdl_conf.cfg.
+*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in lxsdl.cfg.
 *            Otherwise, a LX_TTF_exception will be occured.
 *
 */
