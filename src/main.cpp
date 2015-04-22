@@ -26,6 +26,9 @@
 
 #include "engine/Lunatix_engine.hpp"
 
+using namespace LX_Graphics;
+using namespace LX_TrueTypeFont;
+
 int main ( int argc, char** argv )
 {
 
@@ -44,8 +47,8 @@ int main ( int argc, char** argv )
     std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
-    LX_Graphics::LX_Renderer *graphics = NULL;
-    LX_TrueTypeFont *ttf = NULL;
+    LX_Renderer *graphics = NULL;
+    LX_Font *ttf = NULL;
     LX_Music *audio = NULL;
 
     SDL_Event event;
@@ -63,7 +66,7 @@ int main ( int argc, char** argv )
 
     try
     {
-        graphics = LX_Graphics::LX_Renderer::createInstance();
+        graphics = LX_Renderer::createInstance();
 
     }
     catch(std::exception & e )
@@ -72,7 +75,7 @@ int main ( int argc, char** argv )
         return EXIT_FAILURE;
     }
 
-    ttf = new LX_TrueTypeFont(&color);
+    ttf = new LX_Font(&color);
     audio = new LX_Music(mus);
 
     // Load the texture from the data file
@@ -167,7 +170,7 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-    LX_Graphics::LX_Renderer::destroy();
+    LX_Renderer::destroy();
 
     std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(0) <<std::endl;
     LX_Quit();

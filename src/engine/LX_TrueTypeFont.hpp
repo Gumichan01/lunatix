@@ -39,60 +39,65 @@ struct SDL_Color;
 #define LX_BLACK_COLOR 0                /**< The black color value */
 
 
-/**
-*   @enum LX_TTF_TypeText
-*   @brief The LX_TTF_TypeText enumeration
-*
-*   This enumeration describes the type of the text you want to draw.
-*
-*/
-typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
+namespace LX_TrueTypeFont{
+
+    /**
+    *   @enum LX_TTF_TypeText
+    *   @brief The LX_TTF_TypeText enumeration
+    *
+    *   This enumeration describes the type of the text you want to draw.
+    *
+    */
+    typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 
 
 
-/**
-*   @class LX_TrueTypeFont
-*   @brief The LunatiX_engine True type Font (TTF) module.
-*
-*   This class describes the LX_TrueTypeFont library. It manages the True type Font.
-*
-*   @note This class supports the UTF-8 format
-*
-*/
-class LX_TrueTypeFont{
+    /**
+    *   @class LX_Font
+    *   @brief The LunatiX_engine True type Font (TTF) module.
+    *
+    *   This class describes the font. It manages the True type Font.
+    *
+    *   @note This class supports the UTF-8 format
+    *
+    */
+    class LX_Font{
 
-    std::string font_str;       /**< The font file */
-    unsigned int font_size;     /**< The font size */
-    SDL_Color font_color;       /**< The font color */
+        std::string font_str;       /**< The font file */
+        unsigned int font_size;     /**< The font size */
+        SDL_Color font_color;       /**< The font color */
 
 
-    void init(std::string font_file, SDL_Color *color, int size);
-    SDL_Surface * drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
+        void init(std::string font_file, SDL_Color *color, int size);
+        SDL_Surface * drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
 
-    public:
+        public:
 
-    LX_TrueTypeFont(SDL_Color *color);
-    LX_TrueTypeFont(std::string font_file, SDL_Color *color);
-    LX_TrueTypeFont(std::string font_file, SDL_Color *color, int size);
+        LX_Font(SDL_Color *color);
+        LX_Font(std::string font_file, SDL_Color *color);
+        LX_Font(std::string font_file, SDL_Color *color, int size);
 
-    int sizeOfText(std::string text, int *w, int *h);
-    int sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h);
+        int sizeOfText(std::string text, int *w, int *h);
+        int sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h);
 
-    SDL_Surface * draw_SolidText(std::string text);
-    SDL_Surface * draw_SolidText(std::string text, unsigned int size);
+        SDL_Surface * draw_SolidText(std::string text);
+        SDL_Surface * draw_SolidText(std::string text, unsigned int size);
 
-    SDL_Surface * draw_ShadedText(std::string text, SDL_Color bg);
-    SDL_Surface * draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b);
-    SDL_Surface * draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
+        SDL_Surface * draw_ShadedText(std::string text, SDL_Color bg);
+        SDL_Surface * draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b);
+        SDL_Surface * draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
 
-    SDL_Surface * draw_BlendedText(std::string text);
-    SDL_Surface * draw_BlendedText(std::string text, unsigned int size);
+        SDL_Surface * draw_BlendedText(std::string text);
+        SDL_Surface * draw_BlendedText(std::string text, unsigned int size);
 
-    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size);
+        SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size);
 
-    void setColor(SDL_Color *color);
+        void setColor(SDL_Color *color);
 
-    ~LX_TrueTypeFont();
+        ~LX_Font();
+
+    };
+
 
 };
 
