@@ -91,7 +91,7 @@ int main ( int argc, char** argv )
     SDL_Texture *t2 = ttf->drawTextToTexture(LX_TTF_BLENDED,"RETURN : play music, SPACE : pause/resume, BACKSPACE : stop",
                                                 LX_TTF_DEFAULT_FONT_SIZE);
 
-    //audio->volume(MIX_MAX_VOLUME/2);
+    audio->volume(MIX_MAX_VOLUME/2);
     std::cout << "Volume : " << audio->volume(-1) <<std::endl;
     std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(16) <<std::endl;
 
@@ -115,7 +115,7 @@ int main ( int argc, char** argv )
                                         case SDLK_RETURN :   audio->play();
                                                             break;
 
-                                        case SDLK_BACKSPACE :   LX_Mixer::fadeOutMusic(4000); //audio->stop();
+                                        case SDLK_BACKSPACE :   LX_Mixer::fadeOutMusic(4000);
                                                                 break;
                                         case SDLK_d :   graphics->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
                                                         break;

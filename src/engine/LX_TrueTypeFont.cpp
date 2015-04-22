@@ -155,10 +155,7 @@ void LX_TrueTypeFont::init(std::string font_file, SDL_Color *color, int size)
 *   Destroy the instance
 *
 */
-LX_TrueTypeFont::~LX_TrueTypeFont()
-{
-    //TTF_CloseFont(font);
-}
+LX_TrueTypeFont::~LX_TrueTypeFont(){}
 
 
 /**
