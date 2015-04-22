@@ -163,7 +163,19 @@ void LX_Configuration::destroy()
 }
 
 
-
+/**
+*
+*   @fn void LX_Configuration::assignString(lua_State * state, char *str, int len)
+*
+*   Get the string from the lua stack
+*
+*   @param state The Lua state
+*   @param str the string you will store the extracted string
+*   @param len the length of the string str
+*
+*   @warning if state or str is NULL, a segmentation fault may occur
+*
+*/
 void LX_Configuration::assignString(lua_State * state, char *str, int len)
 {
     char *tmp;
@@ -178,7 +190,14 @@ void LX_Configuration::assignString(lua_State * state, char *str, int len)
 
 
 
-
+/**
+*   @fn void LX_Configuration::setFlags(void)
+*
+*   Set the flags from configuration files
+*
+*   @warning This function need to use LX_config.luac to work,
+*               otherwise, a LX_ConfigurationException exception will occur
+*/
 void LX_Configuration::setFlags(void)
 {
     int t = 1;
@@ -209,7 +228,7 @@ void LX_Configuration::setFlags(void)
     luaL_openlibs(state);
 
     // Open of the Lua file
-    if(luaL_dofile(state,LUA_CONFIG_FILE) != 0)
+    if(luaL_dofile(state,LUAC_CONFIG_FILE) != 0)
     {
         std::cerr << "Error occured in LX_Configuration::setVideoFlag : " << lua_tostring(state,-1) << std::endl;
         lua_close(state);
@@ -317,8 +336,6 @@ void LX_Configuration::setFlags(void)
 
     lua_pop(state,1);
     lua_close(state);
-
-
 }
 
 
