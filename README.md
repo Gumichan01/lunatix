@@ -29,9 +29,10 @@
  ## On Linux system ##
 
  Be careful :
-  - SDL 2.0.1 at least must be installed on your system. Otherwise, you will not be able to compile the program
-  -It is not necessary to have Lua installed on you computer because LunatiX Engine includes a .so file associated 
-with the library  (Lua 5.1) 
+  - SDL 2.0.1 at least must be installed on your system. Otherwise, you will not be able to compile the program.
+  - Lua 5.1 must be installed on you computer.
+  - It is possible you get an issue if you use a recent version of Lua. 
+
 
  You just need to execute this following command :
 	$make
