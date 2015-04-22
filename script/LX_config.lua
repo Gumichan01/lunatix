@@ -123,7 +123,7 @@ function getFlags()
 
 				if( key and value )
 				then
-						result["font"] = value;
+						result["font"] = "font/"..value..pt..ext;
 				end
 
 			end
