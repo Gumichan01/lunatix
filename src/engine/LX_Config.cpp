@@ -115,6 +115,26 @@ LX_Configuration::LX_Configuration()
 **/
 LX_Configuration::~LX_Configuration(){}
 
+
+
+/**
+*   @fn void LX_Configuration::initConfig()
+*
+*   Launch the system configuration
+*
+*   @note  1 : This function is just a shorcut of LX_Configuration::getInstance()
+*               but it does not return the reference to the instance.
+*               So you need to call getInstance() to get the singleton
+*   @note  2 : Normally you do not need to call it because it is already done in LX_Init()
+*
+*/
+void LX_Configuration::initConfig()
+{
+    LX_Configuration::getInstance();
+}
+
+
+
 /**
 *   @fn LX_Configuration * LX_Configuration::getInstance()
 *
@@ -153,7 +173,8 @@ LX_Configuration * LX_Configuration::getInstance()
 *
 *   Destroy the unique instance
 *
-*   @warning you must call this function to prevent a memory leak if you called LX_Configuration::getInstances()
+*   @note It is not necessary to call this function because it is
+*           automatically called when the engine subsystems are shut down
 *
 */
 void LX_Configuration::destroy()

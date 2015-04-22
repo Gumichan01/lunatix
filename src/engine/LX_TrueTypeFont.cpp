@@ -57,7 +57,6 @@ LX_TrueTypeFont::LX_TrueTypeFont(SDL_Color *color)
     {
         font_str = ttf_config->getFontFile();
         font_size = ttf_config->getFontSize();
-        ttf_config->destroy();
     }
 
     init(font_str,color,font_size);

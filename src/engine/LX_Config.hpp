@@ -78,12 +78,12 @@ class LX_Configuration
     void assignString(lua_State * state, char *str, int len);
     void setFlags(void);
 
-
     LX_Configuration();
 
 
     public :
 
+    static void initConfig();
     static LX_Configuration * getInstance();
     static void destroy();
 

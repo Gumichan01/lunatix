@@ -99,8 +99,6 @@ namespace LX_Graphics{
             throw LX_WindowException(SDL_GetError());
         }
 
-        win_config->destroy();  // we do not need the LX_Configuration instance anymore
-
     }
 
 

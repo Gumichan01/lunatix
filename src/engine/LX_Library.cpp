@@ -45,6 +45,7 @@ bool LX_Init(void)
     int img_flags = IMG_INIT_PNG| IMG_INIT_JPG;      // the IMG flag for SDL_Image
 
     // Load the configuration
+    LX_Configuration::initConfig();
     LX_Configuration *configuration = LX_Configuration::getInstance();
 
     // check the tags (video, audio, joystick)
@@ -129,8 +130,6 @@ bool LX_Init(void)
         }
     }
 
-    configuration->destroy();
-
     return true;
 }
 
@@ -149,6 +148,7 @@ void LX_Quit(void)
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
+    LX_Configuration::destroy();
 }
 
 
