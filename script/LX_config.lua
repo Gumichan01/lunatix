@@ -14,8 +14,8 @@
 
 ]]
 
-local SDL_CONFIG_FILE = "../config/lxsdl.cfg";
-local WINDOW_CONFIG_FILE = "../config/lxwindow.cfg";
+local SDL_CONFIG_FILE = "config/lxsdl.cfg";
+local WINDOW_CONFIG_FILE = "config/lxwindow.cfg";
 
 
 --	@fn function getVideo()
@@ -625,6 +625,7 @@ function getFlags()
 
 	end
 
+	sdlfile:close();
 
 	for line in winfile:lines()
 	do
@@ -678,6 +679,8 @@ function getFlags()
 
 
 	end
+
+	winfile:close();
 
 	return result;
 
