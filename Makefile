@@ -23,6 +23,10 @@ MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Renderer.o LX_Library.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o
 
+LUAC=luac5.1
+SCRIPT_FILE=script/LX_config.lua
+COMPILED_SCRIPT=$(SCRIPT_FILE)c
+
 # Path to main file directory
 MAIN_PATH=./src/
 
@@ -58,7 +62,12 @@ LUA_FLAGS=./lib/linux/liblua5.1-c++.so.0
 LFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 
-all : $(LUNATIX_EXE)
+all : clean-target $(LUNATIX_EXE) $(COMPILED_SCRIPT)
+
+
+$(COMPILED_SCRIPT) : $(SCRIPT_FILE)
+	@echo "Compile the Lua script : "$<" -> "$@
+	@$(LUAC) -o $@ $<
 
 
 # Demo
@@ -127,5 +136,5 @@ clean :
 
 clean-target : clean
 	@echo "Delete targets"
-	@rm -f $(LUNATIX_EXE) 
+	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 

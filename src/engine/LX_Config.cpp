@@ -251,7 +251,7 @@ void LX_Configuration::setFlags(void)
     // Open of the Lua file
     if(luaL_dofile(state,LUAC_CONFIG_FILE) != 0)
     {
-        std::cerr << "Error occured in LX_Configuration::setVideoFlag : " << lua_tostring(state,-1) << std::endl;
+        std::cerr << "Error occured in LX_Configuration::setFlags : " << lua_tostring(state,-1) << std::endl;
         lua_close(state);
         throw LX_ConfigurationException("The lua file does not exist or is corrupted");
     }
@@ -262,7 +262,7 @@ void LX_Configuration::setFlags(void)
     // Is it what we want ?
     if(!lua_isfunction(state,-1))
     {
-        std::cerr << "Error occured in LX_Configuration::setVideoFlag : The Lua function "
+        std::cerr << "Error occured in LX_Configuration::setFlags : The Lua function "
                         << luaFunction << " does not exist" << std::endl;
 
         lua_close(state);
