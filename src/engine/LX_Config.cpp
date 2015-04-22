@@ -21,11 +21,11 @@
 *
 */
 
+#include <cstdlib>
+#include <cstring>
 
 #include <string>
 #include <exception>
-
-#include <Lua/lua.hpp>
 
 #include "LX_Config.hpp"
 
@@ -93,7 +93,7 @@ LX_Configuration::LX_Configuration()
     fullscreenFlag = 0;
 
     //loading configuration
-    setVideoFlag();
+    /*setVideoFlag();
     setTTF_Flag();
     setAudioFlag();
     setJoystickFlag();
@@ -102,8 +102,8 @@ LX_Configuration::LX_Configuration()
     setFontSize();
     setWinWidth();
     setWinHeight();
-    setFullscreenFlag();
-
+    setFullscreenFlag();*/
+    setFlags();
 }
 
 
@@ -164,475 +164,161 @@ void LX_Configuration::destroy()
 
 
 
-/**
-*
-*   @fn void LX_Configuration::setVideoFlag()
-*
-*   Set the video flag
-*
-*/
-void LX_Configuration::setVideoFlag()
+void LX_Configuration::assignString(lua_State * state, char *str, int len)
 {
-    //State
-    lua_State *state;
+    char *tmp;
+    memset(str,0,len);
+    tmp = (char *) lua_tostring(state,-2);
 
-    state=lua_open();
+    if(tmp != NULL)
+        strncpy(str,tmp,len-2);
 
-    //Opening of the Lua library
+    str[len-1] = '\0';
+}
+
+
+
+
+void LX_Configuration::setFlags(void)
+{
+    int t = 1;
+    const std::string luaFunction = "getFlags";
+    std::string key;
+    char tmp[16];
+    lua_State *state = NULL;
+
+    // Constant values
+    const std::string VIDEO_KEY = "video";
+    const std::string TTF_KEY = "ttf";
+    const std::string AUDIO_KEY = "audio";
+    const std::string JOYSTICK_KEY = "joystick";
+    const std::string OPENGL_KEY = "opengl";
+    const std::string FONT_KEY = "font";
+    const std::string SIZE_KEY = "size";
+    const std::string WIDTH_KEY = "width";
+    const std::string HEIGHT_KEY = "height";
+    const std::string FULLSCREEN_KEY = "fullscreen";
+
+
+    state = lua_open();
+
+    if(state == NULL)
+        throw LX_ConfigurationException("Error occured in LX_Configuration::setFlags : Internal error\n");
+
+    // Open standard lua libraries
     luaL_openlibs(state);
 
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
+    // Open of the Lua file
+    if(luaL_dofile(state,LUA_CONFIG_FILE) != 0)
     {
         std::cerr << "Error occured in LX_Configuration::setVideoFlag : " << lua_tostring(state,-1) << std::endl;
+        lua_close(state);
         throw LX_ConfigurationException("The lua file does not exist or is corrupted");
     }
 
-    //we get an entity
-    lua_getglobal(state,"getVideo");
+    // Get the function
+    lua_getglobal(state,luaFunction.c_str());
 
+    // Is it what we want ?
     if(!lua_isfunction(state,-1))
     {
-        std::cerr << "Error occured in LX_Configuration::setVideoFlag : The Lua function getVideo does not exist" << std::endl;
+        std::cerr << "Error occured in LX_Configuration::setVideoFlag : The Lua function "
+                        << luaFunction << " does not exist" << std::endl;
+
+        lua_close(state);
         throw LX_ConfigurationException("The Lua function getVideo does not exist");
     }
     else
     {
-        //The call
+        // Call the function
         lua_call(state,0,1);
 
-        //Getting the returned value
-        videoFlag = (int) lua_tonumber(state, -1);
-    }
+        lua_pushnil(state);
 
-    lua_pop(state,1);
-    lua_close(state);
-}
+        while(lua_next(state, t))
+        {
+            /// @todo Get the key, compare with constant keys
+            assignString(state,tmp,sizeof(tmp));
 
+            if(strlen(tmp) == 0)
+            {
+                    lua_pop(state,1);
+                    continue;
+            }
 
-/**
-*
-*   @fn void LX_Configuration::setTTF_Flag()
-*
-*   Set the true type font (TTF) flag
-*
-*/
-void LX_Configuration::setTTF_Flag()
-{
-    //State
-    lua_State *state;
+            key.assign(tmp);
 
-    state=lua_open();
+            //std::cout << "key : " << key << " | " << lua_tostring(state,-1) << std::endl;
 
-    //Opening of the Lua library
-    luaL_openlibs(state);
+            // Video flasg
+            if(key.compare(0,VIDEO_KEY.length(),VIDEO_KEY) == 0)
+            {
+                videoFlag = atoi((char *) lua_tostring(state,-1));
+            }
 
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setTTF_Flag : " << lua_tostring(state,-1) << std::endl;
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
+            // TTF flag
+            if(key.compare(0,TTF_KEY.length(),TTF_KEY) == 0)
+            {
+                ttf_Flag = atoi((char *) lua_tostring(state,-1));
+            }
 
-    //we get an entity
-    lua_getglobal(state,"getTTF");
+            // Audio flag
+            if(key.compare(0,AUDIO_KEY.length(),AUDIO_KEY) == 0)
+            {
+                audioFlag = atoi((char *) lua_tostring(state,-1));
+            }
 
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setTTF_Flag : The Lua function getTTF does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getTTF does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
+            // Joystick flag
+            if(key.compare(0,JOYSTICK_KEY.length(),JOYSTICK_KEY) == 0)
+            {
+                joystickFlag = atoi((char *) lua_tostring(state,-1));
+            }
 
-        //Getting the returned value
-        ttf_Flag = (int) lua_tonumber(state, -1);
-    }
+            // OpenGL flag
+            if(key.compare(0,OPENGL_KEY.length(),OPENGL_KEY) == 0)
+            {
+                openglFlag = atoi((char *) lua_tostring(state,-1));
+            }
 
-    lua_pop(state,1);
-    lua_close(state);
-}
+            // Font file flag
+            if(key.compare(0,FONT_KEY.length(),FONT_KEY) == 0)
+            {
+                font_file = (char *) lua_tostring(state,-1);
+            }
 
+            // Size flag
+            if(key.compare(0,SIZE_KEY.length(),SIZE_KEY) == 0)
+            {
+                font_size = atoi((char *) lua_tostring(state,-1));
+            }
 
-/**
-*
-*   @fn void LX_Configuration::setAudioFlag()
-*
-*   Set the audio flag
-*
-*/
-void LX_Configuration::setAudioFlag()
-{
-    //State
-    lua_State *state;
+            // Width flag
+            if(key.compare(0,WIDTH_KEY.length(),WIDTH_KEY) == 0)
+            {
+                width = atoi((char *) lua_tostring(state,-1));
+            }
 
-    state=lua_open();
+            // Height flag
+            if(key.compare(0,HEIGHT_KEY.length(),HEIGHT_KEY) == 0)
+            {
+                height = atoi((char *) lua_tostring(state,-1));
+            }
 
-    //Opening of the Lua library
-    luaL_openlibs(state);
+            // Fullscreen flag
+            if(key.compare(0,FULLSCREEN_KEY.length(),FULLSCREEN_KEY) == 0)
+            {
+                fullscreenFlag = atoi((char *) lua_tostring(state,-1));
+            }
 
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setAudioFlag : " << lua_tostring(state,-1) << std::endl;
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getAudio");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setAudioFlag : The Lua function getAudio does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getAudio does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        audioFlag = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-
-
-/**
-*
-*   @fn void LX_Configuration::setJoystickFlag()
-*
-*   Set the Joystick flag
-*
-*/
-void LX_Configuration::setJoystickFlag()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setJoystickFlag : " << lua_tostring(state,-1) << std::endl;
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getJoystick");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setJoystickFlag : The Lua function getJoystick does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getJoystick does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        joystickFlag = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-
-
-
-/**
-*
-*   @fn void LX_Configuration::setOpenGL_Flag()
-*
-*   Set the OpenGL flag
-*
-*/
-void LX_Configuration::setOpenGL_Flag()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setOpenGL_Flag : " << lua_tostring(state,-1) << std::endl;
-
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getOpenGL");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setOpenGL_Flag : The Lua function getOpenGL does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getOpenGL does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        openglFlag = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-
-
-/**
-*
-*   @fn void LX_Configuration::setFontFile()
-*
-*   Set the font file
-*
-*
-*/
-void LX_Configuration::setFontFile()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setFontFile : " << lua_tostring(state,-1) << std::endl;
-
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getFont");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setFontFile : The Lua function getFont does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getFont does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        font_file = (char *) lua_tostring(state, -1);
+            lua_pop(state,1);
+        }
 
     }
 
     lua_pop(state,1);
     lua_close(state);
-}
 
 
-
-/**
-*
-*   @fn void LX_Configuration::setFontSize()
-*
-*   Set the font size
-*
-*/
-void LX_Configuration::setFontSize()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setFontSize : " << lua_tostring(state,-1) << std::endl;
-
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getFontSize");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setFontSize : The Lua function getFontSize does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getFontSize does not exist");
-
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        font_size = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-
-
-
-/**
-*
-*   @fn void LX_Configuration::setWinWidth()
-*
-*   Set the window width
-*
-*/
-void LX_Configuration::setWinWidth()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setWinWidth : " << lua_tostring(state,-1) << std::endl;
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getWidth");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setWinWidth : The Lua function getWidth does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getWidth does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        width = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-
-
-
-/**
-*
-*   @fn void LX_Configuration::setWinHeight()
-*
-*   Set the window height
-*
-*/
-void LX_Configuration::setWinHeight()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setWinHeight : " << lua_tostring(state,-1) << std::endl;
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getHeight");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setWinHeight : The Lua function getHeight does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getHeight does not exist");
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        height = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-
-
-
-/**
-*
-*   @fn void LX_Configuration::setFullscreenFlag()
-*
-*   Set the window height
-*
-*/
-void LX_Configuration::setFullscreenFlag()
-{
-    //State
-    lua_State *state;
-
-    state=lua_open();
-
-    //Opening of the Lua library
-    luaL_openlibs(state);
-
-    //Opening of the Lua file
-    if (luaL_dofile(state,LUA_CONFIG_FILE)!=0)
-    {
-        std::cerr << "Error occured in LX_Configuration::setFullscreenFlag : " << lua_tostring(state,-1) << std::endl;
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
-    }
-
-    //we get an entity
-    lua_getglobal(state,"getFullscreen");
-
-    if(!lua_isfunction(state,-1))
-    {
-        std::cerr << "Error occured in LX_Configuration::setFullscreenFlag : The Lua function getFullscreen does not exist" << std::endl;
-        throw LX_ConfigurationException("The Lua function getFullscreen does not exist");
-
-    }
-    else
-    {
-        //The call
-        lua_call(state,0,1);
-
-        //Getting the returned value
-        fullscreenFlag = (int) lua_tonumber(state, -1);
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
 }
 
 

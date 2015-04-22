@@ -25,9 +25,10 @@
 
 #include <iostream>
 
+#include <Lua/lua.hpp>
 
-#define LUA_CONFIG_FILE "script/LX_config.lua"   /**< The lua file the engine uses for the configuration loading*/
-#define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading*/
+#define LUA_CONFIG_FILE "script/LX_config.lua"   /**< The lua file the engine uses for the configuration loading */
+#define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
 /**
 *   @class LX_ConfigurationException
@@ -61,6 +62,7 @@ class LX_ConfigurationException : public std::exception
 class LX_Configuration
 {
 
+    // Variables
     int videoFlag;
     int ttf_Flag;
     int audioFlag;
@@ -73,16 +75,8 @@ class LX_Configuration
     int fullscreenFlag;
 
     // private functions
-    void setVideoFlag();
-    void setTTF_Flag();
-    void setAudioFlag();
-    void setJoystickFlag();
-    void setOpenGL_Flag();
-    void setFontFile();
-    void setFontSize();
-    void setWinWidth();
-    void setWinHeight();
-    void setFullscreenFlag();
+    void assignString(lua_State * state, char *str, int len);
+    void setFlags(void);
 
 
     LX_Configuration();
