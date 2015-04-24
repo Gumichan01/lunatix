@@ -1,4 +1,3 @@
-
  # LunatiX Engine #
 
  LunatiX Engine is a SDL-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license. 
