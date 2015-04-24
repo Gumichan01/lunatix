@@ -34,5 +34,6 @@
 #include "LX_Chunk.hpp"
 #include "LX_Music.hpp"
 #include "LX_Physics.hpp"
+#include "LX_WindowManager.hpp"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED

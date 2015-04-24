@@ -29,6 +29,8 @@
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
 
+// Keep it in comments, it part of code is no longer compilable
+/*
 int main ( int argc, char** argv )
 {
 
@@ -223,3 +225,31 @@ int main ( int argc, char** argv )
 }
 
 
+*/
+
+
+/* Main test to display a window, compilable */
+int main( int argc, char** argv )
+{
+    int err;
+    LX_Init();
+
+    LX_Window * win = new LX_Window("Test",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,600,480,0);
+
+    LX_WindowManager::init();
+
+    err = LX_WindowManager::getInstance()->addWindow(win);
+
+    std::cout << err << std::endl;
+
+    SDL_Delay(4000);
+
+    err = LX_WindowManager::getInstance()->deleteWindow(err);
+
+    std::cout << err << std::endl;
+
+    LX_WindowManager::destroy();
+
+    LX_Quit();
+    return 0;
+}
