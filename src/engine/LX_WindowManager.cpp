@@ -50,6 +50,10 @@ namespace LX_Graphics{
     }
 
 
+    LX_WindowManager::~LX_WindowManager()
+    {
+        deleteWindow(0);
+    }
 
     LX_WindowManager::LX_WindowManager()
     {

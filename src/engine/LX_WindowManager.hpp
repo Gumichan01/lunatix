@@ -40,6 +40,7 @@ namespace LX_Graphics{
         LX_Window * mainWindow;
 
         LX_WindowManager();
+        ~LX_WindowManager();
 
         public:
 
