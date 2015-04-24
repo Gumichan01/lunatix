@@ -50,13 +50,16 @@ namespace LX_Graphics{
     *
     *   This class describes the LX_Renderer engine.
     *
-    *   @note : The LX_Renderer class uses an instance of LX_Window to get the main window information
-    *   @warning Because of the LX_Window and SDL functions use, LX_Renderer class must be built only after you initialized the LX_engine (calling LX_Init())
+    *   @note : The LX_Renderer class uses an instance of LX_Window
+    *           to get the main window information
+    *   @warning Because of the LX_Window and ht use of SDL functions,
+    *   LX_Renderer class must be built only after you initialized LX_engine (calling LX_Init())
+    *
     */
     class LX_Renderer{
 
-        LX_Graphics::LX_Window *mainWindow;  /**< The main window */
-        SDL_Renderer *renderer; /**< The main renderer */
+        LX_Graphics::LX_Window *mainWindow;     /**< The main window */
+        SDL_Renderer *renderer;                 /**< The main renderer */
 
         int originalWidth;
         int originalHeight;
@@ -68,7 +71,7 @@ namespace LX_Graphics{
 
         public:
 
-        //get the instance
+        // Get the instance
         static LX_Renderer * createInstance();
         static LX_Renderer * createInstance(LX_Graphics::LX_Window * win);
         static LX_Renderer * getInstance();
