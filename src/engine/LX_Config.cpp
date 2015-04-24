@@ -267,7 +267,6 @@ void LX_Configuration::setFlags(void)
 
         while(lua_next(state, t))
         {
-            /// @todo Get the key, compare with constant keys
             assignString(state,tmp,sizeof(tmp));
 
             if(strlen(tmp) == 0)

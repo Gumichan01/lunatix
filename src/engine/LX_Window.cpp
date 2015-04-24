@@ -110,9 +110,29 @@ namespace LX_Graphics{
             throw LX_WindowException(err_msg.c_str());
         }
 
-        init();
+        init2();
     }
 
+
+
+    LX_Window::LX_Window(std::string title)
+    {
+        int w,h;
+        Uint32 flag = 0x00000000;
+
+        LX_Configuration *config = LX_Configuration::getInstance();
+
+        w = config->getWinWidth();
+        h = config->getWinHeight();
+
+        if(config->getFullscreenFlag() == 1)
+            flag |= LX_GRAPHICS_FULLSCREEN;
+
+        if(config->getOpenGL_Flag() == 1)
+            flag |= SDL_WINDOW_OPENGL;
+
+        init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,flag);
+    }
 
     /**
     *   @fn LX_Window::LX_Window(SDL_Window *sdlWin)
@@ -145,7 +165,7 @@ namespace LX_Graphics{
             throw LX_WindowException(err_msg.c_str());
         }
 
-        init();
+        init2();
     }
 
     /**
@@ -165,11 +185,16 @@ namespace LX_Graphics{
     *   @exception LX_WindowException If the window initialisation fails.
     *
     */
-    LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
+    LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag)
     {
-        Uint32 fullscreen_flag = (( screen_flag == true ) ? SDL_WINDOW_FULLSCREEN : 0x00000000);
+        init(title.c_str(),posX,posY,w,h,flag);
+    }
 
-        window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|fullscreen_flag);
+
+
+    void LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
+    {
+        window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
 
         if(window == NULL )
         {
@@ -188,11 +213,12 @@ namespace LX_Graphics{
             throw LX_WindowException(err_msg.c_str());
         }
 
-        init();
+        init2();
     }
 
 
-    void LX_Window::init()
+
+    void LX_Window::init2()
     {
         originalWidth = getWidth();
         originalHeight = getHeight();

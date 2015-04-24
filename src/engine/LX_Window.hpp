@@ -33,6 +33,7 @@ struct SDL_Surface;
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /** < Fullscreen with desktop resolution */
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /** < Just fullscreen mode with original resolution */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /** < Original resolution in window */
+#define LX_GRAPHICS_NO_OPENGL 0x00f0507c                                /** < Flag disabling OpenGL */
 
 
 namespace LX_Graphics{
@@ -81,13 +82,15 @@ namespace LX_Graphics{
         int originalWidth;      /**< The width of the window */
         int originalHeight;     /**< The height of the window */
 
-        void init();
+        void init(std::string title, int posX, int posY, int w, int h, Uint32 flag);
+        void init2();
 
         public :
 
         LX_Window();                    // The default constructor with default parameters
         LX_Window(SDL_Window *sdlWin);
-        LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag);
+        LX_Window(std::string title);
+        LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag);
 
         void setTitle(std::string title);
 
