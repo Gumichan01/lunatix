@@ -91,14 +91,26 @@ namespace LX_Graphics{
         else
             position_flag = SDL_WINDOWPOS_CENTERED;
 
-        lxWindow = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|fullscreen_flag);
+        window = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|fullscreen_flag);
 
-        if(lxWindow == NULL )
+        if(window == NULL )
         {
             std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
             throw LX_WindowException(SDL_GetError());
         }
 
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+        if(renderer == NULL)
+        {
+            std::string err_msg = SDL_GetError();
+
+            SDL_DestroyWindow(window);
+            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
+            throw LX_WindowException(err_msg.c_str());
+        }
+
+        init();
     }
 
 
@@ -120,7 +132,20 @@ namespace LX_Graphics{
         if(sdlWin == NULL)
             throw LX_WindowException("exception occured in LX_Window : NULL value \n");
 
-        lxWindow = sdlWin;
+        window = sdlWin;
+
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+        if(renderer == NULL)
+        {
+            std::string err_msg = SDL_GetError();
+
+            SDL_DestroyWindow(window);
+            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
+            throw LX_WindowException(err_msg.c_str());
+        }
+
+        init();
     }
 
     /**
@@ -144,16 +169,34 @@ namespace LX_Graphics{
     {
         Uint32 fullscreen_flag = (( screen_flag == true ) ? SDL_WINDOW_FULLSCREEN : 0x00000000);
 
-        lxWindow = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|fullscreen_flag);
+        window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|fullscreen_flag);
 
-        if(lxWindow == NULL )
+        if(window == NULL )
         {
             std::cerr << "exception occured in LX_Window constructor during the render creation : " << std::endl;
             throw LX_WindowException(SDL_GetError());
         }
 
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+        if(renderer == NULL)
+        {
+            std::string err_msg = SDL_GetError();
+
+            SDL_DestroyWindow(window);
+            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
+            throw LX_WindowException(err_msg.c_str());
+        }
+
+        init();
     }
 
+
+    void LX_Window::init()
+    {
+        originalWidth = getWidth();
+        originalHeight = getHeight();
+    }
 
     /**
     *
@@ -164,7 +207,7 @@ namespace LX_Graphics{
     */
     LX_Window::~LX_Window()
     {
-        SDL_DestroyWindow(lxWindow);
+        SDL_DestroyWindow(window);
     }
 
     /**
@@ -177,7 +220,176 @@ namespace LX_Graphics{
     */
     void LX_Window::setTitle(std::string title)
     {
-        SDL_SetWindowTitle(lxWindow,title.c_str());
+        SDL_SetWindowTitle(window,title.c_str());
+    }
+
+
+
+
+    /**
+    *
+    *   @fn bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    *
+    *   This function puts the surface on the surface according to its position and the area to put on it
+    *
+    *   @param image : the surface to put
+    *   @param area : the area of the surface to put on the screen
+    *   @param pos : the position of what you want to put
+    *
+    *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *
+    *   @return TRUE if the image was put with success, FALSE otherwise
+    */
+    bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    {
+        int err = 0;
+        SDL_Rect offset;
+
+        // I check if the image or the position is NULL
+        if(image == NULL)
+            return false;
+
+        if(pos == NULL)
+        {   // The texture will be set on the top-left of the main surface
+            offset.x = 0;
+            offset.y = 0;
+            offset.w = 0;
+            offset.h = 0;
+        }
+        else
+        {
+            offset.x = pos->x;
+            offset.y = pos->y;
+            offset.w = pos->w;
+            offset.h = pos->h;
+        }
+
+        err = SDL_BlitSurface(image,area,SDL_GetWindowSurface(window),&offset);
+
+        if(err < 0)
+            return false;
+
+        return true;
+    }
+
+
+    /**
+    *   @fn bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
+    *
+    *   This function puts the texture on the window according to its position and the area to put on it
+    *
+    *   @param origin : the texture to put
+    *   @param area : the area of the surface to put on the renderer
+    *   @param pos : the position of what you want to put
+    *
+    *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
+    *               to display the texture according to its dimension
+    *
+    *   @return TRUE if the texture was put with success, FALSE otherwise
+    **/
+    bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
+    {
+
+        if(SDL_RenderCopy(renderer,origin,area,pos) < 0)
+            return false;
+
+        return true;
+    }
+
+
+    /**
+    *   @fn void LX_Window::setWindowSize(int w, int h)
+    *
+    *   Set the size of the main window
+    *
+    *   @param w the width of the window
+    *   @param h the height of the window
+    *
+    */
+    void LX_Window::setWindowSize(int w, int h)
+    {
+        SDL_SetWindowSize(window,w,h);
+    }
+
+
+    /**
+    *   @fn void LX_Window::setFullscreen(Uint32 flag)
+    *
+    *   Set the fullscreen to the main window
+    *
+    *   @param flag the flag you want to use in this function
+    *
+    */
+    void LX_Window::setFullscreen(Uint32 flag)
+    {
+        SDL_SetWindowFullscreen(window,flag);
+
+        if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
+        {
+            setWindowSize(originalWidth,originalHeight);
+        }
+    }
+
+
+
+    /**
+    *   @fn void LX_Window::updateRenderer()
+    *
+    *   Updates the renderer of the window
+    *
+    *   @note This fonction must be used only if you manipulate textures
+    *   on the current window. So you cannot use this function and
+    *   LX_Window::updateWindow() together.
+    *
+    */
+    void LX_Window::updateRenderer()
+    {
+        SDL_RenderPresent(renderer);
+    }
+
+
+
+    /**
+    *
+    *   @fn void LX_Window::clearWindow()
+    *
+    *   This function clears the main window
+    *
+    */
+    void LX_Window::clearWindow()
+    {
+        SDL_Surface *tmp = SDL_GetWindowSurface(window);
+        SDL_FillRect(tmp,NULL, SDL_MapRGB(tmp->format,0,0,0));
+    }
+
+
+    /**
+    *
+    *   @fn void LX_Window::clearRenderer()
+    *
+    *   This function clears the main renderer
+    *
+    */
+    void LX_Window::clearRenderer()
+    {
+        SDL_RenderClear(renderer);
+    }
+
+    /**
+    *
+    *   @fn void LX_Window::updateWindow()
+    *
+    *   This function updates the surface of the window
+    *
+    *   @note This fonction must be used only if you manipulate surfaces
+    *   on the current window. So you cannot use this function and
+    *   LX_Window::updateRenderer() together.
+    *
+    */
+    void LX_Window::updateWindow()
+    {
+        SDL_UpdateWindowSurface(window);
     }
 
 
@@ -192,7 +404,7 @@ namespace LX_Graphics{
     */
     SDL_Renderer * LX_Window::getRenderer()
     {
-        return SDL_GetRenderer(lxWindow);
+        return SDL_GetRenderer(window);
     }
 
 
@@ -207,7 +419,7 @@ namespace LX_Graphics{
     */
     SDL_Surface * LX_Window::getSurface()
     {
-        return SDL_GetWindowSurface(lxWindow);
+        return SDL_GetWindowSurface(window);
     }
 
 
@@ -222,7 +434,7 @@ namespace LX_Graphics{
     */
     SDL_Window * LX_Window::getWindow()
     {
-        return lxWindow;
+        return window;
     }
 
 
@@ -238,7 +450,7 @@ namespace LX_Graphics{
     int LX_Window::getWidth()
     {
         int w;
-        SDL_GetWindowSize(lxWindow,&w,NULL);
+        SDL_GetWindowSize(window,&w,NULL);
 
         return w;
     }
@@ -256,7 +468,7 @@ namespace LX_Graphics{
     int LX_Window::getHeight()
     {
         int h;
-        SDL_GetWindowSize(lxWindow,NULL,&h);
+        SDL_GetWindowSize(window,NULL,&h);
 
         return h;
     }

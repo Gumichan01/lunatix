@@ -30,6 +30,11 @@ struct SDL_Renderer;
 struct SDL_Surface;
 
 
+#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /** < Fullscreen with desktop resolution */
+#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /** < Just fullscreen mode with original resolution */
+#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /** < Original resolution in window */
+
+
 namespace LX_Graphics{
 
 
@@ -70,8 +75,13 @@ namespace LX_Graphics{
     */
     class LX_Window{
 
-        SDL_Window *lxWindow;   /**< The internal window structure*/
+        SDL_Window *window;     /**< The internal window structure */
+        SDL_Renderer *renderer; /**< The main renderer */
 
+        int originalWidth;      /**< The width of the window */
+        int originalHeight;     /**< The height of the window */
+
+        void init();
 
         public :
 
@@ -80,6 +90,20 @@ namespace LX_Graphics{
         LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag);
 
         void setTitle(std::string title);
+
+        // Put the sprite on the screen
+        bool put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
+        bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
+
+        void setWindowSize(int w, int h);
+        void setFullscreen(Uint32 flag);
+
+        // Update and clearing window
+        void updateWindow();
+        void updateRenderer();
+
+        void clearWindow();
+        void clearRenderer();
 
         SDL_Renderer * getRenderer();
         SDL_Surface * getSurface();
