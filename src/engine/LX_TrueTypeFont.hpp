@@ -90,7 +90,7 @@ namespace LX_TrueTypeFont{
         SDL_Surface * draw_BlendedText(std::string text);
         SDL_Surface * draw_BlendedText(std::string text, unsigned int size);
 
-        SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size);
+        SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, int idWindow);
 
         void setColor(SDL_Color *color);
 

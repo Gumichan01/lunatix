@@ -27,8 +27,9 @@
 #include "LX_Config.hpp"
 #include "LX_Renderer.hpp"
 #include "LX_TrueTypeFont.hpp"
+#include "LX_WindowManager.hpp"
 
-
+using namespace LX_Graphics;
 
 namespace LX_TrueTypeFont{
 
@@ -396,7 +397,7 @@ namespace LX_TrueTypeFont{
 
 
     /**
-    *   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size)
+    *   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size,, int idWindow)
     *
     *   Create a Texture from a text according to the type and the size
     *
@@ -407,18 +408,34 @@ namespace LX_TrueTypeFont{
     *   @return a SDL_Texture on success, NULL otherwise
     *
     */
-    SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size)
+    SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, int idWindow)
     {
         SDL_Surface *surface =  NULL;
         SDL_Texture *texture = NULL;
+
+        LX_Window * target_window = NULL;
+        SDL_Renderer *target_render = NULL;
+
+        if(idWindow < 0 )
+            return NULL;
 
         surface = drawText(type,text.c_str(),0,0,0,size);   // Get the surface
 
         if(surface == NULL)
             return texture;
 
+        target_window = LX_WindowManager::getInstance()->getWindow(idWindow);
+
+        if(target_window == NULL)
+        {
+                SDL_FreeSurface(surface);
+                return NULL;
+        }
+
+        target_render = target_window->getRenderer();
+
         // Get the texture
-        texture = SDL_CreateTextureFromSurface(LX_Graphics::LX_Renderer::getInstance()->getRenderer(),surface);
+        texture = SDL_CreateTextureFromSurface(target_render,surface);
 
         SDL_FreeSurface(surface);   // Clean the surface
 
