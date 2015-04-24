@@ -27,7 +27,7 @@
 
 #include "LX_Library.hpp"
 #include "LX_Config.hpp"
-#include "LX_Renderer.hpp"
+#include "LX_Graphics.hpp"
 #include "LX_TrueTypeFont.hpp"
 #include "LX_Mixer.hpp"
 #include "LX_Sound.hpp"

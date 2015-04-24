@@ -30,7 +30,7 @@ using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
 
 // Keep it in comments, it part of code is no longer compilable
-/*
+
 int main ( int argc, char** argv )
 {
 
@@ -49,7 +49,7 @@ int main ( int argc, char** argv )
     std::string name = "data/cb.bmp";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
-    LX_Renderer *graphics = NULL;
+    LX_Window *window = NULL;
     LX_Font *ttf = NULL;
     LX_Music *audio = NULL;
 
@@ -65,36 +65,28 @@ int main ( int argc, char** argv )
     }
 
     // initialization
+    LX_WindowManager::init();
 
-    try
-    {
-        graphics = LX_Renderer::createInstance();
-
-    }
-    catch(std::exception & e )
-    {
-        std::cout << "exception occurred : " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
-
+    window = new LX_Window();
+    LX_WindowManager::getInstance()->addWindow(window);
     ttf = new LX_Font(&color);
     audio = new LX_Music(mus);
 
     // Load the texture from the data file
-    st = graphics->loadTextureFromFile(name.c_str());
+    st = loadTextureFromFile(name.c_str(),0);
 
     if(st == NULL)
     {
-        std::cerr << "[MAIN] LX_Graphics::LX_Renderer::load_surface : " << SDL_GetError() <<std::endl;
+        std::cerr << "[MAIN] loadTexture : " << SDL_GetError() <<std::endl;
     }
 
     ttf->sizeOfText("LunatiX_engine",&wt,&ht);
     std::cout << "[TEST TTF]Size of the text \"LunatiX_engine\" - w : " << wt << "; h : " << ht << std::endl;
 
 
-    SDL_Texture *t1 = ttf->drawTextToTexture(LX_TTF_BLENDED,"LunatiX_engine",LX_TTF_DEFAULT_FONT_SIZE);
+    SDL_Texture *t1 = ttf->drawTextToTexture(LX_TTF_BLENDED,"LunatiX_engine",LX_TTF_DEFAULT_FONT_SIZE,0);
     SDL_Texture *t2 = ttf->drawTextToTexture(LX_TTF_BLENDED,"RETURN : play music, SPACE : pause/resume, BACKSPACE : stop",
-                                                LX_TTF_DEFAULT_FONT_SIZE);
+                                                LX_TTF_DEFAULT_FONT_SIZE,0);
 
     audio->volume(MIX_MAX_VOLUME/2);
     std::cout << "Volume : " << audio->volume(-1) <<std::endl;
@@ -122,13 +114,13 @@ int main ( int argc, char** argv )
 
                                         case SDLK_BACKSPACE :   LX_Mixer::fadeOutMusic(4000);
                                                                 break;
-                                        case SDLK_d :   graphics->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
+                                        case SDLK_d :   window->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
                                                         break;
 
-                                        case SDLK_f :   graphics->setFullscreen(LX_GRAPHICS_FULLSCREEN);
+                                        case SDLK_f :   window->setFullscreen(LX_GRAPHICS_FULLSCREEN);
                                                         break;
 
-                                        case SDLK_g :   graphics->setFullscreen(LX_GRAPHICS_NO_FULLSCREEN);
+                                        case SDLK_g :   window->setFullscreen(LX_GRAPHICS_NO_FULLSCREEN);
                                                         break;
 
                                         case SDLK_LEFT :    LX_Mixer::setPanning(MIX_CHANNEL_POST,255,0);
@@ -153,13 +145,13 @@ int main ( int argc, char** argv )
             }
         }
 
-        graphics->clearRenderer();
+        window->clearRenderer();
 
-        graphics->putTexture(st,NULL,&pos);
-        graphics->putTexture(t1,NULL,&pos1);
-        graphics->putTexture(t2,NULL,&pos2);
+        window->putTexture(st,NULL,&pos);
+        window->putTexture(t1,NULL,&pos1);
+        window->putTexture(t2,NULL,&pos2);
 
-        graphics->updateRenderer();
+        window->updateRenderer();
 
         SDL_Delay(33);
     }
@@ -172,9 +164,9 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-    LX_Renderer::destroy();
 
     std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(0) <<std::endl;
+    LX_WindowManager::destroy();
     LX_Quit();
 
 
@@ -225,31 +217,3 @@ int main ( int argc, char** argv )
 }
 
 
-*/
-
-
-/* Main test to display a window, compilable */
-int main( int argc, char** argv )
-{
-    int err;
-    LX_Init();
-
-    LX_Window * win = new LX_Window("Test",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,600,480,0);
-
-    LX_WindowManager::init();
-
-    err = LX_WindowManager::getInstance()->addWindow(win);
-
-    std::cout << err << std::endl;
-
-    SDL_Delay(4000);
-
-    err = LX_WindowManager::getInstance()->deleteWindow(err);
-
-    std::cout << err << std::endl;
-
-    LX_WindowManager::destroy();
-
-    LX_Quit();
-    return 0;
-}

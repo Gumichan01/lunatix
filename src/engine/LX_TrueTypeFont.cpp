@@ -25,7 +25,7 @@
 #include <SDL2/SDL.h>
 
 #include "LX_Config.hpp"
-#include "LX_Renderer.hpp"
+#include "LX_Graphics.hpp"
 #include "LX_TrueTypeFont.hpp"
 #include "LX_WindowManager.hpp"
 

@@ -17,27 +17,31 @@
 
 
  
- # Installation #
+ ## Installation ##
 
 
- ## On Windows ##
+ ### On Windows ###
 
  - You can use the makefile to generate an executable file to launch the program.
  - Otherwise you can import a new project using the XML file provided in the directory into your IDE.
 
 
- ## On Linux system ##
+ ### On Linux system ###
 
- Be careful :
-  - SDL 2.0.1 at least must be installed on your system. Otherwise, you will not be able to compile the program.
+ Requirements :
+ 
+  - SDL 2.0.1 at least must be installed on your system.
   - Lua 5.1 must be installed on you computer.
+  
+ Warning :
+ 
   - It is possible you get an issue if you use a recent version of Lua. 
 
 
- You just need to execute this following command :
+ You just need to execute the following command :
 	$make
 
- So, you can test the program.
+ So, you can launch the demo program
 
 
 
