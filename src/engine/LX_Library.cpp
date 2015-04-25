@@ -30,6 +30,9 @@
 #include "LX_Library.hpp"
 #include "LX_Mixer.hpp"
 
+
+using namespace LX_Graphics;
+
 /**
 *   @fn bool LX_Init(void)
 *
@@ -130,6 +133,8 @@ bool LX_Init(void)
         }
     }
 
+    LX_WindowManager::init();
+
     return true;
 }
 
@@ -143,11 +148,14 @@ bool LX_Init(void)
 */
 void LX_Quit(void)
 {
+    LX_WindowManager::destroy();
+
     Mix_CloseAudio();
     Mix_Quit();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
+
     LX_Configuration::destroy();
 }
 

@@ -68,8 +68,8 @@ int main ( int argc, char** argv )
     // initialization
     window = new LX_Window();
 
-    LX_WindowManager::init();
-    LX_WindowManager::getInstance()->addWindow(window);
+    // getWindowManager() and LX_WindowManager::getInstance() are the same thing
+    getWindowManager()->addWindow(window);
     LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,SDL_WINDOW_RESIZABLE));
 
     ttf = new LX_Font(&color);
@@ -158,8 +158,8 @@ int main ( int argc, char** argv )
         window->updateRenderer();
 
         // Put the image of explosion to the second window
-        LX_WindowManager::getInstance()->getWindow(1)->putTexture(ex,NULL,&pos);
-        LX_WindowManager::getInstance()->getWindow(1)->updateRenderer();
+        getWindowManager()->getWindow(1)->putTexture(ex,NULL,&pos);
+        getWindowManager()->getWindow(1)->updateRenderer();
 
         SDL_Delay(33);
     }
@@ -180,7 +180,6 @@ int main ( int argc, char** argv )
     delete ttf;
 
     std::cout << "Allocated channels after : " << LX_Mixer::allocateChannels(0) <<std::endl;
-    LX_WindowManager::destroy();
     LX_Quit();
 
 

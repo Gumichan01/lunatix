@@ -24,6 +24,7 @@
 *
 */
 
+#include "LX_WindowManager.hpp"
 
 bool LX_Init(void);
 void LX_Quit(void);
