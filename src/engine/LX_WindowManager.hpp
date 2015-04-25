@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_WindowManager.cpp
+*	@file LX_WindowManager.hpp
 *	@brief The window manager
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.3
@@ -34,9 +34,17 @@
 
 #define LX_NBMAX_WINDOWS 100
 
+
 namespace LX_Graphics{
 
-
+    /**
+    *   @class LX_WindowManager
+    *
+    *   @brief The window manager class
+    *
+    *   It handle various windows
+    *
+    */
     class LX_WindowManager{
 
         LX_Window * mainWindow;

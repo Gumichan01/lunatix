@@ -12,8 +12,8 @@
 */
 
 /**
-*	@file LX_Font.cpp
-*	@brief The LunatiX_engine True type Font (TTF) modules.
+*	@file LX_TrueTypeFont.cpp
+*	@brief The LunatiX Engine True type Font (TTF) modules.
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2
 *	@date July 15th, 2014
@@ -31,6 +31,13 @@
 
 using namespace LX_Graphics;
 
+
+/**
+*   @namespace LX_TrueTypeFont
+*
+*   @brief The True Type Font module
+*
+*/
 namespace LX_TrueTypeFont{
 
 
@@ -404,6 +411,7 @@ namespace LX_TrueTypeFont{
     *   @param type the type of the text(Solid, Shaded, or Blended)
     *   @param text the string you want to draw
     *   @param size the size of the text on the window
+    *   @param idWindow the
     *
     *   @return a SDL_Texture on success, NULL otherwise
     *

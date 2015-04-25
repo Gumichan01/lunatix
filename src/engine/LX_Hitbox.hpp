@@ -27,7 +27,7 @@
 
 
 struct SDL_Rect;
-typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect)*/
+typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect) */
 
 
 /**
@@ -38,8 +38,8 @@ typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect)*/
 */
 typedef struct LX_Point{
 
-    int x;      /**<The x position of the point*/
-    int y;      /**<The y position of the point*/
+    int x;      /**< The x position of the point */
+    int y;      /**< The y position of the point */
 
 }LX_Point;      /**< */
 
@@ -53,12 +53,12 @@ typedef struct LX_Point{
 */
 typedef struct LX_Circle{
 
-    int xCenter;                /**<The x position of circle center*/
-    int yCenter;                /**<The y position of circle center*/
-    unsigned int radius;        /**<The circle radius*/
+    int xCenter;                /**< The x position of circle center */
+    int yCenter;                /**< The y position of circle center */
+    unsigned int radius;        /**< The circle radius */
 
     // The square radius will never be less than 0
-    int square_radius; /**<The square radius (for a collision optimization)*/
+    int square_radius; /**< The square radius (for a collision optimization) */
 
 
 }LX_Circle;     /**< */

@@ -65,6 +65,7 @@ namespace LX_Graphics{
     *   Create the window with the default configuration
     *
     *   @exception LX_WindowException
+    *
     */
     LX_Window::LX_Window()
     {
@@ -114,7 +115,15 @@ namespace LX_Graphics{
     }
 
 
-
+    /**
+    *   @fn LX_Window::LX_Window(std::string title)
+    *
+    *   Create the window setting the title
+    *   using the default configuration
+    *
+    *   @exception LX_WindowException
+    *
+    */
     LX_Window::LX_Window(std::string title)
     {
         int w,h;
@@ -133,6 +142,7 @@ namespace LX_Graphics{
 
         init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,flag);
     }
+
 
     /**
     *   @fn LX_Window::LX_Window(SDL_Window *sdlWin)
@@ -168,8 +178,9 @@ namespace LX_Graphics{
         init2();
     }
 
+
     /**
-    *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, bool screen_flag)
+    *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag)
     *
     *   Create the window with custom configuration
     *
@@ -178,11 +189,15 @@ namespace LX_Graphics{
     *   @param posY : the Y position of the window on the monitor
     *   @param w : the width of the window
     *   @param h : the height of the window
-    *   @param screen_flag : a boolean that said if you want the fullscreen mode
+    *   @param flag : one ofthese following flags :
+    *           LX_GRAPHICS_FULLSCREEN_DESKTOP
+    *           LX_GRAPHICS_FULLSCREEN
+    *           LX_GRAPHICS_NO_FULLSCREEN
+    *           And any SDL flags
     *
     *   @note This constructor does not use the LX_config class
     *
-    *   @exception LX_WindowException If the window initialisation fails.
+    *   @exception LX_WindowException If the window or redrering initialisation fails.
     *
     */
     LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag)
@@ -191,7 +206,23 @@ namespace LX_Graphics{
     }
 
 
-
+     /**
+    *   @fn LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
+    *
+    *   Create the window with custom configuration
+    *
+    *   @param title the title of the window
+    *   @param posX : the X position of the window on the monitor
+    *   @param posY : the Y position of the window on the monitor
+    *   @param w : the width of the window
+    *   @param h : the height of the window
+    *   @param flag : it is the same kind of flag used in LX_Window::LX_Window()
+    *
+    *   @note This constructor does not use the LX_config class
+    *
+    *   @exception LX_WindowException If the window or redrering initialisation fails.
+    *
+    */
     void LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
     {
         window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
@@ -217,7 +248,12 @@ namespace LX_Graphics{
     }
 
 
-
+     /**
+    *   @fn LX_Window::init2()
+    *
+    *   Initialize internal variables
+    *
+    */
     void LX_Window::init2()
     {
         originalWidth = getWidth();

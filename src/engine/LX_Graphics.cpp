@@ -12,8 +12,8 @@
 */
 
 /**
-*	@file LX_Renderer.cpp
-*	@brief The LunatiX_engine graphic module
+*	@file LX_TrueTypeFont.cpp
+*	@brief The LunatiX Engine graphic module
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.2
 *	@date January 28th, 2015
@@ -30,12 +30,16 @@
 #include "LX_WindowManager.hpp"
 
 
-
+/**
+*   @namespace LX_Graphics
+*
+*   @brief The graphics module
+*
+*/
 namespace LX_Graphics{
 
 
     /**
-    *
     *   @fn SDL_Surface * loadSurface(std::string filename)
     *
     *   This function loads an SDL_Surface from any image file an optimized its format
