@@ -1,4 +1,4 @@
- # LunatiX Engine #
+# LunatiX Engine #
 
  LunatiX Engine is a SDL-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license. 
 
@@ -9,7 +9,7 @@
  - LX_Mixer : a mix library using SDL_Mixer
  - LX_Physics : a physics engine 
 
- At the moment, the engine only works on windows. The Linux support will be done soon.
+ The engine works on Windows and Linux system.
 
  
  You can find the library reference [here](http://gumichan01.olympe.in/reference/lunatix-engine/)
@@ -29,8 +29,8 @@
 
  Requirements :
  
-  - SDL 2.0.1 at least must be installed on your system.
-  - Lua 5.1 must be installed on you computer.
+  - SDL 2.0.1 at least
+  - Lua 5.1
   
  Warning :
  
