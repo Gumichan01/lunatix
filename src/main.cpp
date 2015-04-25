@@ -43,10 +43,11 @@ int main ( int argc, char** argv )
     bool err, game = true;
     int wt, ht;
 
-    SDL_Surface *sf = NULL;
     SDL_Texture *st = NULL;
+    SDL_Texture *ex = NULL;
 
     std::string name = "data/cb.bmp";
+    std::string expl_str = "data/explosion.png";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
     LX_Window *window = NULL;
@@ -65,15 +66,18 @@ int main ( int argc, char** argv )
     }
 
     // initialization
-    LX_WindowManager::init();
-
     window = new LX_Window();
+
+    LX_WindowManager::init();
     LX_WindowManager::getInstance()->addWindow(window);
+    LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,SDL_WINDOW_RESIZABLE));
+
     ttf = new LX_Font(&color);
     audio = new LX_Music(mus);
 
     // Load the texture from the data file
     st = loadTextureFromFile(name.c_str(),0);
+    ex = loadTextureFromFile(expl_str.c_str(),1);
 
     if(st == NULL)
     {
@@ -153,12 +157,22 @@ int main ( int argc, char** argv )
 
         window->updateRenderer();
 
+        // Put the image of explosion to the second window
+        LX_WindowManager::getInstance()->getWindow(1)->putTexture(ex,NULL,&pos);
+        LX_WindowManager::getInstance()->getWindow(1)->updateRenderer();
+
         SDL_Delay(33);
     }
 
+    if(LX_WindowManager::getInstance()->getWindow(1024) == NULL)
+        std::cout << "LX_WindowManager::getInstance()->getWindow(1024) is NULL " << std::endl;
 
-    SDL_FreeSurface(sf);
+    if(LX_WindowManager::getInstance()->deleteWindow(128) == -1)
+        std::cout << "LX_WindowManager::getInstance()->deleteWindow(128) returned -1 " << std::endl;
+
+
     SDL_DestroyTexture(st);
+    SDL_DestroyTexture(ex);
     SDL_DestroyTexture(t1);
     SDL_DestroyTexture(t2);
 
