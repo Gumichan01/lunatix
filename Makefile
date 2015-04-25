@@ -20,7 +20,7 @@ DEBUG=no
 
 CC=g++
 MAIN_OBJ=main.o
-OBJS=LX_Chunk.o LX_Config.o LX_Renderer.o LX_Library.o \
+OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o
 
 LUAC=luac5.1
@@ -62,8 +62,9 @@ LUA_FLAGS=./lib/linux/liblua5.1-c++.so.0
 LFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 
-all : clean-target $(LUNATIX_EXE) $(COMPILED_SCRIPT)
+all : $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 
+rebuild : clean-target all
 
 $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@echo "Compile the Lua script : "$<" -> "$@
@@ -91,17 +92,22 @@ LX_Window.o : $(LUNATIX_PATH)LX_Window.cpp $(LUNATIX_PATH)LX_Window.hpp $(LUNATI
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
+LX_WindowManager.o : $(LUNATIX_PATH)LX_WindowManager.cpp $(LUNATIX_PATH)LX_WindowManager.hpp $(LUNATIX_PATH)LX_Config.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
 LX_Library.o : $(LUNATIX_PATH)LX_Library.cpp $(LUNATIX_PATH)LX_Library.hpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Mixer.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Renderer.o : $(LUNATIX_PATH)LX_Renderer.cpp $(LUNATIX_PATH)LX_Window.hpp
+LX_Graphics.o : $(LUNATIX_PATH)LX_Graphics.cpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Window.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_PATH)LX_TrueTypeFont.hpp $(LUNATIX_PATH)LX_Renderer.hpp $(LUNATIX_PATH)LX_Config.hpp
+LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_PATH)LX_TrueTypeFont.hpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Config.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
