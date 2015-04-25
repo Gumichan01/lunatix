@@ -180,6 +180,7 @@ int main ( int argc, char** argv )
     delete ttf;
 
     std::cout << "Allocated channels after : " << LX_Mixer::allocateChannels(0) <<std::endl;
+    std::cout << "Number of windows to destruct : " << getWindowManager()->nbWindow() <<std::endl;
     LX_Quit();
 
 
