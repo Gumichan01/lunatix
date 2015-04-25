@@ -32,12 +32,17 @@
 #include "LX_Window.hpp"
 
 
+#define LX_NBMAX_WINDOWS 100
+
 namespace LX_Graphics{
 
 
     class LX_WindowManager{
 
         LX_Window * mainWindow;
+        unsigned int size;
+        unsigned int nb_windows;
+        LX_Window *windows[LX_NBMAX_WINDOWS];
 
         LX_WindowManager();
         ~LX_WindowManager();
@@ -49,11 +54,11 @@ namespace LX_Graphics{
         static void destroy();
 
         int addWindow(LX_Window *w);
-        int deleteWindow(int id);
+        int deleteWindow(unsigned int id);
 
-        int nbWindow(void);
+        unsigned int nbWindow(void);
 
-        LX_Window * getWindow(int id);
+        LX_Window * getWindow(unsigned int id);
 
     };
 

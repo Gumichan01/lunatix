@@ -20,11 +20,14 @@
 *
 */
 
+
+#include <cstring>
+
 #include "LX_WindowManager.hpp"
 
 
-
 static LX_Graphics::LX_WindowManager *winInstance = NULL;
+
 
 namespace LX_Graphics{
 
@@ -52,48 +55,62 @@ namespace LX_Graphics{
 
     LX_WindowManager::~LX_WindowManager()
     {
-        deleteWindow(0);
+        unsigned int i;
+
+        if(nb_windows != 0)
+        {
+            for(i = 0; nb_windows != 0 && i < size;i++)
+            {
+                deleteWindow(i);
+            }
+        }
     }
 
     LX_WindowManager::LX_WindowManager()
     {
         mainWindow = NULL;
+        size = 0;
+        nb_windows = 0;
+        memset(windows,NULL,LX_NBMAX_WINDOWS);
     }
 
 
     int LX_WindowManager::addWindow(LX_Window *w)
     {
-        if(w == NULL)
+        if(w == NULL || size >= LX_NBMAX_WINDOWS)
             return -1;
 
-        mainWindow = w;
+        windows[size] = w;
+        size++;
+        nb_windows += 1;
 
         return 0;
     }
 
-    int LX_WindowManager::deleteWindow(int id)
+    int LX_WindowManager::deleteWindow(unsigned int id)
     {
-        if(id != 0 || mainWindow == NULL)
+        if(id > size || mainWindow == NULL)
             return -1;
-        else
+        else if(windows[id] != NULL)
         {
-            delete mainWindow;
-            mainWindow = NULL;
+            delete windows[id];
+            windows[id] = NULL;
+            nb_windows -= 1;
             return 0;
         }
 
         return 0;
     }
 
-    int LX_WindowManager::nbWindow()
+    unsigned int LX_WindowManager::nbWindow()
     {
-        return 0;
+        return nb_windows;
     }
 
 
-    LX_Window * LX_WindowManager::getWindow(int id)
+    LX_Window * LX_WindowManager::getWindow(unsigned int id)
     {
-        return (id != 0) ? NULL: mainWindow;
+        return (id > size ) ? NULL: windows[id];
     }
 
 

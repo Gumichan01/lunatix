@@ -90,7 +90,7 @@ int main ( int argc, char** argv )
 
     audio->volume(MIX_MAX_VOLUME/2);
     std::cout << "Volume : " << audio->volume(-1) <<std::endl;
-    std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(16) <<std::endl;
+    std::cout << "Allocated channels before : " << LX_Mixer::allocateChannels(16) <<std::endl;
 
     LX_Mixer::fadeInMusic(audio,4000);
 
@@ -165,7 +165,7 @@ int main ( int argc, char** argv )
     delete audio;
     delete ttf;
 
-    std::cout << "Allocated channels : " << LX_Mixer::allocateChannels(0) <<std::endl;
+    std::cout << "Allocated channels after : " << LX_Mixer::allocateChannels(0) <<std::endl;
     LX_WindowManager::destroy();
     LX_Quit();
 
