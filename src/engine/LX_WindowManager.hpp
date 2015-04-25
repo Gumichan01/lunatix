@@ -62,6 +62,9 @@ namespace LX_Graphics{
 
     };
 
+
+    LX_WindowManager * getWindowManager();
+
 };
 
 

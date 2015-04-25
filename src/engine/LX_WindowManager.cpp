@@ -32,6 +32,12 @@ static LX_Graphics::LX_WindowManager *winInstance = NULL;
 namespace LX_Graphics{
 
 
+    LX_WindowManager * getWindowManager()
+    {
+        return LX_WindowManager::getInstance();
+    }
+
+
     void LX_WindowManager::init()
     {
         if(winInstance == NULL)
