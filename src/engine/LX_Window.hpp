@@ -39,28 +39,6 @@ namespace LX_Graphics{
 
 
     /**
-    *   @class LX_WindowException
-    *   @brief The Window_creation_exception class.
-    *
-    *   This class describes the exception occured when the window initialization fails.
-    *
-    */
-    class LX_WindowException : public std::exception
-    {
-        public :
-
-        std::string str_err;                    /**< The string where the error message will be conteined*/
-
-        LX_WindowException(std::string err);
-
-        const char * what() const throw();
-
-        ~LX_WindowException() throw();
-    };
-
-
-
-    /**
     *   @class LX_Window
     *   @brief The LX_Window class.
     *

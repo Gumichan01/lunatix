@@ -31,33 +31,6 @@
 namespace LX_Graphics{
 
 
-    /**
-    *   @fn LX_WindowException::LX_WindowException(std::string err)
-    *
-    *   Build the LX_WindowException class
-    *
-    *   @param err the error string
-    *
-    */
-    LX_WindowException::LX_WindowException(std::string err)
-    {
-        str_err = err;
-    }
-
-
-    /**
-    *   @fn const char * LX_WindowException::what() const throw()
-    *   Get the error string
-    *   @return the error string
-    */
-    const char * LX_WindowException::what() const throw()
-    {
-        return str_err.c_str();
-    }
-
-
-    LX_WindowException::~LX_WindowException() throw(){}
-
 
     /**
     *   @fn LX_Window::LX_Window()
@@ -105,19 +78,14 @@ namespace LX_Graphics{
 
         if(window == NULL )
         {
-            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
-            throw LX_WindowException(SDL_GetError());
+            std::cerr << "LX_Window constructor - window creation : " << SDL_GetError() << std::endl;
         }
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
         if(renderer == NULL)
         {
-            std::string err_msg = SDL_GetError();
-
-            SDL_DestroyWindow(window);
-            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
-            throw LX_WindowException(err_msg.c_str());
+            std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
         }
 
         init2();
@@ -168,20 +136,13 @@ namespace LX_Graphics{
     */
     LX_Window::LX_Window(SDL_Window *sdlWin)
     {
-        if(sdlWin == NULL)
-            throw LX_WindowException("exception occured in LX_Window : NULL value \n");
-
         window = sdlWin;
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
         if(renderer == NULL)
         {
-            std::string err_msg = SDL_GetError();
-
-            SDL_DestroyWindow(window);
-            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
-            throw LX_WindowException(err_msg.c_str());
+            std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
         }
 
         init2();
@@ -238,19 +199,14 @@ namespace LX_Graphics{
 
         if(window == NULL )
         {
-            std::cerr << "exception occured in LX_Window constructor during the render creation : " << std::endl;
-            throw LX_WindowException(SDL_GetError());
+            std::cerr << "LX_Window constructor - window creation : " << SDL_GetError() << std::endl;
         }
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
         if(renderer == NULL)
         {
-            std::string err_msg = SDL_GetError();
-
-            SDL_DestroyWindow(window);
-            std::cerr << "exception occured in LX_Window constructor during the window creation : " << std::endl;
-            throw LX_WindowException(err_msg.c_str());
+            std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
         }
 
         init2();
