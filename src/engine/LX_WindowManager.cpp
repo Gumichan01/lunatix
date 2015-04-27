@@ -120,7 +120,7 @@ namespace LX_Graphics{
         mainWindow = NULL;
         size = 0;
         nb_windows = 0;
-        memset(windows,NULL,LX_NBMAX_WINDOWS);
+        memset(windows,0,LX_NBMAX_WINDOWS);
     }
 
 

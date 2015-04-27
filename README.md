@@ -31,6 +31,7 @@
  
   - SDL 2.0.1 at least
   - Lua 5.1
+  - OpenGL 2.1 at least
   
  Warning :
  
