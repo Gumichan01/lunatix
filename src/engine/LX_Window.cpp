@@ -69,7 +69,7 @@ namespace LX_Graphics{
     */
     LX_Window::LX_Window()
     {
-        Uint32 fullscreen_flag = 0x00000000;
+        Uint32 option_flag = 0x00000000;
         Uint32 position_flag = 0x00000000;
 
         int lxWidth = 0;
@@ -80,19 +80,28 @@ namespace LX_Graphics{
         lxWidth = win_config->getWinWidth();
         lxHeight = win_config->getWinHeight();
 
+
         // check the fullscreen flag
         if(win_config->getFullscreenFlag() == 1)
         {
-            fullscreen_flag = SDL_WINDOW_FULLSCREEN;
+            option_flag |= SDL_WINDOW_FULLSCREEN;
         }
 
-        // Is the fullscreen mode active
-        if(fullscreen_flag == SDL_WINDOW_FULLSCREEN)
+
+        // Is the fullscreen mode active ?
+        if( (option_flag & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN)
             position_flag = SDL_WINDOWPOS_UNDEFINED;
         else
             position_flag = SDL_WINDOWPOS_CENTERED;
 
-        window = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|fullscreen_flag);
+
+        // OpenGL flag
+        if(win_config->getOpenGL_Flag() == 1)
+        {
+            option_flag |= SDL_WINDOW_OPENGL;
+        }
+
+        window = SDL_CreateWindow("Lunatix-engine with SDL 2",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
 
         if(window == NULL )
         {

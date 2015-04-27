@@ -33,7 +33,6 @@ struct SDL_Surface;
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with desktop resolution */
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Just fullscreen mode with original resolution */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window */
-#define LX_GRAPHICS_NO_OPENGL 0x00f0507c                                /**< Flag disabling OpenGL */
 
 
 namespace LX_Graphics{

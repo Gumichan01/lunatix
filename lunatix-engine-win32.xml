@@ -37,7 +37,7 @@
 			<Add directory=".\include" />
 		</Compiler>
 		<Linker>
-			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer" />
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lOpenGL32 -lglu32" />
 			<Add library="libmingw32.a" />
 			<Add library="lib\win32\libSDL2.a" />
 			<Add library="lib\win32\libSDL2.dll.a" />
@@ -52,8 +52,8 @@
 			<Add library="lib\win32\lua51.lib" />
 			<Add directory="lib\win32" />
 		</Linker>
-		<Unit filename="config\sdl_conf.cfg" />
-		<Unit filename="config\window.cfg" />
+		<Unit filename="config\lxsdl.cfg" />
+		<Unit filename="config\lxwindow.cfg" />
 		<Unit filename="script\LX_config.lua" />
 		<Unit filename="src\engine\LX_Chunk.cpp" />
 		<Unit filename="src\engine\LX_Chunk.hpp" />
