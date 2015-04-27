@@ -26,6 +26,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 
+#include <GL/glu.h>
+
 #include "LX_Config.hpp"
 #include "LX_Library.hpp"
 #include "LX_Mixer.hpp"
@@ -131,6 +133,19 @@ bool LX_Init(void)
             SDL_Quit();
             return false;
         }
+    }
+
+    if(configuration->getOpenGL_Flag() == 1)
+    {
+        err = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+
+        if(err == -1)
+            std::cerr << "Error Attribute : " << SDL_GetError() << std::endl;
+
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
+        if(err == -1)
+            std::cerr << "Error Attribute : " << SDL_GetError() << std::endl;
     }
 
     LX_WindowManager::init();

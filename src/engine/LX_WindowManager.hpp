@@ -42,7 +42,7 @@ namespace LX_Graphics{
     *
     *   @brief The window manager class
     *
-    *   It handle various windows
+    *   It handles various windows
     *
     */
     class LX_WindowManager{
