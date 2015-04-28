@@ -82,9 +82,9 @@ LX_ConfigurationException::~LX_ConfigurationException() throw(){}
 LX_Configuration::LX_Configuration()
 {
     //initialize the variables at the default values
-    videoFlag = 0;
-    ttf_Flag = 0;
-    audioFlag = 0;
+    videoFlag = 1;
+    ttf_Flag = 1;
+    audioFlag = 1;
     joystickFlag = 0;
     openglFlag = 0;
     font_size = 0;
