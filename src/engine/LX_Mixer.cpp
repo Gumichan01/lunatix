@@ -13,11 +13,9 @@
 
 /**
 *	@file LX_Mixer.cpp
-*	@brief The mixer library
+*	@brief The LX_Mixer implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 11th, 2014
-*
+*	@version 0.3
 *
 */
 
@@ -68,7 +66,7 @@ LX_Music * LX_Mixer::loadMusic(Mix_Music *mus)
 *
 *   @param filename The name of the sample file
 *
-*   @return a new instance, NULL otherwise
+*   @return A new instance, NULL otherwise
 *
 */
 LX_Chunk * LX_Mixer::loadSample(std::string filename)
@@ -84,7 +82,7 @@ LX_Chunk * LX_Mixer::loadSample(std::string filename)
 *
 *   @param ch The Mix_chunk
 *
-*   @return a new instance, NULL otherwise
+*   @return A new instance, NULL otherwise
 *
 */
 LX_Chunk * LX_Mixer::loadSample(Mix_Chunk *ch)
@@ -141,12 +139,12 @@ int LX_Mixer::reserveChannels(unsigned int num)
 *   @param channel the channel to set the volume in
 *   @param volume
 *
-*   @return the previous volume setting
+*   @return The previous volume setting
 *
 *   @note if the channel is -1, all channels will be set to the volume
 *   @note If the volume is equals to -1, then the average volume is returned
 *   @note If the new volume is greater than 128, the volume is set to 128
-*   @note Ths value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
+*   @note This value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
 *
 */
 int LX_Mixer::channelVolume(int channel,int volume)
@@ -161,7 +159,7 @@ int LX_Mixer::channelVolume(int channel,int volume)
 *
 *   Pause the channel
 *
-*   @param channel the channel to pause
+*   @param channel The channel to pause
 *
 *   @note If channel is -1, then all channels will be paused
 *
@@ -211,7 +209,7 @@ void LX_Mixer::haltChannel(int channel)
 *   Halt the channel playback after some milliseconds
 *
 *   @param channel The channel to stop playing
-*   @param ticks Milliseconds until channel(s) halt playback
+*   @param ticks Milliseconds until channel(s) halt(s) playback
 *
 *   @note If channel is -1, then all channels will be stopped
 *
@@ -229,7 +227,7 @@ void LX_Mixer::expireChannel(int channel, int ticks)
 *
 *   @param channel The channel to test
 *
-*   @return 0 if the channel is not playing, 1 otherwise
+*   @return 0 If the channel is not playing, 1 otherwise
 *
 *   @note If channel is -1, then all channels will be tested
 *           and the number of channels playing is returned
@@ -248,7 +246,7 @@ int LX_Mixer::isPlaying(int channel)
 *
 *   @param channel The channel to test
 *
-*   @return 0 if the channel is not paused, 1 otherwise
+*   @return 0 If the channel is not paused, 1 otherwise
 *
 *   @note If channel is -1, then all channels will be tested
 *           and the number of aused channels is returned
@@ -269,9 +267,9 @@ int LX_Mixer::isPaused(int channel)
 *   @param music The LX
 *   @param ms Milliseconds for the fade-in effect to complete
 *
-*   @note fadeInMusic starts playing the music with the fade-in effec.
+*   @note fadeInMusic starts playing the music with the fade-in effecT.
 *           So if you use this fuction, you do not need
-*               to call the LX_Music::play() yourself
+*               to call LX_Music::play()
 *   @note Any previous music will be halted, or if it is fading out
 *           it will wait (blocking) for the fade to complete
 *
@@ -313,13 +311,13 @@ void LX_Mixer::fadeOutMusic(int ms)
 *   Set the panning on a channel, increasing of decreasing
 *   the volume on this channel
 *
-*   @param channel the channel
-*   @param left the volume of the left channel (0 - 255)
-*   @param right the volume of the right channel (0 - 255)
+*   @param channel The channel
+*   @param left The volume of the left channel (0 - 255)
+*   @param right The volume of the right channel (0 - 255)
 *
 *   @note This function only works on stereo audio.
 *   @note It is possible the call fail if you do it on a mono audio.
-*   @note To unregister tyhe effect, use this function with 255 as left and right value
+*   @note To unregister type effect, use this function with 255 as left and right value
 *           or use LX_MixerremovePanning().
 *
 */
@@ -334,7 +332,7 @@ void LX_Mixer::setPanning(int channel,Uint8 left,Uint8 right)
 *
 *   Remove the panning on a channel
 *
-*   @param channel the channel you want to remove the panning on
+*   @param channel The channel you want to remove the panning on
 *
 */
 void LX_Mixer::removePanning(int channel)
@@ -349,7 +347,7 @@ void LX_Mixer::removePanning(int channel)
 *
 *   Set the distance
 *
-*   @param distance the virtuel distance betwenn the user and the source
+*   @param distance The virtuel distance betwenn the user and the source
 *
 */
 void LX_Mixer::setDistance(Uint8 distance)
@@ -378,7 +376,7 @@ void LX_Mixer::setPosition(Sint16 angle)
 *   Set the virtuel position of the audio source according to the channel.
 *
 *   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
-*   @param distance the distance between the source and the listener
+*   @param distance The distance between the source and the listener
 *
 */
 void LX_Mixer::setPosition(Sint16 angle, int distance)
@@ -394,11 +392,11 @@ void LX_Mixer::setPosition(Sint16 angle, int distance)
 *   Set the virtuel position of the audio source according to the channel.
 *   This function emulates a 3D audio effect.
 *
-*   @param channel the channel you want to register the effect on
+*   @param channel The channel you want to register the effect on
 *   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
-*   @param distance the distance between the source and the listener
+*   @param distance The distance between the source and the listener
 *
-*   @note the distance is the same as the distance you can specified with LX_Mixer::setDistance()
+*   @note The distance is the same as the distance you can specified with LX_Mixer::setDistance()
 *
 */
 void LX_Mixer::setPosition(int channel, Sint16 angle, int distance)
@@ -413,7 +411,7 @@ void LX_Mixer::setPosition(int channel, Sint16 angle, int distance)
 *
 *   Reset the virtuel position of the audio source according to the channel.
 *
-*   @param channel the channel you want to unregister the effect on
+*   @param channel The channel you want to unregister the effect on
 *
 */
 void LX_Mixer::resetPosition(int channel)
@@ -427,10 +425,10 @@ void LX_Mixer::resetPosition(int channel)
 *
 *   Reverse the left and right channel sound
 *
-*   @param channel the channel to register the effect
-*   @param flip this must a non-zero value to register the reverse effect
+*   @param channel The channel to register the effect
+*   @param flip This must a non-zero value to register the reverse effect
 *
-*   @note If you want want to unregister the effect on a channel, set 0 as flip
+*   @note If you want to unregister the effect on a channel, set 0 as flip
 *
 */
 void LX_Mixer::reverseStereo(int channel, int flip)
@@ -445,10 +443,10 @@ void LX_Mixer::reverseStereo(int channel, int flip)
 *
 *   Set the distance
 *
-*   @param channel the channel you need to use
-*   @param distance the virtuel distance betwenn the user and the source
+*   @param channel The channel you need to use
+*   @param distance The virtuel distance betwenn the user and the source
 *
-*   @note If you set MIX_CHANNEL_POST, all channel will be dealt
+*   @note If you set MIX_CHANNEL_POST, all channels will be dealt
 *
 */
 void LX_Mixer::setDistance(int channel,Uint8 distance)

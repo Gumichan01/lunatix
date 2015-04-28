@@ -13,11 +13,9 @@
 
 /**
 *	@file LX_config.cpp
-*	@brief The LunatiX_engine configuration class
+*	@brief The LX_Configuration implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 7th, 2015
-*
+*	@version 0.3
 *
 */
 
@@ -37,9 +35,9 @@ static LX_Configuration *instance;
 /**
 *   @fn LX_ConfigurationException::LX_ConfigurationException(std::string err)
 *
-*   Build the LX_ConfigurationException class
+*   Build the exeception
 *
-*   @param err the error string
+*   @param err The error string
 *
 */
 LX_ConfigurationException::LX_ConfigurationException(std::string err)
@@ -47,12 +45,13 @@ LX_ConfigurationException::LX_ConfigurationException(std::string err)
     str_err = err;
 }
 
+
 /**
 *   @fn const char * LX_ConfigurationException::what() const throw()
 *
 *   Get the error string
 *
-*   @return the error string
+*   @return The error string
 *
 */
 const char * LX_ConfigurationException::what() const throw()
@@ -68,8 +67,6 @@ const char * LX_ConfigurationException::what() const throw()
 *
 */
 LX_ConfigurationException::~LX_ConfigurationException() throw(){}
-
-
 
 
 
@@ -112,9 +109,9 @@ LX_Configuration::~LX_Configuration(){}
 *
 *   Launch the system configuration
 *
-*   @note  1 : This function is just a shorcut of LX_Configuration::getInstance()
+*   @note  1 : This function is just a shortcut of LX_Configuration::getInstance()
 *               but it does not return the reference to the instance.
-*               So you need to call getInstance() to get the singleton
+*               So you need to call getInstance() to get it
 *   @note  2 : Normally you do not need to call it because it is already done in LX_Init()
 *
 */
@@ -130,10 +127,10 @@ void LX_Configuration::initConfig()
 *
 *   Get the unique instance of the LX_Configuration class
 *
-*   @return the instance of LX_Configuration
+*   @return The instance of LX_Configuration
 *
 *   @note If no instance exists, a new unique instance will be created and returned
-*   @note otherwise, a current instance will be returned
+*           otherwise, a current instance will be returned
 *
 */
 LX_Configuration * LX_Configuration::getInstance()
@@ -158,7 +155,6 @@ LX_Configuration * LX_Configuration::getInstance()
 
 
 /**
-*
 *   @fn void LX_Configuration::destroy()
 *
 *   Destroy the unique instance
@@ -175,14 +171,13 @@ void LX_Configuration::destroy()
 
 
 /**
-*
 *   @fn void LX_Configuration::assignString(lua_State * state, char *str, int len)
 *
 *   Get the string from the lua stack
 *
 *   @param state The Lua state
-*   @param str the string you will store the extracted string
-*   @param len the length of the string str
+*   @param str The string you will store the extracted string
+*   @param len The length of the string str
 *
 *   @warning If state or str is NULL, a segmentation fault may occur
 *               If len is 0 or less than the string you want to take from the lua state,
@@ -356,12 +351,11 @@ void LX_Configuration::setFlags(void)
 
 
 /**
-*
 *   @fn int LX_Configuration::getVideoFlag()
 *
 *   Get the video flag
 *
-*   @return the video configuration
+*   @return The video flag
 *
 */
 int LX_Configuration::getVideoFlag()
@@ -371,12 +365,11 @@ int LX_Configuration::getVideoFlag()
 
 
 /**
-*
 *   @fn int LX_Configuration::getTTF_Flag()
 *
 *   Get the ttf flag
 *
-*   @return the ttf configuration
+*   @return The ttf flag
 *
 */
 int LX_Configuration::getTTF_Flag()
@@ -386,12 +379,11 @@ int LX_Configuration::getTTF_Flag()
 
 
 /**
-*
 *   @fn int LX_Configuration::getAudioFlag()
 *
 *   Get the audio flag
 *
-*   @return the audio configuration
+*   @return The audio flag
 *
 */
 int LX_Configuration::getAudioFlag()
@@ -402,12 +394,11 @@ int LX_Configuration::getAudioFlag()
 
 
 /**
-*
 *   @fn int LX_Configuration::getJoystickFlag()
 *
 *   Get the audio flag
 *
-*   @return the joystick configuration
+*   @return The joystick flag
 *
 */
 int LX_Configuration::getJoystickFlag()
@@ -417,12 +408,11 @@ int LX_Configuration::getJoystickFlag()
 
 
 /**
-*
 *   @fn int LX_Configuration::getOpenGL_Flag()
 *
 *   Get the opengl flag
 *
-*   @return the opengl configuration
+*   @return The opengl flag
 *
 */
 int LX_Configuration::getOpenGL_Flag()
@@ -432,12 +422,11 @@ int LX_Configuration::getOpenGL_Flag()
 
 
 /**
-*
 *   @fn char * LX_Configuration::getFontFile()
 *
 *   Get the font file
 *
-*   @return the font file
+*   @return The font file
 *
 */
 const char * LX_Configuration::getFontFile()
@@ -447,12 +436,11 @@ const char * LX_Configuration::getFontFile()
 
 
 /**
-*
 *   @fn int LX_Configuration::getFontSize()
 *
 *   Get the font size
 *
-*   @return the font size
+*   @return The font size
 *
 */
 int LX_Configuration::getFontSize()
@@ -463,12 +451,11 @@ int LX_Configuration::getFontSize()
 
 
 /**
-*
 *   @fn int LX_Configuration::getWinWidth()
 *
 *   Get the window width
 *
-*   @return the width
+*   @return The width
 *
 */
 int LX_Configuration::getWinWidth()
@@ -479,12 +466,11 @@ int LX_Configuration::getWinWidth()
 
 
 /**
-*
 *   @fn int LX_Configuration::getWinHeight()
 *
 *   Get the window height
 *
-*   @return the height
+*   @return The height
 *
 */
 int LX_Configuration::getWinHeight()
@@ -495,12 +481,11 @@ int LX_Configuration::getWinHeight()
 
 
 /**
-*
 *   @fn int LX_Configuration::getFullscreenFlag()
 *
 *   Get the fullscreen tag
 *
-*   @return the fullscreen tag
+*   @return The fullscreen flag
 *
 */
 int LX_Configuration::getFullscreenFlag()

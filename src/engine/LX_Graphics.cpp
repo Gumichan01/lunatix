@@ -13,10 +13,9 @@
 
 /**
 *	@file LX_TrueTypeFont.cpp
-*	@brief The LunatiX Engine graphic module
+*	@brief The LX_Graphics implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date January 28th, 2015
+*	@version 0.3
 *
 */
 
@@ -44,9 +43,9 @@ namespace LX_Graphics{
     *
     *   This function loads an SDL_Surface from any image file an optimized its format
     *
-    *   @param filename : the file name which describe the image
+    *   @param filename The file name which describe the image
     *
-    *   @return the loaded and optimized surface if there is no problem, NULL otherwise
+    *   @return The loaded and optimized surface if there is no problem, NULL otherwise
     *
     *   @note You may use this function instead of load_surfaceFromBMP() to load a non .bmp file
     *   @note If you want to load a .bmp file and use the transparency,
@@ -81,10 +80,10 @@ namespace LX_Graphics{
     *
     *   Loads create a texture from a surface
     *
-    *   @param target : the surface you want to use to create the texture
-    *   @param id : The ID of the window you create your texture from
+    *   @param target The surface you want to use to create the texture
+    *   @param id The ID of the window you create your texture from
     *
-    *   @return  a new pointer to the texture if the loading is successful, NULL otherwise
+    *   @return A new pointer to the texture if the loading is successful, NULL otherwise
     *
     */
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
@@ -108,10 +107,10 @@ namespace LX_Graphics{
     *
     *   Load a new texture from a file
     *
-    *   @param filename : the name of the file you need to use for the texture creation
-    *   @param id : The ID of the window you create your texture from
+    *   @param filename The name of the file you need to use for the texture creation
+    *   @param id The ID of the window you create your texture from
     *
-    *   @return a pointer to a SDL_Texture if the loading works, NULL otherwise
+    *   @return A pointer to a SDL_Texture if the loading works, NULL otherwise
     *
     */
     SDL_Texture * loadTextureFromFile(std::string filename, int id)
@@ -140,12 +139,12 @@ namespace LX_Graphics{
     *
     *   This function set the alpha value on a SDL_surface
     *
-    *   @param image : the surface
-    *   @param red : the the red color canal of the future transparent color
-    *   @param green : the the green color canal of the future transparent color
-    *   @param blue : the the blue color canal of the future transparent color
+    *   @param image The surface
+    *   @param red The the red color canal of the future transparent color
+    *   @param green The the green color canal of the future transparent color
+    *   @param blue The the blue color canal of the future transparent color
     *
-    *   @return TRUE if the transparency was done without problem, FALSE otherwise
+    *   @return TRUE If the transparency was done without problem, FALSE otherwise
     *
     *   @note You may use any format for values (hexadecimal, digital,...).
     *

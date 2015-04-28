@@ -13,11 +13,9 @@
 
 /**
 *	@file LX_Window.cpp
-*	@brief The LX_Window class
+*	@brief The LX_Window implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 7th, 2015
-*
+*	@version 0.3
 *
 */
 
@@ -47,7 +45,9 @@ namespace LX_Graphics{
 
     /**
     *   @fn const char * LX_WindowException::what() const throw()
+    *
     *   Get the error string
+    *
     *   @return the error string
     */
     const char * LX_WindowException::what() const throw()
@@ -102,7 +102,7 @@ namespace LX_Graphics{
             option_flag |= SDL_WINDOW_OPENGL;
         }
 
-        window = SDL_CreateWindow("LunatiX Engine with SDL 2",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
+        window = SDL_CreateWindow("LunatiX Engine v0.3",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
 
         if(window == NULL )
         {
@@ -125,9 +125,8 @@ namespace LX_Graphics{
     *   @fn LX_Window::LX_Window(std::string title)
     *
     *   Create the window setting the title
-    *   using the default configuration
     *
-    *   @exception LX_WindowException
+    *   @note The default configuration is used during the creation of the window
     *
     */
     LX_Window::LX_Window(std::string title)
@@ -155,12 +154,10 @@ namespace LX_Graphics{
     *
     *   Create the window with an already set window
     *
-    *   @param sdlWin the SDL_Window (must be a non-NULL pointer)
+    *   @param sdlWin The SDL_Window (must be a non-NULL pointer)
     *
     *   @note This constructor does not use the LX_config class
-    *   @warning If you contruct the LX_Window object with a NULL pointer, an exception will occur.
-    *
-    *   @exception LX_WindowException If sdlWin is NULL
+    *   @warning If you contruct the LX_Window object with a NULL pointer, an exception will occur
     *
     */
     LX_Window::LX_Window(SDL_Window *sdlWin)
@@ -183,20 +180,18 @@ namespace LX_Graphics{
     *
     *   Create the window with custom configuration
     *
-    *   @param title the title of the window
-    *   @param posX : the X position of the window on the monitor
-    *   @param posY : the Y position of the window on the monitor
-    *   @param w : the width of the window
-    *   @param h : the height of the window
-    *   @param flag : one ofthese following flags :
+    *   @param title The title of the window
+    *   @param posX The X position of the window on the desktop
+    *   @param posY The Y position of the window on the desktop
+    *   @param w The width of the window
+    *   @param h The height of the window
+    *   @param flag One of these following flags :
     *           LX_GRAPHICS_FULLSCREEN_DESKTOP
     *           LX_GRAPHICS_FULLSCREEN
     *           LX_GRAPHICS_NO_FULLSCREEN
     *           And any SDL flags
     *
     *   @note This constructor does not use the LX_config class
-    *
-    *   @exception LX_WindowException If the window or redrering initialisation fails.
     *
     */
     LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag)
@@ -205,21 +200,21 @@ namespace LX_Graphics{
     }
 
 
-     /**
+    /**
     *   @fn LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
     *
     *   Create the window with custom configuration
     *
-    *   @param title the title of the window
-    *   @param posX : the X position of the window on the monitor
-    *   @param posY : the Y position of the window on the monitor
-    *   @param w : the width of the window
-    *   @param h : the height of the window
-    *   @param flag : it is the same kind of flag used in LX_Window::LX_Window()
+    *   @param title The title of the window
+    *   @param posX The X position of the window on the monitor
+    *   @param posY The Y position of the window on the monitor
+    *   @param w The width of the window
+    *   @param h The height of the window
+    *   @param flag It is the same kind of flag used in LX_Window::LX_Window()
     *
     *   @note This constructor does not use the LX_config class
     *
-    *   @exception LX_WindowException If the window or redrering initialisation fails.
+    *   @exception LX_WindowException If the window initialisation fails.
     *
     */
     void LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
@@ -243,7 +238,7 @@ namespace LX_Graphics{
     }
 
 
-     /**
+    /**
     *   @fn LX_Window::init2()
     *
     *   Initialize internal variables
@@ -255,8 +250,8 @@ namespace LX_Graphics{
         originalHeight = getHeight();
     }
 
+
     /**
-    *
     *   @fn LX_Window::~LX_Window()
     *
     *   Destroy the window instance
@@ -267,12 +262,13 @@ namespace LX_Graphics{
         SDL_DestroyWindow(window);
     }
 
+
     /**
     *   @fn void LX_Window::setTitle(std::string title)
     *
     *   Set the title on the window sidebar
     *
-    *   @param title : The title
+    *   @param title The title
     *
     */
     void LX_Window::setTitle(std::string title)
@@ -282,20 +278,18 @@ namespace LX_Graphics{
 
 
 
-
     /**
-    *
     *   @fn bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     *
     *   This function puts the surface on the surface according to its position and the area to put on it
     *
-    *   @param image : the surface to put
-    *   @param area : the area of the surface to put on the screen
-    *   @param pos : the position of what you want to put
+    *   @param image The surface to put
+    *   @param area The area of the surface to put on the screen
+    *   @param pos The position of what you want to put
     *
     *   @note If you do not need to determine the area parameter of the surface, put NULL
     *
-    *   @return TRUE if the image was put with success, FALSE otherwise
+    *   @return TRUE If the image was put with success, FALSE otherwise
     */
     bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     {
@@ -307,7 +301,8 @@ namespace LX_Graphics{
             return false;
 
         if(pos == NULL)
-        {   // The texture will be set on the top-left of the main surface
+        {
+            // The texture will be set on the top-left of the main surface
             offset.x = 0;
             offset.y = 0;
             offset.w = 0;
@@ -335,16 +330,17 @@ namespace LX_Graphics{
     *
     *   This function puts the texture on the window according to its position and the area to put on it
     *
-    *   @param origin : the texture to put
-    *   @param area : the area of the surface to put on the renderer
-    *   @param pos : the position of what you want to put
+    *   @param origin The texture to put
+    *   @param area The area of the surface to put on the renderer
+    *   @param pos The position of what you want to put
     *
     *   @note If you do not need to determine the area parameter of the surface, put NULL
     *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
     *               to display the texture according to its dimension
     *
-    *   @return TRUE if the texture was put with success, FALSE otherwise
-    **/
+    *   @return TRUE If the texture was put with success, FALSE otherwise
+    *
+    */
     bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
     {
 
@@ -360,8 +356,8 @@ namespace LX_Graphics{
     *
     *   Set the size of the main window
     *
-    *   @param w the width of the window
-    *   @param h the height of the window
+    *   @param w The width of the window
+    *   @param h The height of the window
     *
     */
     void LX_Window::setWindowSize(int w, int h)
@@ -397,7 +393,7 @@ namespace LX_Graphics{
     *
     *   @note This fonction must be used only if you manipulate textures
     *   on the current window. So you cannot use this function and
-    *   LX_Window::updateWindow() together.
+    *   LX_Window::updateWindow() together on a same window.
     *
     */
     void LX_Window::updateRenderer()
@@ -406,9 +402,23 @@ namespace LX_Graphics{
     }
 
 
+    /**
+    *   @fn void LX_Window::updateWindow()
+    *
+    *   This function updates the surface of the window
+    *
+    *   @note This fonction must be used only if you manipulate surfaces
+    *   on the current window. So you cannot use this function and
+    *   LX_Window::updateRenderer() together on a same window.
+    *
+    */
+    void LX_Window::updateWindow()
+    {
+        SDL_UpdateWindowSurface(window);
+    }
+
 
     /**
-    *
     *   @fn void LX_Window::clearWindow()
     *
     *   This function clears the main window
@@ -422,7 +432,6 @@ namespace LX_Graphics{
 
 
     /**
-    *
     *   @fn void LX_Window::clearRenderer()
     *
     *   This function clears the main renderer
@@ -433,30 +442,13 @@ namespace LX_Graphics{
         SDL_RenderClear(renderer);
     }
 
-    /**
-    *
-    *   @fn void LX_Window::updateWindow()
-    *
-    *   This function updates the surface of the window
-    *
-    *   @note This fonction must be used only if you manipulate surfaces
-    *   on the current window. So you cannot use this function and
-    *   LX_Window::updateRenderer() together.
-    *
-    */
-    void LX_Window::updateWindow()
-    {
-        SDL_UpdateWindowSurface(window);
-    }
-
 
     /**
-    *
     *   @fn SDL_Renderer * LX_Window::getRenderer()
     *
     *   Get the window renderer
     *
-    *   @return a pointer to the renderer, NULL otherwise
+    *   @return A pointer to the renderer, NULL otherwise
     *
     */
     SDL_Renderer * LX_Window::getRenderer()
@@ -466,7 +458,6 @@ namespace LX_Graphics{
 
 
     /**
-    *
     *   @fn SDL_Surface * LX_Window::getSurface()
     *
     *   Get the window surface
@@ -486,7 +477,10 @@ namespace LX_Graphics{
     *
     *   Get the window
     *
-    *   @return a pointer to the SDL_Window, NULL otherwise
+    *   @return A pointer to the SDL_Window
+    *
+    *   @note Normally, the function never returns a NULL pointer,
+    *           but it is better to check the pointer value
     *
     */
     SDL_Window * LX_Window::getWindow()
@@ -499,7 +493,7 @@ namespace LX_Graphics{
     /**
     *   @fn int LX_Window::getWidth()
     *
-    *   Return the width of the current window
+    *   Get the width of the current window
     *
     *   @return the width
     *
@@ -517,7 +511,7 @@ namespace LX_Graphics{
     /**
     *   @fn int LX_Window::getHeight()
     *
-    *   Return the height of the current window
+    *   Get the height of the current window
     *
     *   @return the height
     *

@@ -16,12 +16,9 @@
 
 /**
 *	@file LX_TrueTypeFont.hpp
-*	@brief The LX_TrueTypeFont library
+*	@brief The LunatiX Engine True type Font (TTF) library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date July 15th, 2014
-*
-*
+*	@version 0.3
 *
 */
 

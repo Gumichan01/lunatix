@@ -19,7 +19,6 @@
 *	@brief The window manager
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.3
-*	@date April 24th, 2015
 *
 */
 

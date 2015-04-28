@@ -18,23 +18,22 @@
 /**
 *
 *	@file LX_Physics.hpp
-*	@brief The LX_Physics Library, it will be linked with the SDL library
+*	@brief The LX_Physics Library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date July 14th, 2014
+*	@version 0.3
 *
 */
 
 #include "LX_Hitbox.hpp"
 
-#define RECT_SIDES 4    /**<The number of the AABB sides*/
+#define RECT_SIDES 4    /**< The number of the AABB sides */
 
 // todo : gravity, wind, strengh, friction
 
 /**
 *
 *   @namespace LX_Physics
-*   @brief The LunatiX_engine physics engine
+*   @brief The physics engine
 *
 *   This namespace describes the LX_Physics, the physics module of the Lunatix engine.
 *

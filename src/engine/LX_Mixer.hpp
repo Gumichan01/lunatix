@@ -18,9 +18,7 @@
 *	@file LX_Mixer.hpp
 *	@brief The mixer library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 11th, 2014
-*
+*	@version 0.3
 *
 */
 
@@ -45,7 +43,7 @@ class LX_Chunk;
 
 /**
 *   @namespace LX_Mixer
-*   @brief The LunatiX_engine sound module
+*   @brief The mixer module of LunatiX Engine
 *
 *   This SDL_Mixer-based sound engine will load and read a various audio files
 *

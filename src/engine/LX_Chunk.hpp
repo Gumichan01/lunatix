@@ -16,10 +16,9 @@
 
 /**
 *	@file LX_Chunk.hpp
-*	@brief The wrapper of the SDL_Chunk structure
+*	@brief The LX_Chunk file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 19th, 2015
+*	@version 0.3
 *
 */
 
@@ -32,9 +31,7 @@ class LX_Sound;
 *   @class LX_Chunk
 *   @brief The chunk class
 *
-*   This class is a wrapper of the Mix_Chunk type
-*
-**/
+*/
 class LX_Chunk : LX_Sound{
 
     Mix_Chunk *chunk;

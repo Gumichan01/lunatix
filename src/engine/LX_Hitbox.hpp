@@ -19,9 +19,7 @@
 *	@file LX_Hitbox.hpp
 *	@brief The hitbox library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date July 28th, 2014
-*
+*	@version 0.3
 *
 */
 
@@ -47,7 +45,6 @@ typedef struct LX_Point{
 
 /**
 *   @struct LX_Circle
-*
 *   @brief The circle structure
 *
 */

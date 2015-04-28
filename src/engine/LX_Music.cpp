@@ -15,10 +15,9 @@
 
 /**
 *	@file LX_Music.cpp
-*	@brief The LunatiX_engine sound module
+*	@brief The LX_Music implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date July 23th, 2014
+*	@version 0.3
 *
 */
 
@@ -46,7 +45,7 @@ LX_Music::LX_Music()
 *
 *   Load the LX_Music manager with a Mix_Music
 *
-*   @param mus the Mix_Music
+*   @param mus The Mix_Music
 *
 */
 LX_Music::LX_Music(Mix_Music *mus)
@@ -60,7 +59,7 @@ LX_Music::LX_Music(Mix_Music *mus)
 *
 *   Load the LX_Music manager with a Mix_Music
 *
-*   @param filename the music filename you want to load
+*   @param filename The music filename you want to load
 *
 */
 LX_Music::LX_Music(std::string filename)
@@ -89,7 +88,7 @@ LX_Music::~LX_Music()
 *
 *   Load the music specified in the music file
 *
-*   @param filename the file you want to open
+*   @param filename The file to load the music from
 *
 *   @return TRUE on success, FALSE otherwise
 *
@@ -112,7 +111,7 @@ bool LX_Music::load(std::string filename)
 *
 *   Play the music specified in the LX_Music class
 *
-*   @param loops the loops constant
+*   @param loops The loop constant
 *
 *   @return 0 on success, -1 otherwise
 *
@@ -130,7 +129,7 @@ int LX_Music::play(int loops)
 *
 *   @return 0 on success, -1 otherwise
 *
-*   @note This function internally calls play(int loops) with the no loop option
+*   @note This function internally calls play(int loops) with no loop
 *
 */
 int LX_Music::play()
@@ -179,13 +178,13 @@ void LX_Music::stop()
 *
 *   Set the music volume to newVolume, from 0 to 128
 *
-*   @param newVolume
+*   @param newVolume The volume to set
 *
-*   @return the previous volume setting
+*   @return The previous volume setting
 *
 *   @note If the volume is equals to -1, then the previous volume is the current volume
 *   @note If the new volume is greater than 128, the volume is set to 128
-*   @note The value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
+*   @note The value 128 is the maximum value defined by the MIX_MAX_VOLUME macro
 *
 */
 int LX_Music::volume(int newVolume)
@@ -200,7 +199,7 @@ int LX_Music::volume(int newVolume)
 *
 *   Return the instance to the SDL_Music structure
 *
-*   @return the Mix_Music
+*   @return The Mix_Music
 *
 */
 Mix_Music * LX_Music::getMusic()

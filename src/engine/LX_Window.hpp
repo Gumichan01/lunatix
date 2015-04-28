@@ -18,9 +18,7 @@
 *	@file LX_Window.hpp
 *	@brief The LX_Window library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 7th, 2015
-*
+*	@version 0.3
 *
 */
 
@@ -31,7 +29,7 @@ struct SDL_Surface;
 
 
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with desktop resolution */
-#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Just fullscreen mode with original resolution */
+#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window */
 
 
@@ -40,7 +38,7 @@ namespace LX_Graphics{
 
     /**
     *   @class LX_WindowException
-    *   @brief The Window_creation_exception class.
+    *   @brief The exception class of LX_Window
     *
     *   This class describes the exception occured when the window initialization fails.
     *
@@ -49,7 +47,7 @@ namespace LX_Graphics{
     {
         public :
 
-        std::string str_err;                    /**< The string where the error message will be conteined*/
+        std::string str_err;
 
         LX_WindowException(std::string err);
 
@@ -66,11 +64,11 @@ namespace LX_Graphics{
     *
     *   This class describes the window.
     *
-    *   @note By default, the constructor of the LX _window class gets the different informations
+    *   @note By default, the constructor of the LX_window class gets the different informations
     *          from the LX_Configuration class
     *
     *   @warning The LX_Window class must be defined only after you initialized the LX_engine (calling LX_Init())
-    *   @warning A LX_WindowException will be occured if the window creation fails
+    *   @warning A LX_WindowException may be occured if the window creation fails
     *
     */
     class LX_Window{

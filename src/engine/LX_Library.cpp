@@ -15,9 +15,7 @@
 *	@file LX_Library.cpp
 *	@brief The LX_Library file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 7th, 2015
-*
+*	@version 0.3
 *
 */
 
@@ -46,14 +44,14 @@ using namespace LX_Graphics;
 bool LX_Init(void)
 {
     int err = 0;
-    Uint32 sdl_flags = 0x00000000;                                  // the SDL flag for SDL_Init
-    int img_flags = IMG_INIT_PNG| IMG_INIT_JPG;      // the IMG flag for SDL_Image
+    Uint32 sdl_flags = 0x00000000;                  // The flags for SDL_Init
+    int img_flags = IMG_INIT_PNG| IMG_INIT_JPG;     // The IMG flag for SDL_Image
 
     // Load the configuration
     LX_Configuration::initConfig();
     LX_Configuration *configuration = LX_Configuration::getInstance();
 
-    // check the tags (video, audio, joystick)
+    // Check the tags (video, audio, joystick)
     if(configuration->getVideoFlag() == 1)
     {
         sdl_flags |= SDL_INIT_VIDEO;
@@ -76,7 +74,7 @@ bool LX_Init(void)
     }
 
 
-    //Init SDL
+    // Init SDL
     if(SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
     {
         std::cerr << "Error occurred in SDL_Init : " << SDL_GetError() << std::endl;
@@ -86,7 +84,7 @@ bool LX_Init(void)
 
     if(configuration->getVideoFlag() == 1)
     {
-        //Init SDL_Image
+        // Init SDL_Image
         if( IMG_Init(img_flags) != img_flags)
         {
             std::cerr << "Error occurred in IMG_Init : " << IMG_GetError() << std::endl;
@@ -97,7 +95,7 @@ bool LX_Init(void)
 
     if(configuration->getTTF_Flag() == 1)
     {
-        //Init SDL_ttf
+        // Init SDL_ttf
         if(TTF_Init() == -1)
         {
             std::cerr << "Error occurred in TTF_Init : " << SDL_GetError() << std::endl;
@@ -110,7 +108,7 @@ bool LX_Init(void)
 
     if(configuration->getAudioFlag() == 1)
     {
-        //Init SDL_Mixer
+        // Init SDL_Mixer
         err = Mix_Init(MIX_INIT_OGG);
 
         if(err == -1)

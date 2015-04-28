@@ -13,14 +13,13 @@
 
 /**
 *	@file LX_Chunk.cpp
-*	@brief The SDL_Chunk wrapper
+*	@brief The LX_Chunk implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 19th, 2015
+*	@version 0.3
 *
 */
 
-#include<SDL2/SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "LX_Sound.hpp"
 #include "LX_Chunk.hpp"
@@ -42,9 +41,9 @@ LX_Chunk::LX_Chunk()
 /**
 *   @fn LX_Chunk::LX_Chunk(Mix_Chunk *sample)
 *
-*   Construct the instance setting the Mix_Chunk instance from the sample
+*   Construct the instance setting the Mix_Chunk instance
 *
-*   @param sample the sample file
+*   @param sample The sample file
 *
 */
 LX_Chunk::LX_Chunk(Mix_Chunk *sample)
@@ -58,12 +57,12 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample)
 *
 *   Construct the instance creating the Mix_Chunk instance from a WAV file
 *
-*   @param filename the WAV file
+*   @param filename The WAV file
 *
 */
 LX_Chunk::LX_Chunk(std::string filename)
 {
-    chunk = NULL;   // Chnuk must be set to NULL before the call of load()
+    chunk = NULL;
 
     load(filename.c_str());
 }
@@ -72,7 +71,7 @@ LX_Chunk::LX_Chunk(std::string filename)
 /**
 *   @fn LX_Chunk::~LX_Chunk()
 *
-*   Destroyt all the instance
+*   Destroy the instance
 *
 */
 LX_Chunk::~LX_Chunk()
@@ -85,7 +84,7 @@ LX_Chunk::~LX_Chunk()
 *
 *   Load the WAV sample from a file
 *
-*   @param filename the name of the sample file
+*   @param filename The name of the sample file
 *
 *   @return TRUE on success, FALSE otherwise
 *
@@ -127,7 +126,7 @@ int LX_Chunk::play()
 *
 *   Play the current sample
 *
-*   @param channel the channel to play the chunk on
+*   @param channel The channel to play the chunk on
 *
 *   @note This function plays the sample on the first unserved channel
 *         with the no loop option
@@ -147,7 +146,7 @@ int LX_Chunk::play(int channel)
 *
 *   Play the current sample during a moment
 *
-*   @param channel the channel to play the chunk on
+*   @param channel The channel to play the chunk on
 *   @param ticks Millisecond limit to play the current sample
 *
 *   @note This function plays the sample on the first unserved channel
@@ -167,9 +166,9 @@ int LX_Chunk::play(int channel,int ticks)
 *
 *   Set the chunk volume to newVolume, from 0 to 128
 *
-*   @param newVolume
+*   @param newVolume The volume to set
 *
-*   @return the previous volume setting
+*   @return The previous volume setting
 *
 *   @note If the volume is less than 0, then the previous volume is the current volume
 *           and there is no change

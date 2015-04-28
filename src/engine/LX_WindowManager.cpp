@@ -13,10 +13,9 @@
 
 /**
 *	@file LX_WindowManager.cpp
-*	@brief The window manager
+*	@brief The window manager implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.3
-*	@date April 24th, 2015
 *
 */
 
@@ -39,14 +38,14 @@ namespace LX_Graphics{
     *
     *   @return the unique instance of LX_WindowManager
     *
-    *   @note This function is equivalent to LX_WindowManager::getInstance.
-    *           It is just a less verbose function
+    *   @note This function is equivalent to LX_WindowManager::getInstance
     *
     */
     LX_WindowManager * getWindowManager()
     {
         return LX_WindowManager::getInstance();
     }
+
 
     /**
     *   @fn void LX_WindowManager::init()
@@ -68,7 +67,7 @@ namespace LX_Graphics{
     *
     *   Return an instance of the singleton LX_WindowManager
     *
-    *   @return the unique instance of LX_WindowManager
+    *   @return The unique instance of LX_WindowManager
     *
     */
     LX_WindowManager * LX_WindowManager::getInstance()
@@ -131,7 +130,7 @@ namespace LX_Graphics{
     *
     *   @param w the window
     *
-    *   @return the id of the window if the parameter is valid and
+    *   @return The id of the window if the parameter is valid and
     *           LX_WindowManager can add it, -1 otherwise
     *
     */
@@ -166,22 +165,25 @@ namespace LX_Graphics{
     {
         if(id > size || mainWindow == NULL)
             return -1;
-        else if(windows[id] != NULL)
+
+        if(windows[id] != NULL)
         {
             delete windows[id];
+
             windows[id] = NULL;
             nb_windows -= 1;
+
             return 0;
         }
 
-        return 0;
+        return -1;
     }
 
 
     /**
     *   @fn unsigned int LX_WindowManager::nbWindow()
     *
-    *   Count the number of windows
+    *   Count the number of windows the user opened
     *
     *   @return the number of active windows
     *
@@ -203,7 +205,7 @@ namespace LX_Graphics{
     */
     LX_Window * LX_WindowManager::getWindow(unsigned int id)
     {
-        return (id > size ) ? NULL: windows[id];
+        return (id > size) ? NULL : windows[id];
     }
 
 

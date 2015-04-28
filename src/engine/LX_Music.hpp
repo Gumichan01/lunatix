@@ -18,8 +18,7 @@
 *	@file LX_Music.hpp
 *	@brief The LX_Music library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date February 11th, 2014
+*	@version 0.3
 *
 */
 
@@ -34,14 +33,14 @@ class LX_Sound;
 
 /**
 *   @class LX_Music
-*   @brief The audio class
+*   @brief The music class
 *
-*   This class is a wrapper of the Mix_Music type
+*   This class is a high level description of the Mix_Music type
 *
 **/
 class LX_Music : public LX_Sound{
 
-    Mix_Music *music;      /**<The music you want to play (note : LX_Music only plays one music)*/
+    Mix_Music *music;      /**< The musicto play */
 
     public:
 

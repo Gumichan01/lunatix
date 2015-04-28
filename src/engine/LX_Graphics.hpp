@@ -16,10 +16,9 @@
 
 /**
 *	@file LX_Graphics.hpp
-*	@brief The LX_Renderer library, it will be linked with the SDL library
+*	@brief The LX_Graphics library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.2
-*	@date January 28th, 2015
+*	@version 0.3
 *
 */
 
