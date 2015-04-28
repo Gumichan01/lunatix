@@ -184,7 +184,9 @@ void LX_Configuration::destroy()
 *   @param str the string you will store the extracted string
 *   @param len the length of the string str
 *
-*   @warning if state or str is NULL, a segmentation fault may occur
+*   @warning If state or str is NULL, a segmentation fault may occur
+*               If len is 0 or less than the string you want to take from the lua state,
+*               the behaviour is undefined.
 *
 */
 void LX_Configuration::assignString(lua_State * state, char *str, int len)
@@ -233,7 +235,10 @@ void LX_Configuration::setFlags(void)
     state = lua_open();
 
     if(state == NULL)
-        throw LX_ConfigurationException("Error occured in LX_Configuration::setFlags : Internal error\n");
+    {
+        std::cerr << "Error occured in LX_Configuration::setFlags : Internal error" << std::endl;
+        return;
+    }
 
     // Open standard lua libraries
     luaL_openlibs(state);
@@ -243,7 +248,7 @@ void LX_Configuration::setFlags(void)
     {
         std::cerr << "Error occured in LX_Configuration::setFlags : " << lua_tostring(state,-1) << std::endl;
         lua_close(state);
-        throw LX_ConfigurationException("The lua file does not exist or is corrupted");
+        return;
     }
 
     // Get the function
@@ -256,7 +261,7 @@ void LX_Configuration::setFlags(void)
                         << luaFunction << " does not exist" << std::endl;
 
         lua_close(state);
-        throw LX_ConfigurationException("The Lua function getVideo does not exist");
+        return;
     }
     else
     {
@@ -277,9 +282,8 @@ void LX_Configuration::setFlags(void)
 
             key.assign(tmp);
 
-            //std::cout << "key : " << key << " | " << lua_tostring(state,-1) << std::endl;
 
-            // Video flasg
+            // Video flag
             if(key.compare(0,VIDEO_KEY.length(),VIDEO_KEY) == 0)
             {
                 videoFlag = atoi((char *) lua_tostring(state,-1));

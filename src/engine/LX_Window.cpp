@@ -31,6 +31,34 @@
 namespace LX_Graphics{
 
 
+    /**
+    *   @fn LX_WindowException::LX_WindowException(std::string err)
+    *
+    *   Build the LX_WindowException class
+    *
+    *   @param err the error string
+    *
+    */
+    LX_WindowException::LX_WindowException(std::string err)
+    {
+        str_err = err;
+    }
+
+
+    /**
+    *   @fn const char * LX_WindowException::what() const throw()
+    *   Get the error string
+    *   @return the error string
+    */
+    const char * LX_WindowException::what() const throw()
+    {
+        return str_err.c_str();
+    }
+
+
+    LX_WindowException::~LX_WindowException() throw(){}
+
+
 
     /**
     *   @fn LX_Window::LX_Window()
@@ -78,7 +106,8 @@ namespace LX_Graphics{
 
         if(window == NULL )
         {
-            std::cerr << "LX_Window constructor - window creation : " << SDL_GetError() << std::endl;
+            std::cerr << "LX_Window constructor - window creation " << std::endl;
+            throw LX_WindowException(SDL_GetError());
         }
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
@@ -199,7 +228,8 @@ namespace LX_Graphics{
 
         if(window == NULL )
         {
-            std::cerr << "LX_Window constructor - window creation : " << SDL_GetError() << std::endl;
+            std::cerr << "LX_Window constructor - window creation " << std::endl;
+            throw LX_WindowException(SDL_GetError());
         }
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);

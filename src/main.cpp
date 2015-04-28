@@ -66,11 +66,20 @@ int main ( int argc, char** argv )
     }
 
     // initialization
-    window = new LX_Window();
+    try
+    {
+        window = new LX_Window();
 
-    // getWindowManager() and LX_WindowManager::getInstance() are the same thing
-    getWindowManager()->addWindow(window);
-    LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,SDL_WINDOW_RESIZABLE));
+        // getWindowManager() and LX_WindowManager::getInstance() are the same thing
+        getWindowManager()->addWindow(window);
+        LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,SDL_WINDOW_RESIZABLE));
+
+    }
+    catch(LX_WindowException & win_ex)
+    {
+            std::cerr << win_ex.what() << std::endl;
+            return -1;
+    }
 
     ttf = new LX_Font(&color);
     audio = new LX_Music(mus);
