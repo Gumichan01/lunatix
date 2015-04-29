@@ -25,17 +25,44 @@
 namespace LX_Device{
 
 
+    /**
+    *   @fn int numberOfDevices(void)
+    *
+    *   Count the number of connected devices (joystick and gamepads)
+    *
+    */
     int numberOfDevices(void)
     {
       return SDL_NumJoysticks();
     }
 
+
+    /**
+    *   @fn const char * nameOf(SDL_Joystick * joy)
+    *
+    *   Get the name of a joystick
+    *
+    *   @param joy The pointer to a joystick structure
+    *
+    *   @return the name of the joystick, NULL if the pointer is not valid
+    *
+    */
     const char * nameOf(SDL_Joystick * joy)
     {
         return SDL_JoystickName(joy);
     }
 
 
+    /**
+    *   @fn const char * nameOf(SDL_GameController * controller)
+    *
+    *   Get the name of a game controller
+    *
+    *   @param controller The pointer to a structure relative to the gamepad
+    *
+    *   @return the name of the game controller, NULL if the pointer is not valid
+    *
+    */
     const char * nameOf(SDL_GameController * controller)
     {
         return SDL_GameControllerName(controller);
