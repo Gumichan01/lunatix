@@ -82,7 +82,7 @@ LX_Configuration::LX_Configuration()
     videoFlag = 1;
     ttf_Flag = 1;
     audioFlag = 1;
-    joystickFlag = 0;
+    joystickFlag = 1;
     openglFlag = 0;
     font_size = 0;
     width = 800;

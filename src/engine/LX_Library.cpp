@@ -66,11 +66,7 @@ bool LX_Init(void)
 
     if(configuration->getJoystickFlag() == 1)
     {
-        if(SDL_NumJoysticks() != 0)
-        {
-            sdl_flags |= SDL_INIT_JOYSTICK;
-            std::cout << "set joystick" << std::endl;
-        }
+        sdl_flags |= SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER;
     }
 
 

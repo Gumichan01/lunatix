@@ -26,8 +26,11 @@
 
 #include "engine/Lunatix_engine.hpp"
 
+//#define DEBUG_MAIN_TEST
+
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
+using namespace LX_Device;
 
 // Keep it in comments, it part of code is no longer compilable
 
@@ -61,7 +64,7 @@ int main ( int argc, char** argv )
 
     if(!err)
     {
-        std::cout << "ERREUR" << std::endl;
+        std::cerr << "ERREUR" << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -94,16 +97,21 @@ int main ( int argc, char** argv )
     }
 
     ttf->sizeOfText("LunatiX_engine",&wt,&ht);
-    std::cout << "[TEST TTF]Size of the text \"LunatiX_engine\" - w : " << wt << "; h : " << ht << std::endl;
 
+#ifdef DEBUG_MAIN_TEST
+    std::cout << "[TEST TTF]Size of the text \"LunatiX_engine\" - w : " << wt << "; h : " << ht << std::endl;
+#endif
 
     SDL_Texture *t1 = ttf->drawTextToTexture(LX_TTF_BLENDED,"LunatiX_engine",LX_TTF_DEFAULT_FONT_SIZE,0);
     SDL_Texture *t2 = ttf->drawTextToTexture(LX_TTF_BLENDED,"RETURN : play music, SPACE : pause/resume, BACKSPACE : stop",
                                                 LX_TTF_DEFAULT_FONT_SIZE,0);
 
     audio->volume(MIX_MAX_VOLUME/2);
+
+#ifdef DEBUG_MAIN_TEST
     std::cout << "Volume : " << audio->volume(-1) <<std::endl;
     std::cout << "Allocated channels before : " << LX_Mixer::allocateChannels(16) <<std::endl;
+#endif
 
     LX_Mixer::fadeInMusic(audio,4000);
 
@@ -173,12 +181,13 @@ int main ( int argc, char** argv )
         SDL_Delay(33);
     }
 
+#ifdef DEBUG_MAIN_TEST
     if(LX_WindowManager::getInstance()->getWindow(1024) == NULL)
         std::cout << "LX_WindowManager::getInstance()->getWindow(1024) is NULL " << std::endl;
 
     if(LX_WindowManager::getInstance()->deleteWindow(128) == -1)
         std::cout << "LX_WindowManager::getInstance()->deleteWindow(128) returned -1 " << std::endl;
-
+#endif
 
     SDL_DestroyTexture(st);
     SDL_DestroyTexture(ex);
@@ -188,11 +197,10 @@ int main ( int argc, char** argv )
     delete audio;
     delete ttf;
 
+#ifdef DEBUG_MAIN_TEST
     std::cout << "Allocated channels after : " << LX_Mixer::allocateChannels(0) <<std::endl;
     std::cout << "Number of windows to destruct : " << getWindowManager()->nbWindow() <<std::endl;
-    LX_Quit();
-
-
+#endif
 
     // Load configuration
     LX_Configuration *configuration;
@@ -211,6 +219,7 @@ int main ( int argc, char** argv )
     int h = configuration->getWinHeight();
     int f = configuration->getFullscreenFlag();
 
+#ifdef DEBUG_MAIN_TEST
     std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
     std::cout << "video : " << video << std::endl;
     std::cout << "true type font : " << ttfont << std::endl;
@@ -222,10 +231,12 @@ int main ( int argc, char** argv )
     std::cout << "width : " << w << std::endl;
     std::cout << "height : " << h << std::endl;
     std::cout << "fullscreen : " << f << std::endl;
-
+#endif
 
     LX_Configuration::destroy();
 
+
+    // Version of SDL
     SDL_version compiled;
     SDL_version linked;
 
@@ -235,6 +246,20 @@ int main ( int argc, char** argv )
                 compiled.major, compiled.minor, compiled.patch);
     printf("But we linked against SDL version %d.%d.%d.\n",
                 linked.major, linked.minor, linked.patch);
+
+
+    // Joystick and Game controller
+    std::cout << "\nYou have " << numberOfDevices() << " game controller(s) connected " << std::endl;
+
+    SDL_Joystick *joy = SDL_JoystickOpen(0);
+
+    if(joy != NULL)
+    {
+        std::cout << "Your joystick device :  " << nameOf(joy) << std::endl;
+        SDL_JoystickClose(joy);
+    }
+
+    LX_Quit();
 
     return EXIT_SUCCESS;
 }
