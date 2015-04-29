@@ -251,13 +251,12 @@ int main ( int argc, char** argv )
     // Joystick and Game controller
     std::cout << "\nYou have " << numberOfDevices() << " game controller(s) connected " << std::endl;
 
-    SDL_GameController *gc = SDL_GameControllerOpen(0);
+    SDL_Joystick *joy = SDL_JoystickOpen(0);
 
-    if(gc != NULL)
+    if(joy != NULL)
     {
-        std::cout << "\nYour controller device :  " << nameOf(gc) << std::endl;
-        std::cout << "Your joystick device :  " << nameOf(SDL_GameControllerGetJoystick(gc)) << std::endl;
-        SDL_GameControllerClose(gc);
+        std::cout << "Your joystick device :  " << nameOf(joy) << std::endl;
+        SDL_JoystickClose(joy);
     }
 
     LX_Quit();
