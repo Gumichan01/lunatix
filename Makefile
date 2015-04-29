@@ -21,7 +21,7 @@ DEBUG=no
 CC=g++
 MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
-LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o
+LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o
 
 LUAC=luac5.1
 SCRIPT_FILE=script/LX_config.lua
@@ -135,6 +135,13 @@ LX_Mixer.o : $(LUNATIX_PATH)LX_Mixer.cpp $(LUNATIX_PATH)LX_Mixer.hpp $(LUNATIX_P
 main.o : $(MAIN_PATH)main.cpp $(LUNATIX_PATH)Lunatix_engine.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
+LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+	
 
 clean : 
 	@echo "Delete object file "
