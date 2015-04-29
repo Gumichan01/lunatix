@@ -7,7 +7,8 @@
  - LX_Graphics : a 2D library based on SDL and SDL_Image
  - LX_TrueTypeFont : a True Type Font (TTF) library based on SDL_TTF
  - LX_Mixer : a mix library using SDL_Mixer
- - LX_Physics : a physics engine 
+ - LX_Physics : a physics engine
+ - LX_Device : a Device information library
 
  The engine works on Windows and Linux system.
 
