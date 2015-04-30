@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Device.cpp
-*	@brief The LX_Device library. It gathers information about gamepad
+*	@brief The LX_Device library. It gathers information about gamepads
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.3
 *
