@@ -126,7 +126,7 @@ namespace LX_Device{
     {
         ostringstream stream;
 
-        stream << " ==== Joystick Information ==== " << endl
+        stream << endl << " ==== Joystick Information ==== " << endl << endl
                 << "Joystick ID : " << info->id << endl
                 << "Joystick Name : " << info->name << endl
                 << "Joystick Number of Axes : " << info->numAxis << endl
