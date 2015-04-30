@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Device.cpp
-*	@brief The LX_Device library. It gathers information about gamepads
+*	@brief The LX_Device library. It gathers gamepads and mouse cursor information
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.3
 *
@@ -26,6 +26,9 @@
 
 
 #define LX_JOY_NAMESIZE 64
+#define LX_MOUSE_SHOW SDL_ENABLE
+#define LX_MOUSE_HIDE SDL_DISABLE
+#define LX_MOUSE_QUERY SDL_QUERY
 
 
 namespace LX_Device{
@@ -49,6 +52,7 @@ typedef struct LX_GamepadInfo{
 }LX_GamepadInfo; /** < */
 
 
+    // Gamepads
     int numberOfDevices(void);
 
     const char * nameOf(SDL_Joystick * joy);
@@ -58,6 +62,10 @@ typedef struct LX_GamepadInfo{
     int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info);
 
     const char * gamepadToString(LX_GamepadInfo *info);
+
+
+    // Mouse cursor
+    int mouseCursorDisplay(int toggle);
 
 };
 

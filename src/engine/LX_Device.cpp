@@ -165,6 +165,23 @@ namespace LX_Device{
         return stream.str().c_str();
     }
 
+
+    /**
+    *   @fn int mouseCursorDisplay(int toggle)
+    *
+    *   Define is the cursor will be shown or not
+    *
+    *   @param toggle Tha value : 1 to show it, 0 to hide, -1 to get the current state
+    *
+    *   @return 1 if the cursor is shown, 0 if it is hidden, a negative value on failure
+    *
+    */
+    int mouseCursorDisplay(int toggle)
+    {
+        return SDL_ShowCursor(toggle);
+    }
+
+
 };
 
 
