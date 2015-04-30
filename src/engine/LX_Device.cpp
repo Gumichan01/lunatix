@@ -83,7 +83,7 @@ namespace LX_Device{
     *   @param joy The joystick to get information from
     *   @param info The structure to store information
     *
-    *   @return 0 if the joystick is valid and the founction got information
+    *   @return 0 if the joystick is valid and the function got information
     *               -1 on failure
     *
     */
@@ -116,12 +116,38 @@ namespace LX_Device{
     }
 
 
+
+    /**
+    *   @fn int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
+    *
+    *   Get the name of a game controller
+    *
+    *   @param gp The game controller to get information from
+    *   @param info The structure to store information
+    *
+    *   @return 0 if the game controller is valid and the function got information
+    *               -1 on failure
+    *
+    */
     int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
     {
         return (gp == NULL) ? -1 : statGamepad(SDL_GameControllerGetJoystick(gp),info);
     }
 
 
+    /**
+    *   @fn const char * gamepadToString(LX_GamepadInfo *info)
+    *
+    *   Get the string format of the information structure
+    *
+    *   @param info The structure you want to get the string format from
+    *
+    *   @return A valid C string
+    *
+    *   @note This function never returns NULL
+    *   @warning If info is NULL, a segmentation fault will occur
+    *
+    */
     const char * gamepadToString(LX_GamepadInfo *info)
     {
         ostringstream stream;
