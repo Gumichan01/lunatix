@@ -113,6 +113,12 @@ namespace LX_Device{
     }
 
 
+    int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
+    {
+        return (gp == NULL) ? -1 : statGamepad(SDL_GameControllerGetJoystick(gp),info);
+    }
+
+
 };
 
 
