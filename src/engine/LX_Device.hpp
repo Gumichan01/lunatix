@@ -42,12 +42,12 @@ namespace LX_Device{
 */
 typedef struct LX_GamepadInfo{
 
-    SDL_JoystickID id;
-    char name[LX_JOY_NAMESIZE];
-    int numAxis;
-    int numBalls;
-    int numButtons;
-    int numHats;
+    SDL_JoystickID id;              /**< The joystick ID */
+    char name[LX_JOY_NAMESIZE];     /**< The name of the joystick */
+    int numAxis;                    /**< The number of axes */
+    int numBalls;                   /**< The number of balls */
+    int numButtons;                 /**< The number of buttons */
+    int numHats;                    /**< The number of hats */
 
 }LX_GamepadInfo; /** < */
 

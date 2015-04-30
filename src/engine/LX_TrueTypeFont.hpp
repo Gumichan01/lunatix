@@ -51,7 +51,7 @@ namespace LX_TrueTypeFont{
 
     /**
     *   @class LX_Font
-    *   @brief The LunatiX_engine True type Font (TTF) module.
+    *   @brief The LunatiX Engine True type Font (TTF) module.
     *
     *   This class describes the font. It manages the True type Font.
     *
