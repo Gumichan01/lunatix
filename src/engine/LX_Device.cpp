@@ -19,6 +19,8 @@
 *
 */
 
+#include <cstring>
+
 #include "LX_Device.hpp"
 
 
@@ -66,6 +68,48 @@ namespace LX_Device{
     const char * nameOf(SDL_GameController * controller)
     {
         return SDL_GameControllerName(controller);
+    }
+
+
+
+    /**
+    *   @fn int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
+    *
+    *   Get the name of a game controller
+    *
+    *   @param joy The joystick to get information from
+    *   @param info The structure to store information
+    *
+    *   @return 0 if the joystick is valid and the founction got information
+    *               -1 on failure
+    *
+    */
+    int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
+    {
+        const char *tmp;
+
+        if(joy == NULL || info == NULL)
+            return -1;
+
+        // Get information
+        info->id = SDL_JoystickID(joy);
+        tmp = SDL_JoystickName(joy);
+
+        if(tmp == NULL)
+            return -1;
+
+        strcpy(info->name,tmp);
+        info->numAxis = SDL_JoystickNumAxes(joy);
+        info->numBalls = SDL_JoystickNumBalls(joy);
+        info->numButtons = SDL_JoystickNumButtons(joy);
+        info->numHats = SDL_JoystickNumHats(joy);
+
+
+        if(info->id == -1 || info->numAxis == -1
+            || info->numBalls == -1 || info->numButtons == -1 || info->numHats == -1)
+            return -1;
+
+        return 0;
     }
 
 
