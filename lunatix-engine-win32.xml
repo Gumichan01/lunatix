@@ -79,7 +79,6 @@
 		<Unit filename="src\engine\LX_Window.hpp" />
 		<Unit filename="src\engine\LX_WindowManager.cpp" />
 		<Unit filename="src\engine\LX_WindowManager.hpp" />
-		<Unit filename="src\engine\LX_physics.hpp" />
 		<Unit filename="src\engine\Lunatix_engine.hpp" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
