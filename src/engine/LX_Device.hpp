@@ -57,6 +57,8 @@ typedef struct LX_GamepadInfo{
     int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info);
     int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info);
 
+    const char * gamepadToString(LX_GamepadInfo *info);
+
 };
 
 

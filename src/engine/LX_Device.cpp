@@ -20,9 +20,12 @@
 */
 
 #include <cstring>
+#include <iostream>
+#include <sstream>
 
 #include "LX_Device.hpp"
 
+using namespace std;
 
 namespace LX_Device{
 
@@ -118,6 +121,21 @@ namespace LX_Device{
         return (gp == NULL) ? -1 : statGamepad(SDL_GameControllerGetJoystick(gp),info);
     }
 
+
+    const char * gamepadToString(LX_GamepadInfo *info)
+    {
+        ostringstream stream;
+
+        stream << " ==== Joystick Information ==== " << endl
+                << "Joystick ID : " << info->id << endl
+                << "Joystick Name : " << info->name << endl
+                << "Joystick Number of Axes : " << info->numAxis << endl
+                << "Joystick Number of Balls : " << info->numBalls << endl
+                << "Joystick Number of Buttons : " << info->numButtons << endl
+                << "Joystick Number of Hats : " << info->numHats << endl;
+
+        return stream.str().c_str();
+    }
 
 };
 
