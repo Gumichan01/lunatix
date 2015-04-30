@@ -12,18 +12,22 @@
 
  The engine works on Windows and Linux system.
 
+
  
- You can find the library reference [here](http://gumichan01.olympe.in/reference/lunatix-engine/)
-
-
+ ## Contribute ##
+ 
+  - You may take a look on the library or get the development version on [Github](https://github.com/Gumichan01/lunatix-engine)
+  - You can also find the library reference on my [website](http://gumichan01.olympe.in/reference/lunatix-engine/)
+ 
+ 
  
  ## Installation ##
 
 
  ### On Windows ###
 
- - You can use the makefile to generate an executable file to launch the program.
- - Otherwise you can import a new project using the XML file provided in the directory into your IDE.
+  - You can use the makefile to generate an executable file to launch the program.
+  - You can also import a new project using the XML file provided in the directory into your IDE.
 
 
  ### On Linux system ###
@@ -46,7 +50,7 @@
 
 
 
-Warning : No static or shared library are provided when you generate the executable file.
+Warning : No static or shared libraries are provided when you generate the executable file.
 However, all SDL2 and Lua files (.lib, .a, .dll for win32 version, .so for Lua) are provided.
 
 
