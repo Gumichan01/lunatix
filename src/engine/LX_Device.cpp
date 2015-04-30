@@ -27,6 +27,13 @@
 
 using namespace std;
 
+
+/**
+*   @namespace LX_Device
+*
+*   @brief The LX_Device module
+*
+*/
 namespace LX_Device{
 
 
