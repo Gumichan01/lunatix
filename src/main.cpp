@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <cstdio>
+#include <cassert>
 
 #include "engine/Lunatix_engine.hpp"
 
@@ -249,15 +250,18 @@ int main ( int argc, char** argv )
 
 
     // Joystick and Game controller
-    std::cout << "\nYou have " << numberOfDevices() << " game controller(s) connected " << std::endl;
+    std::cout << "\nYou have " << numberOfDevices() << " gamepad(s) connected " << std::endl;
 
+    LX_GamepadInfo gi;
     SDL_Joystick *joy = SDL_JoystickOpen(0);
 
     if(joy != NULL)
     {
-        std::cout << "Your joystick device :  " << nameOf(joy) << std::endl;
+        statGamepad(joy,&gi);
+        std::cout << gamepadToString(&gi);
         SDL_JoystickClose(joy);
     }
+
 
     LX_Quit();
 
