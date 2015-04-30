@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file LX_Device.cpp
+*	@file LX_Device.hpp
 *	@brief The LX_Device library. It gathers gamepads and mouse cursor information
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.3
@@ -25,10 +25,10 @@
 #include <SDL2/SDL.h>
 
 
-#define LX_JOY_NAMESIZE 64
-#define LX_MOUSE_SHOW SDL_ENABLE
-#define LX_MOUSE_HIDE SDL_DISABLE
-#define LX_MOUSE_QUERY SDL_QUERY
+#define LX_JOY_NAMESIZE 64              /**< The size of the joystick name */
+#define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display */
+#define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display */
+#define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status */
 
 
 namespace LX_Device{
