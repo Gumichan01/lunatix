@@ -97,7 +97,7 @@ namespace LX_Device{
             return -1;
 
         // Get information
-        info->id = SDL_JoystickID(joy);
+        info->id = SDL_JoystickInstanceID(joy);
         tmp = SDL_JoystickName(joy);
 
         if(tmp == NULL)
