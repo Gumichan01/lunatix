@@ -35,6 +35,8 @@ namespace LX_Device{
     *
     *   Count the number of connected devices (joystick and gamepads)
     *
+    *   @return The number of gamepads
+    *
     */
     int numberOfDevices(void)
     {
