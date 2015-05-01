@@ -24,6 +24,7 @@
 #include <sstream>
 
 #include "LX_Device.hpp"
+#include "LX_Error.hpp"
 
 using namespace std;
 
@@ -101,14 +102,20 @@ namespace LX_Device{
         const char *tmp;
 
         if(joy == NULL || info == NULL)
+        {
+            LX_SetError("Invalid argument : joystick or gamepad info\n");
             return -1;
+        }
 
         // Get information
         info->id = SDL_JoystickInstanceID(joy);
         tmp = SDL_JoystickName(joy);
 
         if(tmp == NULL)
+        {
+            LX_SetError("Cannot get the name of the joystick\n");
             return -1;
+        }
 
         strcpy(info->name,tmp);
         info->numAxis = SDL_JoystickNumAxes(joy);
@@ -119,7 +126,10 @@ namespace LX_Device{
 
         if(info->id == -1 || info->numAxis == -1
             || info->numBalls == -1 || info->numButtons == -1 || info->numHats == -1)
-            return -1;
+            {
+                LX_SetError("Cannot get information\n");
+                return -1;
+            }
 
         return 0;
     }

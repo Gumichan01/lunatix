@@ -34,5 +34,6 @@
 #include "LX_Physics.hpp"
 #include "LX_WindowManager.hpp"
 #include "LX_Device.hpp"
+#include "LX_Error.hpp"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED
