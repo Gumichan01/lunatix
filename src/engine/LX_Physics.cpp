@@ -23,6 +23,8 @@
 #include <SDL2/SDL.h>
 
 #include "LX_Physics.hpp"
+#include "LX_Error.hpp"
+
 
 /**
 *	@fn int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)

@@ -26,6 +26,8 @@
 #include <exception>
 
 #include "LX_Config.hpp"
+#include "LX_Error.hpp"
+
 
 // unique instance
 static LX_Configuration *instance;

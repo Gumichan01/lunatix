@@ -23,6 +23,7 @@
 #include "LX_Music.hpp"
 #include "LX_Chunk.hpp"
 #include "LX_Mixer.hpp"
+#include "LX_Error.hpp"
 
 
 /**

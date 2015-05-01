@@ -23,6 +23,7 @@
 
 #include "LX_Config.hpp"
 #include "LX_Window.hpp"
+#include "LX_Error.hpp"
 
 
 

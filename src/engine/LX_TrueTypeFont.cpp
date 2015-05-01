@@ -25,6 +25,7 @@
 #include "LX_Graphics.hpp"
 #include "LX_TrueTypeFont.hpp"
 #include "LX_WindowManager.hpp"
+#include "LX_Error.hpp"
 
 
 using namespace LX_Graphics;

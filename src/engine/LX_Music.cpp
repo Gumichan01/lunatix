@@ -24,6 +24,7 @@
 
 #include "LX_Sound.hpp"
 #include "LX_Music.hpp"
+#include "LX_Error.hpp"
 
 
 

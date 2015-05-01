@@ -23,6 +23,7 @@
 #include <cstring>
 
 #include "LX_WindowManager.hpp"
+#include "LX_Error.hpp"
 
 
 static LX_Graphics::LX_WindowManager *winInstance = NULL;

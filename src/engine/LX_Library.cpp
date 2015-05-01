@@ -29,6 +29,7 @@
 #include "LX_Config.hpp"
 #include "LX_Library.hpp"
 #include "LX_Mixer.hpp"
+#include "LX_Error.hpp"
 
 
 using namespace LX_Graphics;
