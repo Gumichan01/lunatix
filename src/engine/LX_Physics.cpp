@@ -209,37 +209,52 @@ bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 */
 bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
 {
+    LX_Vector2D AB,AC,BC;
+    LX_Point M;
     LX_Point O = {circle->xCenter, circle->yCenter};
 
-    double dx0 = O.x - A->x;
-    double dy0 = O.y - A->y;
+    float scal1,scal2;
+    int sum;
+    double t;
+    double x,y;
 
-    double dx = B->x - A->x;
-    double dy = B->y - A->y;
+    // Collision if A or B is in the circle
+    if( collision(A->x,A->y,circle) || collision(B->x,B->y,circle) )
+        return true;
 
-    int som = (int) ((dx*dx)+(dy*dy));  // som must be an integer to avoid a value like 0.5
 
-    if(som == 0)        // this test is necessary because we divide the next expression by it
+    AB.vx = B->x - A->x;
+    AB.vy = B->y - A->y;
+
+    AC.vx = O.x - A->x;
+    AC.vy = O.y - A->y;
+
+    BC.vx = O.x - B->x;
+    BC.vy = O.y - B->y;
+
+    // Scalar product
+    scal1 = (AB.vx * AC.vx) + (AB.vy * AC.vy);
+    scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
+
+    // If there is no collision
+    if(scal1 < 0 || scal2 < 0)
         return false;
 
-    double t = (double) ( ((dx0*dx) + (dy0*dy))/som );  // casting in double value to avoid the accuracy loss
+    // Find the projection point of O
+    sum = (int) ((AB.vx*AB.vx)+(AB.vy*AB.vy));
 
-    double x = A->x + (t*dx);
-    double y = A->y + (t*dy);
+    if(sum == 0)        // A and B are the same point
+        return false;
 
-    // The projected point
-    LX_Point M = {(int) x,(int) y};
-    int AB_distance = euclide_square_distance(A->x, A->y, B->x, B->y);
+    t = (double) ( scal1/sum );
 
+    x = A->x + (t*AB.vx);
+    y = A->y + (t*AB.vy);
 
-    // If M is not into the [AB] segment, check if A or B is into the circle
-    if( euclide_square_distance(A->x, A->y, M.x, M.y) > AB_distance || euclide_square_distance(B->x, B->y, M.x, M.y) > AB_distance )
-    {
-        return( ( euclide_square_distance(O.x, O.y, A->x, A->y) < circle->square_radius ) || ( euclide_square_distance(O.x, O.y, B->x, B->y) < circle->square_radius ) );
-    }
+    M = {(int) x, (int) y}; // M is the projection point of O
 
-    // If M is into the [AB] segment, check if M is into the circle
-    return ( euclide_square_distance(O.x, O.y, M.x, M.y) <  circle->square_radius );
+    return collision(M.x,M.y, circle);
+
 }
 
 
@@ -289,24 +304,6 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -62,6 +62,20 @@ typedef struct LX_Circle{
 
 
 
+/**
+*   @struct LX_Vector2D
+*   @brief The vector structure
+*
+*/
+typedef struct LX_Vector2D{
+
+    int vx;                     /**< The x position */
+    int vy;                     /**< The y position */
+
+}LX_Vector2D;   /**< */
+
+
+
 #endif // HITBOX_H_INCLUDED
 
 
