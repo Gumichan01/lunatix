@@ -46,19 +46,19 @@ int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 
 
 /**
-*	@fn int LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
+*	@fn float LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 *
-*	This function calculates the euclidean distance
+*	This function calculates the euclidean distance with accuracy
 *
 *	@param x1 The x location of the first point
 *	@param y1 The y location of the first point
 *	@param x2 The x location of the second point
 *	@param y2 The y location of the second point
 *
-*	@return An integer value
+*	@return An float value
 *
 */
-int LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
+float LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 {
     return sqrt(euclide_square_distance(x1,y1,x2,y2));
 }
@@ -82,9 +82,9 @@ int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 
 
 /**
-*	@fn int LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+*	@fn float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 *
-*	This function calculates the euclidean square distance
+*	This function calculates the euclidean distance with accuracy
 *
 *	@param p1 The first point
 *	@param p2 The second point
@@ -92,7 +92,7 @@ int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 *	@return An integer value
 *
 */
-int LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 {
     return sqrt(euclide_square_distance(p1,p2));
 }
