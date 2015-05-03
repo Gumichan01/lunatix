@@ -82,62 +82,62 @@ endif
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
-LX_Config.o : $(LUNATIX_PATH)LX_Config.cpp $(LUNATIX_PATH)LX_Config.hpp
+LX_Config.o : $(LUNATIX_PATH)LX_Config.cpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Window.o : $(LUNATIX_PATH)LX_Window.cpp $(LUNATIX_PATH)LX_Window.hpp $(LUNATIX_PATH)LX_Config.hpp
+LX_Window.o : $(LUNATIX_PATH)LX_Window.cpp $(LUNATIX_PATH)LX_Window.hpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_WindowManager.o : $(LUNATIX_PATH)LX_WindowManager.cpp $(LUNATIX_PATH)LX_WindowManager.hpp
+LX_WindowManager.o : $(LUNATIX_PATH)LX_WindowManager.cpp $(LUNATIX_PATH)LX_WindowManager.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Library.o : $(LUNATIX_PATH)LX_Library.cpp $(LUNATIX_PATH)LX_Library.hpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Mixer.hpp
+LX_Library.o : $(LUNATIX_PATH)LX_Library.cpp $(LUNATIX_PATH)LX_Library.hpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Mixer.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Graphics.o : $(LUNATIX_PATH)LX_Graphics.cpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Window.hpp
+LX_Graphics.o : $(LUNATIX_PATH)LX_Graphics.cpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Window.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_PATH)LX_TrueTypeFont.hpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Config.hpp
+LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_PATH)LX_TrueTypeFont.hpp $(LUNATIX_PATH)LX_Graphics.hpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Physics.o : $(LUNATIX_PATH)LX_Physics.cpp $(LUNATIX_PATH)LX_Physics.hpp $(LUNATIX_PATH)LX_Hitbox.hpp
+LX_Physics.o : $(LUNATIX_PATH)LX_Physics.cpp $(LUNATIX_PATH)LX_Physics.hpp $(LUNATIX_PATH)LX_Hitbox.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Chunk.o : $(LUNATIX_PATH)LX_Chunk.cpp $(LUNATIX_PATH)LX_Chunk.hpp $(LUNATIX_PATH)LX_Sound.hpp
+LX_Chunk.o : $(LUNATIX_PATH)LX_Chunk.cpp $(LUNATIX_PATH)LX_Chunk.hpp $(LUNATIX_PATH)LX_Sound.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Music.o : $(LUNATIX_PATH)LX_Music.cpp $(LUNATIX_PATH)LX_Sound.hpp
+LX_Music.o : $(LUNATIX_PATH)LX_Music.cpp $(LUNATIX_PATH)LX_Sound.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Mixer.o : $(LUNATIX_PATH)LX_Mixer.cpp $(LUNATIX_PATH)LX_Mixer.hpp $(LUNATIX_PATH)LX_Sound.hpp $(LUNATIX_PATH)LX_Music.hpp
+LX_Mixer.o : $(LUNATIX_PATH)LX_Mixer.cpp $(LUNATIX_PATH)LX_Mixer.hpp $(LUNATIX_PATH)LX_Sound.hpp $(LUNATIX_PATH)LX_Music.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-main.o : $(MAIN_PATH)main.cpp $(LUNATIX_PATH)Lunatix_engine.hpp
+main.o : $(MAIN_PATH)main.cpp $(LUNATIX_PATH)Lunatix_engine.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp
+LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp $(LUNATIX_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
