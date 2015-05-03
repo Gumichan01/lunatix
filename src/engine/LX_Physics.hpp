@@ -46,8 +46,8 @@ namespace LX_Physics{
         int euclide_square_distance( LX_Point *p1, LX_Point *p2);
         float euclide_distance( LX_Point *p1, LX_Point *p2);
 
-        bool collision(int x_pos, int y_pos, const LX_AABB *rect);                          // collision point/AABB
-        bool collision(int x_pos, int y_pos, const LX_Circle *circle);                      // collision point/circle
+        bool collision(const int x_pos, const int y_pos, const LX_AABB *rect);                          // collision point/AABB
+        bool collision(const int x_pos, const int y_pos, const LX_Circle *circle);                      // collision point/circle
         bool collision(const LX_AABB *rect1, const LX_AABB *rect2);                         // collision AABB/AABB
         bool collision(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
         bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment

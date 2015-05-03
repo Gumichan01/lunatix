@@ -101,7 +101,7 @@ float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 
 
 /**
-*	@fn bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
+*	@fn bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect)
 *
 *	Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
@@ -112,7 +112,7 @@ float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
+bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect)
 {
 
     if( rect == NULL || x_pos <= rect->x || y_pos >= (rect->y + rect->h) ||
@@ -126,7 +126,7 @@ bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 
 
 /**
-*	@fn bool LX_Physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
+*	@fn bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *circle)
 *
 *	Check the collision between a point and a circle
 *
@@ -137,7 +137,7 @@ bool LX_Physics::collision(int x_pos, int y_pos, const LX_AABB *rect)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collision(int x_pos, int y_pos, const LX_Circle *circle)
+bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *circle)
 {
 
     if( circle == NULL ||
