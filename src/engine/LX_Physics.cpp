@@ -188,10 +188,14 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 */
 bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 {
-    if (euclide_square_distance( circle1->xCenter, circle1->yCenter, circle2->xCenter, circle2->yCenter) > circle1->square_radius )
+    int d;
+
+    if(circle1 == NULL || circle2 == NULL)
         return false;
 
-    return true;
+    d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
+
+    return (euclide_square_distance( circle1->xCenter, circle1->yCenter, circle2->xCenter, circle2->yCenter) <= d );
 }
 
 
