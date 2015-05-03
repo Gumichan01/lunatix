@@ -210,6 +210,8 @@ bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
+*   @warning If at least one parameter is NULL, the behaviour is undefined
+*
 */
 bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
 {
@@ -271,6 +273,8 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 *	@param rect The AABB
 *
 *	@return TRUE if there is a collision, FALSE otherwise
+*
+*   @warning If at least one parameter is NULL, the behaviour is undefined
 *
 */
 bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
