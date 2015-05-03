@@ -61,6 +61,7 @@
 		<Unit filename="src\engine\LX_Config.hpp" />
 		<Unit filename="src\engine\LX_Device.cpp" />
 		<Unit filename="src\engine\LX_Device.hpp" />
+		<Unit filename="src\engine\LX_Error.hpp" />
 		<Unit filename="src\engine\LX_Graphics.cpp" />
 		<Unit filename="src\engine\LX_Graphics.hpp" />
 		<Unit filename="src\engine\LX_Hitbox.hpp" />
