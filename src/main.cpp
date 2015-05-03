@@ -203,6 +203,7 @@ int main ( int argc, char** argv )
     std::cout << "Number of windows to destruct : " << getWindowManager()->nbWindow() <<std::endl;
 #endif
 
+#ifdef DEBUG_MAIN_TEST
     // Load configuration
     LX_Configuration *configuration;
 
@@ -220,7 +221,7 @@ int main ( int argc, char** argv )
     int h = configuration->getWinHeight();
     int f = configuration->getFullscreenFlag();
 
-#ifdef DEBUG_MAIN_TEST
+
     std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
     std::cout << "video : " << video << std::endl;
     std::cout << "true type font : " << ttfont << std::endl;
