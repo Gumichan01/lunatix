@@ -27,7 +27,7 @@
 
 
 /**
-*	@fn int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
+*	@fn unsigned int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 *
 *	This function calculates the euclidean square distance between 2 coordinates
 *
@@ -39,7 +39,7 @@
 *	@return An integer value
 *
 */
-int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
+unsigned int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
 {
     return( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
@@ -65,7 +65,7 @@ float LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 
 
 /**
-*	@fn int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+*	@fn unsigned int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 *
 *	This function calculates the euclidean square distance
 *
@@ -75,7 +75,7 @@ float LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 *	@return An integer value
 *
 */
-int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+unsigned int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 {
     return euclide_square_distance(p1->x,p1->y,p2->x,p2->y);
 }
@@ -188,7 +188,7 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 */
 bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 {
-    int d;
+    unsigned int d;
 
     if(circle1 == NULL || circle2 == NULL)
         return false;
