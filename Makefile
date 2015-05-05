@@ -148,7 +148,7 @@ LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp $(LUNATI
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config
+test : $(COMPILED_SCRIPT) test-init test-config test-device
 
 
 test-init : $(OBJS) test-init.o
@@ -169,6 +169,17 @@ test-config : $(OBJS) test-config.o
 test-config.o : $(TEST_PATH)test-config.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+
+
+test-device : $(OBJS) test-device.o
+	@echo $@" - Linking "$<
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-device.o : $(TEST_PATH)test-device.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+
 
 
 clean :
