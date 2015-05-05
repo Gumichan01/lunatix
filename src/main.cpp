@@ -203,40 +203,6 @@ int main ( int argc, char** argv )
     std::cout << "Number of windows to destruct : " << getWindowManager()->nbWindow() <<std::endl;
 #endif
 
-#ifdef DEBUG_MAIN_TEST
-    // Load configuration
-    LX_Configuration *configuration;
-
-    configuration = LX_Configuration::getInstance();
-
-
-    int video = configuration->getVideoFlag();
-    int ttfont = configuration->getTTF_Flag();
-    int sound = configuration->getAudioFlag();
-    int gamepad = configuration->getJoystickFlag();
-    int opengl = configuration->getOpenGL_Flag();
-    std::string font = configuration->getFontFile();
-    int size = configuration->getFontSize();
-    int w = configuration->getWinWidth();
-    int h = configuration->getWinHeight();
-    int f = configuration->getFullscreenFlag();
-
-
-    std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
-    std::cout << "video : " << video << std::endl;
-    std::cout << "true type font : " << ttfont << std::endl;
-    std::cout << "audio : " << sound << std::endl;
-    std::cout << "gamepad : " << gamepad << std::endl;
-    std::cout << "opengl : " << opengl << std::endl;
-    std::cout << "font : " << font << std::endl;
-    std::cout << "size : " << size << std::endl;
-    std::cout << "width : " << w << std::endl;
-    std::cout << "height : " << h << std::endl;
-    std::cout << "fullscreen : " << f << std::endl;
-#endif
-
-    LX_Configuration::destroy();
-
 
     // Version of SDL
     SDL_version compiled;
