@@ -75,6 +75,13 @@ bool LX_Polygon::addPoint(LX_Point *p)
 
 
 
+unsigned int LX_Polygon::numberOfPoints(void)
+{
+    return nbPoints;
+}
+
+
+
 LX_Polygon::~LX_Polygon()
 {
     delete [] points;

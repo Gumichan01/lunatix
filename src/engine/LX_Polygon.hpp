@@ -52,7 +52,7 @@ class LX_Polygon{
     bool addPoint(const int x, const int y);
     bool addPoint(LX_Point *p);
 
-    const unsigned int size(void);
+    unsigned int numberOfPoints(void);
 
     LX_Point * getPoint(const unsigned int index);
 
