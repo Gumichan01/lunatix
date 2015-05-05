@@ -31,7 +31,6 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine has a singleton configuration" << endl;
 
-    // Load configuration
 
     int video = configuration->getVideoFlag();
     int ttfont = configuration->getTTF_Flag();
