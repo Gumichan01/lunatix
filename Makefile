@@ -15,7 +15,7 @@
 
 # You can modify the value of DEBUG
 # If you want to use debug or release mode
-DEBUG=no
+DEBUG=yes
 
 
 CC=g++
@@ -148,7 +148,7 @@ LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp $(LUNATI
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init
+test : $(COMPILED_SCRIPT) test-init test-config
 
 
 test-init : $(OBJS) test-init.o
@@ -158,8 +158,17 @@ test-init : $(OBJS) test-init.o
 
 test-init.o : $(TEST_PATH)test-init.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
 
+
+test-config : $(OBJS) test-config.o
+	@echo $@" - Linking "$<
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-config.o : $(TEST_PATH)test-config.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
 
 
 clean :
