@@ -82,6 +82,17 @@ unsigned int LX_Polygon::numberOfPoints(void)
 
 
 
+LX_Point * LX_Polygon::getPoint(const unsigned int index)
+{
+    if(index < cursor)
+    {
+        return &points[index];
+    }
+
+    return NULL;
+}
+
+
 LX_Polygon::~LX_Polygon()
 {
     delete [] points;
