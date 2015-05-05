@@ -55,7 +55,7 @@ typedef struct LX_Circle{
     unsigned int radius;        /**< The circle radius */
 
     // The square radius will never be less than 0
-    unsigned int square_radius; /**< The square radius (for a collision optimization) */
+    unsigned int square_radius; /**< The square radius */
 
 
 }LX_Circle;     /**< */
