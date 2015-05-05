@@ -182,13 +182,6 @@ int main ( int argc, char** argv )
         SDL_Delay(33);
     }
 
-#ifdef DEBUG_MAIN_TEST
-    if(LX_WindowManager::getInstance()->getWindow(1024) == NULL)
-        std::cout << "LX_WindowManager::getInstance()->getWindow(1024) is NULL " << std::endl;
-
-    if(LX_WindowManager::getInstance()->deleteWindow(128) == -1)
-        std::cout << "LX_WindowManager::getInstance()->deleteWindow(128) returned -1 " << std::endl;
-#endif
 
     SDL_DestroyTexture(st);
     SDL_DestroyTexture(ex);
@@ -197,11 +190,6 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-
-#ifdef DEBUG_MAIN_TEST
-    std::cout << "Allocated channels after : " << LX_Mixer::allocateChannels(0) <<std::endl;
-    std::cout << "Number of windows to destruct : " << getWindowManager()->nbWindow() <<std::endl;
-#endif
 
 
     // Version of SDL
@@ -214,20 +202,6 @@ int main ( int argc, char** argv )
                 compiled.major, compiled.minor, compiled.patch);
     printf("But we linked against SDL version %d.%d.%d.\n",
                 linked.major, linked.minor, linked.patch);
-
-
-    // Joystick and Game controller
-    std::cout << "\nYou have " << numberOfDevices() << " gamepad(s) connected " << std::endl;
-
-    LX_GamepadInfo gi;
-    SDL_Joystick *joy = SDL_JoystickOpen(0);
-
-    if(joy != NULL)
-    {
-        statGamepad(joy,&gi);
-        std::cout << gamepadToString(&gi);
-        SDL_JoystickClose(joy);
-    }
 
 
     LX_Quit();
