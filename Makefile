@@ -8,9 +8,9 @@
 #
 #	Luxon Jean-Pierre (Gumichan01)
 #	luxon.jean.pierre@gmail.com
-# 
+#
 
-# Makefile - Lunatix Engine v0.2
+# Makefile - Lunatix Engine v0.3
 
 
 # You can modify the value of DEBUG
@@ -23,6 +23,7 @@ MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o
 
+
 LUAC=luac5.1
 SCRIPT_FILE=script/LX_config.lua
 COMPILED_SCRIPT=$(SCRIPT_FILE)c
@@ -30,9 +31,11 @@ COMPILED_SCRIPT=$(SCRIPT_FILE)c
 # Path to main file directory
 MAIN_PATH=./src/
 
+# Path to the test files
+TEST_PATH=./test/
 
-# Test file
-LUNATIX_EXE=test_lunatix-engine
+# executable file
+LUNATIX_EXE=lunatix-engine
 
 # Path to Lunatix engine directory and include directory
 LUNATIX_PATH=./src/engine/
@@ -67,8 +70,9 @@ all : $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 rebuild : clean-target all
 
 $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
-	@echo "Compile the Lua script : "$<" -> "$@
+	@echo "Compilation of the Lua script : "$<" -> "$@
 	@$(LUAC) -o $@ $<
+
 
 
 # Demo
@@ -78,7 +82,7 @@ ifeq ($(DEBUG),yes)
 else
 	@echo "Release mode"
 endif
-	@echo $@"- Linking "
+	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
@@ -141,13 +145,32 @@ LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp $(LUNATI
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
-	
 
-clean : 
-	@echo "Delete object file "
+
+# Test of different modules
+test : $(COMPILED_SCRIPT) test-init
+
+
+test-init : $(OBJS) test-init.o
+	@echo $@" - Linking "$<
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-init.o : $(TEST_PATH)test-init.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
+
+clean :
+	@echo "Delete object files"
 	@rm -f *.o
+
+clean-test :
+	@echo "Delete test object files"
+	@rm -f test-*.o 
 
 clean-target : clean
 	@echo "Delete targets"
-	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
+	@rm -f $(LUNATIX_EXE) test-* $(COMPILED_SCRIPT)
 
