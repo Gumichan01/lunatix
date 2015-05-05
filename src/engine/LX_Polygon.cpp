@@ -51,6 +51,30 @@ LX_Polygon::LX_Polygon(const unsigned int nb)
 
 
 
+bool LX_Polygon::addPoint(const int x, const int y)
+{
+    if(cursor < nbPoints)
+    {
+        points[cursor].x = x;
+        points[cursor].y = y;
+
+        cursor++;
+
+        return true;
+    }
+
+    return false;
+}
+
+
+
+bool LX_Polygon::addPoint(LX_Point *p)
+{
+    return addPoint(p->x,p->y);
+}
+
+
+
 LX_Polygon::~LX_Polygon()
 {
     delete [] points;
