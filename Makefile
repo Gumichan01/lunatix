@@ -21,7 +21,7 @@ DEBUG=yes
 CC=g++
 MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
-LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o
+LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o LX_Polygon.o
 
 
 LUAC=luac5.1
