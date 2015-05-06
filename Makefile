@@ -148,11 +148,11 @@ LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp $(LUNATI
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config test-device
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics
 
 
 test-init : $(OBJS) test-init.o
-	@echo $@" - Linking "$<
+	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
@@ -162,7 +162,7 @@ test-init.o : $(TEST_PATH)test-init.cpp
 
 
 test-config : $(OBJS) test-config.o
-	@echo $@" - Linking "$<
+	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
@@ -172,7 +172,7 @@ test-config.o : $(TEST_PATH)test-config.cpp
 
 
 test-device : $(OBJS) test-device.o
-	@echo $@" - Linking "$<
+	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
@@ -181,6 +181,15 @@ test-device.o : $(TEST_PATH)test-device.cpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
 
 
+test-physics : $(OBJS) test-physics.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-physics.o : $(TEST_PATH)test-physics.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+
 
 clean :
 	@echo "Delete object files"
@@ -188,7 +197,7 @@ clean :
 
 clean-test :
 	@echo "Delete test object files"
-	@rm -f test-*.o 
+	@rm -f test-* 
 
 clean-target : clean
 	@echo "Delete targets"
