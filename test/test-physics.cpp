@@ -58,6 +58,8 @@ void test_euclide(void)
 
     int d;
 
+    cout << " = TEST EUCLIDE = " << endl;
+
     d = euclide_square_distance(&A,&B);
 
     if(d != 81)
@@ -88,6 +90,8 @@ void test_euclide(void)
     else
         cout << "SUCCESS - Good distance of CD : " << d << endl;
 
+    cout << " = END TEST = " << endl;
+
 }
 
 
@@ -105,6 +109,7 @@ void test_collisionPointCircle(void)
     C = {105,105};
     D = {100,125};
 
+    cout << " = TEST POINT/CIRCLE = " << endl;
 
     d = collision(A.x,A.y,&c);
 
@@ -133,6 +138,8 @@ void test_collisionPointCircle(void)
         cerr << "FAILURE - expected : FALSE ; got : TRUE" << endl;
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
+
+    cout << " = END TEST = " << endl;
 }
 
 
@@ -173,6 +180,8 @@ void test_collision2Circle(void)
     B = {13,12,3,9};
     C = {100,100,50,50*50};
 
+    cout << " = TEST CIRCLE/CIRCLE = " << endl;
+
     d = collision(&A,&B);
 
     if(d != true)
@@ -188,6 +197,7 @@ void test_collision2Circle(void)
     else
         cout << "SUCCESS - no collision between two circles C and B " << endl;
 
+    cout << " = END TEST = " << endl;
 }
 
 
@@ -200,6 +210,8 @@ void test_collision2Rect(void)
     R1 = {0,0,50,25};
     R2 = {40,21,32,25};
     R3 = {64,32,10,100};
+
+    cout << " = TEST RECT/RECT = " << endl;
 
     d = collision(&R1,&R2);
 
@@ -239,6 +251,7 @@ void test_collisionRectCircle(void)
     B = {51,26,15,15*15};
     C = {100,100,40,40*40};
 
+    cout << " = TEST RECT/CIRCLE = " << endl;
 
     d = collision(&A,&R1);
 
@@ -262,6 +275,7 @@ void test_collisionRectCircle(void)
     else
         cout << "SUCCESS - no collision C/R1 OK " << endl;
 
+    cout << " = END TEST = " << endl;
 }
 
 
