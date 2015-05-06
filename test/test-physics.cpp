@@ -17,6 +17,8 @@ void test_collision2Circle(void);
 void test_collision2Rect(void);
 void test_collisionRectCircle(void);
 
+void testPolygon(void);
+
 
 int main(int argc, char **argv)
 {
@@ -37,6 +39,8 @@ int main(int argc, char **argv)
     test_collision2Circle();
     test_collision2Rect();
     test_collisionRectCircle();
+
+    testPolygon();
 
     LX_Quit();
 
@@ -277,6 +281,70 @@ void test_collisionRectCircle(void)
 
     cout << " = END TEST = " << endl;
 }
+
+
+void testPolygon(void)
+{
+    int d;
+    LX_Polygon poly(3);
+    LX_Point *p = NULL;
+
+    poly.addPoint(10,5);
+    poly.addPoint(10,10);
+    poly.addPoint(5,5);
+
+
+    cout << " = TEST POLYGON = " << endl;
+
+
+    d = poly.numberOfPoints();
+
+    if(d != 3)
+        cerr << "FAILURE - number of points expected : 3; got : " << d << endl;
+    else
+        cout << "SUCCESS - number of points : " << d << endl;
+
+
+    p = poly.getPoint(5);
+
+    if(p != NULL)
+        cerr << "FAILURE - expected : NULL ; got : " << p << endl;
+    else
+        cout << "SUCCESS - no Point at 5" << endl;
+
+
+    p = poly.getPoint(0);
+
+    if(p == NULL)
+        cerr << "FAILURE - getoint at 0 expected : Not NULL value ; got :  NULL" << endl;
+    else
+    {
+        cout << "SUCCESS - there is a Point at 0" << endl;
+
+        if(p->x != 10)
+            cerr << "FAILURE - x position expected : 10 ; got : " << p->x << endl;
+        else
+            cout << "SUCCESS - x = 10" << endl;
+
+        if(p->y != 5)
+            cerr << "FAILURE - y position expected : 5 ; got : " << p->x << endl;
+        else
+            cout << "SUCCESS - y = 5" << endl;
+    }
+
+    cout << " = END TEST = " << endl;
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
