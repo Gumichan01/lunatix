@@ -33,6 +33,8 @@ int main(int argc, char **argv)
 
     test_euclide();
     test_collisionPointCircle();
+    test_collisionPointRect();
+    test_collision2Circle();
 
     LX_Quit();
 
@@ -107,35 +109,84 @@ void test_collisionPointCircle(void)
     if(d != true)
         cerr << "FAILURE - expected : TRUE ; got : " << d << endl;
     else
-        cout << "SUCCESS - collision point is the center : " << d << endl;
+        cout << "SUCCESS - collision, the point is the center : " << d << endl;
 
     d = collision(B.x,B.y,&c);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
     else
-        cout << "SUCCESS - collision point is the center"<< endl;
+        cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
     d = collision(C.x,C.y,&c);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
     else
-        cout << "SUCCESS - collision point is the center " << endl;
+        cout << "SUCCESS - collision point is in the circle" << endl;
 
     d = collision(D.x,D.y,&c);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE ; got : TRUE" << endl;
     else
-        cout << "SUCCESS - collision point is the center "<< endl;
+        cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 }
 
 
+void test_collisionPointRect(void)
+{
+    LX_Point A,B;
+    LX_AABB aabb;
+
+    bool d;
+
+    A = {100,100};
+    B = {50,50};
+    aabb = {40,40,30,30};
+
+    d = collision(A.x,A.y,&aabb);
+
+    if(d != false)
+        cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
+    else
+        cout << "SUCCESS - point out of the rect " << endl;
+
+    d = collision(B.x,B.y,&aabb);
+
+    if(d != true)
+        cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
+    else
+        cout << "SUCCESS - point into the rect " << endl;
+
+}
 
 
+void test_collision2Circle(void)
+{
+    LX_Circle A,B,C;
+    bool d;
+
+    A = {10,10,5,25};
+    B = {13,12,3,9};
+    C = {100,100,50,50*50};
+
+    d = collision(&A,&B);
+
+    if(d != true)
+        cerr << "FAILURE - collisoon A/B expected : TRUE; got : FALSE" << endl;
+    else
+        cout << "SUCCESS - collision between two circles A and B " << endl;
 
 
+    d = collision(&C,&B);
+
+    if(d != false)
+        cerr << "FAILURE - collisoon C/B expected : FALSE; got : TRUE" << endl;
+    else
+        cout << "SUCCESS - no collision between two circles C and B " << endl;
+
+}
 
 
 

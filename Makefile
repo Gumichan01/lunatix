@@ -188,7 +188,7 @@ test-physics : $(OBJS) test-physics.o
 
 test-physics.o : $(TEST_PATH)test-physics.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
 
 clean :
