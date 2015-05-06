@@ -143,8 +143,8 @@ LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_PATH)LX_Device.hpp $(LUNATI
 
 
 LX_Polygon.o : $(LUNATIX_PATH)LX_Polygon.cpp $(LUNATIX_PATH)LX_Polygon.hpp
-        @echo $@" - Compiling "$<
-        @$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 	
 
