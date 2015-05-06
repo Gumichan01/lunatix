@@ -36,6 +36,7 @@ int main(int argc, char **argv)
     test_collisionPointRect();
     test_collision2Circle();
     test_collision2Rect();
+    test_collisionRectCircle();
 
     LX_Quit();
 
@@ -227,7 +228,41 @@ void test_collision2Rect(void)
 }
 
 
+void test_collisionRectCircle(void)
+{
+    LX_AABB R1;
+    LX_Circle A,B,C;
+    bool d;
 
+    R1 = {0,0,50,25};
+    A = {10,10,5,25};
+    B = {51,26,15,15*15};
+    C = {100,100,40,40*40};
+
+
+    d = collision(&A,&R1);
+
+    if(d != true)
+        cerr << "FAILURE - collisoon A/R2 expected : TRUE; got : FALSE" << endl;
+    else
+        cout << "SUCCESS - collision A/R2 OK " << endl;
+
+
+    d = collision(&B,&R1);
+
+    if(d != true)
+        cerr << "FAILURE - collisoon B/R2 expected : TRUE; got : FALSE" << endl;
+    else
+        cout << "SUCCESS - collision B/R2 OK " << endl;
+
+    d = collision(&C,&R1);
+
+    if(d != false)
+        cerr << "FAILURE - collisoon C/R1 expected : FALSE; got : TRUE" << endl;
+    else
+        cout << "SUCCESS - no collision C/R1 OK " << endl;
+
+}
 
 
 
