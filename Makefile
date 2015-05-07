@@ -192,7 +192,7 @@ test-device.o : $(TEST_PATH)test-device.cpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
 
 
-test-physics : $(OBJS) test-physics.o
+test-physics : $(OBJS) test-physics.o LX_Polygon.o LX_Vector2D.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
