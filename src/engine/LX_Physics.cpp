@@ -23,6 +23,7 @@
 #include <SDL2/SDL.h>
 
 #include "LX_Physics.hpp"
+#include "LX_Vector2D.hpp"
 #include "LX_Error.hpp"
 
 
