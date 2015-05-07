@@ -61,6 +61,10 @@ bool LX_Polygon::addPoint(const int x, const int y)
 
         cursor++;
 
+        // Update the convexity when the polygon has at least 3 edges
+        if(cursor == 3)
+            convexity();
+
         return true;
     }
 
@@ -122,8 +126,6 @@ void LX_Polygon::convexity(void)
 
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
 
-    if(n < 3)
-        return;
 
     for(int i = 0; i < n; i++)
     {
