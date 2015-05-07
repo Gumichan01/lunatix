@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "../src/engine/Lunatix_engine.hpp"
+#include "../src/engine/LX_Vector2D.hpp"
 
 using namespace std;
 using namespace LX_Physics;
@@ -16,6 +17,8 @@ void test_collisionPointRect(void);
 void test_collision2Circle(void);
 void test_collision2Rect(void);
 void test_collisionRectCircle(void);
+
+void test_Vector2D(void);
 
 void testPolygon(void);
 
@@ -40,6 +43,7 @@ int main(int argc, char **argv)
     test_collision2Rect();
     test_collisionRectCircle();
 
+    test_Vector2D();
     testPolygon();
 
     LX_Quit();
@@ -337,7 +341,79 @@ void testPolygon(void)
 }
 
 
+void test_Vector2D(void)
+{
+    LX_Vector2D v,u,z;
+    int d;
 
+    v.vx = 1;
+    v.vy = 2;
+
+    u.vx = 2;
+    u.vy = -1;
+
+    z.vx = 0;
+    z.vy = 0;
+
+
+    cout << " = TEST Vector2D = " << endl;
+
+    d = scalar_product(&v,&u);
+
+    if(d != 0)
+        cerr << "FAILURE - scalar product v(1,2).u(2,-1) expected: 0 ; got: " << d << endl;
+    else
+        cout << "SUCCESS - scalar product v(1,2).u(2,-1) = 0" << endl;
+
+    d = scalar_product(&z,&z);
+
+    if(d != 0)
+        cerr << "FAILURE - scalar product z.z (z is a null vector) expected: 0 ; got: " << d << endl;
+    else
+        cout << "SUCCESS - scalar product z.z = 0" << endl;
+
+
+    d = vector_norm(&z);
+
+    if(d != 0)
+        cerr << "FAILURE - norm of z (z is a null vector) expected: 0 ; got: " << d << endl;
+    else
+        cout << "SUCCESS - norm of z = 0" << endl;
+
+
+    d = vector_norm(&v);
+
+    if(d != ((int) sqrt(5)) )
+        cerr << "FAILURE - norm of v expected: "<< ((int) sqrt(5)) <<" ; got: " << d << endl;
+    else
+        cout << "SUCCESS - norm of v = 0" << endl;
+
+
+    d = vector_product(&v,&u);
+
+    if(d != -5)
+        cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -3 ; got: " << d << endl;
+    else
+        cout << "SUCCESS - vector product v(1,2).u(2,-1) = -3" << endl;
+
+
+    d = vector_product(&u,&v);
+
+    if(d != 5)
+        cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 3 ; got: " << d << endl;
+    else
+        cout << "SUCCESS - vector product u(2,-1).v(1,2) = 3" << endl;
+
+
+    d = vector_product(&z,&z);
+
+    if(d != 0)
+        cerr << "FAILURE - vector product z.z (z is a null vector) expected: 0 ; got: " << d << endl;
+    else
+        cout << "SUCCESS - vector product z.z = 0" << endl;
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
