@@ -19,7 +19,6 @@ void test_collision2Rect(void);
 void test_collisionRectCircle(void);
 
 void test_Vector2D(void);
-
 void testPolygon(void);
 
 
@@ -290,7 +289,7 @@ void test_collisionRectCircle(void)
 void testPolygon(void)
 {
     int d;
-    LX_Polygon poly(3);
+    LX_Polygon poly(5);
     LX_Point *p = NULL;
 
     poly.addPoint(10,5);
@@ -335,6 +334,30 @@ void testPolygon(void)
         else
             cout << "SUCCESS - y = 5" << endl;
     }
+
+    // Is the triangle convex ?
+    if(poly.isConvex() == false)
+        cerr << "FAILURE - A triangle is not a non-convex polygon " << endl;
+    else
+        cout << "SUCCESS - The triangle is a convex polygon, well done !" << endl;
+
+    // Now we have a polygon with 4 edges
+    poly.addPoint(7,2);
+
+    // It must be convex
+    if(poly.isConvex() == false)
+        cerr << "FAILURE - Expected : convex; got: non-convex " << endl;
+    else
+        cout << "SUCCESS - Added (7,2). This is still a convex polygon, well done !" << endl;
+
+    // New edge
+    poly.addPoint(6,5);
+
+    // It must be non-convex
+    if(poly.isConvex() == true)
+        cerr << "FAILURE - Expected : non-convex; got: convex " << endl;
+    else
+        cout << "SUCCESS - Added (6,3). This is not a convex polygon" << endl;
 
     cout << " = END TEST = " << endl;
 
