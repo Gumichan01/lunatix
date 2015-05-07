@@ -140,7 +140,7 @@ void LX_Polygon::convexity(void)
             AO.vy = points[i].y - points[i-1].y;
         }
 
-        if(i = n-1)
+        if(i == n-1)
         {
             OB.vx = points[0].x - points[i].x;
             OB.vy = points[0].y - points[i].y;
