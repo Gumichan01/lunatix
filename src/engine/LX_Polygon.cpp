@@ -23,6 +23,7 @@
 
 #include "LX_Hitbox.hpp"
 #include "LX_Polygon.hpp"
+#include "LX_Vector2D.hpp"
 #include "LX_Error.hpp"
 
 using namespace std;
@@ -90,6 +91,105 @@ LX_Point * LX_Polygon::getPoint(const unsigned int index)
     }
 
     return NULL;
+}
+
+
+
+bool LX_Polygon::isConvex(void)
+{
+    return convex;
+}
+
+
+
+void LX_Polygon::convexity(void)
+{
+    // Vectors
+    LX_Vector2D AO;
+    LX_Vector2D OB;
+
+    // Distance
+    float distanceAO;
+    float distanceOB;
+
+    // Scalar product and angle
+    int cross_product;
+    float cosAngle;
+    int angle;
+
+    bool haveSign = false;
+    enum Sign{POSITIVE,NEGATIVE} s;
+
+    const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
+
+    if(n < 3)
+        return;
+
+    for(int i = 0; i < n; i++)
+    {
+        if(i = 0)
+        {
+            AO.vx = points[i].x - points[n-1].x;
+            AO.vy = points[i].y - points[n-1].y;
+        }
+        else
+        {
+            AO.vx = points[i].x - points[i-1].x;
+            AO.vy = points[i].y - points[i-1].y;
+        }
+
+        if(i = n-1)
+        {
+            OB.vx = points[0].x - points[i].x;
+            OB.vy = points[0].y - points[i].y;
+        }
+        else
+        {
+            OB.vx = points[i+1].x - points[i].x;
+            OB.vy = points[i+1].y - points[i].y;
+        }
+
+        cross_product = (int) vector_product(&AO,&OB);
+
+        if(!haveSign)
+        {
+            if(cross_product > 0)
+                s = POSITIVE;
+            else if(cross_product < 0)
+                s = NEGATIVE;
+            else
+            {
+                convex = false;
+                return;
+            }
+
+            haveSign = true;
+        }
+        else
+        {
+            switch(s)
+            {
+                case POSITIVE : if(cross_product < 0)
+                                {
+                                    convex = false;
+                                    return;
+                                }
+                                break;
+
+                case NEGATIVE : if(cross_product > 0)
+                                {
+                                    convex = false;
+                                    return;
+                                }
+                                break;
+
+                default : break;
+            }
+        }
+
+    }
+
+    convex = true;
 }
 
 
