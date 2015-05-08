@@ -80,9 +80,16 @@ bool LX_Polygon::addPoint(LX_Point *p)
 
 
 
-unsigned int LX_Polygon::numberOfPoints(void)
+unsigned int LX_Polygon::numberOfEdges(void)
 {
     return nbPoints;
+}
+
+
+
+unsigned int LX_Polygon::numberOfRealEdges(void)
+{
+    return cursor;
 }
 
 
