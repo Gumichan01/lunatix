@@ -43,7 +43,7 @@ class LX_Polygon{
     unsigned int cursor;            /**< The size */
     bool convex;                    /**< this flag show if the polygon is convex or not */
 
-    bool isConvex(void);
+    void convexity(void);
 
     public :
 
@@ -52,9 +52,12 @@ class LX_Polygon{
     bool addPoint(const int x, const int y);
     bool addPoint(LX_Point *p);
 
-    unsigned int numberOfPoints(void);
+    unsigned int numberOfEdges(void);
+    unsigned int numberOfRealEdges(void);
 
     LX_Point * getPoint(const unsigned int index);
+
+    bool isConvex(void);
 
     ~LX_Polygon();
 
