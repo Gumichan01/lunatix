@@ -126,6 +126,13 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect
 }
 
 
+
+bool LX_Physics::collision(const LX_Point *p,const LX_AABB *rect)
+{
+    return collision(p->x,p->y,rect);
+}
+
+
 /**
 *	@fn bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *circle)
 *
@@ -150,6 +157,15 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *ci
 
     return true;
 }
+
+
+
+bool LX_Physics::collision(const LX_Point *p, const LX_Circle *circle)
+{
+    collision(p->x,p->y,circle);
+}
+
+
 
 
 /**
@@ -189,12 +205,10 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 */
 bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 {
-    unsigned int d;
-
     if(circle1 == NULL || circle2 == NULL)
         return false;
 
-    d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
+    const unsigned int d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
 
     return (euclide_square_distance( circle1->xCenter, circle1->yCenter, circle2->xCenter, circle2->yCenter) <= d );
 }
@@ -225,8 +239,7 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     double t;
     double x,y;
 
-    // Collision if A or B is in the circle
-    if( collision(A->x,A->y,circle) || collision(B->x,B->y,circle) )
+    if( collision(A,circle) || collision(B,circle) )
         return true;
 
 
@@ -239,16 +252,17 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     BC.vx = O.x - B->x;
     BC.vy = O.y - B->y;
 
-    // Scalar product
-    scal1 = (AB.vx * AC.vx) + (AB.vy * AC.vy);
+
+    scal1 = scalar_product(&AB,&AC);
+    // I do not change this line because I use the opposite of vx
     scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
 
-    // If there is no collision
+
     if(scal1 < 0 || scal2 < 0)
         return false;
 
     // Find the projection point of O
-    sum = (int) ((AB.vx*AB.vx)+(AB.vy*AB.vy));
+    sum = scalar_product(&AB,&AB);
 
     if(sum == 0)        // A and B are the same point
         return false;
@@ -258,9 +272,9 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     x = A->x + (t*AB.vx);
     y = A->y + (t*AB.vy);
 
-    M = {(int) x, (int) y}; // M is the projection point of O
+    M = {(int) x, (int) y};     // M is the projection point of O
 
-    return collision(M.x,M.y, circle);
+    return collision(&M, circle);
 
 }
 
@@ -280,13 +294,13 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 */
 bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 {
-    // Check if the circle is completly into the AABB
+    // Check if the center of the circle is completly into the AABB
     if( collision(circle->xCenter, circle->yCenter,rect))
     {
         return true;
     }
 
-    LX_Point sides[RECT_SIDES][2]; //4 segments
+    LX_Point sides[RECT_SIDES][2];  //4 segments
 
     //1st segment
     sides[0][0] = {rect->x , rect->y};
