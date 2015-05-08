@@ -62,7 +62,7 @@ bool LX_Polygon::addPoint(const int x, const int y)
         cursor++;
 
         // Update the convexity when the polygon has at least 3 edges
-        if(cursor == 3)
+        if(cursor >= 3)
             convexity();
 
         return true;
