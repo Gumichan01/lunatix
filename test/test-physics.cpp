@@ -300,13 +300,20 @@ void testPolygon(void)
     cout << " = TEST POLYGON = " << endl;
 
 
-    d = poly.numberOfPoints();
+    d = poly.numberOfRealEdges();
 
     if(d != 3)
-        cerr << "FAILURE - number of points expected : 3; got : " << d << endl;
+        cerr << "FAILURE - number of real edges expected : 3; got : " << d << endl;
     else
-        cout << "SUCCESS - number of points : " << d << endl;
+        cout << "SUCCESS - number of real edges : " << d << endl;
 
+
+    d = poly.numberOfEdges();
+
+    if(d != 5)
+        cerr << "FAILURE - total number of edges expected : 5; got : " << d << endl;
+    else
+        cout << "SUCCESS - total number of edges : " << d << endl;
 
     p = poly.getPoint(5);
 
