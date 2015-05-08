@@ -26,6 +26,8 @@
 
 #include "LX_Hitbox.hpp"
 
+class LX_Polygon;
+
 #define RECT_SIDES 4    /**< The number of the AABB sides */
 
 // todo : gravity, wind, strengh, friction
@@ -48,12 +50,21 @@ namespace LX_Physics{
 
         bool collision(const int x_pos, const int y_pos, const LX_AABB *rect);              // collision point/AABB
         bool collision(const LX_Point *p,const LX_AABB *rect);
+
         bool collision(const int x_pos, const int y_pos, const LX_Circle *circle);          // collision point/circle
         bool collision(const LX_Point *p, const LX_Circle *circle);
+
         bool collision(const LX_AABB *rect1, const LX_AABB *rect2);                         // collision AABB/AABB
         bool collision(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
         bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
         bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
+
+
+        bool intersectSegLine(const LX_Point *A, const LX_Point *B,
+                                const LX_Point *C, const LX_Point *D);                      // collision segment/segment
+        bool intersectSegment(const LX_Point *A, const LX_Point *B,
+                                const LX_Point *C, const LX_Point *D);                      // collision segment/segment
+        bool collision(const LX_Point *p, const LX_Polygon *poly);                          // collision point/polygon
 
 };
 
