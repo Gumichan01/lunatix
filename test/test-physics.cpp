@@ -523,6 +523,10 @@ void test_collisionSeg(void)
 
 void test_collisionPointPolygon(void)
 {
+    /*
+        Be careful, if the coordinates of a point
+        are to high, you will have incorrect results
+    */
     LX_Polygon poly(5);
     int d;
 
