@@ -355,7 +355,7 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
 bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
                                     const LX_Point *C, const LX_Point *D)
 {
-    return (intersectSegment(A,B,C,D) && intersectSegment(C,D,A,B));
+    return (intersectSegLine(A,B,C,D) && intersectSegLine(C,D,A,B));
 }
 
 
