@@ -330,6 +330,72 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 
 
 
+bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
+                                    const LX_Point *C, const LX_Point *D)
+{
+    LX_Vector2D AC,AD,AB;
+    int d;
+
+    AB.vx = B->x - A->x;
+    AB.vy = B->y - A->y;
+
+    AC.vx = C->x - A->x;
+    AC.vy = C->y - A->y;
+
+    AD.vx = D->x - A->x;
+    AD.vy = D->y - A->y;
+
+    d = vector_product(&AB,&AD) * vector_product(&AB,&AC);
+
+    return (d <= 0);
+}
+
+
+
+bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
+                                    const LX_Point *C, const LX_Point *D)
+{
+    return (intersectSegment(A,B,C,D) && intersectSegment(C,D,A,B));
+}
+
+
+bool LX_Physics::collision(const LX_Point *p, const LX_Polygon *poly)
+{
+    return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
