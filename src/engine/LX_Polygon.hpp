@@ -52,10 +52,10 @@ class LX_Polygon{
     bool addPoint(const int x, const int y);
     bool addPoint(LX_Point *p);
 
-    unsigned int numberOfEdges(void);
-    unsigned int numberOfRealEdges(void);
+    unsigned int numberOfEdges(void) const;
+    unsigned int numberOfRealEdges(void) const;
 
-    LX_Point * getPoint(const unsigned int index);
+    LX_Point * getPoint(const unsigned int index) const;
 
     bool isConvex(void);
 

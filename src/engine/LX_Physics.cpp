@@ -24,6 +24,7 @@
 
 #include "LX_Physics.hpp"
 #include "LX_Vector2D.hpp"
+#include "LX_Polygon.hpp"
 #include "LX_Error.hpp"
 
 
@@ -126,6 +127,13 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect
 }
 
 
+
+bool LX_Physics::collision(const LX_Point *p,const LX_AABB *rect)
+{
+    return collision(p->x,p->y,rect);
+}
+
+
 /**
 *	@fn bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *circle)
 *
@@ -150,6 +158,15 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *ci
 
     return true;
 }
+
+
+
+bool LX_Physics::collision(const LX_Point *p, const LX_Circle *circle)
+{
+    collision(p->x,p->y,circle);
+}
+
+
 
 
 /**
@@ -189,12 +206,10 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 */
 bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 {
-    unsigned int d;
-
     if(circle1 == NULL || circle2 == NULL)
         return false;
 
-    d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
+    const unsigned int d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
 
     return (euclide_square_distance( circle1->xCenter, circle1->yCenter, circle2->xCenter, circle2->yCenter) <= d );
 }
@@ -225,8 +240,7 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     double t;
     double x,y;
 
-    // Collision if A or B is in the circle
-    if( collision(A->x,A->y,circle) || collision(B->x,B->y,circle) )
+    if( collision(A,circle) || collision(B,circle) )
         return true;
 
 
@@ -239,16 +253,17 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     BC.vx = O.x - B->x;
     BC.vy = O.y - B->y;
 
-    // Scalar product
-    scal1 = (AB.vx * AC.vx) + (AB.vy * AC.vy);
+
+    scal1 = scalar_product(&AB,&AC);
+    // I do not change this line because I use the opposite of vx
     scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
 
-    // If there is no collision
+
     if(scal1 < 0 || scal2 < 0)
         return false;
 
     // Find the projection point of O
-    sum = (int) ((AB.vx*AB.vx)+(AB.vy*AB.vy));
+    sum = scalar_product(&AB,&AB);
 
     if(sum == 0)        // A and B are the same point
         return false;
@@ -258,9 +273,9 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     x = A->x + (t*AB.vx);
     y = A->y + (t*AB.vy);
 
-    M = {(int) x, (int) y}; // M is the projection point of O
+    M = {(int) x, (int) y};     // M is the projection point of O
 
-    return collision(M.x,M.y, circle);
+    return collision(&M, circle);
 
 }
 
@@ -280,13 +295,13 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 */
 bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 {
-    // Check if the circle is completly into the AABB
+    // Check if the center of the circle is completly into the AABB
     if( collision(circle->xCenter, circle->yCenter,rect))
     {
         return true;
     }
 
-    LX_Point sides[RECT_SIDES][2]; //4 segments
+    LX_Point sides[RECT_SIDES][2];  //4 segments
 
     //1st segment
     sides[0][0] = {rect->x , rect->y};
@@ -313,6 +328,98 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 
     return false;
 }
+
+
+
+bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
+                                    const LX_Point *C, const LX_Point *D)
+{
+    LX_Vector2D AC,AD,AB;
+    long d;
+
+    AB.vx = B->x - A->x;
+    AB.vy = B->y - A->y;
+
+    AC.vx = C->x - A->x;
+    AC.vy = C->y - A->y;
+
+    AD.vx = D->x - A->x;
+    AD.vy = D->y - A->y;
+
+    d = vector_product(&AB,&AD) * vector_product(&AB,&AC);
+
+    return (d <= 0);
+}
+
+
+
+bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
+                                    const LX_Point *C, const LX_Point *D)
+{
+    return (intersectSegLine(A,B,C,D) && intersectSegLine(C,D,A,B));
+}
+
+
+
+
+bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
+{
+    int count = 0;
+    LX_Point I;
+
+    const int v = 1;
+    const unsigned int n = poly->numberOfEdges();
+
+    I.x = v + rand()%100;
+    I.y = v + rand()%100;
+
+
+    for(int i = 0; i < n;i++)
+    {
+        if(i == n-1)
+        {
+            if(intersectSegment(P,&I,poly->getPoint(0),poly->getPoint(i)))
+                count++;
+        }
+        else
+        {
+            if(intersectSegment(P,&I,poly->getPoint(i+1),poly->getPoint(i)))
+                count++;
+        }
+    }
+
+    return (count%2 == 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
