@@ -24,6 +24,7 @@
 
 #include "LX_Physics.hpp"
 #include "LX_Vector2D.hpp"
+#include "LX_Polygon.hpp"
 #include "LX_Error.hpp"
 
 
@@ -352,6 +353,17 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
 
 
 
+
+bool LX_Physics::intersectSegLine(LX_Vector2D *AB, LX_Vector2D *CD)
+{
+    const int d = vector_product(AB,CD) * vector_product(AB,CD);
+
+    return (d <= 0);
+}
+
+
+
+
 bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
                                     const LX_Point *C, const LX_Point *D)
 {
@@ -359,9 +371,48 @@ bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
 }
 
 
-bool LX_Physics::collision(const LX_Point *p, const LX_Polygon *poly)
+
+bool LX_Physics::intersectSegment(LX_Vector2D *AB, LX_Vector2D *CD)
 {
-    return false;
+    return (intersectSegLine(AB,CD) && intersectSegLine(CD,AB));
+}
+
+
+bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
+{
+    int count = 0;
+    LX_Point I;
+    LX_Vector2D PI, AB;
+
+    const int v = 10000;
+    const unsigned int n = poly->numberOfEdges();
+
+    I.x = v + rand()%100;
+    I.y = v + rand()%100;
+
+    PI.vx = I.x - P->x;
+    PI.vx = I.y - P->y;
+
+
+    for(int i = 0; i < n;i++)
+    {
+        if(i == n-1)
+        {
+            AB.vx = poly->getPoint(0)->x - poly->getPoint(i)->x;
+            AB.vy = poly->getPoint(0)->y - poly->getPoint(i)->y;
+        }
+        else
+        {
+            AB.vx = poly->getPoint(i+1)->x - poly->getPoint(i)->x;
+            AB.vy = poly->getPoint(i+1)->y - poly->getPoint(i)->y;
+        }
+
+        if(intersectSegment(&AB,&PI))
+            count++;
+    }
+
+
+    return (count%2 == 1);
 }
 
 

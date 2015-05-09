@@ -27,6 +27,7 @@
 #include "LX_Hitbox.hpp"
 
 class LX_Polygon;
+class LX_Vector2D;
 
 #define RECT_SIDES 4    /**< The number of the AABB sides */
 
@@ -64,7 +65,11 @@ namespace LX_Physics{
                                 const LX_Point *C, const LX_Point *D);                      // collision segment/segment
         bool intersectSegment(const LX_Point *A, const LX_Point *B,
                                 const LX_Point *C, const LX_Point *D);                      // collision segment/segment
-        bool collision(const LX_Point *p, const LX_Polygon *poly);                          // collision point/polygon
+
+        bool intersectSegLine(LX_Vector2D *AB, LX_Vector2D *CD);
+        bool intersectSegment(LX_Vector2D *AB, LX_Vector2D *CD);
+
+        bool collision(const LX_Point *P, const LX_Polygon *poly);                          // collision point/polygon
 
 };
 
