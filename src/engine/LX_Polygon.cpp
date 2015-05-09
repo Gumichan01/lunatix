@@ -80,21 +80,21 @@ bool LX_Polygon::addPoint(LX_Point *p)
 
 
 
-unsigned int LX_Polygon::numberOfEdges(void)
+unsigned int LX_Polygon::numberOfEdges(void) const
 {
     return nbPoints;
 }
 
 
 
-unsigned int LX_Polygon::numberOfRealEdges(void)
+unsigned int LX_Polygon::numberOfRealEdges(void) const
 {
     return cursor;
 }
 
 
 
-LX_Point * LX_Polygon::getPoint(const unsigned int index)
+LX_Point * LX_Polygon::getPoint(const unsigned int index) const
 {
     if(index < cursor)
     {
