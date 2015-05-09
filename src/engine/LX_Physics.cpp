@@ -335,7 +335,7 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
                                     const LX_Point *C, const LX_Point *D)
 {
     LX_Vector2D AC,AD,AB;
-    int d;
+    long d;
 
     AB.vx = B->x - A->x;
     AB.vy = B->y - A->y;
