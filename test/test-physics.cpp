@@ -22,6 +22,7 @@ void test_Vector2D(void);
 void testPolygon(void);
 
 void test_collisionSeg(void);
+void test_collisionPointPolygon(void);
 
 
 int main(int argc, char **argv)
@@ -48,6 +49,7 @@ int main(int argc, char **argv)
     testPolygon();
 
     test_collisionSeg();
+    test_collisionPointPolygon();
 
     LX_Quit();
 
@@ -519,6 +521,71 @@ void test_collisionSeg(void)
 }
 
 
+void test_collisionPointPolygon(void)
+{
+    LX_Polygon poly(5);
+    int d;
+
+    LX_Point N = {12,7};
+    LX_Point O = {9,7};
+    LX_Point P = {6,5};
+    LX_Point Q = {6,4};
+    LX_Point R = {1024,2048};
+    LX_Point S = {2,2};
+
+
+    poly.addPoint(10,5);
+    poly.addPoint(10,10);
+    poly.addPoint(5,5);
+    poly.addPoint(7,2);
+    poly.addPoint(6,5);
+
+    d =  collision(&N,&poly);
+
+    if(d != false)
+        cerr << "FAILURE - N in the polygon. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - N not in the polygon OK" << endl;
+
+    d =  collision(&O,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - O in the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - O in the polygon OK" << endl;
+
+    d =  collision(&P,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - P in the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - P in the polygon OK" << endl;
+
+
+    d =  collision(&Q,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - Q in the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - Q in the polygon OK" << endl;
+
+
+    d =  collision(&R,&poly);
+
+    if(d != false)
+        cerr << "FAILURE - R in the polygon. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - R not in the polygon OK" << endl;
+
+
+    d =  collision(&S,&poly);
+
+    if(d != false)
+        cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - S not in the polygon OK" << endl;
+
+}
 
 
 
