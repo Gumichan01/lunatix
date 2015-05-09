@@ -367,7 +367,7 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
     int count = 0;
     LX_Point I;
 
-    const int v = 10000;
+    const int v = 1;
     const unsigned int n = poly->numberOfEdges();
 
     I.x = v + rand()%100;
