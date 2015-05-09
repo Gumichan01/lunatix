@@ -391,7 +391,7 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
     I.y = v + rand()%100;
 
     PI.vx = I.x - P->x;
-    PI.vx = I.y - P->y;
+    PI.vy = I.y - P->y;
 
 
     for(int i = 0; i < n;i++)
