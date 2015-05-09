@@ -21,7 +21,7 @@ void test_collisionRectCircle(void);
 void test_Vector2D(void);
 void testPolygon(void);
 
-void collisionSeg(void);
+void test_collisionSeg(void);
 
 
 int main(int argc, char **argv)
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     test_Vector2D();
     testPolygon();
 
-    collisionSeg();
+    test_collisionSeg();
 
     LX_Quit();
 
@@ -451,7 +451,7 @@ void test_Vector2D(void)
 
 
 
-void collisionSeg(void)
+void test_collisionSeg(void)
 {
     LX_Point A,B,C,D,E,F;
     bool d;
