@@ -453,7 +453,7 @@ void test_Vector2D(void)
 
 void collisionSeg(void)
 {
-    LX_Point A,B,C,D,E;
+    LX_Point A,B,C,D,E,F;
     bool d;
 
     A.x = 5;
@@ -471,6 +471,9 @@ void collisionSeg(void)
     E.x = 20;
     E.y = 5;
 
+    F.x = 15;
+    F.y = 5;
+
     cout << " = TEST Collision Segment = " << endl;
 
     d = intersectSegment(&A,&B,&C,&D);
@@ -486,7 +489,7 @@ void collisionSeg(void)
     if(d != false)
         cerr << "FAILURE - intersect [AC]/[BD] expected: FALSE ; got: TRUE" << endl;
     else
-        cout << "SUCCESS - intersect [AC]/[BD] OK" << endl;
+        cout << "SUCCESS - no intersect [AC]/[BD] OK" << endl;
 
 
     d = intersectSegment(&A,&B,&A,&D);
@@ -499,11 +502,18 @@ void collisionSeg(void)
 
     d = intersectSegment(&A,&D,&A,&E);
 
-    if(d != false)
-        cerr << "FAILURE - intersect [AD]/[AE] expected: FALSE ; got: TRUE" << endl;
+    if(d != true)
+        cerr << "FAILURE - intersect [AD]/[AE] expected: TRUE ; got: FALSE" << endl;
     else
         cout << "SUCCESS - intersect [AD]/[AE] OK" << endl;
 
+
+    d = intersectSegment(&A,&D,&F,&E);
+
+    if(d != true)
+        cerr << "FAILURE - intersect [AD]/[FE] expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - no intersect [AD]/[FE] OK" << endl;
 
     cout << " = END TEST = " << endl;
 }
