@@ -374,7 +374,7 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
     I.y = v + rand()%100;
 
 
-    for(int i = 0; i < n;i++)
+    for(int i = 0; i < n; i++)
     {
         if(i == n-1)
         {
@@ -393,6 +393,38 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
 
 
 
+bool LX_Physics::collision(const LX_Circle *C, const LX_Polygon *poly)
+{
+    const LX_Point P = {C->xCenter,C->yCenter};
+    LX_Point A,B;
+
+    if(collision(&P,poly) == true)
+        return true;
+
+    const unsigned int n = poly->numberOfEdges();
+
+    for(int i = 0; i < n; i++)
+    {
+        A.x = poly->getPoint(i)->x;
+        A.y = poly->getPoint(i)->y;
+
+        if(i == n-1)
+        {
+            B.x = poly->getPoint(0)->x;
+            B.y = poly->getPoint(0)->y;
+        }
+        else
+        {
+            B.x = poly->getPoint(i+1)->x;
+            B.y = poly->getPoint(i+1)->y;
+        }
+
+        if(collision(C,&A,&B) == true)
+            return true;
+    }
+
+
+}
 
 
 
