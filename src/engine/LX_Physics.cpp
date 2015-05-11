@@ -425,7 +425,48 @@ bool LX_Physics::collision(const LX_Circle *C, const LX_Polygon *poly)
 }
 
 
+bool LX_Physics::collision(const LX_AABB *rect, const LX_Polygon *poly)
+{
+    LX_Point A,B,C,D;
+    LX_Point E,F;
 
+    A = {rect->x,rect->y};
+    B = {rect->x + rect->w,rect->y};
+    C = {rect->x + rect->w,rect->y + rect->h};
+    D = {rect->x,rect->y + rect->h};
+
+    const unsigned int n = poly->numberOfEdges();
+
+
+    for(int j = 0; j < n; j++)
+    {
+        E.x = poly->getPoint(j)->x;
+        E.y = poly->getPoint(j)->y;
+
+        if(j == n-1)
+        {
+                F.x = poly->getPoint(0)->x;
+                F.y = poly->getPoint(0)->y;
+        }
+        else
+        {
+                F.x = poly->getPoint(j+1)->x;
+                F.y = poly->getPoint(j+1)->y;
+        }
+
+
+
+        if(intersectSegment(&A,&B,&E,&F) || intersectSegment(&B,&C,&E,&F) ||
+            intersectSegment(&C,&D,&E,&F) || intersectSegment(&D,&A,&E,&F))
+            return true;
+
+        if(collision(&E,rect))
+            return true;
+    }
+
+    return(collision(&A,poly) || collision(&B,poly)
+            || collision(&C,poly) || collision(&A,poly));
+}
 
 
 
