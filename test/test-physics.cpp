@@ -23,7 +23,7 @@ void testPolygon(void);
 
 void test_collisionSeg(void);
 void test_collisionPointPolygon(void);
-
+void test_collisionCerclePolygon(void);
 
 int main(int argc, char **argv)
 {
@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 
     test_collisionSeg();
     test_collisionPointPolygon();
+    test_collisionCerclePolygon();
 
     LX_Quit();
 
@@ -544,37 +545,39 @@ void test_collisionPointPolygon(void)
     poly.addPoint(7,2);
     poly.addPoint(6,5);
 
-    d =  collision(&N,&poly);
+    cout << " = TEST Collision Point/Polygon = " << endl;
+
+    d = collision(&N,&poly);
 
     if(d != false)
         cerr << "FAILURE - N in the polygon. expected: FALSE ; got: TRUE" << endl;
     else
         cout << "SUCCESS - N not in the polygon OK" << endl;
 
-    d =  collision(&O,&poly);
+    d = collision(&O,&poly);
 
     if(d != true)
-        cerr << "FAILURE - O in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
-    d =  collision(&P,&poly);
+    d = collision(&P,&poly);
 
     if(d != true)
-        cerr << "FAILURE - P in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - P not in the polygon. expected: TRUE ; got: FALSE" << endl;
     else
         cout << "SUCCESS - P in the polygon OK" << endl;
 
 
-    d =  collision(&Q,&poly);
+    d = collision(&Q,&poly);
 
     if(d != true)
-        cerr << "FAILURE - Q in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - Q not in the polygon. expected: TRUE ; got: FALSE" << endl;
     else
         cout << "SUCCESS - Q in the polygon OK" << endl;
 
 
-    d =  collision(&R,&poly);
+    d = collision(&R,&poly);
 
     if(d != false)
         cerr << "FAILURE - R in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -592,7 +595,56 @@ void test_collisionPointPolygon(void)
 }
 
 
+void test_collisionCerclePolygon(void)
+{
+    LX_Circle M = {12,7,1,1};
+    LX_Circle N = {12,7,2,4};
+    LX_Circle O = {9,7,10,100};
+    LX_Circle S = {2,2,2,4};
 
+    bool d;
+    LX_Polygon poly(5);
+
+    poly.addPoint(10,5);
+    poly.addPoint(10,10);
+    poly.addPoint(5,5);
+    poly.addPoint(7,2);
+    poly.addPoint(6,5);
+
+    cout << " = TEST Collision Circle/Polygon = " << endl;
+
+    d = collision(&M,&poly);
+
+    if(d != false)
+        cerr << "FAILURE - M in the polygon. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - M not in the polygon OK" << endl;
+
+
+    d = collision(&S,&poly);
+
+    if(d != false)
+        cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - S not in the polygon OK" << endl;
+
+
+    d = collision(&N,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - N not in the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - N in the polygon OK" << endl;
+
+
+    d = collision(&O,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - O in the polygon OK" << endl;
+
+}
 
 
 
