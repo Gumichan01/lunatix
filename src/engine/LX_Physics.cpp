@@ -422,8 +422,6 @@ bool LX_Physics::collision(const LX_Circle *C, const LX_Polygon *poly)
         if(collision(C,&A,&B) == true)
             return true;
     }
-
-
 }
 
 
