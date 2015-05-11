@@ -163,7 +163,7 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *ci
 
 bool LX_Physics::collision(const LX_Point *p, const LX_Circle *circle)
 {
-    collision(p->x,p->y,circle);
+    return collision(p->x,p->y,circle);
 }
 
 
@@ -255,7 +255,7 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 
 
     scal1 = scalar_product(&AB,&AC);
-    // I do not change this line because I use the opposite of vx
+    // I use the opposite value of vx
     scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
 
 
@@ -303,19 +303,19 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 
     LX_Point sides[RECT_SIDES][2];  //4 segments
 
-    //1st segment
+    // 1st segment
     sides[0][0] = {rect->x , rect->y};
     sides[0][1] = {rect->x , rect->y + rect->h};
 
-    //2nd segment
+    // 2nd segment
     sides[1][0] = sides[0][1];
     sides[1][1] = {rect->x + rect->w , rect->y + rect->h};
 
-    //3rd segment
+    // 3rd segment
     sides[2][0] = sides[1][1];
     sides[2][1] = {rect->x + rect->w, rect->y};
 
-    //4th segment
+    // 4th segment
     sides[3][0] = sides[2][1];
     sides[3][1] = sides[0][0];
 
@@ -367,14 +367,14 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
     int count = 0;
     LX_Point I;
 
-    const int v = 1;
+    const int v = 10000;
     const unsigned int n = poly->numberOfEdges();
 
     I.x = v + rand()%100;
     I.y = v + rand()%100;
 
 
-    for(int i = 0; i < n;i++)
+    for(int i = 0; i < n; i++)
     {
         if(i == n-1)
         {
@@ -393,6 +393,36 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
 
 
 
+bool LX_Physics::collision(const LX_Circle *C, const LX_Polygon *poly)
+{
+    const LX_Point P = {C->xCenter,C->yCenter};
+    LX_Point A,B;
+
+    if(collision(&P,poly) == true)
+        return true;
+
+    const unsigned int n = poly->numberOfEdges();
+
+    for(int i = 0; i < n; i++)
+    {
+        A.x = poly->getPoint(i)->x;
+        A.y = poly->getPoint(i)->y;
+
+        if(i == n-1)
+        {
+            B.x = poly->getPoint(0)->x;
+            B.y = poly->getPoint(0)->y;
+        }
+        else
+        {
+            B.x = poly->getPoint(i+1)->x;
+            B.y = poly->getPoint(i+1)->y;
+        }
+
+        if(collision(C,&A,&B) == true)
+            return true;
+    }
+}
 
 
 
