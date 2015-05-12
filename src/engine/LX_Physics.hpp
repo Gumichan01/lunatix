@@ -66,7 +66,9 @@ namespace LX_Physics{
                                 const LX_Point *C, const LX_Point *D);                      // collision segment/segment
 
         bool collision(const LX_Point *P, const LX_Polygon *poly);                          // collision point/polygon
-        bool collision(const LX_Circle *C, const LX_Polygon *poly);                          // collision circle/polygon
+        bool collision(const LX_Circle *C, const LX_Polygon *poly);                         // collision circle/polygon
+
+        bool collision(const LX_AABB *rect, const LX_Polygon *poly);                           // collision AABB/polygon
 
 };
 
