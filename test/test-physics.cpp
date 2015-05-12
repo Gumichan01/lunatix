@@ -23,7 +23,9 @@ void testPolygon(void);
 
 void test_collisionSeg(void);
 void test_collisionPointPolygon(void);
-void test_collisionCerclePolygon(void);
+void test_collisionCirclePolygon(void);
+void test_collisionRectPolygon(void);
+
 
 int main(int argc, char **argv)
 {
@@ -50,7 +52,8 @@ int main(int argc, char **argv)
 
     test_collisionSeg();
     test_collisionPointPolygon();
-    test_collisionCerclePolygon();
+    test_collisionCirclePolygon();
+    test_collisionRectPolygon();
 
     LX_Quit();
 
@@ -595,7 +598,7 @@ void test_collisionPointPolygon(void)
 }
 
 
-void test_collisionCerclePolygon(void)
+void test_collisionCirclePolygon(void)
 {
     LX_Circle M = {12,7,1,1};
     LX_Circle N = {12,7,2,4};
@@ -644,12 +647,79 @@ void test_collisionCerclePolygon(void)
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
+    cout << " = END TEST = " << endl;
 }
 
 
 
 
+void test_collisionRectPolygon(void)
+{
+    bool d;
+    LX_AABB R1,R2,R3,R4,R5;
 
+    R1 = {1,1,2,2};
+    R2 = {8,3,10,4};
+    R3 = {2,7,20,2};
+    R4 = {8,6,1,1};
+    R5 = {2,0,16,16};
+
+    LX_Polygon poly(5);
+
+    poly.addPoint(10,5);
+    poly.addPoint(10,10);
+    poly.addPoint(5,5);
+    poly.addPoint(7,2);
+    poly.addPoint(6,5);
+
+
+    cout << " = TEST Collision Rect/Polygon = " << endl;
+
+    d = collision(&R1,&poly);
+
+    if(d != false)
+        cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - R1 not in the polygon OK" << endl;
+
+    // A point of R2 in the polygon
+    d = collision(&R2,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - test R2 touch the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - R2 touch the polygon OK" << endl;
+
+
+    // Some Segments of R3 in the polygon (no point inside)
+    d = collision(&R3,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - test R3 touch the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - R3 touch the polygon OK" << endl;
+
+
+    // R4 into the polygon
+    d = collision(&R4,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - test R4 into the polygon. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - R4 into the polygon OK" << endl;
+
+
+    // The polygon into R5
+    d = collision(&R5,&poly);
+
+    if(d != true)
+        cerr << "FAILURE - test polygon into R5. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - polygon into R5 OK" << endl;
+
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
