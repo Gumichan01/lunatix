@@ -182,13 +182,6 @@ int main ( int argc, char** argv )
         SDL_Delay(33);
     }
 
-#ifdef DEBUG_MAIN_TEST
-    if(LX_WindowManager::getInstance()->getWindow(1024) == NULL)
-        std::cout << "LX_WindowManager::getInstance()->getWindow(1024) is NULL " << std::endl;
-
-    if(LX_WindowManager::getInstance()->deleteWindow(128) == -1)
-        std::cout << "LX_WindowManager::getInstance()->deleteWindow(128) returned -1 " << std::endl;
-#endif
 
     SDL_DestroyTexture(st);
     SDL_DestroyTexture(ex);
@@ -197,45 +190,6 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-
-#ifdef DEBUG_MAIN_TEST
-    std::cout << "Allocated channels after : " << LX_Mixer::allocateChannels(0) <<std::endl;
-    std::cout << "Number of windows to destruct : " << getWindowManager()->nbWindow() <<std::endl;
-#endif
-
-#ifdef DEBUG_MAIN_TEST
-    // Load configuration
-    LX_Configuration *configuration;
-
-    configuration = LX_Configuration::getInstance();
-
-
-    int video = configuration->getVideoFlag();
-    int ttfont = configuration->getTTF_Flag();
-    int sound = configuration->getAudioFlag();
-    int gamepad = configuration->getJoystickFlag();
-    int opengl = configuration->getOpenGL_Flag();
-    std::string font = configuration->getFontFile();
-    int size = configuration->getFontSize();
-    int w = configuration->getWinWidth();
-    int h = configuration->getWinHeight();
-    int f = configuration->getFullscreenFlag();
-
-
-    std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
-    std::cout << "video : " << video << std::endl;
-    std::cout << "true type font : " << ttfont << std::endl;
-    std::cout << "audio : " << sound << std::endl;
-    std::cout << "gamepad : " << gamepad << std::endl;
-    std::cout << "opengl : " << opengl << std::endl;
-    std::cout << "font : " << font << std::endl;
-    std::cout << "size : " << size << std::endl;
-    std::cout << "width : " << w << std::endl;
-    std::cout << "height : " << h << std::endl;
-    std::cout << "fullscreen : " << f << std::endl;
-#endif
-
-    LX_Configuration::destroy();
 
 
     // Version of SDL
@@ -248,20 +202,6 @@ int main ( int argc, char** argv )
                 compiled.major, compiled.minor, compiled.patch);
     printf("But we linked against SDL version %d.%d.%d.\n",
                 linked.major, linked.minor, linked.patch);
-
-
-    // Joystick and Game controller
-    std::cout << "\nYou have " << numberOfDevices() << " gamepad(s) connected " << std::endl;
-
-    LX_GamepadInfo gi;
-    SDL_Joystick *joy = SDL_JoystickOpen(0);
-
-    if(joy != NULL)
-    {
-        statGamepad(joy,&gi);
-        std::cout << gamepadToString(&gi);
-        SDL_JoystickClose(joy);
-    }
 
 
     LX_Quit();
