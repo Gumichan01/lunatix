@@ -470,6 +470,56 @@ bool LX_Physics::collision(const LX_AABB *rect, const LX_Polygon *poly)
 
 
 
+bool LX_Physics::collision(const LX_Polygon *poly1, const LX_Polygon *poly2)
+{
+    const unsigned int polySize1 = poly1->numberOfEdges();
+    const unsigned int polySize2 = poly2->numberOfEdges();
+
+    LX_Point A,B,C,D;
+
+
+    for(int i = 0; i < polySize1; i++)
+    {
+
+        A.x = poly1->getPoint(i)->x;
+        A.y = poly1->getPoint(i)->y;
+
+        if(i == polySize1-1)
+        {
+                B.x = poly1->getPoint(0)->x;
+                B.y = poly1->getPoint(0)->y;
+        }
+        else
+        {
+                B.x = poly1->getPoint(i+1)->x;
+                B.y = poly1->getPoint(i+1)->y;
+        }
+
+        for(int j = 0; j < polySize2; j++)
+        {
+
+            C.x = poly2->getPoint(j)->x;
+            C.y = poly2->getPoint(j)->y;
+
+            if(j == polySize2-1)
+            {
+                    D.x = poly2->getPoint(0)->x;
+                    D.y = poly2->getPoint(0)->y;
+            }
+            else
+            {
+                    D.x = poly2->getPoint(j+1)->x;
+                    D.y = poly2->getPoint(j+1)->y;
+            }
+
+            if(intersectSegment(&A,&B,&C,&D))
+                return true;
+
+        }
+    }
+
+    return collision(poly1->getPoint(0),poly2) || collision(poly2->getPoint(0),poly1) ;
+}
 
 
 
