@@ -73,9 +73,13 @@
 		<Unit filename="src\engine\LX_Music.hpp" />
 		<Unit filename="src\engine\LX_Physics.cpp" />
 		<Unit filename="src\engine\LX_Physics.hpp" />
+		<Unit filename="src\engine\LX_Polygon.cpp" />
+		<Unit filename="src\engine\LX_Polygon.hpp" />
 		<Unit filename="src\engine\LX_Sound.hpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.cpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.hpp" />
+		<Unit filename="src\engine\LX_Vector2D.cpp" />
+		<Unit filename="src\engine\LX_Vector2D.hpp" />
 		<Unit filename="src\engine\LX_Window.cpp" />
 		<Unit filename="src\engine\LX_Window.hpp" />
 		<Unit filename="src\engine\LX_WindowManager.cpp" />
