@@ -518,7 +518,7 @@ bool LX_Physics::collision(const LX_Polygon *poly1, const LX_Polygon *poly2)
         }
     }
 
-    return collision(poly1->getPoint(0),poly2) || collision(poly2->getPoint(0),poly1) ;
+    return (collision(poly1->getPoint(0),poly2) || collision(poly2->getPoint(0),poly1));
 }
 
 
