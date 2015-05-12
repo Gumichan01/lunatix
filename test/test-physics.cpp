@@ -25,7 +25,7 @@ void test_collisionSeg(void);
 void test_collisionPointPolygon(void);
 void test_collisionCirclePolygon(void);
 void test_collisionRectPolygon(void);
-
+void test_collision2Polygon(void);
 
 int main(int argc, char **argv)
 {
@@ -54,6 +54,7 @@ int main(int argc, char **argv)
     test_collisionPointPolygon();
     test_collisionCirclePolygon();
     test_collisionRectPolygon();
+    test_collision2Polygon();
 
     LX_Quit();
 
@@ -216,7 +217,6 @@ void test_collision2Circle(void)
 
     cout << " = END TEST = " << endl;
 }
-
 
 
 void test_collision2Rect(void)
@@ -456,7 +456,6 @@ void test_Vector2D(void)
 }
 
 
-
 void test_collisionSeg(void)
 {
     LX_Point A,B,C,D,E,F;
@@ -651,8 +650,6 @@ void test_collisionCirclePolygon(void)
 }
 
 
-
-
 void test_collisionRectPolygon(void)
 {
     bool d;
@@ -721,7 +718,62 @@ void test_collisionRectPolygon(void)
     cout << " = END TEST = " << endl;
 }
 
+void test_collision2Polygon(void)
+{
+    bool d;
+    LX_Polygon poly(5);
+    LX_Polygon poly2(5);
+    LX_Polygon poly3(3);
+    LX_Polygon poly4(3);
 
+    poly.addPoint(10,5);
+    poly.addPoint(10,10);
+    poly.addPoint(5,5);
+    poly.addPoint(7,2);
+    poly.addPoint(6,5);
+
+    poly2.addPoint(9,6);
+    poly2.addPoint(9,9);
+    poly2.addPoint(6,4);
+    poly2.addPoint(6,3);
+    poly2.addPoint(5,6);
+
+    poly3.addPoint(0,0);
+    poly3.addPoint(32,32);
+    poly3.addPoint(0,32);
+
+    poly4.addPoint(2,2);
+    poly4.addPoint(2,3);
+    poly4.addPoint(3,4);
+
+
+    cout << " = TEST Collision Polygon/Polygon = " << endl;
+
+    d = collision(&poly,&poly2);
+
+    if(d != true)
+        cerr << "FAILURE - collision poly/poly2. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - collision poly/poly2 OK" << endl;
+
+
+    d = collision(&poly,&poly3);
+
+    if(d != true)
+        cerr << "FAILURE - collision poly/poly3. expected: TRUE ; got: FALSE" << endl;
+    else
+        cout << "SUCCESS - collision poly/poly3 OK" << endl;
+
+
+    d = collision(&poly,&poly4);
+
+    if(d != false)
+        cerr << "FAILURE - collision poly/poly4. expected: FALSE ; got: TRUE" << endl;
+    else
+        cout << "SUCCESS - collision poly/poly4 OK" << endl;
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
