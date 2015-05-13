@@ -563,6 +563,43 @@ void movePoly(LX_Poly *poly, const int vx, const int vy)
 
 
 
+void movePointTo(LX_Point *P, const int xpos, const int ypos)
+{
+    P->x = xpos;
+    P->y = ypos;
+}
+
+
+
+void moveRectTo(LX_AABB *rect, const int xpos, const int ypos)
+{
+    rect->x = xpos;
+    rect->y = ypos;
+}
+
+
+
+void moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
+{
+    C->xCenter = xpos;
+    C->yCenter = ypos;
+}
+
+
+
+void movePolyTo(LX_Poly *poly, const int xpos, const int ypos)
+{
+    movePointTo(poly->getPoint(0),xpos,ypos);
+    movePointTo(poly->getPoint(1),xpos,ypos);
+    movePointTo(poly->getPoint(2),xpos,ypos);
+
+    const unsigned int n = poly->numberOfEdges();
+
+    for(int i = 3; i < n; i++)
+    {
+        movePoint(poly->getPoint(i),xpos,ypos);
+    }
+}
 
 
 
