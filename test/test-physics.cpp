@@ -129,28 +129,28 @@ void test_collisionPointCircle(void)
 
     cout << " = TEST POINT/CIRCLE = " << endl;
 
-    d = collision(A.x,A.y,&c);
+    d = collisionPointCircle(A.x,A.y,&c);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE ; got : " << d << endl;
     else
         cout << "SUCCESS - collision, the point is the center : " << d << endl;
 
-    d = collision(B.x,B.y,&c);
+    d = collisionPointCircle(B.x,B.y,&c);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
-    d = collision(C.x,C.y,&c);
+    d = collisionPointCircle(C.x,C.y,&c);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
     else
         cout << "SUCCESS - collision point is in the circle" << endl;
 
-    d = collision(D.x,D.y,&c);
+    d = collisionPointCircle(D.x,D.y,&c);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE ; got : TRUE" << endl;
@@ -172,14 +172,14 @@ void test_collisionPointRect(void)
     B = {50,50};
     aabb = {40,40,30,30};
 
-    d = collision(A.x,A.y,&aabb);
+    d = collisionPointRect(A.x,A.y,&aabb);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
     else
         cout << "SUCCESS - point out of the rect " << endl;
 
-    d = collision(B.x,B.y,&aabb);
+    d = collisionPointRect(B.x,B.y,&aabb);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
@@ -200,7 +200,7 @@ void test_collision2Circle(void)
 
     cout << " = TEST CIRCLE/CIRCLE = " << endl;
 
-    d = collision(&A,&B);
+    d = collisionCircle(&A,&B);
 
     if(d != true)
         cerr << "FAILURE - collisoon A/B expected : TRUE; got : FALSE" << endl;
@@ -208,7 +208,7 @@ void test_collision2Circle(void)
         cout << "SUCCESS - collision between two circles A and B " << endl;
 
 
-    d = collision(&C,&B);
+    d = collisionCircle(&C,&B);
 
     if(d != false)
         cerr << "FAILURE - collisoon C/B expected : FALSE; got : TRUE" << endl;
@@ -230,7 +230,7 @@ void test_collision2Rect(void)
 
     cout << " = TEST RECT/RECT = " << endl;
 
-    d = collision(&R1,&R2);
+    d = collisionRect(&R1,&R2);
 
     if(d != true)
         cerr << "FAILURE - collisoon R1/R2 expected : TRUE; got : FALSE" << endl;
@@ -238,7 +238,7 @@ void test_collision2Rect(void)
         cout << "SUCCESS - collision R1/R2 OK " << endl;
 
 
-    d = collision(&R2,&R3);
+    d = collisionRect(&R2,&R3);
 
     if(d != true)
         cerr << "FAILURE - collisoon R2/R3 expected : TRUE; got : FALSE" << endl;
@@ -246,7 +246,7 @@ void test_collision2Rect(void)
         cout << "SUCCESS - collision R2/R3 OK " << endl;
 
 
-    d = collision(&R3,&R1);
+    d = collisionRect(&R3,&R1);
 
     if(d != false)
         cerr << "FAILURE - collisoon R3/R1 expected : FALSE; got : TRUE" << endl;
@@ -270,7 +270,7 @@ void test_collisionRectCircle(void)
 
     cout << " = TEST RECT/CIRCLE = " << endl;
 
-    d = collision(&A,&R1);
+    d = collisionCircleRect(&A,&R1);
 
     if(d != true)
         cerr << "FAILURE - collisoon A/R2 expected : TRUE; got : FALSE" << endl;
@@ -278,14 +278,14 @@ void test_collisionRectCircle(void)
         cout << "SUCCESS - collision A/R2 OK " << endl;
 
 
-    d = collision(&B,&R1);
+    d = collisionCircleRect(&B,&R1);
 
     if(d != true)
         cerr << "FAILURE - collisoon B/R2 expected : TRUE; got : FALSE" << endl;
     else
         cout << "SUCCESS - collision B/R2 OK " << endl;
 
-    d = collision(&C,&R1);
+    d = collisionCircleRect(&C,&R1);
 
     if(d != false)
         cerr << "FAILURE - collisoon C/R1 expected : FALSE; got : TRUE" << endl;
@@ -549,21 +549,21 @@ void test_collisionPointPolygon(void)
 
     cout << " = TEST Collision Point/Polygon = " << endl;
 
-    d = collision(&N,&poly);
+    d = collisionPointPoly(&N,&poly);
 
     if(d != false)
         cerr << "FAILURE - N in the polygon. expected: FALSE ; got: TRUE" << endl;
     else
         cout << "SUCCESS - N not in the polygon OK" << endl;
 
-    d = collision(&O,&poly);
+    d = collisionPointPoly(&O,&poly);
 
     if(d != true)
         cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
-    d = collision(&P,&poly);
+    d = collisionPointPoly(&P,&poly);
 
     if(d != true)
         cerr << "FAILURE - P not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -571,7 +571,7 @@ void test_collisionPointPolygon(void)
         cout << "SUCCESS - P in the polygon OK" << endl;
 
 
-    d = collision(&Q,&poly);
+    d = collisionPointPoly(&Q,&poly);
 
     if(d != true)
         cerr << "FAILURE - Q not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -579,7 +579,7 @@ void test_collisionPointPolygon(void)
         cout << "SUCCESS - Q in the polygon OK" << endl;
 
 
-    d = collision(&R,&poly);
+    d = collisionPointPoly(&R,&poly);
 
     if(d != false)
         cerr << "FAILURE - R in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -587,7 +587,7 @@ void test_collisionPointPolygon(void)
         cout << "SUCCESS - R not in the polygon OK" << endl;
 
 
-    d =  collision(&S,&poly);
+    d = collisionPointPoly(&S,&poly);
 
     if(d != false)
         cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -615,7 +615,7 @@ void test_collisionCirclePolygon(void)
 
     cout << " = TEST Collision Circle/Polygon = " << endl;
 
-    d = collision(&M,&poly);
+    d = collisionCirclePoly(&M,&poly);
 
     if(d != false)
         cerr << "FAILURE - M in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -623,7 +623,7 @@ void test_collisionCirclePolygon(void)
         cout << "SUCCESS - M not in the polygon OK" << endl;
 
 
-    d = collision(&S,&poly);
+    d = collisionCirclePoly(&S,&poly);
 
     if(d != false)
         cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -631,7 +631,7 @@ void test_collisionCirclePolygon(void)
         cout << "SUCCESS - S not in the polygon OK" << endl;
 
 
-    d = collision(&N,&poly);
+    d = collisionCirclePoly(&N,&poly);
 
     if(d != true)
         cerr << "FAILURE - N not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -639,7 +639,7 @@ void test_collisionCirclePolygon(void)
         cout << "SUCCESS - N in the polygon OK" << endl;
 
 
-    d = collision(&O,&poly);
+    d = collisionCirclePoly(&O,&poly);
 
     if(d != true)
         cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -672,7 +672,7 @@ void test_collisionRectPolygon(void)
 
     cout << " = TEST Collision Rect/Polygon = " << endl;
 
-    d = collision(&R1,&poly);
+    d = collisionRectPoly(&R1,&poly);
 
     if(d != false)
         cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -680,7 +680,7 @@ void test_collisionRectPolygon(void)
         cout << "SUCCESS - R1 not in the polygon OK" << endl;
 
     // A point of R2 in the polygon
-    d = collision(&R2,&poly);
+    d = collisionRectPoly(&R2,&poly);
 
     if(d != true)
         cerr << "FAILURE - test R2 touch the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -689,7 +689,7 @@ void test_collisionRectPolygon(void)
 
 
     // Some Segments of R3 in the polygon (no point inside)
-    d = collision(&R3,&poly);
+    d = collisionRectPoly(&R3,&poly);
 
     if(d != true)
         cerr << "FAILURE - test R3 touch the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -698,7 +698,7 @@ void test_collisionRectPolygon(void)
 
 
     // R4 into the polygon
-    d = collision(&R4,&poly);
+    d = collisionRectPoly(&R4,&poly);
 
     if(d != true)
         cerr << "FAILURE - test R4 into the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -707,7 +707,7 @@ void test_collisionRectPolygon(void)
 
 
     // The polygon into R5
-    d = collision(&R5,&poly);
+    d = collisionRectPoly(&R5,&poly);
 
     if(d != true)
         cerr << "FAILURE - test polygon into R5. expected: TRUE ; got: FALSE" << endl;
@@ -749,7 +749,7 @@ void test_collision2Polygon(void)
 
     cout << " = TEST Collision Polygon/Polygon = " << endl;
 
-    d = collision(&poly,&poly2);
+    d = collisionPoly(&poly,&poly2);
 
     if(d != true)
         cerr << "FAILURE - collision poly/poly2. expected: TRUE ; got: FALSE" << endl;
@@ -757,7 +757,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - collision poly/poly2 OK" << endl;
 
 
-    d = collision(&poly,&poly3);
+    d = collisionPoly(&poly,&poly3);
 
     if(d != true)
         cerr << "FAILURE - collision poly/poly3. expected: TRUE ; got: FALSE" << endl;
@@ -765,7 +765,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - collision poly/poly3 OK" << endl;
 
 
-    d = collision(&poly,&poly4);
+    d = collisionPoly(&poly,&poly4);
 
     if(d != false)
         cerr << "FAILURE - collision poly/poly4. expected: FALSE ; got: TRUE" << endl;
