@@ -103,7 +103,7 @@ float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 
 
 /**
-*	@fn bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect)
+*	@fn bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect)
 *
 *	Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
@@ -114,7 +114,7 @@ float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect)
+bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect)
 {
 
     if( rect == NULL || x_pos <= rect->x || y_pos >= (rect->y + rect->h) ||
@@ -128,9 +128,9 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_AABB *rect
 
 
 
-bool LX_Physics::collision(const LX_Point *p,const LX_AABB *rect)
+bool LX_Physics::collisionPointRect(const LX_Point *p,const LX_AABB *rect)
 {
-    return collision(p->x,p->y,rect);
+    return collisionPointRect(p->x,p->y,rect);
 }
 
 
@@ -146,7 +146,7 @@ bool LX_Physics::collision(const LX_Point *p,const LX_AABB *rect)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *circle)
+bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle)
 {
 
     if( circle == NULL ||
@@ -161,16 +161,16 @@ bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *ci
 
 
 
-bool LX_Physics::collision(const LX_Point *p, const LX_Circle *circle)
+bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle)
 {
-    return collision(p->x,p->y,circle);
+    return collisionPointCircle(p->x,p->y,circle);
 }
 
 
 
 
 /**
-*	@fn bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
+*	@fn bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
 *
 *	Check the collision between two Axis Aligned Bouding Box (AABB)
 *
@@ -180,7 +180,7 @@ bool LX_Physics::collision(const LX_Point *p, const LX_Circle *circle)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
+bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
 {
 
     if( rect1 == NULL || rect2 == NULL ||
@@ -194,7 +194,7 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 }
 
 /**
-*	@fn bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
+*	@fn bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2)
 *
 *	Check the collision between two circles
 *
@@ -204,7 +204,7 @@ bool LX_Physics::collision(const LX_AABB *rect1, const LX_AABB *rect2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
+bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2)
 {
     if(circle1 == NULL || circle2 == NULL)
         return false;
@@ -216,7 +216,7 @@ bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 
 
 /**
-*	@fn bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
+*	@fn bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
 *
 *	Check the collision between a circle and the [AB] segment
 *
@@ -229,7 +229,7 @@ bool LX_Physics::collision(const LX_Circle *circle1, const LX_Circle *circle2)
 *   @warning If at least one parameter is NULL, the behaviour is undefined
 *
 */
-bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
+bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
 {
     LX_Vector2D AB,AC,BC;
     LX_Point M;
@@ -240,7 +240,7 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
     double t;
     double x,y;
 
-    if( collision(A,circle) || collision(B,circle) )
+    if( collisionPointCircle(A,circle) || collisionPointCircle(B,circle) )
         return true;
 
 
@@ -275,13 +275,13 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 
     M = {(int) x, (int) y};     // M is the projection point of O
 
-    return collision(&M, circle);
+    return collisionPointCircle(&M, circle);
 
 }
 
 
 /**
-*	@fn bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
+*	@fn bool LX_Physics::collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect)
 *
 *	Check the collision between a circle and a AABB
 *
@@ -293,10 +293,10 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_Point *A, const LX_
 *   @warning If at least one parameter is NULL, the behaviour is undefined
 *
 */
-bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
+bool LX_Physics::collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect)
 {
     // Check if the center of the circle is completly into the AABB
-    if( collision(circle->xCenter, circle->yCenter,rect))
+    if( collisionPointRect(circle->xCenter, circle->yCenter,rect))
     {
         return true;
     }
@@ -322,7 +322,7 @@ bool LX_Physics::collision(const LX_Circle *circle, const LX_AABB *rect)
 
     for(int i=0; i< RECT_SIDES ;i++)
     {
-        if(collision(circle, &sides[i][0], &sides[i][1]))
+        if(collisionSegCircle(circle, &sides[i][0], &sides[i][1]))
             return true;
     }
 
@@ -362,7 +362,7 @@ bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
 
 
 
-bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
+bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
 {
     int count = 0;
     LX_Point I;
@@ -393,12 +393,12 @@ bool LX_Physics::collision(const LX_Point *P, const LX_Polygon *poly)
 
 
 
-bool LX_Physics::collision(const LX_Circle *C, const LX_Polygon *poly)
+bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
 {
     const LX_Point P = {C->xCenter,C->yCenter};
     LX_Point A,B;
 
-    if(collision(&P,poly) == true)
+    if(collisionPointPoly(&P,poly) == true)
         return true;
 
     const unsigned int n = poly->numberOfEdges();
@@ -419,13 +419,13 @@ bool LX_Physics::collision(const LX_Circle *C, const LX_Polygon *poly)
             B.y = poly->getPoint(i+1)->y;
         }
 
-        if(collision(C,&A,&B) == true)
+        if(collisionSegCircle(C,&A,&B) == true)
             return true;
     }
 }
 
 
-bool LX_Physics::collision(const LX_AABB *rect, const LX_Polygon *poly)
+bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 {
     LX_Point A,B,C,D;
     LX_Point E,F;
@@ -460,17 +460,17 @@ bool LX_Physics::collision(const LX_AABB *rect, const LX_Polygon *poly)
             intersectSegment(&C,&D,&E,&F) || intersectSegment(&D,&A,&E,&F))
             return true;
 
-        if(collision(&E,rect))
+        if(collisionPointRect(&E,rect))
             return true;
     }
 
-    return(collision(&A,poly) || collision(&B,poly)
-            || collision(&C,poly) || collision(&A,poly));
+    return(collisionPointPoly(&A,poly) || collisionPointPoly(&B,poly)
+            || collisionPointPoly(&C,poly) || collisionPointPoly(&A,poly));
 }
 
 
 
-bool LX_Physics::collision(const LX_Polygon *poly1, const LX_Polygon *poly2)
+bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 {
     const unsigned int polySize1 = poly1->numberOfEdges();
     const unsigned int polySize2 = poly2->numberOfEdges();
@@ -518,7 +518,7 @@ bool LX_Physics::collision(const LX_Polygon *poly1, const LX_Polygon *poly2)
         }
     }
 
-    return (collision(poly1->getPoint(0),poly2) || collision(poly2->getPoint(0),poly1));
+    return (collisionPointPoly(poly1->getPoint(0),poly2) || collisionPointPoly(poly2->getPoint(0),poly1));
 }
 
 

@@ -48,16 +48,16 @@ namespace LX_Physics{
         unsigned int euclide_square_distance( LX_Point *p1, LX_Point *p2);
         float euclide_distance(LX_Point *p1, LX_Point *p2);
 
-        bool collision(const int x_pos, const int y_pos, const LX_AABB *rect);              // collision point/AABB
-        bool collision(const LX_Point *p,const LX_AABB *rect);
+        bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect);              // collision point/AABB
+        bool collisionPointRect(const LX_Point *p,const LX_AABB *rect);
 
-        bool collision(const int x_pos, const int y_pos, const LX_Circle *circle);          // collision point/circle
-        bool collision(const LX_Point *p, const LX_Circle *circle);
+        bool collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle);          // collision point/circle
+        bool collisionPointCircle(const LX_Point *p, const LX_Circle *circle);
 
-        bool collision(const LX_AABB *rect1, const LX_AABB *rect2);                         // collision AABB/AABB
-        bool collision(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
-        bool collision(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
-        bool collision(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
+        bool collisionRect(const LX_AABB *rect1, const LX_AABB *rect2);                         // collision AABB/AABB
+        bool collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2);                 // collision circle/circle
+        bool collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);      // collision circle/segment
+        bool collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect);                       // collision circle/AABB
 
 
         bool intersectSegLine(const LX_Point *A, const LX_Point *B,
@@ -65,11 +65,11 @@ namespace LX_Physics{
         bool intersectSegment(const LX_Point *A, const LX_Point *B,
                                 const LX_Point *C, const LX_Point *D);                      // collision segment/segment
 
-        bool collision(const LX_Point *P, const LX_Polygon *poly);                          // collision point/polygon
-        bool collision(const LX_Circle *C, const LX_Polygon *poly);                         // collision circle/polygon
+        bool collisionPointPoly(const LX_Point *P, const LX_Polygon *poly);                          // collision point/polygon
+        bool collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly);                         // collision circle/polygon
 
-        bool collision(const LX_AABB *rect, const LX_Polygon *poly);                        // collision AABB/polygon
-        bool collision(const LX_Polygon *poly1, const LX_Polygon *poly2);                   // collision polygon/polygon
+        bool collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly);                        // collision AABB/polygon
+        bool collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2);                   // collision polygon/polygon
 
 };
 
