@@ -523,7 +523,7 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
 
 
-void movePoint(LX_Point *P, const int vx, const int vy)
+void LX_Physics::movePoint(LX_Point *P, const int vx, const int vy)
 {
     P->x += vx;
     P->y += vy;
@@ -531,7 +531,7 @@ void movePoint(LX_Point *P, const int vx, const int vy)
 
 
 
-void moveRect(LX_AABB *rect, const int vx, const int vy)
+void LX_Physics::moveRect(LX_AABB *rect, const int vx, const int vy)
 {
     rect->x += vx;
     rect->y += vy;
@@ -539,7 +539,7 @@ void moveRect(LX_AABB *rect, const int vx, const int vy)
 
 
 
-void moveCircle(LX_Circle *C, const int vx, const int vy)
+void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
 {
     C->xCenter += vx;
     C->yCenter += vy;
@@ -547,7 +547,7 @@ void moveCircle(LX_Circle *C, const int vx, const int vy)
 
 
 
-void movePoly(LX_Poly *poly, const int vx, const int vy)
+void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 {
     movePoint(poly->getPoint(0),vx,vy);
     movePoint(poly->getPoint(1),vx,vy);
@@ -563,7 +563,7 @@ void movePoly(LX_Poly *poly, const int vx, const int vy)
 
 
 
-void movePointTo(LX_Point *P, const int xpos, const int ypos)
+void LX_Physics::movePointTo(LX_Point *P, const int xpos, const int ypos)
 {
     P->x = xpos;
     P->y = ypos;
@@ -571,7 +571,7 @@ void movePointTo(LX_Point *P, const int xpos, const int ypos)
 
 
 
-void moveRectTo(LX_AABB *rect, const int xpos, const int ypos)
+void LX_Physics::moveRectTo(LX_AABB *rect, const int xpos, const int ypos)
 {
     rect->x = xpos;
     rect->y = ypos;
@@ -579,7 +579,7 @@ void moveRectTo(LX_AABB *rect, const int xpos, const int ypos)
 
 
 
-void moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
+void LX_Physics::moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
 {
     C->xCenter = xpos;
     C->yCenter = ypos;
@@ -587,7 +587,7 @@ void moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
 
 
 
-void movePolyTo(LX_Poly *poly, const int xpos, const int ypos)
+void LX_Physics::movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)
 {
     movePointTo(poly->getPoint(0),xpos,ypos);
     movePointTo(poly->getPoint(1),xpos,ypos);
@@ -597,7 +597,7 @@ void movePolyTo(LX_Poly *poly, const int xpos, const int ypos)
 
     for(int i = 3; i < n; i++)
     {
-        movePoint(poly->getPoint(i),xpos,ypos);
+        movePointTo(poly->getPoint(i),xpos,ypos);
     }
 }
 

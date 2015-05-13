@@ -74,12 +74,12 @@ namespace LX_Physics{
         void movePoint(LX_Point *P, const int vx, const int vy);
         void moveRect(LX_AABB *rect, const int vx, const int vy);
         void moveCircle(LX_Circle *C, const int vx, const int vy);
-        void movePoly(LX_Poly *poly, const int vx, const int vy);
+        void movePoly(LX_Polygon *poly, const int vx, const int vy);
 
         void movePointTo(LX_Point *P, const int xpos, const int ypos);
         void moveRectTo(LX_AABB *rect, const int xpos, const int ypos);
         void moveCircleTo(LX_Circle *C, const int xpos, const int ypos);
-        void moveCPolyTo(LX_Poly *poly, const int xpos, const int ypos);
+        void movePolyTo(LX_Polygon *poly, const int xpos, const int ypos);
 
 };
 
