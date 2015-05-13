@@ -523,14 +523,43 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
 
 
+void movePoint(LX_Point *P, const int vx, const int vy)
+{
+    P->x += vx;
+    P->y += vy;
+}
 
 
 
+void moveRect(LX_AABB *rect, const int vx, const int vy)
+{
+    rect->x += vx;
+    rect->y += vy;
+}
 
 
 
+void moveCircle(LX_Circle *C, const int vx, const int vy)
+{
+    C->xCenter += vx;
+    C->yCenter += vy;
+}
 
 
+
+void movePoly(LX_Poly *poly, const int vx, const int vy)
+{
+    movePoint(poly->getPoint(0),vx,vy);
+    movePoint(poly->getPoint(1),vx,vy);
+    movePoint(poly->getPoint(2),vx,vy);
+
+    const unsigned int n = poly->numberOfEdges();
+
+    for(int i = 3; i < n; i++)
+    {
+        movePoint(poly->getPoint(i),vx,vy);
+    }
+}
 
 
 
