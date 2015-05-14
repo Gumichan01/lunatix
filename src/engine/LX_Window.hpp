@@ -92,7 +92,7 @@ namespace LX_Graphics{
         void setTitle(std::string title);
 
         // Put the sprite on the screen
-        bool put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
+        bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
         bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
 
         void setWindowSize(int w, int h);

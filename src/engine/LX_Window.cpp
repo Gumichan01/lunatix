@@ -280,7 +280,7 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    *   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     *
     *   This function puts the surface on the surface according to its position and the area to put on it
     *
@@ -292,7 +292,7 @@ namespace LX_Graphics{
     *
     *   @return TRUE If the image was put with success, FALSE otherwise
     */
-    bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     {
         int err = 0;
         SDL_Rect offset;
