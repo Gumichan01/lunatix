@@ -44,12 +44,12 @@
 
 
  You just need to execute the following command :
-	$make
+ 	$make
 
  So, you can launch the demo program
 
  To test the engine, execute the following command :
-	$ ./test/test.sh
+ 	$./test/test.sh
 
  You need to be on the root directory to launch the script.
  Otherwise, th script will not work.
