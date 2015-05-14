@@ -386,7 +386,7 @@ namespace LX_Graphics{
     bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
                         const double angle)
     {
-        return(SDL_RenderCopyEx(renderer,origin,area,pos, angle, NULL,SDL_FLIP_NONE) == 0);
+        return(SDL_RenderCopyEx(renderer,origin,area,pos, (-angle), NULL,SDL_FLIP_NONE) == 0);
     }
 
 
