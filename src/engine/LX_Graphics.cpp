@@ -30,12 +30,7 @@
 #include "LX_Error.hpp"
 
 
-/**
-*   @namespace LX_Graphics
-*
-*   @brief The graphics module
-*
-*/
+
 namespace LX_Graphics{
 
 
@@ -52,7 +47,7 @@ namespace LX_Graphics{
     *   @note If you want to load a .bmp file and use the transparency,
     *           please use load_surfaceFromBMP and set_alpha()
     *
-    *   @warning When you call this function, the format optimization includes the alpha canal.
+    *   @warning When you call this function, the format optimization includes the alpha channel.
     *               No alpha needs to be set on the surface after that, except if you want to modify it
     *
     */
@@ -102,7 +97,7 @@ namespace LX_Graphics{
     *   specified by its ID
     *
     *   @param target The surface you want to use to create the texture
-    *   @param id The ID of the window you create your texture from
+    *   @param id The ID of the window renderer you create your texture from
     *
     *   @return A new pointer to the texture if the loading is successful, NULL otherwise
     *
@@ -130,7 +125,7 @@ namespace LX_Graphics{
     *   specified by its ID
     *
     *   @param filename The name of the file you need to use for the texture creation
-    *   @param id The ID of the window you create your texture from
+    *   @param id The ID of the window renderer you create your texture from
     *
     *   @return A pointer to a SDL_Texture if the loading works, NULL otherwise
     *
@@ -161,7 +156,7 @@ namespace LX_Graphics{
     *   Loads create a texture from a surface using the renderer of the window
     *
     *   @param filename The name of the file you need to use for the texture creation
-    *   @param w The window you create your texture from
+    *   @param w The window renderer you create your texture from
     *
     *   @return A pointer to a SDL_Texture if the loading works, NULL otherwise
     *
@@ -192,9 +187,9 @@ namespace LX_Graphics{
     *   This function set the alpha value on a SDL_surface
     *
     *   @param image The surface
-    *   @param red The the red color canal of the future transparent color
-    *   @param green The the green color canal of the future transparent color
-    *   @param blue The the blue color canal of the future transparent color
+    *   @param red The the red component of the future transparent color
+    *   @param green The the green component of the future transparent color
+    *   @param blue The the blue component of the future transparent color
     *
     *   @return TRUE If the transparency was done without problem, FALSE otherwise
     *
@@ -203,10 +198,7 @@ namespace LX_Graphics{
     */
     bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
     {
-        if(SDL_SetColorKey(image,SDL_TRUE, SDL_MapRGB(image->format,red,green,blue)) == -1)
-            return false;
-
-        return true;
+        return (SDL_SetColorKey(image,SDL_TRUE, SDL_MapRGB(image->format,red,green,blue)) == 0);
     }
 
 };

@@ -34,7 +34,14 @@ struct SDL_Renderer;
 struct SDL_Surface;
 
 
-
+/**
+*
+*   @namespace LX_Graphics
+*   @brief The graphics module
+*
+*   This namespace describes LX_Graphics, the graphics module of Lunatix Engine.
+*
+*/
 namespace LX_Graphics{
 
 
