@@ -11,6 +11,9 @@ using namespace LX_Graphics;
 
 void test_window1(LX_Window *win);
 void test_window2(void);
+void test_window3(void);
+void test_rendering(LX_Window *win);
+
 
 
 int main(int argc, char **argv)
@@ -32,7 +35,7 @@ int main(int argc, char **argv)
 
     test_window1(w);
     test_window2();
-
+    test_rendering(w);
 
     cout << " ==== END Rendering ==== " << endl;
 }
@@ -119,7 +122,51 @@ void test_window2(void)
 }
 
 
+void test_window3(void)
+{
 
+}
+
+
+void test_rendering(LX_Window *win)
+{
+
+    std::string name = "data/cb.bmp";
+
+    SDL_Texture *st = NULL;
+    SDL_Rect pos = {100,100,150,120};
+
+    if(win == NULL)
+    {
+        cerr << "FAILURE - The window was not initialized" << endl;
+        return;
+    }
+    else
+        cout << "SUCCESS - The window exists" << endl;
+
+    st = SDL_CreateTextureFromSurface(win->getRenderer(),loadSurface(name.c_str()));
+
+    if(st == NULL)
+        cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - the texture was loaded with success" << endl;
+
+
+    if(win->putTexture(st,NULL,&pos) == false)
+        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - Texture on the renderer" << endl;
+
+
+    win->updateRenderer();
+
+    SDL_Delay(2000);
+
+    win->clearRenderer();
+
+    /// @todo test with rotation
+
+}
 
 
 
