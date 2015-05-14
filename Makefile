@@ -159,7 +159,7 @@ LX_Vector2D.o : $(LUNATIX_PATH)LX_Vector2D.cpp $(LUNATIX_PATH)LX_Vector2D.hpp
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-renderer
 
 
 test-init : $(OBJS) test-init.o
@@ -198,6 +198,16 @@ test-physics : $(OBJS) test-physics.o LX_Polygon.o LX_Vector2D.o
 
 
 test-physics.o : $(TEST_PATH)test-physics.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
+
+
+test-renderer : $(OBJS) test-renderer.o LX_Window.o LX_Graphics.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-renderer.o : $(TEST_PATH)test-renderer.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
