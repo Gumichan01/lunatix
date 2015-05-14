@@ -76,10 +76,30 @@ namespace LX_Graphics{
     }
 
 
+
+    /**
+    *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
+    *
+    *   Loads create a texture from a surface using the renderer of the window
+    *
+    *   @param target The surface you want to use to create the texture
+    *   @param w The window you create your texture from
+    *
+    *   @return A new pointer to the texture if the loading is successful, NULL otherwise
+    *
+    */
+    SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
+    {
+        return SDL_CreateTextureFromSurface(w->getRenderer(),target);
+    }
+
+
+
     /**
     *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
     *
-    *   Loads create a texture from a surface
+    *   Loads create a texture from a surface using the renderer of the window
+    *   specified by its ID
     *
     *   @param target The surface you want to use to create the texture
     *   @param id The ID of the window you create your texture from
