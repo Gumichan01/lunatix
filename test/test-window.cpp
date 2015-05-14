@@ -134,13 +134,13 @@ void test_window3(void)
         cout << "SUCCESS - the surface is ready" << endl;
 
 
-    if(win3.getWidth() != 64)
+    if(win3.getWidth() != 256)
         cerr << "FAILURE - width ; expected : 64; got: " << win3.getWidth() << endl;
     else
         cout << "SUCCESS - width 64" << endl;
 
 
-    if(win3.getHeight() != 32)
+    if(win3.getHeight() != 256)
         cerr << "FAILURE - height ; expected : 32; got: " << win3.getHeight() << endl;
     else
         cout << "SUCCESS - height 32" << endl;
