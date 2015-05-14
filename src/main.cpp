@@ -72,11 +72,11 @@ int main ( int argc, char** argv )
     // initialization
     try
     {
-        window = new LX_Window();
+        window = new LX_Window(LX_WINDOW_RENDERING);
 
         // getWindowManager() and LX_WindowManager::getInstance() are the same thing
         getWindowManager()->addWindow(window);
-        LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,SDL_WINDOW_RESIZABLE));
+        LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,LX_WINDOW_RENDERING,SDL_WINDOW_RESIZABLE));
 
     }
     catch(LX_WindowException & win_ex)
