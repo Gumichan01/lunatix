@@ -48,7 +48,11 @@
 
  So, you can launch the demo program
 
+ To test the engine, execute the following command :
+	$ ./test/test.sh
 
+ You need to be on the root directory to launch the script.
+ Otherwise, th script will not work.
 
 Warning : No static or shared libraries are provided when you generate the executable file.
 However, all SDL2 and Lua files (.lib, .a, .dll for win32 version, .so for Lua) are provided.
