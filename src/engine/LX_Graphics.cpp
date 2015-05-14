@@ -76,10 +76,30 @@ namespace LX_Graphics{
     }
 
 
+
+    /**
+    *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
+    *
+    *   Loads create a texture from a surface using the renderer of the window
+    *
+    *   @param target The surface you want to use to create the texture
+    *   @param w The window you create your texture from
+    *
+    *   @return A new pointer to the texture if the loading is successful, NULL otherwise
+    *
+    */
+    SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
+    {
+        return SDL_CreateTextureFromSurface(w->getRenderer(),target);
+    }
+
+
+
     /**
     *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
     *
-    *   Loads create a texture from a surface
+    *   Loads create a texture from a surface using the renderer of the window
+    *   specified by its ID
     *
     *   @param target The surface you want to use to create the texture
     *   @param id The ID of the window you create your texture from
@@ -106,7 +126,8 @@ namespace LX_Graphics{
     /**
     *   @fn SDL_Texture * loadTextureFromFile(std::string filename, int id)
     *
-    *   Load a new texture from a file
+    *   Load a new texture from a file using the renderer of the window
+    *   specified by its ID
     *
     *   @param filename The name of the file you need to use for the texture creation
     *   @param id The ID of the window you create your texture from
@@ -133,6 +154,36 @@ namespace LX_Graphics{
         return tmpT;
     }
 
+
+    /**
+    *   @fn SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
+    *
+    *   Loads create a texture from a surface using the renderer of the window
+    *
+    *   @param filename The name of the file you need to use for the texture creation
+    *   @param w The window you create your texture from
+    *
+    *   @return A pointer to a SDL_Texture if the loading works, NULL otherwise
+    *
+    */
+    SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
+    {
+        SDL_Surface *tmpS = NULL;
+        SDL_Texture *tmpT = NULL;
+
+        tmpS = loadSurface(filename.c_str());
+
+        if(tmpS == NULL)
+        {
+            return NULL;
+        }
+
+        tmpT = loadTextureFromSurface(tmpS,w);
+
+        SDL_FreeSurface(tmpS);
+
+        return tmpT;
+    }
 
     /**
     *

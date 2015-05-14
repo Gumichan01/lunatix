@@ -62,14 +62,16 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn LX_Window::LX_Window()
+    *   @fn LX_Window::LX_Window(const Uint32 mode)
     *
     *   Create the window with the default configuration
+    *
+    *   @param mode kind of display (With surface or renderer)
     *
     *   @exception LX_WindowException
     *
     */
-    LX_Window::LX_Window()
+    LX_Window::LX_Window(const Uint32 mode)
     {
         Uint32 option_flag = 0x00000000;
         Uint32 position_flag = 0x00000000;
@@ -111,11 +113,14 @@ namespace LX_Graphics{
             throw LX_WindowException(SDL_GetError());
         }
 
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-
-        if(renderer == NULL)
+        if(mode == LX_WINDOW_RENDERING)
         {
-            std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+            if(renderer == NULL)
+            {
+                std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+            }
         }
 
         init2();
@@ -123,14 +128,17 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn LX_Window::LX_Window(std::string title)
+    *   @fn LX_Window::LX_Window(std::string title, const Uint32 mode)
     *
     *   Create the window setting the title
+    *
+    *   @param title The title of the window
+    *   @param mode kind of display (With surface or renderer)
     *
     *   @note The default configuration is used during the creation of the window
     *
     */
-    LX_Window::LX_Window(std::string title)
+    LX_Window::LX_Window(std::string title, const Uint32 mode)
     {
         int w,h;
         Uint32 flag = 0x00000000;
@@ -146,24 +154,26 @@ namespace LX_Graphics{
         if(config->getOpenGL_Flag() == 1)
             flag |= SDL_WINDOW_OPENGL;
 
-        init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,flag);
+        init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag);
     }
 
 
     /**
-    *   @fn LX_Window::LX_Window(SDL_Window *sdlWin)
+    *   @fn LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
     *
     *   Create the window with an already set window
     *
     *   @param sdlWin The SDL_Window (must be a non-NULL pointer)
+    *   @param mode kind of display (With surface or renderer)
     *
     *   @note This constructor does not use the LX_config class
     *   @warning If you contruct the LX_Window object with a NULL pointer, an exception will occur
     *
     */
-    LX_Window::LX_Window(SDL_Window *sdlWin)
+    LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
     {
         window = sdlWin;
+
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
@@ -177,7 +187,7 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag)
+    *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
     *
     *   Create the window with custom configuration
     *
@@ -186,6 +196,7 @@ namespace LX_Graphics{
     *   @param posY The Y position of the window on the desktop
     *   @param w The width of the window
     *   @param h The height of the window
+    *   @param mode kind of display (With surface or renderer)
     *   @param flag One of these following flags :
     *           LX_GRAPHICS_FULLSCREEN_DESKTOP
     *           LX_GRAPHICS_FULLSCREEN
@@ -195,9 +206,9 @@ namespace LX_Graphics{
     *   @note This constructor does not use the LX_config class
     *
     */
-    LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag)
+    LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
     {
-        init(title.c_str(),posX,posY,w,h,flag);
+        init(title.c_str(),posX,posY,w,h,mode,flag);
     }
 
 
@@ -218,7 +229,7 @@ namespace LX_Graphics{
     *   @exception LX_WindowException If the window initialisation fails.
     *
     */
-    void LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
+    void LX_Window::init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
     {
         window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
 
@@ -228,11 +239,14 @@ namespace LX_Graphics{
             throw LX_WindowException(SDL_GetError());
         }
 
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-
-        if(renderer == NULL)
+        if(mode == LX_WINDOW_RENDERING)
         {
-            std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+            if(renderer == NULL)
+            {
+                std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+            }
         }
 
         init2();
@@ -280,7 +294,7 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    *   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     *
     *   This function puts the surface on the surface according to its position and the area to put on it
     *
@@ -292,7 +306,7 @@ namespace LX_Graphics{
     *
     *   @return TRUE If the image was put with success, FALSE otherwise
     */
-    bool LX_Window::put_surface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     {
         int err = 0;
         SDL_Rect offset;
@@ -329,7 +343,7 @@ namespace LX_Graphics{
     /**
     *   @fn bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
     *
-    *   This function puts the texture on the window according to its position and the area to put on it
+    *   This function puts an area of the texture on the window
     *
     *   @param origin The texture to put
     *   @param area The area of the surface to put on the renderer
@@ -350,6 +364,31 @@ namespace LX_Graphics{
 
         return true;
     }
+
+
+    /**
+    *   @fn bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,const double angle)
+    *
+    *   This function puts an area of the texture on the window and optionnaly rotate it
+    *
+    *   @param origin The texture to put
+    *   @param area The area of the surface to put on the renderer
+    *   @param pos The position of what you want to put
+    *   @param angle an angle in degrees that indicate the rotation
+    *
+    *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
+    *               to display the texture according to its dimension
+    *
+    *   @return TRUE If the texture was put with success, FALSE otherwise
+    *
+    */
+    bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
+                        const double angle)
+    {
+        return(SDL_RenderCopyEx(renderer,origin,area,pos, angle, NULL,SDL_FLIP_NONE) == 0);
+    }
+
 
 
     /**
