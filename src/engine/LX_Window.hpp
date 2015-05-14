@@ -32,6 +32,9 @@ struct SDL_Surface;
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window */
 
+#define LX_WINDOW_SURFACE 0x01                                          /**< Use surface */
+#define LX_WINDOW_RENDERING 0x10                                        /**< Use Rendering */
+#define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
 namespace LX_Graphics{
 
@@ -79,15 +82,16 @@ namespace LX_Graphics{
         int originalWidth;      /**< The width of the window */
         int originalHeight;     /**< The height of the window */
 
-        void init(std::string title, int posX, int posY, int w, int h, Uint32 flag);
+        void init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag);
         void init2();
 
         public :
 
-        LX_Window();                    // The default constructor with default parameters
-        LX_Window(SDL_Window *sdlWin);
-        LX_Window(std::string title);
-        LX_Window(std::string title, int posX, int posY, int w, int h, Uint32 flag);
+        LX_Window(const Uint32 mode);
+        LX_Window(SDL_Window *sdlWin, const Uint32 mode);
+        LX_Window(std::string title, const Uint32 mode);
+        LX_Window(std::string title, int posX, int posY, int w, int h,
+                    const Uint32 mode, const Uint32 flag);
 
         void setTitle(std::string title);
 
