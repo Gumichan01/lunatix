@@ -36,6 +36,8 @@ struct SDL_Surface;
 #define LX_WINDOW_RENDERING 0x10                                        /**< Use Rendering */
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
+
+
 namespace LX_Graphics{
 
 
@@ -67,10 +69,10 @@ namespace LX_Graphics{
     *
     *   This class describes the window.
     *
-    *   @note By default, the constructor of the LX_window class gets the different informations
-    *          from the LX_Configuration class
+    *   @note By default, the constructor of the LX_window class gets informations
+    *          from the configuration file
     *
-    *   @warning The LX_Window class must be defined only after you initialized the LX_engine (calling LX_Init())
+    *   @warning The LX_Window class must be defined only after you initialized the engine (calling LX_Init())
     *   @warning A LX_WindowException may be occured if the window creation fails
     *
     */

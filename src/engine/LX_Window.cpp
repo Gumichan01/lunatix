@@ -66,7 +66,9 @@ namespace LX_Graphics{
     *
     *   Create the window with the default configuration
     *
-    *   @param mode kind of display (With surface or renderer)
+    *   @param mode the display mode :
+    *           LX_WINDOW_SURFACE : to use surfaces
+    *           LX_WINDOW_RENDERING : to use the renderer
     *
     *   @exception LX_WindowException
     *
@@ -133,7 +135,9 @@ namespace LX_Graphics{
     *   Create the window setting the title
     *
     *   @param title The title of the window
-    *   @param mode kind of display (With surface or renderer)
+    *   @param mode the display mode :
+    *           LX_WINDOW_SURFACE : to use surfaces
+    *           LX_WINDOW_RENDERING : to use the renderer
     *
     *   @note The default configuration is used during the creation of the window
     *
@@ -164,7 +168,9 @@ namespace LX_Graphics{
     *   Create the window with an already set window
     *
     *   @param sdlWin The SDL_Window (must be a non-NULL pointer)
-    *   @param mode kind of display (With surface or renderer)
+    *   @param mode the display mode :
+    *           LX_WINDOW_SURFACE : to use surfaces
+    *           LX_WINDOW_RENDERING : to use the renderer
     *
     *   @note This constructor does not use the LX_config class
     *   @warning If you contruct the LX_Window object with a NULL pointer, an exception will occur
@@ -196,7 +202,9 @@ namespace LX_Graphics{
     *   @param posY The Y position of the window on the desktop
     *   @param w The width of the window
     *   @param h The height of the window
-    *   @param mode kind of display (With surface or renderer)
+    *   @param mode the display mode :
+    *           LX_WINDOW_SURFACE : to use surfaces
+    *           LX_WINDOW_RENDERING : to use the renderer
     *   @param flag One of these following flags :
     *           LX_GRAPHICS_FULLSCREEN_DESKTOP
     *           LX_GRAPHICS_FULLSCREEN
@@ -213,7 +221,7 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn LX_Window::init(std::string title, int posX, int posY, int w, int h, Uint32 flag)
+    *   @fn LX_Window::init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
     *
     *   Create the window with custom configuration
     *
@@ -222,6 +230,9 @@ namespace LX_Graphics{
     *   @param posY The Y position of the window on the monitor
     *   @param w The width of the window
     *   @param h The height of the window
+    *   @param mode the display mode :
+    *           LX_WINDOW_SURFACE : to use surfaces
+    *           LX_WINDOW_RENDERING : to use the renderer
     *   @param flag It is the same kind of flag used in LX_Window::LX_Window()
     *
     *   @note This constructor does not use the LX_config class
@@ -296,7 +307,7 @@ namespace LX_Graphics{
     /**
     *   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     *
-    *   This function puts the surface on the surface according to its position and the area to put on it
+    *   This function puts a area of the surface on the window surface at a specified position
     *
     *   @param image The surface to put
     *   @param area The area of the surface to put on the screen
@@ -359,10 +370,7 @@ namespace LX_Graphics{
     bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
     {
 
-        if(SDL_RenderCopy(renderer,origin,area,pos) < 0)
-            return false;
-
-        return true;
+        return(SDL_RenderCopy(renderer,origin,area,pos) == 0);
     }
 
 
