@@ -159,7 +159,7 @@ LX_Vector2D.o : $(LUNATIX_PATH)LX_Vector2D.cpp $(LUNATIX_PATH)LX_Vector2D.hpp
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-renderer
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window
 
 
 test-init : $(OBJS) test-init.o
@@ -202,12 +202,12 @@ test-physics.o : $(TEST_PATH)test-physics.cpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
 
-test-renderer : $(OBJS) test-renderer.o LX_Window.o LX_Graphics.o
+test-window : $(OBJS) test-window.o LX_Window.o LX_Graphics.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
-test-renderer.o : $(TEST_PATH)test-renderer.cpp
+test-window.o : $(TEST_PATH)test-window.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
@@ -218,6 +218,7 @@ clean :
 
 clean-test :
 	@echo "Delete test object files"
+	@rm -f *.o
 	@rm -f test-* 
 
 clean-target : clean
