@@ -114,9 +114,12 @@ void test_window2(void)
 
 void test_window3(void)
 {
-    LX_Window win3("Hello",512,128,64,32,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
+    LX_Window win3("Hello",512,128,256,256,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
+    std::string name = "data/cb.bmp";
+    SDL_Surface *sf = NULL;
+    SDL_Rect pos = {100,100,150,120};
 
-    cout << " = TEST 3 window = " << endl;
+    cout << " = TEST 3 window with Surface = " << endl;
 
     SDL_Delay(100);
 
@@ -142,9 +145,24 @@ void test_window3(void)
     else
         cout << "SUCCESS - height 32" << endl;
 
-    cout << " = END TEST = " << endl;
+    sf = loadSurface(name.c_str());
 
-    SDL_Delay(100);
+    if(sf == NULL)
+        cerr << "FAILURE - failed to load the surface " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - the surface was loaded with success" << endl;
+
+
+    if(win3.putSurface(sf,NULL,&pos) == false)
+        cerr << "FAILURE - failed to put the surface " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - surface on the window" << endl;
+
+    win3.updateWindow();
+    SDL_Delay(2000);
+    win3.clearWindow();
+
+    cout << " = END TEST = " << endl;
 }
 
 
@@ -199,11 +217,7 @@ void test_rendering(LX_Window *win)
 
     win->clearRenderer();
 
-    SDL_Delay(2000);
-    /// @todo test with rotation
-
     cout << " = END TEST = " << endl;
-
 }
 
 
