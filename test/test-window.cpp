@@ -206,7 +206,7 @@ void test_rendering(LX_Window *win)
     win->clearRenderer();
 
 
-    if(win->putTextureAndRotate(st,NULL,&pos,-45) == false)
+    if(win->putTextureAndRotate(st,NULL,&pos,45) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
