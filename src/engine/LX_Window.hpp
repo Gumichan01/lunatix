@@ -94,6 +94,8 @@ namespace LX_Graphics{
         // Put the sprite on the screen
         bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
         bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
+        bool putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
+                        const double angle);
 
         void setWindowSize(int w, int h);
         void setFullscreen(Uint32 flag);

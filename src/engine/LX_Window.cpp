@@ -329,7 +329,7 @@ namespace LX_Graphics{
     /**
     *   @fn bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
     *
-    *   This function puts the texture on the window according to its position and the area to put on it
+    *   This function puts an area of the texture on the window
     *
     *   @param origin The texture to put
     *   @param area The area of the surface to put on the renderer
@@ -350,6 +350,31 @@ namespace LX_Graphics{
 
         return true;
     }
+
+
+    /**
+    *   @fn bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,const double angle)
+    *
+    *   This function puts an area of the texture on the window and optionnaly rotate it
+    *
+    *   @param origin The texture to put
+    *   @param area The area of the surface to put on the renderer
+    *   @param pos The position of what you want to put
+    *   @param angle an angle in degrees that indicate the rotation
+    *
+    *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
+    *               to display the texture according to its dimension
+    *
+    *   @return TRUE If the texture was put with success, FALSE otherwise
+    *
+    */
+    bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
+                        const double angle)
+    {
+        return(SDL_RenderCopyEx(renderer,origin,area,pos, angle, NULL,SDL_FLIP_NONE) == 0);
+    }
+
 
 
     /**
