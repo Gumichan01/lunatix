@@ -30,7 +30,10 @@ namespace LX_SystemInfo{
     }
 
 
-
+    int getCPUCacheLineSize(void)
+    {
+        return SDL_GetCPUCacheLineSize();
+    }
 
 
 

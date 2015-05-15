@@ -16,8 +16,10 @@ int main(int argc, char **argv)
     cout << " ==== Test System ==== " << endl;
 
     cout << "System : " << getPlatform() << endl;
+    cout << "L1 cache size : " << getCPUCacheLineSize() << " Ko" << endl;
 
     cout << " ==== End System ==== " << endl;
+
     LX_Quit();
 
     return EXIT_SUCCESS;
