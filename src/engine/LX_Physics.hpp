@@ -30,14 +30,14 @@ class LX_Polygon;
 
 #define RECT_SIDES 4    /**< The number of the AABB sides */
 
-// todo : gravity, wind, strengh, friction
+
 
 /**
 *
 *   @namespace LX_Physics
 *   @brief The physics engine
 *
-*   This namespace describes the LX_Physics, the physics module of the Lunatix engine.
+*   This namespace describes LX_Physics, the physics module of the Lunatix engine.
 *
 */
 namespace LX_Physics{
