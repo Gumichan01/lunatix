@@ -11,8 +11,9 @@ using namespace LX_Graphics;
 
 void test_window1(LX_Window *win);
 void test_window2(void);
-void test_window3(void);
+void test_surface(void);
 void test_rendering(LX_Window *win);
+void test_winManager(LX_Window *win);
 
 
 
@@ -35,8 +36,11 @@ int main(int argc, char **argv)
 
     test_window1(w);
     test_window2();
-    test_window3();
+    test_surface();
     test_rendering(w);
+    test_winManager(w);
+
+    LX_Quit();
 
     cout << " ==== END Rendering ==== " << endl;
 }
@@ -112,7 +116,7 @@ void test_window2(void)
 }
 
 
-void test_window3(void)
+void test_surface(void)
 {
     LX_Window win3("Hello",512,128,256,256,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
     std::string name = "data/cb.bmp";
@@ -219,6 +223,88 @@ void test_rendering(LX_Window *win)
 
     cout << " = END TEST = " << endl;
 }
+
+
+void test_winManager(LX_Window *win)
+{
+    std::string name = "data/cb.bmp";
+
+    SDL_Texture *st = NULL;
+    SDL_Rect pos = {100,100,150,120};
+
+    unsigned int id = 0;
+
+    cout << " = TEST WinManager = " << endl;
+
+    if(win == NULL)
+    {
+        cerr << "FAILURE - The window was not initialized" << endl;
+        return;
+    }
+    else
+        cout << "SUCCESS - The window exists" << endl;
+
+
+    id = LX_WindowManager::getInstance()->addWindow(win);
+
+    if(id == -1)
+        cerr << "FAILURE - failed to add a window" << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - th window wad adde dinto the window manager" << endl;
+
+    st = loadTextureFromFile(name.c_str(), id);
+
+    if(st == NULL)
+        cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - the texture was loaded with success" << endl;
+
+
+    if(win->putTexture(st,NULL,&pos) == false)
+        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - Texture on the renderer" << endl;
+
+
+    win->updateRenderer();
+
+    SDL_Delay(2000);
+
+    win->clearRenderer();
+
+
+    if(win->putTextureAndRotate(st,NULL,&pos,45) == false)
+        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - Texture on the renderer with rotation" << endl;
+
+    win->updateRenderer();
+
+    SDL_Delay(2000);
+
+    win->clearRenderer();
+
+    LX_WindowManager::getInstance()->deleteWindow(id);
+
+    cout << " = END TEST = " << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

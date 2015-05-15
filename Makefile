@@ -192,7 +192,7 @@ test-device.o : $(TEST_PATH)test-device.cpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
 
 
-test-physics : $(OBJS) test-physics.o LX_Polygon.o LX_Vector2D.o
+test-physics : $(OBJS) test-physics.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -202,7 +202,7 @@ test-physics.o : $(TEST_PATH)test-physics.cpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
 
-test-window : $(OBJS) test-window.o LX_Window.o LX_Graphics.o
+test-window : $(OBJS) test-window.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
