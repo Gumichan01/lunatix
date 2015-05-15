@@ -43,6 +43,8 @@ int main(int argc, char **argv)
     LX_Quit();
 
     cout << " ==== END Rendering ==== " << endl;
+
+    return EXIT_SUCCESS;
 }
 
 
