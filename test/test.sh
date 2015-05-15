@@ -6,5 +6,6 @@ make test -r -j -f Makefile;
 ./test-device;
 ./test-physics;
 ./test-window;
+./test-system;
 make clean-test -f Makefile;
 

@@ -164,7 +164,7 @@ LX_SystemInfo.o : $(LUNATIX_PATH)LX_SystemInfo.cpp $(LUNATIX_PATH)LX_SystemInfo.
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system
 
 
 test-init : $(OBJS) test-init.o
