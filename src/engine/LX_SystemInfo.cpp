@@ -42,6 +42,11 @@ namespace LX_SystemInfo{
         return SDL_GetCPUCount();
     }
 
+    int getSystemRAM(void)
+    {
+        /// @todo Fix that issue. Bad version of SDL2 (2.0.0)
+        return LX_SetError("Not supported in this compiled version");
+    }
 
 };
 
