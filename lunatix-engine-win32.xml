@@ -75,6 +75,8 @@
 		<Unit filename="src\engine\LX_Physics.hpp" />
 		<Unit filename="src\engine\LX_Polygon.cpp" />
 		<Unit filename="src\engine\LX_Polygon.hpp" />
+		<Unit filename="src\engine\LX_SystemInfo.cpp" />
+		<Unit filename="src\engine\LX_SystemInfo.hpp" />
 		<Unit filename="src\engine\LX_Sound.hpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.cpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.hpp" />
