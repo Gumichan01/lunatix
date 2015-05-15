@@ -22,7 +22,7 @@ CC=g++
 MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o \
-LX_Vector2D.o LX_Polygon.o
+LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o
 
 
 LUAC=luac5.1
@@ -157,6 +157,11 @@ LX_Vector2D.o : $(LUNATIX_PATH)LX_Vector2D.cpp $(LUNATIX_PATH)LX_Vector2D.hpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
+LX_SystemInfo.o : $(LUNATIX_PATH)LX_SystemInfo.cpp $(LUNATIX_PATH)LX_SystemInfo.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
 
 # Test of different modules
 test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window
@@ -208,6 +213,16 @@ test-window : $(OBJS) test-window.o
 
 
 test-window.o : $(TEST_PATH)test-window.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
+
+
+test-system : $(OBJS) test-system.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-system.o : $(TEST_PATH)test-system.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
