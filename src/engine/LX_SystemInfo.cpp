@@ -20,6 +20,7 @@
 */
 
 #include "LX_SystemInfo.hpp"
+#include "LX_Error.hpp"
 
 namespace LX_SystemInfo{
 
@@ -36,9 +37,10 @@ namespace LX_SystemInfo{
     }
 
 
-
-
-
+    int getCPUCount(void)
+    {
+        return SDL_GetCPUCount();
+    }
 
 
 };

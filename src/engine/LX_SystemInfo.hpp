@@ -36,8 +36,6 @@ namespace LX_SystemInfo{
 
     int getCPUCount(void);
 
-    int getSystem_RAM(void);
-
 };
 
 
