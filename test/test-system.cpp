@@ -20,6 +20,24 @@ int main(int argc, char **argv)
     cout << "Number of CPU cores : " << getCPUCount() << endl;
     cout << "RAM : " << getSystemRAM() << " MB" << endl;
 
+    int sz;
+    const SDL_DisplayMode * mode = getDisplayModes(&sz);
+
+    if(mode != NULL && sz != 0)
+    {
+        cout << "\nDisplay : " << endl;
+        for(int i = 0; i < sz; i++)
+        {
+            cout << mode[i].w << " x " << mode[i].h << " @ ~" << mode[i].refresh_rate << " Hz" << endl;
+        }
+    }
+    else
+    {
+        cout << LX_GetError() << endl ;
+    }
+
+    delete [] mode;
+
     cout << " ==== End System ==== " << endl;
 
     LX_Quit();
