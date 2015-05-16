@@ -18,7 +18,7 @@
 *	@file LX_Graphics.hpp
 *	@brief The LX_Graphics library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

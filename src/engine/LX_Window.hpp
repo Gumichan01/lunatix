@@ -18,7 +18,7 @@
 *	@file LX_Window.hpp
 *	@brief The LX_Window library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

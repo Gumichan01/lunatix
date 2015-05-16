@@ -15,7 +15,7 @@
 *	@file LX_Chunk.cpp
 *	@brief The LX_Chunk implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

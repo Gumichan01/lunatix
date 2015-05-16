@@ -18,7 +18,7 @@
 *	@file LX_Device.hpp
 *	@brief The LX_Device library. It gathers gamepads and mouse cursor information
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

@@ -18,7 +18,7 @@
 *	@file LX_Library.hpp
 *	@brief The LX_Library file. It manages the SDL systems
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

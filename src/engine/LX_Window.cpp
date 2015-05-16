@@ -15,7 +15,7 @@
 *	@file LX_Window.cpp
 *	@brief The LX_Window implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

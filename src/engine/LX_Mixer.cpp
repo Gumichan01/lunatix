@@ -15,7 +15,7 @@
 *	@file LX_Mixer.cpp
 *	@brief The LX_Mixer implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

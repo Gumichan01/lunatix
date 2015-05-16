@@ -18,7 +18,7 @@
 *	@file LX_Chunk.hpp
 *	@brief The LX_Chunk file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

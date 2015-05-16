@@ -15,7 +15,7 @@
 *	@file LX_TrueTypeFont.cpp
 *	@brief The LunatiX Engine True type Font (TTF) implementation.
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 

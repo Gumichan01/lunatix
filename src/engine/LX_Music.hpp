@@ -18,7 +18,7 @@
 *	@file LX_Music.hpp
 *	@brief The LX_Music library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.3
+*	@version 0.4
 *
 */
 
