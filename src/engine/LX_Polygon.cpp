@@ -268,6 +268,7 @@ void LX_Polygon::convexity(void)
     convex = true;
 }
 
+
 /**
 *   @fn LX_Polygon::~LX_Polygon()
 *
