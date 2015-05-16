@@ -22,8 +22,6 @@
 *
 */
 
-#include <iostream>
-
 #include <SDL2/SDL.h>
 
 
@@ -46,6 +44,8 @@ namespace LX_SystemInfo{
     int getCPUCount(void);
 
     int getSystemRAM(void);
+
+    const SDL_DisplayMode * getDisplayModes(int *size);
 
 };
 
