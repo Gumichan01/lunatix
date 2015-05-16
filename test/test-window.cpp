@@ -53,8 +53,6 @@ void test_window1(LX_Window *win)
 
     cout << " = TEST main window = " << endl;
 
-    SDL_Delay(100);
-
     if(win == NULL)
     {
         cerr << "FAILURE - The window was not initialized" << endl;
@@ -76,8 +74,6 @@ void test_window1(LX_Window *win)
 
 
     cout << " = END TEST = " << endl;
-
-    SDL_Delay(100);
 }
 
 
@@ -86,8 +82,6 @@ void test_window2(void)
     LX_Window win2("Hello",512,128,64,32,LX_WINDOW_RENDERING,SDL_WINDOW_SHOWN);
 
     cout << " = TEST 2 window = " << endl;
-
-    SDL_Delay(100);
 
     if(win2.getWindow() == NULL)
         cerr << "FAILURE - the window was not initialized" << endl;
@@ -113,8 +107,6 @@ void test_window2(void)
 
     cout << " = END TEST = " << endl;
 
-    SDL_Delay(100);
-
 }
 
 
@@ -126,8 +118,6 @@ void test_surface(void)
     SDL_Rect pos = {100,100,150,120};
 
     cout << " = TEST 3 window with Surface = " << endl;
-
-    SDL_Delay(100);
 
     if(win3.getWindow() == NULL)
         cerr << "FAILURE - the window was not initialized" << endl;
@@ -165,7 +155,7 @@ void test_surface(void)
         cout << "SUCCESS - surface on the window" << endl;
 
     win3.updateWindow();
-    SDL_Delay(2000);
+    SDL_Delay(1000);
     win3.clearWindow();
 
     cout << " = END TEST = " << endl;
@@ -207,7 +197,7 @@ void test_rendering(LX_Window *win)
 
     win->updateRenderer();
 
-    SDL_Delay(2000);
+    SDL_Delay(1000);
 
     win->clearRenderer();
 
@@ -219,7 +209,7 @@ void test_rendering(LX_Window *win)
 
     win->updateRenderer();
 
-    SDL_Delay(2000);
+    SDL_Delay(1000);
 
     win->clearRenderer();
 
@@ -270,7 +260,7 @@ void test_winManager(LX_Window *win)
 
     win->updateRenderer();
 
-    SDL_Delay(2000);
+    SDL_Delay(1000);
 
     win->clearRenderer();
 
@@ -282,7 +272,7 @@ void test_winManager(LX_Window *win)
 
     win->updateRenderer();
 
-    SDL_Delay(2000);
+    SDL_Delay(1000);
 
     win->clearRenderer();
 
