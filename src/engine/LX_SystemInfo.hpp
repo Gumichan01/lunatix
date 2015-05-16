@@ -27,6 +27,15 @@
 #include <SDL2/SDL.h>
 
 
+/**
+*
+*   @namespace LX_SystemInfo
+*   @brief The System information module
+*
+*   This namespace describes a module that is able
+*   to display information about the system
+*
+*/
 namespace LX_SystemInfo{
 
 
