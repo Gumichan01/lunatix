@@ -37,7 +37,7 @@ class LX_Polygon;
 *   @namespace LX_Physics
 *   @brief The physics engine
 *
-*   This namespace describes LX_Physics, the physics module of the Lunatix engine.
+*   This namespace describes LX_Physics, the physics module of Lunatix Engine.
 *
 */
 namespace LX_Physics{
