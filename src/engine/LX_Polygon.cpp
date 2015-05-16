@@ -29,6 +29,14 @@
 using namespace std;
 
 
+/**
+*   @fn LX_Polygon::LX_Polygon(const unsigned int nb)
+*
+*   Create a new instance of LX_Polygon
+*
+*   @param nb The number of edges to build the polygon
+*
+*/
 LX_Polygon::LX_Polygon(const unsigned int nb)
 {
     if(nb > 2)
@@ -51,7 +59,17 @@ LX_Polygon::LX_Polygon(const unsigned int nb)
 }
 
 
-
+/**
+*   @fn bool LX_Polygon::addPoint(const int x, const int y)
+*
+*   Set a new point into the polygon according to its coordinates
+*
+*   @param x The x position of the point
+*   @param y The y position of the point
+*
+*   @return TRUE if the point was added, FALSE otherwise
+*
+*/
 bool LX_Polygon::addPoint(const int x, const int y)
 {
     if(cursor < nbPoints)
@@ -72,28 +90,67 @@ bool LX_Polygon::addPoint(const int x, const int y)
 }
 
 
-
+/**
+*   @fn bool LX_Polygon::addPoint(LX_Point *p)
+*
+*   Set a new point into the polygon
+*
+*   @param p The new edge to add
+*
+*   @return TRUE if the point was added, FALSE otherwise
+*
+*/
 bool LX_Polygon::addPoint(LX_Point *p)
 {
     return addPoint(p->x,p->y);
 }
 
 
-
+/**
+*   @fn unsigned int LX_Polygon::numberOfEdges(void) const
+*
+*   Get the maximum number of edges
+*
+*   @return The maximum number of edges of the polygon
+*
+*   @note The number of edges is the same as
+*           what you sent to the polygon constructor
+*
+*/
 unsigned int LX_Polygon::numberOfEdges(void) const
 {
     return nbPoints;
 }
 
 
-
+/**
+*   @fn unsigned int LX_Polygon::numberOfRealEdges(void) const
+*
+*   Get the real number of defined edges
+*
+*   @return The real number of edges of the polygon
+*
+*   @note The number of edges may be different from the number
+*           you gave to the polygon constructor, becauce you have not
+*           defined all points.
+*
+*/
 unsigned int LX_Polygon::numberOfRealEdges(void) const
 {
     return cursor;
 }
 
 
-
+/**
+*   @fn LX_Point * LX_Polygon::getPoint(const unsigned int index) const
+*
+*   Get the point at a specified position
+*
+*   @param index The index of the point
+*
+*   @return A pointer to the point, NULL if you are out of range
+*
+*/
 LX_Point * LX_Polygon::getPoint(const unsigned int index) const
 {
     if(index < cursor)
@@ -105,14 +162,30 @@ LX_Point * LX_Polygon::getPoint(const unsigned int index) const
 }
 
 
-
+/**
+*   @fn bool LX_Polygon::isConvex(void)
+*
+*   Check the convexity of the polygon
+*
+*   @return TRUE if the polygon is convex, false otherwise
+*
+*   @note Actually, the convexity of the polygon is dynamically evaluated
+*           each time you define a new point.
+*           The result is stored in an internal variable
+*
+*/
 bool LX_Polygon::isConvex(void)
 {
     return convex;
 }
 
 
-
+/**
+*   @fn void LX_Polygon::convexity(void)
+*
+*   Evaluate the convexity of the polygon
+*
+*/
 void LX_Polygon::convexity(void)
 {
     // Vectors
@@ -195,7 +268,12 @@ void LX_Polygon::convexity(void)
     convex = true;
 }
 
-
+/**
+*   @fn LX_Polygon::~LX_Polygon()
+*
+*   Destroy the instance of the polygon
+*
+*/
 LX_Polygon::~LX_Polygon()
 {
     delete [] points;
