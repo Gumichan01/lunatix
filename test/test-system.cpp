@@ -18,8 +18,7 @@ int main(int argc, char **argv)
     cout << "System : " << getPlatform() << endl;
     cout << "L1 cache size : " << getCPUCacheLineSize() << " KB" << endl;
     cout << "Number of CPU cores : " << getCPUCount() << endl;
-    // Not supported in SDL 2.0.0
-    //cout << "RAM : " << getSystemRAM() << " MB" << endl;
+    cout << "RAM : " << getSystemRAM() << " MB" << endl;
 
     cout << " ==== End System ==== " << endl;
 
