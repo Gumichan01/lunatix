@@ -50,9 +50,9 @@ namespace LX_Graphics{
     */
     class LX_WindowException : public std::exception
     {
-        public :
-
         std::string str_err;
+
+        public :
 
         LX_WindowException(std::string err);
 

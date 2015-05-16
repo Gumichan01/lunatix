@@ -31,7 +31,7 @@
 #include "LX_Window.hpp"
 
 
-#define LX_NBMAX_WINDOWS 100
+#define LX_NBMAX_WINDOWS 100    /**< The maximum number of windows to display */
 
 
 namespace LX_Graphics{

@@ -127,7 +127,17 @@ bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_A
 }
 
 
-
+/**
+*	@fn bool LX_Physics::collisionPointRect(const LX_Point *p,const LX_AABB *rect)
+*
+*	Check the collision between a point and an AABB
+*
+*	@param p The point
+*	@param rect The AABB
+*
+*	@return TRUE if there is a collision, FALSE otherwise
+*
+*/
 bool LX_Physics::collisionPointRect(const LX_Point *p,const LX_AABB *rect)
 {
     return collisionPointRect(p->x,p->y,rect);
@@ -135,7 +145,7 @@ bool LX_Physics::collisionPointRect(const LX_Point *p,const LX_AABB *rect)
 
 
 /**
-*	@fn bool LX_Physics::collision(const int x_pos, const int y_pos, const LX_Circle *circle)
+*	@fn bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle)
 *
 *	Check the collision between a point and a circle
 *
@@ -160,7 +170,17 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX
 }
 
 
-
+/**
+*	@fn bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle)
+*
+*	Check the collision between a point and a circle
+*
+*	@param p The point
+*	@param circle The circle
+*
+*	@return TRUE if there is a collision, FALSE otherwise
+*
+*/
 bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle)
 {
     return collisionPointCircle(p->x,p->y,circle);
@@ -531,8 +551,8 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 *
 *   Test the intersection between 2 polygons
 *
-*   @param rect The AABB
-*   @param poly The polygon
+*   @param poly1 The first polygon
+*   @param poly2 The second polygon
 *
 *   @return TRUE if there is an collision, FALSE otherwise
 *
@@ -594,8 +614,9 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 *
 *   Move a point to a direction
 *
-*   @param vx the x direction
-*   @param vy the y direction
+*   @param P The point to move
+*   @param vx The x direction
+*   @param vy The y direction
 *
 */
 void LX_Physics::movePoint(LX_Point *P, const int vx, const int vy)
@@ -610,8 +631,9 @@ void LX_Physics::movePoint(LX_Point *P, const int vx, const int vy)
 *
 *   Move an AABB to a direction
 *
-*   @param vx the x direction
-*   @param vy the y direction
+*   @param rect The AABB to move
+*   @param vx The x direction
+*   @param vy The y direction
 *
 */
 void LX_Physics::moveRect(LX_AABB *rect, const int vx, const int vy)
@@ -626,8 +648,9 @@ void LX_Physics::moveRect(LX_AABB *rect, const int vx, const int vy)
 *
 *   Move the circle to a direction
 *
-*   @param vx the x direction
-*   @param vy the y direction
+*   @param C The circle to move
+*   @param vx The x direction
+*   @param vy The y direction
 *
 */
 void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
@@ -638,12 +661,13 @@ void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
 
 
 /**
-*   @fn void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
+*   @fn void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 *
 *   Move the polygon to a direction
 *
-*   @param vx the x direction
-*   @param vy the y direction
+*   @param poly The polygon to move
+*   @param vx The x direction
+*   @param vy The y direction
 *
 */
 void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
@@ -666,8 +690,9 @@ void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 *
 *   Move a point to an absolute position
 *
-*   @param xpos the x position
-*   @param ypos the y position
+*   @param P The point to move
+*   @param xpos The x position
+*   @param ypos The y position
 *
 */
 void LX_Physics::movePointTo(LX_Point *P, const int xpos, const int ypos)
@@ -682,8 +707,9 @@ void LX_Physics::movePointTo(LX_Point *P, const int xpos, const int ypos)
 *
 *   Move an AABB to an absolute position
 *
-*   @param xpos the x position
-*   @param ypos the y position
+*   @param rect The AABB to move
+*   @param xpos The x position
+*   @param ypos The y position
 *
 */
 void LX_Physics::moveRectTo(LX_AABB *rect, const int xpos, const int ypos)
@@ -698,8 +724,9 @@ void LX_Physics::moveRectTo(LX_AABB *rect, const int xpos, const int ypos)
 *
 *   Move a circle to an absolute position
 *
-*   @param xpos the x position
-*   @param ypos the y position
+*   @param C The circle to move
+*   @param xpos The x position
+*   @param ypos The y position
 *
 */
 void LX_Physics::moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
@@ -714,8 +741,9 @@ void LX_Physics::moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
 *
 *   Move a polygon to an absolute position
 *
-*   @param xpos the x position
-*   @param ypos the y position
+*   @param poly The polygon to move
+*   @param xpos The x position
+*   @param ypos The y position
 *
 */
 void LX_Physics::movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)

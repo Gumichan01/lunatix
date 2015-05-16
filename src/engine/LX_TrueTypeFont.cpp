@@ -31,12 +31,6 @@
 using namespace LX_Graphics;
 
 
-/**
-*   @namespace LX_TrueTypeFont
-*
-*   @brief The True Type Font module
-*
-*/
 namespace LX_TrueTypeFont{
 
 

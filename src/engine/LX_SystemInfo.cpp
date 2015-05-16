@@ -100,7 +100,7 @@ namespace LX_SystemInfo{
     }
 
     /**
-    *   @fn const SDL_DisplayMode * getDisplayModes(void)
+    *   @fn const SDL_DisplayMode * getDisplayModes(int *size)
     *
     *   Get the list of possible displays on the screen
     *

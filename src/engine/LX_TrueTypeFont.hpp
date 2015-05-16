@@ -36,6 +36,12 @@ struct SDL_Color;
 #define LX_BLACK_COLOR 0                /**< The black color value */
 
 
+/**
+*   @namespace LX_TrueTypeFont
+*
+*   @brief The LunatiX Engine True type Font (TTF) module
+*
+*/
 namespace LX_TrueTypeFont{
 
     /**
@@ -51,11 +57,11 @@ namespace LX_TrueTypeFont{
 
     /**
     *   @class LX_Font
-    *   @brief The LunatiX Engine True type Font (TTF) module.
+    *   @brief The Font class.
     *
     *   This class describes the font. It manages the True type Font.
     *
-    *   @note This class supports the UTF-8 format
+    *   @note TX_Font supports the UTF-8 format
     *
     */
     class LX_Font{
