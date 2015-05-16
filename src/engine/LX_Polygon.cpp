@@ -119,22 +119,16 @@ void LX_Polygon::convexity(void)
     LX_Vector2D AO;
     LX_Vector2D OB;
 
-    // Distance
-    float distanceAO;
-    float distanceOB;
-
     // Scalar product and angle
     int cross_product;
-    float cosAngle;
-    int angle;
 
     bool haveSign = false;
-    enum Sign{POSITIVE,NEGATIVE} s;
+    enum Sign{POSITIVE,NEGATIVE, NONE} s = NONE;
 
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
 
 
-    for(int i = 0; i < n; i++)
+    for(unsigned int i = 0; i < n; i++)
     {
         if(i == 0)
         {

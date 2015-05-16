@@ -374,7 +374,7 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
     I.y = v + rand()%100;
 
 
-    for(int i = 0; i < n; i++)
+    for(unsigned int i = 0; i < n; i++)
     {
         if(i == n-1)
         {
@@ -403,7 +403,7 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
 
     const unsigned int n = poly->numberOfEdges();
 
-    for(int i = 0; i < n; i++)
+    for(unsigned int i = 0; i < n; i++)
     {
         A.x = poly->getPoint(i)->x;
         A.y = poly->getPoint(i)->y;
@@ -422,6 +422,8 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
         if(collisionSegCircle(C,&A,&B) == true)
             return true;
     }
+
+    return false;
 }
 
 
@@ -438,7 +440,7 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
     const unsigned int n = poly->numberOfEdges();
 
 
-    for(int j = 0; j < n; j++)
+    for(unsigned int j = 0; j < n; j++)
     {
         E.x = poly->getPoint(j)->x;
         E.y = poly->getPoint(j)->y;
@@ -478,7 +480,7 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
     LX_Point A,B,C,D;
 
 
-    for(int i = 0; i < polySize1; i++)
+    for(unsigned int i = 0; i < polySize1; i++)
     {
 
         A.x = poly1->getPoint(i)->x;
@@ -495,7 +497,7 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
                 B.y = poly1->getPoint(i+1)->y;
         }
 
-        for(int j = 0; j < polySize2; j++)
+        for(unsigned int j = 0; j < polySize2; j++)
         {
 
             C.x = poly2->getPoint(j)->x;
@@ -555,7 +557,7 @@ void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 
     const unsigned int n = poly->numberOfEdges();
 
-    for(int i = 3; i < n; i++)
+    for(unsigned int i = 3; i < n; i++)
     {
         movePoint(poly->getPoint(i),vx,vy);
     }
@@ -595,7 +597,7 @@ void LX_Physics::movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)
 
     const unsigned int n = poly->numberOfEdges();
 
-    for(int i = 3; i < n; i++)
+    for(unsigned int i = 3; i < n; i++)
     {
         movePointTo(poly->getPoint(i),xpos,ypos);
     }
