@@ -35,7 +35,7 @@ namespace LX_Graphics{
     *
     *   Build the LX_WindowException class
     *
-    *   @param err the error string
+    *   @param err The error string
     *
     */
     LX_WindowException::LX_WindowException(std::string err)
@@ -49,7 +49,7 @@ namespace LX_Graphics{
     *
     *   Get the error string
     *
-    *   @return the error string
+    *   @return The error string
     */
     const char * LX_WindowException::what() const throw()
     {
@@ -66,9 +66,9 @@ namespace LX_Graphics{
     *
     *   Create the window with the default configuration
     *
-    *   @param mode the display mode :
-    *           LX_WINDOW_SURFACE : to use surfaces
-    *           LX_WINDOW_RENDERING : to use the renderer
+    *   @param mode The display mode
+    *           - LX_WINDOW_SURFACE : to use surfaces
+    *           - LX_WINDOW_RENDERING : to use the renderer
     *
     *   @exception LX_WindowException
     *
@@ -135,9 +135,9 @@ namespace LX_Graphics{
     *   Create the window setting the title
     *
     *   @param title The title of the window
-    *   @param mode the display mode :
-    *           LX_WINDOW_SURFACE : to use surfaces
-    *           LX_WINDOW_RENDERING : to use the renderer
+    *   @param mode The display mode :
+    *           - LX_WINDOW_SURFACE : to use surfaces
+    *           - LX_WINDOW_RENDERING : to use the renderer
     *
     *   @note The default configuration is used during the creation of the window
     *
@@ -168,19 +168,16 @@ namespace LX_Graphics{
     *   Create the window with an already set window
     *
     *   @param sdlWin The SDL_Window (must be a non-NULL pointer)
-    *   @param mode the display mode :
-    *           LX_WINDOW_SURFACE : to use surfaces
-    *           LX_WINDOW_RENDERING : to use the renderer
+    *   @param mode The display mode
+    *           - LX_WINDOW_SURFACE : to use surfaces
+    *           - LX_WINDOW_RENDERING : to use the renderer
     *
     *   @note This constructor does not use the LX_config class
-    *   @warning If you contruct the LX_Window object with a NULL pointer, an exception will occur
     *
     */
     LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
     {
         window = sdlWin;
-
-
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
         if(renderer == NULL)
@@ -202,14 +199,14 @@ namespace LX_Graphics{
     *   @param posY The Y position of the window on the desktop
     *   @param w The width of the window
     *   @param h The height of the window
-    *   @param mode the display mode :
-    *           LX_WINDOW_SURFACE : to use surfaces
-    *           LX_WINDOW_RENDERING : to use the renderer
-    *   @param flag One of these following flags :
-    *           LX_GRAPHICS_FULLSCREEN_DESKTOP
-    *           LX_GRAPHICS_FULLSCREEN
-    *           LX_GRAPHICS_NO_FULLSCREEN
-    *           And any SDL flags
+    *   @param mode The display mode
+    *           - LX_WINDOW_SURFACE : to use surfaces
+    *           - LX_WINDOW_RENDERING : to use the renderer
+    *   @param flag One of these following flags
+    *           - LX_GRAPHICS_FULLSCREEN_DESKTOP
+    *           - LX_GRAPHICS_FULLSCREEN
+    *           - LX_GRAPHICS_NO_FULLSCREEN
+    *           - And any SDL flags
     *
     *   @note This constructor does not use the LX_config class
     *
@@ -230,14 +227,14 @@ namespace LX_Graphics{
     *   @param posY The Y position of the window on the monitor
     *   @param w The width of the window
     *   @param h The height of the window
-    *   @param mode the display mode :
-    *           LX_WINDOW_SURFACE : to use surfaces
-    *           LX_WINDOW_RENDERING : to use the renderer
+    *   @param mode The display mode
+    *           - LX_WINDOW_SURFACE : to use surfaces
+    *           - LX_WINDOW_RENDERING : to use the renderer
     *   @param flag It is the same kind of flag used in LX_Window::LX_Window()
     *
     *   @note This constructor does not use the LX_config class
     *
-    *   @exception LX_WindowException If the window initialisation fails.
+    *   @exception LX_WindowException
     *
     */
     void LX_Window::init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
@@ -289,20 +286,6 @@ namespace LX_Graphics{
     }
 
 
-    /**
-    *   @fn void LX_Window::setTitle(std::string title)
-    *
-    *   Set the title on the window sidebar
-    *
-    *   @param title The title
-    *
-    */
-    void LX_Window::setTitle(std::string title)
-    {
-        SDL_SetWindowTitle(window,title.c_str());
-    }
-
-
 
     /**
     *   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
@@ -322,7 +305,6 @@ namespace LX_Graphics{
         int err = 0;
         SDL_Rect offset;
 
-        // I check if the image or the position is NULL
         if(image == NULL)
             return false;
 
@@ -400,9 +382,24 @@ namespace LX_Graphics{
 
 
     /**
+    *   @fn void LX_Window::setTitle(std::string title)
+    *
+    *   Set the title of the window
+    *
+    *   @param title The title
+    *
+    */
+    void LX_Window::setTitle(std::string title)
+    {
+        SDL_SetWindowTitle(window,title.c_str());
+    }
+
+
+
+    /**
     *   @fn void LX_Window::setWindowSize(int w, int h)
     *
-    *   Set the size of the main window
+    *   Set the size of the window
     *
     *   @param w The width of the window
     *   @param h The height of the window
@@ -417,9 +414,12 @@ namespace LX_Graphics{
     /**
     *   @fn void LX_Window::setFullscreen(Uint32 flag)
     *
-    *   Set the fullscreen to the main window
+    *   Set the window's fullscreen state
     *
-    *   @param flag the flag you want to use in this function
+    *   @param flag The flag you want to use in this function
+    *           - LX_GRAPHICS_FULLSCREEN_DESKTOP
+    *           - LX_GRAPHICS_FULLSCREEN
+    *           - LX_GRAPHICS_NO_FULLSCREEN
     *
     */
     void LX_Window::setFullscreen(Uint32 flag)
@@ -482,7 +482,7 @@ namespace LX_Graphics{
     /**
     *   @fn void LX_Window::clearRenderer()
     *
-    *   This function clears the main renderer
+    *   This function clears the renderer
     *
     */
     void LX_Window::clearRenderer()
@@ -496,7 +496,7 @@ namespace LX_Graphics{
     *
     *   Get the window renderer
     *
-    *   @return A pointer to the renderer, NULL otherwise
+    *   @return A valid pointer to the renderer if the window internally use it
     *
     */
     SDL_Renderer * LX_Window::getRenderer()
@@ -510,7 +510,7 @@ namespace LX_Graphics{
     *
     *   Get the window surface
     *
-    *   @return a pointer to the SDL_Surface of the window, NULL otherwise
+    *   @return A valid pointer to the SDL_Surface if the window internally use it
     *
     */
     SDL_Surface * LX_Window::getSurface()
@@ -525,7 +525,7 @@ namespace LX_Graphics{
     *
     *   Get the window
     *
-    *   @return A pointer to the SDL_Window
+    *   @return A pointer to the SDL_Window instance
     *
     *   @note Normally, the function never returns a NULL pointer,
     *           but it is better to check the pointer value
@@ -541,7 +541,7 @@ namespace LX_Graphics{
     /**
     *   @fn int LX_Window::getWidth()
     *
-    *   Get the width of the current window
+    *   Get the width of the window
     *
     *   @return the width
     *
@@ -559,7 +559,7 @@ namespace LX_Graphics{
     /**
     *   @fn int LX_Window::getHeight()
     *
-    *   Get the height of the current window
+    *   Get the height of the window
     *
     *   @return the height
     *

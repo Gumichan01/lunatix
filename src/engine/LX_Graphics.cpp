@@ -19,13 +19,12 @@
 *
 */
 
-#include <iostream>
+
 #include <string>
 
 #include <SDL2/SDL_image.h>
 
 #include "LX_Graphics.hpp"
-#include "LX_Window.hpp"
 #include "LX_WindowManager.hpp"
 #include "LX_Error.hpp"
 
@@ -44,7 +43,7 @@ namespace LX_Graphics{
     *   @return The loaded and optimized surface if there is no problem, NULL otherwise
     *
     *   @warning When you call this function, the format optimization includes the alpha channel.
-    *               No alpha needs to be set on the surface after that, except if you want to modify it
+    *               No alpha needs to be set on the surface after that.
     *
     */
     SDL_Surface * loadSurface(std::string filename)

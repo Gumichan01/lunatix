@@ -32,8 +32,8 @@ struct SDL_Surface;
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window */
 
-#define LX_WINDOW_SURFACE 0x01                                          /**< Use surface */
-#define LX_WINDOW_RENDERING 0x10                                        /**< Use Rendering */
+#define LX_WINDOW_SURFACE 0x01                                          /**< The flag to use the surface */
+#define LX_WINDOW_RENDERING 0x10                                        /**< The flag to use the rendering */
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
 
@@ -45,7 +45,8 @@ namespace LX_Graphics{
     *   @class LX_WindowException
     *   @brief The exception class of LX_Window
     *
-    *   This class describes the exception occured when the window initialization fails.
+    *   This class describes the exception occured when
+    *   the SDL_Window instance cannot be loaded.
     *
     */
     class LX_WindowException : public std::exception
@@ -69,8 +70,7 @@ namespace LX_Graphics{
     *
     *   This class describes the window.
     *
-    *   @note By default, the constructor of the LX_window class gets informations
-    *          from the configuration file
+    *   @note By default, the constructor retrieves information from the configuration file
     *
     *   @warning The LX_Window class must be defined only after you initialized the engine (calling LX_Init())
     *   @warning A LX_WindowException may be occured if the window creation fails
@@ -106,7 +106,7 @@ namespace LX_Graphics{
         void setWindowSize(int w, int h);
         void setFullscreen(Uint32 flag);
 
-        // Update and clearing window
+        // Update and clear window
         void updateWindow();
         void updateRenderer();
 

@@ -37,7 +37,7 @@ namespace LX_Graphics{
     *
     *   Return an instance of the singleton LX_WindowManager
     *
-    *   @return the unique instance of LX_WindowManager
+    *   @return The unique instance of LX_WindowManager
     *
     *   @note This function is equivalent to LX_WindowManager::getInstance
     *
@@ -51,7 +51,7 @@ namespace LX_Graphics{
     /**
     *   @fn void LX_WindowManager::init()
     *
-    *   Initialize the instance of LX_WindowManager
+    *   Initialize the singleton
     *
     */
     void LX_WindowManager::init()
@@ -68,7 +68,7 @@ namespace LX_Graphics{
     *
     *   Return an instance of the singleton LX_WindowManager
     *
-    *   @return The unique instance of LX_WindowManager
+    *   @return The singleton
     *
     */
     LX_WindowManager * LX_WindowManager::getInstance()
@@ -80,7 +80,7 @@ namespace LX_Graphics{
     /**
     *   @fn void LX_WindowManager::destroy()
     *
-    *   Destroy the instance of the singleton LX_WindowManager
+    *   Destroy the instance of the singleton
     *
     */
     void LX_WindowManager::destroy()
@@ -129,10 +129,10 @@ namespace LX_Graphics{
     *
     *   Add a window to the list
     *
-    *   @param w the window
+    *   @param w The window
     *
-    *   @return The id of the window if the parameter is valid and
-    *           LX_WindowManager can add it, -1 otherwise
+    *   @return The ID of the window you added if the instance is valid
+    *           -1 otherwise
     *
     */
     int LX_WindowManager::addWindow(LX_Window *w)
@@ -154,12 +154,11 @@ namespace LX_Graphics{
     /**
     *   @fn int LX_WindowManager::deleteWindow(unsigned int id)
     *
-    *   Delete a window from the list acording to its ID number
+    *   Delete a window from the list acording to its ID
     *
-    *   @param id the id
+    *   @param id The ID of the window you want to delete
     *
-    *   @return 0 if the parameter is valid and LX_WindowManager can remove
-    *           the window, -1 otherwise
+    *   @return 0 If the ID refers to a valid window, -1 otherwise
     *
     */
     int LX_WindowManager::deleteWindow(unsigned int id)
@@ -184,9 +183,9 @@ namespace LX_Graphics{
     /**
     *   @fn unsigned int LX_WindowManager::nbWindow()
     *
-    *   Count the number of windows the user opened
+    *   Count the number of opened windows
     *
-    *   @return the number of active windows
+    *   @return The number of opened windows
     *
     */
     unsigned int LX_WindowManager::nbWindow()
@@ -198,9 +197,9 @@ namespace LX_Graphics{
     /**
     *   @fn LX_Window * LX_WindowManager::getWindow(unsigned int id)
     *
-    *   Get a window according to its ID number
+    *   Get a window according to its ID
     *
-    *   @return a reference to a LX_Window instance if it exists,
+    *   @return A reference to a LX_Window instance if it exists,
     *           NULL otherwise
     *
     */
@@ -211,12 +210,6 @@ namespace LX_Graphics{
 
 
 };
-
-
-
-
-
-
 
 
 
