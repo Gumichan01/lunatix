@@ -16,7 +16,7 @@
 
 /**
 *	@file Lunatix_engine.hpp
-*	@brief The Lunatix engine header
+*	@brief The header file of LunatiX engine
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -34,7 +34,6 @@
 #include "LX_Physics.hpp"
 #include "LX_Polygon.hpp"
 #include "LX_Vector2D.hpp"
-#include "LX_WindowManager.hpp"
 #include "LX_Device.hpp"
 #include "LX_SystemInfo.hpp"
 #include "LX_Error.hpp"
