@@ -55,7 +55,7 @@ namespace LX_Graphics{
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id);
     SDL_Texture * loadTextureFromFile(std::string filename, int id);
 
-    bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
+    bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 
 };
 

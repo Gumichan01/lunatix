@@ -178,7 +178,7 @@ namespace LX_Graphics{
 
     /**
     *
-    *   @fn bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
+    *   @fn bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
     *
     *   This function set the alpha value on a SDL_surface
     *
@@ -189,10 +189,10 @@ namespace LX_Graphics{
     *
     *   @return TRUE If the transparency was done without problem, FALSE otherwise
     *
-    *   @note You may use any format for values (hexadecimal, digital,...).
+    *   @note You can use any format for values (hexadecimal, digital,...).
     *
     */
-    bool set_alpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
+    bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
     {
         return (SDL_SetColorKey(image,SDL_TRUE, SDL_MapRGB(image->format,red,green,blue)) == 0);
     }
