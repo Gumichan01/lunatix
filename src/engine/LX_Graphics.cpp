@@ -43,10 +43,6 @@ namespace LX_Graphics{
     *
     *   @return The loaded and optimized surface if there is no problem, NULL otherwise
     *
-    *   @note You may use this function instead of load_surfaceFromBMP() to load a non .bmp file
-    *   @note If you want to load a .bmp file and use the transparency,
-    *           please use load_surfaceFromBMP and set_alpha()
-    *
     *   @warning When you call this function, the format optimization includes the alpha channel.
     *               No alpha needs to be set on the surface after that, except if you want to modify it
     *

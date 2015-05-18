@@ -47,7 +47,7 @@ namespace LX_Graphics{
 
     SDL_Surface * loadSurface(std::string filename);
 
-    // To use if you work with a window without using the window manager
+    // To use when you work with a window without using the window manager
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w);
     SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w);
 
