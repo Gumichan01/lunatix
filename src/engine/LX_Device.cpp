@@ -32,7 +32,7 @@ using namespace std;
 /**
 *   @namespace LX_Device
 *
-*   @brief The LX_Device module
+*   @brief The device module
 *
 */
 namespace LX_Device{
