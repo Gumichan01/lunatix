@@ -41,7 +41,7 @@ namespace LX_Device{
     /**
     *   @fn int numberOfDevices(void)
     *
-    *   Count the number of connected devices (joystick and gamepads)
+    *   Count the number of connected devices (gamepads)
     *
     *   @return The number of gamepads
     *
@@ -59,7 +59,7 @@ namespace LX_Device{
     *
     *   @param joy The pointer to a joystick structure
     *
-    *   @return the name of the joystick, NULL if the pointer is not valid
+    *   @return The name of the joystick, NULL if the pointer is not valid
     *
     */
     const char * nameOf(SDL_Joystick * joy)
@@ -75,7 +75,7 @@ namespace LX_Device{
     *
     *   @param controller The pointer to a structure relative to the gamepad
     *
-    *   @return the name of the game controller, NULL if the pointer is not valid
+    *   @return The name of the game controller, NULL if the pointer is not valid
     *
     */
     const char * nameOf(SDL_GameController * controller)
@@ -161,7 +161,7 @@ namespace LX_Device{
     *
     *   @param info The structure you want to get the string format from
     *
-    *   @return A valid C string
+    *   @return Always returns a non-NULL C string
     *
     *   @note This function never returns NULL
     *   @warning If info is NULL, a segmentation fault will occur
@@ -188,7 +188,10 @@ namespace LX_Device{
     *
     *   Define is the cursor will be shown or not
     *
-    *   @param toggle Tha value : 1 to show it, 0 to hide, -1 to get the current state
+    *   @param toggle One of hese following values :
+    *           1 to show it
+    *           0 to hide
+    *           -1 to get the current state
     *
     *   @return 1 if the cursor is shown, 0 if it is hidden, a negative value on failure
     *

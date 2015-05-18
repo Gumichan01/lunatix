@@ -52,7 +52,6 @@ typedef struct LX_GamepadInfo{
 }LX_GamepadInfo; /** < */
 
 
-    // Gamepads
     int numberOfDevices(void);
 
     const char * nameOf(SDL_Joystick * joy);
@@ -63,8 +62,6 @@ typedef struct LX_GamepadInfo{
 
     const char * gamepadToString(LX_GamepadInfo *info);
 
-
-    // Mouse cursor
     int mouseCursorDisplay(int toggle);
 
 };
