@@ -30,12 +30,12 @@
 namespace LX_Mixer{
 
     /**
-    *   @fn LX_Music::LX_Music()
+    *   @fn LX_Music::LX_Music(void)
     *
     *   Create the instance
     *
     */
-    LX_Music::LX_Music()
+    LX_Music::LX_Music(void)
     {
         music = NULL;
     }
@@ -72,12 +72,12 @@ namespace LX_Mixer{
 
 
     /**
-    *   @fn LX_Music::~LX_Music()
+    *   @fn LX_Music::~LX_Music(void)
     *
     *   Destroy the instance
     *
     */
-    LX_Music::~LX_Music()
+    LX_Music::~LX_Music(void)
     {
         Mix_FreeMusic(music);
     }
@@ -124,7 +124,7 @@ namespace LX_Mixer{
 
 
     /**
-    *   @fn int LX_Music::play()
+    *   @fn int LX_Music::play(void)
     *
     *   Play the music specified in the LX_Music class
     *
@@ -133,19 +133,19 @@ namespace LX_Mixer{
     *   @note This function internally calls play(int loops) with no loop
     *
     */
-    int LX_Music::play()
+    int LX_Music::play(void)
     {
         return play(LX_MIXER_NOLOOP);
     }
 
 
     /**
-    *   @fn void LX_Music::pause()
+    *   @fn void LX_Music::pause(void)
     *
     *   Pause or resume the current music
     *
     */
-    void LX_Music::pause()
+    void LX_Music::pause(void)
     {
         if(Mix_PausedMusic())
         {
@@ -159,12 +159,12 @@ namespace LX_Mixer{
 
 
     /**
-    *   @fn void LX_Music::stop()
+    *   @fn void LX_Music::stop(void)
     *
     *   Stop the music
     *
     */
-    void LX_Music::stop()
+    void LX_Music::stop(void)
     {
         if(Mix_PlayingMusic())
         {
@@ -196,14 +196,14 @@ namespace LX_Mixer{
 
 
     /**
-    *   @fn Mix_Music * LX_Music::getMusic()
+    *   @fn Mix_Music * LX_Music::getMusic(void)
     *
     *   Return the instance to the music structure
     *
     *   @return The Mix_Music
     *
     */
-    Mix_Music * LX_Music::getMusic()
+    Mix_Music * LX_Music::getMusic(void)
     {
         return music;
     }

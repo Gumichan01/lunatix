@@ -47,21 +47,21 @@ class LX_Sound;
 
         public:
 
-        LX_Music();
+        LX_Music(void);
         LX_Music(Mix_Music *mus);
         LX_Music(std::string filename);
 
         // Music
         bool load(std::string filename);
-        int play();
+        int play(void);
         int play(int loops);
-        void pause();
-        void stop();
+        void pause(void);
+        void stop(void);
 
         // Volume
         int volume(int newVolume);
 
-        Mix_Music *getMusic();
+        Mix_Music *getMusic(void);
 
         ~LX_Music();
 

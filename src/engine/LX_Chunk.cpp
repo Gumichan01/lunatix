@@ -29,12 +29,12 @@
 namespace LX_Mixer{
 
     /**
-    *   @fn LX_Chunk::LX_Chunk()
+    *   @fn LX_Chunk::LX_Chunk(void)
     *
     *   Construct the instance
     *
     */
-    LX_Chunk::LX_Chunk()
+    LX_Chunk::LX_Chunk(void)
     {
         chunk = NULL;
     }

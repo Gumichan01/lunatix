@@ -41,7 +41,7 @@ class LX_Sound;
 
         public:
 
-        LX_Chunk();
+        LX_Chunk(void);
         LX_Chunk(Mix_Chunk *sample);
         LX_Chunk(std::string filename);
 
