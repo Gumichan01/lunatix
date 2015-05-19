@@ -32,6 +32,7 @@
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
 using namespace LX_Device;
+using namespace LX_Mixer;
 
 // Keep it in comments, it part of code is no longer compilable
 

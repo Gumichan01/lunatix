@@ -24,27 +24,36 @@
 
 #include <iostream>
 
-
-/**
-*   @class LX_Sound
-*   @brief The sound interface
-*
-*   This virtual class gathers common functions
-*
-**/
-class LX_Sound{
+#define LX_MIXER_LOOP -1                    /**< Activate the loop */
+#define LX_MIXER_NOLOOP 0                   /**< No loop is activated */
 
 
-    public:
 
-    virtual bool load(std::string filename) = 0;
-    virtual int play() = 0;
-    virtual int volume(int newVolume) = 0;
+namespace LX_Mixer{
 
-    ~LX_Sound(){};
+    /**
+    *   @class LX_Sound
+    *   @brief The sound interface
+    *
+    *   This virtual class gathers the functions used by LX_Chunk and LX_Music
+    *
+    **/
+    class LX_Sound{
+
+
+        public:
+
+        virtual bool load(std::string filename) = 0;
+        virtual int play() = 0;
+        virtual int volume(int newVolume) = 0;
+
+        ~LX_Sound(){};
+    };
+
+
 };
 
 
-
-
 #endif // LX_SOUND_H_INCLUDED
+
+

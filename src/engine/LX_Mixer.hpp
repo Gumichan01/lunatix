@@ -28,9 +28,6 @@
 #define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
 #define LX_MIXER_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
 
-#define LX_MIXER_LOOP -1                    /**< Activate the loop */
-#define LX_MIXER_NOLOOP 0                   /**< No loop is activated */
-
 #define LX_MIXER_EFFECT_LOUD 255            /**< Loud (for effect functions) */
 #define LX_MIXER_EFFECT_SILENCE 0           /**< Silence (for effect functions) */
 #define LX_MIXER_EFFECT_NO_DISTANCE 0       /**< The distance between the source and the listener */
@@ -38,18 +35,18 @@
 
 
 
-class LX_Music;
-class LX_Chunk;
-
 /**
 *   @namespace LX_Mixer
 *   @brief The mixer module of LunatiX Engine
 *
-*   This SDL_Mixer-based sound engine will load and read a various audio files
+*   This SDL_Mixer-based sound engine loads and reads audio files
 *
 **/
 namespace LX_Mixer{
 
+
+class LX_Music;
+class LX_Chunk;
 
     /* == Music and chunk == */
     LX_Music * loadMusic(std::string filename);
@@ -95,21 +92,7 @@ namespace LX_Mixer{
 };
 
 
-
 #endif // LX_MIXER_H_INCLUDED
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
