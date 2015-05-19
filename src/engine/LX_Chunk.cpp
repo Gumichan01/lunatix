@@ -169,7 +169,7 @@ namespace LX_Mixer{
     /**
     *   @fn int LX_Chunk::volume(int newVolume)
     *
-    *   Set the chunk volume to newVolume, from 0 to 128
+    *   Set the volume of the chunk, from 0 to 128
     *
     *   @param newVolume The volume to set
     *

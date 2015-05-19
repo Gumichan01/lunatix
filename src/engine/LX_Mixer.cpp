@@ -110,7 +110,7 @@ namespace LX_Mixer{
     /**
     *   @fn int allocateChannels(int num)
     *
-    *   Set the nmber of channel to use.
+    *   Set the number of channel to use.
     *
     *   @param num The number of channels to allocate
     *
@@ -280,7 +280,7 @@ namespace LX_Mixer{
     *
     *   Fade in the loaded Music over some milliseconds of time
     *
-    *   @param music The LX
+    *   @param music The music to fade in
     *   @param ms Milliseconds for the fade-in effect to complete
     *
     *   @note fadeInMusic starts playing the music with the fade-in effecT.
@@ -353,7 +353,7 @@ namespace LX_Mixer{
     /**
     *   @fn void setDistance(Uint8 distance)
     *
-    *   Set the distance
+    *   Set the distance to all channels
     *
     *   @param distance The virtuel distance betwenn the user and the source
     *
@@ -434,7 +434,7 @@ namespace LX_Mixer{
     *   Reverse the left and right channel sound
     *
     *   @param channel The channel to register the effect
-    *   @param flip This must a non-zero value to register the reverse effect
+    *   @param flip Must be a non-zero value to register the reverse effect
     *
     *   @note If you want to unregister the effect on a channel, set 0 as flip
     *
@@ -449,7 +449,7 @@ namespace LX_Mixer{
     /**
     *   @fn void setDistance(int channel,Uint8 distance)
     *
-    *   Set the distance
+    *   Set the distance of a channel
     *
     *   @param channel The channel you need to use
     *   @param distance The virtuel distance betwenn the user and the source
