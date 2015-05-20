@@ -49,12 +49,12 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn void LX_WindowManager::init()
+    *   @fn void LX_WindowManager::init(void)
     *
     *   Initialize the singleton
     *
     */
-    void LX_WindowManager::init()
+    void LX_WindowManager::init(void)
     {
         if(winInstance == NULL)
         {
@@ -78,12 +78,12 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn void LX_WindowManager::destroy()
+    *   @fn void LX_WindowManager::destroy(void)
     *
     *   Destroy the instance of the singleton
     *
     */
-    void LX_WindowManager::destroy()
+    void LX_WindowManager::destroy(void)
     {
         delete winInstance;
     }

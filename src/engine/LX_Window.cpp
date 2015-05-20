@@ -262,12 +262,12 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn LX_Window::init2()
+    *   @fn LX_Window::init2(void)
     *
     *   Initialize internal variables
     *
     */
-    void LX_Window::init2()
+    void LX_Window::init2(void)
     {
         originalWidth = getWidth();
         originalHeight = getHeight();
@@ -435,7 +435,7 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn void LX_Window::updateRenderer()
+    *   @fn void LX_Window::updateRenderer(void)
     *
     *   Updates the renderer of the window
     *
@@ -444,14 +444,14 @@ namespace LX_Graphics{
     *   LX_Window::updateWindow() together on a same window.
     *
     */
-    void LX_Window::updateRenderer()
+    void LX_Window::updateRenderer(void)
     {
         SDL_RenderPresent(renderer);
     }
 
 
     /**
-    *   @fn void LX_Window::updateWindow()
+    *   @fn void LX_Window::updateWindow(void)
     *
     *   This function updates the surface of the window
     *
@@ -460,19 +460,19 @@ namespace LX_Graphics{
     *   LX_Window::updateRenderer() together on a same window.
     *
     */
-    void LX_Window::updateWindow()
+    void LX_Window::updateWindow(void)
     {
         SDL_UpdateWindowSurface(window);
     }
 
 
     /**
-    *   @fn void LX_Window::clearWindow()
+    *   @fn void LX_Window::clearWindow(void)
     *
     *   This function clears the main window
     *
     */
-    void LX_Window::clearWindow()
+    void LX_Window::clearWindow(void)
     {
         SDL_Surface *tmp = SDL_GetWindowSurface(window);
         SDL_FillRect(tmp,NULL, SDL_MapRGB(tmp->format,0,0,0));
@@ -480,40 +480,40 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn void LX_Window::clearRenderer()
+    *   @fn void LX_Window::clearRenderer(void)
     *
     *   This function clears the renderer
     *
     */
-    void LX_Window::clearRenderer()
+    void LX_Window::clearRenderer(void)
     {
         SDL_RenderClear(renderer);
     }
 
 
     /**
-    *   @fn SDL_Renderer * LX_Window::getRenderer()
+    *   @fn SDL_Renderer * LX_Window::getRenderer(void)
     *
     *   Get the window renderer
     *
     *   @return A valid pointer to the renderer if the window internally use it
     *
     */
-    SDL_Renderer * LX_Window::getRenderer()
+    SDL_Renderer * LX_Window::getRenderer(void)
     {
         return SDL_GetRenderer(window);
     }
 
 
     /**
-    *   @fn SDL_Surface * LX_Window::getSurface()
+    *   @fn SDL_Surface * LX_Window::getSurface(void)
     *
     *   Get the window surface
     *
     *   @return A valid pointer to the SDL_Surface if the window internally use it
     *
     */
-    SDL_Surface * LX_Window::getSurface()
+    SDL_Surface * LX_Window::getSurface(void)
     {
         return SDL_GetWindowSurface(window);
     }
@@ -521,7 +521,7 @@ namespace LX_Graphics{
 
     /**
     *
-    *   @fn SDL_Window * LX_Window::getWindow()
+    *   @fn SDL_Window * LX_Window::getWindow(void)
     *
     *   Get the window
     *
@@ -531,7 +531,7 @@ namespace LX_Graphics{
     *           but it is better to check the pointer value
     *
     */
-    SDL_Window * LX_Window::getWindow()
+    SDL_Window * LX_Window::getWindow(void)
     {
         return window;
     }
@@ -539,14 +539,14 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn int LX_Window::getWidth()
+    *   @fn int LX_Window::getWidth(void)
     *
     *   Get the width of the window
     *
     *   @return the width
     *
     */
-    int LX_Window::getWidth()
+    int LX_Window::getWidth(void)
     {
         int w;
         SDL_GetWindowSize(window,&w,NULL);
@@ -557,14 +557,14 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn int LX_Window::getHeight()
+    *   @fn int LX_Window::getHeight(void)
     *
     *   Get the height of the window
     *
     *   @return the height
     *
     */
-    int LX_Window::getHeight()
+    int LX_Window::getHeight(void)
     {
         int h;
         SDL_GetWindowSize(window,NULL,&h);

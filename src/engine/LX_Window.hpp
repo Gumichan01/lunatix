@@ -85,7 +85,7 @@ namespace LX_Graphics{
         int originalHeight;     /**< The height of the window */
 
         void init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag);
-        void init2();
+        void init2(void);
 
         public :
 
@@ -107,18 +107,18 @@ namespace LX_Graphics{
         void setFullscreen(Uint32 flag);
 
         // Update and clear window
-        void updateWindow();
-        void updateRenderer();
+        void updateWindow(void);
+        void updateRenderer(void);
 
-        void clearWindow();
-        void clearRenderer();
+        void clearWindow(void);
+        void clearRenderer(void);
 
-        SDL_Renderer * getRenderer();
-        SDL_Surface * getSurface();
-        SDL_Window * getWindow();
+        SDL_Renderer * getRenderer(void);
+        SDL_Surface * getSurface(void);
+        SDL_Window * getWindow(void);
 
-        int getWidth();
-        int getHeight();
+        int getWidth(void);
+        int getHeight(void);
 
 
         ~LX_Window();

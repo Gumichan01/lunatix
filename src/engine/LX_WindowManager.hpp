@@ -56,9 +56,9 @@ namespace LX_Graphics{
 
         public:
 
-        static void init();
+        static void init(void);
         static LX_WindowManager * getInstance();
-        static void destroy();
+        static void destroy(void);
 
         int addWindow(LX_Window *w);
         int deleteWindow(unsigned int id);
