@@ -46,9 +46,13 @@ namespace LX_TrueTypeFont{
 
     /**
     *   @enum LX_TTF_TypeText
-    *   @brief The LX_TTF_TypeText enumeration
+    *   @brief The type of text enumeration
     *
     *   This enumeration describes the type of the text you want to draw.
+    *
+    *   LX_TTF_SOLID : Quick and dirty text
+    *   LX_TTF_SHADED : Slow and nice text
+    *   LX_TTF_BLENDED : Very slow but very nice text
     *
     */
     typedef enum{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
@@ -61,7 +65,7 @@ namespace LX_TrueTypeFont{
     *
     *   This class describes the font. It manages the True type Font.
     *
-    *   @note TX_Font supports the UTF-8 format
+    *   @note It supports the UTF-8 format
     *
     */
     class LX_Font{
@@ -106,17 +110,6 @@ namespace LX_TrueTypeFont{
 
 
 #endif // LX_TTF_H_INCLUDED
-
-
-
-
-
-
-
-
-
-
-
 
 
 

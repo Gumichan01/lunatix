@@ -118,11 +118,6 @@ namespace LX_TrueTypeFont{
     *   @param color The color font needed
     *   @param size The size of the text you will display
     *
-    *   @note If you do not need to specify the font color, you may put NULL
-    *   @note If you do not need to specify the size, put 0
-    *   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in lxsdl.cfg.
-    *            Otherwise, a LX_TTF_exception will be occured.
-    *
     */
     void LX_Font::init(std::string font_file, SDL_Color *color, int size)
     {
@@ -163,8 +158,10 @@ namespace LX_TrueTypeFont{
     *   Calculate the resulting surface size of the text rendererd using the default font
     *
     *   @param text The string to size up
-    *   @param w The pointer to int to fill the text width in
-    *   @param h The pointer to int to fill the text height in
+    *   @param w The pointer of int to fill in the text width
+    *   @param h The pointer of int to fill in the text height
+    *
+    *   @return A control value, 0 on success, -1 on failure
     *
     */
     int LX_Font::sizeOfText(std::string text, int *w, int *h)
@@ -188,14 +185,16 @@ namespace LX_TrueTypeFont{
     *   @fn int LX_Font::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
     *
     *   Calculate the resulting surface size of the text rendererd using the font
-    *   given in in parameter
+    *   given in parameter
     *
     *   @param ttf The font you use for the text
     *   @param text The texte string to size up
     *   @param w The pointer to int in which to fille the text width
     *   @param h The pointer to int in which to fille the text height
     *
-    *   @warning If the ttf font is NULL, then a segmentation fault will occur
+    *   @return A control value, 0 on success, -1 on failure
+    *
+    *   @warning If the font is NULL, then you have an undefined behavior
     *
     */
     int LX_Font::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
@@ -211,7 +210,7 @@ namespace LX_TrueTypeFont{
     *
     *   @param text The string to display
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_SolidText(std::string text)
@@ -228,7 +227,7 @@ namespace LX_TrueTypeFont{
     *   @param text The string to display
     *   @param size The size defined by the user
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_SolidText(std::string text, unsigned int size)
@@ -246,7 +245,7 @@ namespace LX_TrueTypeFont{
     *   @param text The string to display
     *   @param bg The background color
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_ShadedText(std::string text, SDL_Color bg)
@@ -265,7 +264,7 @@ namespace LX_TrueTypeFont{
     *   @param g The green channel
     *   @param b The blue channel
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
@@ -277,7 +276,7 @@ namespace LX_TrueTypeFont{
     /**
     *   @fn SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
     *
-    *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
+    *   Render the UTF-8 encoded text in shaded mode. The size has to be specified.
     *
     *   @param text The text you want to display
     *   @param r The red color of the background
@@ -285,7 +284,7 @@ namespace LX_TrueTypeFont{
     *   @param b The blue color of the background
     *   @param size The size defined by the user
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
@@ -302,7 +301,7 @@ namespace LX_TrueTypeFont{
     *
     *   @param text The text you want to display
     *
-    *   @return A SDL_surface on success , NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_BlendedText(std::string text)
@@ -316,12 +315,12 @@ namespace LX_TrueTypeFont{
     *
     *   @fn SDL_Surface * LX_Font::draw_BlendedText(std::string text, unsigned int size)
     *
-    *   Render the UTF-8 encoded text in solid mode. The size has to be specified.
+    *   Render the UTF-8 encoded text in blended mode. The size has to be specified.
     *
     *   @param text The text you want to display
     *   @param size The size defined by the user
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
     SDL_Surface * LX_Font::draw_BlendedText(std::string text, unsigned int size)
@@ -342,7 +341,7 @@ namespace LX_TrueTypeFont{
     *   @param b The blue color of the background
     *   @param size The size of the text on the window
     *
-    *   @return A SDL_surface on success, NULL otherwise
+    *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     *   @note If size is 0, then the default faont size is used
     *   @note You can put any value you want if you do not need to use r,g and b
@@ -396,7 +395,7 @@ namespace LX_TrueTypeFont{
     *   @param size The size of the text on the window
     *   @param idWindow The ID of the window
     *
-    *   @return A SDL_Texture on success, NULL if the window is not valid
+    *   @return An instance of SDL_Texture on success, NULL if the window is not valid
     *               or if something wrong happened
     *
     */
@@ -456,29 +455,6 @@ namespace LX_TrueTypeFont{
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
