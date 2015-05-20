@@ -194,7 +194,7 @@ namespace LX_TrueTypeFont{
     *
     *   @return A control value, 0 on success, -1 on failure
     *
-    *   @warning If the font is NULL, then you have an undefined behavior
+    *   @warning If the font is NULL, then you have an undefined behaviour
     *
     */
     int LX_Font::sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h)
