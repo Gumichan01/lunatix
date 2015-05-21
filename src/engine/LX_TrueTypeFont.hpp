@@ -25,6 +25,7 @@
 
 #include <SDL2/SDL_ttf.h>
 
+#include "LX_Window.hpp"
 
 struct SDL_Surface;
 struct SDL_Texture;
@@ -36,10 +37,12 @@ struct SDL_Color;
 #define LX_BLACK_COLOR 0                /**< The black color value */
 
 
+using namespace LX_Graphics;
+
 /**
 *   @namespace LX_TrueTypeFont
 *
-*   @brief The LunatiX Engine True type Font (TTF) module
+*   @brief The LunatiX Engine True Type Font (TTF) module
 *
 */
 namespace LX_TrueTypeFont{
@@ -98,6 +101,7 @@ namespace LX_TrueTypeFont{
         SDL_Surface * draw_BlendedText(std::string text, unsigned int size);
 
         SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, int idWindow);
+        SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, LX_Window *win);
 
         void setColor(SDL_Color *color);
 

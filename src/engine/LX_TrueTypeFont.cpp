@@ -393,7 +393,8 @@ namespace LX_TrueTypeFont{
     *   @param type The type of the text(Solid, Shaded, or Blended)
     *   @param text The string you want to draw
     *   @param size The size of the text on the window
-    *   @param idWindow The ID of the window
+    *   @param idWindow The ID of the window to get the renderer from.
+    *                   It is necessary to load the texture
     *
     *   @return An instance of SDL_Texture on success, NULL if the window is not valid
     *               or if something wrong happened
@@ -434,6 +435,44 @@ namespace LX_TrueTypeFont{
         return texture;
     }
 
+
+    /**
+    *   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, LX_Window *win)
+    *
+    *   Create a Texture from a text according to the type and the size
+    *
+    *   @param type The type of the text(Solid, Shaded, or Blended)
+    *   @param text The string you want to draw
+    *   @param size The size of the text on the window
+    *   @param win The window to get the renderer from.
+    *                   It is necessary to load the texture
+    *
+    *   @return An instance of SDL_Texture on success, NULL if the window is not valid
+    *               or if something wrong happened
+    *
+    */
+    SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, LX_Window *win)
+    {
+        SDL_Surface *surface =  NULL;
+        SDL_Texture *texture = NULL;
+
+        if(win == NULL)
+            return NULL;
+
+        surface = drawText(type,text.c_str(),0,0,0,size);   // Get the surface
+
+        if(surface == NULL)
+            return texture;
+
+        // Get the texture
+        texture = SDL_CreateTextureFromSurface(win->getRenderer(),surface);
+
+        SDL_FreeSurface(surface);
+
+        return texture;
+
+
+    }
 
     /**
     *   @fn void LX_Font::setColor(SDL_Color *color)
