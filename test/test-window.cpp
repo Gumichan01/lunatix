@@ -242,7 +242,7 @@ void test_winManager(LX_Window *win)
     if(id == -1)
         cerr << "FAILURE - failed to add a window" << LX_GetError() << endl;
     else
-        cout << "SUCCESS - th window wad adde dinto the window manager" << endl;
+        cout << "SUCCESS - the window was added into the window manager" << endl;
 
     st = loadTextureFromFile(name.c_str(), id);
 
