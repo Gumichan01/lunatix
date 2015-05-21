@@ -1,7 +1,7 @@
 
 
 /*
-*	Copyright (C) 2014-2015 Luxon Jean-Pierre
+*	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
 *	The LunatiX Engine is a SDL-based game engine.
