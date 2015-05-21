@@ -35,10 +35,8 @@ namespace LX_Device{
 
 /**
 *   @struct LX_GamepadInfo
-*   @brief The gamepad information
 *
 *   This structure gathers information about a gamepad
-*
 */
 typedef struct LX_GamepadInfo{
 
@@ -49,7 +47,7 @@ typedef struct LX_GamepadInfo{
     int numButtons;                 /**< The number of buttons */
     int numHats;                    /**< The number of hats */
 
-}LX_GamepadInfo; /** < */
+}LX_GamepadInfo; /**< @brief The gamepad information */
 
 
     int numberOfDevices(void);
