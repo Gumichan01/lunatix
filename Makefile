@@ -164,7 +164,7 @@ LX_SystemInfo.o : $(LUNATIX_PATH)LX_SystemInfo.cpp $(LUNATIX_PATH)LX_SystemInfo.
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf
 
 
 test-init : $(OBJS) test-init.o
@@ -225,6 +225,17 @@ test-system : $(OBJS) test-system.o
 test-system.o : $(TEST_PATH)test-system.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
+
+
+test-ttf : $(OBJS) test-ttf.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-ttf.o : $(TEST_PATH)test-ttf.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
+
 
 
 clean :

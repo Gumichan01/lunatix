@@ -204,7 +204,7 @@ namespace LX_TrueTypeFont{
 
 
     /**
-    *   @fn SDL_Surface * LX_Font::draw_SolidText(std::string text)
+    *   @fn SDL_Surface * LX_Font::drawSolidText(std::string text)
     *
     *   Create an UTF-8 encoded text in solid mode
     *
@@ -213,14 +213,14 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_SolidText(std::string text)
+    SDL_Surface * LX_Font::drawSolidText(std::string text)
     {
-        return draw_SolidText(text.c_str(),font_size);
+        return drawSolidText(text.c_str(),font_size);
     }
 
 
     /**
-    *   @fn SDL_Surface * LX_Font::draw_SolidText(std::string text, unsigned int size)
+    *   @fn SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
     *
     *   Render the UTF-8 encoded text in solid mode. The size has to be specified
     *
@@ -230,7 +230,7 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_SolidText(std::string text, unsigned int size)
+    SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
     {
         return drawText(LX_TTF_SOLID,text.c_str(),0,0,0,size);
     }
@@ -238,7 +238,7 @@ namespace LX_TrueTypeFont{
 
 
     /**
-    *   @fn SDL_Surface * LX_Font::draw_ShadedText(std::string text, SDL_Color bg)
+    *   @fn SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
     *
     *   Create an UTF-8 encoded text in shaded mode
     *
@@ -248,14 +248,14 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_ShadedText(std::string text, SDL_Color bg)
+    SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
     {
-        return draw_ShadedText(text.c_str(), bg.r, bg.g, bg.b);
+        return drawShadedText(text.c_str(), bg.r, bg.g, bg.b);
     }
 
 
     /**
-    *   @fn SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+    *   @fn SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
     *
     *   Create an UTF-8 encoded text in shaded mode
     *
@@ -267,14 +267,14 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+    SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
     {
-        return draw_ShadedText(text.c_str(),{r,g,b});
+        return drawText(LX_TTF_SHADED,text.c_str(),r,g,b,font_size);
     }
 
 
     /**
-    *   @fn SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+    *   @fn SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
     *
     *   Render the UTF-8 encoded text in shaded mode. The size has to be specified.
     *
@@ -287,7 +287,7 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_ShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+    SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
     {
         return drawText(LX_TTF_SHADED,text.c_str(),r,g,b,size);
     }
@@ -295,7 +295,7 @@ namespace LX_TrueTypeFont{
 
 
     /**
-    *   @fn SDL_Surface * LX_Font::draw_BlendedText(std::string text)
+    *   @fn SDL_Surface * LX_Font::drawBlendedText(std::string text)
     *
     *   Create an UTF-8 encoded text surface in blended mode
     *
@@ -304,16 +304,16 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_BlendedText(std::string text)
+    SDL_Surface * LX_Font::drawBlendedText(std::string text)
     {
-        return draw_BlendedText(text.c_str(),font_size);
+        return drawBlendedText(text.c_str(),font_size);
     }
 
 
 
     /**
     *
-    *   @fn SDL_Surface * LX_Font::draw_BlendedText(std::string text, unsigned int size)
+    *   @fn SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
     *
     *   Render the UTF-8 encoded text in blended mode. The size has to be specified.
     *
@@ -323,7 +323,7 @@ namespace LX_TrueTypeFont{
     *   @return An instance of SDL_Surface on success, NULL otherwise
     *
     */
-    SDL_Surface * LX_Font::draw_BlendedText(std::string text, unsigned int size)
+    SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
     {
         return drawText(LX_TTF_BLENDED,text.c_str(),0,0,0,size);
     }

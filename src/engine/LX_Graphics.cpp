@@ -38,7 +38,7 @@ namespace LX_Graphics{
     *
     *   This function loads an SDL_Surface from any image file an optimized its format
     *
-    *   @param filename The file name which describe the image
+    *   @param filename The name of the image file
     *
     *   @return The loaded and optimized surface if there is no problem, NULL otherwise
     *
