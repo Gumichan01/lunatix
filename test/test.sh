@@ -13,5 +13,6 @@ make test -r -j -f Makefile;
 ./test-physics;
 ./test-window;
 ./test-system;
+./test-ttf;
 make clean-test -f Makefile;
 
