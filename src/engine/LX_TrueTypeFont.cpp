@@ -269,7 +269,7 @@ namespace LX_TrueTypeFont{
     */
     SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
     {
-        return drawShadedText(text.c_str(),{r,g,b});
+        return drawText(LX_TTF_SHADED,text.c_str(),r,g,b,font_size);
     }
 
 
