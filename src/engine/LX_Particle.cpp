@@ -20,7 +20,9 @@
 
 #include "LX_Particle.hpp"
 #include "LX_Physics.hpp"
+#include "LX_Graphics.hpp"
 
+using namespace LX_Graphics;
 
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
 {
@@ -93,6 +95,20 @@ void LX_Particle::update(void)
 
 
 
+bool LX_Particle::setTexture(const char * str, const unsigned int id)
+{
+    texture = loadTextureFromFile(str,id);
+
+    return texture != NULL;
+}
+
+
+bool LX_Particle::setSurface(const char * str)
+{
+    surface = loadSurface(str);
+
+    return texture != NULL;
+}
 
 
 SDL_Texture * LX_Particle::getTexture(void)
@@ -102,7 +118,7 @@ SDL_Texture * LX_Particle::getTexture(void)
 
 
 
-SDL_Texture * LX_Particle::getSurface(void)
+SDL_Surface * LX_Particle::getSurface(void)
 {
     return surface;
 }

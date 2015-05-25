@@ -62,8 +62,8 @@ class LX_Particle{
 
     void update(void);
 
-    int setTexture(const char * str);
-    int setSurface(const char * str);
+    bool setTexture(const char * str, const unsigned int id);
+    bool setSurface(const char * str);
 
     SDL_Texture * getTexture(void);
     SDL_Surface * getSurface(void);
