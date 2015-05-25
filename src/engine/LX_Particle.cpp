@@ -95,6 +95,18 @@ void LX_Particle::update(void)
 
 
 
+SDL_Texture * LX_Particle::getTexture(void)
+{
+    return texture;
+}
+
+
+
+SDL_Texture * LX_Particle::getSurface(void)
+{
+    return surface;
+}
+
 
 const int LX_Particle::getX(void)
 {
