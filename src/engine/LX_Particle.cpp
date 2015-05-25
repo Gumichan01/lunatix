@@ -96,4 +96,48 @@ void LX_Particle::update(void)
 
 
 
+const int LX_Particle::getX(void)
+{
+    return box.x;
+}
+
+
+
+const int LX_Particle::getY(void)
+{
+    return box.y;
+}
+
+
+
+const int LX_Particle::getW(void)
+{
+    return box.w;
+}
+
+
+
+const int LX_Particle::getH(void)
+{
+    return box.h;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
