@@ -111,6 +111,12 @@ bool LX_Particle::setSurface(const char * str)
 }
 
 
+void LX_Particle::setSpeed(int x,int y)
+{
+    velocity = {x, y};
+}
+
+
 SDL_Texture * LX_Particle::getTexture(void)
 {
     return texture;
