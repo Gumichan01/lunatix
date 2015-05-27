@@ -22,7 +22,7 @@ CC=g++
 MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o \
-LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o
+LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o LX_Random.o
 
 
 LUAC=luac5.1
@@ -162,6 +162,10 @@ LX_SystemInfo.o : $(LUNATIX_PATH)LX_SystemInfo.cpp $(LUNATIX_PATH)LX_SystemInfo.
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
+LX_Random.o : $(LUNATIX_PATH)LX_Random.cpp $(LUNATIX_PATH)LX_Random.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
 
 # Test of different modules
 test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf
@@ -174,7 +178,7 @@ test-init : $(OBJS) test-init.o
 
 test-init.o : $(TEST_PATH)test-init.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
 
 test-config : $(OBJS) test-config.o
@@ -184,7 +188,7 @@ test-config : $(OBJS) test-config.o
 
 test-config.o : $(TEST_PATH)test-config.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
 
 test-device : $(OBJS) test-device.o
@@ -194,7 +198,7 @@ test-device : $(OBJS) test-device.o
 
 test-device.o : $(TEST_PATH)test-device.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -g
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) -std=c++0x -g
 
 
 test-physics : $(OBJS) test-physics.o
