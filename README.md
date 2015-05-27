@@ -21,7 +21,7 @@
  ## Contribute ##
  
   - You may take a look on the library or get the development version on [Github](https://github.com/Gumichan01/lunatix-engine)
-  - You can also find the library reference on my [website](http://gumichan01.olympe.in/reference/lunatix-engine/) or [here](http://gumichan01.github.io/lunatix-engine/)
+  - You can also find the library reference on my [website](http://gumichan01.olympe.in/reference/lunatix-engine/) or [here](http://gumichan01.github.io/lunatix-engine/v0.4/)
  
  
  
