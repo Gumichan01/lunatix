@@ -122,7 +122,7 @@ bool LX_Particle::setSurface(const char * str)
 {
     surface = loadSurface(str);
 
-    return texture != NULL;
+    return surface != NULL;
 }
 
 
