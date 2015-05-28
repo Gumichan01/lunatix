@@ -141,13 +141,16 @@ void LX_ParticleSystem::displayParticles(void)
         if(particles[i] == NULL)
             continue;
 
-        if(particles[i]->getTexture() != NULL)
+        if(particles[i]->getDelay()%2 == 0)
         {
-            win->putTexture(particles[i]->getTexture(),NULL,particles[i]->getAABB());
-        }
-        else if(particles[i]->getSurface() != NULL)
-        {
-            win->putSurface(particles[i]->getSurface(),NULL,particles[i]->getAABB());
+            if(particles[i]->getTexture() != NULL)
+            {
+                win->putTexture(particles[i]->getTexture(),NULL,particles[i]->getAABB());
+            }
+            else if(particles[i]->getSurface() != NULL)
+            {
+                win->putSurface(particles[i]->getSurface(),NULL,particles[i]->getAABB());
+            }
         }
     }
 }

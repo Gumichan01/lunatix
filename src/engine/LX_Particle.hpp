@@ -33,6 +33,9 @@ struct SDL_Surface;
 #include "LX_Vector2D.hpp"
 
 
+#define DELAY 16
+
+
 /**
 *   @class LX_Particle
 *   @brief The particle class
@@ -51,6 +54,7 @@ class LX_Particle{
     void init(const int x , const int y, const int w, const int h, const int vx, const int vy);
 
     public :
+
 
     LX_Particle(const int x , const int y, const int w, const int h);
     LX_Particle(const LX_AABB *b);
@@ -76,6 +80,7 @@ class LX_Particle{
     const int getY(void);
     const int getW(void);
     const int getH(void);
+    const unsigned int getDelay();
 
 
     ~LX_Particle();

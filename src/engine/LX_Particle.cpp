@@ -22,8 +22,13 @@
 #include "LX_Particle.hpp"
 #include "LX_Physics.hpp"
 #include "LX_Graphics.hpp"
+#include "LX_Random.hpp"
+
 
 using namespace LX_Graphics;
+using namespace LX_Random;
+
+
 
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
 {
@@ -71,7 +76,7 @@ void LX_Particle::init(const int x , const int y, const int w,
     box = {x,y,w,h};
     velocity = {vx,vy};
 
-    lifetime = 5;
+    lifetime = xorshiftRand()%DELAY;
 
     texture = NULL;
     surface = NULL;
@@ -176,4 +181,11 @@ const int LX_Particle::getH(void)
 {
     return box.h;
 }
+
+
+const unsigned int LX_Particle::getDelay()
+{
+    return lifetime;
+}
+
 
