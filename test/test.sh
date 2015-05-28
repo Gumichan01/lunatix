@@ -14,5 +14,6 @@ make test -r -j -f Makefile;
 ./test-window;
 ./test-system;
 ./test-ttf;
+./test-particle;
 make clean-test -f Makefile;
 
