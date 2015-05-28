@@ -111,6 +111,11 @@ void LX_Particle::update(void)
 }
 
 
+bool LX_Particle::isDead(void)
+{
+    return lifetime == 0;
+}
+
 
 bool LX_Particle::setTexture(const char * str, const unsigned int id)
 {

@@ -66,6 +66,8 @@ class LX_Particle{
     bool setSurface(const char * str);
     void setSpeed(int x,int y);
 
+    bool isDead(void);
+
     SDL_Texture * getTexture(void);
     SDL_Surface * getSurface(void);
 
