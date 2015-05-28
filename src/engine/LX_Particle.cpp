@@ -71,7 +71,7 @@ void LX_Particle::init(const int x , const int y, const int w,
     box = {x,y,w,h};
     velocity = {vx,vy};
 
-    lifetime = 16;
+    lifetime = 5;
 
     texture = NULL;
     surface = NULL;
