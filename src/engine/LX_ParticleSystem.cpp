@@ -64,8 +64,9 @@ void LX_ParticleSystem::init(unsigned int nbPart,unsigned int id)
 bool LX_ParticleSystem::addParticle(LX_Particle *p)
 {
     bool done = false;
+    const unsigned in n = nbParticles;
 
-    for(unsigned int i = 0; nbParticles; i++)
+    for(unsigned int i = 0; i < n; i++)
     {
         if(particles[i] ==  NULL)
         {
@@ -90,6 +91,21 @@ bool LX_ParticleSystem::rmParticle(unsigned int id)
 }
 
 
+void LX_ParticleSystem::updateParticles(void)
+{
+    const unsigned in n = nbParticles;
+
+    for(int i = 0; i < n; i++)
+    {
+        if(particles[i] != NULL)
+        {
+            if(particles[i]->isDead())
+                rmParticle(i);
+            else
+                particles[i]->update();
+        }
+    }
+}
 
 
 
