@@ -74,6 +74,9 @@ class LX_Particle{
     const int getW(void);
     const int getH(void);
 
+
+    ~LX_Particle();
+
 };
 
 

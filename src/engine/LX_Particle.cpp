@@ -78,6 +78,22 @@ void LX_Particle::init(const int x , const int y, const int w,
 }
 
 
+
+LX_Particle::~LX_Particle()
+{
+    if(surface != NULL)
+    {
+        SDL_FreeSurface(surface);
+    }
+
+    if(surface != NULL)
+    {
+        SDL_DestroyTexture(texture);
+    }
+}
+
+
+
 void LX_Particle::update(void)
 {
     if(lifetime > 0)
