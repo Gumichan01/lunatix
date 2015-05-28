@@ -70,6 +70,7 @@ class LX_Particle{
 
     SDL_Texture * getTexture(void);
     SDL_Surface * getSurface(void);
+    LX_AABB * getAABB();
 
     const int getX(void);
     const int getY(void);

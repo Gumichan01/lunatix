@@ -145,6 +145,12 @@ SDL_Surface * LX_Particle::getSurface(void)
 }
 
 
+LX_AABB * LX_Particle::getAABB()
+{
+    return &box;
+}
+
+
 const int LX_Particle::getX(void)
 {
     return box.x;
