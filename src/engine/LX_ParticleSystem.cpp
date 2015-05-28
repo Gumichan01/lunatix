@@ -21,11 +21,13 @@
 #include<new>
 #include <cstring>
 
+#include "LX_WindowManager.hpp"
 #include "LX_ParticleSystem.hpp"
 #include "LX_Particle.hpp"
 #include "LX_Error.hpp"
 
 using namespace std;
+using namespace LX_Graphics;
 
 
 
@@ -122,6 +124,30 @@ void LX_ParticleSystem::updateParticles(void)
 }
 
 
+void LX_ParticleSystem::displayParticles(void)
+{
+    const unsigned int n = nbParticles;
+
+    LX_Window * win = LX_WindowManager::getInstance()->getWindow(idWin);
+
+    if(win == NULL)
+        return;
+
+    for(unsigned int i = 0; i < n ; i++)
+    {
+        if(particles[i] == NULL)
+            continue;
+
+        if(particles[i]->getTexture() != NULL)
+        {
+            win->putTexture(particles[i]->getTexture(),NULL,particles[i]->getAABB());
+        }
+        else if(particles[i]->getSurface() != NULL)
+        {
+            win->putSurface(particles[i]->getSurface(),NULL,particles[i]->getAABB());
+        }
+    }
+}
 
 
 
