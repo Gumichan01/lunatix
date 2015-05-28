@@ -50,8 +50,11 @@ LX_ParticleSystem::~LX_ParticleSystem()
 
     for(unsigned int i = 0; i < n; i++)
     {
-        delete particles[i];
-        particles[i] = NULL;
+        if(particles[i] != NULL)
+        {
+            delete particles[i];
+            particles[i] = NULL;
+        }
     }
 
     delete [] particles;
@@ -61,7 +64,7 @@ LX_ParticleSystem::~LX_ParticleSystem()
 void LX_ParticleSystem::init(unsigned int nbPart,unsigned int id)
 {
     idWin = id;
-    particles = new (nothrow) LX_Particle*[nbParticles];
+    particles = new (nothrow) LX_Particle*[nbPart];
 
     if(particles == NULL)
     {
