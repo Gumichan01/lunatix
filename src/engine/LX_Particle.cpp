@@ -99,14 +99,7 @@ void LX_Particle::update(void)
     if(lifetime > 0)
     {
         LX_Physics::moveRect(&box,velocity.vx,velocity.vy);
-    }
-    else if(lifetime == 0)
-    {
-        if(surface != NULL)
-            SDL_FreeSurface(surface);
-
-        if(texture != NULL)
-            SDL_DestroyTexture(texture);
+        lifetime--;
     }
 }
 
