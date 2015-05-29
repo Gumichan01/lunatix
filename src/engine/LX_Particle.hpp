@@ -44,12 +44,12 @@ struct SDL_Surface;
 */
 class LX_Particle{
 
-    LX_AABB box;            /**< The box of the particle */
-    LX_Vector2D velocity;   /**< The velocity of the particle */
-    unsigned int lifetime;  /**< The delay to stay displayable */
+    LX_AABB box;                    /**< The box of the particle */
+    LX_Vector2D velocity;           /**< The velocity of the particle */
+    unsigned int lifetime;          /**< The delay to stay displayable */
 
-    SDL_Texture *texture;   /**< The texture (for the texture rendering) */
-    SDL_Surface *surface;   /**< The surface (for the surface rendering) */
+    SDL_Texture *texture;           /**< The texture (for the texture rendering) */
+    SDL_Surface *surface;           /**< The surface (for the surface rendering) */
 
     void init(const int x , const int y, const int w, const int h, const int vx, const int vy);
 
