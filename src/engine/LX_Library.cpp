@@ -34,12 +34,15 @@
 
 using namespace LX_Graphics;
 
+
 /**
 *   @fn bool LX_Init(void)
 *
-*   Initializes all SDL systems according to the configuration files
+*   Loads the engine according the configuration file
 *
 *   @return TRUE if all systems were init, FALSE otherwise
+*
+*   @note This function automatically calls LX_WindowManager::init()
 *
 */
 bool LX_Init(void)
@@ -153,7 +156,9 @@ bool LX_Init(void)
 /**
 *   @fn void LX_Quit(void)
 *
-*   Shut down all SDL systems
+*   Shut down the engine
+*
+*   @note This function automatically calls LX_WindowManager::destroy()
 *
 */
 void LX_Quit(void)
