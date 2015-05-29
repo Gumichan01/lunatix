@@ -13,6 +13,8 @@
  
   - LX\_Device : The information library about Gamepads
   - LX\_SystemInfo : The System information library
+  - LX\_Random : The Random Number Generator (RNG) library
+  - LX\_ParticleSystem : The particle system
 
  The engine works on Windows and Linux system.
 
