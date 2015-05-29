@@ -13,7 +13,7 @@
 
 /**
 *	@file LX_Physics.cpp
-*	@brief The LX_Physics implementation
+*	@brief The implementation of the physics library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -717,7 +717,7 @@ void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D *v)
 
 
 /**
-*   @fn void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
+*   @fn void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D *v)
 *
 *   Move the circle to a direction using the vector
 *

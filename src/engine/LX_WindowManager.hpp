@@ -75,6 +75,5 @@ namespace LX_Graphics{
 };
 
 
-
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED
 

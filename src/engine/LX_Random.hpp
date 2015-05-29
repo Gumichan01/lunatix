@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Random.hpp
-*	@brief The LX_Random file
+*	@brief The Random Number Generator library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -32,8 +32,8 @@
 
 
 /**
-*	@namespace The LX_Random
-*	@brief The The LX_Random namespace
+*	@namespace LX_Random
+*	@brief The Random Number Generator (RNG) namespace
 *
 *   This namespace describes LX_Random. This random number generator is based on
 *   the Xorshift* generator, but has also a support of the standard C generator
@@ -52,5 +52,5 @@ namespace LX_Random{
 };
 
 
-
 #endif // LX_RANDOM_HPP_INCLUDED
+

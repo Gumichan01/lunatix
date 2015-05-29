@@ -13,7 +13,7 @@
 
 /**
 *	@file LX_Window.cpp
-*	@brief The LX_Window implementation
+*	@brief The implementation of the window
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -574,10 +574,6 @@ namespace LX_Graphics{
 
 
 };
-
-
-
-
 
 
 

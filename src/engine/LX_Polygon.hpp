@@ -17,7 +17,7 @@
 
 /**
 *	@file LX_Polygon.hpp
-*	@brief The LX_Polygon file
+*	@brief The polygon file
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -30,7 +30,7 @@ struct LX_Point;
 
 /**
 *	@class LX_Polygon
-*	@brief The LX_Polygon class
+*	@brief The polygon
 *
 *   This class defines a polygon
 *

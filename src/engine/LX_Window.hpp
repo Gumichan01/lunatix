@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Window.hpp
-*	@brief The LX_Window library
+*	@brief The window library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -66,7 +66,7 @@ namespace LX_Graphics{
 
     /**
     *   @class LX_Window
-    *   @brief The LX_Window class.
+    *   @brief The window
     *
     *   This class describes the window.
     *
@@ -127,17 +127,5 @@ namespace LX_Graphics{
 };
 
 #endif // LX_WINDOW_H_INCLUDED
-
-
-
-
-
-
-
-
-
-
-
-
 
 

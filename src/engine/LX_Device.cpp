@@ -13,7 +13,7 @@
 
 /**
 *	@file LX_Device.cpp
-*	@brief The LX_Device implementation
+*	@brief The implementation of the device
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -203,7 +203,6 @@ namespace LX_Device{
 
 
 };
-
 
 
 

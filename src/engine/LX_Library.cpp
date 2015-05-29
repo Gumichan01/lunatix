@@ -13,7 +13,7 @@
 
 /**
 *	@file LX_Library.cpp
-*	@brief The LX_Library file
+*	@brief The implementatino of the engine ressources
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *

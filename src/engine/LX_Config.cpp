@@ -13,7 +13,7 @@
 
 /**
 *	@file LX_config.cpp
-*	@brief The LX_Configuration implementation
+*	@brief The configuration class implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *

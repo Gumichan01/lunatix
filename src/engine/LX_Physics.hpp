@@ -18,7 +18,7 @@
 /**
 *
 *	@file LX_Physics.hpp
-*	@brief The LX_Physics Library
+*	@brief The physics Library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *

@@ -25,6 +25,7 @@
 
 /**
 *   @struct LX_Vector2D
+*   @brief The vector2D structure
 *
 *   This structure describes a vector
 */
@@ -33,7 +34,7 @@ typedef struct LX_Vector2D{
     int vx;                     /**< The x position */
     int vy;                     /**< The y position */
 
-}LX_Vector2D;   /**< @brief The vector structure */
+}LX_Vector2D;   /**< @brief The vector2D */
 
 
 

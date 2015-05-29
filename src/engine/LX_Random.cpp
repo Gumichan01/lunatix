@@ -1,7 +1,5 @@
 
 
-
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -28,7 +26,7 @@
 typedef unsigned __int64 uint64_t;
 #define UINT64_C(val) (val##ui64)
 #else
-#define UINT64_C(val) (val##ULL)
+#define UINT64_C(val) (val##ULL)    /**< This macro expands to integer constants */
 #endif
 
 #include "LX_Random.hpp"
@@ -36,7 +34,7 @@ typedef unsigned __int64 uint64_t;
 
 /**
 *	@file LX_Random.cpp
-*	@brief The LX_Random implementation
+*	@brief The Random Number Generator implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -108,7 +106,6 @@ namespace LX_Random{
 
 
 };
-
 
 
 

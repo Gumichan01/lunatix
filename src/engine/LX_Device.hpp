@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Device.hpp
-*	@brief The LX_Device library. It gathers gamepads and mouse cursor information
+*	@brief The library that deals with gamepads and mouse cursor
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -35,6 +35,7 @@ namespace LX_Device{
 
 /**
 *   @struct LX_GamepadInfo
+*   @brief Information about gamepad
 *
 *   This structure gathers information about a gamepad
 */
@@ -47,7 +48,7 @@ typedef struct LX_GamepadInfo{
     int numButtons;                 /**< The number of buttons */
     int numHats;                    /**< The number of hats */
 
-}LX_GamepadInfo; /**< @brief The gamepad information */
+}LX_GamepadInfo; /**< @brief The gamepad structure */
 
 
     int numberOfDevices(void);

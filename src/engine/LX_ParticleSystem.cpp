@@ -50,7 +50,7 @@ LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
 *   Create the instance with a number of particles and the id of the window
 *
 *   @param nbPart The number of particles you want to get
-*   @param id The id of the window in the @link LX_WindowManager window manager @endlink
+*   @param id The id of the window in the LX_WindowManager
 *
 */
 LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart,unsigned int id)
@@ -224,7 +224,6 @@ void LX_ParticleSystem::displayParticles(void)
         }
     }
 }
-
 
 
 

@@ -15,7 +15,7 @@
 
 /**
 *	@file LX_Music.cpp
-*	@brief The LX_Music implementation
+*	@brief The implementation of the music library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *

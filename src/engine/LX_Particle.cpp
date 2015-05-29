@@ -215,7 +215,7 @@ bool LX_Particle::isDead(void)
 *   Set a texture to the particle
 *
 *   @param str The file that contains the sprite to load
-*   @param id The id of the window in the @link LX_WindowManager window manager @endlink
+*   @param id The id of the window in the LX_WindowManager
 *           used to get the texture according to its rendererer
 *
 *   @return TRUE if the particle texture was created, FALSE otherwise
@@ -235,8 +235,6 @@ bool LX_Particle::setTexture(const char * str, const unsigned int id)
 *   Set a surface to the particle
 *
 *   @param str The file that contains the sprite to load
-*   @param id The id of the window in the @link LX_WindowManager window manager @endlink
-*           used to get the texture according to its rendererer
 *
 *   @return TRUE if the particle surface was created, FALSE otherwise
 *

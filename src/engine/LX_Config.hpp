@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Config.hpp
-*	@brief The LX_Configuration class
+*	@brief The configuration class header
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *
@@ -52,7 +52,7 @@ class LX_ConfigurationException : public std::exception
 
 /**
 *   @class LX_Configuration
-*   @brief The LX_Configuration class.
+*   @brief The configuration class.
 *
 *   This class loads the configuration
 *

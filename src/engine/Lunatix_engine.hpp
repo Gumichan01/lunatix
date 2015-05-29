@@ -16,7 +16,7 @@
 
 /**
 *	@file Lunatix_engine.hpp
-*	@brief The header file of LunatiX engine
+*	@brief The header file of LunatiX Engine
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
 *

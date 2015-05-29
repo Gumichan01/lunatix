@@ -15,7 +15,7 @@
 */
 
 /**
-*	@file Particle.hpp
+*	@file LX_Particle.hpp
 *	@brief The Particle file
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.5
@@ -33,7 +33,7 @@ struct SDL_Surface;
 #include "LX_Vector2D.hpp"
 
 
-#define DELAY 16
+#define DELAY 16        /**< The delay of the particle The delay to stay alive */
 
 
 /**
