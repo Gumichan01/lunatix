@@ -263,14 +263,13 @@ test-particle.o : $(TEST_PATH)test-particle.cpp
 
 clean :
 	@echo "Delete object files"
-	@rm -f *.o
+	@rm -f *.o *.luac
 
-clean-test :
+clean-test : clean
 	@echo "Delete test object files"
-	@rm -f *.o
 	@rm -f test-* 
 
-clean-target : clean
+cleanall : clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) test-* $(COMPILED_SCRIPT)
 
