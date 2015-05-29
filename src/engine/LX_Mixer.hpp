@@ -31,7 +31,7 @@
 #define LX_MIXER_EFFECT_LOUD 255            /**< Loud (for effect functions) */
 #define LX_MIXER_EFFECT_SILENCE 0           /**< Silence (for effect functions) */
 #define LX_MIXER_EFFECT_NO_DISTANCE 0       /**< The distance between the source and the listener */
-#define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle bteween the source and the front */
+#define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle between the source and the front */
 
 
 
