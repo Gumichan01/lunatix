@@ -113,6 +113,8 @@ int main(int argc, char **argv)
 
     bool err = LX_Init();
 
+    cout << " ==== Test Particle ==== " << endl;
+
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
@@ -143,6 +145,8 @@ int main(int argc, char **argv)
 
     delete dot;
     LX_Quit();
+
+    cout << " ==== End Particle ==== " << endl;
 
     return EXIT_SUCCESS;
 }
