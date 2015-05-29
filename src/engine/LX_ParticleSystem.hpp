@@ -26,12 +26,18 @@
 class LX_Particle;
 
 
+/**
+*   @class LX_ParticleSystem
+*   @brief The particle system class
+*
+*   This class describes a particle system
+*/
 class LX_ParticleSystem{
 
 
-    LX_Particle **particles;
-    unsigned int nbParticles;
-    unsigned int idWin;
+    LX_Particle **particles;                /**< The array of particles */
+    unsigned int nbParticles;               /**< The number of particles */
+    unsigned int idWin;                     /**< The id of the window to put the particles */
 
     void init(unsigned int nbPart,unsigned int id);
 
@@ -41,7 +47,7 @@ class LX_ParticleSystem{
     LX_ParticleSystem(unsigned int nbPart,unsigned int id);
 
     bool addParticle(LX_Particle *p);
-    bool rmParticle(unsigned int id);
+    bool rmParticle(unsigned int index);
 
     void updateParticles(void);
     void displayParticles(void);
