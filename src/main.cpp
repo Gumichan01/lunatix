@@ -95,7 +95,7 @@ int main ( int argc, char** argv )
 
     if(st == NULL)
     {
-        std::cerr << "[MAIN] loadTexture : " << SDL_GetError() <<std::endl;
+        std::cerr << "[MAIN] loadTexture : " << LX_GetError() <<std::endl;
     }
 
     ttf->sizeOfText("LunatiX_engine",&wt,&ht);

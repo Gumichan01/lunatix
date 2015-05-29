@@ -112,7 +112,7 @@ namespace LX_Graphics{
         if(window == NULL )
         {
             std::cerr << "LX_Window constructor - window creation " << std::endl;
-            throw LX_WindowException(SDL_GetError());
+            throw LX_WindowException(LX_GetError());
         }
 
         if(mode == LX_WINDOW_RENDERING)
@@ -121,7 +121,7 @@ namespace LX_Graphics{
 
             if(renderer == NULL)
             {
-                std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+                std::cerr << "LX_Window constructor - renderer creation : " << LX_GetError() << std::endl;
             }
         }
 
@@ -182,7 +182,7 @@ namespace LX_Graphics{
 
         if(renderer == NULL)
         {
-            std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+            std::cerr << "LX_Window constructor - renderer creation : " << LX_GetError() << std::endl;
         }
 
         init2();
@@ -244,7 +244,7 @@ namespace LX_Graphics{
         if(window == NULL )
         {
             std::cerr << "LX_Window constructor - window creation " << std::endl;
-            throw LX_WindowException(SDL_GetError());
+            throw LX_WindowException(LX_GetError());
         }
 
         if(mode == LX_WINDOW_RENDERING)
@@ -253,7 +253,7 @@ namespace LX_Graphics{
 
             if(renderer == NULL)
             {
-                std::cerr << "LX_Window constructor - renderer creation : " << SDL_GetError() << std::endl;
+                std::cerr << "LX_Window constructor - renderer creation : " << LX_GetError() << std::endl;
             }
         }
 
