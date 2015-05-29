@@ -22,7 +22,8 @@ CC=g++
 MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o \
-LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o LX_Random.o LX_Particle.o LX_ParticleSystem.o
+LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o LX_Random.o LX_Particle.o \
+LX_ParticleSystem.o LX_FileIO.o
 
 
 LUAC=luac5.1
@@ -173,6 +174,11 @@ LX_Particle.o : $(LUNATIX_PATH)LX_Particle.cpp $(LUNATIX_PATH)LX_Particle.hpp
 
 
 LX_ParticleSystem.o : $(LUNATIX_PATH)LX_ParticleSystem.cpp $(LUNATIX_PATH)LX_ParticleSystem.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
+LX_FileIO.o : $(LUNATIX_PATH)LX_FileIO.cpp $(LUNATIX_PATH)LX_FileIO.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
