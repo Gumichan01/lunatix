@@ -686,6 +686,67 @@ void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 
 
 /**
+*   @fn void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D *v)
+*
+*   Move a point to a direction using the vector
+*
+*   @param P The point to move
+*   @param v The vector that indicates the direction
+*
+*/
+void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D *v)
+{
+    movePoint(P,v->vx,v->vy);
+}
+
+
+
+/**
+*   @fn void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D *v)
+*
+*   Move an AABB to a direction using the vector
+*
+*   @param rect The AABB to move
+*   @param v The vector that indicates the direction
+*
+*/
+void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D *v)
+{
+    moveRect(rect,v->vx,v->vy);
+}
+
+
+/**
+*   @fn void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
+*
+*   Move the circle to a direction using the vector
+*
+*   @param C The circle to move
+*   @param v The vector that indicates the direction
+*
+*/
+void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D *v)
+{
+    moveCircle(C,v->vx,v->vy);
+}
+
+
+/**
+*   @fn void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D *v)
+*
+*   Move the polygon to a direction using the vector
+*
+*   @param poly The polygon to move
+*   @param v The vector that indicates the direction
+*
+*/
+void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D *v)
+{
+    movePoly(poly,v->vx,v->vy);
+}
+
+
+/**
 *   @fn void LX_Physics::movePointTo(LX_Point *P, const int xpos, const int ypos)
 *
 *   Move a point to an absolute position

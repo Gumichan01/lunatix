@@ -27,6 +27,7 @@
 #include "LX_Hitbox.hpp"
 
 class LX_Polygon;
+class LX_Vector2D;
 
 #define RECT_SIDES 4    /**< The number of the AABB sides */
 
@@ -75,6 +76,11 @@ namespace LX_Physics{
         void moveRect(LX_AABB *rect, const int vx, const int vy);
         void moveCircle(LX_Circle *C, const int vx, const int vy);
         void movePoly(LX_Polygon *poly, const int vx, const int vy);
+
+        void movePoint(LX_Point *P, const LX_Vector2D *v);
+        void moveRect(LX_AABB *rect, const LX_Vector2D *v);
+        void moveCircle(LX_Circle *C, const LX_Vector2D *v);
+        void movePoly(LX_Polygon *poly, const LX_Vector2D *v);
 
         void movePointTo(LX_Point *P, const int xpos, const int ypos);
         void moveRectTo(LX_AABB *rect, const int xpos, const int ypos);
