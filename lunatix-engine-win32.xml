@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
+					<Add option="-pg" />
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
@@ -71,13 +72,19 @@
 		<Unit filename="src\engine\LX_Mixer.hpp" />
 		<Unit filename="src\engine\LX_Music.cpp" />
 		<Unit filename="src\engine\LX_Music.hpp" />
+		<Unit filename="src\engine\LX_Particle.cpp" />
+		<Unit filename="src\engine\LX_Particle.hpp" />
+		<Unit filename="src\engine\LX_ParticleSystem.cpp" />
+		<Unit filename="src\engine\LX_ParticleSystem.hpp" />
 		<Unit filename="src\engine\LX_Physics.cpp" />
 		<Unit filename="src\engine\LX_Physics.hpp" />
 		<Unit filename="src\engine\LX_Polygon.cpp" />
 		<Unit filename="src\engine\LX_Polygon.hpp" />
+		<Unit filename="src\engine\LX_Random.cpp" />
+		<Unit filename="src\engine\LX_Random.hpp" />
+		<Unit filename="src\engine\LX_Sound.hpp" />
 		<Unit filename="src\engine\LX_SystemInfo.cpp" />
 		<Unit filename="src\engine\LX_SystemInfo.hpp" />
-		<Unit filename="src\engine\LX_Sound.hpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.cpp" />
 		<Unit filename="src\engine\LX_TrueTypeFont.hpp" />
 		<Unit filename="src\engine\LX_Vector2D.cpp" />
@@ -96,4 +103,3 @@
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
-
