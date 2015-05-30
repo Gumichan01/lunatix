@@ -131,7 +131,12 @@ namespace LX_FileIO{
 
     SDL_Surface * LX_File::getSurfaceFromData(void)
     {
-        return IMG_Load_RW(data,0);
+        SDL_Surface * surface = NULL;
+
+        surface = IMG_Load_RW(data,0);
+        seek(0,LX_SEEK_SET);
+
+        return surface;
     }
 
 
