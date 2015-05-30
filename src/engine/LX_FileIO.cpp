@@ -100,6 +100,14 @@ namespace LX_FileIO{
     }
 
 
+    size_t LX_File::write(std::string str)
+    {
+        size_t len = str.length();
+
+        return write((void *)str.c_str(),sizeof(char),len);
+    }
+
+
 
     void LX_File::close(void)
     {
