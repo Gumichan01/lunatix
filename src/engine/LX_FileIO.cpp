@@ -45,13 +45,13 @@ namespace LX_FileIO{
         data = NULL;
 
         if(filename == NULL || mode == 0x00000000)
-            throw new IOException("Invalid filename or mode\n");
+            throw IOException("Invalid filename or mode\n");
 
         name = filename;
         open(mode);
 
         if(data == NULL)
-            throw new IOException(LX_GetError());
+            throw IOException(LX_GetError());
 
     }
 
@@ -90,7 +90,10 @@ namespace LX_FileIO{
     void LX_File::close(void)
     {
         if(data != NULL)
+        {
             SDL_RWclose(data);
+            data = NULL;
+        }
     }
 
 
