@@ -52,7 +52,8 @@ namespace LX_FileIO{
     *   @class IOException
     *   @brief The Input/Output exception
     *
-    *   This exception class occured when there is a problem on a LX_File function
+    *   This exception class occured when
+    *   there is a problem on the LX_File constructor
     *
     */
     class IOException: public std::exception{
@@ -89,7 +90,7 @@ namespace LX_FileIO{
         LX_File(const char * filename, const Uint32 mode);
 
         size_t read(void *ptr,size_t size,size_t max_num);
-        size_t write(void *ptr,size_t size,size_t max_num);
+        size_t write(void *ptr,size_t size,size_t num);
         size_t write(std::string str);
 
         Sint64 seek(Sint64 offset, int whence);
