@@ -18,6 +18,9 @@ void test_open(void);
 void test_read(void);
 void test_write(void);
 void test_tellSeek(void);
+void test_getSurface(void);
+void test_getFont(void);
+void test_getChunk(void);
 
 string str = "tmpFile";
 
@@ -39,8 +42,9 @@ int main(int argc, char **argv)
     test_write();
     test_read();
     test_tellSeek();
+    test_getSurface();
 
-    //remove(str.c_str());
+    remove(str.c_str());
 
     cout << " ==== End File ==== " << endl;
 }
@@ -86,7 +90,7 @@ void test_open(void)
 
     }catch(IOException &ex)
     {
-        cout << "SUCCESS - Exception occured : " << ex.what() << endl;
+        cout << "SUCCESS - IOException occured : " << ex.what() << endl;
     }
 
     // bad mode
@@ -98,7 +102,7 @@ void test_open(void)
 
     }catch(IOException &exe)
     {
-        cout << "SUCCESS - Exception occured : " << exe.what() << endl;
+        cout << "SUCCESS - IOException occured : " << exe.what() << endl;
     }
 
     // invalid file
@@ -110,7 +114,7 @@ void test_open(void)
 
     }catch(IOException &ioe)
     {
-        cout << "SUCCESS - Exception occured : " << ioe.what() << endl;
+        cout << "SUCCESS - IOException occured : " << ioe.what() << endl;
     }
 
     cout << " = END TEST = " << endl;
@@ -215,7 +219,31 @@ void test_tellSeek(void)
 
 
 
+void test_getSurface(void)
+{
+    cout << " = TEST getSurface = " << endl;
 
+    int lus = 0;
+    char buf[N + 1];
+    string str_ex = "data/explosion.png";
+    SDL_Surface * surface = NULL;
+
+    LX_File f(str_ex.c_str(),LX_FILEIO_RDONLY);
+
+    surface = f.getSurfaceFromData();
+
+    if(surface == NULL)
+        cerr << "FAILURE - getSurfaceFromData() Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - got a valid surface " << endl;
+        SDL_FreeSurface(surface);
+    }
+
+    f.close();
+
+    cout << " = END TEST = " << endl;
+}
 
 
 

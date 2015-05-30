@@ -25,7 +25,7 @@
 #include <iostream>
 
 #include <SDL2/SDL.h>
-
+#include <SDL2/SDL_image.h>
 
 #define LX_FILEIO_RDONLY 0x00000001                                 /**< Read only mode (r) */
 #define LX_FILEIO_WRONLY 0x00000010                                 /**< Write only mode (w) */
