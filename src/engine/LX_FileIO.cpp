@@ -60,30 +60,31 @@ namespace LX_FileIO{
     void LX_File::open(const Uint32 mode)
     {
 
-        if(mode&LX_FILEIO_RDWR == LX_FILEIO_RDWR)
-        {
-            data = SDL_RWFromFile(name.c_str(),"rb+");
-        }
-        else if(mode&LX_FILEIO_RDONLY == LX_FILEIO_RDONLY)
-        {
-            data = SDL_RWFromFile(name.c_str(),"rb");
-        }
-        else if(mode&LX_FILEIO_WRONLY == LX_FILEIO_WRONLY)
-        {
-            data = SDL_RWFromFile(name.c_str(),"wb");
-        }
-        else if(mode&LX_FILEIO_APPEND == LX_FILEIO_APPEND)
-        {
-            data = SDL_RWFromFile(name.c_str(),"ab");
-        }
-        else if(mode&LX_FILEIO_WRTR == LX_FILEIO_WRTR)
+        if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
         {
             data = SDL_RWFromFile(name.c_str(),"wb+");
         }
-        else if(mode&LX_FILEIO_RDAP == LX_FILEIO_RDAP)
+        else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
+        {
+            data = SDL_RWFromFile(name.c_str(),"rb+");
+        }
+        else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
         {
             data = SDL_RWFromFile(name.c_str(),"a+");
         }
+        else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
+        {
+            data = SDL_RWFromFile(name.c_str(),"rb");
+        }
+        else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
+        {
+            data = SDL_RWFromFile(name.c_str(),"wb");
+        }
+        else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
+        {
+            data = SDL_RWFromFile(name.c_str(),"ab");
+        }
+
     }
 
 

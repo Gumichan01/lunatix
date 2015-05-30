@@ -27,13 +27,13 @@
 #include <SDL2/SDL.h>
 
 
-#define LX_FILEIO_RDONLY 0x00000001                         /**< Read only mode (r) */
-#define LX_FILEIO_WRONLY 0x00000010                         /**< Write only mode (w) */
-#define LX_FILEIO_APPEND 0x00000100                         /**< Append mode (a) */
-#define LX_FILEIO_WRTR   0x00001000                         /**< Write but can read mode (w+) */
-#define LX_FILEIO_BINARY 0x11000000                         /**< Binary mode (b) */
-#define LX_FILEIO_RDWR LX_FILEIO_RDONLY|LX_FILEIO_WRONLY    /**< Read/Write mode (r+) */
-#define LX_FILEIO_RDAP LX_FILEIO_RDONLY|LX_FILEIO_APPEND    /**< Read/Append mode (a+) */
+#define LX_FILEIO_RDONLY 0x00000001                                 /**< Read only mode (r) */
+#define LX_FILEIO_WRONLY 0x00000010                                 /**< Write only mode (w) */
+#define LX_FILEIO_APPEND 0x00000100                                 /**< Append mode (a) */
+#define LX_FILEIO_BINARY 0x11000000                                 /**< Binary mode (b) */
+#define LX_FILEIO_RDWR   (LX_FILEIO_RDONLY|LX_FILEIO_WRONLY)        /**< Read/Write mode (r+) */
+#define LX_FILEIO_RDAP   (LX_FILEIO_RDONLY|LX_FILEIO_APPEND)        /**< Read/Append mode (a+) */
+#define LX_FILEIO_WRTR   (0x00001011|LX_FILEIO_RDWR)                /**< Write but can read mode (w+) */
 
 
 /**
