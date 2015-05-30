@@ -35,6 +35,7 @@
 #include "LX_Polygon.hpp"
 #include "LX_Particle.hpp"
 #include "LX_ParticleSystem.hpp"
+#include "LX_FileIO.hpp"
 #include "LX_Device.hpp"
 #include "LX_SystemInfo.hpp"
 #include "LX_Random.hpp"

@@ -21,10 +21,23 @@
 
 
 #include "LX_FileIO.hpp"
+#include "LX_Error.hpp"
 
 
 namespace LX_FileIO{
 
+
+    IOException::IOException(std::string err)
+    {
+        str_err = err;
+    }
+
+    const char * IOException::what() const throw()
+    {
+        return str_err.c_str();
+    }
+
+    IOException::~IOException() throw(){}
 
 
     LX_File::LX_File(const char * filename, const Uint32 mode)
@@ -36,6 +49,9 @@ namespace LX_FileIO{
 
         name = filename;
         open(mode);
+
+        if(data == NULL)
+            throw new IOException(LX_GetError());
 
     }
 
