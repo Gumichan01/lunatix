@@ -69,7 +69,7 @@ LFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 all : $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 
-rebuild : clean-target all
+rebuild : cleanall all
 
 $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@echo "Compilation of the Lua script : "$<" -> "$@
@@ -184,7 +184,7 @@ LX_FileIO.o : $(LUNATIX_PATH)LX_FileIO.cpp $(LUNATIX_PATH)LX_FileIO.hpp
 
 
 # Test of different modules
-test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf test-particle
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf test-particle test-file
 
 
 test-init : $(OBJS) test-init.o
@@ -265,6 +265,17 @@ test-particle : $(OBJS) test-particle.o
 test-particle.o : $(TEST_PATH)test-particle.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
+test-file : $(OBJS) test-file.o LX_FileIO.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS) -lstdc++
+
+
+test-file.o : $(TEST_PATH)test-file.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
 
 
 clean :
