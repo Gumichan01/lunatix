@@ -70,7 +70,7 @@ namespace LX_FileIO{
         }
         else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
         {
-            data = SDL_RWFromFile(name.c_str(),"a+");
+            data = SDL_RWFromFile(name.c_str(),"ab+");
         }
         else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
         {
