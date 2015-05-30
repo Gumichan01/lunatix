@@ -48,14 +48,14 @@ LUNATIX_INCLUDE_LIB=./include/
 ifeq ($(DEBUG),yes)
 
 	# Debug mode
-	CFLAGS=-std=c++0x -g
+	CFLAGS=-Wall -std=c++0x -g
 	OPTIMIZE=
 	OPT_SIZE=
 
 else
 
 	# Release mode
-	CFLAGS=-std=c++0x
+	CFLAGS=-Wall -std=c++0x
 	OPTIMIZE=-O3
 	OPT_SIZE=-s
 
