@@ -24,9 +24,6 @@
 
 #include <iostream>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
 #define LX_FILEIO_RDONLY 0x00000001                                 /**< Read only mode (r) */
 #define LX_FILEIO_WRONLY 0x00000010                                 /**< Write only mode (w) */
 #define LX_FILEIO_APPEND 0x00000100                                 /**< Append mode (a) */
@@ -38,6 +35,8 @@
 #define LX_SEEK_CUR RW_SEEK_CUR                                     /**< The current read point */
 #define LX_SEEK_END RW_SEEK_END                                     /**< The end of data */
 
+
+struct SDL_Surface;
 
 /**
 *   @namespace LX_FileIO
@@ -73,9 +72,9 @@ namespace LX_FileIO{
 
     /**
     *   @class LX_File
-    *   @brief The file structure
+    *   @brief The file class
     *
-    *   This structure gathers information about a file
+    *   This class continas information about a file
     *
     */
     class LX_File{
@@ -97,6 +96,7 @@ namespace LX_FileIO{
         Sint64 tell(void);
 
         SDL_Surface * getSurfaceFromData(void);
+        const char * getFilename(void);
 
         void close(void);
 

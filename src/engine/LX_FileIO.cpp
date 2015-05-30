@@ -20,6 +20,9 @@
 */
 
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
 #include "LX_FileIO.hpp"
 #include "LX_Error.hpp"
 
@@ -258,6 +261,19 @@ namespace LX_FileIO{
         seek(save,LX_SEEK_SET);
 
         return surface;
+    }
+
+    /**
+    *   @fn const char * LX_File::getFilename(void)
+    *
+    *   Get the name of the file the refers to
+    *
+    *   @return The name of the file
+    *
+    */
+    const char * LX_File::getFilename(void)
+    {
+        return name.c_str();
     }
 
     /**

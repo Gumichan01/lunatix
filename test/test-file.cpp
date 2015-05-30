@@ -239,7 +239,7 @@ void test_getSurface(void)
         cerr << "FAILURE - getSurfaceFromData() Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - getSurfaceFromData() : got a valid surface " << endl;
+        cout << "SUCCESS - getSurfaceFromData() : got a valid surface from " << f.getFilename() << endl;
         SDL_FreeSurface(surface);
     }
 
@@ -250,7 +250,7 @@ void test_getSurface(void)
         cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - loadSurface() : got a valid surface " << endl;
+        cout << "SUCCESS - loadSurface() : got a valid surface from " << f.getFilename() << endl;
         SDL_FreeSurface(surface);
     }
 
