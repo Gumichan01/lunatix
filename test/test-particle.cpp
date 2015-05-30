@@ -51,7 +51,7 @@ class Dot{
                 case 2 :    p->setTexture("test/asset/green.bmp",0);
                             break;
 
-                defauft :   p->setTexture("test/asset/red.bmp",0);
+                default :   p->setTexture("test/asset/red.bmp",0);
                             break;
             }
 
@@ -81,7 +81,7 @@ class Dot{
                 case 2 :    p->setTexture("test/asset/green.bmp",0);
                             break;
 
-                defauft :   p->setTexture("test/asset/red.bmp",0);
+                default :   p->setTexture("test/asset/red.bmp",0);
                             break;
             }
 
@@ -109,7 +109,6 @@ int main(int argc, char **argv)
 {
 
     Dot *dot;
-    int i = 0;
 
     bool err = LX_Init();
 

@@ -41,7 +41,6 @@ using namespace LX_Graphics;
 
 /**
 *   @namespace LX_TrueTypeFont
-*
 *   @brief The LunatiX Engine True Type Font (TTF) module
 *
 */

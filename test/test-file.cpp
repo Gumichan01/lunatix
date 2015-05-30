@@ -87,6 +87,7 @@ void test_open(void)
         invalidString = new LX_File(null,LX_FILEIO_RDONLY);
 
         cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        delete invalidString;
 
     }catch(IOException &ex)
     {
@@ -99,6 +100,7 @@ void test_open(void)
         f1 = new LX_File(str1.c_str(),0x00000000);
 
         cerr << "FAILURE - mode was not set (o_o); Expected : IOexception; got : a valid reference " << endl;
+        delete f1;
 
     }catch(IOException &exe)
     {
@@ -111,6 +113,7 @@ void test_open(void)
         notExistFile = new LX_File(str3.c_str(),LX_FILEIO_RDONLY);
 
         cout << "FAILURE - An invalid file was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        delete notExistFile;
 
     }catch(IOException &ioe)
     {
@@ -223,8 +226,6 @@ void test_getSurface(void)
 {
     cout << " = TEST getSurface = " << endl;
 
-    int lus = 0;
-    char buf[N + 1];
     string str_ex = "data/explosion.png";
     SDL_Surface * surface = NULL;
 
@@ -236,9 +237,21 @@ void test_getSurface(void)
         cerr << "FAILURE - getSurfaceFromData() Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - got a valid surface " << endl;
+        cout << "SUCCESS - getSurfaceFromData() : got a valid surface " << endl;
         SDL_FreeSurface(surface);
     }
+
+
+    surface = LX_Graphics::loadSurface(&f);
+
+    if(surface == NULL)
+        cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - loadSurface() : got a valid surface " << endl;
+        SDL_FreeSurface(surface);
+    }
+
 
     f.close();
 
