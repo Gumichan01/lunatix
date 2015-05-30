@@ -85,8 +85,9 @@ namespace LX_FileIO{
 
         LX_File(const char * filename, const Uint32 mode);
 
-        size_t readInto(void *ptr,size_t size,size_t max_num);
-        size_t writeFrom(void *ptr,size_t size,size_t max_num);
+        size_t read(void *ptr,size_t size,size_t max_num);
+        size_t write(void *ptr,size_t size,size_t max_num);
+        size_t write(std::string str);
 
         Sint64 seek(Sint64 offset, int whence);
         Sint64 tell(void);

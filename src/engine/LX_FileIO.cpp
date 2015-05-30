@@ -87,6 +87,19 @@ namespace LX_FileIO{
     }
 
 
+    size_t LX_File::read(void *ptr,size_t size,size_t max_num)
+    {
+        return SDL_RWread(data,ptr,size,max_num);
+    }
+
+
+    size_t LX_File::write(void *ptr,size_t size,size_t max_num)
+    {
+        return SDL_RWwrite(data,ptr,size,max_num);
+    }
+
+
+
     void LX_File::close(void)
     {
         if(data != NULL)
