@@ -15,6 +15,8 @@
   - LX\_SystemInfo : The System information library
   - LX\_Random : The Random Number Generator (RNG) library
   - LX\_ParticleSystem : The particle system
+  - LX\_FileIO : The FileIO library
+
 
  The engine works on Windows and Linux system.
 

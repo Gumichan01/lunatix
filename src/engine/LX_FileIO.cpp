@@ -26,16 +26,33 @@
 
 namespace LX_FileIO{
 
-
+    /**
+    *   @fn IOException::IOException(std::string err)
+    *
+    *   The excepyion constructor
+    *
+    *   @param err The error string
+    *
+    */
     IOException::IOException(std::string err)
     {
         str_err = err;
     }
 
+
+    /**
+    *   @fn const char * IOException::what() const throw()
+    *
+    *   Get the error string
+    *
+    *   @return The error string
+    *
+    */
     const char * IOException::what() const throw()
     {
         return str_err.c_str();
     }
+
 
     IOException::~IOException() throw(){}
 
@@ -133,7 +150,7 @@ namespace LX_FileIO{
 
 
     /**
-    *   @fn size_t LX_File::read(void *ptr,size_t size,size_t num)
+    *   @fn size_t LX_File::write(void *ptr,size_t size,size_t num)
     *
     *   Write on the file
     *
