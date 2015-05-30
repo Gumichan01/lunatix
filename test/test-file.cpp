@@ -47,6 +47,8 @@ int main(int argc, char **argv)
     remove(str.c_str());
 
     cout << " ==== End File ==== " << endl;
+
+    return EXIT_SUCCESS;
 }
 
 
