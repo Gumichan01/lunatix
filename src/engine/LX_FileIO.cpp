@@ -103,10 +103,20 @@ namespace LX_FileIO{
     size_t LX_File::write(std::string str)
     {
         size_t len = str.length();
-
         return write((void *)str.c_str(),sizeof(char),len);
     }
 
+
+    Sint64 LX_File::seek(Sint64 offset, int whence)
+    {
+        return SDL_RWseek(data,offset,whence);
+    }
+
+
+    Sint64 LX_File::tell(void)
+    {
+        return SDL_RWtell(data);
+    }
 
 
     void LX_File::close(void)

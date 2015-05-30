@@ -35,6 +35,10 @@
 #define LX_FILEIO_RDAP   (LX_FILEIO_RDONLY|LX_FILEIO_APPEND)        /**< Read/Append mode (a+) */
 #define LX_FILEIO_WRTR   (0x00001011|LX_FILEIO_RDWR)                /**< Write but can read mode (w+) */
 
+#define LX_SEEK_SET RW_SEEK_SET                                     /**< Beginning of data */
+#define LX_SEEK_CUR RW_SEEK_CUR                                     /**< The current read point */
+#define LX_SEEK_END RW_SEEK_END                                     /**< The end of data */
+
 
 /**
 *   @namespace LX_FileIO
