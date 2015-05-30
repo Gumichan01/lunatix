@@ -17,7 +17,7 @@ using namespace LX_FileIO;
 void test_open(void);
 void test_read(void);
 void test_write(void);
-void test_tell(void);
+void test_tellSeek(void);
 
 string str = "tmpFile";
 
@@ -38,6 +38,7 @@ int main(int argc, char **argv)
     test_open();
     test_write();
     test_read();
+    test_tellSeek();
 
     //remove(str.c_str());
 
@@ -172,6 +173,45 @@ void test_write(void)
 }
 
 
+void test_tellSeek(void)
+{
+    cout << " = TEST write = " << endl;
+
+    LX_File f(str.c_str(),LX_FILEIO_RDONLY);
+
+    Sint64 pos = f.seek(4,LX_SEEK_SET);
+
+    if(pos != 4)
+        cerr << "FAILURE - seek Expected : 4 got : " << pos << endl;
+    else
+    {
+        cout << "SUCCESS - seek position : 4 " << endl;
+    }
+
+    pos = f.tell();
+
+    if(pos != 4)
+        cerr << "FAILURE - tell Expected : 4 got : " << pos << endl;
+    else
+    {
+        cout << "SUCCESS - tell position : 4 " << endl;
+    }
+
+    pos = f.seek(-1,LX_SEEK_CUR);
+
+    if(pos != 3)
+        cerr << "FAILURE - seek Expected : 3 got : " << pos << endl;
+    else
+    {
+        cout << "SUCCESS - seek -1 position : 3 " << endl;
+    }
+
+
+    f.close();
+
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
