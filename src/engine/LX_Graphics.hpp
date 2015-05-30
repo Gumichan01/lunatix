@@ -25,6 +25,7 @@
 #include <iostream>
 
 #include "LX_Window.hpp"
+#include "LX_FileIO.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -43,6 +44,9 @@ namespace LX_Graphics{
 
 
     SDL_Surface * loadSurface(std::string filename);
+    SDL_Surface * loadSurface(LX_FileIO::LX_File *file);
+
+    SDL_Surface * optimizeSurface(SDL_Surface * surface);
 
     // To use when you work with a window without using the window manager
     SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w);

@@ -29,7 +29,6 @@
 #include "LX_Error.hpp"
 
 
-
 namespace LX_Graphics{
 
 
@@ -42,14 +41,13 @@ namespace LX_Graphics{
     *
     *   @return The loaded and optimized surface if there is no problem, NULL otherwise
     *
-    *   @warning When you call this function, the format optimization includes the alpha channel.
+    *   @note When you call this function, the format optimization includes the alpha channel.
     *               No alpha needs to be set on the surface after that.
     *
     */
     SDL_Surface * loadSurface(std::string filename)
     {
         SDL_Surface *loaded = NULL;
-        SDL_Surface *optimized = NULL;
 
         loaded = IMG_Load(filename.c_str());
 
@@ -58,9 +56,61 @@ namespace LX_Graphics{
             return NULL;
         }
 
-        optimized = SDL_ConvertSurfaceFormat(loaded,SDL_PIXELFORMAT_RGBA4444,0x00000000);
+        return optimizeSurface(loaded);
+    }
 
-        SDL_FreeSurface(loaded);
+
+    /**
+    *   @fn SDL_Surface * loadSurface(LX_FileIO::LX_File *file)
+    *
+    *   This function loads an SDL_Surface from memory
+    *
+    *   @param file The data you want to load the surface from
+    *
+    *   @return The loaded and optimized surface if there is no problem, NULL otherwise
+    *
+    *   @note When you call this function, the format optimization includes the alpha channel.
+    *               No alpha needs to be set on the surface after that.
+    *
+    */
+    SDL_Surface * loadSurface(LX_FileIO::LX_File *file)
+    {
+        if(file == NULL)
+        {
+            LX_SetError("Invalid pointer : NULL file\n");
+            return NULL;
+        }
+
+        return optimizeSurface(file->getSurfaceFromData());
+    }
+
+
+    /**
+    *   @fn SDL_Surface * optimizeSurface(SDL_Surface * surface)
+    *
+    *   Optimize the surface format
+    *
+    *   @param surface The surface to optimize
+    *
+    *   @return A valid poinetr to the optimized surface on success.
+    *           NULL on error or if the surface is NULL.
+    *
+    *   @note The function frees the surface if it is not NULL.
+    *           So the surface becomes invalid.
+    *
+    */
+    SDL_Surface * optimizeSurface(SDL_Surface * surface)
+    {
+        SDL_Surface * optimized = NULL;
+
+        if(surface == NULL)
+        {
+            LX_SetError("Invalid pointer : NULL surface\n");
+            return NULL;
+        }
+
+        optimized = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA4444,0x00000000);
+        SDL_FreeSurface(surface);
 
         return optimized;
     }
