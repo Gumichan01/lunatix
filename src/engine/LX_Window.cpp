@@ -297,9 +297,12 @@ namespace LX_Graphics{
     *   @param area The area of the surface to put on the screen
     *   @param pos The position of what you want to put
     *
-    *   @note If you do not need to determine the area parameter of the surface, put NULL
-    *
     *   @return TRUE If the image was put with success, FALSE otherwise
+    *
+    *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
+    *           Actually, LX_AABB is just an alias of SDL_Rect
+    *
     */
     bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     {
@@ -343,11 +346,13 @@ namespace LX_Graphics{
     *   @param area The area of the surface to put on the renderer
     *   @param pos The position of what you want to put
     *
+    *   @return TRUE If the texture was put with success, FALSE otherwise
+    *
     *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
+    *           Actually, LX_AABB is just an alias of SDL_Rect
     *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
     *               to display the texture according to its dimension
-    *
-    *   @return TRUE If the texture was put with success, FALSE otherwise
     *
     */
     bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
@@ -367,11 +372,13 @@ namespace LX_Graphics{
     *   @param pos The position of what you want to put
     *   @param angle an angle in degrees that indicate the rotation
     *
+    *   @return TRUE If the texture was put with success, FALSE otherwise
+    *
     *   @note If you do not need to determine the area parameter of the surface, put NULL
+    *   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
+    *           Actually, LX_AABB is just an alias of SDL_Rect
     *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
     *               to display the texture according to its dimension
-    *
-    *   @return TRUE If the texture was put with success, FALSE otherwise
     *
     */
     bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
