@@ -27,6 +27,7 @@
 
 struct SDL_Surface;
 
+
 namespace LX_FileIO{
 
 class LX_File;

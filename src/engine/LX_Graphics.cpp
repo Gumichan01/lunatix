@@ -39,7 +39,7 @@ namespace LX_Graphics{
     /**
     *   @fn SDL_Surface * loadSurface(std::string filename)
     *
-    *   This function loads an SDL_Surface from any image file an optimized its format
+    *   This function loads a SDL_Surface from any image file an optimized its format
     *
     *   @param filename The name of the image file
     *
@@ -67,7 +67,7 @@ namespace LX_Graphics{
     /**
     *   @fn SDL_Surface * loadSurface(LX_File *file)
     *
-    *   This function loads an SDL_Surface from memory
+    *   This function loads a SDL_Surface from memory
     *
     *   @param file The data you want to load the surface from
     *
@@ -92,7 +92,7 @@ namespace LX_Graphics{
     /**
     *   @fn SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
     *
-    *   This function loads an SDL_Surface from the buffer
+    *   This function loads a SDL_Surface from the buffer
     *
     *   @param file The buffer you want to load the surface from
     *
