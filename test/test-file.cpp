@@ -325,6 +325,17 @@ void test_getSurface2(void)
         SDL_FreeSurface(surface);
     }
 
+    surface = LX_Graphics::loadSurfaceFromFileBuffer(&f);
+
+    if(surface == NULL)
+        cerr << "FAILURE - loadSurfaceFromFileBuffer Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - loadSurfaceFromFileBuffer : got a valid surface from " << f.getFilename() << endl;
+        SDL_FreeSurface(surface);
+    }
+
+
     cout << " = END TEST = " << endl;
 }
 

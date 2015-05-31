@@ -29,6 +29,7 @@
 #include "LX_WindowManager.hpp"
 #include "LX_Error.hpp"
 #include "LX_FileIO.hpp"
+#include "LX_FileBuffer.hpp"
 
 using namespace LX_FileIO;
 
@@ -80,12 +81,38 @@ namespace LX_Graphics{
     {
         if(file == NULL)
         {
-            LX_SetError("Invalid pointer : NULL file\n");
+            LX_SetError("Invalid pointer : NULL reference of LX_File\n");
             return NULL;
         }
 
         return optimizeSurface(file->getSurfaceFromData());
     }
+
+
+    /**
+    *   @fn SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
+    *
+    *   This function loads an SDL_Surface from the buffer
+    *
+    *   @param file The buffer you want to load the surface from
+    *
+    *   @return The loaded and optimized surface if there is no problem, NULL otherwise
+    *
+    *   @note When you call this function, the format optimization includes the alpha channel.
+    *               No alpha needs to be set on the surface after that.
+    *
+    */
+    SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
+    {
+        if(file == NULL)
+        {
+            LX_SetError("Invalid pointer : NULL reference of LX_FileBuffer\n");
+            return NULL;
+        }
+
+        return optimizeSurface(file->getSurfaceFromBuffer());
+    }
+
 
 
     /**

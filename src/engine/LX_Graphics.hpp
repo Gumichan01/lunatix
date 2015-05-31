@@ -35,6 +35,7 @@ struct SDL_Texture;
 namespace LX_FileIO{
 
 class LX_File;
+class LX_FileBuffer;
 
 };
 
@@ -54,6 +55,7 @@ class LX_Window;
 
     SDL_Surface * loadSurface(std::string filename);
     SDL_Surface * loadSurface(LX_File *file);
+    SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file);
 
     SDL_Surface * optimizeSurface(SDL_Surface * surface);
 
