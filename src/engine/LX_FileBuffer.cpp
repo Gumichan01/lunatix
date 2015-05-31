@@ -71,6 +71,21 @@ namespace LX_FileIO{
     }
 
 
+
+    /**
+    *   @fn const char * LX_FileBuffer::getFilename(void)
+    *
+    *   Get the name of the file the buffer refers to
+    *
+    *   @return The name of the file
+    *
+    */
+    const char * LX_FileBuffer::getFilename(void)
+    {
+        return name.c_str();
+    }
+
+
     LX_FileBuffer::~LX_FileBuffer()
     {
         delete [] buffer;

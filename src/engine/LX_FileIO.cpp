@@ -267,7 +267,7 @@ namespace LX_FileIO{
     /**
     *   @fn const char * LX_File::getFilename(void)
     *
-    *   Get the name of the file the refers to
+    *   Get the name of the file the instance refers to
     *
     *   @return The name of the file
     *
