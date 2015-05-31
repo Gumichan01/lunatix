@@ -81,16 +81,17 @@ namespace LX_FileIO{
     */
     LX_File::LX_File(const char * filename, const Uint32 mode)
     {
+        std::string str("LX_File : ");
         data = NULL;
 
         if(filename == NULL || mode == 0x00000000)
-            throw IOException("Invalid filename or mode\n");
+            throw IOException(" LX_File : Invalid filename or mode");
 
         name = filename;
         open(mode);
 
         if(data == NULL)
-            throw IOException(LX_GetError());
+            throw IOException(str + LX_GetError());
 
     }
 
