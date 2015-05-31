@@ -92,7 +92,7 @@ namespace LX_Graphics{
     /**
     *   @fn SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
     *
-    *   This function loads a SDL_Surface from the buffer
+    *   This function loads a SDL_Surface from a file buffer
     *
     *   @param file The buffer you want to load the surface from
     *
