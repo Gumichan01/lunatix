@@ -34,6 +34,14 @@
 #define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle between the source and the front */
 
 
+namespace LX_FileIO{
+
+class LX_FileBuffer;
+
+};
+
+using namespace LX_FileIO;
+
 
 /**
 *   @namespace LX_Mixer
@@ -54,6 +62,7 @@ class LX_Chunk;
 
     LX_Chunk * loadSample(std::string filename);
     LX_Chunk * loadSample(Mix_Chunk *ch);
+    LX_Chunk * loadSample(LX_FileBuffer *file);
 
     int allocateChannels(int num);
     int reserveChannels(unsigned int num);

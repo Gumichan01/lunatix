@@ -24,6 +24,10 @@
 #include "LX_Chunk.hpp"
 #include "LX_Mixer.hpp"
 #include "LX_Error.hpp"
+#include "LX_FileIO.hpp"
+#include "LX_FileBuffer.hpp"
+
+using namespace LX_FileIO;
 
 
 namespace LX_Mixer{
@@ -38,7 +42,7 @@ namespace LX_Mixer{
     *
     *   @return A valid instance of LX_Music
     *
-    *   @note This function create a new instance of LX_Music
+    *   @note This function creates a new instance of LX_Music.
     *           So do not forget to destroy it.
     *
     */
@@ -58,7 +62,7 @@ namespace LX_Mixer{
     *
     *   @return A valid instance of LX_Music
     *
-    *   @note This function create a new instance of LX_Music
+    *   @note This function creates a new instance of LX_Music.
     *           So do not forget to destroy it.
     *
     */
@@ -78,7 +82,7 @@ namespace LX_Mixer{
     *
     *   @return A valid instance of LX_Chunk
     *
-    *   @note This function create a new instance of LX_Chunk
+    *   @note This function creates a new instance of LX_Chunk.
     *           So do not forget to destroy it.
     *
     */
@@ -97,7 +101,7 @@ namespace LX_Mixer{
     *
     *   @return A valid instance of LX_Chunk
     *
-    *   @note This function create a new instance of LX_Chunk
+    *   @note This function creates a new instance of LX_Chunk.
     *           So do not forget to destroy it.
     *
     */
@@ -105,6 +109,27 @@ namespace LX_Mixer{
     {
         return new LX_Chunk(ch);
     }
+
+
+    /**
+    *   @fn LX_Chunk * loadSample(LX_FileBuffer *file)
+    *
+    *   Create a new LX_Chunk instance from a file buffer
+    *
+    *   @param file The file buffer
+    *
+    *   @return A valid instance of LX_Chunk if the file buffer is not NULL
+    *           NULL otherwise
+    *
+    *   @note This function creates a new instance of LX_Chunk.
+    *           So do not forget to destroy it.
+    *
+    */
+    LX_Chunk * loadSample(LX_FileBuffer *file)
+    {
+        return (file == NULL) ? NULL:(new LX_Chunk(file));
+    }
+
 
 
     /**

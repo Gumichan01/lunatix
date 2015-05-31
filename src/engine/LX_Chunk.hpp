@@ -24,7 +24,6 @@
 
 struct Mix_Chunk;
 
-
 namespace LX_FileIO{
 
 class LX_FileBuffer;
