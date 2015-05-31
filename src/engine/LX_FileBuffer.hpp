@@ -51,7 +51,7 @@ class IOException;
 
         LX_FileBuffer(const char * filename);
 
-        SDL_Surface * getSurfacefromBuffer(void);
+        SDL_Surface * getSurfaceFromBuffer(void);
         const char * getFilename(void);
 
         ~LX_FileBuffer();

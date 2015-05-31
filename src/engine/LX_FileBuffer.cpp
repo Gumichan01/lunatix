@@ -83,14 +83,14 @@ namespace LX_FileIO{
 
 
     /**
-    *   @fn SDL_Surface * LX_FileBuffer::getSurfacefromBuffer(void)
+    *   @fn SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
     *
     *   Try to load a surface from the memory
     *
     *   @return A valid surface if the memory refers to an image
     *
     */
-    SDL_Surface * LX_FileBuffer::getSurfacefromBuffer(void)
+    SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
     {
         SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
         return (rw == NULL) ? NULL:IMG_Load_RW(rw,1);
