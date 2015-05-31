@@ -24,7 +24,10 @@
 #include "LX_Sound.hpp"
 #include "LX_Chunk.hpp"
 #include "LX_Error.hpp"
+#include "LX_FileIO.hpp"
+#include "LX_FileBuffer.hpp"
 
+using namespace LX_FileIO;
 
 namespace LX_Mixer{
 
@@ -60,7 +63,7 @@ namespace LX_Mixer{
     *
     *   Construct the instance creating the Mix_Chunk instance from a file
     *
-    *   @param filename The file
+    *   @param filename The file to you use to retrieve data
     *
     *   @note It is preferable to give a .wav file to the constructor.
     *           The chunk was optimized for this format. But it can work with
@@ -70,8 +73,26 @@ namespace LX_Mixer{
     LX_Chunk::LX_Chunk(std::string filename)
     {
         chunk = NULL;
-
         load(filename.c_str());
+    }
+
+
+    /**
+    *   @fn LX_Chunk::LX_Chunk(LX_FileBuffer * file)
+    *
+    *   Construct the instance creating the Mix_Chunk instance
+    *   from a file buffer.
+    *
+    *   @param file The file buffer you use to retrieve data
+    *
+    *   @note If the file buffer is NULL, you will have
+    *           an undefined behaviour
+    *
+    */
+    LX_Chunk::LX_Chunk(LX_FileBuffer * file)
+    {
+        chunk = NULL;
+        loadFromBuffer(file);
     }
 
 
@@ -86,6 +107,7 @@ namespace LX_Mixer{
         Mix_FreeChunk(chunk);
     }
 
+
     /**
     *   @fn bool LX_Chunk::load(std::string filename)
     *
@@ -99,13 +121,26 @@ namespace LX_Mixer{
     bool LX_Chunk::load(std::string filename)
     {
         Mix_FreeChunk(chunk);
-
         chunk = Mix_LoadWAV(filename.c_str());
+        return chunk != NULL;
+    }
 
-        if(chunk == NULL)
-            return false;
 
-        return true;
+    /**
+    *   @fn bool LX_Chunk::loadFromBuffer(LX_FileBuffer *file)
+    *
+    *   Load the sample from a file buffer
+    *
+    *   @param file The file buffer you use to retrieve data
+    *
+    *   @return TRUE on success, FALSE otherwise
+    *
+    */
+    bool LX_Chunk::loadFromBuffer(LX_FileBuffer *file)
+    {
+        Mix_FreeChunk(chunk);
+        chunk = file->getChunkFromBuffer();
+        return chunk != NULL;
     }
 
 

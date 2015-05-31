@@ -21,6 +21,7 @@
 
 #include <new>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "LX_FileIO.hpp"
 #include "LX_FileBuffer.hpp"
@@ -101,7 +102,7 @@ namespace LX_FileIO{
     *
     *   Try to load a TTF_Font from the memory
     *
-    *   @return A valid font if the memory refers to an image
+    *   @return A valid font if the memory refers to a font
     *
     */
     TTF_Font * LX_FileBuffer::getTTFFromBuffer(int size)
@@ -110,6 +111,20 @@ namespace LX_FileIO{
         return (rw == NULL) ? NULL:TTF_OpenFontRW(rw,1,size);
     }
 
+
+    /**
+    *   @fn Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
+    *
+    *   Try to load a sample from the memory
+    *
+    *   @return A valid sample if the memory refers to a Mix_Chunk
+    *
+    */
+    Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
+    {
+        SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
+        return (rw == NULL) ? NULL:Mix_LoadWAV_RW(rw,1);
+    }
 
 
     /**

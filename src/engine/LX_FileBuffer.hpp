@@ -27,6 +27,7 @@
 #include <SDL2/SDL_ttf.h>
 
 struct SDL_Surface;
+struct Mix_Chunk;
 
 
 namespace LX_FileIO{
@@ -55,6 +56,7 @@ class IOException;
 
         SDL_Surface * getSurfaceFromBuffer(void);
         TTF_Font * getTTFFromBuffer(int size);
+        Mix_Chunk * getChunkFromBuffer(void);
         const char * getFilename(void);
 
         ~LX_FileBuffer();

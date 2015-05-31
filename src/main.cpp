@@ -33,6 +33,7 @@ using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
 using namespace LX_Device;
 using namespace LX_Mixer;
+using namespace LX_FileIO;
 
 // Keep it in comments, it part of code is no longer compilable
 
@@ -58,6 +59,9 @@ int main ( int argc, char** argv )
     LX_Window *window = NULL;
     LX_Font *ttf = NULL;
     LX_Music *audio = NULL;
+
+    LX_FileBuffer buf("data/explosion.wav");
+    LX_Chunk chunk(&buf);
 
     SDL_Event event;
 
