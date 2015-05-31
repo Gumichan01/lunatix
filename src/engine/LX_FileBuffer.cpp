@@ -21,6 +21,8 @@
 
 #include <new>
 
+#include <SDL2/SDL_image.h>
+
 #include "LX_FileIO.hpp"
 #include "LX_FileBuffer.hpp"
 #include "LX_Error.hpp"
@@ -28,7 +30,16 @@
 
 namespace LX_FileIO{
 
-
+    /**
+    *   @fn LX_FileBuffer::LX_FileBuffer(const char * filename)
+    *
+    *   Build the instance of the file buffer
+    *
+    *   @param filename The file to generate the buffer
+    *
+    *   @exception IOException If the filename is NULL
+    *
+    */
     LX_FileBuffer::LX_FileBuffer(const char * filename)
     {
         LX_File *reader = NULL;
@@ -71,6 +82,20 @@ namespace LX_FileIO{
     }
 
 
+    /**
+    *   @fn SDL_Surface * LX_FileBuffer::getSurfacefromBuffer(void)
+    *
+    *   Try to load a surface from the memory
+    *
+    *   @return A valid surface if the memory refers to an image
+    *
+    */
+    SDL_Surface * LX_FileBuffer::getSurfacefromBuffer(void)
+    {
+        SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
+        return (rw == NULL) ? NULL:IMG_Load_RW(rw,1);
+    }
+
 
     /**
     *   @fn const char * LX_FileBuffer::getFilename(void)
@@ -86,6 +111,12 @@ namespace LX_FileIO{
     }
 
 
+    /**
+    *   @fn LX_FileBuffer::~LX_FileBuffer()
+    *
+    *   Destroy the file buffer
+    *
+    */
     LX_FileBuffer::~LX_FileBuffer()
     {
         delete [] buffer;
