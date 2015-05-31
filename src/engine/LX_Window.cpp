@@ -19,7 +19,8 @@
 *
 */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_render.h>
 
 #include "LX_Config.hpp"
 #include "LX_Window.hpp"

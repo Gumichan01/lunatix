@@ -22,10 +22,7 @@
 *
 */
 
-
 #include <SDL2/SDL_ttf.h>
-
-#include "LX_Window.hpp"
 
 struct SDL_Surface;
 struct SDL_Texture;
@@ -36,6 +33,12 @@ struct SDL_Color;
 #define LX_WHITE_COLOR 255              /**< The white color value */
 #define LX_BLACK_COLOR 0                /**< The black color value */
 
+
+namespace LX_Graphics{
+
+class LX_Window;
+
+};
 
 using namespace LX_Graphics;
 

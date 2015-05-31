@@ -23,6 +23,7 @@
 #include <cstring>
 
 #include "LX_WindowManager.hpp"
+#include "LX_Window.hpp"
 #include "LX_Error.hpp"
 
 

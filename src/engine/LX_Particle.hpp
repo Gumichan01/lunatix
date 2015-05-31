@@ -23,17 +23,16 @@
 *
 */
 
-
-struct SDL_Texture;
-struct SDL_Surface;
-
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
 
 #include "LX_Hitbox.hpp"
 #include "LX_Vector2D.hpp"
 
-
 #define DELAY 16        /**< The delay of the particle The delay to stay alive */
+
+
+struct SDL_Texture;
+struct SDL_Surface;
 
 
 /**

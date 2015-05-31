@@ -19,11 +19,13 @@
 *
 */
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_surface.h>
+#include <SDL2/SDL_render.h>
 
 #include "LX_Config.hpp"
 #include "LX_Graphics.hpp"
 #include "LX_TrueTypeFont.hpp"
+#include "LX_Window.hpp"
 #include "LX_WindowManager.hpp"
 #include "LX_Error.hpp"
 

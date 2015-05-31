@@ -22,10 +22,15 @@
 *
 */
 
+#include <iostream>
+
+#include <SDL2/SDL_stdinc.h>
 
 struct SDL_Window;
 struct SDL_Renderer;
 struct SDL_Surface;
+struct SDL_Texture;
+struct SDL_Rect;
 
 
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with desktop resolution */

@@ -22,8 +22,8 @@
 *
 */
 
-#include <SDL2/SDL.h>
-
+#include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL_gamecontroller.h>
 
 #define LX_JOY_NAMESIZE 64              /**< The size of the joystick name */
 #define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display */

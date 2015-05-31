@@ -20,7 +20,7 @@
 */
 
 #include <cmath>
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
 
 #include "LX_Physics.hpp"
 #include "LX_Vector2D.hpp"

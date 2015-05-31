@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_FileBuffer.hpp
-*	@brief This file defines the file buffer
+*	@brief The file buffer
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.5
 *

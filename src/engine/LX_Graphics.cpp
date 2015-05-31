@@ -25,9 +25,12 @@
 #include <SDL2/SDL_image.h>
 
 #include "LX_Graphics.hpp"
+#include "LX_Window.hpp"
 #include "LX_WindowManager.hpp"
 #include "LX_Error.hpp"
+#include "LX_FileIO.hpp"
 
+using namespace LX_FileIO;
 
 namespace LX_Graphics{
 
@@ -61,7 +64,7 @@ namespace LX_Graphics{
 
 
     /**
-    *   @fn SDL_Surface * loadSurface(LX_FileIO::LX_File *file)
+    *   @fn SDL_Surface * loadSurface(LX_File *file)
     *
     *   This function loads an SDL_Surface from memory
     *
@@ -73,7 +76,7 @@ namespace LX_Graphics{
     *               No alpha needs to be set on the surface after that.
     *
     */
-    SDL_Surface * loadSurface(LX_FileIO::LX_File *file)
+    SDL_Surface * loadSurface(LX_File *file)
     {
         if(file == NULL)
         {

@@ -41,7 +41,6 @@
 
 
 struct SDL_Surface;
-struct SDL_RWops;
 
 
 /**

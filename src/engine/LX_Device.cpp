@@ -23,6 +23,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <SDL2/SDL_mouse.h>
+
 #include "LX_Device.hpp"
 #include "LX_Error.hpp"
 

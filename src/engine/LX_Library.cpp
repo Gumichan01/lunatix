@@ -19,17 +19,11 @@
 *
 */
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
-
-#include <GL/glu.h>
-
-#include "LX_Config.hpp"
 #include "LX_Library.hpp"
+#include "LX_Config.hpp"
 #include "LX_Mixer.hpp"
 #include "LX_Error.hpp"
+#include "LX_WindowManager.hpp"
 
 
 using namespace LX_Graphics;

@@ -23,14 +23,22 @@
 */
 
 #include <iostream>
-
-#include "LX_Window.hpp"
-#include "LX_FileIO.hpp"
+#include <SDL2/SDL_stdinc.h>
 
 struct SDL_Window;
 struct SDL_Renderer;
 struct SDL_Surface;
+struct SDL_Texture;
 
+
+
+namespace LX_FileIO{
+
+class LX_File;
+
+};
+
+using namespace LX_FileIO;
 
 /**
 *
@@ -42,9 +50,10 @@ struct SDL_Surface;
 */
 namespace LX_Graphics{
 
+class LX_Window;
 
     SDL_Surface * loadSurface(std::string filename);
-    SDL_Surface * loadSurface(LX_FileIO::LX_File *file);
+    SDL_Surface * loadSurface(LX_File *file);
 
     SDL_Surface * optimizeSurface(SDL_Surface * surface);
 

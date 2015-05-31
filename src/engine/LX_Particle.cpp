@@ -19,6 +19,9 @@
 *
 */
 
+#include <SDL2/SDL_surface.h>
+#include <SDL2/SDL_render.h>
+
 #include "LX_Particle.hpp"
 #include "LX_Physics.hpp"
 #include "LX_Graphics.hpp"

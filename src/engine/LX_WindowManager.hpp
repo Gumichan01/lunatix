@@ -23,18 +23,12 @@
 */
 
 
-#include <iostream>
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
-#include "LX_Window.hpp"
-
-
 #define LX_NBMAX_WINDOWS 100    /**< The maximum number of windows to display */
 
 
 namespace LX_Graphics{
+
+class LX_Window;
 
     /**
     *   @class LX_WindowManager

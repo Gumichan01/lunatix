@@ -1,5 +1,5 @@
-#ifndef LX_LIB_H_INCLUDED
-#define LX_LIB_H_INCLUDED
+#ifndef LX_LIBRARY_H_INCLUDED
+#define LX_LIBRARY_H_INCLUDED
 
 
 
@@ -22,10 +22,15 @@
 *
 */
 
-#include "LX_WindowManager.hpp"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+#include <GL/glu.h>
+
 
 bool LX_Init(void);
 void LX_Quit(void);
 
 
-#endif // LX_LIB_H_INCLUDED
+#endif // LX_LIBRARY_H_INCLUDED

@@ -12,7 +12,7 @@
 */
 
 /**
-*	@file LX_SystemInfo.hpp
+*	@file LX_SystemInfo.cpp
 *	@brief The implementation of the system information
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.4
@@ -21,6 +21,8 @@
 
 #include <iostream>
 #include <new>
+
+#include <SDL2/SDL_cpuinfo.h>
 
 #include "LX_SystemInfo.hpp"
 #include "LX_Error.hpp"
