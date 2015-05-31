@@ -19,8 +19,8 @@ void test_read(void);
 void test_write(void);
 void test_tellSeek(void);
 void test_getSurface(void);
-void test_getFont(void);
-void test_getChunk(void);
+void test_buffer(void);
+void test_getSurface2(void);
 
 string str = "tmpFile";
 
@@ -43,6 +43,8 @@ int main(int argc, char **argv)
     test_read();
     test_tellSeek();
     test_getSurface();
+    test_buffer();
+    test_getSurface2();
 
     remove(str.c_str());
 
@@ -262,6 +264,69 @@ void test_getSurface(void)
 
 
 
+void test_buffer(void)
+{
+    LX_FileBuffer *f = NULL;
+    LX_FileBuffer *invalid = NULL;
+
+    const char *null = NULL;
+    string str1 = "data/explosion.png";
+
+    cout << " = TEST Buffer = " << endl;
+
+    try{
+
+        invalid = new LX_FileBuffer(null);
+
+        cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        delete invalid;
+
+    }catch(IOException &ex)
+    {
+        cout << "SUCCESS - IOException occured : " << ex.what() << endl;
+    }
+
+
+    // valid file
+    try{
+
+        f = new LX_FileBuffer(str1.c_str());
+
+        cout << "SUCCESS - The following file was loaded : " << str1 << endl;
+
+        delete f;
+        f = NULL;
+
+    }catch(IOException &e)
+    {
+        cerr << "FAILURE - Cannot load " << str1 << "; Expected : a valid refence; Got : " << e.what() << endl;
+    }
+
+    cout << " = END TEST = " << endl;
+
+}
+
+
+void test_getSurface2(void)
+{
+    LX_FileBuffer f("data/explosion.png");
+    SDL_Surface * surface = NULL;
+
+
+    cout << " = TEST Surface from buffer = " << endl;
+
+    surface = f.getSurfaceFromBuffer();
+
+    if(surface == NULL)
+        cerr << "FAILURE - getsurface from buffer Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - getSurfaceFromBuffer : got a valid surface from " << f.getFilename() << endl;
+        SDL_FreeSurface(surface);
+    }
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
