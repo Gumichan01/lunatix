@@ -177,7 +177,7 @@ int main ( int argc, char** argv )
         window->updateRenderer();
 
         // Put the image of explosion to the second window
-        getWindowManager()->getWindow(1)->putTexture(ex,NULL,&pos);
+        getWindowManager()->getWindow(1)->putTextureAndRotate(ex,NULL,&pos,45);
         getWindowManager()->getWindow(1)->updateRenderer();
 
         SDL_Delay(33);

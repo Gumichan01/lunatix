@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_ttf.h>
 
 struct SDL_Surface;
 
@@ -53,6 +54,7 @@ class IOException;
         LX_FileBuffer(const char * filename);
 
         SDL_Surface * getSurfaceFromBuffer(void);
+        TTF_Font * getTTFFromBuffer(int size);
         const char * getFilename(void);
 
         ~LX_FileBuffer();

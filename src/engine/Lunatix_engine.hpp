@@ -35,6 +35,8 @@
 #include "LX_Polygon.hpp"
 #include "LX_Particle.hpp"
 #include "LX_ParticleSystem.hpp"
+#include "LX_Window.hpp"
+#include "LX_WindowManager.hpp"
 #include "LX_FileIO.hpp"
 #include "LX_FileBuffer.hpp"
 #include "LX_Device.hpp"

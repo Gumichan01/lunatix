@@ -97,6 +97,22 @@ namespace LX_FileIO{
 
 
     /**
+    *   @fn TTF_Font * LX_FileBuffer::getTTFFromBuffer(int size)
+    *
+    *   Try to load a TTF_Font from the memory
+    *
+    *   @return A valid font if the memory refers to an image
+    *
+    */
+    TTF_Font * LX_FileBuffer::getTTFFromBuffer(int size)
+    {
+        SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
+        return (rw == NULL) ? NULL:TTF_OpenFontRW(rw,1,size);
+    }
+
+
+
+    /**
     *   @fn const char * LX_FileBuffer::getFilename(void)
     *
     *   Get the name of the file the buffer refers to

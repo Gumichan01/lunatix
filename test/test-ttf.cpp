@@ -26,6 +26,8 @@ int main(int argc, char **argv)
     test_font();
 
     cout << " ==== END Test ==== " << endl;
+
+    return EXIT_SUCCESS;
 }
 
 

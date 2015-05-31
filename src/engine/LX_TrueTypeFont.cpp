@@ -28,9 +28,12 @@
 #include "LX_Window.hpp"
 #include "LX_WindowManager.hpp"
 #include "LX_Error.hpp"
+#include "LX_FileBuffer.hpp"
+#include "LX_FileIO.hpp"
 
 
 using namespace LX_Graphics;
+using namespace LX_FileIO;
 
 
 namespace LX_TrueTypeFont{
@@ -50,6 +53,7 @@ namespace LX_TrueTypeFont{
     */
     LX_Font::LX_Font(SDL_Color *color)
     {
+        std::string str;
         // load the configuration
         LX_Configuration *ttf_config = LX_Configuration::getInstance();
 
@@ -60,11 +64,11 @@ namespace LX_TrueTypeFont{
         }
         else
         {
-            font_str = ttf_config->getFontFile();
+            str = ttf_config->getFontFile();
             font_size = ttf_config->getFontSize();
         }
 
-        init(font_str,color,font_size);
+        init(str,color,font_size);
     }
 
 
@@ -114,7 +118,8 @@ namespace LX_TrueTypeFont{
     *
     *   @fn void LX_Font::init(std::string font_file, SDL_Color *color, int size)
     *
-    *   This function initializes The LX_TTF instance with a font file, a color and the size.
+    *   This private function initializes The LX_TTF instance
+    *   with a font file, a color and the size.
     *
     *   @param font_file The font file you want to load
     *   @param color The color font needed
@@ -123,6 +128,8 @@ namespace LX_TrueTypeFont{
     */
     void LX_Font::init(std::string font_file, SDL_Color *color, int size)
     {
+        font_buffer = NULL;
+        font_str = font_file;
 
         if(size <= 0)
         {
@@ -142,6 +149,16 @@ namespace LX_TrueTypeFont{
             font_color.g = LX_WHITE_COLOR;
             font_color.b = LX_WHITE_COLOR;
         }
+
+        try{
+            font_buffer = new LX_FileBuffer(font_str.c_str());
+
+        }catch(IOException &e)
+        {
+            std::cerr << "Cannot load the TTF file buffer : " << e.what() << std::endl;
+            font_buffer = NULL;
+        }
+
     }
 
 
@@ -354,12 +371,22 @@ namespace LX_TrueTypeFont{
         TTF_Font *ttf = NULL;
         SDL_Surface *loaded = NULL;
 
-
         if(size != font_size && size <= 0)
-            ttf = TTF_OpenFont(font_str.c_str(), font_size);
+        {
+            /*  Check if the buffer is not NULL.
+                It may append if the allocation failed in the constructor */
+            if(font_buffer == NULL)
+                ttf = TTF_OpenFont(font_str.c_str(), font_size);
+            else
+                ttf = font_buffer->getTTFFromBuffer(font_size);
+        }
         else
-            ttf = TTF_OpenFont(font_str.c_str(), size);
-
+        {
+            if(font_buffer == NULL)
+                ttf = TTF_OpenFont(font_str.c_str(), size);
+            else
+                ttf = font_buffer->getTTFFromBuffer(size);
+        }
 
         if(ttf == NULL)
         {
@@ -410,7 +437,7 @@ namespace LX_TrueTypeFont{
         LX_Window * target_window = NULL;
         SDL_Renderer *target_render = NULL;
 
-        if(idWindow < 0 )
+        if(idWindow < 0)
             return NULL;
 
         surface = drawText(type,text.c_str(),0,0,0,size);   // Get the surface

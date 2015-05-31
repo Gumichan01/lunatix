@@ -24,14 +24,14 @@
 
 #include <SDL2/SDL_ttf.h>
 
-struct SDL_Surface;
-struct SDL_Texture;
-struct SDL_Color;
-
-
 #define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
 #define LX_WHITE_COLOR 255              /**< The white color value */
 #define LX_BLACK_COLOR 0                /**< The black color value */
+
+
+struct SDL_Surface;
+struct SDL_Texture;
+struct SDL_Color;
 
 
 namespace LX_Graphics{
@@ -39,6 +39,14 @@ namespace LX_Graphics{
 class LX_Window;
 
 };
+
+
+namespace LX_FileIO{
+
+class LX_FileBuffer;
+
+};
+
 
 using namespace LX_Graphics;
 
@@ -78,6 +86,7 @@ namespace LX_TrueTypeFont{
         std::string font_str;       /**< The font file */
         unsigned int font_size;     /**< The font size */
         SDL_Color font_color;       /**< The font color */
+        LX_FileBuffer *font_buffer;
 
 
         void init(std::string font_file, SDL_Color *color, int size);
