@@ -44,7 +44,7 @@ namespace LX_FileIO{
     {
         LX_File *reader = NULL;
         std::string str("LX_FileBuffer : ");
-        int r = 0;
+        size_t r = 0;
 
         if(filename == NULL)
             throw IOException("LX_FileBuffer : invalid filename");
@@ -76,6 +76,12 @@ namespace LX_FileIO{
         }
 
         r = reader->read(buffer,sizeof(char),bufsize);
+
+        if(r < bufsize)
+        {
+            delete reader;
+            throw IOException(str + "Internal error, cannot read the file entirely");
+        }
 
         reader->close();
         delete reader;
@@ -149,7 +155,7 @@ namespace LX_FileIO{
     */
     LX_FileBuffer::~LX_FileBuffer()
     {
-        delete [] buffer;
+        delete [] (char *) buffer;
     }
 
 };
