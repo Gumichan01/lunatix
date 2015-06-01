@@ -35,6 +35,8 @@ struct SDL_Texture;
 struct SDL_Surface;
 
 
+namespace LX_ParticleEngine{
+
 /**
 *   @class LX_Particle
 *   @brief The particle class
@@ -86,6 +88,8 @@ class LX_Particle{
 
 };
 
+
+};
 
 #endif // PARTICLE_HPP_INCLUDED
 

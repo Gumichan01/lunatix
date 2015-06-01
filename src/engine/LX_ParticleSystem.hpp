@@ -22,6 +22,15 @@
 *
 */
 
+/**
+*   @namespace LX_ParticleEngine
+*   @brief The particle engine
+*
+*   This namespace describes the particle engine
+*
+*/
+namespace LX_ParticleEngine{
+
 
 class LX_Particle;
 
@@ -56,5 +65,7 @@ class LX_ParticleSystem{
 
 };
 
+
+};
 
 #endif // LX_PARTICLESYSTEM_HPP_INCLUDED
