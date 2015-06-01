@@ -1,25 +1,22 @@
 # LunatiX Engine #
 
- LunatiX Engine is a SDL-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
+LunatiX Engine is a SDL-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
 
- It contains these following libraries:
-
- - LX\_Graphics : a 2D library based on SDL_Image (supporting JPEG, PNG, GIF, ...)
- - LX\_TrueTypeFont : The True Type Font (TTF) library based on SDL_TTF
- - LX\_Mixer : The mix library based on SDL_Mixer (supporting MP3, OGG Vorbis, WMA, WAV, ...)
- - LX\_Physics : The physics engine
+It contains these following libraries:
+- LX\_Graphics : a 2D library based on SDL_Image (supporting JPEG, PNG, GIF, ...)
+- LX\_TrueTypeFont : The True Type Font (TTF) library based on SDL_TTF
+- LX\_Mixer : The mix library based on SDL_Mixer (supporting MP3, OGG Vorbis, WMA, WAV, ...)
+- LX\_Physics : The physics engine
 
  LunatiX Engine also contains these modules
+- LX\_Device : The information library about Gamepads
+- LX\_SystemInfo : The System information library
+- LX\_Random : The Random Number Generator (RNG) library
+- LX\_ParticleEngine : The particle engine
+- LX\_FileIO : The FileIO library
 
- - LX\_Device : The information library about Gamepads
- - LX\_SystemInfo : The System information library
- - LX\_Random : The Random Number Generator (RNG) library
- - LX\_ParticleSystem : The particle system
- - LX\_FileIO : The FileIO library
 
-
- The engine works on Windows and Linux system.
-
+The engine works on Windows and Linux system.
 
 
  ## Contribute ##
@@ -54,15 +51,15 @@
 
  ### Build the program ###
 
- You just need to execute the following command : 
-	$make
+ You just need to execute the following command :  
+ $make
 
  So, you can launch the demo program.
 
- To test the engine, execute the following command : 
- 	$./test/test.sh
+ To test the engine, execute the following command :  
+ $./test/test.sh
 
- You need to be on the root directory of the source code to launch the script.
+ You need to be on the root directory of the source code to launch the script.  
  Otherwise, th script will not work.
 
 Warning : No static or shared libraries are created when you generate the executable file.
