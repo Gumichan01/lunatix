@@ -15,7 +15,7 @@
 *	@file LX_Library.cpp
 *	@brief The implementatino of the engine ressources
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.4
+*	@version 0.5
 *
 */
 

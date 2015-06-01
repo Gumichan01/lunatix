@@ -18,7 +18,7 @@
 *	@file LX_Chunk.hpp
 *	@brief The chunk header
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.4
+*	@version 0.5
 *
 */
 

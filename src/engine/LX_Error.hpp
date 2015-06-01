@@ -18,7 +18,7 @@
 *	@file LX_Error.hpp
 *	@brief The error header. It just has macro definitions
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.4
+*	@version 0.5
 *
 */
 

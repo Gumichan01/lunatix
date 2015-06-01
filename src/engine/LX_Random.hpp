@@ -18,7 +18,7 @@
 *	@file LX_Random.hpp
 *	@brief The Random Number Generator library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.4
+*	@version 0.5
 *
 */
 

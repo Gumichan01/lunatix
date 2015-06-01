@@ -15,7 +15,7 @@
 *	@file LX_Physics.cpp
 *	@brief The implementation of the physics library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.4
+*	@version 0.5
 *
 */
 
