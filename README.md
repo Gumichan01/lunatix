@@ -8,7 +8,7 @@ It contains these following libraries:
 - LX\_Mixer : The mix library based on SDL_Mixer(supporting MP3, OGG Vorbis, WMA, WAV, ...)
 - LX\_Physics : The physics engine
 
-LunatiX Engine also contains these modules
+LunatiX Engine also contains these modules:
 - LX\_Device : The information library about Gamepads
 - LX\_SystemInfo : The System information library
 - LX\_Random : The Random Number Generator (RNG) library
@@ -36,7 +36,7 @@ The static and shared files (.lib, .a, .dll for win32 version) required to compi
 
 ### On Linux system ###
 
- Requirements :
+ Requirements:
  - SDL 2.0.3 at least
  - Lua 5.1
  - OpenGL 2.1 at least
@@ -50,12 +50,12 @@ The static and shared files (.lib, .a, .dll for win32 version) required to compi
 
 ### Build the program ###
 
- You just need to execute the following command :  
+ You just need to execute the following command:  
  $make
 
  So, you can launch the demo program.
 
- To test the engine, execute the following command :  
+ To test the engine, execute the following command:  
  $./test/test.sh
 
  You need to be on the root directory of the source code to launch the script.  
