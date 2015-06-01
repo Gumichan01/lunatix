@@ -1,0 +1,71 @@
+# LunatiX Engine - Release note #
+
+## New features ##
+
+  - Particles system
+  - Random Number generator (RNG) using the Xorshift* and The C library
+  - I/O file library
+  - File buffering
+
+
+
+## Details ##
+
+ - The particle system handles several particles. Each particle you create may be  
+used by a system. Each particle system works with a specific window. That means  
+the particles handled by the system will be diplayed on the same window.  
+This window is defined by the ID. The ID is just a reference to a window stored  
+in the Window manager. So, to use the particle system, you need to store the  
+windows you create to use a particle system on it into the window manager.  
+ 
+ - The random number generator (RNG) is a library that provides two RNGs :
+- The Xorshift* RNG
+- The standard C RNG
+ 
+ Be careful : do not forget to initialize the RNGs. Please take a look on the reference  
+
+ - The Input/Output file library provides a simple tool to handle any files.  
+You can do basic operation on files like read/write/seek/tell, and even  
+try to retrieve a SDL_Surface from the file if the content refers to an image.  
+
+ - The file buffering is a specific abstraction of the Input/Output file library.  
+It allows you to retrieve the content of a file and store data in memory.  
+The buffer you rerieved is not directly writable or readable to keep the data encapsulation.  
+However, you can get a SDL\_Surface, a TTF\_Font, or a Mix\_Chunk from that buffer.  
+Thanks to the file buffering, you can store an asset in memory and load it many  
+times. This is more efficient because you do not need to retrieve a data directly on  
+a file stored in the hard disk each time.
+
+
+## Changes ##
+
+ - Fixed a critical bug in LX_TrueTypeFont. A inifinite recursion occured when  
+you call drawShadedText.  
+See Commit [b73f5ca] (https://github.com/Gumichan01/lunatix-engine/commit/b73f5cae50c4753d63d8a7a2b66abe8c6fdddd98)
+ 
+ - LX_TrueTypeFont was improved, now it uses the file buffering to load  
+the font file once and only works with the buffer. It is more efficient to display a text.  
+
+ - The dependency graph of the engine was completely refactored to avoid  
+redondant inclusions and lightly improve the time of compilation.  
+
+ - The minimum version of SDL2 changed. Now you need SDL 2.0.3.
+
+
+## Other changes ##
+
+ - (v0.4) Some functions in LX_Font was refactored. So you will have *drawSomething()* instead of *draw_Something()*  
+See Commit [a690ebe] (https://github.com/Gumichan01/lunatix-engine/commit/a690ebe2e20bb6acbb0398cda461765e6c0b0250)  
+
+ - (v0.4) Integrated a simple error handling and system information.  
+
+ - (v0.4) Improved the physics engine. It handles a complete collision detection  
+ and movement.  
+ 
+ - (v0.4) Added a rotation support in the renderer.  
+
+ - (v0.3) A basic OpenGL loading support. Well, you can just load the library with the engine.  
+
+ - (v0.3) Multiple windows support.  
+
+
