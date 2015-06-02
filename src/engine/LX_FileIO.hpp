@@ -50,63 +50,66 @@ struct SDL_Surface;
 *   This namespace describes the file module of LunatiX Engine
 *
 */
-namespace LX_FileIO{
+namespace LX_FileIO
+{
 
-    /**
-    *   @class IOException
-    *   @brief The Input/Output exception
-    *
-    *   This exception class occured when
-    *   there is a problem on the LX_File constructor
-    *
-    */
-    class IOException: public std::exception{
+/**
+*   @class IOException
+*   @brief The Input/Output exception
+*
+*   This exception class occured when
+*   there is a problem on the LX_File constructor
+*
+*/
+class IOException: public std::exception
+{
 
-        std::string str_err;
+    std::string str_err;
 
-        public :
+public :
 
-        IOException(std::string err);
+    IOException(std::string err);
 
-        const char * what() const throw();
+    const char * what() const throw();
 
-        ~IOException() throw();
+    ~IOException() throw();
 
-    };
+};
 
 
-    /**
-    *   @class LX_File
-    *   @brief The file class
-    *
-    *   This class continas information about a file
-    *
-    */
-    class LX_File{
+/**
+*   @class LX_File
+*   @brief The file class
+*
+*   This class continas information about a file
+*
+*/
+class LX_File
+{
 
-        std::string name;       /**< The name of the file */
-        SDL_RWops *data;        /**< The internal file structure */
+    std::string name;       /**< The name of the file */
+    SDL_RWops *data;        /**< The internal file structure */
 
-        void open(const Uint32 mode);
+    void open(const Uint32 mode);
 
-        public :
+public :
 
-        LX_File(const char * filename, const Uint32 mode);
+    LX_File(const char * filename, const Uint32 mode);
 
-        size_t read(void *ptr,size_t size,size_t max_num);
-        size_t write(void *ptr,size_t size,size_t num);
-        size_t write(std::string str);
+    size_t read(void *ptr,size_t size,size_t max_num);
+    size_t write(void *ptr,size_t size,size_t num);
+    size_t write(std::string str);
 
-        Sint64 seek(Sint64 offset, int whence);
-        Sint64 tell(void);
+    Sint64 seek(Sint64 offset, int whence);
+    Sint64 tell(void);
 
-        SDL_Surface * getSurfaceFromData(void);
-        const char * getFilename(void);
+    SDL_Surface * getSurfaceFromData(void);
+    const char * getFilename(void);
 
-        void close(void);
+    void close(void);
 
-        ~LX_File();
-    };
+    ~LX_File();
+};
 
 
 };

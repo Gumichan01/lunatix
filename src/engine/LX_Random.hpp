@@ -39,14 +39,15 @@
 *   the Xorshift* generator, but has also a support of the standard C generator
 *
 */
-namespace LX_Random{
+namespace LX_Random
+{
 
 
-    void initRand(void);
+void initRand(void);
 
-    uint64_t xorshiftRand(void);
+uint64_t xorshiftRand(void);
 
-    int crand(void);
+int crand(void);
 
 
 };

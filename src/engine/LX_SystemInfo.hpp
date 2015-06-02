@@ -34,18 +34,19 @@
 *   to display information about the system
 *
 */
-namespace LX_SystemInfo{
+namespace LX_SystemInfo
+{
 
 
-    const char * getPlatform(void);
+const char * getPlatform(void);
 
-    int getCPUCacheLineSize(void);
+int getCPUCacheLineSize(void);
 
-    int getCPUCount(void);
+int getCPUCount(void);
 
-    int getSystemRAM(void);
+int getSystemRAM(void);
 
-    const SDL_DisplayMode * getDisplayModes(int *size);
+const SDL_DisplayMode * getDisplayModes(int *size);
 
 };
 

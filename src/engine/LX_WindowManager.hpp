@@ -26,45 +26,47 @@
 #define LX_NBMAX_WINDOWS 100    /**< The maximum number of windows to display */
 
 
-namespace LX_Graphics{
+namespace LX_Graphics
+{
 
 class LX_Window;
 
-    /**
-    *   @class LX_WindowManager
-    *
-    *   @brief The window manager class
-    *
-    *   It handles various windows
-    *
-    */
-    class LX_WindowManager{
+/**
+*   @class LX_WindowManager
+*
+*   @brief The window manager class
+*
+*   It handles various windows
+*
+*/
+class LX_WindowManager
+{
 
-        LX_Window * mainWindow;
-        unsigned int size;
-        unsigned int nb_windows;
-        LX_Window *windows[LX_NBMAX_WINDOWS];
+    LX_Window * mainWindow;
+    unsigned int size;
+    unsigned int nb_windows;
+    LX_Window *windows[LX_NBMAX_WINDOWS];
 
-        LX_WindowManager();
-        ~LX_WindowManager();
+    LX_WindowManager();
+    ~LX_WindowManager();
 
-        public:
+public:
 
-        static void init(void);
-        static LX_WindowManager * getInstance();
-        static void destroy(void);
+    static void init(void);
+    static LX_WindowManager * getInstance();
+    static void destroy(void);
 
-        int addWindow(LX_Window *w);
-        int deleteWindow(unsigned int id);
+    int addWindow(LX_Window *w);
+    int deleteWindow(unsigned int id);
 
-        unsigned int nbWindow(void);
+    unsigned int nbWindow(void);
 
-        LX_Window * getWindow(unsigned int id);
+    LX_Window * getWindow(unsigned int id);
 
-    };
+};
 
 
-    LX_WindowManager * getWindowManager();
+LX_WindowManager * getWindowManager();
 
 };
 

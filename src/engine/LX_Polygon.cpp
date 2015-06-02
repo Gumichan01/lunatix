@@ -196,7 +196,7 @@ void LX_Polygon::convexity(void)
     int cross_product;
 
     bool haveSign = false;
-    enum Sign{POSITIVE,NEGATIVE, NONE} s = NONE;
+    enum Sign {POSITIVE,NEGATIVE, NONE} s = NONE;
 
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
 
@@ -245,21 +245,24 @@ void LX_Polygon::convexity(void)
         {
             switch(s)
             {
-                case POSITIVE : if(cross_product < 0)
-                                {
-                                    convex = false;
-                                    return;
-                                }
-                                break;
+            case POSITIVE :
+                if(cross_product < 0)
+                {
+                    convex = false;
+                    return;
+                }
+                break;
 
-                case NEGATIVE : if(cross_product > 0)
-                                {
-                                    convex = false;
-                                    return;
-                                }
-                                break;
+            case NEGATIVE :
+                if(cross_product > 0)
+                {
+                    convex = false;
+                    return;
+                }
+                break;
 
-                default : break;
+            default :
+                break;
             }
         }
 

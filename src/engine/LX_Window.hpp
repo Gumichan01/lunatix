@@ -43,91 +43,93 @@ struct SDL_Rect;
 
 
 
-namespace LX_Graphics{
+namespace LX_Graphics
+{
 
 
-    /**
-    *   @class LX_WindowException
-    *   @brief The exception class of LX_Window
-    *
-    *   This class describes the exception occured when
-    *   the SDL_Window instance cannot be loaded.
-    *
-    */
-    class LX_WindowException : public std::exception
-    {
-        std::string str_err;
+/**
+*   @class LX_WindowException
+*   @brief The exception class of LX_Window
+*
+*   This class describes the exception occured when
+*   the SDL_Window instance cannot be loaded.
+*
+*/
+class LX_WindowException : public std::exception
+{
+    std::string str_err;
 
-        public :
+public :
 
-        LX_WindowException(std::string err);
+    LX_WindowException(std::string err);
 
-        const char * what() const throw();
+    const char * what() const throw();
 
-        ~LX_WindowException() throw();
-    };
-
-
-
-    /**
-    *   @class LX_Window
-    *   @brief The window
-    *
-    *   This class describes the window.
-    *
-    *   @note By default, the constructor retrieves information from the configuration file
-    *
-    *   @warning The LX_Window class must be defined only after you initialized the engine (calling LX_Init())
-    *   @warning A LX_WindowException may be occured if the window creation fails
-    *
-    */
-    class LX_Window{
-
-        SDL_Window *window;     /**< The internal window structure */
-        SDL_Renderer *renderer; /**< The main renderer */
-
-        int originalWidth;      /**< The width of the window */
-        int originalHeight;     /**< The height of the window */
-
-        void init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag);
-        void init2(void);
-
-        public :
-
-        LX_Window(const Uint32 mode);
-        LX_Window(SDL_Window *sdlWin, const Uint32 mode);
-        LX_Window(std::string title, const Uint32 mode);
-        LX_Window(std::string title, int posX, int posY, int w, int h,
-                    const Uint32 mode, const Uint32 flag);
-
-        void setTitle(std::string title);
-
-        // Put the sprite on the screen
-        bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
-        bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
-        bool putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
-                        const double angle);
-
-        void setWindowSize(int w, int h);
-        void setFullscreen(Uint32 flag);
-
-        // Update and clear window
-        void updateWindow(void);
-        void updateRenderer(void);
-
-        void clearWindow(void);
-        void clearRenderer(void);
-
-        SDL_Renderer * getRenderer(void);
-        SDL_Surface * getSurface(void);
-        SDL_Window * getWindow(void);
-
-        int getWidth(void);
-        int getHeight(void);
+    ~LX_WindowException() throw();
+};
 
 
-        ~LX_Window();
-    };
+
+/**
+*   @class LX_Window
+*   @brief The window
+*
+*   This class describes the window.
+*
+*   @note By default, the constructor retrieves information from the configuration file
+*
+*   @warning The LX_Window class must be defined only after you initialized the engine (calling LX_Init())
+*   @warning A LX_WindowException may be occured if the window creation fails
+*
+*/
+class LX_Window
+{
+
+    SDL_Window *window;     /**< The internal window structure */
+    SDL_Renderer *renderer; /**< The main renderer */
+
+    int originalWidth;      /**< The width of the window */
+    int originalHeight;     /**< The height of the window */
+
+    void init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag);
+    void init2(void);
+
+public :
+
+    LX_Window(const Uint32 mode);
+    LX_Window(SDL_Window *sdlWin, const Uint32 mode);
+    LX_Window(std::string title, const Uint32 mode);
+    LX_Window(std::string title, int posX, int posY, int w, int h,
+              const Uint32 mode, const Uint32 flag);
+
+    void setTitle(std::string title);
+
+    // Put the sprite on the screen
+    bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
+    bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
+    bool putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
+                             const double angle);
+
+    void setWindowSize(int w, int h);
+    void setFullscreen(Uint32 flag);
+
+    // Update and clear window
+    void updateWindow(void);
+    void updateRenderer(void);
+
+    void clearWindow(void);
+    void clearRenderer(void);
+
+    SDL_Renderer * getRenderer(void);
+    SDL_Surface * getSurface(void);
+    SDL_Window * getWindow(void);
+
+    int getWidth(void);
+    int getHeight(void);
+
+
+    ~LX_Window();
+};
 
 };
 

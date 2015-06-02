@@ -35,7 +35,8 @@ struct SDL_Texture;
 struct SDL_Surface;
 
 
-namespace LX_ParticleEngine{
+namespace LX_ParticleEngine
+{
 
 /**
 *   @class LX_Particle
@@ -43,7 +44,8 @@ namespace LX_ParticleEngine{
 *
 *   This class describes a particle
 */
-class LX_Particle{
+class LX_Particle
+{
 
     LX_AABB box;                    /**< The box of the particle */
     LX_Vector2D velocity;           /**< The velocity of the particle */
@@ -54,7 +56,7 @@ class LX_Particle{
 
     void init(const int x , const int y, const int w, const int h, const int vx, const int vy);
 
-    public :
+public :
 
 
     LX_Particle(const int x , const int y, const int w, const int h);

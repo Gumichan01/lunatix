@@ -24,7 +24,8 @@
 
 struct Mix_Chunk;
 
-namespace LX_FileIO{
+namespace LX_FileIO
+{
 
 class LX_FileBuffer;
 
@@ -33,39 +34,41 @@ class LX_FileBuffer;
 using namespace LX_FileIO;
 
 
-namespace LX_Mixer{
+namespace LX_Mixer
+{
 
 
 class LX_Sound;
 
 
-    /**
-    *   @class LX_Chunk
-    *   @brief The chunk class
-    *
-    */
-    class LX_Chunk : LX_Sound{
+/**
+*   @class LX_Chunk
+*   @brief The chunk class
+*
+*/
+class LX_Chunk : LX_Sound
+{
 
-        Mix_Chunk *chunk;
+    Mix_Chunk *chunk;
 
-        public:
+public:
 
-        LX_Chunk(void);
-        LX_Chunk(Mix_Chunk *sample);
-        LX_Chunk(std::string filename);
-        LX_Chunk(LX_FileBuffer *file);
+    LX_Chunk(void);
+    LX_Chunk(Mix_Chunk *sample);
+    LX_Chunk(std::string filename);
+    LX_Chunk(LX_FileBuffer *file);
 
-        bool load(std::string filename);
-        bool loadFromBuffer(LX_FileBuffer *file);
-        int play();
-        int play(int channel);
-        int play(int channel,int ticks);
+    bool load(std::string filename);
+    bool loadFromBuffer(LX_FileBuffer *file);
+    int play();
+    int play(int channel);
+    int play(int channel,int ticks);
 
-        int volume(int newVolume);
+    int volume(int newVolume);
 
-        ~LX_Chunk();
+    ~LX_Chunk();
 
-    };
+};
 
 };
 

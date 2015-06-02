@@ -41,7 +41,7 @@ class LX_ConfigurationException : public std::exception
 
     std::string str_err;
 
-    public :
+public :
 
     LX_ConfigurationException(std::string err);
 
@@ -80,7 +80,7 @@ class LX_Configuration
     LX_Configuration();
 
 
-    public :
+public :
 
     static void initConfig();
     static LX_Configuration * getInstance();

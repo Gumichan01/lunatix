@@ -29,26 +29,28 @@
 
 
 
-namespace LX_Mixer{
+namespace LX_Mixer
+{
 
-    /**
-    *   @class LX_Sound
-    *   @brief The sound interface
-    *
-    *   This virtual class gathers the functions used by LX_Chunk and LX_Music
-    *
-    */
-    class LX_Sound{
+/**
+*   @class LX_Sound
+*   @brief The sound interface
+*
+*   This virtual class gathers the functions used by LX_Chunk and LX_Music
+*
+*/
+class LX_Sound
+{
 
 
-        public:
+public:
 
-        virtual bool load(std::string filename) = 0;    /**< @brief Load a music file */
-        virtual int play() = 0;                         /**< @brief Play something */
-        virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
+    virtual bool load(std::string filename) = 0;    /**< @brief Load a music file */
+    virtual int play() = 0;                         /**< @brief Play something */
+    virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
 
-        ~LX_Sound(){};
-    };
+    ~LX_Sound() {};
+};
 
 
 };

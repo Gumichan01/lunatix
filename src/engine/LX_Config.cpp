@@ -68,7 +68,7 @@ const char * LX_ConfigurationException::what() const throw()
 *   Destroy the instance
 *
 */
-LX_ConfigurationException::~LX_ConfigurationException() throw(){}
+LX_ConfigurationException::~LX_ConfigurationException() throw() {}
 
 
 
@@ -102,7 +102,7 @@ LX_Configuration::LX_Configuration()
 *   Destroy the instance
 *
 **/
-LX_Configuration::~LX_Configuration(){}
+LX_Configuration::~LX_Configuration() {}
 
 
 
@@ -255,7 +255,7 @@ void LX_Configuration::setFlags(void)
     if(!lua_isfunction(state,-1))
     {
         std::cerr << "Error occured in LX_Configuration::setFlags : The Lua function "
-                        << luaFunction << " does not exist" << std::endl;
+                  << luaFunction << " does not exist" << std::endl;
 
         lua_close(state);
         return;
@@ -273,8 +273,8 @@ void LX_Configuration::setFlags(void)
 
             if(strlen(tmp) == 0)
             {
-                    lua_pop(state,1);
-                    continue;
+                lua_pop(state,1);
+                continue;
             }
 
             key.assign(tmp);

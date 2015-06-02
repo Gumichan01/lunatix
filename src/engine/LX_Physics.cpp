@@ -160,7 +160,7 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX
 {
 
     if( circle == NULL ||
-        euclide_square_distance( x_pos,y_pos, circle->xCenter, circle->yCenter)
+            euclide_square_distance( x_pos,y_pos, circle->xCenter, circle->yCenter)
             > (circle->square_radius) )
     {
         return false;
@@ -204,8 +204,8 @@ bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
 {
 
     if( rect1 == NULL || rect2 == NULL ||
-       (rect1->x >= (rect2->x + rect2->w) ) || ( rect1->y >= (rect2->y + rect2->h) ) ||
-        ( (rect1->x + rect1->w) <= rect2->x ) || ( (rect1->y + rect1->h) <= rect2->y ) )
+            (rect1->x >= (rect2->x + rect2->w) ) || ( rect1->y >= (rect2->y + rect2->h) ) ||
+            ( (rect1->x + rect1->w) <= rect2->x ) || ( (rect1->y + rect1->h) <= rect2->y ) )
     {
         return false;
     }
@@ -340,7 +340,7 @@ bool LX_Physics::collisionCircleRect(const LX_Circle *circle, const LX_AABB *rec
     sides[3][1] = sides[0][0];
 
 
-    for(int i=0; i< RECT_SIDES ;i++)
+    for(int i=0; i< RECT_SIDES ; i++)
     {
         if(collisionSegCircle(circle, &sides[i][0], &sides[i][1]))
             return true;
@@ -364,7 +364,7 @@ bool LX_Physics::collisionCircleRect(const LX_Circle *circle, const LX_AABB *rec
 *
 */
 bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
-                                    const LX_Point *C, const LX_Point *D)
+                                  const LX_Point *C, const LX_Point *D)
 {
     LX_Vector2D AC,AD,AB;
     long d;
@@ -398,7 +398,7 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
 *
 */
 bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
-                                    const LX_Point *C, const LX_Point *D)
+                                  const LX_Point *C, const LX_Point *D)
 {
     return (intersectSegLine(A,B,C,D) && intersectSegLine(C,D,A,B));
 }
@@ -522,19 +522,19 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 
         if(j == n-1)
         {
-                F.x = poly->getPoint(0)->x;
-                F.y = poly->getPoint(0)->y;
+            F.x = poly->getPoint(0)->x;
+            F.y = poly->getPoint(0)->y;
         }
         else
         {
-                F.x = poly->getPoint(j+1)->x;
-                F.y = poly->getPoint(j+1)->y;
+            F.x = poly->getPoint(j+1)->x;
+            F.y = poly->getPoint(j+1)->y;
         }
 
 
 
         if(intersectSegment(&A,&B,&E,&F) || intersectSegment(&B,&C,&E,&F) ||
-            intersectSegment(&C,&D,&E,&F) || intersectSegment(&D,&A,&E,&F))
+                intersectSegment(&C,&D,&E,&F) || intersectSegment(&D,&A,&E,&F))
             return true;
 
         if(collisionPointRect(&E,rect))
@@ -542,7 +542,7 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
     }
 
     return(collisionPointPoly(&A,poly) || collisionPointPoly(&B,poly)
-            || collisionPointPoly(&C,poly) || collisionPointPoly(&A,poly));
+           || collisionPointPoly(&C,poly) || collisionPointPoly(&A,poly));
 }
 
 
@@ -573,13 +573,13 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
         if(i == polySize1-1)
         {
-                B.x = poly1->getPoint(0)->x;
-                B.y = poly1->getPoint(0)->y;
+            B.x = poly1->getPoint(0)->x;
+            B.y = poly1->getPoint(0)->y;
         }
         else
         {
-                B.x = poly1->getPoint(i+1)->x;
-                B.y = poly1->getPoint(i+1)->y;
+            B.x = poly1->getPoint(i+1)->x;
+            B.y = poly1->getPoint(i+1)->y;
         }
 
         for(unsigned int j = 0; j < polySize2; j++)
@@ -590,13 +590,13 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
             if(j == polySize2-1)
             {
-                    D.x = poly2->getPoint(0)->x;
-                    D.y = poly2->getPoint(0)->y;
+                D.x = poly2->getPoint(0)->x;
+                D.y = poly2->getPoint(0)->y;
             }
             else
             {
-                    D.x = poly2->getPoint(j+1)->x;
-                    D.y = poly2->getPoint(j+1)->y;
+                D.x = poly2->getPoint(j+1)->x;
+                D.y = poly2->getPoint(j+1)->y;
             }
 
             if(intersectSegment(&A,&B,&C,&D))

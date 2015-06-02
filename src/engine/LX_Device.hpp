@@ -31,7 +31,8 @@
 #define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status */
 
 
-namespace LX_Device{
+namespace LX_Device
+{
 
 /**
 *   @struct LX_GamepadInfo
@@ -39,7 +40,8 @@ namespace LX_Device{
 *
 *   This structure gathers information about a gamepad
 */
-typedef struct LX_GamepadInfo{
+typedef struct LX_GamepadInfo
+{
 
     SDL_JoystickID id;              /**< The joystick ID */
     char name[LX_JOY_NAMESIZE];     /**< The name of the joystick */
@@ -48,20 +50,20 @@ typedef struct LX_GamepadInfo{
     int numButtons;                 /**< The number of buttons */
     int numHats;                    /**< The number of hats */
 
-}LX_GamepadInfo; /**< @brief The gamepad structure */
+} LX_GamepadInfo; /**< @brief The gamepad structure */
 
 
-    int numberOfDevices(void);
+int numberOfDevices(void);
 
-    const char * nameOf(SDL_Joystick * joy);
-    const char * nameOf(SDL_GameController * controller);
+const char * nameOf(SDL_Joystick * joy);
+const char * nameOf(SDL_GameController * controller);
 
-    int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info);
-    int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info);
+int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info);
+int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info);
 
-    const char * gamepadToString(LX_GamepadInfo *info);
+const char * gamepadToString(LX_GamepadInfo *info);
 
-    int mouseCursorDisplay(int toggle);
+int mouseCursorDisplay(int toggle);
 
 };
 

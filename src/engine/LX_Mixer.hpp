@@ -34,7 +34,8 @@
 #define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle between the source and the front */
 
 
-namespace LX_FileIO{
+namespace LX_FileIO
+{
 
 class LX_FileBuffer;
 
@@ -50,53 +51,54 @@ using namespace LX_FileIO;
 *   This SDL_Mixer-based sound engine loads and reads audio files
 *
 **/
-namespace LX_Mixer{
+namespace LX_Mixer
+{
 
 
 class LX_Music;
 class LX_Chunk;
 
-    /* == Music and chunk == */
-    LX_Music * loadMusic(std::string filename);
-    LX_Music * loadMusic(Mix_Music *mus);
+/* == Music and chunk == */
+LX_Music * loadMusic(std::string filename);
+LX_Music * loadMusic(Mix_Music *mus);
 
-    LX_Chunk * loadSample(std::string filename);
-    LX_Chunk * loadSample(Mix_Chunk *ch);
-    LX_Chunk * loadSample(LX_FileBuffer *file);
+LX_Chunk * loadSample(std::string filename);
+LX_Chunk * loadSample(Mix_Chunk *ch);
+LX_Chunk * loadSample(LX_FileBuffer *file);
 
-    int allocateChannels(int num);
-    int reserveChannels(unsigned int num);
-    int channelVolume(int channel,int volume);
-    void pause(int channel);
-    void resume(int channel);
-    void haltChannel(int channel);
-    void expireChannel(int channel, int ticks);
-    int isPlaying(int channel);
-    int isPaused(int channel);
+int allocateChannels(int num);
+int reserveChannels(unsigned int num);
+int channelVolume(int channel,int volume);
+void pause(int channel);
+void resume(int channel);
+void haltChannel(int channel);
+void expireChannel(int channel, int ticks);
+int isPlaying(int channel);
+int isPaused(int channel);
 
 
-    /* == Effects == */
+/* == Effects == */
 
-    // Fading
-    void fadeInMusic(LX_Music *music,int ms);
-    void fadeOutMusic(int ms);
+// Fading
+void fadeInMusic(LX_Music *music,int ms);
+void fadeOutMusic(int ms);
 
-    // Panning
-    void setPanning(int channel,Uint8 left,Uint8 right);
-    void removePanning(int channel);
+// Panning
+void setPanning(int channel,Uint8 left,Uint8 right);
+void removePanning(int channel);
 
-    // 3D Position
-    void setPosition(Sint16 angle);
-    void setPosition(Sint16 angle, int distance);
-    void setPosition(int channel, Sint16 angle, int distance);
-    void resetPosition(int channel);
+// 3D Position
+void setPosition(Sint16 angle);
+void setPosition(Sint16 angle, int distance);
+void setPosition(int channel, Sint16 angle, int distance);
+void resetPosition(int channel);
 
-    // Reverse stereo
-    void reverseStereo(int channel,int flip);
+// Reverse stereo
+void reverseStereo(int channel,int flip);
 
-    // Distance
-    void setDistance(Uint8 distance);
-    void setDistance(int channel,Uint8 distance);
+// Distance
+void setDistance(Uint8 distance);
+void setDistance(int channel,Uint8 distance);
 
 };
 

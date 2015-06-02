@@ -29,7 +29,8 @@
 *   This namespace describes the particle engine
 *
 */
-namespace LX_ParticleEngine{
+namespace LX_ParticleEngine
+{
 
 
 class LX_Particle;
@@ -41,7 +42,8 @@ class LX_Particle;
 *
 *   This class describes a particle system
 */
-class LX_ParticleSystem{
+class LX_ParticleSystem
+{
 
 
     LX_Particle **particles;                /**< The array of particles */
@@ -50,7 +52,7 @@ class LX_ParticleSystem{
 
     void init(unsigned int nbPart,unsigned int id);
 
-    public:
+public:
 
     LX_ParticleSystem(unsigned int nbPart);
     LX_ParticleSystem(unsigned int nbPart,unsigned int id);

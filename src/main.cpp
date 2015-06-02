@@ -85,8 +85,8 @@ int main ( int argc, char** argv )
     }
     catch(LX_WindowException & win_ex)
     {
-            std::cerr << win_ex.what() << std::endl;
-            return -1;
+        std::cerr << win_ex.what() << std::endl;
+        return -1;
     }
 
     ttf = new LX_Font(&color);
@@ -109,7 +109,7 @@ int main ( int argc, char** argv )
 
     SDL_Texture *t1 = ttf->drawTextToTexture(LX_TTF_BLENDED,"LunatiX_engine",LX_TTF_DEFAULT_FONT_SIZE,0);
     SDL_Texture *t2 = ttf->drawTextToTexture(LX_TTF_BLENDED,"RETURN : play music, SPACE : pause/resume, BACKSPACE : stop",
-                                                LX_TTF_DEFAULT_FONT_SIZE,0);
+                      LX_TTF_DEFAULT_FONT_SIZE,0);
 
     audio->volume(MIX_MAX_VOLUME/2);
 
@@ -127,47 +127,61 @@ int main ( int argc, char** argv )
             switch(event.type)
             {
 
-                case SDL_KEYDOWN :  switch(event.key.keysym.sym)
-                                    {
-                                        case SDLK_ESCAPE :   game = false;
-                                                            break;
+            case SDL_KEYDOWN :
+                switch(event.key.keysym.sym)
+                {
+                case SDLK_ESCAPE :
+                    game = false;
+                    break;
 
-                                        case SDLK_SPACE :    audio->pause();
-                                                            break;
+                case SDLK_SPACE :
+                    audio->pause();
+                    break;
 
-                                        case SDLK_RETURN :   audio->play();
-                                                            break;
+                case SDLK_RETURN :
+                    audio->play();
+                    break;
 
-                                        case SDLK_BACKSPACE :   LX_Mixer::fadeOutMusic(4000);
-                                                                break;
-                                        case SDLK_d :   window->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
-                                                        break;
+                case SDLK_BACKSPACE :
+                    LX_Mixer::fadeOutMusic(4000);
+                    break;
+                case SDLK_d :
+                    window->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
+                    break;
 
-                                        case SDLK_f :   window->setFullscreen(LX_GRAPHICS_FULLSCREEN);
-                                                        break;
+                case SDLK_f :
+                    window->setFullscreen(LX_GRAPHICS_FULLSCREEN);
+                    break;
 
-                                        case SDLK_g :   window->setFullscreen(LX_GRAPHICS_NO_FULLSCREEN);
-                                                        break;
+                case SDLK_g :
+                    window->setFullscreen(LX_GRAPHICS_NO_FULLSCREEN);
+                    break;
 
-                                        case SDLK_LEFT :    LX_Mixer::setPanning(MIX_CHANNEL_POST,255,0);
-                                                            break;
+                case SDLK_LEFT :
+                    LX_Mixer::setPanning(MIX_CHANNEL_POST,255,0);
+                    break;
 
-                                        case SDLK_RIGHT :    LX_Mixer::setPanning(MIX_CHANNEL_POST,0,255);
-                                                            break;
+                case SDLK_RIGHT :
+                    LX_Mixer::setPanning(MIX_CHANNEL_POST,0,255);
+                    break;
 
-                                        case SDLK_UP :  LX_Mixer::setPanning(MIX_CHANNEL_POST,255,255);
-                                                        break;
+                case SDLK_UP :
+                    LX_Mixer::setPanning(MIX_CHANNEL_POST,255,255);
+                    break;
 
-                                        default :   break;
-                                    }
-                                    break;
-
-
-                case SDL_QUIT:  game=false;
-                                break;
+                default :
+                    break;
+                }
+                break;
 
 
-                default :   break;
+            case SDL_QUIT:
+                game=false;
+                break;
+
+
+            default :
+                break;
             }
         }
 
@@ -203,9 +217,9 @@ int main ( int argc, char** argv )
     SDL_VERSION(&compiled);
     SDL_GetVersion(&linked);
     printf("We compiled against SDL version %d.%d.%d ...\n",
-                compiled.major, compiled.minor, compiled.patch);
+           compiled.major, compiled.minor, compiled.patch);
     printf("But we linked against SDL version %d.%d.%d.\n",
-                linked.major, linked.minor, linked.patch);
+           linked.major, linked.minor, linked.patch);
 
 
     LX_Quit();

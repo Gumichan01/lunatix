@@ -35,7 +35,8 @@ struct LX_Point;
 *   This class defines a polygon
 *
 */
-class LX_Polygon{
+class LX_Polygon
+{
 
 
     LX_Point *points;               /**< An array of LX_Point */
@@ -45,7 +46,7 @@ class LX_Polygon{
 
     void convexity(void);
 
-    public :
+public :
 
     LX_Polygon(const unsigned int nb);
 

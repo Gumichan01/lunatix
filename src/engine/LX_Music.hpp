@@ -28,44 +28,46 @@
 #include<SDL2/SDL_mixer.h>
 
 
-namespace LX_Mixer{
+namespace LX_Mixer
+{
 
 
 class LX_Sound;
 
 
-    /**
-    *   @class LX_Music
-    *   @brief The music class
-    *
-    *   This class is a high level description of the Mix_Music type
-    *
-    */
-    class LX_Music : public LX_Sound{
+/**
+*   @class LX_Music
+*   @brief The music class
+*
+*   This class is a high level description of the Mix_Music type
+*
+*/
+class LX_Music : public LX_Sound
+{
 
-        Mix_Music *music;      /**< The music to play */
+    Mix_Music *music;      /**< The music to play */
 
-        public:
+public:
 
-        LX_Music(void);
-        LX_Music(Mix_Music *mus);
-        LX_Music(std::string filename);
+    LX_Music(void);
+    LX_Music(Mix_Music *mus);
+    LX_Music(std::string filename);
 
-        // Music
-        bool load(std::string filename);
-        int play(void);
-        int play(int loops);
-        void pause(void);
-        void stop(void);
+    // Music
+    bool load(std::string filename);
+    int play(void);
+    int play(int loops);
+    void pause(void);
+    void stop(void);
 
-        // Volume
-        int volume(int newVolume);
+    // Volume
+    int volume(int newVolume);
 
-        Mix_Music *getMusic(void);
+    Mix_Music *getMusic(void);
 
-        ~LX_Music();
+    ~LX_Music();
 
-    };
+};
 
 
 };
