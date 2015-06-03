@@ -50,16 +50,27 @@ The static and shared files (.lib, .a, .dll for win32 version) required to compi
 
 ### Build the program ###
 
- You just need to execute the following command:  
+If you want to launch the demo program,you just need  
+to execute the following command:  
  $make
 
- So, you can launch the demo program.
+So, you can launch the demo program.
 
- To test the engine, execute the following command:  
+To test the engine, execute the following command:  
  $./test/test.sh
 
- You need to be on the root directory of the source code to launch the script.  
- Otherwise, th script will not work.
+You need to be on the root directory of the source code to launch the script.  
+Otherwise, th script will not work.
+
+To use the engine into your project, you just need to copy these following directories:
+ - config/
+ - include/
+ - lib/
+ - script/
+ - src/engine/
+
+It is very important to keep the engine hierarchy. If you do not respect that  
+the engine may not work correctly.
 
 Warning : No static or shared libraries are created when you generate the executable file.
 
