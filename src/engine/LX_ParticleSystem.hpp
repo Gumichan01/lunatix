@@ -32,7 +32,6 @@
 namespace LX_ParticleEngine
 {
 
-
 class LX_Particle;
 
 
@@ -63,10 +62,13 @@ public:
     void updateParticles(void);
     void displayParticles(void);
 
+    unsigned int nbEmptyParticles(void);
+    unsigned int nbActiveParticles(void);
+    const unsigned int nbTotalParticles(void);
+
     ~LX_ParticleSystem();
 
 };
-
 
 };
 
