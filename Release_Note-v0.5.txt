@@ -18,9 +18,9 @@ This window is defined by the ID. The ID is just a reference to a window stored
 in the Window manager. So, to use the particle system, you need to store the  
 windows you create to use a particle system on it into the window manager.  
  
- - The random number generator (RNG) is a library that provides two RNGs :
-- The Xorshift* RNG
-- The standard C RNG
+ - The random number generator (RNG) is a library that provides two RNGs:
+ - The Xorshift* RNG
+ - The standard C RNG
  
  Be careful : do not forget to initialize the RNGs. Please take a look on the reference  
 
@@ -37,7 +37,14 @@ times. This is more efficient because you do not need to retrieve a data directl
 a file stored in the hard disk each time.
 
 
-## Changes ##
+
+## [UDPATE] Changes from 0.5.1 ##
+
+ - Added some getters into the particle engine.  
+These functions have the following syntax: nb[Total/Empty/Real]Particles()
+
+
+## Changes from version 0.4 and 0.3 ##
 
  - Fixed a critical bug in LX_TrueTypeFont. A inifinite recursion occured when  
 you call drawShadedText.  
