@@ -73,6 +73,8 @@
 		<Unit filename="src\engine\LX_Hitbox.hpp" />
 		<Unit filename="src\engine\LX_Library.cpp" />
 		<Unit filename="src\engine\LX_Library.hpp" />
+		<Unit filename="src\engine\LX_MessageBox.cpp" />
+		<Unit filename="src\engine\LX_MessageBox.hpp" />
 		<Unit filename="src\engine\LX_Mixer.cpp" />
 		<Unit filename="src\engine\LX_Mixer.hpp" />
 		<Unit filename="src\engine\LX_Music.cpp" />
