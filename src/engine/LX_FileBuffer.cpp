@@ -155,7 +155,7 @@ const char * LX_FileBuffer::getFilename(void)
 */
 LX_FileBuffer::~LX_FileBuffer()
 {
-    delete [] (char *) buffer;
+    delete [] buffer;
 }
 
 };
