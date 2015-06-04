@@ -154,7 +154,7 @@ bool LX_ParticleSystem::addParticle(LX_Particle *p)
 /**
 *   @fn bool LX_ParticleSystem::rmParticle(unsigned int index)
 *
-*   Destroy a particle the particle system according to its index
+*   Destroy a particle from the particle system according to its index
 *
 *   @param index the index of the particle in the list
 *
