@@ -230,4 +230,80 @@ void LX_ParticleSystem::displayParticles(void)
     }
 }
 
+
+/**
+*   @fn unsigned int LX_ParticleSystem::nbEmptyParticles(void)
+*
+*   Get the number of empty slots to set particles
+*
+*   @return The number of available slots of the particle system
+*
+*/
+unsigned int LX_ParticleSystem::nbEmptyParticles(void)
+{
+    const unsigned int n = nbParticles;
+    unsigned int nb = 0;
+
+    for(unsigned int i = 0; i < n; i++)
+    {
+        if(particles[i] == NULL)
+            nb++;
+    }
+
+    return nb;
+}
+
+
+/**
+*   @fn unsigned int LX_ParticleSystem::nbActiveParticles(void)
+*
+*   Get the number of initialized particles
+*
+*   @return The number of particles that are not null of the system
+*
+*/
+unsigned int LX_ParticleSystem::nbActiveParticles(void)
+{
+    return nbParticles - nbEmptyParticles();
+}
+
+
+/**
+*   @fn const unsigned int LX_ParticleSystem::nbTotalParticles(void)
+*
+*   Get the maximum number of particles
+*
+*   @return The total number of particles the current particle system can have
+*
+*/
+const unsigned int LX_ParticleSystem::nbTotalParticles(void)
+{
+    return nbParticles;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
