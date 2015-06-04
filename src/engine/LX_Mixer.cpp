@@ -144,7 +144,9 @@ LX_Chunk * loadSample(LX_FileBuffer *file)
 *
 *   @note If num is 0, then all channels will be freed.
 *   @note A negative number do nothing,
-*           it just displays the number of allocated channels
+*           it just displays the number of allocated channels.
+*   @note If num is less than the current number of channels,
+*           then the higher channels will be stopped, freed, and not mixed.
 *
 */
 int allocateChannels(int num)
@@ -161,7 +163,7 @@ int allocateChannels(int num)
 *
 *   @param num The number of channels to reserve
 *
-*   @return The number of channels allocated
+*   @return The number of channels reserved
 *
 *   @note If num is 0, then all channels will be unreserved
 *
