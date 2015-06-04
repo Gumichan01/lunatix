@@ -42,7 +42,6 @@ class LX_Window;
 class LX_WindowManager
 {
 
-    LX_Window * mainWindow;
     unsigned int size;
     unsigned int nb_windows;
     LX_Window *windows[LX_NBMAX_WINDOWS];

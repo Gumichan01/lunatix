@@ -99,11 +99,9 @@ void LX_WindowManager::destroy(void)
 */
 LX_WindowManager::~LX_WindowManager()
 {
-    unsigned int i;
-
     if(nb_windows != 0)
     {
-        for(i = 0; nb_windows != 0 && i < size; i++)
+        for(unsigned int i = 0;i < size; i++)
         {
             deleteWindow(i);
         }
@@ -119,7 +117,6 @@ LX_WindowManager::~LX_WindowManager()
 */
 LX_WindowManager::LX_WindowManager()
 {
-    mainWindow = NULL;
     size = 0;
     nb_windows = 0;
     memset(windows,0,LX_NBMAX_WINDOWS);
@@ -165,7 +162,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
 */
 int LX_WindowManager::deleteWindow(unsigned int id)
 {
-    if(id > size || mainWindow == NULL)
+    if(id > size)
         return -1;
 
     if(windows[id] != NULL)
