@@ -157,7 +157,7 @@ int allocateChannels(int num)
 /**
 *   @fn int reserveChannels(unsigned int num)
 *
-*   Set the nmber of channel to reserve.
+*   Set the number of channel to reserve.
 *
 *   @param num The number of channels to reserve
 *
@@ -381,7 +381,7 @@ void removePanning(int channel)
 *
 *   Set the distance to all channels
 *
-*   @param distance The virtuel distance betwenn the user and the source
+*   @param distance The virtual distance betwenn the user and the source
 *
 */
 void setDistance(Uint8 distance)
@@ -393,7 +393,7 @@ void setDistance(Uint8 distance)
 /**
 *   @fn void setPosition(Sint16 angle)
 *
-*   Set the virtuel position of the audio source according to the channel.
+*   Set the virtual position of the audio source according to the channel.
 *
 *   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
 *
@@ -407,7 +407,7 @@ void setPosition(Sint16 angle)
 /**
 *   @fn void setPosition(Sint16 angle, int distance)
 *
-*   Set the virtuel position of the audio source according to the channel.
+*   Set the virtual position of the audio source according to the channel.
 *
 *   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
 *   @param distance The distance between the source and the listener
@@ -423,7 +423,7 @@ void setPosition(Sint16 angle, int distance)
 /**
 *   @fn void setPosition(int channel, Sint16, int distance)
 *
-*   Set the virtuel position of the audio source according to the channel.
+*   Set the virtual position of the audio source according to the channel.
 *   This function emulates a 3D audio effect.
 *
 *   @param channel The channel you want to register the effect on
@@ -443,7 +443,7 @@ void setPosition(int channel, Sint16 angle, int distance)
 /**
 *   @fn void resetPosition(int channel)
 *
-*   Reset the virtuel position of the audio source according to the channel.
+*   Reset the virtual position of the audio source according to the channel.
 *
 *   @param channel The channel you want to unregister the effect on
 *
@@ -478,7 +478,7 @@ void reverseStereo(int channel, int flip)
 *   Set the distance of a channel
 *
 *   @param channel The channel you need to use
-*   @param distance The virtuel distance betwenn the user and the source
+*   @param distance The virtual distance betwenn the user and the source
 *
 *   @note If you set MIX_CHANNEL_POST, all channels will be dealt
 *
