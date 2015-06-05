@@ -37,8 +37,12 @@ times. This is more efficient because you do not need to retrieve a data directl
 a file stored in the hard disk each time.
 
 
+## [UPDATE] Changes from 0.5.2 ##
 
-## [UDPATE] Changes from 0.5.1 ##
+ - Fixed some memory leaks in LX_Font and LX_Particles
+
+
+## Changes from 0.5.1 ##
 
  - Added some getters into the particle engine.  
 These functions have the following syntax: nb[Total/Empty/Real]Particles()
