@@ -179,7 +179,7 @@ LX_Particle::~LX_Particle()
         SDL_FreeSurface(surface);
     }
 
-    if(surface != NULL)
+    if(texture != NULL)
     {
         SDL_DestroyTexture(texture);
     }
