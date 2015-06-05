@@ -142,6 +142,7 @@ SDL_Surface * optimizeSurface(SDL_Surface * surface)
 
     optimized = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA4444,0x00000000);
     SDL_FreeSurface(surface);
+    surface = NULL;
 
     return optimized;
 }

@@ -170,7 +170,10 @@ void LX_Font::init(std::string font_file, SDL_Color *color, int size)
 *   Destroy the instance
 *
 */
-LX_Font::~LX_Font() {}
+LX_Font::~LX_Font()
+{
+    delete font_buffer;
+}
 
 
 /**
