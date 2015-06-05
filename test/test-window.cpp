@@ -31,8 +31,8 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
 
-    LX_Window win("Test window",LX_WINDOW_RENDERING);
-    w = &win;
+    LX_Window *win = new LX_Window("Test window",LX_WINDOW_RENDERING);
+    w = win;
 
     test_window1(w);
     test_window2();
