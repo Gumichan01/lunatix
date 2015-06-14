@@ -241,9 +241,10 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, const 
 */
 void LX_Window::init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
 {
+    renderer = NULL;
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
 
-    if(window == NULL )
+    if(window == NULL)
     {
         std::cerr << "LX_Window constructor - window creation " << std::endl;
         throw LX_WindowException(LX_GetError());
@@ -284,6 +285,7 @@ void LX_Window::init2(void)
 */
 LX_Window::~LX_Window()
 {
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
 
