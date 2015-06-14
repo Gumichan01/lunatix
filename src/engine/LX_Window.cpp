@@ -109,7 +109,7 @@ LX_Window::LX_Window(const Uint32 mode)
         option_flag |= SDL_WINDOW_OPENGL;
     }
 
-    window = SDL_CreateWindow("LunatiX Engine v0.3",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
+    window = SDL_CreateWindow("LunatiX Engine v0.5",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
 
     if(window == NULL )
     {
