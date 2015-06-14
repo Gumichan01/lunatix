@@ -157,6 +157,7 @@ void test_surface(void)
     win3.updateWindow();
     SDL_Delay(1000);
     win3.clearWindow();
+    SDL_FreeSurface(sf);
 
     cout << " = END TEST = " << endl;
 }
@@ -167,6 +168,7 @@ void test_rendering(LX_Window *win)
 
     std::string name = "data/cb.bmp";
 
+    SDL_Surface *sf = NULL;
     SDL_Texture *st = NULL;
     SDL_Rect pos = {100,100,150,120};
 
@@ -181,7 +183,9 @@ void test_rendering(LX_Window *win)
     else
         cout << "SUCCESS - The window exists" << endl;
 
-    st = SDL_CreateTextureFromSurface(win->getRenderer(),loadSurface(name.c_str()));
+    sf = loadSurface(name.c_str());
+    st = SDL_CreateTextureFromSurface(win->getRenderer(),sf);
+    SDL_FreeSurface(sf);
 
     if(st == NULL)
         cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
@@ -196,9 +200,7 @@ void test_rendering(LX_Window *win)
 
 
     win->updateRenderer();
-
     SDL_Delay(1000);
-
     win->clearRenderer();
 
 
@@ -208,10 +210,10 @@ void test_rendering(LX_Window *win)
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
 
     win->updateRenderer();
-
     SDL_Delay(1000);
-
     win->clearRenderer();
+
+    SDL_DestroyTexture(st);
 
     cout << " = END TEST = " << endl;
 }
