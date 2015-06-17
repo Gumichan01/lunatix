@@ -34,6 +34,7 @@ using namespace LX_TrueTypeFont;
 using namespace LX_Device;
 using namespace LX_Mixer;
 using namespace LX_FileIO;
+using namespace LX_MSGBox;
 
 
 int main ( int argc, char** argv )
@@ -132,6 +133,7 @@ int main ( int argc, char** argv )
                 {
                 case SDLK_ESCAPE :
                     game = false;
+                    showMSG(LX_MSG_INFO,"End of program","It is over",NULL);
                     break;
 
                 case SDLK_SPACE :
