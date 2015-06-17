@@ -2,11 +2,11 @@
 
 ## New features ##
 
+  - Static and Shared libraries
   - Particles system
   - Random Number generator (RNG) using the Xorshift* and The C library
   - I/O file library
   - File buffering
-
 
 
 ## Details ##
@@ -37,8 +37,13 @@ times. This is more efficient because you do not need to retrieve a data directl
 a file stored in the hard disk each time.
 
 
+## [UPDATE] Changes from 0.5.2 ##
 
-## [UPDATE] Changes from 0.5.1 ##
+ - Updated the Makefile. Now you can generate static and shared libraries
+and use them in a project
+
+
+## Changes from 0.5.1 ##
 
  - Fixed some memory leaks in LX_Font and LX_Particles
  - Added some getters into the particle engine.  
