@@ -21,9 +21,10 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\Projet_SDL2" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\Release\libLunatix" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
 				<Option object_output="obj\Release\" />
-				<Option type="1" />
+				<Option type="2" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
@@ -54,9 +55,15 @@
 			<Add library="lib\win32\lua51.lib" />
 			<Add directory="lib\win32" />
 		</Linker>
-		<Unit filename="config\lxsdl.cfg" />
-		<Unit filename="config\lxwindow.cfg" />
-		<Unit filename="script\LX_config.lua" />
+		<Unit filename="config\lxsdl.cfg">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="config\lxwindow.cfg">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="script\LX_config.lua">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="src\engine\LX_Chunk.cpp" />
 		<Unit filename="src\engine\LX_Chunk.hpp" />
 		<Unit filename="src\engine\LX_Config.cpp" />
@@ -99,7 +106,9 @@
 		<Unit filename="src\engine\LX_WindowManager.cpp" />
 		<Unit filename="src\engine\LX_WindowManager.hpp" />
 		<Unit filename="src\engine\Lunatix_engine.hpp" />
-		<Unit filename="src\main.cpp" />
+		<Unit filename="src\main.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
