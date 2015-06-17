@@ -49,7 +49,7 @@ public:
     virtual int play() = 0;                         /**< @brief Play something */
     virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
 
-    ~LX_Sound() {};
+    virtual ~LX_Sound() {};
 };
 
 

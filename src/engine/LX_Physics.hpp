@@ -27,7 +27,7 @@
 #include "LX_Hitbox.hpp"
 
 class LX_Polygon;
-class LX_Vector2D;
+struct LX_Vector2D;
 
 #define RECT_SIDES 4    /**< The number of the AABB sides */
 
