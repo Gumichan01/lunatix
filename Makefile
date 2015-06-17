@@ -88,14 +88,14 @@ $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 
 
 # Demo
-$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SRIPT)
+$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SCRIPT)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
 else
 	@echo "Release mode"
 endif
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $(MAIN_OBJ) $(OBJS) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
 LX_Config.o : $(LUNATIX_PATH)LX_Config.cpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Error.hpp
