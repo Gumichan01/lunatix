@@ -28,7 +28,7 @@ You can also find the library reference on my [website](http://gumichan01.olympe
 ## Installation ##
 ### On Windows ###
 
-You can use the makefile to generate an executable file to launch the program.  
+You can use the makefile to generate libraries to launch the program.  
 You can also import a new project using the XML file provided in the directory into your IDE (Well, it works on CodeBlocks).  
 You need to install Lua 5.1 to compile the Lua script.  
 The static and shared files (.lib, .a, .dll for win32 version) required to compile with SDL2 are provided.
