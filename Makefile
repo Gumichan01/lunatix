@@ -15,7 +15,7 @@
 
 # You can modify the value of DEBUG
 # If you want to use debug or release mode
-DEBUG=yes
+DEBUG=no
 
 
 CC=g++
@@ -36,13 +36,16 @@ MAIN_PATH=./src/
 # Path to the test files
 TEST_PATH=./test/
 
-# executable file
+# Executable file
 LUNATIX_EXE=lunatix-engine
 
 # Path to Lunatix engine directory and include directory
 LUNATIX_PATH=./src/engine/
 LUNATIX_INCLUDE_LIB=./include/
 
+# Libraries
+LUNATIX_STATIC_LIB=libLunatix.a
+LUNATIX_SHARED_LIB=libLunatix.so
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
@@ -55,7 +58,7 @@ ifeq ($(DEBUG),yes)
 else
 
 	# Release mode
-	CFLAGS=-Wall -std=c++0x
+	CFLAGS=-fPIC -Wall -std=c++0x
 	OPTIMIZE=-O3
 	OPT_SIZE=-s
 
@@ -67,18 +70,25 @@ LUA_FLAGS=./lib/linux/liblua5.1-c++.so.0
 LFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 
-all : $(LUNATIX_EXE) $(COMPILED_SCRIPT)
+# The default rule 
+library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
-rebuild : cleanall all
+$(LUNATIX_STATIC_LIB) : $(OBJS)
+	@echo "Generating the static library"
+	@ar rcs $@ $(OBJS)
+
+$(LUNATIX_SHARED_LIB) : $(OBJS)
+	@echo "Generating the shared library"
+	@gcc -shared -o $@ $(OBJS) $(LFLAGS)
+
 
 $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@echo "Compilation of the Lua script : "$<" -> "$@
 	@$(LUAC) -o $@ $<
 
 
-
 # Demo
-$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS)
+$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SRIPT)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
 else
@@ -188,6 +198,11 @@ LX_FileBuffer.o : $(LUNATIX_PATH)LX_FileBuffer.cpp $(LUNATIX_PATH)LX_FileBuffer.
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
+LX_MessageBox.o : $(LUNATIX_PATH)LX_MessageBox.cpp $(LUNATIX_PATH)LX_MessageBox.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
+
+
 
 # Test of different modules
 test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf test-particle test-file
@@ -286,13 +301,17 @@ test-file.o : $(TEST_PATH)test-file.cpp
 
 clean :
 	@echo "Delete object files"
-	@rm -f *.o *.luac
+	@rm -f *.o
+
+cleanlib:
+	@echo "Delete libraries"
+	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 clean-test : clean
 	@echo "Delete test object files"
 	@rm -f test-* 
 
-cleanall : clean
+cleanall : clean-test cleanlib
 	@echo "Delete targets"
-	@rm -f $(LUNATIX_EXE) test-* $(COMPILED_SCRIPT)
+	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 
