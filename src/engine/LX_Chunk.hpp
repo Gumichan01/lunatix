@@ -22,6 +22,9 @@
 *
 */
 
+#include "LX_Sound.hpp"
+
+
 struct Mix_Chunk;
 
 namespace LX_FileIO
@@ -38,9 +41,6 @@ namespace LX_Mixer
 {
 
 
-class LX_Sound;
-
-
 /**
 *   @class LX_Chunk
 *   @brief The chunk class
@@ -55,7 +55,7 @@ public:
 
     LX_Chunk(void);
     LX_Chunk(Mix_Chunk *sample);
-    LX_Chunk(std::string filename);
+    LX_Chunk(string filename);
     LX_Chunk(LX_FileBuffer *file);
 
     bool load(std::string filename);

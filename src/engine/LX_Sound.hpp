@@ -27,6 +27,7 @@
 #define LX_MIXER_LOOP -1                    /**< Activate the loop */
 #define LX_MIXER_NOLOOP 0                   /**< No loop is activated */
 
+using namespace std;
 
 
 namespace LX_Mixer
@@ -45,7 +46,7 @@ class LX_Sound
 
 public:
 
-    virtual bool load(std::string filename) = 0;    /**< @brief Load a music file */
+    virtual bool load(string filename) = 0;    /**< @brief Load a music file */
     virtual int play() = 0;                         /**< @brief Play something */
     virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
 

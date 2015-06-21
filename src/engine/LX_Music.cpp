@@ -22,7 +22,6 @@
 */
 
 
-#include "LX_Sound.hpp"
 #include "LX_Music.hpp"
 #include "LX_Error.hpp"
 
@@ -57,14 +56,14 @@ LX_Music::LX_Music(Mix_Music *mus)
 
 
 /**
-*   @fn LX_Music::LX_Music(std::string filename)
+*   @fn LX_Music::LX_Music(string filename)
 *
 *   Create the instance loading a music file
 *
 *   @param filename The music filename you want to load
 *
 */
-LX_Music::LX_Music(std::string filename)
+LX_Music::LX_Music(string filename)
 {
     music = NULL;
 
@@ -86,7 +85,7 @@ LX_Music::~LX_Music(void)
 
 
 /**
-*   @fn bool LX_Music::load(std::string filename)
+*   @fn bool LX_Music::load(string filename)
 *
 *   Load the music specified in the music file
 *
@@ -95,7 +94,7 @@ LX_Music::~LX_Music(void)
 *   @return TRUE on success, FALSE otherwise
 *
 */
-bool LX_Music::load(std::string filename)
+bool LX_Music::load(string filename)
 {
     Mix_FreeMusic(music);
 

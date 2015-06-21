@@ -21,7 +21,6 @@
 
 #include <SDL2/SDL_mixer.h>
 
-#include "LX_Sound.hpp"
 #include "LX_Chunk.hpp"
 #include "LX_Error.hpp"
 #include "LX_FileIO.hpp"
@@ -61,7 +60,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample)
 
 
 /**
-*   @fn LX_Chunk::LX_Chunk(std::string filename)
+*   @fn LX_Chunk::LX_Chunk(string filename)
 *
 *   Construct the instance creating the Mix_Chunk instance from a file
 *
@@ -72,7 +71,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample)
 *           an other file type.
 *
 */
-LX_Chunk::LX_Chunk(std::string filename)
+LX_Chunk::LX_Chunk(string filename)
 {
     chunk = NULL;
     load(filename.c_str());
@@ -111,7 +110,7 @@ LX_Chunk::~LX_Chunk()
 
 
 /**
-*   @fn bool LX_Chunk::load(std::string filename)
+*   @fn bool LX_Chunk::load(string filename)
 *
 *   Load the WAV sample from a file
 *
@@ -120,7 +119,7 @@ LX_Chunk::~LX_Chunk()
 *   @return TRUE on success, FALSE otherwise
 *
 */
-bool LX_Chunk::load(std::string filename)
+bool LX_Chunk::load(string filename)
 {
     Mix_FreeChunk(chunk);
     chunk = Mix_LoadWAV(filename.c_str());

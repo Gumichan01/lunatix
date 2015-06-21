@@ -24,6 +24,8 @@
 
 #include <SDL2/SDL_mixer.h>
 
+#include "LX_Sound.hpp"
+
 #define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable the mix module */
 #define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
 #define LX_MIXER_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
@@ -59,10 +61,10 @@ class LX_Music;
 class LX_Chunk;
 
 /* == Music and chunk == */
-LX_Music * loadMusic(std::string filename);
+LX_Music * loadMusic(string filename);
 LX_Music * loadMusic(Mix_Music *mus);
 
-LX_Chunk * loadSample(std::string filename);
+LX_Chunk * loadSample(string filename);
 LX_Chunk * loadSample(Mix_Chunk *ch);
 LX_Chunk * loadSample(LX_FileBuffer *file);
 

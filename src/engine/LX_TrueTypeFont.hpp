@@ -22,6 +22,8 @@
 *
 */
 
+#include <iostream>
+
 #include <SDL2/SDL_ttf.h>
 
 #define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
@@ -50,7 +52,9 @@ class LX_FileBuffer;
 };
 
 
+using namespace std;
 using namespace LX_Graphics;
+using namespace LX_FileIO;
 
 /**
 *   @namespace LX_TrueTypeFont
@@ -87,36 +91,36 @@ typedef enum {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 class LX_Font
 {
 
-    std::string font_str;       /**< The font file */
+    string font_str;            /**< The font file */
     unsigned int font_size;     /**< The font size */
     SDL_Color font_color;       /**< The font color */
     LX_FileBuffer *font_buffer;
 
 
-    void init(std::string font_file, SDL_Color *color, int size);
-    SDL_Surface * drawText(LX_TTF_TypeText type, std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
+    void init(string font_file, SDL_Color *color, int size);
+    SDL_Surface * drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
 
 public:
 
     LX_Font(SDL_Color *color);
-    LX_Font(std::string font_file, SDL_Color *color);
-    LX_Font(std::string font_file, SDL_Color *color, int size);
+    LX_Font(string font_file, SDL_Color *color);
+    LX_Font(string font_file, SDL_Color *color, int size);
 
-    int sizeOfText(std::string text, int *w, int *h);
-    int sizeOfText(TTF_Font *ttf, std::string text, int *w, int *h);
+    int sizeOfText(string text, int *w, int *h);
+    int sizeOfText(TTF_Font *ttf, string text, int *w, int *h);
 
-    SDL_Surface * drawSolidText(std::string text);
-    SDL_Surface * drawSolidText(std::string text, unsigned int size);
+    SDL_Surface * drawSolidText(string text);
+    SDL_Surface * drawSolidText(string text, unsigned int size);
 
-    SDL_Surface * drawShadedText(std::string text, SDL_Color bg);
-    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b);
-    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
+    SDL_Surface * drawShadedText(string text, SDL_Color bg);
+    SDL_Surface * drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b);
+    SDL_Surface * drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
 
-    SDL_Surface * drawBlendedText(std::string text);
-    SDL_Surface * drawBlendedText(std::string text, unsigned int size);
+    SDL_Surface * drawBlendedText(string text);
+    SDL_Surface * drawBlendedText(string text, unsigned int size);
 
-    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, int idWindow);
-    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, LX_Window *win);
+    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, int idWindow);
+    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, LX_Window *win);
 
     void setColor(SDL_Color *color);
 

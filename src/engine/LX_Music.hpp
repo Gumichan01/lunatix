@@ -23,9 +23,9 @@
 */
 
 
-#include<iostream>
-
 #include<SDL2/SDL_mixer.h>
+
+#include "LX_Sound.hpp"
 
 
 namespace LX_Mixer
@@ -51,10 +51,10 @@ public:
 
     LX_Music(void);
     LX_Music(Mix_Music *mus);
-    LX_Music(std::string filename);
+    LX_Music(string filename);
 
     // Music
-    bool load(std::string filename);
+    bool load(string filename);
     int play(void);
     int play(int loops);
     void pause(void);

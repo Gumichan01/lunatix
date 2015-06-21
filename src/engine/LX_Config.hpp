@@ -29,6 +29,8 @@
 #define LUA_CONFIG_FILE "script/LX_config.lua"   /**< The lua file the engine uses for the configuration loading */
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
+using namespace std;
+
 /**
 *   @class LX_ConfigurationException
 *   @brief The exception class of LX_Configuration
@@ -36,14 +38,14 @@
 *   This class describes the exception occured when the configuration construction fails.
 *
 */
-class LX_ConfigurationException : public std::exception
+class LX_ConfigurationException : public exception
 {
 
-    std::string str_err;
+    string str_err;
 
 public :
 
-    LX_ConfigurationException(std::string err);
+    LX_ConfigurationException(string err);
 
     const char * what() const throw();
 
@@ -67,7 +69,7 @@ class LX_Configuration
     int audioFlag;
     int joystickFlag;
     int openglFlag;
-    std::string font_file;
+    string font_file;
     int font_size;
     int width;
     int height;

@@ -19,7 +19,6 @@
 *
 */
 
-#include "LX_Sound.hpp"
 #include "LX_Music.hpp"
 #include "LX_Chunk.hpp"
 #include "LX_Mixer.hpp"
@@ -35,7 +34,7 @@ namespace LX_Mixer
 
 
 /**
-*   @fn LX_Music * loadMusic(std::string filename)
+*   @fn LX_Music * loadMusic(string filename)
 *
 *   Load the music according to the file name
 *
@@ -47,7 +46,7 @@ namespace LX_Mixer
 *           So do not forget to destroy it.
 *
 */
-LX_Music * loadMusic(std::string filename)
+LX_Music * loadMusic(string filename)
 {
     return new LX_Music(filename.c_str());
 }
@@ -75,7 +74,7 @@ LX_Music * loadMusic(Mix_Music *mus)
 
 
 /**
-*   @fn LX_Chunk * loadSample(std::string filename)
+*   @fn LX_Chunk * loadSample(string filename)
 *
 *   Create a new LX_Chunk instance from a WAV file
 *
@@ -87,7 +86,7 @@ LX_Music * loadMusic(Mix_Music *mus)
 *           So do not forget to destroy it.
 *
 */
-LX_Chunk * loadSample(std::string filename)
+LX_Chunk * loadSample(string filename)
 {
     return new LX_Chunk(filename.c_str());
 }
