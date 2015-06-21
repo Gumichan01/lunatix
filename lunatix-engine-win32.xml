@@ -21,10 +21,40 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\Projet_SDL2" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\Release\Lunatix" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Release" />
 				<Option object_output="obj\Release\" />
-				<Option type="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option createStaticLib="1" />
+				<Option projectLinkerOptionsRelation="1" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-w" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lOpenGL32 -lglu32" />
+					<Add library="lib\win32\libSDL2.a" />
+					<Add library="lib\win32\libSDL2.dll.a" />
+					<Add library="lib\win32\libSDL2_image.a" />
+					<Add library="lib\win32\libSDL2_image.dll.a" />
+					<Add library="lib\win32\libSDL2_mixer.a" />
+					<Add library="lib\win32\libSDL2_mixer.dll.a" />
+					<Add library="lib\win32\libSDL2_ttf.a" />
+					<Add library="lib\win32\libSDL2_ttf.dll.a" />
+					<Add library="lib\win32\libSDL2main.a" />
+					<Add library="lib\win32\lua5.1.lib" />
+					<Add library="lib\win32\lua51.lib" />
+					<Add library="libmingw32.a" />
+				</Linker>
+			</Target>
+			<Target title="libLuna">
+				<Option output="liblunatix.a" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-O3" />
 					<Add option="-w" />
@@ -54,9 +84,15 @@
 			<Add library="lib\win32\lua51.lib" />
 			<Add directory="lib\win32" />
 		</Linker>
-		<Unit filename="config\lxsdl.cfg" />
-		<Unit filename="config\lxwindow.cfg" />
-		<Unit filename="script\LX_config.lua" />
+		<Unit filename="config\lxsdl.cfg">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="config\lxwindow.cfg">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="script\LX_config.lua">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="src\engine\LX_Chunk.cpp" />
 		<Unit filename="src\engine\LX_Chunk.hpp" />
 		<Unit filename="src\engine\LX_Config.cpp" />
@@ -101,7 +137,9 @@
 		<Unit filename="src\engine\LX_WindowManager.cpp" />
 		<Unit filename="src\engine\LX_WindowManager.hpp" />
 		<Unit filename="src\engine\Lunatix_engine.hpp" />
-		<Unit filename="src\main.cpp" />
+		<Unit filename="src\main.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
