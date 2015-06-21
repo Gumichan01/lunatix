@@ -15,7 +15,7 @@
 
 # You can modify the value of DEBUG
 # If you want to use debug or release mode
-DEBUG=no
+DEBUG=yes
 
 
 CC=g++
@@ -23,7 +23,7 @@ MAIN_OBJ=main.o
 OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o \
 LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o LX_Random.o LX_Particle.o \
-LX_ParticleSystem.o LX_FileIO.o LX_FileBuffer.o
+LX_ParticleSystem.o LX_FileIO.o LX_FileBuffer.o LX_MessageBox.o
 
 
 LUAC=luac5.1
@@ -88,14 +88,14 @@ $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 
 
 # Demo
-$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SRIPT)
+$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SCRIPT)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
 else
 	@echo "Release mode"
 endif
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $(MAIN_OBJ) $(OBJS) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
 LX_Config.o : $(LUNATIX_PATH)LX_Config.cpp $(LUNATIX_PATH)LX_Config.hpp $(LUNATIX_PATH)LX_Error.hpp
