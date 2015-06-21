@@ -279,7 +279,7 @@ void test_winManager(LX_Window *win)
 
     win->clearRenderer();
 
-    LX_WindowManager::getInstance()->deleteWindow(id);
+    LX_WindowManager::getInstance()->removeWindow(id);
 
     cout << " = END TEST = " << endl;
 }

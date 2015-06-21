@@ -103,7 +103,7 @@ LX_WindowManager::~LX_WindowManager()
     {
         for(unsigned int i = 0; i < size; i++)
         {
-            deleteWindow(i);
+            removeWindow(i);
         }
     }
 }
@@ -151,7 +151,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
 
 
 /**
-*   @fn LX_Window * LX_WindowManager::deleteWindow(unsigned int id)
+*   @fn LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 *
 *   Delete a window from the list acording to its ID
 *   and returns the pointer to it.
@@ -162,7 +162,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
 *           NULL otherwise
 *
 */
-LX_Window * LX_WindowManager::deleteWindow(unsigned int id)
+LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 {
     LX_Window *w = NULL;
 
