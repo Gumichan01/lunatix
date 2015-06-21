@@ -56,7 +56,7 @@ public:
     static void destroy(void);
 
     int addWindow(LX_Window *w);
-    int deleteWindow(unsigned int id);
+    LX_Window * deleteWindow(unsigned int id);
 
     unsigned int nbWindow(void);
 

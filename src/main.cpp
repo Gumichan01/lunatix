@@ -43,7 +43,6 @@ int main ( int argc, char** argv )
     SDL_Rect pos = {400,200,150,120};
     SDL_Rect pos1 = {100,200,178,32};
     SDL_Rect pos2 = {100,250,768,32};
-
     SDL_Color color = {255,255,255};
 
     bool err, game = true;
@@ -57,14 +56,13 @@ int main ( int argc, char** argv )
     std::string mus = "data/Prototype Princess v1_01.wav";
 
     LX_Window *window = NULL;
+    LX_Window *window2 = NULL;
     LX_Font *ttf = NULL;
     LX_Music *audio = NULL;
 
     LX_FileBuffer buf("data/explosion.wav");
     LX_Chunk chunk(&buf);
-
     SDL_Event event;
-
 
     err = LX_Init();
 
@@ -78,10 +76,11 @@ int main ( int argc, char** argv )
     try
     {
         window = new LX_Window(LX_WINDOW_RENDERING);
+        window2 = new LX_Window("Windows #2",512,512,600,480,LX_WINDOW_RENDERING,SDL_WINDOW_RESIZABLE);
 
         // getWindowManager() and LX_WindowManager::getInstance() are the same thing
         getWindowManager()->addWindow(window);
-        LX_WindowManager::getInstance()->addWindow(new LX_Window("Windows #2",512,512,600,480,LX_WINDOW_RENDERING,SDL_WINDOW_RESIZABLE));
+        LX_WindowManager::getInstance()->addWindow(window2);
 
     }
     catch(LX_WindowException & win_ex)
@@ -210,7 +209,8 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
-
+    delete window;
+    delete window2;
 
     // Version of SDL
     SDL_version compiled;

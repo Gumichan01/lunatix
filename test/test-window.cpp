@@ -40,6 +40,7 @@ int main(int argc, char **argv)
     test_rendering(w);
     test_winManager(w);
 
+    delete win;
     LX_Quit();
 
     cout << " ==== END Rendering ==== " << endl;
