@@ -223,6 +223,13 @@ int main ( int argc, char** argv )
     printf("But we linked against SDL version %d.%d.%d.\n",
            linked.major, linked.minor, linked.patch);
 
+    // Version of LunatiX Engine
+    LX_Version luna;
+
+    LX_EngineVersion(&luna);
+
+    printf("LunatiX Engine - version %d.%d.%d \n",
+           luna.major, luna.minor, luna.patch);
 
     LX_Quit();
 

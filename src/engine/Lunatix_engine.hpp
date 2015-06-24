@@ -44,5 +44,6 @@
 #include "LX_Random.hpp"
 #include "LX_MessageBox.hpp"
 #include "LX_Error.hpp"
+#include "LX_Version.hpp"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED
