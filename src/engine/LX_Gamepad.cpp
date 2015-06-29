@@ -66,6 +66,18 @@ const char * LX_Gamepad::getName(void)
 }
 
 
+const char * LX_Gamepad::toString(void)
+{
+    LX_GamepadInfo gi;
+
+    if(gc != NULL)
+        statGamepad(gc,&gi);
+    else
+        statGamepad(joy,&gi);
+
+    return gamepadToString(&gi);
+}
+
 
 };
 

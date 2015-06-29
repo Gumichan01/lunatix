@@ -48,6 +48,7 @@ public :
 
     bool isConnected(void);
     const char * getName(void);
+    const char * toString(void);
 
     ~LX_Gamepad();
 
