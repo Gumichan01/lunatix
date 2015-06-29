@@ -104,6 +104,8 @@
 		<Unit filename="src\engine\LX_FileBuffer.hpp" />
 		<Unit filename="src\engine\LX_FileIO.cpp" />
 		<Unit filename="src\engine\LX_FileIO.hpp" />
+		<Unit filename="src\engine\LX_Gamepad.cpp" />
+		<Unit filename="src\engine\LX_Gamepad.hpp" />
 		<Unit filename="src\engine\LX_Graphics.cpp" />
 		<Unit filename="src\engine\LX_Graphics.hpp" />
 		<Unit filename="src\engine\LX_Hitbox.hpp" />
@@ -132,6 +134,8 @@
 		<Unit filename="src\engine\LX_TrueTypeFont.hpp" />
 		<Unit filename="src\engine\LX_Vector2D.cpp" />
 		<Unit filename="src\engine\LX_Vector2D.hpp" />
+		<Unit filename="src\engine\LX_Version.cpp" />
+		<Unit filename="src\engine\LX_Version.hpp" />
 		<Unit filename="src\engine\LX_Window.cpp" />
 		<Unit filename="src\engine\LX_Window.hpp" />
 		<Unit filename="src\engine\LX_WindowManager.cpp" />
