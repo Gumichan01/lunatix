@@ -22,7 +22,6 @@ LX_Gamepad::LX_Gamepad(int index)
 {
     gc = NULL;
     joy = NULL;
-    opened = false;
 
     if(SDL_IsGameController(index))
     {
@@ -33,13 +32,6 @@ LX_Gamepad::LX_Gamepad(int index)
     if(gc == NULL)
     {
         joy = SDL_JoystickOpen(index);
-
-        if(joy != NULL)
-            opened = true;
-    }
-    else
-    {
-        opened = true;
     }
 }
 
@@ -51,13 +43,6 @@ LX_Gamepad::~LX_Gamepad()
         SDL_GameControllerClose(gc);
     else
         SDL_JoystickClose(joy);
-}
-
-
-
-bool LX_Gamepad::isOpen(void)
-{
-    return opened;
 }
 
 

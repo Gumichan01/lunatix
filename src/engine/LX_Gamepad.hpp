@@ -40,14 +40,12 @@ class LX_Gamepad
 
     SDL_GameController *gc;
     SDL_Joystick *joy;
-    bool opened;
 
 
 public :
 
     LX_Gamepad(int index=0);
 
-    bool isOpen(void);
     bool isConnected(void);
     const char * getName(void);
 
