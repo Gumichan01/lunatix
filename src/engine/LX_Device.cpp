@@ -175,7 +175,6 @@ int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
 const char * gamepadToString(LX_GamepadInfo *info)
 {
     ostringstream stream;
-    const char * no_guid = "No GUID";
     char guid[GUID_SIZE+1];
 
     memset(&guid,0,GUID_SIZE+1);
