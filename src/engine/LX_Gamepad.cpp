@@ -34,7 +34,6 @@ LX_Gamepad::LX_Gamepad(int index)
 
     if(SDL_IsGameController(index))
     {
-        std::cout << "The gamepad is supported by the game controller interface!" << std::endl;
         gc = SDL_GameControllerOpen(index);
     }
 
