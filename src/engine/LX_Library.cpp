@@ -28,6 +28,7 @@
 
 using namespace LX_Graphics;
 
+static const std::string mappingFile = "config/gamecontrollerdb.txt";
 
 /**
 *   @fn bool LX_Init(void)
@@ -75,6 +76,11 @@ bool LX_Init(void)
         return false;
     }
 
+    // Load mappings from another configuration file
+    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER != 0))
+    {
+        SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
+    }
 
     if(configuration->getVideoFlag() == 1)
     {
