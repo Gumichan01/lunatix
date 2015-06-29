@@ -44,6 +44,7 @@ typedef struct LX_GamepadInfo
 {
 
     SDL_JoystickID id;              /**< The joystick ID */
+    SDL_JoystickGUID uid;           /**< The joystick UID */
     char name[LX_JOY_NAMESIZE];     /**< The name of the joystick */
     int numAxis;                    /**< The number of axes */
     int numBalls;                   /**< The number of balls */

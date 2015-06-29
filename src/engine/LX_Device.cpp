@@ -29,6 +29,8 @@
 
 using namespace std;
 
+static const short GUID_SIZE = 16;    // Size of the data in SDL_JoystickGUID
+
 
 /**
 *   @namespace LX_Device
@@ -111,6 +113,7 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 
     // Get information
     info->id = SDL_JoystickInstanceID(joy);
+    info->uid = SDL_JoystickGetGUID(joy);
     tmp = SDL_JoystickName(joy);
 
     if(tmp == NULL)
@@ -172,9 +175,15 @@ int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
 const char * gamepadToString(LX_GamepadInfo *info)
 {
     ostringstream stream;
+    const char * no_guid = "No GUID";
+    char guid[GUID_SIZE+1];
+
+    memset(&guid,0,GUID_SIZE+1);
+    SDL_JoystickGetGUIDString(info->uid,guid,GUID_SIZE);
 
     stream << endl << " ==== Gamepad Information ==== " << endl << endl
     << "Gamepad - ID : " << info->id << endl
+    << "Gamepad - UID : " << guid << endl
     << "Gamepad - Name : " << info->name << endl
     << "Gamepad - Number of Axes : " << info->numAxis << endl
     << "Gamepad - Number of Balls : " << info->numBalls << endl
