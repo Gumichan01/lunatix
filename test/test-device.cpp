@@ -55,9 +55,8 @@ void test_gamepad(void)
 
     if(gp->isConnected())
     {
-        cout << "Connected " << endl;
-        cout << "INFO - Name of the gamepad : " << gp->getName() << endl;
-        cout << gp->toString() << endl;
+        cout << "INFO - Name : " << gp->getName() << ";" << endl
+            << gp->toString() << endl;
     }
     else
         cout << "INFO - No gamepad at index 0" << endl;
