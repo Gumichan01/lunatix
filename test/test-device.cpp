@@ -36,7 +36,6 @@ int main(int argc, char **argv)
     // Joystick and Game controller
     cout << "\nYou have " << numberOfDevices() << " gamepad(s) connected " << endl;
 
-    test_joystick();
     test_gamepad();
 
     LX_Quit();
@@ -48,35 +47,6 @@ int main(int argc, char **argv)
 
 
 
-void test_joystick(void)
-{
-    LX_GamepadInfo gi;
-    SDL_Joystick *joy = SDL_JoystickOpen(0);
-    const char *str;
-
-    if(joy != NULL)
-    {
-        if(statGamepad(joy,&gi) == -1)
-            cerr << "FAILURE - Cannot get information : " << LX_GetError() << endl;
-        else
-        {
-            str = gamepadToString(&gi);
-
-            if(str == NULL)
-                cerr << "FAILURE - Cannot get the string format of information" << endl;
-            else
-            {
-                cout << "SUCCESS - Got the string format of joystick information" << endl;
-                cout << str << endl;
-            }
-
-        }
-
-        SDL_JoystickClose(joy);
-    }
-}
-
-
 void test_gamepad(void)
 {
     LX_Gamepad *gp = NULL;
@@ -86,7 +56,8 @@ void test_gamepad(void)
     if(gp->isConnected())
     {
         cout << "Connected " << endl;
-        cout << "INFO - Gamepad - Name : " << gp->getName() << endl;
+        cout << "INFO - Name of the gamepad : " << gp->getName() << endl;
+        cout << gp->toString() << endl;
     }
     else
         cout << "INFO - No gamepad at index 0" << endl;
