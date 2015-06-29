@@ -48,6 +48,7 @@ public :
     LX_Gamepad(int index=0);
 
     bool isOpen(void);
+    bool isConnected(void);
     const char * getName(void);
 
     ~LX_Gamepad();

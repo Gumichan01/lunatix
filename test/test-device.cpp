@@ -83,9 +83,9 @@ void test_gamepad(void)
 
     gp = new LX_Gamepad();
 
-    if(gp->isOpen())
+    if(gp->isConnected())
     {
-        cout << "Opened " << endl;
+        cout << "Connected " << endl;
         cout << "INFO - Gamepad - Name : " << gp->getName() << endl;
     }
     else

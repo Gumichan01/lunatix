@@ -62,6 +62,16 @@ bool LX_Gamepad::isOpen(void)
 
 
 
+bool LX_Gamepad::isConnected(void)
+{
+    if(gc != NULL)
+        return SDL_GameControllerGetAttached(gc);
+    else
+        return SDL_JoystickGetAttached(joy);
+}
+
+
+
 const char * LX_Gamepad::getName(void)
 {
     if(gc != NULL)
