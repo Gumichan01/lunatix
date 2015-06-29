@@ -62,6 +62,13 @@ bool LX_Gamepad::isOpen(void)
 
 
 
+const char * LX_Gamepad::getName(void)
+{
+    if(gc != NULL)
+        return nameOf(gc);
+    else
+        return nameOf(joy);
+}
 
 
 

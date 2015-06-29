@@ -79,7 +79,20 @@ void test_joystick(void)
 
 void test_gamepad(void)
 {
+    LX_Gamepad *gp = NULL;
 
+    gp = new LX_Gamepad();
+
+    if(gp->isOpen())
+    {
+        cout << "Opened " << endl;
+        cout << "INFO - Gamepad - Name : " << gp->getName() << endl;
+    }
+    else
+        cout << "INFO - No gamepad at index 0" << endl;
+
+
+    delete gp;
 }
 
 
