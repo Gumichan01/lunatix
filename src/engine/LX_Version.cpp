@@ -26,7 +26,7 @@
 *
 *   Get the version of the engine
 *
-*   @param version the structure to fill in. Must be not NULL
+*   @param version The structure to fill in. Must be not NULL
 *
 */
 void LX_EngineVersion(LX_Version *version)
