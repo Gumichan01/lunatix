@@ -228,7 +228,7 @@ int main ( int argc, char** argv )
 
     LX_EngineVersion(&luna);
 
-    printf("LunatiX Engine - version %d.%d.%d \n",
+    printf("LunatiX Engine - Version %d.%d.%d \n",
            luna.major, luna.minor, luna.patch);
 
     LX_Quit();
