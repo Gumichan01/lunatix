@@ -173,13 +173,13 @@ const char * gamepadToString(LX_GamepadInfo *info)
 {
     ostringstream stream;
 
-    stream << endl << " ==== Joystick Information ==== " << endl << endl
-    << "Joystick ID : " << info->id << endl
-    << "Joystick Name : " << info->name << endl
-    << "Joystick Number of Axes : " << info->numAxis << endl
-    << "Joystick Number of Balls : " << info->numBalls << endl
-    << "Joystick Number of Buttons : " << info->numButtons << endl
-    << "Joystick Number of Hats : " << info->numHats << endl;
+    stream << endl << " ==== Gamepad Information ==== " << endl << endl
+    << "Gamepad - ID : " << info->id << endl
+    << "Gamepad - Name : " << info->name << endl
+    << "Gamepad - Number of Axes : " << info->numAxis << endl
+    << "Gamepad - Number of Balls : " << info->numBalls << endl
+    << "Gamepad - Number of Buttons : " << info->numButtons << endl
+    << "Gamepad - Number of Hats : " << info->numHats << endl;
 
     return stream.str().c_str();
 }
