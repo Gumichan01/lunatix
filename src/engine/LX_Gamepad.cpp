@@ -17,7 +17,16 @@ namespace LX_Device
 {
 
 
-
+/**
+*   @fn LX_Gamepad::LX_Gamepad(int index)
+*
+*   Load the gamepad
+*
+*   @param index The index of the joystick to query
+*
+*   @note You can check the success of the operation
+*           calling LX_Gamepad::isConnected()
+*/
 LX_Gamepad::LX_Gamepad(int index)
 {
     gc = NULL;
@@ -46,7 +55,15 @@ LX_Gamepad::~LX_Gamepad()
 }
 
 
-
+/**
+*   @fn bool LX_Gamepad::isConnected(void)
+*
+*   Get the status of the gamepad
+*
+*   @return TRUE if the gamepad is opened and connected
+*           FALSE otherwise
+*
+*/
 bool LX_Gamepad::isConnected(void)
 {
     if(gc != NULL)
@@ -56,7 +73,14 @@ bool LX_Gamepad::isConnected(void)
 }
 
 
-
+/**
+*   @fn const char * LX_Gamepad::getName(void)
+*
+*   Get the name of the Gamepad
+*
+*   @return The name of the gamepad, NULL otherwise
+*
+*/
 const char * LX_Gamepad::getName(void)
 {
     if(gc != NULL)
@@ -66,6 +90,13 @@ const char * LX_Gamepad::getName(void)
 }
 
 
+/**
+*   @fn const char * LX_Gamepad::toString(void)
+*
+*   Get information about the gamepad
+*
+*   @return Always returns a valid string
+*/
 const char * LX_Gamepad::toString(void)
 {
     LX_GamepadInfo gi;
