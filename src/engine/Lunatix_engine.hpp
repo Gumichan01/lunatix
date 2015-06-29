@@ -39,7 +39,7 @@
 #include "LX_WindowManager.hpp"
 #include "LX_FileIO.hpp"
 #include "LX_FileBuffer.hpp"
-#include "LX_Device.hpp"
+#include "LX_Gamepad.hpp"
 #include "LX_SystemInfo.hpp"
 #include "LX_Random.hpp"
 #include "LX_MessageBox.hpp"
