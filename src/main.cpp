@@ -212,6 +212,19 @@ int main ( int argc, char** argv )
     delete window;
     delete window2;
 
+    // Gamepad
+    LX_Gamepad *gp =  new LX_Gamepad();
+
+    if(gp->isConnected())
+    {
+        std::string str = gp->toString();
+
+        std::cout << "ID : " << gp->getID() << std::endl;
+        std::cout << str << std::endl;
+    }
+
+    delete gp;
+
     // Version of SDL
     SDL_version compiled;
     SDL_version linked;

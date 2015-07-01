@@ -9,7 +9,6 @@
 *	luxon.jean.pierre@gmail.com
 */
 
-#include <iostream> // For debug display
 #include "LX_Gamepad.hpp"
 
 
@@ -70,6 +69,17 @@ bool LX_Gamepad::isConnected(void)
     else
         return SDL_JoystickGetAttached(joy);
 }
+
+
+
+SDL_JoystickID LX_Gamepad::getID(void)
+{
+    if(gc != NULL)
+        return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(gc));
+    else
+        return SDL_JoystickInstanceID(joy);
+}
+
 
 
 /**

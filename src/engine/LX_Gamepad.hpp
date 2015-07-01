@@ -47,6 +47,7 @@ public :
     LX_Gamepad(int index=0);
 
     bool isConnected(void);
+    SDL_JoystickID getID(void);
     const char * getName(void);
     const char * toString(void);
 
