@@ -31,7 +31,7 @@ LX_Gamepad::LX_Gamepad(int index)
     gc = NULL;
     joy = NULL;
 
-    if(SDL_IsGameController(index))
+    if(index < numberOfDevices() && SDL_IsGameController(index))
     {
         gc = SDL_GameControllerOpen(index);
     }
@@ -65,9 +65,9 @@ LX_Gamepad::~LX_Gamepad()
 bool LX_Gamepad::isConnected(void)
 {
     if(gc != NULL)
-        return SDL_GameControllerGetAttached(gc);
+        return SDL_GameControllerGetAttached(gc) == SDL_TRUE;
     else
-        return SDL_JoystickGetAttached(joy);
+        return SDL_JoystickGetAttached(joy) == SDL_TRUE;
 }
 
 
