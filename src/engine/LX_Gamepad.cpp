@@ -30,6 +30,7 @@ LX_Gamepad::LX_Gamepad(int index)
 {
     gc = NULL;
     joy = NULL;
+    haptic = NULL;
 
     if(index < numberOfDevices() && SDL_IsGameController(index))
     {
@@ -39,6 +40,14 @@ LX_Gamepad::LX_Gamepad(int index)
     if(gc == NULL)
     {
         joy = SDL_JoystickOpen(index);
+        haptic = new LX_Haptic(joy);
+    }
+    else
+        haptic = new LX_Haptic(index);
+
+    if(haptic != NULL)
+    {
+        haptic->RumbleEffectInit();
     }
 }
 
@@ -46,6 +55,8 @@ LX_Gamepad::LX_Gamepad(int index)
 
 LX_Gamepad::~LX_Gamepad()
 {
+    delete haptic;
+
     if(gc != NULL)
         SDL_GameControllerClose(gc);
     else
@@ -72,6 +83,20 @@ bool LX_Gamepad::isConnected(void)
 
 
 
+void LX_Gamepad::playRumble(float strengh, Uint32 length)
+{
+    haptic->RumbleEffectPlay(strengh,length);
+}
+
+
+/**
+*   @fn SDL_JoystickID LX_Gamepad::getID(void)
+*
+*   Get the ID of the gamepad
+*
+*   @return The ID of the gamepad, -1 otherwise
+*
+*/
 SDL_JoystickID LX_Gamepad::getID(void)
 {
     if(gc != NULL)
