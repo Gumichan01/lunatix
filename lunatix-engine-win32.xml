@@ -108,6 +108,8 @@
 		<Unit filename="src\engine\LX_Gamepad.hpp" />
 		<Unit filename="src\engine\LX_Graphics.cpp" />
 		<Unit filename="src\engine\LX_Graphics.hpp" />
+		<Unit filename="src\engine\LX_Haptic.cpp" />
+		<Unit filename="src\engine\LX_Haptic.hpp" />
 		<Unit filename="src\engine\LX_Hitbox.hpp" />
 		<Unit filename="src\engine\LX_Library.cpp" />
 		<Unit filename="src\engine\LX_Library.hpp" />
