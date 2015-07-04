@@ -2,21 +2,23 @@
 
 
 #include <iostream>
+#include <cstring>
 
 #include "../src/engine/Lunatix_engine.hpp"
+#include "../src/engine/LX_Haptic.hpp"
 
 using namespace std;
 using namespace LX_Device;
 
-void test_joystick(void);
 void test_gamepad(void);
+void test_haptic(void);
 
 
 int main(int argc, char **argv)
 {
     bool err = false;
 
-    int flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER;
+    int flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
 
     cout << " ==== Test Device ==== " << endl;
 
@@ -37,6 +39,7 @@ int main(int argc, char **argv)
     cout << "\nYou have " << numberOfDevices() << " gamepad(s) connected " << endl;
 
     test_gamepad();
+    test_haptic();
 
     LX_Quit();
 
@@ -66,8 +69,48 @@ void test_gamepad(void)
 }
 
 
+void test_haptic(void)
+{
+    LX_Haptic haptic;
+    SDL_HapticEffect effect;
+    int effectID;
 
+    memset(&effect,0,sizeof(SDL_HapticEffect));
 
+    if(haptic.isOpened())
+    {
+        if(haptic.RumbleEffectInit())
+        {
+            haptic.RumbleEffectPlay(1,500);
+            SDL_Delay(1000);
+        }
+
+        // Effect
+        effect.type = SDL_HAPTIC_SINE;
+        effect.periodic.direction.type = SDL_HAPTIC_POLAR;      // Polar coordinates
+        effect.periodic.direction.dir[0] = 18000;               // Force comes from south
+        effect.periodic.period = 1000;                          // 1000 ms
+        effect.periodic.magnitude = 20000;                      // 20000/32767 strength
+        effect.periodic.length = 5000;                          // 5 seconds long
+        effect.periodic.attack_length = 1000;                   // Takes 1 second to get max strength
+        effect.periodic.fade_length = 1000;                     // Takes 1 second to fade away
+
+        effectID = haptic.newEffect(&effect);
+
+        if(effectID < 0)
+            cerr << "INFO - Cannot add effect: " << LX_GetError() << endl;
+        else
+        {
+            haptic.runEffect(effectID,1);
+            SDL_Delay(5128);                                    // Wait for the effect to finish
+        }
+
+        cout << "INFO - Effects were done" << endl;
+    }
+    else
+        cout << "INFO - No haptic device" << endl;
+
+}
 
 
 

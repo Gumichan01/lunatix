@@ -38,6 +38,7 @@ bool isHaptic(SDL_Joystick *joy);
 class LX_Haptic
 {
     SDL_Haptic *haptic;
+    int instanceID;
 
 public :
 
@@ -50,9 +51,9 @@ public :
     void RumbleEffectPlay(void);
     void RumbleEffectPlay(float strengh, Uint32 length);
 
-    bool newEffect(SDL_HapticEffect * effect);
+    int newEffect(SDL_HapticEffect * effect);
     void destroyEffect(SDL_HapticEffect * effect);
-    bool runEffect(int effectID, Uint32 iterations);
+    void runEffect(int effectID, Uint32 iterations);
     void stopEffect(int effectID);
 
     int numberOfEffects(void);
