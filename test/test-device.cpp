@@ -112,7 +112,7 @@ void test_haptic(void)
             SDL_Delay(5128);                                    // Wait for the effect to finish
         }
 
-        cout << "INFO - Effects were done" << endl;
+        cout << "INFO - Done" << endl;
     }
     else
         cout << "INFO - No haptic device" << endl;

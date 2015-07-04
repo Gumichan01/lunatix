@@ -32,6 +32,12 @@ using namespace std;
 static const short GUID_SIZE = 16;    // Size of the data in SDL_JoystickGUID
 
 
+namespace LX_Device
+{
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info);
+};
+
+
 /**
 *   @namespace LX_Device
 *
@@ -40,6 +46,26 @@ static const short GUID_SIZE = 16;    // Size of the data in SDL_JoystickGUID
 */
 namespace LX_Device
 {
+
+
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info)
+{
+    // Get information
+    info->id = SDL_JoystickInstanceID(joy);
+    info->uid = SDL_JoystickGetGUID(joy);
+    info->numAxis = SDL_JoystickNumAxes(joy);
+    info->numBalls = SDL_JoystickNumBalls(joy);
+    info->numButtons = SDL_JoystickNumButtons(joy);
+    info->numHats = SDL_JoystickNumHats(joy);
+
+    if(info->id == -1 || info->numAxis == -1
+            || info->numBalls == -1 || info->numButtons == -1 || info->numHats == -1)
+    {
+        return LX_SetError("Cannot get information\n");
+    }
+
+    return 0;
+}
 
 
 /**
@@ -107,42 +133,25 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 
     if(joy == NULL || info == NULL)
     {
-        LX_SetError("Invalid argument : joystick or gamepad info\n");
-        return -1;
+        return LX_SetError("Invalid argument : joystick or gamepad info\n");
     }
 
-    // Get information
-    info->id = SDL_JoystickInstanceID(joy);
-    info->uid = SDL_JoystickGetGUID(joy);
-    tmp = SDL_JoystickName(joy);
+    tmp = nameOf(joy);
 
     if(tmp == NULL)
     {
-        LX_SetError("Cannot get the name of the joystick\n");
-        return -1;
+        return LX_SetError("Cannot get the name of the joystick\n");
     }
 
     strcpy(info->name,tmp);
-    info->numAxis = SDL_JoystickNumAxes(joy);
-    info->numBalls = SDL_JoystickNumBalls(joy);
-    info->numButtons = SDL_JoystickNumButtons(joy);
-    info->numHats = SDL_JoystickNumHats(joy);
 
-
-    if(info->id == -1 || info->numAxis == -1
-            || info->numBalls == -1 || info->numButtons == -1 || info->numHats == -1)
-    {
-        LX_SetError("Cannot get information\n");
-        return -1;
-    }
-
-    return 0;
+    return lx_stat(joy,info);
 }
 
 
 
 /**
-*   @fn int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
+*   @fn int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 *
 *   Get the name of a game controller
 *
@@ -153,9 +162,25 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 *               -1 on failure
 *
 */
-int statGamepad(SDL_GameController * gp, LX_GamepadInfo *info)
+int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 {
-    return statGamepad(SDL_GameControllerGetJoystick(gp),info);
+    const char *tmp;
+
+    if(gc == NULL || info == NULL)
+    {
+        return LX_SetError("Invalid argument : joystick or gamepad info\n");
+    }
+
+    tmp = nameOf(gc);
+
+    if(tmp == NULL)
+    {
+        return LX_SetError("Cannot get the name of the game controller\n");
+    }
+
+    strcpy(info->name,tmp);
+
+    return lx_stat(SDL_GameControllerGetJoystick(gc),info);
 }
 
 

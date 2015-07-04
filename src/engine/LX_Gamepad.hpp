@@ -66,6 +66,3 @@ public :
 #endif  // LX_GAMEPAD_HPP_INCLUDED
 
 
-
-
-
