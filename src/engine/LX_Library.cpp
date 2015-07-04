@@ -65,7 +65,7 @@ bool LX_Init(void)
 
     if(configuration->getJoystickFlag() == 1)
     {
-        sdl_flags |= SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER;
+        sdl_flags |= SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
     }
 
 
