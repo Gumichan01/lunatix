@@ -112,20 +112,10 @@ LX_Window::LX_Window(const Uint32 mode)
     window = SDL_CreateWindow("LunatiX Engine v0.5",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
 
     if(window == NULL )
-    {
-        std::cerr << "LX_Window constructor - window creation " << std::endl;
         throw LX_WindowException(LX_GetError());
-    }
 
     if(mode == LX_WINDOW_RENDERING)
-    {
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-
-        if(renderer == NULL)
-        {
-            std::cerr << "LX_Window constructor - renderer creation : " << LX_GetError() << std::endl;
-        }
-    }
 
     init2();
 }
@@ -181,11 +171,6 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
 {
     window = sdlWin;
     renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-
-    if(renderer == NULL)
-    {
-        std::cerr << "LX_Window constructor - renderer creation : " << LX_GetError() << std::endl;
-    }
 
     init2();
 }
@@ -245,20 +230,10 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h, const 
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
 
     if(window == NULL)
-    {
-        std::cerr << "LX_Window constructor - window creation " << std::endl;
         throw LX_WindowException(LX_GetError());
-    }
 
     if(mode == LX_WINDOW_RENDERING)
-    {
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-
-        if(renderer == NULL)
-        {
-            std::cerr << "LX_Window constructor - renderer creation : " << LX_GetError() << std::endl;
-        }
-    }
 
     init2();
 }

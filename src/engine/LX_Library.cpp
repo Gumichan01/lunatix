@@ -72,7 +72,6 @@ bool LX_Init(void)
     // Init SDL
     if(SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
     {
-        std::cerr << "Error occurred in SDL_Init : " << LX_GetError() << std::endl;
         return false;
     }
 
@@ -87,7 +86,6 @@ bool LX_Init(void)
         // Init SDL_Image
         if( IMG_Init(img_flags) != img_flags)
         {
-            std::cerr << "Error occurred in IMG_Init : " << IMG_GetError() << std::endl;
             SDL_Quit();
             return false;
         }
@@ -98,7 +96,6 @@ bool LX_Init(void)
         // Init SDL_ttf
         if(TTF_Init() == -1)
         {
-            std::cerr << "Error occurred in TTF_Init : " << LX_GetError() << std::endl;
             IMG_Quit();
             SDL_Quit();
             return false;
@@ -113,7 +110,6 @@ bool LX_Init(void)
 
         if(err == -1)
         {
-            std::cerr << "Error occurred in Mix_Init : " << LX_GetError() << std::endl;
             TTF_Quit();
             IMG_Quit();
             SDL_Quit();
@@ -124,7 +120,6 @@ bool LX_Init(void)
 
         if( err < 0)
         {
-            std::cerr << "Error occurred in Mix_OpenAudio : " << LX_GetError() << std::endl;
             Mix_Quit();
             TTF_Quit();
             IMG_Quit();
@@ -135,15 +130,8 @@ bool LX_Init(void)
 
     if(configuration->getOpenGL_Flag() == 1)
     {
-        err = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-
-        if(err == -1)
-            std::cerr << "Error Attribute : " << LX_GetError() << std::endl;
-
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-
-        if(err == -1)
-            std::cerr << "Error Attribute : " << LX_GetError() << std::endl;
     }
 
     LX_WindowManager::init();

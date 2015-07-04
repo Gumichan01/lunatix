@@ -28,7 +28,6 @@
 #include "LX_Graphics.hpp"
 #include "LX_TrueTypeFont.hpp"
 #include "LX_Mixer.hpp"
-#include "LX_Sound.hpp"
 #include "LX_Chunk.hpp"
 #include "LX_Music.hpp"
 #include "LX_Physics.hpp"

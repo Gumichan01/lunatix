@@ -68,7 +68,7 @@ int main ( int argc, char** argv )
 
     if(!err)
     {
-        std::cerr << "ERREUR" << std::endl;
+        std::cerr << "ERROR while Lauching the engine: " << LX_GetError() << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -98,7 +98,7 @@ int main ( int argc, char** argv )
 
     if(st == NULL)
     {
-        std::cerr << "[MAIN] loadTexture : " << LX_GetError() <<std::endl;
+        std::cerr << "[MAIN] loadTexture : " << LX_GetError() << std::endl;
     }
 
     ttf->sizeOfText("LunatiX_engine",&wt,&ht);

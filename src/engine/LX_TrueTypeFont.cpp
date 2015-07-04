@@ -157,7 +157,7 @@ void LX_Font::init(string font_file, SDL_Color *color, int size)
     }
     catch(IOException &e)
     {
-        cerr << "Cannot load the TTF file buffer : " << e.what() << endl;
+        LX_SetError(e.what());
         font_buffer = NULL;
     }
 

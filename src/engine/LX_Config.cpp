@@ -24,6 +24,7 @@
 
 #include <string>
 #include <exception>
+#include <sstream>
 
 #include "LX_Config.hpp"
 #include "LX_Error.hpp"
@@ -146,7 +147,7 @@ LX_Configuration * LX_Configuration::getInstance()
         }
         catch(std::exception & ex_conf)
         {
-            std::cerr << "Exception occurred at LX_Configuration constructor : " << ex_conf.what() << std::endl;
+            LX_SetError(ex_conf.what());
             instance = NULL;
         }
     }
@@ -233,7 +234,7 @@ void LX_Configuration::setFlags(void)
 
     if(state == NULL)
     {
-        std::cerr << "Error occured in LX_Configuration::setFlags : Internal error" << std::endl;
+        LX_SetError("Error occured in LX_Configuration::setFlags : Internal error");
         return;
     }
 
@@ -243,7 +244,7 @@ void LX_Configuration::setFlags(void)
     // Open of the Lua file
     if(luaL_dofile(state,LUAC_CONFIG_FILE) != 0)
     {
-        std::cerr << "Error occured in LX_Configuration::setFlags : " << lua_tostring(state,-1) << std::endl;
+        LX_SetError(lua_tostring(state,-1));
         lua_close(state);
         return;
     }
@@ -254,9 +255,14 @@ void LX_Configuration::setFlags(void)
     // Is it what we want ?
     if(!lua_isfunction(state,-1))
     {
-        std::cerr << "Error occured in LX_Configuration::setFlags : The Lua function "
-                  << luaFunction << " does not exist" << std::endl;
+        stringstream ss;
+        string err;
 
+        ss << "Error occured in LX_Configuration::setFlags : The Lua function "
+        << luaFunction << " does not exist" << std::endl;
+        err = ss.str();
+
+        LX_SetError(err.c_str());
         lua_close(state);
         return;
     }
