@@ -22,7 +22,6 @@
 *
 */
 
-#include <iostream> // Debug
 #include "LX_Haptic.hpp"
 
 

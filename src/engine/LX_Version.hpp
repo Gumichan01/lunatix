@@ -30,11 +30,11 @@
 */
 typedef struct LX_Version
 {
-    char major;
-    char minor;
-    char patch;
+    char major;         /**< Information about the major version */
+    char minor;         /**< Information about the minor version */
+    char patch;         /**< Information about the patch version */
 
-} LX_Version;
+} LX_Version;   /**< The version */
 
 
 #define LX_MAJOR_VERSION 0      /**< The major version of the engine */

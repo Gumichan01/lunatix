@@ -1,3 +1,5 @@
+
+
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -8,6 +10,15 @@
 *   Luxon Jean-Pierre (Gumichan01)
 *	luxon.jean.pierre@gmail.com
 */
+
+/**
+*	@file LX_Gamepad.cpp
+*	@brief The LX_Gamepad implementation
+*	@author Luxon Jean-Pierre(Gumichan01)
+*	@version 0.5
+*
+*/
+
 
 #include "LX_Gamepad.hpp"
 
@@ -94,7 +105,15 @@ SDL_JoystickID LX_Gamepad::getID(void)
 }
 
 
-
+/**
+*   @fn LX_Haptic * LX_Gamepad::getHaptic(void)
+*
+*   Get the haptic system of the gamepad
+*
+*   @return The haptic system
+*
+*   @note The system can be NULL, so check the returned value
+*/
 LX_Haptic * LX_Gamepad::getHaptic(void)
 {
     return haptic;
@@ -109,6 +128,7 @@ LX_Haptic * LX_Gamepad::getHaptic(void)
 *
 *   @return The name of the gamepad, NULL otherwise
 *
+*   @sa toString
 */
 const char * LX_Gamepad::getName(void)
 {

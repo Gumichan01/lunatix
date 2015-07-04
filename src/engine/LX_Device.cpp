@@ -155,7 +155,7 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 *
 *   Get the name of a game controller
 *
-*   @param gp The game controller to get information from
+*   @param gc The game controller to get information from
 *   @param info The structure to store information
 *
 *   @return 0 if the game controller is valid and the function got information
@@ -196,6 +196,7 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 *   @note This function never returns NULL
 *   @warning If info is NULL, a segmentation fault will occur
 *
+*   @sa statGamepad
 */
 const char * gamepadToString(LX_GamepadInfo *info)
 {

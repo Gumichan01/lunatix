@@ -133,6 +133,8 @@ LX_WindowManager::LX_WindowManager()
 *   @return The ID of the window you added if the instance is valid
 *           -1 otherwise
 *
+*   @sa LX_Window
+*   @sa removeWindow
 */
 int LX_WindowManager::addWindow(LX_Window *w)
 {
@@ -161,6 +163,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
 *   @return A valid pointer to a window if the ID refers to a valid window,
 *           NULL otherwise
 *
+*   @sa addWindow
 */
 LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 {

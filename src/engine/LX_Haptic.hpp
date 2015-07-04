@@ -34,7 +34,14 @@ int numberOfHapticDevices(void);
 bool isHaptic(SDL_Joystick *joy);
 
 
-
+/**
+*   @class LX_Haptic
+*   @brief The haptic device
+*
+*   This class describes the force feedback device.
+*
+*   @todo Create a constructor with a game controller as parameter
+*/
 class LX_Haptic
 {
     SDL_Haptic *haptic;
@@ -49,10 +56,9 @@ public :
 
     bool RumbleEffectInit(void);
     void RumbleEffectPlay(void);
-    void RumbleEffectPlay(float strengh, Uint32 length);
+    void RumbleEffectPlay(float strength, Uint32 length);
 
     int newEffect(SDL_HapticEffect * effect);
-    void destroyEffect(SDL_HapticEffect * effect);
     void runEffect(int effectID, Uint32 iterations);
     void stopEffect(int effectID);
 

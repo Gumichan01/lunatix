@@ -306,6 +306,7 @@ LX_Window::~LX_Window()
 *   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
+*   @sa putTexture
 */
 bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 {
@@ -357,6 +358,8 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
 *               to display the texture according to its dimension
 *
+*   @sa putSurface
+*   @sa putTextureAndRotate
 */
 bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 {
@@ -383,6 +386,8 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
 *               to display the texture according to its dimension
 *
+*   @sa putSurface
+*   @sa putTexture
 */
 bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
                                     const double angle)
@@ -399,6 +404,7 @@ bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, c
 *
 *   @param title The title
 *
+*   @sa setWindowSize
 */
 void LX_Window::setTitle(std::string title)
 {
@@ -415,6 +421,7 @@ void LX_Window::setTitle(std::string title)
 *   @param w The width of the window
 *   @param h The height of the window
 *
+*   @sa setTitle
 */
 void LX_Window::setWindowSize(int w, int h)
 {
@@ -454,6 +461,7 @@ void LX_Window::setFullscreen(Uint32 flag)
 *   on the current window. So you cannot use this function and
 *   LX_Window::updateWindow() together on a same window.
 *
+*   @sa updateWindow
 */
 void LX_Window::updateRenderer(void)
 {
@@ -470,6 +478,7 @@ void LX_Window::updateRenderer(void)
 *   on the current window. So you cannot use this function and
 *   LX_Window::updateRenderer() together on a same window.
 *
+*   @sa updateRenderer
 */
 void LX_Window::updateWindow(void)
 {
@@ -585,6 +594,5 @@ int LX_Window::getHeight(void)
 
 
 };
-
 
 

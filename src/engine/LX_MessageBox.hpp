@@ -23,9 +23,9 @@
 
 #include <SDL2/SDL_messagebox.h>
 
-#define LX_MSG_ERR  SDL_MESSAGEBOX_ERROR
-#define LX_MSG_WARN SDL_MESSAGEBOX_WARNING
-#define LX_MSG_INFO SDL_MESSAGEBOX_INFORMATION
+#define LX_MSG_ERR  SDL_MESSAGEBOX_ERROR            /**< Error message */
+#define LX_MSG_WARN SDL_MESSAGEBOX_WARNING          /**< Warning message */
+#define LX_MSG_INFO SDL_MESSAGEBOX_INFORMATION      /**< Information message */
 
 
 
