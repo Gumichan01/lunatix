@@ -5,7 +5,6 @@
 #include <cstring>
 
 #include "../src/engine/Lunatix_engine.hpp"
-#include "../src/engine/LX_Haptic.hpp"
 
 using namespace std;
 using namespace LX_Device;
@@ -18,7 +17,7 @@ int main(int argc, char **argv)
 {
     bool err = false;
 
-    int flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
+    Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
 
     cout << " ==== Test Device ==== " << endl;
 
@@ -60,6 +59,9 @@ void test_gamepad(void)
     {
         cout << "INFO - Name : " << gp->getName() << ";" << endl
             << gp->toString() << endl;
+
+        gp->playRumble(1.0,100);
+        SDL_Delay(500);
     }
     else
         cout << "INFO - No gamepad at index 0" << endl;
