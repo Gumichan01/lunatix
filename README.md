@@ -10,10 +10,13 @@ It contains these following libraries:
 
 LunatiX Engine also contains these modules:
 - LX\_Device : The information library about Gamepads
-- LX\_SystemInfo : The System information library
-- LX\_Random : The Random Number Generator (RNG) library
-- LX\_ParticleEngine : The particle engine
 - LX\_FileIO : The FileIO library
+- LX_MSGBox : The Message box module
+- LX\_ParticleEngine : The particle engine
+- LX\_Random : The Random Number Generator (RNG) library
+- LX\_SystemInfo : The System information library
+
+
 
 
 The engine works on Windows and Linux system.
