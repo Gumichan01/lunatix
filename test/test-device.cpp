@@ -52,6 +52,7 @@ int main(int argc, char **argv)
 void test_gamepad(void)
 {
     LX_Gamepad *gp = NULL;
+    LX_Haptic *hp = NULL;
 
     gp = new LX_Gamepad();
 
@@ -60,8 +61,12 @@ void test_gamepad(void)
         cout << "INFO - Name : " << gp->getName() << ";" << endl
             << gp->toString() << endl;
 
-        gp->playRumble(1.0,100);
-        SDL_Delay(500);
+        if((hp = gp->getHaptic()) != NULL)
+        {
+            hp->RumbleEffectInit();
+            hp->RumbleEffectPlay(1.0,100);
+            SDL_Delay(500);
+        }
     }
     else
         cout << "INFO - No gamepad at index 0" << endl;

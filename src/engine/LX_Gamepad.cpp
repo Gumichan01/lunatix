@@ -44,11 +44,6 @@ LX_Gamepad::LX_Gamepad(int index)
     }
     else
         haptic = new LX_Haptic(index);
-
-    if(haptic != NULL)
-    {
-        haptic->RumbleEffectInit();
-    }
 }
 
 
@@ -79,13 +74,6 @@ bool LX_Gamepad::isConnected(void)
         return SDL_GameControllerGetAttached(gc) == SDL_TRUE;
     else
         return SDL_JoystickGetAttached(joy) == SDL_TRUE;
-}
-
-
-
-void LX_Gamepad::playRumble(float strengh, Uint32 length)
-{
-    haptic->RumbleEffectPlay(strengh,length);
 }
 
 

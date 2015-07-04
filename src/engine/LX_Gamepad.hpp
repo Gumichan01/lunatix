@@ -49,7 +49,6 @@ public :
     LX_Gamepad(int index=0);
 
     bool isConnected(void);
-    void playRumble(float strengh, Uint32 length);
 
     SDL_JoystickID getID(void);
     LX_Haptic * getHaptic(void);
