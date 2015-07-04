@@ -52,6 +52,7 @@ public :
     void playRumble(float strengh, Uint32 length);
 
     SDL_JoystickID getID(void);
+    LX_Haptic * getHaptic(void);
     const char * getName(void);
     const char * toString(void);
 

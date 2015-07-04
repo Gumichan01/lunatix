@@ -107,6 +107,13 @@ SDL_JoystickID LX_Gamepad::getID(void)
 
 
 
+LX_Haptic * LX_Gamepad::getHaptic(void)
+{
+    return haptic;
+}
+
+
+
 /**
 *   @fn const char * LX_Gamepad::getName(void)
 *
