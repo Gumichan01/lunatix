@@ -53,6 +53,7 @@ void test_gamepad(void)
 {
     LX_Gamepad *gp = NULL;
     LX_Haptic *hp = NULL;
+    char s[LX_PADSTRING_SIZE];
 
     cout << "  == Test Gamepad == " << endl;
 
@@ -60,7 +61,7 @@ void test_gamepad(void)
 
     if(gp->isConnected())
     {
-        const char *s = gp->toString();
+        gp->toString(s);
 
         cout << "INFO - Name : " << gp->getName() << ";" << s << endl;
 

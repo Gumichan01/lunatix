@@ -21,6 +21,7 @@
 
 
 #include "LX_Gamepad.hpp"
+#include "LX_Error.hpp"
 
 
 namespace LX_Device
@@ -140,22 +141,32 @@ const char * LX_Gamepad::getName(void)
 
 
 /**
-*   @fn const char * LX_Gamepad::toString(void)
+*   @fn const char * LX_Gamepad::toString(char *str)
 *
 *   Get information about the gamepad
 *
 *   @return Always returns a valid string
 */
-const char * LX_Gamepad::toString(void)
+const char * LX_Gamepad::toString(char *str)
 {
     LX_GamepadInfo gi;
+    int err = 0;
+
+    if(str == NULL)
+    {
+        LX_SetError("Invalid string");
+        return NULL;
+    }
 
     if(gc != NULL)
-        statGamepad(gc,&gi);
+        err = statGamepad(gc,&gi);
     else
-        statGamepad(joy,&gi);
+        err = statGamepad(joy,&gi);
 
-    return gamepadToString(&gi);
+    if(err == -1)
+        return NULL;
+
+    return gamepadToString(&gi,str);
 }
 
 

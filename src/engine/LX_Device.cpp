@@ -185,20 +185,23 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 
 
 /**
-*   @fn const char * gamepadToString(LX_GamepadInfo *info)
+*   @fn const char * gamepadToString(LX_GamepadInfo *info, char * str)
 *
 *   Get the string format of the information structure
 *
 *   @param info The structure you want to get the string format from
+*   @param str The string to fiil in
 *
 *   @return Always returns a non-NULL C string
 *
 *   @note This function never returns NULL
-*   @warning If info is NULL, a segmentation fault will occur
+*   @warning If info or str is NULL, a segmentation fault will occur
+*   @warning str must be long enough to get the entire text.
+*            ::LX_PADSTRING_SIZE is a good length
 *
 *   @sa statGamepad
 */
-const char * gamepadToString(LX_GamepadInfo *info)
+const char * gamepadToString(LX_GamepadInfo *info, char * str)
 {
     ostringstream stream;
     char guid[GUID_SIZE+1];
@@ -215,7 +218,8 @@ const char * gamepadToString(LX_GamepadInfo *info)
     << "Gamepad - Number of Buttons : " << info->numButtons << endl
     << "Gamepad - Number of Hats : " << info->numHats << endl;
 
-    return stream.str().c_str();
+    strcpy(str,stream.str().c_str());
+    return str;
 }
 
 

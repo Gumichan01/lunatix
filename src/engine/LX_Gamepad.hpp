@@ -52,7 +52,7 @@ public :
     SDL_JoystickID getID(void);
     LX_Haptic * getHaptic(void);
     const char * getName(void);
-    const char * toString(void);
+    const char * toString(char *str);
 
     ~LX_Gamepad();
 
