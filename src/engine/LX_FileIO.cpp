@@ -92,7 +92,6 @@ LX_File::LX_File(const char * filename, const Uint32 mode)
 
     if(data == NULL)
         throw IOException(str + LX_GetError());
-
 }
 
 
@@ -106,7 +105,6 @@ LX_File::LX_File(const char * filename, const Uint32 mode)
 */
 void LX_File::open(const Uint32 mode)
 {
-
     if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
     {
         data = SDL_RWFromFile(name.c_str(),"wb+");
@@ -131,7 +129,6 @@ void LX_File::open(const Uint32 mode)
     {
         data = SDL_RWFromFile(name.c_str(),"ab");
     }
-
 }
 
 
@@ -255,7 +252,7 @@ void LX_File::close(void)
 SDL_Surface * LX_File::getSurfaceFromData(void)
 {
     SDL_Surface * surface = NULL;
-    int save = tell();
+    Sint64 save = tell();
 
     seek(0,LX_SEEK_SET);
     surface = IMG_Load_RW(data,0);
