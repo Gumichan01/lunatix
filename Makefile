@@ -24,7 +24,7 @@ OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
 LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o \
 LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o LX_Random.o LX_Particle.o \
 LX_ParticleSystem.o LX_FileIO.o LX_FileBuffer.o LX_MessageBox.o LX_Version.o \
-LX_Gamepad.o
+LX_Gamepad.o LX_Haptic.o
 
 
 LUAC=luac5.1
@@ -209,10 +209,14 @@ LX_Version.o : $(LUNATIX_PATH)LX_Version.cpp $(LUNATIX_PATH)LX_Version.hpp
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
-LX_Gamepad.o : $(LUNATIX_PATH)LX_Gamepad.cpp $(LUNATIX_PATH)LX_Gamepad.hpp $(LUNATIX_PATH)LX_Device.hpp
+LX_Gamepad.o : $(LUNATIX_PATH)LX_Gamepad.cpp $(LUNATIX_PATH)LX_Gamepad.hpp $(LUNATIX_PATH)LX_Haptic.hpp $(LUNATIX_PATH)LX_Device.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
+
+LX_Haptic.o : $(LUNATIX_PATH)LX_Haptic.cpp $(LUNATIX_PATH)LX_Haptic.hpp $(LUNATIX_PATH)LX_Device.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LUNATIX_INCLUDE_LIB) $(CFLAGS)
 
 
 # Test of different modules
