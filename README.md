@@ -18,9 +18,7 @@ LunatiX Engine also contains these modules:
 
 
 
-
 The engine works on Windows and Linux system.
-
 
 
 ## Contribute ##
@@ -37,7 +35,7 @@ The static and shared files (.lib, .a, .dll for win32 version) required to compi
 
 Warning:  
 
- It is possible the engine does not compile with Visual C+.+
+ It is possible the engine does not compile with Visual C++
 
 ### On Linux system ###
 
@@ -59,7 +57,7 @@ If you want to generate the libraries you just need
 to execute the following command:  
  *$make*
 
-These two libraries can bes ued in any program
+These two libraries can be used in any program
 
 To test the engine, execute the following command:  
  *$./test/test.sh*
@@ -74,7 +72,7 @@ To use the engine into your project, you just need to copy these following direc
  - script/
 
 It is very important to keep the engine hierarchy. If you do not respect that  
-the engine may not work correctly.
+the engine wiil not work correctly.
 
 Warning : The static or shared libraries are not completely installed on the system.
  So you need to do that manually.
