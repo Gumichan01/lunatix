@@ -95,7 +95,7 @@ void test_haptic(void)
     {
         if(haptic.RumbleEffectInit())
         {
-            haptic.RumbleEffectPlay(1,500);
+            haptic.RumbleEffectPlay(0.5,500);
             SDL_Delay(1000);
         }
 
