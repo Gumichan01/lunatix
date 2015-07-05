@@ -39,7 +39,6 @@ using namespace LX_MSGBox;
 
 int main ( int argc, char** argv )
 {
-
     SDL_Rect pos = {400,200,150,120};
     SDL_Rect pos1 = {100,200,178,32};
     SDL_Rect pos2 = {100,250,768,32};
@@ -214,12 +213,12 @@ int main ( int argc, char** argv )
 
     // Gamepad
     LX_Gamepad *gp =  new LX_Gamepad();
+    char str[LX_PADSTRING_SIZE];
 
     if(gp->isConnected())
     {
-        std::string str = gp->toString();
+        gp->toString(str);
 
-        std::cout << "ID : " << gp->getID() << std::endl;
         std::cout << str << std::endl;
     }
 
