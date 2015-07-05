@@ -54,12 +54,15 @@ void test_gamepad(void)
     LX_Gamepad *gp = NULL;
     LX_Haptic *hp = NULL;
 
+    cout << "  == Test Gamepad == " << endl;
+
     gp = new LX_Gamepad();
 
     if(gp->isConnected())
     {
-        cout << "INFO - Name : " << gp->getName() << ";" << endl
-            << gp->toString() << endl;
+        const char *s = gp->toString();
+
+        cout << "INFO - Name : " << gp->getName() << ";" << s << endl;
 
         if((hp = gp->getHaptic()) != NULL)
         {
@@ -71,8 +74,9 @@ void test_gamepad(void)
     else
         cout << "INFO - No gamepad at index 0" << endl;
 
-
     delete gp;
+
+    cout << "  == End Test == " << endl;
 }
 
 
@@ -81,6 +85,8 @@ void test_haptic(void)
     LX_Haptic haptic;
     SDL_HapticEffect effect;
     int effectID;
+
+    cout << "  == Test Haptic == " << endl;
 
     memset(&effect,0,sizeof(SDL_HapticEffect));
 
@@ -117,6 +123,7 @@ void test_haptic(void)
     else
         cout << "INFO - No haptic device" << endl;
 
+    cout << "  == End Test == " << endl;
 }
 
 
