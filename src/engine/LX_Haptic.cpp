@@ -219,20 +219,9 @@ void LX_Haptic::stopEffect(int effectID)
 */
 int LX_Haptic::numberOfEffects(void)
 {
-    SDL_HapticNumEffects(haptic);
+    return SDL_HapticNumEffects(haptic);
 }
 
-
-
-
-
 };
-
-
-
-
-
-
-
 
 
