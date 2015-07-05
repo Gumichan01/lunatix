@@ -2,7 +2,6 @@
 #define LX_FILEIO_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in

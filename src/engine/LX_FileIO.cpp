@@ -32,7 +32,7 @@ namespace LX_FileIO
 /**
 *   @fn IOException::IOException(std::string err)
 *
-*   The excepyion constructor
+*   The exception constructor
 *
 *   @param err The error string
 *
@@ -68,12 +68,12 @@ IOException::~IOException() throw() {}
 *   @param filename The file to open
 *   @param mode The mode to be used for opening the file.
 *               It is one of these following :
-*               LX_FILEIO_RDONLY
-*               LX_FILEIO_WRONLY
-*               LX_FILEIO_APPEND
-*               LX_FILEIO_RDWR
-*               LX_FILEIO_RDAP
-*               LX_FILEIO_WRTR
+*               - ::LX_FILEIO_RDONLY
+*               - ::LX_FILEIO_WRONLY
+*               - ::LX_FILEIO_APPEND
+*               - ::LX_FILEIO_RDWR
+*               - ::LX_FILEIO_RDAP
+*               - ::LX_FILEIO_WRTR
 *
 *   @exception IOException If one of these aruguments are invalid
 *               or the file is not openable
@@ -85,7 +85,7 @@ LX_File::LX_File(const char * filename, const Uint32 mode)
     data = NULL;
 
     if(filename == NULL || mode == 0x00000000)
-        throw IOException(" LX_File : Invalid filename or mode");
+        throw IOException("LX_File : Invalid filename or mode");
 
     name = filename;
     open(mode);
@@ -289,3 +289,4 @@ LX_File::~LX_File()
 }
 
 };
+

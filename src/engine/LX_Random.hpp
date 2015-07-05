@@ -42,13 +42,9 @@
 namespace LX_Random
 {
 
-
 void initRand(void);
-
 uint64_t xorshiftRand(void);
-
 int crand(void);
-
 
 };
 
