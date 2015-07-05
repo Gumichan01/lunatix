@@ -50,24 +50,23 @@ bool LX_Init(void)
     LX_Configuration::initConfig();
     LX_Configuration *configuration = LX_Configuration::getInstance();
 
-    // Check the tags (video, audio, joystick)
+    // Video flag
     if(configuration->getVideoFlag() == 1)
     {
         sdl_flags |= SDL_INIT_VIDEO;
     }
 
-
+    // Audio flag
     if(configuration->getAudioFlag() == 1)
     {
         sdl_flags |= SDL_INIT_AUDIO;
     }
 
-
+    // Gamepad flag
     if(configuration->getJoystickFlag() == 1)
     {
         sdl_flags |= SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
     }
-
 
     // Init SDL
     if(SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
@@ -84,7 +83,7 @@ bool LX_Init(void)
     if(configuration->getVideoFlag() == 1)
     {
         // Init SDL_Image
-        if( IMG_Init(img_flags) != img_flags)
+        if(IMG_Init(img_flags) != img_flags)
         {
             SDL_Quit();
             return false;
@@ -101,7 +100,6 @@ bool LX_Init(void)
             return false;
         }
     }
-
 
     if(configuration->getAudioFlag() == 1)
     {

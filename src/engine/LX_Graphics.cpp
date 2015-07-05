@@ -49,6 +49,7 @@ namespace LX_Graphics
 *   @note When you call this function, the format optimization includes the alpha channel.
 *               No alpha needs to be set on the surface after that.
 *
+*   @sa loadSurfaceFromFileBuffer
 */
 SDL_Surface * loadSurface(std::string filename)
 {
@@ -77,6 +78,7 @@ SDL_Surface * loadSurface(std::string filename)
 *   @note When you call this function, the format optimization includes the alpha channel.
 *               No alpha needs to be set on the surface after that.
 *
+*   @sa loadSurfaceFromFileBuffer
 */
 SDL_Surface * loadSurface(LX_File *file)
 {
@@ -129,6 +131,8 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 *   @note The function frees the surface if it is not NULL.
 *           So the surface becomes invalid.
 *
+*   @sa loadSurface
+*   @sa loadSurfaceFromFileBuffer
 */
 SDL_Surface * optimizeSurface(SDL_Surface * surface)
 {
@@ -159,6 +163,7 @@ SDL_Surface * optimizeSurface(SDL_Surface * surface)
 *
 *   @return A new pointer to the texture if the loading is successful, NULL otherwise
 *
+*   @sa loadTextureFromFile
 */
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 {
@@ -178,6 +183,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 *
 *   @return A new pointer to the texture if the loading is successful, NULL otherwise
 *
+*   @sa loadTextureFromFile
 */
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
 {
@@ -206,6 +212,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
 *
 *   @return A pointer to a SDL_Texture if the loading works, NULL otherwise
 *
+*   @sa loadTextureFromSurface
 */
 SDL_Texture * loadTextureFromFile(std::string filename, int id)
 {
@@ -237,6 +244,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, int id)
 *
 *   @return A pointer to a SDL_Texture if the loading works, NULL otherwise
 *
+*   @sa loadTextureFromSurface
 */
 SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
 {

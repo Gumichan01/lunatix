@@ -29,7 +29,7 @@
 
 
 /**
-*	@fn unsigned int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
+*	@fn unsigned int LX_Physics::euclide_square_distance(int x1, int y1, int x2, int y2)
 *
 *	This function calculates the euclidean square distance between 2 coordinates
 *
@@ -41,7 +41,7 @@
 *	@return An integer value
 *
 */
-unsigned int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2)
+unsigned int LX_Physics::euclide_square_distance(int x1, int y1, int x2, int y2)
 {
     return( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
@@ -60,14 +60,14 @@ unsigned int LX_Physics::euclide_square_distance( int x1, int y1, int x2, int y2
 *	@return An float value
 *
 */
-float LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
+float LX_Physics::euclide_distance(int x1, int y1, int x2, int y2)
 {
     return sqrt(euclide_square_distance(x1,y1,x2,y2));
 }
 
 
 /**
-*	@fn unsigned int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+*	@fn unsigned int LX_Physics::euclide_square_distance(LX_Point *p1, LX_Point *p2)
 *
 *	This function calculates the euclidean square distance
 *
@@ -77,7 +77,7 @@ float LX_Physics::euclide_distance( int x1, int y1, int x2, int y2)
 *	@return An integer value
 *
 */
-unsigned int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
+unsigned int LX_Physics::euclide_square_distance(LX_Point *p1, LX_Point *p2)
 {
     return euclide_square_distance(p1->x,p1->y,p2->x,p2->y);
 }
@@ -94,7 +94,7 @@ unsigned int LX_Physics::euclide_square_distance( LX_Point *p1, LX_Point *p2)
 *	@return An integer value
 *
 */
-float LX_Physics::euclide_distance( LX_Point *p1, LX_Point *p2)
+float LX_Physics::euclide_distance(LX_Point *p1, LX_Point *p2)
 {
     return sqrt(euclide_square_distance(p1,p2));
 }
@@ -231,7 +231,7 @@ bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circ
 
     const unsigned int d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
 
-    return (euclide_square_distance( circle1->xCenter, circle1->yCenter, circle2->xCenter, circle2->yCenter) <= d );
+    return (euclide_square_distance(circle1->xCenter,circle1->yCenter,circle2->xCenter,circle2->yCenter) <= d);
 }
 
 
@@ -263,7 +263,6 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
     if( collisionPointCircle(A,circle) || collisionPointCircle(B,circle) )
         return true;
 
-
     AB.vx = B->x - A->x;
     AB.vy = B->y - A->y;
 
@@ -273,11 +272,9 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
     BC.vx = O.x - B->x;
     BC.vy = O.y - B->y;
 
-
     scal1 = scalar_product(&AB,&AC);
     // I use the opposite value of vx
     scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
-
 
     if(scal1 < 0 || scal2 < 0)
         return false;
@@ -296,7 +293,6 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
     M = {(int) x, (int) y};     // M is the projection point of O
 
     return collisionPointCircle(&M, circle);
-
 }
 
 
@@ -338,7 +334,6 @@ bool LX_Physics::collisionCircleRect(const LX_Circle *circle, const LX_AABB *rec
     // 4th segment
     sides[3][0] = sides[2][1];
     sides[3][1] = sides[0][0];
-
 
     for(int i=0; i< RECT_SIDES ; i++)
     {
@@ -427,7 +422,6 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
     I.x = v + rand()%100;
     I.y = v + rand()%100;
 
-
     for(unsigned int i = 0; i < n; i++)
     {
         if(i == n-1)
@@ -514,7 +508,6 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 
     const unsigned int n = poly->numberOfEdges();
 
-
     for(unsigned int j = 0; j < n; j++)
     {
         E.x = poly->getPoint(j)->x;
@@ -530,8 +523,6 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
             F.x = poly->getPoint(j+1)->x;
             F.y = poly->getPoint(j+1)->y;
         }
-
-
 
         if(intersectSegment(&A,&B,&E,&F) || intersectSegment(&B,&C,&E,&F) ||
                 intersectSegment(&C,&D,&E,&F) || intersectSegment(&D,&A,&E,&F))
@@ -564,10 +555,8 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
     LX_Point A,B,C,D;
 
-
     for(unsigned int i = 0; i < polySize1; i++)
     {
-
         A.x = poly1->getPoint(i)->x;
         A.y = poly1->getPoint(i)->y;
 
@@ -584,7 +573,6 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
         for(unsigned int j = 0; j < polySize2; j++)
         {
-
             C.x = poly2->getPoint(j)->x;
             C.y = poly2->getPoint(j)->y;
 
@@ -601,7 +589,6 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
             if(intersectSegment(&A,&B,&C,&D))
                 return true;
-
         }
     }
 
@@ -698,7 +685,6 @@ void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D *v)
 {
     movePoint(P,v->vx,v->vy);
 }
-
 
 
 /**

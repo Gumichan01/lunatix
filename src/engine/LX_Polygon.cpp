@@ -225,7 +225,7 @@ void LX_Polygon::convexity(void)
             OB.vy = points[i+1].y - points[i].y;
         }
 
-        cross_product = (int) vector_product(&AO,&OB);
+        cross_product = static_cast<int>(vector_product(&AO,&OB));
 
         if(!haveSign)
         {
@@ -245,27 +245,26 @@ void LX_Polygon::convexity(void)
         {
             switch(s)
             {
-            case POSITIVE :
-                if(cross_product < 0)
-                {
-                    convex = false;
-                    return;
-                }
-                break;
+                case POSITIVE :
+                    if(cross_product < 0)
+                    {
+                        convex = false;
+                        return;
+                    }
+                    break;
 
-            case NEGATIVE :
-                if(cross_product > 0)
-                {
-                    convex = false;
-                    return;
-                }
-                break;
+                case NEGATIVE :
+                    if(cross_product > 0)
+                    {
+                        convex = false;
+                        return;
+                    }
+                    break;
 
-            default :
-                break;
+                default :
+                    break;
             }
         }
-
     }
 
     convex = true;

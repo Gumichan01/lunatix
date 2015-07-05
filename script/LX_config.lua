@@ -60,7 +60,6 @@ function getFlags()
 					end
 			end
 
-
 			-- True type font library
 			if(string.find(line, ttf_str))
 			then
@@ -71,11 +70,9 @@ function getFlags()
 				then
 						result["ttf"] = value;
 				end
-
 			end
 
-
-			-- audio
+			-- Audio
 			if(string.find(line, audio_str))
 			then
 
@@ -85,9 +82,7 @@ function getFlags()
 				then
 						result["audio"] = value;
 				end
-
 			end
-
 
 			-- Joystick
 			if(string.find(line, joystick_str))
@@ -99,7 +94,6 @@ function getFlags()
 				then
 						result["joystick"] = value;
 				end
-
 			end
 
 			-- OpenGL
@@ -115,7 +109,7 @@ function getFlags()
 
 			end
 
-			-- font file
+			-- Font file
 			if(string.find(line, font_str))
 			then
 
@@ -125,24 +119,19 @@ function getFlags()
 				then
 						result["font"] = "font/"..value..pt..ext;
 				end
-
 			end
 
 			-- Size of text
 			if(string.find(line, size_str))
 			then
-
 				local _,_, key, value = string.find(line, "(%a+)%s*=%s*(%d+)");
 
 				if( key and value )
 				then
 						result["size"] = value;
 				end
-
 			end
-
 		end
-
 	end
 
 	sdlfile:close();
@@ -178,10 +167,9 @@ function getFlags()
 				then
 						result["height"] = value;
 				end
-
 			end
 
-			-- fullscreen
+			-- Fullscreen
 			if(string.find(line, fullscreen_str))
 			then
 
@@ -191,19 +179,13 @@ function getFlags()
 				then
 						result["fullscreen"] = value;
 				end
-
 			end
-
-
 		end
-
-
 	end
 
 	winfile:close();
 
 	return result;
-
 end
 
 
@@ -222,6 +204,6 @@ end
 
 --local res = getFlags();
 
---print("Resultat table : "..res["video"].." "..res["font"]);
---print("Resultat table : "..res["width"].." "..res["height"].." "..res["fullscreen"]);
+--print("Result : "..res["video"].." "..res["font"]);
+--print("Result : "..res["width"].." "..res["height"].." "..res["fullscreen"]);
 

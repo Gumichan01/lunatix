@@ -118,6 +118,7 @@ LX_Chunk::~LX_Chunk()
 *
 *   @return TRUE on success, FALSE otherwise
 *
+*   @sa loadFromBuffer
 */
 bool LX_Chunk::load(string filename)
 {

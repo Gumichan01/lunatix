@@ -60,7 +60,6 @@ typedef struct LX_Circle
     // The square radius will never be less than 0
     unsigned int square_radius; /**< The square radius */
 
-
 } LX_Circle;    /**< @brief The circle */
 
 

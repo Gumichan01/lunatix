@@ -402,15 +402,15 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint
     switch(type)
     {
         case LX_TTF_SOLID :
-            loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(), font_color);
+            loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(),font_color);
             break;
 
         case LX_TTF_SHADED :
-            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(), font_color, {r,g,b});
+            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),font_color,{r,g,b});
             break;
 
         case LX_TTF_BLENDED :
-            loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(), font_color);
+            loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),font_color);
             break;
 
         default :
@@ -464,10 +464,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsig
     }
 
     target_render = target_window->getRenderer();
-
-    // Get the texture
     texture = SDL_CreateTextureFromSurface(target_render,surface);
-
     SDL_FreeSurface(surface);
 
     return texture;
@@ -504,12 +501,9 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsig
 
     // Get the texture
     texture = SDL_CreateTextureFromSurface(win->getRenderer(),surface);
-
     SDL_FreeSurface(surface);
 
     return texture;
-
-
 }
 
 /**
@@ -532,5 +526,4 @@ void LX_Font::setColor(SDL_Color *color)
 
 
 };
-
 

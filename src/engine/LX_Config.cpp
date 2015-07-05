@@ -229,7 +229,6 @@ void LX_Configuration::setFlags(void)
     const std::string HEIGHT_KEY = "height";
     const std::string FULLSCREEN_KEY = "fullscreen";
 
-
     state = lua_open();
 
     if(state == NULL)
@@ -270,7 +269,6 @@ void LX_Configuration::setFlags(void)
     {
         // Call the function
         lua_call(state,0,1);
-
         lua_pushnil(state);
 
         while(lua_next(state, t))
@@ -284,7 +282,6 @@ void LX_Configuration::setFlags(void)
             }
 
             key.assign(tmp);
-
 
             // Video flag
             if(key.compare(0,VIDEO_KEY.length(),VIDEO_KEY) == 0)
@@ -348,14 +345,11 @@ void LX_Configuration::setFlags(void)
 
             lua_pop(state,1);
         }
-
     }
 
     lua_pop(state,1);
     lua_close(state);
 }
-
-
 
 
 /**
@@ -398,7 +392,6 @@ int LX_Configuration::getAudioFlag()
 {
     return audioFlag;
 }
-
 
 
 /**
@@ -457,7 +450,6 @@ int LX_Configuration::getFontSize()
 }
 
 
-
 /**
 *   @fn int LX_Configuration::getWinWidth()
 *
@@ -472,7 +464,6 @@ int LX_Configuration::getWinWidth()
 }
 
 
-
 /**
 *   @fn int LX_Configuration::getWinHeight()
 *
@@ -485,7 +476,6 @@ int LX_Configuration::getWinHeight()
 {
     return height;
 }
-
 
 
 /**
