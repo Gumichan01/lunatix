@@ -52,7 +52,9 @@ LX_Gamepad::LX_Gamepad(int index)
     if(gc == NULL)
     {
         joy = SDL_JoystickOpen(index);
-        haptic = new LX_Haptic(joy);
+
+        if(isHaptic(joy))
+            haptic = new LX_Haptic(joy);
     }
     else
         haptic = new LX_Haptic(index);
@@ -154,7 +156,7 @@ const char * LX_Gamepad::toString(char *str)
 
     if(str == NULL)
     {
-        LX_SetError("Invalid string");
+        LX_SetError("Invalid string pointer");
         return NULL;
     }
 

@@ -50,6 +50,12 @@ namespace LX_Device
 
 int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info)
 {
+    if(joy == NULL)
+        return LX_SetError("Invalid joystick\n");
+
+    if(info == NULL)
+        return LX_SetError("Invalid gamepad info\n");
+
     // Get information
     info->id = SDL_JoystickInstanceID(joy);
     info->uid = SDL_JoystickGetGUID(joy);
@@ -58,8 +64,11 @@ int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info)
     info->numButtons = SDL_JoystickNumButtons(joy);
     info->numHats = SDL_JoystickNumHats(joy);
 
-    if(info->id == -1 || info->numAxis == -1
-            || info->numBalls == -1 || info->numButtons == -1 || info->numHats == -1)
+    if(info->id == -1
+            || info->numAxis == -1
+            || info->numBalls == -1
+            || info->numButtons == -1
+            || info->numHats == -1)
     {
         return LX_SetError("Cannot get information\n");
     }
@@ -131,17 +140,16 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 {
     const char *tmp;
 
-    if(joy == NULL || info == NULL)
-    {
-        return LX_SetError("Invalid argument : joystick or gamepad info\n");
-    }
+    if(joy == NULL)
+        return LX_SetError("Invalid joystick\n");
+
+    if(info == NULL)
+        return LX_SetError("Invalid gamepad info\n");
 
     tmp = nameOf(joy);
 
     if(tmp == NULL)
-    {
         return LX_SetError("Cannot get the name of the joystick\n");
-    }
 
     strcpy(info->name,tmp);
 
@@ -166,17 +174,16 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 {
     const char *tmp;
 
-    if(gc == NULL || info == NULL)
-    {
-        return LX_SetError("Invalid argument : joystick or gamepad info\n");
-    }
+    if(gc == NULL)
+        return LX_SetError("Invalid game controller\n");
+
+    if(info == NULL)
+        return LX_SetError("Invalid gamepad info\n");
 
     tmp = nameOf(gc);
 
     if(tmp == NULL)
-    {
         return LX_SetError("Cannot get the name of the game controller\n");
-    }
 
     strcpy(info->name,tmp);
 
