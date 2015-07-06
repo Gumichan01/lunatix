@@ -55,8 +55,8 @@ public:
 
     // Music
     bool load(string filename);
-    int play(void);
-    int play(int loops);
+    bool play(void);
+    bool play(int loops);
     void pause(void);
     void stop(void);
 

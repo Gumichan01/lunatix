@@ -108,32 +108,32 @@ bool LX_Music::load(string filename)
 
 
 /**
-*   @fn int LX_Music::play(int loops)
+*   @fn bool LX_Music::play(int loops)
 *
 *   Play the music specified in the LX_Music class
 *
 *   @param loops The loop constant
 *
-*   @return 0 on success, -1 otherwise
+*   @return TRUE on success,FALSE otherwise
 *
 */
-int LX_Music::play(int loops)
+bool LX_Music::play(int loops)
 {
-    return Mix_PlayMusic(music,loops);
+    return Mix_PlayMusic(music,loops) == 0;
 }
 
 
 /**
-*   @fn int LX_Music::play(void)
+*   @fn bool LX_Music::play(void)
 *
 *   Play the music specified in the LX_Music class
 *
-*   @return 0 on success, -1 otherwise
+*   @return TRUE on success, FALSE otherwise
 *
 *   @note This function internally calls play(int loops) with no loop
 *
 */
-int LX_Music::play(void)
+bool LX_Music::play(void)
 {
     return play(LX_MIXER_NOLOOP);
 }

@@ -60,9 +60,9 @@ public:
 
     bool load(std::string filename);
     bool loadFromBuffer(LX_FileBuffer *file);
-    int play();
-    int play(int channel);
-    int play(int channel,int ticks);
+    bool play();
+    bool play(int channel);
+    bool play(int channel,int ticks);
 
     int volume(int newVolume);
 

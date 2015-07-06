@@ -148,17 +148,17 @@ bool LX_Chunk::loadFromBuffer(LX_FileBuffer *file)
 
 
 /**
-*   @fn int LX_Chunk::play()
+*   @fn bool LX_Chunk::play()
 *
 *   Play the current sample
 *
 *   @note This function plays the sample on the first unserved channel
 *         with the no loop option
 *
-*   @return 0 on success, -1 otherwise
+*   @return TRUE on success, FALSE otherwise
 *
 */
-int LX_Chunk::play()
+bool LX_Chunk::play()
 {
     return play(-1);
 }
@@ -166,7 +166,7 @@ int LX_Chunk::play()
 
 
 /**
-*   @fn int LX_Chunk::play(int channel)
+*   @fn bool LX_Chunk::play(int channel)
 *
 *   Play the current sample
 *
@@ -174,18 +174,18 @@ int LX_Chunk::play()
 *
 *   @note This function plays the sample with no loop
 *
-*   @return 0 on success, -1 otherwise
+*   @return TRUE on success, FALSE otherwise
 *
 */
-int LX_Chunk::play(int channel)
+bool LX_Chunk::play(int channel)
 {
-    return Mix_PlayChannel(channel,chunk,0);
+    return play(channel,0);
 }
 
 
 
 /**
-*   @fn int LX_Chunk::play(int channel,int ticks)
+*   @fn bool LX_Chunk::play(int channel,int ticks)
 *
 *   Play the current sample during a moment
 *
@@ -194,12 +194,12 @@ int LX_Chunk::play(int channel)
 *
 *   @note This function plays the sample on with no loop
 *
-*   @return 0 on success, -1 otherwise
+*   @return TRUE on success, FALSE otherwise
 *
 */
-int LX_Chunk::play(int channel,int ticks)
+bool LX_Chunk::play(int channel,int ticks)
 {
-    return Mix_PlayChannelTimed(channel,chunk,0, ticks);
+    return Mix_PlayChannelTimed(channel,chunk,0,ticks) == 0;
 }
 
 
