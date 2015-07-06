@@ -33,7 +33,6 @@ using namespace std;
 namespace LX_SystemInfo
 {
 
-
 /**
 *   @fn const char * getPlatform(void)
 *
@@ -102,6 +101,7 @@ int getSystemRAM(void)
     return SDL_GetSystemRAM();
 }
 
+
 /**
 *   @fn const SDL_DisplayMode * getDisplayModes(int *size)
 *
@@ -115,7 +115,7 @@ int getSystemRAM(void)
 *   @note This function allocate a memory to create the list, so you need
 *           to free that list when you do not need it.
 *
-*   @warning if size is NULL, a segmentation fault will occur
+*   @warning If size is NULL, a segmentation fault will occur
 *
 */
 const SDL_DisplayMode * getDisplayModes(int *size)
@@ -155,6 +155,5 @@ const SDL_DisplayMode * getDisplayModes(int *size)
 }
 
 };
-
 
 

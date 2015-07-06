@@ -22,6 +22,20 @@
 *
 */
 
+#define LX_MAJOR_VERSION 0      /**< The major version of the engine */
+#define LX_MINOR_VERSION 5      /**< The minor version of the engine */
+#define LX_PATCH_VERSION 2      /**< The patch of the engine */
+
+
+/**
+*   @namespace LX_VersionInfo
+*
+*   @brief Get information about ht version of the engine
+*
+*/
+namespace LX_VersionInfo
+{
+
 /**
 *   @struct LX_Version
 *   @brief The version structure
@@ -36,14 +50,10 @@ typedef struct LX_Version
 
 } LX_Version;   /**< The version */
 
-
-#define LX_MAJOR_VERSION 0      /**< The major version of the engine */
-#define LX_MINOR_VERSION 5      /**< The minor version of the engine */
-#define LX_PATCH_VERSION 2      /**< The patch of the engine */
-
 void LX_EngineVersion(LX_Version *version);
+
+};
 
 
 #endif // LX_VERSION_HPP_INCLUDED
-
 

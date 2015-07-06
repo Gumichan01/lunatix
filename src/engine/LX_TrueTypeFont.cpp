@@ -72,7 +72,6 @@ LX_Font::LX_Font(SDL_Color *color)
 }
 
 
-
 /**
 *
 *   @fn LX_Font::LX_Font(string font_file, SDL_Color *color)
@@ -113,7 +112,6 @@ LX_Font::LX_Font(string font_file, SDL_Color *color, int size)
 }
 
 
-
 /**
 *
 *   @fn void LX_Font::init(string font_file, SDL_Color *color, int size)
@@ -132,9 +130,7 @@ void LX_Font::init(string font_file, SDL_Color *color, int size)
     font_str = font_file;
 
     if(size <= 0)
-    {
         size = LX_TTF_DEFAULT_FONT_SIZE;
-    }
 
     // Put color if it is not null
     if( color != NULL )
@@ -153,7 +149,6 @@ void LX_Font::init(string font_file, SDL_Color *color, int size)
     try
     {
         font_buffer = new LX_FileBuffer(font_str.c_str());
-
     }
     catch(IOException &e)
     {
@@ -260,7 +255,6 @@ SDL_Surface * LX_Font::drawSolidText(string text, unsigned int size)
 }
 
 
-
 /**
 *   @fn SDL_Surface * LX_Font::drawShadedText(string text, SDL_Color bg)
 *
@@ -317,7 +311,6 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b, un
 }
 
 
-
 /**
 *   @fn SDL_Surface * LX_Font::drawBlendedText(string text)
 *
@@ -332,7 +325,6 @@ SDL_Surface * LX_Font::drawBlendedText(string text)
 {
     return drawBlendedText(text.c_str(),font_size);
 }
-
 
 
 /**
@@ -418,7 +410,6 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint
     }
 
     TTF_CloseFont(ttf);
-
     return loaded;
 }
 

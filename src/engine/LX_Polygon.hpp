@@ -27,7 +27,6 @@
 struct LX_Point;
 
 
-
 /**
 *	@class LX_Polygon
 *	@brief The polygon
@@ -37,7 +36,6 @@ struct LX_Point;
 */
 class LX_Polygon
 {
-
 
     LX_Point *points;               /**< An array of LX_Point */
     unsigned int nbPoints;          /**< The number of points */

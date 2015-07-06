@@ -196,7 +196,7 @@ void LX_Polygon::convexity(void)
     int cross_product;
 
     bool haveSign = false;
-    enum Sign {POSITIVE,NEGATIVE, NONE} s = NONE;
+    enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
 
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
 

@@ -21,6 +21,9 @@
 #include "LX_Version.hpp"
 
 
+namespace LX_VersionInfo
+{
+
 /**
 *   @fn void LX_EngineVersion(LX_Version *version)
 *
@@ -35,3 +38,5 @@ void LX_EngineVersion(LX_Version *version)
     version->minor = LX_MINOR_VERSION;
     version->patch = LX_PATCH_VERSION;
 }
+
+};

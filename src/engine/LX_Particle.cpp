@@ -231,7 +231,6 @@ bool LX_Particle::isDead(void)
 bool LX_Particle::setTexture(const char * str, const unsigned int id)
 {
     texture = loadTextureFromFile(str,id);
-
     return texture != NULL;
 }
 
@@ -249,7 +248,6 @@ bool LX_Particle::setTexture(const char * str, const unsigned int id)
 bool LX_Particle::setSurface(const char * str)
 {
     surface = loadSurface(str);
-
     return surface != NULL;
 }
 

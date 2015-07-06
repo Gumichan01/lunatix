@@ -35,6 +35,7 @@ using namespace LX_Device;
 using namespace LX_Mixer;
 using namespace LX_FileIO;
 using namespace LX_MSGBox;
+using namespace LX_VersionInfo;
 
 
 int main ( int argc, char** argv )
