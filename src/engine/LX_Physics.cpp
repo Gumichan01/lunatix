@@ -100,8 +100,6 @@ float LX_Physics::euclide_distance(LX_Point *p1, LX_Point *p2)
 }
 
 
-
-
 /**
 *	@fn bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect)
 *
@@ -160,8 +158,9 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX
 {
 
     if( circle == NULL ||
-            euclide_square_distance( x_pos,y_pos, circle->xCenter, circle->yCenter)
-            > (circle->square_radius) )
+            euclide_square_distance( x_pos,y_pos,
+                                     circle->xCenter,
+                                     circle->yCenter) > (circle->square_radius) )
     {
         return false;
     }
@@ -185,8 +184,6 @@ bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle
 {
     return collisionPointCircle(p->x,p->y,circle);
 }
-
-
 
 
 /**
@@ -213,6 +210,7 @@ bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
     return true;
 }
 
+
 /**
 *	@fn bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2)
 *
@@ -231,7 +229,8 @@ bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circ
 
     const unsigned int d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
 
-    return (euclide_square_distance(circle1->xCenter,circle1->yCenter,circle2->xCenter,circle2->yCenter) <= d);
+    return (euclide_square_distance(circle1->xCenter,circle1->yCenter,
+                                    circle2->xCenter,circle2->yCenter) <= d);
 }
 
 
@@ -255,7 +254,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
     LX_Point M;
     LX_Point O = {circle->xCenter, circle->yCenter};
 
-    float scal1,scal2;
+    float scal,scal1,scal2;
     int sum;
     double t;
     double x,y;
@@ -280,17 +279,18 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
         return false;
 
     // Find the projection point of O
-    sum = scalar_product(&AB,&AB);
+    scal = scalar_product(&AB,&AB);
+    sum = static_cast<int>(scal);
 
     if(sum == 0)        // A and B are the same point
         return false;
 
-    t = (double) ( scal1/sum );
+    t = scal1/scal;
 
     x = A->x + (t*AB.vx);
     y = A->y + (t*AB.vy);
 
-    M = {(int) x, (int) y};     // M is the projection point of O
+    M = {static_cast<int>(x), static_cast<int>(y)};     // M is the projection point of O
 
     return collisionPointCircle(&M, circle);
 }
@@ -453,8 +453,8 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
 */
 bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
 {
-    const LX_Point P = {C->xCenter,C->yCenter};
     LX_Point A,B;
+    const LX_Point P = {C->xCenter,C->yCenter};
 
     if(collisionPointPoly(&P,poly) == true)
         return true;
@@ -550,10 +550,9 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 */
 bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 {
+    LX_Point A,B,C,D;
     const unsigned int polySize1 = poly1->numberOfEdges();
     const unsigned int polySize2 = poly2->numberOfEdges();
-
-    LX_Point A,B,C,D;
 
     for(unsigned int i = 0; i < polySize1; i++)
     {
@@ -592,7 +591,8 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
         }
     }
 
-    return (collisionPointPoly(poly1->getPoint(0),poly2) || collisionPointPoly(poly2->getPoint(0),poly1));
+    return (collisionPointPoly(poly1->getPoint(0),poly2)
+            || collisionPointPoly(poly2->getPoint(0),poly1));
 }
 
 
