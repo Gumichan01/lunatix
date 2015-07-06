@@ -42,7 +42,6 @@ struct SDL_Rect;
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
 
-
 namespace LX_Graphics
 {
 
@@ -67,7 +66,6 @@ public :
 
     ~LX_WindowException() throw();
 };
-
 
 
 /**
@@ -134,5 +132,4 @@ public :
 };
 
 #endif // LX_WINDOW_H_INCLUDED
-
 

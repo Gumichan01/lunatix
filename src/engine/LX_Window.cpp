@@ -265,7 +265,6 @@ LX_Window::~LX_Window()
 }
 
 
-
 /**
 *   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *
@@ -371,7 +370,6 @@ bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, c
 }
 
 
-
 /**
 *   @fn void LX_Window::setTitle(std::string title)
 *
@@ -385,7 +383,6 @@ void LX_Window::setTitle(std::string title)
 {
     SDL_SetWindowTitle(window,title.c_str());
 }
-
 
 
 /**
@@ -424,7 +421,6 @@ void LX_Window::setFullscreen(Uint32 flag)
         setWindowSize(originalWidth,originalHeight);
     }
 }
-
 
 
 /**
@@ -532,7 +528,6 @@ SDL_Window * LX_Window::getWindow(void)
 }
 
 
-
 /**
 *   @fn int LX_Window::getWidth(void)
 *
@@ -548,7 +543,6 @@ int LX_Window::getWidth(void)
 
     return w;
 }
-
 
 
 /**

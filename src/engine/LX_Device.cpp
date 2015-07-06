@@ -47,7 +47,6 @@ int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info);
 namespace LX_Device
 {
 
-
 int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info)
 {
     if(joy == NULL)
