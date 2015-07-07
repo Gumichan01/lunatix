@@ -18,7 +18,7 @@
 *	@file LX_Library.hpp
 *	@brief The Library header. It manages the engine ressources (load and shut down)
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 

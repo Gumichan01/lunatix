@@ -18,7 +18,7 @@
 *	@file LX_Sound.hpp
 *	@brief The abstract sound class
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 

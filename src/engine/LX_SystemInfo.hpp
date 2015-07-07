@@ -18,7 +18,7 @@
 *	@file LX_SystemInfo.hpp
 *	@brief The System information library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 

@@ -18,13 +18,13 @@
 *	@file LX_Version.hpp
 *	@brief The version library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 
 #define LX_MAJOR_VERSION 0      /**< The major version of the engine */
-#define LX_MINOR_VERSION 5      /**< The minor version of the engine */
-#define LX_PATCH_VERSION 2      /**< The patch of the engine */
+#define LX_MINOR_VERSION 6      /**< The minor version of the engine */
+#define LX_PATCH_VERSION 0      /**< The patch of the engine */
 
 
 /**

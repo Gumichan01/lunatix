@@ -15,7 +15,7 @@
 *	@file LX_ParticleSystem.cpp
 *	@brief The Particle system implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 

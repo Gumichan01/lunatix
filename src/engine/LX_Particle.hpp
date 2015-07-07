@@ -18,7 +18,7 @@
 *	@file LX_Particle.hpp
 *	@brief The Particle file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 *
 */

@@ -18,7 +18,7 @@
 *	@file LX_Config.hpp
 *	@brief The configuration class header
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 

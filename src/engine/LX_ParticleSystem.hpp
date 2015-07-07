@@ -18,7 +18,7 @@
 *	@file LX_ParticleSystem.hpp
 *	@brief The Particle system file
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.5
+*	@version 0.6
 *
 */
 
