@@ -1,5 +1,4 @@
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -124,7 +123,6 @@ void LX_Configuration::initConfig()
 }
 
 
-
 /**
 *   @fn LX_Configuration * LX_Configuration::getInstance()
 *
@@ -154,7 +152,6 @@ LX_Configuration * LX_Configuration::getInstance()
 
     return instance;
 }
-
 
 
 /**
@@ -198,7 +195,6 @@ void LX_Configuration::assignString(lua_State * state, char *str, int len)
 
     str[len-1] = '\0';
 }
-
 
 
 /**

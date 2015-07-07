@@ -110,6 +110,7 @@ int main(int argc, char **argv)
 {
 
     Dot *dot;
+    LX_Window *w = NULL;
 
     bool err = LX_Init();
 
@@ -120,9 +121,9 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
+    w = new LX_Window("Test particle",LX_WINDOW_RENDERING);
 
-
-    LX_WindowManager::getInstance()->addWindow(new LX_Window("Test particle",LX_WINDOW_RENDERING));
+    LX_WindowManager::getInstance()->addWindow(w);
     dot = new Dot();
 
     SDL_Event e;
@@ -143,6 +144,7 @@ int main(int argc, char **argv)
         SDL_Delay(16);
     }
 
+    delete w;
     delete dot;
     LX_Quit();
 

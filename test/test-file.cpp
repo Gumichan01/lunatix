@@ -95,7 +95,7 @@ void test_open(void)
 
     }catch(IOException &ex)
     {
-        cout << "SUCCESS - IOException occured : " << ex.what() << endl;
+        cout << "SUCCESS - IOException occured : NULL -> " << ex.what() << endl;
     }
 
     // bad mode
@@ -108,7 +108,7 @@ void test_open(void)
 
     }catch(IOException &exe)
     {
-        cout << "SUCCESS - IOException occured : " << exe.what() << endl;
+        cout << "SUCCESS - IOException occured : Mode 0x00 -> " << exe.what() << endl;
     }
 
     // invalid file
@@ -121,7 +121,7 @@ void test_open(void)
 
     }catch(IOException &ioe)
     {
-        cout << "SUCCESS - IOException occured : " << ioe.what() << endl;
+        cout << "SUCCESS - IOException occured : " << str3 << " -> " << ioe.what() << endl;
     }
 
     cout << " = END TEST = " << endl;
@@ -283,11 +283,11 @@ void test_buffer(void)
 
     }catch(IOException &ex)
     {
-        cout << "SUCCESS - IOException occured : " << ex.what() << endl;
+        cout << "SUCCESS - IOException occured : NULL -> " << ex.what() << endl;
     }
 
 
-    // valid file
+    // Valid file
     try{
 
         f = new LX_FileBuffer(str1.c_str());
