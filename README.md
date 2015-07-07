@@ -35,8 +35,7 @@ You need to install Lua 5.1 to compile the Lua script.
 The static and shared files (.lib, .a, .dll for win32 version) required to compile with SDL2 and Lua are provided.
 
 Warning:  
-
- It is possible the engine does not compile with Visual C++
+It is possible the engine does not compile with Visual C++
 
 ### On Linux system ###
 
