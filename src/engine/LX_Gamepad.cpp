@@ -52,14 +52,11 @@ LX_Gamepad::LX_Gamepad(int index)
     if(gc == NULL)
     {
         joy = SDL_JoystickOpen(index);
-
-        if(isHaptic(joy))
-            haptic = new LX_Haptic(joy);
+        haptic = new LX_Haptic(joy);
     }
     else
         haptic = new LX_Haptic(gc);
 }
-
 
 
 LX_Gamepad::~LX_Gamepad()
