@@ -73,7 +73,7 @@ LX_Haptic::LX_Haptic(int index)
 /**
 *   @fn LX_Haptic::LX_Haptic(SDL_Joystick *joy)
 *
-*   Create the instance of the haptic device using the index
+*   Create the instance of the haptic device using the joystick
 *
 *   @param joy The joystick to open the device from
 *
@@ -82,6 +82,27 @@ LX_Haptic::LX_Haptic(SDL_Joystick *joy)
 {
     haptic = SDL_HapticOpenFromJoystick(joy);
     instanceID = SDL_JoystickInstanceID(joy);
+}
+
+
+/**
+*   @fn LX_Haptic::LX_Haptic(SDL_GameController *gc)
+*
+*   Create the instance of the haptic device using the game controller
+*
+*   @param gc The game controller to open the device from
+*
+*/
+LX_Haptic::LX_Haptic(SDL_GameController *gc)
+{
+    if(gc != NULL)
+    {
+        SDL_Joystick *joy = SDL_GameControllerGetJoystick(gc);
+        haptic = SDL_HapticOpenFromJoystick(joy);
+        instanceID = SDL_JoystickInstanceID(joy);
+    }
+    else
+        instanceID = 1 << 16; // Invalid value
 }
 
 

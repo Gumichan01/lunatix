@@ -40,7 +40,6 @@ bool isHaptic(SDL_Joystick *joy);
 *
 *   This class describes the force feedback device.
 *
-*   @todo Create a constructor with a game controller as parameter
 */
 class LX_Haptic
 {
@@ -51,6 +50,7 @@ public :
 
     LX_Haptic(int index=0);
     LX_Haptic(SDL_Joystick *joy);
+    LX_Haptic(SDL_GameController *gc);
 
     bool isOpened(void);
 

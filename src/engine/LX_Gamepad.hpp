@@ -48,6 +48,7 @@ public :
     LX_Gamepad(int index=0);
 
     bool isConnected(void);
+    bool isHaptic(void);
 
     SDL_JoystickID getID(void);
     LX_Haptic * getHaptic(void);

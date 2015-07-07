@@ -57,7 +57,7 @@ LX_Gamepad::LX_Gamepad(int index)
             haptic = new LX_Haptic(joy);
     }
     else
-        haptic = new LX_Haptic(index);
+        haptic = new LX_Haptic(gc);
 }
 
 
@@ -88,6 +88,21 @@ bool LX_Gamepad::isConnected(void)
         return SDL_GameControllerGetAttached(gc) == SDL_TRUE;
     else
         return SDL_JoystickGetAttached(joy) == SDL_TRUE;
+}
+
+
+/**
+*   @fn bool LX_Gamepad::isHaptic(void)
+*
+*   Check if the gamepad is haptic
+*
+*   @return TRUE if the gamepad has force feedback support
+*           FALSE otherwise
+*
+*/
+bool LX_Gamepad::isHaptic(void)
+{
+    return haptic->isOpened();
 }
 
 
