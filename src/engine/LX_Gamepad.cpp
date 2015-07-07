@@ -78,7 +78,7 @@ LX_Gamepad::~LX_Gamepad()
 *
 *   Get the status of the gamepad
 *
-*   @return TRUE if the gamepad is opened and connected
+*   @return TRUE if the gamepad is opened and connected,
 *           FALSE otherwise
 *
 */
@@ -96,7 +96,7 @@ bool LX_Gamepad::isConnected(void)
 *
 *   Check if the gamepad is haptic
 *
-*   @return TRUE if the gamepad has force feedback support
+*   @return TRUE if the gamepad has force feedback support,
 *           FALSE otherwise
 *
 */
