@@ -14,6 +14,7 @@ LunatiX Engine also contains these modules:
 - LX_MSGBox : The Message box module
 - LX\_ParticleEngine : The particle engine
 - LX\_Random : The Random Number Generator (RNG) library
+- LX_VersionInfo : A module to get the version of the engine
 - LX\_SystemInfo : The System information library
 
 
@@ -53,6 +54,8 @@ Warning:
 
 ### Build the program ###
 
+#### On Linux ####
+
 If you want to generate the libraries you just need  
 to execute the following command:  
  *$make*
@@ -63,16 +66,28 @@ To test the engine, execute the following command:
  *$./test/test.sh*
 
 You need to be on the root directory of the source code to launch the script.  
-Otherwise, th script will not work.
+Otherwise, the script will not work.
 
-To use the engine into your project, you just need to copy these following directories:
- - config/
- - include/
- - lib/
- - script/
+To use the engine into your project, you need to copy these following directories  
+into your project tree :
+ - *config/*
+ - *include/*
+ - *lib/*
+ - *script/*
 
 It is very important to keep the engine hierarchy. If you do not respect that  
-the engine wiil not work correctly.
+the engine will not work correctly.
+
+After that, create a directory with a name like *LunatiX/* into *include/* and  
+copy all the .hpp files of the engine on *include/LunatiX/*.
+
+Finally, copy the shared libraries in *lib/linux*
+
+
+#### On Windows ####
+
+Download the [development library] (http://gumichan01.olympe.in/download/dev-luna-win32.zip)  
+Now you can use it in your project.
 
 Warning : The static or shared libraries are not completely installed on the system.
  So you need to do that manually.
