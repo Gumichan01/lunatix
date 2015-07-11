@@ -22,6 +22,12 @@ You can get information about a gamepad.
 haptic effects on your gamepad.
 
 
+## FIXES
+
+ - Fix a bug in sizeOFText() from LX_TrueTypeFont
+
+
+
 ## Other changes ##
 
  - Changed a lot of signatures of function in the source code.  
