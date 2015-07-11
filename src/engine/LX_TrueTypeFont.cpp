@@ -185,10 +185,32 @@ LX_Font::~LX_Font()
 */
 int LX_Font::sizeOfText(string text, int *w, int *h)
 {
+    return sizeOfText(text.c_str(),font_size,w,h);
+}
+
+
+/**
+*   @fn int LX_Font::sizeOfText(string text, int size, int *w, int *h)
+*
+*   Calculate the resulting surface size of the text rendererd using the default font
+*
+*   @param text The string to size up
+*   @param size The size of the text to be used when you load the texture
+*   @param w The pointer of int to fill in the text width
+*   @param h The pointer of int to fill in the text height
+*
+*   @return A control value, 0 on success, -1 on failure
+*
+*/
+int LX_Font::sizeOfText(string text, int size, int *w, int *h)
+{
     TTF_Font *ttf = NULL;
     int sz;
 
-    ttf = TTF_OpenFont(font_str.c_str(),font_size);
+    if(font_buffer == NULL)
+        ttf = TTF_OpenFont(font_str.c_str(),size);
+    else
+        ttf = font_buffer->getTTFFromBuffer(size);
 
     if(ttf == NULL)
         return -1;
@@ -196,8 +218,10 @@ int LX_Font::sizeOfText(string text, int *w, int *h)
     sz = sizeOfText(ttf,text.c_str(),w,h);
 
     TTF_CloseFont(ttf);
+    ttf = NULL;
     return sz;
 }
+
 
 
 /**

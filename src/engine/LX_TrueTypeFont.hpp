@@ -107,6 +107,7 @@ public:
     LX_Font(string font_file, SDL_Color *color, int size);
 
     int sizeOfText(string text, int *w, int *h);
+    int sizeOfText(string text, int size, int *w, int *h);
     int sizeOfText(TTF_Font *ttf, string text, int *w, int *h);
 
     SDL_Surface * drawSolidText(string text);
