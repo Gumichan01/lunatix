@@ -10,7 +10,7 @@
 #	luxon.jean.pierre@gmail.com
 #
 
-# Makefile - Lunatix Engine v0.3
+# Makefile - Lunatix Engine
 
 
 # You can modify the value of DEBUG
