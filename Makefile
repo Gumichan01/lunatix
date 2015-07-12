@@ -59,7 +59,7 @@ ifeq ($(DEBUG),yes)
 else
 
 	# Release mode
-	CFLAGS=-fPIC -Wall -std=c++0x
+	CFLAGS=-fPIC -w -std=c++0x -g
 	OPTIMIZE=-O3
 	OPT_SIZE=-s
 
