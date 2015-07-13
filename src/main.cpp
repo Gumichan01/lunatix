@@ -81,7 +81,6 @@ int main ( int argc, char** argv )
         // getWindowManager() and LX_WindowManager::getInstance() are the same thing
         getWindowManager()->addWindow(window);
         LX_WindowManager::getInstance()->addWindow(window2);
-
     }
     catch(LX_WindowException & win_ex)
     {
@@ -213,7 +212,7 @@ int main ( int argc, char** argv )
     delete window2;
 
     // Gamepad
-    LX_Gamepad *gp =  new LX_Gamepad();
+    LX_Gamepad *gp = new LX_Gamepad();
     char str[LX_PADSTRING_SIZE];
 
     if(gp->isConnected())
