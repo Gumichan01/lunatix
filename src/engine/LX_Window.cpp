@@ -72,10 +72,14 @@ LX_WindowException::~LX_WindowException() throw() {}
 *           - LX_WINDOW_SURFACE : to use surfaces
 *           - LX_WINDOW_RENDERING : to use the renderer
 *
+*   @param accel Tag that selects the rendering mode
+*           - TRUE : Use hardware acceleration
+*           - FALSE : Use software fallback
+*
 *   @exception LX_WindowException
 *
 */
-LX_Window::LX_Window(const Uint32 mode)
+LX_Window::LX_Window(const Uint32 mode, bool accel)
 {
     Uint32 option_flag = 0x00000000;
     Uint32 position_flag = 0x00000000;
@@ -109,13 +113,19 @@ LX_Window::LX_Window(const Uint32 mode)
         option_flag |= SDL_WINDOW_OPENGL;
     }
 
-    window = SDL_CreateWindow("LunatiX Engine v0.5",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
+    window = SDL_CreateWindow("LunatiX Engine v0.6",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
 
     if(window == NULL )
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+     {
+        if(accel)
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+        else
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+     }
+
 
     init2();
 }
@@ -131,10 +141,14 @@ LX_Window::LX_Window(const Uint32 mode)
 *           - LX_WINDOW_SURFACE : to use surfaces
 *           - LX_WINDOW_RENDERING : to use the renderer
 *
+*   @param accel Tag that selects the rendering mode
+*           - TRUE : Use hardware acceleration
+*           - FALSE : Use software fallback
+*
 *   @note The default configuration is used during the creation of the window
 *
 */
-LX_Window::LX_Window(std::string title, const Uint32 mode)
+LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 {
     int w,h;
     Uint32 flag = 0x00000000;
@@ -150,7 +164,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode)
     if(config->getOpenGL_Flag() == 1)
         flag |= SDL_WINDOW_OPENGL;
 
-    init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag);
+    init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag,accel);
 }
 
 
@@ -164,13 +178,21 @@ LX_Window::LX_Window(std::string title, const Uint32 mode)
 *           - LX_WINDOW_SURFACE : to use surfaces
 *           - LX_WINDOW_RENDERING : to use the renderer
 *
+*   @param accel Tag that selects the rendering mode
+*           - TRUE : Use hardware acceleration
+*           - FALSE : Use software fallback
+*
 *   @note This constructor does not use the LX_config class
 *
 */
-LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
+LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 {
     window = sdlWin;
-    renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+    if(accel)
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+    else
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
 
     init2();
 }
@@ -189,18 +211,24 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
 *   @param mode The display mode
 *           - LX_WINDOW_SURFACE : to use surfaces
 *           - LX_WINDOW_RENDERING : to use the renderer
+*
 *   @param flag One of these following flags
 *           - LX_GRAPHICS_FULLSCREEN_DESKTOP
 *           - LX_GRAPHICS_FULLSCREEN
 *           - LX_GRAPHICS_NO_FULLSCREEN
 *           - And any SDL flags
 *
+*   @param accel Tag that selects the rendering mode
+*           - TRUE : Use hardware acceleration
+*           - FALSE : Use software fallback
+*
 *   @note This constructor does not use the LX_config class
 *
 */
-LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
+LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
+                     const Uint32 mode, Uint32 flag, bool accel)
 {
-    init(title.c_str(),posX,posY,w,h,mode,flag);
+    init(title.c_str(),posX,posY,w,h,mode,flag,accel);
 }
 
 
@@ -219,12 +247,17 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, const 
 *           - LX_WINDOW_RENDERING : to use the renderer
 *   @param flag It is the same kind of flag used in LX_Window::LX_Window()
 *
+*   @param accel Tag that selects the rendering mode
+*           - TRUE : Use hardware acceleration
+*           - FALSE : Use software fallback
+*
 *   @note This constructor does not use the LX_config class
 *
 *   @exception LX_WindowException
 *
 */
-void LX_Window::init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
+void LX_Window::init(std::string title, int posX, int posY, int w, int h,
+                     const Uint32 mode, Uint32 flag, bool accel)
 {
     renderer = NULL;
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
@@ -233,7 +266,12 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h, const 
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+    {
+        if(accel)
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+        else
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+    }
 
     init2();
 }

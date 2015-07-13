@@ -89,16 +89,17 @@ class LX_Window
     int originalWidth;      /**< The width of the window */
     int originalHeight;     /**< The height of the window */
 
-    void init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag);
+    void init(std::string title, int posX, int posY, int w, int h,
+              const Uint32 mode, Uint32 flag, bool accel = true);
     void init2(void);
 
 public :
 
-    LX_Window(const Uint32 mode);
-    LX_Window(SDL_Window *sdlWin, const Uint32 mode);
-    LX_Window(std::string title, const Uint32 mode);
+    LX_Window(const Uint32 mode, bool accel = true);
+    LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel = true);
+    LX_Window(std::string title, const Uint32 mode, bool accel = true);
     LX_Window(std::string title, int posX, int posY, int w, int h,
-              const Uint32 mode, const Uint32 flag);
+              const Uint32 mode, const Uint32 flag, bool accel = true);
 
     void setTitle(std::string title);
 
