@@ -98,7 +98,9 @@ class LX_Font
 
 
     void init(string font_file, SDL_Color *color, int size);
-    SDL_Surface * drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size);
+    SDL_Surface * drawText(LX_TTF_TypeText type, string text,
+                           Uint8 r, Uint8 g, Uint8 b,
+                           unsigned int size = LX_TTF_DEFAULT_FONT_SIZE);
 
 public:
 
@@ -120,7 +122,7 @@ public:
     SDL_Surface * drawBlendedText(string text);
     SDL_Surface * drawBlendedText(string text, unsigned int size);
 
-    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, int idWindow);
+    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, int idWindow = 0);
     SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, LX_Window *win);
 
     void setColor(SDL_Color *color);
