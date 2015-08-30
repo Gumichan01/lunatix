@@ -93,6 +93,8 @@ class LX_Window
               const Uint32 mode, Uint32 flag, bool accel = true);
     void init2(void);
 
+    void createRendering(bool accel);
+
 public :
 
     LX_Window(const Uint32 mode, bool accel = true);

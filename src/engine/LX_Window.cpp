@@ -119,13 +119,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
-     {
-        if(accel)
-            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-        else
-            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
-     }
-
+        createRendering(accel);
 
     init2();
 }
@@ -189,10 +183,8 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 {
     window = sdlWin;
 
-    if(accel)
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-    else
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+    if(mode == LX_WINDOW_RENDERING)
+        createRendering(accel);
 
     init2();
 }
@@ -266,12 +258,7 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h,
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
-    {
-        if(accel)
-            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-        else
-            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
-    }
+        createRendering(accel);
 
     init2();
 }
@@ -289,6 +276,14 @@ void LX_Window::init2(void)
     originalHeight = getHeight();
 }
 
+
+void LX_Window::createRendering(bool accel)
+{
+    if(accel)
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+    else
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+}
 
 /**
 *   @fn LX_Window::~LX_Window()
