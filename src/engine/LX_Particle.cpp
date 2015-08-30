@@ -221,7 +221,7 @@ bool LX_Particle::setTexture(LX_FileBuffer *buffer, const unsigned int id)
     SDL_Surface * s = NULL;
 
     s = loadSurfaceFromFileBuffer(buffer);
-    texture = loadTextureFromSurface(surface);
+    texture = loadTextureFromSurface(s);
     SDL_FreeSurface(s);
 
     return texture != NULL;
