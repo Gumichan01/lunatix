@@ -35,6 +35,7 @@ class Dot{
 
     Dot()
     {
+        bool err;
         LX_Particle *p = NULL;
         srand(time(NULL));
 
@@ -47,25 +48,29 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    p->setTexture(red,0);
+                case 0 :    err = p->setTexture(red,0);
                             break;
 
-                case 1 :    p->setTexture(blue,0);
+                case 1 :    err = p->setTexture(blue,0);
                             break;
 
-                case 2 :    p->setTexture(green,0);
+                case 2 :    err = p->setTexture(green,0);
                             break;
 
-                default :   p->setTexture(red,0);
+                default :   err = p->setTexture(red,0);
                             break;
             }
 
             sys->addParticle(p);
+
+            if(err == false)
+                cerr << "FAILURE - Dot - Cannot load any texture from a file buffer" << endl;
         }
     }
 
     void update()
     {
+        bool err;
         LX_Particle *p = NULL;
 
         sys->updateParticles();
@@ -77,16 +82,16 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    p->setTexture(red,0);
+                case 0 :    err = p->setTexture(red,0);
                             break;
 
-                case 1 :    p->setTexture(blue,0);
+                case 1 :    err = p->setTexture(blue,0);
                             break;
 
-                case 2 :    p->setTexture(green,0);
+                case 2 :    err = p->setTexture(green,0);
                             break;
 
-                default :   p->setTexture(red,0);
+                default :   err = p->setTexture(red,0);
                             break;
             }
 
@@ -94,6 +99,10 @@ class Dot{
             {
                 delete p;
             }
+
+            if(err == false)
+                cerr << "FAILURE - Dot::update() - Cannot load any texture from a file buffer" << endl;
+
         }
 
         sys->displayParticles();
@@ -126,9 +135,18 @@ int main(int argc, char **argv)
     LX_WindowManager::getInstance()->addWindow(w);
 
     //File buffer of particle
-    red = new LX_FileBuffer("test/asset/red.bmp");
-    green = new LX_FileBuffer("test/asset/green.bmp");
-    blue = new LX_FileBuffer("test/asset/blue.bmp");
+    try
+    {
+        red = new LX_FileBuffer("test/asset/red.bmp");
+        green = new LX_FileBuffer("test/asset/green.bmp");
+        blue = new LX_FileBuffer("test/asset/blue.bmp");
+
+    }catch(IOException)
+    {
+        cerr << "FAILURE - An asset was not loaded" << endl;
+    }
+
+    cout << "SUCCESS - The three assets was successfully loaded in each file buffer" << endl;
 
     // Dot with particle
     dot = new Dot();
