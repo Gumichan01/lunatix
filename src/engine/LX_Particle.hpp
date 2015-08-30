@@ -27,13 +27,14 @@
 
 #include "LX_Hitbox.hpp"
 #include "LX_Vector2D.hpp"
+#include "LX_FileBuffer.hpp"
 
 #define DELAY 16        /**< The delay of the particle The delay to stay alive */
-
 
 struct SDL_Texture;
 struct SDL_Surface;
 
+using namespace LX_FileIO;
 
 namespace LX_ParticleEngine
 {
@@ -49,8 +50,8 @@ class LX_Particle
 
     LX_AABB box;                    /**< The box of the particle */
     LX_Vector2D velocity;           /**< The velocity of the particle */
-    unsigned int lifetime;          /**< The delay to stay displayable */
 
+    unsigned int lifetime;          /**< The delay to stay displayable */
     SDL_Texture *texture;           /**< The texture (for the texture rendering) */
     SDL_Surface *surface;           /**< The surface (for the surface rendering) */
 
@@ -69,8 +70,8 @@ public :
 
     void update(void);
 
-    bool setTexture(const char * str, const unsigned int id);
-    bool setSurface(const char * str);
+    bool setTexture(LX_FileBuffer *buffer, const unsigned int id=0);
+    bool setSurface(LX_FileBuffer *buffer);
     void setSpeed(int x,int y);
 
     bool isDead(void);
@@ -89,7 +90,6 @@ public :
     ~LX_Particle();
 
 };
-
 
 };
 

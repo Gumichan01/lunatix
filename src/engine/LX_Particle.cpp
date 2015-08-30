@@ -26,8 +26,9 @@
 #include "LX_Physics.hpp"
 #include "LX_Graphics.hpp"
 #include "LX_Random.hpp"
+#include "LX_FileBuffer.hpp"
 
-
+using namespace LX_FileIO;
 using namespace LX_Graphics;
 using namespace LX_Random;
 
@@ -202,6 +203,49 @@ void LX_Particle::update(void)
 }
 
 
+
+/**
+*   @fn bool LX_Particle::setTexture(LX_FileBuffer *buffer, const unsigned int id)
+*
+*   Set a texture to the particle
+*
+*   @param buffer The file buffer that contains the sprite to load
+*   @param id The id of the window in the LX_WindowManager
+*           used to get the texture according to its rendererer
+*
+*   @return TRUE if the particle texture was created, FALSE otherwise
+*
+*/
+bool LX_Particle::setTexture(LX_FileBuffer *buffer, const unsigned int id)
+{
+    SDL_Surface * s = NULL;
+
+    s = loadSurfaceFromFileBuffer(buffer);
+    texture = loadTextureFromSurface(surface);
+    SDL_FreeSurface(s);
+
+    return texture != NULL;
+}
+
+
+/**
+*   @fn bool LX_Particle::setSurface(LX_FileBuffer *buffer)
+*
+*   Set a surface to the particle
+*
+*   @param buffer The file buffer that contains the sprite to load
+*
+*   @return TRUE if the particle surface was created, FALSE otherwise
+*
+*/
+bool LX_Particle::setSurface(LX_FileBuffer *buffer)
+{
+    surface = loadSurfaceFromFileBuffer(buffer);
+    return surface != NULL;
+}
+
+
+
 /**
 *   @fn bool LX_Particle::isDead(void)
 *
@@ -213,42 +257,6 @@ void LX_Particle::update(void)
 bool LX_Particle::isDead(void)
 {
     return lifetime == 0;
-}
-
-
-/**
-*   @fn bool LX_Particle::setTexture(const char * str, const unsigned int id)
-*
-*   Set a texture to the particle
-*
-*   @param str The file that contains the sprite to load
-*   @param id The id of the window in the LX_WindowManager
-*           used to get the texture according to its rendererer
-*
-*   @return TRUE if the particle texture was created, FALSE otherwise
-*
-*/
-bool LX_Particle::setTexture(const char * str, const unsigned int id)
-{
-    texture = loadTextureFromFile(str,id);
-    return texture != NULL;
-}
-
-
-/**
-*   @fn bool LX_Particle::setSurface(const char * str)
-*
-*   Set a surface to the particle
-*
-*   @param str The file that contains the sprite to load
-*
-*   @return TRUE if the particle surface was created, FALSE otherwise
-*
-*/
-bool LX_Particle::setSurface(const char * str)
-{
-    surface = loadSurface(str);
-    return surface != NULL;
 }
 
 
