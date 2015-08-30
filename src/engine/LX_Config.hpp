@@ -89,17 +89,17 @@ public :
     static LX_Configuration * getInstance();
     static void destroy();
 
-    int getVideoFlag();
-    int getVSyncFlag();
-    int getTTF_Flag();
-    int getAudioFlag();
-    int getJoystickFlag();
-    int getOpenGL_Flag();
+    bool getVideoFlag();
+    bool getVSyncFlag();
+    bool getTTF_Flag();
+    bool getAudioFlag();
+    bool getJoystickFlag();
+    bool getOpenGL_Flag();
     const char * getFontFile();
     int getFontSize();
     int getWinWidth();
     int getWinHeight();
-    int getFullscreenFlag();
+    bool getFullscreenFlag();
 
     ~LX_Configuration();
 

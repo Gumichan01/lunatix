@@ -357,86 +357,86 @@ void LX_Configuration::setFlags(void)
 
 
 /**
-*   @fn int LX_Configuration::getVideoFlag()
+*   @fn bool LX_Configuration::getVideoFlag()
 *
 *   Get the video flag
 *
-*   @return The video flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getVideoFlag()
+bool LX_Configuration::getVideoFlag()
 {
-    return videoFlag;
+    return videoFlag == 1;
 }
 
 
 /**
-*   @fn int LX_Configuration::getVSyncFlag()
+*   @fn bool LX_Configuration::getVSyncFlag()
 *
 *   Get the Vertical Synchronization (VSync) flag
 *
-*   @return The VSync flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getVSyncFlag()
+bool LX_Configuration::getVSyncFlag()
 {
-    return vsyncFlag;
+    return vsyncFlag == 1;
 }
 
 
 /**
-*   @fn int LX_Configuration::getTTF_Flag()
+*   @fn bool LX_Configuration::getTTF_Flag()
 *
 *   Get the True Ttype Font (TTF) flag
 *
-*   @return The TTF flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getTTF_Flag()
+bool LX_Configuration::getTTF_Flag()
 {
-    return ttfFlag;
+    return ttfFlag == 1;
 }
 
 
 /**
-*   @fn int LX_Configuration::getAudioFlag()
+*   @fn bool LX_Configuration::getAudioFlag()
 *
 *   Get the audio flag
 *
-*   @return The audio flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getAudioFlag()
+bool LX_Configuration::getAudioFlag()
 {
-    return audioFlag;
+    return audioFlag == 1;
 }
 
 
 /**
-*   @fn int LX_Configuration::getJoystickFlag()
+*   @fn bool LX_Configuration::getJoystickFlag()
 *
 *   Get the audio flag
 *
-*   @return The joystick flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getJoystickFlag()
+bool LX_Configuration::getJoystickFlag()
 {
-    return joystickFlag;
+    return joystickFlag == 1;
 }
 
 
 /**
-*   @fn int LX_Configuration::getOpenGL_Flag()
+*   @fn bool LX_Configuration::getOpenGL_Flag()
 *
 *   Get the opengl flag
 *
-*   @return The opengl flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getOpenGL_Flag()
+bool LX_Configuration::getOpenGL_Flag()
 {
-    return openglFlag;
+    return openglFlag == 1;
 }
 
 
@@ -445,7 +445,7 @@ int LX_Configuration::getOpenGL_Flag()
 *
 *   Get the font file
 *
-*   @return The font file
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
 const char * LX_Configuration::getFontFile()
@@ -459,7 +459,7 @@ const char * LX_Configuration::getFontFile()
 *
 *   Get the font size
 *
-*   @return The font size
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
 int LX_Configuration::getFontSize()
@@ -497,16 +497,16 @@ int LX_Configuration::getWinHeight()
 
 
 /**
-*   @fn int LX_Configuration::getFullscreenFlag()
+*   @fn bool LX_Configuration::getFullscreenFlag()
 *
 *   Get the fullscreen tag
 *
-*   @return The fullscreen flag
+*   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getFullscreenFlag()
+bool LX_Configuration::getFullscreenFlag()
 {
-    return fullscreenFlag;
+    return fullscreenFlag == 1;
 }
 
 

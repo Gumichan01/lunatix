@@ -94,11 +94,8 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
 
     // check the fullscreen flag
-    if(win_config->getFullscreenFlag() == 1)
-    {
+    if(win_config->getFullscreenFlag())
         option_flag |= SDL_WINDOW_FULLSCREEN;
-    }
-
 
     // Is the fullscreen mode active ?
     if( (option_flag & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN)
@@ -108,14 +105,12 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
 
     // OpenGL flag
-    if(win_config->getOpenGL_Flag() == 1)
-    {
+    if(win_config->getOpenGL_Flag())
         option_flag |= SDL_WINDOW_OPENGL;
-    }
 
     window = SDL_CreateWindow("LunatiX Engine v0.6",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
 
-    if(window == NULL )
+    if(window == NULL)
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
@@ -152,10 +147,10 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
     w = config->getWinWidth();
     h = config->getWinHeight();
 
-    if(config->getFullscreenFlag() == 1)
+    if(config->getFullscreenFlag())
         flag |= LX_GRAPHICS_FULLSCREEN;
 
-    if(config->getOpenGL_Flag() == 1)
+    if(config->getOpenGL_Flag())
         flag |= SDL_WINDOW_OPENGL;
 
     init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag,accel);
@@ -282,20 +277,17 @@ void LX_Window::createRendering(bool accel)
     Uint32 renderFlag = 0x00000000;
     LX_Configuration *config = LX_Configuration::getInstance();
 
-
-    std::cout << "Rendering" << std::endl;
     // Hardware acceleration or software rendering
     if(accel)
         renderFlag = SDL_RENDERER_ACCELERATED;
     else
         renderFlag = SDL_RENDERER_SOFTWARE;
 
-    if(config->getVideoFlag() == 1)
+    if(config->getVideoFlag())
     {
-        if(config->getVSyncFlag() == 1)
+        if(config->getVSyncFlag())
         {
             renderFlag |= SDL_RENDERER_PRESENTVSYNC;
-            std::cout << "VSync" << std::endl;
         }
     }
 
