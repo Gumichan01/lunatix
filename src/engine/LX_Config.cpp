@@ -82,11 +82,11 @@ LX_Configuration::LX_Configuration()
 {
     //initialize the variables at the default values
     videoFlag = 1;
-    ttf_Flag = 1;
+    ttfFlag = 1;
     audioFlag = 1;
     joystickFlag = 1;
     openglFlag = 0;
-    font_size = 0;
+    fontSize = 0;
     width = 800;
     height = 600;
     fullscreenFlag = 0;
@@ -288,7 +288,7 @@ void LX_Configuration::setFlags(void)
             // TTF flag
             if(key.compare(0,TTF_KEY.length(),TTF_KEY) == 0)
             {
-                ttf_Flag = atoi((char *) lua_tostring(state,-1));
+                ttfFlag = atoi((char *) lua_tostring(state,-1));
             }
 
             // Audio flag
@@ -312,13 +312,13 @@ void LX_Configuration::setFlags(void)
             // Font file flag
             if(key.compare(0,FONT_KEY.length(),FONT_KEY) == 0)
             {
-                font_file = (char *) lua_tostring(state,-1);
+                fontFile = (char *) lua_tostring(state,-1);
             }
 
             // Size flag
             if(key.compare(0,SIZE_KEY.length(),SIZE_KEY) == 0)
             {
-                font_size = atoi((char *) lua_tostring(state,-1));
+                fontSize = atoi((char *) lua_tostring(state,-1));
             }
 
             // Width flag
@@ -365,14 +365,14 @@ int LX_Configuration::getVideoFlag()
 /**
 *   @fn int LX_Configuration::getTTF_Flag()
 *
-*   Get the ttf flag
+*   Get the True Ttype Font (TTF) flag
 *
-*   @return The ttf flag
+*   @return The TTF flag
 *
 */
 int LX_Configuration::getTTF_Flag()
 {
-    return ttf_Flag;
+    return ttfFlag;
 }
 
 
@@ -428,7 +428,7 @@ int LX_Configuration::getOpenGL_Flag()
 */
 const char * LX_Configuration::getFontFile()
 {
-    return font_file.c_str();
+    return fontFile.c_str();
 }
 
 
@@ -442,7 +442,7 @@ const char * LX_Configuration::getFontFile()
 */
 int LX_Configuration::getFontSize()
 {
-    return font_size;
+    return fontSize;
 }
 
 

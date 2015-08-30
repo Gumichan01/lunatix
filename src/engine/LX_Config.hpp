@@ -65,12 +65,12 @@ class LX_Configuration
 
     // Variables
     int videoFlag;
-    int ttf_Flag;
+    int ttfFlag;
     int audioFlag;
     int joystickFlag;
     int openglFlag;
-    string font_file;
-    int font_size;
+    string fontFile;
+    int fontSize;
     int width;
     int height;
     int fullscreenFlag;
