@@ -22,10 +22,6 @@
 *
 */
 
-#define LX_MAJOR_VERSION 0      /**< The major version of the engine */
-#define LX_MINOR_VERSION 6      /**< The minor version of the engine */
-#define LX_PATCH_VERSION 1      /**< The patch of the engine */
-
 
 /**
 *   @namespace LX_VersionInfo
