@@ -66,8 +66,8 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w);
 SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w);
 
 // To use when you work with the window manager
-SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id);
-SDL_Texture * loadTextureFromFile(std::string filename, int id);
+SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id = 0);
+SDL_Texture * loadTextureFromFile(std::string filename, int id = 0);
 
 bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 
