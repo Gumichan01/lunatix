@@ -18,9 +18,13 @@ using namespace LX_Device;
 using namespace LX_Mixer;
 using namespace LX_Physics;
 using namespace LX_ParticleEngine;
+using namespace LX_FileIO;
 
 #define N 20
 
+static LX_FileBuffer *red;
+static LX_FileBuffer *green;
+static LX_FileBuffer *blue;
 
 class Dot{
 
@@ -43,16 +47,16 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    p->setTexture("test/asset/red.bmp",0);
+                case 0 :    p->setTexture(red,0);
                             break;
 
-                case 1 :    p->setTexture("test/asset/blue.bmp",0);
+                case 1 :    p->setTexture(blue,0);
                             break;
 
-                case 2 :    p->setTexture("test/asset/green.bmp",0);
+                case 2 :    p->setTexture(green,0);
                             break;
 
-                default :   p->setTexture("test/asset/red.bmp",0);
+                default :   p->setTexture(red,0);
                             break;
             }
 
@@ -73,16 +77,16 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    p->setTexture("test/asset/red.bmp",0);
+                case 0 :    p->setTexture(red,0);
                             break;
 
-                case 1 :    p->setTexture("test/asset/blue.bmp",0);
+                case 1 :    p->setTexture(blue,0);
                             break;
 
-                case 2 :    p->setTexture("test/asset/green.bmp",0);
+                case 2 :    p->setTexture(green,0);
                             break;
 
-                default :   p->setTexture("test/asset/red.bmp",0);
+                default :   p->setTexture(red,0);
                             break;
             }
 
@@ -93,16 +97,12 @@ class Dot{
         }
 
         sys->displayParticles();
-
-
     }
 
     ~Dot()
     {
         delete sys;
     }
-
-
 };
 
 
@@ -124,6 +124,13 @@ int main(int argc, char **argv)
     w = new LX_Window("Test particle",LX_WINDOW_RENDERING);
 
     LX_WindowManager::getInstance()->addWindow(w);
+
+    //File buffer of particle
+    red = new LX_FileBuffer("test/asset/red.bmp");
+    green = new LX_FileBuffer("test/asset/green.bmp");
+    blue = new LX_FileBuffer("test/asset/blue.bmp");
+
+    // Dot with particle
     dot = new Dot();
 
     SDL_Event e;
@@ -146,6 +153,9 @@ int main(int argc, char **argv)
 
     delete w;
     delete dot;
+    delete red;
+    delete green;
+    delete blue;
     LX_Quit();
 
     cout << " ==== End Particle ==== " << endl;
