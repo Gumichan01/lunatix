@@ -279,10 +279,27 @@ void LX_Window::init2(void)
 
 void LX_Window::createRendering(bool accel)
 {
+    Uint32 renderFlag = 0x00000000;
+    LX_Configuration *config = LX_Configuration::getInstance();
+
+
+    std::cout << "Rendering" << std::endl;
+    // Hardware acceleration or software rendering
     if(accel)
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+        renderFlag = SDL_RENDERER_ACCELERATED;
     else
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_SOFTWARE);
+        renderFlag = SDL_RENDERER_SOFTWARE;
+
+    if(config->getVideoFlag() == 1)
+    {
+        if(config->getVSyncFlag() == 1)
+        {
+            renderFlag |= SDL_RENDERER_PRESENTVSYNC;
+            std::cout << "VSync" << std::endl;
+        }
+    }
+
+    renderer = SDL_CreateRenderer(window,-1,renderFlag);
 }
 
 /**

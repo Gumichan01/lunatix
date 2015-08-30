@@ -65,6 +65,7 @@ class LX_Configuration
 
     // Variables
     int videoFlag;
+    int vsyncFlag;
     int ttfFlag;
     int audioFlag;
     int joystickFlag;
@@ -89,6 +90,7 @@ public :
     static void destroy();
 
     int getVideoFlag();
+    int getVSyncFlag();
     int getTTF_Flag();
     int getAudioFlag();
     int getJoystickFlag();

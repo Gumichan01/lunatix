@@ -20,16 +20,17 @@ local WINDOW_CONFIG_FILE = "config/lxwindow.cfg";
 
 function getFlags()
 
-	-- Check the two files when opening them
+	-- Check the if these files can be opened
 	local sdlfile = assert(io.open(SDL_CONFIG_FILE, "r"));
 	local winfile = assert(io.open(WINDOW_CONFIG_FILE, "r"));
 
 	-- The result table
-	local result = {video=0, ttf=0, audio=0, joystick=0, opengl=0,
+	local result = {video=0, vsync=0, ttf=0, audio=0, joystick=0, opengl=0,
 						font=0, size=0, width=0, height=0, fullscreen=0};
 
 	-- Keys
 	local video_str = "video";
+	local vsync_str = "vsync";
 	local ttf_str = "ttf";
 	local audio_str = "audio";
 	local joystick_str = "joystick";
@@ -57,6 +58,18 @@ function getFlags()
 					if( key and value )
 					then
 							result["video"] = value;
+					end
+			end
+
+			-- VSync flag
+			if(string.find(line, vsync_str))
+			then
+
+				local _,_, key, value = string.find(line, "(%a+)%s*=%s*(%d+)");
+
+					if( key and value )
+					then
+							result["vsync"] = value;
 					end
 			end
 
@@ -134,8 +147,9 @@ function getFlags()
 		end
 	end
 
-	sdlfile:close();
+	sdlfile:close(); -- End of file : Close it!
 
+	-- Read the content of the window file
 	for line in winfile:lines()
 	do
 
@@ -190,20 +204,10 @@ end
 
 
 -- For debug
+--[[
+local res = getFlags();
 
---print("video : "..getVideo())
---print("ttf : "..getTTF())
---print("audio : "..getAudio())
---print("joystick : "..getJoystick())
---print("opengl : "..getOpenGL())
---print("font : "..getFont())
---print("size : "..getFontSize())
---print("window width : "..getWidth())
---print("window height : "..getHeight())
---print("fullscreen : "..getFullscreen())
-
---local res = getFlags();
-
---print("Result : "..res["video"].." "..res["font"]);
---print("Result : "..res["width"].." "..res["height"].." "..res["fullscreen"]);
+print("Result : Video: "..res["video"].."\n VSync: "..res["vsync"].."\n font: "..res["font"].."\n Text size: "..res["size"]);
+print(" Audio: "..res["audio"].."\n Joystick: "..res["joystick"].."\n OpenGL: "..res["opengl"]);
+print(" Width: "..res["width"].."\n Height: "..res["height"].."\n Fullscreen:"..res["fullscreen"]);]]
 

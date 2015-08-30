@@ -80,8 +80,9 @@ LX_ConfigurationException::~LX_ConfigurationException() throw() {}
 */
 LX_Configuration::LX_Configuration()
 {
-    //initialize the variables at the default values
+    // Initialize the variables at the default values
     videoFlag = 1;
+    vsyncFlag = 0;
     ttfFlag = 1;
     audioFlag = 1;
     joystickFlag = 1;
@@ -91,7 +92,7 @@ LX_Configuration::LX_Configuration()
     height = 600;
     fullscreenFlag = 0;
 
-    //loading configuration
+    // Load configuration
     setFlags();
 }
 
@@ -215,6 +216,7 @@ void LX_Configuration::setFlags(void)
 
     // Constant values
     const std::string VIDEO_KEY = "video";
+    const std::string VSYNC_KEY = "vsync";
     const std::string TTF_KEY = "ttf";
     const std::string AUDIO_KEY = "audio";
     const std::string JOYSTICK_KEY = "joystick";
@@ -283,6 +285,12 @@ void LX_Configuration::setFlags(void)
             if(key.compare(0,VIDEO_KEY.length(),VIDEO_KEY) == 0)
             {
                 videoFlag = atoi((char *) lua_tostring(state,-1));
+            }
+
+            // VSync flag
+            if(key.compare(0,VSYNC_KEY.length(),VSYNC_KEY) == 0)
+            {
+                vsyncFlag = atoi((char *) lua_tostring(state,-1));
             }
 
             // TTF flag
@@ -359,6 +367,20 @@ void LX_Configuration::setFlags(void)
 int LX_Configuration::getVideoFlag()
 {
     return videoFlag;
+}
+
+
+/**
+*   @fn int LX_Configuration::getVSyncFlag()
+*
+*   Get the Vertical Synchronization (VSync) flag
+*
+*   @return The VSync flag
+*
+*/
+int LX_Configuration::getVSyncFlag()
+{
+    return vsyncFlag;
 }
 
 
