@@ -28,6 +28,9 @@
 #include <SDL2/SDL_mixer.h>
 #include <GL/glu.h>
 
+#define LX_GL_MAJOR_VERSION 3
+#define LX_GL_MINOR_VERSION 1
+
 
 bool LX_Init(void);
 void LX_Quit(void);

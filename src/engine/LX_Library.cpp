@@ -128,8 +128,8 @@ bool LX_Init(void)
 
     if(configuration->getOpenGL_Flag() == 1)
     {
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, LX_GL_MAJOR_VERSION);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, LX_GL_MINOR_VERSION);
     }
 
     LX_WindowManager::init();
