@@ -77,7 +77,7 @@ class LX_Configuration
     int fullscreenFlag;
 
     // private functions
-    void assignString(lua_State * state, char *str, int len);
+    void assignString(lua_State * state, char *str, unsigned int len);
     void setFlags(void);
 
     LX_Configuration();

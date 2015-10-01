@@ -172,20 +172,20 @@ void LX_Configuration::destroy()
 
 
 /**
-*   @fn void LX_Configuration::assignString(lua_State * state, char *str, int len)
+*   @fn void LX_Configuration::assignString(lua_State * state, char *str, unsigned int len)
 *
 *   Get the string from the lua stack
 *
 *   @param state The Lua state
 *   @param str The string you will store the extracted string
-*   @param len The length of the string str
+*   @param len The length of the string str (must be at least 2)
 *
 *   @warning If state or str is NULL, a segmentation fault may occur
 *               If len is 0 or less than the string you want to take from the lua state,
 *               the behaviour is undefined.
 *
 */
-void LX_Configuration::assignString(lua_State * state, char *str, int len)
+void LX_Configuration::assignString(lua_State * state, char *str, unsigned int len)
 {
     char *tmp;
     memset(str,0,len);

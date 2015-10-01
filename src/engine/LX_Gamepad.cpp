@@ -159,6 +159,8 @@ const char * LX_Gamepad::getName(void)
 *
 *   Get information about the gamepad
 *
+*   @param str the string to fill information in
+*
 *   @return Always returns a valid string
 */
 const char * LX_Gamepad::toString(char *str)

@@ -70,12 +70,12 @@ namespace LX_TrueTypeFont
 *
 *   This enumeration describes the type of the text you want to draw.
 *
-*   LX_TTF_SOLID : Quick and dirty text
-*   LX_TTF_SHADED : Slow and nice text
-*   LX_TTF_BLENDED : Very slow but very nice text
+*   LX_TTF_SOLID : Quick rendering and dirty text
+*   LX_TTF_SHADED : Slow rendering and nice text
+*   LX_TTF_BLENDED : Very slow rendering but very nice text
 *
 */
-typedef enum {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
+typedef enum LX_TTF_TypeText{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 
 
 

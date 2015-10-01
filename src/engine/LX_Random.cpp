@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <ctime>
 
+#include "LX_Random.hpp"
 
 // If UINT64_C was defined, we undefine it
 #ifdef UINT64_C
@@ -28,9 +29,6 @@ typedef unsigned __int64 uint64_t;
 #else
 #define UINT64_C(val) (val##ULL)    /**< This macro expands to integer constants */
 #endif
-
-#include "LX_Random.hpp"
-
 
 /**
 *	@file LX_Random.cpp
@@ -50,7 +48,7 @@ namespace LX_Random
 *   @fn void initRand(void)
 *
 *   Initializes the random number generator
-*   setting a seed given by the function time()
+*   setting a seed
 *
 */
 void initRand(void)
@@ -62,7 +60,7 @@ void initRand(void)
 /**
 *   @fn uint64_t xorshiftRand(void)
 *
-*   Returns a pseudorandom number between 0 and 2^64 - 1
+*   Returns a pseudorandom number between 0 and (2^64 - 1)
 *
 *   @return An integer value between 0 and 2^64 - 1
 *

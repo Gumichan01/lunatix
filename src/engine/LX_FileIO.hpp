@@ -38,7 +38,6 @@
 #define LX_SEEK_END RW_SEEK_END                                     /**< The end of data */
 
 
-
 struct SDL_Surface;
 
 

@@ -27,8 +27,8 @@
 
 
 // Macros
-#define xorshiftRand100(void) xorshiftRand()%100    /**< Returns a random value between 0 and 100 using the xorshift* generator */
-#define crand100(void) crand()%100                  /**< Returns a random value between 0 and 100 using the standard C generator */
+#define xorshiftRand100(void) xorshiftRand()%100    /**< Xorshift random value between 0 and 100 */
+#define crand100(void) crand()%100                  /**< C random value between 0 and 100 */
 
 
 /**

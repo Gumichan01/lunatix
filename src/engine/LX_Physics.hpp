@@ -44,45 +44,58 @@ struct LX_Vector2D;
 namespace LX_Physics
 {
 
-
-unsigned int euclide_square_distance( int x1, int y1, int x2, int y2);
+//* Distances */
+unsigned int euclide_square_distance(int x1, int y1, int x2, int y2);
+unsigned int euclide_square_distance(LX_Point *p1, LX_Point *p2);
 float euclide_distance(int x1, int y1, int x2, int y2);
-unsigned int euclide_square_distance( LX_Point *p1, LX_Point *p2);
 float euclide_distance(LX_Point *p1, LX_Point *p2);
 
-bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect);             // collision point/AABB
+/* Collision*/
+
+// Point/Rect
+bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect);
 bool collisionPointRect(const LX_Point *p,const LX_AABB *rect);
 
-bool collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle);       // collision point/circle
+// Point/Circle
+bool collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle);
 bool collisionPointCircle(const LX_Point *p, const LX_Circle *circle);
 
-bool collisionRect(const LX_AABB *rect1, const LX_AABB *rect2);                             // collision AABB/AABB
-bool collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2);                   // collision circle/circle
-bool collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);     // collision circle/segment
-bool collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect);                     // collision circle/AABB
+// AABB/AABB ; Circle/Circle ; Circle/Segment; Circle/AABB
+bool collisionRect(const LX_AABB *rect1, const LX_AABB *rect2);
+bool collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2);
+bool collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);
+bool collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect);
 
-
+// Segment/Line ; Segment/Segment
+// A segment is a part of a line, so two point are needed to get a line
 bool intersectSegLine(const LX_Point *A, const LX_Point *B,
-                      const LX_Point *C, const LX_Point *D);                              // collision segment/segment
+                      const LX_Point *C, const LX_Point *D);
 bool intersectSegment(const LX_Point *A, const LX_Point *B,
-                      const LX_Point *C, const LX_Point *D);                              // collision segment/segment
+                      const LX_Point *C, const LX_Point *D);
 
-bool collisionPointPoly(const LX_Point *P, const LX_Polygon *poly);                         // collision point/polygon
-bool collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly);                       // collision circle/polygon
+// Point/Polygon ; Circle/Polygon
+bool collisionPointPoly(const LX_Point *P, const LX_Polygon *poly);
+bool collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly);
 
-bool collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly);                        // collision AABB/polygon
-bool collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2);                       // collision polygon/polygon
+// AABB/Polygon ; Polygon/Polygon
+bool collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly);
+bool collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2);
 
+/* Move the entities */
+
+// Using coordinates
 void movePoint(LX_Point *P, const int vx, const int vy);
 void moveRect(LX_AABB *rect, const int vx, const int vy);
 void moveCircle(LX_Circle *C, const int vx, const int vy);
 void movePoly(LX_Polygon *poly, const int vx, const int vy);
 
+// Using vector2D
 void movePoint(LX_Point *P, const LX_Vector2D *v);
 void moveRect(LX_AABB *rect, const LX_Vector2D *v);
 void moveCircle(LX_Circle *C, const LX_Vector2D *v);
 void movePoly(LX_Polygon *poly, const LX_Vector2D *v);
 
+// Go to a specific position
 void movePointTo(LX_Point *P, const int xpos, const int ypos);
 void moveRectTo(LX_AABB *rect, const int xpos, const int ypos);
 void moveCircleTo(LX_Circle *C, const int xpos, const int ypos);
