@@ -55,15 +55,18 @@ class LX_Particle
     SDL_Texture *texture;           /**< The texture (for the texture rendering) */
     SDL_Surface *surface;           /**< The surface (for the surface rendering) */
 
-    void init(const int x , const int y, const int w, const int h, const int vx, const int vy);
+    void init(const int x , const int y, const int w, const int h,
+              const float vx, const float vy);
 
 public :
 
 
     LX_Particle(const int x , const int y, const int w, const int h);
     LX_Particle(const LX_AABB *b);
-    LX_Particle(const int x , const int y, const int w, const int h, const LX_Vector2D *v);
-    LX_Particle(const int x , const int y, const int w, const int h, const int vx , const int vy);
+    LX_Particle(const int x , const int y, const int w, const int h,
+                const LX_Vector2D *v);
+    LX_Particle(const int x , const int y, const int w, const int h,
+                const float vx , const float vy);
 
     LX_Particle(const LX_AABB *b, const int vx , const int vy);
     LX_Particle(const LX_AABB *b, const LX_Vector2D *v);
@@ -72,7 +75,7 @@ public :
 
     bool setTexture(LX_FileBuffer *buffer, const unsigned int id=0);
     bool setSurface(LX_FileBuffer *buffer);
-    void setSpeed(int x,int y);
+    void setSpeed(float x,float y);
 
     bool isDead(void);
 

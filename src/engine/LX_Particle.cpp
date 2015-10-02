@@ -88,7 +88,8 @@ LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
 
 
 /**
-*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w, const int h, const int vx, const int vy)
+*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w,
+*                                const int h, const float vx, const float vy)
 *
 *   Create the instance using coordinates, width, height and the velocity
 *
@@ -101,7 +102,7 @@ LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
 *
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w,
-                         const int h, const int vx , const int vy)
+                         const int h, const float vx , const float vy)
 {
     init(x,y,w,h,vx,vy);
 }
@@ -139,7 +140,8 @@ LX_Particle::LX_Particle(const LX_AABB *b, const LX_Vector2D *v)
 
 
 /**
-*   @fn LX_Particle::init(const int x , const int y, const int w, const int h, const int vx, const int vy)
+*   @fn LX_Particle::init(const int x , const int y, const int w, const int h,
+*                         const float vx, const float vy)
 *
 *   This private function initializes the particle
 *
@@ -155,7 +157,7 @@ LX_Particle::LX_Particle(const LX_AABB *b, const LX_Vector2D *v)
 *
 */
 void LX_Particle::init(const int x , const int y, const int w,
-                       const int h, const int vx, const int vy)
+                       const int h, const float vx, const float vy)
 {
     box = {x,y,w,h};
     velocity = {vx,vy};
@@ -261,7 +263,7 @@ bool LX_Particle::isDead(void)
 
 
 /**
-*   @fn void LX_Particle::setSpeed(int x,int y)
+*   @fn void LX_Particle::setSpeed(float x,float y)
 *
 *   Set the velocity
 *
@@ -271,7 +273,7 @@ bool LX_Particle::isDead(void)
 *   @note This function is very useful to set gravity or acceleration
 *
 */
-void LX_Particle::setSpeed(int x,int y)
+void LX_Particle::setSpeed(float x,float y)
 {
     velocity = {x, y};
 }
