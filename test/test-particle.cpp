@@ -120,6 +120,7 @@ int main(int argc, char **argv)
 
     Dot *dot;
     LX_Window *w = NULL;
+    Uint32 begin_time;
 
     bool err = LX_Init();
 
@@ -154,7 +155,9 @@ int main(int argc, char **argv)
     SDL_Event e;
     int go = 1;
 
-    while(go == 1)
+    begin_time = SDL_GetTicks();
+
+    while(go == 1 &&  ((SDL_GetTicks() - begin_time) < 4000))
     {
         while(SDL_PollEvent(&e))
         {
