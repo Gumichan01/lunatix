@@ -76,24 +76,29 @@ public :
 *
 *   @note By default, the constructor retrieves information from the configuration file
 *
-*   @warning The LX_Window class must be defined only after you initialized the engine (calling LX_Init())
+*   @warning The LX_Window class must be defined only after
+*               you initialized the engine (calling LX_Init())
 *   @warning A LX_WindowException may be occured if the window creation fails
 *
 */
 class LX_Window
 {
 
-    SDL_Window *window;     /**< The internal window structure */
-    SDL_Renderer *renderer; /**< The main renderer */
+    SDL_Window *window;         /**< The internal window structure */
+    SDL_Renderer *renderer;     /**< The main renderer */
 
-    int originalWidth;      /**< The width of the window */
-    int originalHeight;     /**< The height of the window */
+    int original_width;         /**< The width of the window */
+    int original_height;        /**< The height of the window */
+    bool render_mode;          /**< Use Surface or Rendering */
 
     void init(std::string title, int posX, int posY, int w, int h,
               const Uint32 mode, Uint32 flag, bool accel = true);
     void init2(void);
 
     void createRendering(bool accel);
+
+    bool screenshotUsingRenderer(std::string& filename);
+    bool screenshotUsingSurface(std::string& filename);
 
 public :
 
@@ -121,13 +126,14 @@ public :
     void clearWindow(void);
     void clearRenderer(void);
 
+    bool screenshot(std::string filename);
+
     SDL_Renderer * getRenderer(void);
     SDL_Surface * getSurface(void);
     SDL_Window * getWindow(void);
 
     int getWidth(void);
     int getHeight(void);
-
 
     ~LX_Window();
 };

@@ -21,11 +21,37 @@
 
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_endian.h>
 
 #include "LX_Config.hpp"
 #include "LX_Window.hpp"
 #include "LX_Error.hpp"
 
+#define LX_ARGB_DEPTH 32                            /* Pixel depth in bits */
+
+/*
+*   Define the mask for the surface creation
+*   when the screenshot will be done
+*/
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+#define LX_PIXEL_FORMAT SDL_PIXELFORMAT_RGBA8888
+
+static const Uint32 rmask = 0xff000000;
+static const Uint32 gmask = 0x00ff0000;
+static const Uint32 bmask = 0x0000ff00;
+static const Uint32 amask = 0x000000ff;
+
+#else
+#define LX_PIXEL_FORMAT SDL_PIXELFORMAT_ABGR8888
+
+static const Uint32 rmask = 0x000000ff;
+static const Uint32 gmask = 0x0000ff00;
+static const Uint32 bmask = 0x00ff0000;
+static const Uint32 amask = 0xff000000;
+
+#endif
 
 
 namespace LX_Graphics
@@ -115,6 +141,8 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
+    else
+        render_mode = false;
 
     init2();
 }
@@ -180,6 +208,8 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
+    else
+        render_mode = false;
 
     init2();
 }
@@ -219,29 +249,8 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 }
 
 
-/**
-*   @fn LX_Window::init(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
-*
-*   Create the window with custom configuration
-*
-*   @param title The title of the window
-*   @param posX The X position of the window on the monitor
-*   @param posY The Y position of the window on the monitor
-*   @param w The width of the window
-*   @param h The height of the window
-*   @param mode The display mode
-*           - LX_WINDOW_SURFACE : to use surfaces
-*           - LX_WINDOW_RENDERING : to use the renderer
-*   @param flag It is the same kind of flag used in LX_Window::LX_Window()
-*
-*   @param accel Tag that selects the rendering mode
-*           - TRUE : Use hardware acceleration
-*           - FALSE : Use software fallback
-*
-*   @note This constructor does not use the LX_config class
-*
-*   @exception LX_WindowException
-*
+/*
+*   Initialize the window with custom configuration
 */
 void LX_Window::init(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
@@ -254,21 +263,20 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h,
 
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
+    else
+        render_mode = false;
 
     init2();
 }
 
 
-/**
-*   @fn LX_Window::init2(void)
-*
+/*
 *   Initialize internal variables
-*
 */
 void LX_Window::init2(void)
 {
-    originalWidth = getWidth();
-    originalHeight = getHeight();
+    original_width = getWidth();
+    original_height = getHeight();
 }
 
 
@@ -283,15 +291,20 @@ void LX_Window::createRendering(bool accel)
     else
         renderFlag = SDL_RENDERER_SOFTWARE;
 
-    if(config->getVideoFlag())
-    {
-        if(config->getVSyncFlag())
-        {
-            renderFlag |= SDL_RENDERER_PRESENTVSYNC;
-        }
-    }
+    // Video flag and VSync flag actives -> add the option
+    if(config->getVideoFlag() && config->getVSyncFlag())
+        renderFlag |= SDL_RENDERER_PRESENTVSYNC;
 
     renderer = SDL_CreateRenderer(window,-1,renderFlag);
+
+    if(renderer == NULL)
+    {
+        std::string err_msg = "rendering creation: ";
+        err_msg = err_msg + LX_GetError();
+        LX_SetError(err_msg.c_str());
+    }
+
+    render_mode = true;     // The render_mode is active
 }
 
 /**
@@ -460,7 +473,7 @@ void LX_Window::setFullscreen(Uint32 flag)
 
     if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
     {
-        setWindowSize(originalWidth,originalHeight);
+        setWindowSize(original_width,original_height);
     }
 }
 
@@ -522,6 +535,74 @@ void LX_Window::clearRenderer(void)
 {
     SDL_RenderClear(renderer);
 }
+
+
+/**
+    @fn bool LX_Window::screenshot(std::string filename)
+
+    Save a screenshot in a file
+
+    @return TRUE on succes, FALSE otherwise
+
+*/
+bool LX_Window::screenshot(std::string filename)
+{
+    bool success = false;
+
+    if(render_mode)
+    {
+        // The window uses the renderer
+        success = screenshotUsingRenderer(filename);
+    }
+    else
+    {
+        // The window uses the surface
+        success = screenshotUsingSurface(filename);
+    }
+
+    return success;
+}
+
+
+bool LX_Window::screenshotUsingRenderer(std::string& filename)
+{
+    int err = 0;
+    SDL_Surface *sshot = NULL;
+
+    sshot = SDL_CreateRGBSurface(0,getWidth(),getHeight(),
+                                 LX_ARGB_DEPTH,rmask,gmask,bmask,amask);
+
+    if(sshot == NULL)
+        return false;
+
+    err = SDL_RenderReadPixels(renderer,NULL,LX_PIXEL_FORMAT,
+                               sshot->pixels,sshot->pitch);
+
+    if(err == -1)
+    {
+        // Cannot read the pixels from the renderer
+        SDL_FreeSurface(sshot);
+        return false;
+    }
+
+    err = IMG_SavePNG(sshot,filename.c_str());
+    SDL_FreeSurface(sshot);
+
+    return err == 0;
+}
+
+
+bool LX_Window::screenshotUsingSurface(std::string& filename)
+{
+    SDL_Surface *sshot = NULL;
+    sshot = getSurface();   // Get the main surface of the window
+
+    if(sshot == NULL)
+        return false;
+
+    return(IMG_SavePNG(sshot,filename.c_str()) == 0);
+}
+
 
 
 /**

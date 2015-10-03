@@ -31,7 +31,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
 
-    LX_Window *win = new LX_Window("Test window",LX_WINDOW_RENDERING);
+    LX_Window *win = new LX_Window("Hello #1",LX_WINDOW_RENDERING);
     w = win;
 
     test_window1(w);
@@ -73,14 +73,16 @@ void test_window1(LX_Window *win)
     else
         cout << "SUCCESS - the renderer is ready" << endl;
 
-
     cout << " = END TEST = " << endl;
 }
 
 
 void test_window2(void)
 {
-    LX_Window win2("Hello",512,128,64,32,LX_WINDOW_RENDERING,SDL_WINDOW_SHOWN);
+    const int w = 256;
+    const int h = 256;
+
+    LX_Window win2("Hello #2",12,128,w,h,LX_WINDOW_RENDERING,SDL_WINDOW_SHOWN);
 
     cout << " = TEST 2 window = " << endl;
 
@@ -95,25 +97,30 @@ void test_window2(void)
         cout << "SUCCESS - the renderer is ready" << endl;
 
 
-    if(win2.getWidth() != 64)
-        cerr << "FAILURE - width ; expected : 64; got: " << win2.getWidth() << endl;
+    if(win2.getWidth() != w)
+        cerr << "FAILURE - width ; expected : " << w << "; got: " << win2.getWidth() << endl;
     else
-        cout << "SUCCESS - width 64" << endl;
+        cout << "SUCCESS - width " << w << endl;
 
 
-    if(win2.getHeight() != 32)
-        cerr << "FAILURE - height ; expected : 32; got: " << win2.getHeight() << endl;
+    if(win2.getHeight() != h)
+        cerr << "FAILURE - height ; expected : " << h << "; got: " << win2.getHeight() << endl;
     else
-        cout << "SUCCESS - height 32" << endl;
+        cout << "SUCCESS - height " << h << endl;
 
     cout << " = END TEST = " << endl;
 
+    SDL_Delay(750);
 }
 
 
 void test_surface(void)
 {
-    LX_Window win3("Hello",512,128,256,256,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
+    const int w = 512;
+    const int h = 256;
+
+    bool screen_ok;
+    LX_Window win3("Hello #3",448,128,w,h,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
     std::string name = "data/cb.bmp";
     SDL_Surface *sf = NULL;
     SDL_Rect pos = {100,100,150,120};
@@ -125,23 +132,31 @@ void test_surface(void)
     else
         cout << "SUCCESS - the window is ready" << endl;
 
+    /*
+    *   Is the surface mode initialized?
+    *   If LX_WINDOW_SURFACE was made,
+    *   then getSurface must return a valid surface
+    */
     if(win3.getSurface() == NULL)
         cerr << "FAILURE - the surface was not initialized" << endl;
     else
         cout << "SUCCESS - the surface is ready" << endl;
 
 
-    if(win3.getWidth() != 256)
-        cerr << "FAILURE - width ; expected : 64; got: " << win3.getWidth() << endl;
+    if(win3.getWidth() != w)
+        cerr << "FAILURE - width ; expected : " << w
+        << "; got: " << win3.getWidth() << endl;
     else
-        cout << "SUCCESS - width 64" << endl;
+        cout << "SUCCESS - width " << w << endl;
 
 
-    if(win3.getHeight() != 256)
-        cerr << "FAILURE - height ; expected : 32; got: " << win3.getHeight() << endl;
+    if(win3.getHeight() != h)
+        cerr << "FAILURE - height ; expected : " << h
+        << "; got: " << win3.getHeight() << endl;
     else
-        cout << "SUCCESS - height 32" << endl;
+        cout << "SUCCESS - height " << h << endl;
 
+    // Load the surface and test its validity
     sf = loadSurface(name.c_str());
 
     if(sf == NULL)
@@ -149,14 +164,26 @@ void test_surface(void)
     else
         cout << "SUCCESS - the surface was loaded with success" << endl;
 
-
+    // Is the surface put on the window
     if(win3.putSurface(sf,NULL,&pos) == false)
         cerr << "FAILURE - failed to put the surface " << LX_GetError() << endl;
     else
         cout << "SUCCESS - surface on the window" << endl;
 
+    // Update the window
     win3.updateWindow();
-    SDL_Delay(1000);
+
+    // take a screenshot
+    screen_ok = win3.screenshot("win-surface.png");
+
+    if(screen_ok == false)
+        cerr << "FAILURE - failed to take a screenshot of the surface "
+        << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - screenshot token from a surface" << endl;
+
+
+    SDL_Delay(750);
     win3.clearWindow();
     SDL_FreeSurface(sf);
 
@@ -166,7 +193,7 @@ void test_surface(void)
 
 void test_rendering(LX_Window *win)
 {
-
+    bool screen_ok;
     std::string name = "data/cb.bmp";
 
     SDL_Surface *sf = NULL;
@@ -183,6 +210,12 @@ void test_rendering(LX_Window *win)
     }
     else
         cout << "SUCCESS - The window exists" << endl;
+
+    if(win->getRenderer() == NULL)
+        cerr << "FAILURE - the renderer was not initialized" << endl;
+    else
+        cout << "SUCCESS - the renderer is ready" << endl;
+
 
     sf = loadSurface(name.c_str());
     st = SDL_CreateTextureFromSurface(win->getRenderer(),sf);
@@ -201,7 +234,7 @@ void test_rendering(LX_Window *win)
 
 
     win->updateRenderer();
-    SDL_Delay(1000);
+    SDL_Delay(750);
     win->clearRenderer();
 
 
@@ -211,7 +244,17 @@ void test_rendering(LX_Window *win)
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
 
     win->updateRenderer();
-    SDL_Delay(1000);
+
+    // Take a screenshot
+    screen_ok = win->screenshot("win-renderer.png");
+
+    if(screen_ok == false)
+        cerr << "FAILURE - failed to take a screenshot of the renderer"
+        << LX_GetError() << endl;
+    else
+        cout << "SUCCESS - screenshot token from the renderer" << endl;
+
+    SDL_Delay(500);
     win->clearRenderer();
 
     SDL_DestroyTexture(st);
@@ -227,7 +270,7 @@ void test_winManager(LX_Window *win)
     SDL_Texture *st = NULL;
     SDL_Rect pos = {100,100,150,120};
 
-    unsigned int id = 0;
+    int id = 0;
 
     cout << " = TEST WinManager = " << endl;
 

@@ -16,5 +16,6 @@ make test -r -j -f Makefile;
 ./test-ttf;
 ./test-file;
 ./test-particle;
+rm *.png
 make clean-test -f Makefile;
 
