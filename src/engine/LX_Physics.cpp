@@ -271,7 +271,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
     BC.vx = O.x - B->x;
     BC.vy = O.y - B->y;
 
-    scal1 = scalar_product(&AB,&AC);
+    scal1 = scalar_product(AB,AC);
     // I use the opposite value of vx
     scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
 
@@ -279,7 +279,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
         return false;
 
     // Find the projection point of O
-    scal = scalar_product(&AB,&AB);
+    scal = scalar_product(AB,AB);
     sum = static_cast<int>(scal);
 
     if(sum == 0)        // A and B are the same point
@@ -373,7 +373,7 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
     AD.vx = D->x - A->x;
     AD.vy = D->y - A->y;
 
-    d = vector_product(&AB,&AD) * vector_product(&AB,&AC);
+    d = vector_product(AB,AD) * vector_product(AB,AC);
 
     return (d <= 0);
 }

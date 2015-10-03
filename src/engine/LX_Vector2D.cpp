@@ -26,7 +26,7 @@
 
 
 /**
-*   @fn float scalar_product(LX_Vector2D *u,LX_Vector2D *v)
+*   @fn float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Calculate the scalar product of 2 vectors
 *
@@ -36,14 +36,14 @@
 *   @return The scalar product
 *
 */
-float scalar_product(LX_Vector2D *u,LX_Vector2D *v)
+float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 {
-    return (u->vx * v->vx) + (u->vy * v->vy);
+    return (u.vx * v.vx) + (u.vy * v.vy);
 }
 
 
 /**
-*   @fn float vector_product(LX_Vector2D *u,LX_Vector2D *v)
+*   @fn float vector_product(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Calculate the vector product of 2 vectors
 *
@@ -53,14 +53,14 @@ float scalar_product(LX_Vector2D *u,LX_Vector2D *v)
 *   @return The vector product
 *
 */
-float vector_product(LX_Vector2D *u,LX_Vector2D *v)
+float vector_product(LX_Vector2D& u,LX_Vector2D& v)
 {
-    return (u->vx * v->vy) - (v->vx * u->vy);
+    return (u.vx * v.vy) - (v.vx * u.vy);
 }
 
 
 /**
-*   @fn float vector_norm(LX_Vector2D *u)
+*   @fn float vector_norm(LX_Vector2D& u)
 *
 *   Calculate the norm of a vector
 *
@@ -69,7 +69,7 @@ float vector_product(LX_Vector2D *u,LX_Vector2D *v)
 *   @return The norm of the vector
 *
 */
-float vector_norm(LX_Vector2D *u)
+float vector_norm(LX_Vector2D& u)
 {
     return sqrt(scalar_product(u,u));
 }

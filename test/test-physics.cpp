@@ -398,14 +398,14 @@ void test_Vector2D(void)
 
     cout << " = TEST Vector2D = " << endl;
 
-    d = scalar_product(&v,&u);
+    d = scalar_product(v,u);
 
     if(d != 0)
         cerr << "FAILURE - scalar product v(1,2).u(2,-1) expected: 0 ; got: " << d << endl;
     else
         cout << "SUCCESS - scalar product v(1,2).u(2,-1) = 0" << endl;
 
-    d = scalar_product(&z,&z);
+    d = scalar_product(z,z);
 
     if(d != 0)
         cerr << "FAILURE - scalar product z.z (z is a null vector) expected: 0 ; got: " << d << endl;
@@ -413,7 +413,7 @@ void test_Vector2D(void)
         cout << "SUCCESS - scalar product z.z = 0" << endl;
 
 
-    d = vector_norm(&z);
+    d = vector_norm(z);
 
     if(d != 0)
         cerr << "FAILURE - norm of z (z is a null vector) expected: 0 ; got: " << d << endl;
@@ -421,7 +421,7 @@ void test_Vector2D(void)
         cout << "SUCCESS - norm of z = 0" << endl;
 
 
-    d = vector_norm(&v);
+    d = vector_norm(v);
 
     if(d != ((int) sqrt(5)) )
         cerr << "FAILURE - norm of v expected: "<< ((int) sqrt(5)) <<" ; got: " << d << endl;
@@ -429,7 +429,7 @@ void test_Vector2D(void)
         cout << "SUCCESS - norm of v = 0" << endl;
 
 
-    d = vector_product(&v,&u);
+    d = vector_product(v,u);
 
     if(d != -5)
         cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -3 ; got: " << d << endl;
@@ -437,7 +437,7 @@ void test_Vector2D(void)
         cout << "SUCCESS - vector product v(1,2).u(2,-1) = -3" << endl;
 
 
-    d = vector_product(&u,&v);
+    d = vector_product(u,v);
 
     if(d != 5)
         cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 3 ; got: " << d << endl;
@@ -445,7 +445,7 @@ void test_Vector2D(void)
         cout << "SUCCESS - vector product u(2,-1).v(1,2) = 3" << endl;
 
 
-    d = vector_product(&z,&z);
+    d = vector_product(z,z);
 
     if(d != 0)
         cerr << "FAILURE - vector product z.z (z is a null vector) expected: 0 ; got: " << d << endl;

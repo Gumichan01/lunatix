@@ -225,7 +225,7 @@ void LX_Polygon::convexity(void)
             OB.vy = points[i+1].y - points[i].y;
         }
 
-        cross_product = static_cast<int>(vector_product(&AO,&OB));
+        cross_product = static_cast<int>(vector_product(AO,OB));
 
         if(!haveSign)
         {
