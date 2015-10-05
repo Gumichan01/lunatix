@@ -48,7 +48,7 @@ It is possible the engine does not compile with Visual C++
 ### Warning/Information ###
 
  - It is possible you get an issue if you use a recent version of Lua on Linux.
- - The program uses the compiled Lua file, (the .luac file created during the program builing), not the script.
+ - The program uses the compiled Lua file, (the .luac file created during the program building), not the script.
  - A shared Lua library file (.so file) on Linux is provided. It uses Lua 5.1
 
 ### Build the program ###
@@ -77,8 +77,9 @@ into your project tree :
 It is very important to keep the engine hierarchy. If you do not respect that  
 the engine will not work correctly.
 
-After that, create a directory with a name like *LunatiX/* into *include/* and  
-copy all the .hpp files of the engine on *include/LunatiX/*.
+After that, create a directory with a name like *LunatiX/* into the *include/*  
+directory of your project tree and copy all the .hpp files of the engine  
+in *include/LunatiX/*.
 
 Finally, copy the shared libraries in *lib/linux*
 
