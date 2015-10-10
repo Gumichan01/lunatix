@@ -673,7 +673,7 @@ void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 
 
 /**
-*   @fn void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D *v)
+*   @fn void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D& v)
 *
 *   Move a point to a direction using the vector
 *
@@ -681,14 +681,14 @@ void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D *v)
+void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D& v)
 {
-    movePoint(P,v->vx,v->vy);
+    movePoint(P,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D *v)
+*   @fn void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D& v)
 *
 *   Move an AABB to a direction using the vector
 *
@@ -696,14 +696,14 @@ void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D *v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D *v)
+void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D& v)
 {
-    moveRect(rect,v->vx,v->vy);
+    moveRect(rect,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D *v)
+*   @fn void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
 *
 *   Move the circle to a direction using the vector
 *
@@ -711,9 +711,9 @@ void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D *v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D *v)
+void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
 {
-    moveCircle(C,v->vx,v->vy);
+    moveCircle(C,v.vx,v.vy);
 }
 
 
@@ -726,9 +726,9 @@ void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D *v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D *v)
+void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D& v)
 {
-    movePoly(poly,v->vx,v->vy);
+    movePoly(poly,v.vx,v.vy);
 }
 
 

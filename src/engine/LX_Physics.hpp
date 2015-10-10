@@ -90,10 +90,10 @@ void moveCircle(LX_Circle *C, const int vx, const int vy);
 void movePoly(LX_Polygon *poly, const int vx, const int vy);
 
 // Using vector2D
-void movePoint(LX_Point *P, const LX_Vector2D *v);
-void moveRect(LX_AABB *rect, const LX_Vector2D *v);
-void moveCircle(LX_Circle *C, const LX_Vector2D *v);
-void movePoly(LX_Polygon *poly, const LX_Vector2D *v);
+void movePoint(LX_Point *P, const LX_Vector2D& v);
+void moveRect(LX_AABB *rect, const LX_Vector2D& v);
+void moveCircle(LX_Circle *C, const LX_Vector2D& v);
+void movePoly(LX_Polygon *poly, const LX_Vector2D& v);
 
 // Go to a specific position
 void movePointTo(LX_Point *P, const int xpos, const int ypos);
