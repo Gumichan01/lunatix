@@ -44,7 +44,7 @@ static LX_Configuration *instance;
 */
 LX_ConfigurationException::LX_ConfigurationException(std::string err)
 {
-    str_err = err;
+    stringError = err;
 }
 
 
@@ -58,7 +58,7 @@ LX_ConfigurationException::LX_ConfigurationException(std::string err)
 */
 const char * LX_ConfigurationException::what() const throw()
 {
-    return str_err.c_str();
+    return stringError.c_str();
 }
 
 

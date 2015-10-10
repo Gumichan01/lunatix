@@ -39,7 +39,7 @@ namespace LX_FileIO
 */
 IOException::IOException(std::string err)
 {
-    str_err = err;
+    stringError = err;
 }
 
 
@@ -53,7 +53,7 @@ IOException::IOException(std::string err)
 */
 const char * IOException::what() const throw()
 {
-    return str_err.c_str();
+    return stringError.c_str();
 }
 
 

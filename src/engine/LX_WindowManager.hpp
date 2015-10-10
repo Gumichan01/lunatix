@@ -43,7 +43,7 @@ class LX_WindowManager
 {
 
     unsigned int size;
-    unsigned int nb_windows;
+    unsigned int nbWin;
     LX_Window *windows[LX_NBMAX_WINDOWS];
 
     LX_WindowManager();
@@ -58,7 +58,7 @@ public:
     int addWindow(LX_Window *w);
     LX_Window * removeWindow(unsigned int id);
 
-    unsigned int nbWindow(void);
+    unsigned int nbWindows(void);
 
     LX_Window * getWindow(unsigned int id);
 

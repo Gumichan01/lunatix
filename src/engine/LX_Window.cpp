@@ -68,7 +68,7 @@ namespace LX_Graphics
 */
 LX_WindowException::LX_WindowException(std::string err)
 {
-    str_err = err;
+    stringError = err;
 }
 
 
@@ -81,7 +81,7 @@ LX_WindowException::LX_WindowException(std::string err)
 */
 const char * LX_WindowException::what() const throw()
 {
-    return str_err.c_str();
+    return stringError.c_str();
 }
 
 
@@ -142,7 +142,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        render_mode = false;
+        renderMode = false;
 
     init2();
 }
@@ -209,7 +209,7 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        render_mode = false;
+        renderMode = false;
 
     init2();
 }
@@ -264,7 +264,7 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h,
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        render_mode = false;
+        renderMode = false;
 
     init2();
 }
@@ -275,8 +275,8 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h,
 */
 void LX_Window::init2(void)
 {
-    original_width = getWidth();
-    original_height = getHeight();
+    originalWidth = getWidth();
+    originalHeight = getHeight();
 }
 
 
@@ -304,7 +304,7 @@ void LX_Window::createRendering(bool accel)
         LX_SetError(err_msg.c_str());
     }
 
-    render_mode = true;     // The render_mode is active
+    renderMode = true;     // The render_mode is active
 }
 
 /**
@@ -473,7 +473,7 @@ void LX_Window::setFullscreen(Uint32 flag)
 
     if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
     {
-        setWindowSize(original_width,original_height);
+        setWindowSize(originalWidth,originalHeight);
     }
 }
 
@@ -549,7 +549,7 @@ bool LX_Window::screenshot(std::string filename)
 {
     bool success = false;
 
-    if(render_mode)
+    if(renderMode)
     {
         // The window uses the renderer
         success = screenshotUsingRenderer(filename);

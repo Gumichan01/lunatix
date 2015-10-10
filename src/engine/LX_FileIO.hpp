@@ -62,7 +62,7 @@ namespace LX_FileIO
 class IOException: public std::exception
 {
 
-    std::string str_err;
+    std::string stringError;
 
 public :
 

@@ -41,7 +41,7 @@ using namespace std;
 class LX_ConfigurationException : public exception
 {
 
-    string str_err;
+    string stringError;
 
 public :
 

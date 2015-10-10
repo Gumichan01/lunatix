@@ -56,7 +56,7 @@ namespace LX_Graphics
 */
 class LX_WindowException : public std::exception
 {
-    std::string str_err;
+    std::string stringError;
 
 public :
 
@@ -87,9 +87,9 @@ class LX_Window
     SDL_Window *window;         /**< The internal window structure */
     SDL_Renderer *renderer;     /**< The main renderer */
 
-    int original_width;         /**< The width of the window */
-    int original_height;        /**< The height of the window */
-    bool render_mode;          /**< Use Surface or Rendering */
+    int originalWidth;         /**< The width of the window */
+    int originalHeight;        /**< The height of the window */
+    bool renderMode;          /**< Use Surface or Rendering */
 
     void init(std::string title, int posX, int posY, int w, int h,
               const Uint32 mode, Uint32 flag, bool accel = true);

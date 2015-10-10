@@ -99,7 +99,7 @@ void LX_WindowManager::destroy(void)
 */
 LX_WindowManager::~LX_WindowManager()
 {
-    if(nb_windows != 0)
+    if(nbWin != 0)
     {
         for(unsigned int i = 0; i < size; i++)
         {
@@ -118,7 +118,7 @@ LX_WindowManager::~LX_WindowManager()
 LX_WindowManager::LX_WindowManager()
 {
     size = 0;
-    nb_windows = 0;
+    nbWin = 0;
     memset(windows,0,LX_NBMAX_WINDOWS);
 }
 
@@ -146,7 +146,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
     id = size;
 
     size++;
-    nb_windows += 1;
+    nbWin += 1;
 
     return id;
 }
@@ -174,23 +174,23 @@ LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 
     w = windows[id];
     windows[id] = NULL;
-    nb_windows -= 1;
+    nbWin -= 1;
 
     return w;
 }
 
 
 /**
-*   @fn unsigned int LX_WindowManager::nbWindow()
+*   @fn unsigned int LX_WindowManager::nbWindow(void)
 *
 *   Count the number of opened windows
 *
 *   @return The number of opened windows
 *
 */
-unsigned int LX_WindowManager::nbWindow()
+unsigned int LX_WindowManager::nbWindows(void)
 {
-    return nb_windows;
+    return nbWin;
 }
 
 
