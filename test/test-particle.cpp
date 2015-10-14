@@ -6,7 +6,7 @@
 #include <ctime>
 #include <cassert>
 
-#include "../src/engine/Lunatix_engine.hpp"
+#include <LunatiX/Lunatix_engine.hpp>
 
 //#define DEBUG_MAIN_TEST
 

@@ -4,8 +4,8 @@
 
 #include <iostream>
 
-#include "../src/engine/Lunatix_engine.hpp"
-#include "../src/engine/LX_Vector2D.hpp"
+#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
 
 using namespace std;
 using namespace LX_Physics;

@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstring>
 
-#include "../src/engine/Lunatix_engine.hpp"
+#include <LunatiX/Lunatix_engine.hpp>
 
 
 #define N 4

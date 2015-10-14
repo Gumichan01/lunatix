@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "../src/engine/Lunatix_engine.hpp"
+#include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
 

@@ -1,10 +1,11 @@
 #!/bin/sh
 
 #
-# This script will help you to laucnh some tests on the engine
+# This script will help you to launch some tests on the engine
 #
 # It only works on Linux system.
 #
+
 
 make test -r -j -f Makefile;
 ./test-init;
@@ -16,6 +17,6 @@ make test -r -j -f Makefile;
 ./test-ttf;
 ./test-file;
 ./test-particle;
-rm *.png
+rm win-*.png
 make clean-test -f Makefile;
 
