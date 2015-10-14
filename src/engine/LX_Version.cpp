@@ -18,7 +18,7 @@
 *
 */
 
-#include "LX_Version.hpp"
+#include <LunatiX/LX_Version.hpp>
 
 
 #define LX_MAJOR_VERSION 0      /**< The major version of the engine */

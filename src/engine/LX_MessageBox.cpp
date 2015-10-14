@@ -19,7 +19,7 @@
 */
 
 
-#include "LX_MessageBox.hpp"
+#include <LunatiX/LX_MessageBox.hpp>
 
 
 /**

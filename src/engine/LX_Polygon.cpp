@@ -21,10 +21,10 @@
 
 #include <new>
 
-#include "LX_Hitbox.hpp"
-#include "LX_Polygon.hpp"
-#include "LX_Vector2D.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_Hitbox.hpp>
+#include <LunatiX/LX_Polygon.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 using namespace std;
 

@@ -20,8 +20,8 @@
 */
 
 
-#include "LX_Gamepad.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_Gamepad.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 
 namespace LX_Device

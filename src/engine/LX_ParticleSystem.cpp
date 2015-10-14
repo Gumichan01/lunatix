@@ -22,11 +22,11 @@
 #include <new>
 #include <cstring>
 
-#include "LX_WindowManager.hpp"
-#include "LX_Window.hpp"
-#include "LX_ParticleSystem.hpp"
-#include "LX_Particle.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_WindowManager.hpp>
+#include <LunatiX/LX_Window.hpp>
+#include <LunatiX/LX_ParticleSystem.hpp>
+#include <LunatiX/LX_Particle.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 using namespace std;
 using namespace LX_Graphics;

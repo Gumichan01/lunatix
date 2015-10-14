@@ -22,7 +22,7 @@
 
 #include <cmath>
 
-#include "LX_Vector2D.hpp"
+#include <LunatiX/LX_Vector2D.hpp>
 
 
 /**

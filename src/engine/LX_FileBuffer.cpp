@@ -23,9 +23,9 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "LX_FileIO.hpp"
-#include "LX_FileBuffer.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_FileIO.hpp>
+#include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 
 namespace LX_FileIO

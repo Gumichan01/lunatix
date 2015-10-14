@@ -24,9 +24,9 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_endian.h>
 
-#include "LX_Config.hpp"
-#include "LX_Window.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_Config.hpp>
+#include <LunatiX/LX_Window.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 #define LX_ARGB_DEPTH 32                            /* Pixel depth in bits */
 

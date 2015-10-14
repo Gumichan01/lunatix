@@ -22,8 +22,8 @@
 
 #include <SDL2/SDL_image.h>
 
-#include "LX_FileIO.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_FileIO.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 
 namespace LX_FileIO

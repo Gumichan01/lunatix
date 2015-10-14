@@ -22,8 +22,8 @@
 */
 
 
-#include "LX_Music.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_Music.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 
 namespace LX_Mixer

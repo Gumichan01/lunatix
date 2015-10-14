@@ -24,8 +24,8 @@
 
 #include <SDL2/SDL_cpuinfo.h>
 
-#include "LX_SystemInfo.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_SystemInfo.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 
 using namespace std;

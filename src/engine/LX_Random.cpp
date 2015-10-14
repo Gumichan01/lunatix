@@ -15,7 +15,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "LX_Random.hpp"
+#include <LunatiX/LX_Random.hpp>
 
 // If UINT64_C was defined, we undefine it
 #ifdef UINT64_C

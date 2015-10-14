@@ -18,7 +18,7 @@
 *
 */
 
-#include "LX_Haptic.hpp"
+#include <LunatiX/LX_Haptic.hpp>
 
 
 namespace LX_Device

@@ -22,11 +22,11 @@
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_render.h>
 
-#include "LX_Particle.hpp"
-#include "LX_Physics.hpp"
-#include "LX_Graphics.hpp"
-#include "LX_Random.hpp"
-#include "LX_FileBuffer.hpp"
+#include <LunatiX/LX_Particle.hpp>
+#include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Graphics.hpp>
+#include <LunatiX/LX_Random.hpp>
+#include <LunatiX/LX_FileBuffer.hpp>
 
 using namespace LX_FileIO;
 using namespace LX_Graphics;

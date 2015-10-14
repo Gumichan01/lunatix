@@ -25,8 +25,8 @@
 #include <exception>
 #include <sstream>
 
-#include "LX_Config.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_Config.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 
 // unique instance

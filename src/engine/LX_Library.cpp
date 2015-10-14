@@ -19,11 +19,11 @@
 *
 */
 
-#include "LX_Library.hpp"
-#include "LX_Config.hpp"
-#include "LX_Mixer.hpp"
-#include "LX_Error.hpp"
-#include "LX_WindowManager.hpp"
+#include <LunatiX/LX_Library.hpp>
+#include <LunatiX/LX_Config.hpp>
+#include <LunatiX/LX_Mixer.hpp>
+#include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_WindowManager.hpp>
 
 
 using namespace LX_Graphics;

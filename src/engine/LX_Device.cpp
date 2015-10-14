@@ -24,8 +24,8 @@
 
 #include <SDL2/SDL_mouse.h>
 
-#include "LX_Device.hpp"
-#include "LX_Error.hpp"
+#include <LunatiX/LX_Device.hpp>
+#include <LunatiX/LX_Error.hpp>
 
 using namespace std;
 
