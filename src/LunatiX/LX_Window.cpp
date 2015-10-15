@@ -1,5 +1,4 @@
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -90,7 +89,7 @@ LX_WindowException::~LX_WindowException() throw() {}
 
 
 /**
-*   @fn LX_Window::LX_Window(const Uint32 mode)
+*   @fn LX_Window::LX_Window(const Uint32 mode, bool accel)
 *
 *   Create the window with the default configuration
 *
@@ -149,7 +148,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
 
 /**
-*   @fn LX_Window::LX_Window(std::string title, const Uint32 mode)
+*   @fn LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *
 *   Create the window setting the title
 *
@@ -186,7 +185,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 
 
 /**
-*   @fn LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode)
+*   @fn LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 *
 *   Create the window with an already set window
 *
@@ -216,7 +215,8 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 
 
 /**
-*   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h, const Uint32 mode, Uint32 flag)
+*   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
+*                               const Uint32 mode, Uint32 flag, bool accel)
 *
 *   Create the window with custom configuration
 *

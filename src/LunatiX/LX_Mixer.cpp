@@ -353,7 +353,7 @@ void fadeOutMusic(int ms)
 *   @note This function only works on stereo audio.
 *   @note It is possible the call fail if you do it on a mono audio.
 *   @note To unregister type effect, use this function with 255 as left and right value
-*           or use LX_MixerremovePanning().
+*           or use LX_Mixer::removePanning().
 *
 */
 void setPanning(int channel,Uint8 left,Uint8 right)

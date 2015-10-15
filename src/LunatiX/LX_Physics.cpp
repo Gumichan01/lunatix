@@ -718,7 +718,7 @@ void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
 
 
 /**
-*   @fn void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D *v)
+*   @fn void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D& v)
 *
 *   Move the polygon to a direction using the vector
 *

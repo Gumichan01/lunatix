@@ -181,7 +181,7 @@ LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 
 
 /**
-*   @fn unsigned int LX_WindowManager::nbWindow(void)
+*   @fn unsigned int LX_WindowManager::nbWindows(void)
 *
 *   Count the number of opened windows
 *

@@ -11,7 +11,7 @@
 */
 
 /**
-*	@file LX_MessageBox.hpp
+*	@file LX_MessageBox.cpp
 *	@brief The message box Library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.6
