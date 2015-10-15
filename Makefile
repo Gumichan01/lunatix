@@ -13,10 +13,21 @@
 # Makefile - Lunatix Engine
 
 
+.PHONY: doxy clean 
+
+
+#
+# Debug symbol
+#
+
 # You can modify the value of DEBUG
 # If you want to use the debug or release mode
 DEBUG=yes
 
+
+#
+# Variables
+#
 
 CC=g++
 MAIN_OBJ=main.o
@@ -75,7 +86,14 @@ LUA_FLAGS=./lib/linux/liblua5.1-c++.so.0
 LFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 
-# The default rule 
+DOXY_FILE=dox
+
+########################
+#                      #
+# Generate the library #
+#                      #
+########################
+
 library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 $(LUNATIX_STATIC_LIB) : $(OBJS)
@@ -94,7 +112,10 @@ $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@$(LUAC) -o $@ $<
 
 
-# Demo
+##########
+#  Demo  #
+##########
+
 $(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SCRIPT)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
@@ -225,7 +246,12 @@ LX_Haptic.o : $(LUNATIX_PATH)LX_Haptic.cpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp 
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-# Test of different modules
+#############################
+#                           #
+# Test of different modules #
+#                           #
+#############################
+
 test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf test-particle test-file
 
 
@@ -318,11 +344,32 @@ test-file.o : $(TEST_PATH)test-file.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
+######################################
+#                                    #
+# Generate the doxygen documentation #
+#                                    #
+######################################
+
+
+doxy : $(DOXY_FILE)
+	@echo "Generating the doxygen file from "$<
+	@doxygen $<
+
+
+#########################
+#                       #
+# Clean generated files #
+#                       #
+#########################
 
 
 clean :
 	@echo "Delete object files"
 	@rm -f *.o
+
+cleandoc: 
+	@echo "Delete the doxygen documentation"
+	@rm -rf html/
 
 cleanlib:
 	@echo "Delete libraries"
@@ -333,7 +380,7 @@ clean-test : clean
 	@echo "Delete test object files"
 	@rm -f test-* 
 
-cleanall : clean-test cleanlib
+cleanall : clean-test cleanlib cleandoc
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 
