@@ -42,7 +42,7 @@ TEST_PATH=./test/
 LUNATIX_EXE=lunatix-engine
 
 # Path to the Lunatix engine directory and include directory
-LUNATIX_PATH=./src/engine/
+LUNATIX_PATH=./src/LunatiX/
 LIBRARIES_INCLUDE_DIR=./include/
 LUNATIX_INCLUDE_PATH=$(LIBRARIES_INCLUDE_DIR)LunatiX/
 
