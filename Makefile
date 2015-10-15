@@ -48,8 +48,9 @@ LUNATIX_INCLUDE_PATH=$(LIBRARIES_INCLUDE_DIR)LunatiX/
 
 
 # Libraries
-LUNATIX_STATIC_LIB=libLunatix.a
-LUNATIX_SHARED_LIB=libLunatix.so
+LUNATIX_BUILD_DIR=./build/
+LUNATIX_STATIC_LIB=$(LUNATIX_BUILD_DIR)libLunatix.a
+LUNATIX_SHARED_LIB=$(LUNATIX_BUILD_DIR)libLunatix.so
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
@@ -79,10 +80,12 @@ library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 $(LUNATIX_STATIC_LIB) : $(OBJS)
 	@echo "Generating the static library"
+	@mkdir -p $(LUNATIX_BUILD_DIR)
 	@ar rcs $@ $(OBJS)
 
 $(LUNATIX_SHARED_LIB) : $(OBJS)
 	@echo "Generating the shared library"
+	@mkdir -p $(LUNATIX_BUILD_DIR)
 	@gcc -shared -o $@ $(OBJS) $(LFLAGS)
 
 
@@ -324,6 +327,7 @@ clean :
 cleanlib:
 	@echo "Delete libraries"
 	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
+	@rmdir $(LUNATIX_BUILD_DIR)
 
 clean-test : clean
 	@echo "Delete test object files"
