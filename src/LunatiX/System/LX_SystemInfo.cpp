@@ -93,7 +93,7 @@ int getCPUCount(void)
 *
 *   Get the amount of Random Access Memory (RAM) in the system
 *
-*   @return The amount of RAM configured int the system in Megabytes (MB)
+*   @return The amount of RAM configured in the system in Megabytes (MB)
 *
 */
 int getSystemRAM(void)

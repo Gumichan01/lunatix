@@ -31,12 +31,18 @@ DEBUG=yes
 
 CC=g++
 MAIN_OBJ=main.o
-OBJS=LX_Chunk.o LX_Config.o LX_Graphics.o LX_Library.o LX_WindowManager.o \
-LX_Mixer.o LX_Music.o LX_Physics.o LX_TrueTypeFont.o LX_Window.o LX_Device.o \
-LX_Vector2D.o LX_Polygon.o LX_SystemInfo.o LX_Random.o LX_Particle.o \
-LX_ParticleSystem.o LX_FileIO.o LX_FileBuffer.o LX_MessageBox.o LX_Version.o \
-LX_Gamepad.o LX_Haptic.o
-
+OBJS=LX_Device.o LX_Gamepad.o LX_Haptic.o \
+LX_FileIO.o LX_FileBuffer.o \
+LX_Graphics.o LX_Window.o LX_WindowManager.o \
+LX_Config.o LX_Library.o \
+LX_Chunk.o LX_Music.o LX_Mixer.o \
+LX_MessageBox.o \
+LX_Particle.o LX_ParticleSystem.o \
+LX_Physics.o LX_Polygon.o LX_Vector2D.o \
+LX_Random.o \
+LX_SystemInfo.o \
+LX_TrueTypeFont.o \
+LX_Version.o
 
 LUAC=luac5.1
 SCRIPT_FILE=script/LX_config.lua
@@ -56,6 +62,20 @@ LUNATIX_EXE=lunatix-engine
 LUNATIX_PATH=./src/LunatiX/
 LIBRARIES_INCLUDE_DIR=./include/
 LUNATIX_INCLUDE_PATH=$(LIBRARIES_INCLUDE_DIR)LunatiX/
+
+# Path to the different modules
+DEVICE_PATH=$(LUNATIX_PATH)Device/
+FILEIO_PATH=$(LUNATIX_PATH)FileIO/
+GRAPHICS_PATH=$(LUNATIX_PATH)Graphics/
+LIBRARY_PATH=$(LUNATIX_PATH)Library/
+MIXER_PATH=$(LUNATIX_PATH)Mixer/
+MSG_PATH=$(LUNATIX_PATH)MSGBox/
+PARTICLE_PATH=$(LUNATIX_PATH)ParticleEngine/
+PHYSICS_PATH=$(LUNATIX_PATH)Physics/
+RANDOM_PATH=$(LUNATIX_PATH)Random/
+SYSTEM_PATH=$(LUNATIX_PATH)System/
+TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
+VERSION_PATH=$(LUNATIX_PATH)Version/
 
 
 # Libraries
@@ -97,12 +117,12 @@ DOXY_FILE=dox
 library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 $(LUNATIX_STATIC_LIB) : $(OBJS)
-	@echo "Generating the static library"
+	@echo "Generating the static library -> "$@
 	@mkdir -p $(LUNATIX_BUILD_DIR)
 	@ar rcs $@ $(OBJS)
 
 $(LUNATIX_SHARED_LIB) : $(OBJS)
-	@echo "Generating the shared library"
+	@echo "Generating the shared library -> "$@
 	@mkdir -p $(LUNATIX_BUILD_DIR)
 	@gcc -shared -o $@ $(OBJS) $(LFLAGS)
 
@@ -112,8 +132,11 @@ $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@$(LUAC) -o $@ $<
 
 
+
 ##########
+#        #
 #  Demo  #
+#        #
 ##########
 
 $(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) $(COMPILED_SCRIPT)
@@ -126,124 +149,214 @@ endif
 	@$(CC) -o $@ $(MAIN_OBJ) $(OBJS) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
-LX_Config.o : $(LUNATIX_PATH)LX_Config.cpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+#
+# Main file
+#
+
+main.o : $(MAIN_PATH)main.cpp $(LUNATIX_INCLUDE_PATH)Lunatix_engine.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Window.o : $(LUNATIX_PATH)LX_Window.cpp $(LUNATIX_INCLUDE_PATH)LX_Window.hpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+
+#
+# Device
+#
+
+LX_Device.o : $(DEVICE_PATH)LX_Device.cpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_WindowManager.o : $(LUNATIX_PATH)LX_WindowManager.cpp $(LUNATIX_INCLUDE_PATH)LX_WindowManager.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Gamepad.o : $(DEVICE_PATH)LX_Gamepad.cpp $(LUNATIX_INCLUDE_PATH)LX_Gamepad.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Library.o : $(LUNATIX_PATH)LX_Library.cpp $(LUNATIX_INCLUDE_PATH)LX_Library.hpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Haptic.o : $(DEVICE_PATH)LX_Haptic.cpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Device.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Graphics.o : $(LUNATIX_PATH)LX_Graphics.cpp $(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp $(LUNATIX_INCLUDE_PATH)LX_Window.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+
+#
+# FileIO
+#
+
+LX_FileIO.o : $(FILEIO_PATH)LX_FileIO.cpp $(LUNATIX_INCLUDE_PATH)LX_FileIO.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_TrueTypeFont.o : $(LUNATIX_PATH)LX_TrueTypeFont.cpp $(LUNATIX_INCLUDE_PATH)LX_TrueTypeFont.hpp $(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_FileBuffer.o : $(FILEIO_PATH)LX_FileBuffer.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_FileBuffer.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Physics.o : $(LUNATIX_PATH)LX_Physics.cpp $(LUNATIX_INCLUDE_PATH)LX_Physics.hpp $(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+
+#
+# Graphics
+#
+
+
+LX_Graphics.o : $(GRAPHICS_PATH)LX_Graphics.cpp $(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Window.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Chunk.o : $(LUNATIX_PATH)LX_Chunk.cpp $(LUNATIX_INCLUDE_PATH)LX_Chunk.hpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Window.o : $(GRAPHICS_PATH)LX_Window.cpp $(LUNATIX_INCLUDE_PATH)LX_Window.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Music.o : $(LUNATIX_PATH)LX_Music.cpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_WindowManager.o : $(GRAPHICS_PATH)LX_WindowManager.cpp  \
+$(LUNATIX_INCLUDE_PATH)LX_WindowManager.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Mixer.o : $(LUNATIX_PATH)LX_Mixer.cpp $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Music.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+
+#
+# Library
+#
+
+LX_Config.o : $(LIBRARY_PATH)LX_Config.cpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-main.o : $(MAIN_PATH)main.cpp $(LUNATIX_INCLUDE_PATH)Lunatix_engine.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Library.o : $(LIBRARY_PATH)LX_Library.cpp $(LUNATIX_INCLUDE_PATH)LX_Library.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Device.o : $(LUNATIX_PATH)LX_Device.cpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+
+#
+# Mixer
+#
+
+LX_Chunk.o : $(MIXER_PATH)LX_Chunk.cpp $(LUNATIX_INCLUDE_PATH)LX_Chunk.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Polygon.o : $(LUNATIX_PATH)LX_Polygon.cpp $(LUNATIX_INCLUDE_PATH)LX_Polygon.hpp $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
+LX_Music.o : $(MIXER_PATH)LX_Music.cpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Vector2D.o : $(LUNATIX_PATH)LX_Vector2D.cpp $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
+LX_Mixer.o : $(MIXER_PATH)LX_Mixer.cpp $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Music.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_SystemInfo.o : $(LUNATIX_PATH)LX_SystemInfo.cpp $(LUNATIX_INCLUDE_PATH)LX_SystemInfo.hpp
+
+#
+# MSGBox
+#
+
+LX_MessageBox.o : $(MSG_PATH)LX_MessageBox.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_MessageBox.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Random.o : $(LUNATIX_PATH)LX_Random.cpp $(LUNATIX_INCLUDE_PATH)LX_Random.hpp
+
+#
+# ParticleSystem
+#
+
+LX_Particle.o : $(PARTICLE_PATH)LX_Particle.cpp $(LUNATIX_INCLUDE_PATH)LX_Particle.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Particle.o : $(LUNATIX_PATH)LX_Particle.cpp $(LUNATIX_INCLUDE_PATH)LX_Particle.hpp
+LX_ParticleSystem.o : $(PARTICLE_PATH)LX_ParticleSystem.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_ParticleSystem.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_ParticleSystem.o : $(LUNATIX_PATH)LX_ParticleSystem.cpp $(LUNATIX_INCLUDE_PATH)LX_ParticleSystem.hpp
+
+#
+# Physics
+#
+
+LX_Physics.o : $(PHYSICS_PATH)LX_Physics.cpp $(LUNATIX_INCLUDE_PATH)LX_Physics.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_FileIO.o : $(LUNATIX_PATH)LX_FileIO.cpp $(LUNATIX_INCLUDE_PATH)LX_FileIO.hpp
+LX_Polygon.o : $(PHYSICS_PATH)LX_Polygon.cpp $(LUNATIX_INCLUDE_PATH)LX_Polygon.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_FileBuffer.o : $(LUNATIX_PATH)LX_FileBuffer.cpp $(LUNATIX_INCLUDE_PATH)LX_FileBuffer.hpp
+LX_Vector2D.o : $(PHYSICS_PATH)LX_Vector2D.cpp $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_MessageBox.o : $(LUNATIX_PATH)LX_MessageBox.cpp $(LUNATIX_INCLUDE_PATH)LX_MessageBox.hpp
+
+#
+# Random
+#
+
+LX_Random.o : $(RANDOM_PATH)LX_Random.cpp $(LUNATIX_INCLUDE_PATH)LX_Random.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Version.o : $(LUNATIX_PATH)LX_Version.cpp $(LUNATIX_INCLUDE_PATH)LX_Version.hpp
+
+#
+# System
+#
+
+LX_SystemInfo.o : $(SYSTEM_PATH)LX_SystemInfo.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_SystemInfo.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Gamepad.o : $(LUNATIX_PATH)LX_Gamepad.cpp $(LUNATIX_INCLUDE_PATH)LX_Gamepad.hpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
+
+#
+# True Type Font
+#
+
+LX_TrueTypeFont.o : $(TTF_PATH)LX_TrueTypeFont.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_TrueTypeFont.hpp $(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Haptic.o : $(LUNATIX_PATH)LX_Haptic.cpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
+
+#
+# Version
+#
+
+LX_Version.o : $(VERSION_PATH)LX_Version.cpp $(LUNATIX_INCLUDE_PATH)LX_Version.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+
 
 
 #############################
@@ -252,7 +365,8 @@ LX_Haptic.o : $(LUNATIX_PATH)LX_Haptic.cpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp 
 #                           #
 #############################
 
-test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics test-window test-system test-ttf test-particle test-file
+test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics \
+test-window test-system test-ttf test-particle test-file
 
 
 test-init : $(OBJS) test-init.o
@@ -383,4 +497,5 @@ clean-test : clean
 cleanall : clean-test cleanlib cleandoc
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
+
 
