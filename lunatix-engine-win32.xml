@@ -21,8 +21,8 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\Lunatix" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin\Release" />
+				<Option output="build\Lunatix" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="build" />
 				<Option object_output="obj\Release\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -50,8 +50,9 @@
 				</Linker>
 			</Target>
 			<Target title="libLuna">
-				<Option output="liblunatix.a" prefix_auto="1" extension_auto="0" />
+				<Option output="build\liblunatix.a" prefix_auto="1" extension_auto="0" />
 				<Option working_dir="" />
+				<Option object_output="obj\lib\" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -85,64 +86,64 @@
 			<Add directory="lib\win32" />
 		</Linker>
 		<Unit filename="config\lxsdl.cfg">
-			<Option target="Debug" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="config\lxwindow.cfg">
-			<Option target="Debug" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="include\LunatiX\LX_Chunk.hpp" />
+		<Unit filename="include\LunatiX\LX_Config.hpp" />
+		<Unit filename="include\LunatiX\LX_Device.hpp" />
+		<Unit filename="include\LunatiX\LX_Error.hpp" />
+		<Unit filename="include\LunatiX\LX_FileBuffer.hpp" />
+		<Unit filename="include\LunatiX\LX_FileIO.hpp" />
+		<Unit filename="include\LunatiX\LX_Gamepad.hpp" />
+		<Unit filename="include\LunatiX\LX_Graphics.hpp" />
+		<Unit filename="include\LunatiX\LX_Haptic.hpp" />
+		<Unit filename="include\LunatiX\LX_Hitbox.hpp" />
+		<Unit filename="include\LunatiX\LX_Library.hpp" />
+		<Unit filename="include\LunatiX\LX_MessageBox.hpp" />
+		<Unit filename="include\LunatiX\LX_Mixer.hpp" />
+		<Unit filename="include\LunatiX\LX_Music.hpp" />
+		<Unit filename="include\LunatiX\LX_Particle.hpp" />
+		<Unit filename="include\LunatiX\LX_ParticleSystem.hpp" />
+		<Unit filename="include\LunatiX\LX_Physics.hpp" />
+		<Unit filename="include\LunatiX\LX_Polygon.hpp" />
+		<Unit filename="include\LunatiX\LX_Random.hpp" />
+		<Unit filename="include\LunatiX\LX_Sound.hpp" />
+		<Unit filename="include\LunatiX\LX_SystemInfo.hpp" />
+		<Unit filename="include\LunatiX\LX_TrueTypeFont.hpp" />
+		<Unit filename="include\LunatiX\LX_Vector2D.hpp" />
+		<Unit filename="include\LunatiX\LX_Version.hpp" />
+		<Unit filename="include\LunatiX\LX_Window.hpp" />
+		<Unit filename="include\LunatiX\LX_WindowManager.hpp" />
+		<Unit filename="include\LunatiX\Lunatix_engine.hpp" />
 		<Unit filename="script\LX_config.lua">
-			<Option target="Debug" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="src\engine\LX_Chunk.cpp" />
-		<Unit filename="src\engine\LX_Chunk.hpp" />
-		<Unit filename="src\engine\LX_Config.cpp" />
-		<Unit filename="src\engine\LX_Config.hpp" />
-		<Unit filename="src\engine\LX_Device.cpp" />
-		<Unit filename="src\engine\LX_Device.hpp" />
-		<Unit filename="src\engine\LX_Error.hpp" />
-		<Unit filename="src\engine\LX_FileBuffer.cpp" />
-		<Unit filename="src\engine\LX_FileBuffer.hpp" />
-		<Unit filename="src\engine\LX_FileIO.cpp" />
-		<Unit filename="src\engine\LX_FileIO.hpp" />
-		<Unit filename="src\engine\LX_Gamepad.cpp" />
-		<Unit filename="src\engine\LX_Gamepad.hpp" />
-		<Unit filename="src\engine\LX_Graphics.cpp" />
-		<Unit filename="src\engine\LX_Graphics.hpp" />
-		<Unit filename="src\engine\LX_Haptic.cpp" />
-		<Unit filename="src\engine\LX_Haptic.hpp" />
-		<Unit filename="src\engine\LX_Hitbox.hpp" />
-		<Unit filename="src\engine\LX_Library.cpp" />
-		<Unit filename="src\engine\LX_Library.hpp" />
-		<Unit filename="src\engine\LX_MessageBox.cpp" />
-		<Unit filename="src\engine\LX_MessageBox.hpp" />
-		<Unit filename="src\engine\LX_Mixer.cpp" />
-		<Unit filename="src\engine\LX_Mixer.hpp" />
-		<Unit filename="src\engine\LX_Music.cpp" />
-		<Unit filename="src\engine\LX_Music.hpp" />
-		<Unit filename="src\engine\LX_Particle.cpp" />
-		<Unit filename="src\engine\LX_Particle.hpp" />
-		<Unit filename="src\engine\LX_ParticleSystem.cpp" />
-		<Unit filename="src\engine\LX_ParticleSystem.hpp" />
-		<Unit filename="src\engine\LX_Physics.cpp" />
-		<Unit filename="src\engine\LX_Physics.hpp" />
-		<Unit filename="src\engine\LX_Polygon.cpp" />
-		<Unit filename="src\engine\LX_Polygon.hpp" />
-		<Unit filename="src\engine\LX_Random.cpp" />
-		<Unit filename="src\engine\LX_Random.hpp" />
-		<Unit filename="src\engine\LX_Sound.hpp" />
-		<Unit filename="src\engine\LX_SystemInfo.cpp" />
-		<Unit filename="src\engine\LX_SystemInfo.hpp" />
-		<Unit filename="src\engine\LX_TrueTypeFont.cpp" />
-		<Unit filename="src\engine\LX_TrueTypeFont.hpp" />
-		<Unit filename="src\engine\LX_Vector2D.cpp" />
-		<Unit filename="src\engine\LX_Vector2D.hpp" />
-		<Unit filename="src\engine\LX_Version.cpp" />
-		<Unit filename="src\engine\LX_Version.hpp" />
-		<Unit filename="src\engine\LX_Window.cpp" />
-		<Unit filename="src\engine\LX_Window.hpp" />
-		<Unit filename="src\engine\LX_WindowManager.cpp" />
-		<Unit filename="src\engine\LX_WindowManager.hpp" />
-		<Unit filename="src\engine\Lunatix_engine.hpp" />
+		<Unit filename="src\LunatiX\Device\LX_Device.cpp" />
+		<Unit filename="src\LunatiX\Device\LX_Gamepad.cpp" />
+		<Unit filename="src\LunatiX\Device\LX_Haptic.cpp" />
+		<Unit filename="src\LunatiX\FileIO\LX_FileBuffer.cpp" />
+		<Unit filename="src\LunatiX\FileIO\LX_FileIO.cpp" />
+		<Unit filename="src\LunatiX\Graphics\LX_Graphics.cpp" />
+		<Unit filename="src\LunatiX\Graphics\LX_Window.cpp" />
+		<Unit filename="src\LunatiX\Graphics\LX_WindowManager.cpp" />
+		<Unit filename="src\LunatiX\Library\LX_Config.cpp" />
+		<Unit filename="src\LunatiX\Library\LX_Library.cpp" />
+		<Unit filename="src\LunatiX\MSGBox\LX_MessageBox.cpp" />
+		<Unit filename="src\LunatiX\Mixer\LX_Chunk.cpp" />
+		<Unit filename="src\LunatiX\Mixer\LX_Mixer.cpp" />
+		<Unit filename="src\LunatiX\Mixer\LX_Music.cpp" />
+		<Unit filename="src\LunatiX\ParticleEngine\LX_Particle.cpp" />
+		<Unit filename="src\LunatiX\ParticleEngine\LX_ParticleSystem.cpp" />
+		<Unit filename="src\LunatiX\Physics\LX_Physics.cpp" />
+		<Unit filename="src\LunatiX\Physics\LX_Polygon.cpp" />
+		<Unit filename="src\LunatiX\Physics\LX_Vector2D.cpp" />
+		<Unit filename="src\LunatiX\Random\LX_Random.cpp" />
+		<Unit filename="src\LunatiX\System\LX_SystemInfo.cpp" />
+		<Unit filename="src\LunatiX\TrueTypeFont\LX_TrueTypeFont.cpp" />
+		<Unit filename="src\LunatiX\Version\LX_Version.cpp" />
 		<Unit filename="src\main.cpp">
 			<Option target="Debug" />
 		</Unit>
