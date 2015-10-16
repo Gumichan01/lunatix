@@ -11,7 +11,7 @@ It contains these following libraries:
 LunatiX Engine also contains these modules:
 - LX\_Device : The information library about Gamepads
 - LX\_FileIO : The FileIO library
-- LX_MSGBox : The Message box module
+- LX\_MSGBox : The Message box module
 - LX\_ParticleEngine : The particle engine
 - LX\_Random : The Random Number Generator (RNG) library
 - LX_VersionInfo : A module to get the version of the engine
@@ -81,12 +81,12 @@ After that, create a directory with a name like *LunatiX/* into the *include/*
 directory of your project tree and copy all the .hpp files of the engine  
 in *include/LunatiX/*.
 
-Finally, copy the shared libraries in *lib/linux*
+Finally, copy the shared libraries in *lib/linux*.
 
 
 #### On Windows ####
 
-Download the [development library] (http://gumichan01.olympe.in/download/dev-luna-win32.zip)  
+Download the [development library (v0.6.1)] (http://gumichan01.olympe.in/download/dev-luna-win32.zip)  
 Now you can use it in your project.
 
 Warning : The static or shared libraries are not completely installed on the system.
