@@ -29,8 +29,6 @@
 class LX_Polygon;
 struct LX_Vector2D;
 
-#define RECT_SIDES 4    /**< The number of the AABB sides */
-
 
 
 /**
@@ -44,13 +42,14 @@ struct LX_Vector2D;
 namespace LX_Physics
 {
 
-//* Distances */
+/* Distances */
 unsigned int euclide_square_distance(int x1, int y1, int x2, int y2);
 unsigned int euclide_square_distance(LX_Point *p1, LX_Point *p2);
 float euclide_distance(int x1, int y1, int x2, int y2);
 float euclide_distance(LX_Point *p1, LX_Point *p2);
 
-/* Collision*/
+
+/* Collision detection */
 
 // Point/Rect
 bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect);
@@ -80,6 +79,7 @@ bool collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly);
 // AABB/Polygon ; Polygon/Polygon
 bool collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly);
 bool collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2);
+
 
 /* Move the entities */
 

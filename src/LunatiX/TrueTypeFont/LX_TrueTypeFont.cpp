@@ -101,9 +101,11 @@ LX_Font::LX_Font(string font_file, SDL_Color *color)
 *   @param color The color font needed
 *   @param size The size of the text you will display
 *
-*   @note If you do not need to specify the font color, you may put NULL instead of this color
+*   @note If you do not need to specify the font color,
+*           you may put NULL instead of this color
 *   @note If you do not need to specify the size, put 0
-*   @warning You must initialize the SDL_TTF library setting the ttf flag to 1 in lxsdl.cfg.
+*   @warning You must initialize the SDL_TTF library setting
+*               the ttf flag to 1 in lxsdl.cfg.
 *
 */
 LX_Font::LX_Font(string font_file, SDL_Color *color, int size)
@@ -112,16 +114,10 @@ LX_Font::LX_Font(string font_file, SDL_Color *color, int size)
 }
 
 
-/**
-*
-*   @fn void LX_Font::init(string font_file, SDL_Color *color, int size)
+/*
 *
 *   This private function initializes The LX_TTF instance
 *   with a font file, a color and the size.
-*
-*   @param font_file The font file you want to load
-*   @param color The color font needed
-*   @param size The size of the text you will display
 *
 */
 void LX_Font::init(string font_file, SDL_Color *color, int size)
@@ -316,7 +312,8 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 
 
 /**
-*   @fn SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+*   @fn SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g,
+                                              Uint8 b, unsigned int size)
 *
 *   Render the UTF-8 encoded text in shaded mode. The size has to be specified.
 *
@@ -329,7 +326,8 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 *   @return An instance of SDL_Surface on success, NULL otherwise
 *
 */
-SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b,
+                                      unsigned int size)
 {
     return drawText(LX_TTF_SHADED,text.c_str(),r,g,b,size);
 }
@@ -370,24 +368,16 @@ SDL_Surface * LX_Font::drawBlendedText(string text, unsigned int size)
 
 
 /**
-*   @fn SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 *
-*   Create a text surface according to the type, the color bakground, if necessary, and its size
+*   Create a text surface according to the type,
+*   the color bakground, if necessary, and its size
 *
-*   @param type The type of the text(Solid, Shaded, or Blended)
-*   @param text The string you want to draw
-*   @param r The red color of the background
-*   @param g The green color of the background
-*   @param b The blue color of the background
-*   @param size The size of the text on the window
-*
-*   @return An instance of SDL_Surface on success, NULL otherwise
-*
-*   @note If size is 0, then the default faont size is used
-*   @note You can put any value you want if you do not need to use r,g and b
+*   If size is 0, then the default font size is used
+*   You can put any value you want if you do not need to use r, g and b
 *
 */
-SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
+                                Uint8 r, Uint8 g, Uint8 b, unsigned int size)
 {
     TTF_Font *ttf = NULL;
     SDL_Surface *loaded = NULL;
@@ -439,7 +429,9 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text, Uint8 r, Uint
 
 
 /**
-*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, int idWindow)
+*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,
+                                                 string text, unsigned int size,
+                                                 int idWindow)
 *
 *   Create a Texture from a text according to the type and the size
 *
@@ -487,7 +479,8 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsig
 
 
 /**
-*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, LX_Window *win)
+*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text,
+                                                 unsigned int size, LX_Window *win)
 *
 *   Create a Texture from a text according to the type and the size
 *
@@ -501,7 +494,8 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsig
 *               or if something wrong happened
 *
 */
-SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, LX_Window *win)
+SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text,
+                                         unsigned int size, LX_Window *win)
 {
     SDL_Surface *surface =  NULL;
     SDL_Texture *texture = NULL;

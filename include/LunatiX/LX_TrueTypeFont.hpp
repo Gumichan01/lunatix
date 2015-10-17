@@ -56,6 +56,7 @@ using namespace std;
 using namespace LX_Graphics;
 using namespace LX_FileIO;
 
+
 /**
 *   @namespace LX_TrueTypeFont
 *   @brief The LunatiX Engine True Type Font (TTF) module

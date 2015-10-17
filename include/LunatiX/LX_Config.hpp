@@ -26,7 +26,6 @@
 
 #include <Lua/lua.hpp>
 
-#define LUA_CONFIG_FILE "script/LX_config.lua"   /**< The lua file the engine uses for the configuration loading */
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
 using namespace std;
@@ -35,7 +34,8 @@ using namespace std;
 *   @class LX_ConfigurationException
 *   @brief The exception class of LX_Configuration
 *
-*   This class describes the exception occured when the configuration construction fails.
+*   This class describes the exception occured when
+*   the configuration construction fails.
 *
 */
 class LX_ConfigurationException : public exception

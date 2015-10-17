@@ -53,7 +53,7 @@ LX_WindowManager * getWindowManager()
 /**
 *   @fn void LX_WindowManager::init(void)
 *
-*   Initialize the singleton
+*   Initialize the window manager
 *
 */
 void LX_WindowManager::init(void)
@@ -84,6 +84,10 @@ LX_WindowManager * LX_WindowManager::getInstance()
 *
 *   Destroy the instance of the singleton
 *
+*   @warning If the window manager has windows at this moment,
+*   they will not be freed. So you need to remove all of them
+*   before destroying the instance
+*
 */
 void LX_WindowManager::destroy(void)
 {
@@ -91,12 +95,16 @@ void LX_WindowManager::destroy(void)
 }
 
 
-/**
-*   @fn LX_WindowManager::~LX_WindowManager()
-*
-*   Destroy all windows managed by the class
-*
-*/
+// Create the instance
+LX_WindowManager::LX_WindowManager()
+{
+    size = 0;
+    nbWin = 0;
+    memset(windows,0,LX_NBMAX_WINDOWS);
+}
+
+
+// Destroy the instance,
 LX_WindowManager::~LX_WindowManager()
 {
     if(nbWin != 0)
@@ -106,20 +114,6 @@ LX_WindowManager::~LX_WindowManager()
             removeWindow(i);
         }
     }
-}
-
-
-/**
-*   @fn LX_WindowManager::LX_WindowManager()
-*
-*   Initialize the class
-*
-*/
-LX_WindowManager::LX_WindowManager()
-{
-    size = 0;
-    nbWin = 0;
-    memset(windows,0,LX_NBMAX_WINDOWS);
 }
 
 

@@ -88,16 +88,11 @@ LX_ParticleSystem::~LX_ParticleSystem()
 }
 
 
-/**
-*   @fn void LX_ParticleSystem::init(unsigned int nbPart,unsigned int id)
-*
+/*
 *   Initialize the particle system
 *
-*   @param nbPart The number of particles you want to get
-*   @param id The id of the window in the @link LX_WindowManager window manager @endlink
-*
-*   @note This function is automatically called by one of the following constructors
-*           of the particle system
+*   This function is automatically called by one of
+*   the following constructors of the particle system
 *
 */
 void LX_ParticleSystem::init(unsigned int nbPart,unsigned int id)
@@ -140,7 +135,7 @@ bool LX_ParticleSystem::addParticle(LX_Particle *p)
 
     for(unsigned int i = 0; i < n; i++)
     {
-        if(particles[i] ==  NULL)
+        if(particles[i] == NULL)
         {
             particles[i] = p;
             done = true;
@@ -217,15 +212,18 @@ void LX_ParticleSystem::displayParticles(void)
         if(particles[i] == NULL)
             continue;
 
+        // Display the particle when the delay is a multiple of 2
         if(particles[i]->getDelay()%2 == 0)
         {
             if(particles[i]->getTexture() != NULL)
             {
-                win->putTexture(particles[i]->getTexture(),NULL,particles[i]->getAABB());
+                win->putTexture(particles[i]->getTexture(),
+                                NULL,particles[i]->getAABB());
             }
             else if(particles[i]->getSurface() != NULL)
             {
-                win->putSurface(particles[i]->getSurface(),NULL,particles[i]->getAABB());
+                win->putSurface(particles[i]->getSurface(),
+                                NULL,particles[i]->getAABB());
             }
         }
     }

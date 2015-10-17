@@ -72,8 +72,7 @@ LX_ConfigurationException::~LX_ConfigurationException() throw() {}
 
 
 
-/**
-*   @fn LX_Configuration::LX_Configuration()
+/*
 *
 *   Create an instance of the configuration
 *
@@ -97,12 +96,6 @@ LX_Configuration::LX_Configuration()
 }
 
 
-/**
-*   @fn LX_Configuration::~LX_Configuration()
-*
-*   Destroy the instance
-*
-**/
 LX_Configuration::~LX_Configuration() {}
 
 
@@ -171,18 +164,12 @@ void LX_Configuration::destroy()
 }
 
 
-/**
-*   @fn void LX_Configuration::assignString(lua_State * state, char *str, unsigned int len)
-*
+/*
 *   Get the string from the lua stack
 *
-*   @param state The Lua state
-*   @param str The string you will store the extracted string
-*   @param len The length of the string str (must be at least 2)
-*
-*   @warning If state or str is NULL, a segmentation fault may occur
-*               If len is 0 or less than the string you want to take from the lua state,
-*               the behaviour is undefined.
+*   If state or str is NULL, a segmentation fault may occur
+*   If len is 0 or less than the string you want to take from the lua state,
+*   the behaviour is undefined.
 *
 */
 void LX_Configuration::assignString(lua_State * state, char *str, unsigned int len)
@@ -198,13 +185,11 @@ void LX_Configuration::assignString(lua_State * state, char *str, unsigned int l
 }
 
 
-/**
-*   @fn void LX_Configuration::setFlags(void)
-*
+/*
 *   Set the flags from configuration files
 *
-*   @warning This function need to use LX_config.luac to work,
-*               otherwise, a LX_ConfigurationException exception will occur
+*   This function need to use LX_config.luac to work,
+*   otherwise, a LX_ConfigurationException exception will occur
 */
 void LX_Configuration::setFlags(void)
 {

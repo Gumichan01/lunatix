@@ -25,11 +25,11 @@
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
-#define LX_PADSTRING_SIZE 256           /**< The size of a string to fill in in LX_Device::gamepadToString */
-#define LX_JOY_NAMESIZE 64              /**< The size of the joystick name */
 #define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display */
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display */
 #define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status */
+
+const int LX_JOY_NAMESIZE =  64;     // The size of the joystick name
 
 
 namespace LX_Device

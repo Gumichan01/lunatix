@@ -29,7 +29,7 @@
 
 using namespace std;
 
-static const short GUID_SIZE = 16;    // Size of the data in SDL_JoystickGUID
+static const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickGUID
 
 
 namespace LX_Device
@@ -63,11 +63,8 @@ int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info)
     info->numButtons = SDL_JoystickNumButtons(joy);
     info->numHats = SDL_JoystickNumHats(joy);
 
-    if(info->id == -1
-            || info->numAxis == -1
-            || info->numBalls == -1
-            || info->numButtons == -1
-            || info->numHats == -1)
+    if(info->id == -1 || info->numAxis == -1 || info->numBalls == -1
+       || info->numButtons == -1 || info->numHats == -1)
     {
         return LX_SetError("Cannot get information\n");
     }
@@ -203,7 +200,6 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 *   @note This function never returns NULL
 *   @warning If info or str is NULL, a segmentation fault will occur
 *   @warning str must be long enough to get the entire text.
-*            ::LX_PADSTRING_SIZE is a good length
 *
 *   @sa statGamepad
 */

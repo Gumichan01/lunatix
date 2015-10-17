@@ -487,8 +487,7 @@ cleandoc:
 
 cleanlib:
 	@echo "Delete libraries"
-	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
-	@rmdir $(LUNATIX_BUILD_DIR)
+	@rm -rf $(LUNATIX_BUILD_DIR)
 
 clean-test : clean
 	@echo "Delete test object files"

@@ -41,7 +41,7 @@ class IOException;
 *   @brief The file buffer class
 *
 *   This structure contains information about a file buffer.
-*   It store a memory copy of a file content into a buffer.
+*   It stores a memory copy of a file content into a buffer.
 *
 */
 class LX_FileBuffer

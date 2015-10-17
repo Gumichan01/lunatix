@@ -23,7 +23,7 @@
 */
 
 
-#define LX_NBMAX_WINDOWS 100    /**< The maximum number of windows to display */
+#define LX_NBMAX_WINDOWS 64    /**< The maximum number of windows to display */
 
 
 namespace LX_Graphics

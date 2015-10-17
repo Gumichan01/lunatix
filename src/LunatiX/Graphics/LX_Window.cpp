@@ -280,6 +280,9 @@ void LX_Window::init2(void)
 }
 
 
+/*
+*   Create a renderer for the window
+*/
 void LX_Window::createRendering(bool accel)
 {
     Uint32 renderFlag = 0x00000000;
@@ -306,6 +309,7 @@ void LX_Window::createRendering(bool accel)
 
     renderMode = true;     // The render_mode is active
 }
+
 
 /**
 *   @fn LX_Window::~LX_Window()
@@ -564,6 +568,9 @@ bool LX_Window::screenshot(std::string filename)
 }
 
 
+/*
+*   Make a screenshot using the renderer
+*/
 bool LX_Window::screenshotUsingRenderer(std::string& filename)
 {
     int err = 0;
@@ -592,6 +599,9 @@ bool LX_Window::screenshotUsingRenderer(std::string& filename)
 }
 
 
+/*
+*   Make a screenshot using the renderer
+*/
 bool LX_Window::screenshotUsingSurface(std::string& filename)
 {
     SDL_Surface *sshot = NULL;

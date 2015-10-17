@@ -29,7 +29,7 @@
 #include "LX_Vector2D.hpp"
 #include "LX_FileBuffer.hpp"
 
-#define DELAY 16        /**< The delay of the particle The delay to stay alive */
+#define DELAY 16        /**< The delay of the particle to stay alive */
 
 struct SDL_Texture;
 struct SDL_Surface;

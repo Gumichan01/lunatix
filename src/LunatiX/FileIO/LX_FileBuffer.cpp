@@ -72,7 +72,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     if(buffer == NULL)
     {
         delete reader;
-        throw IOException(str + "Internal error, not enough memory to store the file content");
+        throw IOException(str + "not enough memory to store the file content");
     }
 
     r = reader->read(buffer,sizeof(char),bufsize);
@@ -80,7 +80,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     if(r < bufsize)
     {
         delete reader;
-        throw IOException(str + "Internal error, cannot read the file entirely");
+        throw IOException(str + "cannot read the file entirely");
     }
 
     reader->close();

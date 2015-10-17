@@ -56,8 +56,6 @@ typedef struct LX_Circle
     int xCenter;                /**< The x position of circle center */
     int yCenter;                /**< The y position of circle center */
     unsigned int radius;        /**< The circle radius */
-
-    // The square radius will never be less than 0
     unsigned int square_radius; /**< The square radius */
 
 } LX_Circle;    /**< @brief The circle */

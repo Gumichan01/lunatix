@@ -6,6 +6,9 @@
 
 #include <LunatiX/Lunatix_engine.hpp>
 
+#define STRING_SIZE 256
+
+
 using namespace std;
 using namespace LX_Device;
 
@@ -53,7 +56,7 @@ void test_gamepad(void)
 {
     LX_Gamepad *gp = NULL;
     LX_Haptic *hp = NULL;
-    char s[LX_PADSTRING_SIZE];
+    char s[STRING_SIZE];
 
     cout << "  == Test Gamepad == " << endl;
 

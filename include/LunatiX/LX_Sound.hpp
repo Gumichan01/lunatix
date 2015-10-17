@@ -46,9 +46,9 @@ class LX_Sound
 
 public:
 
-    virtual bool load(string filename) = 0;         /**< @brief Load a music file */
-    virtual bool play() = 0;                         /**< @brief Play something */
-    virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
+    virtual bool load(string filename) = 0;     /**< @brief Load a music file */
+    virtual bool play() = 0;                    /**< @brief Play something */
+    virtual int volume(int newVolume) = 0;      /**< @brief Set the volume */
 
     virtual ~LX_Sound() {};
 };

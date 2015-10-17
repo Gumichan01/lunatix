@@ -28,6 +28,9 @@
 #include <LunatiX/LX_Error.hpp>
 
 
+static const int RECT_SIDES =  4;   // The number of sides of a rectangle (AABB)
+
+
 /**
 *	@fn unsigned int LX_Physics::euclide_square_distance(int x1, int y1, int x2, int y2)
 *

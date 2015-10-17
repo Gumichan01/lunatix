@@ -139,21 +139,11 @@ LX_Particle::LX_Particle(const LX_AABB *b, const LX_Vector2D *v)
 }
 
 
-/**
-*   @fn LX_Particle::init(const int x , const int y, const int w, const int h,
-*                         const float vx, const float vy)
-*
+/*
 *   This private function initializes the particle
 *
-*   @param x The X coordinate
-*   @param y The Y coordinate
-*   @param w The width
-*   @param h The height
-*   @param vx The X velocity
-*   @param vy The Y velocity
-*
-*   @note This function is automatically called by one of the following constructors
-*           of the particle
+*   It is automatically called by one of
+*   the following constructors of the particle
 *
 */
 void LX_Particle::init(const int x , const int y, const int w,

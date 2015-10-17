@@ -23,11 +23,11 @@
 
 #include <iostream>
 #include <cstdio>
-#include <cassert>
 
 #include <LunatiX/Lunatix_engine.hpp>
 
-//#define DEBUG_MAIN_TEST
+#define DEBUG_MAIN_TEST
+#define TEXT_SIZE 256
 
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
@@ -213,7 +213,7 @@ int main ( int argc, char** argv )
 
     // Gamepad
     LX_Gamepad *gp = new LX_Gamepad();
-    char str[LX_PADSTRING_SIZE];
+    char str[TEXT_SIZE];
 
     if(gp->isConnected())
     {

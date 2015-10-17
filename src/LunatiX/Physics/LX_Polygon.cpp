@@ -180,8 +180,7 @@ bool LX_Polygon::isConvex(void)
 }
 
 
-/**
-*   @fn void LX_Polygon::convexity(void)
+/*
 *
 *   Evaluate the convexity of the polygon
 *
