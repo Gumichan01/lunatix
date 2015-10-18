@@ -58,9 +58,9 @@ void test_font(void)
     else
     {
         cout << "SUCCESS - Solid text OK" << endl;
-        win.clearWindow();
+        win.clear();
         win.putSurface(textS,NULL,&pos);
-        win.updateWindow();
+        win.update();
         SDL_Delay(1000);
         SDL_FreeSurface(textS);
     }
@@ -73,9 +73,9 @@ void test_font(void)
     else
     {
         cout << "SUCCESS - Shaded text OK" << endl;
-        win.clearWindow();
+        win.clear();
         win.putSurface(textS,NULL,&pos);
-        win.updateWindow();
+        win.update();
         SDL_Delay(1000);
         SDL_FreeSurface(textS);
     }
@@ -88,9 +88,9 @@ void test_font(void)
     else
     {
         cout << "SUCCESS - Blended text OK" << endl;
-        win.clearWindow();
+        win.clear();
         win.putSurface(textS,NULL,&pos);
-        win.updateWindow();
+        win.update();
         SDL_Delay(1000);
         SDL_FreeSurface(textS);
     }

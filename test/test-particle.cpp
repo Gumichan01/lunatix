@@ -165,9 +165,9 @@ int main(int argc, char **argv)
                 go = 0;
         }
 
-        LX_WindowManager::getInstance()->getWindow(0)->clearRenderer();
+        LX_WindowManager::getInstance()->clearWindows();
         dot->update();
-        LX_WindowManager::getInstance()->getWindow(0)->updateRenderer();
+        LX_WindowManager::getInstance()->updateWindows();
 
         SDL_Delay(16);
     }

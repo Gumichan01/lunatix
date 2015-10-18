@@ -171,7 +171,7 @@ void test_surface(void)
         cout << "SUCCESS - surface on the window" << endl;
 
     // Update the window
-    win3.updateWindow();
+    win3.update();
 
     // take a screenshot
     screen_ok = win3.screenshot("win-surface.png");
@@ -184,7 +184,7 @@ void test_surface(void)
 
 
     SDL_Delay(750);
-    win3.clearWindow();
+    win3.clear();
     SDL_FreeSurface(sf);
 
     cout << " = END TEST = " << endl;
@@ -233,9 +233,9 @@ void test_rendering(LX_Window *win)
         cout << "SUCCESS - Texture on the renderer" << endl;
 
 
-    win->updateRenderer();
+    win->update();
     SDL_Delay(750);
-    win->clearRenderer();
+    win->clear();
 
 
     if(win->putTextureAndRotate(st,NULL,&pos,45) == false)
@@ -243,7 +243,7 @@ void test_rendering(LX_Window *win)
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
 
-    win->updateRenderer();
+    win->update();
 
     // Take a screenshot
     screen_ok = win->screenshot("win-renderer.png");
@@ -255,7 +255,7 @@ void test_rendering(LX_Window *win)
         cout << "SUCCESS - screenshot token from the renderer" << endl;
 
     SDL_Delay(500);
-    win->clearRenderer();
+    win->clear();
 
     SDL_DestroyTexture(st);
 
@@ -304,11 +304,11 @@ void test_winManager(LX_Window *win)
         cout << "SUCCESS - Texture on the renderer" << endl;
 
 
-    win->updateRenderer();
+    LX_WindowManager::getInstance()->updateWindows();
 
     SDL_Delay(1000);
 
-    win->clearRenderer();
+    LX_WindowManager::getInstance()->clearWindows();
 
 
     if(win->putTextureAndRotate(st,NULL,&pos,45) == false)
@@ -316,11 +316,11 @@ void test_winManager(LX_Window *win)
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
 
-    win->updateRenderer();
+    LX_WindowManager::getInstance()->updateWindows();
 
     SDL_Delay(1000);
 
-    win->clearRenderer();
+    LX_WindowManager::getInstance()->updateWindows();
 
     LX_WindowManager::getInstance()->removeWindow(id);
 
