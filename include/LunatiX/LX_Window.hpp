@@ -84,12 +84,12 @@ public :
 class LX_Window
 {
 
-    SDL_Window *window;         /**< The internal window structure */
-    SDL_Renderer *renderer;     /**< The main renderer */
+    SDL_Window *window;         /* The internal window structure  */
+    SDL_Renderer *renderer;     /* The main renderer              */
 
-    int originalWidth;         /**< The width of the window */
-    int originalHeight;        /**< The height of the window */
-    bool renderMode;          /**< Use Surface or Rendering */
+    int originalWidth;          /* The width of the window        */
+    int originalHeight;         /* The height of the window       */
+    bool renderMode;            /* Use Surface or Rendering       */
 
     void init(std::string title, int posX, int posY, int w, int h,
               const Uint32 mode, Uint32 flag, bool accel = true);

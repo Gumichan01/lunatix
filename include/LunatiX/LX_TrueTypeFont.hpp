@@ -92,9 +92,9 @@ typedef enum LX_TTF_TypeText{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_T
 class LX_Font
 {
 
-    string font_str;            /**< The font file */
-    unsigned int font_size;     /**< The font size */
-    SDL_Color font_color;       /**< The font color */
+    string font_str;                /* The font file    */
+    unsigned int font_size;         /* The font size    */
+    SDL_Color font_color;           /* The font color   */
     LX_FileBuffer *font_buffer;
 
 

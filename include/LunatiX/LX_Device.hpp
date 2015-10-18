@@ -25,9 +25,9 @@
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
-#define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display */
-#define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display */
-#define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status */
+#define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display   */
+#define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
+#define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status       */
 
 const int LX_JOY_NAMESIZE =  64;     // The size of the joystick name
 
@@ -44,15 +44,15 @@ namespace LX_Device
 typedef struct LX_GamepadInfo
 {
 
-    SDL_JoystickID id;              /**< The joystick ID */
-    SDL_JoystickGUID uid;           /**< The joystick UID */
-    char name[LX_JOY_NAMESIZE];     /**< The name of the joystick */
-    int numAxis;                    /**< The number of axes */
-    int numBalls;                   /**< The number of balls */
-    int numButtons;                 /**< The number of buttons */
-    int numHats;                    /**< The number of hats */
+    SDL_JoystickID id;              /**< The joystick ID                */
+    SDL_JoystickGUID uid;           /**< The joystick UID               */
+    char name[LX_JOY_NAMESIZE];     /**< The name of the joystick       */
+    int numAxis;                    /**< The number of axes             */
+    int numBalls;                   /**< The number of balls            */
+    int numButtons;                 /**< The number of buttons          */
+    int numHats;                    /**< The number of hats             */
 
-} LX_GamepadInfo;                   /**< @brief The gamepad structure */
+} LX_GamepadInfo;                   /**< @brief The gamepad structure   */
 
 
 int numberOfDevices(void);

@@ -37,10 +37,10 @@ struct LX_Point;
 class LX_Polygon
 {
 
-    LX_Point *points;               /**< An array of LX_Point */
-    unsigned int nbPoints;          /**< The number of points */
-    unsigned int cursor;            /**< The size */
-    bool convex;                    /**< If the polygon is convex */
+    LX_Point *points;               /* An array of LX_Point     */
+    unsigned int nbPoints;          /* The number of points     */
+    unsigned int cursor;            /* The size                 */
+    bool convex;                    /* If the polygon is convex */
 
     void convexity(void);
 

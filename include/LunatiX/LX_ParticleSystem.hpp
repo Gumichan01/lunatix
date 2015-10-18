@@ -45,9 +45,9 @@ class LX_ParticleSystem
 {
 
 
-    LX_Particle **particles;            /**< The array of particles */
-    unsigned int nbParticles;           /**< The number of particles */
-    unsigned int idWin;                 /**< The id of the window to put the particles */
+    LX_Particle **particles;        /* The array of particles                   */
+    unsigned int nbParticles;       /* The number of particles                  */
+    unsigned int idWin;             /* The id of the window to put particles    */
 
     void init(unsigned int nbPart,unsigned int id);
 

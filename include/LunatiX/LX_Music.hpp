@@ -45,7 +45,7 @@ class LX_Sound;
 class LX_Music : public LX_Sound
 {
 
-    Mix_Music *music;      /**< The music to play */
+    Mix_Music *music;      /* The music to play */
 
 public:
 

@@ -47,9 +47,9 @@ class IOException;
 class LX_FileBuffer
 {
 
-    std::string name;       /**< The name of the file the instance refers to */
-    char *buffer;           /**< The read-only buffer */
-    Uint64 bufsize;         /**< The size of the buffer */
+    std::string name;       /* The name of the file the instance refers to  */
+    char *buffer;           /* The read-only buffer                         */
+    Uint64 bufsize;         /* The size of the buffer                       */
 
 
 public :

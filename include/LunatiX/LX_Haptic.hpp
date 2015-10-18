@@ -71,20 +71,6 @@ public :
 };
 
 
-
-
 #endif // LX_HAPTIC_HPP_INCLUDED
-
-
-
-
-
-
-
-
-
-
-
-
 
 
