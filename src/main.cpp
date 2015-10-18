@@ -241,7 +241,7 @@ int main ( int argc, char** argv )
     // Version of LunatiX Engine
     LX_Version luna;
 
-    LX_EngineVersion(&luna);
+    LX_EngineVersion(luna);
 
     printf("LunatiX Engine - Version %d.%d.%d \n",
            luna.major, luna.minor, luna.patch);

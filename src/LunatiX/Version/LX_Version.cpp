@@ -30,18 +30,18 @@ namespace LX_VersionInfo
 {
 
 /**
-*   @fn void LX_EngineVersion(LX_Version *version)
+*   @fn void LX_EngineVersion(LX_Version& version)
 *
 *   Get the version of the engine
 *
-*   @param version The structure to fill in. Must be not NULL
+*   @param version The structure to fill in.
 *
 */
-void LX_EngineVersion(LX_Version *version)
+void LX_EngineVersion(LX_Version& version)
 {
-    version->major = LX_MAJOR_VERSION;
-    version->minor = LX_MINOR_VERSION;
-    version->patch = LX_PATCH_VERSION;
+    version.major = LX_MAJOR_VERSION;
+    version.minor = LX_MINOR_VERSION;
+    version.patch = LX_PATCH_VERSION;
 }
 
 };
