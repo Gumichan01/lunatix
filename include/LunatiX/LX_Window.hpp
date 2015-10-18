@@ -89,7 +89,7 @@ class LX_Window
 
     int originalWidth;          /* The width of the window        */
     int originalHeight;         /* The height of the window       */
-    bool renderMode;            /* Use Surface or Rendering       */
+    bool displayMethod;         /* Use Surface or Rendering       */
 
     void init(std::string title, int posX, int posY, int w, int h,
               const Uint32 mode, Uint32 flag, bool accel = true);

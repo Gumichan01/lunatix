@@ -141,7 +141,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        renderMode = false;
+        displayMethod = false;
 
     init2();
 }
@@ -208,7 +208,7 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        renderMode = false;
+        displayMethod = false;
 
     init2();
 }
@@ -264,7 +264,7 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h,
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        renderMode = false;
+        displayMethod = false;
 
     init2();
 }
@@ -307,7 +307,7 @@ void LX_Window::createRendering(bool accel)
         LX_SetError(err_msg.c_str());
     }
 
-    renderMode = true;     // The render_mode is active
+    displayMethod = true;     // The render_mode is active
 }
 
 
@@ -553,7 +553,7 @@ bool LX_Window::screenshot(std::string filename)
 {
     bool success = false;
 
-    if(renderMode)
+    if(displayMethod)
     {
         // The window uses the renderer
         success = screenshotUsingRenderer(filename);
