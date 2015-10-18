@@ -483,15 +483,27 @@ void LX_Window::setFullscreen(Uint32 flag)
 
 
 /**
-*   @fn void LX_Window::updateRenderer(void)
+*   @fn void LX_Window::update(void)
 *
+*   Updates the window's display
+*
+*/
+void LX_Window::update(void)
+{
+    if(displayMethod)
+        updateRenderer();
+    else
+        updateWindow();
+}
+
+
+
+/*
 *   Updates the renderer of the window
 *
-*   @note This fonction must be used only if you manipulate textures
+*   This fonction must be used only if you manipulate textures
 *   on the current window. So you cannot use this function and
 *   LX_Window::updateWindow() together on a same window.
-*
-*   @sa updateWindow
 */
 void LX_Window::updateRenderer(void)
 {
@@ -499,16 +511,12 @@ void LX_Window::updateRenderer(void)
 }
 
 
-/**
-*   @fn void LX_Window::updateWindow(void)
-*
+/*
 *   This function updates the surface of the window
 *
-*   @note This fonction must be used only if you manipulate surfaces
+*   This fonction must be used only if you manipulate surfaces
 *   on the current window. So you cannot use this function and
 *   LX_Window::updateRenderer() together on a same window.
-*
-*   @sa updateRenderer
 */
 void LX_Window::updateWindow(void)
 {
@@ -517,10 +525,22 @@ void LX_Window::updateWindow(void)
 
 
 /**
-*   @fn void LX_Window::clearWindow(void)
+*   @fn void LX_Window::clear(void)
 *
-*   This function clears the main window
+*   CLear the display of the current window
 *
+*/
+void LX_Window::clear(void)
+{
+    if(displayMethod)
+        clearRenderer();
+    else
+        clearWindow();
+}
+
+
+/*
+*   Clear the main window surface
 */
 void LX_Window::clearWindow(void)
 {
@@ -529,11 +549,8 @@ void LX_Window::clearWindow(void)
 }
 
 
-/**
-*   @fn void LX_Window::clearRenderer(void)
-*
-*   This function clears the renderer
-*
+/*
+*   Clear the main window renderer
 */
 void LX_Window::clearRenderer(void)
 {

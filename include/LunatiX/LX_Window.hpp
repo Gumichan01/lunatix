@@ -97,8 +97,15 @@ class LX_Window
 
     void createRendering(bool accel);
 
+    void updateWindow(void);
+    void updateRenderer(void);
+
+    void clearWindow(void);
+    void clearRenderer(void);
+
     bool screenshotUsingRenderer(std::string& filename);
     bool screenshotUsingSurface(std::string& filename);
+
 
 public :
 
@@ -120,11 +127,8 @@ public :
     void setFullscreen(Uint32 flag);
 
     // Update and clear window
-    void updateWindow(void);
-    void updateRenderer(void);
-
-    void clearWindow(void);
-    void clearRenderer(void);
+    void update(void);
+    void clear(void);
 
     bool screenshot(std::string filename);
 

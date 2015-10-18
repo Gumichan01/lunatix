@@ -185,17 +185,17 @@ int main ( int argc, char** argv )
             }
         }
 
-        window->clearRenderer();
+        window->clear();
 
         window->putTexture(st,NULL,&pos);
         window->putTexture(t1,NULL,&pos1);
         window->putTexture(t2,NULL,&pos2);
 
-        window->updateRenderer();
+        window->update();
 
         // Put the image of explosion to the second window
         getWindowManager()->getWindow(1)->putTextureAndRotate(ex,NULL,&pos,45);
-        getWindowManager()->getWindow(1)->updateRenderer();
+        getWindowManager()->getWindow(1)->update();
 
         SDL_Delay(33);
     }
