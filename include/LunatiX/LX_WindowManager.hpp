@@ -60,6 +60,9 @@ public:
 
     unsigned int nbWindows(void);
 
+    void updateWindows();
+    void clearWindows();
+
     LX_Window * getWindow(unsigned int id);
 
 };

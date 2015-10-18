@@ -189,6 +189,38 @@ unsigned int LX_WindowManager::nbWindows(void)
 
 
 /**
+*   @fn void LX_WindowManager::updateWindows()
+*
+*   Update the windows
+*
+*/
+void LX_WindowManager::updateWindows()
+{
+    for(unsigned int i = 0; i < nbWin; i++)
+    {
+        if(windows[i] != NULL)
+            windows[i]->update();
+    }
+}
+
+
+/**
+*   @fn void LX_WindowManager::clearWindows()
+*
+*   Clear the content of the windows
+*
+*/
+void LX_WindowManager::clearWindows()
+{
+    for(unsigned int i = 0; i < nbWin; i++)
+    {
+        if(windows[i] != NULL)
+            windows[i]->clear();
+    }
+}
+
+
+/**
 *   @fn LX_Window * LX_WindowManager::getWindow(unsigned int id)
 *
 *   Get a window according to its ID
