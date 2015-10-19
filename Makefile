@@ -251,8 +251,8 @@ $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Music.o : $(MIXER_PATH)LX_Music.cpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Music.o : $(MIXER_PATH)LX_Music.cpp $(LUNATIX_INCLUDE_PATH)LX_Music.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
