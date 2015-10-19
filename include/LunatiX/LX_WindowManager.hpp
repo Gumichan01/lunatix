@@ -49,6 +49,9 @@ class LX_WindowManager
     LX_WindowManager();
     ~LX_WindowManager();
 
+    LX_WindowManager(LX_WindowManager& wm);
+    LX_WindowManager& operator =(LX_WindowManager& wm);
+
 public:
 
     static void init(void);

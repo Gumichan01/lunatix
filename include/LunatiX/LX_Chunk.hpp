@@ -46,10 +46,13 @@ namespace LX_Mixer
 *   @brief The chunk class
 *
 */
-class LX_Chunk : LX_Sound
+class LX_Chunk : virtual public LX_Sound
 {
 
     Mix_Chunk *chunk;
+
+    LX_Chunk(LX_Chunk& m);
+    LX_Chunk& operator =(LX_Chunk& m);
 
 public:
 

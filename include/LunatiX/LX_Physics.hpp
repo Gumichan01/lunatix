@@ -29,7 +29,7 @@
 class LX_Polygon;
 struct LX_Vector2D;
 
-
+/// @todo LX_Circle, LX_Polygon, LX_Point and LX_Vector2d in LX_Physics namespace
 
 /**
 *

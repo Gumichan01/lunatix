@@ -23,6 +23,7 @@
 *
 */
 
+/// @todo Modifiy the signature of the polygon getter
 
 struct LX_Point;
 
@@ -41,6 +42,9 @@ class LX_Polygon
     unsigned int nbPoints;          /* The number of points     */
     unsigned int cursor;            /* The size                 */
     bool convex;                    /* If the polygon is convex */
+
+    LX_Polygon(LX_Polygon& p);
+    LX_Polygon& operator =(LX_Polygon& p);
 
     void convexity(void);
 

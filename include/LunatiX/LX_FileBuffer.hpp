@@ -51,6 +51,8 @@ class LX_FileBuffer
     char *buffer;           /* The read-only buffer                         */
     Uint64 bufsize;         /* The size of the buffer                       */
 
+    LX_FileBuffer(LX_FileBuffer& fb);
+    LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
 public :
 

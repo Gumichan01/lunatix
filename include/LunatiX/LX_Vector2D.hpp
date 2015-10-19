@@ -21,6 +21,30 @@
 *
 */
 
+/**
+*   @todo operators of LX_Vector2D :
+*   - '=' : assignment
+*   - '==' : same direction and same norm
+*   - '!=' : not same direction or (||) not same norm
+*   - '>' : same direction and first norm > second norm
+*   - '<' : same direction and first norm < second norm
+*   - '>=' : same direction and first norm >= second norm
+*   - '<=' : same direction and first norm <= second norm
+*   - '+' : addition of x and y
+*   - '-' : substraction of x and y
+*   - '++' : vector's coordinates + 1
+*   - '--' : vector's coordinates - 1
+*/
+
+/**
+*   @todo functions of LX_Vector2D :
+*   - add(LX_Vector2D&, float)
+*   - sub(LX_Vector2D&, float)
+*   - multiply(LX_Vector2D&, float)
+*   - divide(LX_Vector2D&, float)
+*   - normalize(LX_Vector2D&)
+*   - isZeroVector(LX_Vector2D&)
+*/
 
 /**
 *   @struct LX_Vector2D

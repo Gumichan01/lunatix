@@ -81,6 +81,8 @@ class LX_Configuration
     void setFlags(void);
 
     LX_Configuration();
+    LX_Configuration(LX_Configuration& c);
+    LX_Configuration& operator =(LX_Configuration& c);
 
 
 public :

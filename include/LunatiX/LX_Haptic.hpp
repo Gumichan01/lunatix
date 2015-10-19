@@ -46,6 +46,9 @@ class LX_Haptic
     SDL_Haptic *haptic;
     int instanceID;
 
+    LX_Haptic(LX_Haptic& h);
+    LX_Haptic& operator =(LX_Haptic& h);
+
 public :
 
     LX_Haptic(int index=0);

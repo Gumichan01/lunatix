@@ -42,10 +42,13 @@ class LX_Sound;
 *   This class is a high level description of the Mix_Music type
 *
 */
-class LX_Music : public LX_Sound
+class LX_Music : virtual public LX_Sound
 {
 
     Mix_Music *music;      /* The music to play */
+
+    LX_Music(LX_Music& m);
+    LX_Music& operator =(LX_Music& m);
 
 public:
 

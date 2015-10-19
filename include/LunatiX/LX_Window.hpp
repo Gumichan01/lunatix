@@ -91,6 +91,9 @@ class LX_Window
     int originalHeight;         /* The height of the window       */
     bool displayMethod;         /* Use Surface or Rendering       */
 
+    LX_Window(LX_Window& w);
+    LX_Window& operator =(LX_Window& w);
+
     void init(std::string title, int posX, int posY, int w, int h,
               const Uint32 mode, Uint32 flag, bool accel = true);
     void init2(void);

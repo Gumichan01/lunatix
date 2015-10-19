@@ -97,6 +97,8 @@ class LX_Font
     SDL_Color font_color;           /* The font color   */
     LX_FileBuffer *font_buffer;
 
+    LX_Font(LX_Font& f);
+    LX_Font& operator =(LX_Font& f);
 
     void init(string font_file, SDL_Color *color, int size);
     SDL_Surface * drawText(LX_TTF_TypeText type, string text,

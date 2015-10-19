@@ -29,6 +29,13 @@ typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect) */
 
 
 /**
+*   @todo operators of LX_Point :
+*   - '=' : assignment
+*   - '==' : same coordinates
+*   - '!=' : not same coordinates
+*/
+
+/**
 *   @struct LX_Point
 *   @brief The point structure
 *
@@ -42,6 +49,17 @@ typedef struct LX_Point
 
 } LX_Point;     /**< The point */
 
+
+/**
+*   @todo operators of LX_Circle :
+*   - '=' : assignment
+*   - '==' : same coordinates and same radius
+*   - '!=' : not same coordinates or not same radius
+*   - '>' : first radius > second radius
+*   - '<' : first radius < second radius
+*   - '>=' : first radius >= second radius
+*   - '<=' : first radius <= second radius
+*/
 
 
 /**

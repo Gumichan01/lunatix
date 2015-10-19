@@ -88,6 +88,9 @@ class LX_File
     std::string name;       /* The name of the file         */
     SDL_RWops *data;        /* The internal file structure  */
 
+    LX_File(LX_File& f);
+    LX_File& operator =(LX_File& f);
+
     void open(const Uint32 mode);
 
 public :

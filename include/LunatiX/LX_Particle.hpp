@@ -55,6 +55,9 @@ class LX_Particle
     SDL_Texture *texture;           /* The texture (for the texture rendering)  */
     SDL_Surface *surface;           /* The surface (for the surface rendering)  */
 
+    LX_Particle(LX_Particle& p);
+    LX_Particle& operator =(LX_Particle& p);
+
     void init(const int x , const int y, const int w, const int h,
               const float vx, const float vy);
 

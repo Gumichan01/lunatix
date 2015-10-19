@@ -44,10 +44,12 @@ class LX_Particle;
 class LX_ParticleSystem
 {
 
-
     LX_Particle **particles;        /* The array of particles                   */
     unsigned int nbParticles;       /* The number of particles                  */
     unsigned int idWin;             /* The id of the window to put particles    */
+
+    LX_ParticleSystem(LX_ParticleSystem& ps);
+    LX_ParticleSystem& operator =(LX_ParticleSystem& ps);
 
     void init(unsigned int nbPart,unsigned int id);
 
