@@ -248,7 +248,8 @@ bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circ
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
-*   @warning If at least one parameter is NULL, the behaviour is undefined
+*   @warning    If at least one parameter is a null pointer,
+*               the behaviour is undefined
 *
 */
 bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
@@ -309,7 +310,8 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
-*   @warning If at least one parameter is NULL, the behaviour is undefined
+*   @warning    If at least one parameter is a null pointer,
+*               the behaviour is undefined
 *
 */
 bool LX_Physics::collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect)

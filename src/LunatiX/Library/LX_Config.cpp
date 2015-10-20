@@ -167,7 +167,7 @@ void LX_Configuration::destroy()
 /*
 *   Get the string from the lua stack
 *
-*   If state or str is NULL, a segmentation fault may occur
+*   If state or str is not valid, a segmentation fault may occur
 *   If len is 0 or less than the string you want to take from the lua state,
 *   the behaviour is undefined.
 *

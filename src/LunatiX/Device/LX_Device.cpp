@@ -94,7 +94,7 @@ int numberOfDevices(void)
 *
 *   @param joy The pointer to a joystick structure
 *
-*   @return The name of the joystick, NULL if the pointer is not valid
+*   @return The name of the joystick, a null pointer if the pointer is invalid
 *
 */
 const char * nameOf(SDL_Joystick * joy)
@@ -110,7 +110,8 @@ const char * nameOf(SDL_Joystick * joy)
 *
 *   @param controller The pointer to a structure relative to the gamepad
 *
-*   @return The name of the game controller, NULL if the pointer is not valid
+*   @return The name of the game controller, a null pointer
+*           if the pointer is invalid
 *
 */
 const char * nameOf(SDL_GameController * controller)
@@ -195,10 +196,10 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 *   @param info The structure you want to get the string format from
 *   @param str The string to fiil in
 *
-*   @return Always returns a non-NULL C string
+*   @return Always returns a valid string
 *
-*   @note This function never returns NULL
-*   @warning If info or str is NULL, a segmentation fault will occur
+*   @note This function never returns an invalid string
+*   @warning If info or str is not valid, a segmentation fault will occur
 *   @warning str must be long enough to get the entire text.
 *
 *   @sa statGamepad

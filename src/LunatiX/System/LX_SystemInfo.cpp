@@ -110,12 +110,13 @@ int getSystemRAM(void)
 *   @param size the pointer to the size to fill in
 *
 *   @return The list of display modes if there is at least one display mode,
-*           NULL otherwise, you can get an error message using LX_GetError()
+*           a null pointer otherwise, you can get an error message using
+*           LX_GetError()
 *
 *   @note This function allocate a memory to create the list, so you need
 *           to free that list when you do not need it.
 *
-*   @warning If size is NULL, a segmentation fault will occur
+*   @warning If size is a null pointer, a segmentation fault will occur
 *
 */
 const SDL_DisplayMode * getDisplayModes(int *size)

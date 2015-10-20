@@ -86,7 +86,7 @@ LX_Chunk::LX_Chunk(string filename)
 *
 *   @param file The file buffer you use to retrieve data
 *
-*   @note If the file buffer is NULL, you will have
+*   @note   If the file buffer is a null pointer, you will have
 *           an undefined behaviour
 *
 */

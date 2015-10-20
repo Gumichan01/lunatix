@@ -241,7 +241,7 @@ void LX_File::close(void)
 *   Try to load a surface from the file
 *
 *   @return A valid pointer to a surface if the file is an image file.
-*           NULL otherwise
+*           a null pointer otherwise
 *
 *   @note This function needs to read the entire file to create the surface.
 *           So the cursor is reinitialized to 0 to do that.

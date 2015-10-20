@@ -127,7 +127,7 @@ SDL_JoystickID LX_Gamepad::getID(void)
 *
 *   @return The haptic system
 *
-*   @note The system can be NULL, so check the returned value
+*   @note The system can be inexistent, so check the returned value
 */
 LX_Haptic * LX_Gamepad::getHaptic(void)
 {
@@ -141,7 +141,7 @@ LX_Haptic * LX_Gamepad::getHaptic(void)
 *
 *   Get the name of the Gamepad
 *
-*   @return The name of the gamepad, NULL otherwise
+*   @return The name of the gamepad, a null pointer otherwise
 *
 *   @sa toString
 */

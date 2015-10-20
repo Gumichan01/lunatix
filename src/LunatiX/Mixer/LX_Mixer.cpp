@@ -118,10 +118,10 @@ LX_Chunk * loadSample(Mix_Chunk *ch)
 *
 *   @param file The file buffer
 *
-*   @return A valid instance of LX_Chunk if the file buffer is not NULL
-*           NULL otherwise
+*   @return A valid instance of LX_Chunk if the file buffer is valid
+*           a null pointer otherwise
 *
-*   @note This function creates a new instance of LX_Chunk.
+*   @note   This function creates a new instance of LX_Chunk.
 *           So do not forget to destroy it.
 *
 */
@@ -141,10 +141,12 @@ LX_Chunk * loadSample(LX_FileBuffer *file)
 *
 *   @return The number of channels allocated
 *
-*   @note If num is 0, then all channels will be freed.
-*   @note A negative number do nothing,
+*   @note   If num is 0, then all channels will be freed.
+*
+*   @note   A negative number do nothing,
 *           it just displays the number of allocated channels.
-*   @note If num is less than the current number of channels,
+*
+*   @note   If num is less than the current number of channels,
 *           then the higher channels will be stopped, freed, and not mixed.
 *
 */

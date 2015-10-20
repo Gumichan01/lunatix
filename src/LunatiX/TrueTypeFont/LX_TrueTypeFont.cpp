@@ -233,7 +233,7 @@ int LX_Font::sizeOfText(string text, int size, int *w, int *h)
 *
 *   @return A control value, 0 on success, -1 on failure
 *
-*   @warning If the font is NULL, then you have an undefined behaviour
+*   @warning If the font is invalid, then you have an undefined behaviour
 *
 */
 int LX_Font::sizeOfText(TTF_Font *ttf, string text, int *w, int *h)
@@ -249,7 +249,7 @@ int LX_Font::sizeOfText(TTF_Font *ttf, string text, int *w, int *h)
 *
 *   @param text The string to display
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawSolidText(string text)
@@ -266,7 +266,7 @@ SDL_Surface * LX_Font::drawSolidText(string text)
 *   @param text The string to display
 *   @param size The size defined by the user
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawSolidText(string text, unsigned int size)
@@ -283,7 +283,7 @@ SDL_Surface * LX_Font::drawSolidText(string text, unsigned int size)
 *   @param text The string to display
 *   @param bg The background color
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawShadedText(string text, SDL_Color bg)
@@ -302,7 +302,7 @@ SDL_Surface * LX_Font::drawShadedText(string text, SDL_Color bg)
 *   @param g The green channel
 *   @param b The blue channel
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
@@ -323,7 +323,7 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 *   @param b The blue color of the background
 *   @param size The size defined by the user
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b,
@@ -340,7 +340,7 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b,
 *
 *   @param text The text you want to display
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawBlendedText(string text)
@@ -358,7 +358,7 @@ SDL_Surface * LX_Font::drawBlendedText(string text)
 *   @param text The text you want to display
 *   @param size The size defined by the user
 *
-*   @return An instance of SDL_Surface on success, NULL otherwise
+*   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
 */
 SDL_Surface * LX_Font::drawBlendedText(string text, unsigned int size)
@@ -367,8 +367,7 @@ SDL_Surface * LX_Font::drawBlendedText(string text, unsigned int size)
 }
 
 
-/**
-*
+/*
 *   Create a text surface according to the type,
 *   the color bakground, if necessary, and its size
 *
@@ -441,8 +440,8 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
 *   @param idWindow The ID of the window to get the renderer from.
 *                   It is necessary to load the texture
 *
-*   @return An instance of SDL_Texture on success, NULL if the window is not valid
-*               or if something wrong happened
+*   @return An instance of SDL_Texture on success, a null pointer
+*           if the window is not valid or if something wrong happened
 *
 */
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, int idWindow)
@@ -490,8 +489,9 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsig
 *   @param win The window to get the renderer from.
 *                   It is necessary to load the texture
 *
-*   @return An instance of SDL_Texture on success, NULL if the window is not valid
-*               or if something wrong happened
+*   @return An instance of SDL_Texture on success,
+*           a null pointer if the window is not valid
+*           or if something wrong happened
 *
 */
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text,

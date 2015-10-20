@@ -38,7 +38,7 @@ namespace LX_FileIO
 *
 *   @param filename The file to generate the buffer
 *
-*   @exception IOException If the filename is NULL
+*   @exception IOException If the filename is not defined
 *
 */
 LX_FileBuffer::LX_FileBuffer(const char * filename)

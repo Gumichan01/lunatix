@@ -148,7 +148,7 @@ unsigned int LX_Polygon::numberOfRealEdges(void) const
 *
 *   @param index The index of the point
 *
-*   @return A pointer to the point, NULL if you are out of range
+*   @return A pointer to the point, a null pointer if the index is not valid
 *
 */
 LX_Point * LX_Polygon::getPoint(const unsigned int index) const

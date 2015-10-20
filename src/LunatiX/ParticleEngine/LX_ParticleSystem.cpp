@@ -122,7 +122,7 @@ void LX_ParticleSystem::init(unsigned int nbPart,unsigned int id)
 *   @param p The particle to add
 *
 *   @return TRUE if the system had the particle with succes.
-*           FALSE if the particle is NULL or the system cannot add it
+*           FALSE if the particle is a null pointer or the system cannot add it
 *
 */
 bool LX_ParticleSystem::addParticle(LX_Particle *p)

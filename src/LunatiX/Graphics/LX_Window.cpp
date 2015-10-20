@@ -189,7 +189,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *
 *   Create the window with an already set window
 *
-*   @param sdlWin The SDL_Window (must be a non-NULL pointer)
+*   @param sdlWin The SDL_Window (must be a valid pointer)
 *   @param mode The display mode
 *           - LX_WINDOW_SURFACE : to use surfaces
 *           - LX_WINDOW_RENDERING : to use the renderer
@@ -335,8 +335,10 @@ LX_Window::~LX_Window()
 *
 *   @return TRUE If the image was put with success, FALSE otherwise
 *
-*   @note If you do not need to determine the area parameter of the surface, put NULL
-*   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
+*   @note   If you do not need to determine the area parameter of the surface,
+*           put a null pointer
+*
+*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @sa putTexture
@@ -385,9 +387,12 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *
 *   @return TRUE If the texture was put with success, FALSE otherwise
 *
-*   @note If you do not need to determine the area parameter of the surface, put NULL
+*   @note   If you do not need to determine the area parameter of the surface,
+*           put a null pointer
+*
 *   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
+*
 *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
 *               to display the texture according to its dimension
 *
@@ -413,11 +418,14 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 *
 *   @return TRUE If the texture was put with success, FALSE otherwise
 *
-*   @note If you do not need to determine the area parameter of the surface, put NULL
-*   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
+*   @note   If you do not need to determine the area parameter of the surface,
+*           put a null pointer
+*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
-*   @warning The width and the height defined in the SDL_Rect are important, the function uses it
-*               to display the texture according to its dimension
+*
+*   @warning    The width and the height defined in the SDL_Rect are important,
+*               the function uses it to display the texture according
+*               to its dimension
 *
 *   @sa putSurface
 *   @sa putTexture
@@ -668,7 +676,7 @@ SDL_Surface * LX_Window::getSurface(void)
 *
 *   @return A pointer to the SDL_Window instance
 *
-*   @note Normally, the function never returns a NULL pointer,
+*   @note Normally, the function never returns an invalid pointer,
 *           but it is better to check the pointer value
 *
 */
