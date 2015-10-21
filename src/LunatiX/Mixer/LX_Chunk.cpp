@@ -32,15 +32,49 @@ using namespace LX_FileIO;
 namespace LX_Mixer
 {
 
+
+
+/**
+*   @fn LX_ChunkException::LX_ChunkException(std::string err)
+*
+*   Build the LX_ChunkException class
+*
+*   @param err The error string
+*
+*/
+LX_ChunkException::LX_ChunkException(std::string err)
+{
+    stringError = err;
+}
+
+
+/**
+*   @fn const char * LX_ChunkException::what() const throw()
+*
+*   Get the error string
+*
+*   @return The error string
+*/
+const char * LX_ChunkException::what() const throw()
+{
+    return stringError.c_str();
+}
+
+
+LX_ChunkException::~LX_ChunkException() throw() {}
+
+
+
+
 /**
 *   @fn LX_Chunk::LX_Chunk(void)
 *
 *   Construct the instance
 *
 */
-LX_Chunk::LX_Chunk(void)
+LX_Chunk::LX_Chunk(void) : chunk(NULL)
 {
-    chunk = NULL;
+    // Empty
 }
 
 
@@ -53,9 +87,9 @@ LX_Chunk::LX_Chunk(void)
 *   @param sample The sample file
 *
 */
-LX_Chunk::LX_Chunk(Mix_Chunk *sample)
+LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 {
-    chunk = sample;
+    // Empty
 }
 
 
@@ -70,11 +104,15 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample)
 *           The chunk was optimized for this format. But it can work with
 *           an other file type.
 *
+*   @exception LX_ChunkException
+*
 */
-LX_Chunk::LX_Chunk(string filename)
+LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
 {
-    chunk = NULL;
-    load(filename.c_str());
+    if(load(filename.c_str()) == false)
+    {
+        throw LX_ChunkException(LX_GetError());
+    }
 }
 
 
@@ -90,10 +128,12 @@ LX_Chunk::LX_Chunk(string filename)
 *           an undefined behaviour
 *
 */
-LX_Chunk::LX_Chunk(LX_FileBuffer * file)
+LX_Chunk::LX_Chunk(LX_FileBuffer * file) : chunk(NULL)
 {
-    chunk = NULL;
-    loadFromBuffer(file);
+    if(loadFromBuffer(file) == false)
+    {
+        throw LX_ChunkException(LX_GetError());
+    }
 }
 
 

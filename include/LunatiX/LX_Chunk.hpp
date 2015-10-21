@@ -41,6 +41,21 @@ namespace LX_Mixer
 {
 
 
+class LX_ChunkException : public std::exception
+{
+    std::string stringError;
+
+public :
+
+    LX_ChunkException(std::string err);
+
+    const char * what() const throw();
+
+    ~LX_ChunkException() throw();
+};
+
+
+
 /**
 *   @class LX_Chunk
 *   @brief The chunk class
