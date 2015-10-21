@@ -203,10 +203,7 @@ int LX_Font::sizeOfText(string text, int size, int *w, int *h)
     TTF_Font *ttf = NULL;
     int sz;
 
-    if(font_buffer == NULL)
-        ttf = TTF_OpenFont(font_str.c_str(),size);
-    else
-        ttf = font_buffer->getFontFromBuffer(size);
+    ttf = createInternalFont(size);
 
     if(ttf == NULL)
         return -1;
