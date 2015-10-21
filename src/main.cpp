@@ -48,6 +48,8 @@ int main ( int argc, char** argv )
     bool err, game = true;
     int wt, ht;
 
+    SDL_Event event;
+
     SDL_Texture *st = NULL;
     SDL_Texture *ex = NULL;
 
@@ -59,10 +61,6 @@ int main ( int argc, char** argv )
     LX_Window *window2 = NULL;
     LX_Font *ttf = NULL;
     LX_Music *audio = NULL;
-
-    LX_FileBuffer buf("data/explosion.wav");
-    LX_Chunk chunk(&buf);
-    SDL_Event event;
 
     err = LX_Init();
 
@@ -145,6 +143,7 @@ int main ( int argc, char** argv )
                 case SDLK_BACKSPACE :
                     LX_Mixer::fadeOutMusic(4000);
                     break;
+
                 case SDLK_d :
                     window->setFullscreen(LX_GRAPHICS_FULLSCREEN_DESKTOP);
                     break;
@@ -213,6 +212,7 @@ int main ( int argc, char** argv )
     delete ttf;
     delete window;
     delete window2;
+    delete chunk;
 
     // Gamepad
     LX_Gamepad *gp = new LX_Gamepad();

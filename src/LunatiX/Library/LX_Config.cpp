@@ -234,7 +234,7 @@ void LX_Configuration::setFlags(void)
     // Get the function
     lua_getglobal(state,luaFunction.c_str());
 
-    // Is it what we want ?
+    // Is it what we want?
     if(!lua_isfunction(state,-1))
     {
         stringstream ss;
