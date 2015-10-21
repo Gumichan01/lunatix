@@ -78,7 +78,7 @@ namespace LX_TrueTypeFont
 */
 typedef enum LX_TTF_TypeText{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 
-
+/// @todo Remove LX_Font::init()
 
 /**
 *   @class LX_Font
@@ -101,9 +101,10 @@ class LX_Font
     LX_Font& operator =(LX_Font& f);
 
     void init(string font_file, SDL_Color *color, int size);
+    TTF_Font * createFontToDraw(unsigned int size);
     SDL_Surface * drawText(LX_TTF_TypeText type, string text,
-                           Uint8 r, Uint8 g, Uint8 b,
-                           unsigned int size = LX_TTF_DEFAULT_FONT_SIZE);
+                           unsigned int size = 0,
+                           Uint8 r = 0, Uint8 g = 0, Uint8 b = 0);
 
 public:
 

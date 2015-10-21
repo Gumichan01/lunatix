@@ -254,6 +254,12 @@ int LX_Font::sizeOfText(TTF_Font *ttf, string text, int *w, int *h)
 */
 SDL_Surface * LX_Font::drawSolidText(string text)
 {
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot fraw a text with a null size");
+        return NULL;
+    }
+
     return drawSolidText(text.c_str(),font_size);
 }
 
@@ -271,7 +277,7 @@ SDL_Surface * LX_Font::drawSolidText(string text)
 */
 SDL_Surface * LX_Font::drawSolidText(string text, unsigned int size)
 {
-    return drawText(LX_TTF_SOLID,text.c_str(),0,0,0,size);
+    return drawText(LX_TTF_SOLID,text.c_str(),size);
 }
 
 
@@ -307,7 +313,7 @@ SDL_Surface * LX_Font::drawShadedText(string text, SDL_Color bg)
 */
 SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 {
-    return drawText(LX_TTF_SHADED,text.c_str(),r,g,b,font_size);
+    return drawText(LX_TTF_SHADED,text.c_str(),font_size,r,g,b);
 }
 
 
@@ -329,7 +335,7 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b,
                                       unsigned int size)
 {
-    return drawText(LX_TTF_SHADED,text.c_str(),r,g,b,size);
+    return drawText(LX_TTF_SHADED,text.c_str(),size,r,g,b);
 }
 
 
@@ -345,6 +351,12 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b,
 */
 SDL_Surface * LX_Font::drawBlendedText(string text)
 {
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot fraw a text with a null size");
+        return NULL;
+    }
+
     return drawBlendedText(text.c_str(),font_size);
 }
 
@@ -363,7 +375,7 @@ SDL_Surface * LX_Font::drawBlendedText(string text)
 */
 SDL_Surface * LX_Font::drawBlendedText(string text, unsigned int size)
 {
-    return drawText(LX_TTF_BLENDED,text.c_str(),0,0,0,size);
+    return drawText(LX_TTF_BLENDED,text.c_str(),size);
 }
 
 
@@ -371,31 +383,24 @@ SDL_Surface * LX_Font::drawBlendedText(string text, unsigned int size)
 *   Create a text surface according to the type,
 *   the color bakground, if necessary, and its size
 *
-*   If size is 0, then the default font size is used
-*   You can put any value you want if you do not need to use r, g and b
+*   If size is 0, then the font size set by the user is used
+*   r, g, b and size are optionnal in this private function.
+*
 *
 */
 SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
-                                Uint8 r, Uint8 g, Uint8 b, unsigned int size)
+                                unsigned int size,Uint8 r, Uint8 g, Uint8 b)
 {
     TTF_Font *ttf = NULL;
     SDL_Surface *loaded = NULL;
 
-    if(size != font_size && size == 0)
+    if(size == 0)
     {
-        /*  Check if the buffer is not NULL.
-            It may append if the allocation failed in the constructor */
-        if(font_buffer == NULL)
-            ttf = TTF_OpenFont(font_str.c_str(), font_size);
-        else
-            ttf = font_buffer->getFontFromBuffer(font_size);
+        ttf = createFontToDraw(font_size);
     }
     else
     {
-        if(font_buffer == NULL)
-            ttf = TTF_OpenFont(font_str.c_str(), size);
-        else
-            ttf = font_buffer->getFontFromBuffer(size);
+        ttf = createFontToDraw(size);
     }
 
     if(ttf == NULL)
@@ -424,6 +429,20 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
 
     TTF_CloseFont(ttf);
     return loaded;
+}
+
+/*
+*   Create an internal and temporal font
+*   according to the font file in the class
+*   or the file buffer if it exists
+*/
+TTF_Font * LX_Font::createFontToDraw(unsigned int size)
+{
+    if(font_buffer == NULL)
+        return TTF_OpenFont(font_str.c_str(), size);
+
+    // The font buffer exists
+    return font_buffer->getFontFromBuffer(size);
 }
 
 
