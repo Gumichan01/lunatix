@@ -175,14 +175,14 @@ const char * LX_Gamepad::toString(char *str)
     }
 
     if(gc != NULL)
-        err = statGamepad(gc,&gi);
+        err = statGamepad(gc,gi);
     else
-        err = statGamepad(joy,&gi);
+        err = statGamepad(joy,gi);
 
     if(err == -1)
         return NULL;
 
-    return gamepadToString(&gi,str);
+    return gamepadToString(gi,str);
 }
 
 

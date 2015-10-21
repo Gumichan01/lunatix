@@ -47,24 +47,21 @@ int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info);
 namespace LX_Device
 {
 
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info)
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     if(joy == NULL)
         return LX_SetError("Invalid joystick\n");
 
-    if(info == NULL)
-        return LX_SetError("Invalid gamepad info\n");
-
     // Get information
-    info->id = SDL_JoystickInstanceID(joy);
-    info->uid = SDL_JoystickGetGUID(joy);
-    info->numAxis = SDL_JoystickNumAxes(joy);
-    info->numBalls = SDL_JoystickNumBalls(joy);
-    info->numButtons = SDL_JoystickNumButtons(joy);
-    info->numHats = SDL_JoystickNumHats(joy);
+    info.id = SDL_JoystickInstanceID(joy);
+    info.uid = SDL_JoystickGetGUID(joy);
+    info.numAxis = SDL_JoystickNumAxes(joy);
+    info.numBalls = SDL_JoystickNumBalls(joy);
+    info.numButtons = SDL_JoystickNumButtons(joy);
+    info.numHats = SDL_JoystickNumHats(joy);
 
-    if(info->id == -1 || info->numAxis == -1 || info->numBalls == -1
-       || info->numButtons == -1 || info->numHats == -1)
+    if(info.id == -1 || info.numAxis == -1 || info.numBalls == -1
+       || info.numButtons == -1 || info.numHats == -1)
     {
         return LX_SetError("Cannot get information\n");
     }
@@ -122,7 +119,7 @@ const char * nameOf(SDL_GameController * controller)
 
 
 /**
-*   @fn int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
+*   @fn int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 *
 *   Get the name of a game controller
 *
@@ -133,22 +130,19 @@ const char * nameOf(SDL_GameController * controller)
 *               -1 on failure
 *
 */
-int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
+int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     const char *tmp;
 
     if(joy == NULL)
         return LX_SetError("Invalid joystick\n");
 
-    if(info == NULL)
-        return LX_SetError("Invalid gamepad info\n");
-
     tmp = nameOf(joy);
 
     if(tmp == NULL)
         return LX_SetError("Cannot get the name of the joystick\n");
 
-    strcpy(info->name,tmp);
+    strcpy(info.name,tmp);
 
     return lx_stat(joy,info);
 }
@@ -156,7 +150,7 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 
 
 /**
-*   @fn int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
+*   @fn int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 *
 *   Get the name of a game controller
 *
@@ -167,22 +161,19 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo *info)
 *               -1 on failure
 *
 */
-int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
+int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 {
     const char *tmp;
 
     if(gc == NULL)
         return LX_SetError("Invalid game controller\n");
 
-    if(info == NULL)
-        return LX_SetError("Invalid gamepad info\n");
-
     tmp = nameOf(gc);
 
     if(tmp == NULL)
         return LX_SetError("Cannot get the name of the game controller\n");
 
-    strcpy(info->name,tmp);
+    strcpy(info.name,tmp);
 
     return lx_stat(SDL_GameControllerGetJoystick(gc),info);
 }
@@ -204,22 +195,22 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo *info)
 *
 *   @sa statGamepad
 */
-const char * gamepadToString(LX_GamepadInfo *info, char * str)
+const char * gamepadToString(LX_GamepadInfo& info, char * str)
 {
     ostringstream stream;
     char guid[GUID_SIZE+1];
 
     memset(&guid,0,GUID_SIZE+1);
-    SDL_JoystickGetGUIDString(info->uid,guid,GUID_SIZE);
+    SDL_JoystickGetGUIDString(info.uid,guid,GUID_SIZE);
 
     stream << endl << " ==== Gamepad Information ==== " << endl << endl
-    << "Gamepad - ID : " << info->id << endl
+    << "Gamepad - ID : " << info.id << endl
     << "Gamepad - UID : " << guid << endl
-    << "Gamepad - Name : " << info->name << endl
-    << "Gamepad - Number of Axes : " << info->numAxis << endl
-    << "Gamepad - Number of Balls : " << info->numBalls << endl
-    << "Gamepad - Number of Buttons : " << info->numButtons << endl
-    << "Gamepad - Number of Hats : " << info->numHats << endl;
+    << "Gamepad - Name : " << info.name << endl
+    << "Gamepad - Number of Axes : " << info.numAxis << endl
+    << "Gamepad - Number of Balls : " << info.numBalls << endl
+    << "Gamepad - Number of Buttons : " << info.numButtons << endl
+    << "Gamepad - Number of Hats : " << info.numHats << endl;
 
     strcpy(str,stream.str().c_str());
     return str;
