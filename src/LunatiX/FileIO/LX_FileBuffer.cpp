@@ -27,6 +27,8 @@
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Error.hpp>
 
+/// @bug There is an issue when the file buffer read a wav file
+
 
 namespace LX_FileIO
 {
