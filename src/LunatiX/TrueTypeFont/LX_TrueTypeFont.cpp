@@ -396,11 +396,11 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
 
     if(size == 0)
     {
-        ttf = createFontToDraw(font_size);
+        ttf = createInternalFont(font_size);
     }
     else
     {
-        ttf = createFontToDraw(size);
+        ttf = createInternalFont(size);
     }
 
     if(ttf == NULL)
@@ -436,7 +436,7 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
 *   according to the font file in the class
 *   or the file buffer if it exists
 */
-TTF_Font * LX_Font::createFontToDraw(unsigned int size)
+TTF_Font * LX_Font::createInternalFont(unsigned int size)
 {
     if(font_buffer == NULL)
         return TTF_OpenFont(font_str.c_str(), size);

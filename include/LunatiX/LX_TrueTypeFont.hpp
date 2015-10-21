@@ -101,7 +101,7 @@ class LX_Font
     LX_Font& operator =(LX_Font& f);
 
     void init(string font_file, SDL_Color *color, int size);
-    TTF_Font * createFontToDraw(unsigned int size);
+    TTF_Font * createInternalFont(unsigned int size);
     SDL_Surface * drawText(LX_TTF_TypeText type, string text,
                            unsigned int size = 0,
                            Uint8 r = 0, Uint8 g = 0, Uint8 b = 0);
