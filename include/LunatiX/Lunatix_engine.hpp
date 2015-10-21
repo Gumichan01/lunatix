@@ -22,6 +22,7 @@
 *
 */
 
+/// @todo remove the init() functions
 
 #include "LX_Library.hpp"
 #include "LX_Config.hpp"
