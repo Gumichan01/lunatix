@@ -462,34 +462,18 @@ TTF_Font * LX_Font::createInternalFont(unsigned int size)
 */
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsigned int size, int idWindow)
 {
-    SDL_Surface *surface =  NULL;
-    SDL_Texture *texture = NULL;
-
     LX_Window * target_window = NULL;
-    SDL_Renderer *target_render = NULL;
 
     if(idWindow < 0)
+    {
+        LX_SetError("LX_Font::drawTextToTexture(): invalid id");
         return NULL;
-
-    surface = drawText(type,text.c_str(),0,0,0,size);   // Get the surface
-
-    if(surface == NULL)
-        return texture;
+    }
 
     // Get the window to use the renderer
     target_window = LX_WindowManager::getInstance()->getWindow(idWindow);
 
-    if(target_window == NULL)
-    {
-        SDL_FreeSurface(surface);
-        return NULL;
-    }
-
-    target_render = target_window->getRenderer();
-    texture = SDL_CreateTextureFromSurface(target_render,surface);
-    SDL_FreeSurface(surface);
-
-    return texture;
+    return drawTextToTexture(type,text.c_str(),size,target_window);
 }
 
 
@@ -513,13 +497,18 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text, unsig
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text,
                                          unsigned int size, LX_Window *win)
 {
-    SDL_Surface *surface =  NULL;
+    SDL_Surface *surface = NULL;
     SDL_Texture *texture = NULL;
 
-    if(win == NULL)
-        return NULL;
+    int black = 0;
 
-    surface = drawText(type,text.c_str(),0,0,0,size);   // Get the surface
+    if(win == NULL)
+    {
+        LX_SetError("LX_Font::drawTextToTexture(): invalid window");
+        return NULL;
+    }
+
+    surface = drawText(type,text.c_str(),size,black,black,black);
 
     if(surface == NULL)
         return texture;
@@ -541,7 +530,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,string text,
 */
 void LX_Font::setColor(SDL_Color *color)
 {
-    if( color != NULL )
+    if(color != NULL)
     {
         font_color.r = color->r;
         font_color.g = color->g;
