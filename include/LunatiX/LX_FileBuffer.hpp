@@ -59,7 +59,7 @@ public :
     LX_FileBuffer(const char * filename);
 
     SDL_Surface * getSurfaceFromBuffer(void);
-    TTF_Font * getTTFFromBuffer(int size);
+    TTF_Font * getFontFromBuffer(int size);
     Mix_Chunk * getChunkFromBuffer(void);
     const char * getFilename(void);
 

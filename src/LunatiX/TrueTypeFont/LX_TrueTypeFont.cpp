@@ -206,7 +206,7 @@ int LX_Font::sizeOfText(string text, int size, int *w, int *h)
     if(font_buffer == NULL)
         ttf = TTF_OpenFont(font_str.c_str(),size);
     else
-        ttf = font_buffer->getTTFFromBuffer(size);
+        ttf = font_buffer->getFontFromBuffer(size);
 
     if(ttf == NULL)
         return -1;
@@ -381,21 +381,21 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
     TTF_Font *ttf = NULL;
     SDL_Surface *loaded = NULL;
 
-    if(size != font_size && size <= 0)
+    if(size != font_size && size == 0)
     {
         /*  Check if the buffer is not NULL.
             It may append if the allocation failed in the constructor */
         if(font_buffer == NULL)
             ttf = TTF_OpenFont(font_str.c_str(), font_size);
         else
-            ttf = font_buffer->getTTFFromBuffer(font_size);
+            ttf = font_buffer->getFontFromBuffer(font_size);
     }
     else
     {
         if(font_buffer == NULL)
             ttf = TTF_OpenFont(font_str.c_str(), size);
         else
-            ttf = font_buffer->getTTFFromBuffer(size);
+            ttf = font_buffer->getFontFromBuffer(size);
     }
 
     if(ttf == NULL)

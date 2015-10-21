@@ -104,14 +104,14 @@ SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
 
 
 /**
-*   @fn TTF_Font * LX_FileBuffer::getTTFFromBuffer(int size)
+*   @fn TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 *
 *   Try to load a TTF_Font from the memory
 *
 *   @return A valid font if the memory refers to a font
 *
 */
-TTF_Font * LX_FileBuffer::getTTFFromBuffer(int size)
+TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 {
     SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
     return (rw == NULL) ? NULL:TTF_OpenFontRW(rw,1,size);
