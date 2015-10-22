@@ -38,21 +38,16 @@ namespace LX_FileIO
 *
 *   @param filename The file to generate the buffer
 *
-*   @exception IOException If the filename is not defined
+*   @exception std::logic_error If the filename is not defined
+*   @exception IOException If the file cannot be dealt by the instance
 *
 */
 LX_FileBuffer::LX_FileBuffer(const char * filename)
+    : name(filename), buffer(NULL), bufsize(0)
 {
     LX_File *reader = NULL;
     std::string str("LX_FileBuffer : ");
     size_t r = 0;
-
-    if(filename == NULL)
-        throw IOException("LX_FileBuffer : invalid filename");
-
-    buffer = NULL;
-    bufsize = 0;
-    name = filename;
 
     reader = new LX_File(name.c_str(),LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
