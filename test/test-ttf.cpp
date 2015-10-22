@@ -66,7 +66,7 @@ void test_font(void)
     }
 
 
-    textS = font->drawShadedText("My name is Gumichan01",127,127,127);
+    textS = font->drawShadedText("My name is Gumichan01",0,255,0);
 
     if(textS == NULL)
         cerr << "FAILURE - text not loaded" << endl;

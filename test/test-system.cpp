@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 
 #include <LunatiX/Lunatix_engine.hpp>
@@ -28,7 +27,8 @@ int main(int argc, char **argv)
         cout << "\nDisplay : " << endl;
         for(int i = 0; i < sz; i++)
         {
-            cout << mode[i].w << " x " << mode[i].h << " @ ~" << mode[i].refresh_rate << " Hz" << endl;
+            cout << mode[i].w << " x " << mode[i].h << " @ ~"
+                 << mode[i].refresh_rate << " Hz" << endl;
         }
     }
     else
