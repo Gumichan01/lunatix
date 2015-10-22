@@ -140,10 +140,54 @@ void LX_File::open(const Uint32 mode)
 *
 *   @return The number of objects read. 0 at error or end of file
 *
+*   @note It can read less bytes than expected.
 */
 size_t LX_File::read(void *ptr,size_t size,size_t max_num)
 {
     return SDL_RWread(data,ptr,size,max_num);
+}
+
+
+/**
+*   @fn size_t LX_File::readExactly(void *ptr,size_t size,size_t num)
+*
+*   Read exactly max_num bytes of the file
+*
+*   @param ptr The pointer to a buffer to read data into
+*   @param size The size of each object to read, in bytes
+*   @param num The maximum number of objects to read
+*
+*   @return The number of objects read. 0 at error or end of file
+*
+*   @note   This function assures that exactly num bytes will be read
+*
+*/
+size_t LX_File::readExactly(void *ptr,size_t size,size_t num)
+{
+    size_t total_read = 0;
+    size_t read_data = 0;
+    char * p = static_cast<char *>(ptr);
+
+    // Read at most num bytes
+    while(total_read < num)
+    {
+        read_data = read(p,size,num);
+
+        // Did it work?
+        if(read_data == 0)
+            return 0;
+
+        // Move a the end of retrieved data
+        p += read_data;
+        total_read += read_data;
+    }
+
+    if(total_read != num)
+    {
+        return 0;
+    }
+
+    return total_read;
 }
 
 

@@ -27,8 +27,6 @@
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-/// @bug There is an issue when the file buffer read a wav file
-
 
 namespace LX_FileIO
 {
@@ -77,7 +75,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
         throw IOException(str + "not enough memory to store the file content");
     }
 
-    r = reader->read(buffer,sizeof(char),bufsize);
+    r = reader->readExactly(buffer,sizeof(char),bufsize);
 
     if(r < bufsize)
     {
