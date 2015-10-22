@@ -9,6 +9,15 @@
 using namespace std;
 
 
+string boolState(const bool b)
+{
+    if(b)
+        return "active";
+
+    return "inactive";
+}
+
+
 int main(int argc, char **argv)
 {
     bool err = false;
@@ -32,29 +41,29 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine has a singleton configuration" << endl;
 
 
-    int video = configuration->getVideoFlag();
-    int ttfont = configuration->getTTF_Flag();
-    int sound = configuration->getAudioFlag();
-    int gamepad = configuration->getJoystickFlag();
-    int opengl = configuration->getOpenGL_Flag();
+    bool video = configuration->getVideoFlag();
+    bool ttfont = configuration->getTTF_Flag();
+    bool sound = configuration->getAudioFlag();
+    bool gamepad = configuration->getJoystickFlag();
+    bool opengl = configuration->getOpenGL_Flag();
     std::string font = configuration->getFontFile();
     int size = configuration->getFontSize();
     int w = configuration->getWinWidth();
     int h = configuration->getWinHeight();
-    int f = configuration->getFullscreenFlag();
+    bool f = configuration->getFullscreenFlag();
 
 
     std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
-    std::cout << "video : " << video << std::endl;
-    std::cout << "true type font : " << ttfont << std::endl;
-    std::cout << "audio : " << sound << std::endl;
-    std::cout << "gamepad : " << gamepad << std::endl;
-    std::cout << "opengl : " << opengl << std::endl;
+    std::cout << "video : " << boolState(video) << std::endl;
+    std::cout << "true type font : " << boolState(ttfont) << std::endl;
+    std::cout << "audio : " << boolState(sound) << std::endl;
+    std::cout << "gamepad : " << boolState(gamepad) << std::endl;
+    std::cout << "opengl : " << boolState(opengl) << std::endl;
     std::cout << "font : " << font << std::endl;
     std::cout << "size : " << size << std::endl;
     std::cout << "width : " << w << std::endl;
     std::cout << "height : " << h << std::endl;
-    std::cout << "fullscreen : " << f << std::endl;
+    std::cout << "fullscreen : " << boolState(f) << std::endl;
 
     LX_Quit();
 
