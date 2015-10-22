@@ -36,6 +36,26 @@ class LX_Sound;
 
 
 /**
+*   @class LX_MusicException
+*   @brief The exception class of LX_Music
+*
+*/
+class LX_MusicException : public std::exception
+{
+    std::string stringError;
+
+public :
+
+    LX_MusicException(std::string err);
+
+    const char * what() const throw();
+
+    ~LX_MusicException() throw();
+};
+
+
+
+/**
 *   @class LX_Music
 *   @brief The music class
 *

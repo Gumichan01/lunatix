@@ -29,15 +29,46 @@
 namespace LX_Mixer
 {
 
+
+/**
+*   @fn LX_MusicException::LX_MusicException(std::string err)
+*
+*   Build the LX_MusicException class
+*
+*   @param err The error string
+*
+*/
+LX_MusicException::LX_MusicException(std::string err)
+{
+    stringError = err;
+}
+
+
+/**
+*   @fn const char * LX_MusicException::what() const throw()
+*
+*   Get the error string
+*
+*   @return The error string
+*/
+const char * LX_MusicException::what() const throw()
+{
+    return stringError.c_str();
+}
+
+
+LX_MusicException::~LX_MusicException() throw() {}
+
+
 /**
 *   @fn LX_Music::LX_Music(void)
 *
 *   Create the instance
 *
 */
-LX_Music::LX_Music(void)
+LX_Music::LX_Music(void) : music(NULL)
 {
-    music = NULL;
+    // Empty
 }
 
 
@@ -49,9 +80,12 @@ LX_Music::LX_Music(void)
 *   @param mus The Mix_Music
 *
 */
-LX_Music::LX_Music(Mix_Music *mus)
+LX_Music::LX_Music(Mix_Music *mus) : music(mus)
 {
-    music = mus;
+    if(mus == NULL)
+    {
+        throw LX_MusicException("LX_Music constructor: invalid Mix_Music");
+    }
 }
 
 
@@ -63,11 +97,12 @@ LX_Music::LX_Music(Mix_Music *mus)
 *   @param filename The music filename you want to load
 *
 */
-LX_Music::LX_Music(string filename)
+LX_Music::LX_Music(string filename) : music(NULL)
 {
-    music = NULL;
-
-    load(filename.c_str());
+    if(load(filename.c_str()) == false)
+    {
+        throw LX_MusicException(LX_GetError());
+    }
 }
 
 

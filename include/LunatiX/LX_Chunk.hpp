@@ -40,7 +40,11 @@ using namespace LX_FileIO;
 namespace LX_Mixer
 {
 
-
+/**
+*   @class LX_ChunkException
+*   @brief The exception class of LX_Chunk
+*
+*/
 class LX_ChunkException : public std::exception
 {
     std::string stringError;

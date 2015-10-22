@@ -33,7 +33,6 @@ namespace LX_Mixer
 {
 
 
-
 /**
 *   @fn LX_ChunkException::LX_ChunkException(std::string err)
 *
@@ -104,7 +103,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 *           The chunk was optimized for this format. But it can work with
 *           an other file type.
 *
-*   @exception LX_ChunkException
+*   @exception LX_ChunkException if data cannot be loaded from the file
 *
 */
 LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
@@ -126,6 +125,8 @@ LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
 *
 *   @note   If the file buffer is a null pointer, you will have
 *           an undefined behaviour
+*
+*   @exception LX_ChunkException if data cannot be loaded from the file buffer
 *
 */
 LX_Chunk::LX_Chunk(LX_FileBuffer * file) : chunk(NULL)

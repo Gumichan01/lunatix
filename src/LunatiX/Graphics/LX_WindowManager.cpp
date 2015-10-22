@@ -97,9 +97,8 @@ void LX_WindowManager::destroy(void)
 
 // Create the instance
 LX_WindowManager::LX_WindowManager()
+    : size(0), nbWin(0)
 {
-    size = 0;
-    nbWin = 0;
     memset(windows,0,LX_NBMAX_WINDOWS);
 }
 

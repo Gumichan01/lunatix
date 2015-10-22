@@ -32,7 +32,7 @@
 namespace LX_MSGBox
 {
 // Display a message box in a little window
-int showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w);
+bool showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w);
 
 };
 

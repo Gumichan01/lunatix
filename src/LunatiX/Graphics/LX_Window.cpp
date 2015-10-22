@@ -1,4 +1,3 @@
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -105,6 +104,8 @@ LX_WindowException::~LX_WindowException() throw() {}
 *
 */
 LX_Window::LX_Window(const Uint32 mode, bool accel)
+    : window(NULL), renderer(NULL), originalWidth(0),
+    originalHeight(0), displayMethod(false)
 {
     Uint32 option_flag = 0x00000000;
     Uint32 position_flag = 0x00000000;
@@ -165,6 +166,8 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *
 */
 LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
+    : window(NULL), renderer(NULL), originalWidth(0),
+    originalHeight(0), displayMethod(false)
 {
     int w,h;
     Uint32 flag = 0x00000000;
@@ -202,6 +205,8 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *
 */
 LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
+    : window(NULL), renderer(NULL), originalWidth(0),
+    originalHeight(0), displayMethod(false)
 {
     window = sdlWin;
 
@@ -244,6 +249,8 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 */
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
+    : window(NULL), renderer(NULL), originalWidth(0),
+    originalHeight(0), displayMethod(false)
 {
     init(title.c_str(),posX,posY,w,h,mode,flag,accel);
 }

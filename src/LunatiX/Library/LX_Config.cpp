@@ -78,6 +78,8 @@ LX_ConfigurationException::~LX_ConfigurationException() throw() {}
 *
 */
 LX_Configuration::LX_Configuration()
+    : videoFlag(1), vsyncFlag(0), ttfFlag(1), audioFlag(1), joystickFlag(1),
+      openglFlag(0), fontSize(0), width(800), height(600), fullscreenFlag(0)
 {
     // Initialize the variables at the default values
     videoFlag = 1;

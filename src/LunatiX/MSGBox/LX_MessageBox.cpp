@@ -44,11 +44,11 @@ namespace LX_MSGBox
 *   @param msg The text to display in the box, UTF-8 format
 *   @param w The parent window, or NULL for no parent
 *
-*   @return 0 on success, -1 on error
+*   @return TRUE on success, FALSE on error
 */
-int showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w)
+bool showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w)
 {
-    return SDL_ShowSimpleMessageBox(flag,title,msg,w);
+    return SDL_ShowSimpleMessageBox(flag,title,msg,w) == true;
 }
 
 
