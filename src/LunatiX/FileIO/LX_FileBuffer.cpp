@@ -56,7 +56,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     bufsize = 0;
     name = filename;
 
-    reader = new LX_File(filename,LX_FILEIO_RDONLY);
+    reader = new LX_File(name.c_str(),LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
 
     {

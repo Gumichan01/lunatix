@@ -79,7 +79,7 @@ public :
 *   @class LX_File
 *   @brief The file class
 *
-*   This class continas information about a file
+*   This class contains information about a file
 *
 */
 class LX_File
@@ -95,7 +95,7 @@ class LX_File
 
 public :
 
-    LX_File(const char * filename, const Uint32 mode);
+    LX_File(std::string filename, const Uint32 mode);
 
     size_t read(void *ptr,size_t size,size_t max_num);
     size_t write(void *ptr,size_t size,size_t num);

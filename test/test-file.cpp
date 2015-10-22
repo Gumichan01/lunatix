@@ -1,9 +1,9 @@
 
 
-
-#include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <iostream>
+#include <stdexcept>
 
 #include <LunatiX/Lunatix_engine.hpp>
 
@@ -61,9 +61,9 @@ void test_open(void)
     LX_File *invalidString = NULL;
     LX_File *notExistFile = NULL;
 
-    string str1 = "data/explosion.png";
-    char * null = NULL;
-    string str3 = "invalid_file";
+    const char * str1 = "data/explosion.png";
+    const char * null = NULL;
+    const char * str3 = "invalid_file";
 
     cout << " = TEST open = " << endl;
 
@@ -71,7 +71,7 @@ void test_open(void)
     // valid file
     try{
 
-        f1 = new LX_File(str1.c_str(),LX_FILEIO_RDONLY);
+        f1 = new LX_File(str1,LX_FILEIO_RDONLY);
 
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
 
@@ -93,15 +93,16 @@ void test_open(void)
         cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete invalidString;
 
-    }catch(IOException &ex)
+    }catch(logic_error le)
     {
-        cout << "SUCCESS - IOException occured : NULL -> " << ex.what() << endl;
+        cout << "SUCCESS - std::logic_error occured : -> " << le.what() << endl;
     }
+
 
     // bad mode
     try{
 
-        f1 = new LX_File(str1.c_str(),0x00000000);
+        f1 = new LX_File(str1,0x00000000);
 
         cerr << "FAILURE - mode was not set (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete f1;
@@ -114,7 +115,7 @@ void test_open(void)
     // invalid file
     try{
 
-        notExistFile = new LX_File(str3.c_str(),LX_FILEIO_RDONLY);
+        notExistFile = new LX_File(str3,LX_FILEIO_RDONLY);
 
         cout << "FAILURE - An invalid file was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete notExistFile;

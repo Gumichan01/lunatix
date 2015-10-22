@@ -1,5 +1,3 @@
-
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -79,19 +77,13 @@ IOException::~IOException() throw() {}
 *               or the file is not openable
 *
 */
-LX_File::LX_File(const char * filename, const Uint32 mode)
+LX_File::LX_File(std::string filename, const Uint32 mode)
+    : name(filename), data(NULL)
 {
-    std::string str("LX_File : ");
-    data = NULL;
+    if(mode == 0x00000000)
+        throw IOException("LX_File : Invalid mode");
 
-    if(filename == NULL || mode == 0x00000000)
-        throw IOException("LX_File : Invalid filename or mode");
-
-    name = filename;
     open(mode);
-
-    if(data == NULL)
-        throw IOException(str + LX_GetError());
 }
 
 
@@ -105,6 +97,8 @@ LX_File::LX_File(const char * filename, const Uint32 mode)
 */
 void LX_File::open(const Uint32 mode)
 {
+    std::string str = "LX_File : ";
+
     if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
     {
         data = SDL_RWFromFile(name.c_str(),"wb+");
@@ -129,6 +123,9 @@ void LX_File::open(const Uint32 mode)
     {
         data = SDL_RWFromFile(name.c_str(),"ab");
     }
+
+    if(data == NULL)
+        throw IOException(str + LX_GetError());
 }
 
 
