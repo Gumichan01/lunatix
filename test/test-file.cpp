@@ -1,5 +1,3 @@
-
-
 #include <cstdio>
 #include <cstring>
 #include <iostream>
@@ -16,11 +14,13 @@ using namespace LX_FileIO;
 
 void test_open(void);
 void test_read(void);
+void test_read2(void);
 void test_write(void);
 void test_tellSeek(void);
 void test_getSurface(void);
 void test_buffer(void);
 void test_getSurface2(void);
+void test_getChunk(void);
 
 string str = "tmpFile";
 
@@ -41,10 +41,12 @@ int main(int argc, char **argv)
     test_open();
     test_write();
     test_read();
+    test_read2();
     test_tellSeek();
     test_getSurface();
     test_buffer();
     test_getSurface2();
+    test_getChunk();
 
     remove(str.c_str());
 
@@ -69,7 +71,8 @@ void test_open(void)
 
 
     // valid file
-    try{
+    try
+    {
 
         f1 = new LX_File(str1,LX_FILEIO_RDONLY);
 
@@ -80,47 +83,54 @@ void test_open(void)
         delete f1;
         f1 = NULL;
 
-    }catch(IOException &e)
+    }
+    catch(IOException &e)
     {
         cerr << "FAILURE - Cannot load " << str1 << "; Expected : a valid refence; Got : " << e.what() << endl;
     }
 
     // null string
-    try{
+    try
+    {
 
         invalidString = new LX_File(null,LX_FILEIO_RDONLY);
 
         cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete invalidString;
 
-    }catch(logic_error le)
+    }
+    catch(logic_error le)
     {
         cout << "SUCCESS - std::logic_error occured : -> " << le.what() << endl;
     }
 
 
     // bad mode
-    try{
+    try
+    {
 
         f1 = new LX_File(str1,0x00000000);
 
         cerr << "FAILURE - mode was not set (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete f1;
 
-    }catch(IOException &exe)
+    }
+    catch(IOException &exe)
     {
         cout << "SUCCESS - IOException occured : Mode 0x00 -> " << exe.what() << endl;
     }
 
     // invalid file
-    try{
+    try
+    {
 
         notExistFile = new LX_File(str3,LX_FILEIO_RDONLY);
 
         cout << "FAILURE - An invalid file was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete notExistFile;
 
-    }catch(IOException &ioe)
+    }
+    catch(IOException &ioe)
     {
         cout << "SUCCESS - IOException occured : " << str3 << " -> " << ioe.what() << endl;
     }
@@ -133,18 +143,18 @@ void test_read(void)
 {
     cout << " = TEST read = " << endl;
 
-    int lus = 0;
+    int read_data = 0;
     char buf[N + 1];
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
-    lus = f.read(buf,sizeof(char),N);
+    read_data = f.read(buf,sizeof(char),N);
 
-    if(lus == -1)
+    if(read_data == -1)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
     {
-        cout << "SUCCESS - Received " << lus << " bytes from " << str << endl;
-        buf[lus] = 0;
+        cout << "SUCCESS - Received " << read_data << " bytes from " << str << endl;
+        buf[read_data] = 0;
         cout << "INFO - data received : " << buf << endl;
     }
 
@@ -154,30 +164,74 @@ void test_read(void)
 }
 
 
+void test_read2(void)
+{
+    cout << " = TEST read2 = " << endl;
+
+    const char * str = "data/explosion.png";
+
+    Sint64 beg, end;
+    int read_data = 0;
+    char *buff = NULL;
+    LX_File f(str,LX_FILEIO_RDONLY);
+
+    end = f.seek(0,LX_SEEK_END);
+
+    if(end == -1)
+        cerr << "FAILURE - Cannot go at the end of the file " << endl;
+
+    Sint64 size = f.tell();
+
+    if(size == -1)
+        cerr << "FAILURE - Cannot get the size of the file " << endl;
+
+    beg = f.seek(LX_SEEK_SET,0);
+
+    if(beg == -1)
+        cerr << "FAILURE - Cannot go at the beginning of the file " << endl;
+
+    buff = new char[size];
+
+    read_data = f.read(buff,sizeof(char),size);
+
+    if(read_data == -1)
+        cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
+    else
+    {
+        cout << "SUCCESS - Received " << read_data << " bytes from " << str << endl;
+    }
+
+    f.close();
+
+    cout << " = END TEST = " << endl;
+}
+
+
+
 void test_write(void)
 {
     cout << " = TEST write = " << endl;
 
-    int lus = 0;
+    int read_data = 0;
     char buf[N];
     LX_File f(str.c_str(),LX_FILEIO_WRONLY);
 
     strncpy(buf,"GUMI",N);
 
-    lus = f.write(buf,sizeof(char),N);
+    read_data = f.write(buf,sizeof(char),N);
 
-    if(lus == -1)
+    if(read_data == -1)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
-        cout << "SUCCESS - Wrote " << lus << " bytes on " << str << endl;
+        cout << "SUCCESS - Wrote " << read_data << " bytes on " << str << endl;
 
 
-    lus = f.write("CHAN01");
+    read_data = f.write("CHAN01");
 
-    if(lus == -1)
+    if(read_data == -1)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
-        cout << "SUCCESS - Wrote " << lus << " bytes on " << str << endl;
+        cout << "SUCCESS - Wrote " << read_data << " bytes on " << str << endl;
 
     f.close();
 
@@ -187,7 +241,7 @@ void test_write(void)
 
 void test_tellSeek(void)
 {
-    cout << " = TEST write = " << endl;
+    cout << " = TEST tellSeek = " << endl;
 
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
@@ -215,7 +269,7 @@ void test_tellSeek(void)
         cerr << "FAILURE - seek Expected : 3 got : " << pos << endl;
     else
     {
-        cout << "SUCCESS - seek -1 position : 3 " << endl;
+        cout << "SUCCESS - seek position : 3 " << endl;
     }
 
 
@@ -272,24 +326,28 @@ void test_buffer(void)
 
     const char *null = NULL;
     string str1 = "data/explosion.png";
+    string str2 = "data/explosion.wav";
 
     cout << " = TEST Buffer = " << endl;
 
-    try{
+    try
+    {
 
         invalid = new LX_FileBuffer(null);
 
         cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete invalid;
 
-    }catch(IOException &ex)
+    }
+    catch(IOException &ex)
     {
         cout << "SUCCESS - IOException occured : NULL -> " << ex.what() << endl;
     }
 
 
     // Valid file
-    try{
+    try
+    {
 
         f = new LX_FileBuffer(str1.c_str());
 
@@ -298,7 +356,8 @@ void test_buffer(void)
         delete f;
         f = NULL;
 
-    }catch(IOException &e)
+    }
+    catch(IOException &e)
     {
         cerr << "FAILURE - Cannot load " << str1 << "; Expected : a valid refence; Got : " << e.what() << endl;
     }
@@ -341,5 +400,49 @@ void test_getSurface2(void)
 }
 
 
+void test_getChunk(void)
+{
+    LX_FileBuffer f("data/explosion.wav");
+    Mix_Chunk * mix = NULL;
+    LX_Mixer::LX_Chunk * lxmix = NULL;
 
+    cout << " = TEST Chunk from buffer = " << endl;
+
+    try
+    {
+        LX_Mixer::LX_Chunk dump(&f);
+        cerr << "SUCCESS - LX_Chunk instanciation done" << LX_GetError() << endl;
+    }
+    catch(IOException & ioe)
+    {
+        cerr << "FAILURE - Cannot instanciate LX_Chunk with a file buffer as argument" << LX_GetError() << endl;
+    }
+
+
+    mix = f.getChunkFromBuffer();
+
+    if(mix == NULL)
+        cerr << "FAILURE - getChunkFromBuffer() from buffer Expected : non-NULL pointer; got : NULL -> "
+             << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - getChunkFromBuffer() : got a valid chunk from "
+             << f.getFilename() << endl;
+        Mix_FreeChunk(mix);
+    }
+
+    lxmix = LX_Mixer::loadSample(&f);
+
+    if(lxmix == NULL)
+        cerr << "FAILURE - LX_Mixer::loadSample() Expected : non-NULL pointer; got : NULL -> "
+             << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - LX_Mixer::loadSample() : got a valid chunk from " << f.getFilename() << endl;
+        delete lxmix;
+    }
+
+
+    cout << " = END TEST = " << endl;
+}
 
