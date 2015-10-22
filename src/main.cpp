@@ -212,7 +212,6 @@ int main ( int argc, char** argv )
     delete ttf;
     delete window;
     delete window2;
-    delete chunk;
 
     // Gamepad
     LX_Gamepad *gp = new LX_Gamepad();
