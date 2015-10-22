@@ -227,7 +227,8 @@ const char * gamepadToString(LX_GamepadInfo& info, char * str)
 *           0 to hide
 *           -1 to get the current state
 *
-*   @return 1 if the cursor is shown, 0 if it is hidden, a negative value on failure
+*   @return 1 if the cursor is shown, 0 if it is hidden,
+*           a negative value on failure
 *
 */
 int mouseCursorDisplay(int toggle)

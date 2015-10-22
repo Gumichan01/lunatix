@@ -35,15 +35,11 @@ namespace LX_Device
 *
 *   @param index The index of the joystick to query
 *
-*   @note You can check the success of the operation
+*   @note   You can check the success of the operation
 *           calling LX_Gamepad::isConnected()
 */
-LX_Gamepad::LX_Gamepad(int index)
+LX_Gamepad::LX_Gamepad(int index): gc(NULL),joy(NULL),haptic(NULL)
 {
-    gc = NULL;
-    joy = NULL;
-    haptic = NULL;
-
     if(index < numberOfDevices() && SDL_IsGameController(index))
     {
         gc = SDL_GameControllerOpen(index);
