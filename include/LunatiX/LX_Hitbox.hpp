@@ -30,7 +30,6 @@ typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect) */
 
 /**
 *   @todo operators of LX_Point :
-*   - '=' : assignment
 *   - '==' : same coordinates
 *   - '!=' : not same coordinates
 */

@@ -23,7 +23,6 @@
 
 /**
 *   @todo operators of LX_Vector2D :
-*   - '=' : assignment
 *   - '==' : same direction and same norm
 *   - '!=' : not same direction or (||) not same norm
 *   - '>' : same direction and first norm > second norm
