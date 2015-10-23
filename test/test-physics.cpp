@@ -300,7 +300,7 @@ void testPolygon(void)
 {
     int d;
     LX_Polygon poly(5);
-    LX_Point *p = NULL;
+    LX_Point p;
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -325,32 +325,19 @@ void testPolygon(void)
     else
         cout << "SUCCESS - total number of edges : " << d << endl;
 
-    p = poly.getPoint(5);
-
-    if(p != NULL)
-        cerr << "FAILURE - expected : NULL ; got : " << p << endl;
-    else
-        cout << "SUCCESS - no Point at 5" << endl;
-
 
     p = poly.getPoint(0);
 
-    if(p == NULL)
-        cerr << "FAILURE - getoint at 0 expected : Not NULL value ; got :  NULL" << endl;
+    if(p.x != 10)
+        cerr << "FAILURE - x position expected : 10 ; got : " << p.x << endl;
     else
-    {
-        cout << "SUCCESS - there is a Point at 0" << endl;
+        cout << "SUCCESS - x = 10" << endl;
 
-        if(p->x != 10)
-            cerr << "FAILURE - x position expected : 10 ; got : " << p->x << endl;
-        else
-            cout << "SUCCESS - x = 10" << endl;
+    if(p.y != 5)
+        cerr << "FAILURE - y position expected : 5 ; got : " << p.y << endl;
+    else
+        cout << "SUCCESS - y = 5" << endl;
 
-        if(p->y != 5)
-            cerr << "FAILURE - y position expected : 5 ; got : " << p->x << endl;
-        else
-            cout << "SUCCESS - y = 5" << endl;
-    }
 
     // Is the triangle convex ?
     if(poly.isConvex() == false)

@@ -160,10 +160,10 @@ bool LX_Physics::collisionPointRect(const LX_Point *p,const LX_AABB *rect)
 bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle)
 {
 
-    if( circle == NULL ||
-            euclide_square_distance( x_pos,y_pos,
+    if(circle == NULL
+       || euclide_square_distance(x_pos,y_pos,
                                      circle->xCenter,
-                                     circle->yCenter) > (circle->square_radius) )
+                                     circle->yCenter) > (circle->square_radius))
     {
         return false;
     }
@@ -203,9 +203,9 @@ bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle
 bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
 {
 
-    if( rect1 == NULL || rect2 == NULL ||
-            (rect1->x >= (rect2->x + rect2->w) ) || ( rect1->y >= (rect2->y + rect2->h) ) ||
-            ( (rect1->x + rect1->w) <= rect2->x ) || ( (rect1->y + rect1->h) <= rect2->y ) )
+    if(rect1 == NULL || rect2 == NULL
+       || (rect1->x >= (rect2->x + rect2->w)) || (rect1->y >= (rect2->y + rect2->h))
+       || ((rect1->x + rect1->w) <= rect2->x) || ((rect1->y + rect1->h) <= rect2->y))
     {
         return false;
     }
@@ -431,12 +431,18 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
     {
         if(i == n-1)
         {
-            if(intersectSegment(P,&I,poly->getPoint(0),poly->getPoint(i)))
+            LX_Point p1 = poly->getPoint(0);
+            LX_Point p2 = poly->getPoint(i);
+
+            if(intersectSegment(P,&I,&p1,&p2))
                 count++;
         }
         else
         {
-            if(intersectSegment(P,&I,poly->getPoint(i+1),poly->getPoint(i)))
+            LX_Point p3 = poly->getPoint(i+1);
+            LX_Point p4 = poly->getPoint(i);
+
+            if(intersectSegment(P,&I,&p3,&p4))
                 count++;
         }
     }
@@ -468,18 +474,18 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
 
     for(unsigned int i = 0; i < n; i++)
     {
-        A.x = poly->getPoint(i)->x;
-        A.y = poly->getPoint(i)->y;
+        A.x = poly->getPoint(i).x;
+        A.y = poly->getPoint(i).y;
 
         if(i == n-1)
         {
-            B.x = poly->getPoint(0)->x;
-            B.y = poly->getPoint(0)->y;
+            B.x = poly->getPoint(0).x;
+            B.y = poly->getPoint(0).y;
         }
         else
         {
-            B.x = poly->getPoint(i+1)->x;
-            B.y = poly->getPoint(i+1)->y;
+            B.x = poly->getPoint(i+1).x;
+            B.y = poly->getPoint(i+1).y;
         }
 
         if(collisionSegCircle(C,&A,&B) == true)
@@ -515,18 +521,18 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 
     for(unsigned int j = 0; j < n; j++)
     {
-        E.x = poly->getPoint(j)->x;
-        E.y = poly->getPoint(j)->y;
+        E.x = poly->getPoint(j).x;
+        E.y = poly->getPoint(j).y;
 
         if(j == n-1)
         {
-            F.x = poly->getPoint(0)->x;
-            F.y = poly->getPoint(0)->y;
+            F.x = poly->getPoint(0).x;
+            F.y = poly->getPoint(0).y;
         }
         else
         {
-            F.x = poly->getPoint(j+1)->x;
-            F.y = poly->getPoint(j+1)->y;
+            F.x = poly->getPoint(j+1).x;
+            F.y = poly->getPoint(j+1).y;
         }
 
         if(intersectSegment(&A,&B,&E,&F) || intersectSegment(&B,&C,&E,&F) ||
@@ -561,34 +567,34 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 
     for(unsigned int i = 0; i < polySize1; i++)
     {
-        A.x = poly1->getPoint(i)->x;
-        A.y = poly1->getPoint(i)->y;
+        A.x = poly1->getPoint(i).x;
+        A.y = poly1->getPoint(i).y;
 
         if(i == polySize1-1)
         {
-            B.x = poly1->getPoint(0)->x;
-            B.y = poly1->getPoint(0)->y;
+            B.x = poly1->getPoint(0).x;
+            B.y = poly1->getPoint(0).y;
         }
         else
         {
-            B.x = poly1->getPoint(i+1)->x;
-            B.y = poly1->getPoint(i+1)->y;
+            B.x = poly1->getPoint(i+1).x;
+            B.y = poly1->getPoint(i+1).y;
         }
 
         for(unsigned int j = 0; j < polySize2; j++)
         {
-            C.x = poly2->getPoint(j)->x;
-            C.y = poly2->getPoint(j)->y;
+            C.x = poly2->getPoint(j).x;
+            C.y = poly2->getPoint(j).y;
 
             if(j == polySize2-1)
             {
-                D.x = poly2->getPoint(0)->x;
-                D.y = poly2->getPoint(0)->y;
+                D.x = poly2->getPoint(0).x;
+                D.y = poly2->getPoint(0).y;
             }
             else
             {
-                D.x = poly2->getPoint(j+1)->x;
-                D.y = poly2->getPoint(j+1)->y;
+                D.x = poly2->getPoint(j+1).x;
+                D.y = poly2->getPoint(j+1).y;
             }
 
             if(intersectSegment(&A,&B,&C,&D))
@@ -596,8 +602,11 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
         }
     }
 
-    return (collisionPointPoly(poly1->getPoint(0),poly2)
-            || collisionPointPoly(poly2->getPoint(0),poly1));
+    LX_Point origin1 = poly1->getPoint(0);
+    LX_Point origin2 = poly2->getPoint(0);
+
+    return (collisionPointPoly(&origin1,poly2)
+            || collisionPointPoly(&origin2,poly1));
 }
 
 
@@ -664,16 +673,7 @@ void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
 */
 void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 {
-    movePoint(poly->getPoint(0),vx,vy);
-    movePoint(poly->getPoint(1),vx,vy);
-    movePoint(poly->getPoint(2),vx,vy);
-
-    const unsigned int n = poly->numberOfEdges();
-
-    for(unsigned int i = 3; i < n; i++)
-    {
-        movePoint(poly->getPoint(i),vx,vy);
-    }
+    poly->move(vx,vy);
 }
 
 
@@ -733,7 +733,7 @@ void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
 */
 void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D& v)
 {
-    movePoly(poly,v.vx,v.vy);
+    poly->move(v);
 }
 
 
@@ -800,16 +800,7 @@ void LX_Physics::moveCircleTo(LX_Circle *C, const int xpos, const int ypos)
 */
 void LX_Physics::movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)
 {
-    movePointTo(poly->getPoint(0),xpos,ypos);
-    movePointTo(poly->getPoint(1),xpos,ypos);
-    movePointTo(poly->getPoint(2),xpos,ypos);
-
-    const unsigned int n = poly->numberOfEdges();
-
-    for(unsigned int i = 3; i < n; i++)
-    {
-        movePointTo(poly->getPoint(i),xpos,ypos);
-    }
+    poly->moveTo(xpos,ypos);
 }
 
 

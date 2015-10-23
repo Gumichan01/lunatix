@@ -24,9 +24,11 @@
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
+#include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 using namespace std;
+using namespace LX_Physics;
 
 
 /**
@@ -76,11 +78,11 @@ LX_Polygon::LX_Polygon(const unsigned int nb)
         points = new (nothrow) LX_Point[nb];
 
         if(points == NULL)
-            throw LX_PolygonException("LX_Polygon constructor: Cannot allocate the points\n");
+            throw LX_PolygonException("constr: Cannot allocate the points\n");
 
     }
     else
-        throw LX_PolygonException("LX_Polygon constructor: Cannot allocate the points\n");
+        throw LX_PolygonException("constr: Not enough points in the polygon\n");
 }
 
 
@@ -167,23 +169,26 @@ unsigned int LX_Polygon::numberOfRealEdges(void) const
 
 
 /**
-*   @fn LX_Point * LX_Polygon::getPoint(const unsigned int index) const
+*   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const
 *
 *   Get the point at a specified position
 *
 *   @param index The index of the point
 *
-*   @return A pointer to the point, a null pointer if the index is not valid
+*   @return A copy of the point
+*
+*   @exception  LX_PolygonException If the index refers
+*               to an out of bounds position
 *
 */
-LX_Point * LX_Polygon::getPoint(const unsigned int index) const
+LX_Point LX_Polygon::getPoint(const unsigned int index) const
 {
     if(index < cursor)
     {
-        return &points[index];
+        return points[index];
     }
 
-    return NULL;
+    throw LX_PolygonException("getPoint: index Out of bounds ");
 }
 
 
@@ -293,6 +298,69 @@ void LX_Polygon::convexity(void)
 
     convex = true;
 }
+
+
+/**
+*   @fn void LX_Polygon::move(int vx, int vy)
+*
+*   Move the polygon to a direction
+*
+*   @param vx The x direction
+*   @param vy The y direction
+*
+*/
+void LX_Polygon::move(const int vx, const int vy)
+{
+    movePoint(&points[0],vx,vy);
+    movePoint(&points[1],vx,vy);
+    movePoint(&points[2],vx,vy);
+
+    const unsigned int n = numberOfEdges();
+
+    for(unsigned int i = 3; i < n; i++)
+    {
+        movePoint(&points[i],vx,vy);
+    }
+}
+
+
+/**
+*   @fn void LX_Polygon::move(const LX_Vector2D& v)
+*
+*   Move the polygon to a direction
+*
+*   @param v The vector that indicates the direction
+*
+*/
+void LX_Polygon::move(const LX_Vector2D& v)
+{
+    move(v.vx, v.vy);
+}
+
+
+/**
+*   @fn void LX_Polygon::move(int vx, int vy)
+*
+*   Move the polygon to a position
+*
+*   @param vx The x position
+*   @param vy The y position
+*
+*/
+void LX_Polygon::moveTo(int vx, int vy)
+{
+    movePointTo(&points[0],vx,vy);
+    movePointTo(&points[1],vx,vy);
+    movePointTo(&points[2],vx,vy);
+
+    const unsigned int n = numberOfEdges();
+
+    for(unsigned int i = 3; i < n; i++)
+    {
+        movePointTo(&points[i],vx,vy);
+    }
+}
+
 
 
 /**

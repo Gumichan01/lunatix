@@ -26,6 +26,7 @@
 /// @todo Modifiy the signature of the polygon getter
 
 struct LX_Point;
+struct LX_Vector2D;
 
 #include <iostream>
 
@@ -50,7 +51,6 @@ public :
 
     ~LX_PolygonException() throw();
 };
-
 
 
 
@@ -84,7 +84,12 @@ public :
     unsigned int numberOfEdges(void) const;
     unsigned int numberOfRealEdges(void) const;
 
-    LX_Point * getPoint(const unsigned int index) const;
+    LX_Point getPoint(const unsigned int index) const;
+
+    void move(const int vx, const int vy);
+    void move(const LX_Vector2D& v);
+
+    void moveTo(int vx, int vy);
 
     bool isConvex(void);
 
