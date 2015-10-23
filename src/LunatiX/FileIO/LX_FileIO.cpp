@@ -261,6 +261,21 @@ Sint64 LX_File::tell(void)
 
 
 /**
+*   @fn Sint64 LX_File::size(void)
+*
+*   Get the size of a file
+*
+*   @return The size of the file.
+*           -1 on failure
+*
+*/
+Sint64 LX_File::size(void)
+{
+    return SDL_RWsize(data);
+}
+
+
+/**
 *   @fn void LX_File::close(void)
 *
 *   Close the file

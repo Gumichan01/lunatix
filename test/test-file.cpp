@@ -147,6 +147,9 @@ void test_read(void)
     char buf[N + 1];
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
+
+    cout << "INFO - " << f.getFilename() << " was opened. Its size is "
+         << f.size() << " byte(s)" << endl;
     read_data = f.read(buf,sizeof(char),N);
 
     if(read_data == -1)
@@ -174,6 +177,9 @@ void test_read2(void)
     int read_data = 0;
     char *buff = NULL;
     LX_File f(str,LX_FILEIO_RDONLY);
+
+    cout << "INFO - " << f.getFilename() << " was opened. Its size is "
+         << f.size() << " byte(s)" << endl;
 
     end = f.seek(0,LX_SEEK_END);
 
@@ -218,6 +224,9 @@ void test_write(void)
 
     strncpy(buf,"GUMI",N);
 
+    cout << "INFO - " << f.getFilename() << " was opened. Its size is "
+         << f.size() << " byte(s)" << endl;
+
     read_data = f.write(buf,sizeof(char),N);
 
     if(read_data == -1)
@@ -244,6 +253,9 @@ void test_tellSeek(void)
     cout << " = TEST tellSeek = " << endl;
 
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
+
+    cout << "INFO - " << f.getFilename() << " was opened. Its size is "
+         << f.size() << " byte(s)" << endl;
 
     Sint64 pos = f.seek(4,LX_SEEK_SET);
 
@@ -289,6 +301,9 @@ void test_getSurface(void)
     SDL_Surface * surface = NULL;
 
     LX_File f(str_ex.c_str(),LX_FILEIO_RDONLY);
+
+    cout << "INFO - " << f.getFilename() << " was opened. Its size is "
+         << f.size() << " byte(s)" << endl;
 
     surface = f.getSurfaceFromData();
 
@@ -339,7 +354,7 @@ void test_buffer(void)
         delete invalid;
 
     }
-    catch(IOException &ex)
+    catch(logic_error ex)
     {
         cout << "SUCCESS - IOException occured : NULL -> " << ex.what() << endl;
     }
@@ -411,7 +426,7 @@ void test_getChunk(void)
     try
     {
         LX_Mixer::LX_Chunk dump(&f);
-        cerr << "SUCCESS - LX_Chunk instanciation done" << LX_GetError() << endl;
+        cerr << "SUCCESS - LX_Chunk instanciation done : " << LX_GetError() << endl;
     }
     catch(IOException & ioe)
     {

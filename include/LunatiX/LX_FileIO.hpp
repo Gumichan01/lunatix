@@ -104,6 +104,7 @@ public :
 
     Sint64 seek(Sint64 offset, int whence);
     Sint64 tell(void);
+    Sint64 size(void);
 
     SDL_Surface * getSurfaceFromData(void);
     const char * getFilename(void);
