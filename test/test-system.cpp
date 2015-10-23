@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     cout << "RAM : " << getSystemRAM() << " MB" << endl;
 
     int sz;
-    const SDL_DisplayMode * mode = getDisplayModes(&sz);
+    const SDL_DisplayMode * mode = getDisplayModes(sz);
 
     if(mode != NULL && sz != 0)
     {
