@@ -59,7 +59,7 @@ IOException::~IOException() throw() {}
 
 
 /**
-*   @fn LX_File::LX_File(const char * filename, const Uint32 mode)
+*   @fn LX_File::LX_File(std::string filename, const Uint32 mode)
 *
 *   The constuctor
 *
