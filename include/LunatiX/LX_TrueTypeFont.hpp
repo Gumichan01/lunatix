@@ -99,7 +99,7 @@ class LX_Font
     LX_Font(LX_Font& f);
     LX_Font& operator =(LX_Font& f);
 
-    void init(string font_file, SDL_Color *color, int size);
+    void createbuffer();
     TTF_Font * createInternalFont(unsigned int size);
 
     SDL_Surface * drawText(LX_TTF_TypeText type, string text,
@@ -108,9 +108,9 @@ class LX_Font
 
 public:
 
-    LX_Font(SDL_Color *color);
-    LX_Font(string font_file, SDL_Color *color);
-    LX_Font(string font_file, SDL_Color *color, int size);
+    LX_Font(SDL_Color& color);
+    LX_Font(string font_file, SDL_Color& color);
+    LX_Font(string font_file, SDL_Color& color, unsigned int size);
 
     int sizeOfText(string text, int *w, int *h);
     int sizeOfText(string text, int size, int *w, int *h);

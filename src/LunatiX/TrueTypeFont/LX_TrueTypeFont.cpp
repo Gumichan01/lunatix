@@ -41,59 +41,60 @@ namespace LX_TrueTypeFont
 
 /**
 *
-*   @fn LX_Font::LX_Font(SDL_Color *color)
+*   @fn LX_Font::LX_Font(SDL_Color& color)
 *
 *   Construct the font with color
 *
 *   @param color The default color font
 *
-*   @note If you do not need to specify the font color, you may put NULL instead of this color
-*   @warning You must initialize the SDL_TTF library setting the TTF flag to 1 in lxsdl.cfg.
+*   @warning You must initialize the SDL_TTF library
+*   setting the TTF flag to 1 in lxsdl.cfg.
+*
+*   @exception IOException if the file cannot be loaded
 *
 */
-LX_Font::LX_Font(SDL_Color *color)
+LX_Font::LX_Font(SDL_Color& color)
+    : font_str(""), font_size(LX_TTF_DEFAULT_FONT_SIZE),
+    font_color(color), font_buffer(NULL)
 {
-    string str;
-    // load the configuration
+    // Load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
 
-    if( ttf_config == NULL)
+    if(ttf_config != NULL)
     {
-        font_str = "";
-        font_size = LX_TTF_DEFAULT_FONT_SIZE;
-    }
-    else
-    {
-        str = ttf_config->getFontFile();
+        font_str = ttf_config->getFontFile();
         font_size = ttf_config->getFontSize();
     }
 
-    init(str,color,font_size);
+    createbuffer();
 }
 
 
 /**
 *
-*   @fn LX_Font::LX_Font(string font_file, SDL_Color *color)
+*   @fn LX_Font::LX_Font(string font_file, SDL_Color& color)
 *
 *   Construct the font with font file and color
 *
 *   @param font_file The font file you want to use
 *   @param color The default color font
 *
-*   @note If you do not need to specify the font color, you may put NULL
 *   @warning You must initialize the SDL_TTF library setting the TTF flag to 1 in lxsdl.cfg
 *
+*   @exception IOException if the file cannot be loaded
+*
 */
-LX_Font::LX_Font(string font_file, SDL_Color *color)
+LX_Font::LX_Font(string font_file, SDL_Color& color)
+    : font_str(font_file), font_size(LX_TTF_DEFAULT_FONT_SIZE),
+    font_color(color), font_buffer(NULL)
 {
-    init(font_file.c_str(),color,0);
+    createbuffer();
 }
 
 
 /**
 *
-*   @fn LX_Font::LX_Font(string font_file, SDL_Color *color, int size)
+*   @fn LX_Font::LX_Font(string font_file, SDL_Color& color, unsigned int size)
 *
 *  Construct the font with a font file, a color and a size.
 *
@@ -101,57 +102,30 @@ LX_Font::LX_Font(string font_file, SDL_Color *color)
 *   @param color The color font needed
 *   @param size The size of the text you will display
 *
-*   @note If you do not need to specify the font color,
-*           you may put NULL instead of this color
-*   @note If you do not need to specify the size, put 0
 *   @warning You must initialize the SDL_TTF library setting
 *               the ttf flag to 1 in lxsdl.cfg.
 *
+*   @exception IOException if the file cannot be loaded
+*
 */
-LX_Font::LX_Font(string font_file, SDL_Color *color, int size)
+LX_Font::LX_Font(string font_file, SDL_Color& color, unsigned int size)
+    : font_str(font_file), font_size(LX_TTF_DEFAULT_FONT_SIZE),
+    font_color(color), font_buffer(NULL)
 {
-    init(font_file.c_str(),color,size);
+    createbuffer();
 }
 
 
 /*
 *
-*   This private function initializes The LX_TTF instance
-*   with a font file, a color and the size.
+*   This private function creates a file buffer from font_str.
+*   This function can throw an IException instance if the buffer cannot
+*   be loaded.
 *
 */
-void LX_Font::init(string font_file, SDL_Color *color, int size)
+void LX_Font::createbuffer()
 {
-    font_buffer = NULL;
-    font_str = font_file;
-
-    if(size <= 0)
-        size = LX_TTF_DEFAULT_FONT_SIZE;
-
-    // Put color if it is not null
-    if( color != NULL )
-    {
-        font_color.r = color->r;
-        font_color.g = color->g;
-        font_color.b = color->b;
-    }
-    else
-    {
-        font_color.r = LX_WHITE_COLOR;
-        font_color.g = LX_WHITE_COLOR;
-        font_color.b = LX_WHITE_COLOR;
-    }
-
-    try
-    {
-        font_buffer = new LX_FileBuffer(font_str.c_str());
-    }
-    catch(IOException &e)
-    {
-        LX_SetError(e.what());
-        font_buffer = NULL;
-    }
-
+    font_buffer = new LX_FileBuffer(font_str.c_str());
 }
 
 

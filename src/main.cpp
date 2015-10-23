@@ -86,7 +86,7 @@ int main ( int argc, char** argv )
         return -1;
     }
 
-    ttf = new LX_Font(&color);
+    ttf = new LX_Font(color);
     audio = new LX_Music(mus);
 
     // Load the texture from the data file

@@ -14,7 +14,7 @@ void test_font(void);
 
 int main(int argc, char **argv)
 {
-    cout << " ==== Test Rendering ==== " << endl;
+    cout << " ==== Test True Type Font ==== " << endl;
 
     bool err = LX_Init();
 
@@ -43,7 +43,32 @@ void test_font(void)
     LX_Window win("LunatiX Engine test TTF",LX_WINDOW_SURFACE);
 
 
-    font = new LX_Font(&color);
+    cout << "INFO - Load a LX_Font object with RAII" << endl;
+    {
+        LX_Font f1(LX_Configuration::getInstance()->getFontFile(),color);
+    }
+    cout << "SUCCESS - Loaded with success" << endl;
+
+    cout << "INFO - Load another LX_Font object with RAII" << endl;
+    {
+        LX_Font f2(LX_Configuration::getInstance()->getFontFile(),color,48);
+    }
+    cout << "SUCCESS - Loaded with success" << endl;
+
+    {
+        try
+        {
+            LX_Font ferror("invalid_file",color);
+            cout << "FAILURE - o_O. Expected: IOException, got: a valid object"
+            << endl;
+
+        }catch(IOException &e)
+        {
+            cout << "SUCCESS - IOException occured. It was expected" << endl;
+        }
+    }
+
+    font = new LX_Font(color);
 
     if(font == NULL)
         cerr << "FAILURE - Font not null" << endl;
