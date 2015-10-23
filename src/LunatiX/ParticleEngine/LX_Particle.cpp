@@ -1,5 +1,3 @@
-
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -49,27 +47,31 @@ namespace LX_ParticleEngine
 *
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
+    : box({x,y,w,h}),velocity({0,0}), lifetime(xorshiftRand()%DELAY),
+texture(NULL), surface(NULL)
 {
-    init(x,y,w,h,0,0);
+    // Empty
 }
 
 
 /**
-*   @fn LX_Particle::LX_Particle(const LX_AABB *b)
+*   @fn LX_Particle::LX_Particle(const LX_AABB& b)
 *
 *   Create the instance using an AABB
 *
 *   @param b The AABB that contains the coordinates, the width and the height
 *
 */
-LX_Particle::LX_Particle(const LX_AABB *b)
+LX_Particle::LX_Particle(const LX_AABB& b)
+    : box(b),velocity({0,0}), lifetime(xorshiftRand()%DELAY),
+texture(NULL), surface(NULL)
 {
-    init(b->x,b->y,b->w,b->h,0,0);
+    // Empty
 }
 
 
 /**
-*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w, const int h, const LX_Vector2D *v)
+*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w, const int h, const LX_Vector2D& v)
 *
 *   Create the instance using coordinates, width, height and the velocity as a vector
 *
@@ -81,9 +83,11 @@ LX_Particle::LX_Particle(const LX_AABB *b)
 *
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
-                         const LX_Vector2D *v)
+                         const LX_Vector2D& v)
+    : box({x,y,w,h}),velocity(v), lifetime(xorshiftRand()%DELAY),
+texture(NULL), surface(NULL)
 {
-    init(x,y,w,h,v->vx,v->vy);
+    // Empty
 }
 
 
@@ -103,13 +107,15 @@ LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w,
                          const int h, const float vx , const float vy)
+    : box({x,y,w,h}),velocity({vx,vy}), lifetime(xorshiftRand()%DELAY),
+texture(NULL), surface(NULL)
 {
-    init(x,y,w,h,vx,vy);
+    // Empty
 }
 
 
 /**
-*   @fn LX_Particle::LX_Particle(const LX_AABB *b, const int vx , const int vy)
+*   @fn LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
 *
 *   Create the instance using an AABB and the velocity
 *
@@ -118,14 +124,16 @@ LX_Particle::LX_Particle(const int x , const int y, const int w,
 *   @param vy The Y velocity
 *
 */
-LX_Particle::LX_Particle(const LX_AABB *b, const int vx , const int vy)
+LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
+    : box(b), velocity({vx,vy}), lifetime(xorshiftRand()%DELAY),
+texture(NULL), surface(NULL)
 {
-    init(b->x,b->y,b->w,b->h,vx,vy);
+    // Empty
 }
 
 
 /**
-*   @fn LX_Particle::LX_Particle(const LX_AABB *b, const LX_Vector2D *v)
+*   @fn LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
 *
 *   Create the instance using an AABB and the velocity
 *
@@ -133,9 +141,11 @@ LX_Particle::LX_Particle(const LX_AABB *b, const int vx , const int vy)
 *   @param v The vector that store the velocity
 *
 */
-LX_Particle::LX_Particle(const LX_AABB *b, const LX_Vector2D *v)
+LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
+    : box(b), velocity(v), lifetime(xorshiftRand()%DELAY),
+texture(NULL), surface(NULL)
 {
-    init(b->x,b->y,b->w,b->h,v->vx,v->vy);
+    // Empty
 }
 
 
@@ -146,17 +156,14 @@ LX_Particle::LX_Particle(const LX_AABB *b, const LX_Vector2D *v)
 *   the following constructors of the particle
 *
 */
-void LX_Particle::init(const int x , const int y, const int w,
+/*void LX_Particle::init(const int x , const int y, const int w,
                        const int h, const float vx, const float vy)
 {
     box = {x,y,w,h};
     velocity = {vx,vy};
 
     lifetime = xorshiftRand()%DELAY;
-
-    texture = NULL;
-    surface = NULL;
-}
+}*/
 
 
 /**
@@ -167,15 +174,8 @@ void LX_Particle::init(const int x , const int y, const int w,
 */
 LX_Particle::~LX_Particle()
 {
-    if(surface != NULL)
-    {
-        SDL_FreeSurface(surface);
-    }
-
-    if(texture != NULL)
-    {
-        SDL_DestroyTexture(texture);
-    }
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }
 
 
@@ -298,16 +298,16 @@ SDL_Surface * LX_Particle::getSurface(void)
 
 
 /**
-*   @fn LX_AABB * LX_Particle::getAABB()
+*   @fn const LX_AABB * LX_Particle::getAABB()
 *
 *   Get the AABB
 *
 *   @return A pointer to the AABB
 *
 */
-LX_AABB * LX_Particle::getAABB()
+LX_AABB LX_Particle::getAABB()
 {
-    return &box;
+    return box;
 }
 
 

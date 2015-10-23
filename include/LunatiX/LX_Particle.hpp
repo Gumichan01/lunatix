@@ -65,14 +65,14 @@ public :
 
 
     LX_Particle(const int x , const int y, const int w, const int h);
-    LX_Particle(const LX_AABB *b);
+    LX_Particle(const LX_AABB& b);
     LX_Particle(const int x , const int y, const int w, const int h,
-                const LX_Vector2D *v);
+                const LX_Vector2D& v);
     LX_Particle(const int x , const int y, const int w, const int h,
                 const float vx , const float vy);
 
-    LX_Particle(const LX_AABB *b, const int vx , const int vy);
-    LX_Particle(const LX_AABB *b, const LX_Vector2D *v);
+    LX_Particle(const LX_AABB& b, const float vx , const float vy);
+    LX_Particle(const LX_AABB& b, const LX_Vector2D& v);
 
     void update(void);
 
@@ -84,7 +84,7 @@ public :
 
     SDL_Texture * getTexture(void);
     SDL_Surface * getSurface(void);
-    LX_AABB * getAABB();
+    LX_AABB getAABB();
 
     const int getX(void);
     const int getY(void);

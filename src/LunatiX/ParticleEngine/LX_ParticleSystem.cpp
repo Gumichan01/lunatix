@@ -45,8 +45,10 @@ namespace LX_ParticleEngine
 *
 */
 LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
+    : particles(NULL), nbParticles(nbPart), idWin(0)
+
 {
-    init(nbPart,0);
+    allocateParticles(nbParticles);
 }
 
 
@@ -60,8 +62,9 @@ LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
 *
 */
 LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart,unsigned int id)
+    : particles(NULL), nbParticles(nbPart), idWin(id)
 {
-    init(nbPart,id);
+    allocateParticles(nbParticles);
 }
 
 
@@ -77,11 +80,8 @@ LX_ParticleSystem::~LX_ParticleSystem()
 
     for(unsigned int i = 0; i < n; i++)
     {
-        if(particles[i] != NULL)
-        {
-            delete particles[i];
-            particles[i] = NULL;
-        }
+        delete particles[i];
+        particles[i] = NULL;
     }
 
     delete [] particles;
@@ -89,15 +89,14 @@ LX_ParticleSystem::~LX_ParticleSystem()
 
 
 /*
-*   Initialize the particle system
+*   Create the particles
 *
 *   This function is automatically called by one of
 *   the following constructors of the particle system
 *
 */
-void LX_ParticleSystem::init(unsigned int nbPart,unsigned int id)
+void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
 {
-    idWin = id;
     particles = new (nothrow) LX_Particle*[nbPart];
 
     if(particles == NULL)
@@ -212,18 +211,20 @@ void LX_ParticleSystem::displayParticles(void)
         if(particles[i] == NULL)
             continue;
 
+        LX_AABB box = (particles[i]->getAABB());
+
         // Display the particle when the delay is a multiple of 2
         if(particles[i]->getDelay()%2 == 0)
         {
             if(particles[i]->getTexture() != NULL)
             {
                 win->putTexture(particles[i]->getTexture(),
-                                NULL,particles[i]->getAABB());
+                                NULL,&box);
             }
             else if(particles[i]->getSurface() != NULL)
             {
                 win->putSurface(particles[i]->getSurface(),
-                                NULL,particles[i]->getAABB());
+                                NULL,&box);
             }
         }
     }

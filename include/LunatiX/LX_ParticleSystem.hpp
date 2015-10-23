@@ -51,7 +51,7 @@ class LX_ParticleSystem
     LX_ParticleSystem(LX_ParticleSystem& ps);
     LX_ParticleSystem& operator =(LX_ParticleSystem& ps);
 
-    void init(unsigned int nbPart,unsigned int id);
+    void allocateParticles(unsigned int nbPart);
 
 public:
 
