@@ -98,7 +98,7 @@ int main ( int argc, char** argv )
         std::cerr << "[MAIN] loadTexture : " << LX_GetError() << std::endl;
     }
 
-    ttf->sizeOfText("LunatiX_engine",&wt,&ht);
+    ttf->sizeOfText("LunatiX_engine",wt,ht);
 
 #ifdef DEBUG_MAIN_TEST
     std::cout << "[TEST TTF]Size of the text \"LunatiX_engine\" - w : " << wt << "; h : " << ht << std::endl;

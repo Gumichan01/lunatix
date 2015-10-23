@@ -41,20 +41,24 @@ namespace LX_TrueTypeFont
 
 /**
 *
-*   @fn LX_Font::LX_Font(SDL_Color& color)
+*   @fn LX_Font::LX_Font(SDL_Color& color, unsigned int size)
 *
-*   Construct the font with color
+*   Construct the font with color and the size of the text
 *
 *   @param color The default color font
+*   @param size the size of the text
 *
-*   @warning You must initialize the SDL_TTF library
-*   setting the TTF flag to 1 in lxsdl.cfg.
+*   @note   If size is 0, then the default value define in the configuratnion
+*           file is used.
 *
-*   @exception IOException if the file cannot be loaded
+*   @warning    You must initialize the SDL_TTF library
+*               setting the TTF flag to 1 in lxsdl.cfg.
+*
+*   @exception LX_FileIO::IOException if the file cannot be loaded
 *
 */
-LX_Font::LX_Font(SDL_Color& color)
-    : font_str(""), font_size(LX_TTF_DEFAULT_FONT_SIZE),
+LX_Font::LX_Font(SDL_Color& color, unsigned int size)
+    : font_str(""), font_size(size),
     font_color(color), font_buffer(NULL)
 {
     // Load the configuration
@@ -63,11 +67,14 @@ LX_Font::LX_Font(SDL_Color& color)
     if(ttf_config != NULL)
     {
         font_str = ttf_config->getFontFile();
-        font_size = ttf_config->getFontSize();
+
+        if(font_size == 0)
+            font_size = ttf_config->getFontSize();
     }
 
     createbuffer();
 }
+
 
 
 /**
@@ -79,9 +86,10 @@ LX_Font::LX_Font(SDL_Color& color)
 *   @param font_file The font file you want to use
 *   @param color The default color font
 *
-*   @warning You must initialize the SDL_TTF library setting the TTF flag to 1 in lxsdl.cfg
+*   @warning    You must initialize the SDL_TTF library
+*               setting the TTF flag to 1 in lxsdl.cfg
 *
-*   @exception IOException if the file cannot be loaded
+*   @exception LX_FileIO::IOException if the file cannot be loaded
 *
 */
 LX_Font::LX_Font(string font_file, SDL_Color& color)
@@ -100,12 +108,12 @@ LX_Font::LX_Font(string font_file, SDL_Color& color)
 *
 *   @param font_file The font file you want to load
 *   @param color The color font needed
-*   @param size The size of the text you will display
+*   @param size The size of the text to display
 *
-*   @warning You must initialize the SDL_TTF library setting
+*   @warning    You must initialize the SDL_TTF library setting
 *               the ttf flag to 1 in lxsdl.cfg.
 *
-*   @exception IOException if the file cannot be loaded
+*   @exception LX_FileIO::IOException if the file cannot be loaded
 *
 */
 LX_Font::LX_Font(string font_file, SDL_Color& color, unsigned int size)
@@ -142,37 +150,37 @@ LX_Font::~LX_Font()
 
 
 /**
-*   @fn int LX_Font::sizeOfText(string text, int *w, int *h)
+*   @fn int LX_Font::sizeOfText(string text, int& w, int& h)
 *
 *   Calculate the resulting surface size of the text rendererd using the default font
 *
 *   @param text The string to size up
-*   @param w The pointer of int to fill in the text width
-*   @param h The pointer of int to fill in the text height
+*   @param w The reference of an integral to fill in the text width
+*   @param h The reference of an integral to fill in the text height
 *
 *   @return A control value, 0 on success, -1 on failure
 *
 */
-int LX_Font::sizeOfText(string text, int *w, int *h)
+int LX_Font::sizeOfText(string text, int& w, int& h)
 {
     return sizeOfText(text.c_str(),font_size,w,h);
 }
 
 
 /**
-*   @fn int LX_Font::sizeOfText(string text, int size, int *w, int *h)
+*   @fn int LX_Font::sizeOfText(string text, int size, int& w, int& h)
 *
 *   Calculate the resulting surface size of the text rendererd using the default font
 *
 *   @param text The string to size up
 *   @param size The size of the text to be used when you load the texture
-*   @param w The pointer of int to fill in the text width
-*   @param h The pointer of int to fill in the text height
+*   @param w The reference of an integral to fill in the text width
+*   @param h The reference of an integral to fill in the text height
 *
 *   @return A control value, 0 on success, -1 on failure
 *
 */
-int LX_Font::sizeOfText(string text, int size, int *w, int *h)
+int LX_Font::sizeOfText(string text, int size, int& w, int& h)
 {
     TTF_Font *ttf = NULL;
     int sz;
@@ -191,25 +199,15 @@ int LX_Font::sizeOfText(string text, int size, int *w, int *h)
 
 
 
-/**
-*   @fn int LX_Font::sizeOfText(TTF_Font *ttf, string text, int *w, int *h)
+/*
 *
-*   Calculate the resulting surface size of the text rendererd using the font
-*   given in parameter
-*
-*   @param ttf The font you use for the text
-*   @param text The texte string to size up
-*   @param w The pointer to int in which to fille the text width
-*   @param h The pointer to int in which to fille the text height
-*
-*   @return A control value, 0 on success, -1 on failure
-*
-*   @warning If the font is invalid, then you have an undefined behaviour
+*   Calculate the resulting surface size of the text to display
+*   using the font given in parameter
 *
 */
-int LX_Font::sizeOfText(TTF_Font *ttf, string text, int *w, int *h)
+int LX_Font::sizeOfText(TTF_Font *ttf, string text, int& w, int& h)
 {
-    return TTF_SizeUTF8(ttf,text.c_str(),w,h);
+    return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
 }
 
 
@@ -265,6 +263,12 @@ SDL_Surface * LX_Font::drawSolidText(string text, unsigned int size)
 */
 SDL_Surface * LX_Font::drawShadedText(string text, SDL_Color bg)
 {
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot fraw a text with a null size");
+        return NULL;
+    }
+
     return drawShadedText(text.c_str(), bg.r, bg.g, bg.b);
 }
 
@@ -284,6 +288,12 @@ SDL_Surface * LX_Font::drawShadedText(string text, SDL_Color bg)
 */
 SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 {
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot fraw a text with a null size");
+        return NULL;
+    }
+
     return drawText(LX_TTF_SHADED,text.c_str(),font_size,r,g,b);
 }
 
@@ -367,17 +377,14 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
 
     if(size == 0)
     {
-        ttf = createInternalFont(font_size);
+        LX_SetError("drawText: Invalid size, must be a positive value");
+        return NULL;
     }
     else
-    {
         ttf = createInternalFont(size);
-    }
 
     if(ttf == NULL)
-    {
         return loaded;
-    }
 
     // Select the text to draw
     switch(type)
@@ -410,7 +417,7 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, string text,
 TTF_Font * LX_Font::createInternalFont(unsigned int size)
 {
     if(font_buffer == NULL)
-        return TTF_OpenFont(font_str.c_str(), size);
+        return NULL;        // This code will normally never be executed
 
     // The font buffer exists
     return font_buffer->getFontFromBuffer(size);

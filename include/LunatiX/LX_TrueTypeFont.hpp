@@ -69,11 +69,10 @@ namespace LX_TrueTypeFont
 *   @enum LX_TTF_TypeText
 *   @brief The type of text enumeration
 *
-*   This enumeration describes the type of the text you want to draw.
-*
-*   LX_TTF_SOLID : Quick rendering and dirty text
-*   LX_TTF_SHADED : Slow rendering and nice text
-*   LX_TTF_BLENDED : Very slow rendering but very nice text
+*   This enumeration describes the type of the text to draw :
+*    - LX_TTF_SOLID : Quick rendering and dirty text
+*    - LX_TTF_SHADED : Slow rendering and nice text
+*    - LX_TTF_BLENDED : Very slow rendering but very nice text
 *
 */
 typedef enum LX_TTF_TypeText{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
@@ -100,6 +99,7 @@ class LX_Font
     LX_Font& operator =(LX_Font& f);
 
     void createbuffer();
+    int sizeOfText(TTF_Font *ttf, string text, int& w, int& h);
     TTF_Font * createInternalFont(unsigned int size);
 
     SDL_Surface * drawText(LX_TTF_TypeText type, string text,
@@ -108,13 +108,12 @@ class LX_Font
 
 public:
 
-    LX_Font(SDL_Color& color);
+    LX_Font(SDL_Color& color, unsigned int size=0);
     LX_Font(string font_file, SDL_Color& color);
     LX_Font(string font_file, SDL_Color& color, unsigned int size);
 
-    int sizeOfText(string text, int *w, int *h);
-    int sizeOfText(string text, int size, int *w, int *h);
-    int sizeOfText(TTF_Font *ttf, string text, int *w, int *h);
+    int sizeOfText(string text, int& w, int& h);
+    int sizeOfText(string text, int size, int& w, int& h);
 
     SDL_Surface * drawSolidText(string text);
     SDL_Surface * drawSolidText(string text, unsigned int size);

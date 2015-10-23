@@ -10,6 +10,7 @@ using namespace LX_TrueTypeFont;
 
 
 void test_font(void);
+void test_font2(void);
 
 
 int main(int argc, char **argv)
@@ -24,6 +25,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     test_font();
+    test_font2();
 
     cout << " ==== END Test ==== " << endl;
 
@@ -40,7 +42,9 @@ void test_font(void)
     SDL_Color grey = {127,127,127};
     SDL_Rect pos = {100,100,32,12};
 
-    LX_Window win("LunatiX Engine test TTF",LX_WINDOW_SURFACE);
+    string str = "My name is Gumichan01";
+
+    LX_Window win("LunatiX Engine test TTF No 1",LX_WINDOW_SURFACE);
 
 
     cout << "INFO - Load a LX_Font object with RAII" << endl;
@@ -76,13 +80,13 @@ void test_font(void)
         cout << "SUCCESS - Font defined" << endl;
 
 
-    textS = font->drawSolidText("My name is Gumichan01");
+    textS = font->drawSolidText(str);
 
     if(textS == NULL)
-        cerr << "FAILURE - text not loaded" << endl;
+        cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - Solid text OK" << endl;
+        cout << "SUCCESS - Solid text with default size OK" << endl;
         win.clear();
         win.putSurface(textS,NULL,&pos);
         win.update();
@@ -91,13 +95,13 @@ void test_font(void)
     }
 
 
-    textS = font->drawShadedText("My name is Gumichan01",0,255,0);
+    textS = font->drawShadedText(str,0,255,0);
 
     if(textS == NULL)
-        cerr << "FAILURE - text not loaded" << endl;
+        cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - Shaded text OK" << endl;
+        cout << "SUCCESS - Shaded text with default size OK" << endl;
         win.clear();
         win.putSurface(textS,NULL,&pos);
         win.update();
@@ -106,13 +110,13 @@ void test_font(void)
     }
 
 
-    textS = font->drawBlendedText("My name is Gumichan01");
+    textS = font->drawBlendedText(str);
 
     if(textS == NULL)
         cerr << "FAILURE - text not loaded" << endl;
     else
     {
-        cout << "SUCCESS - Blended text OK" << endl;
+        cout << "SUCCESS - Blended text with default size OK" << endl;
         win.clear();
         win.putSurface(textS,NULL,&pos);
         win.update();
@@ -125,24 +129,135 @@ void test_font(void)
 
 
 
+void test_font2(void)
+{
+    LX_Font *font = NULL;
+    SDL_Texture *textS = NULL;
+
+    string str = "My name is Gumichan01";
+    SDL_Color color = {255,255,255};
+    SDL_Color grey = {127,127,127};
+    SDL_Rect pos = {100,100,0,0};
+    SDL_Rect pos2 = {100,100,0,0};
+    int size_for_test = 48;
+    int w,h;
+
+    LX_Window win("LunatiX Engine test TTF No 2",LX_WINDOW_RENDERING);
+
+    font = new LX_Font(color,size_for_test);
+
+    if(font == NULL)
+        cerr << "FAILURE - Font not null" << endl;
+    else
+        cout << "SUCCESS - Font defined" << endl;
 
 
+    // In rendering mode, it is necessary to get the dimension of the text
+    // according to the size of it
+    font->sizeOfText(str,size_for_test,w,h);
+    pos2 = {pos.x,pos.y,w,h};
+    textS = LX_Graphics::loadTextureFromSurface(font->drawSolidText(str),&win);
+
+    if(textS == NULL)
+        cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - Solid text with size "
+        << size_for_test << " OK" << endl;
+        win.clear();
+        win.putTexture(textS,NULL,&pos2);
+        win.update();
+        SDL_Delay(1000);
+        SDL_DestroyTexture(textS);
+    }
+
+    font->sizeOfText(str,size_for_test,w,h);
+    pos2 = {pos.x,pos.y,w,h};
+    textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,255,0),&win);
+
+    if(textS == NULL)
+        cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - Shaded text with size "
+        << size_for_test << " OK" << endl;
+        win.clear();
+        win.putTexture(textS,NULL,&pos2);
+        win.update();
+        SDL_Delay(1000);
+        SDL_DestroyTexture(textS);
+    }
+
+    font->sizeOfText(str,size_for_test,w,h);
+    pos2 = {pos.x,pos.y,w,h};
+    textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str),&win);
+
+    if(textS == NULL)
+        cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - Blended text with size "
+        << size_for_test << " OK" << endl;
+        win.clear();
+        win.putTexture(textS,NULL,&pos2);
+        win.update();
+        SDL_Delay(1000);
+        SDL_DestroyTexture(textS);
+    }
 
 
+    font->sizeOfText(str,(size_for_test/4),w,h);
+    pos2 = {pos.x,pos.y,w,h};
+    textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str,
+                                                                      (size_for_test/4)),&win);
+
+    if(textS == NULL)
+        cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
+    else
+    {
+        cout << "SUCCESS - Blended text with size "
+        << (size_for_test/4) << " OK" << endl;
+        win.clear();
+        win.putTexture(textS,NULL,&pos2);
+        win.update();
+        SDL_Delay(1000);
+        SDL_DestroyTexture(textS);
+    }
+
+    cout << "INFO - error cases" << endl;
 
 
+    SDL_Surface *s = font->drawSolidText(str,0);
+
+    if(s != NULL)
+        cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
+    else
+        cout << "SUCCESS - The text was not loaded - " << LX_GetError() << endl;
+
+    SDL_FreeSurface(s);
 
 
+    s = font->drawShadedText(str,0,0,0,0);
+
+    if(s != NULL)
+        cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
+    else
+        cout << "SUCCESS - The text was not loaded - " << LX_GetError() << endl;
+
+    SDL_FreeSurface(s);
 
 
+    s = font->drawBlendedText(str,0);
+
+    if(s != NULL)
+        cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
+    else
+        cout << "SUCCESS - The text was not loaded - " << LX_GetError() << endl;
+
+    SDL_FreeSurface(s);
 
 
-
-
-
-
-
-
-
+    delete font;
+}
 
 
