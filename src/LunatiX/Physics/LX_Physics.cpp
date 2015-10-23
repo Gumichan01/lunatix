@@ -474,18 +474,15 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
 
     for(unsigned int i = 0; i < n; i++)
     {
-        A.x = poly->getPoint(i).x;
-        A.y = poly->getPoint(i).y;
+        A = poly->getPoint(i);
 
         if(i == n-1)
         {
-            B.x = poly->getPoint(0).x;
-            B.y = poly->getPoint(0).y;
+            B = poly->getPoint(0);
         }
         else
         {
-            B.x = poly->getPoint(i+1).x;
-            B.y = poly->getPoint(i+1).y;
+            B = poly->getPoint(i+1);
         }
 
         if(collisionSegCircle(C,&A,&B) == true)
@@ -521,18 +518,15 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
 
     for(unsigned int j = 0; j < n; j++)
     {
-        E.x = poly->getPoint(j).x;
-        E.y = poly->getPoint(j).y;
+        E = poly->getPoint(j);
 
         if(j == n-1)
         {
-            F.x = poly->getPoint(0).x;
-            F.y = poly->getPoint(0).y;
+            F = poly->getPoint(0);
         }
         else
         {
-            F.x = poly->getPoint(j+1).x;
-            F.y = poly->getPoint(j+1).y;
+            F = poly->getPoint(j+1);
         }
 
         if(intersectSegment(&A,&B,&E,&F) || intersectSegment(&B,&C,&E,&F) ||
