@@ -30,6 +30,37 @@ using namespace std;
 
 
 /**
+*   @fn LX_PolygonException::LX_PolygonException(std::string err)
+*
+*   Build the LX_PolygonException class
+*
+*   @param err The error string
+*
+*/
+LX_PolygonException::LX_PolygonException(std::string err)
+{
+    stringError = err;
+}
+
+
+/**
+*   @fn const char * LX_PolygonException::what() const throw()
+*
+*   Get the error string
+*
+*   @return The error string
+*/
+const char * LX_PolygonException::what() const throw()
+{
+    return stringError.c_str();
+}
+
+
+LX_PolygonException::~LX_PolygonException() throw() {}
+
+
+
+/**
 *   @fn LX_Polygon::LX_Polygon(const unsigned int nb)
 *
 *   Create a new instance of LX_Polygon
@@ -38,24 +69,18 @@ using namespace std;
 *
 */
 LX_Polygon::LX_Polygon(const unsigned int nb)
+    : points(NULL),nbPoints(nb), cursor(0), convex(false)
 {
     if(nb > 2)
     {
         points = new (nothrow) LX_Point[nb];
 
         if(points == NULL)
-        {
-            LX_SetError("LX_Polygon constructor: Cannot allocate the points\n");
-            nbPoints = 0;
-            cursor = nbPoints;
-        }
-        else
-        {
-            nbPoints = nb;
-            cursor = 0;
-        }
+            throw LX_PolygonException("LX_Polygon constructor: Cannot allocate the points\n");
 
     }
+    else
+        throw LX_PolygonException("LX_Polygon constructor: Cannot allocate the points\n");
 }
 
 

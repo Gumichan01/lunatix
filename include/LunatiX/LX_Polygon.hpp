@@ -27,6 +27,32 @@
 
 struct LX_Point;
 
+#include <iostream>
+
+
+/**
+*   @class LX_PolygonException
+*   @brief The exception class of LX_Window
+*
+*   This class describes the exception occured when
+*   the SDL_Window instance cannot be loaded.
+*
+*/
+class LX_PolygonException : public std::exception
+{
+    std::string stringError;
+
+public :
+
+    LX_PolygonException(std::string err);
+
+    const char * what() const throw();
+
+    ~LX_PolygonException() throw();
+};
+
+
+
 
 /**
 *	@class LX_Polygon
