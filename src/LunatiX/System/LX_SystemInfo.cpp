@@ -103,30 +103,33 @@ int getSystemRAM(void)
 
 
 /**
-*   @fn const SDL_DisplayMode * getDisplayModes(int *size)
+*   @fn const SDL_DisplayMode * getDisplayModes(int& size)
 *
 *   Get the list of possible displays on the screen
 *
-*   @param size the pointer to the size to fill in
+*   @param size the preference to the size to fill in
 *
 *   @return The list of display modes if there is at least one display mode,
 *           a null pointer otherwise, you can get an error message using
 *           LX_GetError()
 *
-*   @note This function allocate a memory to create the list, so you need
+*   @note This function allocate a memory to create the list, so you have
 *           to free that list when you do not need it.
 *
-*   @warning If size is a null pointer, a segmentation fault will occur
-*
 */
-const SDL_DisplayMode * getDisplayModes(int *size)
+const SDL_DisplayMode * getDisplayModes(int& size)
 {
     const int numberOfDisplays = SDL_GetNumDisplayModes(0);
     SDL_DisplayMode *mode = NULL;
 
-    if(numberOfDisplays < 1)
+    if(numberOfDisplays == 0)
     {
-        LX_SetError("No display available or an error occurred");
+        LX_SetError("No display available");
+        return NULL;
+    }
+    else if(numberOfDisplays == 0)
+    {
+        LX_SetError("Cannot get the number of display modes");
         return NULL;
     }
 
@@ -138,7 +141,7 @@ const SDL_DisplayMode * getDisplayModes(int *size)
         return NULL;
     }
 
-    *size = numberOfDisplays;
+    size = numberOfDisplays;
 
     for(int i = 0; i < numberOfDisplays; i++)
     {

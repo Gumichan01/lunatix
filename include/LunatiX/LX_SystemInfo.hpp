@@ -43,7 +43,7 @@ int getCPUCacheLineSize(void);
 int getCPUCount(void);
 int getSystemRAM(void);
 
-const SDL_DisplayMode * getDisplayModes(int *size);
+const SDL_DisplayMode * getDisplayModes(int& size);
 
 };
 
