@@ -52,14 +52,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     reader = new LX_File(name.c_str(),LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
 
-    {
-        Sint64 n = reader->tell();
-
-        if(n == -1)
-            throw IOException(str + LX_GetError());
-
-        bufsize = n;
-    }
+    bufsize = reader->size();
 
     reader->seek(0,LX_SEEK_SET);
     buffer = new (std::nothrow) char[bufsize];
