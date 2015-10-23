@@ -243,6 +243,9 @@ SDL_Surface * LX_Font::drawSolidText(string text)
 *
 *   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
+*   @note   The size does not change anything when the text is displayed using
+*           the display method with a renderer and texutres.
+*
 */
 SDL_Surface * LX_Font::drawSolidText(string text, unsigned int size)
 {
@@ -312,6 +315,9 @@ SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b)
 *
 *   @return An instance of SDL_Surface on success, a null pointer otherwise
 *
+*   @note   The size does not change anything when the text is displayed using
+*           the display method with a renderer and texutres.
+*
 */
 SDL_Surface * LX_Font::drawShadedText(string text, Uint8 r, Uint8 g, Uint8 b,
                                       unsigned int size)
@@ -352,6 +358,9 @@ SDL_Surface * LX_Font::drawBlendedText(string text)
 *   @param size The size defined by the user
 *
 *   @return An instance of SDL_Surface on success, a null pointer otherwise
+*
+*   @note   The size does not change anything when the text is displayed using
+*           the display method with a renderer and texutres.
 *
 */
 SDL_Surface * LX_Font::drawBlendedText(string text, unsigned int size)
