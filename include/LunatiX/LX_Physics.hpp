@@ -44,10 +44,10 @@ namespace LX_Physics
 {
 
 /* Distances */
-unsigned int euclide_square_distance(int x1, int y1, int x2, int y2);
-unsigned int euclide_square_distance(LX_Point& p1, LX_Point& p2);
-float euclide_distance(int x1, int y1, int x2, int y2);
-float euclide_distance(LX_Point& p1, LX_Point& p2);
+unsigned int euclide_square_distance(const int x1,const int y1,const int x2,const int y2);
+unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
+float euclide_distance(int const x1, const int y1, const int x2, const int y2);
+float euclide_distance(const LX_Point& p1,const LX_Point& p2);
 
 
 /* Collision detection */

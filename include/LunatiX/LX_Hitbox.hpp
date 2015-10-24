@@ -30,6 +30,7 @@ typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect) */
 
 /**
 *   @todo operators of LX_Point :
+*   - '=' : assignment (it should be explicitly defined into the library)
 *   - '==' : same coordinates
 *   - '!=' : not same coordinates
 */
@@ -69,11 +70,9 @@ typedef struct LX_Point
 */
 typedef struct LX_Circle
 {
-
-    int xCenter;                /**< The x position of circle center */
-    int yCenter;                /**< The y position of circle center */
-    unsigned int radius;        /**< The circle radius */
-    unsigned int square_radius; /**< The square radius */
+    LX_Point center;            /**< The point that represents the center */
+    unsigned int radius;        /**< The circle radius                   */
+    unsigned int square_radius; /**< The square radius                   */
 
 } LX_Circle;    /**< @brief The circle */
 

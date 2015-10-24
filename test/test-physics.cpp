@@ -124,7 +124,7 @@ void test_collisionPointCircle(void)
 
     bool d;
 
-    c = {100,100,10,100};
+    c = {{100,100},10,100};
 
     A = {100,100};
     B = {50,50};
@@ -198,9 +198,9 @@ void test_collision2Circle(void)
     LX_Circle A,B,C;
     bool d;
 
-    A = {10,10,5,25};
-    B = {13,12,3,9};
-    C = {100,100,50,50*50};
+    A = {{10,10},5,25};
+    B = {{13,12},3,9};
+    C = {{100,100},50,50*50};
 
     cout << " = TEST CIRCLE/CIRCLE = " << endl;
 
@@ -268,9 +268,9 @@ void test_collisionRectCircle(void)
     bool d;
 
     R1 = {0,0,50,25};
-    A = {10,10,5,25};
-    B = {51,26,15,15*15};
-    C = {100,100,40,40*40};
+    A = {{10,10},5,25};
+    B = {{51,26},15,15*15};
+    C = {{100,100},40,40*40};
 
     cout << " = TEST RECT/CIRCLE = " << endl;
 
@@ -590,10 +590,10 @@ void test_collisionPointPolygon(void)
 
 void test_collisionCirclePolygon(void)
 {
-    LX_Circle M = {12,7,1,1};
-    LX_Circle N = {12,7,2,4};
-    LX_Circle O = {9,7,10,100};
-    LX_Circle S = {2,2,2,4};
+    LX_Circle M = {{12,7},1,1};
+    LX_Circle N = {{12,7},2,4};
+    LX_Circle O = {{9,7},10,100};
+    LX_Circle S = {{2,2},2,4};
 
     bool d;
     LX_Polygon poly(5);
