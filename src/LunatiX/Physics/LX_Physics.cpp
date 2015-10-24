@@ -232,7 +232,8 @@ bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circ
 
 
 /**
-*	@fn bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
+*	@fn bool LX_Physics::collisionSegCircle(const LX_Circle& circle,
+*                                           const LX_Point& A, const LX_Point& B)
 *
 *	Check the collision between a circle and the [AB] segment
 *
@@ -242,36 +243,34 @@ bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circ
 *
 *	@return TRUE if there is a collision, FALSE otherwise
 *
-*   @warning    If at least one parameter is a null pointer,
-*               the behaviour is undefined
-*
 */
-bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B)
+bool LX_Physics::collisionSegCircle(const LX_Circle& circle,
+                                    const LX_Point& A, const LX_Point& B)
 {
     LX_Vector2D AB,AC,BC;
     LX_Point M;
-    LX_Point O = {circle->xCenter, circle->yCenter};
+    LX_Point O = {circle.xCenter, circle.yCenter};
 
     float scal,scal1,scal2;
     int sum;
     double t;
     double x,y;
 
-    if( collisionPointCircle(*A,*circle) || collisionPointCircle(*B,*circle) )
+    if(collisionPointCircle(A,circle) || collisionPointCircle(B,circle))
         return true;
 
-    AB.vx = B->x - A->x;
-    AB.vy = B->y - A->y;
+    AB.vx = B.x - A.x;
+    AB.vy = B.y - A.y;
 
-    AC.vx = O.x - A->x;
-    AC.vy = O.y - A->y;
+    AC.vx = O.x - A.x;
+    AC.vy = O.y - A.y;
 
-    BC.vx = O.x - B->x;
-    BC.vy = O.y - B->y;
+    BC.vx = O.x - B.x;
+    BC.vy = O.y - B.y;
 
     scal1 = scalar_product(AB,AC);
     // I use the opposite value of vx
-    scal2 = ( (-AB.vx) * BC.vx) + ( (-AB.vy) * BC.vy);
+    scal2 = ((-AB.vx) * BC.vx) + ((-AB.vy) * BC.vy);
 
     if(scal1 < 0 || scal2 < 0)
         return false;
@@ -285,12 +284,12 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
 
     t = scal1/scal;
 
-    x = A->x + (t*AB.vx);
-    y = A->y + (t*AB.vy);
+    x = A.x + (t*AB.vx);
+    y = A.y + (t*AB.vy);
 
     M = {static_cast<int>(x), static_cast<int>(y)};     // M is the projection point of O
 
-    return collisionPointCircle(M,*circle);
+    return collisionPointCircle(M,circle);
 }
 
 
@@ -331,7 +330,7 @@ bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rec
 
     for(int i=0; i< RECT_SIDES ; i++)
     {
-        if(collisionSegCircle(&circle, &sides[i][0], &sides[i][1]))
+        if(collisionSegCircle(circle, sides[i][0], sides[i][1]))
             return true;
     }
 
@@ -474,7 +473,7 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
             B = poly->getPoint(i+1);
         }
 
-        if(collisionSegCircle(C,&A,&B) == true)
+        if(collisionSegCircle(*C,A,B) == true)
             return true;
     }
 

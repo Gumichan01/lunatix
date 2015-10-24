@@ -61,9 +61,9 @@ bool collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle& cir
 bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle);
 
 // AABB/AABB ; Circle/Circle ; Circle/Segment; Circle/AABB
-bool collisionRect(const LX_AABB &rect1, const LX_AABB &rect2);
+bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2);
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2);
-bool collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);
+bool collisionSegCircle(const LX_Circle& circle, const LX_Point& A, const LX_Point& B);
 bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect);
 
 // Segment/Line ; Segment/Segment
