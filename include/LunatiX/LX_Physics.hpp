@@ -68,10 +68,10 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect);
 
 // Segment/Line ; Segment/Segment
 // A segment is a part of a line, so two point are needed to get a line
-bool intersectSegLine(const LX_Point *A, const LX_Point *B,
-                      const LX_Point *C, const LX_Point *D);
-bool intersectSegment(const LX_Point *A, const LX_Point *B,
-                      const LX_Point *C, const LX_Point *D);
+bool intersectSegLine(const LX_Point& A, const LX_Point& B,
+                      const LX_Point& C, const LX_Point& D);
+bool intersectSegment(const LX_Point& A, const LX_Point& B,
+                      const LX_Point& C, const LX_Point& D);
 
 // Point/Polygon ; Circle/Polygon
 bool collisionPointPoly(const LX_Point *P, const LX_Polygon *poly);

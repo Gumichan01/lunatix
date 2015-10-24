@@ -339,7 +339,8 @@ bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rec
 
 
 /**
-*   @fn bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B, const LX_Point *C, const LX_Point *D)
+*   @fn bool LX_Physics::intersectSegLine(const LX_Point& A, const LX_Point& B,
+*                                         const LX_Point& C, const LX_Point& D)
 *
 *   Test the intersection between a line and a segment
 *
@@ -351,20 +352,20 @@ bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rec
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
-                                  const LX_Point *C, const LX_Point *D)
+bool LX_Physics::intersectSegLine(const LX_Point& A, const LX_Point& B,
+                                   const LX_Point& C, const LX_Point& D)
 {
     LX_Vector2D AC,AD,AB;
     long d;
 
-    AB.vx = B->x - A->x;
-    AB.vy = B->y - A->y;
+    AB.vx = B.x - A.x;
+    AB.vy = B.y - A.y;
 
-    AC.vx = C->x - A->x;
-    AC.vy = C->y - A->y;
+    AC.vx = C.x - A.x;
+    AC.vy = C.y - A.y;
 
-    AD.vx = D->x - A->x;
-    AD.vy = D->y - A->y;
+    AD.vx = D.x - A.x;
+    AD.vy = D.y - A.y;
 
     d = vector_product(AB,AD) * vector_product(AB,AC);
 
@@ -373,7 +374,8 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
 
 
 /**
-*   @fn bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B, const LX_Point *C, const LX_Point *D)
+*   @fn bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
+*                                         const LX_Point& C, const LX_Point& D)
 *
 *   Test the intersection between 2 segments
 *
@@ -385,8 +387,8 @@ bool LX_Physics::intersectSegLine(const LX_Point *A, const LX_Point *B,
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool LX_Physics::intersectSegment(const LX_Point *A, const LX_Point *B,
-                                  const LX_Point *C, const LX_Point *D)
+bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
+                                   const LX_Point& C, const LX_Point& D)
 {
     return (intersectSegLine(A,B,C,D) && intersectSegLine(C,D,A,B));
 }
@@ -422,7 +424,7 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
             LX_Point p1 = poly->getPoint(0);
             LX_Point p2 = poly->getPoint(i);
 
-            if(intersectSegment(P,&I,&p1,&p2))
+            if(intersectSegment(*P,I,p1,p2))
                 count++;
         }
         else
@@ -430,7 +432,7 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
             LX_Point p3 = poly->getPoint(i+1);
             LX_Point p4 = poly->getPoint(i);
 
-            if(intersectSegment(P,&I,&p3,&p4))
+            if(intersectSegment(*P,I,p3,p4))
                 count++;
         }
     }
@@ -517,8 +519,8 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
             F = poly->getPoint(j+1);
         }
 
-        if(intersectSegment(&A,&B,&E,&F) || intersectSegment(&B,&C,&E,&F) ||
-                intersectSegment(&C,&D,&E,&F) || intersectSegment(&D,&A,&E,&F))
+        if(intersectSegment(A,B,E,F) || intersectSegment(B,C,E,F) ||
+                intersectSegment(C,D,E,F) || intersectSegment(D,A,E,F))
             return true;
 
         if(collisionPointRect(E,*rect))
@@ -579,7 +581,7 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
                 D.y = poly2->getPoint(j+1).y;
             }
 
-            if(intersectSegment(&A,&B,&C,&D))
+            if(intersectSegment(A,B,C,D))
                 return true;
         }
     }

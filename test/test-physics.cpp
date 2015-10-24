@@ -468,7 +468,7 @@ void test_collisionSeg(void)
 
     cout << " = TEST Collision Segment = " << endl;
 
-    d = intersectSegment(&A,&B,&C,&D);
+    d = intersectSegment(A,B,C,D);
 
     if(d != true)
         cerr << "FAILURE - intersect [AB]/[CD] expected: TRUE ; got: FALSE" << endl;
@@ -476,7 +476,7 @@ void test_collisionSeg(void)
         cout << "SUCCESS - intersect [AB]/[CD] OK" << endl;
 
 
-    d = intersectSegment(&A,&C,&B,&D);
+    d = intersectSegment(A,C,B,D);
 
     if(d != false)
         cerr << "FAILURE - intersect [AC]/[BD] expected: FALSE ; got: TRUE" << endl;
@@ -484,7 +484,7 @@ void test_collisionSeg(void)
         cout << "SUCCESS - no intersect [AC]/[BD] OK" << endl;
 
 
-    d = intersectSegment(&A,&B,&A,&D);
+    d = intersectSegment(A,B,A,D);
 
     if(d != true)
         cerr << "FAILURE - intersect [AB]/[AD] expected: TRUE ; got: FALSE" << endl;
@@ -492,7 +492,7 @@ void test_collisionSeg(void)
         cout << "SUCCESS - intersect [AB]/[AD] OK" << endl;
 
 
-    d = intersectSegment(&A,&D,&A,&E);
+    d = intersectSegment(A,D,A,E);
 
     if(d != true)
         cerr << "FAILURE - intersect [AD]/[AE] expected: TRUE ; got: FALSE" << endl;
@@ -500,7 +500,7 @@ void test_collisionSeg(void)
         cout << "SUCCESS - intersect [AD]/[AE] OK" << endl;
 
 
-    d = intersectSegment(&A,&D,&F,&E);
+    d = intersectSegment(A,D,F,E);
 
     if(d != true)
         cerr << "FAILURE - intersect [AD]/[FE] expected: FALSE ; got: TRUE" << endl;
