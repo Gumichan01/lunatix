@@ -189,7 +189,7 @@ void LX_Particle::update(void)
 {
     if(lifetime > 0)
     {
-        LX_Physics::moveRect(&box,velocity.vx,velocity.vy);
+        LX_Physics::moveRect(box,velocity.vx,velocity.vy);
         lifetime--;
     }
 }

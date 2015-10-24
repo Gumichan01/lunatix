@@ -74,7 +74,7 @@ class Dot{
         LX_Particle *p = NULL;
 
         sys->updateParticles();
-        moveRect(&box,10,0);
+        moveRect(box,10,0);
 
         for(int i = 0; i < N; i++)
         {

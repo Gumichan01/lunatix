@@ -311,15 +311,15 @@ void LX_Polygon::convexity(void)
 */
 void LX_Polygon::move(const int vx, const int vy)
 {
-    movePoint(&points[0],vx,vy);
-    movePoint(&points[1],vx,vy);
-    movePoint(&points[2],vx,vy);
+    movePoint(points[0],vx,vy);
+    movePoint(points[1],vx,vy);
+    movePoint(points[2],vx,vy);
 
     const unsigned int n = numberOfEdges();
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePoint(&points[i],vx,vy);
+        movePoint(points[i],vx,vy);
     }
 }
 

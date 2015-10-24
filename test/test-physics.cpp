@@ -736,7 +736,7 @@ void test_collision2Polygon(void)
 
     cout << " = TEST Collision Polygon/Polygon = " << endl;
 
-    d = collisionPoly(&poly,&poly2);
+    d = collisionPoly(poly,poly2);
 
     if(d != true)
         cerr << "FAILURE - collision poly/poly2. expected: TRUE ; got: FALSE" << endl;
@@ -744,7 +744,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - collision poly/poly2 OK" << endl;
 
 
-    d = collisionPoly(&poly,&poly3);
+    d = collisionPoly(poly,poly3);
 
     if(d != true)
         cerr << "FAILURE - collision poly/poly3. expected: TRUE ; got: FALSE" << endl;
@@ -752,7 +752,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - collision poly/poly3 OK" << endl;
 
 
-    d = collisionPoly(&poly,&poly4);
+    d = collisionPoly(poly,poly4);
 
     if(d != false)
         cerr << "FAILURE - collision poly/poly4. expected: FALSE ; got: TRUE" << endl;

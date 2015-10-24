@@ -533,7 +533,7 @@ bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 
 
 /**
-*   @fn bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
+*   @fn bool LX_Physics::collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 *
 *   Test the intersection between 2 polygons
 *
@@ -543,42 +543,42 @@ bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 *   @return TRUE if there is an collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
+bool LX_Physics::collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 {
     LX_Point A,B,C,D;
-    const unsigned int polySize1 = poly1->numberOfEdges();
-    const unsigned int polySize2 = poly2->numberOfEdges();
+    const unsigned int polySize1 = poly1.numberOfEdges();
+    const unsigned int polySize2 = poly2.numberOfEdges();
 
     for(unsigned int i = 0; i < polySize1; i++)
     {
-        A.x = poly1->getPoint(i).x;
-        A.y = poly1->getPoint(i).y;
+        A.x = poly1.getPoint(i).x;
+        A.y = poly1.getPoint(i).y;
 
         if(i == polySize1-1)
         {
-            B.x = poly1->getPoint(0).x;
-            B.y = poly1->getPoint(0).y;
+            B.x = poly1.getPoint(0).x;
+            B.y = poly1.getPoint(0).y;
         }
         else
         {
-            B.x = poly1->getPoint(i+1).x;
-            B.y = poly1->getPoint(i+1).y;
+            B.x = poly1.getPoint(i+1).x;
+            B.y = poly1.getPoint(i+1).y;
         }
 
         for(unsigned int j = 0; j < polySize2; j++)
         {
-            C.x = poly2->getPoint(j).x;
-            C.y = poly2->getPoint(j).y;
+            C.x = poly2.getPoint(j).x;
+            C.y = poly2.getPoint(j).y;
 
             if(j == polySize2-1)
             {
-                D.x = poly2->getPoint(0).x;
-                D.y = poly2->getPoint(0).y;
+                D.x = poly2.getPoint(0).x;
+                D.y = poly2.getPoint(0).y;
             }
             else
             {
-                D.x = poly2->getPoint(j+1).x;
-                D.y = poly2->getPoint(j+1).y;
+                D.x = poly2.getPoint(j+1).x;
+                D.y = poly2.getPoint(j+1).y;
             }
 
             if(intersectSegment(A,B,C,D))
@@ -586,16 +586,16 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
         }
     }
 
-    LX_Point origin1 = poly1->getPoint(0);
-    LX_Point origin2 = poly2->getPoint(0);
+    LX_Point origin1 = poly1.getPoint(0);
+    LX_Point origin2 = poly2.getPoint(0);
 
-    return (collisionPointPoly(origin1,*poly2)
-            || collisionPointPoly(origin2,*poly1));
+    return (collisionPointPoly(origin1,poly2)
+            || collisionPointPoly(origin2,poly1));
 }
 
 
 /**
-*   @fn void LX_Physics::movePoint(LX_Point *P, const int vx, const int vy)
+*   @fn void LX_Physics::movePoint(LX_Point& P, const int vx, const int vy)
 *
 *   Move a point to a direction
 *
@@ -604,15 +604,15 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
 *   @param vy The y direction
 *
 */
-void LX_Physics::movePoint(LX_Point *P, const int vx, const int vy)
+void LX_Physics::movePoint(LX_Point& P, const int vx, const int vy)
 {
-    P->x += vx;
-    P->y += vy;
+    P.x += vx;
+    P.y += vy;
 }
 
 
 /**
-*   @fn void LX_Physics::moveRect(LX_AABB *rect, const int vx, const int vy)
+*   @fn void LX_Physics::moveRect(LX_AABB& rect, const int vx, const int vy)
 *
 *   Move an AABB to a direction
 *
@@ -621,10 +621,10 @@ void LX_Physics::movePoint(LX_Point *P, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void LX_Physics::moveRect(LX_AABB *rect, const int vx, const int vy)
+void LX_Physics::moveRect(LX_AABB& rect, const int vx, const int vy)
 {
-    rect->x += vx;
-    rect->y += vy;
+    rect.x += vx;
+    rect.y += vy;
 }
 
 
@@ -638,15 +638,15 @@ void LX_Physics::moveRect(LX_AABB *rect, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
+void LX_Physics::moveCircle(LX_Circle& C, const int vx, const int vy)
 {
-    C->xCenter += vx;
-    C->yCenter += vy;
+    C.xCenter += vx;
+    C.yCenter += vy;
 }
 
 
 /**
-*   @fn void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
+*   @fn void LX_Physics::movePoly(LX_Polygon& poly, const int vx, const int vy)
 *
 *   Move the polygon to a direction
 *
@@ -655,9 +655,9 @@ void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
+void LX_Physics::movePoly(LX_Polygon& poly, const int vx, const int vy)
 {
-    poly->move(vx,vy);
+    poly.move(vx,vy);
 }
 
 
@@ -670,7 +670,7 @@ void LX_Physics::movePoly(LX_Polygon *poly, const int vx, const int vy)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D& v)
+void LX_Physics::movePoint(LX_Point& P, const LX_Vector2D& v)
 {
     movePoint(P,v.vx,v.vy);
 }
@@ -685,14 +685,14 @@ void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D& v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D& v)
+void LX_Physics::moveRect(LX_AABB& rect, const LX_Vector2D& v)
 {
     moveRect(rect,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
+*   @fn void LX_Physics::moveCircle(LX_Circle& C, const LX_Vector2D& v)
 *
 *   Move the circle to a direction using the vector
 *
@@ -700,14 +700,14 @@ void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D& v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
+void LX_Physics::moveCircle(LX_Circle& C, const LX_Vector2D& v)
 {
     moveCircle(C,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D& v)
+*   @fn void LX_Physics::movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 *
 *   Move the polygon to a direction using the vector
 *
@@ -715,14 +715,14 @@ void LX_Physics::moveCircle(LX_Circle *C, const LX_Vector2D& v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::movePoly(LX_Polygon *poly, const LX_Vector2D& v)
+void LX_Physics::movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 {
-    poly->move(v);
+    poly.move(v);
 }
 
 
 /**
-*   @fn void LX_Physics::movePointTo(LX_Point *P, const int xpos, const int ypos)
+*   @fn void LX_Physics::movePointTo(LX_Point& P, const int xpos, const int ypos)
 *
 *   Move a point to an absolute position
 *
