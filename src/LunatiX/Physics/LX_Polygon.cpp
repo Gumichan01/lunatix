@@ -349,15 +349,15 @@ void LX_Polygon::move(const LX_Vector2D& v)
 */
 void LX_Polygon::moveTo(int vx, int vy)
 {
-    movePointTo(&points[0],vx,vy);
-    movePointTo(&points[1],vx,vy);
-    movePointTo(&points[2],vx,vy);
+    movePointTo(points[0],vx,vy);
+    movePointTo(points[1],vx,vy);
+    movePointTo(points[2],vx,vy);
 
     const unsigned int n = numberOfEdges();
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePointTo(&points[i],vx,vy);
+        movePointTo(points[i],vx,vy);
     }
 }
 
