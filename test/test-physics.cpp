@@ -78,35 +78,35 @@ void test_euclide(void)
 
     cout << " = TEST EUCLIDE = " << endl;
 
-    d = euclide_square_distance(&A,&B);
+    d = euclide_square_distance(A,B);
 
     if(d != 81)
-        cerr << "FAILURE - Bad square distance of AB - expected : 81; got : " << d << endl;
+        cerr << "FAILURE - Bad square distance AB - expected : 81; got : " << d << endl;
     else
-        cout << "SUCCESS - Good square distance of AB : " << d << endl;
+        cout << "SUCCESS - Good square distance AB : " << d << endl;
 
-    d = euclide_distance(&A,&B);
+    d = euclide_distance(A,B);
 
     if(d != 9)
-        cerr << "FAILURE - Bad distance of AB - expected : 9; got : " << d << endl;
+        cerr << "FAILURE - Bad distance AB - expected : 9; got : " << d << endl;
     else
-        cout << "SUCCESS - Good distance of AB : " << d << endl;
+        cout << "SUCCESS - Good distance AB : " << d << endl;
 
     // Test CD
 
-    d = euclide_square_distance(&C,&D);
+    d = euclide_square_distance(C,D);
 
     if(d != 200)
-        cerr << "FAILURE - Bad square distance of CD - expected : 200; got : " << d << endl;
+        cerr << "FAILURE - Bad square distance CD - expected : 200; got : " << d << endl;
     else
-        cout << "SUCCESS - Good square distance of CD : " << d << endl;
+        cout << "SUCCESS - Good square distance CD : " << d << endl;
 
-    d = euclide_distance(&C,&D);
+    d = euclide_distance(C,D);
 
     if(d != ( (int) sqrt(200)) )
-        cerr << "FAILURE - Bad distance of CD - expected : " << (int) sqrt(200) << "; got : " << d << endl;
+        cerr << "FAILURE - Bad distance CD - expected : " << (int) sqrt(200) << "; got : " << d << endl;
     else
-        cout << "SUCCESS - Good distance of CD : " << d << endl;
+        cout << "SUCCESS - Good distance CD : " << d << endl;
 
     cout << " = END TEST = " << endl;
 
