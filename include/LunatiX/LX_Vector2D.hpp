@@ -23,26 +23,28 @@
 
 /**
 *   @todo operators of LX_Vector2D :
+*   - '=' : assignment (it should be explicitly defined into the library)
 *   - '==' : same direction and same norm
 *   - '!=' : not same direction or (||) not same norm
 *   - '>' : same direction and first norm > second norm
 *   - '<' : same direction and first norm < second norm
 *   - '>=' : same direction and first norm >= second norm
 *   - '<=' : same direction and first norm <= second norm
-*   - '+' : addition of x and y
-*   - '-' : substraction of x and y
+*   - '+' : addition of x and y between two vectors
+*   - '-' : substraction of x and y between two vectors
 *   - '++' : vector's coordinates + 1
 *   - '--' : vector's coordinates - 1
+*   - '+=' : vector's coordinates + 2nd vector's coordinates
 */
 
 /**
 *   @todo functions of LX_Vector2D :
-*   - add(LX_Vector2D&, float)
-*   - sub(LX_Vector2D&, float)
-*   - multiply(LX_Vector2D&, float)
-*   - divide(LX_Vector2D&, float)
-*   - normalize(LX_Vector2D&)
-*   - isZeroVector(LX_Vector2D&)
+*   - LX_Vector2D add(LX_Vector2D&, float)
+*   - LX_Vector2D sub(LX_Vector2D&, float)
+*   - LX_Vector2D multiply(LX_Vector2D&, float)
+*   - LX_Vector2D divide(LX_Vector2D&, float)
+*   - LX_Vector2D normalize(LX_Vector2D&)
+*   - bool isZeroVector(LX_Vector2D&)
 */
 
 /**
