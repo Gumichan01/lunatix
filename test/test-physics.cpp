@@ -129,28 +129,28 @@ void test_collisionPointCircle(void)
 
     cout << " = TEST POINT/CIRCLE = " << endl;
 
-    d = collisionPointCircle(A.x,A.y,&c);
+    d = collisionPointCircle(A.x,A.y,c);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE ; got : " << d << endl;
     else
         cout << "SUCCESS - collision, the point is the center : " << d << endl;
 
-    d = collisionPointCircle(B.x,B.y,&c);
+    d = collisionPointCircle(B.x,B.y,c);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
-    d = collisionPointCircle(C.x,C.y,&c);
+    d = collisionPointCircle(C,c);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
     else
         cout << "SUCCESS - collision point is in the circle" << endl;
 
-    d = collisionPointCircle(D.x,D.y,&c);
+    d = collisionPointCircle(D,c);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE ; got : TRUE" << endl;

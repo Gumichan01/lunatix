@@ -146,7 +146,8 @@ bool LX_Physics::collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 
 
 /**
-*	@fn bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle)
+*	@fn bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos,
+*                                               const LX_Circle& circle)
 *
 *	Check the collision between a point and a circle
 *
@@ -157,13 +158,11 @@ bool LX_Physics::collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle)
+bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos,
+                                      const LX_Circle& circle)
 {
-
-    if(circle == NULL
-       || euclide_square_distance(x_pos,y_pos,
-                                     circle->xCenter,
-                                     circle->yCenter) > (circle->square_radius))
+    if(euclide_square_distance(x_pos,y_pos,circle.xCenter,circle.yCenter)
+       > (circle.square_radius))
     {
         return false;
     }
@@ -173,7 +172,7 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX
 
 
 /**
-*	@fn bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle)
+*	@fn bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
 *
 *	Check the collision between a point and a circle
 *
@@ -183,9 +182,9 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos, const LX
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointCircle(const LX_Point *p, const LX_Circle *circle)
+bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
 {
-    return collisionPointCircle(p->x,p->y,circle);
+    return collisionPointCircle(p.x,p.y,circle);
 }
 
 
@@ -263,7 +262,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
     double t;
     double x,y;
 
-    if( collisionPointCircle(A,circle) || collisionPointCircle(B,circle) )
+    if( collisionPointCircle(*A,*circle) || collisionPointCircle(*B,*circle) )
         return true;
 
     AB.vx = B->x - A->x;
@@ -296,7 +295,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle *circle, const LX_Point *A, 
 
     M = {static_cast<int>(x), static_cast<int>(y)};     // M is the projection point of O
 
-    return collisionPointCircle(&M, circle);
+    return collisionPointCircle(M,*circle);
 }
 
 
