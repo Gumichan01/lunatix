@@ -536,21 +536,21 @@ void test_collisionPointPolygon(void)
 
     cout << " = TEST Collision Point/Polygon = " << endl;
 
-    d = collisionPointPoly(&N,&poly);
+    d = collisionPointPoly(N,poly);
 
     if(d != false)
         cerr << "FAILURE - N in the polygon. expected: FALSE ; got: TRUE" << endl;
     else
         cout << "SUCCESS - N not in the polygon OK" << endl;
 
-    d = collisionPointPoly(&O,&poly);
+    d = collisionPointPoly(O,poly);
 
     if(d != true)
         cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
-    d = collisionPointPoly(&P,&poly);
+    d = collisionPointPoly(P,poly);
 
     if(d != true)
         cerr << "FAILURE - P not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -558,7 +558,7 @@ void test_collisionPointPolygon(void)
         cout << "SUCCESS - P in the polygon OK" << endl;
 
 
-    d = collisionPointPoly(&Q,&poly);
+    d = collisionPointPoly(Q,poly);
 
     if(d != true)
         cerr << "FAILURE - Q not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -566,7 +566,7 @@ void test_collisionPointPolygon(void)
         cout << "SUCCESS - Q in the polygon OK" << endl;
 
 
-    d = collisionPointPoly(&R,&poly);
+    d = collisionPointPoly(R,poly);
 
     if(d != false)
         cerr << "FAILURE - R in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -574,7 +574,7 @@ void test_collisionPointPolygon(void)
         cout << "SUCCESS - R not in the polygon OK" << endl;
 
 
-    d = collisionPointPoly(&S,&poly);
+    d = collisionPointPoly(S,poly);
 
     if(d != false)
         cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;

@@ -396,7 +396,7 @@ bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
 
 
 /**
-*   @fn bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
+*   @fn bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 *
 *   Test the collision between a point and a polygon
 *
@@ -406,13 +406,13 @@ bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
+bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 {
     int count = 0;
     LX_Point I;
 
     const int v = 10000;
-    const unsigned int n = poly->numberOfEdges();
+    const unsigned int n = poly.numberOfEdges();
 
     I.x = v + rand()%100;
     I.y = v + rand()%100;
@@ -421,18 +421,18 @@ bool LX_Physics::collisionPointPoly(const LX_Point *P, const LX_Polygon *poly)
     {
         if(i == n-1)
         {
-            LX_Point p1 = poly->getPoint(0);
-            LX_Point p2 = poly->getPoint(i);
+            LX_Point p1 = poly.getPoint(0);
+            LX_Point p2 = poly.getPoint(i);
 
-            if(intersectSegment(*P,I,p1,p2))
+            if(intersectSegment(P,I,p1,p2))
                 count++;
         }
         else
         {
-            LX_Point p3 = poly->getPoint(i+1);
-            LX_Point p4 = poly->getPoint(i);
+            LX_Point p3 = poly.getPoint(i+1);
+            LX_Point p4 = poly.getPoint(i);
 
-            if(intersectSegment(*P,I,p3,p4))
+            if(intersectSegment(P,I,p3,p4))
                 count++;
         }
     }
@@ -457,7 +457,7 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
     LX_Point A,B;
     const LX_Point P = {C->xCenter,C->yCenter};
 
-    if(collisionPointPoly(&P,poly) == true)
+    if(collisionPointPoly(P,*poly) == true)
         return true;
 
     const unsigned int n = poly->numberOfEdges();
@@ -527,8 +527,8 @@ bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
             return true;
     }
 
-    return(collisionPointPoly(&A,poly) || collisionPointPoly(&B,poly)
-           || collisionPointPoly(&C,poly) || collisionPointPoly(&A,poly));
+    return(collisionPointPoly(A,*poly) || collisionPointPoly(B,*poly)
+           || collisionPointPoly(C,*poly) || collisionPointPoly(A,*poly));
 }
 
 
@@ -589,8 +589,8 @@ bool LX_Physics::collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2)
     LX_Point origin1 = poly1->getPoint(0);
     LX_Point origin2 = poly2->getPoint(0);
 
-    return (collisionPointPoly(&origin1,poly2)
-            || collisionPointPoly(&origin2,poly1));
+    return (collisionPointPoly(origin1,*poly2)
+            || collisionPointPoly(origin2,*poly1));
 }
 
 
