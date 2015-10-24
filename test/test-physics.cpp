@@ -27,6 +27,8 @@ void test_collisionCirclePolygon(void);
 void test_collisionRectPolygon(void);
 void test_collision2Polygon(void);
 
+void test_move(void);
+
 int main(int argc, char **argv)
 {
     bool err = false;
@@ -55,6 +57,8 @@ int main(int argc, char **argv)
     test_collisionCirclePolygon();
     test_collisionRectPolygon();
     test_collision2Polygon();
+
+    test_move();
 
     LX_Quit();
 
@@ -758,6 +762,47 @@ void test_collision2Polygon(void)
         cerr << "FAILURE - collision poly/poly4. expected: FALSE ; got: TRUE" << endl;
     else
         cout << "SUCCESS - collision poly/poly4 OK" << endl;
+
+    cout << " = END TEST = " << endl;
+}
+
+
+void test_move(void)
+{
+    cout << " = TEST Move = " << endl;
+
+    LX_Point P = {1,2};
+    LX_AABB R = {8,4,10,10};
+
+    cout << "INFO - Point P(" << P.x << "," << P.y << ")" << endl;
+    cout << "INFO - Rectangle R(" << R.x << "," << R.y << ","<< R.w << "," << R.h << ")" << endl;
+
+
+    cout << "INFO - Point" << endl;
+
+    LX_Point expected_point = {P.x +1, P.y +1};
+    movePoint(P,1,1);
+
+    if(P.x == expected_point.x && P.y == expected_point.y)
+        cout << "SUCCESS - Point P(" << P.x << "," << P.y << ")" << endl;
+    else
+        cout << "FAILURE - expected : Point P(2,3)"
+        << "got : (" << P.x << "," << P.y << ")" << endl;
+
+
+    cout << "INFO - Rectangle" << endl;
+
+    LX_AABB expected_aabb = {R.x +2, R.y +3, R.w, R.h};
+    moveRect(R,2,3);
+
+    if(R.x == expected_aabb.x && R.y == expected_aabb.y)
+        cout << "SUCCESS - Rectangle R(" << R.x << "," << R.y << ","
+        << R.w << "," << R.h << ")" << endl;
+    else
+        cout << "FAILURE - expected : Rectangle R(3,6,10,10)"
+        << "got : (" << R.x << "," << R.y << ","
+        << R.w << "," << R.h << ")" << endl;
+
 
     cout << " = END TEST = " << endl;
 }
