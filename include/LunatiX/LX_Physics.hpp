@@ -78,7 +78,7 @@ bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 
 // AABB/Polygon ; Polygon/Polygon
-bool collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly);
+bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 bool collisionPoly(const LX_Polygon *poly1, const LX_Polygon *poly2);
 
 

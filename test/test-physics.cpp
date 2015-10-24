@@ -659,7 +659,7 @@ void test_collisionRectPolygon(void)
 
     cout << " = TEST Collision Rect/Polygon = " << endl;
 
-    d = collisionRectPoly(&R1,&poly);
+    d = collisionRectPoly(R1,poly);
 
     if(d != false)
         cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -667,7 +667,7 @@ void test_collisionRectPolygon(void)
         cout << "SUCCESS - R1 not in the polygon OK" << endl;
 
     // A point of R2 in the polygon
-    d = collisionRectPoly(&R2,&poly);
+    d = collisionRectPoly(R2,poly);
 
     if(d != true)
         cerr << "FAILURE - test R2 touch the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -676,7 +676,7 @@ void test_collisionRectPolygon(void)
 
 
     // Some Segments of R3 in the polygon (no point inside)
-    d = collisionRectPoly(&R3,&poly);
+    d = collisionRectPoly(R3,poly);
 
     if(d != true)
         cerr << "FAILURE - test R3 touch the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -685,7 +685,7 @@ void test_collisionRectPolygon(void)
 
 
     // R4 into the polygon
-    d = collisionRectPoly(&R4,&poly);
+    d = collisionRectPoly(R4,poly);
 
     if(d != true)
         cerr << "FAILURE - test R4 into the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -694,7 +694,7 @@ void test_collisionRectPolygon(void)
 
 
     // The polygon into R5
-    d = collisionRectPoly(&R5,&poly);
+    d = collisionRectPoly(R5,poly);
 
     if(d != true)
         cerr << "FAILURE - test polygon into R5. expected: TRUE ; got: FALSE" << endl;

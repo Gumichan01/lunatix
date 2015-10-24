@@ -484,7 +484,7 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 
 
 /**
-*   @fn bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
+*   @fn bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 *
 *   Test the intersection between an AABB and a polygon
 *
@@ -494,41 +494,41 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *   @return TRUE if there is an collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly)
+bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 {
     LX_Point A,B,C,D;
     LX_Point E,F;
 
-    A = {rect->x,rect->y};
-    B = {rect->x + rect->w,rect->y};
-    C = {rect->x + rect->w,rect->y + rect->h};
-    D = {rect->x,rect->y + rect->h};
+    A = {rect.x,rect.y};
+    B = {rect.x + rect.w,rect.y};
+    C = {rect.x + rect.w,rect.y + rect.h};
+    D = {rect.x,rect.y + rect.h};
 
-    const unsigned int n = poly->numberOfEdges();
+    const unsigned int n = poly.numberOfEdges();
 
     for(unsigned int j = 0; j < n; j++)
     {
-        E = poly->getPoint(j);
+        E = poly.getPoint(j);
 
         if(j == n-1)
         {
-            F = poly->getPoint(0);
+            F = poly.getPoint(0);
         }
         else
         {
-            F = poly->getPoint(j+1);
+            F = poly.getPoint(j+1);
         }
 
         if(intersectSegment(A,B,E,F) || intersectSegment(B,C,E,F) ||
                 intersectSegment(C,D,E,F) || intersectSegment(D,A,E,F))
             return true;
 
-        if(collisionPointRect(E,*rect))
+        if(collisionPointRect(E,rect))
             return true;
     }
 
-    return(collisionPointPoly(A,*poly) || collisionPointPoly(B,*poly)
-           || collisionPointPoly(C,*poly) || collisionPointPoly(A,*poly));
+    return(collisionPointPoly(A,poly) || collisionPointPoly(B,poly)
+           || collisionPointPoly(C,poly) || collisionPointPoly(A,poly));
 }
 
 
