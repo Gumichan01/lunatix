@@ -75,7 +75,7 @@ bool intersectSegment(const LX_Point& A, const LX_Point& B,
 
 // Point/Polygon ; Circle/Polygon
 bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
-bool collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly);
+bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 
 // AABB/Polygon ; Polygon/Polygon
 bool collisionRectPoly(const LX_AABB *rect, const LX_Polygon *poly);

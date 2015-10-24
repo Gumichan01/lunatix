@@ -442,7 +442,7 @@ bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 
 
 /**
-*   @fn bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
+*   @fn bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *
 *   Test the intersection between a circle and a polygon
 *
@@ -452,30 +452,30 @@ bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 *   @return TRUE if there is an collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionCirclePoly(const LX_Circle *C, const LX_Polygon *poly)
+bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 {
     LX_Point A,B;
-    const LX_Point P = {C->xCenter,C->yCenter};
+    const LX_Point P = {C.xCenter,C.yCenter};
 
-    if(collisionPointPoly(P,*poly) == true)
+    if(collisionPointPoly(P,poly) == true)
         return true;
 
-    const unsigned int n = poly->numberOfEdges();
+    const unsigned int n = poly.numberOfEdges();
 
     for(unsigned int i = 0; i < n; i++)
     {
-        A = poly->getPoint(i);
+        A = poly.getPoint(i);
 
         if(i == n-1)
         {
-            B = poly->getPoint(0);
+            B = poly.getPoint(0);
         }
         else
         {
-            B = poly->getPoint(i+1);
+            B = poly.getPoint(i+1);
         }
 
-        if(collisionSegCircle(*C,A,B) == true)
+        if(collisionSegCircle(C,A,B) == true)
             return true;
     }
 

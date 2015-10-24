@@ -602,7 +602,7 @@ void test_collisionCirclePolygon(void)
 
     cout << " = TEST Collision Circle/Polygon = " << endl;
 
-    d = collisionCirclePoly(&M,&poly);
+    d = collisionCirclePoly(M,poly);
 
     if(d != false)
         cerr << "FAILURE - M in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -610,7 +610,7 @@ void test_collisionCirclePolygon(void)
         cout << "SUCCESS - M not in the polygon OK" << endl;
 
 
-    d = collisionCirclePoly(&S,&poly);
+    d = collisionCirclePoly(S,poly);
 
     if(d != false)
         cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
@@ -618,7 +618,7 @@ void test_collisionCirclePolygon(void)
         cout << "SUCCESS - S not in the polygon OK" << endl;
 
 
-    d = collisionCirclePoly(&N,&poly);
+    d = collisionCirclePoly(N,poly);
 
     if(d != true)
         cerr << "FAILURE - N not in the polygon. expected: TRUE ; got: FALSE" << endl;
@@ -626,7 +626,7 @@ void test_collisionCirclePolygon(void)
         cout << "SUCCESS - N in the polygon OK" << endl;
 
 
-    d = collisionCirclePoly(&O,&poly);
+    d = collisionCirclePoly(O,poly);
 
     if(d != true)
         cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
