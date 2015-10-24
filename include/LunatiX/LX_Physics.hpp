@@ -53,8 +53,8 @@ float euclide_distance(LX_Point& p1, LX_Point& p2);
 /* Collision detection */
 
 // Point/Rect
-bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB *rect);
-bool collisionPointRect(const LX_Point *p,const LX_AABB *rect);
+bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect);
+bool collisionPointRect(const LX_Point& p,const LX_AABB& rect);
 
 // Point/Circle
 bool collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle *circle);
@@ -64,7 +64,7 @@ bool collisionPointCircle(const LX_Point *p, const LX_Circle *circle);
 bool collisionRect(const LX_AABB *rect1, const LX_AABB *rect2);
 bool collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2);
 bool collisionSegCircle(const LX_Circle *circle, const LX_Point *A, const LX_Point *B);
-bool collisionCircleRect(const LX_Circle *circle, const LX_AABB *rect);
+bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect);
 
 // Segment/Line ; Segment/Segment
 // A segment is a part of a line, so two point are needed to get a line

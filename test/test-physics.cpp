@@ -172,14 +172,14 @@ void test_collisionPointRect(void)
     B = {50,50};
     aabb = {40,40,30,30};
 
-    d = collisionPointRect(A.x,A.y,&aabb);
+    d = collisionPointRect(A.x,A.y,aabb);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
     else
         cout << "SUCCESS - point out of the rect " << endl;
 
-    d = collisionPointRect(B.x,B.y,&aabb);
+    d = collisionPointRect(B.x,B.y,aabb);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
@@ -270,7 +270,7 @@ void test_collisionRectCircle(void)
 
     cout << " = TEST RECT/CIRCLE = " << endl;
 
-    d = collisionCircleRect(&A,&R1);
+    d = collisionCircleRect(A,R1);
 
     if(d != true)
         cerr << "FAILURE - collisoon A/R2 expected : TRUE; got : FALSE" << endl;
@@ -278,14 +278,14 @@ void test_collisionRectCircle(void)
         cout << "SUCCESS - collision A/R2 OK " << endl;
 
 
-    d = collisionCircleRect(&B,&R1);
+    d = collisionCircleRect(B,R1);
 
     if(d != true)
         cerr << "FAILURE - collisoon B/R2 expected : TRUE; got : FALSE" << endl;
     else
         cout << "SUCCESS - collision B/R2 OK " << endl;
 
-    d = collisionCircleRect(&C,&R1);
+    d = collisionCircleRect(C,R1);
 
     if(d != false)
         cerr << "FAILURE - collisoon C/R1 expected : FALSE; got : TRUE" << endl;
