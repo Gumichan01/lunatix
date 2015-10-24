@@ -200,7 +200,7 @@ void test_collision2Circle(void)
 
     cout << " = TEST CIRCLE/CIRCLE = " << endl;
 
-    d = collisionCircle(&A,&B);
+    d = collisionCircle(A,B);
 
     if(d != true)
         cerr << "FAILURE - collisoon A/B expected : TRUE; got : FALSE" << endl;
@@ -208,7 +208,7 @@ void test_collision2Circle(void)
         cout << "SUCCESS - collision between two circles A and B " << endl;
 
 
-    d = collisionCircle(&C,&B);
+    d = collisionCircle(C,B);
 
     if(d != false)
         cerr << "FAILURE - collisoon C/B expected : FALSE; got : TRUE" << endl;

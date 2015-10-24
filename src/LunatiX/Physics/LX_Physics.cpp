@@ -212,7 +212,7 @@ bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 
 
 /**
-*	@fn bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2)
+*	@fn bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 *
 *	Check the collision between two circles
 *
@@ -222,15 +222,12 @@ bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionCircle(const LX_Circle *circle1, const LX_Circle *circle2)
+bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 {
-    if(circle1 == NULL || circle2 == NULL)
-        return false;
+    const unsigned int d = (circle1.radius + circle2.radius) * (circle1.radius + circle2.radius);
 
-    const unsigned int d = (circle1->radius + circle2->radius) * (circle1->radius + circle2->radius);
-
-    return (euclide_square_distance(circle1->xCenter,circle1->yCenter,
-                                    circle2->xCenter,circle2->yCenter) <= d);
+    return (euclide_square_distance(circle1.xCenter,circle1.yCenter,
+                                    circle2.xCenter,circle2.yCenter) <= d);
 }
 
 
