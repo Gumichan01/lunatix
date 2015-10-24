@@ -230,7 +230,7 @@ void test_collision2Rect(void)
 
     cout << " = TEST RECT/RECT = " << endl;
 
-    d = collisionRect(&R1,&R2);
+    d = collisionRect(R1,R2);
 
     if(d != true)
         cerr << "FAILURE - collisoon R1/R2 expected : TRUE; got : FALSE" << endl;
@@ -238,7 +238,7 @@ void test_collision2Rect(void)
         cout << "SUCCESS - collision R1/R2 OK " << endl;
 
 
-    d = collisionRect(&R2,&R3);
+    d = collisionRect(R2,R3);
 
     if(d != true)
         cerr << "FAILURE - collisoon R2/R3 expected : TRUE; got : FALSE" << endl;
@@ -246,7 +246,7 @@ void test_collision2Rect(void)
         cout << "SUCCESS - collision R2/R3 OK " << endl;
 
 
-    d = collisionRect(&R3,&R1);
+    d = collisionRect(R3,R1);
 
     if(d != false)
         cerr << "FAILURE - collisoon R3/R1 expected : FALSE; got : TRUE" << endl;

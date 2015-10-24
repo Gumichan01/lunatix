@@ -189,9 +189,9 @@ bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle
 
 
 /**
-*	@fn bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
+*	@fn bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 *
-*	Check the collision between two Axis Aligned Bouding Box (AABB)
+*	Check the collision between two Axis Aligned Bounding Box (AABB)
 *
 *	@param rect1 The first AABB
 *	@param rect2 The second AABB
@@ -199,12 +199,10 @@ bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionRect(const LX_AABB *rect1, const LX_AABB *rect2)
+bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 {
-
-    if(rect1 == NULL || rect2 == NULL
-       || (rect1->x >= (rect2->x + rect2->w)) || (rect1->y >= (rect2->y + rect2->h))
-       || ((rect1->x + rect1->w) <= rect2->x) || ((rect1->y + rect1->h) <= rect2->y))
+    if((rect1.x >= (rect2.x + rect2.w)) || (rect1.y >= (rect2.y + rect2.h))
+       || ((rect1.x + rect1.w) <= rect2.x) || ((rect1.y + rect1.h) <= rect2.y))
     {
         return false;
     }
