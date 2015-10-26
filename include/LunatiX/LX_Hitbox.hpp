@@ -24,16 +24,14 @@
 */
 
 
-struct SDL_Rect;
-typedef SDL_Rect LX_AABB;       /**< The rectangle hitbox (SDL_Rect) */
-
-
 /**
 *   @todo operators of LX_Point :
 *   - '=' : assignment (it should be explicitly defined into the library)
 *   - '==' : same coordinates
 *   - '!=' : not same coordinates
 */
+
+namespace LX_Physics{
 
 /**
 *   @struct LX_Point
@@ -76,6 +74,8 @@ typedef struct LX_Circle
 
 } LX_Circle;    /**< @brief The circle */
 
+
+};
 
 #endif // HITBOX_H_INCLUDED
 

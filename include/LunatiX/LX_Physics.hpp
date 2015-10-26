@@ -24,11 +24,7 @@
 *
 */
 
-#include "LX_Hitbox.hpp"
-
-
-
-/// @todo LX_Circle, LX_Polygon, LX_Point and LX_Vector2D in LX_Physics namespace
+#include "LX_AABB.hpp"
 
 /**
 *
@@ -41,6 +37,8 @@
 namespace LX_Physics
 {
 
+struct LX_Point;
+struct LX_Circle;
 struct LX_Vector2D;
 class LX_Polygon;
 

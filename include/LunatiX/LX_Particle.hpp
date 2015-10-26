@@ -23,9 +23,7 @@
 *
 */
 
-#include <SDL2/SDL_rect.h>
-
-#include "LX_Hitbox.hpp"
+#include "LX_AABB.hpp"
 #include "LX_Vector2D.hpp"
 #include "LX_FileBuffer.hpp"
 

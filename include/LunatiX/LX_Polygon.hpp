@@ -25,11 +25,10 @@
 
 #include <iostream>
 
-struct LX_Point;
-
 
 namespace LX_Physics{
 
+struct LX_Point;
 struct LX_Vector2D;
 
 /**
