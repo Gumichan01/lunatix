@@ -22,13 +22,14 @@
 *
 */
 
-/// @todo When the destuctor is called, destroy all windows
 
 #define LX_NBMAX_WINDOWS 64    /**< The maximum number of windows to display */
 
 
 namespace LX_Graphics
 {
+
+/// @todo Rebuild the Window using the vector container
 
 class LX_Window;
 
