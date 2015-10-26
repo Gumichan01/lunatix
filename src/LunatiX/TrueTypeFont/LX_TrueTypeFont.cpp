@@ -22,14 +22,11 @@
 #include <SDL2/SDL_render.h>
 
 #include <LunatiX/LX_Config.hpp>
-#include <LunatiX/LX_Graphics.hpp>
 #include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_WindowManager.hpp>
-#include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
-#include <LunatiX/LX_FileIO.hpp>
-
+#include <LunatiX/LX_Error.hpp>
 
 using namespace LX_Graphics;
 using namespace LX_FileIO;

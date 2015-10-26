@@ -23,9 +23,7 @@
 */
 
 #include <SDL2/SDL_haptic.h>
-
-#include "LX_Device.hpp"
-
+#include <SDL2/SDL_gamecontroller.h>
 
 namespace LX_Device
 {

@@ -66,7 +66,7 @@ LX_Music * loadMusic(Mix_Music *mus);
 
 LX_Chunk * loadSample(string filename);
 LX_Chunk * loadSample(Mix_Chunk *ch);
-LX_Chunk * loadSample(LX_FileBuffer *file);
+LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file);
 
 int allocateChannels(int num);
 int reserveChannels(unsigned int num);

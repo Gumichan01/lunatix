@@ -22,11 +22,11 @@
 *
 */
 
-#include <iostream>
-#include <Lua/lua.hpp>
+#include <string>
 
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
+struct lua_State;
 
 using namespace std;
 

@@ -22,11 +22,13 @@
 *
 */
 
-#include "LX_Haptic.hpp"
-
+#include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL_gamecontroller.h>
 
 namespace LX_Device
 {
+
+class LX_Haptic;
 
 /**
 *   @class LX_Gamepad

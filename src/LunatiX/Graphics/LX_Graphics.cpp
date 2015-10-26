@@ -27,9 +27,10 @@
 #include <LunatiX/LX_Graphics.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_WindowManager.hpp>
-#include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_Error.hpp>
+
 
 using namespace LX_FileIO;
 

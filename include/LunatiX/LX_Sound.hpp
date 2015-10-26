@@ -22,7 +22,7 @@
 *
 */
 
-#include <iostream>
+#include <string>
 
 #define LX_MIXER_LOOP -1                    /**< Activate the loop */
 #define LX_MIXER_NOLOOP 0                   /**< No loop is activated */

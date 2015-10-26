@@ -18,12 +18,13 @@
 *
 */
 
-#include <cstdlib>
+
 #include <cstring>
 
-#include <string>
 #include <exception>
 #include <sstream>
+
+#include <Lua/lua.hpp>
 
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>

@@ -26,8 +26,10 @@
 #include <LunatiX/LX_Random.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 
+
 using namespace LX_FileIO;
 using namespace LX_Graphics;
+using namespace LX_Physics;
 using namespace LX_Random;
 
 

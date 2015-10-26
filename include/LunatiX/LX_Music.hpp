@@ -32,9 +32,6 @@ namespace LX_Mixer
 {
 
 
-class LX_Sound;
-
-
 /**
 *   @class LX_MusicException
 *   @brief The exception class of LX_Music

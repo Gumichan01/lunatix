@@ -21,6 +21,8 @@
 
 
 #include <LunatiX/LX_Gamepad.hpp>
+#include <LunatiX/LX_Haptic.hpp>
+#include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 

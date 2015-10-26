@@ -19,7 +19,6 @@
 *
 */
 
-#include <iostream>
 #include <new>
 
 #include <SDL2/SDL_cpuinfo.h>
