@@ -27,7 +27,6 @@
 
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
-/// @todo Break the dependency between LX_Configuration::initConfig() and LX_Configuration::getInstance()
 
 using namespace std;
 

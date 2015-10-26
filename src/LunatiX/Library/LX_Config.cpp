@@ -30,7 +30,7 @@
 
 
 // unique instance
-static LX_Configuration *instance;
+static LX_Configuration *instance = NULL;
 
 
 
@@ -81,18 +81,6 @@ LX_Configuration::LX_Configuration()
     : videoFlag(1), vsyncFlag(0), ttfFlag(1), audioFlag(1), joystickFlag(1),
       openglFlag(0), fontSize(0), width(800), height(600), fullscreenFlag(0)
 {
-    // Initialize the variables at the default values
-    videoFlag = 1;
-    vsyncFlag = 0;
-    ttfFlag = 1;
-    audioFlag = 1;
-    joystickFlag = 1;
-    openglFlag = 0;
-    fontSize = 0;
-    width = 800;
-    height = 600;
-    fullscreenFlag = 0;
-
     // Load configuration
     setFlags();
 }
@@ -107,32 +95,14 @@ LX_Configuration::~LX_Configuration() {}
 *
 *   Launch the system configuration
 *
-*   @note  1 : This function is just a shortcut of LX_Configuration::getInstance()
-*               but it does not return the reference to the instance.
-*               It is not necessary to call getInstance() to get it
-*   @note  2 : Normally you do not need to call it because it is already done in LX_Init()
+*   @note   1: This function is automatically called in LX_Init()
+*   @note   2: The instance of LX_Configuration may not be created.
+*           So it will be necessary to call LX_GetError() to get
+*           the error message
 *
 */
 void LX_Configuration::initConfig()
 {
-    LX_Configuration::getInstance();
-}
-
-
-/**
-*   @fn LX_Configuration * LX_Configuration::getInstance()
-*
-*   Get the unique instance of the LX_Configuration class
-*
-*   @return The instance of LX_Configuration
-*
-*   @note If no instance exists, a new unique instance will be created and returned
-*           otherwise, a current instance will be returned
-*
-*/
-LX_Configuration * LX_Configuration::getInstance()
-{
-
     if(instance == NULL)
     {
         try
@@ -145,7 +115,22 @@ LX_Configuration * LX_Configuration::getInstance()
             instance = NULL;
         }
     }
+}
 
+
+/**
+*   @fn LX_Configuration * LX_Configuration::getInstance()
+*
+*   Get the unique instance of the LX_Configuration class
+*
+*   @return The instance of LX_Configuration
+*
+*   @note   The instance can be a null pointer
+*           if LX_Configuration::initConfig() failed.
+*
+*/
+LX_Configuration * LX_Configuration::getInstance()
+{
     return instance;
 }
 
