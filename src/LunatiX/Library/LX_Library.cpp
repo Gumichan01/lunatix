@@ -37,7 +37,8 @@ static const std::string mappingFile = "config/gamecontrollerdb.txt";
 *
 *   @return TRUE if all systems were init, FALSE otherwise
 *
-*   @note This function automatically calls LX_WindowManager::init()
+*   @note   This function automatically calls LX_WindowManager::init()
+*           and LX_Configuration::initConfig()
 *
 */
 bool LX_Init(void)
