@@ -149,23 +149,6 @@ texture(NULL), surface(NULL)
 }
 
 
-/*
-*   This private function initializes the particle
-*
-*   It is automatically called by one of
-*   the following constructors of the particle
-*
-*/
-/*void LX_Particle::init(const int x , const int y, const int w,
-                       const int h, const float vx, const float vy)
-{
-    box = {x,y,w,h};
-    velocity = {vx,vy};
-
-    lifetime = xorshiftRand()%DELAY;
-}*/
-
-
 /**
 *   @fn LX_Particle::~LX_Particle()
 *

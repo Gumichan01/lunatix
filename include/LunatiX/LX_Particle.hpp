@@ -58,8 +58,6 @@ class LX_Particle
     LX_Particle(LX_Particle& p);
     LX_Particle& operator =(LX_Particle& p);
 
-    void init(const int x , const int y, const int w, const int h,
-              const float vx, const float vy);
 
 public :
 
