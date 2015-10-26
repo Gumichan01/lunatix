@@ -134,17 +134,9 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
     if(win_config->getOpenGL_Flag())
         option_flag |= SDL_WINDOW_OPENGL;
 
-    window = SDL_CreateWindow("LunatiX Engine v0.6",position_flag,position_flag,lxWidth,lxHeight,SDL_WINDOW_SHOWN|option_flag);
+    createWindow("LunatiX Engine v0.6",position_flag,position_flag,lxWidth,lxHeight,mode,option_flag,accel);
 
-    if(window == NULL)
-        throw LX_WindowException(LX_GetError());
-
-    if(mode == LX_WINDOW_RENDERING)
-        createRendering(accel);
-    else
-        displayMethod = false;
-
-    init2();
+    setDimension();
 }
 
 
@@ -183,7 +175,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
     if(config->getOpenGL_Flag())
         flag |= SDL_WINDOW_OPENGL;
 
-    init(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag,accel);
+    createWindow(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag,accel);
 }
 
 
@@ -215,7 +207,7 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
     else
         displayMethod = false;
 
-    init2();
+    setDimension();
 }
 
 
@@ -252,17 +244,16 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
     : window(NULL), renderer(NULL), originalWidth(0),
     originalHeight(0), displayMethod(false)
 {
-    init(title.c_str(),posX,posY,w,h,mode,flag,accel);
+    createWindow(title.c_str(),posX,posY,w,h,mode,flag,accel);
 }
 
 
 /*
 *   Initialize the window with custom configuration
 */
-void LX_Window::init(std::string title, int posX, int posY, int w, int h,
+void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
 {
-    renderer = NULL;
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
 
     if(window == NULL)
@@ -273,14 +264,14 @@ void LX_Window::init(std::string title, int posX, int posY, int w, int h,
     else
         displayMethod = false;
 
-    init2();
+    setDimension();
 }
 
 
 /*
 *   Initialize internal variables
 */
-void LX_Window::init2(void)
+void LX_Window::setDimension(void)
 {
     originalWidth = getWidth();
     originalHeight = getHeight();
