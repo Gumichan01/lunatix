@@ -172,6 +172,8 @@ int main(int argc, char **argv)
         SDL_Delay(16);
     }
 
+    LX_WindowManager::getInstance()->removeWindow(0);
+
     delete w;
     delete dot;
     delete red;
