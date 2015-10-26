@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -94,7 +94,7 @@ LX_Music::LX_Music(Mix_Music *mus) : music(mus)
 *
 *   Create the instance loading a music file
 *
-*   @param filename The music filename you want to load
+*   @param filename The music filename that will be loaded
 *
 */
 LX_Music::LX_Music(string filename) : music(NULL)

@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -110,11 +110,11 @@ int getSystemRAM(void)
 *   @param size the preference to the size to fill in
 *
 *   @return The list of display modes if there is at least one display mode,
-*           a null pointer otherwise, you can get an error message using
+*           a null pointer otherwise, an error message can be got using
 *           LX_GetError()
 *
-*   @note This function allocate a memory to create the list, so you have
-*           to free that list when you do not need it.
+*   @note This function allocate a memory to create the list, so this list
+*           must be freed whane it is not used to avoid a memory leak.
 *
 */
 const SDL_DisplayMode * getDisplayModes(int& size)

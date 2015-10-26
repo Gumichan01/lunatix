@@ -7,7 +7,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -23,7 +23,7 @@
 *
 */
 
-/// @todo Modifiy the signature of the polygon getter
+/// @todo Modify the signature of the polygon getter
 
 struct LX_Point;
 struct LX_Vector2D;

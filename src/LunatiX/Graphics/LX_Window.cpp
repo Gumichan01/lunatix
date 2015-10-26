@@ -2,7 +2,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -338,14 +338,14 @@ LX_Window::~LX_Window()
 *
 *   @param image The surface to put
 *   @param area The area of the surface to put on the screen
-*   @param pos The position of what you want to put
+*   @param pos The position of the surface
 *
 *   @return TRUE If the image was put with success, FALSE otherwise
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
 *
-*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
+*   @note   You can give a LX_AABB object to the function instead of an SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @sa putTexture
@@ -390,14 +390,14 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *
 *   @param origin The texture to put
 *   @param area The area of the surface to put on the renderer
-*   @param pos The position of what you want to put
+*   @param pos The position of the texture
 *
 *   @return TRUE If the texture was put with success, FALSE otherwise
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
 *
-*   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
+*   @note You can give a LX_AABB object to the function instead of an SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
@@ -414,20 +414,21 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 
 
 /**
-*   @fn bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,const double angle)
+*   @fn bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
+*                                           const SDL_Rect *pos,const double angle)
 *
 *   This function puts an area of the texture on the window and optionnaly rotate it
 *
 *   @param origin The texture to put
 *   @param area The area of the surface to put on the renderer
-*   @param pos The position of what you want to put
+*   @param pos The position of the texture
 *   @param angle an angle in degrees that indicate the rotation
 *
 *   @return TRUE If the texture was put with success, FALSE otherwise
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
-*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
+*   @note   You can give a LX_AABB object to the function instead of an SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @warning    The width and the height defined in the SDL_Rect are important,
@@ -437,8 +438,8 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 *   @sa putSurface
 *   @sa putTexture
 */
-bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
-                                    const double angle)
+bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
+                                    const SDL_Rect *pos, const double angle)
 {
     return(SDL_RenderCopyEx(renderer,origin,area,pos, (-angle), NULL,SDL_FLIP_NONE) == 0);
 }
@@ -480,7 +481,7 @@ void LX_Window::setWindowSize(int w, int h)
 *
 *   Set the window's fullscreen state
 *
-*   @param flag The flag you want to use in this function
+*   @param flag The flag to use in this function:
 *           - LX_GRAPHICS_FULLSCREEN_DESKTOP
 *           - LX_GRAPHICS_FULLSCREEN
 *           - LX_GRAPHICS_NO_FULLSCREEN
@@ -516,9 +517,10 @@ void LX_Window::update(void)
 /*
 *   Updates the renderer of the window
 *
-*   This fonction must be used only if you manipulate textures
-*   on the current window. So you cannot use this function and
-*   LX_Window::updateWindow() together on a same window.
+*   This fonction must be only used when textures are manipulated
+*   on the current window. So LX_Window::updateWindow() and this function
+*   cannot be used together on a same window.
+*
 */
 void LX_Window::updateRenderer(void)
 {
@@ -529,9 +531,9 @@ void LX_Window::updateRenderer(void)
 /*
 *   This function updates the surface of the window
 *
-*   This fonction must be used only if you manipulate surfaces
-*   on the current window. So you cannot use this function and
-*   LX_Window::updateRenderer() together on a same window.
+*   This fonction must be only used whane textures are manipulated
+*   on the current window. So LX_Window::updateRenderer() and this function
+*   cannot be used together on a same window.
 */
 void LX_Window::updateWindow(void)
 {

@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -97,13 +97,13 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 *
 *   Construct the instance creating the Mix_Chunk instance from a file
 *
-*   @param filename The file to you use to retrieve data
+*   @param filename The file to create the chunk from
 *
 *   @note It is preferable to give a .wav file to the constructor.
 *           The chunk was optimized for this format. But it can work with
 *           an other file type.
 *
-*   @exception LX_ChunkException if data cannot be loaded from the file
+*   @exception LX_ChunkException if the chunk cannot be created from the file
 *
 */
 LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
@@ -121,12 +121,9 @@ LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
 *   Construct the instance creating the Mix_Chunk instance
 *   from a file buffer.
 *
-*   @param file The file buffer you use to retrieve data
+*   @param file The file buffer to create the chunk from
 *
-*   @note   If the file buffer is a null pointer, you will have
-*           an undefined behaviour
-*
-*   @exception LX_ChunkException if data cannot be loaded from the file buffer
+*   @exception LX_ChunkException if the chunk cannot be created from the file buffer
 *
 */
 LX_Chunk::LX_Chunk(LX_FileBuffer * file) : chunk(NULL)
@@ -174,7 +171,7 @@ bool LX_Chunk::load(string filename)
 *
 *   Load the sample from a file buffer
 *
-*   @param file The file buffer you use to retrieve data
+*   @param file The file buffer to load the chunk from
 *
 *   @return TRUE on success, FALSE otherwise
 *

@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -85,7 +85,7 @@ LX_WindowManager * LX_WindowManager::getInstance()
 *   Destroy the instance of the singleton
 *
 *   @warning If the window manager has windows at this moment,
-*   they will not be freed. So you need to remove all of them
+*   they will not be freed. It is necessary to remove all of them
 *   before destroying the instance
 *
 */
@@ -123,7 +123,7 @@ LX_WindowManager::~LX_WindowManager()
 *
 *   @param w The window
 *
-*   @return The ID of the window you added if the instance is valid
+*   @return The ID of the window tha was added if the instance is valid
 *           -1 otherwise
 *
 *   @sa LX_Window
@@ -151,7 +151,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
 *   Delete a window from the list acording to its ID
 *   and returns the pointer to it.
 *
-*   @param id The ID of the window you want to delete
+*   @param id The ID of the window that must be deleted
 *
 *   @return A valid pointer to a window if the ID refers to a valid window,
 *           NULL otherwise

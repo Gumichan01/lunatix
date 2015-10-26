@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -140,8 +140,8 @@ bool LX_Polygon::addPoint(LX_Point *p)
 *
 *   @return The maximum number of edges of the polygon
 *
-*   @note The number of edges is the same as
-*           what you sent to the polygon constructor
+*   @note   The number of edges is the same as the defined value
+*           in the polygon constructor
 *
 */
 unsigned int LX_Polygon::numberOfEdges(void) const
@@ -157,9 +157,9 @@ unsigned int LX_Polygon::numberOfEdges(void) const
 *
 *   @return The real number of edges of the polygon
 *
-*   @note The number of edges may be different from the number
-*           you gave to the polygon constructor, becauce you have not
-*           defined all points.
+*   @note   The number of edges may be different from the defined value
+*           in the polygon constructor, because the points of the polygon
+*           are not completely set.
 *
 */
 unsigned int LX_Polygon::numberOfRealEdges(void) const
@@ -200,7 +200,7 @@ LX_Point LX_Polygon::getPoint(const unsigned int index) const
 *   @return TRUE if the polygon is convex, false otherwise
 *
 *   @note Actually, the convexity of the polygon is dynamically evaluated
-*           each time you define a new point.
+*           each time a new point in added using LX_Polygon::addPoint().
 *           The result is stored in an internal variable
 *
 */

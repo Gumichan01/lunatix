@@ -7,7 +7,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -77,7 +77,7 @@ public :
 *   @note By default, the constructor retrieves information from the configuration file
 *
 *   @warning The LX_Window class must be defined only after
-*               you initialized the engine (calling LX_Init())
+*               the initialization of the engine (calling LX_Init())
 *   @warning A LX_WindowException may be occured if the window creation fails
 *
 */

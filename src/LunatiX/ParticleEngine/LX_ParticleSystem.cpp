@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -41,7 +41,7 @@ namespace LX_ParticleEngine
 *
 *   Create the instance with a number of particles
 *
-*   @param nbPart The number of particles you want to get
+*   @param nbPart The number of particles to define in the system
 *
 */
 LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
@@ -57,8 +57,9 @@ LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
 *
 *   Create the instance with a number of particles and the id of the window
 *
-*   @param nbPart The number of particles you want to get
-*   @param id The id of the window in the LX_WindowManager
+*   @param  nbPart The number of particles to define in the system
+*   @param  id The id of the window in the LX_WindowManager
+*           to get the rendeering context
 *
 */
 LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart,unsigned int id)

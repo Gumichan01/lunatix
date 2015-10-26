@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -312,9 +312,9 @@ int isPaused(int channel)
 *   @param music The music to fade in
 *   @param ms Milliseconds for the fade-in effect to complete
 *
-*   @note fadeInMusic starts playing the music with the fade-in effecT.
-*           So if you use this fuction, you do not need
-*               to call LX_Music::play()
+*   @note   fadeInMusic starts playing the music with the fade-in effecT.
+*           It is not necessary to call LX_Music::play() if this function is called
+*
 *   @note Any previous music will be halted, or if it is fading out
 *           it will wait (blocking) for the fade to complete
 *
@@ -353,7 +353,7 @@ void fadeOutMusic(int ms)
 *   @param right The volume of the right channel (0 - 255)
 *
 *   @note This function only works on stereo audio.
-*   @note It is possible the call fail if you do it on a mono audio.
+*   @note It is possible the call fail if it is done on a mono audio.
 *   @note To unregister type effect, use this function with 255 as left and right value
 *           or use LX_Mixer::removePanning().
 *
@@ -369,7 +369,7 @@ void setPanning(int channel,Uint8 left,Uint8 right)
 *
 *   Remove the panning on a channel
 *
-*   @param channel The channel you want to remove the panning on
+*   @param channel The channel to remove the panning on
 *
 */
 void removePanning(int channel)
@@ -429,11 +429,9 @@ void setPosition(Sint16 angle, int distance)
 *   Set the virtual position of the audio source according to the channel.
 *   This function emulates a 3D audio effect.
 *
-*   @param channel The channel you want to register the effect on
+*   @param channel The channel to register the effect on
 *   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
 *   @param distance The distance between the source and the listener
-*
-*   @note The distance is the same as the distance you can specified with setDistance()
 *
 */
 void setPosition(int channel, Sint16 angle, int distance)
@@ -448,7 +446,7 @@ void setPosition(int channel, Sint16 angle, int distance)
 *
 *   Reset the virtual position of the audio source according to the channel.
 *
-*   @param channel The channel you want to unregister the effect on
+*   @param channel The channel to unregister the effect on
 *
 */
 void resetPosition(int channel)
@@ -480,10 +478,10 @@ void reverseStereo(int channel, int flip)
 *
 *   Set the distance of a channel
 *
-*   @param channel The channel you need to use
+*   @param channel The channel to use
 *   @param distance The virtual distance betwenn the user and the source
 *
-*   @note If you set MIX_CHANNEL_POST, all channels will be dealt
+*   @note If MIX_CHANNEL_POST is set, all channels will be dealt
 *
 */
 void setDistance(int channel,Uint8 distance)

@@ -3,7 +3,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -109,7 +109,7 @@ LX_Configuration::~LX_Configuration() {}
 *
 *   @note  1 : This function is just a shortcut of LX_Configuration::getInstance()
 *               but it does not return the reference to the instance.
-*               So you need to call getInstance() to get it
+*               It is not necessary to call getInstance() to get it
 *   @note  2 : Normally you do not need to call it because it is already done in LX_Init()
 *
 */
@@ -170,8 +170,8 @@ void LX_Configuration::destroy()
 *   Get the string from the lua stack
 *
 *   If state or str is not valid, a segmentation fault may occur
-*   If len is 0 or less than the string you want to take from the lua state,
-*   the behaviour is undefined.
+*   If len is 0 or less than the string length,
+*   then the behaviour is undefined.
 *
 */
 void LX_Configuration::assignString(lua_State * state, char *str, unsigned int len)

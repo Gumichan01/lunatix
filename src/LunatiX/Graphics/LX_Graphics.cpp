@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -40,14 +40,14 @@ namespace LX_Graphics
 /**
 *   @fn SDL_Surface * loadSurface(std::string filename)
 *
-*   This function loads a SDL_Surface from any image file an optimized its format
+*   This function loads an SDL_Surface from any image file an optimized its format
 *
 *   @param filename The name of the image file
 *
 *   @return The loaded and optimized surface if there is no problem,
 *           a null pointer otherwise
 *
-*   @note   When you call this function, the format optimization includes
+*   @note   When this function is called, the format optimization includes
 *           the alpha channel.
 *           No alpha needs to be set on the surface after that.
 *
@@ -71,14 +71,14 @@ SDL_Surface * loadSurface(std::string filename)
 /**
 *   @fn SDL_Surface * loadSurface(LX_File *file)
 *
-*   This function loads a SDL_Surface from memory
+*   This function loads an SDL_Surface from memory
 *
-*   @param file The data you want to load the surface from
+*   @param file The pointer to the LX_File structure
 *
 *   @return The loaded and optimized surface if there is no problem,
-*           a null otherwise
+*           a null pointer otherwise
 *
-*   @note   When you call this function, the format optimization includes
+*   @note   When this function is called, the format optimization includes
 *           the alpha channel.
 *           No alpha needs to be set on the surface after that.
 *
@@ -99,14 +99,14 @@ SDL_Surface * loadSurface(LX_File *file)
 /**
 *   @fn SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 *
-*   This function loads a SDL_Surface from a file buffer
+*   This function loads an SDL_Surface from a file buffer
 *
-*   @param file The buffer you want to load the surface from
+*   @param file The pointer to a LX_FileBuffer structure
 *
 *   @return The loaded and optimized surface if there is no problem,
-*           a null otherwise
+*           a null pointer otherwise
 *
-*   @note   When you call this function, the format optimization includes
+*   @note   When this function is called, the format optimization includes
 *           the alpha channel.
 *           No alpha needs to be set on the surface after that.
 *
@@ -164,8 +164,8 @@ SDL_Surface * optimizeSurface(SDL_Surface * surface)
 *
 *   Loads create a texture from a surface using the renderer of the window
 *
-*   @param target The surface you want to use to create the texture
-*   @param w The window you create your texture from
+*   @param target The surface to create the texture from
+*   @param w The window context
 *
 *   @return A new pointer to the texture if the loading is successful,
 *           a null pointer otherwise
@@ -185,8 +185,8 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 *   Loads create a texture from a surface using the renderer of the window
 *   specified by its ID
 *
-*   @param target The surface you want to use to create the texture
-*   @param id The ID of the window renderer you create your texture from
+*   @param target The surface to create the texture from
+*   @param id The ID of the window that provide the rendering context
 *
 *   @return A new pointer to the texture if the loading is successful,
 *           a null pointer otherwise
@@ -215,10 +215,10 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
 *   Load a new texture from a file using the renderer of the window
 *   specified by its ID
 *
-*   @param filename The name of the file you need to use for the texture creation
-*   @param id The ID of the window renderer you create your texture from
+*   @param filename The name of the file to create the texture from
+*   @param id The ID of the window that provide the rendering context
 *
-*   @return A pointer to a SDL_Texture if the loading works,
+*   @return A pointer to an SDL_Texture if the loading works,
 *           a null pointer otherwise
 *
 *   @sa loadTextureFromSurface
@@ -248,10 +248,10 @@ SDL_Texture * loadTextureFromFile(std::string filename, int id)
 *
 *   Loads create a texture from a surface using the renderer of the window
 *
-*   @param filename The name of the file you need to use for the texture creation
-*   @param w The window renderer you create your texture from
+*   @param filename The name of the file to create the texture from
+*   @param w The window that provide the rendering context to create the texture
 *
-*   @return A pointer to a SDL_Texture if the loading works,
+*   @return A pointer to an SDL_Texture if the loading works,
 *           a null pointer otherwise
 *
 *   @sa loadTextureFromSurface
@@ -279,7 +279,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
 *
 *   @fn bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
 *
-*   This function set the alpha value on a SDL_surface
+*   This function set the alpha value on an SDL_surface
 *
 *   @param image The surface
 *   @param red The the red component of the future transparent color

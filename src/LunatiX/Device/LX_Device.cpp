@@ -3,7 +3,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	LunatiX Engine is a SDL-based game engine.
+*	The LunatiX Engine is an SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -184,7 +184,7 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 *
 *   Get the string format of the information structure
 *
-*   @param info The structure you want to get the string format from
+*   @param info The information structure
 *   @param str The string to fiil in
 *
 *   @return Always returns a valid string
