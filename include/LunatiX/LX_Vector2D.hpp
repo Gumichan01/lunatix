@@ -47,6 +47,8 @@
 *   - bool isZeroVector(LX_Vector2D&)
 */
 
+namespace LX_Physics{
+
 /**
 *   @struct LX_Vector2D
 *   @brief The vector2D structure
@@ -65,5 +67,6 @@ float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_norm(LX_Vector2D& u);
 
+};
 
 #endif // LX_VECTOR2D_HPP_INCLUDED

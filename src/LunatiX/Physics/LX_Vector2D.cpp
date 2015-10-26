@@ -25,6 +25,8 @@
 #include <LunatiX/LX_Vector2D.hpp>
 
 
+namespace LX_Physics{
+
 /**
 *   @fn float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 *
@@ -73,3 +75,7 @@ float vector_norm(LX_Vector2D& u)
 {
     return sqrt(scalar_product(u,u));
 }
+
+
+};
+

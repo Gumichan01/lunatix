@@ -25,10 +25,8 @@
 */
 
 #include "LX_Hitbox.hpp"
-#include "LX_Polygon.hpp"
 
 
-struct LX_Vector2D;
 
 /// @todo LX_Circle, LX_Polygon, LX_Point and LX_Vector2D in LX_Physics namespace
 
@@ -42,6 +40,9 @@ struct LX_Vector2D;
 */
 namespace LX_Physics
 {
+
+struct LX_Vector2D;
+class LX_Polygon;
 
 /* Distances */
 unsigned int euclide_square_distance(const int x1,const int y1,const int x2,const int y2);

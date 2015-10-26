@@ -26,11 +26,11 @@
 #include <iostream>
 
 struct LX_Point;
-struct LX_Vector2D;
 
 
 namespace LX_Physics{
 
+struct LX_Vector2D;
 
 /**
 *   @class LX_PolygonException

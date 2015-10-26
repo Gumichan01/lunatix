@@ -34,7 +34,15 @@
 struct SDL_Texture;
 struct SDL_Surface;
 
+namespace LX_Physics
+{
+
+class LX_Vector2D;
+
+};
+
 using namespace LX_FileIO;
+using namespace LX_Physics;
 
 namespace LX_ParticleEngine
 {

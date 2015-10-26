@@ -23,6 +23,7 @@
 #include <SDL2/SDL_rect.h>
 
 #include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Error.hpp>
 
