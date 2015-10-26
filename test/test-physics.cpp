@@ -1,11 +1,9 @@
 
 
 #include <cmath>
-
 #include <iostream>
 
 #include <LunatiX/Lunatix_engine.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
 
 using namespace std;
 using namespace LX_Physics;
@@ -28,6 +26,10 @@ void test_collisionRectPolygon(void);
 void test_collision2Polygon(void);
 
 void test_move(void);
+
+
+using namespace LX_Physics;
+
 
 int main(int argc, char **argv)
 {

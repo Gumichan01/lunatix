@@ -24,15 +24,16 @@
 
 #include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
-#include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 
 static const int RECT_SIDES =  4;   // The number of sides of a rectangle (AABB)
 
 
+namespace LX_Physics{
+
 /**
-*	@fn unsigned int LX_Physics::euclide_square_distance(const int x1, const int y1,
+*	@fn unsigned int euclide_square_distance(const int x1, const int y1,
 *                                                        const int x2, const int y2)
 *
 *	This function calculates the euclidean square distance between 2 coordinates
@@ -45,7 +46,7 @@ static const int RECT_SIDES =  4;   // The number of sides of a rectangle (AABB)
 *	@return An integer value
 *
 */
-unsigned int LX_Physics::euclide_square_distance(const int x1, const int y1,
+unsigned int euclide_square_distance(const int x1, const int y1,
                                                  const int x2, const int y2)
 {
     return( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
@@ -53,7 +54,7 @@ unsigned int LX_Physics::euclide_square_distance(const int x1, const int y1,
 
 
 /**
-*	@fn float LX_Physics::euclide_distance(const int x1, const int y1,
+*	@fn float euclide_distance(const int x1, const int y1,
 *                                          const int x2, const int y2)
 *
 *	This function calculates the euclidean distance with accuracy
@@ -66,7 +67,7 @@ unsigned int LX_Physics::euclide_square_distance(const int x1, const int y1,
 *	@return An float value
 *
 */
-float LX_Physics::euclide_distance(const int x1, const int y1,
+float euclide_distance(const int x1, const int y1,
                                    const int x2, const int y2)
 {
     return sqrt(euclide_square_distance(x1,y1,x2,y2));
@@ -74,7 +75,7 @@ float LX_Physics::euclide_distance(const int x1, const int y1,
 
 
 /**
-*	@fn unsigned int LX_Physics::euclide_square_distance(const LX_Point& p1,
+*	@fn unsigned int euclide_square_distance(const LX_Point& p1,
 *                                                        const LX_Point& p2)
 *
 *	This function calculates the euclidean square distance
@@ -85,7 +86,7 @@ float LX_Physics::euclide_distance(const int x1, const int y1,
 *	@return An integer value
 *
 */
-unsigned int LX_Physics::euclide_square_distance(const LX_Point& p1,
+unsigned int euclide_square_distance(const LX_Point& p1,
                                                  const LX_Point& p2)
 {
     return euclide_square_distance(p1.x,p1.y,p2.x,p2.y);
@@ -93,7 +94,7 @@ unsigned int LX_Physics::euclide_square_distance(const LX_Point& p1,
 
 
 /**
-*	@fn float LX_Physics::euclide_distance(const LX_Point& p1, const LX_Point& p2)
+*	@fn float euclide_distance(const LX_Point& p1, const LX_Point& p2)
 *
 *	This function calculates the euclidean distance with accuracy
 *
@@ -103,14 +104,14 @@ unsigned int LX_Physics::euclide_square_distance(const LX_Point& p1,
 *	@return An integer value
 *
 */
-float LX_Physics::euclide_distance(const LX_Point& p1, const LX_Point& p2)
+float euclide_distance(const LX_Point& p1, const LX_Point& p2)
 {
     return sqrt(euclide_square_distance(p1,p2));
 }
 
 
 /**
-*	@fn bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos,
+*	@fn bool collisionPointRect(const int x_pos, const int y_pos,
 *                                           const LX_AABB& rect)
 *
 *	Check the collision between a point and an Axis Aligned Bouding Box (AABB)
@@ -122,7 +123,7 @@ float LX_Physics::euclide_distance(const LX_Point& p1, const LX_Point& p2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect)
+bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect)
 {
 
     if(x_pos <= rect.x || y_pos >= (rect.y + rect.h)
@@ -136,7 +137,7 @@ bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_A
 
 
 /**
-*	@fn bool LX_Physics::collisionPointRect(const LX_Point& p,const LX_AABB& rect)
+*	@fn bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 *
 *	Check the collision between a point and an AABB
 *
@@ -146,14 +147,14 @@ bool LX_Physics::collisionPointRect(const int x_pos, const int y_pos, const LX_A
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointRect(const LX_Point& p,const LX_AABB& rect)
+bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 {
     return collisionPointRect(p.x,p.y,rect);
 }
 
 
 /**
-*	@fn bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos,
+*	@fn bool collisionPointCircle(const int x_pos, const int y_pos,
 *                                               const LX_Circle& circle)
 *
 *	Check the collision between a point and a circle
@@ -165,7 +166,7 @@ bool LX_Physics::collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos,
+bool collisionPointCircle(const int x_pos, const int y_pos,
                                       const LX_Circle& circle)
 {
     LX_Point tmp = {x_pos,y_pos};
@@ -174,7 +175,7 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos,
 
 
 /**
-*	@fn bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
+*	@fn bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
 *
 *	Check the collision between a point and a circle
 *
@@ -184,14 +185,14 @@ bool LX_Physics::collisionPointCircle(const int x_pos, const int y_pos,
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
+bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
 {
     return(euclide_square_distance(p,circle.center) <= (circle.square_radius));
 }
 
 
 /**
-*	@fn bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
+*	@fn bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 *
 *	Check the collision between two Axis Aligned Bounding Box (AABB)
 *
@@ -201,7 +202,7 @@ bool LX_Physics::collisionPointCircle(const LX_Point& p, const LX_Circle& circle
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
+bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 {
     if((rect1.x >= (rect2.x + rect2.w)) || (rect1.y >= (rect2.y + rect2.h))
        || ((rect1.x + rect1.w) <= rect2.x) || ((rect1.y + rect1.h) <= rect2.y))
@@ -214,7 +215,7 @@ bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 
 
 /**
-*	@fn bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
+*	@fn bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 *
 *	Check the collision between two circles
 *
@@ -224,7 +225,7 @@ bool LX_Physics::collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
+bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 {
     const unsigned int d = (circle1.radius + circle2.radius) * (circle1.radius + circle2.radius);
 
@@ -233,7 +234,7 @@ bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circ
 
 
 /**
-*	@fn bool LX_Physics::collisionSegCircle(const LX_Circle& circle,
+*	@fn bool collisionSegCircle(const LX_Circle& circle,
 *                                           const LX_Point& A, const LX_Point& B)
 *
 *	Check the collision between a circle and the [AB] segment
@@ -245,7 +246,7 @@ bool LX_Physics::collisionCircle(const LX_Circle& circle1, const LX_Circle& circ
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionSegCircle(const LX_Circle& circle,
+bool collisionSegCircle(const LX_Circle& circle,
                                     const LX_Point& A, const LX_Point& B)
 {
     LX_Vector2D AB,AC,BC;
@@ -295,7 +296,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle& circle,
 
 
 /**
-*	@fn bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
+*	@fn bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
 *
 *	Check the collision between a circle and a AABB
 *
@@ -305,7 +306,7 @@ bool LX_Physics::collisionSegCircle(const LX_Circle& circle,
 *	@return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
+bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
 {
     // Check if the center of the circle is completly into the AABB
     if(collisionPointRect(circle.center,rect))
@@ -340,7 +341,7 @@ bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rec
 
 
 /**
-*   @fn bool LX_Physics::intersectSegLine(const LX_Point& A, const LX_Point& B,
+*   @fn bool intersectSegLine(const LX_Point& A, const LX_Point& B,
 *                                         const LX_Point& C, const LX_Point& D)
 *
 *   Test the intersection between a line and a segment
@@ -353,7 +354,7 @@ bool LX_Physics::collisionCircleRect(const LX_Circle& circle, const LX_AABB& rec
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool LX_Physics::intersectSegLine(const LX_Point& A, const LX_Point& B,
+bool intersectSegLine(const LX_Point& A, const LX_Point& B,
                                    const LX_Point& C, const LX_Point& D)
 {
     LX_Vector2D AC,AD,AB;
@@ -375,7 +376,7 @@ bool LX_Physics::intersectSegLine(const LX_Point& A, const LX_Point& B,
 
 
 /**
-*   @fn bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
+*   @fn bool intersectSegment(const LX_Point& A, const LX_Point& B,
 *                                         const LX_Point& C, const LX_Point& D)
 *
 *   Test the intersection between 2 segments
@@ -388,7 +389,7 @@ bool LX_Physics::intersectSegLine(const LX_Point& A, const LX_Point& B,
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
+bool intersectSegment(const LX_Point& A, const LX_Point& B,
                                    const LX_Point& C, const LX_Point& D)
 {
     return (intersectSegLine(A,B,C,D) && intersectSegLine(C,D,A,B));
@@ -397,7 +398,7 @@ bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
 
 
 /**
-*   @fn bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
+*   @fn bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 *
 *   Test the collision between a point and a polygon
 *
@@ -407,7 +408,7 @@ bool LX_Physics::intersectSegment(const LX_Point& A, const LX_Point& B,
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
+bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 {
     int count = 0;
     LX_Point I;
@@ -443,7 +444,7 @@ bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 
 
 /**
-*   @fn bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
+*   @fn bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *
 *   Test the intersection between a circle and a polygon
 *
@@ -453,7 +454,7 @@ bool LX_Physics::collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 *   @return TRUE if there is an collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
+bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 {
     LX_Point A,B;
     const LX_Point P = C.center;
@@ -485,7 +486,7 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 
 
 /**
-*   @fn bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
+*   @fn bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 *
 *   Test the intersection between an AABB and a polygon
 *
@@ -495,7 +496,7 @@ bool LX_Physics::collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *   @return TRUE if there is an collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
+bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 {
     LX_Point A,B,C,D;
     LX_Point E,F;
@@ -534,7 +535,7 @@ bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 
 
 /**
-*   @fn bool LX_Physics::collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
+*   @fn bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 *
 *   Test the intersection between 2 polygons
 *
@@ -544,7 +545,7 @@ bool LX_Physics::collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 *   @return TRUE if there is an collision, FALSE otherwise
 *
 */
-bool LX_Physics::collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
+bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 {
     LX_Point A,B,C,D;
     const unsigned int polySize1 = poly1.numberOfEdges();
@@ -596,7 +597,7 @@ bool LX_Physics::collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 
 
 /**
-*   @fn void LX_Physics::movePoint(LX_Point& P, const int vx, const int vy)
+*   @fn void movePoint(LX_Point& P, const int vx, const int vy)
 *
 *   Move a point to a direction
 *
@@ -605,7 +606,7 @@ bool LX_Physics::collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 *   @param vy The y direction
 *
 */
-void LX_Physics::movePoint(LX_Point& P, const int vx, const int vy)
+void movePoint(LX_Point& P, const int vx, const int vy)
 {
     P.x += vx;
     P.y += vy;
@@ -613,7 +614,7 @@ void LX_Physics::movePoint(LX_Point& P, const int vx, const int vy)
 
 
 /**
-*   @fn void LX_Physics::moveRect(LX_AABB& rect, const int vx, const int vy)
+*   @fn void moveRect(LX_AABB& rect, const int vx, const int vy)
 *
 *   Move an AABB to a direction
 *
@@ -622,7 +623,7 @@ void LX_Physics::movePoint(LX_Point& P, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void LX_Physics::moveRect(LX_AABB& rect, const int vx, const int vy)
+void moveRect(LX_AABB& rect, const int vx, const int vy)
 {
     rect.x += vx;
     rect.y += vy;
@@ -630,7 +631,7 @@ void LX_Physics::moveRect(LX_AABB& rect, const int vx, const int vy)
 
 
 /**
-*   @fn void LX_Physics::moveCircle(LX_Circle *C, const int vx, const int vy)
+*   @fn void moveCircle(LX_Circle *C, const int vx, const int vy)
 *
 *   Move the circle to a direction
 *
@@ -639,14 +640,14 @@ void LX_Physics::moveRect(LX_AABB& rect, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void LX_Physics::moveCircle(LX_Circle& C, const int vx, const int vy)
+void moveCircle(LX_Circle& C, const int vx, const int vy)
 {
     movePoint(C.center,vx,vy);
 }
 
 
 /**
-*   @fn void LX_Physics::movePoly(LX_Polygon& poly, const int vx, const int vy)
+*   @fn void movePoly(LX_Polygon& poly, const int vx, const int vy)
 *
 *   Move the polygon to a direction
 *
@@ -655,14 +656,14 @@ void LX_Physics::moveCircle(LX_Circle& C, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void LX_Physics::movePoly(LX_Polygon& poly, const int vx, const int vy)
+void movePoly(LX_Polygon& poly, const int vx, const int vy)
 {
     poly.move(vx,vy);
 }
 
 
 /**
-*   @fn void LX_Physics::movePoint(LX_Point *P, const LX_Vector2D& v)
+*   @fn void movePoint(LX_Point *P, const LX_Vector2D& v)
 *
 *   Move a point to a direction using the vector
 *
@@ -670,14 +671,14 @@ void LX_Physics::movePoly(LX_Polygon& poly, const int vx, const int vy)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::movePoint(LX_Point& P, const LX_Vector2D& v)
+void movePoint(LX_Point& P, const LX_Vector2D& v)
 {
     movePoint(P,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::moveRect(LX_AABB *rect, const LX_Vector2D& v)
+*   @fn void moveRect(LX_AABB *rect, const LX_Vector2D& v)
 *
 *   Move an AABB to a direction using the vector
 *
@@ -685,14 +686,14 @@ void LX_Physics::movePoint(LX_Point& P, const LX_Vector2D& v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::moveRect(LX_AABB& rect, const LX_Vector2D& v)
+void moveRect(LX_AABB& rect, const LX_Vector2D& v)
 {
     moveRect(rect,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::moveCircle(LX_Circle& C, const LX_Vector2D& v)
+*   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v)
 *
 *   Move the circle to a direction using the vector
 *
@@ -700,14 +701,14 @@ void LX_Physics::moveRect(LX_AABB& rect, const LX_Vector2D& v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::moveCircle(LX_Circle& C, const LX_Vector2D& v)
+void moveCircle(LX_Circle& C, const LX_Vector2D& v)
 {
     moveCircle(C,v.vx,v.vy);
 }
 
 
 /**
-*   @fn void LX_Physics::movePoly(LX_Polygon& poly, const LX_Vector2D& v)
+*   @fn void movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 *
 *   Move the polygon to a direction using the vector
 *
@@ -715,14 +716,14 @@ void LX_Physics::moveCircle(LX_Circle& C, const LX_Vector2D& v)
 *   @param v The vector that indicates the direction
 *
 */
-void LX_Physics::movePoly(LX_Polygon& poly, const LX_Vector2D& v)
+void movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 {
     poly.move(v);
 }
 
 
 /**
-*   @fn void LX_Physics::movePointTo(LX_Point& P, const int xpos, const int ypos)
+*   @fn void movePointTo(LX_Point& P, const int xpos, const int ypos)
 *
 *   Move a point to an absolute position
 *
@@ -731,14 +732,14 @@ void LX_Physics::movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 *   @param ypos The y position
 *
 */
-void LX_Physics::movePointTo(LX_Point& P, const int xpos, const int ypos)
+void movePointTo(LX_Point& P, const int xpos, const int ypos)
 {
     P = {xpos,ypos};
 }
 
 
 /**
-*   @fn void LX_Physics::moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
+*   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
 *
 *   Move an AABB to an absolute position
 *
@@ -747,7 +748,7 @@ void LX_Physics::movePointTo(LX_Point& P, const int xpos, const int ypos)
 *   @param ypos The y position
 *
 */
-void LX_Physics::moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
+void moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
 {
     rect.x = xpos;
     rect.y = ypos;
@@ -755,7 +756,7 @@ void LX_Physics::moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
 
 
 /**
-*   @fn void LX_Physics::moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
+*   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
 *
 *   Move a circle to an absolute position
 *
@@ -764,14 +765,14 @@ void LX_Physics::moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
 *   @param ypos The y position
 *
 */
-void LX_Physics::moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
+void moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
 {
     movePointTo(C.center,xpos,ypos);
 }
 
 
 /**
-*   @fn void LX_Physics::movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)
+*   @fn void movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)
 *
 *   Move a polygon to an absolute position
 *
@@ -780,9 +781,11 @@ void LX_Physics::moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
 *   @param ypos The y position
 *
 */
-void LX_Physics::movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
+void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 {
     poly.moveTo(xpos,ypos);
 }
 
+
+};
 

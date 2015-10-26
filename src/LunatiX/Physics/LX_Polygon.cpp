@@ -28,8 +28,9 @@
 #include <LunatiX/LX_Error.hpp>
 
 using namespace std;
-using namespace LX_Physics;
 
+
+namespace LX_Physics{
 
 /**
 *   @fn LX_PolygonException::LX_PolygonException(std::string err)
@@ -374,4 +375,6 @@ LX_Polygon::~LX_Polygon()
     delete [] points;
 }
 
+
+};
 

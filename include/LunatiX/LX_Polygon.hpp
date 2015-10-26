@@ -23,12 +23,13 @@
 *
 */
 
-/// @todo Modify the signature of the polygon getter
+#include <iostream>
 
 struct LX_Point;
 struct LX_Vector2D;
 
-#include <iostream>
+
+namespace LX_Physics{
 
 
 /**
@@ -97,6 +98,8 @@ public :
 
 };
 
+
+};
 
 #endif
 
