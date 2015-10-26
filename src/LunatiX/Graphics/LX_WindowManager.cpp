@@ -85,8 +85,7 @@ LX_WindowManager * LX_WindowManager::getInstance()
 *   Destroy the instance of the singleton
 *
 *   @warning If the window manager has windows at this moment,
-*   they will not be freed. It is necessary to remove all of them
-*   before destroying the instance
+*   they will be deleted.
 *
 */
 void LX_WindowManager::destroy(void)
@@ -110,7 +109,8 @@ LX_WindowManager::~LX_WindowManager()
     {
         for(unsigned int i = 0; i < size; i++)
         {
-            removeWindow(i);
+            delete windows[i];
+            windows[i] = NULL;
         }
     }
 }
@@ -123,7 +123,7 @@ LX_WindowManager::~LX_WindowManager()
 *
 *   @param w The window
 *
-*   @return The ID of the window tha was added if the instance is valid
+*   @return The ID of the window that was added if the instance is valid
 *           -1 otherwise
 *
 *   @sa LX_Window
@@ -154,7 +154,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
 *   @param id The ID of the window that must be deleted
 *
 *   @return A valid pointer to a window if the ID refers to a valid window,
-*           NULL otherwise
+*           a null pointer otherwise
 *
 *   @sa addWindow
 */
@@ -162,7 +162,7 @@ LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 {
     LX_Window *w = NULL;
 
-    if(id > size || windows[id] != NULL)
+    if(id > size || windows[id] == NULL)
         return NULL;
 
     w = windows[id];

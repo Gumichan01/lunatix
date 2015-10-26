@@ -29,8 +29,6 @@
 namespace LX_Graphics
 {
 
-/// @todo Rebuild the Window using the vector container
-
 class LX_Window;
 
 /**
