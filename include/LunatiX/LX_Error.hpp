@@ -22,16 +22,40 @@
 *
 */
 
+#include <string>
 #include <SDL2/SDL_error.h>
 
 
-#ifndef LX_GetError
-#define LX_GetError() SDL_GetError()        /**< Alias of SDL_GetError */
-#endif
+/**
+*   @fn inline const char * LX_GetError()
+*
+*   This function is just an alias of SDL_GetError
+*
+*   @return The error string
+*
+*/
+inline const char * LX_GetError()
+{
+    return SDL_GetError();
+}
 
 
-#ifndef LX_SetError
-#define LX_SetError(str) SDL_SetError(str)  /**< Alias of SDL_SetError */
-#endif
+/**
+*   @fn inline int LX_SetError(std::string str)
+*
+*   This function is just an alias of SDL_SetError
+*
+*   @param str The error string
+*
+*   @return Always returns -1
+*
+*/
+inline int LX_SetError(std::string str)
+{
+    return SDL_SetError(str.c_str());
+}
+
 
 #endif // LX_ERROR_HPP_INCLUDED
+
+
