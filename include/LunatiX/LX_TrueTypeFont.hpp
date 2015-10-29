@@ -2,7 +2,6 @@
 #define LX_TTF_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -71,12 +70,12 @@ namespace LX_TrueTypeFont
 *    - LX_TTF_BLENDED : Very slow rendering but very nice text
 *
 */
-typedef enum LX_TTF_TypeText{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
+typedef enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
 
 
 /**
 *   @class LX_Font
-*   @brief The Font class.
+*   @brief The Font class
 *
 *   This class describes the font. It manages the True type Font.
 *
@@ -86,9 +85,9 @@ typedef enum LX_TTF_TypeText{LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_T
 class LX_Font
 {
 
-    std::string font_str;                /* The font file    */
-    unsigned int font_size;             /* The font size    */
-    SDL_Color font_color;               /* The font color   */
+    std::string font_str;                   /* The font file    */
+    unsigned int font_size;                 /* The font size    */
+    SDL_Color font_color;                   /* The font color   */
     LX_FileIO::LX_FileBuffer *font_buffer;
 
     LX_Font(LX_Font& f);
@@ -138,6 +137,5 @@ public:
 
 
 #endif // LX_TTF_H_INCLUDED
-
 
 

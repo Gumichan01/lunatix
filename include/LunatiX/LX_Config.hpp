@@ -28,7 +28,6 @@
 
 struct lua_State;
 
-using namespace std;
 
 /**
 *   @class LX_ConfigurationException
@@ -38,14 +37,14 @@ using namespace std;
 *   the configuration construction fails.
 *
 */
-class LX_ConfigurationException : public exception
+class LX_ConfigurationException : public std::exception
 {
 
-    string stringError;
+    std::string stringError;
 
 public :
 
-    LX_ConfigurationException(string err);
+    LX_ConfigurationException(std::string err);
 
     const char * what() const throw();
 
@@ -70,7 +69,7 @@ class LX_Configuration
     int audioFlag;
     int joystickFlag;
     int openglFlag;
-    string fontFile;
+    std::string fontFile;
     int fontSize;
     int width;
     int height;

@@ -33,6 +33,7 @@
 // unique instance
 static LX_Configuration *instance = NULL;
 
+using namespace std;
 
 
 /**
