@@ -25,6 +25,8 @@
 
 #include "LX_Library.hpp"
 #include "LX_Config.hpp"
+#include "LX_Device.hpp"
+#include "LX_Haptic.hpp"
 #include "LX_Graphics.hpp"
 #include "LX_TrueTypeFont.hpp"
 #include "LX_Mixer.hpp"
