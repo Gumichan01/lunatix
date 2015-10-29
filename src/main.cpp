@@ -210,6 +210,8 @@ int main ( int argc, char** argv )
 
     delete audio;
     delete ttf;
+    delete window;
+    delete window2;
 
     // Gamepad
     LX_Gamepad *gp = new LX_Gamepad();

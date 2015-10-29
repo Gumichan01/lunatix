@@ -84,8 +84,8 @@ LX_WindowManager * LX_WindowManager::getInstance()
 *
 *   Destroy the instance of the singleton
 *
-*   @warning If the window manager has windows at this moment,
-*   they will be deleted.
+*   @warning    The windows contained in the window manager
+*               are not destroyed. So it is necessary to keep an external .
 *
 */
 void LX_WindowManager::destroy(void)
@@ -109,7 +109,6 @@ LX_WindowManager::~LX_WindowManager()
     {
         for(unsigned int i = 0; i < size; i++)
         {
-            delete windows[i];
             windows[i] = NULL;
         }
     }
