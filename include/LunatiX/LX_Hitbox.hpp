@@ -43,16 +43,6 @@ typedef struct LX_Point
 } LX_Point;     /**< The point */
 
 
-/**
-*   @todo operators of LX_Circle :
-*   - '=' : assignment
-*   - '==' : same coordinates and same radius
-*   - '!=' : not same coordinates or not same radius
-*   - '>' : first radius > second radius
-*   - '<' : first radius < second radius
-*   - '>=' : first radius >= second radius
-*   - '<=' : first radius <= second radius
-*/
 
 
 /**
