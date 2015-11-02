@@ -1,5 +1,4 @@
 
-
 #include <cmath>
 #include <iostream>
 
@@ -27,6 +26,7 @@ void test_collision2Polygon(void);
 
 void test_move(void);
 void test_assignement(void);
+void test_operator(void);
 
 
 using namespace LX_Physics;
@@ -63,6 +63,7 @@ int main(int argc, char **argv)
 
     test_move();
     test_assignement();
+    test_operator();
 
     LX_Quit();
 
@@ -791,7 +792,7 @@ void test_move(void)
         cout << "SUCCESS - Point P(" << P.x << "," << P.y << ")" << endl;
     else
         cout << "FAILURE - expected : Point P(2,3)"
-        << "got : (" << P.x << "," << P.y << ")" << endl;
+             << "got : (" << P.x << "," << P.y << ")" << endl;
 
 
     cout << "INFO - Rectangle" << endl;
@@ -801,11 +802,11 @@ void test_move(void)
 
     if(R.x == expected_aabb.x && R.y == expected_aabb.y)
         cout << "SUCCESS - Rectangle R(" << R.x << "," << R.y << ","
-        << R.w << "," << R.h << ")" << endl;
+             << R.w << "," << R.h << ")" << endl;
     else
         cout << "FAILURE - expected : Rectangle R(3,6,10,10)"
-        << "got : (" << R.x << "," << R.y << ","
-        << R.w << "," << R.h << ")" << endl;
+             << "got : (" << R.x << "," << R.y << ","
+             << R.w << "," << R.h << ")" << endl;
 
 
     cout << " = END TEST = " << endl;
@@ -821,20 +822,107 @@ void test_assignement(void)
 
     cout << "INFO - Point P(" << P.x << "," << P.y << ")" << endl;
 
-    Q = P;
+    Q = P;  // assignment
 
     if(Q == P)
         cout << "SUCCESS - Point Q(" << Q.x << "," << Q.y << ")" << endl;
     else
-        cout << "FAILURE - expected : Point Q(1,2)"
-        << "got : (" << Q.x << "," << Q.y << ")" << endl;
+        cerr << "FAILURE - expected : Point Q(1,2)"
+             << "got : (" << Q.x << "," << Q.y << ")" << endl;
+
+
+    LX_Circle C = {{4,9},10,100};
+    LX_Circle D;
+
+    cout << "INFO - Circle C - Center(" << C.center.x << "," << C.center.y
+         << ") radius : " << C.radius << "; square radius : " << C.square_radius
+         << endl;
+
+    D = C;  // assignment
+
+    if(D == C)
+        cout << "SUCCESS - Circle D - Center(" << C.center.x << "," << C.center.y
+         << ") radius : " << C.radius << "; square radius : " << C.square_radius
+         << endl;
+    else
+        cerr << "FAILURE - expected : Circle D{{4,9},10,100}"
+             << "got : Circle : Center(" << D.center.x << "," << D.center.y
+             << ") radius : " << D.radius << "; square radius : " << D.square_radius
+             << endl;
 
 
     cout << " = END TEST = " << endl;
 }
 
 
+void test_operator(void)
+{
+    LX_Circle C = {{2,3},10,100};
+    LX_Circle E = {{4,9},32,32*32};
+    LX_Circle F = {{8,21},10,100};
 
+    cout << " = TEST operators = " << endl;
+
+    cout << "INFO - Circle C - Center(" << C.center.x << "," << C.center.y
+         << ") radius : " << C.radius << "; square radius : " << C.square_radius
+         << endl;
+    cout << "INFO - Circle E - Center(" << E.center.x << "," << E.center.y
+         << ") radius : " << E.radius << "; square radius : " << E.square_radius
+         << endl;
+    cout << "INFO - Circle F - Center(" << F.center.x << "," << F.center.y
+         << ") radius : " << F.radius << "; square radius : " << F.square_radius
+         << endl;
+
+
+    if(E > C)
+        cout << "SUCCESS - E is greater than C" << endl;
+    else
+        cerr << "FAILURE - E is not greater than C" << endl;
+
+    if(C < E)
+        cout << "SUCCESS - C is smaller than E" << endl;
+    else
+        cerr << "FAILURE - C is not smaller than E" << endl;
+
+    if(E >= C)
+        cout << "SUCCESS - E is greater or equal than C" << endl;
+    else
+        cerr << "FAILURE - E is not greater or equal than C" << endl;
+
+    if(C <= E)
+        cout << "SUCCESS - C is smaller or equal than E" << endl;
+    else
+        cerr << "FAILURE - C is not smaller or equal than E" << endl;
+
+    if(F >= C)
+        cout << "SUCCESS - F is greater or equal than C" << endl;
+    else
+        cerr << "FAILURE - F is not greater or equal than C" << endl;
+
+    if(C <= F)
+        cout << "SUCCESS - C is smaller or equal than F" << endl;
+    else
+        cerr << "FAILURE - C is not smaller or equal than F" << endl;
+
+    if(!(E < C))
+        cout << "SUCCESS - E is not smaller than C" << endl;
+    else
+        cerr << "FAILURE - E is smaller than C" << endl;
+
+    cout << "INFO -Is E different from C? " << endl;
+    if(E != C)
+        cout << "SUCCESS - E is not C" << endl;
+    else
+        cerr << "FAILURE - E is C" << endl;
+
+    cout << "INFO -Is E and C not equal? " << endl;
+    if(!(E == C))
+        cout << "SUCCESS - E is not C" << endl;
+    else
+        cerr << "FAILURE - E is C" << endl;
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
