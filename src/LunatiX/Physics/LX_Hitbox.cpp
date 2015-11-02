@@ -46,20 +46,20 @@ LX_Point& LX_Point::operator =(LX_Point p)
 
 
 /**
-*   @fn LX_Circle& LX_Circle::operator=(const LX_Circle p)
+*   @fn LX_Circle& LX_Circle::operator=(const LX_Circle c)
 *
 *   Assign a circle to another circle
 *
-*   @param p The circle
+*   @param c The circle
 *
 *   @return The new circle
 *
 */
-LX_Circle& LX_Circle::operator =(LX_Circle p)
+LX_Circle& LX_Circle::operator =(LX_Circle c)
 {
-    center = p.center;
-    radius = p.radius;
-    square_radius = p.square_radius;
+    center = c.center;
+    radius = c.radius;
+    square_radius = c.square_radius;
 
     return *this;
 }
