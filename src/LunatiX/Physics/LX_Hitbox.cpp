@@ -26,6 +26,16 @@
 namespace LX_Physics
 {
 
+/**
+*   @fn LX_Point& LX_Point::operator=(LX_Point p)
+*
+*   Assign a point to another point
+*
+*   @param p The point
+*
+*   @return The new point
+*
+*/
 LX_Point& LX_Point::operator=(LX_Point p)
 {
     x = p.x;
@@ -38,15 +48,38 @@ LX_Point& LX_Point::operator=(LX_Point p)
 };
 
 
+/**
+*   @fn bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+*
+*   Check if two points are identical
+*
+*   @param a The first point
+*   @param b The second point
+*
+*   @return TRUE if these points have exactly the same coordinates,
+*           FALSE otherwise
+*
+*/
 bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
 {
     return a.x == b.x && a.y == b.y;
 }
 
 
+/**
+*   @fn bool operator!=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+*
+*   Check if two points are different
+*
+*   @param a The first point
+*   @param b The second point
+*
+*   @return TRUE if these points have not the same coordinates, FALSE otherwise
+*
+*/
 bool operator!=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
 {
-    return a.x != b.x && a.y != b.y;
+    return a.x != b.x || a.y != b.y;
 }
 
 
