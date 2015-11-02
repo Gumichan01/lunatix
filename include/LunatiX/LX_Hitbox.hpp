@@ -38,7 +38,7 @@ typedef struct LX_Point
     int x;      /**< The x position of the point */
     int y;      /**< The y position of the point */
 
-    LX_Point& operator=(LX_Point p);
+    LX_Point& operator=(const LX_Point p);
 
 } LX_Point;     /**< The point */
 
@@ -67,18 +67,24 @@ typedef struct LX_Circle
     unsigned int radius;        /**< The circle radius                      */
     unsigned int square_radius; /**< The square radius                      */
 
-    LX_Circle& operator=(LX_Circle p);
+    LX_Circle& operator=(const LX_Circle p);
 
 } LX_Circle;    /**< @brief The circle */
 
 
 };
 
+
 // Operators of points and circles
-bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
-bool operator!=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
+bool operator ==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
+bool operator !=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
 
-
+bool operator ==(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
+bool operator !=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
+bool operator >(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
+bool operator <(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
+bool operator >=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
+bool operator <=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
 
 
 #endif // HITBOX_H_INCLUDED
