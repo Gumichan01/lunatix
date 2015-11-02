@@ -24,13 +24,6 @@
 */
 
 
-/**
-*   @todo operators of LX_Point :
-*   - '=' : assignment (DONE)
-*   - '==' : same coordinates (DONE)
-*   - '!=' : not same coordinates (DONE)
-*/
-
 namespace LX_Physics{
 
 /**
