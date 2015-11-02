@@ -26,6 +26,7 @@ void test_collisionRectPolygon(void);
 void test_collision2Polygon(void);
 
 void test_move(void);
+void test_assignement(void);
 
 
 using namespace LX_Physics;
@@ -61,6 +62,7 @@ int main(int argc, char **argv)
     test_collision2Polygon();
 
     test_move();
+    test_assignement();
 
     LX_Quit();
 
@@ -808,6 +810,38 @@ void test_move(void)
 
     cout << " = END TEST = " << endl;
 }
+
+
+void test_assignement(void)
+{
+    cout << " = TEST Assignement = " << endl;
+
+    LX_Point P = {1,2};
+    LX_Point Q;
+
+    cout << "INFO - Point P(" << P.x << "," << P.y << ")" << endl;
+
+    Q = P;
+
+    if(Q == P)
+        cout << "SUCCESS - Point Q(" << Q.x << "," << Q.y << ")" << endl;
+    else
+        cout << "FAILURE - expected : Point Q(1,2)"
+        << "got : (" << Q.x << "," << Q.y << ")" << endl;
+
+
+    cout << " = END TEST = " << endl;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
