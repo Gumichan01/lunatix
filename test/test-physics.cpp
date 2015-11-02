@@ -382,15 +382,9 @@ void test_Vector2D(void)
     LX_Vector2D v,u,z;
     int d;
 
-    v.vx = 1;
-    v.vy = 2;
-
-    u.vx = 2;
-    u.vy = -1;
-
-    z.vx = 0;
-    z.vy = 0;
-
+    v = {1,2};
+    u = {2,-1};
+    z = {0,0};
 
     cout << " = TEST Vector2D = " << endl;
 
