@@ -25,7 +25,7 @@ void test_collisionRectPolygon(void);
 void test_collision2Polygon(void);
 
 void test_move(void);
-void test_assignement(void);
+void test_assignment(void);
 void test_operator(void);
 
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     test_collision2Polygon();
 
     test_move();
-    test_assignement();
+    test_assignment();
     test_operator();
 
     LX_Quit();
@@ -807,7 +807,7 @@ void test_move(void)
 }
 
 
-void test_assignement(void)
+void test_assignment(void)
 {
     cout << " = TEST Assignement = " << endl;
 
@@ -822,28 +822,41 @@ void test_assignement(void)
         cout << "SUCCESS - Point Q(" << Q.x << "," << Q.y << ")" << endl;
     else
         cerr << "FAILURE - expected : Point Q(1,2)"
-             << "got : (" << Q.x << "," << Q.y << ")" << endl;
+             << "got : Q(" << Q.x << "," << Q.y << ")" << endl;
 
 
     LX_Circle C = {{4,9},10,100};
     LX_Circle D;
 
-    cout << "INFO - Circle C - Center(" << C.center.x << "," << C.center.y
+    cout << "INFO - Circle C : Center(" << C.center.x << "," << C.center.y
          << ") radius : " << C.radius << "; square radius : " << C.square_radius
          << endl;
 
     D = C;  // assignment
 
     if(D == C)
-        cout << "SUCCESS - Circle D - Center(" << C.center.x << "," << C.center.y
+        cout << "SUCCESS - Circle D : Center(" << C.center.x << "," << C.center.y
          << ") radius : " << C.radius << "; square radius : " << C.square_radius
          << endl;
     else
         cerr << "FAILURE - expected : Circle D{{4,9},10,100}"
-             << "got : Circle : Center(" << D.center.x << "," << D.center.y
+             << "got : Circle D : Center(" << D.center.x << "," << D.center.y
              << ") radius : " << D.radius << "; square radius : " << D.square_radius
              << endl;
 
+
+    LX_Vector2D v = {3.14,1.59};
+    LX_Vector2D u;
+
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+
+    u = v;  // assignment
+
+    if(u.vx == v.vx && u.vx == v.vx)
+        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    else
+        cerr << "FAILURE - expected : Vector2D u(3.14,1.59)"
+             << "got : u(" << u.vx << "," << u.vy << ")" << endl;
 
     cout << " = END TEST = " << endl;
 }
