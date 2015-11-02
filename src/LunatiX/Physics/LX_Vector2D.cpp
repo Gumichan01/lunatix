@@ -28,6 +28,25 @@
 namespace LX_Physics{
 
 /**
+*   @fn LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
+*
+*   Assign a vector to another vector
+*
+*   @param v The vector
+*
+*   @return The new vector
+*
+*/
+LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
+{
+    vx = v.vx;
+    vy = v.vy;
+
+    return *this;
+}
+
+
+/**
 *   @fn float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Calculate the scalar product of 2 vectors

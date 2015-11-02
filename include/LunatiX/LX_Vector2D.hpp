@@ -23,7 +23,6 @@
 
 /**
 *   @todo operators of LX_Vector2D :
-*   - '=' : assignment (it should be explicitly defined into the library)
 *   - '==' : same direction and same norm
 *   - '!=' : not same direction or (||) not same norm
 *   - '>' : same direction and first norm > second norm
@@ -61,7 +60,10 @@ typedef struct LX_Vector2D
     float vx;                     /**< The x position */
     float vy;                     /**< The y position */
 
+    LX_Vector2D& operator=(const LX_Vector2D v);
+
 } LX_Vector2D;  /**< @brief The vector2D */
+
 
 
 float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
