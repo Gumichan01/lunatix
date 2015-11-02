@@ -28,7 +28,7 @@
 #include <LunatiX/LX_Error.hpp>
 
 
-static const int RECT_SIDES =  4;   // The number of sides of a rectangle (AABB)
+static const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
 
 namespace LX_Physics{
@@ -470,13 +470,9 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
         A = poly.getPoint(i);
 
         if(i == n-1)
-        {
             B = poly.getPoint(0);
-        }
         else
-        {
             B = poly.getPoint(i+1);
-        }
 
         if(collisionSegCircle(C,A,B) == true)
             return true;
@@ -514,13 +510,9 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
         E = poly.getPoint(j);
 
         if(j == n-1)
-        {
             F = poly.getPoint(0);
-        }
         else
-        {
             F = poly.getPoint(j+1);
-        }
 
         if(intersectSegment(A,B,E,F) || intersectSegment(B,C,E,F) ||
                 intersectSegment(C,D,E,F) || intersectSegment(D,A,E,F))
@@ -554,35 +546,21 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 
     for(unsigned int i = 0; i < polySize1; i++)
     {
-        A.x = poly1.getPoint(i).x;
-        A.y = poly1.getPoint(i).y;
+        A = poly1.getPoint(i);
 
         if(i == polySize1-1)
-        {
-            B.x = poly1.getPoint(0).x;
-            B.y = poly1.getPoint(0).y;
-        }
+            B = poly1.getPoint(0);
         else
-        {
-            B.x = poly1.getPoint(i+1).x;
-            B.y = poly1.getPoint(i+1).y;
-        }
+            B = poly1.getPoint(i+1);
 
         for(unsigned int j = 0; j < polySize2; j++)
         {
-            C.x = poly2.getPoint(j).x;
-            C.y = poly2.getPoint(j).y;
+            C = poly2.getPoint(j);
 
             if(j == polySize2-1)
-            {
-                D.x = poly2.getPoint(0).x;
-                D.y = poly2.getPoint(0).y;
-            }
+                D = poly2.getPoint(0);
             else
-            {
-                D.x = poly2.getPoint(j+1).x;
-                D.y = poly2.getPoint(j+1).y;
-            }
+                D = poly2.getPoint(j+1);
 
             if(intersectSegment(A,B,C,D))
                 return true;
