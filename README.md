@@ -1,11 +1,11 @@
 # LunatiX Engine #
 
-LunatiX Engine is a SDL-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
+LunatiX Engine is a SDL2-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
 
 It contains these following libraries:
-- LX\_Graphics : a 2D library based on SDL_Image (supporting JPEG, PNG, GIF, ...)
-- LX\_TrueTypeFont : The True Type Font (TTF) library based on SDL_TTF
-- LX\_Mixer : The mix library based on SDL_Mixer(supporting MP3, OGG Vorbis, WMA, WAV, ...)
+- LX\_Graphics : A 2D library based on SDL_Image 2.0 (supporting JPEG, PNG, GIF, ...)
+- LX\_TrueTypeFont : The True Type Font (TTF) library based on SDL_TTF 2.0
+- LX\_Mixer : The audio library based on SDL_Mixer 2.0(supporting MP3, OGG Vorbis, WMA, WAV, ...)
 - LX\_Physics : The physics engine
 
 LunatiX Engine also contains these modules:
