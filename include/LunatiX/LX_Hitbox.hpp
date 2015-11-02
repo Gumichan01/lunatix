@@ -45,12 +45,13 @@ typedef struct LX_Point
     int x;      /**< The x position of the point */
     int y;      /**< The y position of the point */
 
+    LX_Point& operator=(LX_Point p);
+
 } LX_Point;     /**< The point */
 
 
 /**
 *   @todo operators of LX_Circle :
-*   - '=' : assignment
 *   - '==' : same coordinates and same radius
 *   - '!=' : not same coordinates or not same radius
 *   - '>' : first radius > second radius
@@ -68,9 +69,9 @@ typedef struct LX_Point
 */
 typedef struct LX_Circle
 {
-    LX_Point center;            /**< The point that represents the center */
-    unsigned int radius;        /**< The circle radius                   */
-    unsigned int square_radius; /**< The square radius                   */
+    LX_Point center;            /**< The point that represents the center   */
+    unsigned int radius;        /**< The circle radius                      */
+    unsigned int square_radius; /**< The square radius                      */
 
 } LX_Circle;    /**< @brief The circle */
 

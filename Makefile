@@ -38,7 +38,7 @@ LX_Config.o LX_Library.o \
 LX_Chunk.o LX_Music.o LX_Mixer.o \
 LX_MessageBox.o \
 LX_Particle.o LX_ParticleSystem.o \
-LX_Physics.o LX_Polygon.o LX_Vector2D.o \
+LX_Hitbox.o LX_Physics.o LX_Polygon.o LX_Vector2D.o \
 LX_Random.o \
 LX_SystemInfo.o \
 LX_TrueTypeFont.o \
@@ -309,6 +309,11 @@ $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
 
 
 LX_Vector2D.o : $(PHYSICS_PATH)LX_Vector2D.cpp $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+LX_Hitbox.o : $(PHYSICS_PATH)LX_Hitbox.cpp $(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
