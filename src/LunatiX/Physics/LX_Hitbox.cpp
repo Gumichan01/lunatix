@@ -35,8 +35,24 @@ LX_Point& LX_Point::operator=(LX_Point p)
 }
 
 
-
 };
+
+
+bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+{
+    return a.x == b.x && a.y == b.y;
+}
+
+
+bool operator!=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+{
+    return a.x != b.x && a.y != b.y;
+}
+
+
+
+
+
 
 
 

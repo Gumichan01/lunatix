@@ -26,9 +26,9 @@
 
 /**
 *   @todo operators of LX_Point :
-*   - '=' : assignment (it should be explicitly defined into the library)
-*   - '==' : same coordinates
-*   - '!=' : not same coordinates
+*   - '=' : assignment (DONE)
+*   - '==' : same coordinates (DONE)
+*   - '!=' : not same coordinates (DONE)
 */
 
 namespace LX_Physics{
@@ -52,6 +52,7 @@ typedef struct LX_Point
 
 /**
 *   @todo operators of LX_Circle :
+*   - '=' : assignment
 *   - '==' : same coordinates and same radius
 *   - '!=' : not same coordinates or not same radius
 *   - '>' : first radius > second radius
@@ -78,6 +79,15 @@ typedef struct LX_Circle
 
 };
 
+bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
+bool operator!=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
+
 #endif // HITBOX_H_INCLUDED
+
+
+
+
+
+
 
 
