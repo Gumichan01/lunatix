@@ -67,13 +67,19 @@ typedef struct LX_Circle
     unsigned int radius;        /**< The circle radius                      */
     unsigned int square_radius; /**< The square radius                      */
 
+    LX_Circle& operator=(LX_Circle p);
+
 } LX_Circle;    /**< @brief The circle */
 
 
 };
 
+// Operators of points and circles
 bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
 bool operator!=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
+
+
+
 
 #endif // HITBOX_H_INCLUDED
 

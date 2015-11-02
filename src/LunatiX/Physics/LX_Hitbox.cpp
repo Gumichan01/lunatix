@@ -45,7 +45,27 @@ LX_Point& LX_Point::operator=(LX_Point p)
 }
 
 
+/**
+*   @fn LX_Circle& LX_Circle::operator=(LX_Circle p)
+*
+*   Assign a circle to another circle
+*
+*   @param p The circle
+*
+*   @return The new circle
+*
+*/
+LX_Circle& LX_Circle::operator=(LX_Circle p)
+{
+    center = p.center;
+    radius = p.radius;
+    square_radius = p.square_radius;
+
+    return *this;
+}
+
 };
+
 
 
 /**
