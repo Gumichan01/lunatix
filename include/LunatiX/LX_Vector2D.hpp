@@ -23,13 +23,9 @@
 
 /**
 *   @todo operators of LX_Vector2D :
-*   - '>' : first norm > second norm
-*   - '<' : first norm < second norm
-*   - '-' : substraction of x and y between two vectors
 *   - Unary '-' : the opposite of the vector
 *   - '++' : vector's coordinates + 1
 *   - '--' : vector's coordinates - 1
-*   - '-=' : 1st vector's coordinates + 2nd vector's coordinates
 */
 
 /**
