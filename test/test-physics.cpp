@@ -27,7 +27,7 @@ void test_collision2Polygon(void);
 void test_move(void);
 void test_assignment(void);
 void test_operator(void);
-
+void test_VectorOperation(void);
 
 using namespace LX_Physics;
 
@@ -64,6 +64,7 @@ int main(int argc, char **argv)
     test_move();
     test_assignment();
     test_operator();
+    test_VectorOperation();
 
     LX_Quit();
 
@@ -852,7 +853,7 @@ void test_assignment(void)
 
     u = v;  // assignment
 
-    if(u.vx == v.vx && u.vx == v.vx)
+    if(u == v)
         cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
     else
         cerr << "FAILURE - expected : Vector2D u(3.14,1.59)"
@@ -867,6 +868,12 @@ void test_operator(void)
     LX_Circle C = {{2,3},10,100};
     LX_Circle E = {{4,9},32,32*32};
     LX_Circle F = {{8,21},10,100};
+
+    LX_Vector2D v = {-3.14,1.59};
+    LX_Vector2D u = v;
+    LX_Vector2D w = {3.14,1.59};
+    LX_Vector2D i = {2.56,1.59};
+    LX_Vector2D j = {-0.14,-1.28};
 
     cout << " = TEST operators = " << endl;
 
@@ -928,8 +935,146 @@ void test_operator(void)
     else
         cerr << "FAILURE - E is C" << endl;
 
+
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    cout << "INFO - Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
+    cout << "INFO - Vector2D i(" << i.vx << "," << i.vy << ")" << endl;
+    cout << "INFO - Vector2D j(" << j.vx << "," << j.vy << ")" << endl;
+
+    if(u == v)
+        cout << "SUCCESS - u and v are equals" << endl;
+    else
+        cerr << "FAILURE - expected: u and v equals; got :"
+             << "Vector2D u(" << u.vx << "," << u.vy << "); "
+             << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+
+    if(v == w)
+        cerr << "FAILURE - expected: v and w are not equals; got :"
+             << "Vector2D v(" << v.vx << "," << v.vy << ")"
+             << "Vector2D w(" << w.vx << "," << w.vy << "); " << endl;
+    else
+        cout << "SUCCESS - v and w are not equals" << endl;
+
+    if(v != i)
+        cout << "SUCCESS - v and i are not equals" << endl;
+    else
+        cerr << "FAILURE - expected: v and i are not equals; got :"
+             << "Vector2D v(" << v.vx << "," << v.vy << ")"
+             << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
+
+    if(j != i)
+        cout << "SUCCESS - j and i are not equals" << endl;
+
+    else
+        cerr << "FAILURE - expected: j and i are not equals; got :"
+             << "Vector2D j(" << j.vx << "," << j.vy << ")"
+             << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
+
+
     cout << " = END TEST = " << endl;
 }
+
+
+void test_VectorOperation(void)
+{
+    LX_Vector2D w;
+
+    LX_Vector2D u = {3.14,1.59};
+    LX_Vector2D v = {-1.28,5.12};
+    LX_Vector2D z = {-2.56,10.24};
+
+    LX_Vector2D a = {3.14,2.048};
+    LX_Vector2D b = {1.28,0.64};
+    LX_Vector2D c = {-2.56,10.24};
+    LX_Vector2D d;
+
+    LX_Vector2D exp_sum_vec = {u.vx + v.vx , u.vy + v.vy};
+    LX_Vector2D exp_add_vec = {u.vx + z.vx , u.vy + z.vy};
+
+    LX_Vector2D exp_diff_vec = {a.vx - b.vx , a.vy - b.vy};
+    LX_Vector2D exp_sub_vec = {a.vx - c.vx , a.vy - c.vy};
+
+    cout << " = TEST Vector arithmetic '+','+=','-','-='  = " << endl;
+    cout << "INFO - '+','+=','-','-='" << endl;
+
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    cout << "INFO - w = u + v;" << endl;
+
+    w = u + v;
+
+    cout << "INFO - Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
+
+    if(w == exp_sum_vec)
+        cout << "SUCCESS - Vector2D w(" << w.vx << "," << w.vy << ")"
+        << " is exactly what the test case expected (" << exp_sum_vec.vx
+        << "," << exp_sum_vec.vy << ")" << endl;
+    else
+    cerr << "FAILURE - expected: LX_Vector2D(" << exp_sum_vec.vx
+         << "," << exp_sum_vec.vy << "); "
+         << "got w(" << w.vx << "," << w.vy << "); " << endl;
+
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    cout << "INFO - Vector2D z(" << z.vx << "," << z.vy << ")" << endl;
+    cout << "INFO - u += z;" << endl;
+
+    u += z;
+
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+
+    if(u == exp_add_vec)
+        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")"
+        << " is exactly what the test case expected (" << exp_add_vec.vx
+        << "," << exp_add_vec.vy << ")" << endl;
+    else
+    cerr << "FAILURE - expected: LX_Vector2D(" << exp_add_vec.vx
+         << "," << exp_add_vec.vy << "); "
+         << "got u(" << u.vx << "," << u.vy << "); " << endl;
+
+
+    cout << "INFO - Vector2D a(" << a.vx << "," << a.vy << ")" << endl;
+    cout << "INFO - Vector2D b(" << b.vx << "," << b.vy << ")" << endl;
+    cout << "INFO - d = a - b;" << endl;
+
+    d = a - b;
+
+    cout << "INFO - Vector2D d("<< d.vx << "," << d.vy << ")" << endl;
+
+    if(d == exp_diff_vec)
+        cout << "SUCCESS - Vector2D d(" << d.vx << "," << d.vy << ")"
+        << " is exactly what the test case expected (" << exp_diff_vec.vx
+        << "," << exp_diff_vec.vy << ")" << endl;
+    else
+    cerr << "FAILURE - expected: LX_Vector2D(" << exp_diff_vec.vx
+         << "," << exp_diff_vec.vy << "); "
+         << "got d(" << d.vx << "," << d.vy << "); " << endl;
+
+
+    cout << "INFO - Vector2D a(" << a.vx << "," << a.vy << ")" << endl;
+    cout << "INFO - Vector2D c(" << c.vx << "," << c.vy << ")" << endl;
+    cout << "INFO - a -= c;" << endl;
+
+    a -= c;
+
+    if(a == exp_sub_vec)
+        cout << "SUCCESS - Vector2D a(" << a.vx << "," << a.vy << ")"
+        << " is exactly what the test case expected (" << exp_sub_vec.vx
+        << "," << exp_sub_vec.vy << ")" << endl;
+    else
+    cerr << "FAILURE - expected: LX_Vector2D(" << exp_sub_vec.vx
+         << "," << exp_sub_vec.vy << "); "
+         << "got a(" << a.vx << "," << a.vy << "); " << endl;
+    cout << " = END TEST = " << endl;
+}
+
+
+
+
+
+
+
+
 
 
 
