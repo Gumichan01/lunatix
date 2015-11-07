@@ -97,9 +97,9 @@ public :
 
     LX_File(std::string filename, const Uint32 mode);
 
-    size_t read(void *ptr,size_t size,size_t max_num);
-    size_t readExactly(void *ptr,size_t size,size_t num);
-    size_t write(void *ptr,size_t size,size_t num);
+    size_t read(void *ptr,size_t data_size,size_t max_num);
+    size_t readExactly(void *ptr,size_t data_size,size_t num);
+    size_t write(void *ptr,size_t data_size,size_t num);
     size_t write(std::string str);
 
     Sint64 seek(Sint64 offset, int whence);
