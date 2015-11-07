@@ -23,7 +23,6 @@
 
 /**
 *   @todo operators of LX_Vector2D :
-*   - '==' : same direction and same norm
 *   - '!=' : not same direction or (||) not same norm
 *   - '>' : same direction and first norm > second norm
 *   - '<' : same direction and first norm < second norm
@@ -66,6 +65,7 @@ typedef struct LX_Vector2D
 
 
 bool operator ==(LX_Vector2D& u,LX_Vector2D& v);
+bool operator !=(LX_Vector2D& u,LX_Vector2D& v);
 
 float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_product(LX_Vector2D& u,LX_Vector2D& v);
