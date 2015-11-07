@@ -60,11 +60,12 @@ typedef struct LX_Vector2D
     float vx;                     /**< The x position */
     float vy;                     /**< The y position */
 
-    LX_Vector2D& operator=(const LX_Vector2D v);
+    LX_Vector2D& operator =(const LX_Vector2D v);
 
 } LX_Vector2D;  /**< @brief The vector2D */
 
 
+bool operator ==(LX_Vector2D& u,LX_Vector2D& v);
 
 float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_product(LX_Vector2D& u,LX_Vector2D& v);

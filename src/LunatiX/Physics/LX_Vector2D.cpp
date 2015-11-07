@@ -47,6 +47,26 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 
 
 /**
+*   @fn LX_Vector2D& LX_Vector2D::operator ==(const LX_Vector2D v)
+*
+*   Assign a vector to another vector
+*
+*   @param u The first vector
+*   @param v The second vector
+*
+*   @return TRUE if they are equal, FALSE otherwise
+*
+*/
+bool operator ==(LX_Vector2D& u,LX_Vector2D& v)
+{
+    return (((u.vx >= 0 && v.vx >= 0) || (u.vx < 0 && v.vx < 0))
+            && ((u.vy >= 0 && v.vy >= 0) || (u.vy < 0 && v.vy < 0) ))
+            && (u.vx == v.vx && u.vy == v.vy);
+}
+
+
+
+/**
 *   @fn float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Calculate the scalar product of 2 vectors
