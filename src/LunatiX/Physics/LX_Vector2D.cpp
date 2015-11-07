@@ -135,7 +135,7 @@ LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v)
 
 
 /**
-*   @fn LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
+*   @fn LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Substraction betwwen two vectors -> 'u -= v' <=> 'u = u - v'
 *
