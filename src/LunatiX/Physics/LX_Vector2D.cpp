@@ -99,10 +99,55 @@ LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v)
 }
 
 
-
+/**
+*   @fn LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
+*
+*   Addition betwwen two vectors -> 'u += v' <=> 'u = u + v'
+*
+*   @param u The vector that will be modified
+*   @param v The second vector
+*
+*   @return The resulting vector
+*
+*/
 LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
 {
-    u = u +v;
+    u = u - v;
+    return u;
+}
+
+
+/**
+*   @fn LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v)
+*
+*   Substraction betwwen two vectors
+*
+*   @param u The first vector
+*   @param v The second vector
+*
+*   @return The resulting vector
+*
+*/
+LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v)
+{
+    return {u.vx - v.vx,u.vy - v.vy};
+}
+
+
+/**
+*   @fn LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
+*
+*   Substraction betwwen two vectors -> 'u -= v' <=> 'u = u - v'
+*
+*   @param u The vector that will be modified
+*   @param v The second vector
+*
+*   @return The resulting vector
+*
+*/
+LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
+{
+    u = u - v;
     return u;
 }
 
