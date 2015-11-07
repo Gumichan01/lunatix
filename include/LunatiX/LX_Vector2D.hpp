@@ -23,7 +23,6 @@
 
 /**
 *   @todo operators of LX_Vector2D :
-*   - Unary '-' : the opposite of the vector
 *   - '++' : vector's coordinates + 1
 *   - '--' : vector's coordinates - 1
 */
