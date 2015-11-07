@@ -66,15 +66,15 @@ typedef struct LX_Circle
 
 
 // Operators of points and circles
-bool operator ==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
-bool operator !=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b);
+bool operator ==(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b);
+bool operator !=(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b);
 
-bool operator ==(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
-bool operator !=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
-bool operator >(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
-bool operator <(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
-bool operator >=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
-bool operator <=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b);
+bool operator ==(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b);
+bool operator !=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b);
+bool operator >(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b);
+bool operator <(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b);
+bool operator >=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b);
+bool operator <=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b);
 
 
 #endif // HITBOX_H_INCLUDED

@@ -69,7 +69,7 @@ LX_Circle& LX_Circle::operator =(LX_Circle c)
 
 
 /**
-*   @fn bool operator==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+*   @fn bool operator==(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b)
 *
 *   Check If two points are identical
 *
@@ -80,14 +80,14 @@ LX_Circle& LX_Circle::operator =(LX_Circle c)
 *           FALSE otherwise
 *
 */
-bool operator ==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+bool operator ==(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b)
 {
     return a.x == b.x && a.y == b.y;
 }
 
 
 /**
-*   @fn bool operator !=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+*   @fn bool operator !=(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b)
 *
 *   Check If two points are dIfferent
 *
@@ -97,14 +97,14 @@ bool operator ==(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 *
 */
-bool operator !=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
+bool operator !=(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b)
 {
     return a.x != b.x || a.y != b.y;
 }
 
 
 /**
-*   @fn bool operator ==(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+*   @fn bool operator ==(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
@@ -114,7 +114,7 @@ bool operator !=(LX_Physics::LX_Point& a, LX_Physics::LX_Point& b)
 *   @return TRUE If these circles are idendital, FALSE otherwise
 *
 */
-bool operator ==(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+bool operator ==(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 {
     return a.center == b.center && a.radius == b.radius
            && a.square_radius == b.square_radius;
@@ -122,7 +122,7 @@ bool operator ==(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 
 
 /**
-*   @fn bool operator !=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+*   @fn bool operator !=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
@@ -132,7 +132,7 @@ bool operator ==(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 *   @return TRUE If these circles are idendital, FALSE otherwise
 *
 */
-bool operator !=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+bool operator !=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 {
     return a.center != b.center || a.radius != b.radius
            || a.square_radius != b.square_radius;
@@ -140,7 +140,7 @@ bool operator !=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 
 
 /**
-*   @fn bool operator >(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+*   @fn bool operator >(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 *
 *   Check If the first circle has a greater radius than the second one
 *
@@ -151,7 +151,7 @@ bool operator !=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 *           FALSE otherwise
 *
 */
-bool operator >(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+bool operator >(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 {
     return a.radius > b.radius && a.square_radius > b.square_radius;
 }
@@ -159,7 +159,7 @@ bool operator >(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 
 
 /**
-*   @fn bool operator <(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+*   @fn bool operator <(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 *
 *   Check If the first circle radius is smaller than the second one
 *
@@ -170,7 +170,7 @@ bool operator >(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 *           FALSE otherwise
 *
 */
-bool operator <(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+bool operator <(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 {
     return a.radius < b.radius && a.square_radius < b.square_radius;
 }
@@ -178,7 +178,7 @@ bool operator <(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 
 
 /**
-*   @fn bool operator >=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+*   @fn bool operator >=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 *
 *   Check If the first circle has a greater radius than the second one
 *   or if they have the same radius length
@@ -190,7 +190,7 @@ bool operator <(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 *           or if have the same radius length, FALSE otherwise
 *
 */
-bool operator >=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+bool operator >=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 {
     return a.radius >= b.radius && a.square_radius >= b.square_radius;
 }
@@ -198,7 +198,7 @@ bool operator >=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 
 
 /**
-*   @fn bool operator <=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+*   @fn bool operator <=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 *
 *   Check If the first circle radius is smaller than the second one
 *   or if they have the same radius length
@@ -210,7 +210,7 @@ bool operator >=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
 *           or if the two circles have the same radius length, FALSE otherwise
 *
 */
-bool operator <=(LX_Physics::LX_Circle& a, LX_Physics::LX_Circle& b)
+bool operator <=(const LX_Physics::LX_Circle& a, const LX_Physics::LX_Circle& b)
 {
     return a.radius <= b.radius && a.square_radius <= b.square_radius;
 }
