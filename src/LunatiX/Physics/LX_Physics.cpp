@@ -610,7 +610,7 @@ void moveRect(LX_AABB& rect, const int vx, const int vy)
 
 
 /**
-*   @fn void moveCircle(LX_Circle *C, const int vx, const int vy)
+*   @fn void moveCircle(LX_Circle& C, const int vx, const int vy)
 *
 *   Move the circle to a direction
 *
@@ -642,7 +642,7 @@ void movePoly(LX_Polygon& poly, const int vx, const int vy)
 
 
 /**
-*   @fn void movePoint(LX_Point *P, const LX_Vector2D& v)
+*   @fn void movePoint(LX_Point& P, const LX_Vector2D& v)
 *
 *   Move a point to a direction using the vector
 *
@@ -657,7 +657,7 @@ void movePoint(LX_Point& P, const LX_Vector2D& v)
 
 
 /**
-*   @fn void moveRect(LX_AABB *rect, const LX_Vector2D& v)
+*   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v)
 *
 *   Move an AABB to a direction using the vector
 *
@@ -751,7 +751,7 @@ void moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
 
 
 /**
-*   @fn void movePolyTo(LX_Polygon *poly, const int xpos, const int ypos)
+*   @fn void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 *
 *   Move a polygon to an absolute position
 *

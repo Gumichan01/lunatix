@@ -47,7 +47,7 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 
 
 /**
-*   @fn LX_Vector2D& LX_Vector2D::operator ==(const LX_Vector2D v)
+*   @fn bool operator ==(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Check if two vectors are equal
 *
@@ -66,7 +66,7 @@ bool operator ==(LX_Vector2D& u,LX_Vector2D& v)
 
 
 /**
-*   @fn LX_Vector2D& LX_Vector2D::operator !=(const LX_Vector2D v)
+*   @fn bool operator !=(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Check if two vectors are not equal
 *
