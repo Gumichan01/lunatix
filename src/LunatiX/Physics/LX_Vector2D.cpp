@@ -83,6 +83,32 @@ bool operator !=(LX_Vector2D& u,LX_Vector2D& v)
 
 
 /**
+*   @fn LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v)
+*
+*   Addition betwwen two vectors
+*
+*   @param u The first vector
+*   @param v The second vector
+*
+*   @return The resulting vector
+*
+*/
+LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v)
+{
+    return {u.vx + v.vx,u.vy + v.vy};
+}
+
+
+
+LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
+{
+    return u + v;
+}
+
+
+
+
+/**
 *   @fn float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Calculate the scalar product of 2 vectors

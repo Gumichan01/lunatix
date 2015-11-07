@@ -31,6 +31,7 @@
 *   - '++' : vector's coordinates + 1
 *   - '--' : vector's coordinates - 1
 *   - '+=' : 1st vector's coordinates + 2nd vector's coordinates
+*   - '-=' : 1st vector's coordinates + 2nd vector's coordinates
 */
 
 /**
@@ -64,6 +65,9 @@ typedef struct LX_Vector2D
 
 bool operator ==(LX_Vector2D& u,LX_Vector2D& v);
 bool operator !=(LX_Vector2D& u,LX_Vector2D& v);
+
+LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v);
+LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v);
 
 float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_product(LX_Vector2D& u,LX_Vector2D& v);
