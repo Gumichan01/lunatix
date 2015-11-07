@@ -47,7 +47,7 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 
 
 /**
-*   @fn bool operator ==(LX_Vector2D& u,LX_Vector2D& v)
+*   @fn bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
 *
 *   Check if two vectors are equal
 *
@@ -57,7 +57,7 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 *   @return TRUE if they are equal, FALSE otherwise
 *
 */
-bool operator ==(LX_Vector2D& u,LX_Vector2D& v)
+bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
 {
     return (((u.vx >= 0 && v.vx >= 0) || (u.vx < 0 && v.vx < 0))
             && ((u.vy >= 0 && v.vy >= 0) || (u.vy < 0 && v.vy < 0) ))
@@ -152,6 +152,20 @@ LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
 }
 
 
+/**
+*   @fn LX_Vector2D operator -(LX_Vector2D& u)
+*
+*   Get the opposite of the vector
+*
+*   @param u The vector
+*
+*   @return The opposite vector
+*
+*/
+LX_Vector2D operator -(LX_Vector2D& u)
+{
+    return {-u.vx,-u.vy};
+}
 
 
 /**
