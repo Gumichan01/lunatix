@@ -23,11 +23,8 @@
 
 /**
 *   @todo operators of LX_Vector2D :
-*   - '!=' : not same direction or (||) not same norm
-*   - '>' : same direction and first norm > second norm
-*   - '<' : same direction and first norm < second norm
-*   - '>=' : same direction and first norm >= second norm
-*   - '<=' : same direction and first norm <= second norm
+*   - '>' : first norm > second norm
+*   - '<' : first norm < second norm
 *   - '+' : addition of x and y between two vectors
 *   - '-' : substraction of x and y between two vectors
 *   - Unary '-' : the opposite of the vector
@@ -38,6 +35,7 @@
 
 /**
 *   @todo functions of LX_Vector2D :
+*   - bool collinear(LX_Vector2D&, LX_Vector2D&)
 *   - LX_Vector2D add(LX_Vector2D&, float)
 *   - LX_Vector2D sub(LX_Vector2D&, float)
 *   - LX_Vector2D multiply(LX_Vector2D&, float)
