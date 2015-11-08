@@ -33,7 +33,7 @@ void test_VectorPlusMinusOp(void);
 void test_VectorOpposite(void);
 void test_VectorIncDec(void);
 void test_VectorCollinear(void);
-//void test_VectorLambda(void);
+void test_VectorLambda(void);
 
 
 using namespace LX_Physics;
@@ -76,6 +76,7 @@ int main(int argc, char **argv)
     test_VectorOpposite();
     test_VectorIncDec();
     test_VectorCollinear();
+    test_VectorLambda();
 
     LX_Quit();
 
@@ -1261,7 +1262,36 @@ void test_VectorCollinear(void)
 }
 
 
+void test_VectorLambda(void)
+{
+    cout << " = TEST Vector scalar multiplication= " << endl;
 
+    float lambda1 = 2.0f;
+    float lambda2 = 0.0f;
+    LX_Vector2D v = {3.14,1.59};
+    LX_Vector2D w = {v.vx * lambda1,v.vy * lambda1};
+    LX_Vector2D t = {0.0f,0.0f};
+
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+
+    multiply(v,lambda1);
+
+    if(v == w)
+        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    else
+        cerr << "FAILURE - expected : v(" << w.vx << "," << w.vy << "); "
+             << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+
+    multiply(v,lambda2);
+
+    if(v == t)
+        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    else
+        cerr << "FAILURE - expected : v(" << t.vx << "," << t.vy << "); "
+             << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+
+    cout << " = END TEST = " << endl;
+}
 
 
 

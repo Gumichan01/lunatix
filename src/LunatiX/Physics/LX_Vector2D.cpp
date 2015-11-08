@@ -329,6 +329,23 @@ bool collinear(const LX_Vector2D& u,const LX_Vector2D& v)
 }
 
 
+/**
+*   @fn LX_Vector2D& multiply(LX_Vector2D& u, float lambda)
+*
+*   Scalar multiplication
+*
+*   @param u The vector
+*   @param lambda The scalar value
+*
+*   @return The new vector after the multiplication
+*
+*/
+LX_Vector2D& multiply(LX_Vector2D& u,float lambda)
+{
+    u = {lambda * u.vx,lambda * u.vy};
+    return u;
+}
+
 
 };
 
