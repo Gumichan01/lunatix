@@ -68,6 +68,9 @@ LX_Vector2D operator -(LX_Vector2D& u);
 LX_Vector2D& operator ++(LX_Vector2D& u);
 LX_Vector2D operator ++(LX_Vector2D& u,int d);
 
+LX_Vector2D& operator --(LX_Vector2D& u);
+LX_Vector2D operator --(LX_Vector2D& u,int d);
+
 float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_product(LX_Vector2D& u,LX_Vector2D& v);
 float vector_norm(LX_Vector2D& u);

@@ -29,6 +29,7 @@ void test_operator(void);
 
 void test_VectorPlusMinusOp(void);
 void test_VectorOpposite(void);
+void test_VectorIncDec(void);
 
 
 using namespace LX_Physics;
@@ -68,6 +69,7 @@ int main(int argc, char **argv)
     test_operator();
     test_VectorPlusMinusOp();
     test_VectorOpposite();
+    test_VectorIncDec();
 
     LX_Quit();
 
@@ -1085,7 +1087,7 @@ void test_VectorOpposite(void)
     cout << "INFO - -u;" << endl;
 
     if(expected_vec == (-u) )
-         cout << "SUCCESS - Vector2D -u(" << (-u).vx << "," << (-u).vy << ")"
+        cout << "SUCCESS - Vector2D -u(" << (-u).vx << "," << (-u).vy << ")"
              << " is exactly what the test case expected (" << expected_vec.vx
              << "," << expected_vec.vy << ")" << endl;
     else
@@ -1096,6 +1098,85 @@ void test_VectorOpposite(void)
     cout << " = END TEST = " << endl;
 }
 
+
+void test_VectorIncDec(void)
+{
+    cout << " = TEST Vector Increment and decrement = " << endl;
+
+    LX_Vector2D u = {1.41,-5.92};
+    LX_Vector2D v = u;
+    LX_Vector2D exp_inc_pre_vec = {u.vx + 1,u.vy + 1};
+    LX_Vector2D exp_inc_post_vec = {u.vx + 1,u.vy + 1};
+    LX_Vector2D exp_dec_pre_vec = {u.vx - 1,u.vy - 1};
+    LX_Vector2D exp_dec_post_vec = {u.vx - 1,u.vy - 1};
+
+    cout << "INFO - Increment" << endl;
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    cout << "INFO - ++u;" << endl;
+
+    ++u;
+
+    if(u == exp_inc_pre_vec)
+        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")"
+             << " is exactly what the test case expected (" << exp_inc_pre_vec.vx
+             << "," << exp_inc_pre_vec.vy << ")" << endl;
+    else
+        cerr << "FAILURE - expected: LX_Vector2D(" << exp_inc_pre_vec.vx
+             << "," << exp_inc_pre_vec.vy << "); "
+             << "got -u(" << u.vx << "," << u.vy << "); " << endl;
+
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    cout << "INFO - v++;" << endl;
+
+    v++;
+
+    if(v == exp_inc_post_vec)
+        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")"
+             << " is exactly what the test case expected ("
+             << exp_inc_post_vec.vx << "," << exp_inc_post_vec.vy
+             << ")" << endl;
+    else
+        cerr << "FAILURE - expected: LX_Vector2D("
+             << exp_inc_post_vec.vx
+             << "," << exp_inc_post_vec.vy << "); "
+             << "got v(" << v.vx << "," << v.vy << "); " << endl;
+
+    u = {1.41,-5.92};
+    v = u;
+
+    cout << "INFO - Decrement" << endl;
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    cout << "INFO - --u;" << endl;
+
+    --u;
+
+    if(u == exp_dec_pre_vec)
+        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")"
+             << " is exactly what the test case expected (" << exp_dec_pre_vec.vx
+             << "," << exp_dec_pre_vec.vy << ")" << endl;
+    else
+        cerr << "FAILURE - expected: LX_Vector2D(" << exp_dec_pre_vec.vx
+             << "," << exp_dec_pre_vec.vy << "); "
+             << "got -u(" << u.vx << "," << u.vy << "); " << endl;
+
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    cout << "INFO - v--;" << endl;
+
+    v--;
+
+    if(v == exp_dec_post_vec)
+        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")"
+             << " is exactly what the test case expected ("
+             << exp_dec_post_vec.vx << "," << exp_dec_post_vec.vy
+             << ")" << endl;
+    else
+        cerr << "FAILURE - expected: LX_Vector2D("
+             << exp_dec_post_vec.vx
+             << "," << exp_dec_post_vec.vy << "); "
+             << "got v(" << v.vx << "," << v.vy << "); " << endl;
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
