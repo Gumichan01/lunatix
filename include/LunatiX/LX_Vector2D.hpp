@@ -24,7 +24,6 @@
 
 /**
 *   @todo functions of LX_Vector2D :
-*   - bool collinear(LX_Vector2D&, LX_Vector2D&)
 *   - LX_Vector2D add(LX_Vector2D&, float)
 *   - LX_Vector2D sub(LX_Vector2D&, float)
 *   - LX_Vector2D multiply(LX_Vector2D&, float)
@@ -71,7 +70,9 @@ float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v);
 float vector_product(const LX_Vector2D& u,const LX_Vector2D& v);
 float vector_norm(const LX_Vector2D& u);
 
-bool isZeroVector(LX_Vector2D& u);
+bool isZeroVector(const LX_Vector2D& u);
+bool collinear(const LX_Vector2D& u,const LX_Vector2D& v);
+
 
 };
 

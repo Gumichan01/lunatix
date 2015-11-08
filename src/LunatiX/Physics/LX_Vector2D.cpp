@@ -303,7 +303,7 @@ float vector_norm(const LX_Vector2D& u)
 *
 *   @param u The vector
 *
-*   @return True if the vector has coordinates equal to 0, FALSE otherwise
+*   @return True if the vector has coordinates equal to 0, False otherwise
 *
 */
 bool isZeroVector(const LX_Vector2D& u)
@@ -312,7 +312,27 @@ bool isZeroVector(const LX_Vector2D& u)
 }
 
 
+/**
+*   @fn bool collinear(const LX_Vector2D& u,const LX_Vector2D& v)
+*
+*   Check if two vectors are colinear
+*
+*   @param u The first vector
+*   @param v The second vector
+*
+*   @return True if they are colinear, False otherwise
+*
+*/
+bool collinear(const LX_Vector2D& u,const LX_Vector2D& v)
+{
+    return vector_product(u,v) == 0.0f;
+}
+
+
+
 };
+
+
 
 
 
