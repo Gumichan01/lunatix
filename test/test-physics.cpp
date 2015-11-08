@@ -1,3 +1,5 @@
+
+
 #include <cmath>
 #include <iostream>
 
@@ -30,6 +32,8 @@ void test_operator(void);
 void test_VectorPlusMinusOp(void);
 void test_VectorOpposite(void);
 void test_VectorIncDec(void);
+void test_VectorCollinear(void);
+//void test_VectorLambda(void);
 
 
 using namespace LX_Physics;
@@ -67,9 +71,11 @@ int main(int argc, char **argv)
     test_move();
     test_assignment();
     test_operator();
+
     test_VectorPlusMinusOp();
     test_VectorOpposite();
     test_VectorIncDec();
+    test_VectorCollinear();
 
     LX_Quit();
 
@@ -96,14 +102,14 @@ void test_euclide(void)
     d = euclide_square_distance(A,B);
 
     if(d != 81)
-        cerr << "FAILURE - Bad square distance AB - expected : 81; got : " << d << endl;
+        cerr << "FAILURE - Bad square distance AB - expected : 81;Got : " << d << endl;
     else
         cout << "SUCCESS - Good square distance AB : " << d << endl;
 
     d = euclide_distance(A,B);
 
     if(d != 9)
-        cerr << "FAILURE - Bad distance AB - expected : 9; got : " << d << endl;
+        cerr << "FAILURE - Bad distance AB - expected : 9;Got : " << d << endl;
     else
         cout << "SUCCESS - Good distance AB : " << d << endl;
 
@@ -112,14 +118,14 @@ void test_euclide(void)
     d = euclide_square_distance(C,D);
 
     if(d != 200)
-        cerr << "FAILURE - Bad square distance CD - expected : 200; got : " << d << endl;
+        cerr << "FAILURE - Bad square distance CD - expected : 200;Got : " << d << endl;
     else
         cout << "SUCCESS - Good square distance CD : " << d << endl;
 
     d = euclide_distance(C,D);
 
     if(d != ( (int) sqrt(200)) )
-        cerr << "FAILURE - Bad distance CD - expected : " << (int) sqrt(200) << "; got : " << d << endl;
+        cerr << "FAILURE - Bad distance CD - expected : " << (int) sqrt(200) << ";Got : " << d << endl;
     else
         cout << "SUCCESS - Good distance CD : " << d << endl;
 
@@ -147,28 +153,28 @@ void test_collisionPointCircle(void)
     d = collisionPointCircle(A.x,A.y,c);
 
     if(d != true)
-        cerr << "FAILURE - expected : TRUE ; got : " << d << endl;
+        cerr << "FAILURE - expected : TRUE ;Got : " << d << endl;
     else
         cout << "SUCCESS - collision, the point is the center : " << d << endl;
 
     d = collisionPointCircle(B.x,B.y,c);
 
     if(d != false)
-        cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
+        cerr << "FAILURE - expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
     d = collisionPointCircle(C,c);
 
     if(d != true)
-        cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision point is in the circle" << endl;
 
     d = collisionPointCircle(D,c);
 
     if(d != false)
-        cerr << "FAILURE - expected : FALSE ; got : TRUE" << endl;
+        cerr << "FAILURE - expected : FALSE ;Got : TRUE" << endl;
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
@@ -190,14 +196,14 @@ void test_collisionPointRect(void)
     d = collisionPointRect(A.x,A.y,aabb);
 
     if(d != false)
-        cerr << "FAILURE - expected : FALSE; got : TRUE" << endl;
+        cerr << "FAILURE - expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - point out of the rect " << endl;
 
     d = collisionPointRect(B.x,B.y,aabb);
 
     if(d != true)
-        cerr << "FAILURE - expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - point into the rect " << endl;
 
@@ -218,7 +224,7 @@ void test_collision2Circle(void)
     d = collisionCircle(A,B);
 
     if(d != true)
-        cerr << "FAILURE - collisoon A/B expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - collisoon A/B expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision between two circles A and B " << endl;
 
@@ -226,7 +232,7 @@ void test_collision2Circle(void)
     d = collisionCircle(C,B);
 
     if(d != false)
-        cerr << "FAILURE - collisoon C/B expected : FALSE; got : TRUE" << endl;
+        cerr << "FAILURE - collisoon C/B expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - no collision between two circles C and B " << endl;
 
@@ -248,7 +254,7 @@ void test_collision2Rect(void)
     d = collisionRect(R1,R2);
 
     if(d != true)
-        cerr << "FAILURE - collisoon R1/R2 expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - collisoon R1/R2 expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision R1/R2 OK " << endl;
 
@@ -256,7 +262,7 @@ void test_collision2Rect(void)
     d = collisionRect(R2,R3);
 
     if(d != true)
-        cerr << "FAILURE - collisoon R2/R3 expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - collisoon R2/R3 expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision R2/R3 OK " << endl;
 
@@ -264,7 +270,7 @@ void test_collision2Rect(void)
     d = collisionRect(R3,R1);
 
     if(d != false)
-        cerr << "FAILURE - collisoon R3/R1 expected : FALSE; got : TRUE" << endl;
+        cerr << "FAILURE - collisoon R3/R1 expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - no collision R3/R1 OK " << endl;
 
@@ -288,7 +294,7 @@ void test_collisionRectCircle(void)
     d = collisionCircleRect(A,R1);
 
     if(d != true)
-        cerr << "FAILURE - collisoon A/R2 expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - collisoon A/R2 expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision A/R2 OK " << endl;
 
@@ -296,14 +302,14 @@ void test_collisionRectCircle(void)
     d = collisionCircleRect(B,R1);
 
     if(d != true)
-        cerr << "FAILURE - collisoon B/R2 expected : TRUE; got : FALSE" << endl;
+        cerr << "FAILURE - collisoon B/R2 expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision B/R2 OK " << endl;
 
     d = collisionCircleRect(C,R1);
 
     if(d != false)
-        cerr << "FAILURE - collisoon C/R1 expected : FALSE; got : TRUE" << endl;
+        cerr << "FAILURE - collisoon C/R1 expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - no collision C/R1 OK " << endl;
 
@@ -328,7 +334,7 @@ void testPolygon(void)
     d = poly.numberOfRealEdges();
 
     if(d != 3)
-        cerr << "FAILURE - number of real edges expected : 3; got : " << d << endl;
+        cerr << "FAILURE - number of real edges expected : 3;Got : " << d << endl;
     else
         cout << "SUCCESS - number of real edges : " << d << endl;
 
@@ -336,7 +342,7 @@ void testPolygon(void)
     d = poly.numberOfEdges();
 
     if(d != 5)
-        cerr << "FAILURE - total number of edges expected : 5; got : " << d << endl;
+        cerr << "FAILURE - total number of edges expected : 5;Got : " << d << endl;
     else
         cout << "SUCCESS - total number of edges : " << d << endl;
 
@@ -344,12 +350,12 @@ void testPolygon(void)
     p = poly.getPoint(0);
 
     if(p.x != 10)
-        cerr << "FAILURE - x position expected : 10 ; got : " << p.x << endl;
+        cerr << "FAILURE - x position expected : 10 ;Got : " << p.x << endl;
     else
         cout << "SUCCESS - x = 10" << endl;
 
     if(p.y != 5)
-        cerr << "FAILURE - y position expected : 5 ; got : " << p.y << endl;
+        cerr << "FAILURE - y position expected : 5 ;Got : " << p.y << endl;
     else
         cout << "SUCCESS - y = 5" << endl;
 
@@ -365,7 +371,7 @@ void testPolygon(void)
 
     // It must be convex
     if(poly.isConvex() == false)
-        cerr << "FAILURE - Expected : convex; got: non-convex " << endl;
+        cerr << "FAILURE - Expected : convex;Got: non-convex " << endl;
     else
         cout << "SUCCESS - Added (7,2). This is still a convex polygon, well done !" << endl;
 
@@ -374,7 +380,7 @@ void testPolygon(void)
 
     // It must be non-convex
     if(poly.isConvex() == true)
-        cerr << "FAILURE - Expected : non-convex; got: convex " << endl;
+        cerr << "FAILURE - Expected : non-convex;Got: convex " << endl;
     else
         cout << "SUCCESS - Added (6,3). This is not a convex polygon" << endl;
 
@@ -397,14 +403,14 @@ void test_Vector2D(void)
     d = scalar_product(v,u);
 
     if(d != 0)
-        cerr << "FAILURE - scalar product v(1,2).u(2,-1) expected: 0 ; got: " << d << endl;
+        cerr << "FAILURE - scalar product v(1,2).u(2,-1) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - scalar product v(1,2).u(2,-1) = 0" << endl;
 
     d = scalar_product(z,z);
 
     if(d != 0)
-        cerr << "FAILURE - scalar product z.z (z is a null vector) expected: 0 ; got: " << d << endl;
+        cerr << "FAILURE - scalar product z.z (z is a null vector) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - scalar product z.z = 0" << endl;
 
@@ -412,7 +418,7 @@ void test_Vector2D(void)
     d = vector_norm(z);
 
     if(d != 0)
-        cerr << "FAILURE - norm of z (z is a null vector) expected: 0 ; got: " << d << endl;
+        cerr << "FAILURE - norm of z (z is a null vector) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - norm of z = 0" << endl;
 
@@ -420,7 +426,7 @@ void test_Vector2D(void)
     d = vector_norm(v);
 
     if(d != ((int) sqrt(5)) )
-        cerr << "FAILURE - norm of v expected: "<< ((int) sqrt(5)) <<" ; got: " << d << endl;
+        cerr << "FAILURE - norm of v expected: "<< ((int) sqrt(5)) <<" ;Got: " << d << endl;
     else
         cout << "SUCCESS - norm of v = 0" << endl;
 
@@ -428,7 +434,7 @@ void test_Vector2D(void)
     d = vector_product(v,u);
 
     if(d != -5)
-        cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -3 ; got: " << d << endl;
+        cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -3 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product v(1,2).u(2,-1) = -3" << endl;
 
@@ -436,7 +442,7 @@ void test_Vector2D(void)
     d = vector_product(u,v);
 
     if(d != 5)
-        cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 3 ; got: " << d << endl;
+        cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 3 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product u(2,-1).v(1,2) = 3" << endl;
 
@@ -444,7 +450,7 @@ void test_Vector2D(void)
     d = vector_product(z,z);
 
     if(d != 0)
-        cerr << "FAILURE - vector product z.z (z is a null vector) expected: 0 ; got: " << d << endl;
+        cerr << "FAILURE - vector product z.z (z is a null vector) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product z.z = 0" << endl;
 
@@ -480,7 +486,7 @@ void test_collisionSeg(void)
     d = intersectSegment(A,B,C,D);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AB]/[CD] expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - intersect [AB]/[CD] expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - intersect [AB]/[CD] OK" << endl;
 
@@ -488,7 +494,7 @@ void test_collisionSeg(void)
     d = intersectSegment(A,C,B,D);
 
     if(d != false)
-        cerr << "FAILURE - intersect [AC]/[BD] expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - intersect [AC]/[BD] expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - no intersect [AC]/[BD] OK" << endl;
 
@@ -496,7 +502,7 @@ void test_collisionSeg(void)
     d = intersectSegment(A,B,A,D);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AB]/[AD] expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - intersect [AB]/[AD] expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - intersect [AB]/[AD] OK" << endl;
 
@@ -504,7 +510,7 @@ void test_collisionSeg(void)
     d = intersectSegment(A,D,A,E);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AD]/[AE] expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - intersect [AD]/[AE] expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - intersect [AD]/[AE] OK" << endl;
 
@@ -512,7 +518,7 @@ void test_collisionSeg(void)
     d = intersectSegment(A,D,F,E);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AD]/[FE] expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - intersect [AD]/[FE] expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - no intersect [AD]/[FE] OK" << endl;
 
@@ -548,21 +554,21 @@ void test_collisionPointPolygon(void)
     d = collisionPointPoly(N,poly);
 
     if(d != false)
-        cerr << "FAILURE - N in the polygon. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - N in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - N not in the polygon OK" << endl;
 
     d = collisionPointPoly(O,poly);
 
     if(d != true)
-        cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - O not in the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
     d = collisionPointPoly(P,poly);
 
     if(d != true)
-        cerr << "FAILURE - P not in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - P not in the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - P in the polygon OK" << endl;
 
@@ -570,7 +576,7 @@ void test_collisionPointPolygon(void)
     d = collisionPointPoly(Q,poly);
 
     if(d != true)
-        cerr << "FAILURE - Q not in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - Q not in the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - Q in the polygon OK" << endl;
 
@@ -578,7 +584,7 @@ void test_collisionPointPolygon(void)
     d = collisionPointPoly(R,poly);
 
     if(d != false)
-        cerr << "FAILURE - R in the polygon. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - R in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - R not in the polygon OK" << endl;
 
@@ -586,7 +592,7 @@ void test_collisionPointPolygon(void)
     d = collisionPointPoly(S,poly);
 
     if(d != false)
-        cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - S in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - S not in the polygon OK" << endl;
 
@@ -614,7 +620,7 @@ void test_collisionCirclePolygon(void)
     d = collisionCirclePoly(M,poly);
 
     if(d != false)
-        cerr << "FAILURE - M in the polygon. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - M in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - M not in the polygon OK" << endl;
 
@@ -622,7 +628,7 @@ void test_collisionCirclePolygon(void)
     d = collisionCirclePoly(S,poly);
 
     if(d != false)
-        cerr << "FAILURE - S in the polygon. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - S in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - S not in the polygon OK" << endl;
 
@@ -630,7 +636,7 @@ void test_collisionCirclePolygon(void)
     d = collisionCirclePoly(N,poly);
 
     if(d != true)
-        cerr << "FAILURE - N not in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - N not in the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - N in the polygon OK" << endl;
 
@@ -638,7 +644,7 @@ void test_collisionCirclePolygon(void)
     d = collisionCirclePoly(O,poly);
 
     if(d != true)
-        cerr << "FAILURE - O not in the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - O not in the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
@@ -671,7 +677,7 @@ void test_collisionRectPolygon(void)
     d = collisionRectPoly(R1,poly);
 
     if(d != false)
-        cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - R1 not in the polygon OK" << endl;
 
@@ -679,7 +685,7 @@ void test_collisionRectPolygon(void)
     d = collisionRectPoly(R2,poly);
 
     if(d != true)
-        cerr << "FAILURE - test R2 touch the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - test R2 touch the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - R2 touch the polygon OK" << endl;
 
@@ -688,7 +694,7 @@ void test_collisionRectPolygon(void)
     d = collisionRectPoly(R3,poly);
 
     if(d != true)
-        cerr << "FAILURE - test R3 touch the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - test R3 touch the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - R3 touch the polygon OK" << endl;
 
@@ -697,7 +703,7 @@ void test_collisionRectPolygon(void)
     d = collisionRectPoly(R4,poly);
 
     if(d != true)
-        cerr << "FAILURE - test R4 into the polygon. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - test R4 into the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - R4 into the polygon OK" << endl;
 
@@ -706,7 +712,7 @@ void test_collisionRectPolygon(void)
     d = collisionRectPoly(R5,poly);
 
     if(d != true)
-        cerr << "FAILURE - test polygon into R5. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - test polygon into R5. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - polygon into R5 OK" << endl;
 
@@ -748,7 +754,7 @@ void test_collision2Polygon(void)
     d = collisionPoly(poly,poly2);
 
     if(d != true)
-        cerr << "FAILURE - no collision poly/poly2. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - no collision poly/poly2. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - collision poly/poly2" << endl;
 
@@ -756,7 +762,7 @@ void test_collision2Polygon(void)
     d = collisionPoly(poly,poly3);
 
     if(d != true)
-        cerr << "FAILURE - no collision poly/poly3. expected: TRUE ; got: FALSE" << endl;
+        cerr << "FAILURE - no collision poly/poly3. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - collision poly/poly3 OK" << endl;
 
@@ -764,7 +770,7 @@ void test_collision2Polygon(void)
     d = collisionPoly(poly,poly4);
 
     if(d != false)
-        cerr << "FAILURE - collision poly/poly4. expected: FALSE ; got: TRUE" << endl;
+        cerr << "FAILURE - collision poly/poly4. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - no collision poly/poly4 OK" << endl;
 
@@ -792,7 +798,7 @@ void test_move(void)
         cout << "SUCCESS - Point P(" << P.x << "," << P.y << ")" << endl;
     else
         cout << "FAILURE - expected : Point P(2,3)"
-             << "got : (" << P.x << "," << P.y << ")" << endl;
+             << "Got : (" << P.x << "," << P.y << ")" << endl;
 
 
     cout << "INFO - Rectangle" << endl;
@@ -805,7 +811,7 @@ void test_move(void)
              << R.w << "," << R.h << ")" << endl;
     else
         cout << "FAILURE - expected : Rectangle R(3,6,10,10)"
-             << "got : (" << R.x << "," << R.y << ","
+             << "Got : (" << R.x << "," << R.y << ","
              << R.w << "," << R.h << ")" << endl;
 
 
@@ -827,8 +833,8 @@ void test_assignment(void)
     if(Q == P)
         cout << "SUCCESS - Point Q(" << Q.x << "," << Q.y << ")" << endl;
     else
-        cerr << "FAILURE - expected : Point Q(1,2)"
-             << "got : Q(" << Q.x << "," << Q.y << ")" << endl;
+        cerr << "FAILURE - expected : Point Q(1,2); "
+             << "Got : Q(" << Q.x << "," << Q.y << ")" << endl;
 
 
     LX_Circle C = {{4,9},10,100};
@@ -845,8 +851,8 @@ void test_assignment(void)
              << ") radius : " << C.radius << "; square radius : " << C.square_radius
              << endl;
     else
-        cerr << "FAILURE - expected : Circle D{{4,9},10,100}"
-             << "got : Circle D : Center(" << D.center.x << "," << D.center.y
+        cerr << "FAILURE - expected : Circle D{{4,9},10,100}; "
+             << "Got : Circle D : Center(" << D.center.x << "," << D.center.y
              << ") radius : " << D.radius << "; square radius : " << D.square_radius
              << endl;
 
@@ -861,8 +867,8 @@ void test_assignment(void)
     if(u == v)
         cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
     else
-        cerr << "FAILURE - expected : Vector2D u(3.14,1.59)"
-             << "got : u(" << u.vx << "," << u.vy << ")" << endl;
+        cerr << "FAILURE - expected : Vector2D u(3.14,1.59); "
+             << "Got : u(" << u.vx << "," << u.vy << ")" << endl;
 
     cout << " = END TEST = " << endl;
 }
@@ -950,12 +956,12 @@ void test_operator(void)
     if(u == v)
         cout << "SUCCESS - u and v are equals" << endl;
     else
-        cerr << "FAILURE - expected: u and v equals; got :"
+        cerr << "FAILURE - expected: u and v equals;Got :"
              << "Vector2D u(" << u.vx << "," << u.vy << "); "
              << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
 
     if(v == w)
-        cerr << "FAILURE - expected: v and w are not equals; got :"
+        cerr << "FAILURE - expected: v and w are not equals;Got :"
              << "Vector2D v(" << v.vx << "," << v.vy << ")"
              << "Vector2D w(" << w.vx << "," << w.vy << "); " << endl;
     else
@@ -964,7 +970,7 @@ void test_operator(void)
     if(v != i)
         cout << "SUCCESS - v and i are not equals" << endl;
     else
-        cerr << "FAILURE - expected: v and i are not equals; got :"
+        cerr << "FAILURE - expected: v and i are not equals;Got :"
              << "Vector2D v(" << v.vx << "," << v.vy << ")"
              << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
 
@@ -972,7 +978,7 @@ void test_operator(void)
         cout << "SUCCESS - j and i are not equals" << endl;
 
     else
-        cerr << "FAILURE - expected: j and i are not equals; got :"
+        cerr << "FAILURE - expected: j and i are not equals;Got :"
              << "Vector2D j(" << j.vx << "," << j.vy << ")"
              << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
 
@@ -1018,7 +1024,7 @@ void test_VectorPlusMinusOp(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << exp_sum_vec.vx
              << "," << exp_sum_vec.vy << "); "
-             << "got w(" << w.vx << "," << w.vy << "); " << endl;
+             << "Got w(" << w.vx << "," << w.vy << "); " << endl;
 
     cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
     cout << "INFO - Vector2D z(" << z.vx << "," << z.vy << ")" << endl;
@@ -1035,7 +1041,7 @@ void test_VectorPlusMinusOp(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << exp_add_vec.vx
              << "," << exp_add_vec.vy << "); "
-             << "got u(" << u.vx << "," << u.vy << "); " << endl;
+             << "Got u(" << u.vx << "," << u.vy << "); " << endl;
 
 
     cout << "INFO - Vector2D a(" << a.vx << "," << a.vy << ")" << endl;
@@ -1053,7 +1059,7 @@ void test_VectorPlusMinusOp(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << exp_diff_vec.vx
              << "," << exp_diff_vec.vy << "); "
-             << "got d(" << d.vx << "," << d.vy << "); " << endl;
+             << "Got d(" << d.vx << "," << d.vy << "); " << endl;
 
 
     cout << "INFO - Vector2D a(" << a.vx << "," << a.vy << ")" << endl;
@@ -1069,7 +1075,7 @@ void test_VectorPlusMinusOp(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << exp_sub_vec.vx
              << "," << exp_sub_vec.vy << "); "
-             << "got a(" << a.vx << "," << a.vy << "); " << endl;
+             << "Got a(" << a.vx << "," << a.vy << "); " << endl;
 
 
     cout << " = END TEST = " << endl;
@@ -1093,7 +1099,7 @@ void test_VectorOpposite(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << expected_vec.vx
              << "," << expected_vec.vy << "); "
-             << "got -u(" << (-u).vx << "," << (-u).vy << "); " << endl;
+             << "Got -u(" << (-u).vx << "," << (-u).vy << "); " << endl;
 
     cout << " = END TEST = " << endl;
 }
@@ -1123,7 +1129,7 @@ void test_VectorIncDec(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << exp_inc_pre_vec.vx
              << "," << exp_inc_pre_vec.vy << "); "
-             << "got -u(" << u.vx << "," << u.vy << "); " << endl;
+             << "Got -u(" << u.vx << "," << u.vy << "); " << endl;
 
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
     cout << "INFO - v++;" << endl;
@@ -1139,7 +1145,7 @@ void test_VectorIncDec(void)
         cerr << "FAILURE - expected: LX_Vector2D("
              << exp_inc_post_vec.vx
              << "," << exp_inc_post_vec.vy << "); "
-             << "got v(" << v.vx << "," << v.vy << "); " << endl;
+             << "Got v(" << v.vx << "," << v.vy << "); " << endl;
 
     u = {1.41,-5.92};
     v = u;
@@ -1157,7 +1163,7 @@ void test_VectorIncDec(void)
     else
         cerr << "FAILURE - expected: LX_Vector2D(" << exp_dec_pre_vec.vx
              << "," << exp_dec_pre_vec.vy << "); "
-             << "got -u(" << u.vx << "," << u.vy << "); " << endl;
+             << "Got -u(" << u.vx << "," << u.vy << "); " << endl;
 
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
     cout << "INFO - v--;" << endl;
@@ -1173,13 +1179,86 @@ void test_VectorIncDec(void)
         cerr << "FAILURE - expected: LX_Vector2D("
              << exp_dec_post_vec.vx
              << "," << exp_dec_post_vec.vy << "); "
-             << "got v(" << v.vx << "," << v.vy << "); " << endl;
+             << "Got v(" << v.vx << "," << v.vy << "); " << endl;
 
     cout << " = END TEST = " << endl;
 }
 
 
+void test_VectorCollinear(void)
+{
+    cout << " = TEST Vector collinearity = " << endl;
 
+    LX_Vector2D u = {1.41,-2.48};
+    LX_Vector2D v = {u.vx *2,u.vy *2};
+    LX_Vector2D w = u;
+    LX_Vector2D o = {0.0,0.0};
+    LX_Vector2D t = {2.01,4.12};
+
+    cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    cout << "INFO - Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
+    cout << "INFO - Vector2D o(" << o.vx << "," << o.vy << ")" << endl;
+    cout << "INFO - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
+
+    cout << "INFO - test: zero vector" << endl;
+
+    if(isZeroVector(o))
+        cout << "SUCCESS - o is a zero vector: o("
+             << o.vx << "," << o.vy << "); " << endl;
+    else
+        cerr << "FAILURE - expected: o must be a zero vector: Got o("
+             << o.vx << "," << o.vy << "); " << endl;
+
+    if(!isZeroVector(t))
+        cout << "SUCCESS - t is not a zero vector: t("
+             << t.vx << "," << t.vy << "); " << endl;
+    else
+        cerr << "FAILURE - expected: t must not be zero vector; Got t("
+             << t.vx << "," << t.vy << "); " << endl;
+
+    cout << "INFO - test: collinearity between u and v" << endl;
+
+    if(collinear(u,v))
+        cout << "SUCCESS - u and v are colinear" << endl;
+    else
+        cerr << "FAILURE -  expected: u and v must be colinear; "
+             << "Got False : u(" << u.vx << "," << u.vy << "); "
+             << "v(" << v.vx << "," << v.vy << "); " << endl;
+
+
+    cout << "INFO - test: collinearity between u and w" << endl;
+
+    if(collinear(u,w))
+        cout << "SUCCESS - u and w are colinear" << endl;
+    else
+        cerr << "FAILURE -  expected: u and w must be colinear; "
+             << "Got False : u(" << u.vx << "," << u.vy << "); "
+             << "w(" << w.vx << "," << w.vy << "); " << endl;
+
+
+    cout << "INFO - test: collinearity between u and o" << endl;
+
+    if(collinear(u,o))
+        cout << "SUCCESS - u and o are colinear" << endl;
+    else
+        cerr << "FAILURE -  expected: u and o must be colinear; "
+             << "Got False : u(" << u.vx << "," << u.vy << "); "
+             << "o(" << o.vx << "," << o.vy << "); " << endl;
+
+
+    cout << "INFO - test: collinearity between u and t" << endl;
+
+    if(!collinear(u,t))
+        cout << "SUCCESS - u and t are not colinear" << endl;
+    else
+        cerr << "FAILURE -  expected: u and t must not be colinear; "
+             << "Got True : u(" << u.vx << "," << u.vy << "); "
+             << "t(" << t.vx << "," << t.vy << "); " << endl;
+
+
+    cout << " = END TEST = " << endl;
+}
 
 
 
