@@ -1,6 +1,6 @@
 # LunatiX Engine #
 
-LunatiX Engine is a SDL2-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
+LunatiX Engine is an SDL2-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
 
 It contains these following libraries:
 - LX\_Graphics : A 2D library based on SDL_Image 2.0 (supporting JPEG, PNG, GIF, ...)
@@ -64,7 +64,7 @@ These two libraries can be used in any program
 To test the engine, execute the following command:  
  *$./test/test.sh*
 
-You need to be on the root directory of the source code to launch the script.  
+You need to be in the root directory of the source code to launch the script.  
 Otherwise, the script will not work.
 
 To use the engine into your project, you need to copy these following directories  
@@ -74,12 +74,8 @@ into your project tree :
  - *lib/*
  - *script/*
 
-It is very important to keep the engine hierarchy. If you do not respect that  
+It is very important to keep the engine hierarchy. If you do not respect that,  
 the engine will not work correctly.
-
-After that, create a directory with a name like *LunatiX/* into the *include/*  
-directory of your project tree and copy all the .hpp files of the engine  
-in *include/LunatiX/*.
 
 Finally, copy the shared libraries in *lib/linux*.
 
@@ -87,7 +83,7 @@ Finally, copy the shared libraries in *lib/linux*.
 #### On Windows ####
 
 Download the [development library (v0.6.1)] (http://gumichan01.olympe.in/download/dev-luna-win32.zip)  
-Now you can use it in your project.
+It includes the library files and all necessary materials to develop any project.  
 
 Warning : The static or shared libraries are not completely installed on the system.
  So you need to do that manually.
