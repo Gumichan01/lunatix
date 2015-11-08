@@ -30,7 +30,6 @@
 *   - LX_Vector2D multiply(LX_Vector2D&, float)
 *   - LX_Vector2D divide(LX_Vector2D&, float)
 *   - LX_Vector2D normalize(LX_Vector2D&)
-*   - bool isZeroVector(LX_Vector2D&)
 */
 
 namespace LX_Physics{
