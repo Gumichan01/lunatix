@@ -296,5 +296,25 @@ float vector_norm(const LX_Vector2D& u)
 }
 
 
+/**
+*   @fn bool isZeroVector(LX_Vector2D& u)
+*
+*   Check if the vector is a zero vector
+*
+*   @param u The vector
+*
+*   @return True if the vector has coordinates equal to 0, FALSE otherwise
+*
+*/
+bool isZeroVector(LX_Vector2D& u)
+{
+    return u.vx == 0 && u.vy ==0;
+}
+
+
 };
+
+
+
+
 
