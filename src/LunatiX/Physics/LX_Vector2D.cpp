@@ -169,6 +169,46 @@ LX_Vector2D operator -(LX_Vector2D& u)
 
 
 /**
+*   @fn LX_Vector2D& operator ++(LX_Vector2D& u)
+*
+*   Prefix increment
+*
+*   @param u The vector
+*
+*   @return The incremented vector
+*
+*/
+LX_Vector2D& operator ++(LX_Vector2D& u)
+{
+    u.vx += 1;
+    u.vy += 1;
+
+    return u;
+}
+
+
+/**
+*   @fn LX_Vector2D operator ++(LX_Vector2D& u,int d)
+*
+*   Postfix increment
+*
+*   @param u The vector
+*   @param d dummy parameter (not used)
+*
+*   @return The vector before the incrementation
+*
+*/
+LX_Vector2D operator ++(LX_Vector2D& u,int d)
+{
+    LX_Vector2D t = u;
+    ++u;
+
+    return t;
+}
+
+
+
+/**
 *   @fn float scalar_product(LX_Vector2D& u,LX_Vector2D& v)
 *
 *   Calculate the scalar product of 2 vectors
