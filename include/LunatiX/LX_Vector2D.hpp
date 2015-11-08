@@ -21,10 +21,6 @@
 *
 */
 
-/**
-*   @todo operators of LX_Vector2D :
-*   - '-\-' : vector's coordinates - 1
-*/
 
 /**
 *   @todo functions of LX_Vector2D :
@@ -56,7 +52,7 @@ typedef struct LX_Vector2D
 
 
 bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v);
-bool operator !=(LX_Vector2D& u,LX_Vector2D& v);
+bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 
 LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v);
 LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v);
@@ -71,9 +67,9 @@ LX_Vector2D operator ++(LX_Vector2D& u,int d);
 LX_Vector2D& operator --(LX_Vector2D& u);
 LX_Vector2D operator --(LX_Vector2D& u,int d);
 
-float scalar_product(LX_Vector2D& u,LX_Vector2D& v);
-float vector_product(LX_Vector2D& u,LX_Vector2D& v);
-float vector_norm(LX_Vector2D& u);
+float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v);
+float vector_product(const LX_Vector2D& u,const LX_Vector2D& v);
+float vector_norm(const LX_Vector2D& u);
 
 };
 
