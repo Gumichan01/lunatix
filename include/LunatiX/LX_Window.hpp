@@ -61,10 +61,11 @@ class LX_WindowException : public std::exception
 public :
 
     LX_WindowException(std::string err);
+    LX_WindowException(const LX_WindowException& w);
 
-    const char * what() const throw();
+    const char * what() const noexcept;
 
-    ~LX_WindowException() throw();
+    ~LX_WindowException() noexcept;
 };
 
 

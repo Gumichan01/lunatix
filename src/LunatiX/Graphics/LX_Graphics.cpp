@@ -163,7 +163,7 @@ SDL_Surface * optimizeSurface(SDL_Surface * surface)
 /**
 *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 *
-*   Loads create a texture from a surface using the renderer of the window
+*   Load a texture from a surface using the renderer of the window
 *
 *   @param target The surface to create the texture from
 *   @param w The window context
@@ -181,9 +181,9 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 
 
 /**
-*   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
+*   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 *
-*   Loads create a texture from a surface using the renderer of the window
+*   Load a texture from a surface using the renderer of the window
 *   specified by its ID
 *
 *   @param target The surface to create the texture from
@@ -194,12 +194,9 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 *
 *   @sa loadTextureFromFile
 */
-SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
+SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 {
     LX_Window *tmp = NULL;
-
-    if(id < 0)
-        return NULL;
 
     tmp = LX_WindowManager::getInstance()->getWindow(id);
 
@@ -211,7 +208,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
 
 
 /**
-*   @fn SDL_Texture * loadTextureFromFile(std::string filename, int id)
+*   @fn SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 *
 *   Load a new texture from a file using the renderer of the window
 *   specified by its ID
@@ -224,7 +221,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, int id)
 *
 *   @sa loadTextureFromSurface
 */
-SDL_Texture * loadTextureFromFile(std::string filename, int id)
+SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 {
     SDL_Surface *tmpS = NULL;
     SDL_Texture *tmpT = NULL;
@@ -232,9 +229,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, int id)
     tmpS = loadSurface(filename.c_str());
 
     if(tmpS == NULL)
-    {
         return NULL;
-    }
 
     tmpT = loadTextureFromSurface(tmpS,id);
 
@@ -247,7 +242,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, int id)
 /**
 *   @fn SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
 *
-*   Loads create a texture from a surface using the renderer of the window
+*   Load a texture from a surface using the renderer of the window
 *
 *   @param filename The name of the file to create the texture from
 *   @param w The window that provide the rendering context to create the texture
@@ -265,9 +260,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
     tmpS = loadSurface(filename.c_str());
 
     if(tmpS == NULL)
-    {
         return NULL;
-    }
 
     tmpT = loadTextureFromSurface(tmpS,w);
 

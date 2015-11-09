@@ -135,7 +135,7 @@ int LX_WindowManager::addWindow(LX_Window *w)
         return -1;
 
     windows[size] = w;
-    id = size;
+    id = static_cast<int>(size);
 
     size++;
     nbWin += 1;

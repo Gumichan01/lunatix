@@ -71,19 +71,33 @@ LX_WindowException::LX_WindowException(std::string err)
 
 
 /**
-*   @fn const char * LX_WindowException::what() const throw()
+*   @fn LX_WindowException::LX_WindowException(const LX_WindowException& w)
+*
+*   Copy contructor
+*
+*   @param err The error string
+*
+*/
+LX_WindowException::LX_WindowException(const LX_WindowException& w)
+{
+    stringError = w.stringError;
+}
+
+
+/**
+*   @fn const char * LX_WindowException::what() const noexcept
 *
 *   Get the error string
 *
 *   @return The error string
 */
-const char * LX_WindowException::what() const throw()
+const char * LX_WindowException::what() const noexcept
 {
     return stringError.c_str();
 }
 
 
-LX_WindowException::~LX_WindowException() throw() {}
+LX_WindowException::~LX_WindowException() noexcept {}
 
 
 
@@ -108,7 +122,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
     originalHeight(0), displayMethod(false)
 {
     Uint32 option_flag = 0x00000000;
-    Uint32 position_flag = 0x00000000;
+    int xy_position = 0x00000000;
 
     int lxWidth = 0;
     int lxHeight = 0;
@@ -125,16 +139,16 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
     // Is the fullscreen mode active ?
     if( (option_flag & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN)
-        position_flag = SDL_WINDOWPOS_UNDEFINED;
+        xy_position = SDL_WINDOWPOS_UNDEFINED;
     else
-        position_flag = SDL_WINDOWPOS_CENTERED;
+        xy_position = SDL_WINDOWPOS_CENTERED;
 
 
     // OpenGL flag
     if(win_config->getOpenGL_Flag())
         option_flag |= SDL_WINDOW_OPENGL;
 
-    createWindow("LunatiX Engine v0.6",position_flag,position_flag,lxWidth,lxHeight,mode,option_flag,accel);
+    createWindow("LunatiX Engine v0.6",xy_position,xy_position,lxWidth,lxHeight,mode,option_flag,accel);
 
     setDimension();
 }
