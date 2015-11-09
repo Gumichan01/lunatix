@@ -83,11 +83,14 @@ LUNATIX_BUILD_DIR=./build/
 LUNATIX_STATIC_LIB=$(LUNATIX_BUILD_DIR)libLunatix.a
 LUNATIX_SHARED_LIB=$(LUNATIX_BUILD_DIR)libLunatix.so
 
+# Warning flags
+WFLAGS=-Weverything -Wno-c++-98compat -Wno-c++98-compat-pedantic -Wno-documentation
+
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
 
 	# Debug mode
-	CFLAGS=-fPIC -Weverything -Wno-c++98compat -std=c++11 -g
+	CFLAGS=-fPIC $(WFLAGS) -std=c++11 -g
 	OPTIMIZE=
 	OPT_SIZE=
 
