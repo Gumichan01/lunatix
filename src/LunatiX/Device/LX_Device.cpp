@@ -34,7 +34,7 @@ static const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickG
 
 namespace LX_Device
 {
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo *info);
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
 };
 
 
