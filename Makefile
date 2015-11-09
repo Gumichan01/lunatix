@@ -84,7 +84,8 @@ LUNATIX_STATIC_LIB=$(LUNATIX_BUILD_DIR)libLunatix.a
 LUNATIX_SHARED_LIB=$(LUNATIX_BUILD_DIR)libLunatix.so
 
 # Warning flags
-WFLAGS=-Weverything -Wno-c++-98compat -Wno-c++98-compat-pedantic -Wno-documentation
+WFLAGS=-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic \
+-Wno-documentation -Wno-implicit-fallthrough -Wno-padded
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
