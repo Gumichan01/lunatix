@@ -34,10 +34,11 @@ namespace LX_Physics{
 */
 typedef struct LX_Point
 {
-
     int x;      /**< The x position of the point */
     int y;      /**< The y position of the point */
 
+    LX_Point(int xpos, int ypos);
+    LX_Point(const LX_Point& p);
     LX_Point& operator=(const LX_Point p);
 
 } LX_Point;     /**< The point */
@@ -57,6 +58,8 @@ typedef struct LX_Circle
     unsigned int radius;        /**< The circle radius                      */
     unsigned int square_radius; /**< The square radius                      */
 
+    LX_Circle(const LX_Point p, unsigned int rad);
+    LX_Circle(const LX_Circle& c);
     LX_Circle& operator=(const LX_Circle c);
 
 } LX_Circle;    /**< @brief The circle */

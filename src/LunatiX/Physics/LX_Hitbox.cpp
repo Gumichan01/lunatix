@@ -26,6 +26,28 @@
 namespace LX_Physics
 {
 
+
+LX_Point::LX_Point(int xpos, int ypos): x(xpos), y(ypos)
+{
+    // Empty
+}
+
+
+/**
+*   @fn LX_Point::LX_Point(const LX_Point& p)
+*
+*   Copy constructor of the point
+*
+*   @param p The point
+*
+*/
+LX_Point::LX_Point(const LX_Point& p)
+{
+    x = p.x;
+    y = p.y;
+}
+
+
 /**
 *   @fn LX_Point& LX_Point::operator=(const LX_Point p)
 *
@@ -46,7 +68,38 @@ LX_Point& LX_Point::operator =(LX_Point p)
 
 
 /**
-*   @fn LX_Circle& LX_Circle::operator=(const LX_Circle c)
+*   @fn LX_Circle(const LX_Point p, unsigned int rad)
+*
+*   Construct the circle with a point and the radius
+*
+*   @param p The center of the circle
+*   @param rad The radius
+*
+*/
+LX_Circle::LX_Circle(const LX_Point p, unsigned int rad)
+    : center(p), radius(rad), square_radius(rad*rad)
+{
+    // Empty
+}
+
+
+/**
+*   @fn LX_Circle::LX_Circle(const LX_Circle& c)
+*
+*   Copy constructor of the circle
+*
+*   @param c The circle
+*
+*/
+LX_Circle::LX_Circle(const LX_Circle& c)
+    : center(c.center),radius(c.radius),square_radius(c.square_radius)
+{
+    // Empty
+}
+
+
+/**
+*   @fn LX_Circle& LX_Circle::operator =(const LX_Circle c)
 *
 *   Assign a circle to another circle
 *
@@ -55,7 +108,7 @@ LX_Point& LX_Point::operator =(LX_Point p)
 *   @return The new circle
 *
 */
-LX_Circle& LX_Circle::operator =(LX_Circle c)
+LX_Circle& LX_Circle::operator =(const LX_Circle c)
 {
     center = c.center;
     radius = c.radius;
@@ -69,7 +122,7 @@ LX_Circle& LX_Circle::operator =(LX_Circle c)
 
 
 /**
-*   @fn bool operator==(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b)
+*   @fn bool operator ==(const LX_Physics::LX_Point& a, const LX_Physics::LX_Point& b)
 *
 *   Check If two points are identical
 *
