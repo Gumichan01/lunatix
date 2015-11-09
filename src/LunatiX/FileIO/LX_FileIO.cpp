@@ -42,20 +42,35 @@ IOException::IOException(std::string err)
 
 
 /**
-*   @fn const char * IOException::what() const throw()
+*   @fn IOException::IOException(IOException& io)
+*
+*   The exception constructor
+*
+*   @param io The object to copy
+*
+*/
+IOException::IOException(const IOException& io)
+{
+    stringError = io.stringError;
+}
+
+
+
+/**
+*   @fn const char * IOException::what() const noexcept
 *
 *   Get the error string
 *
 *   @return The error string
 *
 */
-const char * IOException::what() const throw()
+const char * IOException::what() const noexcept
 {
     return stringError.c_str();
 }
 
 
-IOException::~IOException() throw() {}
+IOException::~IOException() noexcept {}
 
 
 /**

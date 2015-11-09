@@ -67,10 +67,11 @@ class IOException: public std::exception
 public :
 
     IOException(std::string err);
+    IOException(const IOException& io);
 
-    const char * what() const throw();
+    const char * what() const noexcept;
 
-    ~IOException() throw();
+    ~IOException() noexcept;
 
 };
 

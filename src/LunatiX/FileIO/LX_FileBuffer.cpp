@@ -48,11 +48,15 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     LX_File *reader = NULL;
     std::string str("LX_FileBuffer : ");
     size_t r = 0;
+    Sint64 s = 0;
 
     reader = new LX_File(name.c_str(),LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
 
-    bufsize = reader->size();
+    if((s = reader->size()) == -1 )
+        throw IOException(str + "cannot get the size of the file");
+
+    bufsize = static_cast<Uint64>(s);
 
     reader->seek(0,LX_SEEK_SET);
     buffer = new (std::nothrow) char[bufsize];
@@ -68,7 +72,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     if(r < bufsize)
     {
         delete reader;
-        throw IOException(str + "cannot read the file entirely");
+        throw IOException(str + "cannot read the entire file");
     }
 
     reader->close();
@@ -86,7 +90,7 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
 */
 SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
+    SDL_RWops *rw = SDL_RWFromConstMem(buffer, static_cast<int>(bufsize));
     return (rw == NULL) ? NULL:IMG_Load_RW(rw,1);
 }
 
@@ -101,7 +105,7 @@ SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
 */
 TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
+    SDL_RWops *rw = SDL_RWFromConstMem(buffer,static_cast<int>(bufsize));
     return (rw == NULL) ? NULL:TTF_OpenFontRW(rw,1,size);
 }
 
@@ -116,7 +120,7 @@ TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 */
 Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem(buffer,bufsize);
+    SDL_RWops *rw = SDL_RWFromConstMem(buffer,static_cast<int>(bufsize));
     return (rw == NULL) ? NULL:Mix_LoadWAV_RW(rw,1);
 }
 
