@@ -66,7 +66,7 @@ public:
 
     unsigned int nbEmptyParticles(void);
     unsigned int nbActiveParticles(void);
-    const unsigned int nbTotalParticles(void);
+    unsigned int nbTotalParticles(void);
 
     ~LX_ParticleSystem();
 

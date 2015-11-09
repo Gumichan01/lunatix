@@ -49,7 +49,7 @@ namespace LX_ParticleEngine
 *
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
-    : box({x,y,w,h}),velocity({0,0}), lifetime(xorshiftRand()%DELAY),
+    : box({x,y,w,h}),velocity(LX_Vector2D(0.0f,0.0f)), lifetime(xorshiftRand()%DELAY),
 texture(NULL), surface(NULL)
 {
     // Empty
@@ -65,7 +65,7 @@ texture(NULL), surface(NULL)
 *
 */
 LX_Particle::LX_Particle(const LX_AABB& b)
-    : box(b),velocity({0,0}), lifetime(xorshiftRand()%DELAY),
+    : box(b),velocity(LX_Vector2D{0.0f,0.0f}), lifetime(xorshiftRand()%DELAY),
 texture(NULL), surface(NULL)
 {
     // Empty
@@ -174,7 +174,7 @@ void LX_Particle::update(void)
 {
     if(lifetime > 0)
     {
-        LX_Physics::moveRect(box,velocity.vx,velocity.vy);
+        LX_Physics::moveRect(box,velocity);
         lifetime--;
     }
 }
@@ -182,18 +182,16 @@ void LX_Particle::update(void)
 
 
 /**
-*   @fn bool LX_Particle::setTexture(LX_FileBuffer *buffer, const unsigned int id)
+*   @fn bool LX_Particle::setTexture(LX_FileBuffer *buffer)
 *
 *   Set a texture to the particle
 *
 *   @param buffer The file buffer that contains the sprite to load
-*   @param id The id of the window in the LX_WindowManager
-*           used to get the texture according to its rendererer
 *
 *   @return TRUE if the particle texture was created, FALSE otherwise
 *
 */
-bool LX_Particle::setTexture(LX_FileBuffer *buffer, const unsigned int id)
+bool LX_Particle::setTexture(LX_FileBuffer *buffer)
 {
     SDL_Surface * s = NULL;
 
@@ -297,70 +295,70 @@ LX_AABB LX_Particle::getAABB()
 
 
 /**
-*   @fn const int LX_Particle::getX(void)
+*   @fn int LX_Particle::getX(void)
 *
 *   Get the X position
 *
 *   @return The X position
 *
 */
-const int LX_Particle::getX(void)
+int LX_Particle::getX(void)
 {
     return box.x;
 }
 
 
 /**
-*   @fn const int LX_Particle::getY(void)
+*   @fn int LX_Particle::getY(void)
 *
 *   Get the Y position
 *
 *   @return The Y position
 *
 */
-const int LX_Particle::getY(void)
+int LX_Particle::getY(void)
 {
     return box.y;
 }
 
 
 /**
-*   @fn const int LX_Particle::getW(void)
+*   @fn int LX_Particle::getW(void)
 *
 *   Get the width
 *
 *   @return The width
 *
 */
-const int LX_Particle::getW(void)
+int LX_Particle::getW(void)
 {
     return box.w;
 }
 
 
 /**
-*   @fn const int LX_Particle::getH(void)
+*   @fn int LX_Particle::getH(void)
 *
 *   Get the height
 *
 *   @return The height
 *
 */
-const int LX_Particle::getH(void)
+int LX_Particle::getH(void)
 {
     return box.h;
 }
 
 
 /**
-*   @fn const unsigned int LX_Particle::getDelay()
+*   @fn unsigned int LX_Particle::getDelay()
 *
 *   Get the lifetime of the particle
 *
 *   @return The lifetime
 *
 */
-const unsigned int LX_Particle::getDelay()
+unsigned int LX_Particle::getDelay()
 {
     return lifetime;
 }

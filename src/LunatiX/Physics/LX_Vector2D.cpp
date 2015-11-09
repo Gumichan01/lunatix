@@ -27,6 +27,37 @@
 
 namespace LX_Physics{
 
+
+/**
+*   @fn LX_Vector2D::LX_Vector2D(float x,float y)
+*
+*   Build a vector from the coordinates
+*
+*   @param x The x velocity
+*   @param y The y velocity
+*
+*/
+LX_Vector2D::LX_Vector2D(float x,float y): vx(x), vy(y)
+{
+    // Empty
+}
+
+
+/**
+*   @fn LX_Vector2D::LX_Vector2D(const LX_Vector2D& v)
+*
+*   Build a vector from another vector
+*
+*   @param v The vector
+*
+*/
+LX_Vector2D::LX_Vector2D(const LX_Vector2D& v): vx(v.vx), vy(v.vy)
+{
+    // Empty
+}
+
+
+
 /**
 *   @fn LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 *
@@ -46,6 +77,9 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfloat-equal"
+
 /**
 *   @fn bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
 *
@@ -64,6 +98,8 @@ bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
             && (u.vx == v.vx && u.vy == v.vy);
 }
 
+
+#pragma clang diagnostic pop
 
 /**
 *   @fn bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v)
@@ -168,6 +204,8 @@ LX_Vector2D operator -(LX_Vector2D& u)
 }
 
 
+
+
 /**
 *   @fn LX_Vector2D& operator ++(LX_Vector2D& u)
 *
@@ -187,6 +225,9 @@ LX_Vector2D& operator ++(LX_Vector2D& u)
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-parameter"
+
 /**
 *   @fn LX_Vector2D operator ++(LX_Vector2D& u,int d)
 *
@@ -205,6 +246,8 @@ LX_Vector2D operator ++(LX_Vector2D& u,int d)
 
     return t;
 }
+
+#pragma clang diagnostic pop
 
 
 /**
@@ -226,6 +269,9 @@ LX_Vector2D& operator --(LX_Vector2D& u)
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-parameter"
+
 /**
 *   @fn LX_Vector2D operator --(LX_Vector2D& u,int d)
 *
@@ -244,6 +290,8 @@ LX_Vector2D operator --(LX_Vector2D& u,int d)
 
     return t;
 }
+
+#pragma clang diagnostic pop
 
 
 /**
@@ -292,9 +340,12 @@ float vector_product(const LX_Vector2D& u,const LX_Vector2D& v)
 */
 float vector_norm(const LX_Vector2D& u)
 {
-    return sqrt(scalar_product(u,u));
+    return static_cast<float>(sqrt(scalar_product(u,u)));
 }
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfloat-equal"
 
 /**
 *   @fn bool isZeroVector(const LX_Vector2D& u)
@@ -310,6 +361,8 @@ bool isZeroVector(const LX_Vector2D& u)
 {
     return u.vx == 0 && u.vy ==0;
 }
+
+#pragma clang diagnostic pop
 
 
 /**

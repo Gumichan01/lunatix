@@ -77,7 +77,7 @@ public :
 
     void update(void);
 
-    bool setTexture(LX_FileIO::LX_FileBuffer *buffer, const unsigned int id=0);
+    bool setTexture(LX_FileIO::LX_FileBuffer *buffer);
     bool setSurface(LX_FileIO::LX_FileBuffer *buffer);
     void setSpeed(float x,float y);
 
@@ -87,11 +87,11 @@ public :
     SDL_Surface * getSurface(void);
     LX_AABB getAABB();
 
-    const int getX(void);
-    const int getY(void);
-    const int getW(void);
-    const int getH(void);
-    const unsigned int getDelay();
+    int getX(void);
+    int getY(void);
+    int getW(void);
+    int getH(void);
+    unsigned int getDelay();
 
 
     ~LX_Particle();

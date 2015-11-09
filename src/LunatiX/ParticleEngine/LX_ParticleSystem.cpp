@@ -270,14 +270,14 @@ unsigned int LX_ParticleSystem::nbActiveParticles(void)
 
 
 /**
-*   @fn const unsigned int LX_ParticleSystem::nbTotalParticles(void)
+*   @fn unsigned int LX_ParticleSystem::nbTotalParticles(void)
 *
 *   Get the maximum number of particles
 *
 *   @return The total number of particles the current particle system can have
 *
 */
-const unsigned int LX_ParticleSystem::nbTotalParticles(void)
+unsigned int LX_ParticleSystem::nbTotalParticles(void)
 {
     return nbParticles;
 }
