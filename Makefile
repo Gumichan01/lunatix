@@ -29,7 +29,7 @@ DEBUG=yes
 # Variables
 #
 
-CC=g++
+CC=clang
 MAIN_OBJ=main.o
 OBJS=LX_Device.o LX_Gamepad.o LX_Haptic.o \
 LX_FileIO.o LX_FileBuffer.o \
@@ -87,14 +87,14 @@ LUNATIX_SHARED_LIB=$(LUNATIX_BUILD_DIR)libLunatix.so
 ifeq ($(DEBUG),yes)
 
 	# Debug mode
-	CFLAGS=-fPIC -Wall -std=c++0x -g
+	CFLAGS=-fPIC -Weverything -Wno-c++98compat -std=c++11 -g
 	OPTIMIZE=
 	OPT_SIZE=
 
 else
 
 	# Release mode
-	CFLAGS=-fPIC -w -std=c++0x
+	CFLAGS=-fPIC -w -std=c++11
 	OPTIMIZE=-O3
 	OPT_SIZE=-s
 

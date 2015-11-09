@@ -40,6 +40,7 @@ It is possible the engine does not compile with Visual C++
 ### On Linux system ###
 
  Requirements:
+ - Clang 3.4
  - SDL 2.0.3 at least
  - Lua 5.1
  - OpenGL 3.1 at least
