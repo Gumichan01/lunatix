@@ -51,26 +51,26 @@ LX_ConfigurationException::LX_ConfigurationException(std::string err)
 
 
 /**
-*   @fn const char * LX_ConfigurationException::what() const throw()
+*   @fn const char * LX_ConfigurationException::what() const noexcept
 *
 *   Get the error string
 *
 *   @return The error string
 *
 */
-const char * LX_ConfigurationException::what() const throw()
+const char * LX_ConfigurationException::what() const noexcept
 {
     return stringError.c_str();
 }
 
 
 /**
-*   @fn LX_ConfigurationException::~LX_ConfigurationException() throw()
+*   @fn LX_ConfigurationException::~LX_ConfigurationException() noexcept
 *
 *   Destroy the instance
 *
 */
-LX_ConfigurationException::~LX_ConfigurationException() throw() {}
+LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 
 
 

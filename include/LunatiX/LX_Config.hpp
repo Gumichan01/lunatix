@@ -46,9 +46,9 @@ public :
 
     LX_ConfigurationException(std::string err);
 
-    const char * what() const throw();
+    const char * what() const noexcept;
 
-    ~LX_ConfigurationException() throw();
+    ~LX_ConfigurationException() noexcept;
 };
 
 /**
