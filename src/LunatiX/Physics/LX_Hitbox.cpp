@@ -27,6 +27,27 @@ namespace LX_Physics
 {
 
 
+/**
+*   @fn LX_Point::LX_Point()
+*
+*   No argument constructor of the point
+*
+*/
+LX_Point::LX_Point(): LX_Point(0,0)
+{
+    // Empty
+}
+
+
+/**
+*   @fn LX_Point::LX_Point(int xpos, int ypos)
+*
+*   2-argument constructor of the point
+*
+*   @param xpos X position
+*   @param xpos Y position
+*
+*/
 LX_Point::LX_Point(int xpos, int ypos): x(xpos), y(ypos)
 {
     // Empty
