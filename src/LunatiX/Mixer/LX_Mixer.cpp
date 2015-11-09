@@ -34,7 +34,7 @@ namespace LX_Mixer
 
 
 /**
-*   @fn LX_Music * loadMusic(string filename)
+*   @fn LX_Music * loadMusic(std::string filename)
 *
 *   Load the music according to the file name
 *
@@ -46,7 +46,7 @@ namespace LX_Mixer
 *           So do not forget to destroy it.
 *
 */
-LX_Music * loadMusic(string filename)
+LX_Music * loadMusic(std::string filename)
 {
     return new LX_Music(filename.c_str());
 }
@@ -74,7 +74,7 @@ LX_Music * loadMusic(Mix_Music *mus)
 
 
 /**
-*   @fn LX_Chunk * loadSample(string filename)
+*   @fn LX_Chunk * loadSample(std::string filename)
 *
 *   Create a new LX_Chunk instance from a WAV file
 *
@@ -86,7 +86,7 @@ LX_Music * loadMusic(Mix_Music *mus)
 *           So do not forget to destroy it.
 *
 */
-LX_Chunk * loadSample(string filename)
+LX_Chunk * loadSample(std::string filename)
 {
     return new LX_Chunk(filename.c_str());
 }
@@ -112,7 +112,7 @@ LX_Chunk * loadSample(Mix_Chunk *ch)
 
 
 /**
-*   @fn LX_Chunk * loadSample(LX_FileBuffer *file)
+*   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
 *
 *   Create a new LX_Chunk instance from a file buffer
 *
@@ -125,7 +125,7 @@ LX_Chunk * loadSample(Mix_Chunk *ch)
 *           So do not forget to destroy it.
 *
 */
-LX_Chunk * loadSample(LX_FileBuffer *file)
+LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
 {
     return (file == NULL) ? NULL:(new LX_Chunk(file));
 }
@@ -158,20 +158,20 @@ int allocateChannels(int num)
 
 
 /**
-*   @fn int reserveChannels(unsigned int num)
+*   @fn int reserveChannels(int numchans)
 *
 *   Set the number of channel to reserve.
 *
-*   @param num The number of channels to reserve
+*   @param numchans The number of channels to reserve
 *
 *   @return The number of channels reserved
 *
 *   @note If num is 0, then all channels will be unreserved
 *
 */
-int reserveChannels(unsigned int num)
+int reserveChannels(int numchans)
 {
-    return Mix_ReserveChannels(num);
+    return Mix_ReserveChannels(numchans);
 }
 
 
@@ -408,7 +408,7 @@ void setPosition(Sint16 angle)
 
 
 /**
-*   @fn void setPosition(Sint16 angle, int distance)
+*   @fn void setPosition(Sint16 angle, Uint8 distance)
 *
 *   Set the virtual position of the audio source according to the channel.
 *
@@ -416,7 +416,7 @@ void setPosition(Sint16 angle)
 *   @param distance The distance between the source and the listener
 *
 */
-void setPosition(Sint16 angle, int distance)
+void setPosition(Sint16 angle, Uint8 distance)
 {
     setPosition(MIX_CHANNEL_POST,angle,distance);
 }
@@ -424,7 +424,7 @@ void setPosition(Sint16 angle, int distance)
 
 
 /**
-*   @fn void setPosition(int channel, Sint16, int distance)
+*   @fn void setPosition(int channel, Sint16, Uint8 distance)
 *
 *   Set the virtual position of the audio source according to the channel.
 *   This function emulates a 3D audio effect.
@@ -434,7 +434,7 @@ void setPosition(Sint16 angle, int distance)
 *   @param distance The distance between the source and the listener
 *
 */
-void setPosition(int channel, Sint16 angle, int distance)
+void setPosition(int channel, Sint16 angle, Uint8 distance)
 {
     Mix_SetPosition(channel,angle,distance);
 }

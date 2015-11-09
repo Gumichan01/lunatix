@@ -34,8 +34,6 @@ class LX_FileBuffer;
 
 };
 
-using namespace LX_FileIO;
-
 
 namespace LX_Mixer
 {
@@ -52,10 +50,11 @@ class LX_ChunkException : public std::exception
 public :
 
     LX_ChunkException(std::string err);
+    LX_ChunkException(const LX_ChunkException& me);
 
-    const char * what() const throw();
+    const char * what() const noexcept;
 
-    ~LX_ChunkException() throw();
+    ~LX_ChunkException() noexcept;
 };
 
 
@@ -77,11 +76,11 @@ public:
 
     LX_Chunk(void);
     LX_Chunk(Mix_Chunk *sample);
-    LX_Chunk(string filename);
-    LX_Chunk(LX_FileBuffer *file);
+    LX_Chunk(std::string filename);
+    LX_Chunk(LX_FileIO::LX_FileBuffer *file);
 
     bool load(std::string filename);
-    bool loadFromBuffer(LX_FileBuffer *file);
+    bool loadFromBuffer(LX_FileIO::LX_FileBuffer *file);
     bool play();
     bool play(int channel);
     bool play(int channel,int ticks);

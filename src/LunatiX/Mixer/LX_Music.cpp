@@ -14,7 +14,7 @@
 
 
 /**
-*	@file LX_Music.cpp
+*	@file LX_Music.cppLX_FileBuffer
 *	@brief The implementation of the music library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.6
@@ -45,19 +45,34 @@ LX_MusicException::LX_MusicException(std::string err)
 
 
 /**
-*   @fn const char * LX_MusicException::what() const throw()
+*   @fn LX_MusicException::LX_MusicException(const LX_MusicException& me)
+*
+*   Copy constructor
+*
+*   @param err The error string
+*
+*/
+LX_MusicException::LX_MusicException(const LX_MusicException& me)
+{
+    stringError = me.stringError;
+}
+
+
+
+/**
+*   @fn const char * LX_MusicException::what() const noexcept
 *
 *   Get the error string
 *
 *   @return The error string
 */
-const char * LX_MusicException::what() const throw()
+const char * LX_MusicException::what() const noexcept
 {
     return stringError.c_str();
 }
 
 
-LX_MusicException::~LX_MusicException() throw() {}
+LX_MusicException::~LX_MusicException() noexcept {}
 
 
 /**
@@ -90,14 +105,14 @@ LX_Music::LX_Music(Mix_Music *mus) : music(mus)
 
 
 /**
-*   @fn LX_Music::LX_Music(string filename)
+*   @fn LX_Music::LX_Music(std::string filename)
 *
 *   Create the instance loading a music file
 *
 *   @param filename The music filename that will be loaded
 *
 */
-LX_Music::LX_Music(string filename) : music(NULL)
+LX_Music::LX_Music(std::string filename) : music(NULL)
 {
     if(load(filename.c_str()) == false)
     {
@@ -120,7 +135,7 @@ LX_Music::~LX_Music(void)
 
 
 /**
-*   @fn bool LX_Music::load(string filename)
+*   @fn bool LX_Music::load(std::string filename)
 *
 *   Load the music specified in the music file
 *
@@ -129,7 +144,7 @@ LX_Music::~LX_Music(void)
 *   @return TRUE on success, FALSE otherwise
 *
 */
-bool LX_Music::load(string filename)
+bool LX_Music::load(std::string filename)
 {
     Mix_FreeMusic(music);
 

@@ -43,8 +43,6 @@ class LX_FileBuffer;
 
 };
 
-using namespace LX_FileIO;
-
 
 /**
 *   @namespace LX_Mixer
@@ -61,15 +59,15 @@ class LX_Music;
 class LX_Chunk;
 
 /* == Music and chunk == */
-LX_Music * loadMusic(string filename);
+LX_Music * loadMusic(std::string filename);
 LX_Music * loadMusic(Mix_Music *mus);
 
-LX_Chunk * loadSample(string filename);
+LX_Chunk * loadSample(std::string filename);
 LX_Chunk * loadSample(Mix_Chunk *ch);
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file);
 
 int allocateChannels(int num);
-int reserveChannels(unsigned int num);
+int reserveChannels(int numchans);
 int channelVolume(int channel,int volume);
 void pause(int channel);
 void resume(int channel);
@@ -91,8 +89,8 @@ void removePanning(int channel);
 
 // 3D Position
 void setPosition(Sint16 angle);
-void setPosition(Sint16 angle, int distance);
-void setPosition(int channel, Sint16 angle, int distance);
+void setPosition(Sint16 angle, Uint8 distance);
+void setPosition(int channel, Sint16 angle, Uint8 distance);
 void resetPosition(int channel);
 
 // Reverse stereo

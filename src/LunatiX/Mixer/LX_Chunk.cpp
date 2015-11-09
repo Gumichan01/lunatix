@@ -48,19 +48,33 @@ LX_ChunkException::LX_ChunkException(std::string err)
 
 
 /**
-*   @fn const char * LX_ChunkException::what() const throw()
+*   @fn LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
+*
+*   Copy constructor
+*
+*   @param err The error string
+*
+*/
+LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
+{
+    stringError = me.stringError;
+}
+
+
+/**
+*   @fn const char * LX_ChunkException::what() const noexcept
 *
 *   Get the error string
 *
 *   @return The error string
 */
-const char * LX_ChunkException::what() const throw()
+const char * LX_ChunkException::what() const noexcept
 {
     return stringError.c_str();
 }
 
 
-LX_ChunkException::~LX_ChunkException() throw() {}
+LX_ChunkException::~LX_ChunkException() noexcept {}
 
 
 
@@ -93,7 +107,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 
 
 /**
-*   @fn LX_Chunk::LX_Chunk(string filename)
+*   @fn LX_Chunk::LX_Chunk(std::string filename)
 *
 *   Construct the instance creating the Mix_Chunk instance from a file
 *
@@ -106,7 +120,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 *   @exception LX_ChunkException if the chunk cannot be created from the file
 *
 */
-LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
+LX_Chunk::LX_Chunk(std::string filename) : chunk(NULL)
 {
     if(load(filename.c_str()) == false)
     {
@@ -116,7 +130,7 @@ LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
 
 
 /**
-*   @fn LX_Chunk::LX_Chunk(LX_FileBuffer * file)
+*   @fn LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file)
 *
 *   Construct the instance creating the Mix_Chunk instance
 *   from a file buffer.
@@ -126,7 +140,7 @@ LX_Chunk::LX_Chunk(string filename) : chunk(NULL)
 *   @exception LX_ChunkException if the chunk cannot be created from the file buffer
 *
 */
-LX_Chunk::LX_Chunk(LX_FileBuffer * file) : chunk(NULL)
+LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : chunk(NULL)
 {
     if(loadFromBuffer(file) == false)
     {
@@ -148,7 +162,7 @@ LX_Chunk::~LX_Chunk()
 
 
 /**
-*   @fn bool LX_Chunk::load(string filename)
+*   @fn bool LX_Chunk::load(std::string filename)
 *
 *   Load the WAV sample from a file
 *
@@ -158,7 +172,7 @@ LX_Chunk::~LX_Chunk()
 *
 *   @sa loadFromBuffer
 */
-bool LX_Chunk::load(string filename)
+bool LX_Chunk::load(std::string filename)
 {
     Mix_FreeChunk(chunk);
     chunk = Mix_LoadWAV(filename.c_str());

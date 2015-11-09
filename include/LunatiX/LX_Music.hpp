@@ -44,10 +44,11 @@ class LX_MusicException : public std::exception
 public :
 
     LX_MusicException(std::string err);
+    LX_MusicException(const LX_MusicException& me);
 
-    const char * what() const throw();
+    const char * what() const noexcept;
 
-    ~LX_MusicException() throw();
+    ~LX_MusicException() noexcept;
 };
 
 
@@ -71,10 +72,10 @@ public:
 
     LX_Music(void);
     LX_Music(Mix_Music *mus);
-    LX_Music(string filename);
+    LX_Music(std::string filename);
 
     // Music
-    bool load(string filename);
+    bool load(std::string filename);
     bool play(void);
     bool play(int loops);
     void pause(void);
