@@ -40,6 +40,7 @@ typedef struct LX_Vector2D
     float vx;                     /**< The x velocity */
     float vy;                     /**< The y velocity */
 
+    LX_Vector2D();
     LX_Vector2D(float x,float y);
     LX_Vector2D& operator =(const LX_Vector2D v);
     LX_Vector2D(const LX_Vector2D& v);

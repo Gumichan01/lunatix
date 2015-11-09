@@ -29,6 +29,18 @@ namespace LX_Physics{
 
 
 /**
+*   @fn LX_Vector2D::LX_Vector2D()
+*
+*   Default constructor
+*
+*/
+LX_Vector2D::LX_Vector2D(): LX_Vector2D(0.0f,0.0f)
+{
+    // Empty
+}
+
+
+/**
 *   @fn LX_Vector2D::LX_Vector2D(float x,float y)
 *
 *   Build a vector from the coordinates
