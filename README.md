@@ -29,18 +29,28 @@ You can also find the library reference on my [website](http://gumichan01.olympe
 
 ## Installation ##
 ### On Windows ###
- 
+
+ Supported compiler:
+ - MinGW/g++ 4.7.1+
+
 Import a new project using the XML file provided in the directory into your IDE (Well, it works on CodeBlocks).  
 You need to install Lua 5.1 to compile the Lua script.  
 The static and shared files (.lib, .a, .dll for win32 version) required to compile with SDL2 and Lua are provided.
 
 Warning:  
-It is possible the engine does not compile with Visual C++
+It is possible the engine cannot be compiled with Visual C++.
 
 ### On Linux system ###
 
+ Supported compilers:
+ - Clang 3.4+
+ - g++ 4.7+
+
+The source code is stil compilable with g++ 4.6 but its support is deprecated.
+
+
  Requirements:
- - Clang 3.4
+ - Clang 3.4 at least (it is used in the makefile)
  - SDL 2.0.3 at least
  - Lua 5.1
  - OpenGL 3.1 at least
@@ -83,7 +93,9 @@ Finally, copy the shared libraries in *lib/linux*.
 
 #### On Windows ####
 
-Download the [development library (v0.6.1)] (http://gumichan01.olympe.in/download/dev-luna-win32.zip)  
+This current version is unstable, so no development library is provided yet.
+However, it is possible to get the last stable version of the engine donwload this 
+[development library (v0.6.1)] (http://gumichan01.olympe.in/download/dev-luna-win32.zip)  
 It includes the library files and all necessary materials to develop any project.  
 
 Warning : The static or shared libraries are not completely installed on the system.
