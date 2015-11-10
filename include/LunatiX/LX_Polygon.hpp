@@ -46,10 +46,11 @@ class LX_PolygonException : public std::exception
 public :
 
     LX_PolygonException(std::string err);
+    LX_PolygonException(const LX_PolygonException& pex);
 
-    const char * what() const throw();
+    const char * what() const noexcept;
 
-    ~LX_PolygonException() throw();
+    ~LX_PolygonException() noexcept;
 };
 
 
@@ -86,7 +87,7 @@ public :
 
     LX_Point getPoint(const unsigned int index) const;
 
-    void move(const int vx, const int vy);
+    void move(const float vx, const float vy);
     void move(const LX_Vector2D& v);
 
     void moveTo(int vx, int vy);

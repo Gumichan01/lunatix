@@ -87,7 +87,7 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 void movePoint(LX_Point& P, const int vx, const int vy);
 void moveRect(LX_AABB& rect, const int vx, const int vy);
 void moveCircle(LX_Circle& C, const int vx, const int vy);
-void movePoly(LX_Polygon& poly, const int vx, const int vy);
+void movePoly(LX_Polygon& poly, const float vx, const float vy);
 
 // Using vector2D
 void movePoint(LX_Point& P, const LX_Vector2D& v);

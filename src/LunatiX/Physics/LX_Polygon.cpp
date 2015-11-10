@@ -32,6 +32,21 @@ using namespace std;
 
 namespace LX_Physics{
 
+
+/**
+*   @fn LX_PolygonException::LX_PolygonException(LX_PolygonException& pex)
+*
+*   Build the LX_PolygonException class
+*
+*   @param err The error string
+*
+*/
+LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
+{
+    stringError = pex.stringError;
+}
+
+
 /**
 *   @fn LX_PolygonException::LX_PolygonException(std::string err)
 *
@@ -47,19 +62,19 @@ LX_PolygonException::LX_PolygonException(std::string err)
 
 
 /**
-*   @fn const char * LX_PolygonException::what() const throw()
+*   @fn const char * LX_PolygonException::what() const noexcept
 *
 *   Get the error string
 *
 *   @return The error string
 */
-const char * LX_PolygonException::what() const throw()
+const char * LX_PolygonException::what() const noexcept
 {
     return stringError.c_str();
 }
 
 
-LX_PolygonException::~LX_PolygonException() throw() {}
+LX_PolygonException::~LX_PolygonException() noexcept {}
 
 
 
@@ -273,6 +288,10 @@ void LX_Polygon::convexity(void)
         }
         else
         {
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wswitch-enum"
+
             switch(s)
             {
                 case POSITIVE :
@@ -294,6 +313,8 @@ void LX_Polygon::convexity(void)
                 default :
                     break;
             }
+
+#pragma clang diagnostic pop
         }
     }
 
@@ -302,7 +323,7 @@ void LX_Polygon::convexity(void)
 
 
 /**
-*   @fn void LX_Polygon::move(int vx, int vy)
+*   @fn void LX_Polygon::move(const float vx, const float vy)
 *
 *   Move the polygon to a direction
 *
@@ -310,17 +331,21 @@ void LX_Polygon::convexity(void)
 *   @param vy The y direction
 *
 */
-void LX_Polygon::move(const int vx, const int vy)
+void LX_Polygon::move(const float vx, const float vy)
 {
-    movePoint(points[0],vx,vy);
-    movePoint(points[1],vx,vy);
-    movePoint(points[2],vx,vy);
+
+    const int velx = static_cast<int>(vx);
+    const int vely = static_cast<int>(vy);
+
+    movePoint(points[0],velx,vely);
+    movePoint(points[1],velx,vely);
+    movePoint(points[2],velx,vely);
 
     const unsigned int n = numberOfEdges();
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePoint(points[i],vx,vy);
+        movePoint(points[i],velx,vely);
     }
 }
 

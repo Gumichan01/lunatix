@@ -50,7 +50,7 @@ namespace LX_Physics{
 unsigned int euclide_square_distance(const int x1, const int y1,
                                                  const int x2, const int y2)
 {
-    return( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+    return static_cast<unsigned int>( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
 
 
@@ -71,7 +71,7 @@ unsigned int euclide_square_distance(const int x1, const int y1,
 float euclide_distance(const int x1, const int y1,
                                    const int x2, const int y2)
 {
-    return sqrt(euclide_square_distance(x1,y1,x2,y2));
+    return static_cast<float>(sqrt(euclide_square_distance(x1,y1,x2,y2)));
 }
 
 
@@ -107,7 +107,7 @@ unsigned int euclide_square_distance(const LX_Point& p1,
 */
 float euclide_distance(const LX_Point& p1, const LX_Point& p2)
 {
-    return sqrt(euclide_square_distance(p1,p2));
+    return static_cast<float>(sqrt(euclide_square_distance(p1,p2)));
 }
 
 
@@ -370,7 +370,7 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
     AD.vx = D.x - A.x;
     AD.vy = D.y - A.y;
 
-    d = vector_product(AB,AD) * vector_product(AB,AC);
+    d = static_cast<long>(vector_product(AB,AD) * vector_product(AB,AC));
 
     return (d <= 0);
 }
@@ -626,7 +626,7 @@ void moveCircle(LX_Circle& C, const int vx, const int vy)
 
 
 /**
-*   @fn void movePoly(LX_Polygon& poly, const int vx, const int vy)
+*   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy)
 *
 *   Move the polygon to a direction
 *
@@ -635,7 +635,7 @@ void moveCircle(LX_Circle& C, const int vx, const int vy)
 *   @param vy The y direction
 *
 */
-void movePoly(LX_Polygon& poly, const int vx, const int vy)
+void movePoly(LX_Polygon& poly, const float vx, const float vy)
 {
     poly.move(vx,vy);
 }
@@ -652,7 +652,7 @@ void movePoly(LX_Polygon& poly, const int vx, const int vy)
 */
 void movePoint(LX_Point& P, const LX_Vector2D& v)
 {
-    movePoint(P,v.vx,v.vy);
+    movePoint(P,static_cast<int>(v.vx),static_cast<int>(v.vy));
 }
 
 
@@ -667,7 +667,7 @@ void movePoint(LX_Point& P, const LX_Vector2D& v)
 */
 void moveRect(LX_AABB& rect, const LX_Vector2D& v)
 {
-    moveRect(rect,v.vx,v.vy);
+    moveRect(rect,static_cast<int>(v.vx),static_cast<int>(v.vy));
 }
 
 
@@ -682,7 +682,7 @@ void moveRect(LX_AABB& rect, const LX_Vector2D& v)
 */
 void moveCircle(LX_Circle& C, const LX_Vector2D& v)
 {
-    moveCircle(C,v.vx,v.vy);
+    moveCircle(C,static_cast<int>(v.vx),static_cast<int>(v.vy));
 }
 
 
