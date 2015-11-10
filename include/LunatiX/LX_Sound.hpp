@@ -31,8 +31,6 @@
 namespace LX_Mixer
 {
 
-///@todo @bug LX_Sound fix the link edition failure
-
 /**
 *   @class LX_Sound
 *   @brief The sound interface
@@ -43,18 +41,14 @@ namespace LX_Mixer
 class LX_Sound
 {
 
-
 public:
 
-    virtual bool load(std::string filename) = 0;     /**< @brief Load a music file */
-    virtual bool play() = 0;                    /**< @brief Play something */
-    virtual int volume(int newVolume) = 0;      /**< @brief Set the volume */
+    virtual bool load(std::string filename) = 0;    /**< @brief Load a music file */
+    virtual bool play() = 0;                        /**< @brief Play something */
+    virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
 
     virtual ~LX_Sound();
 };
-
-
-LX_Sound::~LX_Sound() {}
 
 
 };

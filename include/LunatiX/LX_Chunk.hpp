@@ -64,7 +64,7 @@ public :
 *   @brief The chunk class
 *
 */
-class LX_Chunk : virtual public LX_Sound
+class LX_Chunk : public virtual LX_Sound
 {
 
     Mix_Chunk *chunk;

@@ -23,7 +23,7 @@
 */
 
 
-#include<SDL2/SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "LX_Sound.hpp"
 
@@ -60,7 +60,7 @@ public :
 *   This class is a high level description of the Mix_Music type
 *
 */
-class LX_Music : virtual public LX_Sound
+class LX_Music : public virtual LX_Sound
 {
 
     Mix_Music *music;      /* The music to play */

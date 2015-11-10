@@ -35,7 +35,7 @@ OBJS=LX_Device.o LX_Gamepad.o LX_Haptic.o \
 LX_FileIO.o LX_FileBuffer.o \
 LX_Graphics.o LX_Window.o LX_WindowManager.o \
 LX_Config.o LX_Library.o \
-LX_Chunk.o LX_Music.o LX_Mixer.o \
+LX_Sound.o LX_Chunk.o LX_Music.o LX_Mixer.o \
 LX_MessageBox.o \
 LX_Particle.o LX_ParticleSystem.o \
 LX_Hitbox.o LX_Physics.o LX_Polygon.o LX_Vector2D.o \
@@ -248,6 +248,10 @@ $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 #
 # Mixer
 #
+
+LX_Sound.o : $(MIXER_PATH)LX_Sound.cpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 LX_Chunk.o : $(MIXER_PATH)LX_Chunk.cpp $(LUNATIX_INCLUDE_PATH)LX_Chunk.hpp \
 $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
