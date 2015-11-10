@@ -66,7 +66,14 @@ LX_Font::LX_Font(SDL_Color& color, unsigned int size)
         font_str = ttf_config->getFontFile();
 
         if(font_size == 0)
-            font_size = ttf_config->getFontSize();
+        {
+            int sz = ttf_config->getFontSize();
+
+            if(sz <= 0)
+                font_size = LX_TTF_DEFAULT_FONT_SIZE;
+            else
+                font_size = static_cast<unsigned int>(sz);
+        }
     }
 
     createbuffer();
@@ -114,7 +121,7 @@ LX_Font::LX_Font(std::string font_file, SDL_Color& color)
 *
 */
 LX_Font::LX_Font(std::string font_file, SDL_Color& color, unsigned int size)
-    : font_str(font_file), font_size(LX_TTF_DEFAULT_FONT_SIZE),
+    : font_str(font_file), font_size(size),
     font_color(color), font_buffer(NULL)
 {
     createbuffer();
@@ -166,7 +173,7 @@ int LX_Font::sizeOfText(std::string text, int& w, int& h)
 
 
 /**
-*   @fn int LX_Font::sizeOfText(std::string text, int size, int& w, int& h)
+*   @fn int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 *
 *   Calculate the resulting texture dimension of the
 *   text rendererd using the default font
@@ -179,12 +186,12 @@ int LX_Font::sizeOfText(std::string text, int& w, int& h)
 *   @return A control value, 0 on success, -1 on failure
 *
 */
-int LX_Font::sizeOfText(std::string text, int size, int& w, int& h)
+int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 {
     TTF_Font *ttf = NULL;
     int sz;
 
-    ttf = createInternalFont(size);
+    ttf = createInternalFont(static_cast<int>(size));
 
     if(ttf == NULL)
         return -1;
@@ -388,10 +395,15 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
         return NULL;
     }
     else
-        ttf = createInternalFont(size);
+        ttf = createInternalFont(static_cast<int>(size));
 
     if(ttf == NULL)
         return loaded;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcovered-switch-default"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
 
     // Select the text to draw
     switch(type)
@@ -401,16 +413,22 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
             break;
 
         case LX_TTF_SHADED :
-            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),font_color,{r,g,b});
+            {
+                SDL_Color bg = {r,g,b,0};
+                loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),font_color,bg);
+            }
             break;
 
         case LX_TTF_BLENDED :
             loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),font_color);
             break;
 
-        default :
+        default :   // All cases are dealt so this block is unreachable
             break;
     }
+
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
 
     TTF_CloseFont(ttf);
     return loaded;
@@ -422,7 +440,7 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
 *   according to the font file in the class
 *   or the file buffer if it exists
 */
-TTF_Font * LX_Font::createInternalFont(unsigned int size)
+TTF_Font * LX_Font::createInternalFont(int size)
 {
     if(font_buffer == NULL)
         return NULL;        // This code will normally never be executed
@@ -435,7 +453,7 @@ TTF_Font * LX_Font::createInternalFont(unsigned int size)
 /**
 *   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,
                                                  std::string text, unsigned int size,
-                                                 int idWindow)
+                                                 unsigned int idWindow)
 *
 *   Create a Texture from a text according to the type and the size
 *
@@ -449,17 +467,10 @@ TTF_Font * LX_Font::createInternalFont(unsigned int size)
 *           if the window is not valid or if something wrong happened
 *
 */
-SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text, unsigned int size, int idWindow)
+SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
+                                         unsigned int size, unsigned int idWindow)
 {
     LX_Window * target_window = NULL;
-
-    if(idWindow < 0)
-    {
-        LX_SetError("LX_Font::drawTextToTexture(): invalid id");
-        return NULL;
-    }
-
-    // Get the window to use the renderer
     target_window = LX_WindowManager::getInstance()->getWindow(idWindow);
 
     return drawTextToTexture(type,text.c_str(),size,target_window);
@@ -489,7 +500,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
     SDL_Surface *surface = NULL;
     SDL_Texture *texture = NULL;
 
-    int black = 0;
+    Uint8 black = 0;
 
     if(win == NULL)
     {

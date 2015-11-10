@@ -95,7 +95,7 @@ class LX_Font
 
     void createbuffer();
     int sizeOfText(TTF_Font *ttf, std::string text, int& w, int& h);
-    TTF_Font * createInternalFont(unsigned int size);
+    TTF_Font * createInternalFont(int size);
 
     SDL_Surface * drawText(LX_TTF_TypeText type, std::string text,
                            unsigned int size = 0,
@@ -108,7 +108,7 @@ public:
     LX_Font(std::string font_file, SDL_Color& color, unsigned int size);
 
     int sizeOfText(std::string text, int& w, int& h);
-    int sizeOfText(std::string text, int size, int& w, int& h);
+    int sizeOfText(std::string text, unsigned int size, int& w, int& h);
 
     SDL_Surface * drawSolidText(std::string text);
     SDL_Surface * drawSolidText(std::string text, unsigned int size);
@@ -122,7 +122,7 @@ public:
     SDL_Surface * drawBlendedText(std::string text, unsigned int size);
 
     SDL_Texture * drawTextToTexture(LX_TTF_TypeText type, std::string text,
-                                    unsigned int size, int idWindow = 0);
+                                    unsigned int size, unsigned int idWindow = 0);
     SDL_Texture * drawTextToTexture(LX_TTF_TypeText type, std::string text,
                                     unsigned int size, LX_Graphics::LX_Window *win);
 
