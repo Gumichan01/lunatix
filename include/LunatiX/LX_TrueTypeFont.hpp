@@ -84,7 +84,7 @@ typedef enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_
 */
 class LX_Font
 {
-
+    /// @todo Documentation of the functions that are default arguments
     std::string font_str;                   /* The font file    */
     unsigned int font_size;                 /* The font size    */
     SDL_Color font_color;                   /* The font color   */

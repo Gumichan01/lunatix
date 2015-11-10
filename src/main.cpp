@@ -37,13 +37,17 @@ using namespace LX_FileIO;
 using namespace LX_MSGBox;
 using namespace LX_VersionInfo;
 
-
-int main ( int argc, char** argv )
+#ifdef _WIN32_
+int main(int argc, char** argv)
+#else
+int main()
+#endif
 {
+
     SDL_Rect pos = {400,200,150,120};
     SDL_Rect pos1 = {100,200,178,32};
     SDL_Rect pos2 = {100,250,768,32};
-    SDL_Color color = {255,255,255};
+    SDL_Color color = {255,255,255,0};
 
     bool err, game = true;
     int wt, ht;
@@ -90,7 +94,7 @@ int main ( int argc, char** argv )
     audio = new LX_Music(mus);
 
     // Load the texture from the data file
-    st = loadTextureFromFile(name.c_str(),0);
+    st = loadTextureFromFile(name.c_str());
     ex = loadTextureFromFile(expl_str.c_str(),1);
 
     if(st == NULL)
@@ -104,9 +108,9 @@ int main ( int argc, char** argv )
     std::cout << "[TEST TTF]Size of the text \"LunatiX_engine\" - w : " << wt << "; h : " << ht << std::endl;
 #endif
 
-    SDL_Texture *t1 = ttf->drawTextToTexture(LX_TTF_BLENDED,"LunatiX_engine",LX_TTF_DEFAULT_FONT_SIZE,0);
+    SDL_Texture *t1 = ttf->drawTextToTexture(LX_TTF_BLENDED,"LunatiX_engine",LX_TTF_DEFAULT_FONT_SIZE);
     SDL_Texture *t2 = ttf->drawTextToTexture(LX_TTF_BLENDED,"RETURN : play music, SPACE : pause/resume, BACKSPACE : stop",
-                      LX_TTF_DEFAULT_FONT_SIZE,0);
+                      LX_TTF_DEFAULT_FONT_SIZE);
 
     audio->volume(MIX_MAX_VOLUME/2);
 

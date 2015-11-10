@@ -31,6 +31,8 @@
 namespace LX_Mixer
 {
 
+///@todo @bug LX_Sound fix the link edition failure
+
 /**
 *   @class LX_Sound
 *   @brief The sound interface
