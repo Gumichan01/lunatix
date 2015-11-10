@@ -201,7 +201,10 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
     tmp = LX_WindowManager::getInstance()->getWindow(id);
 
     if(tmp == NULL)
+    {
+        LX_SetError("LX_Graphics::loadTextureFromSurface - invalid window");
         return NULL;
+    }
 
     return SDL_CreateTextureFromSurface(tmp->getRenderer(),target);
 }
