@@ -10,12 +10,12 @@
 make test -r -j -f Makefile;
 ./test-init;
 ./test-config;
+./test-system;
 ./test-device;
+./test-file;
 ./test-physics;
 ./test-window;
-./test-system;
 ./test-ttf;
-./test-file;
 ./test-particle;
 rm win-*.png
 make clean-test -f Makefile;

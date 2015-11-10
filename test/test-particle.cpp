@@ -37,7 +37,7 @@ class Dot{
     {
         bool err;
         LX_Particle *p = NULL;
-        srand(time(NULL));
+        LX_Random::initRand();
 
         sys = new LX_ParticleSystem(N);
         box = {100,100,20,20};
@@ -48,16 +48,16 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    err = p->setTexture(red,0);
+                case 0 :    err = p->setTexture(red);
                             break;
 
-                case 1 :    err = p->setTexture(blue,0);
+                case 1 :    err = p->setTexture(blue);
                             break;
 
-                case 2 :    err = p->setTexture(green,0);
+                case 2 :    err = p->setTexture(green);
                             break;
 
-                default :   err = p->setTexture(red,0);
+                default :   err = p->setTexture(red);
                             break;
             }
 
@@ -82,16 +82,16 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    err = p->setTexture(red,0);
+                case 0 :    err = p->setTexture(red);
                             break;
 
-                case 1 :    err = p->setTexture(blue,0);
+                case 1 :    err = p->setTexture(blue);
                             break;
 
-                case 2 :    err = p->setTexture(green,0);
+                case 2 :    err = p->setTexture(green);
                             break;
 
-                default :   err = p->setTexture(red,0);
+                default :   err = p->setTexture(red);
                             break;
             }
 
@@ -115,7 +115,7 @@ class Dot{
 };
 
 
-int main(int argc, char **argv)
+int main()
 {
 
     Dot *dot;

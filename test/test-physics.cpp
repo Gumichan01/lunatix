@@ -137,17 +137,14 @@ void test_euclide(void)
 
 void test_collisionPointCircle(void)
 {
-    LX_Point A,B,C,D;
-    LX_Circle c;
-
     bool d;
 
-    c = {{100,100},10,100};
+    LX_Circle c(LX_Point(100,100),10);
 
-    A = {100,100};
-    B = {50,50};
-    C = {105,105};
-    D = {100,125};
+    LX_Point A = {100,100};
+    LX_Point B = {50,50};
+    LX_Point C = {105,105};
+    LX_Point D = {100,125};
 
     cout << " = TEST POINT/CIRCLE = " << endl;
 
@@ -213,12 +210,11 @@ void test_collisionPointRect(void)
 
 void test_collision2Circle(void)
 {
-    LX_Circle A,B,C;
     bool d;
 
-    A = {{10,10},5,25};
-    B = {{13,12},3,9};
-    C = {{100,100},50,50*50};
+    LX_Circle A(LX_Point(10,10),5);
+    LX_Circle B(LX_Point(13,12),3);
+    LX_Circle C(LX_Point(100,100),50);
 
     cout << " = TEST CIRCLE/CIRCLE = " << endl;
 
@@ -281,14 +277,13 @@ void test_collision2Rect(void)
 
 void test_collisionRectCircle(void)
 {
-    LX_AABB R1;
-    LX_Circle A,B,C;
     bool d;
+    LX_AABB R1;
 
     R1 = {0,0,50,25};
-    A = {{10,10},5,25};
-    B = {{51,26},15,15*15};
-    C = {{100,100},40,40*40};
+    LX_Circle A(LX_Point(10,10),5);
+    LX_Circle B(LX_Point(51,26),15);
+    LX_Circle C(LX_Point(100,100),40);
 
     cout << " = TEST RECT/CIRCLE = " << endl;
 
@@ -602,10 +597,10 @@ void test_collisionPointPolygon(void)
 
 void test_collisionCirclePolygon(void)
 {
-    LX_Circle M = {{12,7},1,1};
-    LX_Circle N = {{12,7},2,4};
-    LX_Circle O = {{9,7},10,100};
-    LX_Circle S = {{2,2},2,4};
+    LX_Circle M(LX_Point(12,7),1);
+    LX_Circle N(LX_Point(12,7),2);
+    LX_Circle O(LX_Point(9,7),10);
+    LX_Circle S(LX_Point(2,2),2);
 
     bool d;
     LX_Polygon poly(5);
@@ -838,14 +833,13 @@ void test_assignment(void)
              << "Got : Q(" << Q.x << "," << Q.y << ")" << endl;
 
 
-    LX_Circle C = {{4,9},10,100};
-    LX_Circle D;
+    LX_Circle C(LX_Point(4,9),10);
 
     cout << "INFO - Circle C : Center(" << C.center.x << "," << C.center.y
          << ") radius : " << C.radius << "; square radius : " << C.square_radius
          << endl;
 
-    D = C;  // assignment
+    LX_Circle D = C;  // assignment
 
     if(D == C)
         cout << "SUCCESS - Circle D : Center(" << C.center.x << "," << C.center.y
@@ -859,11 +853,10 @@ void test_assignment(void)
 
 
     LX_Vector2D v = {3.14,1.59};
-    LX_Vector2D u;
 
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
 
-    u = v;  // assignment
+    LX_Vector2D u = v;  // assignment
 
     if(u == v)
         cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
@@ -877,9 +870,9 @@ void test_assignment(void)
 
 void test_operator(void)
 {
-    LX_Circle C = {{2,3},10,100};
-    LX_Circle E = {{4,9},32,32*32};
-    LX_Circle F = {{8,21},10,100};
+    LX_Circle C(LX_Point(2,3),10);
+    LX_Circle E(LX_Point(4,9),32);
+    LX_Circle F(LX_Point(8,21),10);
 
     LX_Vector2D v = {-3.14,1.59};
     LX_Vector2D u = v;

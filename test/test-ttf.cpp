@@ -7,6 +7,7 @@
 using namespace std;
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
+using namespace LX_FileIO;
 
 
 void test_font(void);
@@ -232,7 +233,7 @@ void test_font2(void)
     if(s != NULL)
         cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
     else
-        cout << "SUCCESS - The text was not loaded - " << LX_GetError() << endl;
+        cout << "SUCCESS - The solid text was not loaded - " << LX_GetError() << endl;
 
     SDL_FreeSurface(s);
 
@@ -242,7 +243,7 @@ void test_font2(void)
     if(s != NULL)
         cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
     else
-        cout << "SUCCESS - The text was not loaded - " << LX_GetError() << endl;
+        cout << "SUCCESS - The shaded text was not loaded - " << LX_GetError() << endl;
 
     SDL_FreeSurface(s);
 
@@ -252,7 +253,7 @@ void test_font2(void)
     if(s != NULL)
         cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
     else
-        cout << "SUCCESS - The text was not loaded - " << LX_GetError() << endl;
+        cout << "SUCCESS - The blended text was not loaded - " << LX_GetError() << endl;
 
     SDL_FreeSurface(s);
 

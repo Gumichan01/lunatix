@@ -22,9 +22,19 @@ void test_buffer(void);
 void test_getSurface2(void);
 void test_getChunk(void);
 
-string str = "tmpFile";
 
-int main(int argc, char **argv)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wexit-time-destructors"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wglobal-constructors"
+
+static string str = "tmpFile";
+
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
+
+
+int main()
 {
     bool err = false;
 
@@ -143,7 +153,7 @@ void test_read(void)
 {
     cout << " = TEST read = " << endl;
 
-    int read_data = 0;
+    size_t read_data = 0;
     char buf[N + 1];
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
@@ -152,7 +162,7 @@ void test_read(void)
          << f.size() << " byte(s)" << endl;
     read_data = f.read(buf,sizeof(char),N);
 
-    if(read_data == -1)
+    if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
     {
@@ -171,12 +181,12 @@ void test_read2(void)
 {
     cout << " = TEST read2 = " << endl;
 
-    const char * str = "data/explosion.png";
+    const char * strex = "data/explosion.png";
 
     Sint64 beg, end;
-    int read_data = 0;
+    size_t read_data = 0;
     char *buff = NULL;
-    LX_File f(str,LX_FILEIO_RDONLY);
+    LX_File f(strex,LX_FILEIO_RDONLY);
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
          << f.size() << " byte(s)" << endl;
@@ -198,13 +208,13 @@ void test_read2(void)
 
     buff = new char[size];
 
-    read_data = f.read(buff,sizeof(char),size);
+    read_data = f.read(buff,sizeof(char),static_cast<size_t>(size));
 
-    if(read_data == -1)
+    if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
     {
-        cout << "SUCCESS - Received " << read_data << " bytes from " << str << endl;
+        cout << "SUCCESS - Received " << read_data << " bytes from " << strex << endl;
     }
 
     f.close();
@@ -218,7 +228,7 @@ void test_write(void)
 {
     cout << " = TEST write = " << endl;
 
-    int read_data = 0;
+    size_t read_data = 0;
     char buf[N];
     LX_File f(str.c_str(),LX_FILEIO_WRONLY);
 
@@ -229,7 +239,7 @@ void test_write(void)
 
     read_data = f.write(buf,sizeof(char),N);
 
-    if(read_data == -1)
+    if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
         cout << "SUCCESS - Wrote " << read_data << " bytes on " << str << endl;
@@ -237,7 +247,7 @@ void test_write(void)
 
     read_data = f.write("CHAN01");
 
-    if(read_data == -1)
+    if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
         cout << "SUCCESS - Wrote " << read_data << " bytes on " << str << endl;
@@ -423,6 +433,9 @@ void test_getChunk(void)
 
     cout << " = TEST Chunk from buffer = " << endl;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-exception-parameter"
+
     try
     {
         LX_Mixer::LX_Chunk dump(&f);
@@ -433,6 +446,7 @@ void test_getChunk(void)
         cerr << "FAILURE - Cannot instanciate LX_Chunk with a file buffer as argument" << LX_GetError() << endl;
     }
 
+#pragma clang diagnostic pop
 
     mix = f.getChunkFromBuffer();
 
