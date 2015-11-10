@@ -40,7 +40,11 @@ namespace LX_Random
 */
 void initRand(void)
 {
+// Warning in thisfunction. Not imortant ! Ignore it !
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
     srand(time(NULL));
+#pragma clang diagnostic pop
 }
 
 
@@ -62,7 +66,7 @@ uint64_t xorshiftRand(void)
     if(first_call == false)
     {
         // x must be a nonzero value
-        x = crand() + 1;
+        x = static_cast<uint64_t>(crand() + 1);
         first_call = true;
     }
 
