@@ -37,7 +37,7 @@ using namespace LX_FileIO;
 using namespace LX_MSGBox;
 using namespace LX_VersionInfo;
 
-#ifdef _WIN32_
+#if defined(__WIN32__)
 int main(int argc, char** argv)
 #else
 int main()
