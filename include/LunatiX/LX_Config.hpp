@@ -51,14 +51,11 @@ public :
     ~LX_ConfigurationException() noexcept;
 };
 
+
 /**
 *   @class LX_Configuration
-*   @brief The configuration class.
-*
-*   This class loads the configuration
-*
+*   @brief The The LunatiX engine configuration.
 */
-
 class LX_Configuration
 {
 

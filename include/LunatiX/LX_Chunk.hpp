@@ -41,7 +41,6 @@ namespace LX_Mixer
 /**
 *   @class LX_ChunkException
 *   @brief The exception class of LX_Chunk
-*
 */
 class LX_ChunkException : public std::exception
 {
@@ -62,7 +61,6 @@ public :
 /**
 *   @class LX_Chunk
 *   @brief The chunk class
-*
 */
 class LX_Chunk : public virtual LX_Sound
 {

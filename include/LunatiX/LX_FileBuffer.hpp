@@ -42,7 +42,6 @@ class IOException;
 *
 *   This structure contains information about a file buffer.
 *   It stores a memory copy of a file content into a buffer.
-*
 */
 class LX_FileBuffer
 {

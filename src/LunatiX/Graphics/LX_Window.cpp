@@ -59,7 +59,7 @@ namespace LX_Graphics
 /**
 *   @fn LX_WindowException::LX_WindowException(std::string err)
 *
-*   Build the LX_WindowException class
+*   Constructor
 *
 *   @param err The error string
 *
@@ -70,14 +70,6 @@ LX_WindowException::LX_WindowException(std::string err)
 }
 
 
-/**
-*   @fn LX_WindowException::LX_WindowException(const LX_WindowException& w)
-*
-*   Copy contructor
-*
-*   @param err The error string
-*
-*/
 LX_WindowException::LX_WindowException(const LX_WindowException& w)
 {
     stringError = w.stringError;
@@ -87,7 +79,7 @@ LX_WindowException::LX_WindowException(const LX_WindowException& w)
 /**
 *   @fn const char * LX_WindowException::what() const noexcept
 *
-*   Get the error string
+*   Get the error string associated with the exception
 *
 *   @return The error string
 */
@@ -111,8 +103,8 @@ LX_WindowException::~LX_WindowException() noexcept {}
 *           - LX_WINDOW_RENDERING : to use the renderer
 *
 *   @param accel Tag that selects the rendering mode
-*           - TRUE : Use hardware acceleration
-*           - FALSE : Use software fallback
+*           - True : Use hardware acceleration
+*           - False : Use software fallback
 *
 *   @exception LX_WindowException
 *
@@ -165,8 +157,8 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *           - LX_WINDOW_RENDERING : to use the renderer
 *
 *   @param accel Tag that selects the rendering mode
-*           - TRUE : Use hardware acceleration
-*           - FALSE : Use software fallback
+*           - True : Use hardware acceleration
+*           - False : Use software fallback
 *
 *   @note The default configuration is used during the creation of the window
 *
@@ -196,7 +188,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 /**
 *   @fn LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 *
-*   Create the window with an already set window
+*   Create the window with an SDL_Window instance
 *
 *   @param sdlWin The SDL_Window (must be a valid pointer)
 *   @param mode The display mode
@@ -204,8 +196,8 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *           - LX_WINDOW_RENDERING : to use the renderer
 *
 *   @param accel Tag that selects the rendering mode
-*           - TRUE : Use hardware acceleration
-*           - FALSE : Use software fallback
+*           - True : Use hardware acceleration
+*           - False : Use software fallback
 *
 *   @note This constructor does not use the LX_config class
 *
@@ -247,8 +239,8 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 *           - And any SDL flags
 *
 *   @param accel Tag that selects the rendering mode
-*           - TRUE : Use hardware acceleration
-*           - FALSE : Use software fallback
+*           - True : Use hardware acceleration
+*           - False : Use software fallback
 *
 *   @note This constructor does not use the LX_config class
 *
@@ -345,7 +337,7 @@ LX_Window::~LX_Window()
 *   @param area The area of the surface to put on the screen
 *   @param pos The position of the surface
 *
-*   @return TRUE If the image was put with success, FALSE otherwise
+*   @return True If the image was put with success, False otherwise
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
@@ -397,7 +389,7 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *   @param area The area of the surface to put on the renderer
 *   @param pos The position of the texture
 *
-*   @return TRUE If the texture was put with success, FALSE otherwise
+*   @return True If the texture was put with success, False otherwise
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
@@ -429,7 +421,7 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 *   @param pos The position of the texture
 *   @param angle an angle in degrees that indicate the rotation
 *
-*   @return TRUE If the texture was put with success, FALSE otherwise
+*   @return True If the texture was put with success, False otherwise
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
@@ -585,7 +577,7 @@ void LX_Window::clearRenderer(void)
 
     Save a screenshot in a file
 
-    @return TRUE on succes, FALSE otherwise
+    @return True on succes, False otherwise
 
 */
 bool LX_Window::screenshot(std::string filename)

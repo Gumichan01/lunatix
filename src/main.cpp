@@ -241,7 +241,7 @@ int main()
     printf("But we linked against SDL version %d.%d.%d.\n",
            linked.major, linked.minor, linked.patch);
 
-    // Version of LunatiX Engine
+    // Version of the LunatiX Engine
     LX_Version luna;
 
     LX_EngineVersion(luna);

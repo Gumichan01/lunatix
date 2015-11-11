@@ -44,11 +44,8 @@ class LX_FileBuffer;
 
 /**
 *   @namespace LX_Mixer
-*   @brief The mixer module of LunatiX Engine
-*
-*   This SDL_Mixer-based sound engine loads and reads audio files
-*
-**/
+*   @brief The mixer module
+*/
 namespace LX_Mixer
 {
 

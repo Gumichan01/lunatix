@@ -22,12 +22,6 @@
 #include <LunatiX/LX_MessageBox.hpp>
 
 
-/**
-*   @namespace LX_MSGBox
-*
-*   @brief The Message Box module
-*
-*/
 namespace LX_MSGBox
 {
 

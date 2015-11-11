@@ -27,12 +27,8 @@
 #include <LunatiX/LX_AABB.hpp>
 
 /**
-*
 *   @namespace LX_Physics
-*   @brief The physics engine
-*
-*   This namespace describes LX_Physics, the physics module of Lunatix Engine.
-*
+*   @brief The physics module
 */
 namespace LX_Physics
 {

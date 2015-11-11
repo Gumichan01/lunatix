@@ -41,14 +41,6 @@ IOException::IOException(std::string err)
 }
 
 
-/**
-*   @fn IOException::IOException(IOException& io)
-*
-*   The exception constructor
-*
-*   @param io The object to copy
-*
-*/
 IOException::IOException(const IOException& io)
 {
     stringError = io.stringError;

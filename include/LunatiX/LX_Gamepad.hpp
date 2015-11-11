@@ -32,10 +32,9 @@ class LX_Haptic;
 
 /**
 *   @class LX_Gamepad
-*   @brief The gamepad class
+*   @brief The gamepad (joystick, game controller)
 *
 *   It handles any type of gamepad
-*
 */
 class LX_Gamepad
 {

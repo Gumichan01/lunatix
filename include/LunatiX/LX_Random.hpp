@@ -43,11 +43,10 @@ typedef unsigned __int64 uint64_t;
 
 /**
 *	@namespace LX_Random
-*	@brief The Random Number Generator (RNG) namespace
+*	@brief The Random Number Generator (RNG) module
 *
 *   This namespace describes LX_Random. This random number generator is based on
 *   the Xorshift* generator, but has also a support of the standard C generator
-*
 */
 namespace LX_Random
 {

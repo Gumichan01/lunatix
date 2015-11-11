@@ -16,7 +16,7 @@
 
 /**
 *	@file LX_Error.hpp
-*	@brief The error header. It just has macro definitions
+*	@brief The error header.
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.6
 *
@@ -29,9 +29,9 @@
 /**
 *   @fn inline const char * LX_GetError()
 *
-*   This function is just an alias of SDL_GetError
+*   Get the error message set by LX_SetError
 *
-*   @return The error string
+*   @return The error message
 *
 */
 inline const char * LX_GetError()
@@ -43,7 +43,7 @@ inline const char * LX_GetError()
 /**
 *   @fn inline int LX_SetError(std::string str)
 *
-*   This function is just an alias of SDL_SetError
+*   Set an error message
 *
 *   @param str The error string
 *

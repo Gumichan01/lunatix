@@ -43,10 +43,7 @@ struct SDL_Surface;
 
 /**
 *   @namespace LX_FileIO
-*   @brief The file Input/Output module
-*
-*   This namespace describes the file module of LunatiX Engine
-*
+*   @brief The Input/Output file module
 */
 namespace LX_FileIO
 {
@@ -78,10 +75,7 @@ public :
 
 /**
 *   @class LX_File
-*   @brief The file class
-*
-*   This class contains information about a file
-*
+*   @brief The file handler
 */
 class LX_File
 {

@@ -47,14 +47,6 @@ LX_ChunkException::LX_ChunkException(std::string err)
 }
 
 
-/**
-*   @fn LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
-*
-*   Copy constructor
-*
-*   @param err The error string
-*
-*/
 LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
 {
     stringError = me.stringError;

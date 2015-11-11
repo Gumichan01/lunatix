@@ -37,9 +37,7 @@ class LX_Particle;
 
 /**
 *   @class LX_ParticleSystem
-*   @brief The particle system class
-*
-*   This class describes a particle system
+*   @brief The particle system
 */
 class LX_ParticleSystem
 {

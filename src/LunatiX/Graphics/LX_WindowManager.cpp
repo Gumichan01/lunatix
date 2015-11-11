@@ -85,7 +85,8 @@ LX_WindowManager * LX_WindowManager::getInstance()
 *   Destroy the instance of the singleton
 *
 *   @warning    The windows contained in the window manager
-*               are not destroyed. So it is necessary to keep an external .
+*               are not destroyed. So it is necessary to keep an external
+*               pointer to the windows added in the manager.
 *
 */
 void LX_WindowManager::destroy(void)

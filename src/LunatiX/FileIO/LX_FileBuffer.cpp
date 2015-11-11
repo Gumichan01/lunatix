@@ -39,7 +39,7 @@ namespace LX_FileIO
 *   @param filename The file to generate the buffer
 *
 *   @exception std::logic_error If the filename is not defined
-*   @exception IOException If the file cannot be dealt by the instance
+*   @exception IOException If the file cannot be read by the instance
 *
 */
 LX_FileBuffer::LX_FileBuffer(const char * filename)

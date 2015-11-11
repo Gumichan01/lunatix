@@ -25,9 +25,7 @@
 
 /**
 *   @namespace LX_VersionInfo
-*
-*   @brief Get information about ht version of the engine
-*
+*   @brief Information about the version of the engine
 */
 namespace LX_VersionInfo
 {

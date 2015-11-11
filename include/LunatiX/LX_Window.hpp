@@ -73,8 +73,6 @@ public :
 *   @class LX_Window
 *   @brief The window
 *
-*   This class describes the window.
-*
 *   @note By default, the constructor retrieves information from the configuration file
 *
 *   @warning The LX_Window class must be defined only after

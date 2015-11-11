@@ -37,7 +37,6 @@ bool isHaptic(SDL_Joystick *joy);
 *   @brief The haptic device
 *
 *   This class describes the force feedback device.
-*
 */
 class LX_Haptic
 {

@@ -20,7 +20,6 @@
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.6
 *
-*
 */
 
 #include "LX_AABB.hpp"
@@ -44,9 +43,7 @@ namespace LX_ParticleEngine
 
 /**
 *   @class LX_Particle
-*   @brief The particle class
-*
-*   This class describes a particle
+*   @brief The particle
 */
 class LX_Particle
 {

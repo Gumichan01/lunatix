@@ -45,7 +45,7 @@ LX_Point::LX_Point(): LX_Point(0,0)
 *   2-argument constructor of the point
 *
 *   @param xpos X position
-*   @param xpos Y position
+*   @param ypos Y position
 *
 */
 LX_Point::LX_Point(int xpos, int ypos): x(xpos), y(ypos)

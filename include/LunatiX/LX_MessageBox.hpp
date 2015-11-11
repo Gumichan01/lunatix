@@ -28,7 +28,10 @@
 #define LX_MSG_INFO SDL_MESSAGEBOX_INFORMATION      /**< Information message */
 
 
-
+/**
+*   @namespace LX_MSGBox
+*   @brief The Message Box module
+*/
 namespace LX_MSGBox
 {
 // Display a message box in a little window

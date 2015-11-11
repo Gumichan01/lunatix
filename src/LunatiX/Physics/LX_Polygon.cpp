@@ -34,20 +34,6 @@ namespace LX_Physics{
 
 
 /**
-*   @fn LX_PolygonException::LX_PolygonException(LX_PolygonException& pex)
-*
-*   Build the LX_PolygonException class
-*
-*   @param err The error string
-*
-*/
-LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
-{
-    stringError = pex.stringError;
-}
-
-
-/**
 *   @fn LX_PolygonException::LX_PolygonException(std::string err)
 *
 *   Build the LX_PolygonException class
@@ -58,6 +44,12 @@ LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
 LX_PolygonException::LX_PolygonException(std::string err)
 {
     stringError = err;
+}
+
+
+LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
+{
+    stringError = pex.stringError;
 }
 
 
@@ -365,7 +357,7 @@ void LX_Polygon::move(const LX_Vector2D& v)
 
 
 /**
-*   @fn void LX_Polygon::move(int vx, int vy)
+*   @fn void LX_Polygon::moveTo(int vx, int vy)
 *
 *   Move the polygon to a position
 *

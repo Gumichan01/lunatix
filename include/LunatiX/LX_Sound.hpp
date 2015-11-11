@@ -34,9 +34,6 @@ namespace LX_Mixer
 /**
 *   @class LX_Sound
 *   @brief The sound interface
-*
-*   This virtual class gathers the functions used by LX_Chunk and LX_Music
-*
 */
 class LX_Sound
 {

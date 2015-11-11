@@ -131,7 +131,7 @@ LX_Font::LX_Font(std::string font_file, SDL_Color& color, unsigned int size)
 /*
 *
 *   This private function creates a file buffer from font_str.
-*   This function can throw an IException instance if the buffer cannot
+*   This function can throw an IOException instance if the buffer cannot
 *   be loaded.
 *
 */
@@ -461,7 +461,7 @@ TTF_Font * LX_Font::createInternalFont(int size)
 *   @param text The std::string to draw
 *   @param size The size of the text on the window
 *   @param idWindow The ID of the window to get the renderer from.
-*                   It is necessary to load the texture
+*                   Optional argument
 *
 *   @return An instance of SDL_Texture on success, a null pointer
 *           if the window is not valid or if something wrong happened
@@ -486,8 +486,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 *   @param type The type of the text(Solid, Shaded, or Blended)
 *   @param text The std::string to draw
 *   @param size The size of the text on the window
-*   @param win The window to get the renderer from.
-*                   It is necessary to load the texture
+*   @param win The window to get the renderer from
 *
 *   @return An instance of SDL_Texture on success,
 *           a null pointer if the window is not valid

@@ -38,12 +38,6 @@ int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
 };
 
 
-/**
-*   @namespace LX_Device
-*
-*   @brief The device module
-*
-*/
 namespace LX_Device
 {
 
@@ -180,7 +174,7 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 
 
 /**
-*   @fn const char * gamepadToString(LX_GamepadInfo *info, char * str)
+*   @fn const char * gamepadToString(LX_GamepadInfo& info, char * str)
 *
 *   Get the string format of the information structure
 *

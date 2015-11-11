@@ -29,17 +29,19 @@
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
 #define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status       */
 
-const int LX_JOY_NAMESIZE =  64;     // The size of the joystick name
+const int LX_JOY_NAMESIZE =  64;        // The size of the joystick name
 
 
+/**
+*   @namespace LX_Device
+*   @brief The device module
+*/
 namespace LX_Device
 {
 
 /**
 *   @struct LX_GamepadInfo
 *   @brief Information about gamepad
-*
-*   This structure gathers information about a gamepad
 */
 typedef struct LX_GamepadInfo
 {

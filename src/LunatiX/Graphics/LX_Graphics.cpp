@@ -50,7 +50,7 @@ namespace LX_Graphics
 *
 *   @note   When this function is called, the format optimization includes
 *           the alpha channel.
-*           No alpha needs to be set on the surface after that.
+*           No alpha value needs to be set on the surface after that.
 *
 *   @sa loadSurfaceFromFileBuffer
 */
@@ -192,6 +192,9 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 *   @return A new pointer to the texture if the loading is successful,
 *           a null pointer otherwise
 *
+*   @note   If id is not given as argument to the function,
+*            the default argument is used, that is to say 0
+*
 *   @sa loadTextureFromFile
 */
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
@@ -221,6 +224,9 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 *
 *   @return A pointer to an SDL_Texture if the loading works,
 *           a null pointer otherwise
+*
+*   @note   If id is not given as argument to the function,
+*            the default argument is used, that is to say 0
 *
 *   @sa loadTextureFromSurface
 */

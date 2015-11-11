@@ -41,12 +41,8 @@ class LX_FileBuffer;
 
 
 /**
-*
 *   @namespace LX_Graphics
 *   @brief The graphics module
-*
-*   This namespace describes LX_Graphics, the graphics module of Lunatix Engine.
-*
 */
 namespace LX_Graphics
 {
@@ -64,7 +60,6 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w);
 SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w);
 
 // To use when you work with the window manager
-/// @todo Documentation of SDL_Texture * loadTextureFromSurface (to update)
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id = 0);
 SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id = 0);
 

@@ -33,10 +33,7 @@ class LX_Window;
 
 /**
 *   @class LX_WindowManager
-*
-*   @brief The window manager class
-*
-*   It handles various windows
+*   @brief The windows manager
 *
 */
 class LX_WindowManager

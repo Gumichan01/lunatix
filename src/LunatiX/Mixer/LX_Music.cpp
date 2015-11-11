@@ -14,7 +14,7 @@
 
 
 /**
-*	@file LX_Music.cppLX_FileBuffer
+*	@file LX_Music.cpp
 *	@brief The implementation of the music library
 *	@author Luxon Jean-Pierre(Gumichan01)
 *	@version 0.6
@@ -44,14 +44,6 @@ LX_MusicException::LX_MusicException(std::string err)
 }
 
 
-/**
-*   @fn LX_MusicException::LX_MusicException(const LX_MusicException& me)
-*
-*   Copy constructor
-*
-*   @param err The error string
-*
-*/
 LX_MusicException::LX_MusicException(const LX_MusicException& me)
 {
     stringError = me.stringError;

@@ -37,7 +37,6 @@ struct LX_Vector2D;
 *
 *   This class describes the exception occured when
 *   the SDL_Window instance cannot be loaded.
-*
 */
 class LX_PolygonException : public std::exception
 {
