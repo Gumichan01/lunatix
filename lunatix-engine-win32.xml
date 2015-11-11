@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="lunatix" />
+		<Option title="lunatix-engine-win32" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/lunatix" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/lunatix-demo" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -15,13 +15,30 @@
 					<Add option="-g" />
 				</Compiler>
 			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/lunatix" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
+			<Target title="Static_library">
+				<Option platforms="Windows;" />
+				<Option output="build/lunatix" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
 				<Option compiler="gcc" />
+				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O3" />
+					<Add option="-w" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Dynamic_library">
+				<Option platforms="Windows;" />
+				<Option output="build/lunatix" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-w" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -30,6 +47,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-std=c++11" />
+			<Add option="-Wextra" />
 			<Add option="-Wall" />
 			<Add directory="include" />
 		</Compiler>
@@ -83,6 +101,7 @@
 		<Unit filename="src/LunatiX/Mixer/LX_Chunk.cpp" />
 		<Unit filename="src/LunatiX/Mixer/LX_Mixer.cpp" />
 		<Unit filename="src/LunatiX/Mixer/LX_Music.cpp" />
+		<Unit filename="src/LunatiX/Mixer/LX_Sound.cpp" />
 		<Unit filename="src/LunatiX/ParticleEngine/LX_Particle.cpp" />
 		<Unit filename="src/LunatiX/ParticleEngine/LX_ParticleSystem.cpp" />
 		<Unit filename="src/LunatiX/Physics/LX_Hitbox.cpp" />
@@ -93,7 +112,9 @@
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
 		<Unit filename="src/LunatiX/Version/LX_Version.cpp" />
-		<Unit filename="src/main.cpp" />
+		<Unit filename="src/main.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
