@@ -31,7 +31,7 @@
 
 
 // unique instance
-static LX_Configuration *instance = NULL;
+static LX_Configuration *instance = nullptr;
 
 using namespace std;
 
@@ -105,7 +105,7 @@ LX_Configuration::~LX_Configuration() {}
 */
 void LX_Configuration::initConfig()
 {
-    if(instance == NULL)
+    if(instance == nullptr)
     {
         try
         {
@@ -114,7 +114,7 @@ void LX_Configuration::initConfig()
         catch(std::exception & ex_conf)
         {
             LX_SetError(ex_conf.what());
-            instance = NULL;
+            instance = nullptr;
         }
     }
 }
@@ -149,7 +149,7 @@ LX_Configuration * LX_Configuration::getInstance()
 void LX_Configuration::destroy()
 {
     delete instance;
-    instance = NULL;
+    instance = nullptr;
 }
 
 
@@ -167,7 +167,7 @@ void LX_Configuration::assignString(lua_State * state, char *str, unsigned int l
     memset(str,0,len);
     tmp = (char *) lua_tostring(state,-2);
 
-    if(tmp != NULL)
+    if(tmp != nullptr)
         strncpy(str,tmp,len-2);
 
     str[len-1] = '\0';
@@ -186,7 +186,7 @@ void LX_Configuration::setFlags(void)
     const std::string luaFunction = "getFlags";
     std::string key;
     char tmp[16];
-    lua_State *state = NULL;
+    lua_State *state = nullptr;
 
     // Constant values
     const std::string VIDEO_KEY = "video";
@@ -203,7 +203,7 @@ void LX_Configuration::setFlags(void)
 
     state = lua_open();
 
-    if(state == NULL)
+    if(state == nullptr)
     {
         LX_SetError("Error occured in LX_Configuration::setFlags : Internal error");
         return;
