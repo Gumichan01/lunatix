@@ -56,13 +56,13 @@ namespace LX_Graphics
 */
 SDL_Surface * loadSurface(std::string filename)
 {
-    SDL_Surface *loaded = NULL;
+    SDL_Surface *loaded = nullptr;
 
     loaded = IMG_Load(filename.c_str());
 
-    if(loaded == NULL)
+    if(loaded == nullptr)
     {
-        return NULL;
+        return nullptr;
     }
 
     return optimizeSurface(loaded);
@@ -87,10 +87,10 @@ SDL_Surface * loadSurface(std::string filename)
 */
 SDL_Surface * loadSurface(LX_File *file)
 {
-    if(file == NULL)
+    if(file == nullptr)
     {
-        LX_SetError("Invalid pointer : NULL reference of LX_File\n");
-        return NULL;
+        LX_SetError("Invalid pointer : nullptr reference of LX_File\n");
+        return nullptr;
     }
 
     return optimizeSurface(file->getSurfaceFromData());
@@ -114,10 +114,10 @@ SDL_Surface * loadSurface(LX_File *file)
 */
 SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 {
-    if(file == NULL)
+    if(file == nullptr)
     {
-        LX_SetError("Invalid pointer : NULL reference of LX_FileBuffer\n");
-        return NULL;
+        LX_SetError("Invalid pointer : nullptr reference of LX_FileBuffer\n");
+        return nullptr;
     }
 
     return optimizeSurface(file->getSurfaceFromBuffer());
@@ -143,17 +143,17 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 */
 SDL_Surface * optimizeSurface(SDL_Surface * surface)
 {
-    SDL_Surface * optimized = NULL;
+    SDL_Surface * optimized = nullptr;
 
-    if(surface == NULL)
+    if(surface == nullptr)
     {
         LX_SetError("Invalid pointer : invalid surface\n");
-        return NULL;
+        return nullptr;
     }
 
     optimized = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA4444,0x00000000);
     SDL_FreeSurface(surface);
-    surface = NULL;
+    surface = nullptr;
 
     return optimized;
 }
@@ -199,14 +199,14 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 */
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 {
-    LX_Window *tmp = NULL;
+    LX_Window *tmp = nullptr;
 
     tmp = LX_WindowManager::getInstance()->getWindow(id);
 
-    if(tmp == NULL)
+    if(tmp == nullptr)
     {
         LX_SetError("LX_Graphics::loadTextureFromSurface - invalid window");
-        return NULL;
+        return nullptr;
     }
 
     return SDL_CreateTextureFromSurface(tmp->getRenderer(),target);
@@ -232,13 +232,13 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 */
 SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 {
-    SDL_Surface *tmpS = NULL;
-    SDL_Texture *tmpT = NULL;
+    SDL_Surface *tmpS = nullptr;
+    SDL_Texture *tmpT = nullptr;
 
     tmpS = loadSurface(filename.c_str());
 
-    if(tmpS == NULL)
-        return NULL;
+    if(tmpS == nullptr)
+        return nullptr;
 
     tmpT = loadTextureFromSurface(tmpS,id);
 
@@ -263,13 +263,13 @@ SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 */
 SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
 {
-    SDL_Surface *tmpS = NULL;
-    SDL_Texture *tmpT = NULL;
+    SDL_Surface *tmpS = nullptr;
+    SDL_Texture *tmpT = nullptr;
 
     tmpS = loadSurface(filename.c_str());
 
-    if(tmpS == NULL)
-        return NULL;
+    if(tmpS == nullptr)
+        return nullptr;
 
     tmpT = loadTextureFromSurface(tmpS,w);
 

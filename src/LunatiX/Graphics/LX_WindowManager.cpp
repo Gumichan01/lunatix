@@ -27,7 +27,7 @@
 #include <LunatiX/LX_Error.hpp>
 
 
-static LX_Graphics::LX_WindowManager *winInstance = NULL;
+static LX_Graphics::LX_WindowManager *winInstance = nullptr;
 
 
 namespace LX_Graphics
@@ -58,7 +58,7 @@ LX_WindowManager * getWindowManager()
 */
 void LX_WindowManager::init(void)
 {
-    if(winInstance == NULL)
+    if(winInstance == nullptr)
     {
         winInstance = new LX_WindowManager();
     }
@@ -110,7 +110,7 @@ LX_WindowManager::~LX_WindowManager()
     {
         for(unsigned int i = 0; i < size; i++)
         {
-            windows[i] = NULL;
+            windows[i] = nullptr;
         }
     }
 }
@@ -132,7 +132,7 @@ LX_WindowManager::~LX_WindowManager()
 int LX_WindowManager::addWindow(LX_Window *w)
 {
     int id;
-    if(w == NULL || size >= LX_NBMAX_WINDOWS)
+    if(w == nullptr || size >= LX_NBMAX_WINDOWS)
         return -1;
 
     windows[size] = w;
@@ -160,13 +160,13 @@ int LX_WindowManager::addWindow(LX_Window *w)
 */
 LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 {
-    LX_Window *w = NULL;
+    LX_Window *w = nullptr;
 
-    if(id > size || windows[id] == NULL)
-        return NULL;
+    if(id > size || windows[id] == nullptr)
+        return nullptr;
 
     w = windows[id];
-    windows[id] = NULL;
+    windows[id] = nullptr;
     nbWin -= 1;
 
     return w;
@@ -197,7 +197,7 @@ void LX_WindowManager::updateWindows()
 {
     for(unsigned int i = 0; i < nbWin; i++)
     {
-        if(windows[i] != NULL)
+        if(windows[i] != nullptr)
             windows[i]->update();
     }
 }
@@ -213,7 +213,7 @@ void LX_WindowManager::clearWindows()
 {
     for(unsigned int i = 0; i < nbWin; i++)
     {
-        if(windows[i] != NULL)
+        if(windows[i] != nullptr)
             windows[i]->clear();
     }
 }
@@ -230,7 +230,7 @@ void LX_WindowManager::clearWindows()
 */
 LX_Window * LX_WindowManager::getWindow(unsigned int id)
 {
-    return (id > size) ? NULL : windows[id];
+    return (id > size) ? nullptr : windows[id];
 }
 
 

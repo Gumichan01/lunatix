@@ -110,7 +110,7 @@ LX_WindowException::~LX_WindowException() noexcept {}
 *
 */
 LX_Window::LX_Window(const Uint32 mode, bool accel)
-    : window(NULL), renderer(NULL), originalWidth(0),
+    : window(nullptr), renderer(nullptr), originalWidth(0),
     originalHeight(0), displayMethod(false)
 {
     Uint32 option_flag = 0x00000000;
@@ -164,7 +164,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *
 */
 LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
-    : window(NULL), renderer(NULL), originalWidth(0),
+    : window(nullptr), renderer(nullptr), originalWidth(0),
     originalHeight(0), displayMethod(false)
 {
     int w,h;
@@ -203,7 +203,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *
 */
 LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
-    : window(NULL), renderer(NULL), originalWidth(0),
+    : window(nullptr), renderer(nullptr), originalWidth(0),
     originalHeight(0), displayMethod(false)
 {
     window = sdlWin;
@@ -247,7 +247,7 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 */
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
-    : window(NULL), renderer(NULL), originalWidth(0),
+    : window(nullptr), renderer(nullptr), originalWidth(0),
     originalHeight(0), displayMethod(false)
 {
     createWindow(title.c_str(),posX,posY,w,h,mode,flag,accel);
@@ -262,7 +262,7 @@ void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h
 {
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
 
-    if(window == NULL)
+    if(window == nullptr)
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
@@ -304,7 +304,7 @@ void LX_Window::createRendering(bool accel)
 
     renderer = SDL_CreateRenderer(window,-1,renderFlag);
 
-    if(renderer == NULL)
+    if(renderer == nullptr)
     {
         std::string err_msg = "rendering creation: ";
         err_msg = err_msg + LX_GetError();
@@ -352,10 +352,10 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     int err = 0;
     SDL_Rect offset;
 
-    if(image == NULL)
+    if(image == nullptr)
         return false;
 
-    if(pos == NULL)
+    if(pos == nullptr)
     {
         // The texture will be set on the top-left of the main surface
         offset.x = 0;
@@ -438,7 +438,7 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
                                     const SDL_Rect *pos, const double angle)
 {
-    return(SDL_RenderCopyEx(renderer,origin,area,pos, (-angle), NULL,SDL_FLIP_NONE) == 0);
+    return(SDL_RenderCopyEx(renderer,origin,area,pos, (-angle), nullptr,SDL_FLIP_NONE) == 0);
 }
 
 
@@ -559,7 +559,7 @@ void LX_Window::clear(void)
 void LX_Window::clearWindow(void)
 {
     SDL_Surface *tmp = SDL_GetWindowSurface(window);
-    SDL_FillRect(tmp,NULL, SDL_MapRGB(tmp->format,0,0,0));
+    SDL_FillRect(tmp,nullptr, SDL_MapRGB(tmp->format,0,0,0));
 }
 
 
@@ -605,15 +605,15 @@ bool LX_Window::screenshot(std::string filename)
 bool LX_Window::screenshotUsingRenderer(std::string& filename)
 {
     int err = 0;
-    SDL_Surface *sshot = NULL;
+    SDL_Surface *sshot = nullptr;
 
     sshot = SDL_CreateRGBSurface(0,getWidth(),getHeight(),
                                  LX_ARGB_DEPTH,rmask,gmask,bmask,amask);
 
-    if(sshot == NULL)
+    if(sshot == nullptr)
         return false;
 
-    err = SDL_RenderReadPixels(renderer,NULL,LX_PIXEL_FORMAT,
+    err = SDL_RenderReadPixels(renderer,nullptr,LX_PIXEL_FORMAT,
                                sshot->pixels,sshot->pitch);
 
     if(err == -1)
@@ -635,10 +635,10 @@ bool LX_Window::screenshotUsingRenderer(std::string& filename)
 */
 bool LX_Window::screenshotUsingSurface(std::string& filename)
 {
-    SDL_Surface *sshot = NULL;
+    SDL_Surface *sshot = nullptr;
     sshot = getSurface();   // Get the main surface of the window
 
-    if(sshot == NULL)
+    if(sshot == nullptr)
         return false;
 
     return(IMG_SavePNG(sshot,filename.c_str()) == 0);
@@ -703,7 +703,7 @@ SDL_Window * LX_Window::getWindow(void)
 int LX_Window::getWidth(void)
 {
     int w;
-    SDL_GetWindowSize(window,&w,NULL);
+    SDL_GetWindowSize(window,&w,nullptr);
 
     return w;
 }
@@ -720,7 +720,7 @@ int LX_Window::getWidth(void)
 int LX_Window::getHeight(void)
 {
     int h;
-    SDL_GetWindowSize(window,NULL,&h);
+    SDL_GetWindowSize(window,nullptr,&h);
 
     return h;
 }
