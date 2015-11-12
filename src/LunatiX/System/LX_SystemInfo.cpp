@@ -119,25 +119,25 @@ int getSystemRAM(void)
 const SDL_DisplayMode * getDisplayModes(int& size)
 {
     const int numberOfDisplays = SDL_GetNumDisplayModes(0);
-    SDL_DisplayMode *mode = NULL;
+    SDL_DisplayMode *mode = nullptr;
 
     if(numberOfDisplays == 0)
     {
         LX_SetError("No display available");
-        return NULL;
+        return nullptr;
     }
     else if(numberOfDisplays == 0)
     {
         LX_SetError("Cannot get the number of display modes");
-        return NULL;
+        return nullptr;
     }
 
     mode = new (nothrow) SDL_DisplayMode[numberOfDisplays];
 
-    if(mode == NULL)
+    if(mode == nullptr)
     {
         LX_SetError("Internal error : unavailable ressources");
-        return NULL;
+        return nullptr;
     }
 
     size = numberOfDisplays;
@@ -150,7 +150,7 @@ const SDL_DisplayMode * getDisplayModes(int& size)
         if(SDL_GetDisplayMode(0,i,&mode[i]) < 0)
         {
             delete [] mode;
-            return NULL;
+            return nullptr;
         }
     }
 

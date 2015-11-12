@@ -43,7 +43,7 @@ void initRand(void)
 // Warning in thisfunction. Not imortant ! Ignore it !
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshorten-64-to-32"
-    srand(time(NULL));
+    srand(time(nullptr));
 #pragma clang diagnostic pop
 }
 

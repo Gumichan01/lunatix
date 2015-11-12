@@ -79,13 +79,13 @@ LX_PolygonException::~LX_PolygonException() noexcept {}
 *
 */
 LX_Polygon::LX_Polygon(const unsigned int nb)
-    : points(NULL),nbPoints(nb), cursor(0), convex(false)
+    : points(nullptr),nbPoints(nb), cursor(0), convex(false)
 {
     if(nb > 2)
     {
         points = new (nothrow) LX_Point[nb];
 
-        if(points == NULL)
+        if(points == nullptr)
             throw LX_PolygonException("constr: Cannot allocate the points\n");
 
     }

@@ -56,12 +56,12 @@ namespace LX_TrueTypeFont
 */
 LX_Font::LX_Font(SDL_Color& color, unsigned int size)
     : font_str(""), font_size(size),
-    font_color(color), font_buffer(NULL)
+    font_color(color), font_buffer(nullptr)
 {
     // Load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
 
-    if(ttf_config != NULL)
+    if(ttf_config != nullptr)
     {
         font_str = ttf_config->getFontFile();
 
@@ -98,7 +98,7 @@ LX_Font::LX_Font(SDL_Color& color, unsigned int size)
 */
 LX_Font::LX_Font(std::string font_file, SDL_Color& color)
     : font_str(font_file), font_size(LX_TTF_DEFAULT_FONT_SIZE),
-    font_color(color), font_buffer(NULL)
+    font_color(color), font_buffer(nullptr)
 {
     createbuffer();
 }
@@ -122,7 +122,7 @@ LX_Font::LX_Font(std::string font_file, SDL_Color& color)
 */
 LX_Font::LX_Font(std::string font_file, SDL_Color& color, unsigned int size)
     : font_str(font_file), font_size(size),
-    font_color(color), font_buffer(NULL)
+    font_color(color), font_buffer(nullptr)
 {
     createbuffer();
 }
@@ -188,18 +188,18 @@ int LX_Font::sizeOfText(std::string text, int& w, int& h)
 */
 int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 {
-    TTF_Font *ttf = NULL;
+    TTF_Font *ttf = nullptr;
     int sz;
 
     ttf = createInternalFont(static_cast<int>(size));
 
-    if(ttf == NULL)
+    if(ttf == nullptr)
         return -1;
 
     sz = sizeOfText(ttf,text.c_str(),w,h);
 
     TTF_CloseFont(ttf);
-    ttf = NULL;
+    ttf = nullptr;
     return sz;
 }
 
@@ -232,7 +232,7 @@ SDL_Surface * LX_Font::drawSolidText(std::string text)
     if(font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return NULL;
+        return nullptr;
     }
 
     return drawSolidText(text.c_str(),font_size);
@@ -275,7 +275,7 @@ SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
     if(font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return NULL;
+        return nullptr;
     }
 
     return drawShadedText(text.c_str(), bg.r, bg.g, bg.b);
@@ -300,7 +300,7 @@ SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 
     if(font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return NULL;
+        return nullptr;
     }
 
     return drawText(LX_TTF_SHADED,text.c_str(),font_size,r,g,b);
@@ -347,7 +347,7 @@ SDL_Surface * LX_Font::drawBlendedText(std::string text)
     if(font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return NULL;
+        return nullptr;
     }
 
     return drawBlendedText(text.c_str(),font_size);
@@ -386,18 +386,18 @@ SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
 SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
                                 unsigned int size,Uint8 r, Uint8 g, Uint8 b)
 {
-    TTF_Font *ttf = NULL;
-    SDL_Surface *loaded = NULL;
+    TTF_Font *ttf = nullptr;
+    SDL_Surface *loaded = nullptr;
 
     if(size == 0)
     {
         LX_SetError("drawText: Invalid size, must be a positive value");
-        return NULL;
+        return nullptr;
     }
     else
         ttf = createInternalFont(static_cast<int>(size));
 
-    if(ttf == NULL)
+    if(ttf == nullptr)
         return loaded;
 
 #pragma clang diagnostic push
@@ -442,8 +442,8 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
 */
 TTF_Font * LX_Font::createInternalFont(int size)
 {
-    if(font_buffer == NULL)
-        return NULL;        // This code will normally never be executed
+    if(font_buffer == nullptr)
+        return nullptr;        // This code will normally never be executed
 
     // The font buffer exists
     return font_buffer->getFontFromBuffer(size);
@@ -470,7 +470,7 @@ TTF_Font * LX_Font::createInternalFont(int size)
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
                                          unsigned int size, unsigned int idWindow)
 {
-    LX_Window * target_window = NULL;
+    LX_Window * target_window = nullptr;
     target_window = LX_WindowManager::getInstance()->getWindow(idWindow);
 
     return drawTextToTexture(type,text.c_str(),size,target_window);
@@ -496,20 +496,20 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
                                          unsigned int size, LX_Window *win)
 {
-    SDL_Surface *surface = NULL;
-    SDL_Texture *texture = NULL;
+    SDL_Surface *surface = nullptr;
+    SDL_Texture *texture = nullptr;
 
     Uint8 black = 0;
 
-    if(win == NULL)
+    if(win == nullptr)
     {
         LX_SetError("LX_Font::drawTextToTexture(): invalid window");
-        return NULL;
+        return nullptr;
     }
 
     surface = drawText(type,text.c_str(),size,black,black,black);
 
-    if(surface == NULL)
+    if(surface == nullptr)
         return texture;
 
     // Get the texture
@@ -529,7 +529,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 */
 void LX_Font::setColor(SDL_Color *color)
 {
-    if(color != NULL)
+    if(color != nullptr)
     {
         font_color.r = color->r;
         font_color.g = color->g;
