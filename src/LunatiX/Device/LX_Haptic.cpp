@@ -95,7 +95,7 @@ LX_Haptic::LX_Haptic(SDL_Joystick *joy)
 */
 LX_Haptic::LX_Haptic(SDL_GameController *gc)
 {
-    if(gc != NULL)
+    if(gc != nullptr)
     {
         SDL_Joystick *joy = SDL_GameControllerGetJoystick(gc);
         haptic = SDL_HapticOpenFromJoystick(joy);

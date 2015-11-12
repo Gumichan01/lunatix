@@ -40,14 +40,14 @@ namespace LX_Device
 *   @note   You can check the success of the operation
 *           calling LX_Gamepad::isConnected()
 */
-LX_Gamepad::LX_Gamepad(int index): gc(NULL),joy(NULL),haptic(NULL)
+LX_Gamepad::LX_Gamepad(int index): gc(nullptr),joy(nullptr),haptic(nullptr)
 {
     if(index < numberOfDevices() && SDL_IsGameController(index))
     {
         gc = SDL_GameControllerOpen(index);
     }
 
-    if(gc == NULL)
+    if(gc == nullptr)
     {
         joy = SDL_JoystickOpen(index);
         haptic = new LX_Haptic(joy);
@@ -61,7 +61,7 @@ LX_Gamepad::~LX_Gamepad()
 {
     delete haptic;
 
-    if(gc != NULL)
+    if(gc != nullptr)
         SDL_GameControllerClose(gc);
     else
         SDL_JoystickClose(joy);
@@ -79,7 +79,7 @@ LX_Gamepad::~LX_Gamepad()
 */
 bool LX_Gamepad::isConnected(void)
 {
-    if(gc != NULL)
+    if(gc != nullptr)
         return SDL_GameControllerGetAttached(gc) == SDL_TRUE;
     else
         return SDL_JoystickGetAttached(joy) == SDL_TRUE;
@@ -111,7 +111,7 @@ bool LX_Gamepad::isHaptic(void)
 */
 SDL_JoystickID LX_Gamepad::getID(void)
 {
-    if(gc != NULL)
+    if(gc != nullptr)
         return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(gc));
     else
         return SDL_JoystickInstanceID(joy);
@@ -145,7 +145,7 @@ LX_Haptic * LX_Gamepad::getHaptic(void)
 */
 const char * LX_Gamepad::getName(void)
 {
-    if(gc != NULL)
+    if(gc != nullptr)
         return nameOf(gc);
     else
         return nameOf(joy);
@@ -166,19 +166,19 @@ const char * LX_Gamepad::toString(char *str)
     LX_GamepadInfo gi;
     int err = 0;
 
-    if(str == NULL)
+    if(str == nullptr)
     {
         LX_SetError("Invalid string pointer");
-        return NULL;
+        return nullptr;
     }
 
-    if(gc != NULL)
+    if(gc != nullptr)
         err = statGamepad(gc,gi);
     else
         err = statGamepad(joy,gi);
 
     if(err == -1)
-        return NULL;
+        return nullptr;
 
     return gamepadToString(gi,str);
 }
