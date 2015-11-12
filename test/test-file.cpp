@@ -69,12 +69,12 @@ int main()
 
 void test_open(void)
 {
-    LX_File *f1 = NULL;
-    LX_File *invalidString = NULL;
-    LX_File *notExistFile = NULL;
+    LX_File *f1 = nullptr;
+    LX_File *invalidString = nullptr;
+    LX_File *notExistFile = nullptr;
 
     const char * str1 = "data/explosion.png";
-    const char * null = NULL;
+    const char * null = nullptr;
     const char * str3 = "invalid_file";
 
     cout << " = TEST open = " << endl;
@@ -91,7 +91,7 @@ void test_open(void)
         f1->close();
 
         delete f1;
-        f1 = NULL;
+        f1 = nullptr;
 
     }
     catch(IOException &e)
@@ -105,7 +105,7 @@ void test_open(void)
 
         invalidString = new LX_File(null,LX_FILEIO_RDONLY);
 
-        cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        cerr << "FAILURE - nullptr was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete invalidString;
 
     }
@@ -185,7 +185,7 @@ void test_read2(void)
 
     Sint64 beg, end;
     size_t read_data = 0;
-    char *buff = NULL;
+    char *buff = nullptr;
     LX_File f(strex,LX_FILEIO_RDONLY);
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
@@ -308,7 +308,7 @@ void test_getSurface(void)
     cout << " = TEST getSurface = " << endl;
 
     string str_ex = "data/explosion.png";
-    SDL_Surface * surface = NULL;
+    SDL_Surface * surface = nullptr;
 
     LX_File f(str_ex.c_str(),LX_FILEIO_RDONLY);
 
@@ -317,8 +317,8 @@ void test_getSurface(void)
 
     surface = f.getSurfaceFromData();
 
-    if(surface == NULL)
-        cerr << "FAILURE - getSurfaceFromData() Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    if(surface == nullptr)
+        cerr << "FAILURE - getSurfaceFromData() Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - getSurfaceFromData() : got a valid surface from " << f.getFilename() << endl;
@@ -328,8 +328,8 @@ void test_getSurface(void)
 
     surface = LX_Graphics::loadSurface(&f);
 
-    if(surface == NULL)
-        cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    if(surface == nullptr)
+        cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - loadSurface() : got a valid surface from " << f.getFilename() << endl;
@@ -346,10 +346,10 @@ void test_getSurface(void)
 
 void test_buffer(void)
 {
-    LX_FileBuffer *f = NULL;
-    LX_FileBuffer *invalid = NULL;
+    LX_FileBuffer *f = nullptr;
+    LX_FileBuffer *invalid = nullptr;
 
-    const char *null = NULL;
+    const char *null = nullptr;
     string str1 = "data/explosion.png";
     string str2 = "data/explosion.wav";
 
@@ -360,13 +360,13 @@ void test_buffer(void)
 
         invalid = new LX_FileBuffer(null);
 
-        cerr << "FAILURE - NULL was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        cerr << "FAILURE - nullptr was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
         delete invalid;
 
     }
     catch(logic_error ex)
     {
-        cout << "SUCCESS - IOException occured : NULL -> " << ex.what() << endl;
+        cout << "SUCCESS - IOException occured : nullptr -> " << ex.what() << endl;
     }
 
 
@@ -379,7 +379,7 @@ void test_buffer(void)
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
 
         delete f;
-        f = NULL;
+        f = nullptr;
 
     }
     catch(IOException &e)
@@ -395,15 +395,15 @@ void test_buffer(void)
 void test_getSurface2(void)
 {
     LX_FileBuffer f("data/explosion.png");
-    SDL_Surface * surface = NULL;
+    SDL_Surface * surface = nullptr;
 
 
     cout << " = TEST Surface from buffer = " << endl;
 
     surface = f.getSurfaceFromBuffer();
 
-    if(surface == NULL)
-        cerr << "FAILURE - getsurface from buffer Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    if(surface == nullptr)
+        cerr << "FAILURE - getsurface from buffer Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - getSurfaceFromBuffer : got a valid surface from " << f.getFilename() << endl;
@@ -412,8 +412,8 @@ void test_getSurface2(void)
 
     surface = LX_Graphics::loadSurfaceFromFileBuffer(&f);
 
-    if(surface == NULL)
-        cerr << "FAILURE - loadSurfaceFromFileBuffer Expected : non-NULL pointer; got : NULL -> " << LX_GetError() << endl;
+    if(surface == nullptr)
+        cerr << "FAILURE - loadSurfaceFromFileBuffer Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - loadSurfaceFromFileBuffer : got a valid surface from " << f.getFilename() << endl;
@@ -428,8 +428,8 @@ void test_getSurface2(void)
 void test_getChunk(void)
 {
     LX_FileBuffer f("data/explosion.wav");
-    Mix_Chunk * mix = NULL;
-    LX_Mixer::LX_Chunk * lxmix = NULL;
+    Mix_Chunk * mix = nullptr;
+    LX_Mixer::LX_Chunk * lxmix = nullptr;
 
     cout << " = TEST Chunk from buffer = " << endl;
 
@@ -450,8 +450,8 @@ void test_getChunk(void)
 
     mix = f.getChunkFromBuffer();
 
-    if(mix == NULL)
-        cerr << "FAILURE - getChunkFromBuffer() from buffer Expected : non-NULL pointer; got : NULL -> "
+    if(mix == nullptr)
+        cerr << "FAILURE - getChunkFromBuffer() from buffer Expected : non-nullptr pointer; got : nullptr -> "
              << LX_GetError() << endl;
     else
     {
@@ -462,8 +462,8 @@ void test_getChunk(void)
 
     lxmix = LX_Mixer::loadSample(&f);
 
-    if(lxmix == NULL)
-        cerr << "FAILURE - LX_Mixer::loadSample() Expected : non-NULL pointer; got : NULL -> "
+    if(lxmix == nullptr)
+        cerr << "FAILURE - LX_Mixer::loadSample() Expected : non-nullptr pointer; got : nullptr -> "
              << LX_GetError() << endl;
     else
     {

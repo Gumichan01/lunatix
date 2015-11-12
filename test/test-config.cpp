@@ -21,7 +21,7 @@ string boolState(const bool b)
 int main(int argc, char **argv)
 {
     bool err = false;
-    LX_Configuration *configuration =  NULL;
+    LX_Configuration *configuration =  nullptr;
 
     cout << " ==== Test Config ==== " << endl;
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 
     configuration = LX_Configuration::getInstance();
 
-    if(configuration == NULL)
+    if(configuration == nullptr)
         cerr << "FAILURE - The singleton is not initialized" << endl;
     else
         cout << "SUCCESS - LunatiX Engine has a singleton configuration" << endl;

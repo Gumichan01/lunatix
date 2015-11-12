@@ -36,7 +36,7 @@ class Dot{
     Dot()
     {
         bool err;
-        LX_Particle *p = NULL;
+        LX_Particle *p = nullptr;
         LX_Random::initRand();
 
         sys = new LX_ParticleSystem(N);
@@ -71,7 +71,7 @@ class Dot{
     void update()
     {
         bool err;
-        LX_Particle *p = NULL;
+        LX_Particle *p = nullptr;
 
         sys->updateParticles();
         moveRect(box,10,0);
@@ -119,7 +119,7 @@ int main()
 {
 
     Dot *dot;
-    LX_Window *w = NULL;
+    LX_Window *w = nullptr;
     Uint32 begin_time;
 
     bool err = LX_Init();

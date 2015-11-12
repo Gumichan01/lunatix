@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     int sz;
     const SDL_DisplayMode * mode = getDisplayModes(sz);
 
-    if(mode != NULL && sz != 0)
+    if(mode != nullptr && sz != 0)
     {
         cout << "\nDisplay : " << endl;
         for(int i = 0; i < sz; i++)

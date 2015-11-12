@@ -54,8 +54,8 @@ int main(int argc, char **argv)
 
 void test_gamepad(void)
 {
-    LX_Gamepad *gp = NULL;
-    LX_Haptic *hp = NULL;
+    LX_Gamepad *gp = nullptr;
+    LX_Haptic *hp = nullptr;
     char s[STRING_SIZE];
 
     cout << "  == Test Gamepad == " << endl;
@@ -68,7 +68,7 @@ void test_gamepad(void)
 
         cout << "INFO - Name : " << gp->getName() << ";" << s << endl;
 
-        if((hp = gp->getHaptic()) != NULL)
+        if((hp = gp->getHaptic()) != nullptr)
         {
             hp->RumbleEffectInit();
             hp->RumbleEffectPlay(1.0,100);

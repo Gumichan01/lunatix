@@ -37,8 +37,8 @@ int main(int argc, char **argv)
 
 void test_font(void)
 {
-    LX_Font *font = NULL;
-    SDL_Surface *textS = NULL;
+    LX_Font *font = nullptr;
+    SDL_Surface *textS = nullptr;
     SDL_Color color = {255,255,255};
     SDL_Color grey = {127,127,127};
     SDL_Rect pos = {100,100,32,12};
@@ -75,7 +75,7 @@ void test_font(void)
 
     font = new LX_Font(color);
 
-    if(font == NULL)
+    if(font == nullptr)
         cerr << "FAILURE - Font not null" << endl;
     else
         cout << "SUCCESS - Font defined" << endl;
@@ -83,13 +83,13 @@ void test_font(void)
 
     textS = font->drawSolidText(str);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Solid text with default size OK" << endl;
         win.clear();
-        win.putSurface(textS,NULL,&pos);
+        win.putSurface(textS,nullptr,&pos);
         win.update();
         SDL_Delay(1000);
         SDL_FreeSurface(textS);
@@ -98,13 +98,13 @@ void test_font(void)
 
     textS = font->drawShadedText(str,0,255,0);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Shaded text with default size OK" << endl;
         win.clear();
-        win.putSurface(textS,NULL,&pos);
+        win.putSurface(textS,nullptr,&pos);
         win.update();
         SDL_Delay(1000);
         SDL_FreeSurface(textS);
@@ -113,13 +113,13 @@ void test_font(void)
 
     textS = font->drawBlendedText(str);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - text not loaded" << endl;
     else
     {
         cout << "SUCCESS - Blended text with default size OK" << endl;
         win.clear();
-        win.putSurface(textS,NULL,&pos);
+        win.putSurface(textS,nullptr,&pos);
         win.update();
         SDL_Delay(1000);
         SDL_FreeSurface(textS);
@@ -132,8 +132,8 @@ void test_font(void)
 
 void test_font2(void)
 {
-    LX_Font *font = NULL;
-    SDL_Texture *textS = NULL;
+    LX_Font *font = nullptr;
+    SDL_Texture *textS = nullptr;
 
     string str = "My name is Gumichan01";
     SDL_Color color = {255,255,255};
@@ -147,7 +147,7 @@ void test_font2(void)
 
     font = new LX_Font(color,size_for_test);
 
-    if(font == NULL)
+    if(font == nullptr)
         cerr << "FAILURE - Font not null" << endl;
     else
         cout << "SUCCESS - Font defined" << endl;
@@ -159,14 +159,14 @@ void test_font2(void)
     pos2 = {pos.x,pos.y,w,h};
     textS = LX_Graphics::loadTextureFromSurface(font->drawSolidText(str),&win);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Solid text with size "
         << size_for_test << " OK" << endl;
         win.clear();
-        win.putTexture(textS,NULL,&pos2);
+        win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
         SDL_DestroyTexture(textS);
@@ -176,14 +176,14 @@ void test_font2(void)
     pos2 = {pos.x,pos.y,w,h};
     textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,255,0),&win);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Shaded text with size "
         << size_for_test << " OK" << endl;
         win.clear();
-        win.putTexture(textS,NULL,&pos2);
+        win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
         SDL_DestroyTexture(textS);
@@ -193,14 +193,14 @@ void test_font2(void)
     pos2 = {pos.x,pos.y,w,h};
     textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str),&win);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Blended text with size "
         << size_for_test << " OK" << endl;
         win.clear();
-        win.putTexture(textS,NULL,&pos2);
+        win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
         SDL_DestroyTexture(textS);
@@ -212,14 +212,14 @@ void test_font2(void)
     textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str,
                                                                       (size_for_test/4)),&win);
 
-    if(textS == NULL)
+    if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Blended text with size "
         << (size_for_test/4) << " OK" << endl;
         win.clear();
-        win.putTexture(textS,NULL,&pos2);
+        win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
         SDL_DestroyTexture(textS);
@@ -230,8 +230,8 @@ void test_font2(void)
 
     SDL_Surface *s = font->drawSolidText(str,0);
 
-    if(s != NULL)
-        cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
+    if(s != nullptr)
+        cerr << "FAILURE - Expected: nullptr, got : a valid pointer " << endl;
     else
         cout << "SUCCESS - The solid text was not loaded - " << LX_GetError() << endl;
 
@@ -240,8 +240,8 @@ void test_font2(void)
 
     s = font->drawShadedText(str,0,0,0,0);
 
-    if(s != NULL)
-        cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
+    if(s != nullptr)
+        cerr << "FAILURE - Expected: nullptr, got : a valid pointer " << endl;
     else
         cout << "SUCCESS - The shaded text was not loaded - " << LX_GetError() << endl;
 
@@ -250,8 +250,8 @@ void test_font2(void)
 
     s = font->drawBlendedText(str,0);
 
-    if(s != NULL)
-        cerr << "FAILURE - Expected: NULL, got : a valid pointer " << endl;
+    if(s != nullptr)
+        cerr << "FAILURE - Expected: nullptr, got : a valid pointer " << endl;
     else
         cout << "SUCCESS - The blended text was not loaded - " << LX_GetError() << endl;
 

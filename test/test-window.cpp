@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 {
 
     cout << " ==== Test Rendering ==== " << endl;
-    LX_Window *w = NULL;
+    LX_Window *w = nullptr;
 
     bool err = LX_Init();
 
@@ -54,7 +54,7 @@ void test_window1(LX_Window *win)
 
     cout << " = TEST main window = " << endl;
 
-    if(win == NULL)
+    if(win == nullptr)
     {
         cerr << "FAILURE - The window was not initialized" << endl;
         return;
@@ -63,12 +63,12 @@ void test_window1(LX_Window *win)
         cout << "SUCCESS - The window exists" << endl;
 
 
-    if(win->getWindow() == NULL)
+    if(win->getWindow() == nullptr)
         cerr << "FAILURE - the window was not initialized" << endl;
     else
         cout << "SUCCESS - the window is ready" << endl;
 
-    if(win->getRenderer() == NULL)
+    if(win->getRenderer() == nullptr)
         cerr << "FAILURE - the renderer was not initialized" << endl;
     else
         cout << "SUCCESS - the renderer is ready" << endl;
@@ -86,12 +86,12 @@ void test_window2(void)
 
     cout << " = TEST 2 window = " << endl;
 
-    if(win2.getWindow() == NULL)
+    if(win2.getWindow() == nullptr)
         cerr << "FAILURE - the window was not initialized" << endl;
     else
         cout << "SUCCESS - the window is ready" << endl;
 
-    if(win2.getRenderer() == NULL)
+    if(win2.getRenderer() == nullptr)
         cerr << "FAILURE - the renderer was not initialized" << endl;
     else
         cout << "SUCCESS - the renderer is ready" << endl;
@@ -122,12 +122,12 @@ void test_surface(void)
     bool screen_ok;
     LX_Window win3("Hello #3",448,128,w,h,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
     std::string name = "data/cb.bmp";
-    SDL_Surface *sf = NULL;
+    SDL_Surface *sf = nullptr;
     SDL_Rect pos = {100,100,150,120};
 
     cout << " = TEST 3 window with Surface = " << endl;
 
-    if(win3.getWindow() == NULL)
+    if(win3.getWindow() == nullptr)
         cerr << "FAILURE - the window was not initialized" << endl;
     else
         cout << "SUCCESS - the window is ready" << endl;
@@ -137,7 +137,7 @@ void test_surface(void)
     *   If LX_WINDOW_SURFACE was made,
     *   then getSurface must return a valid surface
     */
-    if(win3.getSurface() == NULL)
+    if(win3.getSurface() == nullptr)
         cerr << "FAILURE - the surface was not initialized" << endl;
     else
         cout << "SUCCESS - the surface is ready" << endl;
@@ -159,13 +159,13 @@ void test_surface(void)
     // Load the surface and test its validity
     sf = loadSurface(name.c_str());
 
-    if(sf == NULL)
+    if(sf == nullptr)
         cerr << "FAILURE - failed to load the surface " << LX_GetError() << endl;
     else
         cout << "SUCCESS - the surface was loaded with success" << endl;
 
     // Is the surface put on the window
-    if(win3.putSurface(sf,NULL,&pos) == false)
+    if(win3.putSurface(sf,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the surface " << LX_GetError() << endl;
     else
         cout << "SUCCESS - surface on the window" << endl;
@@ -196,14 +196,14 @@ void test_rendering(LX_Window *win)
     bool screen_ok;
     std::string name = "data/cb.bmp";
 
-    SDL_Surface *sf = NULL;
-    SDL_Texture *st = NULL;
+    SDL_Surface *sf = nullptr;
+    SDL_Texture *st = nullptr;
     SDL_Rect pos = {100,100,150,120};
 
 
     cout << " = TEST Rendering = " << endl;
 
-    if(win == NULL)
+    if(win == nullptr)
     {
         cerr << "FAILURE - The window was not initialized" << endl;
         return;
@@ -211,7 +211,7 @@ void test_rendering(LX_Window *win)
     else
         cout << "SUCCESS - The window exists" << endl;
 
-    if(win->getRenderer() == NULL)
+    if(win->getRenderer() == nullptr)
         cerr << "FAILURE - the renderer was not initialized" << endl;
     else
         cout << "SUCCESS - the renderer is ready" << endl;
@@ -221,13 +221,13 @@ void test_rendering(LX_Window *win)
     st = SDL_CreateTextureFromSurface(win->getRenderer(),sf);
     SDL_FreeSurface(sf);
 
-    if(st == NULL)
+    if(st == nullptr)
         cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - the texture was loaded with success" << endl;
 
 
-    if(win->putTexture(st,NULL,&pos) == false)
+    if(win->putTexture(st,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer" << endl;
@@ -238,7 +238,7 @@ void test_rendering(LX_Window *win)
     win->clear();
 
 
-    if(win->putTextureAndRotate(st,NULL,&pos,45) == false)
+    if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
@@ -267,14 +267,14 @@ void test_winManager(LX_Window *win)
 {
     std::string name = "data/cb.bmp";
 
-    SDL_Texture *st = NULL;
+    SDL_Texture *st = nullptr;
     SDL_Rect pos = {100,100,150,120};
 
     int id = 0;
 
     cout << " = TEST WinManager = " << endl;
 
-    if(win == NULL)
+    if(win == nullptr)
     {
         cerr << "FAILURE - The window was not initialized" << endl;
         return;
@@ -292,13 +292,13 @@ void test_winManager(LX_Window *win)
 
     st = loadTextureFromFile(name.c_str(), id);
 
-    if(st == NULL)
+    if(st == nullptr)
         cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - the texture was loaded with success" << endl;
 
 
-    if(win->putTexture(st,NULL,&pos) == false)
+    if(win->putTexture(st,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer" << endl;
@@ -311,7 +311,7 @@ void test_winManager(LX_Window *win)
     LX_WindowManager::getInstance()->clearWindows();
 
 
-    if(win->putTextureAndRotate(st,NULL,&pos,45) == false)
+    if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
