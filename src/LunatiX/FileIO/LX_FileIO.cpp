@@ -85,7 +85,7 @@ IOException::~IOException() noexcept {}
 *
 */
 LX_File::LX_File(std::string filename, const Uint32 mode)
-    : name(filename), data(NULL)
+    : name(filename), data(nullptr)
 {
     if(mode == 0x00000000)
         throw IOException("LX_File : Invalid mode");
@@ -131,7 +131,7 @@ void LX_File::open(const Uint32 mode)
         data = SDL_RWFromFile(name.c_str(),"ab");
     }
 
-    if(data == NULL)
+    if(data == nullptr)
         throw IOException(str + LX_GetError());
 }
 
@@ -290,10 +290,10 @@ Sint64 LX_File::size(void)
 */
 void LX_File::close(void)
 {
-    if(data != NULL)
+    if(data != nullptr)
     {
         SDL_RWclose(data);
-        data = NULL;
+        data = nullptr;
     }
 }
 
@@ -314,7 +314,7 @@ void LX_File::close(void)
 */
 SDL_Surface * LX_File::getSurfaceFromData(void)
 {
-    SDL_Surface * surface = NULL;
+    SDL_Surface * surface = nullptr;
     Sint64 save = tell();
 
     seek(0,LX_SEEK_SET);
