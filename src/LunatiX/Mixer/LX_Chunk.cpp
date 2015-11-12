@@ -77,7 +77,7 @@ LX_ChunkException::~LX_ChunkException() noexcept {}
 *   Construct the instance
 *
 */
-LX_Chunk::LX_Chunk(void) : chunk(NULL)
+LX_Chunk::LX_Chunk(void) : chunk(nullptr)
 {
     // Empty
 }
@@ -112,7 +112,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 *   @exception LX_ChunkException if the chunk cannot be created from the file
 *
 */
-LX_Chunk::LX_Chunk(std::string filename) : chunk(NULL)
+LX_Chunk::LX_Chunk(std::string filename) : chunk(nullptr)
 {
     if(load(filename.c_str()) == false)
     {
@@ -132,7 +132,7 @@ LX_Chunk::LX_Chunk(std::string filename) : chunk(NULL)
 *   @exception LX_ChunkException if the chunk cannot be created from the file buffer
 *
 */
-LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : chunk(NULL)
+LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : chunk(nullptr)
 {
     if(loadFromBuffer(file) == false)
     {
@@ -168,7 +168,7 @@ bool LX_Chunk::load(std::string filename)
 {
     Mix_FreeChunk(chunk);
     chunk = Mix_LoadWAV(filename.c_str());
-    return chunk != NULL;
+    return chunk != nullptr;
 }
 
 
@@ -186,7 +186,7 @@ bool LX_Chunk::loadFromBuffer(LX_FileBuffer *file)
 {
     Mix_FreeChunk(chunk);
     chunk = file->getChunkFromBuffer();
-    return chunk != NULL;
+    return chunk != nullptr;
 }
 
 

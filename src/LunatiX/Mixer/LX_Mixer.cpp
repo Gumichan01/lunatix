@@ -127,7 +127,7 @@ LX_Chunk * loadSample(Mix_Chunk *ch)
 */
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
 {
-    return (file == NULL) ? NULL:(new LX_Chunk(file));
+    return (file == nullptr) ? nullptr:(new LX_Chunk(file));
 }
 
 

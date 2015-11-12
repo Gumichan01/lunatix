@@ -73,7 +73,7 @@ LX_MusicException::~LX_MusicException() noexcept {}
 *   Create the instance
 *
 */
-LX_Music::LX_Music(void) : music(NULL)
+LX_Music::LX_Music(void) : music(nullptr)
 {
     // Empty
 }
@@ -89,7 +89,7 @@ LX_Music::LX_Music(void) : music(NULL)
 */
 LX_Music::LX_Music(Mix_Music *mus) : music(mus)
 {
-    if(mus == NULL)
+    if(mus == nullptr)
     {
         throw LX_MusicException("LX_Music constructor: invalid Mix_Music");
     }
@@ -104,7 +104,7 @@ LX_Music::LX_Music(Mix_Music *mus) : music(mus)
 *   @param filename The music filename that will be loaded
 *
 */
-LX_Music::LX_Music(std::string filename) : music(NULL)
+LX_Music::LX_Music(std::string filename) : music(nullptr)
 {
     if(load(filename.c_str()) == false)
     {
@@ -142,7 +142,7 @@ bool LX_Music::load(std::string filename)
 
     music = Mix_LoadMUS(filename.c_str());
 
-    if(music == NULL)
+    if(music == nullptr)
         return false;
 
     return true;
