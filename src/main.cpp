@@ -54,17 +54,17 @@ int main()
 
     SDL_Event event;
 
-    SDL_Texture *st = NULL;
-    SDL_Texture *ex = NULL;
+    SDL_Texture *st = nullptr;
+    SDL_Texture *ex = nullptr;
 
     std::string name = "data/cb.bmp";
     std::string expl_str = "data/explosion.png";
     std::string mus = "data/Prototype Princess v1_01.wav";
 
-    LX_Window *window = NULL;
-    LX_Window *window2 = NULL;
-    LX_Font *ttf = NULL;
-    LX_Music *audio = NULL;
+    LX_Window *window = nullptr;
+    LX_Window *window2 = nullptr;
+    LX_Font *ttf = nullptr;
+    LX_Music *audio = nullptr;
 
     err = LX_Init();
 
@@ -97,7 +97,7 @@ int main()
     st = loadTextureFromFile(name.c_str());
     ex = loadTextureFromFile(expl_str.c_str(),1);
 
-    if(st == NULL)
+    if(st == nullptr)
     {
         std::cerr << "[MAIN] loadTexture : " << LX_GetError() << std::endl;
     }
@@ -133,7 +133,7 @@ int main()
                 {
                 case SDLK_ESCAPE :
                     game = false;
-                    showMSG(LX_MSG_INFO,"End of program","It is over",NULL);
+                    showMSG(LX_MSG_INFO,"End of program","It is over",nullptr);
                     break;
 
                 case SDLK_SPACE :
@@ -191,15 +191,15 @@ int main()
         getWindowManager()->clearWindows();
 
         // Window is in the window manager, so its content was cleared
-        window->putTexture(st,NULL,&pos);
-        window->putTexture(t1,NULL,&pos1);
-        window->putTexture(t2,NULL,&pos2);
+        window->putTexture(st,nullptr,&pos);
+        window->putTexture(t1,nullptr,&pos1);
+        window->putTexture(t2,nullptr,&pos2);
 
         window->update();
 
         // Put the image of explosion to the second window
         // This is window2
-        getWindowManager()->getWindow(1)->putTextureAndRotate(ex,NULL,&pos,45);
+        getWindowManager()->getWindow(1)->putTextureAndRotate(ex,nullptr,&pos,45);
 
         getWindowManager()->updateWindows();
 
