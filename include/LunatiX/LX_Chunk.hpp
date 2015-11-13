@@ -72,7 +72,6 @@ class LX_Chunk : public virtual LX_Sound
 
 public:
 
-    LX_Chunk(void);
     LX_Chunk(Mix_Chunk *sample);
     LX_Chunk(std::string filename);
     LX_Chunk(LX_FileIO::LX_FileBuffer *file);

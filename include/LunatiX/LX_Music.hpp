@@ -70,7 +70,6 @@ class LX_Music : public virtual LX_Sound
 
 public:
 
-    LX_Music(void);
     LX_Music(Mix_Music *mus);
     LX_Music(std::string filename);
 

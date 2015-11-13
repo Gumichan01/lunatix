@@ -69,21 +69,6 @@ const char * LX_ChunkException::what() const noexcept
 LX_ChunkException::~LX_ChunkException() noexcept {}
 
 
-
-
-/**
-*   @fn LX_Chunk::LX_Chunk(void)
-*
-*   Construct the instance
-*
-*/
-LX_Chunk::LX_Chunk(void) : chunk(nullptr)
-{
-    // Empty
-}
-
-
-
 /**
 *   @fn LX_Chunk::LX_Chunk(Mix_Chunk *sample)
 *
@@ -115,9 +100,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample)
 LX_Chunk::LX_Chunk(std::string filename) : chunk(nullptr)
 {
     if(load(filename.c_str()) == false)
-    {
         throw LX_ChunkException(LX_GetError());
-    }
 }
 
 
@@ -135,9 +118,7 @@ LX_Chunk::LX_Chunk(std::string filename) : chunk(nullptr)
 LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : chunk(nullptr)
 {
     if(loadFromBuffer(file) == false)
-    {
         throw LX_ChunkException(LX_GetError());
-    }
 }
 
 
