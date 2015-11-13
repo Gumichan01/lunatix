@@ -415,7 +415,7 @@ test-device.o : $(TEST_PATH)test-device.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-physics : $(OBJS) test-physics.o $(COMPILED_SCRIPT)
+test-physics : $(OBJS) test-physics.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -455,7 +455,7 @@ test-ttf.o : $(TEST_PATH)test-ttf.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-particle : $(OBJS) test-particle.o $(COMPILED_SCRIPT)
+test-particle : $(OBJS) test-particle.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
