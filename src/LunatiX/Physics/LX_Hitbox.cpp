@@ -62,10 +62,9 @@ LX_Point::LX_Point(int xpos, int ypos): x(xpos), y(ypos)
 *   @param p The point
 *
 */
-LX_Point::LX_Point(const LX_Point& p)
+LX_Point::LX_Point(const LX_Point& p): x(p.x), y(p.y)
 {
-    x = p.x;
-    y = p.y;
+    // Empty
 }
 
 
