@@ -101,9 +101,9 @@ class LX_Font
 
 public:
 
-    LX_Font(SDL_Color& color, unsigned int size=0);
-    LX_Font(std::string font_file, SDL_Color& color);
-    LX_Font(std::string font_file, SDL_Color& color, unsigned int size);
+    LX_Font(const SDL_Color& color, unsigned int size=0);
+    LX_Font(std::string font_file,const SDL_Color& color);
+    LX_Font(std::string font_file,const SDL_Color& color, unsigned int size);
 
     int sizeOfText(std::string text, int& w, int& h);
     int sizeOfText(std::string text, unsigned int size, int& w, int& h);

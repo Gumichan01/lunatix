@@ -38,15 +38,17 @@ namespace LX_TrueTypeFont
 
 /**
 *
-*   @fn LX_Font::LX_Font(SDL_Color& color, unsigned int size)
+*   @fn LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
 *
 *   Construct the font with color and the size of the text
 *
 *   @param color The default color font
 *   @param size the size of the text
 *
-*   @note   If size is 0, then the default value define in the configuratnion
+*   @note   If size is 0, then the default value defined in the configuratnion
 *           file is used.
+*
+*   @note   The constructor uses the configuration file to get the TTF file
 *
 *   @warning    You must initialize the SDL_TTF library
 *               setting the TTF flag to 1 in lxsdl.cfg.
@@ -54,7 +56,7 @@ namespace LX_TrueTypeFont
 *   @exception LX_FileIO::IOException if the file cannot be loaded
 *
 */
-LX_Font::LX_Font(SDL_Color& color, unsigned int size)
+LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
     : font_str(""), font_size(size),
     font_color(color), font_buffer(nullptr)
 {
@@ -83,7 +85,7 @@ LX_Font::LX_Font(SDL_Color& color, unsigned int size)
 
 /**
 *
-*   @fn LX_Font::LX_Font(std::string font_file, SDL_Color& color)
+*   @fn LX_Font::LX_Font(std::string font_file,const SDL_Color& color)
 *
 *   Construct the font with font file and color
 *
@@ -93,20 +95,19 @@ LX_Font::LX_Font(SDL_Color& color, unsigned int size)
 *   @warning    It is necessary to initialize the SDL_TTF library
 *               setting the TTF flag to 1 in lxsdl.cfg
 *
-*   @exception LX_FileIO::IOException if the file cannot be loaded
+*   @exception  LX_FileIO::IOException if the file cannot be loaded
 *
 */
-LX_Font::LX_Font(std::string font_file, SDL_Color& color)
-    : font_str(font_file), font_size(LX_TTF_DEFAULT_FONT_SIZE),
-    font_color(color), font_buffer(nullptr)
+LX_Font::LX_Font(std::string font_file,const SDL_Color& color)
+    : LX_Font(font_file,color,LX_TTF_DEFAULT_FONT_SIZE)
 {
-    createbuffer();
+    // Empty
 }
 
 
 /**
 *
-*   @fn LX_Font::LX_Font(std::string font_file, SDL_Color& color, unsigned int size)
+*   @fn LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size)
 *
 *  Construct the font with a font file, a color and a size.
 *
@@ -117,10 +118,10 @@ LX_Font::LX_Font(std::string font_file, SDL_Color& color)
 *   @warning    It is necessary to initialize the SDL_TTF library setting
 *               the ttf flag to 1 in lxsdl.cfg.
 *
-*   @exception LX_FileIO::IOException if the file cannot be loaded
+*   @exception  LX_FileIO::IOException if the file cannot be loaded
 *
 */
-LX_Font::LX_Font(std::string font_file, SDL_Color& color, unsigned int size)
+LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size)
     : font_str(font_file), font_size(size),
     font_color(color), font_buffer(nullptr)
 {
@@ -133,6 +134,8 @@ LX_Font::LX_Font(std::string font_file, SDL_Color& color, unsigned int size)
 *   This private function creates a file buffer from font_str.
 *   This function can throw an IOException instance if the buffer cannot
 *   be loaded.
+*
+*   This function can throw an IOException
 *
 */
 void LX_Font::createbuffer()
