@@ -48,7 +48,7 @@ void test_font(void)
     LX_Window win("LunatiX Engine test TTF No 1",LX_WINDOW_SURFACE);
 
 
-    cout << "INFO - Load a LX_Font object with RAII" << endl;
+    cout << "INFO - Load an LX_Font object with RAII" << endl;
     {
         LX_Font f1(LX_Configuration::getInstance()->getFontFile(),color);
     }
