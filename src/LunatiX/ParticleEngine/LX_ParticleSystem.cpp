@@ -90,7 +90,7 @@ LX_ParticleSystem::~LX_ParticleSystem()
 
 
 /*
-*   Create the particles
+*   Allocate the particle array
 *
 *   This function is automatically called by one of
 *   the following constructors of the particle system
@@ -107,9 +107,10 @@ void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
     }
     else
     {
-        LX_SetError("LX_ParticleSystem constructor: SUCCESS\n");
         nbParticles = nbPart;
-        memset(particles,0,sizeof(LX_Particle*)*nbParticles);
+
+        for(unsigned int i = 0; i < nbParticles; i++)
+            particles[i] = nullptr;
     }
 }
 
