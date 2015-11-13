@@ -37,23 +37,23 @@ namespace LX_ParticleEngine
 
 
 /**
-*   @fn LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
+*   @fn LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
 *
 *   Create the instance with a number of particles
 *
 *   @param nbPart The number of particles to define in the system
 *
 */
-LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
-    : particles(nullptr), nbParticles(nbPart), idWin(0)
+LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
+    : LX_ParticleSystem(nbPart,0)
 
 {
-    allocateParticles(nbParticles);
+    // Empty
 }
 
 
 /**
-*   @fn LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart,unsigned int id)
+*   @fn LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
 *
 *   Create the instance with a number of particles and the id of the window
 *
@@ -62,7 +62,7 @@ LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart)
 *           to get the rendeering context
 *
 */
-LX_ParticleSystem::LX_ParticleSystem(unsigned int nbPart,unsigned int id)
+LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
     : particles(nullptr), nbParticles(nbPart), idWin(id)
 {
     allocateParticles(nbParticles);

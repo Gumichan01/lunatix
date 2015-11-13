@@ -53,8 +53,8 @@ class LX_ParticleSystem
 
 public:
 
-    LX_ParticleSystem(unsigned int nbPart);
-    LX_ParticleSystem(unsigned int nbPart,unsigned int id);
+    LX_ParticleSystem(const unsigned int nbPart);
+    LX_ParticleSystem(const unsigned int nbPart,const unsigned int id);
 
     bool addParticle(LX_Particle *p);
     bool rmParticle(unsigned int index);
