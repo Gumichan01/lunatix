@@ -43,9 +43,7 @@ namespace LX_Device
 LX_Gamepad::LX_Gamepad(int index): gc(nullptr),joy(nullptr),haptic(nullptr)
 {
     if(index < numberOfDevices() && SDL_IsGameController(index))
-    {
         gc = SDL_GameControllerOpen(index);
-    }
 
     if(gc == nullptr)
     {

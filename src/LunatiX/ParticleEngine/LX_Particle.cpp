@@ -49,8 +49,7 @@ namespace LX_ParticleEngine
 *
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
-    : box({x,y,w,h}),velocity(LX_Vector2D(0.0f,0.0f)), lifetime(xorshiftRand()%DELAY),
-texture(nullptr), surface(nullptr)
+    : LX_Particle({x,y,w,h})
 {
     // Empty
 }
@@ -65,8 +64,7 @@ texture(nullptr), surface(nullptr)
 *
 */
 LX_Particle::LX_Particle(const LX_AABB& b)
-    : box(b),velocity(LX_Vector2D{0.0f,0.0f}), lifetime(xorshiftRand()%DELAY),
-texture(nullptr), surface(nullptr)
+    : LX_Particle(b,0.0f,0.0f)
 {
     // Empty
 }
@@ -86,8 +84,7 @@ texture(nullptr), surface(nullptr)
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
                          const LX_Vector2D& v)
-    : box({x,y,w,h}),velocity(v), lifetime(xorshiftRand()%DELAY),
-texture(nullptr), surface(nullptr)
+    : LX_Particle({x,y,w,h},v)
 {
     // Empty
 }
@@ -109,8 +106,7 @@ texture(nullptr), surface(nullptr)
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w,
                          const int h, const float vx , const float vy)
-    : box({x,y,w,h}),velocity({vx,vy}), lifetime(xorshiftRand()%DELAY),
-texture(nullptr), surface(nullptr)
+    : LX_Particle({x,y,w,h},{vx,vy})
 {
     // Empty
 }
@@ -127,8 +123,7 @@ texture(nullptr), surface(nullptr)
 *
 */
 LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
-    : box(b), velocity({vx,vy}), lifetime(xorshiftRand()%DELAY),
-texture(nullptr), surface(nullptr)
+    : LX_Particle(b,{vx,vy})
 {
     // Empty
 }

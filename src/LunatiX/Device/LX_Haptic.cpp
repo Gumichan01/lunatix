@@ -64,9 +64,9 @@ bool isHaptic(SDL_Joystick *joy)
 *
 */
 LX_Haptic::LX_Haptic(int index)
+    : haptic(SDL_HapticOpen(index)), instanceID(index)
 {
-    haptic = SDL_HapticOpen(index);
-    instanceID = index;
+    // Empty
 }
 
 
@@ -79,9 +79,10 @@ LX_Haptic::LX_Haptic(int index)
 *
 */
 LX_Haptic::LX_Haptic(SDL_Joystick *joy)
+    : haptic(SDL_HapticOpenFromJoystick(joy)),
+        instanceID(SDL_JoystickInstanceID(joy))
 {
-    haptic = SDL_HapticOpenFromJoystick(joy);
-    instanceID = SDL_JoystickInstanceID(joy);
+    // Empty
 }
 
 
@@ -94,15 +95,9 @@ LX_Haptic::LX_Haptic(SDL_Joystick *joy)
 *
 */
 LX_Haptic::LX_Haptic(SDL_GameController *gc)
+    : LX_Haptic(SDL_GameControllerGetJoystick(gc))
 {
-    if(gc != nullptr)
-    {
-        SDL_Joystick *joy = SDL_GameControllerGetJoystick(gc);
-        haptic = SDL_HapticOpenFromJoystick(joy);
-        instanceID = SDL_JoystickInstanceID(joy);
-    }
-    else
-        instanceID = 1 << 16; // Invalid value
+    // Empty
 }
 
 
