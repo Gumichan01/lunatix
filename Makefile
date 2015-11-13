@@ -131,6 +131,9 @@ $(LUNATIX_SHARED_LIB) : $(OBJS)
 	@gcc -shared -o $@ $(OBJS) $(LFLAGS)
 
 
+lua-script : $(COMPILED_SCRIPT)
+
+
 $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@echo "Compilation of the Lua script : "$<" -> "$@
 	@$(LUAC) -o $@ $<
@@ -412,7 +415,7 @@ test-device.o : $(TEST_PATH)test-device.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-physics : $(OBJS) test-physics.o
+test-physics : $(OBJS) test-physics.o $(COMPILED_SCRIPT)
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -452,7 +455,7 @@ test-ttf.o : $(TEST_PATH)test-ttf.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-particle : $(OBJS) test-particle.o
+test-particle : $(OBJS) test-particle.o $(COMPILED_SCRIPT)
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
