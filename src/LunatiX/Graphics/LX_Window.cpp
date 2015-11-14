@@ -125,6 +125,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
     lxHeight = win_config->getWinHeight();
 
 
+    /// @bug This line of code is duplicated
     // check the fullscreen flag
     if(win_config->getFullscreenFlag())
         option_flag |= SDL_WINDOW_FULLSCREEN;
@@ -134,7 +135,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
         xy_position = SDL_WINDOWPOS_UNDEFINED;
     else
         xy_position = SDL_WINDOWPOS_CENTERED;
-
+    /// End
 
     // OpenGL flag
     if(win_config->getOpenGL_Flag())
@@ -175,11 +176,13 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
     w = config->getWinWidth();
     h = config->getWinHeight();
 
+    /// @bug Line 128
     if(config->getFullscreenFlag())
         flag |= LX_GRAPHICS_FULLSCREEN;
 
     if(config->getOpenGL_Flag())
         flag |= SDL_WINDOW_OPENGL;
+    /// End
 
     createWindow(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag,accel);
 }
@@ -199,7 +202,9 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *           - True : Use hardware acceleration
 *           - False : Use software fallback
 *
-*   @note This constructor does not use the LX_config class
+*   @note   This constructor does not use the LX_config class
+*   @deprecated     This function will be deleted because it cannot
+*                   be refactored without breaking the class
 *
 */
 LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
