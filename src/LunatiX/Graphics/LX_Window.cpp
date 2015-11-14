@@ -51,6 +51,7 @@ static const Uint32 amask = 0xff000000;
 
 #endif
 
+static const char * DEFAULT_TITLE = "LunatiX Engine v0.6";
 
 namespace LX_Graphics
 {
@@ -110,10 +111,11 @@ LX_WindowException::~LX_WindowException() noexcept {}
 *
 */
 LX_Window::LX_Window(const Uint32 mode, bool accel)
-    : window(nullptr), renderer(nullptr), originalWidth(0),
-    originalHeight(0), displayMethod(false)
+    : LX_Window(DEFAULT_TITLE,mode,accel)
+    /*: window(nullptr), renderer(nullptr), originalWidth(0),
+    originalHeight(0), displayMethod(false)*/
 {
-    Uint32 option_flag = 0x00000000;
+    /*Uint32 option_flag = 0x00000000;
     int xy_position = 0x00000000;
 
     int lxWidth = 0;
@@ -143,7 +145,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
     createWindow("LunatiX Engine v0.6",xy_position,xy_position,lxWidth,lxHeight,mode,option_flag,accel);
 
-    setDimension();
+    setDimension();*/
 }
 
 
@@ -165,30 +167,38 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *
 */
 LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
-    : window(nullptr), renderer(nullptr), originalWidth(0),
-    originalHeight(0), displayMethod(false)
+    : window(nullptr), renderer(nullptr), originalWidth(0), originalHeight(0),
+    displayMethod(false)
 {
-    int w,h;
+    int xpos,ypos,w,h;
     Uint32 flag = 0x00000000;
-
     LX_Configuration *config = LX_Configuration::getInstance();
 
     w = config->getWinWidth();
     h = config->getWinHeight();
+    originalWidth = w;
+    originalHeight = h;
 
-    /// @bug Line 128
     if(config->getFullscreenFlag())
+    {
         flag |= LX_GRAPHICS_FULLSCREEN;
+        xpos = SDL_WINDOWPOS_UNDEFINED;
+        ypos = SDL_WINDOWPOS_UNDEFINED;
+    }
+    else
+    {
+        xpos = SDL_WINDOWPOS_CENTERED;
+        ypos = SDL_WINDOWPOS_CENTERED;
+    }
 
     if(config->getOpenGL_Flag())
         flag |= SDL_WINDOW_OPENGL;
-    /// End
 
-    createWindow(title.c_str(),SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,w,h,mode,flag,accel);
+    createWindow(title.c_str(),xpos,ypos,w,h,mode,flag,accel);
 }
 
 
-/**
+/*
 *   @fn LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 *
 *   Create the window with an SDL_Window instance
@@ -207,7 +217,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *                   be refactored without breaking the class
 *
 */
-LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
+/*LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
     : window(nullptr), renderer(nullptr), originalWidth(0),
     originalHeight(0), displayMethod(false)
 {
@@ -219,7 +229,7 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
         displayMethod = false;
 
     setDimension();
-}
+}*/
 
 
 /**
@@ -252,8 +262,8 @@ LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
 */
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
-    : window(nullptr), renderer(nullptr), originalWidth(0),
-    originalHeight(0), displayMethod(false)
+    : window(nullptr), renderer(nullptr), originalWidth(w),
+    originalHeight(h), displayMethod(false)
 {
     createWindow(title.c_str(),posX,posY,w,h,mode,flag,accel);
 }
@@ -265,7 +275,7 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
 {
-    window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,SDL_WINDOW_SHOWN|flag);
+    window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 
     if(window == nullptr)
         throw LX_WindowException(LX_GetError());
@@ -311,9 +321,9 @@ void LX_Window::createRendering(bool accel)
 
     if(renderer == nullptr)
     {
-        std::string err_msg = "rendering creation: ";
+        std::string err_msg = "Rendering creation: ";
         err_msg = err_msg + LX_GetError();
-        LX_SetError(err_msg.c_str());
+        LX_SetError(err_msg.c_str());   /// @todo Throw an exception
     }
 
     displayMethod = true;     // The render_mode is active

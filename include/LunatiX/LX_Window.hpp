@@ -112,7 +112,7 @@ class LX_Window
 public :
 
     LX_Window(const Uint32 mode, bool accel = true);
-    LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel = true);
+    /*LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel = true);*/
     LX_Window(std::string title, const Uint32 mode, bool accel = true);
     LX_Window(std::string title, int posX, int posY, int w, int h,
               const Uint32 mode, const Uint32 flag, bool accel = true);
