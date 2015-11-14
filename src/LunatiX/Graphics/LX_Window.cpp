@@ -107,6 +107,7 @@ LX_WindowException::~LX_WindowException() noexcept {}
 *           - True : Use hardware acceleration
 *           - False : Use software fallback
 *
+*   @note The default configuration is used in this constructor
 *   @exception LX_WindowException
 *
 */
@@ -152,7 +153,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 /**
 *   @fn LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *
-*   Create the window setting the title
+*   Create the window setting the title and using the configuration file
 *
 *   @param title The title of the window
 *   @param mode The display mode :
@@ -163,7 +164,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *           - True : Use hardware acceleration
 *           - False : Use software fallback
 *
-*   @note The default configuration is used during the creation of the window
+*   @note The default configuration is used in this constructor
 *
 */
 LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
@@ -236,7 +237,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 *                               const Uint32 mode, Uint32 flag, bool accel)
 *
-*   Create the window with custom configuration
+*   Create the window with a custom configuration
 *
 *   @param title The title of the window
 *   @param posX The X position of the window on the desktop
@@ -270,10 +271,10 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 
 
 /*
-*   Initialize the window with custom configuration
+*   Initialize the window according to the configuration
 */
 void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h,
-                     const Uint32 mode, Uint32 flag, bool accel)
+                        const Uint32 mode, Uint32 flag, bool accel)
 {
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 
@@ -284,19 +285,17 @@ void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h
         createRendering(accel);
     else
         displayMethod = false;
-
-    setDimension();
 }
 
 
 /*
 *   Initialize internal variables
 */
-void LX_Window::setDimension(void)
+/*void LX_Window::setDimension(void)
 {
     originalWidth = getWidth();
     originalHeight = getHeight();
-}
+}*/
 
 
 /*
