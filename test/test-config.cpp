@@ -42,10 +42,10 @@ int main(int argc, char **argv)
 
 
     bool video = configuration->getVideoFlag();
-    bool ttfont = configuration->getTTF_Flag();
+    bool ttfont = configuration->getTTFFlag();
     bool sound = configuration->getAudioFlag();
     bool gamepad = configuration->getJoystickFlag();
-    bool opengl = configuration->getOpenGL_Flag();
+    bool opengl = configuration->getOpenGLFlag();
     std::string font = configuration->getFontFile();
     int size = configuration->getFontSize();
     int w = configuration->getWinWidth();

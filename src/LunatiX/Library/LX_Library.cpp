@@ -98,7 +98,7 @@ bool LX_Init(void)
         }
     }
 
-    if(configuration->getTTF_Flag() == 1)
+    if(configuration->getTTFFlag() == 1)
     {
         // Init SDL_ttf
         if(TTF_Init() == -1)
@@ -134,7 +134,7 @@ bool LX_Init(void)
         }
     }
 
-    if(configuration->getOpenGL_Flag() == 1)
+    if(configuration->getOpenGLFlag() == 1)
     {
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, LX_GL_MAJOR_VERSION);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, LX_GL_MINOR_VERSION);

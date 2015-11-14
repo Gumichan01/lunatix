@@ -88,7 +88,7 @@ void test_font(void)
     else
     {
         cout << "SUCCESS - Solid text with default size OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putSurface(textS,nullptr,&pos);
         win.update();
         SDL_Delay(1000);
@@ -103,7 +103,7 @@ void test_font(void)
     else
     {
         cout << "SUCCESS - Shaded text with default size OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putSurface(textS,nullptr,&pos);
         win.update();
         SDL_Delay(1000);
@@ -118,7 +118,7 @@ void test_font(void)
     else
     {
         cout << "SUCCESS - Blended text with default size OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putSurface(textS,nullptr,&pos);
         win.update();
         SDL_Delay(1000);
@@ -165,7 +165,7 @@ void test_font2(void)
     {
         cout << "SUCCESS - Solid text with size "
         << size_for_test << " OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
@@ -182,7 +182,7 @@ void test_font2(void)
     {
         cout << "SUCCESS - Shaded text with size "
         << size_for_test << " OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
@@ -199,7 +199,7 @@ void test_font2(void)
     {
         cout << "SUCCESS - Blended text with size "
         << size_for_test << " OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
@@ -218,7 +218,7 @@ void test_font2(void)
     {
         cout << "SUCCESS - Blended text with size "
         << (size_for_test/4) << " OK" << endl;
-        win.clear();
+        win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);

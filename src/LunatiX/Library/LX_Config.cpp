@@ -80,8 +80,8 @@ LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 *
 */
 LX_Configuration::LX_Configuration()
-    : videoFlag(1), vsyncFlag(0), ttfFlag(1), audioFlag(1), joystickFlag(1),
-      openglFlag(0), fontSize(0), width(800), height(600), fullscreenFlag(0)
+    : video_flag(1), vsync_flag(0), ttf_flag(1), audio_flag(1), joystick_flag(1),
+      opengl_flag(0), fontSize(0), width(800), height(600), fullscreen_flag(0)
 {
     // Load configuration
     setFlags();
@@ -258,37 +258,37 @@ void LX_Configuration::setFlags(void)
             // Video flag
             if(key.compare(0,VIDEO_KEY.length(),VIDEO_KEY) == 0)
             {
-                videoFlag = atoi((char *) lua_tostring(state,-1));
+                video_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             // VSync flag
             if(key.compare(0,VSYNC_KEY.length(),VSYNC_KEY) == 0)
             {
-                vsyncFlag = atoi((char *) lua_tostring(state,-1));
+                vsync_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             // TTF flag
             if(key.compare(0,TTF_KEY.length(),TTF_KEY) == 0)
             {
-                ttfFlag = atoi((char *) lua_tostring(state,-1));
+                ttf_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             // Audio flag
             if(key.compare(0,AUDIO_KEY.length(),AUDIO_KEY) == 0)
             {
-                audioFlag = atoi((char *) lua_tostring(state,-1));
+                audio_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             // Joystick flag
             if(key.compare(0,JOYSTICK_KEY.length(),JOYSTICK_KEY) == 0)
             {
-                joystickFlag = atoi((char *) lua_tostring(state,-1));
+                joystick_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             // OpenGL flag
             if(key.compare(0,OPENGL_KEY.length(),OPENGL_KEY) == 0)
             {
-                openglFlag = atoi((char *) lua_tostring(state,-1));
+                opengl_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             // Font file flag
@@ -318,7 +318,7 @@ void LX_Configuration::setFlags(void)
             // Fullscreen flag
             if(key.compare(0,FULLSCREEN_KEY.length(),FULLSCREEN_KEY) == 0)
             {
-                fullscreenFlag = atoi((char *) lua_tostring(state,-1));
+                fullscreen_flag = atoi((char *) lua_tostring(state,-1));
             }
 
             lua_pop(state,1);
@@ -340,7 +340,7 @@ void LX_Configuration::setFlags(void)
 */
 bool LX_Configuration::getVideoFlag()
 {
-    return videoFlag == 1;
+    return video_flag == 1;
 }
 
 
@@ -354,21 +354,21 @@ bool LX_Configuration::getVideoFlag()
 */
 bool LX_Configuration::getVSyncFlag()
 {
-    return vsyncFlag == 1;
+    return vsync_flag == 1;
 }
 
 
 /**
-*   @fn bool LX_Configuration::getTTF_Flag()
+*   @fn bool LX_Configuration::getTTFFlag()
 *
 *   Get the True Ttype Font (TTF) flag
 *
 *   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-bool LX_Configuration::getTTF_Flag()
+bool LX_Configuration::getTTFFlag()
 {
-    return ttfFlag == 1;
+    return ttf_flag == 1;
 }
 
 
@@ -382,7 +382,7 @@ bool LX_Configuration::getTTF_Flag()
 */
 bool LX_Configuration::getAudioFlag()
 {
-    return audioFlag == 1;
+    return audio_flag == 1;
 }
 
 
@@ -396,21 +396,21 @@ bool LX_Configuration::getAudioFlag()
 */
 bool LX_Configuration::getJoystickFlag()
 {
-    return joystickFlag == 1;
+    return joystick_flag == 1;
 }
 
 
 /**
-*   @fn bool LX_Configuration::getOpenGL_Flag()
+*   @fn bool LX_Configuration::getOpenGLFlag()
 *
 *   Get the opengl flag
 *
 *   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-bool LX_Configuration::getOpenGL_Flag()
+bool LX_Configuration::getOpenGLFlag()
 {
-    return openglFlag == 1;
+    return opengl_flag == 1;
 }
 
 
@@ -480,7 +480,7 @@ int LX_Configuration::getWinHeight()
 */
 bool LX_Configuration::getFullscreenFlag()
 {
-    return fullscreenFlag == 1;
+    return fullscreen_flag == 1;
 }
 
 

@@ -60,17 +60,17 @@ class LX_Configuration
 {
 
     // Variables
-    int videoFlag;
-    int vsyncFlag;
-    int ttfFlag;
-    int audioFlag;
-    int joystickFlag;
-    int openglFlag;
+    int video_flag;
+    int vsync_flag;
+    int ttf_flag;
+    int audio_flag;
+    int joystick_flag;
+    int opengl_flag;
     std::string fontFile;
     int fontSize;
     int width;
     int height;
-    int fullscreenFlag;
+    int fullscreen_flag;
 
     // private functions
     void assignString(lua_State * state, char *str, unsigned int len);
@@ -89,10 +89,10 @@ public :
 
     bool getVideoFlag();
     bool getVSyncFlag();
-    bool getTTF_Flag();
+    bool getTTFFlag();
     bool getAudioFlag();
     bool getJoystickFlag();
-    bool getOpenGL_Flag();
+    bool getOpenGLFlag();
     const char * getFontFile();
     int getFontSize();
     int getWinWidth();

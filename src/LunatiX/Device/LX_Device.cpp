@@ -49,13 +49,13 @@ int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
     // Get information
     info.id = SDL_JoystickInstanceID(joy);
     info.uid = SDL_JoystickGetGUID(joy);
-    info.numAxis = SDL_JoystickNumAxes(joy);
-    info.numBalls = SDL_JoystickNumBalls(joy);
-    info.numButtons = SDL_JoystickNumButtons(joy);
-    info.numHats = SDL_JoystickNumHats(joy);
+    info.nb_axis = SDL_JoystickNumAxes(joy);
+    info.nb_balls = SDL_JoystickNumBalls(joy);
+    info.nb_buttons = SDL_JoystickNumButtons(joy);
+    info.nb_hats = SDL_JoystickNumHats(joy);
 
-    if(info.id == -1 || info.numAxis == -1 || info.numBalls == -1
-       || info.numButtons == -1 || info.numHats == -1)
+    if(info.id == -1 || info.nb_axis == -1 || info.nb_balls == -1
+       || info.nb_buttons == -1 || info.nb_hats == -1)
     {
         return LX_SetError("Cannot get information\n");
     }
@@ -201,10 +201,10 @@ const char * gamepadToString(LX_GamepadInfo& info, char * str)
     << "Gamepad - ID : " << info.id << endl
     << "Gamepad - UID : " << guid << endl
     << "Gamepad - Name : " << info.name << endl
-    << "Gamepad - Number of Axes : " << info.numAxis << endl
-    << "Gamepad - Number of Balls : " << info.numBalls << endl
-    << "Gamepad - Number of Buttons : " << info.numButtons << endl
-    << "Gamepad - Number of Hats : " << info.numHats << endl;
+    << "Gamepad - Number of Axes : " << info.nb_axis << endl
+    << "Gamepad - Number of Balls : " << info.nb_balls << endl
+    << "Gamepad - Number of Buttons : " << info.nb_buttons << endl
+    << "Gamepad - Number of Hats : " << info.nb_hats << endl;
 
     strcpy(str,stream.str().c_str());
     return str;

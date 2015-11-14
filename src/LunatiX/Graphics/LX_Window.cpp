@@ -160,7 +160,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
         ypos = SDL_WINDOWPOS_CENTERED;
     }
 
-    if(config->getOpenGL_Flag())
+    if(config->getOpenGLFlag())
         flag |= SDL_WINDOW_OPENGL;
 
     createWindow(title.c_str(),xpos,ypos,w,h,mode,flag,accel);
