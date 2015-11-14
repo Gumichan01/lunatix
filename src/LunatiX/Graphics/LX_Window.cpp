@@ -451,7 +451,7 @@ void LX_Window::update(void)
 
 
 /*
-*   Updates the renderer of the window
+*   This function updates the renderer of the window
 *
 *   This fonction must be only used when textures are manipulated
 *   on the current window. So LX_Window::updateWindow() and this function
@@ -480,7 +480,7 @@ void LX_Window::updateWindow(void)
 /**
 *   @fn void LX_Window::clearWindow(void)
 *
-*   CLear the display of the current window
+*   Clear the display of the current window
 *
 */
 void LX_Window::clearWindow(void)
@@ -514,27 +514,17 @@ void LX_Window::clearRenderer(void)
 /**
     @fn bool LX_Window::screenshot(std::string filename)
 
-    Save a screenshot in a file
+    Take a screenshot and save it in a file
 
-    @return True on succes, False otherwise
+    @return True on success, False otherwise
 
 */
 bool LX_Window::screenshot(std::string filename)
 {
-    bool success = false;
-
     if(displayMethod)
-    {
-        // The window uses the renderer
-        success = screenshotUsingRenderer(filename);
-    }
-    else
-    {
-        // The window uses the surface
-        success = screenshotUsingSurface(filename);
-    }
+        return screenshotUsingRenderer(filename);
 
-    return success;
+    return screenshotUsingSurface(filename);
 }
 
 
@@ -575,7 +565,7 @@ bool LX_Window::screenshotUsingRenderer(std::string& filename)
 bool LX_Window::screenshotUsingSurface(std::string& filename)
 {
     SDL_Surface *sshot = nullptr;
-    sshot = getSurface();   // Get the main surface of the window
+    sshot = getSurface();
 
     if(sshot == nullptr)
         return false;
