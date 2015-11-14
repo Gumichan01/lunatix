@@ -113,40 +113,8 @@ LX_WindowException::~LX_WindowException() noexcept {}
 */
 LX_Window::LX_Window(const Uint32 mode, bool accel)
     : LX_Window(DEFAULT_TITLE,mode,accel)
-    /*: window(nullptr), renderer(nullptr), originalWidth(0),
-    originalHeight(0), displayMethod(false)*/
 {
-    /*Uint32 option_flag = 0x00000000;
-    int xy_position = 0x00000000;
-
-    int lxWidth = 0;
-    int lxHeight = 0;
-
-    LX_Configuration *win_config = LX_Configuration::getInstance();     // load the configuration
-
-    lxWidth = win_config->getWinWidth();
-    lxHeight = win_config->getWinHeight();
-
-
-    /// @bug This line of code is duplicated
-    // check the fullscreen flag
-    if(win_config->getFullscreenFlag())
-        option_flag |= SDL_WINDOW_FULLSCREEN;
-
-    // Is the fullscreen mode active ?
-    if( (option_flag & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN)
-        xy_position = SDL_WINDOWPOS_UNDEFINED;
-    else
-        xy_position = SDL_WINDOWPOS_CENTERED;
-    /// End
-
-    // OpenGL flag
-    if(win_config->getOpenGL_Flag())
-        option_flag |= SDL_WINDOW_OPENGL;
-
-    createWindow("LunatiX Engine v0.6",xy_position,xy_position,lxWidth,lxHeight,mode,option_flag,accel);
-
-    setDimension();*/
+    // Empty
 }
 
 
@@ -197,40 +165,6 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 
     createWindow(title.c_str(),xpos,ypos,w,h,mode,flag,accel);
 }
-
-
-/*
-*   @fn LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
-*
-*   Create the window with an SDL_Window instance
-*
-*   @param sdlWin The SDL_Window (must be a valid pointer)
-*   @param mode The display mode
-*           - LX_WINDOW_SURFACE : to use surfaces
-*           - LX_WINDOW_RENDERING : to use the renderer
-*
-*   @param accel Tag that selects the rendering mode
-*           - True : Use hardware acceleration
-*           - False : Use software fallback
-*
-*   @note   This constructor does not use the LX_config class
-*   @deprecated     This function will be deleted because it cannot
-*                   be refactored without breaking the class
-*
-*/
-/*LX_Window::LX_Window(SDL_Window *sdlWin, const Uint32 mode, bool accel)
-    : window(nullptr), renderer(nullptr), originalWidth(0),
-    originalHeight(0), displayMethod(false)
-{
-    window = sdlWin;
-
-    if(mode == LX_WINDOW_RENDERING)
-        createRendering(accel);
-    else
-        displayMethod = false;
-
-    setDimension();
-}*/
 
 
 /**
@@ -286,16 +220,6 @@ void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h
     else
         displayMethod = false;
 }
-
-
-/*
-*   Initialize internal variables
-*/
-/*void LX_Window::setDimension(void)
-{
-    originalWidth = getWidth();
-    originalHeight = getHeight();
-}*/
 
 
 /*
