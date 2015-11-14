@@ -136,8 +136,8 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *
 */
 LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
-    : window(nullptr), renderer(nullptr), originalWidth(0), originalHeight(0),
-    displayMethod(false)
+    : window(nullptr), renderer(nullptr), original_width(0), original_height(0),
+    render_method(false)
 {
     int xpos,ypos,w,h;
     Uint32 flag = 0x00000000;
@@ -145,8 +145,8 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 
     w = config->getWinWidth();
     h = config->getWinHeight();
-    originalWidth = w;
-    originalHeight = h;
+    original_width = w;
+    original_height = h;
 
     if(config->getFullscreenFlag())
     {
@@ -198,8 +198,8 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 */
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
-    : window(nullptr), renderer(nullptr), originalWidth(w),
-    originalHeight(h), displayMethod(false)
+    : window(nullptr), renderer(nullptr), original_width(w),
+    original_height(h), render_method(false)
 {
     createWindow(title.c_str(),posX,posY,w,h,mode,flag,accel);
 }
@@ -219,7 +219,7 @@ void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h
     if(mode == LX_WINDOW_RENDERING)
         createRendering(accel);
     else
-        displayMethod = false;
+        render_method = false;
 }
 
 
@@ -250,7 +250,7 @@ void LX_Window::createRendering(bool accel)
         throw LX_WindowException(err_msg.c_str());
     }
 
-    displayMethod = true;     // The render_mode is active
+    render_method = true;     // The render_mode is active
 }
 
 
@@ -429,7 +429,7 @@ void LX_Window::setFullscreen(Uint32 flag)
 
     if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
     {
-        setWindowSize(originalWidth,originalHeight);
+        setWindowSize(original_width,original_height);
     }
 }
 
@@ -442,7 +442,7 @@ void LX_Window::setFullscreen(Uint32 flag)
 */
 void LX_Window::update(void)
 {
-    if(displayMethod)
+    if(render_method)
         updateRenderer();
     else
         updateWindow();
@@ -485,7 +485,7 @@ void LX_Window::updateWindow(void)
 */
 void LX_Window::clearWindow(void)
 {
-    if(displayMethod)
+    if(render_method)
         clearRenderer();
     else
         clearSurface();
@@ -521,7 +521,7 @@ void LX_Window::clearRenderer(void)
 */
 bool LX_Window::screenshot(std::string filename)
 {
-    if(displayMethod)
+    if(render_method)
         return screenshotUsingRenderer(filename);
 
     return screenshotUsingSurface(filename);

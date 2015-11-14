@@ -86,9 +86,9 @@ class LX_Window
     SDL_Window *window;         /* The internal window structure  */
     SDL_Renderer *renderer;     /* The main renderer              */
 
-    int originalWidth;          /* The width of the window        */
-    int originalHeight;         /* The height of the window       */
-    bool displayMethod;         /* Use Surface or Rendering       */
+    int original_width;          /* The width of the window        */
+    int original_height;         /* The height of the window       */
+    bool render_method;         /* Use Surface or Rendering       */
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
