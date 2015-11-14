@@ -247,7 +247,7 @@ void LX_Window::createRendering(bool accel)
     {
         std::string err_msg = "Rendering creation: ";
         err_msg = err_msg + LX_GetError();
-        LX_SetError(err_msg.c_str());   /// @todo Throw an exception
+        throw LX_WindowException(err_msg.c_str());
     }
 
     displayMethod = true;     // The render_mode is active
