@@ -100,8 +100,8 @@ LX_WindowException::~LX_WindowException() noexcept {}
 *   Create the window with the default configuration
 *
 *   @param mode The display mode
-*           - LX_WINDOW_SURFACE : to use surfaces
-*           - LX_WINDOW_RENDERING : to use the renderer
+*           - ::LX_WINDOW_SURFACE : to use surfaces
+*           - ::LX_WINDOW_RENDERING : to use the renderer
 *
 *   @param accel Tag that selects the rendering mode
 *           - True : Use hardware acceleration
@@ -125,8 +125,8 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 *
 *   @param title The title of the window
 *   @param mode The display mode :
-*           - LX_WINDOW_SURFACE : to use surfaces
-*           - LX_WINDOW_RENDERING : to use the renderer
+*           - ::LX_WINDOW_SURFACE : to use surfaces
+*           - ::LX_WINDOW_RENDERING : to use the renderer
 *
 *   @param accel Tag that selects the rendering mode
 *           - True : Use hardware acceleration
@@ -179,20 +179,21 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *   @param w The width of the window
 *   @param h The height of the window
 *   @param mode The display mode
-*           - LX_WINDOW_SURFACE : to use surfaces
-*           - LX_WINDOW_RENDERING : to use the renderer
+*           - ::LX_WINDOW_SURFACE : to use surfaces
+*           - ::LX_WINDOW_RENDERING : to use the renderer
 *
 *   @param flag One of these following flags
-*           - LX_GRAPHICS_FULLSCREEN_DESKTOP
-*           - LX_GRAPHICS_FULLSCREEN
-*           - LX_GRAPHICS_NO_FULLSCREEN
+*           - ::LX_GRAPHICS_FULLSCREEN_DESKTOP
+*           - ::LX_GRAPHICS_FULLSCREEN
+*           - ::LX_GRAPHICS_NO_FULLSCREEN
 *           - And any SDL flags
 *
 *   @param accel Tag that selects the rendering mode
 *           - True : Use hardware acceleration
 *           - False : Use software fallback
 *
-*   @note This constructor does not use the LX_config class
+*   @note This constructor does not use the configuration file
+*   @exception LX_WindowException
 *
 */
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
@@ -417,9 +418,9 @@ void LX_Window::setWindowSize(int w, int h)
 *   Set the window's fullscreen state
 *
 *   @param flag The flag to use in this function:
-*           - LX_GRAPHICS_FULLSCREEN_DESKTOP
-*           - LX_GRAPHICS_FULLSCREEN
-*           - LX_GRAPHICS_NO_FULLSCREEN
+*           - ::LX_GRAPHICS_FULLSCREEN_DESKTOP
+*           - ::LX_GRAPHICS_FULLSCREEN
+*           - ::LX_GRAPHICS_NO_FULLSCREEN
 *
 */
 void LX_Window::setFullscreen(Uint32 flag)
