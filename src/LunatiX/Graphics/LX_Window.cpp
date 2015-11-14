@@ -478,24 +478,24 @@ void LX_Window::updateWindow(void)
 
 
 /**
-*   @fn void LX_Window::clear(void)
+*   @fn void LX_Window::clearWindow(void)
 *
 *   CLear the display of the current window
 *
 */
-void LX_Window::clear(void)
+void LX_Window::clearWindow(void)
 {
     if(displayMethod)
         clearRenderer();
     else
-        clearWindow();
+        clearSurface();
 }
 
 
 /*
 *   Clear the main window surface
 */
-void LX_Window::clearWindow(void)
+void LX_Window::clearSurface(void)
 {
     SDL_Surface *tmp = SDL_GetWindowSurface(window);
     SDL_FillRect(tmp,nullptr, SDL_MapRGB(tmp->format,0,0,0));

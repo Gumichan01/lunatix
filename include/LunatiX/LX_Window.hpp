@@ -101,7 +101,7 @@ class LX_Window
     void updateWindow(void);
     void updateRenderer(void);
 
-    void clearWindow(void);
+    void clearSurface(void);
     void clearRenderer(void);
 
     bool screenshotUsingRenderer(std::string& filename);
@@ -128,7 +128,7 @@ public :
 
     // Update and clear window
     void update(void);
-    void clear(void);
+    void clearWindow(void);
 
     bool screenshot(std::string filename);
 

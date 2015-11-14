@@ -184,7 +184,7 @@ void test_surface(void)
 
 
     SDL_Delay(750);
-    win3.clear();
+    win3.clearWindow();
     SDL_FreeSurface(sf);
 
     cout << " = END TEST = " << endl;
@@ -235,7 +235,7 @@ void test_rendering(LX_Window *win)
 
     win->update();
     SDL_Delay(750);
-    win->clear();
+    win->clearWindow();
 
 
     if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
@@ -255,7 +255,7 @@ void test_rendering(LX_Window *win)
         cout << "SUCCESS - screenshot token from the renderer" << endl;
 
     SDL_Delay(500);
-    win->clear();
+    win->clearWindow();
 
     SDL_DestroyTexture(st);
 

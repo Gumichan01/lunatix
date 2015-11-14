@@ -214,7 +214,7 @@ void LX_WindowManager::clearWindows()
     for(unsigned int i = 0; i < nbWin; i++)
     {
         if(windows[i] != nullptr)
-            windows[i]->clear();
+            windows[i]->clearWindow();
     }
 }
 
