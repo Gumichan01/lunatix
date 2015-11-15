@@ -6,8 +6,6 @@
 # It only works on Linux system.
 #
 
-
-make test -r -j -f Makefile;
 ./test-init;
 ./test-config;
 ./test-system;
@@ -18,5 +16,5 @@ make test -r -j -f Makefile;
 ./test-ttf;
 ./test-particle;
 rm win-*.png
-make clean-test -f Makefile;
+make clean-test clean -f Makefile;
 

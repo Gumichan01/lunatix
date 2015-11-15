@@ -13,7 +13,7 @@
 # Makefile - Lunatix Engine
 
 
-.PHONY: doxy clean 
+.PHONY: clean doxy test
 
 
 #
@@ -374,16 +374,18 @@ LX_Version.o : $(VERSION_PATH)LX_Version.cpp $(LUNATIX_INCLUDE_PATH)LX_Version.h
 
 
 
+##########
+#        #
+#  Test  #
+#        #
+##########
 
-#############################
-#                           #
-# Test of different modules #
-#                           #
-#############################
 
 test : $(COMPILED_SCRIPT) test-init test-config test-device test-physics \
 test-window test-system test-ttf test-particle test-file
-
+	@echo "INFO - Test launch"
+	@./test/test.sh
+	@echo "INFO - Test finished"
 
 test-init : $(OBJS) test-init.o
 	@echo $@" - Linking "
@@ -474,6 +476,7 @@ test-file.o : $(TEST_PATH)test-file.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
+
 ######################################
 #                                    #
 # Generate the doxygen documentation #
@@ -505,11 +508,11 @@ cleanlib:
 	@echo "Delete libraries"
 	@rm -rf $(LUNATIX_BUILD_DIR)
 
-clean-test : clean
+clean-test :
 	@echo "Delete test object files"
 	@rm -f test-* 
 
-cleanall : clean-test cleanlib cleandoc
+cleanall : cleandoc cleanlib clean-test clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
 
