@@ -79,7 +79,7 @@ SYSTEM_PATH=$(LUNATIX_PATH)System/
 TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
 VERSION_PATH=$(LUNATIX_PATH)Version/
 
-# Path to the different objects
+# Path to the different object directories
 OBJ_MAIN_PATH=$(LUNATIX_BUILD_DIR)../
 OBJ_DEVICE_PATH=$(LUNATIX_BUILD_DIR)Device/
 OBJ_FILEIO_PATH=$(LUNATIX_BUILD_DIR)FileIO/
@@ -94,6 +94,7 @@ OBJ_SYSTEM_PATH=$(LUNATIX_BUILD_DIR)System/
 OBJ_TTF_PATH=$(LUNATIX_BUILD_DIR)TrueTypeFont/
 OBJ_VERSION_PATH=$(LUNATIX_BUILD_DIR)Version/
 
+# Path to the different object files
 MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
 OBJ_FILES=$(OBJ_DEVICE_PATH)LX_Device.o \
 $(OBJ_DEVICE_PATH)LX_Gamepad.o $(OBJ_DEVICE_PATH)LX_Haptic.o \
@@ -168,7 +169,6 @@ $(LUNATIX_SHARED_LIB) : $(OBJS)
 
 lua-script : $(COMPILED_SCRIPT)
 
-
 $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@echo "Compilation of the Lua script : "$<" -> "$@
 	@$(LUAC) -o $@ $<
@@ -181,25 +181,29 @@ $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 #        #
 ##########
 
-$(LUNATIX_EXE) : $(MAIN_OBJ) $(OBJS) lua-script
+$(LUNATIX_EXE) : $(MAIN_OBJ_FILE) $(OBJ_FILES) $(COMPILED_SCRIPT)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
 else
 	@echo "Release mode"
 endif
 	@echo $@" - Linking "
-	$(CC) -o $@ $(MAIN_OBJ_FILE) $(OBJ_FILES) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $(MAIN_OBJ_FILE) $(OBJ_FILES) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) \
+	$(LFLAGS) $(LUA_FLAGS) && echo $(LUNATIX_EXE)" - Success" \
+	|| echo $(LUNATIX_EXE)" - Failure"
 
 
 #
 # Main file
 #
 
-main.o : $(MAIN_PATH)main.cpp $(LUNATIX_INCLUDE_PATH)Lunatix_engine.hpp \
+main.o : $(OBJ_MAIN_PATH)main.o
+
+$(OBJ_MAIN_PATH)main.o : $(MAIN_PATH)main.cpp $(LUNATIX_INCLUDE_PATH)Lunatix_engine.hpp \
 $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_MAIN_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_MAIN_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -207,25 +211,32 @@ $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 # Device
 #
 
-LX_Device.o : $(DEVICE_PATH)LX_Device.cpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Device.o : $(OBJ_DEVICE_PATH)LX_Device.o
+
+$(OBJ_DEVICE_PATH)LX_Device.o : $(DEVICE_PATH)LX_Device.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Device.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_DEVICE_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_DEVICE_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Gamepad.o : $(DEVICE_PATH)LX_Gamepad.cpp $(LUNATIX_INCLUDE_PATH)LX_Gamepad.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
-	@mkdir -p $(OBJ_DEVICE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_DEVICE_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+LX_Gamepad.o : $(OBJ_DEVICE_PATH)LX_Gamepad.o
 
-
-LX_Haptic.o : $(DEVICE_PATH)LX_Haptic.cpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp \
+$(OBJ_DEVICE_PATH)LX_Gamepad.o : $(DEVICE_PATH)LX_Gamepad.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Gamepad.hpp $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp \
 $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
 	@mkdir -p $(OBJ_DEVICE_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_DEVICE_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+LX_Haptic.o : $(OBJ_DEVICE_PATH)LX_Haptic.o
+
+$(OBJ_DEVICE_PATH)LX_Haptic.o : $(DEVICE_PATH)LX_Haptic.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
+	@mkdir -p $(OBJ_DEVICE_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -233,17 +244,22 @@ $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
 # FileIO
 #
 
-LX_FileIO.o : $(FILEIO_PATH)LX_FileIO.cpp $(LUNATIX_INCLUDE_PATH)LX_FileIO.hpp
+LX_FileIO.o : $(OBJ_FILEIO_PATH)LX_FileIO.o
+
+$(OBJ_FILEIO_PATH)LX_FileIO.o : $(FILEIO_PATH)LX_FileIO.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_FileIO.hpp
 	@mkdir -p $(OBJ_FILEIO_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_FILEIO_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_FileBuffer.o : $(FILEIO_PATH)LX_FileBuffer.cpp \
+LX_FileBuffer.o : $(OBJ_FILEIO_PATH)LX_FileBuffer.o
+
+$(OBJ_FILEIO_PATH)LX_FileBuffer.o : $(FILEIO_PATH)LX_FileBuffer.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_FileBuffer.hpp
 	@mkdir -p $(OBJ_FILEIO_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_FILEIO_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -251,26 +267,33 @@ $(LUNATIX_INCLUDE_PATH)LX_FileBuffer.hpp
 # Graphics
 #
 
+LX_Graphics.o : $(OBJ_GRAPHICS_PATH)LX_Graphics.o
 
-LX_Graphics.o : $(GRAPHICS_PATH)LX_Graphics.cpp $(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Window.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+$(OBJ_GRAPHICS_PATH)LX_Graphics.o : $(GRAPHICS_PATH)LX_Graphics.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp $(LUNATIX_INCLUDE_PATH)LX_Window.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_GRAPHICS_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_GRAPHICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Window.o : $(GRAPHICS_PATH)LX_Window.cpp $(LUNATIX_INCLUDE_PATH)LX_Window.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Window.o : $(OBJ_GRAPHICS_PATH)LX_Window.o
+
+$(OBJ_GRAPHICS_PATH)LX_Window.o : $(GRAPHICS_PATH)LX_Window.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Window.hpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_GRAPHICS_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_GRAPHICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_WindowManager.o : $(GRAPHICS_PATH)LX_WindowManager.cpp  \
+LX_WindowManager.o : $(OBJ_GRAPHICS_PATH)LX_WindowManager.o
+
+$(OBJ_GRAPHICS_PATH)LX_WindowManager.o : $(GRAPHICS_PATH)LX_WindowManager.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_WindowManager.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_GRAPHICS_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_GRAPHICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -278,19 +301,23 @@ $(LUNATIX_INCLUDE_PATH)LX_WindowManager.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 # Library
 #
 
-LX_Config.o : $(LIBRARY_PATH)LX_Config.cpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Config.o : $(OBJ_LIBRARY_PATH)LX_Config.o
+
+$(OBJ_LIBRARY_PATH)LX_Config.o : $(LIBRARY_PATH)LX_Config.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_LIBRARY_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_LIBRARY_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Library.o : $(LIBRARY_PATH)LX_Library.cpp $(LUNATIX_INCLUDE_PATH)LX_Library.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Library.o : $(OBJ_LIBRARY_PATH)LX_Library.o
+
+$(OBJ_LIBRARY_PATH)LX_Library.o : $(LIBRARY_PATH)LX_Library.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Library.hpp $(LUNATIX_INCLUDE_PATH)LX_Config.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_LIBRARY_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_LIBRARY_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -298,31 +325,43 @@ $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 # Mixer
 #
 
-LX_Sound.o : $(MIXER_PATH)LX_Sound.cpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp
+LX_Sound.o : $(OBJ_MIXER_PATH)LX_Sound.o
+
+$(OBJ_MIXER_PATH)LX_Sound.o : $(MIXER_PATH)LX_Sound.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp
 	@mkdir -p $(OBJ_MIXER_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_MIXER_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
-LX_Chunk.o : $(MIXER_PATH)LX_Chunk.cpp $(LUNATIX_INCLUDE_PATH)LX_Chunk.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_MIXER_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_MIXER_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Music.o : $(MIXER_PATH)LX_Music.cpp $(LUNATIX_INCLUDE_PATH)LX_Music.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_MIXER_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_MIXER_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+LX_Chunk.o : $(OBJ_MIXER_PATH)LX_Chunk.o
 
-
-LX_Mixer.o : $(MIXER_PATH)LX_Mixer.cpp $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Sound.hpp $(LUNATIX_INCLUDE_PATH)LX_Music.hpp \
+$(OBJ_MIXER_PATH)LX_Chunk.o : $(MIXER_PATH)LX_Chunk.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Chunk.hpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp \
 $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_MIXER_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_MIXER_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+LX_Music.o : $(OBJ_MIXER_PATH)LX_Music.o
+
+$(OBJ_MIXER_PATH)LX_Music.o : $(MIXER_PATH)LX_Music.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Music.hpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+	@mkdir -p $(OBJ_MIXER_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+LX_Mixer.o : $(OBJ_MIXER_PATH)LX_Mixer.o
+
+$(OBJ_MIXER_PATH)LX_Mixer.o : $(MIXER_PATH)LX_Mixer.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp $(LUNATIX_INCLUDE_PATH)LX_Sound.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Music.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+	@mkdir -p $(OBJ_MIXER_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -330,11 +369,13 @@ $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 # MSGBox
 #
 
-LX_MessageBox.o : $(MSG_PATH)LX_MessageBox.cpp \
+LX_MessageBox.o : $(OBJ_MSG_PATH)LX_MessageBox.o
+
+$(OBJ_MSG_PATH)LX_MessageBox.o : $(MSG_PATH)LX_MessageBox.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_MessageBox.hpp
 	@mkdir -p $(OBJ_MSG_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_MSG_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -342,17 +383,22 @@ $(LUNATIX_INCLUDE_PATH)LX_MessageBox.hpp
 # ParticleSystem
 #
 
-LX_Particle.o : $(PARTICLE_PATH)LX_Particle.cpp $(LUNATIX_INCLUDE_PATH)LX_Particle.hpp
+LX_Particle.o : $(OBJ_PARTICLE_PATH)LX_Particle.o
+
+$(OBJ_PARTICLE_PATH)LX_Particle.o : $(PARTICLE_PATH)LX_Particle.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Particle.hpp
 	@mkdir -p $(OBJ_PARTICLE_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_PARTICLE_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_ParticleSystem.o : $(PARTICLE_PATH)LX_ParticleSystem.cpp \
+LX_ParticleSystem.o : $(OBJ_PARTICLE_PATH)LX_ParticleSystem.o
+
+$(OBJ_PARTICLE_PATH)LX_ParticleSystem.o : $(PARTICLE_PATH)LX_ParticleSystem.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_ParticleSystem.hpp
 	@mkdir -p $(OBJ_PARTICLE_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_PARTICLE_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -360,30 +406,41 @@ $(LUNATIX_INCLUDE_PATH)LX_ParticleSystem.hpp
 # Physics
 #
 
-LX_Physics.o : $(PHYSICS_PATH)LX_Physics.cpp $(LUNATIX_INCLUDE_PATH)LX_Physics.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+LX_Physics.o : $(OBJ_PHYSICS_PATH)LX_Physics.o
+
+$(OBJ_PHYSICS_PATH)LX_Physics.o : $(PHYSICS_PATH)LX_Physics.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Physics.hpp $(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp \
+$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_PHYSICS_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_PHYSICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Polygon.o : $(PHYSICS_PATH)LX_Polygon.cpp $(LUNATIX_INCLUDE_PATH)LX_Polygon.hpp \
+LX_Polygon.o : $(OBJ_PHYSICS_PATH)LX_Polygon.o
+
+$(OBJ_PHYSICS_PATH)LX_Polygon.o : $(PHYSICS_PATH)LX_Polygon.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Polygon.hpp $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
+	@mkdir -p $(OBJ_PHYSICS_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+LX_Vector2D.o : $(OBJ_PHYSICS_PATH)LX_Vector2D.o
+
+$(OBJ_PHYSICS_PATH)LX_Vector2D.o : $(PHYSICS_PATH)LX_Vector2D.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
 	@mkdir -p $(OBJ_PHYSICS_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_PHYSICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-LX_Vector2D.o : $(PHYSICS_PATH)LX_Vector2D.cpp $(LUNATIX_INCLUDE_PATH)LX_Vector2D.hpp
+LX_Hitbox.o : $(OBJ_PHYSICS_PATH)LX_Hitbox.o
+
+$(OBJ_PHYSICS_PATH)LX_Hitbox.o : $(PHYSICS_PATH)LX_Hitbox.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp
 	@mkdir -p $(OBJ_PHYSICS_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_PHYSICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
-
-LX_Hitbox.o : $(PHYSICS_PATH)LX_Hitbox.cpp $(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp
-	@mkdir -p $(OBJ_PHYSICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_PHYSICS_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -391,10 +448,13 @@ LX_Hitbox.o : $(PHYSICS_PATH)LX_Hitbox.cpp $(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp
 # Random
 #
 
-LX_Random.o : $(RANDOM_PATH)LX_Random.cpp $(LUNATIX_INCLUDE_PATH)LX_Random.hpp
+LX_Random.o : $(OBJ_RANDOM_PATH)LX_Random.o
+
+$(OBJ_RANDOM_PATH)LX_Random.o : $(RANDOM_PATH)LX_Random.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Random.hpp
 	@mkdir -p $(OBJ_RANDOM_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_RANDOM_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -402,11 +462,13 @@ LX_Random.o : $(RANDOM_PATH)LX_Random.cpp $(LUNATIX_INCLUDE_PATH)LX_Random.hpp
 # System
 #
 
-LX_SystemInfo.o : $(SYSTEM_PATH)LX_SystemInfo.cpp \
+LX_SystemInfo.o : $(OBJ_SYSTEM_PATH)LX_SystemInfo.o
+
+$(OBJ_SYSTEM_PATH)LX_SystemInfo.o : $(SYSTEM_PATH)LX_SystemInfo.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_SystemInfo.hpp
 	@mkdir -p $(OBJ_SYSTEM_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_SYSTEM_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -414,12 +476,14 @@ $(LUNATIX_INCLUDE_PATH)LX_SystemInfo.hpp
 # True Type Font
 #
 
-LX_TrueTypeFont.o : $(TTF_PATH)LX_TrueTypeFont.cpp \
+LX_TrueTypeFont.o : $(OBJ_TTF_PATH)LX_TrueTypeFont.o
+
+$(OBJ_TTF_PATH)LX_TrueTypeFont.o : $(TTF_PATH)LX_TrueTypeFont.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_TrueTypeFont.hpp $(LUNATIX_INCLUDE_PATH)LX_Graphics.hpp \
 $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_TTF_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_TTF_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
@@ -427,10 +491,13 @@ $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 # Version
 #
 
-LX_Version.o : $(VERSION_PATH)LX_Version.cpp $(LUNATIX_INCLUDE_PATH)LX_Version.hpp
+LX_Version.o : $(OBJ_VERSION_PATH)LX_Version.o
+
+$(OBJ_VERSION_PATH)LX_Version.o : $(VERSION_PATH)LX_Version.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Version.hpp
 	@mkdir -p $(OBJ_VERSION_PATH)
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $(OBJ_VERSION_PATH)$@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
 
