@@ -4,7 +4,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	The LunatiX Engine is an SDL2-based game engine.
+*	The LunatiX Engine is a SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -41,7 +41,7 @@ namespace LX_Graphics
 /**
 *   @fn SDL_Surface * loadSurface(std::string filename)
 *
-*   This function loads an SDL_Surface from any image file an optimized its format
+*   This function loads a SDL_Surface from any image file an optimized its format
 *
 *   @param filename The name of the image file
 *
@@ -72,7 +72,7 @@ SDL_Surface * loadSurface(std::string filename)
 /**
 *   @fn SDL_Surface * loadSurface(LX_File *file)
 *
-*   This function loads an SDL_Surface from memory
+*   This function loads a SDL_Surface from memory
 *
 *   @param file The pointer to the LX_File structure
 *
@@ -100,7 +100,7 @@ SDL_Surface * loadSurface(LX_File *file)
 /**
 *   @fn SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 *
-*   This function loads an SDL_Surface from a file buffer
+*   This function loads a SDL_Surface from a file buffer
 *
 *   @param file The pointer to a LX_FileBuffer structure
 *
@@ -222,7 +222,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 *   @param filename The name of the file to create the texture from
 *   @param id The ID of the window that provide the rendering context
 *
-*   @return A pointer to an SDL_Texture if the loading works,
+*   @return A pointer to a SDL_Texture if the loading works,
 *           a null pointer otherwise
 *
 *   @note   If id is not given as argument to the function,
@@ -256,7 +256,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 *   @param filename The name of the file to create the texture from
 *   @param w The window that provide the rendering context to create the texture
 *
-*   @return A pointer to an SDL_Texture if the loading works,
+*   @return A pointer to a SDL_Texture if the loading works,
 *           a null pointer otherwise
 *
 *   @sa loadTextureFromSurface
@@ -282,7 +282,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
 *
 *   @fn bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
 *
-*   This function set the alpha value on an SDL_surface
+*   This function set the alpha value on a SDL_surface
 *
 *   @param image The surface
 *   @param red The the red component of the future transparent color

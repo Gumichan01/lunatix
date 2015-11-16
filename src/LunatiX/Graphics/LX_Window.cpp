@@ -2,7 +2,7 @@
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
 *
-*	The LunatiX Engine is an SDL2-based game engine.
+*	The LunatiX Engine is a SDL2-based game engine.
 *	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *   Luxon Jean-Pierre (Gumichan01)
@@ -281,7 +281,7 @@ LX_Window::~LX_Window()
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
 *
-*   @note   You can give a LX_AABB object to the function instead of an SDL_Rect object.
+*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @sa putTexture
@@ -333,7 +333,7 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
 *
-*   @note You can give a LX_AABB object to the function instead of an SDL_Rect object.
+*   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @warning The width and the height defined in the SDL_Rect are important, the function uses it
@@ -363,7 +363,7 @@ bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 *
 *   @note   If you do not need to determine the area parameter of the surface,
 *           put a null pointer
-*   @note   You can give a LX_AABB object to the function instead of an SDL_Rect object.
+*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
 *           Actually, LX_AABB is just an alias of SDL_Rect
 *
 *   @warning    The width and the height defined in the SDL_Rect are important,

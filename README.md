@@ -1,6 +1,6 @@
 # LunatiX Engine #
 
-LunatiX Engine is an SDL2-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
+LunatiX Engine is a SDL2-based game engine. It can be used for open-source or commercial games thanks to the zlib/libpng license.
 
 It contains these following libraries:
 - LX\_Graphics : A 2D library based on SDL_Image 2.0 (supporting JPEG, PNG, GIF, ...)
