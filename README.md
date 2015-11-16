@@ -64,12 +64,12 @@ No libraries are provided in this version, except for the Lua library which is
 provided.
 The engine uses Lua 5.1.
 
- Requirements:
+Requirements:
  - SDL 2.0.3+
- - Lua 5.1 (the compiler)
+ - Lua 5.1
  - OpenGL 3.1+
 
- Warning/Information:
+Warning/Information:
  - It is possible you get an issue if you use a recent version of Lua on Linux.
  - The program uses the compiled Lua file (.luac).
  - A shared Lua library file (.so file) on Linux is provided. It uses Lua 5.1.
@@ -82,7 +82,7 @@ to execute the following command:
 These two library files are generated into the *lib/linux/* directory.
 
 To test the engine, execute the following command:  
- ~~*$ ./test/test.sh*~~ *$ make test*
+ *$ make test*
 
 
 If you want to generate the documentation, do:
