@@ -60,6 +60,7 @@ LUNATIX_EXE=lunatix-engine
 
 # Path to the Lunatix engine directories
 LUNATIX_PATH=./src/LunatiX/
+LUNATIX_BUILD_DIR=./_build/LunatiX/
 LIBRARIES_INCLUDE_DIR=./include/
 LUNATIX_INCLUDE_PATH=$(LIBRARIES_INCLUDE_DIR)LunatiX/
 
@@ -79,9 +80,9 @@ VERSION_PATH=$(LUNATIX_PATH)Version/
 
 
 # Libraries
-LUNATIX_BUILD_DIR=./build/
-LUNATIX_STATIC_LIB=$(LUNATIX_BUILD_DIR)libLunatix.a
-LUNATIX_SHARED_LIB=$(LUNATIX_BUILD_DIR)libLunatix.so
+LUNATIX_LIB_DIR=./lib/linux/
+LUNATIX_STATIC_LIB=$(LUNATIX_LIB_DIR)libLunatix.a
+LUNATIX_SHARED_LIB=$(LUNATIX_LIB_DIR)libLunatix.so
 
 # Warning flags
 WFLAGS=-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic \
@@ -506,7 +507,7 @@ cleandoc:
 
 cleanlib:
 	@echo "Delete libraries"
-	@rm -rf $(LUNATIX_BUILD_DIR)
+	@rm $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 clean-test :
 	@echo "Delete test object files"
