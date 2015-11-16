@@ -344,7 +344,6 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 */
 bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 {
-
     return(SDL_RenderCopy(renderer,origin,area,pos) == 0);
 }
 
