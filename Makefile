@@ -30,20 +30,6 @@ DEBUG=yes
 #
 
 CC=clang
-MAIN_OBJ=main.o
-OBJS=LX_Device.o LX_Gamepad.o LX_Haptic.o \
-LX_FileIO.o LX_FileBuffer.o \
-LX_Graphics.o LX_Window.o LX_WindowManager.o \
-LX_Config.o LX_Library.o \
-LX_Sound.o LX_Chunk.o LX_Music.o LX_Mixer.o \
-LX_MessageBox.o \
-LX_Particle.o LX_ParticleSystem.o \
-LX_Hitbox.o LX_Physics.o LX_Polygon.o LX_Vector2D.o \
-LX_Random.o \
-LX_SystemInfo.o \
-LX_TrueTypeFont.o \
-LX_Version.o
-
 LUAC=luac5.1
 SCRIPT_FILE=script/LX_config.lua
 COMPILED_SCRIPT=$(SCRIPT_FILE)c
@@ -156,15 +142,15 @@ DOXY_FILE=dox
 
 library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB) lua-script
 
-$(LUNATIX_STATIC_LIB) : $(OBJS)
+$(LUNATIX_STATIC_LIB) : $(OBJ_FILES)
 	@echo "Generating the static library -> "$@
 	@mkdir -p $(LUNATIX_BUILD_DIR)
-	@ar rcs $@ $(OBJS)
+	@ar rcs $@ $(OBJ_FILES)
 
-$(LUNATIX_SHARED_LIB) : $(OBJS)
+$(LUNATIX_SHARED_LIB) : $(OBJ_FILES)
 	@echo "Generating the shared library -> "$@
 	@mkdir -p $(LUNATIX_BUILD_DIR)
-	@$(CC) -shared -o $@ $(OBJS) $(LFLAGS)
+	@$(CC) -shared -o $@ $(OBJ_FILES) $(LFLAGS)
 
 
 lua-script : $(COMPILED_SCRIPT)
@@ -512,10 +498,12 @@ $(LUNATIX_INCLUDE_PATH)LX_Version.hpp
 test : lua-script test-init test-config test-device test-physics \
 test-window test-system test-ttf test-particle test-file
 	@echo "INFO - Test launch"
+ifeq ($(DEBUG),yes)
 	@./test/test.sh
+endif
 	@echo "INFO - Test finished"
 
-test-init : $(OBJS) test-init.o
+test-init : $(OBJ_FILES) test-init.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -525,7 +513,7 @@ test-init.o : $(TEST_PATH)test-init.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-config : $(OBJS) test-config.o
+test-config : $(OBJ_FILES) test-config.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -535,7 +523,7 @@ test-config.o : $(TEST_PATH)test-config.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-device : $(OBJS) test-device.o
+test-device : $(OBJ_FILES) test-device.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -545,7 +533,7 @@ test-device.o : $(TEST_PATH)test-device.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-physics : $(OBJS) test-physics.o
+test-physics : $(OBJ_FILES) test-physics.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -555,7 +543,7 @@ test-physics.o : $(TEST_PATH)test-physics.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-window : $(OBJS) test-window.o
+test-window : $(OBJ_FILES) test-window.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -565,7 +553,7 @@ test-window.o : $(TEST_PATH)test-window.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-system : $(OBJS) test-system.o
+test-system : $(OBJ_FILES) test-system.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -575,7 +563,7 @@ test-system.o : $(TEST_PATH)test-system.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-ttf : $(OBJS) test-ttf.o
+test-ttf : $(OBJ_FILES) test-ttf.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -585,7 +573,7 @@ test-ttf.o : $(TEST_PATH)test-ttf.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) -std=c++0x -g
 
 
-test-particle : $(OBJS) test-particle.o
+test-particle : $(OBJ_FILES) test-particle.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -595,7 +583,7 @@ test-particle.o : $(TEST_PATH)test-particle.cpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-test-file : $(OBJS) test-file.o LX_FileIO.o
+test-file : $(OBJ_FILES) test-file.o
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS) -lstdc++
 
