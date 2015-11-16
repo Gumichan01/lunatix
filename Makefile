@@ -10,7 +10,7 @@
 #	luxon.jean.pierre@gmail.com
 #
 
-# Makefile - Lunatix Engine
+# Makefile - LunatiX Engine
 
 
 .PHONY: clean doxy test
@@ -58,7 +58,7 @@ TEST_PATH=./test/
 # Executable file
 LUNATIX_EXE=lunatix-engine
 
-# Path to the Lunatix engine directory and include directory
+# Path to the Lunatix engine directories
 LUNATIX_PATH=./src/LunatiX/
 LIBRARIES_INCLUDE_DIR=./include/
 LUNATIX_INCLUDE_PATH=$(LIBRARIES_INCLUDE_DIR)LunatiX/
@@ -128,7 +128,7 @@ $(LUNATIX_STATIC_LIB) : $(OBJS)
 $(LUNATIX_SHARED_LIB) : $(OBJS)
 	@echo "Generating the shared library -> "$@
 	@mkdir -p $(LUNATIX_BUILD_DIR)
-	@gcc -shared -o $@ $(OBJS) $(LFLAGS)
+	@$(CC) -shared -o $@ $(OBJS) $(LFLAGS)
 
 
 lua-script : $(COMPILED_SCRIPT)
