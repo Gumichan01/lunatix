@@ -35,14 +35,6 @@ int main()
     LX_Window w(LX_WINDOW_RENDERING);
     SDL_Texture *texture = loadTextureFromFile("data/bullet.png",&w);
 
-    /**
-    *   @bug    Linux version: Sometimes, the texture is not displayed.
-    *           It is impossible to reproduce this bug using gdb when
-    *           a breakpoint is set before putTexture(),
-    *           even if putTexture was successfully executed.
-    *           Weirdly, there is no issue when SDL_Delay() is called before
-    *           putTexture() (-_-). Fix it if possible!
-    */
     w.setWindowSize(W,H);
     SDL_Delay(100);
     w.clearWindow();
