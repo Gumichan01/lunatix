@@ -20,8 +20,6 @@
 */
 
 
-#include <cstring>
-
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
@@ -99,7 +97,11 @@ void LX_WindowManager::destroy(void)
 LX_WindowManager::LX_WindowManager()
     : size(0), nbWin(0)
 {
-    memset(windows,0,LX_NBMAX_WINDOWS);
+    //memset(windows,0,LX_NBMAX_WINDOWS);
+    for(int i = 0; i < LX_NBMAX_WINDOWS; i++)
+    {
+        windows[i] = nullptr;
+    }
 }
 
 

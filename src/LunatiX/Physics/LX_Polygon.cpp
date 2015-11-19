@@ -19,7 +19,6 @@
 *
 */
 
-#include <new>
 
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Polygon.hpp>

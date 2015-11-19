@@ -19,8 +19,6 @@
 *
 */
 
-#include <new>
-
 #include <SDL2/SDL_cpuinfo.h>
 
 #include <LunatiX/LX_SystemInfo.hpp>

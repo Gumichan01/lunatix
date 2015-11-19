@@ -20,7 +20,6 @@
 */
 
 #include <new>
-#include <cstring>
 
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
