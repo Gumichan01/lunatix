@@ -435,8 +435,3 @@ LX_Vector2D& normalize(LX_Vector2D& v)
 };
 
 
-
-
-
-
-

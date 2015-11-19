@@ -1257,11 +1257,11 @@ void test_VectorCollinear(void)
 
 void test_VectorLambda(void)
 {
-    cout << " = TEST Vector scalar multiplication= " << endl;
+    cout << " = TEST Vector scalar multiplication = " << endl;
 
     float lambda1 = 2.0f;
     float lambda2 = 0.0f;
-    LX_Vector2D v = {3.14,1.59};
+    LX_Vector2D v = {3.14f,1.59f};
     LX_Vector2D w = {v.vx * lambda1,v.vy * lambda1};
     LX_Vector2D t = {0.0f,0.0f};
 
@@ -1282,6 +1282,37 @@ void test_VectorLambda(void)
     else
         cerr << "FAILURE - expected : v(" << t.vx << "," << t.vy << "); "
              << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+
+    // Test normalization
+    cout << "INFO - Reset v" << endl;
+
+    v = {3.0f,0.0f};
+    LX_Vector2D vv = {v.vx/vector_norm(v),v.vy/vector_norm(v)};
+
+    cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    cout << "INFO - Normalize v" << endl;
+
+    normalize(v);
+
+     if(v == vv)
+        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    else
+        cerr << "FAILURE - expected : v(" << vv.vx << "," << vv.vy << "); "
+             << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+
+    cout << "INFO - This test may fail with some complex float values in the vector" << endl;
+    cout << "INFO - Try it with V(3.14,2.56)" << endl;
+
+    cout << "INFO - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
+    cout << "INFO - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
+    cout << "INFO - Normalize t" << endl;
+
+    normalize(t);
+
+     if(t == t)
+        cout << "SUCCESS - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
+    else
+        cerr << "FAILURE - a zero vector must be normalized to 0" << endl;
 
     cout << " = END TEST = " << endl;
 }

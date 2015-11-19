@@ -22,11 +22,6 @@
 */
 
 
-/**
-*   @todo functions of LX_Vector2D :
-*   - LX_Vector2D normalize(LX_Vector2D&)
-*/
-
 namespace LX_Physics{
 
 /**
