@@ -73,7 +73,7 @@ void test_open(void)
     LX_File *invalidString = nullptr;
     LX_File *notExistFile = nullptr;
 
-    const char * str1 = "data/explosion.png";
+    const char * str1 = "data/bullet.png";
     const char * null = nullptr;
     const char * str3 = "invalid_file";
 
@@ -181,7 +181,7 @@ void test_read2(void)
 {
     cout << " = TEST read2 = " << endl;
 
-    const char * strex = "data/explosion.png";
+    const char * strex = "data/bullet.png";
 
     Sint64 beg, end;
     size_t read_data = 0;
@@ -307,7 +307,7 @@ void test_getSurface(void)
 {
     cout << " = TEST getSurface = " << endl;
 
-    string str_ex = "data/explosion.png";
+    string str_ex = "data/bullet.png";
     SDL_Surface * surface = nullptr;
 
     LX_File f(str_ex.c_str(),LX_FILEIO_RDONLY);
@@ -350,8 +350,7 @@ void test_buffer(void)
     LX_FileBuffer *invalid = nullptr;
 
     const char *null = nullptr;
-    string str1 = "data/explosion.png";
-    string str2 = "data/explosion.wav";
+    string str1 = "data/bullet.png";
 
     cout << " = TEST Buffer = " << endl;
 
@@ -394,7 +393,7 @@ void test_buffer(void)
 
 void test_getSurface2(void)
 {
-    LX_FileBuffer f("data/explosion.png");
+    LX_FileBuffer f("data/bullet.png");
     SDL_Surface * surface = nullptr;
 
 
