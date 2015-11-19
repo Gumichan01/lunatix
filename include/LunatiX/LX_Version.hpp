@@ -38,9 +38,9 @@ namespace LX_VersionInfo
 */
 typedef struct LX_Version
 {
-    char major;         /**< Information about the major version */
-    char minor;         /**< Information about the minor version */
-    char patch;         /**< Information about the patch version */
+    short major;         /**< Information about the major version */
+    short minor;         /**< Information about the minor version */
+    short patch;         /**< Information about the patch version */
 
 } LX_Version;   /**< The version */
 

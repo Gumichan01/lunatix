@@ -1,5 +1,3 @@
-
-
 /*
     Main file for the demo
 */
@@ -57,18 +55,18 @@ int main()
     LX_EngineVersion(luna);
 
     cout << "We compiled against SDL version "
-    << static_cast<int>(compiled.major) << "."
-    << static_cast<int>(compiled.minor) << "."
-    << static_cast<int>(compiled.patch) << " ..." << endl;
+         << static_cast<int>(compiled.major) << "."
+         << static_cast<int>(compiled.minor) << "."
+         << static_cast<int>(compiled.patch) << " ..." << endl;
 
     cout << "But we linked against SDL version "
-    << static_cast<int>(compiled.major) << "."
-    << static_cast<int>(compiled.minor) << "."
-    << static_cast<int>(compiled.patch) << " ..." << endl;
+         << static_cast<int>(compiled.major) << "."
+         << static_cast<int>(compiled.minor) << "."
+         << static_cast<int>(compiled.patch) << " ..." << endl;
 
 
-    cout << "LunatiX Engine - Version " << static_cast<int>(luna.major) << "."
-    << static_cast<int>(luna.minor) << "." <<  static_cast<int>(luna.patch) << endl;
+    cout << "LunatiX Engine - Version " << luna.major << "." << luna.minor
+         << "." <<  luna.patch << endl;
 
     LX_Quit();
 
