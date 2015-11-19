@@ -412,6 +412,26 @@ LX_Vector2D& multiply(LX_Vector2D& v,float lambda)
 }
 
 
+/**
+*   @fn LX_Vector2D& normalize(LX_Vector2D& v)
+*
+*   Vector normalization
+*
+*   @param v The vector
+*
+*   @return The normalized vector
+*
+*/
+LX_Vector2D& normalize(LX_Vector2D& v)
+{
+    if(isZeroVector(v))
+        return v;
+
+    float inverted_norm = 1.0f/vector_norm(v);
+    return multiply(v,inverted_norm);
+}
+
+
 };
 
 
