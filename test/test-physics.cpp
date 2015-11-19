@@ -1293,9 +1293,11 @@ void test_VectorLambda(void)
     cout << "INFO - Normalize v" << endl;
 
     normalize(v);
+    float n = vector_norm(v);
 
-     if(v == vv)
-        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+     if(n == 1.0f)
+        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy
+        << ") is normalized, norm : " << n << endl;
     else
         cerr << "FAILURE - expected : v(" << vv.vx << "," << vv.vy << "); "
              << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
@@ -1306,7 +1308,7 @@ void test_VectorLambda(void)
     cout << "INFO - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
     cout << "INFO - Normalize t" << endl;
 
-    normalize(t);
+    normalize(t);   // t is a null vector
 
      if(t == t)
         cout << "SUCCESS - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
