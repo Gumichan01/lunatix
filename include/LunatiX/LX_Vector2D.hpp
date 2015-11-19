@@ -56,23 +56,24 @@ LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v);
 LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v);
 LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v);
 
-LX_Vector2D operator -(LX_Vector2D& u);
+LX_Vector2D operator -(LX_Vector2D& v);
 
-LX_Vector2D& operator ++(LX_Vector2D& u);
-LX_Vector2D operator ++(LX_Vector2D& u,int d);
+LX_Vector2D& operator ++(LX_Vector2D& v);
+LX_Vector2D operator ++(LX_Vector2D& v,int d);
 
-LX_Vector2D& operator --(LX_Vector2D& u);
-LX_Vector2D operator --(LX_Vector2D& u,int d);
+LX_Vector2D& operator --(LX_Vector2D& v);
+LX_Vector2D operator --(LX_Vector2D& v,int d);
 
 
 float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v);
 float vector_product(const LX_Vector2D& u,const LX_Vector2D& v);
-float vector_norm(const LX_Vector2D& u);
+float vector_norm(const LX_Vector2D& v);
 
-bool isZeroVector(const LX_Vector2D& u);
+bool isZeroVector(const LX_Vector2D& v);
 bool collinear(const LX_Vector2D& u,const LX_Vector2D& v);
 
-LX_Vector2D& multiply(LX_Vector2D& u,float lambda);
+LX_Vector2D& multiply(LX_Vector2D& v,float lambda);
+//LX_Vector2D normalize(LX_Vector2D& u);
 
 };
 

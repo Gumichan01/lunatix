@@ -201,39 +201,39 @@ LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
 
 
 /**
-*   @fn LX_Vector2D operator -(LX_Vector2D& u)
+*   @fn LX_Vector2D operator -(LX_Vector2D& v)
 *
 *   Get the opposite of the vector
 *
-*   @param u The vector
+*   @param v The vector
 *
 *   @return The opposite vector
 *
 */
-LX_Vector2D operator -(LX_Vector2D& u)
+LX_Vector2D operator -(LX_Vector2D& v)
 {
-    return {-u.vx,-u.vy};
+    return {-v.vx,-v.vy};
 }
 
 
 
 
 /**
-*   @fn LX_Vector2D& operator ++(LX_Vector2D& u)
+*   @fn LX_Vector2D& operator ++(LX_Vector2D& v)
 *
 *   Prefix increment
 *
-*   @param u The vector
+*   @param v The vector
 *
 *   @return The incremented vector
 *
 */
-LX_Vector2D& operator ++(LX_Vector2D& u)
+LX_Vector2D& operator ++(LX_Vector2D& v)
 {
-    u.vx += 1;
-    u.vy += 1;
+    v.vx += 1;
+    v.vy += 1;
 
-    return u;
+    return v;
 }
 
 
@@ -241,20 +241,20 @@ LX_Vector2D& operator ++(LX_Vector2D& u)
 #pragma clang diagnostic ignored "-Wunused-parameter"
 
 /**
-*   @fn LX_Vector2D operator ++(LX_Vector2D& u,int d)
+*   @fn LX_Vector2D operator ++(LX_Vector2D& v,int d)
 *
 *   Postfix increment
 *
-*   @param u The vector
+*   @param v The vector
 *   @param d dummy parameter (not used)
 *
 *   @return The vector before the incrementation
 *
 */
-LX_Vector2D operator ++(LX_Vector2D& u,int d)
+LX_Vector2D operator ++(LX_Vector2D& v,int d)
 {
-    LX_Vector2D t = u;
-    ++u;
+    LX_Vector2D t = v;
+    ++v;
 
     return t;
 }
@@ -263,21 +263,21 @@ LX_Vector2D operator ++(LX_Vector2D& u,int d)
 
 
 /**
-*   @fn LX_Vector2D& operator --(LX_Vector2D& u)
+*   @fn LX_Vector2D& operator --(LX_Vector2D& v)
 *
 *   Prefix increment
 *
-*   @param u The vector
+*   @param v The vector
 *
 *   @return The incremented vector
 *
 */
-LX_Vector2D& operator --(LX_Vector2D& u)
+LX_Vector2D& operator --(LX_Vector2D& v)
 {
-    u.vx -= 1;
-    u.vy -= 1;
+    v.vx -= 1;
+    v.vy -= 1;
 
-    return u;
+    return v;
 }
 
 
@@ -285,20 +285,20 @@ LX_Vector2D& operator --(LX_Vector2D& u)
 #pragma clang diagnostic ignored "-Wunused-parameter"
 
 /**
-*   @fn LX_Vector2D operator --(LX_Vector2D& u,int d)
+*   @fn LX_Vector2D operator --(LX_Vector2D& v,int d)
 *
 *   Postfix increment
 *
-*   @param u The vector
+*   @param v The vector
 *   @param d dummy parameter (not used)
 *
 *   @return The vector before the incrementation
 *
 */
-LX_Vector2D operator --(LX_Vector2D& u,int d)
+LX_Vector2D operator --(LX_Vector2D& v,int d)
 {
-    LX_Vector2D t = u;
-    --u;
+    LX_Vector2D t = v;
+    --v;
 
     return t;
 }
@@ -341,18 +341,18 @@ float vector_product(const LX_Vector2D& u,const LX_Vector2D& v)
 
 
 /**
-*   @fn float vector_norm(const LX_Vector2D& u)
+*   @fn float vector_norm(const LX_Vector2D& v)
 *
 *   Calculate the norm of a vector
 *
-*   @param u The vector
+*   @param v The vector
 *
 *   @return The norm of the vector
 *
 */
-float vector_norm(const LX_Vector2D& u)
+float vector_norm(const LX_Vector2D& v)
 {
-    return static_cast<float>(sqrt(scalar_product(u,u)));
+    return static_cast<float>(sqrt(scalar_product(v,v)));
 }
 
 
@@ -360,18 +360,18 @@ float vector_norm(const LX_Vector2D& u)
 #pragma clang diagnostic ignored "-Wfloat-equal"
 
 /**
-*   @fn bool isZeroVector(const LX_Vector2D& u)
+*   @fn bool isZeroVector(const LX_Vector2D& v)
 *
 *   Check if the vector is a zero vector
 *
-*   @param u The vector
+*   @param v The vector
 *
 *   @return True if the vector has coordinates equal to 0, False otherwise
 *
 */
-bool isZeroVector(const LX_Vector2D& u)
+bool isZeroVector(const LX_Vector2D& v)
 {
-    return u.vx == 0 && u.vy ==0;
+    return v.vx == 0 && v.vy ==0;
 }
 
 #pragma clang diagnostic pop
@@ -395,20 +395,20 @@ bool collinear(const LX_Vector2D& u,const LX_Vector2D& v)
 
 
 /**
-*   @fn LX_Vector2D& multiply(LX_Vector2D& u, float lambda)
+*   @fn LX_Vector2D& multiply(LX_Vector2D& v, float lambda)
 *
 *   Scalar multiplication
 *
-*   @param u The vector
+*   @param v The vector
 *   @param lambda The scalar value
 *
 *   @return The new vector after the multiplication
 *
 */
-LX_Vector2D& multiply(LX_Vector2D& u,float lambda)
+LX_Vector2D& multiply(LX_Vector2D& v,float lambda)
 {
-    u = {lambda * u.vx,lambda * u.vy};
-    return u;
+    v = {lambda * v.vx,lambda * v.vy};
+    return v;
 }
 
 
