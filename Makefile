@@ -42,7 +42,7 @@ TEST_PATH=./test/
 
 
 # Executable file
-LUNATIX_EXE=lunatix-engine
+LUNATIX_EXE=lunatix-demo
 
 # Path to the Lunatix engine directories
 LUNATIX_PATH=./src/LunatiX/
