@@ -438,7 +438,7 @@ void test_getChunk(void)
     try
     {
         LX_Mixer::LX_Chunk dump(&f);
-        cerr << "SUCCESS - LX_Chunk instanciation done : " << LX_GetError() << endl;
+        cout << "SUCCESS - LX_Chunk instanciation done : " << LX_GetError() << endl;
     }
     catch(IOException & ioe)
     {
