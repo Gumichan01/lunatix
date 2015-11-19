@@ -1304,7 +1304,6 @@ void test_VectorLambda(void)
     cout << "INFO - Try it with V(3.14,2.56)" << endl;
 
     cout << "INFO - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
-    cout << "INFO - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
     cout << "INFO - Normalize t" << endl;
 
     normalize(t);
