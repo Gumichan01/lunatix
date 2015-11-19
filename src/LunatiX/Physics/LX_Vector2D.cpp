@@ -371,7 +371,7 @@ float vector_norm(const LX_Vector2D& v)
 */
 bool isZeroVector(const LX_Vector2D& v)
 {
-    return v.vx == 0 && v.vy ==0;
+    return v.vx == 0 && v.vy == 0;
 }
 
 #pragma clang diagnostic pop
@@ -421,13 +421,15 @@ LX_Vector2D& multiply(LX_Vector2D& v,float lambda)
 *
 *   @return The normalized vector
 *
+*   @note If the vector is a null vector, then the same vector is returned
+*
 */
 LX_Vector2D& normalize(LX_Vector2D& v)
 {
-    if(isZeroVector(v))
+    if(isZeroVector(v) || norm)
         return v;
 
-    float inverted_norm = 1.0f/vector_norm(v);
+    float inverted_norm = 1.0f/ vector_norm(v);
     return multiply(v,inverted_norm);
 }
 
