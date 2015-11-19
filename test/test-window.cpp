@@ -121,9 +121,9 @@ void test_surface(void)
 
     bool screen_ok;
     LX_Window win3("Hello #3",448,128,w,h,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
-    std::string name = "data/cb.bmp";
+    std::string name = "data/bullet.png";
     SDL_Surface *sf = nullptr;
-    SDL_Rect pos = {100,100,150,120};
+    SDL_Rect pos = {100,100,200,100};
 
     cout << " = TEST 3 window with Surface = " << endl;
 
@@ -183,7 +183,7 @@ void test_surface(void)
         cout << "SUCCESS - screenshot token from a surface" << endl;
 
 
-    SDL_Delay(750);
+    SDL_Delay(1000);
     win3.clearWindow();
     SDL_FreeSurface(sf);
 
@@ -194,11 +194,11 @@ void test_surface(void)
 void test_rendering(LX_Window *win)
 {
     bool screen_ok;
-    std::string name = "data/cb.bmp";
+    std::string name = "data/bullet.png";
 
     SDL_Surface *sf = nullptr;
     SDL_Texture *st = nullptr;
-    SDL_Rect pos = {100,100,150,120};
+    SDL_Rect pos = {100,100,256,128};
 
 
     cout << " = TEST Rendering = " << endl;
@@ -265,10 +265,10 @@ void test_rendering(LX_Window *win)
 
 void test_winManager(LX_Window *win)
 {
-    std::string name = "data/cb.bmp";
+    std::string name = "data/bullet.png";
 
     SDL_Texture *st = nullptr;
-    SDL_Rect pos = {100,100,150,120};
+    SDL_Rect pos = {100,100,256,128};
 
     int id = 0;
 
