@@ -16,5 +16,5 @@
 ./test-ttf;
 ./test-particle;
 rm win-*.png
-make clean-test clean -f Makefile;
+
 
