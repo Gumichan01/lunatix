@@ -1197,14 +1197,14 @@ void test_VectorCollinear(void)
 
     cout << "INFO - test: zero vector" << endl;
 
-    if(isZeroVector(o))
+    if(isNullVector(o))
         cout << "SUCCESS - o is a zero vector: o("
              << o.vx << "," << o.vy << "); " << endl;
     else
         cerr << "FAILURE - expected: o must be a zero vector: Got o("
              << o.vx << "," << o.vy << "); " << endl;
 
-    if(!isZeroVector(t))
+    if(!isNullVector(t))
         cout << "SUCCESS - t is not a zero vector: t("
              << t.vx << "," << t.vy << "); " << endl;
     else

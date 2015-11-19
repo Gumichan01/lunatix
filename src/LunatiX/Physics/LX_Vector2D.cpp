@@ -360,7 +360,7 @@ float vector_norm(const LX_Vector2D& v)
 #pragma clang diagnostic ignored "-Wfloat-equal"
 
 /**
-*   @fn bool isZeroVector(const LX_Vector2D& v)
+*   @fn bool isNullVector(const LX_Vector2D& v)
 *
 *   Check if the vector is a zero vector
 *
@@ -369,7 +369,7 @@ float vector_norm(const LX_Vector2D& v)
 *   @return True if the vector has coordinates equal to 0, False otherwise
 *
 */
-bool isZeroVector(const LX_Vector2D& v)
+bool isNullVector(const LX_Vector2D& v)
 {
     return v.vx == 0 && v.vy == 0;
 }
@@ -426,7 +426,7 @@ LX_Vector2D& multiply(LX_Vector2D& v,float lambda)
 */
 LX_Vector2D& normalize(LX_Vector2D& v)
 {
-    if(isZeroVector(v) || norm)
+    if(isNullVector(v))
         return v;
 
     float inverted_norm = 1.0f/ vector_norm(v);

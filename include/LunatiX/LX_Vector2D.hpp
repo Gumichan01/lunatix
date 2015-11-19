@@ -64,7 +64,7 @@ float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v);
 float vector_product(const LX_Vector2D& u,const LX_Vector2D& v);
 float vector_norm(const LX_Vector2D& v);
 
-bool isZeroVector(const LX_Vector2D& v);
+bool isNullVector(const LX_Vector2D& v);
 bool collinear(const LX_Vector2D& u,const LX_Vector2D& v);
 
 LX_Vector2D& multiply(LX_Vector2D& v,float lambda);
