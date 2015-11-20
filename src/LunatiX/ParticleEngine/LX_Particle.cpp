@@ -106,7 +106,7 @@ LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
 */
 LX_Particle::LX_Particle(const int x , const int y, const int w,
                          const int h, const float vx , const float vy)
-    : LX_Particle({x,y,w,h},{vx,vy})
+    : LX_Particle({x,y,w,h},LX_Vector2D(vx,vy))
 {
     // Empty
 }
@@ -123,7 +123,7 @@ LX_Particle::LX_Particle(const int x , const int y, const int w,
 *
 */
 LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
-    : LX_Particle(b,{vx,vy})
+    : LX_Particle(b,LX_Vector2D(vx,vy))
 {
     // Empty
 }
@@ -231,19 +231,19 @@ bool LX_Particle::isDead(void)
 
 
 /**
-*   @fn void LX_Particle::setSpeed(float x,float y)
+*   @fn void LX_Particle::setSpeed(const float vx,const float vy)
 *
-*   Set the velocity
+*   Set the velocity of the particle
 *
-*   @param x The new X velocity
-*   @param y The new Y velocity
+*   @param vx The new X velocity
+*   @param vy The new Y velocity
 *
 *   @note This function is very useful to set gravity or acceleration
 *
 */
-void LX_Particle::setSpeed(float x,float y)
+void LX_Particle::setSpeed(const float vx,const float vy)
 {
-    velocity = {x, y};
+    velocity = LX_Vector2D(vx, vy);
 }
 
 
@@ -276,14 +276,14 @@ SDL_Surface * LX_Particle::getSurface(void)
 
 
 /**
-*   @fn const LX_AABB * LX_Particle::getAABB()
+*   @fn const LX_AABB * LX_Particle::getAABB(void)
 *
 *   Get the AABB
 *
 *   @return A pointer to the AABB
 *
 */
-LX_AABB LX_Particle::getAABB()
+LX_AABB LX_Particle::getAABB(void)
 {
     return box;
 }
@@ -346,14 +346,14 @@ int LX_Particle::getH(void)
 
 
 /**
-*   @fn unsigned int LX_Particle::getDelay()
+*   @fn unsigned int LX_Particle::getDelay(void)
 *
 *   Get the lifetime of the particle
 *
 *   @return The lifetime
 *
 */
-unsigned int LX_Particle::getDelay()
+unsigned int LX_Particle::getDelay(void)
 {
     return lifetime;
 }
