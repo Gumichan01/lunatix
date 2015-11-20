@@ -143,7 +143,7 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v)
 */
 LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v)
 {
-    return {u.vx + v.vx,u.vy + v.vy};
+    return LX_Vector2D(u.vx + v.vx,u.vy + v.vy);
 }
 
 
@@ -178,7 +178,7 @@ LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
 */
 LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v)
 {
-    return {u.vx - v.vx,u.vy - v.vy};
+    return LX_Vector2D(u.vx - v.vx,u.vy - v.vy);
 }
 
 
@@ -212,7 +212,7 @@ LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
 */
 LX_Vector2D operator -(LX_Vector2D& v)
 {
-    return {-v.vx,-v.vy};
+    return LX_Vector2D(-v.vx,-v.vy);
 }
 
 
@@ -407,7 +407,7 @@ bool collinear(const LX_Vector2D& u,const LX_Vector2D& v)
 */
 LX_Vector2D& multiply(LX_Vector2D& v,float lambda)
 {
-    v = {lambda * v.vx,lambda * v.vy};
+    v = LX_Vector2D(lambda * v.vx,lambda * v.vy);
     return v;
 }
 
