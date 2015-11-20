@@ -108,9 +108,7 @@ bool LX_Polygon::addPoint(const int x, const int y)
 {
     if(cursor < nbPoints)
     {
-        points[cursor].x = x;
-        points[cursor].y = y;
-
+        points[cursor] = LX_Point(x,y);
         cursor++;
 
         // Update the convexity when the polygon has at least 3 edges
@@ -191,9 +189,7 @@ unsigned int LX_Polygon::numberOfRealEdges(void) const
 LX_Point LX_Polygon::getPoint(const unsigned int index) const
 {
     if(index < cursor)
-    {
         return points[index];
-    }
 
     throw LX_PolygonException("getPoint: index Out of bounds ");
 }
@@ -236,29 +232,28 @@ void LX_Polygon::convexity(void)
 
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
 
-
     for(unsigned int i = 0; i < n; i++)
     {
         if(i == 0)
         {
-            AO.vx = points[i].x - points[n-1].x;
-            AO.vy = points[i].y - points[n-1].y;
+            AO = LX_Vector2D(points[i].x - points[n-1].x,
+                             points[i].y - points[n-1].y);
         }
         else
         {
-            AO.vx = points[i].x - points[i-1].x;
-            AO.vy = points[i].y - points[i-1].y;
+            AO = LX_Vector2D(points[i].x - points[i-1].x,
+                             points[i].y - points[i-1].y);
         }
 
         if(i == n-1)
         {
-            OB.vx = points[0].x - points[i].x;
-            OB.vy = points[0].y - points[i].y;
+            OB = LX_Vector2D(points[0].x - points[i].x,
+                             points[0].y - points[i].y);
         }
         else
         {
-            OB.vx = points[i+1].x - points[i].x;
-            OB.vy = points[i+1].y - points[i].y;
+            OB = LX_Vector2D(points[i+1].x - points[i].x,
+                             points[i+1].y - points[i].y);
         }
 
         cross_product = static_cast<int>(vector_product(AO,OB));
@@ -324,19 +319,16 @@ void LX_Polygon::convexity(void)
 */
 void LX_Polygon::move(const float vx, const float vy)
 {
-
-    const int velx = static_cast<int>(vx);
-    const int vely = static_cast<int>(vy);
-
-    movePoint(points[0],velx,vely);
-    movePoint(points[1],velx,vely);
-    movePoint(points[2],velx,vely);
-
+    const LX_Vector2D vel(vx,vy);
     const unsigned int n = numberOfEdges();
+
+    movePoint(points[0],vel);
+    movePoint(points[1],vel);
+    movePoint(points[2],vel);
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePoint(points[i],velx,vely);
+        movePoint(points[i],vel);
     }
 }
 
