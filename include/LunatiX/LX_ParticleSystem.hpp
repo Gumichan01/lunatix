@@ -2,7 +2,6 @@
 #define LX_PARTICLESYSTEM_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -41,7 +40,6 @@ class LX_Particle;
 */
 class LX_ParticleSystem
 {
-
     LX_Particle **particles;        /* The array of particles                   */
     unsigned int nbParticles;       /* The number of particles                  */
     unsigned int idWin;             /* The id of the window to put particles    */
@@ -67,7 +65,6 @@ public:
     unsigned int nbTotalParticles(void);
 
     ~LX_ParticleSystem();
-
 };
 
 };

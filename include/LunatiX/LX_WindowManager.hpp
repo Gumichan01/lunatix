@@ -2,7 +2,6 @@
 #define LX_WINDOWMANAGER_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -38,7 +37,6 @@ class LX_Window;
 */
 class LX_WindowManager
 {
-
     unsigned int size;
     unsigned int nbWin;
     LX_Window *windows[LX_NBMAX_WINDOWS];
@@ -57,21 +55,17 @@ public:
 
     int addWindow(LX_Window *w);
     LX_Window * removeWindow(unsigned int id);
-
     unsigned int nbWindows(void);
 
     void updateWindows();
     void clearWindows();
 
     LX_Window * getWindow(unsigned int id);
-
 };
-
 
 LX_WindowManager * getWindowManager();
 
 };
-
 
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED
 

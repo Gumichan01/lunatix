@@ -2,7 +2,6 @@
 #define LX_VERSION_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -47,7 +46,6 @@ typedef struct LX_Version
 void LX_EngineVersion(LX_Version& version);
 
 };
-
 
 #endif // LX_VERSION_HPP_INCLUDED
 

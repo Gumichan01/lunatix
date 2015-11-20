@@ -191,8 +191,8 @@ int LX_Font::sizeOfText(std::string text, int& w, int& h)
 */
 int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 {
-    TTF_Font *ttf = nullptr;
     int sz;
+    TTF_Font *ttf = nullptr;
 
     ttf = createInternalFont(static_cast<int>(size));
 
@@ -499,10 +499,9 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
                                          unsigned int size, LX_Window *win)
 {
+    Uint8 black = 0;
     SDL_Surface *surface = nullptr;
     SDL_Texture *texture = nullptr;
-
-    Uint8 black = 0;
 
     if(win == nullptr)
     {
@@ -539,7 +538,6 @@ void LX_Font::setColor(SDL_Color *color)
         font_color.b = color->b;
     }
 }
-
 
 };
 

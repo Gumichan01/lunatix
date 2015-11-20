@@ -301,4 +301,3 @@ bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
 
 };
 
-

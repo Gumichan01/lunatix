@@ -2,7 +2,6 @@
 #define LX_SOUND_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -47,10 +46,7 @@ public:
     virtual ~LX_Sound();
 };
 
-
 };
 
-
 #endif // LX_SOUND_H_INCLUDED
-
 

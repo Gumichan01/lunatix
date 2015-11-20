@@ -1,5 +1,3 @@
-
-
 #ifndef PHYSICS_H_INCLUDED
 #define PHYSICS_H_INCLUDED
 
@@ -100,5 +98,4 @@ void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
 };
 
 #endif // PHYSICS_H_INCLUDED
-
 

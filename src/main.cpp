@@ -21,13 +21,11 @@ int main(int argc, char** argv)
 int main()
 #endif
 {
-
     if(!LX_Init())
     {
         cerr << "Cannot load the library: " << LX_GetError() << endl;
         return -1;
     }
-
 
     LX_AABB position = {0,0,W,H};
     LX_Window w(LX_WINDOW_RENDERING);
@@ -72,5 +70,4 @@ int main()
 
     return 0;
 }
-
 

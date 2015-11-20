@@ -383,6 +383,5 @@ LX_Polygon::~LX_Polygon()
     delete [] points;
 }
 
-
 };
 

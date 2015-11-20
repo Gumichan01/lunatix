@@ -2,7 +2,6 @@
 #define LX_SYSTEM_INFO_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -44,7 +43,6 @@ int getSystemRAM(void);
 const SDL_DisplayMode * getDisplayModes(int& size);
 
 };
-
 
 #endif // LX_SYSTEM_INFO_H_INCLUDED
 

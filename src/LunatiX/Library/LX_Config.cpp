@@ -483,4 +483,3 @@ bool LX_Configuration::getFullscreenFlag()
     return fullscreen_flag == 1;
 }
 
-

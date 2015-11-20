@@ -157,4 +157,3 @@ const SDL_DisplayMode * getDisplayModes(int& size)
 
 };
 
-

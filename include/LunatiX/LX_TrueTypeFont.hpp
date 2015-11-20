@@ -22,7 +22,6 @@
 */
 
 #include <string>
-
 #include <SDL2/SDL_ttf.h>
 
 #define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
@@ -127,13 +126,9 @@ public:
     void setColor(SDL_Color *color);
 
     ~LX_Font();
-
 };
 
-
 };
-
 
 #endif // LX_TTF_H_INCLUDED
-
 

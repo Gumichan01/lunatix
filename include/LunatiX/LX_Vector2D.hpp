@@ -52,13 +52,10 @@ LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v);
 LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v);
 
 LX_Vector2D operator -(LX_Vector2D& v);
-
 LX_Vector2D& operator ++(LX_Vector2D& v);
 LX_Vector2D operator ++(LX_Vector2D& v,int d);
-
 LX_Vector2D& operator --(LX_Vector2D& v);
 LX_Vector2D operator --(LX_Vector2D& v,int d);
-
 
 float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v);
 float vector_product(const LX_Vector2D& u,const LX_Vector2D& v);

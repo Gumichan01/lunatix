@@ -2,7 +2,6 @@
 #define LX_POLYGON_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -63,7 +62,6 @@ public :
 */
 class LX_Polygon
 {
-
     LX_Point *points;               /* An array of LX_Point     */
     unsigned int nbPoints;          /* The number of points     */
     unsigned int cursor;            /* The size                 */
@@ -88,18 +86,13 @@ public :
 
     void move(const float vx, const float vy);
     void move(const LX_Vector2D& v);
-
     void moveTo(int vx, int vy);
-
     bool isConvex(void);
 
     ~LX_Polygon();
-
 };
-
 
 };
 
 #endif
-
 

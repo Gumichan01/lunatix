@@ -358,5 +358,4 @@ unsigned int LX_Particle::getDelay(void)
     return lifetime;
 }
 
-
 };

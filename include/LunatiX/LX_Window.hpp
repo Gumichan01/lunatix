@@ -2,7 +2,6 @@
 #define LX_WINDOW_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -23,7 +22,6 @@
 */
 
 #include <string>
-
 #include <SDL2/SDL_stdinc.h>
 
 struct SDL_Window;
@@ -82,7 +80,6 @@ public :
 */
 class LX_Window
 {
-
     SDL_Window *window;         /* The internal window structure  */
     SDL_Renderer *renderer;     /* The main renderer              */
 
@@ -100,7 +97,6 @@ class LX_Window
 
     void updateWindow(void);
     void updateRenderer(void);
-
     void clearSurface(void);
     void clearRenderer(void);
 
@@ -129,7 +125,6 @@ public :
     // Update and clear window
     void update(void);
     void clearWindow(void);
-
     bool screenshot(std::string filename);
 
     SDL_Renderer * getRenderer(void);

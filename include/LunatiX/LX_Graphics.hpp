@@ -2,7 +2,6 @@
 #define LX_GRAPHICS_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -68,5 +67,4 @@ bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 };
 
 #endif // LX_GRAPHICS_H_INCLUDED
-
 

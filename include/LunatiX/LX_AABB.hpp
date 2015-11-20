@@ -28,6 +28,5 @@
 
 typedef SDL_Rect LX_AABB;   /**< The rectangle hitbox (SDL_Rect) */
 
-
 #endif  /* LX_AABB_H_INCLUDED */
 

@@ -656,4 +656,3 @@ int LX_Window::getHeight(void)
 
 };
 
-

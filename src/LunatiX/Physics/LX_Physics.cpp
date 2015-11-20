@@ -751,6 +751,5 @@ void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
     poly.moveTo(xpos,ypos);
 }
 
-
 };
 

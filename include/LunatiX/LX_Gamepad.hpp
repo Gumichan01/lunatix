@@ -2,7 +2,6 @@
 #define LX_GAMEPAD_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -38,7 +37,6 @@ class LX_Haptic;
 */
 class LX_Gamepad
 {
-
     SDL_GameController *gc;
     SDL_Joystick *joy;
     LX_Haptic *haptic;
@@ -57,13 +55,9 @@ public :
     const char * toString(char *str);
 
     ~LX_Gamepad();
-
 };
 
-
 };
-
 
 #endif  // LX_GAMEPAD_HPP_INCLUDED
-
 

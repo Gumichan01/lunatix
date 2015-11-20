@@ -240,4 +240,3 @@ int LX_Haptic::numberOfEffects(void)
 
 };
 
-

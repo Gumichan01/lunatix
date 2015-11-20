@@ -2,7 +2,6 @@
 #define LX_LIBRARY_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -28,6 +27,5 @@
 
 bool LX_Init(void);
 void LX_Quit(void);
-
 
 #endif // LX_LIBRARY_H_INCLUDED

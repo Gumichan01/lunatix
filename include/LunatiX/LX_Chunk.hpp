@@ -2,7 +2,6 @@
 #define LX_CHUNK_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -85,11 +84,9 @@ public:
     int volume(int newVolume);
 
     ~LX_Chunk();
-
 };
 
 };
 
 #endif // LX_CHUNK_H_INCLUDED
-
 

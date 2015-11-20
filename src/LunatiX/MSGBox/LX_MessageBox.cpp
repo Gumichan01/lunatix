@@ -48,4 +48,3 @@ bool showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w)
 
 };
 
-

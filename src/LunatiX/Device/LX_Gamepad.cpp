@@ -184,5 +184,3 @@ const char * LX_Gamepad::toString(char *str)
 
 };
 
-
-

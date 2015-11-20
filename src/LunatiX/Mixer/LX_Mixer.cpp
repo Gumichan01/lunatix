@@ -492,5 +492,3 @@ void setDistance(int channel,Uint8 distance)
 
 };
 
-
-

@@ -168,4 +168,3 @@ void LX_Quit(void)
     LX_Configuration::destroy();
 }
 
-

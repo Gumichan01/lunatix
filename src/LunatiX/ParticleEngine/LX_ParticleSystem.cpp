@@ -282,6 +282,5 @@ unsigned int LX_ParticleSystem::nbTotalParticles(void)
     return nbParticles;
 }
 
-
 };
 

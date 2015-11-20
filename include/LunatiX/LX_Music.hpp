@@ -2,7 +2,6 @@
 #define LX_MUSIC_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -21,7 +20,6 @@
 *	@version 0.6
 *
 */
-
 
 #include <SDL2/SDL_mixer.h>
 
@@ -62,7 +60,6 @@ public :
 */
 class LX_Music : public virtual LX_Sound
 {
-
     Mix_Music *music;      /* The music to play */
 
     LX_Music(LX_Music& m);
@@ -82,17 +79,13 @@ public:
 
     // Volume
     int volume(int newVolume);
-
     Mix_Music *getMusic(void);
 
     ~LX_Music();
-
 };
 
 
 };
-
 
 #endif // LX_MUSIC_H_INCLUDED
-
 

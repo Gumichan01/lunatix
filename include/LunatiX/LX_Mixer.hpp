@@ -2,7 +2,6 @@
 #define LX_MIXER_H_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -97,7 +96,5 @@ void setDistance(int channel,Uint8 distance);
 
 };
 
-
 #endif // LX_MIXER_H_INCLUDED
-
 

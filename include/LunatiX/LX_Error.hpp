@@ -2,7 +2,6 @@
 #define LX_ERROR_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -55,7 +54,5 @@ inline int LX_SetError(std::string str)
     return SDL_SetError(str.c_str());
 }
 
-
 #endif // LX_ERROR_HPP_INCLUDED
-
 

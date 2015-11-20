@@ -2,7 +2,6 @@
 #define LX_HAPTIC_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -70,7 +69,5 @@ public :
 
 };
 
-
 #endif // LX_HAPTIC_HPP_INCLUDED
-
 

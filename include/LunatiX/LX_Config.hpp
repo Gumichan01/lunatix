@@ -58,7 +58,6 @@ public :
 */
 class LX_Configuration
 {
-
     // Variables
     int video_flag;
     int vsync_flag;
@@ -100,10 +99,7 @@ public :
     bool getFullscreenFlag();
 
     ~LX_Configuration();
-
 };
 
-
 #endif // LX_LUA_LAYER_H_INCLUDED
-
 

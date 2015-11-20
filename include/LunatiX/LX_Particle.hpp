@@ -2,7 +2,6 @@
 #define PARTICLE_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -47,7 +46,6 @@ namespace LX_ParticleEngine
 */
 class LX_Particle
 {
-
     LX_AABB box;                        /* The box of the particle                  */
     LX_Physics::LX_Vector2D velocity;   /* The velocity of the particle             */
 
@@ -61,7 +59,6 @@ class LX_Particle
 
 public :
 
-
     LX_Particle(const int x , const int y, const int w, const int h);
     LX_Particle(const LX_AABB& b);
     LX_Particle(const int x , const int y, const int w, const int h,
@@ -73,12 +70,11 @@ public :
     LX_Particle(const LX_AABB& b, const LX_Physics::LX_Vector2D& v);
 
     void update(void);
+    bool isDead(void);
 
     bool setTexture(LX_FileIO::LX_FileBuffer *buffer);
     bool setSurface(LX_FileIO::LX_FileBuffer *buffer);
     void setSpeed(const float vx,const float vy);
-
-    bool isDead(void);
 
     SDL_Texture * getTexture(void);
     SDL_Surface * getSurface(void);
@@ -90,9 +86,7 @@ public :
     int getH(void);
     unsigned int getDelay(void);
 
-
     ~LX_Particle();
-
 };
 
 };

@@ -25,7 +25,6 @@
 
 #include <cinttypes>
 
-
 // If UINT64_C was defined, we undefine it
 #ifdef UINT64_C
 #undef UINT64_C
@@ -38,7 +37,6 @@ typedef unsigned __int64 uint64_t;
 #else
 #define UINT64_C(val) (val##ULL)
 #endif
-
 
 
 /**
@@ -85,17 +83,5 @@ inline int crand100(void)
     return LX_Random::crand()%100;
 }
 
-
-
 #endif // LX_RANDOM_HPP_INCLUDED
-
-
-
-
-
-
-
-
-
-
 

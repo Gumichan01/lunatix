@@ -1,5 +1,3 @@
-
-
 #ifndef HITBOX_H_INCLUDED
 #define HITBOX_H_INCLUDED
 
@@ -79,8 +77,5 @@ bool operator <=(const LX_Circle& a, const LX_Circle& b);
 
 };
 
-
 #endif // HITBOX_H_INCLUDED
-
-
 

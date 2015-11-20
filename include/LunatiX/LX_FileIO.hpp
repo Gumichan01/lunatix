@@ -58,7 +58,6 @@ namespace LX_FileIO
 */
 class IOException: public std::exception
 {
-
     std::string stringError;
 
 public :
@@ -69,7 +68,6 @@ public :
     const char * what() const noexcept;
 
     ~IOException() noexcept;
-
 };
 
 
@@ -79,7 +77,6 @@ public :
 */
 class LX_File
 {
-
     std::string name;       /* The name of the file         */
     SDL_RWops *data;        /* The internal file structure  */
 
@@ -109,9 +106,7 @@ public :
     ~LX_File();
 };
 
-
 };
-
 
 #endif // LX_FILEIO_H_INCLUDED
 

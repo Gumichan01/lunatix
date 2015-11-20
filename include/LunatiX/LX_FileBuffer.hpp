@@ -2,7 +2,6 @@
 #define LX_FILEBUFFER_HPP_INCLUDED
 
 
-
 /*
 *	Copyright (C) 2015 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -45,7 +44,6 @@ class IOException;
 */
 class LX_FileBuffer
 {
-
     std::string name;       /* The name of the file the instance refers to  */
     char *buffer;           /* The read-only buffer                         */
     Uint64 bufsize;         /* The size of the buffer                       */
@@ -66,7 +64,6 @@ public :
 };
 
 };
-
 
 #endif // LX_FILEBUFFER_HPP_INCLUDED
 

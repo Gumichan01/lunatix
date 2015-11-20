@@ -238,6 +238,3 @@ LX_Window * LX_WindowManager::getWindow(unsigned int id)
 
 };
 
-
-
-
