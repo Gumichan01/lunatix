@@ -255,9 +255,8 @@ bool collisionSegCircle(const LX_Circle& circle,
     double x,y;
     float scal,scal1,scal2;
 
-    LX_Point M;
-    LX_Point O = circle.center;
     LX_Vector2D AB,AO,BO;
+    LX_Point O = circle.center;
 
     if(collisionPointCircle(A,circle) || collisionPointCircle(B,circle))
         return true;
@@ -266,8 +265,8 @@ bool collisionSegCircle(const LX_Circle& circle,
     AO = LX_Vector2D(O.x - A.x,O.y - A.y);
     BO = LX_Vector2D(O.x - B.x,O.y - B.y);
 
+    // Using the opposite value of vx for scal2
     scal1 = scalar_product(AB,AO);
-    // I use the opposite value of vx
     scal2 = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
     if(scal1 < 0 || scal2 < 0)
@@ -281,11 +280,11 @@ bool collisionSegCircle(const LX_Circle& circle,
         return false;
 
     t = scal1/scal;
-
     x = A.x + (t*AB.vx);
     y = A.y + (t*AB.vy);
 
-    M = {static_cast<int>(x), static_cast<int>(y)};     // M is the projection point of O
+    // M is the projection point of O
+    LX_Point M = LX_Point(static_cast<int>(x), static_cast<int>(y));
 
     return collisionPointCircle(M,circle);
 }
@@ -304,23 +303,23 @@ bool collisionSegCircle(const LX_Circle& circle,
 */
 bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
 {
-    // Check if the center of the circle is completly into the AABB
+    // Check if the center of the circle is in the AABB
     if(collisionPointRect(circle.center,rect))
         return true;
 
     LX_Point sides[RECT_SIDES][2];  //4 segments
 
     // 1st segment
-    sides[0][0] = {rect.x , rect.y};
-    sides[0][1] = {rect.x , rect.y + rect.h};
+    sides[0][0] = LX_Point(rect.x , rect.y);
+    sides[0][1] = LX_Point(rect.x , rect.y + rect.h);
 
     // 2nd segment
     sides[1][0] = sides[0][1];
-    sides[1][1] = {rect.x + rect.w , rect.y + rect.h};
+    sides[1][1] = LX_Point(rect.x + rect.w , rect.y + rect.h);
 
     // 3rd segment
     sides[2][0] = sides[1][1];
-    sides[2][1] = {rect.x + rect.w, rect.y};
+    sides[2][1] = LX_Point(rect.x + rect.w, rect.y);
 
     // 4th segment
     sides[3][0] = sides[2][1];
@@ -356,15 +355,9 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
     LX_Vector2D AC,AD,AB;
     long d;
 
-    AB.vx = B.x - A.x;
-    AB.vy = B.y - A.y;
-
-    AC.vx = C.x - A.x;
-    AC.vy = C.y - A.y;
-
-    AD.vx = D.x - A.x;
-    AD.vy = D.y - A.y;
-
+    AB = LX_Vector2D(B.x - A.x,B.y - A.y);
+    AC = LX_Vector2D(C.x - A.x,C.y - A.y);
+    AD = LX_Vector2D(D.x - A.x,D.y - A.y);
     d = static_cast<long>(vector_product(AB,AD) * vector_product(AB,AC));
 
     return (d <= 0);
@@ -454,11 +447,10 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 {
     LX_Point A,B;
     const LX_Point P = C.center;
+    const unsigned int n = poly.numberOfEdges();
 
     if(collisionPointPoly(P,poly) == true)
         return true;
-
-    const unsigned int n = poly.numberOfEdges();
 
     for(unsigned int i = 0; i < n; i++)
     {
@@ -490,13 +482,12 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 */
 bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 {
-    LX_Point A,B,C,D;
     LX_Point E,F;
 
-    A = {rect.x,rect.y};
-    B = {rect.x + rect.w,rect.y};
-    C = {rect.x + rect.w,rect.y + rect.h};
-    D = {rect.x,rect.y + rect.h};
+    LX_Point A = LX_Point(rect.x,rect.y);
+    LX_Point B = LX_Point(rect.x + rect.w,rect.y);
+    LX_Point C = LX_Point(rect.x + rect.w,rect.y + rect.h);
+    LX_Point D = LX_Point(rect.x,rect.y + rect.h);
 
     const unsigned int n = poly.numberOfEdges();
 
