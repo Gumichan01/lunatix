@@ -170,8 +170,7 @@ bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 bool collisionPointCircle(const int x_pos, const int y_pos,
                                       const LX_Circle& circle)
 {
-    LX_Point tmp = {x_pos,y_pos};
-    return collisionPointCircle(tmp,circle);
+    return collisionPointCircle(LX_Point(x_pos,y_pos),circle);
 }
 
 
@@ -228,7 +227,8 @@ bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 */
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 {
-    const unsigned int d = (circle1.radius + circle2.radius) * (circle1.radius + circle2.radius);
+    const unsigned int sum_radius = circle1.radius + circle2.radius;
+    const unsigned int d = sum_radius * sum_radius;
 
     return (euclide_square_distance(circle1.center,circle2.center) <= d);
 }
@@ -250,30 +250,25 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 bool collisionSegCircle(const LX_Circle& circle,
                                     const LX_Point& A, const LX_Point& B)
 {
-    LX_Vector2D AB,AC,BC;
-    LX_Point M;
-    LX_Point O = circle.center;
-
-    float scal,scal1,scal2;
     int sum;
     double t;
     double x,y;
+    float scal,scal1,scal2;
+
+    LX_Point M;
+    LX_Point O = circle.center;
+    LX_Vector2D AB,AO,BO;
 
     if(collisionPointCircle(A,circle) || collisionPointCircle(B,circle))
         return true;
 
-    AB.vx = B.x - A.x;
-    AB.vy = B.y - A.y;
+    AB = LX_Vector2D(B.x - A.x,B.y - A.y);
+    AO = LX_Vector2D(O.x - A.x,O.y - A.y);
+    BO = LX_Vector2D(O.x - B.x,O.y - B.y);
 
-    AC.vx = O.x - A.x;
-    AC.vy = O.y - A.y;
-
-    BC.vx = O.x - B.x;
-    BC.vy = O.y - B.y;
-
-    scal1 = scalar_product(AB,AC);
+    scal1 = scalar_product(AB,AO);
     // I use the opposite value of vx
-    scal2 = ((-AB.vx) * BC.vx) + ((-AB.vy) * BC.vy);
+    scal2 = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
     if(scal1 < 0 || scal2 < 0)
         return false;
