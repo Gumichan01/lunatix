@@ -81,7 +81,7 @@ LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 */
 LX_Configuration::LX_Configuration()
     : video_flag(1), vsync_flag(0), ttf_flag(1), audio_flag(1), joystick_flag(1),
-      opengl_flag(0), fontSize(0), width(800), height(600), fullscreen_flag(0)
+      opengl_flag(0), fontFile(""),fontSize(0), width(800), height(600), fullscreen_flag(0)
 {
     // Load configuration
     setFlags();
@@ -294,7 +294,10 @@ void LX_Configuration::setFlags(void)
             // Font file flag
             if(key.compare(0,FONT_KEY.length(),FONT_KEY) == 0)
             {
-                fontFile = (char *) lua_tostring(state,-1);
+                char *seq = (char *) lua_tostring(state,-1);
+
+                if(seq != nullptr)
+                    fontFile = seq;
             }
 
             // Size flag
