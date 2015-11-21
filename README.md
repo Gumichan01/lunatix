@@ -34,8 +34,8 @@ the library reference on my [website] (http://gumichan01.olympe.in/reference/lun
 
 ### On Windows ###
 
-First of all, download the stable [development library] (http://gumichan01.olympe.in/download/dev-luna-win32.zip) (v0.6.1) 
-and the [shared libraries] (http://gumichan01.olympe.in/dump).  
+First of all, download the stable [development library] (http://gumichan01.olympe.in/download/luna-0.7.0-devel-win32.zip) (v0.6.1) 
+and the [shared libraries] (http://gumichan01.olympe.in/download/luna-0.7.0-dll-win32.zip)   
 It includes the library files and all necessary materials to develop any project.  
 You must include them in the root directory of the project you are working on.
 
