@@ -98,23 +98,23 @@ LX_WindowManager::LX_WindowManager()
     : size(0), nbWin(0)
 {
     //memset(windows,0,LX_NBMAX_WINDOWS);
-    for(int i = 0; i < LX_NBMAX_WINDOWS; i++)
+    /*for(int i = 0; i < LX_NBMAX_WINDOWS; i++)
     {
         windows[i] = nullptr;
-    }
+    }*/
 }
 
 
 // Destroy the instance,
 LX_WindowManager::~LX_WindowManager()
 {
-    if(nbWin != 0)
+    /*if(nbWin != 0)
     {
         for(unsigned int i = 0; i < size; i++)
         {
             windows[i] = nullptr;
         }
-    }
+    }*/
 }
 
 

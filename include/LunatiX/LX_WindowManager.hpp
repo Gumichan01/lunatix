@@ -21,6 +21,7 @@
 *
 */
 
+#include <array>
 
 #define LX_NBMAX_WINDOWS 64    /**< The maximum number of windows to display */
 
@@ -39,7 +40,7 @@ class LX_WindowManager
 {
     unsigned int size;
     unsigned int nbWin;
-    LX_Window *windows[LX_NBMAX_WINDOWS];
+    std::array<LX_Window*, LX_NBMAX_WINDOWS> windows;
 
     LX_WindowManager();
     ~LX_WindowManager();
