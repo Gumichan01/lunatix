@@ -295,20 +295,9 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
         return false;
 
     if(pos == nullptr)
-    {
-        // The texture will be set on the top-left of the main surface
-        offset.x = 0;
-        offset.y = 0;
-        offset.w = 0;
-        offset.h = 0;
-    }
+        offset = {0,0,0,0};
     else
-    {
-        offset.x = pos->x;
-        offset.y = pos->y;
-        offset.w = pos->w;
-        offset.h = pos->h;
-    }
+        offset = {pos->x,pos->y,pos->w,pos->h};
 
     err = SDL_BlitSurface(image,area,SDL_GetWindowSurface(window),&offset);
 
