@@ -1,4 +1,4 @@
-# LunatiX Engine (Draft of the new version) #
+# LunatiX Engine #
 
 
 LunatiX Engine is a SDL2-based game engine. It can be used for open-source or 
@@ -34,7 +34,7 @@ the library reference on my [website] (http://gumichan01.olympe.in/reference/lun
 
 ### On Windows ###
 
-First of all, download the stable [development library] (http://gumichan01.olympe.in/download/luna-0.7.0-devel-win32.zip) (v0.6.1) 
+First of all, download the stable [development library] (http://gumichan01.olympe.in/download/luna-0.7.0-devel-win32.zip) (v0.7.0) 
 and the [shared libraries] (http://gumichan01.olympe.in/download/luna-0.7.0-dll-win32.zip)   
 It includes the library files and all necessary materials to develop any project.  
 You must include them in the root directory of the project you are working on.
