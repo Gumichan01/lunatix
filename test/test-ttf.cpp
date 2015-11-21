@@ -222,8 +222,10 @@ void test_font2(void)
         win.putTexture(textS,nullptr,&pos2);
         win.update();
         SDL_Delay(1000);
-        SDL_DestroyTexture(textS);
     }
+
+    SDL_DestroyTexture(textS);
+    textS = nullptr;
 
     cout << "INFO - error cases" << endl;
 

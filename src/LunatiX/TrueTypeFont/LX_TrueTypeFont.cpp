@@ -389,6 +389,7 @@ SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
 SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
                                 unsigned int size,Uint8 r, Uint8 g, Uint8 b)
 {
+    SDL_Color bg = {r,g,b,0};
     TTF_Font *ttf = nullptr;
     SDL_Surface *loaded = nullptr;
 
@@ -416,10 +417,7 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
             break;
 
         case LX_TTF_SHADED :
-            {
-                SDL_Color bg = {r,g,b,0};
-                loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),font_color,bg);
-            }
+            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),font_color,bg);
             break;
 
         case LX_TTF_BLENDED :
