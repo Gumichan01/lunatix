@@ -135,8 +135,7 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 *   @return A valid poinetr to the optimized surface on success.
 *           a null pointer on error or if the surface is not valid.
 *
-*   @note   The function frees the surface if it is not valid.
-*           So the surface becomes invalid.
+*   @note   The surface is automatically freed and become invalid.
 *
 *   @sa loadSurface
 *   @sa loadSurfaceFromFileBuffer
