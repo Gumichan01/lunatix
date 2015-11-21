@@ -17,7 +17,7 @@
 *	@file LX_Mixer.hpp
 *	@brief The mixer library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 

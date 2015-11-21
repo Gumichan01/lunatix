@@ -15,7 +15,7 @@
 *	@file LX_Graphics.cpp
 *	@brief The implementation of the graphics engine
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 

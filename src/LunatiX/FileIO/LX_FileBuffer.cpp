@@ -15,7 +15,7 @@
 *	@file LX_FileBuffer.cpp
 *	@brief The file buffer implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 

@@ -15,7 +15,7 @@
 *	@file LX_SystemInfo.cpp
 *	@brief The implementation of the system information
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 

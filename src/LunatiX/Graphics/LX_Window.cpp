@@ -13,7 +13,7 @@
 *	@file LX_Window.cpp
 *	@brief The implementation of the window
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 
@@ -51,7 +51,8 @@ static const Uint32 amask = 0xff000000;
 
 #endif
 
-static const char * DEFAULT_TITLE = "LunatiX Engine v0.6";
+
+static const char * DEFAULT_TITLE = "LunatiX Engine v0.7";
 
 namespace LX_Graphics
 {

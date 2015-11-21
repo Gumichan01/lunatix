@@ -22,7 +22,7 @@
 *	@file LX_Random.cpp
 *	@brief The Random Number Generator implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 

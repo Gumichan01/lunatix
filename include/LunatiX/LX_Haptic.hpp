@@ -17,7 +17,7 @@
 *	@file LX_Haptic.hpp
 *	@brief The library that deals force feedbaxck
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 

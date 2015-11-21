@@ -16,7 +16,7 @@
 *	@file LX_Sound.cpp
 *	@brief The abstract sound class definition
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.6
+*	@version 0.7
 *
 */
 
