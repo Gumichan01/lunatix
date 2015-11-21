@@ -57,9 +57,7 @@ LX_WindowManager * getWindowManager()
 void LX_WindowManager::init(void)
 {
     if(winInstance == nullptr)
-    {
         winInstance = new LX_WindowManager();
-    }
 }
 
 
@@ -97,24 +95,14 @@ void LX_WindowManager::destroy(void)
 LX_WindowManager::LX_WindowManager()
     : size(0), nbWin(0)
 {
-    //memset(windows,0,LX_NBMAX_WINDOWS);
-    /*for(int i = 0; i < LX_NBMAX_WINDOWS; i++)
-    {
-        windows[i] = nullptr;
-    }*/
+    windows.fill(nullptr);
 }
 
 
 // Destroy the instance,
 LX_WindowManager::~LX_WindowManager()
 {
-    /*if(nbWin != 0)
-    {
-        for(unsigned int i = 0; i < size; i++)
-        {
-            windows[i] = nullptr;
-        }
-    }*/
+    // Emty
 }
 
 
