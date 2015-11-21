@@ -40,10 +40,6 @@ It includes the library files and all necessary materials to develop any project
 You must include them in the root directory of the project you are working on.
 
 
-#### Using Codeblocks ####
-
-TODO
-
 
 ### On a Linux system ###
 
