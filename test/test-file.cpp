@@ -217,6 +217,8 @@ void test_read2(void)
         cout << "SUCCESS - Received " << read_data << " bytes from " << strex << endl;
     }
 
+
+    delete [] buff;
     f.close();
 
     cout << " = END TEST = " << endl;
