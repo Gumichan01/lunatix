@@ -57,6 +57,7 @@ typedef struct LX_Circle
     unsigned int radius;        /**< The circle radius                      */
     unsigned int square_radius; /**< The square radius                      */
 
+    LX_Circle();
     LX_Circle(const LX_Point& p, unsigned int rad);
     LX_Circle(const LX_Circle& c);
     LX_Circle& operator=(const LX_Circle c);

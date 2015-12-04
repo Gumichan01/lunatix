@@ -90,6 +90,19 @@ LX_Point& LX_Point::operator =(LX_Point p)
 /**
 *   @fn LX_Circle(const LX_Point& p, unsigned int rad)
 *
+*   Default constructor
+*
+*/
+LX_Circle::LX_Circle()
+    : LX_Circle(LX_Point(0,0),0)
+{
+    // Empty
+}
+
+
+/**
+*   @fn LX_Circle(const LX_Point& p, unsigned int rad)
+*
 *   Construct the circle with a point and the radius
 *
 *   @param p The center of the circle
