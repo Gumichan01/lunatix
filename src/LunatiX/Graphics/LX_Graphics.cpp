@@ -21,7 +21,6 @@
 
 
 #include <string>
-
 #include <SDL2/SDL_image.h>
 
 #include <LunatiX/LX_Graphics.hpp>
@@ -30,7 +29,6 @@
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Error.hpp>
-
 
 using namespace LX_FileIO;
 
@@ -213,7 +211,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 
 
 /**
-*   @fn SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
+*   @fn SDL_Texture * loadTextureFromFile(const std::string filename, unsigned int id)
 *
 *   Load a new texture from a file using the renderer of the window
 *   specified by its ID
@@ -229,7 +227,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 *
 *   @sa loadTextureFromSurface
 */
-SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
+SDL_Texture * loadTextureFromFile(const std::string filename, unsigned int id)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
@@ -248,7 +246,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 
 
 /**
-*   @fn SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
+*   @fn SDL_Texture * loadTextureFromFile(const std::string filename, LX_Window * w)
 *
 *   Load a texture from a surface using the renderer of the window
 *
@@ -260,7 +258,7 @@ SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
 *
 *   @sa loadTextureFromSurface
 */
-SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
+SDL_Texture * loadTextureFromFile(const std::string filename, LX_Window * w)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
