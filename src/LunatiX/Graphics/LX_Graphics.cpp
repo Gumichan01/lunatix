@@ -54,16 +54,11 @@ namespace LX_Graphics
 */
 SDL_Surface * loadSurface(std::string filename)
 {
-    SDL_Surface *loaded = nullptr;
+    SDL_Surface *loaded = IMG_Load(filename.c_str());
+    SDL_Surface *optimized = optimizeSurface(loaded);
+    SDL_FreeSurface(loaded);
 
-    loaded = IMG_Load(filename.c_str());
-
-    if(loaded == nullptr)
-    {
-        return nullptr;
-    }
-
-    return optimizeSurface(loaded);
+    return optimized;
 }
 
 
@@ -244,7 +239,6 @@ SDL_Texture * loadTextureFromFile(const std::string filename, unsigned int id)
         return nullptr;
 
     tmpT = loadTextureFromSurface(tmpS,id);
-
     SDL_FreeSurface(tmpS);
 
     return tmpT;
@@ -275,7 +269,6 @@ SDL_Texture * loadTextureFromFile(const std::string filename, LX_Window * w)
         return nullptr;
 
     tmpT = loadTextureFromSurface(tmpS,w);
-
     SDL_FreeSurface(tmpS);
 
     return tmpT;
