@@ -124,7 +124,7 @@ const SDL_DisplayMode * getDisplayModes(int& size)
         LX_SetError("No display available");
         return nullptr;
     }
-    else if(numberOfDisplays == 0)
+    else if(numberOfDisplays < 0)
     {
         LX_SetError("Cannot get the number of display modes");
         return nullptr;

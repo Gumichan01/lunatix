@@ -182,10 +182,8 @@ void LX_Configuration::assignString(lua_State * state, char *str, unsigned int l
 */
 void LX_Configuration::setFlags(void)
 {
-    int t = 1;
     const std::string luaFunction = "getFlags";
     std::string key;
-    char tmp[16];
     lua_State *state = nullptr;
 
     // Constant values
@@ -239,11 +237,13 @@ void LX_Configuration::setFlags(void)
     }
     else
     {
+        int index = 1;
+        char tmp[16];
         // Call the function
         lua_call(state,0,1);
         lua_pushnil(state);
 
-        while(lua_next(state, t))
+        while(lua_next(state, index))
         {
             assignString(state,tmp,sizeof(tmp));
 

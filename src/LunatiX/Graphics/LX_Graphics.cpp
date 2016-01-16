@@ -91,7 +91,11 @@ SDL_Surface * loadSurface(LX_File *file)
         return nullptr;
     }
 
-    return optimizeSurface(file->getSurfaceFromData());
+    SDL_Surface * surface = file->getSurfaceFromData();
+    SDL_Surface *optimized = optimizeSurface(surface);
+    SDL_FreeSurface(surface);
+
+    return optimized;
 }
 
 
@@ -118,7 +122,11 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
         return nullptr;
     }
 
-    return optimizeSurface(file->getSurfaceFromBuffer());
+    SDL_Surface * surface = file->getSurfaceFromBuffer();
+    SDL_Surface *optimized = optimizeSurface(surface);
+    SDL_FreeSurface(surface);
+
+    return optimized;
 }
 
 
@@ -149,8 +157,6 @@ SDL_Surface * optimizeSurface(SDL_Surface * surface)
     }
 
     optimized = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA4444,0x00000000);
-    SDL_FreeSurface(surface);
-    surface = nullptr;
 
     return optimized;
 }

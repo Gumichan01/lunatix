@@ -172,8 +172,8 @@ size_t LX_File::read(void *ptr,size_t data_size,size_t max_num)
 size_t LX_File::readExactly(void *ptr,size_t data_size,size_t num)
 {
     size_t total_read = 0;
-    size_t read_data = 0;
     char * p = static_cast<char *>(ptr);
+    size_t read_data = 0;
 
     // Read at most num bytes
     while(total_read < num)

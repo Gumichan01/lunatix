@@ -224,13 +224,12 @@ void LX_Polygon::convexity(void)
     LX_Vector2D AO;
     LX_Vector2D OB;
 
-    // Scalar product and angle
-    int cross_product;
-
     bool haveSign = false;
     enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
-
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
+
+    // Vector product
+    int cross_product;
 
     for(unsigned int i = 0; i < n; i++)
     {
