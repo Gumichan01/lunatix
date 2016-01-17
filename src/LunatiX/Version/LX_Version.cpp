@@ -31,11 +31,24 @@
 #define LX_MINOR_VERSION 7      /**< The minor version of the engine */
 #define LX_PATCH_VERSION 0      /**< The patch of the engine */
 
-using namespace std;
+#define LX_COPYRIGHT    "Copyright (C) 2016"
+#define LX_AUTHOR       "Luxon Jean-Pierre"
 
+using namespace std;
 
 namespace LX_VersionInfo
 {
+
+void LX_EngineInfo(void)
+{
+    LX_Version luna;
+    LX_EngineVersion(luna);
+
+    cout << "LunatiX Engine - Version " << luna.major
+         << "." << luna.minor << "." <<  luna.patch << endl
+         << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
+}
+
 
 /**
 *   @fn void LX_EngineVersion(LX_Version& version)
@@ -79,12 +92,12 @@ void LX_EngineVersionString(void)
     SDL_TTF_VERSION(&ttf_compiled);
     SDL_MIXER_VERSION(&mix_compiled);
 
-
     // Version of the LunatiX Engine
     LX_EngineVersion(luna);
 
-    cout << "LunatiX Engine - Version " << luna.major
-         << "." << luna.minor << "." <<  luna.patch << endl;
+    /*cout << "LunatiX Engine - Version " << luna.major
+         << "." << luna.minor << "." <<  luna.patch << endl;*/
+    LX_EngineInfo();
 
     cout << endl << "Dependencies : " << endl << endl;
 
