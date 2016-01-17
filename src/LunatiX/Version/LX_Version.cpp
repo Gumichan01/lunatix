@@ -23,6 +23,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 #include <LunatiX/LX_Version.hpp>
+#include <Lua/lua.hpp>
 
 #include <iostream>
 
@@ -51,6 +52,12 @@ void LX_EngineVersion(LX_Version& version)
     version.patch = LX_PATCH_VERSION;
 }
 
+/**
+*   @fn void LX_EngineVersionString(void)
+*
+*   Display information about the engine and its dependencies
+*
+*/
 void LX_EngineVersionString(void)
 {
     // Information about SDL2 and the LunatiX engine
@@ -79,45 +86,51 @@ void LX_EngineVersionString(void)
     cout << "LunatiX Engine - Version " << luna.major
          << "." << luna.minor << "." <<  luna.patch << endl;
 
-    cout << " Compiled against SDL version "
+    cout << endl << "Dependencies : " << endl << endl;
+
+    cout << "Compiled against SDL version "
          << static_cast<int>(sdl_compiled.major) << "."
          << static_cast<int>(sdl_compiled.minor) << "."
          << static_cast<int>(sdl_compiled.patch) << " ..." << endl;
 
-    cout << " Linked against SDL version "
+    cout << "Linked against SDL version "
          << static_cast<int>(sdl_linked.major) << "."
          << static_cast<int>(sdl_linked.minor) << "."
          << static_cast<int>(sdl_linked.patch) << " ..." << endl;
 
-    cout << " Compiled against SDL_Image version "
+    cout << endl << "Compiled against SDL_Image version "
          << static_cast<int>(img_compiled.major) << "."
          << static_cast<int>(img_compiled.minor) << "."
          << static_cast<int>(img_compiled.patch) << " ..." << endl;
 
-    cout << " Linked against SDL_Image version "
+    cout << "Linked against SDL_Image version "
          << static_cast<int>(img_linked->major) << "."
          << static_cast<int>(img_linked->minor) << "."
          << static_cast<int>(img_linked->patch) << " ..." << endl;
 
-    cout << " Compiled against SDL_TTF version "
+    cout << endl << "Compiled against SDL_TTF version "
          << static_cast<int>(ttf_compiled.major) << "."
          << static_cast<int>(ttf_compiled.minor) << "."
          << static_cast<int>(ttf_compiled.patch) << " ..." << endl;
 
-    cout << " Linked against SDL_TTF version "
+    cout << "Linked against SDL_TTF version "
          << static_cast<int>(ttf_linked->major) << "."
          << static_cast<int>(ttf_linked->minor) << "."
          << static_cast<int>(ttf_linked->patch) << " ..." << endl;
 
-    cout << " Compiled against SDL_Mixer version "
+    cout << endl << "Compiled against SDL_Mixer version "
          << static_cast<int>(mix_compiled.major) << "."
          << static_cast<int>(mix_compiled.minor) << "."
          << static_cast<int>(mix_compiled.patch) << " ..." << endl;
 
-    cout << " Linked against SDL_Mixer version "
+    cout << "Linked against SDL_Mixer version "
          << static_cast<int>(mix_linked->major) << "."
          << static_cast<int>(mix_linked->minor) << "."
          << static_cast<int>(mix_linked->patch) << " ..." << endl;
+
+    cout << endl << LUA_RELEASE << endl
+         << LUA_COPYRIGHT  << endl
+         << LUA_AUTHORS << endl;
 }
 
 };
