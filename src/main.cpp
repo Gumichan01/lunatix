@@ -40,32 +40,8 @@ int main()
     SDL_Delay(3000);
     SDL_DestroyTexture(texture);
 
-    // Information about SDL2 and the LunatiX engine
-    SDL_version compiled;
-    SDL_version linked;
-    LX_Version luna;
-
-    // Version of SDL
-    SDL_VERSION(&compiled);
-    SDL_GetVersion(&linked);
-
-    // Version of the LunatiX Engine
-    LX_EngineVersion(luna);
-
-    cout << "We compiled against SDL version "
-         << static_cast<int>(compiled.major) << "."
-         << static_cast<int>(compiled.minor) << "."
-         << static_cast<int>(compiled.patch) << " ..." << endl;
-
-    cout << "But we linked against SDL version "
-         << static_cast<int>(compiled.major) << "."
-         << static_cast<int>(compiled.minor) << "."
-         << static_cast<int>(compiled.patch) << " ..." << endl;
-
-
-    cout << "LunatiX Engine - Version " << luna.major << "." << luna.minor
-         << "." <<  luna.patch << endl;
-
+    // Information about
+    LX_EngineVersionString();
     LX_Quit();
 
     return 0;
