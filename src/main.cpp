@@ -21,6 +21,8 @@ int main(int argc, char** argv)
 int main()
 #endif
 {
+    LX_Log::setDefaultMode();
+
     if(!LX_Init())
     {
         cerr << "Cannot load the library: " << LX_GetError() << endl;
