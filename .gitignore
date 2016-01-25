@@ -12,6 +12,6 @@
 *Doxyfile*
 html/
 lunatix/
-libLunatix*
+*libLunatix*
 _build/
 lunatix-demo
