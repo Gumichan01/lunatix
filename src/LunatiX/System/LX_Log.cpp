@@ -55,4 +55,11 @@ void setVerbosePriority(LX_CATEGORY category)
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_VERBOSE);
 }
 
+
+void setDebugPriority(LX_CATEGORY category)
+{
+    SDL_LogSetPriority(category,SDL_LOG_PRIORITY_DEBUG);
+}
+
+
 };

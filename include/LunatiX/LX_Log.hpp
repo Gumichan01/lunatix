@@ -39,7 +39,7 @@ void setDefaultMode(bool debug = true);
 void setDefaultPriority(void);
 
 void setVerbosePriority(LX_CATEGORY category);
-void setDebugPriority(void);
+void setDebugPriority(LX_CATEGORY category);
 void setInfoPriority(void);
 void setWarningPriority(void);
 void setErrorPriority(void);
