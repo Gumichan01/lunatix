@@ -23,7 +23,7 @@ int main()
 {
     LX_Log::LX_CATEGORY cat = LX_Log::LX_LOG_RENDER;
     LX_Log::setDefaultMode();
-    LX_Log::setDebugPriority(cat);
+    LX_Log::setInfoPriority(cat);
 
     if(!LX_Init())
     {
