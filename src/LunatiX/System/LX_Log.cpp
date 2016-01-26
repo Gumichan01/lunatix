@@ -67,4 +67,10 @@ void setInfoPriority(LX_CATEGORY category)
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_INFO);
 }
 
+
+void setWarningPriority(LX_CATEGORY category)
+{
+    SDL_LogSetPriority(category,SDL_LOG_PRIORITY_WARN);
+}
+
 };
