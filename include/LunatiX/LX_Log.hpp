@@ -22,7 +22,15 @@
 namespace LX_Log
 {
 
-bool isDebugMode();
+// Category of log
+enum LX_CATEGORY{LX_LOG_APPLICATION,
+                 LX_LOG_ERROR,
+                 LX_LOG_SYSTEM,
+                 LX_LOG_AUDIO,
+                 LX_LOG_VIDEO,
+                 LX_LOG_RENDER,INPUT};
+
+bool isDebugMode(void);
 void setDefaultMode(bool debug = true);
 void setDefaultPriority(void);
 

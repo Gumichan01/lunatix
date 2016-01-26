@@ -29,7 +29,7 @@ namespace LX_Log
 bool debug_mode = false;
 
 
-bool isDebugMode()
+bool isDebugMode(void)
 {
     return debug_mode;
 }
@@ -51,6 +51,4 @@ void setDefaultPriority(void)
 }
 
 };
-
-
 
