@@ -1,5 +1,4 @@
-#ifndef LX_LOG_HPP_INCLUDED
-#define LX_LOG_HPP_INCLUDED
+
 
 /*
 *	Copyright (C) 2016 Luxon Jean-Pierre
@@ -19,22 +18,38 @@
 *
 */
 
+
+#include <LunatiX/LX_Log.hpp>
+#include <SDL2/SDL_Log.h>
+
 namespace LX_Log
 {
 
-bool isDebugMode();
+// Private field in the namespace
+bool debug_mode = false;
 
-void setDefaultMode(bool debug = true);
 
-void setVerbosePriority(void);
-void setDebugPriority(void);
-void setInfoPriority(void);
-void setWarningPriority(void);
-void setErrorPriority(void);
-void setCriticalPriority(void);
+bool isDebugMode()
+{
+    return debug_mode;
+}
 
-void setDefaultPriority(void);
+void setDefaultMode(bool debug)
+{
+    if(debug)
+        SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
+    else
+    {
+        SDL_LogResetPriorities();
+    }
+
+    debug_mode = debug;
+}
+
+
+
 
 };
 
-#endif // LX_LOG_HPP_INCLUDED
+
+
