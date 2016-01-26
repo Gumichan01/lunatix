@@ -13,8 +13,8 @@
 */
 
 /**
-*	@file LX_Log.cpp
-*	@brief The Log file
+*	@file LX_Log.hpp
+*	@brief The Log file header
 *	@author Luxon Jean-Pierre(Gumichan01)
 *
 */
