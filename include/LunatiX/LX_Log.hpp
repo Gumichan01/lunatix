@@ -43,7 +43,7 @@ void setDebugPriority(LX_CATEGORY category);
 void setInfoPriority(LX_CATEGORY category);
 void setWarningPriority(LX_CATEGORY category);
 void setErrorPriority(LX_CATEGORY category);
-void setCriticalPriority(void);
+void setCriticalPriority(LX_CATEGORY category);
 
 };
 
