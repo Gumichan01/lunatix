@@ -23,8 +23,8 @@ namespace LX_Log
 {
 
 bool isDebugMode();
-
 void setDefaultMode(bool debug = true);
+void setDefaultPriority(void);
 
 void setVerbosePriority(void);
 void setDebugPriority(void);
@@ -32,8 +32,6 @@ void setInfoPriority(void);
 void setWarningPriority(void);
 void setErrorPriority(void);
 void setCriticalPriority(void);
-
-void setDefaultPriority(void);
 
 };
 
