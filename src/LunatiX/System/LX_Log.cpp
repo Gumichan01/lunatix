@@ -39,9 +39,7 @@ void setDefaultMode(bool debug)
     if(debug)
         SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
     else
-    {
         SDL_LogResetPriorities();
-    }
 
     debug_mode = debug;
 }
