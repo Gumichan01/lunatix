@@ -42,7 +42,7 @@ void setVerbosePriority(LX_CATEGORY category);
 void setDebugPriority(LX_CATEGORY category);
 void setInfoPriority(LX_CATEGORY category);
 void setWarningPriority(LX_CATEGORY category);
-void setErrorPriority(void);
+void setErrorPriority(LX_CATEGORY category);
 void setCriticalPriority(void);
 
 };
