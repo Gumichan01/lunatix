@@ -21,7 +21,9 @@ int main(int argc, char** argv)
 int main()
 #endif
 {
+    LX_Log::LX_CATEGORY cat = LX_Log::LX_LOG_RENDER;
     LX_Log::setDefaultMode();
+    LX_Log::setVerbosePriority(cat);
 
     if(!LX_Init())
     {

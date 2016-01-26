@@ -20,7 +20,6 @@
 
 
 #include <LunatiX/LX_Log.hpp>
-#include <SDL2/SDL_Log.h>
 
 namespace LX_Log
 {
@@ -50,5 +49,10 @@ void setDefaultPriority(void)
     SDL_LogResetPriorities();
 }
 
-};
 
+void setVerbosePriority(LX_CATEGORY category)
+{
+    SDL_LogSetPriority(category,SDL_LOG_PRIORITY_VERBOSE);
+}
+
+};
