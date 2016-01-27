@@ -26,7 +26,7 @@ for a better use in a project.
 
 ## Details ##
 
- - Good by C++98/C++0x! C++11 is supported by the LunatiX engine. So, the source code
+ - Goodbye C++98/C++0x! C++11 is supported by the LunatiX engine. So, the source code
 was entirely changed to integrate this standard. The source code architecture was simplified
 thanks to the use of the constructor delegation.
 
