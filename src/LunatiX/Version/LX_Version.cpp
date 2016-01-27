@@ -44,8 +44,8 @@ void LX_EngineInfo(void)
     LX_Version luna;
     LX_EngineVersion(luna);
 
-    cout << "LunatiX Engine - Version " << luna.major
-         << "." << luna.minor << "." <<  luna.patch << endl
+    cout << endl << "LunatiX Engine - Version " << luna.major
+         << "."  << luna.minor << "." <<  luna.patch << endl
          << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
 }
 
