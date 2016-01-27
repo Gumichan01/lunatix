@@ -29,6 +29,8 @@ int main()
         return -1;
     }
 
+    bool go = true;
+    SDL_Event event;
     LX_AABB position = {0,0,W,H};
     LX_Window w(LX_WINDOW_RENDERING);
     SDL_Texture *texture = loadTextureFromFile("data/bullet.png",&w);
@@ -39,7 +41,20 @@ int main()
     w.putTexture(texture,nullptr,&position);
     w.update();
 
-    SDL_Delay(3000);
+    while(go)
+    {
+        while(SDL_PollEvent(&event))
+        {
+            switch(event.type)
+            {
+                case SDL_QUIT : go = false;
+                                break;
+                default : break;
+            }
+        }
+
+        SDL_Delay(33);
+    }
     SDL_DestroyTexture(texture);
 
     // Information about
