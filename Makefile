@@ -96,6 +96,7 @@ $(OBJ_PHYSICS_PATH)LX_Hitbox.o $(OBJ_PHYSICS_PATH)LX_Physics.o \
 $(OBJ_PHYSICS_PATH)LX_Polygon.o $(OBJ_PHYSICS_PATH)LX_Vector2D.o \
 $(OBJ_RANDOM_PATH)LX_Random.o \
 $(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
+$(OBJ_SYSTEM_PATH)LX_Log.o \
 $(OBJ_TTF_PATH)LX_TrueTypeFont.o \
 $(OBJ_VERSION_PATH)LX_Version.o
 
@@ -452,6 +453,15 @@ LX_SystemInfo.o : $(OBJ_SYSTEM_PATH)LX_SystemInfo.o
 
 $(OBJ_SYSTEM_PATH)LX_SystemInfo.o : $(SYSTEM_PATH)LX_SystemInfo.cpp \
 $(LUNATIX_INCLUDE_PATH)LX_SystemInfo.hpp
+	@mkdir -p $(OBJ_SYSTEM_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
+
+
+LX_Log.o : $(OBJ_SYSTEM_PATH)LX_Log.o
+
+$(OBJ_SYSTEM_PATH)LX_Log.o : $(SYSTEM_PATH)LX_Log.cpp \
+$(LUNATIX_INCLUDE_PATH)LX_Log.hpp
 	@mkdir -p $(OBJ_SYSTEM_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
