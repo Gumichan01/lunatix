@@ -1,0 +1,15 @@
+
+= Changelog = 
+
+For the release 0.7.2, changes from 0.7 are provided.
+
+== LX_Log ==
+
+ - Set the program in debug mode
+ - Define a level of priority to some log categories
+
+
+== LX_Version == 
+
+ - Added information about the dependencies
+ - Get short information about the engine
