@@ -23,6 +23,10 @@
 
 /// @todo Documentation + static analysis
 
+/**
+*   @namespace LX_Log
+*   @brief The log module
+*/
 namespace LX_Log
 {
 
@@ -36,7 +40,7 @@ enum LX_CATEGORY{LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
                  LX_LOG_INPUT = SDL_LOG_CATEGORY_INPUT};
 
 bool isDebugMode(void);
-void setDefaultMode(bool debug = true);
+void setDebugMode(bool debug = true);
 void setDefaultPriority(void);
 
 void setVerbosePriority(LX_CATEGORY category);
