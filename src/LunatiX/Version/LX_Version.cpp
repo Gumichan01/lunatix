@@ -38,7 +38,11 @@ using namespace std;
 
 namespace LX_VersionInfo
 {
-
+/**
+*   @fn void LX_EngineInfo(void)
+*
+*   Get information about the engine
+*/
 void LX_EngineInfo(void)
 {
     LX_Version luna;
@@ -49,14 +53,12 @@ void LX_EngineInfo(void)
          << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
 }
 
-
 /**
 *   @fn void LX_EngineVersion(LX_Version& version)
 *
 *   Get the version of the engine
 *
 *   @param version The structure to fill in.
-*
 */
 void LX_EngineVersion(LX_Version& version)
 {
@@ -69,7 +71,6 @@ void LX_EngineVersion(LX_Version& version)
 *   @fn void LX_EngineVersionString(void)
 *
 *   Display information about the engine and its dependencies
-*
 */
 void LX_EngineVersionString(void)
 {
@@ -94,9 +95,6 @@ void LX_EngineVersionString(void)
 
     // Version of the LunatiX Engine
     LX_EngineVersion(luna);
-
-    /*cout << "LunatiX Engine - Version " << luna.major
-         << "." << luna.minor << "." <<  luna.patch << endl;*/
     LX_EngineInfo();
 
     cout << endl << "Dependencies : " << endl << endl;
@@ -147,5 +145,4 @@ void LX_EngineVersionString(void)
 }
 
 };
-
 
