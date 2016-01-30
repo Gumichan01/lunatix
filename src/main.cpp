@@ -15,6 +15,8 @@ using namespace LX_Graphics;
 using namespace LX_FileIO;
 using namespace LX_VersionInfo;
 
+void inputTextExperiment();
+
 #if defined(__WIN32__)
 int main(int argc, char** argv)
 #else
@@ -43,6 +45,8 @@ int main()
 
     while(go)
     {
+        inputTextExperiment();
+
         while(SDL_PollEvent(&event))
         {
             switch(event.type)
@@ -55,6 +59,7 @@ int main()
 
         SDL_Delay(33);
     }
+
     SDL_DestroyTexture(texture);
 
     // Information about
@@ -63,4 +68,70 @@ int main()
 
     return 0;
 }
+
+
+void inputTextExperiment()
+{
+    bool done = false;
+    SDL_Color color = {0,0,0,0};
+    /*string font_file = LX_Configuration::getInstance()->getFontFile();
+    LX_TrueTypeFont::LX_Font font(font_file,color);*/
+    SDL_Event event;
+    string typed_text = "";
+
+    SDL_LogInfo(LX_Log::LX_LOG_APPLICATION,"Test the text input");
+    SDL_StartTextInput();
+
+    if(SDL_IsTextInputActive())
+        SDL_LogInfo(LX_Log::LX_LOG_APPLICATION,"Text input is active");
+    else
+        SDL_LogError(LX_Log::LX_LOG_APPLICATION,"Text input is noy active");
+
+    while(!done)
+    {
+        while(SDL_PollEvent(&event))
+        {
+            switch(event.type)
+            {
+                case SDL_TEXTINPUT: typed_text += event.text.text;
+                                    SDL_LogInfo(LX_Log::LX_LOG_APPLICATION,typed_text.c_str());
+                                    break;
+
+                case SDL_KEYDOWN:   if(event.key.keysym.sym == SDLK_RETURN)
+                                        done = true;
+                                    else if(event.key.keysym.sym == SDLK_BACKSPACE)
+                                    {
+                                        typed_text.pop_back();
+                                        SDL_LogInfo(LX_Log::LX_LOG_APPLICATION,typed_text.c_str());
+                                    }
+            }
+        }
+        SDL_Delay(33);
+    }
+
+    SDL_StopTextInput();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
