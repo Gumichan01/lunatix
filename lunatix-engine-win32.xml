@@ -47,14 +47,21 @@
 		</Build>
 		<Compiler>
 			<Add option="-std=c++11" />
-			<Add option="-Wextra" />
-			<Add option="-Wall" />
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 			<Add option="-lSDL2_ttf -lSDL2_mixer" />
 			<Add option="-lOpenGL32 -lglu32" />
+			<Add library="lib\win32\libSDL2main.a" />
+			<Add library="lib\win32\libSDL2.a" />
+			<Add library="lib\win32\libSDL2.dll.a" />
+			<Add library="lib\win32\libSDL2_image.a" />
+			<Add library="lib\win32\libSDL2_image.dll.a" />
+			<Add library="lib\win32\libSDL2_mixer.a" />
+			<Add library="lib\win32\libSDL2_mixer.dll.a" />
+			<Add library="lib\win32\libSDL2_ttf.a" />
+			<Add library="lib\win32\libSDL2_ttf.dll.a" />
 			<Add library="lib\win32\lua5.1.lib" />
 			<Add library="lib\win32\lua51.lib" />
 			<Add directory="lib/win32" />
@@ -71,6 +78,7 @@
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
 		<Unit filename="include/LunatiX/LX_Hitbox.hpp" />
 		<Unit filename="include/LunatiX/LX_Library.hpp" />
+		<Unit filename="include/LunatiX/LX_Log.hpp" />
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
 		<Unit filename="include/LunatiX/LX_Mixer.hpp" />
 		<Unit filename="include/LunatiX/LX_Music.hpp" />
@@ -109,6 +117,7 @@
 		<Unit filename="src/LunatiX/Physics/LX_Polygon.cpp" />
 		<Unit filename="src/LunatiX/Physics/LX_Vector2D.cpp" />
 		<Unit filename="src/LunatiX/Random/LX_Random.cpp" />
+		<Unit filename="src/LunatiX/System/LX_Log.cpp" />
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
 		<Unit filename="src/LunatiX/Version/LX_Version.cpp" />
