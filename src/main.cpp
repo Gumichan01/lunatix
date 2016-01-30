@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 int main()
 #endif
 {
-    LX_Log::setDefaultMode();
+    LX_Log::setDebugMode();
 
     if(!LX_Init())
     {
