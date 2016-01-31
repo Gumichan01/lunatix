@@ -166,6 +166,14 @@ void logInfo(LX_CATEGORY category,char *format,...)
     va_end(args);
 }
 
+void logWarning(LX_CATEGORY category,char *format,...)
+{
+    va_list args;
+    va_start(args,format);
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_WARN,format,args);
+    va_end(args);
+}
+
 
 };
 
