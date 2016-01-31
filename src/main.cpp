@@ -21,8 +21,7 @@ int main(int argc, char** argv)
 int main()
 #endif
 {
-    //LX_Log::setDebugMode();
-    LX_Log::setVerbosePriority(LX_Log::LX_LOG_APPLICATION);
+    LX_Log::setDebugMode();
 
     if(!LX_Init())
     {
@@ -30,7 +29,7 @@ int main()
         return -1;
     }
 
-    LX_Log::logVerbose(LX_Log::LX_LOG_APPLICATION,"The program was load with success: %d \n");
+    LX_Log::logDebug(LX_Log::LX_LOG_APPLICATION,"The program was load with success\n");
 
     bool go = true;
     SDL_Event event;
