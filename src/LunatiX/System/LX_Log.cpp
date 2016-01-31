@@ -18,10 +18,8 @@
 *
 */
 
-#include <LunatiX/LX_Log.hpp>
 #include <cstdarg>
-
-using namespace std;
+#include <LunatiX/LX_Log.hpp>
 
 namespace LX_Log
 {
@@ -189,6 +187,17 @@ void logCritical(LX_CATEGORY category,char *format,...)
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_CRITICAL,format,args);
     va_end(args);
 }
+
+
+void log(char *format,...)
+{
+    va_list args;
+    va_start(args,format);
+    SDL_LogMessageV(LX_LOG_APPLICATION,SDL_LOG_PRIORITY_INFO,format,args);
+    va_end(args);
+}
+
+
 
 };
 

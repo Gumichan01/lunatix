@@ -68,8 +68,7 @@ void logWarning(LX_CATEGORY category,char *format,...);
 void logError(LX_CATEGORY category,char *format,...);
 void logCritical(LX_CATEGORY category,char *format,...);
 
-
-
+void log(char *format,...);
 
 
 };
