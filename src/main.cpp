@@ -21,13 +21,16 @@ int main(int argc, char** argv)
 int main()
 #endif
 {
-    LX_Log::setDebugMode();
+    //LX_Log::setDebugMode();
+    LX_Log::setVerbosePriority(LX_Log::LX_LOG_APPLICATION);
 
     if(!LX_Init())
     {
         cerr << "Cannot load the library: " << LX_GetError() << endl;
         return -1;
     }
+
+    LX_Log::logVerbose(LX_Log::LX_LOG_APPLICATION,"The program was load with success: %d \n");
 
     bool go = true;
     SDL_Event event;

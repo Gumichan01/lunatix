@@ -61,6 +61,12 @@ void setWarningPriority(LX_CATEGORY category);
 void setErrorPriority(LX_CATEGORY category);
 void setCriticalPriority(LX_CATEGORY category);
 
+void logVerbose(LX_CATEGORY category,char *format,...);
+
+
+
+
+
 };
 
 #endif // LX_LOG_HPP_INCLUDED

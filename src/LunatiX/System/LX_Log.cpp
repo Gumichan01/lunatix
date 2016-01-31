@@ -18,8 +18,10 @@
 *
 */
 
-
 #include <LunatiX/LX_Log.hpp>
+#include <cstdarg>
+
+using namespace std;
 
 namespace LX_Log
 {
@@ -139,5 +141,39 @@ void setCriticalPriority(LX_CATEGORY category)
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_CRITICAL);
 }
 
+
+void logVerbose(LX_CATEGORY category,char *format,...)
+{
+    va_list args;
+    va_start(args,format);
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_VERBOSE,format,args);
+    va_end(args);
+}
+
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
