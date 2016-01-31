@@ -63,6 +63,7 @@ void setCriticalPriority(LX_CATEGORY category);
 
 void logVerbose(LX_CATEGORY category,char *format,...);
 void logDebug(LX_CATEGORY category,char *format,...);
+void logInfo(LX_CATEGORY category,char *format,...);
 
 
 

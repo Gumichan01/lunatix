@@ -158,6 +158,14 @@ void logDebug(LX_CATEGORY category,char *format,...)
     va_end(args);
 }
 
+void logInfo(LX_CATEGORY category,char *format,...)
+{
+    va_list args;
+    va_start(args,format);
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_INFO,format,args);
+    va_end(args);
+}
+
 
 };
 
