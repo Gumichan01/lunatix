@@ -29,7 +29,7 @@ int main()
         return -1;
     }
 
-    LX_Log::logError(LX_Log::LX_LOG_APPLICATION,"The program was load with success\n");
+    LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"The program was load with success\n");
 
     bool go = true;
     SDL_Event event;

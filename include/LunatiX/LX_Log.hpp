@@ -66,6 +66,7 @@ void logDebug(LX_CATEGORY category,char *format,...);
 void logInfo(LX_CATEGORY category,char *format,...);
 void logWarning(LX_CATEGORY category,char *format,...);
 void logError(LX_CATEGORY category,char *format,...);
+void logCritical(LX_CATEGORY category,char *format,...);
 
 
 
