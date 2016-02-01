@@ -29,8 +29,6 @@ int main()
         return -1;
     }
 
-    LX_Log::log("Init OK");
-
     bool go = true;
     SDL_Event event;
     LX_AABB position = {0,0,W,H};
