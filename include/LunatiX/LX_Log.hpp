@@ -21,7 +21,6 @@
 
 #include <SDL2/SDL_Log.h>
 
-/// @todo Documentation + static analysis
 
 /**
 *   @namespace LX_Log
