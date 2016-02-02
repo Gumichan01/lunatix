@@ -25,7 +25,7 @@ namespace LX_Log
 {
 
 //  Private field in the namespace
-bool debug_mode = false;
+static bool debug_mode = false;
 
 
 /**
