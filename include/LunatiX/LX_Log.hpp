@@ -19,7 +19,7 @@
 *
 */
 
-#include <SDL2/SDL_Log.h>
+#include <SDL2/SDL_log.h>
 
 
 /**
