@@ -121,7 +121,7 @@ ifeq ($(DEBUG),yes)
 else
 
 	# Release mode
-	CFLAGS=-fPIC -w -std=c++11
+	CFLAGS=-fPIC -w -std=c++11 -g
 	OPTIMIZE=-O3
 	OPT_SIZE=-s
 
