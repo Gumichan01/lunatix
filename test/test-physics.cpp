@@ -52,6 +52,7 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
+    LX_Log::setDebugMode();
     test_euclide();
     test_collisionPointCircle();
     test_collisionPointRect();
@@ -79,7 +80,6 @@ int main(int argc, char **argv)
     test_VectorLambda();
 
     LX_Quit();
-
     cout << " ==== END Physics ==== " << endl;
 
     return EXIT_SUCCESS;

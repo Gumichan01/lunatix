@@ -47,7 +47,7 @@ int main()
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
-
+    LX_Log::setDebugMode();
     test_open();
     test_write();
     test_read();

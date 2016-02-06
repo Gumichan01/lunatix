@@ -19,7 +19,6 @@ void test_winManager(LX_Window *win);
 
 int main(int argc, char **argv)
 {
-
     cout << " ==== Test Rendering ==== " << endl;
     LX_Window *w = nullptr;
 
@@ -30,7 +29,7 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
-
+    LX_Log::setDebugMode();
     LX_Window *win = new LX_Window("Hello #1",LX_WINDOW_RENDERING);
     w = win;
 
@@ -51,7 +50,6 @@ int main(int argc, char **argv)
 
 void test_window1(LX_Window *win)
 {
-
     cout << " = TEST main window = " << endl;
 
     if(win == nullptr)

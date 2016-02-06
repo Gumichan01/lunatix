@@ -102,7 +102,6 @@ class Dot{
 
             if(err == false)
                 cerr << "FAILURE - Dot::update() - Cannot load any texture from a file buffer" << endl;
-
         }
 
         sys->displayParticles();
@@ -117,7 +116,6 @@ class Dot{
 
 int main()
 {
-
     Dot *dot;
     LX_Window *w = nullptr;
     Uint32 begin_time;
@@ -131,8 +129,8 @@ int main()
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
+    LX_Log::setDebugMode();
     w = new LX_Window("Test particle",LX_WINDOW_RENDERING);
-
     LX_WindowManager::getInstance()->addWindow(w);
 
     //File buffer of particle
@@ -142,20 +140,24 @@ int main()
         green = new LX_FileBuffer("test/asset/green.bmp");
         blue = new LX_FileBuffer("test/asset/blue.bmp");
 
-    }catch(IOException)
+    }
+    catch(IOException)
     {
         cerr << "FAILURE - An asset was not loaded" << endl;
+        cout << " ==== Abort Particle ==== " << endl;
+        return EXIT_FAILURE;
     }
 
     cout << "SUCCESS - The three assets was successfully loaded in each file buffer" << endl;
-
-    // Dot with particle
+    LX_Log::log("Loading the dot");
     dot = new Dot();
+    LX_Log::log("Dot loaded");
 
     SDL_Event e;
     int go = 1;
-
     begin_time = SDL_GetTicks();
+
+    LX_Log::log("The programm is running ...");
 
     while(go == 1 &&  ((SDL_GetTicks() - begin_time) < 4000))
     {
@@ -168,17 +170,17 @@ int main()
         LX_WindowManager::getInstance()->clearWindows();
         dot->update();
         LX_WindowManager::getInstance()->updateWindows();
-
         SDL_Delay(16);
     }
 
     LX_WindowManager::getInstance()->removeWindow(0);
+    LX_Log::log("End of program");
 
-    delete w;
     delete dot;
-    delete red;
-    delete green;
     delete blue;
+    delete green;
+    delete red;
+    delete w;
     LX_Quit();
 
     cout << " ==== End Particle ==== " << endl;

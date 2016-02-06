@@ -12,8 +12,8 @@ int main(int argc, char **argv)
 {
     bool err = false;
 
+    LX_Log::setDebugMode();
     cout << " ==== Test Init ==== " << endl;
-
     err = LX_Init();
 
     if(!err)

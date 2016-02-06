@@ -21,9 +21,7 @@ int main(int argc, char **argv)
     bool err = false;
 
     Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
-
     cout << " ==== Test Device ==== " << endl;
-
     err = LX_Init();
 
     if(!err)
@@ -31,6 +29,7 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
+    LX_Log::setDebugMode();
 
     if(SDL_WasInit(flag) != flag)
         cerr << "FAILURE - The device subsystem has not been initialized" << endl;
@@ -58,15 +57,14 @@ void test_gamepad(void)
     LX_Haptic *hp = nullptr;
     char s[STRING_SIZE];
 
-    cout << "  == Test Gamepad == " << endl;
+    cout << " == Test Gamepad == " << endl;
 
     gp = new LX_Gamepad();
 
     if(gp->isConnected())
     {
         gp->toString(s);
-
-        cout << "INFO - Name : " << gp->getName() << ";" << s << endl;
+        cout << "INFO - Name : " << gp->getName() << s << endl;
 
         if((hp = gp->getHaptic()) != nullptr)
         {
@@ -75,8 +73,6 @@ void test_gamepad(void)
             SDL_Delay(500);
         }
     }
-    else
-        cout << "INFO - No gamepad at index 0" << endl;
 
     delete gp;
 

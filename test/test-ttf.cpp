@@ -25,6 +25,7 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
+    LX_Log::setDebugMode();
     test_font();
     test_font2();
 
