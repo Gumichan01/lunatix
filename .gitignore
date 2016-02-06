@@ -14,3 +14,4 @@ html/
 *libLunatix*
 _build/
 lunatix-demo
+win-*
