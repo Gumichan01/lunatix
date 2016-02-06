@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     LX_Init();
     LX_Log::setDebugMode();
 
-    cout << " ==== Test System ==== " << endl;
+    cout << endl << " ==== Test System ==== " << endl;
     cout << "System : " << getPlatform() << endl;
     cout << "L1 cache size : " << getCPUCacheLineSize() << " KB" << endl;
     cout << "Number of CPU cores : " << getCPUCount() << endl;
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     }
 
     delete [] mode;
-    cout << " ==== End System ==== " << endl;
+    cout << " ==== End System ==== " << endl << endl;
     LX_Quit();
 
     return EXIT_SUCCESS;

@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -26,12 +25,13 @@ static LX_FileBuffer *red;
 static LX_FileBuffer *green;
 static LX_FileBuffer *blue;
 
-class Dot{
+class Dot
+{
 
     LX_ParticleSystem *sys;
     LX_AABB box;
 
-    public:
+public:
 
     Dot()
     {
@@ -48,17 +48,21 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    err = p->setTexture(red);
-                            break;
+            case 0 :
+                err = p->setTexture(red);
+                break;
 
-                case 1 :    err = p->setTexture(blue);
-                            break;
+            case 1 :
+                err = p->setTexture(blue);
+                break;
 
-                case 2 :    err = p->setTexture(green);
-                            break;
+            case 2 :
+                err = p->setTexture(green);
+                break;
 
-                default :   err = p->setTexture(red);
-                            break;
+            default :
+                err = p->setTexture(red);
+                break;
             }
 
             sys->addParticle(p);
@@ -82,17 +86,21 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    err = p->setTexture(red);
-                            break;
+            case 0 :
+                err = p->setTexture(red);
+                break;
 
-                case 1 :    err = p->setTexture(blue);
-                            break;
+            case 1 :
+                err = p->setTexture(blue);
+                break;
 
-                case 2 :    err = p->setTexture(green);
-                            break;
+            case 2 :
+                err = p->setTexture(green);
+                break;
 
-                default :   err = p->setTexture(red);
-                            break;
+            default :
+                err = p->setTexture(red);
+                break;
             }
 
             if(sys->addParticle(p) == false)
@@ -122,7 +130,7 @@ int main()
 
     bool err = LX_Init();
 
-    cout << " ==== Test Particle ==== " << endl;
+    cout << endl << " ==== Test Particle ==== " << endl;
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
@@ -183,7 +191,7 @@ int main()
     delete w;
     LX_Quit();
 
-    cout << " ==== End Particle ==== " << endl;
+    cout << " ==== End Particle ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }

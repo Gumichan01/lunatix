@@ -1,8 +1,5 @@
 
-
-
 #include <iostream>
-
 #include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
@@ -13,7 +10,7 @@ int main(int argc, char **argv)
     bool err = false;
 
     LX_Log::setDebugMode();
-    cout << " ==== Test Init ==== " << endl;
+    cout << endl << " ==== Test Init ==== " << endl;
     err = LX_Init();
 
     if(!err)
@@ -23,7 +20,7 @@ int main(int argc, char **argv)
 
     LX_Quit();
 
-    cout << " ==== END Test Init ==== " << endl;
+    cout << " ==== END Test Init ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }

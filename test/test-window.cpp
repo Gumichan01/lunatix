@@ -1,8 +1,5 @@
 
-
-
 #include <iostream>
-
 #include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
@@ -19,7 +16,7 @@ void test_winManager(LX_Window *win);
 
 int main(int argc, char **argv)
 {
-    cout << " ==== Test Rendering ==== " << endl;
+    cout << endl << " ==== Test Rendering ==== " << endl;
     LX_Window *w = nullptr;
 
     bool err = LX_Init();
@@ -42,7 +39,7 @@ int main(int argc, char **argv)
     delete win;
     LX_Quit();
 
-    cout << " ==== END Rendering ==== " << endl;
+    cout << " ==== END Rendering ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }
@@ -143,14 +140,14 @@ void test_surface(void)
 
     if(win3.getWidth() != w)
         cerr << "FAILURE - width ; expected : " << w
-        << "; got: " << win3.getWidth() << endl;
+             << "; got: " << win3.getWidth() << endl;
     else
         cout << "SUCCESS - width " << w << endl;
 
 
     if(win3.getHeight() != h)
         cerr << "FAILURE - height ; expected : " << h
-        << "; got: " << win3.getHeight() << endl;
+             << "; got: " << win3.getHeight() << endl;
     else
         cout << "SUCCESS - height " << h << endl;
 
@@ -176,7 +173,7 @@ void test_surface(void)
 
     if(screen_ok == false)
         cerr << "FAILURE - failed to take a screenshot of the surface "
-        << LX_GetError() << endl;
+             << LX_GetError() << endl;
     else
         cout << "SUCCESS - screenshot token from a surface" << endl;
 
@@ -248,7 +245,7 @@ void test_rendering(LX_Window *win)
 
     if(screen_ok == false)
         cerr << "FAILURE - failed to take a screenshot of the renderer"
-        << LX_GetError() << endl;
+             << LX_GetError() << endl;
     else
         cout << "SUCCESS - screenshot token from the renderer" << endl;
 

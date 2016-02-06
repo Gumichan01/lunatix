@@ -1,6 +1,4 @@
 
-
-
 #include <iostream>
 #include <cstring>
 
@@ -19,9 +17,9 @@ void test_haptic(void);
 int main(int argc, char **argv)
 {
     bool err = false;
-
     Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
-    cout << " ==== Test Device ==== " << endl;
+
+    cout << endl << " ==== Test Device ==== " << endl;
     err = LX_Init();
 
     if(!err)
@@ -44,7 +42,7 @@ int main(int argc, char **argv)
 
     LX_Quit();
 
-    cout << " ==== END Test Device ==== " << endl;
+    cout << " ==== END Test Device ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }

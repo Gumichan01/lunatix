@@ -1,7 +1,4 @@
 
-
-
-
 #include <iostream>
 
 #include <LunatiX/Lunatix_engine.hpp>
@@ -21,10 +18,10 @@ string boolState(const bool b)
 int main(int argc, char **argv)
 {
     bool err = false;
-    LX_Configuration *configuration =  nullptr;
-    LX_Configuration *configuration2 =  nullptr;
+    LX_Configuration *configuration = nullptr;
+    LX_Configuration *configuration2 = nullptr;
 
-    cout << " ==== Test Config ==== " << endl;
+    cout << endl << " ==== Test Config ==== " << endl;
     err = LX_Init();
 
     if(!err)
@@ -70,7 +67,7 @@ int main(int argc, char **argv)
     std::cout << "fullscreen : " << boolState(f) << std::endl;
 
     LX_Quit();
-    cout << " ==== END Test Config ==== " << endl;
+    cout << " ==== END Test Config ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }

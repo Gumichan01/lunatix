@@ -1,7 +1,5 @@
 
-
 #include <iostream>
-
 #include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
@@ -16,7 +14,7 @@ void test_font2(void);
 
 int main(int argc, char **argv)
 {
-    cout << " ==== Test True Type Font ==== " << endl;
+    cout << endl << " ==== Test True Type Font ==== " << endl;
 
     bool err = LX_Init();
 
@@ -29,7 +27,7 @@ int main(int argc, char **argv)
     test_font();
     test_font2();
 
-    cout << " ==== END Test ==== " << endl;
+    cout << " ==== END Test ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }
@@ -66,9 +64,10 @@ void test_font(void)
         {
             LX_Font ferror("invalid_file",color);
             cout << "FAILURE - o_O. Expected: IOException, got: a valid object"
-            << endl;
+                 << endl;
 
-        }catch(IOException &e)
+        }
+        catch(IOException &e)
         {
             cout << "SUCCESS - IOException occured. It was expected" << endl;
         }
@@ -165,7 +164,7 @@ void test_font2(void)
     else
     {
         cout << "SUCCESS - Solid text with size "
-        << size_for_test << " OK" << endl;
+             << size_for_test << " OK" << endl;
         win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
@@ -182,7 +181,7 @@ void test_font2(void)
     else
     {
         cout << "SUCCESS - Shaded text with size "
-        << size_for_test << " OK" << endl;
+             << size_for_test << " OK" << endl;
         win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
@@ -199,7 +198,7 @@ void test_font2(void)
     else
     {
         cout << "SUCCESS - Blended text with size "
-        << size_for_test << " OK" << endl;
+             << size_for_test << " OK" << endl;
         win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
@@ -211,14 +210,14 @@ void test_font2(void)
     font->sizeOfText(str,(size_for_test/4),w,h);
     pos2 = {pos.x,pos.y,w,h};
     textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str,
-                                                                      (size_for_test/4)),&win);
+            (size_for_test/4)),&win);
 
     if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - Blended text with size "
-        << (size_for_test/4) << " OK" << endl;
+             << (size_for_test/4) << " OK" << endl;
         win.clearWindow();
         win.putTexture(textS,nullptr,&pos2);
         win.update();
