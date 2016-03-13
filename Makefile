@@ -1,6 +1,6 @@
 
 #
-#	Copyright (C) 2014-2015 Luxon Jean-Pierre
+#	Copyright (C) 2016 Luxon Jean-Pierre
 #	gumichan01.olympe.in
 #
 #	The LunatiX Engine is a SDL2-based game engine.
@@ -626,7 +626,7 @@ clean :
 	@echo "Delete object files"
 	@rm -rf $(LUNATIX_BUILD_ROOT)
 
-cleandoc: 
+cleandoc:
 	@echo "Delete the doxygen documentation"
 	@rm -rf html/
 
@@ -636,10 +636,8 @@ cleanlib:
 
 clean-test :
 	@echo "Delete test object files"
-	@rm -f test-* 
+	@rm -f test-*
 
 cleanall : cleandoc cleanlib clean-test clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
-
-
