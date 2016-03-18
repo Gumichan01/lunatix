@@ -64,7 +64,7 @@ const char * nameOf(SDL_GameController * controller);
 int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info);
 int statGamepad(SDL_GameController * gp, LX_GamepadInfo& info);
 
-const char * gamepadToString(LX_GamepadInfo& info, char * str);
+const char * gamepadToString(LX_GamepadInfo& info);
 
 int mouseCursorDisplay(int toggle);
 

@@ -174,7 +174,7 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 
 
 /**
-*   @fn const char * gamepadToString(LX_GamepadInfo& info, char * str)
+*   @fn const char * gamepadToString(LX_GamepadInfo& info, string& str)
 *
 *   Get the string format of the information structure
 *
@@ -189,9 +189,10 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 *
 *   @sa statGamepad
 */
-const char * gamepadToString(LX_GamepadInfo& info, char * str)
+const char * gamepadToString(LX_GamepadInfo& info)
 {
     ostringstream stream;
+    string str;
     char guid[GUID_SIZE+1];
 
     memset(&guid,0,GUID_SIZE+1);
@@ -206,8 +207,8 @@ const char * gamepadToString(LX_GamepadInfo& info, char * str)
     << "Gamepad - Number of Buttons : " << info.nb_buttons << endl
     << "Gamepad - Number of Hats : " << info.nb_hats << endl;
 
-    strcpy(str,stream.str().c_str());
-    return str;
+    str = stream.str();
+    return str.c_str();
 }
 
 
@@ -232,4 +233,3 @@ int mouseCursorDisplay(int toggle)
 
 
 };
-

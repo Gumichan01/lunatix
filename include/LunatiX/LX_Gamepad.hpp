@@ -21,6 +21,8 @@
 *
 */
 
+#include <string>
+
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
@@ -52,7 +54,7 @@ public :
     SDL_JoystickID getID(void);
     LX_Haptic * getHaptic(void);
     const char * getName(void);
-    const char * toString(char *str);
+    const char * toString(void);
 
     ~LX_Gamepad();
 };
