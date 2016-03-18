@@ -57,6 +57,14 @@ int main()
     }
     SDL_DestroyTexture(texture);
 
+    if(LX_Device::numberOfDevices() > 0)
+    {
+        LX_Device::LX_Gamepad *gp = new LX_Device::LX_Gamepad();
+
+        if(gp != nullptr)
+            cout << gp->toString() << endl;
+    }
+
     // Information about
     LX_EngineVersionString();
     LX_Quit();
