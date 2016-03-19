@@ -53,7 +53,6 @@ void test_gamepad(void)
 {
     LX_Gamepad *gp = nullptr;
     LX_Haptic *hp = nullptr;
-    char s[STRING_SIZE];
 
     cout << " == Test Gamepad == " << endl;
 
@@ -61,8 +60,7 @@ void test_gamepad(void)
 
     if(gp->isConnected())
     {
-        gp->toString(s);
-        cout << "INFO - Name : " << gp->getName() << s << endl;
+        cout << "INFO - Name : " << gp->getName() << gp->toString() << endl;
 
         if((hp = gp->getHaptic()) != nullptr)
         {
@@ -123,13 +121,3 @@ void test_haptic(void)
 
     cout << "  == End Test == " << endl;
 }
-
-
-
-
-
-
-
-
-
-
