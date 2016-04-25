@@ -126,17 +126,15 @@ const char * nameOf(SDL_GameController * controller)
 */
 int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
-    const char *tmp;
-
     if(joy == nullptr)
         return LX_SetError("Invalid joystick\n");
 
-    tmp = nameOf(joy);
+    info.name = nameOf(joy);
 
-    if(tmp == nullptr)
-        return LX_SetError("Cannot get the name of the joystick\n");
+    /*if(tmp == nullptr)
+        return LX_SetError("Cannot get the name of the joystick\n");*/
 
-    strcpy(info.name,tmp);
+    //strcpy(info.name,tmp);
 
     return lx_stat(joy,info);
 }
@@ -157,17 +155,15 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 */
 int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 {
-    const char *tmp;
-
     if(gc == nullptr)
         return LX_SetError("Invalid game controller\n");
 
-    tmp = nameOf(gc);
+    info.name = nameOf(gc);
 
-    if(tmp == nullptr)
+    /*if(tmp == nullptr)
         return LX_SetError("Cannot get the name of the game controller\n");
 
-    strcpy(info.name,tmp);
+    strcpy(info.name,tmp);*/
 
     return lx_stat(SDL_GameControllerGetJoystick(gc),info);
 }

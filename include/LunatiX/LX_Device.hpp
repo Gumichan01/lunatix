@@ -21,14 +21,13 @@
 *
 */
 
+#include <string>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
 #define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display   */
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
 #define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status       */
-
-const int LX_JOY_NAMESIZE =  64;        // The size of the joystick name
 
 
 /**
@@ -47,7 +46,7 @@ typedef struct LX_GamepadInfo
 
     SDL_JoystickID id;              /**< The joystick ID                */
     SDL_JoystickGUID uid;           /**< The joystick UID               */
-    char name[LX_JOY_NAMESIZE];     /**< The name of the joystick       */
+    std::string name;               /**< The name of the joystick       */
     int nb_axis;                    /**< The number of axes             */
     int nb_balls;                   /**< The number of balls            */
     int nb_buttons;                 /**< The number of buttons          */
