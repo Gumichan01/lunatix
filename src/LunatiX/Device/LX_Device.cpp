@@ -34,14 +34,16 @@ static const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickG
 
 namespace LX_Device
 {
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+static int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
+                 LX_GamepadInfo& info);
 };
 
 
 namespace LX_Device
 {
 
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
+static int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     if(joy == nullptr)
         return LX_SetError("Invalid joystick\n");
@@ -126,17 +128,7 @@ const char * nameOf(SDL_GameController * controller)
 */
 int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
-    if(joy == nullptr)
-        return LX_SetError("Invalid joystick\n");
-
-    info.name = nameOf(joy);
-
-    /*if(tmp == nullptr)
-        return LX_SetError("Cannot get the name of the joystick\n");*/
-
-    //strcpy(info.name,tmp);
-
-    return lx_stat(joy,info);
+    return gstat(joy,nullptr,info);
 }
 
 
@@ -155,18 +147,27 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 */
 int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 {
-    if(gc == nullptr)
-        return LX_SetError("Invalid game controller\n");
-
-    info.name = nameOf(gc);
-
-    /*if(tmp == nullptr)
-        return LX_SetError("Cannot get the name of the game controller\n");
-
-    strcpy(info.name,tmp);*/
-
-    return lx_stat(SDL_GameControllerGetJoystick(gc),info);
+    return gstat(nullptr,gc,info);
 }
+
+
+static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
+                 LX_GamepadInfo& info)
+{
+    if(joy != nullptr)
+    {
+        info.name = nameOf(joy);
+        return lx_stat(joy,info);
+    }
+    else if(gc != nullptr)
+    {
+        info.name = nameOf(gc);
+        return lx_stat(SDL_GameControllerGetJoystick(gc),info);
+    }
+    else
+        return LX_SetError("Invalid joystick/game controller\n");
+}
+
 
 
 /**
