@@ -17,7 +17,6 @@
 *
 */
 
-#include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_endian.h>
@@ -51,11 +50,58 @@ static const Uint32 amask = 0xff000000;
 
 #endif
 
-
+/// @todo : refactore createWindow() : string -> reference to string
 static const char * DEFAULT_TITLE = "LunatiX Engine v0.7";
+static const int DEFAULT_WIN_WIDTH = 640;
+static const int DEFAULT_WIN_HEIGHT = 480;
 
 namespace LX_Graphics
 {
+
+static Uint32 generateFlags(LX_Configuration &config)
+{
+    Uint32 flag = 0x00000000;
+
+    if(config.getVideoFlag() && config.getFullscreenFlag())
+        flag |= LX_GRAPHICS_FULLSCREEN;
+
+    if(config.getVideoFlag() && config.getOpenGLFlag())
+        flag |= SDL_WINDOW_OPENGL;
+
+    return flag;
+}
+
+void LX_initWindowInfo(LX_WindowInfo &info)
+{
+    info.title = DEFAULT_TITLE;
+    info.x = SDL_WINDOWPOS_CENTERED;
+    info.y = SDL_WINDOWPOS_CENTERED;
+    info.w = DEFAULT_WIN_WIDTH;
+    info.h = DEFAULT_WIN_HEIGHT;
+    info.mode = LX_WINDOW_RENDERING;
+    info.flag = 0;
+    info.accel = true;
+}
+
+
+void LX_loadWindowConfig(LX_WindowInfo &info)
+{
+    LX_Configuration *config = LX_Configuration::getInstance();
+
+    if(config == nullptr)
+        LX_initWindowInfo(info);
+    else
+    {
+        info.title = DEFAULT_TITLE;
+        info.x = SDL_WINDOWPOS_CENTERED;
+        info.y = SDL_WINDOWPOS_CENTERED;
+        info.w = config->getWinWidth();
+        info.h = config->getWinHeight();
+        info.mode = LX_WINDOW_RENDERING;
+        info.flag = generateFlags(*config);
+        info.accel = true;
+    }
+}
 
 
 /**
@@ -90,13 +136,12 @@ const char * LX_WindowException::what() const noexcept
     return stringError.c_str();
 }
 
-
 LX_WindowException::~LX_WindowException() noexcept {}
-
 
 
 /**
 *   @fn LX_Window::LX_Window(const Uint32 mode, bool accel)
+*   @deprecated
 *
 *   Create the window with the default configuration
 *
@@ -165,6 +210,16 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
         flag |= SDL_WINDOW_OPENGL;
 
     createWindow(title.c_str(),xpos,ypos,w,h,mode,flag,accel);
+}
+
+
+
+LX_Window::LX_Window(LX_WindowInfo &info)
+    : window(nullptr), renderer(nullptr),
+    original_width(info.w), original_height(info.h), render_method(false)
+{
+    createWindow(info.title.c_str(),info.x,info.y,info.w,info.h,info.mode,
+                 info.flag,info.accel);
 }
 
 
