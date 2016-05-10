@@ -32,7 +32,9 @@ int main()
     bool go = true;
     SDL_Event event;
     LX_AABB position = {0,0,W,H};
-    LX_Window w(LX_WINDOW_RENDERING);
+    LX_WindowInfo info;
+    LX_loadWindowConfig(info);      // Load the default configuration
+    LX_Window w(info);              // Create the window withe this cofiguration
     SDL_Texture *texture = loadTextureFromFile("data/bullet.png",&w);
 
     w.setWindowSize(W,H);
