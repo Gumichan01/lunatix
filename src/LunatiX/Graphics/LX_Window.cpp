@@ -220,6 +220,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 {
     createWindow(info.title.c_str(),info.x,info.y,info.w,info.h,info.mode,
                  info.flag,info.accel);
+    getInfo(info);
 }
 
 
@@ -618,6 +619,28 @@ bool LX_Window::screenshotUsingSurface(std::string& filename)
 }
 
 
+void LX_Window::getInfo(LX_WindowInfo &info)
+{
+    info.title = SDL_GetWindowTitle(window);
+    SDL_GetWindowPosition(window,&info.x,&info.y);
+    SDL_GetWindowSize(window, &info.w,&info.h);
+    info.flag = SDL_GetWindowFlags(window);
+    info.mode = render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
+
+    if(render_method)
+    {
+        SDL_RendererInfo rinfo;
+        SDL_GetRendererInfo(renderer, &rinfo);
+
+        info.accel = (renderer != nullptr &&
+                      (rinfo.flags&SDL_RENDERER_ACCELERATED)
+                        == SDL_RENDERER_ACCELERATED) ? true : false;
+    }
+    else
+    {
+        info.accel = false;
+    }
+}
 
 /**
 *   @fn SDL_Renderer * LX_Window::getRenderer(void)

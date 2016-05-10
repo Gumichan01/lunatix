@@ -55,7 +55,7 @@ typedef struct LX_WindowInfo
     int h;
     Uint32 mode;    /* display mode */
     Uint32 flag;
-    bool accel ;    /* hardware acceleration */
+    bool accel;     /* hardware acceleration */
 
 } LX_WindowInfo;
 
@@ -102,8 +102,8 @@ class LX_Window
     SDL_Window *window;         /* The internal window structure  */
     SDL_Renderer *renderer;     /* The main renderer              */
 
-    int original_width;          /* The width of the window        */
-    int original_height;         /* The height of the window       */
+    int original_width;         /* The width of the window        */
+    int original_height;        /* The height of the window       */
     bool render_method;         /* Use Surface or Rendering       */
 
     LX_Window(LX_Window& w);
@@ -147,6 +147,7 @@ public :
     void clearWindow(void);
     bool screenshot(std::string filename);
 
+    void getInfo(LX_WindowInfo &info);
     SDL_Renderer * getRenderer(void);
     SDL_Surface * getSurface(void);
     SDL_Window * getWindow(void);
