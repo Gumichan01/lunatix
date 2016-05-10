@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <sstream>
 #include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
@@ -11,14 +12,17 @@ void test_window2(void);
 void test_surface(void);
 void test_rendering(LX_Window *win);
 void test_winManager(LX_Window *win);
+void test_winInfo(LX_Window *win);
 
+string winInfoToString(LX_WindowInfo &winfo);
+bool winInfoEqual(LX_WindowInfo &info1, LX_WindowInfo &info2);
 
+LX_WindowInfo info;
 
 int main(int argc, char **argv)
 {
     cout << endl << " ==== Test Rendering ==== " << endl;
     LX_Window *w = nullptr;
-    LX_WindowInfo info;
 
     bool err = LX_Init();
 
@@ -33,6 +37,7 @@ int main(int argc, char **argv)
     LX_Window *win = new LX_Window(info);
     w = win;
 
+    test_winInfo(win);
     test_window1(w);
     test_window2();
     test_surface();
@@ -326,10 +331,42 @@ void test_winManager(LX_Window *win)
 }
 
 
+void test_winInfo(LX_Window *win)
+{
+    cout << " = TEST window information = " << endl;
+    LX_WindowInfo info_g;
 
+    win->getInfo(info_g);
 
+    if(winInfoEqual(info,info_g))
+        cout << "SUCCESS - Information retrieved and "
+             << "information from user are identicals" << endl;
+    else
+        cerr << "FAILURE - expected : " << winInfoToString(info)
+             << "got : " << winInfoToString(info_g) << endl;
 
+    cout << " = END TEST = " << endl;
+}
 
+string winInfoToString(LX_WindowInfo &winfo)
+{
+    ostringstream ss;
+    ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
+       << "," << winfo.w << "," << winfo.h
+       << "," << winfo.mode << "," << winfo.flag
+       << "," << (winfo.accel ? 1:0) << ")" << endl;
+
+    return ss.str();
+}
+
+bool winInfoEqual(LX_WindowInfo &info1, LX_WindowInfo &info2)
+{
+    return (info1.title == info2.title)
+            && (info1.x == info2.x) && (info1.y == info2.y)
+            && (info1.w == info2.w) && (info1.h == info2.h)
+            && (info1.mode == info2.mode) && (info1.flag == info2.flag)
+            && (info1.accel == info2.accel);
+}
 
 
 
