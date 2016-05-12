@@ -43,7 +43,7 @@ struct SDL_Rect;
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
 
-namespace LX_Graphics
+namespace LX_Win
 {
 
 typedef struct LX_WindowInfo

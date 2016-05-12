@@ -25,10 +25,10 @@
 #include <LunatiX/LX_Error.hpp>
 
 
-static LX_Graphics::LX_WindowManager *winInstance = nullptr;
+static LX_Win::LX_WindowManager *winInstance = nullptr;
 
 
-namespace LX_Graphics
+namespace LX_Win
 {
 
 

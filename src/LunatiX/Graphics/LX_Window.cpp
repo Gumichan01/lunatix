@@ -55,7 +55,7 @@ static const char * DEFAULT_TITLE = "LunatiX Engine v0.7";
 static const int DEFAULT_WIN_WIDTH = 640;
 static const int DEFAULT_WIN_HEIGHT = 480;
 
-namespace LX_Graphics
+namespace LX_Win
 {
 
 static Uint32 generateFlags(LX_Configuration &config)

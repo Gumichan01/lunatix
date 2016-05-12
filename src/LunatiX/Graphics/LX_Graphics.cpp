@@ -31,6 +31,7 @@
 #include <LunatiX/LX_Error.hpp>
 
 using namespace LX_FileIO;
+using namespace LX_Win;
 
 namespace LX_Graphics
 {

@@ -28,9 +28,7 @@
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-using namespace LX_Graphics;
 using namespace LX_FileIO;
-
 
 namespace LX_TrueTypeFont
 {
@@ -471,8 +469,8 @@ TTF_Font * LX_Font::createInternalFont(int size)
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
                                          unsigned int size, unsigned int idWindow)
 {
-    LX_Window * target_window = nullptr;
-    target_window = LX_WindowManager::getInstance()->getWindow(idWindow);
+    LX_Win::LX_Window * target_window = nullptr;
+    target_window = LX_Win::LX_WindowManager::getInstance()->getWindow(idWindow);
 
     return drawTextToTexture(type,text.c_str(),size,target_window);
 }
@@ -495,7 +493,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 *
 */
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
-                                         unsigned int size, LX_Window *win)
+                                         unsigned int size, LX_Win::LX_Window *win)
 {
     Uint8 black = 0;
     SDL_Surface *surface = nullptr;
