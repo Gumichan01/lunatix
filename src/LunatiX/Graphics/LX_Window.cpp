@@ -50,7 +50,7 @@ static const Uint32 amask = 0xff000000;
 
 #endif
 
-/// @todo : refactore createWindow() : string -> reference to string
+
 static const char * DEFAULT_TITLE = "LunatiX Engine v0.7";
 static const int DEFAULT_WIN_WIDTH = 640;
 static const int DEFAULT_WIN_HEIGHT = 480;
@@ -209,7 +209,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
     if(config->getOpenGLFlag())
         flag |= SDL_WINDOW_OPENGL;
 
-    createWindow(title.c_str(),xpos,ypos,w,h,mode,flag,accel);
+    createWindow(title,xpos,ypos,w,h,mode,flag,accel);
 }
 
 
@@ -218,7 +218,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
     : window(nullptr), renderer(nullptr),
     original_width(info.w), original_height(info.h), render_method(false)
 {
-    createWindow(info.title.c_str(),info.x,info.y,info.w,info.h,info.mode,
+    createWindow(info.title,info.x,info.y,info.w,info.h,info.mode,
                  info.flag,info.accel);
     getInfo(info);
 }
@@ -258,14 +258,14 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
     : window(nullptr), renderer(nullptr), original_width(w),
     original_height(h), render_method(false)
 {
-    createWindow(title.c_str(),posX,posY,w,h,mode,flag,accel);
+    createWindow(title,posX,posY,w,h,mode,flag,accel);
 }
 
 
 /*
 *   Initialize the window according to the configuration
 */
-void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h,
+void LX_Window::createWindow(std::string &title, int posX, int posY, int w, int h,
                         const Uint32 mode, Uint32 flag, bool accel)
 {
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
