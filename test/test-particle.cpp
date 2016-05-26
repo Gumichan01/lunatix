@@ -125,7 +125,7 @@ public:
 int main()
 {
     Dot *dot;
-    LX_Window *w = nullptr;
+    LX_Win::LX_Window *w = nullptr;
     Uint32 begin_time;
 
     bool err = LX_Init();
@@ -138,8 +138,8 @@ int main()
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Log::setDebugMode();
-    w = new LX_Window("Test particle",LX_WINDOW_RENDERING);
-    LX_WindowManager::getInstance()->addWindow(w);
+    w = new LX_Win::LX_Window("Test particle",LX_WINDOW_RENDERING);
+    LX_Win::LX_WindowManager::getInstance()->addWindow(w);
 
     //File buffer of particle
     try
@@ -175,13 +175,13 @@ int main()
                 go = 0;
         }
 
-        LX_WindowManager::getInstance()->clearWindows();
+        LX_Win::LX_WindowManager::getInstance()->clearWindows();
         dot->update();
-        LX_WindowManager::getInstance()->updateWindows();
+        LX_Win::LX_WindowManager::getInstance()->updateWindows();
         SDL_Delay(16);
     }
 
-    LX_WindowManager::getInstance()->removeWindow(0);
+    LX_Win::LX_WindowManager::getInstance()->removeWindow(0);
     LX_Log::log("End of program");
 
     delete dot;

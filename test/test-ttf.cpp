@@ -3,7 +3,6 @@
 #include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
-using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
 using namespace LX_FileIO;
 
@@ -44,7 +43,7 @@ void test_font(void)
 
     string str = "My name is Gumichan01";
 
-    LX_Window win("LunatiX Engine test TTF No 1",LX_WINDOW_SURFACE);
+    LX_Win::LX_Window win("LunatiX Engine test TTF No 1",LX_WINDOW_SURFACE);
 
 
     cout << "INFO - Load an LX_Font object with RAII" << endl;
@@ -96,7 +95,7 @@ void test_font(void)
     }
 
 
-    textS = font->drawShadedText(str,0,255,0);
+    textS = font->drawShadedText(str,0,127,255);
 
     if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
@@ -143,7 +142,7 @@ void test_font2(void)
     int size_for_test = 48;
     int w,h;
 
-    LX_Window win("LunatiX Engine test TTF No 2",LX_WINDOW_RENDERING);
+    LX_Win::LX_Window win("LunatiX Engine test TTF No 2",LX_WINDOW_RENDERING);
 
     font = new LX_Font(color,size_for_test);
 
@@ -174,7 +173,7 @@ void test_font2(void)
 
     font->sizeOfText(str,size_for_test,w,h);
     pos2 = {pos.x,pos.y,w,h};
-    textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,255,0),&win);
+    textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,127,255),&win);
 
     if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
@@ -262,5 +261,3 @@ void test_font2(void)
 
     delete font;
 }
-
-

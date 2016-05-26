@@ -7,22 +7,22 @@ using namespace std;
 using namespace LX_Graphics;
 
 
-void test_window1(LX_Window *win);
+void test_window1(LX_Win::LX_Window *win);
 void test_window2(void);
 void test_surface(void);
-void test_rendering(LX_Window *win);
-void test_winManager(LX_Window *win);
-void test_winInfo(LX_Window *win);
+void test_rendering(LX_Win::LX_Window *win);
+void test_winManager(LX_Win::LX_Window *win);
+void test_winInfo(LX_Win::LX_Window *win);
 
-string winInfoToString(LX_WindowInfo &winfo);
-bool winInfoEqual(LX_WindowInfo &info1, LX_WindowInfo &info2);
+string winInfoToString(LX_Win::LX_WindowInfo &winfo);
+bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2);
 
-LX_WindowInfo info;
+LX_Win::LX_WindowInfo info;
 
 int main(int argc, char **argv)
 {
     cout << endl << " ==== Test Rendering ==== " << endl;
-    LX_Window *w = nullptr;
+    LX_Win::LX_Window *w = nullptr;
 
     bool err = LX_Init();
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
     LX_loadWindowConfig(info);
     info.title = "Hello #1";
-    LX_Window *win = new LX_Window(info);
+    LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
     test_winInfo(win);
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 }
 
 
-void test_window1(LX_Window *win)
+void test_window1(LX_Win::LX_Window *win)
 {
     cout << " = TEST main window = " << endl;
 
@@ -85,7 +85,7 @@ void test_window2(void)
     const int w = 256;
     const int h = 256;
 
-    LX_Window win2("Hello #2",12,128,w,h,LX_WINDOW_RENDERING,SDL_WINDOW_SHOWN);
+    LX_Win::LX_Window win2("Hello #2",12,128,w,h,LX_WINDOW_RENDERING,SDL_WINDOW_SHOWN);
 
     cout << " = TEST 2 window = " << endl;
 
@@ -123,7 +123,7 @@ void test_surface(void)
     const int h = 256;
 
     bool screen_ok;
-    LX_Window win3("Hello #3",448,128,w,h,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
+    LX_Win::LX_Window win3("Hello #3",448,128,w,h,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
     std::string name = "data/bullet.png";
     SDL_Surface *sf = nullptr;
     SDL_Rect pos = {100,100,200,100};
@@ -194,7 +194,7 @@ void test_surface(void)
 }
 
 
-void test_rendering(LX_Window *win)
+void test_rendering(LX_Win::LX_Window *win)
 {
     bool screen_ok;
     std::string name = "data/bullet.png";
@@ -266,7 +266,7 @@ void test_rendering(LX_Window *win)
 }
 
 
-void test_winManager(LX_Window *win)
+void test_winManager(LX_Win::LX_Window *win)
 {
     std::string name = "data/bullet.png";
 
@@ -286,7 +286,7 @@ void test_winManager(LX_Window *win)
         cout << "SUCCESS - The window exists" << endl;
 
 
-    id = LX_WindowManager::getInstance()->addWindow(win);
+    id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
 
     if(id == -1)
         cerr << "FAILURE - failed to add a window" << LX_GetError() << endl;
@@ -307,11 +307,11 @@ void test_winManager(LX_Window *win)
         cout << "SUCCESS - Texture on the renderer" << endl;
 
 
-    LX_WindowManager::getInstance()->updateWindows();
+    LX_Win::LX_WindowManager::getInstance()->updateWindows();
 
     SDL_Delay(1000);
 
-    LX_WindowManager::getInstance()->clearWindows();
+    LX_Win::LX_WindowManager::getInstance()->clearWindows();
 
 
     if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
@@ -319,22 +319,22 @@ void test_winManager(LX_Window *win)
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
 
-    LX_WindowManager::getInstance()->updateWindows();
+    LX_Win::LX_WindowManager::getInstance()->updateWindows();
 
     SDL_Delay(1000);
 
-    LX_WindowManager::getInstance()->updateWindows();
+    LX_Win::LX_WindowManager::getInstance()->updateWindows();
 
-    LX_WindowManager::getInstance()->removeWindow(id);
+    LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
 
     cout << " = END TEST = " << endl;
 }
 
 
-void test_winInfo(LX_Window *win)
+void test_winInfo(LX_Win::LX_Window *win)
 {
     cout << " = TEST window information = " << endl;
-    LX_WindowInfo info_g;
+    LX_Win::LX_WindowInfo info_g;
 
     win->getInfo(info_g);
 
@@ -348,7 +348,7 @@ void test_winInfo(LX_Window *win)
     cout << " = END TEST = " << endl;
 }
 
-string winInfoToString(LX_WindowInfo &winfo)
+string winInfoToString(LX_Win::LX_WindowInfo &winfo)
 {
     ostringstream ss;
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
@@ -359,7 +359,7 @@ string winInfoToString(LX_WindowInfo &winfo)
     return ss.str();
 }
 
-bool winInfoEqual(LX_WindowInfo &info1, LX_WindowInfo &info2)
+bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2)
 {
     return (info1.title == info2.title)
             && (info1.x == info2.x) && (info1.y == info2.y)
@@ -367,22 +367,3 @@ bool winInfoEqual(LX_WindowInfo &info1, LX_WindowInfo &info2)
             && (info1.mode == info2.mode) && (info1.flag == info2.flag)
             && (info1.accel == info2.accel);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
