@@ -29,7 +29,7 @@ DEBUG=yes
 # Variables
 #
 
-CC=clang
+CC=clang++
 LUAC=luac5.1
 SCRIPT_FILE=script/LX_config.lua
 COMPILED_SCRIPT=$(SCRIPT_FILE)c
@@ -108,7 +108,7 @@ LUNATIX_SHARED_LIB=$(LUNATIX_LIB_DIR)libLunatix.so
 
 # Warning flags
 WFLAGS=-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic \
--Wno-documentation -Wno-implicit-fallthrough -Wno-padded
+-Wno-documentation -Wno-implicit-fallthrough -Wno-padded -std=c++11
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
