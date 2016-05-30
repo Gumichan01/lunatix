@@ -12,7 +12,6 @@
 
 # Makefile - LunatiX Engine
 
-
 .PHONY: clean doxy test
 
 
@@ -39,7 +38,6 @@ MAIN_PATH=./src/
 
 # Path to the test files
 TEST_PATH=./test/
-
 
 # Executable file
 LUNATIX_EXE=lunatix-demo
@@ -108,7 +106,7 @@ LUNATIX_SHARED_LIB=$(LUNATIX_LIB_DIR)libLunatix.so
 
 # Warning flags
 WFLAGS=-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic \
--Wno-documentation -Wno-implicit-fallthrough -Wno-padded -std=c++11
+-Wno-documentation -Wno-implicit-fallthrough -Wno-padded
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
@@ -131,7 +129,6 @@ endif
 # Linking flags
 LUA_FLAGS=$(LUNATIX_LIB_DIR)liblua5.1-c++.so.0
 LFLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
-
 
 DOXY_FILE=dox
 
@@ -161,7 +158,6 @@ $(COMPILED_SCRIPT) : $(SCRIPT_FILE)
 	@$(LUAC) -o $@ $<
 
 
-
 ##########
 #        #
 #  Demo  #
@@ -186,12 +182,11 @@ endif
 
 main.o : $(OBJ_MAIN_PATH)main.o
 
-$(OBJ_MAIN_PATH)main.o : $(MAIN_PATH)main.cpp $(LUNATIX_INCLUDE_PATH)Lunatix_engine.hpp \
-$(LUNATIX_INCLUDE_PATH)LX_Error.hpp
+$(OBJ_MAIN_PATH)main.o : $(MAIN_PATH)main.cpp \
+$(LUNATIX_INCLUDE_PATH)Lunatix_engine.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_MAIN_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -226,7 +221,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Haptic.hpp $(LUNATIX_INCLUDE_PATH)LX_Device.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-
 #
 # FileIO
 #
@@ -247,7 +241,6 @@ $(LUNATIX_INCLUDE_PATH)LX_FileBuffer.hpp
 	@mkdir -p $(OBJ_FILEIO_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -283,7 +276,6 @@ $(LUNATIX_INCLUDE_PATH)LX_WindowManager.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-
 #
 # Library
 #
@@ -305,7 +297,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Mixer.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_LIBRARY_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -351,7 +342,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Music.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-
 #
 # MSGBox
 #
@@ -363,7 +353,6 @@ $(LUNATIX_INCLUDE_PATH)LX_MessageBox.hpp
 	@mkdir -p $(OBJ_MSG_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -386,7 +375,6 @@ $(LUNATIX_INCLUDE_PATH)LX_ParticleSystem.hpp
 	@mkdir -p $(OBJ_PARTICLE_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -430,7 +418,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Hitbox.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-
 #
 # Random
 #
@@ -442,7 +429,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Random.hpp
 	@mkdir -p $(OBJ_RANDOM_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -467,7 +453,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Log.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-
 #
 # True Type Font
 #
@@ -480,7 +465,6 @@ $(LUNATIX_INCLUDE_PATH)LX_Config.hpp $(LUNATIX_INCLUDE_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_TTF_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
-
 
 
 #
@@ -496,14 +480,11 @@ $(LUNATIX_INCLUDE_PATH)LX_Version.hpp
 	@$(CC) -c -o $@ $< -I $(LIBRARIES_INCLUDE_DIR) $(CFLAGS)
 
 
-
-
 ##########
 #        #
 #  Test  #
 #        #
 ##########
-
 
 test : lua-script test-init test-config test-device test-physics \
 test-window test-system test-ttf test-particle test-file
@@ -609,7 +590,6 @@ test-file.o : $(TEST_PATH)test-file.cpp
 #                                    #
 ######################################
 
-
 doxy : $(DOXY_FILE)
 	@echo "Generating the doxygen file from "$<
 	@doxygen $<
@@ -620,7 +600,6 @@ doxy : $(DOXY_FILE)
 # Clean generated files #
 #                       #
 #########################
-
 
 clean :
 	@echo "Delete object files"
