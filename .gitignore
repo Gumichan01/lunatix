@@ -27,3 +27,4 @@ win-*
 html/
 *Doxyfile*
 lib/
+include/SDL2/
