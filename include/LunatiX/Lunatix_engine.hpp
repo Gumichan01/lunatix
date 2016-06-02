@@ -47,5 +47,6 @@
 #include "LX_Error.hpp"
 #include "LX_Version.hpp"
 #include "LX_Log.hpp"
+#include "LX_Text.hpp"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED
