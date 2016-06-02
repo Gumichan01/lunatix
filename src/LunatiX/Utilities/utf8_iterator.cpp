@@ -11,7 +11,7 @@
 *
 */
 
-#include <utils/utf8_string.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 
 
 UTF8iterator::UTF8iterator(const UTF8string& u) : index(0), data(u) {}

@@ -13,7 +13,7 @@
 
 #include <map>
 #include <stdexcept>
-#include <utils/utf8_string.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 
 typedef char byte_t;
 
