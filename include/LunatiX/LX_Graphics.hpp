@@ -38,6 +38,11 @@ class LX_FileBuffer;
 
 };
 
+namespace LX_Win
+{
+class LX_Window;
+}
+
 
 /**
 *   @namespace LX_Graphics
@@ -46,8 +51,6 @@ class LX_FileBuffer;
 namespace LX_Graphics
 {
 
-class LX_Window;
-
 SDL_Surface * loadSurface(std::string filename);
 SDL_Surface * loadSurface(LX_FileIO::LX_File *file);
 SDL_Surface * loadSurfaceFromFileBuffer(LX_FileIO::LX_FileBuffer *file);
@@ -55,8 +58,8 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileIO::LX_FileBuffer *file);
 SDL_Surface * optimizeSurface(SDL_Surface * surface);
 
 // To use when you work with a window without using the window manager
-SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w);
-SDL_Texture * loadTextureFromFile(const std::string filename, LX_Window * w);
+SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Win::LX_Window * w);
+SDL_Texture * loadTextureFromFile(const std::string filename, LX_Win::LX_Window * w);
 
 // To use when you work with the window manager
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id = 0);

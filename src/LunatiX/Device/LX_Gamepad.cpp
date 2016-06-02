@@ -25,10 +25,10 @@
 #include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Error.hpp>
 
+using namespace std;
 
 namespace LX_Device
 {
-
 
 /**
 *   @fn LX_Gamepad::LX_Gamepad(int index)
@@ -151,24 +151,16 @@ const char * LX_Gamepad::getName(void)
 
 
 /**
-*   @fn const char * LX_Gamepad::toString(char *str)
+*   @fn const char * LX_Gamepad::toString(void)
 *
 *   Get information about the gamepad
 *
-*   @param str the string to fill information in
-*
 *   @return Always returns a valid string
 */
-const char * LX_Gamepad::toString(char *str)
+const char * LX_Gamepad::toString(void)
 {
     LX_GamepadInfo gi;
     int err = 0;
-
-    if(str == nullptr)
-    {
-        LX_SetError("Invalid string pointer");
-        return nullptr;
-    }
 
     if(gc != nullptr)
         err = statGamepad(gc,gi);
@@ -178,7 +170,7 @@ const char * LX_Gamepad::toString(char *str)
     if(err == -1)
         return nullptr;
 
-    return gamepadToString(gi,str);
+    return gamepadToString(gi);
 }
 
 

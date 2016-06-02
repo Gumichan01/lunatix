@@ -23,6 +23,7 @@
 
 #include <string>
 #include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_video.h>
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -31,18 +32,36 @@ struct SDL_Texture;
 struct SDL_Rect;
 
 
+// Fullscreen modes
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with desktop resolution */
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window */
 
+// Display modes
 #define LX_WINDOW_SURFACE 0x01                                          /**< The flag to use the surface */
 #define LX_WINDOW_RENDERING 0x10                                        /**< The flag to use the rendering */
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
 
-namespace LX_Graphics
+namespace LX_Win
 {
 
+typedef struct LX_WindowInfo
+{
+    std::string title;
+    int x;
+    int y;
+    int w;
+    int h;
+    Uint32 mode;    /* display mode */
+    Uint32 flag;
+    bool accel;     /* hardware acceleration */
+
+} LX_WindowInfo;
+
+
+void LX_initWindowInfo(LX_WindowInfo &info);
+void LX_loadWindowConfig(LX_WindowInfo &info);
 
 /**
 *   @class LX_WindowException
@@ -83,14 +102,14 @@ class LX_Window
     SDL_Window *window;         /* The internal window structure  */
     SDL_Renderer *renderer;     /* The main renderer              */
 
-    int original_width;          /* The width of the window        */
-    int original_height;         /* The height of the window       */
+    int original_width;         /* The width of the window        */
+    int original_height;        /* The height of the window       */
     bool render_method;         /* Use Surface or Rendering       */
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
 
-    void createWindow(std::string title, int posX, int posY, int w, int h,
+    void createWindow(std::string &title, int posX, int posY, int w, int h,
               const Uint32 mode, Uint32 flag, bool accel = true);
 
     void createRendering(bool accel);
@@ -106,10 +125,11 @@ class LX_Window
 
 public :
 
-    LX_Window(const Uint32 mode, bool accel = true);
+    LX_Window(const Uint32 mode, bool accel = true);                    /// deprecated
     LX_Window(std::string title, const Uint32 mode, bool accel = true);
     LX_Window(std::string title, int posX, int posY, int w, int h,
-              const Uint32 mode, const Uint32 flag, bool accel = true);
+              const Uint32 mode, const Uint32 flag, bool accel = true); /// deprecated
+    LX_Window(LX_WindowInfo &info);
 
     void setTitle(std::string title);
 
@@ -127,6 +147,7 @@ public :
     void clearWindow(void);
     bool screenshot(std::string filename);
 
+    void getInfo(LX_WindowInfo &info);
     SDL_Renderer * getRenderer(void);
     SDL_Surface * getSurface(void);
     SDL_Window * getWindow(void);

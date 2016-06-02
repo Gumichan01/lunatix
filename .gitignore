@@ -1,16 +1,30 @@
 # Files to exclude
+
+# Object files/directories
 *.o
-*~
 *obj
 *bin
+_build/
+
+#  Compiled files
+*.luac
+*.dll
+
+# Lunatix library and exe
+*libLunatix*
+lunatix-demo
+
+# Codeblocks
 *layout*
 *depend
 *gmon.out
 *.cbp
-*.dll
-*.luac
-*Doxyfile*
+
+# Others
+*~
+result-test-lunatix-*.log
+win-*
 html/
-*libLunatix*
-_build/
-lunatix-demo
+*Doxyfile*
+lib/
+include/SDL2/

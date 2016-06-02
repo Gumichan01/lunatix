@@ -34,7 +34,7 @@ struct SDL_Texture;
 struct SDL_Color;
 
 
-namespace LX_Graphics
+namespace LX_Win
 {
 
 class LX_Window;
@@ -121,7 +121,7 @@ public:
     SDL_Texture * drawTextToTexture(LX_TTF_TypeText type, std::string text,
                                     unsigned int size, unsigned int idWindow = 0);
     SDL_Texture * drawTextToTexture(LX_TTF_TypeText type, std::string text,
-                                    unsigned int size, LX_Graphics::LX_Window *win);
+                                    unsigned int size, LX_Win::LX_Window *win);
 
     void setColor(SDL_Color *color);
 

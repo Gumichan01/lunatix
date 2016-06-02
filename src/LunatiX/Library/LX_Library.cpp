@@ -32,9 +32,6 @@
 #include <LunatiX/LX_WindowManager.hpp>
 
 
-using namespace LX_Graphics;
-
-
 /**
 *   @fn bool LX_Init(void)
 *
@@ -140,7 +137,7 @@ bool LX_Init(void)
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, LX_GL_MINOR_VERSION);
     }
 
-    LX_WindowManager::init();
+    LX_Win::LX_WindowManager::init();
 
     return true;
 }
@@ -157,7 +154,7 @@ bool LX_Init(void)
 */
 void LX_Quit(void)
 {
-    LX_WindowManager::destroy();
+    LX_Win::LX_WindowManager::destroy();
 
     Mix_CloseAudio();
     Mix_Quit();

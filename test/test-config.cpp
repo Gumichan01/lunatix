@@ -1,7 +1,4 @@
 
-
-
-
 #include <iostream>
 
 #include <LunatiX/Lunatix_engine.hpp>
@@ -21,10 +18,10 @@ string boolState(const bool b)
 int main(int argc, char **argv)
 {
     bool err = false;
-    LX_Configuration *configuration =  nullptr;
+    LX_Configuration *configuration = nullptr;
+    LX_Configuration *configuration2 = nullptr;
 
-    cout << " ==== Test Config ==== " << endl;
-
+    cout << endl << " ==== Test Config ==== " << endl;
     err = LX_Init();
 
     if(!err)
@@ -32,14 +29,19 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine was initialized with success" << endl;
 
-
+    LX_Log::setDebugMode();
     configuration = LX_Configuration::getInstance();
+    configuration2 = LX_Configuration::getInstance();
 
     if(configuration == nullptr)
-        cerr << "FAILURE - The singleton is not initialized" << endl;
+        cerr << "FAILURE - The configuration is not initialized" << endl;
     else
-        cout << "SUCCESS - LunatiX Engine has a singleton configuration" << endl;
+        cout << "SUCCESS - The configuration is initialized" << endl;
 
+    if(configuration != configuration2)
+        cerr << "FAILURE - The configuration class is not instantiated as a singleton" << endl;
+    else
+        cout << "SUCCESS - The configuration class is instantiated as a singleton" << endl;
 
     bool video = configuration->getVideoFlag();
     bool ttfont = configuration->getTTFFlag();
@@ -51,7 +53,6 @@ int main(int argc, char **argv)
     int w = configuration->getWinWidth();
     int h = configuration->getWinHeight();
     bool f = configuration->getFullscreenFlag();
-
 
     std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl;
     std::cout << "video : " << boolState(video) << std::endl;
@@ -66,8 +67,7 @@ int main(int argc, char **argv)
     std::cout << "fullscreen : " << boolState(f) << std::endl;
 
     LX_Quit();
-
-    cout << " ==== END Test Config ==== " << endl;
+    cout << " ==== END Test Config ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }

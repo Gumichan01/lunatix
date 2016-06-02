@@ -1,0 +1,15 @@
+
+= Changelog = 
+
+For the release 0.7.2, changes from 0.7 are provided in Release_Note-0.7.md.
+
+== LX_Log ==
+
+ - The program can be set in debug mode
+ - A level of priority can be set in some log categories
+ - Log a message 
+
+== LX_Version == 
+
+ - Added information about the dependencies
+ - Get short information about the engine

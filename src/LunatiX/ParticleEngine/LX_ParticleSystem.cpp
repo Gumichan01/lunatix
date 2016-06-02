@@ -28,7 +28,7 @@
 #include <LunatiX/LX_Error.hpp>
 
 using namespace std;
-using namespace LX_Graphics;
+//using namespace LX_Graphics;
 
 
 namespace LX_ParticleEngine
@@ -202,7 +202,7 @@ void LX_ParticleSystem::displayParticles(void)
 {
     const unsigned int n = nbParticles;
 
-    LX_Window * win = LX_WindowManager::getInstance()->getWindow(idWin);
+    LX_Win::LX_Window * win = LX_Win::LX_WindowManager::getInstance()->getWindow(idWin);
 
     if(win == nullptr)
         return;

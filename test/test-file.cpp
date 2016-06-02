@@ -1,3 +1,4 @@
+
 #include <cstdio>
 #include <cstring>
 #include <iostream>
@@ -5,12 +6,10 @@
 
 #include <LunatiX/Lunatix_engine.hpp>
 
-
 #define N 4
 
 using namespace std;
 using namespace LX_FileIO;
-
 
 void test_open(void);
 void test_read(void);
@@ -38,7 +37,7 @@ int main()
 {
     bool err = false;
 
-    cout << " ==== Test File ==== " << endl;
+    cout << endl << " ==== Test File ==== " << endl;
 
     err = LX_Init();
 
@@ -47,7 +46,7 @@ int main()
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
-
+    LX_Log::setDebugMode();
     test_open();
     test_write();
     test_read();
@@ -60,7 +59,7 @@ int main()
 
     remove(str.c_str());
 
-    cout << " ==== End File ==== " << endl;
+    cout << " ==== End File ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }
@@ -96,16 +95,17 @@ void test_open(void)
     }
     catch(IOException &e)
     {
-        cerr << "FAILURE - Cannot load " << str1 << "; Expected : a valid refence; Got : " << e.what() << endl;
+        cerr << "FAILURE - Cannot load " << str1
+             << "; Expected : a valid refence; Got : " << e.what() << endl;
     }
 
     // null string
     try
     {
-
         invalidString = new LX_File(null,LX_FILEIO_RDONLY);
 
-        cerr << "FAILURE - nullptr was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        cerr << "FAILURE - nullptr was loaded (o_o); "
+             << "Expected : IOexception; got : a valid reference " << endl;
         delete invalidString;
 
     }
@@ -121,13 +121,15 @@ void test_open(void)
 
         f1 = new LX_File(str1,0x00000000);
 
-        cerr << "FAILURE - mode was not set (o_o); Expected : IOexception; got : a valid reference " << endl;
+        cerr << "FAILURE - mode was not set (o_o); Expected : "
+             << "IOexception; got : a valid reference " << endl;
         delete f1;
 
     }
     catch(IOException &exe)
     {
-        cout << "SUCCESS - IOException occured : Mode 0x00 -> " << exe.what() << endl;
+        cout << "SUCCESS - IOException occured : Mode 0x00 -> "
+             << exe.what() << endl;
     }
 
     // invalid file
@@ -136,13 +138,15 @@ void test_open(void)
 
         notExistFile = new LX_File(str3,LX_FILEIO_RDONLY);
 
-        cout << "FAILURE - An invalid file was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        cout << "FAILURE - An invalid file was loaded (o_o); Expected : "
+             << "IOexception; got : a valid reference " << endl;
         delete notExistFile;
 
     }
     catch(IOException &ioe)
     {
-        cout << "SUCCESS - IOException occured : " << str3 << " -> " << ioe.what() << endl;
+        cout << "SUCCESS - IOException occured : " << str3 << " -> "
+             << ioe.what() << endl;
     }
 
     cout << " = END TEST = " << endl;
@@ -157,16 +161,17 @@ void test_read(void)
     char buf[N + 1];
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
-
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
          << f.size() << " byte(s)" << endl;
     read_data = f.read(buf,sizeof(char),N);
 
     if(read_data == 0)
-        cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
+        cerr << "FAILURE - Expected : a positive value or zero; got : -1 "
+             << endl;
     else
     {
-        cout << "SUCCESS - Received " << read_data << " bytes from " << str << endl;
+        cout << "SUCCESS - Received " << read_data << " bytes from " << str
+             << endl;
         buf[read_data] = 0;
         cout << "INFO - data received : " << buf << endl;
     }
@@ -213,10 +218,8 @@ void test_read2(void)
     if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
     else
-    {
-        cout << "SUCCESS - Received " << read_data << " bytes from " << strex << endl;
-    }
-
+        cout << "SUCCESS - Received " << read_data << " bytes from "
+             << strex << endl;
 
     delete [] buff;
     f.close();
@@ -274,31 +277,23 @@ void test_tellSeek(void)
     if(pos != 4)
         cerr << "FAILURE - seek Expected : 4 got : " << pos << endl;
     else
-    {
         cout << "SUCCESS - seek position : 4 " << endl;
-    }
 
     pos = f.tell();
 
     if(pos != 4)
         cerr << "FAILURE - tell Expected : 4 got : " << pos << endl;
     else
-    {
         cout << "SUCCESS - tell position : 4 " << endl;
-    }
 
     pos = f.seek(-1,LX_SEEK_CUR);
 
     if(pos != 3)
         cerr << "FAILURE - seek Expected : 3 got : " << pos << endl;
     else
-    {
         cout << "SUCCESS - seek position : 3 " << endl;
-    }
-
 
     f.close();
-
 
     cout << " = END TEST = " << endl;
 }
@@ -320,10 +315,13 @@ void test_getSurface(void)
     surface = f.getSurfaceFromData();
 
     if(surface == nullptr)
-        cerr << "FAILURE - getSurfaceFromData() Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
+        cerr << "FAILURE - getSurfaceFromData() "
+             << "Expected : non-nullptr pointer; got : nullptr -> "
+             << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - getSurfaceFromData() : got a valid surface from " << f.getFilename() << endl;
+        cout << "SUCCESS - getSurfaceFromData() : got a valid surface from "
+             << f.getFilename() << endl;
         SDL_FreeSurface(surface);
     }
 
@@ -331,13 +329,15 @@ void test_getSurface(void)
     surface = LX_Graphics::loadSurface(&f);
 
     if(surface == nullptr)
-        cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
+        cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : "
+             << "non-nullptr pointer; got : nullptr -> "
+             << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - loadSurface() : got a valid surface from " << f.getFilename() << endl;
+        cout << "SUCCESS - loadSurface() : got a valid surface from "
+             << f.getFilename() << endl;
         SDL_FreeSurface(surface);
     }
-
 
     f.close();
 
@@ -361,7 +361,8 @@ void test_buffer(void)
 
         invalid = new LX_FileBuffer(null);
 
-        cerr << "FAILURE - nullptr was loaded (o_o); Expected : IOexception; got : a valid reference " << endl;
+        cerr << "FAILURE - nullptr was loaded (o_o); Expected : "
+             << "IOexception; got : a valid reference " << endl;
         delete invalid;
 
     }
@@ -376,7 +377,6 @@ void test_buffer(void)
     {
 
         f = new LX_FileBuffer(str1.c_str());
-
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
 
         delete f;
@@ -385,7 +385,8 @@ void test_buffer(void)
     }
     catch(IOException &e)
     {
-        cerr << "FAILURE - Cannot load " << str1 << "; Expected : a valid refence; Got : " << e.what() << endl;
+        cerr << "FAILURE - Cannot load " << str1
+             << "; Expected : a valid refence; Got : " << e.what() << endl;
     }
 
     cout << " = END TEST = " << endl;
@@ -398,26 +399,29 @@ void test_getSurface2(void)
     LX_FileBuffer f("data/bullet.png");
     SDL_Surface * surface = nullptr;
 
-
     cout << " = TEST Surface from buffer = " << endl;
 
     surface = f.getSurfaceFromBuffer();
 
     if(surface == nullptr)
-        cerr << "FAILURE - getsurface from buffer Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
+        cerr << "FAILURE - getsurface from buffer Expected : '"
+             << "'non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - getSurfaceFromBuffer : got a valid surface from " << f.getFilename() << endl;
+        cout << "SUCCESS - getSurfaceFromBuffer : got a valid surface from "
+             << f.getFilename() << endl;
         SDL_FreeSurface(surface);
     }
 
     surface = LX_Graphics::loadSurfaceFromFileBuffer(&f);
 
     if(surface == nullptr)
-        cerr << "FAILURE - loadSurfaceFromFileBuffer Expected : non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
+        cerr << "FAILURE - loadSurfaceFromFileBuffer Expected : "
+             << "non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - loadSurfaceFromFileBuffer : got a valid surface from " << f.getFilename() << endl;
+        cout << "SUCCESS - loadSurfaceFromFileBuffer : "
+             << "got a valid surface from " << f.getFilename() << endl;
         SDL_FreeSurface(surface);
     }
 
@@ -444,7 +448,8 @@ void test_getChunk(void)
     }
     catch(IOException & ioe)
     {
-        cerr << "FAILURE - Cannot instanciate LX_Chunk with a file buffer as argument" << LX_GetError() << endl;
+        cerr << "FAILURE - Cannot instanciate LX_Chunk with"
+             << " a file buffer as argument" << LX_GetError() << endl;
     }
 
 #pragma clang diagnostic pop
@@ -452,8 +457,9 @@ void test_getChunk(void)
     mix = f.getChunkFromBuffer();
 
     if(mix == nullptr)
-        cerr << "FAILURE - getChunkFromBuffer() from buffer Expected : non-nullptr pointer; got : nullptr -> "
-             << LX_GetError() << endl;
+        cerr << "FAILURE - getChunkFromBuffer() from buffer Expected : "
+             << "non-nullptr pointer; got : nullptr -> " << LX_GetError()
+             << endl;
     else
     {
         cout << "SUCCESS - getChunkFromBuffer() : got a valid chunk from "
@@ -464,11 +470,13 @@ void test_getChunk(void)
     lxmix = LX_Mixer::loadSample(&f);
 
     if(lxmix == nullptr)
-        cerr << "FAILURE - LX_Mixer::loadSample() Expected : non-nullptr pointer; got : nullptr -> "
+        cerr << "FAILURE - LX_Mixer::loadSample() Expected : "
+             << "non-nullptr pointer; got : nullptr -> "
              << LX_GetError() << endl;
     else
     {
-        cout << "SUCCESS - LX_Mixer::loadSample() : got a valid chunk from " << f.getFilename() << endl;
+        cout << "SUCCESS - LX_Mixer::loadSample() : got a valid chunk from "
+             << f.getFilename() << endl;
         delete lxmix;
     }
 

@@ -371,7 +371,7 @@ float vector_norm(const LX_Vector2D& v)
 */
 bool isNullVector(const LX_Vector2D& v)
 {
-    return v.vx == 0 && v.vy == 0;
+    return v.vx == 0.0f && v.vy == 0.0f;
 }
 
 #pragma clang diagnostic pop

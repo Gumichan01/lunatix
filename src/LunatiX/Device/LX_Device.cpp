@@ -34,14 +34,16 @@ static const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickG
 
 namespace LX_Device
 {
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+static int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
+                 LX_GamepadInfo& info);
 };
 
 
 namespace LX_Device
 {
 
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
+static int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     if(joy == nullptr)
         return LX_SetError("Invalid joystick\n");
@@ -126,19 +128,7 @@ const char * nameOf(SDL_GameController * controller)
 */
 int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
-    const char *tmp;
-
-    if(joy == nullptr)
-        return LX_SetError("Invalid joystick\n");
-
-    tmp = nameOf(joy);
-
-    if(tmp == nullptr)
-        return LX_SetError("Cannot get the name of the joystick\n");
-
-    strcpy(info.name,tmp);
-
-    return lx_stat(joy,info);
+    return gstat(joy,nullptr,info);
 }
 
 
@@ -157,24 +147,31 @@ int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
 */
 int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 {
-    const char *tmp;
-
-    if(gc == nullptr)
-        return LX_SetError("Invalid game controller\n");
-
-    tmp = nameOf(gc);
-
-    if(tmp == nullptr)
-        return LX_SetError("Cannot get the name of the game controller\n");
-
-    strcpy(info.name,tmp);
-
-    return lx_stat(SDL_GameControllerGetJoystick(gc),info);
+    return gstat(nullptr,gc,info);
 }
 
 
+static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
+                 LX_GamepadInfo& info)
+{
+    if(joy != nullptr)
+    {
+        info.name = nameOf(joy);
+        return lx_stat(joy,info);
+    }
+    else if(gc != nullptr)
+    {
+        info.name = nameOf(gc);
+        return lx_stat(SDL_GameControllerGetJoystick(gc),info);
+    }
+    else
+        return LX_SetError("Invalid joystick/game controller\n");
+}
+
+
+
 /**
-*   @fn const char * gamepadToString(LX_GamepadInfo& info, char * str)
+*   @fn const char * gamepadToString(LX_GamepadInfo& info, string& str)
 *
 *   Get the string format of the information structure
 *
@@ -189,9 +186,10 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 *
 *   @sa statGamepad
 */
-const char * gamepadToString(LX_GamepadInfo& info, char * str)
+const char * gamepadToString(LX_GamepadInfo& info)
 {
     ostringstream stream;
+    string str;
     char guid[GUID_SIZE+1];
 
     memset(&guid,0,GUID_SIZE+1);
@@ -206,8 +204,8 @@ const char * gamepadToString(LX_GamepadInfo& info, char * str)
     << "Gamepad - Number of Buttons : " << info.nb_buttons << endl
     << "Gamepad - Number of Hats : " << info.nb_hats << endl;
 
-    strcpy(str,stream.str().c_str());
-    return str;
+    str = stream.str();
+    return str.c_str();
 }
 
 
@@ -232,4 +230,3 @@ int mouseCursorDisplay(int toggle)
 
 
 };
-

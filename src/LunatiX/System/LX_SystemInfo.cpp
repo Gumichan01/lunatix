@@ -130,6 +130,7 @@ const SDL_DisplayMode * getDisplayModes(int& size)
         return nullptr;
     }
 
+    size = numberOfDisplays;
     mode = new (nothrow) SDL_DisplayMode[numberOfDisplays];
 
     if(mode == nullptr)
@@ -137,8 +138,6 @@ const SDL_DisplayMode * getDisplayModes(int& size)
         LX_SetError("Internal error : unavailable ressources");
         return nullptr;
     }
-
-    size = numberOfDisplays;
 
     for(int i = 0; i < numberOfDisplays; i++)
     {

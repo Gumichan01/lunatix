@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -26,12 +25,13 @@ static LX_FileBuffer *red;
 static LX_FileBuffer *green;
 static LX_FileBuffer *blue;
 
-class Dot{
+class Dot
+{
 
     LX_ParticleSystem *sys;
     LX_AABB box;
 
-    public:
+public:
 
     Dot()
     {
@@ -48,17 +48,21 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    err = p->setTexture(red);
-                            break;
+            case 0 :
+                err = p->setTexture(red);
+                break;
 
-                case 1 :    err = p->setTexture(blue);
-                            break;
+            case 1 :
+                err = p->setTexture(blue);
+                break;
 
-                case 2 :    err = p->setTexture(green);
-                            break;
+            case 2 :
+                err = p->setTexture(green);
+                break;
 
-                default :   err = p->setTexture(red);
-                            break;
+            default :
+                err = p->setTexture(red);
+                break;
             }
 
             sys->addParticle(p);
@@ -82,17 +86,21 @@ class Dot{
 
             switch(rand()%3)
             {
-                case 0 :    err = p->setTexture(red);
-                            break;
+            case 0 :
+                err = p->setTexture(red);
+                break;
 
-                case 1 :    err = p->setTexture(blue);
-                            break;
+            case 1 :
+                err = p->setTexture(blue);
+                break;
 
-                case 2 :    err = p->setTexture(green);
-                            break;
+            case 2 :
+                err = p->setTexture(green);
+                break;
 
-                default :   err = p->setTexture(red);
-                            break;
+            default :
+                err = p->setTexture(red);
+                break;
             }
 
             if(sys->addParticle(p) == false)
@@ -102,7 +110,6 @@ class Dot{
 
             if(err == false)
                 cerr << "FAILURE - Dot::update() - Cannot load any texture from a file buffer" << endl;
-
         }
 
         sys->displayParticles();
@@ -117,23 +124,22 @@ class Dot{
 
 int main()
 {
-
     Dot *dot;
-    LX_Window *w = nullptr;
+    LX_Win::LX_Window *w = nullptr;
     Uint32 begin_time;
 
     bool err = LX_Init();
 
-    cout << " ==== Test Particle ==== " << endl;
+    cout << endl << " ==== Test Particle ==== " << endl;
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
-    w = new LX_Window("Test particle",LX_WINDOW_RENDERING);
-
-    LX_WindowManager::getInstance()->addWindow(w);
+    LX_Log::setDebugMode();
+    w = new LX_Win::LX_Window("Test particle",LX_WINDOW_RENDERING);
+    LX_Win::LX_WindowManager::getInstance()->addWindow(w);
 
     //File buffer of particle
     try
@@ -142,20 +148,24 @@ int main()
         green = new LX_FileBuffer("test/asset/green.bmp");
         blue = new LX_FileBuffer("test/asset/blue.bmp");
 
-    }catch(IOException)
+    }
+    catch(IOException)
     {
         cerr << "FAILURE - An asset was not loaded" << endl;
+        cout << " ==== Abort Particle ==== " << endl;
+        return EXIT_FAILURE;
     }
 
     cout << "SUCCESS - The three assets was successfully loaded in each file buffer" << endl;
-
-    // Dot with particle
+    LX_Log::log("Loading the dot");
     dot = new Dot();
+    LX_Log::log("Dot loaded");
 
     SDL_Event e;
     int go = 1;
-
     begin_time = SDL_GetTicks();
+
+    LX_Log::log("The programm is running ...");
 
     while(go == 1 &&  ((SDL_GetTicks() - begin_time) < 4000))
     {
@@ -165,23 +175,23 @@ int main()
                 go = 0;
         }
 
-        LX_WindowManager::getInstance()->clearWindows();
+        LX_Win::LX_WindowManager::getInstance()->clearWindows();
         dot->update();
-        LX_WindowManager::getInstance()->updateWindows();
-
+        LX_Win::LX_WindowManager::getInstance()->updateWindows();
         SDL_Delay(16);
     }
 
-    LX_WindowManager::getInstance()->removeWindow(0);
+    LX_Win::LX_WindowManager::getInstance()->removeWindow(0);
+    LX_Log::log("End of program");
 
-    delete w;
     delete dot;
-    delete red;
-    delete green;
     delete blue;
+    delete green;
+    delete red;
+    delete w;
     LX_Quit();
 
-    cout << " ==== End Particle ==== " << endl;
+    cout << " ==== End Particle ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }

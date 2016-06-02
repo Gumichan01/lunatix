@@ -26,16 +26,16 @@ The engine works on Windows and Linux system.
 ## Contribute ##
  
 You may take a look on the library or get the development version
-on [Github] (https://github.com/Gumichan01/lunatix-engine). You can also find 
-the library reference on my [website] (http://gumichan01.olympe.in/reference/lunatix-engine/).
+on [Github] ( https://github.com/Gumichan01/lunatix-engine ) You can also find 
+the library reference on my [website] ( http://gumichan01.olympe.in/reference/lunatix-engine/v0.7.2/ ).
 
 
 ## Getting started ##
 
 ### On Windows ###
 
-First of all, download the stable [development library] (http://gumichan01.olympe.in/download/luna-0.7.0-devel-win32.zip) (v0.7.0) 
-and the [shared libraries] (http://gumichan01.olympe.in/download/luna-0.7.0-dll-win32.zip)   
+First of all, download the stable [development library] (http://gumichan01.olympe.in/download/luna-devel-0.7.2-mingw.zip) (v0.7.2) 
+and the [runtime libraries] (http://gumichan01.olympe.in/download/luna-0.7.2-win32.zip)   
 It includes the library files and all necessary materials to develop any project.  
 You must include them in the root directory of the project you are working on.
 

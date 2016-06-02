@@ -34,7 +34,9 @@ int main()
     bool go = true;
     SDL_Event event;
     LX_AABB position = {0,0,W,H};
-    LX_Window w(LX_WINDOW_RENDERING);
+    LX_Win::LX_WindowInfo info;
+    LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
+    LX_Win::LX_Window w(info);              // Create the window withe this cofiguration
     SDL_Texture *texture = loadTextureFromFile("data/bullet.png",&w);
 
     w.setWindowSize(W,H);
@@ -61,6 +63,14 @@ int main()
     }
 
     SDL_DestroyTexture(texture);
+
+    if(LX_Device::numberOfDevices() > 0)
+    {
+        LX_Device::LX_Gamepad *gp = new LX_Device::LX_Gamepad();
+
+        if(gp != nullptr)
+            cout << gp->toString() << endl;
+    }
 
     // Information about
     LX_EngineVersionString();

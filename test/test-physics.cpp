@@ -1,5 +1,4 @@
 
-
 #include <cmath>
 #include <iostream>
 
@@ -7,7 +6,6 @@
 
 using namespace std;
 using namespace LX_Physics;
-
 
 void test_euclide(void);
 void test_collisionPointCircle(void);
@@ -43,7 +41,7 @@ int main(int argc, char **argv)
 {
     bool err = false;
 
-    cout << " ==== Test Physics ==== " << endl;
+    cout << endl << " ==== Test Physics ==== " << endl;
 
     err = LX_Init();
 
@@ -52,6 +50,7 @@ int main(int argc, char **argv)
     else
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
+    LX_Log::setDebugMode();
     test_euclide();
     test_collisionPointCircle();
     test_collisionPointRect();
@@ -79,8 +78,7 @@ int main(int argc, char **argv)
     test_VectorLambda();
 
     LX_Quit();
-
-    cout << " ==== END Physics ==== " << endl;
+    cout << " ==== END Physics ==== " << endl << endl;
 
     return EXIT_SUCCESS;
 }
@@ -1295,9 +1293,9 @@ void test_VectorLambda(void)
     normalize(v);
     float n = vector_norm(v);
 
-     if(n == 1.0f)
+    if(n == 1.0f)
         cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy
-        << ") is normalized, norm : " << n << endl;
+             << ") is normalized, norm : " << n << endl;
     else
         cerr << "FAILURE - expected : v(" << vv.vx << "," << vv.vy << "); "
              << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
@@ -1310,7 +1308,7 @@ void test_VectorLambda(void)
 
     normalize(t);   // t is a null vector
 
-     if(t == t)
+    if(t == t)
         cout << "SUCCESS - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
     else
         cerr << "FAILURE - a zero vector must be normalized to 0" << endl;

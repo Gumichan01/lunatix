@@ -17,7 +17,6 @@
 *
 */
 
-#include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_endian.h>
@@ -53,9 +52,56 @@ static const Uint32 amask = 0xff000000;
 
 
 static const char * DEFAULT_TITLE = "LunatiX Engine v0.7";
+static const int DEFAULT_WIN_WIDTH = 640;
+static const int DEFAULT_WIN_HEIGHT = 480;
 
-namespace LX_Graphics
+namespace LX_Win
 {
+
+static Uint32 generateFlags(LX_Configuration &config)
+{
+    Uint32 flag = 0x00000000;
+
+    if(config.getVideoFlag() && config.getFullscreenFlag())
+        flag |= LX_GRAPHICS_FULLSCREEN;
+
+    if(config.getVideoFlag() && config.getOpenGLFlag())
+        flag |= SDL_WINDOW_OPENGL;
+
+    return flag;
+}
+
+void LX_initWindowInfo(LX_WindowInfo &info)
+{
+    info.title = DEFAULT_TITLE;
+    info.x = SDL_WINDOWPOS_CENTERED;
+    info.y = SDL_WINDOWPOS_CENTERED;
+    info.w = DEFAULT_WIN_WIDTH;
+    info.h = DEFAULT_WIN_HEIGHT;
+    info.mode = LX_WINDOW_RENDERING;
+    info.flag = 0;
+    info.accel = true;
+}
+
+
+void LX_loadWindowConfig(LX_WindowInfo &info)
+{
+    LX_Configuration *config = LX_Configuration::getInstance();
+
+    if(config == nullptr)
+        LX_initWindowInfo(info);
+    else
+    {
+        info.title = DEFAULT_TITLE;
+        info.x = SDL_WINDOWPOS_CENTERED;
+        info.y = SDL_WINDOWPOS_CENTERED;
+        info.w = config->getWinWidth();
+        info.h = config->getWinHeight();
+        info.mode = LX_WINDOW_RENDERING;
+        info.flag = generateFlags(*config);
+        info.accel = true;
+    }
+}
 
 
 /**
@@ -90,13 +136,12 @@ const char * LX_WindowException::what() const noexcept
     return stringError.c_str();
 }
 
-
 LX_WindowException::~LX_WindowException() noexcept {}
-
 
 
 /**
 *   @fn LX_Window::LX_Window(const Uint32 mode, bool accel)
+*   @deprecated
 *
 *   Create the window with the default configuration
 *
@@ -164,7 +209,18 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
     if(config->getOpenGLFlag())
         flag |= SDL_WINDOW_OPENGL;
 
-    createWindow(title.c_str(),xpos,ypos,w,h,mode,flag,accel);
+    createWindow(title,xpos,ypos,w,h,mode,flag,accel);
+}
+
+
+
+LX_Window::LX_Window(LX_WindowInfo &info)
+    : window(nullptr), renderer(nullptr),
+    original_width(info.w), original_height(info.h), render_method(false)
+{
+    createWindow(info.title,info.x,info.y,info.w,info.h,info.mode,
+                 info.flag,info.accel);
+    getInfo(info);
 }
 
 
@@ -202,14 +258,14 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
     : window(nullptr), renderer(nullptr), original_width(w),
     original_height(h), render_method(false)
 {
-    createWindow(title.c_str(),posX,posY,w,h,mode,flag,accel);
+    createWindow(title,posX,posY,w,h,mode,flag,accel);
 }
 
 
 /*
 *   Initialize the window according to the configuration
 */
-void LX_Window::createWindow(std::string title, int posX, int posY, int w, int h,
+void LX_Window::createWindow(std::string &title, int posX, int posY, int w, int h,
                         const Uint32 mode, Uint32 flag, bool accel)
 {
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
@@ -563,6 +619,28 @@ bool LX_Window::screenshotUsingSurface(std::string& filename)
 }
 
 
+void LX_Window::getInfo(LX_WindowInfo &info)
+{
+    info.title = SDL_GetWindowTitle(window);
+    SDL_GetWindowPosition(window,&info.x,&info.y);
+    SDL_GetWindowSize(window, &info.w,&info.h);
+    info.flag = SDL_GetWindowFlags(window);
+    info.mode = render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
+
+    if(render_method)
+    {
+        SDL_RendererInfo rinfo;
+        SDL_GetRendererInfo(renderer, &rinfo);
+
+        info.accel = (renderer != nullptr &&
+                      (rinfo.flags&SDL_RENDERER_ACCELERATED)
+                        == SDL_RENDERER_ACCELERATED) ? true : false;
+    }
+    else
+    {
+        info.accel = false;
+    }
+}
 
 /**
 *   @fn SDL_Renderer * LX_Window::getRenderer(void)
