@@ -186,7 +186,7 @@ $(OBJ_MAIN_PATH)main.o : $(MAIN_PATH)main.cpp \
 $(LUNATIX_I_PATH)Lunatix_engine.hpp $(LUNATIX_I_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_MAIN_PATH)
 	@echo $@" - Compiling "$<
-	$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
 
 #
