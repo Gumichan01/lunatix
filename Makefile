@@ -48,6 +48,7 @@ LUNATIX_BUILD_ROOT=./_build/
 LUNATIX_BUILD_DIR=$(LUNATIX_BUILD_ROOT)LunatiX/
 LIBRARIES_I_DIR=./include/
 LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
+UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
 SDL2_I_PATH=`pkg-config --cflags sdl2 SDL2_image SDL2_mixer SDL2_ttf`
 
 # Path to the different modules
@@ -61,8 +62,10 @@ PARTICLE_PATH=$(LUNATIX_PATH)ParticleEngine/
 PHYSICS_PATH=$(LUNATIX_PATH)Physics/
 RANDOM_PATH=$(LUNATIX_PATH)Random/
 SYSTEM_PATH=$(LUNATIX_PATH)System/
+TEXT_PATH=$(LUNATIX_PATH)Text/
 TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
 VERSION_PATH=$(LUNATIX_PATH)Version/
+UTILS_PATH=$(LUNATIX_PATH)Utilities/
 
 # Path to the different object directories
 OBJ_MAIN_PATH=$(LUNATIX_BUILD_DIR)../
@@ -76,8 +79,10 @@ OBJ_PARTICLE_PATH=$(LUNATIX_BUILD_DIR)ParticleEngine/
 OBJ_PHYSICS_PATH=$(LUNATIX_BUILD_DIR)Physics/
 OBJ_RANDOM_PATH=$(LUNATIX_BUILD_DIR)Random/
 OBJ_SYSTEM_PATH=$(LUNATIX_BUILD_DIR)System/
+OBJ_TEXT_PATH=$(LUNATIX_BUILD_DIR)Text/
 OBJ_TTF_PATH=$(LUNATIX_BUILD_DIR)TrueTypeFont/
 OBJ_VERSION_PATH=$(LUNATIX_BUILD_DIR)Version/
+OBJ_UTILS_PATH=$(LUNATIX_BUILD_DIR)Utilities/
 
 # Path to the different object files
 MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
@@ -93,11 +98,10 @@ $(OBJ_MSG_PATH)LX_MessageBox.o \
 $(OBJ_PARTICLE_PATH)LX_Particle.o $(OBJ_PARTICLE_PATH)LX_ParticleSystem.o \
 $(OBJ_PHYSICS_PATH)LX_Hitbox.o $(OBJ_PHYSICS_PATH)LX_Physics.o \
 $(OBJ_PHYSICS_PATH)LX_Polygon.o $(OBJ_PHYSICS_PATH)LX_Vector2D.o \
-$(OBJ_RANDOM_PATH)LX_Random.o \
-$(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
-$(OBJ_SYSTEM_PATH)LX_Log.o \
-$(OBJ_TTF_PATH)LX_TrueTypeFont.o \
-$(OBJ_VERSION_PATH)LX_Version.o
+$(OBJ_RANDOM_PATH)LX_Random.o $(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
+$(OBJ_SYSTEM_PATH)LX_Log.o $(OBJ_TEXT_PATH)LX_Text.o \
+$(OBJ_TTF_PATH)LX_TrueTypeFont.o $(OBJ_VERSION_PATH)LX_Version.o \
+$(OBJ_UTILS_PATH)utf8_string.o $(OBJ_UTILS_PATH)utf8_iterator.o
 
 # Libraries
 LUNATIX_LIB_DIR=./lib/linux/
@@ -454,6 +458,20 @@ $(LUNATIX_I_PATH)LX_Log.hpp
 
 
 #
+# Text
+#
+
+LX_Text.o : $(OBJ_TEXT_PATH)LX_Text.o
+
+$(OBJ_TEXT_PATH)LX_Text.o : $(TEXT_PATH)LX_Text.cpp \
+$(LUNATIX_I_PATH)LX_Text.hpp $(LUNATIX_I_PATH)LX_Log.hpp \
+$(UTILS_I_PATH)utf8_string.hpp
+	@mkdir -p $(OBJ_TEXT_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+#
 # True Type Font
 #
 
@@ -478,6 +496,28 @@ $(LUNATIX_I_PATH)LX_Version.hpp
 	@mkdir -p $(OBJ_VERSION_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+#
+# Utilities
+#
+
+utf8_string.o : $(OBJ_UTILS_PATH)utf8_string.o
+
+$(OBJ_UTILS_PATH)utf8_string.o : $(UTILS_PATH)utf8_string.cpp \
+$(UTILS_I_PATH)utf8_string.hpp $(UTILS_I_PATH)utf8_iterator.hpp
+	@mkdir -p $(OBJ_UTILS_PATH)
+	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
+	@echo $@" - Compiling "$<
+
+
+utf8_iterator.o : $(OBJ_UTILS_PATH)utf8_iterator.o
+
+$(OBJ_UTILS_PATH)utf8_iterator.o : $(UTILS_PATH)utf8_iterator.cpp \
+$(UTILS_I_PATH)utf8_iterator.hpp $(UTILS_I_PATH)utf8_string.hpp
+	@echo $<" -> "$@
+	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
+	@echo $<" -> "$@" done."
 
 
 ##########
@@ -576,11 +616,20 @@ test-particle.o : $(TEST_PATH)test-particle.cpp
 
 test-file : $(OBJ_FILES) test-file.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS) \
-	-lstdc++
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
 
 test-file.o : $(TEST_PATH)test-file.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+test-ime : $(OBJ_FILES) test-ime.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+
+
+test-ime.o : $(TEST_PATH)test-ime.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
@@ -618,6 +667,6 @@ clean-test :
 	@echo "Delete test object files"
 	@rm -f test-*
 
-cleanall : cleandoc cleanlib clean-test clean
+clear : cleandoc cleanlib clean-test clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
