@@ -151,13 +151,13 @@ const char * LX_Gamepad::getName(void)
 
 
 /**
-*   @fn const char * LX_Gamepad::toString(void)
+*   @fn std::string LX_Gamepad::toString(void)
 *
 *   Get information about the gamepad
 *
 *   @return Always returns a valid string
 */
-const char * LX_Gamepad::toString(void)
+std::string LX_Gamepad::toString(void)
 {
     LX_GamepadInfo gi;
     int err = 0;

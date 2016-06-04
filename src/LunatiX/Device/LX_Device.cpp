@@ -171,7 +171,7 @@ static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
 
 
 /**
-*   @fn const char * gamepadToString(LX_GamepadInfo& info, string& str)
+*   @fn std::string gamepadToString(LX_GamepadInfo& info)
 *
 *   Get the string format of the information structure
 *
@@ -186,10 +186,9 @@ static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
 *
 *   @sa statGamepad
 */
-const char * gamepadToString(LX_GamepadInfo& info)
+std::string gamepadToString(LX_GamepadInfo& info)
 {
     ostringstream stream;
-    string str;
     char guid[GUID_SIZE+1];
 
     memset(&guid,0,GUID_SIZE+1);
@@ -204,8 +203,7 @@ const char * gamepadToString(LX_GamepadInfo& info)
     << "Gamepad - Number of Buttons : " << info.nb_buttons << endl
     << "Gamepad - Number of Hats : " << info.nb_hats << endl;
 
-    str = stream.str();
-    return str.c_str();
+    return stream.str();
 }
 
 
