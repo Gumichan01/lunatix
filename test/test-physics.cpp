@@ -39,11 +39,9 @@ using namespace LX_Physics;
 
 int main(int argc, char **argv)
 {
-    bool err = false;
-
     cout << endl << " ==== Test Physics ==== " << endl;
 
-    err = LX_Init();
+    bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
@@ -527,7 +525,6 @@ void test_collisionPointPolygon(void)
         are to high, you will have incorrect results
     */
     LX_Polygon poly(5);
-    int d;
 
     LX_Point N = {12,7};
     LX_Point O = {9,7};
@@ -545,7 +542,7 @@ void test_collisionPointPolygon(void)
 
     cout << " = TEST Collision Point/Polygon = " << endl;
 
-    d = collisionPointPoly(N,poly);
+    bool d = collisionPointPoly(N,poly);
 
     if(d != false)
         cerr << "FAILURE - N in the polygon. expected: FALSE ;Got: TRUE" << endl;

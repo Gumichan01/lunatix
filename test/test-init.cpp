@@ -7,11 +7,9 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    bool err = false;
-
     LX_Log::setDebugMode();
     cout << endl << " ==== Test Init ==== " << endl;
-    err = LX_Init();
+    bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;

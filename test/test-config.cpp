@@ -6,6 +6,8 @@
 using namespace std;
 
 
+string boolState(const bool b);
+
 string boolState(const bool b)
 {
     if(b)
@@ -17,12 +19,11 @@ string boolState(const bool b)
 
 int main(int argc, char **argv)
 {
-    bool err = false;
     LX_Configuration *configuration = nullptr;
     LX_Configuration *configuration2 = nullptr;
 
     cout << endl << " ==== Test Config ==== " << endl;
-    err = LX_Init();
+    bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;

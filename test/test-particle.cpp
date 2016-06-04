@@ -31,6 +31,8 @@ class Dot
     LX_ParticleSystem *sys;
     LX_AABB box;
 
+    Dot(Dot& d);
+
 public:
 
     Dot()

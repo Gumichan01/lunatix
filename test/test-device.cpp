@@ -16,11 +16,10 @@ void test_haptic(void);
 
 int main(int argc, char **argv)
 {
-    bool err = false;
     Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
 
     cout << endl << " ==== Test Device ==== " << endl;
-    err = LX_Init();
+    bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
@@ -51,27 +50,24 @@ int main(int argc, char **argv)
 
 void test_gamepad(void)
 {
-    LX_Gamepad *gp = nullptr;
-    LX_Haptic *hp = nullptr;
-
     cout << " == Test Gamepad == " << endl;
 
-    gp = new LX_Gamepad();
-
-    if(gp->isConnected())
     {
-        cout << "INFO - Name : " << gp->getName() << gp->toString() << endl;
+        LX_Gamepad gp;
 
-        if((hp = gp->getHaptic()) != nullptr)
+        if(gp.isConnected())
         {
-            hp->RumbleEffectInit();
-            hp->RumbleEffectPlay(1.0,100);
-            SDL_Delay(500);
+            cout << "INFO - Name : " << gp.getName() << gp.toString() << endl;
+            LX_Haptic *hp = gp.getHaptic();
+
+            if(hp != nullptr)
+            {
+                hp->RumbleEffectInit();
+                hp->RumbleEffectPlay(1.0,100);
+                SDL_Delay(500);
+            }
         }
     }
-
-    delete gp;
-
     cout << "  == End Test == " << endl;
 }
 
@@ -80,7 +76,6 @@ void test_haptic(void)
 {
     LX_Haptic haptic;
     SDL_HapticEffect effect;
-    int effectID;
 
     cout << "  == Test Haptic == " << endl;
 
@@ -104,13 +99,13 @@ void test_haptic(void)
         effect.periodic.attack_length = 1000;                   // Takes 1 second to get max strength
         effect.periodic.fade_length = 1000;                     // Takes 1 second to fade away
 
-        effectID = haptic.newEffect(&effect);
+        int effectid = haptic.newEffect(&effect);
 
-        if(effectID < 0)
+        if(effectid < 0)
             cerr << "INFO - Cannot add effect: " << LX_GetError() << endl;
         else
         {
-            haptic.runEffect(effectID,1);
+            haptic.runEffect(effectid,1);
             SDL_Delay(5128);                                    // Wait for the effect to finish
         }
 

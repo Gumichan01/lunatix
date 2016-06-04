@@ -35,11 +35,9 @@ static string str = "tmpFile";
 
 int main()
 {
-    bool err = false;
-
     cout << endl << " ==== Test File ==== " << endl;
 
-    err = LX_Init();
+    bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
@@ -68,30 +66,18 @@ int main()
 
 void test_open(void)
 {
-    LX_File *f1 = nullptr;
-    LX_File *invalidString = nullptr;
-    LX_File *notExistFile = nullptr;
-
-    const char * str1 = "data/bullet.png";
-    const char * null = nullptr;
-    const char * str3 = "invalid_file";
-
     cout << " = TEST open = " << endl;
 
-
+    LX_File *f1 = nullptr;
+    const char * str1 = "data/bullet.png";
     // valid file
     try
     {
-
         f1 = new LX_File(str1,LX_FILEIO_RDONLY);
-
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
-
         f1->close();
-
         delete f1;
         f1 = nullptr;
-
     }
     catch(IOException &e)
     {
@@ -102,14 +88,14 @@ void test_open(void)
     // null string
     try
     {
-        invalidString = new LX_File(null,LX_FILEIO_RDONLY);
+        const char * null = nullptr;
+        LX_File *invalid_str = new LX_File(null,LX_FILEIO_RDONLY);
 
         cerr << "FAILURE - nullptr was loaded (o_o); "
              << "Expected : IOexception; got : a valid reference " << endl;
-        delete invalidString;
-
+        delete invalid_str;
     }
-    catch(logic_error le)
+    catch(logic_error& le)
     {
         cout << "SUCCESS - std::logic_error occured : -> " << le.what() << endl;
     }
@@ -118,13 +104,11 @@ void test_open(void)
     // bad mode
     try
     {
-
         f1 = new LX_File(str1,0x00000000);
 
         cerr << "FAILURE - mode was not set (o_o); Expected : "
              << "IOexception; got : a valid reference " << endl;
         delete f1;
-
     }
     catch(IOException &exe)
     {
@@ -133,15 +117,15 @@ void test_open(void)
     }
 
     // invalid file
+    const char * str3 = "invalid_file";
+
     try
     {
-
-        notExistFile = new LX_File(str3,LX_FILEIO_RDONLY);
+        LX_File *not_exist_file = new LX_File(str3,LX_FILEIO_RDONLY);
 
         cout << "FAILURE - An invalid file was loaded (o_o); Expected : "
              << "IOexception; got : a valid reference " << endl;
-        delete notExistFile;
-
+        delete not_exist_file;
     }
     catch(IOException &ioe)
     {
@@ -348,40 +332,31 @@ void test_getSurface(void)
 
 void test_buffer(void)
 {
-    LX_FileBuffer *f = nullptr;
-    LX_FileBuffer *invalid = nullptr;
-
-    const char *null = nullptr;
-    string str1 = "data/bullet.png";
-
     cout << " = TEST Buffer = " << endl;
 
     try
     {
-
-        invalid = new LX_FileBuffer(null);
+        const char *null = nullptr;
+        LX_FileBuffer *invalid = new LX_FileBuffer(null);
 
         cerr << "FAILURE - nullptr was loaded (o_o); Expected : "
              << "IOexception; got : a valid reference " << endl;
         delete invalid;
-
     }
-    catch(logic_error ex)
+    catch(logic_error& ex)
     {
         cout << "SUCCESS - IOException occured : nullptr -> " << ex.what() << endl;
     }
 
 
     // Valid file
+    string str1 = "data/bullet.png";
+
     try
     {
-
-        f = new LX_FileBuffer(str1.c_str());
+        LX_FileBuffer *f = new LX_FileBuffer(str1.c_str());
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
-
         delete f;
-        f = nullptr;
-
     }
     catch(IOException &e)
     {
