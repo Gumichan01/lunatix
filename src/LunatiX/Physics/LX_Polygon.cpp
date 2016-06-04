@@ -228,9 +228,6 @@ void LX_Polygon::convexity(void)
     enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
     const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
 
-    // Vector product
-    int cross_product;
-
     for(unsigned int i = 0; i < n; i++)
     {
         if(i == 0)
@@ -246,6 +243,9 @@ void LX_Polygon::convexity(void)
 
         if(i == n-1)
         {
+
+
+
             OB = LX_Vector2D(points[0].x - points[i].x,
                              points[0].y - points[i].y);
         }
@@ -255,7 +255,8 @@ void LX_Polygon::convexity(void)
                              points[i+1].y - points[i].y);
         }
 
-        cross_product = static_cast<int>(vector_product(AO,OB));
+        // Vector product
+        int cross_product = static_cast<int>(vector_product(AO,OB));
 
         if(!haveSign)
         {
