@@ -47,9 +47,8 @@ bool LX_Init(void)
 {
     const std::string mappingFile = "config/gamecontrollerdb.txt";
 
-    int err = 0;
     Uint32 sdl_flags = 0x00000000;                  // The flags for SDL_Init
-    int img_flags = IMG_INIT_PNG| IMG_INIT_JPG;     // The IMG flag for SDL_Image
+    int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;      // The IMG flag for SDL_Image
 
     // Load the configuration
     LX_Configuration::initConfig();
@@ -109,9 +108,8 @@ bool LX_Init(void)
     if(configuration->getAudioFlag() == 1)
     {
         // Init SDL_Mixer
-        err = Mix_Init(MIX_INIT_OGG);
 
-        if(err == -1)
+        if(Mix_Init(MIX_INIT_OGG) == -1)
         {
             TTF_Quit();
             IMG_Quit();
@@ -119,9 +117,10 @@ bool LX_Init(void)
             return false;
         }
 
-        err = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE);
+        int err = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,
+                            LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE);
 
-        if( err < 0)
+        if(err < 0)
         {
             Mix_Quit();
             TTF_Quit();
