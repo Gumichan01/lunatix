@@ -108,8 +108,7 @@ bool LX_Init(void)
     if(configuration->getAudioFlag() == 1)
     {
         // Init SDL_Mixer
-
-        if(Mix_Init(MIX_INIT_OGG) == -1)
+        if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == -1)
         {
             TTF_Quit();
             IMG_Quit();
@@ -118,7 +117,7 @@ bool LX_Init(void)
         }
 
         int err = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,
-                            LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE);
+                                LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE);
 
         if(err < 0)
         {
