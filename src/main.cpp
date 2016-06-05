@@ -3,9 +3,7 @@
 */
 
 #include <iostream>
-
 #include <LunatiX/Lunatix_engine.hpp>
-
 
 static const int W = 256;
 static const int H = 256;
@@ -70,6 +68,5 @@ int main()
     // Information about the engine
     LX_EngineInfo();
     LX_Quit();
-
     return 0;
 }

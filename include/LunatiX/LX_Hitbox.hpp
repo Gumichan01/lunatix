@@ -21,8 +21,8 @@
 *
 */
 
-
-namespace LX_Physics{
+namespace LX_Physics
+{
 
 /**
 *   @struct LX_Point
@@ -41,8 +41,6 @@ typedef struct LX_Point
     LX_Point& operator=(const LX_Point p);
 
 } LX_Point;     /**< The point */
-
-
 
 
 /**
@@ -79,4 +77,3 @@ bool operator <=(const LX_Circle& a, const LX_Circle& b);
 };
 
 #endif // HITBOX_H_INCLUDED
-

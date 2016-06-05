@@ -24,8 +24,8 @@
 
 #include <string>
 
-
-namespace LX_Physics{
+namespace LX_Physics
+{
 
 struct LX_Point;
 struct LX_Vector2D;
@@ -50,7 +50,6 @@ public :
 
     ~LX_PolygonException() noexcept;
 };
-
 
 
 /**
@@ -95,4 +94,3 @@ public :
 };
 
 #endif
-

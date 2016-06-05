@@ -21,12 +21,11 @@
 */
 
 #include <cmath>
-
 #include <LunatiX/LX_Vector2D.hpp>
 
 
-namespace LX_Physics{
-
+namespace LX_Physics
+{
 
 /**
 *   @fn LX_Vector2D::LX_Vector2D()
@@ -434,4 +433,3 @@ LX_Vector2D& normalize(LX_Vector2D& v)
 }
 
 };
-

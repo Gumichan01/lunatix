@@ -19,19 +19,16 @@
 *
 */
 
-#include <cmath>
-
 #include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-
 static const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
-
-namespace LX_Physics{
+namespace LX_Physics
+{
 
 /**
 *	@fn unsigned int euclide_square_distance(const int x1, const int y1,
@@ -752,4 +749,3 @@ void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 }
 
 };
-

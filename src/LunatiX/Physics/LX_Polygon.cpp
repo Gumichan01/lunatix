@@ -19,7 +19,6 @@
 *
 */
 
-
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
@@ -28,9 +27,8 @@
 
 using namespace std;
 
-
-namespace LX_Physics{
-
+namespace LX_Physics
+{
 
 /**
 *   @fn LX_PolygonException::LX_PolygonException(std::string err)
@@ -64,9 +62,7 @@ const char * LX_PolygonException::what() const noexcept
     return stringError.c_str();
 }
 
-
 LX_PolygonException::~LX_PolygonException() noexcept {}
-
 
 
 /**
@@ -243,9 +239,6 @@ void LX_Polygon::convexity(void)
 
         if(i == n-1)
         {
-
-
-
             OB = LX_Vector2D(points[0].x - points[i].x,
                              points[0].y - points[i].y);
         }
@@ -274,10 +267,6 @@ void LX_Polygon::convexity(void)
         }
         else
         {
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wswitch-enum"
-
             switch(s)
             {
                 case POSITIVE :
@@ -299,8 +288,6 @@ void LX_Polygon::convexity(void)
                 default :
                     break;
             }
-
-#pragma clang diagnostic pop
         }
     }
 
@@ -371,7 +358,6 @@ void LX_Polygon::moveTo(int vx, int vy)
 }
 
 
-
 /**
 *   @fn LX_Polygon::~LX_Polygon()
 *
@@ -384,4 +370,3 @@ LX_Polygon::~LX_Polygon()
 }
 
 };
-

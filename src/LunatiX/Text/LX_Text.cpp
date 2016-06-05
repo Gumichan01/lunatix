@@ -25,7 +25,8 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_events.h>
 
-namespace LX_Text{
+namespace LX_Text
+{
 
 // Anonymous
 namespace
