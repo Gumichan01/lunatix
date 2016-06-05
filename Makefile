@@ -654,7 +654,7 @@ doxy : $(DOXY_FILE)
 
 clean :
 	@echo "Delete object files"
-	@rm -rf $(LUNATIX_BUILD_ROOT)
+	@rm -rf $(LUNATIX_BUILD_ROOT) test-*
 
 cleandoc:
 	@echo "Delete the doxygen documentation"
@@ -663,10 +663,6 @@ cleandoc:
 cleanlib:
 	@echo "Delete libraries"
 	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
-
-clean-test :
-	@echo "Delete test object files"
-	@rm -f test-*
 
 clear : cleandoc cleanlib clean-test clean
 	@echo "Delete targets"
