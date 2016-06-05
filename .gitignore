@@ -5,6 +5,7 @@
 *obj
 *bin
 _build/
+*.gch
 
 #  Compiled files
 *.luac
