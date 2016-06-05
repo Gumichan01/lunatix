@@ -36,7 +36,7 @@ int main()
     LX_AABB position = {0,0,W,H};
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
-    LX_Win::LX_Window w(info);              // Create the window withe this cofiguration
+    LX_Win::LX_Window w(info);              // Create the window with this configuration
     SDL_Texture *texture = loadTextureFromFile("data/bullet.png",&w);
 
     w.setWindowSize(W,H);
@@ -67,7 +67,7 @@ int main()
         cout << gp.toString() << endl;
     }
 
-    // Information about
+    // Information about the engine
     LX_EngineInfo();
     LX_Quit();
 
