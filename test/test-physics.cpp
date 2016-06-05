@@ -123,8 +123,9 @@ void test_euclide(void)
     cout << "INFO - Distance between C and D" << endl;
     d = euclide_distance(C,D);
 
-    if(d != sqrt(200))
-        cerr << "FAILURE - Bad distance CD - expected : " << (int) sqrt(200) << ";Got : " << d << endl;
+    if(d != static_cast<float>(sqrt(200)))
+        cerr << "FAILURE - Bad distance CD - expected : "
+             << static_cast<float>(sqrt(200)) << ";Got : " << d << endl;
     else
         cout << "SUCCESS - Good distance CD : " << d << endl;
 
