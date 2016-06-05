@@ -58,20 +58,17 @@ void test_window1(LX_Win::LX_Window *win)
     cout << " = TEST main window = " << endl;
 
     if(win == nullptr)
-    {
         cerr << "FAILURE - The window was not initialized" << endl;
-        return;
-    }
     else
         cout << "SUCCESS - The window exists" << endl;
 
 
-    if(win->getWindow() == nullptr)
+    if(win != nullptr && win->getWindow() == nullptr)
         cerr << "FAILURE - the window was not initialized" << endl;
     else
         cout << "SUCCESS - the window is ready" << endl;
 
-    if(win->getRenderer() == nullptr)
+    if(win != nullptr && win->getRenderer() == nullptr)
         cerr << "FAILURE - the renderer was not initialized" << endl;
     else
         cout << "SUCCESS - the renderer is ready" << endl;
@@ -94,6 +91,7 @@ void test_window2(void)
     else
         cout << "SUCCESS - the window is ready" << endl;
 
+    cout << "INFO - Is rendering mode used?" << endl;
     if(win2.getRenderer() == nullptr)
         cerr << "FAILURE - the renderer was not initialized" << endl;
     else
@@ -112,7 +110,6 @@ void test_window2(void)
         cout << "SUCCESS - height " << h << endl;
 
     cout << " = END TEST = " << endl;
-
     SDL_Delay(750);
 }
 
@@ -140,6 +137,7 @@ void test_surface(void)
     *   If LX_WINDOW_SURFACE was made,
     *   then getSurface must return a valid surface
     */
+    cout << "INFO - Is surface mode used?" << endl;
     if(win3.getSurface() == nullptr)
         cerr << "FAILURE - the surface was not initialized" << endl;
     else
@@ -160,6 +158,7 @@ void test_surface(void)
         cout << "SUCCESS - height " << h << endl;
 
     // Load the surface and test its validity
+    cout << "INFO - load a surface." << endl;
     sf = loadSurface(name.c_str());
 
     if(sf == nullptr)
@@ -168,6 +167,7 @@ void test_surface(void)
         cout << "SUCCESS - the surface was loaded with success" << endl;
 
     // Is the surface put on the window
+    cout << "INFO - put the surface on the screen" << endl;
     if(win3.putSurface(sf,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the surface " << LX_GetError() << endl;
     else
@@ -177,6 +177,7 @@ void test_surface(void)
     win3.update();
 
     // take a screenshot
+    cout << "INFO - Screenshot" << endl;
     screen_ok = win3.screenshot("win-surface.png");
 
     if(screen_ok == false)
@@ -185,11 +186,9 @@ void test_surface(void)
     else
         cout << "SUCCESS - screenshot token from a surface" << endl;
 
-
     SDL_Delay(1000);
     win3.clearWindow();
     SDL_FreeSurface(sf);
-
     cout << " = END TEST = " << endl;
 }
 
@@ -202,7 +201,6 @@ void test_rendering(LX_Win::LX_Window *win)
     SDL_Surface *sf = nullptr;
     SDL_Texture *st = nullptr;
     SDL_Rect pos = {100,100,256,128};
-
 
     cout << " = TEST Rendering = " << endl;
 
@@ -219,7 +217,6 @@ void test_rendering(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the renderer is ready" << endl;
 
-
     sf = loadSurface(name.c_str());
     st = SDL_CreateTextureFromSurface(win->getRenderer(),sf);
     SDL_FreeSurface(sf);
@@ -229,17 +226,14 @@ void test_rendering(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the texture was loaded with success" << endl;
 
-
     if(win->putTexture(st,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer" << endl;
 
-
     win->update();
     SDL_Delay(750);
     win->clearWindow();
-
 
     if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
@@ -259,9 +253,7 @@ void test_rendering(LX_Win::LX_Window *win)
 
     SDL_Delay(500);
     win->clearWindow();
-
     SDL_DestroyTexture(st);
-
     cout << " = END TEST = " << endl;
 }
 
@@ -272,21 +264,14 @@ void test_winManager(LX_Win::LX_Window *win)
 
     SDL_Texture *st = nullptr;
     SDL_Rect pos = {100,100,256,128};
-
-    int id = 0;
-
     cout << " = TEST WinManager = " << endl;
 
     if(win == nullptr)
-    {
         cerr << "FAILURE - The window was not initialized" << endl;
-        return;
-    }
     else
         cout << "SUCCESS - The window exists" << endl;
 
-
-    id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
+    int id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
 
     if(id == -1)
         cerr << "FAILURE - failed to add a window" << LX_GetError() << endl;
@@ -300,33 +285,24 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the texture was loaded with success" << endl;
 
-
-    if(win->putTexture(st,nullptr,&pos) == false)
+    if(win != nullptr && win->putTexture(st,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer" << endl;
 
-
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
-
     SDL_Delay(1000);
-
     LX_Win::LX_WindowManager::getInstance()->clearWindows();
 
-
-    if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
+    if(win != nullptr && win->putTextureAndRotate(st,nullptr,&pos,45) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
         cout << "SUCCESS - Texture on the renderer with rotation" << endl;
 
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
-
     SDL_Delay(1000);
-
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
-
     LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
-
     cout << " = END TEST = " << endl;
 }
 
@@ -335,12 +311,13 @@ void test_winInfo(LX_Win::LX_Window *win)
 {
     cout << " = TEST window information = " << endl;
     LX_Win::LX_WindowInfo info_g;
-
+    cout << "INFO - get information" << endl;
     win->getInfo(info_g);
 
     if(winInfoEqual(info,info_g))
         cout << "SUCCESS - Information retrieved and "
-             << "information from user are identicals" << endl;
+             << "information from user are identicals" << endl
+             << winInfoToString(info_g) << endl;
     else
         cerr << "FAILURE - expected : " << winInfoToString(info)
              << "got : " << winInfoToString(info_g) << endl;

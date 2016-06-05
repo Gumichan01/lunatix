@@ -6,7 +6,6 @@ using namespace std;
 using namespace LX_SystemInfo;
 
 
-
 int main(int argc, char **argv)
 {
     LX_Init();
@@ -32,7 +31,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        cout << LX_GetError() << endl ;
+        cout << "INFO - " << LX_GetError() << endl ;
     }
 
     delete [] mode;

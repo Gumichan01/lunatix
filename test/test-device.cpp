@@ -6,7 +6,6 @@
 
 #define STRING_SIZE 256
 
-
 using namespace std;
 using namespace LX_Device;
 
@@ -38,14 +37,11 @@ int main(int argc, char **argv)
 
     test_gamepad();
     test_haptic();
-
     LX_Quit();
 
     cout << " ==== END Test Device ==== " << endl << endl;
-
     return EXIT_SUCCESS;
 }
-
 
 
 void test_gamepad(void)

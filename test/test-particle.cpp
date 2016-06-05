@@ -1,13 +1,6 @@
 
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <cassert>
-
 #include <LunatiX/Lunatix_engine.hpp>
-
-//#define DEBUG_MAIN_TEST
 
 using namespace std;
 
@@ -27,7 +20,6 @@ static LX_FileBuffer *blue;
 
 class Dot
 {
-
     LX_ParticleSystem *sys;
     LX_AABB box;
 
@@ -46,7 +38,8 @@ public:
 
         for(int i = 0; i < N; i++)
         {
-            p = new LX_Particle(box.x - 5 + (rand()%25),box.y - 5 + (rand()%25),5,5);
+            p = new LX_Particle(box.x - 5 + (rand()%25),
+                                box.y - 5 + (rand()%25),5,5);
 
             switch(rand()%3)
             {
@@ -70,7 +63,8 @@ public:
             sys->addParticle(p);
 
             if(err == false)
-                cerr << "FAILURE - Dot - Cannot load any texture from a file buffer" << endl;
+                cerr << "FAILURE - Dot - Cannot load any texture "
+                     << "from a file buffer" << endl;
         }
     }
 
@@ -84,7 +78,8 @@ public:
 
         for(int i = 0; i < N; i++)
         {
-            p = new LX_Particle(box.x - 5 + (rand()%25),box.y - 5 + (rand()%25),5,5);
+            p = new LX_Particle(box.x - 5 + (rand()%25),
+                                box.y - 5 + (rand()%25),5,5);
 
             switch(rand()%3)
             {
@@ -111,7 +106,8 @@ public:
             }
 
             if(err == false)
-                cerr << "FAILURE - Dot::update() - Cannot load any texture from a file buffer" << endl;
+                cerr << "FAILURE - Dot::update() - Cannot load any texture "
+                     << "from a file buffer" << endl;
         }
 
         sys->displayParticles();
@@ -130,14 +126,14 @@ int main()
     LX_Win::LX_Window *w = nullptr;
     Uint32 begin_time;
 
-    bool err = LX_Init();
-
     cout << endl << " ==== Test Particle ==== " << endl;
+    bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
-        cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
+        cout << "SUCCESS - LunatiX Engine have been initialized with success"
+             << endl;
 
     LX_Log::setDebugMode();
     w = new LX_Win::LX_Window("Test particle",LX_WINDOW_RENDERING);
@@ -158,7 +154,8 @@ int main()
         return EXIT_FAILURE;
     }
 
-    cout << "SUCCESS - The three assets was successfully loaded in each file buffer" << endl;
+    cout << "SUCCESS - The three assets were successfully loaded "
+         << "in each file buffer" << endl;
     LX_Log::log("Loading the dot");
     dot = new Dot();
     LX_Log::log("Dot loaded");
@@ -194,6 +191,5 @@ int main()
     LX_Quit();
 
     cout << " ==== End Particle ==== " << endl << endl;
-
     return EXIT_SUCCESS;
 }

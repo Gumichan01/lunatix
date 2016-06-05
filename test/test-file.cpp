@@ -1,9 +1,7 @@
 
-#include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <stdexcept>
-
 #include <LunatiX/Lunatix_engine.hpp>
 
 #define N 4
@@ -21,22 +19,15 @@ void test_buffer(void);
 void test_getSurface2(void);
 void test_getChunk(void);
 
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wexit-time-destructors"
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-
-static string str = "tmpFile";
-
-#pragma clang diagnostic pop
-#pragma clang diagnostic pop
+namespace
+{
+    string str("tmpFile");
+}
 
 
 int main()
 {
     cout << endl << " ==== Test File ==== " << endl;
-
     bool err = LX_Init();
 
     if(!err)
@@ -56,12 +47,9 @@ int main()
     test_getChunk();
 
     remove(str.c_str());
-
     cout << " ==== End File ==== " << endl << endl;
-
     return EXIT_SUCCESS;
 }
-
 
 
 void test_open(void)
@@ -73,6 +61,7 @@ void test_open(void)
     // valid file
     try
     {
+        cout << "INFO - test open " << str1 << " ..." << endl;
         f1 = new LX_File(str1,LX_FILEIO_RDONLY);
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
         f1->close();
@@ -88,6 +77,7 @@ void test_open(void)
     // null string
     try
     {
+        cout << "INFO - test open nullptr ..." << endl;
         const char * null = nullptr;
         LX_File *invalid_str = new LX_File(null,LX_FILEIO_RDONLY);
 
@@ -104,6 +94,7 @@ void test_open(void)
     // bad mode
     try
     {
+        cout << "INFO - test open " << str1 << " with invalid flag..." << endl;
         f1 = new LX_File(str1,0x00000000);
 
         cerr << "FAILURE - mode was not set (o_o); Expected : "
@@ -121,6 +112,7 @@ void test_open(void)
 
     try
     {
+        cout << "INFO - test open " << str3 << " that does not exist..." << endl;
         LX_File *not_exist_file = new LX_File(str3,LX_FILEIO_RDONLY);
 
         cout << "FAILURE - An invalid file was loaded (o_o); Expected : "
@@ -212,15 +204,15 @@ void test_read2(void)
 }
 
 
-
 void test_write(void)
 {
     cout << " = TEST write = " << endl;
 
     size_t read_data = 0;
     char buf[N];
-    LX_File f(str.c_str(),LX_FILEIO_WRONLY);
 
+    cout << "INFO - Open " << str << "..." << endl;
+    LX_File f(str.c_str(),LX_FILEIO_WRONLY);
     strncpy(buf,"GUMI",N);
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
@@ -229,20 +221,22 @@ void test_write(void)
     read_data = f.write(buf,sizeof(char),N);
 
     if(read_data == 0)
-        cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
+        cerr << "FAILURE - Expected : a positive value; got : -1 "
+             << endl;
     else
-        cout << "SUCCESS - Wrote " << read_data << " bytes on " << str << endl;
-
+        cout << "SUCCESS - Wrote " << read_data << " byte(s) into "
+             << str << endl;
 
     read_data = f.write("CHAN01");
 
     if(read_data == 0)
-        cerr << "FAILURE - Expected : a positive value or zero; got : -1 " << endl;
+        cerr << "FAILURE - Expected : a positive value; got : 0 "
+             << endl;
     else
-        cout << "SUCCESS - Wrote " << read_data << " bytes on " << str << endl;
+        cout << "SUCCESS - Wrote " << read_data << " byte(s) into "
+             << str << endl;
 
     f.close();
-
     cout << " = END TEST = " << endl;
 }
 
@@ -250,7 +244,6 @@ void test_write(void)
 void test_tellSeek(void)
 {
     cout << " = TEST tellSeek = " << endl;
-
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
@@ -278,10 +271,8 @@ void test_tellSeek(void)
         cout << "SUCCESS - seek position : 3 " << endl;
 
     f.close();
-
     cout << " = END TEST = " << endl;
 }
-
 
 
 void test_getSurface(void)
@@ -291,6 +282,7 @@ void test_getSurface(void)
     string str_ex = "data/bullet.png";
     SDL_Surface * surface = nullptr;
 
+    cout << "INFO - Open " << str_ex << "..." << endl;
     LX_File f(str_ex.c_str(),LX_FILEIO_RDONLY);
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
@@ -309,7 +301,6 @@ void test_getSurface(void)
         SDL_FreeSurface(surface);
     }
 
-
     surface = LX_Graphics::loadSurface(&f);
 
     if(surface == nullptr)
@@ -324,10 +315,8 @@ void test_getSurface(void)
     }
 
     f.close();
-
     cout << " = END TEST = " << endl;
 }
-
 
 
 void test_buffer(void)
@@ -337,6 +326,7 @@ void test_buffer(void)
     try
     {
         const char *null = nullptr;
+        cout << "INFO - Open nullptr ..." << endl;
         LX_FileBuffer *invalid = new LX_FileBuffer(null);
 
         cerr << "FAILURE - nullptr was loaded (o_o); Expected : "
@@ -345,15 +335,16 @@ void test_buffer(void)
     }
     catch(logic_error& ex)
     {
-        cout << "SUCCESS - IOException occured : nullptr -> " << ex.what() << endl;
+        cout << "SUCCESS - IOException occured : nullptr -> "
+             << ex.what() << endl;
     }
-
 
     // Valid file
     string str1 = "data/bullet.png";
 
     try
     {
+        cout << "INFO - Open " << str1 << " ..." << endl;
         LX_FileBuffer *f = new LX_FileBuffer(str1.c_str());
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
         delete f;
@@ -375,12 +366,12 @@ void test_getSurface2(void)
     SDL_Surface * surface = nullptr;
 
     cout << " = TEST Surface from buffer = " << endl;
-
     surface = f.getSurfaceFromBuffer();
 
     if(surface == nullptr)
         cerr << "FAILURE - getsurface from buffer Expected : '"
-             << "'non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
+             << "'non-nullptr pointer; got : nullptr -> "
+             << LX_GetError() << endl;
     else
     {
         cout << "SUCCESS - getSurfaceFromBuffer : got a valid surface from "
@@ -400,34 +391,29 @@ void test_getSurface2(void)
         SDL_FreeSurface(surface);
     }
 
-
     cout << " = END TEST = " << endl;
 }
 
 
 void test_getChunk(void)
 {
-    LX_FileBuffer f("data/explosion.wav");
     Mix_Chunk * mix = nullptr;
     LX_Mixer::LX_Chunk * lxmix = nullptr;
 
     cout << " = TEST Chunk from buffer = " << endl;
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-exception-parameter"
+    cout << "INFO - Open \"data/explosion.wav\" ..." << endl;
+    LX_FileBuffer f("data/explosion.wav");
 
     try
     {
         LX_Mixer::LX_Chunk dump(&f);
-        cout << "SUCCESS - LX_Chunk instanciation done : " << LX_GetError() << endl;
+        cout << "SUCCESS - LX_Chunk instanciation done." << endl;
     }
     catch(IOException & ioe)
     {
         cerr << "FAILURE - Cannot instanciate LX_Chunk with"
-             << " a file buffer as argument" << LX_GetError() << endl;
+             << " a file buffer as argument" << ioe.what() << endl;
     }
-
-#pragma clang diagnostic pop
 
     mix = f.getChunkFromBuffer();
 
@@ -455,7 +441,5 @@ void test_getChunk(void)
         delete lxmix;
     }
 
-
     cout << " = END TEST = " << endl;
 }
-

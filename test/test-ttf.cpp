@@ -6,7 +6,6 @@ using namespace std;
 using namespace LX_TrueTypeFont;
 using namespace LX_FileIO;
 
-
 void test_font(void);
 void test_font2(void);
 
@@ -14,23 +13,21 @@ void test_font2(void);
 int main(int argc, char **argv)
 {
     cout << endl << " ==== Test True Type Font ==== " << endl;
-
     bool err = LX_Init();
 
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
-        cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
+        cout << "SUCCESS - LunatiX Engine have been initialized with success"
+             << endl;
 
     LX_Log::setDebugMode();
     test_font();
     test_font2();
 
     cout << " ==== END Test ==== " << endl << endl;
-
     return EXIT_SUCCESS;
 }
-
 
 
 void test_font(void)
@@ -42,9 +39,7 @@ void test_font(void)
     SDL_Rect pos = {100,100,32,12};
 
     string str = "My name is Gumichan01";
-
     LX_Win::LX_Window win("LunatiX Engine test TTF No 1",LX_WINDOW_SURFACE);
-
 
     cout << "INFO - Load an LX_Font object with RAII" << endl;
     {
@@ -64,7 +59,6 @@ void test_font(void)
             LX_Font ferror("invalid_file",color);
             cout << "FAILURE - o_O. Expected: IOException, got: a valid object"
                  << endl;
-
         }
         catch(IOException &e)
         {
@@ -79,7 +73,8 @@ void test_font(void)
     else
         cout << "SUCCESS - Font defined" << endl;
 
-
+    cout << "INFO - Load the surface of the following solid text: "
+         << str << endl;
     textS = font->drawSolidText(str);
 
     if(textS == nullptr)
@@ -94,7 +89,8 @@ void test_font(void)
         SDL_FreeSurface(textS);
     }
 
-
+    cout << "INFO - Load the surface of the following shaded text: " << str
+         << endl;
     textS = font->drawShadedText(str,0,127,255);
 
     if(textS == nullptr)
@@ -109,7 +105,8 @@ void test_font(void)
         SDL_FreeSurface(textS);
     }
 
-
+    cout << "INFO - Load the surface of the following blended text: " << str
+         << endl;
     textS = font->drawBlendedText(str);
 
     if(textS == nullptr)
@@ -128,7 +125,6 @@ void test_font(void)
 }
 
 
-
 void test_font2(void)
 {
     LX_Font *font = nullptr;
@@ -140,10 +136,10 @@ void test_font2(void)
     SDL_Rect pos = {100,100,0,0};
     SDL_Rect pos2 = {100,100,0,0};
     int size_for_test = 48;
-    int w,h;
 
     LX_Win::LX_Window win("LunatiX Engine test TTF No 2",LX_WINDOW_RENDERING);
 
+    cout << "INFO - new font" << endl;
     font = new LX_Font(color,size_for_test);
 
     if(font == nullptr)
@@ -151,11 +147,13 @@ void test_font2(void)
     else
         cout << "SUCCESS - Font defined" << endl;
 
-
     // In rendering mode, it is necessary to get the dimension of the text
     // according to the size of it
+    int w,h;
     font->sizeOfText(str,size_for_test,w,h);
     pos2 = {pos.x,pos.y,w,h};
+    cout << "INFO - Load the texture of the following solid text : " << str
+         << endl;
     textS = LX_Graphics::loadTextureFromSurface(font->drawSolidText(str),&win);
 
     if(textS == nullptr)
@@ -173,6 +171,8 @@ void test_font2(void)
 
     font->sizeOfText(str,size_for_test,w,h);
     pos2 = {pos.x,pos.y,w,h};
+    cout << "INFO - Load the texture of the following shaded text : " << str
+         << endl;
     textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,127,255),&win);
 
     if(textS == nullptr)
@@ -190,6 +190,8 @@ void test_font2(void)
 
     font->sizeOfText(str,size_for_test,w,h);
     pos2 = {pos.x,pos.y,w,h};
+    cout << "INFO - Load the texture of the following blended text : " << str
+         << endl;
     textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str),&win);
 
     if(textS == nullptr)
@@ -205,9 +207,10 @@ void test_font2(void)
         SDL_DestroyTexture(textS);
     }
 
-
     font->sizeOfText(str,(size_for_test/4),w,h);
     pos2 = {pos.x,pos.y,w,h};
+    cout << "INFO - Load the texture of the following solid text "
+         << " according to the size (user-defined): " << str << endl;
     textS = LX_Graphics::loadTextureFromSurface(font->drawBlendedText(str,
             (size_for_test/4)),&win);
 
@@ -227,8 +230,7 @@ void test_font2(void)
     textS = nullptr;
 
     cout << "INFO - error cases" << endl;
-
-
+    cout << "INFO - Draw a solid text with a null size" << endl;
     SDL_Surface *s = font->drawSolidText(str,0);
 
     if(s != nullptr)
@@ -237,8 +239,7 @@ void test_font2(void)
         cout << "SUCCESS - The solid text was not loaded - " << LX_GetError() << endl;
 
     SDL_FreeSurface(s);
-
-
+    cout << "INFO - Draw a shaded text with a null size" << endl;
     s = font->drawShadedText(str,0,0,0,0);
 
     if(s != nullptr)
@@ -247,8 +248,7 @@ void test_font2(void)
         cout << "SUCCESS - The shaded text was not loaded - " << LX_GetError() << endl;
 
     SDL_FreeSurface(s);
-
-
+    cout << "INFO - Draw a blended text with a null size" << endl;
     s = font->drawBlendedText(str,0);
 
     if(s != nullptr)
@@ -257,7 +257,5 @@ void test_font2(void)
         cout << "SUCCESS - The blended text was not loaded - " << LX_GetError() << endl;
 
     SDL_FreeSurface(s);
-
-
     delete font;
 }

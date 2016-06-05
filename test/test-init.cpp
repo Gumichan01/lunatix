@@ -17,8 +17,6 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Quit();
-
     cout << " ==== END Test Init ==== " << endl << endl;
-
     return EXIT_SUCCESS;
 }

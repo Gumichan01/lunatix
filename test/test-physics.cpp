@@ -1,7 +1,5 @@
 
-#include <cmath>
 #include <iostream>
-
 #include <LunatiX/Lunatix_engine.hpp>
 
 using namespace std;
@@ -33,9 +31,9 @@ void test_VectorIncDec(void);
 void test_VectorCollinear(void);
 void test_VectorLambda(void);
 
-
 using namespace LX_Physics;
 
+void displayPoly(LX_Polygon& poly);
 
 int main(int argc, char **argv)
 {
@@ -85,57 +83,58 @@ int main(int argc, char **argv)
 // Test the euclidean functions
 void test_euclide(void)
 {
-
     LX_Point A = {1,1};
     LX_Point B = {10,1};
-
     LX_Point C = {0,0};
     LX_Point D = {10,10};
 
-    int d;
-
     cout << " = TEST EUCLIDE = " << endl;
 
-    d = euclide_square_distance(A,B);
+    cout << "INFO - A(" << A.x << "," << A.y << ")" << endl
+         << "INFO - B(" << B.x << "," << B.y << ")" << endl
+         << "INFO - C(" << C.x << "," << C.y << ")" << endl
+         << "INFO - D(" << D.x << "," << D.y << ")" << endl
+         << "INFO - Square distance AB" << endl;
 
-    if(d != 81)
+    float d = euclide_square_distance(A,B);
+
+    if(d != 81.0f)
         cerr << "FAILURE - Bad square distance AB - expected : 81;Got : " << d << endl;
     else
         cout << "SUCCESS - Good square distance AB : " << d << endl;
 
+    cout << "INFO - Distance between A and B" << endl;
     d = euclide_distance(A,B);
 
-    if(d != 9)
+    if(d != 9.0f)
         cerr << "FAILURE - Bad distance AB - expected : 9;Got : " << d << endl;
     else
         cout << "SUCCESS - Good distance AB : " << d << endl;
 
     // Test CD
-
+    cout << "INFO - Square distance CD" << endl;
     d = euclide_square_distance(C,D);
 
-    if(d != 200)
+    if(d != 200.0f)
         cerr << "FAILURE - Bad square distance CD - expected : 200;Got : " << d << endl;
     else
         cout << "SUCCESS - Good square distance CD : " << d << endl;
 
+    cout << "INFO - Distance between C and D" << endl;
     d = euclide_distance(C,D);
 
-    if(d != ( (int) sqrt(200)) )
+    if(d != sqrt(200))
         cerr << "FAILURE - Bad distance CD - expected : " << (int) sqrt(200) << ";Got : " << d << endl;
     else
         cout << "SUCCESS - Good distance CD : " << d << endl;
 
     cout << " = END TEST = " << endl;
-
 }
 
 
 void test_collisionPointCircle(void)
 {
-    bool d;
-
-    LX_Circle c(LX_Point(100,100),10);
+    LX_Circle circle(LX_Point(100,100),10);
 
     LX_Point A = {100,100};
     LX_Point B = {50,50};
@@ -144,28 +143,39 @@ void test_collisionPointCircle(void)
 
     cout << " = TEST POINT/CIRCLE = " << endl;
 
-    d = collisionPointCircle(A.x,A.y,c);
+    cout << "INFO - A(" << A.x << "," << A.y << ")" << endl
+         << "INFO - B(" << B.x << "," << B.y << ")" << endl
+         << "INFO - C(" << C.x << "," << C.y << ")" << endl
+         << "INFO - D(" << D.x << "," << D.y << ")" << endl
+         << "INFO - circle {(" << circle.center.x << "," << circle.center.x
+         << ")," << circle.radius << "}" << "" << endl;
+
+    cout << "INFO - Collision Point A/Circle" << endl;
+    bool d = collisionPointCircle(A.x,A.y,circle);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE ;Got : " << d << endl;
     else
         cout << "SUCCESS - collision, the point is the center : " << d << endl;
 
-    d = collisionPointCircle(B.x,B.y,c);
+    cout << "INFO - Collision Point B/Circle" << endl;
+    d = collisionPointCircle(B.x,B.y,circle);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
-    d = collisionPointCircle(C,c);
+    cout << "INFO - Collision Point C/Circle" << endl;
+    d = collisionPointCircle(C,circle);
 
     if(d != true)
         cerr << "FAILURE - expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision point is in the circle" << endl;
 
-    d = collisionPointCircle(D,c);
+    cout << "INFO - Collision Point D/Circle" << endl;
+    d = collisionPointCircle(D,circle);
 
     if(d != false)
         cerr << "FAILURE - expected : FALSE ;Got : TRUE" << endl;
@@ -181,53 +191,75 @@ void test_collisionPointRect(void)
     LX_Point A,B;
     LX_AABB aabb;
 
-    bool d;
-
     A = {100,100};
     B = {50,50};
     aabb = {40,40,30,30};
 
-    d = collisionPointRect(A.x,A.y,aabb);
+    cout << " = TEST POINT/AABB = " << endl;
+
+    cout << "INFO - A(" << A.x << "," << A.y << ")" << endl
+         << "INFO - B(" << B.x << "," << B.y << ")" << endl
+         << "INFO - AABB{(" << aabb.x << "," << aabb.y << "),"
+         << aabb.w << "," << aabb.h << "}" << endl;
+
+    cout << "INFO - Collision Point A/AABB" << endl;
+    bool d = collisionPointRect(A.x,A.y,aabb);
 
     if(d != false)
-        cerr << "FAILURE - expected : FALSE;Got : TRUE" << endl;
+        cerr << "FAILURE - expected : FALSE; Got : TRUE" << endl;
     else
         cout << "SUCCESS - point out of the rect " << endl;
 
+    cout << "INFO - Collision Point B/AABB" << endl;
     d = collisionPointRect(B.x,B.y,aabb);
 
     if(d != true)
-        cerr << "FAILURE - expected : TRUE;Got : FALSE" << endl;
+        cerr << "FAILURE - expected : TRUE; Got : FALSE" << endl;
     else
         cout << "SUCCESS - point into the rect " << endl;
 
+    cout << " = END TEST = " << endl;
 }
 
 
 void test_collision2Circle(void)
 {
-    bool d;
-
     LX_Circle A(LX_Point(10,10),5);
     LX_Circle B(LX_Point(13,12),3);
     LX_Circle C(LX_Point(100,100),50);
 
     cout << " = TEST CIRCLE/CIRCLE = " << endl;
 
-    d = collisionCircle(A,B);
+    cout << "INFO - circle A {(" << A.center.x << "," << A.center.x << "),"
+         << A.radius << "}" << "" << endl
+         << "INFO - circle B {(" << B.center.x << "," << B.center.x << "),"
+         << B.radius << "}" << "" << endl
+         << "INFO - circle C {(" << C.center.x << "," << C.center.x << "),"
+         << C.radius << "}" << "" << endl;
+
+    cout << "INFO - Collision Circles A/B" << endl;
+    bool d = collisionCircle(A,B);
 
     if(d != true)
         cerr << "FAILURE - collisoon A/B expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision between two circles A and B " << endl;
 
-
+    cout << "INFO - Collision Circles C/B" << endl;
     d = collisionCircle(C,B);
 
     if(d != false)
         cerr << "FAILURE - collisoon C/B expected : FALSE;Got : TRUE" << endl;
     else
         cout << "SUCCESS - no collision between two circles C and B " << endl;
+
+    cout << "INFO - Collision Circles A/C" << endl;
+    d = collisionCircle(A,C);
+
+    if(d != false)
+        cerr << "FAILURE - collisoon A/C expected : FALSE;Got : TRUE" << endl;
+    else
+        cout << "SUCCESS - no collision between two circles A and C " << endl;
 
     cout << " = END TEST = " << endl;
 }
@@ -236,7 +268,6 @@ void test_collision2Circle(void)
 void test_collision2Rect(void)
 {
     LX_AABB R1,R2,R3;
-    bool d;
 
     R1 = {0,0,50,25};
     R2 = {40,21,32,25};
@@ -244,14 +275,22 @@ void test_collision2Rect(void)
 
     cout << " = TEST RECT/RECT = " << endl;
 
-    d = collisionRect(R1,R2);
+    cout << "INFO - R1{(" << R1.x << "," << R1.y << "),"
+         << R1.w << "," << R1.h << "}" << endl;
+    cout << "INFO - R2{(" << R2.x << "," << R2.y << "),"
+         << R2.w << "," << R2.h << "}" << endl;
+    cout << "INFO - R3{(" << R3.x << "," << R3.y << "),"
+         << R3.w << "," << R3.h << "}" << endl;
+
+    cout << "INFO - Collision AABB R1/R2" << endl;
+    bool d = collisionRect(R1,R2);
 
     if(d != true)
         cerr << "FAILURE - collisoon R1/R2 expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision R1/R2 OK " << endl;
 
-
+    cout << "INFO - Collision AABB R2/R3" << endl;
     d = collisionRect(R2,R3);
 
     if(d != true)
@@ -259,7 +298,7 @@ void test_collision2Rect(void)
     else
         cout << "SUCCESS - collision R2/R3 OK " << endl;
 
-
+    cout << "INFO - Collision AABB R3/R1" << endl;
     d = collisionRect(R3,R1);
 
     if(d != false)
@@ -267,13 +306,12 @@ void test_collision2Rect(void)
     else
         cout << "SUCCESS - no collision R3/R1 OK " << endl;
 
-
+    cout << " = END TEST = " << endl;
 }
 
 
 void test_collisionRectCircle(void)
 {
-    bool d;
     LX_AABB R1;
 
     R1 = {0,0,50,25};
@@ -283,14 +321,24 @@ void test_collisionRectCircle(void)
 
     cout << " = TEST RECT/CIRCLE = " << endl;
 
-    d = collisionCircleRect(A,R1);
+    cout << "INFO - R1{(" << R1.x << "," << R1.y << "),"
+         << R1.w << "," << R1.h << "}" << endl
+         << "INFO - circle A {(" << A.center.x << "," << A.center.x << "),"
+         << A.radius << "}" << "" << endl
+         << "INFO - circle B {(" << B.center.x << "," << B.center.x << "),"
+         << B.radius << "}" << "" << endl
+         << "INFO - circle C {(" << C.center.x << "," << C.center.x << "),"
+         << C.radius << "}" << "" << endl;
+
+    cout << "INFO - Collision Circle/Rect AABB A/R1" << endl;
+    bool d = collisionCircleRect(A,R1);
 
     if(d != true)
         cerr << "FAILURE - collisoon A/R2 expected : TRUE;Got : FALSE" << endl;
     else
         cout << "SUCCESS - collision A/R2 OK " << endl;
 
-
+    cout << "INFO - Collision Circle/Rect AABB B/R1" << endl;
     d = collisionCircleRect(B,R1);
 
     if(d != true)
@@ -298,6 +346,7 @@ void test_collisionRectCircle(void)
     else
         cout << "SUCCESS - collision B/R2 OK " << endl;
 
+    cout << "INFO - Collision Circle/Rect AABB C/R1" << endl;
     d = collisionCircleRect(C,R1);
 
     if(d != false)
@@ -311,7 +360,6 @@ void test_collisionRectCircle(void)
 
 void testPolygon(void)
 {
-    int d;
     LX_Polygon poly(5);
     LX_Point p;
 
@@ -319,18 +367,30 @@ void testPolygon(void)
     poly.addPoint(10,10);
     poly.addPoint(5,5);
 
-
     cout << " = TEST POLYGON = " << endl;
 
+    {
+        cout << "INFO - poly {";
+        const unsigned int n = poly.numberOfRealEdges();
+        for(unsigned int i = 0; i < n; i++)
+        {
+            cout << "(" << (poly.getPoint(i)).x << ","
+                 << (poly.getPoint(i)).y << ")";
+            if(i != n)
+                cout << ";";
+        }
+        cout << "}" << endl;
+    }
 
-    d = poly.numberOfRealEdges();
+    cout << "INFO - Number of real edges (defined)" << endl;
+    unsigned int d = poly.numberOfRealEdges();
 
     if(d != 3)
         cerr << "FAILURE - number of real edges expected : 3;Got : " << d << endl;
     else
         cout << "SUCCESS - number of real edges : " << d << endl;
 
-
+    cout << "INFO - Number of edges (capacity)" << endl;
     d = poly.numberOfEdges();
 
     if(d != 5)
@@ -338,8 +398,8 @@ void testPolygon(void)
     else
         cout << "SUCCESS - total number of edges : " << d << endl;
 
-
     p = poly.getPoint(0);
+    cout << "INFO - poly.getPoint(0) : (" << p.x << "," << p.y << ")" << endl;
 
     if(p.x != 10)
         cerr << "FAILURE - x position expected : 10 ;Got : " << p.x << endl;
@@ -351,81 +411,93 @@ void testPolygon(void)
     else
         cout << "SUCCESS - y = 5" << endl;
 
-
     // Is the triangle convex ?
+    cout << "INFO - test the convexity of the polygon." << endl;
     if(poly.isConvex() == false)
         cerr << "FAILURE - A triangle is not a non-convex polygon " << endl;
     else
         cout << "SUCCESS - The triangle is a convex polygon, well done !" << endl;
 
     // Now we have a polygon with 4 edges
+    p = {7,2};
+    cout << "INFO - add point p(" << p.x << "," << p.y << ")" << endl;
     poly.addPoint(7,2);
 
     // It must be convex
+    cout << "INFO - test the convexity of the polygon with the new point." << endl;
     if(poly.isConvex() == false)
-        cerr << "FAILURE - Expected : convex;Got: non-convex " << endl;
+        cerr << "FAILURE - Expected : convex; Got: non-convex " << endl;
     else
         cout << "SUCCESS - Added (7,2). This is still a convex polygon, well done !" << endl;
 
     // New edge
+    p = {6,5};
+    cout << "INFO - add point p(" << p.x << "," << p.y << ")" << endl;
     poly.addPoint(6,5);
 
     // It must be non-convex
+    cout << "INFO - test the non-convexity of the polygon "
+         << "with the new point (again)" << endl;
     if(poly.isConvex() == true)
-        cerr << "FAILURE - Expected : non-convex;Got: convex " << endl;
+        cerr << "FAILURE - Expected : non-convex; Got: convex " << endl;
     else
         cout << "SUCCESS - Added (6,3). This is not a convex polygon" << endl;
 
     cout << " = END TEST = " << endl;
-
 }
 
 
 void test_Vector2D(void)
 {
     LX_Vector2D v,u,z;
-    int d;
 
-    v = {1,2};
-    u = {2,-1};
-    z = {0,0};
+    v = {1.0f,2.0f};
+    u = {2.0f,-1.0f};
+    z = {0.0f,0.0f};
 
     cout << " = TEST Vector2D = " << endl;
 
-    d = scalar_product(v,u);
+    cout << "INFO - v(" << v.vx << "," << v.vy << ")" << endl
+         << "INFO - u(" << u.vx << "," << u.vy << ")" << endl
+         << "INFO - z(" << z.vx << "," << z.vy << ")" << endl;
 
-    if(d != 0)
+    cout << "INFO - scalar product (v,u)" << endl;
+    float d = scalar_product(v,u);
+
+    if(d != 0.0f)
         cerr << "FAILURE - scalar product v(1,2).u(2,-1) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - scalar product v(1,2).u(2,-1) = 0" << endl;
 
+    cout << "INFO - scalar product (z,z)" << endl;
     d = scalar_product(z,z);
 
-    if(d != 0)
+    if(d != 0.0f)
         cerr << "FAILURE - scalar product z.z (z is a null vector) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - scalar product z.z = 0" << endl;
 
-
+    cout << "INFO - norm of z" << endl;
     d = vector_norm(z);
 
-    if(d != 0)
+    if(d != 0.0f)
         cerr << "FAILURE - norm of z (z is a null vector) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - norm of z = 0" << endl;
 
-
+    cout << "INFO - norm of v" << endl;
     d = vector_norm(v);
 
-    if(d != ((int) sqrt(5)) )
-        cerr << "FAILURE - norm of v expected: "<< ((int) sqrt(5)) <<" ;Got: " << d << endl;
+    if(static_cast<int>(d) != static_cast<int>(sqrt(5)))
+        cerr << "FAILURE - norm of v expected: "<< static_cast<int>(sqrt(5))
+             <<" ; Got: " << d << endl;
     else
         cout << "SUCCESS - norm of v = 0" << endl;
 
-
+    cout << "INFO - vector product (v,u)" << endl;
     d = vector_product(v,u);
 
-    if(d != -5)
+    if(d != -5.0f)
         cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -3 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product v(1,2).u(2,-1) = -3" << endl;
@@ -433,7 +505,7 @@ void test_Vector2D(void)
 
     d = vector_product(u,v);
 
-    if(d != 5)
+    if(d != 5.0f)
         cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 3 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product u(2,-1).v(1,2) = 3" << endl;
@@ -441,7 +513,7 @@ void test_Vector2D(void)
 
     d = vector_product(z,z);
 
-    if(d != 0)
+    if(d != 0.0f)
         cerr << "FAILURE - vector product z.z (z is a null vector) expected: 0 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product z.z = 0" << endl;
@@ -455,26 +527,23 @@ void test_collisionSeg(void)
     LX_Point A,B,C,D,E,F;
     bool d;
 
-    A.x = 5;
-    A.y = 5;
-
-    B.x = 10;
-    B.y = 10;
-
-    C.x = 5;
-    C.y = 10;
-
-    D.x = 10;
-    D.y = 5;
-
-    E.x = 20;
-    E.y = 5;
-
-    F.x = 15;
-    F.y = 5;
+    A.x =  5; A.y =  5;
+    B.x = 10; B.y = 10;
+    C.x =  5; C.y = 10;
+    D.x = 10; D.y =  5;
+    E.x = 20; E.y =  5;
+    F.x = 15; F.y =  5;
 
     cout << " = TEST Collision Segment = " << endl;
 
+    cout << "INFO - A(" << A.x << "," << A.y << ")" << endl
+         << "INFO - B(" << B.x << "," << B.y << ")" << endl
+         << "INFO - C(" << C.x << "," << C.y << ")" << endl
+         << "INFO - D(" << D.x << "," << D.y << ")" << endl
+         << "INFO - E(" << E.x << "," << E.y << ")" << endl
+         << "INFO - F(" << F.x << "," << F.y << ")" << endl;
+
+    cout << "INFO - collision segement [AB]/[CD]" << endl;
     d = intersectSegment(A,B,C,D);
 
     if(d != true)
@@ -482,7 +551,7 @@ void test_collisionSeg(void)
     else
         cout << "SUCCESS - intersect [AB]/[CD] OK" << endl;
 
-
+    cout << "INFO - collision segement [AC]/[BD]" << endl;
     d = intersectSegment(A,C,B,D);
 
     if(d != false)
@@ -490,7 +559,7 @@ void test_collisionSeg(void)
     else
         cout << "SUCCESS - no intersect [AC]/[BD] OK" << endl;
 
-
+    cout << "INFO - collision segement [AB]/[AD]" << endl;
     d = intersectSegment(A,B,A,D);
 
     if(d != true)
@@ -498,7 +567,7 @@ void test_collisionSeg(void)
     else
         cout << "SUCCESS - intersect [AB]/[AD] OK" << endl;
 
-
+    cout << "INFO - collision segement [AD]/[AE]" << endl;
     d = intersectSegment(A,D,A,E);
 
     if(d != true)
@@ -506,7 +575,7 @@ void test_collisionSeg(void)
     else
         cout << "SUCCESS - intersect [AD]/[AE] OK" << endl;
 
-
+    cout << "INFO - collision segement [AD]/[FE]" << endl;
     d = intersectSegment(A,D,F,E);
 
     if(d != true)
@@ -533,7 +602,6 @@ void test_collisionPointPolygon(void)
     LX_Point R = {1024,2048};
     LX_Point S = {2,2};
 
-
     poly.addPoint(10,5);
     poly.addPoint(10,10);
     poly.addPoint(5,5);
@@ -542,6 +610,27 @@ void test_collisionPointPolygon(void)
 
     cout << " = TEST Collision Point/Polygon = " << endl;
 
+    {
+        cout << "INFO - poly {";
+        const unsigned int n = poly.numberOfRealEdges();
+        for(unsigned int i = 0; i < n; i++)
+        {
+            cout << "(" << (poly.getPoint(i)).x << ","
+                 << (poly.getPoint(i)).y << ")";
+            if(i != n)
+                cout << ";";
+        }
+        cout << "}" << endl;
+    }
+
+    cout << "INFO - A(" << N.x << "," << N.y << ")" << endl
+         << "INFO - B(" << O.x << "," << O.y << ")" << endl
+         << "INFO - C(" << P.x << "," << P.y << ")" << endl
+         << "INFO - D(" << Q.x << "," << Q.y << ")" << endl
+         << "INFO - E(" << R.x << "," << R.y << ")" << endl
+         << "INFO - F(" << S.x << "," << S.y << ")" << endl;
+
+    cout << "INFO - collision Point N/Polygon" << endl;
     bool d = collisionPointPoly(N,poly);
 
     if(d != false)
@@ -549,6 +638,7 @@ void test_collisionPointPolygon(void)
     else
         cout << "SUCCESS - N not in the polygon OK" << endl;
 
+    cout << "INFO - collision Point O/Polygon" << endl;
     d = collisionPointPoly(O,poly);
 
     if(d != true)
@@ -556,6 +646,7 @@ void test_collisionPointPolygon(void)
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
+    cout << "INFO - collision Point P/Polygon" << endl;
     d = collisionPointPoly(P,poly);
 
     if(d != true)
@@ -563,7 +654,7 @@ void test_collisionPointPolygon(void)
     else
         cout << "SUCCESS - P in the polygon OK" << endl;
 
-
+    cout << "INFO - collision Point Q/Polygon" << endl;
     d = collisionPointPoly(Q,poly);
 
     if(d != true)
@@ -571,7 +662,7 @@ void test_collisionPointPolygon(void)
     else
         cout << "SUCCESS - Q in the polygon OK" << endl;
 
-
+    cout << "INFO - collision Point R/Polygon" << endl;
     d = collisionPointPoly(R,poly);
 
     if(d != false)
@@ -579,14 +670,13 @@ void test_collisionPointPolygon(void)
     else
         cout << "SUCCESS - R not in the polygon OK" << endl;
 
-
+    cout << "INFO - collision Point S/Polygon" << endl;
     d = collisionPointPoly(S,poly);
 
     if(d != false)
         cerr << "FAILURE - S in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - S not in the polygon OK" << endl;
-
 }
 
 
@@ -596,8 +686,6 @@ void test_collisionCirclePolygon(void)
     LX_Circle N(LX_Point(12,7),2);
     LX_Circle O(LX_Point(9,7),10);
     LX_Circle S(LX_Point(2,2),2);
-
-    bool d;
     LX_Polygon poly(5);
 
     poly.addPoint(10,5);
@@ -608,14 +696,37 @@ void test_collisionCirclePolygon(void)
 
     cout << " = TEST Collision Circle/Polygon = " << endl;
 
-    d = collisionCirclePoly(M,poly);
+    cout << "INFO - circle M {(" << M.center.x << "," << M.center.x << "),"
+         << M.radius << "}" << "" << endl
+         << "INFO - circle N {(" << N.center.x << "," << N.center.x << "),"
+         << N.radius << "}" << "" << endl
+         << "INFO - circle O {(" << O.center.x << "," << N.center.x << "),"
+         << O.radius << "}" << "" << endl
+         << "INFO - circle S {(" << S.center.x << "," << S.center.x << "),"
+         << S.radius << "}" << "" << endl;
+
+    {
+        cout << "INFO - poly {";
+        const unsigned int n = poly.numberOfRealEdges();
+        for(unsigned int i = 0; i < n; i++)
+        {
+            cout << "(" << (poly.getPoint(i)).x << ","
+                 << (poly.getPoint(i)).y << ")";
+            if(i != n)
+                cout << ";";
+        }
+        cout << "}" << endl;
+    }
+
+    cout << "INFO - collision Circle M/Polygon" << endl;
+    bool d = collisionCirclePoly(M,poly);
 
     if(d != false)
         cerr << "FAILURE - M in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - M not in the polygon OK" << endl;
 
-
+    cout << "INFO - collision Point S/Polygon" << endl;
     d = collisionCirclePoly(S,poly);
 
     if(d != false)
@@ -623,7 +734,7 @@ void test_collisionCirclePolygon(void)
     else
         cout << "SUCCESS - S not in the polygon OK" << endl;
 
-
+    cout << "INFO - collision Point N/Polygon" << endl;
     d = collisionCirclePoly(N,poly);
 
     if(d != true)
@@ -631,7 +742,7 @@ void test_collisionCirclePolygon(void)
     else
         cout << "SUCCESS - N in the polygon OK" << endl;
 
-
+    cout << "INFO - collision Point O/Polygon" << endl;
     d = collisionCirclePoly(O,poly);
 
     if(d != true)
@@ -645,8 +756,8 @@ void test_collisionCirclePolygon(void)
 
 void test_collisionRectPolygon(void)
 {
-    bool d;
     LX_AABB R1,R2,R3,R4,R5;
+    LX_Polygon poly(5);
 
     R1 = {1,1,2,2};
     R2 = {8,3,10,4};
@@ -654,18 +765,37 @@ void test_collisionRectPolygon(void)
     R4 = {8,6,1,1};
     R5 = {2,0,16,16};
 
-    LX_Polygon poly(5);
-
     poly.addPoint(10,5);
     poly.addPoint(10,10);
     poly.addPoint(5,5);
     poly.addPoint(7,2);
     poly.addPoint(6,5);
 
-
     cout << " = TEST Collision Rect/Polygon = " << endl;
 
-    d = collisionRectPoly(R1,poly);
+    cout << "INFO - R1{(" << R1.x << "," << R1.y << "),"
+         << R1.w << "," << R1.h << "}" << endl
+         << "INFO - R2{(" << R2.x << "," << R1.y << "),"
+         << R2.w << "," << R2.h << "}" << endl
+         << "INFO - R3{(" << R3.x << "," << R1.y << "),"
+         << R3.w << "," << R3.h << "}" << endl
+         << "INFO - R4{(" << R4.x << "," << R1.y << "),"
+         << R4.w << "," << R4.h << "}" << endl;
+
+    {
+        cout << "INFO - poly {";
+        const unsigned int n = poly.numberOfRealEdges();
+        for(unsigned int i = 0; i < n; i++)
+        {
+            cout << "(" << (poly.getPoint(i)).x << ","
+                 << (poly.getPoint(i)).y << ")";
+            if(i != n)
+                cout << ";";
+        }
+        cout << "}" << endl;
+    }
+
+    bool d = collisionRectPoly(R1,poly);
 
     if(d != false)
         cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ;Got: TRUE" << endl;
@@ -713,7 +843,6 @@ void test_collisionRectPolygon(void)
 
 void test_collision2Polygon(void)
 {
-    bool d;
     LX_Polygon poly(5);
     LX_Polygon poly2(5);
     LX_Polygon poly3(3);
@@ -739,10 +868,18 @@ void test_collision2Polygon(void)
     poly4.addPoint(2,3);
     poly4.addPoint(3,4);
 
-
     cout << " = TEST Collision Polygon/Polygon = " << endl;
 
-    d = collisionPoly(poly,poly2);
+    cout << "INFO - poly" << endl;
+    displayPoly(poly);
+    cout << "INFO - poly2" << endl;
+    displayPoly(poly2);
+    cout << "INFO - poly3" << endl;
+    displayPoly(poly3);
+    cout << "INFO - poly4" << endl;
+    displayPoly(poly4);
+
+    bool d = collisionPoly(poly,poly2);
 
     if(d != true)
         cerr << "FAILURE - no collision poly/poly2. expected: TRUE ;Got: FALSE" << endl;
@@ -777,8 +914,8 @@ void test_move(void)
     LX_AABB R = {8,4,10,10};
 
     cout << "INFO - Point P(" << P.x << "," << P.y << ")" << endl;
-    cout << "INFO - Rectangle R(" << R.x << "," << R.y << ","<< R.w << "," << R.h << ")" << endl;
-
+    cout << "INFO - Rectangle R(" << R.x << "," << R.y << ","<< R.w << ","
+         << R.h << ")" << endl;
 
     cout << "INFO - Point" << endl;
 
@@ -790,7 +927,6 @@ void test_move(void)
     else
         cout << "FAILURE - expected : Point P(2,3)"
              << "Got : (" << P.x << "," << P.y << ")" << endl;
-
 
     cout << "INFO - Rectangle" << endl;
 
@@ -804,7 +940,6 @@ void test_move(void)
         cout << "FAILURE - expected : Rectangle R(3,6,10,10)"
              << "Got : (" << R.x << "," << R.y << ","
              << R.w << "," << R.h << ")" << endl;
-
 
     cout << " = END TEST = " << endl;
 }
@@ -846,8 +981,7 @@ void test_assignment(void)
              << ") radius : " << D.radius << "; square radius : " << D.square_radius
              << endl;
 
-
-    LX_Vector2D v = {3.14,1.59};
+    LX_Vector2D v = {3.14f,1.59f};
 
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
 
@@ -869,11 +1003,11 @@ void test_operator(void)
     LX_Circle E(LX_Point(4,9),32);
     LX_Circle F(LX_Point(8,21),10);
 
-    LX_Vector2D v = {-3.14,1.59};
+    LX_Vector2D v = {-3.14f,1.59f};
     LX_Vector2D u = v;
-    LX_Vector2D w = {3.14,1.59};
-    LX_Vector2D i = {2.56,1.59};
-    LX_Vector2D j = {-0.14,-1.28};
+    LX_Vector2D w = {3.14f,1.59f};
+    LX_Vector2D i = {2.56f,1.59f};
+    LX_Vector2D j = {-0.14f,-1.28f};
 
     cout << " = TEST operators = " << endl;
 
@@ -886,7 +1020,6 @@ void test_operator(void)
     cout << "INFO - Circle F - Center(" << F.center.x << "," << F.center.y
          << ") radius : " << F.radius << "; square radius : " << F.square_radius
          << endl;
-
 
     if(E > C)
         cout << "SUCCESS - E is greater than C" << endl;
@@ -935,7 +1068,6 @@ void test_operator(void)
     else
         cerr << "FAILURE - E is C" << endl;
 
-
     cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
     cout << "INFO - Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
@@ -979,14 +1111,13 @@ void test_operator(void)
 void test_VectorPlusMinusOp(void)
 {
     LX_Vector2D w;
+    LX_Vector2D u = {3.14f,1.59f};
+    LX_Vector2D v = {-1.28f,5.12f};
+    LX_Vector2D z = {-2.56f,10.24f};
 
-    LX_Vector2D u = {3.14,1.59};
-    LX_Vector2D v = {-1.28,5.12};
-    LX_Vector2D z = {-2.56,10.24};
-
-    LX_Vector2D a = {3.14,2.048};
-    LX_Vector2D b = {1.28,0.64};
-    LX_Vector2D c = {-2.56,10.24};
+    LX_Vector2D a = {3.14f,2.048f};
+    LX_Vector2D b = {1.28f,0.64f};
+    LX_Vector2D c = {-2.56f,10.24f};
     LX_Vector2D d;
 
     LX_Vector2D exp_sum_vec = {u.vx + v.vx , u.vy + v.vy};
@@ -1075,7 +1206,7 @@ void test_VectorOpposite(void)
 {
     cout << " = TEST Vector Opposite = " << endl;
 
-    LX_Vector2D u = {3.14,-2.56};
+    LX_Vector2D u = {3.14f,-2.56f};
     LX_Vector2D expected_vec = {-u.vx,-u.vy};
 
     cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
@@ -1098,7 +1229,7 @@ void test_VectorIncDec(void)
 {
     cout << " = TEST Vector Increment and decrement = " << endl;
 
-    LX_Vector2D u = {1.41,-5.92};
+    LX_Vector2D u = {1.41f,-5.92f};
     LX_Vector2D v = u;
     LX_Vector2D exp_inc_pre_vec = {u.vx + 1,u.vy + 1};
     LX_Vector2D exp_inc_post_vec = {u.vx + 1,u.vy + 1};
@@ -1136,7 +1267,7 @@ void test_VectorIncDec(void)
              << "," << exp_inc_post_vec.vy << "); "
              << "Got v(" << v.vx << "," << v.vy << "); " << endl;
 
-    u = {1.41,-5.92};
+    u = {1.41f,-5.92f};
     v = u;
 
     cout << "INFO - Decrement" << endl;
@@ -1178,11 +1309,11 @@ void test_VectorCollinear(void)
 {
     cout << " = TEST Vector collinearity = " << endl;
 
-    LX_Vector2D u = {1.41,-2.48};
+    LX_Vector2D u = {1.41f,-2.48f};
     LX_Vector2D v = {u.vx *2,u.vy *2};
     LX_Vector2D w = u;
-    LX_Vector2D o = {0.0,0.0};
-    LX_Vector2D t = {2.01,4.12};
+    LX_Vector2D o = {0.0f,0.0f};
+    LX_Vector2D t = {2.01f,4.12f};
 
     cout << "INFO - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
@@ -1313,13 +1444,16 @@ void test_VectorLambda(void)
     cout << " = END TEST = " << endl;
 }
 
-
-
-
-
-
-
-
-
-
-
+void displayPoly(LX_Polygon& poly)
+{
+    cout << "INFO - {";
+    const unsigned int n = poly.numberOfRealEdges();
+    for(unsigned int i = 0; i < n; i++)
+    {
+        cout << "(" << (poly.getPoint(i)).x << ","
+             << (poly.getPoint(i)).y << ")";
+        if(i != n)
+            cout << ";";
+    }
+    cout << "}" << endl;
+}

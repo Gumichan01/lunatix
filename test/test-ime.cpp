@@ -1,7 +1,6 @@
 
 #include <LunatiX/Lunatix_engine.hpp>
 
-
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 {
     LX_Win::LX_Window& w;
@@ -10,7 +9,7 @@ class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
-    : LX_Text::LX_RedrawCallback(), w(win), font(SDL_Color{255,255,255,0}){}
+     : LX_Text::LX_RedrawCallback(), w(win), font(SDL_Color{255,255,255,0}) {}
 
     void operator ()(UTF8string& u8str)
     {
