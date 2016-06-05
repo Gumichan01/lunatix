@@ -532,6 +532,7 @@ test-window test-system test-ttf test-particle test-file
 ifeq ($(DEBUG),yes)
 	@./test/test.sh
 endif
+	@make clean -j 1
 	@echo "INFO - Test finished"
 
 test-init : $(OBJ_FILES) test-init.o
