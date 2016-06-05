@@ -664,6 +664,6 @@ cleanlib:
 	@echo "Delete libraries"
 	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
-clear : cleandoc cleanlib clean-test clean
+clear : cleandoc cleanlib clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
