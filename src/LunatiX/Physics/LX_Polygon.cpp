@@ -285,7 +285,7 @@ void LX_Polygon::convexity(void)
                     }
                     break;
 
-                default :
+                case NONE :
                     break;
             }
         }

@@ -11,7 +11,6 @@
 *	luxon.jean.pierre@gmail.com
 */
 
-
 #include <cstdlib>
 #include <ctime>
 
@@ -30,7 +29,6 @@
 namespace LX_Random
 {
 
-
 /**
 *   @fn void initRand(void)
 *
@@ -40,11 +38,7 @@ namespace LX_Random
 */
 void initRand(void)
 {
-// Warning in thisfunction. Not imortant ! Ignore it !
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
     srand(time(nullptr));
-#pragma clang diagnostic pop
 }
 
 
@@ -78,7 +72,6 @@ uint64_t xorshiftRand(void)
 }
 
 
-
 /**
 *   @fn int crand(void)
 *
@@ -95,4 +88,3 @@ int crand(void)
 }
 
 };
-

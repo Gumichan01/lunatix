@@ -28,11 +28,9 @@
 #define LX_WHITE_COLOR 255              /**< The white color value */
 #define LX_BLACK_COLOR 0                /**< The black color value */
 
-
 struct SDL_Surface;
 struct SDL_Texture;
 struct SDL_Color;
-
 
 namespace LX_Win
 {
@@ -41,14 +39,12 @@ class LX_Window;
 
 };
 
-
 namespace LX_FileIO
 {
 
 class LX_FileBuffer;
 
 };
-
 
 
 /**
@@ -131,4 +127,3 @@ public:
 };
 
 #endif // LX_TTF_H_INCLUDED
-

@@ -88,9 +88,6 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 }
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wfloat-equal"
-
 /**
 *   @fn bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
 *
@@ -109,8 +106,6 @@ bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
             && (u.vx == v.vx && u.vy == v.vy);
 }
 
-
-#pragma clang diagnostic pop
 
 /**
 *   @fn bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v)
@@ -215,8 +210,6 @@ LX_Vector2D operator -(LX_Vector2D& v)
 }
 
 
-
-
 /**
 *   @fn LX_Vector2D& operator ++(LX_Vector2D& v)
 *
@@ -236,9 +229,6 @@ LX_Vector2D& operator ++(LX_Vector2D& v)
 }
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-parameter"
-
 /**
 *   @fn LX_Vector2D operator ++(LX_Vector2D& v,int d)
 *
@@ -257,8 +247,6 @@ LX_Vector2D operator ++(LX_Vector2D& v,int d)
 
     return t;
 }
-
-#pragma clang diagnostic pop
 
 
 /**
@@ -280,9 +268,6 @@ LX_Vector2D& operator --(LX_Vector2D& v)
 }
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-parameter"
-
 /**
 *   @fn LX_Vector2D operator --(LX_Vector2D& v,int d)
 *
@@ -301,8 +286,6 @@ LX_Vector2D operator --(LX_Vector2D& v,int d)
 
     return t;
 }
-
-#pragma clang diagnostic pop
 
 
 /**
@@ -355,9 +338,6 @@ float vector_norm(const LX_Vector2D& v)
 }
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wfloat-equal"
-
 /**
 *   @fn bool isNullVector(const LX_Vector2D& v)
 *
@@ -372,8 +352,6 @@ bool isNullVector(const LX_Vector2D& v)
 {
     return v.vx == 0.0f && v.vy == 0.0f;
 }
-
-#pragma clang diagnostic pop
 
 
 /**

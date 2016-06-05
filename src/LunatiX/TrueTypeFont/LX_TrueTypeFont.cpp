@@ -33,7 +33,6 @@ using namespace LX_FileIO;
 namespace LX_TrueTypeFont
 {
 
-
 /**
 *
 *   @fn LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
@@ -78,7 +77,6 @@ LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
 
     createbuffer();
 }
-
 
 
 /**
@@ -203,7 +201,6 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
     ttf = nullptr;
     return sz;
 }
-
 
 
 /*
@@ -402,11 +399,6 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
     if(ttf == nullptr)
         return loaded;
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wcovered-switch-default"
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunreachable-code"
-
     // Select the text to draw
     switch(type)
     {
@@ -421,13 +413,7 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
         case LX_TTF_BLENDED :
             loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),font_color);
             break;
-
-        default :   // All cases are dealt so this block is unreachable
-            break;
     }
-
-#pragma clang diagnostic pop
-#pragma clang diagnostic pop
 
     TTF_CloseFont(ttf);
     return loaded;
@@ -536,4 +522,3 @@ void LX_Font::setColor(SDL_Color *color)
 }
 
 };
-
