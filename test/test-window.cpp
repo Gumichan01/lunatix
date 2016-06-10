@@ -21,7 +21,6 @@ LX_Win::LX_WindowInfo info;
 
 int main(int argc, char **argv)
 {
-    cout << endl << " ==== Test Rendering ==== " << endl;
     LX_Win::LX_Window *w = nullptr;
 
     bool err = LX_Init();
@@ -32,6 +31,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Log::setDebugMode();
+    LX_Log::log(" ==== Test Rendering ==== ");
     LX_loadWindowConfig(info);
     info.title = "Hello #1";
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
@@ -47,8 +47,7 @@ int main(int argc, char **argv)
     delete win;
     LX_Quit();
 
-    cout << " ==== END Rendering ==== " << endl << endl;
-
+    LX_Log::log(" ==== END rendering ==== ");
     return EXIT_SUCCESS;
 }
 
@@ -73,7 +72,7 @@ void test_window1(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the renderer is ready" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -109,7 +108,7 @@ void test_window2(void)
     else
         cout << "SUCCESS - height " << h << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
     SDL_Delay(750);
 }
 
@@ -189,7 +188,7 @@ void test_surface(void)
     SDL_Delay(1000);
     win3.clearWindow();
     SDL_FreeSurface(sf);
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -254,7 +253,7 @@ void test_rendering(LX_Win::LX_Window *win)
     SDL_Delay(500);
     win->clearWindow();
     SDL_DestroyTexture(st);
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -303,7 +302,7 @@ void test_winManager(LX_Win::LX_Window *win)
     SDL_Delay(1000);
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
     LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -322,7 +321,7 @@ void test_winInfo(LX_Win::LX_Window *win)
         cerr << "FAILURE - expected : " << winInfoToString(info)
              << "got : " << winInfoToString(info_g) << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 string winInfoToString(LX_Win::LX_WindowInfo &winfo)

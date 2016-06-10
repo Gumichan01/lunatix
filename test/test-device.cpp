@@ -16,8 +16,6 @@ void test_haptic(void);
 int main(int argc, char **argv)
 {
     Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
-
-    cout << endl << " ==== Test Device ==== " << endl;
     bool err = LX_Init();
 
     if(!err)
@@ -26,6 +24,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Log::setDebugMode();
+    LX_Log::log(" ==== Test Device ==== ");
 
     if(SDL_WasInit(flag) != flag)
         cerr << "FAILURE - The device subsystem has not been initialized" << endl;
@@ -39,14 +38,14 @@ int main(int argc, char **argv)
     test_haptic();
     LX_Quit();
 
-    cout << " ==== END Test Device ==== " << endl << endl;
+    LX_Log::log(" ==== END Test Device ==== ");
     return EXIT_SUCCESS;
 }
 
 
 void test_gamepad(void)
 {
-    cout << " == Test Gamepad == " << endl;
+    LX_Log::log(" == Test Gamepad == ");
 
     {
         LX_Gamepad gp;
@@ -64,7 +63,7 @@ void test_gamepad(void)
             }
         }
     }
-    cout << "  == End Test == " << endl;
+    LX_Log::log(" == END TEST == ");
 }
 
 
@@ -73,8 +72,7 @@ void test_haptic(void)
     LX_Haptic haptic;
     SDL_HapticEffect effect;
 
-    cout << "  == Test Haptic == " << endl;
-
+    LX_Log::log(" == Test Haptic == ");
     memset(&effect,0,sizeof(SDL_HapticEffect));
 
     if(haptic.isOpened())
@@ -110,5 +108,5 @@ void test_haptic(void)
     else
         cout << "INFO - No haptic device" << endl;
 
-    cout << "  == End Test == " << endl;
+    LX_Log::log(" == END TEST == ");
 }

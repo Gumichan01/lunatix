@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
     LX_Log::setDebugMode();
-    cout << endl << " ==== Test Init ==== " << endl;
+    LX_Log::log(" ==== Test Init ==== ");
     bool err = LX_Init();
 
     if(!err)
@@ -17,6 +17,6 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Quit();
-    cout << " ==== END Test Init ==== " << endl << endl;
+    LX_Log::log(" ==== END Test Init ==== \n");
     return EXIT_SUCCESS;
 }

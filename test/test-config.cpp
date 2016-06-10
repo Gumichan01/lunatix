@@ -18,8 +18,6 @@ int main(int argc, char **argv)
 {
     LX_Configuration *configuration = nullptr;
     LX_Configuration *configuration2 = nullptr;
-
-    cout << endl << " ==== Test Config ==== " << endl;
     bool err = LX_Init();
 
     if(!err)
@@ -28,6 +26,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine was initialized with success" << endl;
 
     LX_Log::setDebugMode();
+    LX_Log::log(" ==== Test Config ==== ");
     configuration  = LX_Configuration::getInstance();
     configuration2 = LX_Configuration::getInstance();
 
@@ -65,7 +64,7 @@ int main(int argc, char **argv)
               << "fullscreen : " << boolState(f) << std::endl;
 
     LX_Quit();
-    cout << " ==== END Test Config ==== " << endl << endl;
+    LX_Log::log(" ==== END Test Config ==== \n");
 
     return EXIT_SUCCESS;
 }

@@ -126,7 +126,6 @@ int main()
     LX_Win::LX_Window *w = nullptr;
     Uint32 begin_time;
 
-    cout << endl << " ==== Test Particle ==== " << endl;
     bool err = LX_Init();
 
     if(!err)
@@ -136,6 +135,7 @@ int main()
              << endl;
 
     LX_Log::setDebugMode();
+    LX_Log::log(" ==== Test Particle ==== \n");
     w = new LX_Win::LX_Window("Test particle",LX_WINDOW_RENDERING);
     LX_Win::LX_WindowManager::getInstance()->addWindow(w);
 
@@ -190,6 +190,6 @@ int main()
     delete w;
     LX_Quit();
 
-    cout << " ==== End Particle ==== " << endl << endl;
+    LX_Log::log(" ==== END Particle ==== \n");
     return EXIT_SUCCESS;
 }

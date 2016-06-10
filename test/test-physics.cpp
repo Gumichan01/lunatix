@@ -37,8 +37,6 @@ void displayPoly(LX_Polygon& poly);
 
 int main(int argc, char **argv)
 {
-    cout << endl << " ==== Test Physics ==== " << endl;
-
     bool err = LX_Init();
 
     if(!err)
@@ -47,6 +45,8 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Log::setDebugMode();
+    LX_Log::log(" ==== Test Physics ==== \n");
+
     test_euclide();
     test_collisionPointCircle();
     test_collisionPointRect();
@@ -74,8 +74,7 @@ int main(int argc, char **argv)
     test_VectorLambda();
 
     LX_Quit();
-    cout << " ==== END Physics ==== " << endl << endl;
-
+    LX_Log::log(" ==== END Physics ==== \n");
     return EXIT_SUCCESS;
 }
 
@@ -129,7 +128,7 @@ void test_euclide(void)
     else
         cout << "SUCCESS - Good distance CD : " << d << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -183,7 +182,7 @@ void test_collisionPointCircle(void)
     else
         cout << "SUCCESS - collision, the point is not in the circle"<< endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -219,7 +218,7 @@ void test_collisionPointRect(void)
     else
         cout << "SUCCESS - point into the rect " << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -262,7 +261,7 @@ void test_collision2Circle(void)
     else
         cout << "SUCCESS - no collision between two circles A and C " << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -307,7 +306,7 @@ void test_collision2Rect(void)
     else
         cout << "SUCCESS - no collision R3/R1 OK " << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -355,7 +354,7 @@ void test_collisionRectCircle(void)
     else
         cout << "SUCCESS - no collision C/R1 OK " << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -444,7 +443,7 @@ void testPolygon(void)
     else
         cout << "SUCCESS - Added (6,3). This is not a convex polygon" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -519,7 +518,7 @@ void test_Vector2D(void)
     else
         cout << "SUCCESS - vector product z.z = 0" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -584,7 +583,7 @@ void test_collisionSeg(void)
     else
         cout << "SUCCESS - no intersect [AD]/[FE] OK" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -751,7 +750,7 @@ void test_collisionCirclePolygon(void)
     else
         cout << "SUCCESS - O in the polygon OK" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -839,7 +838,7 @@ void test_collisionRectPolygon(void)
         cout << "SUCCESS - polygon into R5 OK" << endl;
 
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 void test_collision2Polygon(void)
@@ -903,7 +902,7 @@ void test_collision2Polygon(void)
     else
         cout << "SUCCESS - no collision poly/poly4 OK" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -942,7 +941,7 @@ void test_move(void)
              << "Got : (" << R.x << "," << R.y << ","
              << R.w << "," << R.h << ")" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -994,7 +993,7 @@ void test_assignment(void)
         cerr << "FAILURE - expected : Vector2D u(3.14,1.59); "
              << "Got : u(" << u.vx << "," << u.vy << ")" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -1105,7 +1104,7 @@ void test_operator(void)
              << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
 
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -1199,7 +1198,7 @@ void test_VectorPlusMinusOp(void)
              << "Got a(" << a.vx << "," << a.vy << "); " << endl;
 
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -1222,7 +1221,7 @@ void test_VectorOpposite(void)
              << "," << expected_vec.vy << "); "
              << "Got -u(" << (-u).vx << "," << (-u).vy << "); " << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -1302,7 +1301,7 @@ void test_VectorIncDec(void)
              << "," << exp_dec_post_vec.vy << "); "
              << "Got v(" << v.vx << "," << v.vy << "); " << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -1378,7 +1377,7 @@ void test_VectorCollinear(void)
              << "t(" << t.vx << "," << t.vy << "); " << endl;
 
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -1442,7 +1441,7 @@ void test_VectorLambda(void)
     else
         cerr << "FAILURE - a zero vector must be normalized to 0" << endl;
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 void displayPoly(LX_Polygon& poly)

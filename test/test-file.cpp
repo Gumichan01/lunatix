@@ -27,7 +27,6 @@ namespace
 
 int main()
 {
-    cout << endl << " ==== Test File ==== " << endl;
     bool err = LX_Init();
 
     if(!err)
@@ -36,6 +35,7 @@ int main()
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Log::setDebugMode();
+    LX_Log::log(" ==== Test File ==== ");
     test_open();
     test_write();
     test_read();
@@ -47,7 +47,7 @@ int main()
     test_getChunk();
 
     remove(str.c_str());
-    cout << " ==== End File ==== " << endl << endl;
+    LX_Log::log(" ==== End File ==== ");
     return EXIT_SUCCESS;
 }
 
@@ -61,7 +61,7 @@ void test_open(void)
     // valid file
     try
     {
-        cout << "INFO - test open " << str1 << " ..." << endl;
+        LX_Log::log("INFO - test open %s ...", str1);
         f1 = new LX_File(str1,LX_FILEIO_RDONLY);
         cout << "SUCCESS - The following file was loaded : " << str1 << endl;
         f1->close();
@@ -77,7 +77,7 @@ void test_open(void)
     // null string
     try
     {
-        cout << "INFO - test open nullptr ..." << endl;
+        LX_Log::log("INFO - test open nullptr ... ");
         const char * null = nullptr;
         LX_File *invalid_str = new LX_File(null,LX_FILEIO_RDONLY);
 
@@ -94,7 +94,7 @@ void test_open(void)
     // bad mode
     try
     {
-        cout << "INFO - test open " << str1 << " with invalid flag..." << endl;
+        LX_Log::log("INFO - test open %s with invalid flag...", str1    );
         f1 = new LX_File(str1,0x00000000);
 
         cerr << "FAILURE - mode was not set (o_o); Expected : "
@@ -112,7 +112,7 @@ void test_open(void)
 
     try
     {
-        cout << "INFO - test open " << str3 << " that does not exist..." << endl;
+        LX_Log::log("INFO - test open %s that does not exist...", str3);
         LX_File *not_exist_file = new LX_File(str3,LX_FILEIO_RDONLY);
 
         cout << "FAILURE - An invalid file was loaded (o_o); Expected : "
@@ -125,13 +125,13 @@ void test_open(void)
              << ioe.what() << endl;
     }
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 
 }
 
 void test_read(void)
 {
-    cout << " = TEST read = " << endl;
+    LX_Log::log("INFO - test read ...");
 
     size_t read_data = 0;
     char buf[N + 1];
@@ -153,15 +153,13 @@ void test_read(void)
     }
 
     f.close();
-
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
 void test_read2(void)
 {
-    cout << " = TEST read2 = " << endl;
-
+    LX_Log::log(" = TEST read2 = ");
     const char * strex = "data/bullet.png";
 
     Sint64 beg, end;
@@ -200,13 +198,13 @@ void test_read2(void)
     delete [] buff;
     f.close();
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
 void test_write(void)
 {
-    cout << " = TEST write = " << endl;
+    LX_Log::log(" = TEST write = ");
 
     size_t read_data = 0;
     char buf[N];
@@ -237,13 +235,13 @@ void test_write(void)
              << str << endl;
 
     f.close();
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
 void test_tellSeek(void)
 {
-    cout << " = TEST tellSeek = " << endl;
+    LX_Log::log(" = TEST tellSeek = ");
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
@@ -271,13 +269,13 @@ void test_tellSeek(void)
         cout << "SUCCESS - seek position : 3 " << endl;
 
     f.close();
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
 void test_getSurface(void)
 {
-    cout << " = TEST getSurface = " << endl;
+    LX_Log::log(" = TEST getSurface = ");
 
     string str_ex = "data/bullet.png";
     SDL_Surface * surface = nullptr;
@@ -315,13 +313,13 @@ void test_getSurface(void)
     }
 
     f.close();
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
 void test_buffer(void)
 {
-    cout << " = TEST Buffer = " << endl;
+    LX_Log::log(" = TEST Buffer = ");
 
     try
     {
@@ -355,8 +353,7 @@ void test_buffer(void)
              << "; Expected : a valid refence; Got : " << e.what() << endl;
     }
 
-    cout << " = END TEST = " << endl;
-
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -365,7 +362,7 @@ void test_getSurface2(void)
     LX_FileBuffer f("data/bullet.png");
     SDL_Surface * surface = nullptr;
 
-    cout << " = TEST Surface from buffer = " << endl;
+    LX_Log::log(" = TEST Surface from buffer = ");
     surface = f.getSurfaceFromBuffer();
 
     if(surface == nullptr)
@@ -391,7 +388,7 @@ void test_getSurface2(void)
         SDL_FreeSurface(surface);
     }
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -400,6 +397,7 @@ void test_getChunk(void)
     Mix_Chunk * mix = nullptr;
     LX_Mixer::LX_Chunk * lxmix = nullptr;
 
+    LX_Log::log(" = TEST Chunk from buffer = ");
     cout << " = TEST Chunk from buffer = " << endl;
     cout << "INFO - Open \"data/explosion.wav\" ..." << endl;
     LX_FileBuffer f("data/explosion.wav");
@@ -441,5 +439,5 @@ void test_getChunk(void)
         delete lxmix;
     }
 
-    cout << " = END TEST = " << endl;
+    LX_Log::log(" = END TEST = ");
 }
