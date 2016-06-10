@@ -18,15 +18,51 @@
 *
 */
 
+#include <ctime>
 #include <cstdarg>
+#include <cstdlib>
+#include <string>
 #include <LunatiX/LX_Log.hpp>
+
 
 namespace LX_Log
 {
 
 //  Private field in the namespace
 static bool debug_mode = false;
+std::string getDate();
 
+// TODO Get the current date/hour is ISO-6801 format
+
+std::string getDate()
+{
+    const size_t sz = 256;
+    char datestr[sz] = {'\0'};
+    const time_t t = time(nullptr);
+
+    if(t == -1)
+    {
+        // This error must not happen
+        perror("time(nullptr)");
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
+                     "Internal error ↑ Cannot get the time");
+        abort();
+    }
+
+    const struct tm *tmp = localtime(&t);
+
+    if(tmp == nullptr)
+    {
+        // This error must not happen
+        perror("localtime(const time_t *t)");
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
+                     "Internal error - ↑ Cannot get the local time");
+        abort();
+    }
+
+    strftime(datestr,sz,"[%Y-%m-%d %H:%M:%S] ",tmp);
+    return std::string(datestr);
+}
 
 /**
 *   @fn bool isDebugMode(void)
@@ -134,7 +170,8 @@ void logVerbose(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(category,SDL_LOG_PRIORITY_VERBOSE,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_VERBOSE,str.c_str(),args);
     va_end(args);
 }
 
@@ -145,7 +182,8 @@ void logDebug(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(category,SDL_LOG_PRIORITY_DEBUG,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_DEBUG,str.c_str(),args);
     va_end(args);
 }
 
@@ -156,7 +194,8 @@ void logInfo(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(category,SDL_LOG_PRIORITY_INFO,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_INFO,str.c_str(),args);
     va_end(args);
 }
 
@@ -167,7 +206,8 @@ void logWarning(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(category,SDL_LOG_PRIORITY_WARN,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_WARN,str.c_str(),args);
     va_end(args);
 }
 
@@ -178,7 +218,8 @@ void logError(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(category,SDL_LOG_PRIORITY_ERROR,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_ERROR,str.c_str(),args);
     va_end(args);
 }
 
@@ -189,7 +230,8 @@ void logCritical(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(category,SDL_LOG_PRIORITY_CRITICAL,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(category,SDL_LOG_PRIORITY_CRITICAL,str.c_str(),args);
     va_end(args);
 }
 
@@ -200,35 +242,9 @@ void log(char *format,...)
 {
     va_list args;
     va_start(args,format);
-    SDL_LogMessageV(LX_LOG_APPLICATION,SDL_LOG_PRIORITY_INFO,format,args);
+    std::string str = getDate() + format;
+    SDL_LogMessageV(LX_LOG_APPLICATION,SDL_LOG_PRIORITY_INFO,str.c_str(),args);
     va_end(args);
 }
 
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
