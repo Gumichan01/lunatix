@@ -32,8 +32,6 @@ namespace LX_Log
 static bool debug_mode = false;
 std::string getDate();
 
-// TODO Get the current date/hour is ISO-6801 format
-
 std::string getDate()
 {
     const size_t sz = 256;

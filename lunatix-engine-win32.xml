@@ -89,6 +89,7 @@
 		<Unit filename="include/LunatiX/LX_Random.hpp" />
 		<Unit filename="include/LunatiX/LX_Sound.hpp" />
 		<Unit filename="include/LunatiX/LX_SystemInfo.hpp" />
+		<Unit filename="include/LunatiX/LX_Text.hpp" />
 		<Unit filename="include/LunatiX/LX_TrueTypeFont.hpp" />
 		<Unit filename="include/LunatiX/LX_Vector2D.hpp" />
 		<Unit filename="include/LunatiX/LX_Version.hpp" />
@@ -119,7 +120,10 @@
 		<Unit filename="src/LunatiX/Random/LX_Random.cpp" />
 		<Unit filename="src/LunatiX/System/LX_Log.cpp" />
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
+		<Unit filename="src/LunatiX/Text/LX_Text.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
+		<Unit filename="src/LunatiX/Utilities/utf8_iterator.cpp" />
+		<Unit filename="src/LunatiX/Utilities/utf8_string.cpp" />
 		<Unit filename="src/LunatiX/Version/LX_Version.cpp" />
 		<Unit filename="src/main.cpp">
 			<Option target="Debug" />

@@ -24,6 +24,8 @@
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_Random.hpp>
+#include <cmath>
 
 static const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
@@ -402,8 +404,8 @@ bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
     const int v = 10000;
     const unsigned int n = poly.numberOfEdges();
 
-    I.x = v + rand()%100;
-    I.y = v + rand()%100;
+    I.x = v + LX_Random::crand100();
+    I.y = v + LX_Random::crand100();
 
     for(unsigned int i = 0; i < n; i++)
     {
