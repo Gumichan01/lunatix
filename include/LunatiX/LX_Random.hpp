@@ -23,22 +23,6 @@
 */
 
 
-#include <cinttypes>
-
-// If UINT64_C was defined, we undefine it
-#ifdef UINT64_C
-#undef UINT64_C
-#endif
-
-// This macro expands to integer constants
-#ifdef _MSC_VER
-typedef unsigned __int64 uint64_t;
-#define UINT64_C(val) (val##ui64)
-#else
-#define UINT64_C(val) (val##ULL)
-#endif
-
-
 /**
 *	@namespace LX_Random
 *	@brief The Random Number Generator (RNG) module
