@@ -53,8 +53,6 @@ void initRand(void);
 uint64_t xorshiftRand(void);
 int crand(void);
 
-};
-
 
 /**
 *   @fn uint64_t xorshiftRand100(void)
@@ -82,6 +80,8 @@ inline int crand100(void)
 {
     return LX_Random::crand()%100;
 }
+
+};
 
 #endif // LX_RANDOM_HPP_INCLUDED
 
