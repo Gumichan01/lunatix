@@ -23,7 +23,7 @@ lunatix-demo
 
 # Others
 *~
-result-test-lunatix-*.log
+*.log
 win-*
 html/
 *Doxyfile*
