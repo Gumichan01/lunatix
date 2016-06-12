@@ -527,7 +527,7 @@ $(UTILS_I_PATH)utf8_iterator.hpp $(UTILS_I_PATH)utf8_string.hpp
 ##########
 
 test : lua-script test-init test-config test-device test-physics \
-test-window test-system test-ttf test-particle test-file
+test-window test-system test-ttf test-particle test-file test-ime
 	@echo "INFO - Test launch"
 ifeq ($(DEBUG),yes)
 	@./test/test.sh
