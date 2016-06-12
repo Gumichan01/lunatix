@@ -616,6 +616,7 @@ test-particle.o : $(TEST_PATH)test-particle.cpp
 
 
 test-file : $(OBJ_FILES) test-file.o
+	@make lua-script
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
@@ -626,6 +627,7 @@ test-file.o : $(TEST_PATH)test-file.cpp
 
 
 test-ime : $(OBJ_FILES) test-ime.o
+	@make lua-script
 	@echo $@" - Linking "
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
 
