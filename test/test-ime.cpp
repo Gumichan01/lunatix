@@ -1,5 +1,6 @@
 
 #include <LunatiX/Lunatix_engine.hpp>
+#include <cstring>
 
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 {
@@ -32,6 +33,44 @@ public:
     ~FuncDraw() = default;
 };
 
+void generateInput()
+{
+    SDL_Event event;
+    event.type = SDL_TEXTINPUT;
+    strcpy(event.text.text,"hello world!");
+    SDL_PushEvent(&event);
+
+    event.type = SDL_KEYDOWN;
+    event.key.keysym.sym = SDLK_BACKSPACE;
+
+    // Remove 6 characters
+    for(int i = 0; i < 6; i++)
+    {
+        SDL_PushEvent(&event);
+    }
+
+    // Add "がんばつて"
+    event.type = SDL_TEXTINPUT;
+    strcpy(event.text.text,"がんばつて");
+    SDL_PushEvent(&event);
+
+    // Add "øþŋł"
+    event.type = SDL_TEXTINPUT;
+    strcpy(event.text.text,"øþŋł");
+    SDL_PushEvent(&event);
+
+    event.type = SDL_KEYDOWN;
+    event.key.keysym.sym = SDLK_BACKSPACE;
+
+    for(int i = 0; i < 16; i++)
+    {
+        SDL_PushEvent(&event);
+    }
+
+    event.type = SDL_KEYDOWN;
+    event.key.keysym.sym = SDLK_ESCAPE;
+    SDL_PushEvent(&event);
+}
 
 int main(int argc, char** argv)
 {
@@ -48,6 +87,7 @@ int main(int argc, char** argv)
         // Text input
         {
             FuncDraw callbck(win);
+            generateInput();            // Automatic input
             LX_Text::LX_TextInput input;
             input.eventLoop(callbck);
         }
