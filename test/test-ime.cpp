@@ -54,8 +54,11 @@ void generateInput()
     strcpy(event.text.text,"がんばつて");
     SDL_PushEvent(&event);
 
+    // Add an invalid string
+    strcpy(event.text.text,"\255");
+    SDL_PushEvent(&event);
+
     // Add "øþŋł"
-    event.type = SDL_TEXTINPUT;
     strcpy(event.text.text,"øþŋł");
     SDL_PushEvent(&event);
 
