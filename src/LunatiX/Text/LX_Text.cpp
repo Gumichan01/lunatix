@@ -102,7 +102,8 @@ void LX_TextInput::textInput(SDL_Event& ev)
         return;
 
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                       "New input : %s",ev.text.text);
+                       "New input : %s of length %d",
+                       ev.text.text,strlen(ev.text.text));
 
     std::string s = ev.text.text;
 
@@ -121,7 +122,8 @@ void LX_TextInput::textInput(SDL_Event& ev)
 
 void LX_TextInput::textEdit(SDL_Event& ev)
 {
-    /// TODO textEdit
+    /// NOTE How do I deal with that?
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
 }
 
 
