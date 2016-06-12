@@ -105,12 +105,9 @@ void LX_TextInput::textInput(SDL_Event& ev)
                        "New input : %s of length %d",
                        ev.text.text,strlen(ev.text.text));
 
-    std::string s = ev.text.text;
-
-
     try
     {
-        u8text += s;
+        u8text += ev.text.text;
     }
     catch(...)
     {
