@@ -20,6 +20,7 @@ touch ${LOG_TMP_FILE}; chmod 600 ${LOG_TMP_FILE}
 ./test-window 2>&1 | tee -a ${LOG_TMP_FILE}
 ./test-ttf 2>&1 | tee -a ${LOG_TMP_FILE}
 ./test-particle 2>&1 | tee -a ${LOG_TMP_FILE}
+./test-ime 2>&1 | tee -a ${LOG_TMP_FILE}
 
 # Rate of success
 NB_OK=`grep ${SUCCESS_TAG} ${LOG_TMP_FILE} | wc -l | tr -s ' ' | cut -d ' ' -f1`
@@ -36,4 +37,3 @@ fi
 
 rm -f win-*.png
 rm ${LOG_TMP_FILE}
-
