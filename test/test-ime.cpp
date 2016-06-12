@@ -77,14 +77,15 @@ void generateInput()
 
 int main(int argc, char** argv)
 {
-    LX_Log::setDebugMode(true);
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_initWindowInfo(info);
     LX_Win::LX_loadWindowConfig(info);
 
     LX_Init();
+    LX_Log::setDebugMode(true);
+    LX_Log::log(" ==== TEST the text input ==== ");
 
-    {
+    try{
         LX_Win::LX_Window win(info);
 
         // Text input
@@ -94,8 +95,15 @@ int main(int argc, char** argv)
             LX_Text::LX_TextInput input;
             input.eventLoop(callbck);
         }
+
+        LX_Log::log("SUCCESS - The input text module is well-implemented!");
+    }catch(...)
+    {
+        LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_TEST,
+                         "FAILURE - Unexpected exception!");
     }
 
+    LX_Log::log(" ==== END TEST ==== ");
     LX_Quit();
-    return 0;
+    return EXIT_SUCCESS;
 }
