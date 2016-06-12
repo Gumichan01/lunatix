@@ -103,7 +103,7 @@ int main(int argc, char** argv)
                          "FAILURE - Unexpected exception!");
     }
 
-    LX_Log::log(" ==== END TEST ==== ");
+    LX_Log::log(" ==== END TEST ==== \n");
     LX_Quit();
     return EXIT_SUCCESS;
 }
