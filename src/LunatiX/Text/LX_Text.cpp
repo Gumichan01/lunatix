@@ -95,23 +95,6 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
     }
 }
 
-// Safely remove the last character (UTF-8 codepoint) of the string
-void LX_TextInput::utf8Pop()
-{
-    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                       "Remove the last codepoint (utf8 character)");
-
-    try
-    {
-        u8text.utf8_pop();
-    }
-    catch(...)
-    {
-        LX_Log::logWarning(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                           "Empty UTF-8 string: cannot remove the character");
-    }
-}
-
 
 void LX_TextInput::textInput(SDL_Event& ev)
 {
@@ -139,6 +122,24 @@ void LX_TextInput::textInput(SDL_Event& ev)
 void LX_TextInput::textEdit(SDL_Event& ev)
 {
     /// TODO textEdit
+}
+
+
+// Safely remove the last character (UTF-8 codepoint) of the string
+void LX_TextInput::utf8Pop()
+{
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                       "Remove the last codepoint (utf8 character)");
+
+    try
+    {
+        u8text.utf8_pop();
+    }
+    catch(...)
+    {
+        LX_Log::logWarning(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                           "Empty UTF-8 string: cannot remove the character");
+    }
 }
 
 
