@@ -47,7 +47,7 @@ LX_RedrawCallback::~LX_RedrawCallback() {}
 LX_TextInput::LX_TextInput()
     : done(false)
 {
-    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Star the input.");
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Start the input.");
     SDL_StartTextInput();
 }
 
