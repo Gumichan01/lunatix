@@ -47,6 +47,7 @@ LX_RedrawCallback::~LX_RedrawCallback() {}
 LX_TextInput::LX_TextInput()
     : done(false)
 {
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Star the input.");
     SDL_StartTextInput();
 }
 
@@ -94,6 +95,9 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
 // Safely remove the last character (UTF-8 codepoint) of the string
 void LX_TextInput::utf8Pop()
 {
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                       "Remove the last codepoint (utf8 character)");
+
     try
     {
         u8text.utf8_pop();
@@ -111,7 +115,11 @@ void LX_TextInput::textInput(SDL_Event& ev)
     if(ev.text.text[0] == '\0' || isEndofLine(ev.text.text))
         return;
 
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                       "New input : %s",ev.text.text);
+
     std::string s = ev.text.text;
+
 
     try
     {
@@ -127,6 +135,7 @@ void LX_TextInput::textInput(SDL_Event& ev)
 
 LX_TextInput::~LX_TextInput()
 {
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"End of input.");
     SDL_StopTextInput();
 }
 
