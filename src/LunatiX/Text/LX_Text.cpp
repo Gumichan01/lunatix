@@ -74,9 +74,10 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 
                 default : break;
             }
+
+            redraw(u8text);
         }
 
-        redraw(u8text);
         SDL_Delay(DELAY);
     }
 }
@@ -102,7 +103,7 @@ void LX_TextInput::textInput(SDL_Event& ev)
         return;
 
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                       "New input : %s of length %d",
+                       "New input : '%s' of length (in bytes) %d",
                        ev.text.text,strlen(ev.text.text));
 
     try
@@ -111,8 +112,9 @@ void LX_TextInput::textInput(SDL_Event& ev)
     }
     catch(...)
     {
-        LX_Log::logWarning(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                           "Invalid UTF-8 string: %s",ev.text.text);
+        LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Invalid UTF-8 string: %s", ev.text.text);
+        u8text.utf8_pop();
     }
 }
 
@@ -136,8 +138,8 @@ void LX_TextInput::utf8Pop()
     }
     catch(...)
     {
-        LX_Log::logWarning(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                           "Empty UTF-8 string: cannot remove the character");
+        LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Empty UTF-8 string: cannot remove the character");
     }
 }
 
