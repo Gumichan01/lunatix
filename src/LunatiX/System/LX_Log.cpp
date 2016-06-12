@@ -180,7 +180,7 @@ void logDebug(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    std::string str = getDate() + format;
+    std::string str = "   " +  getDate() + format;
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_DEBUG,str.c_str(),args);
     va_end(args);
 }
@@ -192,7 +192,7 @@ void logInfo(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    std::string str = getDate() + format;
+    std::string str = "    " + getDate() + format;
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_INFO,str.c_str(),args);
     va_end(args);
 }
@@ -204,7 +204,7 @@ void logWarning(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    std::string str = getDate() + format;
+    std::string str = "    " + getDate() + format;
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_WARN,str.c_str(),args);
     va_end(args);
 }
@@ -216,7 +216,7 @@ void logError(LX_CATEGORY category,char *format,...)
 {
     va_list args;
     va_start(args,format);
-    std::string str = getDate() + format;
+    std::string str = "   " + getDate() + format;
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_ERROR,str.c_str(),args);
     va_end(args);
 }
@@ -240,7 +240,7 @@ void log(char *format,...)
 {
     va_list args;
     va_start(args,format);
-    std::string str = getDate() + format;
+    std::string str = "    " + getDate() + format;
     SDL_LogMessageV(LX_LOG_APPLICATION,SDL_LOG_PRIORITY_INFO,str.c_str(),args);
     va_end(args);
 }
