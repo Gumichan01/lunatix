@@ -48,6 +48,7 @@ class LX_TextInput
 
     void keyboardInput(SDL_Event& ev);
     void textInput(SDL_Event& ev);
+    void textEdit(SDL_Event& ev);
     void utf8Pop();
 
 public:

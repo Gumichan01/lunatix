@@ -63,11 +63,14 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
         {
             switch(ev.type)
             {
-                case SDL_KEYDOWN  : keyboardInput(ev);
-                                    break;
-;
-                case SDL_TEXTINPUT: textInput(ev);
-                                    break;
+                case SDL_KEYDOWN    : keyboardInput(ev);
+                                      break;
+
+                case SDL_TEXTINPUT  : textInput(ev);
+                                      break;
+
+                case SDL_TEXTEDITING: textEdit(ev);
+                                      break;
 
                 default : break;
             }
@@ -130,6 +133,12 @@ void LX_TextInput::textInput(SDL_Event& ev)
         LX_Log::logWarning(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                            "Invalid UTF-8 string: %s",ev.text.text);
     }
+}
+
+
+void LX_TextInput::textEdit(SDL_Event& ev)
+{
+    /// TODO textEdit
 }
 
 
