@@ -7,7 +7,6 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Init ==== ");
     bool err = LX_Init();
 
