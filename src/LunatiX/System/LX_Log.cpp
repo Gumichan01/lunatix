@@ -21,6 +21,8 @@
 #include <ctime>
 #include <cstdarg>
 #include <cstdlib>
+#include <cerrno>
+#include <cstring>
 #include <string>
 #include <LunatiX/LX_Log.hpp>
 
@@ -41,9 +43,9 @@ std::string getDate()
     if(t == -1)
     {
         // This error must not happen
-        perror("time(nullptr)");
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
-                     "Internal error ↑ Cannot get the time");
+        SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
+                        "Internal error - Cannot get the time: %s",
+                        strerror(errno));
         abort();
     }
 
@@ -52,9 +54,9 @@ std::string getDate()
     if(tmp == nullptr)
     {
         // This error must not happen
-        perror("localtime(const time_t *t)");
-        SDL_LogError(SDL_LOG_CATEGORY_ERROR,
-                     "Internal error - ↑ Cannot get the local time");
+        SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
+                        "Internal error - Cannot get the local time: %s",
+                        strerror(errno));
         abort();
     }
 
