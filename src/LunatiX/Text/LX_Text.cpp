@@ -21,6 +21,7 @@
 #include <LunatiX/LX_Text.hpp>
 #include <LunatiX/LX_Log.hpp>
 
+#include <cstring>
 #include <string>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_events.h>
@@ -123,6 +124,8 @@ void LX_TextInput::textEdit(SDL_Event& ev)
 {
     /// NOTE How do I deal with that?
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
+    LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
+                     ev.edit.text);
 }
 
 
