@@ -14,7 +14,7 @@ SUCCESS_TAG="SUCCESS";
 FAILURE_TAG="FAILURE";
 
 touch ${LOG_TMP_FILE} && chmod 600 ${LOG_TMP_FILE}
-echo "============================= Begin Report ============================" \
+echo "\n============================= Begin Report ============================\n\n" \
 | tee -a ${LOG_TMP_FILE}
 ./test-init 2>&1     | tee -a ${LOG_TMP_FILE}
 ./test-config 2>&1   | tee -a ${LOG_TMP_FILE}
@@ -32,10 +32,10 @@ NB_OK=`grep ${SUCCESS_TAG} ${LOG_TMP_FILE} | wc -l | tr -s ' ' | cut -d ' ' -f1`
 NB_KO=`grep ${FAILURE_TAG} ${LOG_TMP_FILE} | wc -l | tr -s ' ' | cut -d ' ' -f1`
 NB_TESTS=`expr ${NB_OK} + ${NB_KO}`
 
-echo "============================= Test report =============================" \
+echo "\n============================= Test report =============================" \
 | tee -a ${LOG_TMP_FILE}
 echo "Success: "${NB_OK}"/"${NB_TESTS} | tee -a ${LOG_TMP_FILE}
-echo "============================= End report ==============================" \
+echo "============================= End report ==============================\n" \
 | tee -a ${LOG_TMP_FILE}
 
 # Get the log file
