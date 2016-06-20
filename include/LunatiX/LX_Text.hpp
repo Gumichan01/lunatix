@@ -51,7 +51,8 @@ class LX_TextInput
     void textInput(SDL_Event& ev);
     void textEdit(SDL_Event& ev);
     void utf8Pop();
-    void removeCodepoint();
+    void backslashKey();
+    void deleteKey();
 
 public:
 

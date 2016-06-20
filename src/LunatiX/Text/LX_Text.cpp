@@ -93,8 +93,11 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
         case SDLK_ESCAPE:       done = true;
                                 break;
 
-        case SDLK_BACKSPACE:    removeCodepoint();
+        case SDLK_BACKSPACE:    backslashKey();
                                 if(cursor > 0) {cursor -= 1;}
+                                break;
+
+        case SDLK_DELETE:       deleteKey();
                                 break;
 
         case SDLK_LEFT:         if(cursor > 0) {cursor -= 1;}
@@ -148,14 +151,13 @@ void LX_TextInput::textInput(SDL_Event& ev)
 
 void LX_TextInput::textEdit(SDL_Event& ev)
 {
-    /// NOTE How do I deal with that?
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
                      ev.edit.text);
 }
 
 
-void LX_TextInput::removeCodepoint()
+void LX_TextInput::backslashKey()
 {
     if(cursor == u8text.utf8_length())
     {
@@ -163,12 +165,37 @@ void LX_TextInput::removeCodepoint()
     }
     else if(cursor > 0)
     {
-        LX_Log::log("Remove the following at %d: %s",cursor-1,
-                    u8text.utf8_at(cursor-1).c_str());
+        LX_Log::log("Backslash key - Remove the following codepoint at %d: %s",
+                    cursor-1, u8text.utf8_at(cursor-1).c_str());
+
         UTF8string rtmp = u8text.utf8_substr(cursor);
         UTF8string ltmp = u8text.utf8_substr(0,cursor-1);
         u8text = ltmp + rtmp;
     }
+}
+
+void LX_TextInput::deleteKey()
+{
+    const size_t u8len = u8text.utf8_length();
+
+    if(cursor < u8len)
+    {
+        LX_Log::log("Delete key - Remove the following codepoint at %d: %s",
+                    cursor, u8text.utf8_at(cursor).c_str());
+    }
+
+    if(cursor > 0 && cursor < u8len)
+    {
+        UTF8string rtmp = u8text.utf8_substr(cursor + 1);
+        UTF8string ltmp = u8text.utf8_substr(0,cursor);
+        u8text = ltmp + rtmp;
+    }
+    else if(cursor == 0)
+    {
+        u8text = u8text.utf8_substr(cursor + 1);
+    }
+    else if(cursor == u8len - 1)
+        utf8Pop();
 }
 
 
