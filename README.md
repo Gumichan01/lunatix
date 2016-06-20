@@ -35,7 +35,7 @@ the library reference on my [website] (http://gumichan01.kappatau.fr/reference/l
 ### On Windows ###
 
 First of all, download the stable [development and runtime libraries]
-(http://gumichan01.kappatau.fr/download/luna-devel-0.7.2-mingw.zip) (v0.7.2)
+(https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.7.2) (v0.7.2)
 It includes the library files and all necessary materials to develop any project.
 You must include them in the root directory of the project you are working on.
 
