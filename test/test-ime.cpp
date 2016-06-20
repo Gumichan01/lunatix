@@ -63,6 +63,21 @@ void generateInput()
     SDL_PushEvent(&event);
 
     event.type = SDL_KEYDOWN;
+    event.key.keysym.sym = SDLK_LEFT;
+    SDL_PushEvent(&event);
+    SDL_PushEvent(&event);
+
+    event.type = SDL_TEXTINPUT;
+    strcpy(event.text.text," がんばつて Gumichan01 ");
+    SDL_PushEvent(&event);
+
+    event.type = SDL_KEYDOWN;
+    event.key.keysym.sym = SDLK_DELETE;
+    SDL_PushEvent(&event);
+    SDL_PushEvent(&event);
+    SDL_PushEvent(&event);
+
+    event.type = SDL_KEYDOWN;
     event.key.keysym.sym = SDLK_BACKSPACE;
 
     for(int i = 0; i < 16; i++)
@@ -91,7 +106,7 @@ int main(int argc, char** argv)
         // Text input
         {
             FuncDraw callbck(win);
-            //generateInput();            // Automatic input
+            generateInput();            // Automatic input
             LX_Text::LX_TextInput input;
             input.eventLoop(callbck);
         }
