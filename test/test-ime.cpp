@@ -80,14 +80,15 @@ void generateInput()
     event.type = SDL_KEYDOWN;
     event.key.keysym.sym = SDLK_BACKSPACE;
 
-    for(int i = 0; i < 16; i++)
+    for(int i = 0; i < 12; i++)
     {
         SDL_PushEvent(&event);
     }
 
-    event.type = SDL_KEYDOWN;
-    event.key.keysym.sym = SDLK_ESCAPE;
-    SDL_PushEvent(&event);
+    SDL_Event nev;
+    nev.type = SDL_KEYDOWN;
+    nev.key.keysym.sym = SDLK_ESCAPE;
+    SDL_PushEvent(&nev);
 }
 
 int main(int argc, char** argv)
