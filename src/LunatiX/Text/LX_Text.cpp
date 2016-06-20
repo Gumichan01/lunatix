@@ -76,6 +76,8 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
                 default : break;
             }
 
+            LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"new text : %s",
+                             u8text.utf8_str());
             redraw(u8text,cursor);
         }
 
@@ -108,7 +110,8 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
     }
 
     if(oldcursor != cursor)
-        LX_Log::log("Input - cursor at %d",cursor);
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Input - cursor at %d",cursor);
 }
 
 
@@ -124,27 +127,27 @@ void LX_TextInput::textInput(SDL_Event& ev)
     try
     {
         const size_t u8len = u8text.utf8_length();
+        UTF8string ntext(ev.text.text);
 
         if(cursor == u8len)
         {
-            u8text += ev.text.text;
+            u8text += ntext;
         }
         else
         {
-            UTF8string ntext(ev.text.text);
             UTF8string rtmp = u8text.utf8_substr(cursor);
             UTF8string ltmp = u8text.utf8_substr(0,cursor);
             u8text = ltmp + ntext + rtmp;
         }
 
-        cursor += 1;
-        LX_Log::log("Input - cursor at %d",cursor);
+        cursor += ntext.utf8_length();
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Input - cursor at %d",cursor);
     }
     catch(...)
     {
         LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                          "Invalid UTF-8 string: %s", ev.text.text);
-        u8text.utf8_pop();
     }
 }
 
@@ -165,8 +168,9 @@ void LX_TextInput::backslashKey()
     }
     else if(cursor > 0)
     {
-        LX_Log::log("Backslash key - Remove the following codepoint at %d: %s",
-                    cursor-1, u8text.utf8_at(cursor-1).c_str());
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Backslash key - Remove the following codepoint at %d: %s",
+                         cursor-1, u8text.utf8_at(cursor-1).c_str());
 
         UTF8string rtmp = u8text.utf8_substr(cursor);
         UTF8string ltmp = u8text.utf8_substr(0,cursor-1);
@@ -180,8 +184,9 @@ void LX_TextInput::deleteKey()
 
     if(cursor < u8len)
     {
-        LX_Log::log("Delete key - Remove the following codepoint at %d: %s",
-                    cursor, u8text.utf8_at(cursor).c_str());
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Delete key - Remove the following codepoint at %d: %s",
+                         cursor, u8text.utf8_at(cursor).c_str());
     }
 
     if(cursor > 0 && cursor < u8len)
