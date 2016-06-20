@@ -93,7 +93,7 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
         case SDLK_ESCAPE:       done = true;
                                 break;
 
-        case SDLK_BACKSPACE:    utf8Pop();
+        case SDLK_BACKSPACE:    removeCodepoint();
                                 if(cursor > 0) {cursor -= 1;}
                                 break;
 
@@ -152,6 +152,23 @@ void LX_TextInput::textEdit(SDL_Event& ev)
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
                      ev.edit.text);
+}
+
+
+void LX_TextInput::removeCodepoint()
+{
+    if(cursor == u8text.utf8_length())
+    {
+        utf8Pop();
+    }
+    else if(cursor > 0)
+    {
+        LX_Log::log("Remove the following at %d: %s",cursor-1,
+                    u8text.utf8_at(cursor-1).c_str());
+        UTF8string rtmp = u8text.utf8_substr(cursor);
+        UTF8string ltmp = u8text.utf8_substr(0,cursor-1);
+        u8text = ltmp + rtmp;
+    }
 }
 
 
