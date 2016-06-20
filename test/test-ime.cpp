@@ -14,7 +14,6 @@ public:
 
     void operator ()(UTF8string& u8str,size_t cursor)
     {
-        LX_Log::log("cursor at %d",cursor);
         w.clearWindow();
 
         if(!u8str.utf8_empty())
