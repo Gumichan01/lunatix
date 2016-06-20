@@ -32,7 +32,7 @@ class LX_RedrawCallback
 {
 public:
     LX_RedrawCallback();
-    virtual void operator ()(UTF8string& u8str) = 0;
+    virtual void operator ()(UTF8string& u8str, size_t cursor = 0) = 0;
     virtual ~LX_RedrawCallback();
 };
 
@@ -40,6 +40,7 @@ public:
 class LX_TextInput
 {
     UTF8string u8text;
+    size_t cursor;
     bool done;
 
     LX_TextInput(LX_TextInput& t);

@@ -12,8 +12,9 @@ public:
     explicit FuncDraw(LX_Win::LX_Window& win)
      : LX_Text::LX_RedrawCallback(), w(win), font(SDL_Color{255,255,255,0}) {}
 
-    void operator ()(UTF8string& u8str)
+    void operator ()(UTF8string& u8str,size_t cursor)
     {
+        LX_Log::log("cursor at %d",cursor);
         w.clearWindow();
 
         if(!u8str.utf8_empty())
@@ -91,7 +92,7 @@ int main(int argc, char** argv)
         // Text input
         {
             FuncDraw callbck(win);
-            generateInput();            // Automatic input
+            //generateInput();            // Automatic input
             LX_Text::LX_TextInput input;
             input.eventLoop(callbck);
         }

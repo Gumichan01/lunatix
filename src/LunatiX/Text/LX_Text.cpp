@@ -46,7 +46,7 @@ LX_RedrawCallback::~LX_RedrawCallback() {}
 
 
 LX_TextInput::LX_TextInput()
-    : done(false)
+    : cursor(0),done(false)
 {
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Start the input.");
     SDL_StartTextInput();
@@ -76,7 +76,7 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
                 default : break;
             }
 
-            redraw(u8text);
+            redraw(u8text,cursor);
         }
 
         SDL_Delay(DELAY);
