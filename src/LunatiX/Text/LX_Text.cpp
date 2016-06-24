@@ -25,6 +25,7 @@
 #include <string>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_clipboard.h>
 
 namespace LX_Text
 {
@@ -83,6 +84,7 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
     }
 }
 
+
 // Handle the keyboard input
 void LX_TextInput::keyboardInput(SDL_Event& ev)
 {
@@ -104,6 +106,9 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
                                 break;
 
         case SDLK_RIGHT:        if(cursor < u8text.utf8_length()) {cursor += 1;}
+                                break;
+
+        case SDLK_v:            paste();
                                 break;
     }
 
@@ -155,6 +160,31 @@ void LX_TextInput::textEdit(SDL_Event& ev)
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
                      ev.edit.text);
+}
+
+void LX_TextInput::paste()
+{
+    static const Uint8 *KEYS = SDL_GetKeyboardState(nullptr);
+
+    if(KEYS[SDL_SCANCODE_LCTRL])
+    {
+        char *s = SDL_GetClipboardText();
+
+        try
+        {
+            UTF8string u8(s);
+            u8text += u8;
+            cursor += u8.utf8_length();
+        }
+        catch(...)
+        {
+            LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                             "Invalid UTF-8 string from the clipboard.");
+        }
+
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                         "Paste %s",s);
+    }
 }
 
 

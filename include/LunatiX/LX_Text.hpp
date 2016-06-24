@@ -47,6 +47,7 @@ class LX_TextInput
     LX_TextInput(LX_TextInput&& t);
     LX_TextInput& operator =(LX_TextInput t);
 
+    void paste();
     void keyboardInput(SDL_Event& ev);
     void textInput(SDL_Event& ev);
     void textEdit(SDL_Event& ev);
