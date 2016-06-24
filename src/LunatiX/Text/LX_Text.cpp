@@ -76,8 +76,6 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
                 default : break;
             }
 
-            LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"new text : %s",
-                             u8text.utf8_str());
             redraw(u8text,cursor);
         }
 
