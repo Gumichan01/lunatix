@@ -110,6 +110,9 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
 
         case SDLK_v:            paste();
                                 break;
+
+        case SDLK_c:            save();
+                                break;
     }
 
     if(oldcursor != cursor)
@@ -161,6 +164,30 @@ void LX_TextInput::textEdit(SDL_Event& ev)
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
                      ev.edit.text);
 }
+
+
+void LX_TextInput::save()
+{
+    static const Uint8 *KEYS = SDL_GetKeyboardState(nullptr);
+
+    if(KEYS[SDL_SCANCODE_LCTRL])
+    {
+        int err = SDL_SetClipboardText(u8text.utf8_str());
+
+        if(err == -1)
+        {
+            UTF8string s("Cannot set " + u8text + "in the clipboard" + SDL_GetError());
+            LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                             "Cannot set %s in the clipboard.",s.utf8_str());
+        }
+        else
+        {
+            LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
+                             "Copy %s into the clipboard.",u8text.utf8_str());
+        }
+    }
+}
+
 
 void LX_TextInput::paste()
 {
