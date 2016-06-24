@@ -108,6 +108,12 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
         case SDLK_RIGHT:        if(cursor < u8text.utf8_length()) {cursor += 1;}
                                 break;
 
+        case SDLK_HOME:         cursor = 0;
+                                break;
+
+        case SDLK_END:          cursor = u8text.utf8_length();
+                                break;
+
         case SDLK_v:            paste();
                                 break;
 
