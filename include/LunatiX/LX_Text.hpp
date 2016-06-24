@@ -47,7 +47,11 @@ class LX_TextInput
     LX_TextInput(LX_TextInput&& t);
     LX_TextInput& operator =(LX_TextInput t);
 
+    // Save a text in the clipboard get it from it
+    void save();
     void paste();
+
+    // Input
     void keyboardInput(SDL_Event& ev);
     void textInput(SDL_Event& ev);
     void textEdit(SDL_Event& ev);
