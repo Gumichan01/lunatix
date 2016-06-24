@@ -138,29 +138,33 @@ void LX_TextInput::textInput(SDL_Event& ev)
 
     try
     {
-        const size_t u8len = u8text.utf8_length();
         UTF8string ntext(ev.text.text);
-
-        if(cursor == u8len)
-        {
-            u8text += ntext;
-        }
-        else
-        {
-            UTF8string rtmp = u8text.utf8_substr(cursor);
-            UTF8string ltmp = u8text.utf8_substr(0,cursor);
-            u8text = ltmp + ntext + rtmp;
-        }
-
-        cursor += ntext.utf8_length();
-        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                         "Input - cursor at %d",cursor);
+        u8stringInput(ntext);
     }
     catch(...)
     {
         LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                          "Invalid UTF-8 string: %s", ev.text.text);
     }
+}
+
+
+void LX_TextInput::u8stringInput(UTF8string& ntext)
+{
+    const size_t u8len = u8text.utf8_length();
+
+    if(cursor == u8len)
+    {
+        u8text += ntext;
+    }
+    else
+    {
+        UTF8string rtmp = u8text.utf8_substr(cursor);
+        UTF8string ltmp = u8text.utf8_substr(0,cursor);
+        u8text = ltmp + ntext + rtmp;
+    }
+
+    cursor += ntext.utf8_length();
 }
 
 
@@ -218,9 +222,8 @@ void LX_TextInput::paste()
 
         try
         {
-            UTF8string u8(s);
-            u8text += u8;
-            cursor += u8.utf8_length();
+            UTF8string ntext(s);
+            u8stringInput(ntext);
         }
         catch(...)
         {
@@ -252,6 +255,7 @@ void LX_TextInput::backslashKey()
     }
 }
 
+
 void LX_TextInput::deleteKey()
 {
     const size_t u8len = u8text.utf8_length();
@@ -276,7 +280,6 @@ void LX_TextInput::deleteKey()
     else if(cursor == u8len - 1)
         utf8Pop();
 }
-
 
 // Safely remove the last character (UTF-8 codepoint) of the string
 void LX_TextInput::utf8Pop()

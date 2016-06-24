@@ -55,6 +55,9 @@ class LX_TextInput
     void keyboardInput(SDL_Event& ev);
     void textInput(SDL_Event& ev);
     void textEdit(SDL_Event& ev);
+
+    // Operation on the string
+    void u8stringInput(UTF8string& ntext);
     void utf8Pop();
     void backslashKey();
     void deleteKey();
