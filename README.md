@@ -1,6 +1,5 @@
 # LunatiX Engine #
 
-
 LunatiX Engine is a SDL2-based game engine. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
 
@@ -19,9 +18,7 @@ LunatiX Engine also contains these modules:
 - LX_VersionInfo : A module to get the version of the engine
 - LX\_SystemInfo : The System information library
 
-
 The engine works on Windows and Linux system.
-
 
 ## Contribute ##
 
@@ -31,7 +28,6 @@ the library reference on my [website] (http://gumichan01.kappatau.fr/reference/l
 
 
 ## Getting started ##
-
 ### On Windows ###
 
 First of all, download the stable [development and runtime libraries]
@@ -39,15 +35,11 @@ First of all, download the stable [development and runtime libraries]
 It includes the library files and all necessary materials to develop any project.
 You must include them in the root directory of the project you are working on.
 
-
-
 ### On a Linux system ###
 
 You just need to download the source code of the engine and build libraries.
 
-
 ### Build ###
-
 #### On Linux ####
 
 The LunatiX Engine source code is written according to the C++11 standard, and
@@ -73,20 +65,24 @@ Warning/Information:
 
 If you want to generate the engine libraries you just need
 to execute the following command:
- *$ make*
+
+    $ make
 
 These two library files are generated into the *lib/linux/* directory.
 
 To test the engine, execute the following command:
- *$ make test*
+
+    $ make test
 
 
 If you want to generate the documentation, do:
- *$ make doxy*
+
+    $ make doxy
 
 
 To use the engine into your project, copy these following directories
 into your project tree:
+
  - *config/*
  - *include/*
  - *lib/*
