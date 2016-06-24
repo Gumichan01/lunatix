@@ -195,7 +195,20 @@ void LX_TextInput::paste()
 
     if(KEYS[SDL_SCANCODE_LCTRL])
     {
+        if(!SDL_HasClipboardText())
+        {
+            LX_Log::log("Empty clipboard.");
+            return;
+        }
+
         char *s = SDL_GetClipboardText();
+
+        if(s == nullptr)
+        {
+            LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_SYSTEM,
+                             "Cannot get the string from the clipboard");
+            return;
+        }
 
         try
         {
