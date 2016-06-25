@@ -71,6 +71,13 @@ static Uint32 generateFlags(LX_Configuration &config)
     return flag;
 }
 
+/**
+*   @fn void LX_initWindowInfo(LX_WindowInfo &info)
+*
+*   Get the default configuration of window that will be created.
+*
+*   @param info The structure to fill information in
+*/
 void LX_initWindowInfo(LX_WindowInfo &info)
 {
     info.title = DEFAULT_TITLE;
@@ -83,7 +90,13 @@ void LX_initWindowInfo(LX_WindowInfo &info)
     info.accel = true;
 }
 
-
+/**
+*   @fn void LX_loadWindowConfig(LX_WindowInfo &info)
+*
+*   Get the configuration of window from the configuration file
+*
+*   @param info The structure to fill information in
+*/
 void LX_loadWindowConfig(LX_WindowInfo &info)
 {
     LX_Configuration *config = LX_Configuration::getInstance();
@@ -117,7 +130,10 @@ LX_WindowException::LX_WindowException(std::string err)
     stringError = err;
 }
 
-
+/**
+*   @fn LX_WindowException::LX_WindowException(const LX_WindowException& w)
+*   @param w Exception to copy
+*/
 LX_WindowException::LX_WindowException(const LX_WindowException& w)
 {
     stringError = w.stringError;
@@ -166,6 +182,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
 /**
 *   @fn LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
+*   @deprecated
 *
 *   Create the window setting the title and using the configuration file
 *
@@ -213,7 +230,15 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 }
 
 
-
+/**
+*   @fn LX_Window::LX_Window(LX_WindowInfo &info)
+*
+*   Create a window using information from the struture given in argument
+*
+*   @param info The structure tha contains information about the window
+*
+*   @note The structure is updated when the window is created
+*/
 LX_Window::LX_Window(LX_WindowInfo &info)
     : window(nullptr), renderer(nullptr),
       original_width(info.w), original_height(info.h), render_method(false)
@@ -227,6 +252,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 /**
 *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 *                               const Uint32 mode, Uint32 flag, bool accel)
+*   @deprecated
 *
 *   Create the window with a custom configuration
 *
@@ -619,7 +645,13 @@ bool LX_Window::screenshotUsingSurface(std::string& filename)
     return(IMG_SavePNG(sshot,filename.c_str()) == 0);
 }
 
-
+/**
+*   @fn void LX_Window::getInfo(LX_WindowInfo &info)
+*
+*   Get information of the current window
+*
+*   @param info the info the structure to fill in information
+*/
 void LX_Window::getInfo(LX_WindowInfo &info)
 {
     info.title = SDL_GetWindowTitle(window);

@@ -42,10 +42,17 @@ struct SDL_Rect;
 #define LX_WINDOW_RENDERING 0x10                                        /**< The flag to use the rendering */
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
 
-
+/**
+*   @namespace LX_Win
+*   @brief The window module
+*/
 namespace LX_Win
 {
 
+/**
+*   @struct LX_WindowInfo
+*   @brief Information about the window
+*/
 typedef struct LX_WindowInfo
 {
     std::string title;  /**< Title */
@@ -57,7 +64,7 @@ typedef struct LX_WindowInfo
     Uint32 flag;        /**< Flags */
     bool accel;         /**< Hardware acceleration */
 
-} LX_WindowInfo;
+} LX_WindowInfo;        /**< @brief The window information structure */
 
 
 void LX_initWindowInfo(LX_WindowInfo &info);
@@ -81,7 +88,6 @@ public :
     LX_WindowException(const LX_WindowException& w);
 
     const char * what() const noexcept;
-
     ~LX_WindowException() noexcept;
 };
 

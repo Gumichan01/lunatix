@@ -214,6 +214,8 @@ void LX_WindowManager::clearWindows()
 *
 *   Get a window according to its ID
 *
+*   @param id The id of the window
+*
 *   @return A reference to a LX_Window instance if it exists,
 *           a null pointer otherwise
 *
