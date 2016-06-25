@@ -53,7 +53,17 @@ LX_TextInput::LX_TextInput()
     SDL_StartTextInput();
 }
 
-
+/**
+*   @fn void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
+*
+*   Handle the event loop and the internal text input.
+*
+*   This function updates an internal string on each text input and
+*   send it to the callback function given by the user to something with that.
+*
+*   @param redraw The callback function
+*
+*/
 void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 {
     SDL_Event ev;
