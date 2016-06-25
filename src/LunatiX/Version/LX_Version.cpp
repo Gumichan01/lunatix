@@ -68,11 +68,11 @@ void LX_EngineVersion(LX_Version& version)
 }
 
 /**
-*   @fn void LX_EngineVersionString(void)
+*   @fn void LX_VersionDependencies(void)
 *
 *   Display information about the engine and its dependencies
 */
-void LX_EngineVersionString(void)
+void LX_VersionDependencies(void)
 {
     // Information about SDL2 and the LunatiX engine
     const SDL_version *img_linked = IMG_Linked_Version();

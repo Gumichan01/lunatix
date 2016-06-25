@@ -45,7 +45,7 @@ typedef struct LX_Version
 
 void LX_EngineInfo(void);
 void LX_EngineVersion(LX_Version& version);
-void LX_EngineVersionString(void);
+void LX_VersionDependencies(void);
 
 };
 
