@@ -140,7 +140,7 @@ LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
 */
 LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
     : box(b), velocity(v), lifetime(xorshiftRand()%DELAY),
-texture(nullptr), surface(nullptr)
+      texture(nullptr), surface(nullptr)
 {
     // Empty
 }

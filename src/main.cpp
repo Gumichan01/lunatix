@@ -49,9 +49,11 @@ int main()
         {
             switch(event.type)
             {
-                case SDL_QUIT : go = false;
-                                break;
-                default : break;
+                case SDL_QUIT :
+                    go = false;
+                    break;
+                default :
+                    break;
             }
         }
         SDL_Delay(33);

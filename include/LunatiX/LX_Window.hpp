@@ -110,7 +110,7 @@ class LX_Window
     LX_Window& operator =(LX_Window& w);
 
     void createWindow(std::string &title, int posX, int posY, int w, int h,
-              const Uint32 mode, Uint32 flag, bool accel = true);
+                      const Uint32 mode, Uint32 flag, bool accel = true);
 
     void createRendering(bool accel);
 

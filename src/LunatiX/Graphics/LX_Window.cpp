@@ -183,7 +183,7 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 */
 LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
     : window(nullptr), renderer(nullptr), original_width(0), original_height(0),
-    render_method(false)
+      render_method(false)
 {
     int xpos,ypos,w,h;
     Uint32 flag = 0x00000000;
@@ -216,7 +216,7 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 
 LX_Window::LX_Window(LX_WindowInfo &info)
     : window(nullptr), renderer(nullptr),
-    original_width(info.w), original_height(info.h), render_method(false)
+      original_width(info.w), original_height(info.h), render_method(false)
 {
     createWindow(info.title,info.x,info.y,info.w,info.h,info.mode,
                  info.flag,info.accel);
@@ -256,7 +256,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
                      const Uint32 mode, Uint32 flag, bool accel)
     : window(nullptr), renderer(nullptr), original_width(w),
-    original_height(h), render_method(false)
+      original_height(h), render_method(false)
 {
     createWindow(title,posX,posY,w,h,mode,flag,accel);
 }
@@ -266,7 +266,7 @@ LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 *   Initialize the window according to the configuration
 */
 void LX_Window::createWindow(std::string &title, int posX, int posY, int w, int h,
-                        const Uint32 mode, Uint32 flag, bool accel)
+                             const Uint32 mode, Uint32 flag, bool accel)
 {
     window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 
@@ -634,7 +634,7 @@ void LX_Window::getInfo(LX_WindowInfo &info)
 
         info.accel = (renderer != nullptr &&
                       (rinfo.flags&SDL_RENDERER_ACCELERATED)
-                        == SDL_RENDERER_ACCELERATED) ? true : false;
+                      == SDL_RENDERER_ACCELERATED) ? true : false;
     }
     else
     {

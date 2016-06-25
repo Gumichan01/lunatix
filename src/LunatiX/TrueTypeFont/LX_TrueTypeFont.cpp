@@ -55,7 +55,7 @@ namespace LX_TrueTypeFont
 */
 LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
     : font_str(""), font_size(size),
-    font_color(color), font_buffer(nullptr)
+      font_color(color), font_buffer(nullptr)
 {
     // Load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
@@ -119,7 +119,7 @@ LX_Font::LX_Font(std::string font_file,const SDL_Color& color)
 */
 LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size)
     : font_str(font_file), font_size(size),
-    font_color(color), font_buffer(nullptr)
+      font_color(color), font_buffer(nullptr)
 {
     createbuffer();
 }
@@ -453,7 +453,7 @@ TTF_Font * LX_Font::createInternalFont(int size)
 *
 */
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
-                                         unsigned int size, unsigned int idWindow)
+        unsigned int size, unsigned int idWindow)
 {
     LX_Win::LX_Window * target_window = nullptr;
     target_window = LX_Win::LX_WindowManager::getInstance()->getWindow(idWindow);
@@ -479,7 +479,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 *
 */
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
-                                         unsigned int size, LX_Win::LX_Window *win)
+        unsigned int size, LX_Win::LX_Window *win)
 {
     Uint8 black = 0;
     SDL_Surface *surface = nullptr;

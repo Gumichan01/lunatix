@@ -47,7 +47,7 @@ namespace LX_Physics
 *
 */
 unsigned int euclide_square_distance(const int x1, const int y1,
-                                                 const int x2, const int y2)
+                                     const int x2, const int y2)
 {
     return static_cast<unsigned int>( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
@@ -68,7 +68,7 @@ unsigned int euclide_square_distance(const int x1, const int y1,
 *
 */
 float euclide_distance(const int x1, const int y1,
-                                   const int x2, const int y2)
+                       const int x2, const int y2)
 {
     return static_cast<float>(sqrt(euclide_square_distance(x1,y1,x2,y2)));
 }
@@ -87,7 +87,7 @@ float euclide_distance(const int x1, const int y1,
 *
 */
 unsigned int euclide_square_distance(const LX_Point& p1,
-                                                 const LX_Point& p2)
+                                     const LX_Point& p2)
 {
     return euclide_square_distance(p1.x,p1.y,p2.x,p2.y);
 }
@@ -127,7 +127,7 @@ bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect)
 {
 
     if(x_pos <= rect.x || y_pos >= (rect.y + rect.h)
-       || y_pos <= rect.y || x_pos >= (rect.x + rect.w))
+            || y_pos <= rect.y || x_pos >= (rect.x + rect.w))
     {
         return false;
     }
@@ -167,7 +167,7 @@ bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 *
 */
 bool collisionPointCircle(const int x_pos, const int y_pos,
-                                      const LX_Circle& circle)
+                          const LX_Circle& circle)
 {
     return collisionPointCircle(LX_Point(x_pos,y_pos),circle);
 }
@@ -204,7 +204,7 @@ bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
 bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
 {
     if((rect1.x >= (rect2.x + rect2.w)) || (rect1.y >= (rect2.y + rect2.h))
-       || ((rect1.x + rect1.w) <= rect2.x) || ((rect1.y + rect1.h) <= rect2.y))
+            || ((rect1.x + rect1.w) <= rect2.x) || ((rect1.y + rect1.h) <= rect2.y))
     {
         return false;
     }
@@ -247,7 +247,7 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
 *
 */
 bool collisionSegCircle(const LX_Circle& circle,
-                                    const LX_Point& A, const LX_Point& B)
+                        const LX_Point& A, const LX_Point& B)
 {
     int sum;
     double t;
@@ -349,7 +349,7 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
 *
 */
 bool intersectSegLine(const LX_Point& A, const LX_Point& B,
-                                   const LX_Point& C, const LX_Point& D)
+                      const LX_Point& C, const LX_Point& D)
 {
     LX_Vector2D AC,AD,AB;
     long d;
@@ -378,7 +378,7 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
 *
 */
 bool intersectSegment(const LX_Point& A, const LX_Point& B,
-                                   const LX_Point& C, const LX_Point& D)
+                      const LX_Point& C, const LX_Point& D)
 {
     return (intersectSegLine(A,B,C,D) && intersectSegLine(C,D,A,B));
 }

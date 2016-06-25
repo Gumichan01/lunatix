@@ -33,12 +33,12 @@ namespace LX_Text
 // Anonymous
 namespace
 {
-    bool isEndofLine(char * text)
-    {
-        return text[0] == '\n' || text[0] == '\r';
-    }
+bool isEndofLine(char * text)
+{
+    return text[0] == '\n' || text[0] == '\r';
+}
 
-    Uint32 DELAY = 33;
+Uint32 DELAY = 33;
 };
 
 
@@ -65,16 +65,20 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
         {
             switch(ev.type)
             {
-                case SDL_KEYDOWN    : keyboardInput(ev);
-                                      break;
+                case SDL_KEYDOWN    :
+                    keyboardInput(ev);
+                    break;
 
-                case SDL_TEXTINPUT  : textInput(ev);
-                                      break;
+                case SDL_TEXTINPUT  :
+                    textInput(ev);
+                    break;
 
-                case SDL_TEXTEDITING: textEdit(ev);
-                                      break;
+                case SDL_TEXTEDITING:
+                    textEdit(ev);
+                    break;
 
-                default : break;
+                default :
+                    break;
             }
 
             redraw(u8text,cursor);
@@ -92,33 +96,51 @@ void LX_TextInput::keyboardInput(SDL_Event& ev)
 
     switch(ev.key.keysym.sym)
     {
-        case SDLK_ESCAPE:       done = true;
-                                break;
+        case SDLK_ESCAPE:
+            done = true;
+            break;
 
-        case SDLK_BACKSPACE:    backslashKey();
-                                if(cursor > 0) {cursor -= 1;}
-                                break;
+        case SDLK_BACKSPACE:
+            backslashKey();
+            if(cursor > 0)
+            {
+                cursor -= 1;
+            }
+            break;
 
-        case SDLK_DELETE:       deleteKey();
-                                break;
+        case SDLK_DELETE:
+            deleteKey();
+            break;
 
-        case SDLK_LEFT:         if(cursor > 0) {cursor -= 1;}
-                                break;
+        case SDLK_LEFT:
+            if(cursor > 0)
+            {
+                cursor -= 1;
+            }
+            break;
 
-        case SDLK_RIGHT:        if(cursor < u8text.utf8_length()) {cursor += 1;}
-                                break;
+        case SDLK_RIGHT:
+            if(cursor < u8text.utf8_length())
+            {
+                cursor += 1;
+            }
+            break;
 
-        case SDLK_HOME:         cursor = 0;
-                                break;
+        case SDLK_HOME:
+            cursor = 0;
+            break;
 
-        case SDLK_END:          cursor = u8text.utf8_length();
-                                break;
+        case SDLK_END:
+            cursor = u8text.utf8_length();
+            break;
 
-        case SDLK_v:            paste();
-                                break;
+        case SDLK_v:
+            paste();
+            break;
 
-        case SDLK_c:            save();
-                                break;
+        case SDLK_c:
+            save();
+            break;
     }
 
     if(oldcursor != cursor)
@@ -133,8 +155,8 @@ void LX_TextInput::textInput(SDL_Event& ev)
         return;
 
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                       "New input : '%s' of length (in bytes) %d",
-                       ev.text.text,strlen(ev.text.text));
+                     "New input : '%s' of length (in bytes) %d",
+                     ev.text.text,strlen(ev.text.text));
 
     try
     {
@@ -285,7 +307,7 @@ void LX_TextInput::deleteKey()
 void LX_TextInput::utf8Pop()
 {
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                       "Remove the last codepoint (utf8 character)");
+                     "Remove the last codepoint (utf8 character)");
 
     try
     {

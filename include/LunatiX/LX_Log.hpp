@@ -40,14 +40,15 @@ namespace LX_Log
 *   - LX_LOG_TEST        : VERBOSE level
 *   - All other          : CRITICAL level
 */
-enum LX_CATEGORY{LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
-                 LX_LOG_ERROR = SDL_LOG_CATEGORY_ERROR,
-                 LX_LOG_SYSTEM = SDL_LOG_CATEGORY_SYSTEM,
-                 LX_LOG_AUDIO = SDL_LOG_CATEGORY_AUDIO,
-                 LX_LOG_VIDEO = SDL_LOG_CATEGORY_VIDEO,
-                 LX_LOG_RENDER = SDL_LOG_CATEGORY_RENDER,
-                 LX_LOG_INPUT = SDL_LOG_CATEGORY_INPUT,
-                 LX_LOG_TEST = SDL_LOG_CATEGORY_TEST};
+enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
+                  LX_LOG_ERROR = SDL_LOG_CATEGORY_ERROR,
+                  LX_LOG_SYSTEM = SDL_LOG_CATEGORY_SYSTEM,
+                  LX_LOG_AUDIO = SDL_LOG_CATEGORY_AUDIO,
+                  LX_LOG_VIDEO = SDL_LOG_CATEGORY_VIDEO,
+                  LX_LOG_RENDER = SDL_LOG_CATEGORY_RENDER,
+                  LX_LOG_INPUT = SDL_LOG_CATEGORY_INPUT,
+                  LX_LOG_TEST = SDL_LOG_CATEGORY_TEST
+                 };
 
 bool isDebugMode(void);
 void setDebugMode(bool debug = true);

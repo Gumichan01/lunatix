@@ -80,7 +80,7 @@ LX_Haptic::LX_Haptic(int index)
 */
 LX_Haptic::LX_Haptic(SDL_Joystick *joy)
     : haptic(SDL_HapticOpenFromJoystick(joy)),
-        instanceID(SDL_JoystickInstanceID(joy))
+      instanceID(SDL_JoystickInstanceID(joy))
 {
     // Empty
 }

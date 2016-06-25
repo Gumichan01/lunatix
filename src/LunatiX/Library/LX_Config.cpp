@@ -228,7 +228,7 @@ void LX_Configuration::setFlags(void)
         string err;
 
         ss << "Error occured in LX_Configuration::setFlags : The Lua function "
-        << luaFunction << " does not exist" << std::endl;
+           << luaFunction << " does not exist" << std::endl;
         err = ss.str();
 
         LX_SetError(err.c_str());
