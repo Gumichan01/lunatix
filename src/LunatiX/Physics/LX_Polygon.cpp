@@ -34,7 +34,6 @@ namespace LX_Physics
 *   @fn LX_PolygonException::LX_PolygonException(std::string err)
 *
 *   Build the LX_PolygonException class
-*
 *   @param err The error string
 *
 */
@@ -43,7 +42,10 @@ LX_PolygonException::LX_PolygonException(std::string err)
     stringError = err;
 }
 
-
+/**
+*   @fn LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
+*   @param pex Exception
+*/
 LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
 {
     stringError = pex.stringError;
