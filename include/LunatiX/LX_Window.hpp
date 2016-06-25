@@ -48,14 +48,14 @@ namespace LX_Win
 
 typedef struct LX_WindowInfo
 {
-    std::string title;
-    int x;
-    int y;
-    int w;
-    int h;
-    Uint32 mode;    /* display mode */
-    Uint32 flag;
-    bool accel;     /* hardware acceleration */
+    std::string title;  /**< Title */
+    int x;              /**< X position */
+    int y;              /**< Y position */
+    int w;              /**< Width */
+    int h;              /**< Height */
+    Uint32 mode;        /**< Display mode */
+    Uint32 flag;        /**< Flags */
+    bool accel;         /**< Hardware acceleration */
 
 } LX_WindowInfo;
 

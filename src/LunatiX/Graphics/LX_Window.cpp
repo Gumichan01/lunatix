@@ -557,12 +557,13 @@ void LX_Window::clearRenderer(void)
 
 
 /**
-    @fn bool LX_Window::screenshot(std::string filename)
-
-    Take a screenshot and save it in a file
-
-    @return True on success, False otherwise
-
+*   @fn bool LX_Window::screenshot(std::string filename)
+*
+*   Take a screenshot and save it in a file
+*
+*   @param filename The name of the file to save the image in
+*   @return True on success, False otherwise
+*
 */
 bool LX_Window::screenshot(std::string filename)
 {
