@@ -101,7 +101,7 @@ LX_Circle::LX_Circle()
 
 
 /**
-*   @fn LX_Circle(const LX_Point& p, unsigned int rad)
+*   @fn LX_Circle::LX_Circle(const LX_Point& p, unsigned int rad)
 *
 *   Construct the circle with a point and the radius
 *
