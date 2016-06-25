@@ -176,8 +176,6 @@ static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
 *   Get the string format of the information structure
 *
 *   @param info The information structure
-*   @param str The string to fiil in
-*
 *   @return Always returns a valid string
 *
 *   @note This function never returns an invalid string

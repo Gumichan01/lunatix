@@ -463,8 +463,10 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 
 
 /**
-*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
-                                                 unsigned int size, LX_Window *win)
+*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,
+*                                                std::string text,
+*                                                unsigned int size,
+*                                                LX_Win::LX_Window *win)
 *
 *   Create a Texture from a text according to the type and the size
 *
