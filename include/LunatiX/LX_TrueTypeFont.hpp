@@ -64,7 +64,7 @@ namespace LX_TrueTypeFont
 *    - LX_TTF_BLENDED : Very slow rendering but very nice text
 *
 */
-typedef enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED} LX_TTF_TypeText;
+enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
 
 
 /**
