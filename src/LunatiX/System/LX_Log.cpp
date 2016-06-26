@@ -107,6 +107,8 @@ void setDefaultPriority(void)
 *   @fn void setVerbosePriority(LX_CATEGORY category)
 *
 *   Set the verbose priority to a log category
+*
+*   @param category
 */
 void setVerbosePriority(LX_CATEGORY category)
 {
@@ -117,6 +119,8 @@ void setVerbosePriority(LX_CATEGORY category)
 *   @fn void setDebugPriority(LX_CATEGORY category)
 *
 *   Set the debug priority to a log category
+*
+*   @param category
 */
 void setDebugPriority(LX_CATEGORY category)
 {
@@ -127,6 +131,8 @@ void setDebugPriority(LX_CATEGORY category)
 *   @fn void setInfoPriority(LX_CATEGORY category)
 *
 *   Set the info priority to a log category
+*
+*   @param category
 */
 void setInfoPriority(LX_CATEGORY category)
 {
@@ -137,6 +143,8 @@ void setInfoPriority(LX_CATEGORY category)
 *   @fn void setWarningPriority(LX_CATEGORY category)
 *
 *   Set the warning priority to a log category
+*
+*   @param category
 */
 void setWarningPriority(LX_CATEGORY category)
 {
@@ -147,6 +155,8 @@ void setWarningPriority(LX_CATEGORY category)
 *   @fn void setErrorPriority(LX_CATEGORY category)
 *
 *   Set the error priority to a log category
+*
+*   @param category
 */
 void setErrorPriority(LX_CATEGORY category)
 {
@@ -157,6 +167,8 @@ void setErrorPriority(LX_CATEGORY category)
 *   @fn void setCriticalPriority(LX_CATEGORY category)
 *
 *   Set the critical priority to a log category
+*
+*   @param category
 */
 void setCriticalPriority(LX_CATEGORY category)
 {
@@ -164,7 +176,12 @@ void setCriticalPriority(LX_CATEGORY category)
 }
 
 /**
+*   @fn void logVerbose(LX_CATEGORY category,char *format,...)
+*
 *   Log a message with the verbose priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
 */
 void logVerbose(LX_CATEGORY category,char *format,...)
 {
@@ -176,7 +193,12 @@ void logVerbose(LX_CATEGORY category,char *format,...)
 }
 
 /**
+*   @fn void logDebug(LX_CATEGORY category,char *format,...)
+*
 *   Log a message with the debug priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
 */
 void logDebug(LX_CATEGORY category,char *format,...)
 {
@@ -188,7 +210,12 @@ void logDebug(LX_CATEGORY category,char *format,...)
 }
 
 /**
+*   @fn void logInfo(LX_CATEGORY category,char *format,...)
+*
 *   Log a message with the info priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
 */
 void logInfo(LX_CATEGORY category,char *format,...)
 {
@@ -200,7 +227,12 @@ void logInfo(LX_CATEGORY category,char *format,...)
 }
 
 /**
+*   @fn void logWarning(LX_CATEGORY category,char *format,...)
+*
 *   Log a message with the warning priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
 */
 void logWarning(LX_CATEGORY category,char *format,...)
 {
@@ -212,7 +244,12 @@ void logWarning(LX_CATEGORY category,char *format,...)
 }
 
 /**
+*   @fn void logError(LX_CATEGORY category,char *format,...)
+*
 *   Log a message with the error priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
 */
 void logError(LX_CATEGORY category,char *format,...)
 {
@@ -224,7 +261,12 @@ void logError(LX_CATEGORY category,char *format,...)
 }
 
 /**
+*   @fn void logCritical(LX_CATEGORY category,char *format,...)
+*
 *   Log a message with the critical priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
 */
 void logCritical(LX_CATEGORY category,char *format,...)
 {
@@ -236,7 +278,11 @@ void logCritical(LX_CATEGORY category,char *format,...)
 }
 
 /**
+*   @fn void log(char *format,...)
+*
 *   Log a message with the info priority and the applicatiion category
+*
+*   @param format : String format
 */
 void log(char *format,...)
 {
