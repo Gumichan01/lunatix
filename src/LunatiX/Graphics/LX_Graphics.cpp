@@ -20,7 +20,6 @@
 */
 
 
-#include <string>
 #include <SDL2/SDL_image.h>
 
 #include <LunatiX/LX_Graphics.hpp>

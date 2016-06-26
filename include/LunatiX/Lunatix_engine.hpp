@@ -32,7 +32,6 @@
 #include "LX_Chunk.hpp"
 #include "LX_Music.hpp"
 #include "LX_Physics.hpp"
-#include "LX_Hitbox.hpp"
 #include "LX_Polygon.hpp"
 #include "LX_Particle.hpp"
 #include "LX_ParticleSystem.hpp"
