@@ -246,7 +246,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 
 /**
 *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
-*                               const Uint32 mode, Uint32 flag, bool accel)
+*                            const Uint32 mode, Uint32 flag, bool accel)
 *   @deprecated
 *
 *   Create the window with a custom configuration
@@ -749,6 +749,4 @@ int LX_Window::getHeight(void)
     return h;
 }
 
-
 };
-
