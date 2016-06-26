@@ -43,7 +43,14 @@ LX_MusicException::LX_MusicException(std::string err)
     stringError = err;
 }
 
-
+/**
+*   @fn LX_MusicException::LX_MusicException(const LX_MusicException& me)
+*
+*   Build the LX_MusicException class
+*
+*   @param me The exception to copy
+*
+*/
 LX_MusicException::LX_MusicException(const LX_MusicException& me)
 {
     stringError = me.stringError;

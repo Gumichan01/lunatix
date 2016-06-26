@@ -46,7 +46,14 @@ LX_ChunkException::LX_ChunkException(std::string err)
     stringError = err;
 }
 
-
+/**
+*   @fn LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
+*
+*   Build the LX_ChunkException class
+*
+*   @param me The exception to copy
+*
+*/
 LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
 {
     stringError = me.stringError;
