@@ -60,13 +60,71 @@ class LX_Particle
 public :
 
     LX_Particle(const int x , const int y, const int w, const int h);
-    LX_Particle(const LX_AABB& b);
-    LX_Particle(const int x , const int y, const int w, const int h,
-                const LX_Physics::LX_Vector2D& v);
-    LX_Particle(const int x , const int y, const int w, const int h,
-                const float vx , const float vy);
 
-    LX_Particle(const LX_AABB& b, const float vx , const float vy);
+    /**
+    *   @fn LX_Particle::LX_Particle(const LX_AABB& b)
+    *
+    *   Create the instance using an AABB
+    *
+    *   @param b The AABB that contains the coordinates, the width and the height
+    *
+    */
+    LX_Particle(const LX_AABB& b);
+
+    /**
+    *   @fn LX_Particle::LX_Particle(const int x, const int y, const int w, const int h,
+    *                                const LX_Physics::LX_Vector2D& v)
+    *
+    *   Create the instance using coordinates, width, height and the velocity as a vector
+    *
+    *   @param x The X coordinate
+    *   @param y The Y coordinate
+    *   @param w The width
+    *   @param h The height
+    *   @param v The vector that store the velocity
+    *
+    */
+    LX_Particle(const int x, const int y, const int w, const int h,
+                const LX_Physics::LX_Vector2D& v);
+
+    /**
+    *   @fn LX_Particle::LX_Particle(const int x, const int y, const int w,
+    *                                const int h, const float vx, const float vy)
+    *
+    *   Create the instance using coordinates, width, height and the velocity
+    *
+    *   @param x The X coordinate
+    *   @param y The Y coordinate
+    *   @param w The width
+    *   @param h The height
+    *   @param vx The X velocity
+    *   @param vy The Y velocity
+    *
+    */
+    LX_Particle(const int x, const int y, const int w, const int h,
+                const float vx, const float vy);
+
+    /**
+    *   @fn LX_Particle::LX_Particle(const LX_AABB& b, const float vx, const float vy)
+    *
+    *   Create the instance using an AABB and the velocity
+    *
+    *   @param b The AABB that contains the coordinates, the width and the height
+    *   @param vx The X velocity
+    *   @param vy The Y velocity
+    *
+    */
+    LX_Particle(const LX_AABB& b, const float vx, const float vy);
+
+    /**
+    *   @fn LX_Particle::LX_Particle(const LX_AABB& b, const LX_Physics::LX_Vector2D& v)
+    *
+    *   Create the instance using an AABB and the velocity
+    *
+    *   @param b The AABB that contains the coordinates, the width and the height
+    *   @param v The vector that store the velocity
+    *
+    */
     LX_Particle(const LX_AABB& b, const LX_Physics::LX_Vector2D& v);
 
     void update(void);

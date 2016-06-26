@@ -38,7 +38,7 @@ namespace LX_ParticleEngine
 
 
 /**
-*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
+*   @fn LX_Particle::LX_Particle(const int x, const int y, const int w, const int h)
 *
 *   Create the instance using coordinates, width and height
 *
@@ -48,40 +48,17 @@ namespace LX_ParticleEngine
 *   @param h The height
 *
 */
-LX_Particle::LX_Particle(const int x , const int y, const int w, const int h)
+LX_Particle::LX_Particle(const int x, const int y, const int w, const int h)
     : LX_Particle({x,y,w,h})
 {
     // Empty
 }
 
-
-/**
-*   @fn LX_Particle::LX_Particle(const LX_AABB& b)
-*
-*   Create the instance using an AABB
-*
-*   @param b The AABB that contains the coordinates, the width and the height
-*
-*/
-LX_Particle::LX_Particle(const LX_AABB& b)
-    : LX_Particle(b,0.0f,0.0f)
+LX_Particle::LX_Particle(const LX_AABB& b): LX_Particle(b,0.0f,0.0f)
 {
     // Empty
 }
 
-
-/**
-*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w, const int h, const LX_Vector2D& v)
-*
-*   Create the instance using coordinates, width, height and the velocity as a vector
-*
-*   @param x The X coordinate
-*   @param y The Y coordinate
-*   @param w The width
-*   @param h The height
-*   @param v The vector that store the velocity
-*
-*/
 LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
                          const LX_Vector2D& v)
     : LX_Particle({x,y,w,h},v)
@@ -89,21 +66,6 @@ LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
     // Empty
 }
 
-
-/**
-*   @fn LX_Particle::LX_Particle(const int x , const int y, const int w,
-*                                const int h, const float vx, const float vy)
-*
-*   Create the instance using coordinates, width, height and the velocity
-*
-*   @param x The X coordinate
-*   @param y The Y coordinate
-*   @param w The width
-*   @param h The height
-*   @param vx The X velocity
-*   @param vy The Y velocity
-*
-*/
 LX_Particle::LX_Particle(const int x , const int y, const int w,
                          const int h, const float vx , const float vy)
     : LX_Particle({x,y,w,h},LX_Vector2D(vx,vy))
@@ -111,33 +73,12 @@ LX_Particle::LX_Particle(const int x , const int y, const int w,
     // Empty
 }
 
-
-/**
-*   @fn LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
-*
-*   Create the instance using an AABB and the velocity
-*
-*   @param b The AABB that contains the coordinates, the width and the height
-*   @param vx The X velocity
-*   @param vy The Y velocity
-*
-*/
 LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
     : LX_Particle(b,LX_Vector2D(vx,vy))
 {
     // Empty
 }
 
-
-/**
-*   @fn LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
-*
-*   Create the instance using an AABB and the velocity
-*
-*   @param b The AABB that contains the coordinates, the width and the height
-*   @param v The vector that store the velocity
-*
-*/
 LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
     : box(b), velocity(v), lifetime(xorshiftRand()%DELAY),
       texture(nullptr), surface(nullptr)
@@ -150,7 +91,6 @@ LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
 *   @fn LX_Particle::~LX_Particle()
 *
 *   Destroy the instance
-*
 */
 LX_Particle::~LX_Particle()
 {
@@ -163,7 +103,6 @@ LX_Particle::~LX_Particle()
 *   @fn void LX_Particle::update(void)
 *
 *   Update the particle statement
-*
 */
 void LX_Particle::update(void)
 {
@@ -184,7 +123,6 @@ void LX_Particle::update(void)
 *   @param buffer The file buffer that contains the sprite to load
 *
 *   @return TRUE if the particle texture was created, FALSE otherwise
-*
 */
 bool LX_Particle::setTexture(LX_FileBuffer *buffer)
 {
@@ -206,7 +144,6 @@ bool LX_Particle::setTexture(LX_FileBuffer *buffer)
 *   @param buffer The file buffer that contains the sprite to load
 *
 *   @return TRUE if the particle surface was created, FALSE otherwise
-*
 */
 bool LX_Particle::setSurface(LX_FileBuffer *buffer)
 {
@@ -239,7 +176,6 @@ bool LX_Particle::isDead(void)
 *   @param vy The new Y velocity
 *
 *   @note This function is very useful to set gravity or acceleration
-*
 */
 void LX_Particle::setSpeed(const float vx,const float vy)
 {
@@ -267,7 +203,6 @@ SDL_Texture * LX_Particle::getTexture(void)
 *   Get the surface
 *
 *   @return A pointer to the surface
-*
 */
 SDL_Surface * LX_Particle::getSurface(void)
 {
@@ -281,7 +216,6 @@ SDL_Surface * LX_Particle::getSurface(void)
 *   Get the AABB
 *
 *   @return A pointer to the AABB
-*
 */
 LX_AABB LX_Particle::getAABB(void)
 {
@@ -295,7 +229,6 @@ LX_AABB LX_Particle::getAABB(void)
 *   Get the X position
 *
 *   @return The X position
-*
 */
 int LX_Particle::getX(void)
 {
@@ -309,7 +242,6 @@ int LX_Particle::getX(void)
 *   Get the Y position
 *
 *   @return The Y position
-*
 */
 int LX_Particle::getY(void)
 {
@@ -323,7 +255,6 @@ int LX_Particle::getY(void)
 *   Get the width
 *
 *   @return The width
-*
 */
 int LX_Particle::getW(void)
 {
@@ -337,7 +268,6 @@ int LX_Particle::getW(void)
 *   Get the height
 *
 *   @return The height
-*
 */
 int LX_Particle::getH(void)
 {
@@ -351,7 +281,6 @@ int LX_Particle::getH(void)
 *   Get the lifetime of the particle
 *
 *   @return The lifetime
-*
 */
 unsigned int LX_Particle::getDelay(void)
 {
