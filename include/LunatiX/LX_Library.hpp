@@ -1,7 +1,6 @@
 #ifndef LX_LIBRARY_H_INCLUDED
 #define LX_LIBRARY_H_INCLUDED
 
-
 /*
 *	Copyright (C) 2016 Luxon Jean-Pierre
 *	gumichan01.olympe.in
@@ -22,8 +21,8 @@
 */
 
 
-#define LX_GL_MAJOR_VERSION 3
-#define LX_GL_MINOR_VERSION 1
+#define LX_GL_MAJOR_VERSION 3   /**< Major version of OpenGL supported by the engine */
+#define LX_GL_MINOR_VERSION 1   /**< Minor version of OpenGL supported by the engine */
 
 bool LX_Init(void);
 void LX_Quit(void);
