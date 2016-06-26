@@ -29,18 +29,17 @@ namespace LX_FileIO
 
 /**
 *   @fn IOException::IOException(std::string err)
-*
-*   The exception constructor
-*
 *   @param err The error string
-*
 */
 IOException::IOException(std::string err)
 {
     stringError = err;
 }
 
-
+/**
+*   @fn IOException::IOException(const IOException& io)
+*   @param io The exception
+*/
 IOException::IOException(const IOException& io)
 {
     stringError = io.stringError;

@@ -66,7 +66,6 @@ public :
     IOException(const IOException& io);
 
     const char * what() const noexcept;
-
     ~IOException() noexcept;
 };
 
