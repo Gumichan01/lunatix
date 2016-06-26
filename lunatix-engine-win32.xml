@@ -96,6 +96,8 @@
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
 		<Unit filename="include/LunatiX/Lunatix_engine.hpp" />
+		<Unit filename="include/LunatiX/utils/utf8_iterator.hpp" />
+		<Unit filename="include/LunatiX/utils/utf8_string.hpp" />
 		<Unit filename="src/LunatiX/Device/LX_Device.cpp" />
 		<Unit filename="src/LunatiX/Device/LX_Gamepad.cpp" />
 		<Unit filename="src/LunatiX/Device/LX_Haptic.cpp" />
