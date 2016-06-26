@@ -1,4 +1,3 @@
-
 /*
 *
 *	Copyright (C) 2016 Luxon Jean-Pierre
@@ -11,7 +10,7 @@
 *
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/utils/utf8_iterator.hpp>
 
 
 UTF8iterator::UTF8iterator(const UTF8string& u) : index(0), data(u) {}

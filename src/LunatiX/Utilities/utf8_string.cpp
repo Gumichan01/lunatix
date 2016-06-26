@@ -104,7 +104,7 @@ const UTF8string& UTF8string::operator +=(const char * str)
     return *this;
 }
 
-
+// Check the validity of the string (utf-8 encoding)
 bool UTF8string::utf8_is_valid_() const
 {
     auto it = utf8data.begin();
@@ -200,7 +200,7 @@ bool UTF8string::utf8_is_valid_() const
     return true;
 }
 
-
+// Compute the length of the utf-8 string (in number of codepoints)
 size_t UTF8string::utf8_length_() const
 {
     auto end_data = utf8data.end();
@@ -240,7 +240,7 @@ size_t UTF8string::utf8_length_() const
     return len;
 }
 
-
+// Compute the memory size of a codepoint in the string (in byte)
 size_t UTF8string::utf8_codepoint_len_(size_t j) const
 {
     if (0xf0 == (0xf8 & utf8data[j]))
@@ -272,7 +272,10 @@ bool UTF8string::utf8_empty() const
     return utf8length == 0;
 }
 
-
+/*
+    Get the memory position of a codepoint according
+    to its position in the utf-8 string
+*/
 size_t UTF8string::utf8_bpos_at_(const size_t cpos) const
 {
     size_t bpos = 0;
@@ -315,7 +318,7 @@ void UTF8string::utf8_pop()
 }
 
 
-UTF8string UTF8string::utf8_substr(size_t pos,size_t len)
+UTF8string UTF8string::utf8_substr(size_t pos,size_t len) const
 {
     if(pos > utf8length)
         return std::string();
@@ -337,7 +340,7 @@ UTF8string UTF8string::utf8_substr(size_t pos,size_t len)
 }
 
 // This function implements the Boyer-Moore string search algorithm
-size_t UTF8string::utf8_find(const UTF8string& str, size_t pos)
+size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
 {
     if(str.utf8length == 0)
         return npos;
@@ -390,10 +393,9 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos)
     return npos;
 }
 
-
+// Terminal recursive function that reverse the string
 UTF8string UTF8string::utf8_reverse_aux_(UTF8iterator& it,
-        const UTF8iterator& end,
-        UTF8string& res)
+        const UTF8iterator& end, UTF8string& res)
 {
     if(it == end)
         return res;
@@ -428,7 +430,7 @@ const char * UTF8string::utf8_str() const
     return utf8data.c_str();
 }
 
-
+// Internal function that creates an iterator of the current string
 UTF8iterator UTF8string::utf8_iterator_() const noexcept
 {
     return UTF8iterator(*this);
