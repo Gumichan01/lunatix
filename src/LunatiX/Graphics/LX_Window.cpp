@@ -31,7 +31,6 @@
 *   Define the mask for the surface creation
 *   when the screenshot will be done
 */
-
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 #define LX_PIXEL_FORMAT SDL_PIXELFORMAT_RGBA8888
 
@@ -119,11 +118,7 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
 
 /**
 *   @fn LX_WindowException::LX_WindowException(std::string err)
-*
-*   Constructor
-*
 *   @param err The error string
-*
 */
 LX_WindowException::LX_WindowException(std::string err)
 {
