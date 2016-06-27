@@ -23,6 +23,7 @@
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
+#include <cmath>
 #include <string>
 #include <sstream>
 #include <LunatiX/LX_Log.hpp>
@@ -50,7 +51,7 @@ long getMillisTime()
 
     SYSTEMTIME st;
     GetSystemTime(&st);
-    ms = static_cast<long>(round(st.wMilliseconds / 1.0e6));
+    ms = static_cast<long>(st.wMilliseconds);
 
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 
