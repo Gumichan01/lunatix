@@ -12,7 +12,7 @@
 
 # Makefile - LunatiX Engine
 
-.PHONY: clean doxy test
+.PHONY: clean doc test
 
 
 #
@@ -643,7 +643,7 @@ test-ime.o : $(TEST_PATH)test-ime.cpp
 #                                    #
 ######################################
 
-doxy : $(DOXY_FILE)
+doc : $(DOXY_FILE)
 	@echo "Generating the doxygen file from "$<
 	@doxygen $<
 

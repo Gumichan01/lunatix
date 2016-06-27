@@ -76,7 +76,7 @@ To test the engine, execute the following command:
 
 If you want to generate the documentation, do:
 
-    $ make doxy
+    $ make doc
 
 To use the engine into your project, copy these following directories
 into your project tree:
