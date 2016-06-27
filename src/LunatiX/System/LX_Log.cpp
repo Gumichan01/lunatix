@@ -20,10 +20,8 @@
 
 #include <ctime>
 #include <cstdarg>
-#include <cstdlib>
 #include <cerrno>
 #include <cstring>
-#include <cmath>
 #include <string>
 #include <sstream>
 #include <LunatiX/LX_Log.hpp>
@@ -32,6 +30,7 @@
 #undef __WIN32__
 #define __WIN32__
 #include <Windows.h>
+#include <cmath>
 #endif
 
 namespace LX_Log
