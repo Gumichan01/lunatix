@@ -24,15 +24,44 @@
 #include <cerrno>
 #include <cstring>
 #include <string>
+#include <sstream>
 #include <LunatiX/LX_Log.hpp>
 
+#if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
+#undef __WIN32__
+#define __WIN32__
+#include <Windows.h>
+#endif
 
 namespace LX_Log
 {
 
 //  Private field in the namespace
 static bool debug_mode = false;
+long getMillisTime();
 std::string getDate();
+
+// Get the time in millisecond
+long getMillisTime()
+{
+    long ms;
+
+#if defined(__WIN32__)
+
+    SYSTEMTIME st;
+    GetSystemTime(&st);
+    ms = static_cast<long>(round(st.wMilliseconds / 1.0e6));
+
+#elif defined(linux) || defined(__linux) || defined(__linux__)
+
+    struct timespec t;
+    clock_gettime(CLOCK_REALTIME, &t);
+    ms = static_cast<long>(round(t.tv_nsec / 1.0e6));
+
+#endif
+
+    return ms;
+}
 
 std::string getDate()
 {
@@ -46,7 +75,7 @@ std::string getDate()
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
                         "Internal error - Cannot get the time: %s",
                         strerror(errno));
-        abort();
+        return std::string("");
     }
 
     const struct tm *tmp = localtime(&t);
@@ -57,11 +86,15 @@ std::string getDate()
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
                         "Internal error - Cannot get the local time: %s",
                         strerror(errno));
-        abort();
+        return std::string("");
     }
 
-    strftime(datestr,sz,"[%Y-%m-%d %H:%M:%S] ",tmp);
-    return std::string(datestr);
+    std::ostringstream ss;
+    strftime(datestr,sz,"[%Y-%m-%d %H:%M:%S.",tmp);
+    ss << getMillisTime() << "] ";
+
+    return std::string(datestr + ss.str());
+
 }
 
 /**
