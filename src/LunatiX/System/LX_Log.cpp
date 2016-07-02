@@ -30,6 +30,7 @@
 #undef __WIN32__
 #define __WIN32__
 #include <Windows.h>
+#else
 #include <cmath>
 #endif
 
@@ -44,7 +45,7 @@ std::string getDate();
 // Get the time in millisecond
 long getMillisTime()
 {
-    long ms;
+    long ms = 0L;
 
 #if defined(__WIN32__)
 
