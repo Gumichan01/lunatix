@@ -131,10 +131,13 @@ class LX_Window
 
 public :
 
-    LX_Window(const Uint32 mode, bool accel = true);                    /// deprecated
+    /// deprecated
+    LX_Window(const Uint32 mode, bool accel = true);
+    /// deprecated
     LX_Window(std::string title, const Uint32 mode, bool accel = true);
+    /// deprecated
     LX_Window(std::string title, int posX, int posY, int w, int h,
-              const Uint32 mode, const Uint32 flag, bool accel = true); /// deprecated
+              const Uint32 mode, const Uint32 flag, bool accel = true);
     LX_Window(LX_WindowInfo &info);
 
     void setTitle(std::string title);

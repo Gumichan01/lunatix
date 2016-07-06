@@ -152,7 +152,10 @@ LX_WindowException::~LX_WindowException() noexcept {}
 
 /**
 *   @fn LX_Window::LX_Window(const Uint32 mode, bool accel)
-*   @deprecated
+*
+*   @deprecated This function is not adapted to real user needs and
+*               will be removed in the last version.
+*               Please use the new constuctor witl the LX_WindowInfo stucture.
 *
 *   Create the window with the default configuration
 *
@@ -177,7 +180,9 @@ LX_Window::LX_Window(const Uint32 mode, bool accel)
 
 /**
 *   @fn LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
-*   @deprecated
+*
+*   @deprecated This function will be removed in the last version.
+*               Please use the new constuctor witl the LX_WindowInfo stucture.
 *
 *   Create the window setting the title and using the configuration file
 *
@@ -231,7 +236,6 @@ LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
 *   Create a window using information from the struture given in argument
 *
 *   @param info The structure tha contains information about the window
-*
 *   @note The structure is updated when the window is created
 */
 LX_Window::LX_Window(LX_WindowInfo &info)
@@ -247,7 +251,10 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 /**
 *   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
 *                            const Uint32 mode, Uint32 flag, bool accel)
-*   @deprecated
+*
+*   @deprecated This function has too mush parameters and
+*               will be removed in the last version.
+*               Please use the new constuctor witl the LX_WindowInfo stucture.
 *
 *   Create the window with a custom configuration
 *
