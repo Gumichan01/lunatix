@@ -59,7 +59,7 @@ LX_Particle::LX_Particle(const LX_AABB& b): LX_Particle(b,0.0f,0.0f)
     // Empty
 }
 
-LX_Particle::LX_Particle(const int x , const int y, const int w, const int h,
+LX_Particle::LX_Particle(const int x, const int y, const int w, const int h,
                          const LX_Vector2D& v)
     : LX_Particle({x,y,w,h},v)
 {
@@ -81,7 +81,7 @@ LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
 
 LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
     : box(b), velocity(v), lifetime(xorshiftRand()%DELAY),
-      texture(nullptr), surface(nullptr)
+      texture(nullptr), surface(nullptr),texture_from_outside(false)
 {
     // Empty
 }
@@ -95,7 +95,9 @@ LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
 LX_Particle::~LX_Particle()
 {
     SDL_FreeSurface(surface);
-    SDL_DestroyTexture(texture);
+
+    if(!texture_from_outside)
+        SDL_DestroyTexture(texture);
 }
 
 
@@ -112,7 +114,6 @@ void LX_Particle::update(void)
         lifetime--;
     }
 }
-
 
 
 /**
@@ -132,6 +133,37 @@ bool LX_Particle::setTexture(LX_FileBuffer *buffer)
     texture = loadTextureFromSurface(s);
     SDL_FreeSurface(s);
 
+    return texture != nullptr;
+}
+
+/**
+*   @fn bool LX_Particle::setTexture(SDL_Texture * t)
+*
+*   Set a texture to the particle
+*
+*   @param t the texture
+*
+*   @return TRUE if the particle texture in argument is valid, FALSE otherwise
+*/
+bool LX_Particle::setTexture(SDL_Texture * t)
+{
+    texture = t;
+    texture_from_outside = true;
+    return texture != nullptr;
+}
+
+/**
+*   @fn bool LX_Particle::setTexture(SDL_Surface * s)
+*
+*   Set a texture to the particle
+*
+*   @param s the surface
+*
+*   @return TRUE if the particle texture was created, FALSE otherwise
+*/
+bool LX_Particle::setTexture(SDL_Surface * s)
+{
+    texture = loadTextureFromSurface(s);
     return texture != nullptr;
 }
 

@@ -49,6 +49,11 @@ class LX_Particle
     LX_AABB box;                        /* The box of the particle                  */
     LX_Physics::LX_Vector2D velocity;   /* The velocity of the particle             */
 
+    /*  Boolean variable defined to check if
+        the texture of the particle was allocatedd outside
+        of the particle */
+    bool texture_from_outside;
+
     unsigned int lifetime;              /* The delay to stay displayable            */
     SDL_Texture *texture;               /* The texture (for the texture rendering)  */
     SDL_Surface *surface;               /* The surface (for the surface rendering)  */
@@ -131,6 +136,8 @@ public :
     bool isDead(void);
 
     bool setTexture(LX_FileIO::LX_FileBuffer *buffer);
+    bool setTexture(SDL_Texture * t);
+    bool setTexture(SDL_Surface * s);
     bool setSurface(LX_FileIO::LX_FileBuffer *buffer);
     void setSpeed(const float vx,const float vy);
 
