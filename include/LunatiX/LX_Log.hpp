@@ -20,7 +20,7 @@
 */
 
 #include <SDL2/SDL_log.h>
-
+#include <string>
 
 /**
 *   @namespace LX_Log
@@ -61,14 +61,14 @@ void setWarningPriority(LX_CATEGORY category);
 void setErrorPriority(LX_CATEGORY category);
 void setCriticalPriority(LX_CATEGORY category);
 
-void logVerbose(LX_CATEGORY category,char *format,...);
-void logDebug(LX_CATEGORY category,char *format,...);
-void logInfo(LX_CATEGORY category,char *format,...);
-void logWarning(LX_CATEGORY category,char *format,...);
-void logError(LX_CATEGORY category,char *format,...);
-void logCritical(LX_CATEGORY category,char *format,...);
+void logVerbose(LX_CATEGORY category,std::string format,...);
+void logDebug(LX_CATEGORY category,std::string format,...);
+void logInfo(LX_CATEGORY category,std::string format,...);
+void logWarning(LX_CATEGORY category,std::string format,...);
+void logError(LX_CATEGORY category,std::string format,...);
+void logCritical(LX_CATEGORY category,std::string format,...);
 
-void log(char *format,...);
+void log(std::string format,...);
 
 
 };

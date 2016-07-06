@@ -210,14 +210,14 @@ void setCriticalPriority(LX_CATEGORY category)
 }
 
 /**
-*   @fn void logVerbose(LX_CATEGORY category,char *format,...)
+*   @fn void logVerbose(LX_CATEGORY category,std::string format,...)
 *
 *   Log a message with the verbose priority and a specified category
 *
 *   @param category : Category of the log
 *   @param format   : String format
 */
-void logVerbose(LX_CATEGORY category,char *format,...)
+void logVerbose(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
     va_start(args,format);
@@ -227,14 +227,14 @@ void logVerbose(LX_CATEGORY category,char *format,...)
 }
 
 /**
-*   @fn void logDebug(LX_CATEGORY category,char *format,...)
+*   @fn void logDebug(LX_CATEGORY category,std::string format,...)
 *
 *   Log a message with the debug priority and a specified category
 *
 *   @param category : Category of the log
 *   @param format   : String format
 */
-void logDebug(LX_CATEGORY category,char *format,...)
+void logDebug(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
     va_start(args,format);
@@ -244,14 +244,14 @@ void logDebug(LX_CATEGORY category,char *format,...)
 }
 
 /**
-*   @fn void logInfo(LX_CATEGORY category,char *format,...)
+*   @fn void logInfo(LX_CATEGORY category,std::string format,...)
 *
 *   Log a message with the info priority and a specified category
 *
 *   @param category : Category of the log
 *   @param format   : String format
 */
-void logInfo(LX_CATEGORY category,char *format,...)
+void logInfo(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
     va_start(args,format);
@@ -261,14 +261,14 @@ void logInfo(LX_CATEGORY category,char *format,...)
 }
 
 /**
-*   @fn void logWarning(LX_CATEGORY category,char *format,...)
+*   @fn void logWarning(LX_CATEGORY category,std::string format,...)
 *
 *   Log a message with the warning priority and a specified category
 *
 *   @param category : Category of the log
 *   @param format   : String format
 */
-void logWarning(LX_CATEGORY category,char *format,...)
+void logWarning(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
     va_start(args,format);
@@ -278,14 +278,14 @@ void logWarning(LX_CATEGORY category,char *format,...)
 }
 
 /**
-*   @fn void logError(LX_CATEGORY category,char *format,...)
+*   @fn void logError(LX_CATEGORY category,std::string format,...)
 *
 *   Log a message with the error priority and a specified category
 *
 *   @param category : Category of the log
 *   @param format   : String format
 */
-void logError(LX_CATEGORY category,char *format,...)
+void logError(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
     va_start(args,format);
@@ -295,14 +295,14 @@ void logError(LX_CATEGORY category,char *format,...)
 }
 
 /**
-*   @fn void logCritical(LX_CATEGORY category,char *format,...)
+*   @fn void logCritical(LX_CATEGORY category,std::string format,...)
 *
 *   Log a message with the critical priority and a specified category
 *
 *   @param category : Category of the log
 *   @param format   : String format
 */
-void logCritical(LX_CATEGORY category,char *format,...)
+void logCritical(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
     va_start(args,format);
@@ -312,13 +312,13 @@ void logCritical(LX_CATEGORY category,char *format,...)
 }
 
 /**
-*   @fn void log(char *format,...)
+*   @fn void log(std::string format,...)
 *
 *   Log a message with the info priority and the applicatiion category
 *
 *   @param format : String format
 */
-void log(char *format,...)
+void log(std::string format,...)
 {
     va_list args;
     va_start(args,format);
