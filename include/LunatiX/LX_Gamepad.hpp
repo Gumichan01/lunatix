@@ -17,7 +17,7 @@
 *	@file LX_Gamepad.hpp
 *	@brief The file that contains the declaration of LX_Gamepad
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.7
+*	@version 0.8
 *
 */
 

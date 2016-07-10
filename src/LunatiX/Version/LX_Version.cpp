@@ -14,7 +14,7 @@
 *	@file LX_Version.cpp
 *	@brief The version implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.7
+*	@version 0.8
 *
 */
 
@@ -28,8 +28,8 @@
 #include <iostream>
 
 #define LX_MAJOR_VERSION 0      /**< The major version of the engine */
-#define LX_MINOR_VERSION 7      /**< The minor version of the engine */
-#define LX_PATCH_VERSION 2      /**< The patch of the engine */
+#define LX_MINOR_VERSION 8      /**< The minor version of the engine */
+#define LX_PATCH_VERSION 0      /**< The patch of the engine */
 
 #define LX_COPYRIGHT    "Copyright (C) 2016"
 #define LX_AUTHOR       "Luxon Jean-Pierre"
@@ -145,4 +145,3 @@ void LX_VersionDependencies(void)
 }
 
 };
-

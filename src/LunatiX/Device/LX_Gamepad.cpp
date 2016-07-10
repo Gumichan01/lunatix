@@ -15,7 +15,7 @@
 *	@file LX_Gamepad.cpp
 *	@brief The LX_Gamepad implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.7
+*	@version 0.8
 *
 */
 

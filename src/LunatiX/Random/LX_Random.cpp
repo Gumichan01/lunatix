@@ -34,7 +34,7 @@ typedef unsigned __int64 uint64_t;
 *	@file LX_Random.cpp
 *	@brief The Random Number Generator implementation
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.7
+*	@version 0.8
 *
 */
 

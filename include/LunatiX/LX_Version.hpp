@@ -17,7 +17,7 @@
 *	@file LX_Version.hpp
 *	@brief The version library
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.7
+*	@version 0.8
 *
 */
 
@@ -50,4 +50,3 @@ void LX_VersionDependencies(void);
 };
 
 #endif // LX_VERSION_HPP_INCLUDED
-

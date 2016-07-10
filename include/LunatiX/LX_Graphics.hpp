@@ -17,7 +17,7 @@
 *	@file LX_Graphics.hpp
 *	@brief The graphics engine
 *	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.7
+*	@version 0.8
 *
 */
 
