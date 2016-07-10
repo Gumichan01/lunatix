@@ -46,11 +46,11 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
     : name(filename), buffer(nullptr), bufsize(0)
 {
     LX_File *reader = nullptr;
-    std::string str("LX_FileBuffer : ");
+    std::string str("LX_FileBuffer: " + name + " - ");
     size_t r = 0;
     Sint64 s = 0;
 
-    reader = new LX_File(name.c_str(),LX_FILEIO_RDONLY);
+    reader = new LX_File(name,LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
 
     if((s = reader->size()) == -1 )
