@@ -29,8 +29,6 @@ DEBUG=yes
 #
 
 CC=clang++
-LUAC=luac5.1
-SCRIPT_FILE=script/LX_config.lua
 COMPILED_SCRIPT=$(SCRIPT_FILE)c
 
 # Path to the main file directory
@@ -131,7 +129,6 @@ endif
 
 
 # Linking flags
-LUA_FLAGS=$(LUNATIX_LIB_DIR)liblua5.1-c++.so.0
 LFLAGS=`pkg-config --libs sdl2 SDL2_image SDL2_mixer SDL2_ttf`
 
 DOXY_FILE=dox
@@ -142,7 +139,7 @@ DOXY_FILE=dox
 #                      #
 ########################
 
-library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB) lua-script
+library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 $(LUNATIX_STATIC_LIB) : $(OBJ_FILES)
 	@echo "Generating the static library -> "$@
@@ -153,13 +150,6 @@ $(LUNATIX_SHARED_LIB) : $(OBJ_FILES)
 	@echo "Generating the shared library -> "$@
 	@mkdir -p $(LUNATIX_BUILD_DIR)
 	@$(CC) -shared -o $@ $(OBJ_FILES) $(LFLAGS)
-
-
-lua-script : $(COMPILED_SCRIPT)
-
-$(COMPILED_SCRIPT) : $(SCRIPT_FILE)
-	@echo "Compilation of the Lua script : "$<" -> "$@
-	@$(LUAC) -o $@ $<
 
 
 ##########
@@ -176,7 +166,7 @@ else
 endif
 	@echo $@" - Linking "
 	@$(CC) -o $@ $(MAIN_OBJ_FILE) $(OBJ_FILES) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) \
-	$(LFLAGS) $(LUA_FLAGS) && echo $(LUNATIX_EXE)" - Success" \
+	$(LFLAGS) && echo $(LUNATIX_EXE)" - Success" \
 	|| echo $(LUNATIX_EXE)" - Failure"
 
 
@@ -526,7 +516,7 @@ $(UTILS_I_PATH)utf8_iterator.hpp $(UTILS_I_PATH)utf8_string.hpp
 #        #
 ##########
 
-test : lua-script test-init test-config test-device test-physics \
+test : test-init test-config test-device test-physics \
 test-window test-system test-ttf test-particle test-file test-ime
 	@echo "INFO - Test launch"
 ifeq ($(DEBUG),yes)
@@ -537,7 +527,7 @@ endif
 
 test-init : $(OBJ_FILES) test-init.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-init.o : $(TEST_PATH)test-init.cpp
@@ -547,7 +537,7 @@ test-init.o : $(TEST_PATH)test-init.cpp
 
 test-config : $(OBJ_FILES) test-config.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-config.o : $(TEST_PATH)test-config.cpp
@@ -557,7 +547,7 @@ test-config.o : $(TEST_PATH)test-config.cpp
 
 test-device : $(OBJ_FILES) test-device.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-device.o : $(TEST_PATH)test-device.cpp
@@ -567,7 +557,7 @@ test-device.o : $(TEST_PATH)test-device.cpp
 
 test-physics : $(OBJ_FILES) test-physics.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-physics.o : $(TEST_PATH)test-physics.cpp
@@ -577,7 +567,7 @@ test-physics.o : $(TEST_PATH)test-physics.cpp
 
 test-window : $(OBJ_FILES) test-window.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-window.o : $(TEST_PATH)test-window.cpp
@@ -587,7 +577,7 @@ test-window.o : $(TEST_PATH)test-window.cpp
 
 test-system : $(OBJ_FILES) test-system.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-system.o : $(TEST_PATH)test-system.cpp
@@ -597,7 +587,7 @@ test-system.o : $(TEST_PATH)test-system.cpp
 
 test-ttf : $(OBJ_FILES) test-ttf.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-ttf.o : $(TEST_PATH)test-ttf.cpp
@@ -607,7 +597,7 @@ test-ttf.o : $(TEST_PATH)test-ttf.cpp
 
 test-particle : $(OBJ_FILES) test-particle.o
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-particle.o : $(TEST_PATH)test-particle.cpp
@@ -616,9 +606,8 @@ test-particle.o : $(TEST_PATH)test-particle.cpp
 
 
 test-file : $(OBJ_FILES) test-file.o
-	@make lua-script
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-file.o : $(TEST_PATH)test-file.cpp
@@ -627,9 +616,8 @@ test-file.o : $(TEST_PATH)test-file.cpp
 
 
 test-ime : $(OBJ_FILES) test-ime.o
-	@make lua-script
 	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) $(LUA_FLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 
 test-ime.o : $(TEST_PATH)test-ime.cpp
@@ -668,4 +656,4 @@ cleanlib:
 
 clear : cleandoc cleanlib clean
 	@echo "Delete targets"
-	@rm -f $(LUNATIX_EXE) $(COMPILED_SCRIPT)
+	@rm -f $(LUNATIX_EXE)

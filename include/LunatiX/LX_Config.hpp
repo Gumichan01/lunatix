@@ -23,11 +23,6 @@
 
 #include <LunatiX/LX_ConfigLoader.hpp>
 
-#define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
-
-struct lua_State;
-
-
 /**
 *   @class LX_ConfigurationException
 *   @brief The exception class of LX_Configuration

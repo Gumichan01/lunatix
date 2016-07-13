@@ -22,24 +22,9 @@
 #include <exception>
 #include <sstream>
 
-#include <Lua/lua.hpp>
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-
-namespace
-{
-const int DEFAULT_VIDEO_FLAG = 1;
-const int DEFAULT_VSYNC_FLAG = 0;
-const int DEFAULT_TTF_FLAG = 1;
-const int DEFAULT_AUDIO_FLAG = 1;
-const int DEFAULT_GAMEPAD_FLAG = 1;
-const int DEFAULT_OPENGL_FLAG = 0;
-const int DEFAULT_FONT_SIZE = 0;
-const int DEFAULT_WIDTH = 800;
-const int DEFAULT_HEIGHT = 600;
-const int DEFAULT_FULLSCREEN_FLAG = 0;
-}
 
 // unique instance
 static LX_Configuration *instance = nullptr;
@@ -70,7 +55,6 @@ LX_Configuration::LX_Configuration()
 }
 
 LX_Configuration::~LX_Configuration() {}
-
 
 void LX_Configuration::initConfig()
 {
