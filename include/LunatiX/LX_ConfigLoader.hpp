@@ -29,22 +29,46 @@
 namespace LX_ConfigLoader
 {
 
+/**
+*   @struct LX_InternalConfig
+*   @brief The configuration structure
+*
+*   This is the internal structure configuration
+*/
 struct LX_InternalConfig
 {
-    bool video_flag;
-    bool vsync_flag;
-    bool ttf_flag;
-    bool audio_flag;
-    bool gamepad_flag;
-    bool opengl_flag;
-    UTF8string font_file;
-    int font_size;
-    int width;
-    int height;
-    bool fullscreen_flag;
+    bool video_flag;        ///< Video flag
+    bool vsync_flag;        ///< VSync flag
+    bool ttf_flag;          ///< TTF flag
+    bool audio_flag;        ///< Audio flag
+    bool gamepad_flag;      ///< Gamepad flag
+    bool opengl_flag;       ///< OpenGL flag
+    UTF8string font_file;   ///< Font file
+    int font_size;          ///< Font size
+    int width;              ///< Width
+    int height;             ///< Height
+    bool fullscreen_flag;   ///< Fullscreen flag
 };
 
+/**
+*   @fn void loadSDLfileConfig(LX_InternalConfig& config)
+*
+*   Load the configuration of the engine and store it into the struture
+*
+*   @param config The structure to fill data in
+*
+*/
 void loadSDLfileConfig(LX_InternalConfig& config);
+
+/**
+*   @fn void loadWindowFileConfig(LX_InternalConfig& config)
+*
+*   Load the default window configuration of the engine
+*   and store it into the struture
+*
+*   @param config The structure to fill data in
+*
+*/
 void loadWindowFileConfig(LX_InternalConfig& config);
 
 };
