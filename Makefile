@@ -159,7 +159,7 @@ $(LUNATIX_SHARED_LIB) : $(OBJ_FILES)
 #        #
 ##########
 
-$(LUNATIX_EXE) : $(MAIN_OBJ_FILE) $(OBJ_FILES) $(COMPILED_SCRIPT)
+$(LUNATIX_EXE) : $(MAIN_OBJ_FILE) $(OBJ_FILES)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
 else
@@ -283,6 +283,7 @@ $(LUNATIX_I_PATH)LX_Config.hpp $(LUNATIX_I_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
+
 LX_ConfigLoader.o : $(OBJ_LIBRARY_PATH)LX_ConfigLoader.o
 
 $(OBJ_LIBRARY_PATH)LX_ConfigLoader.o : $(LIBRARY_PATH)LX_ConfigLoader.cpp \
@@ -290,6 +291,7 @@ $(LUNATIX_I_PATH)LX_ConfigLoader.hpp
 	@mkdir -p $(OBJ_LIBRARY_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
 
 LX_Library.o : $(OBJ_LIBRARY_PATH)LX_Library.o
 
