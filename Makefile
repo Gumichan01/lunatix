@@ -89,7 +89,8 @@ $(OBJ_DEVICE_PATH)LX_Gamepad.o $(OBJ_DEVICE_PATH)LX_Haptic.o \
 $(OBJ_FILEIO_PATH)LX_FileIO.o $(OBJ_FILEIO_PATH)LX_FileBuffer.o \
 $(OBJ_GRAPHICS_PATH)LX_Graphics.o $(OBJ_GRAPHICS_PATH)LX_Window.o \
 $(OBJ_GRAPHICS_PATH)LX_WindowManager.o \
-$(OBJ_LIBRARY_PATH)LX_Config.o $(OBJ_LIBRARY_PATH)LX_Library.o \
+$(OBJ_LIBRARY_PATH)LX_Config.o $(OBJ_LIBRARY_PATH)LX_ConfigLoader.o \
+$(OBJ_LIBRARY_PATH)LX_Library.o \
 $(OBJ_MIXER_PATH)LX_Sound.o $(OBJ_MIXER_PATH)LX_Chunk.o \
 $(OBJ_MIXER_PATH)LX_Music.o $(OBJ_MIXER_PATH)LX_Mixer.o \
 $(OBJ_MSG_PATH)LX_MessageBox.o \
@@ -282,6 +283,13 @@ $(LUNATIX_I_PATH)LX_Config.hpp $(LUNATIX_I_PATH)LX_Error.hpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
+LX_ConfigLoader.o : $(OBJ_LIBRARY_PATH)LX_ConfigLoader.o
+
+$(OBJ_LIBRARY_PATH)LX_ConfigLoader.o : $(LIBRARY_PATH)LX_ConfigLoader.cpp \
+$(LUNATIX_I_PATH)LX_ConfigLoader.hpp
+	@mkdir -p $(OBJ_LIBRARY_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
 LX_Library.o : $(OBJ_LIBRARY_PATH)LX_Library.o
 
