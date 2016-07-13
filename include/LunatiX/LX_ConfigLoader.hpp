@@ -46,7 +46,7 @@ struct LX_InternalConfig
 
 
 void loadSDLfileConfig(LX_InternalConfig& config);
-void loadWindowfileConfig(LX_InternalConfig& config);
+void loadWindowFileConfig(LX_InternalConfig& config);
 
 };
 

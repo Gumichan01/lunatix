@@ -23,9 +23,7 @@
 
 #include <cstdlib>
 #include <fstream>
-#include <string>
 #include <regex>
-
 
 const std::regex videoreg("video=[[:digit:]]+",std::regex::extended);
 const std::regex vsyncreg("vsync=[[:digit:]]+",std::regex::extended);
@@ -33,8 +31,11 @@ const std::regex ttfreg("ttf=[[:digit:]]+",std::regex::extended);
 const std::regex audioreg("audio=[[:digit:]]+",std::regex::extended);
 const std::regex gamepadreg("joystick=[[:digit:]]+",std::regex::extended);
 const std::regex openglreg("opengl=[[:digit:]]+",std::regex::extended);
-const std::regex fontreg("font=[[:digit:]]+",std::regex::extended);
-const std::regex sizereg("size=[[:digit:]]+",std::regex::extended);
+const std::regex fontreg("font=.+",std::regex::extended);
+const std::regex sizereg("size=.+",std::regex::extended);
+const std::regex widthreg("width=.+",std::regex::extended);
+const std::regex heigthreg("height=.+",std::regex::extended);
+const std::regex fullscreenreg("fullscreen=[[:digit:]]+",std::regex::extended);
 const std::string ONE("1");
 const char SHARP = '#';
 
@@ -45,12 +46,12 @@ namespace LX_Config_Loader
 void loadSDLfileConfig(LX_InternalConfig& config)
 {
     std::ifstream f;
-
     f.open(LX_SDL_FILE,std::ios::in);
 
     if(f.is_open() == false)
     {
-        LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,"Cannot open %s",LX_SDL_FILE);
+        LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
+                            "loadSDLfileConfig - Cannot open %s",LX_SDL_FILE);
         return;
     }
 
@@ -135,13 +136,64 @@ void loadSDLfileConfig(LX_InternalConfig& config)
         }
     }
 
-
+    f.close();
 }
 
-void loadWindowfileConfig(LX_InternalConfig& config)
+void loadWindowFileConfig(LX_InternalConfig& config)
 {
-    //std::ifstream f;
-    //std::string line;
+    std::ifstream f;
+    f.open(LX_WINFO_FILE,std::ios::in);
+
+    if(f.is_open() == false)
+    {
+        LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
+                            "loadWindowFileConfig - Cannot open %s",
+                            LX_SDL_FILE);
+        return;
+    }
+
+    int cpt = 0;
+    std::string line;
+
+    while(getline(f,line))
+    {
+        if(line.empty() || line[0] == SHARP)
+            continue;
+
+        std::string s = line.substr(line.find("=") + 1);
+
+        switch(cpt)
+        {
+        case 0:
+            if(std::regex_match(line,widthreg))
+            {
+                config.width = atoi(s.c_str());
+                cpt++;
+            }
+            break;
+
+        case 1:
+            if(std::regex_match(line,heigthreg))
+            {
+                config.height = atoi(s.c_str());
+                cpt++;
+            }
+            break;
+
+        case 2:
+            if(std::regex_match(line,fullscreenreg))
+            {
+                config.fullscreen_flag = (s == ONE);
+                cpt++;
+            }
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    f.close();
 }
 
 };
