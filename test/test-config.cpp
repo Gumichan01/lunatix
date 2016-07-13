@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     bool video   = configuration->getVideoFlag();
     bool ttfont  = configuration->getTTFFlag();
     bool sound   = configuration->getAudioFlag();
-    bool gamepad = configuration->getJoystickFlag();
+    bool gamepad = configuration->getGamepadFlag();
     bool opengl  = configuration->getOpenGLFlag();
     string font  = configuration->getFontFile();
     int size     = configuration->getFontSize();
