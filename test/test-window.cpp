@@ -33,6 +33,7 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Rendering ==== ");
     LX_loadWindowConfig(info);
+    LX_Log::log("Info configuration:\n%s",winInfoToString(info).c_str());
     info.title = "Hello #1";
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
