@@ -30,10 +30,22 @@
 #include <LunatiX/LX_Error.hpp>
 
 
+namespace
+{
+const int DEFAULT_VIDEO_FLAG = 1;
+const int DEFAULT_VSYNC_FLAG = 0;
+const int DEFAULT_TTF_FLAG = 1;
+const int DEFAULT_AUDIO_FLAG = 1;
+const int DEFAULT_GAMEPAD_FLAG = 1;
+const int DEFAULT_OPENGL_FLAG = 0;
+const int DEFAULT_FONT_SIZE = 0;
+const int DEFAULT_WIDTH = 800;
+const int DEFAULT_HEIGHT = 600;
+const int DEFAULT_FULLSCREEN_FLAG = 0;
+}
+
 // unique instance
 static LX_Configuration *instance = nullptr;
-
-using namespace std;
 
 
 /**
@@ -80,8 +92,11 @@ LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 *
 */
 LX_Configuration::LX_Configuration()
-    : video_flag(1), vsync_flag(0), ttf_flag(1), audio_flag(1), joystick_flag(1),
-      opengl_flag(0), fontFile(""),fontSize(0), width(800), height(600), fullscreen_flag(0)
+    : video_flag(DEFAULT_VIDEO_FLAG), vsync_flag(DEFAULT_VSYNC_FLAG),
+      ttf_flag(DEFAULT_TTF_FLAG), audio_flag(DEFAULT_AUDIO_FLAG),
+      joystick_flag(DEFAULT_GAMEPAD_FLAG), opengl_flag(DEFAULT_OPENGL_FLAG),
+      fontFile(),fontSize(DEFAULT_FONT_SIZE), width(DEFAULT_WIDTH),
+      height(DEFAULT_HEIGHT), fullscreen_flag(DEFAULT_FULLSCREEN_FLAG)
 {
     // Load configuration
     setFlags();
@@ -224,8 +239,8 @@ void LX_Configuration::setFlags(void)
     // Is it what we want?
     if(!lua_isfunction(state,-1))
     {
-        stringstream ss;
-        string err;
+        std::stringstream ss;
+        std::string err;
 
         ss << "Error occured in LX_Configuration::setFlags : The Lua function "
            << luaFunction << " does not exist" << std::endl;
