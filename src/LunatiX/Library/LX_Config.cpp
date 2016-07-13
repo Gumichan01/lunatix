@@ -19,13 +19,13 @@
 */
 
 
-#include <cstring>
+#include <LunatiX/LX_ConfigLoader.hpp>
 
+#include <cstring>
 #include <exception>
 #include <sstream>
 
 #include <Lua/lua.hpp>
-
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
 
@@ -56,7 +56,7 @@ static LX_Configuration *instance = nullptr;
 *   @param err The error string
 *
 */
-LX_ConfigurationException::LX_ConfigurationException(std::string err)
+LX_ConfigurationException::LX_ConfigurationException(UTF8string err)
 {
     stringError = err;
 }
@@ -72,9 +72,8 @@ LX_ConfigurationException::LX_ConfigurationException(std::string err)
 */
 const char * LX_ConfigurationException::what() const noexcept
 {
-    return stringError.c_str();
+    return stringError.utf8_str();
 }
-
 
 /**
 *   @fn LX_ConfigurationException::~LX_ConfigurationException() noexcept
@@ -83,7 +82,6 @@ const char * LX_ConfigurationException::what() const noexcept
 *
 */
 LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
-
 
 
 /*
@@ -99,12 +97,11 @@ LX_Configuration::LX_Configuration()
       height(DEFAULT_HEIGHT), fullscreen_flag(DEFAULT_FULLSCREEN_FLAG)
 {
     // Load configuration
-    setFlags();
+    //setFlags();
+    loadSDLFlags();
 }
 
-
 LX_Configuration::~LX_Configuration() {}
-
 
 
 /**
@@ -167,6 +164,25 @@ void LX_Configuration::destroy()
     instance = nullptr;
 }
 
+void LX_Configuration::loadSDLFlags()
+{
+    LX_Config_Loader::LX_InternalConfig conf;
+    LX_Config_Loader::loadSDLfileConfig(conf);
+    LX_Config_Loader::loadWindowFileConfig(conf);
+
+    video_flag = conf.video_flag;
+    vsync_flag = conf.vsync_flag;
+    ttf_flag = conf.ttf_flag;
+    audio_flag = conf.audio_flag;
+    joystick_flag = conf.gamepad_flag;
+    opengl_flag = conf.opengl_flag;
+    font_file = conf.font_file;
+    font_size = conf.font_size;
+    width = conf.width;
+    height = conf.height;
+    fullscreen_flag = conf.fullscreen_flag;
+}
+
 
 /*
 *   Get the string from the lua stack
@@ -194,7 +210,7 @@ void LX_Configuration::assignString(lua_State * state, char *str, unsigned int l
 *
 *   This function need to use LX_config.luac to work,
 *   otherwise, a LX_ConfigurationException exception will occur
-*/
+*
 void LX_Configuration::setFlags(void)
 {
     const std::string luaFunction = "getFlags";
@@ -346,7 +362,7 @@ void LX_Configuration::setFlags(void)
     lua_pop(state,1);
     lua_close(state);
 }
-
+*/
 
 /**
 *   @fn bool LX_Configuration::getVideoFlag()
@@ -358,7 +374,7 @@ void LX_Configuration::setFlags(void)
 */
 bool LX_Configuration::getVideoFlag()
 {
-    return video_flag == 1;
+    return video_flag;
 }
 
 
@@ -372,7 +388,7 @@ bool LX_Configuration::getVideoFlag()
 */
 bool LX_Configuration::getVSyncFlag()
 {
-    return vsync_flag == 1;
+    return vsync_flag;
 }
 
 
@@ -386,7 +402,7 @@ bool LX_Configuration::getVSyncFlag()
 */
 bool LX_Configuration::getTTFFlag()
 {
-    return ttf_flag == 1;
+    return ttf_flag;
 }
 
 
@@ -400,7 +416,7 @@ bool LX_Configuration::getTTFFlag()
 */
 bool LX_Configuration::getAudioFlag()
 {
-    return audio_flag == 1;
+    return audio_flag;
 }
 
 
@@ -414,7 +430,7 @@ bool LX_Configuration::getAudioFlag()
 */
 bool LX_Configuration::getJoystickFlag()
 {
-    return joystick_flag == 1;
+    return joystick_flag;
 }
 
 
@@ -428,7 +444,7 @@ bool LX_Configuration::getJoystickFlag()
 */
 bool LX_Configuration::getOpenGLFlag()
 {
-    return opengl_flag == 1;
+    return opengl_flag;
 }
 
 
@@ -442,47 +458,47 @@ bool LX_Configuration::getOpenGLFlag()
 */
 const char * LX_Configuration::getFontFile()
 {
-    return font_file.c_str();
+    return font_file.utf8_str();
 }
 
 
 /**
-*   @fn bool LX_Configuration::getFontSize()
+*   @fn int LX_Configuration::getFontSize()
 *
 *   Get the font size
 *
 *   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-bool LX_Configuration::getFontSize()
+int LX_Configuration::getFontSize()
 {
     return font_size;
 }
 
 
 /**
-*   @fn bool LX_Configuration::getWinWidth()
+*   @fn int LX_Configuration::getWinWidth()
 *
 *   Get the window width
 *
 *   @return The width
 *
 */
-bool LX_Configuration::getWinWidth()
+int LX_Configuration::getWinWidth()
 {
     return width;
 }
 
 
 /**
-*   @fn bool LX_Configuration::getWinHeight()
+*   @fn int LX_Configuration::getWinHeight()
 *
 *   Get the window height
 *
 *   @return The height
 *
 */
-bool LX_Configuration::getWinHeight()
+int LX_Configuration::getWinHeight()
 {
     return height;
 }
@@ -498,6 +514,6 @@ bool LX_Configuration::getWinHeight()
 */
 bool LX_Configuration::getFullscreenFlag()
 {
-    return fullscreen_flag == 1;
+    return fullscreen_flag;
 }
 

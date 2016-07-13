@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
@@ -39,11 +39,11 @@ struct lua_State;
 class LX_ConfigurationException : public std::exception
 {
 
-    std::string stringError;
+    UTF8string stringError;
 
 public :
 
-    LX_ConfigurationException(std::string err);
+    LX_ConfigurationException(UTF8string err);
 
     const char * what() const noexcept;
 
@@ -64,7 +64,7 @@ class LX_Configuration
     bool audio_flag;
     bool joystick_flag;
     bool opengl_flag;
-    std::string font_file;
+    UTF8string font_file;
     int font_size;
     int width;
     int height;
@@ -72,7 +72,8 @@ class LX_Configuration
 
     // private functions
     void assignString(lua_State * state, char *str, unsigned int len);
-    void setFlags(void);
+    //void setFlags(void);
+    void loadSDLFlags();
 
     LX_Configuration();
     LX_Configuration(LX_Configuration& c);
@@ -92,9 +93,9 @@ public :
     bool getJoystickFlag();
     bool getOpenGLFlag();
     const char * getFontFile();
-    bool getFontSize();
-    bool getWinWidth();
-    bool getWinHeight();
+    int getFontSize();
+    int getWinWidth();
+    int getWinHeight();
     bool getFullscreenFlag();
 
     ~LX_Configuration();
