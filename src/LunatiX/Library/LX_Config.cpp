@@ -95,7 +95,7 @@ LX_Configuration::LX_Configuration()
     : video_flag(DEFAULT_VIDEO_FLAG), vsync_flag(DEFAULT_VSYNC_FLAG),
       ttf_flag(DEFAULT_TTF_FLAG), audio_flag(DEFAULT_AUDIO_FLAG),
       joystick_flag(DEFAULT_GAMEPAD_FLAG), opengl_flag(DEFAULT_OPENGL_FLAG),
-      fontFile(),fontSize(DEFAULT_FONT_SIZE), width(DEFAULT_WIDTH),
+      font_file(),font_size(DEFAULT_FONT_SIZE), width(DEFAULT_WIDTH),
       height(DEFAULT_HEIGHT), fullscreen_flag(DEFAULT_FULLSCREEN_FLAG)
 {
     // Load configuration
@@ -312,13 +312,13 @@ void LX_Configuration::setFlags(void)
                 char *seq = (char *) lua_tostring(state,-1);
 
                 if(seq != nullptr)
-                    fontFile = seq;
+                    font_file = seq;
             }
 
             // Size flag
             if(key.compare(0,SIZE_KEY.length(),SIZE_KEY) == 0)
             {
-                fontSize = atoi((char *) lua_tostring(state,-1));
+                font_size = atoi((char *) lua_tostring(state,-1));
             }
 
             // Width flag
@@ -442,47 +442,47 @@ bool LX_Configuration::getOpenGLFlag()
 */
 const char * LX_Configuration::getFontFile()
 {
-    return fontFile.c_str();
+    return font_file.c_str();
 }
 
 
 /**
-*   @fn int LX_Configuration::getFontSize()
+*   @fn bool LX_Configuration::getFontSize()
 *
 *   Get the font size
 *
 *   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-int LX_Configuration::getFontSize()
+bool LX_Configuration::getFontSize()
 {
-    return fontSize;
+    return font_size;
 }
 
 
 /**
-*   @fn int LX_Configuration::getWinWidth()
+*   @fn bool LX_Configuration::getWinWidth()
 *
 *   Get the window width
 *
 *   @return The width
 *
 */
-int LX_Configuration::getWinWidth()
+bool LX_Configuration::getWinWidth()
 {
     return width;
 }
 
 
 /**
-*   @fn int LX_Configuration::getWinHeight()
+*   @fn bool LX_Configuration::getWinHeight()
 *
 *   Get the window height
 *
 *   @return The height
 *
 */
-int LX_Configuration::getWinHeight()
+bool LX_Configuration::getWinHeight()
 {
     return height;
 }
