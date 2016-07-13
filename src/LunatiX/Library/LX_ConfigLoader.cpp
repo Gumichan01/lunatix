@@ -40,7 +40,7 @@ const std::string ONE("1");
 const char SHARP = '#';
 
 
-namespace LX_Config_Loader
+namespace LX_ConfigLoader
 {
 
 void loadSDLfileConfig(LX_InternalConfig& config)

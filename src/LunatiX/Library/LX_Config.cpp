@@ -18,9 +18,6 @@
 *
 */
 
-
-#include <LunatiX/LX_ConfigLoader.hpp>
-
 #include <cstring>
 #include <exception>
 #include <sstream>
@@ -90,14 +87,8 @@ LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 *
 */
 LX_Configuration::LX_Configuration()
-    : video_flag(DEFAULT_VIDEO_FLAG), vsync_flag(DEFAULT_VSYNC_FLAG),
-      ttf_flag(DEFAULT_TTF_FLAG), audio_flag(DEFAULT_AUDIO_FLAG),
-      joystick_flag(DEFAULT_GAMEPAD_FLAG), opengl_flag(DEFAULT_OPENGL_FLAG),
-      font_file(),font_size(DEFAULT_FONT_SIZE), width(DEFAULT_WIDTH),
-      height(DEFAULT_HEIGHT), fullscreen_flag(DEFAULT_FULLSCREEN_FLAG)
 {
     // Load configuration
-    //setFlags();
     loadSDLFlags();
 }
 
@@ -166,203 +157,9 @@ void LX_Configuration::destroy()
 
 void LX_Configuration::loadSDLFlags()
 {
-    LX_Config_Loader::LX_InternalConfig conf;
-    LX_Config_Loader::loadSDLfileConfig(conf);
-    LX_Config_Loader::loadWindowFileConfig(conf);
-
-    video_flag = conf.video_flag;
-    vsync_flag = conf.vsync_flag;
-    ttf_flag = conf.ttf_flag;
-    audio_flag = conf.audio_flag;
-    joystick_flag = conf.gamepad_flag;
-    opengl_flag = conf.opengl_flag;
-    font_file = conf.font_file;
-    font_size = conf.font_size;
-    width = conf.width;
-    height = conf.height;
-    fullscreen_flag = conf.fullscreen_flag;
+    LX_ConfigLoader::loadSDLfileConfig(conf);
+    LX_ConfigLoader::loadWindowFileConfig(conf);
 }
-
-
-/*
-*   Get the string from the lua stack
-*
-*   If state or str is not valid, a segmentation fault may occur
-*   If len is 0 or less than the string length,
-*   then the behaviour is undefined.
-*
-*/
-void LX_Configuration::assignString(lua_State * state, char *str, unsigned int len)
-{
-    char *tmp;
-    memset(str,0,len);
-    tmp = (char *) lua_tostring(state,-2);
-
-    if(tmp != nullptr)
-        strncpy(str,tmp,len-2);
-
-    str[len-1] = '\0';
-}
-
-
-/*
-*   Set the flags from configuration files
-*
-*   This function need to use LX_config.luac to work,
-*   otherwise, a LX_ConfigurationException exception will occur
-*
-void LX_Configuration::setFlags(void)
-{
-    const std::string luaFunction = "getFlags";
-    std::string key;
-    lua_State *state = nullptr;
-
-    // Constant values
-    const std::string VIDEO_KEY = "video";
-    const std::string VSYNC_KEY = "vsync";
-    const std::string TTF_KEY = "ttf";
-    const std::string AUDIO_KEY = "audio";
-    const std::string JOYSTICK_KEY = "joystick";
-    const std::string OPENGL_KEY = "opengl";
-    const std::string FONT_KEY = "font";
-    const std::string SIZE_KEY = "size";
-    const std::string WIDTH_KEY = "width";
-    const std::string HEIGHT_KEY = "height";
-    const std::string FULLSCREEN_KEY = "fullscreen";
-
-    state = lua_open();
-
-    if(state == nullptr)
-    {
-        LX_SetError("Error occured in LX_Configuration::setFlags : Internal error");
-        return;
-    }
-
-    // Open standard lua libraries
-    luaL_openlibs(state);
-
-    // Open of the Lua file
-    if(luaL_dofile(state,LUAC_CONFIG_FILE) != 0)
-    {
-        LX_SetError(lua_tostring(state,-1));
-        lua_close(state);
-        return;
-    }
-
-    // Get the function
-    lua_getglobal(state,luaFunction.c_str());
-
-    // Is it what we want?
-    if(!lua_isfunction(state,-1))
-    {
-        std::stringstream ss;
-        std::string err;
-
-        ss << "Error occured in LX_Configuration::setFlags : The Lua function "
-           << luaFunction << " does not exist" << std::endl;
-        err = ss.str();
-
-        LX_SetError(err.c_str());
-        lua_close(state);
-        return;
-    }
-    else
-    {
-        int index = 1;
-        char tmp[16];
-        // Call the function
-        lua_call(state,0,1);
-        lua_pushnil(state);
-
-        while(lua_next(state, index))
-        {
-            assignString(state,tmp,sizeof(tmp));
-
-            if(strlen(tmp) == 0)
-            {
-                lua_pop(state,1);
-                continue;
-            }
-
-            key.assign(tmp);
-
-            // Video flag
-            if(key.compare(0,VIDEO_KEY.length(),VIDEO_KEY) == 0)
-            {
-                video_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // VSync flag
-            if(key.compare(0,VSYNC_KEY.length(),VSYNC_KEY) == 0)
-            {
-                vsync_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // TTF flag
-            if(key.compare(0,TTF_KEY.length(),TTF_KEY) == 0)
-            {
-                ttf_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // Audio flag
-            if(key.compare(0,AUDIO_KEY.length(),AUDIO_KEY) == 0)
-            {
-                audio_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // Joystick flag
-            if(key.compare(0,JOYSTICK_KEY.length(),JOYSTICK_KEY) == 0)
-            {
-                joystick_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // OpenGL flag
-            if(key.compare(0,OPENGL_KEY.length(),OPENGL_KEY) == 0)
-            {
-                opengl_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // Font file flag
-            if(key.compare(0,FONT_KEY.length(),FONT_KEY) == 0)
-            {
-                char *seq = (char *) lua_tostring(state,-1);
-
-                if(seq != nullptr)
-                    font_file = seq;
-            }
-
-            // Size flag
-            if(key.compare(0,SIZE_KEY.length(),SIZE_KEY) == 0)
-            {
-                font_size = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // Width flag
-            if(key.compare(0,WIDTH_KEY.length(),WIDTH_KEY) == 0)
-            {
-                width = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // Height flag
-            if(key.compare(0,HEIGHT_KEY.length(),HEIGHT_KEY) == 0)
-            {
-                height = atoi((char *) lua_tostring(state,-1));
-            }
-
-            // Fullscreen flag
-            if(key.compare(0,FULLSCREEN_KEY.length(),FULLSCREEN_KEY) == 0)
-            {
-                fullscreen_flag = atoi((char *) lua_tostring(state,-1));
-            }
-
-            lua_pop(state,1);
-        }
-    }
-
-    lua_pop(state,1);
-    lua_close(state);
-}
-*/
 
 /**
 *   @fn bool LX_Configuration::getVideoFlag()
@@ -374,7 +171,7 @@ void LX_Configuration::setFlags(void)
 */
 bool LX_Configuration::getVideoFlag()
 {
-    return video_flag;
+    return conf.video_flag;
 }
 
 
@@ -388,7 +185,7 @@ bool LX_Configuration::getVideoFlag()
 */
 bool LX_Configuration::getVSyncFlag()
 {
-    return vsync_flag;
+    return conf.vsync_flag;
 }
 
 
@@ -402,7 +199,7 @@ bool LX_Configuration::getVSyncFlag()
 */
 bool LX_Configuration::getTTFFlag()
 {
-    return ttf_flag;
+    return conf.ttf_flag;
 }
 
 
@@ -416,21 +213,21 @@ bool LX_Configuration::getTTFFlag()
 */
 bool LX_Configuration::getAudioFlag()
 {
-    return audio_flag;
+    return conf.audio_flag;
 }
 
 
 /**
-*   @fn bool LX_Configuration::getJoystickFlag()
+*   @fn bool LX_Configuration::getGamepadFlag()
 *
 *   Get the audio flag
 *
 *   @return TRUE if the flag is set, FALSE otherwise
 *
 */
-bool LX_Configuration::getJoystickFlag()
+bool LX_Configuration::getGamepadFlag()
 {
-    return joystick_flag;
+    return conf.gamepad_flag;
 }
 
 
@@ -444,7 +241,7 @@ bool LX_Configuration::getJoystickFlag()
 */
 bool LX_Configuration::getOpenGLFlag()
 {
-    return opengl_flag;
+    return conf.opengl_flag;
 }
 
 
@@ -458,7 +255,7 @@ bool LX_Configuration::getOpenGLFlag()
 */
 const char * LX_Configuration::getFontFile()
 {
-    return font_file.utf8_str();
+    return conf.font_file.utf8_str();
 }
 
 
@@ -472,7 +269,7 @@ const char * LX_Configuration::getFontFile()
 */
 int LX_Configuration::getFontSize()
 {
-    return font_size;
+    return conf.font_size;
 }
 
 
@@ -486,7 +283,7 @@ int LX_Configuration::getFontSize()
 */
 int LX_Configuration::getWinWidth()
 {
-    return width;
+    return conf.width;
 }
 
 
@@ -500,7 +297,7 @@ int LX_Configuration::getWinWidth()
 */
 int LX_Configuration::getWinHeight()
 {
-    return height;
+    return conf.height;
 }
 
 
@@ -514,6 +311,6 @@ int LX_Configuration::getWinHeight()
 */
 bool LX_Configuration::getFullscreenFlag()
 {
-    return fullscreen_flag;
+    return conf.fullscreen_flag;
 }
 

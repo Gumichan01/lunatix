@@ -22,6 +22,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_ConfigLoader.hpp>
 
 #define LUAC_CONFIG_FILE "script/LX_config.luac"  /**< The compiled lua file the engine uses for the configuration loading */
 
@@ -58,21 +59,8 @@ public :
 class LX_Configuration
 {
     // Variables
-    bool video_flag;
-    bool vsync_flag;
-    bool ttf_flag;
-    bool audio_flag;
-    bool joystick_flag;
-    bool opengl_flag;
-    UTF8string font_file;
-    int font_size;
-    int width;
-    int height;
-    bool fullscreen_flag;
+    LX_ConfigLoader::LX_InternalConfig conf;
 
-    // private functions
-    void assignString(lua_State * state, char *str, unsigned int len);
-    //void setFlags(void);
     void loadSDLFlags();
 
     LX_Configuration();
@@ -90,7 +78,7 @@ public :
     bool getVSyncFlag();
     bool getTTFFlag();
     bool getAudioFlag();
-    bool getJoystickFlag();
+    bool getGamepadFlag();
     bool getOpenGLFlag();
     const char * getFontFile();
     int getFontSize();

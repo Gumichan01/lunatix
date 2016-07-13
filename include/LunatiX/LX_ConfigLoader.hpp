@@ -26,7 +26,7 @@
 #define LX_WINFO_FILE "config/lxwindow.cfg"
 
 
-namespace LX_Config_Loader
+namespace LX_ConfigLoader
 {
 
 struct LX_InternalConfig
@@ -43,7 +43,6 @@ struct LX_InternalConfig
     int height;
     bool fullscreen_flag;
 };
-
 
 void loadSDLfileConfig(LX_InternalConfig& config);
 void loadWindowFileConfig(LX_InternalConfig& config);
