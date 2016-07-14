@@ -91,7 +91,7 @@ void test_font(void)
     LX_Log::log("INFO - Load the surface of the following shaded text: %s",str.c_str());
     cout << "INFO - Load the surface of the following shaded text: " << str
          << endl;
-    textS = font->drawShadedText(str,0,127,255);
+    textS = font->drawShadedText(str,0,127,255,0);
 
     if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
@@ -172,7 +172,7 @@ void test_font2(void)
     pos2 = {pos.x,pos.y,w,h};
 
     LX_Log::log("INFO - Load the surface of the following shaded text: %s",str.c_str());
-    textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,127,255),&win);
+    textS = LX_Graphics::loadTextureFromSurface(font->drawShadedText(str,0,127,255,0),&win);
 
     if(textS == nullptr)
         cerr << "FAILURE - Text not loaded - " << LX_GetError() << endl;
