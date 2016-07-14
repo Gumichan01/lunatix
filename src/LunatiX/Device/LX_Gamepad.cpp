@@ -29,16 +29,6 @@
 namespace LX_Device
 {
 
-/**
-*   @fn LX_Gamepad::LX_Gamepad(int index)
-*
-*   Load the gamepad
-*
-*   @param index The index of the joystick to query
-*
-*   @note   You can check the success of the operation
-*           calling LX_Gamepad::isConnected()
-*/
 LX_Gamepad::LX_Gamepad(int index): gc(nullptr),joy(nullptr),haptic(nullptr)
 {
     if(index < numberOfDevices() && SDL_IsGameController(index))
@@ -65,15 +55,6 @@ LX_Gamepad::~LX_Gamepad()
 }
 
 
-/**
-*   @fn bool LX_Gamepad::isConnected(void)
-*
-*   Get the status of the gamepad
-*
-*   @return TRUE if the gamepad is opened and connected,
-*           FALSE otherwise
-*
-*/
 bool LX_Gamepad::isConnected(void)
 {
     if(gc != nullptr)
@@ -83,29 +64,12 @@ bool LX_Gamepad::isConnected(void)
 }
 
 
-/**
-*   @fn bool LX_Gamepad::isHaptic(void)
-*
-*   Check if the gamepad is haptic
-*
-*   @return TRUE if the gamepad has force feedback support,
-*           FALSE otherwise
-*
-*/
 bool LX_Gamepad::isHaptic(void)
 {
     return haptic->isOpened();
 }
 
 
-/**
-*   @fn SDL_JoystickID LX_Gamepad::getID(void)
-*
-*   Get the ID of the gamepad
-*
-*   @return The ID of the gamepad, -1 otherwise
-*
-*/
 SDL_JoystickID LX_Gamepad::getID(void)
 {
     if(gc != nullptr)
@@ -115,31 +79,12 @@ SDL_JoystickID LX_Gamepad::getID(void)
 }
 
 
-/**
-*   @fn LX_Haptic * LX_Gamepad::getHaptic(void)
-*
-*   Get the haptic system of the gamepad
-*
-*   @return The haptic system
-*
-*   @note The system can be inexistent, so check the returned value
-*/
 LX_Haptic * LX_Gamepad::getHaptic(void)
 {
     return haptic;
 }
 
 
-
-/**
-*   @fn const char * LX_Gamepad::getName(void)
-*
-*   Get the name of the Gamepad
-*
-*   @return The name of the gamepad, a null pointer otherwise
-*
-*   @sa toString
-*/
 const char * LX_Gamepad::getName(void)
 {
     if(gc != nullptr)
@@ -149,13 +94,6 @@ const char * LX_Gamepad::getName(void)
 }
 
 
-/**
-*   @fn UTF8string LX_Gamepad::toString(void)
-*
-*   Get information about the gamepad
-*
-*   @return Always returns a valid string
-*/
 UTF8string LX_Gamepad::toString(void)
 {
     LX_GamepadInfo gi;
@@ -173,6 +111,4 @@ UTF8string LX_Gamepad::toString(void)
     return gamepadToString(gi);
 }
 
-
 };
-

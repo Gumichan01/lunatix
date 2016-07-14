@@ -54,17 +54,95 @@ struct LX_GamepadInfo
 
 };
 
-
+/**
+*   @fn int numberOfDevices(void)
+*
+*   Count the number of connected devices (gamepads)
+*
+*   @return The number of gamepads
+*/
 int numberOfDevices(void);
 
+/**
+*   @fn const char * nameOf(SDL_Joystick * joy)
+*
+*   Get the name of a joystick
+*
+*   @param joy The pointer to a joystick structure
+*
+*   @return The name of the joystick, a null pointer if the pointer is invalid
+*/
 const char * nameOf(SDL_Joystick * joy);
+
+/**
+*   @fn const char * nameOf(SDL_GameController * controller)
+*
+*   Get the name of a game controller
+*
+*   @param controller The pointer to a structure relative to the gamepad
+*
+*   @return The name of the game controller, a null pointer
+*           if the pointer is invalid
+*/
 const char * nameOf(SDL_GameController * controller);
 
+/**
+*   @fn int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
+*
+*   Get the name of a game controller
+*
+*   @param joy The joystick to get information from
+*   @param info The structure to store information
+*
+*   @return 0 if the joystick is valid and the function got information
+*               -1 on failure
+*/
 int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info);
+
+/**
+*   @fn int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
+*
+*   Get the name of a game controller
+*
+*   @param gc The game controller to get information from
+*   @param info The structure to store information
+*
+*   @return 0 if the game controller is valid and the function got information
+*               -1 on failure
+*
+*/
 int statGamepad(SDL_GameController * gp, LX_GamepadInfo& info);
 
+/**
+*   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
+*
+*   Get the string format of the information structure
+*
+*   @param info The information structure
+*   @return Always returns a valid string
+*
+*   @note This function never returns an invalid string
+*   @warning If info or str is not valid, a segmentation fault will occur
+*   @warning str must be long enough to get the entire text.
+*
+*   @sa statGamepad
+*/
 UTF8string gamepadToString(LX_GamepadInfo& info);
 
+/**
+*   @fn int mouseCursorDisplay(int toggle)
+*
+*   Define is the cursor will be shown or not
+*
+*   @param toggle One of hese following values :
+*           1 to show it
+*           0 to hide
+*           -1 to get the current state
+*
+*   @return 1 if the cursor is shown, 0 if it is hidden,
+*           a negative value on failure
+*
+*/
 int mouseCursorDisplay(int toggle);
 
 };

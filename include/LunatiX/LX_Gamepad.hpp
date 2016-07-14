@@ -46,14 +46,79 @@ class LX_Gamepad
 
 public :
 
+    /**
+    *   @fn LX_Gamepad(int index)
+    *
+    *   Load the gamepad
+    *
+    *   @param index The index of the joystick to query
+    *
+    *   @note   You can check the success of the operation
+    *           calling isConnected()
+    */
     LX_Gamepad(int index=0);
 
+    /**
+    *   @fn bool isConnected(void)
+    *
+    *   Get the status of the gamepad
+    *
+    *   @return TRUE if the gamepad is opened and connected,
+    *           FALSE otherwise
+    *
+    */
     bool isConnected(void);
+
+    /**
+    *   @fn bool isHaptic(void)
+    *
+    *   Check if the gamepad is haptic
+    *
+    *   @return TRUE if the gamepad has force feedback support,
+    *           FALSE otherwise
+    *
+    */
     bool isHaptic(void);
 
+    /**
+    *   @fn SDL_JoystickID getID(void)
+    *
+    *   Get the ID of the gamepad
+    *
+    *   @return The ID of the gamepad, -1 otherwise
+    *
+    */
     SDL_JoystickID getID(void);
+
+    /**
+    *   @fn LX_Haptic * getHaptic(void)
+    *
+    *   Get the haptic system of the gamepad
+    *
+    *   @return The haptic system
+    *
+    *   @note The system can be inexistent, so check the returned value
+    */
     LX_Haptic * getHaptic(void);
+
+    /**
+    *   @fn const char * getName(void)
+    *
+    *   Get the name of the Gamepad
+    *
+    *   @return The name of the gamepad, a null pointer otherwise
+    *
+    *   @sa toString
+    */
     const char * getName(void);
+
+    /**
+    *   @fn UTF8string toString(void)
+    *
+    *   Get information about the gamepad
+    *
+    *   @return Always returns a valid string
+    */
     UTF8string toString(void);
 
     ~LX_Gamepad();
