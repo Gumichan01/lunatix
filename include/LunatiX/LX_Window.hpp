@@ -152,7 +152,7 @@ class LX_Window
 public :
 
     /**
-    *   @fn LX_Window::LX_Window(LX_WindowInfo &info)
+    *   @fn LX_Window(LX_WindowInfo &info)
     *
     *   Create a window using information from the struture given in argument
     *
@@ -163,7 +163,7 @@ public :
 
     // Put the sprite on the screen
     /**
-    *   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
+    *   @fn bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     *
     *   This function puts a area of the surface on the window surface at a specified position
     *
@@ -184,7 +184,7 @@ public :
     bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos);
 
     /**
-    *   @fn bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
+    *   @fn bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
     *
     *   This function puts an area of the texture on the window
     *
@@ -209,7 +209,7 @@ public :
     bool putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos);
 
     /**
-    *   @fn bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
+    *   @fn bool putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
     *                                           const SDL_Rect *pos,const double angle)
     *
     *   This function puts an area of the texture on the window and optionnaly rotate it
@@ -237,7 +237,7 @@ public :
                              const double angle);
 
     /**
-    *   @fn void LX_Window::setTitle(std::string title)
+    *   @fn void setTitle(std::string title)
     *
     *   Set the title of the window
     *
@@ -248,7 +248,7 @@ public :
     void setTitle(std::string title);
 
     /**
-    *   @fn void LX_Window::setWindowSize(int w, int h)
+    *   @fn void setWindowSize(int w, int h)
     *
     *   Set the size of the window
     *
@@ -260,7 +260,7 @@ public :
     void setWindowSize(int w, int h);
 
     /**
-    *   @fn void LX_Window::setFullscreen(Uint32 flag)
+    *   @fn void setFullscreen(Uint32 flag)
     *
     *   Set the window's fullscreen state
     *
@@ -273,19 +273,19 @@ public :
     void setFullscreen(Uint32 flag);
 
     /**
-    *   @fn void LX_Window::update(void)
+    *   @fn void update(void)
     *   Updates the window's display
     */
     void update(void);
 
     /**
-    *   @fn void LX_Window::clearWindow(void)
+    *   @fn void clearWindow(void)
     *   Clear the display of the current window
     */
     void clearWindow(void);
 
     /**
-    *   @fn bool LX_Window::screenshot(std::string filename)
+    *   @fn bool screenshot(std::string filename)
     *
     *   Take a screenshot and save it in a file
     *
@@ -295,7 +295,7 @@ public :
     bool screenshot(std::string filename);
 
     /**
-    *   @fn void LX_Window::getInfo(LX_WindowInfo &info)
+    *   @fn void getInfo(LX_WindowInfo &info)
     *
     *   Get information of the current window
     *
@@ -304,7 +304,7 @@ public :
     void getInfo(LX_WindowInfo &info);
 
     /**
-    *   @fn SDL_Renderer * LX_Window::getRenderer(void)
+    *   @fn SDL_Renderer * getRenderer(void)
     *
     *   Get the window renderer
     *
@@ -313,7 +313,7 @@ public :
     SDL_Renderer * getRenderer(void);
 
     /**
-    *   @fn SDL_Surface * LX_Window::getSurface(void)
+    *   @fn SDL_Surface * getSurface(void)
     *
     *   Get the window surface
     *
@@ -324,7 +324,7 @@ public :
 
     /**
     *
-    *   @fn SDL_Window * LX_Window::getWindow(void)
+    *   @fn SDL_Window * getWindow(void)
     *
     *   Get the window
     *
@@ -337,7 +337,7 @@ public :
     SDL_Window * getWindow(void);
 
     /**
-    *   @fn int LX_Window::getWidth(void)
+    *   @fn int getWidth(void)
     *
     *   Get the width of the window
     *
@@ -346,7 +346,7 @@ public :
     int getWidth(void);
 
     /**
-    *   @fn int LX_Window::getHeight(void)
+    *   @fn int getHeight(void)
     *
     *   Get the height of the window
     *
@@ -355,7 +355,7 @@ public :
     int getHeight(void);
 
     /**
-    *   @fn LX_Window::~LX_Window()
+    *   @fn ~LX_Window()
     *
     *   Destroy the window instance
     */

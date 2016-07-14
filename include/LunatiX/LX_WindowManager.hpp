@@ -23,8 +23,6 @@
 
 #include <array>
 
-//#define LX_NBMAX_WINDOWS 8    /**< The maximum number of windows to display */
-
 
 namespace LX_Win
 {
@@ -51,20 +49,109 @@ class LX_WindowManager
 
 public:
 
+    /**
+    *   @fn void LX_WindowManager::init(void)
+    *
+    *   Initialize the window manager
+    *
+    */
     static void init(void);
+
+    /**
+    *   @fn LX_WindowManager * LX_WindowManager::getInstance()
+    *
+    *   Return an instance of the singleton LX_WindowManager
+    *
+    *   @return The singleton
+    *
+    */
     static LX_WindowManager * getInstance();
+
+    /**
+    *   @fn void LX_WindowManager::destroy(void)
+    *
+    *   Destroy the instance of the singleton
+    *
+    *   @warning    The windows contained in the window manager
+    *               are not destroyed. So it is necessary to keep an external
+    *               pointer to the windows added in the manager.
+    *
+    */
     static void destroy(void);
 
+    /**
+    *   @fn int LX_WindowManager::addWindow(LX_Window *w)
+    *
+    *   Add a window to the list
+    *
+    *   @param w The window
+    *
+    *   @return The ID of the window that was added if the instance is valid
+    *           -1 otherwise
+    *
+    *   @sa LX_Window
+    *   @sa removeWindow
+    */
     int addWindow(LX_Window *w);
+
+    /**
+    *   @fn LX_Window * LX_WindowManager::removeWindow(unsigned int id)
+    *
+    *   Delete a window from the list acording to its ID
+    *   and returns the pointer to it.
+    *
+    *   @param id The ID of the window that must be deleted
+    *
+    *   @return A valid pointer to a window if the ID refers to a valid window,
+    *           a null pointer otherwise
+    *
+    *   @sa addWindow
+    */
     LX_Window * removeWindow(unsigned int id);
+
+    /**
+    *   @fn unsigned int LX_WindowManager::nbWindows(void)
+    *
+    *   Count the number of opened windows
+    *
+    *   @return The number of opened windows
+    */
     unsigned int nbWindows(void);
 
+    /**
+    *   @fn void LX_WindowManager::updateWindows()
+    *   Update the windows
+    */
     void updateWindows();
+
+    /**
+    *   @fn void LX_WindowManager::clearWindows()
+    *   Clear the content of the windows
+    */
     void clearWindows();
 
+    /**
+    *   @fn LX_Window * LX_WindowManager::getWindow(unsigned int id)
+    *
+    *   Get a window according to its ID
+    *
+    *   @param id The id of the window
+    *
+    *   @return A reference to a LX_Window instance if it exists,
+    *           a null pointer otherwise
+    */
     LX_Window * getWindow(unsigned int id);
 };
 
+/**
+*   @fn LX_WindowManager * getWindowManager()
+*
+*   Return an instance of the singleton LX_WindowManager
+*
+*   @return The unique instance of LX_WindowManager
+*
+*   @note This function is equivalent to LX_WindowManager::getInstance
+*/
 LX_WindowManager * getWindowManager();
 
 };
