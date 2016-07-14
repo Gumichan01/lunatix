@@ -143,7 +143,7 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 *
 */
 SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
-                                unsigned int size,Uint8 r, Uint8 g, Uint8 b)
+                                unsigned int size,Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     SDL_Color bg = {r,g,b,0};
     TTF_Font *ttf = nullptr;
@@ -207,11 +207,11 @@ SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
         return nullptr;
     }
 
-    return drawShadedText(text.c_str(), bg.r, bg.g, bg.b);
+    return drawShadedText(text.c_str(), bg.r, bg.g, bg.b, bg.a);
 }
 
 
-SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     if(font_size == 0)
     {
@@ -219,14 +219,14 @@ SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 
         return nullptr;
     }
 
-    return drawText_(LX_TTF_SHADED,text.c_str(),font_size,r,g,b);
+    return drawText_(LX_TTF_SHADED,text.c_str(),font_size,r,g,b,a);
 }
 
 
-SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b,
-                                      unsigned int size)
+SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g,
+                                      Uint8 b, Uint8 a, unsigned int size)
 {
-    return drawText_(LX_TTF_SHADED,text.c_str(),size,r,g,b);
+    return drawText_(LX_TTF_SHADED,text.c_str(),size,r,g,b,a);
 }
 
 

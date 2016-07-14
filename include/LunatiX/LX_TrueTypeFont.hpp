@@ -88,7 +88,7 @@ class LX_Font
 
     SDL_Surface * drawText_(LX_TTF_TypeText type, std::string text,
                            unsigned int size = 0,
-                           Uint8 r = 0, Uint8 g = 0, Uint8 b = 0);
+                           Uint8 r = 0, Uint8 g = 0, Uint8 b = 0,Uint8 a = 0);
 
 public:
 
@@ -227,11 +227,12 @@ public:
     *   @param r The red channel
     *   @param g The green channel
     *   @param b The blue channel
+    *   @param a The alpha channel
     *
     *   @return An instance of SDL_Surface on success, a null pointer otherwise
     *
     */
-    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b);
+    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
     /**
     *   @fn SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g,
@@ -243,6 +244,7 @@ public:
     *   @param r The red color of the background
     *   @param g The green color of the background
     *   @param b The blue color of the background
+    *   @param a The alpha channel
     *   @param size The size defined by the user
     *
     *   @return An instance of SDL_Surface on success, a null pointer otherwise
@@ -251,7 +253,7 @@ public:
     *           the display method with a renderer and texutres.
     *
     */
-    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b,
+    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a,
                                  unsigned int size);
 
     /**
