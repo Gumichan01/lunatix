@@ -59,7 +59,7 @@ inline int LX_SetError(std::string str)
 *
 *   Set an error message
 *
-*   @param str The error utf-8 string
+*   @param u8str The error utf-8 string
 *
 *   @return Always returns -1
 *
@@ -71,4 +71,3 @@ inline int LX_SetError(UTF8string u8str)
 
 
 #endif // LX_ERROR_HPP_INCLUDED
-
