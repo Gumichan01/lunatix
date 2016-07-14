@@ -23,7 +23,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 #include <LunatiX/LX_Version.hpp>
-#include <Lua/lua.hpp>
 
 #include <iostream>
 
@@ -139,9 +138,6 @@ void LX_VersionDependencies(void)
          << static_cast<int>(mix_linked->minor) << "."
          << static_cast<int>(mix_linked->patch) << " ..." << endl;
 
-    cout << endl << LUA_RELEASE << endl
-         << LUA_COPYRIGHT  << endl
-         << LUA_AUTHORS << endl;
 }
 
 };
