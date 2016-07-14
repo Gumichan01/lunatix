@@ -64,14 +64,6 @@ class LX_Configuration
     LX_ConfigLoader::LX_InternalConfig conf;
 
     LX_Configuration();
-
-    /**
-    *   @fn const char * LX_ConfigurationException::what() const noexcept
-    *
-    *   Get the error string
-    *
-    *   @return The error string
-    */
     LX_Configuration(LX_Configuration& c);
     LX_Configuration& operator =(LX_Configuration& c);
     void loadSDLFlags();
@@ -229,4 +221,3 @@ public :
 };
 
 #endif // LX_LUA_LAYER_H_INCLUDED
-
