@@ -38,6 +38,7 @@ class LX_ConfigurationException : public std::exception
 
 public :
 
+    /// Construct the exception
     LX_ConfigurationException(UTF8string err);
 
     /**
@@ -48,6 +49,8 @@ public :
     *   @return The error string
     */
     const char * what() const noexcept;
+
+    /// Destroy the exception
     ~LX_ConfigurationException() noexcept;
 };
 
