@@ -136,7 +136,7 @@ LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size
 */
 void LX_Font::createbuffer()
 {
-    font_buffer = new LX_FileBuffer(font_str.c_str());
+    font_buffer = new LX_FileBuffer(font_str);
 }
 
 

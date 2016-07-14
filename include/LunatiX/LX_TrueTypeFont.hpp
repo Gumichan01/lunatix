@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_ttf.h>
 
 #define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
@@ -34,16 +34,12 @@ struct SDL_Color;
 
 namespace LX_Win
 {
-
 class LX_Window;
-
 };
 
 namespace LX_FileIO
 {
-
 class LX_FileBuffer;
-
 };
 
 
@@ -59,8 +55,8 @@ namespace LX_TrueTypeFont
 *   @brief The type of text
 *
 *   This enumeration describes the type of the text to draw :
-*    - LX_TTF_SOLID : Quick rendering and dirty text
-*    - LX_TTF_SHADED : Slow rendering and nice text
+*    - LX_TTF_SOLID   : Quick rendering and dirty text
+*    - LX_TTF_SHADED  : Slow rendering and nice text
 *    - LX_TTF_BLENDED : Very slow rendering but very nice text
 *
 */
@@ -78,7 +74,7 @@ enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
 */
 class LX_Font
 {
-    std::string font_str;                   /* The font file    */
+    UTF8string font_str;                    /* The font file    */
     unsigned int font_size;                 /* The font size    */
     SDL_Color font_color;                   /* The font color   */
     LX_FileIO::LX_FileBuffer *font_buffer;
