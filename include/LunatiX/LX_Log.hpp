@@ -20,7 +20,7 @@
 */
 
 #include <SDL2/SDL_log.h>
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 
 /**
 *   @namespace LX_Log
@@ -50,26 +50,153 @@ enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
                   LX_LOG_TEST = SDL_LOG_CATEGORY_TEST
                  };
 
+/**
+*   @fn bool isDebugMode(void)
+*
+*   Check if the program is in debug mode
+*
+*   @return TRUE if the program is in debug mode, false otherwise
+*/
 bool isDebugMode(void);
+
+/**
+*   @fn void setDebugMode(bool debug)
+*
+*   Set the debug mode
+*
+*   @param debug Optionnal argument, TRUE by default when it is not used
+*/
 void setDebugMode(bool debug = true);
+
+/**
+*   @fn void setDefaultPriority(void)
+*
+*   Set the default priorities to the application
+*/
 void setDefaultPriority(void);
 
+/**
+*   @fn void setVerbosePriority(LX_CATEGORY category)
+*
+*   Set the verbose priority to a log category
+*
+*   @param category
+*/
 void setVerbosePriority(LX_CATEGORY category);
+
+/**
+*   @fn void setDebugPriority(LX_CATEGORY category)
+*
+*   Set the debug priority to a log category
+*
+*   @param category
+*/
 void setDebugPriority(LX_CATEGORY category);
+
+/**
+*   @fn void setInfoPriority(LX_CATEGORY category)
+*
+*   Set the info priority to a log category
+*
+*   @param category
+*/
 void setInfoPriority(LX_CATEGORY category);
+
+/**
+*   @fn void setWarningPriority(LX_CATEGORY category)
+*
+*   Set the warning priority to a log category
+*
+*   @param category
+*/
 void setWarningPriority(LX_CATEGORY category);
+
+/**
+*   @fn void setErrorPriority(LX_CATEGORY category)
+*
+*   Set the error priority to a log category
+*
+*   @param category
+*/
 void setErrorPriority(LX_CATEGORY category);
+
+/**
+*   @fn void setCriticalPriority(LX_CATEGORY category)
+*
+*   Set the critical priority to a log category
+*
+*   @param category
+*/
 void setCriticalPriority(LX_CATEGORY category);
 
+/**
+*   @fn void logVerbose(LX_CATEGORY category,std::string format,...)
+*
+*   Log a message with the verbose priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
+*/
 void logVerbose(LX_CATEGORY category,std::string format,...);
+
+/**
+*   @fn void logDebug(LX_CATEGORY category,std::string format,...)
+*
+*   Log a message with the debug priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
+*/
 void logDebug(LX_CATEGORY category,std::string format,...);
+
+/**
+*   @fn void logInfo(LX_CATEGORY category,std::string format,...)
+*
+*   Log a message with the info priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
+*/
 void logInfo(LX_CATEGORY category,std::string format,...);
+
+/**
+*   @fn void logWarning(LX_CATEGORY category,std::string format,...)
+*
+*   Log a message with the warning priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
+*/
 void logWarning(LX_CATEGORY category,std::string format,...);
+
+/**
+*   @fn void logError(LX_CATEGORY category,std::string format,...)
+*
+*   Log a message with the error priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
+*/
 void logError(LX_CATEGORY category,std::string format,...);
+
+/**
+*   @fn void logCritical(LX_CATEGORY category,std::string format,...)
+*
+*   Log a message with the critical priority and a specified category
+*
+*   @param category : Category of the log
+*   @param format   : String format
+*/
 void logCritical(LX_CATEGORY category,std::string format,...);
 
+/**
+*   @fn void log(std::string format,...)
+*
+*   Log a message with the info priority and the applicatiion category
+*
+*   @param format : String format
+*/
 void log(std::string format,...);
-
 
 };
 

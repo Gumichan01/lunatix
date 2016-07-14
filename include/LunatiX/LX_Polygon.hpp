@@ -22,7 +22,7 @@
 *
 */
 
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 
 namespace LX_Physics
 {
