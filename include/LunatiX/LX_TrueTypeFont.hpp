@@ -199,9 +199,6 @@ public:
     *
     *   @return An instance of SDL_Surface on success, a null pointer otherwise
     *
-    *   @note   The size does not change anything when the text is displayed using
-    *           the display method with a renderer and texutres.
-    *
     */
     SDL_Surface * drawSolidText(std::string text, unsigned int size);
 
@@ -250,9 +247,6 @@ public:
     *
     *   @return An instance of SDL_Surface on success, a null pointer otherwise
     *
-    *   @note   The size does not change anything when the text is displayed using
-    *           the display method with a renderer and texutres.
-    *
     */
     SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a,
                                  unsigned int size);
@@ -278,9 +272,6 @@ public:
     *   @param size The size defined by the user
     *
     *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
-    *   @note   The size does not change anything when the text is displayed using
-    *           the display method with a renderer and texutres.
     *
     */
     SDL_Surface * drawBlendedText(std::string text, unsigned int size);
