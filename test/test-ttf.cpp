@@ -246,7 +246,7 @@ void test_font2(void)
 
     SDL_FreeSurface(s);
     LX_Log::log("INFO - Draw a shaded text with a null size");
-    s = font->drawShadedText(str,0,0,0,0);
+    s = font->drawShadedText(str,0,0,0,0,0);
 
     if(s != nullptr)
         cerr << "FAILURE - Expected: nullptr, got : a valid pointer " << endl;
