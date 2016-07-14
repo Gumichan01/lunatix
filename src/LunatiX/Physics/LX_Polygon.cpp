@@ -60,9 +60,15 @@ LX_Polygon::LX_Polygon(const unsigned int nb)
 
 bool LX_Polygon::addPoint(const int x, const int y) /// @todo refactor addPoint
 {
+    return addPoint(LX_Point(x,y));
+}
+
+
+bool LX_Polygon::addPoint(const LX_Point& p)
+{
     if(cursor < nbPoints)
     {
-        points[cursor] = LX_Point(x,y);
+        points[cursor] = p;
         cursor++;
 
         // Update the convexity when the polygon has at least 3 edges
@@ -73,12 +79,6 @@ bool LX_Polygon::addPoint(const int x, const int y) /// @todo refactor addPoint
     }
 
     return false;
-}
-
-
-bool LX_Polygon::addPoint(LX_Point *p)
-{
-    return addPoint(p->x,p->y);
 }
 
 

@@ -102,7 +102,7 @@ public :
     bool addPoint(const int x, const int y);
 
     /**
-    *   @fn bool LX_Polygon::addPoint(LX_Point *p)
+    *   @fn bool LX_Polygon::addPoint(const LX_Point& p)
     *
     *   Set a new point into the polygon
     *
@@ -111,7 +111,7 @@ public :
     *   @return TRUE if the point was added, FALSE otherwise
     *
     */
-    bool addPoint(LX_Point *p);
+    bool addPoint(const LX_Point& p);
 
     /**
     *   @fn unsigned int LX_Polygon::numberOfEdges(void) const
