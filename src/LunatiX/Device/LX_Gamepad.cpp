@@ -25,7 +25,6 @@
 #include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-using namespace std;
 
 namespace LX_Device
 {
@@ -151,13 +150,13 @@ const char * LX_Gamepad::getName(void)
 
 
 /**
-*   @fn std::string LX_Gamepad::toString(void)
+*   @fn UTF8string LX_Gamepad::toString(void)
 *
 *   Get information about the gamepad
 *
 *   @return Always returns a valid string
 */
-std::string LX_Gamepad::toString(void)
+UTF8string LX_Gamepad::toString(void)
 {
     LX_GamepadInfo gi;
     int err = 0;
@@ -168,7 +167,8 @@ std::string LX_Gamepad::toString(void)
         err = statGamepad(joy,gi);
 
     if(err == -1)
-        return nullptr;
+        return UTF8string(std::string("Cannot get gamepad information: ")
+                          + LX_GetError());
 
     return gamepadToString(gi);
 }

@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <Lunatix/utils/utf8_string.hpp>
 
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
@@ -54,7 +54,7 @@ public :
     SDL_JoystickID getID(void);
     LX_Haptic * getHaptic(void);
     const char * getName(void);
-    std::string toString(void);
+    UTF8string toString(void);
 
     ~LX_Gamepad();
 };

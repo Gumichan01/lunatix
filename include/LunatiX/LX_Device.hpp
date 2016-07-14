@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <Lunatix/utils/utf8_string.hpp>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
@@ -41,18 +41,18 @@ namespace LX_Device
 *   @struct LX_GamepadInfo
 *   @brief Information about gamepad
 */
-typedef struct LX_GamepadInfo
+struct LX_GamepadInfo
 {
 
-    SDL_JoystickID id;              /**< The joystick ID                */
-    SDL_JoystickGUID uid;           /**< The joystick UID               */
-    std::string name;               /**< The name of the joystick       */
-    int nb_axis;                    /**< The number of axes             */
-    int nb_balls;                   /**< The number of balls            */
-    int nb_buttons;                 /**< The number of buttons          */
-    int nb_hats;                    /**< The number of hats             */
+    SDL_JoystickID id;              /**< The joystick ID            */
+    SDL_JoystickGUID uid;           /**< The joystick UID           */
+    UTF8string name;                /**< The name of the joystick   */
+    int nb_axis;                    /**< The number of axes         */
+    int nb_balls;                   /**< The number of balls        */
+    int nb_buttons;                 /**< The number of buttons      */
+    int nb_hats;                    /**< The number of hats         */
 
-} LX_GamepadInfo;                   /**< @brief The gamepad structure   */
+};
 
 
 int numberOfDevices(void);
@@ -63,7 +63,7 @@ const char * nameOf(SDL_GameController * controller);
 int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info);
 int statGamepad(SDL_GameController * gp, LX_GamepadInfo& info);
 
-std::string gamepadToString(LX_GamepadInfo& info);
+UTF8string gamepadToString(LX_GamepadInfo& info);
 
 int mouseCursorDisplay(int toggle);
 

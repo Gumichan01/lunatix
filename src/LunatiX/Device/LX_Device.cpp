@@ -18,7 +18,6 @@
 *
 */
 
-#include <cstring>
 #include <iostream>
 #include <sstream>
 
@@ -27,15 +26,13 @@
 #include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-using namespace std;
-
 static const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickGUID
 
 
 namespace LX_Device
 {
-static int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
-static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+int gstat(SDL_Joystick * joy, SDL_GameController * gc,
                  LX_GamepadInfo& info);
 };
 
@@ -43,7 +40,7 @@ static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
 namespace LX_Device
 {
 
-static int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     if(joy == nullptr)
         return LX_SetError("Invalid joystick\n");
@@ -151,7 +148,7 @@ int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
 }
 
 
-static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
+int gstat(SDL_Joystick * joy, SDL_GameController * gc,
                  LX_GamepadInfo& info)
 {
     if(joy != nullptr)
@@ -171,7 +168,7 @@ static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
 
 
 /**
-*   @fn std::string gamepadToString(LX_GamepadInfo& info)
+*   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
 *
 *   Get the string format of the information structure
 *
@@ -184,24 +181,22 @@ static int gstat(SDL_Joystick * joy, SDL_GameController * gc,
 *
 *   @sa statGamepad
 */
-std::string gamepadToString(LX_GamepadInfo& info)
+UTF8string gamepadToString(LX_GamepadInfo& info)
 {
-    ostringstream stream;
-    char guid[GUID_SIZE+1];
-
-    memset(&guid,0,GUID_SIZE+1);
+    std::ostringstream stream;
+    char guid[GUID_SIZE+1] = {'\0'};
     SDL_JoystickGetGUIDString(info.uid,guid,GUID_SIZE);
 
-    stream << endl << " ==== Gamepad Information ==== " << endl << endl
-           << "Gamepad - ID : " << info.id << endl
-           << "Gamepad - UID : " << guid << endl
-           << "Gamepad - Name : " << info.name << endl
-           << "Gamepad - Number of Axes : " << info.nb_axis << endl
-           << "Gamepad - Number of Balls : " << info.nb_balls << endl
-           << "Gamepad - Number of Buttons : " << info.nb_buttons << endl
-           << "Gamepad - Number of Hats : " << info.nb_hats << endl;
+    stream << std::endl << " ==== Gamepad Information ==== " << std::endl
+           << "Gamepad - ID : " << info.id << std::endl
+           << "Gamepad - UID : " << guid << std::endl
+           << "Gamepad - Name : " << info.name << std::endl
+           << "Gamepad - Number of Axes : " << info.nb_axis << std::endl
+           << "Gamepad - Number of Balls : " << info.nb_balls << std::endl
+           << "Gamepad - Number of Buttons : " << info.nb_buttons << std::endl
+           << "Gamepad - Number of Hats : " << info.nb_hats << std::endl;
 
-    return stream.str();
+    return UTF8string(stream.str());
 }
 
 
