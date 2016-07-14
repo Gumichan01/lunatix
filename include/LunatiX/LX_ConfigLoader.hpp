@@ -25,7 +25,10 @@
 #define LX_SDL_FILE "config/lxsdl.cfg"
 #define LX_WINFO_FILE "config/lxwindow.cfg"
 
-
+/**
+*   @namespace LX_ConfigLoader
+*   @brief The configuration loader
+*/
 namespace LX_ConfigLoader
 {
 
