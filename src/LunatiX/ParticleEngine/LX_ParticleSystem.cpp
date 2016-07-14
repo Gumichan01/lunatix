@@ -21,46 +21,23 @@
 
 #include <new>
 
-#include <LunatiX/LX_WindowManager.hpp>
-#include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_ParticleSystem.hpp>
 #include <LunatiX/LX_Particle.hpp>
+
+#include <LunatiX/LX_WindowManager.hpp>
+#include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 using namespace std;
-//using namespace LX_Graphics;
 
 
 namespace LX_ParticleEngine
 {
 
-
-/**
-*   @fn LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
-*
-*   Create the instance with a number of particles
-*
-*   @param nbPart The number of particles to define in the system
-*
-*/
 LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
-    : LX_ParticleSystem(nbPart,0)
-
-{
-    // Empty
-}
+    : LX_ParticleSystem(nbPart,0) {}
 
 
-/**
-*   @fn LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
-*
-*   Create the instance with a number of particles and the id of the window
-*
-*   @param  nbPart The number of particles to define in the system
-*   @param  id The id of the window in the LX_WindowManager
-*           to get the rendeering context
-*
-*/
 LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
     : particles(nullptr), nbParticles(nbPart), idWin(id)
 {
@@ -68,12 +45,6 @@ LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned in
 }
 
 
-/**
-*   @fn LX_ParticleSystem::~LX_ParticleSystem()
-*
-*   Destroy the instance cleaning up the particles
-*
-*/
 LX_ParticleSystem::~LX_ParticleSystem()
 {
     const unsigned int n = nbParticles;
@@ -114,17 +85,6 @@ void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
 }
 
 
-/**
-*   @fn bool LX_ParticleSystem::addParticle(LX_Particle *p)
-*
-*   Add a particle into the particle system
-*
-*   @param p The particle to add
-*
-*   @return TRUE if the system had the particle with succes.
-*           FALSE if the particle is a null pointer or the system cannot add it
-*
-*/
 bool LX_ParticleSystem::addParticle(LX_Particle *p)
 {
     bool done = false;
@@ -147,17 +107,6 @@ bool LX_ParticleSystem::addParticle(LX_Particle *p)
 }
 
 
-/**
-*   @fn bool LX_ParticleSystem::rmParticle(unsigned int index)
-*
-*   Destroy a particle from the particle system according to its index
-*
-*   @param index the index of the particle in the list
-*
-*   @return TRUE if the system found the particle and destroyed it.
-*           FALSE if the index is invalid
-*
-*/
 bool LX_ParticleSystem::rmParticle(unsigned int index)
 {
     if(index > nbParticles || particles[index] == nullptr)
@@ -169,12 +118,6 @@ bool LX_ParticleSystem::rmParticle(unsigned int index)
 }
 
 
-/**
-*   @fn void LX_ParticleSystem::updateParticles(void)
-*
-*   Update the particles
-*
-*/
 void LX_ParticleSystem::updateParticles(void)
 {
     const unsigned int n = nbParticles;
@@ -192,17 +135,11 @@ void LX_ParticleSystem::updateParticles(void)
 }
 
 
-/**
-*   @fn void LX_ParticleSystem::displayParticles(void)
-*
-*   Display the particles
-*
-*/
 void LX_ParticleSystem::displayParticles(void)
 {
     const unsigned int n = nbParticles;
-
-    LX_Win::LX_Window * win = LX_Win::LX_WindowManager::getInstance()->getWindow(idWin);
+    LX_Win::LX_WindowManager *wm = LX_Win::LX_WindowManager::getInstance();
+    LX_Win::LX_Window * win = wm->getWindow(idWin);
 
     if(win == nullptr)
         return;
@@ -232,14 +169,6 @@ void LX_ParticleSystem::displayParticles(void)
 }
 
 
-/**
-*   @fn unsigned int LX_ParticleSystem::nbEmptyParticles(void)
-*
-*   Get the number of empty slots to set particles
-*
-*   @return The number of available slots of the particle system
-*
-*/
 unsigned int LX_ParticleSystem::nbEmptyParticles(void)
 {
     const unsigned int n = nbParticles;
@@ -255,28 +184,12 @@ unsigned int LX_ParticleSystem::nbEmptyParticles(void)
 }
 
 
-/**
-*   @fn unsigned int LX_ParticleSystem::nbActiveParticles(void)
-*
-*   Get the number of initialized particles
-*
-*   @return The number of particles that are not null of the system
-*
-*/
 unsigned int LX_ParticleSystem::nbActiveParticles(void)
 {
     return nbParticles - nbEmptyParticles();
 }
 
 
-/**
-*   @fn unsigned int LX_ParticleSystem::nbTotalParticles(void)
-*
-*   Get the maximum number of particles
-*
-*   @return The total number of particles the current particle system can have
-*
-*/
 unsigned int LX_ParticleSystem::nbTotalParticles(void)
 {
     return nbParticles;
