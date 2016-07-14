@@ -52,7 +52,7 @@ namespace LX_Graphics
 {
 
 /**
-*   @fn SDL_Surface * loadSurface(std::string filename)
+*   @fn SDL_Surface * loadSurface(const std::string filename)
 *
 *   This function loads a SDL_Surface from any image file an optimized its format
 *
@@ -67,7 +67,26 @@ namespace LX_Graphics
 *
 *   @sa loadSurfaceFromFileBuffer
 */
-SDL_Surface * loadSurface(std::string filename);
+SDL_Surface * loadSurface(const std::string filename);
+
+/**
+*   @fn SDL_Surface * loadSurface(const UTF8string filename)
+*
+*   This function loads a SDL_Surface from any image file an optimized its format
+*
+*   @param filename The name of the image file
+*
+*   @return The loaded and optimized surface if there is no problem,
+*           a null pointer otherwise
+*
+*   @note   When this function is called, the format optimization includes
+*           the alpha channel.
+*           No alpha value needs to be set on the surface after that.
+*
+*   @note The string given in argument is utf-8 encoded
+*   @sa loadSurfaceFromFileBuffer
+*/
+SDL_Surface * loadSurface(const UTF8string filename);
 
 /**
 *   @fn SDL_Surface * loadSurface(LX_FileIO::LX_File *file)
@@ -152,6 +171,22 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Win::LX_Window * w)
 SDL_Texture * loadTextureFromFile(const std::string filename, LX_Win::LX_Window * w);
 
 /**
+*   @fn SDL_Texture * loadTextureFromFile(const UTF8string filename, LX_Win::LX_Window * w)
+*
+*   Load a texture from a surface using the renderer of the window
+*
+*   @param filename The name of the file to create the texture from
+*   @param w The window that provide the rendering context to create the texture
+*
+*   @return A pointer to a SDL_Texture if the loading works,
+*           a null pointer otherwise
+*
+*   @note The string given in argument is utf-8 encoded
+*   @sa loadTextureFromSurface
+*/
+SDL_Texture * loadTextureFromFile(const UTF8string filename, LX_Win::LX_Window * w);
+
+/**
 *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 *
 *   Load a texture from a surface using the renderer of the window
@@ -171,7 +206,7 @@ SDL_Texture * loadTextureFromFile(const std::string filename, LX_Win::LX_Window 
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id = 0);
 
 /**
-*   @fn SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
+*   @fn SDL_Texture * loadTextureFromFile(const std::string filename, unsigned int id)
 *
 *   Load a new texture from a file using the renderer of the window
 *   specified by its ID
@@ -188,6 +223,26 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id = 0);
 *   @sa loadTextureFromSurface
 */
 SDL_Texture * loadTextureFromFile(const std::string filename, unsigned int id = 0);
+
+/**
+*   @fn SDL_Texture * loadTextureFromFile(const UTF8string filename, unsigned int id)
+*
+*   Load a new texture from a file using the renderer of the window
+*   specified by its ID
+*
+*   @param filename The name of the file to create the texture from
+*   @param id The ID of the window that provide the rendering context
+*
+*   @return A pointer to a SDL_Texture if the loading works,
+*           a null pointer otherwise
+*
+*   @note   If id is not given as argument to the function,
+*            the default argument is used, that is to say 0
+*
+*   @note The string given in argument is utf-8 encoded
+*   @sa loadTextureFromSurface
+*/
+SDL_Texture * loadTextureFromFile(const UTF8string filename, unsigned int id = 0);
 
 /**
 *

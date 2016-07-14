@@ -35,7 +35,7 @@ using namespace LX_Win;
 namespace LX_Graphics
 {
 
-SDL_Surface * loadSurface(std::string filename)
+SDL_Surface * loadSurface(const std::string filename)
 {
     SDL_Surface *loaded = IMG_Load(filename.c_str());
     SDL_Surface *optimized = optimizeSurface(loaded);
@@ -44,6 +44,10 @@ SDL_Surface * loadSurface(std::string filename)
     return optimized;
 }
 
+SDL_Surface * loadSurface(const UTF8string filename)
+{
+    return loadSurface(filename.utf8_str());
+}
 
 SDL_Surface * loadSurface(LX_File *file)
 {
@@ -77,22 +81,6 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 }
 
 
-
-/**
-*   @fn SDL_Surface * optimizeSurface(SDL_Surface * surface)
-*
-*   Optimize the surface format
-*
-*   @param surface The surface to optimize
-*
-*   @return A valid poinetr to the optimized surface on success.
-*           a null pointer on error or if the surface is not valid.
-*
-*   @note   The surface is automatically freed and become invalid.
-*
-*   @sa loadSurface
-*   @sa loadSurfaceFromFileBuffer
-*/
 SDL_Surface * optimizeSurface(SDL_Surface * surface)
 {
     SDL_Surface * optimized = nullptr;
@@ -115,7 +103,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 }
 
 
-SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
+SDL_Texture * loadTextureFromFile(const std::string filename, LX_Window * w)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
@@ -131,6 +119,10 @@ SDL_Texture * loadTextureFromFile(std::string filename, LX_Window * w)
     return tmpT;
 }
 
+SDL_Texture * loadTextureFromFile(const UTF8string filename, LX_Win::LX_Window * w)
+{
+    return loadTextureFromFile(filename.utf8_str(),w);
+}
 
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 {
@@ -148,7 +140,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 }
 
 
-SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
+SDL_Texture * loadTextureFromFile(const std::string filename, unsigned int id)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
@@ -162,6 +154,11 @@ SDL_Texture * loadTextureFromFile(std::string filename, unsigned int id)
     SDL_FreeSurface(tmpS);
 
     return tmpT;
+}
+
+SDL_Texture * loadTextureFromFile(const UTF8string filename, unsigned int id)
+{
+    return loadTextureFromFile(filename.utf8_str(),id);
 }
 
 
