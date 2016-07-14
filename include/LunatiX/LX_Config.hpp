@@ -34,7 +34,7 @@
 class LX_ConfigurationException : public std::exception
 {
 
-    UTF8string stringError;
+    UTF8string string_error;
 
 public :
 

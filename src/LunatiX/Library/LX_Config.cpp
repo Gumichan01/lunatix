@@ -32,12 +32,12 @@ static LX_Configuration *instance = nullptr;
 
 LX_ConfigurationException::LX_ConfigurationException(UTF8string err)
 {
-    stringError = err;
+    string_error = err;
 }
 
 const char * LX_ConfigurationException::what() const noexcept
 {
-    return stringError.utf8_str();
+    return string_error.utf8_str();
 }
 
 LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
