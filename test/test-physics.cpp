@@ -1,6 +1,8 @@
 
-#include <iostream>
+
 #include <LunatiX/Lunatix_engine.hpp>
+#include <cmath>
+#include <iostream>
 
 using namespace std;
 using namespace LX_Physics;
