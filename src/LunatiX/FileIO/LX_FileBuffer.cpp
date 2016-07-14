@@ -31,22 +31,11 @@
 namespace LX_FileIO
 {
 
-/**
-*   @fn LX_FileBuffer::LX_FileBuffer(const char * filename)
-*
-*   Build the instance of the file buffer
-*
-*   @param filename The file to generate the buffer
-*
-*   @exception std::logic_error If the filename is not defined
-*   @exception IOException If the file cannot be read by the instance
-*
-*/
-LX_FileBuffer::LX_FileBuffer(const char * filename)
+LX_FileBuffer::LX_FileBuffer(const std::string filename)
     : name(filename), buffer(nullptr), bufsize(0)
 {
     LX_File *reader = nullptr;
-    std::string str("LX_FileBuffer: " + name + " - ");
+    std::string str("LX_FileBuffer: " + std::string(name.utf8_str()) + " - ");
     size_t r = 0;
     Sint64 s = 0;
 
@@ -80,14 +69,6 @@ LX_FileBuffer::LX_FileBuffer(const char * filename)
 }
 
 
-/**
-*   @fn SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
-*
-*   Try to load a surface from the memory
-*
-*   @return A valid surface if the memory refers to an image
-*
-*/
 SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem(buffer, static_cast<int>(bufsize));
@@ -95,14 +76,6 @@ SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
 }
 
 
-/**
-*   @fn TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
-*
-*   Try to load a TTF_Font from the memory
-*
-*   @return A valid font if the memory refers to a font
-*
-*/
 TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 {
     SDL_RWops *rw = SDL_RWFromConstMem(buffer,static_cast<int>(bufsize));
@@ -110,14 +83,6 @@ TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 }
 
 
-/**
-*   @fn Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
-*
-*   Try to load a sample from the memory
-*
-*   @return A valid sample if the memory refers to a Mix_Chunk
-*
-*/
 Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem(buffer,static_cast<int>(bufsize));
@@ -125,26 +90,12 @@ Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
 }
 
 
-/**
-*   @fn const char * LX_FileBuffer::getFilename(void)
-*
-*   Get the name of the file the buffer refers to
-*
-*   @return The name of the file
-*
-*/
 const char * LX_FileBuffer::getFilename(void)
 {
-    return name.c_str();
+    return name.utf8_str();
 }
 
 
-/**
-*   @fn LX_FileBuffer::~LX_FileBuffer()
-*
-*   Destroy the file buffer
-*
-*/
 LX_FileBuffer::~LX_FileBuffer()
 {
     delete [] buffer;

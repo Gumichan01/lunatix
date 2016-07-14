@@ -81,7 +81,7 @@ public :
 */
 class LX_File
 {
-    std::string name;       /* The name of the file         */
+    UTF8string name;        /* The name of the file         */
     SDL_RWops *data;        /* The internal file structure  */
 
     LX_File(LX_File& f);
@@ -92,7 +92,7 @@ class LX_File
 public :
 
     /**
-    *   @fn LX_File(std::string filename, const Uint32 mode)
+    *   @fn LX_File(const std::string filename, const Uint32 mode)
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -110,7 +110,29 @@ public :
     *               or the file is not openable
     *
     */
-    LX_File(std::string filename, const Uint32 mode);
+    LX_File(const std::string filename, const Uint32 mode);
+
+
+    /**
+    *   @fn LX_File(const UTF8string& filename, const Uint32 mode)
+    *
+    *   Open the file given in argument according to the mode requested
+    *
+    *   @param filename The file to open
+    *   @param mode The mode to be used for opening the file.
+    *               It is one of these following :
+    *               - ::LX_FILEIO_RDONLY
+    *               - ::LX_FILEIO_WRONLY
+    *               - ::LX_FILEIO_APPEND
+    *               - ::LX_FILEIO_RDWR
+    *               - ::LX_FILEIO_RDAP
+    *               - ::LX_FILEIO_WRTR
+    *
+    *   @exception IOException If one of these aruguments are invalid
+    *               or the file is not openable
+    *
+    */
+    LX_File(const UTF8string& filename, const Uint32 mode);
 
     /**
     *   @fn size_t read(void *ptr,size_t data_size,size_t max_num)

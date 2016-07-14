@@ -38,7 +38,11 @@ const char * IOException::what() const noexcept
 IOException::~IOException() noexcept {}
 
 
-LX_File::LX_File(std::string filename, const Uint32 mode)
+LX_File::LX_File(const std::string filename, const Uint32 mode)
+    : LX_File(UTF8string(filename),mode) {}
+
+
+LX_File::LX_File(const UTF8string& filename, const Uint32 mode)
     : name(filename), data(nullptr)
 {
     if(mode == 0x00000000)
@@ -47,34 +51,33 @@ LX_File::LX_File(std::string filename, const Uint32 mode)
     open(mode);
 }
 
-
 void LX_File::open(const Uint32 mode)
 {
     std::string str = "LX_File : ";
 
     if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
     {
-        data = SDL_RWFromFile(name.c_str(),"wb+");
+        data = SDL_RWFromFile(name.utf8_str(),"wb+");
     }
     else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
     {
-        data = SDL_RWFromFile(name.c_str(),"rb+");
+        data = SDL_RWFromFile(name.utf8_str(),"rb+");
     }
     else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
     {
-        data = SDL_RWFromFile(name.c_str(),"ab+");
+        data = SDL_RWFromFile(name.utf8_str(),"ab+");
     }
     else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
     {
-        data = SDL_RWFromFile(name.c_str(),"rb");
+        data = SDL_RWFromFile(name.utf8_str(),"rb");
     }
     else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
     {
-        data = SDL_RWFromFile(name.c_str(),"wb");
+        data = SDL_RWFromFile(name.utf8_str(),"wb");
     }
     else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
     {
-        data = SDL_RWFromFile(name.c_str(),"ab");
+        data = SDL_RWFromFile(name.utf8_str(),"ab");
     }
 
     if(data == nullptr)
@@ -172,7 +175,7 @@ SDL_Surface * LX_File::getSurfaceFromData(void)
 
 const char * LX_File::getFilename(void)
 {
-    return name.c_str();
+    return name.utf8_str();
 }
 
 

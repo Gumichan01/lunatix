@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -44,7 +44,7 @@ class IOException;
 */
 class LX_FileBuffer
 {
-    std::string name;       /* The name of the file the instance refers to  */
+    UTF8string name;        /* The name of the file the instance refers to  */
     char *buffer;           /* The read-only buffer                         */
     Uint64 bufsize;         /* The size of the buffer                       */
 
@@ -53,13 +53,65 @@ class LX_FileBuffer
 
 public :
 
-    LX_FileBuffer(const char * filename);
+    /**
+    *   @fn LX_FileBuffer::LX_FileBuffer(const std::string filename)
+    *
+    *   Build the instance of the file buffer
+    *
+    *   @param filename The file to generate the buffer
+    *
+    *   @exception std::logic_error If the filename is not defined
+    *   @exception IOException If the file cannot be read by the instance
+    *
+    */
+    LX_FileBuffer(const std::string filename);
 
+    /**
+    *   @fn SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
+    *
+    *   Try to load a surface from the memory
+    *
+    *   @return A valid surface if the memory refers to an image
+    *
+    */
     SDL_Surface * getSurfaceFromBuffer(void);
+
+    /**
+    *   @fn TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
+    *
+    *   Try to load a TTF_Font from the memory
+    *
+    *   @return A valid font if the memory refers to a font
+    *
+    */
     TTF_Font * getFontFromBuffer(int size);
+
+    /**
+    *   @fn Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
+    *
+    *   Try to load a sample from the memory
+    *
+    *   @return A valid sample if the memory refers to a Mix_Chunk
+    *
+    */
     Mix_Chunk * getChunkFromBuffer(void);
+
+    /**
+    *   @fn const char * LX_FileBuffer::getFilename(void)
+    *
+    *   Get the name of the file the buffer refers to
+    *
+    *   @return The name of the file
+    *
+    */
     const char * getFilename(void);
 
+    /**
+    *   @fn LX_FileBuffer::~LX_FileBuffer()
+    *
+    *   Destroy the file buffer
+    *
+    */
     ~LX_FileBuffer();
 };
 
