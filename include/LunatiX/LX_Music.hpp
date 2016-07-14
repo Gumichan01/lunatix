@@ -37,15 +37,19 @@ namespace LX_Mixer
 */
 class LX_MusicException : public std::exception
 {
-    std::string stringError;
+    std::string string_error;
 
 public :
 
+    /// Construct the exception
     LX_MusicException(std::string err);
+    /// Construct the exception by copy
     LX_MusicException(const LX_MusicException& me);
 
+    /// Get the error message
     const char * what() const noexcept;
 
+    /// Destroy the exception
     ~LX_MusicException() noexcept;
 };
 
@@ -60,27 +64,107 @@ public :
 */
 class LX_Music : public virtual LX_Sound
 {
-    Mix_Music *music;      /* The music to play */
+    Mix_Music *music;
 
     LX_Music(LX_Music& m);
     LX_Music& operator =(LX_Music& m);
 
 public:
 
+    /**
+    *   @fn LX_Music(Mix_Music *mus)
+    *
+    *   Create the instance with a Mix_Music
+    *
+    *   @param mus The Mix_Music
+    */
     LX_Music(Mix_Music *mus);
+
+    /**
+    *   @fn LX_Music(std::string filename)
+    *
+    *   Create the instance loading a music file
+    *
+    *   @param filename The music filename that will be loaded
+    */
     LX_Music(std::string filename);
 
-    // Music
+    /**
+    *   @fn bool load(std::string filename)
+    *
+    *   Load the music specified in the music file
+    *
+    *   @param filename The file to load the music from
+    *
+    *   @return TRUE on success, FALSE otherwise
+    */
     bool load(std::string filename);
+
+    /**
+    *   @fn bool play(void)
+    *
+    *   Play the music specified in the LX_Music class
+    *
+    *   @return TRUE on success, FALSE otherwise
+    *
+    *   @note This function internally calls play(int loops) with no loop
+    *
+    */
     bool play(void);
+
+    /**
+    *   @fn bool play(int loops)
+    *
+    *   Play the music specified in the LX_Music class
+    *
+    *   @param loops The loop constant
+    *
+    *   @return TRUE on success,FALSE otherwise
+    */
     bool play(int loops);
+
+    /**
+    *   @fn void pause(void)
+    *   Pause or resume the current music
+    */
     void pause(void);
+
+    /**
+    *   @fn void stop(void)
+    *   Stop the music
+    */
     void stop(void);
 
-    // Volume
+    /**
+    *   @fn int volume(int newVolume)
+    *
+    *   Set the music volume to newVolume, from 0 to 128
+    *
+    *   @param newVolume The volume to set
+    *
+    *   @return The previous volume setting
+    *
+    *   @note If the volume is equals to -1, then the previous volume is the current volume
+    *   @note If the new volume is greater than 128, the volume is set to 128
+    *   @note The value 128 is the maximum value defined by the MIX_MAX_VOLUME macro
+    */
     int volume(int newVolume);
+
+    /**
+    *   @fn Mix_Music * getMusic(void)
+    *
+    *   Return the instance to the music structure
+    *
+    *   @return The Mix_Music
+    */
     Mix_Music *getMusic(void);
 
+    /**
+    *   @fn ~LX_Music(void)
+    *
+    *   Destroy the instance
+    *
+    */
     ~LX_Music();
 };
 
