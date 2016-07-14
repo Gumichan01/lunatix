@@ -165,24 +165,24 @@ void LX_Polygon::convexity(void)
         {
             switch(s)
             {
-                case POSITIVE :
-                    if(cross_product < 0)
-                    {
-                        convex = false;
-                        return;
-                    }
-                    break;
+            case POSITIVE :
+                if(cross_product < 0)
+                {
+                    convex = false;
+                    return;
+                }
+                break;
 
-                case NEGATIVE :
-                    if(cross_product > 0)
-                    {
-                        convex = false;
-                        return;
-                    }
-                    break;
+            case NEGATIVE :
+                if(cross_product > 0)
+                {
+                    convex = false;
+                    return;
+                }
+                break;
 
-                case NONE :
-                    break;
+            case NONE :
+                break;
             }
         }
     }
