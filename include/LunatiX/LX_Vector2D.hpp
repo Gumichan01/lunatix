@@ -191,6 +191,19 @@ LX_Vector2D& operator --(LX_Vector2D& v);
 LX_Vector2D  operator --(LX_Vector2D& v,int d);
 
 /**
+*   @fn LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
+*
+*   Scalar multiplication (syntactic sugar of multiply)
+*
+*   @param v The vector
+*   @param lambda The scalar value
+*
+*   @return The new vector after the multiplication
+*
+*/
+LX_Vector2D& operator *(LX_Vector2D& v,float lambda);
+
+/**
 *   @fn float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v)
 *
 *   Calculate the scalar product of 2 vectors
@@ -265,6 +278,7 @@ bool collinear(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 */
 LX_Vector2D& multiply(LX_Vector2D& v,float lambda);
+
 
 /**
 *   @fn LX_Vector2D& normalize(LX_Vector2D& v)
