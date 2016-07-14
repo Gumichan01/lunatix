@@ -21,6 +21,7 @@
 *
 */
 
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_mixer.h>
 
 #define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable the mix module */

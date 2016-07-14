@@ -33,8 +33,37 @@
 namespace LX_Random
 {
 
+/**
+*   @fn void initRand(void)
+*
+*   Initializes the random number generator
+*   setting a seed
+*
+*/
 void initRand(void);
+
+/**
+*   @fn uint64_t xorshiftRand(void)
+*
+*   Returns a pseudorandom number between 0 and (2^64 - 1)
+*
+*   @return An integer value between 0 and 2^64 - 1
+*
+*   @note This function uses the Xorshift* generator
+*
+*/
 uint64_t xorshiftRand(void);
+
+/**
+*   @fn int crand(void)
+*
+*   Returns a pseudorandom number between 0 and RAND_MAX (at least 32767)
+*
+*   @return An integer value between 0 and RAND_MAX
+*
+*   @note This function uses the standard C generator
+*
+*/
 int crand(void);
 
 

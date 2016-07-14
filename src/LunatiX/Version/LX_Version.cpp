@@ -26,9 +26,9 @@
 
 #include <iostream>
 
-#define LX_MAJOR_VERSION 0      /**< The major version of the engine */
-#define LX_MINOR_VERSION 8      /**< The minor version of the engine */
-#define LX_PATCH_VERSION 0      /**< The patch of the engine */
+#define LX_MAJOR_VERSION 0
+#define LX_MINOR_VERSION 8
+#define LX_PATCH_VERSION 0
 
 #define LX_COPYRIGHT    "Copyright (C) 2016"
 #define LX_AUTHOR       "Luxon Jean-Pierre"
@@ -37,11 +37,7 @@ using namespace std;
 
 namespace LX_VersionInfo
 {
-/**
-*   @fn void LX_EngineInfo(void)
-*
-*   Get information about the engine
-*/
+
 void LX_EngineInfo(void)
 {
     LX_Version luna;
@@ -52,13 +48,7 @@ void LX_EngineInfo(void)
          << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
 }
 
-/**
-*   @fn void LX_EngineVersion(LX_Version& version)
-*
-*   Get the version of the engine
-*
-*   @param version The structure to fill in.
-*/
+
 void LX_EngineVersion(LX_Version& version)
 {
     version.major = LX_MAJOR_VERSION;
@@ -66,11 +56,7 @@ void LX_EngineVersion(LX_Version& version)
     version.patch = LX_PATCH_VERSION;
 }
 
-/**
-*   @fn void LX_VersionDependencies(void)
-*
-*   Display information about the engine and its dependencies
-*/
+
 void LX_VersionDependencies(void)
 {
     // Information about SDL2 and the LunatiX engine

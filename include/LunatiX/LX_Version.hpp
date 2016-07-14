@@ -43,8 +43,27 @@ typedef struct LX_Version
 
 } LX_Version;   /**< The version */
 
+/**
+*   @fn void LX_EngineInfo(void)
+*
+*   Get information about the engine
+*/
 void LX_EngineInfo(void);
+
+/**
+*   @fn void LX_EngineVersion(LX_Version& version)
+*
+*   Get the version of the engine
+*
+*   @param version The structure to fill in.
+*/
 void LX_EngineVersion(LX_Version& version);
+
+/**
+*   @fn void LX_VersionDependencies(void)
+*
+*   Display information about the engine and its dependencies
+*/
 void LX_VersionDependencies(void);
 
 };

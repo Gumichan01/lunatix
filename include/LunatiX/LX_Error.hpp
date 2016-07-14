@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_error.h>
 
 
@@ -53,6 +53,22 @@ inline int LX_SetError(std::string str)
 {
     return SDL_SetError(str.c_str());
 }
+
+/**
+*   @fn inline int LX_SetError(UTF8string u8str)
+*
+*   Set an error message
+*
+*   @param str The error utf-8 string
+*
+*   @return Always returns -1
+*
+*/
+inline int LX_SetError(UTF8string u8str)
+{
+    return SDL_SetError(u8str.utf8_str());
+}
+
 
 #endif // LX_ERROR_HPP_INCLUDED
 
