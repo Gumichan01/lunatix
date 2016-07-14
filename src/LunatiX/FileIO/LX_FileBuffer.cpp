@@ -32,6 +32,10 @@ namespace LX_FileIO
 {
 
 LX_FileBuffer::LX_FileBuffer(const std::string filename)
+    : LX_FileBuffer(UTF8string(filename)) {}
+
+
+LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     : name(filename), buffer(nullptr), bufsize(0)
 {
     LX_File *reader = nullptr;
