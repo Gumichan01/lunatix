@@ -58,7 +58,7 @@ LX_Polygon::LX_Polygon(const unsigned int nb)
 }
 
 
-bool LX_Polygon::addPoint(const int x, const int y) /// @todo refactor addPoint
+bool LX_Polygon::addPoint(const int x, const int y)
 {
     return addPoint(LX_Point(x,y));
 }
