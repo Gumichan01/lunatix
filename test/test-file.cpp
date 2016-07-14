@@ -1,5 +1,6 @@
 
 #include <cstring>
+#include <cstdio>
 #include <iostream>
 #include <stdexcept>
 #include <LunatiX/Lunatix_engine.hpp>
@@ -25,7 +26,7 @@ namespace
 }
 
 
-int main()
+int main(int argc, char **argv)
 {
     bool err = LX_Init();
 
