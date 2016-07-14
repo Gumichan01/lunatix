@@ -21,7 +21,7 @@
 *
 */
 
-#include <Lunatix/utils/utf8_string.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
