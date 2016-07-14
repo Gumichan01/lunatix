@@ -35,13 +35,13 @@ namespace LX_VersionInfo
 *
 *   The current version of the engine
 */
-typedef struct LX_Version
+struct LX_Version
 {
     short major;         /**< Information about the major version */
     short minor;         /**< Information about the minor version */
     short patch;         /**< Information about the patch version */
 
-} LX_Version;   /**< The version */
+};
 
 /**
 *   @fn void LX_EngineInfo(void)

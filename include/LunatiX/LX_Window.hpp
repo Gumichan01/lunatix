@@ -21,7 +21,7 @@
 *
 */
 
-#include <string>
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_video.h>
 
@@ -33,14 +33,14 @@ struct SDL_Rect;
 
 
 // Fullscreen modes
-#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with desktop resolution */
-#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution */
-#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window */
+#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with desktop resolution         */
+#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution   */
+#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window              */
 
 // Display modes
-#define LX_WINDOW_SURFACE 0x01                                          /**< The flag to use the surface */
-#define LX_WINDOW_RENDERING 0x10                                        /**< The flag to use the rendering */
-#define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering) */
+#define LX_WINDOW_SURFACE 0x01                                          /**< The flag to use the surface    */
+#define LX_WINDOW_RENDERING 0x10                                        /**< The flag to use the rendering  */
+#define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering)       */
 
 /**
 *   @namespace LX_Win
@@ -53,18 +53,18 @@ namespace LX_Win
 *   @struct LX_WindowInfo
 *   @brief Information about the window
 */
-typedef struct LX_WindowInfo
+struct LX_WindowInfo
 {
-    std::string title;  /**< Title */
-    int x;              /**< X position */
-    int y;              /**< Y position */
-    int w;              /**< Width */
-    int h;              /**< Height */
-    Uint32 mode;        /**< Display mode */
-    Uint32 flag;        /**< Flags */
-    bool accel;         /**< Hardware acceleration */
+    std::string title;  /**< Title                  */
+    int x;              /**< X position             */
+    int y;              /**< Y position             */
+    int w;              /**< Width                  */
+    int h;              /**< Height                 */
+    Uint32 mode;        /**< Display mode           */
+    Uint32 flag;        /**< Flags                  */
+    bool accel;         /**< Hardware acceleration  */
 
-} LX_WindowInfo;        /**< @brief The window information structure */
+};
 
 
 /**
