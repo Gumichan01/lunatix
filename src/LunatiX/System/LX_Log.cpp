@@ -22,7 +22,6 @@
 #include <cstdarg>
 #include <cerrno>
 #include <cstring>
-#include <string>
 #include <sstream>
 #include <LunatiX/LX_Log.hpp>
 
@@ -34,14 +33,8 @@
 #include <cmath>
 #endif
 
-namespace LX_Log
+namespace
 {
-
-//  Private field in the namespace
-static bool debug_mode = false;
-long getMillisTime();
-std::string getDate();
-
 // Get the time in millisecond
 long getMillisTime()
 {
@@ -97,7 +90,13 @@ std::string getDate()
     return std::string(datestr + ss.str());
 
 }
+};
 
+namespace LX_Log
+{
+
+//  Private field in the namespace
+static bool debug_mode = false;
 
 bool isDebugMode(void)
 {

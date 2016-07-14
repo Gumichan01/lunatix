@@ -25,7 +25,6 @@
 
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
-#include <LunatiX/LX_Error.hpp>
 
 
 namespace LX_FileIO

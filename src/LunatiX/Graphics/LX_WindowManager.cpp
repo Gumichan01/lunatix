@@ -22,7 +22,6 @@
 
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
-#include <LunatiX/LX_Error.hpp>
 
 static LX_Win::LX_WindowManager *winInstance = nullptr;
 

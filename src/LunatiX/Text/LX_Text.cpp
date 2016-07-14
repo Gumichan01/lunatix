@@ -22,7 +22,6 @@
 #include <LunatiX/LX_Log.hpp>
 
 #include <cstring>
-#include <string>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_clipboard.h>

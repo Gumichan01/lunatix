@@ -18,7 +18,6 @@
 *
 */
 
-#include <iostream>
 #include <sstream>
 
 #include <SDL2/SDL_mouse.h>

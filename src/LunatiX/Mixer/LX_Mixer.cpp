@@ -22,7 +22,6 @@
 #include <LunatiX/LX_Music.hpp>
 #include <LunatiX/LX_Chunk.hpp>
 #include <LunatiX/LX_Mixer.hpp>
-#include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 
