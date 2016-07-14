@@ -94,6 +94,8 @@ public :
     *
     *   Try to load a TTF_Font from the memory
     *
+    *   @param size The font size
+    *
     *   @return A valid font if the memory refers to a font
     *
     */
