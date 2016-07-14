@@ -33,26 +33,6 @@ using namespace LX_FileIO;
 namespace LX_TrueTypeFont
 {
 
-/**
-*
-*   @fn LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
-*
-*   Construct the font with color and the size of the text
-*
-*   @param color The default color font
-*   @param size the size of the text
-*
-*   @note   If size is 0, then the default value defined in the configuratnion
-*           file is used.
-*
-*   @note   The constructor uses the configuration file to get the TTF file
-*
-*   @warning    You must initialize the SDL_TTF library
-*               setting the TTF flag to 1 in lxsdl.cfg.
-*
-*   @exception LX_FileIO::IOException if the file cannot be loaded
-*
-*/
 LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
     : font_str(""), font_size(size),
       font_color(color), font_buffer(nullptr)
@@ -79,44 +59,10 @@ LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
 }
 
 
-/**
-*
-*   @fn LX_Font::LX_Font(std::string font_file,const SDL_Color& color)
-*
-*   Construct the font with font file and color
-*
-*   @param font_file The font file to use
-*   @param color The default color font
-*
-*   @warning    It is necessary to initialize the SDL_TTF library
-*               setting the TTF flag to 1 in lxsdl.cfg
-*
-*   @exception  LX_FileIO::IOException if the file cannot be loaded
-*
-*/
 LX_Font::LX_Font(std::string font_file,const SDL_Color& color)
-    : LX_Font(font_file,color,LX_TTF_DEFAULT_FONT_SIZE)
-{
-    // Empty
-}
+    : LX_Font(font_file,color,LX_TTF_DEFAULT_FONT_SIZE) {}
 
 
-/**
-*
-*   @fn LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size)
-*
-*  Construct the font with a font file, a color and a size.
-*
-*   @param font_file The font file to load
-*   @param color The color font needed
-*   @param size The size of the text to display
-*
-*   @warning    It is necessary to initialize the SDL_TTF library setting
-*               the ttf flag to 1 in lxsdl.cfg.
-*
-*   @exception  LX_FileIO::IOException if the file cannot be loaded
-*
-*/
 LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size)
     : font_str(font_file), font_size(size),
       font_color(color), font_buffer(nullptr)
@@ -140,51 +86,36 @@ void LX_Font::createbuffer()
 }
 
 
-/**
-*   @fn LX_Font::~LX_Font()
-*
-*   Destroy the instance
-*
+/*
+*   Private function that calculates the resulting surface size
+*   of the text to display using the font given in parameter
 */
-LX_Font::~LX_Font()
+int LX_Font::sizeOfText_(TTF_Font *ttf, std::string text, int& w, int& h)
 {
-    delete font_buffer;
+    return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
 }
 
 
-/**
-*   @fn int LX_Font::sizeOfText(std::string text, int& w, int& h)
-*
-*   Calculate the resulting texture dimension of the
-*   text rendererd using the default font
-*
-*   @param text The std::string to size up
-*   @param w The reference of an integral to fill in the text width
-*   @param h The reference of an integral to fill in the text height
-*
-*   @return A control value, 0 on success, -1 on failure
-*
+/*
+*   Private function that creates an internal and temporary font
+*   according to the font file in the class or the file buffer if it exists
 */
+TTF_Font * LX_Font::createInternalFont(int size)
+{
+    if(font_buffer == nullptr)
+        return nullptr;        // This code will normally never be executed
+
+    // The font buffer exists
+    return font_buffer->getFontFromBuffer(size);
+}
+
+
 int LX_Font::sizeOfText(std::string text, int& w, int& h)
 {
     return sizeOfText(text.c_str(),font_size,w,h);
 }
 
 
-/**
-*   @fn int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
-*
-*   Calculate the resulting texture dimension of the
-*   text rendererd using the default font
-*
-*   @param text The std::string to size up
-*   @param size The size of the text
-*   @param w The reference of an integral to fill in the text width
-*   @param h The reference of an integral to fill in the text height
-*
-*   @return A control value, 0 on success, -1 on failure
-*
-*/
 int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 {
     int sz;
@@ -195,7 +126,7 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
     if(ttf == nullptr)
         return -1;
 
-    sz = sizeOfText(ttf,text.c_str(),w,h);
+    sz = sizeOfText_(ttf,text.c_str(),w,h);
 
     TTF_CloseFont(ttf);
     ttf = nullptr;
@@ -204,184 +135,14 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 
 
 /*
-*
-*   Calculate the resulting surface size of the text to display
-*   using the font given in parameter
-*
-*/
-int LX_Font::sizeOfText(TTF_Font *ttf, std::string text, int& w, int& h)
-{
-    return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
-}
-
-
-/**
-*   @fn SDL_Surface * LX_Font::drawSolidText(std::string text)
-*
-*   Create an UTF-8 encoded text in solid mode
-*
-*   @param text The std::string to display
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*/
-SDL_Surface * LX_Font::drawSolidText(std::string text)
-{
-    if(font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return nullptr;
-    }
-
-    return drawSolidText(text.c_str(),font_size);
-}
-
-
-/**
-*   @fn SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
-*
-*   Render the UTF-8 encoded text in solid mode. The size has to be specified
-*
-*   @param text The std::string to display
-*   @param size The size defined by the user
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*   @note   The size does not change anything when the text is displayed using
-*           the display method with a renderer and texutres.
-*
-*/
-SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
-{
-    return drawText(LX_TTF_SOLID,text.c_str(),size);
-}
-
-
-/**
-*   @fn SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
-*
-*   Create an UTF-8 encoded text in shaded mode
-*
-*   @param text The std::string to display
-*   @param bg The background color
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*/
-SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
-{
-    if(font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return nullptr;
-    }
-
-    return drawShadedText(text.c_str(), bg.r, bg.g, bg.b);
-}
-
-
-/**
-*   @fn SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
-*
-*   Create an UTF-8 encoded text in shaded mode
-*
-*   @param text The text to display
-*   @param r The red channel
-*   @param g The green channel
-*   @param b The blue channel
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*/
-SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
-{
-    if(font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return nullptr;
-    }
-
-    return drawText(LX_TTF_SHADED,text.c_str(),font_size,r,g,b);
-}
-
-
-/**
-*   @fn SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g,
-                                              Uint8 b, unsigned int size)
-*
-*   Render the UTF-8 encoded text in shaded mode. The size has to be specified.
-*
-*   @param text The text to display
-*   @param r The red color of the background
-*   @param g The green color of the background
-*   @param b The blue color of the background
-*   @param size The size defined by the user
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*   @note   The size does not change anything when the text is displayed using
-*           the display method with a renderer and texutres.
-*
-*/
-SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b,
-                                      unsigned int size)
-{
-    return drawText(LX_TTF_SHADED,text.c_str(),size,r,g,b);
-}
-
-
-/**
-*   @fn SDL_Surface * LX_Font::drawBlendedText(std::string text)
-*
-*   Create an UTF-8 encoded text surface in blended mode
-*
-*   @param text The text to display
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*/
-SDL_Surface * LX_Font::drawBlendedText(std::string text)
-{
-    if(font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return nullptr;
-    }
-
-    return drawBlendedText(text.c_str(),font_size);
-}
-
-
-/**
-*
-*   @fn SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
-*
-*   Render the UTF-8 encoded text in blended mode. The size has to be specified.
-*
-*   @param text The text to display
-*   @param size The size defined by the user
-*
-*   @return An instance of SDL_Surface on success, a null pointer otherwise
-*
-*   @note   The size does not change anything when the text is displayed using
-*           the display method with a renderer and texutres.
-*
-*/
-SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
-{
-    return drawText(LX_TTF_BLENDED,text.c_str(),size);
-}
-
-
-/*
-*   Create a text surface according to the type,
-*   the color bakground, if necessary, and its size
+*   Private function that creates a text surface according to the type,
+*   the color bakground, if necessary, and its size.
 *
 *   If size is 0, then the font size set by the user is used
 *   r, g, b and size are optionnal in this private function.
 *
 */
-SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
+SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
                                 unsigned int size,Uint8 r, Uint8 g, Uint8 b)
 {
     SDL_Color bg = {r,g,b,0};
@@ -420,38 +181,73 @@ SDL_Surface * LX_Font::drawText(LX_TTF_TypeText type, std::string text,
 }
 
 
-/*
-*   Create an internal and temporal font
-*   according to the font file in the class
-*   or the file buffer if it exists
-*/
-TTF_Font * LX_Font::createInternalFont(int size)
+SDL_Surface * LX_Font::drawSolidText(std::string text)
 {
-    if(font_buffer == nullptr)
-        return nullptr;        // This code will normally never be executed
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+        return nullptr;
+    }
 
-    // The font buffer exists
-    return font_buffer->getFontFromBuffer(size);
+    return drawSolidText(text.c_str(),font_size);
 }
 
 
-/**
-*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,
-                                                 std::string text, unsigned int size,
-                                                 unsigned int idWindow)
-*
-*   Create a Texture from a text according to the type and the size
-*
-*   @param type The type of the text(Solid, Shaded, or Blended)
-*   @param text The std::string to draw
-*   @param size The size of the text on the window
-*   @param idWindow The ID of the window to get the renderer from.
-*                   Optional argument
-*
-*   @return An instance of SDL_Texture on success, a null pointer
-*           if the window is not valid or if something wrong happened
-*
-*/
+SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
+{
+    return drawText_(LX_TTF_SOLID,text.c_str(),size);
+}
+
+
+SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
+{
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+        return nullptr;
+    }
+
+    return drawShadedText(text.c_str(), bg.r, bg.g, bg.b);
+}
+
+
+SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+{
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+        return nullptr;
+    }
+
+    return drawText_(LX_TTF_SHADED,text.c_str(),font_size,r,g,b);
+}
+
+
+SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b,
+                                      unsigned int size)
+{
+    return drawText_(LX_TTF_SHADED,text.c_str(),size,r,g,b);
+}
+
+
+SDL_Surface * LX_Font::drawBlendedText(std::string text)
+{
+    if(font_size == 0)
+    {
+        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+        return nullptr;
+    }
+
+    return drawBlendedText(text.c_str(),font_size);
+}
+
+
+SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
+{
+    return drawText_(LX_TTF_BLENDED,text.c_str(),size);
+}
+
+
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
         unsigned int size, unsigned int idWindow)
 {
@@ -462,24 +258,6 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
 }
 
 
-/**
-*   @fn SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,
-*                                                std::string text,
-*                                                unsigned int size,
-*                                                LX_Win::LX_Window *win)
-*
-*   Create a Texture from a text according to the type and the size
-*
-*   @param type The type of the text(Solid, Shaded, or Blended)
-*   @param text The std::string to draw
-*   @param size The size of the text on the window
-*   @param win The window to get the renderer from
-*
-*   @return An instance of SDL_Texture on success,
-*           a null pointer if the window is not valid
-*           or if something wrong happened
-*
-*/
 SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
         unsigned int size, LX_Win::LX_Window *win)
 {
@@ -493,7 +271,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
         return nullptr;
     }
 
-    surface = drawText(type,text.c_str(),size,black,black,black);
+    surface = drawText_(type,text.c_str(),size,black,black,black);
 
     if(surface == nullptr)
         return texture;
@@ -505,14 +283,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
     return texture;
 }
 
-/**
-*   @fn void LX_Font::setColor(SDL_Color *color)
-*
-*   This function sets the new color of texts.
-*
-*   @param color The new color
-*
-*/
+
 void LX_Font::setColor(SDL_Color *color)
 {
     if(color != nullptr)
@@ -521,6 +292,12 @@ void LX_Font::setColor(SDL_Color *color)
         font_color.g = color->g;
         font_color.b = color->b;
     }
+}
+
+
+LX_Font::~LX_Font()
+{
+    delete font_buffer;
 }
 
 };
