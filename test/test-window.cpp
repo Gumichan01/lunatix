@@ -82,7 +82,16 @@ void test_window2(void)
     const int w = 256;
     const int h = 256;
 
-    LX_Win::LX_Window win2("Hello #2",12,128,w,h,LX_WINDOW_RENDERING,SDL_WINDOW_SHOWN);
+    LX_Win::LX_WindowInfo wi;
+    LX_Win::LX_initWindowInfo(wi);
+    wi.title = "Hello #2";
+    wi.x = 12;
+    wi.y = 128;
+    wi.w = w;
+    wi.h = h;
+    wi.mode = LX_WINDOW_RENDERING;
+    wi.flag = SDL_WINDOW_SHOWN;
+    LX_Win::LX_Window win2(wi);
 
     cout << " = TEST 2 window = " << endl;
 
@@ -120,7 +129,17 @@ void test_surface(void)
     const int h = 256;
 
     bool screen_ok;
-    LX_Win::LX_Window win3("Hello #3",448,128,w,h,LX_WINDOW_SURFACE,SDL_WINDOW_SHOWN);
+    LX_Win::LX_WindowInfo wi;
+    LX_Win::LX_initWindowInfo(wi);
+    wi.title = "Hello #3";
+    wi.x = 448;
+    wi.y = 128;
+    wi.w = w;
+    wi.h = h;
+    wi.mode = LX_WINDOW_SURFACE;
+    wi.flag = SDL_WINDOW_SHOWN;
+    LX_Win::LX_Window win2(wi);
+    LX_Win::LX_Window win3(wi);
     std::string name = "data/bullet.png";
     SDL_Surface *sf = nullptr;
     SDL_Rect pos = {100,100,200,100};

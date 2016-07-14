@@ -120,7 +120,7 @@ public:
 };
 
 
-int main()
+int main(int argc, char **argv)
 {
     Dot *dot;
     LX_Win::LX_Window *w = nullptr;
@@ -136,7 +136,13 @@ int main()
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Particle ==== \n");
-    w = new LX_Win::LX_Window("Test particle",LX_WINDOW_RENDERING);
+
+    LX_Win::LX_WindowInfo winfo;
+    LX_Win::LX_loadWindowConfig(winfo);
+    winfo.title = "Test particle";
+    winfo.mode = LX_WINDOW_RENDERING;
+
+    w = new LX_Win::LX_Window(winfo);
     LX_Win::LX_WindowManager::getInstance()->addWindow(w);
 
     //File buffer of particle

@@ -39,7 +39,11 @@ void test_font(void)
     SDL_Rect pos = {100,100,32,12};
 
     string str = "My name is Gumichan01";
-    LX_Win::LX_Window win("LunatiX Engine test TTF No 1",LX_WINDOW_SURFACE);
+    LX_Win::LX_WindowInfo winfo;
+    LX_Win::LX_initWindowInfo(winfo);
+    winfo.title = "LunatiX Engine test TTF No 1";
+    winfo.mode = LX_WINDOW_SURFACE;
+    LX_Win::LX_Window win(winfo);
 
     LX_Log::log("INFO - Load an LX_Font object with RAII");
     {
@@ -135,8 +139,11 @@ void test_font2(void)
     SDL_Rect pos = {100,100,0,0};
     SDL_Rect pos2 = {100,100,0,0};
     int size_for_test = 48;
-
-    LX_Win::LX_Window win("LunatiX Engine test TTF No 2",LX_WINDOW_RENDERING);
+    LX_Win::LX_WindowInfo winfo;
+    LX_Win::LX_loadWindowConfig(winfo);
+    winfo.title = "LunatiX Engine test TTF No 2";
+    winfo.mode = LX_WINDOW_RENDERING;
+    LX_Win::LX_Window win(winfo);
 
     LX_Log::log("INFO - new font");
     font = new LX_Font(color,size_for_test);
