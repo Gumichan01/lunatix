@@ -201,12 +201,6 @@ SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
 
 SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
 {
-    if(font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
-        return nullptr;
-    }
-
     return drawShadedText(text.c_str(), bg.r, bg.g, bg.b, bg.a);
 }
 

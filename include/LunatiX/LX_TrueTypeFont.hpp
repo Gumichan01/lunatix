@@ -219,7 +219,8 @@ public:
     SDL_Surface * drawShadedText(std::string text, SDL_Color bg);
 
     /**
-    *   @fn SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b)
+    *   @fn SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b,
+                                         Uint8 a)
     *
     *   Create an UTF-8 encoded text in shaded mode
     *
@@ -236,7 +237,7 @@ public:
 
     /**
     *   @fn SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g,
-    *                                             Uint8 b, unsigned int size)
+    *                                             Uint8 b, Uint8 a, unsigned int size)
     *
     *   Render the UTF-8 encoded text in shaded mode. The size has to be specified.
     *
