@@ -70,13 +70,7 @@ static Uint32 generateFlags(LX_Configuration &config)
     return flag;
 }
 
-/**
-*   @fn void LX_initWindowInfo(LX_WindowInfo &info)
-*
-*   Get the default configuration of window that will be created.
-*
-*   @param info The structure to fill information in
-*/
+
 void LX_initWindowInfo(LX_WindowInfo &info)
 {
     info.title = DEFAULT_TITLE;
@@ -89,13 +83,7 @@ void LX_initWindowInfo(LX_WindowInfo &info)
     info.accel = true;
 }
 
-/**
-*   @fn void LX_loadWindowConfig(LX_WindowInfo &info)
-*
-*   Get the configuration of window from the configuration file
-*
-*   @param info The structure to fill information in
-*/
+
 void LX_loadWindowConfig(LX_WindowInfo &info)
 {
     LX_Configuration *config = LX_Configuration::getInstance();
@@ -115,129 +103,28 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
     }
 }
 
+/* Exception */
 
-/**
-*   @fn LX_WindowException::LX_WindowException(std::string err)
-*   @param err The error string
-*/
 LX_WindowException::LX_WindowException(std::string err)
 {
-    stringError = err;
+    string_error = err;
 }
 
-/**
-*   @fn LX_WindowException::LX_WindowException(const LX_WindowException& w)
-*   @param w Exception to copy
-*/
 LX_WindowException::LX_WindowException(const LX_WindowException& w)
 {
-    stringError = w.stringError;
+    string_error = w.string_error;
 }
 
-
-/**
-*   @fn const char * LX_WindowException::what() const noexcept
-*
-*   Get the error string associated with the exception
-*
-*   @return The error string
-*/
 const char * LX_WindowException::what() const noexcept
 {
-    return stringError.c_str();
+    return string_error.c_str();
 }
 
 LX_WindowException::~LX_WindowException() noexcept {}
 
 
-/**
-*   @fn LX_Window::LX_Window(const Uint32 mode, bool accel)
-*
-*   @deprecated This function is not adapted to real user needs and
-*               will be removed in the last version.
-*               Please use the new constuctor witl the LX_WindowInfo stucture.
-*
-*   Create the window with the default configuration
-*
-*   @param mode The display mode
-*           - ::LX_WINDOW_SURFACE : to use surfaces
-*           - ::LX_WINDOW_RENDERING : to use the renderer
-*
-*   @param accel Tag that selects the rendering mode
-*           - True : Use hardware acceleration
-*           - False : Use software fallback
-*
-*   @note The default configuration is used in this constructor
-*   @exception LX_WindowException
-*
-*/
-LX_Window::LX_Window(const Uint32 mode, bool accel)
-    : LX_Window(DEFAULT_TITLE,mode,accel)
-{
-    // Empty
-}
+/* LX_Window */
 
-
-/**
-*   @fn LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
-*
-*   @deprecated This function will be removed in the last version.
-*               Please use the new constuctor witl the LX_WindowInfo stucture.
-*
-*   Create the window setting the title and using the configuration file
-*
-*   @param title The title of the window
-*   @param mode The display mode :
-*           - ::LX_WINDOW_SURFACE : to use surfaces
-*           - ::LX_WINDOW_RENDERING : to use the renderer
-*
-*   @param accel Tag that selects the rendering mode
-*           - True : Use hardware acceleration
-*           - False : Use software fallback
-*
-*   @note The default configuration is used in this constructor
-*
-*/
-LX_Window::LX_Window(std::string title, const Uint32 mode, bool accel)
-    : window(nullptr), renderer(nullptr), original_width(0), original_height(0),
-      render_method(false)
-{
-    int xpos,ypos,w,h;
-    Uint32 flag = 0x00000000;
-    LX_Configuration *config = LX_Configuration::getInstance();
-
-    w = config->getWinWidth();
-    h = config->getWinHeight();
-    original_width = w;
-    original_height = h;
-
-    if(config->getFullscreenFlag())
-    {
-        flag |= LX_GRAPHICS_FULLSCREEN;
-        xpos = SDL_WINDOWPOS_UNDEFINED;
-        ypos = SDL_WINDOWPOS_UNDEFINED;
-    }
-    else
-    {
-        xpos = SDL_WINDOWPOS_CENTERED;
-        ypos = SDL_WINDOWPOS_CENTERED;
-    }
-
-    if(config->getOpenGLFlag())
-        flag |= SDL_WINDOW_OPENGL;
-
-    createWindow(title,xpos,ypos,w,h,mode,flag,accel);
-}
-
-
-/**
-*   @fn LX_Window::LX_Window(LX_WindowInfo &info)
-*
-*   Create a window using information from the struture given in argument
-*
-*   @param info The structure tha contains information about the window
-*   @note The structure is updated when the window is created
-*/
 LX_Window::LX_Window(LX_WindowInfo &info)
     : window(nullptr), renderer(nullptr),
       original_width(info.w), original_height(info.h), render_method(false)
@@ -248,50 +135,8 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 }
 
 
-/**
-*   @fn LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
-*                            const Uint32 mode, Uint32 flag, bool accel)
-*
-*   @deprecated This function has too mush parameters and
-*               will be removed in the last version.
-*               Please use the new constuctor witl the LX_WindowInfo stucture.
-*
-*   Create the window with a custom configuration
-*
-*   @param title The title of the window
-*   @param posX The X position of the window on the desktop
-*   @param posY The Y position of the window on the desktop
-*   @param w The width of the window
-*   @param h The height of the window
-*   @param mode The display mode
-*           - ::LX_WINDOW_SURFACE : to use surfaces
-*           - ::LX_WINDOW_RENDERING : to use the renderer
-*
-*   @param flag One of these following flags
-*           - ::LX_GRAPHICS_FULLSCREEN_DESKTOP
-*           - ::LX_GRAPHICS_FULLSCREEN
-*           - ::LX_GRAPHICS_NO_FULLSCREEN
-*           - And any SDL flags
-*
-*   @param accel Tag that selects the rendering mode
-*           - True : Use hardware acceleration
-*           - False : Use software fallback
-*
-*   @note This constructor does not use the configuration file
-*   @exception LX_WindowException
-*
-*/
-LX_Window::LX_Window(std::string title, int posX, int posY, int w, int h,
-                     const Uint32 mode, Uint32 flag, bool accel)
-    : window(nullptr), renderer(nullptr), original_width(w),
-      original_height(h), render_method(false)
-{
-    createWindow(title,posX,posY,w,h,mode,flag,accel);
-}
-
-
 /*
-*   Initialize the window according to the configuration
+*   Private function that initializes the window according to the configuration
 */
 void LX_Window::createWindow(std::string &title, int posX, int posY, int w, int h,
                              const Uint32 mode, Uint32 flag, bool accel)
@@ -309,7 +154,7 @@ void LX_Window::createWindow(std::string &title, int posX, int posY, int w, int 
 
 
 /*
-*   Create a renderer for the window
+*   Private function that creates a renderer for the window
 */
 void LX_Window::createRendering(bool accel)
 {
@@ -339,38 +184,6 @@ void LX_Window::createRendering(bool accel)
 }
 
 
-/**
-*   @fn LX_Window::~LX_Window()
-*
-*   Destroy the window instance
-*
-*/
-LX_Window::~LX_Window()
-{
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-}
-
-
-/**
-*   @fn bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
-*
-*   This function puts a area of the surface on the window surface at a specified position
-*
-*   @param image The surface to put
-*   @param area The area of the surface to put on the screen
-*   @param pos The position of the surface
-*
-*   @return True If the image was put with success, False otherwise
-*
-*   @note   If you do not need to determine the area parameter of the surface,
-*           put a null pointer
-*
-*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
-*           Actually, LX_AABB is just an alias of SDL_Rect
-*
-*   @sa putTexture
-*/
 bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 {
     int err = 0;
@@ -393,109 +206,32 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 }
 
 
-/**
-*   @fn bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
-*
-*   This function puts an area of the texture on the window
-*
-*   @param origin The texture to put
-*   @param area The area of the surface to put on the renderer
-*   @param pos The position of the texture
-*
-*   @return True If the texture was put with success, False otherwise
-*
-*   @note   If you do not need to determine the area parameter of the surface,
-*           put a null pointer
-*
-*   @note You can give a LX_AABB object to the function instead of a SDL_Rect object.
-*           Actually, LX_AABB is just an alias of SDL_Rect
-*
-*   @warning The width and the height defined in the SDL_Rect are important, the function uses it
-*               to display the texture according to its dimension
-*
-*   @sa putSurface
-*   @sa putTextureAndRotate
-*/
 bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 {
-    return(SDL_RenderCopy(renderer,origin,area,pos) == 0);
+    return SDL_RenderCopy(renderer,origin,area,pos) == 0;
 }
 
 
-/**
-*   @fn bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
-*                                           const SDL_Rect *pos,const double angle)
-*
-*   This function puts an area of the texture on the window and optionnaly rotate it
-*
-*   @param origin The texture to put
-*   @param area The area of the surface to put on the renderer
-*   @param pos The position of the texture
-*   @param angle an angle in degrees that indicate the rotation
-*
-*   @return True If the texture was put with success, False otherwise
-*
-*   @note   If you do not need to determine the area parameter of the surface,
-*           put a null pointer
-*   @note   You can give a LX_AABB object to the function instead of a SDL_Rect object.
-*           Actually, LX_AABB is just an alias of SDL_Rect
-*
-*   @warning    The width and the height defined in the SDL_Rect are important,
-*               the function uses it to display the texture according
-*               to its dimension
-*
-*   @sa putSurface
-*   @sa putTexture
-*/
 bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
                                     const SDL_Rect *pos, const double angle)
 {
-    return(SDL_RenderCopyEx(renderer,origin,area,pos, (-angle), nullptr,SDL_FLIP_NONE) == 0);
+    return SDL_RenderCopyEx(renderer,origin,area,pos,(-angle),
+                            nullptr,SDL_FLIP_NONE) == 0;
 }
 
 
-/**
-*   @fn void LX_Window::setTitle(std::string title)
-*
-*   Set the title of the window
-*
-*   @param title The title
-*
-*   @sa setWindowSize
-*/
 void LX_Window::setTitle(std::string title)
 {
     SDL_SetWindowTitle(window,title.c_str());
 }
 
 
-/**
-*   @fn void LX_Window::setWindowSize(int w, int h)
-*
-*   Set the size of the window
-*
-*   @param w The width of the window
-*   @param h The height of the window
-*
-*   @sa setTitle
-*/
 void LX_Window::setWindowSize(int w, int h)
 {
     SDL_SetWindowSize(window,w,h);
 }
 
 
-/**
-*   @fn void LX_Window::setFullscreen(Uint32 flag)
-*
-*   Set the window's fullscreen state
-*
-*   @param flag The flag to use in this function:
-*           - ::LX_GRAPHICS_FULLSCREEN_DESKTOP
-*           - ::LX_GRAPHICS_FULLSCREEN
-*           - ::LX_GRAPHICS_NO_FULLSCREEN
-*
-*/
 void LX_Window::setFullscreen(Uint32 flag)
 {
     SDL_SetWindowFullscreen(window,flag);
@@ -507,68 +243,45 @@ void LX_Window::setFullscreen(Uint32 flag)
 }
 
 
-/**
-*   @fn void LX_Window::update(void)
-*
-*   Updates the window's display
-*
-*/
-void LX_Window::update(void)
-{
-    if(render_method)
-        updateRenderer();
-    else
-        updateWindow();
-}
-
-
-
 /*
-*   This function updates the renderer of the window
+*   This private function updates the renderer of the window
 *
 *   This fonction must be only used when textures are manipulated
 *   on the current window. So LX_Window::updateWindow() and this function
 *   cannot be used together on a same window.
-*
 */
-void LX_Window::updateRenderer(void)
+void LX_Window::updateRenderer_(void)
 {
     SDL_RenderPresent(renderer);
 }
 
 
 /*
-*   This function updates the surface of the window
+*   This private function updates the surface of the window
 *
 *   This fonction must be only used whane textures are manipulated
 *   on the current window. So LX_Window::updateRenderer() and this function
 *   cannot be used together on a same window.
 */
-void LX_Window::updateWindow(void)
+void LX_Window::updateWindow_(void)
 {
     SDL_UpdateWindowSurface(window);
 }
 
 
-/**
-*   @fn void LX_Window::clearWindow(void)
-*
-*   Clear the display of the current window
-*
-*/
-void LX_Window::clearWindow(void)
+void LX_Window::update(void)
 {
     if(render_method)
-        clearRenderer();
+        updateRenderer_();
     else
-        clearSurface();
+        updateWindow_();
 }
 
 
 /*
-*   Clear the main window surface
+*   Private function that clears the main window surface
 */
-void LX_Window::clearSurface(void)
+void LX_Window::clearSurface_(void)
 {
     SDL_Surface *tmp = SDL_GetWindowSurface(window);
     SDL_FillRect(tmp,nullptr, SDL_MapRGB(tmp->format,0,0,0));
@@ -576,34 +289,25 @@ void LX_Window::clearSurface(void)
 
 
 /*
-*   Clear the main window renderer
+*   Private function that clears the main window renderer
 */
-void LX_Window::clearRenderer(void)
+void LX_Window::clearRenderer_(void)
 {
     SDL_RenderClear(renderer);
 }
 
 
-/**
-*   @fn bool LX_Window::screenshot(std::string filename)
-*
-*   Take a screenshot and save it in a file
-*
-*   @param filename The name of the file to save the image in
-*   @return True on success, False otherwise
-*
-*/
-bool LX_Window::screenshot(std::string filename)
+void LX_Window::clearWindow(void)
 {
     if(render_method)
-        return screenshotUsingRenderer(filename);
-
-    return screenshotUsingSurface(filename);
+        clearRenderer_();
+    else
+        clearSurface_();
 }
 
 
 /*
-*   Make a screenshot using the renderer
+*   Private function that makes a screenshot using the renderer
 */
 bool LX_Window::screenshotUsingRenderer(std::string& filename)
 {
@@ -632,9 +336,8 @@ bool LX_Window::screenshotUsingRenderer(std::string& filename)
     return err == 0;
 }
 
-
 /*
-*   Make a screenshot using the renderer
+*   Private function that makes a screenshot using the renderer
 */
 bool LX_Window::screenshotUsingSurface(std::string& filename)
 {
@@ -647,13 +350,16 @@ bool LX_Window::screenshotUsingSurface(std::string& filename)
     return(IMG_SavePNG(sshot,filename.c_str()) == 0);
 }
 
-/**
-*   @fn void LX_Window::getInfo(LX_WindowInfo &info)
-*
-*   Get information of the current window
-*
-*   @param info the info the structure to fill in information
-*/
+
+bool LX_Window::screenshot(std::string filename)
+{
+    if(render_method)
+        return screenshotUsingRenderer(filename);
+
+    return screenshotUsingSurface(filename);
+}
+
+
 void LX_Window::getInfo(LX_WindowInfo &info)
 {
     info.title = SDL_GetWindowTitle(window);
@@ -677,60 +383,25 @@ void LX_Window::getInfo(LX_WindowInfo &info)
     }
 }
 
-/**
-*   @fn SDL_Renderer * LX_Window::getRenderer(void)
-*
-*   Get the window renderer
-*
-*   @return A valid pointer to the renderer if the window internally use it
-*
-*/
+
 SDL_Renderer * LX_Window::getRenderer(void)
 {
     return SDL_GetRenderer(window);
 }
 
 
-/**
-*   @fn SDL_Surface * LX_Window::getSurface(void)
-*
-*   Get the window surface
-*
-*   @return A valid pointer to the SDL_Surface if the window internally use it
-*
-*/
 SDL_Surface * LX_Window::getSurface(void)
 {
     return SDL_GetWindowSurface(window);
 }
 
 
-/**
-*
-*   @fn SDL_Window * LX_Window::getWindow(void)
-*
-*   Get the window
-*
-*   @return A pointer to the SDL_Window instance
-*
-*   @note Normally, the function never returns an invalid pointer,
-*           but it is better to check the pointer value
-*
-*/
 SDL_Window * LX_Window::getWindow(void)
 {
     return window;
 }
 
 
-/**
-*   @fn int LX_Window::getWidth(void)
-*
-*   Get the width of the window
-*
-*   @return the width
-*
-*/
 int LX_Window::getWidth(void)
 {
     int w;
@@ -740,20 +411,19 @@ int LX_Window::getWidth(void)
 }
 
 
-/**
-*   @fn int LX_Window::getHeight(void)
-*
-*   Get the height of the window
-*
-*   @return the height
-*
-*/
 int LX_Window::getHeight(void)
 {
     int h;
     SDL_GetWindowSize(window,nullptr,&h);
 
     return h;
+}
+
+
+LX_Window::~LX_Window()
+{
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
 }
 
 };
