@@ -78,6 +78,8 @@ void LX_initWindowInfo(LX_WindowInfo &info)
     info.y = SDL_WINDOWPOS_CENTERED;
     info.w = DEFAULT_WIN_WIDTH;
     info.h = DEFAULT_WIN_HEIGHT;
+    info.lw = 0;
+    info.lh = 0;
     info.mode = LX_WINDOW_RENDERING;
     info.flag = 0;
     info.accel = true;
@@ -97,6 +99,8 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
         info.y = SDL_WINDOWPOS_CENTERED;
         info.w = config->getWinWidth();
         info.h = config->getWinHeight();
+        info.lw = 0;
+        info.lh = 0;
         info.mode = LX_WINDOW_RENDERING;
         info.flag = generateFlags(*config);
         info.accel = true;
@@ -374,6 +378,7 @@ void LX_Window::getInfo(LX_WindowInfo &info)
     info.title = SDL_GetWindowTitle(_window);
     SDL_GetWindowPosition(_window,&info.x,&info.y);
     SDL_GetWindowSize(_window, &info.w,&info.h);
+    SDL_RenderGetLogicalSize(_renderer,&info.lw,&info.lh);
     info.flag = SDL_GetWindowFlags(_window);
     info.mode = _render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
 

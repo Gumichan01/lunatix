@@ -38,8 +38,8 @@ struct SDL_Rect;
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window                  */
 
 // Display modes
-#define LX_WINDOW_SURFACE 0x01                                          /**< The flag to use the surface    */
-#define LX_WINDOW_RENDERING 0x10                                        /**< The flag to use the rendering  */
+#define LX_WINDOW_SURFACE   0                                           /**< The flag to use the surface    */
+#define LX_WINDOW_RENDERING 1                                           /**< The flag to use the rendering  */
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering)       */
 
 /**
@@ -55,14 +55,16 @@ namespace LX_Win
 */
 struct LX_WindowInfo
 {
-    std::string title;  /**< Title                  */
-    int x;              /**< X position             */
-    int y;              /**< Y position             */
-    int w;              /**< Width                  */
-    int h;              /**< Height                 */
-    Uint32 mode;        /**< Display mode           */
-    Uint32 flag;        /**< Flags                  */
-    bool accel;         /**< Hardware acceleration  */
+    std::string title;  /**< Title                      */
+    int x;              /**< X position                 */
+    int y;              /**< Y position                 */
+    int w;              /**< Window Width               */
+    int h;              /**< Window Height              */
+    int lw;             /**< Independant device width   */
+    int lh;             /**< Independant device height  */
+    Uint32 mode;        /**< Display mode               */
+    Uint32 flag;        /**< Flags                      */
+    bool accel;         /**< Hardware acceleration      */
 
 };
 
