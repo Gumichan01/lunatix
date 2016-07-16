@@ -313,30 +313,6 @@ public :
     SDL_Renderer * getRenderer(void);
 
     /**
-    *   @fn SDL_Surface * getSurface(void)
-    *
-    *   Get the window surface
-    *
-    *   @return A valid pointer to the SDL_Surface if the window internally use it
-    *
-    */
-    SDL_Surface * getSurface(void);
-
-    /**
-    *
-    *   @fn SDL_Window * getWindow(void)
-    *
-    *   Get the window
-    *
-    *   @return A pointer to the SDL_Window instance
-    *
-    *   @note Normally, the function never returns an invalid pointer,
-    *           but it is better to check the pointer value
-    *
-    */
-    SDL_Window * getWindow(void);
-
-    /**
     *   @fn int getWidth(void)
     *
     *   Get the width of the window

@@ -342,7 +342,7 @@ bool LX_Window::screenshotUsingRenderer_(std::string& filename)
 bool LX_Window::screenshotUsingSurface_(std::string& filename)
 {
     SDL_Surface *sshot = nullptr;
-    sshot = getSurface();
+    sshot = SDL_GetWindowSurface(_window);
 
     if(sshot == nullptr)
         return false;
@@ -386,18 +386,6 @@ void LX_Window::getInfo(LX_WindowInfo &info)
 SDL_Renderer * LX_Window::getRenderer(void)
 {
     return SDL_GetRenderer(_window);
-}
-
-
-SDL_Surface * LX_Window::getSurface(void)
-{
-    return SDL_GetWindowSurface(_window);
-}
-
-
-SDL_Window * LX_Window::getWindow(void)
-{
-    return _window;
 }
 
 

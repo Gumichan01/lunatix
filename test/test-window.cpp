@@ -37,6 +37,7 @@ int main(int argc, char **argv)
     info.title = "Hello #1";
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
+    //w->setFullscreen(LX_GRAPHICS_FULLSCREEN);
 
     test_winInfo(win);
     test_window1(w);
@@ -61,12 +62,6 @@ void test_window1(LX_Win::LX_Window *win)
         cerr << "FAILURE - The window was not initialized" << endl;
     else
         cout << "SUCCESS - The window exists" << endl;
-
-
-    if(win != nullptr && win->getWindow() == nullptr)
-        cerr << "FAILURE - the window was not initialized" << endl;
-    else
-        cout << "SUCCESS - the window is ready" << endl;
 
     if(win != nullptr && win->getRenderer() == nullptr)
         cerr << "FAILURE - the renderer was not initialized" << endl;
@@ -94,11 +89,6 @@ void test_window2(void)
     LX_Win::LX_Window win2(wi);
 
     cout << " = TEST 2 window = " << endl;
-
-    if(win2.getWindow() == nullptr)
-        cerr << "FAILURE - the window was not initialized" << endl;
-    else
-        cout << "SUCCESS - the window is ready" << endl;
 
     cout << "INFO - Is rendering mode used?" << endl;
     if(win2.getRenderer() == nullptr)
@@ -142,33 +132,15 @@ void test_surface(void)
     LX_Win::LX_Window win3(wi);
     std::string name = "data/bullet.png";
     SDL_Surface *sf = nullptr;
-    SDL_Rect pos = {100,100,200,100};
+    SDL_Rect pos = {256,256,256,128};
 
     cout << " = TEST 3 window with Surface = " << endl;
-
-    if(win3.getWindow() == nullptr)
-        cerr << "FAILURE - the window was not initialized" << endl;
-    else
-        cout << "SUCCESS - the window is ready" << endl;
-
-    /*
-    *   Is the surface mode initialized?
-    *   If LX_WINDOW_SURFACE was made,
-    *   then getSurface must return a valid surface
-    */
-    cout << "INFO - Is surface mode used?" << endl;
-    if(win3.getSurface() == nullptr)
-        cerr << "FAILURE - the surface was not initialized" << endl;
-    else
-        cout << "SUCCESS - the surface is ready" << endl;
-
 
     if(win3.getWidth() != w)
         cerr << "FAILURE - width ; expected : " << w
              << "; got: " << win3.getWidth() << endl;
     else
         cout << "SUCCESS - width " << w << endl;
-
 
     if(win3.getHeight() != h)
         cerr << "FAILURE - height ; expected : " << h
