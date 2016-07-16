@@ -106,7 +106,6 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Window * w)
 SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
 {
     LX_Window *tmp = nullptr;
-
     tmp = LX_WindowManager::getInstance()->getWindow(id);
 
     if(tmp == nullptr)
@@ -123,7 +122,6 @@ SDL_Texture * loadTextureFromFile(const std::string& filename, LX_Window * w)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
-
     tmpS = loadSurface(filename.c_str());
 
     if(tmpS == nullptr)
@@ -131,7 +129,6 @@ SDL_Texture * loadTextureFromFile(const std::string& filename, LX_Window * w)
 
     tmpT = loadTextureFromSurface(tmpS,w);
     SDL_FreeSurface(tmpS);
-
     return tmpT;
 }
 
@@ -146,7 +143,6 @@ SDL_Texture * loadTextureFromFile(const std::string& filename, unsigned int id)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
-
     tmpS = loadSurface(filename.c_str());
 
     if(tmpS == nullptr)
@@ -154,7 +150,6 @@ SDL_Texture * loadTextureFromFile(const std::string& filename, unsigned int id)
 
     tmpT = loadTextureFromSurface(tmpS,id);
     SDL_FreeSurface(tmpS);
-
     return tmpT;
 }
 
@@ -167,7 +162,7 @@ SDL_Texture * loadTextureFromFile(const UTF8string& filename, unsigned int id)
 
 bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
 {
-    return (SDL_SetColorKey(image,SDL_TRUE, SDL_MapRGB(image->format,red,green,blue)) == 0);
+    return SDL_SetColorKey(image,SDL_TRUE, SDL_MapRGB(image->format,red,green,blue)) == 0;
 }
 
 };

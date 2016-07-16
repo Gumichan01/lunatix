@@ -373,9 +373,8 @@ void LX_Window::getInfo(LX_WindowInfo &info)
         SDL_RendererInfo rinfo;
         SDL_GetRendererInfo(renderer, &rinfo);
 
-        info.accel = (renderer != nullptr &&
-                      (rinfo.flags&SDL_RENDERER_ACCELERATED)
-                      == SDL_RENDERER_ACCELERATED) ? true : false;
+        info.accel = renderer != nullptr &&
+                     (rinfo.flags&SDL_RENDERER_ACCELERATED) == SDL_RENDERER_ACCELERATED;
     }
     else
     {
