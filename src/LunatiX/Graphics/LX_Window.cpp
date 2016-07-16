@@ -240,6 +240,11 @@ void LX_Window::setFullscreen(Uint32 flag)
     {
         setWindowSize(_original_width,_original_height);
     }
+    else if(flag == LX_GRAPHICS_FULLSCREEN)
+    {
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
+        SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
+    }
 }
 
 
