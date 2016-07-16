@@ -180,6 +180,7 @@ void LX_Window::createRendering_(bool accel)
         throw LX_WindowException(err_msg);
     }
 
+    SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
     _render_method = true;     // The render_mode is active
 }
 
@@ -240,10 +241,13 @@ void LX_Window::toggleFullscreen(Uint32 flag)
     {
         setWindowSize(_original_width,_original_height);
     }
-    else if(flag == LX_GRAPHICS_FULLSCREEN)
+    else if(flag == LX_GRAPHICS_FULLSCREEN_DESKTOP)
     {
-        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
-        SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
+        if(_render_method)
+        {
+            SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
+            SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
+        }
     }
 }
 
