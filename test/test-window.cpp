@@ -37,7 +37,6 @@ int main(int argc, char **argv)
     info.title = "Hello #1";
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
-    w->toggleFullscreen(LX_GRAPHICS_FULLSCREEN);
 
     test_winInfo(win);
     test_window1(w);
@@ -318,7 +317,8 @@ string winInfoToString(LX_Win::LX_WindowInfo &winfo)
 {
     ostringstream ss;
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
-       << "," << winfo.w << "," << winfo.h
+       << ",w: " << winfo.w << ",h: " << winfo.h
+       << ",lw: " << winfo.w << ",lh: " << winfo.h
        << "," << winfo.mode << "," << winfo.flag
        << "," << (winfo.accel ? 1:0) << ")" << endl;
 
@@ -330,6 +330,7 @@ bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2)
     return (info1.title == info2.title)
             && (info1.x == info2.x) && (info1.y == info2.y)
             && (info1.w == info2.w) && (info1.h == info2.h)
+            && (info1.w == info2.lw) && (info1.h == info2.lh)
             && (info1.mode == info2.mode) && (info1.flag == info2.flag)
             && (info1.accel == info2.accel);
 }

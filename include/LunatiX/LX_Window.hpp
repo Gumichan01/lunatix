@@ -33,9 +33,9 @@ struct SDL_Rect;
 
 
 // Fullscreen modes
-#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop resolution */
-#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution       */
-#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window                  */
+#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop size   */
+#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution   */
+#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window              */
 
 // Display modes
 #define LX_WINDOW_SURFACE   0                                           /**< The flag to use the surface    */
