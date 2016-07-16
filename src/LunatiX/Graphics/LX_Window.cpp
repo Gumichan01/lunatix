@@ -126,10 +126,10 @@ LX_WindowException::~LX_WindowException() noexcept {}
 /* LX_Window */
 
 LX_Window::LX_Window(LX_WindowInfo &info)
-    : window(nullptr), renderer(nullptr),
-      original_width(info.w), original_height(info.h), render_method(false)
+    : _window(nullptr), _renderer(nullptr),
+      _original_width(info.w), _original_height(info.h), _render_method(false)
 {
-    createWindow(info.title,info.x,info.y,info.w,info.h,info.mode,
+    createWindow_(info.title,info.x,info.y,info.w,info.h,info.mode,
                  info.flag,info.accel);
     getInfo(info);
 }
@@ -138,49 +138,49 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 /*
 *   Private function that initializes the window according to the configuration
 */
-void LX_Window::createWindow(std::string &title, int posX, int posY, int w, int h,
+void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int h,
                              const Uint32 mode, Uint32 flag, bool accel)
 {
-    window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
+    _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 
-    if(window == nullptr)
+    if(_window == nullptr)
         throw LX_WindowException(LX_GetError());
 
     if(mode == LX_WINDOW_RENDERING)
-        createRendering(accel);
+        createRendering_(accel);
     else
-        render_method = false;
+        _render_method = false;
 }
 
 
 /*
 *   Private function that creates a renderer for the window
 */
-void LX_Window::createRendering(bool accel)
+void LX_Window::createRendering_(bool accel)
 {
-    Uint32 renderFlag = 0x00000000;
+    Uint32 render_flag = 0x00000000;
     LX_Configuration *config = LX_Configuration::getInstance();
 
     // Hardware acceleration or software rendering
     if(accel)
-        renderFlag = SDL_RENDERER_ACCELERATED;
+        render_flag = SDL_RENDERER_ACCELERATED;
     else
-        renderFlag = SDL_RENDERER_SOFTWARE;
+        render_flag = SDL_RENDERER_SOFTWARE;
 
     // Video flag and VSync flag actives -> add the option
     if(config->getVideoFlag() && config->getVSyncFlag())
-        renderFlag |= SDL_RENDERER_PRESENTVSYNC;
+        render_flag |= SDL_RENDERER_PRESENTVSYNC;
 
-    renderer = SDL_CreateRenderer(window,-1,renderFlag);
+    _renderer = SDL_CreateRenderer(_window,-1,render_flag);
 
-    if(renderer == nullptr)
+    if(_renderer == nullptr)
     {
         std::string err_msg = "Rendering creation: ";
         err_msg = err_msg + LX_GetError();
-        throw LX_WindowException(err_msg.c_str());
+        throw LX_WindowException(err_msg);
     }
 
-    render_method = true;     // The render_mode is active
+    _render_method = true;     // The render_mode is active
 }
 
 
@@ -197,7 +197,7 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
     else
         offset = {pos->x,pos->y,pos->w,pos->h};
 
-    err = SDL_BlitSurface(image,area,SDL_GetWindowSurface(window),&offset);
+    err = SDL_BlitSurface(image,area,SDL_GetWindowSurface(_window),&offset);
 
     if(err < 0)
         return false;
@@ -208,37 +208,37 @@ bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
 
 bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
 {
-    return SDL_RenderCopy(renderer,origin,area,pos) == 0;
+    return SDL_RenderCopy(_renderer,origin,area,pos) == 0;
 }
 
 
 bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
                                     const SDL_Rect *pos, const double angle)
 {
-    return SDL_RenderCopyEx(renderer,origin,area,pos,(-angle),
+    return SDL_RenderCopyEx(_renderer,origin,area,pos,(-angle),
                             nullptr,SDL_FLIP_NONE) == 0;
 }
 
 
 void LX_Window::setTitle(std::string title)
 {
-    SDL_SetWindowTitle(window,title.c_str());
+    SDL_SetWindowTitle(_window,title.c_str());
 }
 
 
 void LX_Window::setWindowSize(int w, int h)
 {
-    SDL_SetWindowSize(window,w,h);
+    SDL_SetWindowSize(_window,w,h);
 }
 
 
 void LX_Window::setFullscreen(Uint32 flag)
 {
-    SDL_SetWindowFullscreen(window,flag);
+    SDL_SetWindowFullscreen(_window,flag);
 
     if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
     {
-        setWindowSize(original_width,original_height);
+        setWindowSize(_original_width,_original_height);
     }
 }
 
@@ -252,7 +252,7 @@ void LX_Window::setFullscreen(Uint32 flag)
 */
 void LX_Window::updateRenderer_(void)
 {
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(_renderer);
 }
 
 
@@ -265,13 +265,13 @@ void LX_Window::updateRenderer_(void)
 */
 void LX_Window::updateWindow_(void)
 {
-    SDL_UpdateWindowSurface(window);
+    SDL_UpdateWindowSurface(_window);
 }
 
 
 void LX_Window::update(void)
 {
-    if(render_method)
+    if(_render_method)
         updateRenderer_();
     else
         updateWindow_();
@@ -283,7 +283,7 @@ void LX_Window::update(void)
 */
 void LX_Window::clearSurface_(void)
 {
-    SDL_Surface *tmp = SDL_GetWindowSurface(window);
+    SDL_Surface *tmp = SDL_GetWindowSurface(_window);
     SDL_FillRect(tmp,nullptr, SDL_MapRGB(tmp->format,0,0,0));
 }
 
@@ -293,13 +293,13 @@ void LX_Window::clearSurface_(void)
 */
 void LX_Window::clearRenderer_(void)
 {
-    SDL_RenderClear(renderer);
+    SDL_RenderClear(_renderer);
 }
 
 
 void LX_Window::clearWindow(void)
 {
-    if(render_method)
+    if(_render_method)
         clearRenderer_();
     else
         clearSurface_();
@@ -309,7 +309,7 @@ void LX_Window::clearWindow(void)
 /*
 *   Private function that makes a screenshot using the renderer
 */
-bool LX_Window::screenshotUsingRenderer(std::string& filename)
+bool LX_Window::screenshotUsingRenderer_(std::string& filename)
 {
     int err = 0;
     SDL_Surface *sshot = nullptr;
@@ -320,7 +320,7 @@ bool LX_Window::screenshotUsingRenderer(std::string& filename)
     if(sshot == nullptr)
         return false;
 
-    err = SDL_RenderReadPixels(renderer,nullptr,LX_PIXEL_FORMAT,
+    err = SDL_RenderReadPixels(_renderer,nullptr,LX_PIXEL_FORMAT,
                                sshot->pixels,sshot->pitch);
 
     if(err == -1)
@@ -339,7 +339,7 @@ bool LX_Window::screenshotUsingRenderer(std::string& filename)
 /*
 *   Private function that makes a screenshot using the renderer
 */
-bool LX_Window::screenshotUsingSurface(std::string& filename)
+bool LX_Window::screenshotUsingSurface_(std::string& filename)
 {
     SDL_Surface *sshot = nullptr;
     sshot = getSurface();
@@ -353,27 +353,27 @@ bool LX_Window::screenshotUsingSurface(std::string& filename)
 
 bool LX_Window::screenshot(std::string filename)
 {
-    if(render_method)
-        return screenshotUsingRenderer(filename);
+    if(_render_method)
+        return screenshotUsingRenderer_(filename);
 
-    return screenshotUsingSurface(filename);
+    return screenshotUsingSurface_(filename);
 }
 
 
 void LX_Window::getInfo(LX_WindowInfo &info)
 {
-    info.title = SDL_GetWindowTitle(window);
-    SDL_GetWindowPosition(window,&info.x,&info.y);
-    SDL_GetWindowSize(window, &info.w,&info.h);
-    info.flag = SDL_GetWindowFlags(window);
-    info.mode = render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
+    info.title = SDL_GetWindowTitle(_window);
+    SDL_GetWindowPosition(_window,&info.x,&info.y);
+    SDL_GetWindowSize(_window, &info.w,&info.h);
+    info.flag = SDL_GetWindowFlags(_window);
+    info.mode = _render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
 
-    if(render_method)
+    if(_render_method)
     {
         SDL_RendererInfo rinfo;
-        SDL_GetRendererInfo(renderer, &rinfo);
+        SDL_GetRendererInfo(_renderer, &rinfo);
 
-        info.accel = renderer != nullptr &&
+        info.accel = _renderer != nullptr &&
                      (rinfo.flags&SDL_RENDERER_ACCELERATED) == SDL_RENDERER_ACCELERATED;
     }
     else
@@ -385,27 +385,26 @@ void LX_Window::getInfo(LX_WindowInfo &info)
 
 SDL_Renderer * LX_Window::getRenderer(void)
 {
-    return SDL_GetRenderer(window);
+    return SDL_GetRenderer(_window);
 }
 
 
 SDL_Surface * LX_Window::getSurface(void)
 {
-    return SDL_GetWindowSurface(window);
+    return SDL_GetWindowSurface(_window);
 }
 
 
 SDL_Window * LX_Window::getWindow(void)
 {
-    return window;
+    return _window;
 }
 
 
 int LX_Window::getWidth(void)
 {
     int w;
-    SDL_GetWindowSize(window,&w,nullptr);
-
+    SDL_GetWindowSize(_window,&w,nullptr);
     return w;
 }
 
@@ -413,16 +412,15 @@ int LX_Window::getWidth(void)
 int LX_Window::getHeight(void)
 {
     int h;
-    SDL_GetWindowSize(window,nullptr,&h);
-
+    SDL_GetWindowSize(_window,nullptr,&h);
     return h;
 }
 
 
 LX_Window::~LX_Window()
 {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(_renderer);
+    SDL_DestroyWindow(_window);
 }
 
 };

@@ -125,28 +125,28 @@ public :
 */
 class LX_Window
 {
-    SDL_Window *window;         /* The internal window structure  */
-    SDL_Renderer *renderer;     /* The main renderer              */
+    SDL_Window *_window;         /* The internal window structure  */
+    SDL_Renderer *_renderer;     /* The main renderer              */
 
-    int original_width;         /* The width of the window        */
-    int original_height;        /* The height of the window       */
-    bool render_method;         /* Use Surface or Rendering       */
+    int _original_width;         /* The width of the window        */
+    int _original_height;        /* The height of the window       */
+    bool _render_method;         /* Use Surface or Rendering       */
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
 
-    void createWindow(std::string &title, int posX, int posY, int w, int h,
+    void createWindow_(std::string &title, int posX, int posY, int w, int h,
                       const Uint32 mode, Uint32 flag, bool accel = true);
 
-    void createRendering(bool accel);
+    void createRendering_(bool accel);
 
     void updateWindow_(void);
     void updateRenderer_(void);
     void clearSurface_(void);
     void clearRenderer_(void);
 
-    bool screenshotUsingRenderer(std::string& filename);
-    bool screenshotUsingSurface(std::string& filename);
+    bool screenshotUsingRenderer_(std::string& filename);
+    bool screenshotUsingSurface_(std::string& filename);
 
 
 public :
@@ -365,4 +365,3 @@ public :
 };
 
 #endif // LX_WINDOW_H_INCLUDED
-
