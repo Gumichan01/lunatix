@@ -97,7 +97,7 @@ void LX_loadWindowConfig(LX_WindowInfo &info);
 */
 class LX_WindowException : public std::exception
 {
-    std::string string_error;
+    std::string _string_error;
 
 public :
 

@@ -111,17 +111,17 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
 
 LX_WindowException::LX_WindowException(std::string err)
 {
-    string_error = err;
+    _string_error = err;
 }
 
 LX_WindowException::LX_WindowException(const LX_WindowException& w)
 {
-    string_error = w.string_error;
+    _string_error = w._string_error;
 }
 
 const char * LX_WindowException::what() const noexcept
 {
-    return string_error.c_str();
+    return _string_error.c_str();
 }
 
 LX_WindowException::~LX_WindowException() noexcept {}
@@ -184,7 +184,6 @@ void LX_Window::createRendering_(bool accel)
         throw LX_WindowException(err_msg);
     }
 
-    SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
     _render_method = true;     // The render_mode is active
 }
 
@@ -234,6 +233,8 @@ void LX_Window::setTitle(std::string title)
 void LX_Window::setWindowSize(int w, int h)
 {
     SDL_SetWindowSize(_window,w,h);
+    _original_width = w;
+    _original_height = h;
 }
 
 

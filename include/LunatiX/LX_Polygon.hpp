@@ -39,7 +39,7 @@ struct LX_Vector2D;
 */
 class LX_PolygonException : public std::exception
 {
-    std::string string_error;
+    std::string _string_error;
 
 public :
 

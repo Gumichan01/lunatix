@@ -58,7 +58,7 @@ namespace LX_FileIO
 */
 class IOException: public std::exception
 {
-    std::string string_error;
+    std::string _string_error;
 
 public :
 
@@ -81,13 +81,13 @@ public :
 */
 class LX_File
 {
-    UTF8string name;        /* The name of the file         */
-    SDL_RWops *data;        /* The internal file structure  */
+    UTF8string _name;        /* The name of the file         */
+    SDL_RWops *_data;        /* The internal file structure  */
 
     LX_File(LX_File& f);
     LX_File& operator =(LX_File& f);
 
-    void open(const Uint32 mode);
+    void open_(const Uint32 mode);
 
 public :
 
@@ -274,4 +274,3 @@ public :
 };
 
 #endif // LX_FILEIO_H_INCLUDED
-

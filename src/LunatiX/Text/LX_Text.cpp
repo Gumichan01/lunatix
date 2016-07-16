@@ -46,7 +46,7 @@ LX_RedrawCallback::~LX_RedrawCallback() {}
 
 
 LX_TextInput::LX_TextInput()
-    : cursor(0),done(false)
+    : _cursor(0),_done(false)
 {
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Start the input.");
     SDL_StartTextInput();
@@ -66,31 +66,31 @@ LX_TextInput::LX_TextInput()
 void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 {
     SDL_Event ev;
-    done = false;
+    _done = false;
 
-    while(!done)
+    while(!_done)
     {
         while(SDL_PollEvent(&ev))
         {
             switch(ev.type)
             {
                 case SDL_KEYDOWN    :
-                    keyboardInput(ev);
+                    keyboardInput_(ev);
                     break;
 
                 case SDL_TEXTINPUT  :
-                    textInput(ev);
+                    textInput_(ev);
                     break;
 
                 case SDL_TEXTEDITING:
-                    textEdit(ev);
+                    textEdit_(ev);
                     break;
 
                 default :
                     break;
             }
 
-            redraw(u8text,cursor);
+            redraw(_u8text,_cursor);
         }
 
         SDL_Delay(DELAY);
@@ -99,66 +99,66 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 
 
 // Handle the keyboard input
-void LX_TextInput::keyboardInput(SDL_Event& ev)
+void LX_TextInput::keyboardInput_(SDL_Event& ev)
 {
-    const size_t oldcursor = cursor;
+    const size_t old_cursor = _cursor;
 
     switch(ev.key.keysym.sym)
     {
         case SDLK_ESCAPE:
-            done = true;
+            _done = true;
             break;
 
         case SDLK_BACKSPACE:
-            backslashKey();
-            if(cursor > 0)
+            backslashKey_();
+            if(_cursor > 0)
             {
-                cursor -= 1;
+                _cursor -= 1;
             }
             break;
 
         case SDLK_DELETE:
-            deleteKey();
+            deleteKey_();
             break;
 
         case SDLK_LEFT:
-            if(cursor > 0)
+            if(_cursor > 0)
             {
-                cursor -= 1;
+                _cursor -= 1;
             }
             break;
 
         case SDLK_RIGHT:
-            if(cursor < u8text.utf8_length())
+            if(_cursor < _u8text.utf8_length())
             {
-                cursor += 1;
+                _cursor += 1;
             }
             break;
 
         case SDLK_HOME:
-            cursor = 0;
+            _cursor = 0;
             break;
 
         case SDLK_END:
-            cursor = u8text.utf8_length();
+            _cursor = _u8text.utf8_length();
             break;
 
         case SDLK_v:
-            paste();
+            paste_();
             break;
 
         case SDLK_c:
-            save();
+            save_();
             break;
     }
 
-    if(oldcursor != cursor)
+    if(old_cursor != _cursor)
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                         "Input - cursor at %d",cursor);
+                         "Input - _cursor at %d",_cursor);
 }
 
 
-void LX_TextInput::textInput(SDL_Event& ev)
+void LX_TextInput::textInput_(SDL_Event& ev)
 {
     if(ev.text.text[0] == '\0' || isEndofLine(ev.text.text))
         return;
@@ -170,7 +170,7 @@ void LX_TextInput::textInput(SDL_Event& ev)
     try
     {
         UTF8string ntext(ev.text.text);
-        u8stringInput(ntext);
+        u8stringInput_(ntext);
     }
     catch(...)
     {
@@ -180,26 +180,26 @@ void LX_TextInput::textInput(SDL_Event& ev)
 }
 
 
-void LX_TextInput::u8stringInput(UTF8string& ntext)
+void LX_TextInput::u8stringInput_(UTF8string& ntext)
 {
-    const size_t u8len = u8text.utf8_length();
+    const size_t u8len = _u8text.utf8_length();
 
-    if(cursor == u8len)
+    if(_cursor == u8len)
     {
-        u8text += ntext;
+        _u8text += ntext;
     }
     else
     {
-        UTF8string rtmp = u8text.utf8_substr(cursor);
-        UTF8string ltmp = u8text.utf8_substr(0,cursor);
-        u8text = ltmp + ntext + rtmp;
+        UTF8string rtmp = _u8text.utf8_substr(_cursor);
+        UTF8string ltmp = _u8text.utf8_substr(0,_cursor);
+        _u8text = ltmp + ntext + rtmp;
     }
 
-    cursor += ntext.utf8_length();
+    _cursor += ntext.utf8_length();
 }
 
 
-void LX_TextInput::textEdit(SDL_Event& ev)
+void LX_TextInput::textEdit_(SDL_Event& ev)
 {
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
@@ -207,30 +207,30 @@ void LX_TextInput::textEdit(SDL_Event& ev)
 }
 
 
-void LX_TextInput::save()
+void LX_TextInput::save_()
 {
     static const Uint8 *KEYS = SDL_GetKeyboardState(nullptr);
 
     if(KEYS[SDL_SCANCODE_LCTRL])
     {
-        int err = SDL_SetClipboardText(u8text.utf8_str());
+        int err = SDL_SetClipboardText(_u8text.utf8_str());
 
         if(err == -1)
         {
-            UTF8string s("Cannot set " + u8text + "in the clipboard" + SDL_GetError());
+            UTF8string s("Cannot set " + _u8text + "in the clipboard" + SDL_GetError());
             LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                              "Cannot set %s in the clipboard.",s.utf8_str());
         }
         else
         {
             LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                             "Copy %s into the clipboard.",u8text.utf8_str());
+                             "Copy %s into the clipboard.",_u8text.utf8_str());
         }
     }
 }
 
 
-void LX_TextInput::paste()
+void LX_TextInput::paste_()
 {
     static const Uint8 *KEYS = SDL_GetKeyboardState(nullptr);
 
@@ -254,7 +254,7 @@ void LX_TextInput::paste()
         try
         {
             UTF8string ntext(s);
-            u8stringInput(ntext);
+            u8stringInput_(ntext);
         }
         catch(...)
         {
@@ -268,59 +268,59 @@ void LX_TextInput::paste()
 }
 
 
-void LX_TextInput::backslashKey()
+void LX_TextInput::backslashKey_()
 {
-    if(cursor == u8text.utf8_length())
+    if(_cursor == _u8text.utf8_length())
     {
-        utf8Pop();
+        utf8Pop_();
     }
-    else if(cursor > 0)
+    else if(_cursor > 0)
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                          "Backslash key - Remove the following codepoint at %d: %s",
-                         cursor-1, u8text.utf8_at(cursor-1).c_str());
+                         _cursor-1, _u8text.utf8_at(_cursor-1).c_str());
 
-        UTF8string rtmp = u8text.utf8_substr(cursor);
-        UTF8string ltmp = u8text.utf8_substr(0,cursor-1);
-        u8text = ltmp + rtmp;
+        UTF8string rtmp = _u8text.utf8_substr(_cursor);
+        UTF8string ltmp = _u8text.utf8_substr(0,_cursor-1);
+        _u8text = ltmp + rtmp;
     }
 }
 
 
-void LX_TextInput::deleteKey()
+void LX_TextInput::deleteKey_()
 {
-    const size_t u8len = u8text.utf8_length();
+    const size_t u8len = _u8text.utf8_length();
 
-    if(cursor < u8len)
+    if(_cursor < u8len)
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                          "Delete key - Remove the following codepoint at %d: %s",
-                         cursor, u8text.utf8_at(cursor).c_str());
+                         _cursor, _u8text.utf8_at(_cursor).c_str());
     }
 
-    if(cursor > 0 && cursor < u8len)
+    if(_cursor > 0 && _cursor < u8len)
     {
-        UTF8string rtmp = u8text.utf8_substr(cursor + 1);
-        UTF8string ltmp = u8text.utf8_substr(0,cursor);
-        u8text = ltmp + rtmp;
+        UTF8string rtmp = _u8text.utf8_substr(_cursor + 1);
+        UTF8string ltmp = _u8text.utf8_substr(0,_cursor);
+        _u8text = ltmp + rtmp;
     }
-    else if(cursor == 0)
+    else if(_cursor == 0)
     {
-        u8text = u8text.utf8_substr(cursor + 1);
+        _u8text = _u8text.utf8_substr(_cursor + 1);
     }
-    else if(cursor == u8len - 1)
-        utf8Pop();
+    else if(_cursor == u8len - 1)
+        utf8Pop_();
 }
 
 // Safely remove the last character (UTF-8 codepoint) of the string
-void LX_TextInput::utf8Pop()
+void LX_TextInput::utf8Pop_()
 {
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                      "Remove the last codepoint (utf8 character)");
 
     try
     {
-        u8text.utf8_pop();
+        _u8text.utf8_pop();
     }
     catch(...)
     {

@@ -39,8 +39,8 @@ bool isHaptic(SDL_Joystick *joy);
 */
 class LX_Haptic
 {
-    SDL_Haptic *haptic;
-    int instanceID;
+    SDL_Haptic *_haptic;
+    int _instanceID;
 
     LX_Haptic(LX_Haptic& h);
     LX_Haptic& operator =(LX_Haptic& h);
@@ -70,4 +70,3 @@ public :
 };
 
 #endif // LX_HAPTIC_HPP_INCLUDED
-

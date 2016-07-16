@@ -44,9 +44,9 @@ class IOException;
 */
 class LX_FileBuffer
 {
-    UTF8string name;        /* The name of the file the instance refers to  */
-    char *buffer;           /* The read-only buffer                         */
-    Uint64 bufsize;         /* The size of the buffer                       */
+    UTF8string _name;        /* The name of the file the instance refers to  */
+    char *_buffer;           /* The read-only buffer                         */
+    Uint64 _bufsize;         /* The size of the buffer                       */
 
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
@@ -133,4 +133,3 @@ public :
 };
 
 #endif // LX_FILEBUFFER_HPP_INCLUDED
-

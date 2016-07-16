@@ -34,28 +34,28 @@ namespace LX_TrueTypeFont
 {
 
 LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
-    : font_str(""), font_size(size),
-      font_color(color), font_buffer(nullptr)
+    : _font_str(""), _font_size(size),
+      _font_color(color), _font_buffer(nullptr)
 {
     // Load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
 
     if(ttf_config != nullptr)
     {
-        font_str = ttf_config->getFontFile();
+        _font_str = ttf_config->getFontFile();
 
-        if(font_size == 0)
+        if(_font_size == 0)
         {
             int sz = ttf_config->getFontSize();
 
             if(sz <= 0)
-                font_size = LX_TTF_DEFAULT_FONT_SIZE;
+                _font_size = LX_TTF_DEFAULT_FONT_SIZE;
             else
-                font_size = static_cast<unsigned int>(sz);
+                _font_size = static_cast<unsigned int>(sz);
         }
     }
 
-    createbuffer();
+    createBuffer_();
 }
 
 
@@ -64,25 +64,25 @@ LX_Font::LX_Font(std::string font_file,const SDL_Color& color)
 
 
 LX_Font::LX_Font(std::string font_file,const SDL_Color& color, unsigned int size)
-    : font_str(font_file), font_size(size),
-      font_color(color), font_buffer(nullptr)
+    : _font_str(font_file), _font_size(size),
+      _font_color(color), _font_buffer(nullptr)
 {
-    createbuffer();
+    createBuffer_();
 }
 
 
 /*
 *
-*   This private function creates a file buffer from font_str.
+*   This private function creates a file buffer from _font_str.
 *   This function can throw an IOException instance if the buffer cannot
 *   be loaded.
 *
 *   This function can throw an IOException
 *
 */
-void LX_Font::createbuffer()
+void LX_Font::createBuffer_()
 {
-    font_buffer = new LX_FileBuffer(font_str);
+    _font_buffer = new LX_FileBuffer(_font_str);
 }
 
 
@@ -100,19 +100,19 @@ int LX_Font::sizeOfText_(TTF_Font *ttf, std::string text, int& w, int& h)
 *   Private function that creates an internal and temporary font
 *   according to the font file in the class or the file buffer if it exists
 */
-TTF_Font * LX_Font::createInternalFont(int size)
+TTF_Font * LX_Font::createInternalFont_(int size)
 {
-    if(font_buffer == nullptr)
+    if(_font_buffer == nullptr)
         return nullptr;        // This code will normally never be executed
 
     // The font buffer exists
-    return font_buffer->getFontFromBuffer(size);
+    return _font_buffer->getFontFromBuffer(size);
 }
 
 
 int LX_Font::sizeOfText(std::string text, int& w, int& h)
 {
-    return sizeOfText(text.c_str(),font_size,w,h);
+    return sizeOfText(text.c_str(),_font_size,w,h);
 }
 
 
@@ -121,7 +121,7 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
     int sz;
     TTF_Font *ttf = nullptr;
 
-    ttf = createInternalFont(static_cast<int>(size));
+    ttf = createInternalFont_(static_cast<int>(size));
 
     if(ttf == nullptr)
         return -1;
@@ -145,7 +145,7 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
                                 unsigned int size,Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-    SDL_Color bg = {r,g,b,0};
+    SDL_Color bg = {r,g,b,a};
     TTF_Font *ttf = nullptr;
     SDL_Surface *loaded = nullptr;
 
@@ -155,7 +155,7 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
         return nullptr;
     }
     else
-        ttf = createInternalFont(static_cast<int>(size));
+        ttf = createInternalFont_(static_cast<int>(size));
 
     if(ttf == nullptr)
         return loaded;
@@ -164,15 +164,15 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
     switch(type)
     {
         case LX_TTF_SOLID :
-            loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(),font_color);
+            loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(),_font_color);
             break;
 
         case LX_TTF_SHADED :
-            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),font_color,bg);
+            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),_font_color,bg);
             break;
 
         case LX_TTF_BLENDED :
-            loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),font_color);
+            loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),_font_color);
             break;
     }
 
@@ -183,13 +183,13 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
 
 SDL_Surface * LX_Font::drawSolidText(std::string text)
 {
-    if(font_size == 0)
+    if(_font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
         return nullptr;
     }
 
-    return drawSolidText(text.c_str(),font_size);
+    return drawSolidText(text.c_str(),_font_size);
 }
 
 
@@ -207,13 +207,13 @@ SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
 
 SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-    if(font_size == 0)
+    if(_font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
         return nullptr;
     }
 
-    return drawText_(LX_TTF_SHADED,text.c_str(),font_size,r,g,b,a);
+    return drawText_(LX_TTF_SHADED,text.c_str(),_font_size,r,g,b,a);
 }
 
 
@@ -226,13 +226,13 @@ SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g,
 
 SDL_Surface * LX_Font::drawBlendedText(std::string text)
 {
-    if(font_size == 0)
+    if(_font_size == 0)
     {
         LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
         return nullptr;
     }
 
-    return drawBlendedText(text.c_str(),font_size);
+    return drawBlendedText(text.c_str(),_font_size);
 }
 
 
@@ -282,16 +282,16 @@ void LX_Font::setColor(SDL_Color *color)
 {
     if(color != nullptr)
     {
-        font_color.r = color->r;
-        font_color.g = color->g;
-        font_color.b = color->b;
+        _font_color.r = color->r;
+        _font_color.g = color->g;
+        _font_color.b = color->b;
     }
 }
 
 
 LX_Font::~LX_Font()
 {
-    delete font_buffer;
+    delete _font_buffer;
 }
 
 };

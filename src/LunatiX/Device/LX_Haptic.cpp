@@ -64,7 +64,7 @@ bool isHaptic(SDL_Joystick *joy)
 *
 */
 LX_Haptic::LX_Haptic(int index)
-    : haptic(SDL_HapticOpen(index)), instanceID(index)
+    : _haptic(SDL_HapticOpen(index)), _instanceID(index)
 {
     // Empty
 }
@@ -79,8 +79,8 @@ LX_Haptic::LX_Haptic(int index)
 *
 */
 LX_Haptic::LX_Haptic(SDL_Joystick *joy)
-    : haptic(SDL_HapticOpenFromJoystick(joy)),
-      instanceID(SDL_JoystickInstanceID(joy))
+    : _haptic(SDL_HapticOpenFromJoystick(joy)),
+      _instanceID(SDL_JoystickInstanceID(joy))
 {
     // Empty
 }
@@ -103,7 +103,7 @@ LX_Haptic::LX_Haptic(SDL_GameController *gc)
 
 LX_Haptic::~LX_Haptic()
 {
-    SDL_HapticClose(haptic);
+    SDL_HapticClose(_haptic);
 }
 
 
@@ -117,7 +117,7 @@ LX_Haptic::~LX_Haptic()
 */
 bool LX_Haptic::isOpened(void)
 {
-    return SDL_HapticOpened(instanceID) == 1;
+    return SDL_HapticOpened(_instanceID) == 1;
 }
 
 
@@ -131,8 +131,8 @@ bool LX_Haptic::isOpened(void)
 */
 bool LX_Haptic::RumbleEffectInit(void)
 {
-    if(SDL_HapticRumbleSupported(haptic) == SDL_TRUE)
-        return SDL_HapticRumbleInit(haptic) == 0;
+    if(SDL_HapticRumbleSupported(_haptic) == SDL_TRUE)
+        return SDL_HapticRumbleInit(_haptic) == 0;
 
     return false;
 }
@@ -166,7 +166,7 @@ void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
     else if(strength > 1)
         strength = 0;
 
-    SDL_HapticRumblePlay(haptic,strength,length);
+    SDL_HapticRumblePlay(_haptic,strength,length);
 }
 
 
@@ -184,7 +184,7 @@ void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
 */
 int LX_Haptic::newEffect(SDL_HapticEffect * effect)
 {
-    return SDL_HapticNewEffect(haptic,effect);
+    return SDL_HapticNewEffect(_haptic,effect);
 }
 
 
@@ -202,7 +202,7 @@ int LX_Haptic::newEffect(SDL_HapticEffect * effect)
 */
 void LX_Haptic::runEffect(int effectID, Uint32 iterations)
 {
-    SDL_HapticRunEffect(haptic,effectID,iterations);
+    SDL_HapticRunEffect(_haptic,effectID,iterations);
 }
 
 
@@ -218,7 +218,7 @@ void LX_Haptic::runEffect(int effectID, Uint32 iterations)
 */
 void LX_Haptic::stopEffect(int effectID)
 {
-    SDL_HapticStopEffect(haptic,effectID);
+    SDL_HapticStopEffect(_haptic,effectID);
 }
 
 
@@ -235,8 +235,7 @@ void LX_Haptic::stopEffect(int effectID)
 */
 int LX_Haptic::numberOfEffects(void)
 {
-    return SDL_HapticNumEffects(haptic);
+    return SDL_HapticNumEffects(_haptic);
 }
 
 };
-

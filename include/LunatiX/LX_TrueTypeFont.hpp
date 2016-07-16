@@ -74,17 +74,17 @@ enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
 */
 class LX_Font
 {
-    UTF8string font_str;                    /* The font file    */
-    unsigned int font_size;                 /* The font size    */
-    SDL_Color font_color;                   /* The font color   */
-    LX_FileIO::LX_FileBuffer *font_buffer;
+    UTF8string _font_str;                    /* The font file    */
+    unsigned int _font_size;                 /* The font size    */
+    SDL_Color _font_color;                   /* The font color   */
+    LX_FileIO::LX_FileBuffer *_font_buffer;
 
     LX_Font(LX_Font& f);
     LX_Font& operator =(LX_Font& f);
 
-    void createbuffer();
+    void createBuffer_();
     int sizeOfText_(TTF_Font *ttf, std::string text, int& w, int& h);
-    TTF_Font * createInternalFont(int size);
+    TTF_Font * createInternalFont_(int size);
 
     SDL_Surface * drawText_(LX_TTF_TypeText type, std::string text,
                            unsigned int size = 0,

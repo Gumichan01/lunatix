@@ -58,29 +58,29 @@ LX_Particle::LX_Particle(const LX_AABB& b, const float vx , const float vy)
 
 
 LX_Particle::LX_Particle(const LX_AABB& b, const LX_Vector2D& v)
-    : box(b)
+    : _box(b)
 {
-    velocity = v;
-    texture_from_outside = false;
-    lifetime = xorshiftRand()%DELAY;
-    texture = nullptr;
-    surface = nullptr;
+    _velocity = v;
+    _texture_from_outside = false;
+    _lifetime = xorshiftRand()%DELAY;
+    _texture = nullptr;
+    _surface = nullptr;
 }
 
 
 void LX_Particle::update(void)
 {
-    if(lifetime > 0)
+    if(_lifetime > 0)
     {
-        LX_Physics::moveRect(box,velocity);
-        lifetime--;
+        LX_Physics::moveRect(_box,_velocity);
+        _lifetime--;
     }
 }
 
 
 bool LX_Particle::isDead(void)
 {
-    return lifetime == 0;
+    return _lifetime == 0;
 }
 
 
@@ -89,95 +89,95 @@ bool LX_Particle::setTexture(LX_FileBuffer *buffer)
     SDL_Surface * s = nullptr;
 
     s = loadSurfaceFromFileBuffer(buffer);
-    texture = loadTextureFromSurface(s);
+    _texture = loadTextureFromSurface(s);
     SDL_FreeSurface(s);
 
-    return texture != nullptr;
+    return _texture != nullptr;
 }
 
 
 bool LX_Particle::setTexture(SDL_Texture * t)
 {
-    texture = t;
-    texture_from_outside = true;
-    return texture != nullptr;
+    _texture = t;
+    _texture_from_outside = true;
+    return _texture != nullptr;
 }
 
 
 bool LX_Particle::setTexture(SDL_Surface * s)
 {
-    texture = loadTextureFromSurface(s);
-    return texture != nullptr;
+    _texture = loadTextureFromSurface(s);
+    return _texture != nullptr;
 }
 
 
 bool LX_Particle::setSurface(LX_FileBuffer *buffer)
 {
-    surface = loadSurfaceFromFileBuffer(buffer);
-    return surface != nullptr;
+    _surface = loadSurfaceFromFileBuffer(buffer);
+    return _surface != nullptr;
 }
 
 
 void LX_Particle::setSpeed(const float vx,const float vy)
 {
-    velocity = LX_Vector2D(vx, vy);
+    _velocity = LX_Vector2D(vx, vy);
 }
 
 
 SDL_Texture * LX_Particle::getTexture(void)
 {
-    return texture;
+    return _texture;
 }
 
 
 SDL_Surface * LX_Particle::getSurface(void)
 {
-    return surface;
+    return _surface;
 }
 
 
 LX_AABB LX_Particle::getAABB(void)
 {
-    return box;
+    return _box;
 }
 
 
 int LX_Particle::getX(void)
 {
-    return box.x;
+    return _box.x;
 }
 
 
 int LX_Particle::getY(void)
 {
-    return box.y;
+    return _box.y;
 }
 
 
 int LX_Particle::getW(void)
 {
-    return box.w;
+    return _box.w;
 }
 
 
 int LX_Particle::getH(void)
 {
-    return box.h;
+    return _box.h;
 }
 
 
 unsigned int LX_Particle::getDelay(void)
 {
-    return lifetime;
+    return _lifetime;
 }
 
 
 LX_Particle::~LX_Particle()
 {
-    SDL_FreeSurface(surface);
+    SDL_FreeSurface(_surface);
 
-    if(!texture_from_outside)
-        SDL_DestroyTexture(texture);
+    if(!_texture_from_outside)
+        SDL_DestroyTexture(_texture);
 }
 
 };

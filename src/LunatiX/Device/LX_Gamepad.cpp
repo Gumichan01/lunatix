@@ -29,68 +29,68 @@
 namespace LX_Device
 {
 
-LX_Gamepad::LX_Gamepad(int index): gc(nullptr),joy(nullptr),haptic(nullptr)
+LX_Gamepad::LX_Gamepad(int index): _gc(nullptr),_joy(nullptr),_haptic(nullptr)
 {
     if(index < numberOfDevices() && SDL_IsGameController(index))
-        gc = SDL_GameControllerOpen(index);
+        _gc = SDL_GameControllerOpen(index);
 
-    if(gc == nullptr)
+    if(_gc == nullptr)
     {
-        joy = SDL_JoystickOpen(index);
-        haptic = new LX_Haptic(joy);
+        _joy = SDL_JoystickOpen(index);
+        _haptic = new LX_Haptic(_joy);
     }
     else
-        haptic = new LX_Haptic(gc);
+        _haptic = new LX_Haptic(_gc);
 }
 
 
 LX_Gamepad::~LX_Gamepad()
 {
-    delete haptic;
+    delete _haptic;
 
-    if(gc != nullptr)
-        SDL_GameControllerClose(gc);
+    if(_gc != nullptr)
+        SDL_GameControllerClose(_gc);
     else
-        SDL_JoystickClose(joy);
+        SDL_JoystickClose(_joy);
 }
 
 
 bool LX_Gamepad::isConnected(void)
 {
-    if(gc != nullptr)
-        return SDL_GameControllerGetAttached(gc) == SDL_TRUE;
+    if(_gc != nullptr)
+        return SDL_GameControllerGetAttached(_gc) == SDL_TRUE;
     else
-        return SDL_JoystickGetAttached(joy) == SDL_TRUE;
+        return SDL_JoystickGetAttached(_joy) == SDL_TRUE;
 }
 
 
 bool LX_Gamepad::isHaptic(void)
 {
-    return haptic->isOpened();
+    return _haptic->isOpened();
 }
 
 
 SDL_JoystickID LX_Gamepad::getID(void)
 {
-    if(gc != nullptr)
-        return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(gc));
+    if(_gc != nullptr)
+        return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(_gc));
     else
-        return SDL_JoystickInstanceID(joy);
+        return SDL_JoystickInstanceID(_joy);
 }
 
 
 LX_Haptic * LX_Gamepad::getHaptic(void)
 {
-    return haptic;
+    return _haptic;
 }
 
 
 const char * LX_Gamepad::getName(void)
 {
-    if(gc != nullptr)
-        return nameOf(gc);
+    if(_gc != nullptr)
+        return nameOf(_gc);
     else
-        return nameOf(joy);
+        return nameOf(_joy);
 }
 
 
@@ -99,10 +99,10 @@ UTF8string LX_Gamepad::toString(void)
     LX_GamepadInfo gi;
     int err = 0;
 
-    if(gc != nullptr)
-        err = statGamepad(gc,gi);
+    if(_gc != nullptr)
+        err = statGamepad(_gc,gi);
     else
-        err = statGamepad(joy,gi);
+        err = statGamepad(_joy,gi);
 
     if(err == -1)
         return UTF8string(std::string("Cannot get gamepad information: ")

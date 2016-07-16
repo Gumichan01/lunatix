@@ -39,23 +39,23 @@ LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
 
 
 LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
-    : particles(nullptr), nbParticles(nbPart), idWin(id)
+    : _particles(nullptr), _nb_particles(nbPart), _idwin(id)
 {
-    allocateParticles(nbParticles);
+    allocateParticles(_nb_particles);
 }
 
 
 LX_ParticleSystem::~LX_ParticleSystem()
 {
-    const unsigned int n = nbParticles;
+    const unsigned int n = _nb_particles;
 
     for(unsigned int i = 0; i < n; i++)
     {
-        delete particles[i];
-        particles[i] = nullptr;
+        delete _particles[i];
+        _particles[i] = nullptr;
     }
 
-    delete [] particles;
+    delete [] _particles;
 }
 
 
@@ -68,19 +68,19 @@ LX_ParticleSystem::~LX_ParticleSystem()
 */
 void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
 {
-    particles = new (nothrow) LX_Particle*[nbPart];
+    _particles = new (nothrow) LX_Particle*[nbPart];
 
-    if(particles == nullptr)
+    if(_particles == nullptr)
     {
-        LX_SetError("LX_ParticleSystem constructor: Cannot allocate the particles\n");
-        nbParticles = 0;
+        LX_SetError("LX_ParticleSystem constructor: Cannot allocate the _particles\n");
+        _nb_particles = 0;
     }
     else
     {
-        nbParticles = nbPart;
+        _nb_particles = nbPart;
 
-        for(unsigned int i = 0; i < nbParticles; i++)
-            particles[i] = nullptr;
+        for(unsigned int i = 0; i < _nb_particles; i++)
+            _particles[i] = nullptr;
     }
 }
 
@@ -88,16 +88,16 @@ void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
 bool LX_ParticleSystem::addParticle(LX_Particle *p)
 {
     bool done = false;
-    const unsigned int n = nbParticles;
+    const unsigned int n = _nb_particles;
 
     if(p == nullptr)
         return false;
 
     for(unsigned int i = 0; i < n; i++)
     {
-        if(particles[i] == nullptr)
+        if(_particles[i] == nullptr)
         {
-            particles[i] = p;
+            _particles[i] = p;
             done = true;
             break;
         }
@@ -109,27 +109,27 @@ bool LX_ParticleSystem::addParticle(LX_Particle *p)
 
 bool LX_ParticleSystem::rmParticle(unsigned int index)
 {
-    if(index > nbParticles || particles[index] == nullptr)
+    if(index > _nb_particles || _particles[index] == nullptr)
         return false;
 
-    delete particles[index];
-    particles[index] = nullptr;
+    delete _particles[index];
+    _particles[index] = nullptr;
     return true;
 }
 
 
 void LX_ParticleSystem::updateParticles(void)
 {
-    const unsigned int n = nbParticles;
+    const unsigned int n = _nb_particles;
 
     for(unsigned int i = 0; i < n; i++)
     {
-        if(particles[i] != nullptr)
+        if(_particles[i] != nullptr)
         {
-            if(particles[i]->isDead())
+            if(_particles[i]->isDead())
                 rmParticle(i);
             else
-                particles[i]->update();
+                _particles[i]->update();
         }
     }
 }
@@ -137,31 +137,31 @@ void LX_ParticleSystem::updateParticles(void)
 
 void LX_ParticleSystem::displayParticles(void)
 {
-    const unsigned int n = nbParticles;
+    const unsigned int n = _nb_particles;
     LX_Win::LX_WindowManager *wm = LX_Win::LX_WindowManager::getInstance();
-    LX_Win::LX_Window * win = wm->getWindow(idWin);
+    LX_Win::LX_Window * win = wm->getWindow(_idwin);
 
     if(win == nullptr)
         return;
 
     for(unsigned int i = 0; i < n ; i++)
     {
-        if(particles[i] == nullptr)
+        if(_particles[i] == nullptr)
             continue;
 
-        LX_AABB box = (particles[i]->getAABB());
+        LX_AABB box = (_particles[i]->getAABB());
 
         // Display the particle when the delay is a multiple of 2
-        if(particles[i]->getDelay()%2 == 0)
+        if(_particles[i]->getDelay()%2 == 0)
         {
-            if(particles[i]->getTexture() != nullptr)
+            if(_particles[i]->getTexture() != nullptr)
             {
-                win->putTexture(particles[i]->getTexture(),
+                win->putTexture(_particles[i]->getTexture(),
                                 nullptr,&box);
             }
-            else if(particles[i]->getSurface() != nullptr)
+            else if(_particles[i]->getSurface() != nullptr)
             {
-                win->putSurface(particles[i]->getSurface(),
+                win->putSurface(_particles[i]->getSurface(),
                                 nullptr,&box);
             }
         }
@@ -171,12 +171,12 @@ void LX_ParticleSystem::displayParticles(void)
 
 unsigned int LX_ParticleSystem::nbEmptyParticles(void)
 {
-    const unsigned int n = nbParticles;
+    const unsigned int n = _nb_particles;
     unsigned int nb = 0;
 
     for(unsigned int i = 0; i < n; i++)
     {
-        if(particles[i] == nullptr)
+        if(_particles[i] == nullptr)
             nb++;
     }
 
@@ -186,14 +186,13 @@ unsigned int LX_ParticleSystem::nbEmptyParticles(void)
 
 unsigned int LX_ParticleSystem::nbActiveParticles(void)
 {
-    return nbParticles - nbEmptyParticles();
+    return _nb_particles - nbEmptyParticles();
 }
 
 
 unsigned int LX_ParticleSystem::nbTotalParticles(void)
 {
-    return nbParticles;
+    return _nb_particles;
 }
 
 };
-

@@ -44,17 +44,17 @@ namespace LX_ParticleEngine
 */
 class LX_Particle
 {
-    LX_AABB box;                        /* The box of the particle                  */
-    LX_Physics::LX_Vector2D velocity;   /* The velocity of the particle             */
+    LX_AABB _box;                        /* The box of the particle         */
+    LX_Physics::LX_Vector2D _velocity;   /* The velocity of the particle    */
 
     /*  Boolean variable defined to check if
         the texture of the particle was allocatedd outside
         of the particle */
-    bool texture_from_outside;
+    bool _texture_from_outside;
 
-    unsigned int lifetime;              /* The delay to stay displayable            */
-    SDL_Texture *texture;               /* The texture (for the texture rendering)  */
-    SDL_Surface *surface;               /* The surface (for the surface rendering)  */
+    unsigned int _lifetime;              /* The delay to stay displayable            */
+    SDL_Texture *_texture;               /* The texture (for the texture rendering)  */
+    SDL_Surface *_surface;               /* The surface (for the surface rendering)  */
 
     LX_Particle(LX_Particle& p);
     LX_Particle& operator =(LX_Particle& p);
@@ -298,4 +298,3 @@ public :
 };
 
 #endif // PARTICLE_HPP_INCLUDED
-

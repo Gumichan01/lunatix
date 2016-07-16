@@ -39,9 +39,9 @@ class LX_Haptic;
 */
 class LX_Gamepad
 {
-    SDL_GameController *gc;
-    SDL_Joystick *joy;
-    LX_Haptic *haptic;
+    SDL_GameController *_gc;
+    SDL_Joystick *_joy;
+    LX_Haptic *_haptic;
 
 
 public :
@@ -127,4 +127,3 @@ public :
 };
 
 #endif  // LX_GAMEPAD_HPP_INCLUDED
-

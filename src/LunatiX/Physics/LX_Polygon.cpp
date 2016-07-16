@@ -28,14 +28,14 @@ using namespace std;
 namespace LX_Physics
 {
 
-LX_PolygonException::LX_PolygonException(std::string err) : string_error(err) {}
+LX_PolygonException::LX_PolygonException(std::string err) : _string_error(err) {}
 
 LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
-    : string_error(pex.string_error) {}
+    : _string_error(pex._string_error) {}
 
 const char * LX_PolygonException::what() const noexcept
 {
-    return string_error.c_str();
+    return _string_error.c_str();
 }
 
 LX_PolygonException::~LX_PolygonException() noexcept {}

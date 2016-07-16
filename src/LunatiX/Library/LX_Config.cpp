@@ -32,12 +32,12 @@ static LX_Configuration *instance = nullptr;
 
 LX_ConfigurationException::LX_ConfigurationException(UTF8string err)
 {
-    string_error = err;
+    _string_error = err;
 }
 
 const char * LX_ConfigurationException::what() const noexcept
 {
-    return string_error.utf8_str();
+    return _string_error.utf8_str();
 }
 
 LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
@@ -51,7 +51,7 @@ LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 LX_Configuration::LX_Configuration()
 {
     // Load configuration
-    loadSDLFlags();
+    loadSDLFlags_();
 }
 
 LX_Configuration::~LX_Configuration() {}
@@ -83,63 +83,63 @@ void LX_Configuration::destroy()
     instance = nullptr;
 }
 
-void LX_Configuration::loadSDLFlags()
+void LX_Configuration::loadSDLFlags_()
 {
-    LX_ConfigLoader::loadSDLfileConfig(conf);
-    LX_ConfigLoader::loadWindowFileConfig(conf);
+    LX_ConfigLoader::loadSDLfileConfig(_conf);
+    LX_ConfigLoader::loadWindowFileConfig(_conf);
 }
 
 bool LX_Configuration::getVideoFlag()
 {
-    return conf.video_flag;
+    return _conf.video_flag;
 }
 
 bool LX_Configuration::getVSyncFlag()
 {
-    return conf.vsync_flag;
+    return _conf.vsync_flag;
 }
 
 bool LX_Configuration::getTTFFlag()
 {
-    return conf.ttf_flag;
+    return _conf.ttf_flag;
 }
 
 bool LX_Configuration::getAudioFlag()
 {
-    return conf.audio_flag;
+    return _conf.audio_flag;
 }
 
 bool LX_Configuration::getGamepadFlag()
 {
-    return conf.gamepad_flag;
+    return _conf.gamepad_flag;
 }
 
 bool LX_Configuration::getOpenGLFlag()
 {
-    return conf.opengl_flag;
+    return _conf.opengl_flag;
 }
 
 const char * LX_Configuration::getFontFile()
 {
-    return conf.font_file.utf8_str();
+    return _conf.font_file.utf8_str();
 }
 
 int LX_Configuration::getFontSize()
 {
-    return conf.font_size;
+    return _conf.font_size;
 }
 
 int LX_Configuration::getWinWidth()
 {
-    return conf.width;
+    return _conf.width;
 }
 
 int LX_Configuration::getWinHeight()
 {
-    return conf.height;
+    return _conf.height;
 }
 
 bool LX_Configuration::getFullscreenFlag()
 {
-    return conf.fullscreen_flag;
+    return _conf.fullscreen_flag;
 }

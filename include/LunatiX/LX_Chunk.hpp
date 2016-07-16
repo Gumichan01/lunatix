@@ -42,7 +42,7 @@ namespace LX_Mixer
 */
 class LX_ChunkException : public std::exception
 {
-    std::string string_error;
+    std::string _string_error;
 
 public :
 
@@ -65,7 +65,7 @@ public :
 */
 class LX_Chunk : public virtual LX_Sound
 {
-    Mix_Chunk *chunk;
+    Mix_Chunk *_chunk;
 
     LX_Chunk(LX_Chunk& m);
     LX_Chunk& operator =(LX_Chunk& m);
@@ -191,4 +191,3 @@ public:
 };
 
 #endif // LX_CHUNK_H_INCLUDED
-

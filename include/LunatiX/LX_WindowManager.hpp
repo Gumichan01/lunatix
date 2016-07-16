@@ -36,10 +36,10 @@ class LX_Window;
 */
 class LX_WindowManager
 {
-    static const int LX_NBMAX_WINDOWS = 8;
-    unsigned int size;
-    unsigned int nbWin;                                 /* Number of existing windows */
-    std::array<LX_Win::LX_Window*, LX_NBMAX_WINDOWS> windows;
+    static const int _LX_NBMAX_WINDOWS = 8;
+    unsigned int _size;
+    unsigned int _nbwin;                                 /* Number of existing windows */
+    std::array<LX_Win::LX_Window*, _LX_NBMAX_WINDOWS> _windows;
 
     LX_WindowManager();
     ~LX_WindowManager();
@@ -157,4 +157,3 @@ LX_WindowManager * getWindowManager();
 };
 
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED
-

@@ -35,33 +35,33 @@ LX_FileBuffer::LX_FileBuffer(const std::string filename)
 
 
 LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
-    : name(filename), buffer(nullptr), bufsize(0)
+    : _name(filename), _buffer(nullptr), _bufsize(0)
 {
     LX_File *reader = nullptr;
-    std::string str("LX_FileBuffer: " + std::string(name.utf8_str()) + " - ");
+    std::string str("LX_FileBuffer: " + std::string(_name.utf8_str()) + " - ");
     size_t r = 0;
     Sint64 s = 0;
 
-    reader = new LX_File(name,LX_FILEIO_RDONLY);
+    reader = new LX_File(_name,LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
 
     if((s = reader->size()) == -1 )
         throw IOException(str + "cannot get the size of the file");
 
-    bufsize = static_cast<Uint64>(s);
+    _bufsize = static_cast<Uint64>(s);
 
     reader->seek(0,LX_SEEK_SET);
-    buffer = new (std::nothrow) char[bufsize];
+    _buffer = new (std::nothrow) char[_bufsize];
 
-    if(buffer == nullptr)
+    if(_buffer == nullptr)
     {
         delete reader;
         throw IOException(str + "not enough memory to store the file content");
     }
 
-    r = reader->readExactly(buffer,sizeof(char),bufsize);
+    r = reader->readExactly(_buffer,sizeof(char),_bufsize);
 
-    if(r < bufsize)
+    if(r < _bufsize)
     {
         delete reader;
         throw IOException(str + "cannot read the entire file");
@@ -74,34 +74,34 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
 
 SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem(buffer, static_cast<int>(bufsize));
+    SDL_RWops *rw = SDL_RWFromConstMem( _buffer, static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:IMG_Load_RW(rw,1);
 }
 
 
 TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem(buffer,static_cast<int>(bufsize));
+    SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:TTF_OpenFontRW(rw,1,size);
 }
 
 
 Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem(buffer,static_cast<int>(bufsize));
+    SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:Mix_LoadWAV_RW(rw,1);
 }
 
 
 const char * LX_FileBuffer::getFilename(void)
 {
-    return name.utf8_str();
+    return _name.utf8_str();
 }
 
 
 LX_FileBuffer::~LX_FileBuffer()
 {
-    delete [] buffer;
+    delete []  _buffer;
 }
 
 };

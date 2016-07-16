@@ -105,28 +105,28 @@ public:
 
 class LX_TextInput
 {
-    UTF8string u8text;
-    size_t cursor;
-    bool done;
+    UTF8string _u8text;
+    size_t _cursor;
+    bool _done;
 
     LX_TextInput(LX_TextInput& t);
     LX_TextInput(LX_TextInput&& t);
     LX_TextInput& operator =(LX_TextInput t);
 
     // Save a text in the clipboard get it from it
-    void save();
-    void paste();
+    void save_();
+    void paste_();
 
     // Input
-    void keyboardInput(SDL_Event& ev);
-    void textInput(SDL_Event& ev);
-    void textEdit(SDL_Event& ev);
+    void keyboardInput_(SDL_Event& ev);
+    void textInput_(SDL_Event& ev);
+    void textEdit_(SDL_Event& ev);
 
     // Operation on the string
-    void u8stringInput(UTF8string& ntext);
-    void utf8Pop();
-    void backslashKey();
-    void deleteKey();
+    void u8stringInput_(UTF8string& ntext);
+    void utf8Pop_();
+    void backslashKey_();
+    void deleteKey_();
 
 public:
 

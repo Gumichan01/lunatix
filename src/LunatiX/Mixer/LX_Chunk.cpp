@@ -32,31 +32,31 @@ using namespace LX_FileIO;
 namespace LX_Mixer
 {
 
-LX_ChunkException::LX_ChunkException(std::string err) : string_error(err) {}
+LX_ChunkException::LX_ChunkException(std::string err) : _string_error(err) {}
 
 LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
-    : string_error(me.string_error) {}
+    : _string_error(me._string_error) {}
 
 const char * LX_ChunkException::what() const noexcept
 {
-    return string_error.c_str();
+    return _string_error.c_str();
 }
 
 LX_ChunkException::~LX_ChunkException() noexcept {}
 
 /* LX_Chunk */
 
-LX_Chunk::LX_Chunk(Mix_Chunk *sample) : chunk(sample) {}
+LX_Chunk::LX_Chunk(Mix_Chunk *sample) : _chunk(sample) {}
 
 
-LX_Chunk::LX_Chunk(std::string filename) : chunk(nullptr)
+LX_Chunk::LX_Chunk(std::string filename) : _chunk(nullptr)
 {
     if(load(filename.c_str()) == false)
         throw LX_ChunkException(LX_GetError());
 }
 
 
-LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : chunk(nullptr)
+LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : _chunk(nullptr)
 {
     if(loadFromBuffer(file) == false)
         throw LX_ChunkException(LX_GetError());
@@ -65,17 +65,17 @@ LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : chunk(nullptr)
 
 bool LX_Chunk::load(std::string filename)
 {
-    Mix_FreeChunk(chunk);
-    chunk = Mix_LoadWAV(filename.c_str());
-    return chunk != nullptr;
+    Mix_FreeChunk(_chunk);
+    _chunk = Mix_LoadWAV(filename.c_str());
+    return _chunk != nullptr;
 }
 
 
 bool LX_Chunk::loadFromBuffer(LX_FileBuffer *file)
 {
-    Mix_FreeChunk(chunk);
-    chunk = file->getChunkFromBuffer();
-    return chunk != nullptr;
+    Mix_FreeChunk(_chunk);
+    _chunk = file->getChunkFromBuffer();
+    return _chunk != nullptr;
 }
 
 
@@ -93,19 +93,19 @@ bool LX_Chunk::play(int channel)
 
 bool LX_Chunk::play(int channel,int ticks)
 {
-    return Mix_PlayChannelTimed(channel,chunk,0,ticks) == 0;
+    return Mix_PlayChannelTimed(channel,_chunk,0,ticks) == 0;
 }
 
 
 int LX_Chunk::volume(int newVolume)
 {
-    return Mix_VolumeChunk(chunk,newVolume);
+    return Mix_VolumeChunk(_chunk,newVolume);
 }
 
 
 LX_Chunk::~LX_Chunk()
 {
-    Mix_FreeChunk(chunk);
+    Mix_FreeChunk(_chunk);
 }
 
 };

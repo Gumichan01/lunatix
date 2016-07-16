@@ -23,7 +23,7 @@
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
 
-static LX_Win::LX_WindowManager *winInstance = nullptr;
+static LX_Win::LX_WindowManager *win_instance = nullptr;
 
 namespace LX_Win
 {
@@ -36,28 +36,28 @@ LX_WindowManager * getWindowManager()
 
 void LX_WindowManager::init(void)
 {
-    if(winInstance == nullptr)
-        winInstance = new LX_WindowManager();
+    if(win_instance == nullptr)
+        win_instance = new LX_WindowManager();
 }
 
 
 LX_WindowManager * LX_WindowManager::getInstance()
 {
-    return winInstance;
+    return win_instance;
 }
 
 
 void LX_WindowManager::destroy(void)
 {
-    delete winInstance;
+    delete win_instance;
 }
 
 
 // Create the instance
 LX_WindowManager::LX_WindowManager()
-    : size(0), nbWin(0)
+    : _size(0), _nbwin(0)
 {
-    windows.fill(nullptr);
+    _windows.fill(nullptr);
 }
 
 
@@ -71,14 +71,14 @@ LX_WindowManager::~LX_WindowManager()
 int LX_WindowManager::addWindow(LX_Window *w)
 {
     int id;
-    if(w == nullptr || size >= LX_NBMAX_WINDOWS)
+    if(w == nullptr || _size >= _LX_NBMAX_WINDOWS)
         return -1;
 
-    windows[size] = w;
-    id = static_cast<int>(size);
+    _windows[_size] = w;
+    id = static_cast<int>(_size);
 
-    size++;
-    nbWin += 1;
+    _size++;
+    _nbwin += 1;
 
     return id;
 }
@@ -88,12 +88,12 @@ LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 {
     LX_Window *w = nullptr;
 
-    if(id > size || windows[id] == nullptr)
+    if(id > _size || _windows[id] == nullptr)
         return nullptr;
 
-    w = windows[id];
-    windows[id] = nullptr;
-    nbWin -= 1;
+    w = _windows[id];
+    _windows[id] = nullptr;
+    _nbwin -= 1;
 
     return w;
 }
@@ -101,33 +101,33 @@ LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 
 unsigned int LX_WindowManager::nbWindows(void)
 {
-    return nbWin;
+    return _nbwin;
 }
 
 
 void LX_WindowManager::updateWindows()
 {
-    for(unsigned int i = 0; i < nbWin; i++)
+    for(unsigned int i = 0; i < _nbwin; i++)
     {
-        if(windows[i] != nullptr)
-            windows[i]->update();
+        if(_windows[i] != nullptr)
+            _windows[i]->update();
     }
 }
 
 
 void LX_WindowManager::clearWindows()
 {
-    for(unsigned int i = 0; i < nbWin; i++)
+    for(unsigned int i = 0; i < _nbwin; i++)
     {
-        if(windows[i] != nullptr)
-            windows[i]->clearWindow();
+        if(_windows[i] != nullptr)
+            _windows[i]->clearWindow();
     }
 }
 
 
 LX_Window * LX_WindowManager::getWindow(unsigned int id)
 {
-    return (id > size) ? nullptr : windows[id];
+    return (id > _size) ? nullptr : _windows[id];
 }
 
 };

@@ -37,7 +37,7 @@ namespace LX_Mixer
 */
 class LX_MusicException : public std::exception
 {
-    std::string string_error;
+    std::string _string_error;
 
 public :
 
@@ -64,7 +64,7 @@ public :
 */
 class LX_Music : public virtual LX_Sound
 {
-    Mix_Music *music;
+    Mix_Music *_music;
 
     LX_Music(LX_Music& m);
     LX_Music& operator =(LX_Music& m);
@@ -172,4 +172,3 @@ public:
 };
 
 #endif // LX_MUSIC_H_INCLUDED
-

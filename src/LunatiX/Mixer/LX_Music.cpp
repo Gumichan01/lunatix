@@ -26,27 +26,27 @@
 namespace LX_Mixer
 {
 
-LX_MusicException::LX_MusicException(std::string err) : string_error(err) {}
+LX_MusicException::LX_MusicException(std::string err) : _string_error(err) {}
 
 LX_MusicException::LX_MusicException(const LX_MusicException& me)
-    : string_error(me.string_error) {}
+    : _string_error(me._string_error) {}
 
 const char * LX_MusicException::what() const noexcept
 {
-    return string_error.c_str();
+    return _string_error.c_str();
 }
 
 LX_MusicException::~LX_MusicException() noexcept {}
 
 
-LX_Music::LX_Music(Mix_Music *mus) : music(mus)
+LX_Music::LX_Music(Mix_Music *mus) : _music(mus)
 {
     if(mus == nullptr)
         throw LX_MusicException("LX_Music constructor: invalid Mix_Music");
 }
 
 
-LX_Music::LX_Music(std::string filename) : music(nullptr)
+LX_Music::LX_Music(std::string filename) : _music(nullptr)
 {
     if(load(filename.c_str()) == false)
         throw LX_MusicException(LX_GetError());
@@ -55,10 +55,10 @@ LX_Music::LX_Music(std::string filename) : music(nullptr)
 
 bool LX_Music::load(std::string filename)
 {
-    Mix_FreeMusic(music);
-    music = Mix_LoadMUS(filename.c_str());
+    Mix_FreeMusic(_music);
+    _music = Mix_LoadMUS(filename.c_str());
 
-    if(music == nullptr)
+    if(_music == nullptr)
         return false;
 
     return true;
@@ -73,7 +73,7 @@ bool LX_Music::play(void)
 
 bool LX_Music::play(int loops)
 {
-    return Mix_PlayMusic(music,loops) == 0;
+    return Mix_PlayMusic(_music,loops) == 0;
 }
 
 
@@ -101,14 +101,13 @@ int LX_Music::volume(int newVolume)
 
 Mix_Music * LX_Music::getMusic(void)
 {
-    return music;
+    return _music;
 }
 
 
 LX_Music::~LX_Music(void)
 {
-    Mix_FreeMusic(music);
+    Mix_FreeMusic(_music);
 }
 
 };
-

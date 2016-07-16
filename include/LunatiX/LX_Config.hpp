@@ -34,7 +34,7 @@
 class LX_ConfigurationException : public std::exception
 {
 
-    UTF8string string_error;
+    UTF8string _string_error;
 
 public :
 
@@ -61,12 +61,12 @@ public :
 */
 class LX_Configuration
 {
-    LX_ConfigLoader::LX_InternalConfig conf;
+    LX_ConfigLoader::LX_InternalConfig _conf;
 
     LX_Configuration();
     LX_Configuration(LX_Configuration& c);
     LX_Configuration& operator =(LX_Configuration& c);
-    void loadSDLFlags();
+    void loadSDLFlags_();
 
 public :
 
