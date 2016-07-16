@@ -40,14 +40,15 @@ SDL_Surface * loadSurface(const std::string& filename)
     SDL_Surface *loaded = IMG_Load(filename.c_str());
     SDL_Surface *optimized = optimizeSurface(loaded);
     SDL_FreeSurface(loaded);
-
     return optimized;
 }
+
 
 SDL_Surface * loadSurface(const UTF8string& filename)
 {
     return loadSurface(filename.utf8_str());
 }
+
 
 SDL_Surface * loadSurface(LX_File *file)
 {
@@ -60,7 +61,6 @@ SDL_Surface * loadSurface(LX_File *file)
     SDL_Surface * surface = file->getSurfaceFromData();
     SDL_Surface *optimized = optimizeSurface(surface);
     SDL_FreeSurface(surface);
-
     return optimized;
 }
 
@@ -76,7 +76,6 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
     SDL_Surface * surface = file->getSurfaceFromBuffer();
     SDL_Surface *optimized = optimizeSurface(surface);
     SDL_FreeSurface(surface);
-
     return optimized;
 }
 
@@ -92,7 +91,6 @@ SDL_Surface * optimizeSurface(SDL_Surface * surface)
     }
 
     optimized = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA4444,0x00000000);
-
     return optimized;
 }
 
