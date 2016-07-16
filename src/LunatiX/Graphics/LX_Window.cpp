@@ -232,7 +232,7 @@ void LX_Window::setWindowSize(int w, int h)
 }
 
 
-void LX_Window::setFullscreen(Uint32 flag)
+void LX_Window::toggleFullscreen(Uint32 flag)
 {
     SDL_SetWindowFullscreen(_window,flag);
 

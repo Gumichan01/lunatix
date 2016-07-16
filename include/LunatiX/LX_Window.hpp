@@ -260,7 +260,7 @@ public :
     void setWindowSize(int w, int h);
 
     /**
-    *   @fn void setFullscreen(Uint32 flag)
+    *   @fn void toggleFullscreen(Uint32 flag)
     *
     *   Set the window's fullscreen state
     *
@@ -270,7 +270,7 @@ public :
     *           - ::LX_GRAPHICS_NO_FULLSCREEN
     *
     */
-    void setFullscreen(Uint32 flag);
+    void toggleFullscreen(Uint32 flag);
 
     /**
     *   @fn void update(void)

@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     info.title = "Hello #1";
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
-    //w->setFullscreen(LX_GRAPHICS_FULLSCREEN);
+    w->toggleFullscreen(LX_GRAPHICS_FULLSCREEN);
 
     test_winInfo(win);
     test_window1(w);
@@ -96,12 +96,10 @@ void test_window2(void)
     else
         cout << "SUCCESS - the renderer is ready" << endl;
 
-
     if(win2.getWidth() != w)
         cerr << "FAILURE - width ; expected : " << w << "; got: " << win2.getWidth() << endl;
     else
         cout << "SUCCESS - width " << w << endl;
-
 
     if(win2.getHeight() != h)
         cerr << "FAILURE - height ; expected : " << h << "; got: " << win2.getHeight() << endl;
