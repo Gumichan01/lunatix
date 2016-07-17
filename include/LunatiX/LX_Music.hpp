@@ -53,7 +53,7 @@ public :
     ~LX_MusicException() noexcept;
 };
 
-
+/// TODO load music from utf-8 string files
 
 /**
 *   @class LX_Music
@@ -78,7 +78,7 @@ public:
     *
     *   @param mus The Mix_Music
     */
-    LX_Music(Mix_Music *mus);
+    LX_Music(Mix_Music *mus);   /// TODO remove this constructor (Mix_Music)
 
     /**
     *   @fn LX_Music(std::string filename)
@@ -98,7 +98,7 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     */
-    bool load(std::string filename);
+    bool load(std::string filename);    /// TODO remove this function (useless)
 
     /**
     *   @fn bool play(void)
@@ -107,7 +107,7 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     *
-    *   @note This function internally calls play(int loops) with no loop
+    *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP
     *
     */
     bool play(void);
@@ -120,6 +120,9 @@ public:
     *   @param loops The loop constant
     *
     *   @return TRUE on success,FALSE otherwise
+    *
+    *   @note If loops is set to LX_MIXER_NOLOOP, the music is played only once.
+    *   @note If loops is set to LX_MIXER_LOOP, the music is played forever.
     */
     bool play(int loops);
 
@@ -157,7 +160,7 @@ public:
     *
     *   @return The Mix_Music
     */
-    Mix_Music *getMusic(void);
+    Mix_Music *getMusic(void);  /// TODO remove this function (encapsulation violation)
 
     /**
     *   @fn ~LX_Music(void)

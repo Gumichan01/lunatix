@@ -87,7 +87,7 @@ bool LX_Chunk::play()
 
 bool LX_Chunk::play(int channel)
 {
-    return play(channel,0);
+    return Mix_PlayChannel(channel,_chunk,0) == 0;
 }
 
 

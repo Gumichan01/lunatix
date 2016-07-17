@@ -76,7 +76,7 @@ LX_Music * loadMusic(std::string filename);
 *   @note This function creates a new instance of LX_Music.
 *           So do not forget to destroy it.
 */
-LX_Music * loadMusic(Mix_Music *mus);
+LX_Music * loadMusic(Mix_Music *mus); /// TODO remove this function (Mix_Music)
 
 /**
 *   @fn LX_Chunk * loadSample(std::string filename)
@@ -102,7 +102,7 @@ LX_Chunk * loadSample(std::string filename);
 *   @note This function creates a new instance of LX_Chunk.
 *           So do not forget to destroy it.
 */
-LX_Chunk * loadSample(Mix_Chunk *ch);
+LX_Chunk * loadSample(Mix_Chunk *ch);   /// TODO remove this function (Mix_CHunk)
 
 /**
 *   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
@@ -129,7 +129,7 @@ LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file);
 *
 *   @note   If num is 0, then all channels will be freed.
 *   @note   A negative number do nothing,
-*           it just displays the number of allocated channels.
+*           it just returns the number of allocated channels.
 *   @note   If num is less than the current number of channels,
 *           then the higher channels will be stopped, freed, and not mixed.
 */
@@ -159,7 +159,7 @@ int reserveChannels(int numchans);
 *   @note If the channel is -1, all channels will be set to the volume
 *   @note If the volume is equals to -1, then the average volume is returned
 *   @note If the new volume is greater than 128, the volume is set to 128
-*   @note This value 128 is ht maximum value defined by the MIX_MAX_VOLUME macro
+*   @note This value 128 is the maximum value defined by the MIX_MAX_VOLUME macro
 */
 int channelVolume(int channel,int volume);
 
@@ -270,12 +270,16 @@ void fadeOutMusic(int ms);
 *   @param left The volume of the left channel (0 - 255)
 *   @param right The volume of the right channel (0 - 255)
 *
-*   @note This function only works on stereo audio.
-*   @note It is possible the call fail if it is done on a mono audio.
-*   @note To unregister type effect, use this function with 255 as left and right value
-*           or use LX_Mixer::removePanning().
+*   @note This function only works on stereo audio. So the call will have no effect
+*         or fail if it is done on mono audio.
+*   @note The easiest way to do true panning is to call setPanning(left, 254 - left),
+*         so that the total volume is correct, if you consider
+*         the maximum volume to be 127 per channel for center,
+*         or 254 max for left, this works, but about halves the effective volume.
+*   @note To unregister this effect, use this function with 255 as left and right value
+*           or simply use LX_Mixer::removePanning().
 */
-void setPanning(int channel,Uint8 left,Uint8 right);
+void setPanning(int channel,Uint8 left,Uint8 right); // TODO Refactor setPanning
 /**
 *   @fn void removePanning(int channel)
 *
@@ -283,7 +287,7 @@ void setPanning(int channel,Uint8 left,Uint8 right);
 *
 *   @param channel The channel to remove the panning on
 */
-void removePanning(int channel);
+void removePanning(int channel);    // TODO Refactor reovePanning
 
 // 3D Position
 /**
@@ -344,7 +348,7 @@ void reverseStereo(int channel,int flip);
 *
 *   Set the distance to all channels
 *
-*   @param distance The virtual distance betwenn the user and the source
+*   @param distance The virtual distance between the user and the source
 */
 void setDistance(Uint8 distance);
 /**
@@ -353,7 +357,7 @@ void setDistance(Uint8 distance);
 *   Set the distance of a channel
 *
 *   @param channel The channel to use
-*   @param distance The virtual distance betwenn the user and the source
+*   @param distance The virtual distance between the user and the source
 *
 *   @note If MIX_CHANNEL_POST is set, all channels will be dealt
 *
@@ -363,4 +367,3 @@ void setDistance(int channel,Uint8 distance);
 };
 
 #endif // LX_MIXER_H_INCLUDED
-

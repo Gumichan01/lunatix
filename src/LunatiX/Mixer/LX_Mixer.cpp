@@ -27,6 +27,18 @@
 
 using namespace LX_FileIO;
 
+namespace
+{
+    const short LX_DEFAULT_VOLUME = 100;
+
+    // Overall volume in volume unit [0-100]
+    short overall_volume = LX_DEFAULT_VOLUME;
+    // Music volume in percentage of overall volume
+    short music_volume = LX_DEFAULT_VOLUME;
+    // Effects volume in percentage of overall volume
+    short fx_volume = LX_DEFAULT_VOLUME;
+};
+
 namespace LX_Mixer
 {
 
@@ -114,7 +126,7 @@ int isPaused(int channel)
 }
 
 
-void fadeInMusic(LX_Music *music,int ms)
+void fadeInMusic(LX_Music *music,int ms)    /// TODO use reference instead of pointer
 {
     Mix_FadeInMusic(music->getMusic(),LX_MIXER_NOLOOP,ms);
 }
@@ -180,4 +192,3 @@ void setDistance(int channel,Uint8 distance)
 
 
 };
-

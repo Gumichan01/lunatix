@@ -32,6 +32,8 @@ class LX_FileBuffer;
 
 };
 
+/// TODO Implements bool play(int channel,int loops);
+/// TODO Implements bool play(int channel,int loops,int ticks);
 
 namespace LX_Mixer
 {
@@ -79,7 +81,7 @@ public:
     *
     *   @param sample The sample file
     */
-    LX_Chunk(Mix_Chunk *sample);
+    LX_Chunk(Mix_Chunk *sample); /// TODO remove this constructor (Mix_Chunk)
 
     /**
     *   @fn LX_Chunk(std::string filename)
@@ -117,7 +119,7 @@ public:
     *   @return TRUE on success, FALSE otherwise
     *   @sa loadFromBuffer
     */
-    bool load(std::string filename);
+    bool load(std::string filename);    /// TODO remove this function (useless)
 
     /**
     *   @fn bool loadFromBuffer(LX_FileBuffer *file)
