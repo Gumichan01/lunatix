@@ -42,9 +42,7 @@ protected:
 
 public:
 
-    virtual bool play() = 0;                        /**< @brief Play something      */
-    virtual int volume(int newVolume) = 0;          /**< @brief Set the volume      */
-
+    virtual bool play() = 0;                /**< @brief Play something  */
     virtual ~LX_Sound();
 };
 
