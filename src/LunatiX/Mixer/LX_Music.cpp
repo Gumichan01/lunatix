@@ -39,21 +39,23 @@ const char * LX_MusicException::what() const noexcept
 LX_MusicException::~LX_MusicException() noexcept {}
 
 
-LX_Music::LX_Music(Mix_Music *mus) : _music(mus)
-{
-    if(mus == nullptr)
-        throw LX_MusicException("LX_Music constructor: invalid Mix_Music");
-}
+/* LX_Music */
 
-
-LX_Music::LX_Music(std::string filename) : _music(nullptr)
+LX_Music::LX_Music(std::string& filename) : _music(nullptr)
 {
-    if(load(filename.c_str()) == false)
+    if(load_(filename) == false)
         throw LX_MusicException(LX_GetError());
 }
 
 
-bool LX_Music::load(std::string filename)
+LX_Music::LX_Music(UTF8string& filename) : _music(nullptr)
+{
+    if(load_(filename.utf8_str()) == false)
+        throw LX_MusicException(LX_GetError());
+}
+
+
+bool LX_Music::load_(std::string filename)
 {
     Mix_FreeMusic(_music);
     _music = Mix_LoadMUS(filename.c_str());
@@ -62,6 +64,17 @@ bool LX_Music::load(std::string filename)
         return false;
 
     return true;
+}
+
+void LX_Music::fadeIn(int ms)
+{
+    Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
+}
+
+
+void LX_Music::fadeOut(int ms)
+{
+    Mix_FadeOutMusic(ms);
 }
 
 
@@ -96,12 +109,6 @@ void LX_Music::stop(void)
 int LX_Music::volume(int newVolume)
 {
     return Mix_VolumeMusic(newVolume);
-}
-
-
-Mix_Music * LX_Music::getMusic(void)
-{
-    return _music;
 }
 
 

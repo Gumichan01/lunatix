@@ -53,7 +53,6 @@ public :
     ~LX_MusicException() noexcept;
 };
 
-/// TODO load music from utf-8 string files
 
 /**
 *   @class LX_Music
@@ -69,36 +68,57 @@ class LX_Music : public virtual LX_Sound
     LX_Music(LX_Music& m);
     LX_Music& operator =(LX_Music& m);
 
+protected:
+
+    bool load_(std::string filename);
+
 public:
 
     /**
-    *   @fn LX_Music(Mix_Music *mus)
-    *
-    *   Create the instance with a Mix_Music
-    *
-    *   @param mus The Mix_Music
-    */
-    LX_Music(Mix_Music *mus);   /// TODO remove this constructor (Mix_Music)
-
-    /**
-    *   @fn LX_Music(std::string filename)
+    *   @fn LX_Music(std::string& filename)
     *
     *   Create the instance loading a music file
     *
     *   @param filename The music filename that will be loaded
+    *   @exception LX_MusicException if the music cannot be created from the file
     */
-    LX_Music(std::string filename);
+    LX_Music(std::string& filename);
 
     /**
-    *   @fn bool load(std::string filename)
+    *   @fn LX_Music(UTF8string filename)
     *
-    *   Load the music specified in the music file
+    *   Create the instance loading a music file
     *
-    *   @param filename The file to load the music from
-    *
-    *   @return TRUE on success, FALSE otherwise
+    *   @param filename The music filename that will be loaded
+    *   @exception LX_MusicException if the music cannot be created from the file
     */
-    bool load(std::string filename);    /// TODO remove this function (useless)
+    LX_Music(UTF8string& filename);
+
+    /**
+    *   @fn void fadeIn(int ms)
+    *
+    *   Fade in the current Music over some milliseconds of time
+    *
+    *   @param ms Milliseconds for the fade-in effect to complete
+    *
+    *   @note fadeInMusic starts playing the music with the fade-in effect.
+    *         It is not necessary to call LX_Music::play() if this function is called
+    *
+    *   @note Any previous music will be halted, or if it is fading out
+    *           it will wait (blocking) for the fade to complete
+    */
+    void fadeIn(int ms);
+    /**
+    *   @fn void fadeOut(int ms)
+    *
+    *   Fade out the music over some milliseconds of time
+    *
+    *   @param ms Milliseconds for the fade-out effect to complete
+    *
+    *   @note This functions works only when music is playing and
+    *           no fading is already set to fade out
+    */
+    void fadeOut(int ms);
 
     /**
     *   @fn bool play(void)
@@ -154,19 +174,8 @@ public:
     int volume(int newVolume);
 
     /**
-    *   @fn Mix_Music * getMusic(void)
-    *
-    *   Return the instance to the music structure
-    *
-    *   @return The Mix_Music
-    */
-    Mix_Music *getMusic(void);  /// TODO remove this function (encapsulation violation)
-
-    /**
     *   @fn ~LX_Music(void)
-    *
     *   Destroy the instance
-    *
     */
     ~LX_Music();
 };

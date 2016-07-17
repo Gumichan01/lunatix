@@ -23,8 +23,8 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-#define LX_MIXER_LOOP -1                    /**< Activate the loop */
-#define LX_MIXER_NOLOOP 0                   /**< No loop is activated */
+#define LX_MIXER_LOOP -1                    /**< Activate the loop      */
+#define LX_MIXER_NOLOOP 0                   /**< No loop is activated   */
 
 
 namespace LX_Mixer
@@ -36,12 +36,14 @@ namespace LX_Mixer
 */
 class LX_Sound
 {
+protected:
+
+    virtual bool load_(std::string filename) = 0;
 
 public:
 
-    virtual bool load(std::string filename) = 0;    /**< @brief Load a music file */
-    virtual bool play() = 0;                        /**< @brief Play something */
-    virtual int volume(int newVolume) = 0;          /**< @brief Set the volume */
+    virtual bool play() = 0;                        /**< @brief Play something      */
+    virtual int volume(int newVolume) = 0;          /**< @brief Set the volume      */
 
     virtual ~LX_Sound();
 };
@@ -49,4 +51,3 @@ public:
 };
 
 #endif // LX_SOUND_H_INCLUDED
-

@@ -26,8 +26,6 @@
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 
-using namespace LX_FileIO;
-
 
 namespace LX_Mixer
 {
@@ -44,14 +42,19 @@ const char * LX_ChunkException::what() const noexcept
 
 LX_ChunkException::~LX_ChunkException() noexcept {}
 
+
 /* LX_Chunk */
 
-LX_Chunk::LX_Chunk(Mix_Chunk *sample) : _chunk(sample) {}
-
-
-LX_Chunk::LX_Chunk(std::string filename) : _chunk(nullptr)
+LX_Chunk::LX_Chunk(std::string& filename) : _chunk(nullptr)
 {
-    if(load(filename.c_str()) == false)
+    if(load_(filename) == false)
+        throw LX_ChunkException(LX_GetError());
+}
+
+
+LX_Chunk::LX_Chunk(UTF8string& filename) : _chunk(nullptr)
+{
+    if(load_(filename.utf8_str()) == false)
         throw LX_ChunkException(LX_GetError());
 }
 
@@ -63,7 +66,7 @@ LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : _chunk(nullptr)
 }
 
 
-bool LX_Chunk::load(std::string filename)
+bool LX_Chunk::load_(std::string filename)
 {
     Mix_FreeChunk(_chunk);
     _chunk = Mix_LoadWAV(filename.c_str());
@@ -71,7 +74,7 @@ bool LX_Chunk::load(std::string filename)
 }
 
 
-bool LX_Chunk::loadFromBuffer(LX_FileBuffer *file)
+bool LX_Chunk::loadFromBuffer(LX_FileIO::LX_FileBuffer *file)
 {
     Mix_FreeChunk(_chunk);
     _chunk = file->getChunkFromBuffer();

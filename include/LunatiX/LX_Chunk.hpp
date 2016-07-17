@@ -72,19 +72,14 @@ class LX_Chunk : public virtual LX_Sound
     LX_Chunk(LX_Chunk& m);
     LX_Chunk& operator =(LX_Chunk& m);
 
+protected:
+
+    bool load_(std::string filename);
+
 public:
 
     /**
-    *   @fn LX_Chunk(Mix_Chunk *sample)
-    *
-    *   Construct the instance setting the Mix_Chunk instance
-    *
-    *   @param sample The sample file
-    */
-    LX_Chunk(Mix_Chunk *sample); /// TODO remove this constructor (Mix_Chunk)
-
-    /**
-    *   @fn LX_Chunk(std::string filename)
+    *   @fn LX_Chunk(std::string& filename)
     *
     *   Construct the instance creating the Mix_Chunk instance from a file
     *
@@ -96,7 +91,21 @@ public:
     *
     *   @exception LX_ChunkException if the chunk cannot be created from the file
     */
-    LX_Chunk(std::string filename);
+    LX_Chunk(std::string& filename);
+
+    /**
+    *   @fn LX_Music(UTF8string& filename)
+    *
+    *   Create the instance loading a chunk file
+    *
+    *   @param filename The chunk filename that will be loaded
+    *
+    *   @note It is preferable to give a .wav file to the constructor.
+    *           The chunk was optimized for this format. But it can work with
+    *           an other file type.
+    *   @exception LX_ChunkException if the chunk cannot be created from the file
+    */
+    LX_Chunk(UTF8string& filename);
 
     /**
     *   @fn LX_Chunk(LX_FileIO::LX_FileBuffer * file)
@@ -108,18 +117,6 @@ public:
     *   @exception LX_ChunkException if the chunk cannot be created from the file buffer
     */
     LX_Chunk(LX_FileIO::LX_FileBuffer *file);
-
-    /**
-    *   @fn bool load(std::string filename)
-    *
-    *   Load the WAV sample from a file
-    *
-    *   @param filename The name of the sample file
-    *
-    *   @return TRUE on success, FALSE otherwise
-    *   @sa loadFromBuffer
-    */
-    bool load(std::string filename);    /// TODO remove this function (useless)
 
     /**
     *   @fn bool loadFromBuffer(LX_FileBuffer *file)

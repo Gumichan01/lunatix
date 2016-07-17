@@ -44,13 +44,24 @@ namespace LX_Mixer
 
 LX_Music * loadMusic(std::string filename)
 {
-    return new LX_Music(filename.c_str());
+    return new LX_Music(filename);
+}
+
+
+LX_Music * loadMusic(UTF8string& filename)
+{
+    return new LX_Music(filename);
 }
 
 
 LX_Chunk * loadSample(std::string filename)
 {
-    return new LX_Chunk(filename.c_str());
+    return new LX_Chunk(filename);
+}
+
+LX_Chunk * loadSample(UTF8string& filename)
+{
+    return new LX_Chunk(filename);
 }
 
 
@@ -116,7 +127,7 @@ int isPaused(int channel)
 
 void fadeInMusic(LX_Music& music,int ms)
 {
-    Mix_FadeInMusic(music.getMusic(),LX_MIXER_NOLOOP,ms);
+    music.fadeIn(ms);
 }
 
 
