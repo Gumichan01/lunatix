@@ -498,19 +498,19 @@ void test_Vector2D(void)
 
     cout << "INFO - vector product (v,u)" << endl;
     d = vector_product(v,u);
-
+    cout << "INFO - " << d << endl;
     if(d != -5.0f)
-        cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -3 ;Got: " << d << endl;
+        cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -5 ;Got: " << d << endl;
     else
-        cout << "SUCCESS - vector product v(1,2).u(2,-1) = -3" << endl;
+        cout << "SUCCESS - vector product v(1,2).u(2,-1) = -5" << endl;
 
 
     d = vector_product(u,v);
 
     if(d != 5.0f)
-        cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 3 ;Got: " << d << endl;
+        cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 5 ;Got: " << d << endl;
     else
-        cout << "SUCCESS - vector product u(2,-1).v(1,2) = 3" << endl;
+        cout << "SUCCESS - vector product u(2,-1).v(1,2) = 5" << endl;
 
 
     d = vector_product(z,z);
