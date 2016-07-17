@@ -138,11 +138,6 @@ void removePanning()
 }
 
 
-void setDistance(Uint8 distance)
-{
-    setDistance(MIX_CHANNEL_POST,distance);
-}
-
 void setPosition(Sint16 angle)
 {
     setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE);
@@ -151,25 +146,25 @@ void setPosition(Sint16 angle)
 
 void setPosition(Sint16 angle, Uint8 distance)
 {
-    setPosition(MIX_CHANNEL_POST,angle,distance);
+    Mix_SetPosition(MIX_CHANNEL_POST,angle,distance);
 }
 
 
-void setPosition(int channel, Sint16 angle, Uint8 distance)
+void resetPosition()
 {
-    Mix_SetPosition(channel,angle,distance);
-}
-
-
-void resetPosition(int channel)
-{
-    setPosition(channel,LX_MIXER_EFFECT_NO_ANGLE,LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(MIX_CHANNEL_POST,LX_MIXER_EFFECT_NO_ANGLE,LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
 
 void reverseStereo(int channel, int flip)
 {
     Mix_SetReverseStereo(channel,flip);
+}
+
+
+void setDistance(Uint8 distance)
+{
+    setDistance(MIX_CHANNEL_POST,distance);
 }
 
 

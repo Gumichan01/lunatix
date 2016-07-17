@@ -266,6 +266,7 @@ void removePanning();
 *   Set the virtual position of the audio source according to the channel.
 *
 *   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
+*   @note This function call setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE)
 */
 void setPosition(Sint16 angle);
 /**
@@ -278,24 +279,11 @@ void setPosition(Sint16 angle);
 */
 void setPosition(Sint16 angle, Uint8 distance);
 /**
-*   @fn void setPosition(int channel, Sint16, Uint8 distance)
-*
-*   Set the virtual position of the audio source according to the channel.
-*   This function emulates a 3D audio effect.
-*
-*   @param channel The channel to register the effect on
-*   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
-*   @param distance The distance between the source and the listener
-*/
-void setPosition(int channel, Sint16 angle, Uint8 distance);
-/**
-*   @fn void resetPosition(int channel)
+*   @fn void resetPosition()
 *
 *   Reset the virtual position of the audio source according to the channel.
-*
-*   @param channel The channel to unregister the effect on
 */
-void resetPosition(int channel);
+void resetPosition();
 
 // Reverse stereo
 /**
