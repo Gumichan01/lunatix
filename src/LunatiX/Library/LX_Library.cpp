@@ -34,8 +34,8 @@ namespace
 {
 
 bool LX_Mixer_Init(void)
-{   /// TODO refactor LX_Mixer_Init. The return value is not good
-    if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == -1)
+{
+    if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == 0)
         return false;
 
     if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,
