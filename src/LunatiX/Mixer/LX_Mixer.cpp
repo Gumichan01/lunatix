@@ -156,9 +156,10 @@ void resetPosition()
 }
 
 
-void reverseStereo(int channel, int flip)
+void reverseStereo(bool flip)
 {
-    Mix_SetReverseStereo(channel,flip);
+    int opt = flip ? 1:0;
+    Mix_SetReverseStereo(MIX_CHANNEL_POST,opt);
 }
 
 
