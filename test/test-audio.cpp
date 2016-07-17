@@ -7,7 +7,7 @@
 void test_audioInit();
 void test_music();
 void test_chunk();
-void test_fx();
+void test_effects();
 void test_volume();
 
 
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
     test_audioInit();
     test_music();
     test_chunk();
+    test_effects();
     LX_Log::log(" ==== End Audio ==== ");
 
     return EXIT_SUCCESS;
@@ -205,6 +206,44 @@ void test_chunk()
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - chunk: failure exception expected");
     }
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
+}
+
+
+void test_effects()
+{
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST effects = ");
+    std::string sm = "data/01.ogg";
+    std::string sc = "data/explosion.wav";
+    LX_Mixer::LX_Music music(sm);
+    LX_Mixer::LX_Chunk chunk(sc);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade in effect");
+    LX_Mixer::fadeInMusic(&music,1000);
+    music.play();
+    SDL_Delay(4000);
+    LX_Mixer::fadeOutMusic(1000);
+    SDL_Delay(2000);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: no effect");
+    chunk.play();
+    SDL_Delay(1000);
+
+    /*// Left
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: panning effect: left");
+    LX_Mixer::setPanning(255,0);
+    chunk.play();
+    SDL_Delay(1000);
+
+    // Right
+    LX_Mixer::removePanning();
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: panning effect: right");
+    LX_Mixer::setPanning(0,255);
+    chunk.play();
+    SDL_Delay(1000);
+    LX_Mixer::removePanning();*/
+
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
 }
