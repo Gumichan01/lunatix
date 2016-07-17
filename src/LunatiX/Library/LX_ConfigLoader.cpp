@@ -25,19 +25,11 @@
 #include <fstream>
 #include <regex>
 
-const std::regex videoreg("video=[[:digit:]]+",std::regex::extended);
-const std::regex vsyncreg("vsync=[[:digit:]]+",std::regex::extended);
-const std::regex ttfreg("ttf=[[:digit:]]+",std::regex::extended);
-const std::regex audioreg("audio=[[:digit:]]+",std::regex::extended);
-const std::regex gamepadreg("joystick=[[:digit:]]+",std::regex::extended);
-const std::regex openglreg("opengl=[[:digit:]]+",std::regex::extended);
-const std::regex fontreg("font=.+",std::regex::extended);
-const std::regex sizereg("size=.+",std::regex::extended);
-const std::regex widthreg("width=.+",std::regex::extended);
-const std::regex heigthreg("height=.+",std::regex::extended);
-const std::regex fullscreenreg("fullscreen=[[:digit:]]+",std::regex::extended);
-const std::string ONE("1");
-const char SHARP = '#';
+namespace
+{
+    const std::string ONE("1");
+    const char SHARP = '#';
+};
 
 
 namespace LX_ConfigLoader
@@ -45,6 +37,15 @@ namespace LX_ConfigLoader
 
 void loadSDLfileConfig(LX_InternalConfig& config)
 {
+    const std::regex VIDEO_REG("video=[[:digit:]]+",std::regex::extended);
+    const std::regex VSYNC_REG("vsync=[[:digit:]]+",std::regex::extended);
+    const std::regex TTF_REG("ttf=[[:digit:]]+",std::regex::extended);
+    const std::regex AUDIO_REG("audio=[[:digit:]]+",std::regex::extended);
+    const std::regex GAMEPAD_REG("joystick=[[:digit:]]+",std::regex::extended);
+    const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
+    const std::regex FONT_REG("font=.+",std::regex::extended);
+    const std::regex SIZE_REG("size=.+",std::regex::extended);
+
     std::ifstream f;
     f.open(LX_SDL_FILE,std::ios::in);
 
@@ -68,7 +69,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
         switch(cpt)
         {
         case 0:
-            if(std::regex_match(line,videoreg))
+            if(std::regex_match(line,VIDEO_REG))
             {
                 config.video_flag = (s == ONE);
                 cpt++;
@@ -76,7 +77,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 1:
-            if(std::regex_match(line,vsyncreg))
+            if(std::regex_match(line,VSYNC_REG))
             {
                 config.vsync_flag = (s == ONE);
                 cpt++;
@@ -84,7 +85,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 2:
-            if(std::regex_match(line,ttfreg))
+            if(std::regex_match(line,TTF_REG))
             {
                 config.ttf_flag = (s == ONE);
                 cpt++;
@@ -92,7 +93,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 3:
-            if(std::regex_match(line,audioreg))
+            if(std::regex_match(line,AUDIO_REG))
             {
                 config.audio_flag = (s == ONE);
                 cpt++;
@@ -100,7 +101,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 4:
-            if(std::regex_match(line,gamepadreg))
+            if(std::regex_match(line,GAMEPAD_REG))
             {
                 config.gamepad_flag = (s == ONE);
                 cpt++;
@@ -108,7 +109,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 5:
-            if(std::regex_match(line,openglreg))
+            if(std::regex_match(line,OPENGL_REG))
             {
                 config.opengl_flag = (s == ONE);
                 cpt++;
@@ -116,7 +117,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 6:
-            if(std::regex_match(line,fontreg))
+            if(std::regex_match(line,FONT_REG))
             {
                 config.font_file = s;
                 cpt++;
@@ -124,7 +125,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             break;
 
         case 7:
-            if(std::regex_match(line,sizereg))
+            if(std::regex_match(line,SIZE_REG))
             {
                 config.font_size = atoi(s.c_str());
                 cpt++;
@@ -141,6 +142,10 @@ void loadSDLfileConfig(LX_InternalConfig& config)
 
 void loadWindowFileConfig(LX_InternalConfig& config)
 {
+    const std::regex WIDTH_REG("width=.+",std::regex::extended);
+    const std::regex HEIGHT_REG("height=.+",std::regex::extended);
+    const std::regex FULLSCREEN_REG("fullscreen=[[:digit:]]+",std::regex::extended);
+
     std::ifstream f;
     f.open(LX_WINFO_FILE,std::ios::in);
 
@@ -165,7 +170,7 @@ void loadWindowFileConfig(LX_InternalConfig& config)
         switch(cpt)
         {
         case 0:
-            if(std::regex_match(line,widthreg))
+            if(std::regex_match(line,WIDTH_REG))
             {
                 config.width = atoi(s.c_str());
                 cpt++;
@@ -173,7 +178,7 @@ void loadWindowFileConfig(LX_InternalConfig& config)
             break;
 
         case 1:
-            if(std::regex_match(line,heigthreg))
+            if(std::regex_match(line,HEIGHT_REG))
             {
                 config.height = atoi(s.c_str());
                 cpt++;
@@ -181,7 +186,7 @@ void loadWindowFileConfig(LX_InternalConfig& config)
             break;
 
         case 2:
-            if(std::regex_match(line,fullscreenreg))
+            if(std::regex_match(line,FULLSCREEN_REG))
             {
                 config.fullscreen_flag = (s == ONE);
                 cpt++;
