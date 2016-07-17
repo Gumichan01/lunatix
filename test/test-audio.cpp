@@ -179,7 +179,7 @@ void test_chunk()
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk (2 loops) KO");
 
-        // play on any channel (infinite loop) during 8s ()
+        // play on any channel (infinite loop) during 8s
         if(chunk->play(-1,-1,8000))
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk during 8s OK");
         else
