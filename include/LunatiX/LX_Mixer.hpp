@@ -65,18 +65,6 @@ class LX_Chunk;
 */
 LX_Music * loadMusic(std::string filename);
 
-/**
-*   @fn LX_Music * loadMusic(Mix_Music *mus)
-*
-*   Load the music according to the Mix_Music structure
-*
-*   @param mus The Mix_Music structure loaded
-*
-*   @return A valid instance of LX_Music
-*   @note This function creates a new instance of LX_Music.
-*           So do not forget to destroy it.
-*/
-LX_Music * loadMusic(Mix_Music *mus); /// TODO remove this function (Mix_Music)
 
 /**
 *   @fn LX_Chunk * loadSample(std::string filename)
@@ -90,19 +78,6 @@ LX_Music * loadMusic(Mix_Music *mus); /// TODO remove this function (Mix_Music)
 *           So do not forget to destroy it.
 */
 LX_Chunk * loadSample(std::string filename);
-
-/**
-*   @fn LX_Chunk * loadSample(Mix_Chunk *ch)
-*
-*   Create a new LX_Chunk instance from a Mix_Chunk structure
-*
-*   @param ch The Mix_chunk
-*
-*   @return A valid instance of LX_Chunk
-*   @note This function creates a new instance of LX_Chunk.
-*           So do not forget to destroy it.
-*/
-LX_Chunk * loadSample(Mix_Chunk *ch);   /// TODO remove this function (Mix_CHunk)
 
 /**
 *   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)

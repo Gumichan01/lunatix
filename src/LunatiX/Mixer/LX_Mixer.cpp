@@ -48,21 +48,9 @@ LX_Music * loadMusic(std::string filename)
 }
 
 
-LX_Music * loadMusic(Mix_Music *mus)
-{
-    return new LX_Music(mus);
-}
-
-
 LX_Chunk * loadSample(std::string filename)
 {
     return new LX_Chunk(filename.c_str());
-}
-
-
-LX_Chunk * loadSample(Mix_Chunk *ch)
-{
-    return new LX_Chunk(ch);
 }
 
 
