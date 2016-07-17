@@ -24,7 +24,26 @@
 #define LX_GL_MAJOR_VERSION 3   /**< Major version of OpenGL supported by the engine */
 #define LX_GL_MINOR_VERSION 1   /**< Minor version of OpenGL supported by the engine */
 
+/**
+*   @fn bool LX_Init(void)
+*
+*   Loads the engine according the configuration file
+*
+*   @return TRUE if all systems were init, FALSE otherwise
+*
+*   @note   This function automatically calls LX_WindowManager::init()
+*           and LX_Configuration::initConfig()
+*
+*/
 bool LX_Init(void);
+/**
+*   @fn void LX_Quit(void)
+*
+*   Shut down the engine
+*
+*   @note This function automatically calls LX_WindowManager::destroy()
+*
+*/
 void LX_Quit(void);
 
 #endif // LX_LIBRARY_H_INCLUDED

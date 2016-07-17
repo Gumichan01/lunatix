@@ -19,28 +19,38 @@
 *
 */
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <GL/glu.h>
-
 #include <LunatiX/LX_Library.hpp>
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Mixer.hpp>
 #include <LunatiX/LX_WindowManager.hpp>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <GL/glu.h>
 
-/**
-*   @fn bool LX_Init(void)
-*
-*   Loads the engine according the configuration file
-*
-*   @return TRUE if all systems were init, FALSE otherwise
-*
-*   @note   This function automatically calls LX_WindowManager::init()
-*           and LX_Configuration::initConfig()
-*
-*/
+
+namespace
+{
+
+bool LX_Mixer_Init(void)
+{
+    if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == -1)
+        return false;
+
+    if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,
+                     LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE) == -1)
+    {
+        Mix_Quit();
+        return false;
+    }
+
+    return true;
+}
+
+};
+
+
 bool LX_Init(void)
 {
     const std::string mappingFile = "config/gamecontrollerdb.txt";
@@ -53,19 +63,19 @@ bool LX_Init(void)
     LX_Configuration *configuration = LX_Configuration::getInstance();
 
     // Video flag
-    if(configuration->getVideoFlag() == 1)
+    if(configuration->getVideoFlag())
     {
         sdl_flags |= SDL_INIT_VIDEO;
     }
 
     // Audio flag
-    if(configuration->getAudioFlag() == 1)
+    if(configuration->getAudioFlag())
     {
         sdl_flags |= SDL_INIT_AUDIO;
     }
 
     // Gamepad flag
-    if(configuration->getGamepadFlag() == 1)
+    if(configuration->getGamepadFlag())
     {
         sdl_flags |= SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
     }
@@ -82,7 +92,7 @@ bool LX_Init(void)
         SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
     }
 
-    if(configuration->getVideoFlag() == 1)
+    if(configuration->getVideoFlag())
     {
         // Init SDL_Image
         if(IMG_Init(img_flags) != img_flags)
@@ -92,7 +102,7 @@ bool LX_Init(void)
         }
     }
 
-    if(configuration->getTTFFlag() == 1)
+    if(configuration->getTTFFlag())
     {
         // Init SDL_ttf
         if(TTF_Init() == -1)
@@ -103,23 +113,11 @@ bool LX_Init(void)
         }
     }
 
-    if(configuration->getAudioFlag() == 1)
+    if(configuration->getAudioFlag())
     {
         // Init SDL_Mixer
-        if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == -1)
+        if(!LX_Mixer_Init())
         {
-            TTF_Quit();
-            IMG_Quit();
-            SDL_Quit();
-            return false;
-        }
-
-        int err = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,
-                                LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE);
-
-        if(err < 0)
-        {
-            Mix_Quit();
             TTF_Quit();
             IMG_Quit();
             SDL_Quit();
@@ -127,27 +125,17 @@ bool LX_Init(void)
         }
     }
 
-    if(configuration->getOpenGLFlag() == 1)
+    if(configuration->getOpenGLFlag())
     {
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, LX_GL_MAJOR_VERSION);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, LX_GL_MINOR_VERSION);
     }
 
     LX_Win::LX_WindowManager::init();
-
     return true;
 }
 
 
-
-/**
-*   @fn void LX_Quit(void)
-*
-*   Shut down the engine
-*
-*   @note This function automatically calls LX_WindowManager::destroy()
-*
-*/
 void LX_Quit(void)
 {
     LX_Win::LX_WindowManager::destroy();
@@ -160,4 +148,3 @@ void LX_Quit(void)
 
     LX_Configuration::destroy();
 }
-
