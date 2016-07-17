@@ -90,13 +90,19 @@ bool LX_Chunk::play()
 
 bool LX_Chunk::play(int channel)
 {
-    return Mix_PlayChannel(channel,_chunk,0) == 0;
+    return play(channel,LX_MIXER_NOLOOP);
 }
 
 
-bool LX_Chunk::play(int channel,int ticks)
+bool LX_Chunk::play(int channel,int loops)
 {
-    return Mix_PlayChannelTimed(channel,_chunk,0,ticks) == 0;
+    return Mix_PlayChannel(channel,_chunk,loops) == 0;
+}
+
+
+bool LX_Chunk::play(int channel,int loops,int ticks)
+{
+    return Mix_PlayChannelTimed(channel,_chunk,loops,ticks) == 0;
 }
 
 

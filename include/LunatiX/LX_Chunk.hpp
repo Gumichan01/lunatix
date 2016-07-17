@@ -32,8 +32,6 @@ class LX_FileBuffer;
 
 };
 
-/// TODO Implements bool play(int channel,int loops);
-/// TODO Implements bool play(int channel,int loops,int ticks);
 
 namespace LX_Mixer
 {
@@ -152,17 +150,36 @@ public:
     bool play(int channel);
 
     /**
-    *   @fn bool play(int channel,int ticks)
+    *   @fn bool play(int channel,int loops);
+    *
+    *   Play the current sample
+    *
+    *   @param channel The channel to play the chunk on
+    *   @param loops number of loops
+    *
+    *   @return TRUE on success, FALSE otherwise
+    *   @note The chunk is played loops +1 time
+    *         For example:
+    *         - If loop == 0 -> play the chunk once
+    *         - If loop == 1 -> play the chunk 2 times, ...
+    *
+    *   @note If loops == -1 -> loop forever
+    */
+    bool play(int channel,int loops);
+
+    /**
+    *   @fn bool play(int channel,int loops,int ticks)
     *
     *   Play the current sample during a moment
     *
     *   @param channel The channel to play the chunk on
+    *   @param loops number of loops
     *   @param ticks The limit in millisecond to play the current sample
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample on with no loop
     */
-    bool play(int channel,int ticks);
+    bool play(int channel,int loops,int ticks);
 
     /**
     *   @fn int volume(int newVolume)
