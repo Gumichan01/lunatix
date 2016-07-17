@@ -22,6 +22,7 @@ echo "\n============================= Begin Report ============================\
 ./test-device 2>&1   | tee -a ${LOG_TMP_FILE}
 ./test-file 2>&1     | tee -a ${LOG_TMP_FILE}
 ./test-physics 2>&1  | tee -a ${LOG_TMP_FILE}
+./test-audio 2>&1     | tee -a ${LOG_TMP_FILE}
 ./test-window 2>&1   | tee -a ${LOG_TMP_FILE}
 ./test-ttf 2>&1      | tee -a ${LOG_TMP_FILE}
 ./test-particle 2>&1 | tee -a ${LOG_TMP_FILE}
