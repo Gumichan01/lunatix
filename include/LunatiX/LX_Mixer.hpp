@@ -306,18 +306,6 @@ void reverseStereo(bool flip);
 *   @param distance The virtual distance between the user and the source
 */
 void setDistance(Uint8 distance);
-/**
-*   @fn void setDistance(int channel,Uint8 distance)
-*
-*   Set the distance of a channel
-*
-*   @param channel The channel to use
-*   @param distance The virtual distance between the user and the source
-*
-*   @note If MIX_CHANNEL_POST is set, all channels will be dealt
-*
-*/
-void setDistance(int channel,Uint8 distance);
 
 };
 

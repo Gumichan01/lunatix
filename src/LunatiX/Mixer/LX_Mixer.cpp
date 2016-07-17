@@ -165,14 +165,7 @@ void reverseStereo(bool flip)
 
 void setDistance(Uint8 distance)
 {
-    setDistance(MIX_CHANNEL_POST,distance);
+    Mix_SetDistance(MIX_CHANNEL_POST,distance);
 }
-
-
-void setDistance(int channel,Uint8 distance)
-{
-    Mix_SetDistance(channel,distance);
-}
-
 
 };
