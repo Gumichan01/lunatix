@@ -25,6 +25,7 @@ int main(int argc, char **argv)
     LX_Log::log(" ==== Test Audio ==== ");
     test_audioInit();
     test_music();
+    test_chunk();
     LX_Log::log(" ==== End Audio ==== ");
 
     return EXIT_SUCCESS;
@@ -81,6 +82,8 @@ void test_audioInit()
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Sample chunk decoder %d: %s",
                             j,Mix_GetMusicDecoder(j));
         }
+
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Allocated channel(s): %d",LX_Mixer::allocateChannels(-1));
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
@@ -134,7 +137,73 @@ void test_music()
     }
     catch(...)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - failure exception expected");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music: failure exception expected");
+    }
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
+}
+
+
+void test_chunk()
+{
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST chunk = ");
+
+    std::string s = "data/explosion.wav";
+    LX_Mixer::LX_Chunk *chunk = nullptr;
+
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: %s",s.c_str());
+
+    try
+    {
+        chunk = LX_Mixer::loadSample(s);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - chunk launched");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play chunk with no loop on any channel");
+
+        SDL_Delay(1000);
+        // play on any channel (no loop)
+        if(chunk->play())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk (no loop) OK");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk (no loop) KO");
+
+        SDL_Delay(2000);
+
+        // play chunk in 2 loops
+        /*LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play chunk with 2 loops on any channel");
+        if(chunk->play(-1,1))
+        {
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk on any channel (2 loop) OK");
+            SDL_Delay(4000);
+        }
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk (2 loops) KO");*/
+
+        // play on any channel (no loop) during 250 ms
+        /*if(chunk->play(-1,-1,250))
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk during 250 ms OK");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk during 250 ms KO");
+
+        SDL_Delay(1000);*/
+
+        delete chunk;
+    }
+    catch(LX_Mixer::LX_ChunkException& e)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot launch the chunk: %s",e.what());
+    }
+
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch chunk: <empty_string>");
+
+    try
+    {
+        chunk = LX_Mixer::loadSample("");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - chunk launched, it should not");
+        delete chunk;
+    }
+    catch(...)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - chunk: failure exception expected");
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
