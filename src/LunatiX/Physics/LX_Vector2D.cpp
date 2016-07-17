@@ -95,7 +95,7 @@ LX_Vector2D& operator ++(LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator ++(LX_Vector2D& v,int d)
+LX_Vector2D operator ++(LX_Vector2D& v,int)
 {
     LX_Vector2D t = v;
     ++v;
@@ -111,7 +111,7 @@ LX_Vector2D& operator --(LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator --(LX_Vector2D& v,int d)
+LX_Vector2D operator --(LX_Vector2D& v,int)
 {
     LX_Vector2D t = v;
     --v;

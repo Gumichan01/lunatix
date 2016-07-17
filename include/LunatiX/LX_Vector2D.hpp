@@ -153,22 +153,21 @@ LX_Vector2D  operator  -(LX_Vector2D& v);
 LX_Vector2D& operator ++(LX_Vector2D& v);
 
 /**
-*   @fn LX_Vector2D operator ++(LX_Vector2D& v,int d)
+*   @fn LX_Vector2D operator ++(LX_Vector2D& v,int)
 *
 *   Postfix increment
 *
 *   @param v The vector
-*   @param d dummy parameter (not used)
 *
 *   @return The vector before the incrementation
 *
 */
-LX_Vector2D  operator ++(LX_Vector2D& v,int d);
+LX_Vector2D  operator ++(LX_Vector2D& v,int);
 
 /**
 *   @fn LX_Vector2D& operator --(LX_Vector2D& v)
 *
-*   Prefix increment
+*   Prefix decrement
 *
 *   @param v The vector
 *
@@ -178,17 +177,16 @@ LX_Vector2D  operator ++(LX_Vector2D& v,int d);
 LX_Vector2D& operator --(LX_Vector2D& v);
 
 /**
-*   @fn LX_Vector2D operator --(LX_Vector2D& v,int d)
+*   @fn LX_Vector2D operator --(LX_Vector2D& v,int)
 *
-*   Postfix increment
+*   Postfix decrement
 *
 *   @param v The vector
-*   @param d dummy parameter (not used)
 *
 *   @return The vector before the incrementation
 *
 */
-LX_Vector2D  operator --(LX_Vector2D& v,int d);
+LX_Vector2D  operator --(LX_Vector2D& v,int);
 
 /**
 *   @fn LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
