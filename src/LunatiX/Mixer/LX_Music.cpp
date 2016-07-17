@@ -106,12 +106,6 @@ void LX_Music::stop(void)
 }
 
 
-int LX_Music::volume(int newVolume)
-{
-    return Mix_VolumeMusic(newVolume);
-}
-
-
 LX_Music::~LX_Music(void)
 {
     Mix_FreeMusic(_music);

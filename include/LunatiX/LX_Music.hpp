@@ -28,7 +28,7 @@
 
 namespace LX_Mixer
 {
-
+/// TODO set position in the music
 
 /**
 *   @class LX_MusicException
@@ -157,21 +157,6 @@ public:
     *   Stop the music
     */
     void stop(void);
-
-    /**
-    *   @fn int volume(int newVolume)
-    *
-    *   Set the music volume to newVolume, from 0 to 128
-    *
-    *   @param newVolume The volume to set
-    *
-    *   @return The previous volume setting
-    *
-    *   @note If the volume is equals to -1, then the previous volume is the current volume
-    *   @note If the new volume is greater than 128, the volume is set to 128
-    *   @note The value 128 is the maximum value defined by the MIX_MAX_VOLUME macro
-    */
-    int volume(int newVolume);
 
     /**
     *   @fn ~LX_Music(void)
