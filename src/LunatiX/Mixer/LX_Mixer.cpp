@@ -126,15 +126,15 @@ void fadeOutMusic(int ms)
 }
 
 
-void setPanning(int channel,Uint8 left,Uint8 right)
+void setPanning(Uint8 left,Uint8 right)
 {
-    Mix_SetPanning(channel,left,right);
+    Mix_SetPanning(MIX_CHANNEL_POST,left,right);
 }
 
 
-void removePanning(int channel)
+void removePanning()
 {
-    setPanning(channel,LX_MIXER_EFFECT_LOUD,LX_MIXER_EFFECT_LOUD);
+    setPanning(LX_MIXER_EFFECT_LOUD,LX_MIXER_EFFECT_LOUD);
 }
 
 

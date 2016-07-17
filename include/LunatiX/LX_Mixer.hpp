@@ -24,7 +24,7 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_mixer.h>
 
-#define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable the mix module */
+#define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable for the mix module */
 #define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
 #define LX_MIXER_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
 
@@ -236,14 +236,12 @@ void fadeInMusic(LX_Music *music,int ms);
 void fadeOutMusic(int ms);
 
 /**
-*   @fn void setPanning(int channel,Uint8 left,Uint8 right)
+*   @fn void setPanning(Uint8 left,Uint8 right)
 *
-*   Set the panning on a channel, increasing of decreasing
-*   the volume on this channel
+*   Set the panning, increasing of decreasing the volume on the left or the right
 *
-*   @param channel The channel
-*   @param left The volume of the left channel (0 - 255)
-*   @param right The volume of the right channel (0 - 255)
+*   @param left The volume of the left audio channel (0 - 255)
+*   @param right The volume of the right audio channel (0 - 255)
 *
 *   @note This function only works on stereo audio. So the call will have no effect
 *         or fail if it is done on mono audio.
@@ -254,15 +252,12 @@ void fadeOutMusic(int ms);
 *   @note To unregister this effect, use this function with 255 as left and right value
 *           or simply use LX_Mixer::removePanning().
 */
-void setPanning(int channel,Uint8 left,Uint8 right); // TODO Refactor setPanning
+void setPanning(Uint8 left,Uint8 right);
 /**
 *   @fn void removePanning(int channel)
-*
-*   Remove the panning on a channel
-*
-*   @param channel The channel to remove the panning on
+*   Remove the panning effect
 */
-void removePanning(int channel);    // TODO Refactor reovePanning
+void removePanning();
 
 // 3D Position
 /**
