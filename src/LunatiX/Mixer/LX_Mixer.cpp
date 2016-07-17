@@ -29,18 +29,69 @@ using namespace LX_FileIO;
 
 namespace
 {
-    const short LX_DEFAULT_VOLUME = 100;
-
+    const unsigned short LX_DEFAULT_VOLUME = 100;
     // Overall volume in volume unit [0-100]
-    short overall_volume = LX_DEFAULT_VOLUME;
+    unsigned short overall_volume = LX_DEFAULT_VOLUME;
     // Music volume in percentage of overall volume
-    short music_volume = LX_DEFAULT_VOLUME;
+    unsigned short music_volume = LX_DEFAULT_VOLUME;
     // Effects volume in percentage of overall volume
-    short fx_volume = LX_DEFAULT_VOLUME;
+    unsigned short fx_volume = LX_DEFAULT_VOLUME;
 };
 
 namespace LX_Mixer
 {
+
+void setOverallVolume(unsigned short volume)
+{
+    if(volume > LX_DEFAULT_VOLUME)
+        overall_volume = LX_DEFAULT_VOLUME;
+    else
+        overall_volume = volume;
+}
+
+void setMusicVolume(unsigned short volume)
+{
+    if(volume > overall_volume)
+        music_volume = overall_volume;
+    else
+    {
+        if(overall_volume == 0)
+            music_volume = 0;
+        else
+            music_volume = volume * 100/overall_volume;
+    }
+    Mix_VolumeMusic(music_volume);
+}
+
+void setFXVolume(unsigned short volume)
+{
+    if(volume > overall_volume)
+        fx_volume = overall_volume;
+    else
+    {
+        if(overall_volume == 0)
+            fx_volume = 0;
+        else
+            fx_volume = volume * 100/overall_volume;
+    }
+    Mix_Volume(-1,fx_volume);
+}
+
+unsigned short getOverallVolume()
+{
+    return overall_volume;
+}
+
+unsigned short getMusicVolume()
+{
+    return music_volume;
+}
+
+unsigned short getFXVolume()
+{
+    return fx_volume;
+}
+
 
 LX_Music * loadMusic(std::string filename)
 {
@@ -80,12 +131,6 @@ int allocateChannels(int num)
 int reserveChannels(int numchans)
 {
     return Mix_ReserveChannels(numchans);
-}
-
-
-int channelVolume(int channel,int volume)
-{
-    return Mix_Volume(channel,volume);
 }
 
 

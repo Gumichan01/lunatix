@@ -50,6 +50,20 @@ namespace LX_Mixer
 class LX_Music;
 class LX_Chunk;
 
+/* == Volume == */
+
+void setOverallVolume(unsigned short volume);
+
+void setMusicVolume(unsigned short volume);
+
+void setFXVolume(unsigned short volume);
+
+unsigned short getOverallVolume();
+
+unsigned short getMusicVolume();
+
+unsigned short getFXVolume();
+
 /* == Music and chunk == */
 
 /**
@@ -148,21 +162,6 @@ int allocateChannels(int num);
 */
 int reserveChannels(int numchans);
 
-/**
-*   @fn int channelVolume(int channel,int volume)
-*
-*   Set the channel volume to volume, from 0 to 128
-*
-*   @param channel the channel to set the volume in
-*   @param volume
-*   @return The previous volume setting
-*
-*   @note If the channel is -1, all channels will be set to the volume
-*   @note If the volume is equals to -1, then the average volume is returned
-*   @note If the new volume is greater than 128, the volume is set to 128
-*   @note This value 128 is the maximum value defined by the MIX_MAX_VOLUME macro
-*/
-int channelVolume(int channel,int volume);
 
 /**
 *   @fn void pause(int channel)

@@ -182,22 +182,6 @@ public:
     bool play(int channel,int loops,int ticks);
 
     /**
-    *   @fn int volume(int newVolume)
-    *
-    *   Set the volume of the chunk, from 0 to 128
-    *
-    *   @param newVolume The volume to set
-    *   @return The previous volume setting
-    *
-    *   @note If the volume is less than 0, then the previous volume is the current volume
-    *           and there is no change
-    *   @note If the new volume is greater than 128, the volume is set to 128
-    *   @note 128 is the maximum value defined by the MIX_MAX_VOLUME macro
-    *
-    */
-    int volume(int newVolume);
-
-    /**
     *   @fn ~LX_Chunk()
     *   Destroy the instance
     */

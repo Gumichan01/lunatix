@@ -106,12 +106,6 @@ bool LX_Chunk::play(int channel,int loops,int ticks)
 }
 
 
-int LX_Chunk::volume(int newVolume)
-{
-    return Mix_VolumeChunk(_chunk,newVolume);
-}
-
-
 LX_Chunk::~LX_Chunk()
 {
     Mix_FreeChunk(_chunk);
