@@ -55,33 +55,33 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator +(LX_Vector2D& u,LX_Vector2D& v)
+LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v)
 {
     return LX_Vector2D(u.vx + v.vx,u.vy + v.vy);
 }
 
 
-LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
+LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v)
 {
     u = u + v;
     return u;
 }
 
 
-LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v)
+LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v)
 {
     return LX_Vector2D(u.vx - v.vx,u.vy - v.vy);
 }
 
 
-LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
+LX_Vector2D operator -=(LX_Vector2D& u,const LX_Vector2D& v)
 {
     u = u - v;
     return u;
 }
 
 
-LX_Vector2D operator -(LX_Vector2D& v)
+LX_Vector2D operator -(const LX_Vector2D& v)
 {
     return LX_Vector2D(-v.vx,-v.vy);
 }

@@ -87,7 +87,7 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 *   @return The resulting vector
 *
 */
-LX_Vector2D operator  +(LX_Vector2D& u,LX_Vector2D& v);
+LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
 *   @fn LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v)
@@ -100,7 +100,7 @@ LX_Vector2D operator  +(LX_Vector2D& u,LX_Vector2D& v);
 *   @return The resulting vector
 *
 */
-LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v);
+LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
 *   @fn LX_Vector2D operator -(LX_Vector2D& u,LX_Vector2D& v)
@@ -113,7 +113,7 @@ LX_Vector2D operator +=(LX_Vector2D& u,LX_Vector2D& v);
 *   @return The resulting vector
 *
 */
-LX_Vector2D operator  -(LX_Vector2D& u,LX_Vector2D& v);
+LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
 *   @fn LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v)
@@ -126,10 +126,10 @@ LX_Vector2D operator  -(LX_Vector2D& u,LX_Vector2D& v);
 *   @return The resulting vector
 *
 */
-LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v);
+LX_Vector2D operator -=(LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
-*   @fn LX_Vector2D operator -(LX_Vector2D& v)
+*   @fn LX_Vector2D operator -(const LX_Vector2D& v)
 *
 *   Get the opposite of the vector
 *
@@ -138,7 +138,7 @@ LX_Vector2D operator -=(LX_Vector2D& u,LX_Vector2D& v);
 *   @return The opposite vector
 *
 */
-LX_Vector2D  operator  -(LX_Vector2D& v);
+LX_Vector2D operator -(const LX_Vector2D& v);
 
 /**
 *   @fn LX_Vector2D& operator ++(LX_Vector2D& v)
@@ -162,7 +162,7 @@ LX_Vector2D& operator ++(LX_Vector2D& v);
 *   @return The vector before the incrementation
 *
 */
-LX_Vector2D  operator ++(LX_Vector2D& v,int);
+LX_Vector2D operator ++(LX_Vector2D& v,int);
 
 /**
 *   @fn LX_Vector2D& operator --(LX_Vector2D& v)
@@ -186,7 +186,7 @@ LX_Vector2D& operator --(LX_Vector2D& v);
 *   @return The vector before the incrementation
 *
 */
-LX_Vector2D  operator --(LX_Vector2D& v,int);
+LX_Vector2D operator --(LX_Vector2D& v,int);
 
 /**
 *   @fn LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
