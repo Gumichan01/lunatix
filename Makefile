@@ -29,7 +29,6 @@ DEBUG=yes
 #
 
 CC=clang++
-COMPILED_SCRIPT=$(SCRIPT_FILE)c
 
 # Path to the main file directory
 MAIN_PATH=./src/
