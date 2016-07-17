@@ -223,6 +223,7 @@ void test_effects()
     LX_Mixer::fadeInMusic(&music,1000);
     music.play();
     SDL_Delay(4000);
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade out effect");
     LX_Mixer::fadeOutMusic(1000);
     SDL_Delay(2000);
 
