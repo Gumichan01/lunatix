@@ -20,9 +20,45 @@
 *
 */
 
-#include <cmath>
 #include <LunatiX/LX_Vector2D.hpp>
 
+#include <cmath>
+#include <algorithm>
+#include <limits>
+
+namespace
+{
+    const float EPSILON =  0.00001f;
+
+    /*
+    *   Implementation of a "safe" floating point comparison
+    *
+    *   This implementation is based on Nerdylicious's implementation
+    *   of floating point comparison program
+    *
+    *   https://github.com/Nerdylicious/FloatingPointComparison
+    */
+    bool eq(float x, float y)
+    {
+        float abs_x = fabsf(x);
+        float abs_y = fabsf(y);
+        float diff = fabsf(x - y);
+
+        if(x == y)
+        {
+            return true;
+        }
+        else if(x == 0.0f || y == 0.0f || diff < std::numeric_limits<float>::min())
+        {
+            return diff < (EPSILON * std::numeric_limits<float>::min());
+        }
+        else
+        {
+            return (diff / std::min((abs_x + abs_y),
+                    std::numeric_limits<float>::max())) < EPSILON;
+        }
+    }
+};
 
 namespace LX_Physics
 {
@@ -45,7 +81,7 @@ bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
 {
     return (((u.vx >= 0.0f && v.vx >= 0.0f) || (u.vx < 0.0f && v.vx < 0.0f))
             && ((u.vy >= 0.0f && v.vy >= 0.0f) || (u.vy < 0.0f && v.vy < 0.0f)))
-           && (u.vx == v.vx && u.vy == v.vy);
+           && (eq(u.vx,v.vx) && eq(u.vy,v.vy));
 }
 
 
