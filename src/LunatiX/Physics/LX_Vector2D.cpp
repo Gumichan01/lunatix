@@ -43,8 +43,8 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
 
 bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v)
 {
-    return (((u.vx >= 0 && v.vx >= 0) || (u.vx < 0 && v.vx < 0))
-            && ((u.vy >= 0 && v.vy >= 0) || (u.vy < 0 && v.vy < 0) ))
+    return (((u.vx >= 0.0f && v.vx >= 0.0f) || (u.vx < 0.0f && v.vx < 0.0f))
+            && ((u.vy >= 0.0f && v.vy >= 0.0f) || (u.vy < 0.0f && v.vy < 0.0f)))
            && (u.vx == v.vx && u.vy == v.vy);
 }
 
