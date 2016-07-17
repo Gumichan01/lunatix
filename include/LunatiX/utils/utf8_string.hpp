@@ -61,7 +61,7 @@ public:
     *   it is the largest possible representable value for this type.
     *
     */
-    const static size_t npos = -1;
+    const static size_t npos = static_cast<size_t>(-1);
 
     /**
     *   @fn UTF8string()
