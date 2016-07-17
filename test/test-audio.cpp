@@ -170,22 +170,22 @@ void test_chunk()
         SDL_Delay(2000);
 
         // play chunk in 2 loops
-        /*LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play chunk with 2 loops on any channel");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play chunk with 2 loops on any channel");
         if(chunk->play(-1,1))
         {
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk on any channel (2 loop) OK");
             SDL_Delay(4000);
         }
         else
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk (2 loops) KO");*/
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk (2 loops) KO");
 
-        // play on any channel (no loop) during 250 ms
-        /*if(chunk->play(-1,-1,250))
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk during 250 ms OK");
+        // play on any channel (infinite loop) during 8s ()
+        if(chunk->play(-1,-1,8000))
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play chunk during 8s OK");
         else
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk during 250 ms KO");
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play chunk during 8s KO");
 
-        SDL_Delay(1000);*/
+        SDL_Delay(9000);
 
         delete chunk;
     }
