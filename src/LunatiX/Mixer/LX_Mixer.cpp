@@ -114,9 +114,9 @@ int isPaused(int channel)
 }
 
 
-void fadeInMusic(LX_Music *music,int ms)    /// TODO use reference instead of pointer
+void fadeInMusic(LX_Music& music,int ms)
 {
-    Mix_FadeInMusic(music->getMusic(),LX_MIXER_NOLOOP,ms);
+    Mix_FadeInMusic(music.getMusic(),LX_MIXER_NOLOOP,ms);
 }
 
 
