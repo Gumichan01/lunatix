@@ -9,6 +9,7 @@ void test_music();
 void test_chunk();
 void test_effects();
 void test_volume();
+void test_volume_(const unsigned ex);
 
 
 int main(int argc, char **argv)
@@ -24,10 +25,17 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Audio ==== ");
     test_audioInit();
-    test_music();
+    /*test_music();
     test_chunk();
     test_effects();
+    LX_Log::setDebugMode(false);
+    LX_Quit();
+    LX_Init();
+    LX_Log::setDebugMode();*/
+    test_volume();
     LX_Log::log(" ==== End Audio ==== ");
+
+    LX_Quit();
 
     return EXIT_SUCCESS;
 }
@@ -310,3 +318,73 @@ void test_effects()
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
 }
+
+void test_volume()
+{
+    const unsigned short XVOLUME = 100;
+    const unsigned short XVOLUME2 = 50;
+    const unsigned short XVOLUME3 = 10;
+    const unsigned short XVOLUME4 = 5;
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST volume = ");
+    test_volume_(XVOLUME);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set overall volume to %d%%",XVOLUME2);
+    LX_Mixer::setOverallVolume(XVOLUME2);
+    test_volume_(XVOLUME2);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set music volume to %d%%",XVOLUME3);
+    LX_Mixer::setMusicVolume(XVOLUME3);
+
+    unsigned short mv = LX_Mixer::getMusicVolume();
+    const unsigned short ex = XVOLUME2 / XVOLUME3;
+    if(mv != ex)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music volume expected: %d; got: %d",
+                        ex,mv);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music volume: %d",ex);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set fx volume to %d%%",XVOLUME4);
+    LX_Mixer::setFXVolume(XVOLUME4);
+
+    unsigned short fxv = LX_Mixer::getMusicVolume();
+    const unsigned short ex2 = XVOLUME2 / XVOLUME4;
+    if(fxv != ex2)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - FX volume expected: %d; got: %d",
+                        ex2,fxv);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - FX volume: %d",ex2);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
+}
+
+void test_volume_(const unsigned ex)
+{
+    unsigned short ov = LX_Mixer::getOverallVolume();
+    unsigned short mv = LX_Mixer::getMusicVolume();
+    unsigned short fxv = LX_Mixer::getFXVolume();
+
+    // Overall
+    if(ov != ex)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - overall volume expected: %d; got: %d",
+                        ex,ov);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - overall volume: %d",ex);
+
+    // Music
+    if(mv != ex)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music volume expected: %d; got: %d",
+                        ex,mv);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music volume: %d",ex);
+
+    // FX
+    if(fxv != ex)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - FX volume expected: %d; got: %d",
+                        ex,fxv);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - FX volume: %d",ex);
+}
+
+
+/**/
