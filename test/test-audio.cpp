@@ -9,6 +9,7 @@ void test_music();
 void test_chunk();
 void test_effects();
 void test_volume();
+void test_volume2();
 void test_volume_(const unsigned ex);
 
 
@@ -25,14 +26,11 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Audio ==== ");
     test_audioInit();
-    /*test_music();
+    test_music();
     test_chunk();
     test_effects();
-    LX_Log::setDebugMode(false);
-    LX_Quit();
-    LX_Init();
-    LX_Log::setDebugMode();*/
     test_volume();
+    test_volume2();
     LX_Log::log(" ==== End Audio ==== ");
 
     LX_Quit();
@@ -324,20 +322,23 @@ void test_volume()
     const unsigned short XVOLUME = 100;
     const unsigned short XVOLUME2 = 50;
     const unsigned short XVOLUME3 = 10;
-    const unsigned short XVOLUME4 = 5;
+    const unsigned short XVOLUME4 = 50;
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST volume = ");
     test_volume_(XVOLUME);
 
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set overall volume to %d%%",XVOLUME2);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set overall volume to %d",XVOLUME2);
     LX_Mixer::setOverallVolume(XVOLUME2);
     test_volume_(XVOLUME2);
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set music volume to %d%%",XVOLUME3);
     LX_Mixer::setMusicVolume(XVOLUME3);
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"overall volume: %d",LX_Mixer::getOverallVolume());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music volume: %d",LX_Mixer::getMusicVolume());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FX volume: %d",LX_Mixer::getFXVolume());
 
     unsigned short mv = LX_Mixer::getMusicVolume();
-    const unsigned short ex = XVOLUME2 / XVOLUME3;
+    unsigned short ex = XVOLUME2 / XVOLUME3;
     if(mv != ex)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music volume expected: %d; got: %d",
                         ex,mv);
@@ -346,9 +347,32 @@ void test_volume()
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set fx volume to %d%%",XVOLUME4);
     LX_Mixer::setFXVolume(XVOLUME4);
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"overall volume: %d",LX_Mixer::getOverallVolume());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music volume: %d",LX_Mixer::getMusicVolume());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FX volume: %d",LX_Mixer::getFXVolume());
 
-    unsigned short fxv = LX_Mixer::getMusicVolume();
-    const unsigned short ex2 = XVOLUME2 / XVOLUME4;
+    unsigned short fxv = LX_Mixer::getFXVolume();
+    unsigned short ex2 = XVOLUME2 / 2;
+    if(fxv != ex2)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - FX volume expected: %d; got: %d",
+                        ex2,fxv);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - FX volume: %d",ex2);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"set overall volume to %d",XVOLUME);
+    LX_Mixer::setOverallVolume(XVOLUME);
+
+    mv  = LX_Mixer::getMusicVolume();
+    fxv = LX_Mixer::getFXVolume();
+    ex  *= 2;
+    ex2 *= 2;
+
+    if(mv != ex)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music volume expected: %d; got: %d",
+                        ex,mv);
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music volume: %d",ex);
+
     if(fxv != ex2)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - FX volume expected: %d; got: %d",
                         ex2,fxv);
@@ -386,5 +410,39 @@ void test_volume_(const unsigned ex)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - FX volume: %d",ex);
 }
 
+void test_volume2()
+{
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST volume 2 = ");
+
+    LX_Mixer::setOverallVolume(100);
+    LX_Mixer::setMusicVolume(100);
+    LX_Mixer::setFXVolume(100);
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"overall volume: %d",LX_Mixer::getOverallVolume());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music volume: %d",LX_Mixer::getMusicVolume());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FX volume: %d",LX_Mixer::getFXVolume());
+
+    std::string str = "data/01.ogg";
+    LX_Mixer::LX_Music music(str);
+    music.play();
+
+    for(short i = 100; i > 0; i--)
+    {
+        SDL_Delay(100);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"set overall volume to %d",i);
+        LX_Mixer::setOverallVolume(i);
+    }
+
+    for(short i = 0; i <= 100; i++)
+    {
+        SDL_Delay(100);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"set overall volume to %d",i);
+        LX_Mixer::setOverallVolume(i);
+    }
+
+    LX_Mixer::fadeOutMusic(1000);
+    SDL_Delay(1024);
+    music.stop();
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
+}
 
 /**/
