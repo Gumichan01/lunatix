@@ -425,6 +425,11 @@ void test_volume2()
     LX_Mixer::LX_Music music(str);
     music.play();
 
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"set the position to 128.0 second");
+    SDL_Delay(2000);
+    LX_Mixer::setMusicPosition(128.0);
+    SDL_Delay(2000);
+
     for(short i = 100; i > 0; i--)
     {
         SDL_Delay(100);
