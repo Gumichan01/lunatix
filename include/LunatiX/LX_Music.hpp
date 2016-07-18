@@ -28,7 +28,6 @@
 
 namespace LX_Mixer
 {
-/// TODO set position in the music
 
 /**
 *   @class LX_MusicException
