@@ -188,6 +188,20 @@ LX_Chunk * loadSample(UTF8string& filename);
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file);
 
 /**
+*   @fn void setMusicPosition(double pos)
+*   Set the position of the currently playing song from the beginning
+*
+*   @param pos The position to play from, in second
+*
+*   @note This function does not works on every music sources.
+*   @note Here are the music sources available:
+*         - MOD
+*         - OGG
+*         - MP3
+*/
+void setMusicPosition(double pos);
+
+/**
 *   @fn int allocateChannels(int num)
 *
 *   Set the number of channel to use.

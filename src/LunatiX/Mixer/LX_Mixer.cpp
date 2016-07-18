@@ -128,6 +128,13 @@ LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
 }
 
 
+void setMusicPosition(double pos)
+{
+    Mix_RewindMusic();
+    Mix_SetMusicPosition(pos);
+}
+
+
 int allocateChannels(int num)
 {
     return Mix_AllocateChannels(num);
