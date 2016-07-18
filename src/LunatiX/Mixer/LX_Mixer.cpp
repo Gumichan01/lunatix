@@ -32,10 +32,15 @@ namespace
     const unsigned short LX_DEFAULT_VOLUME = 100;
     // Overall volume in volume unit [0-100]
     unsigned short overall_volume = LX_DEFAULT_VOLUME;
-    // Music volume in percentage of overall volume
+    // Music volume in volume unit [0-100]
     unsigned short music_volume = LX_DEFAULT_VOLUME;
-    // Effects volume in percentage of overall volume
+    // Effects volume in volume unit [0-100]
     unsigned short fx_volume = LX_DEFAULT_VOLUME;
+
+    // Music volume in percentage
+    unsigned short music_pvolume = LX_DEFAULT_VOLUME;
+    // Effects volume in percentage
+    unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 };
 
 namespace LX_Mixer
@@ -47,34 +52,35 @@ void setOverallVolume(unsigned short volume)
         overall_volume = LX_DEFAULT_VOLUME;
     else
         overall_volume = volume;
+
+    setMusicVolume(music_pvolume);
+    setFXVolume(fx_pvolume);
 }
 
-void setMusicVolume(unsigned short volume)
+void setMusicVolume(unsigned short pvolume)
 {
-    if(volume > overall_volume)
-        music_volume = overall_volume;
+    if (pvolume > 100) pvolume = 100;
+
+    if(overall_volume == 0)
+        music_volume = 0;
     else
-    {
-        if(overall_volume == 0)
-            music_volume = 0;
-        else
-            music_volume = volume * 100/overall_volume;
-    }
+        music_volume = pvolume * overall_volume/100;
+
     Mix_VolumeMusic(music_volume);
+    music_pvolume = pvolume;
 }
 
-void setFXVolume(unsigned short volume)
+void setFXVolume(unsigned short pvolume)
 {
-    if(volume > overall_volume)
-        fx_volume = overall_volume;
+    if (pvolume > 100) pvolume = 100;
+
+    if(overall_volume == 0)
+        fx_volume = 0;
     else
-    {
-        if(overall_volume == 0)
-            fx_volume = 0;
-        else
-            fx_volume = volume * 100/overall_volume;
-    }
+        fx_volume = pvolume * overall_volume/100;
+
     Mix_Volume(-1,fx_volume);
+    fx_pvolume = pvolume;
 }
 
 unsigned short getOverallVolume()

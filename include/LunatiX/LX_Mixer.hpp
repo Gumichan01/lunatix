@@ -52,16 +52,69 @@ class LX_Chunk;
 
 /* == Volume == */
 
+/**
+*   @fn void setOverallVolume(unsigned short volume)
+*
+*   Set the overall volume
+*
+*   @param volume the volume between 0 and 100
+*
+*   @note if volume > 100, then the overall volume is set to 100
+*/
 void setOverallVolume(unsigned short volume);
 
-void setMusicVolume(unsigned short volume);
+/**
+*   @fn void setMusicVolume(unsigned short pvolume)
+*
+*   Set the music volume in percentage of the overall volume
+*
+*   @param pvolume the volume of the music in percentage of the overall volume
+*
+*   @note If the overall volume is 60 and pvolume is 50%, the music volume
+*         is 50 * 60 / 100.
+*   @note The music volume ca be get using ::getMusicVolume()
+*/
+void setMusicVolume(unsigned short pvolume);
 
-void setFXVolume(unsigned short volume);
+/**
+*   @fn void setFXVolume(unsigned short pvolume)
+*
+*   Set the FX volume in percentage of the overall volume
+*
+*   @param pvolume the volume of the music in percentage of the overall volume
+*
+*   @note Example:
+*         If the overall volume is 60 and pvolume is 50%, the FX volume
+*         is 50 * 60 / 100.
+*   @note The FX volume ca be get using ::getFXVolume()
+*/
+void setFXVolume(unsigned short pvolume);
 
+/**
+*   @fn unsigned short getOverallVolume()
+*
+*   Get the overall volume
+*
+*   @return The overall volume
+*/
 unsigned short getOverallVolume();
 
+/**
+*   @fn unsigned short getMusicVolume()
+*
+*   Get the music volume
+*
+*   @return The music volume
+*/
 unsigned short getMusicVolume();
 
+/**
+*   @fn unsigned short getFXVolume()
+*
+*   Get the FX volume
+*
+*   @return The FX volume
+*/
 unsigned short getFXVolume();
 
 /* == Music and chunk == */
