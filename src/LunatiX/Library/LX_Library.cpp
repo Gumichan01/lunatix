@@ -38,7 +38,7 @@ bool LX_Mixer_Init(void)
     if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == 0)
         return false;
 
-    if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT,
+    if(Mix_OpenAudio(LX_MIXER_AUDIO_FREQUENCY,MIX_DEFAULT_FORMAT,
                      LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE) == -1)
     {
         Mix_Quit();

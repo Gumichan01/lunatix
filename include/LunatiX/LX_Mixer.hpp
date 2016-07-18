@@ -24,11 +24,12 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_mixer.h>
 
-#define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable for the mix module */
-#define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module */
+#define LX_MIXER_AUDIO_FREQUENCY 44100      /**< The default audio frequency             */
+#define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable for the mix module  */
+#define LX_MIXER_MONO_SOUND 1               /**< The mono variable for the mix module    */
 #define LX_MIXER_DEFAULT_CHUNKSIZE 1024     /**< The default chunsize for the mix module */
 
-#define LX_MIXER_EFFECT_LOUD 255            /**< Loud (for effect functions) */
+#define LX_MIXER_EFFECT_LOUD 255            /**< Loud (for effect functions)    */
 #define LX_MIXER_EFFECT_SILENCE 0           /**< Silence (for effect functions) */
 #define LX_MIXER_EFFECT_NO_DISTANCE 0       /**< The distance between the source and the listener */
 #define LX_MIXER_EFFECT_NO_ANGLE 0          /**< The angle between the source and the front */
