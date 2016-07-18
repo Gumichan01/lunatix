@@ -237,7 +237,7 @@ SDL_Texture * loadTextureFromFile(const std::string& filename, unsigned int id =
 *           a null pointer otherwise
 *
 *   @note   If id is not given as argument to the function,
-*            the default argument is used, that is to say 0
+*           the default argument is used, that is to say 0
 *
 *   @note The string given in argument is utf-8 encoded
 *   @sa loadTextureFromSurface

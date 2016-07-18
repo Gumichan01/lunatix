@@ -29,18 +29,18 @@ using namespace LX_FileIO;
 
 namespace
 {
-    const unsigned short LX_DEFAULT_VOLUME = 100;
-    // Overall volume in volume unit [0-100]
-    unsigned short overall_volume = LX_DEFAULT_VOLUME;
-    // Music volume in volume unit [0-100]
-    unsigned short music_volume = LX_DEFAULT_VOLUME;
-    // Effects volume in volume unit [0-100]
-    unsigned short fx_volume = LX_DEFAULT_VOLUME;
+const unsigned short LX_DEFAULT_VOLUME = 100;
+// Overall volume in volume unit [0-100]
+unsigned short overall_volume = LX_DEFAULT_VOLUME;
+// Music volume in volume unit [0-100]
+unsigned short music_volume = LX_DEFAULT_VOLUME;
+// Effects volume in volume unit [0-100]
+unsigned short fx_volume = LX_DEFAULT_VOLUME;
 
-    // Music volume in percentage
-    unsigned short music_pvolume = LX_DEFAULT_VOLUME;
-    // Effects volume in percentage
-    unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
+// Music volume in percentage
+unsigned short music_pvolume = LX_DEFAULT_VOLUME;
+// Effects volume in percentage
+unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 };
 
 namespace LX_Mixer
