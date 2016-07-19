@@ -22,6 +22,7 @@ void test_collisionPointPolygon(void);
 void test_collisionCirclePolygon(void);
 void test_collisionRectPolygon(void);
 void test_collision2Polygon(void);
+void test_collision2PolygonAgain(void);
 
 void test_move(void);
 void test_assignment(void);
@@ -64,6 +65,7 @@ int main(int argc, char **argv)
     test_collisionCirclePolygon();
     test_collisionRectPolygon();
     test_collision2Polygon();
+    test_collision2PolygonAgain();
 
     test_move();
     test_assignment();
@@ -362,7 +364,7 @@ void test_collisionRectCircle(void)
 
 void testPolygon(void)
 {
-    LX_Polygon poly(5);
+    LX_Polygon poly;
     LX_Point p;
 
     poly.addPoint(10,5);
@@ -371,34 +373,15 @@ void testPolygon(void)
 
     cout << " = TEST POLYGON = " << endl;
 
-    {
-        cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfRealEdges();
-        for(unsigned int i = 0; i < n; i++)
-        {
-            cout << "(" << (poly.getPoint(i)).x << ","
-                 << (poly.getPoint(i)).y << ")";
-            if(i != n)
-                cout << ";";
-        }
-        cout << "}" << endl;
-    }
-
-    cout << "INFO - Number of real edges (defined)" << endl;
-    unsigned int d = poly.numberOfRealEdges();
+    cout << "INFO - Number of edges" << endl;
+    unsigned int d = poly.numberOfEdges();
 
     if(d != 3)
         cerr << "FAILURE - number of real edges expected : 3;Got : " << d << endl;
     else
         cout << "SUCCESS - number of real edges : " << d << endl;
 
-    cout << "INFO - Number of edges (capacity)" << endl;
-    d = poly.numberOfEdges();
-
-    if(d != 5)
-        cerr << "FAILURE - total number of edges expected : 5;Got : " << d << endl;
-    else
-        cout << "SUCCESS - total number of edges : " << d << endl;
+    displayPoly(poly);
 
     p = poly.getPoint(0);
     cout << "INFO - poly.getPoint(0) : (" << p.x << "," << p.y << ")" << endl;
@@ -595,7 +578,7 @@ void test_collisionPointPolygon(void)
         Be careful, if the coordinates of a point
         are to high, you will have incorrect results
     */
-    LX_Polygon poly(5);
+    LX_Polygon poly;
 
     LX_Point N = {12,7};
     LX_Point O = {9,7};
@@ -614,7 +597,7 @@ void test_collisionPointPolygon(void)
 
     {
         cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfRealEdges();
+        const unsigned int n = poly.numberOfEdges();
         for(unsigned int i = 0; i < n; i++)
         {
             cout << "(" << (poly.getPoint(i)).x << ","
@@ -688,7 +671,7 @@ void test_collisionCirclePolygon(void)
     LX_Circle N(LX_Point(12,7),2);
     LX_Circle O(LX_Point(9,7),10);
     LX_Circle S(LX_Point(2,2),2);
-    LX_Polygon poly(5);
+    LX_Polygon poly;
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -709,7 +692,7 @@ void test_collisionCirclePolygon(void)
 
     {
         cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfRealEdges();
+        const unsigned int n = poly.numberOfEdges();
         for(unsigned int i = 0; i < n; i++)
         {
             cout << "(" << (poly.getPoint(i)).x << ","
@@ -759,7 +742,7 @@ void test_collisionCirclePolygon(void)
 void test_collisionRectPolygon(void)
 {
     LX_AABB R1,R2,R3,R4,R5;
-    LX_Polygon poly(5);
+    LX_Polygon poly;
 
     R1 = {1,1,2,2};
     R2 = {8,3,10,4};
@@ -786,7 +769,7 @@ void test_collisionRectPolygon(void)
 
     {
         cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfRealEdges();
+        const unsigned int n = poly.numberOfEdges();
         for(unsigned int i = 0; i < n; i++)
         {
             cout << "(" << (poly.getPoint(i)).x << ","
@@ -845,10 +828,7 @@ void test_collisionRectPolygon(void)
 
 void test_collision2Polygon(void)
 {
-    LX_Polygon poly(5);
-    LX_Polygon poly2(5);
-    LX_Polygon poly3(3);
-    LX_Polygon poly4(3);
+    LX_Polygon poly, poly2, poly3, poly4;
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -907,8 +887,53 @@ void test_collision2Polygon(void)
     LX_Log::log(" = END TEST = ");
 }
 
+void test_collision2PolygonAgain(void)
+{
+    const long N = 10000;
+    const long M = 1000;
+    LX_Polygon poly1, poly2;
+    LX_Polygon poly3, poly4;
+    unsigned int t1,t2;
 
-void test_move(void)
+    LX_Log::log(" = TEST Collision BIG Polygon/Polygon = ");
+    LX_Random::initRand();
+
+    LX_Log::log("Generate two random polygons with %d sides",N);
+    for(unsigned int i = 0; i < N; i++)
+    {
+        poly1.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
+        poly2.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
+    }
+
+    LX_Log::log("Generated");
+    LX_Log::log("Calculate the collision");
+    t1 = SDL_GetTicks();
+    bool d = collisionPoly(poly1,poly2);
+    t2 = SDL_GetTicks();
+    LX_Log::log("Result:%s collision between the two random polygons",(d ? "":" No"));
+    LX_Log::log("Calculation done in %f s",(static_cast<float>(t2-t1))/1000.0f);
+
+    LX_Log::log("Generate two other random polygons with %d sides in two different areas",N);
+    for(unsigned int i = 0; i < N; i++)
+    {
+        poly3.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
+        poly4.addPoint((LX_Random::xorshiftRand()%M)+N,(LX_Random::xorshiftRand()%M)+N);
+    }
+
+    LX_Log::log("Generated");
+    LX_Log::log("Calculate the collision");
+    t1 = SDL_GetTicks();
+    d = collisionPoly(poly3,poly4);
+    t2 = SDL_GetTicks();
+    LX_Log::log("t1: %d; t2: %d",t1,t2);
+    LX_Log::log("Result:%s collision between the two random polygons",(d ? "":" No"));
+    LX_Log::log("Calculation done in %f s",(static_cast<float>(t2-t1))/1000.0f);
+
+    LX_Log::log(" = END TEST = ");
+}
+
+
+void test_move(void) // TODO move the polygon
 {
     cout << " = TEST Move = " << endl;
 
@@ -1449,7 +1474,7 @@ void test_VectorLambda(void)
 void displayPoly(LX_Polygon& poly)
 {
     cout << "INFO - {";
-    const unsigned int n = poly.numberOfRealEdges();
+    const unsigned int n = poly.numberOfEdges();
     for(unsigned int i = 0; i < n; i++)
     {
         cout << "(" << (poly.getPoint(i)).x << ","
