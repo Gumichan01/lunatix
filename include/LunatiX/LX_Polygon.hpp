@@ -23,6 +23,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <vector>
 
 namespace LX_Physics
 {
@@ -66,10 +67,8 @@ public :
 */
 class LX_Polygon
 {
-    LX_Point *points;               /* An array of LX_Point     */
-    unsigned int nbPoints;          /* The number of points     */
-    unsigned int cursor;            /* The size                 */
-    bool convex;                    /* If the polygon is convex */
+    std::vector<LX_Point> points;   /* A sequence of LX_Point objects   */
+    bool convex;                    /* If the polygon is convex         */
 
     LX_Polygon(LX_Polygon& p);
     LX_Polygon& operator =(LX_Polygon& p);
@@ -79,66 +78,43 @@ class LX_Polygon
 public :
 
     /**
-    *   @fn LX_Polygon::LX_Polygon(const unsigned int nb)
+    *   @fn LX_Polygon::LX_Polygon()
     *
     *   Create a new instance of LX_Polygon
     *
-    *   @param nb The number of edges to build the polygon
-    *
     */
-    LX_Polygon(const unsigned int nb);
+    LX_Polygon();
 
     /**
-    *   @fn bool LX_Polygon::addPoint(const int x, const int y)
+    *   @fn void LX_Polygon::addPoint(const int x, const int y)
     *
     *   Set a new point into the polygon according to its coordinates
     *
     *   @param x The x position of the point
     *   @param y The y position of the point
     *
-    *   @return TRUE if the point was added, FALSE otherwise
-    *
     */
-    bool addPoint(const int x, const int y);
+    void addPoint(const int x, const int y);
 
     /**
-    *   @fn bool LX_Polygon::addPoint(const LX_Point& p)
+    *   @fn void LX_Polygon::addPoint(const LX_Point& p)
     *
     *   Set a new point into the polygon
     *
     *   @param p The new edge to add
     *
-    *   @return TRUE if the point was added, FALSE otherwise
-    *
     */
-    bool addPoint(const LX_Point& p);
+    void addPoint(const LX_Point& p);
 
     /**
     *   @fn unsigned int LX_Polygon::numberOfEdges(void) const
     *
-    *   Get the maximum number of edges
+    *   Get the number of points
     *
-    *   @return The maximum number of edges of the polygon
-    *
-    *   @note   The number of edges is the same as the defined value
-    *           in the polygon constructor
+    *   @return The number of edges of the polygon
     *
     */
     unsigned int numberOfEdges(void) const;
-
-    /**
-    *   @fn unsigned int LX_Polygon::numberOfRealEdges(void) const
-    *
-    *   Get the real number of defined edges
-    *
-    *   @return The real number of edges of the polygon
-    *
-    *   @note   The number of edges may be different from the defined value
-    *           in the polygon constructor, because the points of the polygon
-    *           are not completely set.
-    *
-    */
-    unsigned int numberOfRealEdges(void) const;
 
     /**
     *   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const
@@ -199,13 +175,8 @@ public :
     */
     void moveTo(int vx, int vy);
 
-    /**
-    *   @fn LX_Polygon::~LX_Polygon()
-    *
-    *   Destroy the instance of the polygon
-    *
-    */
-    ~LX_Polygon();
+    /// Destructor
+    ~LX_Polygon() = default;
 };
 
 };

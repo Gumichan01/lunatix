@@ -41,64 +41,35 @@ const char * LX_PolygonException::what() const noexcept
 LX_PolygonException::~LX_PolygonException() noexcept {}
 
 
-LX_Polygon::LX_Polygon(const unsigned int nb)
-    : points(nullptr),nbPoints(nb), cursor(0), convex(false)
+/* Polygon */
+
+LX_Polygon::LX_Polygon() : convex(false) {}
+
+
+void LX_Polygon::addPoint(const int x, const int y)
 {
-    if(nb > 2)
-    {
-        points = new (nothrow) LX_Point[nb];
-
-        if(points == nullptr)
-            throw LX_PolygonException("constr: Cannot allocate the points\n");
-
-    }
-    else
-        throw LX_PolygonException("constr: Not enough points in the polygon\n");
+    addPoint(LX_Point(x,y));
 }
 
 
-bool LX_Polygon::addPoint(const int x, const int y)
+void LX_Polygon::addPoint(const LX_Point& p)
 {
-    return addPoint(LX_Point(x,y));
-}
-
-
-bool LX_Polygon::addPoint(const LX_Point& p)
-{
-    if(cursor < nbPoints)
-    {
-        points[cursor] = p;
-        cursor++;
-
-        // Update the convexity when the polygon has at least 3 edges
-        if(cursor >= 3)
-            convexity();
-
-        return true;
-    }
-
-    return false;
+    points.push_back(p);
+    // Update the convexity when the polygon has at least 3 edges
+    if(points.size() >= 3)
+        convexity();
 }
 
 
 unsigned int LX_Polygon::numberOfEdges(void) const
 {
-    return nbPoints;
-}
-
-
-unsigned int LX_Polygon::numberOfRealEdges(void) const
-{
-    return cursor;
+    return points.size();
 }
 
 
 LX_Point LX_Polygon::getPoint(const unsigned int index) const
 {
-    if(index < cursor)
-        return points[index];
-
-    throw LX_PolygonException("getPoint: index Out of bounds ");
+    return points.at(index);
 }
 
 
@@ -117,7 +88,7 @@ void LX_Polygon::convexity(void)
 
     bool haveSign = false;
     enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
-    const unsigned int n = (cursor == nbPoints) ? nbPoints : cursor;
+    const unsigned int n = points.size();
 
     for(unsigned int i = 0; i < n; i++)
     {
@@ -190,7 +161,6 @@ void LX_Polygon::convexity(void)
 }
 
 
-
 void LX_Polygon::move(const float vx, const float vy)
 {
     const LX_Vector2D vel(vx,vy);
@@ -225,12 +195,6 @@ void LX_Polygon::moveTo(int vx, int vy)
     {
         movePointTo(points[i],vx,vy);
     }
-}
-
-
-LX_Polygon::~LX_Polygon()
-{
-    delete [] points;
 }
 
 };
