@@ -271,6 +271,17 @@ int groupChannels(int from, int to, int tag);
 int groupCount(int tag);
 
 /**
+*   @fn int channelAvailable(int tag)
+*
+*   Get the first available (not playing) channel in the group specified by the tag
+*
+*   @param tag The group id to look for the available channel
+*
+*   @return The channel id on success. -1 if no channel is available.
+*/
+int channelAvailable(int tag);
+
+/**
 *   @fn void pause(int channel)
 *
 *   Pause the channel

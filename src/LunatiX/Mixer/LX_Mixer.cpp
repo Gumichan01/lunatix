@@ -164,6 +164,12 @@ int groupCount(int tag)
 }
 
 
+int channelAvailable(int tag)
+{
+    return Mix_GroupAvailable(tag);
+}
+
+
 void pause(int channel)
 {
     Mix_Pause(channel);
