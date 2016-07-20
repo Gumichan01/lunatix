@@ -158,6 +158,11 @@ int groupChannels(int from, int to, int tag)
     return Mix_GroupChannels(from,to,tag);
 }
 
+int groupCount(int tag)
+{
+    return Mix_GroupCount(tag);
+}
+
 
 void pause(int channel)
 {

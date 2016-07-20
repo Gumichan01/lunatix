@@ -243,7 +243,7 @@ int reserveChannels(int numchans);
 bool groupChannel(int chan, int tag);
 
 /**
-*   @fn bool groupChannel(int chan, int tag)
+*   @fn int groupChannels(int chan, int tag)
 *
 *   Add a channel to a specific group
 *
@@ -252,11 +252,23 @@ bool groupChannel(int chan, int tag);
 *   @param tag The tag that define the group to put the channel. Positive value
 *
 *   @return The number of tagged channels on success.
-*           If that number is less than to-from+1 then
+*   @note If that number is less than to-from+1 then
 *           some channels were no tagged because they didn't exist
 *   @note Setting -1 in tag reset the group to the default channel
 */
 int groupChannels(int from, int to, int tag);
+
+/**
+*   @fn int groupCount(int tag)
+*
+*   Get the number of channels in the group specifiedby the tag
+*
+*   @param tag The group id
+*
+*   @return The number of channels found in the group. This function never fails
+*   @note Setting -1 in tag will count all channels
+*/
+int groupCount(int tag);
 
 /**
 *   @fn void pause(int channel)
