@@ -73,7 +73,7 @@ LX_Point LX_Polygon::getPoint(const unsigned int index) const
 }
 
 
-bool LX_Polygon::isConvex(void)
+bool LX_Polygon::isConvex(void) const
 {
     return convex;
 }

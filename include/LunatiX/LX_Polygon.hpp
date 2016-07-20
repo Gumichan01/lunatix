@@ -132,7 +132,7 @@ public :
     LX_Point getPoint(const unsigned int index) const;
 
     /**
-    *   @fn bool LX_Polygon::isConvex(void)
+    *   @fn bool LX_Polygon::isConvex(void) const
     *
     *   Check the convexity of the polygon
     *
@@ -143,7 +143,7 @@ public :
     *           The result is stored in an internal variable
     *
     */
-    bool isConvex(void);
+    bool isConvex(void) const;
 
     /**
     *   @fn void LX_Polygon::move(const float vx, const float vy)
