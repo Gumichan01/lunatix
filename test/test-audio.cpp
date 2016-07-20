@@ -5,6 +5,7 @@
 #include <string>
 
 void test_audioInit();
+void test_channels();
 void test_music();
 void test_chunk();
 void test_effects();
@@ -26,6 +27,7 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Audio ==== ");
     test_audioInit();
+    test_channels();
     test_music();
     test_chunk();
     test_effects();
@@ -93,6 +95,59 @@ void test_audioInit()
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Allocated channel(s): %d",LX_Mixer::allocateChannels(-1));
     }
 
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
+}
+
+void test_channels()
+{
+    const int N = 32;
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST channels = ");
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"%d channel(s)",LX_Mixer::allocateChannels(-1));
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Trying to get %d channels",N);
+
+    int res = LX_Mixer::allocateChannels(N);
+
+    if(res == N)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - %d channel(s)",
+                        LX_Mixer::allocateChannels(-1));
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: %d; got: %d",
+                        N,res);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Trying to reserve channels from 0 to 7 in group 1");
+    int g1 = LX_Mixer::groupChannels(0,7,1);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Trying to reserve channels from 9 to 15 in group 2");
+    int g2 = LX_Mixer::groupChannels(8,15,2);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"In group 1: %d channel(s)",g1);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"In group 2: %d channel(s)",g2);
+
+    const int M = 24;
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Try to reserve %d channel(s)",M);
+    int r1 = LX_Mixer::reserveChannels(M);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Reserved: %d channel(s)",r1);
+
+    // PLay a chunk in a specific channel
+    std::string sc = "data/explosion.wav";
+    LX_Mixer::LX_Chunk chunk(sc);
+
+    for(int i = 0; i < 8; i++)
+    {
+        chunk.play(i);
+        SDL_Delay(100);
+    }
+
+    SDL_Delay(2000);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Reset");
+    r1 = LX_Mixer::reserveChannels(0);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Reserved: %d channel(s)",r1);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Reset the groups");
+    int g3 = LX_Mixer::groupChannels(0,15,-1);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Reset: %d channel(s)",g3);
+
+    LX_Mixer::allocateChannels(8);
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
 }
 
