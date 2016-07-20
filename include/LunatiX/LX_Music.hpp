@@ -84,7 +84,7 @@ public:
     LX_Music(std::string& filename);
 
     /**
-    *   @fn LX_Music(UTF8string filename)
+    *   @fn LX_Music(UTF8string& filename)
     *
     *   Create the instance loading a music file
     *

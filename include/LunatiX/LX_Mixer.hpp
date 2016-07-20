@@ -399,7 +399,7 @@ void fadeInMusic(LX_Music& music,int ms);
 *   @note Any previous music will be halted, or if it is fading out
 *           it will wait (blocking) for the fade to complete
 */
-void fadeInMusic(LX_Music& music,int ms,int pos);
+void fadeInMusicPos(LX_Music& music,int ms,int pos);
 /**
 *   @fn void fadeOutMusic(int ms)
 *

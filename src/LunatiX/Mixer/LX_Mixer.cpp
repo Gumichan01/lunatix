@@ -231,7 +231,7 @@ void fadeInMusic(LX_Music& music,int ms)
 }
 
 
-void fadeInMusic(LX_Music& music,int ms,int pos)
+void fadeInMusicPos(LX_Music& music,int ms,int pos)
 {
     music.fadeInPos(ms,pos);
 }

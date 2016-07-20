@@ -92,7 +92,7 @@ public:
     LX_Chunk(std::string& filename);
 
     /**
-    *   @fn LX_Music(UTF8string& filename)
+    *   @fn LX_Chunk(UTF8string& filename)
     *
     *   Create the instance loading a chunk file
     *
