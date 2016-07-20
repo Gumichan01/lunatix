@@ -3,6 +3,7 @@
 #include <LunatiX/Lunatix_engine.hpp>
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 using namespace LX_Physics;
@@ -406,7 +407,7 @@ void testPolygon(void)
     // Now we have a polygon with 4 edges
     p = {7,2};
     cout << "INFO - add point p(" << p.x << "," << p.y << ")" << endl;
-    poly.addPoint(7,2);
+    poly.addPoint(p);
 
     // It must be convex
     cout << "INFO - test the convexity of the polygon with the new point." << endl;
@@ -795,7 +796,6 @@ void test_collisionRectPolygon(void)
     else
         cout << "SUCCESS - R2 touch the polygon OK" << endl;
 
-
     // Some Segments of R3 in the polygon (no point inside)
     d = collisionRectPoly(R3,poly);
 
@@ -804,7 +804,6 @@ void test_collisionRectPolygon(void)
     else
         cout << "SUCCESS - R3 touch the polygon OK" << endl;
 
-
     // R4 into the polygon
     d = collisionRectPoly(R4,poly);
 
@@ -812,7 +811,6 @@ void test_collisionRectPolygon(void)
         cerr << "FAILURE - test R4 into the polygon. expected: TRUE ;Got: FALSE" << endl;
     else
         cout << "SUCCESS - R4 into the polygon OK" << endl;
-
 
     // The polygon into R5
     d = collisionRectPoly(R5,poly);
@@ -828,7 +826,34 @@ void test_collisionRectPolygon(void)
 
 void test_collision2Polygon(void)
 {
+    LX_Polygon poly_empty1, poly_empty2;
+    LX_Polygon polyc, polyc2, polync, polync2;
     LX_Polygon poly, poly2, poly3, poly4;
+
+    // Convex polygon
+    polyc.addPoint(10,5);
+    polyc.addPoint(10,10);
+    polyc.addPoint(5,5);
+    polyc.addPoint(7,2);
+
+    // Non-convex polygon
+    polync.addPoint(1000,500);
+    polync.addPoint(1000,1000);
+    polync.addPoint(500,500);
+    polync.addPoint(700,200);
+    polync.addPoint(600,500);
+
+    // Non-convex polygon (again)
+    polync2.addPoint(10,5);
+    polync2.addPoint(10,10);
+    polync2.addPoint(5,5);
+    polync2.addPoint(7,2);
+    polync2.addPoint(6,5);
+
+    polyc2.addPoint(12,5);
+    polyc2.addPoint(12,12);
+    polyc2.addPoint(4,5);
+    polyc2.addPoint(7,0);
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -860,6 +885,14 @@ void test_collision2Polygon(void)
     displayPoly(poly3);
     cout << "INFO - poly4" << endl;
     displayPoly(poly4);
+    cout << "INFO - polyc" << endl;
+    displayPoly(polyc);
+    cout << "INFO - polyc2" << endl;
+    displayPoly(polyc2);
+    cout << "INFO - polync" << endl;
+    displayPoly(polync);
+    cout << "INFO - polync2" << endl;
+    displayPoly(polync2);
 
     bool d = collisionPoly(poly,poly2);
 
@@ -883,6 +916,57 @@ void test_collision2Polygon(void)
         cerr << "FAILURE - collision poly/poly4. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - no collision poly/poly4 OK" << endl;
+
+    // Empty olygons
+    cout << "INFO - collition between two empty polygons" << endl;
+    try
+    {
+        collisionPoly(poly_empty1,poly_empty2);
+        cerr << "FAILURE - this collision cannot be calculated" << endl;
+    }
+    catch(std::invalid_argument&)
+    {
+        cout << "SUCCESS - std::invalid_argument exception occured" << endl;
+    }
+    catch(...)
+    {
+        cerr << "FAILURE - unknown exception occurred" << endl;
+    }
+
+    cout << "INFO - collition between two convex polygons" << endl;
+    d = collisionPoly(polyc,polyc2);
+
+    if(d != true)
+        cerr << "FAILURE - no collision polyc/polyc2. expected: TRUE ;Got: FALSE" << endl;
+    else
+        cout << "SUCCESS - collision polyc/polyc2 OK" << endl;
+
+    // convex/non-convex
+    cout << "INFO - collition between a convex polygon and a non-convex polygon" << endl;
+    d = collisionPoly(polyc2,polync);
+
+    if(d == true)
+        cerr << "FAILURE - collision polyc2/polync. expected: FALSE ;Got: TRUE" << endl;
+    else
+        cout << "SUCCESS - no collision polyc2/polync OK" << endl;
+
+    // Another test
+    cout << "INFO - collition between a convex polygon and a non-convex polygon (again)" << endl;
+    d = collisionPoly(polyc2,polync2);
+
+    if(d != true)
+        cerr << "FAILURE - no collision polyc2/polync2. expected: FALSE ;Got: TRUE" << endl;
+    else
+        cout << "SUCCESS - collision polyc2/polync2 OK" << endl;
+
+    // convex/triangle (that is convex)
+    cout << "INFO - collition between a convex polygon and a triangle" << endl;
+    d = collisionPoly(polyc2,poly3);
+
+    if(d != true)
+        cerr << "FAILURE - no collision polyc2/poly3. expected: TRUE ;Got: FALSE" << endl;
+    else
+        cout << "SUCCESS - collision polyc2/poly3 OK" << endl;
 
     LX_Log::log(" = END TEST = ");
 }
