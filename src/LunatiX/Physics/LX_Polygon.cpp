@@ -43,7 +43,7 @@ LX_PolygonException::~LX_PolygonException() noexcept {}
 
 /* Polygon */
 
-LX_Polygon::LX_Polygon() : convex(false) {}
+LX_Polygon::LX_Polygon() : _convex(false) {}
 
 
 void LX_Polygon::addPoint(const int x, const int y)
@@ -54,33 +54,33 @@ void LX_Polygon::addPoint(const int x, const int y)
 
 void LX_Polygon::addPoint(const LX_Point& p)
 {
-    points.push_back(p);
+    _points.push_back(p);
     // Update the convexity when the polygon has at least 3 edges
-    if(points.size() >= 3)
-        convexity();
+    if(_points.size() >= 3)
+        convexity_();
 }
 
 
 unsigned int LX_Polygon::numberOfEdges(void) const
 {
-    return points.size();
+    return _points.size();
 }
 
 
 LX_Point LX_Polygon::getPoint(const unsigned int index) const
 {
-    return points.at(index);
+    return _points.at(index);
 }
 
 
 bool LX_Polygon::isConvex(void) const
 {
-    return convex;
+    return _convex;
 }
 
 
 // Evaluate the convexity of the polygon
-void LX_Polygon::convexity(void)
+void LX_Polygon::convexity_(void)
 {
     // Vectors
     LX_Vector2D AO;
@@ -88,30 +88,30 @@ void LX_Polygon::convexity(void)
 
     bool haveSign = false;
     enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
-    const unsigned int n = points.size();
+    const unsigned int n = _points.size();
 
     for(unsigned int i = 0; i < n; i++)
     {
         if(i == 0)
         {
-            AO = LX_Vector2D(points[i].x - points[n-1].x,
-                             points[i].y - points[n-1].y);
+            AO = LX_Vector2D(_points[i].x - _points[n-1].x,
+                             _points[i].y - _points[n-1].y);
         }
         else
         {
-            AO = LX_Vector2D(points[i].x - points[i-1].x,
-                             points[i].y - points[i-1].y);
+            AO = LX_Vector2D(_points[i].x - _points[i-1].x,
+                             _points[i].y - _points[i-1].y);
         }
 
         if(i == n-1)
         {
-            OB = LX_Vector2D(points[0].x - points[i].x,
-                             points[0].y - points[i].y);
+            OB = LX_Vector2D(_points[0].x - _points[i].x,
+                             _points[0].y - _points[i].y);
         }
         else
         {
-            OB = LX_Vector2D(points[i+1].x - points[i].x,
-                             points[i+1].y - points[i].y);
+            OB = LX_Vector2D(_points[i+1].x - _points[i].x,
+                             _points[i+1].y - _points[i].y);
         }
 
         // Vector product
@@ -125,7 +125,7 @@ void LX_Polygon::convexity(void)
                 s = NEGATIVE;
             else
             {
-                convex = false;
+                _convex = false;
                 return;
             }
 
@@ -138,7 +138,7 @@ void LX_Polygon::convexity(void)
             case POSITIVE :
                 if(cross_product < 0)
                 {
-                    convex = false;
+                    _convex = false;
                     return;
                 }
                 break;
@@ -146,7 +146,7 @@ void LX_Polygon::convexity(void)
             case NEGATIVE :
                 if(cross_product > 0)
                 {
-                    convex = false;
+                    _convex = false;
                     return;
                 }
                 break;
@@ -157,7 +157,7 @@ void LX_Polygon::convexity(void)
         }
     }
 
-    convex = true;
+    _convex = true;
 }
 
 
@@ -166,13 +166,13 @@ void LX_Polygon::move(const float vx, const float vy)
     const int nvx = static_cast<int>(vx), nvy = static_cast<int>(vy);
     const unsigned int n = numberOfEdges();
 
-    movePoint(points[0],nvx,nvy);
-    movePoint(points[1],nvx,nvy);
-    movePoint(points[2],nvx,nvy);
+    movePoint(_points[0],nvx,nvy);
+    movePoint(_points[1],nvx,nvy);
+    movePoint(_points[2],nvx,nvy);
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePoint(points[i],nvx,nvy);
+        movePoint(_points[i],nvx,nvy);
     }
 }
 
@@ -185,15 +185,15 @@ void LX_Polygon::move(const LX_Vector2D& v)
 
 void LX_Polygon::moveTo(int vx, int vy)
 {
-    movePointTo(points[0],vx,vy);
-    movePointTo(points[1],vx,vy);
-    movePointTo(points[2],vx,vy);
+    movePointTo(_points[0],vx,vy);
+    movePointTo(_points[1],vx,vy);
+    movePointTo(_points[2],vx,vy);
 
     const unsigned int n = numberOfEdges();
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePointTo(points[i],vx,vy);
+        movePointTo(_points[i],vx,vy);
     }
 }
 

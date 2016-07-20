@@ -67,13 +67,13 @@ public :
 */
 class LX_Polygon
 {
-    std::vector<LX_Point> points;   /* A sequence of LX_Point objects   */
-    bool convex;                    /* If the polygon is convex         */
+    std::vector<LX_Point> _points;   /* A sequence of LX_Point objects   */
+    bool _convex;                     /* If the polygon is convex         */
 
     LX_Polygon(LX_Polygon& p);
     LX_Polygon& operator =(LX_Polygon& p);
 
-    void convexity(void);
+    void convexity_(void);
 
 public :
 
