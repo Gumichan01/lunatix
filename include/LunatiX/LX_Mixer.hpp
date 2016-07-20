@@ -282,6 +282,24 @@ int groupCount(int tag);
 int channelAvailable(int tag);
 
 /**
+*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag)
+*
+*   Play the chunk on a channel of the group specified by the tag
+*
+*   @param chunk The chunk to play
+*   @param tag The group id to look for the channel for playing the chunk on
+*   @param loops Optional argument tha specified the number of loop (default value = 0)
+*
+*   @return TRUE if the chunk can be played, FALSE if no channel is available
+*
+*   @note If the group is empty, any unreserved channels in the default
+*         group is selected and the chunk is played on it
+*   @note If no channel of the group is available for playing, the oldest
+*         playing channel is chosen. So, it is halted, and is used to play the chunk on
+*/
+bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0);
+
+/**
 *   @fn void pause(int channel)
 *
 *   Pause the channel

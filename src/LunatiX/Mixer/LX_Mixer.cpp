@@ -170,6 +170,25 @@ int channelAvailable(int tag)
 }
 
 
+bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops)
+{
+    if(groupCount(tag) == 0)
+        return chunk.play(-1,loops);
+
+    int chan = channelAvailable(tag);
+
+    if(chan == -1)
+    {
+        chan = Mix_GroupOldest(tag);
+
+        if(chan > -1)
+            haltChannel(chan);
+    }
+
+    return chunk.play(chan,loops);
+}
+
+
 void pause(int channel)
 {
     Mix_Pause(channel);
