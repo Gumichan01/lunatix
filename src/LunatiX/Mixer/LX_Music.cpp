@@ -71,6 +71,11 @@ void LX_Music::fadeIn(int ms)
     Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
 }
 
+void LX_Music::fadeInPos(int ms,int pos)
+{
+    Mix_FadeInMusicPos(_music,LX_MIXER_NOLOOP,ms,pos);
+}
+
 
 void LX_Music::fadeOut(int ms)
 {

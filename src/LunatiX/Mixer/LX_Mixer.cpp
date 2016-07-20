@@ -231,6 +231,12 @@ void fadeInMusic(LX_Music& music,int ms)
 }
 
 
+void fadeInMusic(LX_Music& music,int ms,int pos)
+{
+    music.fadeInPos(ms,pos);
+}
+
+
 void fadeOutMusic(int ms)
 {
     Mix_FadeOutMusic(ms);

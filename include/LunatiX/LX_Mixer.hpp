@@ -385,6 +385,22 @@ int isPaused(int channel);
 */
 void fadeInMusic(LX_Music& music,int ms);
 /**
+*   @fn void void fadeInMusicPos(LX_Music& music,int ms,int pos)
+*
+*   Fade in the loaded Music over some milliseconds of time from the position
+*
+*   @param music The music to fade in
+*   @param ms Milliseconds for the fade-in effect to complete
+*   @param pos The position to start the music
+*
+*   @note fadeInMusicPos starts playing the music with the fade-in effect.
+*         It is not necessary to call LX_Music::play() if this function is called
+*
+*   @note Any previous music will be halted, or if it is fading out
+*           it will wait (blocking) for the fade to complete
+*/
+void fadeInMusic(LX_Music& music,int ms,int pos);
+/**
 *   @fn void fadeOutMusic(int ms)
 *
 *   Fade out the loaded Music over some milliseconds of time

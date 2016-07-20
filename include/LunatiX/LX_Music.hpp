@@ -100,13 +100,28 @@ public:
     *
     *   @param ms Milliseconds for the fade-in effect to complete
     *
-    *   @note fadeInMusic starts playing the music with the fade-in effect.
+    *   @note fadeIn starts playing the music with the fade-in effect.
     *         It is not necessary to call LX_Music::play() if this function is called
     *
     *   @note Any previous music will be halted, or if it is fading out
     *           it will wait (blocking) for the fade to complete
     */
     void fadeIn(int ms);
+    /**
+    *   @fn void fadeInPos(int ms,int pos)
+    *
+    *   Fade in the current Music over some milliseconds of time
+    *
+    *   @param ms Milliseconds for the fade-in effect to complete
+    *   @param pos The position to start the music
+    *
+    *   @note fadeInPos starts playing the music with the fade-in effect.
+    *         It is not necessary to call LX_Music::play() if this function is called
+    *
+    *   @note Any previous music will be halted, or if it is fading out
+    *           it will wait (blocking) for the fade to complete
+    */
+    void fadeInPos(int ms,int pos);
     /**
     *   @fn void fadeOut(int ms)
     *
