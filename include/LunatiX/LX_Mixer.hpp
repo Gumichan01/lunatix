@@ -172,7 +172,6 @@ LX_Chunk * loadSample(std::string filename);
 */
 LX_Chunk * loadSample(UTF8string& filename);
 
-
 /**
 *   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
 *
@@ -230,6 +229,34 @@ int allocateChannels(int num);
 */
 int reserveChannels(int numchans);
 
+/**
+*   @fn bool groupChannel(int chan, int tag)
+*
+*   Add a channel to a specific group
+*
+*   @param chan The channel to assign the tag
+*   @param tag The tag that define the group to put the channel. Positive value
+*
+*   @return TRUE on success, FALSE otherwise
+*   @note Setting -1 in tag put the channel in the default group
+*/
+bool groupChannel(int chan, int tag);
+
+/**
+*   @fn bool groupChannel(int chan, int tag)
+*
+*   Add a channel to a specific group
+*
+*   @param from First Channel number of channels to assign tag to. Must be less or equal to to
+*   @param to Last Channel number of channels to assign tag to. Must be greater or equal to from
+*   @param tag The tag that define the group to put the channel. Positive value
+*
+*   @return The number of tagged channels on success.
+*           If that number is less than to-from+1 then
+*           some channels were no tagged because they didn't exist
+*   @note Setting -1 in tag reset the group to the default channel
+*/
+int groupChannels(int from, int to, int tag);
 
 /**
 *   @fn void pause(int channel)

@@ -147,6 +147,18 @@ int reserveChannels(int numchans)
 }
 
 
+bool groupChannel(int chan, int tag)
+{
+    return Mix_GroupChannel(chan,tag) == 1;
+}
+
+
+int groupChannels(int from, int to, int tag)
+{
+    return Mix_GroupChannels(from,to,tag);
+}
+
+
 void pause(int channel)
 {
     Mix_Pause(channel);
