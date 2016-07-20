@@ -268,7 +268,7 @@ bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
 *   @param C The circular hitbox
 *   @param poly The polygon
 *
-*   @return TRUE if there is an collision, FALSE otherwise
+*   @return TRUE if there is a collision, FALSE otherwise
 *
 */
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
@@ -281,7 +281,7 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 *   @param rect The AABB
 *   @param poly The polygon
 *
-*   @return TRUE if there is an collision, FALSE otherwise
+*   @return TRUE if there is a collision, FALSE otherwise
 *
 */
 bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
@@ -294,8 +294,10 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 *   @param poly1 The first polygon
 *   @param poly2 The second polygon
 *
-*   @return TRUE if there is an collision, FALSE otherwise
+*   @return TRUE if there is a collision, FALSE otherwise
 *
+*   @note The function only works on polygons with at least 3 sides.
+*   @exception std::invalid_argument If a polygon has not at least 3 sides
 */
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
@@ -442,4 +444,3 @@ void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
 };
 
 #endif // PHYSICS_H_INCLUDED
-

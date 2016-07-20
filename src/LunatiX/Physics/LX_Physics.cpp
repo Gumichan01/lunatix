@@ -23,9 +23,146 @@
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Random.hpp>
+#include <stdexcept>
 #include <cmath>
 
-static const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
+
+namespace
+{
+const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
+
+bool intersetInterval(const int min1, const int max1, const int min2, const int max2)
+{
+    return (min1 < min2) ? max1 > min2 : max2 > min1;
+}
+
+void getInterval(const LX_Physics::LX_Polygon& poly1,
+                 const LX_Physics::LX_Polygon& poly2,
+                 int& p1_xmin, int& p1_xmax, int& p1_ymin, int& p1_ymax,
+                 int& p2_xmin, int& p2_xmax, int& p2_ymin, int& p2_ymax)
+{
+    const unsigned int N = poly1.numberOfEdges();
+    const unsigned int M = poly2.numberOfEdges();
+
+    p1_xmin = poly1.getPoint(0).x;
+    p1_xmax = poly1.getPoint(0).x;
+    p1_ymin = poly1.getPoint(0).y;
+    p1_ymax = poly1.getPoint(0).y;
+    p2_xmin = poly2.getPoint(0).x;
+    p2_xmax = poly2.getPoint(0).x;
+    p2_ymin = poly2.getPoint(0).y;
+    p2_ymax = poly2.getPoint(0).y;
+
+    for(unsigned int i = 1; i < N; i++)
+    {
+        LX_Physics::LX_Point p = poly1.getPoint(i);
+
+        // X
+        if(p.x < p1_xmin)
+            p1_xmin = p.x;
+
+        if(p.x > p1_xmax)
+            p1_xmax = p.x;
+
+        // Y
+        if(p.y < p1_ymin)
+            p1_ymin = p.y;
+
+        if(p.y > p1_ymax)
+            p1_ymax = p.y;
+    }
+
+    for(unsigned int j = 1; j < M; j++)
+    {
+        LX_Physics::LX_Point q = poly2.getPoint(j);
+
+        if(q.x < p2_xmin)
+            p2_xmin = q.x;
+
+        if(q.x > p2_xmax)
+            p2_xmax = q.x;
+
+        if(q.y < p2_ymin)
+            p2_ymin = q.y;
+
+        if(q.y > p2_ymax)
+            p2_ymax = q.y;
+    }
+}
+
+// Calcute the collision between two polygons using the Separating Axis Theorem (SAT)
+// pre-condition : poly1 and poly2 must be convex with at least 4 sides
+bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
+                      const LX_Physics::LX_Polygon& poly2)
+{
+    int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
+    int p2_xmin, p2_xmax, p2_ymin, p2_ymax;
+
+    getInterval(poly1,poly2,
+                p1_xmin,p1_xmax,p1_ymin,p1_ymax,
+                p2_xmin,p2_xmax,p2_ymin,p2_ymax);
+
+    return intersetInterval(p1_xmin,p1_xmax,p2_xmin,p2_xmax)
+           && intersetInterval(p1_ymin,p1_ymax,p2_ymin,p2_ymax);
+}
+
+// Collision detection between polygons using their AABB
+bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
+                                const LX_Physics::LX_Polygon& poly2)
+{
+    int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
+    int p2_xmin, p2_xmax, p2_ymin, p2_ymax;
+
+    getInterval(poly1,poly2,
+                p1_xmin,p1_xmax,p1_ymin,p1_ymax,
+                p2_xmin,p2_xmax,p2_ymin,p2_ymax);
+
+    LX_AABB box1 = {p1_xmin, p1_ymin, p1_xmax-p1_xmin, p1_ymax-p1_ymin};
+    LX_AABB box2 = {p2_xmin, p2_ymin, p2_xmax-p2_xmin, p2_ymax-p2_ymin};
+
+    return LX_Physics::collisionRect(box1,box2);
+}
+
+
+bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
+                        const LX_Physics::LX_Polygon& poly2)
+{
+    LX_Physics::LX_Point A,B,C,D;
+    const unsigned int S1 = poly1.numberOfEdges();
+    const unsigned int S2 = poly2.numberOfEdges();
+
+    for(unsigned int i = 0; i < S1; i++)
+    {
+        A = poly1.getPoint(i);
+
+        if(i == S1-1)
+            B = poly1.getPoint(0);
+        else
+            B = poly1.getPoint(i+1);
+
+        for(unsigned int j = 0; j < S2; j++)
+        {
+            C = poly2.getPoint(j);
+
+            if(j == S2-1)
+                D = poly2.getPoint(0);
+            else
+                D = poly2.getPoint(j+1);
+
+            if(intersectSegment(A,B,C,D))
+                return true;
+        }
+    }
+
+    LX_Physics::LX_Point origin1 = poly1.getPoint(0);
+    LX_Physics::LX_Point origin2 = poly2.getPoint(0);
+
+    return (collisionPointPoly(origin1,poly2)
+            || collisionPointPoly(origin2,poly1));
+}
+
+};
+
 
 namespace LX_Physics
 {
@@ -305,38 +442,23 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 {
-    LX_Point A,B,C,D;
-    const unsigned int polySize1 = poly1.numberOfEdges();
-    const unsigned int polySize2 = poly2.numberOfEdges();
+    const unsigned int NUM_SIDES = 3;
+    const unsigned int N = poly1.numberOfEdges();
+    const unsigned int M = poly2.numberOfEdges();
 
-    for(unsigned int i = 0; i < polySize1; i++)
-    {
-        A = poly1.getPoint(i);
+    if(N < NUM_SIDES || M < NUM_SIDES)
+        throw std::invalid_argument("The polygons must have at least 3 sides to calculate the collision");
 
-        if(i == polySize1-1)
-            B = poly1.getPoint(0);
-        else
-            B = poly1.getPoint(i+1);
+    // Detect the collision using the AABB of the polygons
+    if(!approximativeCollisionPoly(poly1,poly2))
+        return false;
 
-        for(unsigned int j = 0; j < polySize2; j++)
-        {
-            C = poly2.getPoint(j);
+    // If the two polygons are convex and have at least 4 sides,
+    // use the SAT to detect the collision between then.
+    if(poly1.isConvex() && poly2.isConvex() && N > NUM_SIDES && M > NUM_SIDES)
+        return collisionPolySAT(poly1,poly2);
 
-            if(j == polySize2-1)
-                D = poly2.getPoint(0);
-            else
-                D = poly2.getPoint(j+1);
-
-            if(intersectSegment(A,B,C,D))
-                return true;
-        }
-    }
-
-    LX_Point origin1 = poly1.getPoint(0);
-    LX_Point origin2 = poly2.getPoint(0);
-
-    return (collisionPointPoly(origin1,poly2)
-            || collisionPointPoly(origin2,poly1));
+    return basicCollisionPoly(poly1,poly2);
 }
 
 
