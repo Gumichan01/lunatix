@@ -940,6 +940,24 @@ void test_move(void) // TODO move the polygon
     LX_Point P = {1,2};
     LX_AABB R = {8,4,10,10};
 
+    const int X = -4;
+    const int Y = 8;
+    LX_Vector2D v(X,Y);
+    LX_Polygon poly;
+    LX_Polygon expoly;
+
+    poly.addPoint(24,32);
+    poly.addPoint(48,32);
+    poly.addPoint(128,64);
+    poly.addPoint(64,64);
+    poly.addPoint(32,32);
+    // expected polygon
+    expoly.addPoint(24+X,32+Y);
+    expoly.addPoint(48+X,32+Y);
+    expoly.addPoint(128+X,64+Y);
+    expoly.addPoint(64+X,64+Y);
+    expoly.addPoint(32+X,32+Y);
+
     cout << "INFO - Point P(" << P.x << "," << P.y << ")" << endl;
     cout << "INFO - Rectangle R(" << R.x << "," << R.y << ","<< R.w << ","
          << R.h << ")" << endl;
@@ -967,6 +985,48 @@ void test_move(void) // TODO move the polygon
         cout << "FAILURE - expected : Rectangle R(3,6,10,10)"
              << "Got : (" << R.x << "," << R.y << ","
              << R.w << "," << R.h << ")" << endl;
+
+    movePoly(poly,X,Y);
+    const unsigned int n = poly.numberOfEdges();
+    const unsigned int m = expoly.numberOfEdges();
+
+    LX_Log::log("expected polygon");
+    displayPoly(expoly);
+    LX_Log::log("got");
+    displayPoly(poly);
+
+    if(n != m)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - these polygon have not the same size");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"number of edges expected: %d, got: %d",m,n);
+    }
+    else
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - these polygon have the same size");
+
+    try
+    {
+        bool ok = true;
+        for(unsigned int j = 0; j < n; j++)
+        {
+            LX_Point p1 = poly.getPoint(j);
+            LX_Point p2 = expoly.getPoint(j);
+            if(p1 != p2)
+            {
+                LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - at j = %d → not the same point",j);
+                LX_Log::logInfo(LX_Log::LX_LOG_TEST,"point expected: (%d,%d) got: (%d,%d)",
+                                p2.x,p2.y,p1.x,p1.y);
+                ok = false;
+                break;
+            }
+        }
+
+        if(ok)
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The 2 polygons are identical");
+    }
+    catch(...)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - uncaught exception at %s:%d",__FILE__,__LINE__);
+    }
 
     LX_Log::log(" = END TEST = ");
 }
