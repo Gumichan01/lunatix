@@ -163,16 +163,16 @@ void LX_Polygon::convexity(void)
 
 void LX_Polygon::move(const float vx, const float vy)
 {
-    const LX_Vector2D vel(vx,vy);
+    const int nvx = static_cast<int>(vx), nvy = static_cast<int>(vy);
     const unsigned int n = numberOfEdges();
 
-    movePoint(points[0],vel);
-    movePoint(points[1],vel);
-    movePoint(points[2],vel);
+    movePoint(points[0],nvx,nvy);
+    movePoint(points[1],nvx,nvy);
+    movePoint(points[2],nvx,nvy);
 
     for(unsigned int i = 3; i < n; i++)
     {
-        movePoint(points[i],vel);
+        movePoint(points[i],nvx,nvy);
     }
 }
 
