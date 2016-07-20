@@ -5,7 +5,7 @@
 # It only works on the Linux systems.
 #
 
-VERSION="v0.7"
+VERSION="v0.8"
 LOG_FILE="lunatix-"${VERSION}"-"$(date +%Y-%m-%d-%H:%M:%S)".log";
 LOG_TMP_FILE=/tmp/"."${LOG_FILE}".lx.tmp";
 LOG_RESULT_DIR="test/result/";
@@ -22,7 +22,7 @@ echo "\n============================= Begin Report ============================\
 ./test-device 2>&1   | tee -a ${LOG_TMP_FILE}
 ./test-file 2>&1     | tee -a ${LOG_TMP_FILE}
 ./test-physics 2>&1  | tee -a ${LOG_TMP_FILE}
-./test-audio 2>&1     | tee -a ${LOG_TMP_FILE}
+./test-audio 2>&1    | tee -a ${LOG_TMP_FILE}
 ./test-window 2>&1   | tee -a ${LOG_TMP_FILE}
 ./test-ttf 2>&1      | tee -a ${LOG_TMP_FILE}
 ./test-particle 2>&1 | tee -a ${LOG_TMP_FILE}
