@@ -115,9 +115,11 @@ void test_channels()
                         N,res);
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Trying to reserve channels from 0 to 7 in group 1");
-    int g1 = LX_Mixer::groupChannels(0,7,1);
+    LX_Mixer::groupChannels(0,7,1);
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Trying to reserve channels from 9 to 15 in group 2");
-    int g2 = LX_Mixer::groupChannels(8,15,2);
+    LX_Mixer::groupChannels(8,15,2);
+    int g1 = LX_Mixer::groupCount(1);
+    int g2 = LX_Mixer::groupCount(2);
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"In group 1: %d channel(s)",g1);
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"In group 2: %d channel(s)",g2);
@@ -131,13 +133,22 @@ void test_channels()
     std::string sc = "data/explosion.wav";
     LX_Mixer::LX_Chunk chunk(sc);
 
-    for(int i = 0; i < 8; i++)
-    {
-        chunk.play(i);
-        SDL_Delay(100);
-    }
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Available channel before playing: %d",
+                    LX_Mixer::channelAvailable(1));
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Available channel before playing: %d",
+                    LX_Mixer::channelAvailable(2));
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Playing a chunk in the 2 groups");
+    LX_Mixer::groupPlayChunk(chunk,1);
+    LX_Mixer::groupPlayChunk(chunk,2);
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Available channel (grp 1): %d",
+                    LX_Mixer::channelAvailable(1));
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Available channel (grp 2): %d",
+                    LX_Mixer::channelAvailable(2));
 
     SDL_Delay(2000);
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done");
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Reset");
     r1 = LX_Mixer::reserveChannels(0);
