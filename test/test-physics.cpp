@@ -918,7 +918,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - no collision poly/poly4 OK" << endl;
 
     // Empty olygons
-    cout << "INFO - collition between two empty polygons" << endl;
+    cout << "INFO - collision between two empty polygons" << endl;
     try
     {
         collisionPoly(poly_empty1,poly_empty2);
@@ -933,7 +933,7 @@ void test_collision2Polygon(void)
         cerr << "FAILURE - unknown exception occurred" << endl;
     }
 
-    cout << "INFO - collition between two convex polygons" << endl;
+    cout << "INFO - collision between two convex polygons" << endl;
     d = collisionPoly(polyc,polyc2);
 
     if(d != true)
@@ -942,7 +942,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - collision polyc/polyc2 OK" << endl;
 
     // convex/non-convex
-    cout << "INFO - collition between a convex polygon and a non-convex polygon" << endl;
+    cout << "INFO - collision between a convex polygon and a non-convex polygon" << endl;
     d = collisionPoly(polyc2,polync);
 
     if(d == true)
@@ -951,7 +951,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - no collision polyc2/polync OK" << endl;
 
     // Another test
-    cout << "INFO - collition between a convex polygon and a non-convex polygon (again)" << endl;
+    cout << "INFO - collision between a convex polygon and a non-convex polygon (again)" << endl;
     d = collisionPoly(polyc2,polync2);
 
     if(d != true)
@@ -960,7 +960,7 @@ void test_collision2Polygon(void)
         cout << "SUCCESS - collision polyc2/polync2 OK" << endl;
 
     // convex/triangle (that is convex)
-    cout << "INFO - collition between a convex polygon and a triangle" << endl;
+    cout << "INFO - collision between a convex polygon and a triangle" << endl;
     d = collisionPoly(polyc2,poly3);
 
     if(d != true)
@@ -989,35 +989,33 @@ void test_collision2PolygonAgain(void)
         poly2.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
     }
 
-    LX_Log::log("Generated");
-    LX_Log::log("Calculate the collision");
+    LX_Log::log("Calculate the collision #1");
     t1 = SDL_GetTicks();
     bool d = collisionPoly(poly1,poly2);
     t2 = SDL_GetTicks();
     LX_Log::log("Result:%s collision between the two random polygons",(d ? "":" No"));
-    LX_Log::log("Calculation done in %f s",(static_cast<float>(t2-t1))/1000.0f);
+    LX_Log::log("Calculation done in %d ms",t2-t1);
 
     LX_Log::log("Generate two other random polygons with %d sides in two different areas",N);
     for(unsigned int i = 0; i < N; i++)
     {
         poly3.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
-        poly4.addPoint((LX_Random::xorshiftRand()%M)+N,(LX_Random::xorshiftRand()%M)+N);
+        poly4.addPoint(LX_Random::xorshiftRand()%M+N,LX_Random::xorshiftRand()%M+N);
     }
 
-    LX_Log::log("Generated");
-    LX_Log::log("Calculate the collision");
+    LX_Log::log("Calculate the collision #2");
     t1 = SDL_GetTicks();
     d = collisionPoly(poly3,poly4);
     t2 = SDL_GetTicks();
     LX_Log::log("t1: %d; t2: %d",t1,t2);
     LX_Log::log("Result:%s collision between the two random polygons",(d ? "":" No"));
-    LX_Log::log("Calculation done in %f s",(static_cast<float>(t2-t1))/1000.0f);
+    LX_Log::log("Calculation done in %d ms",t2-t1);
 
     LX_Log::log(" = END TEST = ");
 }
 
 
-void test_move(void) // TODO move the polygon
+void test_move(void)
 {
     cout << " = TEST Move = " << endl;
 
