@@ -31,7 +31,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - LunatiX Engine have been initialized with success" << endl;
 
     LX_Log::setDebugMode();
-    LX_Log::log(" ==== Test Rendering ==== ");
+    LX_Log::log(" ==== Test Window ==== ");
     LX_loadWindowConfig(info);
     LX_Log::log("Info configuration:\n%s",winInfoToString(info).c_str());
     info.title = "Hello #1";
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
     delete win;
     LX_Quit();
 
-    LX_Log::log(" ==== END rendering ==== ");
+    LX_Log::log(" ==== END Window ==== ");
     return EXIT_SUCCESS;
 }
 
@@ -125,7 +125,6 @@ void test_surface(void)
     wi.h = h;
     wi.mode = LX_WINDOW_SURFACE;
     wi.flag = SDL_WINDOW_SHOWN;
-    LX_Win::LX_Window win2(wi);
     LX_Win::LX_Window win3(wi);
     std::string name = "data/bullet.png";
     SDL_Surface *sf = nullptr;
@@ -154,6 +153,8 @@ void test_surface(void)
     else
         cout << "SUCCESS - the surface was loaded with success" << endl;
 
+    win3.clearWindow();
+
     // Is the surface put on the window
     cout << "INFO - put the surface on the screen" << endl;
     if(win3.putSurface(sf,nullptr,&pos) == false)
@@ -162,6 +163,7 @@ void test_surface(void)
         cout << "SUCCESS - surface on the window" << endl;
 
     // Update the window
+    SDL_Delay(1000);
     win3.update();
 
     // take a screenshot
