@@ -38,6 +38,7 @@ struct SDL_Rect;
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window              */
 
 // Display modes
+///< @deprecated
 #define LX_WINDOW_SURFACE   0                                           /**< The flag to use the surface    */
 #define LX_WINDOW_RENDERING 1                                           /**< The flag to use the rendering  */
 #define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering)       */
@@ -62,7 +63,7 @@ struct LX_WindowInfo
     int h;              /**< Window Height              */
     int lw;             /**< Independant device width   */
     int lh;             /**< Independant device height  */
-    Uint32 mode;        /**< Display mode               */
+    Uint32 mode;        /**< @deprecated Display mode   */
     Uint32 flag;        /**< Flags                      */
     bool accel;         /**< Hardware acceleration      */
 
@@ -166,7 +167,7 @@ public :
     // Put the sprite on the screen
     /**
     *   @fn bool putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
-    *
+    *   @deprecated
     *   This function puts a area of the surface on the window surface at a specified position
     *
     *   @param image The surface to put

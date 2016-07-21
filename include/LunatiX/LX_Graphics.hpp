@@ -53,6 +53,7 @@ namespace LX_Graphics
 
 /**
 *   @fn SDL_Surface * loadSurface(const std::string& filename)
+*   @deprecated The engine will no longer support the display with surfaces
 *
 *   This function loads a SDL_Surface from any image file an optimized its format
 *
@@ -71,6 +72,7 @@ SDL_Surface * loadSurface(const std::string& filename);
 
 /**
 *   @fn SDL_Surface * loadSurface(const UTF8string& filename)
+*   @deprecated The engine will no longer support the display with surfaces
 *
 *   This function loads a SDL_Surface from any image file an optimized its format
 *
@@ -108,6 +110,7 @@ SDL_Surface * loadSurface(LX_FileIO::LX_File *file);
 
 /**
 *   @fn SDL_Surface * loadSurfaceFromFileBuffer(LX_FileIO::LX_FileBuffer *file)
+*   @deprecated The engine will no longer support the display with surfaces
 *
 *   This function loads a SDL_Surface from a file buffer
 *
@@ -125,6 +128,7 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileIO::LX_FileBuffer *file);
 
 /**
 *   @fn SDL_Surface * optimizeSurface(SDL_Surface * surface)
+*   @deprecated The engine will no longer support the display with surfaces
 *
 *   Optimize the surface format
 *
@@ -157,6 +161,7 @@ SDL_Texture * loadTextureFromSurface(SDL_Surface *target, LX_Win::LX_Window * w)
 
 /**
 *   @fn SDL_Texture * loadTextureFromSurface(SDL_Surface *target, unsigned int id)
+*   @deprecated The engine will no longer support the display with surfaces
 *
 *   Load a texture from a surface using the renderer of the window
 *   specified by its ID
@@ -245,9 +250,8 @@ SDL_Texture * loadTextureFromFile(const std::string& filename, unsigned int id =
 SDL_Texture * loadTextureFromFile(const UTF8string& filename, unsigned int id = 0);
 
 /**
-*
 *   @fn bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue)
-*
+*   @deprecated The engine will no longer support the display with surfaces
 *   This function set the alpha value on a SDL_surface
 *
 *   @param image The surface
@@ -265,4 +269,3 @@ bool setAlpha(SDL_Surface *image,Uint8 red, Uint8 green, Uint8 blue);
 };
 
 #endif // LX_GRAPHICS_H_INCLUDED
-
