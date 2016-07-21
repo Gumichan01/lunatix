@@ -408,7 +408,7 @@ void LX_Window::getInfo(LX_WindowInfo &info)
 
 SDL_Renderer * LX_Window::getRenderer(void)
 {
-    return SDL_GetRenderer(_window);
+    return _renderer;
 }
 
 
