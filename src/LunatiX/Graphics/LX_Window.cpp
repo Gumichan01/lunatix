@@ -379,7 +379,15 @@ void LX_Window::getInfo(LX_WindowInfo &info)
     info.title = SDL_GetWindowTitle(_window);
     SDL_GetWindowPosition(_window,&info.x,&info.y);
     SDL_GetWindowSize(_window, &info.w,&info.h);
-    SDL_RenderGetLogicalSize(_renderer,&info.lw,&info.lh);
+
+    if(_render_method)
+        SDL_RenderGetLogicalSize(_renderer,&info.lw,&info.lh);
+    else
+    {
+        info.lw = 0;
+        info.lh = 0;
+    }
+
     info.flag = SDL_GetWindowFlags(_window);
     info.mode = _render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
 
