@@ -954,7 +954,7 @@ void test_collision2Polygon(void)
     cout << "INFO - collision between a convex polygon and a non-convex polygon (again)" << endl;
     d = collisionPoly(polyc2,polync2);
 
-    if(d != true)
+    if(d != false)
         cerr << "FAILURE - no collision polyc2/polync2. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - collision polyc2/polync2 OK" << endl;
