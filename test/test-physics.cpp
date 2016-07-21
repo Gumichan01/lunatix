@@ -579,7 +579,7 @@ void test_collisionPointPolygon(void)
         Be careful, if the coordinates of a point
         are to high, you will have incorrect results
     */
-    LX_Polygon poly;
+    LX_Polygon poly, polyc2;
 
     LX_Point N = {12,7};
     LX_Point O = {9,7};
@@ -587,12 +587,18 @@ void test_collisionPointPolygon(void)
     LX_Point Q = {6,4};
     LX_Point R = {1024,2048};
     LX_Point S = {2,2};
+    LX_Point T = {10,5};
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
     poly.addPoint(5,5);
     poly.addPoint(7,2);
     poly.addPoint(6,5);
+
+    polyc2.addPoint(12,5);
+    polyc2.addPoint(12,12);
+    polyc2.addPoint(4,5);
+    polyc2.addPoint(7,0);
 
     cout << " = TEST Collision Point/Polygon = " << endl;
 
@@ -663,6 +669,14 @@ void test_collisionPointPolygon(void)
         cerr << "FAILURE - S in the polygon. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - S not in the polygon OK" << endl;
+
+    cout << "INFO - collision Point T/Polygon polync2" << endl;
+    d = collisionPointPoly(T,polyc2);
+
+    if(d != true)
+        cerr << "FAILURE - T not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+    else
+        cout << "SUCCESS - T in the polygon OK" << endl;
 }
 
 
@@ -917,7 +931,7 @@ void test_collision2Polygon(void)
     else
         cout << "SUCCESS - no collision poly/poly4 OK" << endl;
 
-    // Empty olygons
+    // Empty polygons
     cout << "INFO - collision between two empty polygons" << endl;
     try
     {
@@ -954,7 +968,7 @@ void test_collision2Polygon(void)
     cout << "INFO - collision between a convex polygon and a non-convex polygon (again)" << endl;
     d = collisionPoly(polyc2,polync2);
 
-    if(d != false)
+    if(d != true)
         cerr << "FAILURE - no collision polyc2/polync2. expected: FALSE ;Got: TRUE" << endl;
     else
         cout << "SUCCESS - collision polyc2/polync2 OK" << endl;
