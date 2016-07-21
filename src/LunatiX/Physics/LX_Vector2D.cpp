@@ -64,9 +64,7 @@ namespace LX_Physics
 {
 
 LX_Vector2D::LX_Vector2D(): LX_Vector2D(0.0f,0.0f) {}
-
 LX_Vector2D::LX_Vector2D(float x,float y): vx(x), vy(y) {}
-
 LX_Vector2D::LX_Vector2D(const LX_Vector2D& v): vx(v.vx), vy(v.vy) {}
 
 LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
@@ -181,13 +179,13 @@ float vector_norm(const LX_Vector2D& v)
 
 bool isNullVector(const LX_Vector2D& v)
 {
-    return v.vx == 0.0f && v.vy == 0.0f;
+    return eq(v.vx,0.0f) && eq(v.vy,0.0f);
 }
 
 
 bool collinear(const LX_Vector2D& u,const LX_Vector2D& v)
 {
-    return vector_product(u,v) == 0.0f;
+    return eq(vector_product(u,v),0.0f);
 }
 
 
