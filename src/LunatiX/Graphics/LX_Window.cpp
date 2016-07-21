@@ -351,7 +351,7 @@ bool LX_Window::screenshotUsingRenderer_(std::string& filename)
 }
 
 /*
-*   Private function that makes a screenshot using the renderer
+*   Private function that makes a screenshot using the surface
 */
 bool LX_Window::screenshotUsingSurface_(std::string& filename)
 {
