@@ -328,14 +328,14 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
                       const LX_Point& C, const LX_Point& D)
 {
     LX_Vector2D AC,AD,AB;
-    long d;
+    float d;
 
     AB = LX_Vector2D(B.x - A.x,B.y - A.y);
     AC = LX_Vector2D(C.x - A.x,C.y - A.y);
     AD = LX_Vector2D(D.x - A.x,D.y - A.y);
-    d = static_cast<long>(vector_product(AB,AD) * vector_product(AB,AC));
+    d = vector_product(AB,AD) * vector_product(AB,AC);
 
-    return (d <= 0);
+    return (d <= 0.0f);
 }
 
 
