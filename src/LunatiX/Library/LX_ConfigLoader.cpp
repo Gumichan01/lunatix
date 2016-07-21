@@ -144,7 +144,6 @@ void loadWindowFileConfig(LX_InternalConfig& config)
 {
     const std::regex WIDTH_REG("width=.+",std::regex::extended);
     const std::regex HEIGHT_REG("height=.+",std::regex::extended);
-    const std::regex FULLSCREEN_REG("fullscreen=[[:digit:]]+",std::regex::extended);
 
     std::ifstream f;
     f.open(LX_WINFO_FILE,std::ios::in);
@@ -181,14 +180,6 @@ void loadWindowFileConfig(LX_InternalConfig& config)
             if(std::regex_match(line,HEIGHT_REG))
             {
                 config.height = atoi(s.c_str());
-                cpt++;
-            }
-            break;
-
-        case 2:
-            if(std::regex_match(line,FULLSCREEN_REG))
-            {
-                config.fullscreen_flag = (s == ONE);
                 cpt++;
             }
             break;

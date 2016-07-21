@@ -50,7 +50,6 @@ struct LX_InternalConfig
     int font_size;          ///< Font size
     int width;              ///< Width
     int height;             ///< Height
-    bool fullscreen_flag;   ///< Fullscreen flag
 };
 
 /**

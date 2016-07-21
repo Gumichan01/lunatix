@@ -207,16 +207,6 @@ public :
     */
     int getWinHeight();
 
-    /**
-    *   @fn bool getFullscreenFlag()
-    *
-    *   Get the fullscreen tag
-    *
-    *   @return TRUE if the flag is set, FALSE otherwise
-    *
-    */
-    bool getFullscreenFlag();
-
     ~LX_Configuration();
 };
 

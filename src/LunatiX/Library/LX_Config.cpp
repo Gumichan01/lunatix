@@ -138,8 +138,3 @@ int LX_Configuration::getWinHeight()
 {
     return _conf.height;
 }
-
-bool LX_Configuration::getFullscreenFlag()
-{
-    return _conf.fullscreen_flag;
-}

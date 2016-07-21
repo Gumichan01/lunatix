@@ -7,10 +7,7 @@ string boolState(const bool b);
 
 string boolState(const bool b)
 {
-    if(b)
-        return "active";
-
-    return "inactive";
+    return b ? "active":"inactive";
 }
 
 
@@ -49,19 +46,15 @@ int main(int argc, char **argv)
     int size     = configuration->getFontSize();
     int w        = configuration->getWinWidth();
     int h        = configuration->getWinHeight();
-    bool f       = configuration->getFullscreenFlag();
 
-    std::cout << "\n==== LunatiX engine configuration ==== \n" << std::endl
-              << "video : " << boolState(video) << std::endl
-              << "true type font : " << boolState(ttfont) << std::endl
-              << "audio : " << boolState(sound) << std::endl
-              << "gamepad : " << boolState(gamepad) << std::endl
-              << "opengl : " << boolState(opengl) << std::endl
-              << "font : " << font << std::endl
-              << "size : " << size << std::endl
-              << "width : " << w << std::endl
-              << "height : " << h << std::endl
-              << "fullscreen : " << boolState(f) << std::endl;
+    cout << "\n==== LunatiX engine configuration ==== \n" << endl
+         << "video : " << boolState(video) << endl
+         << "true type font : " << boolState(ttfont) << endl
+         << "audio : " << boolState(sound) << endl
+         << "gamepad : " << boolState(gamepad) << endl
+         << "opengl : " << boolState(opengl) << endl
+         << "font : " << font << endl << "size : " << size << endl
+         << "width : " << w << endl << "height : " << h << endl;
 
     LX_Quit();
     LX_Log::log(" ==== END Test Config ==== \n");

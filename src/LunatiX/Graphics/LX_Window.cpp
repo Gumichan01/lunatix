@@ -61,9 +61,6 @@ static Uint32 generateFlags(LX_Configuration &config)
 {
     Uint32 flag = 0x00000000;
 
-    if(config.getVideoFlag() && config.getFullscreenFlag())
-        flag |= LX_GRAPHICS_FULLSCREEN;
-
     if(config.getVideoFlag() && config.getOpenGLFlag())
         flag |= SDL_WINDOW_OPENGL;
 
