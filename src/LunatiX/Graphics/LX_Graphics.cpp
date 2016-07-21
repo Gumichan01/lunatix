@@ -82,16 +82,13 @@ SDL_Surface * loadSurfaceFromFileBuffer(LX_FileBuffer *file)
 
 SDL_Surface * optimizeSurface(SDL_Surface * surface)
 {
-    SDL_Surface * optimized = nullptr;
-
     if(surface == nullptr)
     {
         LX_SetError("Invalid pointer : invalid surface\n");
         return nullptr;
     }
 
-    optimized = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA4444,0x00000000);
-    return optimized;
+    return SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA8888,0);
 }
 
 
