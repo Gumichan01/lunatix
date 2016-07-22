@@ -125,8 +125,9 @@ public:
 
     LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    bool blit(LX_Surface& s, LX_AABB& rect);
     virtual bool isOpen() const;
+    bool blit(LX_Surface& s, LX_AABB& rect);
+    void update();
 
     virtual ~LX_Streaming_Image();
 };

@@ -235,7 +235,13 @@ bool LX_Streaming_Image::isOpen() const
 
 bool LX_Streaming_Image::blit(LX_Surface& s, LX_AABB& rect)
 {
-    return SDL_BlitSurface(s._surface,nullptr,_screen,&rect) == 0;
+    return SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0;
+}
+
+void LX_Streaming_Image::update()
+{
+    SDL_UpdateTexture(_texture,nullptr,_screen->pixels,_screen->pitch);
+    SDL_FillRect(_screen,nullptr,SDL_MapRGB(_screen->format,0,0,0));
 }
 
 
