@@ -21,6 +21,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_AABB.hpp>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_video.h>
 
@@ -75,7 +76,7 @@ public:
 
     void update();
 
-    virtual void draw();
+    virtual void draw(LX_AABB * box, const double angle = 0);
 
     virtual ~LX_Image();
 };
