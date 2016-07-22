@@ -153,6 +153,39 @@ LX_Static_Image::LX_Static_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Wi
 LX_Static_Image::~LX_Static_Image() {}
 
 
+/* LX_Surface */
+
+LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
+                                 Uint32 format)
+    : LX_Image(w,format), _surface(nullptr)
+{
+    _surface = loadSurface_(filename);
+}
+
+
+LX_Surface::LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
+                                 Uint32 format)
+    : LX_Surface(filename.utf8_str(),w,format) {}
+
+
+LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+                                 Uint32 format)
+    : LX_Image(w,format), _surface(nullptr)
+{
+    _surface = loadSurface_(buffer);
+}
+
+bool LX_Surface::isOpen() const
+{
+    return _surface != nullptr;
+}
+
+LX_Surface::~LX_Surface()
+{
+    SDL_FreeSurface(_surface);
+}
+
+
 /* LX_Streaming_Image */
 
 LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)

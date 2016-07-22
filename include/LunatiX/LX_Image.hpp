@@ -43,12 +43,9 @@ namespace LX_Graphics
 
 class LX_Image
 {
-    SDL_Surface * loadSurface_(const std::string& filename);
-    SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
-    SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
-
     LX_Image(LX_Image&);
     LX_Image& operator =(LX_Image&);
+    SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
 
 protected:
 
@@ -57,6 +54,8 @@ protected:
     Uint32 _format;
 
     LX_Image(LX_Win::LX_Window& w, Uint32 format);
+    SDL_Surface * loadSurface_(const std::string& filename);
+    SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
 
 public:
 
@@ -93,6 +92,27 @@ public:
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual ~LX_Static_Image();
+};
+
+
+class LX_Surface: private LX_Image
+{
+    SDL_Surface * _surface;
+
+public:
+
+    LX_Surface(const std::string filename, LX_Win::LX_Window& w,
+               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
+               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual bool isOpen() const;
+
+    virtual ~LX_Surface();
 };
 
 
