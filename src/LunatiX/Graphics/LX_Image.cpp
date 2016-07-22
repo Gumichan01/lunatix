@@ -27,10 +27,16 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 
+
 namespace LX_Graphics
 {
 
 /* LX_Image */
+
+// protected zero-argument construtor
+LX_Image::LX_Image(LX_Win::LX_Window& w, Uint32 format)
+    : _texture(nullptr), _win(w), _format(format) {}
+
 
 LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
                    Uint32 format)
@@ -38,6 +44,7 @@ LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
 {
     _texture = loadTexture_(filename,_win);
 }
+
 
 LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
                    Uint32 format)
@@ -147,5 +154,53 @@ LX_Static_Image::~LX_Static_Image() {}
 
 
 /* LX_Streaming_Image */
+
+LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
+    : LX_Image(w,format), _screen(nullptr)
+{
+    int bpp, width, height;
+    Uint32 r,g,b,a;
+
+    if(SDL_PixelFormatEnumToMasks(_format,&bpp,&r,&g,&b,&a) != SDL_TRUE)
+    {
+        SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_RGBA8888,&bpp,&r,&g,&b,&a);
+        _format = SDL_PIXELFORMAT_RGBA8888;
+    }
+
+    LX_Win::LX_WindowInfo info;
+    _win.getInfo(info);
+
+    if(info.lw == 0 && info.lh == 0)
+    {
+        width  = _win.getWidth();
+        height = _win.getHeight();
+    }
+    else
+    {
+        width  = info.lw;
+        height = info.lh;
+    }
+
+    if(width <= 0 || height <= 0)
+        LX_SetError("LX_Streaming_Image - bad dimensions");
+    else
+    {
+        _screen  = SDL_CreateRGBSurface(0,width,height,bpp,r,g,b,a);
+        _texture = SDL_CreateTexture(_win.getRenderer(),_format,
+                                     SDL_TEXTUREACCESS_STREAMING,width,height);
+    }
+}
+
+
+bool LX_Streaming_Image::isOpen() const
+{
+    return _screen != nullptr && LX_Image::isOpen();
+}
+
+
+LX_Streaming_Image::~LX_Streaming_Image()
+{
+    SDL_FreeSurface(_screen);
+}
 
 };

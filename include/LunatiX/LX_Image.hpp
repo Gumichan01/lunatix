@@ -41,18 +41,14 @@ class LX_Window;
 namespace LX_Graphics
 {
 
-enum LX_ImageAccess
-{
-    LX_IMG_STATIC,
-    LX_IMG_STREAMING,
-    LX_IMG_TARGET
-};
-
 class LX_Image
 {
     SDL_Surface * loadSurface_(const std::string& filename);
     SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
     SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
+
+    LX_Image(LX_Image&);
+    LX_Image& operator =(LX_Image&);
 
 protected:
 
@@ -60,6 +56,7 @@ protected:
     LX_Win::LX_Window& _win;
     Uint32 _format;
 
+    LX_Image(LX_Win::LX_Window& w, Uint32 format);
 
 public:
 
@@ -72,7 +69,7 @@ public:
     LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    bool isOpen() const;
+    virtual bool isOpen() const;
     virtual void draw();
     virtual void draw(LX_AABB * box);
     virtual void draw(LX_AABB * box, const double angle);
@@ -98,6 +95,21 @@ public:
     virtual ~LX_Static_Image();
 };
 
+
+class LX_Streaming_Image: public LX_Image
+{
+    SDL_Surface * _screen;
+
+public:
+
+    LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual bool isOpen() const;
+
+    virtual ~LX_Streaming_Image();
 };
+
+};
+
 
 #endif  // LX_IMAGE_H_INCLUDED
