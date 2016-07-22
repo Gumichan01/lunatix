@@ -20,7 +20,6 @@
 */
 
 #include <LunatiX/LX_Image.hpp>
-#include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
@@ -35,7 +34,7 @@ LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
                    const LX_ImageAccess ty, Uint32 format)
     : _texture(nullptr), _win(w), _img_access(ty),_format(format)
 {
-    _texture = loadTexture_(filename,w);
+    _texture = loadTexture_(filename,_win);
 }
 
 LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
@@ -43,12 +42,14 @@ LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
     : LX_Image(filename.utf8_str(),w,ty,format) {}
 
 
-/*LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
          LX_ImageAccess ty, Uint32 format)
     : _texture(nullptr), _win(w), _img_access(ty),_format(format)
 {
-
-}*/
+    SDL_Surface *tmp = loadSurface_(buffer);
+    _texture = SDL_CreateTextureFromSurface(w.getRenderer(),tmp);
+    SDL_FreeSurface(tmp);
+}
 
 // private function
 SDL_Surface * LX_Image::loadSurface_(const std::string& filename)
@@ -64,13 +65,17 @@ SDL_Surface * LX_Image::loadSurface_(const std::string& filename)
 }
 
 // private function
-/*SDL_Surface * LX_Image::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
+SDL_Surface * LX_Image::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
 {
     SDL_Surface * surface = buffer.getSurfaceFromBuffer();
+
+    if(surface == nullptr)
+        return nullptr;
+
     SDL_Surface *optimized = SDL_ConvertSurfaceFormat(surface,_format,0);
     SDL_FreeSurface(surface);
     return optimized;
-}*/
+}
 
 // private function
 SDL_Texture * LX_Image::loadTexture_(const std::string& filename, LX_Win::LX_Window& w)

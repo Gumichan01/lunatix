@@ -55,7 +55,7 @@ class LX_Image
     Uint32 _format;
 
     SDL_Surface * loadSurface_(const std::string& filename);
-    //SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
+    SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
     SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
 
 public:
@@ -68,8 +68,8 @@ public:
              const LX_ImageAccess ty=LX_IMG_STATIC,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    /*LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-             LX_ImageAccess ty=LX_IMG_STATIC, Uint32 format=SDL_PIXELFORMAT_RGBA8888);*/
+    LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+             LX_ImageAccess ty=LX_IMG_STATIC, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     bool isOpen() const;
 
