@@ -76,7 +76,7 @@ public:
 
     void update();
 
-    virtual void draw(LX_AABB * box, const double angle = 0);
+    virtual void draw(LX_AABB * box= nullptr, const double angle = 0.0);
 
     virtual ~LX_Image();
 };
