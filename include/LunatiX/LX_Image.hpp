@@ -1,0 +1,83 @@
+#ifndef LX_IMAGE_H_INCLUDED
+#define LX_IMAGE_H_INCLUDED
+
+/*
+*	Copyright (C) 2016 Luxon Jean-Pierre
+*	gumichan01.olympe.in
+*
+*	The LunatiX Engine is a SDL2-based game engine.
+*	It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*
+*   Luxon Jean-Pierre (Gumichan01)
+*	luxon.jean.pierre@gmail.com
+*/
+
+/**
+*	@file LX_Image.hpp
+*	@brief The Image
+*	@author Luxon Jean-Pierre(Gumichan01)
+*	@version 0.8
+*
+*/
+
+#include <LunatiX/utils/utf8_string.hpp>
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_video.h>
+
+struct SDL_Texture;
+
+namespace LX_FileIO
+{
+class LX_FileBuffer;
+};
+
+namespace LX_Win
+{
+class LX_Window;
+};
+
+
+namespace LX_Graphics
+{
+
+enum LX_ImageAccess
+{
+    LX_IMG_STATIC,
+    LX_IMG_STREAMING,
+    LX_IMG_TARGET
+};
+
+class LX_Image
+{
+    SDL_Texture * _texture;
+    LX_Win::LX_Window& _win;
+    const LX_ImageAccess _img_access;
+    Uint32 _format;
+
+    SDL_Surface * loadSurface_(const std::string& filename);
+    //SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
+    SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
+
+public:
+
+    LX_Image(const std::string filename, LX_Win::LX_Window& w,
+             const LX_ImageAccess ty=LX_IMG_STATIC,
+             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    /*LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+             const LX_ImageAccess ty=LX_IMG_STATIC,
+             Uint32 format=SDL_PIXELFORMAT_RGBA8888);*/
+
+    /*LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+             LX_ImageAccess ty=LX_IMG_STATIC, Uint32 format=SDL_PIXELFORMAT_RGBA8888);*/
+
+    void update();
+
+    virtual void draw();
+
+    virtual ~LX_Image();
+};
+
+};
+
+#endif  // LX_IMAGE_H_INCLUDED

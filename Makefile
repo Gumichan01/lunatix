@@ -87,7 +87,7 @@ OBJ_FILES=$(OBJ_DEVICE_PATH)LX_Device.o \
 $(OBJ_DEVICE_PATH)LX_Gamepad.o $(OBJ_DEVICE_PATH)LX_Haptic.o \
 $(OBJ_FILEIO_PATH)LX_FileIO.o $(OBJ_FILEIO_PATH)LX_FileBuffer.o \
 $(OBJ_GRAPHICS_PATH)LX_Graphics.o $(OBJ_GRAPHICS_PATH)LX_Window.o \
-$(OBJ_GRAPHICS_PATH)LX_WindowManager.o \
+$(OBJ_GRAPHICS_PATH)LX_WindowManager.o $(OBJ_GRAPHICS_PATH)LX_Image.o \
 $(OBJ_LIBRARY_PATH)LX_Config.o $(OBJ_LIBRARY_PATH)LX_ConfigLoader.o \
 $(OBJ_LIBRARY_PATH)LX_Library.o \
 $(OBJ_MIXER_PATH)LX_Sound.o $(OBJ_MIXER_PATH)LX_Chunk.o \
@@ -265,6 +265,15 @@ LX_WindowManager.o : $(OBJ_GRAPHICS_PATH)LX_WindowManager.o
 
 $(OBJ_GRAPHICS_PATH)LX_WindowManager.o : $(GRAPHICS_PATH)LX_WindowManager.cpp \
 $(LUNATIX_I_PATH)LX_WindowManager.hpp $(LUNATIX_I_PATH)LX_Error.hpp
+	@mkdir -p $(OBJ_GRAPHICS_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+LX_Image.o : $(OBJ_GRAPHICS_PATH)LX_Image.o
+
+$(OBJ_GRAPHICS_PATH)LX_Image.o : $(GRAPHICS_PATH)LX_Image.cpp \
+$(LUNATIX_I_PATH)LX_Image.hpp
 	@mkdir -p $(OBJ_GRAPHICS_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
