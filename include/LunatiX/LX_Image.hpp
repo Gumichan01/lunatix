@@ -71,6 +71,8 @@ public:
     /*LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              LX_ImageAccess ty=LX_IMG_STATIC, Uint32 format=SDL_PIXELFORMAT_RGBA8888);*/
 
+    bool isOpen() const;
+
     void update();
 
     virtual void draw();

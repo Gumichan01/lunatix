@@ -88,6 +88,11 @@ SDL_Texture * LX_Image::loadTexture_(const std::string& filename, LX_Win::LX_Win
 }
 
 
+bool LX_Image::isOpen() const
+{
+    return _texture != nullptr;
+}
+
 void LX_Image::draw() {}
 
 
