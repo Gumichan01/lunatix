@@ -175,10 +175,12 @@ LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
     _surface = loadSurface_(buffer);
 }
 
+
 bool LX_Surface::isOpen() const
 {
     return _surface != nullptr;
 }
+
 
 LX_Surface::~LX_Surface()
 {
@@ -228,6 +230,12 @@ LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
 bool LX_Streaming_Image::isOpen() const
 {
     return _screen != nullptr && LX_Image::isOpen();
+}
+
+
+bool LX_Streaming_Image::blit(LX_Surface& s, LX_AABB& rect)
+{
+    return SDL_BlitSurface(s._surface,nullptr,_screen,&rect) == 0;
 }
 
 
