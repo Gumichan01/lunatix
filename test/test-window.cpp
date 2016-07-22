@@ -40,13 +40,13 @@ int main(int argc, char **argv)
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
-    /*test_winInfo(win);
+    test_winInfo(win);
     test_window1(w);
     test_window2();
     test_surface();
-    test_rendering(w);*/
+    test_rendering(w);
     test_image(w);
-    //test_winManager(w);
+    test_winManager(w);
 
     delete win;
     LX_Quit();
