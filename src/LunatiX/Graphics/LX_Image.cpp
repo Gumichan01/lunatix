@@ -101,6 +101,18 @@ bool LX_Image::isOpen() const
 }
 
 
+void LX_Image::draw()
+{
+    draw(nullptr);
+}
+
+
+void LX_Image::draw(LX_AABB * box)
+{
+    draw(box,0.0);
+}
+
+
 void LX_Image::draw(LX_AABB * box, const double angle)
 {
     SDL_RenderCopyEx(_win.getRenderer(),_texture,nullptr,box,(-angle),nullptr,
@@ -132,5 +144,8 @@ LX_Static_Image::LX_Static_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Wi
 
 
 LX_Static_Image::~LX_Static_Image() {}
+
+
+/* LX_Streaming_Image */
 
 };

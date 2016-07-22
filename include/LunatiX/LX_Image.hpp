@@ -73,7 +73,9 @@ public:
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     bool isOpen() const;
-    virtual void draw(LX_AABB * box= nullptr, const double angle = 0.0);
+    virtual void draw();
+    virtual void draw(LX_AABB * box);
+    virtual void draw(LX_AABB * box, const double angle);
 
     virtual ~LX_Image();
 };
