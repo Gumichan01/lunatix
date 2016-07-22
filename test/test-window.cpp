@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/LX_Image.hpp>
 
 using namespace std;
 using namespace LX_Graphics;
@@ -11,6 +12,7 @@ void test_window1(LX_Win::LX_Window *win);
 void test_window2(void);
 void test_surface(void);
 void test_rendering(LX_Win::LX_Window *win);
+void test_image(LX_Win::LX_Window *win);
 void test_winManager(LX_Win::LX_Window *win);
 void test_winInfo(LX_Win::LX_Window *win);
 
@@ -38,12 +40,13 @@ int main(int argc, char **argv)
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
-    test_winInfo(win);
+    /*test_winInfo(win);
     test_window1(w);
     test_window2();
     test_surface();
-    test_rendering(w);
-    test_winManager(w);
+    test_rendering(w);*/
+    test_image(w);
+    //test_winManager(w);
 
     delete win;
     LX_Quit();
@@ -248,6 +251,198 @@ void test_rendering(LX_Win::LX_Window *win)
 }
 
 
+void test_image(LX_Win::LX_Window *win)
+{
+    LX_Log::log(" = TEST LX_Image = ");
+
+    std::string name = "data/bullet.png";
+    std::string mname = "data/01.ogg";
+    UTF8string u8name("data/bullet.png");
+
+    LX_Log::log("|> LX_Static_Image");
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+        LX_Graphics::LX_Static_Image img(u8name,*win);
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a image file using the file buffer");
+        LX_FileIO::LX_FileBuffer b(name);
+        LX_Graphics::LX_Static_Image img(b,*win);
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from memory");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from memory: should be loaded");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
+        LX_FileIO::LX_FileBuffer b(mname);
+        LX_Graphics::LX_Static_Image img(b,*win);
+
+        if(!img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - failure expected");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
+    }
+
+    LX_Log::log("|> LX_Streaming_Image");
+    LX_Log::log("||> LX_Surface");
+
+    /// NORMAL CASE
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a surface");
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"std::string argument");
+        LX_Surface data(name,*win);
+
+        if(data.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+        LX_Surface data(u8name,*win);
+
+        if(data.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"FileBuffer argument");
+        LX_FileIO::LX_FileBuffer b(name);
+        LX_Surface data(b,*win);
+
+        if(data.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+    }
+
+    /// ERROR CASE
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
+    {
+        LX_Surface data("<invalid>",*win);
+
+        if(data.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected");
+    }
+
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
+    {
+        LX_FileIO::LX_FileBuffer b(mname);
+        LX_Surface data(b,*win);
+
+        if(data.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected");
+    }
+
+    // Display a bullet
+    {
+        LX_Graphics::LX_Static_Image img(name,*win);
+        LX_AABB box = {64,64,256,128};
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Static_Image example");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Draw the image (angle: 0 → 360)");
+        for(int i = 0; i < 361; i++)
+        {
+            win->clearWindow();
+            img.draw(&box,i);
+            win->update();
+            SDL_Delay(16);
+
+            if(i == 0)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: 0 [2kπ]");
+            if(i == 30)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π/6 [2kπ]");
+            else if(i == 45)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π/4 [2kπ]");
+            else if(i == 90)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π/2 [2kπ]");
+            else if(i == 180)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π [2kπ]");
+            else if(i == 270)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: 3π/2 [2kπ]");
+            else if(i == 360)
+                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: 2π [2kπ]");
+        }
+
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Movement of the sprite");
+
+        Uint32 t1 = SDL_GetTicks();
+        for(int i = 0; i < 512; i++)
+        {
+            box.x += 1;
+            win->clearWindow();
+            img.draw(&box);
+            win->update();
+            SDL_Delay(16);
+        }
+        Uint32 t2 = SDL_GetTicks();
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
+    }
+
+    LX_Log::log("||> Streaming");
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a streaming image");
+    {
+        LX_Streaming_Image img(*win);
+        LX_Surface data(name,*win);
+        LX_AABB box = {256,256,256,128};
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Streaming image created");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Streaming image; it should be created");
+
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"put a surface in a streaming image");
+
+        if(img.blit(data,box))
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - surface on the image");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; got: FALSE");
+
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"update the stream");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Streaming_Image example, with LX_Surface");
+
+        Uint32 t1 = SDL_GetTicks();
+        for(int i = 0; i < 512; i++)
+        {
+            box.x += 1;
+            img.blit(data,box);
+            img.update();
+            win->clearWindow();
+            img.draw();
+            win->update();
+            SDL_Delay(16);
+        }
+        Uint32 t2 = SDL_GetTicks();
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
+    }
+
+    LX_Log::log(" = END TEST= ");
+}
+
+
 void test_winManager(LX_Win::LX_Window *win)
 {
     std::string name = "data/bullet.png";
@@ -268,7 +463,7 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the window was added into the window manager" << endl;
 
-    st = loadTextureFromFile(name.c_str(), id);
+    st = loadTextureFromFile(name.c_str(), static_cast<unsigned int>(id));
 
     if(st == nullptr)
         cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
