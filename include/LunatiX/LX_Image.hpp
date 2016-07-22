@@ -64,9 +64,9 @@ public:
              const LX_ImageAccess ty=LX_IMG_STATIC,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    /*LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
              const LX_ImageAccess ty=LX_IMG_STATIC,
-             Uint32 format=SDL_PIXELFORMAT_RGBA8888);*/
+             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     /*LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              LX_ImageAccess ty=LX_IMG_STATIC, Uint32 format=SDL_PIXELFORMAT_RGBA8888);*/

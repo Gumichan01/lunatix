@@ -33,12 +33,14 @@ namespace LX_Graphics
 
 LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
                    const LX_ImageAccess ty, Uint32 format)
-    : _texture(loadTexture_(filename,_win)), _win(w), _img_access(ty),_format(format)
-{}
+    : _texture(nullptr), _win(w), _img_access(ty),_format(format)
+{
+    _texture = loadTexture_(filename,w);
+}
 
-/*LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
                    const LX_ImageAccess ty, Uint32 format)
-    : LX_Image(filename.utf8_str(),w,ty,format) {}*/
+    : LX_Image(filename.utf8_str(),w,ty,format) {}
 
 
 /*LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
