@@ -49,27 +49,27 @@ enum LX_ImageAccess
 
 class LX_Image
 {
-    SDL_Texture * _texture;
-    LX_Win::LX_Window& _win;
-    const LX_ImageAccess _img_access;
-    Uint32 _format;
-
     SDL_Surface * loadSurface_(const std::string& filename);
     SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
     SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
 
+protected:
+
+    SDL_Texture * _texture;
+    LX_Win::LX_Window& _win;
+    Uint32 _format;
+
+
 public:
 
     LX_Image(const std::string filename, LX_Win::LX_Window& w,
-             const LX_ImageAccess ty=LX_IMG_STATIC,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
-             const LX_ImageAccess ty=LX_IMG_STATIC,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-             LX_ImageAccess ty=LX_IMG_STATIC, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     bool isOpen() const;
 
@@ -78,6 +78,24 @@ public:
     virtual void draw();
 
     virtual ~LX_Image();
+};
+
+
+class LX_Static_Image: public LX_Image
+{
+
+public:
+
+    LX_Static_Image(const std::string filename, LX_Win::LX_Window& w,
+                    Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_Static_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+                    Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_Static_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual ~LX_Static_Image();
 };
 
 };

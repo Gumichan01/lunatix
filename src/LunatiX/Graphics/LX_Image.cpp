@@ -30,21 +30,23 @@
 namespace LX_Graphics
 {
 
+/* LX_Image */
+
 LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
-                   const LX_ImageAccess ty, Uint32 format)
-    : _texture(nullptr), _win(w), _img_access(ty),_format(format)
+                   Uint32 format)
+    : _texture(nullptr), _win(w), _format(format)
 {
     _texture = loadTexture_(filename,_win);
 }
 
 LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
-                   const LX_ImageAccess ty, Uint32 format)
-    : LX_Image(filename.utf8_str(),w,ty,format) {}
+                   Uint32 format)
+    : LX_Image(filename.utf8_str(),w,format) {}
 
 
 LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-         LX_ImageAccess ty, Uint32 format)
-    : _texture(nullptr), _win(w), _img_access(ty),_format(format)
+         Uint32 format)
+    : _texture(nullptr), _win(w), _format(format)
 {
     SDL_Surface *tmp = loadSurface_(buffer);
     _texture = SDL_CreateTextureFromSurface(w.getRenderer(),tmp);
@@ -98,6 +100,10 @@ bool LX_Image::isOpen() const
     return _texture != nullptr;
 }
 
+
+void LX_Image::update() {}
+
+
 void LX_Image::draw() {}
 
 
@@ -105,5 +111,25 @@ LX_Image::~LX_Image()
 {
     SDL_DestroyTexture(_texture);
 }
+
+
+/* LX_Static_Image */
+
+LX_Static_Image::LX_Static_Image(const std::string filename, LX_Win::LX_Window& w,
+                                 Uint32 format)
+    : LX_Image(filename,w,format) {}
+
+
+LX_Static_Image::LX_Static_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+                                 Uint32 format)
+    : LX_Image(filename,w,format) {}
+
+
+LX_Static_Image::LX_Static_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+                                 Uint32 format)
+    : LX_Image(buffer,w,format) {}
+
+
+LX_Static_Image::~LX_Static_Image() {}
 
 };
