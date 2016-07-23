@@ -225,6 +225,54 @@ bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
 }
 
 
+void LX_Window::drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q)
+{
+    SDL_RenderDrawLine(_renderer,p.x,p.y,q.x,q.y);
+}
+
+
+void LX_Window::drawSegments(const LX_Physics::LX_Point * p, const int count)
+{
+    SDL_RenderDrawLines(_renderer,(const SDL_Point*) p,count);
+}
+
+
+void LX_Window::drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+{
+    int vx = static_cast<int>(v.vx);
+    int vy = static_cast<int>(v.vy);
+    drawSegment(p,LX_Physics::LX_Point(p.x + vx, p.y + vy));
+    drawSegment(p,LX_Physics::LX_Point(p.x - vx, p.y - vy));
+}
+
+
+void LX_Window::drawRect(const LX_AABB& box)
+{
+    SDL_RenderDrawRect(_renderer,&box);
+}
+
+
+void LX_Window::drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+{
+    int w = static_cast<int>(v.vx < 0 ? -v.vx : v.vx);
+    int h = static_cast<int>(v.vy < 0 ? -v.vy : v.vy);
+    const LX_AABB box = {p.x,p.y,w,h};
+    drawRect(box);
+}
+
+
+void LX_Window::setDrawColor(const SDL_Color& color)
+{
+    SDL_SetRenderDrawColor(_renderer,color.r,color.g,color.b,color.a);
+}
+
+
+void LX_Window::setDrawBlendMode(SDL_BlendMode mode)
+{
+    SDL_SetRenderDrawBlendMode(_renderer,mode);
+}
+
+
 void LX_Window::setTitle(std::string title)
 {
     SDL_SetWindowTitle(_window,title.c_str());
@@ -310,7 +358,11 @@ void LX_Window::clearSurface_(void)
 */
 void LX_Window::clearRenderer_(void)
 {
+    Uint8 r,g,b,a;
+    SDL_GetRenderDrawColor(_renderer,&r,&g,&b,&a);
+    SDL_SetRenderDrawColor(_renderer,0,0,0,255);
     SDL_RenderClear(_renderer);
+    SDL_SetRenderDrawColor(_renderer,r,g,b,a);
 }
 
 

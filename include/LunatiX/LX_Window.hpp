@@ -24,6 +24,8 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Image.hpp>
 #include <LunatiX/LX_TrueTypeFont.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_video.h>
 
@@ -136,13 +138,13 @@ class LX_Window
     friend class LX_Graphics::LX_AnimatedSprite;
     friend class LX_TrueTypeFont::LX_Font;
 
-    SDL_Window *_window;         /* The internal window structure  */
-    SDL_Renderer *_renderer;     /* The main renderer              */
-    SDL_GLContext _glcontext;
+    SDL_Window *_window;        /* The internal window structure     */
+    SDL_Renderer *_renderer;    /* The main renderer                 */
+    SDL_GLContext _glcontext;   /* The context (only used in OpenGL) */
 
-    int _original_width;         /* The width of the window        */
-    int _original_height;        /* The height of the window       */
-    bool _render_method;         /* Use Surface or Rendering       */
+    int _original_width;        /* The width of the window           */
+    int _original_height;       /* The height of the window          */
+    bool _render_method;        /* Use Surface or Rendering          */
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
@@ -247,6 +249,16 @@ public :
     */
     bool putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
                              const double angle);
+
+
+    void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q);
+    void drawSegments(const LX_Physics::LX_Point * p, const int count);
+    void drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    void drawRect(const LX_AABB& box);
+    void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+
+    void setDrawColor(const SDL_Color& color);
+    void setDrawBlendMode(SDL_BlendMode mode);
 
     /**
     *   @fn void setTitle(std::string title)
