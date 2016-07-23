@@ -77,21 +77,21 @@ public:
 };
 
 
-class LX_Static_Image: public LX_Image
+class LX_Sprite: public LX_Image
 {
 
 public:
 
-    LX_Static_Image(const std::string filename, LX_Win::LX_Window& w,
+    LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
                     Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_Static_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                     Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_Static_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+    LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual ~LX_Static_Image();
+    virtual ~LX_Sprite();
 };
 
 

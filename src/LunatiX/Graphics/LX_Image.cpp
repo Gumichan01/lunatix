@@ -133,24 +133,24 @@ LX_Image::~LX_Image()
 }
 
 
-/* LX_Static_Image */
+/* LX_Sprite */
 
-LX_Static_Image::LX_Static_Image(const std::string filename, LX_Win::LX_Window& w,
+LX_Sprite::LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
                                  Uint32 format)
     : LX_Image(filename,w,format) {}
 
 
-LX_Static_Image::LX_Static_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                                  Uint32 format)
     : LX_Image(filename,w,format) {}
 
 
-LX_Static_Image::LX_Static_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+LX_Sprite::LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                                  Uint32 format)
     : LX_Image(buffer,w,format) {}
 
 
-LX_Static_Image::~LX_Static_Image() {}
+LX_Sprite::~LX_Sprite() {}
 
 
 /* LX_Surface */

@@ -261,12 +261,12 @@ void test_image(LX_Win::LX_Window *win)
     std::string mname = "data/01.ogg";
     UTF8string u8name("data/bullet.png");
 
-    LX_Log::log("|> LX_Static_Image");
+    LX_Log::log("|> LX_Sprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
-        LX_Graphics::LX_Static_Image img(u8name,*win);
+        LX_Graphics::LX_Sprite img(u8name,*win);
 
         if(img.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
@@ -277,7 +277,7 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a image file using the file buffer");
         LX_FileIO::LX_FileBuffer b(name);
-        LX_Graphics::LX_Static_Image img(b,*win);
+        LX_Graphics::LX_Sprite img(b,*win);
 
         if(img.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from memory");
@@ -288,7 +288,7 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
         LX_FileIO::LX_FileBuffer b(mname);
-        LX_Graphics::LX_Static_Image img(b,*win);
+        LX_Graphics::LX_Sprite img(b,*win);
 
         if(!img.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - failure expected");
@@ -356,7 +356,7 @@ void test_image(LX_Win::LX_Window *win)
 
     // Display a bullet
     {
-        LX_Graphics::LX_Static_Image img(name,*win);
+        LX_Graphics::LX_Sprite img(name,*win);
         LX_AABB box = {64,64,256,128};
 
         if(img.isOpen())
@@ -364,7 +364,7 @@ void test_image(LX_Win::LX_Window *win)
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
 
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Static_Image example");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Sprite example");
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Draw the image (angle: 0 → 360)");
         for(int i = 0; i < 361; i++)
         {
