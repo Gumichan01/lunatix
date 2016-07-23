@@ -11,12 +11,12 @@ using namespace LX_Graphics;
 
 void test_window1(LX_Win::LX_Window *win);
 void test_window2(void);
-void test_surface(void);
 void test_rendering(LX_Win::LX_Window *win);
 void test_image(LX_Win::LX_Window *win);
 void test_winManager(LX_Win::LX_Window *win);
 void test_winInfo(LX_Win::LX_Window *win);
 void test_opengl();
+//void test_drawing(LX_Win::LX_Window *win);
 
 string winInfoToString(LX_Win::LX_WindowInfo &winfo);
 bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2);
@@ -43,17 +43,15 @@ int main(int argc, char **argv)
     w = win;
 
     test_winInfo(win);
+    test_opengl();
     test_window1(w);
     test_window2();
-    test_surface();
+    test_winManager(w);
     test_rendering(w);
     test_image(w);
-    test_winManager(w);
-    test_opengl();
-
     delete win;
-    LX_Quit();
 
+    LX_Quit();
     LX_Log::log(" ==== END Window ==== ");
     return EXIT_SUCCESS;
 }
@@ -116,79 +114,6 @@ void test_window2(void)
 }
 
 
-void test_surface(void)
-{
-    const int w = 512;
-    const int h = 256;
-
-    bool screen_ok;
-    LX_Win::LX_WindowInfo wi;
-    LX_Win::LX_initWindowInfo(wi);
-    wi.title = "Hello #3";
-    wi.x = 448;
-    wi.y = 128;
-    wi.w = w;
-    wi.h = h;
-    wi.mode = LX_WINDOW_SURFACE;
-    wi.flag = SDL_WINDOW_SHOWN;
-    LX_Win::LX_Window win3(wi);
-    std::string name = "data/bullet.png";
-    SDL_Surface *sf = nullptr;
-    SDL_Rect pos = {256,256,256,128};
-
-    cout << " = TEST 3 window with Surface = " << endl;
-
-    if(win3.getWidth() != w)
-        cerr << "FAILURE - width ; expected : " << w
-             << "; got: " << win3.getWidth() << endl;
-    else
-        cout << "SUCCESS - width " << w << endl;
-
-    if(win3.getHeight() != h)
-        cerr << "FAILURE - height ; expected : " << h
-             << "; got: " << win3.getHeight() << endl;
-    else
-        cout << "SUCCESS - height " << h << endl;
-
-    // Load the surface and test its validity
-    cout << "INFO - load a surface." << endl;
-    sf = loadSurface(name.c_str());
-
-    if(sf == nullptr)
-        cerr << "FAILURE - failed to load the surface " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - the surface was loaded with success" << endl;
-
-    win3.clearWindow();
-
-    // Is the surface put on the window
-    cout << "INFO - put the surface on the screen" << endl;
-    if(win3.putSurface(sf,nullptr,&pos) == false)
-        cerr << "FAILURE - failed to put the surface " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - surface on the window" << endl;
-
-    // Update the window
-    SDL_Delay(1000);
-    win3.update();
-
-    // take a screenshot
-    cout << "INFO - Screenshot" << endl;
-    screen_ok = win3.screenshot("win-surface.png");
-
-    if(screen_ok == false)
-        cerr << "FAILURE - failed to take a screenshot of the surface "
-             << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - screenshot token from a surface" << endl;
-
-    SDL_Delay(1000);
-    win3.clearWindow();
-    SDL_FreeSurface(sf);
-    LX_Log::log(" = END TEST = ");
-}
-
-
 void test_rendering(LX_Win::LX_Window *win)
 {
     bool screen_ok;
@@ -222,6 +147,7 @@ void test_rendering(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the texture was loaded with success" << endl;
 
+    win->clearWindow();
     if(win->putTexture(st,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
@@ -262,7 +188,7 @@ void test_image(LX_Win::LX_Window *win)
     std::string mname = "data/01.ogg";
     UTF8string u8name("data/bullet.png");
 
-    /*LX_Log::log("|> LX_Sprite");
+    LX_Log::log("|> LX_Sprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
 
     {
@@ -440,7 +366,7 @@ void test_image(LX_Win::LX_Window *win)
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
-    }*/
+    }
 
     LX_Log::log("|> LX_AnimatedSprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
@@ -510,6 +436,7 @@ void test_image(LX_Win::LX_Window *win)
             win->update();
             SDL_Delay(16);
         }
+        win->clearWindow();
     }
 
     LX_Log::log(" = END TEST= ");
