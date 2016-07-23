@@ -26,6 +26,7 @@
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_timer.h>
 
 
 namespace LX_Graphics
@@ -157,6 +158,60 @@ void LX_Sprite::draw(LX_AABB * box, const double angle)
 
 
 LX_Sprite::~LX_Sprite() {}
+
+
+/* LX_AnimatedSprite */
+
+LX_AnimatedSprite::LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
+                                    std::vector<LX_AABB>& coord, Uint32 delay,
+                                    Uint32 format)
+    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
+    _btime(0), _iteration(0), _started(false) {}
+
+
+LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
+                                    std::vector<LX_AABB>& coord, Uint32 delay,
+                                    Uint32 format)
+    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
+    _btime(0), _iteration(0), _started(false) {}
+
+
+LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer,
+                                     LX_Win::LX_Window& w,
+                                     std::vector<LX_AABB>& coord, Uint32 delay,
+                                     Uint32 format)
+    : LX_Sprite(buffer,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
+    _btime(0), _iteration(0), _started(false) {}
+
+
+bool LX_AnimatedSprite::isOpen() const
+{
+    return LX_Image::isOpen();
+}
+
+
+void LX_AnimatedSprite::draw(LX_AABB * box)
+{
+    if(!_started)
+    {
+        _started = true;
+        _btime = SDL_GetTicks();
+    }
+    else if(SDL_GetTicks() - _btime > _delay)
+    {
+        _btime = SDL_GetTicks();
+
+        if(_iteration == _SZ - 1)
+            _iteration = 0;
+        else
+            _iteration += 1;
+    }
+
+    SDL_RenderCopy(_win.getRenderer(),_texture,&_coordinates[_iteration],box);
+}
+
+
+LX_AnimatedSprite::~LX_AnimatedSprite() {}
 
 
 /* LX_Surface */

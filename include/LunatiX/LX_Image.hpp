@@ -98,6 +98,36 @@ public:
 };
 
 
+class LX_AnimatedSprite: protected LX_Sprite
+{
+    std::vector<LX_AABB>& _coordinates;
+    const size_t _SZ;
+    Uint32 _delay;
+    Uint32 _btime;
+    size_t _iteration;
+    bool _started;
+
+public:
+
+    LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
+                      std::vector<LX_AABB>& coord, Uint32 delay,
+                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
+                      std::vector<LX_AABB>& coord, Uint32 delay,
+                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+                      std::vector<LX_AABB>& coord, Uint32 delay,
+                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual bool isOpen() const;
+    virtual void draw(LX_AABB * box);
+
+    virtual ~LX_AnimatedSprite();
+};
+
+
 class LX_Surface: private LX_Image
 {
     friend class LX_Streaming_Image;
@@ -137,6 +167,5 @@ public:
 };
 
 };
-
 
 #endif  // LX_IMAGE_H_INCLUDED

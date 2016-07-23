@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
 #include <LunatiX/Lunatix_engine.hpp>
 #include <LunatiX/LX_Image.hpp>
 
@@ -261,7 +262,7 @@ void test_image(LX_Win::LX_Window *win)
     std::string mname = "data/01.ogg";
     UTF8string u8name("data/bullet.png");
 
-    LX_Log::log("|> LX_Sprite");
+    /*LX_Log::log("|> LX_Sprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
 
     {
@@ -439,6 +440,76 @@ void test_image(LX_Win::LX_Window *win)
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
+    }*/
+
+    LX_Log::log("|> LX_AnimatedSprite");
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+    std::string sp_str = "data/boss.png";
+    UTF8string u8_str(sp_str);
+    std::vector<LX_AABB> c;
+
+    {
+        LX_Graphics::LX_AnimatedSprite img(u8_str,*win,c,0);
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - animated sprite from file: should be loaded");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a sprite sheet file using the file buffer");
+        LX_FileIO::LX_FileBuffer b(sp_str);
+        LX_Graphics::LX_AnimatedSprite img(b,*win,c,0);
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded from memory");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - animated sprite from memory: should be loaded");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
+        LX_FileIO::LX_FileBuffer b(mname);
+        LX_Graphics::LX_AnimatedSprite img(b,*win,c,0);
+
+        if(!img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite failure expected");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
+    }
+
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Animation");
+        LX_AABB rect = {256, 64,211,448};
+        Uint32 delay = 125;
+        std::vector<LX_AABB> coordinates;
+        coordinates.push_back({212,0,211,448});
+        coordinates.push_back({424,0,211,448});
+        coordinates.push_back({636,0,211,448});
+        coordinates.push_back({0,449,211,448});
+        coordinates.push_back({212,449,211,448});
+        coordinates.push_back({424,449,211,448});
+        coordinates.push_back({636,449,211,448});
+        coordinates.push_back({848,0,211,448});
+        coordinates.push_back({1060,0,211,448});
+        coordinates.push_back({1272,0,211,448});
+        coordinates.push_back({848,449,211,448});
+        coordinates.push_back({1484,0,211,448});
+        coordinates.push_back({1060,449,211,448});
+        coordinates.push_back({1272,449,211,448});
+        coordinates.push_back({1484,449,211,448});
+
+        LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay);
+
+        for(int i = 0; i < 448; i++)
+        {
+            win->clearWindow();
+            sprite.draw(&rect);
+            win->update();
+            SDL_Delay(16);
+        }
     }
 
     LX_Log::log(" = END TEST= ");
