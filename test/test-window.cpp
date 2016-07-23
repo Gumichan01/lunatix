@@ -16,7 +16,7 @@ void test_image(LX_Win::LX_Window *win);
 void test_winManager(LX_Win::LX_Window *win);
 void test_winInfo(LX_Win::LX_Window *win);
 void test_opengl();
-//void test_drawing(LX_Win::LX_Window *win);
+void test_drawing(LX_Win::LX_Window *win);
 
 string winInfoToString(LX_Win::LX_WindowInfo &winfo);
 bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2);
@@ -49,6 +49,7 @@ int main(int argc, char **argv)
     test_winManager(w);
     test_rendering(w);
     test_image(w);
+    test_drawing(w);
     delete win;
 
     LX_Quit();
@@ -560,6 +561,70 @@ void test_opengl()
         SDL_Delay(16);
     }
 
+    LX_Log::log(" = END TEST = ");
+}
+
+
+void test_drawing(LX_Win::LX_Window *win)
+{
+    LX_Log::log(" = TEST draw = ");
+    LX_Log::log("Draw a segment with M(32,32) and N(64,448)");
+    LX_Physics::LX_Point M(32,32);
+    LX_Physics::LX_Point N(64,448);
+    LX_Physics::LX_Point O(512,256);
+    LX_Physics::LX_Vector2D u(256.0f,128.0f);
+    LX_Physics::LX_Vector2D v(2048.0f,0.0f);
+    LX_AABB b = {128,128,512,100};
+
+    win->clearWindow();
+    win->drawSegment(M,N);
+    win->update();
+    SDL_Delay(1000);
+
+    LX_Log::log("Draw a line with N(64,448) and u⃗(256.0,128.0)");
+    win->clearWindow();
+    win->drawLine(N,u);
+    win->update();
+    SDL_Delay(1000);
+
+    SDL_Color c = {255,0,0,255};
+    win->setDrawColor(c);
+    LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
+    LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");
+    win->clearWindow();
+    for(float j = 0.0f; j < 256; j++)
+    {
+        win->drawLine(O,v);
+        v.vy += j + 64;
+        win->update();
+        SDL_Delay(16);
+    }
+
+    SDL_Delay(2048);
+    LX_Log::log("Draw multiple lines using several points");
+    LX_Physics::LX_Point points[8] = {{64,64},{128,32},{256,64},{768,512},
+                                      {512,256},{16,448},{32,512},{256,42}};
+
+    c = {255,255,255,255};
+    win->setDrawColor(c);
+    win->clearWindow();
+    win->drawSegments(points,8);
+    win->update();
+    SDL_Delay(2048);
+
+    LX_Log::log("Draw a rectangle using a bounding box");
+    win->clearWindow();
+    win->drawRect(b);
+    win->update();
+    SDL_Delay(1512);
+
+    LX_Log::log("Draw a rectangle using a point and a vector : N and u⃗");
+    win->clearWindow();
+    win->drawRect(N,u);
+    win->update();
+    SDL_Delay(1512);
+
+    win->clearWindow();
     LX_Log::log(" = END TEST = ");
 }
 
