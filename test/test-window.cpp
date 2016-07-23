@@ -15,6 +15,7 @@ void test_rendering(LX_Win::LX_Window *win);
 void test_image(LX_Win::LX_Window *win);
 void test_winManager(LX_Win::LX_Window *win);
 void test_winInfo(LX_Win::LX_Window *win);
+void test_opengl();
 
 string winInfoToString(LX_Win::LX_WindowInfo &winfo);
 bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2);
@@ -47,6 +48,7 @@ int main(int argc, char **argv)
     test_rendering(w);
     test_image(w);
     test_winManager(w);
+    test_opengl();
 
     delete win;
     LX_Quit();
@@ -470,6 +472,7 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the texture was loaded with success" << endl;
 
+    LX_Win::LX_WindowManager::getInstance()->clearWindows();
     if(win != nullptr && win->putTexture(st,nullptr,&pos) == false)
         cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
     else
@@ -494,7 +497,7 @@ void test_winManager(LX_Win::LX_Window *win)
 
 void test_winInfo(LX_Win::LX_Window *win)
 {
-    cout << " = TEST window information = " << endl;
+    LX_Log::log(" = TEST window information = ");
     LX_Win::LX_WindowInfo info_g;
     cout << "INFO - get information" << endl;
     win->getInfo(info_g);
@@ -509,6 +512,59 @@ void test_winInfo(LX_Win::LX_Window *win)
 
     LX_Log::log(" = END TEST = ");
 }
+
+
+void test_opengl()
+{
+    LX_Log::log(" = TEST OpenGL = ");
+    LX_Win::LX_WindowInfo winfo;
+    LX_Win::LX_initWindowInfo(winfo);
+    info.title = "OpenGL window";
+    info.flag = SDL_WINDOW_OPENGL;
+
+    LX_Win::LX_Window w(info);
+
+    // Red color
+    LX_Log::log("Red color");
+    w.clearWindow();
+    glClearColor(0.0, 0.0, 1.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    w.update();
+    SDL_Delay(2000);
+
+    LX_Log::log("Move colors: blue → red");
+    for(float i = 1.0f; i > -0.01f; i=i-0.01f)
+    {
+        w.clearWindow();
+        glClearColor(1.0f - i, 0.0f, i, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        w.update();
+        SDL_Delay(16);
+    }
+
+    LX_Log::log("Move colors: red → green");
+    for(float i = 1.0f; i > -0.01f; i=i-0.01f)
+    {
+        w.clearWindow();
+        glClearColor(i, 1.0f - i, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        w.update();
+        SDL_Delay(16);
+    }
+
+    LX_Log::log("Move colors: green → black");
+    for(float i = 1.0f; i > -0.01f; i=i-0.01f)
+    {
+        w.clearWindow();
+        glClearColor(0.0, i, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        w.update();
+        SDL_Delay(16);
+    }
+
+    LX_Log::log(" = END TEST = ");
+}
+
 
 string winInfoToString(LX_Win::LX_WindowInfo &winfo)
 {
