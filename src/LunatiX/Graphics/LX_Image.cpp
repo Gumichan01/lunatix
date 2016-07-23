@@ -191,7 +191,7 @@ LX_Surface::~LX_Surface()
 /* LX_Streaming_Image */
 
 LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
-    : LX_Image(w,format), _screen(nullptr)
+    : LX_Image(w,format), _screen(nullptr), _update(false)
 {
     int bpp, width, height;
     Uint32 r,g,b,a;
@@ -235,13 +235,22 @@ bool LX_Streaming_Image::isOpen() const
 
 bool LX_Streaming_Image::blit(LX_Surface& s, LX_AABB& rect)
 {
-    return SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0;
+    bool b = (SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0);
+
+    if(!_update)
+        _update = b;
+
+    return b;
 }
 
 void LX_Streaming_Image::update()
 {
-    SDL_UpdateTexture(_texture,nullptr,_screen->pixels,_screen->pitch);
-    SDL_FillRect(_screen,nullptr,SDL_MapRGB(_screen->format,0,0,0));
+    if(_update)
+    {
+        SDL_UpdateTexture(_texture,nullptr,_screen->pixels,_screen->pitch);
+        SDL_FillRect(_screen,nullptr,SDL_MapRGBA(_screen->format,0,0,0,0));
+        _update = false;
+    }
 }
 
 

@@ -120,6 +120,7 @@ public:
 class LX_Streaming_Image: public LX_Image
 {
     SDL_Surface * _screen;
+    bool _update;
 
 public:
 
