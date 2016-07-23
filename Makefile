@@ -129,7 +129,7 @@ endif
 
 
 # Linking flags
-LFLAGS=`pkg-config --libs sdl2 SDL2_image SDL2_mixer SDL2_ttf`
+LFLAGS=`pkg-config --libs sdl2 SDL2_image SDL2_mixer SDL2_ttf gl`
 
 DOXY_FILE=dox
 

@@ -130,6 +130,7 @@ class LX_Window
 {
     SDL_Window *_window;         /* The internal window structure  */
     SDL_Renderer *_renderer;     /* The main renderer              */
+    SDL_GLContext _glcontext;
 
     int _original_width;         /* The width of the window        */
     int _original_height;        /* The height of the window       */
@@ -278,12 +279,14 @@ public :
     /**
     *   @fn void update(void)
     *   Updates the window's display
+    *   @note This function can be used with OpenGL
     */
     void update(void);
 
     /**
     *   @fn void clearWindow(void)
     *   Clear the display of the current window
+    *   @note This function can be used with OpenGL
     */
     void clearWindow(void);
 

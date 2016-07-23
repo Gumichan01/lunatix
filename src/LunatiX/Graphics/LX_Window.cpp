@@ -24,6 +24,7 @@
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <GL/glu.h>
 
 #define LX_ARGB_DEPTH 32                            /* Pixel depth in bits */
 
@@ -127,7 +128,7 @@ LX_WindowException::~LX_WindowException() noexcept {}
 /* LX_Window */
 
 LX_Window::LX_Window(LX_WindowInfo &info)
-    : _window(nullptr), _renderer(nullptr),
+    : _window(nullptr), _renderer(nullptr), _glcontext(nullptr),
       _original_width(info.w), _original_height(info.h), _render_method(false)
 {
     createWindow_(info.title,info.x,info.y,info.w,info.h,info.mode,
@@ -147,6 +148,8 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
     if(_window == nullptr)
         throw LX_WindowException(LX_GetError());
 
+    if((flag&SDL_WINDOW_OPENGL) == SDL_WINDOW_OPENGL)
+        _glcontext = SDL_GL_CreateContext(_window);
     if(mode == LX_WINDOW_RENDERING)
         createRendering_(accel);
     else
@@ -282,7 +285,9 @@ void LX_Window::updateWindow_(void)
 
 void LX_Window::update(void)
 {
-    if(_render_method)
+    if(_glcontext != nullptr)
+        SDL_GL_SwapWindow(_window);
+    else if(_render_method)
         updateRenderer_();
     else
         updateWindow_();
@@ -310,7 +315,12 @@ void LX_Window::clearRenderer_(void)
 
 void LX_Window::clearWindow(void)
 {
-    if(_render_method)
+    if(_glcontext)
+    {
+        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+    else if(_render_method)
         clearRenderer_();
     else
         clearSurface_();
@@ -427,6 +437,7 @@ int LX_Window::getHeight(void)
 
 LX_Window::~LX_Window()
 {
+    SDL_GL_DeleteContext(_glcontext);
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
 }
