@@ -258,6 +258,8 @@ public :
     void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
     void drawCircle(const LX_Physics::LX_Circle& c);
 
+    void fillCircle(const LX_Physics::LX_Circle& c);
+
     void setDrawColor(const SDL_Color& color);
     void setDrawBlendMode(SDL_BlendMode mode);
 

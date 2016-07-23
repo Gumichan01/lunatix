@@ -292,6 +292,20 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 }
 
 
+void LX_Window::fillCircle(const LX_Physics::LX_Circle& c)
+{
+    const unsigned int R = c.radius;
+    LX_Physics::LX_Circle tmp(c);
+    tmp.radius = 0;
+
+    for(unsigned int i = 0; i <= R; i++)
+    {
+        drawCircle(tmp);
+        tmp.radius += 1;
+    }
+}
+
+
 void LX_Window::setDrawColor(const SDL_Color& color)
 {
     SDL_SetRenderDrawColor(_renderer,color.r,color.g,color.b,color.a);
