@@ -271,7 +271,7 @@ SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
         return texture;
 
     // Get the texture
-    texture = SDL_CreateTextureFromSurface(win->getRenderer(),surface);
+    texture = SDL_CreateTextureFromSurface(win->_renderer,surface);
     SDL_FreeSurface(surface);
 
     return texture;

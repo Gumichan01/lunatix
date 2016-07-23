@@ -57,7 +57,7 @@ LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
     : _texture(nullptr), _win(w), _format(format)
 {
     SDL_Surface *tmp = loadSurface_(buffer);
-    _texture = SDL_CreateTextureFromSurface(w.getRenderer(),tmp);
+    _texture = SDL_CreateTextureFromSurface(w._renderer,tmp);
     SDL_FreeSurface(tmp);
 }
 
@@ -97,7 +97,7 @@ SDL_Texture * LX_Image::loadTexture_(const std::string& filename, LX_Win::LX_Win
     if(tmpS == nullptr)
         return nullptr;
 
-    tmpT = SDL_CreateTextureFromSurface(w.getRenderer(),tmpS);
+    tmpT = SDL_CreateTextureFromSurface(w._renderer,tmpS);
     SDL_FreeSurface(tmpS);
     return tmpT;
 }
@@ -111,7 +111,7 @@ bool LX_Image::isOpen() const
 
 void LX_Image::draw()
 {
-    SDL_RenderCopy(_win.getRenderer(),_texture,nullptr,nullptr);
+    SDL_RenderCopy(_win._renderer,_texture,nullptr,nullptr);
 }
 
 
@@ -152,7 +152,7 @@ void LX_Sprite::draw(LX_AABB * box)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle)
 {
-    SDL_RenderCopyEx(_win.getRenderer(),_texture,nullptr,box,(-angle),nullptr,
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,(-angle),nullptr,
                      SDL_FLIP_NONE);
 }
 
@@ -207,7 +207,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box)
             _iteration += 1;
     }
 
-    SDL_RenderCopy(_win.getRenderer(),_texture,&_coordinates[_iteration],box);
+    SDL_RenderCopy(_win._renderer,_texture,&_coordinates[_iteration],box);
 }
 
 
@@ -282,7 +282,7 @@ LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
     else
     {
         _screen  = SDL_CreateRGBSurface(0,width,height,bpp,r,g,b,a);
-        _texture = SDL_CreateTexture(_win.getRenderer(),_format,
+        _texture = SDL_CreateTexture(_win._renderer,_format,
                                      SDL_TEXTUREACCESS_STREAMING,width,height);
     }
 }

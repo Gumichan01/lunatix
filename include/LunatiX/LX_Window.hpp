@@ -22,6 +22,8 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_TrueTypeFont.hpp>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_video.h>
 
@@ -128,6 +130,12 @@ public :
 */
 class LX_Window
 {
+    friend class LX_Graphics::LX_Image;
+    friend class LX_Graphics::LX_Sprite;
+    friend class LX_Graphics::LX_Streaming_Image;
+    friend class LX_Graphics::LX_AnimatedSprite;
+    friend class LX_TrueTypeFont::LX_Font;
+
     SDL_Window *_window;         /* The internal window structure  */
     SDL_Renderer *_renderer;     /* The main renderer              */
     SDL_GLContext _glcontext;

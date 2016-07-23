@@ -17,13 +17,14 @@
 *
 */
 
+#include <LunatiX/LX_Window.hpp>
+#include <LunatiX/LX_Config.hpp>
+#include <LunatiX/LX_Error.hpp>
+
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_endian.h>
 
-#include <LunatiX/LX_Config.hpp>
-#include <LunatiX/LX_Window.hpp>
-#include <LunatiX/LX_Error.hpp>
 #include <GL/glu.h>
 
 #define LX_ARGB_DEPTH 32                            /* Pixel depth in bits */
