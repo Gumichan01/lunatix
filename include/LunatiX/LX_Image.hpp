@@ -24,6 +24,7 @@
 #include <LunatiX/LX_AABB.hpp>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_video.h>
+#include <vector>
 
 struct SDL_Texture;
 
@@ -70,8 +71,6 @@ public:
 
     virtual bool isOpen() const;
     virtual void draw();
-    virtual void draw(LX_AABB * box);
-    virtual void draw(LX_AABB * box, const double angle);
 
     virtual ~LX_Image();
 };
@@ -90,6 +89,10 @@ public:
 
     LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual void draw();
+    virtual void draw(LX_AABB * box);
+    virtual void draw(LX_AABB * box, const double angle);
 
     virtual ~LX_Sprite();
 };
@@ -134,5 +137,6 @@ public:
 };
 
 };
+
 
 #endif  // LX_IMAGE_H_INCLUDED

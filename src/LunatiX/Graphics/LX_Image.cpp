@@ -110,20 +110,7 @@ bool LX_Image::isOpen() const
 
 void LX_Image::draw()
 {
-    draw(nullptr);
-}
-
-
-void LX_Image::draw(LX_AABB * box)
-{
-    draw(box,0.0);
-}
-
-
-void LX_Image::draw(LX_AABB * box, const double angle)
-{
-    SDL_RenderCopyEx(_win.getRenderer(),_texture,nullptr,box,(-angle),nullptr,
-                     SDL_FLIP_NONE);
+    SDL_RenderCopy(_win.getRenderer(),_texture,nullptr,nullptr);
 }
 
 
@@ -148,6 +135,25 @@ LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
 LX_Sprite::LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                                  Uint32 format)
     : LX_Image(buffer,w,format) {}
+
+
+void LX_Sprite::draw()
+{
+    LX_Image::draw();
+}
+
+
+void LX_Sprite::draw(LX_AABB * box)
+{
+    draw(box,0.0);
+}
+
+
+void LX_Sprite::draw(LX_AABB * box, const double angle)
+{
+    SDL_RenderCopyEx(_win.getRenderer(),_texture,nullptr,box,(-angle),nullptr,
+                     SDL_FLIP_NONE);
+}
 
 
 LX_Sprite::~LX_Sprite() {}
