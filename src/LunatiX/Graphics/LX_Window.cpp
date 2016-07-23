@@ -261,6 +261,37 @@ void LX_Window::drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vect
 }
 
 
+void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
+{
+    const int X = c.center.x;
+    const int Y = c.center.x;
+    int offset_x = static_cast<int>(c.radius);
+    int offset_y = 0;
+    int err_margin = 0;
+
+    while(offset_x >= offset_y)
+    {
+        SDL_RenderDrawPoint(_renderer, X + offset_x, Y + offset_y);
+        SDL_RenderDrawPoint(_renderer, X + offset_y, Y + offset_x);
+        SDL_RenderDrawPoint(_renderer, X - offset_y, Y + offset_x);
+        SDL_RenderDrawPoint(_renderer, X - offset_x, Y + offset_y);
+        SDL_RenderDrawPoint(_renderer, X - offset_x, Y - offset_y);
+        SDL_RenderDrawPoint(_renderer, X - offset_y, Y - offset_x);
+        SDL_RenderDrawPoint(_renderer, X + offset_y, Y - offset_x);
+        SDL_RenderDrawPoint(_renderer, X + offset_x, Y - offset_y);
+
+        offset_y += 1;
+        err_margin += 1 +2*offset_y;
+
+        if(2*(err_margin - offset_x) + 1 > 0)
+        {
+            offset_x -= 1;
+            err_margin += 1 - 2*offset_x;
+        }
+    }
+}
+
+
 void LX_Window::setDrawColor(const SDL_Color& color)
 {
     SDL_SetRenderDrawColor(_renderer,color.r,color.g,color.b,color.a);

@@ -623,8 +623,15 @@ void test_drawing(LX_Win::LX_Window *win)
     win->drawRect(N,u);
     win->update();
     SDL_Delay(1512);
-
     win->clearWindow();
+
+    LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(256,256),256);
+    LX_Log::log("Draw a circle");
+    win->clearWindow();
+    win->drawCircle(C);
+    win->update();
+    SDL_Delay(2048);
+
     LX_Log::log(" = END TEST = ");
 }
 
