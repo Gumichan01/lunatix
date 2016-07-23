@@ -264,7 +264,7 @@ void LX_Window::drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vect
 void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 {
     const int X = c.center.x;
-    const int Y = c.center.x;
+    const int Y = c.center.y;
     int offset_x = static_cast<int>(c.radius);
     int offset_y = 0;
     int err_margin = 0;
