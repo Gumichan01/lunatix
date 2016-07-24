@@ -263,30 +263,39 @@ void LX_Window::drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vect
 
 void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 {
-    const int X = c.center.x;
-    const int Y = c.center.y;
-    int offset_x = static_cast<int>(c.radius);
-    int offset_y = 0;
-    int err_margin = 0;
+    const int x_center = c.center.x;
+    const int y_center = c.center.y;
+    const int r = static_cast<int>(c.radius);
+    int x = 0;
+    int y = r;
+    int d = r - 1;
 
-    while(offset_x >= offset_y)
+    while(y >= x)
     {
-        SDL_RenderDrawPoint(_renderer, X + offset_x, Y + offset_y);
-        SDL_RenderDrawPoint(_renderer, X + offset_y, Y + offset_x);
-        SDL_RenderDrawPoint(_renderer, X - offset_y, Y + offset_x);
-        SDL_RenderDrawPoint(_renderer, X - offset_x, Y + offset_y);
-        SDL_RenderDrawPoint(_renderer, X - offset_x, Y - offset_y);
-        SDL_RenderDrawPoint(_renderer, X - offset_y, Y - offset_x);
-        SDL_RenderDrawPoint(_renderer, X + offset_y, Y - offset_x);
-        SDL_RenderDrawPoint(_renderer, X + offset_x, Y - offset_y);
+        SDL_RenderDrawPoint(_renderer, x_center + x, y_center + y);
+        SDL_RenderDrawPoint(_renderer, x_center + y, y_center + x);
+        SDL_RenderDrawPoint(_renderer, x_center - x, y_center + y);
+        SDL_RenderDrawPoint(_renderer, x_center - y, y_center + x);
+        SDL_RenderDrawPoint(_renderer, x_center + x, y_center - y);
+        SDL_RenderDrawPoint(_renderer, x_center + y, y_center - x);
+        SDL_RenderDrawPoint(_renderer, x_center - x, y_center - y);
+        SDL_RenderDrawPoint(_renderer, x_center - y, y_center - x);
 
-        offset_y += 1;
-        err_margin += 1 +2*offset_y;
-
-        if(2*(err_margin - offset_x) + 1 > 0)
+        if(d >= 2*x)
         {
-            offset_x -= 1;
-            err_margin += 1 - 2*offset_x;
+            d -= 2*x + 1;
+            x +=1;
+        }
+        else if(d < 2*(r-y))
+        {
+            d += 2*y - 1;
+            y -= 1;
+        }
+        else
+        {
+            d += 2*(y - x - 1);
+            y -= 1;
+            x += 1;
         }
     }
 }
