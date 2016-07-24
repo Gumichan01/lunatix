@@ -62,13 +62,12 @@
 			<Add library="lib\win32\libSDL2_mixer.dll.a" />
 			<Add library="lib\win32\libSDL2_ttf.a" />
 			<Add library="lib\win32\libSDL2_ttf.dll.a" />
-			<Add library="lib\win32\lua5.1.lib" />
-			<Add library="lib\win32\lua51.lib" />
 			<Add directory="lib/win32" />
 		</Linker>
 		<Unit filename="include/LunatiX/LX_AABB.hpp" />
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
+		<Unit filename="include/LunatiX/LX_ConfigLoader.hpp" />
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
@@ -77,6 +76,7 @@
 		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
 		<Unit filename="include/LunatiX/LX_Hitbox.hpp" />
+		<Unit filename="include/LunatiX/LX_Image.hpp" />
 		<Unit filename="include/LunatiX/LX_Library.hpp" />
 		<Unit filename="include/LunatiX/LX_Log.hpp" />
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
@@ -104,9 +104,11 @@
 		<Unit filename="src/LunatiX/FileIO/LX_FileBuffer.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileIO.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Graphics.cpp" />
+		<Unit filename="src/LunatiX/Graphics/LX_Image.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Window.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_WindowManager.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Config.cpp" />
+		<Unit filename="src/LunatiX/Library/LX_ConfigLoader.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Library.cpp" />
 		<Unit filename="src/LunatiX/MSGBox/LX_MessageBox.cpp" />
 		<Unit filename="src/LunatiX/Mixer/LX_Chunk.cpp" />
