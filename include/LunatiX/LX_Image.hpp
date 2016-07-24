@@ -82,13 +82,13 @@ class LX_Sprite: public LX_Image
 public:
 
     LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
-                    Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                    Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
     virtual void draw(LX_AABB * box);

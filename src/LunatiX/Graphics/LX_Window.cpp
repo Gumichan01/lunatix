@@ -133,7 +133,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
       _original_width(info.w), _original_height(info.h), _render_method(false)
 {
     createWindow_(info.title,info.x,info.y,info.w,info.h,info.mode,
-                 info.flag,info.accel);
+                  info.flag,info.accel);
     getInfo(info);
 }
 
@@ -142,7 +142,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 *   Private function that initializes the window according to the configuration
 */
 void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int h,
-                             const Uint32 mode, Uint32 flag, bool accel)
+                              const Uint32 mode, Uint32 flag, bool accel)
 {
     _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 

@@ -53,7 +53,7 @@ LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
 
 
 LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-         Uint32 format)
+                   Uint32 format)
     : _texture(nullptr), _win(w), _format(format)
 {
     SDL_Surface *tmp = loadSurface_(buffer);
@@ -124,17 +124,17 @@ LX_Image::~LX_Image()
 /* LX_Sprite */
 
 LX_Sprite::LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
-                                 Uint32 format)
+                     Uint32 format)
     : LX_Image(filename,w,format) {}
 
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                                 Uint32 format)
+                     Uint32 format)
     : LX_Image(filename,w,format) {}
 
 
 LX_Sprite::LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                                 Uint32 format)
+                     Uint32 format)
     : LX_Image(buffer,w,format) {}
 
 
@@ -163,17 +163,17 @@ LX_Sprite::~LX_Sprite() {}
 /* LX_AnimatedSprite */
 
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-                                    std::vector<LX_AABB>& coord, Uint32 delay,
-                                    Uint32 format)
+                                     std::vector<LX_AABB>& coord, Uint32 delay,
+                                     Uint32 format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-    _btime(0), _iteration(0), _started(false) {}
+      _btime(0), _iteration(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                                    std::vector<LX_AABB>& coord, Uint32 delay,
-                                    Uint32 format)
+                                     std::vector<LX_AABB>& coord, Uint32 delay,
+                                     Uint32 format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-    _btime(0), _iteration(0), _started(false) {}
+      _btime(0), _iteration(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer,
@@ -181,7 +181,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer,
                                      std::vector<LX_AABB>& coord, Uint32 delay,
                                      Uint32 format)
     : LX_Sprite(buffer,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-    _btime(0), _iteration(0), _started(false) {}
+      _btime(0), _iteration(0), _started(false) {}
 
 
 bool LX_AnimatedSprite::isOpen() const
@@ -217,7 +217,7 @@ LX_AnimatedSprite::~LX_AnimatedSprite() {}
 /* LX_Surface */
 
 LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
-                                 Uint32 format)
+                       Uint32 format)
     : LX_Image(w,format), _surface(nullptr)
 {
     _surface = loadSurface_(filename);
@@ -225,12 +225,12 @@ LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
 
 
 LX_Surface::LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
-                                 Uint32 format)
+                       Uint32 format)
     : LX_Surface(filename.utf8_str(),w,format) {}
 
 
 LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                                 Uint32 format)
+                       Uint32 format)
     : LX_Image(w,format), _surface(nullptr)
 {
     _surface = loadSurface_(buffer);

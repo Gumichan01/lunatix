@@ -28,36 +28,36 @@
 
 namespace
 {
-    const float EPSILON =  0.00001f;
+const float EPSILON =  0.00001f;
 
-    /*
-    *   Implementation of a "safe" floating point comparison
-    *
-    *   This implementation is based on Nerdylicious's implementation
-    *   of floating point comparison program
-    *
-    *   https://github.com/Nerdylicious/FloatingPointComparison
-    */
-    bool eq(float x, float y)
+/*
+*   Implementation of a "safe" floating point comparison
+*
+*   This implementation is based on Nerdylicious's implementation
+*   of floating point comparison program
+*
+*   https://github.com/Nerdylicious/FloatingPointComparison
+*/
+bool eq(float x, float y)
+{
+    float abs_x = fabsf(x);
+    float abs_y = fabsf(y);
+    float diff = fabsf(x - y);
+
+    if(x == y)
     {
-        float abs_x = fabsf(x);
-        float abs_y = fabsf(y);
-        float diff = fabsf(x - y);
-
-        if(x == y)
-        {
-            return true;
-        }
-        else if(x == 0.0f || y == 0.0f || diff < std::numeric_limits<float>::min())
-        {
-            return diff < (EPSILON * std::numeric_limits<float>::min());
-        }
-        else
-        {
-            return (diff / std::min((abs_x + abs_y),
-                    std::numeric_limits<float>::max())) < EPSILON;
-        }
+        return true;
     }
+    else if(x == 0.0f || y == 0.0f || diff < std::numeric_limits<float>::min())
+    {
+        return diff < (EPSILON * std::numeric_limits<float>::min());
+    }
+    else
+    {
+        return (diff / std::min((abs_x + abs_y),
+                                std::numeric_limits<float>::max())) < EPSILON;
+    }
+}
 };
 
 namespace LX_Physics

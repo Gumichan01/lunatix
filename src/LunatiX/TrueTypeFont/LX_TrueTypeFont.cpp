@@ -143,7 +143,7 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 *
 */
 SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
-                                unsigned int size,Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+                                 unsigned int size,Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     SDL_Color bg = {r,g,b,a};
     TTF_Font *ttf = nullptr;
@@ -163,17 +163,17 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
     // Select the text to draw
     switch(type)
     {
-        case LX_TTF_SOLID :
-            loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(),_font_color);
-            break;
+    case LX_TTF_SOLID :
+        loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(),_font_color);
+        break;
 
-        case LX_TTF_SHADED :
-            loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),_font_color,bg);
-            break;
+    case LX_TTF_SHADED :
+        loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),_font_color,bg);
+        break;
 
-        case LX_TTF_BLENDED :
-            loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),_font_color);
-            break;
+    case LX_TTF_BLENDED :
+        loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),_font_color);
+        break;
     }
 
     TTF_CloseFont(ttf);

@@ -27,8 +27,8 @@
 
 namespace
 {
-    const std::string ONE("1");
-    const char SHARP = '#';
+const std::string ONE("1");
+const char SHARP = '#';
 };
 
 

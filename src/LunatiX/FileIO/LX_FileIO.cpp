@@ -73,7 +73,7 @@ void LX_File::open_(const Uint32 mode)
     }
     else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
     {
-         _data = SDL_RWFromFile(_name.utf8_str(),"wb");
+        _data = SDL_RWFromFile(_name.utf8_str(),"wb");
     }
     else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
     {

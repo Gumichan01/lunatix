@@ -87,8 +87,8 @@ class LX_Font
     TTF_Font * createInternalFont_(int size);
 
     SDL_Surface * drawText_(LX_TTF_TypeText type, std::string text,
-                           unsigned int size = 0,
-                           Uint8 r = 0, Uint8 g = 0, Uint8 b = 0,Uint8 a = 0);
+                            unsigned int size = 0,
+                            Uint8 r = 0, Uint8 g = 0, Uint8 b = 0,Uint8 a = 0);
 
 public:
 

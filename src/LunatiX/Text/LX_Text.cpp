@@ -74,20 +74,20 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
         {
             switch(ev.type)
             {
-                case SDL_KEYDOWN    :
-                    keyboardInput_(ev);
-                    break;
+            case SDL_KEYDOWN    :
+                keyboardInput_(ev);
+                break;
 
-                case SDL_TEXTINPUT  :
-                    textInput_(ev);
-                    break;
+            case SDL_TEXTINPUT  :
+                textInput_(ev);
+                break;
 
-                case SDL_TEXTEDITING:
-                    textEdit_(ev);
-                    break;
+            case SDL_TEXTEDITING:
+                textEdit_(ev);
+                break;
 
-                default :
-                    break;
+            default :
+                break;
             }
 
             redraw(_u8text,_cursor);
@@ -105,51 +105,51 @@ void LX_TextInput::keyboardInput_(SDL_Event& ev)
 
     switch(ev.key.keysym.sym)
     {
-        case SDLK_ESCAPE:
-            _done = true;
-            break;
+    case SDLK_ESCAPE:
+        _done = true;
+        break;
 
-        case SDLK_BACKSPACE:
-            backslashKey_();
-            if(_cursor > 0)
-            {
-                _cursor -= 1;
-            }
-            break;
+    case SDLK_BACKSPACE:
+        backslashKey_();
+        if(_cursor > 0)
+        {
+            _cursor -= 1;
+        }
+        break;
 
-        case SDLK_DELETE:
-            deleteKey_();
-            break;
+    case SDLK_DELETE:
+        deleteKey_();
+        break;
 
-        case SDLK_LEFT:
-            if(_cursor > 0)
-            {
-                _cursor -= 1;
-            }
-            break;
+    case SDLK_LEFT:
+        if(_cursor > 0)
+        {
+            _cursor -= 1;
+        }
+        break;
 
-        case SDLK_RIGHT:
-            if(_cursor < _u8text.utf8_length())
-            {
-                _cursor += 1;
-            }
-            break;
+    case SDLK_RIGHT:
+        if(_cursor < _u8text.utf8_length())
+        {
+            _cursor += 1;
+        }
+        break;
 
-        case SDLK_HOME:
-            _cursor = 0;
-            break;
+    case SDLK_HOME:
+        _cursor = 0;
+        break;
 
-        case SDLK_END:
-            _cursor = _u8text.utf8_length();
-            break;
+    case SDLK_END:
+        _cursor = _u8text.utf8_length();
+        break;
 
-        case SDLK_v:
-            paste_();
-            break;
+    case SDLK_v:
+        paste_();
+        break;
 
-        case SDLK_c:
-            save_();
-            break;
+    case SDLK_c:
+        save_();
+        break;
     }
 
     if(old_cursor != _cursor)

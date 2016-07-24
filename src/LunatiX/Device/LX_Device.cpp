@@ -55,7 +55,7 @@ int lx_stat(SDL_Joystick * joy, LX_Device::LX_GamepadInfo& info)
 
 
 int gstat(SDL_Joystick * joy, SDL_GameController * gc,
-                 LX_Device::LX_GamepadInfo& info)
+          LX_Device::LX_GamepadInfo& info)
 {
     if(joy != nullptr)
     {
