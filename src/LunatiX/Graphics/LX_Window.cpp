@@ -303,14 +303,40 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 
 void LX_Window::fillCircle(const LX_Physics::LX_Circle& c)
 {
-    const unsigned int R = c.radius;
-    LX_Physics::LX_Circle tmp(c);
-    tmp.radius = 0;
+    const int x_center = c.center.x;
+    const int y_center = c.center.y;
+    const int r = static_cast<int>(c.radius);
+    int x = 0;
+    int y = r;
+    int d = r - 1;
 
-    for(unsigned int i = 0; i <= R; i++)
+    while(y >= x)
     {
-        drawCircle(tmp);
-        tmp.radius += 1;
+        drawSegment(LX_Physics::LX_Point(x_center - y, y_center + x),
+                    LX_Physics::LX_Point(x_center + y, y_center + x));
+        drawSegment(LX_Physics::LX_Point(x_center - x,y_center + y),
+                    LX_Physics::LX_Point(x_center + x, y_center + y));
+        drawSegment(LX_Physics::LX_Point(x_center - x, y_center - y),
+                    LX_Physics::LX_Point(x_center + x, y_center - y));
+        drawSegment(LX_Physics::LX_Point(x_center - y, y_center - x),
+                    LX_Physics::LX_Point(x_center + y, y_center - x));
+
+        if(d >= 2*x)
+        {
+            d -= 2*x + 1;
+            x +=1;
+        }
+        else if(d < 2*(r-y))
+        {
+            d += 2*y - 1;
+            y -= 1;
+        }
+        else
+        {
+            d += 2*(y - x - 1);
+            y -= 1;
+            x += 1;
+        }
     }
 }
 
