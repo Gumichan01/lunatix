@@ -35,31 +35,32 @@ int main()
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
     LX_Win::LX_Window w(info);              // Create the window with this configuration
-    SDL_Texture *texture = loadTextureFromFile("data/bullet.png",&w);
 
     w.setWindowSize(W,H);
     SDL_Delay(100);
-    w.clearWindow();
-    w.putTexture(texture,nullptr,&position);
-    w.update();
 
-    while(go)
     {
-        while(SDL_PollEvent(&event))
+        LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+        w.clearWindow();
+        sprite.draw(&position);
+        w.update();
+
+        while(go)
         {
-            switch(event.type)
+            while(SDL_PollEvent(&event))
             {
+                switch(event.type)
+                {
                 case SDL_QUIT :
                     go = false;
                     break;
                 default :
                     break;
+                }
             }
+            SDL_Delay(33);
         }
-        SDL_Delay(33);
     }
-
-    SDL_DestroyTexture(texture);
 
     if(LX_Device::numberOfDevices() > 0)
     {
