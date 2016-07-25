@@ -616,21 +616,47 @@ void test_drawing(LX_Win::LX_Window *win)
     win->clearWindow();
     win->drawRect(b);
     win->update();
-    SDL_Delay(1512);
+    SDL_Delay(1000);
+
+    LX_Log::log("Fill a rectangle using a bounding box");
+    win->clearWindow();
+    win->fillRect(b);
+    win->update();
+    SDL_Delay(1000);
 
     LX_Log::log("Draw a rectangle using a point and a vector : N and u⃗");
     win->clearWindow();
     win->drawRect(N,u);
     win->update();
-    SDL_Delay(1512);
+    SDL_Delay(1000);
     win->clearWindow();
 
-    LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(256,256),256);
-    LX_Log::log("Draw a circle");
+    LX_Log::log("Fill a rectangle using a point and a vector : N and u⃗");
     win->clearWindow();
-    win->drawCircle(C);
+    win->fillRect(N,u);
     win->update();
-    SDL_Delay(2048);
+    SDL_Delay(1000);
+    win->clearWindow();
+
+    LX_Log::log("Draw circles");
+    for(int i = 0; i < 300; i++)
+    {
+        LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),i);
+        win->clearWindow();
+        win->drawCircle(C);
+        win->update();
+        SDL_Delay(16);
+    }
+
+    LX_Log::log("Draw filled circles");
+    for(int j = 0; j < 300; j++)
+    {
+        LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),j);
+        win->clearWindow();
+        win->fillCircle(C);
+        win->update();
+        SDL_Delay(16);
+    }
 
     LX_Log::log(" = END TEST = ");
 }
