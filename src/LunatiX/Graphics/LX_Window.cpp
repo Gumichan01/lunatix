@@ -254,8 +254,8 @@ void LX_Window::drawRect(const LX_AABB& box)
 
 void LX_Window::drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
 {
-    int w = static_cast<int>(v.vx < 0 ? -v.vx : v.vx);
-    int h = static_cast<int>(v.vy < 0 ? -v.vy : v.vy);
+    int w = static_cast<int>(v.vx);
+    int h = static_cast<int>(v.vy);
     const LX_AABB box = {p.x,p.y,w,h};
     drawRect(box);
 }
@@ -298,6 +298,21 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
             x += 1;
         }
     }
+}
+
+
+void LX_Window::fillRect(const LX_AABB& box)
+{
+    SDL_RenderFillRect(_renderer,&box);
+}
+
+
+void LX_Window::fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+{
+    int w = static_cast<int>(v.vx);
+    int h = static_cast<int>(v.vy);
+    const LX_AABB box = {p.x,p.y,w,h};
+    fillRect(box);
 }
 
 
