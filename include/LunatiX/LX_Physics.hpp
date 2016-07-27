@@ -22,7 +22,6 @@
 *
 */
 
-#include <LunatiX/LX_AABB.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 
 /**
