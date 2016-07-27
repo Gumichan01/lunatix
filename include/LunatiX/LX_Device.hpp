@@ -29,6 +29,12 @@
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
 #define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status       */
 
+namespace LX_Graphics
+{
+class LX_Surface;
+}
+
+struct SDL_Cursor;
 
 /**
 *   @namespace LX_Device
@@ -43,7 +49,6 @@ namespace LX_Device
 */
 struct LX_GamepadInfo
 {
-
     SDL_JoystickID id;              /**< The joystick ID            */
     SDL_JoystickGUID uid;           /**< The joystick UID           */
     UTF8string name;                /**< The name of the joystick   */
@@ -51,7 +56,19 @@ struct LX_GamepadInfo
     int nb_balls;                   /**< The number of balls        */
     int nb_buttons;                 /**< The number of buttons      */
     int nb_hats;                    /**< The number of hats         */
+};
 
+
+class LX_Mouse
+{
+    SDL_Cursor * _cursor;
+
+public:
+
+    LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y);
+    bool isOpen();
+    void setMouse();
+   ~LX_Mouse();
 };
 
 /**

@@ -38,6 +38,11 @@ namespace LX_Win
 class LX_Window;
 };
 
+namespace LX_Device
+{
+class LX_Mouse;
+};
+
 
 namespace LX_Graphics
 {
@@ -131,6 +136,7 @@ public:
 class LX_Surface: private LX_Image
 {
     friend class LX_Streaming_Image;
+    friend class LX_Device::LX_Mouse;
     SDL_Surface * _surface;
 
 public:
