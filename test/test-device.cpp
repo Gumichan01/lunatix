@@ -11,6 +11,7 @@ using namespace LX_Device;
 
 void test_gamepad(void);
 void test_haptic(void);
+void test_mouse(void);
 
 
 int main(int argc, char **argv)
@@ -36,6 +37,7 @@ int main(int argc, char **argv)
 
     test_gamepad();
     test_haptic();
+    test_mouse();
     LX_Quit();
 
     LX_Log::log(" ==== END Test Device ==== ");
@@ -110,3 +112,54 @@ void test_haptic(void)
 
     LX_Log::log(" == END TEST == ");
 }
+
+
+void test_mouse(void)
+{
+    LX_Log::log(" == Test Gamepad == ");
+    LX_Win::LX_WindowInfo info;
+    LX_Win::LX_initWindowInfo(info);
+    info.w = 800;
+    info.w = 600;
+    LX_Win::LX_Window w(info);
+
+    std::string s = "data/bullet.png";
+    LX_Log::log("Define %s as the mouse cursor",s.c_str());
+    LX_Graphics::LX_Surface img(s,w);
+    LX_Device::LX_Mouse c(img,0,0);
+
+    if(c.isOpen())
+        LX_Log::logDebug(LX_Log::LX_LOG_TEST,"SUCCESS - the mouse cursor was loaded");
+    else
+        LX_Log::logDebug(LX_Log::LX_LOG_TEST,"FAILURE - not loaded; expeected: OK");
+
+    c.setMouse();
+    Uint32 t = SDL_GetTicks();
+    SDL_Event ev;
+    while(SDL_GetTicks() - t < 4000)
+    {
+        while(SDL_PollEvent(&ev))
+        {
+            switch(ev.type)
+            {
+            case SDL_MOUSEBUTTONUP:
+                if(ev.button.button == SDL_BUTTON_RIGHT)
+                    LX_Device::mouseCursorDisplay(0);
+                else
+                    LX_Device::mouseCursorDisplay(1);
+                break;
+
+            default: break;
+            }
+        }
+
+        w.clearWindow();
+        w.update();
+        SDL_Delay(16);
+    }
+
+    LX_Log::log(" == END TEST == ");
+}
+
+
+
