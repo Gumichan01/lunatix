@@ -174,6 +174,10 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
     case LX_TTF_BLENDED :
         loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),_font_color);
         break;
+
+    default:
+        LX_SetError("LX_TrueTypeFont: internal error -> drawText_");
+        break;
     }
 
     TTF_CloseFont(ttf);
