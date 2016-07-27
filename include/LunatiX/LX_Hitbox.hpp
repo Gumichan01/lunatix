@@ -21,6 +21,8 @@
 *
 */
 
+#include <LunatiX/LX_AABB.hpp>
+
 namespace LX_Physics
 {
 

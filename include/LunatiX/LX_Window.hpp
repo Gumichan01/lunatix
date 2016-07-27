@@ -22,8 +22,6 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <LunatiX/LX_Image.hpp>
-#include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <SDL2/SDL_stdinc.h>
@@ -35,6 +33,18 @@ struct SDL_Surface;
 struct SDL_Texture;
 struct SDL_Rect;
 
+namespace LX_Graphics
+{
+class LX_Image;
+class LX_Sprite;
+class LX_Streaming_Image;
+class LX_AnimatedSprite;
+};
+
+namespace LX_TrueTypeFont
+{
+  class LX_Font;
+};
 
 // Fullscreen modes
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop size   */

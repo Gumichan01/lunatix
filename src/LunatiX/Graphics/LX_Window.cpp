@@ -19,6 +19,8 @@
 
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Config.hpp>
+#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 #include <SDL2/SDL_render.h>
