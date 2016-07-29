@@ -243,7 +243,7 @@ int reserveChannels(int numchans);
 bool groupChannel(int chan, int tag);
 
 /**
-*   @fn int groupChannels(int chan, int tag)
+*   @fn int groupChannels(int from, int to, int tag)
 *
 *   Add a channel to a specific group
 *
@@ -282,7 +282,7 @@ int groupCount(int tag);
 int channelAvailable(int tag);
 
 /**
-*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag)
+*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0)
 *
 *   Play the chunk on a channel of the group specified by the tag
 *
@@ -431,7 +431,7 @@ void fadeOutMusic(int ms);
 */
 void setPanning(Uint8 left,Uint8 right);
 /**
-*   @fn void removePanning(int channel)
+*   @fn void removePanning()
 *   Remove the panning effect
 */
 void removePanning();
