@@ -261,18 +261,110 @@ public :
                              const double angle);
 
 
+    /**
+    *   @fn void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q)
+    *
+    *   Draw a segment on the window
+    *
+    *   @param p The first point
+    *   @param q The second point
+    *
+    */
     void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q);
+    /**
+    *   @fn void drawSegments(const LX_Physics::LX_Point * p, const int count)
+    *
+    *   Draw several connected segments on the window
+    *
+    *   @param p A array of points
+    *   @param count The number of points, drawing count-1 segments
+    *
+    */
     void drawSegments(const LX_Physics::LX_Point * p, const int count);
+    /**
+    *   @fn void drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+    *
+    *   Draw a line on the window
+    *
+    *   @param p The point
+    *   @param v The direction vector
+    *
+    *   @note The length of a line depends on the norm of the direction vector
+    *         The length is calculating according to this formula: ||v||*2
+    *
+    */
     void drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    /**
+    *   @fn void drawRect(const LX_AABB& box)
+    *   Draw a rectangle on a window
+    *   @param box The rectangle
+    */
     void drawRect(const LX_AABB& box);
+    /**
+    *   @fn void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+    *
+    *   Draw a rectangle using a point and a vector
+    *
+    *   @param p The point
+    *   @param v The vector that defines how to draw the rectangle (width height)
+    *
+    */
     void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    /**
+    *   @fn void drawCircle(const LX_Physics::LX_Circle& c)
+    *   Draw a circle on a window
+    *   @param c The circle to draw
+    */
     void drawCircle(const LX_Physics::LX_Circle& c);
 
+    /**
+    *   @fn void fillRect(const LX_AABB& box)
+    *   Fill a rectangle on a window
+    *   @param box The rectangle to fill
+    */
     void fillRect(const LX_AABB& box);
+    /**
+    *   @fn void fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+    *
+    *   Fill a rectangle using a point and a 2D vector
+    *
+    *   @param p The point
+    *   @param v The vector
+    */
     void fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    /**
+    *   @fn void fillCircle(const LX_Physics::LX_Circle& c)
+    *   Fill a circle on a window
+    *   @param c The circle to draw
+    */
     void fillCircle(const LX_Physics::LX_Circle& c);
 
+    /**
+    *   @fn void setDrawColor(const SDL_Color& color)
+    *   Set the color used for drawing operations (Lines, Rectangles, Circles)
+    *   @param color The color (ARGB)
+    */
     void setDrawColor(const SDL_Color& color);
+    /**
+    *   @fn void setDrawBlendMode(SDL_BlendMode mode)
+    *
+    *   Set the blend mode for drawing operations (Fill, Line)
+    *
+    *   @param mode The blend mode to use for blending:
+    *    |        Value        |                      Meaning                     |
+    *    |         ---         |                        ---                       |
+    *    | SDL_BLENDMODE_NONE  | no blending                                      |
+    *    |                     | destRGBA = srcRGBA                               |
+    *    | SDL_BLENDMODE_BLEND | alpha blending                                   |
+    *    |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
+    *    |                     | destA = srcA + (destA * (1-srcA))                |
+    *    |  SDL_BLENDMODE_ADD  | additive blending                                |
+    *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
+    *    |                     | destA = destA                                    |
+    *    |  SDL_BLENDMODE_MOD  | color modulate                                   |
+    *    |                     | destRGB = srcRGB * destRGB                       |
+    *    |                     | destA = destA                                    |
+    */
     void setDrawBlendMode(SDL_BlendMode mode);
 
     /**
