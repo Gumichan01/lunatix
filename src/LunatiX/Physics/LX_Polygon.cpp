@@ -61,7 +61,7 @@ void LX_Polygon::addPoint(const LX_Point& p)
 }
 
 
-unsigned int LX_Polygon::numberOfEdges(void) const
+unsigned long LX_Polygon::numberOfEdges(void) const
 {
     return _points.size();
 }
@@ -88,7 +88,7 @@ void LX_Polygon::convexity_(void)
 
     bool haveSign = false;
     enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
-    const unsigned int n = _points.size();
+    const unsigned long n = _points.size();
 
     for(unsigned int i = 0; i < n; i++)
     {
@@ -164,7 +164,7 @@ void LX_Polygon::convexity_(void)
 void LX_Polygon::move(const float vx, const float vy)
 {
     const int nvx = static_cast<int>(vx), nvy = static_cast<int>(vy);
-    const unsigned int n = numberOfEdges();
+    const unsigned long n = numberOfEdges();
 
     movePoint(_points[0],nvx,nvy);
     movePoint(_points[1],nvx,nvy);
@@ -189,7 +189,7 @@ void LX_Polygon::moveTo(int vx, int vy)
     movePointTo(_points[1],vx,vy);
     movePointTo(_points[2],vx,vy);
 
-    const unsigned int n = numberOfEdges();
+    const unsigned long n = numberOfEdges();
 
     for(unsigned int i = 3; i < n; i++)
     {

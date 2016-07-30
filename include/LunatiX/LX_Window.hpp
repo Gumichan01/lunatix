@@ -260,7 +260,6 @@ public :
     bool putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area, const SDL_Rect *pos,
                              const double angle);
 
-
     /**
     *   @fn void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q)
     *

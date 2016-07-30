@@ -27,7 +27,6 @@
 
 namespace
 {
-const std::string ONE("1");
 const char SHARP = '#';
 };
 
@@ -45,6 +44,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
     const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
     const std::regex FONT_REG("font=.+",std::regex::extended);
     const std::regex SIZE_REG("size=.+",std::regex::extended);
+    const std::string ONE("1");
 
     std::ifstream f;
     f.open(LX_SDL_FILE,std::ios::in);

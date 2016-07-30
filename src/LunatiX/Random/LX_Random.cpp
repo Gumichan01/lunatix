@@ -44,7 +44,7 @@ namespace LX_Random
 
 void initRand(void)
 {
-    srand(time(nullptr));
+    srand(static_cast<unsigned int>(time(nullptr)));
 }
 
 

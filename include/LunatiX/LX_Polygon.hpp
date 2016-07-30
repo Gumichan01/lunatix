@@ -107,14 +107,14 @@ public :
     void addPoint(const LX_Point& p);
 
     /**
-    *   @fn unsigned int LX_Polygon::numberOfEdges(void) const
+    *   @fn unsigned long LX_Polygon::numberOfEdges(void) const
     *
     *   Get the number of points
     *
     *   @return The number of edges of the polygon
     *
     */
-    unsigned int numberOfEdges(void) const;
+    unsigned long numberOfEdges(void) const;
 
     /**
     *   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const

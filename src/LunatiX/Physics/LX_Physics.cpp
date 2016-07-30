@@ -41,8 +41,8 @@ void getInterval(const LX_Physics::LX_Polygon& poly1,
                  int& p1_xmin, int& p1_xmax, int& p1_ymin, int& p1_ymax,
                  int& p2_xmin, int& p2_xmax, int& p2_ymin, int& p2_ymax)
 {
-    const unsigned int N = poly1.numberOfEdges();
-    const unsigned int M = poly2.numberOfEdges();
+    const unsigned long N = poly1.numberOfEdges();
+    const unsigned long M = poly2.numberOfEdges();
 
     p1_xmin = poly1.getPoint(0).x;
     p1_xmax = poly1.getPoint(0).x;
@@ -128,8 +128,8 @@ bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
                         const LX_Physics::LX_Polygon& poly2)
 {
     LX_Physics::LX_Point A,B,C,D;
-    const unsigned int S1 = poly1.numberOfEdges();
-    const unsigned int S2 = poly2.numberOfEdges();
+    const unsigned long S1 = poly1.numberOfEdges();
+    const unsigned long S2 = poly2.numberOfEdges();
 
     for(unsigned int i = 0; i < S1; i++)
     {
@@ -352,7 +352,7 @@ bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
     LX_Point I;
 
     const int v = 10000;
-    const unsigned int n = poly.numberOfEdges();
+    const unsigned long n = poly.numberOfEdges();
 
     I.x = v + LX_Random::crand100();
     I.y = v + LX_Random::crand100();
@@ -385,7 +385,7 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 {
     LX_Point A,B;
     const LX_Point P = C.center;
-    const unsigned int n = poly.numberOfEdges();
+    const unsigned long n = poly.numberOfEdges();
 
     if(collisionPointPoly(P,poly) == true)
         return true;
@@ -416,7 +416,7 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
     LX_Point C = LX_Point(rect.x + rect.w,rect.y + rect.h);
     LX_Point D = LX_Point(rect.x,rect.y + rect.h);
 
-    const unsigned int n = poly.numberOfEdges();
+    const unsigned long n = poly.numberOfEdges();
 
     for(unsigned int j = 0; j < n; j++)
     {
@@ -443,8 +443,8 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 {
     const unsigned int NUM_SIDES = 3;
-    const unsigned int N = poly1.numberOfEdges();
-    const unsigned int M = poly2.numberOfEdges();
+    const unsigned long N = poly1.numberOfEdges();
+    const unsigned long M = poly2.numberOfEdges();
 
     if(N < NUM_SIDES || M < NUM_SIDES)
         throw std::invalid_argument("The polygons must have at least 3 sides to calculate the collision");
