@@ -29,39 +29,22 @@
 
 #include <GL/glu.h>
 
-#define LX_ARGB_DEPTH 32                            /* Pixel depth in bits */
+#define LX_ARGB_DEPTH 32                            /* Pixel depth (in bits) */
+#define LX_PIXEL_FORMAT SDL_PIXELFORMAT_RGBA8888    /* Pixel format          */
 
-/*
-*   Define the mask for the surface creation
-*   when the screenshot will be done
-*/
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-#define LX_PIXEL_FORMAT SDL_PIXELFORMAT_RGBA8888
-
-static const Uint32 rmask = 0xff000000;
-static const Uint32 gmask = 0x00ff0000;
-static const Uint32 bmask = 0x0000ff00;
-static const Uint32 amask = 0x000000ff;
-
-#else
-#define LX_PIXEL_FORMAT SDL_PIXELFORMAT_ABGR8888
-
-static const Uint32 rmask = 0x000000ff;
-static const Uint32 gmask = 0x0000ff00;
-static const Uint32 bmask = 0x00ff0000;
-static const Uint32 amask = 0xff000000;
-
-#endif
-
-
-static const char * DEFAULT_TITLE = "LunatiX Engine v0.8";
-static const int DEFAULT_WIN_WIDTH = 640;
-static const int DEFAULT_WIN_HEIGHT = 480;
-
-namespace LX_Win
+namespace
 {
+const char * DEFAULT_TITLE = "LunatiX Engine v0.8";
+const int DEFAULT_WIN_WIDTH = 640;
+const int DEFAULT_WIN_HEIGHT = 480;
 
-static Uint32 generateFlags(LX_Configuration &config)
+// Mask values
+const Uint32 RMASK = 0xff000000;
+const Uint32 GMASK = 0x00ff0000;
+const Uint32 BMASK = 0x0000ff00;
+const Uint32 AMASK = 0x000000ff;
+
+Uint32 generateFlags(LX_Configuration &config)
 {
     Uint32 flag = 0x00000000;
 
@@ -70,6 +53,12 @@ static Uint32 generateFlags(LX_Configuration &config)
 
     return flag;
 }
+
+};
+
+
+namespace LX_Win
+{
 
 
 void LX_initWindowInfo(LX_WindowInfo &info)
@@ -486,7 +475,7 @@ bool LX_Window::screenshotUsingRenderer_(std::string& filename)
     SDL_Surface *sshot = nullptr;
 
     sshot = SDL_CreateRGBSurface(0,getWidth(),getHeight(),
-                                 LX_ARGB_DEPTH,rmask,gmask,bmask,amask);
+                                 LX_ARGB_DEPTH,RMASK,GMASK,BMASK,AMASK);
 
     if(sshot == nullptr)
         return false;

@@ -38,7 +38,7 @@ class LX_WindowManager
 {
     static const int _LX_NBMAX_WINDOWS = 8;
     unsigned int _size;
-    unsigned int _nbwin;                                 /* Number of existing windows */
+    unsigned int _nbwin;                        /* Number of created windows */
     std::array<LX_Win::LX_Window*, _LX_NBMAX_WINDOWS> _windows;
 
     LX_WindowManager();

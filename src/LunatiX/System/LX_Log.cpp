@@ -18,12 +18,8 @@
 *
 */
 
-#include <ctime>
-#include <cstdarg>
-#include <cerrno>
-#include <cstring>
-#include <sstream>
 #include <LunatiX/LX_Log.hpp>
+#include <sstream>
 
 #if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
 #undef __WIN32__
@@ -35,23 +31,29 @@
 
 namespace
 {
+
+// Debug
+bool debug_mode = false;
+
 // Get the time in millisecond
 long getMillisTime()
 {
     long ms = 0L;
 
-#if defined(__WIN32__)
+#if defined(__WIN32__)  // Windows
 
     SYSTEMTIME st;
     GetSystemTime(&st);
     ms = static_cast<long>(st.wMilliseconds);
 
-#elif defined(linux) || defined(__linux) || defined(__linux__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)  // Unix/Linux
 
     struct timespec t;
     clock_gettime(CLOCK_REALTIME, &t);
     ms = static_cast<long>(round(t.tv_nsec / 1.0e6));
 
+#else   // Other system
+#error "Unrecognized operating system"
 #endif
 
     return ms;
@@ -94,9 +96,6 @@ std::string getDate()
 
 namespace LX_Log
 {
-
-//  Private field in the namespace
-static bool debug_mode = false;
 
 bool isDebugMode(void)
 {

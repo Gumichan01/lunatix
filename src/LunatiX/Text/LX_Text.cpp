@@ -32,12 +32,14 @@ namespace LX_Text
 // Anonymous
 namespace
 {
+
+Uint32 DELAY = 33;
+
 bool isEndofLine(char * text)
 {
     return text[0] == '\n' || text[0] == '\r';
 }
 
-Uint32 DELAY = 33;
 };
 
 
@@ -111,10 +113,7 @@ void LX_TextInput::keyboardInput_(SDL_Event& ev)
 
     case SDLK_BACKSPACE:
         backslashKey_();
-        if(_cursor > 0)
-        {
-            _cursor -= 1;
-        }
+        if(_cursor > 0) { _cursor -= 1; }
         break;
 
     case SDLK_DELETE:
@@ -122,17 +121,11 @@ void LX_TextInput::keyboardInput_(SDL_Event& ev)
         break;
 
     case SDLK_LEFT:
-        if(_cursor > 0)
-        {
-            _cursor -= 1;
-        }
+        if(_cursor > 0) { _cursor -= 1; }
         break;
 
     case SDLK_RIGHT:
-        if(_cursor < _u8text.utf8_length())
-        {
-            _cursor += 1;
-        }
+        if(_cursor < _u8text.utf8_length()) { _cursor += 1; }
         break;
 
     case SDLK_HOME:

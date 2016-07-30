@@ -14,9 +14,12 @@ using namespace LX_FileIO;
 
 #define N 20
 
-static LX_FileBuffer *red;
-static LX_FileBuffer *green;
-static LX_FileBuffer *blue;
+namespace
+{
+LX_FileBuffer *red;
+LX_FileBuffer *green;
+LX_FileBuffer *blue;
+};
 
 class Dot
 {
