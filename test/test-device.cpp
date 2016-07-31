@@ -120,7 +120,7 @@ void test_mouse(void)
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_initWindowInfo(info);
     info.w = 800;
-    info.w = 600;
+    info.h = 600;
     LX_Win::LX_Window w(info);
 
     std::string s = "data/bullet.png";
