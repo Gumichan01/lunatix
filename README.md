@@ -11,14 +11,14 @@ It contains these following libraries:
 
 LunatiX Engine also contains these modules:
 - LX\_Device: The information library about Gamepads
-- LX\_FileIO: The FileIO library
+- LX\_FileIO: The Input/Output file library
 - LX\_MSGBox: The Message box module
-- LX\_ParticleEngine: The particle engine
+- LX\_ParticleEngine: A basic particle system
 - LX\_Random: The Random Number Generator (RNG) library
 - LX_VersionInfo: A module to get the version of the engine
 - LX\_SystemInfo: The System information library
 
-The engine works on Windows and Linux system.
+The engine works on Windows and Linux.
 
 ## Contribute ##
 
@@ -26,13 +26,12 @@ You may take a look on the library or get the development version
 on [Github](https://github.com/Gumichan01/lunatix-engine) You can also find
 the library reference on my [website](http://gumichan01.kappatau.fr/reference/lunatix-engine/v0.8.0/).
 
-
 ## Getting started ##
 ### On Windows ###
 
-First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.8.0) (v0.8.0)
+~~First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.8.0) (v0.8.0)
 It includes the library files and all necessary materials to develop any project.
-You must include them in the root directory of the project you are working on.
+You must include them in the root directory of the project you are working on.~~
 
 ### On a Linux system ###
 
@@ -49,17 +48,11 @@ modify the Makefile to compile.
 
 No libraries are provided in this version, except for the Lua library which is
 provided.
-The engine uses Lua 5.1.
+**WARNING: Lua is not supported in this version. The support has been removed.**
 
 Requirements:
  - SDL 2.0.3+
- - Lua 5.1
  - OpenGL 3.1+
-
-Warning/Information:
- - It is possible you get an issue if you use a recent version of Lua on Linux.
- - The program uses the compiled Lua file (.luac).
- - A shared Lua library file (.so file) on Linux is provided. It uses Lua 5.1.
 
 
 If you want to generate the engine libraries you just need
@@ -83,7 +76,6 @@ into your project tree:
  - *config/*
  - *include/*
  - *lib/*
- - *script/*
 
 It is very important to keep the engine hierarchy. If you do not respect that,
 the engine will not work correctly.
