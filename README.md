@@ -46,8 +46,6 @@ So you must ensure that Clang (version 3.4 at least) is installed to compile the
 However, the source code is still compilable with g++, but you will have to
 modify the Makefile to compile.
 
-No libraries are provided in this version, except for the Lua library which is
-provided.  
 **WARNING: Lua is not supported in this version. The support has been removed.**
 
 Requirements:
