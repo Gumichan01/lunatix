@@ -44,10 +44,6 @@ class LX_Window;
 }
 
 
-/**
-*   @namespace LX_Graphics
-*   @brief The graphics module
-*/
 namespace LX_Graphics
 {
 
