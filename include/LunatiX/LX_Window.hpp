@@ -43,7 +43,7 @@ class LX_AnimatedSprite;
 
 namespace LX_TrueTypeFont
 {
-  class LX_Font;
+class LX_Font;
 };
 
 // Fullscreen modes

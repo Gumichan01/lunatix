@@ -94,7 +94,7 @@ public:
     */
     void setMouse();
     /// Destructor
-   ~LX_Mouse();
+    ~LX_Mouse();
 };
 
 /**
