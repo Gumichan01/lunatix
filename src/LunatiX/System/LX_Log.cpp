@@ -20,6 +20,7 @@
 
 #include <LunatiX/LX_Log.hpp>
 #include <sstream>
+#include <ctime>
 
 #if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
 #undef __WIN32__

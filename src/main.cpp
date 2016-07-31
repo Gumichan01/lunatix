@@ -29,8 +29,6 @@ int main()
         return -1;
     }
 
-    bool go = true;
-    SDL_Event event;
     LX_AABB position = {0,0,W,H};
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
@@ -40,6 +38,8 @@ int main()
     SDL_Delay(100);
 
     {
+        bool go = true;
+        SDL_Event event;
         LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
         w.clearWindow();
         sprite.draw(&position);
