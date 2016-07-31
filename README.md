@@ -47,7 +47,7 @@ However, the source code is still compilable with g++, but you will have to
 modify the Makefile to compile.
 
 No libraries are provided in this version, except for the Lua library which is
-provided.
+provided.  
 **WARNING: Lua is not supported in this version. The support has been removed.**
 
 Requirements:
