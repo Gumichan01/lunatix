@@ -23,9 +23,6 @@
 
 #include <LunatiX/LX_ParticleSystem.hpp>
 #include <LunatiX/LX_Particle.hpp>
-
-#include <LunatiX/LX_WindowManager.hpp>
-#include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 using namespace std;
@@ -72,7 +69,7 @@ void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
 
     if(_particles == nullptr)
     {
-        LX_SetError("LX_ParticleSystem constructor: Cannot allocate the _particles\n");
+        LX_SetError("LX_ParticleSystem constructor: Cannot allocate the particles\n");
         _nb_particles = 0;
     }
     else
@@ -137,33 +134,15 @@ void LX_ParticleSystem::updateParticles(void)
 
 void LX_ParticleSystem::displayParticles(void)
 {
-    const unsigned int n = _nb_particles;
-    LX_Win::LX_WindowManager *wm = LX_Win::LX_WindowManager::getInstance();
-    LX_Win::LX_Window * win = wm->getWindow(_idwin);
+    const unsigned int N = _nb_particles;
 
-    if(win == nullptr)
-        return;
-
-    for(unsigned int i = 0; i < n ; i++)
+    for(unsigned int i = 0; i < N; i++)
     {
-        if(_particles[i] == nullptr)
-            continue;
-
-        LX_AABB box = (_particles[i]->getAABB());
-
-        // Display the particle when the delay is a multiple of 2
-        if(_particles[i]->getDelay()%2 == 0)
+        if(_particles[i] != nullptr)
         {
-            if(_particles[i]->getTexture() != nullptr)
-            {
-                win->putTexture(_particles[i]->getTexture(),
-                                nullptr,&box);
-            }
-            else if(_particles[i]->getSurface() != nullptr)
-            {
-                win->putSurface(_particles[i]->getSurface(),
-                                nullptr,&box);
-            }
+            // Display the particle when the delay is a multiple of 2
+            if(_particles[i]->getDelay()%2 == 0)
+                _particles[i]->draw();
         }
     }
 }

@@ -16,9 +16,9 @@ using namespace LX_FileIO;
 
 namespace
 {
-LX_FileBuffer *red;
-LX_FileBuffer *green;
-LX_FileBuffer *blue;
+LX_Sprite *red;
+LX_Sprite *green;
+LX_Sprite *blue;
 };
 
 class Dot
@@ -32,74 +32,68 @@ public:
 
     Dot()
     {
-        bool err;
         LX_Particle *p = nullptr;
         LX_Random::initRand();
+        LX_AABB hitbox;
 
         sys = new LX_ParticleSystem(N);
         box = {100,100,20,20};
 
         for(int i = 0; i < N; i++)
         {
-            p = new LX_Particle(box.x - 5 + (rand()%25),
-                                box.y - 5 + (rand()%25),5,5);
+            hitbox = {box.x - 5 + (rand()%25), box.y - 5 + (rand()%25),5,5};
 
             switch(rand()%3)
             {
             case 0 :
-                err = p->setTexture(red);
+                p = new LX_Particle(*red, hitbox);
                 break;
 
             case 1 :
-                err = p->setTexture(blue);
+                p = new LX_Particle(*blue, hitbox);
                 break;
 
             case 2 :
-                err = p->setTexture(green);
+                p = new LX_Particle(*green, hitbox);
                 break;
 
             default :
-                err = p->setTexture(red);
+                p = new LX_Particle(*red, hitbox);
                 break;
             }
 
             sys->addParticle(p);
-
-            if(err == false)
-                cerr << "FAILURE - Dot - Cannot load any texture "
-                     << "from a file buffer" << endl;
         }
     }
 
     void update()
     {
-        bool err;
         LX_Particle *p = nullptr;
+        LX_AABB hitbox;
 
         sys->updateParticles();
         moveRect(box,10,0);
 
         for(int i = 0; i < N; i++)
         {
-            p = new LX_Particle(box.x - 5 + (rand()%25),
-                                box.y - 5 + (rand()%25),5,5);
+            hitbox = {box.x - 5 + (rand()%25), box.y - 5 + (rand()%25),5,5};
 
             switch(rand()%3)
             {
             case 0 :
-                err = p->setTexture(red);
+                p = new LX_Particle(*red, hitbox);
                 break;
 
             case 1 :
-                err = p->setTexture(blue);
+                p = new LX_Particle(*blue, hitbox);
                 break;
 
             case 2 :
-                err = p->setTexture(green);
+                p = new LX_Particle(*green, hitbox);
                 break;
 
             default :
-                err = p->setTexture(red);
+                p = new LX_Particle(*red, hitbox);
                 break;
             }
 
@@ -107,10 +101,6 @@ public:
             {
                 delete p;
             }
-
-            if(err == false)
-                cerr << "FAILURE - Dot::update() - Cannot load any texture "
-                     << "from a file buffer" << endl;
         }
 
         sys->displayParticles();
@@ -148,23 +138,15 @@ int main(int argc, char **argv)
     w = new LX_Win::LX_Window(winfo);
     LX_Win::LX_WindowManager::getInstance()->addWindow(w);
 
-    //File buffer of particle
-    try
-    {
-        red = new LX_FileBuffer("test/asset/red.bmp");
-        green = new LX_FileBuffer("test/asset/green.bmp");
-        blue = new LX_FileBuffer("test/asset/blue.bmp");
+    red = new LX_Sprite("test/asset/red.bmp",*w);
+    green = new LX_Sprite("test/asset/green.bmp",*w);
+    blue = new LX_Sprite("test/asset/blue.bmp",*w);
 
-    }
-    catch(IOException)
-    {
-        cerr << "FAILURE - An asset was not loaded" << endl;
-        cout << " ==== Abort Particle ==== " << endl;
-        return EXIT_FAILURE;
-    }
+    if(red->isOpen() && green->isOpen() && blue->isOpen())
+        LX_Log::log("SUCCESS - The three assets were successfully loaded");
+    else
+        LX_Log::log("FAILURE - (At least) One of the three assets was not loaded");
 
-    cout << "SUCCESS - The three assets were successfully loaded "
-         << "in each file buffer" << endl;
     LX_Log::log("Loading the dot");
     dot = new Dot();
     LX_Log::log("Dot loaded");
