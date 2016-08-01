@@ -390,6 +390,26 @@ public :
     void setWindowSize(int w, int h);
 
     /**
+    *   @fn bool setViewPort(LX_AABB * viewport)
+    *
+    *   et a specific drawing area (viewport) for rendering
+    *
+    *   @param viewport The drawing area to set. nullptr defines the entire target
+    *   @return TRUE on success, FALSE otherwise
+    */
+    bool setViewPort(LX_AABB * viewport);
+
+    /**
+    *   @fn void getViewPort(LX_AABB& viewport)
+    *
+    *   Get the drawing area (viewport) for rendering
+    *
+    *   @param viewport The drawing area to fill
+    *
+    */
+    void getViewPort(LX_AABB& viewport);
+
+    /**
     *   @fn void toggleFullscreen(Uint32 flag)
     *
     *   Set the window's fullscreen state

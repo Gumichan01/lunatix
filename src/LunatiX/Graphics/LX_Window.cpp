@@ -373,6 +373,17 @@ void LX_Window::setWindowSize(int w, int h)
 }
 
 
+bool LX_Window::setViewPort(LX_AABB * viewport)
+{
+    return SDL_RenderSetViewport(_renderer, viewport) == 0;
+}
+
+
+void LX_Window::getViewPort(LX_AABB& viewport)
+{
+    SDL_RenderGetViewport(_renderer, &viewport);
+}
+
 void LX_Window::toggleFullscreen(Uint32 flag)
 {
     SDL_SetWindowFullscreen(_window,flag);

@@ -4,10 +4,10 @@
 #include <vector>
 #include <LunatiX/Lunatix_engine.hpp>
 #include <LunatiX/LX_Image.hpp>
+#include <SDL2/SDL_image.h>
 
 using namespace std;
 using namespace LX_Graphics;
-
 
 void test_window1(LX_Win::LX_Window *win);
 void test_window2(void);
@@ -17,6 +17,7 @@ void test_winManager(LX_Win::LX_Window *win);
 void test_winInfo(LX_Win::LX_Window *win);
 void test_opengl();
 void test_drawing(LX_Win::LX_Window *win);
+void test_viewport(LX_Win::LX_Window *win);
 
 string winInfoToString(LX_Win::LX_WindowInfo &winfo);
 bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2);
@@ -37,19 +38,22 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Window ==== ");
     LX_loadWindowConfig(info);
+    info.w = 1000;
+    info.h = 600;
     LX_Log::log("Info configuration:\n%s",winInfoToString(info).c_str());
     info.title = "Hello #1";
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
-    test_winInfo(win);
+    /*test_winInfo(win);
     test_opengl();
     test_window1(w);
     test_window2();
     test_winManager(w);
     test_rendering(w);
     test_image(w);
-    test_drawing(w);
+    test_drawing(w);*/
+    test_viewport(w);
     delete win;
 
     LX_Quit();
@@ -139,7 +143,7 @@ void test_rendering(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the renderer is ready" << endl;
 
-    sf = loadSurface(name.c_str());
+    sf = IMG_Load(name.c_str());
     st = SDL_CreateTextureFromSurface(win->getRenderer(),sf);
     SDL_FreeSurface(sf);
 
@@ -443,6 +447,59 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::log(" = END TEST= ");
 }
 
+void test_viewport(LX_Win::LX_Window *win)
+{
+    LX_Log::log(" = TEST Viewport = ");
+
+    std::string sp_str = "data/boss.png";
+    std::string name = "data/bullet.png";
+
+    Uint32 delay = 125;
+    LX_AABB rect = {0, 0,win->getWidth()/4,win->getHeight()/2};
+    std::vector<LX_AABB> coordinates;
+    coordinates.push_back({212,0,211,448});
+    coordinates.push_back({424,0,211,448});
+    coordinates.push_back({636,0,211,448});
+    coordinates.push_back({0,449,211,448});
+    coordinates.push_back({212,449,211,448});
+    coordinates.push_back({424,449,211,448});
+    coordinates.push_back({636,449,211,448});
+    coordinates.push_back({848,0,211,448});
+    coordinates.push_back({1060,0,211,448});
+    coordinates.push_back({1272,0,211,448});
+    coordinates.push_back({848,449,211,448});
+    coordinates.push_back({1484,0,211,448});
+    coordinates.push_back({1060,449,211,448});
+    coordinates.push_back({1272,449,211,448});
+    coordinates.push_back({1484,449,211,448});
+
+    LX_Graphics::LX_Sprite img(name,*win);
+    LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay);
+
+    LX_AABB viewport = {win->getWidth()/2, 0,win->getWidth()/2, win->getHeight()/2};
+    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Viewport: {%d,%d,%d,%d}",
+                    viewport.x,viewport.y,viewport.w,viewport.h);
+
+    Uint32 b = SDL_GetTicks();
+    LX_AABB brect = {0, 0,win->getWidth()/2,win->getHeight()/2};
+    SDL_Color bcolor = {0,0,0,255};
+    while(SDL_GetTicks() - b < 4096)
+    {
+        win->clearWindow();
+        win->setViewPort(nullptr);
+        img.draw();
+
+        win->setViewPort(&viewport);
+        win->setDrawColor(bcolor);
+        win->fillRect(brect);
+        sprite.draw(&rect);
+
+        win->update();
+        SDL_Delay(16);
+    }
+    win->clearWindow();
+    LX_Log::log(" = END TEST= ");
+}
 
 void test_winManager(LX_Win::LX_Window *win)
 {
