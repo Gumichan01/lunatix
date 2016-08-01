@@ -22,7 +22,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_stdinc.h>
 
 #define LX_MIXER_AUDIO_FREQUENCY 44100      /**< The default audio frequency             */
 #define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable for the mix module  */

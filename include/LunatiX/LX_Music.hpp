@@ -21,9 +21,9 @@
 *
 */
 
-#include <SDL2/SDL_mixer.h>
-
 #include "LX_Sound.hpp"
+
+#include <SDL2/SDL_mixer.h>
 
 
 namespace LX_Mixer
