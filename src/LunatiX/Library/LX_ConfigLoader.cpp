@@ -25,17 +25,14 @@
 #include <fstream>
 #include <regex>
 
-namespace
-{
-const char SHARP = '#';
-};
-
 
 namespace LX_ConfigLoader
 {
 
 void loadSDLfileConfig(LX_InternalConfig& config)
 {
+    const char SHARP = '#';
+    const std::string ONE("1");
     const std::regex VIDEO_REG("video=[[:digit:]]+",std::regex::extended);
     const std::regex VSYNC_REG("vsync=[[:digit:]]+",std::regex::extended);
     const std::regex TTF_REG("ttf=[[:digit:]]+",std::regex::extended);
@@ -44,7 +41,6 @@ void loadSDLfileConfig(LX_InternalConfig& config)
     const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
     const std::regex FONT_REG("font=.+",std::regex::extended);
     const std::regex SIZE_REG("size=.+",std::regex::extended);
-    const std::string ONE("1");
 
     std::ifstream f;
     f.open(LX_SDL_FILE,std::ios::in);
@@ -128,58 +124,6 @@ void loadSDLfileConfig(LX_InternalConfig& config)
             if(std::regex_match(line,SIZE_REG))
             {
                 config.font_size = atoi(s.c_str());
-                cpt++;
-            }
-            break;
-
-        default:
-            break;
-        }
-    }
-
-    f.close();
-}
-
-void loadWindowFileConfig(LX_InternalConfig& config)
-{
-    const std::regex WIDTH_REG("width=.+",std::regex::extended);
-    const std::regex HEIGHT_REG("height=.+",std::regex::extended);
-
-    std::ifstream f;
-    f.open(LX_WINFO_FILE,std::ios::in);
-
-    if(f.is_open() == false)
-    {
-        LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
-                            "loadWindowFileConfig - Cannot open %s",
-                            LX_SDL_FILE);
-        return;
-    }
-
-    int cpt = 0;
-    std::string line;
-
-    while(getline(f,line))
-    {
-        if(line.empty() || line[0] == SHARP)
-            continue;
-
-        std::string s = line.substr(line.find("=") + 1);
-
-        switch(cpt)
-        {
-        case 0:
-            if(std::regex_match(line,WIDTH_REG))
-            {
-                config.width = atoi(s.c_str());
-                cpt++;
-            }
-            break;
-
-        case 1:
-            if(std::regex_match(line,HEIGHT_REG))
-            {
-                config.height = atoi(s.c_str());
                 cpt++;
             }
             break;

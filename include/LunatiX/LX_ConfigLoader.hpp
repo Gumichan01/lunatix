@@ -62,17 +62,6 @@ struct LX_InternalConfig
 */
 void loadSDLfileConfig(LX_InternalConfig& config);
 
-/**
-*   @fn void loadWindowFileConfig(LX_InternalConfig& config)
-*
-*   Load the default window configuration of the engine
-*   and store it into the struture
-*
-*   @param config The structure to fill data in
-*
-*/
-void loadWindowFileConfig(LX_InternalConfig& config);
-
 };
 
 #endif // LX_CONFIGLOADER_HPP_INCLUDED
