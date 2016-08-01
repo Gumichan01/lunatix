@@ -25,10 +25,14 @@
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-
 // unique instance
 static LX_Configuration *instance = nullptr;
 
+namespace
+{
+const int CONF_WIDTH  = 800;
+const int CONF_HEIGHT = 600;
+};
 
 LX_ConfigurationException::LX_ConfigurationException(UTF8string err)
 {
@@ -86,7 +90,8 @@ void LX_Configuration::destroy()
 void LX_Configuration::loadSDLFlags_()
 {
     LX_ConfigLoader::loadSDLfileConfig(_conf);
-    LX_ConfigLoader::loadWindowFileConfig(_conf);
+    _conf.width  = CONF_WIDTH;
+    _conf.height = CONF_HEIGHT;
 }
 
 bool LX_Configuration::getVideoFlag()
