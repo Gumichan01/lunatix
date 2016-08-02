@@ -269,6 +269,9 @@ public :
     *
     */
     ~LX_File();
+
+friend LX_File& operator <<(LX_File& f, UTF8string& u8s);
+friend LX_File& operator <<(LX_File& f, std::string s);
 };
 
 };

@@ -184,4 +184,18 @@ LX_File::~LX_File()
     close();
 }
 
+
+LX_File& operator <<(LX_File& f, UTF8string& u8s)
+{
+    f.write(u8s.utf8_str());
+    return f;
+}
+
+
+LX_File& operator <<(LX_File& f, std::string s)
+{
+    f.write(s);
+    return f;
+}
+
 };

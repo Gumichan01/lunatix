@@ -140,7 +140,9 @@ void test_read(void)
 
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
          << f.size() << " byte(s)" << endl;
-    read_data = f.read(buf,sizeof(char),N);
+
+    LX_Log::log("Try to read the file");
+    read_data = f.read(buf,sizeof(char),f.size());
 
     if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 "
@@ -208,32 +210,30 @@ void test_write(void)
     LX_Log::log(" = TEST write = ");
 
     size_t read_data = 0;
-    char buf[N];
 
-    cout << "INFO - Open " << str << "..." << endl;
+    LX_Log::log("Open %s ...",str.c_str());
     LX_File f(str.c_str(),LX_FILEIO_WRONLY);
-    strncpy(buf,"GUMI",N);
+    std::string gumi = "GUMI";
 
+    LX_Log::log("%s was opened. Its size is %ld byte(s)",f.getFilename(),f.size());
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
          << f.size() << " byte(s)" << endl;
 
-    read_data = f.write(buf,sizeof(char),N);
+    LX_Log::log("Writing %s",gumi.c_str());
+    f << gumi;
 
-    if(read_data == 0)
-        cerr << "FAILURE - Expected : a positive value; got : -1 "
-             << endl;
+    if(f.size() != 4)
+        LX_Log::log("FAILURE - expected: 4; got: %ld",f.size());
     else
-        cout << "SUCCESS - Wrote " << read_data << " byte(s) into "
-             << str << endl;
+        LX_Log::log("SUCCESS - ok: 4");
 
-    read_data = f.write("CHAN01");
+    LX_Log::log("Writing CHAN01");
+    f << "CHAN01";
 
-    if(read_data == 0)
-        cerr << "FAILURE - Expected : a positive value; got : 0 "
-             << endl;
+    if(f.size() != 10)
+        LX_Log::log("FAILURE - expected: 10; got: %ld",f.size());
     else
-        cout << "SUCCESS - Wrote " << read_data << " byte(s) into "
-             << str << endl;
+        LX_Log::log("SUCCESS - ok: 10");
 
     f.close();
     LX_Log::log(" = END TEST = ");
