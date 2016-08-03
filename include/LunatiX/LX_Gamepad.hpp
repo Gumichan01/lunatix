@@ -123,9 +123,21 @@ public :
     const char * getName(void);
 
     /**
-    *   @fn UTF8string toString(void)
+    *   @fn bool stat(LX_GamepadInfo& info)
     *
     *   Get information about the gamepad
+    *
+    *   @param[in,out] info The information structure to fill
+    *   @return TRUE on success, FALSE otherwise.
+    *           Call LX_GetError() to get the error message
+    *
+    */
+    bool stat(LX_GamepadInfo& info);
+
+    /**
+    *   @fn UTF8string toString(void)
+    *
+    *   Get information about the gamepad in string format
     *
     *   @return Always returns a valid string
     */

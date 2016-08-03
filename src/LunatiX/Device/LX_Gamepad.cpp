@@ -166,21 +166,30 @@ const char * LX_Gamepad::getName(void)
 }
 
 
+bool LX_Gamepad::stat(LX_GamepadInfo& info)
+{
+    bool res;
+
+    if(_gc != nullptr)
+        res = statGamepad_(_gc,info);
+    else
+        res = statGamepad_(_joy,info);
+
+    if(!res)
+        LX_SetError(UTF8string(std::string(":LX_Gamepad::stat: ") + LX_GetError()));
+
+    return res;
+}
+
+
 UTF8string LX_Gamepad::toString(void)
 {
     LX_GamepadInfo gi;
-    int err = 0;
 
-    if(_gc != nullptr)
-        err = statGamepad_(_gc,gi);
-    else
-        err = statGamepad_(_joy,gi);
+    if(stat(gi))
+        return gamepadToString(gi);
 
-    if(err == -1)
-        return UTF8string(std::string("Cannot get gamepad information: ")
-                          + LX_GetError());
-
-    return gamepadToString(gi);
+    return UTF8string("Unknown gamepad");
 }
 
 };

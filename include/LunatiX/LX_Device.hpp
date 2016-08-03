@@ -114,8 +114,6 @@ int numberOfDevices(void);
 *   @return Always returns a valid string
 *
 *   @note This function never returns an invalid string
-*   @warning If info or str is not valid, a segmentation fault will occur
-*   @warning str must be long enough to get the entire text.
 *
 *   @sa statGamepad
 */
