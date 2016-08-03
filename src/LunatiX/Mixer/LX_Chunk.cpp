@@ -20,12 +20,10 @@
 */
 
 #include <LunatiX/LX_Chunk.hpp>
-#include <SDL2/SDL_mixer.h>
-
-#include <LunatiX/LX_Error.hpp>
-#include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_Error.hpp>
 
+#include <SDL2/SDL_mixer.h>
 
 namespace LX_Mixer
 {
