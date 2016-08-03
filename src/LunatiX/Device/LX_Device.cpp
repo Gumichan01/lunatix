@@ -72,6 +72,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info)
            << "Gamepad - ID : " << info.id << std::endl
            << "Gamepad - UID : " << guid << std::endl
            << "Gamepad - Name : " << info.name << std::endl
+           << "Gamepad - Is haptic : " << info.is_haptic << std::endl
            << "Gamepad - Number of Axes : " << info.nb_axis << std::endl
            << "Gamepad - Number of Balls : " << info.nb_balls << std::endl
            << "Gamepad - Number of Buttons : " << info.nb_buttons << std::endl

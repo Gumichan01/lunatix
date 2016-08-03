@@ -51,6 +51,7 @@ struct LX_GamepadInfo
     SDL_JoystickID id;              /**< The joystick ID            */
     SDL_JoystickGUID uid;           /**< The joystick UID           */
     UTF8string name;                /**< The name of the joystick   */
+    UTF8string is_haptic;           /**< Haptic joystick or not     */
     int nb_axis;                    /**< The number of axes         */
     int nb_balls;                   /**< The number of balls        */
     int nb_buttons;                 /**< The number of buttons      */
