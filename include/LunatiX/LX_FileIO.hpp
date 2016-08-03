@@ -24,7 +24,7 @@
 #include <LunatiX/utils/utf8_string.hpp>
 
 #include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_rwops.h>
+//#include <SDL2/SDL_rwops.h>
 
 #define LX_FILEIO_RDONLY 0x00000001                             /**< Read only mode (r) */
 #define LX_FILEIO_WRONLY 0x00000010                             /**< Write only mode (w) */
@@ -228,13 +228,6 @@ public :
     */
     Sint64 size(void);
 
-    /**
-    *   @fn void close(void)
-    *
-    *   Close the file
-    *
-    */
-    SDL_Surface * getSurfaceFromData(void);
 
     /**
     *   @fn SDL_Surface * getSurfaceFromData(void)

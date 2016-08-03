@@ -160,19 +160,6 @@ void LX_File::close(void)
 }
 
 
-SDL_Surface * LX_File::getSurfaceFromData(void)
-{
-    SDL_Surface * surface = nullptr;
-    Sint64 save = tell();
-
-    seek(0,LX_SEEK_SET);
-    surface = IMG_Load_RW(_data,0);
-    seek(save,LX_SEEK_SET);
-
-    return surface;
-}
-
-
 const char * LX_File::getFilename(void)
 {
     return  _name.utf8_str();
