@@ -21,6 +21,7 @@
 *
 */
 
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_messagebox.h>
 
 #define LX_MSG_ERR  SDL_MESSAGEBOX_ERROR        /**< Error message          */
@@ -36,7 +37,7 @@ namespace LX_MSGBox
 {
 
 /**
-*   @fn int showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w)
+*   @fn bool showMSG(Uint32 flag, std::string title, std::string msg)
 *
 *   Display a simple message box
 *
@@ -46,11 +47,10 @@ namespace LX_MSGBox
 *           - LX_MSG_INFO : Information message
 *   @param title The title of the box, UTF-8 format
 *   @param msg The text to display in the box, UTF-8 format
-*   @param w The parent window, or a null pointer for no parent
 *
 *   @return TRUE on success, FALSE on error
 */
-bool showMSG(Uint32 flag, const char *title, const char *msg, SDL_Window *w);
+bool showMSG(Uint32 flag, std::string title, std::string msg);
 
 };
 
