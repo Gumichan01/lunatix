@@ -123,7 +123,7 @@ LX_Chunk * loadSample(UTF8string& filename)
 
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)
 {
-    return file.getSample();
+    return file.loadSample();
 }
 
 

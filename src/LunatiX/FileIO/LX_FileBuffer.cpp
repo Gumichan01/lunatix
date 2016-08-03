@@ -93,7 +93,7 @@ Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_(void)
 }
 
 
-LX_Mixer::LX_Chunk * LX_FileBuffer::getSample()
+LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample()
 {
     Mix_Chunk * ch = getChunkFromBuffer_();
 
