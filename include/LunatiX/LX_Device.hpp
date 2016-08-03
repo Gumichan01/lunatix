@@ -23,7 +23,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_joystick.h>
-#include <SDL2/SDL_gamecontroller.h>
 
 #define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display   */
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
@@ -105,56 +104,6 @@ public:
 *   @return The number of gamepads
 */
 int numberOfDevices(void);
-
-/**
-*   @fn const char * nameOf(SDL_Joystick * joy)
-*
-*   Get the name of a joystick
-*
-*   @param joy The pointer to a joystick structure
-*
-*   @return The name of the joystick, a null pointer if the pointer is invalid
-*/
-const char * nameOf(SDL_Joystick * joy);
-
-/**
-*   @fn const char * nameOf(SDL_GameController * controller)
-*
-*   Get the name of a game controller
-*
-*   @param controller The pointer to a structure relative to the gamepad
-*
-*   @return The name of the game controller, a null pointer
-*           if the pointer is invalid
-*/
-const char * nameOf(SDL_GameController * controller);
-
-/**
-*   @fn int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
-*
-*   Get the name of a game controller
-*
-*   @param joy The joystick to get information from
-*   @param info The structure to store information
-*
-*   @return 0 if the joystick is valid and the function got information
-*               -1 on failure
-*/
-int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info);
-
-/**
-*   @fn int statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
-*
-*   Get the name of a game controller
-*
-*   @param gc The game controller to get information from
-*   @param info The structure to store information
-*
-*   @return 0 if the game controller is valid and the function got information
-*               -1 on failure
-*
-*/
-int statGamepad(SDL_GameController * gp, LX_GamepadInfo& info);
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)

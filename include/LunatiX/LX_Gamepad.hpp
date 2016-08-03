@@ -26,10 +26,12 @@
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
+
 namespace LX_Device
 {
 
 class LX_Haptic;
+struct LX_GamepadInfo;
 
 /**
 *   @class LX_Gamepad
@@ -42,6 +44,14 @@ class LX_Gamepad
     SDL_GameController *_gc;
     SDL_Joystick *_joy;
     LX_Haptic *_haptic;
+
+
+const char * nameOf(SDL_Joystick * joy);
+const char * nameOf(SDL_GameController * controller);
+int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+int gstat(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info);
+int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info);
+int statGamepad(SDL_GameController * gp, LX_GamepadInfo& info);
 
 
 public :
