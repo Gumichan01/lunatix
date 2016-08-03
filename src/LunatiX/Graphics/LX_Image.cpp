@@ -77,7 +77,7 @@ SDL_Surface * LX_Image::loadSurface_(const std::string& filename)
 // private function
 SDL_Surface * LX_Image::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
 {
-    SDL_Surface * surface = buffer.getSurfaceFromBuffer();
+    SDL_Surface * surface = buffer.getSurfaceFromBuffer_();
 
     if(surface == nullptr)
         return nullptr;

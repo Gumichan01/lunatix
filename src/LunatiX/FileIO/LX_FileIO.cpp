@@ -17,10 +17,11 @@
 *
 */
 
-#include <SDL2/SDL_image.h>
-
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_Error.hpp>
+
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_rwops.h>
 
 
 namespace LX_FileIO

@@ -28,6 +28,20 @@
 struct SDL_Surface;
 struct Mix_Chunk;
 
+namespace LX_Mixer
+{
+class LX_Chunk;
+}
+
+namespace LX_Graphics
+{
+class LX_Image;
+}
+
+namespace LX_TrueTypeFont
+{
+class LX_Font;
+}
 
 namespace LX_FileIO
 {
@@ -44,12 +58,22 @@ class IOException;
 */
 class LX_FileBuffer
 {
+    friend class LX_Mixer::LX_Chunk;
+    friend class LX_Graphics::LX_Image;
+    friend class LX_TrueTypeFont::LX_Font;
     UTF8string _name;        /* The name of the file the instance refers to  */
     char *_buffer;           /* The read-only buffer                         */
     Uint64 _bufsize;         /* The size of the buffer                       */
 
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
+
+    // Load a chunk from the memory, for internal uses
+    Mix_Chunk * getChunkFromBuffer_(void);
+    // Load a surface from the memory, for internal uses
+    SDL_Surface * getSurfaceFromBuffer_(void);
+    // Load a TTF_Font from the memory
+    TTF_Font * getFontFromBuffer_(int size);
 
 public :
 
@@ -78,38 +102,6 @@ public :
     *
     */
     LX_FileBuffer(const UTF8string& filename);
-
-    /**
-    *   @fn SDL_Surface * getSurfaceFromBuffer(void)
-    *
-    *   Try to load a surface from the memory
-    *
-    *   @return A valid surface if the memory refers to an image
-    *
-    */
-    SDL_Surface * getSurfaceFromBuffer(void);
-
-    /**
-    *   @fn TTF_Font * getFontFromBuffer(int size)
-    *
-    *   Try to load a TTF_Font from the memory
-    *
-    *   @param size The font size
-    *
-    *   @return A valid font if the memory refers to a font
-    *
-    */
-    TTF_Font * getFontFromBuffer(int size);
-
-    /**
-    *   @fn Mix_Chunk * getChunkFromBuffer(void)
-    *
-    *   Try to load a sample from the memory
-    *
-    *   @return A valid sample if the memory refers to a Mix_Chunk
-    *
-    */
-    Mix_Chunk * getChunkFromBuffer(void);
 
     /**
     *   @fn const char * getFilename(void)

@@ -19,13 +19,12 @@
 *
 */
 
-#include <new>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
-
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <new>
 
 namespace LX_FileIO
 {
@@ -72,21 +71,21 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
 }
 
 
-SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer(void)
+SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer_(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer, static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:IMG_Load_RW(rw,1);
 }
 
 
-TTF_Font * LX_FileBuffer::getFontFromBuffer(int size)
+TTF_Font * LX_FileBuffer::getFontFromBuffer_(int size)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:TTF_OpenFontRW(rw,1,size);
 }
 
 
-Mix_Chunk * LX_FileBuffer::getChunkFromBuffer(void)
+Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:Mix_LoadWAV_RW(rw,1);

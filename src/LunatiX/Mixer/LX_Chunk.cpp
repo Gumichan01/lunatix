@@ -77,7 +77,7 @@ bool LX_Chunk::load_(std::string filename)
 bool LX_Chunk::loadFromBuffer(LX_FileIO::LX_FileBuffer *file)
 {
     Mix_FreeChunk(_chunk);
-    _chunk = file->getChunkFromBuffer();
+    _chunk = file->getChunkFromBuffer_();
     return _chunk != nullptr;
 }
 

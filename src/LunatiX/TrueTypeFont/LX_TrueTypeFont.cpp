@@ -106,7 +106,7 @@ TTF_Font * LX_Font::createInternalFont_(int size)
         return nullptr;        // This code will normally never be executed
 
     // The font buffer exists
-    return _font_buffer->getFontFromBuffer(size);
+    return _font_buffer->getFontFromBuffer_(size);
 }
 
 
