@@ -67,11 +67,8 @@ class LX_FileBuffer
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
-    // Load a chunk from the memory, for internal uses
     Mix_Chunk * getChunkFromBuffer_(void);
-    // Load a surface from the memory, for internal uses
     SDL_Surface * getSurfaceFromBuffer_(void);
-    // Load a TTF_Font from the memory
     TTF_Font * getFontFromBuffer_(int size);
 
 public :
@@ -101,7 +98,6 @@ public :
     *
     */
     LX_FileBuffer(const UTF8string& filename);
-
 
     LX_Mixer::LX_Chunk * getSample();
 

@@ -71,21 +71,21 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     delete reader;
 }
 
-
+// Private function
 SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer_(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer, static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:IMG_Load_RW(rw,1);
 }
 
-
+// Private function
 TTF_Font * LX_FileBuffer::getFontFromBuffer_(int size)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:TTF_OpenFontRW(rw,1,size);
 }
 
-
+// Private function
 Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
@@ -113,7 +113,7 @@ const char * LX_FileBuffer::getFilename(void)
 
 LX_FileBuffer::~LX_FileBuffer()
 {
-    delete []  _buffer;
+    delete [] _buffer;
 }
 
 };
