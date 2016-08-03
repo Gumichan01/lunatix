@@ -46,12 +46,12 @@ class LX_Gamepad
     LX_Haptic *_haptic;
 
 
-const char * nameOf(SDL_Joystick * joy);
-const char * nameOf(SDL_GameController * controller);
-int lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
-int gstat(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info);
-int statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info);
-int statGamepad(SDL_GameController * gp, LX_GamepadInfo& info);
+    const char * nameOf_(SDL_Joystick * joy);
+    const char * nameOf_(SDL_GameController * controller);
+    bool lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+    bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info);
+    bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info);
+    bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info);
 
 
 public :

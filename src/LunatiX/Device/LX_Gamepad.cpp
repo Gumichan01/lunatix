@@ -55,22 +55,25 @@ LX_Gamepad::~LX_Gamepad()
 }
 
 
-const char * LX_Gamepad::nameOf(SDL_Joystick * joy)
+const char * LX_Gamepad::nameOf_(SDL_Joystick * joy)
 {
     return SDL_JoystickName(joy);
 }
 
 
-const char * LX_Gamepad::nameOf(SDL_GameController * controller)
+const char * LX_Gamepad::nameOf_(SDL_GameController * controller)
 {
     return SDL_GameControllerName(controller);
 }
 
 
-int LX_Gamepad::lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
+bool LX_Gamepad::lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     if(joy == nullptr)
-        return LX_SetError("Invalid joystick\n");
+    {
+        LX_SetError("Invalid joystick\n");
+        return false;
+    }
 
     // Get information
     info.id = SDL_JoystickInstanceID(joy);
@@ -83,40 +86,44 @@ int LX_Gamepad::lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
     if(info.id == -1 || info.nb_axis == -1 || info.nb_balls == -1
             || info.nb_buttons == -1 || info.nb_hats == -1)
     {
-        return LX_SetError("Cannot get information\n");
+        LX_SetError("Cannot get information\n");
+        return false;
     }
 
-    return 0;
+    return true;
 }
 
 
-int LX_Gamepad::gstat(SDL_Joystick * joy, SDL_GameController * gc,
-          LX_GamepadInfo& info)
+bool LX_Gamepad::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
+                        LX_GamepadInfo& info)
 {
     if(joy != nullptr)
     {
-        info.name = nameOf(joy);
+        info.name = nameOf_(joy);
         return lx_stat(joy,info);
     }
     else if(gc != nullptr)
     {
-        info.name = nameOf(gc);
+        info.name = nameOf_(gc);
         return lx_stat(SDL_GameControllerGetJoystick(gc),info);
     }
     else
-        return LX_SetError("Invalid joystick/game controller\n");
+    {
+        // This case should not happen
+        LX_SetError("Invalid joystick/game controller\n");
+    }
 }
 
 
-int LX_Gamepad::statGamepad(SDL_Joystick * joy, LX_GamepadInfo& info)
+bool LX_Gamepad::statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
-    return gstat(joy,nullptr,info);
+    return gstat_(joy,nullptr,info);
 }
 
 
-int LX_Gamepad::statGamepad(SDL_GameController * gc, LX_GamepadInfo& info)
+bool LX_Gamepad::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info)
 {
-    return gstat(nullptr,gc,info);
+    return gstat_(nullptr,gc,info);
 }
 
 
@@ -153,9 +160,9 @@ LX_Haptic * LX_Gamepad::getHaptic(void)
 const char * LX_Gamepad::getName(void)
 {
     if(_gc != nullptr)
-        return nameOf(_gc);
+        return nameOf_(_gc);
     else
-        return nameOf(_joy);
+        return nameOf_(_joy);
 }
 
 
@@ -165,9 +172,9 @@ UTF8string LX_Gamepad::toString(void)
     int err = 0;
 
     if(_gc != nullptr)
-        err = statGamepad(_gc,gi);
+        err = statGamepad_(_gc,gi);
     else
-        err = statGamepad(_joy,gi);
+        err = statGamepad_(_joy,gi);
 
     if(err == -1)
         return UTF8string(std::string("Cannot get gamepad information: ")
