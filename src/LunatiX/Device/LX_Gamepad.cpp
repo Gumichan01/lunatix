@@ -67,7 +67,7 @@ const char * LX_Gamepad::nameOf_(SDL_GameController * controller)
 }
 
 
-bool LX_Gamepad::lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info)
+bool LX_Gamepad::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info)
 {
     if(joy == nullptr)
     {
@@ -100,12 +100,12 @@ bool LX_Gamepad::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
     if(joy != nullptr)
     {
         info.name = nameOf_(joy);
-        return lx_stat(joy,info);
+        return lx_stat_(joy,info);
     }
     else if(gc != nullptr)
     {
         info.name = nameOf_(gc);
-        return lx_stat(SDL_GameControllerGetJoystick(gc),info);
+        return lx_stat_(SDL_GameControllerGetJoystick(gc),info);
     }
     else
     {

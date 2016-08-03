@@ -48,7 +48,7 @@ class LX_Gamepad
 
     const char * nameOf_(SDL_Joystick * joy);
     const char * nameOf_(SDL_GameController * controller);
-    bool lx_stat(SDL_Joystick * joy, LX_GamepadInfo& info);
+    bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info);
     bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info);
     bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info);
     bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info);
@@ -127,7 +127,7 @@ public :
     *
     *   Get information about the gamepad
     *
-    *   @param[in,out] info The information structure to fill
+    *   @param [in,out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
     *           Call LX_GetError() to get the error message
     *
