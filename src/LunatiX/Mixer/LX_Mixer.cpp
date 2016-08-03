@@ -121,9 +121,9 @@ LX_Chunk * loadSample(UTF8string& filename)
 }
 
 
-LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
+LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)
 {
-    return (file == nullptr) ? nullptr:(new LX_Chunk(file));
+    return file.getSample();
 }
 
 

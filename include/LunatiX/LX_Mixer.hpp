@@ -173,7 +173,7 @@ LX_Chunk * loadSample(std::string filename);
 LX_Chunk * loadSample(UTF8string& filename);
 
 /**
-*   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file)
+*   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)
 *
 *   Create a new LX_Chunk instance from a file buffer
 *
@@ -185,7 +185,7 @@ LX_Chunk * loadSample(UTF8string& filename);
 *   @note   This function creates a new instance of LX_Chunk.
 *           So do not forget to destroy it.
 */
-LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer *file);
+LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file);
 
 /**
 *   @fn void setMusicPosition(double pos)
