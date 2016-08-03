@@ -45,14 +45,13 @@ int main(int argc, char **argv)
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
-    /*test_winInfo(win);
+    test_winInfo(win);
     test_opengl();
     test_window1(w);
     test_window2();
     test_winManager(w);
-    test_rendering(w);
     test_image(w);
-    test_drawing(w);*/
+    test_drawing(w);
     test_viewport(w);
     delete win;
 
@@ -116,72 +115,6 @@ void test_window2(void)
 
     LX_Log::log(" = END TEST = ");
     SDL_Delay(750);
-}
-
-
-void test_rendering(LX_Win::LX_Window *win)
-{
-    bool screen_ok;
-    std::string name = "data/bullet.png";
-
-    SDL_Surface *sf = nullptr;
-    SDL_Texture *st = nullptr;
-    SDL_Rect pos = {100,100,256,128};
-
-    cout << " = TEST Rendering = " << endl;
-
-    if(win == nullptr)
-    {
-        cerr << "FAILURE - The window was not initialized" << endl;
-        return;
-    }
-    else
-        cout << "SUCCESS - The window exists" << endl;
-
-    if(win->getRenderer() == nullptr)
-        cerr << "FAILURE - the renderer was not initialized" << endl;
-    else
-        cout << "SUCCESS - the renderer is ready" << endl;
-
-    sf = IMG_Load(name.c_str());
-    st = SDL_CreateTextureFromSurface(win->getRenderer(),sf);
-    SDL_FreeSurface(sf);
-
-    if(st == nullptr)
-        cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - the texture was loaded with success" << endl;
-
-    win->clearWindow();
-    if(win->putTexture(st,nullptr,&pos) == false)
-        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - Texture on the renderer" << endl;
-
-    win->update();
-    SDL_Delay(750);
-    win->clearWindow();
-
-    if(win->putTextureAndRotate(st,nullptr,&pos,45) == false)
-        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - Texture on the renderer with rotation" << endl;
-
-    win->update();
-
-    // Take a screenshot
-    screen_ok = win->screenshot("win-renderer.png");
-
-    if(screen_ok == false)
-        cerr << "FAILURE - failed to take a screenshot of the renderer"
-             << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - screenshot token from the renderer" << endl;
-
-    SDL_Delay(500);
-    win->clearWindow();
-    SDL_DestroyTexture(st);
-    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -505,7 +438,6 @@ void test_winManager(LX_Win::LX_Window *win)
 {
     std::string name = "data/bullet.png";
 
-    SDL_Texture *st = nullptr;
     SDL_Rect pos = {100,100,256,128};
     cout << " = TEST WinManager = " << endl;
 
@@ -521,31 +453,11 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - the window was added into the window manager" << endl;
 
-    st = loadTextureFromFile(name.c_str(), static_cast<unsigned int>(id));
-
-    if(st == nullptr)
-        cerr << "FAILURE - failed to load the texture " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - the texture was loaded with success" << endl;
-
     LX_Win::LX_WindowManager::getInstance()->clearWindows();
-    if(win != nullptr && win->putTexture(st,nullptr,&pos) == false)
-        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - Texture on the renderer" << endl;
-
+    win->setDrawColor({32,128,64,255});
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
-    SDL_Delay(1000);
+    SDL_Delay(512);
     LX_Win::LX_WindowManager::getInstance()->clearWindows();
-
-    if(win != nullptr && win->putTextureAndRotate(st,nullptr,&pos,45) == false)
-        cerr << "FAILURE - failed to put the texture " << LX_GetError() << endl;
-    else
-        cout << "SUCCESS - Texture on the renderer with rotation" << endl;
-
-    LX_Win::LX_WindowManager::getInstance()->updateWindows();
-    SDL_Delay(1000);
-    LX_Win::LX_WindowManager::getInstance()->updateWindows();
     LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
     LX_Log::log(" = END TEST = ");
 }

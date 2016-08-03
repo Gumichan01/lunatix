@@ -15,9 +15,7 @@ void test_read(void);
 void test_read2(void);
 void test_write(void);
 void test_tellSeek(void);
-void test_getSurface(void);
 void test_buffer(void);
-void test_getSurface2(void);
 void test_getChunk(void);
 
 namespace
@@ -42,9 +40,7 @@ int main(int argc, char **argv)
     test_read();
     test_read2();
     test_tellSeek();
-    test_getSurface();
     test_buffer();
-    test_getSurface2();
     test_getChunk();
 
     remove(str.c_str());
@@ -274,50 +270,6 @@ void test_tellSeek(void)
 }
 
 
-void test_getSurface(void)
-{
-    LX_Log::log(" = TEST getSurface = ");
-
-    string str_ex = "data/bullet.png";
-    SDL_Surface * surface = nullptr;
-
-    cout << "INFO - Open " << str_ex << "..." << endl;
-    LX_File f(str_ex.c_str(),LX_FILEIO_RDONLY);
-
-    cout << "INFO - " << f.getFilename() << " was opened. Its size is "
-         << f.size() << " byte(s)" << endl;
-
-    surface = f.getSurfaceFromData();
-
-    if(surface == nullptr)
-        cerr << "FAILURE - getSurfaceFromData() "
-             << "Expected : non-nullptr pointer; got : nullptr -> "
-             << LX_GetError() << endl;
-    else
-    {
-        cout << "SUCCESS - getSurfaceFromData() : got a valid surface from "
-             << f.getFilename() << endl;
-        SDL_FreeSurface(surface);
-    }
-
-    surface = LX_Graphics::loadSurface(&f);
-
-    if(surface == nullptr)
-        cerr << "FAILURE - LX_Graphics::loadSurface from file Expected : "
-             << "non-nullptr pointer; got : nullptr -> "
-             << LX_GetError() << endl;
-    else
-    {
-        cout << "SUCCESS - loadSurface() : got a valid surface from "
-             << f.getFilename() << endl;
-        SDL_FreeSurface(surface);
-    }
-
-    f.close();
-    LX_Log::log(" = END TEST = ");
-}
-
-
 void test_buffer(void)
 {
     LX_Log::log(" = TEST Buffer = ");
@@ -358,44 +310,8 @@ void test_buffer(void)
 }
 
 
-void test_getSurface2(void)
-{
-    LX_FileBuffer f("data/bullet.png");
-    SDL_Surface * surface = nullptr;
-
-    LX_Log::log(" = TEST Surface from buffer = ");
-    surface = f.getSurfaceFromBuffer();
-
-    if(surface == nullptr)
-        cerr << "FAILURE - getsurface from buffer Expected : '"
-             << "'non-nullptr pointer; got : nullptr -> "
-             << LX_GetError() << endl;
-    else
-    {
-        cout << "SUCCESS - getSurfaceFromBuffer : got a valid surface from "
-             << f.getFilename() << endl;
-        SDL_FreeSurface(surface);
-    }
-
-    surface = LX_Graphics::loadSurfaceFromFileBuffer(&f);
-
-    if(surface == nullptr)
-        cerr << "FAILURE - loadSurfaceFromFileBuffer Expected : "
-             << "non-nullptr pointer; got : nullptr -> " << LX_GetError() << endl;
-    else
-    {
-        cout << "SUCCESS - loadSurfaceFromFileBuffer : "
-             << "got a valid surface from " << f.getFilename() << endl;
-        SDL_FreeSurface(surface);
-    }
-
-    LX_Log::log(" = END TEST = ");
-}
-
-
 void test_getChunk(void)
 {
-    Mix_Chunk * mix = nullptr;
     LX_Mixer::LX_Chunk * lxmix = nullptr;
 
     LX_Log::log(" = TEST Chunk from buffer = ");
@@ -405,8 +321,9 @@ void test_getChunk(void)
 
     try
     {
-        LX_Mixer::LX_Chunk dump(&f);
+        LX_Mixer::LX_Chunk *dump = f.loadSample();
         cout << "SUCCESS - LX_Chunk instanciation done." << endl;
+        delete dump;
     }
     catch(IOException & ioe)
     {
@@ -414,20 +331,7 @@ void test_getChunk(void)
              << " a file buffer as argument" << ioe.what() << endl;
     }
 
-    mix = f.getChunkFromBuffer();
-
-    if(mix == nullptr)
-        cerr << "FAILURE - getChunkFromBuffer() from buffer Expected : "
-             << "non-nullptr pointer; got : nullptr -> " << LX_GetError()
-             << endl;
-    else
-    {
-        cout << "SUCCESS - getChunkFromBuffer() : got a valid chunk from "
-             << f.getFilename() << endl;
-        Mix_FreeChunk(mix);
-    }
-
-    lxmix = LX_Mixer::loadSample(&f);
+    lxmix = LX_Mixer::loadSample(f);
 
     if(lxmix == nullptr)
         cerr << "FAILURE - LX_Mixer::loadSample() Expected : "
