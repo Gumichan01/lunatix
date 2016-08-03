@@ -45,6 +45,10 @@ LX_ChunkException::~LX_ChunkException() noexcept {}
 
 /* LX_Chunk */
 
+// Private constructor used for internal uses
+LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chunk(&chunk) {}
+
+
 LX_Chunk::LX_Chunk(std::string& filename) : _chunk(nullptr)
 {
     if(load_(filename) == false)
@@ -59,25 +63,10 @@ LX_Chunk::LX_Chunk(UTF8string& filename) : _chunk(nullptr)
 }
 
 
-LX_Chunk::LX_Chunk(LX_FileIO::LX_FileBuffer * file) : _chunk(nullptr)
-{
-    if(loadFromBuffer(file) == false)
-        throw LX_ChunkException(LX_GetError());
-}
-
-
 bool LX_Chunk::load_(std::string filename)
 {
     Mix_FreeChunk(_chunk);
     _chunk = Mix_LoadWAV(filename.c_str());
-    return _chunk != nullptr;
-}
-
-
-bool LX_Chunk::loadFromBuffer(LX_FileIO::LX_FileBuffer *file)
-{
-    Mix_FreeChunk(_chunk);
-    _chunk = file->getChunkFromBuffer_();
     return _chunk != nullptr;
 }
 

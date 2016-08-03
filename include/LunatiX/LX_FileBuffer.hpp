@@ -58,7 +58,6 @@ class IOException;
 */
 class LX_FileBuffer
 {
-    friend class LX_Mixer::LX_Chunk;
     friend class LX_Graphics::LX_Image;
     friend class LX_TrueTypeFont::LX_Font;
     UTF8string _name;        /* The name of the file the instance refers to  */
@@ -102,6 +101,9 @@ public :
     *
     */
     LX_FileBuffer(const UTF8string& filename);
+
+
+    LX_Mixer::LX_Chunk * getSample();
 
     /**
     *   @fn const char * getFilename(void)

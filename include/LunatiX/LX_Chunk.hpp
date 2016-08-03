@@ -27,9 +27,7 @@ struct Mix_Chunk;
 
 namespace LX_FileIO
 {
-
 class LX_FileBuffer;
-
 };
 
 
@@ -65,8 +63,10 @@ public :
 */
 class LX_Chunk : public virtual LX_Sound
 {
+    friend class LX_FileIO::LX_FileBuffer;
     Mix_Chunk *_chunk;
 
+    LX_Chunk(Mix_Chunk& chunk);
     LX_Chunk(LX_Chunk& m);
     LX_Chunk& operator =(LX_Chunk& m);
 
@@ -104,17 +104,6 @@ public:
     *   @exception LX_ChunkException if the chunk cannot be created from the file
     */
     LX_Chunk(UTF8string& filename);
-
-    /**
-    *   @fn LX_Chunk(LX_FileIO::LX_FileBuffer * file)
-    *
-    *   Construct the instance creating the Mix_Chunk instance
-    *   from a file buffer.
-    *
-    *   @param file The file buffer to create the chunk from
-    *   @exception LX_ChunkException if the chunk cannot be created from the file buffer
-    */
-    LX_Chunk(LX_FileIO::LX_FileBuffer *file);
 
     /**
     *   @fn bool loadFromBuffer(LX_FileBuffer *file)

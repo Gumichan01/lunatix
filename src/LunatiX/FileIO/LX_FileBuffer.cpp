@@ -23,6 +23,7 @@
 #include <LunatiX/LX_FileBuffer.hpp>
 
 #include <SDL2/SDL_image.h>
+#include <LunatiX/LX_Chunk.hpp>
 #include <SDL2/SDL_mixer.h>
 #include <new>
 
@@ -89,6 +90,18 @@ Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_(void)
 {
     SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:Mix_LoadWAV_RW(rw,1);
+}
+
+
+LX_Mixer::LX_Chunk * LX_FileBuffer::getSample()
+{
+    Mix_Chunk * ch = getChunkFromBuffer_();
+
+    if(ch == nullptr)
+        return nullptr;
+
+    LX_Mixer::LX_Chunk *lxchunk = new LX_Mixer::LX_Chunk(*ch);
+    return lxchunk;
 }
 
 
