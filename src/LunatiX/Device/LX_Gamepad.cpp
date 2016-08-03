@@ -24,7 +24,18 @@
 #include <LunatiX/LX_Haptic.hpp>
 #include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_Log.hpp>
+#include <stdexcept>
 
+#include <cstring>
+
+#ifdef __WIN32__
+#define LX_SEP '\\'
+#else
+#define LX_SEP '/'
+#endif // __WIN32__
+
+#define __FILENAME__ (strrchr(__FILE__, LX_SEP) ? strrchr(__FILE__, LX_SEP) + 1 : __FILE__)
 
 namespace LX_Device
 {
@@ -78,6 +89,7 @@ bool LX_Gamepad::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info)
     // Get information
     info.id = SDL_JoystickInstanceID(joy);
     info.uid = SDL_JoystickGetGUID(joy);
+    info.is_haptic = isHaptic() ? "Yes" : "No";
     info.nb_axis = SDL_JoystickNumAxes(joy);
     info.nb_balls = SDL_JoystickNumBalls(joy);
     info.nb_buttons = SDL_JoystickNumButtons(joy);
@@ -109,8 +121,10 @@ bool LX_Gamepad::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
     }
     else
     {
-        // This case should not happen
-        LX_SetError("Invalid joystick/game controller\n");
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
+                            "%s:%d - Internal error: Invalid LX_Gamepad object",
+                            __FILENAME__,__LINE__);
+        throw std::runtime_error("Internal error - Bad LX_Gamepad");
     }
 }
 
@@ -176,7 +190,7 @@ bool LX_Gamepad::stat(LX_GamepadInfo& info)
         res = statGamepad_(_joy,info);
 
     if(!res)
-        LX_SetError(UTF8string(std::string(":LX_Gamepad::stat: ") + LX_GetError()));
+        LX_SetError(UTF8string(std::string("LX_Gamepad::stat: ") + LX_GetError()));
 
     return res;
 }
