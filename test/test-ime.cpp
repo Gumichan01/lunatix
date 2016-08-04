@@ -4,30 +4,27 @@
 
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 {
-    LX_Win::LX_Window& w;
-    LX_TrueTypeFont::LX_Font font;
+    LX_Win::LX_Window& _w;
+    LX_TrueTypeFont::LX_Font _font;
 
 public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
-     : LX_Text::LX_RedrawCallback(), w(win), font(SDL_Color{255,255,255,0}) {}
+     : LX_Text::LX_RedrawCallback(), _w(win), _font(SDL_Color{255,255,255,0}) {}
 
     void operator ()(UTF8string& u8str,size_t cursor)
     {
-        w.clearWindow();
+        LX_Graphics::LX_BlendedTextImage img(_font,_w);
+
+        _w.clearWindow();
 
         if(!u8str.utf8_empty())
         {
-            SDL_Surface *sf = font.drawBlendedText(u8str.utf8_str());
-            SDL_Texture *tx = LX_Graphics::loadTextureFromSurface(sf,&w);
-
-            int width, height;
-            font.sizeOfText(u8str.utf8_str(),width,height);
-
-            SDL_Rect r = {100,100,width,height};
-            w.putTexture(tx,nullptr,&r);
+            img.setText(u8str,24);
+            img.setPosition(100,100);
+            img.draw();
         }
-        w.update();
+        _w.update();
     }
 
     ~FuncDraw() = default;
