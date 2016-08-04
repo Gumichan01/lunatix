@@ -372,6 +372,7 @@ public:
     void setPosition(int x, int y);
     virtual void setText(std::string str, unsigned int sz) = 0;
     virtual void setText(const UTF8string& str, unsigned int sz) = 0;
+    virtual void setSize(unsigned int sz) = 0;
     virtual ~LX_TextImage();
 };
 
@@ -391,6 +392,7 @@ public:
 
     virtual void setText(std::string str, unsigned int sz = 0);
     virtual void setText(const UTF8string& str, unsigned int sz = 0);
+    virtual void setSize(unsigned int sz);
 
     virtual ~LX_SolidTextImage();
 };
@@ -413,6 +415,7 @@ public:
 
     virtual void setText(std::string str, SDL_Color c, unsigned int sz = 0);
     virtual void setText(const UTF8string& str, SDL_Color c, unsigned int sz = 0);
+    virtual void setSize(unsigned int sz);
 
     virtual ~LX_ShadedTextImage();
 };
