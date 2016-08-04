@@ -355,7 +355,7 @@ void LX_TextImage::draw()
 
 void LX_TextImage::draw(const double angle)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,angle,nullptr,
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,(-angle),nullptr,
                      SDL_FLIP_NONE);
 }
 
@@ -394,6 +394,14 @@ LX_SolidTextImage::LX_SolidTextImage(const UTF8string& str, unsigned int sz,
 }
 
 
+void LX_SolidTextImage::updateTexture_()
+{
+    SDL_DestroyTexture(_texture);
+    _texture = _font.drawSolidText(_text,_size,_win);
+    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+}
+
+
 void LX_SolidTextImage::setText(std::string str, unsigned int sz)
 {
     setText(UTF8string(str),sz);
@@ -404,17 +412,13 @@ void LX_SolidTextImage::setText(const UTF8string& str, unsigned int sz)
 {
     _text = str;
     _size = sz;
-    SDL_DestroyTexture(_texture);
-    _texture = _font.drawSolidText(_text,_size,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    updateTexture_();
 }
 
 void LX_SolidTextImage::setSize(unsigned int sz)
 {
     _size = sz;
-    SDL_DestroyTexture(_texture);
-    _texture = _font.drawSolidText(_text,_size,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    updateTexture_();
 }
 
 LX_SolidTextImage::~LX_SolidTextImage() {}
@@ -443,6 +447,14 @@ LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& str, unsigned int sz,
 }
 
 
+void LX_ShadedTextImage::updateTexture_()
+{
+    SDL_DestroyTexture(_texture);
+    _texture = _font.drawShadedText(_text,_size,_bgcolor,_win);
+    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+}
+
+
 void LX_ShadedTextImage::setText(std::string str, SDL_Color c, unsigned int sz)
 {
     setText(UTF8string(str),c,sz);
@@ -454,18 +466,14 @@ void LX_ShadedTextImage::setText(const UTF8string& str, SDL_Color c, unsigned in
     _text = str;
     _size = sz;
     _bgcolor = c;
-    SDL_DestroyTexture(_texture);
-    _texture = _font.drawShadedText(_text,_size,_bgcolor,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    updateTexture_();
 }
 
 
 void LX_ShadedTextImage::setSize(unsigned int sz)
 {
     _size = sz;
-    SDL_DestroyTexture(_texture);
-    _texture = _font.drawShadedText(_text,_size,_bgcolor,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    updateTexture_();
 }
 
 

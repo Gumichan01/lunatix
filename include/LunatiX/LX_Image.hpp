@@ -356,6 +356,8 @@ protected:
     unsigned int _size;
     LX_AABB _dimension;
 
+    virtual void updateTexture_() = 0;
+
 public:
 
     LX_TextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
@@ -369,16 +371,22 @@ public:
 
     virtual void draw();
     virtual void draw(const double angle);
+
     void setPosition(int x, int y);
     virtual void setText(std::string str, unsigned int sz) = 0;
     virtual void setText(const UTF8string& str, unsigned int sz) = 0;
     virtual void setSize(unsigned int sz) = 0;
+
     virtual ~LX_TextImage();
 };
 
 
 class LX_SolidTextImage: public LX_TextImage
 {
+protected:
+
+    virtual void updateTexture_();
+
 public:
 
     LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
@@ -401,6 +409,10 @@ public:
 class LX_ShadedTextImage: public LX_TextImage
 {
     SDL_Color _bgcolor;
+
+protected:
+
+    virtual void updateTexture_();
 
 public:
 
