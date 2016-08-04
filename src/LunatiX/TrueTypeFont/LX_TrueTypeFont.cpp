@@ -33,6 +33,8 @@ using namespace LX_FileIO;
 namespace LX_TrueTypeFont
 {
 
+enum LX_TTF_TypeText: short {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
+
 LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
     : _font_str(""), _font_size(size),
       _font_color(color), _font_buffer(nullptr)

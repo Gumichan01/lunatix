@@ -55,17 +55,7 @@ class LX_TextImage;
 namespace LX_TrueTypeFont
 {
 
-/**
-*   @enum LX_TTF_TypeText
-*   @brief The type of text
-*
-*   This enumeration describes the type of the text to draw :
-*    - LX_TTF_SOLID   : Quick rendering and dirty text
-*    - LX_TTF_SHADED  : Slow rendering and nice text
-*    - LX_TTF_BLENDED : Very slow rendering but very nice text
-*
-*/
-enum LX_TTF_TypeText: short {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
+enum LX_TTF_TypeText: short;
 
 
 /**
