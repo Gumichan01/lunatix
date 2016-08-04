@@ -348,15 +348,13 @@ public:
 
 class LX_TextImage: public LX_Image
 {
+
+protected:
+
     UTF8string _text;
     LX_TrueTypeFont::LX_Font& _font;
     unsigned int _size;
     LX_AABB _dimension;
-
-
-protected:
-
-    void loadText_(LX_TrueTypeFont::LX_TTF_TypeText ty);
 
 public:
 
@@ -370,9 +368,10 @@ public:
                  LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
+    virtual void draw(const double angle);
     void setPosition(int x, int y);
-    void setText(std::string str, unsigned int sz = 0);
-    void setText(const UTF8string& str, unsigned int sz = 0);
+    virtual void setText(std::string str, unsigned int sz) = 0;
+    virtual void setText(const UTF8string& str, unsigned int sz) = 0;
     virtual ~LX_TextImage();
 };
 
@@ -390,7 +389,32 @@ public:
     LX_SolidTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                      LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
+    virtual void setText(std::string str, unsigned int sz = 0);
+    virtual void setText(const UTF8string& str, unsigned int sz = 0);
+
     virtual ~LX_SolidTextImage();
+};
+
+
+class LX_ShadedTextImage: public LX_TextImage
+{
+    SDL_Color _bgcolor;
+
+public:
+
+    LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+                       Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_ShadedTextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                       LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_ShadedTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                       LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual void setText(std::string str, SDL_Color c, unsigned int sz = 0);
+    virtual void setText(const UTF8string& str, SDL_Color c, unsigned int sz = 0);
+
+    virtual ~LX_ShadedTextImage();
 };
 
 };

@@ -122,6 +122,7 @@ LX_Image::~LX_Image()
 }
 
 
+
 /* LX_Sprite */
 
 LX_Sprite::LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
@@ -159,6 +160,7 @@ void LX_Sprite::draw(LX_AABB * box, const double angle)
 
 
 LX_Sprite::~LX_Sprite() {}
+
 
 
 /* LX_AnimatedSprite */
@@ -215,6 +217,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box)
 LX_AnimatedSprite::~LX_AnimatedSprite() {}
 
 
+
 /* LX_Surface */
 
 LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
@@ -248,6 +251,7 @@ LX_Surface::~LX_Surface()
 {
     SDL_FreeSurface(_surface);
 }
+
 
 
 /* LX_Streaming_Image */
@@ -322,11 +326,13 @@ LX_Streaming_Image::~LX_Streaming_Image()
 }
 
 
+
 /* LX_TextImage */
 
 LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            Uint32 format)
-    : LX_Image(w,format), _text(""), _font(font), _size(0), _dimension({0,0,0,0}) {}
+    : LX_Image(w,format), _text(""), _font(font), _size(0),
+      _dimension({0,0,0,0}) {}
 
 
 LX_TextImage::LX_TextImage(std::string str, unsigned int sz,
@@ -342,16 +348,15 @@ LX_TextImage::LX_TextImage(const UTF8string& str, unsigned int sz,
       _dimension({0,0,0,0}) {}
 
 
-void LX_TextImage::loadText_(LX_TrueTypeFont::LX_TTF_TypeText ty)
-{
-    _texture = _font.drawTextToTexture(ty,_text.utf8_str(),_size,&_win);
-    _font.sizeOfText(_text.utf8_str(),_dimension.w,_dimension.h);
-}
-
-
 void LX_TextImage::draw()
 {
-    SDL_RenderCopy(_win._renderer,_texture,nullptr,&_dimension);
+    draw(0.0);
+}
+
+void LX_TextImage::draw(const double angle)
+{
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,angle,nullptr,
+                     SDL_FLIP_NONE);
 }
 
 
@@ -362,21 +367,8 @@ void LX_TextImage::setPosition(int x, int y)
 }
 
 
-void LX_TextImage::setText(std::string str, unsigned int sz)
-{
-    _text = str;
-    _size = sz;
-}
-
-
-void LX_TextImage::setText(const UTF8string& str, unsigned int sz)
-{
-    _text = str;
-    _size = sz;
-}
-
-
 LX_TextImage::~LX_TextImage() {}
+
 
 
 /* LX_SolidTextImage */
@@ -397,9 +389,68 @@ LX_SolidTextImage::LX_SolidTextImage(const UTF8string& str, unsigned int sz,
                                      LX_Win::LX_Window& w,Uint32 format)
     : LX_TextImage(str,sz,font,w,format)
 {
-    loadText_(LX_TrueTypeFont::LX_TTF_SOLID);
+    _texture = _font.drawSolidText(_text,_size,_win);
+    _font.sizeOfText(_text.utf8_str(),_dimension.w,_dimension.h);
+}
+
+
+void LX_SolidTextImage::setText(std::string str, unsigned int sz)
+{
+    setText(UTF8string(str),sz);
+}
+
+
+void LX_SolidTextImage::setText(const UTF8string& str, unsigned int sz)
+{
+    _text = str;
+    _size = sz;
+    _texture = _font.drawSolidText(_text,_size,_win);
+    _font.sizeOfText(_text.utf8_str(),_dimension.w,_dimension.h);
 }
 
 
 LX_SolidTextImage::~LX_SolidTextImage() {}
+
+
+
+/* LX_ShadedTextImage */
+
+LX_ShadedTextImage::LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,
+                                       LX_Win::LX_Window& w, Uint32 format)
+    : LX_TextImage(font,w,format), _bgcolor({0,0,0,0}) {}
+
+
+LX_ShadedTextImage::LX_ShadedTextImage(std::string str, unsigned int sz,
+                                       LX_TrueTypeFont::LX_Font& font,
+                                       LX_Win::LX_Window& w, Uint32 format)
+    : LX_ShadedTextImage(UTF8string(str),sz,font,w,format) {}
+
+
+LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& str, unsigned int sz,
+                                       LX_TrueTypeFont::LX_Font& font,
+                                       LX_Win::LX_Window& w,Uint32 format)
+    : LX_TextImage(str,sz,font,w,format), _bgcolor({0,0,0,0})
+{
+
+}
+
+
+void LX_ShadedTextImage::setText(std::string str, SDL_Color c, unsigned int sz)
+{
+    setText(UTF8string(str),c,sz);
+}
+
+
+void LX_ShadedTextImage::setText(const UTF8string& str, SDL_Color c, unsigned int sz)
+{
+    _text = str;
+    _size = sz;
+    _texture = _font.drawShadedText(_text,_size,c,_win);
+    _font.sizeOfText(_text.utf8_str(),_dimension.w,_dimension.h);
+}
+
+
+LX_ShadedTextImage::~LX_ShadedTextImage() {}
+
+
 };
