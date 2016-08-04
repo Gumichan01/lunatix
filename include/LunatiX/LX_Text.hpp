@@ -46,7 +46,7 @@ public:
     /**
     *   @fn virtual void operator ()(UTF8string& u8str, size_t cursor = 0) = 0;
     *
-    *   Virtual function that must implemented in a subclass
+    *   Virtual function that must be implemented in a subclass
     *   @param u8str The utf-8 encoded string that will be displayed
     *   @param cursor The position of the cursor on the string
     */
@@ -108,6 +108,7 @@ class LX_TextInput
     UTF8string _u8text;
     size_t _cursor;
     bool _done;
+    bool _draw;
 
     LX_TextInput(LX_TextInput& t);
     LX_TextInput(LX_TextInput&& t);

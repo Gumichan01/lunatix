@@ -43,7 +43,7 @@ bool isEndofLine(char * text)
 };
 
 
-LX_RedrawCallback::LX_RedrawCallback() {}
+LX_RedrawCallback::LX_RedrawCallback()  {}
 LX_RedrawCallback::~LX_RedrawCallback() {}
 
 
@@ -69,6 +69,7 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 {
     SDL_Event ev;
     _done = false;
+    _draw = false;
 
     while(!_done)
     {
@@ -76,23 +77,30 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
         {
             switch(ev.type)
             {
-            case SDL_KEYDOWN    :
+            case SDL_KEYDOWN:
                 keyboardInput_(ev);
+                _draw = true;
                 break;
 
-            case SDL_TEXTINPUT  :
+            case SDL_TEXTINPUT:
                 textInput_(ev);
+                _draw = true;
                 break;
 
             case SDL_TEXTEDITING:
                 textEdit_(ev);
+                _draw = true;
                 break;
 
             default :
                 break;
             }
 
-            redraw(_u8text,_cursor);
+            if(_draw)
+            {
+                redraw(_u8text,_cursor);
+                _draw = false;
+            }
         }
 
         SDL_Delay(DELAY);
@@ -151,6 +159,9 @@ void LX_TextInput::keyboardInput_(SDL_Event& ev)
 
     case SDLK_c:
         save_();
+        break;
+
+    default:
         break;
     }
 
