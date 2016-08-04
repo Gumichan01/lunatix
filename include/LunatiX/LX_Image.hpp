@@ -43,6 +43,12 @@ namespace LX_Device
 class LX_Mouse;
 };
 
+namespace LX_TrueTypeFont
+{
+class LX_Font;
+enum LX_TTF_TypeText: short;
+};
+
 /**
 *   @namespace LX_Graphics
 *   @brief The graphics module
@@ -339,6 +345,55 @@ public:
     virtual ~LX_Streaming_Image();
 };
 
+
+class LX_TextImage: public LX_Image
+{
+    UTF8string _text;
+    LX_TrueTypeFont::LX_Font& _font;
+    unsigned int _size;
+    LX_AABB _dimension;
+
+
+protected:
+
+    void loadText_(LX_TrueTypeFont::LX_TTF_TypeText ty);
+
+public:
+
+    LX_TextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+                 Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_TextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                 LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_TextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                 LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual void draw();
+    void setPosition(int x, int y);
+    void setText(std::string str, unsigned int sz = 0);
+    void setText(const UTF8string& str, unsigned int sz = 0);
+    virtual ~LX_TextImage();
+};
+
+
+class LX_SolidTextImage: public LX_TextImage
+{
+public:
+
+    LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_SolidTextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                      LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_SolidTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                     LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual ~LX_SolidTextImage();
+};
+
 };
 
 #endif  // LX_IMAGE_H_INCLUDED
+

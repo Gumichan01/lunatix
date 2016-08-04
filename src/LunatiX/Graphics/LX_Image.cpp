@@ -21,6 +21,7 @@
 
 #include <LunatiX/LX_Image.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
 
@@ -320,4 +321,85 @@ LX_Streaming_Image::~LX_Streaming_Image()
     SDL_FreeSurface(_screen);
 }
 
+
+/* LX_TextImage */
+
+LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           Uint32 format)
+    : LX_Image(w,format), _text(""), _font(font), _size(0), _dimension({0,0,0,0}) {}
+
+
+LX_TextImage::LX_TextImage(std::string str, unsigned int sz,
+                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           Uint32 format)
+    : LX_TextImage(UTF8string(str),sz,font,w,format) {}
+
+
+LX_TextImage::LX_TextImage(const UTF8string& str, unsigned int sz,
+                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           Uint32 format)
+    : LX_Image(w,format), _text(str), _font(font), _size(sz),
+      _dimension({0,0,0,0}) {}
+
+
+void LX_TextImage::loadText_(LX_TrueTypeFont::LX_TTF_TypeText ty)
+{
+    _texture = _font.drawTextToTexture(ty,_text.utf8_str(),_size,&_win);
+    _font.sizeOfText(_text.utf8_str(),_dimension.w,_dimension.h);
+}
+
+
+void LX_TextImage::draw()
+{
+    SDL_RenderCopy(_win._renderer,_texture,nullptr,&_dimension);
+}
+
+
+void LX_TextImage::setPosition(int x, int y)
+{
+    _dimension.x = x;
+    _dimension.y = y;
+}
+
+
+void LX_TextImage::setText(std::string str, unsigned int sz)
+{
+    _text = str;
+    _size = sz;
+}
+
+
+void LX_TextImage::setText(const UTF8string& str, unsigned int sz)
+{
+    _text = str;
+    _size = sz;
+}
+
+
+LX_TextImage::~LX_TextImage() {}
+
+
+/* LX_SolidTextImage */
+
+LX_SolidTextImage::LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,
+                                     LX_Win::LX_Window& w, Uint32 format)
+    : LX_TextImage(font,w,format) {}
+
+
+LX_SolidTextImage::LX_SolidTextImage(std::string str, unsigned int sz,
+                                     LX_TrueTypeFont::LX_Font& font,
+                                     LX_Win::LX_Window& w, Uint32 format)
+    : LX_SolidTextImage(UTF8string(str),sz,font,w,format) {}
+
+
+LX_SolidTextImage::LX_SolidTextImage(const UTF8string& str, unsigned int sz,
+                                     LX_TrueTypeFont::LX_Font& font,
+                                     LX_Win::LX_Window& w,Uint32 format)
+    : LX_TextImage(str,sz,font,w,format)
+{
+    loadText_(LX_TrueTypeFont::LX_TTF_SOLID);
+}
+
+
+LX_SolidTextImage::~LX_SolidTextImage() {}
 };

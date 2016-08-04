@@ -42,6 +42,11 @@ namespace LX_FileIO
 class LX_FileBuffer;
 };
 
+namespace LX_Graphics
+{
+class LX_TextImage;
+}
+
 
 /**
 *   @namespace LX_TrueTypeFont
@@ -60,7 +65,7 @@ namespace LX_TrueTypeFont
 *    - LX_TTF_BLENDED : Very slow rendering but very nice text
 *
 */
-enum LX_TTF_TypeText {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
+enum LX_TTF_TypeText: short {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
 
 
 /**
