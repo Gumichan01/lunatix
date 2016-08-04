@@ -91,9 +91,8 @@ class LX_Font
     int sizeOfText_(TTF_Font *ttf, std::string text, int& w, int& h);
     TTF_Font * createInternalFont_(int size);
 
-    SDL_Surface * drawText_(LX_TTF_TypeText type, std::string text,
-                            unsigned int size = 0,
-                            Uint8 r = 0, Uint8 g = 0, Uint8 b = 0,Uint8 a = 0);
+    SDL_Surface * drawText_(LX_TTF_TypeText type, const UTF8string& text,
+                            unsigned int size = 0, SDL_Color bg = {0,0,0,0});
 
 public:
 
@@ -183,144 +182,95 @@ public:
     int sizeOfText(std::string text, unsigned int size, int& w, int& h);
 
     /**
-    *   @fn SDL_Surface * drawSolidText(std::string text)
+    *   @fn SDL_Texture * drawSolidText(std::string text, unsigned int size, LX_Win::LX_Window& w)
     *
-    *   Create an UTF-8 encoded text in solid mode
+    *   Render the text in solid mode. The size has to be specified
     *
-    *   @param text The std::string to display
+    *   @param text The string to display
+    *   @param size The size defined by the user
+    *   @param w The window to link the texture with
     *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
+    *   @return An valid pointer to a texture, NULL otherwise.
+    *           Call LX_GetError to get error information
     */
-    SDL_Surface * drawSolidText(std::string text);
-
+    SDL_Texture * drawSolidText(std::string text, unsigned int size, LX_Win::LX_Window& w);
     /**
-    *   @fn SDL_Surface * drawSolidText(std::string text, unsigned int size)
+    *   @fn SDL_Texture * drawSolidText(const UTF8string& text, unsigned int size, LX_Win::LX_Window& w)
     *
     *   Render the UTF-8 encoded text in solid mode. The size has to be specified
     *
-    *   @param text The std::string to display
+    *   @param text The utf-8 string to display
     *   @param size The size defined by the user
+    *   @param w The window to link the texture with
     *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
+    *   @return An valid pointer to a texture, NULL otherwise.
+    *           Call LX_GetError to get error information
     */
-    SDL_Surface * drawSolidText(std::string text, unsigned int size);
+    SDL_Texture * drawSolidText(const UTF8string& text, unsigned int size, LX_Win::LX_Window& w);
 
     /**
-    *   @fn SDL_Surface * drawShadedText(std::string text, SDL_Color bg)
+    *   @fn SDL_Texture * drawShadedText(std::string text, unsigned int size,
+    *                                    SDL_Color bg, LX_Win::LX_Window& w)
     *
-    *   Create an UTF-8 encoded text in shaded mode
+    *   Render the text in shaded mode. The size has to be specified
     *
-    *   @param text The std::string to display
-    *   @param bg The background color
-    *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
-    */
-    SDL_Surface * drawShadedText(std::string text, SDL_Color bg);
-
-    /**
-    *   @fn SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b,
-                                         Uint8 a)
-    *
-    *   Create an UTF-8 encoded text in shaded mode
-    *
-    *   @param text The text to display
-    *   @param r The red channel
-    *   @param g The green channel
-    *   @param b The blue channel
-    *   @param a The alpha channel
-    *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
-    */
-    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-
-    /**
-    *   @fn SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g,
-    *                                             Uint8 b, Uint8 a, unsigned int size)
-    *
-    *   Render the UTF-8 encoded text in shaded mode. The size has to be specified.
-    *
-    *   @param text The text to display
-    *   @param r The red color of the background
-    *   @param g The green color of the background
-    *   @param b The blue color of the background
-    *   @param a The alpha channel
+    *   @param text The string to display
     *   @param size The size defined by the user
+    *   @param bg The background color behind the text
+    *   @param w The window to link the texture with
     *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
+    *   @return An valid pointer to a texture, NULL otherwise.
+    *           Call LX_GetError to get error information
     */
-    SDL_Surface * drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a,
-                                 unsigned int size);
-
+    SDL_Texture * drawShadedText(std::string text, unsigned int size,
+                                 SDL_Color bg, LX_Win::LX_Window& w);
     /**
-    *   @fn SDL_Surface * drawBlendedText(std::string text)
+    *   @fn SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
+    *                                    SDL_Color bg, LX_Win::LX_Window& w)
     *
-    *   Create an UTF-8 encoded text surface in blended mode
+    *   Render the UTF-8 encoded text in shaded mode. The size has to be specified
     *
-    *   @param text The text to display
-    *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
-    */
-    SDL_Surface * drawBlendedText(std::string text);
-
-    /**
-    *   @fn SDL_Surface * drawBlendedText(std::string text, unsigned int size)
-    *
-    *   Render the UTF-8 encoded text in blended mode. The size has to be specified.
-    *
-    *   @param text The text to display
+    *   @param text The utf-8 string to display
     *   @param size The size defined by the user
+    *   @param bg The background color behind the text
+    *   @param w The window to link the texture with
     *
-    *   @return An instance of SDL_Surface on success, a null pointer otherwise
-    *
+    *   @return An valid pointer to a texture, NULL otherwise.
+    *           Call LX_GetError to get error information
     */
-    SDL_Surface * drawBlendedText(std::string text, unsigned int size);
+    SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
+                                 SDL_Color bg, LX_Win::LX_Window& w);
 
     /**
-    *   @fn SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,
-    *                                                std::string text, unsigned int size,
-    *                                                unsigned int idWindow)
+    *   @fn SDL_Texture * drawBlendedText(std::string text, unsigned int size,
+    *                                     LX_Win::LX_Window& w)
     *
-    *   Create a Texture from a text according to the type and the size
+    *   Render the text in blended mode. The size has to be specified
     *
-    *   @param type The type of the text(Solid, Shaded, or Blended)
-    *   @param text The std::string to draw
-    *   @param size The size of the text on the window
-    *   @param idWindow The ID of the window to get the renderer from.
-    *                   Optional argument
+    *   @param text The string to display
+    *   @param size The size defined by the user
+    *   @param w The window to link the texture with
     *
-    *   @return An instance of SDL_Texture on success, a null pointer
-    *           if the window is not valid or if something wrong happened
-    *
+    *   @return An valid pointer to a texture, NULL otherwise.
+    *           Call LX_GetError to get error information
     */
-    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type, std::string text,
-                                    unsigned int size, unsigned int idWindow = 0);
-
+    SDL_Texture * drawBlendedText(std::string text, unsigned int size,
+                                  LX_Win::LX_Window& w);
     /**
-    *   @fn SDL_Texture * drawTextToTexture(LX_TTF_TypeText type,
-    *                                                std::string text,
-    *                                                unsigned int size,
-    *                                                LX_Win::LX_Window *win)
+    *   @fn SDL_Texture * drawBlendedText(const UTF8string&, unsigned int size,
+    *                                     LX_Win::LX_Window& w)
     *
-    *   Create a Texture from a text according to the type and the size
+    *   Render the UTF-8 encoded text in blended mode. The size has to be specified
     *
-    *   @param type The type of the text(Solid, Shaded, or Blended)
-    *   @param text The std::string to draw
-    *   @param size The size of the text on the window
-    *   @param win The window to get the renderer from
+    *   @param text The utf-8 string to display
+    *   @param size The size defined by the user
+    *   @param w The window to link the texture with
     *
-    *   @return An instance of SDL_Texture on success,
-    *           a null pointer if the window is not valid
-    *           or if something wrong happened
-    *
+    *   @return An valid pointer to a texture, NULL otherwise.
+    *           Call LX_GetError to get error information
     */
-    SDL_Texture * drawTextToTexture(LX_TTF_TypeText type, std::string text,
-                                    unsigned int size, LX_Win::LX_Window *win);
+    SDL_Texture * drawBlendedText(const UTF8string&, unsigned int size,
+                                  LX_Win::LX_Window& w);
 
     /**
     *   @fn void setColor(SDL_Color *color)

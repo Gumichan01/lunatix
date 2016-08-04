@@ -142,37 +142,35 @@ int LX_Font::sizeOfText(std::string text, unsigned int size, int& w, int& h)
 *   r, g, b and size are optionnal in this private function.
 *
 */
-SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
-                                 unsigned int size,Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, const UTF8string& text,
+                                 unsigned int size, SDL_Color bg)
 {
-    SDL_Color bg = {r,g,b,a};
     TTF_Font *ttf = nullptr;
     SDL_Surface *loaded = nullptr;
 
     if(size == 0)
     {
-        LX_SetError("drawText: Invalid size, must be a positive value");
-        return nullptr;
+        size = _font_size;
     }
-    else
-        ttf = createInternalFont_(static_cast<int>(size));
+
+    ttf = createInternalFont_(static_cast<int>(size));
 
     if(ttf == nullptr)
-        return loaded;
+        return nullptr;
 
     // Select the text to draw
     switch(type)
     {
     case LX_TTF_SOLID :
-        loaded = TTF_RenderUTF8_Solid(ttf,text.c_str(),_font_color);
+        loaded = TTF_RenderUTF8_Solid(ttf,text.utf8_str(),_font_color);
         break;
 
     case LX_TTF_SHADED :
-        loaded = TTF_RenderUTF8_Shaded(ttf,text.c_str(),_font_color,bg);
+        loaded = TTF_RenderUTF8_Shaded(ttf,text.utf8_str(),_font_color,bg);
         break;
 
     case LX_TTF_BLENDED:
-        loaded = TTF_RenderUTF8_Blended(ttf,text.c_str(),_font_color);
+        loaded = TTF_RenderUTF8_Blended(ttf,text.utf8_str(),_font_color);
         break;
     }
 
@@ -181,100 +179,69 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, std::string text,
 }
 
 
-SDL_Surface * LX_Font::drawSolidText(std::string text)
+SDL_Texture * LX_Font::drawSolidText(std::string text, unsigned int size,
+                                     LX_Win::LX_Window& w)
 {
-    if(_font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+    return drawSolidText(UTF8string(text),size,w);
+}
+
+
+SDL_Texture * LX_Font::drawSolidText(const UTF8string& text, unsigned int size,
+                                     LX_Win::LX_Window& w)
+{
+    SDL_Surface *s = drawText_(LX_TTF_SOLID,text,size);
+
+    if(s == nullptr)
         return nullptr;
-    }
 
-    return drawSolidText(text.c_str(),_font_size);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(w._renderer,s);
+    SDL_FreeSurface(s);
+
+    return t;
 }
 
 
-SDL_Surface * LX_Font::drawSolidText(std::string text, unsigned int size)
+SDL_Texture * LX_Font::drawShadedText(std::string text, unsigned int size, SDL_Color bg,
+                                      LX_Win::LX_Window& w)
 {
-    return drawText_(LX_TTF_SOLID,text.c_str(),size);
+    return drawShadedText(UTF8string(text),size,bg,w);
 }
 
 
-SDL_Surface * LX_Font::drawShadedText(std::string text, SDL_Color bg)
+SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size, SDL_Color bg,
+                                      LX_Win::LX_Window& w)
 {
-    return drawShadedText(text.c_str(), bg.r, bg.g, bg.b, bg.a);
-}
+    SDL_Surface *s = drawText_(LX_TTF_SHADED,text,size,bg);
 
-
-SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
-{
-    if(_font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+    if(s == nullptr)
         return nullptr;
-    }
 
-    return drawText_(LX_TTF_SHADED,text.c_str(),_font_size,r,g,b,a);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(w._renderer,s);
+    SDL_FreeSurface(s);
+
+    return t;
 }
 
 
-SDL_Surface * LX_Font::drawShadedText(std::string text, Uint8 r, Uint8 g,
-                                      Uint8 b, Uint8 a, unsigned int size)
+SDL_Texture * LX_Font::drawBlendedText(std::string text, unsigned int size,
+                                       LX_Win::LX_Window& w)
 {
-    return drawText_(LX_TTF_SHADED,text.c_str(),size,r,g,b,a);
+    return drawBlendedText(UTF8string(text),size,w);
 }
 
 
-SDL_Surface * LX_Font::drawBlendedText(std::string text)
+SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size,
+                                       LX_Win::LX_Window& w)
 {
-    if(_font_size == 0)
-    {
-        LX_SetError("LX_Font::drawBlendetText: cannot draw a text with a null size");
+    SDL_Surface *s = drawText_(LX_TTF_BLENDED,text,size);
+
+    if(s == nullptr)
         return nullptr;
-    }
 
-    return drawBlendedText(text.c_str(),_font_size);
-}
+    SDL_Texture *t = SDL_CreateTextureFromSurface(w._renderer,s);
+    SDL_FreeSurface(s);
 
-
-SDL_Surface * LX_Font::drawBlendedText(std::string text, unsigned int size)
-{
-    return drawText_(LX_TTF_BLENDED,text.c_str(),size);
-}
-
-
-SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
-        unsigned int size, unsigned int idWindow)
-{
-    LX_Win::LX_Window * target_window = nullptr;
-    target_window = LX_Win::LX_WindowManager::getInstance()->getWindow(idWindow);
-
-    return drawTextToTexture(type,text.c_str(),size,target_window);
-}
-
-
-SDL_Texture * LX_Font::drawTextToTexture(LX_TTF_TypeText type,std::string text,
-        unsigned int size, LX_Win::LX_Window *win)
-{
-    Uint8 black = 0;
-    SDL_Surface *surface = nullptr;
-    SDL_Texture *texture = nullptr;
-
-    if(win == nullptr)
-    {
-        LX_SetError("LX_Font::drawTextToTexture(): invalid window");
-        return nullptr;
-    }
-
-    surface = drawText_(type,text.c_str(),size,black,black,black);
-
-    if(surface == nullptr)
-        return texture;
-
-    // Get the texture
-    texture = SDL_CreateTextureFromSurface(win->_renderer,surface);
-    SDL_FreeSurface(surface);
-
-    return texture;
+    return t;
 }
 
 
