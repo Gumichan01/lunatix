@@ -425,6 +425,8 @@ public:
     LX_ShadedTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                        LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
+    virtual void setText(std::string str, unsigned int sz = 0);
+    virtual void setText(const UTF8string& str, unsigned int sz = 0);
     virtual void setText(std::string str, SDL_Color c, unsigned int sz = 0);
     virtual void setText(const UTF8string& str, SDL_Color c, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);

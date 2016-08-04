@@ -455,6 +455,19 @@ void LX_ShadedTextImage::updateTexture_()
 }
 
 
+void LX_ShadedTextImage::setText(std::string str, unsigned int sz)
+{
+    setText(UTF8string(str),sz);
+}
+
+
+void LX_ShadedTextImage::setText(const UTF8string& str, unsigned int sz)
+{
+    const SDL_Color GREY = {127,127,127,255};
+    setText(str,GREY,sz);
+}
+
+
 void LX_ShadedTextImage::setText(std::string str, SDL_Color c, unsigned int sz)
 {
     setText(UTF8string(str),c,sz);
