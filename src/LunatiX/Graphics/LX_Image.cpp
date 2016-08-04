@@ -332,7 +332,7 @@ LX_Streaming_Image::~LX_Streaming_Image()
 LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            Uint32 format)
     : LX_Image(w,format), _text(""), _font(font), _size(0),
-      _dimension({0,0,0,0}) {}
+    _dimension({0,0,0,0}) {}
 
 
 LX_TextImage::LX_TextImage(std::string str, unsigned int sz,
@@ -345,7 +345,7 @@ LX_TextImage::LX_TextImage(const UTF8string& str, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            Uint32 format)
     : LX_Image(w,format), _text(str), _font(font), _size(sz),
-      _dimension({0,0,0,0}) {}
+    _dimension({0,0,0,0}) {}
 
 
 void LX_TextImage::draw()
@@ -497,19 +497,19 @@ LX_ShadedTextImage::~LX_ShadedTextImage() {}
 /* LX_BlendedTextImage */
 
 LX_BlendedTextImage::LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w, Uint32 format)
+                                         LX_Win::LX_Window& w, Uint32 format)
     : LX_TextImage(font,w,format) {}
 
 
 LX_BlendedTextImage::LX_BlendedTextImage(std::string str, unsigned int sz,
-                                     LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w, Uint32 format)
+                                         LX_TrueTypeFont::LX_Font& font,
+                                         LX_Win::LX_Window& w, Uint32 format)
     : LX_BlendedTextImage(UTF8string(str),sz,font,w,format) {}
 
 
 LX_BlendedTextImage::LX_BlendedTextImage(const UTF8string& str, unsigned int sz,
-                                     LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w,Uint32 format)
+                                         LX_TrueTypeFont::LX_Font& font,
+                                         LX_Win::LX_Window& w,Uint32 format)
     : LX_TextImage(str,sz,font,w,format)
 {
     _texture = _font.drawBlendedText(_text,_size,_win);
