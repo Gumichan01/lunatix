@@ -434,6 +434,32 @@ public:
     virtual ~LX_ShadedTextImage();
 };
 
+
+class LX_BlendedTextImage: public LX_TextImage
+{
+protected:
+
+    virtual void updateTexture_();
+
+public:
+
+    LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_BlendedTextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                      LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    LX_BlendedTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+                     LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+
+    virtual void setText(std::string str, unsigned int sz = 0);
+    virtual void setText(const UTF8string& str, unsigned int sz = 0);
+    virtual void setSize(unsigned int sz);
+
+    virtual ~LX_BlendedTextImage();
+};
+
+
 };
 
 #endif  // LX_IMAGE_H_INCLUDED

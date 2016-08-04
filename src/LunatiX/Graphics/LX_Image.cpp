@@ -493,4 +493,57 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
 LX_ShadedTextImage::~LX_ShadedTextImage() {}
 
 
+
+/* LX_BlendedTextImage */
+
+LX_BlendedTextImage::LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,
+                                     LX_Win::LX_Window& w, Uint32 format)
+    : LX_TextImage(font,w,format) {}
+
+
+LX_BlendedTextImage::LX_BlendedTextImage(std::string str, unsigned int sz,
+                                     LX_TrueTypeFont::LX_Font& font,
+                                     LX_Win::LX_Window& w, Uint32 format)
+    : LX_BlendedTextImage(UTF8string(str),sz,font,w,format) {}
+
+
+LX_BlendedTextImage::LX_BlendedTextImage(const UTF8string& str, unsigned int sz,
+                                     LX_TrueTypeFont::LX_Font& font,
+                                     LX_Win::LX_Window& w,Uint32 format)
+    : LX_TextImage(str,sz,font,w,format)
+{
+    _texture = _font.drawBlendedText(_text,_size,_win);
+    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+}
+
+
+void LX_BlendedTextImage::updateTexture_()
+{
+    SDL_DestroyTexture(_texture);
+    _texture = _font.drawBlendedText(_text,_size,_win);
+    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+}
+
+
+void LX_BlendedTextImage::setText(std::string str, unsigned int sz)
+{
+    setText(UTF8string(str),sz);
+}
+
+
+void LX_BlendedTextImage::setText(const UTF8string& str, unsigned int sz)
+{
+    _text = str;
+    _size = sz;
+    updateTexture_();
+}
+
+void LX_BlendedTextImage::setSize(unsigned int sz)
+{
+    _size = sz;
+    updateTexture_();
+}
+
+LX_BlendedTextImage::~LX_BlendedTextImage() {}
+
 };
