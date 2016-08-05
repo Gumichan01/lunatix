@@ -73,7 +73,6 @@
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
 		<Unit filename="include/LunatiX/LX_Gamepad.hpp" />
-		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
 		<Unit filename="include/LunatiX/LX_Hitbox.hpp" />
 		<Unit filename="include/LunatiX/LX_Image.hpp" />
@@ -82,6 +81,7 @@
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
 		<Unit filename="include/LunatiX/LX_Mixer.hpp" />
 		<Unit filename="include/LunatiX/LX_Music.hpp" />
+		<Unit filename="include/LunatiX/LX_OpenGL.hpp" />
 		<Unit filename="include/LunatiX/LX_Particle.hpp" />
 		<Unit filename="include/LunatiX/LX_ParticleSystem.hpp" />
 		<Unit filename="include/LunatiX/LX_Physics.hpp" />
@@ -103,8 +103,8 @@
 		<Unit filename="src/LunatiX/Device/LX_Haptic.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileBuffer.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileIO.cpp" />
-		<Unit filename="src/LunatiX/Graphics/LX_Graphics.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Image.cpp" />
+		<Unit filename="src/LunatiX/Graphics/LX_OpenGL.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Window.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_WindowManager.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Config.cpp" />
