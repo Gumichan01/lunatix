@@ -288,6 +288,7 @@ public:
 
     virtual bool isOpen() const;
     virtual void draw(LX_AABB * box);
+    virtual void draw(LX_AABB * box, const double angle);
 
     virtual ~LX_AnimatedSprite();
 };

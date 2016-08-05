@@ -207,6 +207,12 @@ bool LX_AnimatedSprite::isOpen() const
 
 void LX_AnimatedSprite::draw(LX_AABB * box)
 {
+    draw(box,0.0);
+}
+
+
+void LX_AnimatedSprite::draw(LX_AABB * box, const double angle)
+{
     if(!_started)
     {
         _started = true;
@@ -222,7 +228,8 @@ void LX_AnimatedSprite::draw(LX_AABB * box)
             _iteration += 1;
     }
 
-    SDL_RenderCopy(_win._renderer,_texture,&_coordinates[_iteration],box);
+    SDL_RenderCopyEx(_win._renderer,_texture,&_coordinates[_iteration],box,angle,
+                     nullptr,SDL_FLIP_NONE);
 }
 
 
