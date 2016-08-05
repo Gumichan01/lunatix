@@ -116,6 +116,18 @@ void LX_Image::draw()
 }
 
 
+bool LX_Image::bind(float *iw, float *ih)
+{
+    return SDL_GL_BindTexture(_texture,iw,ih) == 0;
+}
+
+
+bool LX_Image::unbind()
+{
+    return SDL_GL_UnbindTexture(_texture) == 0;
+}
+
+
 LX_Image::~LX_Image()
 {
     SDL_DestroyTexture(_texture);

@@ -48,10 +48,7 @@ namespace LX_TrueTypeFont
 class LX_Font;
 };
 
-/**
-*   @namespace LX_Graphics
-*   @brief The graphics module
-*/
+
 namespace LX_Graphics
 {
 
@@ -154,6 +151,38 @@ public:
     *   @note The window is specified at object construction
     */
     virtual void draw();
+
+    /**
+    *   @fn bool bind(float *iw = nullptr, float *ih = nullptr)
+    *
+    *   Bind an image (it internal texture) to the current OpenGL context
+    *   in order to use OpenGL functions.
+    *
+    *   @param [out] iw (Optional) a pointer to a float value of which will be
+    *          filled with the texture width. See notes.
+    *   @param [out] ih (Optional) a pointer to a float value which will be
+    *          filled with the texture width. See notes.
+    *
+    *   @return TRUE on success.FALSE if the operation is not supported.
+    *
+    *   @note If provided, iw and ih will be filled with the width and height
+    *         values suitable for the provided texture.
+    *         In most cases, both will be 1.0, however, on systems that support the
+    *         GL_ARB_texture_rectangle extension, these values will actually be the
+    *         pixel width and height used to create the texture, so this factor needs
+    *         to be taken into account when providing texture coordinates to OpenGL.
+    *
+    */
+    bool bind(float *iw = nullptr, float *ih = nullptr);
+
+    /**
+    *   @fn bool unbind()
+    *
+    *   Unbind an image
+    *
+    *   @return TRUE on success.FALSE if the operation is not supported.
+    */
+    bool unbind();
 
     virtual ~LX_Image();
 };
@@ -457,7 +486,6 @@ public:
 
     virtual ~LX_BlendedTextImage();
 };
-
 
 };
 
