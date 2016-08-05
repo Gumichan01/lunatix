@@ -86,7 +86,7 @@ MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
 OBJ_FILES=$(OBJ_DEVICE_PATH)LX_Device.o \
 $(OBJ_DEVICE_PATH)LX_Gamepad.o $(OBJ_DEVICE_PATH)LX_Haptic.o \
 $(OBJ_FILEIO_PATH)LX_FileIO.o $(OBJ_FILEIO_PATH)LX_FileBuffer.o \
-$(OBJ_GRAPHICS_PATH)LX_Graphics.o $(OBJ_GRAPHICS_PATH)LX_Window.o \
+$(OBJ_GRAPHICS_PATH)LX_OpenGL.o $(OBJ_GRAPHICS_PATH)LX_Window.o \
 $(OBJ_GRAPHICS_PATH)LX_WindowManager.o $(OBJ_GRAPHICS_PATH)LX_Image.o \
 $(OBJ_LIBRARY_PATH)LX_Config.o $(OBJ_LIBRARY_PATH)LX_ConfigLoader.o \
 $(OBJ_LIBRARY_PATH)LX_Library.o \
@@ -241,11 +241,11 @@ $(LUNATIX_I_PATH)LX_FileBuffer.hpp
 # Graphics
 #
 
-LX_Graphics.o : $(OBJ_GRAPHICS_PATH)LX_Graphics.o
+LX_OpenGL.o : $(OBJ_GRAPHICS_PATH)LX_OpenGL.o
 
-$(OBJ_GRAPHICS_PATH)LX_Graphics.o : $(GRAPHICS_PATH)LX_Graphics.cpp \
-$(LUNATIX_I_PATH)LX_Graphics.hpp $(LUNATIX_I_PATH)LX_Window.hpp \
-$(LUNATIX_I_PATH)LX_Error.hpp
+$(OBJ_GRAPHICS_PATH)LX_OpenGL.o : $(GRAPHICS_PATH)LX_OpenGL.cpp \
+$(LUNATIX_I_PATH)LX_OpenGL.hpp $(LUNATIX_I_PATH)LX_Window.hpp \
+$(LUNATIX_I_PATH)LX_Image.hpp
 	@mkdir -p $(OBJ_GRAPHICS_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
@@ -486,8 +486,8 @@ $(UTILS_I_PATH)utf8_string.hpp
 LX_TrueTypeFont.o : $(OBJ_TTF_PATH)LX_TrueTypeFont.o
 
 $(OBJ_TTF_PATH)LX_TrueTypeFont.o : $(TTF_PATH)LX_TrueTypeFont.cpp \
-$(LUNATIX_I_PATH)LX_TrueTypeFont.hpp $(LUNATIX_I_PATH)LX_Graphics.hpp \
-$(LUNATIX_I_PATH)LX_Config.hpp $(LUNATIX_I_PATH)LX_Error.hpp
+$(LUNATIX_I_PATH)LX_TrueTypeFont.hpp $(LUNATIX_I_PATH)LX_Config.hpp \
+$(LUNATIX_I_PATH)LX_Error.hpp
 	@mkdir -p $(OBJ_TTF_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
