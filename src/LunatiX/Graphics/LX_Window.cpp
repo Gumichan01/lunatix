@@ -142,6 +142,7 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
 
     if((flag&SDL_WINDOW_OPENGL) == SDL_WINDOW_OPENGL)
         _glcontext = SDL_GL_CreateContext(_window);
+
     if(mode == LX_WINDOW_RENDERING)
         createRendering_(accel);
     else
@@ -560,12 +561,6 @@ void LX_Window::getInfo(LX_WindowInfo &info)
     {
         info.accel = false;
     }
-}
-
-
-SDL_Renderer * LX_Window::getRenderer(void)
-{
-    return _renderer;
 }
 
 

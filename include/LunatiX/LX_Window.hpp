@@ -458,15 +458,6 @@ public :
     void getInfo(LX_WindowInfo &info);
 
     /**
-    *   @fn SDL_Renderer * getRenderer(void)
-    *
-    *   Get the window renderer
-    *
-    *   @return A valid pointer to the renderer if the window internally use it
-    */
-    SDL_Renderer * getRenderer(void);
-
-    /**
     *   @fn int getWidth(void)
     *
     *   Get the width of the window
