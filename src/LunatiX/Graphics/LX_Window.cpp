@@ -580,6 +580,12 @@ int LX_Window::getHeight(void)
 }
 
 
+void LX_Window::glGetDrawableSize(int& w, int& h)
+{
+    SDL_GL_GetDrawableSize(_window,&w,&h);
+}
+
+
 LX_Window::~LX_Window()
 {
     SDL_GL_DeleteContext(_glcontext);

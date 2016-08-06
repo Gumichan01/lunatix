@@ -476,6 +476,21 @@ public :
     int getHeight(void);
 
     /**
+    *   @fn void glGetDrawableSize(int& w, int& h)
+    *
+    *   Get the size of the size of a window underlying's drawable
+    *   (for use with glViewport)
+    *
+    *   @param [out] w  The reference to the variable for storing the width
+    *   @param [out] h  The reference to the variable for storing the height
+    *
+    *   @note This may differ from getWidth/getHeight if we are rendering
+    *         to a high-DPI drawable, i.e. the window was created with
+    *         SDL_WINDOW_ALLOW_HIGHDPI on a platform with high-DPI support.
+    */
+    void glGetDrawableSize(int& w, int& h);
+
+    /**
     *   @fn ~LX_Window()
     *
     *   Destroy the window instance
