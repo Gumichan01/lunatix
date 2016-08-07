@@ -119,7 +119,7 @@ LX_WindowException::~LX_WindowException() noexcept {}
 
 LX_Window::LX_Window(LX_WindowInfo &info)
     : _window(nullptr), _renderer(nullptr), _glcontext(nullptr),
-      _original_width(info.w), _original_height(info.h), _render_method(false)
+      _original_width(info.w), _original_height(info.h)
 {
     createWindow_(info.title,info.x,info.y,info.w,info.h,info.flag,info.accel);
     getInfo(info);
@@ -170,8 +170,6 @@ void LX_Window::createRendering_(bool accel)
         err_msg = err_msg + LX_GetError();
         throw LX_WindowException(err_msg);
     }
-
-    _render_method = true;     // The render_mode is active
 }
 
 
@@ -353,11 +351,8 @@ void LX_Window::toggleFullscreen(Uint32 flag)
     }
     else if(flag == LX_GRAPHICS_FULLSCREEN_DESKTOP)
     {
-        if(_render_method)
-        {
-            SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
-            SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
-        }
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
+        SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
     }
 }
 
@@ -392,10 +387,8 @@ void LX_Window::update(void)
 {
     if(_glcontext != nullptr)
         SDL_GL_SwapWindow(_window);
-    else if(_render_method)
-        updateRenderer_();
     else
-        updateWindow_();
+        updateRenderer_();
 }
 
 
@@ -429,10 +422,8 @@ void LX_Window::clearWindow(void)
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
     }
-    else if(_render_method)
-        clearRenderer_();
     else
-        clearSurface_();
+        clearRenderer_();
 }
 
 
@@ -483,40 +474,22 @@ bool LX_Window::screenshotUsingSurface_(std::string& filename)
 
 bool LX_Window::screenshot(std::string filename)
 {
-    if(_render_method)
-        return screenshotUsingRenderer_(filename);
-
-    return screenshotUsingSurface_(filename);
+    return screenshotUsingRenderer_(filename);
 }
 
 
 void LX_Window::getInfo(LX_WindowInfo &info)
 {
     info.title = SDL_GetWindowTitle(_window);
-    SDL_GetWindowPosition(_window,&info.x,&info.y);
-    SDL_GetWindowSize(_window, &info.w,&info.h);
-
-    if(_render_method)
-        SDL_RenderGetLogicalSize(_renderer,&info.lw,&info.lh);
-    else
-    {
-        info.lw = 0;
-        info.lh = 0;
-    }
-
     info.flag = SDL_GetWindowFlags(_window);
 
-    if(_render_method)
-    {
-        SDL_RendererInfo rinfo;
-        SDL_GetRendererInfo(_renderer, &rinfo);
+    SDL_GetWindowPosition(_window,&info.x,&info.y);
+    SDL_GetWindowSize(_window, &info.w,&info.h);
+    SDL_RenderGetLogicalSize(_renderer,&info.lw,&info.lh);
 
-        info.accel = ( (rinfo.flags&SDL_RENDERER_ACCELERATED) != 0 );
-    }
-    else
-    {
-        info.accel = false;
-    }
+    SDL_RendererInfo rinfo;
+    SDL_GetRendererInfo(_renderer, &rinfo);
+    info.accel = ( (rinfo.flags&SDL_RENDERER_ACCELERATED) != 0 );
 }
 
 

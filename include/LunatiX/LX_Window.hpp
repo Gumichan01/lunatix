@@ -155,7 +155,6 @@ class LX_Window
 
     int _original_width;        /* The width of the window           */
     int _original_height;       /* The height of the window          */
-    bool _render_method;        /* Use Surface or Rendering          */
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
