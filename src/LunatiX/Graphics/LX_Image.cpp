@@ -395,10 +395,14 @@ void LX_TextImage::draw()
 
 void LX_TextImage::draw(const double angle)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,(-angle),nullptr,
-                     SDL_FLIP_NONE);
+    draw(angle,LX_MIRROR_NONE);
 }
 
+void LX_TextImage::draw(const double angle, const short mirror)
+{
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,(-angle),nullptr,
+                     shortToFlip_(mirror));
+}
 
 void LX_TextImage::setPosition(int x, int y)
 {

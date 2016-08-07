@@ -438,6 +438,7 @@ public:
 
     virtual void draw();
     virtual void draw(const double angle);
+    virtual void draw(const double angle, const short mirror);
 
     void setPosition(int x, int y);
     virtual void setText(std::string str, unsigned int sz) = 0;
