@@ -133,7 +133,6 @@ int main(int argc, char **argv)
     LX_Win::LX_WindowInfo winfo;
     LX_Win::LX_loadWindowConfig(winfo);
     winfo.title = "Test particle";
-    winfo.mode = LX_WINDOW_RENDERING;
 
     w = new LX_Win::LX_Window(winfo);
     LX_Win::LX_WindowManager::getInstance()->addWindow(w);
