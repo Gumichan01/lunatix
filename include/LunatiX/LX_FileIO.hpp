@@ -250,7 +250,28 @@ public :
     */
     ~LX_File();
 
+    /**
+    *   @fn friend LX_File& operator <<(LX_File& f, UTF8string& u8s)
+    *
+    *   Write an UTF-8 string into the file
+    *
+    *   @param [in,out] f The file structure
+    *   @param [in] u8s The utf-8 string
+    *
+    *   @return The updated file
+    */
     friend LX_File& operator <<(LX_File& f, UTF8string& u8s);
+
+    /**
+    *   @fn friend LX_File& operator <<(LX_File& f, std::string s)
+    *
+    *   Write an UTF-8 string into the file
+    *
+    *   @param [in,out] f The file structure
+    *   @param [in] s The string
+    *
+    *   @return The updated file
+    */
     friend LX_File& operator <<(LX_File& f, std::string s);
 };
 
