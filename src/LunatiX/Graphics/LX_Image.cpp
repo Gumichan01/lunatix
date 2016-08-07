@@ -118,7 +118,7 @@ void LX_Image::draw()
 
 bool LX_Image::bind(float *iw, float *ih)
 {
-    return SDL_GL_BindTexture(_texture,iw,ih) == 0;
+    return _win.glMakeCurrent() && SDL_GL_BindTexture(_texture,iw,ih) == 0;
 }
 
 

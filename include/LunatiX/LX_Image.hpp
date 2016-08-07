@@ -125,7 +125,7 @@ public:
     *   | SDL_PIXELFORMAT_UYVY        |      packed mode: U0+Y0+V0+Y1 (1 plane)      |
     *   | SDL_PIXELFORMAT_YVYU        |      packed mode: Y0+V0+Y1+U0 (1 plane)      |
     *
-    *   The default value is SDL_PIXELFORMAT_RGBA8888
+    *   The default value is **SDL_PIXELFORMAT_RGBA8888**
     *
     */
     LX_Image(const std::string filename, LX_Win::LX_Window& w,
@@ -155,7 +155,8 @@ public:
     /**
     *   @fn bool bind(float *iw = nullptr, float *ih = nullptr)
     *
-    *   Bind an image (it internal texture) to the current OpenGL context
+    *   Bind an image (it internal texture) to the OpenGL context
+    *   of the OpenGl window where the image is drawn on
     *   in order to use OpenGL functions.
     *
     *   @param [out] iw (Optional) a pointer to a float value of which will be
@@ -165,13 +166,18 @@ public:
     *
     *   @return TRUE on success.FALSE if the operation is not supported.
     *
-    *   @note If provided, iw and ih will be filled with the width and height
-    *         values suitable for the provided texture.
+    *   @note 1 - If provided, **iw** and **ih** will be filled with
+    *         the width and height values suitable for the provided texture.
     *         In most cases, both will be 1.0, however, on systems that support the
     *         GL_ARB_texture_rectangle extension, these values will actually be the
     *         pixel width and height used to create the texture, so this factor needs
     *         to be taken into account when providing texture coordinates to OpenGL.
     *
+    *   @note 2 - This functions change the focused OpenGL window
+    *         in order to bind the image to the OpenGL context of the window
+    *         where it is usually drawn on.
+    *         That is to say the function can be only called if the window is
+    *         an OpenGL window. Otherwise, bind() returns FALSE.
     */
     bool bind(float *iw = nullptr, float *ih = nullptr);
 
