@@ -230,36 +230,23 @@ public :
 
 
     /**
-    *   @fn SDL_Surface * getSurfaceFromData(void)
-    *
-    *   Try to load a surface from the file
-    *
-    *   @return A valid pointer to a surface if the file is an image file.
-    *           a null pointer otherwise
-    *
-    *   @note This function needs to read the entire file to create the surface.
-    *           So the cursor is reinitialized to 0 to do that.
-    *           However, It saves the old position of the cursor and restores it
-    *           at the end of the call;
-    *
-    */
-    const char * getFilename(void);
-
-    /**
     *   @fn const char * getFilename(void)
     *
     *   Get the name of the file the instance refers to
     *
     *   @return The name of the file
-    *
+    */
+    const char * getFilename(void);
+
+    /**
+    *   @fn void close(void)
+    *   Close the file
     */
     void close(void);
 
     /**
     *   @fn ~LX_File()
-    *
     *   Destroy the instance closing the file
-    *
     */
     ~LX_File();
 
