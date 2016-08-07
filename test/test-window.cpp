@@ -16,6 +16,7 @@ void test_image(LX_Win::LX_Window *win);
 void test_winManager(LX_Win::LX_Window *win);
 void test_winInfo(LX_Win::LX_Window *win);
 void test_opengl();
+void test_opengl2();
 void test_drawing(LX_Win::LX_Window *win);
 void test_viewport(LX_Win::LX_Window *win);
 
@@ -47,6 +48,7 @@ int main(int argc, char **argv)
 
     test_winInfo(win);
     test_opengl();
+    test_opengl2();
     test_window1(w);
     test_window2();
     test_winManager(w);
@@ -70,11 +72,6 @@ void test_window1(LX_Win::LX_Window *win)
     else
         cout << "SUCCESS - The window exists" << endl;
 
-    if(win != nullptr && win->getRenderer() == nullptr)
-        cerr << "FAILURE - the renderer was not initialized" << endl;
-    else
-        cout << "SUCCESS - the renderer is ready" << endl;
-
     LX_Log::log(" = END TEST = ");
 }
 
@@ -96,12 +93,6 @@ void test_window2(void)
     LX_Win::LX_Window win2(wi);
 
     cout << " = TEST 2 window = " << endl;
-
-    cout << "INFO - Is rendering mode used?" << endl;
-    if(win2.getRenderer() == nullptr)
-        cerr << "FAILURE - the renderer was not initialized" << endl;
-    else
-        cout << "SUCCESS - the renderer is ready" << endl;
 
     if(win2.getWidth() != w)
         cerr << "FAILURE - width ; expected : " << w << "; got: " << win2.getWidth() << endl;
@@ -230,28 +221,16 @@ void test_image(LX_Win::LX_Window *win)
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
 
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Sprite example");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Draw the image (angle: 0 → 360)");
-        for(int i = 0; i < 361; i++)
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Draw the image (angle: 0 → 2π)");
+
+        const double PI2 = M_PI * 2;
+
+        for(double i = 0.00; i < PI2; i += 0.02)
         {
             win->clearWindow();
             img.draw(&box,i);
             win->update();
             SDL_Delay(16);
-
-            if(i == 0)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: 0 [2kπ]");
-            if(i == 30)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π/6 [2kπ]");
-            else if(i == 45)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π/4 [2kπ]");
-            else if(i == 90)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π/2 [2kπ]");
-            else if(i == 180)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: π [2kπ]");
-            else if(i == 270)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: 3π/2 [2kπ]");
-            else if(i == 360)
-                LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"angle: 2π [2kπ]");
         }
 
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Movement of the sprite");
@@ -288,11 +267,11 @@ void test_image(LX_Win::LX_Window *win)
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; got: FALSE");
 
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"update the stream");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Update the stream");
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Streaming_Image example, with LX_Surface");
 
         Uint32 t1 = SDL_GetTicks();
-        for(int i = 0; i < 512; i++)
+        for(int i = 0; i < 256; i++)
         {
             box.x += 1;
             img.blit(data,box);
@@ -484,55 +463,170 @@ void test_winInfo(LX_Win::LX_Window *win)
 
 void test_opengl()
 {
-    LX_Log::log(" = TEST OpenGL = ");
+    LX_Log::log(" = TEST OpenGL #1 = ");
     LX_Win::LX_WindowInfo winfo;
     LX_Win::LX_initWindowInfo(winfo);
-    info.title = "OpenGL window";
+    info.title = "OpenGL window #0";
     info.flag = SDL_WINDOW_OPENGL;
 
-    LX_Win::LX_Window w(info);
-
-    // Red color
-    LX_Log::log("Red color");
-    w.clearWindow();
-    glClearColor(0.0, 0.0, 1.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    w.update();
-    SDL_Delay(2000);
-
-    LX_Log::log("Move colors: blue → red");
-    for(float i = 1.0f; i > -0.01f; i=i-0.01f)
     {
+        LX_Win::LX_Window w(info);
+
+        {
+            LX_Log::log("Get an OpengGL function: glClearColor");
+            typedef void (APIENTRY * LX_Fun)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+            LX_Fun f = LX_Graphics::LX_OpenGL::getProcAddress<LX_Fun>("glClearColor");
+
+            if(f == nullptr)
+                LX_Log::log("This function is not available ×");
+            else
+                LX_Log::log("This function is available √");
+
+            f(1.0, 0.0, 1.0, 1.0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            w.update();
+            SDL_Delay(1000);
+        }
+
+        // Red color
+        LX_Log::log("Blue color");
         w.clearWindow();
-        glClearColor(1.0f - i, 0.0f, i, 1.0f);
+        glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w.update();
-        SDL_Delay(16);
-    }
+        SDL_Delay(2000);
 
-    LX_Log::log("Move colors: red → green");
-    for(float i = 1.0f; i > -0.01f; i=i-0.01f)
-    {
-        w.clearWindow();
-        glClearColor(i, 1.0f - i, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        w.update();
-        SDL_Delay(16);
-    }
+        LX_Log::log("Move colors: blue → red");
+        for(float i = 1.0f; i > -0.01f; i=i-0.01f)
+        {
+            w.clearWindow();
+            glClearColor(1.0f - i, 0.0f, i, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+            w.update();
+            SDL_Delay(16);
+        }
 
-    LX_Log::log("Move colors: green → black");
-    for(float i = 1.0f; i > -0.01f; i=i-0.01f)
-    {
-        w.clearWindow();
-        glClearColor(0.0, i, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        w.update();
-        SDL_Delay(16);
+        LX_Log::log("Move colors: red → green");
+        for(float i = 1.0f; i > -0.01f; i=i-0.01f)
+        {
+            w.clearWindow();
+            glClearColor(i, 1.0f - i, 0.0, 1.0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            w.update();
+            SDL_Delay(16);
+        }
+
+        LX_Log::log("Move colors: green → black");
+        for(float i = 1.0f; i > -0.01f; i=i-0.01f)
+        {
+            w.clearWindow();
+            glClearColor(0.0, i, 0.0, 1.0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            w.update();
+            SDL_Delay(16);
+        }
+
+        LX_Log::log("Window size → Width × Height: %d × %d",w.getWidth(),w.getHeight());
+        int width, height;
+        w.glGetDrawableSize(width,height);
+        LX_Log::log("Drawable size (OpenGL) → Width × Height: %d × %d",width,height);
     }
 
     LX_Log::log(" = END TEST = ");
 }
 
+
+void test_opengl2()
+{
+    LX_Log::log(" = TEST OpenGL #2 = ");
+
+    LX_Win::LX_WindowInfo winfo1;
+    LX_Win::LX_WindowInfo winfo2;
+    LX_Win::LX_initWindowInfo(winfo1);
+    LX_Win::LX_initWindowInfo(winfo2);
+
+    // Window #1
+    winfo1.title = "OpenGL window #1";
+    winfo1.flag = SDL_WINDOW_OPENGL;
+    winfo1.x = 128;
+    winfo1.y = 128;
+    winfo1.w = 256;
+    winfo1.h = 256;
+
+    // Window #2
+    winfo2.title = "OpenGL window #2";
+    winfo2.flag = SDL_WINDOW_OPENGL;
+    winfo2.x = 512;
+    winfo2.y = 128;
+    winfo2.w = 256;
+    winfo2.h = 256;
+
+    {
+        LX_Win::LX_Window w1(winfo1);
+        LX_Win::LX_Window w2(winfo2);
+
+        LX_Log::log("Define window #1 as the current OpenGL window");
+        if(w1.glMakeCurrent())
+            LX_Log::log("SUCCESS - OpenGl window #1 OK → current context defined");
+        else
+            LX_Log::log("FAILURE - %s",LX_GetError());
+
+        LX_Log::log("Define window #2 as the current OpenGL window");
+        if(w2.glMakeCurrent())
+            LX_Log::log("SUCCESS - OpenGl window #2 OK → current context defined");
+        else
+            LX_Log::log("FAILURE - %s",LX_GetError());
+
+
+        LX_Log::log("Blue color on window #1");
+        w1.glMakeCurrent();                         // Work on the first window
+        w1.clearWindow();
+        glClearColor(0.0, 0.0, 1.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        w1.update();
+        SDL_Delay(1000);
+
+        LX_Log::log("Red color on window #2");
+        w2.glMakeCurrent();                         // Work on the second window
+        w2.clearWindow();
+        glClearColor(1.0, 0.0, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        w2.update();
+        SDL_Delay(2000);
+
+        {
+            LX_Graphics::LX_Sprite img("data/bullet.png",w1);
+            LX_Log::log("Bind the sprite to the first window → #1");
+            float w, h;
+            bool b = img.bind(&w,&h);
+
+            if(b)
+                LX_Log::log("OK");
+            else
+                LX_Log::log("KO: %s",LX_GetError());
+
+
+            LX_Log::log("Green color on window #2");
+            w2.glMakeCurrent();                         // Work on the first window
+            w2.clearWindow();
+            glClearColor(0.0, 1.0, 0.0, 1.0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            w2.update();
+            SDL_Delay(1000);
+
+            LX_Log::log("Undind the first window → #1");
+            b = img.unbind();
+
+            if(b)
+                LX_Log::log("OK");
+            else
+                LX_Log::log("KO: %s",LX_GetError());
+        }
+
+    }
+
+    LX_Log::log(" = END TEST = ");
+}
 
 void test_drawing(LX_Win::LX_Window *win)
 {
@@ -572,7 +666,8 @@ void test_drawing(LX_Win::LX_Window *win)
     SDL_Delay(2048);
     LX_Log::log("Draw multiple lines using several points");
     LX_Physics::LX_Point points[8] = {{64,64},{128,32},{256,64},{768,512},
-                                      {512,256},{16,448},{32,512},{256,42}};
+        {512,256},{16,448},{32,512},{256,42}
+    };
 
     c = {255,255,255,255};
     win->setDrawColor(c);
@@ -646,9 +741,9 @@ string winInfoToString(LX_Win::LX_WindowInfo &winfo)
 bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2)
 {
     return (info1.title == info2.title)
-            && (info1.x == info2.x) && (info1.y == info2.y)
-            && (info1.w == info2.w) && (info1.h == info2.h)
-            && (info1.lw == info2.lw) && (info1.lh == info2.lh)
-            && (info1.mode == info2.mode) && (info1.flag == info2.flag)
-            && (info1.accel == info2.accel);
+           && (info1.x == info2.x) && (info1.y == info2.y)
+           && (info1.w == info2.w) && (info1.h == info2.h)
+           && (info1.lw == info2.lw) && (info1.lh == info2.lh)
+           && (info1.mode == info2.mode) && (info1.flag == info2.flag)
+           && (info1.accel == info2.accel);
 }
