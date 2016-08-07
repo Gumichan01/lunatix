@@ -52,6 +52,16 @@ class LX_Font;
 namespace LX_Graphics
 {
 
+/// Flag to define no mirror while drawing an image
+const short LX_MIRROR_NONE       = 0;
+
+/// Flag to define horizontal mirror while drawing an image
+const short LX_MIRROR_HORIZONTAL = 1;
+
+/// Flag to define vertical mirror while drawing an image
+const short LX_MIRROR_VERTICAL   = 2;
+
+
 /**
 *   @class LX_Image
 *   @brief The image object
@@ -220,27 +230,48 @@ public:
     virtual void draw();
     /**
     *   @fn virtual void draw(LX_AABB * box)
-    *   Draw an area of the current sprite on the window
     *
-    *   @param box A pointer to the area of the sprite that will be drawn
-    *          If the box is NULL, then the entire sprit is drawn
+    *   Draw the current sprite on the window
+    *
+    *   @param box A pointer to the dimension (coordinates, size)
+    *          of the sprite that will be drawn.
+    *          If the box is NULL, then the sprite is drawn on the entire screen
     *
     *   @note The window is specified at object construction
     */
     virtual void draw(LX_AABB * box);
-
     /**
     *   @fn virtual void draw(LX_AABB * box, const double angle)
+    *
     *   Draw an area of the current sprite on the window with rotation
     *
-    *   @param box A pointer to the area of the sprite that will be drawn
-    *          If the box is NULL, then the entire sprit is drawn
+    *   @param box A pointer to the dimension (coordinates, size)
+    *          of the sprite that will be drawn.
+    *          If the box is NULL, then the sprite is drawn on the entire screen
     *
     *   @param angle The angle to rotate the sprite
     *
     *   @note The window is specified at object construction
     */
     virtual void draw(LX_AABB * box, const double angle);
+    /**
+    *   @fn virtual void draw(LX_AABB * box, const double angle, const short mirror)
+    *
+    *   Draw the current sprite on the window with rotation
+    *
+    *   @param box A pointer to the dimension (coordinates, size)
+    *          of the sprite that will be drawn.
+    *          If the box is NULL, then the sprite is drawn on the entire screen
+    *
+    *   @param angle The angle to rotate the sprite
+    *   @param mirror The flag that set the mirror effect:
+    *          - LX_DRAW_MIRROR_NONE: No mirror effect
+    *          - LX_MIRROR_HORIZONTAL: Horizontal mirror
+    *          - LX_MIRROR_VERTICAL: Vertical mirror
+    *
+    *   @note The window is specified at object construction
+    */
+    virtual void draw(LX_AABB * box, const double angle, const short mirror);
 
     virtual ~LX_Sprite();
 };

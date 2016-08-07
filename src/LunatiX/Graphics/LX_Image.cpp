@@ -166,8 +166,21 @@ void LX_Sprite::draw(LX_AABB * box)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,(-angle),nullptr,
-                     SDL_FLIP_NONE);
+    draw(box,0.0,LX_MIRROR_NONE);
+}
+
+void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
+{
+    SDL_RendererFlip flip;
+
+    if(mirror == 1)
+        flip = SDL_FLIP_HORIZONTAL;
+    else if(mirror == 2)
+        flip = SDL_FLIP_VERTICAL;
+    else
+        flip = SDL_FLIP_NONE;
+
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,(-angle),nullptr,flip);
 }
 
 
