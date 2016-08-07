@@ -30,6 +30,19 @@
 #include <SDL2/SDL_timer.h>
 
 
+namespace
+{
+SDL_RendererFlip shortToFlip_(const short mirror)
+{
+    if(mirror == 1)
+        return SDL_FLIP_HORIZONTAL;
+    else if(mirror == 2)
+        return SDL_FLIP_VERTICAL;
+
+    return SDL_FLIP_NONE;
+}
+};
+
 namespace LX_Graphics
 {
 
@@ -134,7 +147,6 @@ LX_Image::~LX_Image()
 }
 
 
-
 /* LX_Sprite */
 
 LX_Sprite::LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
@@ -166,26 +178,17 @@ void LX_Sprite::draw(LX_AABB * box)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle)
 {
-    draw(box,0.0,LX_MIRROR_NONE);
+    draw(box,angle,LX_MIRROR_NONE);
 }
 
 void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
 {
-    SDL_RendererFlip flip;
-
-    if(mirror == 1)
-        flip = SDL_FLIP_HORIZONTAL;
-    else if(mirror == 2)
-        flip = SDL_FLIP_VERTICAL;
-    else
-        flip = SDL_FLIP_NONE;
-
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,(-angle),nullptr,flip);
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,(-angle),nullptr,
+                     shortToFlip_(mirror));
 }
 
 
 LX_Sprite::~LX_Sprite() {}
-
 
 
 /* LX_AnimatedSprite */
@@ -226,6 +229,12 @@ void LX_AnimatedSprite::draw(LX_AABB * box)
 
 void LX_AnimatedSprite::draw(LX_AABB * box, const double angle)
 {
+    draw(box,angle,LX_MIRROR_NONE);
+}
+
+
+void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirror)
+{
     if(!_started)
     {
         _started = true;
@@ -242,12 +251,11 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle)
     }
 
     SDL_RenderCopyEx(_win._renderer,_texture,&_coordinates[_iteration],box,angle,
-                     nullptr,SDL_FLIP_NONE);
+                     nullptr,shortToFlip_(mirror));
 }
 
 
 LX_AnimatedSprite::~LX_AnimatedSprite() {}
-
 
 
 /* LX_Surface */
