@@ -181,42 +181,6 @@ void LX_Window::createRendering_(bool accel)
 }
 
 
-bool LX_Window::putSurface(SDL_Surface *image, SDL_Rect *area, SDL_Rect *pos)
-{
-    int err = 0;
-    SDL_Rect offset;
-
-    if(image == nullptr)
-        return false;
-
-    if(pos == nullptr)
-        offset = {0,0,0,0};
-    else
-        offset = {pos->x,pos->y,pos->w,pos->h};
-
-    err = SDL_BlitSurface(image,area,SDL_GetWindowSurface(_window),&offset);
-
-    if(err < 0)
-        return false;
-
-    return true;
-}
-
-
-bool LX_Window::putTexture(SDL_Texture *origin, SDL_Rect *area, SDL_Rect *pos)
-{
-    return SDL_RenderCopy(_renderer,origin,area,pos) == 0;
-}
-
-
-bool LX_Window::putTextureAndRotate(SDL_Texture *origin, const SDL_Rect *area,
-                                    const SDL_Rect *pos, const double angle)
-{
-    return SDL_RenderCopyEx(_renderer,origin,area,pos,(-angle),
-                            nullptr,SDL_FLIP_NONE) == 0;
-}
-
-
 void LX_Window::drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q)
 {
     SDL_RenderDrawLine(_renderer,p.x,p.y,q.x,q.y);
