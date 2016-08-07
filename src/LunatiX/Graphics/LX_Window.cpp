@@ -19,8 +19,6 @@
 
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Config.hpp>
-#include <LunatiX/LX_Image.hpp>
-#include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 #include <SDL2/SDL_render.h>
@@ -140,14 +138,14 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
     if((flag&SDL_WINDOW_OPENGL) == SDL_WINDOW_OPENGL)
         _glcontext = SDL_GL_CreateContext(_window);
 
-    createRendering_(accel);
+    createRenderer_(accel);
 }
 
 
 /*
 *   Private function that creates a renderer for the window
 */
-void LX_Window::createRendering_(bool accel)
+void LX_Window::createRenderer_(bool accel)
 {
     Uint32 render_flag = 0x00000000;
     LX_Configuration *config = LX_Configuration::getInstance();
@@ -341,6 +339,7 @@ void LX_Window::getViewPort(LX_AABB& viewport)
     SDL_RenderGetViewport(_renderer, &viewport);
 }
 
+
 void LX_Window::toggleFullscreen(Uint32 flag)
 {
     SDL_SetWindowFullscreen(_window,flag);
@@ -359,27 +358,10 @@ void LX_Window::toggleFullscreen(Uint32 flag)
 
 /*
 *   This private function updates the renderer of the window
-*
-*   This fonction must be only used when textures are manipulated
-*   on the current window. So LX_Window::updateWindow() and this function
-*   cannot be used together on a same window.
 */
 void LX_Window::updateRenderer_(void)
 {
     SDL_RenderPresent(_renderer);
-}
-
-
-/*
-*   This private function updates the surface of the window
-*
-*   This fonction must be only used whane textures are manipulated
-*   on the current window. So LX_Window::updateRenderer() and this function
-*   cannot be used together on a same window.
-*/
-void LX_Window::updateWindow_(void)
-{
-    SDL_UpdateWindowSurface(_window);
 }
 
 
@@ -389,16 +371,6 @@ void LX_Window::update(void)
         SDL_GL_SwapWindow(_window);
     else
         updateRenderer_();
-}
-
-
-/*
-*   Private function that clears the main window surface
-*/
-void LX_Window::clearSurface_(void)
-{
-    SDL_Surface *tmp = SDL_GetWindowSurface(_window);
-    SDL_FillRect(tmp,nullptr, SDL_MapRGB(tmp->format,0,0,0));
 }
 
 
@@ -430,7 +402,7 @@ void LX_Window::clearWindow(void)
 /*
 *   Private function that makes a screenshot using the renderer
 */
-bool LX_Window::screenshotUsingRenderer_(std::string& filename)
+bool LX_Window::screenshot_(std::string& filename)
 {
     int err = 0;
     SDL_Surface *sshot = nullptr;
@@ -457,24 +429,10 @@ bool LX_Window::screenshotUsingRenderer_(std::string& filename)
     return err == 0;
 }
 
-/*
-*   Private function that makes a screenshot using the surface
-*/
-bool LX_Window::screenshotUsingSurface_(std::string& filename)
-{
-    SDL_Surface *sshot = nullptr;
-    sshot = SDL_GetWindowSurface(_window);
-
-    if(sshot == nullptr)
-        return false;
-
-    return(IMG_SavePNG(sshot,filename.c_str()) == 0);
-}
-
 
 bool LX_Window::screenshot(std::string filename)
 {
-    return screenshotUsingRenderer_(filename);
+    return screenshot_(filename);
 }
 
 

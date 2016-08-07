@@ -24,7 +24,6 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
-#include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_video.h>
 
 struct SDL_Window;
@@ -52,11 +51,6 @@ class LX_Font;
 #define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution   */
 #define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window              */
 
-// Display modes
-///< @deprecated
-#define LX_WINDOW_SURFACE   0                                           /**< The flag to use the surface    */
-#define LX_WINDOW_RENDERING 1                                           /**< The flag to use the rendering  */
-#define LX_WINDOW_DEFAULT_MODE LX_WINDOW_RENDERING                      /**< Default mode (Rendering)       */
 
 /**
 *   @namespace LX_Win
@@ -162,15 +156,10 @@ class LX_Window
     void createWindow_(std::string &title, int posX, int posY, int w, int h,
                        Uint32 flag, bool accel = true);
 
-    void createRendering_(bool accel);
-
-    void updateWindow_(void);
+    void createRenderer_(bool accel);
     void updateRenderer_(void);
-    void clearSurface_(void);
     void clearRenderer_(void);
-
-    bool screenshotUsingRenderer_(std::string& filename);
-    bool screenshotUsingSurface_(std::string& filename);
+    bool screenshot_(std::string& filename);
 
 
 public :
