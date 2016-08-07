@@ -249,7 +249,7 @@ public:
     *          of the sprite that will be drawn.
     *          If the box is NULL, then the sprite is drawn on the entire screen
     *
-    *   @param angle The angle to rotate the sprite
+    *   @param angle The angle to rotate the sprite (in radian)
     *
     *   @note The window is specified at object construction
     */
@@ -263,7 +263,7 @@ public:
     *          of the sprite that will be drawn.
     *          If the box is NULL, then the sprite is drawn on the entire screen
     *
-    *   @param angle The angle to rotate the sprite
+    *   @param angle The angle to rotate the sprite (in radian)
     *   @param mirror The flag that set the mirror effect:
     *          - LX_DRAW_MIRROR_NONE: No mirror effect
     *          - LX_MIRROR_HORIZONTAL: Horizontal mirror

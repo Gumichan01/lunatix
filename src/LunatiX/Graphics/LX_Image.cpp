@@ -41,6 +41,12 @@ SDL_RendererFlip shortToFlip_(const short mirror)
 
     return SDL_FLIP_NONE;
 }
+
+double radianToDegree(const double angle)
+{
+    return angle * 180 / M_PI;
+}
+
 };
 
 namespace LX_Graphics
@@ -183,8 +189,8 @@ void LX_Sprite::draw(LX_AABB * box, const double angle)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,(-angle),nullptr,
-                     shortToFlip_(mirror));
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,
+                     (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
 
@@ -250,8 +256,8 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
             _iteration += 1;
     }
 
-    SDL_RenderCopyEx(_win._renderer,_texture,&_coordinates[_iteration],box,angle,
-                     nullptr,shortToFlip_(mirror));
+    SDL_RenderCopyEx(_win._renderer,_texture,&_coordinates[_iteration],box,
+                     (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
 
@@ -393,15 +399,18 @@ void LX_TextImage::draw()
     draw(0.0);
 }
 
+
 void LX_TextImage::draw(const double angle)
 {
     draw(angle,LX_MIRROR_NONE);
 }
 
+
 void LX_TextImage::draw(const double angle, const short mirror)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,(-angle),nullptr,
-                     shortToFlip_(mirror));
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,
+                     (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
+
 }
 
 void LX_TextImage::setPosition(int x, int y)
@@ -532,7 +541,6 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
     _size = sz;
     updateTexture_();
 }
-
 
 LX_ShadedTextImage::~LX_ShadedTextImage() {}
 
