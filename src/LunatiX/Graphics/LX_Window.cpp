@@ -70,7 +70,6 @@ void LX_initWindowInfo(LX_WindowInfo &info)
     info.h = DEFAULT_WIN_HEIGHT;
     info.lw = 0;
     info.lh = 0;
-    info.mode = LX_WINDOW_RENDERING;
     info.flag = 0;
     info.accel = true;
 }
@@ -91,7 +90,6 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
         info.h = config->getWinHeight();
         info.lw = 0;
         info.lh = 0;
-        info.mode = LX_WINDOW_RENDERING;
         info.flag = generateFlags(*config);
         info.accel = true;
     }
@@ -123,8 +121,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
     : _window(nullptr), _renderer(nullptr), _glcontext(nullptr),
       _original_width(info.w), _original_height(info.h), _render_method(false)
 {
-    createWindow_(info.title,info.x,info.y,info.w,info.h,info.mode,
-                  info.flag,info.accel);
+    createWindow_(info.title,info.x,info.y,info.w,info.h,info.flag,info.accel);
     getInfo(info);
 }
 
@@ -133,7 +130,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 *   Private function that initializes the window according to the configuration
 */
 void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int h,
-                              const Uint32 mode, Uint32 flag, bool accel)
+                              Uint32 flag, bool accel)
 {
     _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 
@@ -143,10 +140,7 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
     if((flag&SDL_WINDOW_OPENGL) == SDL_WINDOW_OPENGL)
         _glcontext = SDL_GL_CreateContext(_window);
 
-    if(mode == LX_WINDOW_RENDERING)
-        createRendering_(accel);
-    else
-        _render_method = false;
+    createRendering_(accel);
 }
 
 
@@ -511,7 +505,6 @@ void LX_Window::getInfo(LX_WindowInfo &info)
     }
 
     info.flag = SDL_GetWindowFlags(_window);
-    info.mode = _render_method ? LX_WINDOW_RENDERING : LX_WINDOW_SURFACE;
 
     if(_render_method)
     {

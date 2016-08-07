@@ -78,7 +78,6 @@ struct LX_WindowInfo
     int h;              /**< Window Height              */
     int lw;             /**< Independant device width   */
     int lh;             /**< Independant device height  */
-    Uint32 mode;        /**< @deprecated Display mode   */
     Uint32 flag;        /**< Flags                      */
     bool accel;         /**< Hardware acceleration      */
 
@@ -162,7 +161,7 @@ class LX_Window
     LX_Window& operator =(LX_Window& w);
 
     void createWindow_(std::string &title, int posX, int posY, int w, int h,
-                       const Uint32 mode, Uint32 flag, bool accel = true);
+                       Uint32 flag, bool accel = true);
 
     void createRendering_(bool accel);
 

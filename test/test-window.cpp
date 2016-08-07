@@ -88,7 +88,6 @@ void test_window2(void)
     wi.y = 128;
     wi.w = w;
     wi.h = h;
-    wi.mode = LX_WINDOW_RENDERING;
     wi.flag = SDL_WINDOW_SHOWN;
     LX_Win::LX_Window win2(wi);
 
@@ -732,8 +731,7 @@ string winInfoToString(LX_Win::LX_WindowInfo &winfo)
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
        << ",w: " << winfo.w << ",h: " << winfo.h
        << ",lw: " << winfo.w << ",lh: " << winfo.h
-       << "," << winfo.mode << "," << winfo.flag
-       << "," << (winfo.accel ? 1:0) << ")" << endl;
+       << winfo.flag << "," << (winfo.accel ? 1:0) << ")" << endl;
 
     return ss.str();
 }
@@ -744,6 +742,5 @@ bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2)
            && (info1.x == info2.x) && (info1.y == info2.y)
            && (info1.w == info2.w) && (info1.h == info2.h)
            && (info1.lw == info2.lw) && (info1.lh == info2.lh)
-           && (info1.mode == info2.mode) && (info1.flag == info2.flag)
-           && (info1.accel == info2.accel);
+           && (info1.flag == info2.flag) && (info1.accel == info2.accel);
 }
