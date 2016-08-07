@@ -478,8 +478,7 @@ public :
     /**
     *   @fn void glGetDrawableSize(int& w, int& h)
     *
-    *   Get the size of the size of a window underlying's drawable
-    *   (for use with glViewport)
+    *   Get the size of a window underlying's drawable (for use with glViewport)
     *
     *   @param [out] w  The reference to the variable for storing the width
     *   @param [out] h  The reference to the variable for storing the height
@@ -489,6 +488,20 @@ public :
     *         SDL_WINDOW_ALLOW_HIGHDPI on a platform with high-DPI support.
     */
     void glGetDrawableSize(int& w, int& h);
+
+    /**
+    *   @fn void glMakeCurrent()
+    *
+    *   Set focus on the current OpenGL window for rendering
+    *
+    *   @return TRUE on success.
+    *           FALSE if the window is not an OpenGL window
+    *
+    *   @note This function must only be used if the window was
+    *         created with the SDL_WINDOW_OPENGL.
+    *         Otherwise, it returns FALSE.
+    */
+    bool glMakeCurrent();
 
     /**
     *   @fn ~LX_Window()

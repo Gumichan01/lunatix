@@ -586,6 +586,18 @@ void LX_Window::glGetDrawableSize(int& w, int& h)
 }
 
 
+bool LX_Window::glMakeCurrent()
+{
+    if(_glcontext == nullptr)
+    {
+        LX_SetError("The current window is not an OpenGL window");
+        return false;
+    }
+
+    return SDL_GL_MakeCurrent(_window,_glcontext) == 0;
+}
+
+
 LX_Window::~LX_Window()
 {
     SDL_GL_DeleteContext(_glcontext);
