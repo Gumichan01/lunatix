@@ -113,7 +113,7 @@ void test_SolidText()
         LX_Log::log("Done");
 
         LX_Log::log("Rotation");
-        for(int j = 0; j < 360; j += 2)
+        for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
             simg.setPosition(256,256);
             simg.setSize(32);
@@ -167,7 +167,7 @@ void test_ShadedText()
         LX_Log::log("Done");
 
         LX_Log::log("Rotation");
-        for(int j = 0; j < 360; j += 2)
+        for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
             simg.setPosition(256,256);
             simg.setSize(32);
@@ -220,7 +220,7 @@ void test_BlendedText()
         LX_Log::log("Done");
 
         LX_Log::log("Rotation");
-        for(int j = 0; j < 360; j += 2)
+        for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
             simg.setPosition(256,256);
             simg.setSize(32);
