@@ -23,8 +23,8 @@ The engine works on Windows and Linux.
 ## Contribute ##
 
 You may take a look on the library or get the development version
-on [Github](https://github.com/Gumichan01/lunatix-engine) You can also find
-the library reference on my [website](http://gumichan01.kappatau.fr/reference/lunatix-engine/v0.8.0/).
+on [Github](https://github.com/Gumichan01/lunatix-engine) ~~You can also find
+the library reference on my [website](http://gumichan01.kappatau.fr/reference/lunatix-engine/v0.8.0/).~~
 
 ## Getting started ##
 ### On Windows ###
@@ -46,12 +46,9 @@ So you must ensure that Clang (version 3.4 at least) is installed to compile the
 However, the source code is still compilable with g++, but you will have to
 modify the Makefile to compile.
 
-**WARNING: Lua is not supported in this version. The support has been removed.**
-
 Requirements:
  - SDL 2.0.3+
  - OpenGL 3.1+
-
 
 If you want to generate the engine libraries you just need
 to execute the following command:
