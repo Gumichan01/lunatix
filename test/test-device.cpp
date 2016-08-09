@@ -54,15 +54,19 @@ void test_gamepad(void)
 
         if(gp.isConnected())
         {
-            cout << "INFO - Name : " << gp.getName() << gp.toString() << endl;
+            LX_Log::log("Name: %s",gp.getName());
+            LX_Log::log("\n%s\n",gp.toString().utf8_str());
             LX_Haptic *hp = gp.getHaptic();
 
             if(hp != nullptr)
             {
+                LX_Log::log("The device has force feedback");
                 hp->RumbleEffectInit();
                 hp->RumbleEffectPlay(1.0,100);
                 SDL_Delay(500);
             }
+            else
+                LX_Log::log("No haptic");
         }
     }
     LX_Log::log(" == END TEST == ");
@@ -79,8 +83,11 @@ void test_haptic(void)
 
     if(haptic.isOpened())
     {
+        LX_Log::log("Haptic device detected");
+
         if(haptic.RumbleEffectInit())
         {
+            LX_Log::log("Play the rumble effect");
             haptic.RumbleEffectPlay(0.5,500);
             SDL_Delay(1000);
         }
@@ -95,20 +102,22 @@ void test_haptic(void)
         effect.periodic.attack_length = 1000;                   // Takes 1 second to get max strength
         effect.periodic.fade_length = 1000;                     // Takes 1 second to fade away
 
+        LX_Log::log("Add a custom effect");
         int effectid = haptic.newEffect(&effect);
 
         if(effectid < 0)
-            cerr << "INFO - Cannot add effect: " << LX_GetError() << endl;
+            LX_Log::logError(LX_Log::LX_LOG_TEST,"Cannot add effect: %s",LX_GetError());
         else
         {
+            LX_Log::log("Run the effect");
             haptic.runEffect(effectid,1);
             SDL_Delay(5128);                                    // Wait for the effect to finish
         }
 
-        cout << "INFO - Done" << endl;
+        LX_Log::log("Done");
     }
     else
-        cout << "INFO - No haptic device" << endl;
+        LX_Log::log("No haptic device");
 
     LX_Log::log(" == END TEST == ");
 }
@@ -160,6 +169,3 @@ void test_mouse(void)
 
     LX_Log::log(" == END TEST == ");
 }
-
-
-
