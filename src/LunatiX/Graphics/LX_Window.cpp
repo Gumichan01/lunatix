@@ -166,6 +166,8 @@ void LX_Window::createRenderer_(bool accel)
     {
         std::string err_msg = "Rendering creation: ";
         err_msg = err_msg + LX_GetError();
+        SDL_GL_DeleteContext(_glcontext);
+        SDL_DestroyWindow(_window);
         throw LX_WindowException(err_msg);
     }
 }
