@@ -23,13 +23,14 @@ int main(int argc, char **argv)
              << endl;
 
     LX_Log::setDebugMode();
-    LX_Log::log(" ==== Test True Type Font ====");
+    LX_Log::log("==== Test True Type Font ====");
     test_font();
     test_SolidText();
     test_ShadedText();
     test_BlendedText();
+    LX_Log::log("==== END Test ====");
 
-    cout << " ==== END Test ==== " << endl << endl;
+    LX_Quit();
     return EXIT_SUCCESS;
 }
 

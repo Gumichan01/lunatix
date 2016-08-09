@@ -42,9 +42,10 @@ int main(int argc, char **argv)
     test_tellSeek();
     test_buffer();
     test_getChunk();
-
     remove(str.c_str());
     LX_Log::log(" ==== End File ==== ");
+
+    LX_Init();
     return EXIT_SUCCESS;
 }
 
