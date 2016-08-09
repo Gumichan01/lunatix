@@ -54,13 +54,14 @@ void loadSDLfileConfig(LX_InternalConfig& config)
 
     int cpt = 0;
     std::string line;
+    std::string s;
 
     while(getline(f,line))
     {
         if(line.empty() || line[0] == SHARP)
             continue;
 
-        std::string s = line.substr(line.find("=") + 1);
+        s = line.substr(line.find("=") + 1);
 
         switch(cpt)
         {
