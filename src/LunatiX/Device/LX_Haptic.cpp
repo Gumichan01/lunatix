@@ -40,22 +40,6 @@ int numberOfHapticDevices(void)
 
 
 /**
-*   @fn bool isHaptic(SDL_Joystick *joy)
-*
-*   Check if a joystick has a haptic system
-*
-*   @param joy The Joystick to test for haptic capabilities
-*
-*   @return TRUE if the joystick is haptic, FALSE otherwise
-*
-*/
-bool isHaptic(SDL_Joystick *joy)
-{
-    return SDL_JoystickIsHaptic(joy) == 1;
-}
-
-
-/**
 *   @fn LX_Haptic::LX_Haptic(int index)
 *
 *   Create the instance of the haptic system using the index
@@ -155,16 +139,17 @@ void LX_Haptic::RumbleEffectPlay(void)
 *
 *   Play the rumble effect
 *
-*   @param strength Strength of the rumble to play as a 0-1 float value
+*   @param strength Strength of the rumble to play as a float value
+*          (between 0.0 and 1.0)
 *   @param length Length of the rumble to play in milliseconds
 *
 */
 void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
 {
-    if(strength < 0)
-        strength = 0;
-    else if(strength > 1)
-        strength = 0;
+    if(strength < 0.0f)
+        strength = 0.0f;
+    else if(strength > 1.0f)
+        strength = 1.0f;
 
     SDL_HapticRumblePlay(_haptic,strength,length);
 }

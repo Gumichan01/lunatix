@@ -28,7 +28,6 @@ namespace LX_Device
 {
 
 int numberOfHapticDevices(void);
-bool isHaptic(SDL_Joystick *joy);
 
 
 /**
