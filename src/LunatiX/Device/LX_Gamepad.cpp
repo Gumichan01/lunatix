@@ -19,14 +19,13 @@
 *
 */
 
-
 #include <LunatiX/LX_Gamepad.hpp>
 #include <LunatiX/LX_Haptic.hpp>
 #include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_Log.hpp>
-#include <stdexcept>
 
+#include <stdexcept>
 #include <cstring>
 
 #ifdef __WIN32__
@@ -48,10 +47,14 @@ LX_Gamepad::LX_Gamepad(int index): _gc(nullptr),_joy(nullptr),_haptic(nullptr)
     if(_gc == nullptr)
     {
         _joy = SDL_JoystickOpen(index);
-        _haptic = new LX_Haptic(_joy);
+        if(SDL_JoystickIsHaptic(_joy) == 1)
+            _haptic = new LX_Haptic(_joy);
     }
     else
-        _haptic = new LX_Haptic(_gc);
+    {
+        if(SDL_JoystickIsHaptic(SDL_GameControllerGetJoystick(_gc)) == 1)
+            _haptic = new LX_Haptic(_gc);
+    }
 }
 
 
@@ -152,7 +155,7 @@ bool LX_Gamepad::isConnected(void)
 
 bool LX_Gamepad::isHaptic(void)
 {
-    return _haptic->isOpened();
+    return _haptic != nullptr && _haptic->isOpened();
 }
 
 
