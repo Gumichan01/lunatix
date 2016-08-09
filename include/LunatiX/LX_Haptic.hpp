@@ -27,8 +27,11 @@
 namespace LX_Device
 {
 
-int numberOfHapticDevices(void);
+class LX_Haptic;
 
+int numberOfHapticDevices(void);
+bool mouseIsHaptic();
+LX_Haptic * getMouseHaptic();
 
 /**
 *   @class LX_Haptic
@@ -46,16 +49,18 @@ class LX_Haptic
 
 public :
 
-    LX_Haptic(int index=0);
+    LX_Haptic();
+    LX_Haptic(int index);
     LX_Haptic(SDL_Joystick *joy);
     LX_Haptic(SDL_GameController *gc);
+    LX_Haptic& operator =(SDL_Haptic& haptic);
 
     bool isOpened(void);
-
     bool rumbleEffectInit(void);
     void rumbleEffectPlay(void);
     void rumbleEffectPlay(float strength, Uint32 length);
 
+    bool effectSupported(SDL_HapticEffect& effect);
     int newEffect(SDL_HapticEffect& effect);
     void runEffect(int effect_id, Uint32 iterations);
     void stopEffect(int effect_id);
@@ -64,7 +69,6 @@ public :
 
     ~LX_Haptic();
 };
-
 
 };
 

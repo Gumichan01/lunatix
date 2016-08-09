@@ -75,7 +75,7 @@ void test_gamepad(void)
 
 void test_haptic(void)
 {
-    LX_Haptic haptic;
+    LX_Haptic haptic(0);
     SDL_HapticEffect effect;
 
     LX_Log::log(" == Test Haptic == ");
@@ -143,6 +143,27 @@ void test_mouse(void)
         LX_Log::logDebug(LX_Log::LX_LOG_TEST,"FAILURE - not loaded; expeected: OK");
 
     c.setMouse();
+
+    LX_Log::log("Try to get the haptic feddback of the mouse, if possible");
+
+    if(LX_Device::mouseIsHaptic())
+    {
+        LX_Log::log("Haptic feedback supported by the mouse");
+        LX_Haptic * h = getMouseHaptic();
+
+        if(h == nullptr)
+            LX_Log::log("FAILURE - The haptic feedback does not seem to be supported");
+        else
+        {
+            LX_Log::log("SUCCESS - OK");
+        }
+
+    }
+    else
+    {
+        LX_Log::log("Haptic feedback not supported by the mouse");
+    }
+
     Uint32 t = SDL_GetTicks();
     SDL_Event ev;
     while(SDL_GetTicks() - t < 4000)

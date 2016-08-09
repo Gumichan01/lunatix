@@ -39,6 +39,42 @@ int numberOfHapticDevices(void)
 }
 
 
+bool mouseIsHaptic()
+{
+    return SDL_MouseIsHaptic() == 1;
+}
+
+
+LX_Haptic * getMouseHaptic()
+{
+    SDL_Haptic * sdl_hap = SDL_HapticOpenFromMouse();
+
+    if(sdl_hap == nullptr)
+        return nullptr;
+
+    LX_Haptic *hap = new LX_Haptic();
+    (*hap) = (*sdl_hap);
+
+    return hap;
+}
+
+
+/**
+*   @fn LX_Haptic::LX_Haptic()
+*
+*   Create an empty instance of the haptic system
+*
+*/
+LX_Haptic::LX_Haptic() : _haptic(nullptr), _instanceID(-1) {}
+
+
+LX_Haptic& LX_Haptic::operator =(SDL_Haptic& haptic)
+{
+    _haptic = &haptic;
+    return *this;
+}
+
+
 /**
 *   @fn LX_Haptic::LX_Haptic(int index)
 *
