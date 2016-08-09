@@ -56,7 +56,7 @@ public :
     void RumbleEffectPlay(void);
     void RumbleEffectPlay(float strength, Uint32 length);
 
-    int newEffect(SDL_HapticEffect * effect);
+    int newEffect(SDL_HapticEffect& effect);
     void runEffect(int effectID, Uint32 iterations);
     void stopEffect(int effectID);
 

@@ -156,7 +156,7 @@ void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
 
 
 /**
-*   @fn int LX_Haptic::newEffect(SDL_HapticEffect * effect)
+*   @fn int LX_Haptic::newEffect(SDL_HapticEffect& effect)
 *
 *   Add a new effect
 *
@@ -167,9 +167,9 @@ void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
 *   @sa runEffect
 *   @sa stopEffect
 */
-int LX_Haptic::newEffect(SDL_HapticEffect * effect)
+int LX_Haptic::newEffect(SDL_HapticEffect& effect)
 {
-    return SDL_HapticNewEffect(_haptic,effect);
+    return SDL_HapticNewEffect(_haptic,&effect);
 }
 
 

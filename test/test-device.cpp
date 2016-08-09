@@ -103,7 +103,7 @@ void test_haptic(void)
         effect.periodic.fade_length = 1000;                     // Takes 1 second to fade away
 
         LX_Log::log("Add a custom effect");
-        int effectid = haptic.newEffect(&effect);
+        int effectid = haptic.newEffect(effect);
 
         if(effectid < 0)
             LX_Log::logError(LX_Log::LX_LOG_TEST,"Cannot add effect: %s",LX_GetError());
