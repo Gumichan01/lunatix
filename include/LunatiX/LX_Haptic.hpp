@@ -52,13 +52,13 @@ public :
 
     bool isOpened(void);
 
-    bool RumbleEffectInit(void);
-    void RumbleEffectPlay(void);
-    void RumbleEffectPlay(float strength, Uint32 length);
+    bool rumbleEffectInit(void);
+    void rumbleEffectPlay(void);
+    void rumbleEffectPlay(float strength, Uint32 length);
 
     int newEffect(SDL_HapticEffect& effect);
-    void runEffect(int effectID, Uint32 iterations);
-    void stopEffect(int effectID);
+    void runEffect(int effect_id, Uint32 iterations);
+    void stopEffect(int effect_id);
 
     int numberOfEffects(void);
 

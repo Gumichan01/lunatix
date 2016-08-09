@@ -106,14 +106,14 @@ bool LX_Haptic::isOpened(void)
 
 
 /**
-*   @fn bool LX_Haptic::RumbleEffectInit(void)
+*   @fn bool LX_Haptic::rumbleEffectInit(void)
 *
 *   Initializes the haptic device for simple rumble playback
 *
 *   @return TRUE on success, FALSE otherwise
 *
 */
-bool LX_Haptic::RumbleEffectInit(void)
+bool LX_Haptic::rumbleEffectInit(void)
 {
     if(SDL_HapticRumbleSupported(_haptic) == SDL_TRUE)
         return SDL_HapticRumbleInit(_haptic) == 0;
@@ -123,19 +123,19 @@ bool LX_Haptic::RumbleEffectInit(void)
 
 
 /**
-*   @fn void LX_Haptic::RumbleEffectPlay(void)
+*   @fn void LX_Haptic::rumbleEffectPlay(void)
 *
 *   Play the rumble effect with default values
 *
 */
-void LX_Haptic::RumbleEffectPlay(void)
+void LX_Haptic::rumbleEffectPlay(void)
 {
-    RumbleEffectPlay(1,100);
+    rumbleEffectPlay(1,100);
 }
 
 
 /**
-*   @fn void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
+*   @fn void LX_Haptic::rumbleEffectPlay(float strength, Uint32 length)
 *
 *   Play the rumble effect
 *
@@ -144,7 +144,7 @@ void LX_Haptic::RumbleEffectPlay(void)
 *   @param length Length of the rumble to play in milliseconds
 *
 */
-void LX_Haptic::RumbleEffectPlay(float strength, Uint32 length)
+void LX_Haptic::rumbleEffectPlay(float strength, Uint32 length)
 {
     if(strength < 0.0f)
         strength = 0.0f;
@@ -174,36 +174,36 @@ int LX_Haptic::newEffect(SDL_HapticEffect& effect)
 
 
 /**
-*   @fn void LX_Haptic::runEffect(int effectID, Uint32 iterations)
+*   @fn void LX_Haptic::runEffect(int effect_id, Uint32 iterations)
 *
 *   Play the effect
 *
-*   @param effectID Identifier of the haptic effect to run
+*   @param effect_id Identifier of the haptic effect to run
 *   @param iterations iterations Number of iterations to run the effect. Use
 *         SDL_HAPTIC_INFINITY for infinity.
 *
 *   @sa newEffect
 *   @sa stopEffect
 */
-void LX_Haptic::runEffect(int effectID, Uint32 iterations)
+void LX_Haptic::runEffect(int effect_id, Uint32 iterations)
 {
-    SDL_HapticRunEffect(_haptic,effectID,iterations);
+    SDL_HapticRunEffect(_haptic,effect_id,iterations);
 }
 
 
 /**
-*   @fn void LX_Haptic::stopEffect(int effectID)
+*   @fn void LX_Haptic::stopEffect(int effect_id)
 *
 *   Stop the effect
 *
-*   @param effectID Identifier of the haptic effect to stop
+*   @param effect_id Identifier of the haptic effect to stop
 *
 *   @sa newEffect
 *   @sa runEffect
 */
-void LX_Haptic::stopEffect(int effectID)
+void LX_Haptic::stopEffect(int effect_id)
 {
-    SDL_HapticStopEffect(_haptic,effectID);
+    SDL_HapticStopEffect(_haptic,effect_id);
 }
 
 

@@ -61,8 +61,8 @@ void test_gamepad(void)
             if(hp != nullptr)
             {
                 LX_Log::log("The device has force feedback");
-                hp->RumbleEffectInit();
-                hp->RumbleEffectPlay(1.0,100);
+                hp->rumbleEffectInit();
+                hp->rumbleEffectPlay(1.0,100);
                 SDL_Delay(500);
             }
             else
@@ -85,10 +85,10 @@ void test_haptic(void)
     {
         LX_Log::log("Haptic device detected");
 
-        if(haptic.RumbleEffectInit())
+        if(haptic.rumbleEffectInit())
         {
             LX_Log::log("Play the rumble effect");
-            haptic.RumbleEffectPlay(0.5,500);
+            haptic.rumbleEffectPlay(0.5,500);
             SDL_Delay(1000);
         }
 
