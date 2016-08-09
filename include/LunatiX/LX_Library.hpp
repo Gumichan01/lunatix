@@ -20,8 +20,6 @@
 *
 */
 
-#include <GL/glu.h>
-
 #define LX_GL_MAJOR_VERSION 3   /**< Major version of OpenGL supported by the engine */
 #define LX_GL_MINOR_VERSION 2   /**< Minor version of OpenGL supported by the engine */
 
