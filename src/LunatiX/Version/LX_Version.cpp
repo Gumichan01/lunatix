@@ -81,10 +81,6 @@ void LX_VersionDependencies(void)
     SDL_TTF_VERSION(&ttf_compiled);
     SDL_MIXER_VERSION(&mix_compiled);
 
-    // Version of the LunatiX Engine
-    LX_EngineVersion(luna);
-    LX_EngineInfo();
-
     cout << endl << "Dependencies : " << endl << endl;
 
     cout << "Compiled against SDL version "
@@ -126,7 +122,6 @@ void LX_VersionDependencies(void)
          << static_cast<int>(mix_linked->major) << "."
          << static_cast<int>(mix_linked->minor) << "."
          << static_cast<int>(mix_linked->patch) << " ..." << endl;
-
 }
 
 };
