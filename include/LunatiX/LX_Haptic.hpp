@@ -107,6 +107,7 @@ public :
     *   Set the haptic device
     *
     *   @param [in] haptic The SDL haptic device
+    *   @return The current instance of LX_Haptic
     *
     */
     LX_Haptic& operator =(SDL_Haptic& haptic);
