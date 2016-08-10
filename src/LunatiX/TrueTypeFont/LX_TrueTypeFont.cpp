@@ -247,14 +247,11 @@ SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size
 }
 
 
-void LX_Font::setColor(SDL_Color *color)
+void LX_Font::setColor(SDL_Color& color)
 {
-    if(color != nullptr)
-    {
-        _font_color.r = color->r;
-        _font_color.g = color->g;
-        _font_color.b = color->b;
-    }
+    _font_color.r = color.r;
+    _font_color.g = color.g;
+    _font_color.b = color.b;
 }
 
 

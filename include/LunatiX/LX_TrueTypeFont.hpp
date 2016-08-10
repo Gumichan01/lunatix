@@ -263,13 +263,13 @@ public:
                                   LX_Win::LX_Window& w);
 
     /**
-    *   @fn void setColor(SDL_Color *color)
+    *   @fn void setColor(SDL_Color& color)
     *
     *   This function sets the new color of texts.
     *
     *   @param [in] color The new color
     */
-    void setColor(SDL_Color *color);
+    void setColor(SDL_Color& color);
 
     /**
     *   @fn ~LX_Font()
