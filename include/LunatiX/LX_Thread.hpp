@@ -33,6 +33,8 @@ namespace LX_Multithreading
 {
 
 class LX_Thread_;
+
+using LX_Data = void *;
 typedef int (* LX_ThreadFun) (void *data);
 
 class LX_Thread
@@ -41,12 +43,12 @@ class LX_Thread
 
 public:
 
-    LX_Thread(LX_ThreadFun fun, std::string name); // exception : invalid_argument, system_error
+    LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data); // exception : invalid_argument, system_error
 
-    void start();
-    bool joinable();        // TRUE si ni detach() ni join() a été appelé
-    void join();            // invalid_argument if the thread is not joinable
-    void detach();          // invalid_argument if the thread is not joinable
+    void start(LX_Data data);
+    bool joinable();
+    void join(int& ret);
+    void detach();
 
     unsigned long getID() const;
     std::string getName() const;
