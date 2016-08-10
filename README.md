@@ -47,8 +47,14 @@ However, the source code is still compilable with g++, but you will have to
 modify the Makefile to compile.
 
 Requirements:
- - SDL 2.0.3+
- - OpenGL 3.1+
+
+|   Library  | Minimal version |
+|     ---    |       ---       |
+|    SDL2    |      2.0.3+     |
+| SDL2_image |      2.0.0+     |
+|  SDL2_TTF  |      2.0.12+    |
+| SDL2_Mixer |      2.0.2+     |
+|   OpenGL   |       3.1+      |
 
 If you want to generate the engine libraries you just need
 to execute the following command:
