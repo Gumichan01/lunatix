@@ -85,8 +85,8 @@ struct LX_Circle
 *
 *   Check If two points are identical
 *
-*   @param a The first point
-*   @param b The second point
+*   @param [in] a The first point
+*   @param [in] b The second point
 *
 *   @return TRUE If these points have exactly the same coordinates,
 *           FALSE otherwise
@@ -99,8 +99,8 @@ bool operator ==(const LX_Point& a, const LX_Point& b);
 *
 *   Check If two points are dIfferent
 *
-*   @param a The first point
-*   @param b The second point
+*   @param [in] a The first point
+*   @param [in] b The second point
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 *
@@ -112,8 +112,8 @@ bool operator !=(const LX_Point& a, const LX_Point& b);
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
-*   @param a The first circle
-*   @param b The second circle
+*   @param [in] a The first circle
+*   @param [in] b The second circle
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 *
@@ -125,8 +125,8 @@ bool operator ==(const LX_Circle& a, const LX_Circle& b);
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
-*   @param a The first circle
-*   @param b The second circle
+*   @param [in] a The first circle
+*   @param [in] b The second circle
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 *
@@ -138,8 +138,8 @@ bool operator !=(const LX_Circle& a, const LX_Circle& b);
 *
 *   Check If the first circle has a greater radius than the second one
 *
-*   @param a The first circle
-*   @param b The second circle
+*   @param [in] a The first circle
+*   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is greater than the second circle,
 *           FALSE otherwise
@@ -152,8 +152,8 @@ bool operator >(const LX_Circle& a, const LX_Circle& b);
 *
 *   Check If the first circle radius is smaller than the second one
 *
-*   @param a The first circle
-*   @param b The second circle
+*   @param [in] a The first circle
+*   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is smaller than the second circle,
 *           FALSE otherwise
@@ -167,8 +167,8 @@ bool operator <(const LX_Circle& a, const LX_Circle& b);
 *   Check If the first circle has a greater radius than the second one
 *   or if they have the same radius length
 *
-*   @param a The first circle
-*   @param b The second circle
+*   @param [in] a The first circle
+*   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is greater than the second circle,
 *           or if have the same radius length, FALSE otherwise
@@ -182,8 +182,8 @@ bool operator >=(const LX_Circle& a, const LX_Circle& b);
 *   Check If the first circle radius is smaller than the second one
 *   or if they have the same radius length
 *
-*   @param a The first circle
-*   @param b The second circle
+*   @param [in] a The first circle
+*   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is smaller than the second circle,
 *           or if the two circles have the same radius length, FALSE otherwise

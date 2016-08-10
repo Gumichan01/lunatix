@@ -77,12 +77,7 @@ class LX_Polygon
 
 public :
 
-    /**
-    *   @fn LX_Polygon::LX_Polygon()
-    *
-    *   Create a new instance of LX_Polygon
-    *
-    */
+    /// Constructor
     LX_Polygon();
 
     /**
@@ -90,8 +85,8 @@ public :
     *
     *   Set a new point into the polygon according to its coordinates
     *
-    *   @param x The x position of the point
-    *   @param y The y position of the point
+    *   @param [in] x The x position of the point
+    *   @param [in] y The y position of the point
     *
     */
     void addPoint(const int x, const int y);
@@ -101,7 +96,7 @@ public :
     *
     *   Set a new point into the polygon
     *
-    *   @param p The new edge to add
+    *   @param [in] p The new edge to add
     *
     */
     void addPoint(const LX_Point& p);
@@ -121,7 +116,7 @@ public :
     *
     *   Get the point at a specified position
     *
-    *   @param index The index of the point
+    *   @param [in] index The index of the point
     *
     *   @return A copy of the point
     *
@@ -150,8 +145,8 @@ public :
     *
     *   Move the polygon to a direction
     *
-    *   @param vx The x direction
-    *   @param vy The y direction
+    *   @param [in] vx The x direction
+    *   @param [in] vy The y direction
     */
     void move(const float vx, const float vy);
 
@@ -160,7 +155,7 @@ public :
     *
     *   Move the polygon to a direction
     *
-    *   @param v The vector that indicates the direction
+    *   @param [in] v The vector that indicates the direction
     */
     void move(const LX_Vector2D& v);
 
@@ -169,8 +164,8 @@ public :
     *
     *   Move the polygon to a position
     *
-    *   @param vx The x position
-    *   @param vy The y position
+    *   @param [in] vx The x position
+    *   @param [in] vy The y position
     *
     */
     void moveTo(int vx, int vy);
