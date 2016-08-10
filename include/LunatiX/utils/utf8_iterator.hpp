@@ -61,7 +61,6 @@ public:
     *
     *   Postfix incrementation
     *
-    *   @param int dummy parameter
     *   @return The same iterator before it has moved forward
     */
     UTF8iterator operator ++(int);
@@ -78,7 +77,6 @@ public:
     *
     *   Postfix decrementation
     *
-    *   @param int dummy parameter
     *   @return The same iterator before it has moved backward
     */
     UTF8iterator operator --(int);
