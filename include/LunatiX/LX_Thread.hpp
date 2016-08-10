@@ -22,11 +22,7 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-namespace
-{
 class LX_Thread_;
-};
-
 
 /**
 *   @namespace LX_Multithreading
@@ -49,7 +45,7 @@ public:
 
     LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data);
 
-    void start(LX_Data data);
+    void start();
     bool joinable();
     void join(int *ret=nullptr);
     void detach();

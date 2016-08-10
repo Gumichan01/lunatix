@@ -21,8 +21,8 @@
 
 namespace
 {
-
 using LX_ThreadFun_ = int(void *);
+};
 
 class LX_Thread_
 {
@@ -99,15 +99,11 @@ public:
     }
 };
 
-};
-
-
-
 
 namespace LX_Multithreading
 {
 
-LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data) // exception : invalid_argument, system_error
+LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data)
     : _th(nullptr)
 {
     if(fun == nullptr)
@@ -119,7 +115,7 @@ LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_D
     _th = new LX_Thread_(std::function<LX_ThreadFun_>(fun),name,data);
 }
 
-void LX_Thread::start(LX_Data data)
+void LX_Thread::start()
 {
     _th->start();
 }
