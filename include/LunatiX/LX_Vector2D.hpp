@@ -55,8 +55,8 @@ struct LX_Vector2D
 *
 *   Check if two vectors are equal
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in] u The first vector
+*   @param [in] v The second vector
 *
 *   @return TRUE if they are equal, FALSE otherwise
 *
@@ -68,8 +68,8 @@ bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Check if two vectors are not equal
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in] u The first vector
+*   @param [in] v The second vector
 *
 *   @return TRUE if they are not equal, FALSE otherwise
 *
@@ -81,8 +81,8 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Addition betwwen two vectors
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in] u The first vector
+*   @param [in] v The second vector
 *
 *   @return The resulting vector
 *
@@ -94,8 +94,8 @@ LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Addition betwwen two vectors -> 'u += v' <=> 'u = u + v'
 *
-*   @param u The vector that will be modified
-*   @param v The second vector
+*   @param [in] u The vector that will be modified
+*   @param [in] v The second vector
 *
 *   @return The resulting vector
 *
@@ -107,8 +107,8 @@ LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Substraction betwwen two vectors
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in,out] u The first vector
+*   @param [in] v The second vector
 *
 *   @return The resulting vector
 *
@@ -120,8 +120,8 @@ LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Substraction betwwen two vectors -> 'u -= v' <=> 'u = u - v'
 *
-*   @param u The vector that will be modified
-*   @param v The second vector
+*   @param [in,out] u The vector that will be modified
+*   @param [in] v The second vector
 *
 *   @return The resulting vector
 *
@@ -133,7 +133,7 @@ LX_Vector2D operator -=(LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Get the opposite of the vector
 *
-*   @param v The vector
+*   @param [in] v The vector
 *
 *   @return The opposite vector
 *
@@ -145,7 +145,7 @@ LX_Vector2D operator -(const LX_Vector2D& v);
 *
 *   Prefix increment
 *
-*   @param v The vector
+*   @param [in,out] v The vector
 *
 *   @return The incremented vector
 *
@@ -157,7 +157,7 @@ LX_Vector2D& operator ++(LX_Vector2D& v);
 *
 *   Postfix increment
 *
-*   @param v The vector
+*   @param [in] v The vector
 *
 *   @return The vector before the incrementation
 *
@@ -169,7 +169,7 @@ LX_Vector2D operator ++(LX_Vector2D& v,int);
 *
 *   Prefix decrement
 *
-*   @param v The vector
+*   @param [in,out] v The vector
 *
 *   @return The incremented vector
 *
@@ -181,7 +181,7 @@ LX_Vector2D& operator --(LX_Vector2D& v);
 *
 *   Postfix decrement
 *
-*   @param v The vector
+*   @param [in] v The vector
 *
 *   @return The vector before the incrementation
 *
@@ -193,8 +193,8 @@ LX_Vector2D operator --(LX_Vector2D& v,int);
 *
 *   Scalar multiplication (syntactic sugar of multiply)
 *
-*   @param v The vector
-*   @param lambda The scalar value
+*   @param [in,out] v The vector
+*   @param [in] lambda The scalar value
 *
 *   @return The new vector after the multiplication
 *
@@ -206,8 +206,8 @@ LX_Vector2D& operator *(LX_Vector2D& v,float lambda);
 *
 *   Calculate the scalar product of 2 vectors
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in] u The first vector
+*   @param [in] v The second vector
 *
 *   @return The scalar product
 *
@@ -219,8 +219,8 @@ float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Calculate the vector product of 2 vectors
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in] u The first vector
+*   @param [in] v The second vector
 *
 *   @return The vector product
 *
@@ -232,7 +232,7 @@ float vector_product(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Calculate the norm of a vector
 *
-*   @param v The vector
+*   @param [in] v The vector
 *
 *   @return The norm of the vector
 *
@@ -244,7 +244,7 @@ float vector_norm(const LX_Vector2D& v);
 *
 *   Check if the vector is a zero vector
 *
-*   @param v The vector
+*   @param [in] v The vector
 *
 *   @return True if the vector has coordinates equal to 0, False otherwise
 *
@@ -256,8 +256,8 @@ bool isNullVector(const LX_Vector2D& v);
 *
 *   Check if two vectors are colinear
 *
-*   @param u The first vector
-*   @param v The second vector
+*   @param [in] u The first vector
+*   @param [in] v The second vector
 *
 *   @return True if they are colinear, False otherwise
 *
@@ -269,8 +269,8 @@ bool collinear(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   Scalar multiplication
 *
-*   @param v The vector
-*   @param lambda The scalar value
+*   @param [in,out] v The vector
+*   @param [in] lambda The scalar value
 *
 *   @return The new vector after the multiplication
 *
@@ -283,7 +283,7 @@ LX_Vector2D& multiply(LX_Vector2D& v,float lambda);
 *
 *   Vector normalization
 *
-*   @param v The vector
+*   @param [in,out] v The vector
 *
 *   @return The normalized vector
 *
