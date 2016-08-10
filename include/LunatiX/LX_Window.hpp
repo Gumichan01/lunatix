@@ -83,7 +83,7 @@ struct LX_WindowInfo
 *
 *   Get the default configuration of window that will be created.
 *
-*   @param info The structure to fill information in
+*   @param [out] info The structure to fill information in
 */
 void LX_initWindowInfo(LX_WindowInfo &info);
 
@@ -92,7 +92,7 @@ void LX_initWindowInfo(LX_WindowInfo &info);
 *
 *   Get the configuration of window from the configuration file
 *
-*   @param info The structure to fill information in
+*   @param [out] info The structure to fill information in
 */
 void LX_loadWindowConfig(LX_WindowInfo &info);
 
@@ -169,7 +169,7 @@ public :
     *
     *   Create a window using information from the struture given in argument
     *
-    *   @param info The structure tha contains information about the window
+    *   @param [in,out] info The structure tha contains information about the window
     *   @note The structure is updated when the window is created
     */
     LX_Window(LX_WindowInfo &info);
@@ -179,8 +179,8 @@ public :
     *
     *   Draw a segment on the window
     *
-    *   @param p The first point
-    *   @param q The second point
+    *   @param [in] p The first point
+    *   @param [in] q The second point
     *
     */
     void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q);
@@ -189,8 +189,8 @@ public :
     *
     *   Draw several connected segments on the window
     *
-    *   @param p A array of points
-    *   @param count The number of points, drawing count-1 segments
+    *   @param [in] p A array of points
+    *   @param [in] count The number of points, drawing count-1 segments
     *
     */
     void drawSegments(const LX_Physics::LX_Point * p, const int count);
@@ -199,8 +199,8 @@ public :
     *
     *   Draw a line on the window
     *
-    *   @param p The point
-    *   @param v The direction vector
+    *   @param [in] p The point
+    *   @param [in] v The direction vector
     *
     *   @note The length of a line depends on the norm of the direction vector
     *         The length is calculating according to this formula: ||v||*2
@@ -210,7 +210,7 @@ public :
     /**
     *   @fn void drawRect(const LX_AABB& box)
     *   Draw a rectangle on a window
-    *   @param box The rectangle
+    *   @param [in] box The rectangle
     */
     void drawRect(const LX_AABB& box);
     /**
@@ -218,22 +218,22 @@ public :
     *
     *   Draw a rectangle using a point and a vector
     *
-    *   @param p The point
-    *   @param v The vector that defines how to draw the rectangle (width height)
+    *   @param [in] p The point
+    *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *
     */
     void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
     /**
     *   @fn void drawCircle(const LX_Physics::LX_Circle& c)
     *   Draw a circle on a window
-    *   @param c The circle to draw
+    *   @param [in] c The circle to draw
     */
     void drawCircle(const LX_Physics::LX_Circle& c);
 
     /**
     *   @fn void fillRect(const LX_AABB& box)
     *   Fill a rectangle on a window
-    *   @param box The rectangle to fill
+    *   @param [in] box The rectangle to fill
     */
     void fillRect(const LX_AABB& box);
     /**
@@ -241,21 +241,21 @@ public :
     *
     *   Fill a rectangle using a point and a 2D vector
     *
-    *   @param p The point
-    *   @param v The vector
+    *   @param [in] p The point
+    *   @param [in] v The vector
     */
     void fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
     /**
     *   @fn void fillCircle(const LX_Physics::LX_Circle& c)
     *   Fill a circle on a window
-    *   @param c The circle to draw
+    *   @param [in] c The circle to draw
     */
     void fillCircle(const LX_Physics::LX_Circle& c);
 
     /**
     *   @fn void setDrawColor(const SDL_Color& color)
     *   Set the color used for drawing operations (Lines, Rectangles, Circles)
-    *   @param color The color (ARGB)
+    *   @param [in] color The color (ARGB)
     */
     void setDrawColor(const SDL_Color& color);
     /**
@@ -263,7 +263,7 @@ public :
     *
     *   Set the blend mode for drawing operations (Fill, Line)
     *
-    *   @param mode The blend mode to use for blending:
+    *   @param [in] mode The blend mode to use for blending:
     *    |        Value        |                      Meaning                     |
     *    |         ---         |                        ---                       |
     *    | SDL_BLENDMODE_NONE  | no blending                                      |
@@ -285,8 +285,7 @@ public :
     *
     *   Set the title of the window
     *
-    *   @param title The title
-    *
+    *   @param [in] title The title
     *   @sa setWindowSize
     */
     void setTitle(std::string title);
@@ -296,9 +295,8 @@ public :
     *
     *   Set the size of the window
     *
-    *   @param w The width of the window
-    *   @param h The height of the window
-    *
+    *   @param [in] w The width of the window
+    *   @param [in] h The height of the window
     *   @sa setTitle
     */
     void setWindowSize(int w, int h);
@@ -308,7 +306,7 @@ public :
     *
     *   et a specific drawing area (viewport) for rendering
     *
-    *   @param viewport The drawing area to set. nullptr defines the entire target
+    *   @param [in] viewport The drawing area to set. nullptr defines the entire target
     *   @return TRUE on success, FALSE otherwise
     */
     bool setViewPort(LX_AABB * viewport);
@@ -318,7 +316,7 @@ public :
     *
     *   Get the drawing area (viewport) for rendering
     *
-    *   @param viewport The drawing area to fill
+    *   @param [out] viewport The drawing area to fill
     *
     */
     void getViewPort(LX_AABB& viewport);
@@ -328,7 +326,7 @@ public :
     *
     *   Set the window's fullscreen state
     *
-    *   @param flag The flag to use in this function:
+    *   @param [in] flag The flag to use in this function:
     *           - ::LX_GRAPHICS_FULLSCREEN_DESKTOP
     *           - ::LX_GRAPHICS_FULLSCREEN
     *           - ::LX_GRAPHICS_NO_FULLSCREEN
@@ -355,7 +353,7 @@ public :
     *
     *   Take a screenshot and save it in a file
     *
-    *   @param filename The name of the file to save the image in
+    *   @param [in] filename The name of the file to save the image in
     *   @return True on success, False otherwise
     */
     bool screenshot(std::string filename);
@@ -365,7 +363,7 @@ public :
     *
     *   Get information of the current window
     *
-    *   @param info the info the structure to fill in information
+    *   @param [in] info The information structure to fill in
     */
     void getInfo(LX_WindowInfo &info);
 
@@ -392,8 +390,8 @@ public :
     *
     *   Get the size of a window underlying's drawable (for use with glViewport)
     *
-    *   @param [out] w  The reference to the variable for storing the width
-    *   @param [out] h  The reference to the variable for storing the height
+    *   @param [out] w The reference to the variable for storing the width
+    *   @param [out] h The reference to the variable for storing the height
     *
     *   @note This may differ from getWidth/getHeight if we are rendering
     *         to a high-DPI drawable, i.e. the window was created with
