@@ -300,9 +300,9 @@ LX_Surface::~LX_Surface()
 
 
 
-/* LX_Streaming_Image */
+/* LX_StreamingImage */
 
-LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
+LX_StreamingImage::LX_StreamingImage(LX_Win::LX_Window& w, Uint32 format)
     : LX_Image(w,format), _screen(nullptr), _update(false)
 {
     int bpp, width, height;
@@ -329,7 +329,7 @@ LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
     }
 
     if(width <= 0 || height <= 0)
-        LX_SetError("LX_Streaming_Image - bad dimensions");
+        LX_SetError("LX_StreamingImage - bad dimensions");
     else
     {
         _screen  = SDL_CreateRGBSurface(0,width,height,bpp,r,g,b,a);
@@ -339,13 +339,13 @@ LX_Streaming_Image::LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format)
 }
 
 
-bool LX_Streaming_Image::isOpen() const
+bool LX_StreamingImage::isOpen() const
 {
     return _screen != nullptr && LX_Image::isOpen();
 }
 
 
-bool LX_Streaming_Image::blit(LX_Surface& s, LX_AABB& rect)
+bool LX_StreamingImage::blit(LX_Surface& s, LX_AABB& rect)
 {
     bool b = (SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0);
 
@@ -355,7 +355,7 @@ bool LX_Streaming_Image::blit(LX_Surface& s, LX_AABB& rect)
     return b;
 }
 
-void LX_Streaming_Image::update()
+void LX_StreamingImage::update()
 {
     if(_update)
     {
@@ -366,7 +366,7 @@ void LX_Streaming_Image::update()
 }
 
 
-LX_Streaming_Image::~LX_Streaming_Image()
+LX_StreamingImage::~LX_StreamingImage()
 {
     SDL_FreeSurface(_screen);
 }

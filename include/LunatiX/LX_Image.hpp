@@ -340,7 +340,7 @@ public:
 */
 class LX_Surface: private LX_Image
 {
-    friend class LX_Streaming_Image;
+    friend class LX_StreamingImage;
     friend class LX_Device::LX_Mouse;
     SDL_Surface * _surface;
 
@@ -365,20 +365,20 @@ public:
 
 
 /**
-*   @class LX_Streaming_Image
+*   @class LX_StreamingImage
 *   @brief A special image for texture streaming
 *
 *   This class describes an image used for texture streaming
 */
-class LX_Streaming_Image: public LX_Image
+class LX_StreamingImage: public LX_Image
 {
-    SDL_Surface * _screen;
+    SDL_Surface *_screen;
     bool _update;
 
 public:
 
     /**
-    *   @fn LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *   @fn LX_StreamingImage(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
     *
     *   Build the texture
     *
@@ -386,7 +386,7 @@ public:
     *   @param [in] format Optional argument that specified the format of the image
     *   @sa LX_Image
     */
-    LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    LX_StreamingImage(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     /**
@@ -409,7 +409,7 @@ public:
     */
     void update();
 
-    virtual ~LX_Streaming_Image();
+    virtual ~LX_StreamingImage();
 };
 
 

@@ -36,7 +36,7 @@ namespace LX_Graphics
 {
 class LX_Image;
 class LX_Sprite;
-class LX_Streaming_Image;
+class LX_StreamingImage;
 class LX_AnimatedSprite;
 class LX_TextImage;
 };
@@ -138,7 +138,7 @@ class LX_Window
 {
     friend class LX_Graphics::LX_Image;
     friend class LX_Graphics::LX_Sprite;
-    friend class LX_Graphics::LX_Streaming_Image;
+    friend class LX_Graphics::LX_StreamingImage;
     friend class LX_Graphics::LX_AnimatedSprite;
     friend class LX_Graphics::LX_TextImage;
     friend class LX_TrueTypeFont::LX_Font;
