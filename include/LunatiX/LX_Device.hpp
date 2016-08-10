@@ -75,9 +75,9 @@ public:
     *   Construct the mouse cursor using a surface and the coordinates of
     *   the mouse clicking zone
     *
-    *   @param surface The surface image to load the cursor from
-    *   @param hot_x The x hot spot position
-    *   @param hot_y The y hot spot position
+    *   @param [in] surface The surface image to load the cursor from
+    *   @param [in] hot_x The x hot spot position
+    *   @param [in] hot_y The y hot spot position
     */
     LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y);
     /**
@@ -111,11 +111,10 @@ int numberOfDevices(void);
 *
 *   Get the string format of the information structure
 *
-*   @param info The information structure
+*   @param [in] info The information structure
 *   @return Always returns a valid string
 *
 *   @note This function never returns an invalid string
-*
 *   @sa statGamepad
 */
 UTF8string gamepadToString(LX_GamepadInfo& info);
@@ -125,9 +124,9 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 *
 *   Define is the cursor will be shown or not
 *
-*   @param toggle One of hese following values :
-*           1 to show it
-*           0 to hide
+*   @param [in] toggle One of hese following values :
+*            1 to show it
+*            0 to hide
 *           -1 to get the current state
 *
 *   @return 1 if the cursor is shown, 0 if it is hidden,

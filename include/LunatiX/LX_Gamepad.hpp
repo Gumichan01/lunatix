@@ -61,7 +61,7 @@ public :
     *
     *   Load the gamepad
     *
-    *   @param index The index of the joystick to query
+    *   @param [in] index The index of the joystick to query
     *
     *   @note   You can check the success of the operation
     *           calling isConnected()

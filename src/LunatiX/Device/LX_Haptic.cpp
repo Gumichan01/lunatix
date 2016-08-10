@@ -24,28 +24,19 @@
 namespace LX_Device
 {
 
-
-/**
-*   @fn int numberOfHapticDevices(void)
-*
-*   Get the number of haptic system
-*
-*   @return The number of haptic system
-*
-*/
 int numberOfHapticDevices(void)
 {
     return SDL_NumHaptics();
 }
 
 
-bool mouseIsHaptic()
+bool mouseIsHaptic(void)
 {
     return SDL_MouseIsHaptic() == 1;
 }
 
 
-LX_Haptic * getMouseHaptic()
+LX_Haptic * getMouseHaptic(void)
 {
     SDL_Haptic * sdl_hap = SDL_HapticOpenFromMouse();
 
@@ -59,14 +50,7 @@ LX_Haptic * getMouseHaptic()
 }
 
 
-/**
-*   @fn LX_Haptic::LX_Haptic()
-*
-*   Create an empty instance of the haptic system
-*
-*/
 LX_Haptic::LX_Haptic() : _haptic(nullptr), _instanceID(-1) {}
-
 
 LX_Haptic& LX_Haptic::operator =(SDL_Haptic& haptic)
 {
@@ -75,50 +59,17 @@ LX_Haptic& LX_Haptic::operator =(SDL_Haptic& haptic)
 }
 
 
-/**
-*   @fn LX_Haptic::LX_Haptic(int index)
-*
-*   Create the instance of the haptic system using the index
-*
-*   @param index The index of the device to open
-*
-*/
 LX_Haptic::LX_Haptic(int index)
-    : _haptic(SDL_HapticOpen(index)), _instanceID(index)
-{
-    // Empty
-}
+    : _haptic(SDL_HapticOpen(index)), _instanceID(index) {}
 
 
-/**
-*   @fn LX_Haptic::LX_Haptic(SDL_Joystick *joy)
-*
-*   Create the instance of the haptic device using the joystick
-*
-*   @param joy The joystick to open the device from
-*
-*/
 LX_Haptic::LX_Haptic(SDL_Joystick *joy)
     : _haptic(SDL_HapticOpenFromJoystick(joy)),
-      _instanceID(SDL_JoystickInstanceID(joy))
-{
-    // Empty
-}
+      _instanceID(SDL_JoystickInstanceID(joy)) {}
 
 
-/**
-*   @fn LX_Haptic::LX_Haptic(SDL_GameController *gc)
-*
-*   Create the instance of the haptic device using the game controller
-*
-*   @param gc The game controller to open the device from
-*
-*/
 LX_Haptic::LX_Haptic(SDL_GameController *gc)
-    : LX_Haptic(SDL_GameControllerGetJoystick(gc))
-{
-    // Empty
-}
+    : LX_Haptic(SDL_GameControllerGetJoystick(gc)) {}
 
 
 LX_Haptic::~LX_Haptic()
@@ -127,28 +78,12 @@ LX_Haptic::~LX_Haptic()
 }
 
 
-/**
-*   @fn bool LX_Haptic::isOpened(void)
-*
-*   Check if the haptic device is opened
-*
-*   @return TRUE is the device is opened, FALSE otherwise
-*
-*/
 bool LX_Haptic::isOpened(void)
 {
     return SDL_HapticOpened(_instanceID) == 1;
 }
 
 
-/**
-*   @fn bool LX_Haptic::rumbleEffectInit(void)
-*
-*   Initializes the haptic device for simple rumble playback
-*
-*   @return TRUE on success, FALSE otherwise
-*
-*/
 bool LX_Haptic::rumbleEffectInit(void)
 {
     if(SDL_HapticRumbleSupported(_haptic) == SDL_TRUE)
@@ -158,28 +93,12 @@ bool LX_Haptic::rumbleEffectInit(void)
 }
 
 
-/**
-*   @fn void LX_Haptic::rumbleEffectPlay(void)
-*
-*   Play the rumble effect with default values
-*
-*/
 void LX_Haptic::rumbleEffectPlay(void)
 {
     rumbleEffectPlay(1,100);
 }
 
 
-/**
-*   @fn void LX_Haptic::rumbleEffectPlay(float strength, Uint32 length)
-*
-*   Play the rumble effect
-*
-*   @param strength Strength of the rumble to play as a float value
-*          (between 0.0 and 1.0)
-*   @param length Length of the rumble to play in milliseconds
-*
-*/
 void LX_Haptic::rumbleEffectPlay(float strength, Uint32 length)
 {
     if(strength < 0.0f)
@@ -191,69 +110,24 @@ void LX_Haptic::rumbleEffectPlay(float strength, Uint32 length)
 }
 
 
-/**
-*   @fn int LX_Haptic::newEffect(SDL_HapticEffect& effect)
-*
-*   Add a new effect
-*
-*   @param effect Properties of the effect to create
-*
-*   @return The id of the effect on success or -1 on error.
-*
-*   @sa runEffect
-*   @sa stopEffect
-*/
 int LX_Haptic::newEffect(SDL_HapticEffect& effect)
 {
     return SDL_HapticNewEffect(_haptic,&effect);
 }
 
 
-/**
-*   @fn void LX_Haptic::runEffect(int effect_id, Uint32 iterations)
-*
-*   Play the effect
-*
-*   @param effect_id Identifier of the haptic effect to run
-*   @param iterations iterations Number of iterations to run the effect. Use
-*         SDL_HAPTIC_INFINITY for infinity.
-*
-*   @sa newEffect
-*   @sa stopEffect
-*/
 void LX_Haptic::runEffect(int effect_id, Uint32 iterations)
 {
     SDL_HapticRunEffect(_haptic,effect_id,iterations);
 }
 
 
-/**
-*   @fn void LX_Haptic::stopEffect(int effect_id)
-*
-*   Stop the effect
-*
-*   @param effect_id Identifier of the haptic effect to stop
-*
-*   @sa newEffect
-*   @sa runEffect
-*/
 void LX_Haptic::stopEffect(int effect_id)
 {
     SDL_HapticStopEffect(_haptic,effect_id);
 }
 
 
-/**
-*   @fn int LX_Haptic::numberOfEffects(void)
-*
-*   Get the number of playable effects
-*
-*   @return The number of loaded effects
-*
-*   @sa newEffect
-*   @sa runEffect
-*   @sa stopEffect
-*/
 int LX_Haptic::numberOfEffects(void)
 {
     return SDL_HapticNumEffects(_haptic);
