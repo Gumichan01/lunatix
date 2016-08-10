@@ -23,7 +23,6 @@ namespace
 {
 using LX_ThreadFun_ = int(void *);
 };
-
 class LX_Thread_
 {
     std::function<LX_ThreadFun_> _f;
@@ -41,7 +40,8 @@ public:
 
     void start()
     {
-        _thread = SDL_CreateThread(*_f.target<LX_ThreadFun_>(),_name.c_str(),_data);
+        _thread = SDL_CreateThread(*_f.target<int(*)(void *)>(),
+                                   _name.c_str(),_data);
 
         if(_thread == nullptr)
         {
@@ -87,6 +87,7 @@ public:
     {
         return SDL_GetThreadID(_thread);
     }
+
     std::string getName() const
     {
         return SDL_GetThreadName(_thread);
