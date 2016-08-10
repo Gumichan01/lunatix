@@ -47,8 +47,8 @@ public:
     *   @fn virtual void operator ()(UTF8string& u8str, size_t cursor = 0) = 0;
     *
     *   Virtual function that must be implemented in a subclass
-    *   @param u8str The utf-8 encoded string that will be displayed
-    *   @param cursor The position of the cursor on the string
+    *   @param [in] u8str The utf-8 encoded string that will be displayed
+    *   @param [in] cursor The position of the cursor on the string
     */
     virtual void operator ()(UTF8string& u8str, size_t cursor = 0) = 0;
     virtual ~LX_RedrawCallback();
@@ -72,7 +72,7 @@ public:
 *   - Define a class as a subclass of the pure virtuel class *LX_RedrawCallback*.
 *   - Define the operator () provided by *LX_RedrawCallback*.
 *   - Declare an object of type *LX_TextInput*.
-*   - Call the function **eventLoop** of this object giving the callback function in argument.
+*   - Call the function **LX_TextInput::eventLoop** of this object giving the callback function in argument.
 *
 *   Example of code :
 *
@@ -131,8 +131,15 @@ class LX_TextInput
 
 public:
 
+    /// Constructor
     LX_TextInput();
+    /**
+    *   @fn void eventLoop(LX_RedrawCallback& redraw)
+    *   Launch the event loop
+    *   @param [in] redraw Callback function to call
+    */
     void eventLoop(LX_RedrawCallback& redraw);
+    /// Destructor
     ~LX_TextInput();
 };
 

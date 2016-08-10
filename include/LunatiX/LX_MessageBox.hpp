@@ -41,12 +41,12 @@ namespace LX_MSGBox
 *
 *   Display a simple message box
 *
-*   @param flag One of these following flags:
-*           - LX_MSG_ERR : Error megssage
-*           - LX_MSG_WARN : Warning message
-*           - LX_MSG_INFO : Information message
-*   @param title The title of the box, UTF-8 format
-*   @param msg The text to display in the box, UTF-8 format
+*   @param [in] flag One of these following flags:
+*               - LX_MSG_ERR : Error megssage
+*               - LX_MSG_WARN : Warning message
+*               - LX_MSG_INFO : Information message
+*   @param [in] title The title of the box, UTF-8 format
+*   @param [in] msg The text to display in the box, UTF-8 format
 *
 *   @return TRUE on success, FALSE on error
 */

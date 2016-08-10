@@ -55,7 +55,7 @@ void LX_EngineInfo(void);
 *
 *   Get the version of the engine
 *
-*   @param version The structure to fill in.
+*   @param [out] version The structure to fill in.
 */
 void LX_EngineVersion(LX_Version& version);
 

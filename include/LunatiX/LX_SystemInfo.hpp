@@ -93,7 +93,7 @@ int getSystemRAM(void);
 *
 *   Get the list of possible displays on the screen
 *
-*   @param size the preference to the size to fill in
+*   @param [out] size the preference to the size to fill in
 *
 *   @return The list of display modes if there is at least one display mode,
 *           a null pointer otherwise, an error message can be got using

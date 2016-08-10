@@ -86,7 +86,7 @@ public:
     /**
     *   @fn UTF8iterator& operator =(const UTF8iterator& it)
     *   Asignement
-    *   @param it The iterator that wille be assigned
+    *   @param [in] it The iterator that wille be assigned
     *   @return The same iterator as the argument
     */
     UTF8iterator& operator =(const UTF8iterator& it);
@@ -97,7 +97,7 @@ public:
     *   Check if the current iterators it pointing to the same position as
     *   the iterator given in argument equals.
     *
-    *   @param it The iterator to compare with
+    *   @param [in] it The iterator to compare with
     *   @return TRUE if they are pointing to the same position, FALSE otherwise
     */
     bool operator ==(const UTF8iterator& it) const;
@@ -108,7 +108,7 @@ public:
     *   Check if the current iterators it pointing to a different position
     *   from the iterator given in argument equals.
     *
-    *   @param it The iterator to compare with
+    *   @param [in] it The iterator to compare with
     *   @return TRUE if they are not pointing to the same position,
     *           FALSE otherwise
     */
@@ -119,7 +119,7 @@ public:
     *
     *   Returns an iterator witch has been moved 10 positions forward
     *
-    *   @param n the number of step to move forward
+    *   @param [in] n the number of step to move forward
     *   @return The same iterator that moved forward
     */
     UTF8iterator operator +(const size_t n) const;
@@ -129,7 +129,7 @@ public:
     *
     *   Returns an iterator witch has been moved 10 positions backward
     *
-    *   @param n the number of steps to move backward
+    *   @param [in] n the number of steps to move backward
     *   @return The same iterator that moved backward
     */
     UTF8iterator operator -(const size_t n) const;

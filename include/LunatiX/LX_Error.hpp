@@ -44,7 +44,7 @@ inline const char * LX_GetError()
 *
 *   Set an error message
 *
-*   @param str The error string
+*   @param [in] str The error string
 *
 *   @return Always returns -1
 *
@@ -59,7 +59,7 @@ inline int LX_SetError(std::string str)
 *
 *   Set an error message
 *
-*   @param u8str The error utf-8 string
+*   @param [in] u8str The error utf-8 string
 *
 *   @return Always returns -1
 *
