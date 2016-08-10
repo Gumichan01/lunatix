@@ -63,8 +63,8 @@ public :
     *
     *   Create the instance using an AABB
     *
-    *   @param sp The sprite of the particle
-    *   @param b The AABB that contains the coordinates, the width and the height
+    *   @param [in] sp The sprite of the particle
+    *   @param [in] b The AABB that contains the coordinates, the width and the height
     *
     */
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b);
@@ -74,10 +74,10 @@ public :
     *
     *   Create the instance using an AABB and the velocity
     *
-    *   @param sp The sprite of the particle
-    *   @param b The AABB that contains the coordinates, the width and the height
-    *   @param vx The X velocity
-    *   @param vy The Y velocity
+    *   @param [in] sp The sprite of the particle
+    *   @param [in] b The AABB that contains the coordinates, the width and the height
+    *   @param [in] vx The X velocity
+    *   @param [in] vy The Y velocity
     *
     */
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy);
@@ -87,9 +87,9 @@ public :
     *
     *   Create the instance using an AABB and the velocity
     *
-    *   @param sp The sprite of the particle
-    *   @param b The AABB that contains the coordinates, the width and the height
-    *   @param v The vector that store the velocity
+    *   @param [in] sp The sprite of the particle
+    *   @param [in] b The AABB that contains the coordinates, the width and the height
+    *   @param [in] v The vector that store the velocity
     *
     */
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v);

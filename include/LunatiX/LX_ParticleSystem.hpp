@@ -40,9 +40,9 @@ class LX_Particle;
 */
 class LX_ParticleSystem
 {
-    LX_Particle **_particles;        /* The array of particles                   */
-    unsigned int _nb_particles;       /* The number of particles                  */
-    unsigned int _idwin;             /* The id of the window to put particles    */
+    LX_Particle **_particles;       /* The array of particles                   */
+    unsigned int _nb_particles;     /* The number of particles                  */
+    unsigned int _idwin;            /* The id of the window to put particles    */
 
     LX_ParticleSystem(LX_ParticleSystem& ps);
     LX_ParticleSystem& operator =(LX_ParticleSystem& ps);
@@ -56,7 +56,7 @@ public:
     *
     *   Create the instance with a number of particles
     *
-    *   @param nbPart The number of particles to define in the system
+    *   @param [in] nbPart The number of particles to define in the system
     *
     */
     LX_ParticleSystem(const unsigned int nbPart);
@@ -66,8 +66,8 @@ public:
     *
     *   Create the instance with a number of particles and the id of the window
     *
-    *   @param  nbPart The number of particles to define in the system
-    *   @param  id The id of the window in the LX_WindowManager
+    *   @param [in] nbPart The number of particles to define in the system
+    *   @param [in] id The id of the window in the LX_WindowManager
     *           to get the rendeering context
     *
     */
@@ -78,7 +78,7 @@ public:
     *
     *   Add a particle into the particle system
     *
-    *   @param p The particle to add
+    *   @param [in] p The particle to add
     *
     *   @return TRUE if the system had the particle with succes.
     *           FALSE if the particle is a null pointer or the system cannot add it
@@ -91,7 +91,7 @@ public:
     *
     *   Destroy a particle from the particle system according to its index
     *
-    *   @param index the index of the particle in the list
+    *   @param [in] index the index of the particle in the list
     *
     *   @return TRUE if the system found the particle and destroyed it.
     *           FALSE if the index is invalid
@@ -145,12 +145,7 @@ public:
     */
     unsigned int nbTotalParticles(void);
 
-    /**
-    *   @fn ~LX_ParticleSystem()
-    *
-    *   Destroy the instance cleaning up the particles
-    *
-    */
+    /// Destructor
     ~LX_ParticleSystem();
 };
 
