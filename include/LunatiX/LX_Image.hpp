@@ -92,9 +92,9 @@ public:
     *
     *   Build an Image using a filename
     *
-    *   @param filename The name of the file
-    *   @param w The window the image will be drawn on (see draw())
-    *   @param format Optional argument that specified the format of the image
+    *   @param [in] filename The name of the file
+    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the image
     *
     *   |        Format Values        |                                              |
     *   |             ---             |                      ---                     |
@@ -233,7 +233,7 @@ public:
     *
     *   Draw the current sprite on the window
     *
-    *   @param box A pointer to the dimension (coordinates, size)
+    *   @param [in] box A pointer to the dimension (coordinates, size)
     *          of the sprite that will be drawn.
     *          If the box is NULL, then the sprite is drawn on the entire screen
     *
@@ -245,11 +245,11 @@ public:
     *
     *   Draw an area of the current sprite on the window with rotation
     *
-    *   @param box A pointer to the dimension (coordinates, size)
+    *   @param [in] box A pointer to the dimension (coordinates, size)
     *          of the sprite that will be drawn.
     *          If the box is NULL, then the sprite is drawn on the entire screen
     *
-    *   @param angle The angle to rotate the sprite (in radian)
+    *   @param [in] angle The angle to rotate the sprite (in radian)
     *
     *   @note The window is specified at object construction
     */
@@ -259,12 +259,12 @@ public:
     *
     *   Draw the current sprite on the window with rotation
     *
-    *   @param box A pointer to the dimension (coordinates, size)
+    *   @param [in] box A pointer to the dimension (coordinates, size)
     *          of the sprite that will be drawn.
     *          If the box is NULL, then the sprite is drawn on the entire screen
     *
-    *   @param angle The angle to rotate the sprite (in radian)
-    *   @param mirror The flag that set the mirror effect:
+    *   @param [in] angle The angle to rotate the sprite (in radian)
+    *   @param [in] mirror The flag that set the mirror effect:
     *          - LX_DRAW_MIRROR_NONE: No mirror effect
     *          - LX_MIRROR_HORIZONTAL: Horizontal mirror
     *          - LX_MIRROR_VERTICAL: Vertical mirror
@@ -301,11 +301,11 @@ public:
     *
     *   Build an animated sprite using a filename
     *
-    *   @param filename The name of the file
-    *   @param w The window the image will be drawn on (see draw())
-    *   @param coord The list of coordinates for each sprite on the spritesheet
-    *   @param delay The delay to display each sprite of the animated image
-    *   @param format Optional argument that specified the format of the image
+    *   @param [in] filename The name of the file
+    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] coord The list of coordinates for each sprite on the spritesheet
+    *   @param [in] delay The delay to display each sprite of the animated image
+    *   @param [in] format Optional argument that specified the format of the image
     *
     *   @sa LX_Image
     */
@@ -366,7 +366,7 @@ public:
 
 /**
 *   @class LX_Streaming_Image
-*   @brief The texture
+*   @brief A special image for texture streaming
 *
 *   This class describes an image used for texture streaming
 */
@@ -382,8 +382,8 @@ public:
     *
     *   Build the texture
     *
-    *   @param w The window the image will be drawn on (see draw())
-    *   @param format Optional argument that specified the format of the image
+    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the image
     *   @sa LX_Image
     */
     LX_Streaming_Image(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
@@ -394,8 +394,8 @@ public:
     *
     *   Put the surface given in argument on the current texture
     *
-    *   @param s The surface to put
-    *   @param rect The area of the surface to put
+    *   @param [in] s The surface to put
+    *   @param [in] rect The area of the surface to put
     *
     *   @return TRUE on success, FALSE otherwise
     */
@@ -413,6 +413,12 @@ public:
 };
 
 
+/**
+*   @class LX_TextImage
+*   @brief The text image
+*
+*   This abstract class describes an image build from a text
+*/
 class LX_TextImage: public LX_Image
 {
 
@@ -427,28 +433,132 @@ protected:
 
 public:
 
-    LX_TextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+    /**
+    *   @fn LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    *                    Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    *
+    *   @param [in] font The font that will be used for frawing the text
+    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the image
+    *               See LX_Image for more information
+    *
+    */
+    LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                  Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_TextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /**
+    *   @fn LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    *
+    *   @param [in] text The text that will be drawn on the screen
+    *   @param [in] sz The size of the text
+    *   @param [in] font The font that will be used for frawing the text
+    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the image
+    *               See LX_Image for more information
+    *
+    */
+    LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                  LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_TextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /**
+    *   @fn LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    *
+    *   @param [in] text The text that will be drawn on the screen
+    *   @param [in] sz The size of the text
+    *   @param [in] font The font that will be used for frawing the text
+    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the image
+    *               See LX_Image for more information
+    *
+    */
+    LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                  LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
+    /**
+    *   @fn virtual void draw(const double angle)
+    *
+    *   Draw the current text on the window with rotation and mirror effect
+    *
+    *   @param [in] angle The angle to rotate the sprite (in radian)
+    *
+    *   @note The window is specified at object construction
+    */
     virtual void draw(const double angle);
+    /**
+    *   @fn virtual void draw(const double angle, const short mirror)
+    *
+    *   Draw the current text on the window with rotation and mirror effect
+    *
+    *   @param [in] angle The angle to rotate the sprite (in radian)
+    *   @param [in] mirror The flag that set the mirror effect:
+    *          - LX_DRAW_MIRROR_NONE: No mirror effect
+    *          - LX_MIRROR_HORIZONTAL: Horizontal mirror
+    *          - LX_MIRROR_VERTICAL: Vertical mirror
+    *
+    *   @note The window is specified at object construction
+    */
     virtual void draw(const double angle, const short mirror);
 
+    /**
+    *   @fn void setPosition(int x, int y)
+    *
+    *   Set the position of the current text
+    *
+    *   @param [in] x The new X position
+    *   @param [in] y The new Y position
+    *
+    */
     void setPosition(int x, int y);
-    virtual void setText(std::string str, unsigned int sz) = 0;
-    virtual void setText(const UTF8string& str, unsigned int sz) = 0;
+    /**
+    *   @fn virtual void setText(std::string text, unsigned int sz) = 0
+    *
+    *   Set the text
+    *
+    *   @param [in] text The text to set
+    *   @param [in] sz The new size of the text
+    *
+    *   @note This function updates the image of the text
+    */
+    virtual void setText(std::string text, unsigned int sz) = 0;
+    /**
+    *   @fn virtual void setText(const UTF8string& text, unsigned int sz) = 0;
+    *
+    *   Set the text
+    *
+    *   @param [in] text The utf-8 text to set
+    *   @param [in] sz The new size of the text
+    *
+    *   @note This function updates the image of the text
+    */
+    virtual void setText(const UTF8string& text, unsigned int sz) = 0;
+    /**
+    *   @fn virtual void setSize(unsigned int sz) = 0
+    *
+    *   Set the size of the text
+    *
+    *   @param [in] sz The new size of the text
+    *
+    *   @note This function updates the image of the text
+    */
     virtual void setSize(unsigned int sz) = 0;
 
+    /// Destructor
     virtual ~LX_TextImage();
 };
 
 
+/**
+*   @class LX_SolidTextImage
+*   @brief The solid text image
+*
+*   This class describes a solid text image.
+*   A solid text image is just a text that is quickly and dirty drawn on the screen.
+*
+*   Using this class for drawing text is fast.
+*/
 class LX_SolidTextImage: public LX_TextImage
 {
 protected:
@@ -457,23 +567,37 @@ protected:
 
 public:
 
+    /// Constructor without the text
     LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                       Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_SolidTextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /// Constructor using the text
+    LX_SolidTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_SolidTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /// Constructor using the utf-8 text
+    LX_SolidTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string str, unsigned int sz = 0);
-    virtual void setText(const UTF8string& str, unsigned int sz = 0);
+    virtual void setText(std::string text, unsigned int sz = 0);
+    virtual void setText(const UTF8string& text, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);
 
     virtual ~LX_SolidTextImage();
 };
 
 
+/**
+*   @class LX_ShadedTextImage
+*   @brief The shaded text image
+*
+*   This class describes a shaded text image.
+*   A shaded text image is a text that is slowly but nicely drawn on the screen
+*   with a background color that should be defined.
+*
+*   By default, at instantiation, the background color is black, bu it can be
+*   set using LX_ShadedImage::setColor()
+*/
 class LX_ShadedTextImage: public LX_TextImage
 {
     SDL_Color _bgcolor;
@@ -484,25 +608,61 @@ protected:
 
 public:
 
+    /// Constructor without the text
     LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                        Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_ShadedTextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /// Constructor using the text
+    LX_ShadedTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                        LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_ShadedTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /// Constructor using the utf-8 text
+    LX_ShadedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                        LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string str, unsigned int sz = 0);
-    virtual void setText(const UTF8string& str, unsigned int sz = 0);
-    virtual void setText(std::string str, SDL_Color c, unsigned int sz = 0);
-    virtual void setText(const UTF8string& str, SDL_Color c, unsigned int sz = 0);
+    virtual void setText(std::string text, unsigned int sz = 0);
+    virtual void setText(const UTF8string& text, unsigned int sz = 0);
+    /**
+    *   @fn virtual void setText(std::string text, SDL_Color c, unsigned int sz = 0)
+    *
+    *   Set the text with its color
+    *
+    *   @param [in] text The text to set
+    *   @param [in] c The color of the text
+    *   @param [in] sz (Optional) The new size of the text
+    *
+    *   @note This function updates the image of the text
+    */
+    virtual void setText(std::string text, SDL_Color c, unsigned int sz = 0);
+    /**
+    *   @fn virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz = 0)
+    *
+    *   Set the utf-8 text with its color
+    *
+    *   @param [in] text The utf-8 text to set
+    *   @param [in] c The color of the text
+    *   @param [in] sz (Optional) The new size of the text
+    *
+    *   @note This function updates the image of the text
+    */
+    virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);
 
     virtual ~LX_ShadedTextImage();
 };
 
 
+/**
+*   @class LX_BlendedTextImage
+*   @brief The blended text image
+*
+*   This class describes a blended text image.
+*   A blended text image is a text that is "very" slowly
+*   but very nicely drawn on the screen.
+
+*   Using this class for drawing text should be slow, in particular if
+*   you call LX_BlendedImage::setText() and LX_BlendedImage::setSize() frequently.
+*/
 class LX_BlendedTextImage: public LX_TextImage
 {
 protected:
@@ -511,17 +671,20 @@ protected:
 
 public:
 
+    /// Constructor without the text
     LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                         Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_BlendedTextImage(std::string str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /// Constructor using the text
+    LX_BlendedTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    LX_BlendedTextImage(const UTF8string& str, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    /// Constructor using the utf-8 text
+    LX_BlendedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string str, unsigned int sz = 0);
-    virtual void setText(const UTF8string& str, unsigned int sz = 0);
+    virtual void setText(std::string text, unsigned int sz = 0);
+    virtual void setText(const UTF8string& text, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);
 
     virtual ~LX_BlendedTextImage();
