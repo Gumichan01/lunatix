@@ -91,8 +91,8 @@ public:
     *
     *   Construct the font with color and the size of the text
     *
-    *   @param color The default color font
-    *   @param size the size of the text
+    *   @param [in] color The default color font
+    *   @param [in] size the size of the text
     *
     *   @note   If size is 0, then the default value defined in the configuratnion
     *           file is used.
@@ -112,8 +112,8 @@ public:
     *
     *   Construct the font with font file and color
     *
-    *   @param font_file The font file to use
-    *   @param color The default color font
+    *   @param [in] font_file The font file to use
+    *   @param [in] color The default color font
     *
     *   @warning    It is necessary to initialize the SDL_TTF library
     *               setting the TTF flag to 1 in lxsdl.cfg
@@ -128,9 +128,9 @@ public:
     *
     *  Construct the font with a font file, a color and a size.
     *
-    *   @param font_file The font file to load
-    *   @param color The color font needed
-    *   @param size The size of the text to display
+    *   @param [in] font_file The font file to load
+    *   @param [in] color The color font needed
+    *   @param [in] size The size of the text to display
     *
     *   @warning    It is necessary to initialize the SDL_TTF library setting
     *               the ttf flag to 1 in lxsdl.cfg.
@@ -146,9 +146,9 @@ public:
     *   Calculate the resulting texture dimension of the
     *   text rendererd using the default font
     *
-    *   @param text The std::string to size up
-    *   @param w The reference of an integral to fill in the text width
-    *   @param h The reference of an integral to fill in the text height
+    *   @param [in] text The std::string to size up
+    *   @param [out] w The reference of an integral to fill in the text width
+    *   @param [out] h The reference of an integral to fill in the text height
     *
     *   @return A control value, 0 on success, -1 on failure
     *
@@ -161,10 +161,10 @@ public:
     *   Calculate the resulting texture dimension of the
     *   text rendererd using the default font
     *
-    *   @param text The std::string to size up
-    *   @param size The size of the text
-    *   @param w The reference of an integral to fill in the text width
-    *   @param h The reference of an integral to fill in the text height
+    *   @param [in] text The std::string to size up
+    *   @param [in] size The size of the text
+    *   @param [out] w The reference of an integral to fill in the text width
+    *   @param [out] h The reference of an integral to fill in the text height
     *
     *   @return A control value, 0 on success, -1 on failure
     *
@@ -176,9 +176,9 @@ public:
     *
     *   Render the text in solid mode. The size has to be specified
     *
-    *   @param text The string to display
-    *   @param size The size defined by the user
-    *   @param w The window to link the texture with
+    *   @param [in] text The string to display
+    *   @param [in] size The size defined by the user
+    *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
@@ -189,9 +189,9 @@ public:
     *
     *   Render the UTF-8 encoded text in solid mode. The size has to be specified
     *
-    *   @param text The utf-8 string to display
-    *   @param size The size defined by the user
-    *   @param w The window to link the texture with
+    *   @param [in] text The utf-8 string to display
+    *   @param [in] size The size defined by the user
+    *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
@@ -204,10 +204,10 @@ public:
     *
     *   Render the text in shaded mode. The size has to be specified
     *
-    *   @param text The string to display
-    *   @param size The size defined by the user
-    *   @param bg The background color behind the text
-    *   @param w The window to link the texture with
+    *   @param [in] text The string to display
+    *   @param [in] size The size defined by the user
+    *   @param [in] bg The background color behind the text
+    *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
@@ -220,10 +220,10 @@ public:
     *
     *   Render the UTF-8 encoded text in shaded mode. The size has to be specified
     *
-    *   @param text The utf-8 string to display
-    *   @param size The size defined by the user
-    *   @param bg The background color behind the text
-    *   @param w The window to link the texture with
+    *   @param [in] text The utf-8 string to display
+    *   @param [in] size The size defined by the user
+    *   @param [in] bg The background color behind the text
+    *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
@@ -237,9 +237,9 @@ public:
     *
     *   Render the text in blended mode. The size has to be specified
     *
-    *   @param text The string to display
-    *   @param size The size defined by the user
-    *   @param w The window to link the texture with
+    *   @param [in] text The string to display
+    *   @param [in] size The size defined by the user
+    *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
@@ -252,9 +252,9 @@ public:
     *
     *   Render the UTF-8 encoded text in blended mode. The size has to be specified
     *
-    *   @param text The utf-8 string to display
-    *   @param size The size defined by the user
-    *   @param w The window to link the texture with
+    *   @param [in] text The utf-8 string to display
+    *   @param [in] size The size defined by the user
+    *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
@@ -267,7 +267,7 @@ public:
     *
     *   This function sets the new color of texts.
     *
-    *   @param color The new color
+    *   @param [in] color The new color
     */
     void setColor(SDL_Color *color);
 
