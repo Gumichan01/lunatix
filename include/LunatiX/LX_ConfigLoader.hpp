@@ -23,7 +23,6 @@
 #include <LunatiX/utils/utf8_string.hpp>
 
 #define LX_SDL_FILE "config/lxsdl.cfg"
-#define LX_WINFO_FILE "config/lxwindow.cfg"
 
 /**
 *   @namespace LX_ConfigLoader
@@ -57,7 +56,7 @@ struct LX_InternalConfig
 *
 *   Load the configuration of the engine and store it into the struture
 *
-*   @param config The structure to fill data in
+*   @param [out] config The structure to fill data in
 *
 */
 void loadSDLfileConfig(LX_InternalConfig& config);

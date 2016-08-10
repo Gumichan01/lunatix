@@ -43,9 +43,7 @@ public :
 
     /**
     *   @fn const char * LX_ConfigurationException::what() const noexcept
-    *
     *   Get the error message
-    *
     *   @return The error string
     */
     const char * what() const noexcept;
