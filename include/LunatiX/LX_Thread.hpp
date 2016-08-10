@@ -22,6 +22,12 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
+namespace
+{
+class LX_Thread_;
+};
+
+
 /**
 *   @namespace LX_Multithreading
 *   @brief The Multithreading module
@@ -32,22 +38,20 @@
 namespace LX_Multithreading
 {
 
-class LX_Thread_;
-
 using LX_Data = void *;
 typedef int (* LX_ThreadFun) (void *data);
 
 class LX_Thread
 {
-    LX_Thread_ *th;
+    LX_Thread_ *_th;
 
 public:
 
-    LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data); // exception : invalid_argument, system_error
+    LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data);
 
     void start(LX_Data data);
     bool joinable();
-    void join(int& ret);
+    void join(int *ret=nullptr);
     void detach();
 
     unsigned long getID() const;

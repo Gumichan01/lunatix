@@ -50,12 +50,12 @@ public:
         }
     }
 
-    bool joinable()        // TRUE si ni detach() ni join() a été appelé
+    bool joinable()
     {
         return _joinable;
     }
 
-    void join(int& ret)            // invalid_argument if the thread is not joinable
+    void join(int *ret)
     {
         if(!_joinable)
         {
@@ -65,7 +65,7 @@ public:
             throw std::invalid_argument("This thread is detached or has already been joined");
         }
 
-        SDL_WaitThread(_thread,&ret);
+        SDL_WaitThread(_thread,ret);
         _joinable = false;
     }
 
@@ -92,7 +92,11 @@ public:
         return SDL_GetThreadName(_thread);
     }
 
-    ~LX_Thread_();
+    ~LX_Thread_()
+    {
+        if(joinable())
+            join(nullptr);
+    }
 };
 
 };
@@ -103,6 +107,52 @@ public:
 namespace LX_Multithreading
 {
 
+LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data) // exception : invalid_argument, system_error
+    : _th(nullptr)
+{
+    if(fun == nullptr)
+    {
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"NULL pointer of function");
+        throw std::invalid_argument("The function must be defined");
+    }
+
+    _th = new LX_Thread_(std::function<LX_ThreadFun_>(fun),name,data);
+}
+
+void LX_Thread::start(LX_Data data)
+{
+    _th->start();
+}
+
+bool LX_Thread::joinable()
+{
+    return _th->joinable();
+}
+
+void LX_Thread::join(int *ret)
+{
+    _th->join(ret);
+}
+
+void LX_Thread::detach()
+{
+    _th->detach();
+}
+
+unsigned long LX_Thread::getID() const
+{
+    _th->getID();
+}
+
+std::string LX_Thread::getName() const
+{
+    return _th->getName();
+}
+
+LX_Thread::~LX_Thread()
+{
+    delete _th;
+}
 
 
 };
