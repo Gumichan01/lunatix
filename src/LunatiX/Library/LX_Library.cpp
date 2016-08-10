@@ -23,6 +23,7 @@
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Mixer.hpp>
 #include <LunatiX/LX_WindowManager.hpp>
+#include <LunatiX/LX_OpenGL.hpp>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -128,9 +129,12 @@ bool LX_Init(void)
 
     if(configuration->getOpenGLFlag())
     {
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, LX_GL_MAJOR_VERSION);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, LX_GL_MINOR_VERSION);
+        LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+                                             SDL_GL_CONTEXT_PROFILE_CORE);
+        LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,
+                                             LX_GL_MAJOR_VERSION);
+        LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MINOR_VERSION,
+                                             LX_GL_MINOR_VERSION);
     }
 
     LX_Win::LX_WindowManager::init();
