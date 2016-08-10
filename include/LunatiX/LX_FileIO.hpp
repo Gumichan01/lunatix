@@ -96,8 +96,8 @@ public :
     *
     *   Open the file given in argument according to the mode requested
     *
-    *   @param filename The file to open
-    *   @param mode The mode to be used for opening the file.
+    *   @param [in] filename The file to open
+    *   @param [in] mode The mode to be used for opening the file.
     *               It is one of these following :
     *               - ::LX_FILEIO_RDONLY
     *               - ::LX_FILEIO_WRONLY
@@ -118,8 +118,8 @@ public :
     *
     *   Open the file given in argument according to the mode requested
     *
-    *   @param filename The file to open
-    *   @param mode The mode to be used for opening the file.
+    *   @param [in] filename The file to open
+    *   @param [in] mode The mode to be used for opening the file.
     *               It is one of these following :
     *               - ::LX_FILEIO_RDONLY
     *               - ::LX_FILEIO_WRONLY
@@ -139,9 +139,9 @@ public :
     *
     *   Read the file
     *
-    *   @param ptr The pointer to a buffer to read data into
-    *   @param data_size The size of each object to read, in bytes
-    *   @param max_num The maximum number of objects to read
+    *   @param [out] ptr The pointer to a buffer to read data into
+    *   @param [in] data_size The size of each object to read, in bytes
+    *   @param [in] max_num The maximum number of objects to read
     *
     *   @return The number of objects read. 0 at error or end of file
     *
@@ -154,13 +154,11 @@ public :
     *
     *   Read exactly max_num bytes of the file
     *
-    *   @param ptr The pointer to a buffer to read data into
-    *   @param data_size The size of each object to read, in bytes
-    *   @param num The maximum number of objects to read
+    *   @param [out] ptr The pointer to a buffer to read data into
+    *   @param [in] data_size The size of each object to read, in bytes
+    *   @param [in] num The maximum number of objects to read
     *
     *   @return The number of objects read. 0 at error or end of file
-    *
-    *   @note   This function assures that exactly num bytes will be read
     *
     */
     size_t readExactly(void *ptr,size_t data_size,size_t num);
@@ -170,9 +168,9 @@ public :
     *
     *   Write on the file
     *
-    *   @param ptr The pointer to a buffer containing data to write
-    *   @param data_size The size of an object to write, in bytes
-    *   @param num The maximum number of objects to write
+    *   @param [in] ptr The pointer to a buffer containing data to write
+    *   @param [in] data_size The size of an object to write, in bytes
+    *   @param [in] num The maximum number of objects to write
     *
     *   @return The number of objects written.
     *           This value will be less than num on error
@@ -185,7 +183,7 @@ public :
     *
     *   Write a string on the file
     *
-    *   @param str The string to write
+    *   @param [in] str The string to write
     *
     *   @return The number of characters written.
     *           This value will be less than the string length on error
@@ -198,8 +196,8 @@ public :
     *
     *   Seek for a position the file
     *
-    *   @param offset An offset in bytes, relative to the whence; can be negative
-    *   @param whence Any of LX_SEEK_SET, LX_SEEK_CUR and LX_SEEK_END
+    *   @param [in] offset An offset in bytes, relative to the whence; can be negative
+    *   @param [in] whence Any of LX_SEEK_SET, LX_SEEK_CUR and LX_SEEK_END
     *
     *   @return The final offset in the data stream. -1 on error
     *

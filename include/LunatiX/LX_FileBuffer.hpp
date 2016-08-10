@@ -78,7 +78,7 @@ public :
     *
     *   Build the instance of the file buffer
     *
-    *   @param filename The file to generate the buffer
+    *   @param [in] filename The file to generate the buffer
     *
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
@@ -91,7 +91,7 @@ public :
     *
     *   Build the instance of the file buffer
     *
-    *   @param filename The file to generate the buffer
+    *   @param [in] filename The file to generate the buffer
     *
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
