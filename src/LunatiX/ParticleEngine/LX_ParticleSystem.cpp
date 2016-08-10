@@ -38,7 +38,7 @@ LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
 LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
     : _particles(nullptr), _nb_particles(nbPart), _idwin(id)
 {
-    allocateParticles(_nb_particles);
+    allocateParticles_(_nb_particles);
 }
 
 
@@ -63,7 +63,7 @@ LX_ParticleSystem::~LX_ParticleSystem()
 *   the following constructors of the particle system
 *
 */
-void LX_ParticleSystem::allocateParticles(unsigned int nbPart)
+void LX_ParticleSystem::allocateParticles_(unsigned int nbPart)
 {
     _particles = new (nothrow) LX_Particle*[nbPart];
 
