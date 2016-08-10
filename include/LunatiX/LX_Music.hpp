@@ -78,7 +78,7 @@ public:
     *
     *   Create the instance loading a music file
     *
-    *   @param filename The music filename that will be loaded
+    *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
     */
     LX_Music(std::string& filename);
@@ -88,7 +88,7 @@ public:
     *
     *   Create the instance loading a music file
     *
-    *   @param filename The music filename that will be loaded
+    *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
     */
     LX_Music(UTF8string& filename);
@@ -98,7 +98,7 @@ public:
     *
     *   Fade in the current Music over some milliseconds of time
     *
-    *   @param ms Milliseconds for the fade-in effect to complete
+    *   @param [in] ms Milliseconds for the fade-in effect to complete
     *
     *   @note fadeIn starts playing the music with the fade-in effect.
     *         It is not necessary to call LX_Music::play() if this function is called
@@ -112,8 +112,8 @@ public:
     *
     *   Fade in the current Music over some milliseconds of time
     *
-    *   @param ms Milliseconds for the fade-in effect to complete
-    *   @param pos The position to start the music
+    *   @param [in] ms Milliseconds for the fade-in effect to complete
+    *   @param [in] pos The position to start the music
     *
     *   @note fadeInPos starts playing the music with the fade-in effect.
     *         It is not necessary to call LX_Music::play() if this function is called
@@ -127,7 +127,7 @@ public:
     *
     *   Fade out the music over some milliseconds of time
     *
-    *   @param ms Milliseconds for the fade-out effect to complete
+    *   @param [in] ms Milliseconds for the fade-out effect to complete
     *
     *   @note This functions works only when music is playing and
     *           no fading is already set to fade out
@@ -151,7 +151,7 @@ public:
     *
     *   Play the music specified in the LX_Music class
     *
-    *   @param loops The loop constant
+    *   @param [in] loops The loop constant
     *
     *   @return TRUE on success,FALSE otherwise
     *

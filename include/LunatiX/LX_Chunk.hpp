@@ -81,7 +81,7 @@ public:
     *
     *   Construct the instance creating the Mix_Chunk instance from a file
     *
-    *   @param filename The file to create the chunk from
+    *   @param [in] filename The file to create the chunk from
     *
     *   @note It is preferable to give a .wav file to the constructor.
     *           The chunk was optimized for this format. But it can work with
@@ -96,7 +96,7 @@ public:
     *
     *   Create the instance loading a chunk file
     *
-    *   @param filename The chunk filename that will be loaded
+    *   @param [in] filename The chunk filename that will be loaded
     *
     *   @note It is preferable to give a .wav file to the constructor.
     *           The chunk was optimized for this format. But it can work with
@@ -110,7 +110,7 @@ public:
     *
     *   Load the sample from a file buffer
     *
-    *   @param file The file buffer to load the chunk from
+    *   @param [in] file The file buffer to load the chunk from
     *   @return TRUE on success, FALSE otherwise
     */
     bool loadFromBuffer(LX_FileIO::LX_FileBuffer *file);
@@ -131,7 +131,7 @@ public:
     *
     *   Play the current sample
     *
-    *   @param channel The channel to play the chunk on
+    *   @param [in] channel The channel to play the chunk on
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample with no loop
@@ -143,8 +143,8 @@ public:
     *
     *   Play the current sample
     *
-    *   @param channel The channel to play the chunk on
-    *   @param loops number of loops
+    *   @param [in] channel The channel to play the chunk on
+    *   @param [in] loops number of loops
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note The chunk is played loops +1 time
@@ -161,9 +161,9 @@ public:
     *
     *   Play the current sample during a moment
     *
-    *   @param channel The channel to play the chunk on
-    *   @param loops number of loops
-    *   @param ticks The limit in millisecond to play the current sample
+    *   @param [in] channel The channel to play the chunk on
+    *   @param [in] loops number of loops
+    *   @param [in] ticks The limit in millisecond to play the current sample
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample on with no loop

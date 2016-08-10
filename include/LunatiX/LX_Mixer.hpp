@@ -58,7 +58,7 @@ class LX_Chunk;
 *
 *   Set the overall volume
 *
-*   @param volume the volume between 0 and 100
+*   @param [in] volume the volume between 0 and 100
 *
 *   @note if volume > 100, then the overall volume is set to 100
 */
@@ -69,7 +69,7 @@ void setOverallVolume(unsigned short volume);
 *
 *   Set the music volume in percentage of the overall volume
 *
-*   @param pvolume the volume of the music in percentage of the overall volume
+*   @param [in] pvolume the volume of the music in percentage of the overall volume
 *
 *   @note If the overall volume is 60 and pvolume is 50%, the music volume
 *         is 50 * 60 / 100.
@@ -82,7 +82,7 @@ void setMusicVolume(unsigned short pvolume);
 *
 *   Set the FX volume in percentage of the overall volume
 *
-*   @param pvolume the volume of the music in percentage of the overall volume
+*   @param [in] pvolume the volume of the music in percentage of the overall volume
 *
 *   @note Example:
 *         If the overall volume is 60 and pvolume is 50%, the FX volume
@@ -125,7 +125,7 @@ unsigned short getFXVolume();
 *
 *   Load the music according to the file name
 *
-*   @param filename The name of the music file
+*   @param [in] filename The name of the music file
 *
 *   @return A valid instance of LX_Music
 *   @note This function creates a new instance of LX_Music.
@@ -138,7 +138,7 @@ LX_Music * loadMusic(std::string filename);
 *
 *   Load the music according to the file name
 *
-*   @param filename The name of the music file (utf-8)
+*   @param [in] filename The name of the music file (utf-8)
 *
 *   @return A valid instance of LX_Music
 *   @note This function creates a new instance of LX_Music.
@@ -151,7 +151,7 @@ LX_Music * loadMusic(UTF8string& filename);
 *
 *   Create a new LX_Chunk instance from a WAV file
 *
-*   @param filename The name of the sample file
+*   @param [in] filename The name of the sample file
 *
 *   @return A valid instance of LX_Chunk
 *   @note This function creates a new instance of LX_Chunk.
@@ -164,7 +164,7 @@ LX_Chunk * loadSample(std::string filename);
 *
 *   Create a new LX_Chunk instance from a WAV file
 *
-*   @param filename The name of the sample file
+*   @param [in] filename The name of the sample file
 *
 *   @return A valid instance of LX_Chunk
 *   @note This function creates a new instance of LX_Chunk.
@@ -177,7 +177,7 @@ LX_Chunk * loadSample(UTF8string& filename);
 *
 *   Create a new LX_Chunk instance from a file buffer
 *
-*   @param file The file buffer
+*   @param [in] file The file buffer
 *
 *   @return A valid instance of LX_Chunk if the file buffer is valid
 *           a null pointer otherwise
@@ -191,7 +191,7 @@ LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file);
 *   @fn void setMusicPosition(double pos)
 *   Set the position of the currently playing song from the beginning
 *
-*   @param pos The position to play from, in second
+*   @param [in] pos The position to play from, in second
 *
 *   @note This function does not works on every music sources.
 *   @note Here are the music sources available:
@@ -206,7 +206,7 @@ void setMusicPosition(double pos);
 *
 *   Set the number of channel to use.
 *
-*   @param num The number of channels to allocate
+*   @param [in] num The number of channels to allocate
 *   @return The number of channels allocated
 *
 *   @note   If num is 0, then all channels will be freed.
@@ -222,7 +222,7 @@ int allocateChannels(int num);
 *
 *   Set the number of channel to reserve.
 *
-*   @param numchans The number of channels to reserve
+*   @param [in] numchans The number of channels to reserve
 *
 *   @return The number of channels reserved
 *   @note If num is 0, then all channels will be unreserved
@@ -234,8 +234,8 @@ int reserveChannels(int numchans);
 *
 *   Add a channel to a specific group
 *
-*   @param chan The channel to assign the tag
-*   @param tag The tag that define the group to put the channel. Positive value
+*   @param [in] chan The channel to assign the tag
+*   @param [in] tag The tag that define the group to put the channel. Positive value
 *
 *   @return TRUE on success, FALSE otherwise
 *   @note Setting -1 in tag put the channel in the default group
@@ -247,9 +247,9 @@ bool groupChannel(int chan, int tag);
 *
 *   Add a channel to a specific group
 *
-*   @param from First Channel number of channels to assign tag to. Must be less or equal to to
-*   @param to Last Channel number of channels to assign tag to. Must be greater or equal to from
-*   @param tag The tag that define the group to put the channel. Positive value
+*   @param [in] from First Channel number of channels to assign tag to. Must be less or equal to to
+*   @param [in] to Last Channel number of channels to assign tag to. Must be greater or equal to from
+*   @param [in] tag The tag that define the group to put the channel. Positive value
 *
 *   @return The number of tagged channels on success.
 *   @note If that number is less than to-from+1 then
@@ -263,7 +263,7 @@ int groupChannels(int from, int to, int tag);
 *
 *   Get the number of channels in the group specifiedby the tag
 *
-*   @param tag The group id
+*   @param [in] tag The group id
 *
 *   @return The number of channels found in the group. This function never fails
 *   @note Setting -1 in tag will count all channels
@@ -275,7 +275,7 @@ int groupCount(int tag);
 *
 *   Get the first available (not playing) channel in the group specified by the tag
 *
-*   @param tag The group id to look for the available channel
+*   @param [in] tag The group id to look for the available channel
 *
 *   @return The channel id on success. -1 if no channel is available.
 */
@@ -286,9 +286,9 @@ int channelAvailable(int tag);
 *
 *   Play the chunk on a channel of the group specified by the tag
 *
-*   @param chunk The chunk to play
-*   @param tag The group id to look for the channel for playing the chunk on
-*   @param loops Optional argument tha specified the number of loop (default value = 0)
+*   @param [in] chunk The chunk to play
+*   @param [in] tag The group id to look for the channel for playing the chunk on
+*   @param [in] loops Optional argument tha specified the number of loop (default value = 0)
 *
 *   @return TRUE if the chunk can be played, FALSE if no channel is available
 *
@@ -304,7 +304,7 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0);
 *
 *   Pause the channel
 *
-*   @param channel The channel to pause
+*   @param [in] channel The channel to pause
 *   @note If channel is -1, then all channels will be paused
 */
 void pause(int channel);
@@ -314,7 +314,7 @@ void pause(int channel);
 *
 *   Unpause the channel
 *
-*   @param channel The channel to resume playing
+*   @param [in] channel The channel to resume playing
 *   @note If channel is -1, then all channels will be unpaused
 */
 void resume(int channel);
@@ -324,7 +324,7 @@ void resume(int channel);
 *
 *   Halt the channel playback
 *
-*   @param channel The channel to stop playing
+*   @param [in] channel The channel to stop playing
 *   @note If channel is -1, then all channels will be stopped
 */
 void haltChannel(int channel);
@@ -334,8 +334,8 @@ void haltChannel(int channel);
 *
 *   Halt the channel playback after some milliseconds
 *
-*   @param channel The channel to stop playing
-*   @param ticks The time in millisecond
+*   @param [in] channel The channel to stop playing
+*   @param [in] ticks The time in millisecond
 *   @note If channel is -1, then all channels will be stopped
 */
 void expireChannel(int channel, int ticks);
@@ -345,7 +345,7 @@ void expireChannel(int channel, int ticks);
 *
 *   Check if the channel is playing
 *
-*   @param channel The channel to test
+*   @param [in] channel The channel to test
 *   @return 0 If the channel is not playing, 1 otherwise
 *
 *   @note If channel is -1, then all channels will be tested
@@ -358,7 +358,7 @@ int isPlaying(int channel);
 *
 *   Check if the channel is paused
 *
-*   @param channel The channel to test
+*   @param [in] channel The channel to test
 *   @return 0 If the channel is not paused, 1 otherwise
 *
 *   @note If channel is -1, then all channels will be tested
@@ -374,8 +374,8 @@ int isPaused(int channel);
 *
 *   Fade in the loaded Music over some milliseconds of time
 *
-*   @param music The music to fade in
-*   @param ms Milliseconds for the fade-in effect to complete
+*   @param [in] music The music to fade in
+*   @param [in] ms Milliseconds for the fade-in effect to complete
 *
 *   @note fadeInMusic starts playing the music with the fade-in effect.
 *         It is not necessary to call LX_Music::play() if this function is called
@@ -389,9 +389,9 @@ void fadeInMusic(LX_Music& music,int ms);
 *
 *   Fade in the loaded Music over some milliseconds of time from the position
 *
-*   @param music The music to fade in
-*   @param ms Milliseconds for the fade-in effect to complete
-*   @param pos The position to start the music
+*   @param [in] music The music to fade in
+*   @param [in] ms Milliseconds for the fade-in effect to complete
+*   @param [in] pos The position to start the music
 *
 *   @note fadeInMusicPos starts playing the music with the fade-in effect.
 *         It is not necessary to call LX_Music::play() if this function is called
@@ -405,7 +405,7 @@ void fadeInMusicPos(LX_Music& music,int ms,int pos);
 *
 *   Fade out the loaded Music over some milliseconds of time
 *
-*   @param ms Milliseconds for the fade-out effect to complete
+*   @param [in] ms Milliseconds for the fade-out effect to complete
 *
 *   @note This functions works only when music is playing and
 *           no fading is already set to fade out
@@ -417,8 +417,8 @@ void fadeOutMusic(int ms);
 *
 *   Set the panning, increasing of decreasing the volume on the left or the right
 *
-*   @param left The volume of the left audio channel (0 - 255)
-*   @param right The volume of the right audio channel (0 - 255)
+*   @param [in] left The volume of the left audio channel (0 - 255)
+*   @param [in] right The volume of the right audio channel (0 - 255)
 *
 *   @note This function only works on stereo audio. So the call will have no effect
 *         or fail if it is done on mono audio.
@@ -442,7 +442,7 @@ void removePanning();
 *
 *   Set the virtual position of the audio source.
 *
-*   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
+*   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @note This function call setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE)
 */
 void setPosition(Sint16 angle);
@@ -451,8 +451,8 @@ void setPosition(Sint16 angle);
 *
 *   Set the virtual position of the audio source.
 *
-*   @param angle The angle betwwen 0 and 360, larger angles are reduced using angle % 360
-*   @param distance The distance between the source and the listener
+*   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
+*   @param [in] distance The distance between the source and the listener
 */
 void setPosition(Sint16 angle, Uint8 distance);
 /**
@@ -468,7 +468,7 @@ void resetPosition();
 *
 *   Reverse the left and right audio channels.
 *
-*   @param flip TRUE to set the effect, FALSE to unregister the effect
+*   @param [in] flip TRUE to set the effect, FALSE to unregister the effect
 *   @note If you want to unregister the effect on a channel, set false as flip
 */
 void reverseStereo(bool flip);
@@ -480,7 +480,7 @@ void reverseStereo(bool flip);
 *
 *   Set the distance to all channels
 *
-*   @param distance The virtual distance between the user and the source
+*   @param [in] distance The virtual distance between the user and the source
 */
 void setDistance(Uint8 distance);
 
