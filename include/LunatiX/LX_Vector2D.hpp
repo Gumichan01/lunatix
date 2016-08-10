@@ -90,24 +90,24 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
-*   @fn LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v)
+*   @fn LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v)
 *
 *   Addition betwwen two vectors -> 'u += v' <=> 'u = u + v'
 *
-*   @param [in] u The vector that will be modified
+*   @param [in,out] u The vector that will be modified
 *   @param [in] v The second vector
 *
 *   @return The resulting vector
 *
 */
-LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v);
+LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v)
 *
 *   Substraction betwwen two vectors
 *
-*   @param [in,out] u The first vector
+*   @param [in] u The first vector
 *   @param [in] v The second vector
 *
 *   @return The resulting vector
@@ -116,7 +116,7 @@ LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
-*   @fn LX_Vector2D operator -=(LX_Vector2D& u,const LX_Vector2D& v)
+*   @fn LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v)
 *
 *   Substraction betwwen two vectors -> 'u -= v' <=> 'u = u - v'
 *
@@ -126,7 +126,7 @@ LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v);
 *   @return The resulting vector
 *
 */
-LX_Vector2D operator -=(LX_Vector2D& u,const LX_Vector2D& v);
+LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v);
 
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D& v)

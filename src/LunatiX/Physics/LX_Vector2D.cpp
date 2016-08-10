@@ -95,7 +95,7 @@ LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator +=(LX_Vector2D& u,const LX_Vector2D& v)
+LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v)
 {
     u = u + v;
     return u;
@@ -108,7 +108,7 @@ LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator -=(LX_Vector2D& u,const LX_Vector2D& v)
+LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v)
 {
     u = u - v;
     return u;
