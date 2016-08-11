@@ -22,12 +22,19 @@
 namespace
 {
 using LX_ThreadFun_ = int(void *);
+
+const char * nameOfThread(SDL_Thread * th)
+{
+    return th == nullptr ? "unknown thread": SDL_GetThreadName(th);
+}
+
 };
 class LX_Thread_
 {
     std::function<LX_ThreadFun_> _f;
     std::string _name;
     bool _joinable;
+    bool _launched;
     SDL_Thread * _thread;
     LX_Multithreading::LX_Data _data;
 
@@ -35,7 +42,8 @@ public:
 
     LX_Thread_(const std::function<LX_ThreadFun_>& f, std::string name,
                LX_Multithreading::LX_Data data)
-        : _f(f), _name(name), _joinable(true), _thread(nullptr), _data(data) {}
+        : _f(f), _name(name), _joinable(true), _launched(false),
+        _thread(nullptr), _data(data) {}
 
 
     void start()
@@ -45,9 +53,12 @@ public:
 
         if(_thread == nullptr)
         {
-            LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Couldn't launch the thread: %d",LX_GetError());
+            LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
+                                "Couldn't launch the thread: %d",LX_GetError());
             throw std::runtime_error("An error occurred while starting the thread");
         }
+
+        _launched = true;
     }
 
     bool joinable()
@@ -57,16 +68,18 @@ public:
 
     void join(int *ret)
     {
-        if(!_joinable)
+        if(!_joinable || !_launched)
         {
             LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
-                                "Thread %s #%ld: not joinable",
-                                SDL_GetThreadName(_thread),getID());
-            throw std::invalid_argument("This thread is detached or has already been joined");
+                                "<%s> #%ld: not joinable",
+                                nameOfThread(_thread),getID());
+            throw std::invalid_argument("This thread is detached, has already been joined, or has not been launched");
         }
 
         SDL_WaitThread(_thread,ret);
+        _thread = nullptr;
         _joinable = false;
+        _launched = false;
     }
 
     void detach()
@@ -74,8 +87,8 @@ public:
         if(!_joinable)
         {
             LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
-                                "Thread %s #%ld: cannot be detached",
-                                SDL_GetThreadName(_thread),getID());
+                                "<%s> #%ld: cannot be detached",
+                                nameOfThread(_thread),getID());
             throw std::invalid_argument("This thread is already detached or has been joined");
         }
 
@@ -95,7 +108,7 @@ public:
 
     ~LX_Thread_()
     {
-        if(joinable())
+        if(_joinable && _launched)
             join(nullptr);
     }
 };
