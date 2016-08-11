@@ -549,8 +549,8 @@ $(UTILS_I_PATH)utf8_iterator.hpp $(UTILS_I_PATH)utf8_string.hpp
 #        #
 ##########
 
-test : test-init test-config test-device test-physics \
-test-window test-system test-ttf test-particle test-file test-ime test-audio
+test : test-init test-config test-device test-physics test-window test-system \
+test-ttf test-particle test-file test-ime test-audio test-thread
 	@echo "INFO - Test launch"
 ifeq ($(DEBUG),yes)
 	@./test/test.sh
@@ -663,6 +663,15 @@ test-audio : $(OBJ_FILES) test-audio.o
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 test-audio.o : $(TEST_PATH)test-audio.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+test-thread : $(OBJ_FILES) test-thread.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+
+test-thread.o : $(TEST_PATH)test-thread.cpp
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
