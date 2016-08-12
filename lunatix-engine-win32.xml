@@ -88,6 +88,7 @@
 		<Unit filename="include/LunatiX/LX_Polygon.hpp" />
 		<Unit filename="include/LunatiX/LX_Random.hpp" />
 		<Unit filename="include/LunatiX/LX_Sound.hpp" />
+		<Unit filename="include/LunatiX/LX_Sync.hpp" />
 		<Unit filename="include/LunatiX/LX_SystemInfo.hpp" />
 		<Unit filename="include/LunatiX/LX_Text.hpp" />
 		<Unit filename="include/LunatiX/LX_Thread.hpp" />
@@ -116,6 +117,7 @@
 		<Unit filename="src/LunatiX/Mixer/LX_Mixer.cpp" />
 		<Unit filename="src/LunatiX/Mixer/LX_Music.cpp" />
 		<Unit filename="src/LunatiX/Mixer/LX_Sound.cpp" />
+		<Unit filename="src/LunatiX/Multithreading/LX_Sync.cpp" />
 		<Unit filename="src/LunatiX/Multithreading/LX_Thread.cpp" />
 		<Unit filename="src/LunatiX/ParticleEngine/LX_Particle.cpp" />
 		<Unit filename="src/LunatiX/ParticleEngine/LX_ParticleSystem.cpp" />
