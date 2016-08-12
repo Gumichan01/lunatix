@@ -12,7 +12,6 @@
 
 
 #include <LunatiX/LX_Sync.hpp>
-#include <LunatiX/LX_Log.hpp>
 #include <SDL2/SDL_mutex.h>
 
 
@@ -21,11 +20,7 @@ namespace LX_Multithreading
 
 /* Mutex */
 
-LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex())
-{
-    if(_mutex == nullptr)
-        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Broken mutex");
-}
+LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex()) {}
 
 
 void LX_Mutex::lock()
@@ -48,11 +43,7 @@ LX_Mutex::~LX_Mutex()
 
 /* Condition variable */
 
-LX_Cond::LX_Cond() : _condition(SDL_CreateCond())
-{
-    if(_condition == nullptr)
-        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Broken condition variable");
-}
+LX_Cond::LX_Cond() : _condition(SDL_CreateCond()) {}
 
 
 void LX_Cond::wait(LX_Mutex& mutex)
@@ -76,6 +67,29 @@ void LX_Cond::broadcast()
 LX_Cond::~LX_Cond()
 {
     SDL_DestroyCond(_condition);
+}
+
+
+/* Semaphore */
+
+LX_Semaphore::LX_Semaphore(unsigned int v) : _sem(SDL_CreateSemaphore(v)) {}
+
+
+void LX_Semaphore::wait()
+{
+    SDL_SemWait(_sem);
+}
+
+
+void LX_Semaphore::post()
+{
+    SDL_SemPost(_sem);
+}
+
+
+LX_Semaphore::~LX_Semaphore()
+{
+    SDL_DestroySemaphore(_sem);
 }
 
 };

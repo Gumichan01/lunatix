@@ -22,6 +22,7 @@
 
 struct SDL_mutex;
 struct SDL_cond;
+struct SDL_semaphore;
 
 namespace LX_Multithreading
 {
@@ -39,6 +40,7 @@ public:
     ~LX_Mutex();
 };
 
+
 class LX_Cond
 {
     SDL_cond * _condition;
@@ -50,6 +52,19 @@ public:
     void signal();
     void broadcast();
     ~LX_Cond();
+};
+
+
+class LX_Semaphore
+{
+    SDL_semaphore * _sem;
+
+public:
+
+    LX_Semaphore(unsigned int v);
+    void wait();
+    void post();
+    ~LX_Semaphore();
 };
 
 };
