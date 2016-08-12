@@ -95,7 +95,7 @@ $(OBJ_LIBRARY_PATH)LX_Library.o \
 $(OBJ_MIXER_PATH)LX_Sound.o $(OBJ_MIXER_PATH)LX_Chunk.o \
 $(OBJ_MIXER_PATH)LX_Music.o $(OBJ_MIXER_PATH)LX_Mixer.o \
 $(OBJ_MSG_PATH)LX_MessageBox.o \
-$(OBJ_MULTITHREAD_PATH)LX_Thread.o \
+$(OBJ_MULTITHREAD_PATH)LX_Thread.o $(OBJ_MULTITHREAD_PATH)LX_Sync.o \
 $(OBJ_PARTICLE_PATH)LX_Particle.o $(OBJ_PARTICLE_PATH)LX_ParticleSystem.o \
 $(OBJ_PHYSICS_PATH)LX_Hitbox.o $(OBJ_PHYSICS_PATH)LX_Physics.o \
 $(OBJ_PHYSICS_PATH)LX_Polygon.o $(OBJ_PHYSICS_PATH)LX_Vector2D.o \
@@ -381,6 +381,15 @@ $(LUNATIX_I_PATH)LX_Thread.hpp
 	@mkdir -p $(OBJ_MULTITHREAD_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+LX_Sync.o : $(OBJ_MULTITHREAD_PATH)LX_Sync.o
+
+$(OBJ_MULTITHREAD_PATH)LX_Sync.o : $(MULTITHREAD_PATH)LX_Sync.cpp\
+$(LUNATIX_I_PATH)LX_Sync.hpp
+	@mkdir -p $(OBJ_MULTITHREAD_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
 
 #
 # ParticleSystem
