@@ -3,29 +3,29 @@
 
 
 /*
-*	Copyright (C) 2016 Luxon Jean-Pierre
-*	gumichan01.olympe.in
+*    Copyright (C) 2016 Luxon Jean-Pierre
+*    gumichan01.olympe.in
 *
-*	The LunatiX Engine is a SDL2-based game engine.
-*	It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*    The LunatiX Engine is a SDL2-based game engine.
+*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*   Luxon Jean-Pierre (Gumichan01)
-*	luxon.jean.pierre@gmail.com
+*    Luxon Jean-Pierre (Gumichan01)
+*    luxon.jean.pierre@gmail.com
 */
 
 
 /**
-*	@file LX_Random.hpp
-*	@brief The Random Number Generator library
-*	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.8
+*    @file LX_Random.hpp
+*    @brief The Random Number Generator library
+*    @author Luxon Jean-Pierre(Gumichan01)
+*    @version 0.8
 *
 */
 
 
 /**
-*	@namespace LX_Random
-*	@brief The Random Number Generator (RNG) module
+*    @namespace LX_Random
+*    @brief The Random Number Generator (RNG) module
 *
 *   This namespace describes LX_Random. This random number generator is based on
 *   the Xorshift* generator, but has also a support of the standard C generator

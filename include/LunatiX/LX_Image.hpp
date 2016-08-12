@@ -2,21 +2,21 @@
 #define LX_IMAGE_H_INCLUDED
 
 /*
-*	Copyright (C) 2016 Luxon Jean-Pierre
-*	gumichan01.olympe.in
+*    Copyright (C) 2016 Luxon Jean-Pierre
+*    gumichan01.olympe.in
 *
-*	The LunatiX Engine is a SDL2-based game engine.
-*	It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*    The LunatiX Engine is a SDL2-based game engine.
+*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*   Luxon Jean-Pierre (Gumichan01)
-*	luxon.jean.pierre@gmail.com
+*    Luxon Jean-Pierre (Gumichan01)
+*    luxon.jean.pierre@gmail.com
 */
 
 /**
-*	@file LX_Image.hpp
-*	@brief The Image
-*	@author Luxon Jean-Pierre(Gumichan01)
-*	@version 0.8
+*    @file LX_Image.hpp
+*    @brief The Image
+*    @author Luxon Jean-Pierre(Gumichan01)
+*    @version 0.8
 *
 */
 
@@ -98,34 +98,34 @@ public:
     *
     *   |        Format Values        |                                              |
     *   |             ---             |                      ---                     |
-    *   | SDL_PIXELFORMAT_UNKNOWN	  |                                              |
-    *   | SDL_PIXELFORMAT_INDEX1LSB	  |                                              |
-    *   | SDL_PIXELFORMAT_INDEX1MSB	  |                                              |
-    *   | SDL_PIXELFORMAT_INDEX4LSB	  |                                              |
-    *   | SDL_PIXELFORMAT_INDEX4MSB	  |                                              |
-    *   | SDL_PIXELFORMAT_INDEX8	  |                                              |
-    *   | SDL_PIXELFORMAT_RGB332	  |  RGB: 2 bit for blue, 3 bits for the others  |
-    *   | SDL_PIXELFORMAT_RGB444	  |            RGB : 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_RGB555	  |            RGB : 5 bits per channel          |
-    *   | SDL_PIXELFORMAT_BGR555	  |            BGR : 5 bits per channel          |
-    *   | SDL_PIXELFORMAT_ARGB4444	  |            ARGB: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_RGBA4444	  |            RGBA: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_ABGR4444	  |            ABGR: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_BGRA4444	  |            BGRA: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_ARGB1555	  | ARGB: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_RGBA5551	  | RGBA: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_ABGR1555	  | ABGR: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_BGRA5551	  | BGRA: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_UNKNOWN      |                                              |
+    *   | SDL_PIXELFORMAT_INDEX1LSB      |                                              |
+    *   | SDL_PIXELFORMAT_INDEX1MSB      |                                              |
+    *   | SDL_PIXELFORMAT_INDEX4LSB      |                                              |
+    *   | SDL_PIXELFORMAT_INDEX4MSB      |                                              |
+    *   | SDL_PIXELFORMAT_INDEX8      |                                              |
+    *   | SDL_PIXELFORMAT_RGB332      |  RGB: 2 bit for blue, 3 bits for the others  |
+    *   | SDL_PIXELFORMAT_RGB444      |            RGB : 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_RGB555      |            RGB : 5 bits per channel          |
+    *   | SDL_PIXELFORMAT_BGR555      |            BGR : 5 bits per channel          |
+    *   | SDL_PIXELFORMAT_ARGB4444      |            ARGB: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_RGBA4444      |            RGBA: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_ABGR4444      |            ABGR: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_BGRA4444      |            BGRA: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_ARGB1555      | ARGB: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_RGBA5551      | RGBA: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_ABGR1555      | ABGR: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_BGRA5551      | BGRA: 1 bit for alpha, 5 bits for the others |
     *   | SDL_PIXELFORMAT_RGB565      | RGB: 6 bit for green, 5 bits for the others  |
     *   | SDL_PIXELFORMAT_BGR565      | BGR: 6 bit for green, 5 bits for the others  |
-    *   | SDL_PIXELFORMAT_RGB24	      |                                              |
-    *   | SDL_PIXELFORMAT_BGR24	      |                                              |
-    *   | SDL_PIXELFORMAT_RGB888	  |                                              |
-    *   | SDL_PIXELFORMAT_RGBX8888	  |          RGBX: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_BGR888	  |          BGR:  8 bits per channel            |
-    *   | SDL_PIXELFORMAT_BGRX8888	  |          BGRX: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_ARGB8888	  |          ARGB: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_RGBA8888	  |          RGBA: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_RGB24          |                                              |
+    *   | SDL_PIXELFORMAT_BGR24          |                                              |
+    *   | SDL_PIXELFORMAT_RGB888      |                                              |
+    *   | SDL_PIXELFORMAT_RGBX8888      |          RGBX: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_BGR888      |          BGR:  8 bits per channel            |
+    *   | SDL_PIXELFORMAT_BGRX8888      |          BGRX: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_ARGB8888      |          ARGB: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_RGBA8888      |          RGBA: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_ABGR8888    |          ABGR: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_BGRA8888    |          BGRA: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_ARGB2101010 |                                              |

@@ -1,20 +1,20 @@
 
 
 /*
-*	Copyright (C) 2016 Luxon Jean-Pierre
-*	gumichan01.olympe.in
+*    Copyright (C) 2016 Luxon Jean-Pierre
+*    gumichan01.olympe.in
 *
-*	The LunatiX Engine is a SDL2-based game engine.
-*	It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*    The LunatiX Engine is a SDL2-based game engine.
+*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*   Luxon Jean-Pierre (Gumichan01)
-*	luxon.jean.pierre@gmail.com
+*    Luxon Jean-Pierre (Gumichan01)
+*    luxon.jean.pierre@gmail.com
 */
 
 /**
-*	@file LX_Log.cpp
-*	@brief The Log file
-*	@author Luxon Jean-Pierre(Gumichan01)
+*    @file LX_Log.cpp
+*    @brief The Log file
+*    @author Luxon Jean-Pierre(Gumichan01)
 *
 */
 
