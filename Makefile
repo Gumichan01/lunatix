@@ -247,8 +247,8 @@ $(LUNATIX_I_PATH)LX_FileBuffer.hpp
 LX_OpenGL.o : $(OBJ_GRAPHICS_PATH)LX_OpenGL.o
 
 $(OBJ_GRAPHICS_PATH)LX_OpenGL.o : $(GRAPHICS_PATH)LX_OpenGL.cpp \
-$(LUNATIX_I_PATH)LX_OpenGL.hpp $(LUNATIX_I_PATH)LX_Window.hpp \
-$(LUNATIX_I_PATH)LX_Image.hpp
+$(LUNATIX_I_PATH)LX_OpenGL.hpp $(LUNATIX_I_PATH)LX_OpenGL.tpp \
+$(LUNATIX_I_PATH)LX_Window.hpp
 	@mkdir -p $(OBJ_GRAPHICS_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
