@@ -49,5 +49,6 @@
 #include "LX_Log.hpp"
 #include "LX_Text.hpp"
 #include "LX_Thread.hpp"
+#include "LX_Sync.hpp"
 
 #endif // LUNATIX_ENGINE_H_INCLUDED
