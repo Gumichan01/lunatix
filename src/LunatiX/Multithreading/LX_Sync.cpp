@@ -19,6 +19,8 @@
 namespace LX_Multithreading
 {
 
+/* Mutex */
+
 LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex())
 {
     if(_mutex == nullptr)
@@ -41,6 +43,39 @@ void LX_Mutex::unlock()
 LX_Mutex::~LX_Mutex()
 {
     SDL_DestroyMutex(_mutex);
+}
+
+
+/* Condition variable */
+
+LX_Cond::LX_Cond() : _condition(SDL_CreateCond())
+{
+    if(_condition == nullptr)
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Broken condition variable");
+}
+
+
+void LX_Cond::wait(LX_Mutex& mutex)
+{
+    SDL_CondWait(_condition,mutex._mutex);
+}
+
+
+void LX_Cond::signal()
+{
+    SDL_CondSignal(_condition);
+}
+
+
+void LX_Cond::broadcast()
+{
+    SDL_CondBroadcast(_condition);
+}
+
+
+LX_Cond::~LX_Cond()
+{
+    SDL_DestroyCond(_condition);
 }
 
 };

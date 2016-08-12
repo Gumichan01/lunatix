@@ -21,12 +21,14 @@
 */
 
 struct SDL_mutex;
+struct SDL_cond;
 
 namespace LX_Multithreading
 {
 
 class LX_Mutex
 {
+    friend class LX_Cond;
     SDL_mutex * _mutex;
 
 public:
@@ -35,6 +37,19 @@ public:
     void lock();
     void unlock();
     ~LX_Mutex();
+};
+
+class LX_Cond
+{
+    SDL_cond * _condition;
+
+public:
+
+    LX_Cond();
+    void wait(LX_Mutex& mutex);
+    void signal();
+    void broadcast();
+    ~LX_Cond();
 };
 
 };
