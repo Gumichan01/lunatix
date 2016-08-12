@@ -6,10 +6,21 @@ int foo0(LX_Multithreading::LX_Data data);
 int foo1(LX_Multithreading::LX_Data data);
 int foo2(LX_Multithreading::LX_Data data);
 int foo3(LX_Multithreading::LX_Data data);
-char foo4(int data);
+
+static int val = 0;
+LX_Multithreading::LX_Mutex mutex;
+LX_Multithreading::LX_Mutex mutex2;
+LX_Multithreading::LX_Cond cond;
+
+
+int countValue(LX_Multithreading::LX_Data data);
+int countValueAgain(LX_Multithreading::LX_Data data);
+int sigValue(LX_Multithreading::LX_Data data);
 
 void test_thread();
 void test_thread_fail();
+void test_mutex();
+void test_cond();
 
 #define EX 64
 
@@ -27,6 +38,8 @@ int main(int argc, char **argv)
 
     test_thread();
     test_thread_fail();
+    test_mutex();
+    test_cond();
 
     LX_Log::log(" ==== END TEST ==== ");
     LX_Quit();
@@ -59,10 +72,41 @@ int foo3(LX_Multithreading::LX_Data data)
     return EX;
 }
 
-char foo4(int data)
+int countValue(LX_Multithreading::LX_Data data)
 {
-    LX_Log::log("WHAT! → %d",data);
-    return '\x00';
+    LX_Log::log("New thread(#%ld) is running",SDL_GetThreadID(nullptr));
+    mutex.lock();
+    for(int j = 0; j < 2; j++)
+    {
+        val++;
+    }
+    mutex.unlock();
+}
+
+int countValueAgain(LX_Multithreading::LX_Data data)
+{
+    LX_Log::log("New thread(#%ld) is running",SDL_GetThreadID(nullptr));
+    mutex2.lock();
+    for(int j = 0; j < 10; j++)
+    {
+        if(val == 4)
+        {
+            cond.wait(mutex2);
+        }
+        val++;
+    }
+    mutex2.unlock();
+}
+
+int sigValue(LX_Multithreading::LX_Data data)
+{
+    LX_Log::log("New signal thread(#%ld) is running",SDL_GetThreadID(nullptr));
+    for(int j = 0; j < 10; j++)
+    {
+        mutex2.lock();
+        cond.broadcast();
+        mutex2.unlock();
+    }
 }
 
 
@@ -347,3 +391,62 @@ void test_thread_fail()
 
     LX_Log::log("      == END TEST ==    ");
 }
+
+
+void test_mutex()
+{
+    LX_Log::log("   == TEST mutex ==   ");
+
+    const unsigned long tid = SDL_GetThreadID(nullptr);
+    LX_Multithreading::LX_Thread th1(countValue,"countValue #1",nullptr);
+    LX_Multithreading::LX_Thread th2(countValue,"countValue #2",nullptr);
+
+    LX_Log::log("(#%ld): Launching two thread that increment a global variable",tid);
+    LX_Log::log("(#%ld): from value = %d",tid,val);
+
+    th1.start();
+    th2.start();
+    SDL_Delay(128);
+    th1.join();
+    th2.join();
+    LX_Log::log("(#%ld): result value = %d",tid,val);
+    LX_Log::log("    == END TEST ==    ");
+}
+
+
+void test_cond()
+{
+    LX_Log::log("   == TEST condition ==   ");
+
+    const unsigned long tid = SDL_GetThreadID(nullptr);
+    val = 0;
+
+    LX_Log::log("(#%ld): Launching several threads that increment a global variable",tid);
+    LX_Log::log("(#%ld): Each thread will block at val = 4",tid);
+    LX_Log::log("(#%ld): until the signal thread awakes them",tid);
+
+    LX_Multithreading::LX_Thread th1(countValueAgain,"countValueAgain #1",nullptr);
+    LX_Multithreading::LX_Thread th2(countValueAgain,"countValueAgain #2",nullptr);
+    LX_Multithreading::LX_Thread th3(countValueAgain,"countValueAgain #3",nullptr);
+    LX_Multithreading::LX_Thread th4(countValueAgain,"countValueAgain #4",nullptr);
+    LX_Multithreading::LX_Thread thsig(sigValue,"sigValue #2",nullptr);
+
+    LX_Log::log("(#%ld): Start the threads",tid);
+    th1.start();
+    th2.start();
+    th3.start();
+    th4.start();
+    LX_Log::log("(#%ld): Start the signal thread",tid);
+    thsig.start();
+    th1.join();
+    th2.join();
+    th3.join();
+    th4.join();
+    thsig.join();
+    LX_Log::log("      == END TEST ==    ");
+}
+
+
+
+
+
