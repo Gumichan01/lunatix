@@ -7,23 +7,43 @@ int foo1(LX_Multithreading::LX_Data data);
 int foo2(LX_Multithreading::LX_Data data);
 int foo3(LX_Multithreading::LX_Data data);
 
-
 namespace
 {
 int val = 0;
 LX_Multithreading::LX_Mutex mutex;
 LX_Multithreading::LX_Mutex mutex2;
 LX_Multithreading::LX_Cond cond;
+
+LX_Multithreading::LX_ASyncChannel<int> c;
+
+struct msg_t
+{
+    unsigned int tid;
+    std::string s;
+};
+
+LX_Multithreading::LX_ASyncChannel<msg_t> sc;
+LX_Multithreading::LX_ASyncChannel<msg_t> rc;
+
 };
 
 int countValue(LX_Multithreading::LX_Data data);
 int countValueAgain(LX_Multithreading::LX_Data data);
 int sigValue(LX_Multithreading::LX_Data data);
 
+int sender(LX_Multithreading::LX_Data data);
+int receiver(LX_Multithreading::LX_Data data);
+
+int sender2(LX_Multithreading::LX_Data data);
+int fwd(LX_Multithreading::LX_Data data);
+int receiver2(LX_Multithreading::LX_Data data);
+
 void test_thread();
 void test_thread_fail();
 void test_mutex();
 void test_cond();
+void test_channel();
+void test_channel2();
 
 #define EX 64
 
@@ -39,10 +59,12 @@ int main(int argc, char **argv)
     LX_Log::log(" ==== TEST Multithread ==== ");
     LX_Log::setDebugMode();
 
-    test_thread();
+    /*test_thread();
     test_thread_fail();
     test_mutex();
-    test_cond();
+    test_cond();*/
+    //test_channel();
+    test_channel2();
 
     LX_Log::log(" ==== END TEST ==== ");
     LX_Quit();
@@ -451,3 +473,162 @@ void test_cond()
     thsig.join();
     LX_Log::log("      == END TEST ==    ");
 }
+
+
+int sender(LX_Multithreading::LX_Data data)
+{
+    LX_Random::initRand();
+    int n = LX_Random::xorshiftRand100();
+
+    do
+    {
+        SDL_Delay(16);
+        n = LX_Random::xorshiftRand100();
+    }while(c.send(n));
+
+    return 0;
+}
+
+
+int receiver(LX_Multithreading::LX_Data data)
+{
+    int n;
+
+    SDL_Delay(1024);
+
+    for(int i = 0; i < 8; i++)
+   ; {
+        c.recv(n);
+        LX_Log::log("(#%x): received from the channel → %d",
+                    SDL_GetThreadID(nullptr),n);
+    }
+
+    c.close();
+    return 0;
+}
+
+/* forwarding */
+
+int sender2(LX_Multithreading::LX_Data data)
+{
+    const int MAX_MSG = 10;
+    LX_Random::initRand();
+    int nb = 0;
+
+    msg_t msg;
+    msg.tid = LX_Random::xorshiftRand100();
+    msg.s = "hello";
+
+    while(nb < MAX_MSG)
+    {
+        msg.tid = LX_Random::xorshiftRand100();
+        LX_Log::log("(#%x): SEND",SDL_GetThreadID(nullptr));
+        if(!sc.send(msg))
+        {
+            sc.close();
+            break;
+        }
+        nb++;
+    }
+
+    LX_Log::log("(#%x): OVER sender",SDL_GetThreadID(nullptr));
+    return 0;
+}
+
+
+int fwd(LX_Multithreading::LX_Data data)
+{
+    int cpt = 0;
+    const int N = 10;
+    msg_t msg;
+
+    while(sc.recv(msg))
+    {
+        LX_Log::log("(#%x): fwd → %d; %s",SDL_GetThreadID(nullptr),msg.tid,msg.s.c_str());
+        rc.send(msg);
+
+        cpt++;
+
+        if(cpt == N)
+        {
+            LX_Log::log("(#%x): CLOSE ALL",SDL_GetThreadID(nullptr));
+            sc.close();
+            rc.close();
+            break;
+        }
+    }
+    LX_Log::log("(#%x): OVER fwd",SDL_GetThreadID(nullptr));
+    return 0;
+}
+
+
+int receiver2(LX_Multithreading::LX_Data data)
+{
+    msg_t m;
+
+    while(rc.recv(m))
+    {
+        LX_Log::log("(#%x): received from the channel → %d; %s",
+                    SDL_GetThreadID(nullptr),m.tid,m.s.c_str());
+    }
+
+    LX_Log::log("(#%x): OVER recv",SDL_GetThreadID(nullptr));
+    return 0;
+}
+
+
+void test_channel()
+{
+    LX_Log::log("   == TEST channel #1 ==   ");
+
+    const unsigned long tid = SDL_GetThreadID(nullptr);
+    LX_Multithreading::LX_Thread s1(sender,"sender #1",nullptr);
+    LX_Multithreading::LX_Thread s2(sender,"sender #2",nullptr);
+    LX_Multithreading::LX_Thread r(receiver,"receiver",nullptr);
+
+    LX_Log::log("(#%x): Start the communication between the threads",tid);
+    s1.start();
+    s2.start();
+    r.start();
+    LX_Log::log("(#%x): ...",tid);
+    s1.join();
+    s2.join();
+    r.join();
+    LX_Log::log("(#%x): Done",tid);
+
+    LX_Log::log("      == END TEST ==    ");
+}
+
+
+void test_channel2()
+{
+    LX_Log::log("   == TEST channel #2 ==   ");
+
+    const unsigned long tid = SDL_GetThreadID(nullptr);
+    LX_Multithreading::LX_Thread s1(sender2,"sender2 #1",nullptr);
+    LX_Multithreading::LX_Thread s2(sender2,"sender2 #2",nullptr);
+    LX_Multithreading::LX_Thread forwd(fwd,"fwd",nullptr);
+    LX_Multithreading::LX_Thread r(receiver2,"receiver2 #1",nullptr);
+    LX_Multithreading::LX_Thread r2(receiver2,"receiver2 #2",nullptr);
+
+    LX_Log::log("(#%x): Start the communication between the threads",tid);
+    s1.start();
+    //s2.start();
+    //SDL_Delay(16);
+    forwd.start();
+    r.start();
+    //r2.start();
+
+    LX_Log::log("(#%x): ...",tid);
+
+    s1.join();
+    //s2.join();
+    forwd.join();
+    r.join();
+    //r2.join();
+
+    LX_Log::log("(#%x): Done",tid);
+    LX_Log::log("      == END TEST ==    ");
+}
+
+
