@@ -2,7 +2,6 @@
     Main file for the demo
 */
 
-#include <iostream>
 #include <LunatiX/Lunatix_engine.hpp>
 
 static const int W = 256;
