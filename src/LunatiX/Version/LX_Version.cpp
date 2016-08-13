@@ -67,7 +67,6 @@ void LX_VersionDependencies(void)
     const SDL_version *ttf_linked = TTF_Linked_Version();
     const SDL_version *mix_linked = Mix_Linked_Version();
 
-    LX_Version luna;
     SDL_version sdl_compiled;
     SDL_version sdl_linked;
     SDL_version img_compiled;
