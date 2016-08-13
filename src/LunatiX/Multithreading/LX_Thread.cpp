@@ -63,6 +63,7 @@ public:
         }
 
         _launched = true;
+        _joinable = true;
     }
 
     bool joinable()
