@@ -43,7 +43,7 @@ public:
 
     LX_Thread_(const std::function<LX_ThreadFun_>& f, std::string name,
                LX_Multithreading::LX_Data data)
-        : _f(f), _name(name), _joinable(true), _launched(false),
+        : _f(f), _name(name), _joinable(false), _launched(false),
           _thread(nullptr), _data(data) {}
 
 
