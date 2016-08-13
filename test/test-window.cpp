@@ -1,10 +1,12 @@
 
-#include <iostream>
-#include <sstream>
-#include <vector>
 #include <LunatiX/Lunatix_engine.hpp>
 #include <LunatiX/LX_Image.hpp>
 #include <SDL2/SDL_image.h>
+#include <GL/glu.h>
+
+#include <iostream>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 using namespace LX_Graphics;
