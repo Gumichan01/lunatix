@@ -22,12 +22,12 @@
 #include <sstream>
 #include <ctime>
 
-#if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
-#undef __WIN32__
-#define __WIN32__
+#if defined(__WIN32__)
 #include <Windows.h>
-#else
+#elif defined(__linux__)
 #include <cmath>
+#else
+#error "Not supported system"
 #endif
 
 namespace
