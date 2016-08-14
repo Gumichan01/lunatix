@@ -21,6 +21,15 @@
 *
 */
 
+#if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
+#undef __WIN32__
+#define __WIN32__
+#elif defined(linux) || defined(__linux) || defined(__linux__)  // Unix/Linux
+#undef __linux__
+#define __linux__
+#else
+#error "Not supported system"
+#endif
 
 #include "LX_Library.hpp"
 #include "LX_Config.hpp"
