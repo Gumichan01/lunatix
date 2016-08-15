@@ -11,7 +11,6 @@
 */
 
 #include <LunatiX/LX_Thread.hpp>
-#include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_Log.hpp>
 #include <SDL2/SDL_thread.h>
 
