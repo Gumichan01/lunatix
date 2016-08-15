@@ -46,6 +46,7 @@ public:
     LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data);
 
     void start();
+    void startAndDetach();
     bool joinable();
     void join(int *ret=nullptr);
     void detach();

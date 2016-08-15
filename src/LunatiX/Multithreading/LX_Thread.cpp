@@ -66,6 +66,17 @@ public:
         _joinable = true;
     }
 
+    void startAndDetach()
+    {
+        start();
+
+        if(_joinable)
+        {
+            SDL_DetachThread(_thread);
+            _joinable = false;
+        }
+    }
+
     bool joinable()
     {
         return _joinable;
@@ -141,6 +152,11 @@ LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_D
 void LX_Thread::start()
 {
     _th->start();
+}
+
+void LX_Thread::startAndDetach()
+{
+    _th->startAndDetach();
 }
 
 bool LX_Thread::joinable()
