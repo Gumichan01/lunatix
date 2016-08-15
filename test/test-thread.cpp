@@ -212,7 +212,7 @@ void test_thread()
         LX_Log::log("(#%x): FAILURE - CRITICAL → basic thread #5",tid);
     }
 
-    LX_Log::log("(#%x): Basic thread #6 (create, start and detach the thread)",
+    LX_Log::log("(#%x): Basic thread #6 (create, start the thread, stop and restart it)",
                 tid);
     try
     {
