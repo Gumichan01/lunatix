@@ -20,18 +20,20 @@ namespace LX_Multithreading
 
 /* Mutex */
 
-LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex()) {}
+LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex()), _locked(false) {}
 
 
 void LX_Mutex::lock()
 {
-    SDL_LockMutex(_mutex);
+    if(SDL_LockMutex(_mutex) == 0)
+        _locked = true;
 }
 
 
 void LX_Mutex::unlock()
 {
-    SDL_UnlockMutex(_mutex);
+    if(SDL_UnlockMutex(_mutex) == 0)
+        _locked = false;
 }
 
 

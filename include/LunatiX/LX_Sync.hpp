@@ -31,6 +31,7 @@ class LX_Mutex
 {
     friend class LX_Cond;
     SDL_mutex * _mutex;
+    bool _locked;
 
 public:
 
