@@ -180,7 +180,7 @@ void test_thread()
             LX_Multithreading::LX_Thread th4(foo2,"foo2",nullptr);
             th4.start();
             th4.detach();
-            SDL_Delay(512);
+            SDL_Delay(256);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -197,7 +197,7 @@ void test_thread()
             char s[] = "foo3";
             LX_Multithreading::LX_Thread th5(foo3,s,s);
             th5.start();
-            SDL_Delay(1000);
+            SDL_Delay(128);
             int ret;
             th5.join(&ret);
 
@@ -224,7 +224,7 @@ void test_thread()
             LX_Log::log("(#%x): restart",tid);
             th6.start();
             th6.join();
-            SDL_Delay(512);
+            SDL_Delay(128);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
