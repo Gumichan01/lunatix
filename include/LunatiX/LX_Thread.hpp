@@ -49,7 +49,6 @@ public:
     void startAndDetach();
     bool joinable();
     void join(int *ret=nullptr);
-    void detach();
 
     unsigned long getID() const;
     std::string getName() const;
