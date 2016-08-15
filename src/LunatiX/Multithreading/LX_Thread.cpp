@@ -22,12 +22,6 @@
 namespace
 {
 using LX_ThreadFun_ = int(void *);
-
-const char * nameOfThread(SDL_Thread * th)
-{
-    return th == nullptr ? "unknown thread": SDL_GetThreadName(th);
-}
-
 };
 
 class LX_Thread_
@@ -38,6 +32,11 @@ class LX_Thread_
     bool _launched;
     SDL_Thread * _thread;
     LX_Multithreading::LX_Data _data;
+
+    const char * nameOfThread_(SDL_Thread * th)
+    {
+        return th == nullptr ? "unknown thread": SDL_GetThreadName(th);
+    }
 
 public:
 
@@ -58,7 +57,7 @@ public:
         if(_thread == nullptr)
         {
             LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
-                                "Couldn't launch the thread: %d",LX_GetError());
+                                "Couldn't launch the thread");
             throw std::runtime_error("An error occurred while starting the thread");
         }
 
@@ -90,7 +89,7 @@ public:
         {
             LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
                                 "<%s> #%ld: not joinable",
-                                nameOfThread(_thread),getID());
+                                nameOfThread_(_thread),getID());
             throw std::invalid_argument(JOIN_MSG);
         }
 
