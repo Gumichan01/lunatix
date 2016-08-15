@@ -20,6 +20,8 @@
 *
 */
 
+#ifdef __linux__
+
 struct SDL_mutex;
 struct SDL_cond;
 struct SDL_semaphore;
@@ -70,4 +72,8 @@ public:
 
 };
 
-#endif // LX_SYNC_HPP_INCLUDED
+#else
+#pragma message("LunatiX: No thread synchronization primitives support for Windows")
+#endif  // __linux__
+
+#endif  // LX_SYNC_HPP_INCLUDED

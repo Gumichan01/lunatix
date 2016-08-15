@@ -20,6 +20,8 @@
 *
 */
 
+#ifdef __linux__
+
 #include <LunatiX/utils/utf8_string.hpp>
 
 class LX_Thread_;
@@ -30,6 +32,10 @@ class LX_Thread_;
 *
 *   This namespace describes the multithreading module for anything
 *   related to it (threads, mutexes, semaphores)
+*   This module is entirely based on SDL2
+*
+*   @note This module is not available on Windows because the multithreading
+*   subsystem ,that uses the Multithread Windows API, is not stable.
 */
 namespace LX_Multithreading
 {
@@ -58,4 +64,8 @@ public:
 
 };
 
-#endif // LX_THREAD_HPP_INCLUDED
+#else
+#pragma message("LunatiX: No Multithreading support for Windows")
+#endif  // __linux__
+
+#endif  // LX_THREAD_HPP_INCLUDED
