@@ -7,13 +7,13 @@ int foo1(LX_Multithreading::LX_Data data);
 int foo2(LX_Multithreading::LX_Data data);
 int foo3(LX_Multithreading::LX_Data data);
 
+
 namespace
 {
 int val = 0;
 LX_Multithreading::LX_Mutex mutex;
 LX_Multithreading::LX_Mutex mutex2;
 LX_Multithreading::LX_Cond cond;
-
 LX_Multithreading::LX_ASyncChannel<int> c;
 
 struct msg_t
@@ -200,9 +200,8 @@ void test_thread()
     {
         {
             LX_Multithreading::LX_Thread th4(foo2,"foo2",nullptr);
-            th4.start();
-            th4.detach();
-            SDL_Delay(512);
+            th4.startAndDetach();
+            SDL_Delay(256);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -219,7 +218,7 @@ void test_thread()
             char s[] = "foo3";
             LX_Multithreading::LX_Thread th5(foo3,s,s);
             th5.start();
-            SDL_Delay(1000);
+            SDL_Delay(128);
             int ret;
             th5.join(&ret);
 
@@ -235,7 +234,7 @@ void test_thread()
         LX_Log::log("(#%x): FAILURE - CRITICAL → basic thread #5",tid);
     }
 
-    LX_Log::log("(#%x): Basic thread #6 (create, start and detach the thread)",
+    LX_Log::log("(#%x): Basic thread #6 (create, start the thread, stop and restart it)",
                 tid);
     try
     {
@@ -246,7 +245,7 @@ void test_thread()
             LX_Log::log("(#%x): restart",tid);
             th6.start();
             th6.join();
-            SDL_Delay(512);
+            SDL_Delay(128);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -336,81 +335,15 @@ void test_thread_fail()
     }
 
 
-    LX_Log::log("(#%x): fail thread #5 (detach a thread that was joined)",
-                tid);
+    LX_Log::log("(#%x): fail thread #5 (join a detached thread)",tid);
     try
     {
         {
             LX_Multithreading::LX_Thread th5(foo2,"foo2",nullptr);
-            th5.start();
+            th5.startAndDetach();
             th5.join();
-            th5.detach();
         }
         LX_Log::log("(#%x): FAILURE - should crash → #5",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-
-    LX_Log::log("(#%x): fail thread #6 (join a detached thread)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th6(foo2,"foo2",nullptr);
-            th6.start();
-            th6.detach();
-            th6.join();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #6",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-
-    LX_Log::log("(#%x): fail thread #7 (detach a detached thread)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th7(foo2,"foo2",nullptr);
-            th7.start();
-            th7.detach();
-            th7.detach();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #7",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-    LX_Log::log("(#%x): fail thread #8 (detach a thread that has not been launched)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th8(foo2,"foo2",nullptr);
-            th8.detach();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #8",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-
-    LX_Log::log("(#%x): fail thread #9 (detach and launch a thread)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th9(foo2,"foo2",nullptr);
-            th9.detach();
-            th9.start();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #9",tid);
     }
     catch(std::invalid_argument&)
     {
@@ -630,5 +563,3 @@ void test_channel2()
     LX_Log::log("(#%x): Done",tid);
     LX_Log::log("      == END TEST ==    ");
 }
-
-

@@ -39,7 +39,7 @@ bool debug_mode = false;
 // Get the time in millisecond
 long getMillisTime()
 {
-    long ms = 0L;
+    long ms;
 
 #if defined(__WIN32__)  // Windows
 
@@ -62,16 +62,15 @@ long getMillisTime()
 
 std::string getDate()
 {
-    const size_t sz = 256;
-    char datestr[sz] = {'\0'};
+    const size_t SZ = 256;
+    char datestr[SZ] = {'\0'};
     const time_t t = time(nullptr);
 
     if(t == -1)
     {
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
-                        "Internal error - Cannot get the time: %s",
-                        strerror(errno));
+                        "Internal error - Cannot get the time: %s");
         return std::string("");
     }
 
@@ -81,13 +80,12 @@ std::string getDate()
     {
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
-                        "Internal error - Cannot get the local time: %s",
-                        strerror(errno));
+                        "Internal error - Cannot get the local time");
         return std::string("");
     }
 
     std::ostringstream ss;
-    strftime(datestr,sz,"[%Y-%m-%d %H:%M:%S.",tmp);
+    strftime(datestr,SZ,"[%Y-%m-%d %H:%M:%S.",tmp);
     ss << getMillisTime() << "] ";
 
     return std::string(datestr + ss.str());
