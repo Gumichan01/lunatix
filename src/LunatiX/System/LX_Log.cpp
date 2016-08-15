@@ -39,7 +39,7 @@ bool debug_mode = false;
 // Get the time in millisecond
 long getMillisTime()
 {
-    long ms = 0L;
+    long ms;
 
 #if defined(__WIN32__)  // Windows
 

@@ -206,8 +206,6 @@ void test_write(void)
 {
     LX_Log::log(" = TEST write = ");
 
-    size_t read_data = 0;
-
     LX_Log::log("Open %s ...",str.c_str());
     LX_File f(str.c_str(),LX_FILEIO_WRONLY);
     std::string gumi = "GUMI";
