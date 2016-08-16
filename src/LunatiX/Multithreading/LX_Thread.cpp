@@ -10,11 +10,11 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-#ifdef __linux__
+//#ifdef __linux__
 
 #include <LunatiX/LX_Thread.hpp>
+#include <LunatiX/utils/tinythread/tinythread.h>
 #include <LunatiX/LX_Log.hpp>
-#include <SDL2/SDL_thread.h>
 
 #include <functional>
 #include <stdexcept>
@@ -22,28 +22,22 @@
 
 namespace
 {
-using LX_ThreadFun_ = int(void *);
+using LX_ThreadFun_ = void(void *);
 };
 
 class LX_Thread_
 {
     std::function<LX_ThreadFun_> _f;
     std::string _name;
-    bool _joinable;
     bool _launched;
-    SDL_Thread * _thread;
+    tthread::thread * _thread;
     LX_Multithreading::LX_Data _data;
-
-    const char * nameOfThread_(SDL_Thread * th)
-    {
-        return th == nullptr ? "unknown thread": SDL_GetThreadName(th);
-    }
 
 public:
 
     LX_Thread_(const std::function<LX_ThreadFun_>& f, std::string name,
                LX_Multithreading::LX_Data data)
-        : _f(f), _name(name), _joinable(false), _launched(false),
+        : _f(f), _name(name), _launched(false),
           _thread(nullptr), _data(data) {}
 
 
@@ -52,68 +46,50 @@ public:
         if(_launched)
             return;
 
-        _thread = SDL_CreateThread(*_f.target<int(*)(void *)>(),
-                                   _name.c_str(),_data);
-
-        if(_thread == nullptr)
-        {
-            LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
-                                "Couldn't launch the thread");
-            throw std::runtime_error("An error occurred while starting the thread");
-        }
-
+        _thread = new tthread::thread(*_f.target<void(*)(void *)>(),_data);
         _launched = true;
-        _joinable = true;
     }
 
     void startAndDetach()
     {
         start();
 
-        if(_joinable)
+        if(joinable())
         {
-            SDL_DetachThread(_thread);
-            _joinable = false;
+            _thread->detach();
         }
     }
 
     bool joinable()
     {
-        return _joinable;
+        return _thread != nullptr && _thread->joinable();
     }
 
-    void join(int *ret)
+    void join()
     {
-        const std::string JOIN_MSG("This thread is detached, already joined, or not launched");
+        if(_thread == nullptr || !joinable())
+            throw std::invalid_argument("Not joinable thread");
 
-        if(!_joinable || !_launched)
-        {
-            LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
-                                "<%s> #%ld: not joinable",
-                                nameOfThread_(_thread),getID());
-            throw std::invalid_argument(JOIN_MSG);
-        }
-
-        SDL_WaitThread(_thread,ret);
+        _thread->join();
+        delete _thread;
         _thread = nullptr;
-        _joinable = false;
         _launched = false;
     }
 
-    unsigned long getID() const
+    tthread::thread::id getID() const
     {
-        return SDL_GetThreadID(_thread);
+        return _thread->get_id();
     }
 
     std::string getName() const
     {
-        return SDL_GetThreadName(_thread);
+        return _name;
     }
 
     ~LX_Thread_()
     {
-        if(_joinable && _launched)
-            join(nullptr);
+        if(joinable() && _launched)
+            join();
     }
 };
 
@@ -148,15 +124,15 @@ bool LX_Thread::joinable()
     return _th->joinable();
 }
 
-void LX_Thread::join(int *ret)
+void LX_Thread::join()
 {
-    _th->join(ret);
+    _th->join();
 }
 
-unsigned long LX_Thread::getID() const
+/*tthread::id LX_Thread::getID() const
 {
     return _th->getID();
-}
+}*/
 
 std::string LX_Thread::getName() const
 {
@@ -169,4 +145,4 @@ LX_Thread::~LX_Thread()
 }
 
 };
-#endif  // __linux__
+//#endif  // __linux__
