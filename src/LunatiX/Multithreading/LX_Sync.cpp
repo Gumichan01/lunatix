@@ -10,10 +10,9 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-#ifdef __linux__
 
 #include <LunatiX/LX_Sync.hpp>
-#include <SDL2/SDL_mutex.h>
+#include <LunatiX/utils/tinythread/tinythread.h>
 
 
 namespace LX_Multithreading
@@ -21,80 +20,53 @@ namespace LX_Multithreading
 
 /* Mutex */
 
-LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex()), _locked(false) {}
+LX_Mutex::LX_Mutex() : _mutex(new tthread::mutex()) {}
 
 
 void LX_Mutex::lock()
 {
-    if(SDL_LockMutex(_mutex) == 0)
-        _locked = true;
+    _mutex->lock();
 }
 
 
 void LX_Mutex::unlock()
 {
-    if(SDL_UnlockMutex(_mutex) == 0)
-        _locked = false;
+    _mutex->unlock();
 }
 
 
 LX_Mutex::~LX_Mutex()
 {
-    SDL_DestroyMutex(_mutex);
+    delete _mutex;
 }
 
 
 /* Condition variable */
 
-LX_Cond::LX_Cond() : _condition(SDL_CreateCond()) {}
+LX_Cond::LX_Cond() : _condition(new tthread::condition_variable()) {}
 
 
 void LX_Cond::wait(LX_Mutex& mutex)
 {
-    SDL_CondWait(_condition,mutex._mutex);
+    _condition->wait(*mutex._mutex);
 }
 
 
 void LX_Cond::signal()
 {
-    SDL_CondSignal(_condition);
+    _condition->notify_one();
 }
 
 
 void LX_Cond::broadcast()
 {
-    SDL_CondBroadcast(_condition);
+    _condition->notify_all();
 }
 
 
 LX_Cond::~LX_Cond()
 {
-    SDL_DestroyCond(_condition);
-}
-
-
-/* Semaphore */
-
-LX_Semaphore::LX_Semaphore(unsigned int v) : _sem(SDL_CreateSemaphore(v)) {}
-
-
-void LX_Semaphore::wait()
-{
-    SDL_SemWait(_sem);
-}
-
-
-void LX_Semaphore::post()
-{
-    SDL_SemPost(_sem);
-}
-
-
-LX_Semaphore::~LX_Semaphore()
-{
-    SDL_DestroySemaphore(_sem);
+    delete _condition;
 }
 
 };
-
-#endif  // __linux__

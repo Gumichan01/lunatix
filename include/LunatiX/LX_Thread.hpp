@@ -20,7 +20,6 @@
 *
 */
 
-#ifdef __linux__
 
 #include <LunatiX/utils/utf8_string.hpp>
 
@@ -41,7 +40,9 @@ namespace LX_Multithreading
 {
 
 using LX_Data = void *;
-typedef int (* LX_ThreadFun) (void *data);
+typedef void (* LX_ThreadFun) (void *data);
+
+unsigned long getID();
 
 class LX_Thread
 {
@@ -54,18 +55,14 @@ public:
     void start();
     void startAndDetach();
     bool joinable();
-    void join(int *ret=nullptr);
+    void join();
 
-    unsigned long getID() const;
-    std::string getName() const;
+    const std::string& getName() const;
 
     ~LX_Thread();
 };
 
 };
 
-#else
-#pragma message("LunatiX: No Multithreading support for Windows")
-#endif  // __linux__
 
 #endif  // LX_THREAD_HPP_INCLUDED

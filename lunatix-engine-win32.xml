@@ -46,6 +46,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-march=i486" />
 			<Add option="-std=c++11" />
 			<Add directory="include" />
 		</Compiler>
@@ -65,6 +66,10 @@
 			<Add directory="lib/win32" />
 		</Linker>
 		<Unit filename="include/LunatiX/LX_AABB.hpp" />
+		<Unit filename="include/LunatiX/LX_Channel.hpp" />
+		<Unit filename="include/LunatiX/LX_Channel.tpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
 		<Unit filename="include/LunatiX/LX_ConfigLoader.hpp" />
@@ -98,6 +103,8 @@
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
 		<Unit filename="include/LunatiX/Lunatix_engine.hpp" />
+		<Unit filename="include/LunatiX/utils/tinythread/fast_mutex.h" />
+		<Unit filename="include/LunatiX/utils/tinythread/tinythread.h" />
 		<Unit filename="include/LunatiX/utils/utf8_iterator.hpp" />
 		<Unit filename="include/LunatiX/utils/utf8_string.hpp" />
 		<Unit filename="src/LunatiX/Device/LX_Device.cpp" />
@@ -130,6 +137,7 @@
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/Text/LX_Text.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
+		<Unit filename="src/LunatiX/Utilities/tinythread/tinythread.cpp" />
 		<Unit filename="src/LunatiX/Utilities/utf8_iterator.cpp" />
 		<Unit filename="src/LunatiX/Utilities/utf8_string.cpp" />
 		<Unit filename="src/LunatiX/Version/LX_Version.cpp" />

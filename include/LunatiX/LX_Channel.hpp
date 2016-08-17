@@ -32,37 +32,22 @@ class LX_Channel
 protected:
 
     bool _closed;
-    LX_Mutex _mutex;
-
-public:
-
-    LX_Channel();
-    virtual bool send(T& data) = 0;
-    virtual bool recv(T& data) = 0;
-    virtual void close() = 0;
-    virtual ~LX_Channel();
-};
-
-template <typename T>
-class LX_ASyncChannel: public virtual LX_Channel<T>
-{
-protected:
-
-    std::queue<T> _qdata;
     unsigned int _nbwaiters;
+    std::queue<T> _qdata;
+    LX_Mutex _mutex;
     LX_Cond _cond;
 
 public:
 
-    LX_ASyncChannel();
-    virtual bool send(T& data);
-    virtual bool recv(T& data);
-    virtual void close();
-    virtual ~LX_ASyncChannel();
-};
-
+    LX_Channel();
+    bool send(T& data);
+    bool recv(T& data);
+    void close();
+    ~LX_Channel();
 };
 
 #include "LX_Channel.tpp"
+
+};
 
 #endif // LX_CHANNEL_HPP_INCLUDED

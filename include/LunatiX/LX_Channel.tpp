@@ -10,36 +10,24 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-//#include <SDL2/SDL_mutex.h>
-
-
-namespace LX_Multithreading
-{
 
 /* Channel interface */
 
 template <typename T>
-LX_Channel<T>::LX_Channel() : _closed(false) {}
-
+LX_Channel<T>::LX_Channel() : _closed(false), _nbwaiters(0) {}
 
 template <typename T>
 LX_Channel<T>::~LX_Channel() {}
 
 
-/* Asynchronous channel */
-
 template <typename T>
-LX_ASyncChannel<T>::LX_ASyncChannel() : _nbwaiters(0) {}
-
-
-template <typename T>
-bool LX_ASyncChannel<T>::send(T& data)
+bool LX_Channel<T>::send(T& data)
 {
-    this->_mutex.lock();
+    _mutex.lock();
 
-    if(this->_closed)
+    if(_closed)
     {
-        this->_mutex.unlock();
+        _mutex.unlock();
         return false;
     }
 
@@ -48,49 +36,43 @@ bool LX_ASyncChannel<T>::send(T& data)
     if(_nbwaiters > 0)
         _cond.signal();
 
-    this->_mutex.unlock();
+    _mutex.unlock();
     return true;
 }
 
 
 template <typename T>
-bool LX_ASyncChannel<T>::recv(T& data)
+bool LX_Channel<T>::recv(T& data)
 {
-    this->_mutex.lock();
+    _mutex.lock();
 
     // If the channel is empty but not closed → Wait for input
-    while(_qdata.empty() && !this->_closed)
+    while(_qdata.empty() && !_closed)
     {
         _nbwaiters += 1;
-        _cond.wait(this->_mutex);
+        _cond.wait(_mutex);
         _nbwaiters -= 1;
     }
 
     // If the channel is closed and empty → cannot read it
-    if(_qdata.empty() && this->_closed)
+    if(_qdata.empty() && _closed)
     {
-        this->_mutex.unlock();
+        _mutex.unlock();
         return false;
     }
 
     data = _qdata.front();
     _qdata.pop();
-    this->_mutex.unlock();
+    _mutex.unlock();
     return true;
 }
 
 
 template <typename T>
-void LX_ASyncChannel<T>::close()
+void LX_Channel<T>::close()
 {
-    this->_mutex.lock();
-    this->_closed = true;
+    _mutex.lock();
+    _closed = true;
     _cond.broadcast();
-    this->_mutex.unlock();
+    _mutex.unlock();
 }
-
-
-template <typename T>
-LX_ASyncChannel<T>::~LX_ASyncChannel() {}
-
-};

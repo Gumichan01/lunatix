@@ -46,6 +46,7 @@ LUNATIX_BUILD_DIR=$(LUNATIX_BUILD_ROOT)LunatiX/
 LIBRARIES_I_DIR=./include/
 LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
 UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
+TINYTHREAD_I_PATH=$(UTILS_I_PATH)tinythread/
 SDL2_I_PATH=`pkg-config --cflags sdl2 SDL2_image SDL2_mixer SDL2_ttf`
 
 # Path to the different modules
@@ -64,6 +65,7 @@ TEXT_PATH=$(LUNATIX_PATH)Text/
 TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
 VERSION_PATH=$(LUNATIX_PATH)Version/
 UTILS_PATH=$(LUNATIX_PATH)Utilities/
+TINYTHREAD_PATH=$(UTILS_PATH)tinythread/
 
 # Path to the different object directories
 OBJ_MAIN_PATH=$(LUNATIX_BUILD_DIR)../
@@ -82,6 +84,7 @@ OBJ_TEXT_PATH=$(LUNATIX_BUILD_DIR)Text/
 OBJ_TTF_PATH=$(LUNATIX_BUILD_DIR)TrueTypeFont/
 OBJ_VERSION_PATH=$(LUNATIX_BUILD_DIR)Version/
 OBJ_UTILS_PATH=$(LUNATIX_BUILD_DIR)Utilities/
+OBJ_TINYTHREAD_PATH=$(OBJ_UTILS_PATH)tinythread/
 
 # Path to the different object files
 MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
@@ -102,7 +105,8 @@ $(OBJ_PHYSICS_PATH)LX_Polygon.o $(OBJ_PHYSICS_PATH)LX_Vector2D.o \
 $(OBJ_RANDOM_PATH)LX_Random.o $(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
 $(OBJ_SYSTEM_PATH)LX_Log.o $(OBJ_TEXT_PATH)LX_Text.o \
 $(OBJ_TTF_PATH)LX_TrueTypeFont.o $(OBJ_VERSION_PATH)LX_Version.o \
-$(OBJ_UTILS_PATH)utf8_string.o $(OBJ_UTILS_PATH)utf8_iterator.o
+$(OBJ_UTILS_PATH)utf8_string.o $(OBJ_UTILS_PATH)utf8_iterator.o \
+$(OBJ_TINYTHREAD_PATH)tinythread.o
 
 # Libraries
 LUNATIX_LIB_DIR=./lib/linux/
@@ -377,7 +381,8 @@ $(LUNATIX_I_PATH)LX_MessageBox.hpp
 LX_Thread.o : $(OBJ_MULTITHREAD_PATH)LX_Thread.o
 
 $(OBJ_MULTITHREAD_PATH)LX_Thread.o : $(MULTITHREAD_PATH)LX_Thread.cpp\
-$(LUNATIX_I_PATH)LX_Thread.hpp
+$(LUNATIX_I_PATH)LX_Thread.hpp $(LUNATIX_I_PATH)LX_Channel.hpp \
+$(LUNATIX_I_PATH)LX_Channel.tpp
 	@mkdir -p $(OBJ_MULTITHREAD_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
@@ -551,6 +556,17 @@ $(UTILS_I_PATH)utf8_iterator.hpp $(UTILS_I_PATH)utf8_string.hpp
 	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
 	@echo $<" -> "$@" done."
 
+
+tinythread.o: $(OBJ_TINYTHREAD_PATH)tinythread.o
+
+$(OBJ_TINYTHREAD_PATH)tinythread.o : $(TINYTHREAD_PATH)tinythread.cpp \
+$(TINYTHREAD_I_PATH)tinythread.h $(TINYTHREAD_I_PATH)fast_mutex.h
+	@echo " == Build TinyThread++ == "
+	@mkdir -p $(OBJ_TINYTHREAD_PATH)
+	@echo $<" -> "$@
+	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
+	@echo $<" -> "$@" done."
+	@echo " == TinyThread++ done == "
 
 ##########
 #        #
