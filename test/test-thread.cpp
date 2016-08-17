@@ -7,24 +7,13 @@ int foo1(LX_Multithreading::LX_Data data);
 int foo2(LX_Multithreading::LX_Data data);
 int foo3(LX_Multithreading::LX_Data data);
 
+
 namespace
 {
 int val = 0;
 LX_Multithreading::LX_Mutex mutex;
 LX_Multithreading::LX_Mutex mutex2;
 LX_Multithreading::LX_Cond cond;
-
-LX_Multithreading::LX_ASyncChannel<int> c;
-
-struct msg_t
-{
-    unsigned int tid;
-    std::string s;
-};
-
-LX_Multithreading::LX_ASyncChannel<msg_t> sc;
-LX_Multithreading::LX_ASyncChannel<msg_t> rc;
-
 };
 
 int countValue(LX_Multithreading::LX_Data data);
@@ -200,9 +189,8 @@ void test_thread()
     {
         {
             LX_Multithreading::LX_Thread th4(foo2,"foo2",nullptr);
-            th4.start();
-            th4.detach();
-            SDL_Delay(512);
+            th4.startAndDetach();
+            SDL_Delay(256);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -219,7 +207,7 @@ void test_thread()
             char s[] = "foo3";
             LX_Multithreading::LX_Thread th5(foo3,s,s);
             th5.start();
-            SDL_Delay(1000);
+            SDL_Delay(128);
             int ret;
             th5.join(&ret);
 
@@ -235,7 +223,7 @@ void test_thread()
         LX_Log::log("(#%x): FAILURE - CRITICAL → basic thread #5",tid);
     }
 
-    LX_Log::log("(#%x): Basic thread #6 (create, start and detach the thread)",
+    LX_Log::log("(#%x): Basic thread #6 (create, start the thread, stop and restart it)",
                 tid);
     try
     {
@@ -246,7 +234,7 @@ void test_thread()
             LX_Log::log("(#%x): restart",tid);
             th6.start();
             th6.join();
-            SDL_Delay(512);
+            SDL_Delay(128);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -336,81 +324,15 @@ void test_thread_fail()
     }
 
 
-    LX_Log::log("(#%x): fail thread #5 (detach a thread that was joined)",
-                tid);
+    LX_Log::log("(#%x): fail thread #5 (join a detached thread)",tid);
     try
     {
         {
             LX_Multithreading::LX_Thread th5(foo2,"foo2",nullptr);
-            th5.start();
+            th5.startAndDetach();
             th5.join();
-            th5.detach();
         }
         LX_Log::log("(#%x): FAILURE - should crash → #5",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-
-    LX_Log::log("(#%x): fail thread #6 (join a detached thread)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th6(foo2,"foo2",nullptr);
-            th6.start();
-            th6.detach();
-            th6.join();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #6",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-
-    LX_Log::log("(#%x): fail thread #7 (detach a detached thread)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th7(foo2,"foo2",nullptr);
-            th7.start();
-            th7.detach();
-            th7.detach();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #7",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-    LX_Log::log("(#%x): fail thread #8 (detach a thread that has not been launched)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th8(foo2,"foo2",nullptr);
-            th8.detach();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #8",tid);
-    }
-    catch(std::invalid_argument&)
-    {
-        LX_Log::log("(#%x): SUCCESS - exception occurred",tid);
-    }
-
-
-    LX_Log::log("(#%x): fail thread #9 (detach and launch a thread)",tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th9(foo2,"foo2",nullptr);
-            th9.detach();
-            th9.start();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #9",tid);
     }
     catch(std::invalid_argument&)
     {
@@ -473,162 +395,3 @@ void test_cond()
     thsig.join();
     LX_Log::log("      == END TEST ==    ");
 }
-
-
-int sender(LX_Multithreading::LX_Data data)
-{
-    LX_Random::initRand();
-    int n = LX_Random::xorshiftRand100();
-
-    do
-    {
-        SDL_Delay(16);
-        n = LX_Random::xorshiftRand100();
-    }while(c.send(n));
-
-    return 0;
-}
-
-
-int receiver(LX_Multithreading::LX_Data data)
-{
-    int n;
-
-    SDL_Delay(1024);
-
-    for(int i = 0; i < 8; i++)
-   ; {
-        c.recv(n);
-        LX_Log::log("(#%x): received from the channel → %d",
-                    SDL_GetThreadID(nullptr),n);
-    }
-
-    c.close();
-    return 0;
-}
-
-/* forwarding */
-
-int sender2(LX_Multithreading::LX_Data data)
-{
-    const int MAX_MSG = 10;
-    LX_Random::initRand();
-    int nb = 0;
-
-    msg_t msg;
-    msg.tid = LX_Random::xorshiftRand100();
-    msg.s = "hello";
-
-    while(nb < MAX_MSG)
-    {
-        msg.tid = LX_Random::xorshiftRand100();
-        LX_Log::log("(#%x): SEND",SDL_GetThreadID(nullptr));
-        if(!sc.send(msg))
-        {
-            sc.close();
-            break;
-        }
-        nb++;
-    }
-
-    LX_Log::log("(#%x): OVER sender",SDL_GetThreadID(nullptr));
-    return 0;
-}
-
-
-int fwd(LX_Multithreading::LX_Data data)
-{
-    int cpt = 0;
-    const int N = 10;
-    msg_t msg;
-
-    while(sc.recv(msg))
-    {
-        LX_Log::log("(#%x): fwd → %d; %s",SDL_GetThreadID(nullptr),msg.tid,msg.s.c_str());
-        rc.send(msg);
-
-        cpt++;
-
-        if(cpt == N)
-        {
-            LX_Log::log("(#%x): CLOSE ALL",SDL_GetThreadID(nullptr));
-            sc.close();
-            rc.close();
-            break;
-        }
-    }
-    LX_Log::log("(#%x): OVER fwd",SDL_GetThreadID(nullptr));
-    return 0;
-}
-
-
-int receiver2(LX_Multithreading::LX_Data data)
-{
-    msg_t m;
-
-    while(rc.recv(m))
-    {
-        LX_Log::log("(#%x): received from the channel → %d; %s",
-                    SDL_GetThreadID(nullptr),m.tid,m.s.c_str());
-    }
-
-    LX_Log::log("(#%x): OVER recv",SDL_GetThreadID(nullptr));
-    return 0;
-}
-
-
-void test_channel()
-{
-    LX_Log::log("   == TEST channel #1 ==   ");
-
-    const unsigned long tid = SDL_GetThreadID(nullptr);
-    LX_Multithreading::LX_Thread s1(sender,"sender #1",nullptr);
-    LX_Multithreading::LX_Thread s2(sender,"sender #2",nullptr);
-    LX_Multithreading::LX_Thread r(receiver,"receiver",nullptr);
-
-    LX_Log::log("(#%x): Start the communication between the threads",tid);
-    s1.start();
-    s2.start();
-    r.start();
-    LX_Log::log("(#%x): ...",tid);
-    s1.join();
-    s2.join();
-    r.join();
-    LX_Log::log("(#%x): Done",tid);
-
-    LX_Log::log("      == END TEST ==    ");
-}
-
-
-void test_channel2()
-{
-    LX_Log::log("   == TEST channel #2 ==   ");
-
-    const unsigned long tid = SDL_GetThreadID(nullptr);
-    LX_Multithreading::LX_Thread s1(sender2,"sender2 #1",nullptr);
-    LX_Multithreading::LX_Thread s2(sender2,"sender2 #2",nullptr);
-    LX_Multithreading::LX_Thread forwd(fwd,"fwd",nullptr);
-    LX_Multithreading::LX_Thread r(receiver2,"receiver2 #1",nullptr);
-    LX_Multithreading::LX_Thread r2(receiver2,"receiver2 #2",nullptr);
-
-    LX_Log::log("(#%x): Start the communication between the threads",tid);
-    s1.start();
-    //s2.start();
-    //SDL_Delay(16);
-    forwd.start();
-    r.start();
-    //r2.start();
-
-    LX_Log::log("(#%x): ...",tid);
-
-    s1.join();
-    //s2.join();
-    forwd.join();
-    r.join();
-    //r2.join();
-
-    LX_Log::log("(#%x): Done",tid);
-    LX_Log::log("      == END TEST ==    ");
-}
-
-

@@ -10,6 +10,7 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifdef __linux__
 
 #include <LunatiX/LX_Sync.hpp>
 #include <SDL2/SDL_mutex.h>
@@ -20,18 +21,20 @@ namespace LX_Multithreading
 
 /* Mutex */
 
-LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex()) {}
+LX_Mutex::LX_Mutex() : _mutex(SDL_CreateMutex()), _locked(false) {}
 
 
 void LX_Mutex::lock()
 {
-    SDL_LockMutex(_mutex);
+    if(SDL_LockMutex(_mutex) == 0)
+        _locked = true;
 }
 
 
 void LX_Mutex::unlock()
 {
-    SDL_UnlockMutex(_mutex);
+    if(SDL_UnlockMutex(_mutex) == 0)
+        _locked = false;
 }
 
 
@@ -93,3 +96,5 @@ LX_Semaphore::~LX_Semaphore()
 }
 
 };
+
+#endif  // __linux__
