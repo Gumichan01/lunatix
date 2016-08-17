@@ -43,6 +43,8 @@ namespace LX_Multithreading
 using LX_Data = void *;
 typedef void (* LX_ThreadFun) (void *data);
 
+unsigned long getID();
+
 class LX_Thread
 {
     LX_Thread_ *_th;
@@ -56,8 +58,7 @@ public:
     bool joinable();
     void join();
 
-    //unsigned long getID() const;
-    std::string getName() const;
+    const std::string& getName() const;
 
     ~LX_Thread();
 };

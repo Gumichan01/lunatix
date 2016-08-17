@@ -16,6 +16,7 @@
 #include <LunatiX/utils/tinythread/tinythread.h>
 #include <LunatiX/LX_Log.hpp>
 
+#include <SDL2/SDL_thread.h>
 #include <functional>
 #include <stdexcept>
 
@@ -67,7 +68,7 @@ public:
 
     void join()
     {
-        if(_thread == nullptr || !joinable())
+        if(!_launched || _thread == nullptr || !joinable())
             throw std::invalid_argument("Not joinable thread");
 
         _thread->join();
@@ -76,12 +77,7 @@ public:
         _launched = false;
     }
 
-    tthread::thread::id getID() const
-    {
-        return _thread->get_id();
-    }
-
-    std::string getName() const
+    const std::string& getName() const
     {
         return _name;
     }
@@ -96,6 +92,11 @@ public:
 
 namespace LX_Multithreading
 {
+
+unsigned long getID()
+{
+    return SDL_GetThreadID(nullptr);
+}
 
 LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data)
     : _th(nullptr)
@@ -129,12 +130,7 @@ void LX_Thread::join()
     _th->join();
 }
 
-/*tthread::id LX_Thread::getID() const
-{
-    return _th->getID();
-}*/
-
-std::string LX_Thread::getName() const
+const std::string& LX_Thread::getName() const
 {
     return _th->getName();
 }
