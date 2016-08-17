@@ -20,7 +20,6 @@
 *
 */
 
-//#ifdef __linux__
 
 #include <LunatiX/utils/utf8_string.hpp>
 
@@ -65,8 +64,5 @@ public:
 
 };
 
-//#else
-//#pragma message("LunatiX: No Multithreading support for Windows")
-//#endif  // __linux__
 
 #endif  // LX_THREAD_HPP_INCLUDED

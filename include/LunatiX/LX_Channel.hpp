@@ -20,8 +20,6 @@
 *
 */
 
-//#ifdef __linux__
-
 #include <LunatiX/LX_Sync.hpp>
 #include <queue>
 
@@ -66,9 +64,5 @@ public:
 };
 
 #include "LX_Channel.tpp"
-
-//#else
-//#pragma message("LunatiX: No Channel support (based on LX_Multithreading) for Windows")
-//#endif  // __linux__
 
 #endif // LX_CHANNEL_HPP_INCLUDED

@@ -10,7 +10,6 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-//#ifdef __linux__
 
 #include <LunatiX/LX_Sync.hpp>
 #include <LunatiX/utils/tinythread/tinythread.h>
@@ -96,4 +95,3 @@ LX_Semaphore::~LX_Semaphore()
 
 };
 
-//#endif  // __linux__

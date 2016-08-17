@@ -20,16 +20,12 @@
 *
 */
 
-//#ifdef __linux__
-
 namespace tthread
 {
 class mutex;
 class condition_variable;
 };
 
-/*struct SDL_mutex;
-struct SDL_cond;*/
 struct SDL_semaphore;
 
 namespace LX_Multithreading
@@ -77,8 +73,5 @@ public:
 
 };
 
-//#else
-//#pragma message("LunatiX: No thread synchronization primitives support for Windows")
-//#endif  // __linux__
 
 #endif  // LX_SYNC_HPP_INCLUDED

@@ -10,8 +10,6 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-//#ifdef __linux__
-
 #include <LunatiX/LX_Thread.hpp>
 #include <LunatiX/utils/tinythread/tinythread.h>
 #include <LunatiX/LX_Log.hpp>
@@ -148,4 +146,3 @@ LX_Thread::~LX_Thread()
 }
 
 };
-//#endif  // __linux__

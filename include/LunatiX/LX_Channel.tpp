@@ -10,8 +10,6 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-//#include <SDL2/SDL_mutex.h>
-
 
 namespace LX_Multithreading
 {
