@@ -13,7 +13,6 @@
 
 #include <LunatiX/LX_Sync.hpp>
 #include <LunatiX/utils/tinythread/tinythread.h>
-#include <SDL2/SDL_mutex.h>
 
 
 namespace LX_Multithreading
@@ -70,28 +69,4 @@ LX_Cond::~LX_Cond()
     delete _condition;
 }
 
-
-/* Semaphore */
-
-LX_Semaphore::LX_Semaphore(unsigned int v) : _sem(SDL_CreateSemaphore(v)) {}
-
-
-void LX_Semaphore::wait()
-{
-    SDL_SemWait(_sem);
-}
-
-
-void LX_Semaphore::post()
-{
-    SDL_SemPost(_sem);
-}
-
-
-LX_Semaphore::~LX_Semaphore()
-{
-    SDL_DestroySemaphore(_sem);
-}
-
 };
-

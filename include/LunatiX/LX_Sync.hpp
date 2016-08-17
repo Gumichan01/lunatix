@@ -26,7 +26,6 @@ class mutex;
 class condition_variable;
 };
 
-struct SDL_semaphore;
 
 namespace LX_Multithreading
 {
@@ -58,20 +57,6 @@ public:
     ~LX_Cond();
 };
 
-
-class LX_Semaphore
-{
-    SDL_semaphore * _sem;
-
-public:
-
-    LX_Semaphore(unsigned int v);
-    void wait();
-    void post();
-    ~LX_Semaphore();
 };
-
-};
-
 
 #endif  // LX_SYNC_HPP_INCLUDED
