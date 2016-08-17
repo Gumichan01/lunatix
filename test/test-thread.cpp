@@ -31,8 +31,6 @@ void test_thread();
 void test_thread_fail();
 void test_mutex();
 void test_cond();
-void test_channel();
-void test_channel2();
 
 #define EX 64
 
@@ -48,12 +46,10 @@ int main(int argc, char **argv)
     LX_Log::log(" ==== TEST Multithread ==== ");
     LX_Log::setDebugMode();
 
-    /*test_thread();
+    test_thread();
     test_thread_fail();
     test_mutex();
-    test_cond();*/
-    //test_channel();
-    test_channel2();
+    test_cond();
 
     LX_Log::log(" ==== END TEST ==== ");
     LX_Quit();
