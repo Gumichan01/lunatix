@@ -16,7 +16,7 @@ unsigned int w = 0;
 LX_Multithreading::LX_Mutex mutex;
 LX_Multithreading::LX_Mutex mutex2;
 LX_Multithreading::LX_Cond cond;
-LX_Multithreading::LX_ASyncChannel<int> c;
+LX_Multithreading::LX_Channel<int> c;
 
 struct msg_t
 {
@@ -24,8 +24,8 @@ struct msg_t
     std::string s;
 };
 
-LX_Multithreading::LX_ASyncChannel<msg_t> sc;
-LX_Multithreading::LX_ASyncChannel<msg_t> rc;
+LX_Multithreading::LX_Channel<msg_t> sc;
+LX_Multithreading::LX_Channel<msg_t> rc;
 
 };
 
@@ -550,4 +550,3 @@ void test_channel2()
     LX_Log::log("(#%x): Done",tid);
     LX_Log::log("      == END TEST ==    ");
 }
-
