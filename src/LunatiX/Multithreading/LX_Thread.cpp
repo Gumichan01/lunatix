@@ -31,6 +31,7 @@ class LX_Thread_
     std::function<LX_ThreadFun_> _f;
     std::string _name;
     bool _launched;
+    bool _detached;
     tthread::thread * _thread;
     LX_Multithreading::LX_Data _data;
 
@@ -38,7 +39,7 @@ public:
 
     LX_Thread_(const std::function<LX_ThreadFun_>& f, std::string name,
                LX_Multithreading::LX_Data data)
-        : _f(f), _name(name), _launched(false),
+        : _f(f), _name(name), _launched(false), _detached(false),
           _thread(nullptr), _data(data) {}
 
 
@@ -58,6 +59,7 @@ public:
         if(joinable())
         {
             _thread->detach();
+            _detached = true;
         }
     }
 
@@ -68,13 +70,18 @@ public:
 
     void join()
     {
-        if(!_launched || _thread == nullptr || !joinable())
+        if(!_launched || _detached)
             throw std::invalid_argument("Not joinable thread");
 
-        _thread->join();
+        if(joinable())
+        {
+            _thread->join();
+        }
+
         delete _thread;
         _thread = nullptr;
         _launched = false;
+        _detached = false;
     }
 
     const std::string& getName() const
@@ -84,7 +91,7 @@ public:
 
     ~LX_Thread_()
     {
-        if(joinable() && _launched)
+        if(_launched && joinable())
             join();
     }
 };
