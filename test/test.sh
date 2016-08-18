@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# This script will help you to launch some tests on the engine
+# This script will help you to launch some tests on the library
 # It only works on the Linux systems.
 #
 

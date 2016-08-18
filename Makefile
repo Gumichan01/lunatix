@@ -3,16 +3,16 @@
 #	Copyright (C) 2016 Luxon Jean-Pierre
 #	gumichan01.olympe.in
 #
-#	The LunatiX Engine is a SDL2-based game engine.
+#	LunatiX is a free, SDL2-based library.
 #	It can be used for open-source or commercial games thanks to the zlib/libpng license.
 #
 #	Luxon Jean-Pierre (Gumichan01)
 #	luxon.jean.pierre@gmail.com
 #
 
-# Makefile - LunatiX Engine
+# Makefile - LunatiX
 
-.PHONY: clean doc test
+.PHONY: clean documentation test
 
 
 #
@@ -39,7 +39,7 @@ TEST_PATH=./test/
 # Executable file
 LUNATIX_EXE=lunatix-demo
 
-# Path to the Lunatix engine directories
+# Path to the LunatiX directories
 LUNATIX_PATH=./src/LunatiX/
 LUNATIX_BUILD_ROOT=./_build/
 LUNATIX_BUILD_DIR=$(LUNATIX_BUILD_ROOT)LunatiX/
@@ -707,7 +707,7 @@ test-thread.o : $(TEST_PATH)test-thread.cpp
 #                                    #
 ######################################
 
-doc : $(DOXY_FILE)
+documentation : $(DOXY_FILE)
 	@echo "Generating the doxygen file from "$<
 	@doxygen $<
 

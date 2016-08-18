@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
-        cout << "SUCCESS - LunatiX Engine was initialized with success" << endl;
+        cout << "SUCCESS - The LunatiX library has been initialized with success" << endl;
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Config ==== ");
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     int w        = configuration->getWinWidth();
     int h        = configuration->getWinHeight();
 
-    cout << "\n==== LunatiX engine configuration ==== \n" << endl
+    cout << "\n==== LunatiX configuration ==== \n" << endl
          << "video : " << boolState(video) << endl
          << "true type font : " << boolState(ttfont) << endl
          << "audio : " << boolState(sound) << endl

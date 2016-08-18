@@ -6,7 +6,7 @@
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    gumichan01.olympe.in
 *
-*    The LunatiX Engine is a SDL2-based game engine.
+*    LunatiX is a free, SDL2-based library.
 *    It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *    Luxon Jean-Pierre (Gumichan01)
@@ -55,7 +55,7 @@ public :
 
 /**
 *   @class LX_Configuration
-*   @brief The The LunatiX engine configuration.
+*   @brief The The LunatiX configuration.
 */
 class LX_Configuration
 {
@@ -100,7 +100,7 @@ public :
     *   Destroy the unique instance
     *
     *   @note It is not necessary to call this function because it is
-    *           automatically called when the engine subsystems are shut down
+    *           automatically called when the library subsystems are shut down
     *
     */
     static void destroy();

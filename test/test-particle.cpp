@@ -124,7 +124,7 @@ int main(int argc, char **argv)
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
-        cout << "SUCCESS - LunatiX Engine have been initialized with success"
+        cout << "SUCCESS - The LunatiX library has been initialized with success"
              << endl;
 
     LX_Log::setDebugMode();

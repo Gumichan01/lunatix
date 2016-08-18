@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     if(!err)
         cerr << "FAILURE - Init does not work" << endl;
     else
-        cout << "SUCCESS - LunatiX Engine have been initialized with success"
+        cout << "SUCCESS - The LunatiX library has been initialized with success"
              << endl;
 
     LX_Log::setDebugMode();
@@ -82,7 +82,7 @@ void test_SolidText()
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
     LX_Win::LX_initWindowInfo(winfo);
-    winfo.title = "LunatiX Engine - Test True Type Font - Solid text";
+    winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
     LX_Font font(LX_Configuration::getInstance()->getFontFile(),color);
@@ -136,7 +136,7 @@ void test_ShadedText()
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
     LX_Win::LX_initWindowInfo(winfo);
-    winfo.title = "LunatiX Engine - Test True Type Font - Shaded text";
+    winfo.title = "LunatiX - Test True Type Font - Shaded text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
     LX_Font font(LX_Configuration::getInstance()->getFontFile(),color);
@@ -189,7 +189,7 @@ void test_BlendedText()
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
     LX_Win::LX_initWindowInfo(winfo);
-    winfo.title = "LunatiX Engine - Test True Type Font - Blended text";
+    winfo.title = "LunatiX - Test True Type Font - Blended text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
     LX_Font font(LX_Configuration::getInstance()->getFontFile(),color);

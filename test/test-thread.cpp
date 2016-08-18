@@ -1,7 +1,7 @@
 
 #include <LunatiX/Lunatix_engine.hpp>
 #include <stdexcept>
-#include <LunatiX/utils/tinythread/tinythread.h>
+#include <sstream>
 
 void foo0(LX_Multithreading::LX_Data data);
 void foo1(LX_Multithreading::LX_Data data);
@@ -17,6 +17,8 @@ LX_Multithreading::LX_Mutex mutex;
 LX_Multithreading::LX_Mutex mutex2;
 LX_Multithreading::LX_Cond cond;
 LX_Multithreading::LX_Channel<int> c;
+LX_Multithreading::LX_Channel<int> c2;
+LX_Multithreading::LX_Channel<std::string> result;
 
 struct msg_t
 {
@@ -26,7 +28,6 @@ struct msg_t
 
 LX_Multithreading::LX_Channel<msg_t> sc;
 LX_Multithreading::LX_Channel<msg_t> rc;
-
 };
 
 void countValue(LX_Multithreading::LX_Data data);
@@ -40,14 +41,17 @@ void sender2(LX_Multithreading::LX_Data data);
 void fwd(LX_Multithreading::LX_Data data);
 void receiver2(LX_Multithreading::LX_Data data);
 
+void vsender(LX_Multithreading::LX_Data data);
+void vreceiver(LX_Multithreading::LX_Data data);
+
 void test_thread();
 void test_thread_fail();
 void test_mutex();
 void test_cond();
 void test_channel();
 void test_channel2();
+void test_channel3();
 
-#define EX 64
 
 int main(int argc, char **argv)
 {
@@ -67,6 +71,7 @@ int main(int argc, char **argv)
     test_cond();
     test_channel();
     test_channel2();
+    test_channel3();
 
     LX_Log::log(" ==== END TEST ==== ");
     LX_Quit();
@@ -546,6 +551,67 @@ void test_channel2()
     forwd.join();
     r.join();
     r2.join();
+
+    LX_Log::log("(#%x): Done",tid);
+    LX_Log::log("      == END TEST ==    ");
+}
+
+
+void vsender(LX_Multithreading::LX_Data data)
+{
+    if(data == nullptr)
+        return;
+
+    LX_Log::log("(#%x): running",LX_Multithreading::getID());
+    std::vector<int> v = *((std::vector<int> *) data);
+    c2.vsend(v);
+}
+
+void vreceiver(LX_Multithreading::LX_Data data)
+{
+    const unsigned int SZ = 32;
+    std::vector<int> v;
+    std::ostringstream ss;
+
+    LX_Log::log("(#%x): running",LX_Multithreading::getID());
+    while(c2.vrecv(v,SZ));
+
+    for(int n: v)
+    {
+        ss << n << " ";
+    }
+    const std::string tmp(ss.str());
+    result.send(tmp);
+    result.close();
+}
+
+
+void test_channel3()
+{
+    LX_Log::log("   == TEST channel #3 ==   ");
+
+    const unsigned long tid = LX_Multithreading::getID();
+    std::vector<int> v1 = {1,2,4,8,16,32};
+    std::vector<int> v2 = {3,5,7,11,17,35};
+    LX_Multithreading::LX_Thread s1(vsender,"vsender #1",&v1);
+    LX_Multithreading::LX_Thread s2(vsender,"vsender #2",&v2);
+    LX_Multithreading::LX_Thread r(vreceiver,"vreceiver",nullptr);
+
+    LX_Log::log("(#%x): Start the communication between the threads",tid);
+    s1.start();
+    s2.start();
+    r.start();
+
+    // Join
+    s1.join();
+    s2.join();
+    c2.close();
+    r.join();
+
+    std::string str;
+    result.recv(str);
+    LX_Log::log("(#%x): Received from the receiver thread",tid);
+    LX_Log::log("(#%x): %s",tid,str.c_str());
 
     LX_Log::log("(#%x): Done",tid);
     LX_Log::log("      == END TEST ==    ");

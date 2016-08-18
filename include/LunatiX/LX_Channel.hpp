@@ -5,7 +5,7 @@
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    gumichan01.olympe.in
 *
-*    The LunatiX Engine is a SDL2-based game engine.
+*    LunatiX is a free, SDL2-based library.
 *    It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *    Luxon Jean-Pierre (Gumichan01)
@@ -22,6 +22,7 @@
 
 #include <LunatiX/LX_Sync.hpp>
 #include <queue>
+#include <vector>
 
 namespace LX_Multithreading
 {
@@ -40,8 +41,10 @@ protected:
 public:
 
     LX_Channel();
-    bool send(T& data);
+    bool send(const T& data);
     bool recv(T& data);
+    bool vsend(const std::vector<T>& vec);
+    bool vrecv(std::vector<T>& vec, const unsigned long nb);
     void close();
     ~LX_Channel();
 };
