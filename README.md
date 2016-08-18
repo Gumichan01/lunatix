@@ -1,6 +1,6 @@
-# LunatiX Engine #
+# LunatiX #
 
-LunatiX Engine is a free SDL2-based game engine. It can be used for open-source or
+LunatiX is a free SDL2-based library. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
 
 It contains these following libraries:
@@ -9,16 +9,16 @@ It contains these following libraries:
 - LX\_Mixer: The audio library based on SDL_Mixer 2.0 (supporting MP3, OGG, WAV, ...)
 - LX\_Physics: The physics engine
 
-LunatiX Engine also contains these modules:
+LunatiX also contains these modules:
 - LX\_Device: The information library about Gamepads
 - LX\_FileIO: The Input/Output file library
 - LX\_MSGBox: The Message box module
 - LX\_ParticleEngine: A basic particle system
 - LX\_Random: The Random Number Generator (RNG) library
-- LX_VersionInfo: A module to get the version of the engine
+- LX_VersionInfo: A module to get the version of the library
 - LX\_SystemInfo: The System information library
 
-The engine works on Windows and Linux.
+The library works on Windows and Linux.
 
 ## Contribute ##
 
@@ -35,12 +35,12 @@ You must include them in the root directory of the project you are working on.~~
 
 ### On a Linux system ###
 
-You just need to download the source code of the engine and build libraries.
+You just need to download the source code of the library and build libraries.
 
 ### Build ###
 #### On Linux ####
 
-The LunatiX Engine source code is written according to the C++11 standard, and
+The LunatiX source code is written according to the C++11 standard, and
 uses Clang to be compiled.
 So you must ensure that Clang (version 3.4 at least) is installed to compile the code.
 However, the source code is still compilable with g++, but you will have to
@@ -56,14 +56,14 @@ Requirements:
 | SDL2_Mixer |      2.0.2+     |
 |   OpenGL   |       3.1+      |
 
-If you want to generate the engine libraries you just need
+If you want to generate the library libraries you just need
 to execute the following command:
 
     $ make
 
 These two library files are generated into the *lib/linux/* directory.
 
-To test the engine, execute the following command:
+To test the library, execute the following command:
 
     $ make test
 
@@ -71,12 +71,12 @@ If you want to generate the documentation, do:
 
     $ make doc
 
-To use the engine into your project, copy these following directories
+To use the library into your project, copy these following directories
 into your project tree:
 
  - *config/*
  - *include/*
  - *lib/*
 
-It is very important to keep the engine hierarchy. If you do not respect that,
-the engine will not work correctly.
+It is very important to keep the library hierarchy. If you do not respect that,
+the library will not work correctly.

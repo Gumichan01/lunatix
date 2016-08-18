@@ -3,7 +3,7 @@
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    gumichan01.olympe.in
 *
-*    The LunatiX Engine is a SDL2-based game engine.
+*    LunatiX is a free, SDL2-based library.
 *    It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
 *    Luxon Jean-Pierre (Gumichan01)
@@ -46,7 +46,7 @@ void LX_EngineInfo(void)
     LX_Version luna;
     LX_EngineVersion(luna);
 
-    cout << endl << "LunatiX Engine - Version " << luna.major
+    cout << endl << "LunatiX - Version " << luna.major
          << "."  << luna.minor << "." <<  luna.patch << endl
          << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
 }
@@ -62,7 +62,7 @@ void LX_EngineVersion(LX_Version& version)
 
 void LX_VersionDependencies(void)
 {
-    // Information about SDL2 and the LunatiX engine
+    // Information about SDL2 and LunatiX
     const SDL_version *img_linked = IMG_Linked_Version();
     const SDL_version *ttf_linked = TTF_Linked_Version();
     const SDL_version *mix_linked = Mix_Linked_Version();

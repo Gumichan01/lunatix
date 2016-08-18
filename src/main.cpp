@@ -67,7 +67,7 @@ int main()
         cout << gp.toString() << endl;
     }
 
-    // Information about the engine
+    // Information about the library
     LX_EngineInfo();
     LX_Quit();
     return 0;
