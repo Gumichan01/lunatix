@@ -12,7 +12,7 @@
 
 # Makefile - LunatiX Engine
 
-.PHONY: clean doc test
+.PHONY: clean documentation test
 
 
 #
@@ -707,7 +707,7 @@ test-thread.o : $(TEST_PATH)test-thread.cpp
 #                                    #
 ######################################
 
-doc : $(DOXY_FILE)
+documentation : $(DOXY_FILE)
 	@echo "Generating the doxygen file from "$<
 	@doxygen $<
 
