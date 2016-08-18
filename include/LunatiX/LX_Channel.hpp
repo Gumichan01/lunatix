@@ -22,6 +22,7 @@
 
 #include <LunatiX/LX_Sync.hpp>
 #include <queue>
+#include <vector>
 
 namespace LX_Multithreading
 {
@@ -40,8 +41,10 @@ protected:
 public:
 
     LX_Channel();
-    bool send(T& data);
+    bool send(const T& data);
     bool recv(T& data);
+    bool vsend(const std::vector<T>& vec);
+    bool vrecv(std::vector<T>& vec, const unsigned long nb);
     void close();
     ~LX_Channel();
 };
