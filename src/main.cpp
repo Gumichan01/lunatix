@@ -2,29 +2,23 @@
     Main file for the demo
 */
 
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/LX_Library.hpp>
+#include <LunatiX/LX_Version.hpp>
+#include <LunatiX/LX_Window.hpp>
+#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_Log.hpp>
 
-static const int W = 256;
-static const int H = 256;
 
-using namespace std;
-using namespace LX_Graphics;
-using namespace LX_FileIO;
-using namespace LX_VersionInfo;
-
-void inputTextExperiment();
-
-#if defined(__WIN32__)
 int main(int argc, char** argv)
-#else
-int main()
-#endif
 {
-    LX_Log::setDebugMode();
+    static const int W = 256;
+    static const int H = 256;
+    bool go = true;
 
     if(!LX_Init())
     {
-        cerr << "Cannot load the library: " << LX_GetError() << endl;
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Cannot load the library: %s",
+                            LX_GetError());
         return -1;
     }
 
@@ -36,39 +30,31 @@ int main()
     w.setWindowSize(W,H);
     SDL_Delay(100);
 
+    SDL_Event event;
+    LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+
+    while(go)
     {
-        bool go = true;
-        SDL_Event event;
-        LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+        while(SDL_PollEvent(&event))
+        {
+            switch(event.type)
+            {
+            case SDL_QUIT :
+                go = false;
+                break;
+            default :
+                break;
+            }
+        }
+
         w.clearWindow();
         sprite.draw(&position);
         w.update();
-
-        while(go)
-        {
-            while(SDL_PollEvent(&event))
-            {
-                switch(event.type)
-                {
-                case SDL_QUIT :
-                    go = false;
-                    break;
-                default :
-                    break;
-                }
-            }
-            SDL_Delay(33);
-        }
-    }
-
-    if(LX_Device::numberOfDevices() > 0)
-    {
-        LX_Device::LX_Gamepad gp;
-        cout << gp.toString() << endl;
+        SDL_Delay(33);
     }
 
     // Information about the library
-    LX_EngineInfo();
+    LX_VersionInfo::LX_EngineInfo();
     LX_Quit();
     return 0;
 }
