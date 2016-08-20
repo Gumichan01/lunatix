@@ -144,7 +144,7 @@ void test_mouse(void)
 
     c.setMouse();
 
-    LX_Log::log("Try to get the haptic feddback of the mouse, if possible");
+    LX_Log::log("Try to get the haptic feedback of the mouse, if possible");
 
     if(LX_Device::mouseIsHaptic())
     {
@@ -158,6 +158,7 @@ void test_mouse(void)
             LX_Log::log("SUCCESS - OK");
         }
 
+        delete h;
     }
     else
     {
