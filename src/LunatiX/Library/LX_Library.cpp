@@ -20,12 +20,10 @@
 */
 
 #include <LunatiX/LX_Library.hpp>
-#include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Mixer.hpp>
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_OpenGL.hpp>
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
