@@ -41,14 +41,14 @@ LX_MusicException::~LX_MusicException() noexcept {}
 
 /* LX_Music */
 
-LX_Music::LX_Music(std::string& filename) : _music(nullptr)
+LX_Music::LX_Music(std::string& filename) : _music(nullptr), _filename(filename)
 {
     if(load_(filename) == false)
         throw LX_MusicException(LX_GetError());
 }
 
 
-LX_Music::LX_Music(UTF8string& filename) : _music(nullptr)
+LX_Music::LX_Music(UTF8string& filename) : _music(nullptr), _filename(filename.utf8_str())
 {
     if(load_(filename.utf8_str()) == false)
         throw LX_MusicException(LX_GetError());
@@ -63,13 +63,16 @@ bool LX_Music::load_(std::string filename)
     if(_music == nullptr)
         return false;
 
+    _filename = filename;
     return true;
 }
+
 
 void LX_Music::fadeIn(int ms)
 {
     Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
 }
+
 
 void LX_Music::fadeInPos(int ms,int pos)
 {
@@ -108,6 +111,15 @@ void LX_Music::stop(void)
 {
     if(Mix_PlayingMusic())
         Mix_HaltMusic();
+}
+
+
+const libtagpp::Tag& LX_Music::getInfo()
+{
+    if(!_tag.readTag(_filename))
+        LX_SetError("Cannot get metadata");
+
+    return _tag;
 }
 
 

@@ -23,6 +23,7 @@
 
 #include "LX_Sound.hpp"
 
+#include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <SDL2/SDL_mixer.h>
 
 
@@ -63,6 +64,8 @@ public :
 class LX_Music : public virtual LX_Sound
 {
     Mix_Music *_music;
+    libtagpp::Tag _tag;
+    std::string _filename;
 
     LX_Music(LX_Music& m);
     LX_Music& operator =(LX_Music& m);
@@ -171,6 +174,14 @@ public:
     *   Stop the music
     */
     void stop(void);
+
+    /**
+    *   @fn const libtagpp::Tag& getInfo()
+    *   Get information about the current file
+    *
+    *   @return The metadata
+    */
+    const libtagpp::Tag& getInfo();
 
     /**
     *   @fn ~LX_Music(void)
