@@ -147,7 +147,8 @@ SDL_GLContext getCurrentContext();
 *
 *   Get the swap interval for the current OpenGL context
 *
-*   @return - LX_GL_NO_VSYNC if there is no Vertical synchronization
+*   @return
+*           - LX_GL_NO_VSYNC if there is no Vertical synchronization
 *           - LX_GL_VSYNC if the swap is synchonized with the vertical retrace
 *           - LX_GL_NOT_SUPPORTED if the swap interval is not supported.
 *             Call LX_GetError() for more information
@@ -161,7 +162,7 @@ int getSwapInterval();
 *
 *   Set the swap interval for the current OpenGL context
 *
-*   @param [in] interval One of the followinf values:
+*   @param [in] interval One of the following values:
 *           - ::LX_GL_NO_VSYNC : for immediate updates
 *           - ::LX_GL_VSYNC    : for Vertical Synchronization (VSync)
 *           - ::LX_GL_TEARING  : for late swap tearing
@@ -189,7 +190,7 @@ bool setSwapInterval(int interval);
 *
 *   Get the actual value for an attribute from the current context
 *
-*   @param [in] attr The [SDL_GLAttr] (http://wiki.libsdl.org/SDL_GLattr)
+*   @param [in] attr The [SDL_GLAttr](http://wiki.libsdl.org/SDL_GLattr)
 *               structure to query
 *   @param [out] value The reference that will be filled in with
 *                the current value of attr
