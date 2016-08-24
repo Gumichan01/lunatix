@@ -26,13 +26,13 @@ int main(int argc, char **argv)
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Audio ==== ");
-    test_audioInit();
-    test_channels();
+    /*test_audioInit();
+    test_channels();*/
     test_music();
-    test_chunk();
+    /*test_chunk();
     test_effects();
     test_volume();
-    test_volume2();
+    test_volume2();*/
     LX_Log::log(" ==== End Audio ==== ");
 
     LX_Quit();
@@ -188,10 +188,17 @@ void test_music()
             SDL_Delay(2000);
             music->stop();
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music stopped");
-
         }
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play music KO");
+
+        const libtagpp::Tag& tag = music->getInfo();
+        LX_Log::log("================================");
+        LX_Log::log("Title - %s",tag.title());
+        LX_Log::log("Artist - %s",tag.artist());
+        LX_Log::log("Album - %s",tag.album());
+        LX_Log::log("Year - %s",tag.year());
+        LX_Log::log("================================");
 
         delete music;
     }
