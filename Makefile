@@ -47,6 +47,7 @@ LIBRARIES_I_DIR=./include/
 LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
 UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
 TINYTHREAD_I_PATH=$(UTILS_I_PATH)tinythread/
+LIBTAGSPP_I_PATH=$(UTILS_I_PATH)libtagspp/
 SDL2_I_PATH=`pkg-config --cflags sdl2 SDL2_image SDL2_mixer SDL2_ttf`
 
 # Path to the different modules
@@ -66,6 +67,7 @@ TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
 VERSION_PATH=$(LUNATIX_PATH)Version/
 UTILS_PATH=$(LUNATIX_PATH)Utilities/
 TINYTHREAD_PATH=$(UTILS_PATH)tinythread/
+LIBTAGSPP_PATH=$(UTILS_PATH)libtagspp/
 
 # Path to the different object directories
 OBJ_MAIN_PATH=$(LUNATIX_BUILD_DIR)../
@@ -85,6 +87,7 @@ OBJ_TTF_PATH=$(LUNATIX_BUILD_DIR)TrueTypeFont/
 OBJ_VERSION_PATH=$(LUNATIX_BUILD_DIR)Version/
 OBJ_UTILS_PATH=$(LUNATIX_BUILD_DIR)Utilities/
 OBJ_TINYTHREAD_PATH=$(OBJ_UTILS_PATH)tinythread/
+OBJ_LIBTAGSPP_PATH=$(OBJ_UTILS_PATH)libtagspp/
 
 # Path to the different object files
 MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
@@ -106,7 +109,12 @@ $(OBJ_RANDOM_PATH)LX_Random.o $(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
 $(OBJ_SYSTEM_PATH)LX_Log.o $(OBJ_TEXT_PATH)LX_Text.o \
 $(OBJ_TTF_PATH)LX_TrueTypeFont.o $(OBJ_VERSION_PATH)LX_Version.o \
 $(OBJ_UTILS_PATH)utf8_string.o $(OBJ_UTILS_PATH)utf8_iterator.o \
-$(OBJ_TINYTHREAD_PATH)tinythread.o
+$(OBJ_TINYTHREAD_PATH)tinythread.o $(OBJ_LIBTAGSPP_PATH)8859.o \
+$(OBJ_LIBTAGSPP_PATH)flac.o $(OBJ_LIBTAGSPP_PATH)id3genres.o \
+$(OBJ_LIBTAGSPP_PATH)id3v1.o $(OBJ_LIBTAGSPP_PATH)id3v2.o \
+$(OBJ_LIBTAGSPP_PATH)m4a.o $(OBJ_LIBTAGSPP_PATH)tags.o \
+$(OBJ_LIBTAGSPP_PATH)utf16.o $(OBJ_LIBTAGSPP_PATH)vorbis.o \
+$(OBJ_LIBTAGSPP_PATH)libtagspp.o
 
 # Libraries
 LUNATIX_LIB_DIR=./lib/linux/
@@ -567,6 +575,10 @@ $(TINYTHREAD_I_PATH)tinythread.h $(TINYTHREAD_I_PATH)fast_mutex.h
 	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
 	@echo $<" -> "$@" done."
 	@echo " == TinyThread++ done == "
+
+
+$(OBJ_LIBTAGSPP_PATH)%.o: $(LIBTAGSPP_PATH)%.cpp
+	$(CC) -c $< -o $@ -I $(LIBTAGSPP_I_PATH) $(FLAGS)
 
 ##########
 #        #
