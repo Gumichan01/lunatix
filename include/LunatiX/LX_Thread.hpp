@@ -28,37 +28,93 @@ class LX_Thread_;
 /**
 *   @namespace LX_Multithreading
 *   @brief The Multithreading module
-*
-*   This namespace describes the multithreading module for anything
-*   related to it (threads, mutexes, semaphores)
-*   This module is entirely based on SDL2
-*
-*   @note This module is not available on Windows because the multithreading
-*   subsystem ,that uses the Multithread Windows API, is not stable.
 */
 namespace LX_Multithreading
 {
 
+/// Data used in argument in the function executed by the thread
 using LX_Data = void *;
+
+/// Signature of the function executed by the thread
 typedef void (* LX_ThreadFun) (void *data);
 
+/**
+*   @fn unsigned long getID();
+*   The the id of the current thread
+*   @return The thread identifier of the current thread
+*/
 unsigned long getID();
 
+/**
+*   @class LX_Thread
+*   @brief The thread
+*/
 class LX_Thread
 {
     LX_Thread_ *_th;
 
 public:
 
+    /**
+    *   @fn LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data)
+    *   @brief Constructor
+    *
+    *   @param fun The function launched by the thread
+    *   @param name The name of the thread
+    *   @param data argument of the function (fun)
+    *
+    *   @exception std::invalid_argument If the function given in argument is not defined
+    */
     LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data);
 
+    /**
+    *   @fn void start()
+    *
+    *   Start the thread
+    *
+    *   @note This function does nothing if the thread is already running
+    *   @sa startAndDetach
+    *   @sa join
+    */
     void start();
+    /**
+    *   @fn void startAndDetach()
+    *
+    *   Start the thread and detach it
+    *
+    *   @sa start
+    */
     void startAndDetach();
+    /**
+    *   @fn bool joinable()
+    *
+    *   Check if the thread is joinable (not joined and not detached)
+    *
+    *   @return TRUE if the thread is joinable, false otherwise
+    *   @sa join
+    */
     bool joinable();
+    /**
+    *   @fn void join()
+    *
+    *   Wait for the thread to terminate
+    *
+    *   @exception std::invalid_argument If the thread is not joinable (joined or detached)
+    *   @sa joinable
+    */
     void join();
 
+    /**
+    *   @fn const std::string& getName() const
+    *
+    *   Get the name of the thread
+    *
+    *   @return The name of the thread
+    *   @sa LX_Multithreading::getID
+    */
     const std::string& getName() const;
 
+    /// Destructor
     ~LX_Thread();
 };
 
