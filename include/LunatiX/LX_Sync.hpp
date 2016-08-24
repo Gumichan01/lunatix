@@ -74,7 +74,7 @@ public:
     *
     *   Wait on the current condition variable
     *
-    *   @param mutex The mutex to associate the condition variable with.
+    *   @param [in] mutex The mutex to associate the condition variable with.
     *
     *   @note 1 - The mutex given in argument must be locked.
     *         Otherwise the behaviour is undefined.

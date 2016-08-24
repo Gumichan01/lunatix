@@ -59,9 +59,9 @@ public:
     *   @fn LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data)
     *   @brief Constructor
     *
-    *   @param fun The function launched by the thread
-    *   @param name The name of the thread
-    *   @param data argument of the function (fun)
+    *   @param [in] fun The function launched by the thread
+    *   @param [in] name The name of the thread
+    *   @param [in] data argument of the function (fun)
     *
     *   @exception std::invalid_argument If the function given in argument is not defined
     */
