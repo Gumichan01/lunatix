@@ -27,6 +27,17 @@
 namespace LX_Multithreading
 {
 
+/**
+*   @brief Multithread synchronization primitive
+*
+*   @arg T Generic type that implements '='
+*
+*   This is a C++ implementation of the channel
+*   introduced by the Go language.
+*
+*   See this link:
+*   - https://en.wikipedia.org/wiki/Go_(programming_language)#Concurrency:_goroutines_and_channels
+*/
 template <typename T>
 class LX_Channel
 {
@@ -40,12 +51,59 @@ protected:
 
 public:
 
+    /// Constructor
     LX_Channel();
+    /**
+    *   @fn bool send(const T& data)
+    *
+    *   Send data into the channel
+    *
+    *   @param [in] data Data to send
+    *
+    *   @return TRUE on success, FALSE if the channel is closed
+    */
     bool send(const T& data);
+    /**
+    *   @fn bool recv(T& data)
+    *
+    *   Receive data from the channel
+    *
+    *   @param [out] data Data to fill in
+    *
+    *   @return TRUE on success, FALSE if the channel is closed and empty
+    *   @note If no data is available yet, the calls blocks until
+    *         until thre is something to retrieve
+    */
     bool recv(T& data);
+    /**
+    *   @fn bool vsend(const std::vector<T>& vec)
+    *
+    *   Send multiple data into the channel
+    *
+    *   @param [in] vec list of data to send
+    *
+    *   @return TRUE on success, FALSE if the channel is closed
+    */
     bool vsend(const std::vector<T>& vec);
+    /**
+    *   @fn bool vrecv(std::vector<T>& vec, const unsigned long nb)
+    *
+    *   Receive multiple data from the channel
+    *
+    *   @param [out] vec list of data to send
+    *   @param [in] nb Number of data values
+    *
+    *   @return TRUE on success, FALSE if the channel is closed and empty
+    *
+    *   @note This functions can retrieve less data than expected
+    */
     bool vrecv(std::vector<T>& vec, const unsigned long nb);
+    /**
+    *   @fn void close()
+    *   Close the channel
+    */
     void close();
+    /// Destructor
     ~LX_Channel();
 };
 
