@@ -10,21 +10,21 @@ namespace
 
 struct Aux
 {
-	FILE * f;
+    FILE * f;
     libtagpp::Tag& tag;
 };
 
 int ctxread(Tagctx *ctx, void *buf, int cnt)
 {
-	Aux *aux = (Aux *) ctx->aux;
-	return fread(buf,1,cnt,aux->f);
+    Aux *aux = (Aux *) ctx->aux;
+    return fread(buf,1,cnt,aux->f);
 }
 
 int ctxseek(Tagctx *ctx, int offset, int whence)
 {
-	Aux *aux = (Aux *) ctx->aux;
+    Aux *aux = (Aux *) ctx->aux;
     fseek(aux->f, offset, whence);
-	return ftell(aux->f);
+    return ftell(aux->f);
 }
 
 inline const char * sec_(int second)
@@ -91,9 +91,7 @@ const char * Properties::duration() const
     if(hour > 0)
         ss << hour << ":" << minute_(minute) << minute << ":" << sec_(second) << second;
     else if(minute > 0)
-    {
         ss << minute << ":" << sec_(second) << second;
-    }
     else
         ss << second << "s";
 
@@ -117,16 +115,35 @@ void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
 
     switch(t)
     {
-        case Tartist: aux->tag._artist = v; break;
-        case Talbum: aux->tag._album = v; break;
-        case Ttitle: aux->tag._title = v; break;
-        case Tdate: aux->tag._year = v; break;
-        case Ttrack: aux->tag._track = v; break;
-        case Tgenre: aux->tag._genre = v; break;
-        case Talbumgain: aux->tag._albumgain = v; break;
-        case Talbumpeak: aux->tag._albumpeak = v; break;
-        case Ttrackgain: aux->tag._trackgain = v; break;
-        default: break;
+    case Tartist:
+        aux->tag._artist = v;
+        break;
+    case Talbum:
+        aux->tag._album = v;
+        break;
+    case Ttitle:
+        aux->tag._title = v;
+        break;
+    case Tdate:
+        aux->tag._year = v;
+        break;
+    case Ttrack:
+        aux->tag._track = v;
+        break;
+    case Tgenre:
+        aux->tag._genre = v;
+        break;
+    case Talbumgain:
+        aux->tag._albumgain = v;
+        break;
+    case Talbumpeak:
+        aux->tag._albumpeak = v;
+        break;
+    case Ttrackgain:
+        aux->tag._trackgain = v;
+        break;
+    default:
+        break;
     }
 }
 
@@ -135,8 +152,8 @@ bool Tag::readTag(const std::string& filename)
 {
     const char * f = filename.c_str();
     char buf[256];
-	Aux aux = { NULL, *this };
-	Tagctx ctx = { NULL, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf) };
+    Aux aux = { NULL, *this };
+    Tagctx ctx = { NULL, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf) };
 
     if((aux.f = fopen(f, "rb")) == NULL)
     {

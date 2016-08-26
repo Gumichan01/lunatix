@@ -19,11 +19,11 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long long uvlong;
 
-#include "tags.h"
+#include <LunatiX/utils/libtagspp/tags.h>
 
 enum
 {
-	Numgenre = 192,
+    Numgenre = 192,
 };
 
 extern const char *id3genres[Numgenre];
