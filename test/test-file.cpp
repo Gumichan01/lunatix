@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <iostream>
 #include <stdexcept>
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 
 #define N 4
 

@@ -1,5 +1,5 @@
-#ifndef LUNATIX_ENGINE_H_INCLUDED
-#define LUNATIX_ENGINE_H_INCLUDED
+#ifndef LUNATIX_H_INCLUDED
+#define LUNATIX_H_INCLUDED
 
 
 /*
@@ -14,7 +14,7 @@
 */
 
 /**
-*    @file Lunatix_engine.hpp
+*    @file Lunatix.hpp
 *    @brief The header file of the LunatiX
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.8
@@ -71,4 +71,4 @@
 
 
 
-#endif // LUNATIX_ENGINE_H_INCLUDED
+#endif // LUNATIX_H_INCLUDED

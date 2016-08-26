@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 #include <stdexcept>
 #include <sstream>
 

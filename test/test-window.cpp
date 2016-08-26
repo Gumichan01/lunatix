@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 #include <LunatiX/LX_Image.hpp>
 #include <SDL2/SDL_image.h>
 #include <GL/glu.h>

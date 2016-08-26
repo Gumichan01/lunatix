@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 #include <cstring>
 
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback

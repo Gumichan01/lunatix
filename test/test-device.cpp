@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstring>
 
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 
 #define STRING_SIZE 256
 

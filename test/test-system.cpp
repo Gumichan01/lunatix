@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 
 using namespace std;
 using namespace LX_SystemInfo;

@@ -1,6 +1,6 @@
 
 
-#include <LunatiX/Lunatix_engine.hpp>
+#include <LunatiX/Lunatix.hpp>
 #include <iostream>
 #include <string>
 
@@ -26,13 +26,13 @@ int main(int argc, char **argv)
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Audio ==== ");
-    /*test_audioInit();
-    test_channels();*/
+    test_audioInit();
+    test_channels();
     test_music();
-    /*test_chunk();
+    test_chunk();
     test_effects();
     test_volume();
-    test_volume2();*/
+    test_volume2();
     LX_Log::log(" ==== End Audio ==== ");
 
     LX_Quit();
