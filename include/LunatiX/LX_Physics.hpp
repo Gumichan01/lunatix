@@ -52,7 +52,7 @@ unsigned int euclide_square_distance(const int x1,const int y1,const int x2,cons
 
 /**
 *    @fn float euclide_distance(const int x1, const int y1,
-*                              const int x2, const int y2)
+*                               const int x2, const int y2)
 *
 *    This function calculates the euclidean distance with accuracy
 *
@@ -68,7 +68,7 @@ unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
 
 /**
 *    @fn unsigned int euclide_square_distance(const LX_Point& p1,
-*                                            const LX_Point& p2)
+*                                             const LX_Point& p2)
 *
 *    This function calculates the euclidean square distance
 *
@@ -99,7 +99,7 @@ float euclide_distance(const LX_Point& p1,const LX_Point& p2);
 
 /**
 *    @fn bool collisionPointRect(const int x_pos, const int y_pos,
-*                               const LX_AABB& rect)
+*                                const LX_AABB& rect)
 *
 *    Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
@@ -128,7 +128,7 @@ bool collisionPointRect(const LX_Point& p,const LX_AABB& rect);
 
 /**
 *    @fn bool collisionPointCircle(const int x_pos, const int y_pos,
-*                                 const LX_Circle& circle)
+*                                  const LX_Circle& circle)
 *
 *    Check the collision between a point and a circle
 *
@@ -183,7 +183,7 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2);
 
 /**
 *    @fn bool collisionSegCircle(const LX_Circle& circle,
-*                               const LX_Point& A, const LX_Point& B)
+*                                const LX_Point& A, const LX_Point& B)
 *
 *    Check the collision between a circle and the [AB] segment
 *

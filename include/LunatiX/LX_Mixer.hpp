@@ -43,7 +43,7 @@ class LX_FileBuffer;
 
 /**
 *   @namespace LX_Mixer
-*   @brief The mixer module
+*   @brief The audio module
 */
 namespace LX_Mixer
 {
