@@ -3,9 +3,8 @@
 */
 
 #include <LunatiX/LX_Library.hpp>
+#include <LunatiX/LX_Graphics.hpp>
 #include <LunatiX/LX_Version.hpp>
-#include <LunatiX/LX_Window.hpp>
-#include <LunatiX/LX_Image.hpp>
 #include <LunatiX/LX_Log.hpp>
 
 

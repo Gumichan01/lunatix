@@ -32,48 +32,41 @@
 #endif
 
 // Initialization
-#include "LX_Library.hpp"
-#include "LX_Config.hpp"
-#include "LX_Version.hpp"
+#include <LunatiX/LX_Library.hpp>
+#include <LunatiX/LX_Version.hpp>
 
 // Graphics
-#include "LX_Image.hpp"
-#include "LX_OpenGL.hpp"
-#include "LX_TrueTypeFont.hpp"
-#include "LX_Window.hpp"
-#include "LX_WindowManager.hpp"
+#include <LunatiX/LX_Graphics.hpp>
 
 // Audio
-#include "LX_Chunk.hpp"
-#include "LX_Mixer.hpp"
-#include "LX_Music.hpp"
+#include <LunatiX/LX_Audio.hpp>
 
 // Game controller
-#include "LX_Device.hpp"
-#include "LX_Gamepad.hpp"
-#include "LX_Haptic.hpp"
+#include <LunatiX/LX_Device.hpp>
+#include <LunatiX/LX_Gamepad.hpp>
+#include <LunatiX/LX_Haptic.hpp>
 
 // Physics
-#include "LX_Particle.hpp"
-#include "LX_ParticleSystem.hpp"
-#include "LX_Physics.hpp"
-#include "LX_Polygon.hpp"
+#include <LunatiX/LX_Particle.hpp>
+#include <LunatiX/LX_ParticleSystem.hpp>
+#include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Polygon.hpp>
 
 // System
-#include "LX_Channel.hpp"
-#include "LX_Error.hpp"
-#include "LX_FileIO.hpp"
-#include "LX_FileBuffer.hpp"
-#include "LX_Log.hpp"
-#include "LX_MessageBox.hpp"
-#include "LX_Random.hpp"
-#include "LX_Sync.hpp"
-#include "LX_SystemInfo.hpp"
-#include "LX_Thread.hpp"
+#include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_FileIO.hpp>
+#include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_Log.hpp>
+#include <LunatiX/LX_MessageBox.hpp>
+#include <LunatiX/LX_Random.hpp>
+#include <LunatiX/LX_SystemInfo.hpp>
+
+// Multithread
+#include <LunatiX/LX_Multithread.hpp>
 
 // Utils
-#include "LX_Text.hpp"
-#include "utils/utf8_string.hpp"
+#include <LunatiX/LX_Text.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 
 
 
