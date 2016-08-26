@@ -588,7 +588,10 @@ $(TINYTHREAD_I_PATH)tinythread.h $(TINYTHREAD_I_PATH)fast_mutex.h
 
 
 $(OBJ_LIBTAGSPP_PATH)%.o: $(LIBTAGSPP_PATH)%.cpp
-	$(CC) -c $< -o $@ -I $(LIBTAGSPP_I_PATH) $(FLAGS)
+	@mkdir -p $(OBJ_LIBTAGSPP_PATH)
+	@echo $<" -> "$@
+	@$(CC) -c $< -o $@ -I $(LIBRARIES_I_DIR) $(CFLAGS)
+	@echo $<" -> "$@" done."
 
 ##########
 #        #
