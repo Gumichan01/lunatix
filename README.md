@@ -21,7 +21,16 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 ## Features ##
 
-**TODO**
+- 2D hardware acceleration
+- 2D basic animation
+- Support for OpenGL 3.0+
+- Support for Multiple windows
+- Collision detection
+- Basic particle system
+- Multithreading
+- Text input
+- Gamepad support
+- many other things...
 
 ## Examples ##
 
@@ -115,7 +124,7 @@ installed.
 | SDL2_image |      2.0.0+     |
 |  SDL2_TTF  |      2.0.12+    |
 | SDL2_Mixer |      2.0.2+     |
-|   OpenGL   |       3.1+      |
+|   OpenGL   |       3.0+      |
 
 
 If you want to generate the library libraries you just need to execute
