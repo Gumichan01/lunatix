@@ -12,6 +12,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+/**
+*    @file LX_Multithread.hpp
+*    @brief The interface of LX_Multithreading
+*    @author Luxon Jean-Pierre(Gumichan01)
+*    @version 0.8
+*
+*/
+
 #include "LX_Channel.hpp"
 #include "LX_Thread.hpp"
 #include "LX_Sync.hpp"

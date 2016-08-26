@@ -12,6 +12,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+/**
+*    @file LX_Audio.hpp
+*    @brief The interface of LX_Mixer
+*    @author Luxon Jean-Pierre(Gumichan01)
+*    @version 0.8
+*
+*/
+
 #include "LX_Chunk.hpp"
 #include "LX_Mixer.hpp"
 #include "LX_Music.hpp"

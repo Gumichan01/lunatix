@@ -12,6 +12,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+/**
+*    @file LX_Graphics.hpp
+*    @brief The interface of LX_Graphics
+*    @author Luxon Jean-Pierre(Gumichan01)
+*    @version 0.8
+*
+*/
+
 #include "LX_Image.hpp"
 #include "LX_OpenGL.hpp"
 #include "LX_TrueTypeFont.hpp"
