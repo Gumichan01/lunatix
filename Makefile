@@ -93,6 +93,7 @@ OBJ_LIBTAGSPP_PATH=$(OBJ_UTILS_PATH)libtagspp/
 MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
 OBJ_FILES=$(OBJ_DEVICE_PATH)LX_Device.o \
 $(OBJ_DEVICE_PATH)LX_Gamepad.o $(OBJ_DEVICE_PATH)LX_Haptic.o \
+$(OBJ_DEVICE_PATH)LX_Mouse.o \
 $(OBJ_FILEIO_PATH)LX_FileIO.o $(OBJ_FILEIO_PATH)LX_FileBuffer.o \
 $(OBJ_GRAPHICS_PATH)LX_OpenGL.o $(OBJ_GRAPHICS_PATH)LX_Window.o \
 $(OBJ_GRAPHICS_PATH)LX_WindowManager.o $(OBJ_GRAPHICS_PATH)LX_Image.o \
@@ -225,6 +226,15 @@ LX_Haptic.o : $(OBJ_DEVICE_PATH)LX_Haptic.o
 
 $(OBJ_DEVICE_PATH)LX_Haptic.o : $(DEVICE_PATH)LX_Haptic.cpp \
 $(LUNATIX_I_PATH)LX_Haptic.hpp $(LUNATIX_I_PATH)LX_Device.hpp
+	@mkdir -p $(OBJ_DEVICE_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+LX_Mouse.o : $(OBJ_DEVICE_PATH)LX_Mouse.o
+
+$(OBJ_DEVICE_PATH)LX_Mouse.o: $(DEVICE_PATH)LX_Mouse.cpp \
+$(LUNATIX_I_PATH)LX_Mouse.hpp
 	@mkdir -p $(OBJ_DEVICE_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)

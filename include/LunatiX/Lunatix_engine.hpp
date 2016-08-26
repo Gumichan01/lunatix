@@ -43,6 +43,7 @@
 
 // Game controller
 #include <LunatiX/LX_Device.hpp>
+#include <LunatiX/LX_Mouse.hpp>
 #include <LunatiX/LX_Gamepad.hpp>
 #include <LunatiX/LX_Haptic.hpp>
 

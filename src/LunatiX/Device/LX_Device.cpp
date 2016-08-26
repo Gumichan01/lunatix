@@ -19,7 +19,6 @@
 */
 
 #include <LunatiX/LX_Device.hpp>
-#include <LunatiX/LX_Image.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 #include <SDL2/SDL_mouse.h>
@@ -30,31 +29,6 @@ const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickGUID
 
 namespace LX_Device
 {
-
-LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
-    : _cursor(nullptr)
-{
-    _cursor = SDL_CreateColorCursor(surface._surface,hot_x,hot_y);
-}
-
-
-bool LX_Mouse::isOpen()
-{
-    return _cursor != nullptr;
-}
-
-
-void LX_Mouse::setMouse()
-{
-    SDL_SetCursor(_cursor);
-}
-
-
-LX_Mouse::~LX_Mouse()
-{
-    SDL_FreeCursor(_cursor);
-}
-
 
 int numberOfDevices(void)
 {
