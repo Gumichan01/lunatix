@@ -45,7 +45,7 @@ class LX_ConfigurationException : public std::exception
 
 public :
 
-    /// Construct the exception
+    /// Constructor
     LX_ConfigurationException(UTF8string err);
 
     /**
@@ -55,7 +55,7 @@ public :
     */
     const char * what() const noexcept;
 
-    /// Destroy the exception
+    /// Destructor
     ~LX_ConfigurationException() noexcept;
 };
 
@@ -71,6 +71,8 @@ class LX_Configuration
     LX_Configuration();
     LX_Configuration(LX_Configuration& c);
     LX_Configuration& operator =(LX_Configuration& c);
+    ~LX_Configuration();
+
     void loadSDLFlags_();
 
 public :
@@ -212,7 +214,6 @@ public :
     */
     int getWinHeight();
 
-    ~LX_Configuration();
 };
 
 };

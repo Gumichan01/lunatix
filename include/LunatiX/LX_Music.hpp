@@ -41,15 +41,15 @@ class LX_MusicException : public std::exception
 
 public :
 
-    /// Construct the exception
+    /// Constructor
     LX_MusicException(std::string err);
-    /// Construct the exception by copy
+    /// Copy constructor
     LX_MusicException(const LX_MusicException& me);
 
     /// Get the error message
     const char * what() const noexcept;
 
-    /// Destroy the exception
+    /// Destructor
     ~LX_MusicException() noexcept;
 };
 
@@ -57,9 +57,6 @@ public :
 /**
 *   @class LX_Music
 *   @brief The music class
-*
-*   This class is a high level description of the Mix_Music type
-*
 */
 class LX_Music : public virtual LX_Sound
 {
@@ -78,8 +75,7 @@ public:
 
     /**
     *   @fn LX_Music(std::string& filename)
-    *
-    *   Create the instance loading a music file
+    *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
@@ -88,8 +84,7 @@ public:
 
     /**
     *   @fn LX_Music(UTF8string& filename)
-    *
-    *   Create the instance loading a music file
+    *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
@@ -99,7 +94,7 @@ public:
     /**
     *   @fn void fadeIn(int ms)
     *
-    *   Fade in the current Music over some milliseconds of time
+    *   Fade in the current music over some milliseconds of time
     *
     *   @param [in] ms Milliseconds for the fade-in effect to complete
     *
@@ -113,7 +108,7 @@ public:
     /**
     *   @fn void fadeInPos(int ms,int pos)
     *
-    *   Fade in the current Music over some milliseconds of time
+    *   Fade in the current music over some milliseconds of time
     *
     *   @param [in] ms Milliseconds for the fade-in effect to complete
     *   @param [in] pos The position to start the music
@@ -145,7 +140,6 @@ public:
     *   @return TRUE on success, FALSE otherwise
     *
     *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP
-    *
     */
     bool play(void);
 
@@ -178,18 +172,13 @@ public:
     /**
     *   @fn const libtagpp::Tag& getInfo()
     *   Get information about the current file
-    *
     *   @return The metadata
     */
     const libtagpp::Tag& getInfo();
 
-    /**
-    *   @fn ~LX_Music(void)
-    *   Destroy the instance
-    */
+    /// Destructor
     ~LX_Music();
 };
-
 
 };
 

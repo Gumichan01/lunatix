@@ -42,6 +42,7 @@ public:
 
     /**
     *   @fn LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
+    *   @brief Constructor
     *
     *   Construct the mouse cursor using a surface and the coordinates of
     *   the mouse clicking zone
@@ -64,6 +65,7 @@ public:
     *   Activate the current mouse
     */
     void setMouse();
+
     /// Destructor
     ~LX_Mouse();
 };

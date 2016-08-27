@@ -51,6 +51,7 @@ public:
     *   @param [in] cursor The position of the cursor on the string
     */
     virtual void operator ()(UTF8string& u8str, size_t cursor = 0) = 0;
+    /// Destructor
     virtual ~LX_RedrawCallback();
 };
 
@@ -79,20 +80,38 @@ public:
 *       // Define and implement a subclass of LX_RedrawCallback
 *       class FuncDraw : public LX_RedrawCallback
 *       {
+*           LX_Win::LX_Window& _w;
+*           LX_TrueTypeFont::LX_Font _font;
+*
 *       public:
 *
 *           ...
+*
 *           void operator ()(UTF8String& u8str)
 *           {
-*               // Do something
+*               LX_Graphics::LX_BlendedTextImage img(_font,_w);
+*
+*               _w.clearWindow();
+*
+*               if(!u8str.utf8_empty())
+*               {
+*                   img.setText(u8str,24);
+*                   img.setPosition(100,100);
+*                   img.draw();
+*               }
+*                   _w.update();
 *           }
+*
 *           ...
+*
 *       }
 *
 *       ...
 *
 *       // In a function that uses the callback
+*
 *       ...
+*
 *       void textInput()
 *       {
 *           FuncDraw callbck;

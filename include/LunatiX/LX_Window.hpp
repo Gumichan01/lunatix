@@ -110,15 +110,15 @@ class LX_WindowException : public std::exception
 
 public :
 
-    /// Construct the exception
+    /// Constructor
     LX_WindowException(std::string err);
-    /// Construct the exception by copy
+    /// Copy constructor
     LX_WindowException(const LX_WindowException& w);
 
     /// Get the error message
     const char * what() const noexcept;
 
-    /// Destroy the exception
+    /// Destructor
     ~LX_WindowException() noexcept;
 };
 
@@ -166,6 +166,7 @@ public :
 
     /**
     *   @fn LX_Window(LX_WindowInfo &info)
+    *   @brief Constructor
     *
     *   Create a window using information from the struture given in argument
     *
@@ -413,11 +414,7 @@ public :
     */
     bool glMakeCurrent();
 
-    /**
-    *   @fn ~LX_Window()
-    *
-    *   Destroy the window instance
-    */
+    /// Destructor
     ~LX_Window();
 };
 

@@ -75,6 +75,7 @@ public :
 
     /**
     *   @fn LX_Haptic(int index)
+    *   @brief Constructor
     *
     *   Create the instance of the haptic system using the index
     *
@@ -84,6 +85,7 @@ public :
     LX_Haptic(int index);
     /**
     *   @fn LX_Haptic(SDL_Joystick *joy)
+    *   @brief Constructor
     *
     *   Create the instance of the haptic device using the joystick
     *
@@ -93,6 +95,7 @@ public :
     LX_Haptic(SDL_Joystick *joy);
     /**
     *   @fn LX_Haptic(SDL_GameController *gc)
+    *   @brief Constructor
     *
     *   Create the instance of the haptic device using the game controller
     *
@@ -212,6 +215,7 @@ public :
     */
     int numberOfEffects(void);
 
+    /// Destructor
     ~LX_Haptic();
 };
 

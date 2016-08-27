@@ -44,15 +44,15 @@ class LX_ChunkException : public std::exception
 
 public :
 
-    /// Construct the exception
+    /// Constructor
     LX_ChunkException(std::string err);
-    /// Construct the exception by copy
+    /// Copy constructor
     LX_ChunkException(const LX_ChunkException& me);
 
     /// Get the error message
     const char * what() const noexcept;
 
-    /// Destroy the exception
+    /// Destructor
     ~LX_ChunkException() noexcept;
 };
 
@@ -78,6 +78,7 @@ public:
 
     /**
     *   @fn LX_Chunk(std::string& filename)
+    *   @brief Constructor
     *
     *   Construct the instance creating the Mix_Chunk instance from a file
     *
@@ -93,6 +94,7 @@ public:
 
     /**
     *   @fn LX_Chunk(UTF8string& filename)
+    *   @brief Constructor
     *
     *   Create the instance loading a chunk file
     *
@@ -170,10 +172,7 @@ public:
     */
     bool play(int channel,int loops,int ticks);
 
-    /**
-    *   @fn ~LX_Chunk()
-    *   Destroy the instance
-    */
+    /// Destructor
     ~LX_Chunk();
 };
 

@@ -75,6 +75,7 @@ public :
 
     /**
     *   @fn LX_FileBuffer(const std::string filename)
+    *   @brief Constructor
     *
     *   Build the instance of the file buffer
     *
@@ -88,6 +89,7 @@ public :
 
     /**
     *   @fn LX_FileBuffer(const UTF8string& filename)
+    *   @brief Constructor
     *
     *   Build the instance of the file buffer
     *
@@ -119,12 +121,7 @@ public :
     */
     const char * getFilename(void);
 
-    /**
-    *   @fn ~LX_FileBuffer()
-    *
-    *   Destroy the file buffer
-    *
-    */
+    /// Destructor
     ~LX_FileBuffer();
 };
 

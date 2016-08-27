@@ -43,6 +43,7 @@ protected:
 public:
 
     virtual bool play() = 0;                /**< @brief Play something  */
+    /// Destructor
     virtual ~LX_Sound();
 };
 

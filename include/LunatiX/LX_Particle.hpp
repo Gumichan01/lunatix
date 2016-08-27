@@ -60,6 +60,7 @@ public :
 
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b)
+    *   @brief Constructor
     *
     *   Create the instance using an AABB
     *

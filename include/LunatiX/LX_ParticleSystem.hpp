@@ -53,6 +53,7 @@ public:
 
     /**
     *   @fn LX_ParticleSystem(const unsigned int nbPart)
+    *   @brief Constructor
     *
     *   Create the instance with a number of particles
     *
@@ -63,12 +64,13 @@ public:
 
     /**
     *   @fn LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
+    *   @brief Constructor
     *
     *   Create the instance with a number of particles and the id of the window
     *
     *   @param [in] nbPart The number of particles to define in the system
     *   @param [in] id The id of the window in the LX_WindowManager
-    *           to get the rendeering context
+    *           to get the rendering context
     *
     */
     LX_ParticleSystem(const unsigned int nbPart,const unsigned int id);

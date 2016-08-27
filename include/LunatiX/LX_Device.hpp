@@ -78,7 +78,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 /**
 *   @fn int mouseCursorDisplay(int toggle)
 *
-*   Define is the cursor will be shown or not
+*   Define if the cursor will be shown or not
 *
 *   @param [in] toggle One of hese following values :
 *            1 to show it

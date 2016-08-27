@@ -89,6 +89,7 @@ public:
     /**
     *   @fn LX_Image(const std::string filename, LX_Win::LX_Window& w,
     *                Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *   @brief Constructor
     *
     *   Build an Image using a filename
     *
@@ -98,34 +99,34 @@ public:
     *
     *   |        Format Values        |                                              |
     *   |             ---             |                      ---                     |
-    *   | SDL_PIXELFORMAT_UNKNOWN      |                                              |
-    *   | SDL_PIXELFORMAT_INDEX1LSB      |                                              |
-    *   | SDL_PIXELFORMAT_INDEX1MSB      |                                              |
-    *   | SDL_PIXELFORMAT_INDEX4LSB      |                                              |
-    *   | SDL_PIXELFORMAT_INDEX4MSB      |                                              |
+    *   | SDL_PIXELFORMAT_UNKNOWN     |                                              |
+    *   | SDL_PIXELFORMAT_INDEX1LSB   |                                              |
+    *   | SDL_PIXELFORMAT_INDEX1MSB   |                                              |
+    *   | SDL_PIXELFORMAT_INDEX4LSB   |                                              |
+    *   | SDL_PIXELFORMAT_INDEX4MSB   |                                              |
     *   | SDL_PIXELFORMAT_INDEX8      |                                              |
     *   | SDL_PIXELFORMAT_RGB332      |  RGB: 2 bit for blue, 3 bits for the others  |
     *   | SDL_PIXELFORMAT_RGB444      |            RGB : 4 bits per channel          |
     *   | SDL_PIXELFORMAT_RGB555      |            RGB : 5 bits per channel          |
     *   | SDL_PIXELFORMAT_BGR555      |            BGR : 5 bits per channel          |
-    *   | SDL_PIXELFORMAT_ARGB4444      |            ARGB: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_RGBA4444      |            RGBA: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_ABGR4444      |            ABGR: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_BGRA4444      |            BGRA: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_ARGB1555      | ARGB: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_RGBA5551      | RGBA: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_ABGR1555      | ABGR: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_BGRA5551      | BGRA: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_ARGB4444    |            ARGB: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_RGBA4444    |            RGBA: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_ABGR4444    |            ABGR: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_BGRA4444    |            BGRA: 4 bits per channel          |
+    *   | SDL_PIXELFORMAT_ARGB1555    | ARGB: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_RGBA5551    | RGBA: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_ABGR1555    | ABGR: 1 bit for alpha, 5 bits for the others |
+    *   | SDL_PIXELFORMAT_BGRA5551    | BGRA: 1 bit for alpha, 5 bits for the others |
     *   | SDL_PIXELFORMAT_RGB565      | RGB: 6 bit for green, 5 bits for the others  |
     *   | SDL_PIXELFORMAT_BGR565      | BGR: 6 bit for green, 5 bits for the others  |
-    *   | SDL_PIXELFORMAT_RGB24          |                                              |
-    *   | SDL_PIXELFORMAT_BGR24          |                                              |
+    *   | SDL_PIXELFORMAT_RGB24       |                                              |
+    *   | SDL_PIXELFORMAT_BGR24       |                                              |
     *   | SDL_PIXELFORMAT_RGB888      |                                              |
-    *   | SDL_PIXELFORMAT_RGBX8888      |          RGBX: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_RGBX8888    |          RGBX: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_BGR888      |          BGR:  8 bits per channel            |
-    *   | SDL_PIXELFORMAT_BGRX8888      |          BGRX: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_ARGB8888      |          ARGB: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_RGBA8888      |          RGBA: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_BGRX8888    |          BGRX: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_ARGB8888    |          ARGB: 8 bits per channel            |
+    *   | SDL_PIXELFORMAT_RGBA8888    |          RGBA: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_ABGR8888    |          ABGR: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_BGRA8888    |          BGRA: 8 bits per channel            |
     *   | SDL_PIXELFORMAT_ARGB2101010 |                                              |
@@ -165,16 +166,16 @@ public:
     /**
     *   @fn bool bind(float *iw = nullptr, float *ih = nullptr)
     *
-    *   Bind an image (it internal texture) to the OpenGL context
+    *   Bind an image (its internal texture) to the OpenGL context
     *   of the OpenGl window where the image is drawn on
-    *   in order to use OpenGL functions.
+    *   in order to use the OpenGL functions.
     *
     *   @param [out] iw (Optional) a pointer to a float value of which will be
     *          filled with the texture width. See notes.
     *   @param [out] ih (Optional) a pointer to a float value which will be
     *          filled with the texture width. See notes.
     *
-    *   @return TRUE on success.FALSE if the operation is not supported.
+    *   @return TRUE on success. FALSE if the operation is not supported.
     *
     *   @note 1 - If provided, **iw** and **ih** will be filled with
     *         the width and height values suitable for the provided texture.
@@ -193,13 +194,12 @@ public:
 
     /**
     *   @fn bool unbind()
-    *
     *   Unbind an image
-    *
     *   @return TRUE on success.FALSE if the operation is not supported.
     */
     bool unbind();
 
+    /// Destructor
     virtual ~LX_Image();
 };
 
@@ -207,15 +207,13 @@ public:
 /**
 *   @class LX_Sprite
 *   @brief The sprite
-*
-*   This class describes a specific image : the sprite
 */
 class LX_Sprite: public LX_Image
 {
 
 public:
 
-    /// Sprite constuctor with the filename in any encoding
+    /// Sprite constuctor
     LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
@@ -273,6 +271,7 @@ public:
     */
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
 
+    /// Destructor
     virtual ~LX_Sprite();
 };
 
@@ -328,6 +327,7 @@ public:
     virtual void draw(LX_AABB * box, const double angle);
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
 
+    /// Destructor
     virtual ~LX_AnimatedSprite();
 };
 
@@ -336,7 +336,7 @@ public:
 *   @class LX_Surface
 *   @brief The Surface
 *
-*   This class describes a kind of image used in texture streaming: surface.
+*   This class describes the surface for the texture streaming.
 */
 class LX_Surface: private LX_Image
 {
@@ -346,7 +346,7 @@ class LX_Surface: private LX_Image
 
 public:
 
-    /// Surface constuctor with the filename in any encoding
+    /// Surface constuctor
     LX_Surface(const std::string filename, LX_Win::LX_Window& w,
                Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
@@ -360,6 +360,7 @@ public:
 
     virtual bool isOpen() const;
 
+    /// Destructor
     virtual ~LX_Surface();
 };
 
@@ -409,6 +410,7 @@ public:
     */
     void update();
 
+    /// Destructor
     virtual ~LX_StreamingImage();
 };
 
@@ -417,7 +419,7 @@ public:
 *   @class LX_TextImage
 *   @brief The text image
 *
-*   This abstract class describes an image build from a text
+*   This abstract class describes an image build from a text.
 */
 class LX_TextImage: public LX_Image
 {
@@ -435,9 +437,10 @@ public:
 
     /**
     *   @fn LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                    Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    *                    Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *   @brief Constructor
     *
-    *   @param [in] font The font that will be used for frawing the text
+    *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
     *               See LX_Image for more information
@@ -448,11 +451,12 @@ public:
 
     /**
     *   @fn LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
     *   @param [in] sz The size of the text
-    *   @param [in] font The font that will be used for frawing the text
+    *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
     *               See LX_Image for more information
@@ -463,11 +467,12 @@ public:
 
     /**
     *   @fn LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
     *   @param [in] sz The size of the text
-    *   @param [in] font The font that will be used for frawing the text
+    *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
     *               See LX_Image for more information
@@ -583,6 +588,7 @@ public:
     virtual void setText(const UTF8string& text, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);
 
+    /// Destructor
     virtual ~LX_SolidTextImage();
 };
 
@@ -648,6 +654,7 @@ public:
     virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);
 
+    /// Destructor
     virtual ~LX_ShadedTextImage();
 };
 
@@ -687,6 +694,7 @@ public:
     virtual void setText(const UTF8string& text, unsigned int sz = 0);
     virtual void setSize(unsigned int sz);
 
+    /// Destructor
     virtual ~LX_BlendedTextImage();
 };
 

@@ -44,16 +44,16 @@ class LX_PolygonException : public std::exception
 
 public :
 
-    /// Construct the exception
+    /// Constructor
     LX_PolygonException(std::string err);
 
-    /// Construct the exception by copy
+    /// Copy constructor
     LX_PolygonException(const LX_PolygonException& pex);
 
     /// Get the error message
     const char * what() const noexcept;
 
-    /// Destroy the exception
+    /// Destructor
     ~LX_PolygonException() noexcept;
 };
 

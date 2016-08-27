@@ -35,10 +35,14 @@ namespace LX_Log
 *   @brief The log categories of the program
 *
 *   Here are the default level priorities of each application category:
-*   - LX_LOG_APPLICATION INFO level
-*   - LX_LOG_APPLICATION WARN level
-*   - LX_LOG_TEST        VERBOSE level
-*   - All other          CRITICAL level
+*
+*   |      Category      |      Level     |
+*   |--------------------|----------------|
+*   | LX_LOG_APPLICATION | INFO level     |
+*   | LX_LOG_APPLICATION | WARN level     |
+*   | LX_LOG_TEST        | VERBOSE level  |
+*   | All other          | CRITICAL level |
+
 */
 enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
                   LX_LOG_ERROR = SDL_LOG_CATEGORY_ERROR,

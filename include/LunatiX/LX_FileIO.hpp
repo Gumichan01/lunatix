@@ -43,14 +43,14 @@ struct SDL_RWops;
 
 /**
 *   @namespace LX_FileIO
-*   @brief The Input/Output file module
+*   @brief The file Input/Output module
 */
 namespace LX_FileIO
 {
 
 /**
 *   @class IOException
-*   @brief The Input/Output exception
+*   @brief The Input/Output file exception
 *
 *   This exception class occured when
 *   there is a problem on the LX_File constructor
@@ -62,15 +62,15 @@ class IOException: public std::exception
 
 public :
 
-    /// Construct the Input/Output exception
+    /// Constructor
     IOException(std::string err);
-    /// Construct the Input/Output exception by copy
+    /// Copy cnstructor
     IOException(const IOException& io);
 
     /// Get the error message
     const char * what() const noexcept;
 
-    /// Destruction
+    /// Destructor
     ~IOException() noexcept;
 };
 
@@ -93,6 +93,7 @@ public :
 
     /**
     *   @fn LX_File(const std::string filename, const Uint32 mode)
+    *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -115,6 +116,7 @@ public :
 
     /**
     *   @fn LX_File(const UTF8string& filename, const Uint32 mode)
+    *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -143,9 +145,9 @@ public :
     *   @param [in] data_size The size of each object to read, in bytes
     *   @param [in] max_num The maximum number of objects to read
     *
-    *   @return The number of objects read. 0 at error or end of file
+    *   @return The number of objects that are read. 0 at error or end of file
     *
-    *   @note It can read less bytes than expected.
+    *   @note It can read less objects than *max_num*.
     */
     size_t read(void *ptr,size_t data_size,size_t max_num);
 
@@ -158,7 +160,7 @@ public :
     *   @param [in] data_size The size of each object to read, in bytes
     *   @param [in] num The maximum number of objects to read
     *
-    *   @return The number of objects read. 0 at error or end of file
+    *   @return The number of objects that are read. 0 at error or end of file
     *
     */
     size_t readExactly(void *ptr,size_t data_size,size_t num);
@@ -188,6 +190,7 @@ public :
     *   @return The number of characters written.
     *           This value will be less than the string length on error
     *
+    *   @sa read
     */
     size_t write(std::string str);
 
@@ -201,6 +204,7 @@ public :
     *
     *   @return The final offset in the data stream. -1 on error
     *
+    *   @sa read
     */
     Sint64 seek(Sint64 offset, int whence);
 
@@ -212,26 +216,20 @@ public :
     *   @return The current offset of the stream.
     *           -1 if the position cannot be determined
     *
+    *   @sa seek
     */
     Sint64 tell(void);
 
     /**
     *   @fn Sint64 size(void)
-    *
     *   Get the size of a file
-    *
-    *   @return The size of the file.
-    *           -1 on failure
-    *
+    *   @return The size of the file on success. -1 on failure
     */
     Sint64 size(void);
 
-
     /**
     *   @fn const char * getFilename(void)
-    *
     *   Get the name of the file the instance refers to
-    *
     *   @return The name of the file
     */
     const char * getFilename(void);
@@ -242,10 +240,7 @@ public :
     */
     void close(void);
 
-    /**
-    *   @fn ~LX_File()
-    *   Destroy the instance closing the file
-    */
+    /// Destructor
     ~LX_File();
 
     /**

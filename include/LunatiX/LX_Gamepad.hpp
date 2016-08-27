@@ -58,8 +58,7 @@ public :
 
     /**
     *   @fn LX_Gamepad(int index)
-    *
-    *   Load the gamepad
+    *   @brief Constructor
     *
     *   @param [in] index The index of the joystick to query
     *
@@ -127,7 +126,7 @@ public :
     *
     *   Get information about the gamepad
     *
-    *   @param [in,out] info The information structure to fill
+    *   @param [out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
     *           Call LX_GetError() to get the error message
     *
@@ -143,6 +142,7 @@ public :
     */
     UTF8string toString(void);
 
+    /// Destructor
     ~LX_Gamepad();
 };
 
