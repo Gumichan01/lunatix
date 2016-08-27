@@ -13,7 +13,7 @@ It contains these following modules:
 
 LunatiX also contains these modules:
 - LX\_Device: The library for Gamepads and mouse support
-- LX\_FileIO: The Input/Output file library
+- LX\_FileIO: The file Input/Output library
 - LX\_Multithreading: Multithreading support with synchronization primitives
 - LX\_Text: To handle text input
 
