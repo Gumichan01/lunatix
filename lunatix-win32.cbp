@@ -66,9 +66,9 @@
 			<Add directory="lib/win32" />
 		</Linker>
 		<Unit filename="include/LunatiX/LX_AABB.hpp" />
-		<Unit filename="include/LunatiX/LX_Channel.hpp" />
-		<Unit filename="include/LunatiX/LX_Channel.tpp">
-			<Option target="&lt;{~None~}&gt;" />
+		<Unit filename="include/LunatiX/LX_Audio.hpp" />
+		<Unit filename="include/LunatiX/LX_Channel.hpp">
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
@@ -78,6 +78,7 @@
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
 		<Unit filename="include/LunatiX/LX_Gamepad.hpp" />
+		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
 		<Unit filename="include/LunatiX/LX_Hitbox.hpp" />
 		<Unit filename="include/LunatiX/LX_Image.hpp" />
@@ -85,6 +86,8 @@
 		<Unit filename="include/LunatiX/LX_Log.hpp" />
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
 		<Unit filename="include/LunatiX/LX_Mixer.hpp" />
+		<Unit filename="include/LunatiX/LX_Mouse.hpp" />
+		<Unit filename="include/LunatiX/LX_Multithread.hpp" />
 		<Unit filename="include/LunatiX/LX_Music.hpp" />
 		<Unit filename="include/LunatiX/LX_OpenGL.hpp" />
 		<Unit filename="include/LunatiX/LX_Particle.hpp" />
@@ -103,6 +106,9 @@
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
 		<Unit filename="include/LunatiX/Lunatix_engine.hpp" />
+		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
+		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
+		<Unit filename="include/LunatiX/utils/libtagspp/tagspriv.h" />
 		<Unit filename="include/LunatiX/utils/tinythread/fast_mutex.h" />
 		<Unit filename="include/LunatiX/utils/tinythread/tinythread.h" />
 		<Unit filename="include/LunatiX/utils/utf8_iterator.hpp" />
@@ -110,6 +116,7 @@
 		<Unit filename="src/LunatiX/Device/LX_Device.cpp" />
 		<Unit filename="src/LunatiX/Device/LX_Gamepad.cpp" />
 		<Unit filename="src/LunatiX/Device/LX_Haptic.cpp" />
+		<Unit filename="src/LunatiX/Device/LX_Mouse.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileBuffer.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileIO.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Image.cpp" />
@@ -137,6 +144,16 @@
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/Text/LX_Text.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/8859.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/flac.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/id3genres.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/id3v1.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/id3v2.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/libtagspp.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/m4a.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/tags.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/utf16.cpp" />
+		<Unit filename="src/LunatiX/Utilities/libtagspp/vorbis.cpp" />
 		<Unit filename="src/LunatiX/Utilities/tinythread/tinythread.cpp" />
 		<Unit filename="src/LunatiX/Utilities/utf8_iterator.cpp" />
 		<Unit filename="src/LunatiX/Utilities/utf8_string.cpp" />
