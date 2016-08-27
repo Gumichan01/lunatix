@@ -28,6 +28,7 @@
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Error.hpp>
 
+using namespace LX_Config;
 using namespace LX_FileIO;
 
 namespace LX_TrueTypeFont

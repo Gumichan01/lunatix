@@ -29,6 +29,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <GL/glu.h>
 
+using namespace LX_Config;
 
 namespace
 {

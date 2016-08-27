@@ -25,6 +25,9 @@
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
 
+namespace LX_Config
+{
+
 // unique instance
 static LX_Configuration *instance = nullptr;
 
@@ -89,7 +92,7 @@ void LX_Configuration::destroy()
 
 void LX_Configuration::loadSDLFlags_()
 {
-    LX_ConfigLoader::loadSDLfileConfig(_conf);
+    LX_Config::loadSDLfileConfig(_conf);
     _conf.width  = CONF_WIDTH;
     _conf.height = CONF_HEIGHT;
 }
@@ -143,3 +146,5 @@ int LX_Configuration::getWinHeight()
 {
     return _conf.height;
 }
+
+};

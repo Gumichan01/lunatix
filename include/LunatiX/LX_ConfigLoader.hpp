@@ -24,11 +24,8 @@
 
 #define LX_SDL_FILE "config/lxsdl.cfg"
 
-/**
-*   @namespace LX_ConfigLoader
-*   @brief The configuration loader
-*/
-namespace LX_ConfigLoader
+
+namespace LX_Config
 {
 
 /**

@@ -42,7 +42,7 @@ const Uint32 GMASK = 0x00ff0000;
 const Uint32 BMASK = 0x0000ff00;
 const Uint32 AMASK = 0x000000ff;
 
-Uint32 generateFlags(LX_Configuration &config)
+Uint32 generateFlags(LX_Config::LX_Configuration &config)
 {
     Uint32 flag = 0x00000000;
 
@@ -75,7 +75,7 @@ void LX_initWindowInfo(LX_WindowInfo &info)
 
 void LX_loadWindowConfig(LX_WindowInfo &info)
 {
-    LX_Configuration *config = LX_Configuration::getInstance();
+    LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
 
     if(config == nullptr)
         LX_initWindowInfo(info);
@@ -148,7 +148,7 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
 void LX_Window::createRenderer_(bool accel)
 {
     Uint32 render_flag = 0x00000000;
-    LX_Configuration *config = LX_Configuration::getInstance();
+    LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
 
     // Hardware acceleration or software rendering
     if(accel)

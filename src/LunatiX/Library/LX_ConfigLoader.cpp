@@ -26,7 +26,7 @@
 #include <regex>
 
 
-namespace LX_ConfigLoader
+namespace LX_Config
 {
 
 void loadSDLfileConfig(LX_InternalConfig& config)

@@ -24,6 +24,13 @@
 #include <LunatiX/LX_ConfigLoader.hpp>
 
 /**
+*   @namespace LX_Config
+*   @brief The configuration loader
+*/
+namespace LX_Config
+{
+
+/**
 *   @class LX_ConfigurationException
 *   @brief The exception class of LX_Configuration
 *
@@ -59,7 +66,7 @@ public :
 */
 class LX_Configuration
 {
-    LX_ConfigLoader::LX_InternalConfig _conf;
+    LX_Config::LX_InternalConfig _conf;
 
     LX_Configuration();
     LX_Configuration(LX_Configuration& c);
@@ -208,4 +215,5 @@ public :
     ~LX_Configuration();
 };
 
+};
 #endif // LX_LUA_LAYER_H_INCLUDED
