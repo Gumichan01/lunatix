@@ -199,23 +199,22 @@ LX_Sprite::~LX_Sprite() {}
 /* LX_AnimatedSprite */
 
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-                                     std::vector<LX_AABB>& coord, Uint32 delay,
+                                     const std::vector<LX_AABB>& coord, const Uint32 delay,
                                      Uint32 format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                                     std::vector<LX_AABB>& coord, Uint32 delay,
-                                     Uint32 format)
+                                     const std::vector<LX_AABB>& coord,
+                                     const Uint32 delay, Uint32 format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
 
-LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer,
-                                     LX_Win::LX_Window& w,
-                                     std::vector<LX_AABB>& coord, Uint32 delay,
-                                     Uint32 format)
+LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+                                     const std::vector<LX_AABB>& coord,
+                                     const Uint32 delay, Uint32 format)
     : LX_Sprite(buffer,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 

@@ -282,9 +282,9 @@ public:
 *
 *   This class describes a sprite sheet. It is used for animation.
 */
-class LX_AnimatedSprite: protected LX_Sprite
+class LX_AnimatedSprite: public LX_Sprite
 {
-    std::vector<LX_AABB>& _coordinates;
+    const std::vector<LX_AABB> _coordinates;
     const size_t _SZ;
     Uint32 _delay;
     Uint32 _btime;
@@ -295,7 +295,7 @@ public:
 
     /**
     *   @fn LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-    *                         std::vector<LX_AABB>& coord, Uint32 delay,
+    *                         const std::vector<LX_AABB>& coord, const Uint32 delay,
     *                         Uint32 format=SDL_PIXELFORMAT_RGBA8888)
     *
     *   Build an animated sprite using a filename
@@ -309,17 +309,17 @@ public:
     *   @sa LX_Image
     */
     LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-                      std::vector<LX_AABB>& coord, Uint32 delay,
+                      const std::vector<LX_AABB>& coord, const Uint32 delay,
                       Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Animated Sprite constuctor with the filename (UTF-8)
     LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                      std::vector<LX_AABB>& coord, Uint32 delay,
+                      const std::vector<LX_AABB>& coord, const Uint32 delay,
                       Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Animated Sprite constuctor with a file buffer
     LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                      std::vector<LX_AABB>& coord, Uint32 delay,
+                      const std::vector<LX_AABB>& coord, const Uint32 delay,
                       Uint32 format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
