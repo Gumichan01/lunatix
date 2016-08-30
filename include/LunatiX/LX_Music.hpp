@@ -69,18 +69,18 @@ class LX_Music : public virtual LX_Sound
 
 protected:
 
-    bool load_(std::string filename);
+    bool load_(const std::string filename);
 
 public:
 
     /**
-    *   @fn LX_Music(std::string& filename)
+    *   @fn LX_Music(std::string filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
     */
-    LX_Music(std::string& filename);
+    LX_Music(const std::string filename);
 
     /**
     *   @fn LX_Music(UTF8string& filename)
@@ -89,7 +89,7 @@ public:
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
     */
-    LX_Music(UTF8string& filename);
+    LX_Music(const UTF8string& filename);
 
     /**
     *   @fn void fadeIn(int ms)

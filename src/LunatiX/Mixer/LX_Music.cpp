@@ -41,21 +41,23 @@ LX_MusicException::~LX_MusicException() noexcept {}
 
 /* LX_Music */
 
-LX_Music::LX_Music(std::string& filename) : _music(nullptr), _filename(filename)
+LX_Music::LX_Music(const std::string filename)
+    : _music(nullptr), _filename(filename)
 {
     if(load_(filename) == false)
         throw LX_MusicException(LX_GetError());
 }
 
 
-LX_Music::LX_Music(UTF8string& filename) : _music(nullptr), _filename(filename.utf8_str())
+LX_Music::LX_Music(const UTF8string& filename)
+    : _music(nullptr), _filename(filename.utf8_str())
 {
     if(load_(filename.utf8_str()) == false)
         throw LX_MusicException(LX_GetError());
 }
 
 
-bool LX_Music::load_(std::string filename)
+bool LX_Music::load_(const std::string filename)
 {
     Mix_FreeMusic(_music);
     _music = Mix_LoadMUS(filename.c_str());
