@@ -1,7 +1,5 @@
-
 #ifndef LX_AABB_H_INCLUDED
 #define LX_AABB_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -23,8 +21,26 @@
 *
 */
 
-#include <SDL2/SDL_rect.h>
+struct SDL_Rect;
 
-typedef SDL_Rect LX_AABB;   /**< The rectangle hitbox (SDL_Rect) */
+/**
+*   @struct LX_AABB
+*   @brief The Axis-Aligned Bounding Box (AABB)
+*/
+struct LX_AABB
+{
+    int x, y;
+    int w, h;
+};
+
+inline const SDL_Rect * toRect(const LX_AABB *box)
+{
+    return reinterpret_cast<const SDL_Rect *>(box);
+}
+
+inline SDL_Rect * toRect(LX_AABB *box)
+{
+    return reinterpret_cast<SDL_Rect *>(box);
+}
 
 #endif  /* LX_AABB_H_INCLUDED */

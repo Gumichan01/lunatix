@@ -196,7 +196,7 @@ void LX_Window::drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vect
 
 void LX_Window::drawRect(const LX_AABB& box)
 {
-    SDL_RenderDrawRect(_renderer,&box);
+    SDL_RenderDrawRect(_renderer,toRect(&box));
 }
 
 
@@ -251,7 +251,7 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 
 void LX_Window::fillRect(const LX_AABB& box)
 {
-    SDL_RenderFillRect(_renderer,&box);
+    SDL_RenderFillRect(_renderer,toRect(&box));
 }
 
 
@@ -332,13 +332,13 @@ void LX_Window::setWindowSize(int w, int h)
 
 bool LX_Window::setViewPort(LX_AABB * viewport)
 {
-    return SDL_RenderSetViewport(_renderer, viewport) == 0;
+    return SDL_RenderSetViewport(_renderer, toRect(viewport)) == 0;
 }
 
 
 void LX_Window::getViewPort(LX_AABB& viewport)
 {
-    SDL_RenderGetViewport(_renderer, &viewport);
+    SDL_RenderGetViewport(_renderer, toRect(&viewport));
 }
 
 
