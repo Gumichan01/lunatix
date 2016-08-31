@@ -416,8 +416,6 @@ void test_viewport(LX_Win::LX_Window *win)
 
 void test_winManager(LX_Win::LX_Window *win)
 {
-
-    SDL_Rect pos = {100,100,256,128};
     cout << " = TEST WinManager = " << endl;
 
     if(win == nullptr)
