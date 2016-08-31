@@ -5,6 +5,7 @@
 #include <LunatiX/LX_Library.hpp>
 #include <LunatiX/LX_Graphics.hpp>
 #include <LunatiX/LX_Version.hpp>
+#include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Log.hpp>
 
 
@@ -27,7 +28,7 @@ int main(int argc, char** argv)
     LX_Win::LX_Window w(info);              // Create the window with this configuration
 
     w.setWindowSize(W,H);
-    SDL_Delay(100);
+    LX_Timer::delay(100);
 
     SDL_Event event;
     LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
@@ -49,7 +50,7 @@ int main(int argc, char** argv)
         w.clearWindow();
         sprite.draw(&position);
         w.update();
-        SDL_Delay(33);
+        LX_Timer::delay(33);
     }
 
     // Information about the library
