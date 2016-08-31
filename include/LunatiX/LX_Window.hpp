@@ -26,9 +26,6 @@
 
 struct SDL_Window;
 struct SDL_Renderer;
-struct SDL_Surface;
-struct SDL_Texture;
-struct SDL_Rect;
 
 namespace LX_Graphics
 {
@@ -245,7 +242,7 @@ public :
     */
     void fillRect(const LX_AABB& box);
     /**
-    *   @fn void fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+    *   @fn void fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
     *
     *   Fill a rectangle using a point and a 2D vector
     *
