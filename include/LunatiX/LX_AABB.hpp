@@ -33,11 +33,13 @@ struct LX_AABB
     int w, h;
 };
 
+/// Convert a constant AABB pointer to a constant SDL_Rect pointer
 inline const SDL_Rect * toRect(const LX_AABB *box)
 {
     return reinterpret_cast<const SDL_Rect *>(box);
 }
 
+/// Convert an AABB pointer to an SDL_Rect pointer
 inline SDL_Rect * toRect(LX_AABB *box)
 {
     return reinterpret_cast<SDL_Rect *>(box);

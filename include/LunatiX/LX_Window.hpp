@@ -22,8 +22,6 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <LunatiX/LX_Hitbox.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
 #include <SDL2/SDL_video.h>
 
 struct SDL_Window;
@@ -45,6 +43,16 @@ namespace LX_TrueTypeFont
 {
 class LX_Font;
 };
+
+namespace LX_Physics
+{
+class LX_Circle;
+class LX_AABB;
+class LX_Vector2D;
+class LX_Point;
+};
+
+struct LX_AABB;
 
 // Fullscreen modes
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop size   */
@@ -215,7 +223,7 @@ public :
     */
     void drawRect(const LX_AABB& box);
     /**
-    *   @fn void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+    *   @fn void drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
     *
     *   Draw a rectangle using a point and a vector
     *
@@ -223,7 +231,7 @@ public :
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *
     */
-    void drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    void drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v);
     /**
     *   @fn void drawCircle(const LX_Physics::LX_Circle& c)
     *   Draw a circle on a window
@@ -245,7 +253,7 @@ public :
     *   @param [in] p The point
     *   @param [in] v The vector
     */
-    void fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    void fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v);
     /**
     *   @fn void fillCircle(const LX_Physics::LX_Circle& c)
     *   Fill a circle on a window

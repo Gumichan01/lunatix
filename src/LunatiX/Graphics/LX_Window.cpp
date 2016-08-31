@@ -20,10 +20,11 @@
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
 
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_endian.h>
 
 #include <GL/glu.h>
 
@@ -200,7 +201,7 @@ void LX_Window::drawRect(const LX_AABB& box)
 }
 
 
-void LX_Window::drawRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+void LX_Window::drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
 {
     int w = static_cast<int>(v.vx);
     int h = static_cast<int>(v.vy);
@@ -255,7 +256,7 @@ void LX_Window::fillRect(const LX_AABB& box)
 }
 
 
-void LX_Window::fillRect(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+void LX_Window::fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
 {
     int w = static_cast<int>(v.vx);
     int h = static_cast<int>(v.vy);
