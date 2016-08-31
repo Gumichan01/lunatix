@@ -5,6 +5,7 @@
 using namespace std;
 using namespace LX_TrueTypeFont;
 using namespace LX_FileIO;
+using namespace LX_Config;
 
 void test_font(void);
 void test_font2(void);

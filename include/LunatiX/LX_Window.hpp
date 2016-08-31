@@ -47,7 +47,6 @@ class LX_Font;
 namespace LX_Physics
 {
 class LX_Circle;
-class LX_AABB;
 class LX_Vector2D;
 class LX_Point;
 };
