@@ -74,7 +74,7 @@ protected:
 public:
 
     /**
-    *   @fn LX_Music(std::string filename)
+    *   @fn LX_Music(const std::string filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
@@ -83,7 +83,7 @@ public:
     LX_Music(const std::string filename);
 
     /**
-    *   @fn LX_Music(UTF8string& filename)
+    *   @fn LX_Music(const UTF8string& filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
