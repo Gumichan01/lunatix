@@ -100,12 +100,13 @@
 		<Unit filename="include/LunatiX/LX_SystemInfo.hpp" />
 		<Unit filename="include/LunatiX/LX_Text.hpp" />
 		<Unit filename="include/LunatiX/LX_Thread.hpp" />
+		<Unit filename="include/LunatiX/LX_Timer.hpp" />
 		<Unit filename="include/LunatiX/LX_TrueTypeFont.hpp" />
 		<Unit filename="include/LunatiX/LX_Vector2D.hpp" />
 		<Unit filename="include/LunatiX/LX_Version.hpp" />
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
-		<Unit filename="include/LunatiX/Lunatix_engine.hpp" />
+		<Unit filename="include/LunatiX/Lunatix.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tagspriv.h" />
