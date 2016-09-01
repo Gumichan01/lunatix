@@ -38,9 +38,7 @@ const int CONF_HEIGHT = 600;
 };
 
 LX_ConfigurationException::LX_ConfigurationException(UTF8string err)
-{
-    _string_error = err;
-}
+    : _string_error(err) {}
 
 const char * LX_ConfigurationException::what() const noexcept
 {

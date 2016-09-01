@@ -1435,9 +1435,9 @@ void test_VectorIncDec(void)
              << "Got -u(" << u.vx << "," << u.vy << "); " << endl;
 
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "INFO - v++;" << endl;
+    cout << "INFO - ++v;" << endl;
 
-    v++;
+    ++v;
 
     if(v == exp_inc_post_vec)
         cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")"
@@ -1469,9 +1469,9 @@ void test_VectorIncDec(void)
              << "Got -u(" << u.vx << "," << u.vy << "); " << endl;
 
     cout << "INFO - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "INFO - v--;" << endl;
+    cout << "INFO - --v;" << endl;
 
-    v--;
+    --v;
 
     if(v == exp_dec_post_vec)
         cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")"

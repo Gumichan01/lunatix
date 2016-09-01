@@ -45,7 +45,7 @@ class LX_PolygonException : public std::exception
 public :
 
     /// Constructor
-    LX_PolygonException(std::string err);
+    explicit LX_PolygonException(std::string err);
 
     /// Copy constructor
     LX_PolygonException(const LX_PolygonException& pex);

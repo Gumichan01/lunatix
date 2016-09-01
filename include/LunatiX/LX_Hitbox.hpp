@@ -47,7 +47,7 @@ struct LX_Point
     LX_Point(const LX_Point& p);
 
     /// Point assignment
-    LX_Point& operator=(const LX_Point p);
+    LX_Point& operator=(const LX_Point& p);
 
 };
 
@@ -74,7 +74,7 @@ struct LX_Circle
     LX_Circle(const LX_Circle& c);
 
     /// Circle assignment
-    LX_Circle& operator=(const LX_Circle c);
+    LX_Circle& operator=(const LX_Circle& c);
 
 };
 

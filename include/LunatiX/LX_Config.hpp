@@ -46,7 +46,7 @@ class LX_ConfigurationException : public std::exception
 public :
 
     /// Constructor
-    LX_ConfigurationException(UTF8string err);
+    explicit LX_ConfigurationException(UTF8string err);
 
     /**
     *   @fn const char * LX_ConfigurationException::what() const noexcept

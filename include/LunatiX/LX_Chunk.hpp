@@ -45,7 +45,7 @@ class LX_ChunkException : public std::exception
 public :
 
     /// Constructor
-    LX_ChunkException(std::string err);
+    explicit LX_ChunkException(std::string err);
     /// Copy constructor
     LX_ChunkException(const LX_ChunkException& me);
 
@@ -66,18 +66,18 @@ class LX_Chunk : public virtual LX_Sound
     friend class LX_FileIO::LX_FileBuffer;
     Mix_Chunk *_chunk;
 
-    LX_Chunk(Mix_Chunk& chunk);
+    explicit LX_Chunk(Mix_Chunk& chunk);
     LX_Chunk(LX_Chunk& m);
     LX_Chunk& operator =(LX_Chunk& m);
 
 protected:
 
-    bool load_(std::string filename);
+    bool load_(const std::string& filename);
 
 public:
 
     /**
-    *   @fn LX_Chunk(std::string& filename)
+    *   @fn LX_Chunk(const std::string& filename)
     *   @brief Constructor
     *
     *   Construct the instance creating the Mix_Chunk instance from a file
@@ -90,7 +90,7 @@ public:
     *
     *   @exception LX_ChunkException if the chunk cannot be created from the file
     */
-    LX_Chunk(std::string& filename);
+    explicit LX_Chunk(const std::string& filename);
 
     /**
     *   @fn LX_Chunk(UTF8string& filename)
@@ -105,7 +105,7 @@ public:
     *           an other file type.
     *   @exception LX_ChunkException if the chunk cannot be created from the file
     */
-    LX_Chunk(UTF8string& filename);
+    explicit LX_Chunk(UTF8string& filename);
 
     /**
     *   @fn bool loadFromBuffer(LX_FileBuffer *file)

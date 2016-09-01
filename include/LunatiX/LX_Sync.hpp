@@ -39,6 +39,8 @@ class LX_Mutex
     friend class LX_Cond;
     tthread::mutex * _mutex;
 
+    LX_Mutex(const LX_Mutex& m);
+
 public:
 
     /// Constructor
@@ -64,6 +66,8 @@ public:
 class LX_Cond
 {
     tthread::condition_variable * _condition;
+
+    LX_Cond(const LX_Cond& c);
 
 public:
 

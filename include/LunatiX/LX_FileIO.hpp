@@ -63,7 +63,7 @@ class IOException: public std::exception
 public :
 
     /// Constructor
-    IOException(std::string err);
+    explicit IOException(std::string err);
     /// Copy cnstructor
     IOException(const IOException& io);
 

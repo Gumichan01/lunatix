@@ -60,7 +60,7 @@ public:
     *   @param [in] nbPart The number of particles to define in the system
     *
     */
-    LX_ParticleSystem(const unsigned int nbPart);
+    explicit LX_ParticleSystem(const unsigned int nbPart);
 
     /**
     *   @fn LX_ParticleSystem(const unsigned int nbPart,const unsigned int id)
@@ -73,7 +73,7 @@ public:
     *           to get the rendering context
     *
     */
-    LX_ParticleSystem(const unsigned int nbPart,const unsigned int id);
+    explicit LX_ParticleSystem(const unsigned int nbPart,const unsigned int id);
 
     /**
     *   @fn bool addParticle(LX_Particle *p)

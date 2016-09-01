@@ -46,7 +46,7 @@ struct LX_Vector2D
     LX_Vector2D(const LX_Vector2D& v);
 
     /// Vector2D assignment
-    LX_Vector2D& operator =(const LX_Vector2D v);
+    LX_Vector2D& operator =(const LX_Vector2D& v);
 
 };
 

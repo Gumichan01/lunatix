@@ -99,7 +99,7 @@ public :
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    LX_FileBuffer(const UTF8string& filename);
+    explicit LX_FileBuffer(const UTF8string& filename);
 
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample()

@@ -144,27 +144,26 @@ public:
     LX_Font(const std::string& font_file,const SDL_Color& color, unsigned int size);
 
     /**
-    *   @fn int sizeOfText(const std::string text, int& w, int& h)
+    *   @fn int sizeOfText(std::string text, int& w, int& h)
     *
     *   Calculate the resulting texture dimension of the
     *   text rendererd using the default font
     *
-    *   @param [in] text The std::string to size up
+    *   @param [in] text The string to size up
     *   @param [out] w The reference of an integral to fill in the text width
     *   @param [out] h The reference of an integral to fill in the text height
     *
     *   @return A control value, 0 on success, -1 on failure
     *
     */
-    int sizeOfText(const std::string text, int& w, int& h);
-
+    int sizeOfText(std::string text, int& w, int& h);
     /**
-    *   @fn int sizeOfText(const std::string& text, unsigned int size, int& w, int& h)
+    *   @fn int sizeOfText(const std::string& text, const unsigned int size, int& w, int& h)
     *
     *   Calculate the resulting texture dimension of the
     *   text rendererd using the default font
     *
-    *   @param [in] text The std::string to size up
+    *   @param [in] text The string to size up
     *   @param [in] size The size of the text
     *   @param [out] w The reference of an integral to fill in the text width
     *   @param [out] h The reference of an integral to fill in the text height
@@ -172,7 +171,22 @@ public:
     *   @return A control value, 0 on success, -1 on failure
     *
     */
-    int sizeOfText(const std::string& text, unsigned int size, int& w, int& h);
+    int sizeOfText(const std::string& text, const unsigned int size, int& w, int& h);
+    /**
+    *   @fn int sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h)
+    *
+    *   Calculate the resulting texture dimension of the
+    *   utf-8 text rendererd using the default font
+    *
+    *   @param [in] text The utf-8 string to size up
+    *   @param [in] size The size of the text
+    *   @param [out] w The reference of an integral to fill in the text width
+    *   @param [out] h The reference of an integral to fill in the text height
+    *
+    *   @return A control value, 0 on success, -1 on failure
+    *
+    */
+    int sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h);
 
     /**
     *   @fn SDL_Texture * drawSolidText(const std::string text,

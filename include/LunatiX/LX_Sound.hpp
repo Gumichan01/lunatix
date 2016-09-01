@@ -38,7 +38,7 @@ class LX_Sound
 {
 protected:
 
-    virtual bool load_(std::string filename) = 0;
+    virtual bool load_(const std::string& filename) = 0;
 
 public:
 

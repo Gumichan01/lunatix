@@ -445,7 +445,7 @@ LX_SolidTextImage::LX_SolidTextImage(const UTF8string& text, unsigned int sz,
     : LX_TextImage(text,sz,font,w,format)
 {
     _texture = _font.drawSolidText(_text,_size,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -453,7 +453,7 @@ void LX_SolidTextImage::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
     _texture = _font.drawSolidText(_text,_size,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -506,7 +506,7 @@ void LX_ShadedTextImage::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
     _texture = _font.drawShadedText(_text,_size,_bgcolor,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -567,7 +567,7 @@ LX_BlendedTextImage::LX_BlendedTextImage(const UTF8string& text, unsigned int sz
     : LX_TextImage(text,sz,font,w,format)
 {
     _texture = _font.drawBlendedText(_text,_size,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -575,7 +575,7 @@ void LX_BlendedTextImage::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
     _texture = _font.drawBlendedText(_text,_size,_win);
-    _font.sizeOfText(_text.utf8_str(),_size,_dimension.w,_dimension.h);
+    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 

@@ -113,13 +113,13 @@ TTF_Font * LX_Font::createInternalFont_(int size)
 }
 
 
-int LX_Font::sizeOfText(const std::string text, int& w, int& h)
+int LX_Font::sizeOfText(std::string text, int& w, int& h)
 {
     return sizeOfText(text,_font_size,w,h);
 }
 
 
-int LX_Font::sizeOfText(const std::string& text, unsigned int size, int& w, int& h)
+int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w, int& h)
 {
     int sz;
     TTF_Font *ttf = nullptr;
@@ -136,6 +136,12 @@ int LX_Font::sizeOfText(const std::string& text, unsigned int size, int& w, int&
     return sz;
 }
 
+
+int LX_Font::sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h)
+{
+    const std::string s = text.utf8_str();
+    return sizeOfText(s,_font_size,w,h);
+}
 
 /*
 *   Private function that creates a text surface according to the type,

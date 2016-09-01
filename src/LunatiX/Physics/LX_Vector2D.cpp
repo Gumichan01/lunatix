@@ -67,7 +67,7 @@ LX_Vector2D::LX_Vector2D(): LX_Vector2D(0.0f,0.0f) {}
 LX_Vector2D::LX_Vector2D(float x,float y): vx(x), vy(y) {}
 LX_Vector2D::LX_Vector2D(const LX_Vector2D& v): vx(v.vx), vy(v.vy) {}
 
-LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D v)
+LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D& v)
 {
     vx = v.vx;
     vy = v.vy;

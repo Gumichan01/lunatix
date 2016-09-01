@@ -82,7 +82,7 @@ public :
     *   @param [in] index The index of the device to open
     *
     */
-    LX_Haptic(int index);
+    explicit LX_Haptic(int index);
     /**
     *   @fn LX_Haptic(SDL_Joystick *joy)
     *   @brief Constructor
@@ -92,7 +92,7 @@ public :
     *   @param [in] joy The joystick to open the device from
     *
     */
-    LX_Haptic(SDL_Joystick *joy);
+    explicit LX_Haptic(SDL_Joystick *joy);
     /**
     *   @fn LX_Haptic(SDL_GameController *gc)
     *   @brief Constructor
@@ -102,7 +102,7 @@ public :
     *   @param [in] gc The game controller to open the device from
     *
     */
-    LX_Haptic(SDL_GameController *gc);
+    explicit LX_Haptic(SDL_GameController *gc);
 
     /**
     *   @fn LX_Haptic& operator =(SDL_Haptic& haptic)

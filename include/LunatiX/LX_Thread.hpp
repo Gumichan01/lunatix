@@ -53,6 +53,8 @@ class LX_Thread
 {
     LX_Thread_ *_th;
 
+    LX_Thread(const LX_Thread& m);
+
 public:
 
     /**

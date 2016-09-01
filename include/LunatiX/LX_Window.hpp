@@ -115,7 +115,7 @@ class LX_WindowException : public std::exception
 public :
 
     /// Constructor
-    LX_WindowException(std::string err);
+    explicit LX_WindowException(std::string err);
     /// Copy constructor
     LX_WindowException(const LX_WindowException& w);
 
@@ -177,10 +177,10 @@ public :
     *   @param [in,out] info The structure tha contains information about the window
     *   @note The structure is updated when the window is created
     */
-    LX_Window(LX_WindowInfo &info);
+    explicit LX_Window(LX_WindowInfo &info);
 
     /**
-    *   @fn void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q)
+    *   @fn void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
     *
     *   Draw a segment on the window
     *
@@ -188,7 +188,7 @@ public :
     *   @param [in] q The second point
     *
     */
-    void drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q);
+    void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q);
     /**
     *   @fn void drawSegments(const LX_Physics::LX_Point * p, const int count)
     *
@@ -200,7 +200,7 @@ public :
     */
     void drawSegments(const LX_Physics::LX_Point * p, const int count);
     /**
-    *   @fn void drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+    *   @fn void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
     *
     *   Draw a line on the window
     *
@@ -211,7 +211,7 @@ public :
     *         The length is calculating according to this formula: ||v||*2
     *
     */
-    void drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v);
+    void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v);
     /**
     *   @fn void drawRect(const LX_AABB& box)
     *   Draw a rectangle on a window

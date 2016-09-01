@@ -53,6 +53,7 @@ class LX_Gamepad
     bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info);
     bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info);
 
+    LX_Gamepad(const LX_Gamepad& g);
 
 public :
 
@@ -65,7 +66,7 @@ public :
     *   @note   You can check the success of the operation
     *           calling isConnected()
     */
-    LX_Gamepad(int index=0);
+    explicit LX_Gamepad(int index=0);
 
     /**
     *   @fn bool isConnected(void)

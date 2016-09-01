@@ -96,15 +96,10 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
 
 /* Exception */
 
-LX_WindowException::LX_WindowException(std::string err)
-{
-    _string_error = err;
-}
+LX_WindowException::LX_WindowException(std::string err) : _string_error(err) {}
 
 LX_WindowException::LX_WindowException(const LX_WindowException& w)
-{
-    _string_error = w._string_error;
-}
+    : _string_error(w._string_error) {}
 
 const char * LX_WindowException::what() const noexcept
 {
@@ -174,7 +169,7 @@ void LX_Window::createRenderer_(bool accel)
 }
 
 
-void LX_Window::drawSegment(const LX_Physics::LX_Point p, const LX_Physics::LX_Point q)
+void LX_Window::drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
     SDL_RenderDrawLine(_renderer,p.x,p.y,q.x,q.y);
 }
@@ -186,10 +181,10 @@ void LX_Window::drawSegments(const LX_Physics::LX_Point * p, const int count)
 }
 
 
-void LX_Window::drawLine(const LX_Physics::LX_Point p, const LX_Physics::LX_Vector2D v)
+void LX_Window::drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
 {
-    int vx = static_cast<int>(v.vx);
-    int vy = static_cast<int>(v.vy);
+    const int vx = static_cast<int>(v.vx);
+    const int vy = static_cast<int>(v.vy);
     drawSegment(p,LX_Physics::LX_Point(p.x + vx, p.y + vy));
     drawSegment(p,LX_Physics::LX_Point(p.x - vx, p.y - vy));
 }
