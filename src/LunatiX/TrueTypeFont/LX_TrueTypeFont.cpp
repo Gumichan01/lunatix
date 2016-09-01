@@ -140,7 +140,7 @@ int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w
 int LX_Font::sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h)
 {
     const std::string s = text.utf8_str();
-    return sizeOfText(s,_font_size,w,h);
+    return sizeOfText(s,size,w,h);
 }
 
 /*
