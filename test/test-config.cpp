@@ -13,8 +13,8 @@ string boolState(const bool b)
 
 int main(int argc, char **argv)
 {
-    LX_Configuration *configuration = nullptr;
-    LX_Configuration *configuration2 = nullptr;
+    LX_Config::LX_Configuration *configuration = nullptr;
+    LX_Config::LX_Configuration *configuration2 = nullptr;
     bool err = LX_Init();
 
     if(!err)
@@ -24,8 +24,8 @@ int main(int argc, char **argv)
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Config ==== ");
-    configuration  = LX_Configuration::getInstance();
-    configuration2 = LX_Configuration::getInstance();
+    configuration  = LX_Config::LX_Configuration::getInstance();
+    configuration2 = LX_Config::LX_Configuration::getInstance();
 
     if(configuration == nullptr)
         cerr << "FAILURE - The configuration is not initialized" << endl;
