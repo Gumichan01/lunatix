@@ -26,7 +26,6 @@
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
-#include <SDL2/SDL_timer.h>
 
 
 namespace
@@ -261,8 +260,6 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 }
 
 
-LX_AnimatedSprite::~LX_AnimatedSprite() {}
-
 
 /* LX_Surface */
 
@@ -476,8 +473,6 @@ void LX_SolidTextImage::setSize(unsigned int sz)
     updateTexture_();
 }
 
-LX_SolidTextImage::~LX_SolidTextImage() {}
-
 
 
 /* LX_ShadedTextImage */
@@ -544,8 +539,6 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
     updateTexture_();
 }
 
-LX_ShadedTextImage::~LX_ShadedTextImage() {}
-
 
 
 /* LX_BlendedTextImage */
@@ -597,7 +590,5 @@ void LX_BlendedTextImage::setSize(unsigned int sz)
     _size = sz;
     updateTexture_();
 }
-
-LX_BlendedTextImage::~LX_BlendedTextImage() {}
 
 };

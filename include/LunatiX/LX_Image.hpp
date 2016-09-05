@@ -23,9 +23,10 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_AABB.hpp>
 #include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_pixels.h>
 #include <vector>
 
+struct SDL_Surface;
 struct SDL_Texture;
 
 namespace LX_FileIO
@@ -328,7 +329,7 @@ public:
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
 
     /// Destructor
-    virtual ~LX_AnimatedSprite();
+    ~LX_AnimatedSprite() = default;
 };
 
 
@@ -589,7 +590,7 @@ public:
     virtual void setSize(unsigned int sz);
 
     /// Destructor
-    virtual ~LX_SolidTextImage();
+    ~LX_SolidTextImage() = default;
 };
 
 
@@ -655,7 +656,7 @@ public:
     virtual void setSize(unsigned int sz);
 
     /// Destructor
-    virtual ~LX_ShadedTextImage();
+    ~LX_ShadedTextImage() = default;
 };
 
 
@@ -695,7 +696,7 @@ public:
     virtual void setSize(unsigned int sz);
 
     /// Destructor
-    virtual ~LX_BlendedTextImage();
+    ~LX_BlendedTextImage() = default;
 };
 
 };
