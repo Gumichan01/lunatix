@@ -23,7 +23,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-#include <SDL2/SDL_stdinc.h>
 
 #define LX_FILEIO_RDONLY 0x00000001                             /**< Read only mode (r) */
 #define LX_FILEIO_WRONLY 0x00000010                             /**< Write only mode (w) */
@@ -87,12 +86,12 @@ class LX_File
     LX_File(LX_File& f);
     LX_File& operator =(LX_File& f);
 
-    void open_(const Uint32 mode);
+    void open_(const uint32_t mode);
 
 public :
 
     /**
-    *   @fn LX_File(const std::string filename, const Uint32 mode)
+    *   @fn LX_File(const std::string filename, const uint32_t mode)
     *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
@@ -111,11 +110,11 @@ public :
     *               or the file is not openable
     *
     */
-    LX_File(const std::string filename, const Uint32 mode);
+    LX_File(const std::string filename, const uint32_t mode);
 
 
     /**
-    *   @fn LX_File(const UTF8string& filename, const Uint32 mode)
+    *   @fn LX_File(const UTF8string& filename, const uint32_t mode)
     *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
@@ -134,7 +133,7 @@ public :
     *               or the file is not openable
     *
     */
-    LX_File(const UTF8string& filename, const Uint32 mode);
+    LX_File(const UTF8string& filename, const uint32_t mode);
 
     /**
     *   @fn size_t read(void *ptr,size_t data_size,size_t max_num)
@@ -195,7 +194,7 @@ public :
     size_t write(std::string str);
 
     /**
-    *   @fn Sint64 seek(Sint64 offset, int whence)
+    *   @fn int64_t seek(int64_t offset, int whence)
     *
     *   Seek for a position the file
     *
@@ -206,10 +205,10 @@ public :
     *
     *   @sa read
     */
-    Sint64 seek(Sint64 offset, int whence);
+    int64_t seek(int64_t offset, int whence);
 
     /**
-    *   @fn Sint64 tell(void)
+    *   @fn int64_t tell(void)
     *
     *   Get the position in a file
     *
@@ -218,14 +217,14 @@ public :
     *
     *   @sa seek
     */
-    Sint64 tell(void);
+    int64_t tell(void);
 
     /**
-    *   @fn Sint64 size(void)
+    *   @fn int64_t size(void)
     *   Get the size of a file
     *   @return The size of the file on success. -1 on failure
     */
-    Sint64 size(void);
+    int64_t size(void);
 
     /**
     *   @fn const char * getFilename(void)

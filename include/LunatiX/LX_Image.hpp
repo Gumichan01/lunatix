@@ -22,7 +22,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_AABB.hpp>
-#include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_pixels.h>
 #include <vector>
 
@@ -79,9 +78,9 @@ protected:
 
     SDL_Texture * _texture;
     LX_Win::LX_Window& _win;
-    Uint32 _format;
+    uint32_t _format;
 
-    LX_Image(LX_Win::LX_Window& w, Uint32 format);
+    LX_Image(LX_Win::LX_Window& w, uint32_t format);
     SDL_Surface * loadSurface_(const std::string& filename);
     SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
 
@@ -89,7 +88,7 @@ public:
 
     /**
     *   @fn LX_Image(const std::string filename, LX_Win::LX_Window& w,
-    *                Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *                uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   Build an Image using a filename
@@ -141,15 +140,15 @@ public:
     *
     */
     LX_Image(const std::string filename, LX_Win::LX_Window& w,
-             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+             uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constuctor with the filename (UTF-8)
     LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
-             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+             uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Image constuctor with a file buffer
     LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-             Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+             uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn virtual bool isOpen() const
@@ -216,15 +215,15 @@ public:
 
     /// Sprite constuctor
     LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
-              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Sprite constuctor with the filename (UTF-8)
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Sprite constuctor with a file buffer
     LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-              Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
     /**
@@ -287,8 +286,8 @@ class LX_AnimatedSprite: public LX_Sprite
 {
     const std::vector<LX_AABB> _coordinates;
     const size_t _SZ;
-    Uint32 _delay;
-    Uint32 _btime;
+    uint32_t _delay;
+    uint32_t _btime;
     size_t _iteration;
     bool _started;
 
@@ -296,8 +295,8 @@ public:
 
     /**
     *   @fn LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-    *                         const std::vector<LX_AABB>& coord, const Uint32 delay,
-    *                         Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *                         const std::vector<LX_AABB>& coord, const uint32_t delay,
+    *                         uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *
     *   Build an animated sprite using a filename
     *
@@ -310,18 +309,18 @@ public:
     *   @sa LX_Image
     */
     LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const Uint32 delay,
-                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Animated Sprite constuctor with the filename (UTF-8)
     LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const Uint32 delay,
-                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Animated Sprite constuctor with a file buffer
     LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const Uint32 delay,
-                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     virtual void draw(LX_AABB * box);
@@ -349,15 +348,15 @@ public:
 
     /// Surface constuctor
     LX_Surface(const std::string filename, LX_Win::LX_Window& w,
-               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with the filename (UTF-8)
     LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
-               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with a file buffer
     LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-               Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
 
@@ -380,7 +379,7 @@ class LX_StreamingImage: public LX_Image
 public:
 
     /**
-    *   @fn LX_StreamingImage(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *   @fn LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *
     *   Build the texture
     *
@@ -388,7 +387,7 @@ public:
     *   @param [in] format Optional argument that specified the format of the image
     *   @sa LX_Image
     */
-    LX_StreamingImage(LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+    LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     /**
@@ -438,7 +437,7 @@ public:
 
     /**
     *   @fn LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                    Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *                    uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] font The font that will be used for drawing the text
@@ -448,11 +447,11 @@ public:
     *
     */
     LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                 Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                 uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
@@ -464,11 +463,11 @@ public:
     *
     */
     LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                 LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                 LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-    *                    LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888)
+    *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
@@ -480,7 +479,7 @@ public:
     *
     */
     LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                 LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                 LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
     /**
@@ -575,15 +574,15 @@ public:
 
     /// Constructor without the text
     LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                      Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_SolidTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                      LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                      LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_SolidTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                      LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                      LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz = 0);
     virtual void setText(const UTF8string& text, unsigned int sz = 0);
@@ -617,15 +616,15 @@ public:
 
     /// Constructor without the text
     LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                       Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                       uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_ShadedTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                       LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_ShadedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                       LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz = 0);
     virtual void setText(const UTF8string& text, unsigned int sz = 0);
@@ -681,15 +680,15 @@ public:
 
     /// Constructor without the text
     LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                        Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_BlendedTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                        LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_BlendedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                        LX_Win::LX_Window& w, Uint32 format=SDL_PIXELFORMAT_RGBA8888);
+                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz = 0);
     virtual void setText(const UTF8string& text, unsigned int sz = 0);

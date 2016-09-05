@@ -53,12 +53,12 @@ namespace LX_Graphics
 /* LX_Image */
 
 // protected zero-argument construtor
-LX_Image::LX_Image(LX_Win::LX_Window& w, Uint32 format)
+LX_Image::LX_Image(LX_Win::LX_Window& w, uint32_t format)
     : _texture(nullptr), _win(w), _format(format) {}
 
 
 LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
-                   Uint32 format)
+                   uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
     _texture = loadTexture_(filename,_win);
@@ -66,12 +66,12 @@ LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
 
 
 LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
-                   Uint32 format)
+                   uint32_t format)
     : LX_Image(filename.utf8_str(),w,format) {}
 
 
 LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                   Uint32 format)
+                   uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
     SDL_Surface *tmp = loadSurface_(buffer);
@@ -154,17 +154,17 @@ LX_Image::~LX_Image()
 /* LX_Sprite */
 
 LX_Sprite::LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
-                     Uint32 format)
+                     uint32_t format)
     : LX_Image(filename,w,format) {}
 
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                     Uint32 format)
+                     uint32_t format)
     : LX_Image(filename,w,format) {}
 
 
 LX_Sprite::LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                     Uint32 format)
+                     uint32_t format)
     : LX_Image(buffer,w,format) {}
 
 
@@ -199,22 +199,22 @@ LX_Sprite::~LX_Sprite() {}
 /* LX_AnimatedSprite */
 
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
-                                     const std::vector<LX_AABB>& coord, const Uint32 delay,
-                                     Uint32 format)
+                                     const std::vector<LX_AABB>& coord, const uint32_t delay,
+                                     uint32_t format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
-                                     const Uint32 delay, Uint32 format)
+                                     const uint32_t delay, uint32_t format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
-                                     const Uint32 delay, Uint32 format)
+                                     const uint32_t delay, uint32_t format)
     : LX_Sprite(buffer,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
@@ -264,7 +264,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 /* LX_Surface */
 
 LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
-                       Uint32 format)
+                       uint32_t format)
     : LX_Image(w,format), _surface(nullptr)
 {
     _surface = loadSurface_(filename);
@@ -272,12 +272,12 @@ LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
 
 
 LX_Surface::LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
-                       Uint32 format)
+                       uint32_t format)
     : LX_Surface(filename.utf8_str(),w,format) {}
 
 
 LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                       Uint32 format)
+                       uint32_t format)
     : LX_Image(w,format), _surface(nullptr)
 {
     _surface = loadSurface_(buffer);
@@ -299,11 +299,11 @@ LX_Surface::~LX_Surface()
 
 /* LX_StreamingImage */
 
-LX_StreamingImage::LX_StreamingImage(LX_Win::LX_Window& w, Uint32 format)
+LX_StreamingImage::LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format)
     : LX_Image(w,format), _screen(nullptr), _update(false)
 {
     int bpp, width, height;
-    Uint32 r,g,b,a;
+    uint32_t r,g,b,a;
 
     if(SDL_PixelFormatEnumToMasks(_format,&bpp,&r,&g,&b,&a) != SDL_TRUE)
     {
@@ -374,20 +374,20 @@ LX_StreamingImage::~LX_StreamingImage()
 /* LX_TextImage */
 
 LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                           Uint32 format)
+                           uint32_t format)
     : LX_Image(w,format), _text(""), _font(font), _size(0),
     _dimension({0,0,0,0}) {}
 
 
 LX_TextImage::LX_TextImage(std::string text, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                           Uint32 format)
+                           uint32_t format)
     : LX_TextImage(UTF8string(text),sz,font,w,format) {}
 
 
 LX_TextImage::LX_TextImage(const UTF8string& text, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                           Uint32 format)
+                           uint32_t format)
     : LX_Image(w,format), _text(text), _font(font), _size(sz),
     _dimension({0,0,0,0}) {}
 
@@ -426,19 +426,19 @@ LX_TextImage::~LX_TextImage() {}
 /* LX_SolidTextImage */
 
 LX_SolidTextImage::LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w, Uint32 format)
+                                     LX_Win::LX_Window& w, uint32_t format)
     : LX_TextImage(font,w,format) {}
 
 
 LX_SolidTextImage::LX_SolidTextImage(std::string text, unsigned int sz,
                                      LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w, Uint32 format)
+                                     LX_Win::LX_Window& w, uint32_t format)
     : LX_SolidTextImage(UTF8string(text),sz,font,w,format) {}
 
 
 LX_SolidTextImage::LX_SolidTextImage(const UTF8string& text, unsigned int sz,
                                      LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w,Uint32 format)
+                                     LX_Win::LX_Window& w,uint32_t format)
     : LX_TextImage(text,sz,font,w,format)
 {
     _texture = _font.drawSolidText(_text,_size,_win);
@@ -478,19 +478,19 @@ void LX_SolidTextImage::setSize(unsigned int sz)
 /* LX_ShadedTextImage */
 
 LX_ShadedTextImage::LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,
-                                       LX_Win::LX_Window& w, Uint32 format)
+                                       LX_Win::LX_Window& w, uint32_t format)
     : LX_TextImage(font,w,format), _bgcolor({0,0,0,0}) {}
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(std::string text, unsigned int sz,
                                        LX_TrueTypeFont::LX_Font& font,
-                                       LX_Win::LX_Window& w, Uint32 format)
+                                       LX_Win::LX_Window& w, uint32_t format)
     : LX_ShadedTextImage(UTF8string(text),sz,font,w,format) {}
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
                                        LX_TrueTypeFont::LX_Font& font,
-                                       LX_Win::LX_Window& w,Uint32 format)
+                                       LX_Win::LX_Window& w,uint32_t format)
     : LX_TextImage(text,sz,font,w,format), _bgcolor({0,0,0,0})
 {
 
@@ -544,19 +544,19 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
 /* LX_BlendedTextImage */
 
 LX_BlendedTextImage::LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,
-                                         LX_Win::LX_Window& w, Uint32 format)
+                                         LX_Win::LX_Window& w, uint32_t format)
     : LX_TextImage(font,w,format) {}
 
 
 LX_BlendedTextImage::LX_BlendedTextImage(std::string text, unsigned int sz,
                                          LX_TrueTypeFont::LX_Font& font,
-                                         LX_Win::LX_Window& w, Uint32 format)
+                                         LX_Win::LX_Window& w, uint32_t format)
     : LX_BlendedTextImage(UTF8string(text),sz,font,w,format) {}
 
 
 LX_BlendedTextImage::LX_BlendedTextImage(const UTF8string& text, unsigned int sz,
                                          LX_TrueTypeFont::LX_Font& font,
-                                         LX_Win::LX_Window& w,Uint32 format)
+                                         LX_Win::LX_Window& w,uint32_t format)
     : LX_TextImage(text,sz,font,w,format)
 {
     _texture = _font.drawBlendedText(_text,_size,_win);

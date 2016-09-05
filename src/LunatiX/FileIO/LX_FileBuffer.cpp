@@ -40,7 +40,7 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     LX_File *reader = nullptr;
     std::string str("LX_FileBuffer: " + std::string(_name.utf8_str()) + " - ");
     size_t r = 0;
-    Sint64 s = 0;
+    int64_t s = 0;
 
     reader = new LX_File(_name,LX_FILEIO_RDONLY);
     reader->seek(0,LX_SEEK_END);
@@ -48,7 +48,7 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     if((s = reader->size()) == -1 )
         throw IOException(str + "cannot get the size of the file");
 
-    _bufsize = static_cast<Uint64>(s);
+    _bufsize = static_cast<uint64_t>(s);
 
     reader->seek(0,LX_SEEK_SET);
     _buffer = new (std::nothrow) char[_bufsize];

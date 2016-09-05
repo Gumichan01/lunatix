@@ -141,7 +141,7 @@ public :
     */
     void rumbleEffectPlay(void);
     /**
-    *   @fn void rumbleEffectPlay(float strength, Uint32 length)
+    *   @fn void rumbleEffectPlay(float strength, uint32_t length)
     *
     *   Play the rumble effect
     *
@@ -150,7 +150,7 @@ public :
     *   @param [in] length Length of the rumble to play in milliseconds
     *
     */
-    void rumbleEffectPlay(float strength, Uint32 length);
+    void rumbleEffectPlay(float strength, uint32_t length);
 
     /**
     *   @fn bool effectSupported(SDL_HapticEffect& effect)
@@ -178,7 +178,7 @@ public :
     */
     int newEffect(SDL_HapticEffect& effect);
     /**
-    *   @fn void runEffect(int effect_id, Uint32 iterations)
+    *   @fn void runEffect(int effect_id, uint32_t iterations)
     *
     *   Play the effect
     *
@@ -189,7 +189,7 @@ public :
     *   @sa newEffect
     *   @sa stopEffect
     */
-    void runEffect(int effect_id, Uint32 iterations);
+    void runEffect(int effect_id, uint32_t iterations);
     /**
     *   @fn void stopEffect(int effect_id)
     *

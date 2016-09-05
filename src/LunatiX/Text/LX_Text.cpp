@@ -33,7 +33,7 @@ namespace LX_Text
 namespace
 {
 
-Uint32 DELAY = 33;
+uint32_t DELAY = 33;
 
 bool isEndofLine(char * text)
 {
@@ -222,7 +222,7 @@ void LX_TextInput::textEdit_(SDL_Event& ev)
 
 void LX_TextInput::save_()
 {
-    static const Uint8 *KEYS = SDL_GetKeyboardState(nullptr);
+    static const uint8_t *KEYS = SDL_GetKeyboardState(nullptr);
 
     if(KEYS[SDL_SCANCODE_LCTRL])
     {
@@ -245,7 +245,7 @@ void LX_TextInput::save_()
 
 void LX_TextInput::paste_()
 {
-    static const Uint8 *KEYS = SDL_GetKeyboardState(nullptr);
+    static const uint8_t *KEYS = SDL_GetKeyboardState(nullptr);
 
     if(KEYS[SDL_SCANCODE_LCTRL])
     {

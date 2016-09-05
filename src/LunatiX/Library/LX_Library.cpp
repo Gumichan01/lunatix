@@ -56,7 +56,7 @@ bool LX_Init(void)
 {
     const std::string mappingFile = "config/gamecontrollerdb.txt";
 
-    Uint32 sdl_flags = 0x00000000;                  // The flags for SDL_Init
+    uint32_t sdl_flags = 0x00000000;                  // The flags for SDL_Init
     int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;      // The IMG flag for SDL_Image
 
     // Load the configuration

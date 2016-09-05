@@ -76,7 +76,7 @@ struct LX_WindowInfo
     int h;              /**< Window Height              */
     int lw;             /**< Independant device width   */
     int lh;             /**< Independant device height  */
-    Uint32 flag;        /**< Flags                      */
+    uint32_t flag;        /**< Flags                      */
     bool accel;         /**< Hardware acceleration      */
 
 };
@@ -158,7 +158,7 @@ class LX_Window
     LX_Window& operator =(LX_Window& w);
 
     void createWindow_(std::string &title, int posX, int posY, int w, int h,
-                       Uint32 flag, bool accel = true);
+                       uint32_t flag, bool accel = true);
 
     void createRenderer_(bool accel);
     void updateRenderer_(void);
@@ -327,7 +327,7 @@ public :
     void getViewPort(LX_AABB& viewport);
 
     /**
-    *   @fn void toggleFullscreen(Uint32 flag)
+    *   @fn void toggleFullscreen(uint32_t flag)
     *
     *   Set the window's fullscreen state
     *
@@ -337,7 +337,7 @@ public :
     *           - ::LX_GRAPHICS_NO_FULLSCREEN
     *
     */
-    void toggleFullscreen(Uint32 flag);
+    void toggleFullscreen(uint32_t flag);
 
     /**
     *   @fn void update(void)

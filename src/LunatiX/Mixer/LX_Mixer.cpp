@@ -242,7 +242,7 @@ void fadeOutMusic(int ms)
 }
 
 
-void setPanning(Uint8 left,Uint8 right)
+void setPanning(uint8_t left,uint8_t right)
 {
     Mix_SetPanning(MIX_CHANNEL_POST,left,right);
 }
@@ -254,13 +254,13 @@ void removePanning()
 }
 
 
-void setPosition(Sint16 angle)
+void setPosition(int16_t angle)
 {
     setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
 
-void setPosition(Sint16 angle, Uint8 distance)
+void setPosition(int16_t angle, uint8_t distance)
 {
     Mix_SetPosition(MIX_CHANNEL_POST,angle,distance);
 }
@@ -279,7 +279,7 @@ void reverseStereo(bool flip)
 }
 
 
-void setDistance(Uint8 distance)
+void setDistance(uint8_t distance)
 {
     Mix_SetDistance(MIX_CHANNEL_POST,distance);
 }

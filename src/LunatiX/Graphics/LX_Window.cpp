@@ -38,14 +38,14 @@ const int DEFAULT_WIN_WIDTH = 640;
 const int DEFAULT_WIN_HEIGHT = 480;
 
 // Mask values
-const Uint32 RMASK = 0xff000000;
-const Uint32 GMASK = 0x00ff0000;
-const Uint32 BMASK = 0x0000ff00;
-const Uint32 AMASK = 0x000000ff;
+const uint32_t RMASK = 0xff000000;
+const uint32_t GMASK = 0x00ff0000;
+const uint32_t BMASK = 0x0000ff00;
+const uint32_t AMASK = 0x000000ff;
 
-Uint32 generateFlags(LX_Config::LX_Configuration &config)
+uint32_t generateFlags(LX_Config::LX_Configuration &config)
 {
-    Uint32 flag = 0x00000000;
+    uint32_t flag = 0x00000000;
 
     if(config.getVideoFlag() && config.getOpenGLFlag())
         flag |= SDL_WINDOW_OPENGL;
@@ -124,7 +124,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
 *   Private function that initializes the window according to the configuration
 */
 void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int h,
-                              Uint32 flag, bool accel)
+                              uint32_t flag, bool accel)
 {
     _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
 
@@ -143,7 +143,7 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
 */
 void LX_Window::createRenderer_(bool accel)
 {
-    Uint32 render_flag = 0x00000000;
+    uint32_t render_flag = 0x00000000;
     LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
 
     // Hardware acceleration or software rendering
@@ -338,7 +338,7 @@ void LX_Window::getViewPort(LX_AABB& viewport)
 }
 
 
-void LX_Window::toggleFullscreen(Uint32 flag)
+void LX_Window::toggleFullscreen(uint32_t flag)
 {
     SDL_SetWindowFullscreen(_window,flag);
 
@@ -377,7 +377,7 @@ void LX_Window::update(void)
 */
 void LX_Window::clearRenderer_(void)
 {
-    Uint8 r,g,b,a;
+    uint8_t r,g,b,a;
     SDL_GetRenderDrawColor(_renderer,&r,&g,&b,&a);
     SDL_SetRenderDrawColor(_renderer,0,0,0,255);
     SDL_RenderClear(_renderer);

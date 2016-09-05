@@ -99,7 +99,7 @@ void LX_Haptic::rumbleEffectPlay(void)
 }
 
 
-void LX_Haptic::rumbleEffectPlay(float strength, Uint32 length)
+void LX_Haptic::rumbleEffectPlay(float strength, uint32_t length)
 {
     if(strength < 0.0f)
         strength = 0.0f;
@@ -116,7 +116,7 @@ int LX_Haptic::newEffect(SDL_HapticEffect& effect)
 }
 
 
-void LX_Haptic::runEffect(int effect_id, Uint32 iterations)
+void LX_Haptic::runEffect(int effect_id, uint32_t iterations)
 {
     SDL_HapticRunEffect(_haptic,effect_id,iterations);
 }

@@ -22,7 +22,6 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_stdinc.h>
 
 #define LX_MIXER_AUDIO_FREQUENCY 44100      /**< The default audio frequency             */
 #define LX_MIXER_STEREO_SOUND 2             /**< The stereo variable for the mix module  */
@@ -413,7 +412,7 @@ void fadeInMusicPos(LX_Music& music,int ms,int pos);
 void fadeOutMusic(int ms);
 
 /**
-*   @fn void setPanning(Uint8 left,Uint8 right)
+*   @fn void setPanning(uint8_t left,uint8_t right)
 *
 *   Set the panning, increasing of decreasing the volume on the left or the right
 *
@@ -429,7 +428,7 @@ void fadeOutMusic(int ms);
 *   @note To unregister this effect, use this function with 255 as left and right value
 *           or simply use LX_Mixer::removePanning().
 */
-void setPanning(Uint8 left,Uint8 right);
+void setPanning(uint8_t left,uint8_t right);
 /**
 *   @fn void removePanning()
 *   Remove the panning effect
@@ -438,23 +437,23 @@ void removePanning();
 
 // 3D Position
 /**
-*   @fn void setPosition(Sint16 angle)
+*   @fn void setPosition(int16_t angle)
 *
 *   Set the virtual position of the audio source.
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @note This function call setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE)
 */
-void setPosition(Sint16 angle);
+void setPosition(int16_t angle);
 /**
-*   @fn void setPosition(Sint16 angle, Uint8 distance)
+*   @fn void setPosition(int16_t angle, uint8_t distance)
 *
 *   Set the virtual position of the audio source.
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @param [in] distance The distance between the source and the listener
 */
-void setPosition(Sint16 angle, Uint8 distance);
+void setPosition(int16_t angle, uint8_t distance);
 /**
 *   @fn void resetPosition()
 *
@@ -476,13 +475,13 @@ void reverseStereo(bool flip);
 // Distance
 
 /**
-*   @fn void setDistance(Uint8 distance)
+*   @fn void setDistance(uint8_t distance)
 *
 *   Set the distance to all channels
 *
 *   @param [in] distance The virtual distance between the user and the source
 */
-void setDistance(Uint8 distance);
+void setDistance(uint8_t distance);
 
 };
 

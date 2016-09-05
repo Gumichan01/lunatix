@@ -37,7 +37,7 @@ namespace LX_MSGBox
 {
 
 /**
-*   @fn bool showMSG(Uint32 flag, std::string title, std::string msg)
+*   @fn bool showMSG(uint32_t flag, std::string title, std::string msg)
 *
 *   Display a simple message box
 *
@@ -50,7 +50,7 @@ namespace LX_MSGBox
 *
 *   @return TRUE on success, FALSE on error
 */
-bool showMSG(Uint32 flag, std::string title, std::string msg);
+bool showMSG(uint32_t flag, std::string title, std::string msg);
 
 };
 

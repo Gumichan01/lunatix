@@ -39,11 +39,11 @@ const char * IOException::what() const noexcept
 IOException::~IOException() noexcept {}
 
 
-LX_File::LX_File(const std::string filename, const Uint32 mode)
+LX_File::LX_File(const std::string filename, const uint32_t mode)
     : LX_File(UTF8string(filename),mode) {}
 
 
-LX_File::LX_File(const UTF8string& filename, const Uint32 mode)
+LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
     : _name(filename), _data(nullptr)
 {
     if(mode == 0x00000000)
@@ -52,7 +52,7 @@ LX_File::LX_File(const UTF8string& filename, const Uint32 mode)
     open_(mode);
 }
 
-void LX_File::open_(const Uint32 mode)
+void LX_File::open_(const uint32_t mode)
 {
     std::string str = "LX_File : ";
 
@@ -133,19 +133,19 @@ size_t LX_File::write(std::string str)
 }
 
 
-Sint64 LX_File::seek(Sint64 offset, int whence)
+int64_t LX_File::seek(int64_t offset, int whence)
 {
     return SDL_RWseek(_data,offset,whence);
 }
 
 
-Sint64 LX_File::tell(void)
+int64_t LX_File::tell(void)
 {
     return SDL_RWtell(_data);
 }
 
 
-Sint64 LX_File::size(void)
+int64_t LX_File::size(void)
 {
     return SDL_RWsize(_data);
 }
