@@ -62,10 +62,7 @@ LX_WindowManager::LX_WindowManager()
 
 
 // Destroy the instance,
-LX_WindowManager::~LX_WindowManager()
-{
-    // Emty
-}
+LX_WindowManager::~LX_WindowManager() {}
 
 
 int LX_WindowManager::addWindow(LX_Window *w)
