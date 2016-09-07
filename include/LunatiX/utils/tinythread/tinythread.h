@@ -958,11 +958,11 @@ public:
     /// Default constructor.
     /// The default constructed ID is that of thread without a thread of
     /// execution.
-    id() : mId(0) {};
+    id() : mId(0) {}
 
-    id(unsigned long int aId) : mId(aId) {};
+    id(unsigned long int aId) : mId(aId) {}
 
-    id(const id& aId) : mId(aId.mId) {};
+    id(const id& aId) : mId(aId.mId) {}
 
     inline id & operator=(const id &aId)
     {
@@ -1041,7 +1041,7 @@ public:
 
     /// Construct a duration object with the given duration.
     template <class _Rep2>
-    explicit duration(const _Rep2& r) : rep_(r) {};
+    explicit duration(const _Rep2& r) : rep_(r) {}
 
     /// Return the value of the duration object.
     rep count() const
