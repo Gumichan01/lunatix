@@ -375,8 +375,7 @@ LX_StreamingImage::~LX_StreamingImage()
 
 LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
-    : LX_Image(w,format), _text(""), _font(font), _size(0),
-    _dimension({0,0,0,0}) {}
+    : LX_Image(w,format), _text(""), _font(font), _size(0),_dimension({0,0,0,0}) {}
 
 
 LX_TextImage::LX_TextImage(std::string text, unsigned int sz,
@@ -388,8 +387,7 @@ LX_TextImage::LX_TextImage(std::string text, unsigned int sz,
 LX_TextImage::LX_TextImage(const UTF8string& text, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
-    : LX_Image(w,format), _text(text), _font(font), _size(sz),
-    _dimension({0,0,0,0}) {}
+    : LX_Image(w,format), _text(text), _font(font), _size(sz),_dimension({0,0,0,0}) {}
 
 
 void LX_TextImage::draw()
@@ -410,6 +408,11 @@ void LX_TextImage::draw(const double angle, const short mirror)
     SDL_RenderCopyEx(_win._renderer,_texture,nullptr,rect,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 
+}
+
+const UTF8string LX_TextImage::getText() const
+{
+    return _text;
 }
 
 void LX_TextImage::setPosition(int x, int y)
@@ -483,17 +486,17 @@ LX_ShadedTextImage::LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(std::string text, unsigned int sz,
-                                       LX_TrueTypeFont::LX_Font& font,
+                                       LX_TrueTypeFont::LX_Font& font,SDL_Color& c,
                                        LX_Win::LX_Window& w, uint32_t format)
-    : LX_ShadedTextImage(UTF8string(text),sz,font,w,format) {}
+    : LX_ShadedTextImage(UTF8string(text),sz,font,c,w,format) {}
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
-                                       LX_TrueTypeFont::LX_Font& font,
+                                       LX_TrueTypeFont::LX_Font& font,SDL_Color& c,
                                        LX_Win::LX_Window& w,uint32_t format)
-    : LX_TextImage(text,sz,font,w,format), _bgcolor({0,0,0,0})
+    : LX_TextImage(text,sz,font,w,format), _bgcolor(c)
 {
-
+    updateTexture_();
 }
 
 
@@ -539,6 +542,11 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
     updateTexture_();
 }
 
+void LX_ShadedTextImage::setBgColor(SDL_Color c)
+{
+    _bgcolor = c;
+    updateTexture_();
+}
 
 
 /* LX_BlendedTextImage */

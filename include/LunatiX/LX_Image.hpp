@@ -508,6 +508,13 @@ public:
     virtual void draw(const double angle, const short mirror);
 
     /**
+    *   @fn const UTF8string getText() const
+    *   Get the text
+    *   @return the text
+    */
+    const UTF8string getText() const;
+
+    /**
     *   @fn void setPosition(int x, int y)
     *
     *   Set the position of the current text
@@ -584,8 +591,8 @@ public:
     LX_SolidTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string text, unsigned int sz = 0);
-    virtual void setText(const UTF8string& text, unsigned int sz = 0);
+    virtual void setText(std::string text, unsigned int sz);
+    virtual void setText(const UTF8string& text, unsigned int sz);
     virtual void setSize(unsigned int sz);
 
     /// Destructor
@@ -615,44 +622,58 @@ protected:
 public:
 
     /// Constructor without the text
-    LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+    LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_ShadedTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_ShadedTextImage(std::string text, unsigned int sz,
+                       LX_TrueTypeFont::LX_Font& font, SDL_Color& c,
                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
-    LX_ShadedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
+                       LX_TrueTypeFont::LX_Font& font, SDL_Color& c,
                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string text, unsigned int sz = 0);
-    virtual void setText(const UTF8string& text, unsigned int sz = 0);
+    virtual void setText(std::string text, unsigned int sz);
+    virtual void setText(const UTF8string& text, unsigned int sz);
     /**
-    *   @fn virtual void setText(std::string text, SDL_Color c, unsigned int sz = 0)
+    *   @fn virtual void setText(std::string text, SDL_Color c, unsigned int sz)
     *
     *   Set the text with its color
     *
     *   @param [in] text The text to set
     *   @param [in] c The color of the text
-    *   @param [in] sz (Optional) The new size of the text
+    *   @param [in] sz The new size of the text
     *
     *   @note This function updates the image of the text
     */
-    virtual void setText(std::string text, SDL_Color c, unsigned int sz = 0);
+    virtual void setText(std::string text, SDL_Color c, unsigned int sz);
     /**
-    *   @fn virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz = 0)
+    *   @fn virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz)
     *
     *   Set the utf-8 text with its color
     *
     *   @param [in] text The utf-8 text to set
     *   @param [in] c The color of the text
-    *   @param [in] sz (Optional) The new size of the text
+    *   @param [in] sz The new size of the text
     *
     *   @note This function updates the image of the text
     */
-    virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz = 0);
+    virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz);
     virtual void setSize(unsigned int sz);
+
+    /**
+    *   @fn void setBgColor(SDL_Color c)
+    *
+    *   Set the color of the background behind the text
+    *
+    *   @param [in] c The color of the text
+    *
+    *   @note 1 - This function updates the image of the text
+    *   @note 2 - In order to
+    */
+    void setBgColor(SDL_Color c);
 
     /// Destructor
     ~LX_ShadedTextImage() = default;
@@ -690,8 +711,8 @@ public:
     LX_BlendedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string text, unsigned int sz = 0);
-    virtual void setText(const UTF8string& text, unsigned int sz = 0);
+    virtual void setText(std::string text, unsigned int sz);
+    virtual void setText(const UTF8string& text, unsigned int sz);
     virtual void setSize(unsigned int sz);
 
     /// Destructor
