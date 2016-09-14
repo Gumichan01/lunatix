@@ -78,7 +78,9 @@ void setFXVolume(unsigned short pvolume)
     else
         fx_volume = pvolume * overall_volume/100;
 
-    Mix_Volume(-1,fx_volume);
+    if(allocateChannels(-1) > 0)
+        Mix_Volume(-1,fx_volume);
+
     fx_pvolume = pvolume;
 }
 
@@ -136,7 +138,14 @@ void setMusicPosition(double pos)
 
 int allocateChannels(int num)
 {
-    return Mix_AllocateChannels(num);
+
+    int n = Mix_AllocateChannels(num);
+
+    // Set the volume of every channels to *fx_volume*
+    if(num > 0)
+        Mix_Volume(-1,fx_volume);
+
+    return n;
 }
 
 
