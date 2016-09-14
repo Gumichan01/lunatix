@@ -132,7 +132,7 @@ void test_SolidText()
 void test_ShadedText()
 {
     SDL_Color color = {0,0,0,0};
-    SDL_Color bg = {255,255,255,255};
+    SDL_Color bg = {255,200,127,0};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -145,7 +145,7 @@ void test_ShadedText()
     LX_Log::log("Load a shaded text image and display it");
 
     {
-        LX_Graphics::LX_ShadedTextImage simg(font,win);
+        LX_Graphics::LX_ShadedTextImage simg(str,32,font,bg,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setText(str,bg,32);
