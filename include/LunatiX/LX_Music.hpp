@@ -70,17 +70,18 @@ class LX_Music : public virtual LX_Sound
 protected:
 
     bool load_(const std::string& filename);
+    bool load_(const UTF8string& filename);
 
 public:
 
     /**
-    *   @fn LX_Music(const std::string& filename)
+    *   @fn LX_Music(const std::string filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
     */
-    LX_Music(const std::string& filename);
+    LX_Music(const std::string filename);
 
     /**
     *   @fn LX_Music(const UTF8string& filename)
