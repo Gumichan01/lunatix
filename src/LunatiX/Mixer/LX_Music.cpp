@@ -41,10 +41,10 @@ LX_MusicException::~LX_MusicException() noexcept {}
 
 /* LX_Music */
 
-LX_Music::LX_Music(const std::string& filename)
+LX_Music::LX_Music(const std::string filename)
     : _music(nullptr), _filename(filename)
 {
-    if(load_(filename) == false)
+    if(load_(_filename) == false)
         throw LX_MusicException(LX_GetError());
 }
 
