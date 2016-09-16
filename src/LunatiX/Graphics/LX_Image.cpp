@@ -57,7 +57,7 @@ LX_Image::LX_Image(LX_Win::LX_Window& w, uint32_t format)
     : _texture(nullptr), _win(w), _format(format) {}
 
 
-LX_Image::LX_Image(const std::string filename, LX_Win::LX_Window& w,
+LX_Image::LX_Image(const std::string& filename, LX_Win::LX_Window& w,
                    uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
@@ -153,7 +153,7 @@ LX_Image::~LX_Image()
 
 /* LX_Sprite */
 
-LX_Sprite::LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
+LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      uint32_t format)
     : LX_Image(filename,w,format) {}
 
@@ -198,7 +198,7 @@ LX_Sprite::~LX_Sprite() {}
 
 /* LX_AnimatedSprite */
 
-LX_AnimatedSprite::LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
+LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord, const uint32_t delay,
                                      uint32_t format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
@@ -263,7 +263,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 
 /* LX_Surface */
 
-LX_Surface::LX_Surface(const std::string filename, LX_Win::LX_Window& w,
+LX_Surface::LX_Surface(const std::string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
     : LX_Image(w,format), _surface(nullptr)
 {

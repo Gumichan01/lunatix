@@ -73,7 +73,7 @@ class LX_FileBuffer
 public :
 
     /**
-    *   @fn LX_FileBuffer(const std::string filename)
+    *   @fn LX_FileBuffer(const std::string& filename)
     *   @brief Constructor
     *
     *   Build the instance of the file buffer
@@ -84,7 +84,7 @@ public :
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    LX_FileBuffer(const std::string filename);
+    LX_FileBuffer(const std::string& filename);
 
     /**
     *   @fn LX_FileBuffer(const UTF8string& filename)

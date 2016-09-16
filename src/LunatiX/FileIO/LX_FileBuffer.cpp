@@ -30,7 +30,7 @@
 namespace LX_FileIO
 {
 
-LX_FileBuffer::LX_FileBuffer(const std::string filename)
+LX_FileBuffer::LX_FileBuffer(const std::string& filename)
     : LX_FileBuffer(UTF8string(filename)) {}
 
 

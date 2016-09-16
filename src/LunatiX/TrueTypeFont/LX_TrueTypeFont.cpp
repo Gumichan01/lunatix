@@ -62,7 +62,7 @@ LX_Font::LX_Font(const SDL_Color& color, unsigned int size)
 }
 
 
-LX_Font::LX_Font(const std::string font_file,const SDL_Color& color)
+LX_Font::LX_Font(const std::string& font_file,const SDL_Color& color)
     : LX_Font(font_file,color,LX_TTF_DEFAULT_FONT_SIZE) {}
 
 
@@ -188,7 +188,7 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, const UTF8string& text,
 }
 
 
-SDL_Texture * LX_Font::drawSolidText(const std::string text, unsigned int size,
+SDL_Texture * LX_Font::drawSolidText(const std::string& text, unsigned int size,
                                      LX_Win::LX_Window& w)
 {
     return drawSolidText(UTF8string(text),size,w);
@@ -210,7 +210,7 @@ SDL_Texture * LX_Font::drawSolidText(const UTF8string& text, unsigned int size,
 }
 
 
-SDL_Texture * LX_Font::drawShadedText(const std::string text, unsigned int size, SDL_Color bg,
+SDL_Texture * LX_Font::drawShadedText(const std::string& text, unsigned int size, SDL_Color bg,
                                       LX_Win::LX_Window& w)
 {
     return drawShadedText(UTF8string(text),size,bg,w);
@@ -232,7 +232,7 @@ SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size,
 }
 
 
-SDL_Texture * LX_Font::drawBlendedText(const std::string text, unsigned int size,
+SDL_Texture * LX_Font::drawBlendedText(const std::string& text, unsigned int size,
                                        LX_Win::LX_Window& w)
 {
     return drawBlendedText(UTF8string(text),size,w);

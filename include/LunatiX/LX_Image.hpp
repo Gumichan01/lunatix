@@ -87,7 +87,7 @@ protected:
 public:
 
     /**
-    *   @fn LX_Image(const std::string filename, LX_Win::LX_Window& w,
+    *   @fn LX_Image(const std::string& filename, LX_Win::LX_Window& w,
     *                uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
@@ -139,7 +139,7 @@ public:
     *   The default value is **SDL_PIXELFORMAT_RGBA8888**
     *
     */
-    LX_Image(const std::string filename, LX_Win::LX_Window& w,
+    LX_Image(const std::string& filename, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constuctor with the filename (UTF-8)
@@ -214,7 +214,7 @@ class LX_Sprite: public LX_Image
 public:
 
     /// Sprite constuctor
-    LX_Sprite(const std::string filename, LX_Win::LX_Window& w,
+    LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Sprite constuctor with the filename (UTF-8)
@@ -294,7 +294,7 @@ class LX_AnimatedSprite: public LX_Sprite
 public:
 
     /**
-    *   @fn LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
+    *   @fn LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
     *                         const std::vector<LX_AABB>& coord, const uint32_t delay,
     *                         uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *
@@ -308,7 +308,7 @@ public:
     *
     *   @sa LX_Image
     */
-    LX_AnimatedSprite(const std::string filename, LX_Win::LX_Window& w,
+    LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
@@ -347,7 +347,7 @@ class LX_Surface: private LX_Image
 public:
 
     /// Surface constuctor
-    LX_Surface(const std::string filename, LX_Win::LX_Window& w,
+    LX_Surface(const std::string& filename, LX_Win::LX_Window& w,
                uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with the filename (UTF-8)

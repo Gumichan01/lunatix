@@ -39,7 +39,7 @@ const char * IOException::what() const noexcept
 IOException::~IOException() noexcept {}
 
 
-LX_File::LX_File(const std::string filename, const uint32_t mode)
+LX_File::LX_File(const std::string& filename, const uint32_t mode)
     : LX_File(UTF8string(filename),mode) {}
 
 

@@ -98,7 +98,7 @@ bool loadLibrary(std::string path);
 void UnloadLibrary();
 
 /**
-*   @fn template<typename T> T getProcAddress(const std::string proc);
+*   @fn template<typename T> T getProcAddress(const std::string& proc);
 *
 *   Get an OpenGL function by name.
 *
@@ -127,7 +127,7 @@ void UnloadLibrary();
 *   where this matters (Win32) thereby avoiding stack corruption.
 */
 template<typename T>
-T getProcAddress(const std::string proc);
+T getProcAddress(const std::string& proc);
 
 
 /**

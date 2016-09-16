@@ -91,7 +91,7 @@ class LX_File
 public :
 
     /**
-    *   @fn LX_File(const std::string filename, const uint32_t mode)
+    *   @fn LX_File(const std::string& filename, const uint32_t mode)
     *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
@@ -110,7 +110,7 @@ public :
     *               or the file is not openable
     *
     */
-    LX_File(const std::string filename, const uint32_t mode);
+    LX_File(const std::string& filename, const uint32_t mode);
 
 
     /**

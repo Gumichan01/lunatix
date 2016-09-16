@@ -109,7 +109,7 @@ public:
     LX_Font(const SDL_Color& color, unsigned int size=0);
 
     /**
-    *   @fn LX_Font(const std::string font_file,const SDL_Color& color)
+    *   @fn LX_Font(const std::string& font_file,const SDL_Color& color)
     *   @brief Constructor
     *
     *   Construct the font with font file and color
@@ -123,7 +123,7 @@ public:
     *   @exception  LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const std::string font_file,const SDL_Color& color);
+    LX_Font(const std::string& font_file,const SDL_Color& color);
 
     /**
     *   @fn LX_Font(const std::string& font_file,const SDL_Color& color, unsigned int size)
@@ -189,7 +189,7 @@ public:
     int sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h);
 
     /**
-    *   @fn SDL_Texture * drawSolidText(const std::string text,
+    *   @fn SDL_Texture * drawSolidText(const std::string& text,
     *                                   unsigned int size, LX_Win::LX_Window& w)
     *
     *   Render the text in solid mode. The size has to be specified
@@ -201,7 +201,7 @@ public:
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
     */
-    SDL_Texture * drawSolidText(const std::string text, unsigned int size, LX_Win::LX_Window& w);
+    SDL_Texture * drawSolidText(const std::string& text, unsigned int size, LX_Win::LX_Window& w);
     /**
     *   @fn SDL_Texture * drawSolidText(const UTF8string& text, unsigned int size,
     *                                   LX_Win::LX_Window& w)
@@ -218,7 +218,7 @@ public:
     SDL_Texture * drawSolidText(const UTF8string& text, unsigned int size, LX_Win::LX_Window& w);
 
     /**
-    *   @fn SDL_Texture * drawShadedText(const std::string text, unsigned int size,
+    *   @fn SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
     *                                    SDL_Color bg, LX_Win::LX_Window& w)
     *
     *   Render the text in shaded mode. The size has to be specified
@@ -231,7 +231,7 @@ public:
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
     */
-    SDL_Texture * drawShadedText(const std::string text, unsigned int size,
+    SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
                                  SDL_Color bg, LX_Win::LX_Window& w);
     /**
     *   @fn SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
@@ -251,7 +251,7 @@ public:
                                  SDL_Color bg, LX_Win::LX_Window& w);
 
     /**
-    *   @fn SDL_Texture * drawBlendedText(const std::string text, unsigned int size,
+    *   @fn SDL_Texture * drawBlendedText(const std::string& text, unsigned int size,
     *                                     LX_Win::LX_Window& w)
     *
     *   Render the text in blended mode. The size has to be specified
@@ -263,7 +263,7 @@ public:
     *   @return An valid pointer to a texture, NULL otherwise.
     *           Call LX_GetError to get error information
     */
-    SDL_Texture * drawBlendedText(const std::string text, unsigned int size,
+    SDL_Texture * drawBlendedText(const std::string& text, unsigned int size,
                                   LX_Win::LX_Window& w);
     /**
     *   @fn SDL_Texture * drawBlendedText(const UTF8string& text, unsigned int size,
