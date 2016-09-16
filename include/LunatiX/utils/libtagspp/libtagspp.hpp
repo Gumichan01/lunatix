@@ -60,11 +60,11 @@ public:
     */
     int bitrate() const;
     /**
-    *   @fn const char * duration() const
+    *   @fn std::string duration() const
     *   Get the duration of the music
-    *   @return A constant string representing the duration, "0" if it is not defined
+    *   @return A string representing the duration, "0" if it is not defined
     */
-    const char * duration() const;
+    std::string duration() const;
     /**
     *   @fn int format() const
     *   Get the format of the music
