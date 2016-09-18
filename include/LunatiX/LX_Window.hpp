@@ -377,7 +377,7 @@ public :
     *
     *   Get the width of the window
     *
-    *   @return the width
+    *   @return The width
     */
     int getWidth(void);
 
@@ -386,9 +386,27 @@ public :
     *
     *   Get the height of the window
     *
-    *   @return the height
+    *   @return The height
     */
     int getHeight(void);
+
+    /**
+    *   @fn int getLogicalWidth(void)
+    *
+    *   Get the logical width of the window
+    *
+    *   @return The logical width
+    */
+    int getLogicalWidth(void);
+
+    /**
+    *   @fn int getLogicalHeight(void)
+    *
+    *   Get the logical height of the window
+    *
+    *   @return The logical height
+    */
+    int getLogicalHeight(void);
 
     /**
     *   @fn void glGetDrawableSize(int& w, int& h)

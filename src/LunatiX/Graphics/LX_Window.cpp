@@ -346,9 +346,8 @@ void LX_Window::toggleFullscreen(uint32_t flag)
     {
         setWindowSize(_original_width,_original_height);
     }
-    else if(flag == LX_GRAPHICS_FULLSCREEN_DESKTOP)
+    else if(flag == LX_GRAPHICS_FULLSCREEN)
     {
-        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
         SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
     }
 }
@@ -462,6 +461,22 @@ int LX_Window::getHeight(void)
     int h;
     SDL_GetWindowSize(_window,nullptr,&h);
     return h;
+}
+
+
+int LX_Window::getLogicalWidth(void)
+{
+    int w;
+    SDL_RenderGetLogicalSize(_renderer,&w,nullptr);
+    return w == 0 ? getWidth() : w;
+}
+
+
+int LX_Window::getLogicalHeight(void)
+{
+    int h;
+    SDL_RenderGetLogicalSize(_renderer,nullptr,&h);
+    return h == 0 ? getHeight() : h;
 }
 
 
