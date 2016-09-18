@@ -136,6 +136,8 @@ bool LX_Init(void)
                                              LX_GL_MINOR_VERSION);
     }
 
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
+
     LX_Win::LX_WindowManager::init();
     return true;
 }
