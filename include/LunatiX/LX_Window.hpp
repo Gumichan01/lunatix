@@ -76,7 +76,7 @@ struct LX_WindowInfo
     int h;              /**< Window Height              */
     int lw;             /**< Independant device width   */
     int lh;             /**< Independant device height  */
-    uint32_t flag;        /**< Flags                      */
+    uint32_t flag;      /**< Flags                      */
     bool accel;         /**< Hardware acceleration      */
 
 };

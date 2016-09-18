@@ -154,7 +154,7 @@ void LX_Window::createRenderer_(bool accel)
 
     // Video flag and VSync flag actives -> add the option
     if(config->getVideoFlag() && config->getVSyncFlag())
-        render_flag |= SDL_RENDERER_PRESENTVSYNC;
+        SDL_SetHint(SDL_HINT_RENDER_VSYNC,"1");
 
     _renderer = SDL_CreateRenderer(_window,-1,render_flag);
 
