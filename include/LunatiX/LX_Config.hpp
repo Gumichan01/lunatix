@@ -42,7 +42,7 @@ class LX_ConfigurationException : public std::exception
 {
     UTF8string _string_error;
 
-public :
+public:
 
     /// Constructor
     explicit LX_ConfigurationException(UTF8string err);
