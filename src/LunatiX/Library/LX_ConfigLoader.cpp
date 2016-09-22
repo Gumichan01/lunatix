@@ -25,6 +25,10 @@
 #include <fstream>
 #include <regex>
 
+namespace
+{
+const char * LX_SDL_FILE="config/lxsdl.cfg";
+};
 
 namespace LX_Config
 {
@@ -33,6 +37,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
 {
     const char SHARP = '#';
     const std::string ONE("1");
+    const std::string EQUAL("=");
     const std::regex VIDEO_REG("video=[[:digit:]]+",std::regex::extended);
     const std::regex VSYNC_REG("vsync=[[:digit:]]+",std::regex::extended);
     const std::regex TTF_REG("ttf=[[:digit:]]+",std::regex::extended);
@@ -61,7 +66,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
         if(line.empty() || line[0] == SHARP)
             continue;
 
-        s = line.substr(line.find("=") + 1);
+        s = line.substr(line.find(EQUAL) + 1);
 
         switch(cpt)
         {

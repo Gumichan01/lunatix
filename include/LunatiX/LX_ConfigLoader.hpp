@@ -22,8 +22,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-#define LX_SDL_FILE "config/lxsdl.cfg"
-
 
 namespace LX_Config
 {
