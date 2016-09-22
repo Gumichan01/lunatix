@@ -23,6 +23,7 @@
 #include <sstream>
 
 #include <LunatiX/LX_Config.hpp>
+#include <LunatiX/LX_ConfigLoader.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 namespace LX_Config
@@ -30,6 +31,7 @@ namespace LX_Config
 
 // unique instance
 static LX_Configuration *instance = nullptr;
+LX_Config::LX_InternalConfig _conf = {0,0,0,0,0,0,UTF8string(""),0,0,0};
 
 namespace
 {

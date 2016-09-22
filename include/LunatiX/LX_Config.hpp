@@ -21,7 +21,7 @@
 *
 */
 
-#include <LunatiX/LX_ConfigLoader.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 
 /**
 *   @namespace LX_Config
@@ -40,7 +40,6 @@ namespace LX_Config
 */
 class LX_ConfigurationException : public std::exception
 {
-
     UTF8string _string_error;
 
 public :
@@ -66,8 +65,6 @@ public :
 */
 class LX_Configuration
 {
-    LX_Config::LX_InternalConfig _conf;
-
     LX_Configuration();
     LX_Configuration(LX_Configuration& c);
     LX_Configuration& operator =(LX_Configuration& c);
