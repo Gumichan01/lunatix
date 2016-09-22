@@ -1,12 +1,12 @@
 /*
 *
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    gumichan01.olympe.in
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   gumichan01.olympe.in
 *
 *   This library is under the MIT license
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 *
 */
 
@@ -37,8 +37,9 @@ class UTF8string
 
     bool utf8_is_valid_() const;
     size_t utf8_length_() const;
-    size_t utf8_codepoint_len_(size_t j) const;
+    size_t utf8_codepoint_len_(const size_t j) const;
     size_t utf8_bpos_at_(const size_t cpos) const;
+    void utf8_at_(const size_t index, std::string& s) const;
     UTF8iterator utf8_iterator_() const noexcept;
     UTF8string utf8_reverse_aux_(UTF8iterator& it,
                                  const UTF8iterator& end, UTF8string& res);
@@ -61,7 +62,7 @@ public:
     *   it is the largest possible representable value for this type.
     *
     */
-    const static size_t npos = static_cast<size_t>(-1);
+    const static size_t npos = static_cast<const size_t>(-1);
 
     /**
     *   @fn UTF8string()
@@ -70,21 +71,21 @@ public:
 
     /**
     *   @fn UTF8string(const std::string &str)
-    *   @param [in] str The string to convert from
+    *   @param str The string to convert from
     *   @exception std::invalid_argument If the string is not valid
     */
     UTF8string(const std::string &str);
 
     /**
     *   @fn UTF8string(const UTF8string &u8str)
-    *   @param [in] u8str The string to convert from
+    *   @param u8str The string to convert from
     *   @exception std::invalid_argument If the string is not valid
     */
     UTF8string(const UTF8string &u8str);
 
     /**
     *   @fn const UTF8string& operator =(const char * str)
-    *   @param [in] str C-string that will be converted
+    *   @param str C-string that will be converted
     *   @return A reference to the new utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
@@ -92,7 +93,7 @@ public:
 
     /**
     *   @fn const UTF8string& operator =(const std::string &str)
-    *   @param [in] str The string that will be converted and checked
+    *   @param str The string that will be converted and checked
     *   @return A reference to the new utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
@@ -100,7 +101,7 @@ public:
 
     /**
     *   @fn const UTF8string& operator =(const UTF8string &u8str)
-    *   @param [in] u8str The utf-8 string
+    *   @param u8str The utf-8 string
     *   @return A reference to the new utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
@@ -111,7 +112,7 @@ public:
     *
     *   Append a utf-8 string
     *
-    *   @param [in] u8str The string to convert from
+    *   @param u8str The string to convert from
     *   @return The reference to the concatenated utf-8 string
     */
     const UTF8string& operator +=(const UTF8string &u8str);
@@ -121,7 +122,7 @@ public:
     *
     *   Append a string
     *
-    *   @param [in] str The string to convert from
+    *   @param str The string to convert from
     *   @return The reference to the concatenated utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
@@ -132,7 +133,7 @@ public:
     *
     *   Append a C-string
     *
-    *   @param [in] str The string to convert from
+    *   @param str The string to convert from
     *   @return The reference to the concatenated utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
@@ -158,11 +159,24 @@ public:
     *
     *   Get the codepoint at a specified position.
     *
-    *   @param [in] index The index of the requested codepoint in the string
+    *   @param index The index of the requested codepoint in the string
     *   @return The codepoint
-    *   @exception std::out_of_range If the index if out of the string range
+    *   @exception std::out_of_range If the index is out of the string range
     */
     std::string utf8_at(const size_t index) const;
+
+    /**
+    *   @fn std::string utf8_at(const size_t index) const
+    *
+    *   Get the codepoint at a specified position.
+    *
+    *   @param index The index of the requested codepoint in the string
+    *   @return The codepoint
+    *
+    *   @note If the index is out of the string range, calling this functions
+    *         causes undefined behaviour
+    */
+    std::string operator [](const size_t index) const;
 
     /**
     *   @fn void utf8_pop()
@@ -182,8 +196,8 @@ public:
     *   character position *pos* and spans *len* characters
     *   (or until the end of the string, whichever comes first).
     *
-    *   @param [in] pos The beginning position of the substring (default value: 0)
-    *   @param [in] len The length of the substring (in number of codepoints, default value = npos)
+    *   @param pos The beginning position of the substring (default value: 0)
+    *   @param len The length of the substring (in number of codepoints, default value = npos)
     *   @return The substring
     */
     UTF8string utf8_substr(size_t pos = 0, size_t len = npos) const;
@@ -198,8 +212,8 @@ public:
     *   at or after position pos, ignoring any possible occurrences
     *   that include characters before pos.
     *
-    *   @param [in] str The string to look for
-    *   @param [in] pos The osition to start the search
+    *   @param str The string to look for
+    *   @param pos The osition to start the search
     *   @return The position of the subtring if it was found
     *           (in number of codepoints), UTF8string::npos otherwise.
     */
@@ -272,8 +286,8 @@ public:
 *   Two utf-8 strings are equals if and only if they heve the same length
 *   and have the same sequence of codepoints.
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return TRUE if they are equals, FALSE otherwise
 */
 bool operator ==(const UTF8string &str1, const UTF8string &str2);
@@ -283,8 +297,8 @@ bool operator ==(const UTF8string &str1, const UTF8string &str2);
 *
 *   Check if two utf-8 strings are differents.
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return TRUE if they are not equals, FALSE otherwise
 */
 bool operator !=(const UTF8string &str1, const UTF8string &str2);
@@ -295,8 +309,8 @@ bool operator !=(const UTF8string &str1, const UTF8string &str2);
 *   Check if the first utf-8 string is shorter or equal
 *   than/to the second utf-8 string
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return TRUE if the first string is shorter, FALSE otherwise
 */
 bool operator <=(const UTF8string &str1, const UTF8string &str2);
@@ -306,8 +320,8 @@ bool operator <=(const UTF8string &str1, const UTF8string &str2);
 *
 *   Check if the first utf-8 string is longer or equal than/to the second utf-8 string
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return TRUE if tthe first string is longer, FALSE otherwise
 */
 bool operator >=(const UTF8string &str1, const UTF8string &str2);
@@ -318,8 +332,8 @@ bool operator >=(const UTF8string &str1, const UTF8string &str2);
 *   Check if the first utf-8 string is strictly shorter
 *   than the second utf-8 string
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return TRUE if the first string is strictly shorter, FALSE otherwise
 */
 bool operator <(const UTF8string &str1, const UTF8string &str2);
@@ -330,8 +344,8 @@ bool operator <(const UTF8string &str1, const UTF8string &str2);
 *   Check if the first utf-8 string is strictly longer
 *   than the second utf-8 string
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return TRUE if the string is strictly longer, FALSE otherwise
 */
 bool operator >(const UTF8string &str1, const UTF8string &str2);
@@ -341,8 +355,8 @@ bool operator >(const UTF8string &str1, const UTF8string &str2);
 *
 *   Generate a string as a concatenation of the two utf-8 givenin arguments
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 utf-8 string
+*   @param str1 utf-8 string
+*   @param str2 utf-8 string
 *   @return A new string whose values is the concatenation of str1 and str2
 */
 UTF8string operator +(const UTF8string &str1, const UTF8string &str2);
@@ -353,8 +367,8 @@ UTF8string operator +(const UTF8string &str1, const UTF8string &str2);
 *   Generate a string as a concatenation of a utf-8 string and a string
 *   given in arguments
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 string
+*   @param str1 utf-8 string
+*   @param str2 string
 *   @return A new string whose values is the concatenation of str1 and str2
 */
 UTF8string operator +(const UTF8string &str1, const std::string &str2);
@@ -365,8 +379,8 @@ UTF8string operator +(const UTF8string &str1, const std::string &str2);
 *   Generate a string as a concatenation of a string and a utf-8 string
 *   given in arguments
 *
-*   @param [in] str1 string
-*   @param [in] str2 utf-8 string
+*   @param str1 string
+*   @param str2 utf-8 string
 *   @return A new string whose values is the concatenation of str1 and str2
 */
 UTF8string operator +(const std::string &str1, const UTF8string &str2);
@@ -377,8 +391,8 @@ UTF8string operator +(const std::string &str1, const UTF8string &str2);
 *   Generate a string as a concatenation of a utf-8 string and a C-string
 *   given in arguments
 *
-*   @param [in] str1 utf-8 string
-*   @param [in] str2 C-string
+*   @param str1 utf-8 string
+*   @param str2 C-string
 *   @return A new string whose values is the concatenation of str1 and str2
 */
 UTF8string operator +(const UTF8string &str1, const char * str2);
@@ -389,8 +403,8 @@ UTF8string operator +(const UTF8string &str1, const char * str2);
 *   Generate a string as a concatenation of a C-string and a utf-8 string
 *   given in arguments
 *
-*   @param [in] str1 C-string
-*   @param [in] str2 utf8 string
+*   @param str1 C-string
+*   @param str2 utf8 string
 *   @return A new string whose values is the concatenation of str1 and str2
 */
 UTF8string operator +(const char * str1, const UTF8string &str2);
@@ -403,8 +417,8 @@ UTF8string operator +(const char * str1, const UTF8string &str2);
 *   This function overloads *operator <<* to behave as described
 *   in *ostream::operator <<* for C-strings, but applied to utf-8 string objects.
 *
-*   @param [in,out] os The output stream
-*   @param [in] str utf8 string to put
+*   @param os The output stream
+*   @param str utf8 string to put
 *   @return The same as parameter *os*
 */
 std::ostream & operator <<(std::ostream &os, const UTF8string &str);
@@ -418,8 +432,8 @@ std::ostream & operator <<(std::ostream &os, const UTF8string &str);
 *   This function overloads *operator >>* to behave as described
 *   in *istream::operator >>* for c-strings, but applied to string objects.
 *
-*   @param [in,out] is The input stream
-*   @param [in] str utf8 string to put
+*   @param is The input stream
+*   @param str utf8 string to put
 *   @return The same as parameter *is*
 */
 std::istream & operator >>(std::istream &is, UTF8string &str);
