@@ -30,7 +30,7 @@
 /**
 *   @fn bool LX_Init(void)
 *
-*   Loads the library according the configuration file
+*   Load the library according the configuration file
 *
 *   @return TRUE if all systems were init, FALSE otherwise
 *
@@ -39,6 +39,30 @@
 *
 */
 bool LX_Init(void);
+
+/**
+*   @fn bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value)
+*
+*   Set a configuration hint
+*
+*   @param [in] sdlconfig_name The name of the [hint](http://wiki.libsdl.org/CategoryHints#Hints)
+*   @param [in] sdlconfig_value The value of the hint
+*
+*   @return TRUE on SUCCESS, FALSE otherwise.
+*/
+bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value);
+
+/**
+*   @fn const std::string getSDLConfig(const std::string& sdlconfig_name)
+*
+*   Get ht evalue of a configuration hint given in argument
+*
+*   @param [in] sdlconfig_name The name of the [hint](http://wiki.libsdl.org/CategoryHints#Hints)
+*
+*   @return A non-empty string on success, an empty string on failure
+*/
+const std::string getSDLConfig(const std::string& sdlconfig_name);
+
 /**
 *   @fn void LX_Quit(void)
 *

@@ -136,10 +136,20 @@ bool LX_Init(void)
                                              LX_GL_MINOR_VERSION);
     }
 
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
-
     LX_Win::LX_WindowManager::init();
     return true;
+}
+
+
+bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value)
+{
+    return SDL_SetHint(sdlconfig_name.c_str(),sdlconfig_value.c_str()) == SDL_TRUE;
+}
+
+const std::string getSDLConfig(const std::string& sdlconfig_name)
+{
+    const char * res = SDL_GetHint(sdlconfig_name.c_str());
+    return res == nullptr ? "" : std::string(res);
 }
 
 

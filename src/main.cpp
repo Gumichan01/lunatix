@@ -22,6 +22,8 @@ int main(int argc, char** argv)
         return -1;
     }
 
+    setSDLConfig(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
+
     LX_AABB position = {0,0,W,H};
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
