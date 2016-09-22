@@ -72,7 +72,6 @@
 		</Unit>
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
-		<Unit filename="include/LunatiX/LX_ConfigLoader.hpp" />
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
@@ -125,7 +124,6 @@
 		<Unit filename="src/LunatiX/Graphics/LX_Window.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_WindowManager.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Config.cpp" />
-		<Unit filename="src/LunatiX/Library/LX_ConfigLoader.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Library.cpp" />
 		<Unit filename="src/LunatiX/MSGBox/LX_MessageBox.cpp" />
 		<Unit filename="src/LunatiX/Mixer/LX_Chunk.cpp" />
