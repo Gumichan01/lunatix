@@ -55,7 +55,7 @@ struct LX_InternalConfig
     int height;             // Height
 };
 
-LX_Config::LX_InternalConfig _conf = {0,0,0,0,0,0,UTF8string(""),0,0,0};
+static LX_InternalConfig _conf;
 
 
 void readFile_(std::ifstream& f,LX_InternalConfig& config);
@@ -171,6 +171,7 @@ void loadSDLfileConfig(LX_InternalConfig& config)
         return;
     }
 
+    _conf = {0,0,0,0,0,0,UTF8string(""),0,0,0};
     readFile_(f,config);
     f.close();
 }
