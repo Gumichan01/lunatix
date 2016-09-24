@@ -51,6 +51,7 @@ void test_gamepad(void)
 
     {
         LX_Gamepad gp;
+        gp.open(0);
 
         if(gp.isConnected())
         {
@@ -68,6 +69,7 @@ void test_gamepad(void)
             else
                 LX_Log::log("No haptic");
         }
+        gp .close();
     }
     LX_Log::log(" == END TEST == ");
 }

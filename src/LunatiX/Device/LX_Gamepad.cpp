@@ -39,7 +39,16 @@
 namespace LX_Device
 {
 
-LX_Gamepad::LX_Gamepad(int index): _gc(nullptr),_joy(nullptr),_haptic(nullptr)
+LX_Gamepad::LX_Gamepad(): _gc(nullptr),_joy(nullptr),_haptic(nullptr) {}
+
+
+LX_Gamepad::~LX_Gamepad()
+{
+    close();
+}
+
+
+void LX_Gamepad::open(int index)
 {
     if(index < numberOfDevices() && SDL_IsGameController(index))
         _gc = SDL_GameControllerOpen(index);
@@ -58,14 +67,21 @@ LX_Gamepad::LX_Gamepad(int index): _gc(nullptr),_joy(nullptr),_haptic(nullptr)
 }
 
 
-LX_Gamepad::~LX_Gamepad()
+void LX_Gamepad::close()
 {
     delete _haptic;
+    _haptic = nullptr;
 
     if(_gc != nullptr)
+    {
         SDL_GameControllerClose(_gc);
+        _gc = nullptr;
+    }
     else
+    {
         SDL_JoystickClose(_joy);
+        _joy = nullptr;
+    }
 }
 
 

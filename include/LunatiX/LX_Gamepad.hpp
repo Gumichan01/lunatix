@@ -58,15 +58,28 @@ class LX_Gamepad
 public :
 
     /**
-    *   @fn LX_Gamepad(int index)
+    *   @fn LX_Gamepad()
     *   @brief Constructor
+    */
+    LX_Gamepad();
+
+    /**
+    *   @fn void open(int index)
+    *
+    *   Open the gamepad
     *
     *   @param [in] index The index of the joystick to query
     *
     *   @note   You can check the success of the operation
     *           calling isConnected()
     */
-    explicit LX_Gamepad(int index=0);
+    void open(int index);
+
+    /**
+    *   @fn void close()
+    *   Close the gamepad
+    */
+    void close();
 
     /**
     *   @fn bool isConnected(void)
