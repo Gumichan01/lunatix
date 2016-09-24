@@ -100,6 +100,8 @@ int numberOfDevices(void);
 *   Get the string value of a button specified by the enum
 *   given in argument
 *
+*   @param [in] button The enumeration to get the string from
+*
 *   @return The string on success, "null" otherwise
 */
 UTF8string stringOfButton(LX_GamepadButton button);
@@ -107,6 +109,8 @@ UTF8string stringOfButton(LX_GamepadButton button);
 *   @fn UTF8string stringOfButton(uint8_t button)
 *
 *   Get the string value of a button value
+*
+*   @param [in] button The value to get the string from
 *
 *   @return The string on success, "null" otherwise
 */
@@ -118,6 +122,8 @@ UTF8string stringOfButton(uint8_t button);
 *   Get the string value of an axis specified by the enum
 *   given in argument
 *
+*   @param [in] axis The enumeration to get the string from
+*
 *   @return The string on success, "null" otherwise
 */
 UTF8string stringOfAxis(LX_GamepadAxis axis);
@@ -126,6 +132,8 @@ UTF8string stringOfAxis(LX_GamepadAxis axis);
 *
 *   Get the string value of an axis specified by the enum
 *   given in argument
+*
+*   @param [in] axis The value to get the string from
 *
 *   @return The string on success, "null" otherwise
 */
