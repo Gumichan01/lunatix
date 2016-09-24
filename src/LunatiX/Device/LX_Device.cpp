@@ -35,6 +35,11 @@ inline SDL_GameControllerButton toGCButton(LX_GamepadButton button)
     return static_cast<SDL_GameControllerButton>(button);
 }
 
+inline SDL_GameControllerAxis toGCAxis(LX_GamepadAxis axis)
+{
+    return static_cast<SDL_GameControllerAxis>(axis);
+}
+
 
 int numberOfDevices(void)
 {
@@ -45,6 +50,13 @@ int numberOfDevices(void)
 UTF8string stringOfButton(LX_GamepadButton button)
 {
     const char * s = SDL_GameControllerGetStringForButton(toGCButton(button));
+    return UTF8string(s == nullptr ? "null" : s);
+}
+
+
+UTF8string stringOfAxis(LX_GamepadAxis axis)
+{
+    const char * s = SDL_GameControllerGetStringForAxis(toGCAxis(axis));
     return UTF8string(s == nullptr ? "null" : s);
 }
 

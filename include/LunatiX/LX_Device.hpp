@@ -52,8 +52,20 @@ enum LX_GamepadButton {LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID,
                        LX_BUTTON_DPAD_DOWN     = SDL_CONTROLLER_BUTTON_DPAD_DOWN,
                        LX_BUTTON_DPAD_LEFT     = SDL_CONTROLLER_BUTTON_DPAD_LEFT,
                        LX_BUTTON_DPAD_RIGHT    = SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
-                       LX_BUTTON_DPAD_MAX      = SDL_CONTROLLER_BUTTON_MAX,
+                       LX_BUTTON_MAX           = SDL_CONTROLLER_BUTTON_MAX,
                       };
+
+enum LX_GamepadAxis {LX_AXIS_INVALID      = SDL_CONTROLLER_AXIS_INVALID,
+                     LX_AXIS_LEFTX        = SDL_CONTROLLER_AXIS_LEFTX,
+                     LX_AXIS_LEFTY        = SDL_CONTROLLER_AXIS_LEFTY,
+                     LX_AXIS_RIGHTX       = SDL_CONTROLLER_AXIS_RIGHTX,
+                     LX_AXIS_RIGHTY       = SDL_CONTROLLER_AXIS_RIGHTY,
+                     LX_AXIS_TRIGGERLEFT  = SDL_CONTROLLER_AXIS_TRIGGERLEFT,
+                     LX_AXIS_TRIGGERRIGHT = SDL_CONTROLLER_AXIS_TRIGGERRIGHT,
+                     LX_AXIS_MAX          = SDL_CONTROLLER_AXIS_MAX,
+                    };
+
+
 
 /**
 *   @struct LX_GamepadInfo
@@ -84,11 +96,22 @@ int numberOfDevices(void);
 /**
 *   @fn UTF8string stringOfButton(LX_GamepadButton button)
 *
-*   Get the string value of a button enum
+*   Get the string value of a button specified by the enum
+*   given in argument
 *
 *   @return The string on success, "null" otherwise
 */
 UTF8string stringOfButton(LX_GamepadButton button);
+
+/**
+*   @fn UTF8string stringOfAxis(LX_GamepadAxis axis)
+*
+*   Get the string value of an axis specified by the enum
+*   given in argument
+*
+*   @return The string on success, "null" otherwise
+*/
+UTF8string stringOfAxis(LX_GamepadAxis axis);
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
