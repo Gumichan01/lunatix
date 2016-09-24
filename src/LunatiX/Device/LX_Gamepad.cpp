@@ -77,7 +77,7 @@ void LX_Gamepad::close()
         SDL_GameControllerClose(_gc);
         _gc = nullptr;
     }
-    else
+    else if(_joy != nullptr)
     {
         SDL_JoystickClose(_joy);
         _joy = nullptr;
