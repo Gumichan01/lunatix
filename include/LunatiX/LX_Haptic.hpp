@@ -70,7 +70,7 @@ class LX_Haptic
 
 public :
 
-    /// Default constructor, useful for creating a haptic device from the mouse
+    /// Constructor for creating a haptic device from the mouse
     LX_Haptic();
 
     /**
