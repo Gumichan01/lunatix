@@ -30,17 +30,6 @@ const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
 namespace LX_Device
 {
 
-inline SDL_GameControllerButton toGCButton(LX_GamepadButton button)
-{
-    return static_cast<SDL_GameControllerButton>(button);
-}
-
-inline SDL_GameControllerAxis toGCAxis(LX_GamepadAxis axis)
-{
-    return static_cast<SDL_GameControllerAxis>(axis);
-}
-
-
 int numberOfDevices(void)
 {
     return SDL_NumJoysticks();
@@ -49,15 +38,25 @@ int numberOfDevices(void)
 
 UTF8string stringOfButton(LX_GamepadButton button)
 {
-    const char * s = SDL_GameControllerGetStringForButton(toGCButton(button));
+    const char * s = SDL_GameControllerGetStringForButton(button);
     return UTF8string(s == nullptr ? "null" : s);
+}
+
+UTF8string stringOfButton(uint8_t button)
+{
+    return stringOfButton(static_cast<LX_GamepadButton>(button));
 }
 
 
 UTF8string stringOfAxis(LX_GamepadAxis axis)
 {
-    const char * s = SDL_GameControllerGetStringForAxis(toGCAxis(axis));
+    const char * s = SDL_GameControllerGetStringForAxis(axis);
     return UTF8string(s == nullptr ? "null" : s);
+}
+
+UTF8string stringOfAxis(uint8_t axis)
+{
+    return stringOfAxis(static_cast<LX_GamepadAxis>(axis));
 }
 
 
