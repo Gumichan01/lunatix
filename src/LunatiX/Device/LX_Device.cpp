@@ -24,7 +24,7 @@
 #include <SDL2/SDL_mouse.h>
 #include <sstream>
 
-const short GUID_SIZE = 16;          // Size of the data in SDL_JoystickGUID
+const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
 
 
 namespace LX_Device
@@ -39,7 +39,7 @@ int numberOfDevices(void)
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
     std::ostringstream stream;
-    char guid[GUID_SIZE+1] = {'\0'};
+    char guid[GUID_SIZE] = {'\0'};
     SDL_JoystickGetGUIDString(info.uid,guid,GUID_SIZE);
 
     stream << std::endl << " ==== Gamepad Information ==== " << std::endl
