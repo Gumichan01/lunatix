@@ -30,9 +30,22 @@ const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
 namespace LX_Device
 {
 
+inline SDL_GameControllerButton toGCButton(LX_GamepadButton button)
+{
+    return static_cast<SDL_GameControllerButton>(button);
+}
+
+
 int numberOfDevices(void)
 {
     return SDL_NumJoysticks();
+}
+
+
+UTF8string stringOfButton(LX_GamepadButton button)
+{
+    const char * s = SDL_GameControllerGetStringForButton(toGCButton(button));
+    return UTF8string(s == nullptr ? "null" : s);
 }
 
 

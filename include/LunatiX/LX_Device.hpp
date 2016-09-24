@@ -22,7 +22,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL_gamecontroller.h>
 
 #define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display   */
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
@@ -35,6 +35,25 @@
 */
 namespace LX_Device
 {
+
+enum LX_GamepadButton {LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID,
+                       LX_BUTTON_A             = SDL_CONTROLLER_BUTTON_A,
+                       LX_BUTTON_B             = SDL_CONTROLLER_BUTTON_B,
+                       LX_BUTTON_X             = SDL_CONTROLLER_BUTTON_X,
+                       LX_BUTTON_Y             = SDL_CONTROLLER_BUTTON_Y,
+                       LX_BUTTON_BACK          = SDL_CONTROLLER_BUTTON_BACK,
+                       LX_BUTTON_GUIDE         = SDL_CONTROLLER_BUTTON_GUIDE,
+                       LX_BUTTON_START         = SDL_CONTROLLER_BUTTON_START,
+                       LX_BUTTON_LEFTSTICK     = SDL_CONTROLLER_BUTTON_LEFTSTICK,
+                       LX_BUTTON_RIGHTSTICK    = SDL_CONTROLLER_BUTTON_RIGHTSTICK,
+                       LX_BUTTON_LEFTSHOULDER  = SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+                       LX_BUTTON_RIGHTSHOULDER = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+                       LX_BUTTON_DPAD_UP       = SDL_CONTROLLER_BUTTON_DPAD_UP,
+                       LX_BUTTON_DPAD_DOWN     = SDL_CONTROLLER_BUTTON_DPAD_DOWN,
+                       LX_BUTTON_DPAD_LEFT     = SDL_CONTROLLER_BUTTON_DPAD_LEFT,
+                       LX_BUTTON_DPAD_RIGHT    = SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
+                       LX_BUTTON_DPAD_MAX      = SDL_CONTROLLER_BUTTON_MAX,
+                      };
 
 /**
 *   @struct LX_GamepadInfo
@@ -63,6 +82,15 @@ struct LX_GamepadInfo
 int numberOfDevices(void);
 
 /**
+*   @fn UTF8string stringOfButton(LX_GamepadButton button)
+*
+*   Get the string value of a button enum
+*
+*   @return The string on success, "null" otherwise
+*/
+UTF8string stringOfButton(LX_GamepadButton button);
+
+/**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
 *
 *   Get the string format of the information structure
@@ -80,7 +108,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 *
 *   Define if the cursor will be shown or not
 *
-*   @param [in] toggle One of hese following values :
+*   @param [in] toggle One of these following values :
 *            1 to show it
 *            0 to hide
 *           -1 to get the current state
