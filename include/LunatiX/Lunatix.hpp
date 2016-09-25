@@ -61,6 +61,7 @@
 #include <LunatiX/LX_MessageBox.hpp>
 #include <LunatiX/LX_Random.hpp>
 #include <LunatiX/LX_SystemInfo.hpp>
+#include <LunatiX/LX_FileSystem.hpp>
 
 // Multithread
 #include <LunatiX/LX_Multithread.hpp>
