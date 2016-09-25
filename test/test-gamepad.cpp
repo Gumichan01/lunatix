@@ -31,8 +31,15 @@ int main(int argc, char **argv)
         {
             switch(ev.type)
             {
-            case SDL_KEYUP:
+            case SDL_QUIT:
                 d = true;
+                break;
+
+            /// ---------------- Keyboard ----------------
+
+            case SDL_KEYUP:
+                LX_Log::log("physical key → %s",stringOfPhysicalKey(ev.key.keysym.scancode).utf8_str());
+                LX_Log::log("virtual key  → %s",stringOfVirtualKey(ev.key.keysym.sym).utf8_str());
                 break;
 
             /// ---------------- Gamepad ----------------
@@ -54,7 +61,6 @@ int main(int argc, char **argv)
             }
         }
     }
-
 
     g.close();
     LX_Quit();
