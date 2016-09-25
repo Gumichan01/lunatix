@@ -157,11 +157,32 @@ UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key);
 *
 *   Get the string value of the virtual key value given in argument
 *
-*   @param [in] axis The virtual key value to get the string from
+*   @param [in] key The virtual key value to get the string from
 *
 *   @return A non-empty string on success, "" otherwise
 */
 UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key);
+
+/**
+*   @fn LX_KeyboardVirtualKey getVirtualKey(LX_KeyboardPhysicalKey key)
+*
+*   Get the virtual key that corresponds to the physical key given in argument
+*
+*   @param [in] key The virtual key value
+*
+*   @return The virtual key that corresponds to the physical key
+*/
+LX_KeyboardVirtualKey getVirtualKey(LX_KeyboardPhysicalKey key);
+/**
+*   @fn LX_KeyboardPhysicalKey getPhysicalKey(LX_KeyboardVirtualKey key)
+*
+*   Get the physical key that corresponds to the virtual key given in argument
+*
+*   @param [in] key The physical key value
+*
+*   @return The physical key that corresponds to the virtual key
+*/
+LX_KeyboardPhysicalKey getPhysicalKey(LX_KeyboardVirtualKey key);
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)

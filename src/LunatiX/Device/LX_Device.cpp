@@ -72,6 +72,18 @@ UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key)
 }
 
 
+LX_KeyboardVirtualKey getVirtualKey(LX_KeyboardPhysicalKey key)
+{
+    return SDL_GetKeyFromScancode(key);
+}
+
+
+LX_KeyboardPhysicalKey getPhysicalKey(LX_KeyboardVirtualKey key)
+{
+    return SDL_GetScancodeFromKey(key);
+}
+
+
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
     std::ostringstream stream;
