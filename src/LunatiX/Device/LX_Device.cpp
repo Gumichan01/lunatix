@@ -60,6 +60,18 @@ UTF8string stringOfAxis(uint8_t axis)
 }
 
 
+UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key)
+{
+    return UTF8string(SDL_GetScancodeName(key));
+}
+
+
+UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key)
+{
+    return UTF8string(SDL_GetKeyName(key));
+}
+
+
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
     std::ostringstream stream;

@@ -23,6 +23,7 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_gamecontroller.h>
+#include <SDL2/SDL_keyboard.h>
 
 #define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display   */
 #define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
@@ -36,8 +37,10 @@
 namespace LX_Device
 {
 
-using LX_GamepadButton = SDL_GameControllerButton;
-using LX_GamepadAxis = SDL_GameControllerAxis;
+using LX_GamepadButton       = SDL_GameControllerButton;
+using LX_GamepadAxis         = SDL_GameControllerAxis;
+using LX_KeyboardPhysicalKey = SDL_Scancode;
+using LX_KeyboardVirtualKey  = SDL_Keycode;
 
 
 const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
@@ -138,6 +141,27 @@ UTF8string stringOfAxis(LX_GamepadAxis axis);
 *   @return The string on success, "null" otherwise
 */
 UTF8string stringOfAxis(uint8_t axis);
+
+/**
+*   @fn UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key)
+*
+*   Get the string value of the physical key value given in argument
+*
+*   @param [in] key The physical key value to get the string from
+*
+*   @return A non-empty string on success, "" otherwise
+*/
+UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key);
+/**
+*   @fn UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key)
+*
+*   Get the string value of the virtual key value given in argument
+*
+*   @param [in] axis The virtual key value to get the string from
+*
+*   @return A non-empty string on success, "" otherwise
+*/
+UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key);
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
