@@ -47,14 +47,14 @@ LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
     : _name(filename), _data(nullptr)
 {
     if(mode == 0x00000000)
-        throw IOException("LX_File : Invalid mode");
+        throw IOException("LX_File: Invalid mode");
 
     open_(mode);
 }
 
 void LX_File::open_(const uint32_t mode)
 {
-    std::string str = "LX_File : ";
+    std::string str = "LX_File: ";
 
     if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
     {
@@ -80,6 +80,8 @@ void LX_File::open_(const uint32_t mode)
     {
         _data = SDL_RWFromFile(_name.utf8_str(),"ab");
     }
+    else
+        throw IOException(str + "Unrecognized mode");
 
     if(_data == nullptr)
         throw IOException(str + LX_GetError());
