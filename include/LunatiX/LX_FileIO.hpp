@@ -275,7 +275,7 @@ public :
 */
 class LX_TmpFile: public virtual LX_AbstractFile
 {
-    FILE * f;
+    FILE * _f;
 
     LX_TmpFile(const LX_TmpFile&);
     LX_TmpFile& operator =(const LX_TmpFile&);

@@ -187,21 +187,21 @@ LX_File::~LX_File()
 
 /// LX_TmpFile
 
-LX_TmpFile::LX_TmpFile(): f(nullptr)
+LX_TmpFile::LX_TmpFile(): _f(nullptr)
 {
-    f = tmpfile();
+    _f = tmpfile();
 
-    if(f == nullptr)
+    if(_f == nullptr)
         throw IOException(strerror(errno));
 }
 
 
 size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num)
 {
-    size_t sz = fread(ptr,data_size,max_num,f);
+    size_t sz = fread(ptr,data_size,max_num,_f);
     char * err = strerror(errno);
 
-    if(ferror(f))
+    if(ferror(_f))
         LX_SetError(err);
 
     return sz;
@@ -233,10 +233,10 @@ size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num)
 
 size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num)
 {
-    size_t sz = fwrite(ptr,data_size,num,f);
+    size_t sz = fwrite(ptr,data_size,num,_f);
     char * err = strerror(errno);
 
-    if(ferror(f))
+    if(ferror(_f))
         LX_SetError(err);
 
     return sz;
@@ -252,19 +252,19 @@ size_t LX_TmpFile::write(std::string str)
 
 int64_t LX_TmpFile::seek(int64_t offset, int whence)
 {
-    return fseek(f,offset,whence);
+    return fseek(_f,offset,whence);
 }
 
 
 int64_t LX_TmpFile::tell(void)
 {
-    return ftell(f);
+    return ftell(_f);
 }
 
 void LX_TmpFile::close(void)
 {
-    fclose(f);
-    f = nullptr;
+    fclose(_f);
+    _f = nullptr;
 }
 
 
