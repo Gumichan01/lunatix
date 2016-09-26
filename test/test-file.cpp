@@ -16,6 +16,7 @@ void test_read2(void);
 void test_write(void);
 void test_tellSeek(void);
 void test_buffer(void);
+void test_tmp(void);
 void test_getChunk(void);
 
 namespace
@@ -208,13 +209,13 @@ void test_write(void)
 
     LX_Log::log("Open %s ...",str.c_str());
     LX_File f(str.c_str(),LX_FILEIO_WRONLY);
-    std::string gumi = "GUMI";
+    UTF8string gumi("GUMI");
 
     LX_Log::log("%s was opened. Its size is %ld byte(s)",f.getFilename(),f.size());
     cout << "INFO - " << f.getFilename() << " was opened. Its size is "
          << f.size() << " byte(s)" << endl;
 
-    LX_Log::log("Writing %s",gumi.c_str());
+    LX_Log::log("Writing %s",gumi.utf8_str());
     f << gumi;
 
     if(f.size() != 4)
@@ -304,6 +305,23 @@ void test_buffer(void)
         cerr << "FAILURE - Cannot load " << str1
              << "; Expected : a valid refence; Got : " << e.what() << endl;
     }
+
+    LX_Log::log(" = END TEST = ");
+}
+
+
+void test_tmp(void)
+{
+    LX_Log::log(" = TEST Temporary file = ");
+
+
+    char buf[1024] = {'\0'};
+    LX_FileIO::LX_TmpFile tmp;
+    tmp << LX_FileSystem::getWorkingDirectory().utf8_str() << "\n ← Gumichan01";
+
+    tmp.seek(0,LX_SEEK_SET);
+    tmp.read(buf,1024,1);
+    LX_Log::log("\n%s",buf);
 
     LX_Log::log(" = END TEST = ");
 }
