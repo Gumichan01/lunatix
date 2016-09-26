@@ -78,6 +78,8 @@ UTF8string getWorkingDirectory();
 */
 UTF8string getPreferencesDirectory(const std::string& org, const std::string& app);
 
+UTF8string basename(const UTF8string& path);
+
 };
 
 #endif // LX_FILESYSTEM_HPP_INCLUDED
