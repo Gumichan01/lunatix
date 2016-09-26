@@ -19,10 +19,16 @@
 namespace LX_FileSystem
 {
 
+#ifdef __WIN32__
+const char * current_dir = ".\\";
+#else
+const char * current_dir = "./";
+#endif
+
 UTF8string getWorkingDirectory()
 {
     char *base_path = SDL_GetBasePath();
-    UTF8string path(base_path == nullptr ? "./": base_path);
+    UTF8string path(base_path == nullptr ? current_dir: base_path);
 
     if(base_path != nullptr)
         SDL_free(base_path);
