@@ -187,8 +187,7 @@ void LX_Sprite::draw(LX_AABB * box, const double angle)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
 {
-    const SDL_Rect *rect = toRect(box);
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,rect,
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
@@ -254,9 +253,8 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
             _iteration += 1;
     }
 
-    SDL_Rect *rect = toRect(box);
-    SDL_RenderCopyEx(_win._renderer,_texture,toRect(&_coordinates[_iteration]),
-                     rect,(-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
+    SDL_RenderCopyEx(_win._renderer,_texture,&_coordinates[_iteration],
+                     box,(-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
 
@@ -344,8 +342,7 @@ bool LX_StreamingImage::isOpen() const
 
 bool LX_StreamingImage::blit(LX_Surface& s, LX_AABB& rect)
 {
-    SDL_Rect *drect = toRect(&rect);
-    bool b = (SDL_BlitScaled(s._surface,nullptr,_screen,drect) == 0);
+    bool b = (SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0);
 
     if(!_update)
         _update = b;
@@ -404,10 +401,8 @@ void LX_TextImage::draw(const double angle)
 
 void LX_TextImage::draw(const double angle, const short mirror)
 {
-    const SDL_Rect *rect = toRect(&_dimension);
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,rect,
+    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
-
 }
 
 const UTF8string LX_TextImage::getText() const

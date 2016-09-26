@@ -21,48 +21,9 @@
 *
 */
 
-struct SDL_Rect;
+#include <SDL2/SDL_rect.h>
 
-/**
-*   @struct LX_AABB
-*   @brief The Axis-Aligned Bounding Box (AABB)
-*/
-struct LX_AABB
-{
-    int x, y;
-    int w, h;
-
-    /// Default constructor
-    LX_AABB(): x(0), y(0), w(0), h(0) {}
-
-    /// Constructor
-    LX_AABB(const int xx, const int yy, const int ww, const int hh)
-        : x(xx), y(yy), w(ww), h(hh) {}
-
-    /// Copy constructor
-    LX_AABB(const LX_AABB& aabb): x(aabb.x), y(aabb.y), w(aabb.w), h(aabb.h) {}
-
-    /// Assignment
-    LX_AABB& operator =(const LX_AABB& aabb)
-    {
-        x = aabb.x;
-        y = aabb.y;
-        w = aabb.w;
-        h = aabb.h;
-        return *this;
-    }
-};
-
-/// Convert a constant AABB pointer to a constant SDL_Rect pointer
-inline const SDL_Rect * toRect(const LX_AABB *box)
-{
-    return reinterpret_cast<const SDL_Rect *>(box);
-}
-
-/// Convert an AABB pointer to an SDL_Rect pointer
-inline SDL_Rect * toRect(LX_AABB *box)
-{
-    return reinterpret_cast<SDL_Rect *>(box);
-}
+// LX_AABB is just an alias og
+using LX_AABB = SDL_Rect;
 
 #endif  /* LX_AABB_H_INCLUDED */

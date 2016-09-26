@@ -21,6 +21,7 @@
 *
 */
 
+#include <LunatiX/LX_AABB.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_video.h>
 
@@ -48,7 +49,7 @@ struct LX_Circle;
 struct LX_Vector2D;
 };
 
-struct LX_AABB;
+//struct LX_AABB;
 
 // Fullscreen modes
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop size   */
