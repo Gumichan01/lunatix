@@ -74,8 +74,15 @@ public :
 };
 
 
+/**
+*   @class LX_AbstractFile
+*   @brief The abstract file interface
+*/
 class LX_AbstractFile
 {
+    LX_AbstractFile(const LX_AbstractFile&);
+    LX_AbstractFile& operator =(const LX_AbstractFile&);
+
 public:
 
     LX_AbstractFile() = default;
@@ -176,7 +183,7 @@ public:
 *   @class LX_File
 *   @brief The file handler
 */
-class LX_File
+class LX_File: public virtual LX_AbstractFile
 {
     UTF8string _name;        /* The name of the file         */
     SDL_RWops *_data;        /* The internal file structure  */
@@ -262,13 +269,20 @@ public :
     virtual ~LX_File();
 };
 
-
+/**
+*   @class LX_TmpFile
+*   @brief The temporary file
+*/
 class LX_TmpFile: public virtual LX_AbstractFile
 {
     FILE * f;
 
+    LX_TmpFile(const LX_TmpFile&);
+    LX_TmpFile& operator =(const LX_TmpFile&);
+
 public:
 
+    /// Constructor
     LX_TmpFile();
 
     virtual size_t read(void *ptr, size_t data_size, size_t max_num);
@@ -281,6 +295,7 @@ public:
     virtual int64_t tell(void);
     virtual void close(void);
 
+    /// Destructor
     virtual ~LX_TmpFile();
 };
 
