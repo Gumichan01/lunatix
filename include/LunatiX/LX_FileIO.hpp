@@ -22,7 +22,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-
+#include <cstdio>
 
 #define LX_FILEIO_RDONLY 0x00000001                             /**< Read only mode (r) */
 #define LX_FILEIO_WRONLY 0x00000010                             /**< Write only mode (w) */
@@ -78,10 +78,10 @@ class LX_AbstractFile
 {
 public:
 
-    LX_AbstractFile();
+    LX_AbstractFile() = default;
 
     /**
-    *   @fn virtual size_t read(void *ptr,size_t data_size,size_t max_num)
+    *   @fn virtual size_t read(void *ptr, size_t data_size, size_t max_num)
     *
     *   Read the file
     *
@@ -93,10 +93,9 @@ public:
     *
     *   @note It can read less objects than *max_num*.
     */
-    virtual size_t read(void *ptr,size_t data_size,size_t max_num) = 0;
-
+    virtual size_t read(void *ptr, size_t data_size, size_t max_num) = 0;
     /**
-    *   @fn virtual size_t readExactly(void *ptr,size_t data_size,size_t num)
+    *   @fn virtual size_t readExactly(void *ptr, size_t data_size, size_t num)
     *
     *   Read exactly max_num bytes of the file
     *
@@ -107,10 +106,10 @@ public:
     *   @return The number of objects that are read. 0 at error or end of file
     *
     */
-    virtual size_t readExactly(void *ptr,size_t data_size,size_t num) = 0;
+    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) = 0;
 
     /**
-    *   @fn virtual size_t write(void *ptr,size_t data_size,size_t num)
+    *   @fn virtual size_t write(void *ptr, size_t data_size, size_t num)
     *
     *   Write on the file
     *
@@ -122,8 +121,7 @@ public:
     *           This value will be less than num on error
     *
     */
-    virtual size_t write(void *ptr,size_t data_size,size_t num) = 0;
-
+    virtual size_t write(void *ptr, size_t data_size, size_t num) = 0;
     /**
     *   @fn virtual size_t write(std::string str)
     *
@@ -164,7 +162,13 @@ public:
     */
     virtual int64_t tell(void) = 0;
 
-    ~LX_AbstractFile();
+    /**
+    *   @fn void close(void)
+    *   Close the file
+    */
+    virtual void close(void) = 0;
+
+    virtual ~LX_AbstractFile();
 };
 
 
@@ -229,10 +233,10 @@ public :
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 
-    virtual size_t read(void *ptr,size_t data_size,size_t max_num);
-    virtual size_t readExactly(void *ptr,size_t data_size,size_t num);
+    virtual size_t read(void *ptr, size_t data_size, size_t max_num);
+    virtual size_t readExactly(void *ptr, size_t data_size, size_t num);
 
-    virtual size_t write(void *ptr,size_t data_size,size_t num);
+    virtual size_t write(void *ptr, size_t data_size, size_t num);
     virtual size_t write(std::string str);
 
     virtual int64_t seek(int64_t offset, int whence);
@@ -252,39 +256,81 @@ public :
     */
     const char * getFilename(void);
 
-    /**
-    *   @fn void close(void)
-    *   Close the file
-    */
-    void close(void);
+    virtual void close(void);
 
     /// Destructor
-    ~LX_File();
-
-    /**
-    *   @fn friend LX_File& operator <<(LX_File& f, UTF8string& u8s)
-    *
-    *   Write an UTF-8 string into the file
-    *
-    *   @param [in,out] f The file structure
-    *   @param [in] u8s The utf-8 string
-    *
-    *   @return The updated file
-    */
-    friend LX_File& operator <<(LX_File& f, UTF8string& u8s);
-
-    /**
-    *   @fn friend LX_File& operator <<(LX_File& f, std::string s)
-    *
-    *   Write an UTF-8 string into the file
-    *
-    *   @param [in,out] f The file structure
-    *   @param [in] s The string
-    *
-    *   @return The updated file
-    */
-    friend LX_File& operator <<(LX_File& f, std::string s);
+    virtual ~LX_File();
 };
+
+
+class LX_TmpFile: public virtual LX_AbstractFile
+{
+    FILE * f;
+
+public:
+
+    LX_TmpFile();
+
+    virtual size_t read(void *ptr, size_t data_size, size_t max_num);
+    virtual size_t readExactly(void *ptr, size_t data_size, size_t num);
+
+    virtual size_t write(void *ptr, size_t data_size, size_t num);
+    virtual size_t write(std::string str);
+
+    virtual int64_t seek(int64_t offset, int whence);
+    virtual int64_t tell(void);
+    virtual void close(void);
+
+    virtual ~LX_TmpFile();
+};
+
+/**
+*   @fn LX_File& operator <<(LX_File& f, UTF8string& u8s)
+*
+*   Write an UTF-8 string into the file
+*
+*   @param [in,out] f The file structure
+*   @param [in] u8s The utf-8 string
+*
+*   @return The updated file
+*/
+LX_File& operator <<(LX_File& f, UTF8string& u8s);
+
+/**
+*   @fn LX_File& operator <<(LX_File& f, std::string s)
+*
+*   Write an UTF-8 string into the file
+*
+*   @param [in,out] f The file structure
+*   @param [in] s The string
+*
+*   @return The updated file
+*/
+LX_File& operator <<(LX_File& f, std::string s);
+
+/**
+*   @fn LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s)
+*
+*   Write an UTF-8 string into the file
+*
+*   @param [in,out] f The file structure
+*   @param [in] u8s The utf-8 string
+*
+*   @return The updated file
+*/
+LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s);
+
+/**
+*   @fn LX_TmpFile& operator <<(LX_TmpFile& f, std::string s)
+*
+*   Write an UTF-8 string into the file
+*
+*   @param [in,out] f The file structure
+*   @param [in] s The string
+*
+*   @return The updated file
+*/
+LX_TmpFile& operator <<(LX_TmpFile& f, std::string s);
 
 };
 

@@ -23,6 +23,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_rwops.h>
 
+#include <cstring>
+#include <cerrno>
 
 namespace LX_FileIO
 {
@@ -38,6 +40,13 @@ const char * IOException::what() const noexcept
 
 IOException::~IOException() noexcept {}
 
+
+/// LX_AbstractFile
+
+LX_AbstractFile::~LX_AbstractFile() {}
+
+
+/// LX_File
 
 LX_File::LX_File(const std::string& filename, const uint32_t mode)
     : LX_File(UTF8string(filename),mode) {}
@@ -88,13 +97,13 @@ void LX_File::open_(const uint32_t mode)
 }
 
 
-size_t LX_File::read(void *ptr,size_t data_size,size_t max_num)
+size_t LX_File::read(void *ptr, size_t data_size, size_t max_num)
 {
     return SDL_RWread(_data,ptr,data_size,max_num);
 }
 
 
-size_t LX_File::readExactly(void *ptr,size_t data_size,size_t num)
+size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num)
 {
     size_t total_read = 0;
     char * p = static_cast<char *>(ptr);
@@ -122,7 +131,7 @@ size_t LX_File::readExactly(void *ptr,size_t data_size,size_t num)
 }
 
 
-size_t LX_File::write(void *ptr,size_t data_size,size_t num)
+size_t LX_File::write(void *ptr, size_t data_size, size_t num)
 {
     return SDL_RWwrite(_data,ptr,data_size,num);
 }
@@ -130,7 +139,7 @@ size_t LX_File::write(void *ptr,size_t data_size,size_t num)
 
 size_t LX_File::write(std::string str)
 {
-    size_t len = str.length();
+    size_t len = str.size();
     return write((void *)str.c_str(),sizeof(char),len);
 }
 
@@ -175,6 +184,96 @@ LX_File::~LX_File()
 }
 
 
+/// LX_TmpFile
+
+LX_TmpFile::LX_TmpFile(): f(nullptr)
+{
+    f = tmpfile();
+
+    if(f == nullptr)
+        throw IOException(strerror(errno));
+}
+
+
+size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num)
+{
+    size_t sz = fread(ptr,data_size,max_num,f);
+    char * err = strerror(errno);
+
+    if(ferror(f))
+        LX_SetError(err);
+
+    return sz;
+}
+
+
+size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num)
+{
+    size_t total_read = 0;
+    char * p = static_cast<char *>(ptr);
+
+    // Read at most num bytes
+    while(total_read < num)
+    {
+        size_t read_data = read(p,data_size,num);
+
+        // Did it work?
+        if(read_data == 0)
+            return 0;
+
+        // Move a the end of retrieved data
+        p += read_data;
+        total_read += read_data;
+    }
+
+    return total_read != num ? 0 : total_read;
+}
+
+
+size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num)
+{
+    size_t sz = fwrite(ptr,data_size,num,f);
+    char * err = strerror(errno);
+
+    if(ferror(f))
+        LX_SetError(err);
+
+    return sz;
+}
+
+
+size_t LX_TmpFile::write(std::string str)
+{
+    size_t len = str.size();
+    return write((void *)str.c_str(),sizeof(char),len);
+}
+
+
+int64_t LX_TmpFile::seek(int64_t offset, int whence)
+{
+    return fseek(f,offset,whence);
+}
+
+
+int64_t LX_TmpFile::tell(void)
+{
+    return ftell(f);
+}
+
+void LX_TmpFile::close(void)
+{
+    fclose(f);
+    f = nullptr;
+}
+
+
+LX_TmpFile::~LX_TmpFile()
+{
+    close();
+}
+
+/// Stream
+
 LX_File& operator <<(LX_File& f, UTF8string& u8s)
 {
     f.write(u8s.utf8_str());
@@ -183,6 +282,19 @@ LX_File& operator <<(LX_File& f, UTF8string& u8s)
 
 
 LX_File& operator <<(LX_File& f, std::string s)
+{
+    f.write(s);
+    return f;
+}
+
+LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s)
+{
+    f.write(u8s.utf8_str());
+    return f;
+}
+
+
+LX_TmpFile& operator <<(LX_TmpFile& f, std::string s)
 {
     f.write(s);
     return f;
