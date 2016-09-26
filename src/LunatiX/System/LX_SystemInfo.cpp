@@ -27,9 +27,9 @@
 namespace LX_SystemInfo
 {
 
-const char * getPlatform(void)
+const UTF8string getPlatform(void)
 {
-    return SDL_GetPlatform();
+    return UTF8string(SDL_GetPlatform());
 }
 
 
@@ -78,7 +78,7 @@ const SDL_DisplayMode * getDisplayModes(int& size)
 
     for(int i = 0; i < numberOfDisplays; i++)
     {
-        // Is that line useful ?
+        /// @todo LX_SystemInfo::getDisplayModes - Is that line useful?
         mode[i].format = SDL_PIXELFORMAT_RGBA4444;
 
         if(SDL_GetDisplayMode(0,i,&mode[i]) < 0)

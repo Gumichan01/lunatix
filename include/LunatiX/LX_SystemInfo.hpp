@@ -21,6 +21,7 @@
 *
 */
 
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_video.h>
 
 
@@ -36,7 +37,7 @@ namespace LX_SystemInfo
 {
 
 /**
-*   @fn const char * getPlatform(void)
+*   @fn const UTF8string getPlatform(void)
 *
 *   Return the name of the patform.
 *
@@ -53,7 +54,7 @@ namespace LX_SystemInfo
 *           - Android
 *
 */
-const char * getPlatform(void);
+const UTF8string getPlatform(void);
 
 /**
 *   @fn int getCPUCacheLineSize(void)
