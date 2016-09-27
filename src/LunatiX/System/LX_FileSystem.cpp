@@ -16,7 +16,7 @@
 #include <SDL2/SDL_filesystem.h>
 
 
-namespace LX_FileSystem
+namespace
 {
 
 #ifdef __WIN32__
@@ -26,6 +26,39 @@ const char * separator = "\\";
 const char * current_dir = "./";
 const char * separator = "/";
 #endif
+
+/// Remove trailing separators ('/' on POSIX system, '\' on Windows)
+UTF8string removeTrailingSep(const UTF8string& u8str)
+{
+    const UTF8iterator u8end = u8str.utf8_end();
+    UTF8iterator it = u8str.utf8_begin();
+    UTF8string u8s;
+
+    while(it != u8end)
+    {
+        u8s += *it;
+
+        if(*it == separator)
+        {
+            while(it != u8end && *it == separator)
+            {
+                ++it;
+            }
+            --it;
+        }
+
+        ++it;
+    }
+
+    return u8s;
+}
+
+};
+
+
+namespace LX_FileSystem
+{
+
 
 UTF8string getWorkingDirectory()
 {
@@ -71,9 +104,10 @@ UTF8string basename(const UTF8string& path)
         return path;
 
     // Path that contains at least one separator
-    const size_t u8len = path.utf8_length();
-    const UTF8iterator beg = path.utf8_begin();
-    UTF8iterator it = --(path.utf8_end());
+    const UTF8string npath = removeTrailingSep(path);
+    const size_t u8len = npath.utf8_length();
+    const UTF8iterator beg = npath.utf8_begin();
+    UTF8iterator it = --(npath.utf8_end());
     size_t spos = 0;
     bool end_sep = false;
 
@@ -97,12 +131,12 @@ UTF8string basename(const UTF8string& path)
     if(*it == sep)
     {
         if(end_sep)
-            return path.utf8_substr(spos,u8len-spos -1);
+            return npath.utf8_substr(spos,u8len-spos -1);
         else
-            return path.utf8_substr(spos,u8len);
+            return npath.utf8_substr(spos,u8len);
     }
 
-    return path.utf8_substr(0,u8len -1);
+    return npath.utf8_substr(0,u8len -1);
 }
 
 };
