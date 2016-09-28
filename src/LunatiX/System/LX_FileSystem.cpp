@@ -88,23 +88,23 @@ UTF8string basename(const UTF8string& path)
 {
     const UTF8string current(".");
     const UTF8string parent("..");
-    const UTF8string root("/");
+    const UTF8string root(separator);
     const UTF8string sep(separator);
+    const UTF8string npath = removeTrailingSep(path);
 
     // Empty string → current
-    if(path.utf8_empty())
+    if(npath.utf8_empty())
         return current;
 
     // ".", ".." or "/" → return the path
-    if(path == current || path == parent || path == root)
+    if(npath == current || npath == parent || npath == root)
         return path;
 
     // No separator → the path itself
-    if(path.utf8_find(sep) == UTF8string::npos)
+    if(npath.utf8_find(sep) == UTF8string::npos)
         return path;
 
     // Path that contains at least one separator
-    const UTF8string npath = removeTrailingSep(path);
     const size_t u8len = npath.utf8_length();
     const UTF8iterator beg = npath.utf8_begin();
     UTF8iterator it = --(npath.utf8_end());
