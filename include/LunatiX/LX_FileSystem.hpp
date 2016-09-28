@@ -59,17 +59,17 @@ UTF8string getWorkingDirectory();
 *           If the function cannot retrieve the directory,
 *           it returns an empty string.
 *
-*   @note 1 - The directory is unique per user and per application.
+*   @note 1 — The directory is unique per user and per application.
 *
-*   @note 2 - The returned directory has the following syntax:
+*   @note 2 — The returned directory has the following syntax:
 *
 *             <path>/org/app/   # On POSIX systems
 *             <path>\org\app\   # On Windows
 *
-*   @note 3 - The return path will be guaranteed to end with a
+*   @note 3 — The return path will be guaranteed to end with a
 *             path separator ('\' on Windows, '/' on most other platforms)
 *
-*   @note 4 - You should assume the path returned by this function
+*   @note 4 — You should assume the path returned by this function
 *             is the only safe place to write files
 *             (and that ::getWorkingDirectory(), while it might be writable,
                or even the parent of the returned path,
@@ -78,6 +78,24 @@ UTF8string getWorkingDirectory();
 */
 UTF8string getPreferencesDirectory(const std::string& org, const std::string& app);
 
+/**
+*   @fn UTF8string basename(const UTF8string& path)
+*
+*   Get the basename of the path given in argument
+*
+*   @param path The path, utf-8 encoded.
+*
+*   @return The basename in utf-8 format.
+*
+*   @note 1 — If the path is one of these following values:
+*             - '.'
+*             - '..'
+*             - '/'
+*             - '\'
+*             The path is returned.
+*   @note 2 — Trailing '\' (on Windows) or '/' (on Linux) are not counted
+*             as part of the path name.
+*/
 UTF8string basename(const UTF8string& path);
 
 };
