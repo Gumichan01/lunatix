@@ -106,8 +106,9 @@ $(OBJ_PARTICLE_PATH)LX_Particle.o $(OBJ_PARTICLE_PATH)LX_ParticleSystem.o \
 $(OBJ_PHYSICS_PATH)LX_Hitbox.o $(OBJ_PHYSICS_PATH)LX_Physics.o \
 $(OBJ_PHYSICS_PATH)LX_Polygon.o $(OBJ_PHYSICS_PATH)LX_Vector2D.o \
 $(OBJ_RANDOM_PATH)LX_Random.o $(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
-$(OBJ_SYSTEM_PATH)LX_Log.o $(OBJ_TEXT_PATH)LX_Text.o \
-$(OBJ_TTF_PATH)LX_TrueTypeFont.o $(OBJ_VERSION_PATH)LX_Version.o \
+$(OBJ_SYSTEM_PATH)LX_Log.o $(OBJ_SYSTEM_PATH)LX_FileSystem.o \
+$(OBJ_TEXT_PATH)LX_Text.o $(OBJ_TTF_PATH)LX_TrueTypeFont.o \
+$(OBJ_VERSION_PATH)LX_Version.o \
 $(OBJ_UTILS_PATH)utf8_string.o $(OBJ_UTILS_PATH)utf8_iterator.o \
 $(OBJ_TINYTHREAD_PATH)tinythread.o $(OBJ_LIBTAGSPP_PATH)8859.o \
 $(OBJ_LIBTAGSPP_PATH)flac.o $(OBJ_LIBTAGSPP_PATH)id3genres.o \
@@ -488,6 +489,15 @@ LX_SystemInfo.o : $(OBJ_SYSTEM_PATH)LX_SystemInfo.o
 
 $(OBJ_SYSTEM_PATH)LX_SystemInfo.o : $(SYSTEM_PATH)LX_SystemInfo.cpp \
 $(LUNATIX_I_PATH)LX_SystemInfo.hpp
+	@mkdir -p $(OBJ_SYSTEM_PATH)
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
+LX_FileSystem.o : $(OBJ_SYSTEM_PATH)LX_FileSystem.o
+
+$(OBJ_SYSTEM_PATH)LX_FileSystem.o: $(SYSTEM_PATH)LX_FileSystem.cpp \
+$(LUNATIX_I_PATH)LX_FileSystem.hpp
 	@mkdir -p $(OBJ_SYSTEM_PATH)
 	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
