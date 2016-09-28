@@ -53,6 +53,20 @@ UTF8string removeTrailingSep(const UTF8string& u8str)
     return u8s;
 }
 
+size_t countSeparator(const UTF8string& u8str)
+{
+    const UTF8iterator e = u8str.utf8_end();
+    UTF8iterator it = u8str.utf8_begin();
+    size_t counter = 0;
+
+    while(it != e)
+    {
+        if(*it == separator) ++counter;
+        ++it;
+    }
+    return counter;
+}
+
 };
 
 
@@ -96,15 +110,15 @@ UTF8string basename(const UTF8string& path)
     if(npath.utf8_empty())
         return current;
 
-    // ".", ".." or "/" → return the path
+    // ".", ".." or root directory → return the path
     if(npath == current || npath == parent || npath == root)
-        return path;
+        return npath;
 
     // No separator → the path itself
     if(npath.utf8_find(sep) == UTF8string::npos)
-        return path;
+        return npath;
 
-    // Path that contains at least one separator
+    // The path contains at least one separator
     const size_t u8len = npath.utf8_length();
     const UTF8iterator beg = npath.utf8_begin();
     UTF8iterator it = --(npath.utf8_end());
@@ -131,12 +145,72 @@ UTF8string basename(const UTF8string& path)
     if(*it == sep)
     {
         if(end_sep)
-            return npath.utf8_substr(spos,u8len-spos -1);
+            return npath.utf8_substr(spos,u8len-spos - 1);
         else
             return npath.utf8_substr(spos,u8len);
     }
 
-    return npath.utf8_substr(0,u8len -1);
+    return npath.utf8_substr(0,u8len - 1);
 }
+
+
+UTF8string dirname(const UTF8string& path)
+{
+    const UTF8string current(".");
+    const UTF8string parent("..");
+    const UTF8string root(separator);
+    const UTF8string sep(separator);
+    const UTF8string npath = removeTrailingSep(path);
+
+    // Empty string or parent → current
+    if(npath.utf8_empty() || npath == parent)
+        return current;
+
+    // "." or root directory → return the path
+    if(npath == current || npath == root)
+        return npath;
+
+    const size_t pos = npath.utf8_find(sep);
+    const size_t u8len = npath.utf8_length();
+    // No separator → current directory
+    if(pos == UTF8string::npos)
+        return current;
+
+    // The path contains at least one separator
+    // The first separator is at the end of string → it is unique
+    if(pos == u8len -1)
+        return current;
+
+    // If a unique separator was found and is at position 0 → root
+    if(pos == 0 && countSeparator(npath) == 1)
+    {
+        return root;
+    }
+    else if(countSeparator(npath) == 1)
+    {
+        return npath.utf8_substr(0,pos + 1);
+    }
+
+    // At this point, there are more than 1 separators
+    const UTF8iterator beg = npath.utf8_begin();
+    UTF8iterator it = --(npath.utf8_end());
+    size_t spos = u8len - 1;
+
+    // Last character == separator → do not count it
+    if(*it == separator)
+    {
+        --it;
+        --spos;
+    }
+
+    while(it != beg && *it != separator)
+    {
+        --it;
+        --spos;
+    }
+
+    return npath.utf8_substr(0, (spos == 0 ? spos + 1 : spos));
+}
+
 
 };

@@ -45,7 +45,6 @@ namespace LX_FileSystem
 *         path separator ('\' on Windows, '/' on most other platforms)
 */
 UTF8string getWorkingDirectory();
-
 /**
 *   @fn UTF8string getPreferencesDirectory(const std::string& org, const std::string& app)
 *
@@ -97,6 +96,14 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
 *             as part of the path name.
 */
 UTF8string basename(const UTF8string& path);
+/**
+*   @fn UTF8string dirname(const UTF8string& path)
+*
+*   @param path The path, utf-8 encoded.
+*
+*   @return The basename in utf-8 format.
+*/
+UTF8string dirname(const UTF8string& path);
 
 };
 
