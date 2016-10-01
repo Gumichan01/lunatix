@@ -381,8 +381,10 @@ void test_fs(void)
     basename_ctest.insert(u8pair(root,root));
     basename_ctest.insert(u8pair(sep2,root));
     basename_ctest.insert(u8pair(cursep,current));
+    basename_ctest.insert(u8pair(sep + current,current));
     basename_ctest.insert(u8pair(scursep,current));
     basename_ctest.insert(u8pair(parsep,parent));
+    basename_ctest.insert(u8pair(sep + parent,parent));
     basename_ctest.insert(u8pair(sparsep,parent));
     basename_ctest.insert(u8pair(usr,usr));
     basename_ctest.insert(u8pair(usrsep,usr));
@@ -396,8 +398,10 @@ void test_fs(void)
     dirname_ctest.insert(u8pair(root,root));
     dirname_ctest.insert(u8pair(sep2,root));
     dirname_ctest.insert(u8pair(cursep,current));
+    dirname_ctest.insert(u8pair(root + current,root));
     dirname_ctest.insert(u8pair(scursep,current));
     dirname_ctest.insert(u8pair(parsep,current));
+    dirname_ctest.insert(u8pair(root + parent,root));
     dirname_ctest.insert(u8pair(sparsep,current));
     dirname_ctest.insert(u8pair(usr,current));
     dirname_ctest.insert(u8pair(usrsep,current));
@@ -446,7 +450,6 @@ void test_fs(void)
     }
 
     LX_Log::log(" == END TEST == ");
-
     LX_Log::log(" = END TEST = ");
 }
 
