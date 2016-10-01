@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        cout << "INFO - " << LX_GetError() << endl ;
+        cout << "INFO - " << LX_GetError() << endl;
     }
 
     delete [] mode;
