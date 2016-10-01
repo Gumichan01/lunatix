@@ -160,6 +160,8 @@ UTF8string dirname(const UTF8string& path)
     const UTF8string parent("..");
     const UTF8string root(separator);
     const UTF8string sep(separator);
+    const UTF8string scurs(sep + current + sep);
+    const UTF8string spars(sep + parent + sep);
     const UTF8string npath = removeTrailingSep(path);
 
     // Empty string or parent → current
@@ -169,6 +171,10 @@ UTF8string dirname(const UTF8string& path)
     // "." or root directory → return the path
     if(npath == current || npath == root)
         return npath;
+
+    // "." or ".." between separators → current directory
+    if(npath == scurs || npath == spars)
+        return current;
 
     const size_t pos = npath.utf8_find(sep);
     const size_t u8len = npath.utf8_length();
