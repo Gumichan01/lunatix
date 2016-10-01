@@ -66,8 +66,8 @@ class LX_FileBuffer
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
-    Mix_Chunk * getChunkFromBuffer_(void);
-    SDL_Surface * getSurfaceFromBuffer_(void);
+    Mix_Chunk * getChunkFromBuffer_();
+    SDL_Surface * getSurfaceFromBuffer_();
     TTF_Font * getFontFromBuffer_(int size);
 
 public :
@@ -111,14 +111,14 @@ public :
     LX_Mixer::LX_Chunk * loadSample();
 
     /**
-    *   @fn const char * getFilename(void)
+    *   @fn const char * getFilename()
     *
     *   Get the name of the file the buffer refers to
     *
     *   @return The name of the file
     *
     */
-    const char * getFilename(void);
+    const char * getFilename();
 
     /// Destructor
     ~LX_FileBuffer();

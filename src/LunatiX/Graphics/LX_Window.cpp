@@ -356,13 +356,13 @@ void LX_Window::toggleFullscreen(uint32_t flag)
 /*
 *   This private function updates the renderer of the window
 */
-void LX_Window::updateRenderer_(void)
+void LX_Window::updateRenderer_()
 {
     SDL_RenderPresent(_renderer);
 }
 
 
-void LX_Window::update(void)
+void LX_Window::update()
 {
     if(_glcontext != nullptr)
         SDL_GL_SwapWindow(_window);
@@ -374,7 +374,7 @@ void LX_Window::update(void)
 /*
 *   Private function that clears the main window renderer
 */
-void LX_Window::clearRenderer_(void)
+void LX_Window::clearRenderer_()
 {
     uint8_t r,g,b,a;
     SDL_GetRenderDrawColor(_renderer,&r,&g,&b,&a);
@@ -384,7 +384,7 @@ void LX_Window::clearRenderer_(void)
 }
 
 
-void LX_Window::clearWindow(void)
+void LX_Window::clearWindow()
 {
     if(_glcontext)
     {
@@ -448,7 +448,7 @@ void LX_Window::getInfo(LX_WindowInfo &info)
 }
 
 
-int LX_Window::getWidth(void)
+int LX_Window::getWidth()
 {
     int w;
     SDL_GetWindowSize(_window,&w,nullptr);
@@ -456,7 +456,7 @@ int LX_Window::getWidth(void)
 }
 
 
-int LX_Window::getHeight(void)
+int LX_Window::getHeight()
 {
     int h;
     SDL_GetWindowSize(_window,nullptr,&h);
@@ -464,7 +464,7 @@ int LX_Window::getHeight(void)
 }
 
 
-int LX_Window::getLogicalWidth(void)
+int LX_Window::getLogicalWidth()
 {
     int w;
     SDL_RenderGetLogicalSize(_renderer,&w,nullptr);
@@ -472,7 +472,7 @@ int LX_Window::getLogicalWidth(void)
 }
 
 
-int LX_Window::getLogicalHeight(void)
+int LX_Window::getLogicalHeight()
 {
     int h;
     SDL_RenderGetLogicalSize(_renderer,nullptr,&h);

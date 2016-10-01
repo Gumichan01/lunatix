@@ -44,11 +44,11 @@ struct LX_Version
 };
 
 /**
-*   @fn void LX_EngineInfo(void)
+*   @fn void LX_EngineInfo()
 *
 *   Get information about the library
 */
-void LX_EngineInfo(void);
+void LX_EngineInfo();
 
 /**
 *   @fn void LX_EngineVersion(LX_Version& version)
@@ -60,11 +60,11 @@ void LX_EngineInfo(void);
 void LX_EngineVersion(LX_Version& version);
 
 /**
-*   @fn void LX_VersionDependencies(void)
+*   @fn void LX_VersionDependencies()
 *
 *   Display information about the library and its dependencies
 */
-void LX_VersionDependencies(void);
+void LX_VersionDependencies();
 
 };
 

@@ -89,13 +89,13 @@ struct LX_GamepadInfo
 
 
 /**
-*   @fn int numberOfDevices(void)
+*   @fn int numberOfDevices()
 *
 *   Count the number of connected devices (gamepads)
 *
 *   @return The number of gamepads
 */
-int numberOfDevices(void);
+int numberOfDevices();
 
 /**
 *   @fn UTF8string stringOfButton(LX_GamepadButton button)

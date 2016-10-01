@@ -40,7 +40,7 @@ namespace LX_SystemInfo
 using LX_DisplayMode = std::vector<SDL_DisplayMode>;
 
 /**
-*   @fn const UTF8string getPlatform(void)
+*   @fn const UTF8string getPlatform()
 *
 *   Return the name of the patform.
 *
@@ -57,20 +57,20 @@ using LX_DisplayMode = std::vector<SDL_DisplayMode>;
 *           - Android
 *
 */
-const UTF8string getPlatform(void);
+const UTF8string getPlatform();
 
 /**
-*   @fn int getCPUCacheLineSize(void)
+*   @fn int getCPUCacheLineSize()
 *
 *   Get the L1 cache line sizeof the CPU
 *
 *   @return The L1 cache size of the CPU, in kilobytes (KB)
 *
 */
-int getCPUCacheLineSize(void);
+int getCPUCacheLineSize();
 
 /**
-*   @fn int getCPUCount(void)
+*   @fn int getCPUCount()
 *
 *   Get the CPU cores
 *
@@ -80,17 +80,17 @@ int getCPUCacheLineSize(void);
 *   the value may be higher than the number of physical cores
 *
 */
-int getCPUCount(void);
+int getCPUCount();
 
 /**
-*   @fn int getSystemRAM(void)
+*   @fn int getSystemRAM()
 *
 *   Get the amount of Random Access Memory (RAM) in the system
 *
 *   @return The amount of RAM configured in the system in Megabytes (MB)
 *
 */
-int getSystemRAM(void);
+int getSystemRAM();
 
 /**
 *   @fn void getAvailableDisplayModes(LX_DisplayMode& modes)

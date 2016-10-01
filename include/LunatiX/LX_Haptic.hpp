@@ -30,13 +30,13 @@ namespace LX_Device
 class LX_Haptic;
 
 /**
-*   @fn int numberOfHapticDevices(void)
+*   @fn int numberOfHapticDevices()
 *
 *   Get the number of haptic systems
 *
 *   @return The number of haptic systems
 */
-int numberOfHapticDevices(void);
+int numberOfHapticDevices();
 /**
 *   @fn bool mouseIsHaptic
 *
@@ -44,15 +44,15 @@ int numberOfHapticDevices(void);
 *
 *   @return TRUE if the mouse has haptic feedback, FALSE otherwise
 */
-bool mouseIsHaptic(void);
+bool mouseIsHaptic();
 /**
-*   @fn LX_Haptic * getMouseHaptic(void)
+*   @fn LX_Haptic * getMouseHaptic()
 *
 *   Get the haptic system of the mouse
 *
 *   @return The haptic system of mouse if it has haptic feedback, NULL otherwise
 */
-LX_Haptic * getMouseHaptic(void);
+LX_Haptic * getMouseHaptic();
 
 /**
 *   @class LX_Haptic
@@ -116,30 +116,30 @@ public :
     LX_Haptic& operator =(SDL_Haptic& haptic);
 
     /**
-    *   @fn bool isOpened(void)
+    *   @fn bool isOpened()
     *
     *   Check if the haptic device is opened
     *
     *   @return TRUE is the device is opened, FALSE otherwise
     *
     */
-    bool isOpened(void);
+    bool isOpened();
     /**
-    *   @fn bool rumbleEffectInit(void)
+    *   @fn bool rumbleEffectInit()
     *
     *   Initializes the haptic device for simple rumble playback
     *
     *   @return TRUE on success, FALSE otherwise
     *
     */
-    bool rumbleEffectInit(void);
+    bool rumbleEffectInit();
     /**
-    *   @fn void rumbleEffectPlay(void)
+    *   @fn void rumbleEffectPlay()
     *
     *   Play the rumble effect with default values
     *
     */
-    void rumbleEffectPlay(void);
+    void rumbleEffectPlay();
     /**
     *   @fn void rumbleEffectPlay(float strength, uint32_t length)
     *
@@ -203,7 +203,7 @@ public :
     void stopEffect(int effect_id);
 
     /**
-    *   @fn int numberOfEffects(void)
+    *   @fn int numberOfEffects()
     *
     *   Get the number of playable effects
     *
@@ -213,7 +213,7 @@ public :
     *   @sa runEffect
     *   @sa stopEffect
     */
-    int numberOfEffects(void);
+    int numberOfEffects();
 
     /// Destructor
     ~LX_Haptic();

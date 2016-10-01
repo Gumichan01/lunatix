@@ -159,8 +159,8 @@ class LX_Window
                        uint32_t flag, bool accel = true);
 
     void createRenderer_(bool accel);
-    void updateRenderer_(void);
-    void clearRenderer_(void);
+    void updateRenderer_();
+    void clearRenderer_();
     bool screenshot_(std::string& filename);
 
 
@@ -338,18 +338,18 @@ public :
     void toggleFullscreen(uint32_t flag);
 
     /**
-    *   @fn void update(void)
+    *   @fn void update()
     *   Updates the window's display
     *   @note This function can be used with OpenGL
     */
-    void update(void);
+    void update();
 
     /**
-    *   @fn void clearWindow(void)
+    *   @fn void clearWindow()
     *   Clear the display of the current window
     *   @note This function can be used with OpenGL
     */
-    void clearWindow(void);
+    void clearWindow();
 
     /**
     *   @fn bool screenshot(std::string filename)
@@ -371,40 +371,40 @@ public :
     void getInfo(LX_WindowInfo &info);
 
     /**
-    *   @fn int getWidth(void)
+    *   @fn int getWidth()
     *
     *   Get the width of the window
     *
     *   @return The width
     */
-    int getWidth(void);
+    int getWidth();
 
     /**
-    *   @fn int getHeight(void)
+    *   @fn int getHeight()
     *
     *   Get the height of the window
     *
     *   @return The height
     */
-    int getHeight(void);
+    int getHeight();
 
     /**
-    *   @fn int getLogicalWidth(void)
+    *   @fn int getLogicalWidth()
     *
     *   Get the logical width of the window
     *
     *   @return The logical width
     */
-    int getLogicalWidth(void);
+    int getLogicalWidth();
 
     /**
-    *   @fn int getLogicalHeight(void)
+    *   @fn int getLogicalHeight()
     *
     *   Get the logical height of the window
     *
     *   @return The logical height
     */
-    int getLogicalHeight(void);
+    int getLogicalHeight();
 
     /**
     *   @fn void glGetDrawableSize(int& w, int& h)

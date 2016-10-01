@@ -34,7 +34,7 @@ LX_WindowManager * getWindowManager()
 }
 
 
-void LX_WindowManager::init(void)
+void LX_WindowManager::init()
 {
     if(win_instance == nullptr)
         win_instance = new LX_WindowManager();
@@ -47,7 +47,7 @@ LX_WindowManager * LX_WindowManager::getInstance()
 }
 
 
-void LX_WindowManager::destroy(void)
+void LX_WindowManager::destroy()
 {
     delete win_instance;
 }
@@ -96,7 +96,7 @@ LX_Window * LX_WindowManager::removeWindow(unsigned int id)
 }
 
 
-unsigned int LX_WindowManager::nbWindows(void)
+unsigned int LX_WindowManager::nbWindows()
 {
     return _nbwin;
 }

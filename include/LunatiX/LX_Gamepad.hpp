@@ -82,7 +82,7 @@ public :
     void close();
 
     /**
-    *   @fn bool isConnected(void)
+    *   @fn bool isConnected()
     *
     *   Get the status of the gamepad
     *
@@ -90,10 +90,10 @@ public :
     *           FALSE otherwise
     *
     */
-    bool isConnected(void);
+    bool isConnected();
 
     /**
-    *   @fn bool isHaptic(void)
+    *   @fn bool isHaptic()
     *
     *   Check if the gamepad is haptic
     *
@@ -101,20 +101,20 @@ public :
     *           FALSE otherwise
     *
     */
-    bool isHaptic(void);
+    bool isHaptic();
 
     /**
-    *   @fn SDL_JoystickID getID(void)
+    *   @fn SDL_JoystickID getID()
     *
     *   Get the ID of the gamepad
     *
     *   @return The ID of the gamepad, -1 otherwise
     *
     */
-    SDL_JoystickID getID(void);
+    SDL_JoystickID getID();
 
     /**
-    *   @fn LX_Haptic * getHaptic(void)
+    *   @fn LX_Haptic * getHaptic()
     *
     *   Get the haptic system of the gamepad
     *
@@ -122,10 +122,10 @@ public :
     *
     *   @note The system can be inexistent, so check the returned value
     */
-    LX_Haptic * getHaptic(void);
+    LX_Haptic * getHaptic();
 
     /**
-    *   @fn const char * getName(void)
+    *   @fn const char * getName()
     *
     *   Get the name of the Gamepad
     *
@@ -133,7 +133,7 @@ public :
     *
     *   @sa toString
     */
-    const char * getName(void);
+    const char * getName();
 
     /**
     *   @fn bool stat(LX_GamepadInfo& info)
@@ -148,13 +148,13 @@ public :
     bool stat(LX_GamepadInfo& info);
 
     /**
-    *   @fn UTF8string toString(void)
+    *   @fn UTF8string toString()
     *
     *   Get information about the gamepad in string format
     *
     *   @return Always returns a valid string
     */
-    UTF8string toString(void);
+    UTF8string toString();
 
     /// Destructor
     ~LX_Gamepad();

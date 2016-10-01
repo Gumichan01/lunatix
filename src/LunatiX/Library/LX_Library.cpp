@@ -34,7 +34,7 @@ using namespace LX_Config;
 namespace
 {
 
-bool LX_Mixer_Init(void)
+bool LX_Mixer_Init()
 {
     if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == 0)
         return false;
@@ -52,7 +52,7 @@ bool LX_Mixer_Init(void)
 };
 
 
-bool LX_Init(void)
+bool LX_Init()
 {
     const std::string mappingFile = "config/gamecontrollerdb.txt";
 
@@ -153,7 +153,7 @@ const std::string getSDLConfig(const std::string& sdlconfig_name)
 }
 
 
-void LX_Quit(void)
+void LX_Quit()
 {
     LX_Win::LX_WindowManager::destroy();
 

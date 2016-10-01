@@ -24,19 +24,19 @@
 namespace LX_Device
 {
 
-int numberOfHapticDevices(void)
+int numberOfHapticDevices()
 {
     return SDL_NumHaptics();
 }
 
 
-bool mouseIsHaptic(void)
+bool mouseIsHaptic()
 {
     return SDL_MouseIsHaptic() == 1;
 }
 
 
-LX_Haptic * getMouseHaptic(void)
+LX_Haptic * getMouseHaptic()
 {
     SDL_Haptic * sdl_hap = SDL_HapticOpenFromMouse();
 
@@ -78,13 +78,13 @@ LX_Haptic::~LX_Haptic()
 }
 
 
-bool LX_Haptic::isOpened(void)
+bool LX_Haptic::isOpened()
 {
     return SDL_HapticOpened(_instanceID) == 1;
 }
 
 
-bool LX_Haptic::rumbleEffectInit(void)
+bool LX_Haptic::rumbleEffectInit()
 {
     if(SDL_HapticRumbleSupported(_haptic) == SDL_TRUE)
         return SDL_HapticRumbleInit(_haptic) == 0;
@@ -93,7 +93,7 @@ bool LX_Haptic::rumbleEffectInit(void)
 }
 
 
-void LX_Haptic::rumbleEffectPlay(void)
+void LX_Haptic::rumbleEffectPlay()
 {
     rumbleEffectPlay(1,100);
 }
@@ -128,7 +128,7 @@ void LX_Haptic::stopEffect(int effect_id)
 }
 
 
-int LX_Haptic::numberOfEffects(void)
+int LX_Haptic::numberOfEffects()
 {
     return SDL_HapticNumEffects(_haptic);
 }

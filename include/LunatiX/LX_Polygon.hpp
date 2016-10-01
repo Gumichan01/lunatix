@@ -73,7 +73,7 @@ class LX_Polygon
     LX_Polygon(LX_Polygon& p);
     LX_Polygon& operator =(LX_Polygon& p);
 
-    void convexity_(void);
+    void convexity_();
 
 public :
 
@@ -102,14 +102,14 @@ public :
     void addPoint(const LX_Point& p);
 
     /**
-    *   @fn unsigned long LX_Polygon::numberOfEdges(void) const
+    *   @fn unsigned long LX_Polygon::numberOfEdges() const
     *
     *   Get the number of points
     *
     *   @return The number of edges of the polygon
     *
     */
-    unsigned long numberOfEdges(void) const;
+    unsigned long numberOfEdges() const;
 
     /**
     *   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const
@@ -127,7 +127,7 @@ public :
     LX_Point getPoint(const unsigned int index) const;
 
     /**
-    *   @fn bool LX_Polygon::isConvex(void) const
+    *   @fn bool LX_Polygon::isConvex() const
     *
     *   Check the convexity of the polygon
     *
@@ -138,7 +138,7 @@ public :
     *           The result is stored in an internal variable
     *
     */
-    bool isConvex(void) const;
+    bool isConvex() const;
 
     /**
     *   @fn void LX_Polygon::move(const float vx, const float vy)

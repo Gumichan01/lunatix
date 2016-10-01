@@ -50,10 +50,10 @@ class LX_WindowManager
 public:
 
     /**
-    *   @fn void LX_WindowManager::init(void)
+    *   @fn void LX_WindowManager::init()
     *   Initialize the window manager
     */
-    static void init(void);
+    static void init();
 
     /**
     *   @fn LX_WindowManager * LX_WindowManager::getInstance()
@@ -65,7 +65,7 @@ public:
     static LX_WindowManager * getInstance();
 
     /**
-    *   @fn void LX_WindowManager::destroy(void)
+    *   @fn void LX_WindowManager::destroy()
     *
     *   Destroy the instance of the singleton
     *
@@ -73,7 +73,7 @@ public:
     *               are not destroyed. So it is necessary to keep an external
     *               pointer to the windows added in the manager.
     */
-    static void destroy(void);
+    static void destroy();
 
     /**
     *   @fn int LX_WindowManager::addWindow(LX_Window *w)
@@ -106,13 +106,13 @@ public:
     LX_Window * removeWindow(unsigned int id);
 
     /**
-    *   @fn unsigned int LX_WindowManager::nbWindows(void)
+    *   @fn unsigned int LX_WindowManager::nbWindows()
     *
     *   Count the number of opened windows
     *
     *   @return The number of opened windows
     */
-    unsigned int nbWindows(void);
+    unsigned int nbWindows();
 
     /**
     *   @fn void LX_WindowManager::updateWindows()

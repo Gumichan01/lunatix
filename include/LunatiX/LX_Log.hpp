@@ -55,13 +55,13 @@ enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
                  };
 
 /**
-*   @fn bool isDebugMode(void)
+*   @fn bool isDebugMode()
 *
 *   Check if the program is in debug mode
 *
 *   @return TRUE if the program is in debug mode, false otherwise
 */
-bool isDebugMode(void);
+bool isDebugMode();
 
 /**
 *   @fn void setDebugMode(bool debug)
@@ -73,11 +73,11 @@ bool isDebugMode(void);
 void setDebugMode(bool debug = true);
 
 /**
-*   @fn void setDefaultPriority(void)
+*   @fn void setDefaultPriority()
 *
 *   Set the default priorities to the application
 */
-void setDefaultPriority(void);
+void setDefaultPriority();
 
 /**
 *   @fn void setVerbosePriority(LX_CATEGORY category)

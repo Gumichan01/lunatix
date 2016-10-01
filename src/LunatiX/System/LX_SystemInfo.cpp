@@ -27,25 +27,25 @@
 namespace LX_SystemInfo
 {
 
-const UTF8string getPlatform(void)
+const UTF8string getPlatform()
 {
     return UTF8string(SDL_GetPlatform());
 }
 
 
-int getCPUCacheLineSize(void)
+int getCPUCacheLineSize()
 {
     return SDL_GetCPUCacheLineSize();
 }
 
 
-int getCPUCount(void)
+int getCPUCount()
 {
     return SDL_GetCPUCount();
 }
 
 
-int getSystemRAM(void)
+int getSystemRAM()
 {
     return SDL_GetSystemRAM();
 }

@@ -151,19 +151,19 @@ int64_t LX_File::seek(int64_t offset, int whence)
 }
 
 
-int64_t LX_File::tell(void)
+int64_t LX_File::tell()
 {
     return SDL_RWtell(_data);
 }
 
 
-int64_t LX_File::size(void)
+int64_t LX_File::size()
 {
     return SDL_RWsize(_data);
 }
 
 
-void LX_File::close(void)
+void LX_File::close()
 {
     if(_data != nullptr)
     {
@@ -173,7 +173,7 @@ void LX_File::close(void)
 }
 
 
-const char * LX_File::getFilename(void)
+const char * LX_File::getFilename()
 {
     return  _name.utf8_str();
 }
@@ -256,12 +256,12 @@ int64_t LX_TmpFile::seek(int64_t offset, int whence)
 }
 
 
-int64_t LX_TmpFile::tell(void)
+int64_t LX_TmpFile::tell()
 {
     return ftell(_f);
 }
 
-void LX_TmpFile::close(void)
+void LX_TmpFile::close()
 {
     fclose(_f);
     _f = nullptr;

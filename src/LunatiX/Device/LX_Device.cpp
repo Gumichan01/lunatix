@@ -30,7 +30,7 @@ const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
 namespace LX_Device
 {
 
-int numberOfDevices(void)
+int numberOfDevices()
 {
     return SDL_NumJoysticks();
 }

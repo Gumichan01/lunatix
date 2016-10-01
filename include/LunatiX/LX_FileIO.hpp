@@ -158,7 +158,7 @@ public:
     virtual int64_t seek(int64_t offset, int whence) = 0;
 
     /**
-    *   @fn virtual int64_t tell(void)
+    *   @fn virtual int64_t tell()
     *
     *   Get the position in a file
     *
@@ -167,13 +167,13 @@ public:
     *
     *   @sa seek
     */
-    virtual int64_t tell(void) = 0;
+    virtual int64_t tell() = 0;
 
     /**
-    *   @fn void close(void)
+    *   @fn void close()
     *   Close the file
     */
-    virtual void close(void) = 0;
+    virtual void close() = 0;
 
     virtual ~LX_AbstractFile();
 };
@@ -247,23 +247,23 @@ public :
     virtual size_t write(std::string str);
 
     virtual int64_t seek(int64_t offset, int whence);
-    virtual int64_t tell(void);
+    virtual int64_t tell();
 
     /**
-    *   @fn int64_t size(void)
+    *   @fn int64_t size()
     *   Get the size of a file
     *   @return The size of the file on success. -1 on failure
     */
-    int64_t size(void);
+    int64_t size();
 
     /**
-    *   @fn const char * getFilename(void)
+    *   @fn const char * getFilename()
     *   Get the name of the file the instance refers to
     *   @return The name of the file
     */
-    const char * getFilename(void);
+    const char * getFilename();
 
-    virtual void close(void);
+    virtual void close();
 
     /// Destructor
     virtual ~LX_File();
@@ -292,8 +292,8 @@ public:
     virtual size_t write(std::string str);
 
     virtual int64_t seek(int64_t offset, int whence);
-    virtual int64_t tell(void);
-    virtual void close(void);
+    virtual int64_t tell();
+    virtual void close();
 
     /// Destructor
     virtual ~LX_TmpFile();

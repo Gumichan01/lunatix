@@ -102,50 +102,50 @@ public:
     bool rmParticle(unsigned int index);
 
     /**
-    *   @fn void updateParticles(void)
+    *   @fn void updateParticles()
     *
     *   Update the particles
     *
     */
-    void updateParticles(void);
+    void updateParticles();
 
     /**
-    *   @fn void displayParticles(void)
+    *   @fn void displayParticles()
     *
     *   Display the particles
     *
     */
-    void displayParticles(void);
+    void displayParticles();
 
     /**
-    *   @fn unsigned int nbEmptyParticles(void)
+    *   @fn unsigned int nbEmptyParticles()
     *
     *   Get the number of empty slots to set particles
     *
     *   @return The number of available slots of the particle system
     *
     */
-    unsigned int nbEmptyParticles(void);
+    unsigned int nbEmptyParticles();
 
     /**
-    *   @fn unsigned int nbActiveParticles(void)
+    *   @fn unsigned int nbActiveParticles()
     *
     *   Get the number of initialized particles
     *
     *   @return The number of particles that are not null of the system
     *
     */
-    unsigned int nbActiveParticles(void);
+    unsigned int nbActiveParticles();
 
     /**
-    *   @fn unsigned int nbTotalParticles(void)
+    *   @fn unsigned int nbTotalParticles()
     *
     *   Get the maximum number of particles
     *
     *   @return The total number of particles the current particle system can have
     *
     */
-    unsigned int nbTotalParticles(void);
+    unsigned int nbTotalParticles();
 
     /// Destructor
     ~LX_ParticleSystem();

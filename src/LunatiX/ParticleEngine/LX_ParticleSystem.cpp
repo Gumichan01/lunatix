@@ -115,7 +115,7 @@ bool LX_ParticleSystem::rmParticle(unsigned int index)
 }
 
 
-void LX_ParticleSystem::updateParticles(void)
+void LX_ParticleSystem::updateParticles()
 {
     const unsigned int n = _nb_particles;
 
@@ -132,7 +132,7 @@ void LX_ParticleSystem::updateParticles(void)
 }
 
 
-void LX_ParticleSystem::displayParticles(void)
+void LX_ParticleSystem::displayParticles()
 {
     const unsigned int N = _nb_particles;
 
@@ -148,7 +148,7 @@ void LX_ParticleSystem::displayParticles(void)
 }
 
 
-unsigned int LX_ParticleSystem::nbEmptyParticles(void)
+unsigned int LX_ParticleSystem::nbEmptyParticles()
 {
     const unsigned int n = _nb_particles;
     unsigned int nb = 0;
@@ -163,13 +163,13 @@ unsigned int LX_ParticleSystem::nbEmptyParticles(void)
 }
 
 
-unsigned int LX_ParticleSystem::nbActiveParticles(void)
+unsigned int LX_ParticleSystem::nbActiveParticles()
 {
     return _nb_particles - nbEmptyParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbTotalParticles(void)
+unsigned int LX_ParticleSystem::nbTotalParticles()
 {
     return _nb_particles;
 }

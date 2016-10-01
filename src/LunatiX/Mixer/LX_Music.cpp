@@ -92,7 +92,7 @@ void LX_Music::fadeOut(int ms)
 }
 
 
-bool LX_Music::play(void)
+bool LX_Music::play()
 {
     return play(LX_MIXER_NOLOOP);
 }
@@ -104,7 +104,7 @@ bool LX_Music::play(int loops)
 }
 
 
-void LX_Music::pause(void)
+void LX_Music::pause()
 {
     if(Mix_PausedMusic())
         Mix_ResumeMusic();
@@ -113,7 +113,7 @@ void LX_Music::pause(void)
 }
 
 
-void LX_Music::stop(void)
+void LX_Music::stop()
 {
     if(Mix_PlayingMusic())
         Mix_HaltMusic();
@@ -129,7 +129,7 @@ const libtagpp::Tag& LX_Music::getInfo()
 }
 
 
-LX_Music::~LX_Music(void)
+LX_Music::~LX_Music()
 {
     Mix_FreeMusic(_music);
 }

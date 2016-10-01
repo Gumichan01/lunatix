@@ -45,7 +45,7 @@ LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
     : _box(b), _lifetime(xorshiftRand()%DELAY), _velocity(v), _texture(sp) {}
 
 
-void LX_Particle::update(void)
+void LX_Particle::update()
 {
     if(_lifetime > 0)
     {
@@ -55,19 +55,19 @@ void LX_Particle::update(void)
 }
 
 
-void LX_Particle::draw(void)
+void LX_Particle::draw()
 {
     _texture.draw(&_box);
 }
 
 
-bool LX_Particle::isDead(void)
+bool LX_Particle::isDead()
 {
     return _lifetime == 0;
 }
 
 
-unsigned int LX_Particle::getDelay(void)
+unsigned int LX_Particle::getDelay()
 {
     return _lifetime;
 }

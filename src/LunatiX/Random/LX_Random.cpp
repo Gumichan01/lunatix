@@ -42,13 +42,13 @@ typedef unsigned __int64 uint64_t;
 namespace LX_Random
 {
 
-void initRand(void)
+void initRand()
 {
     srand(static_cast<unsigned int>(time(nullptr)));
 }
 
 
-uint64_t xorshiftRand(void)
+uint64_t xorshiftRand()
 {
     static uint64_t x = 0;
     static bool first_call = false;
@@ -68,7 +68,7 @@ uint64_t xorshiftRand(void)
 }
 
 
-int crand(void)
+int crand()
 {
     return rand();
 }

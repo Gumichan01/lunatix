@@ -134,7 +134,7 @@ public:
     void fadeOut(int ms);
 
     /**
-    *   @fn bool play(void)
+    *   @fn bool play()
     *
     *   Play the music specified in the LX_Music class
     *
@@ -142,7 +142,7 @@ public:
     *
     *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP
     */
-    bool play(void);
+    bool play();
 
     /**
     *   @fn bool play(int loops)
@@ -159,16 +159,16 @@ public:
     bool play(int loops);
 
     /**
-    *   @fn void pause(void)
+    *   @fn void pause()
     *   Pause or resume the current music
     */
-    void pause(void);
+    void pause();
 
     /**
-    *   @fn void stop(void)
+    *   @fn void stop()
     *   Stop the music
     */
-    void stop(void);
+    void stop();
 
     /**
     *   @fn const libtagpp::Tag& getInfo()

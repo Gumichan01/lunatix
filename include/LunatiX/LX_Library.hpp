@@ -28,7 +28,7 @@
 #define LX_GL_MINOR_VERSION 2   /**< Minor version of OpenGL supported by the library */
 
 /**
-*   @fn bool LX_Init(void)
+*   @fn bool LX_Init()
 *
 *   Load the library according the configuration file
 *
@@ -38,7 +38,7 @@
 *           and LX_Configuration::initConfig()
 *
 */
-bool LX_Init(void);
+bool LX_Init();
 
 /**
 *   @fn bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value)
@@ -64,13 +64,13 @@ bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfi
 const std::string getSDLConfig(const std::string& sdlconfig_name);
 
 /**
-*   @fn void LX_Quit(void)
+*   @fn void LX_Quit()
 *
 *   Shut down the library
 *
 *   @note This function automatically calls LX_WindowManager::destroy()
 *
 */
-void LX_Quit(void);
+void LX_Quit();
 
 #endif // LX_LIBRARY_H_INCLUDED

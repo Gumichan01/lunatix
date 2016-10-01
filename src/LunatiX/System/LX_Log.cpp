@@ -96,7 +96,7 @@ std::string getDate()
 namespace LX_Log
 {
 
-bool isDebugMode(void)
+bool isDebugMode()
 {
     return debug_mode;
 }
@@ -113,7 +113,7 @@ void setDebugMode(bool debug)
 }
 
 
-void setDefaultPriority(void)
+void setDefaultPriority()
 {
     SDL_LogResetPriorities();
 }

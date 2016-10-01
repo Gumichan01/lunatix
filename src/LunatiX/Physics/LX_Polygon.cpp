@@ -61,7 +61,7 @@ void LX_Polygon::addPoint(const LX_Point& p)
 }
 
 
-unsigned long LX_Polygon::numberOfEdges(void) const
+unsigned long LX_Polygon::numberOfEdges() const
 {
     return _points.size();
 }
@@ -73,14 +73,14 @@ LX_Point LX_Polygon::getPoint(const unsigned int index) const
 }
 
 
-bool LX_Polygon::isConvex(void) const
+bool LX_Polygon::isConvex() const
 {
     return _convex;
 }
 
 
 // Evaluate the convexity of the polygon
-void LX_Polygon::convexity_(void)
+void LX_Polygon::convexity_()
 {
     // Vectors
     LX_Vector2D AO;

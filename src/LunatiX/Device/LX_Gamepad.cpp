@@ -160,7 +160,7 @@ bool LX_Gamepad::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info)
 }
 
 
-bool LX_Gamepad::isConnected(void)
+bool LX_Gamepad::isConnected()
 {
     if(_gc != nullptr)
         return SDL_GameControllerGetAttached(_gc) == SDL_TRUE;
@@ -169,13 +169,13 @@ bool LX_Gamepad::isConnected(void)
 }
 
 
-bool LX_Gamepad::isHaptic(void)
+bool LX_Gamepad::isHaptic()
 {
     return _haptic != nullptr && _haptic->isOpened();
 }
 
 
-SDL_JoystickID LX_Gamepad::getID(void)
+SDL_JoystickID LX_Gamepad::getID()
 {
     if(_gc != nullptr)
         return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(_gc));
@@ -184,13 +184,13 @@ SDL_JoystickID LX_Gamepad::getID(void)
 }
 
 
-LX_Haptic * LX_Gamepad::getHaptic(void)
+LX_Haptic * LX_Gamepad::getHaptic()
 {
     return _haptic;
 }
 
 
-const char * LX_Gamepad::getName(void)
+const char * LX_Gamepad::getName()
 {
     if(_gc != nullptr)
         return nameOf_(_gc);
@@ -215,7 +215,7 @@ bool LX_Gamepad::stat(LX_GamepadInfo& info)
 }
 
 
-UTF8string LX_Gamepad::toString(void)
+UTF8string LX_Gamepad::toString()
 {
     LX_GamepadInfo gi;
 

@@ -96,37 +96,37 @@ public :
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v);
 
     /**
-    *   @fn void update(void)
+    *   @fn void update()
     *
     *   Update the particle statement
     */
-    void update(void);
+    void update();
 
     /**
-    *   @fn void draw(void)
+    *   @fn void draw()
     *
     *   Draw the particle
     */
-    void draw(void);
+    void draw();
 
     /**
-    *   @fn bool isDead(void)
+    *   @fn bool isDead()
     *
     *   Check if the particle is dead and must be destroyed
     *
     *   @return TRUE if the particle is dead, FALSE otherwise
     *
     */
-    bool isDead(void);
+    bool isDead();
 
     /**
-    *   @fn unsigned int getDelay(void)
+    *   @fn unsigned int getDelay()
     *
     *   Get the lifetime of the particle
     *
     *   @return The lifetime
     */
-    unsigned int getDelay(void);
+    unsigned int getDelay();
 
     /// Destructor
     ~LX_Particle() = default;
