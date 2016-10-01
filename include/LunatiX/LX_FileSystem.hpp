@@ -86,14 +86,8 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
 *
 *   @return The basename in utf-8 format.
 *
-*   @note 1 — If the path is one of these following values:
-*             - '.'
-*             - '..'
-*             - '/'
-*             - '\'
-*             The path is returned.
-*   @note 2 — Trailing '\' (on Windows) or '/' (on Linux) are not counted
-*             as part of the path name.
+*   @note Trailing '\' (on Windows) or '/' (on Linux) are not counted
+*         as part of the path name.
 */
 UTF8string basename(const UTF8string& path);
 /**
