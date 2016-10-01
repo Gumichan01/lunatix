@@ -49,7 +49,6 @@ struct LX_Circle;
 struct LX_Vector2D;
 };
 
-//struct LX_AABB;
 
 // Fullscreen modes
 #define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop size   */
@@ -132,10 +131,8 @@ public :
 *   @class LX_Window
 *   @brief The window
 *
-*   @note By default, the constructor retrieves information from the configuration file
-*
 *   @warning The LX_Window class must be defined only after
-*               the initialization of the library (calling LX_Init())
+*            the initialization of the library (calling LX_Init())
 *   @warning A LX_WindowException may be occured if the window creation fails
 *
 */
@@ -175,7 +172,7 @@ public :
     *
     *   Create a window using information from the struture given in argument
     *
-    *   @param [in,out] info The structure tha contains information about the window
+    *   @param [in,out] info The structure that contains information about the window
     *   @note The structure is updated when the window is created
     */
     explicit LX_Window(LX_WindowInfo &info);
