@@ -1,9 +1,7 @@
 
-#include <cstring>
-#include <cstdio>
-#include <iostream>
-#include <stdexcept>
 #include <LunatiX/Lunatix.hpp>
+#include <iostream>
+#include <map>
 
 #define N 4
 
@@ -17,6 +15,7 @@ void test_write(void);
 void test_tellSeek(void);
 void test_buffer(void);
 void test_tmp(void);
+void test_fs(void);
 void test_getChunk(void);
 
 namespace
@@ -36,13 +35,15 @@ int main(int argc, char **argv)
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test File ==== ");
-    test_open();
+    /*test_open();
     test_write();
     test_read();
     test_read2();
     test_tellSeek();
-    test_buffer();
-    test_getChunk();
+    test_buffer();*/
+    test_tmp();
+    test_fs();
+    //test_getChunk();
     remove(str.c_str());
     LX_Log::log(" ==== End File ==== ");
 
@@ -314,14 +315,137 @@ void test_tmp(void)
 {
     LX_Log::log(" = TEST Temporary file = ");
 
+    try
+    {
+        char buf[1024] = {'\0'};
+        LX_FileIO::LX_TmpFile tmp;
 
-    char buf[1024] = {'\0'};
-    LX_FileIO::LX_TmpFile tmp;
-    tmp << LX_FileSystem::getWorkingDirectory().utf8_str() << "\n ← Gumichan01";
+        LX_Log::log("File created. writing \"→ Gumichan01 ←\" ...");
+        tmp << "→ Gumichan01 ←";
 
-    tmp.seek(0,LX_SEEK_SET);
-    tmp.read(buf,1024,1);
-    LX_Log::log("\n%s",buf);
+        tmp.seek(0,LX_SEEK_SET);
+        tmp.read(buf,1024,1);
+        LX_Log::log("Read the tmp file from the beginning ...");
+        LX_Log::log("got: %s",buf);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - temporary file done",buf);
+    }
+    catch(LX_FileIO::IOException &ioe)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s",ioe.what());
+    }
+
+    LX_Log::log(" = END TEST = ");
+}
+
+using u8map = std::map<UTF8string,UTF8string>;
+using u8pair = std::pair<UTF8string,UTF8string>;
+
+void test_fs(void)
+{
+    LX_Log::log(" = TEST File System (dirname, basename) = ");
+
+#ifdef __WIN32__
+    const char * current_dir = ".\\";
+    const char * separator = "\\";
+#else
+    const char * current_dir = "./";
+    const char * separator = "/";
+#endif
+
+    const UTF8string u8empty("");
+    const UTF8string current(".");
+    const UTF8string parent("..");
+    const UTF8string sep(separator);
+    const UTF8string root(separator);
+    const UTF8string sep2(sep + sep);
+    const UTF8string cursep(current + sep);
+    const UTF8string scursep(sep + cursep);
+    const UTF8string parsep(parent + sep);
+    const UTF8string sparsep(sep + parsep);
+    const UTF8string usr("usr");
+    const UTF8string usrsep(usr + sep);
+    const UTF8string susrsep(sep + usrsep);
+    const UTF8string tmp("tmp");
+    const UTF8string toto("toto");
+    const UTF8string lib("lib");
+    const UTF8string totopath(sep + tmp + sep + toto);
+    const UTF8string libpath(sep + usr + sep + lib + sep);
+    const UTF8string libpathex(sep + usr + sep2 + lib + sep2);
+
+    u8map basename_ctest;   // Test suite for basename
+    u8map dirname_ctest;    // Test suite for basename
+
+    basename_ctest.insert(u8pair(u8empty,current));
+    basename_ctest.insert(u8pair(current,current));
+    basename_ctest.insert(u8pair(parent,parent));
+    basename_ctest.insert(u8pair(root,root));
+    basename_ctest.insert(u8pair(sep2,root));
+    basename_ctest.insert(u8pair(cursep,current));
+    basename_ctest.insert(u8pair(scursep,current));
+    basename_ctest.insert(u8pair(parsep,parent));
+    basename_ctest.insert(u8pair(sparsep,parent));
+    basename_ctest.insert(u8pair(usr,usr));
+    basename_ctest.insert(u8pair(usrsep,usr));
+    basename_ctest.insert(u8pair(totopath,toto));
+    basename_ctest.insert(u8pair(libpath,lib));
+    basename_ctest.insert(u8pair(libpathex,lib));
+
+    dirname_ctest.insert(u8pair(u8empty,current));
+    dirname_ctest.insert(u8pair(current,current));
+    dirname_ctest.insert(u8pair(parent,current));
+    dirname_ctest.insert(u8pair(root,root));
+    dirname_ctest.insert(u8pair(sep2,root));
+    dirname_ctest.insert(u8pair(cursep,current));
+    dirname_ctest.insert(u8pair(scursep,current));
+    dirname_ctest.insert(u8pair(parsep,current));
+    dirname_ctest.insert(u8pair(sparsep,current));
+    dirname_ctest.insert(u8pair(usr,current));
+    dirname_ctest.insert(u8pair(usrsep,current));
+    dirname_ctest.insert(u8pair(totopath,sep + tmp));
+    dirname_ctest.insert(u8pair(libpath,sep + usr));
+    dirname_ctest.insert(u8pair(libpathex,sep + usr));
+
+
+    LX_Log::log(" == TEST basename() == ");
+
+    for(auto it = basename_ctest.begin(); it != basename_ctest.end(); it++)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST," → basename of %s",
+                        (it->first.utf8_empty() ? "<empty>" : it->first.utf8_str()) );
+        UTF8string u8got = LX_FileSystem::basename(it->first);
+        if(u8got != it->second)
+        {
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: %s; got: %s",
+                            it->second.utf8_str(),u8got.utf8_str());
+        }
+        else
+        {
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected: %s; got: %s",
+                            it->second.utf8_str(),u8got.utf8_str());
+        }
+    }
+
+    LX_Log::log(" == END TEST == \n ");
+    LX_Log::log(" == TEST dirname() == ");
+
+    for(auto it = dirname_ctest.begin(); it != dirname_ctest.end(); it++)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST," → dirname of %s",
+                        (it->first.utf8_empty() ? "<empty>" : it->first.utf8_str()) );
+        UTF8string u8got = LX_FileSystem::dirname(it->first);
+        if(u8got != it->second)
+        {
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: %s; got: %s",
+                            it->second.utf8_str(),u8got.utf8_str());
+        }
+        else
+        {
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected: %s; got: %s",
+                            it->second.utf8_str(),u8got.utf8_str());
+        }
+    }
+
+    LX_Log::log(" == END TEST == ");
 
     LX_Log::log(" = END TEST = ");
 }
