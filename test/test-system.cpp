@@ -17,24 +17,16 @@ int main(int argc, char **argv)
     cout << "Number of CPU cores : " << getCPUCount() << endl;
     cout << "RAM : " << getSystemRAM() << " MB" << endl;
 
-    int sz;
-    const SDL_DisplayMode * mode = getDisplayModes(sz);
+    LX_DisplayMode modes;
+    LX_SystemInfo::getAvailableDisplayModes(modes);
 
-    if(mode != nullptr && sz != 0)
+    cout << "\nDisplay : " << endl;
+    LX_Log::log("Display:\n ");
+    for(auto it = modes.begin(); it != modes.end(); it++)
     {
-        cout << "\nDisplay : " << endl;
-        for(int i = 0; i < sz; i++)
-        {
-            cout << mode[i].w << " x " << mode[i].h << " @ ~"
-                 << mode[i].refresh_rate << " Hz" << endl;
-        }
-    }
-    else
-    {
-        cout << "INFO - " << LX_GetError() << endl;
+        LX_Log::log("%d × %d @ ~%d Hz",(*it).w,(*it).h,(*it).refresh_rate);
     }
 
-    delete [] mode;
     LX_Log::log(" ==== End System ==== ");
     LX_Quit();
 

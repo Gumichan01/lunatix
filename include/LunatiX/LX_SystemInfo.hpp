@@ -23,6 +23,7 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_video.h>
+#include <vector>
 
 
 /**
@@ -35,6 +36,8 @@
 */
 namespace LX_SystemInfo
 {
+
+using LX_DisplayMode = std::vector<SDL_DisplayMode>;
 
 /**
 *   @fn const UTF8string getPlatform(void)
@@ -90,21 +93,17 @@ int getCPUCount(void);
 int getSystemRAM(void);
 
 /**
-*   @fn const SDL_DisplayMode * getDisplayModes(int& size)
+*   @fn void getAvailableDisplayModes(LX_DisplayMode& modes)
 *
-*   Get the list of possible displays on the screen
+*   Get the list of available display modes on the screen
 *
-*   @param [out] size the preference to the size to fill in
+*   @param [in,out] modes the different modes of display to fill in
 *
-*   @return The list of display modes if there is at least one display mode,
-*           a null pointer otherwise, an error message can be got using
-*           LX_GetError()
-*
-*   @note This function allocate a memory to create the list, so this list
-*           must be freed whane it is not used to avoid a memory leak.
-*
+*   @note LX_DisplayMode is a struture that contains every available
+*         display modes. In order to get these following modes, you should
+*         use iterators.
 */
-const SDL_DisplayMode * getDisplayModes(int& size);
+void getAvailableDisplayModes(LX_DisplayMode& modes);
 
 };
 
