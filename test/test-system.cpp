@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include <LunatiX/Lunatix.hpp>
 
 using namespace std;
@@ -12,16 +11,15 @@ int main(int argc, char **argv)
     LX_Log::setDebugMode();
 
     LX_Log::log(" ==== Test System ==== \n");
-    cout << "System : " << getPlatform() << endl;
-    cout << "L1 cache size : " << getCPUCacheLineSize() << " KB" << endl;
-    cout << "Number of CPU cores : " << getCPUCount() << endl;
-    cout << "RAM : " << getSystemRAM() << " MB" << endl;
+    LX_Log::log("System: %s",getPlatform().utf8_str());
+    LX_Log::log("L1 cache size: %d KB",getCPUCacheLineSize());
+    LX_Log::log("Number of CPU cores: %d",getCPUCount());
+    LX_Log::log("RAM: %d MB\n ",getSystemRAM());
 
     LX_DisplayMode modes;
-    LX_SystemInfo::getAvailableDisplayModes(modes);
+    getAvailableDisplayModes(modes);
 
-    cout << "\nDisplay : " << endl;
-    LX_Log::log("Display:\n ");
+    LX_Log::log("Display modes: ");
     for(auto it = modes.begin(); it != modes.end(); it++)
     {
         LX_Log::log("%d × %d @ ~%d Hz",(*it).w,(*it).h,(*it).refresh_rate);
