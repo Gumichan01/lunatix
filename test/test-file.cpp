@@ -345,10 +345,8 @@ void test_fs(void)
     LX_Log::log(" = TEST File System (dirname, basename) = ");
 
 #ifdef __WIN32__
-    const char * current_dir = ".\\";
     const char * separator = "\\";
 #else
-    const char * current_dir = "./";
     const char * separator = "/";
 #endif
 
