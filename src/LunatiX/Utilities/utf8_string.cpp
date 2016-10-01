@@ -444,19 +444,19 @@ const char * UTF8string::utf8_str() const
 }
 
 // Internal function that creates an iterator of the current string
-UTF8iterator UTF8string::utf8_iterator_() const noexcept
+UTF8iterator UTF8string::utf8_iterator_() const
 {
     return UTF8iterator(*this);
 }
 
 
-UTF8iterator UTF8string::utf8_begin() const noexcept
+UTF8iterator UTF8string::utf8_begin() const
 {
     return utf8_iterator_();
 }
 
 
-UTF8iterator UTF8string::utf8_end() const noexcept
+UTF8iterator UTF8string::utf8_end() const
 {
     return utf8_begin() + utf8length;
 }

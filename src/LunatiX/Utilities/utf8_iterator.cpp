@@ -1,23 +1,23 @@
 /*
 *
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    gumichan01.olympe.in
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   gumichan01.olympe.in
 *
 *   This library is under the MIT license
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 *
 */
 
-#include <LunatiX/utils/utf8_iterator.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 
 
-UTF8iterator::UTF8iterator(const UTF8string& u) : index(0), data(u) {}
+UTF8iterator::UTF8iterator(const UTF8string& u)
+    : index(0),data(u) {}
 
 UTF8iterator::UTF8iterator(const UTF8iterator& it)
     : index(it.index), data(it.data) {}
-
 
 UTF8iterator::~UTF8iterator() {}
 

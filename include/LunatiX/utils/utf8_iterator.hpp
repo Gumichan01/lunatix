@@ -1,12 +1,12 @@
 /*
 *
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    gumichan01.olympe.in
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   gumichan01.olympe.in
 *
 *   This library is under the MIT license
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 *
 */
 
@@ -18,7 +18,7 @@
 *   @brief This is a UTF-8 string library header
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
+class UTF8string;
 
 
 /**
@@ -61,6 +61,7 @@ public:
     *
     *   Postfix incrementation
     *
+    *   @param int dummy parameter
     *   @return The same iterator before it has moved forward
     */
     UTF8iterator operator ++(int);
@@ -77,6 +78,7 @@ public:
     *
     *   Postfix decrementation
     *
+    *   @param int dummy parameter
     *   @return The same iterator before it has moved backward
     */
     UTF8iterator operator --(int);
@@ -84,7 +86,7 @@ public:
     /**
     *   @fn UTF8iterator& operator =(const UTF8iterator& it)
     *   Asignement
-    *   @param [in] it The iterator that wille be assigned
+    *   @param it The iterator that wille be assigned
     *   @return The same iterator as the argument
     */
     UTF8iterator& operator =(const UTF8iterator& it);
@@ -95,7 +97,7 @@ public:
     *   Check if the current iterators it pointing to the same position as
     *   the iterator given in argument equals.
     *
-    *   @param [in] it The iterator to compare with
+    *   @param it The iterator to compare with
     *   @return TRUE if they are pointing to the same position, FALSE otherwise
     */
     bool operator ==(const UTF8iterator& it) const;
@@ -106,7 +108,7 @@ public:
     *   Check if the current iterators it pointing to a different position
     *   from the iterator given in argument equals.
     *
-    *   @param [in] it The iterator to compare with
+    *   @param it The iterator to compare with
     *   @return TRUE if they are not pointing to the same position,
     *           FALSE otherwise
     */
@@ -117,7 +119,7 @@ public:
     *
     *   Returns an iterator witch has been moved 10 positions forward
     *
-    *   @param [in] n the number of step to move forward
+    *   @param n the number of step to move forward
     *   @return The same iterator that moved forward
     */
     UTF8iterator operator +(const size_t n) const;
@@ -127,7 +129,7 @@ public:
     *
     *   Returns an iterator witch has been moved 10 positions backward
     *
-    *   @param [in] n the number of steps to move backward
+    *   @param n the number of steps to move backward
     *   @return The same iterator that moved backward
     */
     UTF8iterator operator -(const size_t n) const;

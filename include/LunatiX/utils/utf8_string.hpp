@@ -40,7 +40,7 @@ class UTF8string
     size_t utf8_codepoint_len_(const size_t j) const;
     size_t utf8_bpos_at_(const size_t cpos) const;
     void utf8_at_(const size_t index, std::string& s) const;
-    UTF8iterator utf8_iterator_() const noexcept;
+    UTF8iterator utf8_iterator_() const;
     UTF8string utf8_reverse_aux_(UTF8iterator& it,
                                  const UTF8iterator& end, UTF8string& res);
 
@@ -254,16 +254,16 @@ public:
     const char * utf8_str() const;
 
     /**
-    *   @fn UTF8iterator utf8_begin() const noexcept
+    *   @fn UTF8iterator utf8_begin() const
     *
     *   Returns an iterator that points to the first codepoint of the string
     *
     *   @return An iterator to the beginnigng of the string
     */
-    UTF8iterator utf8_begin() const noexcept;
+    UTF8iterator utf8_begin() const;
 
     /**
-    *   @fn UTF8iterator utf8_end() const noexcept
+    *   @fn UTF8iterator utf8_end() const
     *
     *   Returns an iterator that points to the *past-the-end* codepoint of the string
     *
@@ -272,7 +272,7 @@ public:
     *
     *   @return An iterator to the past-the-end codepoint
     */
-    UTF8iterator utf8_end() const noexcept;
+    UTF8iterator utf8_end() const;
 
     ~UTF8string() = default;
 };
