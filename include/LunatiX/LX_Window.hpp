@@ -378,7 +378,6 @@ public :
     *   @return The width
     */
     int getWidth();
-
     /**
     *   @fn int getHeight()
     *
@@ -396,7 +395,6 @@ public :
     *   @return The logical width
     */
     int getLogicalWidth();
-
     /**
     *   @fn int getLogicalHeight()
     *
@@ -419,7 +417,6 @@ public :
     *         SDL_WINDOW_ALLOW_HIGHDPI on a platform with high-DPI support.
     */
     void glGetDrawableSize(int& w, int& h);
-
     /**
     *   @fn void glMakeCurrent()
     *
