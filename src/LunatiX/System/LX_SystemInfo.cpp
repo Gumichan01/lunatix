@@ -78,9 +78,6 @@ const SDL_DisplayMode * getDisplayModes(int& size)
 
     for(int i = 0; i < numberOfDisplays; i++)
     {
-        /// @todo LX_SystemInfo::getDisplayModes - Is that line useful?
-        mode[i].format = SDL_PIXELFORMAT_RGBA4444;
-
         if(SDL_GetDisplayMode(0,i,&mode[i]) < 0)
         {
             delete [] mode;
