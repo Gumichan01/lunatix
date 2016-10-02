@@ -1,23 +1,16 @@
 
 #
-#	Copyright (C) 2016 Luxon Jean-Pierre
-#	gumichan01.olympe.in
+#   Copyright (C) 2016 Luxon Jean-Pierre
+#   gumichan01.cpplympe.in
 #
-#	LunatiX is a free, SDL2-based library.
-#	It can be used for open-source or commercial games thanks to the zlib/libpng license.
+#   LunatiX is a free, SDL2-based library.
+#   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 #
-#	Luxon Jean-Pierre (Gumichan01)
-#	luxon.jean.pierre@gmail.com
+#   Luxon Jean-Pierre (Gumichan01)
+#   luxon.jean.pierre@gmail.com
 #
 
 # Makefile - LunatiX
-
-.PHONY: clean documentation test
-
-
-#
-# Debug symbol
-#
 
 # You can modify the value of DEBUG
 # If you want to use the debug or release mode
@@ -30,19 +23,15 @@ DEBUG=yes
 
 CC=clang++
 
-# Path to the main file directory
-MAIN_PATH=./src/
-
 # Path to the test files
 TEST_PATH=./test/
 
 # Executable file
 LUNATIX_EXE=lunatix-demo
 
-# Path to the LunatiX directories
+# Path to directories
+SRC_PATH=./src/
 LUNATIX_PATH=./src/LunatiX/
-LUNATIX_BUILD_ROOT=./_build/
-LUNATIX_BUILD_DIR=$(LUNATIX_BUILD_ROOT)LunatiX/
 LIBRARIES_I_DIR=./include/
 LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
 UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
@@ -51,71 +40,64 @@ LIBTAGSPP_I_PATH=$(UTILS_I_PATH)libtagspp/
 SDL2_I_PATH=`pkg-config --cflags sdl2 SDL2_image SDL2_mixer SDL2_ttf`
 
 # Path to the different modules
-DEVICE_PATH=$(LUNATIX_PATH)Device/
-FILEIO_PATH=$(LUNATIX_PATH)FileIO/
-GRAPHICS_PATH=$(LUNATIX_PATH)Graphics/
-LIBRARY_PATH=$(LUNATIX_PATH)Library/
-MIXER_PATH=$(LUNATIX_PATH)Mixer/
-MSG_PATH=$(LUNATIX_PATH)MSGBox/
-MULTITHREAD_PATH=$(LUNATIX_PATH)Multithreading/
-PARTICLE_PATH=$(LUNATIX_PATH)ParticleEngine/
-PHYSICS_PATH=$(LUNATIX_PATH)Physics/
-RANDOM_PATH=$(LUNATIX_PATH)Random/
-SYSTEM_PATH=$(LUNATIX_PATH)System/
-TEXT_PATH=$(LUNATIX_PATH)Text/
-TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
-VERSION_PATH=$(LUNATIX_PATH)Version/
-UTILS_PATH=$(LUNATIX_PATH)Utilities/
-TINYTHREAD_PATH=$(UTILS_PATH)tinythread/
-LIBTAGSPP_PATH=$(UTILS_PATH)libtagspp/
+SRC_MAIN_PATH=./src/
+SRC_DEVICE_PATH=$(LUNATIX_PATH)Device/
+SRC_FILEIO_PATH=$(LUNATIX_PATH)FileIO/
+SRC_GRAPHICS_PATH=$(LUNATIX_PATH)Graphics/
+SRC_LIBRARY_PATH=$(LUNATIX_PATH)Library/
+SRC_MIXER_PATH=$(LUNATIX_PATH)Mixer/
+SRC_MSG_PATH=$(LUNATIX_PATH)MSGBox/
+SRC_MULTITHREAD_PATH=$(LUNATIX_PATH)Multithreading/
+SRC_PARTICLE_PATH=$(LUNATIX_PATH)ParticleEngine/
+SRC_PHYSICS_PATH=$(LUNATIX_PATH)Physics/
+SRC_RANDOM_PATH=$(LUNATIX_PATH)Random/
+SRC_SYSTEM_PATH=$(LUNATIX_PATH)System/
+SRC_TEXT_PATH=$(LUNATIX_PATH)Text/
+SRC_TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
+SRC_VERSION_PATH=$(LUNATIX_PATH)Version/
+SRC_UTILS_PATH=$(LUNATIX_PATH)Utilities/
+SRC_TINYTHREAD_PATH=$(SRC_UTILS_PATH)tinythread/
+SRC_LIBTAGSPP_PATH=$(SRC_UTILS_PATH)libtagspp/
 
-# Path to the different object directories
-OBJ_MAIN_PATH=$(LUNATIX_BUILD_DIR)../
-OBJ_DEVICE_PATH=$(LUNATIX_BUILD_DIR)Device/
-OBJ_FILEIO_PATH=$(LUNATIX_BUILD_DIR)FileIO/
-OBJ_GRAPHICS_PATH=$(LUNATIX_BUILD_DIR)Graphics/
-OBJ_LIBRARY_PATH=$(LUNATIX_BUILD_DIR)Library/
-OBJ_MIXER_PATH=$(LUNATIX_BUILD_DIR)Mixer/
-OBJ_MSG_PATH=$(LUNATIX_BUILD_DIR)MSGBox/
-OBJ_MULTITHREAD_PATH=$(LUNATIX_BUILD_DIR)Multithread/
-OBJ_PARTICLE_PATH=$(LUNATIX_BUILD_DIR)ParticleEngine/
-OBJ_PHYSICS_PATH=$(LUNATIX_BUILD_DIR)Physics/
-OBJ_RANDOM_PATH=$(LUNATIX_BUILD_DIR)Random/
-OBJ_SYSTEM_PATH=$(LUNATIX_BUILD_DIR)System/
-OBJ_TEXT_PATH=$(LUNATIX_BUILD_DIR)Text/
-OBJ_TTF_PATH=$(LUNATIX_BUILD_DIR)TrueTypeFont/
-OBJ_VERSION_PATH=$(LUNATIX_BUILD_DIR)Version/
-OBJ_UTILS_PATH=$(LUNATIX_BUILD_DIR)Utilities/
-OBJ_TINYTHREAD_PATH=$(OBJ_UTILS_PATH)tinythread/
-OBJ_LIBTAGSPP_PATH=$(OBJ_UTILS_PATH)libtagspp/
+# Path to the different sources files
+MAIN_FILE=$(SRC_MAIN_PATH)main.cpp
+SRC_FILES=$(SRC_DEVICE_PATH)LX_Device.cpp $(SRC_DEVICE_PATH)LX_Gamepad.cpp \
+$(SRC_DEVICE_PATH)LX_Haptic.cpp $(SRC_DEVICE_PATH)LX_Mouse.cpp \
+$(SRC_FILEIO_PATH)LX_FileIO.cpp $(SRC_FILEIO_PATH)LX_FileBuffer.cpp \
+$(SRC_GRAPHICS_PATH)LX_OpenGL.cpp $(SRC_GRAPHICS_PATH)LX_Window.cpp \
+$(SRC_GRAPHICS_PATH)LX_WindowManager.cpp $(SRC_GRAPHICS_PATH)LX_Image.cpp \
+$(SRC_LIBRARY_PATH)LX_Config.cpp $(SRC_LIBRARY_PATH)LX_Library.cpp \
+$(SRC_MIXER_PATH)LX_Sound.cpp $(SRC_MIXER_PATH)LX_Chunk.cpp \
+$(SRC_MIXER_PATH)LX_Music.cpp $(SRC_MIXER_PATH)LX_Mixer.cpp \
+$(SRC_MSG_PATH)LX_MessageBox.cpp \
+$(SRC_MULTITHREAD_PATH)LX_Thread.cpp $(SRC_MULTITHREAD_PATH)LX_Sync.cpp \
+$(SRC_PARTICLE_PATH)LX_Particle.cpp $(SRC_PARTICLE_PATH)LX_ParticleSystem.cpp \
+$(SRC_PHYSICS_PATH)LX_Hitbox.cpp $(SRC_PHYSICS_PATH)LX_Physics.cpp \
+$(SRC_PHYSICS_PATH)LX_Polygon.cpp $(SRC_PHYSICS_PATH)LX_Vector2D.cpp \
+$(SRC_RANDOM_PATH)LX_Random.cpp $(SRC_SYSTEM_PATH)LX_SystemInfo.cpp \
+$(SRC_SYSTEM_PATH)LX_Log.cpp $(SRC_SYSTEM_PATH)LX_FileSystem.cpp \
+$(SRC_TEXT_PATH)LX_Text.cpp $(SRC_TTF_PATH)LX_TrueTypeFont.cpp \
+$(SRC_VERSION_PATH)LX_Version.cpp \
+$(SRC_UTILS_PATH)utf8_string.cpp $(SRC_UTILS_PATH)utf8_iterator.cpp \
+$(SRC_TINYTHREAD_PATH)tinythread.cpp $(SRC_LIBTAGSPP_PATH)8859.cpp \
+$(SRC_LIBTAGSPP_PATH)flac.cpp $(SRC_LIBTAGSPP_PATH)id3genres.cpp \
+$(SRC_LIBTAGSPP_PATH)id3v1.cpp $(SRC_LIBTAGSPP_PATH)id3v2.cpp \
+$(SRC_LIBTAGSPP_PATH)m4a.cpp $(SRC_LIBTAGSPP_PATH)tags.cpp \
+$(SRC_LIBTAGSPP_PATH)utf16.cpp $(SRC_LIBTAGSPP_PATH)vorbis.cpp \
+$(SRC_LIBTAGSPP_PATH)libtagspp.cpp
 
-# Path to the different object files
-MAIN_OBJ_FILE=$(OBJ_MAIN_PATH)main.o
-OBJ_FILES=$(OBJ_DEVICE_PATH)LX_Device.o \
-$(OBJ_DEVICE_PATH)LX_Gamepad.o $(OBJ_DEVICE_PATH)LX_Haptic.o \
-$(OBJ_DEVICE_PATH)LX_Mouse.o \
-$(OBJ_FILEIO_PATH)LX_FileIO.o $(OBJ_FILEIO_PATH)LX_FileBuffer.o \
-$(OBJ_GRAPHICS_PATH)LX_OpenGL.o $(OBJ_GRAPHICS_PATH)LX_Window.o \
-$(OBJ_GRAPHICS_PATH)LX_WindowManager.o $(OBJ_GRAPHICS_PATH)LX_Image.o \
-$(OBJ_LIBRARY_PATH)LX_Config.o $(OBJ_LIBRARY_PATH)LX_Library.o \
-$(OBJ_MIXER_PATH)LX_Sound.o $(OBJ_MIXER_PATH)LX_Chunk.o \
-$(OBJ_MIXER_PATH)LX_Music.o $(OBJ_MIXER_PATH)LX_Mixer.o \
-$(OBJ_MSG_PATH)LX_MessageBox.o \
-$(OBJ_MULTITHREAD_PATH)LX_Thread.o $(OBJ_MULTITHREAD_PATH)LX_Sync.o \
-$(OBJ_PARTICLE_PATH)LX_Particle.o $(OBJ_PARTICLE_PATH)LX_ParticleSystem.o \
-$(OBJ_PHYSICS_PATH)LX_Hitbox.o $(OBJ_PHYSICS_PATH)LX_Physics.o \
-$(OBJ_PHYSICS_PATH)LX_Polygon.o $(OBJ_PHYSICS_PATH)LX_Vector2D.o \
-$(OBJ_RANDOM_PATH)LX_Random.o $(OBJ_SYSTEM_PATH)LX_SystemInfo.o \
-$(OBJ_SYSTEM_PATH)LX_Log.o $(OBJ_SYSTEM_PATH)LX_FileSystem.o \
-$(OBJ_TEXT_PATH)LX_Text.o $(OBJ_TTF_PATH)LX_TrueTypeFont.o \
-$(OBJ_VERSION_PATH)LX_Version.o \
-$(OBJ_UTILS_PATH)utf8_string.o $(OBJ_UTILS_PATH)utf8_iterator.o \
-$(OBJ_TINYTHREAD_PATH)tinythread.o $(OBJ_LIBTAGSPP_PATH)8859.o \
-$(OBJ_LIBTAGSPP_PATH)flac.o $(OBJ_LIBTAGSPP_PATH)id3genres.o \
-$(OBJ_LIBTAGSPP_PATH)id3v1.o $(OBJ_LIBTAGSPP_PATH)id3v2.o \
-$(OBJ_LIBTAGSPP_PATH)m4a.o $(OBJ_LIBTAGSPP_PATH)tags.o \
-$(OBJ_LIBTAGSPP_PATH)utf16.o $(OBJ_LIBTAGSPP_PATH)vorbis.o \
-$(OBJ_LIBTAGSPP_PATH)libtagspp.o
+# Test files
+SRC_TEST_FILES=$(TEST_PATH)test-init.cpp $(TEST_PATH)test-config.cpp \
+$(TEST_PATH)test-device.cpp $(TEST_PATH)test-physics.cpp $(TEST_PATH)test-window.cpp \
+$(TEST_PATH)test-system.cpp $(TEST_PATH)test-ttf.cpp $(TEST_PATH)test-particle.cpp \
+$(TEST_PATH)test-file.cpp $(TEST_PATH)test-ime.cpp $(TEST_PATH)test-audio.cpp \
+$(TEST_PATH)test-thread.cpp $(TEST_PATH)test-ime.cpp $(TEST_PATH)test-gamepad.cpp
+
+OBJ_FILES=$(SRC_FILES:.cpp=.o)
+MAIN_OBJ=$(MAIN_FILE:.cpp=.o)
+
+# Dependency
+DEPENDENCY=Makefile.depend
 
 # Libraries
 LUNATIX_LIB_DIR=./lib/linux/
@@ -131,7 +113,7 @@ ifeq ($(DEBUG),yes)
 
 	# Debug mode
 	CFLAGS=-fPIC $(WFLAGS) -std=c++11 -g
-	OPTIMIZE=
+	OPTIMIZE=-O0
 	OPT_SIZE=
 
 else
@@ -155,17 +137,19 @@ DOXY_FILE=dox
 #                      #
 ########################
 
-library : $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
+.PHONY: depend test clean cleandoc documentation $(DEPENDENCY)
 
-$(LUNATIX_STATIC_LIB) : $(OBJ_FILES)
-	@echo "Generating the static library -> "$@
-	@mkdir -p $(LUNATIX_BUILD_DIR)
+library: depend $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
+
+$(LUNATIX_STATIC_LIB): $(OBJ_FILES)
+	@echo -n "Generating the static library → "$@"... "
 	@ar rcs $@ $(OBJ_FILES)
+	@echo "DONE"
 
-$(LUNATIX_SHARED_LIB) : $(OBJ_FILES)
-	@echo "Generating the shared library -> "$@
-	@mkdir -p $(LUNATIX_BUILD_DIR)
+$(LUNATIX_SHARED_LIB): $(OBJ_FILES)
+	@echo -n "Generating the shared library → "$@"... "
 	@$(CC) -shared -o $@ $(OBJ_FILES) $(LFLAGS)
+	@echo "DONE"
 
 
 ##########
@@ -174,424 +158,51 @@ $(LUNATIX_SHARED_LIB) : $(OBJ_FILES)
 #        #
 ##########
 
-$(LUNATIX_EXE) : $(MAIN_OBJ_FILE) $(OBJ_FILES)
+$(LUNATIX_EXE): depend $(MAIN_OBJ) $(OBJ_FILES)
 ifeq ($(DEBUG),yes)
 	@echo "Debug mode"
 else
 	@echo "Release mode"
 endif
-	@echo $@" - Linking "
-	@$(CC) -o $@ $(MAIN_OBJ_FILE) $(OBJ_FILES) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) \
-	$(LFLAGS) && echo $(LUNATIX_EXE)" - Success" \
-	|| echo $(LUNATIX_EXE)" - Failure"
+	@echo "| Linking → " $@"... "
+	@$(CC) -o $@ $(MAIN_OBJ) $(OBJ_FILES) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS) \
+	&& echo "| SUCCESS" || echo "| FAILURE"
+
+
+# Object files (library)
+main.o: $(SRC_MAIN_PATH)main.o
+LX_Device.o: $(SRC_DEVICE_PATH)LX_Device.o
+LX_Gamepad.o: $(SRC_DEVICE_PATH)LX_Gamepad.o
+LX_Haptic.o: $(SRC_DEVICE_PATH)LX_Haptic.o
+LX_Mouse.o: $(SRC_DEVICE_PATH)LX_Mouse.o
+LX_FileIO.o: $(SRC_FILEIO_PATH)LX_FileIO.o
+LX_FileBuffer.o: $(SRC_FILEIO_PATH)LX_FileBuffer.o
+LX_OpenGL.o: $(SRC_GRAPHICS_PATH)LX_OpenGL.o
+LX_Window.o: $(SRC_GRAPHICS_PATH)LX_Window.o
+LX_WindowManager.o: $(SRC_GRAPHICS_PATH)LX_WindowManager.o
+LX_Image.o: $(SRC_GRAPHICS_PATH)LX_Image.o
+LX_Config.o: $(SRC_LIBRARY_PATH)LX_Config.o
+LX_Library.o: $(SRC_LIBRARY_PATH)LX_Library.o
+LX_Sound.o: $(SRC_MIXER_PATH)LX_Sound.o
+LX_Chunk.o: $(SRC_MIXER_PATH)LX_Chunk.o
+LX_Music.o: $(SRC_MIXER_PATH)LX_Music.o
+LX_Mixer.o: $(SRC_MIXER_PATH)LX_Mixer.o
+LX_MessageBox.o: $(SRC_MSG_PATH)LX_MessageBox.o
+LX_Thread.o: $(SRC_MULTITHREAD_PATH)LX_Thread.o
+LX_Sync.o: $(SRC_MULTITHREAD_PATH)LX_Sync.o
+LX_Particle.o: $(SRC_PARTICLE_PATH)LX_Particle.o
+LX_ParticleSystem.o: $(SRC_PARTICLE_PATH)LX_ParticleSystem.o
+LX_Physics.o: $(SRC_PHYSICS_PATH)LX_Physics.o
+LX_Polygon.o: $(SRC_PHYSICS_PATH)LX_Polygon.o
+LX_Hitbox.o: $(SRC_PHYSICS_PATH)LX_Hitbox.o
+LX_Random.o: $(SRC_RANDOM_PATH)LX_Random.o
+LX_SystemInfo.o: $(SRC_SYSTEM_PATH)LX_SystemInfo.o
+LX_FileSystem.o: $(SRC_SYSTEM_PATH)LX_FileSystem.o
+LX_Log.o: $(SRC_SYSTEM_PATH)LX_Log.o
+LX_Text.o: $(SRC_TEXT_PATH)LX_Text.o
+LX_TrueTypeFont.o: $(SRC_TTF_PATH)LX_TrueTypeFont.o
+LX_Version.o: $(SRC_VERSION_PATH)LX_Version.o
 
-
-#
-# Main file
-#
-
-main.o : $(OBJ_MAIN_PATH)main.o
-
-$(OBJ_MAIN_PATH)main.o : $(MAIN_PATH)main.cpp \
-$(LUNATIX_I_PATH)Lunatix.hpp $(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_MAIN_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Device
-#
-
-LX_Device.o : $(OBJ_DEVICE_PATH)LX_Device.o
-
-$(OBJ_DEVICE_PATH)LX_Device.o : $(DEVICE_PATH)LX_Device.cpp \
-$(LUNATIX_I_PATH)LX_Device.hpp $(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_DEVICE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Gamepad.o : $(OBJ_DEVICE_PATH)LX_Gamepad.o
-
-$(OBJ_DEVICE_PATH)LX_Gamepad.o : $(DEVICE_PATH)LX_Gamepad.cpp \
-$(LUNATIX_I_PATH)LX_Gamepad.hpp $(LUNATIX_I_PATH)LX_Haptic.hpp \
-$(LUNATIX_I_PATH)LX_Device.hpp
-	@mkdir -p $(OBJ_DEVICE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Haptic.o : $(OBJ_DEVICE_PATH)LX_Haptic.o
-
-$(OBJ_DEVICE_PATH)LX_Haptic.o : $(DEVICE_PATH)LX_Haptic.cpp \
-$(LUNATIX_I_PATH)LX_Haptic.hpp $(LUNATIX_I_PATH)LX_Device.hpp
-	@mkdir -p $(OBJ_DEVICE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Mouse.o : $(OBJ_DEVICE_PATH)LX_Mouse.o
-
-$(OBJ_DEVICE_PATH)LX_Mouse.o: $(DEVICE_PATH)LX_Mouse.cpp \
-$(LUNATIX_I_PATH)LX_Mouse.hpp
-	@mkdir -p $(OBJ_DEVICE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# FileIO
-#
-
-LX_FileIO.o : $(OBJ_FILEIO_PATH)LX_FileIO.o
-
-$(OBJ_FILEIO_PATH)LX_FileIO.o : $(FILEIO_PATH)LX_FileIO.cpp \
-$(LUNATIX_I_PATH)LX_FileIO.hpp
-	@mkdir -p $(OBJ_FILEIO_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_FileBuffer.o : $(OBJ_FILEIO_PATH)LX_FileBuffer.o
-
-$(OBJ_FILEIO_PATH)LX_FileBuffer.o : $(FILEIO_PATH)LX_FileBuffer.cpp \
-$(LUNATIX_I_PATH)LX_FileBuffer.hpp
-	@mkdir -p $(OBJ_FILEIO_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Graphics
-#
-
-LX_OpenGL.o : $(OBJ_GRAPHICS_PATH)LX_OpenGL.o
-
-$(OBJ_GRAPHICS_PATH)LX_OpenGL.o : $(GRAPHICS_PATH)LX_OpenGL.cpp \
-$(LUNATIX_I_PATH)LX_OpenGL.hpp $(LUNATIX_I_PATH)LX_OpenGL.tpp \
-$(LUNATIX_I_PATH)LX_Window.hpp
-	@mkdir -p $(OBJ_GRAPHICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Window.o : $(OBJ_GRAPHICS_PATH)LX_Window.o
-
-$(OBJ_GRAPHICS_PATH)LX_Window.o : $(GRAPHICS_PATH)LX_Window.cpp \
-$(LUNATIX_I_PATH)LX_Window.hpp $(LUNATIX_I_PATH)LX_Config.hpp \
-$(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_GRAPHICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_WindowManager.o : $(OBJ_GRAPHICS_PATH)LX_WindowManager.o
-
-$(OBJ_GRAPHICS_PATH)LX_WindowManager.o : $(GRAPHICS_PATH)LX_WindowManager.cpp \
-$(LUNATIX_I_PATH)LX_WindowManager.hpp $(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_GRAPHICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Image.o : $(OBJ_GRAPHICS_PATH)LX_Image.o
-
-$(OBJ_GRAPHICS_PATH)LX_Image.o : $(GRAPHICS_PATH)LX_Image.cpp \
-$(LUNATIX_I_PATH)LX_Image.hpp
-	@mkdir -p $(OBJ_GRAPHICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Library
-#
-
-LX_Config.o : $(OBJ_LIBRARY_PATH)LX_Config.o
-
-$(OBJ_LIBRARY_PATH)LX_Config.o : $(LIBRARY_PATH)LX_Config.cpp \
-$(LUNATIX_I_PATH)LX_Config.hpp $(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_LIBRARY_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Library.o : $(OBJ_LIBRARY_PATH)LX_Library.o
-
-$(OBJ_LIBRARY_PATH)LX_Library.o : $(LIBRARY_PATH)LX_Library.cpp \
-$(LUNATIX_I_PATH)LX_Library.hpp $(LUNATIX_I_PATH)LX_Config.hpp \
-$(LUNATIX_I_PATH)LX_Mixer.hpp $(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_LIBRARY_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Mixer
-#
-
-LX_Sound.o : $(OBJ_MIXER_PATH)LX_Sound.o
-
-$(OBJ_MIXER_PATH)LX_Sound.o : $(MIXER_PATH)LX_Sound.cpp \
-$(LUNATIX_I_PATH)LX_Sound.hpp
-	@mkdir -p $(OBJ_MIXER_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Chunk.o : $(OBJ_MIXER_PATH)LX_Chunk.o
-
-$(OBJ_MIXER_PATH)LX_Chunk.o : $(MIXER_PATH)LX_Chunk.cpp \
-$(LUNATIX_I_PATH)LX_Chunk.hpp $(LUNATIX_I_PATH)LX_Sound.hpp \
-$(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_MIXER_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Music.o : $(OBJ_MIXER_PATH)LX_Music.o
-
-$(OBJ_MIXER_PATH)LX_Music.o : $(MIXER_PATH)LX_Music.cpp \
-$(LUNATIX_I_PATH)LX_Music.hpp $(LUNATIX_I_PATH)LX_Sound.hpp \
-$(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_MIXER_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Mixer.o : $(OBJ_MIXER_PATH)LX_Mixer.o
-
-$(OBJ_MIXER_PATH)LX_Mixer.o : $(MIXER_PATH)LX_Mixer.cpp \
-$(LUNATIX_I_PATH)LX_Mixer.hpp $(LUNATIX_I_PATH)LX_Sound.hpp \
-$(LUNATIX_I_PATH)LX_Music.hpp $(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_MIXER_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# MSGBox
-#
-
-LX_MessageBox.o : $(OBJ_MSG_PATH)LX_MessageBox.o
-
-$(OBJ_MSG_PATH)LX_MessageBox.o : $(MSG_PATH)LX_MessageBox.cpp \
-$(LUNATIX_I_PATH)LX_MessageBox.hpp
-	@mkdir -p $(OBJ_MSG_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Multithreading
-#
-
-LX_Thread.o : $(OBJ_MULTITHREAD_PATH)LX_Thread.o
-
-$(OBJ_MULTITHREAD_PATH)LX_Thread.o : $(MULTITHREAD_PATH)LX_Thread.cpp\
-$(LUNATIX_I_PATH)LX_Thread.hpp $(LUNATIX_I_PATH)LX_Channel.hpp \
-$(LUNATIX_I_PATH)LX_Channel.tpp
-	@mkdir -p $(OBJ_MULTITHREAD_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-LX_Sync.o : $(OBJ_MULTITHREAD_PATH)LX_Sync.o
-
-$(OBJ_MULTITHREAD_PATH)LX_Sync.o : $(MULTITHREAD_PATH)LX_Sync.cpp\
-$(LUNATIX_I_PATH)LX_Sync.hpp
-	@mkdir -p $(OBJ_MULTITHREAD_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# ParticleSystem
-#
-
-LX_Particle.o : $(OBJ_PARTICLE_PATH)LX_Particle.o
-
-$(OBJ_PARTICLE_PATH)LX_Particle.o : $(PARTICLE_PATH)LX_Particle.cpp \
-$(LUNATIX_I_PATH)LX_Particle.hpp
-	@mkdir -p $(OBJ_PARTICLE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_ParticleSystem.o : $(OBJ_PARTICLE_PATH)LX_ParticleSystem.o
-
-$(OBJ_PARTICLE_PATH)LX_ParticleSystem.o : $(PARTICLE_PATH)LX_ParticleSystem.cpp \
-$(LUNATIX_I_PATH)LX_ParticleSystem.hpp
-	@mkdir -p $(OBJ_PARTICLE_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Physics
-#
-
-LX_Physics.o : $(OBJ_PHYSICS_PATH)LX_Physics.o
-
-$(OBJ_PHYSICS_PATH)LX_Physics.o : $(PHYSICS_PATH)LX_Physics.cpp \
-$(LUNATIX_I_PATH)LX_Physics.hpp $(LUNATIX_I_PATH)LX_Hitbox.hpp \
-$(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_PHYSICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Polygon.o : $(OBJ_PHYSICS_PATH)LX_Polygon.o
-
-$(OBJ_PHYSICS_PATH)LX_Polygon.o : $(PHYSICS_PATH)LX_Polygon.cpp \
-$(LUNATIX_I_PATH)LX_Polygon.hpp $(LUNATIX_I_PATH)LX_Vector2D.hpp
-	@mkdir -p $(OBJ_PHYSICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Vector2D.o : $(OBJ_PHYSICS_PATH)LX_Vector2D.o
-
-$(OBJ_PHYSICS_PATH)LX_Vector2D.o : $(PHYSICS_PATH)LX_Vector2D.cpp \
-$(LUNATIX_I_PATH)LX_Vector2D.hpp
-	@mkdir -p $(OBJ_PHYSICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Hitbox.o : $(OBJ_PHYSICS_PATH)LX_Hitbox.o
-
-$(OBJ_PHYSICS_PATH)LX_Hitbox.o : $(PHYSICS_PATH)LX_Hitbox.cpp \
-$(LUNATIX_I_PATH)LX_Hitbox.hpp
-	@mkdir -p $(OBJ_PHYSICS_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Random
-#
-
-LX_Random.o : $(OBJ_RANDOM_PATH)LX_Random.o
-
-$(OBJ_RANDOM_PATH)LX_Random.o : $(RANDOM_PATH)LX_Random.cpp \
-$(LUNATIX_I_PATH)LX_Random.hpp
-	@mkdir -p $(OBJ_RANDOM_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# System
-#
-
-LX_SystemInfo.o : $(OBJ_SYSTEM_PATH)LX_SystemInfo.o
-
-$(OBJ_SYSTEM_PATH)LX_SystemInfo.o : $(SYSTEM_PATH)LX_SystemInfo.cpp \
-$(LUNATIX_I_PATH)LX_SystemInfo.hpp
-	@mkdir -p $(OBJ_SYSTEM_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_FileSystem.o : $(OBJ_SYSTEM_PATH)LX_FileSystem.o
-
-$(OBJ_SYSTEM_PATH)LX_FileSystem.o: $(SYSTEM_PATH)LX_FileSystem.cpp \
-$(LUNATIX_I_PATH)LX_FileSystem.hpp
-	@mkdir -p $(OBJ_SYSTEM_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-LX_Log.o : $(OBJ_SYSTEM_PATH)LX_Log.o
-
-$(OBJ_SYSTEM_PATH)LX_Log.o : $(SYSTEM_PATH)LX_Log.cpp \
-$(LUNATIX_I_PATH)LX_Log.hpp
-	@mkdir -p $(OBJ_SYSTEM_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Text
-#
-
-LX_Text.o : $(OBJ_TEXT_PATH)LX_Text.o
-
-$(OBJ_TEXT_PATH)LX_Text.o : $(TEXT_PATH)LX_Text.cpp \
-$(LUNATIX_I_PATH)LX_Text.hpp $(LUNATIX_I_PATH)LX_Log.hpp \
-$(UTILS_I_PATH)utf8_string.hpp
-	@mkdir -p $(OBJ_TEXT_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# True Type Font
-#
-
-LX_TrueTypeFont.o : $(OBJ_TTF_PATH)LX_TrueTypeFont.o
-
-$(OBJ_TTF_PATH)LX_TrueTypeFont.o : $(TTF_PATH)LX_TrueTypeFont.cpp \
-$(LUNATIX_I_PATH)LX_TrueTypeFont.hpp $(LUNATIX_I_PATH)LX_Config.hpp \
-$(LUNATIX_I_PATH)LX_Error.hpp
-	@mkdir -p $(OBJ_TTF_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Version
-#
-
-LX_Version.o : $(OBJ_VERSION_PATH)LX_Version.o
-
-$(OBJ_VERSION_PATH)LX_Version.o : $(VERSION_PATH)LX_Version.cpp \
-$(LUNATIX_I_PATH)LX_Version.hpp
-	@mkdir -p $(OBJ_VERSION_PATH)
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-#
-# Utilities
-#
-
-utf8_string.o : $(OBJ_UTILS_PATH)utf8_string.o
-
-$(OBJ_UTILS_PATH)utf8_string.o : $(UTILS_PATH)utf8_string.cpp \
-$(UTILS_I_PATH)utf8_string.hpp $(UTILS_I_PATH)utf8_iterator.hpp
-	@mkdir -p $(OBJ_UTILS_PATH)
-	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
-	@echo $@" - Compiling "$<
-
-
-utf8_iterator.o : $(OBJ_UTILS_PATH)utf8_iterator.o
-
-$(OBJ_UTILS_PATH)utf8_iterator.o : $(UTILS_PATH)utf8_iterator.cpp \
-$(UTILS_I_PATH)utf8_iterator.hpp $(UTILS_I_PATH)utf8_string.hpp
-	@echo $<" -> "$@
-	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
-	@echo $<" -> "$@" done."
-
-
-tinythread.o: $(OBJ_TINYTHREAD_PATH)tinythread.o
-
-$(OBJ_TINYTHREAD_PATH)tinythread.o : $(TINYTHREAD_PATH)tinythread.cpp \
-$(TINYTHREAD_I_PATH)tinythread.h $(TINYTHREAD_I_PATH)fast_mutex.h
-	@echo " == Build TinyThread++ == "
-	@mkdir -p $(OBJ_TINYTHREAD_PATH)
-	@echo $<" -> "$@
-	@$(CC) -c $(CFLAGS) -o $@ $< -I $(LIBRARIES_I_DIR)
-	@echo $<" -> "$@" done."
-	@echo " == TinyThread++ done == "
-
-
-$(OBJ_LIBTAGSPP_PATH)%.o: $(LIBTAGSPP_PATH)%.cpp
-	@mkdir -p $(OBJ_LIBTAGSPP_PATH)
-	@echo $<" -> "$@
-	@$(CC) -c $< -o $@ -I $(LIBRARIES_I_DIR) $(CFLAGS)
-	@echo $<" -> "$@" done."
 
 ##########
 #        #
@@ -599,141 +210,83 @@ $(OBJ_LIBTAGSPP_PATH)%.o: $(LIBTAGSPP_PATH)%.cpp
 #        #
 ##########
 
-test : test-init test-config test-device test-physics test-window test-system \
-test-ttf test-particle test-file test-ime test-audio test-thread
-	@echo "INFO - Test launch"
-ifeq ($(DEBUG),yes)
-	@./test/test.sh
-endif
-	@make clean -j 1
-	@echo "INFO - Test finished"
+test: depend test-init test-config test-system test-device test-file test-physics \
+test-audio test-window test-ttf test-particle test-ime test-thread
 
-test-init : $(OBJ_FILES) test-init.o
-	@echo $@" - Linking "
+
+# Test (object files + executable)
+test-init: $(TEST_PATH)test-init.o $(OBJ_FILES)
+	$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+
+test-config: $(TEST_PATH)test-config.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-init.o : $(TEST_PATH)test-init.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-config : $(OBJ_FILES) test-config.o
-	@echo $@" - Linking "
+test-device: $(TEST_PATH)test-device.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-config.o : $(TEST_PATH)test-config.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-device : $(OBJ_FILES) test-device.o
-	@echo $@" - Linking "
+test-physics: $(TEST_PATH)test-physics.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-device.o : $(TEST_PATH)test-device.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-physics : $(OBJ_FILES) test-physics.o
-	@echo $@" - Linking "
+test-window: $(TEST_PATH)test-window.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-physics.o : $(TEST_PATH)test-physics.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-window : $(OBJ_FILES) test-window.o
-	@echo $@" - Linking "
+test-system: $(TEST_PATH)test-system.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-window.o : $(TEST_PATH)test-window.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-system : $(OBJ_FILES) test-system.o
-	@echo $@" - Linking "
+test-ttf: $(TEST_PATH)test-ttf.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-system.o : $(TEST_PATH)test-system.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-ttf : $(OBJ_FILES) test-ttf.o
-	@echo $@" - Linking "
+test-particle: $(TEST_PATH)test-particle.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-ttf.o : $(TEST_PATH)test-ttf.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-particle : $(OBJ_FILES) test-particle.o
-	@echo $@" - Linking "
+test-file: $(TEST_PATH)test-file.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-particle.o : $(TEST_PATH)test-particle.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-file : $(OBJ_FILES) test-file.o
-	@echo $@" - Linking "
+test-ime: $(TEST_PATH)test-ime.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-file.o : $(TEST_PATH)test-file.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-ime : $(OBJ_FILES) test-ime.o
-	@echo $@" - Linking "
+test-audio: $(TEST_PATH)test-audio.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-
-test-ime.o : $(TEST_PATH)test-ime.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-audio : $(OBJ_FILES) test-audio.o
-	@echo $@" - Linking "
+test-thread: $(TEST_PATH)test-thread.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-test-audio.o : $(TEST_PATH)test-audio.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
-
-
-test-thread : $(OBJ_FILES) test-thread.o
-	@echo $@" - Linking "
+test-gamepad: $(TEST_PATH)test-gamepad.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-test-thread.o : $(TEST_PATH)test-thread.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+# Object files (test)
+test-init.o: $(TEST_PATH)test-init.o
+test-config.o: $(TEST_PATH)test-config.o
+test-device.o: $(TEST_PATH)test-device.o
+test-physics.o: $(TEST_PATH)test-physics.o
+test-window.o: $(TEST_PATH)test-window.o
+test-system.o: $(TEST_PATH)test-system.o
+test-ttf.o: $(TEST_PATH)test-ttf.o
+test-particle.o: $(TEST_PATH)test-particle.o
+test-file.o: $(TEST_PATH)test-file.o
+test-ime.o: $(TEST_PATH)test-ime.o
+test-audio.o: $(TEST_PATH)test-audio.o
+test-thread.o: $(TEST_PATH)test-thread.o
+test-gamepad.o: $(TEST_PATH)test-gamepad.o
 
 
-test-gamepad : $(OBJ_FILES) test-gamepad.o
-	@echo $@" - Linking "
-	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+################################
+#                              #
+# General rules + dependencies #
+#                              #
+################################
 
+# General rule
+%.o: %.cpp
+	@echo $@" - Compiling "$^
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
 
-test-gamepad.o : $(TEST_PATH)test-gamepad.cpp
-	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+# Dependencies
+depend: $(SRC_FILES) $(SRC_TEST_FILES)
+	@touch $(DEPENDENCY)
+	@echo -n "Generate dependencies... " && \
+	makedepend $^ -I $(LIBRARIES_I_DIR) -I $(SDL2_I_PATH) -f $(DEPENDENCY) 2>/dev/null \
+	&& echo "DONE"; rm -f $(DEPENDENCY).bak
 
 
 ######################################
@@ -742,7 +295,7 @@ test-gamepad.o : $(TEST_PATH)test-gamepad.cpp
 #                                    #
 ######################################
 
-documentation : $(DOXY_FILE)
+documentation: $(DOXY_FILE)
 	@echo "Generating the doxygen file from "$<
 	@doxygen $<
 
@@ -753,18 +306,21 @@ documentation : $(DOXY_FILE)
 #                       #
 #########################
 
-clean :
+clean:
 	@echo "Delete object files"
-	@rm -rf $(LUNATIX_BUILD_ROOT) test-*
+	@find $(LUNATIX_PATH) $(SRC_MAIN_PATH) $(TEST_PATH) -name '*.o' -exec rm {} \;
+	@echo "Delete library files"
+	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
+	@echo "Delete the dependency graph"
+	@rm -rf $(DEPENDENCY)
 
 cleandoc:
 	@echo "Delete the doxygen documentation"
 	@rm -rf html/
 
-cleanlib:
-	@echo "Delete libraries"
-	@rm -f $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
-
-clear : cleandoc cleanlib clean
+clear: cleandoc clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE)
+
+# Dependency file (automatically generated by depend)
+include $(wildcard $(DEPENDENCY))
