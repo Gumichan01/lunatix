@@ -278,7 +278,7 @@ test-gamepad.o: $(TEST_PATH)test-gamepad.o
 
 # General rule
 %.o: %.cpp
-	@echo $@" - Compiling "$^
+	@echo $@" - Compiling "$<
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
 
 # Dependencies
