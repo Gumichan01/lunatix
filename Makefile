@@ -726,6 +726,16 @@ test-thread.o : $(TEST_PATH)test-thread.cpp
 	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
 
 
+test-gamepad : $(OBJ_FILES) test-gamepad.o
+	@echo $@" - Linking "
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+
+
+test-gamepad.o : $(TEST_PATH)test-gamepad.cpp
+	@echo $@" - Compiling "$<
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS)
+
+
 ######################################
 #                                    #
 # Generate the doxygen documentation #
