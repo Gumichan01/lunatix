@@ -5,7 +5,7 @@
 # It only works on the Linux systems.
 #
 
-VERSION="v0.8"
+VERSION="v1.0"
 LOG_FILE="lunatix-"${VERSION}"-"$(date +%Y-%m-%d-%H:%M:%S)".log";
 LOG_TMP_FILE=/tmp/"."${LOG_FILE}".lx.tmp";
 LOG_RESULT_DIR="test/result/";
@@ -14,6 +14,8 @@ SUCCESS_TAG="SUCCESS";
 FAILURE_TAG="FAILURE";
 
 touch ${LOG_TMP_FILE} && chmod 600 ${LOG_TMP_FILE}
+echo "Build the test suite..." && make --quiet test 2>&1 1>/dev/null && echo "DONE" \
+|| (echo "FAIL"; return 0)
 echo "\n============================= Begin Report ============================\n\n" \
 | tee -a ${LOG_TMP_FILE}
 ./test-init 2>&1     | tee -a ${LOG_TMP_FILE}
