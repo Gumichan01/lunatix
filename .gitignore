@@ -4,11 +4,9 @@
 *.o
 *obj
 *bin
-_build/
 *.gch
 
-#  Compiled files
-*.luac
+# Compiled files
 *.dll
 
 # Lunatix library and exe
@@ -30,3 +28,4 @@ html/
 lib/
 include/SDL2/
 *.cppcheck
+Makefile.depend
