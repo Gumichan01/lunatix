@@ -1,6 +1,7 @@
 
 #include <LunatiX/Lunatix.hpp>
 #include <iostream>
+#include <stdexcept>
 #include <map>
 
 #define N 4
@@ -85,7 +86,7 @@ void test_open(void)
              << "Expected : IOexception; got : a valid reference " << endl;
         delete invalid_str;
     }
-    catch(logic_error& le)
+    catch(std::logic_error& le)
     {
         cout << "SUCCESS - std::logic_error occured : -> " << le.what() << endl;
     }
