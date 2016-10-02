@@ -306,9 +306,21 @@ void LX_Window::setDrawColor(const SDL_Color& color)
 }
 
 
+void LX_Window::getDrawColor(SDL_Color& color)
+{
+    SDL_GetRenderDrawColor(_renderer,&color.r,&color.g,&color.b,&color.a);
+}
+
+
 void LX_Window::setDrawBlendMode(SDL_BlendMode mode)
 {
     SDL_SetRenderDrawBlendMode(_renderer,mode);
+}
+
+
+void LX_Window::getDrawBlendMode(SDL_BlendMode& mode)
+{
+    SDL_GetRenderDrawBlendMode(_renderer,&mode);
 }
 
 

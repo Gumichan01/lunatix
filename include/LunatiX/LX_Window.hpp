@@ -258,7 +258,7 @@ public :
     /**
     *   @fn void setDrawColor(const SDL_Color& color)
     *   Set the color used for drawing operations (Lines, Rectangles, Circles)
-    *   @param [in] color The color (ARGB)
+    *   @param [in] color The color (RGBA)
     */
     void setDrawColor(const SDL_Color& color);
     /**
@@ -282,6 +282,33 @@ public :
     *    |                     | destA = destA                                    |
     */
     void setDrawBlendMode(SDL_BlendMode mode);
+    /**
+    *   @fn void getDrawColor(const SDL_Color& color)
+    *   Get the color used for drawing operations (Lines, Rectangles, Circles)
+    *   @param [out] color The color (RGBA) to get
+    */
+    void getDrawColor(SDL_Color& color);
+    /**
+    *   @fn void getDrawBlendMode(SDL_BlendMode& mode)
+    *
+    *   Get the blend mode for drawing operations (Fill, Line)
+    *
+    *   @return The blend mode used for blending:
+    *    |        Value        |                      Meaning                     |
+    *    |         ---         |                        ---                       |
+    *    | SDL_BLENDMODE_NONE  | no blending                                      |
+    *    |                     | destRGBA = srcRGBA                               |
+    *    | SDL_BLENDMODE_BLEND | alpha blending                                   |
+    *    |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
+    *    |                     | destA = srcA + (destA * (1-srcA))                |
+    *    |  SDL_BLENDMODE_ADD  | additive blending                                |
+    *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
+    *    |                     | destA = destA                                    |
+    *    |  SDL_BLENDMODE_MOD  | color modulate                                   |
+    *    |                     | destRGB = srcRGB * destRGB                       |
+    *    |                     | destA = destA                                    |
+    */
+    void getDrawBlendMode(SDL_BlendMode& mode);
 
     /**
     *   @fn void setTitle(std::string title)
