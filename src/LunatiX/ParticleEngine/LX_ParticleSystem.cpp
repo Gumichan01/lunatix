@@ -19,13 +19,12 @@
 *
 */
 
-#include <new>
-
 #include <LunatiX/LX_ParticleSystem.hpp>
 #include <LunatiX/LX_Particle.hpp>
 #include <LunatiX/LX_Error.hpp>
 
-using namespace std;
+#include <array>
+#include <new>
 
 
 namespace LX_ParticleEngine
@@ -48,11 +47,10 @@ LX_ParticleSystem::~LX_ParticleSystem()
 
     for(unsigned int i = 0; i < n; i++)
     {
-        delete _particles[i];
-        _particles[i] = nullptr;
+        _particles[i].reset();
     }
 
-    delete [] _particles;
+    _particles.reset();
 }
 
 
@@ -65,19 +63,12 @@ LX_ParticleSystem::~LX_ParticleSystem()
 */
 void LX_ParticleSystem::allocateParticles_(unsigned int nbPart)
 {
-    _particles = new (nothrow) LX_Particle*[nbPart];
+    _particles.reset(new (std::nothrow) std::unique_ptr<LX_Particle>[nbPart]);
 
     if(_particles == nullptr)
     {
         LX_SetError("LX_ParticleSystem constructor: Cannot allocate the particles\n");
         _nb_particles = 0;
-    }
-    else
-    {
-        _nb_particles = nbPart;
-
-        for(unsigned int i = 0; i < _nb_particles; i++)
-            _particles[i] = nullptr;
     }
 }
 
@@ -94,7 +85,7 @@ bool LX_ParticleSystem::addParticle(LX_Particle *p)
     {
         if(_particles[i] == nullptr)
         {
-            _particles[i] = p;
+            _particles[i].reset(p);
             done = true;
             break;
         }
@@ -109,8 +100,7 @@ bool LX_ParticleSystem::rmParticle(unsigned int index)
     if(index > _nb_particles || _particles[index] == nullptr)
         return false;
 
-    delete _particles[index];
-    _particles[index] = nullptr;
+    _particles[index].reset();
     return true;
 }
 
