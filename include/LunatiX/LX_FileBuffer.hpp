@@ -23,6 +23,7 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_ttf.h>
+#include <memory>
 
 struct SDL_Surface;
 struct Mix_Chunk;
@@ -59,9 +60,9 @@ class LX_FileBuffer
 {
     friend class LX_Graphics::LX_Image;
     friend class LX_TrueTypeFont::LX_Font;
-    UTF8string _name;       /* The name of the file the instance refers to  */
-    char *_buffer;          /* The read-only buffer                         */
-    uint64_t _bufsize;      /* The size of the buffer                       */
+    UTF8string _name;               /* The name of the file refered by the buffer */
+    std::unique_ptr<char> _buffer;  /* The read-only buffer                       */
+    uint64_t _bufsize;              /* The size of the buffer                     */
 
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);

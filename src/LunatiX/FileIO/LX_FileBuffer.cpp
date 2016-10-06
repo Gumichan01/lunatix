@@ -51,7 +51,7 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     _bufsize = static_cast<uint64_t>(s);
 
     reader->seek(0,LX_SEEK_SET);
-    _buffer = new (std::nothrow) char[_bufsize];
+    _buffer.reset(new (std::nothrow) char[_bufsize]);
 
     if(_buffer == nullptr)
     {
@@ -59,7 +59,7 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
         throw IOException(str + "not enough memory to store the file content");
     }
 
-    r = reader->readExactly(_buffer,sizeof(char),_bufsize);
+    r = reader->readExactly(_buffer.get(),sizeof(char),_bufsize);
 
     if(r < _bufsize)
     {
@@ -74,21 +74,21 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
 // Private function
 SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer_()
 {
-    SDL_RWops *rw = SDL_RWFromConstMem( _buffer, static_cast<int>(_bufsize));
+    SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(), static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:IMG_Load_RW(rw,1);
 }
 
 // Private function
 TTF_Font * LX_FileBuffer::getFontFromBuffer_(int size)
 {
-    SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
+    SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:TTF_OpenFontRW(rw,1,size);
 }
 
 // Private function
 Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_()
 {
-    SDL_RWops *rw = SDL_RWFromConstMem( _buffer,static_cast<int>(_bufsize));
+    SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:Mix_LoadWAV_RW(rw,1);
 }
 
@@ -113,7 +113,7 @@ const char * LX_FileBuffer::getFilename()
 
 LX_FileBuffer::~LX_FileBuffer()
 {
-    delete [] _buffer;
+    _buffer.reset();
 }
 
 };
