@@ -35,7 +35,7 @@ class LX_Thread_
 
 public:
 
-    LX_Thread_(const std::function<LX_ThreadFun_>& f, std::string name,
+    LX_Thread_(const std::function<LX_ThreadFun_>& f, const std::string& name,
                LX_Multithreading::LX_Data data)
         : _f(f), _name(name), _launched(false), _detached(false),
           _thread(nullptr), _data(data) {}
@@ -103,7 +103,7 @@ unsigned long getID()
     return SDL_GetThreadID(nullptr);
 }
 
-LX_Thread::LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data)
+LX_Thread::LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data)
     : _th(nullptr)
 {
     if(fun == nullptr)

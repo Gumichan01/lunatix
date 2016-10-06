@@ -59,7 +59,7 @@ class LX_Thread
 public:
 
     /**
-    *   @fn LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data)
+    *   @fn LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data)
     *   @brief Constructor
     *
     *   @param [in] fun The function launched by the thread
@@ -68,7 +68,7 @@ public:
     *
     *   @exception std::invalid_argument If the function given in argument is not defined
     */
-    LX_Thread(LX_ThreadFun fun, std::string name, LX_Multithreading::LX_Data data);
+    LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data);
 
     /**
     *   @fn void start()
