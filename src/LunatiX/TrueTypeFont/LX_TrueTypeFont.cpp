@@ -85,7 +85,7 @@ LX_Font::LX_Font(const std::string& font_file,const SDL_Color& color, unsigned i
 */
 void LX_Font::createBuffer_()
 {
-    _font_buffer = new LX_FileBuffer(_font_str);
+    _font_buffer.reset(new LX_FileBuffer(_font_str));
 }
 
 
@@ -264,7 +264,7 @@ void LX_Font::setColor(const SDL_Color& color)
 
 LX_Font::~LX_Font()
 {
-    delete _font_buffer;
+    _font_buffer.reset();
 }
 
 };

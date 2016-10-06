@@ -23,6 +23,7 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_ttf.h>
+#include <memory>
 
 #define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
 #define LX_WHITE_COLOR 255              /**< The white color value */
@@ -72,7 +73,7 @@ class LX_Font
     UTF8string _font_str;                    /* The font file    */
     unsigned int _font_size;                 /* The font size    */
     SDL_Color _font_color;                   /* The font color   */
-    LX_FileIO::LX_FileBuffer *_font_buffer;
+    std::unique_ptr<LX_FileIO::LX_FileBuffer> _font_buffer;
 
     LX_Font(LX_Font& f);
     LX_Font& operator =(LX_Font& f);
