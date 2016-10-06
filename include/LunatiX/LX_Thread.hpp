@@ -20,8 +20,8 @@
 *
 */
 
-
 #include <LunatiX/utils/utf8_string.hpp>
+#include <memory>
 
 class LX_Thread_;
 
@@ -51,9 +51,10 @@ unsigned long getID();
 */
 class LX_Thread
 {
-    LX_Thread_ *_th;
+    std::unique_ptr<LX_Thread_> _th;
 
     LX_Thread(const LX_Thread& m);
+    LX_Thread& operator=(const LX_Thread& m);
 
 public:
 
