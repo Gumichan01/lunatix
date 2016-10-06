@@ -57,20 +57,19 @@ void LX_Gamepad::open(int index)
     {
         _joy = SDL_JoystickOpen(index);
         if(SDL_JoystickIsHaptic(_joy) == 1)
-            _haptic = new LX_Haptic(_joy);
+            _haptic.reset(new LX_Haptic(_joy));
     }
     else
     {
         if(SDL_JoystickIsHaptic(SDL_GameControllerGetJoystick(_gc)) == 1)
-            _haptic = new LX_Haptic(_gc);
+            _haptic.reset(new LX_Haptic(_gc));
     }
 }
 
 
 void LX_Gamepad::close()
 {
-    delete _haptic;
-    _haptic = nullptr;
+    _haptic.reset();
 
     if(_gc != nullptr)
     {
@@ -186,7 +185,7 @@ SDL_JoystickID LX_Gamepad::getID()
 
 LX_Haptic * LX_Gamepad::getHaptic()
 {
-    return _haptic;
+    return _haptic.get();
 }
 
 

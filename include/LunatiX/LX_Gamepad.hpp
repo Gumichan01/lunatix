@@ -26,6 +26,7 @@
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
 
+#include <memory>
 
 namespace LX_Device
 {
@@ -43,7 +44,7 @@ class LX_Gamepad
 {
     SDL_GameController *_gc;
     SDL_Joystick *_joy;
-    LX_Haptic *_haptic;
+    std::unique_ptr<LX_Haptic> _haptic;
 
 
     const char * nameOf_(SDL_Joystick * joy);
