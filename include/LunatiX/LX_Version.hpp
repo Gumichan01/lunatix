@@ -40,7 +40,6 @@ struct LX_Version
     short major;         /**< Information about the major version */
     short minor;         /**< Information about the minor version */
     short patch;         /**< Information about the patch version */
-
 };
 
 /**

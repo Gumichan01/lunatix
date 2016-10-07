@@ -306,7 +306,7 @@ void LX_Window::setDrawColor(const SDL_Color& color)
 }
 
 
-void LX_Window::getDrawColor(SDL_Color& color)
+void LX_Window::getDrawColor(SDL_Color& color) const
 {
     SDL_GetRenderDrawColor(_renderer,&color.r,&color.g,&color.b,&color.a);
 }
@@ -318,7 +318,7 @@ void LX_Window::setDrawBlendMode(SDL_BlendMode mode)
 }
 
 
-void LX_Window::getDrawBlendMode(SDL_BlendMode& mode)
+void LX_Window::getDrawBlendMode(SDL_BlendMode& mode) const
 {
     SDL_GetRenderDrawBlendMode(_renderer,&mode);
 }
@@ -344,7 +344,7 @@ bool LX_Window::setViewPort(LX_AABB * viewport)
 }
 
 
-void LX_Window::getViewPort(LX_AABB& viewport)
+void LX_Window::getViewPort(LX_AABB& viewport) const
 {
     SDL_RenderGetViewport(_renderer,&viewport);
 }
@@ -460,7 +460,7 @@ void LX_Window::getInfo(LX_WindowInfo &info)
 }
 
 
-int LX_Window::getWidth()
+int LX_Window::getWidth() const
 {
     int w;
     SDL_GetWindowSize(_window,&w,nullptr);
@@ -468,7 +468,7 @@ int LX_Window::getWidth()
 }
 
 
-int LX_Window::getHeight()
+int LX_Window::getHeight() const
 {
     int h;
     SDL_GetWindowSize(_window,nullptr,&h);
@@ -476,7 +476,7 @@ int LX_Window::getHeight()
 }
 
 
-int LX_Window::getLogicalWidth()
+int LX_Window::getLogicalWidth() const
 {
     int w;
     SDL_RenderGetLogicalSize(_renderer,&w,nullptr);
@@ -484,7 +484,7 @@ int LX_Window::getLogicalWidth()
 }
 
 
-int LX_Window::getLogicalHeight()
+int LX_Window::getLogicalHeight() const
 {
     int h;
     SDL_RenderGetLogicalSize(_renderer,nullptr,&h);
@@ -492,7 +492,7 @@ int LX_Window::getLogicalHeight()
 }
 
 
-void LX_Window::glGetDrawableSize(int& w, int& h)
+void LX_Window::glGetDrawableSize(int& w, int& h) const
 {
     SDL_GL_GetDrawableSize(_window,&w,&h);
 }

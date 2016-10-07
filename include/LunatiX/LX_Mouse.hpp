@@ -53,13 +53,13 @@ public:
     */
     LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y);
     /**
-    *   @fn bool isOpen()
+    *   @fn bool isOpen() const
     *
     *   Check if the mouse is loaded without issues
     *
     *   @return TRUE if there is no problem, FALSE otherwise
     */
-    bool isOpen();
+    bool isOpen() const;
     /**
     *   @fn void setMouse()
     *   Activate the current mouse

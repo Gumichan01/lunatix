@@ -158,7 +158,7 @@ public:
     virtual int64_t seek(int64_t offset, int whence) = 0;
 
     /**
-    *   @fn virtual int64_t tell()
+    *   @fn virtual int64_t tell() const
     *
     *   Get the position in a file
     *
@@ -167,7 +167,7 @@ public:
     *
     *   @sa seek
     */
-    virtual int64_t tell() = 0;
+    virtual int64_t tell() const = 0;
 
     /**
     *   @fn void close()
@@ -247,7 +247,7 @@ public :
     virtual size_t write(std::string str);
 
     virtual int64_t seek(int64_t offset, int whence);
-    virtual int64_t tell();
+    virtual int64_t tell() const;
 
     /**
     *   @fn int64_t size()
@@ -261,7 +261,7 @@ public :
     *   Get the name of the file the instance refers to
     *   @return The name of the file
     */
-    const char * getFilename();
+    const char * getFilename() const;
 
     virtual void close();
 
@@ -292,7 +292,7 @@ public:
     virtual size_t write(std::string str);
 
     virtual int64_t seek(int64_t offset, int whence);
-    virtual int64_t tell();
+    virtual int64_t tell() const;
     virtual void close();
 
     /// Destructor

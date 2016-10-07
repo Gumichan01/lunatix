@@ -138,7 +138,7 @@ void LX_ParticleSystem::displayParticles()
 }
 
 
-unsigned int LX_ParticleSystem::nbEmptyParticles()
+unsigned int LX_ParticleSystem::nbEmptyParticles() const
 {
     const unsigned int n = _nb_particles;
     unsigned int nb = 0;
@@ -153,13 +153,13 @@ unsigned int LX_ParticleSystem::nbEmptyParticles()
 }
 
 
-unsigned int LX_ParticleSystem::nbActiveParticles()
+unsigned int LX_ParticleSystem::nbActiveParticles() const
 {
     return _nb_particles - nbEmptyParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbTotalParticles()
+unsigned int LX_ParticleSystem::nbTotalParticles() const
 {
     return _nb_particles;
 }

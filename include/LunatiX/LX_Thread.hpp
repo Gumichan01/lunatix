@@ -89,14 +89,14 @@ public:
     */
     void startAndDetach();
     /**
-    *   @fn bool joinable()
+    *   @fn bool joinable() const
     *
     *   Check if the thread is joinable (not joined and not detached)
     *
     *   @return TRUE if the thread is joinable, false otherwise
     *   @sa join
     */
-    bool joinable();
+    bool joinable() const;
     /**
     *   @fn void join()
     *

@@ -93,7 +93,7 @@ void LX_Font::createBuffer_()
 *   Private function that calculates the resulting surface size
 *   of the text to display using the font given in parameter
 */
-int LX_Font::sizeOfText_(TTF_Font *ttf, const std::string& text, int& w, int& h)
+int LX_Font::sizeOfText_(TTF_Font *ttf, const std::string& text, int& w, int& h) const
 {
     return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
 }
@@ -103,7 +103,7 @@ int LX_Font::sizeOfText_(TTF_Font *ttf, const std::string& text, int& w, int& h)
 *   Private function that creates an internal and temporary font
 *   according to the font file in the class or the file buffer if it exists
 */
-TTF_Font * LX_Font::createInternalFont_(int size)
+TTF_Font * LX_Font::createInternalFont_(int size) const
 {
     if(_font_buffer == nullptr)
         return nullptr;        // This code will normally never be executed
@@ -113,13 +113,13 @@ TTF_Font * LX_Font::createInternalFont_(int size)
 }
 
 
-int LX_Font::sizeOfText(std::string text, int& w, int& h)
+int LX_Font::sizeOfText(std::string text, int& w, int& h) const
 {
     return sizeOfText(text,_font_size,w,h);
 }
 
 
-int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w, int& h)
+int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w, int& h) const
 {
     int sz;
     TTF_Font *ttf = nullptr;
@@ -137,7 +137,7 @@ int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w
 }
 
 
-int LX_Font::sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h)
+int LX_Font::sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h) const
 {
     const std::string s = text.utf8_str();
     return sizeOfText(s,size,w,h);

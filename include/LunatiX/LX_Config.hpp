@@ -96,7 +96,6 @@ public :
     *
     *   @note   The instance can be a null pointer
     *           if initConfig() failed.
-    *
     */
     static LX_Configuration * getInstance();
 
@@ -107,109 +106,89 @@ public :
     *
     *   @note It is not necessary to call this function because it is
     *           automatically called when the library subsystems are shut down
-    *
     */
     static void destroy();
 
     /**
-    *   @fn bool getVideoFlag()
+    *   @fn bool getVideoFlag() const
     *
     *   Get the video flag
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    bool getVideoFlag();
-
+    bool getVideoFlag() const;
     /**
-    *   @fn bool getVSyncFlag()
+    *   @fn bool getVSyncFlag() const
     *
     *   Get the Vertical Synchronization (VSync) flag
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    bool getVSyncFlag();
-
+    bool getVSyncFlag() const;
     /**
-    *   @fn bool getTTFFlag()
+    *   @fn bool getTTFFlag() const
     *
     *   Get the True Ttype Font (TTF) flag
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    bool getTTFFlag();
-
+    bool getTTFFlag() const;
     /**
-    *   @fn bool getAudioFlag()
+    *   @fn bool getAudioFlag() const
     *
     *   Get the audio flag
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    bool getAudioFlag();
-
+    bool getAudioFlag() const;
     /**
-    *   @fn bool getGamepadFlag()
+    *   @fn bool getGamepadFlag() const
     *
     *   Get the audio flag
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    bool getGamepadFlag();
-
+    bool getGamepadFlag() const;
     /**
-    *   @fn bool getOpenGLFlag()
+    *   @fn bool getOpenGLFlag() const
     *
     *   Get the opengl flag
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    bool getOpenGLFlag();
-
+    bool getOpenGLFlag() const;
     /**
-    *   @fn char * getFontFile()
+    *   @fn char * getFontFile() const
     *
     *   Get the font file
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    const char * getFontFile();
-
+    const char * getFontFile() const;
     /**
-    *   @fn int getFontSize()
+    *   @fn int getFontSize() const
     *
     *   Get the font size
     *
     *   @return TRUE if the flag is set, FALSE otherwise
-    *
     */
-    int getFontSize();
-
+    int getFontSize() const;
     /**
-    *   @fn int getWinWidth()
+    *   @fn int getWinWidth() const
     *
     *   Get the window width
     *
     *   @return The width
-    *
     */
-    int getWinWidth();
-
+    int getWinWidth() const;
     /**
-    *   @fn int getWinHeight()
+    *   @fn int getWinHeight() const
     *
     *   Get the window height
     *
     *   @return The height
-    *
     */
-    int getWinHeight();
+    int getWinHeight() const;
 
 };
 

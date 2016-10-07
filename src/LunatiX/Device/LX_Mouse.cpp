@@ -34,7 +34,7 @@ LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
 }
 
 
-bool LX_Mouse::isOpen()
+bool LX_Mouse::isOpen() const
 {
     return _cursor != nullptr;
 }

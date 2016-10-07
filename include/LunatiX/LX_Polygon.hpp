@@ -90,7 +90,6 @@ public :
     *
     */
     void addPoint(const int x, const int y);
-
     /**
     *   @fn void LX_Polygon::addPoint(const LX_Point& p)
     *

@@ -110,23 +110,23 @@ public :
     void draw();
 
     /**
-    *   @fn bool isDead()
+    *   @fn bool isDead() const
     *
     *   Check if the particle is dead and must be destroyed
     *
     *   @return TRUE if the particle is dead, FALSE otherwise
     *
     */
-    bool isDead();
+    bool isDead() const;
 
     /**
-    *   @fn unsigned int getDelay()
+    *   @fn unsigned int getDelay() const
     *
     *   Get the lifetime of the particle
     *
     *   @return The lifetime
     */
-    unsigned int getDelay();
+    unsigned int getDelay() const;
 
     /// Destructor
     ~LX_Particle() = default;

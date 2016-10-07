@@ -72,28 +72,28 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
 }
 
 // Private function
-SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer_()
+SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer_() const
 {
     SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(), static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:IMG_Load_RW(rw,1);
 }
 
 // Private function
-TTF_Font * LX_FileBuffer::getFontFromBuffer_(int size)
+TTF_Font * LX_FileBuffer::getFontFromBuffer_(int size) const
 {
     SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:TTF_OpenFontRW(rw,1,size);
 }
 
 // Private function
-Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_()
+Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_() const
 {
     SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
     return (rw == nullptr) ? nullptr:Mix_LoadWAV_RW(rw,1);
 }
 
 
-LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample()
+LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
 {
     Mix_Chunk * ch = getChunkFromBuffer_();
 
@@ -105,7 +105,7 @@ LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample()
 }
 
 
-const char * LX_FileBuffer::getFilename()
+const char * LX_FileBuffer::getFilename() const
 {
     return _name.utf8_str();
 }

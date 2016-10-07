@@ -239,52 +239,52 @@ void LX_Configuration::loadSDLFlags_()
     _conf.height = CONF_HEIGHT;
 }
 
-bool LX_Configuration::getVideoFlag()
+bool LX_Configuration::getVideoFlag() const
 {
     return _conf.video_flag;
 }
 
-bool LX_Configuration::getVSyncFlag()
+bool LX_Configuration::getVSyncFlag() const
 {
     return _conf.vsync_flag;
 }
 
-bool LX_Configuration::getTTFFlag()
+bool LX_Configuration::getTTFFlag() const
 {
     return _conf.ttf_flag;
 }
 
-bool LX_Configuration::getAudioFlag()
+bool LX_Configuration::getAudioFlag() const
 {
     return _conf.audio_flag;
 }
 
-bool LX_Configuration::getGamepadFlag()
+bool LX_Configuration::getGamepadFlag() const
 {
     return _conf.gamepad_flag;
 }
 
-bool LX_Configuration::getOpenGLFlag()
+bool LX_Configuration::getOpenGLFlag() const
 {
     return _conf.opengl_flag;
 }
 
-const char * LX_Configuration::getFontFile()
+const char * LX_Configuration::getFontFile() const
 {
     return _conf.font_file.utf8_str();
 }
 
-int LX_Configuration::getFontSize()
+int LX_Configuration::getFontSize() const
 {
     return _conf.font_size;
 }
 
-int LX_Configuration::getWinWidth()
+int LX_Configuration::getWinWidth() const
 {
     return _conf.width;
 }
 
-int LX_Configuration::getWinHeight()
+int LX_Configuration::getWinHeight() const
 {
     return _conf.height;
 }

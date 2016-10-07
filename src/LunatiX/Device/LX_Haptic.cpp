@@ -78,7 +78,7 @@ LX_Haptic::~LX_Haptic()
 }
 
 
-bool LX_Haptic::isOpened()
+bool LX_Haptic::isOpened() const
 {
     return SDL_HapticOpened(_instanceID) == 1;
 }
@@ -128,7 +128,7 @@ void LX_Haptic::stopEffect(int effect_id)
 }
 
 
-int LX_Haptic::numberOfEffects()
+int LX_Haptic::numberOfEffects() const
 {
     return SDL_HapticNumEffects(_haptic);
 }

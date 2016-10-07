@@ -84,19 +84,19 @@ void LX_Gamepad::close()
 }
 
 
-const char * LX_Gamepad::nameOf_(SDL_Joystick * joy)
+const char * LX_Gamepad::nameOf_(SDL_Joystick * joy) const
 {
     return SDL_JoystickName(joy);
 }
 
 
-const char * LX_Gamepad::nameOf_(SDL_GameController * controller)
+const char * LX_Gamepad::nameOf_(SDL_GameController * controller) const
 {
     return SDL_GameControllerName(controller);
 }
 
 
-bool LX_Gamepad::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info)
+bool LX_Gamepad::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const
 {
     if(joy == nullptr)
     {
@@ -125,7 +125,7 @@ bool LX_Gamepad::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info)
 
 
 bool LX_Gamepad::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
-                        LX_GamepadInfo& info)
+                        LX_GamepadInfo& info) const
 {
     if(joy != nullptr)
     {
@@ -147,19 +147,19 @@ bool LX_Gamepad::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
 }
 
 
-bool LX_Gamepad::statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info)
+bool LX_Gamepad::statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const
 {
     return gstat_(joy,nullptr,info);
 }
 
 
-bool LX_Gamepad::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info)
+bool LX_Gamepad::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info) const
 {
     return gstat_(nullptr,gc,info);
 }
 
 
-bool LX_Gamepad::isConnected()
+bool LX_Gamepad::isConnected() const
 {
     if(_gc != nullptr)
         return SDL_GameControllerGetAttached(_gc) == SDL_TRUE;
@@ -168,13 +168,13 @@ bool LX_Gamepad::isConnected()
 }
 
 
-bool LX_Gamepad::isHaptic()
+bool LX_Gamepad::isHaptic() const
 {
     return _haptic != nullptr && _haptic->isOpened();
 }
 
 
-SDL_JoystickID LX_Gamepad::getID()
+SDL_JoystickID LX_Gamepad::getID() const
 {
     if(_gc != nullptr)
         return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(_gc));
@@ -183,13 +183,13 @@ SDL_JoystickID LX_Gamepad::getID()
 }
 
 
-LX_Haptic * LX_Gamepad::getHaptic()
+LX_Haptic * LX_Gamepad::getHaptic() const
 {
     return _haptic.get();
 }
 
 
-const char * LX_Gamepad::getName()
+const char * LX_Gamepad::getName() const
 {
     if(_gc != nullptr)
         return nameOf_(_gc);
@@ -198,7 +198,7 @@ const char * LX_Gamepad::getName()
 }
 
 
-bool LX_Gamepad::stat(LX_GamepadInfo& info)
+bool LX_Gamepad::stat(LX_GamepadInfo& info) const
 {
     bool res;
 
@@ -214,7 +214,7 @@ bool LX_Gamepad::stat(LX_GamepadInfo& info)
 }
 
 
-UTF8string LX_Gamepad::toString()
+UTF8string LX_Gamepad::toString() const
 {
     LX_GamepadInfo gi;
 

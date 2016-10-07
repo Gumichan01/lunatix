@@ -61,7 +61,7 @@ public:
         }
     }
 
-    bool joinable()
+    bool joinable() const
     {
         return _thread != nullptr && _thread->joinable();
     }
@@ -125,7 +125,7 @@ void LX_Thread::startAndDetach()
     _th->startAndDetach();
 }
 
-bool LX_Thread::joinable()
+bool LX_Thread::joinable() const
 {
     return _th->joinable();
 }

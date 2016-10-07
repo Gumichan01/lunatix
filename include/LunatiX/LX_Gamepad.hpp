@@ -47,12 +47,12 @@ class LX_Gamepad
     std::unique_ptr<LX_Haptic> _haptic;
 
 
-    const char * nameOf_(SDL_Joystick * joy);
-    const char * nameOf_(SDL_GameController * controller);
-    bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info);
-    bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info);
-    bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info);
-    bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info);
+    const char * nameOf_(SDL_Joystick * joy) const;
+    const char * nameOf_(SDL_GameController * controller) const;
+    bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
+    bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;
+    bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
+    bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info) const;
 
     LX_Gamepad(const LX_Gamepad& g);
 
@@ -83,7 +83,7 @@ public :
     void close();
 
     /**
-    *   @fn bool isConnected()
+    *   @fn bool isConnected() const
     *
     *   Get the status of the gamepad
     *
@@ -91,10 +91,10 @@ public :
     *           FALSE otherwise
     *
     */
-    bool isConnected();
+    bool isConnected() const;
 
     /**
-    *   @fn bool isHaptic()
+    *   @fn bool isHaptic() const
     *
     *   Check if the gamepad is haptic
     *
@@ -102,20 +102,20 @@ public :
     *           FALSE otherwise
     *
     */
-    bool isHaptic();
+    bool isHaptic() const;
 
     /**
-    *   @fn SDL_JoystickID getID()
+    *   @fn SDL_JoystickID getID() const
     *
     *   Get the ID of the gamepad
     *
     *   @return The ID of the gamepad, -1 otherwise
     *
     */
-    SDL_JoystickID getID();
+    SDL_JoystickID getID() const;
 
     /**
-    *   @fn LX_Haptic * getHaptic()
+    *   @fn LX_Haptic * getHaptic() const
     *
     *   Get the haptic system of the gamepad
     *
@@ -123,10 +123,10 @@ public :
     *
     *   @note The system can be inexistent, so check the returned value
     */
-    LX_Haptic * getHaptic();
+    LX_Haptic * getHaptic() const;
 
     /**
-    *   @fn const char * getName()
+    *   @fn const char * getName() const
     *
     *   Get the name of the Gamepad
     *
@@ -134,10 +134,10 @@ public :
     *
     *   @sa toString
     */
-    const char * getName();
+    const char * getName() const;
 
     /**
-    *   @fn bool stat(LX_GamepadInfo& info)
+    *   @fn bool stat(LX_GamepadInfo& info) const
     *
     *   Get information about the gamepad
     *
@@ -146,16 +146,16 @@ public :
     *           Call LX_GetError() to get the error message
     *
     */
-    bool stat(LX_GamepadInfo& info);
+    bool stat(LX_GamepadInfo& info) const;
 
     /**
-    *   @fn UTF8string toString()
+    *   @fn UTF8string toString() const
     *
     *   Get information about the gamepad in string format
     *
     *   @return Always returns a valid string
     */
-    UTF8string toString();
+    UTF8string toString() const;
 
     /// Destructor
     ~LX_Gamepad();

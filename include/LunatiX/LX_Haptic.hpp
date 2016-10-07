@@ -116,14 +116,14 @@ public :
     LX_Haptic& operator =(SDL_Haptic& haptic);
 
     /**
-    *   @fn bool isOpened()
+    *   @fn bool isOpened() const
     *
     *   Check if the haptic device is opened
     *
     *   @return TRUE is the device is opened, FALSE otherwise
     *
     */
-    bool isOpened();
+    bool isOpened() const;
     /**
     *   @fn bool rumbleEffectInit()
     *
@@ -153,7 +153,7 @@ public :
     void rumbleEffectPlay(float strength, uint32_t length);
 
     /**
-    *   @fn bool effectSupported(SDL_HapticEffect& effect)
+    *   @fn bool effectSupported(SDL_HapticEffect& effect) const
     *
     *   Check if an effect is supported by the current device
     *
@@ -163,7 +163,7 @@ public :
     *
     *   @sa newEffect
     */
-    bool effectSupported(SDL_HapticEffect& effect);
+    bool effectSupported(SDL_HapticEffect& effect) const;
     /**
     *   @fn int newEffect(SDL_HapticEffect& effect)
     *
@@ -203,7 +203,7 @@ public :
     void stopEffect(int effect_id);
 
     /**
-    *   @fn int numberOfEffects()
+    *   @fn int numberOfEffects() const
     *
     *   Get the number of playable effects
     *
@@ -213,7 +213,7 @@ public :
     *   @sa runEffect
     *   @sa stopEffect
     */
-    int numberOfEffects();
+    int numberOfEffects() const;
 
     /// Destructor
     ~LX_Haptic();

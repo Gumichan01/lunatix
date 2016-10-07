@@ -151,7 +151,7 @@ int64_t LX_File::seek(int64_t offset, int whence)
 }
 
 
-int64_t LX_File::tell()
+int64_t LX_File::tell() const
 {
     return SDL_RWtell(_data);
 }
@@ -173,7 +173,7 @@ void LX_File::close()
 }
 
 
-const char * LX_File::getFilename()
+const char * LX_File::getFilename() const
 {
     return  _name.utf8_str();
 }
@@ -256,7 +256,7 @@ int64_t LX_TmpFile::seek(int64_t offset, int whence)
 }
 
 
-int64_t LX_TmpFile::tell()
+int64_t LX_TmpFile::tell() const
 {
     return ftell(_f);
 }

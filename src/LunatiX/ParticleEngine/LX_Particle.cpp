@@ -61,13 +61,13 @@ void LX_Particle::draw()
 }
 
 
-bool LX_Particle::isDead()
+bool LX_Particle::isDead() const
 {
     return _lifetime == 0;
 }
 
 
-unsigned int LX_Particle::getDelay()
+unsigned int LX_Particle::getDelay() const
 {
     return _lifetime;
 }

@@ -127,7 +127,6 @@ public:
     *         with the no loop option
     */
     bool play();
-
     /**
     *   @fn bool play(int channel)
     *
@@ -139,7 +138,6 @@ public:
     *   @note This function plays the sample with no loop
     */
     bool play(int channel);
-
     /**
     *   @fn bool play(int channel,int loops);
     *
@@ -157,7 +155,6 @@ public:
     *   @note If loops == -1 -> loop forever
     */
     bool play(int channel,int loops);
-
     /**
     *   @fn bool play(int channel,int loops,int ticks)
     *
