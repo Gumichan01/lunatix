@@ -26,6 +26,8 @@
 
 namespace LX_Device
 {
+/// @todo LX_Haptic - Implement LX_MouseHaptic
+/// @todo LX_Haptic - Private implementation
 
 class LX_Haptic;
 

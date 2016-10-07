@@ -178,6 +178,7 @@ public:
     virtual ~LX_AbstractFile();
 };
 
+/// @todo LX_File - private implementation
 
 /**
 *   @class LX_File
@@ -268,6 +269,8 @@ public :
     /// Destructor
     virtual ~LX_File();
 };
+
+/// @todo LX_TmpFile - private implementation
 
 /**
 *   @class LX_TmpFile

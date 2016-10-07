@@ -57,6 +57,7 @@ public :
     ~LX_PolygonException() noexcept;
 };
 
+/// @todo LX_Polygon - private implementation
 
 /**
 *    @class LX_Polygon
@@ -67,7 +68,7 @@ public :
 */
 class LX_Polygon
 {
-    std::vector<LX_Point> _points;   /* A sequence of LX_Point objects   */
+    std::vector<LX_Point> _points;    /* A sequence of LX_Point objects   */
     bool _convex;                     /* If the polygon is convex         */
 
     LX_Polygon(LX_Polygon& p);

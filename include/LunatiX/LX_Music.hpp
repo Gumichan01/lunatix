@@ -53,6 +53,7 @@ public :
     ~LX_MusicException() noexcept;
 };
 
+/// @todo LX_Music - private implementation
 
 /**
 *   @class LX_Music

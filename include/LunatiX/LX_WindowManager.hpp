@@ -29,6 +29,8 @@ namespace LX_Win
 
 class LX_Window;
 
+/// @todo LX_WindowManager - private implementation
+
 /**
 *   @class LX_WindowManager
 *   @brief The windows manager

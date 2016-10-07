@@ -59,6 +59,7 @@ const short LX_MIRROR_HORIZONTAL = 1;
 /// Flag to define vertical mirror while drawing an image
 const short LX_MIRROR_VERTICAL   = 2;
 
+/// @todo LX_Image and sub-classes - private implementation
 
 /**
 *   @class LX_Image

@@ -58,6 +58,7 @@ namespace LX_TrueTypeFont
 
 enum LX_TTF_TypeText: short;
 
+/// @todo LX_Font - private implementation
 
 /**
 *   @class LX_Font

@@ -34,6 +34,8 @@ class LX_FileBuffer;
 namespace LX_Mixer
 {
 
+/// @todo LX_Chunk - private implementation
+
 /**
 *   @class LX_ChunkException
 *   @brief The exception class of LX_Chunk

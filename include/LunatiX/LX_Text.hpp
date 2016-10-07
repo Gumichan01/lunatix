@@ -55,6 +55,8 @@ public:
     virtual ~LX_RedrawCallback();
 };
 
+/// @todo LX_TextInput - private implementation
+
 /**
 *   @class LX_TextInput
 *   @brief Text input class
@@ -121,7 +123,6 @@ public:
 *
 *   LX_TextInput also support clipboard handling.
 */
-
 class LX_TextInput
 {
     UTF8string _u8text;

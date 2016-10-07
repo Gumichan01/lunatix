@@ -27,6 +27,8 @@
 namespace LX_Multithreading
 {
 
+/// @todo LX_Channel - private implementation
+
 /**
 *   @brief Multithread synchronization primitive
 *
