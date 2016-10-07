@@ -30,7 +30,7 @@ class LX_Thread_
     std::string _name;
     bool _launched;
     bool _detached;
-    tthread::thread * _thread;
+    std::unique_ptr<tthread::thread> _thread;
     LX_Multithreading::LX_Data _data;
 
 public:
@@ -46,7 +46,7 @@ public:
         if(_launched)
             return;
 
-        _thread = new tthread::thread(*_f.target<void(*)(void *)>(),_data);
+        _thread.reset(new tthread::thread(*_f.target<void(*)(void *)>(),_data));
         _launched = true;
     }
 
@@ -56,14 +56,14 @@ public:
 
         if(joinable())
         {
-            _thread->detach();
+            _thread.get()->detach();
             _detached = true;
         }
     }
 
     bool joinable() const
     {
-        return _thread != nullptr && _thread->joinable();
+        return _thread != nullptr && _thread.get()->joinable();
     }
 
     void join()
@@ -73,11 +73,10 @@ public:
 
         if(joinable())
         {
-            _thread->join();
+            _thread.get()->join();
         }
 
-        delete _thread;
-        _thread = nullptr;
+        _thread.reset();
         _launched = false;
         _detached = false;
     }
