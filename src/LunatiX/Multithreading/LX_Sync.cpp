@@ -105,7 +105,7 @@ LX_Cond::LX_Cond(): _cond(new LX_Cond_()) {}
 
 void LX_Cond::wait(LX_Mutex& mutex)
 {
-    _cond->wait(*mutex._mu);
+    _cond->wait(mutex._mu.get());
 }
 
 
