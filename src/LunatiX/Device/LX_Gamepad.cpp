@@ -246,55 +246,55 @@ LX_Gamepad::~LX_Gamepad()
 
 void LX_Gamepad::open(int index)
 {
-    _gamepad.get()->open(index);
+    _gamepad->open(index);
 }
 
 
 void LX_Gamepad::close()
 {
-    _gamepad.get()->close();
+    _gamepad->close();
 }
 
 
 bool LX_Gamepad::isConnected() const
 {
-    return _gamepad.get()->isConnected();
+    return _gamepad->isConnected();
 }
 
 
 bool LX_Gamepad::isHaptic() const
 {
-    return _gamepad.get()->isHaptic();
+    return _gamepad->isHaptic();
 }
 
 
 int32_t LX_Gamepad::getID() const
 {
-    return _gamepad.get()->getID();
+    return _gamepad->getID();
 }
 
 
 LX_Haptic * LX_Gamepad::getHaptic() const
 {
-    return _gamepad.get()->getHaptic();
+    return _gamepad->getHaptic();
 }
 
 
 const char * LX_Gamepad::getName() const
 {
-    _gamepad.get()->getName();
+    _gamepad->getName();
 }
 
 
 bool LX_Gamepad::stat(LX_GamepadInfo& info) const
 {
-    return _gamepad.get()->stat(info);
+    return _gamepad->stat(info);
 }
 
 
 UTF8string LX_Gamepad::toString() const
 {
-    return _gamepad.get()->toString();
+    return _gamepad->toString();
 }
 
 };

@@ -32,12 +32,12 @@ public:
 
     void lock()
     {
-        _mutex.get()->lock();
+        _mutex->lock();
     }
 
     void unlock()
     {
-        _mutex.get()->unlock();
+        _mutex->unlock();
     }
 
     ~LX_Mutex_()
@@ -80,17 +80,17 @@ public:
 
     void wait(LX_Mutex_ *mutex)
     {
-        _condition.get()->wait(*(mutex->_mutex.get()));
+        _condition->wait(*(mutex->_mutex.get()));
     }
 
     void signal()
     {
-        _condition.get()->notify_one();
+        _condition->notify_one();
     }
 
     void broadcast()
     {
-        _condition.get()->notify_all();
+        _condition->notify_all();
     }
 
     ~LX_Cond_()
@@ -105,19 +105,19 @@ LX_Cond::LX_Cond(): _cond(new LX_Cond_()) {}
 
 void LX_Cond::wait(LX_Mutex& mutex)
 {
-    _cond.get()->wait(mutex._mu.get());
+    _cond->wait(*mutex._mu);
 }
 
 
 void LX_Cond::signal()
 {
-    _cond.get()->signal();
+    _cond->signal();
 }
 
 
 void LX_Cond::broadcast()
 {
-    _cond.get()->broadcast();
+    _cond->broadcast();
 }
 
 

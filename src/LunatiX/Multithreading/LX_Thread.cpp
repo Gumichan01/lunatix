@@ -56,14 +56,14 @@ public:
 
         if(joinable())
         {
-            _thread.get()->detach();
+            _thread->detach();
             _detached = true;
         }
     }
 
     bool joinable() const
     {
-        return _thread != nullptr && _thread.get()->joinable();
+        return _thread != nullptr && _thread->joinable();
     }
 
     void join()
@@ -73,7 +73,7 @@ public:
 
         if(joinable())
         {
-            _thread.get()->join();
+            _thread->join();
         }
 
         _thread.reset();

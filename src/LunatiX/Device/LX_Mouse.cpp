@@ -59,13 +59,13 @@ LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
 
 bool LX_Mouse::isOpen() const
 {
-    return _mouse.get()->isOpen();
+    return _mouse->isOpen();
 }
 
 
 void LX_Mouse::setMouse()
 {
-    _mouse.get()->setMouse();
+    _mouse->setMouse();
 }
 
 
