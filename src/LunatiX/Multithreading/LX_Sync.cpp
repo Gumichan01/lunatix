@@ -19,9 +19,11 @@ namespace LX_Multithreading
 {
 
 /* Mutex */
+
 class LX_Mutex_
 {
     friend class LX_Cond;
+    friend class LX_Cond_;
     std::unique_ptr<tthread::mutex> _mutex;
 
 public:
@@ -68,30 +70,60 @@ LX_Mutex::~LX_Mutex()
 
 /* Condition variable */
 
-LX_Cond::LX_Cond() : _condition(new tthread::condition_variable()) {}
+class LX_Cond_
+{
+    std::unique_ptr<tthread::condition_variable> _condition;
+
+public:
+
+    LX_Cond_(): _condition(new tthread::condition_variable()) {}
+
+    void wait(LX_Mutex_ *mutex)
+    {
+        _condition.get()->wait(*(mutex->_mutex.get()));
+    }
+
+    void signal()
+    {
+        _condition.get()->notify_one();
+    }
+
+    void broadcast()
+    {
+        _condition.get()->notify_all();
+    }
+
+    ~LX_Cond_()
+    {
+        _condition.reset();
+    }
+};
+
+
+LX_Cond::LX_Cond(): _cond(new LX_Cond_()) {}
 
 
 void LX_Cond::wait(LX_Mutex& mutex)
 {
-    _condition->wait(*mutex._mu.get()->_mutex);
+    _cond.get()->wait(mutex._mu.get());
 }
 
 
 void LX_Cond::signal()
 {
-    _condition->notify_one();
+    _cond.get()->signal();
 }
 
 
 void LX_Cond::broadcast()
 {
-    _condition->notify_all();
+    _cond.get()->broadcast();
 }
 
 
 LX_Cond::~LX_Cond()
 {
-    delete _condition;
+    _cond.reset();
 }
 
 };

@@ -34,6 +34,7 @@ namespace LX_Multithreading
 
 /// @todo LX_Mutex - private implementation
 class LX_Mutex_;
+class LX_Cond_;
 
 /**
 *   @class LX_Mutex
@@ -45,6 +46,7 @@ class LX_Mutex
     std::unique_ptr<LX_Mutex_> _mu;
 
     LX_Mutex(const LX_Mutex& m);
+    LX_Mutex& operator =(const LX_Mutex& m);
 
 public:
 
@@ -72,14 +74,16 @@ public:
 */
 class LX_Cond
 {
-    tthread::condition_variable * _condition;
+    std::unique_ptr<LX_Cond_> _cond;
 
     LX_Cond(const LX_Cond& c);
+    LX_Cond& operator =(const LX_Cond& c);
 
 public:
 
     /// Constructor
     LX_Cond();
+
     /**
     *   @fn void wait(LX_Mutex& mutex)
     *
