@@ -20,6 +20,8 @@
 *
 */
 
+#include <memory>
+
 namespace tthread
 {
 class mutex;
@@ -31,6 +33,7 @@ namespace LX_Multithreading
 {
 
 /// @todo LX_Mutex - private implementation
+class LX_Mutex_;
 
 /**
 *   @class LX_Mutex
@@ -39,7 +42,7 @@ namespace LX_Multithreading
 class LX_Mutex
 {
     friend class LX_Cond;
-    tthread::mutex * _mutex;
+    std::unique_ptr<LX_Mutex_> _mu;
 
     LX_Mutex(const LX_Mutex& m);
 
