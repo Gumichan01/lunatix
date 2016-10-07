@@ -293,6 +293,8 @@ public :
     *
     *   Get the blend mode for drawing operations (Fill, Line)
     *
+    *   @param mode Structure to fill in
+    *
     *   @return The blend mode used for blending:
     *    |        Value        |                      Meaning                     |
     *    |         ---         |                        ---                       |
