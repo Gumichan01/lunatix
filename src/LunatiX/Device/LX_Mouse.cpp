@@ -27,28 +27,51 @@
 namespace LX_Device
 {
 
-LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
-    : _cursor(nullptr)
+class LX_Mouse_
 {
-    _cursor = SDL_CreateColorCursor(surface._surface,hot_x,hot_y);
-}
+    SDL_Cursor * _cursor;
+
+public:
+
+    LX_Mouse_(SDL_Surface * surface, int hot_x, int hot_y)
+        : _cursor(SDL_CreateColorCursor(surface,hot_x,hot_y)) {}
+
+    bool isOpen() const
+    {
+        return _cursor != nullptr;
+    }
+
+    void setMouse()
+    {
+        SDL_SetCursor(_cursor);
+    }
+
+    ~LX_Mouse_()
+    {
+        SDL_FreeCursor(_cursor);
+    }
+};
+
+
+LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
+    : _mouse(new LX_Mouse_(surface._surface,hot_x,hot_y)) {}
 
 
 bool LX_Mouse::isOpen() const
 {
-    return _cursor != nullptr;
+    return _mouse.get()->isOpen();
 }
 
 
 void LX_Mouse::setMouse()
 {
-    SDL_SetCursor(_cursor);
+    _mouse.get()->setMouse();
 }
 
 
 LX_Mouse::~LX_Mouse()
 {
-    SDL_FreeCursor(_cursor);
+    _mouse.reset();
 }
 
 };

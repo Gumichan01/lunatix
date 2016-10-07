@@ -20,15 +20,17 @@
 */
 
 
+#include <memory>
+
 namespace LX_Graphics
 {
 class LX_Surface;
 }
 
-struct SDL_Cursor;
-
 namespace LX_Device
 {
+
+class LX_Mouse_;
 
 /**
 *   @class LX_Mouse
@@ -36,7 +38,7 @@ namespace LX_Device
 */
 class LX_Mouse
 {
-    SDL_Cursor * _cursor;
+    std::unique_ptr<LX_Mouse_> _mouse;
 
 public:
 
