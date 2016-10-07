@@ -18,11 +18,11 @@
 *
 */
 
+#include <LunatiX/LX_Version.hpp>
 #include <SDL2/SDL_version.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
-#include <LunatiX/LX_Version.hpp>
 #include <iostream>
 
 
@@ -31,11 +31,10 @@ using namespace std;
 namespace
 {
 const short LX_MAJOR_VERSION = 0;
-const short LX_MINOR_VERSION = 8;
+const short LX_MINOR_VERSION = 9;
 const short LX_PATCH_VERSION = 0;
 const char * LX_COPYRIGHT    = "Copyright (C) 2016";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
-
 };
 
 namespace LX_VersionInfo
