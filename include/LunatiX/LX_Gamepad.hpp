@@ -23,15 +23,13 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-#include <SDL2/SDL_joystick.h>
-#include <SDL2/SDL_gamecontroller.h>
-
 #include <memory>
 
 namespace LX_Device
 {
 
 class LX_Haptic;
+class LX_Gamepad_;
 struct LX_GamepadInfo;
 
 /**
@@ -42,19 +40,10 @@ struct LX_GamepadInfo;
 */
 class LX_Gamepad
 {
-    SDL_GameController *_gc;
-    SDL_Joystick *_joy;
-    std::unique_ptr<LX_Haptic> _haptic;
-
-
-    const char * nameOf_(SDL_Joystick * joy) const;
-    const char * nameOf_(SDL_GameController * controller) const;
-    bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
-    bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;
-    bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
-    bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info) const;
+    std::unique_ptr<LX_Gamepad_> _gamepad;
 
     LX_Gamepad(const LX_Gamepad& g);
+    LX_Gamepad& operator =(const LX_Gamepad&);
 
 public :
 
@@ -105,14 +94,14 @@ public :
     bool isHaptic() const;
 
     /**
-    *   @fn SDL_JoystickID getID() const
+    *   @fn int32_t getID() const
     *
     *   Get the ID of the gamepad
     *
     *   @return The ID of the gamepad, -1 otherwise
     *
     */
-    SDL_JoystickID getID() const;
+    int32_t getID() const;
 
     /**
     *   @fn LX_Haptic * getHaptic() const
