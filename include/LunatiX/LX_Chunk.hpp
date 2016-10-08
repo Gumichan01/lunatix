@@ -105,16 +105,6 @@ public:
     */
     explicit LX_Chunk(UTF8string& filename);
 
-    /*
-    *   @fn bool loadFromBuffer(LX_FileBuffer *file)
-    *
-    *   Load the sample from a file buffer
-    *
-    *   @param [in] file The file buffer to load the chunk from
-    *   @return TRUE on success, FALSE otherwise
-    */
-    //bool loadFromBuffer(LX_FileIO::LX_FileBuffer *file);
-
     /**
     *   @fn bool play()
     *
