@@ -23,10 +23,11 @@
 
 #include <SDL2/SDL_haptic.h>
 #include <SDL2/SDL_gamecontroller.h>
+#include <memory>
+
 
 namespace LX_Device
 {
-/// @todo LX_Haptic - Private implementation
 
 class LX_Haptic;
 
@@ -47,6 +48,9 @@ int numberOfHapticDevices();
 */
 bool mouseIsHaptic();
 
+struct LX_Haptic_;
+struct LX_Haptic_common;
+
 /**
 *   @class LX_Haptic
 *   @brief The haptic device
@@ -55,14 +59,14 @@ bool mouseIsHaptic();
 */
 class LX_Haptic
 {
-    int _instanceID;
+    std::unique_ptr<LX_Haptic_> _himpl;
 
     LX_Haptic(LX_Haptic& h);
     LX_Haptic& operator =(LX_Haptic& h);
 
 protected:
 
-    SDL_Haptic *_haptic;
+    std::unique_ptr<LX_Haptic_common> _hcimpl;
 
     LX_Haptic();
 
