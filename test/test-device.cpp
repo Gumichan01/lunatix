@@ -1,8 +1,7 @@
 
+#include <LunatiX/Lunatix.hpp>
 #include <iostream>
 #include <cstring>
-
-#include <LunatiX/Lunatix.hpp>
 
 #define STRING_SIZE 256
 
@@ -151,16 +150,12 @@ void test_mouse(void)
     if(LX_Device::mouseIsHaptic())
     {
         LX_Log::log("Haptic feedback supported by the mouse");
-        LX_Haptic * h = getMouseHaptic();
+        LX_MouseHaptic h;
 
-        if(h == nullptr)
+        if(h.isOpened())
             LX_Log::log("FAILURE - The haptic feedback does not seem to be supported");
         else
-        {
             LX_Log::log("SUCCESS - OK");
-        }
-
-        delete h;
     }
     else
     {
