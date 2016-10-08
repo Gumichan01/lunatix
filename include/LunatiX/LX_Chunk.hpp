@@ -72,10 +72,6 @@ class LX_Chunk
     LX_Chunk(LX_Chunk& m);
     LX_Chunk& operator =(LX_Chunk& m);
 
-/*protected:
-
-    bool load_(const std::string& filename);*/
-
 public:
 
     /**
