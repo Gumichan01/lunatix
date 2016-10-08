@@ -19,8 +19,8 @@
 *    @version 0.8
 *
 */
-
-#include "LX_Sound.hpp"
+#include <LunatiX/utils/utf8_string.hpp>
+#include <memory>
 
 
 struct Mix_Chunk;
@@ -33,8 +33,6 @@ class LX_FileBuffer;
 
 namespace LX_Mixer
 {
-
-/// @todo LX_Chunk - private implementation
 
 /**
 *   @class LX_ChunkException
@@ -59,22 +57,24 @@ public :
 };
 
 
+class LX_Chunk_;
+
 /**
 *   @class LX_Chunk
 *   @brief The chunk class
 */
-class LX_Chunk : public virtual LX_Sound
+class LX_Chunk
 {
     friend class LX_FileIO::LX_FileBuffer;
-    Mix_Chunk *_chunk;
+    std::unique_ptr<LX_Chunk_> _chkimpl;
 
-    explicit LX_Chunk(Mix_Chunk& chunk);
+    LX_Chunk(Mix_Chunk& chunk);
     LX_Chunk(LX_Chunk& m);
     LX_Chunk& operator =(LX_Chunk& m);
 
-protected:
+/*protected:
 
-    bool load_(const std::string& filename);
+    bool load_(const std::string& filename);*/
 
 public:
 
@@ -109,7 +109,7 @@ public:
     */
     explicit LX_Chunk(UTF8string& filename);
 
-    /**
+    /*
     *   @fn bool loadFromBuffer(LX_FileBuffer *file)
     *
     *   Load the sample from a file buffer
@@ -117,7 +117,7 @@ public:
     *   @param [in] file The file buffer to load the chunk from
     *   @return TRUE on success, FALSE otherwise
     */
-    bool loadFromBuffer(LX_FileIO::LX_FileBuffer *file);
+    //bool loadFromBuffer(LX_FileIO::LX_FileBuffer *file);
 
     /**
     *   @fn bool play()
