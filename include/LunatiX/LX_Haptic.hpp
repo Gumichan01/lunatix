@@ -26,7 +26,6 @@
 
 namespace LX_Device
 {
-/// @todo LX_Haptic - Implement LX_MouseHaptic
 /// @todo LX_Haptic - Private implementation
 
 class LX_Haptic;
@@ -47,14 +46,6 @@ int numberOfHapticDevices();
 *   @return TRUE if the mouse has haptic feedback, FALSE otherwise
 */
 bool mouseIsHaptic();
-/**
-*   @fn LX_Haptic * getMouseHaptic()
-*
-*   Get the haptic system of the mouse
-*
-*   @return The haptic system of mouse if it has haptic feedback, NULL otherwise
-*/
-LX_Haptic * getMouseHaptic();
 
 /**
 *   @class LX_Haptic

@@ -36,12 +36,6 @@ bool mouseIsHaptic()
 }
 
 
-LX_Haptic * getMouseHaptic()
-{
-    return new LX_MouseHaptic();
-}
-
-
 LX_Haptic::LX_Haptic() : _haptic(nullptr), _instanceID(-1) {}
 
 
