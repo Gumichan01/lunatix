@@ -2,7 +2,9 @@
 #include <LunatiX/Lunatix.hpp>
 #include <iostream>
 #include <stdexcept>
+#include <cstdio>
 #include <map>
+
 
 #define N 4
 
