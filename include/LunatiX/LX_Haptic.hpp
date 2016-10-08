@@ -64,11 +64,14 @@ LX_Haptic * getMouseHaptic();
 */
 class LX_Haptic
 {
-    SDL_Haptic *_haptic;
     int _instanceID;
 
     LX_Haptic(LX_Haptic& h);
     LX_Haptic& operator =(LX_Haptic& h);
+
+protected:
+
+    SDL_Haptic *_haptic;
 
 public :
 
@@ -107,7 +110,7 @@ public :
     explicit LX_Haptic(SDL_GameController *gc);
 
     /**
-    *   @fn LX_Haptic& operator =(SDL_Haptic& haptic)
+    *   @fn virtual LX_Haptic& operator =(SDL_Haptic& haptic)
     *
     *   Set the haptic device
     *
@@ -115,35 +118,35 @@ public :
     *   @return The current instance of LX_Haptic
     *
     */
-    LX_Haptic& operator =(SDL_Haptic& haptic);
+    virtual LX_Haptic& operator =(SDL_Haptic& haptic);
 
     /**
-    *   @fn bool isOpened() const
+    *   @fn virtual bool isOpened() const
     *
     *   Check if the haptic device is opened
     *
     *   @return TRUE is the device is opened, FALSE otherwise
     *
     */
-    bool isOpened() const;
+    virtual bool isOpened() const;
     /**
-    *   @fn bool rumbleEffectInit()
+    *   @fn virtual bool rumbleEffectInit()
     *
     *   Initializes the haptic device for simple rumble playback
     *
     *   @return TRUE on success, FALSE otherwise
     *
     */
-    bool rumbleEffectInit();
+    virtual bool rumbleEffectInit();
     /**
-    *   @fn void rumbleEffectPlay()
+    *   @fn virtual void rumbleEffectPlay()
     *
     *   Play the rumble effect with default values
     *
     */
-    void rumbleEffectPlay();
+    virtual void rumbleEffectPlay();
     /**
-    *   @fn void rumbleEffectPlay(float strength, uint32_t length)
+    *   @fn virtual void rumbleEffectPlay(float strength, uint32_t length)
     *
     *   Play the rumble effect
     *
@@ -152,10 +155,10 @@ public :
     *   @param [in] length Length of the rumble to play in milliseconds
     *
     */
-    void rumbleEffectPlay(float strength, uint32_t length);
+    virtual void rumbleEffectPlay(float strength, uint32_t length);
 
     /**
-    *   @fn bool effectSupported(SDL_HapticEffect& effect) const
+    *   @fn virtual bool effectSupported(SDL_HapticEffect& effect) const
     *
     *   Check if an effect is supported by the current device
     *
@@ -165,9 +168,9 @@ public :
     *
     *   @sa newEffect
     */
-    bool effectSupported(SDL_HapticEffect& effect) const;
+    virtual bool effectSupported(SDL_HapticEffect& effect) const;
     /**
-    *   @fn int newEffect(SDL_HapticEffect& effect)
+    *   @fn virtual int newEffect(SDL_HapticEffect& effect)
     *
     *   Add a new effect
     *
@@ -178,9 +181,9 @@ public :
     *   @sa runEffect
     *   @sa stopEffect
     */
-    int newEffect(SDL_HapticEffect& effect);
+    virtual int newEffect(SDL_HapticEffect& effect);
     /**
-    *   @fn void runEffect(int effect_id, uint32_t iterations)
+    *   @fn virtual void runEffect(int effect_id, uint32_t iterations)
     *
     *   Play the effect
     *
@@ -191,9 +194,9 @@ public :
     *   @sa newEffect
     *   @sa stopEffect
     */
-    void runEffect(int effect_id, uint32_t iterations);
+    virtual void runEffect(int effect_id, uint32_t iterations);
     /**
-    *   @fn void stopEffect(int effect_id)
+    *   @fn virtual void stopEffect(int effect_id)
     *
     *   Stop the effect
     *
@@ -202,10 +205,10 @@ public :
     *   @sa newEffect
     *   @sa runEffect
     */
-    void stopEffect(int effect_id);
+    virtual void stopEffect(int effect_id);
 
     /**
-    *   @fn int numberOfEffects() const
+    *   @fn virtual int numberOfEffects() const
     *
     *   Get the number of playable effects
     *
@@ -215,10 +218,10 @@ public :
     *   @sa runEffect
     *   @sa stopEffect
     */
-    int numberOfEffects() const;
+    virtual int numberOfEffects() const;
 
     /// Destructor
-    ~LX_Haptic();
+    virtual ~LX_Haptic();
 };
 
 };
