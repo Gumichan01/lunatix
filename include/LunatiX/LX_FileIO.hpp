@@ -178,7 +178,6 @@ public:
     virtual ~LX_AbstractFile();
 };
 
-/// @todo LX_File - private implementation
 
 class LX_File_;
 
@@ -269,7 +268,8 @@ public :
     virtual ~LX_File();
 };
 
-/// @todo LX_TmpFile - private implementation
+
+class LX_TmpFile_;
 
 /**
 *   @class LX_TmpFile
@@ -277,7 +277,7 @@ public :
 */
 class LX_TmpFile: public virtual LX_AbstractFile
 {
-    FILE * _f;
+    std::unique_ptr<LX_TmpFile_> _timpl;
 
     LX_TmpFile(const LX_TmpFile&);
     LX_TmpFile& operator =(const LX_TmpFile&);

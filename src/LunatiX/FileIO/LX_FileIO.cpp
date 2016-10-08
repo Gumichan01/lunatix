@@ -52,10 +52,6 @@ LX_AbstractFile::~LX_AbstractFile() {}
 
 /* Private implementation */
 
-/**
-*   @class LX_File
-*   @brief The file handler
-*/
 class LX_File_
 {
     UTF8string _name;        /* The name of the file         */
@@ -98,11 +94,14 @@ class LX_File_
 
 public :
 
-    /*LX_File_(const std::string& filename, const uint32_t mode)
-        : LX_File(UTF8string(filename),mode) {}*/
-
     LX_File_(const UTF8string& filename, const uint32_t mode)
-        : _name(filename), _data(nullptr) {}
+        : _name(filename), _data(nullptr)
+    {
+        if(mode == 0x00000000)
+            throw IOException("LX_File: Invalid mode");
+
+        open_(mode);
+    }
 
     size_t read(void *ptr, size_t data_size, size_t max_num)
     {
@@ -182,7 +181,8 @@ public :
     }
 };
 
-/* Public interface (implementation) */
+
+/* Public functions */
 
 LX_File::LX_File(const std::string& filename, const uint32_t mode)
     : LX_File(UTF8string(filename),mode) {}
@@ -254,84 +254,136 @@ LX_File::~LX_File()
 
 /// LX_TmpFile
 
-LX_TmpFile::LX_TmpFile(): _f(nullptr)
-{
-    _f = tmpfile();
+/* Private implementation */
 
-    if(_f == nullptr)
-        throw IOException(strerror(errno));
-}
+class LX_TmpFile_
+{
+    FILE * _f;
+
+public:
+
+    LX_TmpFile_() : _f(tmpfile())
+    {
+        if(_f == nullptr)
+            throw IOException(strerror(errno));
+    }
+
+    size_t read(void *ptr, size_t data_size, size_t max_num)
+    {
+        size_t sz = fread(ptr,data_size,max_num,_f);
+        char * err = strerror(errno);
+
+        if(ferror(_f))
+            LX_SetError(err);
+
+        return sz;
+    }
+
+    size_t readExactly(void *ptr, size_t data_size, size_t num)
+    {
+        size_t total_read = 0;
+        char * p = static_cast<char *>(ptr);
+
+        // Read at most num bytes
+        while(total_read < num)
+        {
+            size_t read_data = read(p,data_size,num);
+
+            // Did it work?
+            if(read_data == 0)
+                return 0;
+
+            // Move a the end of retrieved data
+            p += read_data;
+            total_read += read_data;
+        }
+
+        return total_read != num ? 0 : total_read;
+    }
+
+    size_t write(void *ptr, size_t data_size, size_t num)
+    {
+        size_t sz = fwrite(ptr,data_size,num,_f);
+        char * err = strerror(errno);
+
+        if(ferror(_f))
+            LX_SetError(err);
+
+        return sz;
+    }
+
+    size_t write(std::string str)
+    {
+        size_t len = str.size();
+        return write((void *)str.c_str(),sizeof(char),len);
+    }
+
+    int64_t seek(int64_t offset, int whence)
+    {
+        return fseek(_f,offset,whence);
+    }
+
+    int64_t tell() const
+    {
+        return ftell(_f);
+    }
+
+    void close()
+    {
+        fclose(_f);
+        _f = nullptr;
+    }
+
+    ~LX_TmpFile_()
+    {
+        close();
+    }
+};
+
+
+/* Public functions */
+
+LX_TmpFile::LX_TmpFile(): _timpl(new LX_TmpFile_()) {}
 
 
 size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num)
 {
-    size_t sz = fread(ptr,data_size,max_num,_f);
-    char * err = strerror(errno);
-
-    if(ferror(_f))
-        LX_SetError(err);
-
-    return sz;
+    return _timpl->read(ptr,data_size,max_num);
 }
 
 
 size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num)
 {
-    size_t total_read = 0;
-    char * p = static_cast<char *>(ptr);
-
-    // Read at most num bytes
-    while(total_read < num)
-    {
-        size_t read_data = read(p,data_size,num);
-
-        // Did it work?
-        if(read_data == 0)
-            return 0;
-
-        // Move a the end of retrieved data
-        p += read_data;
-        total_read += read_data;
-    }
-
-    return total_read != num ? 0 : total_read;
+    return _timpl->readExactly(ptr,data_size,num);
 }
 
 
 size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num)
 {
-    size_t sz = fwrite(ptr,data_size,num,_f);
-    char * err = strerror(errno);
-
-    if(ferror(_f))
-        LX_SetError(err);
-
-    return sz;
+    return _timpl->write(ptr,data_size,num);
 }
 
 
 size_t LX_TmpFile::write(std::string str)
 {
-    size_t len = str.size();
-    return write((void *)str.c_str(),sizeof(char),len);
+    return _timpl->write(str);
 }
 
 
 int64_t LX_TmpFile::seek(int64_t offset, int whence)
 {
-    return fseek(_f,offset,whence);
+    return _timpl->seek(offset,whence);
 }
 
 
 int64_t LX_TmpFile::tell() const
 {
-    return ftell(_f);
+    return _timpl->tell();
 }
 
 void LX_TmpFile::close()
 {
-    fclose(_f);
-    _f = nullptr;
+    _timpl->close();
 }
 
 
