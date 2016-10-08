@@ -30,7 +30,7 @@ namespace LX_Multithreading
 /**
 *   @brief Multithread synchronization primitive
 *
-*   @arg T Generic type that implements '='
+*   @arg T Generic type that implements '=' (and a copy constructor for classes)
 *
 *   This is a C++ implementation of the channel
 *   introduced by the Go language.
