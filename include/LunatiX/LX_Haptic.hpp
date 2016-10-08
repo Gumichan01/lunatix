@@ -21,15 +21,22 @@
 *
 */
 
-#include <SDL2/SDL_haptic.h>
-#include <SDL2/SDL_gamecontroller.h>
 #include <memory>
+#include <cstdint>
 
+struct _SDL_Joystick;
+struct _SDL_GameController;
+union SDL_HapticEffect;
 
 namespace LX_Device
 {
 
-class LX_Haptic;
+struct LX_Haptic_;
+struct LX_Haptic_common;
+class LX_Gamepad_;
+
+using LX_Joystick = _SDL_Joystick;
+using LX_GameController = _SDL_GameController;
 
 /**
 *   @fn int numberOfHapticDevices()
@@ -48,8 +55,6 @@ int numberOfHapticDevices();
 */
 bool mouseIsHaptic();
 
-struct LX_Haptic_;
-struct LX_Haptic_common;
 
 /**
 *   @class LX_Haptic
@@ -59,10 +64,15 @@ struct LX_Haptic_common;
 */
 class LX_Haptic
 {
+    friend class LX_Device::LX_Gamepad_;
     std::unique_ptr<LX_Haptic_> _himpl;
 
     LX_Haptic(LX_Haptic& h);
     LX_Haptic& operator =(LX_Haptic& h);
+
+    // Used by LX_Gamepad
+    explicit LX_Haptic(LX_Joystick *joy);
+    explicit LX_Haptic(LX_GameController *gc);
 
 protected:
 
@@ -82,26 +92,6 @@ public :
     *
     */
     explicit LX_Haptic(int index);
-    /**
-    *   @fn LX_Haptic(SDL_Joystick *joy)
-    *   @brief Constructor
-    *
-    *   Create the instance of the haptic device using the joystick
-    *
-    *   @param [in] joy The joystick to open the device from
-    *
-    */
-    explicit LX_Haptic(SDL_Joystick *joy);
-    /**
-    *   @fn LX_Haptic(SDL_GameController *gc)
-    *   @brief Constructor
-    *
-    *   Create the instance of the haptic device using the game controller
-    *
-    *   @param [in] gc The game controller to open the device from
-    *
-    */
-    explicit LX_Haptic(SDL_GameController *gc);
 
     /**
     *   @fn virtual bool isOpened() const

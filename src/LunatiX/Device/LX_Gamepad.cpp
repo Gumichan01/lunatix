@@ -25,8 +25,8 @@
 #include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_Log.hpp>
 
-#include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_gamecontroller.h>
+#include <SDL2/SDL_haptic.h>
 
 #include <stdexcept>
 #include <cstring>

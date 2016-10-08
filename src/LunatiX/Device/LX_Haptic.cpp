@@ -19,6 +19,8 @@
 */
 
 #include <LunatiX/LX_Haptic.hpp>
+#include <SDL2/SDL_gamecontroller.h>
+#include <SDL2/SDL_haptic.h>
 
 
 namespace LX_Device
@@ -78,12 +80,12 @@ LX_Haptic::LX_Haptic(int index)
       _hcimpl(new LX_Haptic_common(SDL_HapticOpen(index))) {}
 
 
-LX_Haptic::LX_Haptic(SDL_Joystick *joy)
+LX_Haptic::LX_Haptic(LX_Joystick *joy)
     : _himpl(new LX_Haptic_(SDL_JoystickInstanceID(joy))),
       _hcimpl(new LX_Haptic_common(SDL_HapticOpenFromJoystick(joy))) {}
 
 
-LX_Haptic::LX_Haptic(SDL_GameController *gc)
+LX_Haptic::LX_Haptic(LX_GameController *gc)
     : LX_Haptic(SDL_GameControllerGetJoystick(gc)) {}
 
 
