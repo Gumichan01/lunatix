@@ -130,7 +130,7 @@ public:
     */
     virtual size_t write(void *ptr, size_t data_size, size_t num) = 0;
     /**
-    *   @fn virtual size_t write(std::string str)
+    *   @fn virtual size_t write(const std::string& str)
     *
     *   Write a string on the file
     *
@@ -141,7 +141,7 @@ public:
     *
     *   @sa read
     */
-    virtual size_t write(std::string str) = 0;
+    virtual size_t write(const std::string& str) = 0;
 
     /**
     *   @fn virtual int64_t seek(int64_t offset, int whence)
@@ -243,7 +243,7 @@ public :
     virtual size_t readExactly(void *ptr, size_t data_size, size_t num);
 
     virtual size_t write(void *ptr, size_t data_size, size_t num);
-    virtual size_t write(std::string str);
+    virtual size_t write(const std::string& str);
 
     virtual int64_t seek(int64_t offset, int whence);
     virtual int64_t tell() const;
@@ -291,7 +291,7 @@ public:
     virtual size_t readExactly(void *ptr, size_t data_size, size_t num);
 
     virtual size_t write(void *ptr, size_t data_size, size_t num);
-    virtual size_t write(std::string str);
+    virtual size_t write(const std::string& str);
 
     virtual int64_t seek(int64_t offset, int whence);
     virtual int64_t tell() const;

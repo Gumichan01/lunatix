@@ -210,7 +210,7 @@ size_t LX_File::write(void *ptr, size_t data_size, size_t num)
 }
 
 
-size_t LX_File::write(std::string str)
+size_t LX_File::write(const std::string& str)
 {
     return _fimpl->write(str);
 }
@@ -312,7 +312,7 @@ public:
         return sz;
     }
 
-    size_t write(std::string str)
+    size_t write(const std::string& str)
     {
         size_t len = str.size();
         return write((void *)str.c_str(),sizeof(char),len);
@@ -364,7 +364,7 @@ size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num)
 }
 
 
-size_t LX_TmpFile::write(std::string str)
+size_t LX_TmpFile::write(const std::string& str)
 {
     return _timpl->write(str);
 }
