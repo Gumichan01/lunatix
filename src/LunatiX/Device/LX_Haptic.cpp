@@ -110,6 +110,12 @@ void LX_Haptic::rumbleEffectPlay(float strength, uint32_t length)
 }
 
 
+bool LX_Haptic::effectSupported(SDL_HapticEffect& effect) const
+{
+    return SDL_HapticEffectSupported(_haptic,&effect) == SDL_TRUE;
+}
+
+
 int LX_Haptic::newEffect(SDL_HapticEffect& effect)
 {
     return SDL_HapticNewEffect(_haptic,&effect);
