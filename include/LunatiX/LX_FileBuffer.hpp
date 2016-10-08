@@ -49,6 +49,8 @@ namespace LX_FileIO
 class LX_File;
 class IOException;
 
+/// @todo LX_FileBuffer - private implementation
+
 /**
 *   @class LX_FileBuffer
 *   @brief The file buffer class
@@ -60,9 +62,9 @@ class LX_FileBuffer
 {
     friend class LX_Graphics::LX_Image;
     friend class LX_TrueTypeFont::LX_Font;
-    UTF8string _name;               /* The name of the file refered by the buffer */
-    std::unique_ptr<char[]> _buffer;  /* The read-only buffer                       */
-    uint64_t _bufsize;              /* The size of the buffer                     */
+    UTF8string _name;                   /* The name of the file refered by the buffer */
+    std::unique_ptr<char[]> _buffer;    /* The read-only buffer                       */
+    uint64_t _bufsize;                  /* The size of the buffer                     */
 
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
