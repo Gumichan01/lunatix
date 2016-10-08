@@ -38,7 +38,7 @@ class LX_Mouse_;
 */
 class LX_Mouse
 {
-    std::unique_ptr<LX_Mouse_> _mouse;
+    std::unique_ptr<LX_Mouse_> _mimpl;
 
 public:
 

@@ -54,24 +54,24 @@ public:
 
 
 LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
-    : _mouse(new LX_Mouse_(surface._surface,hot_x,hot_y)) {}
+    : _mimpl(new LX_Mouse_(surface._surface,hot_x,hot_y)) {}
 
 
 bool LX_Mouse::isOpen() const
 {
-    return _mouse->isOpen();
+    return _mimpl->isOpen();
 }
 
 
 void LX_Mouse::setMouse()
 {
-    _mouse->setMouse();
+    _mimpl->setMouse();
 }
 
 
 LX_Mouse::~LX_Mouse()
 {
-    _mouse.reset();
+    _mimpl.reset();
 }
 
 };
