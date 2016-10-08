@@ -50,7 +50,7 @@ class LX_Chunk_ : public virtual LX_Sound
 
 public:
 
-    LX_Chunk_(Mix_Chunk& chunk): _chunk(&chunk) {}
+    explicit LX_Chunk_(Mix_Chunk& chunk): _chunk(&chunk) {}
 
     explicit LX_Chunk_(const std::string& filename) : _chunk(nullptr)
     {

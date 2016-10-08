@@ -44,7 +44,7 @@ struct LX_Haptic_
 {
     int _instanceID;
 
-    LX_Haptic_(int i)
+    explicit LX_Haptic_(int i)
     {
         _instanceID = i;
     }
@@ -57,7 +57,7 @@ struct LX_Haptic_common
 {
     SDL_Haptic *_haptic;
 
-    LX_Haptic_common(SDL_Haptic *h)
+    explicit LX_Haptic_common(SDL_Haptic *h)
     {
         _haptic = h;
     }
