@@ -32,7 +32,6 @@ class condition_variable;
 namespace LX_Multithreading
 {
 
-/// @todo LX_Mutex - private implementation
 class LX_Mutex_;
 class LX_Cond_;
 
@@ -66,7 +65,6 @@ public:
     ~LX_Mutex();
 };
 
-/// @todo LX_Cond - private implementation
 
 /**
 *   @class LX_Cond
