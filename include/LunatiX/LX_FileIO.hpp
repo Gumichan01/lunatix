@@ -22,7 +22,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <cstdio>
+#include <memory>
 
 #define LX_FILEIO_RDONLY 0x00000001                             /**< Read only mode (r) */
 #define LX_FILEIO_WRONLY 0x00000010                             /**< Write only mode (w) */
@@ -180,19 +180,18 @@ public:
 
 /// @todo LX_File - private implementation
 
+class LX_File_;
+
 /**
 *   @class LX_File
 *   @brief The file handler
 */
 class LX_File: public virtual LX_AbstractFile
 {
-    UTF8string _name;        /* The name of the file         */
-    SDL_RWops *_data;        /* The internal file structure  */
+    std::unique_ptr<LX_File_> _fimpl;
 
     LX_File(LX_File& f);
     LX_File& operator =(LX_File& f);
-
-    void open_(const uint32_t mode);
 
 public :
 

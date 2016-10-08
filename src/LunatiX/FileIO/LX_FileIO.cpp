@@ -24,6 +24,7 @@
 #include <SDL2/SDL_rwops.h>
 
 #include <cstring>
+#include <cstdio>
 #include <cerrno>
 
 
@@ -49,133 +50,199 @@ LX_AbstractFile::~LX_AbstractFile() {}
 
 /// LX_File
 
+/* Private implementation */
+
+/**
+*   @class LX_File
+*   @brief The file handler
+*/
+class LX_File_
+{
+    UTF8string _name;        /* The name of the file         */
+    SDL_RWops *_data;        /* The internal file structure  */
+
+    void open_(const uint32_t mode)
+    {
+        std::string str = "LX_File: ";
+
+        if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
+        {
+            _data = SDL_RWFromFile(_name.utf8_str(),"wb+");
+        }
+        else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
+        {
+            _data = SDL_RWFromFile(_name.utf8_str(),"rb+");
+        }
+        else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
+        {
+            _data = SDL_RWFromFile(_name.utf8_str(),"ab+");
+        }
+        else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
+        {
+            _data = SDL_RWFromFile(_name.utf8_str(),"rb");
+        }
+        else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
+        {
+            _data = SDL_RWFromFile(_name.utf8_str(),"wb");
+        }
+        else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
+        {
+            _data = SDL_RWFromFile(_name.utf8_str(),"ab");
+        }
+        else
+            throw IOException(str + "Unrecognized mode");
+
+        if(_data == nullptr)
+            throw IOException(str + LX_GetError());
+    }
+
+public :
+
+    /*LX_File_(const std::string& filename, const uint32_t mode)
+        : LX_File(UTF8string(filename),mode) {}*/
+
+    LX_File_(const UTF8string& filename, const uint32_t mode)
+        : _name(filename), _data(nullptr) {}
+
+    size_t read(void *ptr, size_t data_size, size_t max_num)
+    {
+        return SDL_RWread(_data,ptr,data_size,max_num);
+    }
+
+    size_t readExactly(void *ptr, size_t data_size, size_t num)
+    {
+        size_t total_read = 0;
+        char * p = static_cast<char *>(ptr);
+
+        // Read at most num bytes
+        while(total_read < num)
+        {
+            size_t read_data = read(p,data_size,num);
+
+            // Did it work?
+            if(read_data == 0)
+                return 0;
+
+            // Move a the end of retrieved data
+            p += read_data;
+            total_read += read_data;
+        }
+
+        if(total_read != num)
+        {
+            return 0;
+        }
+
+        return total_read;
+    }
+
+    size_t write(void *ptr, size_t data_size, size_t num)
+    {
+        return SDL_RWwrite(_data,ptr,data_size,num);
+    }
+
+    size_t write(const std::string& str)
+    {
+        size_t len = str.size();
+        return write((void *)str.c_str(),sizeof(char),len);
+    }
+
+    int64_t seek(int64_t offset, int whence)
+    {
+        return SDL_RWseek(_data,offset,whence);
+    }
+
+    int64_t tell() const
+    {
+        return SDL_RWtell(_data);
+    }
+
+    int64_t size()
+    {
+        return SDL_RWsize(_data);
+    }
+
+    const char * getFilename() const
+    {
+        return  _name.utf8_str();
+    }
+
+    void close()
+    {
+        if(_data != nullptr)
+        {
+            SDL_RWclose(_data);
+            _data = nullptr;
+        }
+    }
+
+    ~LX_File_()
+    {
+        close();
+    }
+};
+
+/* Public interface (implementation) */
+
 LX_File::LX_File(const std::string& filename, const uint32_t mode)
     : LX_File(UTF8string(filename),mode) {}
 
 
 LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
-    : _name(filename), _data(nullptr)
-{
-    if(mode == 0x00000000)
-        throw IOException("LX_File: Invalid mode");
-
-    open_(mode);
-}
-
-void LX_File::open_(const uint32_t mode)
-{
-    std::string str = "LX_File: ";
-
-    if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
-    {
-        _data = SDL_RWFromFile(_name.utf8_str(),"wb+");
-    }
-    else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
-    {
-        _data = SDL_RWFromFile(_name.utf8_str(),"rb+");
-    }
-    else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
-    {
-        _data = SDL_RWFromFile(_name.utf8_str(),"ab+");
-    }
-    else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
-    {
-        _data = SDL_RWFromFile(_name.utf8_str(),"rb");
-    }
-    else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
-    {
-        _data = SDL_RWFromFile(_name.utf8_str(),"wb");
-    }
-    else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
-    {
-        _data = SDL_RWFromFile(_name.utf8_str(),"ab");
-    }
-    else
-        throw IOException(str + "Unrecognized mode");
-
-    if(_data == nullptr)
-        throw IOException(str + LX_GetError());
-}
+    : _fimpl(new LX_File_(filename,mode)) {}
 
 
 size_t LX_File::read(void *ptr, size_t data_size, size_t max_num)
 {
-    return SDL_RWread(_data,ptr,data_size,max_num);
+    return _fimpl->read(ptr,data_size,max_num);
 }
 
 
 size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num)
 {
-    size_t total_read = 0;
-    char * p = static_cast<char *>(ptr);
-
-    // Read at most num bytes
-    while(total_read < num)
-    {
-        size_t read_data = read(p,data_size,num);
-
-        // Did it work?
-        if(read_data == 0)
-            return 0;
-
-        // Move a the end of retrieved data
-        p += read_data;
-        total_read += read_data;
-    }
-
-    if(total_read != num)
-    {
-        return 0;
-    }
-
-    return total_read;
+    return _fimpl->readExactly(ptr,data_size,num);
 }
 
 
 size_t LX_File::write(void *ptr, size_t data_size, size_t num)
 {
-    return SDL_RWwrite(_data,ptr,data_size,num);
+    return _fimpl->write(ptr,data_size,num);
 }
 
 
 size_t LX_File::write(std::string str)
 {
-    size_t len = str.size();
-    return write((void *)str.c_str(),sizeof(char),len);
+    return _fimpl->write(str);
 }
 
 
 int64_t LX_File::seek(int64_t offset, int whence)
 {
-    return SDL_RWseek(_data,offset,whence);
+    return _fimpl->seek(offset,whence);
 }
 
 
 int64_t LX_File::tell() const
 {
-    return SDL_RWtell(_data);
+    return _fimpl->tell();
 }
 
 
 int64_t LX_File::size()
 {
-    return SDL_RWsize(_data);
-}
-
-
-void LX_File::close()
-{
-    if(_data != nullptr)
-    {
-        SDL_RWclose(_data);
-        _data = nullptr;
-    }
+    return _fimpl->size();
 }
 
 
 const char * LX_File::getFilename() const
 {
-    return  _name.utf8_str();
+    return _fimpl->getFilename();
+}
+
+
+void LX_File::close()
+{
+    _fimpl->close();
 }
 
 
