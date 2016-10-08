@@ -73,10 +73,9 @@ protected:
 
     SDL_Haptic *_haptic;
 
-public :
-
-    /// Constructor for creating a haptic device from the mouse
     LX_Haptic();
+
+public :
 
     /**
     *   @fn LX_Haptic(int index)
@@ -108,17 +107,6 @@ public :
     *
     */
     explicit LX_Haptic(SDL_GameController *gc);
-
-    /**
-    *   @fn virtual LX_Haptic& operator =(SDL_Haptic& haptic)
-    *
-    *   Set the haptic device
-    *
-    *   @param [in] haptic The SDL haptic device
-    *   @return The current instance of LX_Haptic
-    *
-    */
-    virtual LX_Haptic& operator =(SDL_Haptic& haptic);
 
     /**
     *   @fn virtual bool isOpened() const
@@ -223,6 +211,27 @@ public :
     /// Destructor
     virtual ~LX_Haptic();
 };
+
+/**
+*   @class LX_MouseHaptic
+*   @brief The mouse haptic device
+*
+*   This class describes the force feedback system related to the mouse.
+*/
+class LX_MouseHaptic: public LX_Haptic
+{
+    LX_MouseHaptic(LX_Haptic& h);
+    LX_MouseHaptic& operator =(LX_MouseHaptic& h);
+
+public:
+
+    /// Constructor
+    LX_MouseHaptic();
+    virtual bool isOpened() const;
+    /// Desstructor
+    ~LX_MouseHaptic();
+};
+
 
 };
 

@@ -38,25 +38,11 @@ bool mouseIsHaptic()
 
 LX_Haptic * getMouseHaptic()
 {
-    SDL_Haptic * sdl_hap = SDL_HapticOpenFromMouse();
-
-    if(sdl_hap == nullptr)
-        return nullptr;
-
-    LX_Haptic *hap = new LX_Haptic();
-    (*hap) = (*sdl_hap);
-
-    return hap;
+    return new LX_MouseHaptic();
 }
 
 
 LX_Haptic::LX_Haptic() : _haptic(nullptr), _instanceID(-1) {}
-
-LX_Haptic& LX_Haptic::operator =(SDL_Haptic& haptic)
-{
-    _haptic = &haptic;
-    return *this;
-}
 
 
 LX_Haptic::LX_Haptic(int index)
@@ -138,5 +124,19 @@ int LX_Haptic::numberOfEffects() const
 {
     return SDL_HapticNumEffects(_haptic);
 }
+
+/* LX_MouseHaptic */
+
+LX_MouseHaptic::LX_MouseHaptic(): LX_Haptic()
+{
+    _haptic = SDL_HapticOpenFromMouse();
+}
+
+bool LX_MouseHaptic::isOpened() const
+{
+    return _haptic != nullptr;
+}
+
+LX_MouseHaptic::~LX_MouseHaptic() {}
 
 };
