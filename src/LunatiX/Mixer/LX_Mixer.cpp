@@ -23,6 +23,7 @@
 #include <LunatiX/LX_Music.hpp>
 #include <LunatiX/LX_Chunk.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <SDL2/SDL_mixer.h>
 
 using namespace LX_FileIO;
 
