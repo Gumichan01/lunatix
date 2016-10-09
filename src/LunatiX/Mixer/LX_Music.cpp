@@ -70,7 +70,7 @@ protected:
 
 public:
 
-    LX_Music_(const std::string& filename)
+    explicit LX_Music_(const std::string& filename)
         : _music(nullptr), _filename(filename)
     {
         if(load_(filename) == false)
