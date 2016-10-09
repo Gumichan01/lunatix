@@ -20,7 +20,10 @@
 */
 
 #include <LunatiX/LX_Music.hpp>
+#include <LunatiX/LX_Sound.hpp>
+#include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <SDL2/SDL_mixer.h>
 
 
 namespace LX_Mixer
@@ -39,99 +42,161 @@ const char * LX_MusicException::what() const noexcept
 LX_MusicException::~LX_MusicException() noexcept {}
 
 
-/* LX_Music */
+/* LX_music: private implementation */
 
-LX_Music::LX_Music(const std::string& filename)
-    : _music(nullptr), _filename(filename)
+class LX_Music_ : public virtual LX_Sound
 {
-    if(load_(filename) == false)
-        throw LX_MusicException(LX_GetError());
-}
+    Mix_Music *_music;
+    libtagpp::Tag _tag;
+    std::string _filename;
+
+protected:
+
+    bool load_(const std::string& filename)
+    {
+        return load_(UTF8string(filename));
+    }
+
+    bool load_(const UTF8string& filename)
+    {
+        Mix_FreeMusic(_music);
+        _music = Mix_LoadMUS(filename.utf8_str());
+
+        if(_music == nullptr)
+            return false;
+
+        return true;
+    }
+
+public:
+
+    LX_Music_(const std::string& filename)
+        : _music(nullptr), _filename(filename)
+    {
+        if(load_(filename) == false)
+            throw LX_MusicException(LX_GetError());
+    }
+
+    explicit LX_Music_(const UTF8string& filename)
+        : _music(nullptr), _filename(filename.utf8_str())
+    {
+        if(load_(filename) == false)
+            throw LX_MusicException(LX_GetError());
+    }
+
+    void fadeIn(int ms)
+    {
+        Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
+    }
+
+    void fadeInPos(int ms,int pos)
+    {
+        Mix_FadeInMusicPos(_music,LX_MIXER_NOLOOP,ms,pos);
+    }
+
+    void fadeOut(int ms)
+    {
+        Mix_FadeOutMusic(ms);
+    }
+
+    bool play()
+    {
+        return play(LX_MIXER_NOLOOP);
+    }
+
+    bool play(int loops)
+    {
+        return Mix_PlayMusic(_music,loops) == 0;
+    }
+
+    void pause()
+    {
+        if(Mix_PausedMusic())
+            Mix_ResumeMusic();
+        else
+            Mix_PauseMusic();
+    }
 
 
-LX_Music::LX_Music(const UTF8string& filename)
-    : _music(nullptr), _filename(filename.utf8_str())
-{
-    if(load_(filename) == false)
-        throw LX_MusicException(LX_GetError());
-}
+    void stop()
+    {
+        if(Mix_PlayingMusic())
+            Mix_HaltMusic();
+    }
 
+    const libtagpp::Tag& getInfo()
+    {
+        if(!_tag.readTag(_filename))
+            LX_SetError("Cannot get metadata");
 
-bool LX_Music::load_(const std::string& filename)
-{
-    return load_(UTF8string(filename));
-}
+        return _tag;
+    }
 
-bool LX_Music::load_(const UTF8string& filename)
-{
-    Mix_FreeMusic(_music);
-    _music = Mix_LoadMUS(filename.utf8_str());
+    ~LX_Music_()
+    {
+        stop();
+        Mix_FreeMusic(_music);
+    }
+};
 
-    if(_music == nullptr)
-        return false;
+/* LX_Music: public functions */
 
-    return true;
-}
+LX_Music::LX_Music(const std::string& filename) : _mimpl(new LX_Music_(filename)) {}
+
+LX_Music::LX_Music(const UTF8string& filename) : _mimpl(new LX_Music_(filename)) {}
 
 
 void LX_Music::fadeIn(int ms)
 {
-    Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
+    _mimpl->fadeIn(ms);
 }
 
 
 void LX_Music::fadeInPos(int ms,int pos)
 {
-    Mix_FadeInMusicPos(_music,LX_MIXER_NOLOOP,ms,pos);
+    _mimpl->fadeInPos(ms,pos);
 }
 
 
 void LX_Music::fadeOut(int ms)
 {
-    Mix_FadeOutMusic(ms);
+    _mimpl->fadeOut(ms);
 }
 
 
 bool LX_Music::play()
 {
-    return play(LX_MIXER_NOLOOP);
+    return _mimpl->play();
 }
 
 
 bool LX_Music::play(int loops)
 {
-    return Mix_PlayMusic(_music,loops) == 0;
+    return _mimpl->play(loops);
 }
 
 
 void LX_Music::pause()
 {
-    if(Mix_PausedMusic())
-        Mix_ResumeMusic();
-    else
-        Mix_PauseMusic();
+    return _mimpl->pause();
 }
 
 
 void LX_Music::stop()
 {
-    if(Mix_PlayingMusic())
-        Mix_HaltMusic();
+    _mimpl->stop();
 }
 
 
 const libtagpp::Tag& LX_Music::getInfo()
 {
-    if(!_tag.readTag(_filename))
-        LX_SetError("Cannot get metadata");
-
-    return _tag;
+    return _mimpl->getInfo();
 }
 
 
 LX_Music::~LX_Music()
 {
-    Mix_FreeMusic(_music);
+    _mimpl.reset();
 }
 
 };

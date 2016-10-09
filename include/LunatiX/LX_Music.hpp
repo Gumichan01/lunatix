@@ -21,11 +21,14 @@
 *
 */
 
-#include "LX_Sound.hpp"
+#include <LunatiX/utils/utf8_string.hpp>
+#include <memory>
 
-#include <LunatiX/utils/libtagspp/libtagspp.hpp>
-#include <SDL2/SDL_mixer.h>
 
+namespace libtagpp
+{
+class Tag;
+};
 
 namespace LX_Mixer
 {
@@ -53,25 +56,19 @@ public :
     ~LX_MusicException() noexcept;
 };
 
-/// @todo LX_Music - private implementation
+
+class LX_Music_;
 
 /**
 *   @class LX_Music
 *   @brief The music class
 */
-class LX_Music : public virtual LX_Sound
+class LX_Music
 {
-    Mix_Music *_music;
-    libtagpp::Tag _tag;
-    std::string _filename;
+    std::unique_ptr<LX_Music_> _mimpl;
 
     LX_Music(LX_Music& m);
     LX_Music& operator =(LX_Music& m);
-
-protected:
-
-    bool load_(const std::string& filename);
-    bool load_(const UTF8string& filename);
 
 public:
 
