@@ -70,6 +70,7 @@
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Text.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/utils/libtagspp/libtagspp.hpp>
 
 
 
