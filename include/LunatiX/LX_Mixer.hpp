@@ -117,59 +117,8 @@ unsigned short getMusicVolume();
 */
 unsigned short getFXVolume();
 
+
 /* == Music and chunk == */
-
-/**
-*   @fn LX_Music * loadMusic(std::string filename)
-*
-*   Load the music according to the file name
-*
-*   @param [in] filename The name of the music file
-*
-*   @return A valid instance of LX_Music
-*   @note This function creates a new instance of LX_Music.
-*           So do not forget to destroy it.
-*/
-LX_Music * loadMusic(std::string filename);
-
-/**
-*   @fn LX_Music * loadMusic(UTF8string& filename)
-*
-*   Load the music according to the file name
-*
-*   @param [in] filename The name of the music file (utf-8)
-*
-*   @return A valid instance of LX_Music
-*   @note This function creates a new instance of LX_Music.
-*           So do not forget to destroy it.
-*/
-LX_Music * loadMusic(UTF8string& filename);
-
-/**
-*   @fn LX_Chunk * loadSample(std::string filename)
-*
-*   Create a new LX_Chunk instance from a WAV file
-*
-*   @param [in] filename The name of the sample file
-*
-*   @return A valid instance of LX_Chunk
-*   @note This function creates a new instance of LX_Chunk.
-*           So do not forget to destroy it.
-*/
-LX_Chunk * loadSample(std::string filename);
-
-/**
-*   @fn LX_Chunk * loadSample(UTF8string& filename)
-*
-*   Create a new LX_Chunk instance from a WAV file
-*
-*   @param [in] filename The name of the sample file
-*
-*   @return A valid instance of LX_Chunk
-*   @note This function creates a new instance of LX_Chunk.
-*           So do not forget to destroy it.
-*/
-LX_Chunk * loadSample(UTF8string& filename);
 
 /**
 *   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)

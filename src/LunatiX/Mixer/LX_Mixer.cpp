@@ -101,29 +101,6 @@ unsigned short getFXVolume()
 }
 
 
-LX_Music * loadMusic(std::string filename)
-{
-    return new LX_Music(filename);
-}
-
-
-LX_Music * loadMusic(UTF8string& filename)
-{
-    return new LX_Music(filename);
-}
-
-
-LX_Chunk * loadSample(std::string filename)
-{
-    return new LX_Chunk(filename);
-}
-
-LX_Chunk * loadSample(UTF8string& filename)
-{
-    return new LX_Chunk(filename);
-}
-
-
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)
 {
     return file.loadSample();
