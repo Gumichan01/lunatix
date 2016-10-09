@@ -1,6 +1,7 @@
 
-
 #include <LunatiX/Lunatix.hpp>
+#include <SDL2/SDL_mixer.h>
+
 #include <iostream>
 #include <string>
 
@@ -172,7 +173,7 @@ void test_music()
 
     try
     {
-        music = LX_Mixer::loadMusic(s);
+        music = new LX_Mixer::LX_Music(s);
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music launched");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play music");
 
@@ -211,7 +212,7 @@ void test_music()
 
     try
     {
-        music = LX_Mixer::loadMusic("");
+        music = new LX_Mixer::LX_Music("");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music launched, it should not");
         delete music;
     }
@@ -235,7 +236,7 @@ void test_chunk()
 
     try
     {
-        chunk = LX_Mixer::loadSample(s);
+        chunk = new LX_Mixer::LX_Chunk(s);
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - chunk launched");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play chunk with no loop on any channel");
 
@@ -277,7 +278,7 @@ void test_chunk()
 
     try
     {
-        chunk = LX_Mixer::loadSample("");
+        chunk = new LX_Mixer::LX_Chunk("");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - chunk launched, it should not");
         delete chunk;
     }
