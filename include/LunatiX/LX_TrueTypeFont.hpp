@@ -25,9 +25,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 
-#define LX_TTF_DEFAULT_FONT_SIZE 24     /**< The default value of the font size */
-#define LX_WHITE_COLOR 255              /**< The white color value */
-#define LX_BLACK_COLOR 0                /**< The black color value */
+const unsigned int LX_TTF_DEFAULT_FONT_SIZE = 24;   /**< The default value of the font size */
+const uint8_t LX_WHITE_COLOR = 255;                 /**< The white color value              */
+const uint8_t LX_BLACK_COLOR = 0;                   /**< The black color value              */
 
 struct SDL_Surface;
 struct SDL_Texture;

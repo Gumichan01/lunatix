@@ -24,11 +24,11 @@
 #include <SDL2/SDL_mouse.h>
 #include <sstream>
 
-const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
-
 
 namespace LX_Device
 {
+
+const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
 
 int numberOfDevices()
 {

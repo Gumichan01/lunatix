@@ -21,8 +21,8 @@
 
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
-
 #include <LunatiX/LX_Chunk.hpp>
+
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <new>

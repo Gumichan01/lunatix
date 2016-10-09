@@ -1,5 +1,5 @@
-#ifndef LX_LUA_LAYER_H_INCLUDED
-#define LX_LUA_LAYER_H_INCLUDED
+#ifndef LX_CONFIG_H_INCLUDED
+#define LX_CONFIG_H_INCLUDED
 
 
 /*
@@ -193,4 +193,4 @@ public :
 };
 
 };
-#endif // LX_LUA_LAYER_H_INCLUDED
+#endif // LX_CONFIG_H_INCLUDED

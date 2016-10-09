@@ -19,6 +19,7 @@
 */
 
 #include <LunatiX/LX_MessageBox.hpp>
+#include <SDL2/SDL_messagebox.h>
 
 
 namespace LX_MSGBox

@@ -31,6 +31,8 @@ using namespace LX_Random;
 namespace LX_ParticleEngine
 {
 
+const int DELAY = 16;
+
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b)
     : LX_Particle(sp,b,0.0f,0.0f) {}
 

@@ -31,16 +31,16 @@
 #include <stdexcept>
 #include <cstring>
 
-#ifdef __WIN32__
-#define LX_SEP '\\'
-#else
-#define LX_SEP '/'
-#endif // __WIN32__
-
 #define __FILENAME__ (strrchr(__FILE__, LX_SEP) ? strrchr(__FILE__, LX_SEP) + 1 : __FILE__)
 
 namespace LX_Device
 {
+
+#ifdef __WIN32__
+const char LX_SEP = '\\';
+#else
+const char LX_SEP = '/';
+#endif // __WIN32__
 
 class LX_Gamepad_
 {

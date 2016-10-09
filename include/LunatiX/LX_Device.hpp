@@ -25,9 +25,9 @@
 #include <SDL2/SDL_gamecontroller.h>
 #include <SDL2/SDL_keyboard.h>
 
-#define LX_MOUSE_SHOW SDL_ENABLE        /**< Enable the mouse display   */
-#define LX_MOUSE_HIDE SDL_DISABLE       /**< Disable the mouse display  */
-#define LX_MOUSE_QUERY SDL_QUERY        /**< Get the mouse status       */
+const short LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
+const short LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
+const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 
 
 /**

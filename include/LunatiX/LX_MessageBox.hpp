@@ -22,11 +22,11 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_messagebox.h>
 
-#define LX_MSG_ERR  SDL_MESSAGEBOX_ERROR        /**< Error message          */
-#define LX_MSG_WARN SDL_MESSAGEBOX_WARNING      /**< Warning message        */
-#define LX_MSG_INFO SDL_MESSAGEBOX_INFORMATION  /**< Information message    */
+
+const uint32_t LX_MSG_ERR  = 0x00000010;    /**< Error message          */
+const uint32_t LX_MSG_WARN = 0x00000020;    /**< Warning message        */
+const uint32_t LX_MSG_INFO = 0x00000040;    /**< Information message    */
 
 
 /**

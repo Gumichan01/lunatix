@@ -24,16 +24,16 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <memory>
 
-#define LX_FILEIO_RDONLY 0x00000001                             /**< Read only mode (r) */
-#define LX_FILEIO_WRONLY 0x00000010                             /**< Write only mode (w) */
-#define LX_FILEIO_APPEND 0x00000100                             /**< Append mode (a) */
-#define LX_FILEIO_RDWR   (LX_FILEIO_RDONLY|LX_FILEIO_WRONLY)    /**< Read/Write mode (r+) */
-#define LX_FILEIO_RDAP   (LX_FILEIO_RDONLY|LX_FILEIO_APPEND)    /**< Read/Append mode (a+) */
-#define LX_FILEIO_WRTR   (0x00001000|LX_FILEIO_RDWR)            /**< Write but can read mode (w+) */
+const uint32_t LX_FILEIO_RDONLY = 0x00000001;                           /**< Read only mode (r)     */
+const uint32_t LX_FILEIO_WRONLY = 0x00000010;                           /**< Write only mode (w)    */
+const uint32_t LX_FILEIO_APPEND = 0x00000100;                           /**< Append mode (a)        */
+const uint32_t LX_FILEIO_RDWR   = (LX_FILEIO_RDONLY|LX_FILEIO_WRONLY);  /**< Read/Write mode (r+)   */
+const uint32_t LX_FILEIO_RDAP   = (LX_FILEIO_RDONLY|LX_FILEIO_APPEND);  /**< Read/Append mode (a+)  */
+const uint32_t LX_FILEIO_WRTR   = (0x00001000|LX_FILEIO_RDWR);          /**< Write but can read mode (w+) */
 
-#define LX_SEEK_SET      RW_SEEK_SET                            /**< Beginning of data */
-#define LX_SEEK_CUR      RW_SEEK_CUR                            /**< The current read point */
-#define LX_SEEK_END      RW_SEEK_END                            /**< The end of data */
+const uint32_t LX_SEEK_SET = 0;     /**< Beginning of data      */
+const uint32_t LX_SEEK_CUR = 1;     /**< The current read point */
+const uint32_t LX_SEEK_END = 2;     /**< The end of data        */
 
 
 struct SDL_Surface;

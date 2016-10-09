@@ -50,18 +50,17 @@ struct LX_Vector2D;
 };
 
 
-// Fullscreen modes
-#define LX_GRAPHICS_FULLSCREEN_DESKTOP SDL_WINDOW_FULLSCREEN_DESKTOP    /**< Fullscreen with the current desktop size   */
-#define LX_GRAPHICS_FULLSCREEN SDL_WINDOW_FULLSCREEN                    /**< Fullscreen mode with original resolution   */
-#define LX_GRAPHICS_NO_FULLSCREEN 0                                     /**< Original resolution in window              */
-
-
 /**
 *   @namespace LX_Win
 *   @brief The window module
 */
 namespace LX_Win
 {
+
+// Fullscreen modes
+const uint32_t LX_GRAPHICS_FULLSCREEN_DESKTOP = SDL_WINDOW_FULLSCREEN_DESKTOP;  /**< Fullscreen with the current desktop size   */
+const uint32_t LX_GRAPHICS_FULLSCREEN = SDL_WINDOW_FULLSCREEN;                  /**< Fullscreen mode with original resolution   */
+const uint32_t LX_GRAPHICS_NO_FULLSCREEN = 0;                                   /**< Original resolution in window              */
 
 /**
 *   @struct LX_WindowInfo

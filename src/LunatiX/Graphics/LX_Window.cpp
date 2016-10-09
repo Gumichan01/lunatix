@@ -28,11 +28,13 @@
 
 #include <GL/glu.h>
 
-#define LX_ARGB_DEPTH 32                            /* Pixel depth (in bits) */
-#define LX_PIXEL_FORMAT SDL_PIXELFORMAT_RGBA8888    /* Pixel format          */
 
 namespace
 {
+
+const int LX_ARGB_DEPTH = 32;                               /* Pixel depth (in bits) */
+const uint32_t LX_PIXEL_FORMAT = SDL_PIXELFORMAT_RGBA8888;  /* Pixel format          */
+
 const char * DEFAULT_TITLE = "LunatiX v0.8";
 const int DEFAULT_WIN_WIDTH = 640;
 const int DEFAULT_WIN_HEIGHT = 480;

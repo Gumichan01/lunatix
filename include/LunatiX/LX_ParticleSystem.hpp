@@ -35,6 +35,7 @@ namespace LX_ParticleEngine
 
 class LX_Particle;
 
+/// @todo LX_ParticleSystem - private implementation
 
 /**
 *   @class LX_ParticleSystem

@@ -24,8 +24,6 @@
 #include <LunatiX/LX_AABB.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 
-#define DELAY 16        /**< The delay of the particle to stay alive */
-
 
 namespace LX_FileIO
 {
@@ -40,6 +38,8 @@ class LX_Sprite;
 
 namespace LX_ParticleEngine
 {
+
+/// @todo LX_Particle - private implementation
 
 /**
 *   @class LX_Particle
