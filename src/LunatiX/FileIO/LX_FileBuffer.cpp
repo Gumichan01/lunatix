@@ -75,21 +75,21 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
 SDL_Surface * LX_FileBuffer::getSurfaceFromBuffer_() const
 {
     SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(), static_cast<int>(_bufsize));
-    return (rw == nullptr) ? nullptr:IMG_Load_RW(rw,1);
+    return (rw == nullptr) ? nullptr : IMG_Load_RW(rw,1);
 }
 
 // Private function
 TTF_Font * LX_FileBuffer::getFontFromBuffer_(int size) const
 {
     SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
-    return (rw == nullptr) ? nullptr:TTF_OpenFontRW(rw,1,size);
+    return (rw == nullptr) ? nullptr : TTF_OpenFontRW(rw,1,size);
 }
 
 // Private function
 Mix_Chunk * LX_FileBuffer::getChunkFromBuffer_() const
 {
     SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
-    return (rw == nullptr) ? nullptr:Mix_LoadWAV_RW(rw,1);
+    return (rw == nullptr) ? nullptr : Mix_LoadWAV_RW(rw,1);
 }
 
 
@@ -100,8 +100,7 @@ LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
     if(ch == nullptr)
         return nullptr;
 
-    LX_Mixer::LX_Chunk *lxchunk = new LX_Mixer::LX_Chunk(*ch);
-    return lxchunk;
+    return new LX_Mixer::LX_Chunk(*ch);
 }
 
 
