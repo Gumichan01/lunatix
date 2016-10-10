@@ -282,7 +282,7 @@ LX_Haptic * LX_Gamepad::getHaptic() const
 
 const char * LX_Gamepad::getName() const
 {
-    _gpimpl->getName();
+    return _gpimpl->getName();
 }
 
 
