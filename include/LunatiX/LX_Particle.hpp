@@ -44,8 +44,6 @@ class LX_Vector2D;
 namespace LX_ParticleEngine
 {
 
-/// @todo (#1#) LX_Particle - private implementation
-
 class LX_Particle_;
 
 /**
@@ -133,7 +131,7 @@ public :
     unsigned int getDelay() const;
 
     /// Destructor
-    ~LX_Particle() = default;
+    ~LX_Particle();
 };
 
 };

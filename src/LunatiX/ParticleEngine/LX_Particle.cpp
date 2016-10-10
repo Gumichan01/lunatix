@@ -89,6 +89,11 @@ LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
     : _pimpl(new LX_Particle_(sp,b,v)) {}
 
 
+LX_Particle::~LX_Particle()
+{
+    _pimpl.reset();
+}
+
 void LX_Particle::update()
 {
     _pimpl->update();
