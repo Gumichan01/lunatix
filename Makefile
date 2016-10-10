@@ -216,7 +216,7 @@ test-audio test-window test-ttf test-particle test-ime test-thread
 
 # Test (object files + executable)
 test-init: $(TEST_PATH)test-init.o $(OBJ_FILES)
-	$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 test-config: $(TEST_PATH)test-config.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
