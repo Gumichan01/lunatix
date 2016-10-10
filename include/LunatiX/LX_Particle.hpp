@@ -22,7 +22,8 @@
 */
 
 #include <LunatiX/LX_AABB.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
+
+#include <memory>
 
 
 namespace LX_FileIO
@@ -35,11 +36,17 @@ namespace LX_Graphics
 class LX_Sprite;
 }
 
+namespace LX_Physics
+{
+class LX_Vector2D;
+};
 
 namespace LX_ParticleEngine
 {
 
 /// @todo (#1#) LX_Particle - private implementation
+
+class LX_Particle_;
 
 /**
 *   @class LX_Particle
@@ -47,10 +54,7 @@ namespace LX_ParticleEngine
 */
 class LX_Particle
 {
-    LX_AABB _box;                       /* The box of the particle                 */
-    unsigned int _lifetime;             /* The delay to stay displayable           */
-    LX_Physics::LX_Vector2D _velocity;  /* The velocity of the particle            */
-    LX_Graphics::LX_Sprite& _texture;   /* The texture (for the texture rendering) */
+    std::unique_ptr<LX_Particle_> _pimpl;
 
     LX_Particle(LX_Particle& p);
     LX_Particle& operator =(LX_Particle& p);
