@@ -387,10 +387,7 @@ void LX_TmpFile::close()
 }
 
 
-LX_TmpFile::~LX_TmpFile()
-{
-    close();
-}
+LX_TmpFile::~LX_TmpFile() {}
 
 /// Stream
 
