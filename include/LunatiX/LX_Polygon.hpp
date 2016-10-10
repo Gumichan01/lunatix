@@ -57,7 +57,7 @@ public :
     ~LX_PolygonException() noexcept;
 };
 
-/// @todo LX_Polygon - private implementation
+/// @todo (#3#) LX_Polygon - private implementation
 
 /**
 *    @class LX_Polygon

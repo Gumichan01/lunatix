@@ -39,7 +39,7 @@ class LX_Sprite;
 namespace LX_ParticleEngine
 {
 
-/// @todo LX_Particle - private implementation
+/// @todo (#1#) LX_Particle - private implementation
 
 /**
 *   @class LX_Particle

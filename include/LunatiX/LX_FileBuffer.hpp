@@ -49,7 +49,7 @@ namespace LX_FileIO
 class LX_File;
 class IOException;
 
-/// @todo LX_FileBuffer - private implementation
+/// @todo (#1#) LX_FileBuffer - private implementation
 
 /**
 *   @class LX_FileBuffer
