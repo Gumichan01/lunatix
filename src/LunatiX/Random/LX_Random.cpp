@@ -11,10 +11,11 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-#include <ctime>
-#include <cstdlib>
-#include <cinttypes>
 #include <LunatiX/LX_Random.hpp>
+#include <cinttypes>
+#include <cstdlib>
+#include <ctime>
+
 
 // If UINT64_C was defined, we undefine it
 #ifdef UINT64_C

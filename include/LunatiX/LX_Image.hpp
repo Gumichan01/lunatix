@@ -23,6 +23,7 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_AABB.hpp>
 #include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_rect.h>
 #include <vector>
 
 struct SDL_Surface;

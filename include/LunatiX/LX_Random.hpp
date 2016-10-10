@@ -22,6 +22,7 @@
 *
 */
 
+#include <cstdint>
 
 /**
 *    @namespace LX_Random

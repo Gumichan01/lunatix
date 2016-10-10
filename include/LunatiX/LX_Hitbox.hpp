@@ -22,6 +22,7 @@
 */
 
 #include <LunatiX/LX_AABB.hpp>
+#include <SDL2/SDL_rect.h>
 
 namespace LX_Physics
 {

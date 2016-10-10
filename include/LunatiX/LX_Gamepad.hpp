@@ -22,7 +22,6 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-
 #include <memory>
 
 namespace LX_Device

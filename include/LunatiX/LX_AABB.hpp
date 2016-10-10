@@ -21,9 +21,8 @@
 *
 */
 
-#include <SDL2/SDL_rect.h>
-
-// LX_AABB is just an alias og
+// LX_AABB is just an alias of SDL_Rect
+struct SDL_Rect;
 using LX_AABB = SDL_Rect;
 
 #endif  /* LX_AABB_H_INCLUDED */
