@@ -381,11 +381,8 @@ int64_t LX_TmpFile::tell() const
     return _timpl->tell();
 }
 
-void LX_TmpFile::close()
-{
-    _timpl->close();
-}
-
+// private
+void LX_TmpFile::close() {}
 
 LX_TmpFile::~LX_TmpFile() {}
 

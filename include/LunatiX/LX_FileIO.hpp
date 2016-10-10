@@ -281,6 +281,7 @@ class LX_TmpFile: public virtual LX_AbstractFile
 
     LX_TmpFile(const LX_TmpFile&);
     LX_TmpFile& operator =(const LX_TmpFile&);
+    virtual void close();
 
 public:
 
@@ -295,7 +296,6 @@ public:
 
     virtual int64_t seek(int64_t offset, int whence);
     virtual int64_t tell() const;
-    virtual void close();
 
     /// Destructor
     virtual ~LX_TmpFile();
