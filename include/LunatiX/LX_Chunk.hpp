@@ -27,7 +27,7 @@ struct Mix_Chunk;
 
 namespace LX_FileIO
 {
-class LX_FileBuffer;
+class LX_FileBuffer_;
 };
 
 
@@ -65,7 +65,7 @@ class LX_Chunk_;
 */
 class LX_Chunk
 {
-    friend class LX_FileIO::LX_FileBuffer;
+    friend class LX_FileIO::LX_FileBuffer_;
     std::unique_ptr<LX_Chunk_> _chkimpl;
 
     LX_Chunk(Mix_Chunk& chunk);

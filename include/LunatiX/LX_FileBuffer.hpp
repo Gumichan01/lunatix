@@ -22,11 +22,8 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_ttf.h>
 #include <memory>
 
-struct SDL_Surface;
-struct Mix_Chunk;
 
 namespace LX_Mixer
 {
@@ -49,7 +46,8 @@ namespace LX_FileIO
 class LX_File;
 class IOException;
 
-/// @todo (#1#) LX_FileBuffer - private implementation
+
+class LX_FileBuffer_;
 
 /**
 *   @class LX_FileBuffer
@@ -62,16 +60,14 @@ class LX_FileBuffer
 {
     friend class LX_Graphics::LX_Image;
     friend class LX_TrueTypeFont::LX_Font;
-    UTF8string _name;                   /* The name of the file refered by the buffer */
-    std::unique_ptr<char[]> _buffer;    /* The read-only buffer                       */
-    uint64_t _bufsize;                  /* The size of the buffer                     */
+    std::unique_ptr<LX_FileBuffer_> _bimpl;
 
     LX_FileBuffer(LX_FileBuffer& fb);
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
-    Mix_Chunk * getChunkFromBuffer_() const;
-    SDL_Surface * getSurfaceFromBuffer_() const;
-    TTF_Font * getFontFromBuffer_(int size) const;
+    // private function
+    void * getSurfaceFromBuffer_() const;
+    void * getFontFromBuffer_(int size) const;
 
 public :
 
