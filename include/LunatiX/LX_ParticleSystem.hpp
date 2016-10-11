@@ -26,9 +26,6 @@
 /**
 *   @namespace LX_ParticleEngine
 *   @brief The particle engine
-*
-*   This namespace describes the particle engine
-*
 */
 namespace LX_ParticleEngine
 {
@@ -85,19 +82,6 @@ public:
     *
     */
     bool addParticle(LX_Particle *p);
-
-    /**
-    *   @fn bool rmParticle(unsigned int index)
-    *
-    *   Destroy a particle from the particle system according to its index
-    *
-    *   @param [in] index the index of the particle in the list
-    *
-    *   @return TRUE if the system found the particle and destroyed it.
-    *           FALSE if the index is invalid
-    *
-    */
-    bool rmParticle(unsigned int index);
 
     /**
     *   @fn void updateParticles()

@@ -182,12 +182,6 @@ bool LX_ParticleSystem::addParticle(LX_Particle *p)
 }
 
 
-bool LX_ParticleSystem::rmParticle(unsigned int index)
-{
-    return _psimpl->rmParticle(index);
-}
-
-
 void LX_ParticleSystem::updateParticles()
 {
     _psimpl->updateParticles();
