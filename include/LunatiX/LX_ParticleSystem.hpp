@@ -34,8 +34,7 @@ namespace LX_ParticleEngine
 {
 
 class LX_Particle;
-
-/// @todo (#2#) LX_ParticleSystem - private implementation
+class LX_ParticleSystem_;
 
 /**
 *   @class LX_ParticleSystem
@@ -43,17 +42,10 @@ class LX_Particle;
 */
 class LX_ParticleSystem
 {
-    // Array of particles (in the heap)
-    std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
-    // The number of particles
-    unsigned int _nb_particles;
-    // The id of the window to put particles
-    unsigned int _idwin;
+    std::unique_ptr<LX_ParticleSystem_> _psimpl;
 
     LX_ParticleSystem(LX_ParticleSystem& ps);
     LX_ParticleSystem& operator =(LX_ParticleSystem& ps);
-
-    void allocateParticles_(unsigned int nbPart);
 
 public:
 
