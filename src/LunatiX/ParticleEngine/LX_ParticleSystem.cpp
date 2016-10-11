@@ -38,7 +38,7 @@ class LX_ParticleSystem_
     // Array of particles
     std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
     // The number of particles
-    unsigned int _nb_particles;
+    const unsigned int _nb_particles;
     // The id of the window to put particles
     unsigned int _idwin;
 
@@ -48,9 +48,9 @@ class LX_ParticleSystem_
     *   This function is automatically called by
     *   the constructor of the particle system
     */
-    inline void allocateParticles_(unsigned int nbPart)
+    inline void allocateParticles_()
     {
-        _particles.reset(new (std::nothrow) std::unique_ptr<LX_Particle>[nbPart]);
+        _particles.reset(new (std::nothrow) std::unique_ptr<LX_Particle>[_nb_particles]);
 
         if(_particles == nullptr)
         {
@@ -65,18 +65,17 @@ public:
     explicit LX_ParticleSystem_(const unsigned int nbPart,const unsigned int id)
         : _particles(nullptr), _nb_particles(nbPart), _idwin(id)
     {
-        allocateParticles_(_nb_particles);
+        allocateParticles_();
     }
 
     bool addParticle(LX_Particle *p)
     {
         bool done = false;
-        const unsigned int n = _nb_particles;
 
         if(p == nullptr)
             return false;
 
-        for(unsigned int i = 0; i < n; i++)
+        for(unsigned int i = 0; i < _nb_particles; i++)
         {
             if(_particles[i] == nullptr)
             {
@@ -100,9 +99,7 @@ public:
 
     void updateParticles()
     {
-        const unsigned int n = _nb_particles;
-
-        for(unsigned int i = 0; i < n; i++)
+        for(unsigned int i = 0; i < _nb_particles; i++)
         {
             if(_particles[i] != nullptr)
             {
@@ -116,9 +113,7 @@ public:
 
     void displayParticles()
     {
-        const unsigned int N = _nb_particles;
-
-        for(unsigned int i = 0; i < N; i++) /// Refactor the foreach
+        for(unsigned int i = 0; i < _nb_particles; i++)
         {
             if(_particles[i] != nullptr)
             {
@@ -131,10 +126,9 @@ public:
 
     unsigned int nbEmptyParticles() const
     {
-        const unsigned int n = _nb_particles;
         unsigned int nb = 0;
 
-        for(unsigned int i = 0; i < n; i++)
+        for(unsigned int i = 0; i < _nb_particles; i++)
         {
             if(_particles[i] == nullptr)
                 nb++;
@@ -155,9 +149,7 @@ public:
 
     ~LX_ParticleSystem_()
     {
-        const unsigned int n = _nb_particles;
-
-        for(unsigned int i = 0; i < n; i++) /// Refactor the foreach
+        for(unsigned int i = 0; i < _nb_particles; i++)
         {
             _particles[i].reset();
         }
