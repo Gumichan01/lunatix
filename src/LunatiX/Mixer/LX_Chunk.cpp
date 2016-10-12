@@ -20,7 +20,6 @@
 */
 
 #include <LunatiX/LX_Chunk.hpp>
-#include <LunatiX/LX_Sound.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Error.hpp>
 
@@ -44,7 +43,7 @@ LX_ChunkException::~LX_ChunkException() noexcept {}
 
 /* LX_Chunk (private implementation) */
 
-class LX_Chunk_ : public virtual LX_Sound
+class LX_Chunk_
 {
     Mix_Chunk *_chunk;
 
@@ -58,17 +57,17 @@ public:
             throw LX_ChunkException(LX_GetError());
     }
 
-    explicit LX_Chunk_(UTF8string& filename) : _chunk(nullptr)
+    explicit LX_Chunk_(const UTF8string& filename) : _chunk(nullptr)
     {
-        if(load_(filename.utf8_str()) == false)
+        if(load_(filename) == false)
             throw LX_ChunkException(LX_GetError());
     }
 
 
-    bool load_(const std::string& filename)
+    bool load_(const UTF8string& filename)
     {
         Mix_FreeChunk(_chunk);
-        _chunk = Mix_LoadWAV(filename.c_str());
+        _chunk = Mix_LoadWAV(filename.utf8_str());
         return _chunk != nullptr;
     }
 
@@ -105,7 +104,7 @@ LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
 
 LX_Chunk::LX_Chunk(const std::string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
-LX_Chunk::LX_Chunk(UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 
 bool LX_Chunk::play()

@@ -20,7 +20,6 @@
 */
 
 #include <LunatiX/LX_Music.hpp>
-#include <LunatiX/LX_Sound.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <LunatiX/LX_Error.hpp>
 #include <SDL2/SDL_mixer.h>
@@ -44,18 +43,13 @@ LX_MusicException::~LX_MusicException() noexcept {}
 
 /* LX_music: private implementation */
 
-class LX_Music_ : public virtual LX_Sound
+class LX_Music_
 {
     Mix_Music *_music;
     libtagpp::Tag _tag;
     std::string _filename;
 
 protected:
-
-    bool load_(const std::string& filename)
-    {
-        return load_(UTF8string(filename));
-    }
 
     bool load_(const UTF8string& filename)
     {

@@ -19,6 +19,8 @@
 *    @version 0.8
 *
 */
+
+#include <LunatiX/LX_Sound.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
 #include <memory>
 
@@ -63,7 +65,7 @@ class LX_Chunk_;
 *   @class LX_Chunk
 *   @brief The chunk class
 */
-class LX_Chunk
+class LX_Chunk : public virtual LX_Sound
 {
     friend class LX_FileIO::LX_FileBuffer_;
     std::unique_ptr<LX_Chunk_> _chkimpl;
@@ -91,7 +93,7 @@ public:
     explicit LX_Chunk(const std::string& filename);
 
     /**
-    *   @fn LX_Chunk(UTF8string& filename)
+    *   @fn LX_Chunk(const UTF8string& filename)
     *   @brief Constructor
     *
     *   Create the instance loading a chunk file
@@ -103,7 +105,7 @@ public:
     *           an other file type.
     *   @exception LX_ChunkException if the chunk cannot be created from the file
     */
-    explicit LX_Chunk(UTF8string& filename);
+    explicit LX_Chunk(const UTF8string& filename);
 
     /**
     *   @fn bool play()

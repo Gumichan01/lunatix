@@ -21,6 +21,7 @@
 *
 */
 
+#include <LunatiX/LX_Sound.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
 #include <memory>
 
@@ -63,7 +64,7 @@ class LX_Music_;
 *   @class LX_Music
 *   @brief The music class
 */
-class LX_Music
+class LX_Music : public virtual LX_Sound
 {
     std::unique_ptr<LX_Music_> _mimpl;
 

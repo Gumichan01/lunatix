@@ -21,8 +21,6 @@
 *
 */
 
-#include <string>
-
 const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */
 const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
 
@@ -36,13 +34,11 @@ namespace LX_Mixer
 */
 class LX_Sound
 {
-protected:
-
-    virtual bool load_(const std::string& filename) = 0;
 
 public:
 
-    virtual bool play() = 0;                /**< @brief Play something  */
+    /// Play something
+    virtual bool play() = 0;
     /// Destructor
     virtual ~LX_Sound();
 };
