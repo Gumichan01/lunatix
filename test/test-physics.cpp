@@ -604,7 +604,7 @@ void test_collisionPointPolygon(void)
 
     {
         cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfEdges();
+        const unsigned long n = poly.numberOfEdges();
         for(unsigned int i = 0; i < n; i++)
         {
             cout << "(" << (poly.getPoint(i)).x << ","
@@ -707,7 +707,7 @@ void test_collisionCirclePolygon(void)
 
     {
         cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfEdges();
+        const unsigned long n = poly.numberOfEdges();
         for(unsigned int i = 0; i < n; i++)
         {
             cout << "(" << (poly.getPoint(i)).x << ","
@@ -784,7 +784,7 @@ void test_collisionRectPolygon(void)
 
     {
         cout << "INFO - poly {";
-        const unsigned int n = poly.numberOfEdges();
+        const unsigned long n = poly.numberOfEdges();
         for(unsigned int i = 0; i < n; i++)
         {
             cout << "(" << (poly.getPoint(i)).x << ","
@@ -1083,8 +1083,8 @@ void test_move(void)
              << R.w << "," << R.h << ")" << endl;
 
     movePoly(poly,X,Y);
-    const unsigned int n = poly.numberOfEdges();
-    const unsigned int m = expoly.numberOfEdges();
+    const unsigned long n = poly.numberOfEdges();
+    const unsigned long m = expoly.numberOfEdges();
 
     LX_Log::log("expected polygon");
     displayPoly(expoly);
