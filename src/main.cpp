@@ -12,29 +12,24 @@
 
 int main(int argc, char** argv)
 {
-    UNUSED(argc); UNUSED(argv);
-    static const int W = 256;
-    static const int H = 256;
+    UNUSED(argc);UNUSED(argv);
+    LX_AABB position = {0,0,256,256};
+    SDL_Event event;
     bool go = true;
 
     if(!LX_Init())
     {
-        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Cannot load the library: %s",
-                            LX_GetError());
+        LX_Log::log("Cannot load the library: %s",LX_GetError());
         return -1;
     }
 
-    setSDLConfig(SDL_HINT_RENDER_SCALE_QUALITY,"linear");
-
-    LX_AABB position = {0,0,W,H};
+    // Information about how to build the window
     LX_Win::LX_WindowInfo info;
-    LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
-    LX_Win::LX_Window w(info);              // Create the window with this configuration
+    LX_Win::LX_loadWindowConfig(info);
+    info.w = 256;
+    info.h = 256;
 
-    w.setWindowSize(W,H);
-    LX_Timer::delay(100);
-
-    SDL_Event event;
+    LX_Win::LX_Window w(info);
     LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
 
     while(go)
@@ -43,10 +38,10 @@ int main(int argc, char** argv)
         {
             switch(event.type)
             {
-            case SDL_QUIT :
+            case SDL_QUIT:
                 go = false;
                 break;
-            default :
+            default:
                 break;
             }
         }
@@ -54,11 +49,9 @@ int main(int argc, char** argv)
         w.clearWindow();
         sprite.draw(&position);
         w.update();
-        LX_Timer::delay(33);
+        SDL_Delay(33);
     }
 
-    // Information about the library
-    LX_VersionInfo::LX_EngineInfo();
     LX_Quit();
     return 0;
 }
