@@ -39,8 +39,6 @@ class LX_ParticleSystem_
     std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
     // The number of particles
     const unsigned int _nb_particles;
-    // The id of the window to put particles
-    unsigned int _idwin;
 
     /*
     *   Allocate the particle array
@@ -62,8 +60,8 @@ class LX_ParticleSystem_
 
 public:
 
-    explicit LX_ParticleSystem_(const unsigned int nbPart,const unsigned int id)
-        : _particles(nullptr), _nb_particles(nbPart), _idwin(id)
+    explicit LX_ParticleSystem_(const unsigned int nbPart)
+        : _particles(nullptr), _nb_particles(nbPart)
     {
         allocateParticles_();
     }
@@ -162,12 +160,7 @@ public:
 /* Public functions */
 
 LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
-    : LX_ParticleSystem(nbPart,0) {}
-
-
-LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart,
-                                     const unsigned int id)
-    : _psimpl(new LX_ParticleSystem_(nbPart,id)) {}
+    : _psimpl(new LX_ParticleSystem_(nbPart)) {}
 
 
 LX_ParticleSystem::~LX_ParticleSystem()
