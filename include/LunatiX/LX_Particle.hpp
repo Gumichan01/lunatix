@@ -38,7 +38,7 @@ class LX_Sprite;
 
 namespace LX_Physics
 {
-class LX_Vector2D;
+struct LX_Vector2D;
 };
 
 namespace LX_ParticleEngine
