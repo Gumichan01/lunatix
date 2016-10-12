@@ -49,7 +49,7 @@ class LX_FileBuffer_
 
 public:
 
-    explicit LX_FileBuffer_(const UTF8string& filename)
+    explicit LX_FileBuffer_(const UTF8string& filename) : _name(filename)
     {
         LX_File *reader = nullptr;
         std::string str("LX_FileBuffer: " + std::string(_name.utf8_str()) + " - ");
