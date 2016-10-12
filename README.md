@@ -42,26 +42,23 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
     int main(int argc, char** argv)
     {
-        const int W = 256;
-        const int H = 256;
+        LX_AABB position = {0,0,256,256};
+        SDL_Event event;
         bool go = true;
 
         if(!LX_Init())
         {
-            LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"Cannot load the library: %s",
-                                LX_GetError());
+            LX_Log::log("Cannot load the library: %s",LX_GetError());
             return -1;
         }
 
-        LX_AABB position = {0,0,W,H};
+        // Information about how to build the window
         LX_Win::LX_WindowInfo info;
-        LX_Win::LX_loadWindowConfig(info);      // Load the default configuration
-        LX_Win::LX_Window w(info);              // Create the window with this configuration
+        LX_Win::LX_loadWindowConfig(info);
+        info.w = 256;
+        info.h = 256;
 
-        w.setWindowSize(W,H);
-        SDL_Delay(100);
-
-        SDL_Event event;
+        LX_Win::LX_Window w(info);
         LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
 
         while(go)
@@ -70,10 +67,10 @@ The library works on Windows and Linux (maybe on Mac OS X).
             {
                 switch(event.type)
                 {
-                case SDL_QUIT :
+                case SDL_QUIT:
                     go = false;
                     break;
-                default :
+                default:
                     break;
                 }
             }
