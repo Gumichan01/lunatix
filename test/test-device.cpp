@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cstring>
 
-#define STRING_SIZE 256
 
 using namespace std;
 using namespace LX_Device;

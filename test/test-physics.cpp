@@ -375,7 +375,7 @@ void testPolygon(void)
     cout << " = TEST POLYGON = " << endl;
 
     cout << "INFO - Number of edges" << endl;
-    unsigned int d = poly.numberOfEdges();
+    unsigned long d = poly.numberOfEdges();
 
     if(d != 3)
         cerr << "FAILURE - number of real edges expected : 3;Got : " << d << endl;
