@@ -8,9 +8,11 @@
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Log.hpp>
 
+#define UNUSED(X) (void)(X)
 
 int main(int argc, char** argv)
 {
+    UNUSED(argc); UNUSED(argv);
     static const int W = 256;
     static const int H = 256;
     bool go = true;
