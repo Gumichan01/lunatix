@@ -22,7 +22,8 @@
 *
 */
 
-#include <LunatiX/LX_Hitbox.hpp>
+#include <LunatiX/LX_AABB.hpp>
+
 
 /**
 *   @namespace LX_Physics
@@ -31,6 +32,8 @@
 namespace LX_Physics
 {
 
+struct LX_Point;
+struct LX_Circle;
 struct LX_Vector2D;
 class LX_Polygon;
 
