@@ -113,8 +113,7 @@ bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
     int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
     int p2_xmin, p2_xmax, p2_ymin, p2_ymax;
 
-    getInterval(poly1,poly2,
-                p1_xmin,p1_xmax,p1_ymin,p1_ymax,
+    getInterval(poly1,poly2,p1_xmin,p1_xmax,p1_ymin,p1_ymax,
                 p2_xmin,p2_xmax,p2_ymin,p2_ymax);
 
     LX_AABB box1 = {p1_xmin, p1_ymin, p1_xmax-p1_xmin, p1_ymax-p1_ymin};
