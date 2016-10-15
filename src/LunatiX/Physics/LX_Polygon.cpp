@@ -20,8 +20,10 @@
 */
 
 #include <LunatiX/LX_Polygon.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
+#include <vector>
 
 using namespace std;
 
@@ -41,56 +43,16 @@ const char * LX_PolygonException::what() const noexcept
 LX_PolygonException::~LX_PolygonException() noexcept {}
 
 
-/* Polygon */
+/* Polygon - private implementation */
 
-LX_Polygon::LX_Polygon() : _convex(false) {}
+using LX_Points_ = std::vector<LX_Point>;
 
-
-void LX_Polygon::addPoint(const int x, const int y)
+class LX_Polygon_
 {
-    addPoint(LX_Point(x,y));
-}
+    LX_Points_ _points;    /* A sequence of LX_Point objects   */
+    bool _convex;                     /* If the polygon is convex         */
 
-
-void LX_Polygon::addPoint(const LX_Point& p)
-{
-    _points.push_back(p);
-    // Update the convexity when the polygon has at least 3 edges
-    if(_points.size() >= 3)
-        convexity_();
-}
-
-
-unsigned long LX_Polygon::numberOfEdges() const
-{
-    return _points.size();
-}
-
-
-LX_Point LX_Polygon::getPoint(const unsigned int index) const
-{
-    return _points.at(index);
-}
-
-
-bool LX_Polygon::isConvex() const
-{
-    return _convex;
-}
-
-
-// Evaluate the convexity of the polygon
-void LX_Polygon::convexity_()
-{
-    // Vectors
-    LX_Vector2D AO;
-    LX_Vector2D OB;
-
-    bool haveSign = false;
-    enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
-    const unsigned long n = _points.size();
-
-    for(unsigned int i = 0; i < n; i++)
+    void generateSegments(int i, const int n, LX_Vector2D& AO, LX_Vector2D& OB)
     {
         if(i == 0)
         {
@@ -113,88 +75,180 @@ void LX_Polygon::convexity_()
             OB = LX_Vector2D(_points[i+1].x - _points[i].x,
                              _points[i+1].y - _points[i].y);
         }
+    }
 
-        // Vector product
-        int cross_product = static_cast<int>(vector_product(AO,OB));
+    void convexity_()
+    {
+        // Vectors
+        LX_Vector2D AO;
+        LX_Vector2D OB;
 
-        if(!haveSign)
+        bool haveSign = false;
+        enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
+        const unsigned long n = _points.size();
+
+        for(unsigned int i = 0; i < n; i++)
         {
-            if(cross_product > 0)
-                s = POSITIVE;
-            else if(cross_product < 0)
-                s = NEGATIVE;
+            generateSegments(i,n,AO,OB);
+            // Vector product
+            int cross_product = static_cast<int>(vector_product(AO,OB));
+
+            if(!haveSign)
+            {
+                if(cross_product > 0)
+                    s = POSITIVE;
+                else if(cross_product < 0)
+                    s = NEGATIVE;
+                else
+                {
+                    _convex = false;
+                    return;
+                }
+
+                haveSign = true;
+            }
             else
             {
-                _convex = false;
-                return;
-            }
+                switch(s)
+                {
+                case POSITIVE :
+                    if(cross_product < 0)
+                    {
+                        _convex = false;
+                        return;
+                    }
+                    break;
 
-            haveSign = true;
+                case NEGATIVE :
+                    if(cross_product > 0)
+                    {
+                        _convex = false;
+                        return;
+                    }
+                    break;
+
+                case NONE :
+                    break;
+                }
+            }
         }
-        else
+
+        _convex = true;
+    }
+
+public :
+
+    LX_Polygon_() : _convex(false) {}
+
+    void addPoint(const LX_Point& p)
+    {
+        _points.push_back(p);
+        // Update the convexity when the polygon has at least 3 edges
+        if(_points.size() >= 3)
+            convexity_();
+    }
+
+    unsigned long numberOfEdges() const
+    {
+        return _points.size();
+    }
+
+
+    LX_Point getPoint(const unsigned int index) const
+    {
+        return _points.at(index);
+    }
+
+
+    bool isConvex() const
+    {
+        return _convex;
+    }
+
+
+    void move(const float vx, const float vy)
+    {
+        const int nvx = static_cast<int>(vx), nvy = static_cast<int>(vy);
+        const unsigned long n = numberOfEdges();
+
+        movePoint(_points[0],nvx,nvy);
+        movePoint(_points[1],nvx,nvy);
+        movePoint(_points[2],nvx,nvy);
+
+        for(unsigned int i = 3; i < n; i++)
         {
-            switch(s)
-            {
-            case POSITIVE :
-                if(cross_product < 0)
-                {
-                    _convex = false;
-                    return;
-                }
-                break;
-
-            case NEGATIVE :
-                if(cross_product > 0)
-                {
-                    _convex = false;
-                    return;
-                }
-                break;
-
-            case NONE :
-                break;
-            }
+            movePoint(_points[i],nvx,nvy);
         }
     }
 
-    _convex = true;
+    void moveTo(int vx, int vy)
+    {
+        movePointTo(_points[0],vx,vy);
+        movePointTo(_points[1],vx,vy);
+        movePointTo(_points[2],vx,vy);
+
+        const unsigned long n = numberOfEdges();
+
+        for(unsigned int i = 3; i < n; i++)
+        {
+            movePointTo(_points[i],vx,vy);
+        }
+    }
+
+    ~LX_Polygon_() = default;
+};
+
+
+/* Polygon, public functions */
+
+LX_Polygon::LX_Polygon() : _polyimpl(new LX_Polygon_()) {}
+
+
+void LX_Polygon::addPoint(const int x, const int y)
+{
+    _polyimpl->addPoint(LX_Point(x,y));
+}
+
+
+void LX_Polygon::addPoint(const LX_Point& p)
+{
+    _polyimpl->addPoint(p);
+}
+
+
+unsigned long LX_Polygon::numberOfEdges() const
+{
+    return _polyimpl->numberOfEdges();
+}
+
+
+LX_Point LX_Polygon::getPoint(const unsigned int index) const
+{
+    return _polyimpl->getPoint(index);
+}
+
+
+bool LX_Polygon::isConvex() const
+{
+    _polyimpl->isConvex();
 }
 
 
 void LX_Polygon::move(const float vx, const float vy)
 {
-    const int nvx = static_cast<int>(vx), nvy = static_cast<int>(vy);
-    const unsigned long n = numberOfEdges();
-
-    movePoint(_points[0],nvx,nvy);
-    movePoint(_points[1],nvx,nvy);
-    movePoint(_points[2],nvx,nvy);
-
-    for(unsigned int i = 3; i < n; i++)
-    {
-        movePoint(_points[i],nvx,nvy);
-    }
+    _polyimpl->move(vx,vy);
 }
 
 
 void LX_Polygon::move(const LX_Vector2D& v)
 {
-    move(v.vx, v.vy);
+    _polyimpl->move(v.vx,v.vy);
 }
 
 
 void LX_Polygon::moveTo(int vx, int vy)
 {
-    movePointTo(_points[0],vx,vy);
-    movePointTo(_points[1],vx,vy);
-    movePointTo(_points[2],vx,vy);
-
-    const unsigned long n = numberOfEdges();
-
-    for(unsigned int i = 3; i < n; i++)
-    {
-        movePointTo(_points[i],vx,vy);
-    }
+    _polyimpl->moveTo(vx,vy);
 }
 
 };

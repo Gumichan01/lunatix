@@ -23,13 +23,13 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <vector>
+#include <memory>
 
 namespace LX_Physics
 {
 
-struct LX_Point;
 struct LX_Vector2D;
+struct LX_Point;
 
 /**
 *   @class LX_PolygonException
@@ -57,7 +57,8 @@ public :
     ~LX_PolygonException() noexcept;
 };
 
-/// @todo (#3#) LX_Polygon - private implementation
+
+class LX_Polygon_;
 
 /**
 *    @class LX_Polygon
@@ -68,13 +69,11 @@ public :
 */
 class LX_Polygon
 {
-    std::vector<LX_Point> _points;    /* A sequence of LX_Point objects   */
-    bool _convex;                     /* If the polygon is convex         */
+    std::unique_ptr<LX_Polygon_> _polyimpl;
 
     LX_Polygon(LX_Polygon& p);
     LX_Polygon& operator =(LX_Polygon& p);
 
-    void convexity_();
 
 public :
 
