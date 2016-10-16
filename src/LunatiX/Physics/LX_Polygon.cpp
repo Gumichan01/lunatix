@@ -49,8 +49,8 @@ using LX_Points_ = std::vector<LX_Point>;
 
 class LX_Polygon_
 {
-    LX_Points_ _points;    /* A sequence of LX_Point objects   */
-    bool _convex;                     /* If the polygon is convex         */
+    LX_Points_ _points;     /* A sequence of LX_Point objects   */
+    bool _convex;           /* If the polygon is convex         */
 
     void generateSegments(int i, const int n, LX_Vector2D& AO, LX_Vector2D& OB)
     {
@@ -181,18 +181,11 @@ public :
         }
     }
 
-    void moveTo(int vx, int vy)
+    void moveTo(int xpos, int ypos)
     {
-        movePointTo(_points[0],vx,vy);
-        movePointTo(_points[1],vx,vy);
-        movePointTo(_points[2],vx,vy);
-
-        const unsigned long n = numberOfEdges();
-
-        for(unsigned int i = 3; i < n; i++)
-        {
-            movePointTo(_points[i],vx,vy);
-        }
+        const LX_Point p(xpos,ypos);
+        const LX_Vector2D v(_points[0],p);
+        move(v.vx,v.vy);
     }
 
     ~LX_Polygon_() = default;
@@ -202,6 +195,7 @@ public :
 /* Polygon, public functions */
 
 LX_Polygon::LX_Polygon() : _polyimpl(new LX_Polygon_()) {}
+LX_Polygon::~LX_Polygon() {}
 
 
 void LX_Polygon::addPoint(const int x, const int y)
@@ -246,9 +240,9 @@ void LX_Polygon::move(const LX_Vector2D& v)
 }
 
 
-void LX_Polygon::moveTo(int vx, int vy)
+void LX_Polygon::moveTo(int xpos, int ypos)
 {
-    _polyimpl->moveTo(vx,vy);
+    _polyimpl->moveTo(xpos,ypos);
 }
 
 };

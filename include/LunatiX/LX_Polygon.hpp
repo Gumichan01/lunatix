@@ -159,18 +159,18 @@ public :
     void move(const LX_Vector2D& v);
 
     /**
-    *   @fn void LX_Polygon::moveTo(int vx, int vy)
+    *   @fn void LX_Polygon::moveTo(int xpos, int ypos)
     *
     *   Move the polygon to a position
     *
-    *   @param [in] vx The x position
-    *   @param [in] vy The y position
+    *   @param [in] xpos The x position
+    *   @param [in] ypos The y position
     *
     */
-    void moveTo(int vx, int vy);
+    void moveTo(int xpos, int ypos);    /// @todo Fix it! Inocrrect implementation
 
     /// Destructor
-    ~LX_Polygon() = default;
+    ~LX_Polygon();
 };
 
 };
