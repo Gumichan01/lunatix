@@ -448,7 +448,7 @@ void test_Vector2D(void)
     cout << "INFO - v(" << v.vx << "," << v.vy << ")" << endl
          << "INFO - u(" << u.vx << "," << u.vy << ")" << endl
          << "INFO - z(" << z.vx << "," << z.vy << ")" << endl;
-         << "INFO - w(" << w.vx << "," << w.vy << ")" << endl;
+            << "INFO - w(" << w.vx << "," << w.vy << ")" << endl;
 
     cout << "INFO - scalar product (v,u)" << endl;
     float d = scalar_product(v,u);
@@ -516,12 +516,18 @@ void test_collisionSeg(void)
     LX_Point A,B,C,D,E,F;
     bool d;
 
-    A.x =  5; A.y =  5;
-    B.x = 10; B.y = 10;
-    C.x =  5; C.y = 10;
-    D.x = 10; D.y =  5;
-    E.x = 20; E.y =  5;
-    F.x = 15; F.y =  5;
+    A.x =  5;
+    A.y =  5;
+    B.x = 10;
+    B.y = 10;
+    C.x =  5;
+    C.y = 10;
+    D.x = 10;
+    D.y =  5;
+    E.x = 20;
+    E.y =  5;
+    F.x = 15;
+    F.y =  5;
 
     cout << " = TEST Collision Segment = " << endl;
 

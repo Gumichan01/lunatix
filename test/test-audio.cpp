@@ -54,7 +54,7 @@ void test_audioInit()
     if(n == 0)
     {
         LX_Log::logError(LX_Log::LX_LOG_TEST,"Cannot get information: %s",
-                        Mix_GetError());
+                         Mix_GetError());
     }
     else
     {
@@ -62,13 +62,26 @@ void test_audioInit()
 
         switch(format)
         {
-            case AUDIO_U8: format_str="U8"; break;
-            case AUDIO_S8: format_str="S8"; break;
-            case AUDIO_U16LSB: format_str="U16LSB"; break;
-            case AUDIO_S16LSB: format_str="S16LSB"; break;
-            case AUDIO_U16MSB: format_str="U16MSB"; break;
-            case AUDIO_S16MSB: format_str="S16MSB"; break;
-            default: break;
+        case AUDIO_U8:
+            format_str="U8";
+            break;
+        case AUDIO_S8:
+            format_str="S8";
+            break;
+        case AUDIO_U16LSB:
+            format_str="U16LSB";
+            break;
+        case AUDIO_S16LSB:
+            format_str="S16LSB";
+            break;
+        case AUDIO_U16MSB:
+            format_str="U16MSB";
+            break;
+        case AUDIO_S16MSB:
+            format_str="S16MSB";
+            break;
+        default:
+            break;
         }
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"opened = %d time(s)",n);
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"frequency = %d Hz",freq);

@@ -10,7 +10,7 @@ class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
-     : LX_Text::LX_RedrawCallback(), _w(win), _font(SDL_Color{255,255,255,0}) {}
+        : LX_Text::LX_RedrawCallback(), _w(win), _font(SDL_Color {255,255,255,0}) {}
 
     void operator ()(UTF8string& u8str,size_t cursor)
     {
@@ -98,7 +98,8 @@ int main(int argc, char** argv)
     LX_Log::setDebugMode(true);
     LX_Log::log(" ==== TEST the text input ==== ");
 
-    try{
+    try
+    {
         LX_Win::LX_Window win(info);
 
         // Text input
@@ -110,7 +111,8 @@ int main(int argc, char** argv)
         }
 
         LX_Log::log("SUCCESS - The input text module is well-implemented!");
-    }catch(...)
+    }
+    catch(...)
     {
         LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_TEST,
                          "FAILURE - Unexpected exception!");

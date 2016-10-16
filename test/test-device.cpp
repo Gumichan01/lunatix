@@ -176,7 +176,8 @@ void test_mouse(void)
                     LX_Device::mouseCursorDisplay(1);
                 break;
 
-            default: break;
+            default:
+                break;
             }
         }
 

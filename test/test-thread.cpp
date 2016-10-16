@@ -418,7 +418,8 @@ void sender(LX_Multithreading::LX_Data data)
     {
         SDL_Delay(16);
         n = LX_Random::xorshiftRand100();
-    }while(c.send(n));
+    }
+    while(c.send(n));
 }
 
 
@@ -427,7 +428,7 @@ void receiver(LX_Multithreading::LX_Data data)
     int n;
 
     for(int i = 0; i < 8; i++)
-   {
+    {
         c.recv(n);
         LX_Log::log("(#%x): received from the channel → %d",
                     LX_Multithreading::getID(),n);

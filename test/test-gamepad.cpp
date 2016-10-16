@@ -35,14 +35,14 @@ int main(int argc, char **argv)
                 d = true;
                 break;
 
-            /// ---------------- Keyboard ----------------
+                /// ---------------- Keyboard ----------------
 
             case SDL_KEYUP:
                 LX_Log::log("physical key → %s",stringOfPhysicalKey(ev.key.keysym.scancode).utf8_str());
                 LX_Log::log("virtual key  → %s",stringOfVirtualKey(ev.key.keysym.sym).utf8_str());
                 break;
 
-            /// ---------------- Gamepad ----------------
+                /// ---------------- Gamepad ----------------
 
             case SDL_CONTROLLERBUTTONUP:
                 LX_Log::log("button → %s",stringOfButton(ev.cbutton.button).utf8_str());

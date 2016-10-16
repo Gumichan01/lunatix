@@ -23,7 +23,7 @@ void test_getChunk(void);
 
 namespace
 {
-    string str("tmpFile");
+string str("tmpFile");
 }
 
 
