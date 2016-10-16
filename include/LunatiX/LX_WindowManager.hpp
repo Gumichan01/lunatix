@@ -29,7 +29,7 @@ namespace LX_Win
 
 class LX_Window;
 
-/// @todo (#3#) LX_WindowManager - private implementation
+/// @todo (#1#) LX_WindowManager - private implementation
 
 /**
 *   @class LX_WindowManager

@@ -167,7 +167,7 @@ public :
     *   @param [in] ypos The y position
     *
     */
-    void moveTo(int xpos, int ypos);    /// @todo Fix it! Inocrrect implementation
+    void moveTo(int xpos, int ypos);
 
     /// Destructor
     ~LX_Polygon();
