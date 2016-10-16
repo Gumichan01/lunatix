@@ -72,7 +72,8 @@ class LX_Polygon_
     LX_Points_ _points;     /* A sequence of LX_Point objects   */
     bool _convex;           /* If the polygon is convex         */
 
-    void generateSegments(int i, const int n, LX_Vector2D& AO, LX_Vector2D& OB) const
+    void generateSegments(unsigned long i, const unsigned long n,
+                          LX_Vector2D& AO, LX_Vector2D& OB) const
     {
         if(i == 0)
         {
@@ -291,7 +292,7 @@ LX_Point LX_Polygon::getPoint(const unsigned int index) const
 
 bool LX_Polygon::isConvex() const
 {
-    _polyimpl->isConvex();
+    return _polyimpl->isConvex();
 }
 
 
