@@ -21,6 +21,7 @@
 */
 
 #include <LunatiX/LX_Vector2D.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
 
 #include <cmath>
 #include <algorithm>
@@ -66,6 +67,10 @@ namespace LX_Physics
 LX_Vector2D::LX_Vector2D(): LX_Vector2D(0.0f,0.0f) {}
 LX_Vector2D::LX_Vector2D(float x,float y): vx(x), vy(y) {}
 LX_Vector2D::LX_Vector2D(const LX_Vector2D& v): vx(v.vx), vy(v.vy) {}
+
+LX_Vector2D::LX_Vector2D(const LX_Point& ori, const LX_Point& im)
+    : vx(im.x - ori.x), vy(im.y - ori.y) {}
+
 
 LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D& v)
 {

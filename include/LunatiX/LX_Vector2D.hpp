@@ -25,6 +25,8 @@
 namespace LX_Physics
 {
 
+struct LX_Point;
+
 /**
 *   @struct LX_Vector2D
 *   @brief The vector2D structure
@@ -40,7 +42,10 @@ struct LX_Vector2D
     LX_Vector2D();
 
     /// Construct a vector using coordinates
-    LX_Vector2D(float x,float y);
+    LX_Vector2D(float x, float y);
+
+    /// Construct a vector using points
+    LX_Vector2D(const LX_Point& ori, const LX_Point& im);
 
     /// Construct a vector using coordinates
     LX_Vector2D(const LX_Vector2D& v);
