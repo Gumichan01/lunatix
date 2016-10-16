@@ -30,20 +30,20 @@ using namespace std;
 
 namespace
 {
-    inline int sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
-    {
-        return p.x + q.x;
-    }
+inline int sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+{
+    return p.x + q.x;
+}
 
-    inline int sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
-    {
-        return p.y + q.y;
-    }
+inline int sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+{
+    return p.y + q.y;
+}
 
-    inline int cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
-    {
-        return p.x * q.y - p.y * q.x;
-    }
+inline int cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+{
+    return p.x * q.y - p.y * q.x;
+}
 };
 
 
