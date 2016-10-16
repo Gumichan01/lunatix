@@ -25,8 +25,6 @@
 #include <LunatiX/LX_Hitbox.hpp>
 #include <vector>
 
-#define LX_ABS(x) (x >= 0 ? x : -x)
-
 using namespace std;
 
 
@@ -73,11 +71,8 @@ class LX_Polygon_
 {
     LX_Points_ _points;     /* A sequence of LX_Point objects   */
     bool _convex;           /* If the polygon is convex         */
-    //float _area;            /* Area of the polygon              */
-    //float _sign;            /* Sign of the area                 */
-    LX_Point _centroid;     /* Centroid of the polygon          */
 
-    void generateSegments(int i, const int n, LX_Vector2D& AO, LX_Vector2D& OB)
+    void generateSegments(int i, const int n, LX_Vector2D& AO, LX_Vector2D& OB) const
     {
         if(i == 0)
         {
@@ -162,7 +157,7 @@ class LX_Polygon_
     }
 
 
-    float area_()
+    float area_() const
     {
         const unsigned long N = _points.size();
         float sum = 0.0f;
@@ -178,12 +173,10 @@ class LX_Polygon_
                 sum += cross_(_points[i],_points[i+1]);
             }
         }
-        //_area = LX_ABS(sum / 2.0f);
-        //_sign = sum < 0.0f ? -1.0f : 1.0f;
         return (sum / 2.0f);
     }
 
-    void calculateCentroid_()
+    void calculateCentroid_(LX_Point& p) const
     {
         const unsigned long N = _points.size();
         float sum_x = 0, sum_y = 0;
@@ -202,7 +195,9 @@ class LX_Polygon_
                 sum_y += sumy_(_points[i],_points[i+1]) * cross_(_points[i],_points[i+1]);
             }
         }
-        _centroid = LX_Point(static_cast<int>(sum_x/p6_area),static_cast<int>(sum_y/p6_area));
+
+        p.x = static_cast<int>(sum_x/p6_area);
+        p.y = static_cast<int>(sum_y/p6_area);
     }
 
 public :
@@ -252,8 +247,11 @@ public :
 
     void moveTo(int xpos, int ypos)
     {
+        LX_Point centroid;
+        calculateCentroid_(centroid);
+
         const LX_Point p(xpos,ypos);
-        const LX_Vector2D v(_centroid,p);
+        const LX_Vector2D v(centroid,p);
         move(v.vx,v.vy);
     }
 
