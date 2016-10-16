@@ -435,7 +435,7 @@ void testPolygon(void)
 
 void test_Vector2D(void)
 {
-    LX_Point p(1,2), LX_Point q(2,-1);
+    LX_Point p(1,2), q(2,-1);
     LX_Vector2D v,u,z,w;
 
     v = {1.0f,2.0f};
@@ -447,8 +447,8 @@ void test_Vector2D(void)
 
     cout << "INFO - v(" << v.vx << "," << v.vy << ")" << endl
          << "INFO - u(" << u.vx << "," << u.vy << ")" << endl
-         << "INFO - z(" << z.vx << "," << z.vy << ")" << endl;
-            << "INFO - w(" << w.vx << "," << w.vy << ")" << endl;
+         << "INFO - z(" << z.vx << "," << z.vy << ")" << endl
+         << "INFO - w(" << w.vx << "," << w.vy << ")" << endl;
 
     cout << "INFO - scalar product (v,u)" << endl;
     float d = scalar_product(v,u);
@@ -996,7 +996,7 @@ void test_collision2Polygon(void)
 
 void test_collision2PolygonAgain(void)
 {
-    const long N = 10000;
+    const long N = 100000;
     const long M = 1000;
     LX_Polygon poly1, poly2;
     LX_Polygon poly3, poly4;
@@ -1639,7 +1639,7 @@ void test_VectorLambda(void)
 void displayPoly(LX_Polygon& poly)
 {
     cout << "INFO - {";
-    const unsigned int n = poly.numberOfEdges();
+    const unsigned long n = poly.numberOfEdges();
     for(unsigned int i = 0; i < n; i++)
     {
         cout << "(" << (poly.getPoint(i)).x << ","
