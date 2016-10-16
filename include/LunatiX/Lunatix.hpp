@@ -51,6 +51,7 @@
 #include <LunatiX/LX_Particle.hpp>
 #include <LunatiX/LX_ParticleSystem.hpp>
 #include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 
