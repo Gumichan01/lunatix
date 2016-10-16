@@ -435,17 +435,20 @@ void testPolygon(void)
 
 void test_Vector2D(void)
 {
-    LX_Vector2D v,u,z;
+    LX_Point p(1,2), LX_Point q(2,-1);
+    LX_Vector2D v,u,z,w;
 
     v = {1.0f,2.0f};
     u = {2.0f,-1.0f};
     z = {0.0f,0.0f};
+    w = LX_Vector2D(p,q);
 
     cout << " = TEST Vector2D = " << endl;
 
     cout << "INFO - v(" << v.vx << "," << v.vy << ")" << endl
          << "INFO - u(" << u.vx << "," << u.vy << ")" << endl
          << "INFO - z(" << z.vx << "," << z.vy << ")" << endl;
+         << "INFO - w(" << w.vx << "," << w.vy << ")" << endl;
 
     cout << "INFO - scalar product (v,u)" << endl;
     float d = scalar_product(v,u);
