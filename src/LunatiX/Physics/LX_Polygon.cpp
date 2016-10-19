@@ -177,11 +177,14 @@ class LX_Polygon_
         return (sum / 2.0f);
     }
 
-    void calculateCentroid_(LX_Point& p) const
+    bool calculateCentroid_(LX_Point& p) const
     {
         const unsigned long N = _points.size();
         float sum_x = 0, sum_y = 0;
         const float p6_area = 6 * area_();
+
+        if(p6_area <= 0.0f) // self-intersecting polygon
+            return false;
 
         for(unsigned long i = 0; i < N; i++)
         {
@@ -199,6 +202,7 @@ class LX_Polygon_
 
         p.x = static_cast<int>(sum_x/p6_area);
         p.y = static_cast<int>(sum_y/p6_area);
+        return true;
     }
 
 public :
@@ -248,12 +252,26 @@ public :
 
     void moveTo(int xpos, int ypos)
     {
-        LX_Point centroid;
-        calculateCentroid_(centroid);
-
         const LX_Point p(xpos,ypos);
-        const LX_Vector2D v(centroid,p);
-        move(v.vx,v.vy);
+        LX_Point centroid;
+
+        if(!calculateCentroid_(centroid))
+        {
+            // self-intersecting polygon. The movement is less accurate
+            const auto pend = _points.end();
+
+            for(auto it = _points.begin(); it != pend; it++)
+            {
+                const LX_Vector2D iv(*it,p);
+                move(iv.vx,iv.vy);
+            }
+        }
+        else
+        {
+            // Normal case.→ accurate movement
+            const LX_Vector2D v(centroid,p);
+            move(v.vx,v.vy);
+        }
     }
 
     ~LX_Polygon_() = default;
