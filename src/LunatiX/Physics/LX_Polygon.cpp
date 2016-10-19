@@ -160,18 +160,19 @@ class LX_Polygon_
 
     float area_() const
     {
-        const unsigned long N = _points.size();
         float sum = 0.0f;
+        const auto pbeg = _points.begin();
+        const auto pend = _points.end();
 
-        for(unsigned long i = 0; i < N; i++)
+        for(auto it = pbeg; it != pend; it++)
         {
-            if(i == N-1)
+            if(it == pend - 1)
             {
-                sum += cross_(_points[i],_points[0]);
+                sum += cross_(*it,*pbeg);
             }
             else
             {
-                sum += cross_(_points[i],_points[i+1]);
+                sum += cross_(*it,*(it + 1));
             }
         }
         return (sum / 2.0f);
@@ -179,24 +180,26 @@ class LX_Polygon_
 
     bool calculateCentroid_(LX_Point& p) const
     {
-        const unsigned long N = _points.size();
+        const auto pbeg = _points.begin();
+        const auto pend = _points.end();
+        //const unsigned long N = _points.size();
         float sum_x = 0, sum_y = 0;
         const float p6_area = 6 * area_();
 
         if(p6_area <= 0.0f) // self-intersecting polygon
             return false;
 
-        for(unsigned long i = 0; i < N; i++)
+        for(auto it = pbeg; it != pend; it++)
         {
-            if(i == N-1)
+            if(it == pend - 1)
             {
-                sum_x += sumx_(_points[i],_points[0]) * cross_(_points[i],_points[0]);
-                sum_y += sumy_(_points[i],_points[0]) * cross_(_points[i],_points[0]);
+                sum_x += sumx_(*it,*pbeg) * cross_(*it,*pbeg);
+                sum_y += sumy_(*it,*pbeg) * cross_(*it,*pbeg);
             }
             else
             {
-                sum_x += sumx_(_points[i],_points[i+1]) * cross_(_points[i],_points[i+1]);
-                sum_y += sumy_(_points[i],_points[i+1]) * cross_(_points[i],_points[i+1]);
+                sum_x += sumx_(*it,*(it + 1)) * cross_(*it,*(it + 1));
+                sum_y += sumy_(*it,*(it + 1)) * cross_(*it,*(it + 1));
             }
         }
 
@@ -237,16 +240,13 @@ public :
 
     void move(const float vx, const float vy)
     {
-        const int nvx = static_cast<int>(vx), nvy = static_cast<int>(vy);
-        const unsigned long n = numberOfEdges();
+        const int nvx = static_cast<int>(vx);
+        const int nvy = static_cast<int>(vy);
+        const auto pend = _points.end();
 
-        movePoint(_points[0],nvx,nvy);
-        movePoint(_points[1],nvx,nvy);
-        movePoint(_points[2],nvx,nvy);
-
-        for(unsigned int i = 3; i < n; i++)
+        for(auto it = _points.begin(); it != pend; it++)
         {
-            movePoint(_points[i],nvx,nvy);
+            movePoint(*it,nvx,nvy);
         }
     }
 
