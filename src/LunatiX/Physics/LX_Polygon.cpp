@@ -77,24 +77,20 @@ class LX_Polygon_
     {
         if(i == 0)
         {
-            AO = LX_Vector2D(_points[i].x - _points[n-1].x,
-                             _points[i].y - _points[n-1].y);
+            AO = LX_Vector2D(_points[i],_points[n-1]);
         }
         else
         {
-            AO = LX_Vector2D(_points[i].x - _points[i-1].x,
-                             _points[i].y - _points[i-1].y);
+            AO = LX_Vector2D(_points[i],_points[i-1]);
         }
 
         if(i == n-1)
         {
-            OB = LX_Vector2D(_points[0].x - _points[i].x,
-                             _points[0].y - _points[i].y);
+            OB = LX_Vector2D(_points[0],_points[i]);
         }
         else
         {
-            OB = LX_Vector2D(_points[i+1].x - _points[i].x,
-                             _points[i+1].y - _points[i].y);
+            OB = LX_Vector2D(_points[i+1],_points[i]);
         }
     }
 
