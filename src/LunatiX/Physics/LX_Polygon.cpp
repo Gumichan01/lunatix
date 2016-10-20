@@ -74,18 +74,18 @@ class LX_Polygon_
 
     void convexity_()
     {
-        // Vectors
         LX_Vector2D AO;
         LX_Vector2D OB;
 
         bool haveSign = false;
         float sign = 0.0f;
-        const unsigned long n = _points.size();
+        const auto pbeg =_points.begin();
+        const auto pend =_points.end();
 
-        for(unsigned int i = 0; i < n; i++)
+        for(auto it = pbeg; it != pend; it++)
         {
-            AO = LX_Vector2D(_points[i],(i == 0 ? _points[n-1] : _points[i-1]));
-            OB = LX_Vector2D(( i == n-1 ? _points[0] : _points[i+1]),_points[i]);
+            AO = LX_Vector2D(*it,(it == pbeg ? *(pend - 1) : *(it - 1)));
+            OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)),*it);
             // Vector product
             int cross_product = static_cast<int>(vector_product(AO,OB));
 
