@@ -42,14 +42,27 @@ const char LX_SEP = '\\';
 const char LX_SEP = '/';
 #endif // __WIN32__
 
+namespace
+{
+const char * nameOf_(SDL_Joystick * joy)
+{
+    return SDL_JoystickName(joy);
+}
+
+
+const char * nameOf_(SDL_GameController * controller)
+{
+    return SDL_GameControllerName(controller);
+}
+};
+
+
 class LX_Gamepad_
 {
     SDL_GameController *_gc;
     SDL_Joystick *_joy;
     std::unique_ptr<LX_Haptic> _haptic;
 
-    const char * nameOf_(SDL_Joystick * joy) const;
-    const char * nameOf_(SDL_GameController * controller) const;
     bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
     bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;
     bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
@@ -160,18 +173,6 @@ public :
 
 
 // Private functions
-const char * LX_Gamepad_::nameOf_(SDL_Joystick * joy) const
-{
-    return SDL_JoystickName(joy);
-}
-
-
-const char * LX_Gamepad_::nameOf_(SDL_GameController * controller) const
-{
-    return SDL_GameControllerName(controller);
-}
-
-
 bool LX_Gamepad_::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const
 {
     if(joy == nullptr)
