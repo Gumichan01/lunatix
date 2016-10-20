@@ -66,7 +66,7 @@ public:
         allocateParticles_();
     }
 
-    bool addParticle(LX_Particle *p)
+    bool addParticle(LX_Particle *p) const
     {
         bool done = false;
 
@@ -86,7 +86,7 @@ public:
         return done;
     }
 
-    bool rmParticle(unsigned int index)
+    bool rmParticle(unsigned int index) const
     {
         if(index > _nb_particles || _particles[index] == nullptr)
             return false;
@@ -95,7 +95,7 @@ public:
         return true;
     }
 
-    void updateParticles()
+    void updateParticles() const
     {
         for(unsigned int i = 0; i < _nb_particles; i++)
         {
@@ -109,7 +109,7 @@ public:
         }
     }
 
-    void displayParticles()
+    void displayParticles() const
     {
         for(unsigned int i = 0; i < _nb_particles; i++)
         {
@@ -181,7 +181,7 @@ void LX_ParticleSystem::updateParticles()
 }
 
 
-void LX_ParticleSystem::displayParticles()
+void LX_ParticleSystem::displayParticles() const
 {
     _psimpl->displayParticles();
 }

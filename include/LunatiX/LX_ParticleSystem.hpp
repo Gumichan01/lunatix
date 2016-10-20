@@ -77,10 +77,10 @@ public:
     void updateParticles();
 
     /**
-    *   @fn void displayParticles()
+    *   @fn void displayParticles() const
     *   Display the particles
     */
-    void displayParticles();
+    void displayParticles() const;
 
     /**
     *   @fn unsigned int nbEmptyParticles() const
