@@ -88,11 +88,6 @@ public:
         Mix_FadeInMusicPos(_music,LX_MIXER_NOLOOP,ms,pos);
     }
 
-    void fadeOut(int ms)
-    {
-        Mix_FadeOutMusic(ms);
-    }
-
     bool play()
     {
         return play(LX_MIXER_NOLOOP);
@@ -101,21 +96,6 @@ public:
     bool play(int loops)
     {
         return Mix_PlayMusic(_music,loops) == 0;
-    }
-
-    void pause()
-    {
-        if(Mix_PausedMusic())
-            Mix_ResumeMusic();
-        else
-            Mix_PauseMusic();
-    }
-
-
-    void stop()
-    {
-        if(Mix_PlayingMusic())
-            Mix_HaltMusic();
     }
 
     const libtagpp::Tag& getInfo()
@@ -128,7 +108,6 @@ public:
 
     ~LX_Music_()
     {
-        stop();
         Mix_FreeMusic(_music);
     }
 };
@@ -154,7 +133,7 @@ void LX_Music::fadeInPos(int ms,int pos)
 
 void LX_Music::fadeOut(int ms)
 {
-    _mimpl->fadeOut(ms);
+    Mix_FadeOutMusic(ms);
 }
 
 
@@ -172,13 +151,17 @@ bool LX_Music::play(int loops)
 
 void LX_Music::pause()
 {
-    return _mimpl->pause();
+    if(Mix_PausedMusic())
+        Mix_ResumeMusic();
+    else
+        Mix_PauseMusic();
 }
 
 
 void LX_Music::stop()
 {
-    _mimpl->stop();
+    if(Mix_PlayingMusic())
+        Mix_HaltMusic();
 }
 
 

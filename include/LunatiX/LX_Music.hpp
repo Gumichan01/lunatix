@@ -120,7 +120,7 @@ public:
     */
     void fadeInPos(int ms,int pos);
     /**
-    *   @fn void fadeOut(int ms)
+    *   @fn static void fadeOut(int ms)
     *
     *   Fade out the music over some milliseconds of time
     *
@@ -129,7 +129,7 @@ public:
     *   @note This functions works only when music is playing and
     *           no fading is already set to fade out
     */
-    void fadeOut(int ms);
+    static void fadeOut(int ms);
 
     /**
     *   @fn bool play()
@@ -159,13 +159,13 @@ public:
     *   @fn void pause()
     *   Pause or resume the current music
     */
-    void pause();
+    static void pause();
 
     /**
-    *   @fn void stop()
+    *   @fn static void stop()
     *   Stop the music
     */
-    void stop();
+    static void stop();
 
     /**
     *   @fn const libtagpp::Tag& getInfo()
