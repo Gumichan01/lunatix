@@ -79,12 +79,11 @@ class LX_Polygon_
         LX_Vector2D OB;
 
         bool haveSign = false;
-        enum Sign {POSITIVE,NEGATIVE,NONE} s = NONE;
+        float sign = 0.0f;
         const unsigned long n = _points.size();
 
         for(unsigned int i = 0; i < n; i++)
         {
-            //generateSegments(i,n,AO,OB);
             AO = LX_Vector2D(_points[i],(i == 0 ? _points[n-1] : _points[i-1]));
             OB = LX_Vector2D(( i == n-1 ? _points[0] : _points[i+1]),_points[i]);
             // Vector product
@@ -93,9 +92,9 @@ class LX_Polygon_
             if(!haveSign)
             {
                 if(cross_product > 0)
-                    s = POSITIVE;
+                    sign = 1.0f;
                 else if(cross_product < 0)
-                    s = NEGATIVE;
+                    sign = -1.0f;
                 else
                 {
                     _convex = false;
@@ -106,26 +105,11 @@ class LX_Polygon_
             }
             else
             {
-                switch(s)
+                if((sign > 0.0f && cross_product < 0)
+                        || (sign < 0.0f && cross_product > 0))
                 {
-                case POSITIVE :
-                    if(cross_product < 0)
-                    {
-                        _convex = false;
-                        return;
-                    }
-                    break;
-
-                case NEGATIVE :
-                    if(cross_product > 0)
-                    {
-                        _convex = false;
-                        return;
-                    }
-                    break;
-
-                case NONE :
-                    break;
+                    _convex = false;
+                    return;
                 }
             }
         }
