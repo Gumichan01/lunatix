@@ -72,28 +72,6 @@ class LX_Polygon_
     LX_Points_ _points;     /* A sequence of LX_Point objects   */
     bool _convex;           /* If the polygon is convex         */
 
-    void generateSegments(unsigned long i, const unsigned long n,
-                          LX_Vector2D& AO, LX_Vector2D& OB) const
-    {
-        if(i == 0)
-        {
-            AO = LX_Vector2D(_points[i],_points[n-1]);
-        }
-        else
-        {
-            AO = LX_Vector2D(_points[i],_points[i-1]);
-        }
-
-        if(i == n-1)
-        {
-            OB = LX_Vector2D(_points[0],_points[i]);
-        }
-        else
-        {
-            OB = LX_Vector2D(_points[i+1],_points[i]);
-        }
-    }
-
     void convexity_()
     {
         // Vectors
@@ -106,7 +84,9 @@ class LX_Polygon_
 
         for(unsigned int i = 0; i < n; i++)
         {
-            generateSegments(i,n,AO,OB);
+            //generateSegments(i,n,AO,OB);
+            AO = LX_Vector2D(_points[i],(i == 0 ? _points[n-1] : _points[i-1]));
+            OB = LX_Vector2D(( i == n-1 ? _points[0] : _points[i+1]),_points[i]);
             // Vector product
             int cross_product = static_cast<int>(vector_product(AO,OB));
 
