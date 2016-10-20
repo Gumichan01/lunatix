@@ -77,17 +77,17 @@ class LX_Polygon_
         LX_Vector2D AO;
         LX_Vector2D OB;
 
-        bool haveSign = false;
         float sign = 0.0f;
+        bool haveSign = false;
         const auto pbeg =_points.begin();
         const auto pend =_points.end();
+        int cross_product;
 
         for(auto it = pbeg; it != pend; it++)
         {
             AO = LX_Vector2D(*it,(it == pbeg ? *(pend - 1) : *(it - 1)));
             OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)),*it);
-            // Vector product
-            int cross_product = static_cast<int>(vector_product(AO,OB));
+            cross_product = static_cast<int>(vector_product(AO,OB));
 
             if(!haveSign)
             {
@@ -142,7 +142,6 @@ class LX_Polygon_
     {
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
-        //const unsigned long N = _points.size();
         float sum_x = 0, sum_y = 0;
         const float p6_area = 6 * area_();
 
