@@ -1,0 +1,7 @@
+<map id="LX_Physics::scalar_product" name="LX_Physics::scalar_product">
+<area shape="rect" id="node2" href="$namespace_l_x___physics.html#ae88837976c43945a182c3247916dbe58" title="LX_Physics::collisionSeg\lCircle" alt="" coords="187,45,355,86"/>
+<area shape="rect" id="node5" href="$namespace_l_x___physics.html#a73229d2347c0ec7bc01ec0f224f8c21a" title="LX_Physics::vector_norm" alt="" coords="187,111,355,137"/>
+<area shape="rect" id="node3" href="$namespace_l_x___physics.html#adcd8a1fa4eaf9719a5c3b6de4a5ea2b0" title="LX_Physics::collisionCircleRect" alt="" coords="403,5,608,32"/>
+<area shape="rect" id="node4" href="$namespace_l_x___physics.html#ab9ec50d30cb4d0004da61adea1e937e2" title="LX_Physics::collisionCirclePoly" alt="" coords="403,56,607,83"/>
+<area shape="rect" id="node6" href="$namespace_l_x___physics.html#ab9ad44483e91a68eab83ff5adf211069" title="LX_Physics::normalize" alt="" coords="428,111,583,137"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="LX_Init" name="LX_Init">
+<area shape="rect" id="node2" href="$class_l_x___configuration.html#a432e7a17f9d1edbcc3587a8cf288b22c" title="LX_Configuration::initConfig" alt="" coords="133,5,311,32"/>
+<area shape="rect" id="node4" href="$class_l_x___configuration.html#abd5c52de995711f1c004510ed88a9dd2" title="LX_Configuration::getInstance" alt="" coords="125,56,319,83"/>
+<area shape="rect" id="node5" href="$class_l_x___configuration.html#a49011bfce63d1db3dfb011ac93d65fff" title="LX_Configuration::getVideoFlag" alt="" coords="121,107,323,133"/>
+<area shape="rect" id="node6" href="$class_l_x___configuration.html#a0379bbd6a46206aabe07c97731dab075" title="LX_Configuration::getAudioFlag" alt="" coords="121,157,323,184"/>
+<area shape="rect" id="node7" href="$class_l_x___configuration.html#a3fdff1014ea20e108427d2253fe11207" title="LX_Configuration::getJoystickFlag" alt="" coords="113,208,331,235"/>
+<area shape="rect" id="node8" href="$class_l_x___configuration.html#abbc64f982dcaa4a9f33983b2b3fe1171" title="LX_Configuration::getTTFFlag" alt="" coords="127,259,317,285"/>
+<area shape="rect" id="node9" href="$class_l_x___configuration.html#a9dc59fa522b7d639a15c7b4440fefb60" title="LX_Configuration::getOpen\lGLFlag" alt="" coords="135,310,309,351"/>
+<area shape="rect" id="node10" href="$class_l_x___win_1_1_l_x___window_manager.html#ab06d449493213b017f34d23198fa8bff" title="LX_Win::LX_WindowManager\l::init" alt="" coords="127,375,317,417"/>
+<area shape="rect" id="node3" href="$_l_x___error_8hpp.html#a5426a2a2baf9ee189e39f42a9e2687eb" title="LX_SetError" alt="" coords="379,5,469,32"/>
+</map>

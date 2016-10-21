@@ -1,0 +1,8 @@
+<map id="include/LunatiX/LX_Window.hpp" name="include/LunatiX/LX_Window.hpp">
+<area shape="rect" id="node2" href="$_lunatix__engine_8hpp.html" title="The header file of the LunatiX Engine. " alt="" coords="5,95,160,136"/>
+<area shape="rect" id="node3" href="$_l_x___graphics_8cpp.html" title="The implementation of the graphics engine. " alt="" coords="185,95,327,136"/>
+<area shape="rect" id="node4" href="$_l_x___window_8cpp.html" title="The implementation of the window. " alt="" coords="351,95,494,136"/>
+<area shape="rect" id="node5" href="$_l_x___window_manager_8cpp.html" title="The window manager implementation. " alt="" coords="519,95,687,136"/>
+<area shape="rect" id="node6" href="$_l_x___particle_system_8cpp.html" title="The Particle system implementation. " alt="" coords="711,95,886,136"/>
+<area shape="rect" id="node7" href="$_l_x___true_type_font_8cpp.html" title="The LunatiX Engine True type Font (TTF) implementation. " alt="" coords="910,95,1079,136"/>
+</map>

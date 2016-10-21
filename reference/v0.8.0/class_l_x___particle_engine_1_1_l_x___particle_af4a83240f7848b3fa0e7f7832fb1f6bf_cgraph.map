@@ -1,0 +1,6 @@
+<map id="LX_ParticleEngine::LX_Particle::setSurface" name="LX_ParticleEngine::LX_Particle::setSurface">
+<area shape="rect" id="node2" href="$namespace_l_x___graphics.html#a04e98ab25501aeb8e46644af642af73d" title="LX_Graphics::loadSurface\lFromFileBuffer" alt="" coords="211,28,381,69"/>
+<area shape="rect" id="node3" href="$_l_x___error_8hpp.html#a5426a2a2baf9ee189e39f42a9e2687eb" title="LX_SetError" alt="" coords="673,35,764,62"/>
+<area shape="rect" id="node4" href="$class_l_x___file_i_o_1_1_l_x___file_buffer.html#a33e60c73b2be537a07c65e9b50086f4b" title="LX_FileIO::LX_FileBuffer\l::getSurfaceFromBuffer" alt="" coords="447,28,607,69"/>
+<area shape="rect" id="node5" href="$namespace_l_x___graphics.html#adcddbebbe271ecf73fcf4aa06560bdb8" title="LX_Graphics::optimizeSurface" alt="" coords="429,94,625,121"/>
+</map>

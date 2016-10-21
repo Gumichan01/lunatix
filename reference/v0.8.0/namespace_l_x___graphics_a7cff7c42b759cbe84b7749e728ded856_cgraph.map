@@ -1,0 +1,7 @@
+<map id="LX_Graphics::loadSurface" name="LX_Graphics::loadSurface">
+<area shape="rect" id="node2" href="$_l_x___error_8hpp.html#a5426a2a2baf9ee189e39f42a9e2687eb" title="LX_SetError" alt="" coords="486,5,577,32"/>
+<area shape="rect" id="node3" href="$class_l_x___file_i_o_1_1_l_x___file.html#a8554678952c30be1b331ea73003201c7" title="LX_FileIO::LX_File\l::getSurfaceFromData" alt="" coords="247,82,397,123"/>
+<area shape="rect" id="node6" href="$namespace_l_x___graphics.html#adcddbebbe271ecf73fcf4aa06560bdb8" title="LX_Graphics::optimizeSurface" alt="" coords="224,31,420,57"/>
+<area shape="rect" id="node4" href="$class_l_x___file_i_o_1_1_l_x___file.html#a2b192af85809f25277f6813913003c60" title="LX_FileIO::LX_File\l::tell" alt="" coords="468,69,595,110"/>
+<area shape="rect" id="node5" href="$class_l_x___file_i_o_1_1_l_x___file.html#a2019648e561d71008b4038e90f6d5165" title="LX_FileIO::LX_File\l::seek" alt="" coords="468,134,595,175"/>
+</map>

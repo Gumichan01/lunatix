@@ -1,0 +1,4 @@
+<map id="LX_Physics::collisionSegCircle" name="LX_Physics::collisionSegCircle">
+<area shape="rect" id="node2" href="$namespace_l_x___physics.html#adcd8a1fa4eaf9719a5c3b6de4a5ea2b0" title="LX_Physics::collisionCircleRect" alt="" coords="221,5,427,32"/>
+<area shape="rect" id="node3" href="$namespace_l_x___physics.html#ab9ec50d30cb4d0004da61adea1e937e2" title="LX_Physics::collisionCirclePoly" alt="" coords="222,56,426,83"/>
+</map>
