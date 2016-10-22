@@ -1,0 +1,135 @@
+/*----Images----*/
+img {
+  position: relative;
+  border: none;
+}
+
+.center {
+  display: block;
+  margin: auto auto 0 auto;
+  width: 768px;
+  height: 300px;
+}
+
+img#head {
+  margin-left: 1px;
+  margin-bottom: 32px;
+}
+
+img#side {
+  margin-right: 16px;
+  width: 768px;
+  height: 468px;
+}
+
+/*----Html & body----*/
+body {
+  margin-top: -1px;
+  padding: 0px;
+  background-color: #111111;
+}
+
+/*----Titles----*/
+h1 {
+  position: relative;
+  text-align: center;
+  font-size: 400%;
+}
+
+/*----navigation----*/
+nav {
+  display: block;
+}
+
+.link {
+  font-size: 100%;
+}
+
+/*--hover--*/
+li:hover {
+  background: #000000;
+}
+
+/**----div----*/
+div#contains {
+  display: block;
+  margin: auto auto 0 auto;
+  position: relative;
+  min-height: 608px;
+}
+
+/*--textual block--*/
+div#texte {
+  margin: auto auto 0 auto;
+  width: 768px;
+}
+
+/*----References----*/
+a {
+  font-size: 100%;
+  color: #1af;
+  margin-left: 0px;
+  text-decoration: none;
+}
+
+.onglet {
+  font-size: 175%;
+  color: #000000;
+  margin-left: 16px;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f00;
+  text-decoration: underline;
+}
+
+/*----paragraph----*/
+p {
+  font-family: 'Arial';
+  font-size: 100%;
+  text-decoration: none;
+}
+
+p:first-letter {
+  padding-left: 20px;
+}
+
+/*----frame----*/
+iframe {
+  border: 0;
+  width: 768px;
+  height: 432px;
+  margin: auto auto auto auto;
+}
+
+footer {
+  border-bottom: 4px solid;
+}
+
+div#page_foot {
+  float: left;
+}
+
+div#contains,
+div#page_foot {
+  width: 944px;
+}
+
+/*----group----*/
+h1,
+h2,
+h3,
+h4,
+p,
+div#page_foot,
+iframe,
+script,
+li {
+  color: #ffffff;
+}
+
+div,
+footer {
+  background-color: #000000;
+}
