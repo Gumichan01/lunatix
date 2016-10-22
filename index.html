@@ -1,75 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="author" content="Luxon JEAN-PIERRE">
-		<meta name="description" content="Lunatix library">
-		<meta name="keywords" content="lunatix, gumichan01, SDL2">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-		<title>LunatiX - Home page</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-		<link rel="icon" href="lunatix-logo.ico" type="image/icon" />
-		<link rel="stylesheet" type="text/css" href="layout.css">
-	</head>
+    <title>Lunatix by Gumichan01</title>
+  </head>
 
-	<body>
+  <body>
 
-		<div id="contains">
+    <header>
+      <div class="container">
+        <h1>Lunatix</h1>
+        <h2>A free SDL2-based library</h2>
 
-			<header>
-				<a class="onglet" href="index.html">
-					<img class="center" src="lunatix-logo.png" alt="Home page"/>
-				</a>
-			</header>
+        <section id="downloads">
+          <a href="https://github.com/Gumichan01/lunatix/zipball/master" class="btn">.zip</a>
+          <a href="https://github.com/Gumichan01/lunatix/tarball/master" class="btn">.tar.gz</a>
+          <a href="#" class="btn">Manual (soon)</a>
+          <a href="https://gumichan01.github.io/lunatix/reference/v0.8.0" class="btn">Reference</a>
+          <a href="https://github.com/Gumichan01/lunatix" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-			<div id="texte">
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="lunatix" class="anchor" href="#lunatix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LunatiX</h1>
 
-				<h2> LunatiX </h2>
+<p><img src="https://raw.githubusercontent.com/Gumichan01/lunatix-engine/master/data/lunatix-logo.png" alt="LunatiX Logo"></p>
 
-				<p>|
-					EN, <a href="index_fr.html">EN</a> |
-					<a href="http://github.com/Gumichan01/lunatix/">Repository </a> |
-					<a href="http://gumichan01.github.io/lunatix/reference/v0.8.0">Reference</a>
-				   |
-				</p>
+<p>LunatiX is a free SDL2-based library. It can be used for open-source or
+commercial games thanks to the zlib/libpng license.</p>
 
-				<p> LunatiX is a free, SDL2-based library. This library is used in
-					<a href="../tx/index.html" title="Target Xplosion">Target Xplosion</a>.
-					It can be used for open-source or commercial games thanks to the zlib/libpng license.</p>
+<p>It contains these following modules:</p>
 
-				<p>It contains these following libraries:</p>
+<ul>
+<li>LX_Graphics: A 2D library based on SDL_Image 2.0 (supporting JPEG, PNG,...)</li>
+<li>LX_TrueTypeFont: The True Type Font (TTF) library based on SDL_TTF 2.0</li>
+<li>LX_Mixer: The audio library based on SDL_Mixer 2.0 (supporting MP3, OGG, WAV, ...)</li>
+<li>LX_Physics: The physics module</li>
+</ul>
 
-				<ul>
-					<li> LX_Graphics: A 2D library based on SDL_Image 2.0 (supporting JPEG, PNG,...)</li>
-					<li> LX_TrueTypeFont: The True Type Font (TTF) library based on SDL_TTF 2.0</li>
-					<li> LX_Mixer: The audio library based on SDL_Mixer 2.0 (supporting MP3, OGG, WAV, ...)</li>
-					<li> LX_Physics: The physics module (collision destection, movement)</li>
-					<li> Many other modules...</li>
-				</ul>
+<p>LunatiX also contains these modules:</p>
 
-				<p>The library works on Windows and Linux systems (maybe on MAC OS) and can be downloaded
-				<a href="https://github.com/Gumichan01/lunatix/releases"
-				target="_blank" title="Release" >here</a>.</p>
+<ul>
+<li>LX_Device: The library for Gamepads and mouse support</li>
+<li>LX_FileIO: The file Input/Output library</li>
+<li>LX_Multithreading: Multithreading support with synchronization primitives</li>
+<li>LX_Text: To handle text input</li>
+</ul>
 
-				<h3> Features </h3>
+<p>The library works on Windows and Linux (maybe on Mac OS X).</p>
 
-				<ul>
-					<li> 2D hardware acceleration </li>
-					<li> 2D basic animation </li>
-					<li> Support for OpenGL 3.0+ </li>
-					<li> Support for Multiple windows </li>
-					<li> Collision detection </li>
-					<li> Basic particle system </li>
-					<li> Multithreading </li>
-					<li> Text input </li>
-					<li> Gamepad support </li>
-					<li> many other things... </li>
-				</ul>
-			</div>
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
 
-			<footer>
-				<div id="page_foot">&copy; 2016 Luxon Jean-Pierre</div>
-			</footer>
-		</div>
-     </body>
+<ul>
+<li>2D hardware acceleration</li>
+<li>2D basic animation</li>
+<li>Support for OpenGL 3.0+</li>
+<li>Support for Multiple windows</li>
+<li>Collision detection</li>
+<li>Basic particle system</li>
+<li>Multithreading</li>
+<li>Text input</li>
+<li>Gamepad support</li>
+<li>many other things...</li>
+</ul>
+
+<h2>
+<a id="contribute" class="anchor" href="#contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>The documentation is available
+    <a href="https://gumichan01.github.io/lunatix/reference/v0.8.0">here</a>.</p>
+      </section>
+    </div>
+
+
+  </body>
 </html>
