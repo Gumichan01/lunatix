@@ -20,8 +20,16 @@
 
 #include <LunatiX/LX_Event.hpp>
 
+
+namespace
+{
+// Type of the user event
+uint32_t utype = -1;
+};
+
 namespace LX_Event
 {
+
 bool pollEvent(LX_Input *event)
 {
     return SDL_PollEvent(event) == 1;
@@ -40,6 +48,24 @@ bool waitEventTimeout(LX_Input *event, int timeout)
 bool pushEvent(LX_Input *event)
 {
     return SDL_PushEvent(event) == 1;
+}
+
+bool pushUserEvent(LX_UserInput *uevent)
+{
+    if(utype == -1)
+    {
+        if((utype = SDL_RegisterEvents(1)) == static_cast<uint32_t>(-1))
+            return false;
+    }
+
+    LX_Input ev;
+    SDL_zero(ev);
+
+    ev.type = SDL_USEREVENT;
+    ev.user = *uevent;
+    uevent->type = utype;
+
+    return pushEvent(&ev);
 }
 
 };
