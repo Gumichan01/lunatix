@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 
     while(go)
     {
-        while(LX_Event::pollEvent(&event))
+        while(LX_Event::pollEvent(event))
         {
             switch(event.type)
             {
