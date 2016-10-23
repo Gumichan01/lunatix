@@ -27,13 +27,13 @@ namespace LX_Event
 using LX_Input = SDL_Event;
 using LX_UserInput = SDL_UserEvent;
 
-bool pollEvent(LX_Input *event);
-bool waitEvent(LX_Input *event);
-bool waitEventTimeout(LX_Input *event, int timeout);
+bool pollEvent(LX_Input& event);
+bool waitEvent(LX_Input& event);
+bool waitEventTimeout(LX_Input& event, int timeout);
 
-bool pushEvent(LX_Input *event);
+bool pushEvent(LX_Input& event);
 
-bool pushUserEvent(LX_UserInput *uevent);
+bool pushUserEvent(LX_UserInput& uevent);
 };
 
 #endif // LX_EVENT_HPP_INCLUDED
