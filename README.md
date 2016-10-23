@@ -36,14 +36,14 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 
     #include <LunatiX/LX_Library.hpp>
-    #include <LunatiX/LX_Window.hpp>
-    #include <LunatiX/LX_Image.hpp>
+    #include <LunatiX/LX_Graphics.hpp>
+    #include <LunatiX/LX_Event.hpp>
     #include <LunatiX/LX_Log.hpp>
 
     int main(int argc, char** argv)
     {
         LX_AABB position = {0,0,256,256};
-        SDL_Event event;
+        LX_Event::LX_Input event;
         bool go = true;
 
         if(!LX_Init())
@@ -63,7 +63,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
         while(go)
         {
-            while(SDL_PollEvent(&event))
+            while(LX_Event::pollEvent(event))
             {
                 switch(event.type)
                 {
@@ -88,17 +88,17 @@ The library works on Windows and Linux (maybe on Mac OS X).
 ## Contribute ##
 
 You may take a look on the library or get the development version
-on [Github](https://github.com/Gumichan01/lunatix-engine) ~~The library reference
-is also available [online](http://gumichan01.kappatau.fr/reference/lunatix-engine/v0.8.0/).~~
+on [Github](https://github.com/Gumichan01/lunatix). The library reference
+is also available [online (version 0.8)](https://gumichan01.github.io/lunatix/reference/v0.8.0/).
 
 
 ## Build ##
 
 #### On Windows ####
 
-~~First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.8.0) (v0.8.0)
+First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.8.0) (v0.8.0)
 It includes the library files and all necessary materials (SDL2 libraries)
-to develop any project.~~
+to develop any project.
 
 The source code is compilable using [MinGW](http://www.mingw.org/).
 It should work with Visual C++ (if you are lucky).
@@ -107,7 +107,7 @@ You can build it using the CodeBlocks project provided in the directory (*lunati
 
 #### On Linux ####
 
-The source code mainly uses Clang to be compiled.
+The Makefile uses Clang in order to get the library being compiled.
 So you must ensure that Clang (version 3.4 at least) is installed to compile the code.
 If not, you can compile the source code using g++ (4.7.1+), but you will have to
 modify the Makefile to do it.
@@ -137,5 +137,5 @@ To test the library, execute the following command:
 
 ## Documentation ##
 
-The documentation of the file can be build with Doxygen,
+The documentation of the library can be build with Doxygen,
 using the **dox** configuration file.
