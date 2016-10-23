@@ -74,8 +74,10 @@
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
+		<Unit filename="include/LunatiX/LX_Event.hpp" />
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
+		<Unit filename="include/LunatiX/LX_FileSystem.hpp" />
 		<Unit filename="include/LunatiX/LX_Gamepad.hpp" />
 		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
@@ -123,6 +125,7 @@
 		<Unit filename="src/LunatiX/Graphics/LX_OpenGL.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Window.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_WindowManager.cpp" />
+		<Unit filename="src/LunatiX/Input/LX_Event.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Config.cpp" />
 		<Unit filename="src/LunatiX/Library/LX_Library.cpp" />
 		<Unit filename="src/LunatiX/MSGBox/LX_MessageBox.cpp" />
@@ -139,6 +142,7 @@
 		<Unit filename="src/LunatiX/Physics/LX_Polygon.cpp" />
 		<Unit filename="src/LunatiX/Physics/LX_Vector2D.cpp" />
 		<Unit filename="src/LunatiX/Random/LX_Random.cpp" />
+		<Unit filename="src/LunatiX/System/LX_FileSystem.cpp" />
 		<Unit filename="src/LunatiX/System/LX_Log.cpp" />
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/Text/LX_Text.cpp" />
