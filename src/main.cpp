@@ -4,17 +4,17 @@
 
 #include <LunatiX/LX_Library.hpp>
 #include <LunatiX/LX_Graphics.hpp>
-#include <LunatiX/LX_Version.hpp>
-#include <LunatiX/LX_Timer.hpp>
+#include <LunatiX/LX_Event.hpp>
 #include <LunatiX/LX_Log.hpp>
 
 #define UNUSED(X) (void)(X)
+
 
 int main(int argc, char** argv)
 {
     UNUSED(argc);UNUSED(argv);
     LX_AABB position = {0,0,256,256};
-    SDL_Event event;
+    LX_Event::LX_Input event;
     bool go = true;
 
     if(!LX_Init())
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 
     while(go)
     {
-        while(SDL_PollEvent(&event))
+        while(LX_Event::pollEvent(&event))
         {
             switch(event.type)
             {
