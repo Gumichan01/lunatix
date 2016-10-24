@@ -27,30 +27,30 @@ namespace
 uint32_t utype = -1;
 };
 
-namespace LX_Event
+namespace LX_EventHandler
 {
 
-bool pollEvent(LX_Input& event)
+bool pollEvent(LX_Event& event)
 {
     return SDL_PollEvent(&event) == 1;
 }
 
-bool waitEvent(LX_Input& event)
+bool waitEvent(LX_Event& event)
 {
     return SDL_WaitEvent(&event) == 1;
 }
 
-bool waitEventTimeout(LX_Input& event, int timeout)
+bool waitEventTimeout(LX_Event& event, int timeout)
 {
     return SDL_WaitEventTimeout(&event,timeout) == 1;
 }
 
-bool pushEvent(LX_Input& event)
+bool pushEvent(LX_Event& event)
 {
     return SDL_PushEvent(&event) == 1;
 }
 
-bool pushUserEvent(LX_UserInput& uevent)
+bool pushUserEvent(LX_UserEvent& uevent)
 {
     if(utype == -1)
     {
@@ -58,7 +58,7 @@ bool pushUserEvent(LX_UserInput& uevent)
             return false;
     }
 
-    LX_Input ev;
+    LX_Event ev;
     SDL_zero(ev);
 
     uevent.type = utype;

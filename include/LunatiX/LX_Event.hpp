@@ -22,18 +22,18 @@
 
 #include <SDL2/SDL_events.h>
 
-namespace LX_Event
+namespace LX_EventHandler
 {
-using LX_Input = SDL_Event;
-using LX_UserInput = SDL_UserEvent;
+using LX_Event = SDL_Event;
+using LX_UserEvent = SDL_UserEvent;
 
-bool pollEvent(LX_Input& event);
-bool waitEvent(LX_Input& event);
-bool waitEventTimeout(LX_Input& event, int timeout);
+bool pollEvent(LX_Event& event);
+bool waitEvent(LX_Event& event);
+bool waitEventTimeout(LX_Event& event, int timeout);
 
-bool pushEvent(LX_Input& event);
+bool pushEvent(LX_Event& event);
 
-bool pushUserEvent(LX_UserInput& uevent);
+bool pushUserEvent(LX_UserEvent& uevent);
 };
 
 #endif // LX_EVENT_HPP_INCLUDED
