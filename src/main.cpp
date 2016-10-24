@@ -9,12 +9,13 @@
 
 #define UNUSED(X) (void)(X)
 
+using namespace LX_EventHandler;
 
 int main(int argc, char** argv)
 {
     UNUSED(argc);UNUSED(argv);
     LX_AABB position = {0,0,256,256};
-    LX_Event::LX_Input event;
+    LX_Event event;
     bool go = true;
 
     if(!LX_Init())
@@ -34,7 +35,7 @@ int main(int argc, char** argv)
 
     while(go)
     {
-        while(LX_Event::pollEvent(event))
+        while(pollEvent(event))
         {
             switch(event.type)
             {
