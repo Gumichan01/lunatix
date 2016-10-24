@@ -43,7 +43,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
     int main(int argc, char** argv)
     {
         LX_AABB position = {0,0,256,256};
-        LX_Event::LX_Input event;
+        LX_EventHandler::LX_Event event;
         bool go = true;
 
         if(!LX_Init())
@@ -63,7 +63,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
         while(go)
         {
-            while(LX_Event::pollEvent(event))
+            while(LX_EventHandler::pollEvent(event))
             {
                 switch(event.type)
                 {
