@@ -68,4 +68,24 @@ bool pushUserEvent(LX_UserEvent& uevent)
     return pushEvent(ev);
 }
 
+LX_KeyCode getKeyCode(LX_Event& event)
+{
+    return event.key.keysym.sym;
+}
+
+LX_ScanCode getScanCode(LX_Event& event)
+{
+    return event.key.keysym.scancode;
+}
+
+LX_KeyCode getKeyCodeFromScanCode(LX_ScanCode scancode)
+{
+    return SDL_GetKeyFromScancode(scancode);
+}
+
+LX_ScanCode getScanCodeFromKeyCode(LX_KeyCode keycode)
+{
+    return SDL_GetScancodeFromKey(keycode);
+}
+
 };
