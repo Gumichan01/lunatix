@@ -22,18 +22,26 @@
 
 #include <SDL2/SDL_events.h>
 
+/// @todo (#5#) LX_EventHandler: Full implementation
+/// @todo (#5#) LX_EventHandler: Documentation
+
 namespace LX_EventHandler
 {
-using LX_Event = SDL_Event;
-using LX_UserEvent = SDL_UserEvent;
+using LX_Event = SDL_Event;             /* Event                        */
+using LX_UserEvent = SDL_UserEvent;     /* User-defined event           */
+using LX_KeyCode = SDL_Keycode;         /* Virtual key representation   */
+using LX_ScanCode = SDL_Scancode;       /* Physical key representation  */
 
 bool pollEvent(LX_Event& event);
 bool waitEvent(LX_Event& event);
 bool waitEventTimeout(LX_Event& event, int timeout);
 
 bool pushEvent(LX_Event& event);
-
 bool pushUserEvent(LX_UserEvent& uevent);
+
+/// @todo (#2#) LX_EventHandler: Get keypad and mouse buttons
+/// @todo (#5#) LX_EventHandler: Get gamepad button (joystick and game controller)
+
 };
 
 #endif // LX_EVENT_HPP_INCLUDED
