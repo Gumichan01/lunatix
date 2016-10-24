@@ -78,14 +78,24 @@ LX_ScanCode getScanCode(LX_Event& event)
     return event.key.keysym.scancode;
 }
 
-LX_KeyCode getKeyCodeFromScanCode(LX_ScanCode scancode)
+LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
 {
     return SDL_GetKeyFromScancode(scancode);
 }
 
-LX_ScanCode getScanCodeFromKeyCode(LX_KeyCode keycode)
+LX_ScanCode getScanCodeFrom(LX_KeyCode keycode)
 {
     return SDL_GetScancodeFromKey(keycode);
+}
+
+UTF8string stringOfScanCode(LX_ScanCode scancode)
+{
+    return UTF8string(SDL_GetScancodeName(scancode));
+}
+
+UTF8string stringOfKeyCode(LX_KeyCode keycode)
+{
+    return UTF8string(SDL_GetKeyName(keycode));
 }
 
 };

@@ -20,6 +20,7 @@
 *    @version 0.9
 */
 
+#include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_events.h>
 
 /// @todo (#5#) LX_EventHandler: Full implementation
@@ -42,8 +43,11 @@ bool pushUserEvent(LX_UserEvent& uevent);
 LX_KeyCode getKeyCode(LX_Event& event);
 LX_ScanCode getScanCode(LX_Event& event);
 
-LX_KeyCode getKeyCodeFromScanCode(LX_ScanCode scancode);
-LX_ScanCode getScanCodeFromKeyCode(LX_KeyCode keycode);
+LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
+LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
+
+UTF8string stringOfScanCode(LX_ScanCode scancode);
+UTF8string stringOfKeyCode(LX_KeyCode keycode);
 
 /// @todo (#2#) LX_EventHandler: Get keypad and mouse buttons
 /// @todo (#5#) LX_EventHandler: Get gamepad button (joystick and game controller)
