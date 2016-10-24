@@ -29,6 +29,8 @@ const short LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
 const short LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
 const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 
+/// @todo (#1#) remove duplicate virtual and physical keys
+/// @todo (#1#) remove duplicate gamepad buttons and axis
 
 /**
 *   @namespace LX_Device
