@@ -74,10 +74,10 @@ struct LX_GAxis
     int16_t value;          /* Value [-32768 ↔ 32768]   */
 };
 
-// Axis represantation of a gamepad
+// Button represantation of a gamepad
 struct LX_GButton
 {
-    SDL_JoystickID id;      /* ID of the gamepad                                */
+    SDL_JoystickID which;   /* ID of the gamepad                                */
     LX_GamepadButton value; /* Button value                                     */
     int16_t state;          /* Value : LX_BUTTON_PRESSED or LX_BUTTON_RELEASED  */
 };
@@ -90,7 +90,7 @@ bool waitEventTimeout(LX_Event& event, int timeout);
 bool pushEvent(LX_Event& event);
 bool pushUserEvent(LX_UserEvent& uevent);
 
-// Keayboard
+// Keyboard
 
 LX_KeyCode getKeyCode(LX_Event& event);
 LX_ScanCode getScanCode(LX_Event& event);
