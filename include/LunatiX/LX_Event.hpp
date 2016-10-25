@@ -23,8 +23,8 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_events.h>
 
-/// @todo (#5#) LX_EventHandler: Full implementation
-/// @todo (#5#) LX_EventHandler: Documentation
+/// @todo (#1#) LX_EventHandler: Full implementation
+/// @todo (#2#) LX_EventHandler: Documentation
 
 namespace LX_EventHandler
 {
@@ -114,8 +114,8 @@ UTF8string stringOfAxis(LX_GamepadAxis axis);
 UTF8string stringOfAxis(uint8_t axis);
 
 
-/// @todo (#2#) LX_EventHandler: Get keypad and mouse buttons
-/// @todo (#5#) LX_EventHandler: Get gamepad button (joystick and game controller)
+/// @todo (#2#) LX_EventHandler: Get keypad (and test it) and mouse buttons
+/// @todo (#1#) LX_EventHandler: Get gamepad button and test it
 
 };
 
