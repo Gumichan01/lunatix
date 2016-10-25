@@ -36,54 +36,6 @@ int numberOfDevices()
 }
 
 
-UTF8string stringOfButton(LX_GamepadButton button)
-{
-    const char * s = SDL_GameControllerGetStringForButton(button);
-    return UTF8string(s == nullptr ? "null" : s);
-}
-
-UTF8string stringOfButton(uint8_t button)
-{
-    return stringOfButton(static_cast<LX_GamepadButton>(button));
-}
-
-
-UTF8string stringOfAxis(LX_GamepadAxis axis)
-{
-    const char * s = SDL_GameControllerGetStringForAxis(axis);
-    return UTF8string(s == nullptr ? "null" : s);
-}
-
-UTF8string stringOfAxis(uint8_t axis)
-{
-    return stringOfAxis(static_cast<LX_GamepadAxis>(axis));
-}
-
-
-UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key)
-{
-    return UTF8string(SDL_GetScancodeName(key));
-}
-
-
-UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key)
-{
-    return UTF8string(SDL_GetKeyName(key));
-}
-
-
-LX_KeyboardVirtualKey getVirtualKey(LX_KeyboardPhysicalKey key)
-{
-    return SDL_GetKeyFromScancode(key);
-}
-
-
-LX_KeyboardPhysicalKey getPhysicalKey(LX_KeyboardVirtualKey key)
-{
-    return SDL_GetScancodeFromKey(key);
-}
-
-
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
     std::ostringstream stream;
