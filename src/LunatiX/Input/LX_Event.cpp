@@ -68,6 +68,9 @@ bool pushUserEvent(LX_UserEvent& uevent)
     return pushEvent(ev);
 }
 
+
+// Keyboard
+
 LX_KeyCode getKeyCode(LX_Event& event)
 {
     return event.key.keysym.sym;
@@ -96,6 +99,46 @@ UTF8string stringOfScanCode(LX_ScanCode scancode)
 UTF8string stringOfKeyCode(LX_KeyCode keycode)
 {
     return UTF8string(SDL_GetKeyName(keycode));
+}
+
+
+// Gamepad
+
+const LX_GAxis getAxis(LX_Event& event)
+{
+    const SDL_ControllerAxisEvent ax = event.caxis;
+    const LX_GAxis gax = {ax.which,static_cast<LX_GamepadAxis>(ax.axis),ax.value};
+    return gax;
+}
+
+const LX_GButton getButton(LX_Event& event)
+{
+    const SDL_ControllerButtonEvent bu = event.cbutton;
+    const LX_GButton gbutton = {bu.which,static_cast<LX_GamepadButton>(bu.button),bu.state};
+    return gbutton;
+}
+
+UTF8string stringOfButton(LX_GamepadButton button)
+{
+    const char * s = SDL_GameControllerGetStringForButton(button);
+    return UTF8string(s == nullptr ? "null" : s);
+}
+
+UTF8string stringOfButton(uint8_t button)
+{
+    return stringOfButton(static_cast<LX_GamepadButton>(button));
+}
+
+
+UTF8string stringOfAxis(LX_GamepadAxis axis)
+{
+    const char * s = SDL_GameControllerGetStringForAxis(axis);
+    return UTF8string(s == nullptr ? "null" : s);
+}
+
+UTF8string stringOfAxis(uint8_t axis)
+{
+    return stringOfAxis(static_cast<LX_GamepadAxis>(axis));
 }
 
 };
