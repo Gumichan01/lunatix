@@ -27,30 +27,38 @@ namespace
 uint32_t utype = -1;
 };
 
-namespace LX_EventHandler
+namespace LX_Event
 {
+// LX_Event
 
-bool pollEvent(LX_Event& event)
+LX_EventHandler::LX_EventHandler()
+{
+    SDL_zero(event);
+}
+
+
+bool LX_EventHandler::pollEvent()
 {
     return SDL_PollEvent(&event) == 1;
 }
 
-bool waitEvent(LX_Event& event)
+bool LX_EventHandler::waitEvent()
 {
     return SDL_WaitEvent(&event) == 1;
 }
 
-bool waitEventTimeout(LX_Event& event, int timeout)
+bool LX_EventHandler::waitEventTimeout(int timeout)
 {
     return SDL_WaitEventTimeout(&event,timeout) == 1;
 }
 
-bool pushEvent(LX_Event& event)
+bool LX_EventHandler::pushEvent(LX_EventData& ev)
 {
-    return SDL_PushEvent(&event) == 1;
+    return SDL_PushEvent(&ev) == 1;
 }
 
-bool pushUserEvent(LX_UserEvent& uevent)
+
+bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 {
     if(utype == -1)
     {
@@ -58,7 +66,7 @@ bool pushUserEvent(LX_UserEvent& uevent)
             return false;
     }
 
-    LX_Event ev;
+    LX_EventData ev;
     SDL_zero(ev);
 
     uevent.type = utype;
@@ -68,18 +76,38 @@ bool pushUserEvent(LX_UserEvent& uevent)
     return pushEvent(ev);
 }
 
+LX_EventType LX_EventHandler::getEventType()
+{
+    return event.type;
+}
 
-// Keyboard
-
-LX_KeyCode getKeyCode(LX_Event& event)
+LX_KeyCode LX_EventHandler::getKeyCode()
 {
     return event.key.keysym.sym;
 }
 
-LX_ScanCode getScanCode(LX_Event& event)
+
+LX_ScanCode LX_EventHandler::getScanCode()
 {
     return event.key.keysym.scancode;
 }
+
+const LX_GAxis LX_EventHandler::getAxis()
+{
+    const SDL_ControllerAxisEvent ax = event.caxis;
+    const LX_GAxis gax = {ax.which,static_cast<LX_GamepadAxis>(ax.axis),ax.value};
+    return gax;
+}
+
+const LX_GButton LX_EventHandler::getButton()
+{
+    const SDL_ControllerButtonEvent bu = event.cbutton;
+    const LX_GButton gbutton = {bu.which,static_cast<LX_GamepadButton>(bu.button),bu.state};
+    return gbutton;
+}
+
+
+// Keyboard
 
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
 {
@@ -103,20 +131,6 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode)
 
 
 // Gamepad
-
-const LX_GAxis getAxis(LX_Event& event)
-{
-    const SDL_ControllerAxisEvent ax = event.caxis;
-    const LX_GAxis gax = {ax.which,static_cast<LX_GamepadAxis>(ax.axis),ax.value};
-    return gax;
-}
-
-const LX_GButton getButton(LX_Event& event)
-{
-    const SDL_ControllerButtonEvent bu = event.cbutton;
-    const LX_GButton gbutton = {bu.which,static_cast<LX_GamepadButton>(bu.button),bu.state};
-    return gbutton;
-}
 
 UTF8string stringOfButton(LX_GamepadButton button)
 {

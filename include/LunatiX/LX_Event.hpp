@@ -26,9 +26,10 @@
 /// @todo (#1#) LX_EventHandler: Full implementation
 /// @todo (#2#) LX_EventHandler: Documentation
 
-namespace LX_EventHandler
+namespace LX_Event
 {
-using LX_Event = SDL_Event;                         /* Event                        */
+using LX_EventType = uint32_t;
+using LX_EventData = SDL_Event;                     /* Event                        */
 using LX_UserEvent = SDL_UserEvent;                 /* User-defined event           */
 using LX_KeyCode = SDL_Keycode;                     /* Virtual key representation   */
 using LX_ScanCode = SDL_Scancode;                   /* Physical key representation  */
@@ -77,23 +78,13 @@ struct LX_GAxis
 // Button represantation of a gamepad
 struct LX_GButton
 {
-    SDL_JoystickID which;   /* ID of the gamepad                                */
-    LX_GamepadButton value; /* Button value                                     */
-    int16_t state;          /* Value : LX_BUTTON_PRESSED or LX_BUTTON_RELEASED  */
+    SDL_JoystickID which;   /* ID of the gamepad                                        */
+    LX_GamepadButton value; /* Button value                                             */
+    int16_t state;          /* Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
 };
 
 
-bool pollEvent(LX_Event& event);
-bool waitEvent(LX_Event& event);
-bool waitEventTimeout(LX_Event& event, int timeout);
-
-bool pushEvent(LX_Event& event);
-bool pushUserEvent(LX_UserEvent& uevent);
-
 // Keyboard
-
-LX_KeyCode getKeyCode(LX_Event& event);
-LX_ScanCode getScanCode(LX_Event& event);
 
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
@@ -104,14 +95,41 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode);
 
 // Gamepad
 
-const LX_GAxis getAxis(LX_Event& event);
-const LX_GButton getButton(LX_Event& event);
-
 UTF8string stringOfButton(LX_GamepadButton button);
 UTF8string stringOfButton(uint8_t button);
 
 UTF8string stringOfAxis(LX_GamepadAxis axis);
 UTF8string stringOfAxis(uint8_t axis);
+
+
+// Event handling
+
+class LX_EventHandler
+{
+    LX_EventData event;
+
+    LX_EventHandler(const LX_EventHandler&);
+
+public:
+
+    LX_EventHandler();
+
+    bool pollEvent();
+    bool waitEvent();
+    bool waitEventTimeout(int timeout);
+
+    bool pushEvent(LX_EventData& ev);
+    bool pushUserEvent(LX_UserEvent& uevent);
+
+    LX_EventType getEventType();
+    LX_KeyCode getKeyCode();
+    LX_ScanCode getScanCode();
+
+    const LX_GAxis getAxis();
+    const LX_GButton getButton();
+
+    ~LX_EventHandler() = default;
+};
 
 
 /// @todo (#2#) LX_EventHandler: Get keypad (and test it) and mouse buttons
