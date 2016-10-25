@@ -62,6 +62,7 @@ class LX_Gamepad_
     SDL_GameController *_gc;
     SDL_Joystick *_joy;
     std::unique_ptr<LX_Haptic> _haptic;
+    bool _closed;
 
     bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
     bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;
@@ -70,7 +71,7 @@ class LX_Gamepad_
 
 public :
 
-    LX_Gamepad_(): _gc(nullptr),_joy(nullptr),_haptic(nullptr) {}
+    LX_Gamepad_(): _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(false) {}
 
     void open(int index)
     {
@@ -94,15 +95,19 @@ public :
     {
         _haptic.reset();
 
-        if(_gc != nullptr)
+        if(!_closed)
         {
-            SDL_GameControllerClose(_gc);
-            _gc = nullptr;
-        }
-        else if(_joy != nullptr)
-        {
-            SDL_JoystickClose(_joy);
-            _joy = nullptr;
+            if(_gc != nullptr)
+            {
+                SDL_GameControllerClose(_gc);
+                _gc = nullptr;
+            }
+            else if(_joy != nullptr)
+            {
+                SDL_JoystickClose(_joy);
+                _joy = nullptr;
+            }
+            _closed = true;
         }
     }
 
