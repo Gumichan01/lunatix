@@ -41,6 +41,9 @@
 // Audio
 #include <LunatiX/LX_Audio.hpp>
 
+//Event
+#include <LunatiX/LX_Event.hpp>
+
 // Game controller
 #include <LunatiX/LX_Device.hpp>
 #include <LunatiX/LX_Mouse.hpp>
