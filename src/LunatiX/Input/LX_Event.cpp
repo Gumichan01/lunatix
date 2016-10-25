@@ -106,6 +106,11 @@ const LX_GButton LX_EventHandler::getButton()
     return gbutton;
 }
 
+LX_GamepadID LX_EventHandler::getGamepadID()
+{
+    return event.cdevice.which;
+}
+
 
 // Keyboard
 

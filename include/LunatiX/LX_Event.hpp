@@ -28,13 +28,14 @@
 
 namespace LX_Event
 {
-using LX_EventType = uint32_t;
+using LX_EventType = uint32_t;                      /* Event type                   */
 using LX_EventData = SDL_Event;                     /* Event                        */
 using LX_UserEvent = SDL_UserEvent;                 /* User-defined event           */
 using LX_KeyCode = SDL_Keycode;                     /* Virtual key representation   */
 using LX_ScanCode = SDL_Scancode;                   /* Physical key representation  */
 using LX_GamepadButton = SDL_GameControllerButton;  /* Gamepad button               */
 using LX_GamepadAxis = SDL_GameControllerAxis;      /* Gamepad axis                 */
+using LX_GamepadID = int32_t;                       /* Identifier of the gamepad    */
 
 const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
 const LX_GamepadButton LX_BUTTON_A             = SDL_CONTROLLER_BUTTON_A;
@@ -124,6 +125,7 @@ public:
     LX_EventType getEventType();
     LX_KeyCode getKeyCode();
     LX_ScanCode getScanCode();
+    LX_GamepadID getGamepadID();
 
     const LX_GAxis getAxis();
     const LX_GButton getButton();
@@ -133,7 +135,6 @@ public:
 
 
 /// @todo (#2#) LX_EventHandler: Get keypad (and test it) and mouse buttons
-/// @todo (#1#) LX_EventHandler: Get gamepad button and test it
 
 };
 
