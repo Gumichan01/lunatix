@@ -48,12 +48,14 @@ int main(int argc, char **argv)
             switch(evh.getEventType())
             {
             case SDL_QUIT:
+                LX_Log::log("Quit Request");
                 d = true;
                 break;
 
                 /// ---------------- Keyboard ----------------
 
             case SDL_KEYUP:
+                LX_Log::log("KEYBOARD INPUT");
                 LX_Log::log("physical key → %s",stringOfScanCode(evh.getScanCode()).utf8_str());
                 LX_Log::log("virtual key  → %s",stringOfKeyCode(evh.getKeyCode()).utf8_str());
                 break;
@@ -61,6 +63,7 @@ int main(int argc, char **argv)
                 /// ---------------- Mouse ------------------
 
             case SDL_MOUSEBUTTONUP:
+                LX_Log::log("MOUSE BUTTON INPUT");
                 LX_Log::log("window ID → %d",evh.getMouseButton().wid);
                 LX_Log::log("button    → %d",evh.getMouseButton().button);
                 LX_Log::log("state     → %d",evh.getMouseButton().state);
@@ -70,6 +73,7 @@ int main(int argc, char **argv)
                 break;
 
             case SDL_MOUSEMOTION:
+                LX_Log::log("MOUSE MOTION INPUT");
                 LX_Log::log("window ID  → %d",evh.getMouseMotion().wid);
                 LX_Log::log("state → %d %d %d %d %d",
                             evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
@@ -83,14 +87,23 @@ int main(int argc, char **argv)
                 LX_Log::log("Y relative → %d",evh.getMouseMotion().yrel);
                 break;
 
+            case SDL_MOUSEWHEEL:
+                LX_Log::log("MOUSE WHEEL INPUT");
+                LX_Log::log("window ID → %d",evh.getMouseWheel().wid);
+                LX_Log::log("X         → %d",evh.getMouseWheel().x);
+                LX_Log::log("Y         → %d",evh.getMouseWheel().y);
+                break;
+
                 /// ---------------- Gamepad ----------------
 
             case SDL_CONTROLLERBUTTONUP:
+                LX_Log::log("GAMEPAD BUTTON INPUT");
                 LX_Log::log("button which → %u",evh.getButton().which);
                 LX_Log::log("button → %s",stringOfButton(evh.getButton().value).utf8_str());
                 break;
 
             case SDL_CONTROLLERAXISMOTION:
+                LX_Log::log("GAMEPAD AXIS INPUT");
                 if(evh.getAxis().value > 8192 || evh.getAxis().value < -8192)
                 {
                     LX_Log::log("move which → %u",evh.getAxis().id);
@@ -99,6 +112,7 @@ int main(int argc, char **argv)
                 break;
 
             case SDL_CONTROLLERDEVICEADDED:
+                LX_Log::log("NEW GAMEPAD ADDED");
                 gid = evh.getGamepadID();
                 LX_Log::log("move which → %u",gid);
                 g[gid].open(gid);
@@ -111,6 +125,7 @@ int main(int argc, char **argv)
                 break;
 
             case SDL_CONTROLLERDEVICEREMOVED:
+                LX_Log::log("GAMEPAD REMOVED");
                 gid = evh.getGamepadID();
                 LX_Log::log("move which → %u",gid);
                 g[gid].close();
