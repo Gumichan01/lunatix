@@ -112,7 +112,6 @@ struct LX_MMotion
 {
     uint32_t wid;
     bool state[LX_MBUTTONS];
-    //uint32_t state;
     int x;
     int y;
     int xrel;
