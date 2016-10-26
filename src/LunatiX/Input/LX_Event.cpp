@@ -170,7 +170,7 @@ const LX_MButton LX_EventHandler::getMouseButton()
 {
     const SDL_MouseButtonEvent mb = event.button;
     LX_MouseButton b = toMouseButton(mb.button);
-    const LX_MButton mbutton = {b, mb.state, mb.clicks, mb.x, mb.y};
+    const LX_MButton mbutton = {mb.windowID,b, mb.state, mb.clicks, mb.x, mb.y};
     return mbutton;
 }
 

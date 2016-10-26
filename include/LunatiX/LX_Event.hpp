@@ -65,8 +65,8 @@ const LX_GamepadButton LX_BUTTON_DPAD_RIGHT    = SDL_CONTROLLER_BUTTON_DPAD_RIGH
 const LX_GamepadButton LX_BUTTON_MAX           = SDL_CONTROLLER_BUTTON_MAX;
 
 // Button state
-const uint8_t LX_BUTTON_RELEASED = SDL_RELEASED;
 const uint8_t LX_BUTTON_PRESSED  = SDL_PRESSED;
+const uint8_t LX_BUTTON_RELEASED = SDL_RELEASED;
 
 const LX_GamepadAxis LX_AXIS_INVALID      = SDL_CONTROLLER_AXIS_INVALID;
 const LX_GamepadAxis LX_AXIS_LEFTX        = SDL_CONTROLLER_AXIS_LEFTX;
@@ -96,6 +96,7 @@ struct LX_GButton
 // Button of a mouse
 struct LX_MButton
 {
+    uint32_t wid;
     LX_MouseButton button;
     uint8_t state;
     uint8_t clicks;
