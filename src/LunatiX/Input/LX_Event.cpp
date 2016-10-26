@@ -56,6 +56,24 @@ inline LX_Event::LX_MouseButton toMouseButton(uint8_t button)
     return m;
 }
 
+inline void fillButtonState(bool * state, uint32_t st)
+{
+    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_LBUTTON))
+        state[LX_Event::LX_MOUSE_LBUTTON] = true;
+
+    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_MBUTTON))
+        state[LX_Event::LX_MOUSE_MBUTTON] = true;
+
+    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_RBUTTON))
+        state[LX_Event::LX_MOUSE_RBUTTON] = true;
+
+    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_X1))
+        state[LX_Event::LX_MOUSE_X1] = true;
+
+    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_X2))
+        state[LX_Event::LX_MOUSE_X2] = true;
+}
+
 };
 
 namespace LX_Event
@@ -73,15 +91,18 @@ bool LX_EventHandler::pollEvent()
     return SDL_PollEvent(&event) == 1;
 }
 
+
 bool LX_EventHandler::waitEvent()
 {
     return SDL_WaitEvent(&event) == 1;
 }
 
+
 bool LX_EventHandler::waitEventTimeout(int timeout)
 {
     return SDL_WaitEventTimeout(&event,timeout) == 1;
 }
+
 
 bool LX_EventHandler::pushEvent(LX_EventData& ev)
 {
@@ -107,10 +128,12 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
     return pushEvent(ev);
 }
 
+
 LX_EventType LX_EventHandler::getEventType()
 {
     return event.type;
 }
+
 
 LX_KeyCode LX_EventHandler::getKeyCode()
 {
@@ -122,6 +145,7 @@ LX_ScanCode LX_EventHandler::getScanCode()
 {
     return event.key.keysym.scancode;
 }
+
 
 LX_GamepadID LX_EventHandler::getGamepadID()
 {
@@ -152,6 +176,7 @@ LX_GamepadID LX_EventHandler::getGamepadID()
     return id;
 }
 
+
 const LX_GAxis LX_EventHandler::getAxis()
 {
     const SDL_ControllerAxisEvent ax = event.caxis;
@@ -159,12 +184,14 @@ const LX_GAxis LX_EventHandler::getAxis()
     return gax;
 }
 
+
 const LX_GButton LX_EventHandler::getButton()
 {
     const SDL_ControllerButtonEvent bu = event.cbutton;
     const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), bu.state};
     return gbutton;
 }
+
 
 const LX_MButton LX_EventHandler::getMouseButton()
 {
@@ -175,6 +202,24 @@ const LX_MButton LX_EventHandler::getMouseButton()
 }
 
 
+const LX_MMotion LX_EventHandler::getMouseMotion()
+{
+    LX_MMotion mmotion;
+    const SDL_MouseMotionEvent mm = event.motion;
+
+    for(int i = 0; i < LX_MBUTTONS; i++) {mmotion.state[i] = false;}
+    fillButtonState(mmotion.state,mm.state);
+
+    mmotion.wid = mm.windowID;
+    mmotion.x = mm.x;
+    mmotion.y = mm.y;
+    mmotion.xrel = mm.xrel;
+    mmotion.yrel = mm.yrel;
+
+    return mmotion;
+}
+
+
 // Keyboard
 
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
@@ -182,15 +227,18 @@ LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
     return SDL_GetKeyFromScancode(scancode);
 }
 
+
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode)
 {
     return SDL_GetScancodeFromKey(keycode);
 }
 
+
 UTF8string stringOfScanCode(LX_ScanCode scancode)
 {
     return UTF8string(SDL_GetScancodeName(scancode));
 }
+
 
 UTF8string stringOfKeyCode(LX_KeyCode keycode)
 {
@@ -206,6 +254,7 @@ UTF8string stringOfButton(LX_GamepadButton button)
     return UTF8string(s == nullptr ? "null" : s);
 }
 
+
 UTF8string stringOfButton(uint8_t button)
 {
     return stringOfButton(static_cast<LX_GamepadButton>(button));
@@ -217,6 +266,7 @@ UTF8string stringOfAxis(LX_GamepadAxis axis)
     const char * s = SDL_GameControllerGetStringForAxis(axis);
     return UTF8string(s == nullptr ? "null" : s);
 }
+
 
 UTF8string stringOfAxis(uint8_t axis)
 {

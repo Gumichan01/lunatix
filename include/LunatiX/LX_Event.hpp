@@ -46,6 +46,8 @@ enum LX_MouseButton: uint8_t {LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,
                               LX_MOUSE_UNKNWON
                              };
 
+const int LX_MBUTTONS = 6;
+
 const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
 const LX_GamepadButton LX_BUTTON_A             = SDL_CONTROLLER_BUTTON_A;
 const LX_GamepadButton LX_BUTTON_B             = SDL_CONTROLLER_BUTTON_B;
@@ -105,6 +107,19 @@ struct LX_MButton
 };
 
 
+// Mouse movement
+struct LX_MMotion
+{
+    uint32_t wid;
+    bool state[LX_MBUTTONS];
+    //uint32_t state;
+    int x;
+    int y;
+    int xrel;
+    int yrel;
+};
+
+
 // Keyboard
 
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
@@ -151,6 +166,7 @@ public:
     const LX_GButton getButton();
 
     const LX_MButton getMouseButton();
+    const LX_MMotion getMouseMotion();
 
     ~LX_EventHandler() = default;
 };
