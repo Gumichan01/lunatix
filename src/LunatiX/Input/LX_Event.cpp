@@ -108,7 +108,31 @@ const LX_GButton LX_EventHandler::getButton()
 
 LX_GamepadID LX_EventHandler::getGamepadID()
 {
-    return event.cdevice.which;
+    LX_GamepadID id;
+
+    switch(event.type)
+    {
+    case SDL_CONTROLLERBUTTONDOWN:
+    case SDL_CONTROLLERBUTTONUP:
+        id = event.cbutton.which;
+        break;
+
+    case SDL_CONTROLLERAXISMOTION:
+        id = event.caxis.which;
+        break;
+
+    case SDL_CONTROLLERDEVICEADDED:
+    case SDL_CONTROLLERDEVICEREMOVED:
+    case SDL_CONTROLLERDEVICEREMAPPED:
+        id = event.cdevice.which;
+        break;
+
+    default:
+        id = -1;
+        break;
+    }
+
+    return id;
 }
 
 
