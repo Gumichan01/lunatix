@@ -25,6 +25,37 @@ namespace
 {
 // Type of the user event
 uint32_t utype = -1;
+
+inline LX_Event::LX_MouseButton toMouseButton(uint8_t button)
+{
+    LX_Event::LX_MouseButton m;
+
+    switch(button)
+    {
+    case SDL_BUTTON_LEFT:
+        m = LX_Event::LX_MOUSE_LBUTTON;
+        break;
+
+    case SDL_BUTTON_MIDDLE:
+        m = LX_Event::LX_MOUSE_MBUTTON;
+        break;
+
+    case SDL_BUTTON_RIGHT:
+        m = LX_Event::LX_MOUSE_RBUTTON;
+        break;
+
+    case SDL_BUTTON_X1:
+        m = LX_Event::LX_MOUSE_X1;
+        break;
+
+    case SDL_BUTTON_X2:
+        m = LX_Event::LX_MOUSE_X2;
+        break;
+    }
+
+    return m;
+}
+
 };
 
 namespace LX_Event
@@ -92,20 +123,6 @@ LX_ScanCode LX_EventHandler::getScanCode()
     return event.key.keysym.scancode;
 }
 
-const LX_GAxis LX_EventHandler::getAxis()
-{
-    const SDL_ControllerAxisEvent ax = event.caxis;
-    const LX_GAxis gax = {ax.which,static_cast<LX_GamepadAxis>(ax.axis),ax.value};
-    return gax;
-}
-
-const LX_GButton LX_EventHandler::getButton()
-{
-    const SDL_ControllerButtonEvent bu = event.cbutton;
-    const LX_GButton gbutton = {bu.which,static_cast<LX_GamepadButton>(bu.button),bu.state};
-    return gbutton;
-}
-
 LX_GamepadID LX_EventHandler::getGamepadID()
 {
     LX_GamepadID id;
@@ -133,6 +150,28 @@ LX_GamepadID LX_EventHandler::getGamepadID()
     }
 
     return id;
+}
+
+const LX_GAxis LX_EventHandler::getAxis()
+{
+    const SDL_ControllerAxisEvent ax = event.caxis;
+    const LX_GAxis gax = {ax.which, static_cast<LX_GamepadAxis>(ax.axis), ax.value};
+    return gax;
+}
+
+const LX_GButton LX_EventHandler::getButton()
+{
+    const SDL_ControllerButtonEvent bu = event.cbutton;
+    const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), bu.state};
+    return gbutton;
+}
+
+const LX_MButton LX_EventHandler::getMouseButton()
+{
+    const SDL_MouseButtonEvent mb = event.button;
+    LX_MouseButton b = toMouseButton(mb.button);
+    const LX_MButton mbutton = {b, mb.state, mb.clicks, mb.x, mb.y};
+    return mbutton;
 }
 
 

@@ -35,7 +35,16 @@ using LX_KeyCode = SDL_Keycode;                     /* Virtual key representatio
 using LX_ScanCode = SDL_Scancode;                   /* Physical key representation  */
 using LX_GamepadButton = SDL_GameControllerButton;  /* Gamepad button               */
 using LX_GamepadAxis = SDL_GameControllerAxis;      /* Gamepad axis                 */
+
 using LX_GamepadID = int32_t;                       /* Identifier of the gamepad    */
+
+enum LX_MouseButton: uint8_t {LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,
+                              LX_MOUSE_MBUTTON = SDL_BUTTON_MIDDLE,
+                              LX_MOUSE_RBUTTON = SDL_BUTTON_RIGHT,
+                              LX_MOUSE_X1 = SDL_BUTTON_X1,
+                              LX_MOUSE_X2 = SDL_BUTTON_X2,
+                              LX_MOUSE_UNKNWON
+                             };
 
 const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
 const LX_GamepadButton LX_BUTTON_A             = SDL_CONTROLLER_BUTTON_A;
@@ -68,7 +77,7 @@ const LX_GamepadAxis LX_AXIS_TRIGGERLEFT  = SDL_CONTROLLER_AXIS_TRIGGERLEFT;
 const LX_GamepadAxis LX_AXIS_TRIGGERRIGHT = SDL_CONTROLLER_AXIS_TRIGGERRIGHT;
 const LX_GamepadAxis LX_AXIS_MAX          = SDL_CONTROLLER_AXIS_MAX;
 
-// Axis represantation of a gamepad
+// Axis of a gamepad
 struct LX_GAxis
 {
     SDL_JoystickID id;      /* ID of the gamepad        */
@@ -76,12 +85,22 @@ struct LX_GAxis
     int16_t value;          /* Value [-32768 ↔ 32768]   */
 };
 
-// Button represantation of a gamepad
+// Button of a gamepad
 struct LX_GButton
 {
     SDL_JoystickID which;   /* ID of the gamepad                                        */
     LX_GamepadButton value; /* Button value                                             */
     int16_t state;          /* Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
+};
+
+// Button of a mouse
+struct LX_MButton
+{
+    LX_MouseButton button;
+    uint8_t state;
+    uint8_t clicks;
+    int x;
+    int y;
 };
 
 
@@ -129,6 +148,8 @@ public:
 
     const LX_GAxis getAxis();
     const LX_GButton getButton();
+
+    const LX_MButton getMouseButton();
 
     ~LX_EventHandler() = default;
 };
