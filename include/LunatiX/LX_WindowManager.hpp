@@ -30,6 +30,7 @@ namespace LX_Win
 class LX_Window;
 
 /// @todo (#1#) LX_WindowManager - private implementation
+/// @todo (#2#) LX_Window - Refactor the window research and deletion
 
 /**
 *   @class LX_WindowManager
