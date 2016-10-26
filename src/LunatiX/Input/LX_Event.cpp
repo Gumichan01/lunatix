@@ -219,6 +219,13 @@ const LX_MMotion LX_EventHandler::getMouseMotion()
     return mmotion;
 }
 
+const LX_MWheel LX_EventHandler::getMouseWheel()
+{
+    const SDL_MouseWheelEvent mw = event.wheel;
+    const LX_MWheel mwheel = {mw.windowID, mw.x, mw.y};
+    return mwheel;
+}
+
 
 // Keyboard
 

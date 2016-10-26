@@ -119,6 +119,14 @@ struct LX_MMotion
 };
 
 
+// Mouse wheel
+struct LX_MWheel
+{
+    uint32_t wid;
+    int x;
+    int y;
+};
+
 // Keyboard
 
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
@@ -166,6 +174,7 @@ public:
 
     const LX_MButton getMouseButton();
     const LX_MMotion getMouseMotion();
+    const LX_MWheel getMouseWheel();
 
     ~LX_EventHandler() = default;
 };
