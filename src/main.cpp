@@ -9,13 +9,13 @@
 
 #define UNUSED(X) (void)(X)
 
-using namespace LX_EventHandler;
+using namespace LX_Event;
 
 int main(int argc, char** argv)
 {
     UNUSED(argc);UNUSED(argv);
     LX_AABB position = {0,0,256,256};
-    LX_Event event;
+    LX_EventHandler event;
     bool go = true;
 
     if(!LX_Init())
@@ -35,9 +35,9 @@ int main(int argc, char** argv)
 
     while(go)
     {
-        while(pollEvent(event))
+        while(event.pollEvent())
         {
-            switch(event.type)
+            switch(event.getEventType())
             {
             case SDL_QUIT:
                 go = false;
