@@ -125,7 +125,7 @@ public :
     ~LX_WindowException() noexcept;
 };
 
-/// @todo (#2#) LX_Window - Window ID (for event handling)
+/// @todo (#2#) LX_Window - Window ID (for event handling → LX_Event)
 /// @todo (#4#) LX_Window - private implementation
 
 /**

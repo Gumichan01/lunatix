@@ -25,6 +25,10 @@
 
 /// @todo (#1#) LX_EventHandler: Full implementation
 /// @todo (#2#) LX_EventHandler: Documentation
+/// @todo (#2#) LX_EventHandler: handle window event
+/// @todo (#2#) LX_EventHandler: handle text input/editing events
+/// @todo (#2#) LX_EventHandler: handle user event
+/// @todo (#2#) LX_EventHandler: handle drag-and-drop event (only DROPFILE)
 
 namespace LX_Event
 {
@@ -178,9 +182,6 @@ public:
 
     ~LX_EventHandler() = default;
 };
-
-
-/// @todo (#2#) LX_EventHandler: Get keypad (and test it) and mouse buttons
 
 };
 
