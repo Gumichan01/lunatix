@@ -36,14 +36,13 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 
     #include <LunatiX/LX_Library.hpp>
-    #include <LunatiX/LX_Graphics.hpp>
-    #include <LunatiX/LX_Event.hpp>
-    #include <LunatiX/LX_Log.hpp>
+
+    using namespace LX_Event;
 
     int main(int argc, char** argv)
     {
         LX_AABB position = {0,0,256,256};
-        LX_EventHandler::LX_Event event;
+        LX_EventHandler ev;
         bool go = true;
 
         if(!LX_Init())
@@ -63,9 +62,9 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
         while(go)
         {
-            while(LX_EventHandler::pollEvent(event))
+            while(ev.pollEvent())
             {
-                switch(event.type)
+                switch(ev.getType())
                 {
                 case SDL_QUIT:
                     go = false;
