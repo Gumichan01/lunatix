@@ -131,8 +131,17 @@ struct LX_MWheel
     int y;
 };
 
-// Keyboard
 
+//Window event
+struct LX_WEvent
+{
+    uint32_t wid;
+    uint8_t evid;
+    int data1;
+    int data2;
+};
+
+// Keyboard
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
 
@@ -141,7 +150,6 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode);
 
 
 // Gamepad
-
 UTF8string stringOfButton(LX_GamepadButton button);
 UTF8string stringOfButton(uint8_t button);
 
@@ -179,6 +187,7 @@ public:
     const LX_MButton getMouseButton();
     const LX_MMotion getMouseMotion();
     const LX_MWheel getMouseWheel();
+    const LX_WEvent getWindowEvent();
 
     ~LX_EventHandler() = default;
 };

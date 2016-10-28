@@ -227,6 +227,14 @@ const LX_MWheel LX_EventHandler::getMouseWheel()
 }
 
 
+const LX_WEvent LX_EventHandler::getWindowEvent()
+{
+    const SDL_WindowEvent winev = event.window;
+    const LX_WEvent we = {winev.windowID, winev.event, winev.data1, winev.data2};
+    return we;
+}
+
+
 // Keyboard
 
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)

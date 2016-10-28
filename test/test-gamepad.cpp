@@ -6,6 +6,9 @@ const int N = 4;
 using namespace LX_Device;
 using namespace LX_Event;
 
+void printEvent(const LX_WEvent& event);
+
+
 int main(int argc, char **argv)
 {
     LX_Gamepad g[N];
@@ -131,6 +134,11 @@ int main(int argc, char **argv)
                 g[gid].close();
                 break;
 
+            case SDL_WINDOWEVENT:
+                LX_Log::log("WINDOW EVENT");
+                printEvent(evh.getWindowEvent());
+                break;
+
             default:
                 break;
             }
@@ -146,3 +154,71 @@ int main(int argc, char **argv)
     LX_Quit();
     return 0;
 }
+
+
+void printEvent(const LX_WEvent& event)
+{
+    switch (event.evid)
+    {
+    case SDL_WINDOWEVENT_SHOWN:
+        SDL_Log("Window %d shown", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_HIDDEN:
+        SDL_Log("Window %d hidden", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_EXPOSED:
+        SDL_Log("Window %d exposed", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_MOVED:
+        SDL_Log("Window %d moved to %d,%d", event.wid, event.data1, event.data2);
+        break;
+
+    case SDL_WINDOWEVENT_RESIZED:
+        SDL_Log("Window %d resized to %dx%d", event.wid, event.data1, event.data2);
+        break;
+
+    case SDL_WINDOWEVENT_SIZE_CHANGED:
+        SDL_Log("Window %d size changed to %dx%d", event.wid, event.data1, event.data2);
+        break;
+
+    case SDL_WINDOWEVENT_MINIMIZED:
+        SDL_Log("Window %d minimized", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_MAXIMIZED:
+        SDL_Log("Window %d maximized", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_RESTORED:
+        SDL_Log("Window %d restored", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_ENTER:
+        SDL_Log("Mouse entered window %d", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_LEAVE:
+        SDL_Log("Mouse left window %d", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_FOCUS_GAINED:
+        SDL_Log("Window %d gained keyboard focus", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_FOCUS_LOST:
+        SDL_Log("Window %d lost keyboard focus", event.wid);
+        break;
+
+    case SDL_WINDOWEVENT_CLOSE:
+        SDL_Log("Window %d closed", event.wid);
+        break;
+
+    default:
+        SDL_Log("Window %d got unknown event %d", event.wid, event.evid);
+        break;
+    }
+}
+
