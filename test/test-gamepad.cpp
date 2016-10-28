@@ -43,6 +43,11 @@ int main(int argc, char **argv)
 
     bool d = false;
     LX_EventHandler evh;
+    LX_UserEvent usr;
+    usr.wid = 1;
+    usr.code = 42;
+
+    evh.pushUserEvent(usr);
 
     while(!d)
     {
@@ -139,6 +144,12 @@ int main(int argc, char **argv)
                 printEvent(evh.getWindowEvent());
                 break;
 
+            case SDL_USEREVENT:
+                LX_Log::log("USER EVENT");
+                LX_Log::log("window ID → %d",evh.getUserEvent().wid);
+                LX_Log::log("code      → %d",evh.getUserEvent().code);
+                break;
+
             default:
                 break;
             }
@@ -161,63 +172,63 @@ void printEvent(const LX_WEvent& event)
     switch (event.evid)
     {
     case SDL_WINDOWEVENT_SHOWN:
-        SDL_Log("Window %d shown", event.wid);
+        LX_Log::log("Window %d shown", event.wid);
         break;
 
     case SDL_WINDOWEVENT_HIDDEN:
-        SDL_Log("Window %d hidden", event.wid);
+        LX_Log::log("Window %d hidden", event.wid);
         break;
 
     case SDL_WINDOWEVENT_EXPOSED:
-        SDL_Log("Window %d exposed", event.wid);
+        LX_Log::log("Window %d exposed", event.wid);
         break;
 
     case SDL_WINDOWEVENT_MOVED:
-        SDL_Log("Window %d moved to %d,%d", event.wid, event.data1, event.data2);
+        LX_Log::log("Window %d moved to %d,%d", event.wid, event.data1, event.data2);
         break;
 
     case SDL_WINDOWEVENT_RESIZED:
-        SDL_Log("Window %d resized to %dx%d", event.wid, event.data1, event.data2);
+        LX_Log::log("Window %d resized to %dx%d", event.wid, event.data1, event.data2);
         break;
 
     case SDL_WINDOWEVENT_SIZE_CHANGED:
-        SDL_Log("Window %d size changed to %dx%d", event.wid, event.data1, event.data2);
+        LX_Log::log("Window %d size changed to %dx%d", event.wid, event.data1, event.data2);
         break;
 
     case SDL_WINDOWEVENT_MINIMIZED:
-        SDL_Log("Window %d minimized", event.wid);
+        LX_Log::log("Window %d minimized", event.wid);
         break;
 
     case SDL_WINDOWEVENT_MAXIMIZED:
-        SDL_Log("Window %d maximized", event.wid);
+        LX_Log::log("Window %d maximized", event.wid);
         break;
 
     case SDL_WINDOWEVENT_RESTORED:
-        SDL_Log("Window %d restored", event.wid);
+        LX_Log::log("Window %d restored", event.wid);
         break;
 
     case SDL_WINDOWEVENT_ENTER:
-        SDL_Log("Mouse entered window %d", event.wid);
+        LX_Log::log("Mouse entered window %d", event.wid);
         break;
 
     case SDL_WINDOWEVENT_LEAVE:
-        SDL_Log("Mouse left window %d", event.wid);
+        LX_Log::log("Mouse left window %d", event.wid);
         break;
 
     case SDL_WINDOWEVENT_FOCUS_GAINED:
-        SDL_Log("Window %d gained keyboard focus", event.wid);
+        LX_Log::log("Window %d gained keyboard focus", event.wid);
         break;
 
     case SDL_WINDOWEVENT_FOCUS_LOST:
-        SDL_Log("Window %d lost keyboard focus", event.wid);
+        LX_Log::log("Window %d lost keyboard focus", event.wid);
         break;
 
     case SDL_WINDOWEVENT_CLOSE:
-        SDL_Log("Window %d closed", event.wid);
+        LX_Log::log("Window %d closed", event.wid);
         break;
 
     default:
-        SDL_Log("Window %d got unknown event %d", event.wid, event.evid);
+        LX_Log::log("Window %d got unknown event %d", event.wid, event.evid);
         break;
     }
 }

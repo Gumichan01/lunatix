@@ -25,7 +25,6 @@
 
 /// @todo (#1#) LX_EventHandler: Full implementation
 /// @todo (#2#) LX_EventHandler: Documentation
-/// @todo (#2#) LX_EventHandler: handle window event
 /// @todo (#2#) LX_EventHandler: handle text input/editing events
 /// @todo (#2#) LX_EventHandler: handle user event
 /// @todo (#2#) LX_EventHandler: handle drag-and-drop event (only DROPFILE)
@@ -34,7 +33,6 @@ namespace LX_Event
 {
 using LX_EventType = uint32_t;                      /* Event type                   */
 using LX_EventData = SDL_Event;                     /* Event                        */
-using LX_UserEvent = SDL_UserEvent;                 /* User-defined event           */
 using LX_KeyCode = SDL_Keycode;                     /* Virtual key representation   */
 using LX_ScanCode = SDL_Scancode;                   /* Physical key representation  */
 using LX_GamepadButton = SDL_GameControllerButton;  /* Gamepad button               */
@@ -141,6 +139,16 @@ struct LX_WEvent
     int data2;
 };
 
+// User-defined event
+struct LX_UserEvent
+{
+    uint32_t type;
+    uint32_t wid;
+    int code;
+    void *data1;
+    void *data2;
+};
+
 // Keyboard
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
@@ -188,6 +196,7 @@ public:
     const LX_MMotion getMouseMotion();
     const LX_MWheel getMouseWheel();
     const LX_WEvent getWindowEvent();
+    const LX_UserEvent getUserEvent();
 
     ~LX_EventHandler() = default;
 };

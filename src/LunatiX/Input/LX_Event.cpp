@@ -123,7 +123,7 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 
     uevent.type = utype;
     ev.type = SDL_USEREVENT;
-    ev.user = uevent;
+    ev.user = {uevent.type, 0, uevent.wid, uevent.code, uevent.data1, uevent.data2};
 
     return pushEvent(ev);
 }
@@ -232,6 +232,14 @@ const LX_WEvent LX_EventHandler::getWindowEvent()
     const SDL_WindowEvent winev = event.window;
     const LX_WEvent we = {winev.windowID, winev.event, winev.data1, winev.data2};
     return we;
+}
+
+
+const LX_UserEvent LX_EventHandler::getUserEvent()
+{
+    const SDL_UserEvent usr = event.user;
+    const LX_UserEvent uev = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
+    return uev;
 }
 
 
