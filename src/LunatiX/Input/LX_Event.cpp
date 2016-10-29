@@ -129,6 +129,56 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 }
 
 
+uint32_t LX_EventHandler::getWindowID()
+{
+    uint32_t id;
+
+    switch(event.type)
+    {
+    case SDL_WINDOWEVENT:
+        id = event.window.windowID;
+        break;
+
+    case SDL_KEYDOWN:
+SDL_KEYUP:
+        id = event.key.windowID;
+        break;
+
+    case SDL_TEXTEDITING:
+        id = event.edit.windowID;
+        break;
+
+    case SDL_TEXTINPUT:
+        id = event.text.windowID;
+        break;
+
+    case SDL_MOUSEMOTION:
+        id = event.motion.windowID;
+        break;
+
+    case SDL_MOUSEBUTTONDOWN:
+SDL_MOUSEBUTTONUP:
+        id = event.button.windowID;
+        break;
+
+    case SDL_MOUSEWHEEL:
+        id = event.wheel.windowID;
+        break;
+
+    case SDL_USEREVENT:
+        id = event.user.windowID;
+        break;
+
+    case SDL_DROPFILE:
+        id = event.edit.windowID;
+        break;
+
+    }
+
+    return id;
+}
+
+
 LX_EventType LX_EventHandler::getEventType()
 {
     return event.type;
@@ -207,7 +257,10 @@ const LX_MMotion LX_EventHandler::getMouseMotion()
     LX_MMotion mmotion;
     const SDL_MouseMotionEvent mm = event.motion;
 
-    for(int i = 0; i < LX_MBUTTONS; i++) {mmotion.state[i] = false;}
+    for(int i = 0; i < LX_MBUTTONS; i++)
+    {
+        mmotion.state[i] = false;
+    }
     fillButtonState(mmotion.state,mm.state);
 
     mmotion.wid = mm.windowID;

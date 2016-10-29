@@ -184,6 +184,7 @@ public:
     bool pushEvent(LX_EventData& ev);
     bool pushUserEvent(LX_UserEvent& uevent);
 
+    uint32_t getWindowID();
     LX_EventType getEventType();
     LX_KeyCode getKeyCode();
     LX_ScanCode getScanCode();
