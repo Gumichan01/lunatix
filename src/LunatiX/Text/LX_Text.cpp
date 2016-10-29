@@ -19,11 +19,10 @@
 */
 
 #include <LunatiX/LX_Text.hpp>
+#include <LunatiX/LX_Event.hpp>
+#include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Log.hpp>
 
-#include <cstring>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_clipboard.h>
 
 namespace LX_Text
@@ -35,7 +34,7 @@ namespace
 
 uint32_t DELAY = 33;
 
-bool isEndofLine(char * text)
+bool isEndofLine(const std::string& text)
 {
     return text[0] == '\n' || text[0] == '\r';
 }
@@ -54,28 +53,23 @@ LX_TextInput::LX_TextInput()
     SDL_StartTextInput();
 }
 
-/**
-*   @fn void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
-*
+/*
 *   Handle the event loop and the internal text input.
 *
 *   This function updates an internal string on each text input and
 *   send it to the callback function given by the user to something with that.
-*
-*   @param redraw The callback function
-*
 */
 void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 {
-    SDL_Event ev;
+    LX_Event::LX_EventHandler ev;
     _done = false;
     _draw = false;
 
     while(!_done)
     {
-        while(SDL_PollEvent(&ev))
+        while(ev.pollEvent())
         {
-            switch(ev.type)
+            switch(ev.getEventType())
             {
             case SDL_KEYDOWN:
                 keyboardInput_(ev);
@@ -103,17 +97,17 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
             }
         }
 
-        SDL_Delay(DELAY);
+        LX_Timer::delay(DELAY);
     }
 }
 
 
 // Handle the keyboard input
-void LX_TextInput::keyboardInput_(SDL_Event& ev)
+void LX_TextInput::keyboardInput_(LX_Event::LX_EventHandler& ev)
 {
     const size_t old_cursor = _cursor;
 
-    switch(ev.key.keysym.sym)
+    switch(ev.getKeyCode())
     {
     case SDLK_ESCAPE:
         _done = true;
@@ -153,17 +147,16 @@ void LX_TextInput::keyboardInput_(SDL_Event& ev)
         _cursor = _u8text.utf8_length();
         break;
 
-    case SDLK_v:
-        paste_();
-        break;
-
-    case SDLK_c:
-        save_();
-        break;
-
     default:
         break;
     }
+
+    LX_Event::LX_ScanCode sc = ev.getScanCode();
+
+    if(sc == SDL_SCANCODE_C)
+        save_();
+    else if(sc == SDL_SCANCODE_V)
+        paste_();
 
     if(old_cursor != _cursor)
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
@@ -171,24 +164,26 @@ void LX_TextInput::keyboardInput_(SDL_Event& ev)
 }
 
 
-void LX_TextInput::textInput_(SDL_Event& ev)
+void LX_TextInput::textInput_(LX_Event::LX_EventHandler& ev)
 {
-    if(ev.text.text[0] == '\0' || isEndofLine(ev.text.text))
+    const LX_Event::LX_TextEvent tev = ev.getTextEvent();
+
+    if(tev.text[0] == '\0' || isEndofLine(tev.text))
         return;
 
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                      "New input : '%s' of length (in bytes) %d",
-                     ev.text.text,strlen(ev.text.text));
+                     tev.text.c_str(),tev.text.length());
 
     try
     {
-        UTF8string ntext(ev.text.text);
+        UTF8string ntext(tev.text);
         u8stringInput_(ntext);
     }
     catch(...)
     {
         LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                         "Invalid UTF-8 string: %s", ev.text.text);
+                         "Invalid UTF-8 string: %s", tev.text.c_str());
     }
 }
 
@@ -212,11 +207,11 @@ void LX_TextInput::u8stringInput_(UTF8string& ntext)
 }
 
 
-void LX_TextInput::textEdit_(SDL_Event& ev)
+void LX_TextInput::textEdit_(LX_Event::LX_EventHandler& ev)
 {
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
     LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
-                     ev.edit.text);
+                     ev.getTextEvent().text.c_str());
 }
 
 

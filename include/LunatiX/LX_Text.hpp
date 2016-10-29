@@ -22,7 +22,12 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-union SDL_Event;
+
+namespace LX_Event
+{
+class LX_EventHandler;
+};
+
 
 /**
 *   @namespace LX_Text
@@ -139,9 +144,9 @@ class LX_TextInput
     void paste_();
 
     // Input
-    void keyboardInput_(SDL_Event& ev);
-    void textInput_(SDL_Event& ev);
-    void textEdit_(SDL_Event& ev);
+    void keyboardInput_(LX_Event::LX_EventHandler& ev);
+    void textInput_(LX_Event::LX_EventHandler& ev);
+    void textEdit_(LX_Event::LX_EventHandler& ev);
 
     // Operation on the string
     void u8stringInput_(UTF8string& ntext);

@@ -2,6 +2,8 @@
 #include <LunatiX/Lunatix.hpp>
 #include <cstring>
 
+void generateInput();
+
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 {
     LX_Win::LX_Window& _w;
