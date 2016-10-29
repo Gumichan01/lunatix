@@ -46,7 +46,6 @@ int main(int argc, char **argv)
     LX_UserEvent usr;
     usr.wid = 1;
     usr.code = 42;
-
     evh.pushUserEvent(usr);
 
     while(!d)
@@ -144,6 +143,8 @@ int main(int argc, char **argv)
                 printEvent(evh.getWindowEvent());
                 break;
 
+                /// ---------------- User Event ----------------
+
             case SDL_USEREVENT:
                 LX_Log::log("USER EVENT");
                 LX_Log::log("window ID → %d",evh.getUserEvent().wid);
@@ -161,7 +162,7 @@ int main(int argc, char **argv)
     {
         g[k].close();
     }
-    //g.close();
+
     LX_Quit();
     return 0;
 }
