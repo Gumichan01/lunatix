@@ -79,20 +79,20 @@ int main(int argc, char **argv)
                 LX_Log::log("Y         → %d",evh.getMouseButton().y);
                 break;
 
-            case SDL_MOUSEMOTION:
-                LX_Log::log("MOUSE MOTION INPUT");
-                LX_Log::log("window ID  → %d",evh.getMouseMotion().wid);
-                LX_Log::log("state → %d %d %d %d %d",
-                            evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
-                            evh.getMouseMotion().state[LX_MOUSE_MBUTTON],
-                            evh.getMouseMotion().state[LX_MOUSE_RBUTTON],
-                            evh.getMouseMotion().state[LX_MOUSE_X1],
-                            evh.getMouseMotion().state[LX_MOUSE_X2]);
-                LX_Log::log("X          → %d",evh.getMouseMotion().x);
-                LX_Log::log("Y          → %d",evh.getMouseMotion().y);
-                LX_Log::log("X relative → %d",evh.getMouseMotion().xrel);
-                LX_Log::log("Y relative → %d",evh.getMouseMotion().yrel);
-                break;
+                /*case SDL_MOUSEMOTION:
+                    LX_Log::log("MOUSE MOTION INPUT");
+                    LX_Log::log("window ID  → %d",evh.getMouseMotion().wid);
+                    LX_Log::log("state → %d %d %d %d %d",
+                                evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
+                                evh.getMouseMotion().state[LX_MOUSE_MBUTTON],
+                                evh.getMouseMotion().state[LX_MOUSE_RBUTTON],
+                                evh.getMouseMotion().state[LX_MOUSE_X1],
+                                evh.getMouseMotion().state[LX_MOUSE_X2]);
+                    LX_Log::log("X          → %d",evh.getMouseMotion().x);
+                    LX_Log::log("Y          → %d",evh.getMouseMotion().y);
+                    LX_Log::log("X relative → %d",evh.getMouseMotion().xrel);
+                    LX_Log::log("Y relative → %d",evh.getMouseMotion().yrel);
+                    break;*/
 
             case SDL_MOUSEWHEEL:
                 LX_Log::log("MOUSE WHEEL INPUT");
