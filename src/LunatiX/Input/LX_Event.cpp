@@ -172,10 +172,6 @@ SDL_MOUSEBUTTONUP:
         id = event.user.windowID;
         break;
 
-    case SDL_DROPFILE:
-        id = event.edit.windowID;
-        break;
-
     default:
         break;
     }
@@ -317,6 +313,14 @@ const LX_TextEvent LX_EventHandler::getTextEvent()
     }
 
     return t;
+}
+
+
+const LX_DropEvent LX_EventHandler::getDropEvent()
+{
+    const SDL_DropEvent dev = event.drop;
+    const LX_DropEvent drop = {dev.file};
+    return drop;
 }
 
 

@@ -151,6 +151,13 @@ int main(int argc, char **argv)
                 LX_Log::log("code      → %d",evh.getUserEvent().code);
                 break;
 
+                /// ---------------- Drag and drop ----------------
+
+            case SDL_DROPFILE:
+                LX_Log::log("DRAG & DROP EVENT");
+                LX_Log::log("file → %s",evh.getDropEvent().file.c_str());
+                break;
+
             default:
                 break;
             }

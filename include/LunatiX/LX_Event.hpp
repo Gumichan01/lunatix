@@ -25,7 +25,6 @@
 
 /// @todo (#1#) LX_EventHandler: Full implementation
 /// @todo (#2#) LX_EventHandler: Documentation
-/// @todo (#2#) LX_EventHandler: handle text input/editing events
 /// @todo (#2#) LX_EventHandler: handle drag-and-drop event (only DROPFILE)
 
 namespace LX_Event
@@ -160,6 +159,12 @@ struct LX_TextEvent
 };
 
 
+struct LX_DropEvent
+{
+    std::string file;
+};
+
+
 // Keyboard
 LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
@@ -210,6 +215,7 @@ public:
     const LX_WEvent getWindowEvent();
     const LX_UserEvent getUserEvent();
     const LX_TextEvent getTextEvent();
+    const LX_DropEvent getDropEvent();
 
     ~LX_EventHandler() = default;
 };
