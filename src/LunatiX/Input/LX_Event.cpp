@@ -20,7 +20,6 @@
 
 #include <LunatiX/LX_Event.hpp>
 
-
 namespace
 {
 // Type of the user event
@@ -51,6 +50,10 @@ inline LX_Event::LX_MouseButton toMouseButton(uint8_t button)
     case SDL_BUTTON_X2:
         m = LX_Event::LX_MOUSE_X2;
         break;
+
+    default:
+        m = LX_Event::LX_MOUSE_UNKNWON;
+    break;
     }
 
     return m;
@@ -131,7 +134,7 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 
 uint32_t LX_EventHandler::getWindowID()
 {
-    uint32_t id;
+    uint32_t id = 0;
 
     switch(event.type)
     {
@@ -173,6 +176,8 @@ SDL_MOUSEBUTTONUP:
         id = event.edit.windowID;
         break;
 
+    default:
+        break;
     }
 
     return id;
@@ -293,6 +298,25 @@ const LX_UserEvent LX_EventHandler::getUserEvent()
     const SDL_UserEvent usr = event.user;
     const LX_UserEvent uev = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
     return uev;
+}
+
+
+const LX_TextEvent LX_EventHandler::getTextEvent()
+{
+    LX_TextEvent t = {0,"",0,0};
+
+    if(event.type == SDL_TEXTINPUT)
+    {
+        const SDL_TextInputEvent ti = event.text;
+        t = {ti.windowID, ti.text, 0, static_cast<size_t>(std::string(ti.text).length())};
+    }
+    else
+    {
+        const SDL_TextEditingEvent te = event.edit;
+        t = {te.windowID, te.text, te.start, static_cast<size_t>(te.length)};
+    }
+
+    return t;
 }
 
 
