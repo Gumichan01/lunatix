@@ -320,6 +320,7 @@ const LX_DropEvent LX_EventHandler::getDropEvent()
 {
     const SDL_DropEvent dev = event.drop;
     const LX_DropEvent drop = {dev.file};
+    SDL_free(dev.file);
     return drop;
 }
 
