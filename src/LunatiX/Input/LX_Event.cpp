@@ -53,7 +53,7 @@ inline LX_Event::LX_MouseButton toMouseButton(uint8_t button)
 
     default:
         m = LX_Event::LX_MOUSE_UNKNWON;
-    break;
+        break;
     }
 
     return m;
@@ -318,9 +318,15 @@ const LX_TextEvent LX_EventHandler::getTextEvent()
 
 const LX_DropEvent LX_EventHandler::getDropEvent()
 {
+    LX_DropEvent drop = {""};
     const SDL_DropEvent dev = event.drop;
-    const LX_DropEvent drop = {dev.file};
-    SDL_free(dev.file);
+
+    if(event.type == SDL_DROPFILE && dev.file != nullptr)
+    {
+        drop.file = dev.file;
+        SDL_free(dev.file);
+    }
+
     return drop;
 }
 
