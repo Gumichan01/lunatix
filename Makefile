@@ -93,7 +93,7 @@ SRC_TEST_FILES=$(TEST_PATH)test-init.cpp $(TEST_PATH)test-config.cpp \
 $(TEST_PATH)test-device.cpp $(TEST_PATH)test-physics.cpp $(TEST_PATH)test-window.cpp \
 $(TEST_PATH)test-system.cpp $(TEST_PATH)test-ttf.cpp $(TEST_PATH)test-particle.cpp \
 $(TEST_PATH)test-file.cpp $(TEST_PATH)test-ime.cpp $(TEST_PATH)test-audio.cpp \
-$(TEST_PATH)test-thread.cpp $(TEST_PATH)test-ime.cpp $(TEST_PATH)test-gamepad.cpp
+$(TEST_PATH)test-thread.cpp $(TEST_PATH)test-ime.cpp $(TEST_PATH)test-input.cpp
 
 OBJ_FILES=$(SRC_FILES:.cpp=.o)
 MAIN_OBJ=$(MAIN_FILE:.cpp=.o)
@@ -254,7 +254,7 @@ test-audio: $(TEST_PATH)test-audio.o $(OBJ_FILES)
 test-thread: $(TEST_PATH)test-thread.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
-test-gamepad: $(TEST_PATH)test-gamepad.o $(OBJ_FILES)
+test-input: $(TEST_PATH)test-input.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 # Object files (test)
@@ -270,7 +270,7 @@ test-file.o: $(TEST_PATH)test-file.o
 test-ime.o: $(TEST_PATH)test-ime.o
 test-audio.o: $(TEST_PATH)test-audio.o
 test-thread.o: $(TEST_PATH)test-thread.o
-test-gamepad.o: $(TEST_PATH)test-gamepad.o
+test-input.o: $(TEST_PATH)test-input.o
 
 
 ################################
