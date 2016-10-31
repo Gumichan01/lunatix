@@ -113,6 +113,29 @@ enum LX_EventType: uint32_t
     LX_USEREVENT                    /**< User-defined event                 */
 };
 
+/**
+*   @enum LX_WinEventID
+*   @brief Window Event type
+*/
+enum LX_WinEventID: uint8_t
+{
+    LX_WINEV_NONE,           /**< Never used                                            */
+    LX_WINEV_SHOWN,          /**< Window has been shown                                 */
+    LX_WINEV_HIDDEN,         /**< Window has been hidden                                */
+    LX_WINEV_EXPOSED,        /**< Window has been exposed and should be redrawn         */
+    LX_WINEV_MOVED,          /**< Window has been moved to a position (data1,data2)     */
+    LX_WINEV_RESIZED,        /**< Window has been resized to data1 × data2              */
+    LX_WINEV_SIZE_CHANGED,   /**< The window size has changed.                          */
+    LX_WINEV_MINIMIZED,      /**< Window has been minimized                             */
+    LX_WINEV_MAXIMIZED,      /**< Window has been maximized                             */
+    LX_WINEV_RESTORED,       /**< Window has been restored to normal size and position  */
+    LX_WINEV_ENTER,          /**< Window has gained mouse focus                         */
+    LX_WINEV_LEAVE,          /**< Window has lost mouse focus                           */
+    LX_WINEV_FOCUS_GAINED,   /**< Window has gained keyboard focus                      */
+    LX_WINEV_FOCUS_LOST,     /**< Window has lost keyboard focus                        */
+    LX_WINEV_CLOSE           /**< The window manager requests that the window be closed */
+};
+
 
 /**
 *   @enum LX_MouseButton
@@ -234,10 +257,10 @@ struct LX_MWheel
 */
 struct LX_WEvent
 {
-    uint32_t wid;   /**< Identifier of the window where the event occured   */
-    uint8_t evid;   /**< Type of window event (incmopelt → todo)  */
-    int data1;      /**< Event dependant data */
-    int data2;      /**< Event dependant data */
+    uint32_t wid;       /**< Identifier of the window where the event occured   */
+    LX_WinEventID evid; /**< Type of window event                               */
+    int data1;          /**< Event dependant data                               */
+    int data2;          /**< Event dependant data                               */
 };
 
 

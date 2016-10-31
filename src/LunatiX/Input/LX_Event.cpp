@@ -77,6 +77,76 @@ inline void fillButtonState(bool * state, uint32_t st)
         state[LX_Event::LX_MOUSE_X2] = true;
 }
 
+inline LX_Event::LX_WinEventID toWinEvent(uint8_t id)
+{
+    LX_Event::LX_WinEventID wid;
+
+    switch (id)
+    {
+    case SDL_WINDOWEVENT_SHOWN:
+        wid = LX_Event::LX_WINEV_SHOWN;
+        break;
+
+    case SDL_WINDOWEVENT_HIDDEN:
+        wid = LX_Event::LX_WINEV_HIDDEN;
+        break;
+
+    case SDL_WINDOWEVENT_EXPOSED:
+        wid = LX_Event::LX_WINEV_EXPOSED;
+        break;
+
+    case SDL_WINDOWEVENT_MOVED:
+        wid = LX_Event::LX_WINEV_MOVED;
+        break;
+
+    case SDL_WINDOWEVENT_RESIZED:
+        wid = LX_Event::LX_WINEV_RESIZED;
+        break;
+
+    case SDL_WINDOWEVENT_SIZE_CHANGED:
+        wid = LX_Event::LX_WINEV_SIZE_CHANGED;
+        break;
+
+    case SDL_WINDOWEVENT_MINIMIZED:
+        wid = LX_Event::LX_WINEV_MINIMIZED;
+        break;
+
+    case SDL_WINDOWEVENT_MAXIMIZED:
+        wid = LX_Event::LX_WINEV_MAXIMIZED;
+        break;
+
+    case SDL_WINDOWEVENT_RESTORED:
+        wid = LX_Event::LX_WINEV_RESTORED;
+        break;
+
+    case SDL_WINDOWEVENT_ENTER:
+        wid = LX_Event::LX_WINEV_ENTER;
+        break;
+
+    case SDL_WINDOWEVENT_LEAVE:
+        wid = LX_Event::LX_WINEV_LEAVE;
+        break;
+
+    case SDL_WINDOWEVENT_FOCUS_GAINED:
+        wid = LX_Event::LX_WINEV_FOCUS_GAINED;
+        break;
+
+    case SDL_WINDOWEVENT_FOCUS_LOST:
+        wid = LX_Event::LX_WINEV_FOCUS_LOST;
+        break;
+
+    case SDL_WINDOWEVENT_CLOSE:
+        wid = LX_Event::LX_WINEV_CLOSE;
+        break;
+
+    default:
+        wid = LX_Event::LX_WINEV_NONE;
+        break;
+    }
+
+    return wid;
+}
+
 };
 
 namespace LX_Event
@@ -353,7 +423,9 @@ const LX_MWheel LX_EventHandler::getMouseWheel()
 const LX_WEvent LX_EventHandler::getWindowEvent()
 {
     const SDL_WindowEvent winev = event.window;
-    const LX_WEvent we = {winev.windowID, winev.event, winev.data1, winev.data2};
+    const LX_WEvent we = {winev.windowID,
+                          toWinEvent(winev.event), winev.data1, winev.data2
+                         };
     return we;
 }
 
