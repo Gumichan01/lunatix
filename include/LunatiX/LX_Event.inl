@@ -14,6 +14,12 @@
 *   This file describes every constant values usable by the user
 */
 
+
+// Button state
+const uint8_t LX_BUTTON_PRESSED  = SDL_PRESSED;
+const uint8_t LX_BUTTON_RELEASED = SDL_RELEASED;
+
+// Gamepad buttons
 const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
 const LX_GamepadButton LX_BUTTON_A             = SDL_CONTROLLER_BUTTON_A;
 const LX_GamepadButton LX_BUTTON_B             = SDL_CONTROLLER_BUTTON_B;
@@ -32,10 +38,7 @@ const LX_GamepadButton LX_BUTTON_DPAD_LEFT     = SDL_CONTROLLER_BUTTON_DPAD_LEFT
 const LX_GamepadButton LX_BUTTON_DPAD_RIGHT    = SDL_CONTROLLER_BUTTON_DPAD_RIGHT;
 const LX_GamepadButton LX_BUTTON_MAX           = SDL_CONTROLLER_BUTTON_MAX;
 
-// Button state
-const uint8_t LX_BUTTON_PRESSED  = SDL_PRESSED;
-const uint8_t LX_BUTTON_RELEASED = SDL_RELEASED;
-
+// Gamepad axis
 const LX_GamepadAxis LX_AXIS_INVALID      = SDL_CONTROLLER_AXIS_INVALID;
 const LX_GamepadAxis LX_AXIS_LEFTX        = SDL_CONTROLLER_AXIS_LEFTX;
 const LX_GamepadAxis LX_AXIS_LEFTY        = SDL_CONTROLLER_AXIS_LEFTY;
