@@ -31,7 +31,6 @@
 */
 namespace LX_Event
 {
-using LX_EventType = uint32_t;                      /**< Event type                     */
 using LX_EventData = SDL_Event;                     /**< Event data                     */
 using LX_KeyCode = SDL_Keycode;                     /**< Virtual key representation     */
 using LX_ScanCode = SDL_Scancode;                   /**< Physical key representation    */
@@ -81,16 +80,53 @@ using LX_GamepadAxis = SDL_GameControllerAxis;
 using LX_GamepadButton = SDL_GameControllerButton;
 
 /**
+*   @enum LX_EventType
+*   @brief Event type
+*/
+enum LX_EventType: uint32_t
+{
+    LX_UNKNOWN,                     /**< Unknown type           */
+    LX_QUIT,                        /**< User-requested quit    */
+    LX_WINDOWEVENT,                 /**< Window state change    */
+
+    /* Keyboard events */
+    LX_KEYDOWN,                     /**< Key pressed                            */
+    LX_KEYUP,                       /**< Key released                           */
+    LX_TEXTEDITING,                 /**< Keyboard text editing (composition)    */
+    LX_TEXTINPUT,                   /**< Keyboard text input                    */
+
+    /* Mouse events */
+    LX_MOUSEMOTION,                 /**< Mouse moved            */
+    LX_MOUSEBUTTONDOWN,             /**< Mouse button pressed   */
+    LX_MOUSEBUTTONUP,               /**< Mouse button released  */
+    LX_MOUSEWHEEL,                  /**< Mouse wheel motion     */
+
+    /* Game controller events */
+    LX_CONTROLLERAXISMOTION,        /**< Game controller axis motion        */
+    LX_CONTROLLERBUTTONDOWN,        /**< Game controller button pressed     */
+    LX_CONTROLLERBUTTONUP,          /**< Game controller button released    */
+    LX_CONTROLLERDEVICEADDED,       /**< A new Game controller has been inserted into the system    */
+    LX_CONTROLLERDEVICEREMOVED,     /**< An opened Game controller has been removed                 */
+
+    /* Drag and drop events */
+    LX_DROPFILE,                    /**< The system requests a file open    */
+    LX_USEREVENT                    /**< User-defined event                 */
+};
+
+
+/**
 *   @enum LX_MouseButton
 *   @brief Representation of mouse butons
 */
-enum LX_MouseButton: uint8_t {LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,   /**< Left mouse button    */
-                              LX_MOUSE_MBUTTON = SDL_BUTTON_MIDDLE, /**< Middle mouse button  */
-                              LX_MOUSE_RBUTTON = SDL_BUTTON_RIGHT,  /**< Right mouse button   */
-                              LX_MOUSE_X1 = SDL_BUTTON_X1,          /**< X1 mouse button      */
-                              LX_MOUSE_X2 = SDL_BUTTON_X2,          /**< X2 mouse button      */
-                              LX_MOUSE_UNKNWON                      /**< Unknown mouse button */
-                             };
+enum LX_MouseButton: uint8_t
+{
+    LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,   /**< Left mouse button    */
+    LX_MOUSE_MBUTTON = SDL_BUTTON_MIDDLE, /**< Middle mouse button  */
+    LX_MOUSE_RBUTTON = SDL_BUTTON_RIGHT,  /**< Right mouse button   */
+    LX_MOUSE_X1 = SDL_BUTTON_X1,          /**< X1 mouse button      */
+    LX_MOUSE_X2 = SDL_BUTTON_X2,          /**< X2 mouse button      */
+    LX_MOUSE_UNKNWON                      /**< Unknown mouse button */
+};
 
 /**
 *   @struct LX_GAxis

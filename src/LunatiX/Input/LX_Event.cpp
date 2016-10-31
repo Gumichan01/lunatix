@@ -143,7 +143,7 @@ uint32_t LX_EventHandler::getWindowID()
         break;
 
     case SDL_KEYDOWN:
-SDL_KEYUP:
+    case SDL_KEYUP:
         id = event.key.windowID;
         break;
 
@@ -160,7 +160,7 @@ SDL_KEYUP:
         break;
 
     case SDL_MOUSEBUTTONDOWN:
-SDL_MOUSEBUTTONUP:
+    case SDL_MOUSEBUTTONUP:
         id = event.button.windowID;
         break;
 
@@ -182,7 +182,76 @@ SDL_MOUSEBUTTONUP:
 
 LX_EventType LX_EventHandler::getEventType()
 {
-    return event.type;
+    LX_EventType ty;
+
+    switch(event.type)
+    {
+    case SDL_QUIT:
+        ty = LX_QUIT;
+        break;
+    case SDL_WINDOWEVENT:
+        ty = LX_WINDOWEVENT;
+        break;
+
+    /* Keyboard events */
+    case SDL_KEYDOWN:
+        ty = LX_KEYDOWN;
+        break;
+    case SDL_KEYUP:
+        ty = LX_KEYUP;
+        break;
+    case SDL_TEXTEDITING:
+        ty = LX_TEXTEDITING;
+        break;
+    case SDL_TEXTINPUT:
+        ty = LX_TEXTINPUT;
+        break;
+
+    /* Mouse events */
+    case SDL_MOUSEMOTION:
+        ty = LX_MOUSEMOTION;
+        break;
+    case SDL_MOUSEBUTTONDOWN:
+        ty = LX_MOUSEBUTTONDOWN;
+        break;
+    case SDL_MOUSEBUTTONUP:
+        ty = LX_MOUSEBUTTONUP;
+        break;
+    case SDL_MOUSEWHEEL:
+        ty = LX_MOUSEWHEEL;
+        break;
+
+    /* Game controller events */
+    case SDL_CONTROLLERAXISMOTION:
+        ty = LX_CONTROLLERAXISMOTION;
+        break;
+    case SDL_CONTROLLERBUTTONDOWN:
+        ty = LX_CONTROLLERBUTTONDOWN;
+        break;
+    case SDL_CONTROLLERBUTTONUP:
+        ty = LX_CONTROLLERBUTTONUP;
+        break;
+    case SDL_CONTROLLERDEVICEADDED:
+        ty = LX_CONTROLLERDEVICEADDED;
+        break;
+    case SDL_CONTROLLERDEVICEREMOVED:
+        ty = LX_CONTROLLERDEVICEREMOVED;
+        break;
+
+    /* Drag and drop events */
+    case SDL_DROPFILE:
+        ty = LX_DROPFILE;
+        break;
+    case SDL_USEREVENT:
+        ty = LX_USEREVENT;
+        break;
+
+    default:
+        ty = LX_UNKNOWN;
+        break;
+    }
+
+    return ty;
 }
 
 
