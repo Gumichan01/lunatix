@@ -39,7 +39,7 @@ int main(int argc, char** argv)
         {
             switch(event.getEventType())
             {
-            case SDL_QUIT:
+            case LX_QUIT:
                 go = false;
                 break;
             default:

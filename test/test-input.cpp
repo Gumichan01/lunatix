@@ -54,14 +54,14 @@ int main(int argc, char **argv)
         {
             switch(evh.getEventType())
             {
-            case SDL_QUIT:
+            case LX_QUIT:
                 LX_Log::log("Quit Request");
                 d = true;
                 break;
 
                 /// ---------------- Keyboard ----------------
 
-            case SDL_KEYUP:
+            case LX_KEYUP:
                 LX_Log::log("KEYBOARD INPUT");
                 LX_Log::log("physical key → %s",stringOfScanCode(evh.getScanCode()).utf8_str());
                 LX_Log::log("virtual key  → %s",stringOfKeyCode(evh.getKeyCode()).utf8_str());
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 
                 /// ---------------- Mouse ------------------
 
-            case SDL_MOUSEBUTTONUP:
+            case LX_MOUSEBUTTONUP:
                 LX_Log::log("MOUSE BUTTON INPUT");
                 LX_Log::log("window ID → %d",evh.getMouseButton().wid);
                 LX_Log::log("button    → %d",evh.getMouseButton().button);
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
                 LX_Log::log("Y         → %d",evh.getMouseButton().y);
                 break;
 
-                /*case SDL_MOUSEMOTION:
+                /*case LX_MOUSEMOTION:
                     LX_Log::log("MOUSE MOTION INPUT");
                     LX_Log::log("window ID  → %d",evh.getMouseMotion().wid);
                     LX_Log::log("state → %d %d %d %d %d",
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
                     LX_Log::log("Y relative → %d",evh.getMouseMotion().yrel);
                     break;*/
 
-            case SDL_MOUSEWHEEL:
+            case LX_MOUSEWHEEL:
                 LX_Log::log("MOUSE WHEEL INPUT");
                 LX_Log::log("window ID → %d",evh.getMouseWheel().wid);
                 LX_Log::log("X         → %d",evh.getMouseWheel().x);
@@ -103,13 +103,13 @@ int main(int argc, char **argv)
 
                 /// ---------------- Gamepad ----------------
 
-            case SDL_CONTROLLERBUTTONUP:
+            case LX_CONTROLLERBUTTONUP:
                 LX_Log::log("GAMEPAD BUTTON INPUT");
                 LX_Log::log("button which → %u",evh.getButton().which);
                 LX_Log::log("button → %s",stringOfButton(evh.getButton().value).utf8_str());
                 break;
 
-            case SDL_CONTROLLERAXISMOTION:
+            case LX_CONTROLLERAXISMOTION:
                 LX_Log::log("GAMEPAD AXIS INPUT");
                 if(evh.getAxis().value > 8192 || evh.getAxis().value < -8192)
                 {
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
                 }
                 break;
 
-            case SDL_CONTROLLERDEVICEADDED:
+            case LX_CONTROLLERDEVICEADDED:
                 LX_Log::log("NEW GAMEPAD ADDED");
                 gid = evh.getGamepadID();
                 LX_Log::log("move which → %u",gid);
@@ -131,14 +131,14 @@ int main(int argc, char **argv)
                 }
                 break;
 
-            case SDL_CONTROLLERDEVICEREMOVED:
+            case LX_CONTROLLERDEVICEREMOVED:
                 LX_Log::log("GAMEPAD REMOVED");
                 gid = evh.getGamepadID();
                 LX_Log::log("move which → %u",gid);
                 g[gid].close();
                 break;
 
-            case SDL_WINDOWEVENT:
+            case LX_WINDOWEVENT:
                 LX_Log::log("WINDOW EVENT");
                 printEvent(evh.getWindowEvent());
                 break;
@@ -179,59 +179,59 @@ void printEvent(const LX_WEvent& event)
 {
     switch (event.evid)
     {
-    case SDL_WINDOWEVENT_SHOWN:
+    case LX_WINEV_SHOWN:
         LX_Log::log("Window %d shown", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_HIDDEN:
+    case LX_WINEV_HIDDEN:
         LX_Log::log("Window %d hidden", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_EXPOSED:
+    case LX_WINEV_EXPOSED:
         LX_Log::log("Window %d exposed", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_MOVED:
+    case LX_WINEV_MOVED:
         LX_Log::log("Window %d moved to %d,%d", event.wid, event.data1, event.data2);
         break;
 
-    case SDL_WINDOWEVENT_RESIZED:
+    case LX_WINEV_RESIZED:
         LX_Log::log("Window %d resized to %dx%d", event.wid, event.data1, event.data2);
         break;
 
-    case SDL_WINDOWEVENT_SIZE_CHANGED:
+    case LX_WINEV_SIZE_CHANGED:
         LX_Log::log("Window %d size changed to %dx%d", event.wid, event.data1, event.data2);
         break;
 
-    case SDL_WINDOWEVENT_MINIMIZED:
+    case LX_WINEV_MINIMIZED:
         LX_Log::log("Window %d minimized", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_MAXIMIZED:
+    case LX_WINEV_MAXIMIZED:
         LX_Log::log("Window %d maximized", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_RESTORED:
+    case LX_WINEV_RESTORED:
         LX_Log::log("Window %d restored", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_ENTER:
+    case LX_WINEV_ENTER:
         LX_Log::log("Mouse entered window %d", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_LEAVE:
+    case LX_WINEV_LEAVE:
         LX_Log::log("Mouse left window %d", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_FOCUS_GAINED:
+    case LX_WINEV_FOCUS_GAINED:
         LX_Log::log("Window %d gained keyboard focus", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_FOCUS_LOST:
+    case LX_WINEV_FOCUS_LOST:
         LX_Log::log("Window %d lost keyboard focus", event.wid);
         break;
 
-    case SDL_WINDOWEVENT_CLOSE:
+    case LX_WINEV_CLOSE:
         LX_Log::log("Window %d closed", event.wid);
         break;
 
