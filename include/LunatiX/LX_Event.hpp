@@ -23,166 +23,234 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_events.h>
 
-/// @todo (#1#) LX_EventHandler: Full implementation
-/// @todo (#2#) LX_EventHandler: Documentation
-/// @todo (#2#) LX_EventHandler: handle drag-and-drop event (only DROPFILE)
+/// @todo (#1#) Alias of window events
 
+/**
+*   @namespace LX_Event
+*   @brief The event module
+*/
 namespace LX_Event
 {
-using LX_EventType = uint32_t;                      /* Event type                   */
-using LX_EventData = SDL_Event;                     /* Event                        */
-using LX_KeyCode = SDL_Keycode;                     /* Virtual key representation   */
-using LX_ScanCode = SDL_Scancode;                   /* Physical key representation  */
-using LX_GamepadButton = SDL_GameControllerButton;  /* Gamepad button               */
-using LX_GamepadAxis = SDL_GameControllerAxis;      /* Gamepad axis                 */
+using LX_EventType = uint32_t;                      /**< Event type                     */
+using LX_EventData = SDL_Event;                     /**< Event data                     */
+using LX_KeyCode = SDL_Keycode;                     /**< Virtual key representation     */
+using LX_ScanCode = SDL_Scancode;                   /**< Physical key representation    */
+using LX_GamepadID = int32_t;                       /**< Identifier of the gamepad      */
 
-using LX_GamepadID = int32_t;                       /* Identifier of the gamepad    */
+/**
+*   @typedef LX_GamepadAxis
+*   @brief Gamepad axis
+*
+*   Values:
+*   - LX_AXIS_INVALID
+*   - LX_AXIS_LEFTX
+*   - LX_AXIS_LEFTY
+*   - LX_AXIS_RIGHTX
+*   - LX_AXIS_RIGHTY
+*   - LX_AXIS_TRIGGERLEFT
+*   - LX_AXIS_TRIGGERRIGHT
+*   - LX_AXIS_MAX
+*
+*/
+using LX_GamepadAxis = SDL_GameControllerAxis;
 
-enum LX_MouseButton: uint8_t {LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,
-                              LX_MOUSE_MBUTTON = SDL_BUTTON_MIDDLE,
-                              LX_MOUSE_RBUTTON = SDL_BUTTON_RIGHT,
-                              LX_MOUSE_X1 = SDL_BUTTON_X1,
-                              LX_MOUSE_X2 = SDL_BUTTON_X2,
-                              LX_MOUSE_UNKNWON
+/**
+*   @typedef LX_GamepadButton
+*   @brief Gamepad button
+*
+*   Values:
+*   - LX_BUTTON_INVALID
+*   - LX_BUTTON_A
+*   - LX_BUTTON_B
+*   - LX_BUTTON_X
+*   - LX_BUTTON_Y
+*   - LX_BUTTON_BACK
+*   - LX_BUTTON_GUIDE
+*   - LX_BUTTON_START
+*   - LX_BUTTON_LEFTSTICK
+*   - LX_BUTTON_RIGHTSTICK
+*   - LX_BUTTON_LEFTSHOULDER
+*   - LX_BUTTON_RIGHTSHOULDER
+*   - LX_BUTTON_DPAD_UP
+*   - LX_BUTTON_DPAD_DOWN
+*   - LX_BUTTON_DPAD_LEFT
+*   - LX_BUTTON_DPAD_RIGHT
+*   - LX_BUTTON_MAX
+*
+*/
+using LX_GamepadButton = SDL_GameControllerButton;
+
+/**
+*   @enum LX_MouseButton
+*   @brief Representation of mouse butons
+*/
+enum LX_MouseButton: uint8_t {LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,   /**< Left mouse button    */
+                              LX_MOUSE_MBUTTON = SDL_BUTTON_MIDDLE, /**< Middle mouse button  */
+                              LX_MOUSE_RBUTTON = SDL_BUTTON_RIGHT,  /**< Right mouse button   */
+                              LX_MOUSE_X1 = SDL_BUTTON_X1,          /**< X1 mouse button      */
+                              LX_MOUSE_X2 = SDL_BUTTON_X2,          /**< X2 mouse button      */
+                              LX_MOUSE_UNKNWON                      /**< Unknown mouse button */
                              };
+
+/**
+*   @struct LX_GAxis
+*   @brief Axis of a gamepad
+*/
+struct LX_GAxis
+{
+    SDL_JoystickID id;      /**< ID of the gamepad        */
+    LX_GamepadAxis axis;    /**< Axis type                */
+    int16_t value;          /**< Value [-32768 ↔ 32768]   */
+};
+
+
+/**
+*   @struct LX_GButton
+*   @brief Button of a gamepad
+*/
+struct LX_GButton
+{
+    SDL_JoystickID which;   /**< ID of the gamepad                                        */
+    LX_GamepadButton value; /**< Button value                                             */
+    int16_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
+};
+
+
+/**
+*   @struct LX_MButton
+*   @brief Button of a mouse
+*/
+struct LX_MButton
+{
+    uint32_t wid;           /**< Identifier of the window where the event occured         */
+    LX_MouseButton button;  /**< Type of button                                           */
+    uint8_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
+    uint8_t clicks;         /**< Number of clicks (1: single-click, 2: double-click, ...) */
+    int x;                  /**< X position of the mouse                                  */
+    int y;                  /**< Y position of the mouse                                  */
+};
 
 const int LX_MBUTTONS = 6;
 
-const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
-const LX_GamepadButton LX_BUTTON_A             = SDL_CONTROLLER_BUTTON_A;
-const LX_GamepadButton LX_BUTTON_B             = SDL_CONTROLLER_BUTTON_B;
-const LX_GamepadButton LX_BUTTON_X             = SDL_CONTROLLER_BUTTON_X;
-const LX_GamepadButton LX_BUTTON_Y             = SDL_CONTROLLER_BUTTON_Y;
-const LX_GamepadButton LX_BUTTON_BACK          = SDL_CONTROLLER_BUTTON_BACK;
-const LX_GamepadButton LX_BUTTON_GUIDE         = SDL_CONTROLLER_BUTTON_GUIDE;
-const LX_GamepadButton LX_BUTTON_START         = SDL_CONTROLLER_BUTTON_START;
-const LX_GamepadButton LX_BUTTON_LEFTSTICK     = SDL_CONTROLLER_BUTTON_LEFTSTICK;
-const LX_GamepadButton LX_BUTTON_RIGHTSTICK    = SDL_CONTROLLER_BUTTON_RIGHTSTICK;
-const LX_GamepadButton LX_BUTTON_LEFTSHOULDER  = SDL_CONTROLLER_BUTTON_LEFTSHOULDER;
-const LX_GamepadButton LX_BUTTON_RIGHTSHOULDER = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER;
-const LX_GamepadButton LX_BUTTON_DPAD_UP       = SDL_CONTROLLER_BUTTON_DPAD_UP;
-const LX_GamepadButton LX_BUTTON_DPAD_DOWN     = SDL_CONTROLLER_BUTTON_DPAD_DOWN;
-const LX_GamepadButton LX_BUTTON_DPAD_LEFT     = SDL_CONTROLLER_BUTTON_DPAD_LEFT;
-const LX_GamepadButton LX_BUTTON_DPAD_RIGHT    = SDL_CONTROLLER_BUTTON_DPAD_RIGHT;
-const LX_GamepadButton LX_BUTTON_MAX           = SDL_CONTROLLER_BUTTON_MAX;
 
-// Button state
-const uint8_t LX_BUTTON_PRESSED  = SDL_PRESSED;
-const uint8_t LX_BUTTON_RELEASED = SDL_RELEASED;
-
-const LX_GamepadAxis LX_AXIS_INVALID      = SDL_CONTROLLER_AXIS_INVALID;
-const LX_GamepadAxis LX_AXIS_LEFTX        = SDL_CONTROLLER_AXIS_LEFTX;
-const LX_GamepadAxis LX_AXIS_LEFTY        = SDL_CONTROLLER_AXIS_LEFTY;
-const LX_GamepadAxis LX_AXIS_RIGHTX       = SDL_CONTROLLER_AXIS_RIGHTX;
-const LX_GamepadAxis LX_AXIS_RIGHTY       = SDL_CONTROLLER_AXIS_RIGHTY;
-const LX_GamepadAxis LX_AXIS_TRIGGERLEFT  = SDL_CONTROLLER_AXIS_TRIGGERLEFT;
-const LX_GamepadAxis LX_AXIS_TRIGGERRIGHT = SDL_CONTROLLER_AXIS_TRIGGERRIGHT;
-const LX_GamepadAxis LX_AXIS_MAX          = SDL_CONTROLLER_AXIS_MAX;
-
-// Axis of a gamepad
-struct LX_GAxis
-{
-    SDL_JoystickID id;      /* ID of the gamepad        */
-    LX_GamepadAxis axis;    /* Axis                     */
-    int16_t value;          /* Value [-32768 ↔ 32768]   */
-};
-
-// Button of a gamepad
-struct LX_GButton
-{
-    SDL_JoystickID which;   /* ID of the gamepad                                        */
-    LX_GamepadButton value; /* Button value                                             */
-    int16_t state;          /* Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
-};
-
-// Button of a mouse
-struct LX_MButton
-{
-    uint32_t wid;
-    LX_MouseButton button;
-    uint8_t state;
-    uint8_t clicks;
-    int x;
-    int y;
-};
-
-
-// Mouse movement
+/**
+*   @struct LX_MMotion
+*   @brief Mouse movement
+*
+*   @note state is a boolean array that contains information
+*   about each button state of the mouse.
+*
+*   In order to know the state of a specific button,
+*   the use of one of the following values of ::LX_MouseButton as
+*   the index is necessary.
+*
+*   Example of code (from test-input.cpp):
+*
+*       LX_EventHandler evh;
+*
+*       while(true)
+*       {
+*           while(evh.pollEvent())
+*           {
+*               switch(evh.getEventType())
+*               {
+*                   case SDL_MOUSEMOTION:
+*                       ...
+*                       LX_Log::log("state → %d %d %d %d %d",
+*                                   evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
+*                                   evh.getMouseMotion().state[LX_MOUSE_MBUTTON],
+*                                   evh.getMouseMotion().state[LX_MOUSE_RBUTTON],
+*                                   evh.getMouseMotion().state[LX_MOUSE_X1],
+*                                   evh.getMouseMotion().state[LX_MOUSE_X2]);
+*                       ...
+*                       break;
+*               }
+*           }
+*       }
+*
+*/
 struct LX_MMotion
 {
-    uint32_t wid;
-    bool state[LX_MBUTTONS];
-    int x;
-    int y;
-    int xrel;
-    int yrel;
+    uint32_t wid;               /**< Identifier of the window where the event occured   */
+    bool state[LX_MBUTTONS];    /**< The possible states of the mouse                   */
+    int x;                      /**< X position of the mouse                            */
+    int y;                      /**< Y position of the mouse                            */
+    int xrel;                   /**< X relative position of the mouse                   */
+    int yrel;                   /**< Y relative position of the mouse                   */
 };
 
 
-// Mouse wheel
+/**
+*   @struct LX_MWheel
+*   @brief Mouse wheel
+*/
 struct LX_MWheel
 {
-    uint32_t wid;
-    int x;
-    int y;
+    uint32_t wid;   /**< Identifier of the window where the event occured   */
+    int x;          /**< X direction of the wheel                           */
+    int y;          /**< Y direction of the wheel                           */
 };
 
 
-//Window event
+/**
+*   @struct LX_WEvent
+*   @brief Window event
+*/
 struct LX_WEvent
 {
-    uint32_t wid;
-    uint8_t evid;
-    int data1;
-    int data2;
+    uint32_t wid;   /**< Identifier of the window where the event occured   */
+    uint8_t evid;   /**< Type of window event (incmopelt → todo)  */
+    int data1;      /**< Event dependant data */
+    int data2;      /**< Event dependant data */
 };
 
 
-// User-defined event
+/**
+*   @struct LX_UserEvent
+*   @brief User-defined event
+*/
 struct LX_UserEvent
 {
-    uint32_t type;
-    uint32_t wid;
-    int code;
-    void *data1;
-    void *data2;
+    uint32_t type;  /* User defined type (internal use)                     */
+    uint32_t wid;   /**< Identifier of the window where the event occured   */
+    int code;       /**< User defined event code                            */
+    void *data1;    /**< user defined data pointer                          */
+    void *data2;    /**< user defined data pointer                          */
 };
 
 
-// Text event
+/**
+*   @struct LX_TextEvent
+*   @brief Text event
+*/
 struct LX_TextEvent
 {
-    uint32_t wid;
-    std::string text;
-    int start;
-    size_t length;
+    uint32_t wid;       /**< Identifier of the window where the event occured   */
+    std::string text;   /**< UTF-8 string                                       */
+    int start;          /**< Begining of the text (for editing)                 */
+    size_t length;      /**< Length of the string from the start                */
 };
 
-
+/**
+*   @struct LX_DropEvent
+*   @brief Drop event (file request)
+*/
 struct LX_DropEvent
 {
-    std::string file;
+    std::string file;   /**< The name of the file that is requested             */
 };
 
 
-// Keyboard
-LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
-LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
-
-UTF8string stringOfScanCode(LX_ScanCode scancode);
-UTF8string stringOfKeyCode(LX_KeyCode keycode);
-
-
-// Gamepad
-UTF8string stringOfButton(LX_GamepadButton button);
-UTF8string stringOfButton(uint8_t button);
-
-UTF8string stringOfAxis(LX_GamepadAxis axis);
-UTF8string stringOfAxis(uint8_t axis);
-
-
-// Event handling
-
+/**
+*   @class LX_EventHandler
+*   @brief The class for event handling
+*
+*   This class is reponsible of handling event (pushing, retrieving)
+*
+*   @note Every getter functions must be called after
+*   calling pollEvent()/waitEvent*(). If not, the behaviour is undefined.
+*
+*/
 class LX_EventHandler
 {
     LX_EventData event;
@@ -191,34 +259,244 @@ class LX_EventHandler
 
 public:
 
+    /// Constructor
     LX_EventHandler();
 
+    /**
+    *   @fn bool pollEvent()
+    *   Pool for currently pending events
+    *
+    *   @return TRUE if there is a pending event, FALSE otherwise
+    *
+    *   @note If there is an event, it is retrieved and internally stored.
+    *   The event is removed from the event queue
+    */
     bool pollEvent();
+    /**
+    *   @fn bool waitEvent()
+    *   Wait for currently pending event
+    *
+    *   @return TRUE on success, FALSE otherwise
+    *
+    *   @note On success, an event is retrieved and internally stored.
+    *   The event is removed from the event queue.
+    *   @sa pollEvent()
+    */
     bool waitEvent();
+    /**
+    *   @fn bool waitEventTimeout(int timeout)
+    *   Wait for currently pending event during a certein number of milliseconds
+    *
+    *   @param [in] timeout The time to wait (in milliseconds)
+    *
+    *   @return TRUE on success, FALSE otherwise, or if the time is up.
+    *
+    *   @note On success, an event is retrieved and internally stored.
+    *   The event is removed from the event queue.
+    *   @sa pollEvent()
+    */
     bool waitEventTimeout(int timeout);
 
+    /**
+    *   @fn bool pushEvent(LX_EventData& ev)
+    *   Push an event to the event queue
+    *
+    *   @param [in] ev The event to push
+    *
+    *   @return TRUE on success, FALSE otherwise.
+    *   Use LX_GetError() for more information on failure.
+    */
     bool pushEvent(LX_EventData& ev);
+
+    /**
+    *   @fn bool pushUserEvent(LX_UserEvent& uevent)
+    *   Push a user event to the event queue
+    *
+    *   @param uevent The user event to push
+    *
+    *   @return TRUE on success, FALSE otherwise.
+    *   Use LX_GetError() for more information on failure.
+    */
     bool pushUserEvent(LX_UserEvent& uevent);
 
+    /**
+    *   @fn uint32_t getWindowID()
+    *   Get the id of a window where an event happened in
+    *
+    *   @return The window ID, 0 on failure.
+    *   @note This function can returns 0 if the current event
+    *   is not window-dependant
+    */
     uint32_t getWindowID();
+    /**
+    *   @fn LX_EventType getEventType()
+    *   Get the type of the current event after
+    *   @return The type of event
+    */
     LX_EventType getEventType();
+    /**
+    *   @fn LX_KeyCode getKeyCode()
+    *
+    *   Get the key code value (virtual keyboard value) of the keyboard button,
+    *   assuming that the event is a keyboard event
+    *
+    *   @return The key code value
+    */
     LX_KeyCode getKeyCode();
+    /**
+    *   @fn LX_ScanCode getScanCode()
+    *
+    *   Get the scan code value (physical keyboard value) of the keyboard button,
+    *   assuming that the event is a keyboard event
+    *
+    *   @return The scan code value
+    */
     LX_ScanCode getScanCode();
+    /**
+    *   @fn LX_GamepadID getGamepadID()
+    *   Get the gamepad identifier related to the current event.
+    *   @return The gamepad ID
+    */
     LX_GamepadID getGamepadID();
 
+    /**
+    *   @fn const LX_GAxis getAxis()
+    *   Get information about the gamepad axis related to the current event
+    *   @return The structure describing the gamepad axis
+    *   @sa getButton
+    */
     const LX_GAxis getAxis();
+    /**
+    *   @fn const LX_GButton getButton()
+    *   Get information about the gamepad button related to the current event
+    *   @return The structure describing the gamepad button
+    *   @sa getAxis
+    */
     const LX_GButton getButton();
 
+    /**
+    *   @fn const LX_MButton getMouseButton()
+    *   Get information about the mouse button related to the current event
+    *   @return The structure describing the mouse button
+    *
+    *   @sa getMouseMotion
+    *   @sa getMouseWheel
+    */
     const LX_MButton getMouseButton();
+    /**
+    *   @fn const LX_MMotion getMouseMotion()
+    *   Get information about the mouse movement related to the current event
+    *   @return The structure describing the mouse movement
+    *
+    *   @sa getMouseButton
+    *   @sa getMouseWheel
+    */
     const LX_MMotion getMouseMotion();
+    /**
+    *   @fn const LX_MWheel getMouseWheel()
+    *   Get information about the mouse wheel related to the current event
+    *   @return The structure describing the mouse wheel
+    *
+    *   @sa getMouseButton
+    *   @sa getMouseMotion
+    */
     const LX_MWheel getMouseWheel();
+    /**
+    *   @fn const LX_WEvent getWindowEvent()
+    *   Get information about the window event
+    *   @return The structure describing the window event
+    */
     const LX_WEvent getWindowEvent();
+    /**
+    *   @fn const LX_UserEvent getUserEvent()
+    *   Get information about the user event
+    *   @return The structure describing the user event
+    */
     const LX_UserEvent getUserEvent();
+    /**
+    *   @fn const LX_TextEvent getTextEvent()
+    *   Get information about the text event
+    *   @return The structure describing the text event
+    */
     const LX_TextEvent getTextEvent();
+    /**
+    *   @fn const LX_DropEvent getDropEvent()
+    *   Get information about the drop event (drag & drop a file)
+    *   @return The structure describing the event
+    */
     const LX_DropEvent getDropEvent();
 
+    /// Default Destructor
     ~LX_EventHandler() = default;
 };
+
+
+// Keyboard
+/**
+*   @fn LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
+*
+*   Get the virtual key (key code) that corresponds to
+*   the physical key (scan code) given in argument
+*
+*   @param [in] scancode The virtual key value
+*   @return The virtual key that corresponds to the physical key
+*   @sa getScanCodeFrom()
+*/
+LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
+/**
+*   @fn LX_ScanCode getScanCodeFrom(LX_KeyCode keycode)
+*
+*   Get the physical key (scan code) that corresponds to
+*   the virtual key (key code) given in argument
+*
+*   @param [in] keycode The physical key value
+*   @return The physical key that corresponds to the virtual key
+*/
+LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
+
+/**
+*   @fn UTF8string stringOfScanCode(LX_ScanCode scancode)
+*
+*   Get the string value of the physical key value given in argument
+*
+*   @param [in] scancode The physical key value to get the string from
+*   @return A non-empty string on success, "" otherwise
+*/
+UTF8string stringOfScanCode(LX_ScanCode scancode);
+/**
+*   @fn UTF8string stringOfKeyCode(LX_KeyCode keycode)
+*
+*   Get the string value of the virtual key value given in argument
+*
+*   @param [in] keycode The virtual key value to get the string from
+*   @return A non-empty string on success, "" otherwise
+*/
+UTF8string stringOfKeyCode(LX_KeyCode keycode);
+
+
+// Gamepad
+/**
+*   @fn UTF8string stringOfButton(LX_GamepadButton button)
+*
+*   Get the string value of a button specified by the enum
+*   given in argument
+*
+*   @param [in] button The enumeration to get the string from
+*   @return The string on success, "null" otherwise
+*/
+UTF8string stringOfButton(LX_GamepadButton button);
+/**
+*   @fn UTF8string stringOfAxis(LX_GamepadAxis axis)
+*
+*   Get the string value of an axis specified by the enum
+*   given in argument
+*
+*   @param [in] axis The enumeration to get the string from
+*   @return The string on success, "null" otherwise
+*/
+UTF8string stringOfAxis(LX_GamepadAxis axis);
+
+#include "LX_Event.inl"
 
 };
 

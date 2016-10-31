@@ -366,22 +366,10 @@ UTF8string stringOfButton(LX_GamepadButton button)
 }
 
 
-UTF8string stringOfButton(uint8_t button)
-{
-    return stringOfButton(static_cast<LX_GamepadButton>(button));
-}
-
-
 UTF8string stringOfAxis(LX_GamepadAxis axis)
 {
     const char * s = SDL_GameControllerGetStringForAxis(axis);
     return UTF8string(s == nullptr ? "null" : s);
-}
-
-
-UTF8string stringOfAxis(uint8_t axis)
-{
-    return stringOfAxis(static_cast<LX_GamepadAxis>(axis));
 }
 
 };

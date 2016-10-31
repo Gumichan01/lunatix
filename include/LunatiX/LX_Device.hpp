@@ -28,8 +28,6 @@ const short LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
 const short LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
 const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 
-/// @todo (#1#) remove duplicate virtual and physical keys
-/// @todo (#1#) remove duplicate gamepad buttons and axis
 
 /**
 *   @namespace LX_Device
@@ -64,92 +62,6 @@ struct LX_GamepadInfo
 */
 int numberOfDevices();
 
-/**
-*   @fn UTF8string stringOfButton(LX_GamepadButton button)
-*
-*   Get the string value of a button specified by the enum
-*   given in argument
-*
-*   @param [in] button The enumeration to get the string from
-*
-*   @return The string on success, "null" otherwise
-*/
-//UTF8string stringOfButton(LX_GamepadButton button);
-/**
-*   @fn UTF8string stringOfButton(uint8_t button)
-*
-*   Get the string value of a button value
-*
-*   @param [in] button The value to get the string from
-*
-*   @return The string on success, "null" otherwise
-*/
-//UTF8string stringOfButton(uint8_t button);
-
-/**
-*   @fn UTF8string stringOfAxis(LX_GamepadAxis axis)
-*
-*   Get the string value of an axis specified by the enum
-*   given in argument
-*
-*   @param [in] axis The enumeration to get the string from
-*
-*   @return The string on success, "null" otherwise
-*/
-//UTF8string stringOfAxis(LX_GamepadAxis axis);
-/**
-*   @fn UTF8string stringOfAxis(uint8_t axis)
-*
-*   Get the string value of an axis specified by the enum
-*   given in argument
-*
-*   @param [in] axis The value to get the string from
-*
-*   @return The string on success, "null" otherwise
-*/
-//UTF8string stringOfAxis(uint8_t axis);
-
-/**
-*   @fn UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key)
-*
-*   Get the string value of the physical key value given in argument
-*
-*   @param [in] key The physical key value to get the string from
-*
-*   @return A non-empty string on success, "" otherwise
-*/
-//UTF8string stringOfPhysicalKey(LX_KeyboardPhysicalKey key);
-/**
-*   @fn UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key)
-*
-*   Get the string value of the virtual key value given in argument
-*
-*   @param [in] key The virtual key value to get the string from
-*
-*   @return A non-empty string on success, "" otherwise
-*/
-//UTF8string stringOfVirtualKey(LX_KeyboardVirtualKey key);
-
-/**
-*   @fn LX_KeyboardVirtualKey getVirtualKey(LX_KeyboardPhysicalKey key)
-*
-*   Get the virtual key that corresponds to the physical key given in argument
-*
-*   @param [in] key The virtual key value
-*
-*   @return The virtual key that corresponds to the physical key
-*/
-//LX_KeyboardVirtualKey getVirtualKey(LX_KeyboardPhysicalKey key);
-/**
-*   @fn LX_KeyboardPhysicalKey getPhysicalKey(LX_KeyboardVirtualKey key)
-*
-*   Get the physical key that corresponds to the virtual key given in argument
-*
-*   @param [in] key The physical key value
-*
-*   @return The physical key that corresponds to the virtual key
-*/
-//LX_KeyboardPhysicalKey getPhysicalKey(LX_KeyboardVirtualKey key);
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
