@@ -110,9 +110,9 @@ int main(int argc, char **argv)
                 break;
 
             case LX_CONTROLLERAXISMOTION:
-                LX_Log::log("GAMEPAD AXIS INPUT");
                 if(evh.getAxis().value > 8192 || evh.getAxis().value < -8192)
                 {
+                    LX_Log::log("GAMEPAD AXIS INPUT");
                     LX_Log::log("move which → %u",evh.getAxis().id);
                     LX_Log::log("move → %s",stringOfAxis(evh.getAxis().axis).utf8_str());
                 }

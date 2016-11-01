@@ -162,15 +162,15 @@ void test_mouse(void)
     }
 
     Uint32 t = SDL_GetTicks();
-    SDL_Event ev;
+    LX_Event::LX_EventHandler ev;
     while(SDL_GetTicks() - t < 4000)
     {
-        while(SDL_PollEvent(&ev))
+        while(ev.pollEvent())
         {
-            switch(ev.type)
+            switch(ev.getEventType())
             {
-            case SDL_MOUSEBUTTONUP:
-                if(ev.button.button == SDL_BUTTON_RIGHT)
+            case LX_Event::LX_MOUSEBUTTONUP:
+                if(ev.getMouseButton().button == LX_Event::LX_MOUSE_LBUTTON)
                     LX_Device::mouseCursorDisplay(0);
                 else
                     LX_Device::mouseCursorDisplay(1);

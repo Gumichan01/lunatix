@@ -3,6 +3,7 @@
 #include <LunatiX/Lunatix.hpp>
 
 using namespace std;
+using namespace LX_Event;
 
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
@@ -150,7 +151,7 @@ int main(int argc, char **argv)
     dot = new Dot();
     LX_Log::log("Dot loaded");
 
-    SDL_Event e;
+    LX_EventHandler e;
     int go = 1;
     begin_time = SDL_GetTicks();
 
@@ -158,9 +159,9 @@ int main(int argc, char **argv)
 
     while(go == 1 &&  ((SDL_GetTicks() - begin_time) < 4000))
     {
-        while(SDL_PollEvent(&e))
+        while(e.pollEvent())
         {
-            if(e.type == SDL_QUIT)
+            if(e.getEventType() == LX_QUIT)
                 go = 0;
         }
 

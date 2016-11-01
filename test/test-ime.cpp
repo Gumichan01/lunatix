@@ -2,6 +2,8 @@
 #include <LunatiX/Lunatix.hpp>
 #include <cstring>
 
+using namespace LX_Event;
+
 void generateInput();
 
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
@@ -34,7 +36,7 @@ public:
 
 void generateInput()
 {
-    SDL_Event event;
+    LX_EventData event;
     event.type = SDL_TEXTINPUT;
     strcpy(event.text.text,"hello world!");
     SDL_PushEvent(&event);
@@ -84,7 +86,7 @@ void generateInput()
         SDL_PushEvent(&event);
     }
 
-    SDL_Event nev;
+    LX_EventData nev;
     nev.type = SDL_KEYDOWN;
     nev.key.keysym.sym = SDLK_ESCAPE;
     SDL_PushEvent(&nev);
