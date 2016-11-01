@@ -21,8 +21,8 @@
 *
 */
 
-#include <array>
-
+#include <list>
+#include <cinttypes>
 
 namespace LX_Win
 {
@@ -30,19 +30,18 @@ namespace LX_Win
 class LX_Window;
 
 /// @todo (#1#) LX_WindowManager - private implementation
-/// @todo (#2#) LX_Window - Refactor the window research and deletion (LX_Event)
 
 /**
 *   @class LX_WindowManager
 *   @brief The windows manager
 *
+*   LX_WindowManager allows the user to handle several windows
+*   inside an application
+*
 */
 class LX_WindowManager
 {
-    static const int _LX_NBMAX_WINDOWS = 8;
-    unsigned int _size;
-    unsigned int _nbwin;                        /* Number of created windows */
-    std::array<LX_Win::LX_Window*, _LX_NBMAX_WINDOWS> _windows;
+    std::list<LX_Win::LX_Window*> _windows;
 
     LX_WindowManager();
     ~LX_WindowManager();
@@ -79,22 +78,22 @@ public:
     static void destroy();
 
     /**
-    *   @fn int LX_WindowManager::addWindow(LX_Window *w)
+    *   @fn uint32_t LX_WindowManager::addWindow(LX_Window *w)
     *
-    *   Add a window to the list
+    *   Add a window in the manager
     *
     *   @param [in] w The window
     *
     *   @return The ID of the window that was added if the instance is valid
-    *           -1 otherwise
+    *           ((uint32_t) -1 ) otherwise
     *
     *   @sa LX_Window
     *   @sa removeWindow
     */
-    int addWindow(LX_Window *w);
+    uint32_t addWindow(LX_Window *w);
 
     /**
-    *   @fn LX_Window * LX_WindowManager::removeWindow(unsigned int id)
+    *   @fn LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
     *
     *   Delete a window from the list acording to its ID
     *   and returns the pointer to it.
@@ -104,15 +103,17 @@ public:
     *   @return A valid pointer to a window if the ID refers to a valid window,
     *           a null pointer otherwise
     *
+    *   @note This function does not destroy the window, because each instance
+    *         of a window in the list can be statically or dymanically allocated
+    *         So, the user is responsible of releasing the window.
+    *
     *   @sa addWindow
     */
-    LX_Window * removeWindow(unsigned int id);
+    LX_Window * removeWindow(const uint32_t id);
 
     /**
     *   @fn unsigned int LX_WindowManager::nbWindows()
-    *
     *   Count the number of opened windows
-    *
     *   @return The number of opened windows
     */
     unsigned int nbWindows();
@@ -130,16 +131,16 @@ public:
     void clearWindows();
 
     /**
-    *   @fn LX_Window * LX_WindowManager::getWindow(unsigned int id)
+    *   @fn LX_Window * LX_WindowManager::getWindow(const uint32_t id)
     *
     *   Get a window according to its ID
     *
     *   @param [in] id The id of the window
     *
-    *   @return A reference to a LX_Window instance if it exists,
+    *   @return A valid pointer to a LX_Window instance if it exists,
     *           a null pointer otherwise
     */
-    LX_Window * getWindow(unsigned int id);
+    LX_Window * getWindow(const uint32_t id);
 };
 
 /**
