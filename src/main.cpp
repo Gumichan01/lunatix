@@ -5,6 +5,7 @@
 #include <LunatiX/LX_Library.hpp>
 #include <LunatiX/LX_Graphics.hpp>
 #include <LunatiX/LX_Event.hpp>
+#include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Log.hpp>
 
 #define UNUSED(X) (void)(X)
