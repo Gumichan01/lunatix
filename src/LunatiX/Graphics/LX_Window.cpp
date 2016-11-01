@@ -455,7 +455,7 @@ uint32_t LX_Window::getID() const
 }
 
 
-void LX_Window::getInfo(LX_WindowInfo &info)
+void LX_Window::getInfo(LX_WindowInfo &info) const
 {
     info.id = getID();
     info.title = SDL_GetWindowTitle(_window);

@@ -203,7 +203,7 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 }
 
 
-uint32_t LX_EventHandler::getWindowID()
+uint32_t LX_EventHandler::getWindowID() const
 {
     uint32_t id = 0;
     const SDL_Event& ev = (*event);
@@ -252,7 +252,7 @@ uint32_t LX_EventHandler::getWindowID()
 }
 
 
-LX_EventType LX_EventHandler::getEventType()
+LX_EventType LX_EventHandler::getEventType() const
 {
     LX_EventType ty;
     const SDL_Event& ev = (*event);
@@ -328,19 +328,19 @@ LX_EventType LX_EventHandler::getEventType()
 }
 
 
-LX_KeyCode LX_EventHandler::getKeyCode()
+LX_KeyCode LX_EventHandler::getKeyCode() const
 {
     return (*event).key.keysym.sym;
 }
 
 
-LX_ScanCode LX_EventHandler::getScanCode()
+LX_ScanCode LX_EventHandler::getScanCode() const
 {
     return (*event).key.keysym.scancode;
 }
 
 
-LX_GamepadID LX_EventHandler::getGamepadID()
+LX_GamepadID LX_EventHandler::getGamepadID() const
 {
     LX_GamepadID id;
     const SDL_Event& ev = (*event);
@@ -371,7 +371,7 @@ LX_GamepadID LX_EventHandler::getGamepadID()
 }
 
 
-const LX_GAxis LX_EventHandler::getAxis()
+const LX_GAxis LX_EventHandler::getAxis() const
 {
     const SDL_ControllerAxisEvent ax = (*event).caxis;
     const LX_GAxis gax = {ax.which, static_cast<LX_GamepadAxis>(ax.axis), ax.value};
@@ -379,7 +379,7 @@ const LX_GAxis LX_EventHandler::getAxis()
 }
 
 
-const LX_GButton LX_EventHandler::getButton()
+const LX_GButton LX_EventHandler::getButton() const
 {
     const SDL_ControllerButtonEvent bu = (*event).cbutton;
     const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), bu.state};
@@ -387,7 +387,7 @@ const LX_GButton LX_EventHandler::getButton()
 }
 
 
-const LX_MButton LX_EventHandler::getMouseButton()
+const LX_MButton LX_EventHandler::getMouseButton() const
 {
     const SDL_MouseButtonEvent mb = (*event).button;
     LX_MouseButton b = toMouseButton(mb.button);
@@ -396,7 +396,7 @@ const LX_MButton LX_EventHandler::getMouseButton()
 }
 
 
-const LX_MMotion LX_EventHandler::getMouseMotion()
+const LX_MMotion LX_EventHandler::getMouseMotion() const
 {
     LX_MMotion mmotion;
     const SDL_MouseMotionEvent mm = (*event).motion;
@@ -416,7 +416,7 @@ const LX_MMotion LX_EventHandler::getMouseMotion()
     return mmotion;
 }
 
-const LX_MWheel LX_EventHandler::getMouseWheel()
+const LX_MWheel LX_EventHandler::getMouseWheel() const
 {
     const SDL_MouseWheelEvent mw = (*event).wheel;
     const LX_MWheel mwheel = {mw.windowID, mw.x, mw.y};
@@ -424,7 +424,7 @@ const LX_MWheel LX_EventHandler::getMouseWheel()
 }
 
 
-const LX_WEvent LX_EventHandler::getWindowEvent()
+const LX_WEvent LX_EventHandler::getWindowEvent() const
 {
     const SDL_WindowEvent winev = (*event).window;
     const LX_WEvent we = {winev.windowID,
@@ -434,7 +434,7 @@ const LX_WEvent LX_EventHandler::getWindowEvent()
 }
 
 
-const LX_UserEvent LX_EventHandler::getUserEvent()
+const LX_UserEvent LX_EventHandler::getUserEvent() const
 {
     const SDL_UserEvent usr = (*event).user;
     const LX_UserEvent uev = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
@@ -442,7 +442,7 @@ const LX_UserEvent LX_EventHandler::getUserEvent()
 }
 
 
-const LX_TextEvent LX_EventHandler::getTextEvent()
+const LX_TextEvent LX_EventHandler::getTextEvent() const
 {
     LX_TextEvent t = {0,"",0,0};
     const SDL_Event& ev = (*event);
@@ -462,7 +462,7 @@ const LX_TextEvent LX_EventHandler::getTextEvent()
 }
 
 
-const LX_DropEvent LX_EventHandler::getDropEvent()
+const LX_DropEvent LX_EventHandler::getDropEvent() const
 {
     LX_DropEvent drop = {""};
     const SDL_DropEvent dev = (*event).drop;

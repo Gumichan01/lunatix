@@ -405,13 +405,13 @@ public :
     */
     uint32_t getID() const;
     /**
-    *   @fn void getInfo(LX_WindowInfo &info)
+    *   @fn void getInfo(LX_WindowInfo &info) const
     *
     *   Get information of the current window
     *
     *   @param [in] info The information structure to fill in
     */
-    void getInfo(LX_WindowInfo &info);
+    void getInfo(LX_WindowInfo &info) const;
 
     /**
     *   @fn int getWidth() const
