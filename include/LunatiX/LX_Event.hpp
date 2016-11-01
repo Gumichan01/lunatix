@@ -21,8 +21,12 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_gamecontroller.h>
+#include <memory>
 
+union SDL_Event;
 
 /**
 *   @namespace LX_Event
@@ -30,10 +34,10 @@
 */
 namespace LX_Event
 {
-using LX_EventData = SDL_Event;                     /**< Event data                     */
 using LX_KeyCode = SDL_Keycode;                     /**< Virtual key representation     */
 using LX_ScanCode = SDL_Scancode;                   /**< Physical key representation    */
 using LX_GamepadID = int32_t;                       /**< Identifier of the gamepad      */
+
 
 /**
 *   @typedef LX_GamepadAxis
@@ -311,7 +315,7 @@ struct LX_DropEvent
 */
 class LX_EventHandler
 {
-    LX_EventData event;
+    std::unique_ptr<SDL_Event> event;
 
     LX_EventHandler(const LX_EventHandler&);
 
@@ -473,7 +477,7 @@ public:
     const LX_DropEvent getDropEvent();
 
     /// Default Destructor
-    ~LX_EventHandler() = default;
+    ~LX_EventHandler();
 };
 
 

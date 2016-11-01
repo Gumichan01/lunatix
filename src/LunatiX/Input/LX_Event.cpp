@@ -19,6 +19,8 @@
 */
 
 #include <LunatiX/LX_Event.hpp>
+#include <SDL2/SDL_events.h>
+
 
 namespace
 {
@@ -153,27 +155,32 @@ namespace LX_Event
 {
 // LX_Event
 
-LX_EventHandler::LX_EventHandler()
+LX_EventHandler::LX_EventHandler(): event(new SDL_Event())
 {
-    SDL_zero(event);
+    SDL_zero(*event);
+}
+
+LX_EventHandler::~LX_EventHandler()
+{
+    event.reset();
 }
 
 
 bool LX_EventHandler::pollEvent()
 {
-    return SDL_PollEvent(&event) == 1;
+    return SDL_PollEvent( &(*event) ) == 1;
 }
 
 
 bool LX_EventHandler::waitEvent()
 {
-    return SDL_WaitEvent(&event) == 1;
+    return SDL_WaitEvent( &(*event) ) == 1;
 }
 
 
 bool LX_EventHandler::waitEventTimeout(int timeout)
 {
-    return SDL_WaitEventTimeout(&event,timeout) == 1;
+    return SDL_WaitEventTimeout(&(*event), timeout) == 1;
 }
 
 
@@ -185,7 +192,7 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
             return false;
     }
 
-    LX_EventData ev;
+    SDL_Event ev;
     SDL_zero(ev);
 
     uevent.type = utype;
@@ -199,41 +206,42 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 uint32_t LX_EventHandler::getWindowID()
 {
     uint32_t id = 0;
+    const SDL_Event& ev = (*event);
 
-    switch(event.type)
+    switch(ev.type)
     {
     case SDL_WINDOWEVENT:
-        id = event.window.windowID;
+        id = ev.window.windowID;
         break;
 
     case SDL_KEYDOWN:
     case SDL_KEYUP:
-        id = event.key.windowID;
+        id = ev.key.windowID;
         break;
 
     case SDL_TEXTEDITING:
-        id = event.edit.windowID;
+        id = ev.edit.windowID;
         break;
 
     case SDL_TEXTINPUT:
-        id = event.text.windowID;
+        id = ev.text.windowID;
         break;
 
     case SDL_MOUSEMOTION:
-        id = event.motion.windowID;
+        id = ev.motion.windowID;
         break;
 
     case SDL_MOUSEBUTTONDOWN:
     case SDL_MOUSEBUTTONUP:
-        id = event.button.windowID;
+        id = ev.button.windowID;
         break;
 
     case SDL_MOUSEWHEEL:
-        id = event.wheel.windowID;
+        id = ev.wheel.windowID;
         break;
 
     case SDL_USEREVENT:
-        id = event.user.windowID;
+        id = ev.user.windowID;
         break;
 
     default:
@@ -247,8 +255,9 @@ uint32_t LX_EventHandler::getWindowID()
 LX_EventType LX_EventHandler::getEventType()
 {
     LX_EventType ty;
+    const SDL_Event& ev = (*event);
 
-    switch(event.type)
+    switch(ev.type)
     {
     case SDL_QUIT:
         ty = LX_QUIT;
@@ -321,35 +330,36 @@ LX_EventType LX_EventHandler::getEventType()
 
 LX_KeyCode LX_EventHandler::getKeyCode()
 {
-    return event.key.keysym.sym;
+    return (*event).key.keysym.sym;
 }
 
 
 LX_ScanCode LX_EventHandler::getScanCode()
 {
-    return event.key.keysym.scancode;
+    return (*event).key.keysym.scancode;
 }
 
 
 LX_GamepadID LX_EventHandler::getGamepadID()
 {
     LX_GamepadID id;
+    const SDL_Event& ev = (*event);
 
-    switch(event.type)
+    switch(ev.type)
     {
     case SDL_CONTROLLERBUTTONDOWN:
     case SDL_CONTROLLERBUTTONUP:
-        id = event.cbutton.which;
+        id = ev.cbutton.which;
         break;
 
     case SDL_CONTROLLERAXISMOTION:
-        id = event.caxis.which;
+        id = ev.caxis.which;
         break;
 
     case SDL_CONTROLLERDEVICEADDED:
     case SDL_CONTROLLERDEVICEREMOVED:
     case SDL_CONTROLLERDEVICEREMAPPED:
-        id = event.cdevice.which;
+        id = ev.cdevice.which;
         break;
 
     default:
@@ -363,7 +373,7 @@ LX_GamepadID LX_EventHandler::getGamepadID()
 
 const LX_GAxis LX_EventHandler::getAxis()
 {
-    const SDL_ControllerAxisEvent ax = event.caxis;
+    const SDL_ControllerAxisEvent ax = (*event).caxis;
     const LX_GAxis gax = {ax.which, static_cast<LX_GamepadAxis>(ax.axis), ax.value};
     return gax;
 }
@@ -371,7 +381,7 @@ const LX_GAxis LX_EventHandler::getAxis()
 
 const LX_GButton LX_EventHandler::getButton()
 {
-    const SDL_ControllerButtonEvent bu = event.cbutton;
+    const SDL_ControllerButtonEvent bu = (*event).cbutton;
     const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), bu.state};
     return gbutton;
 }
@@ -379,7 +389,7 @@ const LX_GButton LX_EventHandler::getButton()
 
 const LX_MButton LX_EventHandler::getMouseButton()
 {
-    const SDL_MouseButtonEvent mb = event.button;
+    const SDL_MouseButtonEvent mb = (*event).button;
     LX_MouseButton b = toMouseButton(mb.button);
     const LX_MButton mbutton = {mb.windowID,b, mb.state, mb.clicks, mb.x, mb.y};
     return mbutton;
@@ -389,7 +399,7 @@ const LX_MButton LX_EventHandler::getMouseButton()
 const LX_MMotion LX_EventHandler::getMouseMotion()
 {
     LX_MMotion mmotion;
-    const SDL_MouseMotionEvent mm = event.motion;
+    const SDL_MouseMotionEvent mm = (*event).motion;
 
     for(int i = 0; i < LX_MBUTTONS; i++)
     {
@@ -408,7 +418,7 @@ const LX_MMotion LX_EventHandler::getMouseMotion()
 
 const LX_MWheel LX_EventHandler::getMouseWheel()
 {
-    const SDL_MouseWheelEvent mw = event.wheel;
+    const SDL_MouseWheelEvent mw = (*event).wheel;
     const LX_MWheel mwheel = {mw.windowID, mw.x, mw.y};
     return mwheel;
 }
@@ -416,7 +426,7 @@ const LX_MWheel LX_EventHandler::getMouseWheel()
 
 const LX_WEvent LX_EventHandler::getWindowEvent()
 {
-    const SDL_WindowEvent winev = event.window;
+    const SDL_WindowEvent winev = (*event).window;
     const LX_WEvent we = {winev.windowID,
                           toWinEvent(winev.event), winev.data1, winev.data2
                          };
@@ -426,7 +436,7 @@ const LX_WEvent LX_EventHandler::getWindowEvent()
 
 const LX_UserEvent LX_EventHandler::getUserEvent()
 {
-    const SDL_UserEvent usr = event.user;
+    const SDL_UserEvent usr = (*event).user;
     const LX_UserEvent uev = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
     return uev;
 }
@@ -435,15 +445,16 @@ const LX_UserEvent LX_EventHandler::getUserEvent()
 const LX_TextEvent LX_EventHandler::getTextEvent()
 {
     LX_TextEvent t = {0,"",0,0};
+    const SDL_Event& ev = (*event);
 
-    if(event.type == SDL_TEXTINPUT)
+    if(ev.type == SDL_TEXTINPUT)
     {
-        const SDL_TextInputEvent ti = event.text;
+        const SDL_TextInputEvent ti = ev.text;
         t = {ti.windowID, ti.text, 0, static_cast<size_t>(std::string(ti.text).length())};
     }
     else
     {
-        const SDL_TextEditingEvent te = event.edit;
+        const SDL_TextEditingEvent te = ev.edit;
         t = {te.windowID, te.text, te.start, static_cast<size_t>(te.length)};
     }
 
@@ -454,9 +465,9 @@ const LX_TextEvent LX_EventHandler::getTextEvent()
 const LX_DropEvent LX_EventHandler::getDropEvent()
 {
     LX_DropEvent drop = {""};
-    const SDL_DropEvent dev = event.drop;
+    const SDL_DropEvent dev = (*event).drop;
 
-    if(event.type == SDL_DROPFILE && dev.file != nullptr)
+    if((*event).type == SDL_DROPFILE && dev.file != nullptr)
     {
         drop.file = dev.file;
         SDL_free(dev.file);

@@ -16,8 +16,8 @@
 
 
 // Button state
-const uint8_t LX_BUTTON_PRESSED  = SDL_PRESSED;
-const uint8_t LX_BUTTON_RELEASED = SDL_RELEASED;
+const uint8_t LX_BUTTON_PRESSED  = 1;
+const uint8_t LX_BUTTON_RELEASED = 0;
 
 // Gamepad buttons
 const LX_GamepadButton LX_BUTTON_INVALID       = SDL_CONTROLLER_BUTTON_INVALID;
