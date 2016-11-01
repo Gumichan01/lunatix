@@ -157,12 +157,12 @@ namespace LX_Event
 
 LX_EventHandler::LX_EventHandler(): event(new SDL_Event())
 {
-    SDL_zero(*event);
+    SDL_zerop(event);
 }
 
 LX_EventHandler::~LX_EventHandler()
 {
-    event.reset();
+    delete event;
 }
 
 

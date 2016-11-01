@@ -24,7 +24,6 @@
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_gamecontroller.h>
-#include <memory>
 
 union SDL_Event;
 
@@ -315,7 +314,7 @@ struct LX_DropEvent
 */
 class LX_EventHandler
 {
-    std::unique_ptr<SDL_Event> event;
+    SDL_Event *event;
 
     LX_EventHandler(const LX_EventHandler&);
 
