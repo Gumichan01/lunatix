@@ -25,8 +25,7 @@
 
 #include <SDL2/SDL_clipboard.h>
 
-namespace LX_Text
-{
+using namespace LX_Event;
 
 // Anonymous
 namespace
@@ -41,6 +40,8 @@ bool isEndofLine(const std::string& text)
 
 };
 
+namespace LX_Text
+{
 
 LX_RedrawCallback::LX_RedrawCallback()  {}
 LX_RedrawCallback::~LX_RedrawCallback() {}
@@ -61,7 +62,7 @@ LX_TextInput::LX_TextInput()
 */
 void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
 {
-    LX_Event::LX_EventHandler ev;
+    LX_EventHandler ev;
     _done = false;
     _draw = false;
 
@@ -71,17 +72,17 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
         {
             switch(ev.getEventType())
             {
-            case SDL_KEYDOWN:
+            case LX_KEYDOWN:
                 keyboardInput_(ev);
                 _draw = true;
                 break;
 
-            case SDL_TEXTINPUT:
+            case LX_TEXTINPUT:
                 textInput_(ev);
                 _draw = true;
                 break;
 
-            case SDL_TEXTEDITING:
+            case LX_TEXTEDITING:
                 textEdit_(ev);
                 _draw = true;
                 break;
