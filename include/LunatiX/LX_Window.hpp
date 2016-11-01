@@ -53,6 +53,13 @@ struct LX_Vector2D;
 /**
 *   @namespace LX_Win
 *   @brief The window module
+*
+*   It provides functions and classes for manipulating windows
+*
+*   @warning In order to use this module, the *video* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
 */
 namespace LX_Win
 {

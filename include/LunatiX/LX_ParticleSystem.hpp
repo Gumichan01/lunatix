@@ -26,6 +26,9 @@
 /**
 *   @namespace LX_ParticleEngine
 *   @brief The particle engine
+*
+*   it handles a basic particle system
+*
 */
 namespace LX_ParticleEngine
 {

@@ -30,6 +30,13 @@ union SDL_Event;
 /**
 *   @namespace LX_Event
 *   @brief The event module
+*
+*   It handles every events (user input, window,...)
+*
+*   @warning In order to use this module, the *video* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
 */
 namespace LX_Event
 {

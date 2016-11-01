@@ -30,8 +30,7 @@
 *   @namespace LX_SystemInfo
 *   @brief The System information module
 *
-*   This namespace describes a module that is able
-*   to display information about the system
+*   This module provides information about the system
 *   (Platform, CPU, RAM)
 */
 namespace LX_SystemInfo

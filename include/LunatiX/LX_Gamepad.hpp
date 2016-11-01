@@ -33,9 +33,7 @@ struct LX_GamepadInfo;
 
 /**
 *   @class LX_Gamepad
-*   @brief The gamepad (joystick, game controller)
-*
-*   It handles any type of gamepad
+*   @brief The gamepad
 */
 class LX_Gamepad
 {

@@ -35,6 +35,8 @@ class LX_Mouse_;
 /**
 *   @class LX_Mouse
 *   @brief The mouse cursor
+*
+*   It handles a user-defined mouse (with custom cursor)
 */
 class LX_Mouse
 {

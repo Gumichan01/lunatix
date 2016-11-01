@@ -28,8 +28,8 @@
 *    @namespace LX_Random
 *    @brief The Random Number Generator (RNG) module
 *
-*   This namespace describes LX_Random. This random number generator is based on
-*   the Xorshift* generator, but has also a support of the standard C generator
+*   This random number generator can be used using the Xorshift* generator,
+*   or the standard C generator.
 */
 namespace LX_Random
 {

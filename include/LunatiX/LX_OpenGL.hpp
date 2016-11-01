@@ -27,6 +27,12 @@
 /**
 *   @namespace LX_Graphics
 *   @brief The graphics module
+*
+*   It handles every every graphics operation (images, texture streaming,...)
+*
+*   @warning In order to use this module, the *video* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
 */
 namespace LX_Graphics
 {
@@ -34,6 +40,14 @@ namespace LX_Graphics
 /**
 *   @namespace LX_Graphics::LX_OpenGL
 *   @brief The OpenGL interface module
+*
+*   It provides functions for using OpenGL with LunatiX
+*
+*   @warning In order to use this module, the *opengl* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
+*   @sa LX_Graphics
 */
 namespace LX_OpenGL
 {

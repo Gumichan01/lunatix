@@ -28,6 +28,9 @@
 /**
 *   @namespace LX_Physics
 *   @brief The physics module
+*
+*   It handles operations on bodies (collision, movement, ...)
+*
 */
 namespace LX_Physics
 {
@@ -75,8 +78,8 @@ unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
 *
 *    This function calculates the euclidean square distance
 *
-*    @param [in]    p1 The first point
-*    @param [in]    p2 The second point
+*    @param [in] p1 The first point
+*    @param [in] p2 The second point
 *
 *    @return An integer value
 *

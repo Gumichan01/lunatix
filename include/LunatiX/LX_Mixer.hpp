@@ -43,6 +43,13 @@ class LX_FileBuffer;
 /**
 *   @namespace LX_Mixer
 *   @brief The audio module
+*
+*   It handles sound mixing and effect processing
+*
+*   @warning In order to use this module, the *audio* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
 */
 namespace LX_Mixer
 {
