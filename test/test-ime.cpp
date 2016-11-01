@@ -36,7 +36,7 @@ public:
 
 void generateInput()
 {
-    LX_EventData event;
+    SDL_Event event;
     event.type = SDL_TEXTINPUT;
     strcpy(event.text.text,"hello world!");
     SDL_PushEvent(&event);
@@ -86,7 +86,7 @@ void generateInput()
         SDL_PushEvent(&event);
     }
 
-    LX_EventData nev;
+    SDL_Event nev;
     nev.type = SDL_KEYDOWN;
     nev.key.keysym.sym = SDLK_ESCAPE;
     SDL_PushEvent(&nev);
