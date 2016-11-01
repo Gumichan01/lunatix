@@ -162,7 +162,7 @@ class LX_Window
     void createRenderer_(bool accel);
     void updateRenderer_();
     void clearRenderer_();
-    bool screenshot_(std::string& filename);
+    bool screenshot_(const std::string& filename);
 
 
 public :
@@ -382,21 +382,21 @@ public :
     void clearWindow();
 
     /**
-    *   @fn bool screenshot(std::string filename)
+    *   @fn bool screenshot(const std::string& filename)
     *
     *   Take a screenshot and save it in a file
     *
     *   @param [in] filename The name of the file to save the image in
     *   @return True on success, False otherwise
     */
-    bool screenshot(std::string filename);
+    bool screenshot(const std::string& filename);
 
     /**
-    *   @fn uint32_t getID();
+    *   @fn uint32_t getID() const
     *   Get the unique identifier of the window
     *   @return The identifier of the window
     */
-    uint32_t getID();
+    uint32_t getID() const;
     /**
     *   @fn void getInfo(LX_WindowInfo &info)
     *

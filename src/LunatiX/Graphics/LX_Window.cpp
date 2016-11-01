@@ -415,7 +415,7 @@ void LX_Window::clearWindow()
 /*
 *   Private function that makes a screenshot using the renderer
 */
-bool LX_Window::screenshot_(std::string& filename)
+bool LX_Window::screenshot_(const std::string& filename)
 {
     int err = 0;
     SDL_Surface *sshot = nullptr;
@@ -443,13 +443,13 @@ bool LX_Window::screenshot_(std::string& filename)
 }
 
 
-bool LX_Window::screenshot(std::string filename)
+bool LX_Window::screenshot(const std::string& filename)
 {
     return screenshot_(filename);
 }
 
 
-uint32_t LX_Window::getID()
+uint32_t LX_Window::getID() const
 {
     return SDL_GetWindowID(_window);
 }
