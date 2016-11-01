@@ -177,12 +177,6 @@ bool LX_EventHandler::waitEventTimeout(int timeout)
 }
 
 
-bool LX_EventHandler::pushEvent(LX_EventData& ev)
-{
-    return SDL_PushEvent(&ev) == 1;
-}
-
-
 bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 {
     if(utype == -1)
@@ -198,7 +192,7 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
     ev.type = SDL_USEREVENT;
     ev.user = {uevent.type, 0, uevent.wid, uevent.code, uevent.data1, uevent.data2};
 
-    return pushEvent(ev);
+    return SDL_PushEvent(&ev) == 1;
 }
 
 

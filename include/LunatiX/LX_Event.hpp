@@ -354,18 +354,6 @@ public:
     *   @sa pollEvent()
     */
     bool waitEventTimeout(int timeout);
-
-    /**
-    *   @fn bool pushEvent(LX_EventData& ev)
-    *   Push an event to the event queue
-    *
-    *   @param [in] ev The event to push
-    *
-    *   @return TRUE on success, FALSE otherwise.
-    *   Use LX_GetError() for more information on failure.
-    */
-    bool pushEvent(LX_EventData& ev);
-
     /**
     *   @fn bool pushUserEvent(LX_UserEvent& uevent)
     *   Push a user event to the event queue
