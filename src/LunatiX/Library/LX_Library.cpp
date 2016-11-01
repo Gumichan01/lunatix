@@ -56,7 +56,7 @@ bool LX_Init()
 {
     const std::string mappingFile = "config/gamecontrollerdb.txt";
 
-    uint32_t sdl_flags = 0x00000000;                  // The flags for SDL_Init
+    uint32_t sdl_flags = 0x00000000;                // The flags for SDL_Init
     int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;      // The IMG flag for SDL_Image
 
     // Load the configuration
@@ -78,17 +78,20 @@ bool LX_Init()
     // Gamepad flag
     if(configuration->getGamepadFlag())
     {
-        sdl_flags |= SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
+        sdl_flags |= SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
     }
 
     // Init SDL
-    if(SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
+    if(sdl_flags == 0 || SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
     {
+        if(sdl_flags == 0)
+            LX_SetError("No flag is set in the configuration file");
+
         return false;
     }
 
     // Load mappings from another configuration file
-    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER != 0))
+    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER) != 0)
     {
         SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
     }

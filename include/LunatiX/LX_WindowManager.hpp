@@ -131,6 +131,14 @@ public:
     void clearWindows();
 
     /**
+    *   @fn template<class Fun> void map(Fun f)
+    *   Apply a function on every windows
+    *   @param [in] f the function to call on each window
+    */
+    template<class Fun>
+    void map(Fun f);
+
+    /**
     *   @fn LX_Window * LX_WindowManager::getWindow(const uint32_t id)
     *
     *   Get a window according to its ID
@@ -154,5 +162,7 @@ public:
 LX_WindowManager * getWindowManager();
 
 };
+
+#include "LX_WindowManager.tpp"
 
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED

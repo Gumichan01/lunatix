@@ -26,6 +26,8 @@
 /**
 *   @namespace LX_FileSystem
 *   @brief The file system
+*
+*   This module is responsible of managing the file system
 */
 namespace LX_FileSystem
 {

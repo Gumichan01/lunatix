@@ -52,6 +52,12 @@ class LX_TextImage;
 /**
 *   @namespace LX_TrueTypeFont
 *   @brief The LunatiX True Type Font (TTF) module
+*
+*   It handles True Type Font texts manipulation.
+*
+*   @warning In order to use this module, the *ttf* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
 */
 namespace LX_TrueTypeFont
 {

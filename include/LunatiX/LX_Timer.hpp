@@ -24,7 +24,7 @@
 
 /**
 *   @namespace LX_Timer
-*   @brief Very simple module for handling tme
+*   @brief Very simple module for handling time
 *
 */
 namespace LX_Timer

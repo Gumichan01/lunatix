@@ -26,6 +26,9 @@
 /**
 *   @namespace LX_Config
 *   @brief The configuration loader
+*
+*   This module is responsible of loading subsystems of the library
+*
 */
 namespace LX_Config
 {

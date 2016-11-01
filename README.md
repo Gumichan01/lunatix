@@ -35,7 +35,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 ## Examples ##
 
 
-    #include <LunatiX/LX_Library.hpp>
+    #include <LunatiX/LX_LunatiX.hpp>
 
     using namespace LX_Event;
 
@@ -77,7 +77,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
             w.clearWindow();
             sprite.draw(&position);
             w.update();
-            SDL_Delay(33);
+            LX_Timer::delay(33);
         }
 
         LX_Quit();

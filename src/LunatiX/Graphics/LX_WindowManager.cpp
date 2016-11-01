@@ -19,7 +19,6 @@
 *
 */
 
-
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
 
@@ -63,8 +62,19 @@ LX_WindowManager::~LX_WindowManager() {}
 
 uint32_t LX_WindowManager::addWindow(LX_Window *w)
 {
+    const auto wend = _windows.end();
+    const uint32_t no = static_cast<uint32_t>(-1);
+
     if(w == nullptr)
-        return static_cast<uint32_t>(-1);
+        return no;
+
+    bool found = std::any_of(_windows.begin(), wend, [&w](const LX_Window * win)
+    {
+        return win->getID() == w->getID();
+    });
+
+    if(found)
+        return no;
 
     _windows.push_back(w);
     return w->getID();
@@ -78,16 +88,16 @@ LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
     if(_windows.empty())
         return nullptr;
 
-    for(auto it = _windows.begin(); it != _windows.end(); it++)
+    const auto wend = _windows.end();
+    auto it = std::find_if(_windows.begin(), wend, [&id](const LX_Window * win)
     {
-        if(*it == nullptr)
-            continue;
+        return win->getID() == id;
+    });
 
-        if((*it)->getID() == id)
-        {
-            w = *it;
-            it = _windows.erase(it);
-        }
+    if(it != wend)
+    {
+        w = *it;
+        _windows.erase(it);
     }
 
     return w;
@@ -102,30 +112,25 @@ unsigned int LX_WindowManager::nbWindows()
 
 void LX_WindowManager::updateWindows()
 {
-    for(auto it = _windows.begin(); it != _windows.end(); it++)
-    {
-        (*it)->update();
-    }
+    map([](LX_Window *w){w->update();});
 }
 
 
 void LX_WindowManager::clearWindows()
 {
-    for(auto it = _windows.begin(); it != _windows.end(); it++)
-    {
-        (*it)->clearWindow();
-    }
+    map([](LX_Window *w){w->clearWindow();});
 }
 
 
 LX_Window * LX_WindowManager::getWindow(uint32_t id)
 {
     LX_Window *w = nullptr;
-    auto it = _windows.begin();
     const auto wend = _windows.end();
 
-    while(it != wend && (*it)->getID() != id)
-        ++it;
+    auto it = std::find_if(_windows.begin(), wend, [&id](const LX_Window * win)
+    {
+        return win->getID() == id;
+    });
 
     if(it != wend)
         w = (*it);

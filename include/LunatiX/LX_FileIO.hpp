@@ -43,6 +43,8 @@ struct SDL_RWops;
 /**
 *   @namespace LX_FileIO
 *   @brief The file Input/Output module
+*
+*   This provides an interface for manipulating files
 */
 namespace LX_FileIO
 {

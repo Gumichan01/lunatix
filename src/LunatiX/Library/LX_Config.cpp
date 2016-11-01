@@ -70,7 +70,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
     const std::regex VSYNC_REG("vsync=[[:digit:]]+",std::regex::extended);
     const std::regex TTF_REG("ttf=[[:digit:]]+",std::regex::extended);
     const std::regex AUDIO_REG("audio=[[:digit:]]+",std::regex::extended);
-    const std::regex GAMEPAD_REG("joystick=[[:digit:]]+",std::regex::extended);
+    const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+",std::regex::extended);
     const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
     const std::regex FONT_REG("font=.+",std::regex::extended);
     const std::regex SIZE_REG("size=.+",std::regex::extended);

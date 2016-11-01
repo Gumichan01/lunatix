@@ -28,6 +28,10 @@ class LX_Thread_;
 /**
 *   @namespace LX_Multithreading
 *   @brief The Multithreading module
+*
+*   It handles multithreading and threadsynchronization primitives
+*   (mutexes, condition variables, channels)
+*
 */
 namespace LX_Multithreading
 {

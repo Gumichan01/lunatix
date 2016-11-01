@@ -25,6 +25,33 @@
 /**
 *   @namespace LX_Log
 *   @brief The log module
+*
+*   It handles log messages with categories and priorities
+*
+*   For each category, a priority level is associated with it.
+*   These are the level priorities:
+*   - Verbose
+*   - Debug
+*   - Info
+*   - Warning
+*   - Error
+*   - Critical
+*
+*
+*   The default level priorities are defined as follows:
+*
+*   |      Category      |      Level     |
+*   |--------------------|----------------|
+*   | LX_LOG_APPLICATION | Info           |
+*   | LX_LOG_ASSERT      | Warning        |
+*   | LX_LOG_TEST        | Verbose        |
+*   | Everything else    | Critical       |
+*
+*
+*   @note If you're debugging your program you might want to call:
+*
+*       setDebugMode(true);
+*
 */
 namespace LX_Log
 {
@@ -34,24 +61,16 @@ namespace LX_Log
 *   @enum LX_CATEGORY
 *   @brief The log categories of the program
 *
-*   Here are the default level priorities of each application category:
-*
-*   |      Category      |      Level     |
-*   |--------------------|----------------|
-*   | LX_LOG_APPLICATION | INFO level     |
-*   | LX_LOG_APPLICATION | WARN level     |
-*   | LX_LOG_TEST        | VERBOSE level  |
-*   | All other          | CRITICAL level |
-
 */
-enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,
-                  LX_LOG_ERROR = SDL_LOG_CATEGORY_ERROR,
-                  LX_LOG_SYSTEM = SDL_LOG_CATEGORY_SYSTEM,
-                  LX_LOG_AUDIO = SDL_LOG_CATEGORY_AUDIO,
-                  LX_LOG_VIDEO = SDL_LOG_CATEGORY_VIDEO,
-                  LX_LOG_RENDER = SDL_LOG_CATEGORY_RENDER,
-                  LX_LOG_INPUT = SDL_LOG_CATEGORY_INPUT,
-                  LX_LOG_TEST = SDL_LOG_CATEGORY_TEST
+enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,    /**< Application log    */
+                  LX_LOG_ASSERT = SDL_LOG_CATEGORY_ASSERT,              /**< Assertion log      */
+                  LX_LOG_ERROR = SDL_LOG_CATEGORY_ERROR,                /**< Error log          */
+                  LX_LOG_SYSTEM = SDL_LOG_CATEGORY_SYSTEM,              /**< System log         */
+                  LX_LOG_AUDIO = SDL_LOG_CATEGORY_AUDIO,                /**< Audio log          */
+                  LX_LOG_VIDEO = SDL_LOG_CATEGORY_VIDEO,                /**< Video log          */
+                  LX_LOG_RENDER = SDL_LOG_CATEGORY_RENDER,              /**< Rendering log      */
+                  LX_LOG_INPUT = SDL_LOG_CATEGORY_INPUT,                /**< Input log          */
+                  LX_LOG_TEST = SDL_LOG_CATEGORY_TEST                   /**< Test log           */
                  };
 
 /**

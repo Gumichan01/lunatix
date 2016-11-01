@@ -48,15 +48,15 @@ int main(int argc, char **argv)
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
-    test_winInfo(win);
+    /*test_winInfo(win);
     test_opengl();
     test_opengl2();
     test_window1(w);
-    test_window2();
+    test_window2();*/
     test_winManager(w);
-    test_image(w);
+    /*test_image(w);
     test_drawing(w);
-    test_viewport(w);
+    test_viewport(w);*/
     delete win;
 
     LX_Quit();
@@ -394,8 +394,9 @@ void test_viewport(LX_Win::LX_Window *win)
                     viewport.x,viewport.y,viewport.w,viewport.h);
 
     Uint32 b = SDL_GetTicks();
-    LX_AABB brect = {0, 0,win->getWidth()/2,win->getHeight()/2};
+    LX_AABB brect = {0, 0, win->getWidth()/2, win->getHeight()/2};
     SDL_Color bcolor = {0,0,0,255};
+
     while(SDL_GetTicks() - b < 4096)
     {
         win->clearWindow();
@@ -418,24 +419,55 @@ void test_winManager(LX_Win::LX_Window *win)
 {
     cout << " = TEST WinManager = " << endl;
 
+    std::string name = "data/bullet.png";
+    LX_Graphics::LX_Sprite img(name,*win);
+
     if(win == nullptr)
         cerr << "FAILURE - The window was not initialized" << endl;
     else
         cout << "SUCCESS - The window exists" << endl;
 
-    int id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
+    uint32_t id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
+    uint32_t wid = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
 
-    if(id == -1)
+    if(id == static_cast<uint32_t>(-1))
         cerr << "FAILURE - failed to add a window" << LX_GetError() << endl;
     else
         cout << "SUCCESS - the window was added into the window manager" << endl;
 
+    if(wid == static_cast<uint32_t>(-1))
+        cout << "SUCCESS - the window was not added into the window manager" << endl;
+    else
+        cerr << "FAILURE - the window has been added" << LX_GetError() << endl;
+
+
+    LX_Win::LX_Window *lxw = LX_Win::LX_WindowManager::getInstance()->getWindow(id);
+
+    if(lxw == win)
+        cout << "SUCCESS - (getWindow) the window is exactly what we added" << endl;
+    else
+        cerr << "FAILURE - (getWindow) the window is not exactly what we added" << endl;
+
     LX_Win::LX_WindowManager::getInstance()->clearWindows();
-    win->setDrawColor({32,128,64,255});
+    img.draw();
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
     SDL_Delay(512);
-    LX_Win::LX_WindowManager::getInstance()->clearWindows();
-    LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+
+    LX_Win::LX_Window *wi = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+
+    if(wi == win)
+        cout << "SUCCESS - the removed window is exactly what we added" << endl;
+    else
+        cerr << "FAILURE - the removed window is not exactly what we added" << endl;
+
+    cout << "INFO - remove the same window (again) " << endl;
+    LX_Win::LX_Window *null = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+
+    if(null == nullptr)
+        cout << "SUCCESS - nullptr: expected" << endl;
+    else
+        cerr << "FAILURE - expected : nullptr, got: a valid pointer" << endl;
+
     LX_Log::log(" = END TEST = ");
 }
 

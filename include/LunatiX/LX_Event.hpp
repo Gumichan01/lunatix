@@ -30,6 +30,13 @@ union SDL_Event;
 /**
 *   @namespace LX_Event
 *   @brief The event module
+*
+*   It handles every events (user input, window,...)
+*
+*   @warning In order to use this module, the *video* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
 */
 namespace LX_Event
 {
@@ -369,111 +376,111 @@ public:
     bool pushUserEvent(LX_UserEvent& uevent);
 
     /**
-    *   @fn uint32_t getWindowID()
+    *   @fn uint32_t getWindowID() const
     *   Get the id of a window where an event happened in
     *
     *   @return The window ID, 0 on failure.
     *   @note This function can returns 0 if the current event
     *   is not window-dependant
     */
-    uint32_t getWindowID();
+    uint32_t getWindowID() const;
     /**
-    *   @fn LX_EventType getEventType()
+    *   @fn LX_EventType getEventType() const
     *   Get the type of the current event after
     *   @return The type of event
     */
-    LX_EventType getEventType();
+    LX_EventType getEventType() const;
     /**
-    *   @fn LX_KeyCode getKeyCode()
+    *   @fn LX_KeyCode getKeyCode() const
     *
     *   Get the key code value (virtual keyboard value) of the keyboard button,
     *   assuming that the event is a keyboard event
     *
     *   @return The key code value
     */
-    LX_KeyCode getKeyCode();
+    LX_KeyCode getKeyCode() const;
     /**
-    *   @fn LX_ScanCode getScanCode()
+    *   @fn LX_ScanCode getScanCode() const
     *
     *   Get the scan code value (physical keyboard value) of the keyboard button,
     *   assuming that the event is a keyboard event
     *
     *   @return The scan code value
     */
-    LX_ScanCode getScanCode();
+    LX_ScanCode getScanCode() const;
     /**
-    *   @fn LX_GamepadID getGamepadID()
+    *   @fn LX_GamepadID getGamepadID() const
     *   Get the gamepad identifier related to the current event.
     *   @return The gamepad ID
     */
-    LX_GamepadID getGamepadID();
+    LX_GamepadID getGamepadID() const;
 
     /**
-    *   @fn const LX_GAxis getAxis()
+    *   @fn const LX_GAxis getAxis() const
     *   Get information about the gamepad axis related to the current event
     *   @return The structure describing the gamepad axis
     *   @sa getButton
     */
-    const LX_GAxis getAxis();
+    const LX_GAxis getAxis() const;
     /**
-    *   @fn const LX_GButton getButton()
+    *   @fn const LX_GButton getButton() const
     *   Get information about the gamepad button related to the current event
     *   @return The structure describing the gamepad button
     *   @sa getAxis
     */
-    const LX_GButton getButton();
+    const LX_GButton getButton() const;
 
     /**
-    *   @fn const LX_MButton getMouseButton()
+    *   @fn const LX_MButton getMouseButton() const
     *   Get information about the mouse button related to the current event
     *   @return The structure describing the mouse button
     *
     *   @sa getMouseMotion
     *   @sa getMouseWheel
     */
-    const LX_MButton getMouseButton();
+    const LX_MButton getMouseButton() const;
     /**
-    *   @fn const LX_MMotion getMouseMotion()
+    *   @fn const LX_MMotion getMouseMotion() const
     *   Get information about the mouse movement related to the current event
     *   @return The structure describing the mouse movement
     *
     *   @sa getMouseButton
     *   @sa getMouseWheel
     */
-    const LX_MMotion getMouseMotion();
+    const LX_MMotion getMouseMotion() const;
     /**
-    *   @fn const LX_MWheel getMouseWheel()
+    *   @fn const LX_MWheel getMouseWheel() const
     *   Get information about the mouse wheel related to the current event
     *   @return The structure describing the mouse wheel
     *
     *   @sa getMouseButton
     *   @sa getMouseMotion
     */
-    const LX_MWheel getMouseWheel();
+    const LX_MWheel getMouseWheel() const;
     /**
-    *   @fn const LX_WEvent getWindowEvent()
+    *   @fn const LX_WEvent getWindowEvent() const
     *   Get information about the window event
     *   @return The structure describing the window event
     */
-    const LX_WEvent getWindowEvent();
+    const LX_WEvent getWindowEvent() const;
     /**
-    *   @fn const LX_UserEvent getUserEvent()
+    *   @fn const LX_UserEvent getUserEvent() const
     *   Get information about the user event
     *   @return The structure describing the user event
     */
-    const LX_UserEvent getUserEvent();
+    const LX_UserEvent getUserEvent() const;
     /**
-    *   @fn const LX_TextEvent getTextEvent()
+    *   @fn const LX_TextEvent getTextEvent() const
     *   Get information about the text event
     *   @return The structure describing the text event
     */
-    const LX_TextEvent getTextEvent();
+    const LX_TextEvent getTextEvent() const;
     /**
-    *   @fn const LX_DropEvent getDropEvent()
+    *   @fn const LX_DropEvent getDropEvent() const
     *   Get information about the drop event (drag & drop a file)
     *   @return The structure describing the event
     */
-    const LX_DropEvent getDropEvent();
+    const LX_DropEvent getDropEvent() const;
 
     /// Default Destructor
     ~LX_EventHandler();

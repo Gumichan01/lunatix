@@ -32,6 +32,14 @@ const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 /**
 *   @namespace LX_Device
 *   @brief The device module
+*
+*   This modules handles several types of device (gamepad, mouse)
+*   and the haptic system
+*
+*   @warning In order to use any gamepad in LX_Device, the *gamepad* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
 */
 namespace LX_Device
 {

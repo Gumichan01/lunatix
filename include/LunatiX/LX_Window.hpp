@@ -53,6 +53,13 @@ struct LX_Vector2D;
 /**
 *   @namespace LX_Win
 *   @brief The window module
+*
+*   It provides functions and classes for manipulating windows
+*
+*   @warning In order to use this module, the *video* flag
+*   in the configuration file must be set to 1, otherwise the behaviour of
+*   the library is undefined.
+*
 */
 namespace LX_Win
 {
@@ -162,7 +169,7 @@ class LX_Window
     void createRenderer_(bool accel);
     void updateRenderer_();
     void clearRenderer_();
-    bool screenshot_(std::string& filename);
+    bool screenshot_(const std::string& filename);
 
 
 public :
@@ -382,60 +389,50 @@ public :
     void clearWindow();
 
     /**
-    *   @fn bool screenshot(std::string filename)
+    *   @fn bool screenshot(const std::string& filename)
     *
     *   Take a screenshot and save it in a file
     *
     *   @param [in] filename The name of the file to save the image in
     *   @return True on success, False otherwise
     */
-    bool screenshot(std::string filename);
+    bool screenshot(const std::string& filename);
 
     /**
-    *   @fn uint32_t getID();
+    *   @fn uint32_t getID() const
     *   Get the unique identifier of the window
     *   @return The identifier of the window
     */
-    uint32_t getID();
+    uint32_t getID() const;
     /**
-    *   @fn void getInfo(LX_WindowInfo &info)
-    *
+    *   @fn void getInfo(LX_WindowInfo &info) const
     *   Get information of the current window
-    *
-    *   @param [in] info The information structure to fill in
+    *   @param [out] info The information structure to fill in
     */
-    void getInfo(LX_WindowInfo &info);
+    void getInfo(LX_WindowInfo &info) const;
 
     /**
     *   @fn int getWidth() const
-    *
     *   Get the width of the window
-    *
     *   @return The width
     */
     int getWidth() const;
     /**
     *   @fn int getHeight() const
-    *
     *   Get the height of the window
-    *
     *   @return The height
     */
     int getHeight() const;
 
     /**
     *   @fn int getLogicalWidth() const
-    *
     *   Get the logical width of the window
-    *
     *   @return The logical width
     */
     int getLogicalWidth() const;
     /**
     *   @fn int getLogicalHeight() const
-    *
     *   Get the logical height of the window
-    *
     *   @return The logical height
     */
     int getLogicalHeight() const;

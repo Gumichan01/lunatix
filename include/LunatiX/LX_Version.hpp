@@ -24,7 +24,7 @@
 
 /**
 *   @namespace LX_VersionInfo
-*   @brief Information about the version of the library
+*   @brief Information about the library
 */
 namespace LX_VersionInfo
 {
