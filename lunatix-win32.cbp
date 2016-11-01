@@ -75,6 +75,9 @@
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
 		<Unit filename="include/LunatiX/LX_Event.hpp" />
+		<Unit filename="include/LunatiX/LX_Event.inl">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
 		<Unit filename="include/LunatiX/LX_FileSystem.hpp" />
@@ -107,6 +110,8 @@
 		<Unit filename="include/LunatiX/LX_Version.hpp" />
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
+		<Unit filename="include/LunatiX/LX_WindowManager.tpp" />
+		<Unit filename="include/LunatiX/LX_WindowManager.tpp.h" />
 		<Unit filename="include/LunatiX/Lunatix.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
