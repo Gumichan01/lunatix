@@ -68,6 +68,7 @@ const uint32_t LX_GRAPHICS_NO_FULLSCREEN = 0;                                   
 */
 struct LX_WindowInfo
 {
+    uint32_t id;        /**< Identifier of the window (read-only)   */
     std::string title;  /**< Title                      */
     int x;              /**< X position                 */
     int y;              /**< Y position                 */
@@ -125,7 +126,6 @@ public :
     ~LX_WindowException() noexcept;
 };
 
-/// @todo (#2#) LX_Window - Window ID (for event handling → LX_Event)
 /// @todo (#4#) LX_Window - private implementation
 
 /**
@@ -146,12 +146,12 @@ class LX_Window
     friend class LX_Graphics::LX_TextImage;
     friend class LX_TrueTypeFont::LX_Font;
 
-    SDL_Window *_window;        /* The internal window structure     */
-    SDL_Renderer *_renderer;    /* The main renderer                 */
-    SDL_GLContext _glcontext;   /* The context (only used in OpenGL) */
+    SDL_Window *_window;        /* The internal window structure        */
+    SDL_Renderer *_renderer;    /* The main renderer                    */
+    SDL_GLContext _glcontext;   /* The context (only used in OpenGL)    */
 
-    int _original_width;        /* The width of the window           */
-    int _original_height;       /* The height of the window          */
+    int _original_width;        /* The width of the window              */
+    int _original_height;       /* The height of the window             */
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
@@ -391,6 +391,12 @@ public :
     */
     bool screenshot(std::string filename);
 
+    /**
+    *   @fn uint32_t getID();
+    *   Get the unique identifier of the window
+    *   @return The identifier of the window
+    */
+    uint32_t getID();
     /**
     *   @fn void getInfo(LX_WindowInfo &info)
     *

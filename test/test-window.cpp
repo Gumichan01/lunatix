@@ -737,7 +737,8 @@ string winInfoToString(LX_Win::LX_WindowInfo &winfo)
 
 bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2)
 {
-    return (info1.title == info2.title)
+    return (info1.id == info2.id)
+           && (info1.title == info2.title)
            && (info1.x == info2.x) && (info1.y == info2.y)
            && (info1.w == info2.w) && (info1.h == info2.h)
            && (info1.lw == info2.lw) && (info1.lh == info2.lh)

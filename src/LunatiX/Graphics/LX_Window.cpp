@@ -64,6 +64,7 @@ namespace LX_Win
 
 void LX_initWindowInfo(LX_WindowInfo &info)
 {
+    info.id = 0;
     info.title = DEFAULT_TITLE;
     info.x = SDL_WINDOWPOS_CENTERED;
     info.y = SDL_WINDOWPOS_CENTERED;
@@ -84,6 +85,7 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
         LX_initWindowInfo(info);
     else
     {
+        info.id = 0;
         info.title = DEFAULT_TITLE;
         info.x = SDL_WINDOWPOS_CENTERED;
         info.y = SDL_WINDOWPOS_CENTERED;
@@ -447,8 +449,15 @@ bool LX_Window::screenshot(std::string filename)
 }
 
 
+uint32_t LX_Window::getID()
+{
+    return SDL_GetWindowID(_window);
+}
+
+
 void LX_Window::getInfo(LX_WindowInfo &info)
 {
+    info.id = getID();
     info.title = SDL_GetWindowTitle(_window);
     info.flag = SDL_GetWindowFlags(_window);
 
