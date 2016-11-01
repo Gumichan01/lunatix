@@ -66,7 +66,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
             {
                 switch(ev.getType())
                 {
-                case SDL_QUIT:
+                case LX_QUIT:
                     go = false;
                     break;
                 default:

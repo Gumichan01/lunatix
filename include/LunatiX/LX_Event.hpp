@@ -23,7 +23,6 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_events.h>
 
-/// @todo (#1#) Alias of window events
 
 /**
 *   @namespace LX_Event
