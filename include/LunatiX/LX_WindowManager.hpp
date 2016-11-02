@@ -21,15 +21,12 @@
 *
 */
 
-#include <list>
 #include <cinttypes>
 
 namespace LX_Win
 {
 
 class LX_Window;
-
-/// @todo (#1#) LX_WindowManager - private implementation
 
 /**
 *   @class LX_WindowManager
@@ -41,13 +38,11 @@ class LX_Window;
 */
 class LX_WindowManager
 {
-    std::list<LX_Win::LX_Window*> _windows;
-
     LX_WindowManager();
     ~LX_WindowManager();
 
-    LX_WindowManager(LX_WindowManager& wm);
-    LX_WindowManager& operator =(LX_WindowManager& wm);
+    LX_WindowManager(LX_WindowManager&);
+    LX_WindowManager& operator =(LX_WindowManager&);
 
 public:
 
