@@ -25,4 +25,6 @@
 struct SDL_Rect;
 using LX_AABB = SDL_Rect;
 
+#include <SDL2/SDL_rect.h>
+
 #endif  /* LX_AABB_H_INCLUDED */
