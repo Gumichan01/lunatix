@@ -58,7 +58,7 @@ public:
     *   @param [in] update A constant value that specify if the display
     *           of the string has to be updated
     *   @param [in] cursor The current position of the cursor on the string
-    *   @param [in] cursor The previous position of the cursor on the string
+    *   @param [in] prev_cur The previous position of the cursor on the string
     *
     *   @note This function must be implemented in a subclass
     */
