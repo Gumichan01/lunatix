@@ -71,6 +71,7 @@
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
+		<Unit filename="include/LunatiX/LX_Colour.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
