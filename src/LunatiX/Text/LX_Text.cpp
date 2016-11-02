@@ -60,7 +60,7 @@ class LX_TextInput_
     // Save a text in the clipboard get it from it
     void save_()
     {
-        static const uint8_t *KEYS = SDL_GetKeyboardState(nullptr);
+        static const uint8_t *KEYS = LX_EventHandler::getKeyboardState().state;
 
         if(KEYS[SDL_SCANCODE_LCTRL])
         {
@@ -82,7 +82,7 @@ class LX_TextInput_
 
     void paste_()
     {
-        static const uint8_t *KEYS = SDL_GetKeyboardState(nullptr);
+        static const uint8_t *KEYS = LX_EventHandler::getKeyboardState().state;
 
         if(KEYS[SDL_SCANCODE_LCTRL])
         {

@@ -61,8 +61,6 @@ public:
     virtual ~LX_RedrawCallback();
 };
 
-/// @todo (#2#) LX_TextInput - private implementation
-
 class LX_TextInput_;
 
 /**
