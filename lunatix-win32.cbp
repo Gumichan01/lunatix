@@ -111,7 +111,6 @@
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.tpp" />
-		<Unit filename="include/LunatiX/LX_WindowManager.tpp.h" />
 		<Unit filename="include/LunatiX/Lunatix.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
