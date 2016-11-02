@@ -16,19 +16,22 @@ public:
     explicit FuncDraw(LX_Win::LX_Window& win)
         : LX_Text::LX_RedrawCallback(), _w(win), _font(SDL_Color {255,255,255,0}) {}
 
-    void operator ()(UTF8string& u8str,size_t cursor)
+    void operator ()(UTF8string& u8str, bool update,
+                     size_t cursor, size_t prev_cur)
     {
-        LX_Graphics::LX_BlendedTextImage img(_font,_w);
-
-        _w.clearWindow();
-
-        if(!u8str.utf8_empty())
+        if(update)
         {
-            img.setText(u8str,24);
-            img.setPosition(100,100);
-            img.draw();
+            LX_Graphics::LX_BlendedTextImage img(_font,_w);
+            _w.clearWindow();
+
+            if(!u8str.utf8_empty())
+            {
+                img.setText(u8str,24);
+                img.setPosition(100,100);
+                img.draw();
+            }
+            _w.update();
         }
-        _w.update();
     }
 
     ~FuncDraw() = default;
@@ -105,7 +108,8 @@ int main(int argc, char** argv)
     try
     {
         LX_Win::LX_Window win(info);
-
+        win.clearWindow();
+        win.update();
         // Text input
         {
             FuncDraw callbck(win);

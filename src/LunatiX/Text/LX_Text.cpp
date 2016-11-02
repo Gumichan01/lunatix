@@ -34,7 +34,8 @@ namespace
 
 uint32_t DELAY = 33;
 
-inline bool isEndofLine(const std::string& text)
+// Check if the string is an End-Of-Line string (EOL)
+inline bool isEOL(const std::string& text)
 {
     return text[0] == '\n' || text[0] == '\r';
 }
@@ -129,10 +130,6 @@ class LX_TextInput_
 
         case SDLK_BACKSPACE:
             backslashKey_();
-            if(_cursor > 0)
-            {
-                _cursor -= 1;
-            }
             break;
 
         case SDLK_DELETE:
@@ -170,7 +167,10 @@ class LX_TextInput_
         if(sc == SDL_SCANCODE_C)
             save_();
         else if(sc == SDL_SCANCODE_V)
+        {
             paste_();
+            _draw = true;
+        }
 
         if(old_cursor != _cursor)
             LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
@@ -181,7 +181,7 @@ class LX_TextInput_
     {
         const LX_Event::LX_TextEvent tev = ev.getTextEvent();
 
-        if(tev.text[0] == '\0' || isEndofLine(tev.text))
+        if(tev.text[0] == '\0' || isEOL(tev.text))
             return;
 
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
@@ -192,6 +192,7 @@ class LX_TextInput_
         {
             UTF8string ntext(tev.text);
             u8stringInput_(ntext);
+            _draw = true;
         }
         catch(...)
         {
@@ -244,19 +245,25 @@ class LX_TextInput_
 
     void backslashKey_()
     {
-        if(_cursor == _u8text.utf8_length())
-        {
-            utf8Pop_();
-        }
-        else if(_cursor > 0)
+        if(_cursor > 0)
         {
             LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                              "Backslash key - Remove the following codepoint at %d: %s",
                              _cursor-1, _u8text.utf8_at(_cursor-1).c_str());
 
-            UTF8string rtmp = _u8text.utf8_substr(_cursor);
-            UTF8string ltmp = _u8text.utf8_substr(0,_cursor-1);
-            _u8text = ltmp + rtmp;
+            if(_cursor == _u8text.utf8_length())
+            {
+                utf8Pop_();
+            }
+            else
+            {
+                UTF8string rtmp = _u8text.utf8_substr(_cursor);
+                UTF8string ltmp = _u8text.utf8_substr(0,_cursor-1);
+                _u8text = ltmp + rtmp;
+            }
+
+            _cursor -= 1;
+            _draw = true;
         }
     }
 
@@ -276,13 +283,13 @@ class LX_TextInput_
             UTF8string rtmp = _u8text.utf8_substr(_cursor + 1);
             UTF8string ltmp = _u8text.utf8_substr(0,_cursor);
             _u8text = ltmp + rtmp;
+            _draw = true;
         }
         else if(_cursor == 0)
         {
             _u8text = _u8text.utf8_substr(_cursor + 1);
+            _draw = true;
         }
-        else if(_cursor == u8len - 1)
-            utf8Pop_();
     }
 
 public:
@@ -297,6 +304,7 @@ public:
 
     void eventLoop_(LX_RedrawCallback& redraw)
     {
+        size_t prev_cur = _cursor;
         LX_EventHandler ev;
         _done = false;
         _draw = false;
@@ -309,28 +317,23 @@ public:
                 {
                 case LX_KEYDOWN:
                     keyboardInput_(ev);
-                    _draw = true;
                     break;
 
                 case LX_TEXTINPUT:
                     textInput_(ev);
-                    _draw = true;
                     break;
 
                 case LX_TEXTEDITING:
                     textEdit_(ev);
-                    _draw = true;
                     break;
 
                 default :
                     break;
                 }
 
-                if(_draw)
-                {
-                    redraw(_u8text,_cursor);
-                    _draw = false;
-                }
+                redraw(_u8text, _draw, _cursor, prev_cur);
+                prev_cur = _cursor;
+                _draw = false;
             }
 
             LX_Timer::delay(DELAY);
