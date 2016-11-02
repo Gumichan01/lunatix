@@ -240,7 +240,7 @@ const int LX_MBUTTONS = 6;
 struct LX_MMotion
 {
     uint32_t wid;               /**< Identifier of the window where the event occured   */
-    bool state[LX_MBUTTONS];    /**< The possible states of the mouse                   */
+    bool state[LX_MBUTTONS];    /**< The state of each button of the mouse              */
     int x;                      /**< X position of the mouse                            */
     int y;                      /**< Y position of the mouse                            */
     int xrel;                   /**< X relative position of the mouse                   */
@@ -305,9 +305,18 @@ struct LX_TextEvent
 */
 struct LX_DropEvent
 {
-    std::string file;   /**< The name of the file that is requested             */
+    std::string file;   /**< The name of the file that is requested                 */
 };
 
+/**
+*   @struct LX_KeyboardState
+*   @brief Keyboard state
+*/
+struct LX_KeyboardState
+{
+    const uint8_t * state;  /**< The state of each key (Scan Code) of the keyboard  */
+    const int sz;           /**< The number of states (size of the array)           */
+};
 
 /**
 *   @class LX_EventHandler
@@ -391,6 +400,12 @@ public:
     */
     LX_EventType getEventType() const;
     /**
+    *   @fn const LX_KeyboardState getKeyboardState() const
+    *   Get the current state of the keyboard
+    *   @return The keyboard state
+    */
+    static const LX_KeyboardState getKeyboardState();
+    /**
     *   @fn LX_KeyCode getKeyCode() const
     *
     *   Get the key code value (virtual keyboard value) of the keyboard button,
@@ -408,6 +423,7 @@ public:
     *   @return The scan code value
     */
     LX_ScanCode getScanCode() const;
+
     /**
     *   @fn LX_GamepadID getGamepadID() const
     *   Get the gamepad identifier related to the current event.

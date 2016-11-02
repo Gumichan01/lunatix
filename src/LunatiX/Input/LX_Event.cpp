@@ -328,6 +328,14 @@ LX_EventType LX_EventHandler::getEventType() const
 }
 
 
+const LX_KeyboardState LX_EventHandler::getKeyboardState()
+{
+    int sz;
+    LX_KeyboardState ks = {SDL_GetKeyboardState(&sz),sz};
+    return ks;
+}
+
+
 LX_KeyCode LX_EventHandler::getKeyCode() const
 {
     return (*event).key.keysym.sym;
