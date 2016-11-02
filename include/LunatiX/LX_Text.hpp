@@ -21,6 +21,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <memory>
 
 
 namespace LX_Event
@@ -46,8 +47,8 @@ namespace LX_Text
 class LX_RedrawCallback
 {
 public:
-    LX_RedrawCallback();
 
+    LX_RedrawCallback();
     /**
     *   @fn virtual void operator ()(UTF8string& u8str, size_t cursor = 0) = 0;
     *
@@ -61,6 +62,8 @@ public:
 };
 
 /// @todo (#2#) LX_TextInput - private implementation
+
+class LX_TextInput_;
 
 /**
 *   @class LX_TextInput
@@ -130,29 +133,11 @@ public:
 */
 class LX_TextInput
 {
-    UTF8string _u8text;
-    size_t _cursor;
-    bool _done;
-    bool _draw;
+    std::unique_ptr<LX_TextInput_> _timpl;
 
     LX_TextInput(LX_TextInput& t);
     LX_TextInput(LX_TextInput&& t);
     LX_TextInput& operator =(LX_TextInput t);
-
-    // Save a text in the clipboard get it from it
-    void save_();
-    void paste_();
-
-    // Input
-    void keyboardInput_(LX_Event::LX_EventHandler& ev);
-    void textInput_(LX_Event::LX_EventHandler& ev);
-    void textEdit_(LX_Event::LX_EventHandler& ev);
-
-    // Operation on the string
-    void u8stringInput_(UTF8string& ntext);
-    void utf8Pop_();
-    void backslashKey_();
-    void deleteKey_();
 
 public:
 
