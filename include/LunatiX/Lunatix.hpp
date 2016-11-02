@@ -59,7 +59,6 @@
 #include <LunatiX/LX_Vector2D.hpp>
 
 // System
-#include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Log.hpp>
@@ -75,7 +74,6 @@
 #include <LunaitX/LX_Colour.hpp>
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Text.hpp>
-#include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
 
 
