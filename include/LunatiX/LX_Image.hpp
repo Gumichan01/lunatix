@@ -603,14 +603,14 @@ public:
 *
 *   This class describes a shaded text image.
 *   A shaded text image is a text that is slowly but nicely drawn on the screen
-*   with a background color that should be defined.
+*   with a background colour that should be defined.
 *
-*   By default, at instantiation, the background color is black, bu it can be
+*   By default, at instantiation, the background colour is black, bu it can be
 *   set using LX_ShadedImage::setColor()
 */
 class LX_ShadedTextImage: public LX_TextImage
 {
-    LX_Colour _bgcolor;
+    LX_Colour _bgcolour;
 
 protected:
 
@@ -637,10 +637,10 @@ public:
     /**
     *   @fn virtual void setText(std::string text, LX_Colour c, unsigned int sz)
     *
-    *   Set the text with its color
+    *   Set the text with its colour
     *
     *   @param [in] text The text to set
-    *   @param [in] c The color of the text
+    *   @param [in] c The colour of the text
     *   @param [in] sz The new size of the text
     *
     *   @note This function updates the image of the text
@@ -649,10 +649,10 @@ public:
     /**
     *   @fn virtual void setText(const UTF8string& text, LX_Colour c, unsigned int sz)
     *
-    *   Set the utf-8 text with its color
+    *   Set the utf-8 text with its colour
     *
     *   @param [in] text The utf-8 text to set
-    *   @param [in] c The color of the text
+    *   @param [in] c The colour of the text
     *   @param [in] sz The new size of the text
     *
     *   @note This function updates the image of the text
@@ -663,9 +663,9 @@ public:
     /**
     *   @fn void setBgColor(LX_Colour c)
     *
-    *   Set the color of the background behind the text
+    *   Set the colour of the background behind the text
     *
-    *   @param [in] c The color of the text
+    *   @param [in] c The colour of the text
     *
     *   @note 1 - This function updates the image of the text
     *   @note 2 - In order to

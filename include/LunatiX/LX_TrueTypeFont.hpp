@@ -27,8 +27,8 @@
 #include <memory>
 
 const unsigned int LX_TTF_DEFAULT_FONT_SIZE = 24;   /**< The default value of the font size */
-const uint8_t LX_WHITE_COLOR = 255;                 /**< The white color value              */
-const uint8_t LX_BLACK_COLOR = 0;                   /**< The black color value              */
+const uint8_t LX_WHITE_COLOUR = 255;                /**< The white colour value             */
+const uint8_t LX_BLACK_COLOUR = 0;                  /**< The black colour value             */
 
 struct SDL_Surface;
 struct SDL_Texture;
@@ -77,9 +77,9 @@ enum LX_TTF_TypeText: short;
 */
 class LX_Font
 {
-    UTF8string _font_str;                    /* The font file    */
-    unsigned int _font_size;                 /* The font size    */
-    LX_Colour _font_color;                   /* The font color   */
+    UTF8string _font_str;                    /* The font file       */
+    unsigned int _font_size;                 /* The font size       */
+    LX_Colour _font_colour;                  /* The font colour     */
     std::unique_ptr<LX_FileIO::LX_FileBuffer> _font_buffer;
 
     LX_Font(LX_Font& f);
@@ -95,12 +95,12 @@ class LX_Font
 public:
 
     /**
-    *   @fn LX_Font(const LX_Colour& color, unsigned int size)
+    *   @fn LX_Font(const LX_Colour& colour, unsigned int size)
     *   @brief Constructor
     *
-    *   Construct the font with color and the size of the text
+    *   Construct the font with colour and the size of the text
     *
-    *   @param [in] color The default color font
+    *   @param [in] colour The default colour font
     *   @param [in] size the size of the text
     *
     *   @note   If size is 0, then the default value defined in the configuratnion
@@ -114,16 +114,16 @@ public:
     *   @exception LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const LX_Colour& color, unsigned int size=0);
+    LX_Font(const LX_Colour& colour, unsigned int size=0);
 
     /**
-    *   @fn LX_Font(const std::string& font_file,const LX_Colour& color)
+    *   @fn LX_Font(const std::string& font_file,const LX_Colour& colour)
     *   @brief Constructor
     *
-    *   Construct the font with font file and color
+    *   Construct the font with font file and colour
     *
     *   @param [in] font_file The font file to use
-    *   @param [in] color The default color font
+    *   @param [in] colour The default colour font
     *
     *   @warning    You must  initialize the SDL_TTF library
     *               setting the TTF flag to 1 in lxsdl.cfg
@@ -131,16 +131,16 @@ public:
     *   @exception  LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const std::string& font_file,const LX_Colour& color);
+    LX_Font(const std::string& font_file,const LX_Colour& colour);
 
     /**
-    *   @fn LX_Font(const std::string& font_file,const LX_Colour& color, unsigned int size)
+    *   @fn LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
     *   @brief Constructor
     *
-    *  Construct the font with a font file, a color and a size.
+    *  Construct the font with a font file, a colour and a size.
     *
     *   @param [in] font_file The font file to load
-    *   @param [in] color The color font needed
+    *   @param [in] colour The colour font needed
     *   @param [in] size The size of the text to display
     *
     *   @warning    It is necessary to initialize the SDL_TTF library setting
@@ -149,7 +149,7 @@ public:
     *   @exception  LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const std::string& font_file,const LX_Colour& color, unsigned int size);
+    LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size);
 
     /**
     *   @fn int sizeOfText(std::string text, int& w, int& h) const
@@ -233,7 +233,7 @@ public:
     *
     *   @param [in] text The string to display
     *   @param [in] size The size defined by the user
-    *   @param [in] bg The background color behind the text
+    *   @param [in] bg The background colour behind the text
     *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
@@ -249,7 +249,7 @@ public:
     *
     *   @param [in] text The utf-8 string to display
     *   @param [in] size The size defined by the user
-    *   @param [in] bg The background color behind the text
+    *   @param [in] bg The background colour behind the text
     *   @param [in] w The window to link the texture with
     *
     *   @return An valid pointer to a texture, NULL otherwise.
@@ -290,13 +290,13 @@ public:
                                   LX_Win::LX_Window& w);
 
     /**
-    *   @fn void setColor(const LX_Colour& color)
+    *   @fn void setColor(const LX_Colour& colour)
     *
-    *   This function sets the new color of texts.
+    *   This function sets the new colour of texts.
     *
-    *   @param [in] color The new color
+    *   @param [in] colour The new colour
     */
-    void setColor(const LX_Colour& color);
+    void setColor(const LX_Colour& colour);
 
     /// Destructor
     ~LX_Font();

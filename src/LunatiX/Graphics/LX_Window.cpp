@@ -304,15 +304,15 @@ void LX_Window::fillCircle(const LX_Physics::LX_Circle& c)
 }
 
 
-void LX_Window::setDrawColor(const LX_Colour& color)
+void LX_Window::setDrawColor(const LX_Colour& colour)
 {
-    SDL_SetRenderDrawColor(_renderer,color.r,color.g,color.b,color.a);
+    SDL_SetRenderDrawColor(_renderer,colour.r,colour.g,colour.b,colour.a);
 }
 
 
-void LX_Window::getDrawColor(LX_Colour& color) const
+void LX_Window::getDrawColor(LX_Colour& colour) const
 {
-    SDL_GetRenderDrawColor(_renderer,&color.r,&color.g,&color.b,&color.a);
+    SDL_GetRenderDrawColor(_renderer,&colour.r,&colour.g,&colour.b,&colour.a);
 }
 
 

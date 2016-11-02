@@ -477,7 +477,7 @@ void LX_SolidTextImage::setSize(unsigned int sz)
 
 LX_ShadedTextImage::LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,
                                        LX_Win::LX_Window& w, uint32_t format)
-    : LX_TextImage(font,w,format), _bgcolor({0,0,0,0}) {}
+    : LX_TextImage(font,w,format), _bgcolour({0,0,0,0}) {}
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(std::string text, unsigned int sz,
@@ -489,7 +489,7 @@ LX_ShadedTextImage::LX_ShadedTextImage(std::string text, unsigned int sz,
 LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
                                        LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
                                        LX_Win::LX_Window& w,uint32_t format)
-    : LX_TextImage(text,sz,font,w,format), _bgcolor(c)
+    : LX_TextImage(text,sz,font,w,format), _bgcolour(c)
 {
     updateTexture_();
 }
@@ -498,7 +498,7 @@ LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
 void LX_ShadedTextImage::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
-    _texture = _font.drawShadedText(_text,_size,_bgcolor,_win);
+    _texture = _font.drawShadedText(_text,_size,_bgcolour,_win);
     _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
@@ -526,7 +526,7 @@ void LX_ShadedTextImage::setText(const UTF8string& text, LX_Colour c, unsigned i
 {
     _text = text;
     _size = sz;
-    _bgcolor = c;
+    _bgcolour = c;
     updateTexture_();
 }
 
@@ -539,7 +539,7 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
 
 void LX_ShadedTextImage::setBgColor(LX_Colour c)
 {
-    _bgcolor = c;
+    _bgcolour = c;
     updateTexture_();
 }
 

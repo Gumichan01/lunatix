@@ -265,11 +265,11 @@ public :
     void fillCircle(const LX_Physics::LX_Circle& c);
 
     /**
-    *   @fn void setDrawColor(const LX_Colour& color)
-    *   Set the color used for drawing operations (Lines, Rectangles, Circles)
-    *   @param [in] color The color (RGBA)
+    *   @fn void setDrawColor(const LX_Colour& colour)
+    *   Set the colour used for drawing operations (Lines, Rectangles, Circles)
+    *   @param [in] colour The colour (RGBA)
     */
-    void setDrawColor(const LX_Colour& color);
+    void setDrawColor(const LX_Colour& colour);
     /**
     *   @fn void setDrawBlendMode(SDL_BlendMode mode)
     *
@@ -286,17 +286,17 @@ public :
     *    |  SDL_BLENDMODE_ADD  | additive blending                                |
     *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *    |                     | destA = destA                                    |
-    *    |  SDL_BLENDMODE_MOD  | color modulate                                   |
+    *    |  SDL_BLENDMODE_MOD  | colour modulate                                  |
     *    |                     | destRGB = srcRGB * destRGB                       |
     *    |                     | destA = destA                                    |
     */
     void setDrawBlendMode(SDL_BlendMode mode);
     /**
-    *   @fn void getDrawColor(const LX_Colour& color) const
-    *   Get the color used for drawing operations (Lines, Rectangles, Circles)
-    *   @param [out] color The color (RGBA) to get
+    *   @fn void getDrawColor(const LX_Colour& colour) const
+    *   Get the colour used for drawing operations (Lines, Rectangles, Circles)
+    *   @param [out] colour The colour (RGBA) to get
     */
-    void getDrawColor(LX_Colour& color) const;
+    void getDrawColor(LX_Colour& colour) const;
     /**
     *   @fn void getDrawBlendMode(SDL_BlendMode& mode) const
     *
@@ -315,7 +315,7 @@ public :
     *    |  SDL_BLENDMODE_ADD  | additive blending                                |
     *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *    |                     | destA = destA                                    |
-    *    |  SDL_BLENDMODE_MOD  | color modulate                                   |
+    *    |  SDL_BLENDMODE_MOD  | colour modulate                                  |
     *    |                     | destRGB = srcRGB * destRGB                       |
     *    |                     | destA = destA                                    |
     */

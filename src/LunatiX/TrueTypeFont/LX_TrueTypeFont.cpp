@@ -36,9 +36,9 @@ namespace LX_TrueTypeFont
 
 enum LX_TTF_TypeText: short {LX_TTF_SOLID,LX_TTF_SHADED,LX_TTF_BLENDED};
 
-LX_Font::LX_Font(const LX_Colour& color, unsigned int size)
+LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
     : _font_str(""), _font_size(size),
-      _font_color(color), _font_buffer(nullptr)
+      _font_colour(colour), _font_buffer(nullptr)
 {
     // Load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
@@ -62,13 +62,13 @@ LX_Font::LX_Font(const LX_Colour& color, unsigned int size)
 }
 
 
-LX_Font::LX_Font(const std::string& font_file,const LX_Colour& color)
-    : LX_Font(font_file,color,LX_TTF_DEFAULT_FONT_SIZE) {}
+LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour)
+    : LX_Font(font_file,colour,LX_TTF_DEFAULT_FONT_SIZE) {}
 
 
-LX_Font::LX_Font(const std::string& font_file,const LX_Colour& color, unsigned int size)
+LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
     : _font_str(font_file), _font_size(size),
-      _font_color(color), _font_buffer(nullptr)
+      _font_colour(colour), _font_buffer(nullptr)
 {
     createBuffer_();
 }
@@ -145,7 +145,7 @@ int LX_Font::sizeOfText(const UTF8string& text, const unsigned int size, int& w,
 
 /*
 *   Private function that creates a text surface according to the type,
-*   the color bakground, if necessary, and its size.
+*   the colour bakground, if necessary, and its size.
 *
 *   If size is 0, then the font size set by the user is used
 *   r, g, b and size are optionnal in this private function.
@@ -171,15 +171,15 @@ SDL_Surface * LX_Font::drawText_(LX_TTF_TypeText type, const UTF8string& text,
     switch(type)
     {
     case LX_TTF_SOLID :
-        loaded = TTF_RenderUTF8_Solid(ttf,text.utf8_str(),_font_color);
+        loaded = TTF_RenderUTF8_Solid(ttf,text.utf8_str(),_font_colour);
         break;
 
     case LX_TTF_SHADED :
-        loaded = TTF_RenderUTF8_Shaded(ttf,text.utf8_str(),_font_color,bg);
+        loaded = TTF_RenderUTF8_Shaded(ttf,text.utf8_str(),_font_colour,bg);
         break;
 
     case LX_TTF_BLENDED:
-        loaded = TTF_RenderUTF8_Blended(ttf,text.utf8_str(),_font_color);
+        loaded = TTF_RenderUTF8_Blended(ttf,text.utf8_str(),_font_colour);
         break;
     }
 
@@ -254,11 +254,11 @@ SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size
 }
 
 
-void LX_Font::setColor(const LX_Colour& color)
+void LX_Font::setColor(const LX_Colour& colour)
 {
-    _font_color.r = color.r;
-    _font_color.g = color.g;
-    _font_color.b = color.b;
+    _font_colour.r = colour.r;
+    _font_colour.g = colour.g;
+    _font_colour.b = colour.b;
 }
 
 
