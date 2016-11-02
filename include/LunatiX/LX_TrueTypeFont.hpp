@@ -22,6 +22,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_Colour.hpp>
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 
@@ -31,7 +32,6 @@ const uint8_t LX_BLACK_COLOR = 0;                   /**< The black color value  
 
 struct SDL_Surface;
 struct SDL_Texture;
-struct SDL_Color;
 
 namespace LX_Win
 {
@@ -79,7 +79,7 @@ class LX_Font
 {
     UTF8string _font_str;                    /* The font file    */
     unsigned int _font_size;                 /* The font size    */
-    SDL_Color _font_color;                   /* The font color   */
+    LX_Colour _font_color;                   /* The font color   */
     std::unique_ptr<LX_FileIO::LX_FileBuffer> _font_buffer;
 
     LX_Font(LX_Font& f);
@@ -90,12 +90,12 @@ class LX_Font
     TTF_Font * createInternalFont_(int size) const;
 
     SDL_Surface * drawText_(LX_TTF_TypeText type, const UTF8string& text,
-                            unsigned int size = 0, SDL_Color bg = {0,0,0,0});
+                            unsigned int size = 0, LX_Colour bg = {0,0,0,0});
 
 public:
 
     /**
-    *   @fn LX_Font(const SDL_Color& color, unsigned int size)
+    *   @fn LX_Font(const LX_Colour& color, unsigned int size)
     *   @brief Constructor
     *
     *   Construct the font with color and the size of the text
@@ -114,10 +114,10 @@ public:
     *   @exception LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const SDL_Color& color, unsigned int size=0);
+    LX_Font(const LX_Colour& color, unsigned int size=0);
 
     /**
-    *   @fn LX_Font(const std::string& font_file,const SDL_Color& color)
+    *   @fn LX_Font(const std::string& font_file,const LX_Colour& color)
     *   @brief Constructor
     *
     *   Construct the font with font file and color
@@ -131,10 +131,10 @@ public:
     *   @exception  LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const std::string& font_file,const SDL_Color& color);
+    LX_Font(const std::string& font_file,const LX_Colour& color);
 
     /**
-    *   @fn LX_Font(const std::string& font_file,const SDL_Color& color, unsigned int size)
+    *   @fn LX_Font(const std::string& font_file,const LX_Colour& color, unsigned int size)
     *   @brief Constructor
     *
     *  Construct the font with a font file, a color and a size.
@@ -149,7 +149,7 @@ public:
     *   @exception  LX_FileIO::IOException if the file cannot be loaded
     *
     */
-    LX_Font(const std::string& font_file,const SDL_Color& color, unsigned int size);
+    LX_Font(const std::string& font_file,const LX_Colour& color, unsigned int size);
 
     /**
     *   @fn int sizeOfText(std::string text, int& w, int& h) const
@@ -227,7 +227,7 @@ public:
 
     /**
     *   @fn SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
-    *                                    SDL_Color bg, LX_Win::LX_Window& w)
+    *                                    LX_Colour bg, LX_Win::LX_Window& w)
     *
     *   Render the text in shaded mode. The size has to be specified
     *
@@ -240,10 +240,10 @@ public:
     *           Call LX_GetError to get error information
     */
     SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
-                                 SDL_Color bg, LX_Win::LX_Window& w);
+                                 LX_Colour bg, LX_Win::LX_Window& w);
     /**
     *   @fn SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
-    *                                    SDL_Color bg, LX_Win::LX_Window& w)
+    *                                    LX_Colour bg, LX_Win::LX_Window& w)
     *
     *   Render the UTF-8 encoded text in shaded mode. The size has to be specified
     *
@@ -256,7 +256,7 @@ public:
     *           Call LX_GetError to get error information
     */
     SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
-                                 SDL_Color bg, LX_Win::LX_Window& w);
+                                 LX_Colour bg, LX_Win::LX_Window& w);
 
     /**
     *   @fn SDL_Texture * drawBlendedText(const std::string& text, unsigned int size,
@@ -290,13 +290,13 @@ public:
                                   LX_Win::LX_Window& w);
 
     /**
-    *   @fn void setColor(const SDL_Color& color)
+    *   @fn void setColor(const LX_Colour& color)
     *
     *   This function sets the new color of texts.
     *
     *   @param [in] color The new color
     */
-    void setColor(const SDL_Color& color);
+    void setColor(const LX_Colour& color);
 
     /// Destructor
     ~LX_Font();

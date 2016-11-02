@@ -21,9 +21,8 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_AABB.hpp>
-#include <SDL2/SDL_pixels.h>
-#include <SDL2/SDL_rect.h>
 #include <vector>
 
 struct SDL_Surface;
@@ -611,7 +610,7 @@ public:
 */
 class LX_ShadedTextImage: public LX_TextImage
 {
-    SDL_Color _bgcolor;
+    LX_Colour _bgcolor;
 
 protected:
 
@@ -625,18 +624,18 @@ public:
 
     /// Constructor using the text
     LX_ShadedTextImage(std::string text, unsigned int sz,
-                       LX_TrueTypeFont::LX_Font& font, SDL_Color& c,
+                       LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
-                       LX_TrueTypeFont::LX_Font& font, SDL_Color& c,
+                       LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);
     /**
-    *   @fn virtual void setText(std::string text, SDL_Color c, unsigned int sz)
+    *   @fn virtual void setText(std::string text, LX_Colour c, unsigned int sz)
     *
     *   Set the text with its color
     *
@@ -646,9 +645,9 @@ public:
     *
     *   @note This function updates the image of the text
     */
-    virtual void setText(std::string text, SDL_Color c, unsigned int sz);
+    virtual void setText(std::string text, LX_Colour c, unsigned int sz);
     /**
-    *   @fn virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz)
+    *   @fn virtual void setText(const UTF8string& text, LX_Colour c, unsigned int sz)
     *
     *   Set the utf-8 text with its color
     *
@@ -658,11 +657,11 @@ public:
     *
     *   @note This function updates the image of the text
     */
-    virtual void setText(const UTF8string& text, SDL_Color c, unsigned int sz);
+    virtual void setText(const UTF8string& text, LX_Colour c, unsigned int sz);
     virtual void setSize(unsigned int sz);
 
     /**
-    *   @fn void setBgColor(SDL_Color c)
+    *   @fn void setBgColor(LX_Colour c)
     *
     *   Set the color of the background behind the text
     *
@@ -671,7 +670,7 @@ public:
     *   @note 1 - This function updates the image of the text
     *   @note 2 - In order to
     */
-    void setBgColor(SDL_Color c);
+    void setBgColor(LX_Colour c);
 
     /// Destructor
     ~LX_ShadedTextImage() = default;

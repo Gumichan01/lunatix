@@ -21,8 +21,9 @@
 *
 */
 
-#include <LunatiX/LX_AABB.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_Colour.hpp>
+#include <LunatiX/LX_AABB.hpp>
 #include <SDL2/SDL_video.h>
 
 struct SDL_Window;
@@ -65,9 +66,9 @@ namespace LX_Win
 {
 
 // Fullscreen modes
-const uint32_t LX_GRAPHICS_FULLSCREEN_DESKTOP = SDL_WINDOW_FULLSCREEN_DESKTOP;  /**< Fullscreen with the current desktop size   */
-const uint32_t LX_GRAPHICS_FULLSCREEN = SDL_WINDOW_FULLSCREEN;                  /**< Fullscreen mode with original resolution   */
-const uint32_t LX_GRAPHICS_NO_FULLSCREEN = 0;                                   /**< Original resolution in window              */
+const uint32_t LX_GRAPHICS_FULLSCREEN = 0x00000001;             /**< Fullscreen mode with original resolution   */
+const uint32_t LX_GRAPHICS_FULLSCREEN_DESKTOP = 0x00001001;     /**< Fullscreen with the current desktop size   */
+const uint32_t LX_GRAPHICS_NO_FULLSCREEN = 0;                   /**< Original resolution in window              */
 
 /**
 *   @struct LX_WindowInfo
@@ -264,11 +265,11 @@ public :
     void fillCircle(const LX_Physics::LX_Circle& c);
 
     /**
-    *   @fn void setDrawColor(const SDL_Color& color)
+    *   @fn void setDrawColor(const LX_Colour& color)
     *   Set the color used for drawing operations (Lines, Rectangles, Circles)
     *   @param [in] color The color (RGBA)
     */
-    void setDrawColor(const SDL_Color& color);
+    void setDrawColor(const LX_Colour& color);
     /**
     *   @fn void setDrawBlendMode(SDL_BlendMode mode)
     *
@@ -291,11 +292,11 @@ public :
     */
     void setDrawBlendMode(SDL_BlendMode mode);
     /**
-    *   @fn void getDrawColor(const SDL_Color& color) const
+    *   @fn void getDrawColor(const LX_Colour& color) const
     *   Get the color used for drawing operations (Lines, Rectangles, Circles)
     *   @param [out] color The color (RGBA) to get
     */
-    void getDrawColor(SDL_Color& color) const;
+    void getDrawColor(LX_Colour& color) const;
     /**
     *   @fn void getDrawBlendMode(SDL_BlendMode& mode) const
     *

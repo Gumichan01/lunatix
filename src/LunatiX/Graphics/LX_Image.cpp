@@ -481,13 +481,13 @@ LX_ShadedTextImage::LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(std::string text, unsigned int sz,
-                                       LX_TrueTypeFont::LX_Font& font,SDL_Color& c,
+                                       LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
                                        LX_Win::LX_Window& w, uint32_t format)
     : LX_ShadedTextImage(UTF8string(text),sz,font,c,w,format) {}
 
 
 LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
-                                       LX_TrueTypeFont::LX_Font& font,SDL_Color& c,
+                                       LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
                                        LX_Win::LX_Window& w,uint32_t format)
     : LX_TextImage(text,sz,font,w,format), _bgcolor(c)
 {
@@ -511,18 +511,18 @@ void LX_ShadedTextImage::setText(std::string text, unsigned int sz)
 
 void LX_ShadedTextImage::setText(const UTF8string& text, unsigned int sz)
 {
-    const SDL_Color GREY = {127,127,127,255};
+    const LX_Colour GREY = {127,127,127,255};
     setText(text,GREY,sz);
 }
 
 
-void LX_ShadedTextImage::setText(std::string text, SDL_Color c, unsigned int sz)
+void LX_ShadedTextImage::setText(std::string text, LX_Colour c, unsigned int sz)
 {
     setText(UTF8string(text),c,sz);
 }
 
 
-void LX_ShadedTextImage::setText(const UTF8string& text, SDL_Color c, unsigned int sz)
+void LX_ShadedTextImage::setText(const UTF8string& text, LX_Colour c, unsigned int sz)
 {
     _text = text;
     _size = sz;
@@ -537,7 +537,7 @@ void LX_ShadedTextImage::setSize(unsigned int sz)
     updateTexture_();
 }
 
-void LX_ShadedTextImage::setBgColor(SDL_Color c)
+void LX_ShadedTextImage::setBgColor(LX_Colour c)
 {
     _bgcolor = c;
     updateTexture_();
