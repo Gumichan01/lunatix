@@ -23,6 +23,17 @@
 
 // LX_AABB is just an alias of SDL_Rect
 struct SDL_Rect;
+/**
+*   @typedef LX_AABB
+*   @brief The Axis-Aligned Bounding Box (AABB)
+*
+*   Structure:
+*
+*       int x, int y;   // Coordinates
+*       int w, int h;   // Dimension
+*
+*   Very useful for collision detection, image positioning, ...
+*/
 using LX_AABB = SDL_Rect;
 
 #include <SDL2/SDL_rect.h>
