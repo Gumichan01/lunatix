@@ -48,15 +48,15 @@ int main(int argc, char **argv)
     LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
     w = win;
 
-    /*test_winInfo(win);
+    test_winInfo(win);
     test_opengl();
     test_opengl2();
     test_window1(w);
-    test_window2();*/
+    test_window2();
     test_winManager(w);
-    /*test_image(w);
+    test_image(w);
     test_drawing(w);
-    test_viewport(w);*/
+    test_viewport(w);
     delete win;
 
     LX_Quit();
