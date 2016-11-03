@@ -59,12 +59,22 @@ public :
     *
     *   @note   You can check the success of the operation
     *           calling isConnected()
+    *
+    *   @sa close()
     */
     void open(int index);
 
     /**
     *   @fn void close()
     *   Close the gamepad
+    *
+    *   @note An opened gamepad contains resources that
+    *   are dynamiccally allocated. So, it is very important to close its resources.
+    *
+    *   @warning If the instance is destroyed without closing the gamepad,
+    *   a memory leak will happen.
+    *
+    *   @sa open()
     */
     void close();
 
@@ -75,7 +85,6 @@ public :
     *
     *   @return TRUE if the gamepad is opened and connected,
     *           FALSE otherwise
-    *
     */
     bool isConnected() const;
 
@@ -92,19 +101,14 @@ public :
 
     /**
     *   @fn int32_t getID() const
-    *
     *   Get the ID of the gamepad
-    *
     *   @return The ID of the gamepad, -1 otherwise
-    *
     */
     int32_t getID() const;
 
     /**
     *   @fn LX_Haptic * getHaptic() const
-    *
     *   Get the haptic system of the gamepad
-    *
     *   @return The haptic system
     *
     *   @note The system can be inexistent, so check the returned value
@@ -113,9 +117,7 @@ public :
 
     /**
     *   @fn const char * getName() const
-    *
     *   Get the name of the Gamepad
-    *
     *   @return The name of the gamepad, a null pointer otherwise
     *
     *   @sa toString
@@ -130,15 +132,12 @@ public :
     *   @param [out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
     *           Call LX_GetError() to get the error message
-    *
     */
     bool stat(LX_GamepadInfo& info) const;
 
     /**
     *   @fn UTF8string toString() const
-    *
     *   Get information about the gamepad in string format
-    *
     *   @return Always returns a valid string
     */
     UTF8string toString() const;
