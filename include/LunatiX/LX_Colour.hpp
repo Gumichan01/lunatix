@@ -124,4 +124,14 @@ inline LX_Colour fromGLColor(const LX_glColour& colour)
     return c;
 }
 
+inline uint32_t toRBGAValue(const LX_Colour& colour)
+{
+    uint32_t rvalue = colour.r;
+    uint32_t gvalue = colour.g;
+    uint32_t bvalue = colour.b;
+    uint32_t avalue = colour.a;
+
+    return (rvalue << 24) | (gvalue << 16) | (bvalue << 8) | avalue;
+}
+
 #endif // LX_COLOUR_HPP_INCLUDED
