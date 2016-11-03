@@ -1,7 +1,7 @@
 
 #include <LunatiX/Lunatix.hpp>
 
-const int N = 4;
+const int N = 8;
 
 using namespace LX_Device;
 using namespace LX_Event;
@@ -165,7 +165,7 @@ int main(int argc, char **argv)
         LX_Timer::delay(33);
     }
 
-    for(int k = 0; k < pads; k++)
+    for(int k = 0; k < N; k++)
     {
         g[k].close();
     }
