@@ -71,7 +71,7 @@ class LX_Gamepad_
 
 public :
 
-    LX_Gamepad_(): _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(false) {}
+    LX_Gamepad_(): _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(true) {}
 
     void open(int index)
     {
@@ -89,6 +89,7 @@ public :
             if(SDL_JoystickIsHaptic(SDL_GameControllerGetJoystick(_gc)) == 1)
                 _haptic.reset(new LX_Haptic(_gc));
         }
+        _closed = false;
     }
 
     void close()
@@ -170,10 +171,7 @@ public :
         return UTF8string("Unknown gamepad");
     }
 
-    ~LX_Gamepad_()
-    {
-        close();
-    }
+    ~LX_Gamepad_() = default;
 };
 
 
