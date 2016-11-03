@@ -306,9 +306,11 @@ LX_EventType LX_EventHandler::getEventType() const
         ty = LX_CONTROLLERBUTTONUP;
         break;
     case SDL_CONTROLLERDEVICEADDED:
+    case SDL_JOYDEVICEADDED:
         ty = LX_CONTROLLERDEVICEADDED;
         break;
     case SDL_CONTROLLERDEVICEREMOVED:
+    case SDL_JOYDEVICEREMOVED:
         ty = LX_CONTROLLERDEVICEREMOVED;
         break;
 
@@ -369,6 +371,11 @@ LX_GamepadID LX_EventHandler::getGamepadID() const
     case SDL_CONTROLLERDEVICEREMOVED:
     case SDL_CONTROLLERDEVICEREMAPPED:
         id = ev.cdevice.which;
+        break;
+
+    case SDL_JOYDEVICEADDED:
+    case SDL_JOYDEVICEREMOVED:
+        id = ev.jdevice.which;
         break;
 
     default:
