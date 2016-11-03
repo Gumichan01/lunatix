@@ -153,13 +153,13 @@ inline LX_Event::LX_WinEventID toWinEvent(uint8_t id)
 
 void eventState(const LX_Event::LX_EventType ty, bool process)
 {
+    /*
+        0 → do nothing
+        1 → disable gamepad (LX_CONTROLLERDEVICEADDED)
+        2 → disable gamepad (LX_CONTROLLERDEVICEREMOVED)
+    */
     uint32_t sdl_ev_ty = 0;
-    int state;
-
-    if(process)
-        state = SDL_ENABLE;
-    else
-        state = SDL_DISABLE;
+    int state = process ? SDL_ENABLE : SDL_DISABLE;
 
     switch(ty)
     {
@@ -208,11 +208,11 @@ void eventState(const LX_Event::LX_EventType ty, bool process)
         break;
 
     case LX_Event::LX_CONTROLLERDEVICEADDED:
-        sdl_ev_ty = SDL_CONTROLLERDEVICEADDED;
+        sdl_ev_ty = 1;
         break;
 
     case LX_Event::LX_CONTROLLERDEVICEREMOVED:
-        sdl_ev_ty = SDL_CONTROLLERDEVICEREMOVED;
+        sdl_ev_ty = 2;
         break;
 
     case LX_Event::LX_DROPFILE:
@@ -223,8 +223,20 @@ void eventState(const LX_Event::LX_EventType ty, bool process)
         break;
     }
 
-    if(sdl_ev_ty != 0)
+    if(sdl_ev_ty == 1)
+    {
+        SDL_EventState(SDL_JOYDEVICEADDED,state);
+        SDL_EventState(SDL_CONTROLLERDEVICEADDED,state);
+    }
+    else if(sdl_ev_ty == 2)
+    {
+        SDL_EventState(SDL_JOYDEVICEREMOVED,state);
+        SDL_EventState(SDL_CONTROLLERDEVICEREMOVED,state);
+    }
+    else if(sdl_ev_ty != 0)
+    {
         SDL_EventState(sdl_ev_ty,state);
+    }
 }
 
 };
