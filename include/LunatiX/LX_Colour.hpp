@@ -64,7 +64,6 @@ using LX_Colour = SDL_Colour;
 *
 *       ⇒ LX_Colour: { r = 1.0f, g = 0.647058f, b = 1.0f, a = 1.0f }
 *
-*
 */
 struct LX_glColour
 {
@@ -80,7 +79,7 @@ struct LX_glColour
 *
 *   Convert a colour in 8-bit notation to a colour in floating-point notation
 *
-*   @param colour [in] Colour in 8-bit notation
+*   @param [in] colour Colour in 8-bit notation
 *   @return The colour in floating-point notation
 *
 *   @note This function is very useful when the program uses colours in OpenGL
@@ -104,7 +103,7 @@ inline LX_glColour from8BitColor(const LX_Colour& colour)
 *
 *   Convert a colour in floating-point notation to a colour in 8-bit notation
 *
-*   @param colour [in] Colour floating-point notation
+*   @param [in] colour Colour floating-point notation
 *   @return The colour in 8-bit notation
 *
 *   @note This function is very useful when the program uses colours in OpenGL
@@ -124,6 +123,15 @@ inline LX_Colour fromGLColor(const LX_glColour& colour)
     return c;
 }
 
+/**
+*   @fn inline uint32_t toRGBAvalue(const LX_Colour& colour)
+*
+*   Get the colour value in one unsigned integer value
+*
+*   @param [in] colour Colour in 8-bit notation
+*   @return The color in RGBA notation in one integer value
+*
+*/
 inline uint32_t toRGBAvalue(const LX_Colour& colour)
 {
     uint32_t rvalue = colour.r;
