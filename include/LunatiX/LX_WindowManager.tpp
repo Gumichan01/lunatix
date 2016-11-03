@@ -11,15 +11,7 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-#include <list>
 #include <algorithm>
-
-
-namespace
-{
-std::list<LX_Win::LX_Window*> _windows;
-}
-
 
 namespace LX_Win
 {

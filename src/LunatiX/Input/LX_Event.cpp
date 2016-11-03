@@ -24,8 +24,9 @@
 
 namespace
 {
+const uint32_t UTYPE_ERR = static_cast<uint32_t>(-1);
 // Type of the user event
-uint32_t utype = -1;
+uint32_t utype = UTYPE_ERR;
 
 inline LX_Event::LX_MouseButton toMouseButton(uint8_t button)
 {
@@ -186,9 +187,9 @@ bool LX_EventHandler::waitEventTimeout(int timeout)
 
 bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
 {
-    if(utype == -1)
+    if(utype == UTYPE_ERR)
     {
-        if((utype = SDL_RegisterEvents(1)) == static_cast<uint32_t>(-1))
+        if((utype = SDL_RegisterEvents(1)) == UTYPE_ERR)
             return false;
     }
 

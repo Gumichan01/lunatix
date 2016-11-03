@@ -327,7 +327,7 @@ public:
                     textEdit_(ev);
                     break;
 
-                default :
+                default:
                     break;
                 }
 

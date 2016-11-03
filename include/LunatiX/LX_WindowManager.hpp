@@ -21,6 +21,7 @@
 *
 */
 
+#include <list>
 #include <cinttypes>
 
 namespace LX_Win
@@ -38,6 +39,7 @@ class LX_Window;
 */
 class LX_WindowManager
 {
+    std::list<LX_Win::LX_Window*> _windows;
     LX_WindowManager();
     ~LX_WindowManager();
 
@@ -107,11 +109,11 @@ public:
     LX_Window * removeWindow(const uint32_t id);
 
     /**
-    *   @fn unsigned int LX_WindowManager::nbWindows()
+    *   @fn std::size_t LX_WindowManager::nbWindows()
     *   Count the number of opened windows
     *   @return The number of opened windows
     */
-    unsigned int nbWindows();
+    std::size_t nbWindows();
 
     /**
     *   @fn void LX_WindowManager::updateWindows()

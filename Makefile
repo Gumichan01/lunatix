@@ -183,7 +183,7 @@ LX_OpenGL.o: $(SRC_GRAPHICS_PATH)LX_OpenGL.o
 LX_Window.o: $(SRC_GRAPHICS_PATH)LX_Window.o
 LX_WindowManager.o: $(SRC_GRAPHICS_PATH)LX_WindowManager.o
 LX_Image.o: $(SRC_GRAPHICS_PATH)LX_Image.o
-LX_Event.o: $(SRC_LIBRARY_PATH)LX_Event.o
+LX_Event.o: $(SRC_INPUT_PATH)LX_Event.o
 LX_Config.o: $(SRC_LIBRARY_PATH)LX_Config.o
 LX_Library.o: $(SRC_LIBRARY_PATH)LX_Library.o
 LX_Sound.o: $(SRC_MIXER_PATH)LX_Sound.o

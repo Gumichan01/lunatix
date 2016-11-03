@@ -24,6 +24,10 @@
 
 static LX_Win::LX_WindowManager *win_instance = nullptr;
 
+/*namespace
+{
+
+}*/
 
 namespace LX_Win
 {
@@ -104,7 +108,7 @@ LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
 }
 
 
-unsigned int LX_WindowManager::nbWindows()
+std::size_t LX_WindowManager::nbWindows()
 {
     return _windows.size();
 }
