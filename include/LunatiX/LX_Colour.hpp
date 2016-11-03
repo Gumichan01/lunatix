@@ -124,7 +124,7 @@ inline LX_Colour fromGLColor(const LX_glColour& colour)
     return c;
 }
 
-inline uint32_t toRBGAValue(const LX_Colour& colour)
+inline uint32_t toRGBAvalue(const LX_Colour& colour)
 {
     uint32_t rvalue = colour.r;
     uint32_t gvalue = colour.g;
