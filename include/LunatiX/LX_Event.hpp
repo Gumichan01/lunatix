@@ -385,6 +385,32 @@ public:
     bool pushUserEvent(LX_UserEvent& uevent);
 
     /**
+    *   @fn static void processEvent(const LX_EventType ty)
+    *
+    *   Activate the event processing for a type of event
+    *
+    *   @param ty The type of event to process
+    *   @note 1 — By default, every events are enabled by default
+    *   @note 2 — ::LX_TEXTEDITING and ::LX_TEXTINPUT cannot be set for processing
+    *   using this function because the operation is done by LX_Text
+    *
+    *   @sa ignoreEvent
+    */
+    static void processEvent(const LX_EventType ty);
+    /**
+    *   @fn static void ignoreEvent(const LX_EventType ty)
+    *
+    *   Ingore a type of event
+    *
+    *   @param ty The type of event to ignore
+    *   @note ::LX_TEXTEDITING and ::LX_TEXTINPUT cannot be ignored using
+    *   this function because the operation is done by LX_Text
+    *
+    *   @sa processEvent
+    */
+    static void ignoreEvent(const LX_EventType ty);
+
+    /**
     *   @fn uint32_t getWindowID() const
     *   Get the id of a window where an event happened in
     *

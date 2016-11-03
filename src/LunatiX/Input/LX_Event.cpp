@@ -150,6 +150,83 @@ inline LX_Event::LX_WinEventID toWinEvent(uint8_t id)
     return wid;
 }
 
+
+void eventState(const LX_Event::LX_EventType ty, bool process)
+{
+    uint32_t sdl_ev_ty = 0;
+    int state;
+
+    if(process)
+        state = SDL_ENABLE;
+    else
+        state = SDL_DISABLE;
+
+    switch(ty)
+    {
+    case LX_Event::LX_QUIT:
+        sdl_ev_ty = SDL_QUIT;
+        break;
+
+    case LX_Event::LX_WINDOWEVENT:
+        sdl_ev_ty = SDL_WINDOWEVENT;
+        break;
+
+    case LX_Event::LX_KEYDOWN:
+        sdl_ev_ty = SDL_KEYDOWN;
+        break;
+
+    case LX_Event::LX_KEYUP:
+        sdl_ev_ty = SDL_KEYUP;
+        break;
+
+    case LX_Event::LX_MOUSEMOTION:
+        sdl_ev_ty = SDL_MOUSEMOTION;
+        break;
+
+    case LX_Event::LX_MOUSEBUTTONDOWN:
+        sdl_ev_ty = SDL_MOUSEBUTTONDOWN;
+        break;
+
+    case LX_Event::LX_MOUSEBUTTONUP:
+        sdl_ev_ty = SDL_MOUSEBUTTONUP;
+        break;
+
+    case LX_Event::LX_MOUSEWHEEL:
+        sdl_ev_ty = SDL_MOUSEWHEEL;
+        break;
+
+    case LX_Event::LX_CONTROLLERAXISMOTION:
+        sdl_ev_ty = SDL_CONTROLLERAXISMOTION;
+        break;
+
+    case LX_Event::LX_CONTROLLERBUTTONDOWN:
+        sdl_ev_ty = SDL_CONTROLLERBUTTONDOWN;
+        break;
+
+    case LX_Event::LX_CONTROLLERBUTTONUP:
+        sdl_ev_ty = SDL_CONTROLLERBUTTONUP;
+        break;
+
+    case LX_Event::LX_CONTROLLERDEVICEADDED:
+        sdl_ev_ty = SDL_CONTROLLERDEVICEADDED;
+        break;
+
+    case LX_Event::LX_CONTROLLERDEVICEREMOVED:
+        sdl_ev_ty = SDL_CONTROLLERDEVICEREMOVED;
+        break;
+
+    case LX_Event::LX_DROPFILE:
+        sdl_ev_ty = SDL_DROPFILE;
+        break;
+
+    default:
+        break;
+    }
+
+    if(sdl_ev_ty != 0)
+        SDL_EventState(sdl_ev_ty,state);
+}
+
 };
 
 namespace LX_Event
@@ -201,6 +278,18 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent)
     ev.user = {uevent.type, 0, uevent.wid, uevent.code, uevent.data1, uevent.data2};
 
     return SDL_PushEvent(&ev) == 1;
+}
+
+
+void LX_EventHandler::processEvent(const LX_EventType ty)
+{
+    eventState(ty, true);
+}
+
+
+void LX_EventHandler::ignoreEvent(const LX_EventType ty)
+{
+    eventState(ty, false);
 }
 
 
