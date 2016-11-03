@@ -97,7 +97,6 @@ inline LX_glColour from8BitColor(const LX_Colour& colour)
                     };
     return c;
 }
-
 /**
 *   @fn inline LX_Colour fromGLColor(const LX_glColour& colour)
 *
@@ -129,8 +128,7 @@ inline LX_Colour fromGLColor(const LX_glColour& colour)
 *   Get the colour value in one unsigned integer value
 *
 *   @param [in] colour Colour in 8-bit notation
-*   @return The color in RGBA notation in one integer value
-*
+*   @return The colour in RGBA notation in one integer value
 */
 inline uint32_t toRGBAvalue(const LX_Colour& colour)
 {
@@ -141,5 +139,23 @@ inline uint32_t toRGBAvalue(const LX_Colour& colour)
 
     return (rvalue << 24) | (gvalue << 16) | (bvalue << 8) | avalue;
 }
+/**
+*   @fn inline LX_Colour fromRGBAvalue(const uint32_t rgba)
+*
+*   Get the colour structure from an integer value
+*
+*   @param [in] rgba The color in one unsignd interger value
+*   @return The colour structure
+*/
+inline LX_Colour fromRGBAvalue(const uint32_t rgba)
+{
+    uint8_t r = (rgba >> 24) & 0x000000FF;
+    uint8_t g = (rgba >> 16) & 0x000000FF;
+    uint8_t b = (rgba >> 8) & 0x000000FF;
+    uint8_t a = rgba & 0x000000FF;
+
+    return LX_Colour{r,g,b,a};
+}
+
 
 #endif // LX_COLOUR_HPP_INCLUDED
