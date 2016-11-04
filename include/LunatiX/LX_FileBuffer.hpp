@@ -37,7 +37,6 @@ class LX_Image;
 
 namespace LX_TrueTypeFont
 {
-class LX_Font;
 struct LX_Font_;
 }
 

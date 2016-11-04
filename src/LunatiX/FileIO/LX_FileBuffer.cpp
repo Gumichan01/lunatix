@@ -35,8 +35,6 @@ namespace LX_FileIO
 
 class LX_FileBuffer_
 {
-    friend class LX_Graphics::LX_Image;
-    friend class LX_TrueTypeFont::LX_Font;
     UTF8string _name;                       /* The name of the file refered by the buffer */
     std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */
     uint64_t _bufsize;                      /* The size of the buffer                     */

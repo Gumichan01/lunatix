@@ -22,7 +22,6 @@ namespace LX_Multithreading
 
 class LX_Mutex_
 {
-    friend class LX_Cond;
     friend class LX_Cond_;
     std::unique_ptr<tthread::mutex> _mutex;
 
