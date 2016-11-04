@@ -118,8 +118,21 @@ public:
     }
 };
 
-/* LX_Filebuffer — public functions */
 
+// Used by LX_Image and sub-classes
+void * LX_FileBuffer::getSurfaceFromBuffer_() const
+{
+    return _bimpl->getSurfaceFromBuffer();
+}
+
+// Used by LX_Font
+void * LX_FileBuffer::getFontFromBuffer_(int size) const
+{
+    return _bimpl->getFontFromBuffer(size);
+}
+
+
+/** LX_Filebuffer — public functions */
 LX_FileBuffer::LX_FileBuffer(const std::string& filename)
     : LX_FileBuffer(UTF8string(filename)) {}
 
@@ -127,21 +140,6 @@ LX_FileBuffer::LX_FileBuffer(const std::string& filename)
 LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     : _bimpl(new LX_FileBuffer_(filename)) {}
 
-
-/* Private functions */
-// Used by LX_Font
-void * LX_FileBuffer::getSurfaceFromBuffer_() const
-{
-    return _bimpl->getSurfaceFromBuffer();
-}
-
-// Used by LX_Image and sub-classes
-void * LX_FileBuffer::getFontFromBuffer_(int size) const
-{
-    return _bimpl->getFontFromBuffer(size);
-}
-
-/* Public functions */
 
 LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
 {
