@@ -65,8 +65,6 @@ namespace LX_TrueTypeFont
 struct LX_Font_;
 enum LX_TTF_TypeText: short;
 
-/// @todo (#3#) LX_Font - private implementation
-
 /**
 *   @class LX_Font
 *   @brief The Font class
