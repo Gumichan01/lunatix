@@ -23,7 +23,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Colour.hpp>
-#include <SDL2/SDL_ttf.h>
 #include <memory>
 
 const unsigned int LX_TTF_DEFAULT_FONT_SIZE = 24;   /**< The default value of the font size */
@@ -32,6 +31,7 @@ const uint8_t LX_BLACK_COLOUR = 0;                  /**< The black colour value 
 
 struct SDL_Surface;
 struct SDL_Texture;
+struct SDL_Colour;
 
 namespace LX_Win
 {
@@ -218,7 +218,7 @@ public:
 
     /**
     *   @fn SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
-    *                                    LX_Colour bg, LX_Win::LX_Window& w)
+    *                                    const LX_Colour& bg, LX_Win::LX_Window& w)
     *
     *   Render the text in shaded mode. The size has to be specified
     *
@@ -231,10 +231,10 @@ public:
     *           Call LX_GetError to get error information
     */
     SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
-                                 LX_Colour bg, LX_Win::LX_Window& w);
+                                 const LX_Colour& bg, LX_Win::LX_Window& w);
     /**
     *   @fn SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
-    *                                    LX_Colour bg, LX_Win::LX_Window& w)
+    *                                    const LX_Colour& bg, LX_Win::LX_Window& w)
     *
     *   Render the UTF-8 encoded text in shaded mode. The size has to be specified
     *
@@ -247,7 +247,7 @@ public:
     *           Call LX_GetError to get error information
     */
     SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
-                                 LX_Colour bg, LX_Win::LX_Window& w);
+                                 const LX_Colour& bg, LX_Win::LX_Window& w);
 
     /**
     *   @fn SDL_Texture * drawBlendedText(const std::string& text, unsigned int size,

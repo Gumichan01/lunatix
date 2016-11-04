@@ -19,14 +19,13 @@
 */
 
 #include <LunatiX/LX_TrueTypeFont.hpp>
-#include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Config.hpp>
-#include <LunatiX/LX_Error.hpp>
 
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_ttf.h>
 
 using namespace LX_Config;
 using namespace LX_FileIO;
@@ -76,17 +75,14 @@ struct LX_Font_
     /*
     *   This function creates an internal and temporary font
     *   according to the font file in the class or the file buffer if it exists
+    *
+    *   note:
+    *   getFontFromBuffer() returns a void pointer in order to hide
+    *   the real type (TTF_Font*) in the public interface.
+    *   So, the static cast was necessary to get the real type
     */
     inline TTF_Font * createInternalFont_(int size) const
     {
-        if(_font_buffer == nullptr)
-            return nullptr;        /// @todo This code will normally never be executed
-
-        /*
-        *   getFontFromBuffer() returns a void pinter in order to hide
-        *   the real type (TTF_Font*) in the public interface.
-        *   So, the static cast was necessary to get the real type
-        */
         return static_cast<TTF_Font*>(_font_buffer->getFontFromBuffer_(size));
     }
 
@@ -229,15 +225,15 @@ SDL_Texture * LX_Font::drawSolidText(const UTF8string& text, unsigned int size,
 }
 
 
-SDL_Texture * LX_Font::drawShadedText(const std::string& text, unsigned int size, LX_Colour bg,
-                                      LX_Win::LX_Window& w)
+SDL_Texture * LX_Font::drawShadedText(const std::string& text, unsigned int size,
+                                      const LX_Colour& bg, LX_Win::LX_Window& w)
 {
     return drawShadedText(UTF8string(text),size,bg,w);
 }
 
 
-SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size, LX_Colour bg,
-                                      LX_Win::LX_Window& w)
+SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size,
+                                      const LX_Colour& bg, LX_Win::LX_Window& w)
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_SHADED,text,size,bg);
 
