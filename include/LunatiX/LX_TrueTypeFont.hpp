@@ -62,6 +62,7 @@ class LX_TextImage;
 namespace LX_TrueTypeFont
 {
 
+struct LX_Font_;
 enum LX_TTF_TypeText: short;
 
 /// @todo (#3#) LX_Font - private implementation
@@ -77,20 +78,10 @@ enum LX_TTF_TypeText: short;
 */
 class LX_Font
 {
-    UTF8string _font_str;                    /* The font file       */
-    unsigned int _font_size;                 /* The font size       */
-    LX_Colour _font_colour;                  /* The font colour     */
-    std::unique_ptr<LX_FileIO::LX_FileBuffer> _font_buffer;
+    std::unique_ptr<LX_Font_> _fimpl;
 
     LX_Font(LX_Font& f);
     LX_Font& operator =(LX_Font& f);
-
-    void createBuffer_();
-    int sizeOfText_(TTF_Font *ttf, const std::string& text, int& w, int& h) const;
-    TTF_Font * createInternalFont_(int size) const;
-
-    SDL_Surface * drawText_(LX_TTF_TypeText type, const UTF8string& text,
-                            unsigned int size = 0, LX_Colour bg = {0,0,0,0});
 
 public:
 

@@ -38,6 +38,7 @@ class LX_Image;
 namespace LX_TrueTypeFont
 {
 class LX_Font;
+struct LX_Font_;
 }
 
 namespace LX_FileIO
@@ -59,7 +60,7 @@ class LX_FileBuffer_;
 class LX_FileBuffer
 {
     friend class LX_Graphics::LX_Image;
-    friend class LX_TrueTypeFont::LX_Font;
+    friend class LX_TrueTypeFont::LX_Font_;
     std::unique_ptr<LX_FileBuffer_> _bimpl;
 
     LX_FileBuffer(LX_FileBuffer& fb);
