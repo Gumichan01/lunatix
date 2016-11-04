@@ -23,8 +23,6 @@
 
 #include <SDL2/SDL_pixels.h>
 
-/// @todo (#5#) Conversion RGBA → colour value
-/// @todo (#5#) Conversion colour value → RGBA
 
 /**
 *   @typedef LX_Colour
