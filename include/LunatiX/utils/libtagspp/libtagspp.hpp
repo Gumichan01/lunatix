@@ -30,21 +30,24 @@ class Tag;
 */
 struct Properties
 {
-    int channels;
-    int samplerate;
-    int bitrate;
-    std::string duration;
-    int format;
+    int channels;           /**< Number of audio channels       */
+    int samplerate;         /**< Sample rate (in Hz)            */
+    int bitrate;            /**< Bitrate (in bits/s)            */
+    std::string duration;   /**< Duration                       */
+    std::string format;     /**< Format (MP3, OGG, FLAC, M4A)   */
 
     Properties();
     ~Properties() = default;
 };
 
-
+/**
+*   @struct ImgMetaData
+*   @brief Information about an image
+*/
 struct ImgMetaData
 {
-    int _img_offset;
-    int _img_size;
+    int _img_offset;    /**< Beginning of image data in the file */
+    int _img_size;      /**< Size of data */
 };
 
 /**

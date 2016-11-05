@@ -73,6 +73,32 @@ std::string duration(int t)
     return ss.str();
 }
 
+std::string format(int f)
+{
+    std::string s;
+
+    switch(f)
+    {
+    case 0:
+        s = "MP3";
+        break;
+    case 1:
+        s = "OGG Vorbis";
+        break;
+    case 2:
+        s = "FLAC";
+        break;
+    case 3:
+        s = "M4A";
+        break;
+    default:
+        s = "UNKNOWN";
+        break;
+    }
+
+    return s;
+}
+
 };
 
 namespace libtagpp
@@ -81,7 +107,7 @@ namespace libtagpp
 /* Properties */
 
 Properties::Properties()
-    : channels(0), samplerate(0), bitrate(0), duration(""), format(0) {}
+    : channels(0), samplerate(0), bitrate(0), duration(""), format("") {}
 
 
 /* Tag */
@@ -158,7 +184,7 @@ bool Tag::readTag(const std::string& filename)
         _properties.samplerate = ctx.samplerate;
         _properties.bitrate    = ctx.bitrate;
         _properties.duration   = duration(ctx.duration);
-        _properties.format     = ctx.format;
+        _properties.format     = format(ctx.format);
         return true;
     }
 
