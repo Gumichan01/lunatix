@@ -16,13 +16,13 @@ struct Aux
 
 int ctxread(Tagctx *ctx, void *buf, int cnt)
 {
-    Aux *aux = (Aux *) ctx->aux;
+    Aux *aux = static_cast<Aux *>(ctx->aux);
     return static_cast<int>(fread(buf,1,static_cast<size_t>(cnt),aux->f));
 }
 
 int ctxseek(Tagctx *ctx, int offset, int whence)
 {
-    Aux *aux = (Aux *) ctx->aux;
+    Aux *aux = static_cast<Aux *>(ctx->aux);
     fseek(aux->f, offset, whence);
     return static_cast<int>(ftell(aux->f));
 }
@@ -37,37 +37,12 @@ inline const char * minute_(int minute)
     return minute < 10 ? "0":"";
 }
 
-};
-
-namespace libtagpp
-{
-
-/* Properties */
-
-Properties::Properties()
-    : _channels(0), _samplerate(0), _bitrate(0), _duration(0), _format(0) {}
-
-int Properties::channels() const
-{
-    return _channels;
-}
-
-int Properties::samplerate() const
-{
-    return _samplerate;
-}
-
-int Properties::bitrate() const
-{
-    return _bitrate;
-}
-
-std::string Properties::duration() const
+std::string duration(int t)
 {
     std::ostringstream ss;
     const int H_MINUTE = 60;
     const int M_SECOND = 60;
-    const int d = _duration / 1000;
+    const int d = t / 1000;
     int hour, minute, second;
 
     hour = 0;
@@ -98,15 +73,20 @@ std::string Properties::duration() const
     return ss.str();
 }
 
-int Properties::format() const
+};
+
+namespace libtagpp
 {
-    return _format;
-}
 
-Properties::~Properties() {}
+/* Properties */
+
+Properties::Properties()
+    : channels(0), samplerate(0), bitrate(0), duration(""), format(0) {}
 
 
-// Friend function
+/* Tag */
+
+// (Tag) Friend function
 void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
 {
     Aux *aux = (Aux *) ctx->aux;
@@ -140,22 +120,28 @@ void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
     case Ttrackgain:
         aux->tag._trackgain = v;
         break;
+
+    case Timage:
+        aux->tag._imdata._img_offset = offset;
+        aux->tag._imdata._img_size = size;
+        break;
     default:
         break;
     }
 }
 
 
-/* Tag */
-
 Tag::Tag() {}
+
 
 bool Tag::readTag(const std::string& filename)
 {
     const char * f = filename.c_str();
     char buf[256];
     Aux aux = { NULL, *this };
-    Tagctx ctx = { NULL, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf),0,0,0,0,0};
+    Tagctx ctx = { NULL, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf),
+                   0, 0, 0, 0, 0, 0, 0
+                 };
 
     if((aux.f = fopen(f, "rb")) == NULL)
     {
@@ -168,11 +154,11 @@ bool Tag::readTag(const std::string& filename)
 
     if(success)
     {
-        _properties._channels   = ctx.channels;
-        _properties._samplerate = ctx.samplerate;
-        _properties._bitrate    = ctx.bitrate;
-        _properties._duration   = ctx.duration;
-        _properties._format     = ctx.format;
+        _properties.channels   = ctx.channels;
+        _properties.samplerate = ctx.samplerate;
+        _properties.bitrate    = ctx.bitrate;
+        _properties.duration   = duration(ctx.duration);
+        _properties.format     = ctx.format;
         return true;
     }
 
@@ -230,11 +216,14 @@ const char * Tag::trackpeak() const
     return _trackpeak.c_str();
 }
 
+const ImgMetaData& Tag::getImageMetaData() const
+{
+    return _imdata;
+}
+
 const Properties& Tag::properties() const
 {
     return _properties;
 }
-
-Tag::~Tag() {}
 
 };
