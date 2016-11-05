@@ -179,7 +179,7 @@ void test_channels()
 void test_music()
 {
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST music = ");
-    std::string s = "data/01.ogg";
+    std::string s = "data/test.mp3";
     LX_Mixer::LX_Music *music = nullptr;
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: %s",s.c_str());
@@ -212,6 +212,14 @@ void test_music()
         LX_Log::log("Artist - %s",tag.artist());
         LX_Log::log("Album - %s",tag.album());
         LX_Log::log("Year - %s",tag.year());
+        LX_Log::log("--------------------------------");
+        LX_Log::log("Image - position %d %d",tag.getImageMetaData()._img_offset,
+                    tag.getImageMetaData()._img_size);
+        LX_Log::log("Duration - %s", tag.properties().duration.c_str());
+        LX_Log::log("Channels - %d", tag.properties().channels);
+        LX_Log::log("Sample rate - %d Hz", tag.properties().samplerate);
+        LX_Log::log("Bitrate - %d bits/s", tag.properties().bitrate);
+        LX_Log::log("Format - %s", tag.properties().format.c_str());
         LX_Log::log("================================");
 
         delete music;
