@@ -408,12 +408,12 @@ LX_EventType LX_EventHandler::getEventType() const
         break;
 
     case SDL_CONTROLLERDEVICEADDED:
-SDL_JOYDEVICEADDED:
+	case SDL_JOYDEVICEADDED:
         ty = LX_CONTROLLERDEVICEADDED;
         break;
 
     case SDL_CONTROLLERDEVICEREMOVED:
-SDL_JOYDEVICEREMOVED:
+	case SDL_JOYDEVICEREMOVED:
         ty = LX_CONTROLLERDEVICEREMOVED;
         break;
 
