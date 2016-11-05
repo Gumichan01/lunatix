@@ -41,6 +41,16 @@ const char * LX_MusicException::what() const noexcept
 LX_MusicException::~LX_MusicException() noexcept {}
 
 
+/* Music tag */
+
+MusicTag::MusicTag(): img(nullptr) {}
+
+MusicTag::~MusicTag()
+{
+    delete img;
+}
+
+
 /* LX_music: private implementation */
 
 class LX_Music_

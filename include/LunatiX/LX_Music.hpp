@@ -31,6 +31,11 @@ namespace libtagpp
 class Tag;
 };
 
+namespace LX_Graphics
+{
+class LX_Image;
+};
+
 namespace LX_Mixer
 {
 
@@ -55,6 +60,34 @@ public :
 
     /// Destructor
     ~LX_MusicException() noexcept;
+};
+
+/**
+*   @struct MusicTag
+*   @brief High-level music metadata
+*
+*   MusicTag is a metadata structure that contains essential information
+*   about a music (title, author, album, year, ...)
+*
+*   In comparison with *libtagpp::Tag*, MusicTag does not contain
+*   low-level contents (track-gain, album-gain, bitrate, ...), but have
+*   an image loaded from the audio file if it exists
+*
+*/
+struct MusicTag
+{
+    UTF8string title;
+    UTF8string artist;
+    UTF8string album;
+    UTF8string year;            /**< "2014", "2015/02/01", but the year goes first      */
+    UTF8string track;           /**< "1", "01", "1/4", but the track number goes first  */
+    UTF8string genre;
+    UTF8string format;
+    UTF8string duration;
+    LX_Graphics::LX_Image *img; /**< Album cover, if it exists */
+
+    MusicTag();
+    ~MusicTag();
 };
 
 
