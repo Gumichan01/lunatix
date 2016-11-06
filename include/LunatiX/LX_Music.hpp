@@ -33,7 +33,7 @@ class Tag;
 
 namespace LX_Graphics
 {
-class LX_Image;
+class LX_Surface;
 };
 
 namespace LX_Mixer
@@ -63,7 +63,7 @@ public :
 };
 
 /**
-*   @struct MusicTag
+*   @struct LX_MusicTag
 *   @brief High-level music metadata
 *
 *   MusicTag is a metadata structure that contains essential information
@@ -74,20 +74,20 @@ public :
 *   an image loaded from the audio file if it exists
 *
 */
-struct MusicTag
+struct LX_MusicTag
 {
     UTF8string title;
     UTF8string artist;
     UTF8string album;
-    UTF8string year;            /**< "2014", "2015/02/01", but the year goes first      */
-    UTF8string track;           /**< "1", "01", "1/4", but the track number goes first  */
+    UTF8string year;                /**< "2014", "2015/02/01", but the year goes first      */
+    UTF8string track;               /**< "1", "01", "1/4", but the track number goes first  */
     UTF8string genre;
     UTF8string format;
     UTF8string duration;
-    LX_Graphics::LX_Image *img; /**< Album cover, if it exists */
+    LX_Graphics::LX_Surface *img;   /**< Album cover, if it exists */
 
-    MusicTag();
-    ~MusicTag();
+    LX_MusicTag();
+    ~LX_MusicTag();
 };
 
 
@@ -202,10 +202,24 @@ public:
 
     /**
     *   @fn const libtagpp::Tag& getInfo()
-    *   Get information about the current file
+    *   Get information about the current music
     *   @return The metadata
+    *
+    *   @note It provides low-level information about
+    *   the file related to the music (bitrate, album-gain, ...)
+    *
+    *   @sa metaData()
     */
     const libtagpp::Tag& getInfo();
+    /**
+    *   @fn const LX_MusicTag& metaData()
+    *   Get essential information about the current music
+    *   @return The metadata
+    *
+    *   @sa LX_MusicTag
+    *   @sa getInfo()
+    */
+    const LX_MusicTag& metaData();
 
     /// Destructor
     ~LX_Music();

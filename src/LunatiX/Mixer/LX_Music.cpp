@@ -20,10 +20,24 @@
 */
 
 #include <LunatiX/LX_Music.hpp>
+#include <LunatiX/LX_Image.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <LunatiX/LX_Error.hpp>
 #include <SDL2/SDL_mixer.h>
 
+
+namespace
+{
+
+/// @todo (#2#) complete the implementation of this private function ↓
+LX_Graphics::LX_Surface * _loadImage(std::string file,
+                                     const libtagpp::ImgMetaData& imgdata)
+{
+    if(imgdata._img_offset <= 0 && imgdata._img_size == 0)
+        return nullptr;
+}
+
+};
 
 namespace LX_Mixer
 {
@@ -43,9 +57,13 @@ LX_MusicException::~LX_MusicException() noexcept {}
 
 /* Music tag */
 
-MusicTag::MusicTag(): img(nullptr) {}
+LX_MusicTag::LX_MusicTag(): img(nullptr) {}
 
-MusicTag::~MusicTag()
+/*LX_MusicTag::LX_MusicTag(const LX_MusicTag& t) : title(t.title), artist(t.artist),
+    album(t.album), year(t.year), genre(t.genre), format(t.format),
+    duration(t.duration), img(t.img) {}*/
+
+LX_MusicTag::~LX_MusicTag()
 {
     delete img;
 }
@@ -56,8 +74,10 @@ MusicTag::~MusicTag()
 class LX_Music_
 {
     Mix_Music *_music;
-    libtagpp::Tag _tag;
     std::string _filename;
+    libtagpp::Tag _tag;
+    LX_MusicTag _mtag;
+    bool mtag_set;
 
 protected:
 
@@ -75,14 +95,14 @@ protected:
 public:
 
     explicit LX_Music_(const std::string& filename)
-        : _music(nullptr), _filename(filename)
+        : _music(nullptr), _filename(filename), mtag_set(false)
     {
         if(load_(filename) == false)
             throw LX_MusicException(LX_GetError());
     }
 
     explicit LX_Music_(const UTF8string& filename)
-        : _music(nullptr), _filename(filename.utf8_str())
+        : _music(nullptr), _filename(filename.utf8_str()), mtag_set(false)
     {
         if(load_(filename) == false)
             throw LX_MusicException(LX_GetError());
@@ -114,6 +134,27 @@ public:
             LX_SetError("Cannot get metadata");
 
         return _tag;
+    }
+
+    const LX_MusicTag& metaData()
+    {
+        if(!mtag_set)
+        {
+            getInfo();
+            _mtag.title = _tag.title();
+            _mtag.artist = _tag.artist();
+            _mtag.album = _tag.album();
+            _mtag.year = _tag.year();
+            _mtag.track = _tag.track();
+            _mtag.genre = _tag.genre();
+            _mtag.format = _tag.properties().format;
+            _mtag.duration = _tag.properties().duration;
+            _mtag.img = _loadImage(_filename,_tag.getImageMetaData());
+
+            mtag_set = true;
+        }
+
+        return _mtag;
     }
 
     ~LX_Music_()
@@ -178,6 +219,11 @@ void LX_Music::stop()
 const libtagpp::Tag& LX_Music::getInfo()
 {
     return _mimpl->getInfo();
+}
+
+const LX_MusicTag& LX_Music::metaData()
+{
+    return _mimpl->metaData();
 }
 
 
