@@ -134,7 +134,7 @@ public :
     ~LX_WindowException() noexcept;
 };
 
-/// @todo (#1#) LX_Window - private implementation
+/// @todo (#3#) LX_Window - private implementation
 
 /**
 *   @class LX_Window

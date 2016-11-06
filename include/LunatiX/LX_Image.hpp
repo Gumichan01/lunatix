@@ -49,6 +49,17 @@ class LX_Font;
 };
 
 
+
+/**
+*
+*   @todo (#1#) LX_Surface is not well-implemented → refactor it
+*
+*   - LX_Surface represent an image stored in memory (like SDL_Surface does)
+*   - LX_Surface is not a good name. it must be named LX_BufferedImage
+*/
+/// @todo (#1#) LX_Image, raneme it → LX_Texture
+/// @todo (#1#) LX_StreamingImage, raneme it → LX_StreamingTexture
+
 namespace LX_Graphics
 {
 
