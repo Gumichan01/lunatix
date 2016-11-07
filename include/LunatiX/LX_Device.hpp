@@ -17,7 +17,7 @@
 *    @file LX_Device.hpp
 *    @brief The library that deals with gamepads and mouse cursor
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

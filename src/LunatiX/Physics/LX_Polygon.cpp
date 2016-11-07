@@ -15,7 +15,7 @@
 *    @file LX_Polygon.cpp
 *    @brief The Implementation of the polygon
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

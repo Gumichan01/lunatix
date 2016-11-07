@@ -17,7 +17,7 @@
 *    @file LX_Colour.hpp
 *    @brief The colour representation
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

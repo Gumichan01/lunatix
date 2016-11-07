@@ -16,7 +16,7 @@
 *    @file LX_Audio.hpp
 *    @brief The interface of LX_Mixer
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 
