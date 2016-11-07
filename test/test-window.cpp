@@ -153,7 +153,7 @@ void test_image(LX_Win::LX_Window *win)
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
     }
 
-    LX_Log::log("|> LX_StreamingImage");
+    LX_Log::log("|> LX_StreamingTexture");
     LX_Log::log("||> LX_Surface");
 
     /// NORMAL CASE
@@ -252,7 +252,7 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::log("||> Streaming");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a streaming image");
     {
-        LX_StreamingImage img(*win);
+        LX_StreamingTexture img(*win);
         LX_Surface data(name,*win);
         LX_AABB box = {256,256,256,128};
 
@@ -269,7 +269,7 @@ void test_image(LX_Win::LX_Window *win)
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; got: FALSE");
 
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Update the stream");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_StreamingImage example, with LX_Surface");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_StreamingTexture example, with LX_Surface");
 
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 256; i++)

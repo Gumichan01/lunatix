@@ -57,25 +57,24 @@ class LX_Font;
 *   - LX_Surface represent an image stored in memory (like SDL_Surface does)
 *   - LX_Surface is not a good name. it must be named LX_BufferedImage
 */
-/// @todo (#1#) LX_Texture, rename it → LX_Texture
-/// @todo (#1#) LX_StreamingImage, raneme it → LX_StreamingTexture
+/// @todo (#1#) LX_StreamingTexture, raneme it → LX_StreamingTexture
 
 namespace LX_Graphics
 {
 
-/// Flag to define no mirror while drawing an image
+/// Flag to define no mirror while drawing a texture
 const short LX_MIRROR_NONE       = 0;
-/// Flag to define horizontal mirror while drawing an image
+/// Flag to define horizontal mirror while drawing a texture
 const short LX_MIRROR_HORIZONTAL = 1;
-/// Flag to define vertical mirror while drawing an image
+/// Flag to define vertical mirror while drawing a texture
 const short LX_MIRROR_VERTICAL   = 2;
 
 
 /**
 *   @class LX_Texture
-*   @brief The image object
+*   @brief The texture object
 *
-*   This class describes an image
+*   This class describes a texture.
 */
 class LX_Texture
 {
@@ -100,11 +99,11 @@ public:
     *                uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
-    *   Build an Image using a filename
+    *   Build the texture from a filename
     *
     *   @param [in] filename The name of the file
-    *   @param [in] w The window the image will be drawn on (see draw())
-    *   @param [in] format Optional argument that specified the format of the image
+    *   @param [in] w The window the texture will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the texture
     *
     *   |        Format Values        |                                              |
     *   |             ---             |                      ---                     |
@@ -155,19 +154,19 @@ public:
     LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    /// Image constuctor with a file buffer
+    /// Texture constuctor with a file buffer
     LX_Texture(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn virtual bool isOpen() const
-    *   Check if the image has been loaded
+    *   Check if the texture has been loaded
     *   @return TRUE on success, FALSE otherwise
     */
     virtual bool isOpen() const;
     /**
     *   @fn virtual void draw()
-    *   Draw an image on the window
+    *   Draw a texture on the window
     *   @note The window is specified at object construction
     */
     virtual void draw();
@@ -175,8 +174,8 @@ public:
     /**
     *   @fn bool bind(float *iw = nullptr, float *ih = nullptr)
     *
-    *   Bind an image (its internal texture) to the OpenGL context
-    *   of the OpenGl window where the image is drawn on
+    *   Bind a texture (its internal texture) to the OpenGL context
+    *   of the OpenGl window where the texture is drawn on
     *   in order to use the OpenGL functions.
     *
     *   @param [out] iw (Optional) a pointer to a float value of which will be
@@ -194,7 +193,7 @@ public:
     *         to be taken into account when providing texture coordinates to OpenGL.
     *
     *   @note 2 - This functions change the focused OpenGL window
-    *         in order to bind the image to the OpenGL context of the window
+    *         in order to bind the texture to the OpenGL context of the window
     *         where it is usually drawn on.
     *         That is to say the function can be only called if the window is
     *         an OpenGL window. Otherwise, bind() returns FALSE.
@@ -203,7 +202,7 @@ public:
 
     /**
     *   @fn bool unbind()
-    *   Unbind an image
+    *   Unbind a texture
     *   @return TRUE on success.FALSE if the operation is not supported.
     */
     bool unbind();
@@ -310,10 +309,10 @@ public:
     *   Build an animated sprite using a filename
     *
     *   @param [in] filename The name of the file
-    *   @param [in] w The window the image will be drawn on (see draw())
+    *   @param [in] w The window the animated sprite will be drawn on (see draw())
     *   @param [in] coord The list of coordinates for each sprite on the spritesheet
-    *   @param [in] delay The delay to display each sprite of the animated image
-    *   @param [in] format Optional argument that specified the format of the image
+    *   @param [in] delay The delay to display each sprite of the sprite sheet
+    *   @param [in] format Optional argument that specified the format of every sprites
     *
     *   @sa LX_Texture
     */
@@ -349,7 +348,7 @@ public:
 */
 class LX_Surface: private LX_Texture
 {
-    friend class LX_StreamingImage;
+    friend class LX_StreamingTexture;
     friend class LX_Device::LX_Mouse;
     SDL_Surface * _surface;
 
@@ -375,12 +374,12 @@ public:
 
 
 /**
-*   @class LX_StreamingImage
-*   @brief A special image for texture streaming
+*   @class LX_StreamingTexture
+*   @brief A special texture for texture streaming
 *
-*   This class describes an image used for texture streaming
+*   This class describes a texture for streaming
 */
-class LX_StreamingImage: public LX_Texture
+class LX_StreamingTexture: public LX_Texture
 {
     SDL_Surface *_screen;
     bool _update;
@@ -388,15 +387,15 @@ class LX_StreamingImage: public LX_Texture
 public:
 
     /**
-    *   @fn LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *   @fn LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *
     *   Build the texture
     *
-    *   @param [in] w The window the image will be drawn on (see draw())
-    *   @param [in] format Optional argument that specified the format of the image
+    *   @param [in] w The window the texture will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the t
     *   @sa LX_Texture
     */
-    LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     /**
@@ -420,15 +419,15 @@ public:
     void update();
 
     /// Destructor
-    virtual ~LX_StreamingImage();
+    virtual ~LX_StreamingTexture();
 };
 
 
 /**
 *   @class LX_TextImage
-*   @brief The text image
+*   @brief The text texture
 *
-*   This abstract class describes an image build from a text.
+*   This abstract class describes a texture build from a text.
 */
 class LX_TextImage: public LX_Texture
 {
@@ -450,8 +449,8 @@ public:
     *   @brief Constructor
     *
     *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the image will be drawn on (see draw())
-    *   @param [in] format Optional argument that specified the format of the image
+    *   @param [in] w The window the texture will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the texture
     *               See LX_Texture for more information
     *
     */
@@ -466,8 +465,8 @@ public:
     *   @param [in] text The text that will be drawn on the screen
     *   @param [in] sz The size of the text
     *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the image will be drawn on (see draw())
-    *   @param [in] format Optional argument that specified the format of the image
+    *   @param [in] w The window the texture will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the texture
     *               See LX_Texture for more information
     *
     */
@@ -481,8 +480,8 @@ public:
     *   @param [in] text The text that will be drawn on the screen
     *   @param [in] sz The size of the text
     *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the image will be drawn on (see draw())
-    *   @param [in] format Optional argument that specified the format of the image
+    *   @param [in] w The window the texture will be drawn on (see draw())
+    *   @param [in] format Optional argument that specified the format of the texture
     *               See LX_Texture for more information
     *
     */
@@ -540,7 +539,7 @@ public:
     *   @param [in] text The text to set
     *   @param [in] sz The new size of the text
     *
-    *   @note This function updates the image of the text
+    *   @note This function updates the texture of the text
     */
     virtual void setText(std::string text, unsigned int sz) = 0;
     /**
@@ -551,7 +550,7 @@ public:
     *   @param [in] text The utf-8 text to set
     *   @param [in] sz The new size of the text
     *
-    *   @note This function updates the image of the text
+    *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text, unsigned int sz) = 0;
     /**
@@ -561,7 +560,7 @@ public:
     *
     *   @param [in] sz The new size of the text
     *
-    *   @note This function updates the image of the text
+    *   @note This function updates the texture of the text
     */
     virtual void setSize(unsigned int sz) = 0;
 
@@ -572,10 +571,10 @@ public:
 
 /**
 *   @class LX_SolidTextImage
-*   @brief The solid text image
+*   @brief The solid text texture
 *
-*   This class describes a solid text image.
-*   A solid text image is just a text that is quickly and dirty drawn on the screen.
+*   This class describes a solid text texture.
+*   A solid text texture is just a text that is quickly and dirty drawn on the screen.
 *
 *   Using this class for drawing text is fast.
 */
@@ -610,10 +609,10 @@ public:
 
 /**
 *   @class LX_ShadedTextImage
-*   @brief The shaded text image
+*   @brief The shaded text texture
 *
-*   This class describes a shaded text image.
-*   A shaded text image is a text that is slowly but nicely drawn on the screen
+*   This class describes a shaded text texture.
+*   A shaded text texture is a text that is slowly but nicely drawn on the screen
 *   with a background colour that should be defined.
 *
 *   By default, at instantiation, the background colour is black, bu it can be
@@ -654,7 +653,7 @@ public:
     *   @param [in] c The colour of the text
     *   @param [in] sz The new size of the text
     *
-    *   @note This function updates the image of the text
+    *   @note This function updates the texture of the text
     */
     virtual void setText(std::string text, LX_Colour c, unsigned int sz);
     /**
@@ -666,7 +665,7 @@ public:
     *   @param [in] c The colour of the text
     *   @param [in] sz The new size of the text
     *
-    *   @note This function updates the image of the text
+    *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text, LX_Colour c, unsigned int sz);
     virtual void setSize(unsigned int sz);
@@ -678,7 +677,7 @@ public:
     *
     *   @param [in] c The colour of the text
     *
-    *   @note 1 - This function updates the image of the text
+    *   @note 1 - This function updates the texture of the text
     *   @note 2 - In order to
     */
     void setBgColor(LX_Colour c);
@@ -690,10 +689,10 @@ public:
 
 /**
 *   @class LX_BlendedTextImage
-*   @brief The blended text image
+*   @brief The blended text texture
 *
-*   This class describes a blended text image.
-*   A blended text image is a text that is "very" slowly
+*   This class describes a blended text texture.
+*   A blended text texture is a text that is "very" slowly
 *   but very nicely drawn on the screen.
 
 *   Using this class for drawing text should be slow, in particular if
