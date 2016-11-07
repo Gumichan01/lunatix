@@ -11,7 +11,7 @@
 */
 
 /**
-*    @file LX_Image.cpp
+*    @file LX_Texture.cpp
 *    @brief The implementation of the image
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.8
@@ -50,14 +50,14 @@ double radianToDegree(const double angle)
 namespace LX_Graphics
 {
 
-/* LX_Image */
+/* LX_Texture */
 
 // protected zero-argument construtor
-LX_Image::LX_Image(LX_Win::LX_Window& w, uint32_t format)
+LX_Texture::LX_Texture(LX_Win::LX_Window& w, uint32_t format)
     : _texture(nullptr), _win(w), _format(format) {}
 
 
-LX_Image::LX_Image(const std::string& filename, LX_Win::LX_Window& w,
+LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
                    uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
@@ -65,12 +65,12 @@ LX_Image::LX_Image(const std::string& filename, LX_Win::LX_Window& w,
 }
 
 
-LX_Image::LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
                    uint32_t format)
-    : LX_Image(filename.utf8_str(),w,format) {}
+    : LX_Texture(filename.utf8_str(),w,format) {}
 
 
-LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+LX_Texture::LX_Texture(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                    uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
@@ -80,7 +80,7 @@ LX_Image::LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
 }
 
 // private function
-SDL_Surface * LX_Image::loadSurface_(const std::string& filename)
+SDL_Surface * LX_Texture::loadSurface_(const std::string& filename)
 {
     SDL_Surface *loaded = IMG_Load(filename.c_str());
 
@@ -93,7 +93,7 @@ SDL_Surface * LX_Image::loadSurface_(const std::string& filename)
 }
 
 // private function
-SDL_Surface * LX_Image::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
+SDL_Surface * LX_Texture::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
 {
     SDL_Surface * surface = static_cast<SDL_Surface*>(buffer.getSurfaceFromBuffer_());
 
@@ -106,7 +106,7 @@ SDL_Surface * LX_Image::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
 }
 
 // private function
-SDL_Texture * LX_Image::loadTexture_(const std::string& filename, LX_Win::LX_Window& w)
+SDL_Texture * LX_Texture::loadTexture_(const std::string& filename, LX_Win::LX_Window& w)
 {
     SDL_Surface *tmpS = nullptr;
     SDL_Texture *tmpT = nullptr;
@@ -121,31 +121,31 @@ SDL_Texture * LX_Image::loadTexture_(const std::string& filename, LX_Win::LX_Win
 }
 
 
-bool LX_Image::isOpen() const
+bool LX_Texture::isOpen() const
 {
     return _texture != nullptr;
 }
 
 
-void LX_Image::draw()
+void LX_Texture::draw()
 {
     SDL_RenderCopy(_win._renderer,_texture,nullptr,nullptr);
 }
 
 
-bool LX_Image::bind(float *iw, float *ih)
+bool LX_Texture::bind(float *iw, float *ih)
 {
     return _win.glMakeCurrent() && SDL_GL_BindTexture(_texture,iw,ih) == 0;
 }
 
 
-bool LX_Image::unbind()
+bool LX_Texture::unbind()
 {
     return SDL_GL_UnbindTexture(_texture) == 0;
 }
 
 
-LX_Image::~LX_Image()
+LX_Texture::~LX_Texture()
 {
     SDL_DestroyTexture(_texture);
 }
@@ -155,22 +155,22 @@ LX_Image::~LX_Image()
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      uint32_t format)
-    : LX_Image(filename,w,format) {}
+    : LX_Texture(filename,w,format) {}
 
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      uint32_t format)
-    : LX_Image(filename,w,format) {}
+    : LX_Texture(filename,w,format) {}
 
 
 LX_Sprite::LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                      uint32_t format)
-    : LX_Image(buffer,w,format) {}
+    : LX_Texture(buffer,w,format) {}
 
 
 void LX_Sprite::draw()
 {
-    LX_Image::draw();
+    LX_Texture::draw();
 }
 
 
@@ -220,7 +220,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::L
 
 bool LX_AnimatedSprite::isOpen() const
 {
-    return LX_Image::isOpen();
+    return LX_Texture::isOpen();
 }
 
 
@@ -263,7 +263,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 
 LX_Surface::LX_Surface(const std::string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
-    : LX_Image(w,format), _surface(nullptr)
+    : LX_Texture(w,format), _surface(nullptr)
 {
     _surface = loadSurface_(filename);
 }
@@ -276,7 +276,7 @@ LX_Surface::LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
 
 LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                        uint32_t format)
-    : LX_Image(w,format), _surface(nullptr)
+    : LX_Texture(w,format), _surface(nullptr)
 {
     _surface = loadSurface_(buffer);
 }
@@ -298,7 +298,7 @@ LX_Surface::~LX_Surface()
 /* LX_StreamingImage */
 
 LX_StreamingImage::LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format)
-    : LX_Image(w,format), _screen(nullptr), _update(false)
+    : LX_Texture(w,format), _screen(nullptr), _update(false)
 {
     int bpp, width, height;
     uint32_t r,g,b,a;
@@ -336,7 +336,7 @@ LX_StreamingImage::LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format)
 
 bool LX_StreamingImage::isOpen() const
 {
-    return _screen != nullptr && LX_Image::isOpen();
+    return _screen != nullptr && LX_Texture::isOpen();
 }
 
 
@@ -372,7 +372,7 @@ LX_StreamingImage::~LX_StreamingImage()
 
 LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
-    : LX_Image(w,format), _text(""), _font(font), _size(0),_dimension({0,0,0,0}) {}
+    : LX_Texture(w,format), _text(""), _font(font), _size(0),_dimension({0,0,0,0}) {}
 
 
 LX_TextImage::LX_TextImage(std::string text, unsigned int sz,
@@ -384,7 +384,7 @@ LX_TextImage::LX_TextImage(std::string text, unsigned int sz,
 LX_TextImage::LX_TextImage(const UTF8string& text, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
-    : LX_Image(w,format), _text(text), _font(font), _size(sz),_dimension({0,0,0,0}) {}
+    : LX_Texture(w,format), _text(text), _font(font), _size(sz),_dimension({0,0,0,0}) {}
 
 
 void LX_TextImage::draw()

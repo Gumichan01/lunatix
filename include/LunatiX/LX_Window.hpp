@@ -31,7 +31,7 @@ struct SDL_Renderer;
 
 namespace LX_Graphics
 {
-class LX_Image;
+class LX_Texture;
 class LX_Sprite;
 class LX_StreamingImage;
 class LX_AnimatedSprite;
@@ -147,7 +147,7 @@ public :
 */
 class LX_Window
 {
-    friend class LX_Graphics::LX_Image;
+    friend class LX_Graphics::LX_Texture;
     friend class LX_Graphics::LX_Sprite;
     friend class LX_Graphics::LX_StreamingImage;
     friend class LX_Graphics::LX_AnimatedSprite;

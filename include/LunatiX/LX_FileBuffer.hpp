@@ -32,7 +32,7 @@ class LX_Chunk;
 
 namespace LX_Graphics
 {
-class LX_Image;
+class LX_Texture;
 }
 
 namespace LX_TrueTypeFont
@@ -58,7 +58,7 @@ class LX_FileBuffer_;
 */
 class LX_FileBuffer
 {
-    friend class LX_Graphics::LX_Image;
+    friend class LX_Graphics::LX_Texture;
     friend class LX_TrueTypeFont::LX_Font_;
     std::unique_ptr<LX_FileBuffer_> _bimpl;
 

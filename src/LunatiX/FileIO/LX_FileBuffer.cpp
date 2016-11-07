@@ -117,7 +117,7 @@ public:
 };
 
 
-// Used by LX_Image and sub-classes
+// Used by LX_Texture and sub-classes
 void * LX_FileBuffer::getSurfaceFromBuffer_() const
 {
     return _bimpl->getSurfaceFromBuffer();

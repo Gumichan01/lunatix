@@ -57,7 +57,7 @@ class LX_Font;
 *   - LX_Surface represent an image stored in memory (like SDL_Surface does)
 *   - LX_Surface is not a good name. it must be named LX_BufferedImage
 */
-/// @todo (#1#) LX_Image, raneme it → LX_Texture
+/// @todo (#1#) LX_Texture, rename it → LX_Texture
 /// @todo (#1#) LX_StreamingImage, raneme it → LX_StreamingTexture
 
 namespace LX_Graphics
@@ -72,15 +72,15 @@ const short LX_MIRROR_VERTICAL   = 2;
 
 
 /**
-*   @class LX_Image
+*   @class LX_Texture
 *   @brief The image object
 *
 *   This class describes an image
 */
-class LX_Image
+class LX_Texture
 {
-    LX_Image(LX_Image&);
-    LX_Image& operator =(LX_Image&);
+    LX_Texture(LX_Texture&);
+    LX_Texture& operator =(LX_Texture&);
     SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
 
 protected:
@@ -89,14 +89,14 @@ protected:
     LX_Win::LX_Window& _win;
     uint32_t _format;
 
-    LX_Image(LX_Win::LX_Window& w, uint32_t format);
+    LX_Texture(LX_Win::LX_Window& w, uint32_t format);
     SDL_Surface * loadSurface_(const std::string& filename);
     SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
 
 public:
 
     /**
-    *   @fn LX_Image(const std::string& filename, LX_Win::LX_Window& w,
+    *   @fn LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
     *                uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
@@ -148,15 +148,15 @@ public:
     *   The default value is **SDL_PIXELFORMAT_RGBA8888**
     *
     */
-    LX_Image(const std::string& filename, LX_Win::LX_Window& w,
+    LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constuctor with the filename (UTF-8)
-    LX_Image(const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Image constuctor with a file buffer
-    LX_Image(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+    LX_Texture(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
@@ -209,7 +209,7 @@ public:
     bool unbind();
 
     /// Destructor
-    virtual ~LX_Image();
+    virtual ~LX_Texture();
 };
 
 
@@ -217,7 +217,7 @@ public:
 *   @class LX_Sprite
 *   @brief The sprite
 */
-class LX_Sprite: public LX_Image
+class LX_Sprite: public LX_Texture
 {
 
 public:
@@ -315,7 +315,7 @@ public:
     *   @param [in] delay The delay to display each sprite of the animated image
     *   @param [in] format Optional argument that specified the format of the image
     *
-    *   @sa LX_Image
+    *   @sa LX_Texture
     */
     LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
@@ -347,7 +347,7 @@ public:
 *
 *   This class describes the surface for the texture streaming.
 */
-class LX_Surface: private LX_Image
+class LX_Surface: private LX_Texture
 {
     friend class LX_StreamingImage;
     friend class LX_Device::LX_Mouse;
@@ -380,7 +380,7 @@ public:
 *
 *   This class describes an image used for texture streaming
 */
-class LX_StreamingImage: public LX_Image
+class LX_StreamingImage: public LX_Texture
 {
     SDL_Surface *_screen;
     bool _update;
@@ -394,7 +394,7 @@ public:
     *
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
-    *   @sa LX_Image
+    *   @sa LX_Texture
     */
     LX_StreamingImage(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
@@ -414,7 +414,7 @@ public:
     *   @fn void update()
     *   Update the texture in order to be drawn on the window
     *
-    *   @note After each call of update(), you ned to call LX_Image::draw()
+    *   @note After each call of update(), you ned to call LX_Texture::draw()
     *         in order to draw the new texture on the window
     */
     void update();
@@ -430,7 +430,7 @@ public:
 *
 *   This abstract class describes an image build from a text.
 */
-class LX_TextImage: public LX_Image
+class LX_TextImage: public LX_Texture
 {
 
 protected:
@@ -452,7 +452,7 @@ public:
     *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
-    *               See LX_Image for more information
+    *               See LX_Texture for more information
     *
     */
     LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
@@ -468,7 +468,7 @@ public:
     *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
-    *               See LX_Image for more information
+    *               See LX_Texture for more information
     *
     */
     LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
@@ -483,7 +483,7 @@ public:
     *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the image will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the image
-    *               See LX_Image for more information
+    *               See LX_Texture for more information
     *
     */
     LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
