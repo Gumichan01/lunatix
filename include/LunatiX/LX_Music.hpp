@@ -33,7 +33,7 @@ class Tag;
 
 namespace LX_Graphics
 {
-class LX_Surface;
+class LX_BufferedImage;
 };
 
 namespace LX_Mixer
@@ -84,7 +84,7 @@ struct LX_MusicTag
     UTF8string genre;
     UTF8string format;
     UTF8string duration;
-    LX_Graphics::LX_Surface *img;   /**< Album cover, if it exists */
+    LX_Graphics::LX_BufferedImage *img;   /**< Album cover, if it exists */
 
     LX_MusicTag();
     ~LX_MusicTag();

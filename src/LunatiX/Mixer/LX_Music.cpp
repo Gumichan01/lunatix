@@ -30,7 +30,7 @@ namespace
 {
 
 /// @todo (#2#) complete the implementation of this private function ↓
-LX_Graphics::LX_Surface * _loadImage(std::string file,
+LX_Graphics::LX_BufferedImage * _loadImage(std::string file,
                                      const libtagpp::ImgMetaData& imgdata)
 {
     if(imgdata._img_offset <= 0 && imgdata._img_size == 0)

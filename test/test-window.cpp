@@ -154,13 +154,13 @@ void test_image(LX_Win::LX_Window *win)
     }
 
     LX_Log::log("|> LX_StreamingTexture");
-    LX_Log::log("||> LX_Surface");
+    LX_Log::log("||> LX_BufferedImage");
 
     /// NORMAL CASE
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a surface");
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"std::string argument");
-        LX_Surface data(name,*win);
+        LX_BufferedImage data(name,*win);
 
         if(data.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
@@ -170,7 +170,7 @@ void test_image(LX_Win::LX_Window *win)
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
-        LX_Surface data(u8name,*win);
+        LX_BufferedImage data(u8name,*win);
 
         if(data.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
@@ -181,7 +181,7 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"FileBuffer argument");
         LX_FileIO::LX_FileBuffer b(name);
-        LX_Surface data(b,*win);
+        LX_BufferedImage data(b,*win);
 
         if(data.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
@@ -192,7 +192,7 @@ void test_image(LX_Win::LX_Window *win)
     /// ERROR CASE
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
     {
-        LX_Surface data("<invalid>",*win);
+        LX_BufferedImage data("<invalid>",*win);
 
         if(data.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
@@ -203,7 +203,7 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
     {
         LX_FileIO::LX_FileBuffer b(mname);
-        LX_Surface data(b,*win);
+        LX_BufferedImage data(b,*win);
 
         if(data.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
@@ -253,7 +253,7 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a streaming image");
     {
         LX_StreamingTexture img(*win);
-        LX_Surface data(name,*win);
+        LX_BufferedImage data(name,*win);
         LX_AABB box = {256,256,256,128};
 
         if(img.isOpen())
@@ -269,7 +269,7 @@ void test_image(LX_Win::LX_Window *win)
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; got: FALSE");
 
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Update the stream");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_StreamingTexture example, with LX_Surface");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_StreamingTexture example, with LX_BufferedImage");
 
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 256; i++)

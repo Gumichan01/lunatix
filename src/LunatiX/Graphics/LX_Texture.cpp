@@ -259,9 +259,9 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 
 
 
-/* LX_Surface */
+/* LX_BufferedImage */
 
-LX_Surface::LX_Surface(const std::string& filename, LX_Win::LX_Window& w,
+LX_BufferedImage::LX_BufferedImage(const std::string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
     : LX_Texture(w,format), _surface(nullptr)
 {
@@ -269,12 +269,12 @@ LX_Surface::LX_Surface(const std::string& filename, LX_Win::LX_Window& w,
 }
 
 
-LX_Surface::LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
+LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
-    : LX_Surface(filename.utf8_str(),w,format) {}
+    : LX_BufferedImage(filename.utf8_str(),w,format) {}
 
 
-LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+LX_BufferedImage::LX_BufferedImage(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                        uint32_t format)
     : LX_Texture(w,format), _surface(nullptr)
 {
@@ -282,13 +282,13 @@ LX_Surface::LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
 }
 
 
-bool LX_Surface::isOpen() const
+bool LX_BufferedImage::isOpen() const
 {
     return _surface != nullptr;
 }
 
 
-LX_Surface::~LX_Surface()
+LX_BufferedImage::~LX_BufferedImage()
 {
     SDL_FreeSurface(_surface);
 }
@@ -340,7 +340,7 @@ bool LX_StreamingTexture::isOpen() const
 }
 
 
-bool LX_StreamingTexture::blit(LX_Surface& s, LX_AABB& rect)
+bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_AABB& rect)
 {
     bool b = (SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0);
 

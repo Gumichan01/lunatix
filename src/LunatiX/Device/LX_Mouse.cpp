@@ -53,7 +53,7 @@ public:
 };
 
 
-LX_Mouse::LX_Mouse(LX_Graphics::LX_Surface& surface, int hot_x, int hot_y)
+LX_Mouse::LX_Mouse(LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y)
     : _mimpl(new LX_Mouse_(surface._surface,hot_x,hot_y)) {}
 
 

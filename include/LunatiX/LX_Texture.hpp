@@ -50,12 +50,11 @@ class LX_Font;
 
 
 
+
+///   @todo (#1#) LX_BufferedImage is not well-implemented → refactor it
+
 /**
-*
-*   @todo (#1#) LX_Surface is not well-implemented → refactor it
-*
-*   - LX_Surface represent an image stored in memory (like SDL_Surface does)
-*   - LX_Surface is not a good name. it must be named LX_BufferedImage
+*   - LX_BufferedImage represent an image stored in memory (like SDL_Surface does)
 */
 
 namespace LX_Graphics
@@ -340,12 +339,12 @@ public:
 
 
 /**
-*   @class LX_Surface
+*   @class LX_BufferedImage
 *   @brief The Surface
 *
 *   This class describes the surface for the texture streaming.
 */
-class LX_Surface: private LX_Texture
+class LX_BufferedImage: private LX_Texture
 {
     friend class LX_StreamingTexture;
     friend class LX_Device::LX_Mouse;
@@ -354,21 +353,21 @@ class LX_Surface: private LX_Texture
 public:
 
     /// Surface constuctor
-    LX_Surface(const std::string& filename, LX_Win::LX_Window& w,
+    LX_BufferedImage(const std::string& filename, LX_Win::LX_Window& w,
                uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with the filename (UTF-8)
-    LX_Surface(const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_BufferedImage(const UTF8string& filename, LX_Win::LX_Window& w,
                uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with a file buffer
-    LX_Surface(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
+    LX_BufferedImage(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
                uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
 
     /// Destructor
-    virtual ~LX_Surface();
+    virtual ~LX_BufferedImage();
 };
 
 
@@ -398,7 +397,7 @@ public:
 
     virtual bool isOpen() const;
     /**
-    *   @fn bool blit(LX_Surface& s, LX_AABB& rect)
+    *   @fn bool blit(LX_BufferedImage& s, LX_AABB& rect)
     *
     *   Put the surface given in argument on the current texture
     *
@@ -407,7 +406,7 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     */
-    bool blit(LX_Surface& s, LX_AABB& rect);
+    bool blit(LX_BufferedImage& s, LX_AABB& rect);
     /**
     *   @fn void update()
     *   Update the texture in order to be drawn on the window
