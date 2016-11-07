@@ -28,6 +28,7 @@
 struct SDL_Surface;
 struct SDL_Texture;
 
+
 namespace LX_FileIO
 {
 class LX_FileBuffer;
@@ -49,14 +50,6 @@ class LX_Font;
 };
 
 
-
-
-///   @todo (#1#) LX_BufferedImage is not well-implemented → refactor it
-
-/**
-*   - LX_BufferedImage represent an image stored in memory (like SDL_Surface does)
-*/
-
 namespace LX_Graphics
 {
 
@@ -76,6 +69,8 @@ const short LX_MIRROR_VERTICAL   = 2;
 */
 class LX_Texture
 {
+    friend class LX_BufferedImage;
+
     LX_Texture(LX_Texture&);
     LX_Texture& operator =(LX_Texture&);
     SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
@@ -87,8 +82,8 @@ protected:
     uint32_t _format;
 
     LX_Texture(LX_Win::LX_Window& w, uint32_t format);
-    SDL_Surface * loadSurface_(const std::string& filename);
-    SDL_Surface * loadSurface_(LX_FileIO::LX_FileBuffer& buffer);
+    LX_Texture(SDL_Texture *t, LX_Win::LX_Window& w,
+               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
 public:
 
@@ -152,10 +147,6 @@ public:
     LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    /// Texture constuctor with a file buffer
-    LX_Texture(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-             uint32_t format=SDL_PIXELFORMAT_RGBA8888);
-
     /**
     *   @fn virtual bool isOpen() const
     *   Check if the texture has been loaded
@@ -216,6 +207,12 @@ public:
 */
 class LX_Sprite: public LX_Texture
 {
+    friend class LX_BufferedImage;
+
+protected:
+
+    LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
+              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
 public:
 
@@ -225,10 +222,6 @@ public:
 
     /// Sprite constuctor with the filename (UTF-8)
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
-
-    /// Sprite constuctor with a file buffer
-    LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
@@ -290,12 +283,18 @@ public:
 */
 class LX_AnimatedSprite: public LX_Sprite
 {
+    friend class LX_BufferedImage;
     const std::vector<LX_AABB> _coordinates;
     const size_t _SZ;
     uint32_t _delay;
     uint32_t _btime;
     size_t _iteration;
     bool _started;
+
+protected:
+    LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
+                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
 public:
 
@@ -323,11 +322,6 @@ public:
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    /// Animated Sprite constuctor with a file buffer
-    LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
-
     virtual bool isOpen() const;
     virtual void draw(LX_AABB * box);
     virtual void draw(LX_AABB * box, const double angle);
@@ -344,30 +338,49 @@ public:
 *
 *   This class describes the surface for the texture streaming.
 */
-class LX_BufferedImage: private LX_Texture
+class LX_BufferedImage
 {
     friend class LX_StreamingTexture;
     friend class LX_Device::LX_Mouse;
+    friend class LX_FileIO::LX_FileBuffer;
     SDL_Surface * _surface;
+
+    LX_BufferedImage(SDL_Surface * s, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
 public:
 
     /// Surface constuctor
-    LX_BufferedImage(const std::string& filename, LX_Win::LX_Window& w,
-               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_BufferedImage(const std::string& filename,
+                     uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with the filename (UTF-8)
-    LX_BufferedImage(const UTF8string& filename, LX_Win::LX_Window& w,
-               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_BufferedImage(const UTF8string& filename,
+                     uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
-    /// Surface Sprite constuctor with a file buffer
-    LX_BufferedImage(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    /**
+    *   @fn bool isLoaded() const
+    *   Check if the buffered image has been loaded
+    *   @return TRUE, if it is loaded, FALSE otherwise
+    */
+    bool isLoaded() const;
 
-    virtual bool isOpen() const;
+    /**
+    *   @fn LX_Texture * generateTexture() const
+    *   Create a texture from the current surface
+    *   @return A new fresh texture (allocated) on success, nullptr otherwise
+    */
+    LX_Texture * generateTexture(LX_Win::LX_Window& w) const;
+
+    /// @todo doc
+    LX_Texture * generateSprite(LX_Win::LX_Window& w) const;
+
+    /// @todo doc
+    LX_Texture * generateAnimatedSprite(LX_Win::LX_Window& w,
+                                        const std::vector<LX_AABB>& coord,
+                                        const uint32_t delay) const;
 
     /// Destructor
-    virtual ~LX_BufferedImage();
+    ~LX_BufferedImage();
 };
 
 

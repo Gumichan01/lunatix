@@ -149,6 +149,7 @@ class LX_Window
 {
     friend class LX_Graphics::LX_Texture;
     friend class LX_Graphics::LX_Sprite;
+    friend class LX_Graphics::LX_BufferedImage;
     friend class LX_Graphics::LX_StreamingTexture;
     friend class LX_Graphics::LX_AnimatedSprite;
     friend class LX_Graphics::LX_TextTexture;

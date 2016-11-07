@@ -33,6 +33,7 @@ class LX_Chunk;
 namespace LX_Graphics
 {
 class LX_Texture;
+class LX_BufferedImage;
 }
 
 namespace LX_TrueTypeFont
@@ -66,8 +67,8 @@ class LX_FileBuffer
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
     // private function
-    void * getSurfaceFromBuffer_() const;
-    void * getFontFromBuffer_(int size) const;
+    //void * getSurfaceFromBuffer_() const;       // used by LX_Graphics::LX_Texture
+    void * getFontFromBuffer_(int size) const;  // used by LX_TrueTypeFont::LX_Font
 
 public :
 
@@ -97,6 +98,9 @@ public :
     *
     */
     explicit LX_FileBuffer(const UTF8string& filename);
+
+    /// @todo documentation
+    LX_Graphics::LX_BufferedImage * loadBufferedImage() const;
 
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const

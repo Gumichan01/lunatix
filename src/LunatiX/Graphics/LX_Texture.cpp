@@ -45,6 +45,35 @@ double radianToDegree(const double angle)
     return angle * 180 / M_PI;
 }
 
+// Load a image from a file
+SDL_Surface * loadSurface_(const std::string& filename, uint32_t format)
+{
+    SDL_Surface *loaded = IMG_Load(filename.c_str());
+
+    if(loaded == nullptr)
+        return nullptr;
+
+    SDL_Surface *optimized = SDL_ConvertSurfaceFormat(loaded,format,0);
+    SDL_FreeSurface(loaded);
+    return optimized;
+}
+
+// Load a texture from a file
+SDL_Texture * loadTexture_(const std::string& filename,
+                           uint32_t format, SDL_Renderer *r)
+{
+    SDL_Surface *tmp_s = nullptr;
+    SDL_Texture *tmp_t = nullptr;
+    tmp_s = loadSurface_(filename.c_str(), format);
+
+    if(tmp_s == nullptr)
+        return nullptr;
+
+    tmp_t = SDL_CreateTextureFromSurface(r,tmp_s);
+    SDL_FreeSurface(tmp_s);
+    return tmp_t;
+}
+
 };
 
 namespace LX_Graphics
@@ -52,13 +81,17 @@ namespace LX_Graphics
 
 /* LX_Texture */
 
-// protected zero-argument construtor
+/// @todo protected zero-argument construtor (useful?)
 LX_Texture::LX_Texture(LX_Win::LX_Window& w, uint32_t format)
     : _texture(nullptr), _win(w), _format(format) {}
 
 
+LX_Texture::LX_Texture(SDL_Texture *t, LX_Win::LX_Window& w, uint32_t format)
+    : _texture(t), _win(w), _format(format) {}
+
+
 LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-                   uint32_t format)
+                       uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
     _texture = loadTexture_(filename,_win);
@@ -66,59 +99,8 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
 
 
 LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
-                   uint32_t format)
+                       uint32_t format)
     : LX_Texture(filename.utf8_str(),w,format) {}
-
-
-LX_Texture::LX_Texture(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                   uint32_t format)
-    : _texture(nullptr), _win(w), _format(format)
-{
-    SDL_Surface *tmp = loadSurface_(buffer);
-    _texture = SDL_CreateTextureFromSurface(w._renderer,tmp);
-    SDL_FreeSurface(tmp);
-}
-
-// private function
-SDL_Surface * LX_Texture::loadSurface_(const std::string& filename)
-{
-    SDL_Surface *loaded = IMG_Load(filename.c_str());
-
-    if(loaded == nullptr)
-        return nullptr;
-
-    SDL_Surface *optimized = SDL_ConvertSurfaceFormat(loaded,_format,0);
-    SDL_FreeSurface(loaded);
-    return optimized;
-}
-
-// private function
-SDL_Surface * LX_Texture::loadSurface_(LX_FileIO::LX_FileBuffer& buffer)
-{
-    SDL_Surface * surface = static_cast<SDL_Surface*>(buffer.getSurfaceFromBuffer_());
-
-    if(surface == nullptr)
-        return nullptr;
-
-    SDL_Surface *optimized = SDL_ConvertSurfaceFormat(surface,_format,0);
-    SDL_FreeSurface(surface);
-    return optimized;
-}
-
-// private function
-SDL_Texture * LX_Texture::loadTexture_(const std::string& filename, LX_Win::LX_Window& w)
-{
-    SDL_Surface *tmpS = nullptr;
-    SDL_Texture *tmpT = nullptr;
-    tmpS = loadSurface_(filename.c_str());
-
-    if(tmpS == nullptr)
-        return nullptr;
-
-    tmpT = SDL_CreateTextureFromSurface(w._renderer,tmpS);
-    SDL_FreeSurface(tmpS);
-    return tmpT;
-}
 
 
 bool LX_Texture::isOpen() const
@@ -153,6 +135,10 @@ LX_Texture::~LX_Texture()
 
 /* LX_Sprite */
 
+// protected constructor
+LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, uint32_t format)
+    : LX_Texture(t,w,format) {}
+
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      uint32_t format)
     : LX_Texture(filename,w,format) {}
@@ -161,11 +147,6 @@ LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      uint32_t format)
     : LX_Texture(filename,w,format) {}
-
-
-LX_Sprite::LX_Sprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                     uint32_t format)
-    : LX_Texture(buffer,w,format) {}
 
 
 void LX_Sprite::draw()
@@ -197,9 +178,17 @@ LX_Sprite::~LX_Sprite() {}
 
 /* LX_AnimatedSprite */
 
+// protected constructor
+LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
+                                     const std::vector<LX_AABB>& coord,
+                                     const uint32_t delay, uint32_t format)
+    : LX_Sprite(t,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
+      _btime(0), _iteration(0), _started(false) {}
+
+
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
-                                     const std::vector<LX_AABB>& coord, const uint32_t delay,
-                                     uint32_t format)
+                                     const std::vector<LX_AABB>& coord,
+                                     const uint32_t delay, uint32_t format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
@@ -208,13 +197,6 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
     : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-      _btime(0), _iteration(0), _started(false) {}
-
-
-LX_AnimatedSprite::LX_AnimatedSprite(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                                     const std::vector<LX_AABB>& coord,
-                                     const uint32_t delay, uint32_t format)
-    : LX_Sprite(buffer,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
       _btime(0), _iteration(0), _started(false) {}
 
 
@@ -261,30 +243,42 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 
 /* LX_BufferedImage */
 
-LX_BufferedImage::LX_BufferedImage(const std::string& filename, LX_Win::LX_Window& w,
-                       uint32_t format)
-    : LX_Texture(w,format), _surface(nullptr)
+LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
 {
-    _surface = loadSurface_(filename);
+    _surface = loadSurface_(filename, format);
 }
 
 
-LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, LX_Win::LX_Window& w,
-                       uint32_t format)
-    : LX_BufferedImage(filename.utf8_str(),w,format) {}
+LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
+    : LX_BufferedImage(filename.utf8_str(),format) {}
 
 
-LX_BufferedImage::LX_BufferedImage(LX_FileIO::LX_FileBuffer& buffer, LX_Win::LX_Window& w,
-                       uint32_t format)
-    : LX_Texture(w,format), _surface(nullptr)
-{
-    _surface = loadSurface_(buffer);
-}
+LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, uint32_t format)
+    : _surface(s) {}
 
 
-bool LX_BufferedImage::isOpen() const
+bool LX_BufferedImage::isLoaded() const
 {
     return _surface != nullptr;
+}
+
+
+LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
+{
+    return new LX_Texture(SDL_CreateTextureFromSurface(w._renderer,_surface),w);
+}
+
+LX_Texture * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
+{
+    return new LX_Sprite(SDL_CreateTextureFromSurface(w._renderer,_surface),w);
+}
+
+LX_Texture * LX_BufferedImage::generateAnimatedSprite(LX_Win::LX_Window& w,
+                                                      const std::vector<LX_AABB>& coord,
+                                                      const uint32_t delay) const
+{
+    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(w._renderer,_surface),
+                                 w, coord, delay);
 }
 
 

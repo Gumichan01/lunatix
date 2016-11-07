@@ -21,6 +21,7 @@
 
 #include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_Texture.hpp>
 #include <LunatiX/LX_Chunk.hpp>
 
 #include <SDL2/SDL_image.h>
@@ -83,6 +84,7 @@ public:
         delete reader;
     }
 
+
     LX_Mixer::LX_Chunk * loadSample() const
     {
         Mix_Chunk * ch = getChunkFromBuffer_();
@@ -117,11 +119,11 @@ public:
 };
 
 
-// Used by LX_Texture and sub-classes
-void * LX_FileBuffer::getSurfaceFromBuffer_() const
+/// @todo Used by LX_Texture and sub-classes (useful?)
+/**void * LX_FileBuffer::getSurfaceFromBuffer_() const
 {
     return _bimpl->getSurfaceFromBuffer();
-}
+}*/
 
 // Used by LX_Font
 void * LX_FileBuffer::getFontFromBuffer_(int size) const
@@ -137,6 +139,12 @@ LX_FileBuffer::LX_FileBuffer(const std::string& filename)
 
 LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
     : _bimpl(new LX_FileBuffer_(filename)) {}
+
+
+LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage() const
+{
+    return new LX_Graphics::LX_BufferedImage(_bimpl->getSurfaceFromBuffer());
+}
 
 
 LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
