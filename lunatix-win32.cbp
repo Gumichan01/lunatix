@@ -67,18 +67,15 @@
 		</Linker>
 		<Unit filename="include/LunatiX/LX_AABB.hpp" />
 		<Unit filename="include/LunatiX/LX_Audio.hpp" />
-		<Unit filename="include/LunatiX/LX_Channel.hpp">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="include/LunatiX/LX_Channel.hpp" />
+		<Unit filename="include/LunatiX/LX_Channel.tpp" />
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Colour.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
 		<Unit filename="include/LunatiX/LX_Event.hpp" />
-		<Unit filename="include/LunatiX/LX_Event.inl">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="include/LunatiX/LX_Event.inl" />
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
 		<Unit filename="include/LunatiX/LX_FileSystem.hpp" />
@@ -95,6 +92,7 @@
 		<Unit filename="include/LunatiX/LX_Multithread.hpp" />
 		<Unit filename="include/LunatiX/LX_Music.hpp" />
 		<Unit filename="include/LunatiX/LX_OpenGL.hpp" />
+		<Unit filename="include/LunatiX/LX_OpenGL.tpp" />
 		<Unit filename="include/LunatiX/LX_Particle.hpp" />
 		<Unit filename="include/LunatiX/LX_ParticleSystem.hpp" />
 		<Unit filename="include/LunatiX/LX_Physics.hpp" />

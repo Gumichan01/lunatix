@@ -20,7 +20,7 @@
 */
 
 #include <LunatiX/LX_Mouse.hpp>
-#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_Texture.hpp>
 
 #include <SDL2/SDL_mouse.h>
 

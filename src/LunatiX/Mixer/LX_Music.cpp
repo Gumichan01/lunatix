@@ -20,7 +20,7 @@
 */
 
 #include <LunatiX/LX_Music.hpp>
-#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_Texture.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <LunatiX/LX_Error.hpp>
 #include <SDL2/SDL_mixer.h>

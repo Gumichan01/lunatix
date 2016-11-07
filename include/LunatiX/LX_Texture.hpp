@@ -13,7 +13,7 @@
 */
 
 /**
-*    @file LX_Image.hpp
+*    @file LX_Texture.hpp
 *    @brief The Image
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
@@ -57,7 +57,6 @@ class LX_Font;
 *   - LX_Surface represent an image stored in memory (like SDL_Surface does)
 *   - LX_Surface is not a good name. it must be named LX_BufferedImage
 */
-/// @todo (#1#) LX_StreamingTexture, raneme it → LX_StreamingTexture
 
 namespace LX_Graphics
 {

@@ -18,7 +18,7 @@
 *
 */
 
-#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_Texture.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Window.hpp>

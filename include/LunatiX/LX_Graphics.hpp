@@ -20,7 +20,7 @@
 *
 */
 
-#include "LX_Image.hpp"
+#include "LX_Texture.hpp"
 #include "LX_OpenGL.hpp"
 #include "LX_TrueTypeFont.hpp"
 #include "LX_Window.hpp"

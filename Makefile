@@ -66,7 +66,7 @@ SRC_FILES=$(SRC_DEVICE_PATH)LX_Device.cpp $(SRC_DEVICE_PATH)LX_Gamepad.cpp \
 $(SRC_DEVICE_PATH)LX_Haptic.cpp $(SRC_DEVICE_PATH)LX_Mouse.cpp \
 $(SRC_FILEIO_PATH)LX_FileIO.cpp $(SRC_FILEIO_PATH)LX_FileBuffer.cpp \
 $(SRC_GRAPHICS_PATH)LX_OpenGL.cpp $(SRC_GRAPHICS_PATH)LX_Window.cpp \
-$(SRC_GRAPHICS_PATH)LX_WindowManager.cpp $(SRC_GRAPHICS_PATH)LX_Image.cpp \
+$(SRC_GRAPHICS_PATH)LX_WindowManager.cpp $(SRC_GRAPHICS_PATH)LX_Texture.cpp \
 $(SRC_INPUT_PATH)LX_Event.cpp \
 $(SRC_LIBRARY_PATH)LX_Config.cpp $(SRC_LIBRARY_PATH)LX_Library.cpp \
 $(SRC_MIXER_PATH)LX_Sound.cpp $(SRC_MIXER_PATH)LX_Chunk.cpp \
@@ -182,7 +182,7 @@ LX_FileBuffer.o: $(SRC_FILEIO_PATH)LX_FileBuffer.o
 LX_OpenGL.o: $(SRC_GRAPHICS_PATH)LX_OpenGL.o
 LX_Window.o: $(SRC_GRAPHICS_PATH)LX_Window.o
 LX_WindowManager.o: $(SRC_GRAPHICS_PATH)LX_WindowManager.o
-LX_Image.o: $(SRC_GRAPHICS_PATH)LX_Image.o
+LX_Texture.o: $(SRC_GRAPHICS_PATH)LX_Texture.o
 LX_Event.o: $(SRC_INPUT_PATH)LX_Event.o
 LX_Config.o: $(SRC_LIBRARY_PATH)LX_Config.o
 LX_Library.o: $(SRC_LIBRARY_PATH)LX_Library.o

@@ -21,7 +21,7 @@
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Random.hpp>
-#include <LunatiX/LX_Image.hpp>
+#include <LunatiX/LX_Texture.hpp>
 
 using namespace LX_Random;
 
