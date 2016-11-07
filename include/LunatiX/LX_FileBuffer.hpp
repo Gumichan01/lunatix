@@ -67,7 +67,6 @@ class LX_FileBuffer
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
     // private function
-    //void * getSurfaceFromBuffer_() const;       // used by LX_Graphics::LX_Texture
     void * getFontFromBuffer_(int size) const;  // used by LX_TrueTypeFont::LX_Font
 
 public :

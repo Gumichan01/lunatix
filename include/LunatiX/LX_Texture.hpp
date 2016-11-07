@@ -73,7 +73,6 @@ class LX_Texture
 
     LX_Texture(LX_Texture&);
     LX_Texture& operator =(LX_Texture&);
-    SDL_Texture * loadTexture_(const std::string& filename, LX_Win::LX_Window& w);
 
 protected:
 

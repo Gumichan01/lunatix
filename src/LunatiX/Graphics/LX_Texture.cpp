@@ -81,7 +81,7 @@ namespace LX_Graphics
 
 /* LX_Texture */
 
-/// @todo protected zero-argument construtor (useful?)
+//  protected zero-argument construtor
 LX_Texture::LX_Texture(LX_Win::LX_Window& w, uint32_t format)
     : _texture(nullptr), _win(w), _format(format) {}
 
@@ -94,7 +94,7 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
-    _texture = loadTexture_(filename,_win);
+    _texture = loadTexture_(filename,format, w._renderer);
 }
 
 

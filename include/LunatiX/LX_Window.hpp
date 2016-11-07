@@ -36,6 +36,7 @@ class LX_Sprite;
 class LX_StreamingTexture;
 class LX_AnimatedSprite;
 class LX_TextTexture;
+class LX_BufferedImage;
 };
 
 namespace LX_TrueTypeFont

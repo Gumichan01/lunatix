@@ -119,12 +119,6 @@ public:
 };
 
 
-/// @todo Used by LX_Texture and sub-classes (useful?)
-/**void * LX_FileBuffer::getSurfaceFromBuffer_() const
-{
-    return _bimpl->getSurfaceFromBuffer();
-}*/
-
 // Used by LX_Font
 void * LX_FileBuffer::getFontFromBuffer_(int size) const
 {
