@@ -35,7 +35,7 @@ class LX_Texture;
 class LX_Sprite;
 class LX_StreamingTexture;
 class LX_AnimatedSprite;
-class LX_TextImage;
+class LX_TextTexture;
 };
 
 namespace LX_TrueTypeFont
@@ -151,7 +151,7 @@ class LX_Window
     friend class LX_Graphics::LX_Sprite;
     friend class LX_Graphics::LX_StreamingTexture;
     friend class LX_Graphics::LX_AnimatedSprite;
-    friend class LX_Graphics::LX_TextImage;
+    friend class LX_Graphics::LX_TextTexture;
     friend class LX_TrueTypeFont::LX_Font;
 
     SDL_Window *_window;        /* The internal window structure        */

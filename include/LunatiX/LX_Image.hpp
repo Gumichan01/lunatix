@@ -424,12 +424,12 @@ public:
 
 
 /**
-*   @class LX_TextImage
+*   @class LX_TextTexture
 *   @brief The text texture
 *
 *   This abstract class describes a texture build from a text.
 */
-class LX_TextImage: public LX_Texture
+class LX_TextTexture: public LX_Texture
 {
 
 protected:
@@ -444,7 +444,7 @@ protected:
 public:
 
     /**
-    *   @fn LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    *   @fn LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
     *                    uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
@@ -454,11 +454,11 @@ public:
     *               See LX_Texture for more information
     *
     */
-    LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                  uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
-    *   @fn LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    *   @fn LX_TextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
     *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
@@ -470,10 +470,10 @@ public:
     *               See LX_Texture for more information
     *
     */
-    LX_TextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_TextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                  LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
     /**
-    *   @fn LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    *   @fn LX_TextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
     *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
@@ -485,7 +485,7 @@ public:
     *               See LX_Texture for more information
     *
     */
-    LX_TextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_TextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                  LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
@@ -565,12 +565,12 @@ public:
     virtual void setSize(unsigned int sz) = 0;
 
     /// Destructor
-    virtual ~LX_TextImage();
+    virtual ~LX_TextTexture();
 };
 
 
 /**
-*   @class LX_SolidTextImage
+*   @class LX_SolidTextTexture
 *   @brief The solid text texture
 *
 *   This class describes a solid text texture.
@@ -578,7 +578,7 @@ public:
 *
 *   Using this class for drawing text is fast.
 */
-class LX_SolidTextImage: public LX_TextImage
+class LX_SolidTextTexture: public LX_TextTexture
 {
 protected:
 
@@ -587,15 +587,15 @@ protected:
 public:
 
     /// Constructor without the text
-    LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+    LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                       uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_SolidTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_SolidTextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
-    LX_SolidTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_SolidTextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
@@ -603,12 +603,12 @@ public:
     virtual void setSize(unsigned int sz);
 
     /// Destructor
-    ~LX_SolidTextImage() = default;
+    ~LX_SolidTextTexture() = default;
 };
 
 
 /**
-*   @class LX_ShadedTextImage
+*   @class LX_ShadedTextTexture
 *   @brief The shaded text texture
 *
 *   This class describes a shaded text texture.
@@ -618,7 +618,7 @@ public:
 *   By default, at instantiation, the background colour is black, bu it can be
 *   set using LX_ShadedImage::setColor()
 */
-class LX_ShadedTextImage: public LX_TextImage
+class LX_ShadedTextTexture: public LX_TextTexture
 {
     LX_Colour _bgcolour;
 
@@ -629,16 +629,16 @@ protected:
 public:
 
     /// Constructor without the text
-    LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_ShadedTextImage(std::string text, unsigned int sz,
+    LX_ShadedTextTexture(std::string text, unsigned int sz,
                        LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
-    LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
+    LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                        LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
@@ -683,12 +683,12 @@ public:
     void setBgColor(LX_Colour c);
 
     /// Destructor
-    ~LX_ShadedTextImage() = default;
+    ~LX_ShadedTextTexture() = default;
 };
 
 
 /**
-*   @class LX_BlendedTextImage
+*   @class LX_BlendedTextTexture
 *   @brief The blended text texture
 *
 *   This class describes a blended text texture.
@@ -698,7 +698,7 @@ public:
 *   Using this class for drawing text should be slow, in particular if
 *   you call LX_BlendedImage::setText() and LX_BlendedImage::setSize() frequently.
 */
-class LX_BlendedTextImage: public LX_TextImage
+class LX_BlendedTextTexture: public LX_TextTexture
 {
 protected:
 
@@ -707,15 +707,15 @@ protected:
 public:
 
     /// Constructor without the text
-    LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
+    LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                         uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_BlendedTextImage(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_BlendedTextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
-    LX_BlendedTextImage(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
+    LX_BlendedTextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
@@ -723,7 +723,7 @@ public:
     virtual void setSize(unsigned int sz);
 
     /// Destructor
-    ~LX_BlendedTextImage() = default;
+    ~LX_BlendedTextTexture() = default;
 };
 
 };

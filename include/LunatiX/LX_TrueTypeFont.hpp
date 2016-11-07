@@ -45,7 +45,7 @@ class LX_FileBuffer;
 
 namespace LX_Graphics
 {
-class LX_TextImage;
+class LX_TextTexture;
 }
 
 

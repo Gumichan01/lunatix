@@ -91,7 +91,7 @@ void test_SolidText()
     LX_Log::log("Load a solid text image and display it");
 
     {
-        LX_Graphics::LX_SolidTextImage simg(font,win);
+        LX_Graphics::LX_SolidTextTexture simg(font,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setText(str,32);
@@ -145,7 +145,7 @@ void test_ShadedText()
     LX_Log::log("Load a shaded text image and display it");
 
     {
-        LX_Graphics::LX_ShadedTextImage simg(str,32,font,bg,win);
+        LX_Graphics::LX_ShadedTextTexture simg(str,32,font,bg,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setText(str,bg,32);
@@ -198,7 +198,7 @@ void test_BlendedText()
     LX_Log::log("Load a solid text image and display it");
 
     {
-        LX_Graphics::LX_BlendedTextImage simg(font,win);
+        LX_Graphics::LX_BlendedTextTexture simg(font,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setText(str,32);

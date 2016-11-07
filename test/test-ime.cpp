@@ -21,7 +21,7 @@ public:
     {
         if(update)
         {
-            LX_Graphics::LX_BlendedTextImage img(_font,_w);
+            LX_Graphics::LX_BlendedTextTexture img(_font,_w);
             _w.clearWindow();
 
             if(!u8str.utf8_empty())

@@ -104,7 +104,7 @@ class LX_TextInput_;
 *
 *           void operator ()(UTF8String& u8str)
 *           {
-*               LX_Graphics::LX_BlendedTextImage img(_font,_w);
+*               LX_Graphics::LX_BlendedTextTexture img(_font,_w);
 *
 *               _w.clearWindow();
 *

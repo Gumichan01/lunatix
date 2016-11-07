@@ -368,83 +368,83 @@ LX_StreamingTexture::~LX_StreamingTexture()
 
 
 
-/* LX_TextImage */
+/* LX_TextTexture */
 
-LX_TextImage::LX_TextImage(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
     : LX_Texture(w,format), _text(""), _font(font), _size(0),_dimension({0,0,0,0}) {}
 
 
-LX_TextImage::LX_TextImage(std::string text, unsigned int sz,
+LX_TextTexture::LX_TextTexture(std::string text, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
-    : LX_TextImage(UTF8string(text),sz,font,w,format) {}
+    : LX_TextTexture(UTF8string(text),sz,font,w,format) {}
 
 
-LX_TextImage::LX_TextImage(const UTF8string& text, unsigned int sz,
+LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
                            LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            uint32_t format)
     : LX_Texture(w,format), _text(text), _font(font), _size(sz),_dimension({0,0,0,0}) {}
 
 
-void LX_TextImage::draw()
+void LX_TextTexture::draw()
 {
     draw(0.0);
 }
 
 
-void LX_TextImage::draw(const double angle)
+void LX_TextTexture::draw(const double angle)
 {
     draw(angle,LX_MIRROR_NONE);
 }
 
 
-void LX_TextImage::draw(const double angle, const short mirror)
+void LX_TextTexture::draw(const double angle, const short mirror)
 {
     SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
-const UTF8string LX_TextImage::getText() const
+const UTF8string LX_TextTexture::getText() const
 {
     return _text;
 }
 
-void LX_TextImage::setPosition(int x, int y)
+void LX_TextTexture::setPosition(int x, int y)
 {
     _dimension.x = x;
     _dimension.y = y;
 }
 
 
-LX_TextImage::~LX_TextImage() {}
+LX_TextTexture::~LX_TextTexture() {}
 
 
 
-/* LX_SolidTextImage */
+/* LX_SolidTextTexture */
 
-LX_SolidTextImage::LX_SolidTextImage(LX_TrueTypeFont::LX_Font& font,
+LX_SolidTextTexture::LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font,
                                      LX_Win::LX_Window& w, uint32_t format)
-    : LX_TextImage(font,w,format) {}
+    : LX_TextTexture(font,w,format) {}
 
 
-LX_SolidTextImage::LX_SolidTextImage(std::string text, unsigned int sz,
+LX_SolidTextTexture::LX_SolidTextTexture(std::string text, unsigned int sz,
                                      LX_TrueTypeFont::LX_Font& font,
                                      LX_Win::LX_Window& w, uint32_t format)
-    : LX_SolidTextImage(UTF8string(text),sz,font,w,format) {}
+    : LX_SolidTextTexture(UTF8string(text),sz,font,w,format) {}
 
 
-LX_SolidTextImage::LX_SolidTextImage(const UTF8string& text, unsigned int sz,
+LX_SolidTextTexture::LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                                      LX_TrueTypeFont::LX_Font& font,
                                      LX_Win::LX_Window& w,uint32_t format)
-    : LX_TextImage(text,sz,font,w,format)
+    : LX_TextTexture(text,sz,font,w,format)
 {
     _texture = _font.drawSolidText(_text,_size,_win);
     _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 
-void LX_SolidTextImage::updateTexture_()
+void LX_SolidTextTexture::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
     _texture = _font.drawSolidText(_text,_size,_win);
@@ -452,20 +452,20 @@ void LX_SolidTextImage::updateTexture_()
 }
 
 
-void LX_SolidTextImage::setText(std::string text, unsigned int sz)
+void LX_SolidTextTexture::setText(std::string text, unsigned int sz)
 {
     setText(UTF8string(text),sz);
 }
 
 
-void LX_SolidTextImage::setText(const UTF8string& text, unsigned int sz)
+void LX_SolidTextTexture::setText(const UTF8string& text, unsigned int sz)
 {
     _text = text;
     _size = sz;
     updateTexture_();
 }
 
-void LX_SolidTextImage::setSize(unsigned int sz)
+void LX_SolidTextTexture::setSize(unsigned int sz)
 {
     _size = sz;
     updateTexture_();
@@ -473,29 +473,29 @@ void LX_SolidTextImage::setSize(unsigned int sz)
 
 
 
-/* LX_ShadedTextImage */
+/* LX_ShadedTextTexture */
 
-LX_ShadedTextImage::LX_ShadedTextImage(LX_TrueTypeFont::LX_Font& font,
+LX_ShadedTextTexture::LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font,
                                        LX_Win::LX_Window& w, uint32_t format)
-    : LX_TextImage(font,w,format), _bgcolour({0,0,0,0}) {}
+    : LX_TextTexture(font,w,format), _bgcolour({0,0,0,0}) {}
 
 
-LX_ShadedTextImage::LX_ShadedTextImage(std::string text, unsigned int sz,
+LX_ShadedTextTexture::LX_ShadedTextTexture(std::string text, unsigned int sz,
                                        LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
                                        LX_Win::LX_Window& w, uint32_t format)
-    : LX_ShadedTextImage(UTF8string(text),sz,font,c,w,format) {}
+    : LX_ShadedTextTexture(UTF8string(text),sz,font,c,w,format) {}
 
 
-LX_ShadedTextImage::LX_ShadedTextImage(const UTF8string& text, unsigned int sz,
+LX_ShadedTextTexture::LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                                        LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
                                        LX_Win::LX_Window& w,uint32_t format)
-    : LX_TextImage(text,sz,font,w,format), _bgcolour(c)
+    : LX_TextTexture(text,sz,font,w,format), _bgcolour(c)
 {
     updateTexture_();
 }
 
 
-void LX_ShadedTextImage::updateTexture_()
+void LX_ShadedTextTexture::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
     _texture = _font.drawShadedText(_text,_size,_bgcolour,_win);
@@ -503,26 +503,26 @@ void LX_ShadedTextImage::updateTexture_()
 }
 
 
-void LX_ShadedTextImage::setText(std::string text, unsigned int sz)
+void LX_ShadedTextTexture::setText(std::string text, unsigned int sz)
 {
     setText(UTF8string(text),sz);
 }
 
 
-void LX_ShadedTextImage::setText(const UTF8string& text, unsigned int sz)
+void LX_ShadedTextTexture::setText(const UTF8string& text, unsigned int sz)
 {
     const LX_Colour GREY = {127,127,127,255};
     setText(text,GREY,sz);
 }
 
 
-void LX_ShadedTextImage::setText(std::string text, LX_Colour c, unsigned int sz)
+void LX_ShadedTextTexture::setText(std::string text, LX_Colour c, unsigned int sz)
 {
     setText(UTF8string(text),c,sz);
 }
 
 
-void LX_ShadedTextImage::setText(const UTF8string& text, LX_Colour c, unsigned int sz)
+void LX_ShadedTextTexture::setText(const UTF8string& text, LX_Colour c, unsigned int sz)
 {
     _text = text;
     _size = sz;
@@ -531,43 +531,43 @@ void LX_ShadedTextImage::setText(const UTF8string& text, LX_Colour c, unsigned i
 }
 
 
-void LX_ShadedTextImage::setSize(unsigned int sz)
+void LX_ShadedTextTexture::setSize(unsigned int sz)
 {
     _size = sz;
     updateTexture_();
 }
 
-void LX_ShadedTextImage::setBgColor(LX_Colour c)
+void LX_ShadedTextTexture::setBgColor(LX_Colour c)
 {
     _bgcolour = c;
     updateTexture_();
 }
 
 
-/* LX_BlendedTextImage */
+/* LX_BlendedTextTexture */
 
-LX_BlendedTextImage::LX_BlendedTextImage(LX_TrueTypeFont::LX_Font& font,
+LX_BlendedTextTexture::LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,
                                          LX_Win::LX_Window& w, uint32_t format)
-    : LX_TextImage(font,w,format) {}
+    : LX_TextTexture(font,w,format) {}
 
 
-LX_BlendedTextImage::LX_BlendedTextImage(std::string text, unsigned int sz,
+LX_BlendedTextTexture::LX_BlendedTextTexture(std::string text, unsigned int sz,
                                          LX_TrueTypeFont::LX_Font& font,
                                          LX_Win::LX_Window& w, uint32_t format)
-    : LX_BlendedTextImage(UTF8string(text),sz,font,w,format) {}
+    : LX_BlendedTextTexture(UTF8string(text),sz,font,w,format) {}
 
 
-LX_BlendedTextImage::LX_BlendedTextImage(const UTF8string& text, unsigned int sz,
+LX_BlendedTextTexture::LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                                          LX_TrueTypeFont::LX_Font& font,
                                          LX_Win::LX_Window& w,uint32_t format)
-    : LX_TextImage(text,sz,font,w,format)
+    : LX_TextTexture(text,sz,font,w,format)
 {
     _texture = _font.drawBlendedText(_text,_size,_win);
     _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
 }
 
 
-void LX_BlendedTextImage::updateTexture_()
+void LX_BlendedTextTexture::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
     _texture = _font.drawBlendedText(_text,_size,_win);
@@ -575,20 +575,20 @@ void LX_BlendedTextImage::updateTexture_()
 }
 
 
-void LX_BlendedTextImage::setText(std::string text, unsigned int sz)
+void LX_BlendedTextTexture::setText(std::string text, unsigned int sz)
 {
     setText(UTF8string(text),sz);
 }
 
 
-void LX_BlendedTextImage::setText(const UTF8string& text, unsigned int sz)
+void LX_BlendedTextTexture::setText(const UTF8string& text, unsigned int sz)
 {
     _text = text;
     _size = sz;
     updateTexture_();
 }
 
-void LX_BlendedTextImage::setSize(unsigned int sz)
+void LX_BlendedTextTexture::setSize(unsigned int sz)
 {
     _size = sz;
     updateTexture_();
