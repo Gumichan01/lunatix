@@ -86,7 +86,7 @@ public :
     */
     LX_FileBuffer(const std::string& filename, uint32_t offset=0, uint32_t sz=0);
     /**
-    *   @fn LX_FileBuffer(const UTF8string& filename)
+    *   @fn explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset=0, uint32_t sz=0)
     *   @brief Constructor
     *
     *   Read the file given in argument and put it in the buffer
