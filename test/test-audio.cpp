@@ -180,33 +180,56 @@ void test_music()
 {
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST music = ");
     std::string s = "data/test.mp3";
-    LX_Mixer::LX_Music *music = nullptr;
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: %s",s.c_str());
 
     try
     {
-        music = new LX_Mixer::LX_Music(s);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music launched");
+        LX_Mixer::LX_Music music(s);
+        const libtagpp::Tag& tag = music.getInfo();
+
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music loaded");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play music");
 
-        if(music->play())
+        LX_Win::LX_WindowInfo info;
+        LX_Win::LX_initWindowInfo(info);
+        info.w = 256;
+        info.h = 256;
+        LX_Win::LX_Window w(info);
+
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Get the cover of the title");
+        LX_Graphics::LX_BufferedImage * bf =
+            LX_FileIO::LX_FileBuffer(s, tag.getImageMetaData()._img_offset,
+                                     tag.getImageMetaData()._img_size).loadBufferedImage();
+        LX_Graphics::LX_Sprite * cover = bf->generateSprite(w);
+        delete bf;
+
+        if(cover->isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - cover opened");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s",LX_GetError());
+
+        w.clearWindow();
+        LX_AABB box = {0,0,info.w,info.h};
+        cover->draw(&box);
+        w.update();
+
+        if(music.play())
         {
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - play music OK");
             SDL_Delay(4000);
-            music->pause();
+            music.pause();
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music paused during 1 second");
             SDL_Delay(1000);
-            music->pause();
+            music.pause();
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music resumed");
             SDL_Delay(2000);
-            music->stop();
+            music.stop();
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music stopped");
         }
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - play music KO");
 
-        const libtagpp::Tag& tag = music->getInfo();
         LX_Log::log("================================");
         LX_Log::log("Title - %s",tag.title());
         LX_Log::log("Artist - %s",tag.artist());
@@ -222,7 +245,6 @@ void test_music()
         LX_Log::log("Format - %s", tag.properties().format.c_str());
         LX_Log::log("================================");
 
-        delete music;
     }
     catch(LX_Mixer::LX_MusicException& e)
     {
@@ -233,9 +255,9 @@ void test_music()
 
     try
     {
-        music = new LX_Mixer::LX_Music("");
+        LX_Mixer::LX_Music *mus = new LX_Mixer::LX_Music("");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music launched, it should not");
-        delete music;
+        delete mus;
     }
     catch(...)
     {

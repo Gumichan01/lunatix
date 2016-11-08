@@ -20,24 +20,26 @@
 */
 
 #include <LunatiX/LX_Music.hpp>
-#include <LunatiX/LX_Texture.hpp>
-#include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_Texture.hpp>
+#include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <SDL2/SDL_mixer.h>
 
+#define S32(x) static_cast<uint32_t>(x)
 
 namespace
 {
-
-/// @todo (#2#) complete the implementation of this private function ↓
 LX_Graphics::
 LX_BufferedImage *_loadImage(std::string file,
                              const libtagpp::ImgMetaData& imgdata)
 {
-    //if(imgdata._img_offset <= 0 && imgdata._img_size == 0)
+    if(imgdata._img_offset <= 0 && imgdata._img_size == 0)
         return nullptr;
-}
 
+    return LX_FileIO::LX_FileBuffer(file, S32(imgdata._img_offset),
+                                    S32(imgdata._img_size)).loadBufferedImage();
+}
 };
 
 namespace LX_Mixer
