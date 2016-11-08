@@ -134,23 +134,27 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a image file using the file buffer");
         LX_FileIO::LX_FileBuffer b(name);
-        LX_Graphics::LX_Sprite img(b,*win);
+        LX_Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
+        LX_Graphics::LX_Sprite *img = bf->generateSprite(*win);
 
-        if(img.isOpen())
+        if(img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from memory");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from memory: should be loaded");
+
+        delete img;
     }
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
-        LX_FileIO::LX_FileBuffer b(mname);
-        LX_Graphics::LX_Sprite img(b,*win);
+        LX_Graphics::LX_Sprite *img = LX_Graphics::LX_BufferedImage(mname).generateSprite(*win);
 
-        if(!img.isOpen())
+        if(!img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - failure expected");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
+
+        delete img;
     }
 
     LX_Log::log("|> LX_StreamingTexture");
@@ -160,9 +164,9 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a surface");
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"std::string argument");
-        LX_BufferedImage data(name,*win);
+        LX_BufferedImage data(name);
 
-        if(data.isOpen())
+        if(data.isLoaded())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
@@ -170,9 +174,9 @@ void test_image(LX_Win::LX_Window *win)
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
-        LX_BufferedImage data(u8name,*win);
+        LX_BufferedImage data(u8name);
 
-        if(data.isOpen())
+        if(data.isLoaded())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
@@ -181,20 +185,22 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"FileBuffer argument");
         LX_FileIO::LX_FileBuffer b(name);
-        LX_BufferedImage data(b,*win);
+        LX_BufferedImage *data = b.loadBufferedImage();
 
-        if(data.isOpen())
+        if(data->isLoaded())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+
+        delete data;
     }
 
     /// ERROR CASE
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
     {
-        LX_BufferedImage data("<invalid>",*win);
+        LX_BufferedImage data("<invalid>");
 
-        if(data.isOpen())
+        if(data.isLoaded())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected");
@@ -202,10 +208,9 @@ void test_image(LX_Win::LX_Window *win)
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
     {
-        LX_FileIO::LX_FileBuffer b(mname);
-        LX_BufferedImage data(b,*win);
+        LX_BufferedImage data(mname);
 
-        if(data.isOpen())
+        if(data.isLoaded())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected");
@@ -253,7 +258,7 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a streaming image");
     {
         LX_StreamingTexture img(*win);
-        LX_BufferedImage data(name,*win);
+        LX_BufferedImage data(name);
         LX_AABB box = {256,256,256,128};
 
         if(img.isOpen())
@@ -303,25 +308,27 @@ void test_image(LX_Win::LX_Window *win)
     }
 
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a sprite sheet file using the file buffer");
-        LX_FileIO::LX_FileBuffer b(sp_str);
-        LX_Graphics::LX_AnimatedSprite img(b,*win,c,0);
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a sprite sheet file using the bufered image");
+        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0);
 
-        if(img.isOpen())
+        if(img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded from memory");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - animated sprite from memory: should be loaded");
+
+        delete img;
     }
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
-        LX_FileIO::LX_FileBuffer b(mname);
-        LX_Graphics::LX_AnimatedSprite img(b,*win,c,0);
+        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0);
 
-        if(!img.isOpen())
+        if(!img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite failure expected");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
+
+        delete img;
     }
 
     {

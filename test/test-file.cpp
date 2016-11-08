@@ -17,6 +17,7 @@ void test_read2(void);
 void test_write(void);
 void test_tellSeek(void);
 void test_buffer(void);
+void test_buffer2(void);
 void test_tmp(void);
 void test_fs(void);
 void test_getChunk(void);
@@ -44,6 +45,7 @@ int main(int argc, char **argv)
     test_read2();
     test_tellSeek();
     test_buffer();
+    test_buffer2();
     test_tmp();
     test_fs();
     test_getChunk();
@@ -276,7 +278,7 @@ void test_tellSeek(void)
 
 void test_buffer(void)
 {
-    LX_Log::log(" = TEST Buffer = ");
+    LX_Log::log(" = TEST Buffer #1 = ");
 
     try
     {
@@ -308,6 +310,47 @@ void test_buffer(void)
     {
         cerr << "FAILURE - Cannot load " << str1
              << "; Expected : a valid refence; Got : " << e.what() << endl;
+    }
+
+    LX_Log::log(" = END TEST = ");
+}
+
+void test_buffer2(void)
+{
+    LX_Log::log(" = TEST Buffer #2 = ");
+
+    // Valid file
+    string str1 = "data/lunatix-logo.png";
+    string str2 = "data/bullet.png";
+    uint32_t off1 = 112, sz1 = 20;
+    uint32_t off2 = 65536, sz2 = 20;
+
+    try
+    {
+        cout << "INFO - Open " << str1 << " at " << off1 << " and read "
+             << sz1 << " bytes ..." << endl;
+        LX_FileBuffer *f = new LX_FileBuffer(str1.c_str(),off1, sz1);
+        cout << "SUCCESS - The following file was loaded : " << str1 << endl;
+        delete f;
+    }
+    catch(IOException &e)
+    {
+        cerr << "FAILURE - Cannot load " << str1
+             << "; Expected : a valid refence; Got : " << e.what() << endl;
+    }
+
+    // Ofeest too big
+    try
+    {
+        cout << "INFO - Open " << str1 << " at " << off1 << " and read "
+             << sz2 << " bytes ..." << endl;
+        LX_FileBuffer *f = new LX_FileBuffer(str2.c_str(),off2, sz2);
+        cout << "FAILURE - it should fail: " << str2 << endl;
+        delete f;
+    }
+    catch(IOException &e)
+    {
+        cerr << "SUCCESS - Exception expected " << endl;
     }
 
     LX_Log::log(" = END TEST = ");
