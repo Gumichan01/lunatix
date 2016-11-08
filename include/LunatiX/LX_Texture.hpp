@@ -28,7 +28,6 @@
 struct SDL_Surface;
 struct SDL_Texture;
 
-
 namespace LX_FileIO
 {
 class LX_FileBuffer;

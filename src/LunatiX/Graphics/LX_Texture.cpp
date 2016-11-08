@@ -19,13 +19,11 @@
 */
 
 #include <LunatiX/LX_Texture.hpp>
-#include <LunatiX/LX_FileBuffer.hpp>
 #include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_render.h>
 
 
 namespace
@@ -182,22 +180,23 @@ LX_Sprite::~LX_Sprite() {}
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
-    : LX_Sprite(t,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-      _btime(0), _iteration(0), _started(false) {}
+    : LX_Sprite(t,w,format), _coordinates(coord), _SZ(coord.size()),
+      _delay(delay), _btime(0), _iteration(0), _started(false) {}
 
 
-LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
+LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
+                                     LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
-    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-      _btime(0), _iteration(0), _started(false) {}
+    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()),
+      _delay(delay), _btime(0), _iteration(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
-    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()), _delay(delay),
-      _btime(0), _iteration(0), _started(false) {}
+    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()),
+      _delay(delay), _btime(0), _iteration(0), _started(false) {}
 
 
 bool LX_AnimatedSprite::isOpen() const
@@ -268,14 +267,14 @@ LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
     return new LX_Texture(SDL_CreateTextureFromSurface(w._renderer,_surface),w);
 }
 
-LX_Texture * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
+LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
 {
     return new LX_Sprite(SDL_CreateTextureFromSurface(w._renderer,_surface),w);
 }
 
-LX_Texture * LX_BufferedImage::generateAnimatedSprite(LX_Win::LX_Window& w,
-                                                      const std::vector<LX_AABB>& coord,
-                                                      const uint32_t delay) const
+LX_AnimatedSprite * LX_BufferedImage::
+generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
+                       const uint32_t delay) const
 {
     return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(w._renderer,_surface),
                                  w, coord, delay);
@@ -318,7 +317,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
     }
 
     if(width <= 0 || height <= 0)
-        LX_SetError("LX_StreamingTexture - bad dimensions");
+        LX_SetError("LX_StreamingTexture - bad dimensions");    // Must be unreachable
     else
     {
         _screen  = SDL_CreateRGBSurface(0,width,height,bpp,r,g,b,a);
@@ -364,20 +363,20 @@ LX_StreamingTexture::~LX_StreamingTexture()
 
 /* LX_TextTexture */
 
-LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                           uint32_t format)
+LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
+                               LX_Win::LX_Window& w, uint32_t format)
     : LX_Texture(w,format), _text(""), _font(font), _size(0),_dimension({0,0,0,0}) {}
 
 
 LX_TextTexture::LX_TextTexture(std::string text, unsigned int sz,
-                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                           uint32_t format)
+                               LX_TrueTypeFont::LX_Font& font,
+                               LX_Win::LX_Window& w, uint32_t format)
     : LX_TextTexture(UTF8string(text),sz,font,w,format) {}
 
 
 LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
-                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                           uint32_t format)
+                               LX_TrueTypeFont::LX_Font& font,
+                               LX_Win::LX_Window& w, uint32_t format)
     : LX_Texture(w,format), _text(text), _font(font), _size(sz),_dimension({0,0,0,0}) {}
 
 
@@ -417,20 +416,23 @@ LX_TextTexture::~LX_TextTexture() {}
 
 /* LX_SolidTextTexture */
 
-LX_SolidTextTexture::LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w, uint32_t format)
+LX_SolidTextTexture::
+LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    uint32_t format)
     : LX_TextTexture(font,w,format) {}
 
 
-LX_SolidTextTexture::LX_SolidTextTexture(std::string text, unsigned int sz,
-                                     LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w, uint32_t format)
+LX_SolidTextTexture::
+LX_SolidTextTexture(std::string text, unsigned int sz,
+                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    uint32_t format)
     : LX_SolidTextTexture(UTF8string(text),sz,font,w,format) {}
 
 
-LX_SolidTextTexture::LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
-                                     LX_TrueTypeFont::LX_Font& font,
-                                     LX_Win::LX_Window& w,uint32_t format)
+LX_SolidTextTexture::
+LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
+                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    uint32_t format)
     : LX_TextTexture(text,sz,font,w,format)
 {
     _texture = _font.drawSolidText(_text,_size,_win);
@@ -469,20 +471,23 @@ void LX_SolidTextTexture::setSize(unsigned int sz)
 
 /* LX_ShadedTextTexture */
 
-LX_ShadedTextTexture::LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font,
-                                       LX_Win::LX_Window& w, uint32_t format)
+LX_ShadedTextTexture::
+LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                     uint32_t format)
     : LX_TextTexture(font,w,format), _bgcolour({0,0,0,0}) {}
 
 
-LX_ShadedTextTexture::LX_ShadedTextTexture(std::string text, unsigned int sz,
-                                       LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
-                                       LX_Win::LX_Window& w, uint32_t format)
+LX_ShadedTextTexture::
+LX_ShadedTextTexture(std::string text, unsigned int sz,
+                     LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
+                     LX_Win::LX_Window& w, uint32_t format)
     : LX_ShadedTextTexture(UTF8string(text),sz,font,c,w,format) {}
 
 
-LX_ShadedTextTexture::LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
-                                       LX_TrueTypeFont::LX_Font& font,LX_Colour& c,
-                                       LX_Win::LX_Window& w,uint32_t format)
+LX_ShadedTextTexture::
+LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
+                     LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
+                     LX_Win::LX_Window& w,uint32_t format)
     : LX_TextTexture(text,sz,font,w,format), _bgcolour(c)
 {
     updateTexture_();
@@ -540,20 +545,23 @@ void LX_ShadedTextTexture::setBgColor(LX_Colour c)
 
 /* LX_BlendedTextTexture */
 
-LX_BlendedTextTexture::LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,
-                                         LX_Win::LX_Window& w, uint32_t format)
+LX_BlendedTextTexture::
+LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                      uint32_t format)
     : LX_TextTexture(font,w,format) {}
 
 
-LX_BlendedTextTexture::LX_BlendedTextTexture(std::string text, unsigned int sz,
-                                         LX_TrueTypeFont::LX_Font& font,
-                                         LX_Win::LX_Window& w, uint32_t format)
+LX_BlendedTextTexture::
+LX_BlendedTextTexture(std::string text, unsigned int sz,
+                      LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                      uint32_t format)
     : LX_BlendedTextTexture(UTF8string(text),sz,font,w,format) {}
 
 
-LX_BlendedTextTexture::LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
-                                         LX_TrueTypeFont::LX_Font& font,
-                                         LX_Win::LX_Window& w,uint32_t format)
+LX_BlendedTextTexture::
+LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
+                      LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                      uint32_t format)
     : LX_TextTexture(text,sz,font,w,format)
 {
     _texture = _font.drawBlendedText(_text,_size,_win);
