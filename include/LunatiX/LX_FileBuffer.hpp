@@ -66,31 +66,46 @@ class LX_FileBuffer
 public :
 
     /**
-    *   @fn LX_FileBuffer(const std::string& filename)
+    *   @fn LX_FileBuffer(const std::string& filename, uint32_t offset=0, uint32_t sz=0)
     *   @brief Constructor
     *
-    *   Build the instance of the file buffer
+    *   Read the file given in argument and put it in the buffer
     *
-    *   @param [in] filename The file to generate the buffer
+    *   @param [in] filename The file to read
+    *   @param [in] offset The position in the file to start reading (default value: 0)
+    *   @param [in] sz The number of bytes to put in the buffer (default value: 0)
+    *
+    *   @note 1 — By default, the entire file is read from the beginning.
+    *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
+    *
+    *   @warning If the value of *offset* is greater than the size of the file,
+    *            then an IOException will be thrown
     *
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
-    *
     */
-    LX_FileBuffer(const std::string& filename);
+    LX_FileBuffer(const std::string& filename, uint32_t offset=0, uint32_t sz=0);
     /**
     *   @fn LX_FileBuffer(const UTF8string& filename)
     *   @brief Constructor
     *
-    *   Build the instance of the file buffer
+    *   Read the file given in argument and put it in the buffer
     *
-    *   @param [in] filename The file to generate the buffer
+    *   @param [in] filename The file to read
+    *   @param [in] offset The position in the file to start reading (default value: 0)
+    *   @param [in] sz The number of bytes to put in the buffer (default value: 0)
+    *
+    *   @note 1 — By default, the entire file is read from the beginning.
+    *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
+    *
+    *   @warning If the value of *offset* is greater than the size of the file,
+    *            then an IOException will be thrown
     *
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    explicit LX_FileBuffer(const UTF8string& filename);
+    explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset=0, uint32_t sz=0);
 
     /**
     *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage() const
@@ -114,9 +129,7 @@ public :
 
     /**
     *   @fn const char * getFilename() const
-    *
     *   Get the name of the file the buffer refers to
-    *
     *   @return The name of the file
     */
     const char * getFilename() const;

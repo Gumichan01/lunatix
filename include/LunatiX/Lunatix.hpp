@@ -21,8 +21,6 @@
 *
 */
 
-/// @todo (#2#) Refactor the classes that uses private implementation
-
 #if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
 #undef __WIN32__
 #define __WIN32__

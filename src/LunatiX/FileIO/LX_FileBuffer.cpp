@@ -29,6 +29,10 @@
 #include <SDL2/SDL_ttf.h>
 #include <new>
 
+#define U64(x) static_cast<uint64_t>(x)
+#define S64(x) static_cast<int64_t>(x)
+
+
 namespace LX_FileIO
 {
 
@@ -48,7 +52,8 @@ class LX_FileBuffer_
 
 public:
 
-    explicit LX_FileBuffer_(const UTF8string& filename) : _name(filename)
+    explicit LX_FileBuffer_(const UTF8string& filename, uint32_t offset, uint32_t sz)
+        : _name(filename)
     {
         LX_File *reader = nullptr;
         std::string str("LX_FileBuffer: " + std::string(_name.utf8_str()) + " - ");
@@ -61,9 +66,19 @@ public:
         if((s = reader->size()) == -1)
             throw IOException(str + "cannot get the size of the file");
 
-        _bufsize = static_cast<uint64_t>(s);
+        // If offset > size of the file → failure
+        if(S64(offset) > s)
+        {
+            reader->close();
+            throw IOException(str + "invalid offset: offset > size of the file");
+        }
 
-        reader->seek(0,LX_SEEK_SET);
+        if(sz == 0)
+            _bufsize = U64(s) - U64(offset);
+        else
+            _bufsize = U64(sz);
+
+        reader->seek(S64(offset),LX_SEEK_SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
 
         if(_buffer == nullptr)
@@ -127,12 +142,14 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const
 
 
 /** LX_Filebuffer — public functions */
-LX_FileBuffer::LX_FileBuffer(const std::string& filename)
-    : LX_FileBuffer(UTF8string(filename)) {}
+LX_FileBuffer::LX_FileBuffer(const std::string& filename, uint32_t offset,
+                             uint32_t sz)
+    : LX_FileBuffer(UTF8string(filename), offset, sz) {}
 
 
-LX_FileBuffer::LX_FileBuffer(const UTF8string& filename)
-    : _bimpl(new LX_FileBuffer_(filename)) {}
+LX_FileBuffer::LX_FileBuffer(const UTF8string& filename,uint32_t offset,
+                             uint32_t sz)
+    : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 
 
 LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage() const
