@@ -98,7 +98,7 @@ public :
     */
     explicit LX_FileBuffer(const UTF8string& filename);
 
-    /// @todo documentation
+    /// @todo (#1#) documentation
     LX_Graphics::LX_BufferedImage * loadBufferedImage() const;
 
     /**

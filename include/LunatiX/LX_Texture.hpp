@@ -370,10 +370,10 @@ public:
     */
     LX_Texture * generateTexture(LX_Win::LX_Window& w) const;
 
-    /// @todo doc
+    /// @todo (#1#) LX_Texture: doc
     LX_Texture * generateSprite(LX_Win::LX_Window& w) const;
 
-    /// @todo doc
+
     LX_Texture * generateAnimatedSprite(LX_Win::LX_Window& w,
                                         const std::vector<LX_AABB>& coord,
                                         const uint32_t delay) const;
