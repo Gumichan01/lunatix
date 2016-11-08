@@ -140,11 +140,11 @@ public:
     *
     */
     LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-             uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constuctor with the filename (UTF-8)
     LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
-             uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn virtual bool isOpen() const
@@ -306,7 +306,7 @@ public:
     *
     *   @param [in] filename The name of the file
     *   @param [in] w The window the animated sprite will be drawn on (see draw())
-    *   @param [in] coord The list of coordinates for each sprite on the spritesheet
+    *   @param [in] coord The list of coordinates for each sprite on the sprite sheet
     *   @param [in] delay The delay to display each sprite of the sprite sheet
     *   @param [in] format Optional argument that specified the format of every sprites
     *
@@ -365,18 +365,37 @@ public:
 
     /**
     *   @fn LX_Texture * generateTexture() const
-    *   Create a texture from the current surface
-    *   @return A new fresh texture (allocated) on success, nullptr otherwise
+    *   Create a texture from the current buffered image
+    *
+    *   @param [in] w The window to link the sprite to (see draw())
+    *   @return A new fresh allocated texture on success, nullptr otherwise
     */
     LX_Texture * generateTexture(LX_Win::LX_Window& w) const;
-
-    /// @todo (#1#) LX_Texture: doc
-    LX_Texture * generateSprite(LX_Win::LX_Window& w) const;
-
-
-    LX_Texture * generateAnimatedSprite(LX_Win::LX_Window& w,
-                                        const std::vector<LX_AABB>& coord,
-                                        const uint32_t delay) const;
+    /**
+    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w) const
+    *   Create a sprite from the current buffered image
+    *
+    *   @param [in] w The window to link the sprite to (see draw())
+    *   @return A new fresh allocated sprite on success, nullptr otherwise
+    */
+    LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
+    /**
+    *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
+    *                                    const std::vector<LX_AABB>& coord,
+    *                                    const uint32_t delay) const
+    *
+    *   Create an animated sprite from the current buffered image
+    *
+    *   @param [in] w The window to link the sprite to (see draw())
+    *   @param [in] coord The list of coordinates for each sprite on the sprite sheet
+    *   @param [in] delay The delay to display each sprite of the sprite sheet
+    *
+    *   @return A new fresh allocated animated sprite on success, nullptr otherwise
+    */
+    LX_AnimatedSprite *
+    generateAnimatedSprite(LX_Win::LX_Window& w,
+                           const std::vector<LX_AABB>& coord,
+                           const uint32_t delay) const;
 
     /// Destructor
     ~LX_BufferedImage();
@@ -465,7 +484,7 @@ public:
     *
     */
     LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                 uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                   uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn LX_TextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
@@ -481,7 +500,7 @@ public:
     *
     */
     LX_TextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                 LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                   LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
     /**
     *   @fn LX_TextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
     *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
@@ -495,8 +514,9 @@ public:
     *               See LX_Texture for more information
     *
     */
-    LX_TextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                 LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_TextTexture(const UTF8string& text, unsigned int sz,
+                   LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                   uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
     /**
@@ -598,15 +618,17 @@ public:
 
     /// Constructor without the text
     LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_SolidTextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                      LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_SolidTextTexture(std::string text, unsigned int sz,
+                        LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
-    LX_SolidTextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                      LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
+                        LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);
@@ -640,17 +662,17 @@ public:
 
     /// Constructor without the text
     LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                       uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                         uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_ShadedTextTexture(std::string text, unsigned int sz,
-                       LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
-                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                         LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
+                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
-                       LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
-                       LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                         LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
+                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);
@@ -718,15 +740,17 @@ public:
 
     /// Constructor without the text
     LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                          uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_BlendedTextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_BlendedTextTexture(std::string text, unsigned int sz,
+                          LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                          uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
-    LX_BlendedTextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                        LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
+                          LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                          uint32_t format=SDL_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);

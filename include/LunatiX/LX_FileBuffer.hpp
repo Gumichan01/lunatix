@@ -98,16 +98,23 @@ public :
     */
     explicit LX_FileBuffer(const UTF8string& filename);
 
-    /// @todo (#1#) documentation
+    /**
+    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage() const
+    *
+    *   Load a buffered image from the file buffer.
+    *
+    *   @return A pointer to new an allocated buffered image on success,
+    *           nullptr if the file buffer is not an image to load.
+    *           Call LX_GetError() for more information.
+    */
     LX_Graphics::LX_BufferedImage * loadBufferedImage() const;
-
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
     *
     *   Load a sample from the current file buffer
     *
-    *   @return A pointer to an LX_Chunk object, nullptr if thhe fil buffer
-    *           is not a sample to load
+    *   @return A pointer to an allocated LX_Chunk object,
+    *           nullptr if the file buffer is not a sample to load
     */
     LX_Mixer::LX_Chunk * loadSample() const;
 
