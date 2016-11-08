@@ -19,8 +19,8 @@
 *
 */
 
-#include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_FileIO.hpp>
 #include <LunatiX/LX_Texture.hpp>
 #include <LunatiX/LX_Chunk.hpp>
 
