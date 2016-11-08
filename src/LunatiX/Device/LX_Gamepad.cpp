@@ -57,60 +57,23 @@ const char * nameOf_(SDL_GameController * controller)
 };
 
 
-class LX_Gamepad_
+struct LX_Gamepad_
 {
     SDL_GameController *_gc;
     SDL_Joystick *_joy;
     std::unique_ptr<LX_Haptic> _haptic;
     bool _closed;
 
+private:
+
     bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
     bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;
     bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
     bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info) const;
 
-public :
+public:
 
     LX_Gamepad_(): _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(true) {}
-
-    void open(int index)
-    {
-        if(index < numberOfDevices() && SDL_IsGameController(index))
-            _gc = SDL_GameControllerOpen(index);
-
-        if(_gc == nullptr)
-        {
-            _joy = SDL_JoystickOpen(index);
-            if(SDL_JoystickIsHaptic(_joy) == 1)
-                _haptic.reset(new LX_Haptic(_joy));
-        }
-        else
-        {
-            if(SDL_JoystickIsHaptic(SDL_GameControllerGetJoystick(_gc)) == 1)
-                _haptic.reset(new LX_Haptic(_gc));
-        }
-        _closed = false;
-    }
-
-    void close()
-    {
-        _haptic.reset();
-
-        if(!_closed)
-        {
-            if(_gc != nullptr)
-            {
-                SDL_GameControllerClose(_gc);
-                _gc = nullptr;
-            }
-            else if(_joy != nullptr)
-            {
-                SDL_JoystickClose(_joy);
-                _joy = nullptr;
-            }
-            _closed = true;
-        }
-    }
 
     bool isConnected() const
     {
@@ -250,13 +213,42 @@ LX_Gamepad::~LX_Gamepad()
 
 void LX_Gamepad::open(int index)
 {
-    _gpimpl->open(index);
+    if(index < numberOfDevices() && SDL_IsGameController(index))
+        _gpimpl->_gc = SDL_GameControllerOpen(index);
+
+    if(_gpimpl->_gc == nullptr)
+    {
+        _gpimpl->_joy = SDL_JoystickOpen(index);
+        if(SDL_JoystickIsHaptic(_gpimpl->_joy) == 1)
+            _gpimpl->_haptic.reset(new LX_Haptic(_gpimpl->_joy));
+    }
+    else
+    {
+        if(SDL_JoystickIsHaptic(SDL_GameControllerGetJoystick(_gpimpl->_gc)) == 1)
+            _gpimpl->_haptic.reset(new LX_Haptic(_gpimpl->_gc));
+    }
+    _gpimpl->_closed = false;
 }
 
 
 void LX_Gamepad::close()
 {
-    _gpimpl->close();
+    _gpimpl->_haptic.reset();
+
+    if(!_gpimpl->_closed)
+    {
+        if(_gpimpl->_gc != nullptr)
+        {
+            SDL_GameControllerClose(_gpimpl->_gc);
+            _gpimpl->_gc = nullptr;
+        }
+        else if(_gpimpl->_joy != nullptr)
+        {
+            SDL_JoystickClose(_gpimpl->_joy);
+            _gpimpl->_joy = nullptr;
+        }
+        _gpimpl->_closed = true;
+    }
 }
 
 

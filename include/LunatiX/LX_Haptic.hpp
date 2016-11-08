@@ -33,7 +33,7 @@ namespace LX_Device
 
 struct LX_Haptic_;
 struct LX_Haptic_common;
-class LX_Gamepad_;
+class LX_Gamepad;
 
 using LX_Joystick = _SDL_Joystick;
 using LX_GameController = _SDL_GameController;
@@ -64,7 +64,7 @@ bool mouseIsHaptic();
 */
 class LX_Haptic
 {
-    friend class LX_Device::LX_Gamepad_;
+    friend class LX_Device::LX_Gamepad;
     std::unique_ptr<LX_Haptic_> _himpl;
 
     LX_Haptic(LX_Haptic& h);
@@ -89,33 +89,24 @@ public :
     *   Create the instance of the haptic system using the index
     *
     *   @param [in] index The index of the device to open
-    *
     */
     explicit LX_Haptic(int index);
 
     /**
     *   @fn virtual bool isOpened() const
-    *
     *   Check if the haptic device is opened
-    *
-    *   @return TRUE is the device is opened, FALSE otherwise
-    *
+    *   @return TRUE is the device is opened, FALSE otherwis
     */
     virtual bool isOpened() const;
     /**
     *   @fn virtual bool rumbleEffectInit()
-    *
     *   Initializes the haptic device for simple rumble playback
-    *
     *   @return TRUE on success, FALSE otherwise
-    *
     */
     virtual bool rumbleEffectInit();
     /**
     *   @fn virtual void rumbleEffectPlay()
-    *
     *   Play the rumble effect with default values
-    *
     */
     virtual void rumbleEffectPlay();
     /**
@@ -126,7 +117,6 @@ public :
     *   @param [in] strength Strength of the rumble to play as a float value
     *          (between 0.0 and 1.0)
     *   @param [in] length Length of the rumble to play in milliseconds
-    *
     */
     virtual void rumbleEffectPlay(float strength, uint32_t length);
 
@@ -135,8 +125,7 @@ public :
     *
     *   Check if an effect is supported by the current device
     *
-    *   @param [in] effect Effect to check
-    *
+    *   @param [in] effect Effect to chec
     *   @return TRUE if the effect is supported. FALSE otherwise
     *
     *   @sa newEffect
@@ -148,7 +137,6 @@ public :
     *   Add a new effect
     *
     *   @param [in] effect Properties of the effect to create
-    *
     *   @return The id of the effect on success or -1 on error.
     *
     *   @sa runEffect
