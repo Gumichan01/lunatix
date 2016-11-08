@@ -14,7 +14,8 @@ using namespace LX_Event;
 
 int main(int argc, char** argv)
 {
-    UNUSED(argc);UNUSED(argv);
+    UNUSED(argc);
+    UNUSED(argv);
     LX_AABB position = {0,0,256,256};
     LX_EventHandler event;
     bool go = true;

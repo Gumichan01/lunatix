@@ -24,10 +24,6 @@
 
 static LX_Win::LX_WindowManager *win_instance = nullptr;
 
-/*namespace
-{
-
-}*/
 
 namespace LX_Win
 {
@@ -116,13 +112,19 @@ std::size_t LX_WindowManager::nbWindows()
 
 void LX_WindowManager::updateWindows()
 {
-    map([](LX_Window *w){w->update();});
+    map([](LX_Window *w)
+    {
+        w->update();
+    });
 }
 
 
 void LX_WindowManager::clearWindows()
 {
-    map([](LX_Window *w){w->clearWindow();});
+    map([](LX_Window *w)
+    {
+        w->clearWindow();
+    });
 }
 
 

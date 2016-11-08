@@ -152,7 +152,7 @@ inline LX_Colour fromRGBAvalue(const uint32_t rgba)
     uint8_t b = (rgba >> 8) & 0x000000FF;
     uint8_t a = rgba & 0x000000FF;
 
-    return LX_Colour{r,g,b,a};
+    return LX_Colour {r,g,b,a};
 }
 
 
