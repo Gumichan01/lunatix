@@ -62,7 +62,7 @@ struct LX_Font_
     LX_Font_() : _font_str(""), _font_size(0), _font_colour({0,0,0,0}),
     _font_buffer(nullptr) {}
 
-    LX_Font_(std::string s, unsigned int sz, LX_Colour c)
+    LX_Font_(const std::string& s, unsigned int sz, LX_Colour c)
         : _font_str(s), _font_size(sz), _font_colour(c), _font_buffer(nullptr) {}
 
     /*
