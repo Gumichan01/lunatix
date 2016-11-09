@@ -50,7 +50,7 @@ uint32_t generateFlags(LX_Config::LX_Configuration &config)
     uint32_t flag = 0x00000000;
 
     if(config.getVideoFlag() && config.getOpenGLFlag())
-        flag |= SDL_WINDOW_OPENGL;
+        flag |= LX_Win::LX_WINDOW_OPENGL;
 
     return flag;
 }
@@ -61,13 +61,15 @@ uint32_t generateFlags(LX_Config::LX_Configuration &config)
 namespace LX_Win
 {
 
-
 void LX_initWindowInfo(LX_WindowInfo &info)
 {
+    SDL_DisplayMode dm;
+    SDL_GetDesktopDisplayMode(0,&dm);
+
     info.id = 0;
     info.title = DEFAULT_TITLE;
-    info.x = SDL_WINDOWPOS_CENTERED;
-    info.y = SDL_WINDOWPOS_CENTERED;
+    info.x = (dm.w - DEFAULT_WIN_WIDTH)/2;
+    info.y = (dm.h - DEFAULT_WIN_HEIGHT)/2;
     info.w = DEFAULT_WIN_WIDTH;
     info.h = DEFAULT_WIN_HEIGHT;
     info.lw = 0;
@@ -85,12 +87,15 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
         LX_initWindowInfo(info);
     else
     {
+        SDL_DisplayMode dm;
+        SDL_GetDesktopDisplayMode(0,&dm);
+
         info.id = 0;
         info.title = DEFAULT_TITLE;
-        info.x = SDL_WINDOWPOS_CENTERED;
-        info.y = SDL_WINDOWPOS_CENTERED;
         info.w = config->getWinWidth();
         info.h = config->getWinHeight();
+        info.x = (dm.w - info.w)/2;
+        info.y = (dm.h - info.h)/2;
         info.lw = 0;
         info.lh = 0;
         info.flag = generateFlags(*config);
@@ -135,7 +140,7 @@ void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int
     if(_window == nullptr)
         throw LX_WindowException(LX_GetError());
 
-    if((flag&SDL_WINDOW_OPENGL) == SDL_WINDOW_OPENGL)
+    if((flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
         _glcontext = SDL_GL_CreateContext(_window);
 
     createRenderer_(accel);
@@ -358,11 +363,11 @@ void LX_Window::toggleFullscreen(uint32_t flag)
 {
     SDL_SetWindowFullscreen(_window,flag);
 
-    if(flag == LX_GRAPHICS_NO_FULLSCREEN)   // set the window at the original size
+    if(flag == LX_WINDOW_NO_FULLSCREEN)   // set the window at the original size
     {
         setWindowSize(_original_width,_original_height);
     }
-    else if(flag == LX_GRAPHICS_FULLSCREEN)
+    else if(flag == LX_WINDOW_FULLSCREEN)
     {
         SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
     }

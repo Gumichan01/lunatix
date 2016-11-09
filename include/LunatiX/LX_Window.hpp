@@ -67,9 +67,16 @@ namespace LX_Win
 {
 
 // Fullscreen modes
-const uint32_t LX_GRAPHICS_FULLSCREEN = 0x00000001;             /**< Fullscreen mode with original resolution   */
-const uint32_t LX_GRAPHICS_FULLSCREEN_DESKTOP = 0x00001001;     /**< Fullscreen with the current desktop size   */
-const uint32_t LX_GRAPHICS_NO_FULLSCREEN = 0;                   /**< Original resolution in window              */
+const uint32_t LX_WINDOW_FULLSCREEN = 0x00000001;           /**< Fullscreen mode with original resolution   */
+const uint32_t LX_WINDOW_FULLSCREEN_DESKTOP = 0x00001001;   /**< Fullscreen with the current desktop size   */
+const uint32_t LX_WINDOW_NO_FULLSCREEN = 0x00000000;        /**< Original resolution in window              */
+const uint32_t LX_WINDOW_OPENGL = 0x00000002;               /**< Window usable with OpenGL context          */
+const uint32_t LX_WINDOW_SHOWN = 0x00000004;                /**< Window is visible                          */
+const uint32_t LX_WINDOW_HIDDEN = 0x00000008;               /**< Window is not visible                      */
+const uint32_t LX_WINDOW_BORDERLESS = 0x00000010;           /**< No window decoration                       */
+const uint32_t LX_WINDOW_RESIZABLE = 0x00000020;            /**< Window can be resized                      */
+const uint32_t LX_WINDOW_MINIMIZED = 0x00000040;            /**< Window is minimized                        */
+const uint32_t LX_WINDOW_MAXIMIZED = 0x00000080;            /**< Window is maximized                        */
 
 /**
 *   @struct LX_WindowInfo
@@ -370,10 +377,16 @@ public :
     *   Set the window's fullscreen state
     *
     *   @param [in] flag The flag to use in this function:
-    *           - ::LX_GRAPHICS_FULLSCREEN_DESKTOP
-    *           - ::LX_GRAPHICS_FULLSCREEN
-    *           - ::LX_GRAPHICS_NO_FULLSCREEN
-    *
+    *           - ::LX_WINDOW_FULLSCREEN_DESKTOP
+    *           - ::LX_WINDOW_FULLSCREEN
+    *           - ::LX_WINDOW_NO_FULLSCREEN
+    *           - ::LX_WINDOW_OPENGL
+    *           - ::LX_WINDOW_SHOWN
+    *           - ::LX_WINDOW_HIDDEN
+    *           - ::LX_WINDOW_BORDERLESS
+    *           - ::LX_WINDOW_RESIZABLE
+    *           - ::LX_WINDOW_MINIMIZED
+    *           - ::LX_WINDOW_MAXIMIZED
     */
     void toggleFullscreen(uint32_t flag);
 
