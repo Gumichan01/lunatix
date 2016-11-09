@@ -56,6 +56,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
         LX_Win::LX_loadWindowConfig(info);
         info.w = 256;
         info.h = 256;
+        LX_Win::LX_WinConfSetCenter(info);
 
         LX_Win::LX_Window w(info);
         LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
@@ -88,14 +89,14 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 You may take a look on the library or get the development version
 on [Github](https://github.com/Gumichan01/lunatix). The library reference
-is also available [online (version 0.8)](https://gumichan01.github.io/lunatix/reference/v0.8.0/).
+is also available [online (version 0.9)](https://gumichan01.github.io/lunatix/reference/v0.9.0/).
 
 
 ## Build ##
 
 #### On Windows ####
 
-First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.8.0) (v0.8.0)
+First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.9.0) (v0.9.0)
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
