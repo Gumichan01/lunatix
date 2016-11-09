@@ -48,7 +48,7 @@ uint32_t generateFlags(LX_Config::LX_Configuration &config)
     uint32_t flag = 0x00000000;
 
     if(config.getVideoFlag() && config.getOpenGLFlag())
-        flag |= LX_Win::LX_WINDOW_OPENGL;
+        flag |= LX_Win::LX_WINDOW_SHOWN|LX_Win::LX_WINDOW_OPENGL;
 
     return flag;
 }
@@ -130,22 +130,19 @@ struct LX_Window_
     int _original_height;       /* The height of the window             */
 
     LX_Window_(const LX_WindowInfo& info): _window(nullptr), _renderer(nullptr),
-        _glcontext(nullptr), _original_width(info.w), _original_height(info.h) {}
-
-
-    void createWindow_(std::string &title, int posX, int posY, int w, int h,
-                       uint32_t flag, bool accel = true)
+        _glcontext(nullptr), _original_width(info.w), _original_height(info.h)
     {
-        _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
+        _window = SDL_CreateWindow(info.title.c_str(),info.x,info.y,info.w,info.h,info.flag);
 
         if(_window == nullptr)
             throw LX_WindowException(LX_GetError());
 
-        if((flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
+        if((info.flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
             _glcontext = SDL_GL_CreateContext(_window);
 
-        createRenderer_(accel);
+        createRenderer_(info.accel);
     }
+
 
     void createRenderer_(bool accel)
     {
@@ -233,7 +230,6 @@ struct LX_Window_
 LX_Window::LX_Window(LX_WindowInfo &info)
     : _wimpl(new LX_Window_(info))
 {
-    _wimpl->createWindow_(info.title,info.x,info.y,info.w,info.h,info.flag,info.accel);
     getInfo(info);
 }
 
