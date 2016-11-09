@@ -30,6 +30,8 @@ class LX_EventHandler;
 };
 
 
+/// @todo (#1#) handle the text edition
+
 /**
 *   @namespace LX_Text
 *   @brief The Text input module
