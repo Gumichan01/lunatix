@@ -81,13 +81,12 @@ class LX_Polygon_
         bool haveSign = false;
         const auto pbeg =_points.begin();
         const auto pend =_points.end();
-        int cross_product;
 
         for(auto it = pbeg; it != pend; it++)
         {
             AO = LX_Vector2D(*it,(it == pbeg ? *(pend - 1) : *(it - 1)));
             OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)),*it);
-            cross_product = static_cast<int>(vector_product(AO,OB));
+            int cross_product = static_cast<int>(vector_product(AO,OB));
 
             if(!haveSign)
             {
