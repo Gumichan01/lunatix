@@ -55,21 +55,20 @@ public:
     explicit LX_FileBuffer_(const UTF8string& filename, uint32_t offset, uint32_t sz)
         : _name(filename)
     {
-        LX_File *reader = nullptr;
         std::string str("LX_FileBuffer: " + std::string(_name.utf8_str()) + " - ");
         size_t r = 0;
         int64_t s = 0;
 
-        reader = new LX_File(_name,LX_FILEIO_RDONLY);
-        reader->seek(0,LX_SEEK_END);
+        LX_File reader(_name,LX_FILEIO_RDONLY);
+        reader.seek(0,LX_SEEK_END);     // Is that useful ?
 
-        if((s = reader->size()) == -1)
+        if((s = reader.size()) == -1)
             throw IOException(str + "cannot get the size of the file");
 
         // If offset > size of the file → failure
         if(S64(offset) > s)
         {
-            reader->close();
+            reader.close();
             throw IOException(str + "invalid offset: offset > size of the file");
         }
 
@@ -78,25 +77,18 @@ public:
         else
             _bufsize = U64(sz);
 
-        reader->seek(S64(offset),LX_SEEK_SET);
+        reader.seek(S64(offset),LX_SEEK_SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
 
         if(_buffer == nullptr)
-        {
-            delete reader;
             throw IOException(str + "not enough memory to store the file content");
-        }
 
-        r = reader->readExactly(_buffer.get(),sizeof(int8_t),_bufsize);
+        r = reader.readExactly(_buffer.get(),sizeof(int8_t),_bufsize);
 
         if(r < _bufsize)
-        {
-            delete reader;
             throw IOException(str + "cannot read the entire file");
-        }
 
-        reader->close();
-        delete reader;
+        reader.close();
     }
 
 
