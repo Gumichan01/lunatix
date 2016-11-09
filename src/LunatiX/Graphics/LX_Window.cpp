@@ -23,9 +23,7 @@
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 
-#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
-
 #include <GL/glu.h>
 
 
@@ -388,15 +386,15 @@ void LX_Window::getDrawColor(LX_Colour& colour) const
 }
 
 
-void LX_Window::setDrawBlendMode(SDL_BlendMode mode)
+void LX_Window::setDrawBlendMode(LX_BlendMode mode)
 {
-    SDL_SetRenderDrawBlendMode(_wimpl->_renderer,mode);
+    SDL_SetRenderDrawBlendMode(_wimpl->_renderer, static_cast<SDL_BlendMode>(mode));
 }
 
 
-void LX_Window::getDrawBlendMode(SDL_BlendMode& mode) const
+void LX_Window::getDrawBlendMode(LX_BlendMode& mode) const
 {
-    SDL_GetRenderDrawBlendMode(_wimpl->_renderer,&mode);
+    SDL_GetRenderDrawBlendMode(_wimpl->_renderer, reinterpret_cast<SDL_BlendMode*>(&mode));
 }
 
 

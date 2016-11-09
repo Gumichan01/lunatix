@@ -24,7 +24,6 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_AABB.hpp>
-#include <SDL2/SDL_video.h>
 #include <memory>
 
 struct SDL_Window;
@@ -78,6 +77,20 @@ const uint32_t LX_WINDOW_BORDERLESS = 0x00000010;           /**< No window decor
 const uint32_t LX_WINDOW_RESIZABLE = 0x00000020;            /**< Window can be resized                      */
 const uint32_t LX_WINDOW_MINIMIZED = 0x00000040;            /**< Window is minimized                        */
 const uint32_t LX_WINDOW_MAXIMIZED = 0x00000080;            /**< Window is maximized                        */
+
+enum LX_BlendMode: uint32_t
+{
+    LX_BLENDMODE_NONE = 0x00000000,     /**< no blending dstRGBA = srcRGBA */
+    LX_BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
+                                              dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                                              dstA = srcA + (dstA * (1-srcA)) */
+    LX_BLENDMODE_ADD = 0x00000002,      /**< additive blending
+                                              dstRGB = (srcRGB * srcA) + dstRGB
+                                              dstA = dstA */
+    LX_BLENDMODE_MOD = 0x00000004       /**< color modulate
+                                              dstRGB = srcRGB * dstRGB
+                                              dstA = dstA */
+};
 
 /**
 *   @struct LX_WindowInfo
@@ -147,7 +160,6 @@ public :
     ~LX_WindowException() noexcept;
 };
 
-/// @todo (#3#) LX_Window - private implementation
 
 struct LX_Window_;
 
@@ -294,7 +306,7 @@ public :
     *    |                     | destRGB = srcRGB * destRGB                       |
     *    |                     | destA = destA                                    |
     */
-    void setDrawBlendMode(SDL_BlendMode mode);
+    void setDrawBlendMode(LX_BlendMode mode);
     /**
     *   @fn void getDrawColor(const LX_Colour& colour) const
     *   Get the colour used for drawing operations (Lines, Rectangles, Circles)
@@ -323,7 +335,7 @@ public :
     *    |                     | destRGB = srcRGB * destRGB                       |
     *    |                     | destA = destA                                    |
     */
-    void getDrawBlendMode(SDL_BlendMode& mode) const;
+    void getDrawBlendMode(LX_BlendMode& mode) const;
 
     /**
     *   @fn void setTitle(std::string title)
