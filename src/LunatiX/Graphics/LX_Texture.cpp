@@ -25,6 +25,7 @@
 
 #include <SDL2/SDL_image.h>
 
+#define RENDER(x) static_cast<SDL_Renderer*>(x)
 
 namespace
 {
@@ -92,7 +93,7 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
     : _texture(nullptr), _win(w), _format(format)
 {
-    _texture = loadTexture_(filename,format, w._renderer);
+    _texture = loadTexture_(filename, format, RENDER(w.getRenderingSys()));
 }
 
 
@@ -109,7 +110,7 @@ bool LX_Texture::isOpen() const
 
 void LX_Texture::draw()
 {
-    SDL_RenderCopy(_win._renderer,_texture,nullptr,nullptr);
+    SDL_RenderCopy(RENDER(_win.getRenderingSys()),_texture,nullptr,nullptr);
 }
 
 
@@ -166,7 +167,7 @@ void LX_Sprite::draw(LX_AABB * box, const double angle)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,box,
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,nullptr,box,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
@@ -234,7 +235,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
             _iteration += 1;
     }
 
-    SDL_RenderCopyEx(_win._renderer,_texture,&_coordinates[_iteration],
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,&_coordinates[_iteration],
                      box,(-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
@@ -264,19 +265,19 @@ bool LX_BufferedImage::isLoaded() const
 
 LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
 {
-    return new LX_Texture(SDL_CreateTextureFromSurface(w._renderer,_surface),w);
+    return new LX_Texture(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),w);
 }
 
 LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
 {
-    return new LX_Sprite(SDL_CreateTextureFromSurface(w._renderer,_surface),w);
+    return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),w);
 }
 
 LX_AnimatedSprite * LX_BufferedImage::
 generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
                        const uint32_t delay) const
 {
-    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(w._renderer,_surface),
+    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),
                                  w, coord, delay);
 }
 
@@ -321,7 +322,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
     else
     {
         _screen  = SDL_CreateRGBSurface(0,width,height,bpp,r,g,b,a);
-        _texture = SDL_CreateTexture(_win._renderer,_format,
+        _texture = SDL_CreateTexture(RENDER(w.getRenderingSys()),_format,
                                      SDL_TEXTUREACCESS_STREAMING,width,height);
     }
 }
@@ -394,8 +395,9 @@ void LX_TextTexture::draw(const double angle)
 
 void LX_TextTexture::draw(const double angle, const short mirror)
 {
-    SDL_RenderCopyEx(_win._renderer,_texture,nullptr,&_dimension,
-                     (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,nullptr,
+                     &_dimension, (-radianToDegree(angle)),nullptr,
+                     shortToFlip_(mirror));
 }
 
 const UTF8string LX_TextTexture::getText() const

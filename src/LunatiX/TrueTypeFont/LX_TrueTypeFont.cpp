@@ -27,6 +27,8 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
 
+#define RENDER(x) static_cast<SDL_Renderer*>(x)
+
 using namespace LX_Config;
 using namespace LX_FileIO;
 
@@ -218,7 +220,7 @@ SDL_Texture * LX_Font::drawSolidText(const UTF8string& text, unsigned int size,
     if(s == nullptr)
         return nullptr;
 
-    SDL_Texture *t = SDL_CreateTextureFromSurface(w._renderer,s);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),s);
     SDL_FreeSurface(s);
 
     return t;
@@ -240,7 +242,7 @@ SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size,
     if(s == nullptr)
         return nullptr;
 
-    SDL_Texture *t = SDL_CreateTextureFromSurface(w._renderer,s);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),s);
     SDL_FreeSurface(s);
 
     return t;
@@ -262,7 +264,7 @@ SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size
     if(s == nullptr)
         return nullptr;
 
-    SDL_Texture *t = SDL_CreateTextureFromSurface(w._renderer,s);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),s);
     SDL_FreeSurface(s);
 
     return t;
