@@ -129,8 +129,10 @@ struct LX_Window_
     int _original_width;        /* The width of the window              */
     int _original_height;       /* The height of the window             */
 
-    LX_Window_(const LX_WindowInfo& info): _window(nullptr), _renderer(nullptr),
-        _glcontext(nullptr), _original_width(info.w), _original_height(info.h)
+
+    explicit LX_Window_(const LX_WindowInfo& info): _window(nullptr),
+        _renderer(nullptr), _glcontext(nullptr), _original_width(info.w),
+        _original_height(info.h)
     {
         _window = SDL_CreateWindow(info.title.c_str(),info.x,info.y,info.w,info.h,info.flag);
 
@@ -142,7 +144,6 @@ struct LX_Window_
 
         createRenderer_(info.accel);
     }
-
 
     void createRenderer_(bool accel)
     {
@@ -170,7 +171,6 @@ struct LX_Window_
             throw LX_WindowException(err_msg);
         }
     }
-
 
     inline void updateRenderer_()
     {
