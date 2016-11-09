@@ -45,7 +45,7 @@ class LX_Mouse
 public:
 
     /**
-    *   @fn LX_Mouse(LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y)
+    *   @fn LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y)
     *   @brief Constructor
     *
     *   Construct the mouse cursor using a surface and the coordinates of
@@ -55,7 +55,7 @@ public:
     *   @param [in] hot_x The x hot spot position
     *   @param [in] hot_y The y hot spot position
     */
-    LX_Mouse(LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y);
+    LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y);
     /**
     *   @fn bool isOpen() const
     *

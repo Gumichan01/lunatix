@@ -28,7 +28,7 @@ namespace LX_Device
 {
 
 class LX_Haptic;
-class LX_Gamepad_;
+struct LX_Gamepad_;
 struct LX_GamepadInfo;
 
 /**

@@ -141,6 +141,8 @@ struct LX_Font_
 LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
     : _fimpl(new LX_Font_())
 {
+    _fimpl->_font_colour = colour;
+    _fimpl->_font_size = size;
     // Load the configuration
     LX_Configuration *ttf_config = LX_Configuration::getInstance();
 

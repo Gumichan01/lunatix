@@ -54,7 +54,7 @@ class LX_FileBuffer_;
 */
 class LX_FileBuffer
 {
-    friend class LX_TrueTypeFont::LX_Font_;
+    friend struct LX_TrueTypeFont::LX_Font_;
     std::unique_ptr<LX_FileBuffer_> _bimpl;
 
     LX_FileBuffer(LX_FileBuffer& fb);

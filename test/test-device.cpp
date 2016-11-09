@@ -134,8 +134,7 @@ void test_mouse(void)
 
     std::string s = "data/bullet.png";
     LX_Log::log("Define %s as the mouse cursor",s.c_str());
-    LX_Graphics::LX_BufferedImage img(s,w);
-    LX_Device::LX_Mouse c(img,0,0);
+    LX_Device::LX_Mouse c(LX_Graphics::LX_BufferedImage(s),0,0);
 
     if(c.isOpen())
         LX_Log::logDebug(LX_Log::LX_LOG_TEST,"SUCCESS - the mouse cursor was loaded");
