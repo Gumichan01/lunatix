@@ -63,15 +63,11 @@ namespace LX_Win
 
 void LX_initWindowInfo(LX_WindowInfo &info)
 {
-    SDL_DisplayMode dm;
-    SDL_GetDesktopDisplayMode(0,&dm);
-
     info.id = 0;
     info.title = DEFAULT_TITLE;
-    info.x = (dm.w - DEFAULT_WIN_WIDTH)/2;
-    info.y = (dm.h - DEFAULT_WIN_HEIGHT)/2;
     info.w = DEFAULT_WIN_WIDTH;
     info.h = DEFAULT_WIN_HEIGHT;
+    LX_WinConfSetCenter(info);
     info.lw = 0;
     info.lh = 0;
     info.flag = 0;
@@ -87,21 +83,27 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
         LX_initWindowInfo(info);
     else
     {
-        SDL_DisplayMode dm;
-        SDL_GetDesktopDisplayMode(0,&dm);
-
         info.id = 0;
         info.title = DEFAULT_TITLE;
         info.w = config->getWinWidth();
         info.h = config->getWinHeight();
-        info.x = (dm.w - info.w)/2;
-        info.y = (dm.h - info.h)/2;
+        LX_WinConfSetCenter(info);
         info.lw = 0;
         info.lh = 0;
         info.flag = generateFlags(*config);
         info.accel = true;
     }
 }
+
+
+void LX_WinConfSetCenter(LX_WindowInfo &info)
+{
+    SDL_DisplayMode dm;
+    SDL_GetDesktopDisplayMode(0,&dm);
+    info.x = (dm.w - info.w)/2;
+    info.y = (dm.h - info.h)/2;
+}
+
 
 /* Exception */
 
