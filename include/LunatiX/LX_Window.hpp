@@ -78,6 +78,11 @@ const uint32_t LX_WINDOW_RESIZABLE = 0x00000020;            /**< Window can be r
 const uint32_t LX_WINDOW_MINIMIZED = 0x00000040;            /**< Window is minimized                        */
 const uint32_t LX_WINDOW_MAXIMIZED = 0x00000080;            /**< Window is maximized                        */
 
+/**
+*   @enum LX_BlendMode
+*   @brief Define the blend mode for drawing operations
+*
+*/
 enum LX_BlendMode: uint32_t
 {
     LX_BLENDMODE_NONE = 0x00000000,     /**< no blending dstRGBA = srcRGBA */
