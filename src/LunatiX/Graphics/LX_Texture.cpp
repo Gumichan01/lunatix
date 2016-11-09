@@ -63,7 +63,7 @@ SDL_Texture * loadTexture_(const std::string& filename,
 {
     SDL_Surface *tmp_s = nullptr;
     SDL_Texture *tmp_t = nullptr;
-    tmp_s = loadSurface_(filename.c_str(), format);
+    tmp_s = loadSurface_(filename, format);
 
     if(tmp_s == nullptr)
         return nullptr;
