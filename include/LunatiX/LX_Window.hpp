@@ -25,6 +25,7 @@
 #include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_AABB.hpp>
 #include <SDL2/SDL_video.h>
+#include <memory>
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -148,6 +149,8 @@ public :
 
 /// @todo (#3#) LX_Window - private implementation
 
+struct LX_Window_;
+
 /**
 *   @class LX_Window
 *   @brief The window
@@ -167,24 +170,12 @@ class LX_Window
     friend class LX_Graphics::LX_TextTexture;
     friend class LX_TrueTypeFont::LX_Font;
 
-    SDL_Window *_window;        /* The internal window structure        */
-    SDL_Renderer *_renderer;    /* The main renderer                    */
-    SDL_GLContext _glcontext;   /* The context (only used in OpenGL)    */
-
-    int _original_width;        /* The width of the window              */
-    int _original_height;       /* The height of the window             */
+    std::unique_ptr<LX_Window_> _wimpl;
 
     LX_Window(LX_Window& w);
     LX_Window& operator =(LX_Window& w);
 
-    void createWindow_(std::string &title, int posX, int posY, int w, int h,
-                       uint32_t flag, bool accel = true);
-
-    void createRenderer_(bool accel);
-    void updateRenderer_();
-    void clearRenderer_();
-    bool screenshot_(const std::string& filename);
-
+    void * getRenderingSys() const;
 
 public :
 

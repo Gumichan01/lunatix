@@ -120,75 +120,140 @@ const char * LX_WindowException::what() const noexcept
 LX_WindowException::~LX_WindowException() noexcept {}
 
 
+
+/* LX_Window, private implementation */
+
+struct LX_Window_
+{
+    SDL_Window *_window;        /* The internal window structure        */
+    SDL_Renderer *_renderer;    /* The main renderer                    */
+    SDL_GLContext _glcontext;   /* The context (only used in OpenGL)    */
+    int _original_width;        /* The width of the window              */
+    int _original_height;       /* The height of the window             */
+
+    LX_Window_(const LX_WindowInfo& info): _window(nullptr), _renderer(nullptr),
+        _glcontext(nullptr), _original_width(info.w), _original_height(info.h) {}
+
+
+    void createWindow_(std::string &title, int posX, int posY, int w, int h,
+                       uint32_t flag, bool accel = true)
+    {
+        _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
+
+        if(_window == nullptr)
+            throw LX_WindowException(LX_GetError());
+
+        if((flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
+            _glcontext = SDL_GL_CreateContext(_window);
+
+        createRenderer_(accel);
+    }
+
+    void createRenderer_(bool accel)
+    {
+        uint32_t render_flag = 0x00000000;
+        LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
+
+        // Hardware acceleration or software rendering
+        if(accel)
+            render_flag = SDL_RENDERER_ACCELERATED;
+        else
+            render_flag = SDL_RENDERER_SOFTWARE;
+
+        // Video flag and VSync flag actives -> add the option
+        if(config->getVideoFlag() && config->getVSyncFlag())
+            SDL_SetHint(SDL_HINT_RENDER_VSYNC,"1");
+
+        _renderer = SDL_CreateRenderer(_window,-1,render_flag);
+
+        if(_renderer == nullptr)
+        {
+            std::string err_msg = "Rendering creation: ";
+            err_msg = err_msg + LX_GetError();
+            SDL_GL_DeleteContext(_glcontext);
+            SDL_DestroyWindow(_window);
+            throw LX_WindowException(err_msg);
+        }
+    }
+
+
+    inline void updateRenderer_()
+    {
+        SDL_RenderPresent(_renderer);
+    }
+
+    void clearRenderer_()
+    {
+        uint8_t r,g,b,a;
+        SDL_GetRenderDrawColor(_renderer,&r,&g,&b,&a);
+        SDL_SetRenderDrawColor(_renderer,0,0,0,255);
+        SDL_RenderClear(_renderer);
+        SDL_SetRenderDrawColor(_renderer,r,g,b,a);
+    }
+
+    bool screenshot_(const std::string& filename)
+    {
+        int err = 0;
+        int w, h;
+        SDL_Surface *sshot = nullptr;
+
+        SDL_GetWindowSize(_window,&w,&h);
+        sshot = SDL_CreateRGBSurface(0,w,h,LX_ARGB_DEPTH,
+                                     RMASK,GMASK,BMASK,AMASK);
+
+        if(sshot == nullptr)
+            return false;
+
+        err = SDL_RenderReadPixels(_renderer,nullptr,LX_PIXEL_FORMAT,
+                                   sshot->pixels,sshot->pitch);
+
+        if(err == -1)
+        {
+            // Cannot read the pixels from the renderer
+            SDL_FreeSurface(sshot);
+            return false;
+        }
+
+        err = IMG_SavePNG(sshot,filename.c_str());
+        SDL_FreeSurface(sshot);
+
+        return err == 0;
+    }
+
+
+    ~LX_Window_()
+    {
+        SDL_GL_DeleteContext(_glcontext);
+        SDL_DestroyRenderer(_renderer);
+        SDL_DestroyWindow(_window);
+    }
+};
+
+
 /* LX_Window */
 
 LX_Window::LX_Window(LX_WindowInfo &info)
-    : _window(nullptr), _renderer(nullptr), _glcontext(nullptr),
-      _original_width(info.w), _original_height(info.h)
+    : _wimpl(new LX_Window_(info))
 {
-    createWindow_(info.title,info.x,info.y,info.w,info.h,info.flag,info.accel);
+    _wimpl->createWindow_(info.title,info.x,info.y,info.w,info.h,info.flag,info.accel);
     getInfo(info);
 }
 
-
-/*
-*   Private function that initializes the window according to the configuration
-*/
-void LX_Window::createWindow_(std::string &title, int posX, int posY, int w, int h,
-                              uint32_t flag, bool accel)
+void * LX_Window::getRenderingSys() const
 {
-    _window = SDL_CreateWindow(title.c_str(),posX,posY,w,h,flag);
-
-    if(_window == nullptr)
-        throw LX_WindowException(LX_GetError());
-
-    if((flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
-        _glcontext = SDL_GL_CreateContext(_window);
-
-    createRenderer_(accel);
-}
-
-
-/*
-*   Private function that creates a renderer for the window
-*/
-void LX_Window::createRenderer_(bool accel)
-{
-    uint32_t render_flag = 0x00000000;
-    LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
-
-    // Hardware acceleration or software rendering
-    if(accel)
-        render_flag = SDL_RENDERER_ACCELERATED;
-    else
-        render_flag = SDL_RENDERER_SOFTWARE;
-
-    // Video flag and VSync flag actives -> add the option
-    if(config->getVideoFlag() && config->getVSyncFlag())
-        SDL_SetHint(SDL_HINT_RENDER_VSYNC,"1");
-
-    _renderer = SDL_CreateRenderer(_window,-1,render_flag);
-
-    if(_renderer == nullptr)
-    {
-        std::string err_msg = "Rendering creation: ";
-        err_msg = err_msg + LX_GetError();
-        SDL_GL_DeleteContext(_glcontext);
-        SDL_DestroyWindow(_window);
-        throw LX_WindowException(err_msg);
-    }
+    return _wimpl->_renderer;
 }
 
 
 void LX_Window::drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
-    SDL_RenderDrawLine(_renderer,p.x,p.y,q.x,q.y);
+    SDL_RenderDrawLine(_wimpl->_renderer,p.x,p.y,q.x,q.y);
 }
 
 
 void LX_Window::drawSegments(const LX_Physics::LX_Point * p, const int count)
 {
-    SDL_RenderDrawLines(_renderer,(const SDL_Point*) p,count);
+    SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) p,count);
 }
 
 
@@ -203,7 +268,7 @@ void LX_Window::drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 
 void LX_Window::drawRect(const LX_AABB& box)
 {
-    SDL_RenderDrawRect(_renderer,&box);
+    SDL_RenderDrawRect(_wimpl->_renderer,&box);
 }
 
 
@@ -227,14 +292,14 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 
     while(y >= x)
     {
-        SDL_RenderDrawPoint(_renderer, x_center + x, y_center + y);
-        SDL_RenderDrawPoint(_renderer, x_center + y, y_center + x);
-        SDL_RenderDrawPoint(_renderer, x_center - x, y_center + y);
-        SDL_RenderDrawPoint(_renderer, x_center - y, y_center + x);
-        SDL_RenderDrawPoint(_renderer, x_center + x, y_center - y);
-        SDL_RenderDrawPoint(_renderer, x_center + y, y_center - x);
-        SDL_RenderDrawPoint(_renderer, x_center - x, y_center - y);
-        SDL_RenderDrawPoint(_renderer, x_center - y, y_center - x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + x, y_center + y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + y, y_center + x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - x, y_center + y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - y, y_center + x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + x, y_center - y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + y, y_center - x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - x, y_center - y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - y, y_center - x);
 
         if(d >= 2*x)
         {
@@ -258,7 +323,7 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 
 void LX_Window::fillRect(const LX_AABB& box)
 {
-    SDL_RenderFillRect(_renderer,&box);
+    SDL_RenderFillRect(_wimpl->_renderer,&box);
 }
 
 
@@ -313,167 +378,115 @@ void LX_Window::fillCircle(const LX_Physics::LX_Circle& c)
 
 void LX_Window::setDrawColor(const LX_Colour& colour)
 {
-    SDL_SetRenderDrawColor(_renderer,colour.r,colour.g,colour.b,colour.a);
+    SDL_SetRenderDrawColor(_wimpl->_renderer,colour.r,colour.g,colour.b,colour.a);
 }
 
 
 void LX_Window::getDrawColor(LX_Colour& colour) const
 {
-    SDL_GetRenderDrawColor(_renderer,&colour.r,&colour.g,&colour.b,&colour.a);
+    SDL_GetRenderDrawColor(_wimpl->_renderer,&colour.r,&colour.g,&colour.b,&colour.a);
 }
 
 
 void LX_Window::setDrawBlendMode(SDL_BlendMode mode)
 {
-    SDL_SetRenderDrawBlendMode(_renderer,mode);
+    SDL_SetRenderDrawBlendMode(_wimpl->_renderer,mode);
 }
 
 
 void LX_Window::getDrawBlendMode(SDL_BlendMode& mode) const
 {
-    SDL_GetRenderDrawBlendMode(_renderer,&mode);
+    SDL_GetRenderDrawBlendMode(_wimpl->_renderer,&mode);
 }
 
 
 void LX_Window::setTitle(std::string title)
 {
-    SDL_SetWindowTitle(_window,title.c_str());
+    SDL_SetWindowTitle(_wimpl->_window,title.c_str());
 }
 
 
 void LX_Window::setWindowSize(int w, int h)
 {
-    SDL_SetWindowSize(_window,w,h);
-    _original_width = w;
-    _original_height = h;
+    SDL_SetWindowSize(_wimpl->_window,w,h);
+    _wimpl->_original_width = w;
+    _wimpl->_original_height = h;
 }
 
 
 bool LX_Window::setViewPort(LX_AABB * viewport)
 {
-    return SDL_RenderSetViewport(_renderer,viewport) == 0;
+    return SDL_RenderSetViewport(_wimpl->_renderer,viewport) == 0;
 }
 
 
 void LX_Window::getViewPort(LX_AABB& viewport) const
 {
-    SDL_RenderGetViewport(_renderer,&viewport);
+    SDL_RenderGetViewport(_wimpl->_renderer,&viewport);
 }
 
 
 void LX_Window::toggleFullscreen(uint32_t flag)
 {
-    SDL_SetWindowFullscreen(_window,flag);
+    SDL_SetWindowFullscreen(_wimpl->_window,flag);
 
     if(flag == LX_WINDOW_NO_FULLSCREEN)   // set the window at the original size
     {
-        setWindowSize(_original_width,_original_height);
+        setWindowSize(_wimpl->_original_width,_wimpl->_original_height);
     }
     else if(flag == LX_WINDOW_FULLSCREEN)
     {
-        SDL_RenderSetLogicalSize(_renderer,_original_width,_original_height);
+        SDL_RenderSetLogicalSize(_wimpl->_renderer,_wimpl->_original_width,
+                                 _wimpl->_original_height);
     }
-}
-
-
-/*
-*   This private function updates the renderer of the window
-*/
-void LX_Window::updateRenderer_()
-{
-    SDL_RenderPresent(_renderer);
 }
 
 
 void LX_Window::update()
 {
-    if(_glcontext != nullptr)
-        SDL_GL_SwapWindow(_window);
+    if(_wimpl->_glcontext != nullptr)
+        SDL_GL_SwapWindow(_wimpl->_window);
     else
-        updateRenderer_();
-}
-
-
-/*
-*   Private function that clears the main window renderer
-*/
-void LX_Window::clearRenderer_()
-{
-    uint8_t r,g,b,a;
-    SDL_GetRenderDrawColor(_renderer,&r,&g,&b,&a);
-    SDL_SetRenderDrawColor(_renderer,0,0,0,255);
-    SDL_RenderClear(_renderer);
-    SDL_SetRenderDrawColor(_renderer,r,g,b,a);
+        _wimpl->updateRenderer_();
 }
 
 
 void LX_Window::clearWindow()
 {
-    if(_glcontext)
+    if(_wimpl->_glcontext)
     {
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
     }
     else
-        clearRenderer_();
-}
-
-
-/*
-*   Private function that makes a screenshot using the renderer
-*/
-bool LX_Window::screenshot_(const std::string& filename)
-{
-    int err = 0;
-    SDL_Surface *sshot = nullptr;
-
-    sshot = SDL_CreateRGBSurface(0,getWidth(),getHeight(),
-                                 LX_ARGB_DEPTH,RMASK,GMASK,BMASK,AMASK);
-
-    if(sshot == nullptr)
-        return false;
-
-    err = SDL_RenderReadPixels(_renderer,nullptr,LX_PIXEL_FORMAT,
-                               sshot->pixels,sshot->pitch);
-
-    if(err == -1)
-    {
-        // Cannot read the pixels from the renderer
-        SDL_FreeSurface(sshot);
-        return false;
-    }
-
-    err = IMG_SavePNG(sshot,filename.c_str());
-    SDL_FreeSurface(sshot);
-
-    return err == 0;
+        _wimpl->clearRenderer_();
 }
 
 
 bool LX_Window::screenshot(const std::string& filename)
 {
-    return screenshot_(filename);
+    return _wimpl->screenshot_(filename);
 }
 
 
 uint32_t LX_Window::getID() const
 {
-    return SDL_GetWindowID(_window);
+    return SDL_GetWindowID(_wimpl->_window);
 }
 
 
 void LX_Window::getInfo(LX_WindowInfo &info) const
 {
     info.id = getID();
-    info.title = SDL_GetWindowTitle(_window);
-    info.flag = SDL_GetWindowFlags(_window);
+    info.title = SDL_GetWindowTitle(_wimpl->_window);
+    info.flag = SDL_GetWindowFlags(_wimpl->_window);
 
-    SDL_GetWindowPosition(_window,&info.x,&info.y);
-    SDL_GetWindowSize(_window, &info.w,&info.h);
-    SDL_RenderGetLogicalSize(_renderer,&info.lw,&info.lh);
+    SDL_GetWindowPosition(_wimpl->_window,&info.x,&info.y);
+    SDL_GetWindowSize(_wimpl->_window, &info.w,&info.h);
+    SDL_RenderGetLogicalSize(_wimpl->_renderer,&info.lw,&info.lh);
 
     SDL_RendererInfo rinfo;
-    SDL_GetRendererInfo(_renderer, &rinfo);
+    SDL_GetRendererInfo(_wimpl->_renderer, &rinfo);
     info.accel = ( (rinfo.flags&SDL_RENDERER_ACCELERATED) != 0 );
 }
 
@@ -481,7 +494,7 @@ void LX_Window::getInfo(LX_WindowInfo &info) const
 int LX_Window::getWidth() const
 {
     int w;
-    SDL_GetWindowSize(_window,&w,nullptr);
+    SDL_GetWindowSize(_wimpl->_window,&w,nullptr);
     return w;
 }
 
@@ -489,7 +502,7 @@ int LX_Window::getWidth() const
 int LX_Window::getHeight() const
 {
     int h;
-    SDL_GetWindowSize(_window,nullptr,&h);
+    SDL_GetWindowSize(_wimpl->_window,nullptr,&h);
     return h;
 }
 
@@ -497,7 +510,7 @@ int LX_Window::getHeight() const
 int LX_Window::getLogicalWidth() const
 {
     int w;
-    SDL_RenderGetLogicalSize(_renderer,&w,nullptr);
+    SDL_RenderGetLogicalSize(_wimpl->_renderer,&w,nullptr);
     return w == 0 ? getWidth() : w;
 }
 
@@ -505,34 +518,32 @@ int LX_Window::getLogicalWidth() const
 int LX_Window::getLogicalHeight() const
 {
     int h;
-    SDL_RenderGetLogicalSize(_renderer,nullptr,&h);
+    SDL_RenderGetLogicalSize(_wimpl->_renderer,nullptr,&h);
     return h == 0 ? getHeight() : h;
 }
 
 
 void LX_Window::glGetDrawableSize(int& w, int& h) const
 {
-    SDL_GL_GetDrawableSize(_window,&w,&h);
+    SDL_GL_GetDrawableSize(_wimpl->_window,&w,&h);
 }
 
 
 bool LX_Window::glMakeCurrent()
 {
-    if(_glcontext == nullptr)
+    if(_wimpl->_glcontext == nullptr)
     {
         LX_SetError("The current window is not an OpenGL window");
         return false;
     }
 
-    return SDL_GL_MakeCurrent(_window,_glcontext) == 0;
+    return SDL_GL_MakeCurrent(_wimpl->_window,_wimpl->_glcontext) == 0;
 }
 
 
 LX_Window::~LX_Window()
 {
-    SDL_GL_DeleteContext(_glcontext);
-    SDL_DestroyRenderer(_renderer);
-    SDL_DestroyWindow(_window);
+    _wimpl.reset();
 }
 
 };
