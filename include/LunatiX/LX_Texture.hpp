@@ -341,6 +341,7 @@ class LX_BufferedImage
     friend class LX_StreamingTexture;
     friend class LX_Device::LX_Mouse;
     friend class LX_FileIO::LX_FileBuffer;
+    friend class LX_Win::LX_Window;
     SDL_Surface * _surface;
 
     LX_BufferedImage(SDL_Surface * s, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
@@ -762,4 +763,3 @@ public:
 };
 
 #endif  // LX_IMAGE_H_INCLUDED
-

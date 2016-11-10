@@ -18,6 +18,7 @@
 */
 
 #include <LunatiX/LX_Window.hpp>
+#include <LunatiX/LX_Texture.hpp>
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
@@ -233,11 +234,16 @@ LX_Window::LX_Window(LX_WindowInfo &info)
     getInfo(info);
 }
 
+// private function
 void * LX_Window::getRenderingSys() const
 {
     return _wimpl->_renderer;
 }
 
+void LX_Window::setIcon(const std::string& ficon)
+{
+    SDL_SetWindowIcon(_wimpl->_window, LX_Graphics::LX_BufferedImage(ficon)._surface);
+}
 
 void LX_Window::drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {

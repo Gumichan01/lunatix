@@ -208,13 +208,19 @@ public :
     explicit LX_Window(LX_WindowInfo &info);
 
     /**
+    *   @fn void setIcon(const std::string& ficon)
+    *   Set a icon to the current window
+    *   @param [in] ficon Name of the file to load as an icon
+    */
+    void setIcon(const std::string& ficon);
+
+    /**
     *   @fn void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
     *
     *   Draw a segment on the window
     *
     *   @param [in] p The first point
     *   @param [in] q The second point
-    *
     */
     void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q);
     /**
@@ -224,7 +230,6 @@ public :
     *
     *   @param [in] p A array of points
     *   @param [in] count The number of points, drawing count-1 segments
-    *
     */
     void drawSegments(const LX_Physics::LX_Point * p, const int count);
     /**
@@ -237,7 +242,6 @@ public :
     *
     *   @note The length of a line depends on the norm of the direction vector
     *         The length is calculating according to this formula: ||v||*2
-    *
     */
     void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v);
     /**

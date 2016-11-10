@@ -19,6 +19,7 @@ int main(int argc, char** argv)
     LX_AABB position = {0,0,256,256};
     LX_EventHandler event;
     bool go = true;
+    std::string s("data/bullet.png");
 
     if(!LX_Init())
     {
@@ -34,7 +35,8 @@ int main(int argc, char** argv)
     LX_Win::LX_WinConfSetCenter(info);
 
     LX_Win::LX_Window w(info);
-    LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+    w.setIcon(s);
+    LX_Graphics::LX_Sprite sprite(s,w);
 
     while(go)
     {
