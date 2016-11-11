@@ -101,7 +101,7 @@ void test_SolidText()
         LX_Log::log("Update");
         simg.draw();
         win.update();
-        SDL_Delay(1024);
+        LX_Timer::delay(1024);
 
         LX_Log::log("Size: 32 → 72");
         for(unsigned int j = 34; j < 74; j += 2)
@@ -110,7 +110,7 @@ void test_SolidText()
             win.clearWindow();
             simg.draw();
             win.update();
-            SDL_Delay(100);
+            LX_Timer::delay(100);
         }
         LX_Log::log("Done");
 
@@ -122,7 +122,7 @@ void test_SolidText()
             win.clearWindow();
             simg.draw(j);
             win.update();
-            SDL_Delay(33);
+            LX_Timer::delay(33);
         }
         LX_Log::log("Done");
     }
@@ -155,7 +155,7 @@ void test_ShadedText()
         LX_Log::log("Update");
         simg.draw();
         win.update();
-        SDL_Delay(1024);
+        LX_Timer::delay(1024);
 
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
@@ -164,7 +164,7 @@ void test_ShadedText()
             win.clearWindow();
             simg.draw();
             win.update();
-            SDL_Delay(100);
+            LX_Timer::delay(100);
         }
         LX_Log::log("Done");
 
@@ -176,7 +176,7 @@ void test_ShadedText()
             win.clearWindow();
             simg.draw(j);
             win.update();
-            SDL_Delay(33);
+            LX_Timer::delay(33);
         }
         LX_Log::log("Done");
     }
@@ -208,7 +208,7 @@ void test_BlendedText()
         LX_Log::log("Update");
         simg.draw();
         win.update();
-        SDL_Delay(1024);
+        LX_Timer::delay(1024);
 
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
@@ -217,7 +217,7 @@ void test_BlendedText()
             win.clearWindow();
             simg.draw();
             win.update();
-            SDL_Delay(100);
+            LX_Timer::delay(100);
         }
         LX_Log::log("Done");
 
@@ -229,7 +229,7 @@ void test_BlendedText()
             win.clearWindow();
             simg.draw(j);
             win.update();
-            SDL_Delay(33);
+            LX_Timer::delay(33);
         }
         LX_Log::log("Done");
     }

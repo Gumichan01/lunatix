@@ -55,7 +55,7 @@ int main(int argc, char** argv)
         w.clearWindow();
         sprite.draw(&position);
         w.update();
-        SDL_Delay(33);
+        LX_Timer::delay(33);
     }
 
     LX_Quit();

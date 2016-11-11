@@ -106,7 +106,7 @@ void test_window2(void)
         cout << "SUCCESS - height " << h << endl;
 
     LX_Log::log(" = END TEST = ");
-    SDL_Delay(750);
+    LX_Timer::delay(750);
 }
 
 
@@ -236,7 +236,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             img.draw(&box,i);
             win->update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
 
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Movement of the sprite");
@@ -248,7 +248,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             img.draw(&box);
             win->update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
@@ -285,7 +285,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             img.draw();
             win->update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
@@ -359,7 +359,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             sprite.draw(&rect);
             win->update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
         win->clearWindow();
     }
@@ -416,7 +416,7 @@ void test_viewport(LX_Win::LX_Window *win)
         sprite.draw(&rect);
 
         win->update();
-        SDL_Delay(16);
+        LX_Timer::delay(16);
     }
     win->clearWindow();
     LX_Log::log(" = END TEST= ");
@@ -458,7 +458,7 @@ void test_winManager(LX_Win::LX_Window *win)
     LX_Win::LX_WindowManager::getInstance()->clearWindows();
     img.draw();
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
-    SDL_Delay(512);
+    LX_Timer::delay(512);
 
     LX_Win::LX_Window *wi = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
 
@@ -522,7 +522,7 @@ void test_opengl()
             f(1.0, 0.0, 1.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            SDL_Delay(1000);
+            LX_Timer::delay(1000);
         }
 
         // Red color
@@ -531,7 +531,7 @@ void test_opengl()
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w.update();
-        SDL_Delay(2000);
+        LX_Timer::delay(2000);
 
         LX_Log::log("Move colors: blue → red");
         for(float i = 1.0f; i > -0.01f; i=i-0.01f)
@@ -540,7 +540,7 @@ void test_opengl()
             glClearColor(1.0f - i, 0.0f, i, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
 
         LX_Log::log("Move colors: red → green");
@@ -550,7 +550,7 @@ void test_opengl()
             glClearColor(i, 1.0f - i, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
 
         LX_Log::log("Move colors: green → black");
@@ -560,7 +560,7 @@ void test_opengl()
             glClearColor(0.0, i, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            SDL_Delay(16);
+            LX_Timer::delay(16);
         }
 
         LX_Log::log("Window size → Width × Height: %d × %d",w.getWidth(),w.getHeight());
@@ -621,7 +621,7 @@ void test_opengl2()
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w1.update();
-        SDL_Delay(1000);
+        LX_Timer::delay(1000);
 
         LX_Log::log("Red color on window #2");
         w2.glMakeCurrent();                         // Work on the second window
@@ -629,7 +629,7 @@ void test_opengl2()
         glClearColor(1.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w2.update();
-        SDL_Delay(2000);
+        LX_Timer::delay(2000);
 
         {
             LX_Graphics::LX_Sprite img("data/bullet.png",w1);
@@ -649,7 +649,7 @@ void test_opengl2()
             glClearColor(0.0, 1.0, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w2.update();
-            SDL_Delay(1000);
+            LX_Timer::delay(1000);
 
             LX_Log::log("Undind the first window → #1");
             b = img.unbind();
@@ -679,13 +679,13 @@ void test_drawing(LX_Win::LX_Window *win)
     win->clearWindow();
     win->drawSegment(M,N);
     win->update();
-    SDL_Delay(1000);
+    LX_Timer::delay(1000);
 
     LX_Log::log("Draw a line with N(64,448) and u⃗(256.0,128.0)");
     win->clearWindow();
     win->drawLine(N,u);
     win->update();
-    SDL_Delay(1000);
+    LX_Timer::delay(1000);
 
     SDL_Color c = {255,0,0,255};
     win->setDrawColor(c);
@@ -697,10 +697,10 @@ void test_drawing(LX_Win::LX_Window *win)
         win->drawLine(O,v);
         v.vy += j + 64;
         win->update();
-        SDL_Delay(16);
+        LX_Timer::delay(16);
     }
 
-    SDL_Delay(2048);
+    LX_Timer::delay(2048);
     LX_Log::log("Draw multiple lines using several points");
     LX_Physics::LX_Point points[8] = {{64,64},{128,32},{256,64},{768,512},
         {512,256},{16,448},{32,512},{256,42}
@@ -711,32 +711,32 @@ void test_drawing(LX_Win::LX_Window *win)
     win->clearWindow();
     win->drawSegments(points,8);
     win->update();
-    SDL_Delay(2048);
+    LX_Timer::delay(2048);
 
     LX_Log::log("Draw a rectangle using a bounding box");
     win->clearWindow();
     win->drawRect(b);
     win->update();
-    SDL_Delay(1000);
+    LX_Timer::delay(1000);
 
     LX_Log::log("Fill a rectangle using a bounding box");
     win->clearWindow();
     win->fillRect(b);
     win->update();
-    SDL_Delay(1000);
+    LX_Timer::delay(1000);
 
     LX_Log::log("Draw a rectangle using a point and a vector : N and u⃗");
     win->clearWindow();
     win->drawRect(N,u);
     win->update();
-    SDL_Delay(1000);
+    LX_Timer::delay(1000);
     win->clearWindow();
 
     LX_Log::log("Fill a rectangle using a point and a vector : N and u⃗");
     win->clearWindow();
     win->fillRect(N,u);
     win->update();
-    SDL_Delay(1000);
+    LX_Timer::delay(1000);
     win->clearWindow();
 
     LX_Log::log("Draw circles");
@@ -746,7 +746,7 @@ void test_drawing(LX_Win::LX_Window *win)
         win->clearWindow();
         win->drawCircle(C);
         win->update();
-        SDL_Delay(16);
+        LX_Timer::delay(16);
     }
 
     LX_Log::log("Draw filled circles");
@@ -756,7 +756,7 @@ void test_drawing(LX_Win::LX_Window *win)
         win->clearWindow();
         win->fillCircle(C);
         win->update();
-        SDL_Delay(16);
+        LX_Timer::delay(16);
     }
 
     LX_Log::log(" = END TEST = ");

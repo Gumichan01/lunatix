@@ -168,7 +168,7 @@ int main(int argc, char **argv)
         LX_Win::LX_WindowManager::getInstance()->clearWindows();
         dot->update();
         LX_Win::LX_WindowManager::getInstance()->updateWindows();
-        SDL_Delay(16);
+        LX_Timer::delay(16);
     }
 
     LX_Win::LX_WindowManager::getInstance()->removeWindow(0);

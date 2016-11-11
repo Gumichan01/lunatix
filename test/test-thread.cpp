@@ -204,7 +204,7 @@ void test_thread()
         {
             LX_Multithreading::LX_Thread th4(foo2,"foo2",nullptr);
             th4.startAndDetach();
-            SDL_Delay(256);
+            LX_Timer::delay(256);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -221,7 +221,7 @@ void test_thread()
             char s[] = "foo3";
             LX_Multithreading::LX_Thread th5(foo3,s,s);
             th5.start();
-            SDL_Delay(128);
+            LX_Timer::delay(128);
             th5.join();
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
@@ -242,7 +242,7 @@ void test_thread()
             LX_Log::log("(#%x): restart",tid);
             th6.start();
             th6.join();
-            SDL_Delay(128);
+            LX_Timer::delay(128);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -366,7 +366,7 @@ void test_mutex()
     th2.start();
     th1.join();
     th2.join();
-    SDL_Delay(128);
+    LX_Timer::delay(128);
     LX_Log::log("(#%x): result value = %d",tid,val);
     LX_Log::log("    == END TEST ==    \n");
 }
@@ -396,7 +396,7 @@ void test_cond()
     th2.start();
     th3.start();
     th4.start();
-    SDL_Delay(256);
+    LX_Timer::delay(256);
 
     LX_Log::log("(#%x): Start and detach the signal thread",tid);
     thsig.startAndDetach();
@@ -416,7 +416,7 @@ void sender(LX_Multithreading::LX_Data data)
 
     do
     {
-        SDL_Delay(16);
+        LX_Timer::delay(16);
         n = LX_Random::xorshiftRand100();
     }
     while(c.send(n));
