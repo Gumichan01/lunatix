@@ -134,6 +134,7 @@ void test_image(LX_Win::LX_Window *win)
         LX_FileIO::LX_FileBuffer b(name);
         LX_Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
         LX_Graphics::LX_Sprite *img = bf->generateSprite(*win);
+        delete bf;
 
         if(img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from memory");
