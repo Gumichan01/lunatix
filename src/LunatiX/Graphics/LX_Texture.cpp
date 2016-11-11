@@ -47,7 +47,8 @@ double radianToDegree(const double angle)
 // Load a image from a file
 SDL_Surface * loadSurface_(const std::string& filename, uint32_t format)
 {
-    SDL_Surface *loaded = IMG_Load(filename.c_str());
+    SDL_Surface *loaded = nullptr;
+    loaded = IMG_Load(filename.c_str());
 
     if(loaded == nullptr)
         return nullptr;
