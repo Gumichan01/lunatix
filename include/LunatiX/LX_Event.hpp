@@ -1,4 +1,4 @@
-#ifndef LX_EVENT_HPP_INCLUDED
+ #ifndef LX_EVENT_HPP_INCLUDED
 #define LX_EVENT_HPP_INCLUDED
 
 
@@ -23,11 +23,9 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_mouse.h>
-#include <SDL2/SDL_gamecontroller.h>
 
 union SDL_Event;
 
-/// @todo (#2#) Refactor LX_MouseButton
 
 /**
 *   @namespace LX_Event
@@ -62,7 +60,7 @@ using LX_GamepadID = int32_t;                       /**< Identifier of the gamep
 *   - LX_AXIS_MAX
 *
 */
-using LX_GamepadAxis = SDL_GameControllerAxis;
+using LX_GamepadAxis = int16_t;
 
 /**
 *   @typedef LX_GamepadButton
@@ -88,7 +86,7 @@ using LX_GamepadAxis = SDL_GameControllerAxis;
 *   - LX_BUTTON_MAX
 *
 */
-using LX_GamepadButton = SDL_GameControllerButton;
+using LX_GamepadButton = int32_t;
 
 /**
 *   @enum LX_EventType
@@ -154,12 +152,12 @@ enum LX_WinEventID: uint8_t
 */
 enum LX_MouseButton: uint8_t
 {
-    LX_MOUSE_LBUTTON = SDL_BUTTON_LEFT,   /**< Left mouse button    */
-    LX_MOUSE_MBUTTON = SDL_BUTTON_MIDDLE, /**< Middle mouse button  */
-    LX_MOUSE_RBUTTON = SDL_BUTTON_RIGHT,  /**< Right mouse button   */
-    LX_MOUSE_X1 = SDL_BUTTON_X1,          /**< X1 mouse button      */
-    LX_MOUSE_X2 = SDL_BUTTON_X2,          /**< X2 mouse button      */
-    LX_MOUSE_UNKNWON                      /**< Unknown mouse button */
+    LX_MOUSE_LBUTTON = 1,   /**< Left mouse button    */
+    LX_MOUSE_MBUTTON = 2,   /**< Middle mouse button  */
+    LX_MOUSE_RBUTTON = 3,   /**< Right mouse button   */
+    LX_MOUSE_X1 = 4,        /**< X1 mouse button      */
+    LX_MOUSE_X2 = 5,        /**< X2 mouse button      */
+    LX_MOUSE_UNKNWON = 0    /**< Unknown mouse button */
 };
 
 /**
@@ -168,7 +166,7 @@ enum LX_MouseButton: uint8_t
 */
 struct LX_GAxis
 {
-    SDL_JoystickID id;      /**< ID of the gamepad        */
+    LX_GamepadID id;        /**< ID of the gamepad        */
     LX_GamepadAxis axis;    /**< Axis type                */
     int16_t value;          /**< Value [-32768 ↔ 32768]   */
 };
@@ -180,7 +178,7 @@ struct LX_GAxis
 */
 struct LX_GButton
 {
-    SDL_JoystickID which;   /**< ID of the gamepad                                        */
+    LX_GamepadID which;     /**< ID of the gamepad                                        */
     LX_GamepadButton value; /**< Button value                                             */
     int16_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
 };
@@ -596,8 +594,8 @@ UTF8string stringOfButton(LX_GamepadButton button);
 */
 UTF8string stringOfAxis(LX_GamepadAxis axis);
 
-#include "LX_Event.inl"
-
 };
+
+#include "LX_Event.inl"
 
 #endif // LX_EVENT_HPP_INCLUDED

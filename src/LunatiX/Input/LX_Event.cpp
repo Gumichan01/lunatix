@@ -19,7 +19,6 @@
 */
 
 #include <LunatiX/LX_Event.hpp>
-#include <SDL2/SDL_events.h>
 
 
 namespace
@@ -626,14 +625,14 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode)
 
 UTF8string stringOfButton(LX_GamepadButton button)
 {
-    const char * s = SDL_GameControllerGetStringForButton(button);
+    const char * s = SDL_GameControllerGetStringForButton(static_cast<SDL_GameControllerButton>(button));
     return UTF8string(s == nullptr ? "null" : s);
 }
 
 
 UTF8string stringOfAxis(LX_GamepadAxis axis)
 {
-    const char * s = SDL_GameControllerGetStringForAxis(axis);
+    const char * s = SDL_GameControllerGetStringForAxis(static_cast<SDL_GameControllerAxis>(axis));
     return UTF8string(s == nullptr ? "null" : s);
 }
 

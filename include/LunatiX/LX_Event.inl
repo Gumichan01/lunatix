@@ -14,6 +14,10 @@
 *   This file describes every constant values usable by the user
 */
 
+#include <SDL2/SDL_events.h>
+
+namespace LX_Event
+{
 
 // Button state
 const uint8_t LX_BUTTON_PRESSED  = 1;
@@ -47,3 +51,5 @@ const LX_GamepadAxis LX_AXIS_RIGHTY       = SDL_CONTROLLER_AXIS_RIGHTY;
 const LX_GamepadAxis LX_AXIS_TRIGGERLEFT  = SDL_CONTROLLER_AXIS_TRIGGERLEFT;
 const LX_GamepadAxis LX_AXIS_TRIGGERRIGHT = SDL_CONTROLLER_AXIS_TRIGGERRIGHT;
 const LX_GamepadAxis LX_AXIS_MAX          = SDL_CONTROLLER_AXIS_MAX;
+
+};
