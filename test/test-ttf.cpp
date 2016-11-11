@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 void test_font(void)
 {
     LX_Font *font = nullptr;
-    SDL_Color color = {255,255,255,255};
+    LX_Colour color = {255,255,255,255};
 
     LX_Log::log("Load an LX_Font object using RAII");
     {
@@ -78,7 +78,7 @@ void test_font(void)
 
 void test_SolidText()
 {
-    SDL_Color color = {255,255,255,255};
+    LX_Colour color = {255,255,255,255};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -131,8 +131,8 @@ void test_SolidText()
 
 void test_ShadedText()
 {
-    SDL_Color color = {0,0,0,0};
-    SDL_Color bg = {255,200,127,0};
+    LX_Colour color = {0,0,0,0};
+    LX_Colour bg = {255,200,127,0};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -185,7 +185,7 @@ void test_ShadedText()
 
 void test_BlendedText()
 {
-    SDL_Color color = {255,255,255,255};
+    LX_Colour color = {255,255,255,255};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;

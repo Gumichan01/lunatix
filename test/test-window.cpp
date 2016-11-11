@@ -1,7 +1,5 @@
 
 #include <LunatiX/Lunatix.hpp>
-#include <LunatiX/LX_Texture.hpp>
-#include <SDL2/SDL_image.h>
 #include <GL/glu.h>
 
 #include <iostream>
@@ -402,7 +400,7 @@ void test_viewport(LX_Win::LX_Window *win)
 
     Uint32 b = SDL_GetTicks();
     LX_AABB brect = {0, 0, win->getWidth()/2, win->getHeight()/2};
-    SDL_Color bcolor = {0,0,0,255};
+    LX_Colour bcolor = {0,0,0,255};
 
     while(SDL_GetTicks() - b < 4096)
     {
@@ -687,7 +685,7 @@ void test_drawing(LX_Win::LX_Window *win)
     win->update();
     LX_Timer::delay(1000);
 
-    SDL_Color c = {255,0,0,255};
+    LX_Colour c = {255,0,0,255};
     win->setDrawColor(c);
     LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
     LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");

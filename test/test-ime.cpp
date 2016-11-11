@@ -14,7 +14,7 @@ class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
-        : LX_Text::LX_RedrawCallback(), _w(win), _font(SDL_Color {255,255,255,0}) {}
+        : LX_Text::LX_RedrawCallback(), _w(win), _font(LX_Colour {255,255,255,0}) {}
 
     void operator ()(UTF8string& u8str, bool update,
                      size_t cursor, size_t prev_cur)
