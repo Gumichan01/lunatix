@@ -122,12 +122,15 @@ int main(int argc, char **argv)
                 LX_Log::log("NEW GAMEPAD ADDED");
                 gid = evh.getGamepadID();
                 LX_Log::log("move which → %u",gid);
-                g[gid].open(gid);
-                if(g[gid].isConnected())
+                if(!g[git].isConnected())
                 {
-                    LX_GamepadInfo gi;
-                    g[gid].stat(gi);
-                    LX_Log::log("%s",gamepadToString(gi).utf8_str());
+                    g[gid].open(gid);
+                    if(g[gid].isConnected())
+                    {
+                        LX_GamepadInfo gi;
+                        g[gid].stat(gi);
+                        LX_Log::log("%s",gamepadToString(gi).utf8_str());
+                    }
                 }
                 break;
 
@@ -240,4 +243,3 @@ void printEvent(const LX_WEvent& event)
         break;
     }
 }
-
