@@ -22,8 +22,6 @@
 #include <SDL2/SDL_log.h>
 #include <LunatiX/utils/utf8_string.hpp>
 
-/// @todo (#2#) Refactor the enumeration: LX_CATEGORY
-
 /**
 *   @namespace LX_Log
 *   @brief The log module
@@ -64,16 +62,16 @@ namespace LX_Log
 *   @brief The log categories of the program
 *
 */
-enum LX_CATEGORY {LX_LOG_APPLICATION = SDL_LOG_CATEGORY_APPLICATION,    /**< Application log    */
-                  LX_LOG_ASSERT = SDL_LOG_CATEGORY_ASSERT,              /**< Assertion log      */
-                  LX_LOG_ERROR = SDL_LOG_CATEGORY_ERROR,                /**< Error log          */
-                  LX_LOG_SYSTEM = SDL_LOG_CATEGORY_SYSTEM,              /**< System log         */
-                  LX_LOG_AUDIO = SDL_LOG_CATEGORY_AUDIO,                /**< Audio log          */
-                  LX_LOG_VIDEO = SDL_LOG_CATEGORY_VIDEO,                /**< Video log          */
-                  LX_LOG_RENDER = SDL_LOG_CATEGORY_RENDER,              /**< Rendering log      */
-                  LX_LOG_INPUT = SDL_LOG_CATEGORY_INPUT,                /**< Input log          */
-                  LX_LOG_TEST = SDL_LOG_CATEGORY_TEST                   /**< Test log           */
-                 };
+enum LX_CATEGORY: int {LX_LOG_APPLICATION = 0,  /**< Application log    */
+                       LX_LOG_ASSERT = 1,       /**< Assertion log      */
+                       LX_LOG_ERROR = 2,                /**< Error log          */
+                       LX_LOG_SYSTEM = 3,              /**< System log         */
+                       LX_LOG_AUDIO = 4,                /**< Audio log          */
+                       LX_LOG_VIDEO = 5,                /**< Video log          */
+                       LX_LOG_RENDER = 6,              /**< Rendering log      */
+                       LX_LOG_INPUT = 7,                /**< Input log          */
+                       LX_LOG_TEST = 8                   /**< Test log           */
+                      };
 
 /**
 *   @fn bool isDebugMode()

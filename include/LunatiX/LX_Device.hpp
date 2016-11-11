@@ -24,11 +24,7 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_joystick.h>
 
-const short LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
-const short LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
-const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 
-/// @todo (#2#) Joystick ID and UID to refactor 
 /**
 *   @namespace LX_Device
 *   @brief The device module
@@ -44,20 +40,27 @@ const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 namespace LX_Device
 {
 
+const int LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
+const int LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
+const int LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
+
+using LX_DeviceID = int32_t;
+using LX_DeviceGUID = SDL_JoystickGUID;
+
 /**
 *   @struct LX_GamepadInfo
 *   @brief Information about gamepad
 */
 struct LX_GamepadInfo
 {
-    SDL_JoystickID id;              /**< The joystick ID            */
-    SDL_JoystickGUID uid;           /**< The joystick UID           */
-    UTF8string name;                /**< The name of the joystick   */
-    UTF8string is_haptic;           /**< Haptic joystick or not     */
-    int nb_axis;                    /**< The number of axes         */
-    int nb_balls;                   /**< The number of balls        */
-    int nb_buttons;                 /**< The number of buttons      */
-    int nb_hats;                    /**< The number of hats         */
+    LX_DeviceID id;         /**< The joystick ID            */
+    LX_DeviceGUID uid;      /**< The joystick UID           */
+    UTF8string name;        /**< The name of the joystick   */
+    UTF8string is_haptic;   /**< Haptic joystick or not     */
+    int nb_axis;            /**< The number of axes         */
+    int nb_balls;           /**< The number of balls        */
+    int nb_buttons;         /**< The number of buttons      */
+    int nb_hats;            /**< The number of hats         */
 };
 
 
@@ -90,9 +93,9 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 *   Define if the cursor will be shown or not
 *
 *   @param [in] toggle One of these following values :
-*            1 to show it
-*            0 to hide
-*           -1 to get the current state
+*            - ::LX_MOUSE_SHOW:  to show it
+*            - ::LX_MOUSE_HIDE:  to hide
+*            - ::LX_MOUSE_QUERY: to get the current state
 *
 *   @return 1 if the cursor is shown, 0 if it is hidden,
 *           a negative value on failure

@@ -52,6 +52,8 @@ namespace LX_Graphics
 namespace LX_OpenGL
 {
 
+using LX_GLattr = SDL_GLattr;
+
 const int LX_GL_NO_VSYNC        =  0;   /**< No VSync                   */
 const int LX_GL_VSYNC           =  1;   /**< VSync                      */
 const int LX_GL_NOT_SUPPORTED   = -1;   /**< Operation not supported    */
@@ -204,13 +206,16 @@ bool setSwapInterval(int interval);
 *
 *   Get the actual value for an attribute from the current context
 *
-*   @param [in] attr The [SDL_GLAttr](http://wiki.libsdl.org/SDL_GLattr)
-*               structure to query
+*   @param [in] attr The [attribute](http://wiki.libsdl.org/SDL_GLattr)
+*               attribute to query
 *   @param [out] value The reference that will be filled in with
 *                the current value of attr
 *
 *   @return TRUE on success. FALSE otherwise.
 *           Call LX_GetError() for more information
+*
+*   @note the value the attribute are exactly the same with the attribute
+*   defined in SDL2 (as of SDL 2.0.3)
 *
 *   @sa setAttribute
 */
