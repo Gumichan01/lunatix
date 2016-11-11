@@ -51,7 +51,6 @@ struct LX_Circle;
 struct LX_Vector2D;
 };
 
-/// @todo (#2#) BlendMode: refactoring
 
 /**
 *   @namespace LX_Win
@@ -297,7 +296,7 @@ public :
     */
     void setDrawColor(const LX_Colour& colour);
     /**
-    *   @fn void setDrawBlendMode(SDL_BlendMode mode)
+    *   @fn void setDrawBlendMode(LX_BlendMode mode)
     *
     *   Set the blend mode for drawing operations (Fill, Line)
     *
@@ -324,7 +323,7 @@ public :
     */
     void getDrawColor(LX_Colour& colour) const;
     /**
-    *   @fn void getDrawBlendMode(SDL_BlendMode& mode) const
+    *   @fn void getDrawBlendMode(LX_BlendMode& mode) const
     *
     *   Get the blend mode for drawing operations (Fill, Line)
     *
@@ -333,15 +332,15 @@ public :
     *   @return The blend mode used for blending:
     *    |        Value        |                      Meaning                     |
     *    |         ---         |                        ---                       |
-    *    | SDL_BLENDMODE_NONE  | no blending                                      |
+    *    |  LX_BLENDMODE_NONE  | no blending                                      |
     *    |                     | destRGBA = srcRGBA                               |
-    *    | SDL_BLENDMODE_BLEND | alpha blending                                   |
+    *    |  LX_BLENDMODE_BLEND | alpha blending                                   |
     *    |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
     *    |                     | destA = srcA + (destA * (1-srcA))                |
-    *    |  SDL_BLENDMODE_ADD  | additive blending                                |
+    *    |  LX_BLENDMODE_ADD   | additive blending                                |
     *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *    |                     | destA = destA                                    |
-    *    |  SDL_BLENDMODE_MOD  | colour modulate                                  |
+    *    |  LX_BLENDMODE_MOD   | colour modulate                                  |
     *    |                     | destRGB = srcRGB * destRGB                       |
     *    |                     | destA = destA                                    |
     */
