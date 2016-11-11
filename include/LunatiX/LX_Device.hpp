@@ -28,7 +28,7 @@ const short LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
 const short LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
 const short LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
 
-
+/// @todo (#2#) Joystick ID and UID to refactor 
 /**
 *   @namespace LX_Device
 *   @brief The device module
@@ -103,4 +103,3 @@ int mouseCursorDisplay(int toggle);
 };
 
 #endif // LX_DEVICE_HPP_INCLUDED
-

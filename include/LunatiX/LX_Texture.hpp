@@ -48,6 +48,7 @@ namespace LX_TrueTypeFont
 class LX_Font;
 };
 
+/// @todo (#2#) Refactor the constant value of the format
 
 namespace LX_Graphics
 {

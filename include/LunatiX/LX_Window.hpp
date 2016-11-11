@@ -51,6 +51,7 @@ struct LX_Circle;
 struct LX_Vector2D;
 };
 
+/// @todo (#2#) BlendMode: refactoring
 
 /**
 *   @namespace LX_Win

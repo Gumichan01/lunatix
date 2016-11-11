@@ -27,6 +27,8 @@
 
 union SDL_Event;
 
+/// @todo (#2#) Refactor LX_MouseButton
+
 /**
 *   @namespace LX_Event
 *   @brief The event module

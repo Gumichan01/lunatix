@@ -56,7 +56,7 @@ const int LX_GL_NO_VSYNC        =  0;   /**< No VSync                   */
 const int LX_GL_VSYNC           =  1;   /**< VSync                      */
 const int LX_GL_NOT_SUPPORTED   = -1;   /**< Operation not supported    */
 const int LX_GL_TEARING         = -1;   /**< Late swap Tearing          */
-
+/// @todo (#2#) Alias of SDL_GL* types
 /**
 *   @fn bool extensionSupported(std::string extension)
 *

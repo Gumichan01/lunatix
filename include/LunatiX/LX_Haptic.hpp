@@ -37,6 +37,7 @@ class LX_Gamepad;
 
 using LX_Joystick = _SDL_Joystick;
 using LX_GameController = _SDL_GameController;
+/// @todo (#2#) Alias of SDL_HapticEffect
 
 /**
 *   @fn int numberOfHapticDevices()

@@ -22,6 +22,8 @@
 #include <SDL2/SDL_log.h>
 #include <LunatiX/utils/utf8_string.hpp>
 
+/// @todo (#2#) Refactor the enumeration: LX_CATEGORY
+
 /**
 *   @namespace LX_Log
 *   @brief The log module
