@@ -450,14 +450,13 @@ void test_effects()
     }
 
     uint8_t j = 254;
-
     do
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: distance %d",j);
         LX_Mixer::setDistance(j);
-        j -= 2;
-        LX_Timer::delay(100);
-    }while(j >= 0);
+        j -= 1;
+        LX_Timer::delay(33);
+    }while(j > 0);
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade out effect (again)");
     LX_Mixer::fadeOutMusic(2560);
