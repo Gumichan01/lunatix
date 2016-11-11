@@ -51,18 +51,21 @@ public :
     LX_Gamepad();
 
     /**
-    *   @fn void open(int index)
+    *   @fn bool open(int index)
     *
     *   Open the gamepad
     *
     *   @param [in] index The index of the joystick to query
     *
-    *   @note   You can check the success of the operation
+    *   @return TRUE on success, FALSE if the gamepad is already opened and
+    *           connected to another device.
+    *
+    *   @note   You can also check the success of the operation
     *           calling isConnected()
     *
     *   @sa close()
     */
-    void open(int index);
+    bool open(int index);
 
     /**
     *   @fn void close()

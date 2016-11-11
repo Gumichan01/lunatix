@@ -211,8 +211,18 @@ LX_Gamepad::~LX_Gamepad()
 }
 
 
-void LX_Gamepad::open(int index)
+bool LX_Gamepad::open(int index)
 {
+    if(!_gpimpl->_closed)
+    {
+        std::string s = getName();
+
+        LX_Log::logError(LX_Log::LX_LOG_SYSTEM,
+                            "Gamepad opened and connected to %s", s.c_str());
+        LX_SetError("Instance of gamepad already connected to another device");
+        return false;
+    }
+
     if(index < numberOfDevices() && SDL_IsGameController(index))
         _gpimpl->_gc = SDL_GameControllerOpen(index);
 
@@ -228,6 +238,7 @@ void LX_Gamepad::open(int index)
             _gpimpl->_haptic.reset(new LX_Haptic(_gpimpl->_gc));
     }
     _gpimpl->_closed = false;
+    return true;
 }
 
 
