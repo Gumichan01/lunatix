@@ -122,7 +122,7 @@ int main(int argc, char **argv)
                 LX_Log::log("NEW GAMEPAD ADDED");
                 gid = evh.getGamepadID();
                 LX_Log::log("move which → %u",gid);
-                if(!g[git].isConnected())
+                if(!g[gid].isConnected())
                 {
                     g[gid].open(gid);
                     if(g[gid].isConnected())
