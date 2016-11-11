@@ -127,7 +127,7 @@ void test_euclide(void)
     cout << "INFO - Distance between C and D" << endl;
     d = euclide_distance(C,D);
 
-    if(d != static_cast<float>(sqrt(200)))
+    if(static_cast<int>(d) != static_cast<int>(sqrt(200))) 
         cerr << "FAILURE - Bad distance CD - expected : "
              << static_cast<float>(sqrt(200)) << ";Got : " << d << endl;
     else
@@ -486,7 +486,7 @@ void test_Vector2D(void)
     cout << "INFO - vector product (v,u)" << endl;
     d = vector_product(v,u);
     cout << "INFO - " << d << endl;
-    if(d != -5.0f)
+    if(static_cast<int>(d) != static_cast<int>(-5.0f))
         cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -5 ;Got: " << d << endl;
     else
         cout << "SUCCESS - vector product v(1,2).u(2,-1) = -5" << endl;

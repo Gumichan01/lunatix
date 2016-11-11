@@ -21,11 +21,12 @@ public:
     {
         if(update)
         {
-            LX_Graphics::LX_BlendedTextTexture img(_font,_w);
+            LX_Log::log("cursor → prev: %d; cur: %d\n",prev_cur,cursor);
             _w.clearWindow();
 
             if(!u8str.utf8_empty())
             {
+                LX_Graphics::LX_BlendedTextTexture img(_font,_w);
                 img.setText(u8str,24);
                 img.setPosition(100,100);
                 img.draw();

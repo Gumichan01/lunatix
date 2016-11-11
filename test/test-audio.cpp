@@ -180,6 +180,7 @@ void test_music()
 {
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST music = ");
     std::string s = "data/test.mp3";
+    std::string sm = "data/01.ogg";
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: %s",s.c_str());
 
@@ -188,9 +189,7 @@ void test_music()
         LX_Mixer::LX_Music music(s);
         const libtagpp::Tag& tag = music.getInfo();
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music loaded");
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play music");
-
+        LX_Log::log("Loaded");
         LX_Win::LX_WindowInfo info;
         LX_Win::LX_initWindowInfo(info);
         info.w = 256;
@@ -213,6 +212,37 @@ void test_music()
         LX_AABB box = {0,0,info.w,info.h};
         cover->draw(&box);
         w.update();
+        delete cover;
+
+        LX_Timer::delay(2000);
+        LX_Log::log("File: %s",s.c_str());
+        LX_Log::log("================================");
+        LX_Log::log("Title - %s",tag.title());
+        LX_Log::log("Artist - %s",tag.artist());
+        LX_Log::log("Album - %s",tag.album());
+        LX_Log::log("Year - %s",tag.year());
+        LX_Log::log("--------------------------------");
+        LX_Log::log("Image - position %d %d",tag.getImageMetaData()._img_offset,
+                    tag.getImageMetaData()._img_size);
+        LX_Log::log("Duration - %s", tag.properties().duration.c_str());
+        LX_Log::log("Channels - %d", tag.properties().channels);
+        LX_Log::log("Sample rate - %d Hz", tag.properties().samplerate);
+        LX_Log::log("Bitrate - %d bits/s", tag.properties().bitrate);
+        LX_Log::log("Format - %s", tag.properties().format.c_str());
+        LX_Log::log("================================");
+    }
+    catch(LX_Mixer::LX_MusicException& e)
+    {
+        LX_Log::log("Cannot launch the music: %s",e.what());
+    }
+
+    try
+    {
+        LX_Mixer::LX_Music music(sm);
+        const libtagpp::Tag& tag = music.getInfo();
+
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music loaded");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play music");
 
         if(music.play())
         {
@@ -419,12 +449,15 @@ void test_effects()
         SDL_Delay(100);
     }
 
-    for(int j = 254; j >= 0; j -= 2)
+    uint8_t j = 254;
+
+    do
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: distance %d",j);
         LX_Mixer::setDistance(j);
+        j -= 2;
         SDL_Delay(100);
-    }
+    }while(j >= 0);
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade out effect (again)");
     LX_Mixer::fadeOutMusic(2560);
@@ -551,10 +584,10 @@ void test_volume2()
     {
         SDL_Delay(100);
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"set overall volume to %d",i);
-        LX_Mixer::setOverallVolume(i);
+        LX_Mixer::setOverallVolume(static_cast<unsigned short>(i));
     }
 
-    for(short i = 0; i <= 100; i++)
+    for(unsigned short i = 0; i <= 100; i++)
     {
         SDL_Delay(100);
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"set overall volume to %d",i);

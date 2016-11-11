@@ -740,7 +740,7 @@ void test_drawing(LX_Win::LX_Window *win)
     win->clearWindow();
 
     LX_Log::log("Draw circles");
-    for(int i = 0; i < 300; i++)
+    for(unsigned int i = 0; i < 300; i++)
     {
         LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),i);
         win->clearWindow();

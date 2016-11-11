@@ -5,7 +5,6 @@
 #include <cstdio>
 #include <map>
 
-
 #define N 4
 
 using namespace std;
@@ -146,7 +145,7 @@ void test_read(void)
          << f.size() << " byte(s)" << endl;
 
     LX_Log::log("Try to read the file");
-    read_data = f.read(buf,sizeof(char),f.size());
+    read_data = f.read(buf,sizeof(char), static_cast<size_t>(f.size()));
 
     if(read_data == 0)
         cerr << "FAILURE - Expected : a positive value or zero; got : -1 "
@@ -348,7 +347,7 @@ void test_buffer2(void)
         cout << "FAILURE - it should fail: " << str2 << endl;
         delete f;
     }
-    catch(IOException &e)
+    catch(IOException &)
     {
         cerr << "SUCCESS - Exception expected " << endl;
     }

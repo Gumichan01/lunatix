@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 void test_font(void)
 {
     LX_Font *font = nullptr;
-    SDL_Color color = {255,255,255};
+    SDL_Color color = {255,255,255,255};
 
     LX_Log::log("Load an LX_Font object using RAII");
     {
@@ -59,7 +59,7 @@ void test_font(void)
             LX_Font ferror("invalid_file",color);
             LX_Log::log("FAILURE - o_O. Expected: IOException, got: a valid object");
         }
-        catch(IOException &e)
+        catch(IOException &)
         {
             LX_Log::log("SUCCESS - IOException occured. It was expected");
         }
@@ -104,7 +104,7 @@ void test_SolidText()
         SDL_Delay(1024);
 
         LX_Log::log("Size: 32 → 72");
-        for(int j = 34; j < 74; j += 2)
+        for(unsigned int j = 34; j < 74; j += 2)
         {
             simg.setSize(j);
             win.clearWindow();
