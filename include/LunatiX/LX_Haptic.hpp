@@ -37,7 +37,8 @@ class LX_Gamepad;
 
 using LX_Joystick = _SDL_Joystick;
 using LX_GameController = _SDL_GameController;
-/// @todo (#2#) Alias of SDL_HapticEffect
+using LX_HapticEffect = SDL_HapticEffect;
+
 
 /**
 *   @fn int numberOfHapticDevices()
@@ -122,7 +123,7 @@ public :
     virtual void rumbleEffectPlay(float strength, uint32_t length);
 
     /**
-    *   @fn virtual bool effectSupported(SDL_HapticEffect& effect) const
+    *   @fn virtual bool effectSupported(LX_HapticEffect& effect) const
     *
     *   Check if an effect is supported by the current device
     *
@@ -131,9 +132,9 @@ public :
     *
     *   @sa newEffect
     */
-    virtual bool effectSupported(SDL_HapticEffect& effect) const;
+    virtual bool effectSupported(LX_HapticEffect& effect) const;
     /**
-    *   @fn virtual int newEffect(SDL_HapticEffect& effect)
+    *   @fn virtual int newEffect(LX_HapticEffect& effect)
     *
     *   Add a new effect
     *
@@ -143,7 +144,7 @@ public :
     *   @sa runEffect
     *   @sa stopEffect
     */
-    virtual int newEffect(SDL_HapticEffect& effect);
+    virtual int newEffect(LX_HapticEffect& effect);
     /**
     *   @fn virtual void runEffect(int effect_id, uint32_t iterations)
     *
