@@ -52,7 +52,7 @@ void UnloadLibrary()
 }
 
 
-SDL_GLContext getCurrentContext()
+LX_GLContext getCurrentContext()
 {
     return SDL_GL_GetCurrentContext();
 }
@@ -70,13 +70,13 @@ bool setSwapInterval(int interval)
 }
 
 
-bool getAttribute(SDL_GLattr attr, int& value)
+bool getAttribute(LX_GLattr attr, int& value)
 {
     return SDL_GL_GetAttribute(attr,&value) == 0;
 }
 
 
-bool setAttribute(SDL_GLattr attr, int value)
+bool setAttribute(LX_GLattr attr, int value)
 {
     return SDL_GL_SetAttribute(attr,value) == 0;
 }

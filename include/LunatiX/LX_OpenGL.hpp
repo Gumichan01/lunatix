@@ -53,12 +53,13 @@ namespace LX_OpenGL
 {
 
 using LX_GLattr = SDL_GLattr;
+using LX_GLContext = SDL_GLContext;
 
 const int LX_GL_NO_VSYNC        =  0;   /**< No VSync                   */
 const int LX_GL_VSYNC           =  1;   /**< VSync                      */
 const int LX_GL_NOT_SUPPORTED   = -1;   /**< Operation not supported    */
 const int LX_GL_TEARING         = -1;   /**< Late swap Tearing          */
-/// @todo (#2#) Alias of SDL_GL* types
+
 /**
 *   @fn bool extensionSupported(std::string extension)
 *
@@ -147,7 +148,7 @@ T getProcAddress(const std::string& proc);
 
 
 /**
-*   @fn SDL_GLContext getCurrentContext()
+*   @fn LX_GLContext getCurrentContext()
 *
 *   Get the current context
 *
@@ -155,7 +156,7 @@ T getProcAddress(const std::string& proc);
 *           Call LX_GetError() for more information
 *
 */
-SDL_GLContext getCurrentContext();
+LX_GLContext getCurrentContext();
 
 
 /**
@@ -202,7 +203,7 @@ bool setSwapInterval(int interval);
 
 
 /**
-*   @fn bool getAttribute(SDL_GLattr attr, int& value)
+*   @fn bool getAttribute(LX_GLattr attr, int& value)
 *
 *   Get the actual value for an attribute from the current context
 *
@@ -219,10 +220,10 @@ bool setSwapInterval(int interval);
 *
 *   @sa setAttribute
 */
-bool getAttribute(SDL_GLattr attr, int& value);
+bool getAttribute(LX_GLattr attr, int& value);
 
 /**
-*   @fn bool setAttribute(SDL_GLattr attr, int value)
+*   @fn bool setAttribute(LX_GLattr attr, int value)
 *
 *   Set an OpenGL attribute before te creation of a window
 *
@@ -240,7 +241,7 @@ bool getAttribute(SDL_GLattr attr, int& value);
 *
 *   @sa getAttribute
 */
-bool setAttribute(SDL_GLattr attr, int value);
+bool setAttribute(LX_GLattr attr, int value);
 
 };
 
