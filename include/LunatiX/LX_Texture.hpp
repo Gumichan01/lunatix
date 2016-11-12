@@ -647,8 +647,8 @@ public:
 *   A shaded text texture is a text that is slowly but nicely drawn on the screen
 *   with a background colour that should be defined.
 *
-*   By default, at instantiation, the background colour is black, bu it can be
-*   set using LX_ShadedImage::setColor()
+*   By default, at instantiation, the background colour is black, but it can be
+*   set using LX_ShadedImage::setbgColor()
 */
 class LX_ShadedTextTexture: public LX_TextTexture
 {

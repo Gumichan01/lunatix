@@ -155,7 +155,7 @@ LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
             int sz = ttf_config->getFontSize();
 
             if(sz <= 0)
-                _fimpl->_font_size = LX_TTF_DEFAULT_FONT_SIZE;
+                _fimpl->_font_size = LX_TTF_DEFAULT_SIZE;
             else
                 _fimpl->_font_size = static_cast<unsigned int>(sz);
         }
@@ -166,7 +166,7 @@ LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
 
 
 LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour)
-    : LX_Font(font_file,colour,LX_TTF_DEFAULT_FONT_SIZE) {}
+    : LX_Font(font_file,colour,LX_TTF_DEFAULT_SIZE) {}
 
 
 LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
@@ -175,13 +175,32 @@ LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned 
     _fimpl->createBuffer_();
 }
 
-
+/*
+*   Calculate the resulting texture dimension of the text
+*   rendererd using the default font
+*
+*   @param [in] text The string to size up
+*   @param [out] w The reference of an integral to fill in the text width
+*   @param [out] h The reference of an integral to fill in the text height
+*
+*   @return A control value, 0 on success, -1 on failure
+*/
 int LX_Font::sizeOfText(std::string text, int& w, int& h) const
 {
     return sizeOfText(text,_fimpl->_font_size,w,h);
 }
 
-
+/*
+*   Calculate the resulting texture dimension of the text rendererd
+*   using the default font
+*
+*   @param [in] text The string to size up
+*   @param [in] size The size of the text
+*   @param [out] w The reference of an integral to fill in the text width
+*   @param [out] h The reference of an integral to fill in the text height
+*
+*   @return A control value, 0 on success, -1 on failure
+*/
 int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w, int& h) const
 {
     int sz;
@@ -199,21 +218,47 @@ int LX_Font::sizeOfText(const std::string& text, const unsigned int size, int& w
     return sz;
 }
 
-
+/*
+*   Calculate the resulting texture dimension of the utf-8 text
+*   rendererd using the default font
+*
+*   @param [in] text The utf-8 string to size up
+*   @param [in] size The size of the text
+*   @param [out] w The reference of an integral to fill in the text width
+*   @param [out] h The reference of an integral to fill in the text height
+*
+*   @return A control value, 0 on success, -1 on failure
+*/
 int LX_Font::sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h) const
 {
     const std::string s = text.utf8_str();
     return sizeOfText(s,size,w,h);
 }
 
-
+/*
+*   Render the text in solid mode. The size has to be specified
+*
+*   @param [in] text The string to display
+*   @param [in] size The size defined by the user
+*   @param [in] w The window to link the texture with
+*
+*   @return An valid pointer to a texture, NULL otherwise.
+*/
 SDL_Texture * LX_Font::drawSolidText(const std::string& text, unsigned int size,
                                      LX_Win::LX_Window& w)
 {
     return drawSolidText(UTF8string(text),size,w);
 }
 
-
+/*
+*   Render the UTF-8 encoded text in solid mode. The size has to be specified
+*
+*   @param [in] text The utf-8 string to display
+*   @param [in] size The size defined by the user
+*   @param [in] w The window to link the texture with
+*
+*   @return An valid pointer to a texture, NULL otherwise.
+*/
 SDL_Texture * LX_Font::drawSolidText(const UTF8string& text, unsigned int size,
                                      LX_Win::LX_Window& w)
 {
@@ -228,14 +273,32 @@ SDL_Texture * LX_Font::drawSolidText(const UTF8string& text, unsigned int size,
     return t;
 }
 
-
+/*
+*   Render the text in shaded mode. The size has to be specified
+*
+*   @param [in] text The string to display
+*   @param [in] size The size defined by the user
+*   @param [in] bg The background colour behind the text
+*   @param [in] w The window to link the texture with
+*
+*   @return An valid pointer to a texture, nullptr otherwise.
+*/
 SDL_Texture * LX_Font::drawShadedText(const std::string& text, unsigned int size,
                                       const LX_Colour& bg, LX_Win::LX_Window& w)
 {
     return drawShadedText(UTF8string(text),size,bg,w);
 }
 
-
+/*
+*   Render the UTF-8 encoded text in shaded mode. The size has to be specified
+*
+*   @param [in] text The utf-8 string to display
+*   @param [in] size The size defined by the user
+*   @param [in] bg The background colour behind the text
+*   @param [in] w The window to link the texture with
+*
+*   @return An valid pointer to a texture, NULL otherwise.
+*/
 SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size,
                                       const LX_Colour& bg, LX_Win::LX_Window& w)
 {
@@ -250,14 +313,30 @@ SDL_Texture * LX_Font::drawShadedText(const UTF8string& text, unsigned int size,
     return t;
 }
 
-
+/*
+*   Render the text in blended mode. The size has to be specified
+*
+*   @param [in] text The string to display
+*   @param [in] size The size defined by the user
+*   @param [in] w The window to link the texture with
+*
+*   @return An valid pointer to a texture, nullptr otherwise.
+*/
 SDL_Texture * LX_Font::drawBlendedText(const std::string& text, unsigned int size,
                                        LX_Win::LX_Window& w)
 {
     return drawBlendedText(UTF8string(text),size,w);
 }
 
-
+/*
+*   Render the UTF-8 encoded text in blended mode. The size has to be specified
+*
+*   @param [in] text The utf-8 string to display
+*   @param [in] size The size defined by the user
+*   @param [in] w The window to link the texture with
+*
+*   @return An valid pointer to a texture, nullptr otherwise.
+*/
 SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size,
                                        LX_Win::LX_Window& w)
 {
@@ -272,7 +351,9 @@ SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size
     return t;
 }
 
-
+/*
+*   This function sets the new colour of texts.
+*/
 void LX_Font::setColor(const LX_Colour& colour)
 {
     _fimpl->_font_colour = colour;
