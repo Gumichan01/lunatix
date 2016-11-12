@@ -25,9 +25,6 @@
 #include <LunatiX/LX_Colour.hpp>
 #include <memory>
 
-const unsigned int LX_TTF_DEFAULT_FONT_SIZE = 24;   /**< The default value of the font size */
-const uint8_t LX_WHITE_COLOUR = 255;                /**< The white colour value             */
-const uint8_t LX_BLACK_COLOUR = 0;                  /**< The black colour value             */
 
 struct SDL_Surface;
 struct SDL_Texture;
@@ -61,6 +58,11 @@ class LX_TextTexture;
 */
 namespace LX_TrueTypeFont
 {
+/// @todo Refactoring
+
+const unsigned int LX_TTF_DEFAULT_FONT_SIZE = 24;   /**< The default value of the font size */
+const uint8_t LX_WHITE_COLOUR = 255;                /**< The white colour value             */
+const uint8_t LX_BLACK_COLOUR = 0;                  /**< The black colour value             */
 
 struct LX_Font_;
 enum LX_TTF_TypeText: short;
