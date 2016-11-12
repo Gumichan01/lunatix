@@ -23,7 +23,6 @@
 
 #include <SDL2/SDL_pixels.h>
 
-
 /**
 *   @typedef LX_Colour
 *   @brief Colour representation
@@ -155,5 +154,6 @@ inline LX_Colour fromRGBAvalue(const uint32_t rgba)
     return LX_Colour {r,g,b,a};
 }
 
+#include "LX_Format.inl"
 
 #endif // LX_COLOUR_HPP_INCLUDED

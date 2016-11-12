@@ -301,7 +301,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
     if(SDL_PixelFormatEnumToMasks(_format,&bpp,&r,&g,&b,&a) != SDL_TRUE)
     {
         SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_RGBA8888,&bpp,&r,&g,&b,&a);
-        _format = SDL_PIXELFORMAT_RGBA8888;
+        _format = LX_PIXELFORMAT_RGBA8888;
     }
 
     LX_Win::LX_WindowInfo info;

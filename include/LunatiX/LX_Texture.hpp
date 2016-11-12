@@ -48,7 +48,6 @@ namespace LX_TrueTypeFont
 class LX_Font;
 };
 
-/// @todo (#2#) Refactor the constant value of the format
 
 namespace LX_Graphics
 {
@@ -82,13 +81,13 @@ protected:
 
     LX_Texture(LX_Win::LX_Window& w, uint32_t format);
     LX_Texture(SDL_Texture *t, LX_Win::LX_Window& w,
-               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
     /**
     *   @fn LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-    *                uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *                uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   Build the texture from a filename
@@ -97,54 +96,54 @@ public:
     *   @param [in] w The window the texture will be drawn on (see draw())
     *   @param [in] format Optional argument that specified the format of the texture
     *
-    *   |        Format Values        |                                              |
-    *   |             ---             |                      ---                     |
-    *   | SDL_PIXELFORMAT_UNKNOWN     |                                              |
-    *   | SDL_PIXELFORMAT_INDEX1LSB   |                                              |
-    *   | SDL_PIXELFORMAT_INDEX1MSB   |                                              |
-    *   | SDL_PIXELFORMAT_INDEX4LSB   |                                              |
-    *   | SDL_PIXELFORMAT_INDEX4MSB   |                                              |
-    *   | SDL_PIXELFORMAT_INDEX8      |                                              |
-    *   | SDL_PIXELFORMAT_RGB332      |  RGB: 2 bit for blue, 3 bits for the others  |
-    *   | SDL_PIXELFORMAT_RGB444      |            RGB : 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_RGB555      |            RGB : 5 bits per channel          |
-    *   | SDL_PIXELFORMAT_BGR555      |            BGR : 5 bits per channel          |
-    *   | SDL_PIXELFORMAT_ARGB4444    |            ARGB: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_RGBA4444    |            RGBA: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_ABGR4444    |            ABGR: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_BGRA4444    |            BGRA: 4 bits per channel          |
-    *   | SDL_PIXELFORMAT_ARGB1555    | ARGB: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_RGBA5551    | RGBA: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_ABGR1555    | ABGR: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_BGRA5551    | BGRA: 1 bit for alpha, 5 bits for the others |
-    *   | SDL_PIXELFORMAT_RGB565      | RGB: 6 bit for green, 5 bits for the others  |
-    *   | SDL_PIXELFORMAT_BGR565      | BGR: 6 bit for green, 5 bits for the others  |
-    *   | SDL_PIXELFORMAT_RGB24       |                                              |
-    *   | SDL_PIXELFORMAT_BGR24       |                                              |
-    *   | SDL_PIXELFORMAT_RGB888      |                                              |
-    *   | SDL_PIXELFORMAT_RGBX8888    |          RGBX: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_BGR888      |          BGR:  8 bits per channel            |
-    *   | SDL_PIXELFORMAT_BGRX8888    |          BGRX: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_ARGB8888    |          ARGB: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_RGBA8888    |          RGBA: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_ABGR8888    |          ABGR: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_BGRA8888    |          BGRA: 8 bits per channel            |
-    *   | SDL_PIXELFORMAT_ARGB2101010 |                                              |
-    *   | SDL_PIXELFORMAT_YV12        |      planar mode: Y + V + U (3 planes)       |
-    *   | SDL_PIXELFORMAT_IYUV        |      planar mode: Y + U + V (3 planes)       |
-    *   | SDL_PIXELFORMAT_YUY2        |      packed mode: Y0+U0+Y1+V0 (1 plane)      |
-    *   | SDL_PIXELFORMAT_UYVY        |      packed mode: U0+Y0+V0+Y1 (1 plane)      |
-    *   | SDL_PIXELFORMAT_YVYU        |      packed mode: Y0+V0+Y1+U0 (1 plane)      |
+    *   |       Format Values        |                                              |
+    *   |            ---             |                     ---                      |
+    *   | LX_PIXELFORMAT_UNKNOWN     |                                              |
+    *   | LX_PIXELFORMAT_INDEX1LSB   |                                              |
+    *   | LX_PIXELFORMAT_INDEX1MSB   |                                              |
+    *   | LX_PIXELFORMAT_INDEX4LSB   |                                              |
+    *   | LX_PIXELFORMAT_INDEX4MSB   |                                              |
+    *   | LX_PIXELFORMAT_INDEX8      |                                              |
+    *   | LX_PIXELFORMAT_RGB332      |  RGB: 2 bit for blue, 3 bits for the others  |
+    *   | LX_PIXELFORMAT_RGB444      |            RGB : 4 bits per channel          |
+    *   | LX_PIXELFORMAT_RGB555      |            RGB : 5 bits per channel          |
+    *   | LX_PIXELFORMAT_BGR555      |            BGR : 5 bits per channel          |
+    *   | LX_PIXELFORMAT_ARGB4444    |            ARGB: 4 bits per channel          |
+    *   | LX_PIXELFORMAT_RGBA4444    |            RGBA: 4 bits per channel          |
+    *   | LX_PIXELFORMAT_ABGR4444    |            ABGR: 4 bits per channel          |
+    *   | LX_PIXELFORMAT_BGRA4444    |            BGRA: 4 bits per channel          |
+    *   | LX_PIXELFORMAT_ARGB1555    | ARGB: 1 bit for alpha, 5 bits for the others |
+    *   | LX_PIXELFORMAT_RGBA5551    | RGBA: 1 bit for alpha, 5 bits for the others |
+    *   | LX_PIXELFORMAT_ABGR1555    | ABGR: 1 bit for alpha, 5 bits for the others |
+    *   | LX_PIXELFORMAT_BGRA5551    | BGRA: 1 bit for alpha, 5 bits for the others |
+    *   | LX_PIXELFORMAT_RGB565      | RGB: 6 bit for green, 5 bits for the others  |
+    *   | LX_PIXELFORMAT_BGR565      | BGR: 6 bit for green, 5 bits for the others  |
+    *   | LX_PIXELFORMAT_RGB24       |                                              |
+    *   | LX_PIXELFORMAT_BGR24       |                                              |
+    *   | LX_PIXELFORMAT_RGB888      |                                              |
+    *   | LX_PIXELFORMAT_RGBX8888    |          RGBX: 8 bits per channel            |
+    *   | LX_PIXELFORMAT_BGR888      |          BGR:  8 bits per channel            |
+    *   | LX_PIXELFORMAT_BGRX8888    |          BGRX: 8 bits per channel            |
+    *   | LX_PIXELFORMAT_ARGB8888    |          ARGB: 8 bits per channel            |
+    *   | LX_PIXELFORMAT_RGBA8888    |          RGBA: 8 bits per channel            |
+    *   | LX_PIXELFORMAT_ABGR8888    |          ABGR: 8 bits per channel            |
+    *   | LX_PIXELFORMAT_BGRA8888    |          BGRA: 8 bits per channel            |
+    *   | LX_PIXELFORMAT_ARGB2101010 |                                              |
+    *   | LX_PIXELFORMAT_YV12        |      planar mode: Y + V + U (3 planes)       |
+    *   | LX_PIXELFORMAT_IYUV        |      planar mode: Y + U + V (3 planes)       |
+    *   | LX_PIXELFORMAT_YUY2        |      packed mode: Y0+U0+Y1+V0 (1 plane)      |
+    *   | LX_PIXELFORMAT_UYVY        |      packed mode: U0+Y0+V0+Y1 (1 plane)      |
+    *   | LX_PIXELFORMAT_YVYU        |      packed mode: Y0+V0+Y1+U0 (1 plane)      |
     *
-    *   The default value is **SDL_PIXELFORMAT_RGBA8888**
+    *   The default value is **LX_PIXELFORMAT_RGBA8888**
     *
     */
     LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constuctor with the filename (UTF-8)
     LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
-               uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn virtual bool isOpen() const
@@ -211,17 +210,17 @@ class LX_Sprite: public LX_Texture
 protected:
 
     LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+              uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
     /// Sprite constuctor
     LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+              uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Sprite constuctor with the filename (UTF-8)
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-              uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+              uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
     /**
@@ -293,14 +292,14 @@ class LX_AnimatedSprite: public LX_Sprite
 protected:
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
     /**
     *   @fn LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
     *                         const std::vector<LX_AABB>& coord, const uint32_t delay,
-    *                         uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *                         uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *
     *   Build an animated sprite using a filename
     *
@@ -314,12 +313,12 @@ public:
     */
     LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Animated Sprite constuctor with the filename (UTF-8)
     LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     virtual void draw(LX_AABB * box);
@@ -345,17 +344,17 @@ class LX_BufferedImage
     friend class LX_Win::LX_Window;
     SDL_Surface * _surface;
 
-    LX_BufferedImage(SDL_Surface * s, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_BufferedImage(SDL_Surface * s, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
     /// Surface constuctor
     LX_BufferedImage(const std::string& filename,
-                     uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                     uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Surface Sprite constuctor with the filename (UTF-8)
     LX_BufferedImage(const UTF8string& filename,
-                     uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                     uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn bool isLoaded() const
@@ -417,7 +416,7 @@ class LX_StreamingTexture: public LX_Texture
 public:
 
     /**
-    *   @fn LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *   @fn LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *
     *   Build the texture
     *
@@ -425,7 +424,7 @@ public:
     *   @param [in] format Optional argument that specified the format of the t
     *   @sa LX_Texture
     */
-    LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+    LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     /**
@@ -475,7 +474,7 @@ public:
 
     /**
     *   @fn LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                    uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *                    uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] font The font that will be used for drawing the text
@@ -485,11 +484,11 @@ public:
     *
     */
     LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                   uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                   uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn LX_TextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-    *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *                    LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
@@ -501,10 +500,10 @@ public:
     *
     */
     LX_TextTexture(std::string text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-                   LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                   LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
     /**
     *   @fn LX_TextTexture(const UTF8string& text, unsigned int sz, LX_TrueTypeFont::LX_Font& font,
-    *                    LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888)
+    *                    LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
@@ -517,7 +516,7 @@ public:
     */
     LX_TextTexture(const UTF8string& text, unsigned int sz,
                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                   uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                   uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual void draw();
     /**
@@ -619,17 +618,17 @@ public:
 
     /// Constructor without the text
     LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                        uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_SolidTextTexture(std::string text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                        uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                        uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                        uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);
@@ -663,17 +662,17 @@ public:
 
     /// Constructor without the text
     LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                         uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_ShadedTextTexture(std::string text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
-                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                         LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
-                         LX_Win::LX_Window& w, uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                         LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);
@@ -741,17 +740,17 @@ public:
 
     /// Constructor without the text
     LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
-                          uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
     LX_BlendedTextTexture(std::string text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                          uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                          uint32_t format=SDL_PIXELFORMAT_RGBA8888);
+                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual void setText(std::string text, unsigned int sz);
     virtual void setText(const UTF8string& text, unsigned int sz);

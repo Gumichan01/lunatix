@@ -11,7 +11,7 @@
 */
 
 /*
-*   This file describes every constant values usable by the user
+*   This file describes every constant values usable by the user (LX_Event)
 */
 
 #include <SDL2/SDL_events.h>
