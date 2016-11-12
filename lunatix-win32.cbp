@@ -79,6 +79,7 @@
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
 		<Unit filename="include/LunatiX/LX_FileSystem.hpp" />
+		<Unit filename="include/LunatiX/LX_Format.inl" />
 		<Unit filename="include/LunatiX/LX_Gamepad.hpp" />
 		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
