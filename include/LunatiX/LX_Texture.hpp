@@ -579,7 +579,6 @@ public:
     *
     *   @param [in] text The utf-8 text to set
     *   @param [in] sz The new size of the text
-    *
     *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text, unsigned int sz) = 0;
@@ -589,10 +588,19 @@ public:
     *   Set the size of the text
     *
     *   @param [in] sz The new size of the text
-    *
     *   @note This function updates the texture of the text
     */
     virtual void setSize(unsigned int sz) = 0;
+
+    /**
+    *   @fn virtual void setTextColour(LX_Colour c)
+    *
+    *   Set the colour of the text
+    *
+    *   @param [in] c the colour of the text
+    *   @note This function updates the texture of the text
+    */
+    virtual void setTextColour(LX_Colour c);
 
     /// Destructor
     virtual ~LX_TextTexture();

@@ -413,6 +413,12 @@ void LX_TextTexture::setPosition(int x, int y)
 }
 
 
+void LX_TextTexture::setTextColour(LX_Colour c)
+{
+    _font.setColor(c);
+    updateTexture_();
+}
+
 LX_TextTexture::~LX_TextTexture() {}
 
 
