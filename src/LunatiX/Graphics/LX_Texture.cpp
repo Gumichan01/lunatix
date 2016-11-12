@@ -415,7 +415,7 @@ void LX_TextTexture::setPosition(int x, int y)
 
 void LX_TextTexture::setTextColour(LX_Colour c)
 {
-    _font.setColor(c);
+    _font.setColour(c);
     updateTexture_();
 }
 
@@ -545,7 +545,7 @@ void LX_ShadedTextTexture::setSize(unsigned int sz)
     updateTexture_();
 }
 
-void LX_ShadedTextTexture::setBgColor(LX_Colour c)
+void LX_ShadedTextTexture::setBgColour(LX_Colour c)
 {
     _bgcolour = c;
     updateTexture_();

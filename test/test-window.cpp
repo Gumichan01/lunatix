@@ -410,7 +410,7 @@ void test_viewport(LX_Win::LX_Window *win)
         img.draw();
 
         win->setViewPort(&viewport);
-        win->setDrawColor(bcolor);
+        win->setDrawColour(bcolor);
         win->fillRect(brect);
         sprite.draw(&rect);
 
@@ -687,7 +687,7 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Timer::delay(1000);
 
     LX_Colour c = {255,0,0,255};
-    win->setDrawColor(c);
+    win->setDrawColour(c);
     LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
     LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");
     win->clearWindow();
@@ -706,7 +706,7 @@ void test_drawing(LX_Win::LX_Window *win)
     };
 
     c = {255,255,255,255};
-    win->setDrawColor(c);
+    win->setDrawColour(c);
     win->clearWindow();
     win->drawSegments(points,8);
     win->update();

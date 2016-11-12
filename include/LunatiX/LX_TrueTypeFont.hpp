@@ -60,7 +60,6 @@ class LX_BlendedTextTexture;
 */
 namespace LX_TrueTypeFont
 {
-/// @todo Refactoring
 
 const unsigned int LX_TTF_DEFAULT_SIZE = 24;   /**< The default value of the font size */
 
@@ -105,7 +104,7 @@ class LX_Font
     SDL_Texture * drawBlendedText(const UTF8string& text, unsigned int size,
                                   LX_Win::LX_Window& w);
 
-    void setColor(const LX_Colour& colour);
+    void setColour(const LX_Colour& colour);
 
 public:
 

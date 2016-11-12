@@ -656,7 +656,7 @@ public:
 *   with a background colour that should be defined.
 *
 *   By default, at instantiation, the background colour is black, but it can be
-*   set using LX_ShadedImage::setbgColor()
+*   set using LX_ShadedImage::setbgColour()
 */
 class LX_ShadedTextTexture: public LX_TextTexture
 {
@@ -711,7 +711,7 @@ public:
     virtual void setSize(unsigned int sz);
 
     /**
-    *   @fn void setBgColor(LX_Colour c)
+    *   @fn void setBgColour(LX_Colour c)
     *
     *   Set the colour of the background behind the text
     *
@@ -720,7 +720,7 @@ public:
     *   @note 1 - This function updates the texture of the text
     *   @note 2 - In order to
     */
-    void setBgColor(LX_Colour c);
+    void setBgColour(LX_Colour c);
 
     /// Destructor
     ~LX_ShadedTextTexture() = default;

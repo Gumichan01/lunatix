@@ -354,7 +354,7 @@ SDL_Texture * LX_Font::drawBlendedText(const UTF8string& text, unsigned int size
 /*
 *   This function sets the new colour of texts.
 */
-void LX_Font::setColor(const LX_Colour& colour)
+void LX_Font::setColour(const LX_Colour& colour)
 {
     _fimpl->_font_colour = colour;
 }

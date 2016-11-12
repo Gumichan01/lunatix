@@ -92,7 +92,7 @@ enum LX_BlendMode: uint32_t
     LX_BLENDMODE_ADD = 0x00000002,      /**< additive blending
                                               dstRGB = (srcRGB * srcA) + dstRGB
                                               dstA = dstA */
-    LX_BLENDMODE_MOD = 0x00000004       /**< color modulate
+    LX_BLENDMODE_MOD = 0x00000004       /**< colour modulate
                                               dstRGB = srcRGB * dstRGB
                                               dstA = dstA */
 };
@@ -290,11 +290,11 @@ public :
     void fillCircle(const LX_Physics::LX_Circle& c);
 
     /**
-    *   @fn void setDrawColor(const LX_Colour& colour)
+    *   @fn void setDrawColour(const LX_Colour& colour)
     *   Set the colour used for drawing operations (Lines, Rectangles, Circles)
     *   @param [in] colour The colour (RGBA)
     */
-    void setDrawColor(const LX_Colour& colour);
+    void setDrawColour(const LX_Colour& colour);
     /**
     *   @fn void setDrawBlendMode(LX_BlendMode mode)
     *
@@ -317,11 +317,11 @@ public :
     */
     void setDrawBlendMode(LX_BlendMode mode);
     /**
-    *   @fn void getDrawColor(const LX_Colour& colour) const
+    *   @fn void getDrawColour(const LX_Colour& colour) const
     *   Get the colour used for drawing operations (Lines, Rectangles, Circles)
     *   @param [out] colour The colour (RGBA) to get
     */
-    void getDrawColor(LX_Colour& colour) const;
+    void getDrawColour(LX_Colour& colour) const;
     /**
     *   @fn void getDrawBlendMode(LX_BlendMode& mode) const
     *

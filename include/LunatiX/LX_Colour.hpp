@@ -72,7 +72,7 @@ struct LX_glColour
 
 
 /**
-*   @fn inline LX_glColour from8BitColor(const LX_Colour& colour)
+*   @fn inline LX_glColour from8BitColour(const LX_Colour& colour)
 *
 *   Convert a colour in 8-bit notation to a colour in floating-point notation
 *
@@ -82,9 +82,9 @@ struct LX_glColour
 *   @note This function is very useful when the program uses colours in OpenGL
 *   representation (floating-point)
 *
-*   @sa fromGLColor
+*   @sa fromGLColour
 */
-inline LX_glColour from8BitColor(const LX_Colour& colour)
+inline LX_glColour from8BitColour(const LX_Colour& colour)
 {
     const float M = 255.0f;  // Max 8-it colour
     LX_glColour c = {static_cast<float>(colour.r) / M,
@@ -95,7 +95,7 @@ inline LX_glColour from8BitColor(const LX_Colour& colour)
     return c;
 }
 /**
-*   @fn inline LX_Colour fromGLColor(const LX_glColour& colour)
+*   @fn inline LX_Colour fromGLColour(const LX_glColour& colour)
 *
 *   Convert a colour in floating-point notation to a colour in 8-bit notation
 *
@@ -105,9 +105,9 @@ inline LX_glColour from8BitColor(const LX_Colour& colour)
 *   @note This function is very useful when the program uses colours in OpenGL
 *   representation (floating-point)
 *
-*   @sa from8BitColor
+*   @sa from8BitColour
 */
-inline LX_Colour fromGLColor(const LX_glColour& colour)
+inline LX_Colour fromGLColour(const LX_glColour& colour)
 {
     const float N = 255.0f;
     LX_Colour c = {static_cast<uint8_t>(colour.r * N),
@@ -141,7 +141,7 @@ inline uint32_t toRGBAvalue(const LX_Colour& colour)
 *
 *   Get the colour structure from an integer value
 *
-*   @param [in] rgba The color in one unsignd interger value
+*   @param [in] rgba The colour in one unsigned integer value
 *   @return The colour structure
 */
 inline LX_Colour fromRGBAvalue(const uint32_t rgba)
