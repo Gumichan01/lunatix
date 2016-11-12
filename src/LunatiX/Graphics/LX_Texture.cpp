@@ -415,7 +415,7 @@ void LX_TextTexture::setPosition(int x, int y)
 
 void LX_TextTexture::setTextColour(LX_Colour c)
 {
-    _font.setColour(c);
+    _font.setColour_(c);
     updateTexture_();
 }
 
@@ -444,16 +444,16 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                     uint32_t format)
     : LX_TextTexture(text,sz,font,w,format)
 {
-    _texture = _font.drawSolidText(_text,_size,_win);
-    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
+    _texture = _font.drawSolidText_(_text,_size,_win);
+    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 
 void LX_SolidTextTexture::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
-    _texture = _font.drawSolidText(_text,_size,_win);
-    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
+    _texture = _font.drawSolidText_(_text,_size,_win);
+    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -506,8 +506,8 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
 void LX_ShadedTextTexture::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
-    _texture = _font.drawShadedText(_text,_size,_bgcolour,_win);
-    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
+    _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
+    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -573,16 +573,16 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                       uint32_t format)
     : LX_TextTexture(text,sz,font,w,format)
 {
-    _texture = _font.drawBlendedText(_text,_size,_win);
-    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
+    _texture = _font.drawBlendedText_(_text,_size,_win);
+    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 
 void LX_BlendedTextTexture::updateTexture_()
 {
     SDL_DestroyTexture(_texture);
-    _texture = _font.drawBlendedText(_text,_size,_win);
-    _font.sizeOfText(_text,_size,_dimension.w,_dimension.h);
+    _texture = _font.drawBlendedText_(_text,_size,_win);
+    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 

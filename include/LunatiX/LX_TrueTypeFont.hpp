@@ -87,24 +87,24 @@ class LX_Font
     LX_Font& operator =(LX_Font& f);
 
     /* Private functions */
-    int sizeOfText(std::string text, int& w, int& h) const;
-    int sizeOfText(const std::string& text, const unsigned int size, int& w, int& h) const;
-    int sizeOfText(const UTF8string& text, const unsigned int size, int& w, int& h) const;
+    int sizeOfText_(std::string text, int& w, int& h) const;
+    int sizeOfText_(const std::string& text, const unsigned int size, int& w, int& h) const;
+    int sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const;
 
-    SDL_Texture * drawSolidText(const std::string& text, unsigned int size, LX_Win::LX_Window& w);
-    SDL_Texture * drawSolidText(const UTF8string& text, unsigned int size, LX_Win::LX_Window& w);
+    SDL_Texture * drawSolidText_(const std::string& text, unsigned int size, LX_Win::LX_Window& w);
+    SDL_Texture * drawSolidText_(const UTF8string& text, unsigned int size, LX_Win::LX_Window& w);
 
-    SDL_Texture * drawShadedText(const std::string& text, unsigned int size,
+    SDL_Texture * drawShadedText_(const std::string& text, unsigned int size,
                                  const LX_Colour& bg, LX_Win::LX_Window& w);
-    SDL_Texture * drawShadedText(const UTF8string& text, unsigned int size,
+    SDL_Texture * drawShadedText_(const UTF8string& text, unsigned int size,
                                  const LX_Colour& bg, LX_Win::LX_Window& w);
 
-    SDL_Texture * drawBlendedText(const std::string& text, unsigned int size,
+    SDL_Texture * drawBlendedText_(const std::string& text, unsigned int size,
                                   LX_Win::LX_Window& w);
-    SDL_Texture * drawBlendedText(const UTF8string& text, unsigned int size,
+    SDL_Texture * drawBlendedText_(const UTF8string& text, unsigned int size,
                                   LX_Win::LX_Window& w);
 
-    void setColour(const LX_Colour& colour);
+    void setColour_(const LX_Colour& colour);
 
 public:
 
