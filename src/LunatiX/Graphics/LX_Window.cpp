@@ -64,9 +64,10 @@ void LX_initWindowInfo(LX_WindowInfo &info)
 {
     info.id = 0;
     info.title = DEFAULT_TITLE;
+    info.x = SDL_WINDOWPOS_CENTERED;
+    info.y = SDL_WINDOWPOS_CENTERED;
     info.w = DEFAULT_WIN_WIDTH;
     info.h = DEFAULT_WIN_HEIGHT;
-    LX_WinConfSetCenter(info);
     info.lw = 0;
     info.lh = 0;
     info.flag = 0;
@@ -84,23 +85,15 @@ void LX_loadWindowConfig(LX_WindowInfo &info)
     {
         info.id = 0;
         info.title = DEFAULT_TITLE;
+        info.x = SDL_WINDOWPOS_CENTERED;
+        info.y = SDL_WINDOWPOS_CENTERED;
         info.w = config->getWinWidth();
         info.h = config->getWinHeight();
-        LX_WinConfSetCenter(info);
         info.lw = 0;
         info.lh = 0;
         info.flag = generateFlags(*config);
         info.accel = true;
     }
-}
-
-
-void LX_WinConfSetCenter(LX_WindowInfo &info)
-{
-    SDL_DisplayMode dm;
-    SDL_GetDesktopDisplayMode(0,&dm);
-    info.x = (dm.w - info.w)/2;
-    info.y = (dm.h - info.h)/2;
 }
 
 

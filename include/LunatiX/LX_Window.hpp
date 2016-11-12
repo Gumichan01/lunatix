@@ -129,14 +129,6 @@ void LX_initWindowInfo(LX_WindowInfo &info);
 *   @param [out] info The structure to fill information in
 */
 void LX_loadWindowConfig(LX_WindowInfo &info);
-/**
-*   @fn void LX_WinConfSetCenter(LX_WindowInfo &info)
-*   Configure the window in order to put it in the middle of the screen
-*   @param [in,out] info The structure to fill information in
-*
-*   @note This function should be called when the width and the height are set
-*/
-void LX_WinConfSetCenter(LX_WindowInfo &info);
 
 
 /**
