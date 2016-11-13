@@ -32,7 +32,6 @@ int main(int argc, char** argv)
     LX_Win::LX_loadWindowConfig(info);
     info.w = 256;
     info.h = 256;
-    LX_Win::LX_WinConfSetCenter(info);
 
     LX_Win::LX_Window w(info);
     w.setIcon(s);
