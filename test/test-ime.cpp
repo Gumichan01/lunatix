@@ -16,7 +16,7 @@ public:
     explicit FuncDraw(LX_Win::LX_Window& win)
         : LX_Text::LX_RedrawCallback(), _w(win), _font(LX_Colour {255,255,255,0}) {}
 
-    void operator ()(UTF8string& u8str, bool update,
+    void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
                      size_t cursor, size_t prev_cur)
     {
         if(update)
@@ -30,6 +30,14 @@ public:
                 img.setText(u8str,24);
                 img.setPosition(100,100);
                 img.draw();
+            }
+
+            if(!u8comp.utf8_empty())
+            {
+                LX_Colour colour = {127,127,127,255};
+                LX_Graphics::LX_ShadedTextTexture im(u8comp,18,_font,colour,_w);
+                im.setPosition(100,124);
+                im.draw();
             }
             _w.update();
         }
@@ -114,7 +122,7 @@ int main(int argc, char** argv)
         // Text input
         {
             FuncDraw callbck(win);
-            generateInput();            // Automatic input
+            //generateInput();            // Remove it in order to use the manual input
             LX_Text::LX_TextInput input;
             input.eventLoop(callbck);
         }

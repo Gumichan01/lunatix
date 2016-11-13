@@ -30,8 +30,6 @@ class LX_EventHandler;
 };
 
 
-/// @todo (#1#) handle the text edition
-
 /**
 *   @namespace LX_Text
 *   @brief The Text input module
@@ -52,19 +50,24 @@ public:
 
     LX_RedrawCallback();
     /**
-    *   @fn virtual void operator ()(UTF8string& u8str, const bool update,
-    *                                size_t cursor, size_t prev_cur) = 0;
+    *   @fn virtual void operator ()(UTF8string& u8str, UTF8string& u8comp,
+                                     const bool update, size_t cursor,
+                                     size_t prev_cur) = 0;
     *
     *   Virtual function that update the display of a string
-    *   @param [in] u8str The utf-8 encoded string that will be displayed
+    *   @param [in] u8str The utf-8 encoded string written by the user
+    *   @param [in] u8comp The utf-8 encoded string that has been composed
     *   @param [in] update A constant value that specify if the display
     *           of the string has to be updated
     *   @param [in] cursor The current position of the cursor on the string
     *   @param [in] prev_cur The previous position of the cursor on the string
     *
-    *   @note This function must be implemented in a subclass
+    *   @note 1 — This function must be implemented in a subclass
+    *   @note 2 — u8str is the string written by the user
+    *   @note 3 — u8comp is the string that is currently composed but
+    *           not yet validated by the user (often used for non-latin words)
     */
-    virtual void operator ()(UTF8string& u8str, const bool update,
+    virtual void operator ()(UTF8string& u8str, UTF8string& u8comp, const bool update,
                              size_t cursor, size_t prev_cur) = 0;
     /// Destructor
     virtual ~LX_RedrawCallback();

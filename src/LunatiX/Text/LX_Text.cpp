@@ -54,9 +54,11 @@ LX_RedrawCallback::~LX_RedrawCallback() {}
 class LX_TextInput_
 {
     UTF8string _u8text;
+    UTF8string _u8comp;
     size_t _cursor;
     bool _done;
     bool _draw;
+    bool _composing;
 
     // Save a text in the clipboard get it from it
     void save_()
@@ -122,11 +124,17 @@ class LX_TextInput_
     {
         const size_t old_cursor = _cursor;
 
+        if(ev.getKeyCode() == SDLK_ESCAPE)
+        {
+            _done = true;
+            return;
+        }
+
+        if(_composing)
+            return;
+
         switch(ev.getKeyCode())
         {
-        case SDLK_ESCAPE:
-            _done = true;
-            break;
 
         case SDLK_BACKSPACE:
             backslashKey_();
@@ -193,6 +201,7 @@ class LX_TextInput_
             UTF8string ntext(tev.text);
             u8stringInput_(ntext);
             _draw = true;
+            _u8comp = "";
         }
         catch(...)
         {
@@ -206,6 +215,17 @@ class LX_TextInput_
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
                          ev.getTextEvent().text.c_str());
+
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"start: %d; len: %d",
+                         ev.getTextEvent().start, ev.getTextEvent().length);
+        _u8comp = ev.getTextEvent().text.c_str();
+
+        if(_u8comp.utf8_empty())
+            _composing = false;
+        else
+            _composing = true;
+
+        _draw = true;
     }
 
     // Operation on the string
@@ -295,7 +315,7 @@ class LX_TextInput_
 public:
 
     LX_TextInput_()
-        : _cursor(0),_done(false),_draw(false)
+        : _cursor(0),_done(false),_draw(false), _composing(false)
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Start the input.");
         SDL_StartTextInput();
@@ -331,7 +351,7 @@ public:
                     break;
                 }
 
-                redraw(_u8text, _draw, _cursor, prev_cur);
+                redraw(_u8text, _u8comp, _draw, _cursor, prev_cur);
                 prev_cur = _cursor;
                 _draw = false;
             }
