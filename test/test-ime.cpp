@@ -122,7 +122,7 @@ int main(int argc, char** argv)
         // Text input
         {
             FuncDraw callbck(win);
-            //generateInput();            // Remove it in order to use the manual input
+            generateInput();            // Remove it in order to use the manual input
             LX_Text::LX_TextInput input;
             input.eventLoop(callbck);
         }
