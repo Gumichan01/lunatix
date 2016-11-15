@@ -13,7 +13,7 @@
 *    @file LX_Particle.cpp
 *    @brief The particle implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

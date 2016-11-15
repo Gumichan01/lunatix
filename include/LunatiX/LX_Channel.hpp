@@ -16,7 +16,7 @@
 *    @file LX_Channel.hpp
 *    @brief The channel API
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

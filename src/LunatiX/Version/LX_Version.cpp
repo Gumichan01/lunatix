@@ -14,7 +14,7 @@
 *    @file LX_Version.cpp
 *    @brief The version implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 
@@ -32,7 +32,7 @@ namespace
 {
 const short LX_MAJOR_VERSION = 0;
 const short LX_MINOR_VERSION = 9;
-const short LX_PATCH_VERSION = 0;
+const short LX_PATCH_VERSION = 1;
 const char * LX_COPYRIGHT    = "Copyright (C) 2016";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 };

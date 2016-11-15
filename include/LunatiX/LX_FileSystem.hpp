@@ -17,7 +17,7 @@
 *    @file LX_FileSystem.hpp
 *    @brief The File system
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

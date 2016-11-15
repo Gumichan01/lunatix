@@ -18,7 +18,7 @@
 *    @file LX_Polygon.hpp
 *    @brief The polygon file
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

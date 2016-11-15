@@ -16,7 +16,7 @@
 *    @file LX_Text.hpp
 *    @brief The interface of LX_TextInput
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 

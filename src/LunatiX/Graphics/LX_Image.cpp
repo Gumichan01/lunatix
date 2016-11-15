@@ -14,7 +14,7 @@
 *    @file LX_Image.cpp
 *    @brief The implementation of the image
 *    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.8
+*    @version 0.9
 *
 */
 
