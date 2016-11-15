@@ -143,11 +143,13 @@ library: depend $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
 
 $(LUNATIX_STATIC_LIB): $(OBJ_FILES)
 	@echo -n "Generating the static library → "$@"... "
+	@mkdir -p $(LUNATIX_LIB_DIR)
 	@ar rcs $@ $(OBJ_FILES)
 	@echo "DONE"
 
 $(LUNATIX_SHARED_LIB): $(OBJ_FILES)
 	@echo -n "Generating the shared library → "$@"... "
+	@mkdir -p $(LUNATIX_LIB_DIR)
 	@$(CC) -shared -o $@ $(OBJ_FILES) $(LFLAGS)
 	@echo "DONE"
 
