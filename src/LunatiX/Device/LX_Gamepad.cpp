@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -13,10 +12,9 @@
 
 /**
 *    @file LX_Gamepad.cpp
-*    @brief The LX_Gamepad implementation
+*    @brief The gamepad implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Gamepad.hpp>

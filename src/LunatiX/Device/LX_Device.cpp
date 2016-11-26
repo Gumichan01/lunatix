@@ -35,7 +35,6 @@ int numberOfDevices()
     return SDL_NumJoysticks();
 }
 
-
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
     std::ostringstream stream;
@@ -54,7 +53,6 @@ UTF8string gamepadToString(LX_GamepadInfo& info)
 
     return UTF8string(stream.str());
 }
-
 
 int mouseCursorDisplay(int toggle)
 {

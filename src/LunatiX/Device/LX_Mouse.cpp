@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -56,18 +55,15 @@ public:
 LX_Mouse::LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y)
     : _mimpl(new LX_Mouse_(surface._surface,hot_x,hot_y)) {}
 
-
 bool LX_Mouse::isOpen() const
 {
     return _mimpl->isOpen();
 }
 
-
 void LX_Mouse::setMouse()
 {
     _mimpl->setMouse();
 }
-
 
 LX_Mouse::~LX_Mouse()
 {

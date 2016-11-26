@@ -1,6 +1,3 @@
-#ifndef LX_HAPTIC_HPP_INCLUDED
-#define LX_HAPTIC_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_HAPTIC_HPP_INCLUDED
+#define LX_HAPTIC_HPP_INCLUDED
+
 /**
 *    @file LX_Haptic.hpp
-*    @brief The library that deals force feedback
+*    @brief The force feedback (Haptic) interface
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <memory>
@@ -42,17 +41,13 @@ using LX_HapticEffect = SDL_HapticEffect;
 
 /**
 *   @fn int numberOfHapticDevices()
-*
 *   Get the number of haptic systems
-*
 *   @return The number of haptic systems
 */
 int numberOfHapticDevices();
 /**
 *   @fn bool mouseIsHaptic
-*
 *   Check if the current mouse has haptic feedback
-*
 *   @return TRUE if the mouse has haptic feedback, FALSE otherwise
 */
 bool mouseIsHaptic();
@@ -89,7 +84,6 @@ public :
     *   @brief Constructor
     *
     *   Create the instance of the haptic system using the index
-    *
     *   @param [in] index The index of the device to open
     */
     explicit LX_Haptic(int index);
@@ -127,7 +121,7 @@ public :
     *
     *   Check if an effect is supported by the current device
     *
-    *   @param [in] effect Effect to chec
+    *   @param [in] effect Effect to check
     *   @return TRUE if the effect is supported. FALSE otherwise
     *
     *   @sa newEffect
@@ -160,9 +154,7 @@ public :
     virtual void runEffect(int effect_id, uint32_t iterations);
     /**
     *   @fn virtual void stopEffect(int effect_id)
-    *
     *   Stop the effect
-    *
     *   @param [in] effect_id Identifier of the haptic effect to stop
     *
     *   @sa newEffect
@@ -172,9 +164,7 @@ public :
 
     /**
     *   @fn virtual int numberOfEffects() const
-    *
     *   Get the number of playable effects
-    *
     *   @return The number of loaded effects
     *
     *   @sa newEffect
@@ -190,7 +180,6 @@ public :
 /**
 *   @class LX_MouseHaptic
 *   @brief The mouse haptic device
-*
 *   This class describes the force feedback system related to the mouse.
 */
 class LX_MouseHaptic: public LX_Haptic

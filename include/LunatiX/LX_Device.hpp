@@ -1,6 +1,3 @@
-#ifndef LX_DEVICE_HPP_INCLUDED
-#define LX_DEVICE_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_DEVICE_HPP_INCLUDED
+#define LX_DEVICE_HPP_INCLUDED
+
 /**
 *    @file LX_Device.hpp
-*    @brief The library that deals with gamepads and mouse cursor
+*    @brief The Device header
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -26,10 +25,16 @@
 
 
 /**
+*   @defgroup Device Device
+*   @brief Device handling (gamepad, mouse, force feedback)
+*/
+
+/**
+*   @ingroup Device
 *   @namespace LX_Device
-*   @brief The device module
+*   @brief The device namespace
 *
-*   This modules handles several types of device (gamepad, mouse)
+*   This namespaces handles several types of device (gamepad, mouse)
 *   and the haptic system
 *
 *   @warning In order to use any gamepad in LX_Device, the *gamepad* flag
@@ -66,13 +71,10 @@ struct LX_GamepadInfo
 
 /**
 *   @fn int numberOfDevices()
-*
-*   Count the number of connected devices (gamepads)
-*
+*   Count the number of plugged devices (gamepads)
 *   @return The number of gamepads
 */
 int numberOfDevices();
-
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
@@ -97,9 +99,8 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 *            - ::LX_MOUSE_HIDE:  to hide
 *            - ::LX_MOUSE_QUERY: to get the current state
 *
-*   @return 1 if the cursor is shown, 0 if it is hidden,
-*           a negative value on failure
-*
+*   @return LX_MOUSE_SHOW if the cursor is shown, LX_MOUSE_HIDE if it is hidden,
+*           a negative value on failure.
 */
 int mouseCursorDisplay(int toggle);
 

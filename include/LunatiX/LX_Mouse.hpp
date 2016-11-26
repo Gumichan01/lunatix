@@ -1,5 +1,3 @@
-#ifndef LX_MOUSE_HPP_INCLUDED
-#define LX_MOUSE_HPP_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,13 +10,15 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_MOUSE_HPP_INCLUDED
+#define LX_MOUSE_HPP_INCLUDED
+
 /**
 *    @file LX_Mouse.hpp
 *    @brief The mouse interface
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
 */
-
 
 #include <memory>
 
@@ -35,7 +35,6 @@ class LX_Mouse_;
 /**
 *   @class LX_Mouse
 *   @brief The mouse cursor
-*
 *   It handles a user-defined mouse (with custom cursor)
 */
 class LX_Mouse
@@ -51,16 +50,14 @@ public:
     *   Construct the mouse cursor using a surface and the coordinates of
     *   the mouse clicking zone
     *
-    *   @param [in] surface The surface image to load the cursor from
+    *   @param [in] surface The buffered image to load the cursor from
     *   @param [in] hot_x The x hot spot position
     *   @param [in] hot_y The y hot spot position
     */
     LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y);
     /**
     *   @fn bool isOpen() const
-    *
     *   Check if the mouse is loaded without issues
-    *
     *   @return TRUE if there is no problem, FALSE otherwise
     */
     bool isOpen() const;
@@ -75,6 +72,5 @@ public:
 };
 
 };
-
 
 #endif // LX_MOUSE_HPP_INCLUDED

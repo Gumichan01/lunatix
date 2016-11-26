@@ -1,6 +1,3 @@
-#ifndef LX_GAMEPAD_HPP_INCLUDED
-#define LX_GAMEPAD_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_GAMEPAD_HPP_INCLUDED
+#define LX_GAMEPAD_HPP_INCLUDED
+
 /**
 *    @file LX_Gamepad.hpp
-*    @brief The file that contains the declaration of LX_Gamepad
+*    @brief The gamepad interface
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -98,7 +97,6 @@ public :
     *
     *   @return TRUE if the gamepad has force feedback support,
     *           FALSE otherwise
-    *
     */
     bool isHaptic() const;
 
