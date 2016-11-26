@@ -1,6 +1,3 @@
-#ifndef PHYSICS_H_INCLUDED
-#define PHYSICS_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,24 +10,29 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef PHYSICS_H_INCLUDED
+#define PHYSICS_H_INCLUDED
+
 /**
-*
 *    @file LX_Physics.hpp
 *    @brief The physics Library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_AABB.hpp>
 
+/**
+*   @defgroup Physics Physics
+*   @brief Physics Module (collision detection, movement, ...)
+*/
 
 /**
+*   @ingroup Physics
 *   @namespace LX_Physics
-*   @brief The physics module
+*   @brief The physics namespace
 *
 *   It handles operations on bodies (collision, movement, ...)
-*
 */
 namespace LX_Physics
 {
@@ -42,7 +44,7 @@ class LX_Polygon;
 
 /**
 *    @fn unsigned int euclide_square_distance(const int x1, const int y1,
-*                                            const int x2, const int y2)
+*                                             const int x2, const int y2)
 *
 *    This function calculates the euclidean square distance between 2 coordinates
 *
@@ -51,10 +53,21 @@ class LX_Polygon;
 *    @param [in] x2 The x location of the second point
 *    @param [in] y2 The y location of the second point
 *
-*    @return An integer value
-*
+*    @return The square distance (integer value)
 */
 unsigned int euclide_square_distance(const int x1,const int y1,const int x2,const int y2);
+/**
+*    @fn unsigned int euclide_square_distance(const LX_Point& p1,
+*                                             const LX_Point& p2)
+*
+*    This function calculates the euclidean square distance
+*
+*    @param [in] p1 The first point
+*    @param [in] p2 The second point
+*
+*    @return The square distance (integer value)
+*/
+unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
 
 /**
 *    @fn float euclide_distance(const int x1, const int y1,
@@ -67,24 +80,9 @@ unsigned int euclide_square_distance(const int x1,const int y1,const int x2,cons
 *    @param [in] x2 The x location of the second point
 *    @param [in] y2 The y location of the second point
 *
-*    @return An float value
-*
+*    @return The distance (floating-point value)
 */
-unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
-
-/**
-*    @fn unsigned int euclide_square_distance(const LX_Point& p1,
-*                                             const LX_Point& p2)
-*
-*    This function calculates the euclidean square distance
-*
-*    @param [in] p1 The first point
-*    @param [in] p2 The second point
-*
-*    @return An integer value
-*
-*/
-float euclide_distance(int const x1, const int y1, const int x2, const int y2);
+float euclide_distance(const int x1, const int y1, const int x2, const int y2);
 
 /**
 *    @fn float euclide_distance(const LX_Point& p1, const LX_Point& p2)
@@ -94,29 +92,26 @@ float euclide_distance(int const x1, const int y1, const int x2, const int y2);
 *    @param [in] p1 The first point
 *    @param [in] p2 The second point
 *
-*    @return An integer value
-*
+*    @return The distance (floating-point value)
 */
 float euclide_distance(const LX_Point& p1,const LX_Point& p2);
 
 
 /* Collision detection */
 
-
 /**
-*    @fn bool collisionPointRect(const int x_pos, const int y_pos,
+*    @fn bool collisionPointRect(const int xpos, const int ypos,
 *                                const LX_AABB& rect)
 *
 *    Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
-*    @param [in] x_pos The x position of the point
-*    @param [in] y_pos The y position of the point
+*    @param [in] xpos The x position of the point
+*    @param [in] ypos The y position of the point
 *    @param [in] rect The AABB
 *
 *    @return TRUE if there is a collision, FALSE otherwise
-*
 */
-bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect);
+bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect);
 
 /**
 *    @fn bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
@@ -127,25 +122,23 @@ bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect);
 *    @param [in] rect The AABB
 *
 *    @return TRUE if there is a collision, FALSE otherwise
-*
 */
 bool collisionPointRect(const LX_Point& p,const LX_AABB& rect);
 
 
 /**
-*    @fn bool collisionPointCircle(const int x_pos, const int y_pos,
+*    @fn bool collisionPointCircle(const int xpos, const int ypos,
 *                                  const LX_Circle& circle)
 *
 *    Check the collision between a point and a circle
 *
-*    @param [in] x_pos The x position of the point
-*    @param [in] y_pos The y position of the point
+*    @param [in] xpos The x position of the point
+*    @param [in] ypos The y position of the point
 *    @param [in] circle The circle
 *
 *    @return TRUE if there is a collision, FALSE otherwise
-*
 */
-bool collisionPointCircle(const int x_pos, const int y_pos, const LX_Circle& circle);
+bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle);
 
 /**
 *    @fn bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
@@ -246,7 +239,6 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
 *   @param [in] D the second point of the second segment
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
-*
 */
 bool intersectSegment(const LX_Point& A, const LX_Point& B,
                       const LX_Point& C, const LX_Point& D);
@@ -261,7 +253,6 @@ bool intersectSegment(const LX_Point& A, const LX_Point& B,
 *   @param [in] poly The polygon
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
-*
 */
 bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
 
@@ -274,7 +265,6 @@ bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
 *   @param [in] poly The polygon
 *
 *   @return TRUE if there is a collision, FALSE otherwise
-*
 */
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 
@@ -287,7 +277,6 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 *   @param [in] poly The polygon
 *
 *   @return TRUE if there is a collision, FALSE otherwise
-*
 */
 bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 
@@ -314,7 +303,6 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 *   @param [in] P The point to move
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
-*
 */
 void movePoint(LX_Point& P, const int vx, const int vy);
 
@@ -326,7 +314,6 @@ void movePoint(LX_Point& P, const int vx, const int vy);
 *   @param [in] rect The AABB to move
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
-*
 */
 void moveRect(LX_AABB& rect, const int vx, const int vy);
 
@@ -338,7 +325,6 @@ void moveRect(LX_AABB& rect, const int vx, const int vy);
 *   @param [in] C The circle to move
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
-*
 */
 void moveCircle(LX_Circle& C, const int vx, const int vy);
 
@@ -350,7 +336,6 @@ void moveCircle(LX_Circle& C, const int vx, const int vy);
 *   @param [in] poly The polygon to move
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
-*
 */
 void movePoly(LX_Polygon& poly, const float vx, const float vy);
 
@@ -361,7 +346,6 @@ void movePoly(LX_Polygon& poly, const float vx, const float vy);
 *
 *   @param [in] P The point to move
 *   @param [in] v The vector that indicates the direction
-*
 */
 void movePoint(LX_Point& P, const LX_Vector2D& v);
 
@@ -372,7 +356,6 @@ void movePoint(LX_Point& P, const LX_Vector2D& v);
 *
 *   @param [in] rect The AABB to move
 *   @param [in] v The vector that indicates the direction
-*
 */
 void moveRect(LX_AABB& rect, const LX_Vector2D& v);
 
@@ -383,7 +366,6 @@ void moveRect(LX_AABB& rect, const LX_Vector2D& v);
 *
 *   @param [in] C The circle to move
 *   @param [in] v The vector that indicates the direction
-*
 */
 void moveCircle(LX_Circle& C, const LX_Vector2D& v);
 
@@ -394,7 +376,6 @@ void moveCircle(LX_Circle& C, const LX_Vector2D& v);
 *
 *   @param [in] poly The polygon to move
 *   @param [in] v The vector that indicates the direction
-*
 */
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v);
 
@@ -406,7 +387,6 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v);
 *   @param [in] P The point to move
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
-*
 */
 void movePointTo(LX_Point& P, const int xpos, const int ypos);
 
@@ -418,7 +398,6 @@ void movePointTo(LX_Point& P, const int xpos, const int ypos);
 *   @param [in] rect The AABB to move
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
-*
 */
 void moveRectTo(LX_AABB& rect, const int xpos, const int ypos);
 
@@ -430,7 +409,6 @@ void moveRectTo(LX_AABB& rect, const int xpos, const int ypos);
 *   @param [in] C The circle to move
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
-*
 */
 void moveCircleTo(LX_Circle& C, const int xpos, const int ypos);
 
@@ -442,7 +420,6 @@ void moveCircleTo(LX_Circle& C, const int xpos, const int ypos);
 *   @param [in] poly The polygon to move
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
-*
 */
 void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
 

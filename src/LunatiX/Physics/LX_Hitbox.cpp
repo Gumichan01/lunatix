@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -11,13 +10,11 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-
 /**
 *    @file LX_Hitbox.cpp
 *    @brief The Hitbox operators implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Hitbox.hpp>
@@ -109,4 +106,3 @@ bool operator <=(const LX_Circle& a, const LX_Circle& b)
 }
 
 };
-

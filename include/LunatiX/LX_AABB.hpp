@@ -1,5 +1,3 @@
-#ifndef LX_AABB_H_INCLUDED
-#define LX_AABB_H_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,18 +10,20 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_AABB_H_INCLUDED
+#define LX_AABB_H_INCLUDED
+
 /**
-*
-*    @file LX_AABB.hpp
-*    @brief The definition of LX_AABB
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
-*
+*   @file LX_AABB.hpp
+*   @brief The definition of LX_AABB
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 // LX_AABB is just an alias of SDL_Rect
 struct SDL_Rect;
 /**
+*   @ingroup Physics
 *   @typedef LX_AABB
 *   @brief The Axis-Aligned Bounding Box (AABB)
 *

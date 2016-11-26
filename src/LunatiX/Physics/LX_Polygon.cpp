@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -16,7 +15,6 @@
 *    @brief The Implementation of the polygon
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Polygon.hpp>
@@ -116,7 +114,6 @@ class LX_Polygon_
         _convex = true;
     }
 
-
     float area_() const
     {
         float sum = 0.0f;
@@ -166,7 +163,7 @@ class LX_Polygon_
         return true;
     }
 
-public :
+public:
 
     LX_Polygon_() : _convex(false) {}
 

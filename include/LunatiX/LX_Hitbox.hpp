@@ -1,6 +1,3 @@
-#ifndef HITBOX_H_INCLUDED
-#define HITBOX_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef HITBOX_H_INCLUDED
+#define HITBOX_H_INCLUDED
+
 /**
 *    @file LX_Hitbox.hpp
 *    @brief The hitbox library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_AABB.hpp>
@@ -29,7 +28,6 @@ namespace LX_Physics
 /**
 *   @struct LX_Point
 *   @brief The point structure
-*
 *   This point is described by the x and y field
 */
 struct LX_Point
@@ -39,13 +37,10 @@ struct LX_Point
 
     /// No argument constructor
     LX_Point();
-
     /// Construct a point using coordinates
     LX_Point(int xpos, int ypos);
-
     /// Construct a point using another point
     LX_Point(const LX_Point& p);
-
     /// Point assignment
     LX_Point& operator=(const LX_Point& p);
 };
@@ -54,7 +49,6 @@ struct LX_Point
 /**
 *   @struct LX_Circle
 *   @brief The circle structure
-*
 *   This structure describe the circle
 */
 struct LX_Circle
@@ -65,13 +59,10 @@ struct LX_Circle
 
     /// No argument constructor
     LX_Circle();
-
     /// Construct a circle using a point and a radius
     LX_Circle(const LX_Point& p, unsigned int rad);
-
     /// Construct a circle using another circle
     LX_Circle(const LX_Circle& c);
-
     /// Circle assignment
     LX_Circle& operator=(const LX_Circle& c);
 };
@@ -88,10 +79,8 @@ struct LX_Circle
 *
 *   @return TRUE If these points have exactly the same coordinates,
 *           FALSE otherwise
-*
 */
 bool operator ==(const LX_Point& a, const LX_Point& b);
-
 /**
 *   @fn bool operator !=(const LX_Point& a, const LX_Point& b)
 *
@@ -101,10 +90,8 @@ bool operator ==(const LX_Point& a, const LX_Point& b);
 *   @param [in] b The second point
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
-*
 */
 bool operator !=(const LX_Point& a, const LX_Point& b);
-
 /**
 *   @fn bool operator ==(const LX_Circle& a, const LX_Circle& b)
 *
@@ -114,10 +101,8 @@ bool operator !=(const LX_Point& a, const LX_Point& b);
 *   @param [in] b The second circle
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
-*
 */
 bool operator ==(const LX_Circle& a, const LX_Circle& b);
-
 /**
 *   @fn bool operator !=(const LX_Circle& a, const LX_Circle& b)
 *
@@ -127,10 +112,8 @@ bool operator ==(const LX_Circle& a, const LX_Circle& b);
 *   @param [in] b The second circle
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
-*
 */
 bool operator !=(const LX_Circle& a, const LX_Circle& b);
-
 /**
 *   @fn bool operator >(const LX_Circle& a, const LX_Circle& b)
 *
@@ -141,10 +124,8 @@ bool operator !=(const LX_Circle& a, const LX_Circle& b);
 *
 *   @return TRUE If the first circle is greater than the second circle,
 *           FALSE otherwise
-*
 */
 bool operator >(const LX_Circle& a, const LX_Circle& b);
-
 /**
 *   @fn bool operator <(const LX_Circle& a, const LX_Circle& b)
 *
@@ -155,10 +136,8 @@ bool operator >(const LX_Circle& a, const LX_Circle& b);
 *
 *   @return TRUE If the first circle is smaller than the second circle,
 *           FALSE otherwise
-*
 */
 bool operator <(const LX_Circle& a, const LX_Circle& b);
-
 /**
 *   @fn bool operator >=(const LX_Circle& a, const LX_Circle& b)
 *
@@ -173,7 +152,6 @@ bool operator <(const LX_Circle& a, const LX_Circle& b);
 *
 */
 bool operator >=(const LX_Circle& a, const LX_Circle& b);
-
 /**
 *   @fn bool operator <=(const LX_Circle& a, const LX_Circle& b)
 *
@@ -185,7 +163,6 @@ bool operator >=(const LX_Circle& a, const LX_Circle& b);
 *
 *   @return TRUE If the first circle is smaller than the second circle,
 *           or if the two circles have the same radius length, FALSE otherwise
-*
 */
 bool operator <=(const LX_Circle& a, const LX_Circle& b);
 

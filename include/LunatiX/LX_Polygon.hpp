@@ -1,6 +1,3 @@
-#ifndef LX_POLYGON_H_INCLUDED
-#define LX_POLYGON_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,13 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_POLYGON_H_INCLUDED
+#define LX_POLYGON_H_INCLUDED
 
 /**
 *    @file LX_Polygon.hpp
 *    @brief The polygon file
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -46,7 +44,6 @@ public :
 
     /// Constructor
     explicit LX_PolygonException(std::string err);
-
     /// Copy constructor
     LX_PolygonException(const LX_PolygonException& pex);
 
@@ -63,9 +60,7 @@ class LX_Polygon_;
 /**
 *    @class LX_Polygon
 *    @brief The polygon
-*
 *   This class defines a polygon
-*
 */
 class LX_Polygon
 {
@@ -74,8 +69,7 @@ class LX_Polygon
     LX_Polygon(LX_Polygon& p);
     LX_Polygon& operator =(LX_Polygon& p);
 
-
-public :
+public:
 
     /// Constructor
     LX_Polygon();
@@ -87,26 +81,19 @@ public :
     *
     *   @param [in] x The x position of the point
     *   @param [in] y The y position of the point
-    *
     */
     void addPoint(const int x, const int y);
     /**
     *   @fn void LX_Polygon::addPoint(const LX_Point& p)
-    *
     *   Set a new point into the polygon
-    *
     *   @param [in] p The new edge to add
-    *
     */
     void addPoint(const LX_Point& p);
 
     /**
     *   @fn unsigned long LX_Polygon::numberOfEdges() const
-    *
     *   Get the number of points
-    *
     *   @return The number of edges of the polygon
-    *
     */
     unsigned long numberOfEdges() const;
 
@@ -121,7 +108,6 @@ public :
     *
     *   @exception  LX_PolygonException If the index refers
     *               to an out of bounds position
-    *
     */
     LX_Point getPoint(const unsigned int index) const;
 
@@ -133,9 +119,8 @@ public :
     *   @return TRUE if the polygon is convex, false otherwise
     *
     *   @note Actually, the convexity of the polygon is dynamically evaluated
-    *           each time a new point in added using LX_Polygon::addPoint().
-    *           The result is stored in an internal variable
-    *
+    *         each time a new point in added using LX_Polygon::addPoint().
+    *         The result is stored in an internal variable
     */
     bool isConvex() const;
 
@@ -151,9 +136,7 @@ public :
 
     /**
     *   @fn void LX_Polygon::move(const LX_Vector2D& v)
-    *
     *   Move the polygon to a direction
-    *
     *   @param [in] v The vector that indicates the direction
     */
     void move(const LX_Vector2D& v);
@@ -165,7 +148,6 @@ public :
     *
     *   @param [in] xpos The x position
     *   @param [in] ypos The y position
-    *
     */
     void moveTo(int xpos, int ypos);
 

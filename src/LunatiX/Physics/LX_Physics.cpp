@@ -194,11 +194,11 @@ float euclide_distance(const LX_Point& p1, const LX_Point& p2)
 }
 
 
-bool collisionPointRect(const int x_pos, const int y_pos, const LX_AABB& rect)
+bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect)
 {
 
-    if(x_pos <= rect.x || y_pos >= (rect.y + rect.h)
-            || y_pos <= rect.y || x_pos >= (rect.x + rect.w))
+    if(xpos <= rect.x || ypos >= (rect.y + rect.h)
+            || ypos <= rect.y || xpos >= (rect.x + rect.w))
     {
         return false;
     }
@@ -213,10 +213,9 @@ bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
 }
 
 
-bool collisionPointCircle(const int x_pos, const int y_pos,
-                          const LX_Circle& circle)
+bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle)
 {
-    return collisionPointCircle(LX_Point(x_pos,y_pos),circle);
+    return collisionPointCircle(LX_Point(xpos,ypos),circle);
 }
 
 
