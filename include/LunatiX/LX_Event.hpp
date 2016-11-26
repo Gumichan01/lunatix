@@ -1,6 +1,3 @@
- #ifndef LX_EVENT_HPP_INCLUDED
-#define LX_EVENT_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,9 +10,12 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_EVENT_HPP_INCLUDED
+#define LX_EVENT_HPP_INCLUDED
+
 /**
 *    @file LX_Event.hpp
-*    @brief The Event module
+*    @brief The Event namespace
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
 */
@@ -28,12 +28,18 @@ union SDL_Event;
 
 
 /**
+*   @defgroup Event Event
+*   @brief Event handling module
+*/
+
+/**
+*   @ingroup Event
 *   @namespace LX_Event
-*   @brief The event module
+*   @brief The event namespace
 *
 *   It handles every events (user input, window,...)
 *
-*   @warning In order to use this module, the *video* flag
+*   @warning In order to use this namespace, the *video* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 *
@@ -47,7 +53,7 @@ using LX_GamepadID = int32_t;                       /**< Identifier of the gamep
 
 /**
 *   @typedef LX_GamepadAxis
-*   @brief Gamepad axis
+*   @brief Gamepad axis value
 *
 *   Values:
 *   - LX_AXIS_INVALID
@@ -64,7 +70,7 @@ using LX_GamepadAxis = int16_t;
 
 /**
 *   @typedef LX_GamepadButton
-*   @brief Gamepad button
+*   @brief Gamepad button value
 *
 *   Values:
 *   - LX_BUTTON_INVALID
@@ -305,7 +311,7 @@ struct LX_TextEvent
 */
 struct LX_DropEvent
 {
-    std::string file;   /**< The name of the file that is requested                 */
+    std::string file;   /**< The name of the file that is requested */
 };
 
 /**
@@ -347,6 +353,9 @@ public:
     *
     *   @note If there is an event, it is retrieved and internally stored.
     *   The event is removed from the event queue
+    *
+    *   @sa waitEvent()
+    *   @sa waitEventTimeout()
     */
     bool pollEvent();
     /**
