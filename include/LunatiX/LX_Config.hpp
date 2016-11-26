@@ -26,9 +26,6 @@
 /**
 *   @namespace LX_Config
 *   @brief The configuration loader
-*
-*   This module is responsible of loading subsystems of the library
-*
 */
 namespace LX_Config
 {
@@ -64,7 +61,9 @@ public:
 
 /**
 *   @class LX_Configuration
-*   @brief The The LunatiX configuration.
+*   @brief The The LunatiX configuration
+*
+*   This class is responsible of loading the configuration of the library
 */
 class LX_Configuration
 {
@@ -73,7 +72,7 @@ class LX_Configuration
     LX_Configuration& operator =(LX_Configuration& c);
     ~LX_Configuration();
 
-    void loadSDLFlags_();
+    void loadFlags_();
 
 public :
 
@@ -82,23 +81,19 @@ public :
     *
     *   Launch the system configuration
     *
-    *   @note   1: This function is automatically called in LX_Init()
-    *   @note   2: The instance of LX_Configuration may not be created.
-    *           So it will be necessary to call LX_GetError() to get
-    *           the error message
-    *
+    *   @note 1 — This function is automatically called in LX_Init()
+    *   @note 2 — The instance of LX_Configuration may not be created.
+    *           So, it will be necessary to call LX_GetError() to get
+    *           the error message.
     */
     static void initConfig();
 
     /**
     *   @fn LX_Configuration * getInstance()
-    *
     *   Get the unique instance of the LX_Configuration class
-    *
     *   @return The instance of LX_Configuration
     *
-    *   @note   The instance can be a null pointer
-    *           if initConfig() failed.
+    *   @note The instance can be a null pointer if *initConfig()* failed.
     */
     static LX_Configuration * getInstance();
 
@@ -108,91 +103,74 @@ public :
     *   Destroy the unique instance
     *
     *   @note It is not necessary to call this function because it is
-    *           automatically called when the library subsystems are shut down
+    *         automatically called when the library subsystems are shut down
     */
     static void destroy();
 
     /**
     *   @fn bool getVideoFlag() const
-    *
     *   Get the video flag
-    *
     *   @return TRUE if the flag is set, FALSE otherwise
     */
     bool getVideoFlag() const;
     /**
     *   @fn bool getVSyncFlag() const
-    *
     *   Get the Vertical Synchronization (VSync) flag
-    *
     *   @return TRUE if the flag is set, FALSE otherwise
     */
     bool getVSyncFlag() const;
     /**
     *   @fn bool getTTFFlag() const
-    *
-    *   Get the True Ttype Font (TTF) flag
-    *
+    *   Get the True Type Font (TTF) flag
     *   @return TRUE if the flag is set, FALSE otherwise
     */
     bool getTTFFlag() const;
     /**
     *   @fn bool getAudioFlag() const
-    *
     *   Get the audio flag
-    *
     *   @return TRUE if the flag is set, FALSE otherwise
     */
     bool getAudioFlag() const;
     /**
     *   @fn bool getGamepadFlag() const
-    *
     *   Get the audio flag
-    *
     *   @return TRUE if the flag is set, FALSE otherwise
     */
     bool getGamepadFlag() const;
     /**
     *   @fn bool getOpenGLFlag() const
-    *
     *   Get the opengl flag
-    *
     *   @return TRUE if the flag is set, FALSE otherwise
     */
     bool getOpenGLFlag() const;
     /**
     *   @fn char * getFontFile() const
+    *   @deprecated This function will be removed in v0.10.1
     *
     *   Get the font file
-    *
-    *   @return TRUE if the flag is set, FALSE otherwise
+    *   @return The font file
     */
     const char * getFontFile() const;
     /**
     *   @fn int getFontSize() const
+    *   @deprecated This function will be removed in v0.10.1
     *
     *   Get the font size
-    *
-    *   @return TRUE if the flag is set, FALSE otherwise
+    *   @return The size of the font
     */
     int getFontSize() const;
     /**
     *   @fn int getWinWidth() const
-    *
     *   Get the window width
-    *
     *   @return The width
     */
     int getWinWidth() const;
     /**
     *   @fn int getWinHeight() const
-    *
     *   Get the window height
-    *
     *   @return The height
     */
     int getWinHeight() const;
-
 };
 
 };

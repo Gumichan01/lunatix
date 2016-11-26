@@ -59,7 +59,7 @@ static LX_InternalConfig _conf;
 
 
 void readFile_(std::ifstream& f,LX_InternalConfig& config);
-void loadSDLfileConfig(LX_InternalConfig& config);
+void loadFileConfig_(LX_InternalConfig& config);
 
 void readFile_(std::ifstream& f,LX_InternalConfig& config)
 {
@@ -72,6 +72,8 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
     const std::regex AUDIO_REG("audio=[[:digit:]]+",std::regex::extended);
     const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+",std::regex::extended);
     const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
+
+    // depracated: remove these two regular expression
     const std::regex FONT_REG("font=.+",std::regex::extended);
     const std::regex SIZE_REG("size=.+",std::regex::extended);
 
@@ -157,17 +159,17 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
     }
 }
 
-void loadSDLfileConfig(LX_InternalConfig& config)
+void loadFileConfig_(LX_InternalConfig& config)
 {
-    const char * LX_SDL_FILE="config/lxsdl.cfg";
+    const char * LX_CFG_FILE = "config/lunatix.cfg";
 
     std::ifstream f;
-    f.open(LX_SDL_FILE,std::ios::in);
+    f.open(LX_CFG_FILE,std::ios::in);
 
     if(f.is_open() == false)
     {
         LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
-                            "loadSDLfileConfig - Cannot open %s",LX_SDL_FILE);
+                            "loadFileConfig - Cannot open %s",LX_CFG_FILE);
         return;
     }
 
@@ -192,15 +194,9 @@ LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
 
 /* LX_Configuration */
 
-/*
-*
-*   Create an instance of the configuration
-*
-*/
 LX_Configuration::LX_Configuration()
 {
-    // Load configuration
-    loadSDLFlags_();
+    loadFlags_();
 }
 
 LX_Configuration::~LX_Configuration() {}
@@ -232,9 +228,9 @@ void LX_Configuration::destroy()
     instance = nullptr;
 }
 
-void LX_Configuration::loadSDLFlags_()
+void LX_Configuration::loadFlags_()
 {
-    LX_Config::loadSDLfileConfig(_conf);
+    LX_Config::loadFileConfig_(_conf);
     _conf.width  = CONF_WIDTH;
     _conf.height = CONF_HEIGHT;
 }
