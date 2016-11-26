@@ -10,13 +10,11 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-
 /**
 *    @file LX_Music.cpp
 *    @brief The implementation of the music library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Music.hpp>
@@ -34,7 +32,7 @@ LX_Graphics::
 LX_BufferedImage *_loadImage(std::string file,
                              const libtagpp::ImgMetaData& imgdata)
 {
-    if(imgdata._img_offset <= 0 && imgdata._img_size == 0)
+    if(imgdata._img_offset <= 0 && imgdata._img_size <= 0)
         return nullptr;
 
     return LX_FileIO::LX_FileBuffer(file, S32(imgdata._img_offset),
@@ -61,10 +59,6 @@ LX_MusicException::~LX_MusicException() noexcept {}
 /* Music tag */
 
 LX_MusicTag::LX_MusicTag(): img(nullptr) {}
-
-/*LX_MusicTag::LX_MusicTag(const LX_MusicTag& t) : title(t.title), artist(t.artist),
-    album(t.album), year(t.year), genre(t.genre), format(t.format),
-    duration(t.duration), img(t.img) {}*/
 
 LX_MusicTag::~LX_MusicTag()
 {

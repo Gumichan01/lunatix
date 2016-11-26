@@ -1,6 +1,3 @@
-#ifndef LX_SOUND_H_INCLUDED
-#define LX_SOUND_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_SOUND_H_INCLUDED
+#define LX_SOUND_H_INCLUDED
+
 /**
 *    @file LX_Sound.hpp
 *    @brief The abstract sound class
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */

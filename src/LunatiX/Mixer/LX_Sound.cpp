@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -19,9 +18,7 @@
 *
 */
 
-
 #include <LunatiX/LX_Sound.hpp>
-
 
 namespace LX_Mixer
 {

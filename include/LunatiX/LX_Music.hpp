@@ -1,6 +1,3 @@
-#ifndef LX_MUSIC_H_INCLUDED
-#define LX_MUSIC_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_MUSIC_H_INCLUDED
+#define LX_MUSIC_H_INCLUDED
+
 /**
 *    @file LX_Music.hpp
 *    @brief The music library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Sound.hpp>
@@ -42,7 +41,6 @@ namespace LX_Mixer
 /**
 *   @class LX_MusicException
 *   @brief The exception class of LX_Music
-*
 */
 class LX_MusicException : public std::exception
 {
@@ -71,20 +69,19 @@ public :
 *
 *   In comparison with *libtagpp::Tag*, MusicTag does not contain
 *   low-level contents (track-gain, album-gain, bitrate, ...), but have
-*   an image loaded from the audio file if it exists
-*
+*   an image loaded from the audio file if it exists.
 */
 struct LX_MusicTag
 {
-    UTF8string title;
-    UTF8string artist;
-    UTF8string album;
-    UTF8string year;                /**< "2014", "2015/02/01", but the year goes first      */
-    UTF8string track;               /**< "1", "01", "1/4", but the track number goes first  */
-    UTF8string genre;
-    UTF8string format;
-    UTF8string duration;
-    LX_Graphics::LX_BufferedImage *img;   /**< Album cover, if it exists */
+    UTF8string title;                   /**< Title  */
+    UTF8string artist;                  /**< Artist */
+    UTF8string album;                   /**< Album  */
+    UTF8string year;                    /**< Year (2016, 2014/02/01)         */
+    UTF8string track;                   /**< Track number ("1", "01", "1/4") */
+    UTF8string genre;                   /**< Genre  */
+    UTF8string format;                  /**< Format (MP3, OGG, FLAC, M4A)    */
+    UTF8string duration;                /**< Duration, in HH:MM:SS format    */
+    LX_Graphics::LX_BufferedImage *img; /**< Album cover, if it exists       */
 
     LX_MusicTag();
     ~LX_MusicTag();
@@ -166,9 +163,7 @@ public:
 
     /**
     *   @fn bool play()
-    *
     *   Play the music specified in the LX_Music class
-    *
     *   @return TRUE on success, FALSE otherwise
     *
     *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP

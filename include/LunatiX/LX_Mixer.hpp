@@ -1,6 +1,3 @@
-#ifndef LX_MIXER_H_INCLUDED
-#define LX_MIXER_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,6 +10,9 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_MIXER_H_INCLUDED
+#define LX_MIXER_H_INCLUDED
+
 /**
 *    @file LX_Mixer.hpp
 *    @brief The mixer library
@@ -24,9 +24,9 @@
 #include <LunatiX/utils/utf8_string.hpp>
 
 const int LX_MIXER_AUDIO_FREQUENCY = 44100;     /**< The default audio frequency             */
-const int LX_MIXER_STEREO_SOUND = 2;            /**< The stereo variable for the mix module  */
-const int LX_MIXER_MONO_SOUND = 1;              /**< The mono variable for the mix module    */
-const int LX_MIXER_DEFAULT_CHUNKSIZE = 1024;    /**< The default chunsize for the mix module */
+const int LX_MIXER_STEREO_SOUND = 2;            /**< The stereo variable for the mix namespace  */
+const int LX_MIXER_MONO_SOUND = 1;              /**< The mono variable for the mix namespace    */
+const int LX_MIXER_DEFAULT_CHUNKSIZE = 1024;    /**< The default chunsize for the mix namespace */
 
 const uint8_t LX_MIXER_EFFECT_LOUD = 255;        /**< Loud (for effect functions)    */
 const uint8_t LX_MIXER_EFFECT_SILENCE = 0;       /**< Silence (for effect functions) */
@@ -41,12 +41,13 @@ class LX_FileBuffer;
 
 
 /**
+*   @ingroup Audio
 *   @namespace LX_Mixer
-*   @brief The audio module
+*   @brief The audio namespace
 *
 *   It handles sound mixing and effect processing
 *
-*   @warning In order to use this module, the *audio* flag
+*   @warning In order to use this namespace, the *audio* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 *

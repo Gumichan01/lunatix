@@ -1,5 +1,3 @@
-#ifndef LX_CHUNK_H_INCLUDED
-#define LX_CHUNK_H_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_CHUNK_H_INCLUDED
+#define LX_CHUNK_H_INCLUDED
+
 /**
 *    @file LX_Chunk.hpp
-*    @brief The chunk header
+*    @brief The sample header
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Sound.hpp>
@@ -63,7 +63,7 @@ class LX_Chunk_;
 
 /**
 *   @class LX_Chunk
-*   @brief The chunk class
+*   @brief The sample class
 */
 class LX_Chunk : public virtual LX_Sound
 {
@@ -80,15 +80,15 @@ public:
     *   @fn LX_Chunk(const std::string& filename)
     *   @brief Constructor
     *
-    *   Construct the instance creating the Mix_Chunk instance from a file
+    *   Load a sample from a file
     *
-    *   @param [in] filename The file to create the chunk from
+    *   @param [in] filename The file to create the sample from
     *
-    *   @note It is preferable to give a .wav file to the constructor.
-    *           The chunk was optimized for this format. But it can work with
-    *           an other file type.
+    *   @note It is better to give a .wav file to the constructor.
+    *         The sample was optimized for this format. But it can work with
+    *         an other file type.
     *
-    *   @exception LX_ChunkException if the chunk cannot be created from the file
+    *   @exception LX_ChunkException if the sample cannot be created from the file
     */
     explicit LX_Chunk(const std::string& filename);
 
@@ -96,14 +96,14 @@ public:
     *   @fn LX_Chunk(const UTF8string& filename)
     *   @brief Constructor
     *
-    *   Create the instance loading a chunk file
+    *   Load a sample from a file
     *
-    *   @param [in] filename The chunk filename that will be loaded
+    *   @param [in] filename The file to create the sample from
     *
-    *   @note It is preferable to give a .wav file to the constructor.
-    *           The chunk was optimized for this format. But it can work with
+    *   @note It is better to give a .wav file to the constructor.
+    *           The sample was optimized for this format. But it can work with
     *           an other file type.
-    *   @exception LX_ChunkException if the chunk cannot be created from the file
+    *   @exception LX_ChunkException if the sample cannot be created from the file
     */
     explicit LX_Chunk(const UTF8string& filename);
 
@@ -122,7 +122,7 @@ public:
     *
     *   Play the current sample
     *
-    *   @param [in] channel The channel to play the chunk on
+    *   @param [in] channel The channel to play the sample on
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample with no loop
@@ -133,16 +133,17 @@ public:
     *
     *   Play the current sample
     *
-    *   @param [in] channel The channel to play the chunk on
+    *   @param [in] channel The channel to play the sample on
     *   @param [in] loops number of loops
     *
     *   @return TRUE on success, FALSE otherwise
-    *   @note The chunk is played loops +1 time
-    *         For example:
-    *         - If loop == 0 -> play the chunk once
-    *         - If loop == 1 -> play the chunk 2 times, ...
+    *   @note 1 — The sample is played loops +1 time
+    *             For example:
+    *               - If loop == 0 → play the sample once
+    *               - If loop == 1 → play the sample 2 times, ...
+    *               - If loop == n (n ∈ N) → play the sample n+1 times
     *
-    *   @note If loops == -1 -> loop forever
+    *   @note 2 — If loops == -1 → loop forever
     */
     bool play(int channel,int loops);
     /**
@@ -150,7 +151,7 @@ public:
     *
     *   Play the current sample during a moment
     *
-    *   @param [in] channel The channel to play the chunk on
+    *   @param [in] channel The channel to play the sample on
     *   @param [in] loops number of loops
     *   @param [in] ticks The limit in millisecond to play the current sample
     *
