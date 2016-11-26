@@ -1,6 +1,3 @@
-#ifndef LX_WINDOWMANAGER_HPP_INCLUDED
-#define LX_WINDOWMANAGER_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,6 +9,9 @@
 *    Luxon Jean-Pierre (Gumichan01)
 *    luxon.jean.pierre@gmail.com
 */
+
+#ifndef LX_WINDOWMANAGER_HPP_INCLUDED
+#define LX_WINDOWMANAGER_HPP_INCLUDED
 
 /**
 *    @file LX_WindowManager.hpp
@@ -34,8 +34,7 @@ class LX_Window;
 *   @brief The windows manager
 *
 *   LX_WindowManager allows the user to handle several windows
-*   inside an application
-*
+*   inside an application.
 */
 class LX_WindowManager
 {
@@ -56,9 +55,7 @@ public:
 
     /**
     *   @fn LX_WindowManager * LX_WindowManager::getInstance()
-    *
-    *   Return an instance of the singleton LX_WindowManager
-    *
+    *   Return a unique instance of the window manager
     *   @return The singleton
     */
     static LX_WindowManager * getInstance();
@@ -68,9 +65,9 @@ public:
     *
     *   Destroy the instance of the singleton
     *
-    *   @warning    The windows contained in the window manager
-    *               are not destroyed. So it is necessary to keep an external
-    *               pointer to the windows added in the manager.
+    *   @warning The windows contained in the window manager
+    *            are not destroyed. So it is necessary to keep an external
+    *            pointer to the windows added in the manager.
     */
     static void destroy();
 
@@ -81,7 +78,7 @@ public:
     *
     *   @param [in] w The window
     *
-    *   @return The ID of the window that was added if the instance is valid
+    *   @return The ID of the window that was added if the instance is valid,
     *           ((uint32_t) -1 ) otherwise
     *
     *   @sa LX_Window
@@ -110,8 +107,8 @@ public:
 
     /**
     *   @fn std::size_t LX_WindowManager::nbWindows()
-    *   Count the number of opened windows
-    *   @return The number of opened windows
+    *   Count the number of windows
+    *   @return The number of registered windows
     */
     std::size_t nbWindows();
 
@@ -151,7 +148,7 @@ public:
 /**
 *   @fn LX_WindowManager * getWindowManager()
 *
-*   Return an instance of the singleton LX_WindowManager
+*   Return the singleton, if allocated
 *
 *   @return The unique instance of LX_WindowManager
 *   @note This function is equivalent to LX_WindowManager::getInstance

@@ -1,6 +1,3 @@
-#ifndef LX_WINDOW_H_INCLUDED
-#define LX_WINDOW_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,6 +9,9 @@
 *    Luxon Jean-Pierre (Gumichan01)
 *    luxon.jean.pierre@gmail.com
 */
+
+#ifndef LX_WINDOW_H_INCLUDED
+#define LX_WINDOW_H_INCLUDED
 
 /**
 *    @file LX_Window.hpp
@@ -53,15 +53,13 @@ struct LX_Vector2D;
 
 
 /**
+*   @ingroup Graphics
 *   @namespace LX_Win
-*   @brief The window module
+*   @brief The window namespace
 *
-*   It provides functions and classes for manipulating windows
-*
-*   @warning In order to use this module, the *video* flag
+*   @warning In order to use this namespace, the *video* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
-*
 */
 namespace LX_Win
 {
@@ -295,15 +293,15 @@ public :
     *   @param [in] mode The blend mode to use for blending:
     *    |        Value        |                      Meaning                     |
     *    |         ---         |                        ---                       |
-    *    | SDL_BLENDMODE_NONE  | no blending                                      |
+    *    |  LX_BLENDMODE_NONE  | no blending                                      |
     *    |                     | destRGBA = srcRGBA                               |
-    *    | SDL_BLENDMODE_BLEND | alpha blending                                   |
+    *    |  LX_BLENDMODE_BLEND | alpha blending                                   |
     *    |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
     *    |                     | destA = srcA + (destA * (1-srcA))                |
-    *    |  SDL_BLENDMODE_ADD  | additive blending                                |
+    *    |  LX_BLENDMODE_ADD   | additive blending                                |
     *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *    |                     | destA = destA                                    |
-    *    |  SDL_BLENDMODE_MOD  | colour modulate                                  |
+    *    |  LX_BLENDMODE_MOD   | colour modulate                                  |
     *    |                     | destRGB = srcRGB * destRGB                       |
     *    |                     | destA = destA                                    |
     */
@@ -339,14 +337,14 @@ public :
     void getDrawBlendMode(LX_BlendMode& mode) const;
 
     /**
-    *   @fn void setTitle(std::string title)
+    *   @fn void setTitle(const std::string& title)
     *
     *   Set the title of the window
     *
     *   @param [in] title The title
     *   @sa setWindowSize
     */
-    void setTitle(std::string title);
+    void setTitle(const std::string& title);
 
     /**
     *   @fn void setWindowSize(int w, int h)
@@ -364,7 +362,7 @@ public :
     *
     *   et a specific drawing area (viewport) for rendering
     *
-    *   @param [in] viewport The drawing area to set. nullptr defines the entire target
+    *   @param [in] viewport The drawing area to set. *nullptr* defines the entire target
     *   @return TRUE on success, FALSE otherwise
     */
     bool setViewPort(LX_AABB * viewport);
@@ -388,13 +386,6 @@ public :
     *           - ::LX_WINDOW_FULLSCREEN_DESKTOP
     *           - ::LX_WINDOW_FULLSCREEN
     *           - ::LX_WINDOW_NO_FULLSCREEN
-    *           - ::LX_WINDOW_OPENGL
-    *           - ::LX_WINDOW_SHOWN
-    *           - ::LX_WINDOW_HIDDEN
-    *           - ::LX_WINDOW_BORDERLESS
-    *           - ::LX_WINDOW_RESIZABLE
-    *           - ::LX_WINDOW_MINIMIZED
-    *           - ::LX_WINDOW_MAXIMIZED
     */
     void toggleFullscreen(uint32_t flag);
 
@@ -468,23 +459,18 @@ public :
     *
     *   @param [out] w The reference to the variable for storing the width
     *   @param [out] h The reference to the variable for storing the height
-    *
-    *   @note This may differ from getWidth/getHeight if we are rendering
-    *         to a high-DPI drawable, i.e. the window was created with
-    *         SDL_WINDOW_ALLOW_HIGHDPI on a platform with high-DPI support.
     */
     void glGetDrawableSize(int& w, int& h) const;
     /**
     *   @fn void glMakeCurrent()
     *
-    *   Set focus on the current OpenGL window for rendering
+    *   Set the focus on the current OpenGL window for rendering
     *
     *   @return TRUE on success.
     *           FALSE if the window is not an OpenGL window
     *
     *   @note This function must only be used if the window was
-    *         created with the SDL_WINDOW_OPENGL.
-    *         Otherwise, it returns FALSE.
+    *         created with the OpenGL flag. Otherwise, it returns FALSE.
     */
     bool glMakeCurrent();
 

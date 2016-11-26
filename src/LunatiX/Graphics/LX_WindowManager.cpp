@@ -62,13 +62,13 @@ LX_WindowManager::~LX_WindowManager() {}
 
 uint32_t LX_WindowManager::addWindow(LX_Window *w)
 {
-    const auto wend = _windows.end();
+    const auto wend = _windows.cend();
     const uint32_t no = static_cast<uint32_t>(-1);
 
     if(w == nullptr)
         return no;
 
-    bool found = std::any_of(_windows.begin(), wend, [&w](const LX_Window * win)
+    bool found = std::any_of(_windows.cbegin(), wend, [&w](const LX_Window * win)
     {
         return win->getID() == w->getID();
     });
@@ -131,9 +131,9 @@ void LX_WindowManager::clearWindows()
 LX_Window * LX_WindowManager::getWindow(uint32_t id)
 {
     LX_Window *w = nullptr;
-    const auto wend = _windows.end();
+    const auto wend = _windows.cend();
 
-    auto it = std::find_if(_windows.begin(), wend, [&id](const LX_Window * win)
+    auto it = std::find_if(_windows.cbegin(), wend, [&id](const LX_Window * win)
     {
         return win->getID() == id;
     });

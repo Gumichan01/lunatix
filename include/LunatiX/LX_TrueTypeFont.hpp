@@ -1,6 +1,3 @@
-#ifndef LX_TTF_H_INCLUDED
-#define LX_TTF_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_TTF_H_INCLUDED
+#define LX_TTF_H_INCLUDED
+
 /**
 *    @file LX_TrueTypeFont.hpp
-*    @brief The LunatiX True type Font (TTF) library
+*    @brief The True type Font (TTF) library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -49,12 +48,11 @@ class LX_BlendedTextTexture;
 
 
 /**
+*   @ingroup Graphics
 *   @namespace LX_TrueTypeFont
-*   @brief The LunatiX True Type Font (TTF) module
+*   @brief The True Type Font (TTF) namespace.
 *
-*   It handles True Type Font texts manipulation.
-*
-*   @warning In order to use this module, the *ttf* flag
+*   @warning In order to use this namespace, the *ttf* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 */
@@ -70,10 +68,8 @@ enum LX_TTF_TypeText: short;
 *   @class LX_Font
 *   @brief The Font class
 *
-*   This class describes the font. It manages the True type Font.
-*
+*   This class describes the font.
 *   @note It supports the UTF-8 format
-*
 */
 class LX_Font
 {
@@ -88,21 +84,25 @@ class LX_Font
 
     /* Private functions */
     int sizeOfText_(std::string text, int& w, int& h) const;
-    int sizeOfText_(const std::string& text, const unsigned int size, int& w, int& h) const;
-    int sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const;
+    int sizeOfText_(const std::string& text, const unsigned int size,
+                    int& w, int& h) const;
+    int sizeOfText_(const UTF8string& text, const unsigned int size,
+                    int& w, int& h) const;
 
-    SDL_Texture * drawSolidText_(const std::string& text, unsigned int size, LX_Win::LX_Window& w);
-    SDL_Texture * drawSolidText_(const UTF8string& text, unsigned int size, LX_Win::LX_Window& w);
+    SDL_Texture * drawSolidText_(const std::string& text, unsigned int size,
+                                 LX_Win::LX_Window& w);
+    SDL_Texture * drawSolidText_(const UTF8string& text, unsigned int size,
+                                 LX_Win::LX_Window& w);
 
     SDL_Texture * drawShadedText_(const std::string& text, unsigned int size,
-                                 const LX_Colour& bg, LX_Win::LX_Window& w);
+                                  const LX_Colour& bg, LX_Win::LX_Window& w);
     SDL_Texture * drawShadedText_(const UTF8string& text, unsigned int size,
-                                 const LX_Colour& bg, LX_Win::LX_Window& w);
+                                  const LX_Colour& bg, LX_Win::LX_Window& w);
 
     SDL_Texture * drawBlendedText_(const std::string& text, unsigned int size,
-                                  LX_Win::LX_Window& w);
+                                   LX_Win::LX_Window& w);
     SDL_Texture * drawBlendedText_(const UTF8string& text, unsigned int size,
-                                  LX_Win::LX_Window& w);
+                                   LX_Win::LX_Window& w);
 
     void setColour_(const LX_Colour& colour);
 
@@ -111,22 +111,23 @@ public:
     /**
     *   @fn LX_Font(const LX_Colour& colour, unsigned int size)
     *   @brief Constructor
+    *   @deprecated This function will be removed in v0.10.1.
+    *   Use the other constructors instead.
     *
     *   Construct the font with colour and the size of the text
     *
-    *   @param [in] colour The default colour font
+    *   @param [in] colour The colour for rendering the text
     *   @param [in] size the size of the text
     *
-    *   @note   If size is 0, then the default value defined in the configuratnion
-    *           file is used.
+    *   @note If size is 0, then the default value defined
+    *         in the configuration file is used.
     *
-    *   @note   The constructor uses the configuration file to get the TTF file
+    *   @note The constructor uses the configuration file to get the TTF file
     *
-    *   @warning    You must initialize the SDL_TTF library
-    *               setting the TTF flag to 1 in lxsdl.cfg.
+    *   @warning You must initialize the SDL_TTF library
+    *            setting the TTF flag to 1 in lunatix.cfg.
     *
     *   @exception LX_FileIO::IOException if the file cannot be loaded
-    *
     */
     LX_Font(const LX_Colour& colour, unsigned int size=0);
 
@@ -137,33 +138,31 @@ public:
     *   Construct the font with font file and colour
     *
     *   @param [in] font_file The font file to use
-    *   @param [in] colour The default colour font
+    *   @param [in] colour The colour for rendering the text
     *
-    *   @warning    You must  initialize the SDL_TTF library
-    *               setting the TTF flag to 1 in lxsdl.cfg
+    *   @warning You must initialize the SDL_TTF library
+    *            setting the TTF flag to 1 in lunatix.cfg
     *
-    *   @exception  LX_FileIO::IOException if the file cannot be loaded
-    *
+    *   @exception LX_FileIO::IOException if the file cannot be loaded
     */
-    LX_Font(const std::string& font_file,const LX_Colour& colour);
+    LX_Font(const std::string& font_file, const LX_Colour& colour);
 
     /**
     *   @fn LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
     *   @brief Constructor
     *
-    *  Construct the font with a font file, a colour and a size.
+    *   Construct the font with a font file, a colour and a size.
     *
     *   @param [in] font_file The font file to load
-    *   @param [in] colour The colour font needed
+    *   @param [in] colour The colour for rendering the text
     *   @param [in] size The size of the text to display
     *
-    *   @warning    It is necessary to initialize the SDL_TTF library setting
-    *               the ttf flag to 1 in lxsdl.cfg.
+    *   @warning It is necessary to initialize the SDL_TTF library setting
+    *            the ttf flag to 1 in lunatix.cfg.
     *
-    *   @exception  LX_FileIO::IOException if the file cannot be loaded
-    *
+    *   @exception LX_FileIO::IOException if the file cannot be loaded
     */
-    LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size);
+    LX_Font(const std::string& font_file, const LX_Colour& colour, unsigned int size);
 
     /// Destructor
     ~LX_Font();

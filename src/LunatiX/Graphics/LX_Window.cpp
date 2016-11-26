@@ -393,7 +393,7 @@ void LX_Window::getDrawBlendMode(LX_BlendMode& mode) const
 }
 
 
-void LX_Window::setTitle(std::string title)
+void LX_Window::setTitle(const std::string& title)
 {
     SDL_SetWindowTitle(_wimpl->_window,title.c_str());
 }
@@ -476,7 +476,8 @@ void LX_Window::getInfo(LX_WindowInfo &info) const
 
     SDL_GetWindowPosition(_wimpl->_window,&info.x,&info.y);
     SDL_GetWindowSize(_wimpl->_window, &info.w,&info.h);
-    SDL_RenderGetLogicalSize(_wimpl->_renderer,&info.lw,&info.lh);
+    info.lw = getLogicalWidth();
+    info.lh = getLogicalHeight();
 
     SDL_RendererInfo rinfo;
     SDL_GetRendererInfo(_wimpl->_renderer, &rinfo);

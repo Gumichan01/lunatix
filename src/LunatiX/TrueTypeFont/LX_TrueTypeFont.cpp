@@ -281,7 +281,7 @@ SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
 *   @param [in] bg The background colour behind the text
 *   @param [in] w The window to link the texture with
 *
-*   @return An valid pointer to a texture, nullptr otherwise.
+*   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int size,
                                       const LX_Colour& bg, LX_Win::LX_Window& w)
@@ -320,7 +320,7 @@ SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size
 *   @param [in] size The size defined by the user
 *   @param [in] w The window to link the texture with
 *
-*   @return An valid pointer to a texture, nullptr otherwise.
+*   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int size,
                                        LX_Win::LX_Window& w)
@@ -335,7 +335,7 @@ SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int si
 *   @param [in] size The size defined by the user
 *   @param [in] w The window to link the texture with
 *
-*   @return An valid pointer to a texture, nullptr otherwise.
+*   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const UTF8string& text, unsigned int size,
                                        LX_Win::LX_Window& w)

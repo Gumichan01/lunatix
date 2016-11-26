@@ -1,5 +1,3 @@
-#ifndef LX_GRAPHICS_HPP_INCLUDED
-#define LX_GRAPHICS_HPP_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,12 +10,20 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_GRAPHICS_HPP_INCLUDED
+#define LX_GRAPHICS_HPP_INCLUDED
+
 /**
 *    @file LX_Graphics.hpp
 *    @brief The interface of LX_Graphics
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
 *
+*/
+
+/**
+*   @defgroup Graphics Graphics
+*   @brief 2D module for rendering (sprite, text, ...) and window management
 */
 
 #include "LX_Texture.hpp"

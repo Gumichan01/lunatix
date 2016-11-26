@@ -1,6 +1,3 @@
-#ifndef LX_OPENGL_H_INCLUDED
-#define LX_OPENGL_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,24 +10,28 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_OPENGL_H_INCLUDED
+#define LX_OPENGL_H_INCLUDED
+
+
 /**
 *    @file LX_OpenGL.hpp
 *    @brief The LunatiX/OpenGL interface
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_video.h>
 
 /**
+*   @ingroup Graphics
 *   @namespace LX_Graphics
-*   @brief The graphics module
+*   @brief The graphics namespace
 *
-*   It handles every every graphics operation (images, texture streaming,...)
+*   It handlles rendering and operations (images, texture streaming,...)
 *
-*   @warning In order to use this module, the *video* flag
+*   @warning In order to use this namespace, the *video* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 */
@@ -39,11 +40,11 @@ namespace LX_Graphics
 
 /**
 *   @namespace LX_Graphics::LX_OpenGL
-*   @brief The OpenGL interface module
+*   @brief The OpenGL interface namespace
 *
 *   It provides functions for using OpenGL with LunatiX
 *
-*   @warning In order to use this module, the *opengl* flag
+*   @warning In order to use this namespace, the *opengl* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 *
@@ -82,7 +83,6 @@ bool extensionSupported(std::string extension);
 *
 */
 bool loadDefaultLibrary();
-
 /**
 *   @fn bool loadLibrary(std::string path)
 *
@@ -92,25 +92,22 @@ bool loadDefaultLibrary();
 *   @return TRUE on success or FALSE on FAILURE.
 *           Call LX_GetError() for more information
 *
-*   @note 1 - This function should be called after initializing the video driver,
+*   @note 1 - This function should be called after initializing the video subsystem,
 *             but before creating any OpenGL windows.
-*   @note 2 - If no OpengGL library is loaded the default library is loaded
-*             upon creation of the first OpenGL window
+*   @note 2 - If no OpenGL library is loaded, the default library is loaded
+*             upon creation of the first OpenGL window.
 *   @note 3 - If you do this, you need to retireve all of the OpenGL functions
-*             used in your program from the dynamic library using ::getProcAddress
-*
+*             used in your program from the dynamic library using *getProcAddress()*
 */
 bool loadLibrary(std::string path);
-
 /**
 *   @fn void UnloadLibrary()
 *
 *   Unload the OpenGL library previously loaded by
-*   ::loadDefaultLibrary or ::loadLibrary
+*   *::loadDefaultLibrary()* or ::loadLibrary()*
 *
 *   @return TRUE on success or FALSE on FAILURE.
 *           Call LX_GetError() for more information
-*
 */
 void UnloadLibrary();
 
@@ -154,10 +151,8 @@ T getProcAddress(const std::string& proc);
 *
 *   @return The current active OpenGL context or NULL on failure.
 *           Call LX_GetError() for more information
-*
 */
 LX_GLContext getCurrentContext();
-
 
 /**
 *   @fn int getSwapInterval()
@@ -173,9 +168,8 @@ LX_GLContext getCurrentContext();
 *   @sa setSwapInterval
 */
 int getSwapInterval();
-
 /**
-*   @fn int setSwapInterval(int interval)
+*   @fn bool setSwapInterval(int interval)
 *
 *   Set the swap interval for the current OpenGL context
 *
@@ -201,19 +195,18 @@ int getSwapInterval();
 */
 bool setSwapInterval(int interval);
 
-
 /**
 *   @fn bool getAttribute(LX_GLattr attr, int& value)
 *
 *   Get the actual value for an attribute from the current context
 *
-*   @param [in] attr The [attribute](http://wiki.libsdl.org/SDL_GLattr)
-*               attribute to query
+*   @param [in] attr The [attribute](http://wiki.libsdl.org/SDL_GLattr) to query
 *   @param [out] value The reference that will be filled in with
 *                the current value of attr
 *
-*   @return TRUE on success. FALSE otherwise.
-*           Call LX_GetError() for more information
+*   @return TRUE on success, and value is set with the value odf the attribute,
+*           FALSE otherwise.
+*           Call LX_GetError() for more information.
 *
 *   @note the value the attribute are exactly the same with the attribute
 *   defined in SDL2 (as of SDL 2.0.3)
@@ -221,21 +214,20 @@ bool setSwapInterval(int interval);
 *   @sa setAttribute
 */
 bool getAttribute(LX_GLattr attr, int& value);
-
 /**
 *   @fn bool setAttribute(LX_GLattr attr, int value)
 *
 *   Set an OpenGL attribute before te creation of a window
 *
-*   @param [in] attr The attribute to set
+*   @param [in] attr The [attribute](http://wiki.libsdl.org/SDL_GLattr) to set
 *   @param [in] value The desired value for the attribute
 *
 *   @return TRUE on success. FALSE otherwise.
 *           Call LX_GetError() for more information
 *
-*   @note This function sets the OpenGL attribute attr to value.
+*   @note This function sets the OpenGL attribute *attr* to *value*.
 *         The requested attributes should be set before creating an OpenGL window.
-*         You should use getAttribute() to check the values
+*         You should use *getAttribute()* to check the values
 *         after creating the OpenGL context,
 *         since the values obtained can differ from the requested ones.
 *
