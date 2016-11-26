@@ -1,6 +1,3 @@
-#ifndef LUNATIX_H_INCLUDED
-#define LUNATIX_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LUNATIX_H_INCLUDED
+#define LUNATIX_H_INCLUDED
+
 /**
 *    @file Lunatix.hpp
-*    @brief The header file of the LunatiX
+*    @brief The header file of LunatiX
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
@@ -75,7 +74,5 @@
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Text.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
-
-
 
 #endif // LUNATIX_H_INCLUDED

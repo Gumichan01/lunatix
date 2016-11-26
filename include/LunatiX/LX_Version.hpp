@@ -1,6 +1,3 @@
-#ifndef LX_VERSION_HPP_INCLUDED
-#define LX_VERSION_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,14 +10,15 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_VERSION_HPP_INCLUDED
+#define LX_VERSION_HPP_INCLUDED
+
 /**
 *    @file LX_Version.hpp
 *    @brief The version library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
-
 
 /**
 *   @namespace LX_VersionInfo
@@ -32,7 +30,6 @@ namespace LX_VersionInfo
 /**
 *   @struct LX_Version
 *   @brief The version structure
-*
 *   The current version of the library
 */
 struct LX_Version
@@ -44,23 +41,19 @@ struct LX_Version
 
 /**
 *   @fn void LX_EngineInfo()
-*
 *   Get information about the library
 */
 void LX_EngineInfo();
 
 /**
 *   @fn void LX_EngineVersion(LX_Version& version)
-*
 *   Get the version of the library
-*
 *   @param [out] version The structure to fill in.
 */
 void LX_EngineVersion(LX_Version& version);
 
 /**
 *   @fn void LX_VersionDependencies()
-*
 *   Display information about the library and its dependencies
 */
 void LX_VersionDependencies();

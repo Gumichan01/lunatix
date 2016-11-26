@@ -1,5 +1,3 @@
-#ifndef LX_LIBRARY_H_INCLUDED
-#define LX_LIBRARY_H_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_LIBRARY_H_INCLUDED
+#define LX_LIBRARY_H_INCLUDED
+
 /**
 *    @file LX_Library.hpp
-*    @brief The Library header. It manages the library ressources (load and shut down)
+*    @brief Library ressources manager (load and shut down)
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Error.hpp>
@@ -25,16 +25,18 @@
 #include <SDL2/SDL.h>
 
 const int LX_GL_MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by the library */
-const int LX_GL_MINOR_VERSION = 2;  /**< Minor version of OpenGL supported by the library */
+const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the library */
 
 /**
 *   @fn bool LX_Init()
 *
 *   Load the library according the configuration file
 *
-*   @return TRUE if all systems were init, FALSE otherwise
+*   @return TRUE on success, FALSE otherwise
 *
-*   @note   This function automatically calls LX_WindowManager::init()
+*   @note 1 — LX_Init initializes the subsystems defined in
+*           the configuration file (lunatix.cfg)
+*   @note 2 — This function automatically calls LX_WindowManager::init()
 *           and LX_Configuration::initConfig()
 *
 */
@@ -65,11 +67,8 @@ const std::string getSDLConfig(const std::string& sdlconfig_name);
 
 /**
 *   @fn void LX_Quit()
-*
 *   Shut down the library
-*
 *   @note This function automatically calls LX_WindowManager::destroy()
-*
 */
 void LX_Quit();
 
