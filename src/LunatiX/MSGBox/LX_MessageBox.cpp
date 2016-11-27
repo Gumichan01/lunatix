@@ -26,7 +26,7 @@ namespace LX_MSGBox
 
 bool showMSG(uint32_t flag, std::string title, std::string msg)
 {
-    return SDL_ShowSimpleMessageBox(flag,title.c_str(),msg.c_str(),nullptr) == true;
+    return SDL_ShowSimpleMessageBox(flag,title.c_str(),msg.c_str(),nullptr) == 0;
 }
 
 };
