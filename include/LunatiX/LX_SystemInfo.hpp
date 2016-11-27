@@ -91,8 +91,7 @@ int getSystemRAM();
 *   @note LX_DisplayMode is a struture that contains every available
 *         display modes. In order to get these following modes, you should
 *         use iterators.
-*
-*   Example:
+*   @note Example:
 *
 *       LX_DisplayMode modes;
 *       getAvailableDisplayModes(modes);
