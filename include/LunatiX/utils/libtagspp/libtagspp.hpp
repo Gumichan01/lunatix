@@ -6,7 +6,6 @@
 *    @file libtagspp.hpp
 *    @brief The metadata reader API
 *    @author Luxon Jean-Pierre(Gumichan01)
-*
 */
 
 #include <string>
@@ -16,6 +15,7 @@ typedef int (*Tagread)(void *buf, int *cnt);
 
 
 /**
+*   @ingroup Audio
 *   @namespace libtagpp
 *   @brief The metadata reader namespace
 */

@@ -1,6 +1,3 @@
-#ifndef LX_TIMER_HPP_INCLUDED
-#define LX_TIMER_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,9 +10,12 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_TIMER_HPP_INCLUDED
+#define LX_TIMER_HPP_INCLUDED
+
 /**
 *    @file LX_Timer.hpp
-*    @brief The timer
+*    @brief The timer interface
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
 */
@@ -23,8 +23,9 @@
 #include <SDL2/SDL_timer.h>
 
 /**
+*   @ingroup System
 *   @namespace LX_Timer
-*   @brief Very simple module for handling time
+*   @brief Very simple namespace for handling time
 *
 */
 namespace LX_Timer

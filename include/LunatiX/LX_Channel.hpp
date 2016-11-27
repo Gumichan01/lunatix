@@ -1,5 +1,3 @@
-#ifndef LX_CHANNEL_HPP_INCLUDED
-#define LX_CHANNEL_HPP_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_CHANNEL_HPP_INCLUDED
+#define LX_CHANNEL_HPP_INCLUDED
+
 /**
 *    @file LX_Channel.hpp
 *    @brief The channel API
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_Sync.hpp>

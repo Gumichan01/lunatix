@@ -1,5 +1,3 @@
-#ifndef LX_SYNC_HPP_INCLUDED
-#define LX_SYNC_HPP_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_SYNC_HPP_INCLUDED
+#define LX_SYNC_HPP_INCLUDED
+
 /**
 *    @file LX_Sync.hpp
 *    @brief The thread synchroization API
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <memory>

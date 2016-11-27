@@ -1,6 +1,3 @@
-#ifndef LX_FILEBUFFER_HPP_INCLUDED
-#define LX_FILEBUFFER_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_FILEBUFFER_HPP_INCLUDED
+#define LX_FILEBUFFER_HPP_INCLUDED
+
 /**
 *    @file LX_FileBuffer.hpp
 *    @brief The file buffer
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -113,7 +112,7 @@ public :
     *   Load a buffered image from the file buffer.
     *
     *   @return A pointer to new an allocated buffered image on success,
-    *           nullptr if the file buffer is not an image to load.
+    *           *nullptr* if the file buffer is not an image to load.
     *           Call LX_GetError() for more information.
     */
     LX_Graphics::LX_BufferedImage * loadBufferedImage() const;
@@ -123,7 +122,7 @@ public :
     *   Load a sample from the current file buffer
     *
     *   @return A pointer to an allocated LX_Chunk object,
-    *           nullptr if the file buffer is not a sample to load
+    *           *nullptr* if the file buffer is not a sample to load
     */
     LX_Mixer::LX_Chunk * loadSample() const;
 

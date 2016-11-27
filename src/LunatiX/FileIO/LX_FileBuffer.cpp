@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -16,7 +15,6 @@
 *    @brief The file buffer implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_FileBuffer.hpp>
@@ -137,7 +135,6 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const
 LX_FileBuffer::LX_FileBuffer(const std::string& filename, uint32_t offset,
                              uint32_t sz)
     : LX_FileBuffer(UTF8string(filename), offset, sz) {}
-
 
 LX_FileBuffer::LX_FileBuffer(const UTF8string& filename,uint32_t offset,
                              uint32_t sz)

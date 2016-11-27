@@ -15,7 +15,7 @@
 
 /**
 *    @file LX_Library.hpp
-*    @brief Library ressources manager (load and shut down)
+*    @brief Library ressource manager (load and shut down)
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
 */

@@ -1,6 +1,3 @@
-#ifndef LX_FILEIO_H_INCLUDED
-#define LX_FILEIO_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,16 +10,37 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_FILEIO_H_INCLUDED
+#define LX_FILEIO_H_INCLUDED
+
 /**
 *    @file LX_FileIO.hpp
 *    @brief The file handling library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <memory>
+
+struct SDL_Surface;
+struct SDL_RWops;
+
+/**
+*   @ingroup System
+*   @defgroup File File abstraction
+*   @brief File manipulation (Input/Output, file buffering)
+*/
+
+/**
+*   @ingroup File
+*   @namespace LX_FileIO
+*   @brief The file Input/Output namespace
+*
+*   This provides an interface for manipulating files
+*/
+namespace LX_FileIO
+{
 
 const uint32_t LX_FILEIO_RDONLY = 0x00000001;                           /**< Read only mode (r)     */
 const uint32_t LX_FILEIO_WRONLY = 0x00000010;                           /**< Write only mode (w)    */
@@ -35,19 +53,6 @@ const uint32_t LX_SEEK_SET = 0;     /**< Beginning of data      */
 const uint32_t LX_SEEK_CUR = 1;     /**< The current read point */
 const uint32_t LX_SEEK_END = 2;     /**< The end of data        */
 
-
-struct SDL_Surface;
-struct SDL_RWops;
-
-
-/**
-*   @namespace LX_FileIO
-*   @brief The file Input/Output module
-*
-*   This provides an interface for manipulating files
-*/
-namespace LX_FileIO
-{
 
 /**
 *   @class IOException
@@ -113,7 +118,6 @@ public:
     *   @param [in] num The maximum number of objects to read
     *
     *   @return The number of objects that are read. 0 at error or end of file
-    *
     */
     virtual size_t readExactly(void *ptr, size_t data_size, size_t num) = 0;
 
@@ -128,7 +132,6 @@ public:
     *
     *   @return The number of objects written.
     *           This value will be less than num on error
-    *
     */
     virtual size_t write(void *ptr, size_t data_size, size_t num) = 0;
     /**
@@ -213,12 +216,9 @@ public :
     *               - ::LX_FILEIO_WRTR
     *
     *   @exception IOException If one of these aruguments are invalid
-    *               or the file is not openable
-    *
+    *              or the file is not openable
     */
     LX_File(const std::string& filename, const uint32_t mode);
-
-
     /**
     *   @fn LX_File(const UTF8string& filename, const uint32_t mode)
     *   @brief Constructor
@@ -236,8 +236,7 @@ public :
     *               - ::LX_FILEIO_WRTR
     *
     *   @exception IOException If one of these aruguments are invalid
-    *               or the file is not openable
-    *
+    *              or the file is not openable
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 
@@ -306,7 +305,7 @@ public:
 /**
 *   @fn LX_File& operator <<(LX_File& f, UTF8string& u8s)
 *
-*   Write an UTF-8 string into the file
+*   Write a UTF-8 string into the file
 *
 *   @param [in,out] f The file structure
 *   @param [in] u8s The utf-8 string
@@ -314,11 +313,10 @@ public:
 *   @return The updated file
 */
 LX_File& operator <<(LX_File& f, UTF8string& u8s);
-
 /**
 *   @fn LX_File& operator <<(LX_File& f, std::string s)
 *
-*   Write an UTF-8 string into the file
+*   Write a UTF-8 string into the file
 *
 *   @param [in,out] f The file structure
 *   @param [in] s The string
@@ -326,11 +324,10 @@ LX_File& operator <<(LX_File& f, UTF8string& u8s);
 *   @return The updated file
 */
 LX_File& operator <<(LX_File& f, std::string s);
-
 /**
 *   @fn LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s)
 *
-*   Write an UTF-8 string into the file
+*   Write a UTF-8 string into the file
 *
 *   @param [in,out] f The file structure
 *   @param [in] u8s The utf-8 string
@@ -338,11 +335,10 @@ LX_File& operator <<(LX_File& f, std::string s);
 *   @return The updated file
 */
 LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s);
-
 /**
 *   @fn LX_TmpFile& operator <<(LX_TmpFile& f, std::string s)
 *
-*   Write an UTF-8 string into the file
+*   Write a UTF-8 string into the file
 *
 *   @param [in,out] f The file structure
 *   @param [in] s The string

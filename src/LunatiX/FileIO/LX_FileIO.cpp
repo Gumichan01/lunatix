@@ -14,7 +14,6 @@
 *    @brief The file handling implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_FileIO.hpp>
@@ -187,7 +186,6 @@ public :
 LX_File::LX_File(const std::string& filename, const uint32_t mode)
     : LX_File(UTF8string(filename),mode) {}
 
-
 LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
     : _fimpl(new LX_File_(filename,mode)) {}
 
@@ -196,7 +194,6 @@ size_t LX_File::read(void *ptr, size_t data_size, size_t max_num)
 {
     return _fimpl->read(ptr,data_size,max_num);
 }
-
 
 size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num)
 {
@@ -209,7 +206,6 @@ size_t LX_File::write(void *ptr, size_t data_size, size_t num)
     return _fimpl->write(ptr,data_size,num);
 }
 
-
 size_t LX_File::write(const std::string& str)
 {
     return _fimpl->write(str);
@@ -221,12 +217,10 @@ int64_t LX_File::seek(int64_t offset, int whence)
     return _fimpl->seek(offset,whence);
 }
 
-
 int64_t LX_File::tell() const
 {
     return _fimpl->tell();
 }
-
 
 int64_t LX_File::size()
 {
@@ -351,7 +345,6 @@ size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num)
     return _timpl->read(ptr,data_size,max_num);
 }
 
-
 size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num)
 {
     return _timpl->readExactly(ptr,data_size,num);
@@ -362,7 +355,6 @@ size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num)
 {
     return _timpl->write(ptr,data_size,num);
 }
-
 
 size_t LX_TmpFile::write(const std::string& str)
 {
@@ -375,7 +367,6 @@ int64_t LX_TmpFile::seek(int64_t offset, int whence)
     return _timpl->seek(offset,whence);
 }
 
-
 int64_t LX_TmpFile::tell() const
 {
     return _timpl->tell();
@@ -386,6 +377,7 @@ void LX_TmpFile::close() {}
 
 LX_TmpFile::~LX_TmpFile() {}
 
+
 /// Stream
 
 LX_File& operator <<(LX_File& f, UTF8string& u8s)
@@ -393,7 +385,6 @@ LX_File& operator <<(LX_File& f, UTF8string& u8s)
     f.write(u8s.utf8_str());
     return f;
 }
-
 
 LX_File& operator <<(LX_File& f, std::string s)
 {
@@ -406,7 +397,6 @@ LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s)
     f.write(u8s.utf8_str());
     return f;
 }
-
 
 LX_TmpFile& operator <<(LX_TmpFile& f, std::string s)
 {

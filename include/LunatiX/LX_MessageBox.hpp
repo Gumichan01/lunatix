@@ -1,6 +1,3 @@
-#ifndef LX_MESSAGEBOX_HPP_INCLUDED
-#define LX_MESSAGEBOX_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,28 +10,29 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_MESSAGEBOX_HPP_INCLUDED
+#define LX_MESSAGEBOX_HPP_INCLUDED
+
 /**
 *    @file LX_MessageBox.hpp
 *    @brief The message box Library
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
 
 
-const uint32_t LX_MSG_ERR  = 0x00000010;    /**< Error message          */
-const uint32_t LX_MSG_WARN = 0x00000020;    /**< Warning message        */
-const uint32_t LX_MSG_INFO = 0x00000040;    /**< Information message    */
-
-
 /**
+*   @ingroup System
 *   @namespace LX_MSGBox
-*   @brief The Message Box module
+*   @brief The Message Box namespace
 */
 namespace LX_MSGBox
 {
+const uint32_t LX_MSG_ERR  = 0x00000010;    /**< Error message          */
+const uint32_t LX_MSG_WARN = 0x00000020;    /**< Warning message        */
+const uint32_t LX_MSG_INFO = 0x00000040;    /**< Information message    */
 
 /**
 *   @fn bool showMSG(uint32_t flag, std::string title, std::string msg)

@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -10,7 +9,6 @@
 *    Luxon Jean-Pierre (Gumichan01)
 *    luxon.jean.pierre@gmail.com
 */
-
 
 #include <LunatiX/LX_FileSystem.hpp>
 #include <SDL2/SDL_filesystem.h>
@@ -73,7 +71,6 @@ size_t countSeparator(const UTF8string& u8str)
 namespace LX_FileSystem
 {
 
-
 UTF8string getWorkingDirectory()
 {
     char *base_path = SDL_GetBasePath();
@@ -85,7 +82,6 @@ UTF8string getWorkingDirectory()
     return path;
 }
 
-
 UTF8string getPreferencesDirectory(const std::string& org, const std::string& app)
 {
     char *base_path = SDL_GetPrefPath(org.c_str(),app.c_str());
@@ -96,7 +92,6 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
 
     return path;
 }
-
 
 UTF8string basename(const UTF8string& path)
 {
@@ -152,7 +147,6 @@ UTF8string basename(const UTF8string& path)
 
     return npath.utf8_substr(0,u8len - 1);
 }
-
 
 UTF8string dirname(const UTF8string& path)
 {
@@ -217,6 +211,5 @@ UTF8string dirname(const UTF8string& path)
 
     return npath.utf8_substr(0, (spos == 0 ? spos + 1 : spos));
 }
-
 
 };

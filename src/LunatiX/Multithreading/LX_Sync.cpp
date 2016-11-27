@@ -10,7 +10,6 @@
 *    luxon.jean.pierre@gmail.com
 */
 
-
 #include <LunatiX/LX_Sync.hpp>
 #include <LunatiX/utils/tinythread/tinythread.h>
 

@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -15,7 +14,6 @@
 *    @file LX_Log.cpp
 *    @brief The Log file
 *    @author Luxon Jean-Pierre(Gumichan01)
-*
 */
 
 #include <LunatiX/LX_Log.hpp>
@@ -32,7 +30,6 @@
 
 namespace
 {
-
 // Debug
 bool debug_mode = false;
 
@@ -118,36 +115,30 @@ void setDefaultPriority()
     SDL_LogResetPriorities();
 }
 
-
 void setVerbosePriority(LX_CATEGORY category)
 {
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_VERBOSE);
 }
-
 
 void setDebugPriority(LX_CATEGORY category)
 {
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_DEBUG);
 }
 
-
 void setInfoPriority(LX_CATEGORY category)
 {
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_INFO);
 }
-
 
 void setWarningPriority(LX_CATEGORY category)
 {
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_WARN);
 }
 
-
 void setErrorPriority(LX_CATEGORY category)
 {
     SDL_LogSetPriority(category,SDL_LOG_PRIORITY_ERROR);
 }
-
 
 void setCriticalPriority(LX_CATEGORY category)
 {
@@ -164,7 +155,6 @@ void logVerbose(LX_CATEGORY category,std::string format,...)
     va_end(args);
 }
 
-
 void logDebug(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
@@ -173,7 +163,6 @@ void logDebug(LX_CATEGORY category,std::string format,...)
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_DEBUG,str.c_str(),args);
     va_end(args);
 }
-
 
 void logInfo(LX_CATEGORY category,std::string format,...)
 {
@@ -184,7 +173,6 @@ void logInfo(LX_CATEGORY category,std::string format,...)
     va_end(args);
 }
 
-
 void logWarning(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
@@ -193,7 +181,6 @@ void logWarning(LX_CATEGORY category,std::string format,...)
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_WARN,str.c_str(),args);
     va_end(args);
 }
-
 
 void logError(LX_CATEGORY category,std::string format,...)
 {
@@ -204,7 +191,6 @@ void logError(LX_CATEGORY category,std::string format,...)
     va_end(args);
 }
 
-
 void logCritical(LX_CATEGORY category,std::string format,...)
 {
     va_list args;
@@ -213,7 +199,6 @@ void logCritical(LX_CATEGORY category,std::string format,...)
     SDL_LogMessageV(category,SDL_LOG_PRIORITY_CRITICAL,str.c_str(),args);
     va_end(args);
 }
-
 
 void log(std::string format,...)
 {

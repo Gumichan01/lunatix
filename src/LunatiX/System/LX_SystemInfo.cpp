@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -16,7 +15,6 @@
 *    @brief The implementation of the system information
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <SDL2/SDL_cpuinfo.h>
@@ -32,24 +30,20 @@ const UTF8string getPlatform()
     return UTF8string(SDL_GetPlatform());
 }
 
-
 int getCPUCacheLineSize()
 {
     return SDL_GetCPUCacheLineSize();
 }
-
 
 int getCPUCount()
 {
     return SDL_GetCPUCount();
 }
 
-
 int getSystemRAM()
 {
     return SDL_GetSystemRAM();
 }
-
 
 void getAvailableDisplayModes(LX_DisplayMode& modes)
 {
