@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef HITBOX_H_INCLUDED
 #define HITBOX_H_INCLUDED
 
 /**
-*    @file LX_Hitbox.hpp
-*    @brief The hitbox library
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Hitbox.hpp
+*   @brief The hitbox library
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/LX_AABB.hpp>
@@ -78,7 +78,7 @@ struct LX_Circle
 *   @param [in] b The second point
 *
 *   @return TRUE If these points have exactly the same coordinates,
-*           FALSE otherwise
+*          FALSE otherwise
 */
 bool operator ==(const LX_Point& a, const LX_Point& b);
 /**
@@ -123,7 +123,7 @@ bool operator !=(const LX_Circle& a, const LX_Circle& b);
 *   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is greater than the second circle,
-*           FALSE otherwise
+*          FALSE otherwise
 */
 bool operator >(const LX_Circle& a, const LX_Circle& b);
 /**
@@ -135,7 +135,7 @@ bool operator >(const LX_Circle& a, const LX_Circle& b);
 *   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is smaller than the second circle,
-*           FALSE otherwise
+*          FALSE otherwise
 */
 bool operator <(const LX_Circle& a, const LX_Circle& b);
 /**
@@ -148,7 +148,7 @@ bool operator <(const LX_Circle& a, const LX_Circle& b);
 *   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is greater than the second circle,
-*           or if have the same radius length, FALSE otherwise
+*          or if have the same radius length, FALSE otherwise
 *
 */
 bool operator >=(const LX_Circle& a, const LX_Circle& b);
@@ -162,7 +162,7 @@ bool operator >=(const LX_Circle& a, const LX_Circle& b);
 *   @param [in] b The second circle
 *
 *   @return TRUE If the first circle is smaller than the second circle,
-*           or if the two circles have the same radius length, FALSE otherwise
+*          or if the two circles have the same radius length, FALSE otherwise
 */
 bool operator <=(const LX_Circle& a, const LX_Circle& b);
 

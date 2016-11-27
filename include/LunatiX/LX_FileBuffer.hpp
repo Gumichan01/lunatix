@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_FILEBUFFER_HPP_INCLUDED
 #define LX_FILEBUFFER_HPP_INCLUDED
 
 /**
-*    @file LX_FileBuffer.hpp
-*    @brief The file buffer
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_FileBuffer.hpp
+*   @brief The file buffer
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -78,7 +78,7 @@ public:
     *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
     *
     *   @warning If the value of *offset* is greater than the size of the file,
-    *            then an IOException will be thrown
+    *           then an IOException will be thrown
     *
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
@@ -98,7 +98,7 @@ public:
     *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
     *
     *   @warning If the value of *offset* is greater than the size of the file,
-    *            then an IOException will be thrown
+    *           then an IOException will be thrown
     *
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
@@ -112,8 +112,8 @@ public:
     *   Load a buffered image from the file buffer.
     *
     *   @return A pointer to new an allocated buffered image on success,
-    *           *nullptr* if the file buffer is not an image to load.
-    *           Call LX_GetError() for more information.
+    *          *nullptr* if the file buffer is not an image to load.
+    *          Call LX_GetError() for more information.
     */
     LX_Graphics::LX_BufferedImage * loadBufferedImage() const;
     /**
@@ -122,7 +122,7 @@ public:
     *   Load a sample from the current file buffer
     *
     *   @return A pointer to an allocated LX_Chunk object,
-    *           *nullptr* if the file buffer is not a sample to load
+    *          *nullptr* if the file buffer is not a sample to load
     */
     LX_Mixer::LX_Chunk * loadSample() const;
 

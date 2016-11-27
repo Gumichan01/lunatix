@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_PARTICLESYSTEM_HPP_INCLUDED
 #define LX_PARTICLESYSTEM_HPP_INCLUDED
 
 /**
-*    @file LX_ParticleSystem.hpp
-*    @brief The Particle system file
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_ParticleSystem.hpp
+*   @brief The Particle system file
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <memory>
@@ -66,7 +66,7 @@ public:
     *   @param [in] p The particle to add
     *
     *   @return TRUE if the system had the particle with succes.
-    *           FALSE if the particle is a null pointer or the system cannot add it
+    *          FALSE if the particle is a null pointer or the system cannot add it
     */
     bool addParticle(LX_Particle *p);
     /**

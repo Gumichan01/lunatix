@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_TTF_H_INCLUDED
 #define LX_TTF_H_INCLUDED
 
 /**
-*    @file LX_TrueTypeFont.hpp
-*    @brief The True type Font (TTF) library
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_TrueTypeFont.hpp
+*   @brief The True type Font (TTF) library
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -120,12 +120,12 @@ public:
     *   @param [in] size the size of the text
     *
     *   @note If size is 0, then the default value defined
-    *         in the configuration file is used.
+    *        in the configuration file is used.
     *
     *   @note The constructor uses the configuration file to get the TTF file
     *
     *   @warning You must initialize the SDL_TTF library
-    *            setting the TTF flag to 1 in lunatix.cfg.
+    *           setting the TTF flag to 1 in lunatix.cfg.
     *
     *   @exception LX_FileIO::IOException if the file cannot be loaded
     */
@@ -141,7 +141,7 @@ public:
     *   @param [in] colour The colour for rendering the text
     *
     *   @warning You must initialize the SDL_TTF library
-    *            setting the TTF flag to 1 in lunatix.cfg
+    *           setting the TTF flag to 1 in lunatix.cfg
     *
     *   @exception LX_FileIO::IOException if the file cannot be loaded
     */
@@ -158,7 +158,7 @@ public:
     *   @param [in] size The size of the text to display
     *
     *   @warning It is necessary to initialize the SDL_TTF library setting
-    *            the ttf flag to 1 in lunatix.cfg.
+    *           the ttf flag to 1 in lunatix.cfg.
     *
     *   @exception LX_FileIO::IOException if the file cannot be loaded
     */

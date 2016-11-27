@@ -3,9 +3,9 @@
 #define TAGS_HPP_INCLUDED
 
 /**
-*    @file libtagspp.hpp
-*    @brief The metadata reader API
-*    @author Luxon Jean-Pierre(Gumichan01)
+*   @file libtagspp.hpp
+*   @brief The metadata reader API
+*   @author Luxon Jean-Pierre(Gumichan01)
 */
 
 #include <string>

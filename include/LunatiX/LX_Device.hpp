@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_DEVICE_HPP_INCLUDED
 #define LX_DEVICE_HPP_INCLUDED
 
 /**
-*    @file LX_Device.hpp
-*    @brief The Device header
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Device.hpp
+*   @brief The Device header
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -95,12 +95,12 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 *   Define if the cursor will be shown or not
 *
 *   @param [in] toggle One of these following values :
-*            - ::LX_MOUSE_SHOW:  to show it
-*            - ::LX_MOUSE_HIDE:  to hide
-*            - ::LX_MOUSE_QUERY: to get the current state
+*           - ::LX_MOUSE_SHOW:  to show it
+*           - ::LX_MOUSE_HIDE:  to hide
+*           - ::LX_MOUSE_QUERY: to get the current state
 *
 *   @return LX_MOUSE_SHOW if the cursor is shown, LX_MOUSE_HIDE if it is hidden,
-*           a negative value on failure.
+*          a negative value on failure.
 */
 int mouseCursorDisplay(int toggle);
 

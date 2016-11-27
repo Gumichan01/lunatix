@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_SYNC_HPP_INCLUDED
 #define LX_SYNC_HPP_INCLUDED
 
 /**
-*    @file LX_Sync.hpp
-*    @brief The thread synchroization API
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Sync.hpp
+*   @brief The thread synchroization API
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <memory>
@@ -90,21 +90,21 @@ public:
     *   @param [in] mutex The mutex to associate the condition variable with.
     *
     *   @note 1 - The mutex given in argument must be locked.
-    *         Otherwise the behaviour is undefined.
+    *        Otherwise the behaviour is undefined.
     *   @note 2 - This function atomically releases the mutex in argument
-    *         and cause the calling thread to block on the current condition variable;
-    *         atomically here means
-    *         "atomically with respect to access by another thread to the mutex and then the condition variable".
-    *         That is, if another thread is able to acquire the mutex
-    *         after the about-to-block thread has released it,
-    *         then a subsequent call to broadcast() or signal()
-    *         in that thread shall behave as if it were issued
-    *         after the about-to-block thread has blocked.
+    *        and cause the calling thread to block on the current condition variable;
+    *        atomically here means
+    *        "atomically with respect to access by another thread to the mutex and then the condition variable".
+    *        That is, if another thread is able to acquire the mutex
+    *        after the about-to-block thread has released it,
+    *        then a subsequent call to broadcast() or signal()
+    *        in that thread shall behave as if it were issued
+    *        after the about-to-block thread has blocked.
     *   @note 3 - The effect os using more than one mutex for concurrent
-    *         signal() or broadcat() operations on the same condition variable is undefined.
-    *         Because the condition variable is bound to a unique mutex when
-    *         a thread waits on this condition variable, and this binding ends
-    *         when the wait "returns"
+    *        signal() or broadcat() operations on the same condition variable is undefined.
+    *        Because the condition variable is bound to a unique mutex when
+    *        a thread waits on this condition variable, and this binding ends
+    *        when the wait "returns"
     *
     *   @sa signal
     *   @sa broadcast
@@ -116,9 +116,9 @@ public:
     *   Unblock a thread taht is blocked on the current condition variable
     *
     *   @note 1 - If more than one thread is blocked on the condition variable
-    *         the scheduling policy shall determine which thread is unblocked
+    *        the scheduling policy shall determine which thread is unblocked
     *   @note 2 - The function does nothing if no threads are blocked
-    *         on the condition variable
+    *        on the condition variable
     *
     *   @sa broadcast
     */
@@ -129,10 +129,10 @@ public:
     *   Unblock all threads that are blocked on the current condition variable
     *
     *   @note 1 - If more than one thread is blocked on the condition variable
-    *         the scheduling policy shall determine the order in
-    *         which thread is unblocked.
+    *        the scheduling policy shall determine the order in
+    *        which thread is unblocked.
     *   @note 2 - The function does nothing if no threads are blocked
-    *         on the condition variable
+    *        on the condition variable
     *
     *   @sa signal
     */

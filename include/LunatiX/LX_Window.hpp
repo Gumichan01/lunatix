@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_WINDOW_H_INCLUDED
 #define LX_WINDOW_H_INCLUDED
 
 /**
-*    @file LX_Window.hpp
-*    @brief The window library
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Window.hpp
+*   @brief The window library
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 *
 */
 
@@ -163,7 +163,7 @@ struct LX_Window_;
 *   @brief The window
 *
 *   @warning The LX_Window class must be defined only after
-*            the initialization of the library (calling LX_Init())
+*           the initialization of the library (calling LX_Init())
 *   @warning A LX_WindowException may be occured if the window creation fails
 *
 */
@@ -231,7 +231,7 @@ public:
     *   @param [in] v The direction vector
     *
     *   @note The length of a line depends on the norm of the direction vector
-    *         The length is calculating according to this formula: ||v||*2
+    *        The length is calculating according to this formula: ||v||*2
     */
     void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v);
     /**
@@ -291,19 +291,19 @@ public:
     *   Set the blend mode for drawing operations (Fill, Line)
     *
     *   @param [in] mode The blend mode to use for blending:
-    *    |        Value        |                      Meaning                     |
-    *    |         ---         |                        ---                       |
-    *    |  LX_BLENDMODE_NONE  | no blending                                      |
-    *    |                     | destRGBA = srcRGBA                               |
-    *    |  LX_BLENDMODE_BLEND | alpha blending                                   |
-    *    |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
-    *    |                     | destA = srcA + (destA * (1-srcA))                |
-    *    |  LX_BLENDMODE_ADD   | additive blending                                |
-    *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
-    *    |                     | destA = destA                                    |
-    *    |  LX_BLENDMODE_MOD   | colour modulate                                  |
-    *    |                     | destRGB = srcRGB * destRGB                       |
-    *    |                     | destA = destA                                    |
+    *   |        Value        |                      Meaning                     |
+    *   |         ---         |                        ---                       |
+    *   |  LX_BLENDMODE_NONE  | no blending                                      |
+    *   |                     | destRGBA = srcRGBA                               |
+    *   |  LX_BLENDMODE_BLEND | alpha blending                                   |
+    *   |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
+    *   |                     | destA = srcA + (destA * (1-srcA))                |
+    *   |  LX_BLENDMODE_ADD   | additive blending                                |
+    *   |                     | destRGB = (srcRGB * srcA) + destRGB              |
+    *   |                     | destA = destA                                    |
+    *   |  LX_BLENDMODE_MOD   | colour modulate                                  |
+    *   |                     | destRGB = srcRGB * destRGB                       |
+    *   |                     | destA = destA                                    |
     */
     void setDrawBlendMode(LX_BlendMode mode);
     /**
@@ -320,19 +320,19 @@ public:
     *   @param mode Structure to fill in
     *
     *   @return The blend mode used for blending:
-    *    |        Value        |                      Meaning                     |
-    *    |         ---         |                        ---                       |
-    *    |  LX_BLENDMODE_NONE  | no blending                                      |
-    *    |                     | destRGBA = srcRGBA                               |
-    *    |  LX_BLENDMODE_BLEND | alpha blending                                   |
-    *    |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
-    *    |                     | destA = srcA + (destA * (1-srcA))                |
-    *    |  LX_BLENDMODE_ADD   | additive blending                                |
-    *    |                     | destRGB = (srcRGB * srcA) + destRGB              |
-    *    |                     | destA = destA                                    |
-    *    |  LX_BLENDMODE_MOD   | colour modulate                                  |
-    *    |                     | destRGB = srcRGB * destRGB                       |
-    *    |                     | destA = destA                                    |
+    *   |        Value        |                      Meaning                     |
+    *   |         ---         |                        ---                       |
+    *   |  LX_BLENDMODE_NONE  | no blending                                      |
+    *   |                     | destRGBA = srcRGBA                               |
+    *   |  LX_BLENDMODE_BLEND | alpha blending                                   |
+    *   |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
+    *   |                     | destA = srcA + (destA * (1-srcA))                |
+    *   |  LX_BLENDMODE_ADD   | additive blending                                |
+    *   |                     | destRGB = (srcRGB * srcA) + destRGB              |
+    *   |                     | destA = destA                                    |
+    *   |  LX_BLENDMODE_MOD   | colour modulate                                  |
+    *   |                     | destRGB = srcRGB * destRGB                       |
+    *   |                     | destA = destA                                    |
     */
     void getDrawBlendMode(LX_BlendMode& mode) const;
 
@@ -383,9 +383,9 @@ public:
     *   Set the window's fullscreen state
     *
     *   @param [in] flag The flag to use in this function:
-    *           - ::LX_WINDOW_FULLSCREEN_DESKTOP
-    *           - ::LX_WINDOW_FULLSCREEN
-    *           - ::LX_WINDOW_NO_FULLSCREEN
+    *          - ::LX_WINDOW_FULLSCREEN_DESKTOP
+    *          - ::LX_WINDOW_FULLSCREEN
+    *          - ::LX_WINDOW_NO_FULLSCREEN
     */
     void toggleFullscreen(uint32_t flag);
 
@@ -467,10 +467,10 @@ public:
     *   Set the focus on the current OpenGL window for rendering
     *
     *   @return TRUE on success.
-    *           FALSE if the window is not an OpenGL window
+    *          FALSE if the window is not an OpenGL window
     *
     *   @note This function must only be used if the window was
-    *         created with the OpenGL flag. Otherwise, it returns FALSE.
+    *        created with the OpenGL flag. Otherwise, it returns FALSE.
     */
     bool glMakeCurrent();
 

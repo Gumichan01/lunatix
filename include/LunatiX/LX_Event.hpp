@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_EVENT_HPP_INCLUDED
 #define LX_EVENT_HPP_INCLUDED
 
 /**
-*    @file LX_Event.hpp
-*    @brief The Event namespace
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Event.hpp
+*   @brief The Event namespace
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -220,27 +220,27 @@ const int LX_MBUTTONS = 6;
 *
 *   Example of code (from test-input.cpp):
 *
-*       LX_EventHandler evh;
+*      LX_EventHandler evh;
 *
-*       while(true)
-*       {
-*           while(evh.pollEvent())
-*           {
-*               switch(evh.getEventType())
-*               {
-*                   case SDL_MOUSEMOTION:
-*                       ...
-*                       LX_Log::log("state → %d %d %d %d %d",
-*                                   evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
-*                                   evh.getMouseMotion().state[LX_MOUSE_MBUTTON],
-*                                   evh.getMouseMotion().state[LX_MOUSE_RBUTTON],
-*                                   evh.getMouseMotion().state[LX_MOUSE_X1],
-*                                   evh.getMouseMotion().state[LX_MOUSE_X2]);
-*                       ...
-*                       break;
-*               }
-*           }
-*       }
+*      while(true)
+*      {
+*          while(evh.pollEvent())
+*          {
+*              switch(evh.getEventType())
+*              {
+*                  case SDL_MOUSEMOTION:
+*                      ...
+*                      LX_Log::log("state → %d %d %d %d %d",
+*                                  evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
+*                                  evh.getMouseMotion().state[LX_MOUSE_MBUTTON],
+*                                  evh.getMouseMotion().state[LX_MOUSE_RBUTTON],
+*                                  evh.getMouseMotion().state[LX_MOUSE_X1],
+*                                  evh.getMouseMotion().state[LX_MOUSE_X2]);
+*                      ...
+*                      break;
+*              }
+*          }
+*      }
 *
 */
 struct LX_MMotion

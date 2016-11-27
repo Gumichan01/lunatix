@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_TEXT_HPP_INCLUDED
 #define LX_TEXT_HPP_INCLUDED
 
 /**
-*    @file LX_Text.hpp
-*    @brief The interface of LX_TextInput
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Text.hpp
+*   @brief The interface of LX_TextInput
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -52,21 +52,21 @@ public:
     LX_RedrawCallback();
     /**
     *   @fn virtual void operator ()(UTF8string& u8str, UTF8string& u8comp,
-    *                                const bool update, size_t cursor,
-    *                                size_t prev_cur) = 0;
+    *                               const bool update, size_t cursor,
+    *                               size_t prev_cur) = 0;
     *
     *   Virtual function that update the display of a string
     *   @param [in] u8str The utf-8 encoded string written by the user
     *   @param [in] u8comp The utf-8 encoded string that has been composed
     *   @param [in] update A constant value that specify if the display
-    *           of the string has to be updated
+    *          of the string has to be updated
     *   @param [in] cursor The current position of the cursor on the string
     *   @param [in] prev_cur The previous position of the cursor on the string
     *
     *   @note 1 — This function must be implemented in a subclass
     *   @note 2 — u8str is the string written by the user
     *   @note 3 — u8comp is the string that is currently composed but
-    *           not yet validated by the user (often used for non-latin words)
+    *          not yet validated by the user (often used for non-latin words)
     */
     virtual void operator ()(UTF8string& u8str, UTF8string& u8comp, const bool update,
                              size_t cursor, size_t prev_cur) = 0;
@@ -120,7 +120,7 @@ class LX_TextInput_;
 *                   img.setPosition(100,100);
 *                   img.draw();
 *               }
-*                   _w.update();
+*               _w.update();
 *           }
 *
 *           ...

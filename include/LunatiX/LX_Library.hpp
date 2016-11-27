@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_LIBRARY_H_INCLUDED
 #define LX_LIBRARY_H_INCLUDED
 
 /**
-*    @file LX_Library.hpp
-*    @brief Library ressource manager (load and shut down)
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Library.hpp
+*   @brief Library ressource manager (load and shut down)
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/LX_Error.hpp>
@@ -45,9 +45,9 @@ const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by th
 *   @return TRUE on success, FALSE otherwise
 *
 *   @note 1 — LX_Init initializes the subsystems defined in
-*           the configuration file (lunatix.cfg)
+*          the configuration file (lunatix.cfg)
 *   @note 2 — This function automatically calls LX_WindowManager::init()
-*           and LX_Configuration::initConfig()
+*          and LX_Configuration::initConfig()
 *
 */
 bool LX_Init();

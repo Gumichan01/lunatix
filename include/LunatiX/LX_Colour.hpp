@@ -1,13 +1,13 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_COLOUR_HPP_INCLUDED
@@ -29,10 +29,10 @@
 *
 *   Internal structure:
 *
-*       uint8_t r;
-*       uint8_t g;
-*       uint8_t b;
-*       uint8_t a;  // 255: opaque; 0: transparent
+*      uint8_t r;
+*      uint8_t g;
+*      uint8_t b;
+*      uint8_t a;  // 255: opaque; 0: transparent
 *
 *   Examples:
 *
@@ -60,7 +60,7 @@ using LX_Colour = SDL_Colour;
 *
 *   Orange colour
 *
-*       ⇒ LX_Colour: { r = 1.0f, g = 0.647058f, b = 1.0f, a = 1.0f }
+*      ⇒ LX_Colour: { r = 1.0f, g = 0.647058f, b = 1.0f, a = 1.0f }
 *
 */
 struct LX_glColour
@@ -156,7 +156,7 @@ inline LX_Colour fromRGBAvalue(const uint32_t rgba)
     uint8_t b = (rgba >> 8) & 0x000000FF;
     uint8_t a = rgba & 0x000000FF;
 
-    return LX_Colour{r,g,b,a};
+    return LX_Colour {r,g,b,a};
 }
 
 #include "LX_Format.inl"

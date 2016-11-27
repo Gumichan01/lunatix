@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_HAPTIC_HPP_INCLUDED
 #define LX_HAPTIC_HPP_INCLUDED
 
 /**
-*    @file LX_Haptic.hpp
-*    @brief The force feedback (Haptic) interface
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Haptic.hpp
+*   @brief The force feedback (Haptic) interface
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <memory>
@@ -111,7 +111,7 @@ public:
     *   Play the rumble effect
     *
     *   @param [in] strength Strength of the rumble to play as a float value
-    *          (between 0.0 and 1.0)
+    *         (between 0.0 and 1.0)
     *   @param [in] length Length of the rumble to play in milliseconds
     */
     virtual void rumbleEffectPlay(float strength, uint32_t length);
@@ -146,7 +146,7 @@ public:
     *
     *   @param [in] effect_id Identifier of the haptic effect to run
     *   @param [in] iterations iterations Number of iterations to run the effect.
-    *           Use SDL_HAPTIC_INFINITY for infinity.
+    *          Use SDL_HAPTIC_INFINITY for infinity.
     *
     *   @sa newEffect
     *   @sa stopEffect

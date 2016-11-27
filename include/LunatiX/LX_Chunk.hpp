@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_CHUNK_H_INCLUDED
 #define LX_CHUNK_H_INCLUDED
 
 /**
-*    @file LX_Chunk.hpp
-*    @brief The sample header
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Chunk.hpp
+*   @brief The sample header
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/LX_Sound.hpp>
@@ -85,8 +85,8 @@ public:
     *   @param [in] filename The file to create the sample from
     *
     *   @note It is better to give a .wav file to the constructor.
-    *         The sample was optimized for this format. But it can work with
-    *         an other file type.
+    *        The sample was optimized for this format. But it can work with
+    *        an other file type.
     *
     *   @exception LX_ChunkException if the sample cannot be created from the file
     */
@@ -101,8 +101,8 @@ public:
     *   @param [in] filename The file to create the sample from
     *
     *   @note It is better to give a .wav file to the constructor.
-    *           The sample was optimized for this format. But it can work with
-    *           an other file type.
+    *          The sample was optimized for this format. But it can work with
+    *          an other file type.
     *   @exception LX_ChunkException if the sample cannot be created from the file
     */
     explicit LX_Chunk(const UTF8string& filename);
@@ -114,7 +114,7 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample on the first unserved channel
-    *         with the no loop option
+    *        with the no loop option
     */
     bool play();
     /**
@@ -138,10 +138,10 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     *   @note 1 — The sample is played loops +1 time
-    *             For example:
-    *               - If loop == 0 → play the sample once
-    *               - If loop == 1 → play the sample 2 times, ...
-    *               - If loop == n (n ∈ N) → play the sample n+1 times
+    *            For example:
+    *              - If loop == 0 → play the sample once
+    *              - If loop == 1 → play the sample 2 times, ...
+    *              - If loop == n (n ∈ N) → play the sample n+1 times
     *
     *   @note 2 — If loops == -1 → loop forever
     */

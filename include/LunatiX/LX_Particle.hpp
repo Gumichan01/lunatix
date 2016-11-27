@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef PARTICLE_HPP_INCLUDED
 #define PARTICLE_HPP_INCLUDED
 
 /**
-*    @file LX_Particle.hpp
-*    @brief The Particle file
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Particle.hpp
+*   @brief The Particle file
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/LX_AABB.hpp>
@@ -71,7 +71,7 @@ public:
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b);
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-    *                   const float vx, const float vy)
+    *                  const float vx, const float vy)
     *   @brief Constructor
     *
     *   Create the instance using an AABB and the velocity
@@ -84,7 +84,7 @@ public:
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy);
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-    *                   const LX_Physics::LX_Vector2D& v)
+    *                  const LX_Physics::LX_Vector2D& v)
     *   @brief Constructor
     *
     *   Create the instance using an AABB and the velocity

@@ -174,7 +174,7 @@ public:
     *   @return The codepoint
     *
     *   @note If the index is out of the string range, calling this functions
-    *         causes undefined behaviour
+    *        causes undefined behaviour
     */
     std::string operator [](const size_t index) const;
 
@@ -215,7 +215,7 @@ public:
     *   @param str The string to look for
     *   @param pos The osition to start the search
     *   @return The position of the subtring if it was found
-    *           (in number of codepoints), UTF8string::npos otherwise.
+    *          (in number of codepoints), UTF8string::npos otherwise.
     */
     size_t utf8_find(const UTF8string& str, size_t pos = 0) const;
 

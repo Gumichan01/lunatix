@@ -1,20 +1,20 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 /**
-*    @file LX_TrueTypeFont.cpp
-*    @brief The LunatiX True type Font (TTF) implementation.
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_TrueTypeFont.cpp
+*   @brief The LunatiX True type Font (TTF) implementation.
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 *
 */
 
@@ -245,7 +245,7 @@ int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size,
-                                     LX_Win::LX_Window& w)
+                                      LX_Win::LX_Window& w)
 {
     return drawSolidText_(UTF8string(text),size,w);
 }
@@ -260,7 +260,7 @@ SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
-                                     LX_Win::LX_Window& w)
+                                      LX_Win::LX_Window& w)
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_SOLID,text,size);
 
@@ -284,7 +284,7 @@ SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int size,
-                                      const LX_Colour& bg, LX_Win::LX_Window& w)
+                                       const LX_Colour& bg, LX_Win::LX_Window& w)
 {
     return drawShadedText_(UTF8string(text),size,bg,w);
 }
@@ -300,7 +300,7 @@ SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int siz
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size,
-                                      const LX_Colour& bg, LX_Win::LX_Window& w)
+                                       const LX_Colour& bg, LX_Win::LX_Window& w)
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_SHADED,text,size,bg);
 
@@ -323,7 +323,7 @@ SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int size,
-                                       LX_Win::LX_Window& w)
+                                        LX_Win::LX_Window& w)
 {
     return drawBlendedText_(UTF8string(text),size,w);
 }
@@ -338,7 +338,7 @@ SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int si
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const UTF8string& text, unsigned int size,
-                                       LX_Win::LX_Window& w)
+                                        LX_Win::LX_Window& w)
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_BLENDED,text,size);
 

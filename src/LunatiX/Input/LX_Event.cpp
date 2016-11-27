@@ -1,20 +1,20 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 /**
-*    @file LX_Event.cpp
-*    @brief The Implementation of the event odule
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Event.cpp
+*   @brief The Implementation of the event odule
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 *
 */
 
@@ -407,12 +407,12 @@ LX_EventType LX_EventHandler::getEventType() const
         break;
 
     case SDL_CONTROLLERDEVICEADDED:
-    /*case SDL_JOYDEVICEADDED:*/
+        /*case SDL_JOYDEVICEADDED:*/
         ty = LX_CONTROLLERDEVICEADDED;
         break;
 
     case SDL_CONTROLLERDEVICEREMOVED:
-    /*case SDL_JOYDEVICEREMOVED:*/
+        /*case SDL_JOYDEVICEREMOVED:*/
         ty = LX_CONTROLLERDEVICEREMOVED;
         break;
 
@@ -440,18 +440,15 @@ const LX_KeyboardState LX_EventHandler::getKeyboardState()
     return ks;
 }
 
-
 LX_KeyCode LX_EventHandler::getKeyCode() const
 {
     return (*event).key.keysym.sym;
 }
 
-
 LX_ScanCode LX_EventHandler::getScanCode() const
 {
     return (*event).key.keysym.scancode;
 }
-
 
 LX_GamepadID LX_EventHandler::getGamepadID() const
 {
@@ -496,14 +493,12 @@ const LX_GAxis LX_EventHandler::getAxis() const
     return gax;
 }
 
-
 const LX_GButton LX_EventHandler::getButton() const
 {
     const SDL_ControllerButtonEvent bu = (*event).cbutton;
     const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), bu.state};
     return gbutton;
 }
-
 
 const LX_MButton LX_EventHandler::getMouseButton() const
 {
@@ -512,7 +507,6 @@ const LX_MButton LX_EventHandler::getMouseButton() const
     const LX_MButton mbutton = {mb.windowID,b, mb.state, mb.clicks, mb.x, mb.y};
     return mbutton;
 }
-
 
 const LX_MMotion LX_EventHandler::getMouseMotion() const
 {
@@ -541,7 +535,6 @@ const LX_MWheel LX_EventHandler::getMouseWheel() const
     return mwheel;
 }
 
-
 const LX_WEvent LX_EventHandler::getWindowEvent() const
 {
     const SDL_WindowEvent winev = (*event).window;
@@ -551,14 +544,12 @@ const LX_WEvent LX_EventHandler::getWindowEvent() const
     return we;
 }
 
-
 const LX_UserEvent LX_EventHandler::getUserEvent() const
 {
     const SDL_UserEvent usr = (*event).user;
     const LX_UserEvent uev = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
     return uev;
 }
-
 
 const LX_TextEvent LX_EventHandler::getTextEvent() const
 {
@@ -578,7 +569,6 @@ const LX_TextEvent LX_EventHandler::getTextEvent() const
 
     return t;
 }
-
 
 const LX_DropEvent LX_EventHandler::getDropEvent() const
 {
@@ -602,18 +592,15 @@ LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
     return SDL_GetKeyFromScancode(scancode);
 }
 
-
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode)
 {
     return SDL_GetScancodeFromKey(keycode);
 }
 
-
 UTF8string stringOfScanCode(LX_ScanCode scancode)
 {
     return UTF8string(SDL_GetScancodeName(scancode));
 }
-
 
 UTF8string stringOfKeyCode(LX_KeyCode keycode)
 {
@@ -628,7 +615,6 @@ UTF8string stringOfButton(LX_GamepadButton button)
     const char * s = SDL_GameControllerGetStringForButton(static_cast<SDL_GameControllerButton>(button));
     return UTF8string(s == nullptr ? "null" : s);
 }
-
 
 UTF8string stringOfAxis(LX_GamepadAxis axis)
 {

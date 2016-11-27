@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_FILEIO_H_INCLUDED
 #define LX_FILEIO_H_INCLUDED
 
 /**
-*    @file LX_FileIO.hpp
-*    @brief The file handling library
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_FileIO.hpp
+*   @brief The file handling library
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -131,7 +131,7 @@ public:
     *   @param [in] num The maximum number of objects to write
     *
     *   @return The number of objects written.
-    *           This value will be less than num on error
+    *          This value will be less than num on error
     */
     virtual size_t write(void *ptr, size_t data_size, size_t num) = 0;
     /**
@@ -142,7 +142,7 @@ public:
     *   @param [in] str The string to write
     *
     *   @return The number of characters written.
-    *           This value will be less than the string length on error
+    *          This value will be less than the string length on error
     *
     *   @sa read
     */
@@ -168,7 +168,7 @@ public:
     *   Get the position in a file
     *
     *   @return The current offset of the stream.
-    *           -1 if the position cannot be determined
+    *          -1 if the position cannot be determined
     *
     *   @sa seek
     */
@@ -207,16 +207,16 @@ public:
     *
     *   @param [in] filename The file to open
     *   @param [in] mode The mode to be used for opening the file.
-    *               It is one of these following :
-    *               - ::LX_FILEIO_RDONLY
-    *               - ::LX_FILEIO_WRONLY
-    *               - ::LX_FILEIO_APPEND
-    *               - ::LX_FILEIO_RDWR
-    *               - ::LX_FILEIO_RDAP
-    *               - ::LX_FILEIO_WRTR
+    *              It is one of these following :
+    *              - ::LX_FILEIO_RDONLY
+    *              - ::LX_FILEIO_WRONLY
+    *              - ::LX_FILEIO_APPEND
+    *              - ::LX_FILEIO_RDWR
+    *              - ::LX_FILEIO_RDAP
+    *              - ::LX_FILEIO_WRTR
     *
     *   @exception IOException If one of these aruguments are invalid
-    *              or the file is not openable
+    *             or the file is not openable
     */
     LX_File(const std::string& filename, const uint32_t mode);
     /**
@@ -227,16 +227,16 @@ public:
     *
     *   @param [in] filename The file to open
     *   @param [in] mode The mode to be used for opening the file.
-    *               It is one of these following :
-    *               - ::LX_FILEIO_RDONLY
-    *               - ::LX_FILEIO_WRONLY
-    *               - ::LX_FILEIO_APPEND
-    *               - ::LX_FILEIO_RDWR
-    *               - ::LX_FILEIO_RDAP
-    *               - ::LX_FILEIO_WRTR
+    *              It is one of these following :
+    *              - ::LX_FILEIO_RDONLY
+    *              - ::LX_FILEIO_WRONLY
+    *              - ::LX_FILEIO_APPEND
+    *              - ::LX_FILEIO_RDWR
+    *              - ::LX_FILEIO_RDAP
+    *              - ::LX_FILEIO_WRTR
     *
     *   @exception IOException If one of these aruguments are invalid
-    *              or the file is not openable
+    *             or the file is not openable
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 

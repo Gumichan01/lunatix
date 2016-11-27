@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_WINDOWMANAGER_HPP_INCLUDED
 #define LX_WINDOWMANAGER_HPP_INCLUDED
 
 /**
-*    @file LX_WindowManager.hpp
-*    @brief The window manager
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_WindowManager.hpp
+*   @brief The window manager
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 *
 */
 
@@ -66,8 +66,8 @@ public:
     *   Destroy the instance of the singleton
     *
     *   @warning The windows contained in the window manager
-    *            are not destroyed. So it is necessary to keep an external
-    *            pointer to the windows added in the manager.
+    *           are not destroyed. So it is necessary to keep an external
+    *           pointer to the windows added in the manager.
     */
     static void destroy();
 
@@ -79,7 +79,7 @@ public:
     *   @param [in] w The window
     *
     *   @return The ID of the window that was added if the instance is valid,
-    *           ((uint32_t) -1 ) otherwise
+    *          ((uint32_t) -1 ) otherwise
     *
     *   @sa LX_Window
     *   @sa removeWindow
@@ -95,11 +95,11 @@ public:
     *   @param [in] id The ID of the window that must be deleted
     *
     *   @return A valid pointer to a window if the ID refers to a valid window,
-    *           a null pointer otherwise
+    *          a null pointer otherwise
     *
     *   @note This function does not destroy the window, because each instance
-    *         of a window in the list can be statically or dymanically allocated
-    *         So, the user is responsible of releasing the window.
+    *        of a window in the list can be statically or dymanically allocated
+    *        So, the user is responsible of releasing the window.
     *
     *   @sa addWindow
     */
@@ -140,7 +140,7 @@ public:
     *   @param [in] id The id of the window
     *
     *   @return A valid pointer to a LX_Window instance if it exists,
-    *           a null pointer otherwise
+    *          a null pointer otherwise
     */
     LX_Window * getWindow(const uint32_t id);
 };

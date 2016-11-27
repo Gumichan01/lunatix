@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LUNATIX_H_INCLUDED
 #define LUNATIX_H_INCLUDED
 
 /**
-*    @file Lunatix.hpp
-*    @brief The header file of LunatiX
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file Lunatix.hpp
+*   @brief The header file of LunatiX
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)

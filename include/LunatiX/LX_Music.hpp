@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_MUSIC_H_INCLUDED
 #define LX_MUSIC_H_INCLUDED
 
 /**
-*    @file LX_Music.hpp
-*    @brief The music library
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Music.hpp
+*   @brief The music library
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/LX_Sound.hpp>
@@ -128,10 +128,10 @@ public:
     *   @param [in] ms Milliseconds for the fade-in effect to complete
     *
     *   @note fadeIn starts playing the music with the fade-in effect.
-    *         It is not necessary to call LX_Music::play() if this function is called
+    *        It is not necessary to call LX_Music::play() if this function is called
     *
     *   @note Any previous music will be halted, or if it is fading out
-    *           it will wait (blocking) for the fade to complete
+    *          it will wait (blocking) for the fade to complete
     */
     void fadeIn(int ms);
     /**
@@ -143,10 +143,10 @@ public:
     *   @param [in] pos The position to start the music
     *
     *   @note fadeInPos starts playing the music with the fade-in effect.
-    *         It is not necessary to call LX_Music::play() if this function is called
+    *        It is not necessary to call LX_Music::play() if this function is called
     *
     *   @note Any previous music will be halted, or if it is fading out
-    *           it will wait (blocking) for the fade to complete
+    *          it will wait (blocking) for the fade to complete
     */
     void fadeInPos(int ms,int pos);
     /**
@@ -157,7 +157,7 @@ public:
     *   @param [in] ms Milliseconds for the fade-out effect to complete
     *
     *   @note This functions works only when music is playing and
-    *           no fading is already set to fade out
+    *          no fading is already set to fade out
     */
     static void fadeOut(int ms);
 

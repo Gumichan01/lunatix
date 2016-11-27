@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_SYSTEM_INFO_H_INCLUDED
 #define LX_SYSTEM_INFO_H_INCLUDED
 
 /**
-*    @file LX_SystemInfo.hpp
-*    @brief The System information library
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_SystemInfo.hpp
+*   @brief The System information library
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -48,14 +48,14 @@ using LX_DisplayMode = std::vector<SDL_DisplayMode>;
 *   Return the name of the patform.
 *
 *   @return The name of the platform the program is running on.
-*           Or a string beginning with "Unkownn" if the name
-*           is not available.
+*          Or a string beginning with "Unkownn" if the name
+*          is not available.
 *
 *   @note The names returned by the function is one of
-*           these following names :
-*           - Windows
-*           - Mac OS X
-*           - Linux
+*          these following names :
+*          - Windows
+*          - Mac OS X
+*          - Linux
 */
 const UTF8string getPlatform();
 
@@ -89,8 +89,8 @@ int getSystemRAM();
 *   @param [in,out] modes the different modes of display to fill in
 *
 *   @note LX_DisplayMode is a struture that contains every available
-*         display modes. In order to get these following modes, you should
-*         use iterators.
+*        display modes. In order to get these following modes, you should
+*        use iterators.
 *   @note Example:
 *
 *       LX_DisplayMode modes;

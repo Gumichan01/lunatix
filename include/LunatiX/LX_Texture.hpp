@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_IMAGE_H_INCLUDED
 #define LX_IMAGE_H_INCLUDED
 
 /**
-*    @file LX_Texture.hpp
-*    @brief The Texture header file
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Texture.hpp
+*   @brief The Texture header file
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -86,7 +86,7 @@ public:
 
     /**
     *   @fn LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-    *                  uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                 uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   Build the texture from a filename
@@ -165,24 +165,24 @@ public:
     *   in order to use the OpenGL functions.
     *
     *   @param [out] iw (Optional) a pointer to a float value of which will be
-    *          filled with the texture width. See notes.
+    *         filled with the texture width. See notes.
     *   @param [out] ih (Optional) a pointer to a float value which will be
-    *          filled with the texture width. See notes.
+    *         filled with the texture width. See notes.
     *
     *   @return TRUE on success. FALSE if the operation is not supported.
     *
     *   @note 1 - If provided, **iw** and **ih** will be filled with
-    *         the width and height values suitable for the provided texture.
-    *         In most cases, both will be 1.0, however, on systems that support the
-    *         GL_ARB_texture_rectangle extension, these values will actually be the
-    *         pixel width and height used to create the texture, so this factor needs
-    *         to be taken into account when providing texture coordinates to OpenGL.
+    *        the width and height values suitable for the provided texture.
+    *        In most cases, both will be 1.0, however, on systems that support the
+    *        GL_ARB_texture_rectangle extension, these values will actually be the
+    *        pixel width and height used to create the texture, so this factor needs
+    *        to be taken into account when providing texture coordinates to OpenGL.
     *
     *   @note 2 - This functions change the focused OpenGL window
-    *         in order to bind the texture to the OpenGL context of the window
-    *         where it is usually drawn on.
-    *         That is to say the function can be only called if the window is
-    *         an OpenGL window. Otherwise, bind() returns FALSE.
+    *        in order to bind the texture to the OpenGL context of the window
+    *        where it is usually drawn on.
+    *        That is to say the function can be only called if the window is
+    *        an OpenGL window. Otherwise, bind() returns FALSE.
     */
     bool bind(float *iw = nullptr, float *ih = nullptr);
 
@@ -228,8 +228,8 @@ public:
     *   Draw the current sprite on the window
     *
     *   @param [in] box A pointer to the dimension (coordinates, size)
-    *          of the sprite that will be drawn. If the box is *nullptr*,
-    *          then the sprite is drawn on the entire screen
+    *         of the sprite that will be drawn. If the box is *nullptr*,
+    *         then the sprite is drawn on the entire screen
     *
     *   @note The window is specified at object construction
     */
@@ -240,8 +240,8 @@ public:
     *   Draw an area of the current sprite on the window with rotation
     *
     *   @param [in] box A pointer to the dimension (coordinates, size)
-    *          of the sprite that will be drawn. If the box is *nullptr*,
-    *          then the sprite is drawn on the entire screen
+    *         of the sprite that will be drawn. If the box is *nullptr*,
+    *         then the sprite is drawn on the entire screen
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
     *
@@ -254,14 +254,14 @@ public:
     *   Draw the current sprite on the window with rotation
     *
     *   @param [in] box A pointer to the dimension (coordinates, size)
-    *          of the sprite that will be drawn. If the box is *nullptr*,
-    *          then the sprite is drawn on the entire screen
+    *         of the sprite that will be drawn. If the box is *nullptr*,
+    *         then the sprite is drawn on the entire screen
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
     *   @param [in] mirror The flag that set the mirror effect:
-    *          - LX_MIRROR_NONE: No mirror effect
-    *          - LX_MIRROR_HORIZONTAL: Horizontal mirror
-    *          - LX_MIRROR_VERTICAL: Vertical mirror
+    *         - LX_MIRROR_NONE: No mirror effect
+    *         - LX_MIRROR_HORIZONTAL: Horizontal mirror
+    *         - LX_MIRROR_VERTICAL: Vertical mirror
     *
     *   @note The window is specified at object construction
     */
@@ -296,8 +296,8 @@ public:
 
     /**
     *   @fn LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
-    *                         const std::vector<LX_AABB>& coord, const uint32_t delay,
-    *                         uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                        const std::vector<LX_AABB>& coord, const uint32_t delay,
+    *                        uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *
     *   Build an animated sprite using a filename
     *
@@ -380,8 +380,8 @@ public:
     LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
-    *                                    const std::vector<LX_AABB>& coord,
-    *                                    const uint32_t delay) const
+    *                                   const std::vector<LX_AABB>& coord,
+    *                                   const uint32_t delay) const
     *
     *   Create an animated sprite from the current buffered image
     *
@@ -415,7 +415,7 @@ public:
 
     /**
     *   @fn LX_StreamingTexture(LX_Win::LX_Window& w,
-    *                           uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                          uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *
     *   Build the texture
     *
@@ -442,7 +442,7 @@ public:
     *   Update the texture in order to be drawn on the window
     *
     *   @note After each call of update(), you ned to call LX_Texture::draw()
-    *         in order to draw the new texture on the window
+    *        in order to draw the new texture on the window
     */
     void update();
 
@@ -472,7 +472,7 @@ public:
 
     /**
     *   @fn LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                      uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                     uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] font The font that will be used for drawing the text
@@ -486,8 +486,8 @@ public:
 
     /**
     *   @fn LX_TextTexture(std::string text, unsigned int sz,
-    *                      LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                      uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    *                     uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
@@ -503,8 +503,8 @@ public:
                    uint32_t format=LX_PIXELFORMAT_RGBA8888);
     /**
     *   @fn LX_TextTexture(const UTF8string& text, unsigned int sz,
-    *                      LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                      uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    *                     uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
@@ -537,9 +537,9 @@ public:
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
     *   @param [in] mirror The flag that set the mirror effect:
-    *          - LX_DRAW_MIRROR_NONE: No mirror effect
-    *          - LX_MIRROR_HORIZONTAL: Horizontal mirror
-    *          - LX_MIRROR_VERTICAL: Vertical mirror
+    *         - LX_DRAW_MIRROR_NONE: No mirror effect
+    *         - LX_MIRROR_HORIZONTAL: Horizontal mirror
+    *         - LX_MIRROR_VERTICAL: Vertical mirror
     *
     *   @note The window is specified at object construction
     */

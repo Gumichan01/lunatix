@@ -1,13 +1,13 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_OPENGL_H_INCLUDED
@@ -15,10 +15,10 @@
 
 
 /**
-*    @file LX_OpenGL.hpp
-*    @brief The LunatiX/OpenGL interface
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_OpenGL.hpp
+*   @brief The LunatiX/OpenGL interface
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -77,7 +77,7 @@ bool extensionSupported(std::string extension);
 *   Load the default OpenGL library
 *
 *   @return TRUE on success or FALSE on FAILURE.
-*           Call LX_GetError() for more information
+*          Call LX_GetError() for more information
 *
 *   @note See ::loadLibrary
 *
@@ -90,14 +90,14 @@ bool loadDefaultLibrary();
 *
 *   @param [in] path The platform dependent library name
 *   @return TRUE on success or FALSE on FAILURE.
-*           Call LX_GetError() for more information
+*          Call LX_GetError() for more information
 *
 *   @note 1 - This function should be called after initializing the video subsystem,
-*             but before creating any OpenGL windows.
+*            but before creating any OpenGL windows.
 *   @note 2 - If no OpenGL library is loaded, the default library is loaded
-*             upon creation of the first OpenGL window.
+*            upon creation of the first OpenGL window.
 *   @note 3 - If you do this, you need to retireve all of the OpenGL functions
-*             used in your program from the dynamic library using *getProcAddress()*
+*            used in your program from the dynamic library using *getProcAddress()*
 */
 bool loadLibrary(std::string path);
 /**
@@ -107,7 +107,7 @@ bool loadLibrary(std::string path);
 *   *::loadDefaultLibrary()* or ::loadLibrary()*
 *
 *   @return TRUE on success or FALSE on FAILURE.
-*           Call LX_GetError() for more information
+*          Call LX_GetError() for more information
 */
 void UnloadLibrary();
 
@@ -119,22 +119,22 @@ void UnloadLibrary();
 *   @param [in] proc The name of the function to load
 *
 *   @return A pointer to the OpenGL function on success,
-*           NULL if the function is not found.
+*          NULL if the function is not found.
 *
 *   @note 1 - The pointer should be cast to the appropriate function signature
 *   With SDL2, you should write a code like this:
 *
-*       typedef void (APIENTRY * GL_ActiveTextureARB_Func)(unsigned int);
-*       GL_ActiveTextureARB_Func glActiveTextureARB_ptr = 0;
-*       glActiveTextureARB_ptr = (GL_ActiveTextureARB_Func) SDL_GL_GetProcAddress("glActiveTextureARB");
+*      typedef void (APIENTRY * GL_ActiveTextureARB_Func)(unsigned int);
+*      GL_ActiveTextureARB_Func glActiveTextureARB_ptr = 0;
+*      glActiveTextureARB_ptr = (GL_ActiveTextureARB_Func) SDL_GL_GetProcAddress("glActiveTextureARB");
 *   Now, with LunatiX, you should do:
 *
-*       typedef void (APIENTRY * GL_ActiveTextureARB_Func)(unsigned int);
-*       GL_ActiveTextureARB_Func glActiveTextureARB_ptr = 0;
-*       glActiveTextureARB_ptr = LX_Graphics::LX_OpenGL::getProcAddress<GL_ActiveTextureARB_Func>("glActiveTextureARB");
+*      typedef void (APIENTRY * GL_ActiveTextureARB_Func)(unsigned int);
+*      GL_ActiveTextureARB_Func glActiveTextureARB_ptr = 0;
+*      glActiveTextureARB_ptr = LX_Graphics::LX_OpenGL::getProcAddress<GL_ActiveTextureARB_Func>("glActiveTextureARB");
 *
 *   @note 2 - It is very important to set the type parameter to *getProcAddress* → *getProcAddress<**type**>()* .
-*       Otherwise, the code will not compile.
+*      Otherwise, the code will not compile.
 *
 *   @note 3 - OpenGL function pointers must be declared **APIENTRY** as in the example code.
 *   This will ensure the proper calling convention is followed on platforms
@@ -150,7 +150,7 @@ T getProcAddress(const std::string& proc);
 *   Get the current context
 *
 *   @return The current active OpenGL context or NULL on failure.
-*           Call LX_GetError() for more information
+*          Call LX_GetError() for more information
 */
 LX_GLContext getCurrentContext();
 
@@ -160,10 +160,10 @@ LX_GLContext getCurrentContext();
 *   Get the swap interval for the current OpenGL context
 *
 *   @return
-*           - LX_GL_NO_VSYNC if there is no Vertical synchronization
-*           - LX_GL_VSYNC if the swap is synchonized with the vertical retrace
-*           - LX_GL_NOT_SUPPORTED if the swap interval is not supported.
-*             Call LX_GetError() for more information
+*          - LX_GL_NO_VSYNC if there is no Vertical synchronization
+*          - LX_GL_VSYNC if the swap is synchonized with the vertical retrace
+*          - LX_GL_NOT_SUPPORTED if the swap interval is not supported.
+*            Call LX_GetError() for more information
 *
 *   @sa setSwapInterval
 */
@@ -174,22 +174,22 @@ int getSwapInterval();
 *   Set the swap interval for the current OpenGL context
 *
 *   @param [in] interval One of the following values:
-*           - ::LX_GL_NO_VSYNC : for immediate updates
-*           - ::LX_GL_VSYNC    : for Vertical Synchronization (VSync)
-*           - ::LX_GL_TEARING  : for late swap tearing
+*          - ::LX_GL_NO_VSYNC : for immediate updates
+*          - ::LX_GL_VSYNC    : for Vertical Synchronization (VSync)
+*          - ::LX_GL_TEARING  : for late swap tearing
 *
 *   @return TRUE on success. FALSE if the setting is not supported.
-*           Call LX_GetError() for more information
+*          Call LX_GetError() for more information
 *
 *   @note Some systems allow specifying -1 (LX_GL_TEARING)
-*         for the interval in order to enable late swap tearing.
-*         Late swap tearing (LX_GL_TEARING) works the same as vsync (LX_GL_VSYNC),
-*         but if you've already missed the vertical retrace for a given frame,
-*         it swaps buffers immediately, which might be less jarring
-*         for the user during occasional framerate drops.
-*         If application requests late swap tearing and the system does not support it,
-*         this function will fail and return FALSE.
-*         In such a case, you should probably retry the call with LX_GL_VSYNC for the interval.
+*        for the interval in order to enable late swap tearing.
+*        Late swap tearing (LX_GL_TEARING) works the same as vsync (LX_GL_VSYNC),
+*        but if you've already missed the vertical retrace for a given frame,
+*        it swaps buffers immediately, which might be less jarring
+*        for the user during occasional framerate drops.
+*        If application requests late swap tearing and the system does not support it,
+*        this function will fail and return FALSE.
+*        In such a case, you should probably retry the call with LX_GL_VSYNC for the interval.
 *
 *   @sa getSwapInterval
 */
@@ -202,11 +202,11 @@ bool setSwapInterval(int interval);
 *
 *   @param [in] attr The [attribute](http://wiki.libsdl.org/SDL_GLattr) to query
 *   @param [out] value The reference that will be filled in with
-*                the current value of attr
+*               the current value of attr
 *
 *   @return TRUE on success, and value is set with the value odf the attribute,
-*           FALSE otherwise.
-*           Call LX_GetError() for more information.
+*          FALSE otherwise.
+*          Call LX_GetError() for more information.
 *
 *   @note the value the attribute are exactly the same with the attribute
 *   defined in SDL2 (as of SDL 2.0.3)
@@ -223,13 +223,13 @@ bool getAttribute(LX_GLattr attr, int& value);
 *   @param [in] value The desired value for the attribute
 *
 *   @return TRUE on success. FALSE otherwise.
-*           Call LX_GetError() for more information
+*          Call LX_GetError() for more information
 *
 *   @note This function sets the OpenGL attribute *attr* to *value*.
-*         The requested attributes should be set before creating an OpenGL window.
-*         You should use *getAttribute()* to check the values
-*         after creating the OpenGL context,
-*         since the values obtained can differ from the requested ones.
+*        The requested attributes should be set before creating an OpenGL window.
+*        You should use *getAttribute()* to check the values
+*        after creating the OpenGL context,
+*        since the values obtained can differ from the requested ones.
 *
 *   @sa getAttribute
 */

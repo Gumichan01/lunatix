@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_CHANNEL_HPP_INCLUDED
 #define LX_CHANNEL_HPP_INCLUDED
 
 /**
-*    @file LX_Channel.hpp
-*    @brief The channel API
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Channel.hpp
+*   @brief The channel API
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/LX_Sync.hpp>
@@ -72,7 +72,7 @@ public:
     *
     *   @return TRUE on success, FALSE if the channel is closed and empty
     *   @note If no data is available yet, the calls blocks until
-    *         until thre is something to retrieve
+    *        until thre is something to retrieve
     */
     bool recv(T& data);
     /**

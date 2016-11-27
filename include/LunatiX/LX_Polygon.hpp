@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_POLYGON_H_INCLUDED
 #define LX_POLYGON_H_INCLUDED
 
 /**
-*    @file LX_Polygon.hpp
-*    @brief The polygon file
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Polygon.hpp
+*   @brief The polygon file
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -58,8 +58,8 @@ public:
 class LX_Polygon_;
 
 /**
-*    @class LX_Polygon
-*    @brief The polygon
+*   @class LX_Polygon
+*   @brief The polygon
 *   This class defines a polygon
 */
 class LX_Polygon
@@ -107,7 +107,7 @@ public:
     *   @return A copy of the point
     *
     *   @exception  LX_PolygonException If the index refers
-    *               to an out of bounds position
+    *              to an out of bounds position
     */
     LX_Point getPoint(const unsigned int index) const;
 
@@ -119,8 +119,8 @@ public:
     *   @return TRUE if the polygon is convex, false otherwise
     *
     *   @note Actually, the convexity of the polygon is dynamically evaluated
-    *         each time a new point in added using LX_Polygon::addPoint().
-    *         The result is stored in an internal variable
+    *        each time a new point in added using LX_Polygon::addPoint().
+    *        The result is stored in an internal variable
     */
     bool isConvex() const;
 

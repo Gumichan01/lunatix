@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_CONFIG_H_INCLUDED
 #define LX_CONFIG_H_INCLUDED
 
 /**
-*    @file LX_Config.hpp
-*    @brief The configuration class header
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Config.hpp
+*   @brief The configuration class header
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 *
 */
 
@@ -84,8 +84,8 @@ public:
     *
     *   @note 1 — This function is automatically called in LX_Init()
     *   @note 2 — The instance of LX_Configuration may not be created.
-    *           So, it will be necessary to call LX_GetError() to get
-    *           the error message.
+    *          So, it will be necessary to call LX_GetError() to get
+    *          the error message.
     */
     static void initConfig();
 
@@ -104,7 +104,7 @@ public:
     *   Destroy the unique instance
     *
     *   @note It is not necessary to call this function because it is
-    *         automatically called when the library subsystems are shut down
+    *        automatically called when the library subsystems are shut down
     */
     static void destroy();
 

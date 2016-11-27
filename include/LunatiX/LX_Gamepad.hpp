@@ -1,23 +1,23 @@
 
 /*
-*    Copyright (C) 2016 Luxon Jean-Pierre
-*    https://gumichan01.github.io/
+*   Copyright (C) 2016 Luxon Jean-Pierre
+*   https://gumichan01.github.io/
 *
-*    LunatiX is a free, SDL2-based library.
-*    It can be used for open-source or commercial games thanks to the zlib/libpng license.
+*   LunatiX is a free, SDL2-based library.
+*   It can be used for open-source or commercial games thanks to the zlib/libpng license.
 *
-*    Luxon Jean-Pierre (Gumichan01)
-*    luxon.jean.pierre@gmail.com
+*   Luxon Jean-Pierre (Gumichan01)
+*   luxon.jean.pierre@gmail.com
 */
 
 #ifndef LX_GAMEPAD_HPP_INCLUDED
 #define LX_GAMEPAD_HPP_INCLUDED
 
 /**
-*    @file LX_Gamepad.hpp
-*    @brief The gamepad interface
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
+*   @file LX_Gamepad.hpp
+*   @brief The gamepad interface
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -57,10 +57,10 @@ public:
     *   @param [in] index The index of the joystick to query
     *
     *   @return TRUE on success, FALSE if the gamepad is already opened and
-    *           connected to another device.
+    *          connected to another device.
     *
     *   @note   You can also check the success of the operation
-    *           calling isConnected()
+    *          calling isConnected()
     *
     *   @sa close()
     */
@@ -86,7 +86,7 @@ public:
     *   Get the status of the gamepad
     *
     *   @return TRUE if the gamepad is opened and connected,
-    *           FALSE otherwise
+    *          FALSE otherwise
     */
     bool isConnected() const;
 
@@ -96,7 +96,7 @@ public:
     *   Check if the gamepad is haptic
     *
     *   @return TRUE if the gamepad has force feedback support,
-    *           FALSE otherwise
+    *          FALSE otherwise
     */
     bool isHaptic() const;
 
@@ -132,7 +132,7 @@ public:
     *
     *   @param [out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
-    *           Call LX_GetError() to get the error message
+    *          Call LX_GetError() to get the error message
     */
     bool stat(LX_GamepadInfo& info) const;
 
