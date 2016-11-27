@@ -302,50 +302,29 @@ public:
     virtual ~LX_TmpFile();
 };
 
+
 /**
-*   @fn LX_File& operator <<(LX_File& f, UTF8string& u8s)
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s)
 *
-*   Write a UTF-8 string into the file
+*   Write a string into the file
 *
-*   @param [in,out] f The file structure
-*   @param [in] u8s The utf-8 string
-*
-*   @return The updated file
-*/
-LX_File& operator <<(LX_File& f, UTF8string& u8s);
-/**
-*   @fn LX_File& operator <<(LX_File& f, std::string s)
-*
-*   Write a UTF-8 string into the file
-*
-*   @param [in,out] f The file structure
+*   @param [in,out] f The file to write data into
 *   @param [in] s The string
 *
 *   @return The updated file
 */
-LX_File& operator <<(LX_File& f, std::string s);
+LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s);
 /**
-*   @fn LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s)
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s);
 *
-*   Write a UTF-8 string into the file
+*   Write a utf-8 string into the file
 *
-*   @param [in,out] f The file structure
+*   @param [in,out] f The file to write data into
 *   @param [in] u8s The utf-8 string
 *
 *   @return The updated file
 */
-LX_TmpFile& operator <<(LX_TmpFile& f, UTF8string& u8s);
-/**
-*   @fn LX_TmpFile& operator <<(LX_TmpFile& f, std::string s)
-*
-*   Write a UTF-8 string into the file
-*
-*   @param [in,out] f The file structure
-*   @param [in] s The string
-*
-*   @return The updated file
-*/
-LX_TmpFile& operator <<(LX_TmpFile& f, std::string s);
+LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s);
 
 };
 
