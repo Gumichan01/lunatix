@@ -26,6 +26,7 @@
 *   @brief 2D module for rendering (sprite, text, ...) and window management
 */
 
+#include "LX_Colour.hpp"
 #include "LX_Texture.hpp"
 #include "LX_OpenGL.hpp"
 #include "LX_TrueTypeFont.hpp"

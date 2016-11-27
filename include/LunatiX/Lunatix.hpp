@@ -70,7 +70,6 @@
 #include <LunatiX/LX_Multithread.hpp>
 
 // Utils
-#include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Text.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
