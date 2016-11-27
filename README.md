@@ -6,16 +6,10 @@ LunatiX is a free SDL2-based library. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
 
 It contains these following modules:
-- LX\_Graphics: A 2D library based on SDL_Image 2.0 (supporting JPEG, PNG,...)
-- LX\_TrueTypeFont: The True Type Font (TTF) library based on SDL_TTF 2.0
-- LX\_Mixer: The audio library based on SDL_Mixer 2.0 (supporting MP3, OGG, WAV, ...)
-- LX\_Physics: The physics module
-
-LunatiX also contains these modules:
-- LX\_Device: The library for Gamepads and mouse support
-- LX\_FileIO: The file Input/Output library
-- LX\_Multithreading: Multithreading support with synchronization primitives
-- LX\_Text: To handle text input
+- Graphics: 2D module for rendering (sprite, text, ...) and window management
+- Audio: Audio module for mixing (music, channels, effect, ...)
+- Physics: Physics Module (collision detection, movement, ...)
+- And some others ...
 
 The library works on Windows and Linux (maybe on Mac OS X).
 
@@ -24,8 +18,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 - 2D hardware acceleration
 - 2D basic animation
 - Support for OpenGL 3.0+
-- Support for Multiple windows
-- Collision detection
+- Support for multiple windows
 - Basic particle system
 - Multithreading
 - Text input
