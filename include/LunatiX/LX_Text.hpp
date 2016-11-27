@@ -1,5 +1,3 @@
-#ifndef LX_TEXT_HPP_INCLUDED
-#define LX_TEXT_HPP_INCLUDED
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_TEXT_HPP_INCLUDED
+#define LX_TEXT_HPP_INCLUDED
+
 /**
 *    @file LX_Text.hpp
 *    @brief The interface of LX_TextInput
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
@@ -31,8 +31,9 @@ class LX_EventHandler;
 
 
 /**
+*   @ingroup Event
 *   @namespace LX_Text
-*   @brief The Text input module
+*   @brief The Text input namespace
 */
 namespace LX_Text
 {
@@ -51,8 +52,8 @@ public:
     LX_RedrawCallback();
     /**
     *   @fn virtual void operator ()(UTF8string& u8str, UTF8string& u8comp,
-                                     const bool update, size_t cursor,
-                                     size_t prev_cur) = 0;
+    *                                const bool update, size_t cursor,
+    *                                size_t prev_cur) = 0;
     *
     *   Virtual function that update the display of a string
     *   @param [in] u8str The utf-8 encoded string written by the user
