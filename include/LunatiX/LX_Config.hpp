@@ -1,6 +1,3 @@
-#ifndef LX_CONFIG_H_INCLUDED
-#define LX_CONFIG_H_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -12,6 +9,9 @@
 *    Luxon Jean-Pierre (Gumichan01)
 *    luxon.jean.pierre@gmail.com
 */
+
+#ifndef LX_CONFIG_H_INCLUDED
+#define LX_CONFIG_H_INCLUDED
 
 /**
 *    @file LX_Config.hpp
@@ -146,6 +146,7 @@ public :
     /**
     *   @fn char * getFontFile() const
     *   @deprecated This function will be removed in v0.10.1
+    *   Provide the TTF file while constructing the LX_Font object
     *
     *   Get the font file
     *   @return The font file
@@ -153,7 +154,8 @@ public :
     const char * getFontFile() const;
     /**
     *   @fn int getFontSize() const
-    *   @deprecated This function will be removed in v0.10.1
+    *   @deprecated This function will be removed in v0.10.1.
+    *   Provide the font size while constructing the LX_Font object
     *
     *   Get the font size
     *   @return The size of the font
