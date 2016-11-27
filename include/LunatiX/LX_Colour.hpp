@@ -1,6 +1,3 @@
-#ifndef LX_COLOUR_HPP_INCLUDED
-#define LX_COLOUR_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,17 +10,20 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_COLOUR_HPP_INCLUDED
+#define LX_COLOUR_HPP_INCLUDED
+
 /**
-*    @file LX_Colour.hpp
-*    @brief The colour representation
-*    @author Luxon Jean-Pierre(Gumichan01)
-*    @version 0.9
-*
+*   @file LX_Colour.hpp
+*   @brief The colour representation
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.9
 */
 
 #include <SDL2/SDL_pixels.h>
 
 /**
+*   @ingroup Graphics
 *   @typedef LX_Colour
 *   @brief Colour representation
 *
@@ -49,6 +49,7 @@
 using LX_Colour = SDL_Colour;
 
 /**
+*   @ingroup Graphics
 *   @struct LX_glColour
 *   @brief Colour representation (in OpenGL format)
 *
@@ -72,6 +73,7 @@ struct LX_glColour
 
 
 /**
+*   @ingroup Graphics
 *   @fn inline LX_glColour from8BitColour(const LX_Colour& colour)
 *
 *   Convert a colour in 8-bit notation to a colour in floating-point notation
@@ -95,6 +97,7 @@ inline LX_glColour from8BitColour(const LX_Colour& colour)
     return c;
 }
 /**
+*   @ingroup Graphics
 *   @fn inline LX_Colour fromGLColour(const LX_glColour& colour)
 *
 *   Convert a colour in floating-point notation to a colour in 8-bit notation
@@ -120,6 +123,7 @@ inline LX_Colour fromGLColour(const LX_glColour& colour)
 }
 
 /**
+*   @ingroup Graphics
 *   @fn inline uint32_t toRGBAvalue(const LX_Colour& colour)
 *
 *   Get the colour value in one unsigned integer value
@@ -137,6 +141,7 @@ inline uint32_t toRGBAvalue(const LX_Colour& colour)
     return (rvalue << 24) | (gvalue << 16) | (bvalue << 8) | avalue;
 }
 /**
+*   @ingroup Graphics
 *   @fn inline LX_Colour fromRGBAvalue(const uint32_t rgba)
 *
 *   Get the colour structure from an integer value
@@ -151,7 +156,7 @@ inline LX_Colour fromRGBAvalue(const uint32_t rgba)
     uint8_t b = (rgba >> 8) & 0x000000FF;
     uint8_t a = rgba & 0x000000FF;
 
-    return LX_Colour {r,g,b,a};
+    return LX_Colour{r,g,b,a};
 }
 
 #include "LX_Format.inl"
