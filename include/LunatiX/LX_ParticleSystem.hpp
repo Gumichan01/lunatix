@@ -1,6 +1,3 @@
-#ifndef LX_PARTICLESYSTEM_HPP_INCLUDED
-#define LX_PARTICLESYSTEM_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,22 +10,24 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_PARTICLESYSTEM_HPP_INCLUDED
+#define LX_PARTICLESYSTEM_HPP_INCLUDED
+
 /**
 *    @file LX_ParticleSystem.hpp
 *    @brief The Particle system file
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <memory>
 
 /**
+*   @ingroup Graphics
 *   @namespace LX_ParticleEngine
 *   @brief The particle engine
 *
 *   It handles a basic particle system
-*
 */
 namespace LX_ParticleEngine
 {
@@ -56,7 +55,6 @@ public:
     *   Create the instance with a number of particles
     *
     *   @param [in] nbPart The number of particles to define in the system
-    *
     */
     explicit LX_ParticleSystem(const unsigned int nbPart);
 
@@ -69,16 +67,13 @@ public:
     *
     *   @return TRUE if the system had the particle with succes.
     *           FALSE if the particle is a null pointer or the system cannot add it
-    *
     */
     bool addParticle(LX_Particle *p);
-
     /**
     *   @fn void updateParticles()
     *   Update the particles
     */
     void updateParticles();
-
     /**
     *   @fn void displayParticles() const
     *   Display the particles
@@ -87,27 +82,19 @@ public:
 
     /**
     *   @fn unsigned int nbEmptyParticles() const
-    *
     *   Get the number of empty slots to set particles
-    *
     *   @return The number of available slots of the particle system
     */
     unsigned int nbEmptyParticles() const;
-
     /**
     *   @fn unsigned int nbActiveParticles() const
-    *
     *   Get the number of initialized particles
-    *
     *   @return The number of particles that are not null of the system
     */
     unsigned int nbActiveParticles() const;
-
     /**
     *   @fn unsigned int nbTotalParticles() const
-    *
     *   Get the maximum number of particles
-    *
     *   @return The total number of particles the current particle system can have
     */
     unsigned int nbTotalParticles() const;

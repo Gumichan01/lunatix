@@ -1,6 +1,3 @@
-#ifndef PARTICLE_HPP_INCLUDED
-#define PARTICLE_HPP_INCLUDED
-
 
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
@@ -13,12 +10,14 @@
 *    luxon.jean.pierre@gmail.com
 */
 
+#ifndef PARTICLE_HPP_INCLUDED
+#define PARTICLE_HPP_INCLUDED
+
 /**
 *    @file LX_Particle.hpp
 *    @brief The Particle file
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_AABB.hpp>
@@ -68,12 +67,12 @@ public :
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
-    *
     */
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b);
-
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy)
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+    *                   const float vx, const float vy)
+    *   @brief Constructor
     *
     *   Create the instance using an AABB and the velocity
     *
@@ -81,51 +80,41 @@ public :
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     *   @param [in] vx The X velocity
     *   @param [in] vy The Y velocity
-    *
     */
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy);
-
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v)
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+    *                   const LX_Physics::LX_Vector2D& v)
+    *   @brief Constructor
     *
     *   Create the instance using an AABB and the velocity
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     *   @param [in] v The vector that store the velocity
-    *
     */
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v);
 
     /**
     *   @fn void update()
-    *
-    *   Update the particle statement
+    *   Update the particle state
     */
     void update();
-
     /**
     *   @fn void draw()
-    *
     *   Draw the particle
     */
     void draw();
 
     /**
     *   @fn bool isDead() const
-    *
     *   Check if the particle is dead and must be destroyed
-    *
     *   @return TRUE if the particle is dead, FALSE otherwise
-    *
     */
     bool isDead() const;
-
     /**
     *   @fn unsigned int getDelay() const
-    *
     *   Get the lifetime of the particle
-    *
     *   @return The lifetime
     */
     unsigned int getDelay() const;

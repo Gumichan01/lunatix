@@ -1,5 +1,4 @@
 
-
 /*
 *    Copyright (C) 2016 Luxon Jean-Pierre
 *    https://gumichan01.github.io/
@@ -16,7 +15,6 @@
 *    @brief The Particle system implementation
 *    @author Luxon Jean-Pierre(Gumichan01)
 *    @version 0.9
-*
 */
 
 #include <LunatiX/LX_ParticleSystem.hpp>
