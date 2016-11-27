@@ -24,6 +24,7 @@
 #include <LunatiX/utils/utf8_string.hpp>
 
 /**
+*   @ingroup Config
 *   @namespace LX_Config
 *   @brief The configuration loader
 */

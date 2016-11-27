@@ -28,6 +28,16 @@ const int LX_GL_MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by th
 const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the library */
 
 /**
+*   @defgroup Config Configuration
+*   @brief Basics (initialization and shutdown, version, configuration)
+*/
+
+/**
+*   @addtogroup Config
+*   @{
+*/
+
+/**
 *   @fn bool LX_Init()
 *
 *   Load the library according the configuration file
@@ -71,5 +81,7 @@ const std::string getSDLConfig(const std::string& sdlconfig_name);
 *   @note This function automatically calls LX_WindowManager::destroy()
 */
 void LX_Quit();
+
+/** @} */
 
 #endif // LX_LIBRARY_H_INCLUDED

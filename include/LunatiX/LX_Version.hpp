@@ -21,6 +21,7 @@
 */
 
 /**
+*   @ingroup Config
 *   @namespace LX_VersionInfo
 *   @brief Information about the library
 */
