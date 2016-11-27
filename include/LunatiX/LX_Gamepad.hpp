@@ -41,7 +41,7 @@ class LX_Gamepad
     LX_Gamepad(const LX_Gamepad& g);
     LX_Gamepad& operator =(const LX_Gamepad&);
 
-public :
+public:
 
     /**
     *   @fn LX_Gamepad()

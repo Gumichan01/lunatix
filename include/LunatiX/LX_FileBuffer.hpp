@@ -62,7 +62,7 @@ class LX_FileBuffer
     // private function
     void * getFontFromBuffer_(int size) const;  // used by LX_TrueTypeFont::LX_Font
 
-public :
+public:
 
     /**
     *   @fn LX_FileBuffer(const std::string& filename, uint32_t offset=0, uint32_t sz=0)

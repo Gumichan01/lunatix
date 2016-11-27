@@ -75,7 +75,7 @@ class LX_Configuration
 
     void loadFlags_();
 
-public :
+public:
 
     /**
     *   @fn void initConfig()

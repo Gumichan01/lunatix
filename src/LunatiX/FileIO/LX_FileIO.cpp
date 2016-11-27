@@ -91,7 +91,7 @@ class LX_File_
             throw IOException(str + LX_GetError());
     }
 
-public :
+public:
 
     LX_File_(const UTF8string& filename, const uint32_t mode)
         : _name(filename), _data(nullptr)

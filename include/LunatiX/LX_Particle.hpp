@@ -57,7 +57,7 @@ class LX_Particle
     LX_Particle& operator =(LX_Particle& p);
 
 
-public :
+public:
 
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b)

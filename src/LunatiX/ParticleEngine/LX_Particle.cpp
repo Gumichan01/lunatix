@@ -39,7 +39,7 @@ class LX_Particle_
     LX_Physics::LX_Vector2D _velocity;  /* The velocity of the particle            */
     LX_Graphics::LX_Sprite& _texture;   /* The texture (for the texture rendering) */
 
-public :
+public:
 
     LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
                  const LX_Physics::LX_Vector2D& v)

@@ -44,7 +44,7 @@ class LX_ChunkException : public std::exception
 {
     std::string _string_error;
 
-public :
+public:
 
     /// Constructor
     explicit LX_ChunkException(std::string err);

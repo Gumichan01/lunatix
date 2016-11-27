@@ -66,7 +66,7 @@ class IOException: public std::exception
 {
     std::string _string_error;
 
-public :
+public:
 
     /// Constructor
     explicit IOException(std::string err);
@@ -197,7 +197,7 @@ class LX_File: public virtual LX_AbstractFile
     LX_File(LX_File& f);
     LX_File& operator =(LX_File& f);
 
-public :
+public:
 
     /**
     *   @fn LX_File(const std::string& filename, const uint32_t mode)

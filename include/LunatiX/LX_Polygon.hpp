@@ -40,7 +40,7 @@ class LX_PolygonException : public std::exception
 {
     std::string _string_error;
 
-public :
+public:
 
     /// Constructor
     explicit LX_PolygonException(std::string err);

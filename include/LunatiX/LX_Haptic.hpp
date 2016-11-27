@@ -77,7 +77,7 @@ protected:
 
     LX_Haptic();
 
-public :
+public:
 
     /**
     *   @fn LX_Haptic(int index)

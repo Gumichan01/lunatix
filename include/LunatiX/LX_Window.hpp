@@ -141,7 +141,7 @@ class LX_WindowException : public std::exception
 {
     std::string _string_error;
 
-public :
+public:
 
     /// Constructor
     explicit LX_WindowException(std::string err);
@@ -184,7 +184,7 @@ class LX_Window
 
     void * getRenderingSys() const;
 
-public :
+public:
 
     /**
     *   @fn LX_Window(LX_WindowInfo &info)

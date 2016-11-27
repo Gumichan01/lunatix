@@ -46,7 +46,7 @@ class LX_MusicException : public std::exception
 {
     std::string _string_error;
 
-public :
+public:
 
     /// Constructor
     explicit LX_MusicException(std::string err);
