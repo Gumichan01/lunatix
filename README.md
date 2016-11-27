@@ -83,10 +83,9 @@ You may take a look on the library or get the development version
 on [Github](https://github.com/Gumichan01/lunatix). The library reference
 is also available [online (version 0.9)](https://gumichan01.github.io/lunatix/reference/v0.9.0/).
 
-
 ## Build ##
 
-#### On Windows ####
+### On Windows ###
 
 First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.9.0) (v0.9.0)
 It includes the library files and all necessary materials (SDL2 libraries)
@@ -97,7 +96,7 @@ It should work with Visual C++ (if you are lucky).
 
 You can build it using the CodeBlocks project provided in the directory (*lunatix-win32.cbp*).
 
-#### On Linux ####
+### On Linux ###
 
 The Makefile uses Clang in order to get the library being compiled.
 So you must ensure that Clang (version 3.4 at least) is installed to compile the code.
