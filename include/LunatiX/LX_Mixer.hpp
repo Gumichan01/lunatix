@@ -165,14 +165,13 @@ void setMusicPosition(double pos);
 *   @param [in] num The number of channels to allocate
 *   @return The number of channels allocated
 *
-*   @note   If num is 0, then all channels will be freed.
+*   @note   If *num* is 0, then all channels will be freed.
 *   @note   A negative number do nothing,
 *           it just returns the number of allocated channels.
-*   @note   If num is less than the current number of channels,
+*   @note   If *num* is less than the current number of channels,
 *           then the higher channels will be stopped, freed, and not mixed.
 */
 int allocateChannels(int num);
-
 /**
 *   @fn int reserveChannels(int numchans)
 *
@@ -181,7 +180,7 @@ int allocateChannels(int num);
 *   @param [in] numchans The number of channels to reserve
 *
 *   @return The number of channels reserved
-*   @note If num is 0, then all channels will be unreserved
+*   @note If *num* is 0, then all channels will be unreserved
 */
 int reserveChannels(int numchans);
 
@@ -194,10 +193,9 @@ int reserveChannels(int numchans);
 *   @param [in] tag The tag that define the group to put the channel. Positive value
 *
 *   @return TRUE on success, FALSE otherwise
-*   @note Setting -1 in tag put the channel in the default group
+*   @note Setting -1 in *tag* put the channel in the default group
 */
 bool groupChannel(int chan, int tag);
-
 /**
 *   @fn int groupChannels(int from, int to, int tag)
 *
@@ -210,7 +208,7 @@ bool groupChannel(int chan, int tag);
 *   @return The number of tagged channels on success.
 *   @note If that number is less than to-from+1 then
 *           some channels were no tagged because they didn't exist
-*   @note Setting -1 in tag reset the group to the default channel
+*   @note Setting -1 in *tag* reset the group to the default channel
 */
 int groupChannels(int from, int to, int tag);
 
@@ -222,10 +220,9 @@ int groupChannels(int from, int to, int tag);
 *   @param [in] tag The group id
 *
 *   @return The number of channels found in the group. This function never fails
-*   @note Setting -1 in tag will count all channels
+*   @note Setting -1 in *tag* will count all channels
 */
 int groupCount(int tag);
-
 /**
 *   @fn int channelAvailable(int tag)
 *
@@ -264,7 +261,6 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0);
 *   @note If channel is -1, then all channels will be paused
 */
 void pause(int channel);
-
 /**
 *   @fn void resume(int channel)
 *
@@ -284,7 +280,6 @@ void resume(int channel);
 *   @note If channel is -1, then all channels will be stopped
 */
 void haltChannel(int channel);
-
 /**
 *   @fn void expireChannel(int channel, int ticks)
 *
@@ -308,7 +303,6 @@ void expireChannel(int channel, int ticks);
 *           and the number of channels playing is returned
 */
 int isPlaying(int channel);
-
 /**
 *   @fn int isPaused(int channel)
 *
