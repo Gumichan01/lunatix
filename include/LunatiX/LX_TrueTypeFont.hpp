@@ -111,8 +111,8 @@ public:
     /**
     *   @fn LX_Font(const LX_Colour& colour, unsigned int size)
     *   @brief Constructor
-    *   @deprecated This function will be removed in v0.10.1.
-    *   Use the other constructors instead.
+    *   @deprecated This function is deprecated and will be removed in v0.11.0.
+    *   @deprecated Use the constructor with 3 arguments
     *
     *   Construct the font with colour and the size of the text
     *
@@ -134,12 +134,15 @@ public:
     /**
     *   @fn LX_Font(const std::string& font_file,const LX_Colour& colour)
     *   @brief Constructor
+    *   @deprecated This function is deprecated and will be removed in v0.11.0.
+    *   @deprecated Use the constructor with 3 arguments
     *
     *   Construct the font with font file and colour
     *
     *   @param [in] font_file The font file to use
     *   @param [in] colour The colour for rendering the text
     *
+    *   @note The default size of the font is 24.
     *   @warning You must initialize the SDL_TTF library
     *           setting the TTF flag to 1 in lunatix.cfg
     *

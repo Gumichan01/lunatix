@@ -146,7 +146,8 @@ public:
     bool getOpenGLFlag() const;
     /**
     *   @fn char * getFontFile() const
-    *   @deprecated This function will be removed in v0.10.1
+    *   @deprecated This function will be removed in v0.11.0
+    *
     *   Provide the TTF file while constructing the LX_Font object
     *
     *   Get the font file
@@ -155,7 +156,8 @@ public:
     const char * getFontFile() const;
     /**
     *   @fn int getFontSize() const
-    *   @deprecated This function will be removed in v0.10.1.
+    *   @deprecated This function will be removed in v0.11.0.
+    *
     *   Provide the font size while constructing the LX_Font object
     *
     *   Get the font size

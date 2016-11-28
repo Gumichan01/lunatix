@@ -130,7 +130,6 @@ struct LX_Font_
         return loaded;
     }
 
-
     ~LX_Font_()
     {
         _font_buffer.reset();
