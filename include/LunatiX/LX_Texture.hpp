@@ -210,6 +210,7 @@ class LX_Sprite: public LX_Texture
 protected:
 
     LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
+              LX_AABB * sprite_area = nullptr,
               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
@@ -400,13 +401,16 @@ public:
     */
     LX_Texture * generateTexture(LX_Win::LX_Window& w) const;
     /**
-    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w) const
+    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w,
+    *                                  LX_AABB * sprite_area = nullptr) const
     *   Create a sprite from the current buffered image
     *
     *   @param [in] w The window to link the sprite to → see *draw()*
+    *   @param [in] sprite_area (Optional) Area of the sprite to display
     *   @return A new fresh allocated sprite on success, *nullptr* otherwise
     */
-    LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
+    LX_Sprite * generateSprite(LX_Win::LX_Window& w,
+                               LX_AABB * sprite_area = nullptr) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
     *                                   const std::vector<LX_AABB>& coord,

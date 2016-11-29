@@ -136,8 +136,9 @@ LX_Texture::~LX_Texture()
 /* LX_Sprite */
 
 // protected constructor
-LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, uint32_t format)
-    : LX_Texture(t,w,format), _sprite_area(nullptr) {}
+LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
+                     LX_AABB * sprite_area, uint32_t format)
+    : LX_Texture(t,w,format), _sprite_area(sprite_area) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      LX_AABB * sprite_area, uint32_t format)
@@ -180,7 +181,7 @@ LX_Sprite::~LX_Sprite() {}
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
-    : LX_Sprite(t,w,format), _coordinates(coord), _SZ(coord.size()),
+    : LX_Sprite(t,w,nullptr,format), _coordinates(coord), _SZ(coord.size()),
       _delay(delay), _btime(0), _iteration(0), _started(false) {}
 
 
@@ -266,12 +267,15 @@ bool LX_BufferedImage::isLoaded() const
 
 LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
 {
-    return new LX_Texture(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),w);
+    return new LX_Texture(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),
+                          _surface),w);
 }
 
-LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
+LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w,
+        LX_AABB * sprite_area) const
 {
-    return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),w);
+    return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
+                         w, sprite_area);
 }
 
 LX_AnimatedSprite * LX_BufferedImage::
