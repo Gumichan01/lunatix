@@ -205,6 +205,7 @@ public:
 class LX_Sprite: public LX_Texture
 {
     friend class LX_BufferedImage;
+    LX_AABB *_sprite_area;
 
 protected:
 
@@ -213,12 +214,40 @@ protected:
 
 public:
 
-    /// Sprite constructor
+    /**
+    *   @fn LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
+    *                 LX_AABB * sprite_area = nullptr,
+    *                 uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *
+    *   Sprite constructor with the filename
+    *
+    *   @param [in] filename
+    *   @param [in] w Window where the sprite wille drawn on
+    *   @param [in] sprite_area (Optional) Area of the sprite to display
+    *   @param [in] format (Optional) Pixel format
+    *
+    *   @note sprite_area is useful xhen the filename is a sprite sheet
+    */
     LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
+              LX_AABB * sprite_area = nullptr,
               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    /// Sprite constructor with the filename (UTF-8)
+    /**
+    *   @fn LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
+    *                 LX_AABB * sprite_area = nullptr,
+    *                 uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *
+    *   Sprite constructor with the filename (UTF-8)
+    *
+    *   @param [in] filename
+    *   @param [in] w Window where the sprite wille drawn on
+    *   @param [in] sprite_area (Optional) Area of the sprite to display
+    *   @param [in] format (Optional) Pixel format
+    *
+    *   @note sprite_area is useful xhen the filename is a sprite sheet
+    */
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
+              LX_AABB * sprite_area = nullptr,
               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual void draw();

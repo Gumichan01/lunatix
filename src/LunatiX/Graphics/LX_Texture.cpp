@@ -137,23 +137,22 @@ LX_Texture::~LX_Texture()
 
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, uint32_t format)
-    : LX_Texture(t,w,format) {}
+    : LX_Texture(t,w,format), _sprite_area(nullptr) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-                     uint32_t format)
-    : LX_Texture(filename,w,format) {}
+                     LX_AABB * sprite_area, uint32_t format)
+    : LX_Texture(filename,w,format), _sprite_area(sprite_area) {}
 
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                     uint32_t format)
-    : LX_Texture(filename,w,format) {}
+                     LX_AABB * sprite_area, uint32_t format)
+    : LX_Texture(filename,w,format), _sprite_area(sprite_area) {}
 
 
 void LX_Sprite::draw()
 {
     LX_Texture::draw();
 }
-
 
 void LX_Sprite::draw(LX_AABB * box)
 {
@@ -172,7 +171,6 @@ void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
-
 LX_Sprite::~LX_Sprite() {}
 
 
@@ -190,15 +188,17 @@ LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
                                      LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
-    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()),
-      _delay(delay), _btime(0), _iteration(0), _started(false) {}
+    : LX_Sprite(filename,w,nullptr,format), _coordinates(coord),
+      _SZ(coord.size()), _delay(delay), _btime(0), _iteration(0),
+      _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
-    : LX_Sprite(filename,w,format), _coordinates(coord), _SZ(coord.size()),
-      _delay(delay), _btime(0), _iteration(0), _started(false) {}
+    : LX_Sprite(filename,w,nullptr,format), _coordinates(coord),
+      _SZ(coord.size()), _delay(delay), _btime(0), _iteration(0),
+      _started(false) {}
 
 
 bool LX_AnimatedSprite::isOpen() const
