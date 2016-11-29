@@ -1,5 +1,7 @@
 # Files to exclude
 
+.gitattributes
+
 # Object files/directories
 *.o
 *obj
