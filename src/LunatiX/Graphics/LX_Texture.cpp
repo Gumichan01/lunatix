@@ -167,7 +167,7 @@ void LX_Sprite::draw(LX_AABB * box, const double angle)
 
 void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
 {
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,nullptr,box,
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,_sprite_area,box,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
