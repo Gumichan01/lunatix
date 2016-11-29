@@ -1,5 +1,0 @@
-<map id="LX_Physics::collisionPointPoly" name="LX_Physics::collisionPointPoly">
-<area shape="rect" id="node2" href="$namespace_l_x___physics.html#ab9ec50d30cb4d0004da61adea1e937e2" title="LX_Physics::collisionCirclePoly" alt="" coords="255,5,459,32"/>
-<area shape="rect" id="node3" href="$namespace_l_x___physics.html#a171790d51ead26cd867d942d39ed1414" title="LX_Physics::collisionRectPoly" alt="" coords="257,56,456,83"/>
-<area shape="rect" id="node4" href="$namespace_l_x___physics.html#aafa36790fae6fa02c2525ff008e7a618" title="LX_Physics::collisionPoly" alt="" coords="271,107,442,133"/>
-</map>

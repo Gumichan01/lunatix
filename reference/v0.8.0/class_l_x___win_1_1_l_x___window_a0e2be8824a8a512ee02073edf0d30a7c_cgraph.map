@@ -1,7 +1,0 @@
-<map id="LX_Win::LX_Window::LX_Window" name="LX_Win::LX_Window::LX_Window">
-<area shape="rect" id="node2" href="$class_l_x___configuration.html#abd5c52de995711f1c004510ed88a9dd2" title="LX_Configuration::getInstance" alt="" coords="221,5,414,32"/>
-<area shape="rect" id="node3" href="$class_l_x___configuration.html#a744cb5f70ab2bfb1951f8c1a6f43bcca" title="LX_Configuration::getWin\lWidth" alt="" coords="234,57,401,98"/>
-<area shape="rect" id="node4" href="$class_l_x___configuration.html#afe4957b35c19d9a321455439308ae18c" title="LX_Configuration::getWin\lHeight" alt="" coords="234,122,401,163"/>
-<area shape="rect" id="node5" href="$class_l_x___configuration.html#a9c09aab4d3a948117591e9d2f261f8d6" title="LX_Configuration::getFullscreenFlag" alt="" coords="203,188,432,215"/>
-<area shape="rect" id="node6" href="$class_l_x___configuration.html#a9dc59fa522b7d639a15c7b4440fefb60" title="LX_Configuration::getOpen\lGLFlag" alt="" coords="230,239,405,281"/>
-</map>

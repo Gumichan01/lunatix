@@ -1,8 +1,0 @@
-<map id="LX_Physics::movePoint" name="LX_Physics::movePoint">
-<area shape="rect" id="node2" href="$namespace_l_x___physics.html#a153ca90c923a666c7c7d04117500401e" title="LX_Physics::moveCircle" alt="" coords="215,5,376,32"/>
-<area shape="rect" id="node4" href="$namespace_l_x___physics.html#aab823e4b352977b3d974296215a1f9a4" title="LX_Physics::movePoint" alt="" coords="216,56,375,83"/>
-<area shape="rect" id="node5" href="$class_l_x___physics_1_1_l_x___polygon.html#a14483ad7a0599777c070e71bf395b267" title="LX_Physics::LX_Polygon\l::move" alt="" coords="212,107,379,149"/>
-<area shape="rect" id="node3" href="$namespace_l_x___physics.html#ad40d041540bc774d70c491d1803ac83a" title="LX_Physics::moveCircle" alt="" coords="429,5,591,32"/>
-<area shape="rect" id="node6" href="$namespace_l_x___physics.html#aea3d259553fa739421919fb6d161bca9" title="LX_Physics::movePoly" alt="" coords="433,85,587,112"/>
-<area shape="rect" id="node7" href="$class_l_x___physics_1_1_l_x___polygon.html#a322eae18e1488f27083dacdcf1313312" title="LX_Physics::LX_Polygon\l::move" alt="" coords="427,137,593,178"/>
-</map>

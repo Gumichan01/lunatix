@@ -1,6 +1,0 @@
-<map id="include/LunatiX/LX_Physics.hpp" name="include/LunatiX/LX_Physics.hpp">
-<area shape="rect" id="node2" href="$_lunatix__engine_8hpp.html" title="The header file of the LunatiX Engine. " alt="" coords="5,95,160,136"/>
-<area shape="rect" id="node3" href="$_l_x___particle_8cpp.html" title="The particle implementation. " alt="" coords="185,95,359,136"/>
-<area shape="rect" id="node4" href="$_l_x___physics_8cpp.html" title="The implementation of the physics library. " alt="" coords="383,95,521,136"/>
-<area shape="rect" id="node5" href="$_l_x___polygon_8cpp.html" title="The Implementation of the polygon. " alt="" coords="545,95,682,136"/>
-</map>

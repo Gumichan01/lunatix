@@ -1,9 +1,0 @@
-<map id="LX_Random::crand" name="LX_Random::crand">
-<area shape="rect" id="node2" href="$namespace_l_x___random.html#aeee006c468df764baa420d2e695b9fd9" title="LX_Random::crand100" alt="" coords="193,56,345,83"/>
-<area shape="rect" id="node7" href="$namespace_l_x___random.html#accd6e3cf791254ee624d3521ff2973e4" title="LX_Random::xorshiftRand" alt="" coords="184,107,355,133"/>
-<area shape="rect" id="node3" href="$namespace_l_x___physics.html#ad43e5584598674beff8366dcc7ef31f6" title="LX_Physics::collisionPointPoly" alt="" coords="403,56,604,83"/>
-<area shape="rect" id="node4" href="$namespace_l_x___physics.html#ab9ec50d30cb4d0004da61adea1e937e2" title="LX_Physics::collisionCirclePoly" alt="" coords="652,5,856,32"/>
-<area shape="rect" id="node5" href="$namespace_l_x___physics.html#a171790d51ead26cd867d942d39ed1414" title="LX_Physics::collisionRectPoly" alt="" coords="655,56,853,83"/>
-<area shape="rect" id="node6" href="$namespace_l_x___physics.html#aafa36790fae6fa02c2525ff008e7a618" title="LX_Physics::collisionPoly" alt="" coords="669,107,839,133"/>
-<area shape="rect" id="node8" href="$namespace_l_x___random.html#a38c1637f59ada94238166765eff11c76" title="LX_Random::xorshiftRand100" alt="" coords="407,107,599,133"/>
-</map>

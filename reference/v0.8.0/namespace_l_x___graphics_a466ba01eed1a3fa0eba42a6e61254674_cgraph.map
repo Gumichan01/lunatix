@@ -1,7 +1,0 @@
-<map id="LX_Graphics::loadTextureFromFile" name="LX_Graphics::loadTextureFromFile">
-<area shape="rect" id="node2" href="$namespace_l_x___graphics.html#aeb8e8fd7f4d90e151bb9539b4c2530f1" title="LX_Graphics::loadSurface" alt="" coords="224,5,395,32"/>
-<area shape="rect" id="node5" href="$namespace_l_x___graphics.html#ac1951f88d8c5114c936b91ee5107410f" title="LX_Graphics::loadTexture\lFromSurface" alt="" coords="224,57,395,98"/>
-<area shape="rect" id="node3" href="$namespace_l_x___graphics.html#adcddbebbe271ecf73fcf4aa06560bdb8" title="LX_Graphics::optimizeSurface" alt="" coords="443,5,639,32"/>
-<area shape="rect" id="node4" href="$_l_x___error_8hpp.html#a5426a2a2baf9ee189e39f42a9e2687eb" title="LX_SetError" alt="" coords="687,5,777,32"/>
-<area shape="rect" id="node6" href="$class_l_x___win_1_1_l_x___window.html#a2d333caa108171cf5ac26754ec6caec9" title="LX_Win::LX_Window::\lgetRenderer" alt="" coords="466,57,615,98"/>
-</map>

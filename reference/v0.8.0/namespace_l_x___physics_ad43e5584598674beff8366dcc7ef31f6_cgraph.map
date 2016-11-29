@@ -1,9 +1,0 @@
-<map id="LX_Physics::collisionPointPoly" name="LX_Physics::collisionPointPoly">
-<area shape="rect" id="node2" href="$class_l_x___physics_1_1_l_x___polygon.html#adf30d15bdacef0da58edb06b6a40b6ee" title="LX_Physics::LX_Polygon\l::numberOfEdges" alt="" coords="271,5,438,47"/>
-<area shape="rect" id="node3" href="$namespace_l_x___random.html#aeee006c468df764baa420d2e695b9fd9" title="LX_Random::crand100" alt="" coords="279,71,431,98"/>
-<area shape="rect" id="node5" href="$class_l_x___physics_1_1_l_x___polygon.html#a6ac9c274d421de2f258bb50e53bca3a2" title="LX_Physics::LX_Polygon\l::getPoint" alt="" coords="271,123,438,164"/>
-<area shape="rect" id="node6" href="$namespace_l_x___physics.html#a5be963d9f1b176962d90e9acf9059d9a" title="LX_Physics::intersectSegment" alt="" coords="255,189,455,215"/>
-<area shape="rect" id="node4" href="$namespace_l_x___random.html#acff1f4e17121725d4d3556f9c5c0535f" title="LX_Random::crand" alt="" coords="535,71,665,98"/>
-<area shape="rect" id="node7" href="$namespace_l_x___physics.html#a4bc4e34396d94eba95892eb586dabe58" title="LX_Physics::intersectSegLine" alt="" coords="503,189,697,215"/>
-<area shape="rect" id="node8" href="$namespace_l_x___physics.html#adc2d64c183c99f8180df918f6a9b22d2" title="LX_Physics::vector\l_product" alt="" coords="745,181,877,223"/>
-</map>

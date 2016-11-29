@@ -1,9 +1,0 @@
-<map id="include/LunatiX/LX_Sound.hpp" name="include/LunatiX/LX_Sound.hpp">
-<area shape="rect" id="node2" href="$_l_x___chunk_8hpp.html" title="The chunk header. " alt="" coords="351,95,477,136"/>
-<area shape="rect" id="node6" href="$_l_x___music_8hpp.html" title="The music library. " alt="" coords="189,95,316,136"/>
-<area shape="rect" id="node8" href="$_l_x___sound_8cpp.html" title="The abstract sound class definition. " alt="" coords="501,95,641,136"/>
-<area shape="rect" id="node3" href="$_lunatix__engine_8hpp.html" title="The header file of the LunatiX Engine. " alt="" coords="170,184,325,225"/>
-<area shape="rect" id="node4" href="$_l_x___chunk_8cpp.html" title="The chunk implementation. " alt="" coords="513,184,653,225"/>
-<area shape="rect" id="node5" href="$_l_x___mixer_8cpp.html" title="The implementation of the mixer library. " alt="" coords="349,184,489,225"/>
-<area shape="rect" id="node7" href="$_l_x___music_8cpp.html" title="The implementation of the music library. " alt="" coords="5,184,145,225"/>
-</map>

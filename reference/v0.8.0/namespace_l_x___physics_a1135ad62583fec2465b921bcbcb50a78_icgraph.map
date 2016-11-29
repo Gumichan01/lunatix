@@ -1,6 +1,0 @@
-<map id="LX_Physics::euclide_square_distance" name="LX_Physics::euclide_square_distance">
-<area shape="rect" id="node2" href="$namespace_l_x___physics.html#a5cc0bee3b20feea28cc6758fb86c3cae" title="LX_Physics::euclide\l_distance" alt="" coords="212,5,351,47"/>
-<area shape="rect" id="node3" href="$namespace_l_x___physics.html#ab036bb96f39fa4fc6189becbb182dbf7" title="LX_Physics::euclide\l_square_distance" alt="" coords="212,71,351,112"/>
-<area shape="rect" id="node4" href="$namespace_l_x___physics.html#aea5e82ac6fda59b7940471773e958b0c" title="LX_Physics::collisionPoint\lCircle" alt="" coords="194,136,369,177"/>
-<area shape="rect" id="node5" href="$namespace_l_x___physics.html#a781e49dc2010b47de7154013ab97ed4c" title="LX_Physics::collisionCircle" alt="" coords="192,202,371,229"/>
-</map>

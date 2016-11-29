@@ -1,8 +1,0 @@
-<map id="LX_ParticleEngine::LX_Particle::setTexture" name="LX_ParticleEngine::LX_Particle::setTexture">
-<area shape="rect" id="node2" href="$namespace_l_x___graphics.html#a04e98ab25501aeb8e46644af642af73d" title="LX_Graphics::loadSurface\lFromFileBuffer" alt="" coords="209,43,380,84"/>
-<area shape="rect" id="node6" href="$namespace_l_x___graphics.html#ac1951f88d8c5114c936b91ee5107410f" title="LX_Graphics::loadTexture\lFromSurface" alt="" coords="209,121,380,163"/>
-<area shape="rect" id="node3" href="$_l_x___error_8hpp.html#a5426a2a2baf9ee189e39f42a9e2687eb" title="LX_SetError" alt="" coords="672,37,763,63"/>
-<area shape="rect" id="node4" href="$class_l_x___file_i_o_1_1_l_x___file_buffer.html#a33e60c73b2be537a07c65e9b50086f4b" title="LX_FileIO::LX_FileBuffer\l::getSurfaceFromBuffer" alt="" coords="446,29,606,71"/>
-<area shape="rect" id="node5" href="$namespace_l_x___graphics.html#adcddbebbe271ecf73fcf4aa06560bdb8" title="LX_Graphics::optimizeSurface" alt="" coords="428,95,624,122"/>
-<area shape="rect" id="node7" href="$class_l_x___win_1_1_l_x___window.html#a2d333caa108171cf5ac26754ec6caec9" title="LX_Win::LX_Window::\lgetRenderer" alt="" coords="451,147,601,188"/>
-</map>
