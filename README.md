@@ -1,6 +1,6 @@
 # LunatiX #
 
-![LunatiX Logo](https://raw.githubusercontent.com/Gumichan01/lunatix-engine/master/data/lunatix-logo.png)
+![LunatiX Logo](https://media.githubusercontent.com/media/Gumichan01/lunatix/master/data/lunatix-logo.png)
 
 LunatiX is a free SDL2-based library. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
