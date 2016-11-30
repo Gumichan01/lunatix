@@ -112,6 +112,7 @@ void test_image(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST LX_Texture = ");
     /// @todo spritesheet in the buffer
+    std::string sp_str = "data/boss.png";
     std::string name = "data/bullet.png";
     std::string mname = "data/01.ogg";
     UTF8string u8name("data/bullet.png");
@@ -127,6 +128,61 @@ void test_image(LX_Win::LX_Window *win)
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
         else
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+    }
+
+    {
+        LX_AABB sp = {1060,449,211,448};
+        LX_AABB box = {64,64,211,448};
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"from a sprite sheet #1");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"std::string argument");
+        LX_Graphics::LX_Sprite img(sp_str,*win, &sp);
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+
+        win->clearWindow();
+        img.draw(&box);
+        win->update();
+        LX_Timer::delay(750);
+    }
+
+    {
+        LX_AABB sp = {1060,449,211,448};
+        LX_AABB box = {64,64,211,448};
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"from a sprite sheet #2");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+        LX_Graphics::LX_Sprite img(UTF8string(sp_str),*win, &sp);
+
+        if(img.isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+
+        win->clearWindow();
+        img.draw(&box);
+        win->update();
+        LX_Timer::delay(750);
+    }
+
+    {
+        LX_AABB sp = {1060,449,211,448};
+        LX_AABB box = {64,64,211,448};
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"from a sprite sheet #3");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"buffered image");
+        LX_Graphics::LX_Sprite *img = LX_BufferedImage(sp_str).generateSprite(*win, &sp);
+
+        if(img->isOpen())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+
+        win->clearWindow();
+        img->draw(&box);
+        win->update();
+        LX_Timer::delay(750);
+        delete img;
     }
 
     {
@@ -155,6 +211,7 @@ void test_image(LX_Win::LX_Window *win)
 
         delete img;
     }
+
 
     LX_Log::log("|> LX_StreamingTexture");
     LX_Log::log("||> LX_BufferedImage");
@@ -293,7 +350,6 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::log("|> LX_AnimatedSprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
-    std::string sp_str = "data/boss.png";
     UTF8string u8_str(sp_str);
     std::vector<LX_AABB> c;
 
