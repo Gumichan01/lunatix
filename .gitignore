@@ -1,8 +1,5 @@
 # Files to exclude
 
-# Git files
-.gitattributes
-
 # Object files/directories
 *.o
 *obj
