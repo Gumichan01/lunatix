@@ -1,6 +1,6 @@
 # LunatiX #
 
-![LunatiX Logo](https://media.githubusercontent.com/media/Gumichan01/lunatix/master/data/lunatix-logo.png)
+![LunatiX Logo](https://raw.githubusercontent.com/Gumichan01/lunatix/master/data/lunatix-logo.png)
 
 LunatiX is a free SDL2-based library. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
@@ -83,11 +83,17 @@ You may take a look on the library or get the development version
 on [Github](https://github.com/Gumichan01/lunatix). The library reference
 is also available [online (version 0.9)](https://gumichan01.github.io/lunatix/reference/v0.9.0/).
 
+### Prerequisites ###
+
+You must install [*git-lfs*](https://github.com/git-lfs/git-lfs/wiki/Installation)
+in your computer in order to retrieve the repository.
+
 ## Build ##
 
 ### On Windows ###
 
-First of all, download the stable [development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.9.0) (v0.9.0)
+First of all, download the stable
+[development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.9.0) (v0.9.0)
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
