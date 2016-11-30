@@ -1,6 +1,6 @@
 # LunatiX #
 
-![LunatiX Logo](https://raw.githubusercontent.com/Gumichan01/lunatix/master/data/lunatix-logo.png)
+![LunatiX Logo][]
 
 LunatiX is a free SDL2-based library. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
@@ -79,25 +79,22 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 ## Contribute ##
 
-You may take a look on the library or get the development version
-on [Github](https://github.com/Gumichan01/lunatix). The library reference
-is also available [online (version 0.9)](https://gumichan01.github.io/lunatix/reference/v0.9.0/).
+You may take a look on the library or get the development version on [Github][].
+The library reference is also available [online][] (version 0.9).
 
 ### Prerequisites ###
 
-You must install [*git-lfs*](https://github.com/git-lfs/git-lfs/wiki/Installation)
-in your computer in order to retrieve the repository.
+You must install [git-lfs][] in your computer in order to retrieve the repository.
 
 ## Build ##
 
 ### On Windows ###
 
-First of all, download the stable
-[development and runtime libraries](https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.9.0) (v0.9.0)
+First of all, download the stable development and runtime [libraries][] (v0.9.0).
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
-The source code is compilable using [MinGW](http://www.mingw.org/).
+The source code is compilable using [MinGW][].
 It should work with Visual C++ (if you are lucky).
 
 You can build it using the CodeBlocks project provided in the directory (*lunatix-win32.cbp*).
@@ -136,3 +133,12 @@ To test the library, execute the following command:
 
 The documentation of the library can be build with Doxygen,
 using the **dox** configuration file.
+
+---
+
+[LunatiX Logo]: https://raw.githubusercontent.com/Gumichan01/lunatix/master/data/lunatix-logo.png
+[Github]: https://github.com/Gumichan01/lunatix
+[online]: https://gumichan01.github.io/lunatix/reference/v0.9.0/
+[git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
+[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.9.0
+[MinGW]: http://www.mingw.org/
