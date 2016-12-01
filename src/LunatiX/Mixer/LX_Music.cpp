@@ -165,17 +165,11 @@ public:
 
 LX_Music::LX_Music() : _mimpl(nullptr) {}
 
-LX_Music::LX_Music(const std::string& filename) : _mimpl(new LX_Music_(filename))
-{
-    if(!_mimpl->isLoaded_())
-        throw LX_Mixer::LX_MusicException(LX_GetError());
-}
+LX_Music::LX_Music(const std::string& filename)
+    : _mimpl(new LX_Music_(filename)) {}
 
-LX_Music::LX_Music(const UTF8string& filename) : _mimpl(new LX_Music_(filename))
-{
-    if(!_mimpl->isLoaded_())
-        throw LX_Mixer::LX_MusicException(LX_GetError());
-}
+LX_Music::LX_Music(const UTF8string& filename)
+    : _mimpl(new LX_Music_(filename)) {}
 
 
 bool LX_Music::load(const std::string& filename)
@@ -192,7 +186,7 @@ bool LX_Music::load(const UTF8string& filename)
 
 bool LX_Music::isLoaded()
 {
-    return _mimpl->isLoaded_();
+    return _mimpl != nullptr && _mimpl->isLoaded_();
 }
 
 void LX_Music::fadeIn(int ms)

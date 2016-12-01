@@ -126,7 +126,7 @@ bool LX_Chunk::load(const UTF8string& filename)
 
 bool LX_Chunk::isLoaded()
 {
-    return _chkimpl->isLoaded_();
+    return _chkimpl != nullptr && _chkimpl->isLoaded_();
 }
 
 bool LX_Chunk::play()
