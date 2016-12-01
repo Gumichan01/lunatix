@@ -45,21 +45,19 @@ LX_ChunkException::~LX_ChunkException() noexcept {}
 class LX_Chunk_
 {
     Mix_Chunk *_chunk;
+    bool _loaded;
 
 public:
 
-    explicit LX_Chunk_(Mix_Chunk& chunk): _chunk(&chunk) {}
+    explicit LX_Chunk_(Mix_Chunk& chunk): _chunk(&chunk), _loaded(true) {}
 
-    explicit LX_Chunk_(const std::string& filename) : _chunk(nullptr)
-    {
-        if(load_(filename) == false)
-            throw LX_ChunkException(LX_GetError());
-    }
+    explicit LX_Chunk_(const std::string& filename)
+        : LX_Chunk_(UTF8string(filename)) {}
 
-    explicit LX_Chunk_(const UTF8string& filename) : _chunk(nullptr)
+    explicit LX_Chunk_(const UTF8string& filename)
+        : _chunk(nullptr), _loaded(false)
     {
-        if(load_(filename) == false)
-            throw LX_ChunkException(LX_GetError());
+        _loaded = load_(filename);
     }
 
 
@@ -68,6 +66,11 @@ public:
         Mix_FreeChunk(_chunk);
         _chunk = Mix_LoadWAV(filename.utf8_str());
         return _chunk != nullptr;
+    }
+
+    bool isLoaded_()
+    {
+        return _loaded;
     }
 
     bool play()
@@ -101,9 +104,25 @@ public:
 // Private constructor used for internal uses
 LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
 
+// Public constructors
+LX_Chunk::LX_Chunk() : _chkimpl(nullptr) {}
+
 LX_Chunk::LX_Chunk(const std::string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 LX_Chunk::LX_Chunk(const UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
+
+
+bool LX_Chunk::load(const std::string& filename)
+{
+    _chkimpl.reset(new LX_Chunk_(filename));
+    return _chkimpl->isLoaded_();
+}
+
+bool LX_Chunk::load(const UTF8string& filename)
+{
+    _chkimpl.reset(new LX_Chunk_(filename));
+    return _chkimpl->isLoaded_();
+}
 
 
 bool LX_Chunk::play()
@@ -111,24 +130,25 @@ bool LX_Chunk::play()
     return _chkimpl->play();
 }
 
-
 bool LX_Chunk::play(int channel)
 {
     return _chkimpl->play(channel,LX_MIXER_NOLOOP);
 }
-
 
 bool LX_Chunk::play(int channel,int loops)
 {
     return _chkimpl->play(channel,loops);
 }
 
-
 bool LX_Chunk::play(int channel,int loops,int ticks)
 {
     return _chkimpl->play(channel,loops,ticks);
 }
 
+void LX_Chunk::close()
+{
+    _chkimpl.reset();
+}
 
 LX_Chunk::~LX_Chunk()
 {

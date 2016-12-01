@@ -71,7 +71,7 @@ LX_MusicTag::~LX_MusicTag()
 class LX_Music_
 {
     Mix_Music *_music;
-    std::string _filename;
+    UTF8string _filename;
     bool _loaded;
     libtagpp::Tag _tag;
     LX_MusicTag _mtag;
@@ -93,15 +93,15 @@ protected:
 public:
 
     explicit LX_Music_(const std::string& filename)
-        : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)
-    {
-         _loaded = load_(filename);
-    }
+        : LX_Music_(UTF8string(filename)) {}
 
     explicit LX_Music_(const UTF8string& filename)
-        : LX_Music_(filename.utf8_str()) {}
+        : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)
+    {
+        _loaded = load_(filename);
+    }
 
-    bool isLoaded()
+    bool isLoaded_()
     {
         return _loaded;
     }
@@ -128,7 +128,7 @@ public:
 
     const libtagpp::Tag& getInfo()
     {
-        if(!_tag.readTag(_filename))
+        if(!_tag.readTag(_filename.utf8_str()))
             LX_SetError("Cannot get metadata");
 
         return _tag;
@@ -147,7 +147,7 @@ public:
             _mtag.genre = _tag.genre();
             _mtag.format = _tag.properties().format;
             _mtag.duration = _tag.properties().duration;
-            _mtag.img = _loadImage(_filename,_tag.getImageMetaData());
+            _mtag.img = _loadImage(_filename.utf8_str(), _tag.getImageMetaData());
 
             mtag_set = true;
         }
@@ -167,13 +167,13 @@ LX_Music::LX_Music() : _mimpl(nullptr) {}
 
 LX_Music::LX_Music(const std::string& filename) : _mimpl(new LX_Music_(filename))
 {
-    if(!_mimpl->isLoaded())
+    if(!_mimpl->isLoaded_())
         throw LX_Mixer::LX_MusicException(LX_GetError());
 }
 
 LX_Music::LX_Music(const UTF8string& filename) : _mimpl(new LX_Music_(filename))
 {
-    if(!_mimpl->isLoaded())
+    if(!_mimpl->isLoaded_())
         throw LX_Mixer::LX_MusicException(LX_GetError());
 }
 
@@ -181,13 +181,13 @@ LX_Music::LX_Music(const UTF8string& filename) : _mimpl(new LX_Music_(filename))
 bool LX_Music::load(const std::string& filename)
 {
     _mimpl.reset(new LX_Music_(filename));
-    return _mimpl->isLoaded();
+    return _mimpl->isLoaded_();
 }
 
 bool LX_Music::load(const UTF8string& filename)
 {
     _mimpl.reset(new LX_Music_(filename));
-    return _mimpl->isLoaded();
+    return _mimpl->isLoaded_();
 }
 
 void LX_Music::fadeIn(int ms)

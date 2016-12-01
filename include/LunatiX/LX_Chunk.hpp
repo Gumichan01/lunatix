@@ -21,7 +21,6 @@
 */
 
 #include <LunatiX/LX_Sound.hpp>
-#include <LunatiX/utils/utf8_string.hpp>
 #include <memory>
 
 
@@ -76,6 +75,9 @@ class LX_Chunk : public virtual LX_Sound
 
 public:
 
+    /// Default constructor
+    LX_Chunk();
+
     /**
     *   @fn LX_Chunk(const std::string& filename)
     *   @brief Constructor
@@ -106,6 +108,25 @@ public:
     *   @exception LX_ChunkException if the sample cannot be created from the file
     */
     explicit LX_Chunk(const UTF8string& filename);
+
+    /**
+    *   @fn bool load(const std::string& filename)
+    *
+    *   Load the sample file
+    *
+    *   @param [in] filename The sample file that will be loaded
+    *   @return TRUE on succes, FALSE otherwise
+    */
+    virtual bool load(const std::string& filename);
+    /**
+    *   @fn virtual bool load(const UTF8string& filename)
+    *
+    *   Load the sample file (utf-8 format)
+    *
+    *   @param [in] filename The sample file that will be loaded
+    *   @return TRUE on succes, FALSE otherwise
+    */
+    virtual bool load(const UTF8string& filename);
 
     /**
     *   @fn bool play()
@@ -159,6 +180,9 @@ public:
     *   @note This function plays the sample on with no loop
     */
     bool play(int channel,int loops,int ticks);
+
+    /// Close the chunk
+    virtual void close();
 
     /// Destructor
     ~LX_Chunk();

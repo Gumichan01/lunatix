@@ -107,8 +107,6 @@ public:
     /**
     *   @fn LX_Music(const std::string& filename)
     *   @brief Constructor
-    *   @deprecated This constructor will be removed in v0.11.0.
-    *   @deprecated Use the default constructor and load() instead
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
@@ -117,8 +115,6 @@ public:
     /**
     *   @fn LX_Music(const UTF8string& filename)
     *   @brief Constructor
-    *   @deprecated This constructor will be removed in v0.11.0.
-    *   @deprecated Use the default constructor and load() instead
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
