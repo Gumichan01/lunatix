@@ -130,7 +130,7 @@ public:
     *
     *   Load the music file
     *
-    *   @param [in] filename The music filename that will be loaded
+    *   @param [in] filename The music file that will be loaded
     *   @return TRUE on succes, FALSE otherwise
     */
     virtual bool load(const std::string& filename);
@@ -139,7 +139,7 @@ public:
     *
     *   Load the music file (utf-8 format)
     *
-    *   @param [in] filename The music filename that will be loaded
+    *   @param [in] filename The music file that will be loaded
     *   @return TRUE on succes, FALSE otherwise
     */
     virtual bool load(const UTF8string& filename);
