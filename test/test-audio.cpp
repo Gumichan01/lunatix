@@ -184,17 +184,21 @@ void test_music()
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: %s",s.c_str());
 
-    try
     {
         LX_Mixer::LX_Music music(s);
-        const libtagpp::Tag& tag = music.getInfo();
 
-        LX_Log::log("Loaded");
+        if(music.isLoaded())
+            LX_Log::log("mp3 file loaded");
+        else
+            LX_Log::log("mp3 file not loaded");
+
+
         LX_Win::LX_WindowInfo info;
         LX_Win::LX_initWindowInfo(info);
         info.w = 256;
         info.h = 256;
         LX_Win::LX_Window w(info);
+        const libtagpp::Tag& tag = music.getInfo();
 
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Get the cover of the title");
         LX_Graphics::LX_BufferedImage * bf =
@@ -231,16 +235,16 @@ void test_music()
         LX_Log::log("Format - %s", tag.properties().format.c_str());
         LX_Log::log("================================");
     }
-    catch(LX_Mixer::LX_MusicException& e)
-    {
-        LX_Log::log("Cannot launch the music: %s",e.what());
-    }
 
-    try
     {
-        LX_Mixer::LX_Music music(sm);
+        LX_Mixer::LX_Music music;
+
+        if(music.load(sm))
+            LX_Log::log("SUCCESS - Loaded");
+        else
+            LX_Log::log("FAILURE - not loaded");
+
         const libtagpp::Tag& tag = music.getInfo();
-
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music loaded");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play music");
 
@@ -274,24 +278,21 @@ void test_music()
         LX_Log::log("Bitrate - %d bits/s", tag.properties().bitrate);
         LX_Log::log("Format - %s", tag.properties().format.c_str());
         LX_Log::log("================================");
-
-    }
-    catch(LX_Mixer::LX_MusicException& e)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot launch the music: %s",e.what());
+        music.close();
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: <empty_string>");
 
-    try
     {
         LX_Mixer::LX_Music *mus = new LX_Mixer::LX_Music("");
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music launched, it should not");
+
+        if(mus->isLoaded())
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music launched, it should not");
+        else
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music: not launched as expected");
+
+        mus->close();
         delete mus;
-    }
-    catch(...)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music: failure exception expected");
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
@@ -307,9 +308,14 @@ void test_chunk()
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: %s",s.c_str());
 
-    try
     {
         chunk = new LX_Mixer::LX_Chunk(s);
+
+        if(chunk->isLoaded())
+            LX_Log::log("SUCCESS - Loaded");
+        else
+            LX_Log::log("FAILURE - not loaded");
+
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - chunk launched");
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"play chunk with no loop on any channel");
 
@@ -340,24 +346,22 @@ void test_chunk()
 
         LX_Timer::delay(9000);
 
+        chunk->close();
         delete chunk;
-    }
-    catch(LX_Mixer::LX_ChunkException& e)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot launch the chunk: %s",e.what());
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch chunk: <empty_string>");
 
-    try
     {
         chunk = new LX_Mixer::LX_Chunk("");
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - chunk launched, it should not");
+
+        if(chunk->isLoaded())
+            LX_Log::log("FAILURE - loaded, but it should not be");
+        else
+            LX_Log::log("SUCCESS - not loaded, as expected");
+
+        chunk->close();
         delete chunk;
-    }
-    catch(...)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - chunk: failure exception expected");
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
@@ -463,6 +467,8 @@ void test_effects()
     LX_Timer::delay(3000);
     music.stop();
 
+    chunk.close();
+    music.close();
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
 }
 
