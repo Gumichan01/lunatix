@@ -20,12 +20,11 @@
 *   @version 0.9
 */
 
-const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */
-const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
-
-
 namespace LX_Mixer
 {
+
+const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */
+const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
 
 /**
 *   @class LX_Sound
