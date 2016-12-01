@@ -38,10 +38,12 @@ class LX_Sound
 
 public:
 
-    /// Load a music file
+    /// Load a sound file
     virtual bool load(const std::string& filename) = 0;
-    /// Load a music file (UTF-8)
+    /// Load a sound file (UTF-8)
     virtual bool load(const UTF8string& filename) = 0;
+    /// Check if the sound is loaded
+    virtual bool isLoaded() = 0;
     /// Play something
     virtual bool play() = 0;
     /// Close the music

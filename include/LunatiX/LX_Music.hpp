@@ -139,6 +139,12 @@ public:
     *   @return TRUE on succes, FALSE otherwise
     */
     virtual bool load(const UTF8string& filename);
+    /**
+    *   @fn virtual bool isLoaded()
+    *   Check if the music is loaded
+    *   @return TRUE on succes, FALSE otherwise
+    */
+    virtual bool isLoaded();
 
     /**
     *   @fn void fadeIn(int ms)

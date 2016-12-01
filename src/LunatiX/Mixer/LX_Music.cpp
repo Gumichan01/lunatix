@@ -190,6 +190,11 @@ bool LX_Music::load(const UTF8string& filename)
     return _mimpl->isLoaded_();
 }
 
+bool LX_Music::isLoaded()
+{
+    return _mimpl->isLoaded_();
+}
+
 void LX_Music::fadeIn(int ms)
 {
     _mimpl->fadeIn(ms);
