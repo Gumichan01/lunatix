@@ -72,6 +72,7 @@ class LX_Music_
 {
     Mix_Music *_music;
     std::string _filename;
+    bool _loaded;
     libtagpp::Tag _tag;
     LX_MusicTag _mtag;
     bool mtag_set;
@@ -92,17 +93,17 @@ protected:
 public:
 
     explicit LX_Music_(const std::string& filename)
-        : _music(nullptr), _filename(filename), mtag_set(false)
+        : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)
     {
-        if(load_(filename) == false)
-            throw LX_MusicException(LX_GetError());
+         _loaded = load_(filename);
     }
 
     explicit LX_Music_(const UTF8string& filename)
-        : _music(nullptr), _filename(filename.utf8_str()), mtag_set(false)
+        : LX_Music_(filename.utf8_str()) {}
+
+    bool isLoaded()
     {
-        if(load_(filename) == false)
-            throw LX_MusicException(LX_GetError());
+        return _loaded;
     }
 
     void fadeIn(int ms)
@@ -162,10 +163,32 @@ public:
 
 /* LX_Music: public functions */
 
-LX_Music::LX_Music(const std::string& filename) : _mimpl(new LX_Music_(filename)) {}
+LX_Music::LX_Music() : _mimpl(nullptr) {}
 
-LX_Music::LX_Music(const UTF8string& filename) : _mimpl(new LX_Music_(filename)) {}
+LX_Music::LX_Music(const std::string& filename) : _mimpl(new LX_Music_(filename))
+{
+    if(!_mimpl->isLoaded())
+        throw LX_Mixer::LX_MusicException(LX_GetError());
+}
 
+LX_Music::LX_Music(const UTF8string& filename) : _mimpl(new LX_Music_(filename))
+{
+    if(!_mimpl->isLoaded())
+        throw LX_Mixer::LX_MusicException(LX_GetError());
+}
+
+
+bool LX_Music::load(const std::string& filename)
+{
+    _mimpl.reset(new LX_Music_(filename));
+    return _mimpl->isLoaded();
+}
+
+bool LX_Music::load(const UTF8string& filename)
+{
+    _mimpl.reset(new LX_Music_(filename));
+    return _mimpl->isLoaded();
+}
 
 void LX_Music::fadeIn(int ms)
 {
@@ -178,7 +201,6 @@ void LX_Music::fadeInPos(int ms,int pos)
     _mimpl->fadeInPos(ms,pos);
 }
 
-
 void LX_Music::fadeOut(int ms)
 {
     Mix_FadeOutMusic(ms);
@@ -189,7 +211,6 @@ bool LX_Music::play()
 {
     return _mimpl->play();
 }
-
 
 bool LX_Music::play(int loops)
 {
@@ -205,11 +226,15 @@ void LX_Music::pause()
         Mix_PauseMusic();
 }
 
-
 void LX_Music::stop()
 {
     if(Mix_PlayingMusic())
         Mix_HaltMusic();
+}
+
+void LX_Music::close()
+{
+    _mimpl.reset();
 }
 
 

@@ -21,7 +21,6 @@
 */
 
 #include <LunatiX/LX_Sound.hpp>
-#include <LunatiX/utils/utf8_string.hpp>
 #include <memory>
 
 
@@ -103,9 +102,13 @@ class LX_Music : public virtual LX_Sound
 
 public:
 
+    /// Default constructor
+    LX_Music();
     /**
     *   @fn LX_Music(const std::string& filename)
     *   @brief Constructor
+    *   @deprecated This constructor will be removed in v0.11.0.
+    *   @deprecated Use the default constructor and load() instead
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
@@ -114,11 +117,32 @@ public:
     /**
     *   @fn LX_Music(const UTF8string& filename)
     *   @brief Constructor
+    *   @deprecated This constructor will be removed in v0.11.0.
+    *   @deprecated Use the default constructor and load() instead
     *
     *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MusicException if the music cannot be created from the file
     */
     explicit LX_Music(const UTF8string& filename);
+
+    /**
+    *   @fn bool load(const std::string& filename)
+    *
+    *   Load the music file
+    *
+    *   @param [in] filename The music filename that will be loaded
+    *   @return TRUE on succes, FALSE otherwise
+    */
+    virtual bool load(const std::string& filename);
+    /**
+    *   @fn virtual bool load(const UTF8string& filename)
+    *
+    *   Load the music file (utf-8 format)
+    *
+    *   @param [in] filename The music filename that will be loaded
+    *   @return TRUE on succes, FALSE otherwise
+    */
+    virtual bool load(const UTF8string& filename);
 
     /**
     *   @fn void fadeIn(int ms)
@@ -162,13 +186,13 @@ public:
     static void fadeOut(int ms);
 
     /**
-    *   @fn bool play()
+    *   @fn virtual bool play()
     *   Play the music specified in the LX_Music class
     *   @return TRUE on success, FALSE otherwise
     *
     *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP
     */
-    bool play();
+    virtual bool play();
     /**
     *   @fn bool play(int loops)
     *
@@ -194,6 +218,12 @@ public:
     *   Stop the music
     */
     static void stop();
+
+    /**
+    *   @fn virtual void close()
+    *   Close the music
+    */
+    virtual void close();
 
     /**
     *   @fn const libtagpp::Tag& getInfo()

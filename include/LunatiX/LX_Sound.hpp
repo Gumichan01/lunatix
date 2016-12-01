@@ -20,6 +20,9 @@
 *   @version 0.9
 */
 
+#include <LunatiX/utils/utf8_string.hpp>
+
+
 namespace LX_Mixer
 {
 
@@ -35,8 +38,14 @@ class LX_Sound
 
 public:
 
+    /// Load a music file
+    virtual bool load(const std::string& filename) = 0;
+    /// Load a music file (UTF-8)
+    virtual bool load(const UTF8string& filename) = 0;
     /// Play something
     virtual bool play() = 0;
+    /// Close the music
+    virtual void close() = 0;
     /// Destructor
     virtual ~LX_Sound();
 };
