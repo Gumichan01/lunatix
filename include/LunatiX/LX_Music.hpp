@@ -40,6 +40,8 @@ namespace LX_Mixer
 /**
 *   @class LX_MusicException
 *   @brief The exception class of LX_Music
+*   @deprecated The use of this class is deprecated.
+*   It will be removed at the next minor version
 */
 class LX_MusicException : public std::exception
 {

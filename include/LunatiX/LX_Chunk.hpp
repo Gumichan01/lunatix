@@ -38,6 +38,8 @@ namespace LX_Mixer
 /**
 *   @class LX_ChunkException
 *   @brief The exception class of LX_Chunk
+*   @deprecated The use of this class is deprecated.
+*   It will be removed at the next minor version
 */
 class LX_ChunkException : public std::exception
 {
