@@ -345,7 +345,6 @@ public:
     *   @sa setWindowSize
     */
     void setTitle(const std::string& title);
-
     /**
     *   @fn void setWindowSize(int w, int h)
     *
@@ -356,7 +355,6 @@ public:
     *   @sa setTitle
     */
     void setWindowSize(int w, int h);
-
     /**
     *   @fn bool setViewPort(LX_AABB * viewport)
     *
@@ -366,7 +364,6 @@ public:
     *   @return TRUE on success, FALSE otherwise
     */
     bool setViewPort(LX_AABB * viewport);
-
     /**
     *   @fn void getViewPort(LX_AABB& viewport) const
     *
@@ -395,7 +392,6 @@ public:
     *   @note This function can be used with OpenGL
     */
     void update();
-
     /**
     *   @fn void clearWindow()
     *   Clear the display of the current window
@@ -438,7 +434,6 @@ public:
     *   @return The height
     */
     int getHeight() const;
-
     /**
     *   @fn int getLogicalWidth() const
     *   Get the logical width of the window

@@ -56,6 +56,7 @@ uint32_t generateFlags(LX_Config::LX_Configuration &config)
 
 };
 
+using namespace LX_Config;
 
 namespace LX_Win
 {
@@ -77,7 +78,7 @@ void LX_initWindowInfo(LX_WindowInfo &info)
 
 void LX_loadWindowConfig(LX_WindowInfo &info)
 {
-    LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
+    LX_Configuration *config = LX_Configuration::getInstance();
 
     if(config == nullptr)
         LX_initWindowInfo(info);
@@ -128,7 +129,10 @@ struct LX_Window_
         _renderer(nullptr), _glcontext(nullptr), _original_width(info.w),
         _original_height(info.h)
     {
-        _window = SDL_CreateWindow(info.title.c_str(),info.x,info.y,info.w,info.h,info.flag);
+        uint32_t rflag = 0x00000000;
+        LX_Configuration *config = LX_Configuration::getInstance();
+        _window = SDL_CreateWindow(info.title.c_str(),info.x,info.y,info.w,
+                                   info.h,info.flag);
 
         if(_window == nullptr)
             throw LX_WindowException(LX_GetError());
@@ -136,25 +140,14 @@ struct LX_Window_
         if((info.flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
             _glcontext = SDL_GL_CreateContext(_window);
 
-        createRenderer_(info.accel);
-    }
-
-    void createRenderer_(bool accel)
-    {
-        uint32_t render_flag = 0x00000000;
-        LX_Config::LX_Configuration *config = LX_Config::LX_Configuration::getInstance();
-
         // Hardware acceleration or software rendering
-        if(accel)
-            render_flag = SDL_RENDERER_ACCELERATED;
-        else
-            render_flag = SDL_RENDERER_SOFTWARE;
+        rflag = info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
 
         // Video flag and VSync flag actives -> add the option
         if(config->getVideoFlag() && config->getVSyncFlag())
             SDL_SetHint(SDL_HINT_RENDER_VSYNC,"1");
 
-        _renderer = SDL_CreateRenderer(_window,-1,render_flag);
+        _renderer = SDL_CreateRenderer(_window,-1,rflag);
 
         if(_renderer == nullptr)
         {
@@ -238,17 +231,16 @@ void LX_Window::setIcon(const std::string& ficon)
     SDL_SetWindowIcon(_wimpl->_window, LX_Graphics::LX_BufferedImage(ficon)._surface);
 }
 
+
 void LX_Window::drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
     SDL_RenderDrawLine(_wimpl->_renderer,p.x,p.y,q.x,q.y);
 }
 
-
 void LX_Window::drawSegments(const LX_Physics::LX_Point * p, const int count)
 {
     SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) p,count);
 }
-
 
 void LX_Window::drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
 {
@@ -264,7 +256,6 @@ void LX_Window::drawRect(const LX_AABB& box)
     SDL_RenderDrawRect(_wimpl->_renderer,&box);
 }
 
-
 void LX_Window::drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
 {
     int w = static_cast<int>(v.vx);
@@ -272,7 +263,6 @@ void LX_Window::drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
     const LX_AABB box = {p.x,p.y,w,h};
     drawRect(box);
 }
-
 
 void LX_Window::drawCircle(const LX_Physics::LX_Circle& c)
 {
@@ -319,7 +309,6 @@ void LX_Window::fillRect(const LX_AABB& box)
     SDL_RenderFillRect(_wimpl->_renderer,&box);
 }
 
-
 void LX_Window::fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v)
 {
     int w = static_cast<int>(v.vx);
@@ -327,7 +316,6 @@ void LX_Window::fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
     const LX_AABB box = {p.x,p.y,w,h};
     fillRect(box);
 }
-
 
 void LX_Window::fillCircle(const LX_Physics::LX_Circle& c)
 {
@@ -374,7 +362,6 @@ void LX_Window::setDrawColour(const LX_Colour& colour)
     SDL_SetRenderDrawColor(_wimpl->_renderer,colour.r,colour.g,colour.b,colour.a);
 }
 
-
 void LX_Window::getDrawColour(LX_Colour& colour) const
 {
     SDL_GetRenderDrawColor(_wimpl->_renderer,&colour.r,&colour.g,&colour.b,&colour.a);
@@ -386,7 +373,6 @@ void LX_Window::setDrawBlendMode(LX_BlendMode mode)
     SDL_SetRenderDrawBlendMode(_wimpl->_renderer, static_cast<SDL_BlendMode>(mode));
 }
 
-
 void LX_Window::getDrawBlendMode(LX_BlendMode& mode) const
 {
     SDL_GetRenderDrawBlendMode(_wimpl->_renderer, reinterpret_cast<SDL_BlendMode*>(&mode));
@@ -397,7 +383,6 @@ void LX_Window::setTitle(const std::string& title)
 {
     SDL_SetWindowTitle(_wimpl->_window,title.c_str());
 }
-
 
 void LX_Window::setWindowSize(int w, int h)
 {
@@ -411,7 +396,6 @@ bool LX_Window::setViewPort(LX_AABB * viewport)
 {
     return SDL_RenderSetViewport(_wimpl->_renderer,viewport) == 0;
 }
-
 
 void LX_Window::getViewPort(LX_AABB& viewport) const
 {
@@ -481,7 +465,7 @@ void LX_Window::getInfo(LX_WindowInfo &info) const
 
     SDL_RendererInfo rinfo;
     SDL_GetRendererInfo(_wimpl->_renderer, &rinfo);
-    info.accel = ( (rinfo.flags&SDL_RENDERER_ACCELERATED) != 0 );
+    info.accel = ((rinfo.flags&SDL_RENDERER_ACCELERATED) != 0);
 }
 
 
@@ -492,7 +476,6 @@ int LX_Window::getWidth() const
     return w;
 }
 
-
 int LX_Window::getHeight() const
 {
     int h;
@@ -500,14 +483,12 @@ int LX_Window::getHeight() const
     return h;
 }
 
-
 int LX_Window::getLogicalWidth() const
 {
     int w;
     SDL_RenderGetLogicalSize(_wimpl->_renderer,&w,nullptr);
     return w == 0 ? getWidth() : w;
 }
-
 
 int LX_Window::getLogicalHeight() const
 {
@@ -521,7 +502,6 @@ void LX_Window::glGetDrawableSize(int& w, int& h) const
 {
     SDL_GL_GetDrawableSize(_wimpl->_window,&w,&h);
 }
-
 
 bool LX_Window::glMakeCurrent()
 {
