@@ -109,7 +109,6 @@ public:
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
-    *   @exception LX_MusicException if the music cannot be created from the file
     */
     LX_Music(const std::string& filename);
     /**
@@ -117,7 +116,6 @@ public:
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
-    *   @exception LX_MusicException if the music cannot be created from the file
     */
     explicit LX_Music(const UTF8string& filename);
 

@@ -90,7 +90,6 @@ public:
     *        The sample was optimized for this format. But it can work with
     *        an other file type.
     *
-    *   @exception LX_ChunkException if the sample cannot be created from the file
     */
     explicit LX_Chunk(const std::string& filename);
 
@@ -105,7 +104,6 @@ public:
     *   @note It is better to give a .wav file to the constructor.
     *          The sample was optimized for this format. But it can work with
     *          an other file type.
-    *   @exception LX_ChunkException if the sample cannot be created from the file
     */
     explicit LX_Chunk(const UTF8string& filename);
 
