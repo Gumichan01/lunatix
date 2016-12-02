@@ -101,7 +101,7 @@ public:
         _loaded = load_(filename);
     }
 
-    bool isLoaded_()
+    bool isLoaded_() const
     {
         return _loaded;
     }
@@ -184,7 +184,7 @@ bool LX_Music::load(const UTF8string& filename)
     return _mimpl->isLoaded_();
 }
 
-bool LX_Music::isLoaded()
+bool LX_Music::isLoaded() const
 {
     return _mimpl != nullptr && _mimpl->isLoaded_();
 }

@@ -126,11 +126,11 @@ public:
     */
     virtual bool load(const UTF8string& filename);
     /**
-    *   @fn virtual bool isLoaded()
+    *   @fn virtual bool isLoaded() const
     *   Check if the music is loaded
     *   @return TRUE on succes, FALSE otherwise
     */
-    virtual bool isLoaded();
+    virtual bool isLoaded() const;
 
     /**
     *   @fn bool play()

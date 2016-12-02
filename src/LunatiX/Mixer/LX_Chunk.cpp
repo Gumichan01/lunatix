@@ -68,7 +68,7 @@ public:
         return _chunk != nullptr;
     }
 
-    bool isLoaded_()
+    bool isLoaded_() const
     {
         return _loaded;
     }
@@ -124,7 +124,7 @@ bool LX_Chunk::load(const UTF8string& filename)
     return _chkimpl->isLoaded_();
 }
 
-bool LX_Chunk::isLoaded()
+bool LX_Chunk::isLoaded() const
 {
     return _chkimpl != nullptr && _chkimpl->isLoaded_();
 }

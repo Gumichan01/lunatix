@@ -43,7 +43,7 @@ public:
     /// Load a sound file (UTF-8)
     virtual bool load(const UTF8string& filename) = 0;
     /// Check if the sound is loaded
-    virtual bool isLoaded() = 0;
+    virtual bool isLoaded() const = 0;
     /// Play something
     virtual bool play() = 0;
     /// Close the music
