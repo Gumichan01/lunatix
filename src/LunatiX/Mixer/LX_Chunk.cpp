@@ -131,17 +131,17 @@ bool LX_Chunk::isLoaded()
 
 bool LX_Chunk::play()
 {
-    return _chkimpl->play();
+    return isLoaded() && _chkimpl->play();
 }
 
 bool LX_Chunk::play(int channel)
 {
-    return _chkimpl->play(channel,LX_MIXER_NOLOOP);
+    return isLoaded() && _chkimpl->play(channel,LX_MIXER_NOLOOP);
 }
 
 bool LX_Chunk::play(int channel,int loops)
 {
-    return _chkimpl->play(channel,loops);
+    return isLoaded() && _chkimpl->play(channel,loops);
 }
 
 bool LX_Chunk::play(int channel,int loops,int ticks)

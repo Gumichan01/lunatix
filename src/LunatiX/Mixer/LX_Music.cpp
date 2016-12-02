@@ -191,13 +191,19 @@ bool LX_Music::isLoaded()
 
 void LX_Music::fadeIn(int ms)
 {
-    _mimpl->fadeIn(ms);
+    if(isLoaded())
+        _mimpl->fadeIn(ms);
+    else
+        LX_SetError("Cannot play an unloaded music");
 }
 
 
 void LX_Music::fadeInPos(int ms,int pos)
 {
-    _mimpl->fadeInPos(ms,pos);
+    if(isLoaded())
+        _mimpl->fadeInPos(ms,pos);
+    else
+        LX_SetError("Cannot play an unloaded music");
 }
 
 void LX_Music::fadeOut(int ms)
@@ -208,12 +214,12 @@ void LX_Music::fadeOut(int ms)
 
 bool LX_Music::play()
 {
-    return _mimpl->play();
+    return isLoaded() && _mimpl->play();
 }
 
 bool LX_Music::play(int loops)
 {
-    return _mimpl->play(loops);
+    return isLoaded() && _mimpl->play(loops);
 }
 
 
