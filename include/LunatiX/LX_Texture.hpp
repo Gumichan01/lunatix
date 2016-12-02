@@ -228,7 +228,7 @@ public:
     *   @note sprite_area is useful xhen the filename is a sprite sheet
     */
     LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
+              uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
@@ -259,7 +259,7 @@ public:
     *   @note sprite_area is useful xhen the filename is a sprite sheet
     */
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
+              uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
     *   @fn LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
