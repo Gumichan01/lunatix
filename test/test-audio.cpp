@@ -279,6 +279,22 @@ void test_music()
         LX_Log::log("Format - %s", tag.properties().format.c_str());
         LX_Log::log("================================");
         music.close();
+
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"DANGER ZONE #1 IN");
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"double close");
+        music.close();
+        music.close();
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"play");
+        music.play();
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"stop");
+        music.stop();
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"fadeIn");
+        music.fadeIn(1000);
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"fadeOut");
+        music.fadeOut(1000);
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"pause");
+        music.pause();
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"DANGER ZONE #1 OUT");
     }
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Launch music: <empty_string>");
@@ -347,6 +363,15 @@ void test_chunk()
         LX_Timer::delay(9000);
 
         chunk->close();
+
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"DANGER ZONE #2 IN");
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"double close");
+        chunk->close();
+        chunk->close();
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"play");
+        chunk->play();
+        LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"DANGER ZONE #2 OUT");
+
         delete chunk;
     }
 
