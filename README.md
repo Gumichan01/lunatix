@@ -77,10 +77,11 @@ The library works on Windows and Linux (maybe on Mac OS X).
         return 0;
     }
 
+
 ## Contribute ##
 
 You may take a look on the library or get the development version on [Github][].
-The library reference is also available [online][] (version 0.9).
+The library reference is also available [online][] (version 0.10).
 
 ### Prerequisites ###
 
