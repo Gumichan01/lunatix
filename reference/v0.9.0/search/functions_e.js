@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['pause',['pause',['../class_l_x___mixer_1_1_l_x___music.html#a3095e89d281a13a76baafe55e7c813dc',1,'LX_Mixer::LX_Music::pause()'],['../namespace_l_x___mixer.html#a51d7d817a6997b1268d7f1a2739df983',1,'LX_Mixer::pause()']]],
-  ['play',['play',['../class_l_x___mixer_1_1_l_x___chunk.html#a82be43dde66ad5aa96598eb2edbf685f',1,'LX_Mixer::LX_Chunk::play()'],['../class_l_x___mixer_1_1_l_x___chunk.html#a9fcdec5c80afe623b8a8445cbacf05e3',1,'LX_Mixer::LX_Chunk::play(int channel)'],['../class_l_x___mixer_1_1_l_x___chunk.html#a76ea76ee629f5fa8da8350ff7e941439',1,'LX_Mixer::LX_Chunk::play(int channel, int loops)'],['../class_l_x___mixer_1_1_l_x___chunk.html#a74fd583ad30a42a40671d812b270d359',1,'LX_Mixer::LX_Chunk::play(int channel, int loops, int ticks)'],['../class_l_x___mixer_1_1_l_x___music.html#a97d76162a9855437cd25f61150f0c6b8',1,'LX_Mixer::LX_Music::play(void)'],['../class_l_x___mixer_1_1_l_x___music.html#ade761614ca9c5aca148c9e876c556077',1,'LX_Mixer::LX_Music::play(int loops)'],['../class_l_x___mixer_1_1_l_x___sound.html#aaae122508754b27200d2848b8d644833',1,'LX_Mixer::LX_Sound::play()']]]
-];
