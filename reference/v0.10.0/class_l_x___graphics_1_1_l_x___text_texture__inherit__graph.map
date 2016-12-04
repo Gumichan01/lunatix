@@ -1,0 +1,6 @@
+<map id="LX_Graphics::LX_TextTexture" name="LX_Graphics::LX_TextTexture">
+<area shape="rect" id="node3" href="$class_l_x___graphics_1_1_l_x___blended_text_texture.html" title="The blended text texture. " alt="" coords="460,5,656,47"/>
+<area shape="rect" id="node4" href="$class_l_x___graphics_1_1_l_x___shaded_text_texture.html" title="The shaded text texture. " alt="" coords="461,71,655,112"/>
+<area shape="rect" id="node5" href="$class_l_x___graphics_1_1_l_x___solid_text_texture.html" title="The solid text texture. " alt="" coords="469,136,647,177"/>
+<area shape="rect" id="node2" href="$class_l_x___graphics_1_1_l_x___texture.html" title="The texture object This class describes a texture. " alt="" coords="5,78,172,105"/>
+</map>

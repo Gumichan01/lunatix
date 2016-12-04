@@ -1,0 +1,8 @@
+<map id="include/LunatiX/LX_Audio.hpp" name="include/LunatiX/LX_Audio.hpp">
+<area shape="rect" id="node2" href="$_l_x___chunk_8hpp.html" title="The sample header. " alt="" coords="280,95,385,121"/>
+<area shape="rect" id="node9" href="$_l_x___mixer_8hpp.html" title="The mixer library. " alt="" coords="5,169,105,196"/>
+<area shape="rect" id="node10" href="$_l_x___music_8hpp.html" title="The music library. " alt="" coords="153,95,256,121"/>
+<area shape="rect" id="node3" href="$_l_x___sound_8hpp.html" title="The abstract sound class. " alt="" coords="129,169,280,196"/>
+<area shape="rect" id="node4" href="$utf8__string_8hpp.html" title="This is a UTF&#45;8 string library header. " alt="" coords="71,244,189,285"/>
+<area shape="rect" id="node7" href="$utf8__iterator_8hpp.html" title="This is a UTF&#45;8 string library header. " alt="" coords="190,333,305,360"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="LX_Graphics::LX_AnimatedSprite" name="LX_Graphics::LX_AnimatedSprite">
+<area shape="rect" id="node2" href="$class_l_x___graphics_1_1_l_x___sprite.html" title="The sprite. " alt="" coords="15,80,174,107"/>
+<area shape="rect" id="node3" href="$class_l_x___graphics_1_1_l_x___texture.html" title="The texture object This class describes a texture. " alt="" coords="11,5,178,32"/>
+</map>
