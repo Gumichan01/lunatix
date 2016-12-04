@@ -111,7 +111,6 @@ void test_window2(void)
 void test_image(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST LX_Texture = ");
-    /// @todo spritesheet in the buffer
     std::string sp_str = "data/boss.png";
     std::string name = "data/bullet.png";
     std::string mname = "data/01.ogg";
