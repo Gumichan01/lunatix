@@ -1,9 +1,0 @@
-<map id="LX_Graphics::LX_Texture" name="LX_Graphics::LX_Texture">
-<area shape="rect" id="node2" href="$class_l_x___graphics_1_1_l_x___sprite.html" title="The sprite. " alt="" coords="237,15,395,42"/>
-<area shape="rect" id="node4" href="$class_l_x___graphics_1_1_l_x___streaming_texture.html" title="A special texture for texture streaming This class describes a texture for streaming. " alt="" coords="225,69,407,111"/>
-<area shape="rect" id="node5" href="$class_l_x___graphics_1_1_l_x___text_texture.html" title="The text texture This abstract class describes a texture build from a text. " alt="" coords="220,142,412,169"/>
-<area shape="rect" id="node3" href="$class_l_x___graphics_1_1_l_x___animated_sprite.html" title="The animated sprite This class describes a sprite sheet used for animation. " alt="" coords="469,5,647,47"/>
-<area shape="rect" id="node6" href="$class_l_x___graphics_1_1_l_x___blended_text_texture.html" title="The blended text texture. " alt="" coords="460,71,656,112"/>
-<area shape="rect" id="node7" href="$class_l_x___graphics_1_1_l_x___shaded_text_texture.html" title="The shaded text texture. " alt="" coords="461,136,655,177"/>
-<area shape="rect" id="node8" href="$class_l_x___graphics_1_1_l_x___solid_text_texture.html" title="The solid text texture. " alt="" coords="469,201,647,243"/>
-</map>

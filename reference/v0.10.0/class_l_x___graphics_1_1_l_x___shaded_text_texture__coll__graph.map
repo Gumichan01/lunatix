@@ -1,7 +1,0 @@
-<map id="LX_Graphics::LX_ShadedTextTexture" name="LX_Graphics::LX_ShadedTextTexture">
-<area shape="rect" id="node2" href="$class_l_x___graphics_1_1_l_x___text_texture.html" title="The text texture This abstract class describes a texture build from a text. " alt="" coords="189,184,381,211"/>
-<area shape="rect" id="node3" href="$class_l_x___graphics_1_1_l_x___texture.html" title="The texture object This class describes a texture. " alt="" coords="5,95,172,121"/>
-<area shape="rect" id="node4" href="$class_l_x___win_1_1_l_x___window.html" title="The window. " alt="" coords="18,5,159,32"/>
-<area shape="rect" id="node5" href="$class_l_x___true_type_font_1_1_l_x___font.html" title="The Font class. " alt="" coords="196,95,373,121"/>
-<area shape="rect" id="node6" href="$class_u_t_f8string.html" title="UTF&#45;8 string class. " alt="" coords="398,95,483,121"/>
-</map>
