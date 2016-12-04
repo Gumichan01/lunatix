@@ -17,7 +17,7 @@
 *   @file LX_Audio.hpp
 *   @brief The interface the audio module
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 

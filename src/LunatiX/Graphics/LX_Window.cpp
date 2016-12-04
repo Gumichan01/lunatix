@@ -13,7 +13,7 @@
 *   @file LX_Window.cpp
 *   @brief The implementation of the window
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 
@@ -34,7 +34,7 @@ namespace
 const int LX_ARGB_DEPTH = 32;                               /* Pixel depth (in bits) */
 const uint32_t LX_PIXEL_FORMAT = SDL_PIXELFORMAT_RGBA8888;  /* Pixel format          */
 
-const char * DEFAULT_TITLE = "LunatiX v0.9";
+const char * DEFAULT_TITLE = "LunatiX v0.10";
 const int DEFAULT_WIN_WIDTH = 640;
 const int DEFAULT_WIN_HEIGHT = 480;
 

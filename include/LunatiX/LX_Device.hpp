@@ -17,7 +17,7 @@
 *   @file LX_Device.hpp
 *   @brief The Device header
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

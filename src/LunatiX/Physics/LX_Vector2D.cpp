@@ -16,7 +16,7 @@
 *   @file LX_Vector2D.cpp
 *   @brief The vector 2D implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 

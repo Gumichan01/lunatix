@@ -14,7 +14,7 @@
 *   @file LX_FileBuffer.cpp
 *   @brief The file buffer implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <LunatiX/LX_FileBuffer.hpp>

@@ -17,7 +17,7 @@
 *   @file LX_Colour.hpp
 *   @brief The colour representation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <SDL2/SDL_pixels.h>

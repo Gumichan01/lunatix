@@ -15,7 +15,7 @@
 *   @file LX_OpenGL.cpp
 *   @brief The implementation of the LunatiX/OpenGL interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 

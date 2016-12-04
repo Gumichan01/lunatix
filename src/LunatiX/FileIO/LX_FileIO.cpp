@@ -13,7 +13,7 @@
 *   @file LX_FileIO.cpp
 *   @brief The file handling implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <LunatiX/LX_FileIO.hpp>

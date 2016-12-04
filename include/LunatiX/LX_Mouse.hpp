@@ -17,7 +17,7 @@
 *   @file LX_Mouse.hpp
 *   @brief The mouse interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <memory>

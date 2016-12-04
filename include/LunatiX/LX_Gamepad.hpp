@@ -17,7 +17,7 @@
 *   @file LX_Gamepad.hpp
 *   @brief The gamepad interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

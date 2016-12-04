@@ -17,7 +17,7 @@
 *   @file LX_Library.hpp
 *   @brief Library ressource manager (load and shut down)
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <LunatiX/LX_Error.hpp>

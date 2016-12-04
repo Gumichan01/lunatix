@@ -14,7 +14,7 @@
 *   @file LX_Event.cpp
 *   @brief The Implementation of the event odule
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 

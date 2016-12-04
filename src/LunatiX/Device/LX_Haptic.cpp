@@ -14,7 +14,7 @@
 *   @file LX_Haptic.cpp
 *   @brief The Haptic system implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 

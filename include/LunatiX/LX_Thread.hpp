@@ -17,7 +17,7 @@
 *   @file LX_Thread.hpp
 *   @brief The multithreading API
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

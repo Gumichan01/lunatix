@@ -15,7 +15,7 @@
 *   @file LX_Library.cpp
 *   @brief The implementatino of the library ressources
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.9
+*   @version 0.10
 *
 */
 
