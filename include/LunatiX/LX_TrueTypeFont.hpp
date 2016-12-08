@@ -104,6 +104,7 @@ class LX_Font
     SDL_Texture * drawBlendedText_(const UTF8string& text, unsigned int size,
                                    LX_Win::LX_Window& w);
 
+    const LX_Colour getColour_();
     void setColour_(const LX_Colour& colour);
 
 public:
