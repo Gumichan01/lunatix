@@ -648,14 +648,14 @@ public:
     */
     virtual void setText(const UTF8string& text, unsigned int sz);
     /**
-    *   @fn virtual void setSize(unsigned int sz) = 0
+    *   @fn virtual void setSize(unsigned int sz)
     *
     *   Set the size of the text that will be displayed
     *
     *   @param [in] sz The new size of the text
     *   @note This function updates the texture of the text
     */
-    virtual void setSize(unsigned int sz) = 0;
+    virtual void setSize(unsigned int sz);
 
     /**
     *   @fn virtual void setTextColour(LX_Colour c)
@@ -702,8 +702,6 @@ public:
     LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
-
-    virtual void setSize(unsigned int sz);
 
     /// Destructor
     ~LX_SolidTextTexture() = default;
@@ -774,7 +772,6 @@ public:
     *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz);
-    virtual void setSize(unsigned int sz);
 
     /**
     *   @fn void setBgColour(LX_Colour bg)
@@ -825,8 +822,6 @@ public:
     LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);
-
-    virtual void setSize(unsigned int sz);
 
     /// Destructor
     ~LX_BlendedTextTexture() = default;

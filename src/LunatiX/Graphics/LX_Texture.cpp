@@ -445,11 +445,19 @@ void LX_TextTexture::setPosition(int x, int y)
 }
 
 
+void LX_TextTexture::setSize(unsigned int sz)
+{
+    _size = sz;
+    updateTexture_();
+}
+
+
 void LX_TextTexture::setTextColour(LX_Colour c)
 {
     colour = c;
     updateTexture_();
 }
+
 
 LX_TextTexture::~LX_TextTexture() {}
 
@@ -491,14 +499,6 @@ void LX_SolidTextTexture::updateTexture_()
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
     _font.setColour_(tmp);
 }
-
-
-void LX_SolidTextTexture::setSize(unsigned int sz)
-{
-    _size = sz;
-    updateTexture_();
-}
-
 
 
 /* LX_ShadedTextTexture */
@@ -557,12 +557,6 @@ void LX_ShadedTextTexture::setText(const UTF8string& text, LX_Colour bg, unsigne
 }
 
 
-void LX_ShadedTextTexture::setSize(unsigned int sz)
-{
-    _size = sz;
-    updateTexture_();
-}
-
 void LX_ShadedTextTexture::setBgColour(LX_Colour bg)
 {
     _bgcolour = bg;
@@ -605,13 +599,6 @@ void LX_BlendedTextTexture::updateTexture_()
     _texture = _font.drawBlendedText_(_text,_size,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
     _font.setColour_(tmp);
-}
-
-
-void LX_BlendedTextTexture::setSize(unsigned int sz)
-{
-    _size = sz;
-    updateTexture_();
 }
 
 };
