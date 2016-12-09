@@ -423,6 +423,21 @@ const UTF8string LX_TextTexture::getText() const
     return _text;
 }
 
+
+void LX_TextTexture::setText(std::string text, unsigned int sz)
+{
+    setText(UTF8string(text),sz);
+}
+
+
+void LX_TextTexture::setText(const UTF8string& text, unsigned int sz)
+{
+    _text = text;
+    _size = sz;
+    updateTexture_();
+}
+
+
 void LX_TextTexture::setPosition(int x, int y)
 {
     _dimension.x = x;
@@ -536,17 +551,8 @@ void LX_ShadedTextTexture::updateTexture_()
 }
 
 
-void LX_ShadedTextTexture::setText(std::string text, unsigned int sz)
-{
-    setText(UTF8string(text),sz);
-}
-
-
-void LX_ShadedTextTexture::setText(const UTF8string& text, unsigned int sz)
-{
-    const LX_Colour GREY = {127,127,127,255};
-    setText(text,GREY,sz);
-}
+void LX_ShadedTextTexture::setText(std::string text, unsigned int sz) {}
+void LX_ShadedTextTexture::setText(const UTF8string& text, unsigned int sz) {}
 
 
 void LX_ShadedTextTexture::setText(std::string text, LX_Colour bg, unsigned int sz)
