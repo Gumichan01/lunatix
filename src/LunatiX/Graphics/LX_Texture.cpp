@@ -493,19 +493,6 @@ void LX_SolidTextTexture::updateTexture_()
 }
 
 
-void LX_SolidTextTexture::setText(std::string text, unsigned int sz)
-{
-    setText(UTF8string(text),sz);
-}
-
-
-void LX_SolidTextTexture::setText(const UTF8string& text, unsigned int sz)
-{
-    _text = text;
-    _size = sz;
-    updateTexture_();
-}
-
 void LX_SolidTextTexture::setSize(unsigned int sz)
 {
     _size = sz;
@@ -620,19 +607,6 @@ void LX_BlendedTextTexture::updateTexture_()
     _font.setColour_(tmp);
 }
 
-
-void LX_BlendedTextTexture::setText(std::string text, unsigned int sz)
-{
-    setText(UTF8string(text),sz);
-}
-
-
-void LX_BlendedTextTexture::setText(const UTF8string& text, unsigned int sz)
-{
-    _text = text;
-    _size = sz;
-    updateTexture_();
-}
 
 void LX_BlendedTextTexture::setSize(unsigned int sz)
 {

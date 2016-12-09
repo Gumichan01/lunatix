@@ -703,8 +703,6 @@ public:
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string text, unsigned int sz);
-    virtual void setText(const UTF8string& text, unsigned int sz);
     virtual void setSize(unsigned int sz);
 
     /// Destructor
@@ -828,8 +826,6 @@ public:
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(std::string text, unsigned int sz);
-    virtual void setText(const UTF8string& text, unsigned int sz);
     virtual void setSize(unsigned int sz);
 
     /// Destructor
