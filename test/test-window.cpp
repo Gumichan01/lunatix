@@ -456,7 +456,7 @@ void test_viewport(LX_Win::LX_Window *win)
 
     Uint32 b = SDL_GetTicks();
     LX_AABB brect = {0, 0, win->getWidth()/2, win->getHeight()/2};
-    LX_Colour bcolor = {0,0,0,255};
+    LX_Colour bcolour = {0,0,0,255};
 
     while(SDL_GetTicks() - b < 4096)
     {
@@ -465,7 +465,7 @@ void test_viewport(LX_Win::LX_Window *win)
         img.draw();
 
         win->setViewPort(&viewport);
-        win->setDrawColour(bcolor);
+        win->setDrawColour(bcolour);
         win->fillRect(brect);
         sprite.draw(&rect);
 
@@ -579,15 +579,15 @@ void test_opengl()
             LX_Timer::delay(1000);
         }
 
-        // Red color
-        LX_Log::log("Blue color");
+        // Red colour
+        LX_Log::log("Blue colour");
         w.clearWindow();
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w.update();
         LX_Timer::delay(2000);
 
-        LX_Log::log("Move colors: blue → red");
+        LX_Log::log("Move colours: blue → red");
         for(float i = 1.0f; i > -0.01f; i=i-0.01f)
         {
             w.clearWindow();
@@ -597,7 +597,7 @@ void test_opengl()
             LX_Timer::delay(16);
         }
 
-        LX_Log::log("Move colors: red → green");
+        LX_Log::log("Move colours: red → green");
         for(float i = 1.0f; i > -0.01f; i=i-0.01f)
         {
             w.clearWindow();
@@ -607,7 +607,7 @@ void test_opengl()
             LX_Timer::delay(16);
         }
 
-        LX_Log::log("Move colors: green → black");
+        LX_Log::log("Move colours: green → black");
         for(float i = 1.0f; i > -0.01f; i=i-0.01f)
         {
             w.clearWindow();
@@ -669,7 +669,7 @@ void test_opengl2()
             LX_Log::log("FAILURE - %s",LX_GetError());
 
 
-        LX_Log::log("Blue color on window #1");
+        LX_Log::log("Blue colour on window #1");
         w1.glMakeCurrent();                         // Work on the first window
         w1.clearWindow();
         glClearColor(0.0, 0.0, 1.0, 1.0);
@@ -677,7 +677,7 @@ void test_opengl2()
         w1.update();
         LX_Timer::delay(1000);
 
-        LX_Log::log("Red color on window #2");
+        LX_Log::log("Red colour on window #2");
         w2.glMakeCurrent();                         // Work on the second window
         w2.clearWindow();
         glClearColor(1.0, 0.0, 0.0, 1.0);
@@ -697,7 +697,7 @@ void test_opengl2()
                 LX_Log::log("KO: %s",LX_GetError());
 
 
-            LX_Log::log("Green color on window #2");
+            LX_Log::log("Green colour on window #2");
             w2.glMakeCurrent();                         // Work on the first window
             w2.clearWindow();
             glClearColor(0.0, 1.0, 0.0, 1.0);
