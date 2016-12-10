@@ -538,10 +538,6 @@ void LX_ShadedTextTexture::updateTexture_()
 }
 
 
-void LX_ShadedTextTexture::setText(std::string text, unsigned int sz) {}
-void LX_ShadedTextTexture::setText(const UTF8string& text, unsigned int sz) {}
-
-
 void LX_ShadedTextTexture::setText(std::string text, LX_Colour bg, unsigned int sz)
 {
     setText(UTF8string(text),bg,sz);

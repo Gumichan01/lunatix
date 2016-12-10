@@ -677,7 +677,8 @@ public:
 *   @brief The solid text texture
 *
 *   This class describes a solid text texture.
-*   A solid text texture is just a text that is quickly and dirty drawn on the screen.
+*   A solid text texture is just a text that is quickly
+*   and dirty drawn on the screen.
 *
 *   Using this class for drawing text is fast.
 */
@@ -722,9 +723,6 @@ public:
 class LX_ShadedTextTexture: public LX_TextTexture
 {
     LX_Colour _bgcolour;
-
-    void setText(std::string text, unsigned int sz);
-    void setText(const UTF8string& text, unsigned int sz);
 
 protected:
 
