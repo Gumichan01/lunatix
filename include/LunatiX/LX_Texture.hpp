@@ -623,9 +623,6 @@ public:
     void setPosition(int x, int y);
 
     /// @todo (#2#) setText with just the text in argument
-    //virtual void setText(std::string text);
-    //virtual void setText(UTF8strung text);
-
     /**
     *   @fn virtual void setText(std::string text, unsigned int sz)
     *
@@ -636,11 +633,34 @@ public:
     *
     *   @note This function updates the texture of the text
     */
+    virtual void setText(std::string text);
+
+    /**
+    *   @fn virtual void setText(UTF8string text)
+    *
+    *   Set the text to display
+    *
+    *   @param [in] text The text to set
+    *
+    *   @note This function updates the texture of the text
+    */
+    virtual void setText(UTF8string text);
+
+    /**
+    *   @fn virtual void setText(std::string text, unsigned int sz)
+    *
+    *   Set the text (with its size) to display
+    *
+    *   @param [in] text The text to set
+    *   @param [in] sz The new size of the text
+    *
+    *   @note This function updates the texture of the text
+    */
     virtual void setText(std::string text, unsigned int sz);
     /**
     *   @fn virtual void setText(const UTF8string& text, unsigned int sz);
     *
-    *   Set the text to display
+    *   Set the text (with its size) to display
     *
     *   @param [in] text The utf-8 text to set
     *   @param [in] sz The new size of the text
@@ -745,6 +765,9 @@ public:
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// @todo (#3#) setText with the text and the colour in argument
+
+    virtual void setText(std::string text);
+    virtual void setText(const UTF8string& text);
 
     /**
     *   @fn virtual void setText(std::string text, LX_Colour bg, unsigned int sz)

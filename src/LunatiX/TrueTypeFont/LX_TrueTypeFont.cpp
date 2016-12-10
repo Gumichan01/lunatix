@@ -356,6 +356,13 @@ const LX_Colour LX_Font::getColour_()
     return _fimpl->_font_colour;
 }
 
+
+unsigned int LX_Font::getSize_()
+{
+    return _fimpl->_font_size;
+}
+
+
 /*
 *   This function sets the new colour of texts.
 */

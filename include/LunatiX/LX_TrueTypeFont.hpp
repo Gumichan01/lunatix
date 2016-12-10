@@ -105,6 +105,7 @@ class LX_Font
                                    LX_Win::LX_Window& w);
 
     const LX_Colour getColour_();
+    unsigned int getSize_();
     void setColour_(const LX_Colour& colour);
 
 public:

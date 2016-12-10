@@ -384,6 +384,7 @@ LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
 _dimension({0,0,0,0})
 {
     colour = _font.getColour_();
+    _size = _font.getSize_();
 }
 
 
@@ -421,6 +422,17 @@ void LX_TextTexture::draw(const double angle, const short mirror)
 const UTF8string LX_TextTexture::getText() const
 {
     return _text;
+}
+
+
+void LX_TextTexture::setText(std::string text)
+{
+    setText(text, _size);
+}
+
+void LX_TextTexture::setText(UTF8string text)
+{
+    setText(text, _size);
 }
 
 
@@ -535,6 +547,17 @@ void LX_ShadedTextTexture::updateTexture_()
     _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
     _font.setColour_(tmp);
+}
+
+void LX_ShadedTextTexture::setText(std::string text)
+{
+    LX_TextTexture::setText(UTF8string(text));
+}
+
+
+void LX_ShadedTextTexture::setText(const UTF8string& text)
+{
+    LX_TextTexture::setText(text);
 }
 
 

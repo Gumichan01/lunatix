@@ -86,7 +86,7 @@ void test_SolidText()
     winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour[0]);
+    LX_Font font(LX_Configuration::getInstance()->getFontFile(), colour[0], 32);
 
     LX_Log::log("Load a solid text image and display it");
 
@@ -95,7 +95,7 @@ void test_SolidText()
         LX_Graphics::LX_SolidTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
-        simg.setText(str,32);
+        simg.setText(str);
         simg.setPosition(100,100);
         LX_Log::log("Done");
         win.clearWindow();
@@ -106,7 +106,7 @@ void test_SolidText()
 
         simg2.setTextColour(colour[1]);
         simg2.setPosition(100,400);
-        simg2.setText(str,32);
+        simg2.setText(str, 48);
 
         LX_Log::log("Size: 32 → 72");
         for(unsigned int j = 32; j < 74; j += 2)
@@ -120,11 +120,12 @@ void test_SolidText()
         }
         LX_Log::log("Done");
 
+        simg.setPosition(256,256);
+        simg.setSize(32);
+
         LX_Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
-            simg.setPosition(256,256);
-            simg.setSize(32);
             win.clearWindow();
             simg.draw(j);
             win.update();
@@ -139,7 +140,7 @@ void test_ShadedText()
 {
     LX_Colour colour = {0,0,0,0};
     LX_Colour bg = {255,200,127,0};
-    LX_Colour bg2 = {24,10,1,0};
+    LX_Colour bg2 = {64,40,4,0};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -147,7 +148,7 @@ void test_ShadedText()
     winfo.title = "LunatiX - Test True Type Font - Shaded text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour);
+    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour,32);
 
     LX_Log::log("Load a shaded text image and display it");
 
@@ -156,7 +157,7 @@ void test_ShadedText()
         LX_Graphics::LX_ShadedTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
-        simg.setText(str,bg,32);
+        simg.setText(str);
         simg.setPosition(100,100);
         LX_Log::log("Done");
         win.clearWindow();
@@ -167,7 +168,7 @@ void test_ShadedText()
 
         simg2.setTextColour({255,0,255,0});
         simg2.setPosition(100,400);
-        simg2.setText(str,bg2,32);
+        simg2.setText(str,bg2,48);
 
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
@@ -181,11 +182,12 @@ void test_ShadedText()
         }
         LX_Log::log("Done");
 
+        simg.setPosition(256,256);
+        simg.setSize(32);
+
         LX_Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
-            simg.setPosition(256,256);
-            simg.setSize(32);
             win.clearWindow();
             simg.draw(j);
             win.update();
@@ -206,7 +208,7 @@ void test_BlendedText()
     winfo.title = "LunatiX - Test True Type Font - Blended text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour);
+    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour, 32);
 
     LX_Log::log("Load a solid text image and display it");
 
@@ -215,7 +217,7 @@ void test_BlendedText()
         LX_Graphics::LX_BlendedTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
-        simg.setText(str,32);
+        simg.setText(str);
         simg.setPosition(100,100);
         LX_Log::log("Done");
         win.clearWindow();
@@ -226,7 +228,7 @@ void test_BlendedText()
 
         simg2.setTextColour({255,0,255,0});
         simg2.setPosition(100,400);
-        simg2.setText(str,32);
+        simg2.setText(str,48);
 
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
@@ -240,11 +242,12 @@ void test_BlendedText()
         }
         LX_Log::log("Done");
 
+        simg.setPosition(256,256);
+        simg.setSize(32);
+
         LX_Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
-            simg.setPosition(256,256);
-            simg.setSize(32);
             win.clearWindow();
             simg.draw(j);
             win.update();
