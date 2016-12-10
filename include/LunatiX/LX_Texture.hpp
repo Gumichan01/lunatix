@@ -545,7 +545,7 @@ public:
                    uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
-    *   @fn LX_TextTexture(std::string text, unsigned int sz,
+    *   @fn LX_TextTexture(const std::string& text, unsigned int sz,
     *                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
     *                     uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
@@ -558,7 +558,7 @@ public:
     *
     *   @sa LX_Texture
     */
-    LX_TextTexture(std::string text, unsigned int sz,
+    LX_TextTexture(const std::string& text, unsigned int sz,
                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                    uint32_t format=LX_PIXELFORMAT_RGBA8888);
     /**
@@ -622,9 +622,8 @@ public:
     */
     void setPosition(int x, int y);
 
-    /// @todo (#2#) setText with just the text in argument
     /**
-    *   @fn virtual void setText(std::string text, unsigned int sz)
+    *   @fn virtual void setText(const std::string& text, unsigned int sz)
     *
     *   Set the text to display
     *
@@ -633,10 +632,10 @@ public:
     *
     *   @note This function updates the texture of the text
     */
-    virtual void setText(std::string text);
+    virtual void setText(const std::string& text);
 
     /**
-    *   @fn virtual void setText(UTF8string text)
+    *   @fn virtual void setText(const UTF8string& text)
     *
     *   Set the text to display
     *
@@ -644,10 +643,10 @@ public:
     *
     *   @note This function updates the texture of the text
     */
-    virtual void setText(UTF8string text);
+    virtual void setText(const UTF8string& text);
 
     /**
-    *   @fn virtual void setText(std::string text, unsigned int sz)
+    *   @fn virtual void setText(const std::string& text, unsigned int sz)
     *
     *   Set the text (with its size) to display
     *
@@ -656,7 +655,7 @@ public:
     *
     *   @note This function updates the texture of the text
     */
-    virtual void setText(std::string text, unsigned int sz);
+    virtual void setText(const std::string& text, unsigned int sz);
     /**
     *   @fn virtual void setText(const UTF8string& text, unsigned int sz);
     *
@@ -715,7 +714,7 @@ public:
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_SolidTextTexture(std::string text, unsigned int sz,
+    LX_SolidTextTexture(const std::string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
@@ -755,7 +754,7 @@ public:
                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_ShadedTextTexture(std::string text, unsigned int sz,
+    LX_ShadedTextTexture(const std::string& text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
@@ -766,11 +765,11 @@ public:
 
     /// @todo (#3#) setText with the text and the colour in argument
 
-    virtual void setText(std::string text);
+    virtual void setText(const std::string& text);
     virtual void setText(const UTF8string& text);
 
     /**
-    *   @fn virtual void setText(std::string text, LX_Colour bg, unsigned int sz)
+    *   @fn virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz)
     *
     *   Set the text with its colour
     *
@@ -780,7 +779,7 @@ public:
     *
     *   @note This function updates the texture of the text
     */
-    virtual void setText(std::string text, LX_Colour bg, unsigned int sz);
+    virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz);
     /**
     *   @fn virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz)
     *
@@ -835,7 +834,7 @@ public:
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
-    LX_BlendedTextTexture(std::string text, unsigned int sz,
+    LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
