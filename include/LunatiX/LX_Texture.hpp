@@ -763,8 +763,6 @@ public:
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    /// @todo (#3#) setText with the text and the colour in argument
-
     virtual void setText(const std::string& text);
     virtual void setText(const UTF8string& text);
 
@@ -772,6 +770,28 @@ public:
     *   @fn virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz)
     *
     *   Set the text with its colour
+    *
+    *   @param [in] text The text to set
+    *   @param [in] bg The background colour of the text
+    *
+    *   @note This function updates the texture of the text
+    */
+    virtual void setText(const std::string& text, LX_Colour bg);
+    /**
+    *   @fn virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz)
+    *
+    *   Set the utf-8 text with its colour
+    *
+    *   @param [in] text The utf-8 text to set
+    *   @param [in] bg The background colour of the text
+    *
+    *   @note This function updates the texture of the text
+    */
+    virtual void setText(const UTF8string& text, LX_Colour bg);
+    /**
+    *   @fn virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz)
+    *
+    *   Set the text with its colour and its size
     *
     *   @param [in] text The text to set
     *   @param [in] bg The background colour of the text
@@ -783,7 +803,7 @@ public:
     /**
     *   @fn virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz)
     *
-    *   Set the utf-8 text with its colour
+    *   Set the utf-8 text with its colour and its size
     *
     *   @param [in] text The utf-8 text to set
     *   @param [in] bg The background colour of the text
