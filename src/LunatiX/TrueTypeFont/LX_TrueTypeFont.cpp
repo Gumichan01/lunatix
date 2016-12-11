@@ -134,37 +134,6 @@ struct LX_Font_
     }
 };
 
-/*
-LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
-    : _fimpl(new LX_Font_())
-{
-    _fimpl->_font_colour = colour;
-    _fimpl->_font_size = size;
-    // Load the configuration
-    LX_Configuration *ttf_config = LX_Configuration::getInstance();
-
-    if(ttf_config != nullptr)
-    {
-        _fimpl->_font_str = ttf_config->getFontFile();
-
-        if(_fimpl->_font_size == 0)
-        {
-            int sz = ttf_config->getFontSize();
-
-            if(sz <= 0)
-                _fimpl->_font_size = LX_TTF_DEFAULT_SIZE;
-            else
-                _fimpl->_font_size = static_cast<unsigned int>(sz);
-        }
-    }
-
-    _fimpl->createBuffer_();
-}
-
-
-LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour)
-    : LX_Font(font_file,colour,LX_TTF_DEFAULT_SIZE) {}*/
-
 
 LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
     : _fimpl(new LX_Font_(font_file,size,colour))
