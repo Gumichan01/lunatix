@@ -49,8 +49,6 @@ struct LX_InternalConfig
     bool audio_flag;        // Audio flag
     bool gamepad_flag;      // Gamepad flag
     bool opengl_flag;       // OpenGL flag
-    UTF8string font_file;   // Font file
-    int font_size;          // Font size
     int width;              // Width
     int height;             // Height
 };
@@ -73,9 +71,8 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
     const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+",std::regex::extended);
     const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
 
-    // depracated: remove these two regular expression
-    const std::regex FONT_REG("font=.+",std::regex::extended);
-    const std::regex SIZE_REG("size=.+",std::regex::extended);
+    //const std::regex FONT_REG("font=.+",std::regex::extended);
+    //const std::regex SIZE_REG("size=.+",std::regex::extended);
 
     int cpt = 0;
     std::string line;
@@ -137,7 +134,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
             }
             break;
 
-        case 6:
+        /*case 6:
             if(std::regex_match(line,FONT_REG))
             {
                 config.font_file = s;
@@ -151,7 +148,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
                 config.font_size = atoi(s.c_str());
                 cpt++;
             }
-            break;
+            break;*/
 
         default:
             break;
@@ -173,7 +170,7 @@ void loadFileConfig_(LX_InternalConfig& config)
         return;
     }
 
-    _conf = {0,0,0,0,0,0,UTF8string(""),0,0,0};
+    _conf = {0,0,0,0,0,0,0,0};
     readFile_(f,config);
     f.close();
 }
