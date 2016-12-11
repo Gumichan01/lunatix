@@ -35,31 +35,6 @@ class LX_FileBuffer_;
 namespace LX_Mixer
 {
 
-/**
-*   @class LX_ChunkException
-*   @brief The exception class of LX_Chunk
-*   @deprecated The use of this class is deprecated.
-*   It will be removed at the next minor version
-*/
-class LX_ChunkException : public std::exception
-{
-    std::string _string_error;
-
-public:
-
-    /// Constructor
-    explicit LX_ChunkException(std::string err);
-    /// Copy constructor
-    LX_ChunkException(const LX_ChunkException& me);
-
-    /// Get the error message
-    const char * what() const noexcept;
-
-    /// Destructor
-    ~LX_ChunkException() noexcept;
-};
-
-
 class LX_Chunk_;
 
 /**

@@ -27,19 +27,6 @@
 namespace LX_Mixer
 {
 
-LX_ChunkException::LX_ChunkException(std::string err) : _string_error(err) {}
-
-LX_ChunkException::LX_ChunkException(const LX_ChunkException& me)
-    : _string_error(me._string_error) {}
-
-const char * LX_ChunkException::what() const noexcept
-{
-    return _string_error.c_str();
-}
-
-LX_ChunkException::~LX_ChunkException() noexcept {}
-
-
 /* LX_Chunk (private implementation) */
 
 class LX_Chunk_
