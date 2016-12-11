@@ -42,8 +42,6 @@ int main(int argc, char **argv)
     bool sound   = configuration->getAudioFlag();
     bool gamepad = configuration->getGamepadFlag();
     bool opengl  = configuration->getOpenGLFlag();
-    string font  = configuration->getFontFile();
-    int size     = configuration->getFontSize();
     int w        = configuration->getWinWidth();
     int h        = configuration->getWinHeight();
 
@@ -53,7 +51,6 @@ int main(int argc, char **argv)
          << "audio : " << boolState(sound) << endl
          << "gamepad : " << boolState(gamepad) << endl
          << "opengl : " << boolState(opengl) << endl
-         << "font : " << font << endl << "size : " << size << endl
          << "width : " << w << endl << "height : " << h << endl;
 
     LX_Quit();
