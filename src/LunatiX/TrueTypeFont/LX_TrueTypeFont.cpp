@@ -59,8 +59,6 @@ struct LX_Font_
     LX_Colour _font_colour;                  /* The font colour     */
     std::unique_ptr<LX_FileIO::LX_FileBuffer> _font_buffer;
 
-    LX_Font_() : _font_str(""), _font_size(0), _font_colour({0,0,0,0}),
-    _font_buffer(nullptr) {}
 
     LX_Font_(const std::string& s, unsigned int sz, LX_Colour c)
         : _font_str(s), _font_size(sz), _font_colour(c), _font_buffer(nullptr) {}
@@ -136,7 +134,7 @@ struct LX_Font_
     }
 };
 
-
+/*
 LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
     : _fimpl(new LX_Font_())
 {
@@ -165,7 +163,7 @@ LX_Font::LX_Font(const LX_Colour& colour, unsigned int size)
 
 
 LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour)
-    : LX_Font(font_file,colour,LX_TTF_DEFAULT_SIZE) {}
+    : LX_Font(font_file,colour,LX_TTF_DEFAULT_SIZE) {}*/
 
 
 LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
