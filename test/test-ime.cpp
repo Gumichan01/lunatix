@@ -4,6 +4,7 @@
 
 using namespace LX_Event;
 
+const char * fname = "font/AozoraMinchoMedium.ttf";
 void generateInput();
 
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
@@ -14,7 +15,8 @@ class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
-        : LX_Text::LX_RedrawCallback(), _w(win), _font(LX_Colour {255,255,255,0}) {}
+        : LX_Text::LX_RedrawCallback(), _w(win),
+        _font(fname, {255,255,255,0}, 32) {}
 
     void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
                      size_t cursor, size_t prev_cur)

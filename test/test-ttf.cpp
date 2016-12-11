@@ -13,6 +13,8 @@ void test_SolidText();
 void test_ShadedText();
 void test_BlendedText();
 
+const char * fname = "font/AozoraMinchoMedium.ttf";
+
 int main(int argc, char **argv)
 {
     bool err = LX_Init();
@@ -43,20 +45,20 @@ void test_font(void)
 
     LX_Log::log("Load an LX_Font object using RAII");
     {
-        LX_Font f1(LX_Configuration::getInstance()->getFontFile(),colour);
+        LX_Font f1(fname,colour,0);
         LX_Log::log("SUCCESS - Loaded with success");
     }
 
     LX_Log::log("Load another LX_Font object using RAII");
     {
-        LX_Font f2(LX_Configuration::getInstance()->getFontFile(),colour,48);
+        LX_Font f2(fname,colour,0);
         LX_Log::log("SUCCESS - Loaded with success");
     }
 
     {
         try
         {
-            LX_Font ferror("invalid_file",colour);
+            LX_Font ferror("invalid_file",colour,0);
             LX_Log::log("FAILURE - o_O. Expected: IOException, got: a valid object");
         }
         catch(IOException &)
@@ -65,7 +67,7 @@ void test_font(void)
         }
     }
 
-    font = new LX_Font(colour);
+    font = new LX_Font(fname,colour,0);
 
     if(font == nullptr)
         LX_Log::log("FAILURE - Font not null");
@@ -86,7 +88,7 @@ void test_SolidText()
     winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(LX_Configuration::getInstance()->getFontFile(), colour[0], 32);
+    LX_Font font(fname, colour[0], 32);
 
     LX_Log::log("Load a solid text image and display it");
 
@@ -148,7 +150,7 @@ void test_ShadedText()
     winfo.title = "LunatiX - Test True Type Font - Shaded text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour,32);
+    LX_Font font(fname,colour,32);
 
     LX_Log::log("Load a shaded text image and display it");
 
@@ -208,7 +210,7 @@ void test_BlendedText()
     winfo.title = "LunatiX - Test True Type Font - Blended text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(LX_Configuration::getInstance()->getFontFile(),colour, 32);
+    LX_Font font(fname,colour, 32);
 
     LX_Log::log("Load a solid text image and display it");
 
