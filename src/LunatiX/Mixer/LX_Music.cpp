@@ -43,19 +43,6 @@ LX_BufferedImage *_loadImage(std::string file,
 namespace LX_Mixer
 {
 
-LX_MusicException::LX_MusicException(std::string err) : _string_error(err) {}
-
-LX_MusicException::LX_MusicException(const LX_MusicException& me)
-    : _string_error(me._string_error) {}
-
-const char * LX_MusicException::what() const noexcept
-{
-    return _string_error.c_str();
-}
-
-LX_MusicException::~LX_MusicException() noexcept {}
-
-
 /* Music tag */
 
 LX_MusicTag::LX_MusicTag(): img(nullptr) {}
@@ -196,7 +183,6 @@ void LX_Music::fadeIn(int ms)
     else
         LX_SetError("Cannot play an unloaded music");
 }
-
 
 void LX_Music::fadeInPos(int ms,int pos)
 {

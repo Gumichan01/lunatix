@@ -38,30 +38,6 @@ namespace LX_Mixer
 {
 
 /**
-*   @class LX_MusicException
-*   @brief The exception class of LX_Music
-*   @deprecated The use of this class is deprecated.
-*   It will be removed at the next minor version
-*/
-class LX_MusicException : public std::exception
-{
-    std::string _string_error;
-
-public:
-
-    /// Constructor
-    explicit LX_MusicException(std::string err);
-    /// Copy constructor
-    LX_MusicException(const LX_MusicException& me);
-
-    /// Get the error message
-    const char * what() const noexcept;
-
-    /// Destructor
-    ~LX_MusicException() noexcept;
-};
-
-/**
 *   @struct LX_MusicTag
 *   @brief High-level music metadata
 *
