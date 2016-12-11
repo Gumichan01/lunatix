@@ -71,9 +71,6 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
     const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+",std::regex::extended);
     const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
 
-    //const std::regex FONT_REG("font=.+",std::regex::extended);
-    //const std::regex SIZE_REG("size=.+",std::regex::extended);
-
     int cpt = 0;
     std::string line;
 
@@ -133,22 +130,6 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
                 cpt++;
             }
             break;
-
-        /*case 6:
-            if(std::regex_match(line,FONT_REG))
-            {
-                config.font_file = s;
-                cpt++;
-            }
-            break;
-
-        case 7:
-            if(std::regex_match(line,SIZE_REG))
-            {
-                config.font_size = atoi(s.c_str());
-                cpt++;
-            }
-            break;*/
 
         default:
             break;
