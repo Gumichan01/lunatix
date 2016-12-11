@@ -168,7 +168,7 @@ void test_ShadedText()
 
         simg2.setTextColour({255,0,255,0});
         simg2.setPosition(100,400);
-        simg2.setText(str,bg2,48);
+        simg2.setText(str,bg2);
 
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
