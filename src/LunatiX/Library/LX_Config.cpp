@@ -265,16 +265,6 @@ bool LX_Configuration::getOpenGLFlag() const
     return _conf.opengl_flag;
 }
 
-const char * LX_Configuration::getFontFile() const
-{
-    return _conf.font_file.utf8_str();
-}
-
-int LX_Configuration::getFontSize() const
-{
-    return _conf.font_size;
-}
-
 int LX_Configuration::getWinWidth() const
 {
     return _conf.width;
