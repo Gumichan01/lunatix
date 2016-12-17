@@ -38,6 +38,7 @@ int main(int argc, char **argv)
         cout << "SUCCESS - The configuration class is instantiated as a singleton" << endl;
 
     bool video   = configuration->getVideoFlag();
+    bool vsync   = configuration->getVSyncFlag();
     bool ttfont  = configuration->getTTFFlag();
     bool sound   = configuration->getAudioFlag();
     bool gamepad = configuration->getGamepadFlag();
@@ -46,12 +47,13 @@ int main(int argc, char **argv)
     int h        = configuration->getWinHeight();
 
     cout << "\n==== LunatiX configuration ==== \n" << endl
-         << "video : " << boolState(video) << endl
-         << "true type font : " << boolState(ttfont) << endl
-         << "audio : " << boolState(sound) << endl
-         << "gamepad : " << boolState(gamepad) << endl
-         << "opengl : " << boolState(opengl) << endl
-         << "width : " << w << endl << "height : " << h << endl;
+         << "video: " << boolState(video) << endl
+         << "true type font: " << boolState(ttfont) << endl
+         << "vsync: " << boolState(vsync) << endl
+         << "audio: " << boolState(sound) << endl
+         << "gamepad: " << boolState(gamepad) << endl
+         << "opengl: " << boolState(opengl) << endl
+         << "width: " << w << endl << "height : " << h << endl;
 
     LX_Quit();
     LX_Log::log(" ==== END Test Config ==== \n");
