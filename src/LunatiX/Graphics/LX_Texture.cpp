@@ -380,10 +380,10 @@ LX_StreamingTexture::~LX_StreamingTexture()
 
 LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, uint32_t format)
-    : LX_Texture(w,format), _text(""), _font(font), _size(0), colour({0,0,0,0}),
+    : LX_Texture(w,format), _text(""), _font(font), _size(0), _colour({0,0,0,0}),
 _dimension({0,0,0,0})
 {
-    colour = _font.getColour_();
+    _colour = _font.getColour_();
     _size = _font.getSize_();
 }
 
@@ -472,9 +472,9 @@ void LX_TextTexture::setSize(unsigned int sz)
 
 void LX_TextTexture::setTextColour(LX_Colour c)
 {
-    if(colour != c)
+    if(_colour != c)
     {
-        colour = c;
+        _colour = c;
         updateTexture_();
     }
 }
@@ -515,7 +515,7 @@ void LX_SolidTextTexture::updateTexture_()
     const LX_Colour tmp = _font.getColour_();
 
     SDL_DestroyTexture(_texture);
-    _font.setColour_(colour);
+    _font.setColour_(_colour);
     _texture = _font.drawSolidText_(_text,_size,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
     _font.setColour_(tmp);
@@ -552,7 +552,7 @@ void LX_ShadedTextTexture::updateTexture_()
     const LX_Colour tmp = _font.getColour_();
 
     SDL_DestroyTexture(_texture);
-    _font.setColour_(colour);
+    _font.setColour_(_colour);
     _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
     _font.setColour_(tmp);
@@ -641,7 +641,7 @@ void LX_BlendedTextTexture::updateTexture_()
     const LX_Colour tmp = _font.getColour_();
 
     SDL_DestroyTexture(_texture);
-    _font.setColour_(colour);
+    _font.setColour_(_colour);
     _texture = _font.drawBlendedText_(_text,_size,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
     _font.setColour_(tmp);

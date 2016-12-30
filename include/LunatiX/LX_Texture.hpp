@@ -523,7 +523,7 @@ protected:
     UTF8string _text;
     LX_TrueTypeFont::LX_Font& _font;
     unsigned int _size;
-    LX_Colour colour;
+    LX_Colour _colour;
     LX_AABB _dimension;
 
     virtual void updateTexture_() = 0;
