@@ -29,10 +29,10 @@
 *
 *   Internal structure:
 *
-*      uint8_t r;
-*      uint8_t g;
-*      uint8_t b;
-*      uint8_t a;  // 255: opaque; 0: transparent
+*       uint8_t r;
+*       uint8_t g;
+*       uint8_t b;
+*       uint8_t a;  // 255: opaque; 0: transparent
 *
 *   Examples:
 *
