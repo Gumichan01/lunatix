@@ -444,9 +444,12 @@ void LX_TextTexture::setText(const std::string& text, unsigned int sz)
 
 void LX_TextTexture::setText(const UTF8string& text, unsigned int sz)
 {
-    _text = text;
-    _size = sz;
-    updateTexture_();
+    if(text != _text || _size != sz)
+    {
+        _text = text;
+        _size = sz;
+        updateTexture_();
+    }
 }
 
 
@@ -459,15 +462,21 @@ void LX_TextTexture::setPosition(int x, int y)
 
 void LX_TextTexture::setSize(unsigned int sz)
 {
-    _size = sz;
-    updateTexture_();
+    if(_size != sz)
+    {
+        _size = sz;
+        updateTexture_();
+    }
 }
 
 
 void LX_TextTexture::setTextColour(LX_Colour c)
 {
-    colour = c;
-    updateTexture_();
+    if(colour != c)
+    {
+        colour = c;
+        updateTexture_();
+    }
 }
 
 
@@ -581,17 +590,23 @@ void LX_ShadedTextTexture::setText(const std::string& text, LX_Colour bg, unsign
 
 void LX_ShadedTextTexture::setText(const UTF8string& text, LX_Colour bg, unsigned int sz)
 {
-    _text = text;
-    _size = sz;
-    _bgcolour = bg;
-    updateTexture_();
+    if(_text != text || _size != sz || _bgcolour != bg)
+    {
+        _text = text;
+        _size = sz;
+        _bgcolour = bg;
+        updateTexture_();
+    }
 }
 
 
 void LX_ShadedTextTexture::setBgColour(LX_Colour bg)
 {
-    _bgcolour = bg;
-    updateTexture_();
+    if(_bgcolour != bg)
+    {
+        _bgcolour = bg;
+        updateTexture_();
+    }
 }
 
 
