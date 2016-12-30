@@ -25,7 +25,7 @@
 /**
 *   @ingroup Graphics
 *   @typedef LX_Colour
-*   @brief Colour representation
+*   @brief Colour representation (in 8-bit notation)
 *
 *   Internal structure:
 *
@@ -71,6 +71,38 @@ struct LX_glColour
     float a;    /**< Alpha    */
 };
 
+
+/**
+*   @ingroup Graphics
+*   @fn inline bool operator ==(const LX_Colour& a, const LX_Colour& b)
+*
+*   Check if two colors are identical
+*
+*   @param [in] a The colour in 8-bit notation
+*   @param [in] b Another colour in 8-bit notation
+*   @return TRUE if they are identical, FALSE otherwise
+*
+*/
+inline bool operator ==(const LX_Colour& a, const LX_Colour& b)
+{
+    return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
+}
+
+/**
+*   @ingroup Graphics
+*   @fn inline bool operator !=(const LX_Colour& a, const LX_Colour& b)
+*
+*   Check if two colors are different
+*
+*   @param [in] a The colour in 8-bit notation
+*   @param [in] b Another colour in 8-bit notation
+*   @return TRUE if they are different, FALSE otherwise
+*
+*/
+inline bool operator !=(const LX_Colour& a, const LX_Colour& b)
+{
+    return !(a == b);
+}
 
 /**
 *   @ingroup Graphics
