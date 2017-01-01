@@ -1,6 +1,6 @@
 
 LunatiX
-Copyright (C) 2016 Luxon Jean-Pierre
+Copyright © 2017 Luxon Jean-Pierre
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages

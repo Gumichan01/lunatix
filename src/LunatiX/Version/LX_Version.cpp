@@ -1,6 +1,6 @@
 
 /*
-*   Copyright (C) 2016 Luxon Jean-Pierre
+*   Copyright © 2017 Luxon Jean-Pierre
 *   https://gumichan01.github.io/
 *
 *   LunatiX is a free, SDL2-based library.
@@ -32,8 +32,8 @@ namespace
 {
 const short LX_MAJOR_VERSION = 0;
 const short LX_MINOR_VERSION = 10;
-const short LX_PATCH_VERSION = 0;
-const char * LX_COPYRIGHT    = "Copyright (C) 2016";
+const short LX_PATCH_VERSION = 1;
+const char * LX_COPYRIGHT    = "Copyright © 2017";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 };
 
