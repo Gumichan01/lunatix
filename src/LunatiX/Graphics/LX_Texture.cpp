@@ -81,7 +81,7 @@ namespace LX_Graphics
 
 /* LX_Texture */
 
-//  protected zero-argument construtor
+//  protected zero-argument constructor
 LX_Texture::LX_Texture(LX_Win::LX_Window& w, uint32_t format)
     : _texture(nullptr), _win(w), _format(format) {}
 
