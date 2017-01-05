@@ -63,6 +63,7 @@ const short LX_MIRROR_VERTICAL   = 2;
 /**
 *   @class LX_Texture
 *   @brief The texture object
+*
 *   This class describes a texture.
 */
 class LX_Texture
@@ -331,6 +332,7 @@ public:
 /**
 *   @class LX_AnimatedSprite
 *   @brief The animated sprite
+*
 *   This class describes a sprite sheet used for animation.
 */
 class LX_AnimatedSprite: public LX_Sprite
@@ -388,6 +390,7 @@ public:
 /**
 *   @class LX_BufferedImage
 *   @brief The Buffered image
+*
 *   This class describes an image stored in memory.
 *   Any texture can be generated from this buffered.
 */
@@ -462,7 +465,8 @@ public:
 
 /**
 *   @class LX_StreamingTexture
-*   @brief A special texture for texture streaming
+*   @brief A special texture for texture streaming.
+*
 *   This class describes a texture for streaming.
 */
 class LX_StreamingTexture: public LX_Texture
@@ -512,7 +516,8 @@ public:
 
 /**
 *   @class LX_TextTexture
-*   @brief The text texture
+*   @brief The text texture.
+*
 *   This abstract class describes a texture build from a text.
 */
 class LX_TextTexture: public LX_Texture
@@ -623,13 +628,10 @@ public:
     void setPosition(int x, int y);
 
     /**
-    *   @fn virtual void setText(const std::string& text, unsigned int sz)
+    *   @fn virtual void setText(const std::string& text)
     *
     *   Set the text to display
-    *
     *   @param [in] text The text to set
-    *   @param [in] sz The new size of the text
-    *
     *   @note This function updates the texture of the text
     */
     virtual void setText(const std::string& text);
@@ -638,9 +640,7 @@ public:
     *   @fn virtual void setText(const UTF8string& text)
     *
     *   Set the text to display
-    *
     *   @param [in] text The text to set
-    *
     *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text);
