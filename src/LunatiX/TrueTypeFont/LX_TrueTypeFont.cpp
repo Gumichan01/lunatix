@@ -170,9 +170,7 @@ int LX_Font::sizeOfText_(std::string text, int& w, int& h) const
 int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& w, int& h) const
 {
     int sz;
-    TTF_Font *ttf = nullptr;
-
-    ttf = _fimpl->createInternalFont_(static_cast<int>(size));
+    TTF_Font *ttf = _fimpl->createInternalFont_(static_cast<int>(size));
 
     if(ttf == nullptr)
         return -1;

@@ -177,7 +177,7 @@ struct LX_Window_
     {
         int err = 0;
         int w, h;
-        SDL_Surface *sshot = nullptr;
+        SDL_Surface *sshot;
 
         SDL_GetWindowSize(_window,&w,&h);
         sshot = SDL_CreateRGBSurface(0,w,h,LX_ARGB_DEPTH,

@@ -47,8 +47,7 @@ double radianToDegree(const double angle)
 // Load a image from a file
 SDL_Surface * loadSurface_(const std::string& filename, uint32_t format)
 {
-    SDL_Surface *loaded = nullptr;
-    loaded = IMG_Load(filename.c_str());
+    SDL_Surface *loaded = IMG_Load(filename.c_str());
 
     if(loaded == nullptr)
         return nullptr;
@@ -62,14 +61,12 @@ SDL_Surface * loadSurface_(const std::string& filename, uint32_t format)
 SDL_Texture * loadTexture_(const std::string& filename,
                            uint32_t format, SDL_Renderer *r)
 {
-    SDL_Surface *tmp_s = nullptr;
-    SDL_Texture *tmp_t = nullptr;
-    tmp_s = loadSurface_(filename, format);
+    SDL_Surface *tmp_s = loadSurface_(filename, format);
 
     if(tmp_s == nullptr)
         return nullptr;
 
-    tmp_t = SDL_CreateTextureFromSurface(r,tmp_s);
+    SDL_Texture *tmp_t = SDL_CreateTextureFromSurface(r,tmp_s);
     SDL_FreeSurface(tmp_s);
     return tmp_t;
 }
