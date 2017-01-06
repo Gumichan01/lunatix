@@ -569,7 +569,6 @@ public:
     *   @brief Constructor
     *
     *   @param [in] text The text that will be drawn on the screen
-    *   @param [in] sz The size of the text
     *   @param [in] font The font that will be used for drawing the text
     *   @param [in] w The window the texture will be drawn on → see *draw()*
     *   @param [in] format Optional argument that specified the format of the texture
