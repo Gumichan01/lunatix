@@ -403,7 +403,11 @@ LX_TextTexture::LX_TextTexture(const std::string& text, unsigned int sz,
 LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
                                LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, uint32_t format)
-    : LX_Texture(w,format), _text(text), _font(font), _size(sz), _dimension({0,0,0,0}) {}
+    : LX_Texture(w,format), _text(text), _font(font), _size(sz),
+    _colour(_font.getColour_()), _dimension({0,0,0,0})
+{
+    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
+}
 
 
 void LX_TextTexture::draw()
@@ -507,7 +511,7 @@ LX_SolidTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
 LX_SolidTextTexture::
 LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                     LX_Win::LX_Window& w, uint32_t format)
-    : LX_TextTexture(text,font,w,format) {}
+    : LX_SolidTextTexture(text,font.getSize_(),font,w,format) {}
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, unsigned int sz,
@@ -523,7 +527,6 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text,sz,font,w,format)
 {
     _texture = _font.drawSolidText_(_text,_size,_win);
-    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 
@@ -560,7 +563,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                      LX_Win::LX_Window& w,uint32_t format)
     : LX_TextTexture(text,sz,font,w,format), _bgcolour(c)
 {
-    updateTexture_();
+    _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
 }
 
 
@@ -649,7 +652,6 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text,sz,font,w,format)
 {
     _texture = _font.drawBlendedText_(_text,_size,_win);
-    _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
 }
 
 
