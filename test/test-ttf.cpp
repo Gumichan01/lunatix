@@ -13,7 +13,13 @@ void test_SolidText();
 void test_ShadedText();
 void test_BlendedText();
 
+
+#ifdef __WIN32__
+const char * fname = "font\\AozoraMinchoMedium.ttf";
+#else
 const char * fname = "font/AozoraMinchoMedium.ttf";
+#endif
+
 
 int main(int argc, char **argv)
 {
@@ -47,6 +53,8 @@ void test_font(void)
     {
         LX_Font f1(fname,colour,0);
         LX_Log::log("SUCCESS - Loaded with success");
+        LX_Log::log("font file: %s",f1.getName().utf8_str());
+        LX_Log::log("font file with path: %s",f1.getName(true).utf8_str());
     }
 
     LX_Log::log("Load another LX_Font object using RAII");
@@ -80,7 +88,8 @@ void test_font(void)
 
 void test_SolidText()
 {
-    LX_Colour colour[] = {{255,255,255,0}, {255,0,255,0}};
+    LX_Colour dcolour = {255,0,255,0};
+    LX_Colour bcolour = {255,255,255,0};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -88,32 +97,33 @@ void test_SolidText()
     winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(fname, colour[0], 32);
+    LX_Font font(fname, dcolour, 32);
 
     LX_Log::log("Load a solid text image and display it");
 
     {
-        LX_Graphics::LX_SolidTextTexture simg(font,win);
+        LX_Graphics::LX_SolidTextTexture simg(str,font,win);
         LX_Graphics::LX_SolidTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
+        LX_Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
-        simg.setText(str);
+        simg.setTextColour(bcolour);
         simg.setPosition(100,100);
         LX_Log::log("Done");
+        LX_Log::log("text: %s", simg.getText().utf8_str());
         win.clearWindow();
-        LX_Log::log("Update");
+        LX_Log::log("Draw text");
         simg.draw();
         win.update();
         LX_Timer::delay(1024);
 
-        simg2.setTextColour(colour[1]);
         simg2.setPosition(100,400);
         simg2.setText(str, 48);
 
         LX_Log::log("Size: 32 → 72");
         for(unsigned int j = 32; j < 74; j += 2)
         {
-            simg.setSize(j);
+            simg.setTextSize(j);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -123,7 +133,7 @@ void test_SolidText()
         LX_Log::log("Done");
 
         simg.setPosition(256,256);
-        simg.setSize(32);
+        simg.setTextSize(32);
 
         LX_Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
@@ -155,16 +165,18 @@ void test_ShadedText()
     LX_Log::log("Load a shaded text image and display it");
 
     {
-        LX_Graphics::LX_ShadedTextTexture simg(str,32,font,bg,win);
+        LX_Graphics::LX_ShadedTextTexture simg(str,font,bg,win);
         LX_Graphics::LX_ShadedTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
+        LX_Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
-        simg.setText(str);
         simg.setPosition(100,100);
         LX_Log::log("Done");
+        LX_Log::log("text: %s", simg.getText().utf8_str());
         win.clearWindow();
-        LX_Log::log("Update");
+        LX_Log::log("Draw the text");
         simg.draw();
+        LX_Log::log("Update");
         win.update();
         LX_Timer::delay(1024);
 
@@ -175,7 +187,7 @@ void test_ShadedText()
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
-            simg.setSize(j);
+            simg.setTextSize(j);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -185,7 +197,7 @@ void test_ShadedText()
         LX_Log::log("Done");
 
         simg.setPosition(256,256);
-        simg.setSize(32);
+        simg.setTextSize(32);
 
         LX_Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
@@ -215,16 +227,17 @@ void test_BlendedText()
     LX_Log::log("Load a solid text image and display it");
 
     {
-        LX_Graphics::LX_BlendedTextTexture simg(font,win);
+        LX_Graphics::LX_BlendedTextTexture simg(str,font,win);
         LX_Graphics::LX_BlendedTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
         LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
-        simg.setText(str);
         simg.setPosition(100,100);
         LX_Log::log("Done");
+        LX_Log::log("text: %s", simg.getText().utf8_str());
         win.clearWindow();
-        LX_Log::log("Update");
+        LX_Log::log("Draw the text");
         simg.draw();
+        LX_Log::log("Update");
         win.update();
         LX_Timer::delay(1024);
 
@@ -235,7 +248,7 @@ void test_BlendedText()
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
-            simg.setSize(j);
+            simg.setTextSize(j);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -245,7 +258,7 @@ void test_BlendedText()
         LX_Log::log("Done");
 
         simg.setPosition(256,256);
-        simg.setSize(32);
+        simg.setTextSize(32);
 
         LX_Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
