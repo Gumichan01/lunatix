@@ -792,11 +792,21 @@ public:
                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
+    LX_ShadedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                         LX_Colour& c, LX_Win::LX_Window& w,
+                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /// Constructor using the utf-8 text
+    LX_ShadedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                         LX_Colour& c, LX_Win::LX_Window& w,
+                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /// Constructor using the text and the text size
     LX_ShadedTextTexture(const std::string& text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    /// Constructor using the utf-8 text
+    /// Constructor using the utf-8 text and the text size
     LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
@@ -892,11 +902,19 @@ public:
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
+    LX_BlendedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /// Constructor using the utf-8 text
+    LX_BlendedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /// Constructor using the text with the text size
     LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    /// Constructor using the utf-8 text
+    /// Constructor using the utf-8 text with the text size
     LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           uint32_t format=LX_PIXELFORMAT_RGBA8888);

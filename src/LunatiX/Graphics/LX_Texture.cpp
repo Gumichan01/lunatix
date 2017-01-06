@@ -507,19 +507,19 @@ LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                     LX_Win::LX_Window& w, uint32_t format)
-    : LX_SolidTextTexture(UTF8string(text),font,w,format) {}
+    : LX_SolidTextTexture(UTF8string(text), font, w, format) {}
 
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                     LX_Win::LX_Window& w, uint32_t format)
-    : LX_SolidTextTexture(text,font.getSize_(),font,w,format) {}
+    : LX_SolidTextTexture(text, font.getSize_(), font, w, format) {}
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, unsigned int sz,
                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                     uint32_t format)
-    : LX_SolidTextTexture(UTF8string(text),sz,font,w,format) {}
+    : LX_SolidTextTexture(UTF8string(text), sz, font, w, format) {}
 
 
 LX_SolidTextTexture::
@@ -553,16 +553,27 @@ LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
 
 
 LX_ShadedTextTexture::
+LX_ShadedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                     LX_Colour& c, LX_Win::LX_Window& w, uint32_t format)
+    : LX_ShadedTextTexture(UTF8string(text), font, c, w, format) {}
+
+LX_ShadedTextTexture::
+LX_ShadedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                     LX_Colour& c, LX_Win::LX_Window& w, uint32_t format)
+    : LX_ShadedTextTexture(text, font.getSize_(), font, c, w,format) {}
+
+
+LX_ShadedTextTexture::
 LX_ShadedTextTexture(const std::string& text, unsigned int sz,
                      LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                      LX_Win::LX_Window& w, uint32_t format)
-    : LX_ShadedTextTexture(UTF8string(text),sz,font,c,w,format) {}
+    : LX_ShadedTextTexture(UTF8string(text), sz, font, c, w, format) {}
 
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                      LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
-                     LX_Win::LX_Window& w,uint32_t format)
+                     LX_Win::LX_Window& w, uint32_t format)
     : LX_TextTexture(text,sz,font,w,format), _bgcolour(c)
 {
     _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
@@ -641,11 +652,21 @@ LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
 
 
 LX_BlendedTextTexture::
+LX_BlendedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                      LX_Win::LX_Window& w, uint32_t format)
+    : LX_BlendedTextTexture(UTF8string(text), font, w, format) {}
+
+LX_BlendedTextTexture::
+LX_BlendedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                      LX_Win::LX_Window& w, uint32_t format)
+    : LX_BlendedTextTexture(text, font.getSize_(), font, w, format) {}
+
+
+LX_BlendedTextTexture::
 LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                       LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                       uint32_t format)
-    : LX_BlendedTextTexture(UTF8string(text),sz,font,w,format) {}
-
+    : LX_BlendedTextTexture(UTF8string(text), sz, font, w, format) {}
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
