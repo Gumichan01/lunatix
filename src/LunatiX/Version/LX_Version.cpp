@@ -23,16 +23,19 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+
 #include <iostream>
+#include <cstring>
 
 
 using namespace std;
 
 namespace
 {
-const short LX_MAJOR_VERSION = 0;
-const short LX_MINOR_VERSION = 10;
-const short LX_PATCH_VERSION = 1;
+const short LX_MAJOR_VERSION = 1;
+const short LX_MINOR_VERSION = 0;
+const short LX_PATCH_VERSION = 0;
+const char *LX_STATUS = "rc2";
 const char * LX_COPYRIGHT    = "Copyright © 2017";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 };
@@ -40,26 +43,27 @@ const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 namespace LX_VersionInfo
 {
 
-void LX_EngineInfo()
+void info()
 {
     LX_Version luna;
-    LX_EngineVersion(luna);
+    getVersion(luna);
 
-    cout << endl << "LunatiX - Version " << luna.major
-         << "."  << luna.minor << "." <<  luna.patch << endl
-         << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
+    cout << endl << "LunatiX v" << luna.major
+         << "."  << luna.minor << "." <<  luna.patch << "-" << luna.status
+         << endl << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
 }
 
 
-void LX_EngineVersion(LX_Version& version)
+void getVersion(LX_Version& version)
 {
     version.major = LX_MAJOR_VERSION;
     version.minor = LX_MINOR_VERSION;
     version.patch = LX_PATCH_VERSION;
+    strcpy(version.status, LX_STATUS);
 }
 
 
-void LX_VersionDependencies()
+void dependencies()
 {
     // Information about SDL2 and LunatiX
     const SDL_version *img_linked = IMG_Linked_Version();

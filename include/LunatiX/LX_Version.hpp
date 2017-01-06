@@ -38,26 +38,27 @@ struct LX_Version
     short major;         /**< Information about the major version */
     short minor;         /**< Information about the minor version */
     short patch;         /**< Information about the patch version */
+    char status[8];
 };
 
 /**
-*   @fn void LX_EngineInfo()
+*   @fn void info()
 *   Get information about the library
 */
-void LX_EngineInfo();
+void info();
 
 /**
-*   @fn void LX_EngineVersion(LX_Version& version)
+*   @fn void getVersion(LX_Version& version)
 *   Get the version of the library
 *   @param [out] version The structure to fill in.
 */
-void LX_EngineVersion(LX_Version& version);
+void getVersion(LX_Version& version);
 
 /**
-*   @fn void LX_VersionDependencies()
+*   @fn void dependencies()
 *   Display information about the library and its dependencies
 */
-void LX_VersionDependencies();
+void dependencies();
 
 };
 
