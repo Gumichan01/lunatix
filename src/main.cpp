@@ -7,6 +7,7 @@
 #include <LunatiX/LX_Event.hpp>
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Log.hpp>
+#include <LunatiX/LX_Version.hpp>
 
 #define UNUSED(X) (void)(X)
 
@@ -57,6 +58,7 @@ int main(int argc, char** argv)
         LX_Timer::delay(33);
     }
 
+    LX_VersionInfo::info();
     LX_Quit();
     return 0;
 }
