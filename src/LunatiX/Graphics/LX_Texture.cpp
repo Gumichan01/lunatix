@@ -126,7 +126,7 @@ bool LX_Texture::unbind()
 
 LX_Texture::~LX_Texture()
 {
-    SDL_DestroyTexture(_texture);
+    if(_texture != nullptr) SDL_DestroyTexture(_texture);
 }
 
 
@@ -545,7 +545,7 @@ void LX_SolidTextTexture::updateTexture_()
 {
     const LX_Colour tmp = _font.getColour_();
 
-    SDL_DestroyTexture(_texture);
+    if(_texture != nullptr) SDL_DestroyTexture(_texture);
     _font.setColour_(_colour);
     _texture = _font.drawSolidText_(_text,_size,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
@@ -593,7 +593,7 @@ void LX_ShadedTextTexture::updateTexture_()
 {
     const LX_Colour tmp = _font.getColour_();
 
-    SDL_DestroyTexture(_texture);
+    if(_texture != nullptr) SDL_DestroyTexture(_texture);
     _font.setColour_(_colour);
     _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
@@ -691,7 +691,7 @@ void LX_BlendedTextTexture::updateTexture_()
 {
     const LX_Colour tmp = _font.getColour_();
 
-    SDL_DestroyTexture(_texture);
+    if(_texture != nullptr) SDL_DestroyTexture(_texture);
     _font.setColour_(_colour);
     _texture = _font.drawBlendedText_(_text,_size,_win);
     _font.sizeOfText_(_text,_size,_dimension.w,_dimension.h);
