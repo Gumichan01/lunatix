@@ -709,14 +709,14 @@ public:
     */
     virtual void setText(const UTF8string& text, unsigned int sz);
     /**
-    *   @fn virtual void setSize(unsigned int sz)
+    *   @fn virtual void setTextSize(unsigned int sz)
     *
     *   Set the size of the text that will be displayed
     *
     *   @param [in] sz The new size of the text
     *   @note This function updates the texture of the text
     */
-    virtual void setSize(unsigned int sz);
+    virtual void setTextSize(unsigned int sz);
 
     /**
     *   @fn virtual void setTextColour(LX_Colour c)
@@ -899,7 +899,7 @@ public:
 *   but very nicely drawn on the screen.
 *
 *   Using this class for drawing text should be very slow, in particular if
-*   you call LX_BlendedImage::setText() and LX_BlendedImage::setSize() frequently.
+*   you call LX_BlendedImage::setText() and LX_BlendedImage::setTextSize() frequently.
 */
 class LX_BlendedTextTexture: public LX_TextTexture
 {

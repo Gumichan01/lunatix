@@ -479,7 +479,7 @@ void LX_TextTexture::setPosition(int x, int y)
 }
 
 
-void LX_TextTexture::setSize(unsigned int sz)
+void LX_TextTexture::setTextSize(unsigned int sz)
 {
     if(_size != sz)
     {
