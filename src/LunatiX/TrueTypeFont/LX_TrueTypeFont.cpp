@@ -20,6 +20,7 @@
 
 #include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_FileBuffer.hpp>
+#include <LunatiX/LX_FileSystem.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Config.hpp>
 
@@ -336,6 +337,16 @@ void LX_Font::setColour_(const LX_Colour& colour)
     _fimpl->_font_colour = colour;
 }
 
+UTF8string LX_Font::getName(bool with_path)
+{
+    using namespace LX_FileSystem;
+    return with_path ? _fimpl->_font_str : basename(_fimpl->_font_str);
+}
+
+LX_Colour LX_Font::getColour()
+{
+    return _fimpl->_font_colour;
+}
 
 LX_Font::~LX_Font()
 {
