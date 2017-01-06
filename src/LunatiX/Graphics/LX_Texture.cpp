@@ -385,16 +385,25 @@ _dimension({0,0,0,0})
 }
 
 
+LX_TextTexture::LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                               LX_Win::LX_Window& w, uint32_t format)
+    : LX_TextTexture(UTF8string(text), font.getSize_(), font, w, format) {}
+
+LX_TextTexture::LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                               LX_Win::LX_Window& w, uint32_t format)
+    : LX_TextTexture(text, font.getSize_(), font, w, format) {}
+
+
 LX_TextTexture::LX_TextTexture(const std::string& text, unsigned int sz,
                                LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, uint32_t format)
-    : LX_TextTexture(UTF8string(text),sz,font,w,format) {}
+    : LX_TextTexture(UTF8string(text), sz, font, w, format) {}
 
 
 LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
                                LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, uint32_t format)
-    : LX_Texture(w,format), _text(text), _font(font), _size(sz),_dimension({0,0,0,0}) {}
+    : LX_Texture(w,format), _text(text), _font(font), _size(sz), _dimension({0,0,0,0}) {}
 
 
 void LX_TextTexture::draw()
@@ -488,6 +497,17 @@ LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                     uint32_t format)
     : LX_TextTexture(font,w,format) {}
 
+
+LX_SolidTextTexture::
+LX_SolidTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                    LX_Win::LX_Window& w, uint32_t format)
+    : LX_SolidTextTexture(UTF8string(text),font,w,format) {}
+
+
+LX_SolidTextTexture::
+LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                    LX_Win::LX_Window& w, uint32_t format)
+    : LX_TextTexture(text,font,w,format) {}
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, unsigned int sz,

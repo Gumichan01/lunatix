@@ -550,6 +550,36 @@ public:
                    uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
+    *   @fn LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+    *                      LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *   @brief Constructor
+    *
+    *   @param [in] text The text that will be drawn on the screen
+    *   @param [in] font The font that will be used for drawing the text
+    *   @param [in] w The window the texture will be drawn on → see *draw()*
+    *   @param [in] format Optional argument that specified the format of the texture
+    *
+    *   @sa LX_Texture
+    */
+    LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                   LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+    /**
+    *   @fn LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+    *                      LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *   @brief Constructor
+    *
+    *   @param [in] text The text that will be drawn on the screen
+    *   @param [in] sz The size of the text
+    *   @param [in] font The font that will be used for drawing the text
+    *   @param [in] w The window the texture will be drawn on → see *draw()*
+    *   @param [in] format Optional argument that specified the format of the texture
+    *
+    *   @sa LX_Texture
+    */
+    LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                   LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /**
     *   @fn LX_TextTexture(const std::string& text, unsigned int sz,
     *                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
     *                     uint32_t format=LX_PIXELFORMAT_RGBA8888)
@@ -714,11 +744,19 @@ public:
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text
+    LX_SolidTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
+                        LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /// Constructor using the utf-8 text
+    LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+                        LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+
+    /// Constructor using the text and the text size
     LX_SolidTextTexture(const std::string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    /// Constructor using the utf-8 text
+    /// Constructor using the utf-8 text and the text size
     LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         uint32_t format=LX_PIXELFORMAT_RGBA8888);
