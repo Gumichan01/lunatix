@@ -643,9 +643,21 @@ public:
     /**
     *   @fn const UTF8string getText() const
     *   Get the text
-    *   @return the text
+    *   @return The text
     */
     const UTF8string getText() const;
+    /**
+    *   @fn unsigned int getTextSize() const
+    *   Get the text size
+    *   @return The text size
+    */
+    unsigned int getTextSize() const;
+    /**
+    *   @fn LX_Colour getTextColour() const
+    *   Get the text colour
+    *   @return The text size
+    */
+    LX_Colour getTextColour() const;
 
     /**
     *   @fn void setPosition(int x, int y)

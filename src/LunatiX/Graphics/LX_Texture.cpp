@@ -434,6 +434,15 @@ const UTF8string LX_TextTexture::getText() const
     return _text;
 }
 
+unsigned int LX_TextTexture::getTextSize() const
+{
+    return _size;
+}
+
+LX_Colour LX_TextTexture::getTextColour() const
+{
+    return _colour;
+}
 
 void LX_TextTexture::setText(const std::string& text)
 {
