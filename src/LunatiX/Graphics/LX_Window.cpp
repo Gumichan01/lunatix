@@ -34,7 +34,7 @@ namespace
 const int LX_ARGB_DEPTH = 32;                               /* Pixel depth (in bits) */
 const uint32_t LX_PIXEL_FORMAT = SDL_PIXELFORMAT_RGBA8888;  /* Pixel format          */
 
-const char * DEFAULT_TITLE = "LunatiX v0.10";
+const char * DEFAULT_TITLE = "LunatiX v1.0.0-rc2";
 const int DEFAULT_WIN_WIDTH = 640;
 const int DEFAULT_WIN_HEIGHT = 480;
 
