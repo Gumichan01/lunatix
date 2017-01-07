@@ -676,7 +676,6 @@ public:
     *   @note This function updates the texture of the text
     */
     virtual void setText(const std::string& text);
-
     /**
     *   @fn virtual void setText(const UTF8string& text)
     *
@@ -685,7 +684,6 @@ public:
     *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text);
-
     /**
     *   @fn virtual void setText(const std::string& text, unsigned int sz)
     *
@@ -707,6 +705,7 @@ public:
     *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text, unsigned int sz);
+
     /**
     *   @fn virtual void setTextSize(unsigned int sz)
     *
@@ -716,7 +715,6 @@ public:
     *   @note This function updates the texture of the text
     */
     virtual void setTextSize(unsigned int sz);
-
     /**
     *   @fn virtual void setTextColour(LX_Colour c)
     *
@@ -822,55 +820,13 @@ public:
                          LX_TrueTypeFont::LX_Font& font, LX_Colour& c,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual void setText(const std::string& text);
-    virtual void setText(const UTF8string& text);
-
     /**
-    *   @fn virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz)
+    *   @fn LX_Colour getBgColour()
     *
-    *   Set the text with its colour
-    *
-    *   @param [in] text The text to set
-    *   @param [in] bg The background colour of the text
-    *
-    *   @note This function updates the texture of the text
+    *   Get the colour of the background behind the text
+    *   @return THe background colour
     */
-    virtual void setText(const std::string& text, LX_Colour bg);
-    /**
-    *   @fn virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz)
-    *
-    *   Set the utf-8 text with its colour
-    *
-    *   @param [in] text The utf-8 text to set
-    *   @param [in] bg The background colour of the text
-    *
-    *   @note This function updates the texture of the text
-    */
-    virtual void setText(const UTF8string& text, LX_Colour bg);
-    /**
-    *   @fn virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz)
-    *
-    *   Set the text with its colour and its size
-    *
-    *   @param [in] text The text to set
-    *   @param [in] bg The background colour of the text
-    *   @param [in] sz The new size of the text
-    *
-    *   @note This function updates the texture of the text
-    */
-    virtual void setText(const std::string& text, LX_Colour bg, unsigned int sz);
-    /**
-    *   @fn virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz)
-    *
-    *   Set the utf-8 text with its colour and its size
-    *
-    *   @param [in] text The utf-8 text to set
-    *   @param [in] bg The background colour of the text
-    *   @param [in] sz The new size of the text
-    *
-    *   @note This function updates the texture of the text
-    */
-    virtual void setText(const UTF8string& text, LX_Colour bg, unsigned int sz);
+    LX_Colour getBgColour();
 
     /**
     *   @fn void setBgColour(LX_Colour bg)
@@ -878,9 +834,7 @@ public:
     *   Set the colour of the background behind the text
     *
     *   @param [in] bg The background colour of the text
-    *
-    *   @note 1 - This function updates the texture of the text
-    *   @note 2 - In order to
+    *   @note This function updates the texture of the text
     */
     void setBgColour(LX_Colour bg);
 
