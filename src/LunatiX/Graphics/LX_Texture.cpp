@@ -491,8 +491,7 @@ void LX_TextTexture::setTextSize(unsigned int sz)
     if(_size != sz)
     {
         _size = sz;
-        if(!_text.utf8_empty())
-            updateTexture_();
+        if(!_text.utf8_empty()) updateTexture_();
     }
 }
 
@@ -502,8 +501,7 @@ void LX_TextTexture::setTextColour(LX_Colour c)
     if(_colour != c)
     {
         _colour = c;
-        if(!_text.utf8_empty())
-            updateTexture_();
+        if(!_text.utf8_empty()) updateTexture_();
     }
 }
 
@@ -613,7 +611,7 @@ void LX_ShadedTextTexture::setBgColour(LX_Colour bg)
     if(_bgcolour != bg)
     {
         _bgcolour = bg;
-        updateTexture_();
+        if(!_text.utf8_empty()) updateTexture_();
     }
 }
 
