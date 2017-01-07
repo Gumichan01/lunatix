@@ -141,9 +141,9 @@ LX_FileBuffer::LX_FileBuffer(const UTF8string& filename,uint32_t offset,
     : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 
 
-LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage() const
+LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage(uint32_t format) const
 {
-    return new LX_Graphics::LX_BufferedImage(_bimpl->getSurfaceFromBuffer());
+    return new LX_Graphics::LX_BufferedImage(_bimpl->getSurfaceFromBuffer(), format);
 }
 
 

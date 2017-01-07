@@ -21,6 +21,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_Colour.hpp>
 #include <memory>
 
 
@@ -111,11 +112,13 @@ public:
     *
     *   Load a buffered image from the file buffer.
     *
+    *   @param [in] Optional argument that specified the format of the image
+    *
     *   @return A pointer to new an allocated buffered image on success,
     *          *nullptr* if the file buffer is not an image to load.
     *          Call LX_GetError() for more information.
     */
-    LX_Graphics::LX_BufferedImage * loadBufferedImage() const;
+    LX_Graphics::LX_BufferedImage * loadBufferedImage(uint32_t format=LX_PIXELFORMAT_RGBA8888) const;
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
     *

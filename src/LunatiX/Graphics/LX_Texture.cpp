@@ -262,7 +262,14 @@ LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
 
 
 LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, uint32_t format)
-    : _surface(s) {}
+    : _surface(nullptr)
+{
+    if(s->format->format != format)
+    {
+        _surface = SDL_ConvertSurfaceFormat(s,format,0);
+        SDL_FreeSurface(s);
+    }
+}
 
 
 bool LX_BufferedImage::isLoaded() const
