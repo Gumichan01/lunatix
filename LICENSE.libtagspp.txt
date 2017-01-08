@@ -1,4 +1,4 @@
-libtag++ - Copyright © 2016 Luxon JEAN-PIERRE
+libtag++ - Copyright © 2017 Luxon JEAN-PIERRE
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
