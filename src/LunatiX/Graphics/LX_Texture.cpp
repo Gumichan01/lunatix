@@ -188,7 +188,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
     : LX_Sprite(t,w,nullptr,format), _coordinates(coord), _SZ(coord.size()),
-      _delay(delay), _btime(0), _iteration(0), _started(false) {}
+      _delay(delay), _btime(0), _frame(0), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
@@ -196,7 +196,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
     : LX_Sprite(filename,w,nullptr,format), _coordinates(coord),
-      _SZ(coord.size()), _delay(delay), _btime(0), _iteration(0),
+      _SZ(coord.size()), _delay(delay), _btime(0), _frame(0),
       _started(false) {}
 
 
@@ -204,7 +204,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, uint32_t format)
     : LX_Sprite(filename,w,nullptr,format), _coordinates(coord),
-      _SZ(coord.size()), _delay(delay), _btime(0), _iteration(0),
+      _SZ(coord.size()), _delay(delay), _btime(0), _frame(0),
       _started(false) {}
 
 
@@ -237,13 +237,13 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
     {
         _btime = SDL_GetTicks();
 
-        if(_iteration == _SZ - 1)
-            _iteration = 0;
+        if(_frame == _SZ - 1)
+            _frame = 0;
         else
-            _iteration += 1;
+            _frame += 1;
     }
 
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,&_coordinates[_iteration],
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,&_coordinates[_frame],
                      box,(-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 

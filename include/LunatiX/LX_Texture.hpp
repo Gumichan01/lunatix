@@ -342,7 +342,7 @@ class LX_AnimatedSprite: public LX_Sprite
     const size_t _SZ;
     uint32_t _delay;
     uint32_t _btime;
-    size_t _iteration;
+    size_t _frame;
     bool _started;
 
 protected:
