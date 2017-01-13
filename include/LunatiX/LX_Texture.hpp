@@ -802,22 +802,22 @@ public:
 
     /// Constructor using the text
     LX_ShadedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
-                         const LX_Colour& c, LX_Win::LX_Window& w,
+                         const LX_Colour& bg, LX_Win::LX_Window& w,
                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text
     LX_ShadedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
-                         const LX_Colour& c, LX_Win::LX_Window& w,
+                         const LX_Colour& bg, LX_Win::LX_Window& w,
                          uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the text and the text size
     LX_ShadedTextTexture(const std::string& text, unsigned int sz,
-                         LX_TrueTypeFont::LX_Font& font, const LX_Colour& c,
+                         LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Constructor using the utf-8 text and the text size
     LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
-                         LX_TrueTypeFont::LX_Font& font, const LX_Colour& c,
+                         LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
