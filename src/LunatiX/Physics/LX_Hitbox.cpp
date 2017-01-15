@@ -42,16 +42,25 @@ LX_Point& LX_Point::operator =(const LX_Point& p)
 {
     x = p.x;
     y = p.y;
-
     return *this;
 }
+
+
+LX_Line::LX_Line(const LX_Point& p, const LX_Vector2D& dv): o(p), v(dv) {}
+
+LX_Line& LX_Line::operator=(const LX_Line& l)
+{
+    o = l.o;
+    v = l.v;
+    return *this;
+}
+
 
 LX_Circle& LX_Circle::operator =(const LX_Circle& c)
 {
     center = c.center;
     radius = c.radius;
     square_radius = c.square_radius;
-
     return *this;
 }
 
