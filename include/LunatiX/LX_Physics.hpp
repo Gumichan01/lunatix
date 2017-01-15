@@ -261,8 +261,8 @@ bool intersectSegment(const LX_Point& A, const LX_Point& B,
 *
 *   Test the intersection between 2 lines
 *
-*   @param [in] A the first line
-*   @param [in] B the second line
+*   @param [in] L1 the first line
+*   @param [in] L2 the second line
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
