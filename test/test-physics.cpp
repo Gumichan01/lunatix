@@ -15,6 +15,7 @@ void test_collision2Circle(void);
 void test_collision2Rect(void);
 void test_collisionRectCircle(void);
 
+void testLine();
 void test_Vector2D(void);
 void testPolygon(void);
 
@@ -58,6 +59,7 @@ int main(int argc, char **argv)
     test_collision2Rect();
     test_collisionRectCircle();
 
+    testLine();
     test_Vector2D();
     testPolygon();
 
@@ -127,7 +129,7 @@ void test_euclide(void)
     cout << "INFO - Distance between C and D" << endl;
     d = euclide_distance(C,D);
 
-    if(static_cast<int>(d) != static_cast<int>(sqrt(200))) 
+    if(static_cast<int>(d) != static_cast<int>(sqrt(200)))
         cerr << "FAILURE - Bad distance CD - expected : "
              << static_cast<float>(sqrt(200)) << ";Got : " << d << endl;
     else
@@ -430,6 +432,45 @@ void testPolygon(void)
         cout << "SUCCESS - Added (6,3). This is not a convex polygon" << endl;
 
     LX_Log::log(" = END TEST = ");
+}
+
+
+void testLine()
+{
+    LX_Log::log("= TEST Vector2D =");
+
+    LX_Vector2D v(0.0f,4.0f);
+    LX_Vector2D u(0.0f,42.0f);
+    LX_Vector2D w(21.0f,0.0f);
+    LX_Line l1(LX_Point(1,1), v);
+    LX_Line l2(LX_Point(5,21), u);
+    LX_Line l3(LX_Point(1,1), w);
+
+    LX_Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx, l1.v.vy);
+    LX_Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx, l2.v.vy);
+    LX_Log::log("line #3: (%d, %d) - (%f, %f)", l3.o.x, l3.o.y, l3.v.vx, l3.v.vy);
+
+    if(l1.isParralelWith(l2))
+        LX_Log::log("SUCCESS - parralel: l1 and l2");
+    else
+        LX_Log::log("FAILURE - expected: parralel");
+
+    if(!l1.isParralelWith(l3))
+        LX_Log::log("SUCCESS - not parralel: l1 and l3");
+    else
+        LX_Log::log("FAILURE - expected: not parralel");
+
+    if(l1.isPerpendicularTo(l3))
+        LX_Log::log("SUCCESS - perpendicular: l1 and l3");
+    else
+        LX_Log::log("FAILURE - expected: perpendicular");
+
+    if(!l1.isPerpendicularTo(l2))
+        LX_Log::log("SUCCESS - not perpendicular: l1 and l2");
+    else
+        LX_Log::log("FAILURE - expected: not perpendicular");
+
+    LX_Log::log("= END TEST =");
 }
 
 
