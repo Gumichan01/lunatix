@@ -56,6 +56,16 @@ LX_Line& LX_Line::operator=(const LX_Line& l)
 }
 
 
+bool LX_Line::isParralelWith(const LX_Line& l) const
+{
+    return collinear(v, l.v);
+}
+
+bool LX_Line::isPerpendicularTo(const LX_Line& l) const
+{
+    return scalar_product(v, l.v) == 0.0f;
+}
+
 LX_Circle& LX_Circle::operator =(const LX_Circle& c)
 {
     center = c.center;
