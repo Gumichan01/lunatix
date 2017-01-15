@@ -470,6 +470,16 @@ void testLine()
     else
         LX_Log::log("FAILURE - expected: not perpendicular");
 
+    if(intersectLine(l1, l3))
+        LX_Log::log("SUCCESS - intersection: l1 and l3");
+    else
+        LX_Log::log("FAILURE - expected: intersection");
+
+    if(intersectLine(l2, l3))
+        LX_Log::log("SUCCESS - intersection: l2 and l3");
+    else
+        LX_Log::log("FAILURE - expected: intersection");
+
     LX_Log::log("= END TEST =");
 }
 

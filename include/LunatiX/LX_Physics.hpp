@@ -256,7 +256,17 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
 */
 bool intersectSegment(const LX_Point& A, const LX_Point& B,
                       const LX_Point& C, const LX_Point& D);
-
+/**
+*   @fn bool intersectLine(const LX_Line& L1, const LX_Line& L2)
+*
+*   Test the intersection between 2 lines
+*
+*   @param [in] A the first line
+*   @param [in] B the second line
+*
+*   @return TRUE if there is an intersection, FALSE otherwise
+*/
+bool intersectLine(const LX_Line& L1, const LX_Line& L2);
 
 /**
 *   @fn bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)

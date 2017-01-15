@@ -341,6 +341,12 @@ bool intersectSegment(const LX_Point& A, const LX_Point& B,
 }
 
 
+bool intersectLine(const LX_Line& L1, const LX_Line& L2)
+{
+    return !L1.isParralelWith(L2) && !L2.isParralelWith(L1);
+}
+
+
 bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
 {
     int count = 0;
