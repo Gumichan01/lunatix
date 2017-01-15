@@ -350,7 +350,7 @@ class LX_AnimatedSprite: public LX_Sprite
 protected:
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      /*bool loop, */uint32_t format=LX_PIXELFORMAT_RGBA8888);
+                      bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
@@ -453,13 +453,14 @@ public:
     *   @param [in] w The window to link the sprite to → see *draw()*
     *   @param [in] coord The list of coordinates for each sprite on the sprite sheet
     *   @param [in] delay The delay to display each sprite of the sprite sheet
+    *   @param [in] loop Boolean value that specify if the animation must be looped infinitely
     *
     *   @return A new fresh allocated animated sprite on success, *nullptr* otherwise
     */
     LX_AnimatedSprite *
     generateAnimatedSprite(LX_Win::LX_Window& w,
                            const std::vector<LX_AABB>& coord,
-                           const uint32_t delay) const;
+                           const uint32_t delay, bool loop) const;
 
     /// Destructor
     ~LX_BufferedImage();

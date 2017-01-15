@@ -363,7 +363,7 @@ void test_image(LX_Win::LX_Window *win)
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a sprite sheet file using the bufered image");
-        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0);
+        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0, false);
 
         if(img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded from memory");
@@ -375,7 +375,7 @@ void test_image(LX_Win::LX_Window *win)
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
-        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0);
+        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0,false);
 
         if(!img->isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite failure expected");

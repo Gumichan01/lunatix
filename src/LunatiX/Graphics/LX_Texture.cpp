@@ -186,10 +186,10 @@ LX_Sprite::~LX_Sprite() {}
 // protected constructor
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
-                                     const uint32_t delay,/* bool loop,*/
+                                     const uint32_t delay, bool loop,
                                      uint32_t format)
     : LX_Sprite(t,w,nullptr,format), _coordinates(coord), _SZ(coord.size()),
-      _delay(delay), _btime(0), _frame(0), _started(false) {}
+      _delay(delay), _btime(0), _frame(0), _loop(loop), _started(false) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
@@ -301,10 +301,10 @@ LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w,
 
 LX_AnimatedSprite * LX_BufferedImage::
 generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
-                       const uint32_t delay) const
+                       const uint32_t delay, bool loop) const
 {
     return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),
-                                 w, coord, delay);
+                                 w, coord, delay, loop);
 }
 
 
