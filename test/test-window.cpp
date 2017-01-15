@@ -353,7 +353,7 @@ void test_image(LX_Win::LX_Window *win)
     std::vector<LX_AABB> c;
 
     {
-        LX_Graphics::LX_AnimatedSprite img(u8_str,*win,c,0);
+        LX_Graphics::LX_AnimatedSprite img(u8_str,*win,c,0,false);
 
         if(img.isOpen())
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded");
@@ -406,9 +406,9 @@ void test_image(LX_Win::LX_Window *win)
         coordinates.push_back({1272,449,211,448});
         coordinates.push_back({1484,449,211,448});
 
-        LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay);
+        LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
 
-        for(int i = 0; i < 448; i++)
+        for(int i = 0; i < 512; i++)
         {
             win->clearWindow();
             sprite.draw(&rect);
@@ -448,7 +448,7 @@ void test_viewport(LX_Win::LX_Window *win)
     coordinates.push_back({1484,449,211,448});
 
     LX_Graphics::LX_Sprite img(name,*win);
-    LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay);
+    LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
 
     LX_AABB viewport = {win->getWidth()/2, 0,win->getWidth()/2, win->getHeight()/2};
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Viewport: {%d,%d,%d,%d}",
