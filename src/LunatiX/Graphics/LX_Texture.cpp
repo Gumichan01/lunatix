@@ -186,7 +186,8 @@ LX_Sprite::~LX_Sprite() {}
 // protected constructor
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
-                                     const uint32_t delay, uint32_t format)
+                                     const uint32_t delay,/* bool loop,*/
+                                     uint32_t format)
     : LX_Sprite(t,w,nullptr,format), _coordinates(coord), _SZ(coord.size()),
       _delay(delay), _btime(0), _frame(0), _started(false) {}
 
@@ -194,18 +195,18 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
                                      LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
-                                     const uint32_t delay, uint32_t format)
-    : LX_Sprite(filename,w,nullptr,format), _coordinates(coord),
-      _SZ(coord.size()), _delay(delay), _btime(0), _frame(0),
-      _started(false) {}
+                                     const uint32_t delay, bool loop,
+                                     uint32_t format)
+    : LX_AnimatedSprite(UTF8string(filename), w, coord, delay, loop, format) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
-                                     const uint32_t delay, uint32_t format)
+                                     const uint32_t delay, bool loop,
+                                     uint32_t format)
     : LX_Sprite(filename,w,nullptr,format), _coordinates(coord),
       _SZ(coord.size()), _delay(delay), _btime(0), _frame(0),
-      _started(false) {}
+      _started(false), _loop(loop), _drawable(true) {}
 
 
 bool LX_AnimatedSprite::isOpen() const
@@ -216,13 +217,13 @@ bool LX_AnimatedSprite::isOpen() const
 
 void LX_AnimatedSprite::draw(LX_AABB * box)
 {
-    draw(box,0.0);
+    draw(box, 0.0);
 }
 
 
 void LX_AnimatedSprite::draw(LX_AABB * box, const double angle)
 {
-    draw(box,angle,LX_MIRROR_NONE);
+    draw(box, angle, LX_MIRROR_NONE);
 }
 
 
@@ -238,13 +239,20 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
         _btime = SDL_GetTicks();
 
         if(_frame == _SZ - 1)
-            _frame = 0;
+            if(_loop)
+                _frame = 0;
+            else
+                _drawable = false;
         else
             _frame += 1;
     }
 
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,&_coordinates[_frame],
-                     box,(-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
+    if(_drawable)
+    {
+        SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture,
+                         &_coordinates[_frame], box, (-radianToDegree(angle)),
+                         nullptr, shortToFlip_(mirror));
+    }
 }
 
 

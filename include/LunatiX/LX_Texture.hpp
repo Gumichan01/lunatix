@@ -344,11 +344,13 @@ class LX_AnimatedSprite: public LX_Sprite
     uint32_t _btime;
     size_t _frame;
     bool _started;
+    bool _loop;
+    bool _drawable;
 
 protected:
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
+                      /*bool loop, */uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
@@ -363,6 +365,7 @@ public:
     *   @param [in] w The window the animated sprite will be drawn on → see *draw()*
     *   @param [in] coord The list of coordinates for each sprite on the sprite sheet
     *   @param [in] delay The delay to display each sprite of the sprite sheet
+    *   @param [in] loop Boolean value that specify if the animation must be looped infinitely
     *   @param [in] format Optional argument that specified the format of every sprites
     *
     *   @sa LX_Sprite
@@ -370,12 +373,12 @@ public:
     */
     LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
+                      bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /// Animated Sprite constructor with the filename (UTF-8)
     LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
+                      bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     virtual bool isOpen() const;
     virtual void draw(LX_AABB * box);
