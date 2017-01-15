@@ -288,6 +288,14 @@ bool collisionSegCircle(const LX_Circle& circle,
     return collisionPointCircle(M,circle);
 }
 
+bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L)
+{
+    const LX_Point Q(L.o.x + static_cast<int>(L.v.vx),
+                     L.o.y + static_cast<int>(L.v.vy));
+    return collisionSegCircle(circle, L.o , Q);
+}
+
+#define PFL(x) static_cast<float>(x)
 
 bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
 {
@@ -295,27 +303,15 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
     if(collisionPointRect(circle.center,rect))
         return true;
 
-    LX_Point sides[RECT_SIDES][2];  //4 segments
+    LX_Line sides[RECT_SIDES] = LX_Line(LX_Point(0,0), LX_Vector2D(0.0f,0.0f));
+    sides[0] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
+    sides[1] = LX_Line(LX_Point(rect.x, rect.y + rect.h), LX_Vector2D(PFL(rect.w), 0.0f));
+    sides[2] = LX_Line(LX_Point(rect.x + rect.w, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
+    sides[2] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(PFL(rect.w), 0.0f));
 
-    // 1st segment
-    sides[0][0] = LX_Point(rect.x , rect.y);
-    sides[0][1] = LX_Point(rect.x , rect.y + rect.h);
-
-    // 2nd segment
-    sides[1][0] = sides[0][1];
-    sides[1][1] = LX_Point(rect.x + rect.w , rect.y + rect.h);
-
-    // 3rd segment
-    sides[2][0] = sides[1][1];
-    sides[2][1] = LX_Point(rect.x + rect.w, rect.y);
-
-    // 4th segment
-    sides[3][0] = sides[2][1];
-    sides[3][1] = sides[0][0];
-
-    for(int i=0; i< RECT_SIDES ; i++)
+    for(int i = 0; i < RECT_SIDES; i++)
     {
-        if(collisionSegCircle(circle, sides[i][0], sides[i][1]))
+        if(collisionLineCircle(circle, sides[i]))
             return true;
     }
 
