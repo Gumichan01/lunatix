@@ -108,11 +108,11 @@ public:
     explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset=0, uint32_t sz=0);
 
     /**
-    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage() const
+    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(uint32_t format=LX_PIXELFORMAT_RGBA8888) const
     *
     *   Load a buffered image from the file buffer.
     *
-    *   @param [in] Optional argument that specified the format of the image
+    *   @param [in] format Optional argument that specified the format of the image
     *
     *   @return A pointer to new an allocated buffered image on success,
     *          *nullptr* if the file buffer is not an image to load.

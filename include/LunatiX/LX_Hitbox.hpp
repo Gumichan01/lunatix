@@ -28,7 +28,6 @@ namespace LX_Physics
 /**
 *   @struct LX_Point
 *   @brief The point structure
-*   This point is described by the x and y field
 */
 struct LX_Point
 {
@@ -49,7 +48,6 @@ struct LX_Point
 /**
 *   @struct LX_Circle
 *   @brief The circle structure
-*   This structure describe the circle
 */
 struct LX_Circle
 {

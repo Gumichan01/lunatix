@@ -29,7 +29,8 @@ struct LX_Point;
 /**
 *   @struct LX_Vector2D
 *   @brief The vector2D structure
-*   This structure describes a vector in 2 dimensions
+*
+*   This structure describes a 2-dimension vector
 */
 struct LX_Vector2D
 {

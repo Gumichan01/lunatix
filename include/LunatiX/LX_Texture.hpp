@@ -357,7 +357,7 @@ public:
     /**
     *   @fn LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
     *                        const std::vector<LX_AABB>& coord, const uint32_t delay,
-    *                        uint32_t format=LX_PIXELFORMAT_RGBA8888)
+    *                        bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888)
     *
     *   Build an animated sprite using a filename
     *

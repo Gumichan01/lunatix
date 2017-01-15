@@ -60,7 +60,6 @@ class LX_Polygon_;
 /**
 *   @class LX_Polygon
 *   @brief The polygon
-*   This class defines a polygon
 */
 class LX_Polygon
 {
