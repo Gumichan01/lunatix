@@ -46,6 +46,8 @@ LX_Point& LX_Point::operator =(const LX_Point& p)
 }
 
 
+LX_Line::LX_Line(): o(LX_Point(0,0)), v(LX_Vector2D(0.0f, 0.0f)) {}
+
 LX_Line::LX_Line(const LX_Point& p, const LX_Vector2D& dv): o(p), v(dv) {}
 
 LX_Line& LX_Line::operator=(const LX_Line& l)

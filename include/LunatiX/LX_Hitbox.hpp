@@ -55,6 +55,8 @@ struct LX_Line
     LX_Point o;     /**< Origin point       */
     LX_Vector2D v;  /**< Direction vector   */
 
+    /// Default Constructor
+    LX_Line();
     /// Construct the line using the point and the direction vector
     LX_Line(const LX_Point& p, const LX_Vector2D& dv);
     /// Line assignment
