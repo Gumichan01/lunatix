@@ -303,7 +303,7 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
     if(collisionPointRect(circle.center,rect))
         return true;
 
-    LX_Line sides[RECT_SIDES] = LX_Line(LX_Point(0,0), LX_Vector2D(0.0f,0.0f));
+    LX_Line sides[RECT_SIDES];
     sides[0] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
     sides[1] = LX_Line(LX_Point(rect.x, rect.y + rect.h), LX_Vector2D(PFL(rect.w), 0.0f));
     sides[2] = LX_Line(LX_Point(rect.x + rect.w, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
