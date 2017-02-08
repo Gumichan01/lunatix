@@ -28,6 +28,8 @@
 namespace LX_VersionInfo
 {
 
+const int STATUS_LEN = 8;
+
 /**
 *   @struct LX_Version
 *   @brief The version structure
@@ -38,7 +40,7 @@ struct LX_Version
     short major;         /**< Information about the major version */
     short minor;         /**< Information about the minor version */
     short patch;         /**< Information about the patch version */
-    char status[8];
+    char status[STATUS_LEN];
 };
 
 /**
