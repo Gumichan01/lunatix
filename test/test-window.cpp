@@ -407,6 +407,8 @@ void test_image(LX_Win::LX_Window *win)
         coordinates.push_back({1484,449,211,448});
 
         LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — delay: %d; infinitely looped: %s",
+                        sprite.getFrameDelay(), sprite.isInfinitelyLooped() ? "Yes" : "No");
 
         for(int i = 0; i < 512; i++)
         {
