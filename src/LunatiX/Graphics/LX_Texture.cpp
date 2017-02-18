@@ -76,7 +76,7 @@ SDL_Texture * loadTexture_(const std::string& filename,
 namespace LX_Graphics
 {
 
-/* LX_Texture */
+/** LX_Texture */
 
 //  protected zero-argument constructor
 LX_Texture::LX_Texture(LX_Win::LX_Window& w, uint32_t format)
@@ -117,10 +117,20 @@ bool LX_Texture::bind(float *iw, float *ih)
     return _win.glMakeCurrent() && SDL_GL_BindTexture(_texture,iw,ih) == 0;
 }
 
-
 bool LX_Texture::unbind()
 {
     return SDL_GL_UnbindTexture(_texture) == 0;
+}
+
+
+LX_Win::LX_Window& LX_Texture::getWindow() const
+{
+    return _win;
+}
+
+uint32_t LX_Texture::getFormat() const
+{
+    return _format;
 }
 
 
@@ -130,7 +140,7 @@ LX_Texture::~LX_Texture()
 }
 
 
-/* LX_Sprite */
+/** LX_Sprite */
 
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
@@ -181,7 +191,7 @@ void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
 LX_Sprite::~LX_Sprite() {}
 
 
-/* LX_AnimatedSprite */
+/** LX_AnimatedSprite */
 
 // protected constructor
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
@@ -257,7 +267,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 
 
 
-/* LX_BufferedImage */
+/** LX_BufferedImage */
 
 LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
 {
@@ -315,7 +325,7 @@ LX_BufferedImage::~LX_BufferedImage()
 
 
 
-/* LX_StreamingTexture */
+/** LX_StreamingTexture */
 
 LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
     : LX_Texture(w,format), _screen(nullptr), _update(false)
@@ -388,7 +398,7 @@ LX_StreamingTexture::~LX_StreamingTexture()
 
 
 
-/* LX_TextTexture */
+/** LX_TextTexture */
 
 LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, uint32_t format)
@@ -518,7 +528,7 @@ LX_TextTexture::~LX_TextTexture() {}
 
 
 
-/* LX_SolidTextTexture */
+/** LX_SolidTextTexture */
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
@@ -566,7 +576,7 @@ void LX_SolidTextTexture::updateTexture_()
 }
 
 
-/* LX_ShadedTextTexture */
+/** LX_ShadedTextTexture */
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
@@ -624,7 +634,7 @@ void LX_ShadedTextTexture::setBgColour(const LX_Colour& bg)
 }
 
 
-/* LX_BlendedTextTexture */
+/** LX_BlendedTextTexture */
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,

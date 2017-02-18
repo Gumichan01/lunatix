@@ -186,13 +186,25 @@ public:
     *        an OpenGL window. Otherwise, bind() returns FALSE.
     */
     bool bind(float *iw = nullptr, float *ih = nullptr);
-
     /**
     *   @fn bool unbind()
     *   Unbind a texture
     *   @return TRUE on success.FALSE if the operation is not supported.
     */
     bool unbind();
+
+    /**
+    *   @fn LX_Win::LX_Window& getWindow() const
+    *   Get the window where the texture is drawn on
+    *   @return The window
+    */
+    LX_Win::LX_Window& getWindow() const;
+    /**
+    *   @fn uint32_t getFormat() const
+    *   Get the format of the texture
+    *   @return The format
+    */
+    uint32_t getFormat() const;
 
     /// Destructor
     virtual ~LX_Texture();
