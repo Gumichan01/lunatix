@@ -352,11 +352,11 @@ class LX_AnimatedSprite: public LX_Sprite
     friend class LX_BufferedImage;
     const std::vector<LX_AABB> _coordinates;
     const size_t _SZ;
-    uint32_t _delay;
+    uint32_t _delay;    // Delay to display a part of the sprite sheet
     uint32_t _btime;
     size_t _frame;
     bool _started;
-    bool _loop;
+    bool _loop;         // TRUE: Infinite loop - FALSE: one loop
     bool _drawable;
 
 protected:
@@ -396,6 +396,19 @@ public:
     virtual void draw(LX_AABB * box);
     virtual void draw(LX_AABB * box, const double angle);
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
+
+    /**
+    *   @fn uint32_t getFrameDelay() const
+    *   Get the delay to display each frame of the sprite sheet
+    *   @return The delay
+    */
+    uint32_t getFrameDelay() const;
+    /**
+    *   @fn bool isInfinitelyLoopable() const
+    *   Check the animation is infinitely looped
+    *   @return TRUE if the animation is looped infinitely, FALSE otherwise
+    */
+    bool isInfinitelyLooped() const;
 
     /// Destructor
     ~LX_AnimatedSprite() = default;

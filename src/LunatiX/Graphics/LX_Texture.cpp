@@ -266,6 +266,16 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 }
 
 
+uint32_t LX_AnimatedSprite::getFrameDelay() const
+{
+    return _delay;
+}
+
+bool LX_AnimatedSprite::isInfinitelyLooped() const
+{
+    return _loop;
+}
+
 
 /** LX_BufferedImage */
 
