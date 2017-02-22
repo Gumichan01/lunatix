@@ -45,9 +45,9 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        cerr << "FAILURE - Init does not work" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
     else
-        cout << "SUCCESS - The LunatiX library has been initialized with success" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Physics ==== \n");
