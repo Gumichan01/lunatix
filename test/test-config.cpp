@@ -18,9 +18,9 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        cerr << "FAILURE - Init does not work" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
     else
-        cout << "SUCCESS - The LunatiX library has been initialized with success" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Config ==== ");
@@ -28,14 +28,14 @@ int main(int argc, char **argv)
     configuration2 = LX_Config::LX_Configuration::getInstance();
 
     if(configuration == nullptr)
-        cerr << "FAILURE - The configuration is not initialized" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - The configuration is not initialized");
     else
-        cout << "SUCCESS - The configuration is initialized" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The configuration is initialized");
 
     if(configuration != configuration2)
-        cerr << "FAILURE - The configuration class is not instantiated as a singleton" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - The configuration class is not instantiated as a singleton");
     else
-        cout << "SUCCESS - The configuration class is instantiated as a singleton" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The configuration class is instantiated as a singleton");
 
     bool video   = configuration->getVideoFlag();
     bool vsync   = configuration->getVSyncFlag();
@@ -46,14 +46,16 @@ int main(int argc, char **argv)
     int w        = configuration->getWinWidth();
     int h        = configuration->getWinHeight();
 
-    cout << "\n==== LunatiX configuration ==== \n" << endl
-         << "video: " << boolState(video) << endl
-         << "true type font: " << boolState(ttfont) << endl
-         << "vsync: " << boolState(vsync) << endl
-         << "audio: " << boolState(sound) << endl
-         << "gamepad: " << boolState(gamepad) << endl
-         << "opengl: " << boolState(opengl) << endl
-         << "width: " << w << endl << "height : " << h << endl;
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"======== Configuration ========");
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"video: %s", boolState(video).c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"true type font: %s", boolState(ttfont).c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"vsync: %s", boolState(vsync).c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"audio: %s", boolState(sound).c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"gamepad: %s", boolState(gamepad).c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"opengl: %s", boolState(opengl).c_str());
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"width: %d ", w);
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"height: %d ", h);
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"===============================");
 
     LX_Quit();
     LX_Log::log(" ==== END Test Config ==== \n");
