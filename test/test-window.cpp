@@ -65,12 +65,12 @@ int main(int argc, char **argv)
 
 void test_window1(LX_Win::LX_Window *win)
 {
-    cout << " = TEST main window = " << endl;
+    LX_Log::log(" = TEST main window = ");
 
     if(win == nullptr)
-        cerr << "FAILURE - The window was not initialized" << endl;
+        LX_Log::log("FAILURE - The window was not initialized");
     else
-        cout << "SUCCESS - The window exists" << endl;
+        LX_Log::log("SUCCESS - The window exists");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -91,17 +91,17 @@ void test_window2(void)
     wi.flag = SDL_WINDOW_SHOWN;
     LX_Win::LX_Window win2(wi);
 
-    cout << " = TEST 2 window = " << endl;
+    LX_Log::log(" = TEST 2 window = ");
 
     if(win2.getWidth() != w)
-        cerr << "FAILURE - width ; expected : " << w << "; got: " << win2.getWidth() << endl;
+        LX_Log::log("FAILURE - width; expected: %d; got: %d",w,win2.getWidth());
     else
-        cout << "SUCCESS - width " << w << endl;
+        LX_Log::log("SUCCESS - width: %d",w);
 
     if(win2.getHeight() != h)
-        cerr << "FAILURE - height ; expected : " << h << "; got: " << win2.getHeight() << endl;
+        LX_Log::log("FAILURE - height; expected: %d; got: %d",h,win2.getHeight());
     else
-        cout << "SUCCESS - height " << h << endl;
+        LX_Log::log("SUCCESS - width: %d",h);
 
     LX_Log::log(" = END TEST = ");
     LX_Timer::delay(750);
@@ -480,15 +480,15 @@ void test_viewport(LX_Win::LX_Window *win)
 
 void test_winManager(LX_Win::LX_Window *win)
 {
-    cout << " = TEST WinManager = " << endl;
-
+    LX_Log::log(" = TEST WinManager = ");
+    @todo
     std::string name = "data/bullet.png";
     LX_Graphics::LX_Sprite img(name,*win);
 
     if(win == nullptr)
-        cerr << "FAILURE - The window was not initialized" << endl;
+        LX_Log::log("FAILURE - The window was not initialized");
     else
-        cout << "SUCCESS - The window exists" << endl;
+        LX_Log::log("SUCCESS - The window exists");
 
     uint32_t id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
     uint32_t wid = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
