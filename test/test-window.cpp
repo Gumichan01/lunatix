@@ -2,7 +2,6 @@
 #include <LunatiX/Lunatix.hpp>
 #include <GL/glu.h>
 
-#include <iostream>
 #include <sstream>
 #include <vector>
 
@@ -481,7 +480,6 @@ void test_viewport(LX_Win::LX_Window *win)
 void test_winManager(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST WinManager = ");
-    @todo
     std::string name = "data/bullet.png";
     LX_Graphics::LX_Sprite img(name,*win);
 
@@ -491,45 +489,40 @@ void test_winManager(LX_Win::LX_Window *win)
         LX_Log::log("SUCCESS - The window exists");
 
     uint32_t id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
-    uint32_t wid = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
 
     if(id == static_cast<uint32_t>(-1))
-        cerr << "FAILURE - failed to add a window" << LX_GetError() << endl;
+        LX_Log::log("FAILURE - cannot add a window: %s", LX_GetError());
     else
-        cout << "SUCCESS - the window was added into the window manager" << endl;
-
-    if(wid == static_cast<uint32_t>(-1))
-        cout << "SUCCESS - the window was not added into the window manager" << endl;
-    else
-        cerr << "FAILURE - the window has been added" << LX_GetError() << endl;
+        LX_Log::log("SUCCESS - the window was added into the window manager");
 
 
     LX_Win::LX_Window *lxw = LX_Win::LX_WindowManager::getInstance()->getWindow(id);
 
     if(lxw == win)
-        cout << "SUCCESS - (getWindow) the window is exactly what we added" << endl;
+        LX_Log::log("SUCCESS - (getWindow) the window is exactly what we added");
     else
-        cerr << "FAILURE - (getWindow) the window is not exactly what we added" << endl;
+        LX_Log::log("FAILURE - (getWindow) the window is not exactly what we added");
 
     LX_Win::LX_WindowManager::getInstance()->clearWindows();
     img.draw();
     LX_Win::LX_WindowManager::getInstance()->updateWindows();
     LX_Timer::delay(512);
 
+    LX_Log::log("Remove the same window");
     LX_Win::LX_Window *wi = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
 
     if(wi == win)
-        cout << "SUCCESS - the removed window is exactly what we added" << endl;
+        LX_Log::log("SUCCESS - The removed window is exactly what we added");
     else
-        cerr << "FAILURE - the removed window is not exactly what we added" << endl;
+        LX_Log::log("FAILURE - The removed window is not exactly what we added");
 
-    cout << "INFO - remove the same window (again) " << endl;
+    LX_Log::log("Remove the same window (again)");
     LX_Win::LX_Window *null = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
 
     if(null == nullptr)
-        cout << "SUCCESS - nullptr: expected" << endl;
+        LX_Log::log("SUCCESS - nullptr: expected");
     else
-        cerr << "FAILURE - expected : nullptr, got: a valid pointer" << endl;
+        LX_Log::log("FAILURE - The window must not be in the manager");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -539,16 +532,15 @@ void test_winInfo(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST window information = ");
     LX_Win::LX_WindowInfo info_g;
-    cout << "INFO - get information" << endl;
+    LX_Log::log("Get information");
     win->getInfo(info_g);
 
     if(winInfoEqual(info,info_g))
-        cout << "SUCCESS - Information retrieved and "
-             << "information from user are identicals" << endl
-             << winInfoToString(info_g) << endl;
+        LX_Log::log("SUCCESS - The information provided by user are correct: %s",
+                    winInfoToString(info_g).c_str());
     else
-        cerr << "FAILURE - expected : " << winInfoToString(info)
-             << "got : " << winInfoToString(info_g) << endl;
+        LX_Log::log("FAILURE - expected: %s; Got: %s",
+                    winInfoToString(info_g).c_str(), winInfoToString(info_g).c_str());
 
     LX_Log::log(" = END TEST = ");
 }
@@ -825,7 +817,7 @@ string winInfoToString(LX_Win::LX_WindowInfo &winfo)
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
        << ",w: " << winfo.w << ",h: " << winfo.h
        << ",lw: " << winfo.w << ",lh: " << winfo.h
-       << winfo.flag << "," << (winfo.accel ? 1:0) << ")" << endl;
+       << winfo.flag << "," << (winfo.accel ? 1:0) << ")";
 
     return ss.str();
 }
