@@ -2,7 +2,7 @@
 
 #include <LunatiX/Lunatix.hpp>
 #include <cmath>
-#include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 using namespace std;
@@ -355,62 +355,60 @@ void testPolygon(void)
     poly.addPoint(10,10);
     poly.addPoint(5,5);
 
-    cout << " = TEST POLYGON = " << endl;
-
-    cout << "Number of edges" << endl;
+    LX_Log::log(" = TEST POLYGON = ");
+    LX_Log::log("Number of edges");
     unsigned long d = poly.numberOfEdges();
 
     if(d != 3)
-        cerr << "FAILURE - number of real edges expected : 3;Got : " << d << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - number of real edges expected: 3; Got: %u",d);
     else
-        cout << "SUCCESS - number of real edges : " << d << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - number of real edges: %u",d);
 
     displayPoly(poly);
 
     p = poly.getPoint(0);
-    cout << "poly.getPoint(0) : (" << p.x << "," << p.y << ")" << endl;
+    LX_Log::log("poly.getPoint(0): (%d,%d)", p.x, p.y);
 
     if(p.x != 10)
-        cerr << "FAILURE - x position expected : 10 ;Got : " << p.x << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - x position expected: 10; Got: %d",p.x);
     else
-        cout << "SUCCESS - x = 10" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - x = %d",p.x);
 
     if(p.y != 5)
-        cerr << "FAILURE - y position expected : 5 ;Got : " << p.y << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - y position expected: 5; Got: %d",p.y);
     else
-        cout << "SUCCESS - y = 5" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - y = %d",p.y);
 
     // Is the triangle convex ?
-    cout << "test the convexity of the polygon." << endl;
+    LX_Log::log("Test the convexity of the polygon.");
     if(poly.isConvex() == false)
-        cerr << "FAILURE - A triangle is not a non-convex polygon " << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - A triangle is not a non-convex polygon");
     else
-        cout << "SUCCESS - The triangle is a convex polygon, well done !" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The triangle is a convex polygon, well done !");
 
     // Now we have a polygon with 4 edges
     p = {7,2};
-    cout << "add point p(" << p.x << "," << p.y << ")" << endl;
+    LX_Log::log("add point p(%d,%d)", p.x, p.y);
     poly.addPoint(p);
 
     // It must be convex
-    cout << "test the convexity of the polygon with the new point." << endl;
+    LX_Log::log("Test the convexity of the polygon with the new point.");
     if(poly.isConvex() == false)
-        cerr << "FAILURE - Expected : convex; Got: non-convex " << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: convex; Got: non-convex");
     else
-        cout << "SUCCESS - Added (7,2). This is still a convex polygon, well done !" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (7,2). This is still a convex polygon, well done !");
 
     // New edge
     p = {6,5};
-    cout << "add point p(" << p.x << "," << p.y << ")" << endl;
+    LX_Log::log("add point p(%d,%d)", p.x, p.y);
     poly.addPoint(6,5);
 
     // It must be non-convex
-    cout << "test the non-convexity of the polygon "
-         << "with the new point (again)" << endl;
+    LX_Log::log("Test the convexity of the polygon with the new point (again).");
     if(poly.isConvex() == true)
-        cerr << "FAILURE - Expected : non-convex; Got: convex " << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: non-convex; Got: convex");
     else
-        cout << "SUCCESS - Added (6,3). This is not a convex polygon" << endl;
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (6,5). This is not a convex polygon");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -475,69 +473,69 @@ void test_Vector2D(void)
     z = {0.0f,0.0f};
     w = LX_Vector2D(p,q);
 
-    cout << " = TEST Vector2D = " << endl;
-
-    cout << "v(" << v.vx << "," << v.vy << ")" << endl
-         << "u(" << u.vx << "," << u.vy << ")" << endl
-         << "z(" << z.vx << "," << z.vy << ")" << endl
-         << "w(" << w.vx << "," << w.vy << ")" << endl;
-
-    cout << "scalar product (v,u)" << endl;
+    LX_Log::log(" = TEST Vector2D = ");
+    LX_Log::log("v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("z(%f,%f)", z.vx, z.vy);
+    LX_Log::log("w(%f,%f)", w.vx, w.vy);
+    LX_Log::log("scalar product (v,u)");
     float d = scalar_product(v,u);
 
     if(d != 0.0f)
-        cerr << "FAILURE - scalar product v(1,2).u(2,-1) expected: 0 ;Got: " << d << endl;
+        LX_Log::log("FAILURE - scalar product v(1,2).u(2,-1) expected: 0; Got: %f", d);
     else
-        cout << "SUCCESS - scalar product v(1,2).u(2,-1) = 0" << endl;
+        LX_Log::log("SUCCESS - scalar product v(1,2).u(2,-1) = 0");
 
-    cout << "scalar product (z,z)" << endl;
+    LX_Log::log("scalar product (z,z)");
     d = scalar_product(z,z);
 
     if(d != 0.0f)
-        cerr << "FAILURE - scalar product z.z (z is a null vector) expected: 0 ;Got: " << d << endl;
+        LX_Log::log("FAILURE - scalar product z.z (z is a null vector) expected: 0; Got: %f", d);
     else
-        cout << "SUCCESS - scalar product z.z = 0" << endl;
+        LX_Log::log("SUCCESS - scalar product z.z = 0");
 
-    cout << "norm of z" << endl;
+    LX_Log::log("norm of z");
     d = vector_norm(z);
 
     if(d != 0.0f)
-        cerr << "FAILURE - norm of z (z is a null vector) expected: 0 ;Got: " << d << endl;
+        LX_Log::log("FAILURE - norm of z (z is a null vector) expected: 0; Got: %f", d);
     else
-        cout << "SUCCESS - norm of z = 0" << endl;
+        LX_Log::log("SUCCESS - norm of z = 0");
 
-    cout << "norm of v" << endl;
+
+    LX_Log::log("norm of v");
     d = vector_norm(v);
 
-    if(static_cast<int>(d) != static_cast<int>(sqrt(5)))
-        cerr << "FAILURE - norm of v expected: "<< static_cast<int>(sqrt(5))
-             <<" ; Got: " << d << endl;
+    if(static_cast<int>(d) != static_cast<int>(sqrtf(5)))
+        LX_Log::log("FAILURE - norm of v (z is a null vector) expected: %f; Got: %f",
+                    sqrtf(5), d);
     else
-        cout << "SUCCESS - norm of v = 0" << endl;
+        LX_Log::log("SUCCESS - norm of v = %f", d);
 
-    cout << "vector product (v,u)" << endl;
+
+    LX_Log::log("vector product (v,u)");
     d = vector_product(v,u);
-    cout << "" << d << endl;
+
     if(static_cast<int>(d) != static_cast<int>(-5.0f))
-        cerr << "FAILURE - vector product v(1,2).u(2,-1) expected: -5 ;Got: " << d << endl;
+        LX_Log::log("FAILURE - vector product v(1,2).u(2,-1) expected: -5.0; Got: %f", d);
     else
-        cout << "SUCCESS - vector product v(1,2).u(2,-1) = -5" << endl;
+        LX_Log::log("SUCCESS - vector product v(1,2).u(2,-1) = %f", d);
 
 
     d = vector_product(u,v);
 
     if(d != 5.0f)
-        cerr << "FAILURE - vector product u(2,-1).v(1,2) expected: 5 ;Got: " << d << endl;
+        LX_Log::log("FAILURE - vector product u(2,-1).v(1,2) expected: 5.0; Got: %f", d);
     else
-        cout << "SUCCESS - vector product u(2,-1).v(1,2) = 5" << endl;
+        LX_Log::log("SUCCESS - vector product u(2,-1).v(1,2) = %f", d);
 
 
     d = vector_product(z,z);
 
     if(d != 0.0f)
-        cerr << "FAILURE - vector product z.z (z is a null vector) expected: 0 ;Got: " << d << endl;
+        LX_Log::log("FAILURE - vector product z.z (z is a null vector) expected: 0; Got: %f", d);
     else
-        cout << "SUCCESS - vector product z.z = 0" << endl;
+        LX_Log::log("SUCCESS - vector product z.z = 0");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -561,54 +559,54 @@ void test_collisionSeg(void)
     F.x = 15;
     F.y =  5;
 
-    cout << " = TEST Collision Segment = " << endl;
+    LX_Log::log(" = TEST Collision Segment = ");
+    LX_Log::log("A(%d,%d)", A.x, A.y);
+    LX_Log::log("B(%d,%d)", B.x, B.y);
+    LX_Log::log("C(%d,%d)", C.x, C.y);
+    LX_Log::log("D(%d,%d)", D.x, D.y);
+    LX_Log::log("E(%d,%d)", E.x, E.y);
+    LX_Log::log("F(%d,%d)", F.x, F.y);
+    LX_Log::log("collision segement [AB]/[CD]");
 
-    cout << "A(" << A.x << "," << A.y << ")" << endl
-         << "B(" << B.x << "," << B.y << ")" << endl
-         << "C(" << C.x << "," << C.y << ")" << endl
-         << "D(" << D.x << "," << D.y << ")" << endl
-         << "E(" << E.x << "," << E.y << ")" << endl
-         << "F(" << F.x << "," << F.y << ")" << endl;
-
-    cout << "collision segement [AB]/[CD]" << endl;
     d = intersectSegment(A,B,C,D);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AB]/[CD] expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - intersect [AB]/[CD] expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - intersect [AB]/[CD] OK" << endl;
+        LX_Log::log("SUCCESS - intersect [AB]/[CD] OK");
 
-    cout << "collision segement [AC]/[BD]" << endl;
+
+    LX_Log::log("collision segement [AC]/[BD]");
     d = intersectSegment(A,C,B,D);
 
     if(d != false)
-        cerr << "FAILURE - intersect [AC]/[BD] expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - intersect [AC]/[BD] expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - no intersect [AC]/[BD] OK" << endl;
+        LX_Log::log("SUCCESS - no intersect [AC]/[BD] OK");
 
-    cout << "collision segement [AB]/[AD]" << endl;
+    LX_Log::log("collision segement [AB]/[AD]");
     d = intersectSegment(A,B,A,D);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AB]/[AD] expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - intersect [AB]/[AD] expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - intersect [AB]/[AD] OK" << endl;
+        LX_Log::log("SUCCESS - intersect [AB]/[AD] OK");
 
-    cout << "collision segement [AD]/[AE]" << endl;
+    LX_Log::log("collision segement [AD]/[AE]");
     d = intersectSegment(A,D,A,E);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AD]/[AE] expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - intersect [AD]/[AE] expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - intersect [AD]/[AE] OK" << endl;
+        LX_Log::log("SUCCESS - intersect [AD]/[AE] OK");
 
-    cout << "collision segement [AD]/[FE]" << endl;
+    LX_Log::log("collision segement [AD]/[FE]");
     d = intersectSegment(A,D,F,E);
 
     if(d != true)
-        cerr << "FAILURE - intersect [AD]/[FE] expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - intersect [AD]/[FE] expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - no intersect [AD]/[FE] OK" << endl;
+        LX_Log::log("SUCCESS - no intersect [AD]/[FE] OK");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -641,83 +639,73 @@ void test_collisionPointPolygon(void)
     polyc2.addPoint(4,5);
     polyc2.addPoint(7,0);
 
-    cout << " = TEST Collision Point/Polygon = " << endl;
+    LX_Log::log(" = TEST Collision Point/Polygon = ");
+    displayPoly(poly);
+    LX_Log::log("N(%d,%d)", N.x, N.y);
+    LX_Log::log("O(%d,%d)", O.x, O.y);
+    LX_Log::log("P(%d,%d)", P.x, P.y);
+    LX_Log::log("Q(%d,%d)", Q.x, Q.y);
+    LX_Log::log("R(%d,%d)", R.x, R.y);
+    LX_Log::log("S(%d,%d)", S.x, S.y);
+    LX_Log::log("T(%d,%d)", T.x, T.y);
 
-    {
-        cout << "poly {";
-        const unsigned long n = poly.numberOfEdges();
-        for(unsigned int i = 0; i < n; i++)
-        {
-            cout << "(" << (poly.getPoint(i)).x << ","
-                 << (poly.getPoint(i)).y << ")";
-            if(i != n)
-                cout << ";";
-        }
-        cout << "}" << endl;
-    }
-
-    cout << "A(" << N.x << "," << N.y << ")" << endl
-         << "B(" << O.x << "," << O.y << ")" << endl
-         << "C(" << P.x << "," << P.y << ")" << endl
-         << "D(" << Q.x << "," << Q.y << ")" << endl
-         << "E(" << R.x << "," << R.y << ")" << endl
-         << "F(" << S.x << "," << S.y << ")" << endl;
-
-    cout << "collision Point N/Polygon" << endl;
+    LX_Log::log("collision Point N/Polygon");
     bool d = collisionPointPoly(N,poly);
 
     if(d != false)
-        cerr << "FAILURE - N in the polygon. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - N in the polygon. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - N not in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - N not in the polygon OK");
 
-    cout << "collision Point O/Polygon" << endl;
+    LX_Log::log("collision Point O/Polygon");
     d = collisionPointPoly(O,poly);
 
     if(d != true)
-        cerr << "FAILURE - O not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - N not in the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - O in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - N in the polygon OK");
 
-    cout << "collision Point P/Polygon" << endl;
+    LX_Log::log("collision Point P/Polygon");
     d = collisionPointPoly(P,poly);
 
     if(d != true)
-        cerr << "FAILURE - P not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - P not in the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - P in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - P in the polygon OK");
 
-    cout << "collision Point Q/Polygon" << endl;
+    LX_Log::log("collision Point Q/Polygon");
     d = collisionPointPoly(Q,poly);
 
     if(d != true)
-        cerr << "FAILURE - Q not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - Q not in the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - Q in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - Q in the polygon OK");
 
-    cout << "collision Point R/Polygon" << endl;
+    LX_Log::log("collision Point R/Polygon");
     d = collisionPointPoly(R,poly);
 
     if(d != false)
-        cerr << "FAILURE - R in the polygon. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - R in the polygon. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - R not in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - R not in the polygon OK");
 
-    cout << "collision Point S/Polygon" << endl;
+    LX_Log::log("collision Point S/Polygon");
     d = collisionPointPoly(S,poly);
 
     if(d != false)
-        cerr << "FAILURE - S in the polygon. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - S in the polygon. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - S not in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - S not in the polygon OK");
 
-    cout << "collision Point T/Polygon polync2" << endl;
+    LX_Log::log("collision Point T/Polygon");
     d = collisionPointPoly(T,polyc2);
 
     if(d != true)
-        cerr << "FAILURE - T not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - T not in the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - T in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - T in the polygon OK");
+
+    LX_Log::log(" = END TEST = ");
 }
 
 
@@ -735,61 +723,45 @@ void test_collisionCirclePolygon(void)
     poly.addPoint(7,2);
     poly.addPoint(6,5);
 
-    cout << " = TEST Collision Circle/Polygon = " << endl;
+    LX_Log::log(" = TEST Collision Circle/Polygon = ");
 
-    cout << "circle M {(" << M.center.x << "," << M.center.x << "),"
-         << M.radius << "}" << "" << endl
-         << "circle N {(" << N.center.x << "," << N.center.x << "),"
-         << N.radius << "}" << "" << endl
-         << "circle O {(" << O.center.x << "," << N.center.x << "),"
-         << O.radius << "}" << "" << endl
-         << "circle S {(" << S.center.x << "," << S.center.x << "),"
-         << S.radius << "}" << "" << endl;
+    LX_Log::log("M{(%d,%d),%d}", M.center.x, M.center.y, M.radius);
+    LX_Log::log("N{(%d,%d),%d}", N.center.x, N.center.y, N.radius);
+    LX_Log::log("O{(%d,%d),%d}", O.center.x, O.center.y, O.radius);
+    LX_Log::log("S{(%d,%d),%d}", S.center.x, S.center.y, S.radius);
+    displayPoly(poly);
 
-    {
-        cout << "poly {";
-        const unsigned long n = poly.numberOfEdges();
-        for(unsigned int i = 0; i < n; i++)
-        {
-            cout << "(" << (poly.getPoint(i)).x << ","
-                 << (poly.getPoint(i)).y << ")";
-            if(i != n)
-                cout << ";";
-        }
-        cout << "}" << endl;
-    }
-
-    cout << "collision Circle M/Polygon" << endl;
+    LX_Log::log("Collision Circle M/Polygon");
     bool d = collisionCirclePoly(M,poly);
 
     if(d != false)
-        cerr << "FAILURE - M in the polygon. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - M in the polygon. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - M not in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - M not in the polygon OK");
 
-    cout << "collision Point S/Polygon" << endl;
+    LX_Log::log("Collision Circle S/Polygon");
     d = collisionCirclePoly(S,poly);
 
     if(d != false)
-        cerr << "FAILURE - S in the polygon. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - S in the polygon. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - S not in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - S not in the polygon OK");
 
-    cout << "collision Point N/Polygon" << endl;
+    LX_Log::log("Collision Circle N/Polygon");
     d = collisionCirclePoly(N,poly);
 
     if(d != true)
-        cerr << "FAILURE - N not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - N not in the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - N in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - N in the polygon OK");
 
-    cout << "collision Point O/Polygon" << endl;
+    LX_Log::log("Collision Circle O/Polygon");
     d = collisionCirclePoly(O,poly);
 
     if(d != true)
-        cerr << "FAILURE - O not in the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - O not in the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - O in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - O in the polygon OK");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -812,69 +784,52 @@ void test_collisionRectPolygon(void)
     poly.addPoint(7,2);
     poly.addPoint(6,5);
 
-    cout << " = TEST Collision Rect/Polygon = " << endl;
-
-    cout << "R1{(" << R1.x << "," << R1.y << "),"
-         << R1.w << "," << R1.h << "}" << endl
-         << "R2{(" << R2.x << "," << R1.y << "),"
-         << R2.w << "," << R2.h << "}" << endl
-         << "R3{(" << R3.x << "," << R1.y << "),"
-         << R3.w << "," << R3.h << "}" << endl
-         << "R4{(" << R4.x << "," << R1.y << "),"
-         << R4.w << "," << R4.h << "}" << endl;
-
-    {
-        cout << "poly {";
-        const unsigned long n = poly.numberOfEdges();
-        for(unsigned int i = 0; i < n; i++)
-        {
-            cout << "(" << (poly.getPoint(i)).x << ","
-                 << (poly.getPoint(i)).y << ")";
-            if(i != n)
-                cout << ";";
-        }
-        cout << "}" << endl;
-    }
+    LX_Log::log(" = TEST Collision Rect/Polygon = ");
+    LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
+    LX_Log::log("R2{(%d,%d),%d,%d}", R2.x, R2.y, R2.w, R2.h);
+    LX_Log::log("R3{(%d,%d),%d,%d}", R3.x, R3.y, R3.w, R3.h);
+    LX_Log::log("R4{(%d,%d),%d,%d}", R4.x, R4.y, R4.w, R4.h);
+    LX_Log::log("poly");
+    displayPoly(poly);
 
     bool d = collisionRectPoly(R1,poly);
 
     if(d != false)
-        cerr << "FAILURE - test R1 not in the polygon. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - test R1 not in the polygon. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - R1 not in the polygon OK" << endl;
+        LX_Log::log("SUCCESS - R1 not in the polygon OK");
 
     // A point of R2 in the polygon
     d = collisionRectPoly(R2,poly);
 
     if(d != true)
-        cerr << "FAILURE - test R2 touch the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - test R2 touch the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - R2 touch the polygon OK" << endl;
+        LX_Log::log("SUCCESS - R2 touch the polygon OK");
 
     // Some Segments of R3 in the polygon (no point inside)
     d = collisionRectPoly(R3,poly);
 
     if(d != true)
-        cerr << "FAILURE - test R3 touch the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - test R3 touch the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - R3 touch the polygon OK" << endl;
+        LX_Log::log("SUCCESS - R3 touch the polygon OK");
 
     // R4 into the polygon
     d = collisionRectPoly(R4,poly);
 
     if(d != true)
-        cerr << "FAILURE - test R4 into the polygon. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - test R4 touch the polygon. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - R4 into the polygon OK" << endl;
+        LX_Log::log("SUCCESS - R4 touch the polygon OK");
 
     // The polygon into R5
     d = collisionRectPoly(R5,poly);
 
     if(d != true)
-        cerr << "FAILURE - test polygon into R5. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - test polygon into R5. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - polygon into R5 OK" << endl;
-
+        LX_Log::log("SUCCESS - polygon into R5 OK");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -930,98 +885,98 @@ void test_collision2Polygon(void)
     poly4.addPoint(2,3);
     poly4.addPoint(3,4);
 
-    cout << " = TEST Collision Polygon/Polygon = " << endl;
+    LX_Log::log(" = TEST Collision Polygon/Polygon = ");
 
-    cout << "poly" << endl;
+    LX_Log::log("poly");
     displayPoly(poly);
-    cout << "poly2" << endl;
+    LX_Log::log("poly2");
     displayPoly(poly2);
-    cout << "poly3" << endl;
+    LX_Log::log("poly3");
     displayPoly(poly3);
-    cout << "poly4" << endl;
+    LX_Log::log("poly4");
     displayPoly(poly4);
-    cout << "polyc" << endl;
+    LX_Log::log("polyc");
     displayPoly(polyc);
-    cout << "polyc2" << endl;
+    LX_Log::log("polyc2");
     displayPoly(polyc2);
-    cout << "polync" << endl;
+    LX_Log::log("polync");
     displayPoly(polync);
-    cout << "polync2" << endl;
+    LX_Log::log("polync2");
     displayPoly(polync2);
 
     bool d = collisionPoly(poly,poly2);
 
     if(d != true)
-        cerr << "FAILURE - no collision poly/poly2. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - no collision poly/poly2. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - collision poly/poly2" << endl;
+        LX_Log::log("SUCCESS - collision poly/poly2");
 
 
     d = collisionPoly(poly,poly3);
 
     if(d != true)
-        cerr << "FAILURE - no collision poly/poly3. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - no collision poly/poly3. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - collision poly/poly3 OK" << endl;
+        LX_Log::log("SUCCESS - collision poly/poly3");
 
 
     d = collisionPoly(poly,poly4);
 
     if(d != false)
-        cerr << "FAILURE - collision poly/poly4. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - no collision poly/poly4. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - no collision poly/poly4 OK" << endl;
+        LX_Log::log("SUCCESS - collision poly/poly4");
 
     // Empty polygons
-    cout << "collision between two empty polygons" << endl;
+    LX_Log::log("collision between two empty polygons");
     try
     {
         collisionPoly(poly_empty1,poly_empty2);
-        cerr << "FAILURE - this collision cannot be calculated" << endl;
+        LX_Log::log("FAILURE - this collision cannot be calculated");
     }
     catch(std::invalid_argument&)
     {
-        cout << "SUCCESS - std::invalid_argument exception occured" << endl;
+        LX_Log::log("SUCCESS - std::invalid_argument exception occured");
     }
     catch(...)
     {
-        cerr << "FAILURE - unknown exception occurred" << endl;
+        LX_Log::log("FAILURE - unknown exception occurred");
     }
 
-    cout << "collision between two convex polygons" << endl;
+    LX_Log::log("collision between two convex polygons");
     d = collisionPoly(polyc,polyc2);
 
     if(d != true)
-        cerr << "FAILURE - no collision polyc/polyc2. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - no collision polyc/polyc2. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - collision polyc/polyc2 OK" << endl;
+        LX_Log::log("SUCCESS - collision polyc/polyc2");
 
     // convex/non-convex
-    cout << "collision between a convex polygon and a non-convex polygon" << endl;
+    LX_Log::log("collision between a convex polygon and a non-convex polygon");
     d = collisionPoly(polyc2,polync);
 
     if(d == true)
-        cerr << "FAILURE - collision polyc2/polync. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - collision polyc2/polycnc. expected: FALSE; Got: TRUE");
     else
-        cout << "SUCCESS - no collision polyc2/polync OK" << endl;
+        LX_Log::log("SUCCESS - no collision polyc2/polync");
 
     // Another test
-    cout << "collision between a convex polygon and a non-convex polygon (again)" << endl;
+    LX_Log::log("collision between a convex polygon and a non-convex polygon (again)");
     d = collisionPoly(polyc2,polync2);
 
     if(d != true)
-        cerr << "FAILURE - no collision polyc2/polync2. expected: FALSE ;Got: TRUE" << endl;
+        LX_Log::log("FAILURE - no collision polyc2/polync2. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - collision polyc2/polync2 OK" << endl;
+        LX_Log::log("SUCCESS - collision polyc2/polync2");
 
     // convex/triangle (that is convex)
-    cout << "collision between a convex polygon and a triangle" << endl;
+    LX_Log::log("collision between a convex polygon and a triangle");
     d = collisionPoly(polyc2,poly3);
 
     if(d != true)
-        cerr << "FAILURE - no collision polyc2/poly3. expected: TRUE ;Got: FALSE" << endl;
+        LX_Log::log("FAILURE - no collision polyc2/poly3. expected: TRUE; Got: FALSE");
     else
-        cout << "SUCCESS - collision polyc2/poly3 OK" << endl;
+        LX_Log::log("SUCCESS - collision polyc2/poly3");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1040,22 +995,22 @@ void test_collision2PolygonAgain(void)
     LX_Log::log("Generate two random polygons with %d sides",N);
     for(unsigned int i = 0; i < N; i++)
     {
-        poly1.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
-        poly2.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
+        poly1.addPoint(LX_Random::xorshiftRand()%M, LX_Random::xorshiftRand()%M);
+        poly2.addPoint(LX_Random::xorshiftRand()%M, LX_Random::xorshiftRand()%M);
     }
 
     LX_Log::log("Calculate the collision #1");
     t1 = SDL_GetTicks();
-    bool d = collisionPoly(poly1,poly2);
+    bool d = collisionPoly(poly1, poly2);
     t2 = SDL_GetTicks();
-    LX_Log::log("Result:%s collision between the two random polygons",(d ? "":" No"));
-    LX_Log::log("Calculation done in %d ms",t2-t1);
+    LX_Log::log("Result:%s collision between the two random polygons", (d ? "":" No"));
+    LX_Log::log("Calculation done in %d ms", t2-t1);
 
     LX_Log::log("Generate two other random polygons with %d sides in two different areas",N);
     for(unsigned int i = 0; i < N; i++)
     {
-        poly3.addPoint(LX_Random::xorshiftRand()%M,LX_Random::xorshiftRand()%M);
-        poly4.addPoint(LX_Random::xorshiftRand()%M+N,LX_Random::xorshiftRand()%M+N);
+        poly3.addPoint(LX_Random::xorshiftRand()%M, LX_Random::xorshiftRand()%M);
+        poly4.addPoint(LX_Random::xorshiftRand()%M+N, LX_Random::xorshiftRand()%M+N);
     }
 
     LX_Log::log("Calculate the collision #2");
@@ -1072,8 +1027,6 @@ void test_collision2PolygonAgain(void)
 
 void test_move(void)
 {
-    cout << " = TEST Move = " << endl;
-
     LX_Point P = {1,2};
     LX_AABB R = {8,4,10,10};
 
@@ -1095,33 +1048,35 @@ void test_move(void)
     expoly.addPoint(64+X,64+Y);
     expoly.addPoint(32+X,32+Y);
 
-    cout << "Point P(" << P.x << "," << P.y << ")" << endl;
-    cout << "Rectangle R(" << R.x << "," << R.y << ","<< R.w << ","
-         << R.h << ")" << endl;
+    LX_Log::log(" = TEST Move = ");
 
-    cout << "Point" << endl;
+    LX_Log::log("P(%d,%d)", P.x, P.y);
+    LX_Log::log("R{(%d,%d),%d,%d}", R.x, R.y, R.w, R.h);
+    LX_Log::log("poly");
+    displayPoly(poly);
+    LX_Log::log("expoly");
+    displayPoly(expoly);
+
+    LX_Log::log("Point");
 
     LX_Point expected_point = {P.x +1, P.y +1};
     movePoint(P,1,1);
 
     if(P.x == expected_point.x && P.y == expected_point.y)
-        cout << "SUCCESS - Point P(" << P.x << "," << P.y << ")" << endl;
+        LX_Log::log("Point P(%d,%d)", P.x, P.y);
     else
-        cout << "FAILURE - expected : Point P(2,3)"
-             << "Got : (" << P.x << "," << P.y << ")" << endl;
+        LX_Log::log("FAILURE - expected : Point P(2,3); Got: P(%d,%d)", P.x, P.y);
 
-    cout << "Rectangle" << endl;
+    LX_Log::log("Rectangle");
 
     LX_AABB expected_aabb = {R.x +2, R.y +3, R.w, R.h};
     moveRect(R,2,3);
 
     if(R.x == expected_aabb.x && R.y == expected_aabb.y)
-        cout << "SUCCESS - Rectangle R(" << R.x << "," << R.y << ","
-             << R.w << "," << R.h << ")" << endl;
+        LX_Log::log("SUCCESS - Rectangle R{(%d,%d),%d,%d}", R.x, R.y, R.w, R.h);
     else
-        cout << "FAILURE - expected : Rectangle R(3,6,10,10)"
-             << "Got : (" << R.x << "," << R.y << ","
-             << R.w << "," << R.h << ")" << endl;
+        LX_Log::log("FAILURE - expected : Rectangle R(3,6,10,10); got: R{(%d,%d),%d,%d}",
+                    R.x, R.y, R.w, R.h);
 
     movePoly(poly,X,Y);
     const unsigned long n = poly.numberOfEdges();
@@ -1133,12 +1088,9 @@ void test_move(void)
     displayPoly(poly);
 
     if(n != m)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - these polygon have not the same size");
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"number of edges expected: %d, got: %d",m,n);
-    }
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - ≠ degree. #edges expected: %d, got: %d",m,n);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - these polygon have the same size");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - these polygon have the same degree");
 
     try
     {
@@ -1149,9 +1101,8 @@ void test_move(void)
             LX_Point p2 = expoly.getPoint(j);
             if(p1 != p2)
             {
-                LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - at j = %d → not the same point",j);
-                LX_Log::logInfo(LX_Log::LX_LOG_TEST,"point expected: (%d,%d) got: (%d,%d)",
-                                p2.x,p2.y,p1.x,p1.y);
+                LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - at j = %d → ≠ point; expected: (%d,%d); got: (%d,%d)",
+                                j,p2.x,p2.y,p1.x,p1.y);
                 ok = false;
                 break;
             }
@@ -1171,51 +1122,43 @@ void test_move(void)
 
 void test_assignment(void)
 {
-    cout << " = TEST Assignement = " << endl;
+    LX_Log::log(" = TEST Assignement = ");
 
     LX_Point P = {1,2};
     LX_Point Q;
 
-    cout << "Point P(" << P.x << "," << P.y << ")" << endl;
+    LX_Log::log("P(%d,%d)", P.x, P.y);
 
     Q = P;  // assignment
 
     if(Q == P)
-        cout << "SUCCESS - Point Q(" << Q.x << "," << Q.y << ")" << endl;
+        LX_Log::log("SUCCESS - Point Q(%d,%d)", Q.x, Q.y);
     else
-        cerr << "FAILURE - expected : Point Q(1,2); "
-             << "Got : Q(" << Q.x << "," << Q.y << ")" << endl;
-
+        LX_Log::log("FAILURE - expected: Q(1,2); Got: Q(%d,%d)", Q.x, Q.y);
 
     LX_Circle C(LX_Point(4,9),10);
 
-    cout << "Circle C : Center(" << C.center.x << "," << C.center.y
-         << ") radius : " << C.radius << "; square radius : " << C.square_radius
-         << endl;
+    LX_Log::log("C{(%d,%d),%d}; square radius: %d", C.center.x, C.center.y,
+                C.radius, C.square_radius);
 
     LX_Circle D = C;  // assignment
 
     if(D == C)
-        cout << "SUCCESS - Circle D : Center(" << C.center.x << "," << C.center.y
-             << ") radius : " << C.radius << "; square radius : " << C.square_radius
-             << endl;
+        LX_Log::log("SUCCESS - Circle D{(%d,%d),%d}; square radius =  %d", D.center.x, D.center.y,
+                    D.radius, D.square_radius);
     else
-        cerr << "FAILURE - expected : Circle D{{4,9},10,100}; "
-             << "Got : Circle D : Center(" << D.center.x << "," << D.center.y
-             << ") radius : " << D.radius << "; square radius : " << D.square_radius
-             << endl;
+        LX_Log::log("FAILURE - expected: Circle D{{4,9},10} with suare radius = 100; Got: D{(%d,%d),%d}; square radius = %d",
+                    D.center.x, D.center.y, D.radius, D.square_radius);
 
     LX_Vector2D v = {3.14f,1.59f};
-
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
 
     LX_Vector2D u = v;  // assignment
 
     if(u == v)
-        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", u.vx, u.vy);
     else
-        cerr << "FAILURE - expected : Vector2D u(3.14,1.59); "
-             << "Got : u(" << u.vx << "," << u.vy << ")" << endl;
+        LX_Log::log("FAILURE - expected: u(3.14,1.59); Got: u(%f,%f)", u.vx, u.vy);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1233,100 +1176,92 @@ void test_operator(void)
     LX_Vector2D i = {2.56f,1.59f};
     LX_Vector2D j = {-0.14f,-1.28f};
 
-    cout << " = TEST operators = " << endl;
+    LX_Log::log(" = TEST operators = ");
 
-    cout << "Circle C - Center(" << C.center.x << "," << C.center.y
-         << ") radius : " << C.radius << "; square radius : " << C.square_radius
-         << endl;
-    cout << "Circle E - Center(" << E.center.x << "," << E.center.y
-         << ") radius : " << E.radius << "; square radius : " << E.square_radius
-         << endl;
-    cout << "Circle F - Center(" << F.center.x << "," << F.center.y
-         << ") radius : " << F.radius << "; square radius : " << F.square_radius
-         << endl;
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("C{(%d,%d),%d}; square radius = %d", C.center.x, C.center.y,
+                C.radius, C.square_radius);
+    LX_Log::log("E{(%d,%d),%d}; square radius = %d", E.center.x, E.center.y,
+                E.radius, E.square_radius);
+    LX_Log::log("F{(%d,%d),%d}; square radius = %d", F.center.x, F.center.y,
+                F.radius, F.square_radius);
 
     if(E > C)
-        cout << "SUCCESS - E is greater than C" << endl;
+        LX_Log::log("SUCCESS - E > C");
     else
-        cerr << "FAILURE - E is not greater than C" << endl;
+        LX_Log::log("FAILURE - E ≤ C");
 
     if(C < E)
-        cout << "SUCCESS - C is smaller than E" << endl;
+        LX_Log::log("SUCCESS - C < E");
     else
-        cerr << "FAILURE - C is not smaller than E" << endl;
+        LX_Log::log("FAILURE - C ≥ E");
 
     if(E >= C)
-        cout << "SUCCESS - E is greater or equal than C" << endl;
+        LX_Log::log("SUCCESS - E ≥ C");
     else
-        cerr << "FAILURE - E is not greater or equal than C" << endl;
+        LX_Log::log("FAILURE - E < C");
 
     if(C <= E)
-        cout << "SUCCESS - C is smaller or equal than E" << endl;
+        LX_Log::log("SUCCESS - C ≤ E");
     else
-        cerr << "FAILURE - C is not smaller or equal than E" << endl;
+        LX_Log::log("FAILURE - C > E");
 
     if(F >= C)
-        cout << "SUCCESS - F is greater or equal than C" << endl;
+        LX_Log::log("SUCCESS - F ≥ C");
     else
-        cerr << "FAILURE - F is not greater or equal than C" << endl;
+        LX_Log::log("FAILURE - F < C");
 
     if(C <= F)
-        cout << "SUCCESS - C is smaller or equal than F" << endl;
+        LX_Log::log("SUCCESS - C ≤ F");
     else
-        cerr << "FAILURE - C is not smaller or equal than F" << endl;
+        LX_Log::log("FAILURE - C > F");
 
     if(!(E < C))
-        cout << "SUCCESS - E is not smaller than C" << endl;
+        LX_Log::log("SUCCESS - !(E < C)");
     else
-        cerr << "FAILURE - E is smaller than C" << endl;
+        LX_Log::log("FAILURE - E < C");
 
-    cout << "INFO -Is E different from C? " << endl;
+    LX_Log::log("E ≠ C ?");
     if(E != C)
-        cout << "SUCCESS - E is not C" << endl;
+        LX_Log::log("SUCCESS - E ≠ C");
     else
-        cerr << "FAILURE - E is C" << endl;
+        LX_Log::log("FAILURE - E == C");
 
-    cout << "INFO -Is E and C not equal? " << endl;
+    LX_Log::log(" !(E == C) ?");
     if(!(E == C))
-        cout << "SUCCESS - E is not C" << endl;
+        LX_Log::log("SUCCESS - !(E == C)");
     else
-        cerr << "FAILURE - E is C" << endl;
+        LX_Log::log("FAILURE - E == C");
 
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
-    cout << "Vector2D i(" << i.vx << "," << i.vy << ")" << endl;
-    cout << "Vector2D j(" << j.vx << "," << j.vy << ")" << endl;
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D w(%f,%f)", w.vx, w.vy);
+    LX_Log::log("Vector2D i(%f,%f)", i.vx, i.vy);
+    LX_Log::log("Vector2D j(%f,%f)", j.vx, j.vy);
 
     if(u == v)
-        cout << "SUCCESS - u and v are equals" << endl;
+        LX_Log::log("SUCCESS - u == v");
     else
-        cerr << "FAILURE - expected: u and v equals;Got :"
-             << "Vector2D u(" << u.vx << "," << u.vy << "); "
-             << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+        LX_Log::log("FAILURE - expected: u == v; Got: u(%f,%f) ≠ v(%f,%f)",
+                    u.vx, u.vy, v.vx, v.vy);
 
     if(v == w)
-        cerr << "FAILURE - expected: v and w are not equals;Got :"
-             << "Vector2D v(" << v.vx << "," << v.vy << ")"
-             << "Vector2D w(" << w.vx << "," << w.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: v ≠ w; Got: v(%f,%f) ≠ w(%f,%f)",
+                    v.vx, v.vy, w.vx, w.vy);
     else
-        cout << "SUCCESS - v and w are not equals" << endl;
+        LX_Log::log("SUCCESS - v ≠ w");
 
     if(v != i)
-        cout << "SUCCESS - v and i are not equals" << endl;
+        LX_Log::log("SUCCESS - v ≠ i");
     else
-        cerr << "FAILURE - expected: v and i are not equals;Got :"
-             << "Vector2D v(" << v.vx << "," << v.vy << ")"
-             << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: v ≠ i; Got: v(%f,%f) ≠ i(%f,%f)",
+                    v.vx, v.vy, i.vx, i.vy);
 
     if(j != i)
-        cout << "SUCCESS - j and i are not equals" << endl;
-
+        LX_Log::log("SUCCESS - j ≠ i");
     else
-        cerr << "FAILURE - expected: j and i are not equals;Got :"
-             << "Vector2D j(" << j.vx << "," << j.vy << ")"
-             << "Vector2D i(" << i.vx << "," << i.vy << "); " << endl;
-
+        LX_Log::log("FAILURE - expected: j ≠ i; Got: j(%f,%f) ≠ i(%f,%f)",
+                    j.vx, j.vy, i.vx, i.vy);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1350,77 +1285,62 @@ void test_VectorPlusMinusOp(void)
     LX_Vector2D exp_diff_vec = {a.vx - b.vx , a.vy - b.vy};
     LX_Vector2D exp_sub_vec = {a.vx - c.vx , a.vy - c.vy};
 
-    cout << " = TEST Vector arithmetic '+','+=','-','-='  = " << endl;
-    cout << "'+','+=','-','-='" << endl;
+    LX_Log::log(" = TEST Vector arithmetic = ");
+    LX_Log::log(" '+','+=','-','-='");
 
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "w = u + v;" << endl;
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("w = u + v;");
 
     w = u + v;
-
-    cout << "Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
+    LX_Log::log("Vector2D w(%f,%f)", w.vx, w.vy);
 
     if(w == exp_sum_vec)
-        cout << "SUCCESS - Vector2D w(" << w.vx << "," << w.vy << ")"
-             << " is exactly what the test case expected (" << exp_sum_vec.vx
-             << "," << exp_sum_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - w(%f,%f) as expected", w.vx, w.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << exp_sum_vec.vx
-             << "," << exp_sum_vec.vy << "); "
-             << "Got w(" << w.vx << "," << w.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: w(%f,%f)",
+                    exp_sum_vec.vx, exp_sum_vec.vy, w.vx, w.vy);
 
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "Vector2D z(" << z.vx << "," << z.vy << ")" << endl;
-    cout << "u += z;" << endl;
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("u += z;");
 
     u += z;
 
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
 
     if(u == exp_add_vec)
-        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")"
-             << " is exactly what the test case expected (" << exp_add_vec.vx
-             << "," << exp_add_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx, u.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << exp_add_vec.vx
-             << "," << exp_add_vec.vy << "); "
-             << "Got u(" << u.vx << "," << u.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+                    exp_add_vec.vx, exp_add_vec.vy, u.vx, u.vy);
 
-
-    cout << "Vector2D a(" << a.vx << "," << a.vy << ")" << endl;
-    cout << "Vector2D b(" << b.vx << "," << b.vy << ")" << endl;
-    cout << "d = a - b;" << endl;
+    LX_Log::log("Vector2D a(%f,%f)", a.vx, a.vy);
+    LX_Log::log("Vector2D b(%f,%f)", b.vx, b.vy);
+    LX_Log::log("d = a - b;");
 
     d = a - b;
 
-    cout << "Vector2D d("<< d.vx << "," << d.vy << ")" << endl;
+    LX_Log::log("Vector2D d(%f,%f)", d.vx, d.vy);
 
     if(d == exp_diff_vec)
-        cout << "SUCCESS - Vector2D d(" << d.vx << "," << d.vy << ")"
-             << " is exactly what the test case expected (" << exp_diff_vec.vx
-             << "," << exp_diff_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - d(%f,%f) as expected", d.vx, d.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << exp_diff_vec.vx
-             << "," << exp_diff_vec.vy << "); "
-             << "Got d(" << d.vx << "," << d.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: d(%f,%f)",
+                    exp_diff_vec.vx, exp_diff_vec.vy, d.vx, d.vy);
 
 
-    cout << "Vector2D a(" << a.vx << "," << a.vy << ")" << endl;
-    cout << "Vector2D c(" << c.vx << "," << c.vy << ")" << endl;
-    cout << "a -= c;" << endl;
+    LX_Log::log("Vector2D a(%f,%f)", a.vx, a.vy);
+    LX_Log::log("Vector2D b(%f,%f)", b.vx, b.vy);
+    LX_Log::log("a -= c;");
 
     a -= c;
 
     if(a == exp_sub_vec)
-        cout << "SUCCESS - Vector2D a(" << a.vx << "," << a.vy << ")"
-             << " is exactly what the test case expected (" << exp_sub_vec.vx
-             << "," << exp_sub_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - a(%f,%f) as expected", a.vx, a.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << exp_sub_vec.vx
-             << "," << exp_sub_vec.vy << "); "
-             << "Got a(" << a.vx << "," << a.vy << "); " << endl;
-
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: a(%f,%f)",
+                    exp_sub_vec.vx, exp_sub_vec.vy, a.vx, a.vy);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1428,22 +1348,19 @@ void test_VectorPlusMinusOp(void)
 
 void test_VectorOpposite(void)
 {
-    cout << " = TEST Vector Opposite = " << endl;
+    LX_Log::log(" = TEST Vector Opposite = ");
 
     LX_Vector2D u = {3.14f,-2.56f};
     LX_Vector2D expected_vec = {-u.vx,-u.vy};
 
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "-u;" << endl;
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("-u;");
 
     if(expected_vec == (-u) )
-        cout << "SUCCESS - Vector2D -u(" << (-u).vx << "," << (-u).vy << ")"
-             << " is exactly what the test case expected (" << expected_vec.vx
-             << "," << expected_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", (-u).vx, (-u).vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << expected_vec.vx
-             << "," << expected_vec.vy << "); "
-             << "Got -u(" << (-u).vx << "," << (-u).vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+                    expected_vec.vx, expected_vec.vy, (-u).vx, (-u).vy);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1451,7 +1368,7 @@ void test_VectorOpposite(void)
 
 void test_VectorIncDec(void)
 {
-    cout << " = TEST Vector Increment and decrement = " << endl;
+    LX_Log::log(" = TEST Vector Increment and decrement = ");
 
     LX_Vector2D u = {1.41f,-5.92f};
     LX_Vector2D v = u;
@@ -1460,70 +1377,54 @@ void test_VectorIncDec(void)
     LX_Vector2D exp_dec_pre_vec = {u.vx - 1,u.vy - 1};
     LX_Vector2D exp_dec_post_vec = {u.vx - 1,u.vy - 1};
 
-    cout << "Increment" << endl;
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "++u;" << endl;
+    LX_Log::log("Increment");
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("++u;");
 
     ++u;
 
     if(u == exp_inc_pre_vec)
-        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")"
-             << " is exactly what the test case expected (" << exp_inc_pre_vec.vx
-             << "," << exp_inc_pre_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx, u.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << exp_inc_pre_vec.vx
-             << "," << exp_inc_pre_vec.vy << "); "
-             << "Got -u(" << u.vx << "," << u.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+                    exp_inc_pre_vec.vx, exp_inc_pre_vec.vy, u.vx, u.vy);
 
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "++v;" << endl;
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("v++;");
 
-    ++v;
+    v++;
 
     if(v == exp_inc_post_vec)
-        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")"
-             << " is exactly what the test case expected ("
-             << exp_inc_post_vec.vx << "," << exp_inc_post_vec.vy
-             << ")" << endl;
+        LX_Log::log("SUCCESS - v(%f,%f) as expected", v.vx, v.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D("
-             << exp_inc_post_vec.vx
-             << "," << exp_inc_post_vec.vy << "); "
-             << "Got v(" << v.vx << "," << v.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: v(%f,%f)",
+                    exp_inc_post_vec.vx, exp_inc_post_vec.vy, v.vx, v.vy);
 
     u = {1.41f,-5.92f};
     v = u;
 
-    cout << "Decrement" << endl;
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "--u;" << endl;
+    LX_Log::log("Decrement");
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("--u;");
 
     --u;
 
     if(u == exp_dec_pre_vec)
-        cout << "SUCCESS - Vector2D u(" << u.vx << "," << u.vy << ")"
-             << " is exactly what the test case expected (" << exp_dec_pre_vec.vx
-             << "," << exp_dec_pre_vec.vy << ")" << endl;
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx, u.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D(" << exp_dec_pre_vec.vx
-             << "," << exp_dec_pre_vec.vy << "); "
-             << "Got -u(" << u.vx << "," << u.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+                    exp_dec_pre_vec.vx, exp_dec_pre_vec.vy, u.vx, u.vy);
 
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "--v;" << endl;
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("v--;");
 
-    --v;
+    v--;
 
     if(v == exp_dec_post_vec)
-        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")"
-             << " is exactly what the test case expected ("
-             << exp_dec_post_vec.vx << "," << exp_dec_post_vec.vy
-             << ")" << endl;
+        LX_Log::log("SUCCESS - v(%f,%f) as expected", v.vx, v.vy);
     else
-        cerr << "FAILURE - expected: LX_Vector2D("
-             << exp_dec_post_vec.vx
-             << "," << exp_dec_post_vec.vy << "); "
-             << "Got v(" << v.vx << "," << v.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: v(%f,%f)",
+                    exp_dec_post_vec.vx, exp_dec_post_vec.vy, v.vx, v.vy);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1531,7 +1432,7 @@ void test_VectorIncDec(void)
 
 void test_VectorCollinear(void)
 {
-    cout << " = TEST Vector collinearity = " << endl;
+    LX_Log::log(" = TEST Vector collinearity = ");
 
     LX_Vector2D u = {1.41f,-2.48f};
     LX_Vector2D v = {u.vx *2,u.vy *2};
@@ -1539,67 +1440,56 @@ void test_VectorCollinear(void)
     LX_Vector2D o = {0.0f,0.0f};
     LX_Vector2D t = {2.01f,4.12f};
 
-    cout << "Vector2D u(" << u.vx << "," << u.vy << ")" << endl;
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "Vector2D w(" << w.vx << "," << w.vy << ")" << endl;
-    cout << "Vector2D o(" << o.vx << "," << o.vy << ")" << endl;
-    cout << "Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
+    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D w(%f,%f)", w.vx, w.vy);
+    LX_Log::log("Vector2D o(%f,%f)", o.vx, o.vy);
+    LX_Log::log("Vector2D t(%f,%f)", t.vx, t.vy);
 
-    cout << "test: zero vector" << endl;
+    LX_Log::log("test: zero vector");
 
     if(isNullVector(o))
-        cout << "SUCCESS - o is a zero vector: o("
-             << o.vx << "," << o.vy << "); " << endl;
+        LX_Log::log("SUCCESS - o is a zero vector: o(%f,%f)", o.vx, o.vy);
     else
-        cerr << "FAILURE - expected: o must be a zero vector: Got o("
-             << o.vx << "," << o.vy << "); " << endl;
+        LX_Log::log("FAILURE - o is not a zero vector: o(%f,%f)", o.vx, o.vy);
 
     if(!isNullVector(t))
-        cout << "SUCCESS - t is not a zero vector: t("
-             << t.vx << "," << t.vy << "); " << endl;
+        LX_Log::log("SUCCESS - t is not a zero vector: t(%f,%f)", t.vx, t.vy);
     else
-        cerr << "FAILURE - expected: t must not be zero vector; Got t("
-             << t.vx << "," << t.vy << "); " << endl;
+        LX_Log::log("FAILURE - t is a zero vector: t(%f,%f)", t.vx, t.vy);
 
-    cout << "test: collinearity between u and v" << endl;
+    LX_Log::log("test: collinearity between u and v");
 
     if(collinear(u,v))
-        cout << "SUCCESS - u and v are colinear" << endl;
+        LX_Log::log("SUCCESS - u and v are colinear");
     else
-        cerr << "FAILURE -  expected: u and v must be colinear; "
-             << "Got False : u(" << u.vx << "," << u.vy << "); "
-             << "v(" << v.vx << "," << v.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: u and v must be colinear; Got: u(%f,%f) and v(%f,%f)",
+                    u.vx, u.vy, v.vx, v.vy);
 
 
-    cout << "test: collinearity between u and w" << endl;
+    LX_Log::log("test: collinearity between u and w");
 
     if(collinear(u,w))
-        cout << "SUCCESS - u and w are colinear" << endl;
+        LX_Log::log("SUCCESS - u and w are colinear");
     else
-        cerr << "FAILURE -  expected: u and w must be colinear; "
-             << "Got False : u(" << u.vx << "," << u.vy << "); "
-             << "w(" << w.vx << "," << w.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: u and w must be colinear; Got: u(%f,%f) and w(%f,%f)",
+                    u.vx, u.vy, w.vx, w.vy);
 
-
-    cout << "test: collinearity between u and o" << endl;
+    LX_Log::log("test: collinearity between u and o");
 
     if(collinear(u,o))
-        cout << "SUCCESS - u and o are colinear" << endl;
+        LX_Log::log("SUCCESS - u and o are colinear");
     else
-        cerr << "FAILURE -  expected: u and o must be colinear; "
-             << "Got False : u(" << u.vx << "," << u.vy << "); "
-             << "o(" << o.vx << "," << o.vy << "); " << endl;
+        LX_Log::log("FAILURE - expected: u and o must be colinear; Got: u(%f,%f) and o(%f,%f)",
+                    u.vx, u.vy, o.vx, o.vy);
 
-
-    cout << "test: collinearity between u and t" << endl;
+    LX_Log::log("test: collinearity between u and t");
 
     if(!collinear(u,t))
-        cout << "SUCCESS - u and t are not colinear" << endl;
+        LX_Log::log("SUCCESS - u and t are colinear");
     else
-        cerr << "FAILURE -  expected: u and t must not be colinear; "
-             << "Got True : u(" << u.vx << "," << u.vy << "); "
-             << "t(" << t.vx << "," << t.vy << "); " << endl;
-
+        LX_Log::log("FAILURE - expected: u and t must be colinear; Got: u(%f,%f) and t(%f,%f)",
+                    u.vx, u.vy, t.vx, t.vy);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1607,7 +1497,7 @@ void test_VectorCollinear(void)
 
 void test_VectorLambda(void)
 {
-    cout << " = TEST Vector scalar multiplication = " << endl;
+    LX_Log::log(" = TEST Vector, scalar multiplication = ");
 
     float lambda1 = 2.0f;
     float lambda2 = 0.0f;
@@ -1615,69 +1505,70 @@ void test_VectorLambda(void)
     LX_Vector2D w = {v.vx * lambda1,v.vy * lambda1};
     LX_Vector2D t = {0.0f,0.0f};
 
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
 
     multiply(v,lambda1);
 
     if(v == w)
-        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx, v.vy);
     else
-        cerr << "FAILURE - expected : v(" << w.vx << "," << w.vy << "); "
-             << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", w.vx, w.vy,
+                    v.vx, v.vy);
 
     multiply(v,lambda2);
 
     if(v == t)
-        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx, v.vy);
     else
-        cerr << "FAILURE - expected : v(" << t.vx << "," << t.vy << "); "
-             << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx, t.vy,
+                    v.vx, v.vy);
 
     // Test normalization
-    cout << "Reset v" << endl;
+    LX_Log::log("Reset v");
 
     v = {3.0f,0.0f};
     LX_Vector2D vv = {v.vx/vector_norm(v),v.vy/vector_norm(v)};
 
-    cout << "Vector2D v(" << v.vx << "," << v.vy << ")" << endl;
-    cout << "Normalize v" << endl;
+    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Normalize v");
 
     normalize(v);
     float n = vector_norm(v);
 
     if(n == 1.0f)
-        cout << "SUCCESS - Vector2D v(" << v.vx << "," << v.vy
-             << ") is normalized, norm : " << n << endl;
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f) normalized, norm: %f", v.vx, v.vy, n);
     else
-        cerr << "FAILURE - expected : v(" << vv.vx << "," << vv.vy << "); "
-             << "Got : v(" << v.vx << "," << v.vy << ")" << endl;
+        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx, t.vy,
+                    v.vx, v.vy);
 
-    cout << "This test may fail with some complex float values in the vector" << endl;
-    cout << "Try it with V(3.14,2.56)" << endl;
+    LX_Log::logWarning(LX_Log::LX_LOG_TEST,"The previous test may fail with some complex float values in the vector");
+    LX_Log::logWarning(LX_Log::LX_LOG_TEST,"Try it with V(3.14,2.56)");
 
-    cout << "Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
-    cout << "Normalize t" << endl;
+    LX_Log::log("Vector2D t(%f,%f)", t.vx, t.vy);
+    LX_Log::log("Normalize t");
 
     normalize(t);   // t is a null vector
 
     if(t == t)
-        cout << "SUCCESS - Vector2D t(" << t.vx << "," << t.vy << ")" << endl;
+        LX_Log::log("SUCCESS - Vector2D t(%f,%f) normalized, norm: %f", v.vx, v.vy, n);
     else
-        cerr << "FAILURE - a zero vector must be normalized to 0" << endl;
+        LX_Log::log("FAILURE - a zero vector must be normalized to 0");
 
     LX_Log::log(" = END TEST = ");
 }
 
 void displayPoly(LX_Polygon& poly)
 {
-    cout << "{";
+    ostringstream os;
+    os << "{";
     const unsigned long n = poly.numberOfEdges();
     for(unsigned int i = 0; i < n; i++)
     {
-        cout << "(" << (poly.getPoint(i)).x << ","
+        os << "(" << (poly.getPoint(i)).x << ","
              << (poly.getPoint(i)).y << ")";
         if(i != n)
-            cout << ";";
+            os << ";";
     }
-    cout << "}" << endl;
+    os << "}";
+    LX_Log::log("%s",os.str().c_str());
 }
