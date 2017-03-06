@@ -89,6 +89,12 @@ public:
     */
     void addPoint(const LX_Point& p);
 
+    /// @todo Add points using a unique function
+    /**
+    *   @note With this kind of signature
+    *   addPoints(iterator beg, iterator end);
+    */
+
     /**
     *   @fn unsigned long LX_Polygon::numberOfEdges() const
     *   Get the number of points
