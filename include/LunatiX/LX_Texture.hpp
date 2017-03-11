@@ -404,7 +404,7 @@ public:
     */
     uint32_t getFrameDelay() const;
     /**
-    *   @fn bool isInfinitelyLoopable() const
+    *   @fn bool isInfinitelyLooped() const
     *   Check the animation is infinitely looped
     *   @return TRUE if the animation is looped infinitely, FALSE otherwise
     */
