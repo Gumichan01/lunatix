@@ -88,12 +88,16 @@ public:
     *   @param [in] p The new edge to add
     */
     void addPoint(const LX_Point& p);
-
-    /// @todo Add points using a unique function
     /**
-    *   @note With this kind of signature
-    *   addPoints(iterator beg, iterator end);
+    *   @fn template <typename Iterator> void addPoints(Iterator first, Iterator last)
+    *
+    *   Add every points iterated into the polygon
+    *
+    *   @param [in] first Iterator of the structure pointing to the first point
+    *   @param [in] last Iterator of the structure pointing to the position after the last point
     */
+    template <typename Iterator>
+    void addPoints(Iterator first, Iterator last);
 
     /**
     *   @fn unsigned long LX_Polygon::numberOfEdges() const
@@ -101,7 +105,6 @@ public:
     *   @return The number of edges of the polygon
     */
     unsigned long numberOfEdges() const;
-
     /**
     *   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const
     *
@@ -115,7 +118,6 @@ public:
     *              to an out of bounds position
     */
     LX_Point getPoint(const unsigned int index) const;
-
     /**
     *   @fn bool LX_Polygon::isConvex() const
     *
@@ -138,14 +140,12 @@ public:
     *   @param [in] vy The y direction
     */
     void move(const float vx, const float vy);
-
     /**
     *   @fn void LX_Polygon::move(const LX_Vector2D& v)
     *   Move the polygon to a direction
     *   @param [in] v The vector that indicates the direction
     */
     void move(const LX_Vector2D& v);
-
     /**
     *   @fn void LX_Polygon::moveTo(int xpos, int ypos)
     *
@@ -161,5 +161,7 @@ public:
 };
 
 };
+
+#include <LunatiX/LX_Polygon.tpp>
 
 #endif
