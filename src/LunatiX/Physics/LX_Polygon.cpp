@@ -214,7 +214,7 @@ public:
         {
             // self-intersecting polygon. The movement is less accurate
             const auto pend = _points.end();
-
+            /// @todo fix it — incorrect
             for(auto it = _points.begin(); it != pend; it++)
             {
                 const LX_Vector2D iv(*it,p);
