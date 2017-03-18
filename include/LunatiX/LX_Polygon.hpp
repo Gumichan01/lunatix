@@ -21,6 +21,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+#include <LunatiX/LX_AABB.hpp>
 #include <memory>
 
 namespace LX_Physics
@@ -118,6 +119,17 @@ public:
     *              to an out of bounds position
     */
     LX_Point getPoint(const unsigned int index) const;
+    /**
+    *   @fn LX_AABB getEnclosingBox() const
+    *
+    *   Get the axis-aligned minimum bounding box (AABB) that enclose the polygon
+    *   See — https://en.wikipedia.org/wiki/Minimum_bounding_box
+    *
+    *   @return The enclosing box
+    *
+    *   @exception  LX_PolygonException If the polygon has less than 3 sides
+    */
+    LX_AABB getEnclosingBox() const;
     /**
     *   @fn bool LX_Polygon::isConvex() const
     *

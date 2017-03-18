@@ -186,6 +186,43 @@ public:
         return _points.at(index);
     }
 
+    LX_AABB getEnclosingBox() const
+    {
+        if(_points.size() < 3)
+            throw LX_PolygonException("LX_Polygon: Cannot get the enclosing bounding box");
+
+        int xm, ym;
+        LX_AABB aabb = {0,0,0,0};
+        aabb.x = _points.at(0).x;
+        aabb.y = _points.at(0).y;
+        xm = _points.at(0).x;
+        ym = _points.at(0).y;
+
+        for(auto it = _points.begin(); it != _points.end(); it++)
+        {
+            LX_Physics::LX_Point p(*it);
+
+            // X
+            if(p.x < aabb.x)
+                aabb.x = p.x;
+
+            if(p.x > xm)
+                xm = p.x;
+
+            // Y
+            if(p.y < aabb.y)
+                aabb.y = p.y;
+
+            if(p.y > ym)
+                ym = p.y;
+        }
+
+        aabb.w = xm - aabb.x;
+        aabb.h = ym - aabb.y;
+
+        return aabb;
+    }
+
 
     bool isConvex() const
     {
@@ -260,6 +297,11 @@ unsigned long LX_Polygon::numberOfEdges() const
 LX_Point LX_Polygon::getPoint(const unsigned int index) const
 {
     return _polyimpl->getPoint(index);
+}
+
+LX_AABB LX_Polygon::getEnclosingBox() const
+{
+    return _polyimpl->getEnclosingBox();
 }
 
 
