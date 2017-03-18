@@ -53,9 +53,9 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     p2_xmin = box2.x;
     p2_ymin = box2.y;
     // max values
-    p1_ymax = box2.x + box2.w;
-    p1_ymax = box2.y + box2.h;
-    p2_ymax = box2.x + box2.w;
+    p1_xmax = box1.x + box1.w;
+    p1_ymax = box1.y + box1.h;
+    p2_xmax = box2.x + box2.w;
     p2_ymax = box2.y + box2.h;
 
     return intersetInterval(p1_xmin,p1_xmax,p2_xmin,p2_xmax)
