@@ -163,6 +163,11 @@ LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
     return multiply(v, lambda);
 }
 
+LX_Vector2D& operator *=(LX_Vector2D& v,float lambda)
+{
+    v = v * lambda;
+    return v;
+}
 
 float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v)
 {

@@ -75,7 +75,7 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 /**
 *   @fn LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v)
 *
-*   Addition betwwen two vectors
+*   Addition between two vectors
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -86,7 +86,7 @@ LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v);
 /**
 *   @fn LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v)
 *
-*   Addition betwwen two vectors -> 'u += v' <=> 'u = u + v'
+*   Addition between two vectors -> 'u += v' <=> 'u = u + v'
 *
 *   @param [in,out] u The vector that will be modified
 *   @param [in] v The second vector
@@ -97,7 +97,7 @@ LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v)
 *
-*   Substraction betwwen two vectors
+*   Substraction between two vectors
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -108,7 +108,7 @@ LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v);
 /**
 *   @fn LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v)
 *
-*   Substraction betwwen two vectors -> 'u -= v' <=> 'u = u - v'
+*   Substraction between two vectors -> 'u -= v' <=> 'u = u - v'
 *
 *   @param [in,out] u The vector that will be modified
 *   @param [in] v The second vector
@@ -177,6 +177,17 @@ LX_Vector2D operator --(LX_Vector2D& v,int);
 *   @return The new vector after the multiplication
 */
 LX_Vector2D& operator *(LX_Vector2D& v,float lambda);
+/**
+*   @fn LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
+*
+*   Scalar multiplication (syntactic sugar of multiply) -> 'u *= λ' <=> 'u = u * λ'
+*
+*   @param [in,out] v The vector
+*   @param [in] lambda The scalar value
+*
+*   @return The new vector after the multiplication
+*/
+LX_Vector2D& operator *=(LX_Vector2D& v,float lambda);
 
 /**
 *   @fn float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v)
