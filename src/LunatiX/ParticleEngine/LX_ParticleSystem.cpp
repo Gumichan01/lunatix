@@ -19,6 +19,7 @@
 
 #include <LunatiX/LX_ParticleSystem.hpp>
 #include <LunatiX/LX_Particle.hpp>
+#include <LunatiX/LX_Log.hpp>
 #include <LunatiX/LX_Error.hpp>
 
 #include <exception>
@@ -51,8 +52,9 @@ class LX_ParticleSystem_
         if(_particles == nullptr)
         {
             /// !!! This code must not be executed !!!
+            LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
+                                "Particle system: Cannot allocate the particles\n");
             LX_SetError("Particle system: Cannot allocate the particles\n");
-            std::terminate();
         }
     }
 
@@ -66,10 +68,10 @@ public:
 
     bool addParticle(LX_Particle *p) const
     {
-        bool done = false;
-
-        if(p == nullptr)
+        if(_particles == nullptr || p == nullptr)
             return false;
+
+        bool done = false;
 
         for(unsigned int i = 0; i < _nb_particles; i++)
         {
@@ -86,7 +88,8 @@ public:
 
     bool rmParticle(unsigned int index) const
     {
-        if(index > _nb_particles || _particles[index] == nullptr)
+        if(index > _nb_particles || _particles == nullptr
+                || _particles[index] == nullptr)
             return false;
 
         _particles[index].reset();
@@ -95,6 +98,9 @@ public:
 
     void updateParticles() const
     {
+        if(_particles == nullptr)
+            return;
+
         for(unsigned int i = 0; i < _nb_particles; i++)
         {
             if(_particles[i] != nullptr)
@@ -109,6 +115,9 @@ public:
 
     void displayParticles() const
     {
+        if(_particles == nullptr)
+            return;
+
         for(unsigned int i = 0; i < _nb_particles; i++)
         {
             if(_particles[i] != nullptr)
@@ -122,6 +131,9 @@ public:
 
     unsigned int nbEmptyParticles() const
     {
+        if(_particles == nullptr)
+            return 0;
+
         unsigned int nb = 0;
 
         for(unsigned int i = 0; i < _nb_particles; i++)
@@ -135,7 +147,7 @@ public:
 
     unsigned int nbActiveParticles() const
     {
-        return _nb_particles - nbEmptyParticles();
+        return (_particles == nullptr) ? 0 : _nb_particles - nbEmptyParticles();
     }
 
     unsigned int nbTotalParticles() const
@@ -145,9 +157,12 @@ public:
 
     ~LX_ParticleSystem_()
     {
-        for(unsigned int i = 0; i < _nb_particles; i++)
+        if(_particles != nullptr)
         {
-            _particles[i].reset();
+            for(unsigned int i = 0; i < _nb_particles; i++)
+            {
+                _particles[i].reset();
+            }
         }
 
         _particles.reset();
