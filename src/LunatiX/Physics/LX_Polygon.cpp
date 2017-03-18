@@ -123,13 +123,9 @@ class LX_Polygon_
         for(auto it = pbeg; it != pend; it++)
         {
             if(it == pend - 1)
-            {
                 sum += cross_(*it,*pbeg);
-            }
             else
-            {
                 sum += cross_(*it,*(it + 1));
-            }
         }
         return (sum / 2.0f);
     }
@@ -234,12 +230,11 @@ public:
     {
         const int nvx = static_cast<int>(vx);
         const int nvy = static_cast<int>(vy);
-        const auto pend = _points.end();
 
-        for(auto it = _points.begin(); it != pend; it++)
+        std::for_each(_points.begin(), _points.end(), [nvx, nvy] (LX_Point& p)
         {
-            movePoint(*it,nvx,nvy);
-        }
+            movePoint(p,nvx,nvy);
+        });
     }
 
     void moveTo(int xpos, int ypos)
