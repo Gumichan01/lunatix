@@ -37,60 +37,6 @@ bool intersetInterval(const int min1, const int max1, const int min2, const int 
     return (min1 < min2) ? max1 > min2 : max2 > min1;
 }
 
-void getInterval(const LX_Physics::LX_Polygon& poly1,
-                 const LX_Physics::LX_Polygon& poly2,
-                 int& p1_xmin, int& p1_xmax, int& p1_ymin, int& p1_ymax,
-                 int& p2_xmin, int& p2_xmax, int& p2_ymin, int& p2_ymax)
-{
-    const unsigned long N = poly1.numberOfEdges();
-    const unsigned long M = poly2.numberOfEdges();
-
-    p1_xmin = poly1.getPoint(0).x;
-    p1_xmax = poly1.getPoint(0).x;
-    p1_ymin = poly1.getPoint(0).y;
-    p1_ymax = poly1.getPoint(0).y;
-    p2_xmin = poly2.getPoint(0).x;
-    p2_xmax = poly2.getPoint(0).x;
-    p2_ymin = poly2.getPoint(0).y;
-    p2_ymax = poly2.getPoint(0).y;
-
-    for(unsigned int i = 1; i < N; i++)
-    {
-        LX_Physics::LX_Point p = poly1.getPoint(i);
-
-        // X
-        if(p.x < p1_xmin)
-            p1_xmin = p.x;
-
-        if(p.x > p1_xmax)
-            p1_xmax = p.x;
-
-        // Y
-        if(p.y < p1_ymin)
-            p1_ymin = p.y;
-
-        if(p.y > p1_ymax)
-            p1_ymax = p.y;
-    }
-
-    for(unsigned int j = 1; j < M; j++)
-    {
-        LX_Physics::LX_Point q = poly2.getPoint(j);
-
-        if(q.x < p2_xmin)
-            p2_xmin = q.x;
-
-        if(q.x > p2_xmax)
-            p2_xmax = q.x;
-
-        if(q.y < p2_ymin)
-            p2_ymin = q.y;
-
-        if(q.y > p2_ymax)
-            p2_ymax = q.y;
-    }
-}
-
 // Calcute the collision between two polygons using the Separating Axis Theorem (SAT)
 // pre-condition : poly1 and poly2 must be convex with at least 4 sides
 bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
@@ -98,10 +44,19 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
 {
     int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
     int p2_xmin, p2_xmax, p2_ymin, p2_ymax;
+    LX_AABB box1 = poly1.getEnclosingBox();
+    LX_AABB box2 = poly2.getEnclosingBox();
 
-    getInterval(poly1,poly2,
-                p1_xmin,p1_xmax,p1_ymin,p1_ymax,
-                p2_xmin,p2_xmax,p2_ymin,p2_ymax);
+    // min values
+    p1_xmin = box1.x;
+    p1_ymin = box1.y;
+    p2_xmin = box2.x;
+    p2_ymin = box2.y;
+    // max values
+    p1_ymax = box2.x + box2.w;
+    p1_ymax = box2.y + box2.h;
+    p2_ymax = box2.x + box2.w;
+    p2_ymax = box2.y + box2.h;
 
     return intersetInterval(p1_xmin,p1_xmax,p2_xmin,p2_xmax)
            && intersetInterval(p1_ymin,p1_ymax,p2_ymin,p2_ymax);
@@ -111,15 +66,8 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
 bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
                                 const LX_Physics::LX_Polygon& poly2)
 {
-    int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
-    int p2_xmin, p2_xmax, p2_ymin, p2_ymax;
-
-    getInterval(poly1,poly2,p1_xmin,p1_xmax,p1_ymin,p1_ymax,
-                p2_xmin,p2_xmax,p2_ymin,p2_ymax);
-
-    LX_AABB box1 = {p1_xmin, p1_ymin, p1_xmax-p1_xmin, p1_ymax-p1_ymin};
-    LX_AABB box2 = {p2_xmin, p2_ymin, p2_xmax-p2_xmin, p2_ymax-p2_ymin};
-
+    LX_AABB box1 = poly1.getEnclosingBox();
+    LX_AABB box2 = poly2.getEnclosingBox();
     return LX_Physics::collisionRect(box1,box2);
 }
 
