@@ -406,7 +406,6 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v);
 *   @param [in] ypos The y position
 */
 void movePointTo(LX_Point& P, const int xpos, const int ypos);
-
 /**
 *   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
 *
@@ -417,7 +416,15 @@ void movePointTo(LX_Point& P, const int xpos, const int ypos);
 *   @param [in] ypos The y position
 */
 void moveRectTo(LX_AABB& rect, const int xpos, const int ypos);
-
+/**
+*   @fn void moveRectTo(LX_AABB& rect, const LX_Point& P)
+*
+*   Move an AABB to an absolute position
+*
+*   @param [in] rect The AABB to move
+*   @param [in] P The new position
+*/
+void moveRectTo(LX_AABB& rect, const LX_Point& P);
 /**
 *   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
 *
@@ -428,7 +435,15 @@ void moveRectTo(LX_AABB& rect, const int xpos, const int ypos);
 *   @param [in] ypos The y position
 */
 void moveCircleTo(LX_Circle& C, const int xpos, const int ypos);
-
+/**
+*   @fn void moveCircleTo(LX_Circle& C, const LX_Point& P)
+*
+*   Move a circle to an absolute position
+*
+*   @param [in] C The circle to move
+*   @param [in] P The new position
+*/
+void moveCircleTo(LX_Circle& C, const LX_Point& P);
 /**
 *   @fn void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 *
@@ -439,6 +454,15 @@ void moveCircleTo(LX_Circle& C, const int xpos, const int ypos);
 *   @param [in] ypos The y position
 */
 void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
+/**
+*   @fn void movePolyTo(LX_Polygon& poly, const LX_Point& P)
+*
+*   Move a polygon to an absolute position
+*
+*   @param [in] poly The polygon to move
+*   @param [in] P The new position
+*/
+void movePolyTo(LX_Polygon& poly, const LX_Point& P);
 
 };
 

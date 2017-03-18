@@ -470,16 +470,29 @@ void moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
     rect.y = ypos;
 }
 
+void moveRectTo(LX_AABB& rect, const LX_Point& P)
+{
+    moveRectTo(rect, P.x, P.y);
+}
 
 void moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
 {
     movePointTo(C.center,xpos,ypos);
 }
 
+void moveCircleTo(LX_Circle& C, const LX_Point& P)
+{
+    moveCircleTo(C, P.x, P.y);
+}
 
 void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 {
     poly.moveTo(xpos,ypos);
+}
+
+void movePolyTo(LX_Polygon& poly, const LX_Point& P)
+{
+    movePolyTo(poly, P.x, P.y);
 }
 
 };
