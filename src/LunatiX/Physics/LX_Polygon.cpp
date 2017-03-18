@@ -245,25 +245,20 @@ public:
     void moveTo(int xpos, int ypos)
     {
         const LX_Point p(xpos,ypos);
+        LX_Vector2D v;
         LX_Point centroid;
 
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
-            const auto pend = _points.end();
-            /// @todo fix it — incorrect
-            for(auto it = _points.begin(); it != pend; it++)
-            {
-                const LX_Vector2D iv(*it,p);
-                move(iv.vx,iv.vy);
-            }
+            const LX_AABB box = getEnclosingBox();
+            const LX_Point q(box.x + box.w/2, box.y + box.h/2);
+            v = LX_Vector2D(q,p);
         }
-        else
-        {
-            // Normal case.→ accurate movement
-            const LX_Vector2D v(centroid,p);
-            move(v.vx,v.vy);
-        }
+        else // Normal case.→ accurate movement
+            v = LX_Vector2D(centroid,p);
+
+        move(v.vx,v.vy);
     }
 
     ~LX_Polygon_() = default;
