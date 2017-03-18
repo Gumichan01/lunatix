@@ -515,7 +515,8 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 
 void movePointTo(LX_Point& P, const int xpos, const int ypos)
 {
-    P = LX_Point(xpos,ypos);
+    P.x = xpos;
+    P.y = ypos;
 }
 
 
