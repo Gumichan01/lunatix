@@ -417,11 +417,21 @@ void movePoint(LX_Point& P, const int vx, const int vy)
     P.y += vy;
 }
 
+void movePoint(LX_Point& P, const LX_Vector2D& v)
+{
+    movePoint(P,static_cast<int>(v.vx),static_cast<int>(v.vy));
+}
+
 
 void moveRect(LX_AABB& rect, const int vx, const int vy)
 {
     rect.x += vx;
     rect.y += vy;
+}
+
+void moveRect(LX_AABB& rect, const LX_Vector2D& v)
+{
+    moveRect(rect,static_cast<int>(v.vx),static_cast<int>(v.vy));
 }
 
 
@@ -430,30 +440,16 @@ void moveCircle(LX_Circle& C, const int vx, const int vy)
     movePoint(C.center,vx,vy);
 }
 
-
-void movePoly(LX_Polygon& poly, const float vx, const float vy)
-{
-    poly.move(vx,vy);
-}
-
-
-void movePoint(LX_Point& P, const LX_Vector2D& v)
-{
-    movePoint(P,static_cast<int>(v.vx),static_cast<int>(v.vy));
-}
-
-
-void moveRect(LX_AABB& rect, const LX_Vector2D& v)
-{
-    moveRect(rect,static_cast<int>(v.vx),static_cast<int>(v.vy));
-}
-
-
 void moveCircle(LX_Circle& C, const LX_Vector2D& v)
 {
     moveCircle(C,static_cast<int>(v.vx),static_cast<int>(v.vy));
 }
 
+
+void movePoly(LX_Polygon& poly, const float vx, const float vy)
+{
+    poly.move(vx,vy);
+}
 
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 {

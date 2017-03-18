@@ -329,7 +329,15 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 *   @param [in] vy The y direction
 */
 void movePoint(LX_Point& P, const int vx, const int vy);
-
+/**
+*   @fn void movePoint(LX_Point& P, const LX_Vector2D& v)
+*
+*   Move a point to a direction using the vector
+*
+*   @param [in] P The point to move
+*   @param [in] v The vector that indicates the direction
+*/
+void movePoint(LX_Point& P, const LX_Vector2D& v);
 /**
 *   @fn void moveRect(LX_AABB& rect, const int vx, const int vy)
 *
@@ -340,7 +348,15 @@ void movePoint(LX_Point& P, const int vx, const int vy);
 *   @param [in] vy The y direction
 */
 void moveRect(LX_AABB& rect, const int vx, const int vy);
-
+/**
+*   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v)
+*
+*   Move an AABB to a direction using the vector
+*
+*   @param [in] rect The AABB to move
+*   @param [in] v The vector that indicates the direction
+*/
+void moveRect(LX_AABB& rect, const LX_Vector2D& v);
 /**
 *   @fn void moveCircle(LX_Circle& C, const int vx, const int vy)
 *
@@ -351,7 +367,15 @@ void moveRect(LX_AABB& rect, const int vx, const int vy);
 *   @param [in] vy The y direction
 */
 void moveCircle(LX_Circle& C, const int vx, const int vy);
-
+/**
+*   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v)
+*
+*   Move the circle to a direction using the vector
+*
+*   @param [in] C The circle to move
+*   @param [in] v The vector that indicates the direction
+*/
+void moveCircle(LX_Circle& C, const LX_Vector2D& v);
 /**
 *   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy)
 *
@@ -362,37 +386,6 @@ void moveCircle(LX_Circle& C, const int vx, const int vy);
 *   @param [in] vy The y direction
 */
 void movePoly(LX_Polygon& poly, const float vx, const float vy);
-
-/**
-*   @fn void movePoint(LX_Point& P, const LX_Vector2D& v)
-*
-*   Move a point to a direction using the vector
-*
-*   @param [in] P The point to move
-*   @param [in] v The vector that indicates the direction
-*/
-void movePoint(LX_Point& P, const LX_Vector2D& v);
-
-/**
-*   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v)
-*
-*   Move an AABB to a direction using the vector
-*
-*   @param [in] rect The AABB to move
-*   @param [in] v The vector that indicates the direction
-*/
-void moveRect(LX_AABB& rect, const LX_Vector2D& v);
-
-/**
-*   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v)
-*
-*   Move the circle to a direction using the vector
-*
-*   @param [in] C The circle to move
-*   @param [in] v The vector that indicates the direction
-*/
-void moveCircle(LX_Circle& C, const LX_Vector2D& v);
-
 /**
 *   @fn void movePoly(LX_Polygon& poly, const LX_Vector2D& v)
 *
