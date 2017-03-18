@@ -323,4 +323,9 @@ void LX_Polygon::moveTo(int xpos, int ypos)
     _polyimpl->moveTo(xpos,ypos);
 }
 
+void LX_Polygon::moveTo(const LX_Point& p)
+{
+    _polyimpl->moveTo(p.x, p.y);
+}
+
 };

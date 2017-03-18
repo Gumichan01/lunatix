@@ -161,13 +161,20 @@ public:
     /**
     *   @fn void LX_Polygon::moveTo(int xpos, int ypos)
     *
-    *   Move the polygon to a position
+    *   Move the polygon to an absolute position
     *
     *   @param [in] xpos The x position
     *   @param [in] ypos The y position
     */
     void moveTo(int xpos, int ypos);
-
+    /**
+    *   @fn void moveTo(const LX_Point& p)
+    *
+    *   Move the polygon to an absolute position
+    *
+    *   @param [in] p The new position
+    */
+    void moveTo(const LX_Point& p);
     /// Destructor
     ~LX_Polygon();
 };
