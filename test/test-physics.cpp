@@ -349,7 +349,7 @@ void test_collisionRectCircle(void)
 void testPolygon(void)
 {
     LX_Polygon poly;
-    LX_Point p;
+    LX_Point p, q, r;
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -386,10 +386,15 @@ void testPolygon(void)
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The triangle is a convex polygon, well done !");
 
+    {
+        LX_AABB b = poly.getEnclosingBox();
+        LX_Log::log("enclosing box {%d, %d, %d, %d}", b.x, b.y, b.w, b.h);
+    }
+
     // Now we have a polygon with 4 edges
-    p = {7,2};
-    LX_Log::log("add point p(%d,%d)", p.x, p.y);
-    poly.addPoint(p);
+    q = {7,2};
+    LX_Log::log("add point p(%d,%d)", q.x, q.y);
+    poly.addPoint(q);
 
     // It must be convex
     LX_Log::log("Test the convexity of the polygon with the new point.");
@@ -399,8 +404,8 @@ void testPolygon(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (7,2). This is still a convex polygon, well done !");
 
     // New edge
-    p = {6,5};
-    LX_Log::log("add point p(%d,%d)", p.x, p.y);
+    r = {6,5};
+    LX_Log::log("add point p(%d,%d)", r.x, r.y);
     poly.addPoint(6,5);
 
     // It must be non-convex
@@ -409,6 +414,11 @@ void testPolygon(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: non-convex; Got: convex");
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (6,5). This is not a convex polygon");
+
+    {
+        LX_AABB b = poly.getEnclosingBox();
+        LX_Log::log("enclosing box {%d, %d, %d, %d}", b.x, b.y, b.w, b.h);
+    }
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1090,7 +1100,7 @@ void test_move(void)
     if(n != m)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - ≠ degree. #edges expected: %d, got: %d",m,n);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - these polygon have the same degree");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - these polygons have the same degree");
 
     try
     {
@@ -1115,6 +1125,17 @@ void test_move(void)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - uncaught exception at %s:%d",__FILE__,__LINE__);
     }
+
+    // reset
+    movePoly(poly,-X,-Y);
+    LX_AABB box = expoly.getEnclosingBox();
+    LX_Point q(box.x + box.w/2, box.y + box.h/2);
+
+    movePolyTo(poly, q.x, q.y);
+    LX_AABB b = poly.getEnclosingBox();
+    LX_Point s(b.x + b.w/2, b.y + b.h/2);
+    LX_Log::log("centroid of poly: s(%d,%d)", s.x, s.y);
+    LX_Log::log("centroid of expoly: q(%d,%d)", q.x, q.y);
 
     LX_Log::log(" = END TEST = ");
 }
