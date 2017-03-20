@@ -558,7 +558,7 @@ protected:
     LX_TrueTypeFont::LX_Font& _font;
     unsigned int _size;
     LX_Colour _colour;
-    LX_AABB _dimension;
+    LX_AABB _dimension;     /// @todo (#1#) Get the width/height of a text texture
 
     virtual void updateTexture_() = 0;
 
