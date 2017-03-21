@@ -122,7 +122,10 @@ void test_SolidText()
         LX_Log::log("Size: 32 → 72");
         for(unsigned int j = 32; j < 74; j += 2)
         {
+            int w, h;
             simg.setTextSize(j);
+            simg.getTextDimension(w, h);
+            LX_Log::log("Dimension: %d × %d", w,h);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -187,7 +190,10 @@ void test_ShadedText()
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
+            int w, h;
             simg.setTextSize(j);
+            simg.getTextDimension(w, h);
+            LX_Log::log("Dimension: %d × %d", w,h);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -248,7 +254,10 @@ void test_BlendedText()
         LX_Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
+            int w, h;
             simg.setTextSize(j);
+            simg.getTextDimension(w, h);
+            LX_Log::log("Dimension: %d × %d", w,h);
             win.clearWindow();
             simg.draw();
             simg2.draw();
