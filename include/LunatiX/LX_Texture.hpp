@@ -558,7 +558,7 @@ protected:
     LX_TrueTypeFont::LX_Font& _font;
     unsigned int _size;
     LX_Colour _colour;
-    LX_AABB _dimension;     /// @todo (#1#) Get the width/height of a text texture
+    LX_AABB _dimension;
 
     virtual void updateTexture_() = 0;
 
@@ -680,6 +680,14 @@ public:
     *   @return The text size
     */
     unsigned int getTextSize() const;
+    /**
+    *   @fn void getTextDimension(int& w, int& h)
+    *   Get the dimension of the text displayed on the screen (width/height)
+    *
+    *   @param [out] w Width value returned by this function
+    *   @param [out] h Height value returned by this function
+    */
+    void getTextDimension(int& w, int& h);
     /**
     *   @fn LX_Colour getTextColour() const
     *   Get the text colour

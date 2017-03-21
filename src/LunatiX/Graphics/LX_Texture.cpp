@@ -474,6 +474,12 @@ unsigned int LX_TextTexture::getTextSize() const
     return _size;
 }
 
+void LX_TextTexture::getTextDimension(int& w, int& h)
+{
+    w = _dimension.w;
+    h = _dimension.h;
+}
+
 LX_Colour LX_TextTexture::getTextColour() const
 {
     return _colour;
