@@ -104,35 +104,35 @@ void test_euclide(void)
     float d = euclide_square_distance(A,B);
 
     if(d != 81.0f)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance AB - expected: 81; Got: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance AB - expected: 81; Got: %f",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance AB: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance AB: %f",d);
 
     LX_Log::log("Distance between A and B");
     d = euclide_distance(A,B);
 
     if(d != 9.0f)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance AB - expected: 9; Got: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance AB - expected: 9; Got: %f",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good distance AB: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good distance AB: %f",d);
 
     // Test CD
     LX_Log::log("Square distance CD");
     d = euclide_square_distance(C,D);
 
     if(d != 200.0f)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance CD - expected: 81; Got: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance CD - expected: 81; Got: %f",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %f",d);
 
     LX_Log::log("Distance between C and D");
     d = euclide_distance(C,D);
 
     if(static_cast<int>(d) != static_cast<int>(sqrt(200)))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance CD - expected: %f; Got: %d",
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance CD - expected: %f; Got: %f",
                         static_cast<float>(sqrt(200)),d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %d",d);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %f",d);
 
     LX_Log::log(" = END TEST = ");
 }
