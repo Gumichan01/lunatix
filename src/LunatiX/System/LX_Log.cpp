@@ -22,10 +22,8 @@
 
 #if defined(__WIN32__)
 #include <Windows.h>
-#pragma message "Windows platform: Included \"Windows.h\""
 #elif defined(__linux__)
 #include <cmath>
-#pragma message "Linux platform: Included \"cmath\""
 #else
 #error "Not supported system"
 #endif
