@@ -480,6 +480,16 @@ void LX_TextTexture::getTextDimension(int& w, int& h)
     h = _dimension.h;
 }
 
+int LX_TextTexture::getTextWidth()
+{
+    return _dimension.w;
+}
+
+int LX_TextTexture::getTextHeight()
+{
+    return _dimension.h;
+}
+
 LX_Colour LX_TextTexture::getTextColour() const
 {
     return _colour;

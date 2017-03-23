@@ -688,6 +688,19 @@ public:
     *   @param [out] h Height value returned by this function
     */
     void getTextDimension(int& w, int& h);
+
+    /**
+    *   @fn int getTextWidth()
+    *   Get the width of the text displayed on the screen
+    *   @return The width
+    */
+    int getTextWidth();
+    /**
+    *   @fn int getTextHeight()
+    *   Get the height of the text displayed on the screen
+    *   @return The height
+    */
+    int getTextHeight();
     /**
     *   @fn LX_Colour getTextColour() const
     *   Get the text colour
