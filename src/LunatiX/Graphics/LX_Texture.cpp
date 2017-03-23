@@ -199,7 +199,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const uint32_t delay, bool loop,
                                      uint32_t format)
     : LX_Sprite(t,w,nullptr,format), _coordinates(coord), _SZ(coord.size()),
-      _delay(delay), _btime(0), _frame(0), _loop(loop), _started(false) {}
+      _delay(delay), _btime(0), _frame(0), _started(false), _loop(loop), _drawable(true) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
