@@ -116,7 +116,6 @@ void setMusicPosition(double pos)
 
 int allocateChannels(int num)
 {
-
     int n = Mix_AllocateChannels(num);
 
     // Set the volume of every channels to *fx_volume*

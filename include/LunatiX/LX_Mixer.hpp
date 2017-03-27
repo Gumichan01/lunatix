@@ -362,6 +362,7 @@ void fadeInMusicPos(LX_Music& music,int ms,int pos);
 */
 void fadeOutMusic(int ms);
 
+/// @todo setPanning() — version of the function for a specific channel and test it
 /**
 *   @fn void setPanning(uint8_t left,uint8_t right)
 *
@@ -387,6 +388,9 @@ void setPanning(uint8_t left,uint8_t right);
 void removePanning();
 
 // 3D Position
+
+/// @todo setPosition() — version of the function for a specific channel and test it
+
 /**
 *   @fn void setPosition(int16_t angle)
 *
