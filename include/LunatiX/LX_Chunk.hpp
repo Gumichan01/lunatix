@@ -149,7 +149,7 @@ public:
     */
     bool play(int channel,int loops);
     /**
-    *   @fn bool play(int channel,int loops,int ticks)
+    *   @fn bool play(int channel, int loops, int ticks)
     *
     *   Play the current sample during a moment
     *
@@ -160,7 +160,7 @@ public:
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample on with no loop
     */
-    bool play(int channel,int loops,int ticks);
+    bool play(int channel, int loops, int ticks);
 
     /// Close the chunk
     virtual void close();
