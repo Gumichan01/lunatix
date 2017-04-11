@@ -91,7 +91,7 @@ class LX_TextInput_;
 *   It is not necessary to handle text input events, because *LX_TextInput* does that properly.
 *
 *   So, in order to use LX_TextInput, you need to:
-*   - Define a class as a subclass of the pure virtuel class *LX_RedrawCallback*.
+*   - Define a class as a subclass of the pure virtual class *LX_RedrawCallback*.
 *   - Define the operator () provided by *LX_RedrawCallback*.
 *   - Declare an object of type *LX_TextInput*.
 *   - Call the function **LX_TextInput::eventLoop** of this object giving the callback function in argument.
