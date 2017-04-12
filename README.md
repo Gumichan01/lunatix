@@ -81,7 +81,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 ## Contribute ##
 
 You may take a look on the library or get the development version on [Github][].
-The library reference is also available [online][] (version 0.10).
+The library reference is also available [here][] (version 0.10).
 
 ### Prerequisites ###
 
@@ -139,7 +139,7 @@ using the **dox** configuration file.
 
 [LunatiX Logo]: https://raw.githubusercontent.com/Gumichan01/lunatix/master/data/lunatix-logo.png
 [Github]: https://github.com/Gumichan01/lunatix
-[online]: https://gumichan01.github.io/lunatix/reference/v0.10.0/
+[here]: https://github.com/Gumichan01/lunatix/tree/gh-pages/reference
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
 [libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.10.0
 [MinGW]: http://www.mingw.org/
