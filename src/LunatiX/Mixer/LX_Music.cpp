@@ -80,7 +80,10 @@ protected:
 public:
 
     explicit LX_Music_(const std::string& filename)
-        : LX_Music_(UTF8string(filename)) {}
+        : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)
+    {
+        _loaded = load_(filename);
+    }
 
     explicit LX_Music_(const UTF8string& filename)
         : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)

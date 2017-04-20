@@ -224,12 +224,10 @@ bool LX_AnimatedSprite::isOpen() const
     return LX_Texture::isOpen();
 }
 
-
 void LX_AnimatedSprite::draw(LX_AABB * box)
 {
     draw(box, 0.0);
 }
-
 
 void LX_AnimatedSprite::draw(LX_AABB * box, const double angle)
 {
@@ -249,10 +247,12 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
         _btime = SDL_GetTicks();
 
         if(_frame == _SZ - 1)
+        {
             if(_loop)
                 _frame = 0;
             else
                 _drawable = false;
+        }
         else
             _frame += 1;
     }
@@ -263,6 +263,14 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
                          &_coordinates[_frame], box, (-radianToDegree(angle)),
                          nullptr, shortToFlip_(mirror));
     }
+}
+
+
+void LX_AnimatedSprite::resetAnimation()
+{
+    _started = false;
+    _drawable = true;
+    _frame = 0;
 }
 
 

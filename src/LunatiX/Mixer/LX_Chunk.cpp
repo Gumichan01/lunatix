@@ -39,7 +39,10 @@ public:
     explicit LX_Chunk_(Mix_Chunk& chunk): _chunk(&chunk), _loaded(true) {}
 
     explicit LX_Chunk_(const std::string& filename)
-        : LX_Chunk_(UTF8string(filename)) {}
+        : _chunk(nullptr), _loaded(false)
+    {
+        _loaded = load_(UTF8string(filename));
+    }
 
     explicit LX_Chunk_(const UTF8string& filename)
         : _chunk(nullptr), _loaded(false)

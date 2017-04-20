@@ -398,6 +398,12 @@ public:
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
 
     /**
+    *   @fn void resetAnimation()
+    *   Reset the animation to the beginning
+    */
+    void resetAnimation();
+
+    /**
     *   @fn uint32_t getFrameDelay() const
     *   Get the delay to display each frame of the sprite sheet
     *   @return The delay
