@@ -115,7 +115,7 @@ void test_image(LX_Win::LX_Window *win)
     std::string mname = "data/01.ogg";
     UTF8string u8name("data/bullet.png");
 
-    LX_Log::log("|> LX_Sprite");
+    /*LX_Log::log("|> LX_Sprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
 
     {
@@ -343,7 +343,7 @@ void test_image(LX_Win::LX_Window *win)
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
-    }
+    }*/
 
     LX_Log::log("|> LX_AnimatedSprite");
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
@@ -386,7 +386,6 @@ void test_image(LX_Win::LX_Window *win)
 
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Animation");
-        LX_AABB rect = {256, 64,211,448};
         Uint32 delay = 125;
         std::vector<LX_AABB> coordinates;
         coordinates.push_back({212,0,211,448});
@@ -405,18 +404,52 @@ void test_image(LX_Win::LX_Window *win)
         coordinates.push_back({1272,449,211,448});
         coordinates.push_back({1484,449,211,448});
 
-        LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — delay: %d; infinitely looped: %s",
-                        sprite.getFrameDelay(), sprite.isInfinitelyLooped() ? "Yes" : "No");
-
-        for(int i = 0; i < 512; i++)
         {
+            // Infinite animation
+            LX_AABB rect = {256,64,211,448};
+            LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — infinitely looped: %s",
+                            sprite.isInfinitelyLooped() ? "Yes" : "No");
+            LX_Log::log("frame delay: %u ms", sprite.getFrameDelay());
+
+            for(int i = 0; i < 512; i++)
+            {
+                win->clearWindow();
+                sprite.draw(&rect);
+                win->update();
+                LX_Timer::delay(16);
+            }
             win->clearWindow();
-            sprite.draw(&rect);
-            win->update();
-            LX_Timer::delay(16);
         }
-        win->clearWindow();
+
+        LX_Log::log("Not infinite animation");
+
+        {
+            // Animation
+            LX_AABB rect = {420,100,211,448};
+            LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — infinitely looped: %s",
+                            sprite.isInfinitelyLooped() ? "Yes" : "No");
+            LX_Log::log("frame delay: %u ms", sprite.getFrameDelay());
+
+            uint32_t t = LX_Timer::getTicks();
+            for(int j = 0; j <= 1; j++)
+            {
+                while((LX_Timer::getTicks() - t) < 2000)
+                {
+                    win->clearWindow();
+                    sprite.draw(&rect);
+                    win->update();
+                    LX_Timer::delay(16);
+                }
+
+                win->clearWindow();
+                sprite.resetAnimation();
+                LX_Log::log("Reset animation");
+                t = LX_Timer::getTicks();
+                LX_Timer::delay(500);
+            }
+        }
     }
 
     LX_Log::log(" = END TEST= ");
