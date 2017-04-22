@@ -70,7 +70,6 @@ class LX_Chunk;
 *   @note if volume > 100, then the overall volume is set to 100
 */
 void setOverallVolume(unsigned short volume);
-
 /**
 *   @fn void setMusicVolume(unsigned short pvolume)
 *
@@ -83,7 +82,6 @@ void setOverallVolume(unsigned short volume);
 *   @note The music volume ca be get using ::getMusicVolume()
 */
 void setMusicVolume(unsigned short pvolume);
-
 /**
 *   @fn void setFXVolume(unsigned short pvolume)
 *
@@ -100,27 +98,19 @@ void setFXVolume(unsigned short pvolume);
 
 /**
 *   @fn unsigned short getOverallVolume()
-*
 *   Get the overall volume
-*
 *   @return The overall volume
 */
 unsigned short getOverallVolume();
-
 /**
 *   @fn unsigned short getMusicVolume()
-*
 *   Get the music volume
-*
 *   @return The music volume
 */
 unsigned short getMusicVolume();
-
 /**
 *   @fn unsigned short getFXVolume()
-*
 *   Get the FX volume
-*
 *   @return The FX volume
 */
 unsigned short getFXVolume();
@@ -320,7 +310,7 @@ int isPaused(int channel);
 /* == Effects == */
 
 /**
-*   @fn void fadeInMusic(LX_Music& music,int ms)
+*   @fn void fadeInMusic(LX_Music& music, int ms)
 *
 *   Fade in the loaded Music over some milliseconds of time
 *
@@ -333,9 +323,9 @@ int isPaused(int channel);
 *   @note Any previous music will be halted, or if it is fading out
 *          it will wait (blocking) for the fade to complete
 */
-void fadeInMusic(LX_Music& music,int ms);
+void fadeInMusic(LX_Music& music, int ms);
 /**
-*   @fn void void fadeInMusicPos(LX_Music& music,int ms,int pos)
+*   @fn void void fadeInMusicPos(LX_Music& music,int ms, int pos)
 *
 *   Fade in the loaded Music over some milliseconds of time from the position
 *
@@ -349,7 +339,7 @@ void fadeInMusic(LX_Music& music,int ms);
 *   @note Any previous music will be halted, or if it is fading out
 *          it will wait (blocking) for the fade to complete
 */
-void fadeInMusicPos(LX_Music& music,int ms,int pos);
+void fadeInMusicPos(LX_Music& music, int ms, int pos);
 /**
 *   @fn void fadeOutMusic(int ms)
 *
@@ -364,7 +354,7 @@ void fadeOutMusic(int ms);
 
 /// @todo setPanning() — version of the function for a specific channel and test it
 /**
-*   @fn void setPanning(uint8_t left,uint8_t right)
+*   @fn void setPanning(uint8_t left, uint8_t right)
 *
 *   Set the panning, increasing of decreasing the volume on the left or the right
 *
@@ -380,7 +370,7 @@ void fadeOutMusic(int ms);
 *   @note To unregister this effect, use this function with 255 as left and right value
 *          or simply use LX_Mixer::removePanning().
 */
-void setPanning(uint8_t left,uint8_t right);
+void setPanning(uint8_t left, uint8_t right);
 /**
 *   @fn void removePanning()
 *   Remove the panning effect
