@@ -80,7 +80,7 @@ void setFXVolume(unsigned short pvolume)
         fx_volume = pvolume * overall_volume/100;
 
     if(allocateChannels(-1) > 0)
-        Mix_Volume(-1,fx_volume);
+        Mix_Volume(-1, fx_volume);
 
     fx_pvolume = pvolume;
 }
@@ -120,7 +120,7 @@ int allocateChannels(int num)
 
     // Set the volume of every channels to *fx_volume*
     if(num > 0)
-        Mix_Volume(-1,fx_volume);
+        Mix_Volume(-1, fx_volume);
 
     return n;
 }
@@ -134,13 +134,13 @@ int reserveChannels(int numchans)
 
 bool groupChannel(int chan, int tag)
 {
-    return Mix_GroupChannel(chan,tag) == 1;
+    return Mix_GroupChannel(chan, tag) == 1;
 }
 
 
 int groupChannels(int from, int to, int tag)
 {
-    return Mix_GroupChannels(from,to,tag);
+    return Mix_GroupChannels(from, to, tag);
 }
 
 int groupCount(int tag)
@@ -170,7 +170,7 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops)
             haltChannel(chan);
     }
 
-    return chunk.play(chan,loops);
+    return chunk.play(chan, loops);
 }
 
 
@@ -210,15 +210,15 @@ int isPaused(int channel)
 }
 
 
-void fadeInMusic(LX_Music& music,int ms)
+void fadeInMusic(LX_Music& music, int ms)
 {
     music.fadeIn(ms);
 }
 
 
-void fadeInMusicPos(LX_Music& music,int ms,int pos)
+void fadeInMusicPos(LX_Music& music, int ms, int pos)
 {
-    music.fadeInPos(ms,pos);
+    music.fadeInPos(ms ,pos);
 }
 
 
@@ -230,48 +230,52 @@ void fadeOutMusic(int ms)
 
 void setPanning(uint8_t left, uint8_t right)
 {
-    Mix_SetPanning(MIX_CHANNEL_POST,left,right);
+    Mix_SetPanning(MIX_CHANNEL_POST, left, right);
 }
 
 void setPanning(int chan, uint8_t left, uint8_t right)
 {
-    Mix_SetPanning(chan,left,right);
+    Mix_SetPanning(chan, left, right);
 }
 
 void removePanning()
 {
-    setPanning(LX_MIXER_EFFECT_LOUD,LX_MIXER_EFFECT_LOUD);
+    setPanning(LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
 }
 
+void removePanning(int chan)
+{
+    setPanning(chan, LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
+}
 
 void setPosition(int16_t angle)
 {
-    setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE);
+    setPosition(angle, LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
 
 void setPosition(int16_t angle, uint8_t distance)
 {
-    Mix_SetPosition(MIX_CHANNEL_POST,angle,distance);
+    Mix_SetPosition(MIX_CHANNEL_POST, angle, distance);
 }
 
 
 void resetPosition()
 {
-    Mix_SetPosition(MIX_CHANNEL_POST,LX_MIXER_EFFECT_NO_ANGLE,LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(MIX_CHANNEL_POST ,LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
 
 void reverseStereo(bool flip)
 {
     int opt = flip ? 1:0;
-    Mix_SetReverseStereo(MIX_CHANNEL_POST,opt);
+    Mix_SetReverseStereo(MIX_CHANNEL_POST, opt);
 }
 
 
 void setDistance(uint8_t distance)
 {
-    Mix_SetDistance(MIX_CHANNEL_POST,distance);
+    Mix_SetDistance(MIX_CHANNEL_POST, distance);
 }
 
 };

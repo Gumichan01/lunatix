@@ -352,7 +352,6 @@ void fadeInMusicPos(LX_Music& music, int ms, int pos);
 */
 void fadeOutMusic(int ms);
 
-/// @todo setPanning() — version of the function for a specific channel and test it
 /**
 *   @fn void setPanning(uint8_t left, uint8_t right)
 *
@@ -386,7 +385,7 @@ void setPanning(uint8_t left, uint8_t right);
 *        the maximum volume to be 127 per channel for center,
 *        or 254 max for left, this works, but about halves the effective volume.
 *   @note To unregister this effect, use this function with 255 as left and right value
-*        or simply use LX_Mixer::removePanning().
+*        or simply use LX_Mixer::removePanning(int chan).
 */
 void setPanning(int chan, uint8_t left, uint8_t right);
 /**
@@ -394,6 +393,13 @@ void setPanning(int chan, uint8_t left, uint8_t right);
 *   Remove the panning effect
 */
 void removePanning();
+/**
+*   @fn void removePanning(int chan)
+*   Remove the panning effect on a specific channel
+*
+*   @param [in] chan The channel to remove the effect from
+*/
+void removePanning(int chan);
 
 // 3D Position
 
