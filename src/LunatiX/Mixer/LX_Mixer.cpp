@@ -228,11 +228,15 @@ void fadeOutMusic(int ms)
 }
 
 
-void setPanning(uint8_t left,uint8_t right)
+void setPanning(uint8_t left, uint8_t right)
 {
     Mix_SetPanning(MIX_CHANNEL_POST,left,right);
 }
 
+void setPanning(int chan, uint8_t left, uint8_t right)
+{
+    Mix_SetPanning(chan,left,right);
+}
 
 void removePanning()
 {

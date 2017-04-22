@@ -361,16 +361,34 @@ void fadeOutMusic(int ms);
 *   @param [in] left The volume of the left audio channel (0 - 255)
 *   @param [in] right The volume of the right audio channel (0 - 255)
 *
-*   @note This function only works on stereo audio. So the call will have no effect
-*        or fail if it is done on mono audio.
+*   @note This function set the efect on every mixing channels.
+*        The other signature can be used to set the effect on a specific channel.
 *   @note The easiest way to do true panning is to call setPanning(left, 254 - left),
 *        so that the total volume is correct, if you consider
 *        the maximum volume to be 127 per channel for center,
 *        or 254 max for left, this works, but about halves the effective volume.
 *   @note To unregister this effect, use this function with 255 as left and right value
-*          or simply use LX_Mixer::removePanning().
+*        or simply use LX_Mixer::removePanning().
 */
 void setPanning(uint8_t left, uint8_t right);
+/**
+*   @fn void setPanning(int chan, uint8_t left, uint8_t right)
+*
+*   Set the panning, increasing of decreasing the volume on the left or the right,
+*   on a specific mixing channel
+*
+*   @param [in] chan The channel to apply the effect on
+*   @param [in] left The volume of the left audio channel (0 - 255)
+*   @param [in] right The volume of the right audio channel (0 - 255)
+*
+*   @note The easiest way to do true panning is to call setPanning(left, 254 - left),
+*        so that the total volume is correct, if you consider
+*        the maximum volume to be 127 per channel for center,
+*        or 254 max for left, this works, but about halves the effective volume.
+*   @note To unregister this effect, use this function with 255 as left and right value
+*        or simply use LX_Mixer::removePanning().
+*/
+void setPanning(int chan, uint8_t left, uint8_t right);
 /**
 *   @fn void removePanning()
 *   Remove the panning effect
