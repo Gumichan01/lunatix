@@ -340,7 +340,7 @@ public:
     virtual ~LX_Sprite();
 };
 
-/// @todo Reset animation
+
 /**
 *   @class LX_AnimatedSprite
 *   @brief The animated sprite
