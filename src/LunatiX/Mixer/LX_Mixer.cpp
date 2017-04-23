@@ -287,4 +287,9 @@ void setDistance(uint8_t distance)
     Mix_SetDistance(MIX_CHANNEL_POST, distance);
 }
 
+void setDistance(int chan, uint8_t distance)
+{
+    Mix_SetDistance(chan, distance);
+}
+
 };

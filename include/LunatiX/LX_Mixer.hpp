@@ -404,7 +404,7 @@ void setPanning(uint8_t left, uint8_t right);
 *   Set the panning, increasing of decreasing the volume on the left or the right,
 *   on a specific mixing channel
 *
-*   @param [in] chan The channel to apply the effect on
+*   @param [in] chan The channel
 *   @param [in] left The volume of the left audio channel (0 - 255)
 *   @param [in] right The volume of the right audio channel (0 - 255)
 *
@@ -430,8 +430,6 @@ void removePanning();
 void removePanning(int chan);
 
 // 3D Position
-
-/// @todo setPosition() — version of the function for a specific channel and test it
 
 /**
 *   @fn void setPosition(int16_t angle)
@@ -469,6 +467,7 @@ void resetPosition();
 /**
 *   @fn void resetPosition(int chan)
 *   Reset the virtual position of the audio source.
+*   @param [in] chan The channel
 */
 void resetPosition(int chan);
 
@@ -485,15 +484,20 @@ void resetPosition(int chan);
 void reverseStereo(bool flip);
 
 // Distance
-/// @todo setDistance() — version of the function for a specific channel and test it
+
 /**
 *   @fn void setDistance(uint8_t distance)
-*
 *   Set the distance to all channels
-*
 *   @param [in] distance The virtual distance between the user and the source
 */
 void setDistance(uint8_t distance);
+/**
+*   @fn void setDistance(int chan, uint8_t distance)
+*   Set the distance to all channels
+*   @param [in] chan The channel
+*   @param [in] distance The virtual distance between the user and the source
+*/
+void setDistance(int chan, uint8_t distance);
 
 };
 
