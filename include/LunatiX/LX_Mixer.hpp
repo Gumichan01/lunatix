@@ -439,26 +439,41 @@ void removePanning(int chan);
 *   Set the virtual position of the audio source.
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
-*   @note This function call setPosition(angle,LX_MIXER_EFFECT_NO_DISTANCE)
+*   @note This function call setPosition(angle, LX_MIXER_EFFECT_NO_DISTANCE)
 */
 void setPosition(int16_t angle);
 /**
 *   @fn void setPosition(int16_t angle, uint8_t distance)
 *
-*   Set the virtual position of the audio source.
+*   Set the virtual position of the audio source (post-processing).
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @param [in] distance The distance between the source and the listener
 */
 void setPosition(int16_t angle, uint8_t distance);
 /**
-*   @fn void resetPosition()
+*   @fn void setPosition(int chan, int16_t angle, uint8_t distance)
 *
+*   Set the virtual position of the audio source in a specific channel.
+*
+*   @param [in] chan The channel
+*   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
+*   @param [in] distance The distance between the source and the listener
+*/
+void setPosition(int chan, int16_t angle, uint8_t distance);
+/**
+*   @fn void resetPosition()
 *   Reset the virtual position of the audio source.
 */
 void resetPosition();
+/**
+*   @fn void resetPosition(int chan)
+*   Reset the virtual position of the audio source.
+*/
+void resetPosition(int chan);
 
 // Reverse stereo
+/// @todo reverseStereo() — version of the function for a specific channel and test it
 /**
 *   @fn int reverseStereo(bool flip)
 *
@@ -470,7 +485,7 @@ void resetPosition();
 void reverseStereo(bool flip);
 
 // Distance
-
+/// @todo setDistance() — version of the function for a specific channel and test it
 /**
 *   @fn void setDistance(uint8_t distance)
 *

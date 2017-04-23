@@ -259,12 +259,21 @@ void setPosition(int16_t angle, uint8_t distance)
     Mix_SetPosition(MIX_CHANNEL_POST, angle, distance);
 }
 
+void setPosition(int chan, int16_t angle, uint8_t distance)
+{
+    Mix_SetPosition(chan, angle, distance);
+}
+
 
 void resetPosition()
 {
-    Mix_SetPosition(MIX_CHANNEL_POST ,LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(MIX_CHANNEL_POST, LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
+void resetPosition(int chan)
+{
+    Mix_SetPosition(chan, LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
+}
 
 void reverseStereo(bool flip)
 {
