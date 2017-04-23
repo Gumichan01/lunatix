@@ -472,9 +472,9 @@ void resetPosition();
 void resetPosition(int chan);
 
 // Reverse stereo
-/// @todo reverseStereo() — version of the function for a specific channel and test it
+
 /**
-*   @fn int reverseStereo(bool flip)
+*   @fn void reverseStereo(bool flip)
 *
 *   Reverse the left and right audio channels.
 *
@@ -482,6 +482,16 @@ void resetPosition(int chan);
 *   @note If you want to unregister the effect on a channel, set false as flip
 */
 void reverseStereo(bool flip);
+/**
+*   @fn void reverseStereo(int chan, bool flip)
+*
+*   Reverse the left and right audio channels on a specific mix channel
+*
+*   @param [in] chan The channel to reverse the stereo sound from
+*   @param [in] flip TRUE to set the effect, FALSE to unregister the effect
+*   @note If you want to unregister the effect on a channel, set false as flip
+*/
+void reverseStereo(int chan, bool flip);
 
 // Distance
 
@@ -493,7 +503,7 @@ void reverseStereo(bool flip);
 void setDistance(uint8_t distance);
 /**
 *   @fn void setDistance(int chan, uint8_t distance)
-*   Set the distance to all channels
+*   Set the distance to a specific channel
 *   @param [in] chan The channel
 *   @param [in] distance The virtual distance between the user and the source
 */
