@@ -313,7 +313,6 @@ void test_music()
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
 }
 
-
 void test_chunk()
 {
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST chunk = ");
@@ -391,22 +390,33 @@ void test_chunk()
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = END TEST = ");
 }
 
-
 void test_effects()
 {
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION," = TEST effects = ");
     std::string sm = "data/01.ogg";
     std::string sc = "data/explosion.wav";
+    int chan = 5;
     LX_Mixer::LX_Music music(sm);
     LX_Mixer::LX_Chunk chunk(sc);
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade in effect");
     LX_Mixer::fadeInMusic(music,1000);
-    LX_Timer::delay(4000);
+    LX_Timer::delay(2000);
+
+    // play chunk during the music
+    int fxv = LX_Mixer::getFXVolume();
+    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: left on channel %d", chan);
+    LX_Mixer::setFXVolume(fxv/3);
+    LX_Mixer::setPanning(chan,255,0);
+    chunk.play(chan);
+    LX_Timer::delay(2000);
+    LX_Mixer::setFXVolume(fxv);
+
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade out effect");
     LX_Mixer::fadeOutMusic(1000);
     LX_Timer::delay(2000);
 
+    LX_Mixer::removePanning();
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: no effect");
     chunk.play();
     LX_Timer::delay(1000);
@@ -415,10 +425,9 @@ void test_effects()
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: panning effect: left");
     LX_Mixer::setPanning(255,0);
     chunk.play();
-    LX_Timer::delay(1000);
+    LX_Timer::delay(500);
 
     // Right
-    LX_Mixer::removePanning();
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"chunk: panning effect: right");
     LX_Mixer::setPanning(0,255);
     chunk.play();
