@@ -123,7 +123,7 @@ void dependencies()
     cout << "Linked against SDL_Mixer version "
          << static_cast<int>(mix_linked->major) << "."
          << static_cast<int>(mix_linked->minor) << "."
-         << static_cast<int>(mix_linked->patch) << " ..." << endl;
+         << static_cast<int>(mix_linked->patch) << " ..." << endl << endl;;
 }
 
 };
