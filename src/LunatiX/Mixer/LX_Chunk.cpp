@@ -41,20 +41,19 @@ public:
     explicit LX_Chunk_(const std::string& filename)
         : _chunk(nullptr), _loaded(false)
     {
-        _loaded = load_(UTF8string(filename));
+        _loaded = load_(filename);
     }
 
     explicit LX_Chunk_(const UTF8string& filename)
         : _chunk(nullptr), _loaded(false)
     {
-        _loaded = load_(filename);
+        _loaded = load_(filename.utf8_str());
     }
 
-
-    bool load_(const UTF8string& filename)
+    bool load_(const std::string& filename)
     {
         Mix_FreeChunk(_chunk);
-        _chunk = Mix_LoadWAV(filename.utf8_str());
+        _chunk = Mix_LoadWAV(filename.c_str());
         return _chunk != nullptr;
     }
 

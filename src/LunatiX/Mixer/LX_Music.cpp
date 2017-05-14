@@ -29,7 +29,7 @@
 namespace
 {
 LX_Graphics::
-LX_BufferedImage *_loadImage(std::string file,
+LX_BufferedImage *_loadImage(const std::string& file,
                              const libtagpp::ImgMetaData& imgdata)
 {
     if(imgdata._img_offset <= 0 && imgdata._img_size <= 0)
@@ -58,7 +58,7 @@ LX_MusicTag::~LX_MusicTag()
 class LX_Music_
 {
     Mix_Music *_music;
-    UTF8string _filename;
+    std::string _filename;
     bool _loaded;
     libtagpp::Tag _tag;
     LX_MusicTag _mtag;
@@ -66,10 +66,10 @@ class LX_Music_
 
 protected:
 
-    bool load_(const UTF8string& filename)
+    bool load_(const std::string& filename)
     {
         Mix_FreeMusic(_music);
-        _music = Mix_LoadMUS(filename.utf8_str());
+        _music = Mix_LoadMUS(filename.c_str());
 
         if(_music == nullptr)
             return false;
@@ -86,9 +86,9 @@ public:
     }
 
     explicit LX_Music_(const UTF8string& filename)
-        : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)
+        : _music(nullptr), _filename(filename.utf8_str()), _loaded(false), mtag_set(false)
     {
-        _loaded = load_(filename);
+        _loaded = load_(_filename);
     }
 
     bool isLoaded_() const
@@ -118,7 +118,7 @@ public:
 
     const libtagpp::Tag& getInfo()
     {
-        if(!_tag.readTag(_filename.utf8_str()))
+        if(!_tag.readTag(_filename.c_str()))
             LX_SetError("Cannot get metadata");
 
         return _tag;
@@ -137,7 +137,7 @@ public:
             _mtag.genre = _tag.genre();
             _mtag.format = _tag.properties().format;
             _mtag.duration = _tag.properties().duration;
-            _mtag.img = _loadImage(_filename.utf8_str(), _tag.getImageMetaData());
+            _mtag.img = _loadImage(_filename, _tag.getImageMetaData());
 
             mtag_set = true;
         }
