@@ -188,6 +188,28 @@ LX_Vector2D& operator *(LX_Vector2D& v,float lambda);
 *   @return The new vector after the multiplication
 */
 LX_Vector2D& operator *=(LX_Vector2D& v,float lambda);
+/**
+*   @fn LX_Vector2D& operator /(LX_Vector2D& v,float lambda)
+*
+*   Scalar division
+*
+*   @param [in,out] v The vector
+*   @param [in] lambda The scalar value
+*
+*   @return The new vector after the multiplication
+*/
+LX_Vector2D& operator /(LX_Vector2D& v,float lambda);
+/**
+*   @fn LX_Vector2D& operator /(LX_Vector2D& v,float lambda)
+*
+*   Scalar division -> 'u /= λ' <=> 'u = u / λ'
+*
+*   @param [in,out] v The vector
+*   @param [in] lambda The scalar value
+*
+*   @return The new vector after the multiplication
+*/
+LX_Vector2D& operator /=(LX_Vector2D& v,float lambda);
 
 /**
 *   @fn float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v)
