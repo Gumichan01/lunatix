@@ -12,6 +12,9 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -82,6 +85,9 @@
 		<Unit filename="include/LunatiX/LX_ParticleSystem.hpp" />
 		<Unit filename="include/LunatiX/LX_Physics.hpp" />
 		<Unit filename="include/LunatiX/LX_Polygon.hpp" />
+		<Unit filename="include/LunatiX/LX_Polygon.tpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="include/LunatiX/LX_Random.hpp" />
 		<Unit filename="include/LunatiX/LX_Sound.hpp" />
 		<Unit filename="include/LunatiX/LX_Sync.hpp" />
