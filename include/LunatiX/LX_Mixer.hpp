@@ -232,7 +232,7 @@ int groupChannels(int from, int to, int tag);
 /**
 *   @fn int groupCount(int tag)
 *
-*   Get the number of channels in the group specifiedby the tag
+*   Get the number of channels in the group specified by the tag
 *
 *   @param [in] tag The group id
 *
