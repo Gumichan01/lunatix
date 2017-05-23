@@ -62,6 +62,6 @@ void getVersion(LX_Version& version);
 */
 void dependencies();
 
-};
+}
 
 #endif // LX_VERSION_HPP_INCLUDED

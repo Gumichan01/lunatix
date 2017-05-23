@@ -158,5 +158,5 @@ public:
     int getWinHeight() const;
 };
 
-};
+}
 #endif // LX_CONFIG_H_INCLUDED

@@ -144,4 +144,4 @@ LX_Window * LX_WindowManager::getWindow(uint32_t id)
     return w;
 }
 
-};
+}

@@ -52,7 +52,7 @@ const char * nameOf_(SDL_GameController * controller)
 {
     return SDL_GameControllerName(controller);
 }
-};
+}
 
 
 struct LX_Gamepad_
@@ -302,4 +302,4 @@ UTF8string LX_Gamepad::toString() const
     return _gpimpl->toString();
 }
 
-};
+}

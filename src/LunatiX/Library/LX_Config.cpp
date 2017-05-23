@@ -33,7 +33,7 @@ namespace
 {
 const int CONF_WIDTH  = 800;
 const int CONF_HEIGHT = 600;
-};
+}
 
 // unique instance
 static LX_Configuration *instance = nullptr;
@@ -253,4 +253,4 @@ int LX_Configuration::getWinHeight() const
     return _conf.height;
 }
 
-};
+}

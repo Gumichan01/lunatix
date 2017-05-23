@@ -71,6 +71,6 @@ public:
     ~LX_Mouse();
 };
 
-};
+}
 
 #endif // LX_MOUSE_HPP_INCLUDED

@@ -202,6 +202,6 @@ bool operator >=(const LX_Circle& a, const LX_Circle& b);
 */
 bool operator <=(const LX_Circle& a, const LX_Circle& b);
 
-};
+}
 
 #endif // HITBOX_H_INCLUDED

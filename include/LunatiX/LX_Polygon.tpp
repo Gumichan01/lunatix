@@ -24,4 +24,4 @@ void LX_Polygon::addPoints(Iterator beg, Iterator last)
     });
 }
 
-};
+}

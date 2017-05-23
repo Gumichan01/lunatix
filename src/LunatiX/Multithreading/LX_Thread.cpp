@@ -22,7 +22,7 @@
 namespace
 {
 using LX_ThreadFun_ = void(void *);
-};
+}
 
 class LX_Thread_
 {
@@ -144,4 +144,4 @@ LX_Thread::~LX_Thread()
     _th.reset();
 }
 
-};
+}

@@ -40,7 +40,7 @@ inline bool isEOL(const std::string& text)
     return text[0] == '\n' || text[0] == '\r';
 }
 
-};
+}
 
 namespace LX_Text
 {
@@ -388,4 +388,4 @@ LX_TextInput::~LX_TextInput()
     _timpl.reset();
 }
 
-};
+}

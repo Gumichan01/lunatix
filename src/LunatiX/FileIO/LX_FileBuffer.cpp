@@ -164,4 +164,4 @@ LX_FileBuffer::~LX_FileBuffer()
     _bimpl.reset();
 }
 
-};
+}

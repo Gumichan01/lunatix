@@ -38,7 +38,7 @@ LX_BufferedImage *_loadImage(const std::string& file,
     return LX_FileIO::LX_FileBuffer(file, S32(imgdata._img_offset),
                                     S32(imgdata._img_size)).loadBufferedImage();
 }
-};
+}
 
 namespace LX_Mixer
 {
@@ -248,4 +248,4 @@ LX_Music::~LX_Music()
     _mimpl.reset();
 }
 
-};
+}

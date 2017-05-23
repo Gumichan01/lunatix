@@ -155,7 +155,7 @@ public:
 */
 LX_WindowManager * getWindowManager();
 
-};
+}
 
 #include "LX_WindowManager.tpp"
 

@@ -125,6 +125,6 @@ public:
     ~LX_Thread();
 };
 
-};
+}
 
 #endif  // LX_THREAD_HPP_INCLUDED

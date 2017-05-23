@@ -464,6 +464,6 @@ void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
 */
 void movePolyTo(LX_Polygon& poly, const LX_Point& P);
 
-};
+}
 
 #endif // PHYSICS_H_INCLUDED

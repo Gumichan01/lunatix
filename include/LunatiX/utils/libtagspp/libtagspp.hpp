@@ -115,6 +115,6 @@ public:
     ~Tag() = default;
 };
 
-};
+}
 
 #endif // TAGS_H_INCLUDED

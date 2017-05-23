@@ -41,7 +41,7 @@ unsigned short fx_volume = LX_DEFAULT_VOLUME;
 unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
-};
+}
 
 namespace LX_Mixer
 {
@@ -297,4 +297,4 @@ void setDistance(int chan, uint8_t distance)
     Mix_SetDistance(chan, distance);
 }
 
-};
+}

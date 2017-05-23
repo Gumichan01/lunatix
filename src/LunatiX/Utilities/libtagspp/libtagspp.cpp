@@ -99,7 +99,7 @@ std::string format(int f)
     return s;
 }
 
-};
+}
 
 namespace libtagpp
 {
@@ -252,4 +252,4 @@ const Properties& Tag::properties() const
     return _properties;
 }
 
-};
+}

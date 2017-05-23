@@ -88,7 +88,7 @@ std::string getDate()
     return std::string(datestr + ss.str());
 
 }
-};
+}
 
 namespace LX_Log
 {
@@ -209,4 +209,4 @@ void log(std::string format,...)
     va_end(args);
 }
 
-};
+}

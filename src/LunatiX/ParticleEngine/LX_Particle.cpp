@@ -116,4 +116,4 @@ unsigned int LX_Particle::getDelay() const
     return _pimpl->getDelay();
 }
 
-};
+}

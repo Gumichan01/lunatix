@@ -179,7 +179,7 @@ public:
     ~LX_Polygon();
 };
 
-};
+}
 
 #include <LunatiX/LX_Polygon.tpp>
 

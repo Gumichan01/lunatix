@@ -103,6 +103,6 @@ public:
     ~LX_ParticleSystem();
 };
 
-};
+}
 
 #endif // LX_PARTICLESYSTEM_HPP_INCLUDED

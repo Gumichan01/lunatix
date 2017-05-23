@@ -27,7 +27,7 @@
 namespace LX_Event
 {
 class LX_EventHandler;
-};
+}
 
 
 /**
@@ -164,6 +164,6 @@ public:
     ~LX_TextInput();
 };
 
-};
+}
 
 #endif // LX_TEXT_HPP_INCLUDED

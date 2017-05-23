@@ -71,7 +71,7 @@ SDL_Texture * loadTexture_(const std::string& filename,
     return tmp_t;
 }
 
-};
+}
 
 namespace LX_Graphics
 {
@@ -714,4 +714,4 @@ void LX_BlendedTextTexture::updateTexture_()
     _font.setColour_(tmp);
 }
 
-};
+}

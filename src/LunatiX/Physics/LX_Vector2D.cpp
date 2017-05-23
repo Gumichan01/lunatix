@@ -59,7 +59,7 @@ bool eq(float x, float y)
                                 std::numeric_limits<float>::max())) < EPSILON;
     }
 }
-};
+}
 
 namespace LX_Physics
 {
@@ -226,4 +226,4 @@ LX_Vector2D& normalize(LX_Vector2D& v)
     return multiply(v,inverted_norm);
 }
 
-};
+}

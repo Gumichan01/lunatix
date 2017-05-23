@@ -235,9 +235,9 @@ bool getAttribute(LX_GLattr attr, int& value);
 */
 bool setAttribute(LX_GLattr attr, int value);
 
-};
+}
 
-};
+}
 
 #include <LunatiX/LX_OpenGL.tpp>
 

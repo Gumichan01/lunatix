@@ -24,6 +24,5 @@ T getProcAddress(const std::string& proc)
     return t;
 }
 
-};
-
-};
+}
+}

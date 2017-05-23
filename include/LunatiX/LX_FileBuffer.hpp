@@ -140,6 +140,6 @@ public:
     ~LX_FileBuffer();
 };
 
-};
+}
 
 #endif // LX_FILEBUFFER_HPP_INCLUDED

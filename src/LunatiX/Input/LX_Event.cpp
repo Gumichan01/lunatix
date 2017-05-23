@@ -238,7 +238,7 @@ void eventState(const LX_Event::LX_EventType ty, bool process)
     }
 }
 
-};
+}
 
 namespace LX_Event
 {
@@ -622,4 +622,4 @@ UTF8string stringOfAxis(LX_GamepadAxis axis)
     return UTF8string(s == nullptr ? "null" : s);
 }
 
-};
+}

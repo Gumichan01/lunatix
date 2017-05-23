@@ -23,13 +23,12 @@
 #include <LunatiX/LX_Sound.hpp>
 #include <memory>
 
-
 struct Mix_Chunk;
 
 namespace LX_FileIO
 {
 class LX_FileBuffer_;
-};
+}
 
 
 namespace LX_Mixer
@@ -169,6 +168,6 @@ public:
     ~LX_Chunk();
 };
 
-};
+}
 
 #endif // LX_CHUNK_H_INCLUDED

@@ -65,7 +65,7 @@ size_t countSeparator(const UTF8string& u8str)
     return counter;
 }
 
-};
+}
 
 
 namespace LX_FileSystem
@@ -212,4 +212,4 @@ UTF8string dirname(const UTF8string& path)
     return npath.utf8_substr(0, (spos == 0 ? spos + 1 : spos));
 }
 
-};
+}

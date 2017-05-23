@@ -192,6 +192,6 @@ void logCritical(LX_CATEGORY category,std::string format,...);
 */
 void log(std::string format,...);
 
-};
+}
 
 #endif // LX_LOG_HPP_INCLUDED

@@ -166,4 +166,4 @@ bool LX_MouseHaptic::isOpened() const
 
 LX_MouseHaptic::~LX_MouseHaptic() {}
 
-};
+}

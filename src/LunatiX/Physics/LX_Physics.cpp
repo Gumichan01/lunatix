@@ -109,7 +109,7 @@ bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
             || collisionPointPoly(origin2,poly1));
 }
 
-};
+}
 
 
 namespace LX_Physics
@@ -495,4 +495,4 @@ void movePolyTo(LX_Polygon& poly, const LX_Point& P)
     movePolyTo(poly, P.x, P.y);
 }
 
-};
+}

@@ -31,22 +31,22 @@ struct SDL_Texture;
 namespace LX_FileIO
 {
 class LX_FileBuffer;
-};
+}
 
 namespace LX_Win
 {
 class LX_Window;
-};
+}
 
 namespace LX_Device
 {
 class LX_Mouse;
-};
+}
 
 namespace LX_TrueTypeFont
 {
 class LX_Font;
-};
+}
 
 
 namespace LX_Graphics
@@ -944,6 +944,6 @@ public:
     ~LX_BlendedTextTexture() = default;
 };
 
-};
+}
 
 #endif  // LX_IMAGE_H_INCLUDED

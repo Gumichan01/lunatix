@@ -42,6 +42,6 @@ inline void delay(uint32_t ms)
     return SDL_Delay(ms);
 }
 
-};
+}
 
 #endif // LX_TIMER_HPP_INCLUDED

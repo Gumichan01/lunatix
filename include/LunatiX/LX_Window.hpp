@@ -37,19 +37,19 @@ class LX_StreamingTexture;
 class LX_AnimatedSprite;
 class LX_TextTexture;
 class LX_BufferedImage;
-};
+}
 
 namespace LX_TrueTypeFont
 {
 class LX_Font;
-};
+}
 
 namespace LX_Physics
 {
 struct LX_Point;
 struct LX_Circle;
 struct LX_Vector2D;
-};
+}
 
 
 /**
@@ -473,6 +473,6 @@ public:
     ~LX_Window();
 };
 
-};
+}
 
 #endif // LX_WINDOW_H_INCLUDED

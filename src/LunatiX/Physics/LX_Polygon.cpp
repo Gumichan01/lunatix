@@ -42,7 +42,7 @@ inline int cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
     return p.x * q.y - p.y * q.x;
 }
-};
+}
 
 
 namespace LX_Physics
@@ -323,4 +323,4 @@ void LX_Polygon::moveTo(const LX_Point& p)
     _polyimpl->moveTo(p.x, p.y);
 }
 
-};
+}

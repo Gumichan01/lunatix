@@ -290,6 +290,6 @@ LX_Vector2D& multiply(LX_Vector2D& v,float lambda);
 */
 LX_Vector2D& normalize(LX_Vector2D& v);
 
-};
+}
 
 #endif // LX_VECTOR2D_HPP_INCLUDED

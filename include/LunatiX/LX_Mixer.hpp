@@ -37,7 +37,7 @@ const uint16_t LX_MIXER_EFFECT_NO_ANGLE = 0;     /**< The angle between the sour
 namespace LX_FileIO
 {
 class LX_FileBuffer;
-};
+}
 
 
 /**
@@ -509,6 +509,6 @@ void setDistance(uint8_t distance);
 */
 void setDistance(int chan, uint8_t distance);
 
-};
+}
 
 #endif // LX_MIXER_H_INCLUDED

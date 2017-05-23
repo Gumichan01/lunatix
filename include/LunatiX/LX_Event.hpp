@@ -603,7 +603,7 @@ UTF8string stringOfButton(LX_GamepadButton button);
 */
 UTF8string stringOfAxis(LX_GamepadAxis axis);
 
-};
+}
 
 #include "LX_Event.inl"
 

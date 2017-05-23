@@ -27,12 +27,12 @@
 namespace libtagpp
 {
 class Tag;
-};
+}
 
 namespace LX_Graphics
 {
 class LX_BufferedImage;
-};
+}
 
 namespace LX_Mixer
 {
@@ -228,6 +228,6 @@ public:
     ~LX_Music();
 };
 
-};
+}
 
 #endif // LX_MUSIC_H_INCLUDED

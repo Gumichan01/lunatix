@@ -94,6 +94,6 @@ UTF8string basename(const UTF8string& path);
 */
 UTF8string dirname(const UTF8string& path);
 
-};
+}
 
 #endif // LX_FILESYSTEM_HPP_INCLUDED

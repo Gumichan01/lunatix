@@ -59,4 +59,4 @@ int mouseCursorDisplay(int toggle)
     return SDL_ShowCursor(toggle);
 }
 
-};
+}

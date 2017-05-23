@@ -31,12 +31,12 @@ struct SDL_Texture;
 namespace LX_Win
 {
 class LX_Window;
-};
+}
 
 namespace LX_FileIO
 {
 class LX_FileBuffer;
-};
+}
 
 namespace LX_Graphics
 {
@@ -150,6 +150,6 @@ public:
     ~LX_Font();
 };
 
-};
+}
 
 #endif // LX_TTF_H_INCLUDED

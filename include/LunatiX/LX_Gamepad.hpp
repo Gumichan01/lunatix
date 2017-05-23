@@ -147,6 +147,6 @@ public:
     ~LX_Gamepad();
 };
 
-};
+}
 
 #endif  // LX_GAMEPAD_HPP_INCLUDED

@@ -217,4 +217,4 @@ unsigned int LX_ParticleSystem::nbTotalParticles() const
     return _psimpl->nbTotalParticles();
 }
 
-};
+}

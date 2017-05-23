@@ -22,4 +22,4 @@ void LX_WindowManager::map(Fun f)
     std::for_each(_windows.begin(), _windows.end(),f);
 }
 
-};
+}

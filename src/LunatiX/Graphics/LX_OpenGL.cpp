@@ -81,6 +81,6 @@ bool setAttribute(LX_GLattr attr, int value)
     return SDL_GL_SetAttribute(attr,value) == 0;
 }
 
-};
+}
 
-};
+}

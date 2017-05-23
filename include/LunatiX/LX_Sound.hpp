@@ -52,6 +52,6 @@ public:
     virtual ~LX_Sound();
 };
 
-};
+}
 
 #endif // LX_SOUND_H_INCLUDED

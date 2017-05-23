@@ -78,6 +78,6 @@ inline int crand100()
     return LX_Random::crand()%100;
 }
 
-};
+}
 
 #endif // LX_RANDOM_HPP_INCLUDED

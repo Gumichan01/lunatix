@@ -104,6 +104,6 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 */
 int mouseCursorDisplay(int toggle);
 
-};
+}
 
 #endif // LX_DEVICE_HPP_INCLUDED

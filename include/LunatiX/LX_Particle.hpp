@@ -28,7 +28,7 @@
 namespace LX_FileIO
 {
 class LX_FileBuffer;
-};
+}
 
 namespace LX_Graphics
 {
@@ -38,7 +38,7 @@ class LX_Sprite;
 namespace LX_Physics
 {
 struct LX_Vector2D;
-};
+}
 
 namespace LX_ParticleEngine
 {
@@ -123,6 +123,6 @@ public:
     ~LX_Particle();
 };
 
-};
+}
 
 #endif // PARTICLE_HPP_INCLUDED

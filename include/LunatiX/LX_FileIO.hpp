@@ -326,6 +326,6 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s);
 */
 LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s);
 
-};
+}
 
 #endif // LX_FILEIO_H_INCLUDED

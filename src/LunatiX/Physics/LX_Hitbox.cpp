@@ -126,4 +126,4 @@ bool operator <=(const LX_Circle& a, const LX_Circle& b)
     return a.radius <= b.radius && a.square_radius <= b.square_radius;
 }
 
-};
+}

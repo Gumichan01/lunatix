@@ -43,7 +43,7 @@ inline int sizeOfText(TTF_Font *ttf, const std::string& text, int& w, int& h)
 {
     return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
 }
-};
+}
 
 
 namespace LX_TrueTypeFont
@@ -353,4 +353,4 @@ LX_Font::~LX_Font()
     _fimpl->_font_buffer.reset();
 }
 
-};
+}

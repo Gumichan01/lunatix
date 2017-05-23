@@ -54,7 +54,7 @@ uint32_t generateFlags(LX_Config::LX_Configuration &config)
     return flag;
 }
 
-};
+}
 
 using namespace LX_Config;
 
@@ -520,4 +520,4 @@ LX_Window::~LX_Window()
     _wimpl.reset();
 }
 
-};
+}

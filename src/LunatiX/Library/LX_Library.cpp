@@ -49,7 +49,7 @@ bool LX_Mixer_Init()
     return true;
 }
 
-};
+}
 
 
 bool LX_Init()

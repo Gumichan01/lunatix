@@ -70,4 +70,4 @@ LX_Mouse::~LX_Mouse()
     _mimpl.reset();
 }
 
-};
+}
