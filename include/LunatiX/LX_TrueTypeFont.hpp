@@ -62,7 +62,7 @@ namespace LX_TrueTypeFont
 const unsigned int LX_TTF_DEFAULT_SIZE = 24;   /**< The default value of the font size */
 
 struct LX_Font_;
-enum LX_TTF_TypeText: short;
+enum class LX_TTF_TypeText;
 
 /**
 *   @class LX_Font
