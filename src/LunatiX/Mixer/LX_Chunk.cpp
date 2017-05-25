@@ -44,7 +44,7 @@ public:
         _loaded = load_(filename);
     }
 
-    explicit LX_Chunk_(const UTF8string& filename)
+    explicit LX_Chunk_(const UTF8string filename)
         : _chunk(nullptr), _loaded(false)
     {
         _loaded = load_(filename.utf8_str());
@@ -96,18 +96,18 @@ LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
 // Public constructors
 LX_Chunk::LX_Chunk() : _chkimpl(nullptr) {}
 
-LX_Chunk::LX_Chunk(const std::string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const std::string filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
-LX_Chunk::LX_Chunk(const UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const UTF8string filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 
-bool LX_Chunk::load(const std::string& filename)
+bool LX_Chunk::load(const std::string filename)
 {
     _chkimpl.reset(new LX_Chunk_(filename));
     return _chkimpl->isLoaded_();
 }
 
-bool LX_Chunk::load(const UTF8string& filename)
+bool LX_Chunk::load(const UTF8string filename)
 {
     _chkimpl.reset(new LX_Chunk_(filename));
     return _chkimpl->isLoaded_();

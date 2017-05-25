@@ -83,38 +83,38 @@ public:
     /// Default constructor
     LX_Music();
     /**
-    *   @fn LX_Music(const std::string& filename)
+    *   @fn LX_Music(const std::string filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
     */
-    LX_Music(const std::string& filename);
+    LX_Music(const std::string filename);
     /**
-    *   @fn LX_Music(const UTF8string& filename)
+    *   @fn LX_Music(const UTF8string filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
     */
-    explicit LX_Music(const UTF8string& filename);
+    explicit LX_Music(const UTF8string filename);
 
     /**
-    *   @fn bool load(const std::string& filename)
+    *   @fn bool load(const std::string filename)
     *
     *   Load the music file
     *
     *   @param [in] filename The music file that will be loaded
     *   @return TRUE on succes, FALSE otherwise
     */
-    virtual bool load(const std::string& filename);
+    virtual bool load(const std::string filename);
     /**
-    *   @fn virtual bool load(const UTF8string& filename)
+    *   @fn virtual bool load(const UTF8string filename)
     *
     *   Load the music file (utf-8 format)
     *
     *   @param [in] filename The music file that will be loaded
     *   @return TRUE on succes, FALSE otherwise
     */
-    virtual bool load(const UTF8string& filename);
+    virtual bool load(const UTF8string filename);
     /**
     *   @fn virtual bool isLoaded() const
     *   Check if the music is loaded

@@ -55,7 +55,7 @@ public:
     LX_Chunk();
 
     /**
-    *   @fn LX_Chunk(const std::string& filename)
+    *   @fn LX_Chunk(const std::string filename)
     *   @brief Constructor
     *
     *   Load a sample from a file
@@ -67,10 +67,10 @@ public:
     *        an other file type.
     *
     */
-    explicit LX_Chunk(const std::string& filename);
+    explicit LX_Chunk(const std::string filename);
 
     /**
-    *   @fn LX_Chunk(const UTF8string& filename)
+    *   @fn LX_Chunk(const UTF8string filename)
     *   @brief Constructor
     *
     *   Load a sample from a file
@@ -81,26 +81,26 @@ public:
     *          The sample was optimized for this format. But it can work with
     *          an other file type.
     */
-    explicit LX_Chunk(const UTF8string& filename);
+    explicit LX_Chunk(const UTF8string filename);
 
     /**
-    *   @fn bool load(const std::string& filename)
+    *   @fn bool load(const std::string filename)
     *
     *   Load the sample file
     *
     *   @param [in] filename The sample file that will be loaded
     *   @return TRUE on succes, FALSE otherwise
     */
-    virtual bool load(const std::string& filename);
+    virtual bool load(const std::string filename);
     /**
-    *   @fn virtual bool load(const UTF8string& filename)
+    *   @fn virtual bool load(const UTF8string filename)
     *
     *   Load the sample file (utf-8 format)
     *
     *   @param [in] filename The sample file that will be loaded
     *   @return TRUE on succes, FALSE otherwise
     */
-    virtual bool load(const UTF8string& filename);
+    virtual bool load(const UTF8string filename);
     /**
     *   @fn virtual bool isLoaded() const
     *   Check if the music is loaded

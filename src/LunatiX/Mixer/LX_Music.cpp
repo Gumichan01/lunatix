@@ -155,20 +155,20 @@ public:
 
 LX_Music::LX_Music() : _mimpl(nullptr) {}
 
-LX_Music::LX_Music(const std::string& filename)
+LX_Music::LX_Music(const std::string filename)
     : _mimpl(new LX_Music_(filename)) {}
 
-LX_Music::LX_Music(const UTF8string& filename)
+LX_Music::LX_Music(const UTF8string filename)
     : _mimpl(new LX_Music_(filename)) {}
 
 
-bool LX_Music::load(const std::string& filename)
+bool LX_Music::load(const std::string filename)
 {
     _mimpl.reset(new LX_Music_(filename));
     return _mimpl->isLoaded_();
 }
 
-bool LX_Music::load(const UTF8string& filename)
+bool LX_Music::load(const UTF8string filename)
 {
     _mimpl.reset(new LX_Music_(filename));
     return _mimpl->isLoaded_();

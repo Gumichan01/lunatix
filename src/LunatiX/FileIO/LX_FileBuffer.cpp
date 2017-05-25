@@ -38,7 +38,7 @@ namespace LX_FileIO
 
 class LX_FileBuffer_
 {
-    UTF8string _name;                       /* The name of the file refered by the buffer */
+    std::string _name;                      /* The name of the file refered by the buffer */
     std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */
     uint64_t _bufsize;                      /* The size of the buffer                     */
 
@@ -50,10 +50,13 @@ class LX_FileBuffer_
 
 public:
 
-    explicit LX_FileBuffer_(const UTF8string& filename, uint32_t offset, uint32_t sz)
-        : _name(filename)
+    explicit LX_FileBuffer_(const UTF8string filename, uint32_t offset, uint32_t sz)
+        : LX_FileBuffer_(filename.utf8_str(), offset, sz) {}
+
+    explicit LX_FileBuffer_(const std::string& filename, uint32_t offset, uint32_t sz)
+        : _name(filename), _bufsize(0)
     {
-        std::string str("LX_FileBuffer: " + std::string(_name.utf8_str()) + " - ");
+        std::string str("LX_FileBuffer: " + _name + " - ");
         size_t r = 0;
         int64_t s = 0;
 
@@ -114,7 +117,7 @@ public:
 
     const char * getFilename() const
     {
-        return _name.utf8_str();
+        return _name.c_str();
     }
 
     ~LX_FileBuffer_()
@@ -132,11 +135,11 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const
 
 
 /** LX_Filebuffer — public functions */
-LX_FileBuffer::LX_FileBuffer(const std::string& filename, uint32_t offset,
+LX_FileBuffer::LX_FileBuffer(const std::string filename, uint32_t offset,
                              uint32_t sz)
-    : LX_FileBuffer(UTF8string(filename), offset, sz) {}
+    : LX_FileBuffer(filename, offset, sz) {}
 
-LX_FileBuffer::LX_FileBuffer(const UTF8string& filename,uint32_t offset,
+LX_FileBuffer::LX_FileBuffer(const UTF8string filename, uint32_t offset,
                              uint32_t sz)
     : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 

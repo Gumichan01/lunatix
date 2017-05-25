@@ -66,7 +66,7 @@ class LX_FileBuffer
 public:
 
     /**
-    *   @fn LX_FileBuffer(const std::string& filename, uint32_t offset=0, uint32_t sz=0)
+    *   @fn LX_FileBuffer(const std::string filename, uint32_t offset=0, uint32_t sz=0)
     *   @brief Constructor
     *
     *   Read the file given in argument and put it in the buffer
@@ -84,9 +84,9 @@ public:
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read by the instance
     */
-    LX_FileBuffer(const std::string& filename, uint32_t offset=0, uint32_t sz=0);
+    LX_FileBuffer(const std::string filename, uint32_t offset=0, uint32_t sz=0);
     /**
-    *   @fn explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset=0, uint32_t sz=0)
+    *   @fn explicit LX_FileBuffer(const UTF8string filename, uint32_t offset=0, uint32_t sz=0)
     *   @brief Constructor
     *
     *   Read the file given in argument and put it in the buffer
@@ -105,7 +105,7 @@ public:
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset=0, uint32_t sz=0);
+    explicit LX_FileBuffer(const UTF8string filename, uint32_t offset=0, uint32_t sz=0);
 
     /**
     *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(uint32_t format=LX_PIXELFORMAT_RGBA8888) const
