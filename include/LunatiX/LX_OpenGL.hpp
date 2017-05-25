@@ -96,7 +96,7 @@ bool loadDefaultLibrary();
 *            but before creating any OpenGL windows.
 *   @note 2 - If no OpenGL library is loaded, the default library is loaded
 *            upon creation of the first OpenGL window.
-*   @note 3 - If you do this, you need to retireve all of the OpenGL functions
+*   @note 3 - If you do this, you need to retrieve all of the OpenGL functions
 *            used in your program from the dynamic library using *getProcAddress()*
 */
 bool loadLibrary(std::string path);
@@ -112,7 +112,7 @@ bool loadLibrary(std::string path);
 void UnloadLibrary();
 
 /**
-*   @fn template<typename T> T getProcAddress(const std::string& proc);
+*   @fn template<typename T> T getProcAddress(const std::string proc);
 *
 *   Get an OpenGL function by name.
 *
@@ -121,7 +121,8 @@ void UnloadLibrary();
 *   @return A pointer to the OpenGL function on success,
 *          NULL if the function is not found.
 *
-*   @note 1 - The pointer should be cast to the appropriate function signature
+*   @note 1 - You have to specify the appropriate signature of the function
+*   you want to get.
 *   With SDL2, you should write a code like this:
 *
 *      typedef void (APIENTRY * GL_ActiveTextureARB_Func)(unsigned int);
@@ -133,7 +134,7 @@ void UnloadLibrary();
 *      GL_ActiveTextureARB_Func glActiveTextureARB_ptr = 0;
 *      glActiveTextureARB_ptr = LX_Graphics::LX_OpenGL::getProcAddress<GL_ActiveTextureARB_Func>("glActiveTextureARB");
 *
-*   @note 2 - It is very important to set the type parameter to *getProcAddress* → *getProcAddress<**type**>()* .
+*   @note 2 - It is very important to set the type parameter of *getProcAddress* → *getProcAddress<**type**>()* .
 *      Otherwise, the code will not compile.
 *
 *   @note 3 - OpenGL function pointers must be declared **APIENTRY** as in the example code.
@@ -141,7 +142,7 @@ void UnloadLibrary();
 *   where this matters (Win32) thereby avoiding stack corruption.
 */
 template<typename T>
-T getProcAddress(const std::string& proc);
+T getProcAddress(const std::string proc);
 
 
 /**

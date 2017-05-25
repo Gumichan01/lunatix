@@ -18,7 +18,7 @@ namespace LX_OpenGL
 {
 
 template<typename T>
-T getProcAddress(const std::string& proc)
+T getProcAddress(const std::string proc)
 {
     T t = (T) SDL_GL_GetProcAddress(proc.c_str());
     return t;
