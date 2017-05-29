@@ -53,7 +53,7 @@ public:
     explicit LX_FileBuffer_(const UTF8string filename, uint32_t offset, uint32_t sz)
         : LX_FileBuffer_(filename.utf8_str(), offset, sz) {}
 
-    explicit LX_FileBuffer_(const std::string& filename, uint32_t offset, uint32_t sz)
+    explicit LX_FileBuffer_(const std::string filename, uint32_t offset, uint32_t sz)
         : _name(filename), _bufsize(0)
     {
         std::string str("LX_FileBuffer: " + _name + " - ");
@@ -137,7 +137,7 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const
 /** LX_Filebuffer — public functions */
 LX_FileBuffer::LX_FileBuffer(const std::string filename, uint32_t offset,
                              uint32_t sz)
-    : LX_FileBuffer(filename, offset, sz) {}
+    : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 
 LX_FileBuffer::LX_FileBuffer(const UTF8string filename, uint32_t offset,
                              uint32_t sz)
