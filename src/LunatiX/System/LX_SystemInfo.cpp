@@ -71,4 +71,4 @@ void getAvailableDisplayModes(LX_DisplayMode& modes)
     }
 }
 
-};
+}

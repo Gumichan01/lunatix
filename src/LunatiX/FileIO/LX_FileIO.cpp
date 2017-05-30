@@ -391,4 +391,4 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s)
     return f;
 }
 
-};
+}

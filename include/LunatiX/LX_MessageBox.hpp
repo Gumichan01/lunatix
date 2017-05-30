@@ -50,6 +50,6 @@ const uint32_t LX_MSG_INFO = 0x00000040;    /**< Information message    */
 */
 bool showMSG(uint32_t flag, std::string title, std::string msg);
 
-};
+}
 
 #endif // LX_MESSAGEBOX_HPP_INCLUDED

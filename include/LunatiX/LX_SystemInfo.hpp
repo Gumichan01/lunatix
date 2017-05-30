@@ -105,6 +105,6 @@ int getSystemRAM();
 */
 void getAvailableDisplayModes(LX_DisplayMode& modes);
 
-};
+}
 
 #endif // LX_SYSTEM_INFO_H_INCLUDED

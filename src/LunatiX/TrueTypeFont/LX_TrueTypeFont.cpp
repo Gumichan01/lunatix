@@ -49,7 +49,10 @@ inline int sizeOfText(TTF_Font *ttf, const std::string& text, int& w, int& h)
 namespace LX_TrueTypeFont
 {
 
-enum class LX_TTF_TypeText {LX_TTF_SOLID, LX_TTF_SHADED, LX_TTF_BLENDED};
+enum class LX_TTF_TypeText
+{
+    LX_TTF_SOLID, LX_TTF_SHADED, LX_TTF_BLENDED
+};
 
 /* Private implementation */
 
@@ -122,6 +125,9 @@ struct LX_Font_
 
         case LX_TTF_TypeText::LX_TTF_BLENDED:
             loaded = TTF_RenderUTF8_Blended(ttf,text.utf8_str(), _font_colour);
+            break;
+
+        default:
             break;
         }
 

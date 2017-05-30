@@ -26,7 +26,7 @@ namespace tthread
 {
 class mutex;
 class condition_variable;
-};
+}
 
 
 namespace LX_Multithreading
@@ -141,6 +141,6 @@ public:
     ~LX_Cond();
 };
 
-};
+}
 
 #endif  // LX_SYNC_HPP_INCLUDED
