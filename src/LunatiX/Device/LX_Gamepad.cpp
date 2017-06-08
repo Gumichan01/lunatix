@@ -29,8 +29,6 @@
 #include <stdexcept>
 #include <cstring>
 
-#define __FILENAME__ (strrchr(__FILE__, LX_SEP) ? strrchr(__FILE__, LX_SEP) + 1 : __FILE__)
-
 namespace LX_Device
 {
 
@@ -39,6 +37,8 @@ const char LX_SEP = '\\';
 #else
 const char LX_SEP = '/';
 #endif // __WIN32__
+
+#define __FILENAME__ (strrchr(__FILE__, LX_SEP) ? strrchr(__FILE__, LX_SEP) + 1 : __FILE__)
 
 namespace
 {
