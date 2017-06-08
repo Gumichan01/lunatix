@@ -101,7 +101,7 @@ struct LX_Font_
     SDL_Surface * drawText_(LX_TTF_TypeText type, const UTF8string& text,
                             unsigned int sz = 0, LX_Colour bg = {0,0,0,0})
     {
-        TTF_Font *ttf = nullptr;
+        TTF_Font *ttf;
         SDL_Surface *loaded = nullptr;
 
         if(sz == 0)
