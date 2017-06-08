@@ -339,6 +339,7 @@ class LX_EventHandler
     SDL_Event *event;
 
     LX_EventHandler(const LX_EventHandler&);
+    LX_EventHandler& operator =(const LX_EventHandler&);
 
 public:
 
