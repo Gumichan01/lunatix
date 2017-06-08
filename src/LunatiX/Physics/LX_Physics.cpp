@@ -385,7 +385,7 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
     }
 
     return(collisionPointPoly(A,poly) || collisionPointPoly(B,poly)
-           || collisionPointPoly(C,poly) || collisionPointPoly(A,poly));
+           || collisionPointPoly(C,poly) || collisionPointPoly(D,poly));
 }
 
 
