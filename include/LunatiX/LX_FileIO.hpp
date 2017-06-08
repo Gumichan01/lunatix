@@ -66,6 +66,8 @@ class IOException: public std::exception
 {
     std::string _string_error;
 
+    IOException& operator =(const IOException& io);
+
 public:
 
     /// Constructor

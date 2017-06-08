@@ -141,6 +141,8 @@ class LX_WindowException : public std::exception
 {
     std::string _string_error;
 
+    LX_WindowException& operator =(const LX_WindowException& w);
+
 public:
 
     /// Constructor

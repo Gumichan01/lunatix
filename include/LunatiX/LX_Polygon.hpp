@@ -47,6 +47,8 @@ public:
     explicit LX_PolygonException(std::string err);
     /// Copy constructor
     LX_PolygonException(const LX_PolygonException& pex);
+    /// '=' operator
+    LX_PolygonException& operator =(const LX_PolygonException& pex);
 
     /// Get the error message
     const char * what() const noexcept;
