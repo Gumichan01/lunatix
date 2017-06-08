@@ -28,19 +28,19 @@ using namespace std;
 
 namespace
 {
-inline int sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+inline float sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
-    return p.x + q.x;
+    return static_cast<float>(p.x + q.x);
 }
 
-inline int sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+inline float sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
-    return p.y + q.y;
+    return static_cast<float>(p.y + q.y);
 }
 
-inline int cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+inline float cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
 {
-    return p.x * q.y - p.y * q.x;
+    return static_cast<float>(p.x * q.y - p.y * q.x);
 }
 }
 
@@ -132,10 +132,11 @@ class LX_Polygon_
 
     bool calculateCentroid_(LX_Point& p) const
     {
+        const float CMULT = 6.0f;
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
         float sum_x = 0, sum_y = 0;
-        const float p6_area = 6 * area_();
+        const float p6_area = CMULT * area_();
 
         if(p6_area <= 0.0f) // self-intersecting polygon
             return false;
