@@ -80,7 +80,7 @@ class LX_Polygon_
         const auto pbeg =_points.begin();
         const auto pend =_points.end();
 
-        for(auto it = pbeg; it != pend; it++)
+        for(auto it = pbeg; it != pend; ++it)
         {
             AO = LX_Vector2D(*it,(it == pbeg ? *(pend - 1) : *(it - 1)));
             OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)),*it);
@@ -120,7 +120,7 @@ class LX_Polygon_
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
 
-        for(auto it = pbeg; it != pend; it++)
+        for(auto it = pbeg; it != pend; ++it)
         {
             if(it == pend - 1)
                 sum += cross_(*it,*pbeg);
@@ -141,7 +141,7 @@ class LX_Polygon_
         if(p6_area <= 0.0f) // self-intersecting polygon
             return false;
 
-        for(auto it = pbeg; it != pend; it++)
+        for(auto it = pbeg; it != pend; ++it)
         {
             if(it == pend - 1)
             {
@@ -190,12 +190,16 @@ public:
 
         int xm, ym;
         LX_AABB aabb = {0,0,0,0};
-        aabb.x = _points.at(0).x;
-        aabb.y = _points.at(0).y;
-        xm = _points.at(0).x;
-        ym = _points.at(0).y;
 
-        for(auto it = _points.begin(); it != _points.end(); it++)
+        {
+            const LX_Point& p0 = _points.at(0);
+            aabb.x = p0.x;
+            aabb.y = p0.y;
+            xm = p0.x;
+            ym = p0.y;
+        }
+
+        for(auto it = _points.begin(); it != _points.end(); ++it)
         {
             LX_Physics::LX_Point p(*it);
 
