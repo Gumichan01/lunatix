@@ -68,7 +68,7 @@ std::string getDate()
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
                         "Internal error - Cannot get the time: %s");
-        return std::string("");
+        return std::string();
     }
 
     const struct tm *tmp = localtime(&t);
@@ -78,7 +78,7 @@ std::string getDate()
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
                         "Internal error - Cannot get the local time");
-        return std::string("");
+        return std::string();
     }
 
     std::ostringstream ss;
