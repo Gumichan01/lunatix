@@ -132,7 +132,7 @@ enum class LX_EventType
 *   @enum LX_WinEventID
 *   @brief Window Event type
 */
-enum LX_WinEventID: uint8_t
+enum class LX_WinEventID
 {
     LX_WINEV_NONE,           /**< Never used                                            */
     LX_WINEV_SHOWN,          /**< Window has been shown                                 */
