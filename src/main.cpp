@@ -44,7 +44,7 @@ int main(int argc, char** argv)
         {
             switch(event.getEventType())
             {
-            case LX_QUIT:
+            case LX_EventType::LX_QUIT:
                 go = false;
                 break;
             default:

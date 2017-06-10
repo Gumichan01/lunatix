@@ -16,7 +16,6 @@
 # If you want to use the debug or release mode
 DEBUG=yes
 
-
 #
 # Variables
 #
