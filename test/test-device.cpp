@@ -168,7 +168,7 @@ void test_mouse(void)
         {
             switch(ev.getEventType())
             {
-            case LX_Event::LX_MOUSEBUTTONUP:
+            case LX_Event::LX_EventType::LX_MOUSEBUTTONUP:
                 if(ev.getMouseButton().button == LX_Event::LX_MOUSE_LBUTTON)
                     LX_Device::mouseCursorDisplay(0);
                 else
