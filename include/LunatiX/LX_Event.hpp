@@ -98,7 +98,7 @@ using LX_GamepadButton = int32_t;
 *   @enum LX_EventType
 *   @brief Event type
 */
-enum LX_EventType: uint32_t
+enum class LX_EventType
 {
     LX_UNKNOWN,                     /**< Unknown type           */
     LX_QUIT,                        /**< User-requested quit    */

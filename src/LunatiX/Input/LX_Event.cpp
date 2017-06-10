@@ -162,59 +162,59 @@ void eventState(const LX_Event::LX_EventType ty, bool process)
 
     switch(ty)
     {
-    case LX_Event::LX_QUIT:
+    case LX_Event::LX_EventType::LX_QUIT:
         sdl_ev_ty = SDL_QUIT;
         break;
 
-    case LX_Event::LX_WINDOWEVENT:
+    case LX_Event::LX_EventType::LX_WINDOWEVENT:
         sdl_ev_ty = SDL_WINDOWEVENT;
         break;
 
-    case LX_Event::LX_KEYDOWN:
+    case LX_Event::LX_EventType::LX_KEYDOWN:
         sdl_ev_ty = SDL_KEYDOWN;
         break;
 
-    case LX_Event::LX_KEYUP:
+    case LX_Event::LX_EventType::LX_KEYUP:
         sdl_ev_ty = SDL_KEYUP;
         break;
 
-    case LX_Event::LX_MOUSEMOTION:
+    case LX_Event::LX_EventType::LX_MOUSEMOTION:
         sdl_ev_ty = SDL_MOUSEMOTION;
         break;
 
-    case LX_Event::LX_MOUSEBUTTONDOWN:
+    case LX_Event::LX_EventType::LX_MOUSEBUTTONDOWN:
         sdl_ev_ty = SDL_MOUSEBUTTONDOWN;
         break;
 
-    case LX_Event::LX_MOUSEBUTTONUP:
+    case LX_Event::LX_EventType::LX_MOUSEBUTTONUP:
         sdl_ev_ty = SDL_MOUSEBUTTONUP;
         break;
 
-    case LX_Event::LX_MOUSEWHEEL:
+    case LX_Event::LX_EventType::LX_MOUSEWHEEL:
         sdl_ev_ty = SDL_MOUSEWHEEL;
         break;
 
-    case LX_Event::LX_CONTROLLERAXISMOTION:
+    case LX_Event::LX_EventType::LX_CONTROLLERAXISMOTION:
         sdl_ev_ty = SDL_CONTROLLERAXISMOTION;
         break;
 
-    case LX_Event::LX_CONTROLLERBUTTONDOWN:
+    case LX_Event::LX_EventType::LX_CONTROLLERBUTTONDOWN:
         sdl_ev_ty = SDL_CONTROLLERBUTTONDOWN;
         break;
 
-    case LX_Event::LX_CONTROLLERBUTTONUP:
+    case LX_Event::LX_EventType::LX_CONTROLLERBUTTONUP:
         sdl_ev_ty = SDL_CONTROLLERBUTTONUP;
         break;
 
-    case LX_Event::LX_CONTROLLERDEVICEADDED:
+    case LX_Event::LX_EventType::LX_CONTROLLERDEVICEADDED:
         sdl_ev_ty = 1;
         break;
 
-    case LX_Event::LX_CONTROLLERDEVICEREMOVED:
+    case LX_Event::LX_EventType::LX_CONTROLLERDEVICEREMOVED:
         sdl_ev_ty = 2;
         break;
 
-    case LX_Event::LX_DROPFILE:
+    case LX_Event::LX_EventType::LX_DROPFILE:
         sdl_ev_ty = SDL_DROPFILE;
         break;
 
@@ -361,71 +361,69 @@ LX_EventType LX_EventHandler::getEventType() const
     switch(ev.type)
     {
     case SDL_QUIT:
-        ty = LX_QUIT;
+        ty = LX_EventType::LX_QUIT;
         break;
     case SDL_WINDOWEVENT:
-        ty = LX_WINDOWEVENT;
+        ty = LX_EventType::LX_WINDOWEVENT;
         break;
 
     /* Keyboard events */
     case SDL_KEYDOWN:
-        ty = LX_KEYDOWN;
+        ty = LX_EventType::LX_KEYDOWN;
         break;
     case SDL_KEYUP:
-        ty = LX_KEYUP;
+        ty = LX_EventType::LX_KEYUP;
         break;
     case SDL_TEXTEDITING:
-        ty = LX_TEXTEDITING;
+        ty = LX_EventType::LX_TEXTEDITING;
         break;
     case SDL_TEXTINPUT:
-        ty = LX_TEXTINPUT;
+        ty = LX_EventType::LX_TEXTINPUT;
         break;
 
     /* Mouse events */
     case SDL_MOUSEMOTION:
-        ty = LX_MOUSEMOTION;
+        ty = LX_EventType::LX_MOUSEMOTION;
         break;
     case SDL_MOUSEBUTTONDOWN:
-        ty = LX_MOUSEBUTTONDOWN;
+        ty = LX_EventType::LX_MOUSEBUTTONDOWN;
         break;
     case SDL_MOUSEBUTTONUP:
-        ty = LX_MOUSEBUTTONUP;
+        ty = LX_EventType::LX_MOUSEBUTTONUP;
         break;
     case SDL_MOUSEWHEEL:
-        ty = LX_MOUSEWHEEL;
+        ty = LX_EventType::LX_MOUSEWHEEL;
         break;
 
     /* Game controller events */
     case SDL_CONTROLLERAXISMOTION:
-        ty = LX_CONTROLLERAXISMOTION;
+        ty = LX_EventType::LX_CONTROLLERAXISMOTION;
         break;
     case SDL_CONTROLLERBUTTONDOWN:
-        ty = LX_CONTROLLERBUTTONDOWN;
+        ty = LX_EventType::LX_CONTROLLERBUTTONDOWN;
         break;
     case SDL_CONTROLLERBUTTONUP:
-        ty = LX_CONTROLLERBUTTONUP;
+        ty = LX_EventType::LX_CONTROLLERBUTTONUP;
         break;
 
     case SDL_CONTROLLERDEVICEADDED:
-        /*case SDL_JOYDEVICEADDED:*/
-        ty = LX_CONTROLLERDEVICEADDED;
+        ty = LX_EventType::LX_CONTROLLERDEVICEADDED;
         break;
 
     case SDL_CONTROLLERDEVICEREMOVED:
-        /*case SDL_JOYDEVICEREMOVED:*/
-        ty = LX_CONTROLLERDEVICEREMOVED;
+        ty = LX_EventType::LX_CONTROLLERDEVICEREMOVED;
         break;
 
     /* Drag and drop events */
     case SDL_DROPFILE:
-        ty = LX_DROPFILE;
+        ty = LX_EventType::LX_DROPFILE;
         break;
     case SDL_USEREVENT:
-        ty = LX_USEREVENT;
+        ty = LX_EventType::LX_USEREVENT;
         break;
 
     default:
-        ty = LX_UNKNOWN;
+        ty = LX_EventType::LX_UNKNOWN;
         break;
     }
 
