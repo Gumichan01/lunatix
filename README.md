@@ -57,9 +57,9 @@ The library works on Windows and Linux (maybe on Mac OS X).
         {
             while(ev.pollEvent())
             {
-                switch(ev.getType())
+                switch(ev.getEventType())
                 {
-                case LX_QUIT:
+                case LX_EventType::LX_QUIT:
                     go = false;
                     break;
                 default:
