@@ -335,15 +335,15 @@ public:
             {
                 switch(ev.getEventType())
                 {
-                case LX_KEYDOWN:
+                case LX_EventType::LX_KEYDOWN:
                     keyboardInput_(ev);
                     break;
 
-                case LX_TEXTINPUT:
+                case LX_EventType::LX_TEXTINPUT:
                     textInput_(ev);
                     break;
 
-                case LX_TEXTEDITING:
+                case LX_EventType::LX_TEXTEDITING:
                     textEdit_(ev);
                     break;
 
