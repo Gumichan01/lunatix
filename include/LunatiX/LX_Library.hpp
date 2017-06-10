@@ -53,7 +53,7 @@ const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by th
 bool LX_Init();
 
 /**
-*   @fn bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value)
+*   @fn bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value)
 *
 *   Set a configuration hint
 *
@@ -62,7 +62,7 @@ bool LX_Init();
 *
 *   @return TRUE on SUCCESS, FALSE otherwise.
 */
-bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value);
+bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value);
 
 /**
 *   @fn const std::string getSDLConfig(const std::string& sdlconfig_name)

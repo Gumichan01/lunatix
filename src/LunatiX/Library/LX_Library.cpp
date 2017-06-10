@@ -144,9 +144,9 @@ bool LX_Init()
 }
 
 
-bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value)
+bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value)
 {
-    return SDL_SetHint(sdlconfig_name.c_str(),sdlconfig_value.c_str()) == SDL_TRUE;
+    return SDL_SetHint(sdlconfig_name.c_str(), sdlconfig_value.c_str()) == SDL_TRUE;
 }
 
 const std::string getSDLConfig(const std::string& sdlconfig_name)
