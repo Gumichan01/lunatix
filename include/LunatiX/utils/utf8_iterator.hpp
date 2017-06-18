@@ -108,7 +108,7 @@ public:
     *
     *   @param it The iterator to compare with
     *   @return TRUE if they are not pointing to the same position,
-    *          FALSE otherwise
+    *           FALSE otherwise
     */
     bool operator !=(const UTF8iterator& it) const;
 
@@ -140,7 +140,7 @@ public:
     *
     *   @return The codepoint
     *   @note This function will throw an *std::out_of_range* exception
-    *        if the iterator does not point to a codepoint
+    *         if the iterator does not point to a codepoint
     */
     const std::string operator *() const;
 
