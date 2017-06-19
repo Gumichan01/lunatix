@@ -158,26 +158,26 @@ LX_Vector2D operator --(LX_Vector2D& v,int)
 }
 
 
-LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
+LX_Vector2D operator *(LX_Vector2D& v, float lambda)
+{
+    return LX_Vector2D(v.vx * lambda, v.vy * lambda);
+}
+
+LX_Vector2D& operator *=(LX_Vector2D& v, float lambda)
 {
     return multiply(v, lambda);
 }
 
-LX_Vector2D& operator *=(LX_Vector2D& v,float lambda)
+LX_Vector2D operator /(LX_Vector2D& v, float lambda)
 {
-    return (v * lambda);
+    return LX_Vector2D(v.vx / lambda, v.vy / lambda);
 }
 
-LX_Vector2D& operator /(LX_Vector2D& v,float lambda)
+LX_Vector2D& operator /=(LX_Vector2D& v, float lambda)
 {
     v.vx /= lambda;
     v.vy /= lambda;
     return v;
-}
-
-LX_Vector2D& operator /=(LX_Vector2D& v,float lambda)
-{
-    return (v / lambda);
 }
 
 float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v)
