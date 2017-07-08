@@ -94,7 +94,7 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v)
+LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v)
 {
     return LX_Vector2D(u.vx + v.vx,u.vy + v.vy);
 }
@@ -107,7 +107,7 @@ LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v)
 }
 
 
-LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v)
+LX_Vector2D operator -(const LX_Vector2D u,const LX_Vector2D v)
 {
     return LX_Vector2D(u.vx - v.vx,u.vy - v.vy);
 }
@@ -158,7 +158,7 @@ LX_Vector2D operator --(LX_Vector2D& v,int)
 }
 
 
-LX_Vector2D operator *(LX_Vector2D& v, float lambda)
+LX_Vector2D operator *(LX_Vector2D v, float lambda)
 {
     return LX_Vector2D(v.vx * lambda, v.vy * lambda);
 }
@@ -168,7 +168,7 @@ LX_Vector2D& operator *=(LX_Vector2D& v, float lambda)
     return multiply(v, lambda);
 }
 
-LX_Vector2D operator /(LX_Vector2D& v, float lambda)
+LX_Vector2D operator /(LX_Vector2D v, float lambda)
 {
     return LX_Vector2D(v.vx / lambda, v.vy / lambda);
 }

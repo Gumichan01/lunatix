@@ -73,7 +73,7 @@ bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v);
 */
 bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 /**
-*   @fn LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v)
+*   @fn LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v)
 *
 *   Addition between two vectors
 *
@@ -82,7 +82,7 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   @return The resulting vector
 */
-LX_Vector2D operator +(const LX_Vector2D& u,const LX_Vector2D& v);
+LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v);
 /**
 *   @fn LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v)
 *
@@ -104,7 +104,7 @@ LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 *
 *   @return The resulting vector
 */
-LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v);
+LX_Vector2D operator -(const LX_Vector2D u,const LX_Vector2D v);
 /**
 *   @fn LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v)
 *
@@ -167,7 +167,7 @@ LX_Vector2D& operator --(LX_Vector2D& v);
 */
 LX_Vector2D operator --(LX_Vector2D& v,int);
 /**
-*   @fn LX_Vector2D operator *(LX_Vector2D& v,float lambda)
+*   @fn LX_Vector2D operator *(LX_Vector2D v,float lambda)
 *
 *   Scalar multiplication (syntactic sugar of multiply)
 *
@@ -176,9 +176,9 @@ LX_Vector2D operator --(LX_Vector2D& v,int);
 *
 *   @return A new vector after the multiplication
 */
-LX_Vector2D operator *(LX_Vector2D& v,float lambda);
+LX_Vector2D operator *(LX_Vector2D v,float lambda);
 /**
-*   @fn LX_Vector2D& operator *(LX_Vector2D& v,float lambda)
+*   @fn LX_Vector2D& operator *=(LX_Vector2D& v,float lambda)
 *
 *   Scalar multiplication (syntactic sugar of multiply) -> 'u *= λ' <=> 'u = u * λ'
 *
@@ -189,7 +189,7 @@ LX_Vector2D operator *(LX_Vector2D& v,float lambda);
 */
 LX_Vector2D& operator *=(LX_Vector2D& v,float lambda);
 /**
-*   @fn LX_Vector2D& operator /(LX_Vector2D& v,float lambda)
+*   @fn LX_Vector2D& operator /(LX_Vector2D v,float lambda)
 *
 *   Scalar division
 *
@@ -198,7 +198,7 @@ LX_Vector2D& operator *=(LX_Vector2D& v,float lambda);
 *
 *   @return The vector after the division
 */
-LX_Vector2D operator /(LX_Vector2D& v,float lambda);
+LX_Vector2D operator /(LX_Vector2D v,float lambda);
 /**
 *   @fn LX_Vector2D& operator /(LX_Vector2D& v,float lambda)
 *
