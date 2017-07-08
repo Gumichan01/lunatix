@@ -1181,6 +1181,13 @@ void test_assignment(void)
     else
         LX_Log::log("FAILURE - expected: u(3.14,1.59); Got: u(%f,%f)", u.vx, u.vy);
 
+    LX_Vector2D t(0.0f,0.0f), w(0.0f,0.0f);
+
+    if(t == w)
+        LX_Log::log("SUCCESS - Vector2D t(%f,%f)", t.vx, t.vy);
+    else
+        LX_Log::log("FAILURE - expected: w(0.0f,0.0f); Got: u(%f,%f)", w.vx, w.vy);
+
     LX_Log::log(" = END TEST = ");
 }
 
