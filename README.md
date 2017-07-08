@@ -81,7 +81,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 ## Contribute ##
 
 You may take a look on the library or get the development version on [Github][].
-The library reference is also available [here][] (version 0.10).
+The library reference is also available [here][] (version 0.10.0).
 
 ### Prerequisites ###
 
@@ -91,7 +91,7 @@ You must install [git-lfs][] in your computer in order to retrieve the repositor
 
 ### On Windows ###
 
-First of all, download the stable development and runtime [libraries][] (v0.9.0).
+First of all, download the stable development and runtime [libraries][] (v0.10.0).
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
