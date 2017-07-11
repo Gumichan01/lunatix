@@ -135,6 +135,10 @@ To test the library, execute the following command:
 The documentation of the library can be build with Doxygen,
 using the **dox** configuration file.
 
+## Game that uses LunatiX ##
+
+- [Target Xplosion][tx]: 2D scrolling shooter game
+
 ---
 
 [LunatiX Logo]: https://raw.githubusercontent.com/Gumichan01/lunatix/master/data/lunatix-logo.png
@@ -143,3 +147,4 @@ using the **dox** configuration file.
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
 [libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.10.0
 [MinGW]: http://www.mingw.org/
+[tx]: https://github.com/Gumichan01/target-xplosion/
