@@ -102,7 +102,7 @@ You can build it using the CodeBlocks project provided in the directory (*lunati
 
 ### On Linux ###
 
-The Makefile uses Clang in order to get the library being compiled.
+The Makefile uses Clang in order to compile the library.
 So you must ensure that Clang (version 3.4 at least) is installed to compile the code.
 If not, you can compile the source code using g++ (4.7.1+), but you will have to
 modify the Makefile to do it.
@@ -119,16 +119,23 @@ installed.
 |   OpenGL   |       3.0+      |
 
 
-If you want to generate the library libraries you just need to execute
+If you want to generate the library files you just need to execute
 the following command:
 
     $ make
 
 These two library files are generated into the *lib/linux/* directory.
 
+If you just want to compile and launch the example code,
+execute the following command:
+
+    $ make lunatix-demo
+    $ ./lunatix-demo
+
 To test the library, execute the following command:
 
     $ make test
+    $ bash ./test/test.sh
 
 ## Documentation ##
 
