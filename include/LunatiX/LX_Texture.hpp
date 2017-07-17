@@ -220,6 +220,8 @@ class LX_Sprite: public LX_Texture
     friend class LX_BufferedImage;
     LX_AABB *_sprite_area;
 
+    void setSpriteArea(LX_AABB * sprite_area);
+
 protected:
 
     LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,

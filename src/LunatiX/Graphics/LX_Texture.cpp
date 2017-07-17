@@ -145,7 +145,10 @@ LX_Texture::~LX_Texture()
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
                      LX_AABB * sprite_area, uint32_t format)
-    : LX_Texture(t,w,format), _sprite_area(sprite_area) {}
+    : LX_Texture(t,w,format), _sprite_area(nullptr)
+{
+    setSpriteArea(sprite_area);
+}
 
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
@@ -154,16 +157,33 @@ LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      LX_AABB * sprite_area, uint32_t format)
-    : LX_Texture(filename,w,format), _sprite_area(sprite_area) {}
+    : LX_Texture(filename,w,format), _sprite_area(nullptr)
+{
+    setSpriteArea(sprite_area);
+}
 
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      uint32_t format)
     : LX_Sprite(filename,w,nullptr,format) {}
 
+
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      LX_AABB * sprite_area, uint32_t format)
-    : LX_Texture(filename,w,format), _sprite_area(sprite_area) {}
+    : LX_Texture(filename,w,format), _sprite_area(nullptr)
+{
+    setSpriteArea(sprite_area);
+}
+
+
+void LX_Sprite::setSpriteArea(LX_AABB * sprite_area)
+{
+    if(sprite_area != nullptr)
+    {
+        _sprite_area = new LX_AABB();
+        *_sprite_area = *sprite_area;
+    }
+}
 
 
 void LX_Sprite::draw()
@@ -188,7 +208,10 @@ void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
-LX_Sprite::~LX_Sprite() {}
+LX_Sprite::~LX_Sprite()
+{
+    delete _sprite_area;
+}
 
 
 /** LX_AnimatedSprite */
