@@ -95,7 +95,7 @@ LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v);
 */
 LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v);
 /**
-*   @fn LX_Vector2D operator -(const LX_Vector2D& u,const LX_Vector2D& v)
+*   @fn LX_Vector2D operator -(const LX_Vector2D u,const LX_Vector2D v)
 *
 *   Substraction between two vectors
 *
@@ -200,7 +200,7 @@ LX_Vector2D& operator *=(LX_Vector2D& v,float lambda);
 */
 LX_Vector2D operator /(LX_Vector2D v,float lambda);
 /**
-*   @fn LX_Vector2D& operator /(LX_Vector2D& v,float lambda)
+*   @fn LX_Vector2D& operator /=(LX_Vector2D& v,float lambda)
 *
 *   Scalar division -> 'u /= λ' <=> 'u = u / λ'
 *
