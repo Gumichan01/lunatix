@@ -91,7 +91,7 @@ You must install [git-lfs][] in your computer in order to retrieve the repositor
 
 ### On Windows ###
 
-First of all, download the stable development and runtime [libraries][] (v0.10.0).
+First of all, download the stable development and runtime [libraries][] (v0.11.0).
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
@@ -152,6 +152,6 @@ using the **dox** configuration file.
 [Github]: https://github.com/Gumichan01/lunatix
 [here]: https://github.com/Gumichan01/lunatix/tree/gh-pages/reference
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
-[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.10.0
+[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.11.0
 [MinGW]: http://www.mingw.org/
 [tx]: https://github.com/Gumichan01/target-xplosion/
