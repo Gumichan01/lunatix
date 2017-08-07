@@ -170,12 +170,6 @@ public:
                uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
-    *   @fn virtual bool isOpen() const
-    *   Check if the texture has been loaded
-    *   @return TRUE on success, FALSE otherwise
-    */
-    //virtual bool isOpen() const;
-    /**
     *   @fn virtual void draw()
     *   Draw a texture on the window
     *   @note The window is specified at object construction
@@ -418,7 +412,7 @@ public:
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    //virtual bool isOpen() const;
+
     virtual void draw(LX_AABB * box);
     virtual void draw(LX_AABB * box, const double angle);
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
@@ -549,7 +543,6 @@ public:
     */
     LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    //virtual bool isOpen() const;
     /**
     *   @fn bool blit(LX_BufferedImage& s, LX_AABB& rect)
     *
