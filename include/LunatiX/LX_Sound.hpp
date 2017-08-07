@@ -33,6 +33,7 @@ const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
 
 /**
 *   @class LX_SoundException
+*   @brief Exception class of the Audio module
 */
 class LX_SoundException : public std::exception
 {

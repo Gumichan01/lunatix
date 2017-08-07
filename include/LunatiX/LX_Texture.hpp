@@ -64,6 +64,7 @@ const short LX_MIRROR_VERTICAL   = 2;
 
 /**
 *   @class LX_ImageException
+*   @brief Exception class related to the image handling
 */
 class LX_ImageException : public std::exception
 {
