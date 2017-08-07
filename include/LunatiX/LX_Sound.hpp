@@ -22,12 +22,36 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
+#include <exception>
 
 namespace LX_Mixer
 {
 
 const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */
 const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
+
+
+/**
+*   @class LX_SoundException
+*   @brief The sound interface
+*/
+class LX_SoundException : public std::exception
+{
+    std::string _string_error;
+
+public:
+
+    /// Constructor
+    explicit LX_SoundException(std::string err);
+    /// Copy constructor
+    LX_SoundException(const LX_SoundException& me);
+
+    /// Get the error message
+    virtual const char * what() const noexcept;
+
+    /// Destructor
+    ~LX_SoundException() = default;
+};
 
 /**
 *   @class LX_Sound

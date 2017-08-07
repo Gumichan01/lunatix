@@ -22,5 +22,17 @@
 
 namespace LX_Mixer
 {
+
+LX_SoundException::LX_SoundException(std::string err) : _string_error(err) {}
+
+LX_SoundException::LX_SoundException(const LX_SoundException& me)
+    : _string_error(me._string_error) {}
+
+const char * LX_SoundException::what() const noexcept
+{
+    return _string_error.c_str();
+}
+
+
 LX_Sound::~LX_Sound() {}
 }
