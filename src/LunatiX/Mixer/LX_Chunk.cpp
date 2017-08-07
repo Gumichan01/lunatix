@@ -88,8 +88,6 @@ public:
 LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
 
 // Public constructors
-LX_Chunk::LX_Chunk() : _chkimpl(nullptr) {}
-
 LX_Chunk::LX_Chunk(const std::string filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 LX_Chunk::LX_Chunk(const UTF8string filename) : _chkimpl(new LX_Chunk_(filename)) {}

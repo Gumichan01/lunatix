@@ -51,9 +51,6 @@ class LX_Chunk : public virtual LX_Sound
 
 public:
 
-    /// Default constructor
-    LX_Chunk();
-
     /**
     *   @fn LX_Chunk(const std::string filename)
     *   @brief Constructor
@@ -66,6 +63,7 @@ public:
     *        The sample was optimized for this format. But it can work with
     *        an other file type.
     *
+    *   @exception LX_SoundException On failure
     */
     explicit LX_Chunk(const std::string filename);
 
@@ -80,6 +78,8 @@ public:
     *   @note It is better to give a .wav file to the constructor.
     *          The sample was optimized for this format. But it can work with
     *          an other file type.
+    *
+    *   @exception LX_SoundException On failure
     */
     explicit LX_Chunk(const UTF8string filename);
 

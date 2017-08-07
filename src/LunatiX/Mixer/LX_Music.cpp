@@ -142,9 +142,6 @@ public:
 };
 
 /* LX_Music: public functions */
-
-LX_Music::LX_Music() : _mimpl(nullptr) {}
-
 LX_Music::LX_Music(const std::string filename)
     : _mimpl(new LX_Music_(filename)) {}
 

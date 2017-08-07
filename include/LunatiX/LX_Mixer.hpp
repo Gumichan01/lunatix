@@ -157,6 +157,8 @@ unsigned short getFXVolume();
 *
 *   @note   This function creates a new instance of LX_Chunk.
 *          So do not forget to destroy it.
+*
+*   @exception LX_SoundException On failure
 */
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file);
 

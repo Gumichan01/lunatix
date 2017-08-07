@@ -80,13 +80,12 @@ class LX_Music : public virtual LX_Sound
 
 public:
 
-    /// Default constructor
-    LX_Music();
     /**
     *   @fn LX_Music(const std::string filename)
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
+    *   @exception LX_SoundException On failure
     */
     LX_Music(const std::string filename);
     /**
@@ -94,6 +93,7 @@ public:
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
+    *   @exception LX_SoundException On failure
     */
     explicit LX_Music(const UTF8string filename);
 
