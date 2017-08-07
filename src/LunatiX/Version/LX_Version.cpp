@@ -34,8 +34,8 @@ namespace
 {
 const short LX_MAJOR_VERSION = 0;
 const short LX_MINOR_VERSION = 11;
-const short LX_PATCH_VERSION = 0;
-const char * LX_STATUS = "stable";
+const short LX_PATCH_VERSION = 1;
+const char * LX_STATUS = "alpha";
 const char * LX_COPYRIGHT    = "Copyright © 2017";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 }
