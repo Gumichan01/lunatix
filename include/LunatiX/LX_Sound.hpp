@@ -61,17 +61,8 @@ class LX_Sound
 {
 
 public:
-
-    /// Load a sound file
-    //virtual bool load(const std::string filename) = 0;
-    /// Load a sound file (UTF-8)
-    //virtual bool load(const UTF8string filename) = 0;
-    /// Check if the sound is loaded
-    //virtual bool isLoaded() const = 0;
     /// Play something
     virtual bool play() = 0;
-    /// Close the music
-    virtual void close() = 0;
     /// Destructor
     virtual ~LX_Sound();
 };

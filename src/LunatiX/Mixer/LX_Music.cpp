@@ -190,11 +190,6 @@ void LX_Music::stop()
         Mix_HaltMusic();
 }
 
-void LX_Music::close()
-{
-    _mimpl.reset();
-}
-
 
 const libtagpp::Tag& LX_Music::getInfo()
 {

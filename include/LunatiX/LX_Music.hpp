@@ -159,24 +159,16 @@ public:
     *   @note If loops is set to LX_MIXER_LOOP, the music is played forever.
     */
     bool play(int loops);
-
     /**
     *   @fn void pause()
     *   Pause or resume the current music
     */
     static void pause();
-
     /**
     *   @fn static void stop()
     *   Stop the music
     */
     static void stop();
-
-    /**
-    *   @fn virtual void close()
-    *   Close the music
-    */
-    virtual void close();
 
     /**
     *   @fn const libtagpp::Tag& getInfo()

@@ -113,11 +113,6 @@ bool LX_Chunk::play(int channel,int loops,int ticks)
     return _chkimpl->play(channel,loops,ticks);
 }
 
-void LX_Chunk::close()
-{
-    _chkimpl.reset();
-}
-
 LX_Chunk::~LX_Chunk()
 {
     _chkimpl.reset();

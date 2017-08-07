@@ -83,7 +83,6 @@ public:
     */
     explicit LX_Chunk(const UTF8string filename);
 
-
     /**
     *   @fn bool play()
     *
@@ -136,9 +135,6 @@ public:
     *   @note This function plays the sample on with no loop
     */
     bool play(int channel, int loops, int ticks);
-
-    /// Close the chunk
-    virtual void close();
 
     /// Destructor
     ~LX_Chunk();
