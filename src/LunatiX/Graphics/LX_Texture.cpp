@@ -80,12 +80,12 @@ SDL_Texture * loadTexture_(const std::string& filename,
 namespace LX_Graphics
 {
 
-LX_TextureException::LX_TextureException(std::string err) : _string_error(err) {}
+LX_ImageException::LX_ImageException(std::string err) : _string_error(err) {}
 
-LX_TextureException::LX_TextureException(const LX_TextureException& me)
+LX_ImageException::LX_ImageException(const LX_ImageException& me)
     : _string_error(me._string_error) {}
 
-const char * LX_TextureException::what() const noexcept
+const char * LX_ImageException::what() const noexcept
 {
     return _string_error.c_str();
 }
@@ -109,7 +109,7 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
     _texture = loadTexture_(filename, format, RENDER(w.getRenderingSys()));
 
     if(_texture == nullptr)
-        throw LX_TextureException("LX_Texture — Cannot load " + filename);
+        throw LX_ImageException("LX_Texture — Cannot load " + filename);
 }
 
 
@@ -322,7 +322,7 @@ LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
     _surface = loadSurface_(filename, format);
 
     if(_surface == nullptr)
-        throw LX_TextureException("LX_BufferedImage — Cannot load " + filename);
+        throw LX_ImageException("LX_BufferedImage — Cannot load " + filename);
 }
 
 
@@ -405,7 +405,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
     }
 
     if(width <= 0 || height <= 0)
-        throw LX_TextureException("LX_StreamingTexture - bad dimensions");
+        throw LX_ImageException("LX_StreamingTexture - bad dimensions");
     else
     {
         _screen  = SDL_CreateRGBSurface(0,width,height,bpp,r,g,b,a);
@@ -624,7 +624,7 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
     _texture = _font.drawSolidText_(_text,_size,_win);
 
     if(_texture == nullptr)
-        throw LX_TextureException("LX_SolidTextTexture — Cannot create the texture " +
+        throw LX_ImageException("LX_SolidTextTexture — Cannot create the texture " +
                                   std::string(text.utf8_str()));
 }
 
@@ -676,7 +676,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
     _texture = _font.drawShadedText_(_text,_size,_bgcolour,_win);
 
     if(_texture == nullptr)
-        throw LX_TextureException("LX_ShadedTextTexture — Cannot create the texture: " +
+        throw LX_ImageException("LX_ShadedTextTexture — Cannot create the texture: " +
                                   std::string(text.utf8_str()));
 }
 
@@ -737,7 +737,7 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
     _texture = _font.drawBlendedText_(_text,_size,_win);
 
     if(_texture == nullptr)
-        throw LX_TextureException("LX_BlendedTextTexture — Cannot create the texture: " +
+        throw LX_ImageException("LX_BlendedTextTexture — Cannot create the texture: " +
                                   std::string(text.utf8_str()));
 }
 

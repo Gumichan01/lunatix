@@ -63,24 +63,24 @@ const short LX_MIRROR_VERTICAL   = 2;
 
 
 /**
-*   @class LX_TextureException
+*   @class LX_ImageException
 */
-class LX_TextureException : public std::exception
+class LX_ImageException : public std::exception
 {
     std::string _string_error;
 
 public:
 
     /// Constructor
-    explicit LX_TextureException(std::string err);
+    explicit LX_ImageException(std::string err);
     /// Copy constructor
-    LX_TextureException(const LX_TextureException& me);
+    LX_ImageException(const LX_ImageException& me);
 
     /// Get the error message
     virtual const char * what() const noexcept;
 
     /// Destructor
-    ~LX_TextureException() = default;
+    ~LX_ImageException() = default;
 };
 
 
