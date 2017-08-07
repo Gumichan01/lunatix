@@ -109,6 +109,6 @@ public:
 
 #include "LX_Channel.tpp"
 
-};
+}
 
 #endif // LX_CHANNEL_HPP_INCLUDED
