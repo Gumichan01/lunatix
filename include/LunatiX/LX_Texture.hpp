@@ -23,6 +23,8 @@
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_AABB.hpp>
+
+#include <exception>
 #include <vector>
 
 struct SDL_Surface;
@@ -58,6 +60,28 @@ const short LX_MIRROR_NONE       = 0;
 const short LX_MIRROR_HORIZONTAL = 1;
 /// Flag to define vertical mirror while drawing a texture
 const short LX_MIRROR_VERTICAL   = 2;
+
+
+/**
+*   @class LX_TextureException
+*/
+class LX_TextureException : public std::exception
+{
+    std::string _string_error;
+
+public:
+
+    /// Constructor
+    explicit LX_TextureException(std::string err);
+    /// Copy constructor
+    LX_TextureException(const LX_TextureException& me);
+
+    /// Get the error message
+    virtual const char * what() const noexcept;
+
+    /// Destructor
+    ~LX_TextureException() = default;
+};
 
 
 /**
@@ -150,7 +174,7 @@ public:
     *   Check if the texture has been loaded
     *   @return TRUE on success, FALSE otherwise
     */
-    virtual bool isOpen() const;
+    //virtual bool isOpen() const;
     /**
     *   @fn virtual void draw()
     *   Draw a texture on the window
@@ -394,7 +418,7 @@ public:
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual bool isOpen() const;
+    //virtual bool isOpen() const;
     virtual void draw(LX_AABB * box);
     virtual void draw(LX_AABB * box, const double angle);
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
@@ -525,7 +549,7 @@ public:
     */
     LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual bool isOpen() const;
+    //virtual bool isOpen() const;
     /**
     *   @fn bool blit(LX_BufferedImage& s, LX_AABB& rect)
     *

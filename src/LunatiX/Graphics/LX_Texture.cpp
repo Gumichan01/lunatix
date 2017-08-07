@@ -29,6 +29,7 @@
 
 namespace
 {
+
 SDL_RendererFlip shortToFlip_(const short mirror)
 {
     if(mirror == 1)
@@ -76,6 +77,17 @@ SDL_Texture * loadTexture_(const std::string& filename,
 namespace LX_Graphics
 {
 
+LX_TextureException::LX_TextureException(std::string err) : _string_error(err) {}
+
+LX_TextureException::LX_TextureException(const LX_TextureException& me)
+    : _string_error(me._string_error) {}
+
+const char * LX_TextureException::what() const noexcept
+{
+    return _string_error.c_str();
+}
+
+
 /** LX_Texture */
 
 //  protected zero-argument constructor
@@ -100,10 +112,10 @@ LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
     : LX_Texture(filename.utf8_str(),w,format) {}
 
 
-bool LX_Texture::isOpen() const
+/*bool LX_Texture::isOpen() const
 {
     return _texture != nullptr;
-}
+}*/
 
 
 void LX_Texture::draw()
@@ -242,10 +254,10 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
       _started(false), _loop(loop), _drawable(true) {}
 
 
-bool LX_AnimatedSprite::isOpen() const
+/*bool LX_AnimatedSprite::isOpen() const
 {
     return LX_Texture::isOpen();
-}
+}*/
 
 void LX_AnimatedSprite::draw(LX_AABB * box)
 {
@@ -405,10 +417,10 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
 }
 
 
-bool LX_StreamingTexture::isOpen() const
+/*bool LX_StreamingTexture::isOpen() const
 {
     return _screen != nullptr && LX_Texture::isOpen();
-}
+}*/
 
 
 bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_AABB& rect)
