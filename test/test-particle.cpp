@@ -20,7 +20,7 @@ namespace
 LX_Sprite *red;
 LX_Sprite *green;
 LX_Sprite *blue;
-};
+}
 
 class Dot
 {
@@ -137,14 +137,18 @@ int main(int argc, char **argv)
     w = new LX_Win::LX_Window(winfo);
     LX_Win::LX_WindowManager::getInstance()->addWindow(w);
 
-    red = new LX_Sprite("test/asset/red.bmp",*w);
-    green = new LX_Sprite("test/asset/green.bmp",*w);
-    blue = new LX_Sprite("test/asset/blue.bmp",*w);
-
-    if(red->isOpen() && green->isOpen() && blue->isOpen())
+    try
+    {
+        red = new LX_Sprite("test/asset/red.bmp",*w);
+        green = new LX_Sprite("test/asset/green.bmp",*w);
+        blue = new LX_Sprite("test/asset/blue.bmp",*w);
         LX_Log::log("SUCCESS - The three assets were successfully loaded");
-    else
+    }
+    catch(LX_Graphics::LX_ImageException& ie)
+    {
         LX_Log::log("FAILURE - (At least) One of the three assets was not loaded");
+        LX_Log::log("%s", ie.what());
+    }
 
     LX_Log::log("Loading the dot");
     dot = new Dot();
