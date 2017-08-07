@@ -341,12 +341,6 @@ LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, uint32_t format)
 }
 
 
-bool LX_BufferedImage::isLoaded() const
-{
-    return _surface != nullptr;
-}
-
-
 LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
 {
     return new LX_Texture(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),

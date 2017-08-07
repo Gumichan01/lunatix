@@ -161,6 +161,7 @@ public:
     *
     *   The default value is **LX_PIXELFORMAT_RGBA8888**
     *
+    *   @exception LX_ImageException On failure
     */
     LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
                uint32_t format=LX_PIXELFORMAT_RGBA8888);
@@ -447,6 +448,8 @@ public:
 *
 *   This class describes an image stored in memory.
 *   Any texture can be generated from this buffered.
+*
+*   @note This class throws LX_ImageException if an object cannot be created
 */
 class LX_BufferedImage
 {
@@ -467,13 +470,6 @@ public:
     /// Constructor (UTF-8)
     LX_BufferedImage(const UTF8string& filename,
                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
-
-    /**
-    *   @fn bool isLoaded() const
-    *   Check if the buffered image has been loaded
-    *   @return TRUE, if it is loaded, FALSE otherwise
-    */
-    bool isLoaded() const;
 
     /**
     *   @fn LX_Texture * generateTexture() const
