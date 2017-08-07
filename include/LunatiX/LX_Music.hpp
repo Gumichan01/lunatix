@@ -98,31 +98,6 @@ public:
     explicit LX_Music(const UTF8string filename);
 
     /**
-    *   @fn bool load(const std::string filename)
-    *
-    *   Load the music file
-    *
-    *   @param [in] filename The music file that will be loaded
-    *   @return TRUE on succes, FALSE otherwise
-    */
-    virtual bool load(const std::string filename);
-    /**
-    *   @fn virtual bool load(const UTF8string filename)
-    *
-    *   Load the music file (utf-8 format)
-    *
-    *   @param [in] filename The music file that will be loaded
-    *   @return TRUE on succes, FALSE otherwise
-    */
-    virtual bool load(const UTF8string filename);
-    /**
-    *   @fn virtual bool isLoaded() const
-    *   Check if the music is loaded
-    *   @return TRUE on succes, FALSE otherwise
-    */
-    virtual bool isLoaded() const;
-
-    /**
     *   @fn void fadeIn(int ms)
     *
     *   Fade in the current music over some milliseconds of time

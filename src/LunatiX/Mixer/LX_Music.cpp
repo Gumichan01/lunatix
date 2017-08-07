@@ -59,41 +59,31 @@ class LX_Music_
 {
     Mix_Music *_music;
     std::string _filename;
-    bool _loaded;
     libtagpp::Tag _tag;
     LX_MusicTag _mtag;
     bool mtag_set;
 
-protected:
-
-    bool load_(const std::string& filename)
+    void load_(const std::string& filename)
     {
         Mix_FreeMusic(_music);
         _music = Mix_LoadMUS(filename.c_str());
 
         if(_music == nullptr)
-            return false;
-
-        return true;
+            throw LX_SoundException("LX_Music — Cannot load " + filename);
     }
 
 public:
 
     explicit LX_Music_(const std::string& filename)
-        : _music(nullptr), _filename(filename), _loaded(false), mtag_set(false)
+        : _music(nullptr), _filename(filename), mtag_set(false)
     {
-        _loaded = load_(filename);
+        load_(filename);
     }
 
     explicit LX_Music_(const UTF8string& filename)
-        : _music(nullptr), _filename(filename.utf8_str()), _loaded(false), mtag_set(false)
+        : _music(nullptr), _filename(filename.utf8_str()), mtag_set(false)
     {
-        _loaded = load_(_filename);
-    }
-
-    bool isLoaded_() const
-    {
-        return _loaded;
+        load_(_filename);
     }
 
     void fadeIn(int ms)
@@ -162,37 +152,14 @@ LX_Music::LX_Music(const UTF8string filename)
     : _mimpl(new LX_Music_(filename)) {}
 
 
-bool LX_Music::load(const std::string filename)
-{
-    _mimpl.reset(new LX_Music_(filename));
-    return _mimpl->isLoaded_();
-}
-
-bool LX_Music::load(const UTF8string filename)
-{
-    _mimpl.reset(new LX_Music_(filename));
-    return _mimpl->isLoaded_();
-}
-
-bool LX_Music::isLoaded() const
-{
-    return _mimpl != nullptr && _mimpl->isLoaded_();
-}
-
 void LX_Music::fadeIn(int ms)
 {
-    if(isLoaded())
-        _mimpl->fadeIn(ms);
-    else
-        LX_SetError("Cannot play an unloaded music");
+    _mimpl->fadeIn(ms);
 }
 
 void LX_Music::fadeInPos(int ms,int pos)
 {
-    if(isLoaded())
-        _mimpl->fadeInPos(ms,pos);
-    else
-        LX_SetError("Cannot play an unloaded music");
+    _mimpl->fadeInPos(ms,pos);
 }
 
 void LX_Music::fadeOut(int ms)
@@ -203,12 +170,12 @@ void LX_Music::fadeOut(int ms)
 
 bool LX_Music::play()
 {
-    return isLoaded() && _mimpl->play();
+    return _mimpl->play();
 }
 
 bool LX_Music::play(int loops)
 {
-    return isLoaded() && _mimpl->play(loops);
+    return _mimpl->play(loops);
 }
 
 
