@@ -186,6 +186,7 @@ void test_music()
     try
     {
         LX_Mixer::LX_Music music(s);
+        LX_Graphics::LX_BufferedImage * bf;
 
         LX_Win::LX_WindowInfo info;
         LX_Win::LX_initWindowInfo(info);
@@ -195,22 +196,25 @@ void test_music()
         const libtagpp::Tag& tag = music.getInfo();
 
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Get the cover of the title");
-        LX_Graphics::LX_BufferedImage * bf =
-            LX_FileIO::LX_FileBuffer(s, tag.getImageMetaData()._img_offset,
-                                     tag.getImageMetaData()._img_size).loadBufferedImage();
-        LX_Graphics::LX_Sprite * cover = bf->generateSprite(w);
-        delete bf;
 
-        if(cover->isOpen())
+        bf = LX_FileIO::LX_FileBuffer(s, tag.getImageMetaData()._img_offset,
+                                      tag.getImageMetaData()._img_size).loadBufferedImage();
+
+        try
+        {
+            LX_Graphics::LX_Sprite * cover = bf->generateSprite(w);
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - cover opened");
-        else
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s",LX_GetError());
 
-        w.clearWindow();
-        LX_AABB box = {0,0,info.w,info.h};
-        cover->draw(&box);
-        w.update();
-        delete cover;
+            w.clearWindow();
+            LX_AABB box = {0,0,info.w,info.h};
+            cover->draw(&box);
+            w.update();
+            delete cover;
+        }
+        catch(LX_Graphics::LX_ImageException& ie)
+        {
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s", ie.what());
+        }
 
         LX_Timer::delay(2000);
         LX_Log::log("File: %s",s.c_str());
