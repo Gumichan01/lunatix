@@ -555,7 +555,7 @@ public:
     *   @fn void update()
     *   Update the texture in order to be drawn on the window
     *
-    *   @note After each call of update(), you ned to call LX_Texture::draw()
+    *   @note After each call of update(), you need to call LX_Texture::draw()
     *        in order to draw the new texture on the window
     */
     void update();
