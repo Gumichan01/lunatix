@@ -145,6 +145,7 @@ using the **dox** configuration file.
 ## Game that uses LunatiX ##
 
 - [Target Xplosion][tx]: 2D scrolling shooter game
+- [Br8k0ut][tx]: 8-bit platformer game
 
 ---
 
