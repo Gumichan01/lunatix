@@ -39,7 +39,7 @@ inline uint32_t getTicks()
 /// Wait for a certain number of milliseconds before returning
 inline void delay(uint32_t ms)
 {
-    return SDL_Delay(ms);
+    SDL_Delay(ms);
 }
 
 }
