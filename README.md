@@ -142,7 +142,7 @@ To test the library, execute the following command:
 The documentation of the library can be build with Doxygen,
 using the **dox** configuration file.
 
-## Game that uses LunatiX ##
+## Games that use LunatiX ##
 
 - [Target Xplosion][tx]: 2D scrolling shooter game
 - [Br8k0ut][tx]: 8-bit platformer game
