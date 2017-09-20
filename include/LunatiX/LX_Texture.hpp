@@ -246,7 +246,7 @@ class LX_Sprite: public LX_Texture
 protected:
 
     LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-              LX_AABB * sprite_area = nullptr,
+              const UTF8string filename, LX_AABB * sprite_area = nullptr,
               uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
@@ -385,7 +385,7 @@ class LX_AnimatedSprite: public LX_Sprite
 protected:
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+                      bool loop, const UTF8string filename, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 
@@ -460,8 +460,11 @@ class LX_BufferedImage
     friend class LX_FileIO::LX_FileBuffer;
     friend class LX_Win::LX_Window;
     SDL_Surface * _surface;
+    UTF8string _filename;
 
     LX_BufferedImage(SDL_Surface * s, uint32_t format=LX_PIXELFORMAT_RGBA8888);
+    LX_BufferedImage(SDL_Surface * s, const std::string filename,
+                     uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 public:
 

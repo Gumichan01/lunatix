@@ -156,8 +156,9 @@ LX_Texture::~LX_Texture()
 
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-                     LX_AABB * sprite_area, uint32_t format)
-    : LX_Texture(t,w,format), _sprite_area(nullptr)
+                     const UTF8string filename, LX_AABB * sprite_area,
+                     uint32_t format)
+    : LX_Texture(t,w,format), _sprite_area(nullptr), _filename(filename)
 {
     setSpriteArea(sprite_area);
 }
@@ -232,8 +233,8 @@ LX_Sprite::~LX_Sprite()
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, bool loop,
-                                     uint32_t format)
-    : LX_Sprite(t,w,nullptr,format), _coordinates(coord), _SZ(coord.size()),
+                                     const UTF8string filename, uint32_t format)
+    : LX_Sprite(t, w, filename, nullptr, format), _coordinates(coord), _SZ(coord.size()),
       _delay(delay), _btime(0), _frame(0), _started(false), _loop(loop), _drawable(true) {}
 
 
@@ -318,6 +319,7 @@ bool LX_AnimatedSprite::isInfinitelyLooped() const
 /** LX_BufferedImage */
 
 LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
+    : _surface(nullptr), _filename(filename)
 {
     _surface = loadSurface_(filename, format);
 
@@ -327,15 +329,20 @@ LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
 
 
 LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
-    : LX_BufferedImage(filename.utf8_str(),format) {}
+    : LX_BufferedImage(filename.utf8_str(), format) {}
 
 
 LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, uint32_t format)
-    : _surface(nullptr)
+    : LX_BufferedImage(s, "", format) {}
+
+
+LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string filename,
+                                   uint32_t format)
+    : _surface(nullptr), _filename(filename)
 {
     if(s->format->format != format)
     {
-        _surface = SDL_ConvertSurfaceFormat(s,format,0);
+        _surface = SDL_ConvertSurfaceFormat(s, format, 0);
         SDL_FreeSurface(s);
     }
 }
@@ -347,19 +354,18 @@ LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
                           _surface),w);
 }
 
-LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w,
-        LX_AABB * sprite_area) const
+LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w, LX_AABB * sprite_area) const
 {
     return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
-                         w, sprite_area);
+                         w, _filename, sprite_area);
 }
 
 LX_AnimatedSprite * LX_BufferedImage::
 generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
                        const uint32_t delay, bool loop) const
 {
-    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),_surface),
-                                 w, coord, delay, loop);
+    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
+                                 w, coord, delay, loop, _filename);
 }
 
 
@@ -442,7 +448,7 @@ LX_StreamingTexture::~LX_StreamingTexture()
 LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, uint32_t format)
     : LX_Texture(w,format), _text(""), _font(font), _size(0), _colour(cnull),
-    _dimension(rnull)
+      _dimension(rnull)
 {
     _colour = _font.getColour_();
     _size = _font.getSize_();
@@ -619,7 +625,7 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_SolidTextTexture — Cannot create the texture " +
-                                  std::string(text.utf8_str()));
+                                std::string(text.utf8_str()));
 }
 
 
@@ -671,7 +677,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_ShadedTextTexture — Cannot create the texture: " +
-                                  std::string(text.utf8_str()));
+                                std::string(text.utf8_str()));
 }
 
 
@@ -732,7 +738,7 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_BlendedTextTexture — Cannot create the texture: " +
-                                  std::string(text.utf8_str()));
+                                std::string(text.utf8_str()));
 }
 
 
