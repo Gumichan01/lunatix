@@ -239,6 +239,7 @@ class LX_Sprite: public LX_Texture
 {
     friend class LX_BufferedImage;
     LX_AABB *_sprite_area;
+    UTF8string _filename;
 
     void setSpriteArea(LX_AABB * sprite_area);
 

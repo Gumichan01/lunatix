@@ -169,7 +169,7 @@ LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      LX_AABB * sprite_area, uint32_t format)
-    : LX_Texture(filename,w,format), _sprite_area(nullptr)
+    : LX_Texture(filename,w,format), _sprite_area(nullptr), _filename(filename)
 {
     setSpriteArea(sprite_area);
 }
@@ -182,7 +182,7 @@ LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      LX_AABB * sprite_area, uint32_t format)
-    : LX_Texture(filename,w,format), _sprite_area(nullptr)
+    : LX_Texture(filename,w,format), _sprite_area(nullptr), _filename(filename)
 {
     setSpriteArea(sprite_area);
 }
