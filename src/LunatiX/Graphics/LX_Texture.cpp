@@ -221,6 +221,13 @@ void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
+
+UTF8string LX_Sprite::getFileName()
+{
+    return _filename;
+}
+
+
 LX_Sprite::~LX_Sprite()
 {
     delete _sprite_area;
@@ -367,6 +374,12 @@ generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
 {
     return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
                                  w, coord, delay, loop, _filename);
+}
+
+
+UTF8string LX_BufferedImage::getFileName()
+{
+    return _filename;
 }
 
 

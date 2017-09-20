@@ -359,6 +359,13 @@ public:
     */
     virtual void draw(LX_AABB * box, const double angle, const short mirror);
 
+    /**
+    *   @fn UTF8string getFileName()
+    *   Returns the name of the file associated with this texture
+    *   @return The name of the file (UTF-8 format)
+    */
+    UTF8string getFileName();
+
     /// Destructor
     virtual ~LX_Sprite();
 };
@@ -513,6 +520,13 @@ public:
     generateAnimatedSprite(LX_Win::LX_Window& w,
                            const std::vector<LX_AABB>& coord,
                            const uint32_t delay, bool loop) const;
+
+    /**
+    *   @fn UTF8string getFileName()
+    *   Returns the name of the file associated with this texture
+    *   @return The name of the file (UTF-8 format)
+    */
+    UTF8string getFileName();
 
     /// Destructor
     ~LX_BufferedImage();
