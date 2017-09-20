@@ -318,20 +318,6 @@ bool LX_AnimatedSprite::isInfinitelyLooped() const
 
 /** LX_BufferedImage */
 
-LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
-    : _surface(nullptr), _filename(filename)
-{
-    _surface = loadSurface_(filename, format);
-
-    if(_surface == nullptr)
-        throw LX_ImageException("LX_BufferedImage — Cannot load " + filename);
-}
-
-
-LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
-    : LX_BufferedImage(filename.utf8_str(), format) {}
-
-
 LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, uint32_t format)
     : LX_BufferedImage(s, "", format) {}
 
@@ -346,6 +332,21 @@ LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string filename,
         SDL_FreeSurface(s);
     }
 }
+
+
+LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
+    : _surface(nullptr), _filename(filename)
+{
+    _surface = loadSurface_(filename, format);
+
+    if(_surface == nullptr)
+        throw LX_ImageException("LX_BufferedImage — Cannot load " + filename);
+}
+
+
+LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
+    : LX_BufferedImage(filename.utf8_str(), format) {}
+
 
 
 LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
