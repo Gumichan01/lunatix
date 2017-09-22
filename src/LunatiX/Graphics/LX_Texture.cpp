@@ -22,6 +22,7 @@
 #include <LunatiX/LX_TrueTypeFont.hpp>
 #include <LunatiX/LX_Window.hpp>
 #include <LunatiX/LX_Error.hpp>
+#include <LunatiX/LX_Log.hpp>
 
 #include <SDL2/SDL_image.h>
 
@@ -331,7 +332,7 @@ LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, uint32_t format)
 
 LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string filename,
                                    uint32_t format)
-    : _surface(nullptr), _filename(filename)
+    : _surface(s), _filename(filename)
 {
     if(s->format->format != format)
     {
@@ -353,6 +354,120 @@ LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
 
 LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
     : LX_BufferedImage(filename.utf8_str(), format) {}
+
+
+bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
+                                        Uint8& b, Uint8& a)
+{
+    switch(_surface->format->format)
+    {
+        case LX_PIXELFORMAT_RGBA8888:
+            r = (pixel >> 24) & 0xFF;
+            g = (pixel >> 16) & 0xFF;
+            b = (pixel >> 8) & 0xFF;
+            a = pixel & 0xFF;
+        break;
+
+        case LX_PIXELFORMAT_ARGB8888:
+            a = (pixel >> 24) & 0xFF;
+            r = (pixel >> 16) & 0xFF;
+            g = (pixel >> 8) & 0xFF;
+            b = pixel & 0xFF;
+        break;
+
+        case LX_PIXELFORMAT_BGRA8888:
+            b = (pixel >> 24) & 0xFF;
+            g = (pixel >> 16) & 0xFF;
+            r = (pixel >> 8) & 0xFF;
+            a = pixel & 0xFF;
+        break;
+
+        case LX_PIXELFORMAT_ABGR8888:
+            a = (pixel >> 24) & 0xFF;
+            b = (pixel >> 16) & 0xFF;
+            g = (pixel >> 8) & 0xFF;
+            r = pixel & 0xFF;
+        break;
+
+
+        default:
+            return false;
+        break;
+    }
+
+    return true;
+}
+
+
+Uint32 LX_BufferedImage::_updateColour(Uint8 a, Uint8 v)
+{
+    Uint32 npixel = 0;
+
+    switch(_surface->format->format)
+    {
+        case LX_PIXELFORMAT_RGBA8888:
+            npixel = (v << 24) |(v << 16) | (v << 8) | a;
+        break;
+
+        case LX_PIXELFORMAT_ARGB8888:
+            npixel = a |(v << 16) | (v << 8) | v;
+        break;
+
+        case LX_PIXELFORMAT_BGRA8888:
+            npixel = (v << 24) |(v << 16) | (v << 8) | a;
+        break;
+
+        case LX_PIXELFORMAT_ABGR8888:
+            npixel = a |(v << 16) | (v << 8) | v;
+        break;
+
+        default:
+        break;
+    }
+
+    return npixel;
+}
+
+
+
+Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel)
+{
+
+#define FL(x) static_cast<float>(x)
+
+    const float RED_RATIO   = 0.212671f;
+    const float GREEN_RATIO = 0.715160f;
+    const float BLUE_RATIO  = 0.072169f;
+
+    Uint8 v = 0;
+    Uint8 r = 0, g = 0, b = 0, a = 0;
+
+    if(!_retrieveColours(pixel, r, g, b, a))
+    {
+        LX_Log::logCritical(LX_Log::LX_LOG_VIDEO, "convert image: Unrecognized format");
+        return pixel;
+    }
+
+    v = static_cast<Uint8>(RED_RATIO * FL(r) + GREEN_RATIO * FL(g) + BLUE_RATIO * FL(b));
+
+    return _updateColour(a, v);
+}
+
+
+void LX_BufferedImage::convertGrayscale()
+{
+    Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
+
+    for (int y = 0; y < _surface->h; ++y)
+    {
+        for (int x = 0; x < _surface->w; ++x)
+        {
+            Uint32 pixel = pixels[y * _surface->w + x];
+            pixels[y * _surface->w + x] = _convertGrayscalePixel(pixel);
+        }
+    }
+
+}
 
 
 
