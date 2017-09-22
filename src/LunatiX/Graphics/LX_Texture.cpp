@@ -399,7 +399,7 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
 }
 
 
-Uint32 LX_BufferedImage::_updateColour(Uint8 a, Uint8 v)
+Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v)
 {
     Uint32 npixel = 0;
 
@@ -429,7 +429,6 @@ Uint32 LX_BufferedImage::_updateColour(Uint8 a, Uint8 v)
 }
 
 
-
 Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel)
 {
 
@@ -450,7 +449,56 @@ Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel)
 
     v = static_cast<Uint8>(RED_RATIO * FL(r) + GREEN_RATIO * FL(g) + BLUE_RATIO * FL(b));
 
-    return _updateColour(a, v);
+    return _updateGrayscaleColour(a, v);
+}
+
+
+Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+    Uint32 npixel = 0;
+
+    switch(_surface->format->format)
+    {
+        case LX_PIXELFORMAT_RGBA8888:
+            npixel = (r << 24) |(g << 16) | (b << 8) | a;
+        break;
+
+        case LX_PIXELFORMAT_ARGB8888:
+            npixel = a |(r << 16) | (g << 8) | b;
+        break;
+
+        case LX_PIXELFORMAT_BGRA8888:
+            npixel = (b << 24) |(g << 16) | (r << 8) | a;
+        break;
+
+        case LX_PIXELFORMAT_ABGR8888:
+            npixel = a |(b << 16) | (g << 8) | r;
+        break;
+
+        default:
+        break;
+    }
+
+    return npixel;
+}
+
+
+Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel)
+{
+    const Uint8 MAX_UINT = 255;
+    Uint8 r = 0, g = 0, b = 0, a = 0;
+
+    if(!_retrieveColours(pixel, r, g, b, a))
+    {
+        LX_Log::logCritical(LX_Log::LX_LOG_VIDEO, "convert image: Unrecognized format");
+        return pixel;
+    }
+
+    r = MAX_UINT - r;
+    g = MAX_UINT - g;
+    b = MAX_UINT - b;
+
+    return _updateNegativeColour(r, g, b, a);
 }
 
 
@@ -466,9 +514,21 @@ void LX_BufferedImage::convertGrayscale()
             pixels[y * _surface->w + x] = _convertGrayscalePixel(pixel);
         }
     }
-
 }
 
+void LX_BufferedImage::convertNegative()
+{
+    Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
+
+    for (int y = 0; y < _surface->h; ++y)
+    {
+        for (int x = 0; x < _surface->w; ++x)
+        {
+            Uint32 pixel = pixels[y * _surface->w + x];
+            pixels[y * _surface->w + x] = _convertNegativePixel(pixel);
+        }
+    }
+}
 
 
 LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
