@@ -180,7 +180,7 @@ void test_image(LX_Win::LX_Window *win)
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"buffered image");
         LX_Graphics::LX_Sprite *img = LX_BufferedImage(sp_str).generateSprite(*win, &sp);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from file");
 
         win->clearWindow();
         img->draw(&box);
@@ -193,6 +193,58 @@ void test_image(LX_Win::LX_Window *win)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
         LX_Log::log("%s", ie.what());
     }
+
+    try
+    {
+        LX_AABB sp = {1060,449,211,448};
+        LX_AABB box = {64,64,211,448};
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"from a sprite sheet #3 bis");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"grayscale");
+
+        LX_BufferedImage bf(sp_str);
+        bf.convertGrayscale();
+        LX_Graphics::LX_Sprite *img = bf.generateSprite(*win, &sp);
+
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from file");
+
+        win->clearWindow();
+        img->draw(&box);
+        win->update();
+        LX_Timer::delay(750);
+        delete img;
+    }
+    catch(LX_Graphics::LX_ImageException& ie)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+        LX_Log::log("%s", ie.what());
+    }
+
+
+    try
+    {
+        LX_AABB sp = {1060,449,211,448};
+        LX_AABB box = {64,64,211,448};
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"from a sprite sheet #3 bis");
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"negative");
+
+        LX_BufferedImage bf(sp_str);
+        bf.convertNegative();
+        LX_Graphics::LX_Sprite *img = bf.generateSprite(*win, &sp);
+
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from file");
+
+        win->clearWindow();
+        img->draw(&box);
+        win->update();
+        LX_Timer::delay(750);
+        delete img;
+    }
+    catch(LX_Graphics::LX_ImageException& ie)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+        LX_Log::log("%s", ie.what());
+    }
+
 
     try
     {
@@ -360,9 +412,9 @@ void test_image(LX_Win::LX_Window *win)
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_StreamingTexture example, with LX_BufferedImage");
 
         Uint32 t1 = SDL_GetTicks();
-        for(int i = 0; i < 256; i++)
+        for(int i = 0; i < 64; i++)
         {
-            box.x += 1;
+            box.x += 4;
             img.blit(data,box);
             img.update();
             win->clearWindow();
@@ -871,7 +923,7 @@ void test_drawing(LX_Win::LX_Window *win)
     }
 
     LX_Log::log("Draw filled circles");
-    for(int j = 0; j < 300; j++)
+    for(unsigned int j = 0; j < 300; j++)
     {
         LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),j);
         win->clearWindow();
