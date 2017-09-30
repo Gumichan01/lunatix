@@ -85,6 +85,39 @@ namespace LX_Mixer
 class LX_Music;
 class LX_Chunk;
 
+const int LX_UNKNOWN_EFFECT = 0x00000;
+const int LX_PANNING = 0x00001;
+const int LX_POSITION = 0x00010;
+const int LX_DISTANCE = 0x00100;
+const int LX_STEREO = 0x01000;
+
+
+struct LX_MixerEffect
+{
+    int type;
+
+    // Panning
+    uint8_t pan_left;
+    uint8_t pan_right;
+
+    // Position
+    int16_t pos_angle;
+    uint8_t  pos_distance;
+
+    // Distance
+    uint8_t distance;
+
+    // Stereo
+    bool rev_stereo;
+
+    // Loop
+    int loops;
+
+    LX_MixerEffect();
+    LX_MixerEffect(const LX_MixerEffect& st);
+    LX_MixerEffect& operator = (const LX_MixerEffect& st);
+};
+
 /* == Volume == */
 
 /**
@@ -260,7 +293,7 @@ int channelAvailable(int tag);
 *
 *   @param [in] chunk The chunk to play
 *   @param [in] tag The group id to look for the channel for playing the chunk on
-*   @param [in] loops Optional argument tha specified the number of loop (default value = 0)
+*   @param [in] loops Optional argument that specified the number of loop (default value = 0)
 *
 *   @return TRUE if the chunk can be played, FALSE if no channel is available
 *
@@ -270,6 +303,24 @@ int channelAvailable(int tag);
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
 bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0);
+
+/**
+*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0)
+*
+*   Play the chunk on a channel of the group specified by the tag
+*
+*   @param [in] chunk The chunk to play
+*   @param [in] tag The group id to look for the channel for playing the chunk on
+*   @param [in] fx The structur that provides information about the effects to use
+*
+*   @return TRUE if the chunk can be played, FALSE if no channel is available
+*
+*   @note If the group is empty, any unreserved channels in the default
+*        group is selected and the chunk is played on it
+*   @note If no channel of the group is available for playing, the oldest
+*        playing channel is chosen. So, it is halted, and is used to play the chunk on
+*/
+bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect);
 
 /**
 *   @fn void pause(int channel)
@@ -481,7 +532,7 @@ void resetPosition(int chan);
 *   Reverse the left and right audio channels.
 *
 *   @param [in] flip TRUE to set the effect, FALSE to unregister the effect
-*   @note If you want to unregister the effect on a channel, set false as flip
+*   @note If you want to unregister the effect on a channel, set flip as false
 */
 void reverseStereo(bool flip);
 /**
@@ -491,7 +542,7 @@ void reverseStereo(bool flip);
 *
 *   @param [in] chan The channel to reverse the stereo sound from
 *   @param [in] flip TRUE to set the effect, FALSE to unregister the effect
-*   @note If you want to unregister the effect on a channel, set false as flip
+*   @note If you want to unregister the effect on a channel, set flip as false
 */
 void reverseStereo(int chan, bool flip);
 

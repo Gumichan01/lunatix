@@ -46,6 +46,30 @@ unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 namespace LX_Mixer
 {
 
+
+LX_MixerEffect::LX_MixerEffect() : type(LX_UNKNOWN_EFFECT),
+    pan_left(0), pan_right(0), pos_angle(0), pos_distance(0),
+    rev_stereo(false), loops(0) {}
+
+LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) : type(st.type),
+    pan_left(st.pan_left), pan_right(st.pan_right),
+    pos_angle(st.pos_angle), pos_distance(st.pos_distance),
+    rev_stereo(st.rev_stereo), loops(st.loops) {}
+
+LX_MixerEffect& LX_MixerEffect::operator = (const LX_MixerEffect& st)
+{
+    type = st.type;
+    pan_left = st.pan_left;
+    pan_right = st.pan_right;
+    pos_angle = st.pos_angle;
+    pos_distance = st.pos_distance;
+    rev_stereo = st.rev_stereo;
+    loops = st.loops;
+
+    return *this;
+}
+
+
 void setOverallVolume(unsigned short volume)
 {
     if(volume > LX_DEFAULT_VOLUME)
@@ -173,6 +197,55 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops)
     return chunk.play(chan, loops);
 }
 
+bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect)
+{
+    int chan = -1;
+    int _tag;
+
+    if(groupCount(tag) == 0)
+        _tag = -1;
+    else
+        _tag = tag;
+
+    chan = channelAvailable(_tag);
+
+    if(chan == -1)
+    {
+        chan = Mix_GroupOldest(_tag);
+
+        if(chan > -1)
+            haltChannel(chan);
+    }
+
+    if(effect.type == LX_UNKNOWN_EFFECT)
+        return chunk.play(chan, effect.loops);
+    else
+    {
+        Mix_UnregisterAllEffects(chan);
+
+        if(effect.type & LX_PANNING)
+        {
+            setPanning(chan, effect.pan_left, effect.pan_right);
+        }
+
+        if(effect.type & LX_POSITION)
+        {
+            setPosition(chan, effect.pos_angle, effect.pos_distance);
+        }
+
+        if(effect.type & LX_DISTANCE)
+        {
+            setDistance(chan, effect.distance);
+        }
+
+        if(effect.type & LX_STEREO)
+        {
+            reverseStereo(chan, effect.rev_stereo);
+        }
+    }
+
+    return chunk.play(chan, effect.loops);
+}
 
 void pause(int channel)
 {
@@ -218,7 +291,7 @@ void fadeInMusic(LX_Music& music, int ms)
 
 void fadeInMusicPos(LX_Music& music, int ms, int pos)
 {
-    music.fadeInPos(ms ,pos);
+    music.fadeInPos(ms,pos);
 }
 
 
