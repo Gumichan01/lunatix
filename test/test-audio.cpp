@@ -398,6 +398,29 @@ void test_effects()
     LX_Mixer::LX_Music music(sm);
     LX_Mixer::LX_Chunk chunk(sc);
 
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"combine effects in a group");
+        LX_Mixer::allocateChannels(255);
+        LX_Mixer::groupChannels(1,32, 64);
+        LX_Mixer::LX_MixerEffect effect;
+        effect.type = LX_Mixer::LX_PANNING | LX_Mixer::LX_STEREO | LX_Mixer::LX_DISTANCE;
+        effect.pan_left  = 1;
+        effect.pan_right = 254;
+        effect.distance = 32;
+        effect.rev_stereo = true;
+
+        while(effect.pan_left < 255)
+        {
+            LX_Mixer::groupPlayChunk(chunk, 64, effect);
+            LX_Timer::delay(17);
+            effect.pan_left++;
+            effect.pan_right--;
+        }
+
+        LX_Mixer::groupChannels(1,32, -1);
+        LX_Mixer::allocateChannels(8);
+    }
+
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"music: fade in effect");
     LX_Mixer::fadeInMusic(music,1000);
     LX_Timer::delay(2000);
