@@ -305,13 +305,13 @@ int channelAvailable(int tag);
 bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0);
 
 /**
-*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0)
+*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect)
 *
 *   Play the chunk on a channel of the group specified by the tag
 *
 *   @param [in] chunk The chunk to play
 *   @param [in] tag The group id to look for the channel for playing the chunk on
-*   @param [in] fx The structur that provides information about the effects to use
+*   @param [in] effect The structure that provides information about the effects to use
 *
 *   @return TRUE if the chunk can be played, FALSE if no channel is available
 *

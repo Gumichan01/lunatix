@@ -493,7 +493,7 @@ public:
 
 
     /**
-    *   @fn void setGrayscale()
+    *   @fn void convertGrayscale()
     *   Convert the image to grayscale
     */
     void convertGrayscale();
