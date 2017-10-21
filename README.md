@@ -145,7 +145,7 @@ using the **dox** configuration file.
 ## Games that use LunatiX ##
 
 - [Target Xplosion][tx]: 2D scrolling shooter game
-- [Br8k0ut][tx]: 8-bit platformer game
+- [Br8k0ut][br]: 8-bit platformer game
 
 ---
 
@@ -156,3 +156,4 @@ using the **dox** configuration file.
 [libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.11.0
 [MinGW]: http://www.mingw.org/
 [tx]: https://github.com/Gumichan01/target-xplosion/
+[br]: https://github.com/Gumichan01/br8k0ut/
