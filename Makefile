@@ -106,8 +106,7 @@ LUNATIX_STATIC_LIB=$(LUNATIX_LIB_DIR)libLunatix.a
 LUNATIX_SHARED_LIB=$(LUNATIX_LIB_DIR)libLunatix.so
 
 # Warning flags
-WFLAGS=-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic \
--Wno-documentation -Wno-implicit-fallthrough -Wno-padded
+WFLAGS=-Wall -Wextra
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
@@ -322,7 +321,7 @@ cleandoc:
 	@echo "Delete the doxygen documentation"
 	@rm -rf html/
 
-clear: cleandoc clean
+mrproper: cleandoc clean
 	@echo "Delete targets"
 	@rm -f $(LUNATIX_EXE) test-*
 
