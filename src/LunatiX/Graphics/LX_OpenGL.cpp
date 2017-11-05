@@ -28,59 +28,59 @@ namespace LX_Graphics
 namespace LX_OpenGL
 {
 
-bool extensionSupported(std::string extension)
+bool extensionSupported(std::string extension) noexcept
 {
     return SDL_GL_ExtensionSupported(extension.c_str());
 }
 
 
-bool loadDefaultLibrary()
+bool loadDefaultLibrary() noexcept
 {
     return SDL_GL_LoadLibrary(nullptr) == 0;
 }
 
 
-bool loadLibrary(std::string path)
+bool loadLibrary(std::string path) noexcept
 {
     return SDL_GL_LoadLibrary(path.c_str()) == 0;
 }
 
 
-void UnloadLibrary()
+void UnloadLibrary() noexcept
 {
     SDL_GL_UnloadLibrary();
 }
 
 
-LX_GLContext getCurrentContext()
+LX_GLContext getCurrentContext() noexcept
 {
     return SDL_GL_GetCurrentContext();
 }
 
 
-int getSwapInterval()
+int getSwapInterval() noexcept
 {
     return SDL_GL_GetSwapInterval();
 }
 
 
-bool setSwapInterval(int interval)
+bool setSwapInterval(int interval) noexcept
 {
     return SDL_GL_SetSwapInterval(interval) == 0;
 }
 
 
-bool getAttribute(LX_GLattr attr, int& value)
+bool getAttribute(LX_GLattr attr, int& value) noexcept
 {
     return SDL_GL_GetAttribute(attr,&value) == 0;
 }
 
 
-bool setAttribute(LX_GLattr attr, int value)
+bool setAttribute(LX_GLattr attr, int value) noexcept
 {
     return SDL_GL_SetAttribute(attr,value) == 0;
 }
 
-}
+}   // LX_OpenGL::
 
-}
+}   // LX_Graphics::

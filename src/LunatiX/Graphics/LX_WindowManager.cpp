@@ -22,32 +22,37 @@
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
 
-static LX_Win::LX_WindowManager *win_instance = nullptr;
+#include <algorithm>
+#include <list>
 
+static LX_Win::LX_WindowManager *win_instance = nullptr;
 
 namespace LX_Win
 {
 
-LX_WindowManager * getWindowManager()
+// Lit of windows
+std::list<LX_Win::LX_Window*> _windows;
+
+LX_WindowManager * getWindowManager() noexcept
 {
     return LX_WindowManager::getInstance();
 }
 
 
-void LX_WindowManager::init()
+void LX_WindowManager::init() noexcept
 {
     if(win_instance == nullptr)
         win_instance = new LX_WindowManager();
 }
 
 
-LX_WindowManager * LX_WindowManager::getInstance()
+LX_WindowManager * LX_WindowManager::getInstance() noexcept
 {
     return win_instance;
 }
 
 
-void LX_WindowManager::destroy()
+void LX_WindowManager::destroy() noexcept
 {
     delete win_instance;
 }
@@ -60,7 +65,7 @@ LX_WindowManager::LX_WindowManager() {}
 LX_WindowManager::~LX_WindowManager() {}
 
 
-uint32_t LX_WindowManager::addWindow(LX_Window *w)
+uint32_t LX_WindowManager::addWindow(LX_Window *w) noexcept
 {
     const auto wend = _windows.cend();
     const uint32_t no = static_cast<uint32_t>(-1);
@@ -68,7 +73,7 @@ uint32_t LX_WindowManager::addWindow(LX_Window *w)
     if(w == nullptr)
         return no;
 
-    bool found = std::any_of(_windows.cbegin(), wend, [&w](const LX_Window * win)
+    bool found = std::any_of(_windows.cbegin(), wend, [&w](const LX_Window * win) noexcept
     {
         return win->getID() == w->getID();
     });
@@ -81,7 +86,7 @@ uint32_t LX_WindowManager::addWindow(LX_Window *w)
 }
 
 
-LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
+LX_Window * LX_WindowManager::removeWindow(const uint32_t id) noexcept
 {
     LX_Window *w = nullptr;
 
@@ -89,7 +94,7 @@ LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
         return nullptr;
 
     const auto wend = _windows.end();
-    auto it = std::find_if(_windows.begin(), wend, [&id](const LX_Window * win)
+    auto it = std::find_if(_windows.begin(), wend, [&id](const LX_Window * win) noexcept
     {
         return win->getID() == id;
     });
@@ -104,36 +109,38 @@ LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
 }
 
 
-std::size_t LX_WindowManager::nbWindows()
+std::size_t LX_WindowManager::nbWindows() noexcept
 {
     return _windows.size();
 }
 
 
-void LX_WindowManager::updateWindows()
+void LX_WindowManager::updateWindows() noexcept
 {
-    map([](LX_Window *w)
+    std::for_each(_windows.begin(), _windows.end(),
+    [](LX_Window *w) noexcept
     {
         w->update();
     });
 }
 
 
-void LX_WindowManager::clearWindows()
+void LX_WindowManager::clearWindows() noexcept
 {
-    map([](LX_Window *w)
+    std::for_each(_windows.begin(), _windows.end(),
+    [](LX_Window *w) noexcept
     {
         w->clearWindow();
     });
 }
 
 
-LX_Window * LX_WindowManager::getWindow(uint32_t id)
+LX_Window * LX_WindowManager::getWindow(uint32_t id) noexcept
 {
     LX_Window *w = nullptr;
     const auto wend = _windows.cend();
 
-    auto it = std::find_if(_windows.cbegin(), wend, [&id](const LX_Window * win)
+    auto it = std::find_if(_windows.cbegin(), wend, [&id](const LX_Window * win) noexcept
     {
         return win->getID() == id;
     });

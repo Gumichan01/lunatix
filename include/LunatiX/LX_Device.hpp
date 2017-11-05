@@ -70,11 +70,11 @@ struct LX_GamepadInfo
 
 
 /**
-*   @fn int numberOfDevices()
+*   @fn int numberOfDevices() noexcept
 *   Count the number of plugged devices (gamepads)
 *   @return The number of gamepads
 */
-int numberOfDevices();
+int numberOfDevices() noexcept;
 
 /**
 *   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
@@ -90,7 +90,7 @@ int numberOfDevices();
 UTF8string gamepadToString(LX_GamepadInfo& info);
 
 /**
-*   @fn int mouseCursorDisplay(int toggle)
+*   @fn int mouseCursorDisplay(int toggle) noexcept
 *
 *   Define if the cursor will be shown or not
 *
@@ -102,7 +102,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info);
 *   @return LX_MOUSE_SHOW if the cursor is shown, LX_MOUSE_HIDE if it is hidden,
 *          a negative value on failure.
 */
-int mouseCursorDisplay(int toggle);
+int mouseCursorDisplay(int toggle) noexcept;
 
 }
 

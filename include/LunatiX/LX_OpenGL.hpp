@@ -62,17 +62,17 @@ const int LX_GL_NOT_SUPPORTED   = -1;   /**< Operation not supported    */
 const int LX_GL_TEARING         = -1;   /**< Late swap Tearing          */
 
 /**
-*   @fn bool extensionSupported(std::string extension)
+*   @fn bool extensionSupported(std::string extension) noexcept
 *
 *   Check if an OpenGL extension is supported for the current context
 *
 *   @param [in] extension The name of the extension to check
 *   @return TRUE if the extension is supported, FALSE otherwise
 */
-bool extensionSupported(std::string extension);
+bool extensionSupported(std::string extension) noexcept;
 
 /**
-*   @fn bool loadDefaultLibrary()
+*   @fn bool loadDefaultLibrary() noexcept
 *
 *   Load the default OpenGL library
 *
@@ -80,11 +80,10 @@ bool extensionSupported(std::string extension);
 *          Call LX_GetError() for more information
 *
 *   @note See ::loadLibrary
-*
 */
-bool loadDefaultLibrary();
+bool loadDefaultLibrary() noexcept;
 /**
-*   @fn bool loadLibrary(std::string path)
+*   @fn bool loadLibrary(std::string path) noexcept
 *
 *   Load an OpenGL library
 *
@@ -99,9 +98,9 @@ bool loadDefaultLibrary();
 *   @note 3 - If you do this, you need to retrieve all of the OpenGL functions
 *            used in your program from the dynamic library using *getProcAddress()*
 */
-bool loadLibrary(std::string path);
+bool loadLibrary(std::string path) noexcept;
 /**
-*   @fn void UnloadLibrary()
+*   @fn void UnloadLibrary() noexcept
 *
 *   Unload the OpenGL library previously loaded by
 *   *::loadDefaultLibrary()* or ::loadLibrary()*
@@ -109,10 +108,10 @@ bool loadLibrary(std::string path);
 *   @return TRUE on success or FALSE on FAILURE.
 *          Call LX_GetError() for more information
 */
-void UnloadLibrary();
+void UnloadLibrary() noexcept;
 
 /**
-*   @fn template<typename T> T getProcAddress(const std::string proc);
+*   @fn template<typename T> T getProcAddress(const std::string proc) noexcept
 *
 *   Get an OpenGL function by name.
 *
@@ -142,21 +141,21 @@ void UnloadLibrary();
 *   where this matters (Win32) thereby avoiding stack corruption.
 */
 template<typename T>
-T getProcAddress(const std::string proc);
+T getProcAddress(const std::string proc) noexcept;
 
 
 /**
-*   @fn LX_GLContext getCurrentContext()
+*   @fn LX_GLContext getCurrentContext() noexcept
 *
 *   Get the current context
 *
 *   @return The current active OpenGL context or NULL on failure.
 *          Call LX_GetError() for more information
 */
-LX_GLContext getCurrentContext();
+LX_GLContext getCurrentContext() noexcept;
 
 /**
-*   @fn int getSwapInterval()
+*   @fn int getSwapInterval() noexcept
 *
 *   Get the swap interval for the current OpenGL context
 *
@@ -168,9 +167,9 @@ LX_GLContext getCurrentContext();
 *
 *   @sa setSwapInterval
 */
-int getSwapInterval();
+int getSwapInterval() noexcept;
 /**
-*   @fn bool setSwapInterval(int interval)
+*   @fn bool setSwapInterval(int interval) noexcept
 *
 *   Set the swap interval for the current OpenGL context
 *
@@ -194,10 +193,10 @@ int getSwapInterval();
 *
 *   @sa getSwapInterval
 */
-bool setSwapInterval(int interval);
+bool setSwapInterval(int interval) noexcept;
 
 /**
-*   @fn bool getAttribute(LX_GLattr attr, int& value)
+*   @fn bool getAttribute(LX_GLattr attr, int& value) noexcept
 *
 *   Get the actual value for an attribute from the current context
 *
@@ -214,9 +213,9 @@ bool setSwapInterval(int interval);
 *
 *   @sa setAttribute
 */
-bool getAttribute(LX_GLattr attr, int& value);
+bool getAttribute(LX_GLattr attr, int& value) noexcept;
 /**
-*   @fn bool setAttribute(LX_GLattr attr, int value)
+*   @fn bool setAttribute(LX_GLattr attr, int value) noexcept
 *
 *   Set an OpenGL attribute before te creation of a window
 *
@@ -234,7 +233,7 @@ bool getAttribute(LX_GLattr attr, int& value);
 *
 *   @sa getAttribute
 */
-bool setAttribute(LX_GLattr attr, int value);
+bool setAttribute(LX_GLattr attr, int value) noexcept;
 
 }
 

@@ -44,10 +44,10 @@ class LX_Gamepad
 public:
 
     /**
-    *   @fn LX_Gamepad()
+    *   @fn LX_Gamepad() noexcept
     *   @brief Constructor
     */
-    LX_Gamepad();
+    LX_Gamepad() noexcept;
 
     /**
     *   @fn bool open(int index)
@@ -64,10 +64,10 @@ public:
     *
     *   @sa close()
     */
-    bool open(int index);
+    bool open(int index) noexcept;
 
     /**
-    *   @fn void close()
+    *   @fn void close() noexcept
     *   Close the gamepad
     *
     *   @note An opened gamepad contains resources that
@@ -78,52 +78,52 @@ public:
     *
     *   @sa open()
     */
-    void close();
+    void close() noexcept;
 
     /**
-    *   @fn bool isConnected() const
+    *   @fn bool isConnected() const noexcept
     *
     *   Get the status of the gamepad
     *
     *   @return TRUE if the gamepad is opened and connected,
     *          FALSE otherwise
     */
-    bool isConnected() const;
+    bool isConnected() const noexcept;
 
     /**
-    *   @fn bool isHaptic() const
+    *   @fn bool isHaptic() const noexcept
     *
     *   Check if the gamepad is haptic
     *
     *   @return TRUE if the gamepad has force feedback support,
     *          FALSE otherwise
     */
-    bool isHaptic() const;
+    bool isHaptic() const noexcept;
 
     /**
-    *   @fn int32_t getID() const
+    *   @fn int32_t getID() const noexcept
     *   Get the ID of the gamepad
     *   @return The ID of the gamepad, -1 otherwise
     */
-    int32_t getID() const;
+    int32_t getID() const noexcept;
 
     /**
-    *   @fn LX_Haptic * getHaptic() const
+    *   @fn LX_Haptic * getHaptic() const noexcept
     *   Get the haptic system of the gamepad
     *   @return The haptic system
     *
     *   @note The system can be inexistent, so check the returned value
     */
-    LX_Haptic * getHaptic() const;
+    LX_Haptic * getHaptic() const noexcept;
 
     /**
-    *   @fn const char * getName() const
+    *   @fn const char * getName() const noexcept
     *   Get the name of the Gamepad
     *   @return The name of the gamepad, a null pointer otherwise
     *
     *   @sa toString
     */
-    const char * getName() const;
+    const char * getName() const noexcept;
 
     /**
     *   @fn bool stat(LX_GamepadInfo& info) const

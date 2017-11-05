@@ -61,7 +61,7 @@ class LX_FileBuffer
     LX_FileBuffer& operator =(LX_FileBuffer& fb);
 
     // private function
-    void * getFontFromBuffer_(int size) const;  // used by LX_TrueTypeFont::LX_Font
+    void * getFontFromBuffer_(int size) const noexcept;  // used by LX_TrueTypeFont::LX_Font
 
 public:
 
@@ -115,8 +115,8 @@ public:
     *   @param [in] format Optional argument that specified the format of the image
     *
     *   @return A pointer to new an allocated buffered image on success,
-    *          *nullptr* if the file buffer is not an image to load.
-    *          Call LX_GetError() for more information.
+    *
+    *   @exception LX_Graphics::LX_ImageException if the buffered image cannot be created
     */
     LX_Graphics::LX_BufferedImage * loadBufferedImage(uint32_t format=LX_PIXELFORMAT_RGBA8888) const;
     /**
@@ -134,7 +134,7 @@ public:
     *   Get the name of the file the buffer refers to
     *   @return The name of the file
     */
-    const char * getFilename() const;
+    const char * getFilename() const noexcept;
 
     /// Destructor
     ~LX_FileBuffer();

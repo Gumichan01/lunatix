@@ -40,17 +40,17 @@ using LX_HapticEffect = SDL_HapticEffect;
 
 
 /**
-*   @fn int numberOfHapticDevices()
+*   @fn int numberOfHapticDevices() noexcept
 *   Get the number of haptic systems
 *   @return The number of haptic systems
 */
-int numberOfHapticDevices();
+int numberOfHapticDevices() noexcept;
 /**
-*   @fn bool mouseIsHaptic
+*   @fn bool mouseIsHaptic() noexcept
 *   Check if the current mouse has haptic feedback
 *   @return TRUE if the mouse has haptic feedback, FALSE otherwise
 */
-bool mouseIsHaptic();
+bool mouseIsHaptic() noexcept;
 
 
 /**
@@ -68,43 +68,42 @@ class LX_Haptic
     LX_Haptic& operator =(LX_Haptic& h);
 
     // Used by LX_Gamepad
-    explicit LX_Haptic(LX_Joystick *joy);
-    explicit LX_Haptic(LX_GameController *gc);
+    explicit LX_Haptic(LX_Joystick *joy) noexcept;
+    explicit LX_Haptic(LX_GameController *gc) noexcept;
 
 protected:
 
     std::unique_ptr<LX_Haptic_common> _hcimpl;
-
-    LX_Haptic();
+    LX_Haptic() noexcept;
 
 public:
 
     /**
-    *   @fn LX_Haptic(int index)
+    *   @fn LX_Haptic(int index) noexcept
     *   @brief Constructor
     *
     *   Create the instance of the haptic system using the index
     *   @param [in] index The index of the device to open
     */
-    explicit LX_Haptic(int index);
+    explicit LX_Haptic(int index) noexcept;
 
     /**
-    *   @fn virtual bool isOpened() const
+    *   @fn virtual bool isOpened() const noexcept
     *   Check if the haptic device is opened
     *   @return TRUE is the device is opened, FALSE otherwis
     */
-    virtual bool isOpened() const;
+    virtual bool isOpened() const noexcept;
     /**
-    *   @fn virtual bool rumbleEffectInit()
+    *   @fn virtual bool rumbleEffectInit() noexcept
     *   Initializes the haptic device for simple rumble playback
     *   @return TRUE on success, FALSE otherwise
     */
-    virtual bool rumbleEffectInit();
+    virtual bool rumbleEffectInit() noexcept;
     /**
-    *   @fn virtual void rumbleEffectPlay()
+    *   @fn virtual void rumbleEffectPlay() noexcept
     *   Play the rumble effect with default values
     */
-    virtual void rumbleEffectPlay();
+    virtual void rumbleEffectPlay() noexcept;
     /**
     *   @fn virtual void rumbleEffectPlay(float strength, uint32_t length)
     *
@@ -114,7 +113,7 @@ public:
     *         (between 0.0 and 1.0)
     *   @param [in] length Length of the rumble to play in milliseconds
     */
-    virtual void rumbleEffectPlay(float strength, uint32_t length);
+    virtual void rumbleEffectPlay(float strength, uint32_t length) noexcept;
 
     /**
     *   @fn virtual bool effectSupported(LX_HapticEffect& effect) const
@@ -126,7 +125,7 @@ public:
     *
     *   @sa newEffect
     */
-    virtual bool effectSupported(LX_HapticEffect& effect) const;
+    virtual bool effectSupported(LX_HapticEffect& effect) const noexcept;
     /**
     *   @fn virtual int newEffect(LX_HapticEffect& effect)
     *
@@ -138,7 +137,7 @@ public:
     *   @sa runEffect
     *   @sa stopEffect
     */
-    virtual int newEffect(LX_HapticEffect& effect);
+    virtual int newEffect(LX_HapticEffect& effect) noexcept;
     /**
     *   @fn virtual void runEffect(int effect_id, uint32_t iterations)
     *
@@ -151,7 +150,7 @@ public:
     *   @sa newEffect
     *   @sa stopEffect
     */
-    virtual void runEffect(int effect_id, uint32_t iterations);
+    virtual void runEffect(int effect_id, uint32_t iterations) noexcept;
     /**
     *   @fn virtual void stopEffect(int effect_id)
     *   Stop the effect
@@ -160,7 +159,7 @@ public:
     *   @sa newEffect
     *   @sa runEffect
     */
-    virtual void stopEffect(int effect_id);
+    virtual void stopEffect(int effect_id) noexcept;
 
     /**
     *   @fn virtual int numberOfEffects() const
@@ -171,7 +170,7 @@ public:
     *   @sa runEffect
     *   @sa stopEffect
     */
-    virtual int numberOfEffects() const;
+    virtual int numberOfEffects() const noexcept;
 
     /// Destructor
     virtual ~LX_Haptic();
@@ -190,8 +189,8 @@ class LX_MouseHaptic: public LX_Haptic
 public:
 
     /// Constructor
-    LX_MouseHaptic();
-    virtual bool isOpened() const;
+    LX_MouseHaptic() noexcept;
+    virtual bool isOpened() const noexcept;
     /// Desstructor
     ~LX_MouseHaptic();
 };

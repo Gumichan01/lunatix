@@ -97,7 +97,7 @@ public:
     LX_AbstractFile() = default;
 
     /**
-    *   @fn virtual size_t read(void *ptr, size_t data_size, size_t max_num)
+    *   @fn virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
     *
     *   Read the file
     *
@@ -109,9 +109,9 @@ public:
     *
     *   @note It can read less objects than *max_num*.
     */
-    virtual size_t read(void *ptr, size_t data_size, size_t max_num) = 0;
+    virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept = 0;
     /**
-    *   @fn virtual size_t readExactly(void *ptr, size_t data_size, size_t num)
+    *   @fn virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
     *
     *   Read exactly max_num bytes of the file
     *
@@ -121,10 +121,10 @@ public:
     *
     *   @return The number of objects that are read. 0 at error or end of file
     */
-    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) = 0;
+    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept = 0;
 
     /**
-    *   @fn virtual size_t write(void *ptr, size_t data_size, size_t num)
+    *   @fn virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept
     *
     *   Write on the file
     *
@@ -135,9 +135,9 @@ public:
     *   @return The number of objects written.
     *          This value will be less than num on error
     */
-    virtual size_t write(void *ptr, size_t data_size, size_t num) = 0;
+    virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept = 0;
     /**
-    *   @fn virtual size_t write(const std::string& str)
+    *   @fn virtual size_t write(const std::string& str) noexcept
     *
     *   Write a string on the file
     *
@@ -148,10 +148,10 @@ public:
     *
     *   @sa read
     */
-    virtual size_t write(const std::string& str) = 0;
+    virtual size_t write(const std::string& str) noexcept = 0;
 
     /**
-    *   @fn virtual int64_t seek(int64_t offset, int whence)
+    *   @fn virtual int64_t seek(int64_t offset, int whence) noexcept
     *
     *   Seek for a position the file
     *
@@ -162,10 +162,10 @@ public:
     *
     *   @sa read
     */
-    virtual int64_t seek(int64_t offset, int whence) = 0;
+    virtual int64_t seek(int64_t offset, int whence) noexcept = 0;
 
     /**
-    *   @fn virtual int64_t tell() const
+    *   @fn virtual int64_t tell() const noexcept
     *
     *   Get the position in a file
     *
@@ -174,13 +174,13 @@ public:
     *
     *   @sa seek
     */
-    virtual int64_t tell() const = 0;
+    virtual int64_t tell() const noexcept = 0;
 
     /**
     *   @fn void close()
     *   Close the file
     */
-    virtual void close() = 0;
+    virtual void close() noexcept = 0;
 
     virtual ~LX_AbstractFile();
 };
@@ -242,30 +242,30 @@ public:
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 
-    virtual size_t read(void *ptr, size_t data_size, size_t max_num);
-    virtual size_t readExactly(void *ptr, size_t data_size, size_t num);
+    virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept;
+    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept;
 
-    virtual size_t write(void *ptr, size_t data_size, size_t num);
-    virtual size_t write(const std::string& str);
+    virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept;
+    virtual size_t write(const std::string& str) noexcept;
 
-    virtual int64_t seek(int64_t offset, int whence);
-    virtual int64_t tell() const;
+    virtual int64_t seek(int64_t offset, int whence) noexcept;
+    virtual int64_t tell() const noexcept;
 
     /**
     *   @fn int64_t size()
     *   Get the size of a file
     *   @return The size of the file on success. -1 on failure
     */
-    int64_t size();
+    int64_t size() noexcept;
 
     /**
     *   @fn const char * getFilename()
     *   Get the name of the file the instance refers to
     *   @return The name of the file
     */
-    const char * getFilename() const;
+    const char * getFilename() const noexcept;
 
-    virtual void close();
+    virtual void close() noexcept;
 
     /// Destructor
     virtual ~LX_File();
@@ -284,21 +284,21 @@ class LX_TmpFile: public virtual LX_AbstractFile
 
     LX_TmpFile(const LX_TmpFile&);
     LX_TmpFile& operator =(const LX_TmpFile&);
-    virtual void close();
+    virtual void close() noexcept;
 
 public:
 
     /// Constructor
     LX_TmpFile();
 
-    virtual size_t read(void *ptr, size_t data_size, size_t max_num);
-    virtual size_t readExactly(void *ptr, size_t data_size, size_t num);
+    virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept;
+    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept;
 
-    virtual size_t write(void *ptr, size_t data_size, size_t num);
-    virtual size_t write(const std::string& str);
+    virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept;
+    virtual size_t write(const std::string& str) noexcept;
 
-    virtual int64_t seek(int64_t offset, int whence);
-    virtual int64_t tell() const;
+    virtual int64_t seek(int64_t offset, int whence) noexcept;
+    virtual int64_t tell() const noexcept;
 
     /// Destructor
     virtual ~LX_TmpFile();
@@ -306,7 +306,7 @@ public:
 
 
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s)
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept
 *
 *   Write a string into the file
 *
@@ -315,9 +315,9 @@ public:
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s);
+LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept;
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s);
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
 *
 *   Write a utf-8 string into the file
 *
@@ -326,7 +326,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s);
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s);
+LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept;
 
 }
 

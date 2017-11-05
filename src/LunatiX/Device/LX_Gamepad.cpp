@@ -42,16 +42,17 @@ const char LX_SEP = '/';
 
 namespace
 {
-const char * nameOf_(SDL_Joystick * joy)
+
+const char * nameOf_(SDL_Joystick * joy) noexcept
 {
     return SDL_JoystickName(joy);
 }
 
-
-const char * nameOf_(SDL_GameController * controller)
+const char * nameOf_(SDL_GameController * controller) noexcept
 {
     return SDL_GameControllerName(controller);
 }
+
 }
 
 
@@ -71,9 +72,9 @@ private:
 
 public:
 
-    LX_Gamepad_(): _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(true) {}
+    LX_Gamepad_() noexcept: _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(true) {}
 
-    bool isConnected() const
+    bool isConnected() const noexcept
     {
         if(_gc != nullptr)
             return SDL_GameControllerGetAttached(_gc) == SDL_TRUE;
@@ -99,7 +100,7 @@ public:
         return _haptic.get();
     }
 
-    const char * getName() const
+    const char * getName() const noexcept
     {
         if(_gc != nullptr)
             return nameOf_(_gc);
@@ -200,7 +201,7 @@ bool LX_Gamepad_::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info) co
 }
 
 
-LX_Gamepad::LX_Gamepad(): _gpimpl(new LX_Gamepad_()) {}
+LX_Gamepad::LX_Gamepad() noexcept: _gpimpl(new LX_Gamepad_()) {}
 
 
 LX_Gamepad::~LX_Gamepad()
@@ -209,7 +210,7 @@ LX_Gamepad::~LX_Gamepad()
 }
 
 
-bool LX_Gamepad::open(int index)
+bool LX_Gamepad::open(int index) noexcept
 {
     if(!_gpimpl->_closed)
     {
@@ -240,7 +241,7 @@ bool LX_Gamepad::open(int index)
 }
 
 
-void LX_Gamepad::close()
+void LX_Gamepad::close() noexcept
 {
     _gpimpl->_haptic.reset();
 
@@ -261,31 +262,31 @@ void LX_Gamepad::close()
 }
 
 
-bool LX_Gamepad::isConnected() const
+bool LX_Gamepad::isConnected() const noexcept
 {
     return _gpimpl->isConnected();
 }
 
 
-bool LX_Gamepad::isHaptic() const
+bool LX_Gamepad::isHaptic() const noexcept
 {
     return _gpimpl->isHaptic();
 }
 
 
-int32_t LX_Gamepad::getID() const
+int32_t LX_Gamepad::getID() const noexcept
 {
     return _gpimpl->getID();
 }
 
 
-LX_Haptic * LX_Gamepad::getHaptic() const
+LX_Haptic * LX_Gamepad::getHaptic() const noexcept
 {
     return _gpimpl->getHaptic();
 }
 
 
-const char * LX_Gamepad::getName() const
+const char * LX_Gamepad::getName() const noexcept
 {
     return _gpimpl->getName();
 }

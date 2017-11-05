@@ -42,7 +42,7 @@ class LX_FileBuffer_
     std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */
     uint64_t _bufsize;                      /* The size of the buffer                     */
 
-    Mix_Chunk * getChunkFromBuffer_() const
+    Mix_Chunk * getChunkFromBuffer_() const noexcept
     {
         SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
         return (rw == nullptr) ? nullptr : Mix_LoadWAV_RW(rw,1);
@@ -103,19 +103,19 @@ public:
         return new LX_Mixer::LX_Chunk(*ch);
     }
 
-    inline SDL_Surface * getSurfaceFromBuffer() const
+    inline SDL_Surface * getSurfaceFromBuffer() const noexcept
     {
         SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(), static_cast<int>(_bufsize));
         return (rw == nullptr) ? nullptr : IMG_Load_RW(rw,1);
     }
 
-    inline TTF_Font * getFontFromBuffer(int size) const
+    inline TTF_Font * getFontFromBuffer(int size) const noexcept
     {
         SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
         return (rw == nullptr) ? nullptr : TTF_OpenFontRW(rw,1,size);
     }
 
-    const char * getFilename() const
+    const char * getFilename() const noexcept
     {
         return _name.c_str();
     }
@@ -128,7 +128,7 @@ public:
 
 
 // Used by LX_Font
-void * LX_FileBuffer::getFontFromBuffer_(int size) const
+void * LX_FileBuffer::getFontFromBuffer_(int size) const noexcept
 {
     return _bimpl->getFontFromBuffer(size);
 }
@@ -156,7 +156,7 @@ LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
 }
 
 
-const char * LX_FileBuffer::getFilename() const
+const char * LX_FileBuffer::getFilename() const noexcept
 {
     return _bimpl->getFilename();
 }

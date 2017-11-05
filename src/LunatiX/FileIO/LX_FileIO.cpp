@@ -102,12 +102,12 @@ public:
         open_(mode);
     }
 
-    size_t read(void *ptr, size_t data_size, size_t max_num)
+    size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
     {
         return SDL_RWread(_data,ptr,data_size,max_num);
     }
 
-    size_t readExactly(void *ptr, size_t data_size, size_t num)
+    size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
     {
         size_t total_read = 0;
         char * p = static_cast<char *>(ptr);
@@ -134,38 +134,38 @@ public:
         return total_read;
     }
 
-    size_t write(void *ptr, size_t data_size, size_t num)
+    size_t write(void *ptr, size_t data_size, size_t num) noexcept
     {
         return SDL_RWwrite(_data,ptr,data_size,num);
     }
 
-    size_t write(const std::string& str)
+    size_t write(const std::string& str) noexcept
     {
         size_t len = str.size();
         return write((void *)str.c_str(),sizeof(char),len);
     }
 
-    int64_t seek(int64_t offset, int whence)
+    int64_t seek(int64_t offset, int whence) noexcept
     {
         return SDL_RWseek(_data,offset,whence);
     }
 
-    int64_t tell() const
+    int64_t tell() const noexcept
     {
         return SDL_RWtell(_data);
     }
 
-    int64_t size()
+    int64_t size() noexcept
     {
         return SDL_RWsize(_data);
     }
 
-    const char * getFilename() const
+    const char * getFilename() const noexcept
     {
         return  _name.utf8_str();
     }
 
-    void close()
+    void close() noexcept
     {
         if(_data != nullptr)
         {
@@ -190,51 +190,51 @@ LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
     : _fimpl(new LX_File_(filename,mode)) {}
 
 
-size_t LX_File::read(void *ptr, size_t data_size, size_t max_num)
+size_t LX_File::read(void *ptr, size_t data_size, size_t max_num) noexcept
 {
     return _fimpl->read(ptr,data_size,max_num);
 }
 
-size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num)
+size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num) noexcept
 {
     return _fimpl->readExactly(ptr,data_size,num);
 }
 
 
-size_t LX_File::write(void *ptr, size_t data_size, size_t num)
+size_t LX_File::write(void *ptr, size_t data_size, size_t num) noexcept
 {
     return _fimpl->write(ptr,data_size,num);
 }
 
-size_t LX_File::write(const std::string& str)
+size_t LX_File::write(const std::string& str) noexcept
 {
     return _fimpl->write(str);
 }
 
 
-int64_t LX_File::seek(int64_t offset, int whence)
+int64_t LX_File::seek(int64_t offset, int whence) noexcept
 {
     return _fimpl->seek(offset,whence);
 }
 
-int64_t LX_File::tell() const
+int64_t LX_File::tell() const noexcept
 {
     return _fimpl->tell();
 }
 
-int64_t LX_File::size()
+int64_t LX_File::size() noexcept
 {
     return _fimpl->size();
 }
 
 
-const char * LX_File::getFilename() const
+const char * LX_File::getFilename() const noexcept
 {
     return _fimpl->getFilename();
 }
 
 
-void LX_File::close()
+void LX_File::close() noexcept
 {
     _fimpl->close();
 }
@@ -262,7 +262,7 @@ public:
             throw IOException(strerror(errno));
     }
 
-    size_t read(void *ptr, size_t data_size, size_t max_num)
+    size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
     {
         size_t sz = fread(ptr,data_size,max_num,_f);
         char * err = strerror(errno);
@@ -273,7 +273,7 @@ public:
         return sz;
     }
 
-    size_t readExactly(void *ptr, size_t data_size, size_t num)
+    size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
     {
         size_t total_read = 0;
         char * p = static_cast<char *>(ptr);
@@ -295,7 +295,7 @@ public:
         return total_read != num ? 0 : total_read;
     }
 
-    size_t write(void *ptr, size_t data_size, size_t num)
+    size_t write(void *ptr, size_t data_size, size_t num) noexcept
     {
         size_t sz = fwrite(ptr,data_size,num,_f);
         char * err = strerror(errno);
@@ -306,23 +306,23 @@ public:
         return sz;
     }
 
-    size_t write(const std::string& str)
+    size_t write(const std::string& str) noexcept
     {
         size_t len = str.size();
         return write((void *)str.c_str(),sizeof(char),len);
     }
 
-    int64_t seek(int64_t offset, int whence)
+    int64_t seek(int64_t offset, int whence) noexcept
     {
         return fseek(_f,offset,whence);
     }
 
-    int64_t tell() const
+    int64_t tell() const noexcept
     {
         return ftell(_f);
     }
 
-    void close()
+    void close() noexcept
     {
         fclose(_f);
         _f = nullptr;
@@ -340,52 +340,52 @@ public:
 LX_TmpFile::LX_TmpFile(): _timpl(new LX_TmpFile_()) {}
 
 
-size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num)
+size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num) noexcept
 {
     return _timpl->read(ptr,data_size,max_num);
 }
 
-size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num)
+size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num) noexcept
 {
     return _timpl->readExactly(ptr,data_size,num);
 }
 
 
-size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num)
+size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num) noexcept
 {
     return _timpl->write(ptr,data_size,num);
 }
 
-size_t LX_TmpFile::write(const std::string& str)
+size_t LX_TmpFile::write(const std::string& str) noexcept
 {
     return _timpl->write(str);
 }
 
 
-int64_t LX_TmpFile::seek(int64_t offset, int whence)
+int64_t LX_TmpFile::seek(int64_t offset, int whence) noexcept
 {
     return _timpl->seek(offset,whence);
 }
 
-int64_t LX_TmpFile::tell() const
+int64_t LX_TmpFile::tell() const noexcept
 {
     return _timpl->tell();
 }
 
 // private
-void LX_TmpFile::close() {}
+void LX_TmpFile::close() noexcept {}
 
 LX_TmpFile::~LX_TmpFile() {}
 
 
 /// Stream
-LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s)
+LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept
 {
     f.write(s);
     return f;
 }
 
-LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s)
+LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
 {
     f.write(u8s.utf8_str());
     return f;

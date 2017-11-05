@@ -30,7 +30,7 @@ namespace LX_Device
 
 const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
 
-int numberOfDevices()
+int numberOfDevices() noexcept
 {
     return SDL_NumJoysticks();
 }
@@ -54,7 +54,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info)
     return UTF8string(stream.str());
 }
 
-int mouseCursorDisplay(int toggle)
+int mouseCursorDisplay(int toggle) noexcept
 {
     return SDL_ShowCursor(toggle);
 }

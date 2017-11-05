@@ -21,7 +21,6 @@
 *
 */
 
-#include <list>
 #include <cinttypes>
 
 namespace LX_Win
@@ -38,7 +37,6 @@ class LX_Window;
 */
 class LX_WindowManager
 {
-    std::list<LX_Win::LX_Window*> _windows;
     LX_WindowManager();
     ~LX_WindowManager();
 
@@ -51,14 +49,14 @@ public:
     *   @fn void LX_WindowManager::init()
     *   Initialize the window manager
     */
-    static void init();
+    static void init() noexcept;
 
     /**
     *   @fn LX_WindowManager * LX_WindowManager::getInstance()
     *   Return a unique instance of the window manager
     *   @return The singleton
     */
-    static LX_WindowManager * getInstance();
+    static LX_WindowManager * getInstance() noexcept;
 
     /**
     *   @fn void LX_WindowManager::destroy()
@@ -69,7 +67,7 @@ public:
     *           are not destroyed. So it is necessary to keep an external
     *           pointer to the windows added in the manager.
     */
-    static void destroy();
+    static void destroy() noexcept;
 
     /**
     *   @fn uint32_t LX_WindowManager::addWindow(LX_Window *w)
@@ -84,7 +82,7 @@ public:
     *   @sa LX_Window
     *   @sa removeWindow
     */
-    uint32_t addWindow(LX_Window *w);
+    uint32_t addWindow(LX_Window *w) noexcept;
 
     /**
     *   @fn LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
@@ -103,26 +101,26 @@ public:
     *
     *   @sa addWindow
     */
-    LX_Window * removeWindow(const uint32_t id);
+    LX_Window * removeWindow(const uint32_t id) noexcept;
 
     /**
     *   @fn std::size_t LX_WindowManager::nbWindows()
     *   Count the number of windows
     *   @return The number of registered windows
     */
-    std::size_t nbWindows();
+    std::size_t nbWindows() noexcept;
 
     /**
     *   @fn void LX_WindowManager::updateWindows()
     *   Update the windows
     */
-    void updateWindows();
+    void updateWindows() noexcept;
 
     /**
     *   @fn void LX_WindowManager::clearWindows()
     *   Clear the content of the windows
     */
-    void clearWindows();
+    void clearWindows() noexcept;
 
     /**
     *   @fn template<class Fun> void map(Fun f)
@@ -142,7 +140,7 @@ public:
     *   @return A valid pointer to a LX_Window instance if it exists,
     *          a null pointer otherwise
     */
-    LX_Window * getWindow(const uint32_t id);
+    LX_Window * getWindow(const uint32_t id) noexcept;
 };
 
 /**
@@ -153,10 +151,10 @@ public:
 *   @return The unique instance of LX_WindowManager
 *   @note This function is equivalent to LX_WindowManager::getInstance
 */
-LX_WindowManager * getWindowManager();
+LX_WindowManager * getWindowManager() noexcept;
 
 }
 
-#include "LX_WindowManager.tpp"
+//#include "LX_WindowManager.tpp"
 
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED
