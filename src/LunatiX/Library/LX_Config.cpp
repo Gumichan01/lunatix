@@ -29,12 +29,6 @@
 namespace LX_Config
 {
 
-namespace
-{
-const int CONF_WIDTH  = 800;
-const int CONF_HEIGHT = 600;
-}
-
 // unique instance
 static LX_Configuration *instance = nullptr;
 
@@ -49,17 +43,15 @@ struct LX_InternalConfig
     bool audio_flag;        // Audio flag
     bool gamepad_flag;      // Gamepad flag
     bool opengl_flag;       // OpenGL flag
-    int width;              // Width
-    int height;             // Height
 };
 
 static LX_InternalConfig _conf;
 
 
-void readFile_(std::ifstream& f,LX_InternalConfig& config);
-void loadFileConfig_(LX_InternalConfig& config);
+void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept;
+void loadFileConfig_(LX_InternalConfig& config) noexcept;
 
-void readFile_(std::ifstream& f,LX_InternalConfig& config)
+void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
 {
     const char SHARP = '#';
     const std::string ONE("1");
@@ -137,7 +129,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config)
     }
 }
 
-void loadFileConfig_(LX_InternalConfig& config)
+void loadFileConfig_(LX_InternalConfig& config) noexcept
 {
     const char * LX_CFG_FILE = "config/lunatix.cfg";
 
@@ -151,35 +143,22 @@ void loadFileConfig_(LX_InternalConfig& config)
         return;
     }
 
-    _conf = {0,0,0,0,0,0,0,0};
+    _conf = {0,0,0,0,0,0};
     readFile_(f,config);
     f.close();
 }
 
 
-/* LX_ConfigurationException */
-
-LX_ConfigurationException::LX_ConfigurationException(UTF8string err)
-    : _string_error(err) {}
-
-const char * LX_ConfigurationException::what() const noexcept
-{
-    return _string_error.utf8_str();
-}
-
-LX_ConfigurationException::~LX_ConfigurationException() noexcept {}
-
-
 /* LX_Configuration */
 
-LX_Configuration::LX_Configuration()
+LX_Configuration::LX_Configuration() noexcept
 {
     loadFlags_();
 }
 
 LX_Configuration::~LX_Configuration() {}
 
-void LX_Configuration::initConfig()
+void LX_Configuration::initConfig() noexcept
 {
     if(instance == nullptr)
     {
@@ -195,62 +174,50 @@ void LX_Configuration::initConfig()
     }
 }
 
-LX_Configuration * LX_Configuration::getInstance()
+LX_Configuration * LX_Configuration::getInstance() noexcept
 {
     return instance;
 }
 
-void LX_Configuration::destroy()
+void LX_Configuration::destroy() noexcept
 {
     delete instance;
     instance = nullptr;
 }
 
-void LX_Configuration::loadFlags_()
+void LX_Configuration::loadFlags_() noexcept
 {
     LX_Config::loadFileConfig_(_conf);
-    _conf.width  = CONF_WIDTH;
-    _conf.height = CONF_HEIGHT;
 }
 
-bool LX_Configuration::getVideoFlag() const
+bool LX_Configuration::getVideoFlag() const noexcept
 {
     return _conf.video_flag;
 }
 
-bool LX_Configuration::getVSyncFlag() const
+bool LX_Configuration::getVSyncFlag() const noexcept
 {
     return _conf.vsync_flag;
 }
 
-bool LX_Configuration::getTTFFlag() const
+bool LX_Configuration::getTTFFlag() const noexcept
 {
     return _conf.ttf_flag;
 }
 
-bool LX_Configuration::getAudioFlag() const
+bool LX_Configuration::getAudioFlag() const noexcept
 {
     return _conf.audio_flag;
 }
 
-bool LX_Configuration::getGamepadFlag() const
+bool LX_Configuration::getGamepadFlag() const noexcept
 {
     return _conf.gamepad_flag;
 }
 
-bool LX_Configuration::getOpenGLFlag() const
+bool LX_Configuration::getOpenGLFlag() const noexcept
 {
     return _conf.opengl_flag;
-}
-
-int LX_Configuration::getWinWidth() const
-{
-    return _conf.width;
-}
-
-int LX_Configuration::getWinHeight() const
-{
-    return _conf.height;
 }
 
 }
