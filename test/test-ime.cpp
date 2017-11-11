@@ -19,7 +19,7 @@ public:
         _font(fname, {255,255,255,0}, 32) {}
 
     void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
-                     size_t cursor, size_t prev_cur)
+                     size_t cursor, size_t prev_cur) noexcept
     {
         if(update)
         {

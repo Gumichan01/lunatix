@@ -43,8 +43,6 @@ int main(int argc, char **argv)
     bool sound   = configuration->getAudioFlag();
     bool gamepad = configuration->getGamepadFlag();
     bool opengl  = configuration->getOpenGLFlag();
-    int w        = configuration->getWinWidth();
-    int h        = configuration->getWinHeight();
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"======== Configuration ========");
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"video: %s", boolState(video).c_str());
@@ -53,8 +51,6 @@ int main(int argc, char **argv)
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"audio: %s", boolState(sound).c_str());
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"gamepad: %s", boolState(gamepad).c_str());
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"opengl: %s", boolState(opengl).c_str());
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"width: %d ", w);
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"height: %d ", h);
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"===============================");
 
     LX_Quit();
