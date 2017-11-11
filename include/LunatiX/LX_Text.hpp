@@ -49,7 +49,7 @@ class LX_RedrawCallback
 {
 public:
 
-    LX_RedrawCallback();
+    LX_RedrawCallback() noexcept = default;
     /**
     *   @fn virtual void operator ()(UTF8string& u8str, UTF8string& u8comp,
     *                               const bool update, size_t cursor,
@@ -69,9 +69,9 @@ public:
     *          not yet validated by the user (often used for non-latin words)
     */
     virtual void operator ()(UTF8string& u8str, UTF8string& u8comp, const bool update,
-                             size_t cursor, size_t prev_cur) = 0;
+                             size_t cursor, size_t prev_cur) noexcept = 0;
     /// Destructor
-    virtual ~LX_RedrawCallback();
+    virtual ~LX_RedrawCallback() = default;
 };
 
 class LX_TextInput_;
@@ -153,13 +153,13 @@ class LX_TextInput
 public:
 
     /// Constructor
-    LX_TextInput();
+    LX_TextInput() noexcept;
     /**
-    *   @fn void eventLoop(LX_RedrawCallback& redraw)
+    *   @fn void eventLoop(LX_RedrawCallback& redraw) noexcept
     *   Launch the event loop
     *   @param [in] redraw Callback function to call
     */
-    void eventLoop(LX_RedrawCallback& redraw);
+    void eventLoop(LX_RedrawCallback& redraw) noexcept;
     /// Destructor
     ~LX_TextInput();
 };

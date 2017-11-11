@@ -35,7 +35,7 @@ namespace
 uint32_t DELAY = 33;
 
 // Check if the string is an End-Of-Line string (EOL)
-inline bool isEOL(const std::string& text)
+inline bool isEOL(const std::string& text) noexcept
 {
     return text[0] == '\n' || text[0] == '\r';
 }
@@ -44,9 +44,6 @@ inline bool isEOL(const std::string& text)
 
 namespace LX_Text
 {
-
-LX_RedrawCallback::LX_RedrawCallback()  {}
-LX_RedrawCallback::~LX_RedrawCallback() {}
 
 
 /* Text input, private implementation   */
@@ -61,7 +58,7 @@ class LX_TextInput_
     bool _composing;
 
     // Save a text in the clipboard get it from it
-    void save_()
+    void save_() noexcept
     {
         static const uint8_t *KEYS = LX_EventHandler::getKeyboardState().state;
 
@@ -83,7 +80,7 @@ class LX_TextInput_
         }
     }
 
-    void paste_()
+    void paste_() noexcept
     {
         static const uint8_t *KEYS = LX_EventHandler::getKeyboardState().state;
 
@@ -120,7 +117,7 @@ class LX_TextInput_
     }
 
     // Input
-    void keyboardInput_(LX_Event::LX_EventHandler& ev)
+    void keyboardInput_(LX_Event::LX_EventHandler& ev) noexcept
     {
         const size_t old_cursor = _cursor;
 
@@ -185,7 +182,7 @@ class LX_TextInput_
                              "Input - _cursor at %d",_cursor);
     }
 
-    void textInput_(LX_Event::LX_EventHandler& ev)
+    void textInput_(LX_Event::LX_EventHandler& ev) noexcept
     {
         const LX_Event::LX_TextEvent tev = ev.getTextEvent();
 
@@ -210,7 +207,7 @@ class LX_TextInput_
         }
     }
 
-    void textEdit_(LX_Event::LX_EventHandler& ev)
+    void textEdit_(LX_Event::LX_EventHandler& ev) noexcept
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
@@ -229,7 +226,7 @@ class LX_TextInput_
     }
 
     // Operation on the string
-    void u8stringInput_(UTF8string& ntext)
+    void u8stringInput_(UTF8string& ntext) noexcept
     {
         const size_t u8len = _u8text.utf8_length();
 
@@ -247,7 +244,7 @@ class LX_TextInput_
         _cursor += ntext.utf8_length();
     }
 
-    void utf8Pop_()
+    void utf8Pop_() noexcept
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                          "Remove the last codepoint (utf8 character)");
@@ -263,7 +260,7 @@ class LX_TextInput_
         }
     }
 
-    void backslashKey_()
+    void backslashKey_() noexcept
     {
         if(_cursor > 0)
         {
@@ -287,7 +284,7 @@ class LX_TextInput_
         }
     }
 
-    void deleteKey_()
+    void deleteKey_() noexcept
     {
         const size_t u8len = _u8text.utf8_length();
 
@@ -314,7 +311,7 @@ class LX_TextInput_
 
 public:
 
-    LX_TextInput_()
+    LX_TextInput_() noexcept
         : _cursor(0),_done(false),_draw(false), _composing(false)
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Start the input.");
@@ -322,7 +319,7 @@ public:
     }
 
 
-    void eventLoop_(LX_RedrawCallback& redraw)
+    void eventLoop_(LX_RedrawCallback& redraw) noexcept
     {
         size_t prev_cur = _cursor;
         LX_EventHandler ev;
@@ -370,7 +367,7 @@ public:
 
 /* Text input, public functions         */
 
-LX_TextInput::LX_TextInput() : _timpl(new LX_TextInput_()) {}
+LX_TextInput::LX_TextInput() noexcept : _timpl(new LX_TextInput_()) {}
 
 /*
 *   Handle the event loop and the internal text input.
@@ -378,7 +375,7 @@ LX_TextInput::LX_TextInput() : _timpl(new LX_TextInput_()) {}
 *   This function updates an internal string on each text input and
 *   send it to the callback function given by the user to something with that.
 */
-void LX_TextInput::eventLoop(LX_RedrawCallback& redraw)
+void LX_TextInput::eventLoop(LX_RedrawCallback& redraw) noexcept
 {
     _timpl->eventLoop_(redraw);
 }

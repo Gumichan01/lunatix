@@ -43,7 +43,7 @@ const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 namespace LX_VersionInfo
 {
 
-void info()
+void info() noexcept
 {
     LX_Version luna;
     getVersion(luna);
@@ -54,7 +54,7 @@ void info()
 }
 
 
-void getVersion(LX_Version& version)
+void getVersion(LX_Version& version) noexcept
 {
     version.major = LX_MAJOR_VERSION;
     version.minor = LX_MINOR_VERSION;
@@ -63,7 +63,7 @@ void getVersion(LX_Version& version)
 }
 
 
-void dependencies()
+void dependencies() noexcept
 {
     // Information about SDL2 and LunatiX
     const SDL_version *img_linked = IMG_Linked_Version();
