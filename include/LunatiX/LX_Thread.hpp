@@ -47,7 +47,7 @@ typedef void (* LX_ThreadFun) (void *data);
 *   The the id of the current thread
 *   @return The thread identifier of the current thread
 */
-unsigned long getID();
+unsigned long getID() noexcept;
 
 /**
 *   @class LX_Thread
@@ -93,14 +93,14 @@ public:
     */
     void startAndDetach();
     /**
-    *   @fn bool joinable() const
+    *   @fn bool joinable() const noexcept
     *
     *   Check if the thread is joinable (not joined and not detached)
     *
     *   @return TRUE if the thread is joinable, false otherwise
     *   @sa join
     */
-    bool joinable() const;
+    bool joinable() const noexcept;
     /**
     *   @fn void join()
     *
@@ -112,14 +112,14 @@ public:
     void join();
 
     /**
-    *   @fn const std::string& getName() const
+    *   @fn const std::string& getName() const noexcept
     *
     *   Get the name of the thread
     *
     *   @return The name of the thread
     *   @sa LX_Multithreading::getID
     */
-    const std::string& getName() const;
+    const std::string& getName() const noexcept;
 
     /// Destructor
     ~LX_Thread();

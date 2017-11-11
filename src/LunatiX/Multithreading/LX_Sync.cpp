@@ -26,14 +26,14 @@ class LX_Mutex_
 
 public:
 
-    LX_Mutex_(): _mutex(new tthread::mutex()) {}
+    LX_Mutex_() noexcept: _mutex(new tthread::mutex()) {}
 
-    void lock()
+    void lock() noexcept
     {
         _mutex->lock();
     }
 
-    void unlock()
+    void unlock() noexcept
     {
         _mutex->unlock();
     }
@@ -45,16 +45,16 @@ public:
 };
 
 
-LX_Mutex::LX_Mutex(): _mu(new LX_Mutex_) {}
+LX_Mutex::LX_Mutex() noexcept: _mu(new LX_Mutex_) {}
 
 
-void LX_Mutex::lock()
+void LX_Mutex::lock() noexcept
 {
     _mu->lock();
 }
 
 
-void LX_Mutex::unlock()
+void LX_Mutex::unlock() noexcept
 {
     _mu->unlock();
 }
@@ -74,19 +74,19 @@ class LX_Cond_
 
 public:
 
-    LX_Cond_(): _condition(new tthread::condition_variable()) {}
+    LX_Cond_() noexcept: _condition(new tthread::condition_variable()) {}
 
-    void wait(LX_Mutex_ *mutex)
+    void wait(LX_Mutex_ *mutex) noexcept
     {
         _condition->wait(*(mutex->_mutex.get()));
     }
 
-    void signal()
+    void signal() noexcept
     {
         _condition->notify_one();
     }
 
-    void broadcast()
+    void broadcast() noexcept
     {
         _condition->notify_all();
     }
@@ -98,22 +98,22 @@ public:
 };
 
 
-LX_Cond::LX_Cond(): _cond(new LX_Cond_()) {}
+LX_Cond::LX_Cond() noexcept: _cond(new LX_Cond_()) {}
 
 
-void LX_Cond::wait(LX_Mutex& mutex)
+void LX_Cond::wait(LX_Mutex& mutex) noexcept
 {
     _cond->wait(mutex._mu.get());
 }
 
 
-void LX_Cond::signal()
+void LX_Cond::signal() noexcept
 {
     _cond->signal();
 }
 
 
-void LX_Cond::broadcast()
+void LX_Cond::broadcast() noexcept
 {
     _cond->broadcast();
 }

@@ -61,7 +61,7 @@ public:
         }
     }
 
-    bool joinable() const
+    bool joinable() const noexcept
     {
         return _thread != nullptr && _thread->joinable();
     }
@@ -81,7 +81,7 @@ public:
         _detached = false;
     }
 
-    const std::string& getName() const
+    const std::string& getName() const noexcept
     {
         return _name;
     }
@@ -97,7 +97,7 @@ public:
 namespace LX_Multithreading
 {
 
-unsigned long getID()
+unsigned long getID() noexcept
 {
     return SDL_GetThreadID(nullptr);
 }
@@ -124,7 +124,7 @@ void LX_Thread::startAndDetach()
     _th->startAndDetach();
 }
 
-bool LX_Thread::joinable() const
+bool LX_Thread::joinable() const noexcept
 {
     return _th->joinable();
 }
@@ -134,7 +134,7 @@ void LX_Thread::join()
     _th->join();
 }
 
-const std::string& LX_Thread::getName() const
+const std::string& LX_Thread::getName() const noexcept
 {
     return _th->getName();
 }
