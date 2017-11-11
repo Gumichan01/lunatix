@@ -18,7 +18,6 @@
 
 #include <LunatiX/LX_Log.hpp>
 #include <sstream>
-#include <utility>
 #include <ctime>
 
 #if defined(__WIN32__)
@@ -58,7 +57,7 @@ long getMillisTime() noexcept
     return ms;
 }
 
-std::string&& getDate() noexcept
+std::string getDate() noexcept
 {
     const size_t SZ = 256;
     char datestr[SZ] = {'\0'};
@@ -69,7 +68,7 @@ std::string&& getDate() noexcept
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
                         "Internal error - Cannot get the time: %s");
-        return std::move(std::string());
+        return std::string();
     }
 
     const struct tm *tmp = localtime(&t);
@@ -79,14 +78,14 @@ std::string&& getDate() noexcept
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
                         "Internal error - Cannot get the local time");
-        return std::move(std::string());
+        return std::string();
     }
 
     std::ostringstream ss;
     strftime(datestr,SZ,"[%Y-%m-%d %H:%M:%S.",tmp);
     ss << getMillisTime() << "] ";
 
-    return std::move(std::string(datestr + ss.str()));
+    return std::string(datestr + ss.str());
 }
 
 }   // namespace
