@@ -46,20 +46,20 @@ class LX_WindowManager
 public:
 
     /**
-    *   @fn void LX_WindowManager::init()
+    *   @fn void LX_WindowManager::init() noexcept
     *   Initialize the window manager
     */
     static void init() noexcept;
 
     /**
-    *   @fn LX_WindowManager * LX_WindowManager::getInstance()
+    *   @fn LX_WindowManager * LX_WindowManager::getInstance() noexcept
     *   Return a unique instance of the window manager
     *   @return The singleton
     */
     static LX_WindowManager * getInstance() noexcept;
 
     /**
-    *   @fn void LX_WindowManager::destroy()
+    *   @fn void LX_WindowManager::destroy() noexcept
     *
     *   Destroy the instance of the singleton
     *
@@ -70,7 +70,7 @@ public:
     static void destroy() noexcept;
 
     /**
-    *   @fn uint32_t LX_WindowManager::addWindow(LX_Window *w)
+    *   @fn uint32_t LX_WindowManager::addWindow(LX_Window *w) noexcept
     *
     *   Add a window in the manager
     *
@@ -85,7 +85,7 @@ public:
     uint32_t addWindow(LX_Window *w) noexcept;
 
     /**
-    *   @fn LX_Window * LX_WindowManager::removeWindow(const uint32_t id)
+    *   @fn LX_Window * LX_WindowManager::removeWindow(const uint32_t id) noexcept
     *
     *   Delete a window from the list acording to its ID
     *   and returns the pointer to it.
@@ -104,34 +104,26 @@ public:
     LX_Window * removeWindow(const uint32_t id) noexcept;
 
     /**
-    *   @fn std::size_t LX_WindowManager::nbWindows()
+    *   @fn std::size_t LX_WindowManager::nbWindows() noexcept
     *   Count the number of windows
     *   @return The number of registered windows
     */
     std::size_t nbWindows() noexcept;
 
     /**
-    *   @fn void LX_WindowManager::updateWindows()
+    *   @fn void LX_WindowManager::updateWindows() noexcept
     *   Update the windows
     */
     void updateWindows() noexcept;
 
     /**
-    *   @fn void LX_WindowManager::clearWindows()
+    *   @fn void LX_WindowManager::clearWindows() noexcept
     *   Clear the content of the windows
     */
     void clearWindows() noexcept;
 
     /**
-    *   @fn template<class Fun> void map(Fun f)
-    *   Apply a function on every windows
-    *   @param [in] f the function to call on each window
-    */
-    template<class Fun>
-    void map(Fun f);
-
-    /**
-    *   @fn LX_Window * LX_WindowManager::getWindow(const uint32_t id)
+    *   @fn LX_Window * LX_WindowManager::getWindow(const uint32_t id) noexcept
     *
     *   Get a window according to its ID
     *
@@ -144,7 +136,7 @@ public:
 };
 
 /**
-*   @fn LX_WindowManager * getWindowManager()
+*   @fn LX_WindowManager * getWindowManager() noexcept
 *
 *   Return the singleton, if allocated
 *
@@ -154,7 +146,5 @@ public:
 LX_WindowManager * getWindowManager() noexcept;
 
 }
-
-//#include "LX_WindowManager.tpp"
 
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED
