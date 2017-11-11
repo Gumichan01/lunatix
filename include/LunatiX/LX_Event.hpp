@@ -344,10 +344,10 @@ class LX_EventHandler
 public:
 
     /// Constructor
-    LX_EventHandler();
+    LX_EventHandler() noexcept;
 
     /**
-    *   @fn bool pollEvent()
+    *   @fn bool pollEvent() noexcept
     *   Pool for currently pending events
     *
     *   @return TRUE if there is a pending event, FALSE otherwise
@@ -358,9 +358,9 @@ public:
     *   @sa waitEvent()
     *   @sa waitEventTimeout()
     */
-    bool pollEvent();
+    bool pollEvent() noexcept;
     /**
-    *   @fn bool waitEvent()
+    *   @fn bool waitEvent() noexcept
     *   Wait for currently pending event
     *
     *   @return TRUE on success, FALSE otherwise
@@ -369,9 +369,9 @@ public:
     *   The event is removed from the event queue.
     *   @sa pollEvent()
     */
-    bool waitEvent();
+    bool waitEvent() noexcept;
     /**
-    *   @fn bool waitEventTimeout(int timeout)
+    *   @fn bool waitEventTimeout(int timeout) noexcept
     *   Wait for currently pending event during a certein number of milliseconds
     *
     *   @param [in] timeout The time to wait (in milliseconds)
@@ -382,9 +382,9 @@ public:
     *   The event is removed from the event queue.
     *   @sa pollEvent()
     */
-    bool waitEventTimeout(int timeout);
+    bool waitEventTimeout(int timeout) noexcept;
     /**
-    *   @fn bool pushUserEvent(LX_UserEvent& uevent)
+    *   @fn bool pushUserEvent(LX_UserEvent& uevent) noexcept
     *   Push a user event to the event queue
     *
     *   @param uevent The user event to push
@@ -392,10 +392,10 @@ public:
     *   @return TRUE on success, FALSE otherwise.
     *   Use LX_GetError() for more information on failure.
     */
-    bool pushUserEvent(LX_UserEvent& uevent);
+    bool pushUserEvent(LX_UserEvent& uevent) noexcept;
 
     /**
-    *   @fn static void processEvent(const LX_EventType ty)
+    *   @fn static void processEvent(const LX_EventType ty) noexcept
     *
     *   Activate the event processing for a type of event
     *
@@ -406,9 +406,9 @@ public:
     *
     *   @sa ignoreEvent
     */
-    static void processEvent(const LX_EventType ty);
+    static void processEvent(const LX_EventType ty) noexcept;
     /**
-    *   @fn static void ignoreEvent(const LX_EventType ty)
+    *   @fn static void ignoreEvent(const LX_EventType ty) noexcept
     *
     *   Ingore a type of event
     *
@@ -418,121 +418,121 @@ public:
     *
     *   @sa processEvent
     */
-    static void ignoreEvent(const LX_EventType ty);
+    static void ignoreEvent(const LX_EventType ty) noexcept;
 
     /**
-    *   @fn uint32_t getWindowID() const
+    *   @fn uint32_t getWindowID() const noexcept
     *   Get the id of a window where an event happened in
     *
     *   @return The window ID, 0 on failure.
     *   @note This function can returns 0 if the current event
     *   is not window-dependant
     */
-    uint32_t getWindowID() const;
+    uint32_t getWindowID() const noexcept;
     /**
-    *   @fn LX_EventType getEventType() const
+    *   @fn LX_EventType getEventType() const noexcept
     *   Get the type of the current event after
     *   @return The type of event
     */
-    LX_EventType getEventType() const;
+    LX_EventType getEventType() const noexcept;
     /**
-    *   @fn const LX_KeyboardState getKeyboardState() const
+    *   @fn const LX_KeyboardState getKeyboardState() const noexcept
     *   Get the current state of the keyboard
     *   @return The keyboard state
     */
-    static const LX_KeyboardState getKeyboardState();
+    static const LX_KeyboardState getKeyboardState() noexcept;
     /**
-    *   @fn LX_KeyCode getKeyCode() const
+    *   @fn LX_KeyCode getKeyCode() const noexcept
     *
     *   Get the key code value (virtual keyboard value) of the keyboard button,
     *   assuming that the event is a keyboard event
     *
     *   @return The key code value
     */
-    LX_KeyCode getKeyCode() const;
+    LX_KeyCode getKeyCode() const noexcept;
     /**
-    *   @fn LX_ScanCode getScanCode() const
+    *   @fn LX_ScanCode getScanCode() const noexcept
     *
     *   Get the scan code value (physical keyboard value) of the keyboard button,
     *   assuming that the event is a keyboard event
     *
     *   @return The scan code value
     */
-    LX_ScanCode getScanCode() const;
+    LX_ScanCode getScanCode() const noexcept;
 
     /**
-    *   @fn LX_GamepadID getGamepadID() const
+    *   @fn LX_GamepadID getGamepadID() const noexcept
     *   Get the gamepad identifier related to the current event.
     *   @return The gamepad ID
     */
-    LX_GamepadID getGamepadID() const;
+    LX_GamepadID getGamepadID() const noexcept;
 
     /**
-    *   @fn const LX_GAxis getAxis() const
+    *   @fn const LX_GAxis getAxis() const noexcept
     *   Get information about the gamepad axis related to the current event
     *   @return The structure describing the gamepad axis
     *   @sa getButton
     */
-    const LX_GAxis getAxis() const;
+    const LX_GAxis getAxis() const noexcept;
     /**
     *   @fn const LX_GButton getButton() const
     *   Get information about the gamepad button related to the current event
     *   @return The structure describing the gamepad button
     *   @sa getAxis
     */
-    const LX_GButton getButton() const;
+    const LX_GButton getButton() const noexcept;
 
     /**
-    *   @fn const LX_MButton getMouseButton() const
+    *   @fn const LX_MButton getMouseButton() const noexcept
     *   Get information about the mouse button related to the current event
     *   @return The structure describing the mouse button
     *
     *   @sa getMouseMotion
     *   @sa getMouseWheel
     */
-    const LX_MButton getMouseButton() const;
+    const LX_MButton getMouseButton() const noexcept;
     /**
-    *   @fn const LX_MMotion getMouseMotion() const
+    *   @fn const LX_MMotion getMouseMotion() const noexcept
     *   Get information about the mouse movement related to the current event
     *   @return The structure describing the mouse movement
     *
     *   @sa getMouseButton
     *   @sa getMouseWheel
     */
-    const LX_MMotion getMouseMotion() const;
+    const LX_MMotion getMouseMotion() const noexcept;
     /**
-    *   @fn const LX_MWheel getMouseWheel() const
+    *   @fn const LX_MWheel getMouseWheel() const noexcept
     *   Get information about the mouse wheel related to the current event
     *   @return The structure describing the mouse wheel
     *
     *   @sa getMouseButton
     *   @sa getMouseMotion
     */
-    const LX_MWheel getMouseWheel() const;
+    const LX_MWheel getMouseWheel() const noexcept;
     /**
-    *   @fn const LX_WEvent getWindowEvent() const
+    *   @fn const LX_WEvent getWindowEvent() const noexcept
     *   Get information about the window event
     *   @return The structure describing the window event
     */
-    const LX_WEvent getWindowEvent() const;
+    const LX_WEvent getWindowEvent() const noexcept;
     /**
-    *   @fn const LX_UserEvent getUserEvent() const
+    *   @fn const LX_UserEvent getUserEvent() const noexcept
     *   Get information about the user event
     *   @return The structure describing the user event
     */
-    const LX_UserEvent getUserEvent() const;
+    const LX_UserEvent getUserEvent() const noexcept;
     /**
-    *   @fn const LX_TextEvent getTextEvent() const
+    *   @fn const LX_TextEvent getTextEvent() const noexcept
     *   Get information about the text event
     *   @return The structure describing the text event
     */
-    const LX_TextEvent getTextEvent() const;
+    const LX_TextEvent getTextEvent() const noexcept;
     /**
-    *   @fn const LX_DropEvent getDropEvent() const
+    *   @fn const LX_DropEvent getDropEvent() const noexcept
     *   Get information about the drop event (drag & drop a file)
     *   @return The structure describing the event
     */
-    const LX_DropEvent getDropEvent() const;
+    const LX_DropEvent getDropEvent() const noexcept;
 
     /// Default Destructor
     ~LX_EventHandler();
@@ -541,7 +541,7 @@ public:
 
 // Keyboard
 /**
-*   @fn LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode)
+*   @fn LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode) noexcept
 *
 *   Get the virtual key (key code) that corresponds to
 *   the physical key (scan code) given in argument
@@ -550,9 +550,9 @@ public:
 *   @return The virtual key that corresponds to the physical key
 *   @sa getScanCodeFrom()
 */
-LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
+LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode) noexcept;
 /**
-*   @fn LX_ScanCode getScanCodeFrom(LX_KeyCode keycode)
+*   @fn LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept
 *
 *   Get the physical key (scan code) that corresponds to
 *   the virtual key (key code) given in argument
@@ -560,7 +560,7 @@ LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode);
 *   @param [in] keycode The physical key value
 *   @return The physical key that corresponds to the virtual key
 */
-LX_ScanCode getScanCodeFrom(LX_KeyCode keycode);
+LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept;
 
 /**
 *   @fn UTF8string stringOfScanCode(LX_ScanCode scancode)
