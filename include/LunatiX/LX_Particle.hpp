@@ -60,7 +60,7 @@ class LX_Particle
 public:
 
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b)
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
     *   @brief Constructor
     *
     *   Create the instance using an AABB
@@ -68,10 +68,10 @@ public:
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     */
-    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b);
+    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept;
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-    *                  const float vx, const float vy)
+    *                  const float vx, const float vy) noexcept
     *   @brief Constructor
     *
     *   Create the instance using an AABB and the velocity
@@ -81,10 +81,10 @@ public:
     *   @param [in] vx The X velocity
     *   @param [in] vy The Y velocity
     */
-    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy);
+    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy) noexcept;
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-    *                  const LX_Physics::LX_Vector2D& v)
+    *                  const LX_Physics::LX_Vector2D& v) noexcept
     *   @brief Constructor
     *
     *   Create the instance using an AABB and the velocity
@@ -93,31 +93,31 @@ public:
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     *   @param [in] v The vector that store the velocity
     */
-    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v);
+    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v) noexcept;
 
     /**
-    *   @fn void update()
+    *   @fn void update() noexcept
     *   Update the particle state
     */
-    void update();
+    void update() noexcept;
     /**
-    *   @fn void draw()
+    *   @fn void draw() noexcept
     *   Draw the particle
     */
-    void draw();
+    void draw() noexcept;
 
     /**
-    *   @fn bool isDead() const
+    *   @fn bool isDead() const noexcept
     *   Check if the particle is dead and must be destroyed
     *   @return TRUE if the particle is dead, FALSE otherwise
     */
-    bool isDead() const;
+    bool isDead() const noexcept;
     /**
-    *   @fn unsigned int getDelay() const
+    *   @fn unsigned int getDelay() const noexcept
     *   Get the lifetime of the particle
     *   @return The lifetime
     */
-    unsigned int getDelay() const;
+    unsigned int getDelay() const noexcept;
 
     /// Destructor
     ~LX_Particle();

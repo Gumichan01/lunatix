@@ -45,7 +45,7 @@ class LX_ParticleSystem_
     *   This function is automatically called by
     *   the constructor of the particle system
     */
-    inline void allocateParticles_()
+    inline void allocateParticles_() noexcept
     {
         _particles.reset(new (std::nothrow) std::unique_ptr<LX_Particle>[_nb_particles]);
 
@@ -60,13 +60,13 @@ class LX_ParticleSystem_
 
 public:
 
-    explicit LX_ParticleSystem_(const unsigned int nbPart)
+    explicit LX_ParticleSystem_(const unsigned int nbPart) noexcept
         : _particles(nullptr), _nb_particles(nbPart)
     {
         allocateParticles_();
     }
 
-    bool addParticle(LX_Particle *p) const
+    bool addParticle(LX_Particle *p) const noexcept
     {
         if(_particles == nullptr || p == nullptr)
             return false;
@@ -86,7 +86,7 @@ public:
         return done;
     }
 
-    bool rmParticle(unsigned int index) const
+    bool rmParticle(unsigned int index) const noexcept
     {
         if(index > _nb_particles || _particles == nullptr
                 || _particles[index] == nullptr)
@@ -96,7 +96,7 @@ public:
         return true;
     }
 
-    void updateParticles() const
+    void updateParticles() const noexcept
     {
         if(_particles == nullptr)
             return;
@@ -113,7 +113,7 @@ public:
         }
     }
 
-    void displayParticles() const
+    void displayParticles() const noexcept
     {
         if(_particles == nullptr)
             return;
@@ -129,7 +129,7 @@ public:
         }
     }
 
-    unsigned int nbEmptyParticles() const
+    unsigned int nbEmptyParticles() const noexcept
     {
         if(_particles == nullptr)
             return 0;
@@ -145,12 +145,12 @@ public:
         return nb;
     }
 
-    unsigned int nbActiveParticles() const
+    unsigned int nbActiveParticles() const noexcept
     {
         return (_particles == nullptr) ? 0 : _nb_particles - nbEmptyParticles();
     }
 
-    unsigned int nbTotalParticles() const
+    unsigned int nbTotalParticles() const noexcept
     {
         return _nb_particles;
     }
@@ -172,7 +172,7 @@ public:
 
 /* Public functions */
 
-LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart)
+LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart) noexcept
     : _psimpl(new LX_ParticleSystem_(nbPart)) {}
 
 
@@ -182,37 +182,37 @@ LX_ParticleSystem::~LX_ParticleSystem()
 }
 
 
-bool LX_ParticleSystem::addParticle(LX_Particle *p)
+bool LX_ParticleSystem::addParticle(LX_Particle *p) noexcept
 {
     return _psimpl->addParticle(p);
 }
 
 
-void LX_ParticleSystem::updateParticles()
+void LX_ParticleSystem::updateParticles() noexcept
 {
     _psimpl->updateParticles();
 }
 
 
-void LX_ParticleSystem::displayParticles() const
+void LX_ParticleSystem::displayParticles() const noexcept
 {
     _psimpl->displayParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbEmptyParticles() const
+unsigned int LX_ParticleSystem::nbEmptyParticles() const noexcept
 {
     return _psimpl->nbEmptyParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbActiveParticles() const
+unsigned int LX_ParticleSystem::nbActiveParticles() const noexcept
 {
     return _psimpl->nbActiveParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbTotalParticles() const
+unsigned int LX_ParticleSystem::nbTotalParticles() const noexcept
 {
     return _psimpl->nbTotalParticles();
 }

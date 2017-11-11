@@ -42,10 +42,10 @@ class LX_Particle_
 public:
 
     LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-                 const LX_Physics::LX_Vector2D& v)
+                 const LX_Physics::LX_Vector2D& v) noexcept
         : _box(b), _lifetime(xorshiftRand()%DELAY), _velocity(v), _texture(sp) {}
 
-    void update()
+    void update() noexcept
     {
         if(_lifetime > 0)
         {
@@ -54,17 +54,17 @@ public:
         }
     }
 
-    void draw()
+    void draw() noexcept
     {
         _texture.draw(&_box);
     }
 
-    bool isDead() const
+    bool isDead() const noexcept
     {
         return _lifetime == 0;
     }
 
-    unsigned int getDelay() const
+    unsigned int getDelay() const noexcept
     {
         return _lifetime;
     }
@@ -74,17 +74,17 @@ public:
 
 /* LX_Particle — public interface */
 
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b)
+LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
     : _pimpl(new LX_Particle_(sp,b,LX_Physics::LX_Vector2D(0.0f,0.0f))) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-                         const float vx , const float vy)
+                         const float vx , const float vy) noexcept
     : _pimpl(new LX_Particle_(sp,b,LX_Physics::LX_Vector2D(vx,vy))) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-                         const LX_Physics::LX_Vector2D& v)
+                         const LX_Physics::LX_Vector2D& v) noexcept
     : _pimpl(new LX_Particle_(sp,b,v)) {}
 
 
@@ -93,25 +93,25 @@ LX_Particle::~LX_Particle()
     _pimpl.reset();
 }
 
-void LX_Particle::update()
+void LX_Particle::update() noexcept
 {
     _pimpl->update();
 }
 
 
-void LX_Particle::draw()
+void LX_Particle::draw() noexcept
 {
     _pimpl->draw();
 }
 
 
-bool LX_Particle::isDead() const
+bool LX_Particle::isDead() const noexcept
 {
     return _pimpl->isDead();
 }
 
 
-unsigned int LX_Particle::getDelay() const
+unsigned int LX_Particle::getDelay() const noexcept
 {
     return _pimpl->getDelay();
 }

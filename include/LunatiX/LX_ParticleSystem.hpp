@@ -49,17 +49,17 @@ class LX_ParticleSystem
 public:
 
     /**
-    *   @fn LX_ParticleSystem(const unsigned int nbPart)
+    *   @fn LX_ParticleSystem(const unsigned int nbPart) noexcept
     *   @brief Constructor
     *
     *   Create the instance with a number of particles
     *
     *   @param [in] nbPart The number of particles to define in the system
     */
-    explicit LX_ParticleSystem(const unsigned int nbPart);
+    explicit LX_ParticleSystem(const unsigned int nbPart) noexcept;
 
     /**
-    *   @fn bool addParticle(LX_Particle *p)
+    *   @fn bool addParticle(LX_Particle *p) noexcept
     *
     *   Add a particle into the particle system
     *
@@ -68,36 +68,36 @@ public:
     *   @return TRUE if the system had the particle with succes.
     *          FALSE if the particle is a null pointer or the system cannot add it
     */
-    bool addParticle(LX_Particle *p);
+    bool addParticle(LX_Particle *p) noexcept;
     /**
-    *   @fn void updateParticles()
+    *   @fn void updateParticles() noexcept
     *   Update the particles
     */
-    void updateParticles();
+    void updateParticles() noexcept;
     /**
-    *   @fn void displayParticles() const
+    *   @fn void displayParticles() const noexcept
     *   Display the particles
     */
-    void displayParticles() const;
+    void displayParticles() const noexcept;
 
     /**
-    *   @fn unsigned int nbEmptyParticles() const
+    *   @fn unsigned int nbEmptyParticles() const noexcept
     *   Get the number of empty slots to set particles
     *   @return The number of available slots of the particle system
     */
-    unsigned int nbEmptyParticles() const;
+    unsigned int nbEmptyParticles() const noexcept;
     /**
-    *   @fn unsigned int nbActiveParticles() const
+    *   @fn unsigned int nbActiveParticles() const noexcept
     *   Get the number of initialized particles
     *   @return The number of particles that are not null of the system
     */
-    unsigned int nbActiveParticles() const;
+    unsigned int nbActiveParticles() const noexcept;
     /**
-    *   @fn unsigned int nbTotalParticles() const
+    *   @fn unsigned int nbTotalParticles() const noexcept
     *   Get the maximum number of particles
     *   @return The total number of particles the current particle system can have
     */
-    unsigned int nbTotalParticles() const;
+    unsigned int nbTotalParticles() const noexcept;
 
     /// Destructor
     ~LX_ParticleSystem();
