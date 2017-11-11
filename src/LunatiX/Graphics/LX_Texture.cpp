@@ -34,7 +34,7 @@ namespace
 const LX_AABB rnull = {0,0,0,0};
 const LX_Colour cnull = {0,0,0,0};
 
-SDL_RendererFlip shortToFlip_(const short mirror)
+SDL_RendererFlip shortToFlip_(const short mirror) noexcept
 {
     if(mirror == 1)
         return SDL_FLIP_HORIZONTAL;
@@ -44,13 +44,13 @@ SDL_RendererFlip shortToFlip_(const short mirror)
     return SDL_FLIP_NONE;
 }
 
-double radianToDegree(const double angle)
+double radianToDegree(const double angle) noexcept
 {
     return angle * 180 / M_PI;
 }
 
 // Load a image from a file
-SDL_Surface * loadSurface_(const std::string& filename, uint32_t format)
+SDL_Surface * loadSurface_(const std::string& filename, uint32_t format) noexcept
 {
     SDL_Surface *loaded = IMG_Load(filename.c_str());
 
@@ -64,7 +64,7 @@ SDL_Surface * loadSurface_(const std::string& filename, uint32_t format)
 
 // Load a texture from a file
 SDL_Texture * loadTexture_(const std::string& filename,
-                           uint32_t format, SDL_Renderer *r)
+                           uint32_t format, SDL_Renderer *r) noexcept
 {
     SDL_Surface *tmp_s = loadSurface_(filename, format);
 
@@ -119,29 +119,29 @@ LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
     : LX_Texture(filename.utf8_str(),w,format) {}
 
 
-void LX_Texture::draw()
+void LX_Texture::draw() noexcept
 {
     SDL_RenderCopy(RENDER(_win.getRenderingSys()),_texture,nullptr,nullptr);
 }
 
 
-bool LX_Texture::bind(float *iw, float *ih)
+bool LX_Texture::bind(float *iw, float *ih) noexcept
 {
     return _win.glMakeCurrent() && SDL_GL_BindTexture(_texture,iw,ih) == 0;
 }
 
-bool LX_Texture::unbind()
+bool LX_Texture::unbind() noexcept
 {
     return SDL_GL_UnbindTexture(_texture) == 0;
 }
 
 
-LX_Win::LX_Window& LX_Texture::getWindow() const
+LX_Win::LX_Window& LX_Texture::getWindow() const noexcept
 {
     return _win;
 }
 
-uint32_t LX_Texture::getFormat() const
+uint32_t LX_Texture::getFormat() const noexcept
 {
     return _format;
 }
@@ -190,7 +190,7 @@ LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
 }
 
 
-void LX_Sprite::setSpriteArea(LX_AABB * sprite_area)
+void LX_Sprite::setSpriteArea(LX_AABB * sprite_area) noexcept
 {
     if(sprite_area != nullptr)
     {
@@ -200,30 +200,30 @@ void LX_Sprite::setSpriteArea(LX_AABB * sprite_area)
 }
 
 
-void LX_Sprite::draw()
+void LX_Sprite::draw() noexcept
 {
     LX_Texture::draw();
 }
 
-void LX_Sprite::draw(LX_AABB * box)
+void LX_Sprite::draw(LX_AABB * box) noexcept
 {
     draw(box,0.0);
 }
 
 
-void LX_Sprite::draw(LX_AABB * box, const double angle)
+void LX_Sprite::draw(LX_AABB * box, const double angle) noexcept
 {
     draw(box,angle,LX_MIRROR_NONE);
 }
 
-void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror)
+void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror) noexcept
 {
     SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,_sprite_area,box,
                      (-radianToDegree(angle)),nullptr,shortToFlip_(mirror));
 }
 
 
-UTF8string LX_Sprite::getFileName()
+UTF8string LX_Sprite::getFileName() noexcept
 {
     return _filename;
 }
@@ -263,18 +263,18 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
       _started(false), _loop(loop), _drawable(true) {}
 
 
-void LX_AnimatedSprite::draw(LX_AABB * box)
+void LX_AnimatedSprite::draw(LX_AABB * box) noexcept
 {
     draw(box, 0.0);
 }
 
-void LX_AnimatedSprite::draw(LX_AABB * box, const double angle)
+void LX_AnimatedSprite::draw(LX_AABB * box, const double angle) noexcept
 {
     draw(box, angle, LX_MIRROR_NONE);
 }
 
 
-void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirror)
+void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirror) noexcept
 {
     if(!_started)
     {
@@ -305,7 +305,7 @@ void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirr
 }
 
 
-void LX_AnimatedSprite::resetAnimation()
+void LX_AnimatedSprite::resetAnimation() noexcept
 {
     _started = false;
     _drawable = true;
@@ -313,12 +313,12 @@ void LX_AnimatedSprite::resetAnimation()
 }
 
 
-uint32_t LX_AnimatedSprite::getFrameDelay() const
+uint32_t LX_AnimatedSprite::getFrameDelay() const noexcept
 {
     return _delay;
 }
 
-bool LX_AnimatedSprite::isInfinitelyLooped() const
+bool LX_AnimatedSprite::isInfinitelyLooped() const noexcept
 {
     return _loop;
 }
@@ -357,7 +357,7 @@ LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
 
 
 bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
-                                        Uint8& b, Uint8& a)
+                                        Uint8& b, Uint8& a) noexcept
 {
     switch(_surface->format->format)
     {
@@ -389,7 +389,6 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
             r = pixel & 0xFF;
         break;
 
-
         default:
             return false;
         break;
@@ -399,7 +398,7 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
 }
 
 
-Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v)
+Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) noexcept
 {
     Uint32 npixel = 0;
 
@@ -429,7 +428,7 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v)
 }
 
 
-Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel)
+Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel) noexcept
 {
 
 #define FL(x) static_cast<float>(x)
@@ -453,7 +452,7 @@ Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel)
 }
 
 
-Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a) noexcept
 {
     Uint32 npixel = 0;
 
@@ -483,7 +482,7 @@ Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 
 }
 
 
-Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel)
+Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel) noexcept
 {
     const Uint8 MAX_UINT = 255;
     Uint8 r = 0, g = 0, b = 0, a = 0;
@@ -502,7 +501,7 @@ Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel)
 }
 
 
-void LX_BufferedImage::convertGrayscale()
+void LX_BufferedImage::convertGrayscale() noexcept
 {
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
 
@@ -516,7 +515,7 @@ void LX_BufferedImage::convertGrayscale()
     }
 }
 
-void LX_BufferedImage::convertNegative()
+void LX_BufferedImage::convertNegative() noexcept
 {
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
 
@@ -552,7 +551,7 @@ generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
 }
 
 
-UTF8string LX_BufferedImage::getFileName()
+UTF8string LX_BufferedImage::getFileName() noexcept
 {
     return _filename;
 }
@@ -604,7 +603,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format)
 }
 
 
-bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_AABB& rect)
+bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_AABB& rect) noexcept
 {
     bool b = (SDL_BlitScaled(s._surface,nullptr,_screen,&rect) == 0);
 
@@ -614,7 +613,7 @@ bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_AABB& rect)
     return b;
 }
 
-void LX_StreamingTexture::update()
+void LX_StreamingTexture::update() noexcept
 {
     if(_update)
     {
@@ -629,7 +628,6 @@ LX_StreamingTexture::~LX_StreamingTexture()
 {
     SDL_FreeSurface(_screen);
 }
-
 
 
 /** LX_TextTexture */
@@ -669,74 +667,74 @@ LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
 }
 
 
-void LX_TextTexture::draw()
+void LX_TextTexture::draw() noexcept
 {
     draw(0.0);
 }
 
 
-void LX_TextTexture::draw(const double angle)
+void LX_TextTexture::draw(const double angle) noexcept
 {
     draw(angle,LX_MIRROR_NONE);
 }
 
 
-void LX_TextTexture::draw(const double angle, const short mirror)
+void LX_TextTexture::draw(const double angle, const short mirror) noexcept
 {
     SDL_RenderCopyEx(RENDER(_win.getRenderingSys()),_texture,nullptr,
                      &_dimension, (-radianToDegree(angle)),nullptr,
                      shortToFlip_(mirror));
 }
 
-const UTF8string LX_TextTexture::getText() const
+const UTF8string LX_TextTexture::getText() const noexcept
 {
     return _text;
 }
 
-unsigned int LX_TextTexture::getTextSize() const
+unsigned int LX_TextTexture::getTextSize() const noexcept
 {
     return _size;
 }
 
-void LX_TextTexture::getTextDimension(int& w, int& h)
+void LX_TextTexture::getTextDimension(int& w, int& h) noexcept
 {
     w = _dimension.w;
     h = _dimension.h;
 }
 
-int LX_TextTexture::getTextWidth()
+int LX_TextTexture::getTextWidth() noexcept
 {
     return _dimension.w;
 }
 
-int LX_TextTexture::getTextHeight()
+int LX_TextTexture::getTextHeight() noexcept
 {
     return _dimension.h;
 }
 
-LX_Colour LX_TextTexture::getTextColour() const
+LX_Colour LX_TextTexture::getTextColour() const noexcept
 {
     return _colour;
 }
 
-void LX_TextTexture::setText(const std::string& text)
+void LX_TextTexture::setText(const std::string& text) noexcept
 {
     setText(text, _size);
 }
 
-void LX_TextTexture::setText(const UTF8string& text)
+void LX_TextTexture::setText(const UTF8string& text) noexcept
 {
     setText(text, _size);
 }
 
 
-void LX_TextTexture::setText(const std::string& text, unsigned int sz)
+void LX_TextTexture::setText(const std::string& text, unsigned int sz) noexcept
 {
     setText(UTF8string(text),sz);
 }
 
 
-void LX_TextTexture::setText(const UTF8string& text, unsigned int sz)
+void LX_TextTexture::setText(const UTF8string& text, unsigned int sz) noexcept
 {
     if(text != _text || _size != sz)
     {
@@ -747,14 +745,14 @@ void LX_TextTexture::setText(const UTF8string& text, unsigned int sz)
 }
 
 
-void LX_TextTexture::setPosition(int x, int y)
+void LX_TextTexture::setPosition(int x, int y) noexcept
 {
     _dimension.x = x;
     _dimension.y = y;
 }
 
 
-void LX_TextTexture::setTextSize(unsigned int sz)
+void LX_TextTexture::setTextSize(unsigned int sz) noexcept
 {
     if(_size != sz)
     {
@@ -764,7 +762,7 @@ void LX_TextTexture::setTextSize(unsigned int sz)
 }
 
 
-void LX_TextTexture::setTextColour(const LX_Colour& c)
+void LX_TextTexture::setTextColour(const LX_Colour& c) noexcept
 {
     if(_colour != c)
     {
@@ -775,7 +773,6 @@ void LX_TextTexture::setTextColour(const LX_Colour& c)
 
 
 LX_TextTexture::~LX_TextTexture() {}
-
 
 
 /** LX_SolidTextTexture */
@@ -818,7 +815,7 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
 }
 
 
-void LX_SolidTextTexture::updateTexture_()
+void LX_SolidTextTexture::updateTexture_() noexcept
 {
     const LX_Colour tmp = _font.getColour_();
 
@@ -870,7 +867,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
 }
 
 
-void LX_ShadedTextTexture::updateTexture_()
+void LX_ShadedTextTexture::updateTexture_() noexcept
 {
     const LX_Colour tmp = _font.getColour_();
 
@@ -882,7 +879,7 @@ void LX_ShadedTextTexture::updateTexture_()
 }
 
 
-void LX_ShadedTextTexture::setBgColour(const LX_Colour& bg)
+void LX_ShadedTextTexture::setBgColour(const LX_Colour& bg) noexcept
 {
     if(_bgcolour != bg)
     {
@@ -931,7 +928,7 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
 }
 
 
-void LX_BlendedTextTexture::updateTexture_()
+void LX_BlendedTextTexture::updateTexture_() noexcept
 {
     const LX_Colour tmp = _font.getColour_();
 

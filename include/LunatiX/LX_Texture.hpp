@@ -172,14 +172,14 @@ public:
                uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
-    *   @fn virtual void draw()
+    *   @fn virtual void draw() noexcept
     *   Draw a texture on the window
     *   @note The window is specified at object construction
     */
-    virtual void draw();
+    virtual void draw() noexcept;
 
     /**
-    *   @fn bool bind(float *iw = nullptr, float *ih = nullptr)
+    *   @fn bool bind(float *iw = nullptr, float *ih = nullptr) noexcept
     *
     *   Bind a texture (its internal texture) to the OpenGL context
     *   of the OpenGl window where the texture is drawn on
@@ -205,26 +205,26 @@ public:
     *        That is to say the function can be only called if the window is
     *        an OpenGL window. Otherwise, bind() returns FALSE.
     */
-    bool bind(float *iw = nullptr, float *ih = nullptr);
+    bool bind(float *iw = nullptr, float *ih = nullptr) noexcept;
     /**
-    *   @fn bool unbind()
+    *   @fn bool unbind() noexcept
     *   Unbind a texture
     *   @return TRUE on success.FALSE if the operation is not supported.
     */
-    bool unbind();
+    bool unbind() noexcept;
 
     /**
-    *   @fn LX_Win::LX_Window& getWindow() const
+    *   @fn LX_Win::LX_Window& getWindow() const noexcept
     *   Get the window where the texture is drawn on
     *   @return The window
     */
-    LX_Win::LX_Window& getWindow() const;
+    LX_Win::LX_Window& getWindow() const noexcept;
     /**
-    *   @fn uint32_t getFormat() const
+    *   @fn uint32_t getFormat() const noexcept
     *   Get the format of the texture
     *   @return The format
     */
-    uint32_t getFormat() const;
+    uint32_t getFormat() const noexcept;
 
     /// Destructor
     virtual ~LX_Texture();
@@ -241,7 +241,7 @@ class LX_Sprite: public LX_Texture
     LX_AABB *_sprite_area;
     UTF8string _filename;
 
-    void setSpriteArea(LX_AABB * sprite_area);
+    void setSpriteArea(LX_AABB * sprite_area) noexcept;
 
 protected:
 
@@ -313,9 +313,9 @@ public:
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
               LX_AABB * sprite_area, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual void draw();
+    virtual void draw() noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box)
+    *   @fn virtual void draw(LX_AABB * box) noexcept
     *
     *   Draw the current sprite on the window
     *
@@ -325,9 +325,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box);
+    virtual void draw(LX_AABB * box) noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box, const double angle)
+    *   @fn virtual void draw(LX_AABB * box, const double angle) noexcept
     *
     *   Draw an area of the current sprite on the window with rotation
     *
@@ -339,9 +339,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box, const double angle);
+    virtual void draw(LX_AABB * box, const double angle) noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box, const double angle, const short mirror)
+    *   @fn virtual void draw(LX_AABB * box, const double angle, const short mirror) noexcept
     *
     *   Draw the current sprite on the window with rotation
     *
@@ -357,14 +357,14 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box, const double angle, const short mirror);
+    virtual void draw(LX_AABB * box, const double angle, const short mirror) noexcept;
 
     /**
-    *   @fn UTF8string getFileName()
+    *   @fn UTF8string getFileName() noexcept
     *   Returns the name of the file associated with this texture
     *   @return The name of the file (UTF-8 format)
     */
-    UTF8string getFileName();
+    UTF8string getFileName() noexcept;
 
     /// Destructor
     virtual ~LX_Sprite();
@@ -423,28 +423,28 @@ public:
                       bool loop, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
 
-    virtual void draw(LX_AABB * box);
-    virtual void draw(LX_AABB * box, const double angle);
-    virtual void draw(LX_AABB * box, const double angle, const short mirror);
+    virtual void draw(LX_AABB * box) noexcept;
+    virtual void draw(LX_AABB * box, const double angle) noexcept;
+    virtual void draw(LX_AABB * box, const double angle, const short mirror) noexcept;
 
     /**
-    *   @fn void resetAnimation()
+    *   @fn void resetAnimation() noexcept
     *   Reset the animation to the beginning
     */
-    void resetAnimation();
+    void resetAnimation() noexcept;
 
     /**
-    *   @fn uint32_t getFrameDelay() const
+    *   @fn uint32_t getFrameDelay() const noexcept
     *   Get the delay to display each frame of the sprite sheet
     *   @return The delay
     */
-    uint32_t getFrameDelay() const;
+    uint32_t getFrameDelay() const noexcept;
     /**
-    *   @fn bool isInfinitelyLooped() const
+    *   @fn bool isInfinitelyLooped() const noexcept
     *   Check the animation is infinitely looped
     *   @return TRUE if the animation is looped infinitely, FALSE otherwise
     */
-    bool isInfinitelyLooped() const;
+    bool isInfinitelyLooped() const noexcept;
 
     /// Destructor
     ~LX_AnimatedSprite() = default;
@@ -473,13 +473,13 @@ class LX_BufferedImage
     LX_BufferedImage(SDL_Surface * s, const std::string filename,
                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    bool _retrieveColours(Uint32 pixel, Uint8& r, Uint8& g, Uint8& b, Uint8& a);
+    bool _retrieveColours(Uint32 pixel, Uint8& r, Uint8& g, Uint8& b, Uint8& a) noexcept;
 
-    Uint32 _updateGrayscaleColour(Uint8 a, Uint8 v);
-    Uint32 _updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    Uint32 _updateGrayscaleColour(Uint8 a, Uint8 v) noexcept;
+    Uint32 _updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a) noexcept;
 
-    Uint32 _convertGrayscalePixel(Uint32 pixel);
-    Uint32 _convertNegativePixel(Uint32 pixel);
+    Uint32 _convertGrayscalePixel(Uint32 pixel) noexcept;
+    Uint32 _convertNegativePixel(Uint32 pixel) noexcept;
 
 public:
 
@@ -491,18 +491,17 @@ public:
     LX_BufferedImage(const UTF8string& filename,
                      uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-
     /**
-    *   @fn void convertGrayscale()
+    *   @fn void convertGrayscale() noexcept
     *   Convert the image to grayscale
     */
-    void convertGrayscale();
+    void convertGrayscale() noexcept;
 
     /**
     *   @fn void convertNegative()
     *   Convert the image to grayscale
     */
-    void convertNegative();
+    void convertNegative() noexcept;
 
     /**
     *   @fn LX_Texture * generateTexture() const
@@ -543,11 +542,11 @@ public:
                            const uint32_t delay, bool loop) const;
 
     /**
-    *   @fn UTF8string getFileName()
+    *   @fn UTF8string getFileName() noexcept
     *   Returns the name of the file associated with this texture
     *   @return The name of the file (UTF-8 format)
     */
-    UTF8string getFileName();
+    UTF8string getFileName() noexcept;
 
     /// Destructor
     ~LX_BufferedImage();
@@ -580,7 +579,7 @@ public:
     LX_StreamingTexture(LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
-    *   @fn bool blit(LX_BufferedImage& s, LX_AABB& rect)
+    *   @fn bool blit(LX_BufferedImage& s, LX_AABB& rect) noexcept
     *
     *   Put the surface given in argument on the current texture
     *
@@ -589,15 +588,15 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     */
-    bool blit(LX_BufferedImage& s, LX_AABB& rect);
+    bool blit(LX_BufferedImage& s, LX_AABB& rect) noexcept;
     /**
-    *   @fn void update()
+    *   @fn void update() noexcept
     *   Update the texture in order to be drawn on the window
     *
     *   @note After each call of update(), you need to call LX_Texture::draw()
     *        in order to draw the new texture on the window
     */
-    void update();
+    void update() noexcept;
 
     /// Destructor
     virtual ~LX_StreamingTexture();
@@ -621,7 +620,7 @@ protected:
     LX_Colour _colour;
     LX_AABB _dimension;
 
-    virtual void updateTexture_() = 0;
+    virtual void updateTexture_() noexcept = 0;
 
 public:
 
@@ -703,9 +702,9 @@ public:
                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                    uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
-    virtual void draw();
+    virtual void draw() noexcept;
     /**
-    *   @fn virtual void draw(const double angle)
+    *   @fn virtual void draw(const double angle) noexcept
     *
     *   Draw the current text on the window with rotation and mirror effect
     *
@@ -713,9 +712,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(const double angle);
+    virtual void draw(const double angle) noexcept;
     /**
-    *   @fn virtual void draw(const double angle, const short mirror)
+    *   @fn virtual void draw(const double angle, const short mirror) noexcept
     *
     *   Draw the current text on the window with rotation and mirror effect
     *
@@ -727,76 +726,76 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(const double angle, const short mirror);
+    virtual void draw(const double angle, const short mirror) noexcept;
 
     /**
-    *   @fn const UTF8string getText() const
+    *   @fn const UTF8string getText() const noexcept
     *   Get the text
     *   @return The text
     */
-    const UTF8string getText() const;
+    const UTF8string getText() const noexcept;
     /**
-    *   @fn unsigned int getTextSize() const
+    *   @fn unsigned int getTextSize() const noexcept
     *   Get the text size
     *   @return The text size
     */
-    unsigned int getTextSize() const;
+    unsigned int getTextSize() const noexcept;
     /**
-    *   @fn void getTextDimension(int& w, int& h)
+    *   @fn void getTextDimension(int& w, int& h) noexcept
     *   Get the dimension of the text displayed on the screen (width/height)
     *
     *   @param [out] w Width value returned by this function
     *   @param [out] h Height value returned by this function
     */
-    void getTextDimension(int& w, int& h);
+    void getTextDimension(int& w, int& h) noexcept;
 
     /**
-    *   @fn int getTextWidth()
+    *   @fn int getTextWidth() noexcept
     *   Get the width of the text displayed on the screen
     *   @return The width
     */
-    int getTextWidth();
+    int getTextWidth() noexcept;
     /**
-    *   @fn int getTextHeight()
+    *   @fn int getTextHeight() noexcept
     *   Get the height of the text displayed on the screen
     *   @return The height
     */
-    int getTextHeight();
+    int getTextHeight() noexcept;
     /**
-    *   @fn LX_Colour getTextColour() const
+    *   @fn LX_Colour getTextColour() const noexcept
     *   Get the text colour
     *   @return The text size
     */
-    LX_Colour getTextColour() const;
 
+    LX_Colour getTextColour() const noexcept;
     /**
-    *   @fn void setPosition(int x, int y)
+    *   @fn void setPosition(int x, int y) noexcept
     *
     *   Set the position of the current text
     *
     *   @param [in] x The new X position
     *   @param [in] y The new Y position
     */
-    void setPosition(int x, int y);
+    void setPosition(int x, int y) noexcept;
 
     /**
-    *   @fn virtual void setText(const std::string& text)
+    *   @fn virtual void setText(const std::string& text) noexcept
     *
     *   Set the text to display
     *   @param [in] text The text to set
     *   @note This function updates the texture of the text
     */
-    virtual void setText(const std::string& text);
+    virtual void setText(const std::string& text) noexcept;
     /**
-    *   @fn virtual void setText(const UTF8string& text)
+    *   @fn virtual void setText(const UTF8string& text) noexcept
     *
     *   Set the text to display
     *   @param [in] text The text to set
     *   @note This function updates the texture of the text
     */
-    virtual void setText(const UTF8string& text);
+    virtual void setText(const UTF8string& text) noexcept;
     /**
-    *   @fn virtual void setText(const std::string& text, unsigned int sz)
+    *   @fn virtual void setText(const std::string& text, unsigned int sz) noexcept
     *
     *   Set the text (with its size) to display
     *
@@ -805,9 +804,9 @@ public:
     *
     *   @note This function updates the texture of the text
     */
-    virtual void setText(const std::string& text, unsigned int sz);
+    virtual void setText(const std::string& text, unsigned int sz) noexcept;
     /**
-    *   @fn virtual void setText(const UTF8string& text, unsigned int sz);
+    *   @fn virtual void setText(const UTF8string& text, unsigned int sz) noexcept
     *
     *   Set the text (with its size) to display
     *
@@ -815,26 +814,26 @@ public:
     *   @param [in] sz The new size of the text
     *   @note This function updates the texture of the text
     */
-    virtual void setText(const UTF8string& text, unsigned int sz);
+    virtual void setText(const UTF8string& text, unsigned int sz) noexcept;
 
     /**
-    *   @fn virtual void setTextSize(unsigned int sz)
+    *   @fn virtual void setTextSize(unsigned int sz) noexcept
     *
     *   Set the size of the text that will be displayed
     *
     *   @param [in] sz The new size of the text
     *   @note This function updates the texture of the text
     */
-    virtual void setTextSize(unsigned int sz);
+    virtual void setTextSize(unsigned int sz) noexcept;
     /**
-    *   @fn virtual void setTextColour(const LX_Colour& c)
+    *   @fn virtual void setTextColour(const LX_Colour& c) noexcept
     *
     *   Set the colour of the text
     *
     *   @param [in] c the colour of the text
     *   @note This function updates the texture of the text
     */
-    virtual void setTextColour(const LX_Colour& c);
+    virtual void setTextColour(const LX_Colour& c) noexcept;
 
     /// Destructor
     virtual ~LX_TextTexture();
@@ -855,7 +854,7 @@ class LX_SolidTextTexture: public LX_TextTexture
 {
 protected:
 
-    virtual void updateTexture_();
+    virtual void updateTexture_() noexcept;
 
 public:
 
@@ -903,7 +902,7 @@ class LX_ShadedTextTexture: public LX_TextTexture
 
 protected:
 
-    virtual void updateTexture_();
+    virtual void updateTexture_() noexcept;
 
 public:
 
@@ -932,22 +931,22 @@ public:
                          LX_Win::LX_Window& w, uint32_t format=LX_PIXELFORMAT_RGBA8888);
 
     /**
-    *   @fn LX_Colour getBgColour()
+    *   @fn LX_Colour getBgColour() noexcept
     *
     *   Get the colour of the background behind the text
     *   @return THe background colour
     */
-    LX_Colour getBgColour();
+    LX_Colour getBgColour() noexcept;
 
     /**
-    *   @fn void setBgColour(const LX_Colour& bg)
+    *   @fn void setBgColour(const LX_Colour& bg) noexcept
     *
     *   Set the colour of the background behind the text
     *
     *   @param [in] bg The background colour of the text
     *   @note This function updates the texture of the text
     */
-    void setBgColour(const LX_Colour& bg);
+    void setBgColour(const LX_Colour& bg) noexcept;
 
     /// Destructor
     ~LX_ShadedTextTexture() = default;
@@ -969,7 +968,7 @@ class LX_BlendedTextTexture: public LX_TextTexture
 {
 protected:
 
-    virtual void updateTexture_();
+    virtual void updateTexture_() noexcept;
 
 public:
 
