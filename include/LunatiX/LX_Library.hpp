@@ -38,7 +38,7 @@ const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by th
 */
 
 /**
-*   @fn bool LX_Init()
+*   @fn bool LX_Init() noexcept
 *
 *   Load the library according the configuration file
 *
@@ -50,10 +50,10 @@ const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by th
 *          and LX_Configuration::initConfig()
 *
 */
-bool LX_Init();
+bool LX_Init() noexcept;
 
 /**
-*   @fn bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value)
+*   @fn bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept
 *
 *   Set a configuration hint
 *
@@ -62,10 +62,10 @@ bool LX_Init();
 *
 *   @return TRUE on SUCCESS, FALSE otherwise.
 */
-bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value);
+bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept;
 
 /**
-*   @fn const std::string getSDLConfig(const std::string& sdlconfig_name)
+*   @fn const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 *
 *   Get ht evalue of a configuration hint given in argument
 *
@@ -73,14 +73,14 @@ bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_
 *
 *   @return A non-empty string on success, an empty string on failure
 */
-const std::string getSDLConfig(const std::string& sdlconfig_name);
+const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept;
 
 /**
-*   @fn void LX_Quit()
+*   @fn void LX_Quit() noexcept
 *   Shut down the library
 *   @note This function automatically calls LX_WindowManager::destroy()
 */
-void LX_Quit();
+void LX_Quit() noexcept;
 
 /** @} */
 

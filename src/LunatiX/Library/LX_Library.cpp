@@ -1,5 +1,4 @@
 
-
 /*
 *   Copyright © 2017 Luxon Jean-Pierre
 *   https://gumichan01.github.io/
@@ -34,7 +33,7 @@ using namespace LX_Config;
 namespace
 {
 
-bool LX_Mixer_Init()
+bool LX_Mixer_Init() noexcept
 {
     if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == 0)
         return false;
@@ -52,7 +51,7 @@ bool LX_Mixer_Init()
 }
 
 
-bool LX_Init()
+bool LX_Init() noexcept
 {
     const std::string mappingFile = "config/gamecontrollerdb.txt";
 
@@ -144,19 +143,19 @@ bool LX_Init()
 }
 
 
-bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value)
+bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept
 {
     return SDL_SetHint(sdlconfig_name.c_str(), sdlconfig_value.c_str()) == SDL_TRUE;
 }
 
-const std::string getSDLConfig(const std::string& sdlconfig_name)
+const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 {
     const char * res = SDL_GetHint(sdlconfig_name.c_str());
     return res == nullptr ? "" : std::string(res);
 }
 
 
-void LX_Quit()
+void LX_Quit() noexcept
 {
     LX_Win::LX_WindowManager::destroy();
 
