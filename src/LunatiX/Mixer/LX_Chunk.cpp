@@ -56,22 +56,22 @@ public:
         load_(filename.utf8_str());
     }
 
-    bool play()
+    bool play() noexcept
     {
         return play(-1);
     }
 
-    bool play(int channel)
+    bool play(int channel) noexcept
     {
         return play(channel,LX_MIXER_NOLOOP);
     }
 
-    bool play(int channel,int loops)
+    bool play(int channel,int loops) noexcept
     {
         return Mix_PlayChannel(channel,_chunk,loops) == 0;
     }
 
-    bool play(int channel,int loops,int ticks)
+    bool play(int channel,int loops,int ticks) noexcept
     {
         return Mix_PlayChannelTimed(channel,_chunk,loops,ticks) == 0;
     }
@@ -93,22 +93,22 @@ LX_Chunk::LX_Chunk(const std::string filename) : _chkimpl(new LX_Chunk_(filename
 LX_Chunk::LX_Chunk(const UTF8string filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 
-bool LX_Chunk::play()
+bool LX_Chunk::play() noexcept
 {
     return _chkimpl->play();
 }
 
-bool LX_Chunk::play(int channel)
+bool LX_Chunk::play(int channel) noexcept
 {
     return _chkimpl->play(channel,LX_MIXER_NOLOOP);
 }
 
-bool LX_Chunk::play(int channel,int loops)
+bool LX_Chunk::play(int channel,int loops) noexcept
 {
     return _chkimpl->play(channel,loops);
 }
 
-bool LX_Chunk::play(int channel,int loops,int ticks)
+bool LX_Chunk::play(int channel,int loops,int ticks) noexcept
 {
     return _chkimpl->play(channel,loops,ticks);
 }

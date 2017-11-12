@@ -47,16 +47,16 @@ namespace LX_Mixer
 {
 
 
-LX_MixerEffect::LX_MixerEffect() : type(LX_UNKNOWN_EFFECT),
+LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_UNKNOWN_EFFECT),
     pan_left(0), pan_right(0), pos_angle(0), pos_distance(0),
     rev_stereo(false), loops(0) {}
 
-LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) : type(st.type),
-    pan_left(st.pan_left), pan_right(st.pan_right),
+LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) noexcept:
+    type(st.type),pan_left(st.pan_left), pan_right(st.pan_right),
     pos_angle(st.pos_angle), pos_distance(st.pos_distance),
     rev_stereo(st.rev_stereo), loops(st.loops) {}
 
-LX_MixerEffect& LX_MixerEffect::operator = (const LX_MixerEffect& st)
+LX_MixerEffect& LX_MixerEffect::operator = (const LX_MixerEffect& st) noexcept
 {
     type = st.type;
     pan_left = st.pan_left;
@@ -70,7 +70,7 @@ LX_MixerEffect& LX_MixerEffect::operator = (const LX_MixerEffect& st)
 }
 
 
-void setOverallVolume(unsigned short volume)
+void setOverallVolume(unsigned short volume) noexcept
 {
     if(volume > LX_DEFAULT_VOLUME)
         overall_volume = LX_DEFAULT_VOLUME;
@@ -81,7 +81,7 @@ void setOverallVolume(unsigned short volume)
     setFXVolume(fx_pvolume);
 }
 
-void setMusicVolume(unsigned short pvolume)
+void setMusicVolume(unsigned short pvolume) noexcept
 {
     if (pvolume > 100) pvolume = 100;
 
@@ -94,7 +94,7 @@ void setMusicVolume(unsigned short pvolume)
     music_pvolume = pvolume;
 }
 
-void setFXVolume(unsigned short pvolume)
+void setFXVolume(unsigned short pvolume) noexcept
 {
     if (pvolume > 100) pvolume = 100;
 
@@ -109,17 +109,17 @@ void setFXVolume(unsigned short pvolume)
     fx_pvolume = pvolume;
 }
 
-unsigned short getOverallVolume()
+unsigned short getOverallVolume() noexcept
 {
     return overall_volume;
 }
 
-unsigned short getMusicVolume()
+unsigned short getMusicVolume() noexcept
 {
     return music_volume;
 }
 
-unsigned short getFXVolume()
+unsigned short getFXVolume() noexcept
 {
     return fx_volume;
 }
@@ -131,14 +131,14 @@ LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)
 }
 
 
-void setMusicPosition(double pos)
+void setMusicPosition(double pos) noexcept
 {
     Mix_RewindMusic();
     Mix_SetMusicPosition(pos);
 }
 
 
-int allocateChannels(int num)
+int allocateChannels(int num) noexcept
 {
     int n = Mix_AllocateChannels(num);
 
@@ -150,36 +150,36 @@ int allocateChannels(int num)
 }
 
 
-int reserveChannels(int numchans)
+int reserveChannels(int numchans) noexcept
 {
     return Mix_ReserveChannels(numchans);
 }
 
 
-bool groupChannel(int chan, int tag)
+bool groupChannel(int chan, int tag) noexcept
 {
     return Mix_GroupChannel(chan, tag) == 1;
 }
 
 
-int groupChannels(int from, int to, int tag)
+int groupChannels(int from, int to, int tag) noexcept
 {
     return Mix_GroupChannels(from, to, tag);
 }
 
-int groupCount(int tag)
+int groupCount(int tag) noexcept
 {
     return Mix_GroupCount(tag);
 }
 
 
-int channelAvailable(int tag)
+int channelAvailable(int tag) noexcept
 {
     return Mix_GroupAvailable(tag);
 }
 
 
-bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops)
+bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops) noexcept
 {
     if(groupCount(tag) == 0)
         return chunk.play(-1,loops);
@@ -197,7 +197,7 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops)
     return chunk.play(chan, loops);
 }
 
-bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect)
+bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexcept
 {
     int chan = -1;
     int _tag;
@@ -247,125 +247,125 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect)
     return chunk.play(chan, effect.loops);
 }
 
-void pause(int channel)
+void pause(int channel) noexcept
 {
     Mix_Pause(channel);
 }
 
 
-void resume(int channel)
+void resume(int channel) noexcept
 {
     Mix_Resume(channel);
 }
 
 
-void haltChannel(int channel)
+void haltChannel(int channel) noexcept
 {
     Mix_HaltChannel(channel);
 }
 
 
-void expireChannel(int channel, int ticks)
+void expireChannel(int channel, int ticks) noexcept
 {
     Mix_ExpireChannel(channel,ticks);
 }
 
 
-int isPlaying(int channel)
+int isPlaying(int channel) noexcept
 {
     return Mix_Playing(channel);
 }
 
 
-int isPaused(int channel)
+int isPaused(int channel) noexcept
 {
     return Mix_Paused(channel);
 }
 
 
-void fadeInMusic(LX_Music& music, int ms)
+void fadeInMusic(LX_Music& music, int ms) noexcept
 {
     music.fadeIn(ms);
 }
 
 
-void fadeInMusicPos(LX_Music& music, int ms, int pos)
+void fadeInMusicPos(LX_Music& music, int ms, int pos) noexcept
 {
     music.fadeInPos(ms,pos);
 }
 
 
-void fadeOutMusic(int ms)
+void fadeOutMusic(int ms) noexcept
 {
     Mix_FadeOutMusic(ms);
 }
 
 
-void setPanning(uint8_t left, uint8_t right)
+void setPanning(uint8_t left, uint8_t right) noexcept
 {
     Mix_SetPanning(MIX_CHANNEL_POST, left, right);
 }
 
-void setPanning(int chan, uint8_t left, uint8_t right)
+void setPanning(int chan, uint8_t left, uint8_t right) noexcept
 {
     Mix_SetPanning(chan, left, right);
 }
 
-void removePanning()
+void removePanning() noexcept
 {
     setPanning(LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
 }
 
-void removePanning(int chan)
+void removePanning(int chan) noexcept
 {
     setPanning(chan, LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
 }
 
-void setPosition(int16_t angle)
+void setPosition(int16_t angle) noexcept
 {
     setPosition(angle, LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
 
-void setPosition(int16_t angle, uint8_t distance)
+void setPosition(int16_t angle, uint8_t distance) noexcept
 {
     Mix_SetPosition(MIX_CHANNEL_POST, angle, distance);
 }
 
-void setPosition(int chan, int16_t angle, uint8_t distance)
+void setPosition(int chan, int16_t angle, uint8_t distance) noexcept
 {
     Mix_SetPosition(chan, angle, distance);
 }
 
 
-void resetPosition()
+void resetPosition() noexcept
 {
     Mix_SetPosition(MIX_CHANNEL_POST, LX_MIXER_EFFECT_NO_ANGLE,
                     LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
-void resetPosition(int chan)
+void resetPosition(int chan) noexcept
 {
     Mix_SetPosition(chan, LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
 }
 
-void reverseStereo(bool flip)
+void reverseStereo(bool flip) noexcept
 {
     reverseStereo(MIX_CHANNEL_POST, flip);
 }
 
-void reverseStereo(int chan, bool flip)
+void reverseStereo(int chan, bool flip) noexcept
 {
     int opt = flip ? 1:0;
     Mix_SetReverseStereo(chan, opt);
 }
 
-void setDistance(uint8_t distance)
+void setDistance(uint8_t distance) noexcept
 {
     Mix_SetDistance(MIX_CHANNEL_POST, distance);
 }
 
-void setDistance(int chan, uint8_t distance)
+void setDistance(int chan, uint8_t distance) noexcept
 {
     Mix_SetDistance(chan, distance);
 }

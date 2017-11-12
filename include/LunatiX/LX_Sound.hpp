@@ -62,7 +62,7 @@ class LX_Sound
 
 public:
     /// Play something
-    virtual bool play() = 0;
+    virtual bool play() noexcept = 0;
     /// Destructor
     virtual ~LX_Sound();
 };

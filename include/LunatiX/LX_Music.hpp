@@ -60,7 +60,7 @@ struct LX_MusicTag
     UTF8string duration;                /**< Duration, in HH:MM:SS format    */
     LX_Graphics::LX_BufferedImage *img; /**< Album cover, if it exists       */
 
-    LX_MusicTag();
+    LX_MusicTag() noexcept;
     ~LX_MusicTag();
 };
 
@@ -98,7 +98,7 @@ public:
     explicit LX_Music(const UTF8string filename);
 
     /**
-    *   @fn void fadeIn(int ms)
+    *   @fn void fadeIn(int ms) noexcept
     *
     *   Fade in the current music over some milliseconds of time
     *
@@ -110,9 +110,9 @@ public:
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
     */
-    void fadeIn(int ms);
+    void fadeIn(int ms) noexcept;
     /**
-    *   @fn void fadeInPos(int ms,int pos)
+    *   @fn void fadeInPos(int ms,int pos) noexcept
     *
     *   Fade in the current music over some milliseconds of time
     *
@@ -125,9 +125,9 @@ public:
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
     */
-    void fadeInPos(int ms,int pos);
+    void fadeInPos(int ms,int pos) noexcept;
     /**
-    *   @fn static void fadeOut(int ms)
+    *   @fn static void fadeOut(int ms) noexcept
     *
     *   Fade out the music over some milliseconds of time
     *
@@ -136,18 +136,18 @@ public:
     *   @note This functions works only when music is playing and
     *         no fading is already set to fade out
     */
-    static void fadeOut(int ms);
+    static void fadeOut(int ms) noexcept;
 
     /**
-    *   @fn virtual bool play()
+    *   @fn virtual bool play() noexcept
     *   Play the music specified in the LX_Music class
     *   @return TRUE on success, FALSE otherwise
     *
     *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP
     */
-    virtual bool play();
+    virtual bool play() noexcept;
     /**
-    *   @fn bool play(int loops)
+    *   @fn bool play(int loops) noexcept
     *
     *   Play the music specified in the LX_Music class
     *
@@ -158,20 +158,20 @@ public:
     *   @note If loops is set to LX_MIXER_NOLOOP, the music is played only once.
     *   @note If loops is set to LX_MIXER_LOOP, the music is played forever.
     */
-    bool play(int loops);
+    bool play(int loops) noexcept;
     /**
-    *   @fn void pause()
+    *   @fn void pause() noexcept
     *   Pause or resume the current music
     */
-    static void pause();
+    static void pause() noexcept;
     /**
     *   @fn static void stop()
     *   Stop the music
     */
-    static void stop();
+    static void stop() noexcept;
 
     /**
-    *   @fn const libtagpp::Tag& getInfo()
+    *   @fn const libtagpp::Tag& getInfo() noexcept
     *   Get information about the current music
     *   @return The metadata
     *
@@ -180,16 +180,16 @@ public:
     *
     *   @sa metaData()
     */
-    const libtagpp::Tag& getInfo();
+    const libtagpp::Tag& getInfo() noexcept;
     /**
-    *   @fn const LX_MusicTag& metaData()
+    *   @fn const LX_MusicTag& metaData() noexcept
     *   Get essential information about the current music
     *   @return The metadata
     *
     *   @sa LX_MusicTag
     *   @sa getInfo()
     */
-    const LX_MusicTag& metaData();
+    const LX_MusicTag& metaData() noexcept;
 
     /// Destructor
     ~LX_Music();

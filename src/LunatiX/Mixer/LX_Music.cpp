@@ -45,7 +45,7 @@ namespace LX_Mixer
 
 /* Music tag */
 
-LX_MusicTag::LX_MusicTag(): img(nullptr) {}
+LX_MusicTag::LX_MusicTag() noexcept: img(nullptr) {}
 
 LX_MusicTag::~LX_MusicTag()
 {
@@ -86,27 +86,27 @@ public:
         load_(_filename);
     }
 
-    void fadeIn(int ms)
+    void fadeIn(int ms) noexcept
     {
         Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
     }
 
-    void fadeInPos(int ms,int pos)
+    void fadeInPos(int ms,int pos) noexcept
     {
         Mix_FadeInMusicPos(_music,LX_MIXER_NOLOOP,ms,pos);
     }
 
-    bool play()
+    bool play() noexcept
     {
         return play(LX_MIXER_NOLOOP);
     }
 
-    bool play(int loops)
+    bool play(int loops) noexcept
     {
         return Mix_PlayMusic(_music,loops) == 0;
     }
 
-    const libtagpp::Tag& getInfo()
+    const libtagpp::Tag& getInfo() noexcept
     {
         if(!_tag.readTag(_filename.c_str()))
             LX_SetError("Cannot get metadata");
@@ -114,7 +114,7 @@ public:
         return _tag;
     }
 
-    const LX_MusicTag& metaData()
+    const LX_MusicTag& metaData() noexcept
     {
         if(!mtag_set)
         {
@@ -149,34 +149,34 @@ LX_Music::LX_Music(const UTF8string filename)
     : _mimpl(new LX_Music_(filename)) {}
 
 
-void LX_Music::fadeIn(int ms)
+void LX_Music::fadeIn(int ms) noexcept
 {
     _mimpl->fadeIn(ms);
 }
 
-void LX_Music::fadeInPos(int ms,int pos)
+void LX_Music::fadeInPos(int ms,int pos) noexcept
 {
     _mimpl->fadeInPos(ms,pos);
 }
 
-void LX_Music::fadeOut(int ms)
+void LX_Music::fadeOut(int ms) noexcept
 {
     Mix_FadeOutMusic(ms);
 }
 
 
-bool LX_Music::play()
+bool LX_Music::play() noexcept
 {
     return _mimpl->play();
 }
 
-bool LX_Music::play(int loops)
+bool LX_Music::play(int loops) noexcept
 {
     return _mimpl->play(loops);
 }
 
 
-void LX_Music::pause()
+void LX_Music::pause() noexcept
 {
     if(Mix_PausedMusic())
         Mix_ResumeMusic();
@@ -184,23 +184,22 @@ void LX_Music::pause()
         Mix_PauseMusic();
 }
 
-void LX_Music::stop()
+void LX_Music::stop() noexcept
 {
     if(Mix_PlayingMusic())
         Mix_HaltMusic();
 }
 
 
-const libtagpp::Tag& LX_Music::getInfo()
+const libtagpp::Tag& LX_Music::getInfo() noexcept
 {
     return _mimpl->getInfo();
 }
 
-const LX_MusicTag& LX_Music::metaData()
+const LX_MusicTag& LX_Music::metaData() noexcept
 {
     return _mimpl->metaData();
 }
-
 
 LX_Music::~LX_Music()
 {
