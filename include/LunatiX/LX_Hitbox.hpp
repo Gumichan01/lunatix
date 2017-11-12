@@ -36,13 +36,13 @@ struct LX_Point
     int y;      /**< The y position of the point */
 
     /// No argument constructor
-    LX_Point();
+    LX_Point() noexcept;
     /// Construct a point using coordinates
-    LX_Point(int xpos, int ypos);
+    LX_Point(int xpos, int ypos) noexcept;
     /// Construct a point using another point
-    LX_Point(const LX_Point& p);
+    LX_Point(const LX_Point& p) noexcept;
     /// Point assignment
-    LX_Point& operator=(const LX_Point& p);
+    LX_Point& operator=(const LX_Point& p) noexcept;
 };
 
 
@@ -56,32 +56,32 @@ struct LX_Line
     LX_Vector2D v;  /**< Direction vector   */
 
     /// Default Constructor
-    LX_Line();
+    LX_Line() noexcept;
     /// Copy destructor
-    LX_Line(const LX_Line& l);
+    LX_Line(const LX_Line& l) noexcept;
     /// Construct the line using the point and the direction vector
-    LX_Line(const LX_Point& p, const LX_Vector2D& dv);
+    LX_Line(const LX_Point& p, const LX_Vector2D& dv) noexcept;
     /// Line assignment
-    LX_Line& operator=(const LX_Line& l);
+    LX_Line& operator=(const LX_Line& l) noexcept;
 
     /**
-    *   @fn bool isParralelWith(const LX_Line& l) const
+    *   @fn bool isParralelWith(const LX_Line& l) const noexcept
     *
     *   Check if the line is parralel with the line given in argument
     *
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are paralel, FALSE otherwise
     */
-    bool isParralelWith(const LX_Line& l) const;
+    bool isParralelWith(const LX_Line& l) const noexcept;
     /**
-    *   @fn bool isPerpendicularTo(const LX_Line& l) const
+    *   @fn bool isPerpendicularTo(const LX_Line& l) const noexcept
     *
     *   Check if the line is perpendicular to the line given in argument
     *
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are perpendicular, FALSE otherwise
     */
-    bool isPerpendicularTo(const LX_Line& l) const;
+    bool isPerpendicularTo(const LX_Line& l) const noexcept;
 };
 
 
@@ -96,19 +96,19 @@ struct LX_Circle
     unsigned int square_radius; /**< The square radius                      */
 
     /// No argument constructor
-    LX_Circle();
+    LX_Circle() noexcept;
     /// Construct a circle using a point and a radius
-    LX_Circle(const LX_Point& p, unsigned int rad);
+    LX_Circle(const LX_Point& p, unsigned int rad) noexcept;
     /// Construct a circle using another circle
-    LX_Circle(const LX_Circle& c);
+    LX_Circle(const LX_Circle& c) noexcept;
     /// Circle assignment
-    LX_Circle& operator=(const LX_Circle& c);
+    LX_Circle& operator=(const LX_Circle& c) noexcept;
 };
 
 
 // Operators of points and circles
 /**
-*   @fn bool operator ==(const LX_Point& a, const LX_Point& b)
+*   @fn bool operator ==(const LX_Point& a, const LX_Point& b) noexcept
 *
 *   Check If two points are identical
 *
@@ -118,9 +118,9 @@ struct LX_Circle
 *   @return TRUE If these points have exactly the same coordinates,
 *          FALSE otherwise
 */
-bool operator ==(const LX_Point& a, const LX_Point& b);
+bool operator ==(const LX_Point& a, const LX_Point& b) noexcept;
 /**
-*   @fn bool operator !=(const LX_Point& a, const LX_Point& b)
+*   @fn bool operator !=(const LX_Point& a, const LX_Point& b) noexcept
 *
 *   Check If two points are dIfferent
 *
@@ -129,9 +129,9 @@ bool operator ==(const LX_Point& a, const LX_Point& b);
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
-bool operator !=(const LX_Point& a, const LX_Point& b);
+bool operator !=(const LX_Point& a, const LX_Point& b) noexcept;
 /**
-*   @fn bool operator ==(const LX_Circle& a, const LX_Circle& b)
+*   @fn bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
@@ -140,9 +140,9 @@ bool operator !=(const LX_Point& a, const LX_Point& b);
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 */
-bool operator ==(const LX_Circle& a, const LX_Circle& b);
+bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept;
 /**
-*   @fn bool operator !=(const LX_Circle& a, const LX_Circle& b)
+*   @fn bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
@@ -151,9 +151,9 @@ bool operator ==(const LX_Circle& a, const LX_Circle& b);
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 */
-bool operator !=(const LX_Circle& a, const LX_Circle& b);
+bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept;
 /**
-*   @fn bool operator >(const LX_Circle& a, const LX_Circle& b)
+*   @fn bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept
 *
 *   Check If the first circle has a greater radius than the second one
 *
@@ -163,9 +163,9 @@ bool operator !=(const LX_Circle& a, const LX_Circle& b);
 *   @return TRUE If the first circle is greater than the second circle,
 *          FALSE otherwise
 */
-bool operator >(const LX_Circle& a, const LX_Circle& b);
+bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept;
 /**
-*   @fn bool operator <(const LX_Circle& a, const LX_Circle& b)
+*   @fn bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept
 *
 *   Check If the first circle radius is smaller than the second one
 *
@@ -175,9 +175,9 @@ bool operator >(const LX_Circle& a, const LX_Circle& b);
 *   @return TRUE If the first circle is smaller than the second circle,
 *          FALSE otherwise
 */
-bool operator <(const LX_Circle& a, const LX_Circle& b);
+bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept;
 /**
-*   @fn bool operator >=(const LX_Circle& a, const LX_Circle& b)
+*   @fn bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept
 *
 *   Check If the first circle has a greater radius than the second one
 *   or if they have the same radius length
@@ -189,9 +189,9 @@ bool operator <(const LX_Circle& a, const LX_Circle& b);
 *          or if have the same radius length, FALSE otherwise
 *
 */
-bool operator >=(const LX_Circle& a, const LX_Circle& b);
+bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept;
 /**
-*   @fn bool operator <=(const LX_Circle& a, const LX_Circle& b)
+*   @fn bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept
 *
 *   Check If the first circle radius is smaller than the second one
 *   or if they have the same radius length
@@ -202,7 +202,7 @@ bool operator >=(const LX_Circle& a, const LX_Circle& b);
 *   @return TRUE If the first circle is smaller than the second circle,
 *          or if the two circles have the same radius length, FALSE otherwise
 */
-bool operator <=(const LX_Circle& a, const LX_Circle& b);
+bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept;
 
 }
 

@@ -46,7 +46,7 @@ class LX_Polygon;
 
 /**
 *   @fn unsigned int euclide_square_distance(const int x1, const int y1,
-*                                            const int x2, const int y2)
+*                                            const int x2, const int y2) noexcept
 *
 *   This function calculates the euclidean square distance between 2 coordinates
 *
@@ -57,10 +57,10 @@ class LX_Polygon;
 *
 *   @return The square distance (integer value)
 */
-unsigned int euclide_square_distance(const int x1,const int y1,const int x2,const int y2);
+unsigned int euclide_square_distance(const int x1,const int y1,const int x2,const int y2) noexcept;
 /**
 *   @fn unsigned int euclide_square_distance(const LX_Point& p1,
-*                                            const LX_Point& p2)
+*                                            const LX_Point& p2) noexcept
 *
 *   This function calculates the euclidean square distance
 *
@@ -69,11 +69,11 @@ unsigned int euclide_square_distance(const int x1,const int y1,const int x2,cons
 *
 *   @return The square distance (integer value)
 */
-unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
+unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2) noexcept;
 
 /**
 *   @fn float euclide_distance(const int x1, const int y1,
-*                              const int x2, const int y2)
+*                              const int x2, const int y2) noexcept
 *
 *   This function calculates the euclidean distance with accuracy
 *
@@ -84,10 +84,10 @@ unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2);
 *
 *   @return The distance (floating-point value)
 */
-float euclide_distance(const int x1, const int y1, const int x2, const int y2);
+float euclide_distance(const int x1, const int y1, const int x2, const int y2) noexcept;
 
 /**
-*   @fn float euclide_distance(const LX_Point& p1, const LX_Point& p2)
+*   @fn float euclide_distance(const LX_Point& p1, const LX_Point& p2) noexcept
 *
 *   This function calculates the euclidean distance with accuracy
 *
@@ -96,14 +96,14 @@ float euclide_distance(const int x1, const int y1, const int x2, const int y2);
 *
 *   @return The distance (floating-point value)
 */
-float euclide_distance(const LX_Point& p1,const LX_Point& p2);
+float euclide_distance(const LX_Point& p1,const LX_Point& p2) noexcept;
 
 
 /* Collision detection */
 
 /**
 *   @fn bool collisionPointRect(const int xpos, const int ypos,
-*                               const LX_AABB& rect)
+*                               const LX_AABB& rect) noexcept
 *
 *   Check the collision between a point and an Axis Aligned Bouding Box (AABB)
 *
@@ -113,10 +113,10 @@ float euclide_distance(const LX_Point& p1,const LX_Point& p2);
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect);
+bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noexcept;
 
 /**
-*   @fn bool collisionPointRect(const LX_Point& p,const LX_AABB& rect)
+*   @fn bool collisionPointRect(const LX_Point& p,const LX_AABB& rect) noexcept
 *
 *   Check the collision between a point and an AABB
 *
@@ -125,12 +125,12 @@ bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect);
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionPointRect(const LX_Point& p,const LX_AABB& rect);
+bool collisionPointRect(const LX_Point& p,const LX_AABB& rect) noexcept;
 
 
 /**
 *   @fn bool collisionPointCircle(const int xpos, const int ypos,
-*                                 const LX_Circle& circle)
+*                                 const LX_Circle& circle) noexcept
 *
 *   Check the collision between a point and a circle
 *
@@ -140,10 +140,10 @@ bool collisionPointRect(const LX_Point& p,const LX_AABB& rect);
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle);
+bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle) noexcept;
 
 /**
-*   @fn bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle)
+*   @fn bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle) noexcept
 *
 *   Check the collision between a point and a circle
 *
@@ -153,11 +153,11 @@ bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circl
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle);
+bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle) noexcept;
 
 
 /**
-*   @fn bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2)
+*   @fn bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept
 *
 *   Check the collision between two Axis Aligned Bounding Box (AABB)
 *
@@ -167,10 +167,10 @@ bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle);
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2);
+bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept;
 
 /**
-*   @fn bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2)
+*   @fn bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept
 *
 *   Check the collision between two circles
 *
@@ -180,11 +180,11 @@ bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2);
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2);
+bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept;
 
 /**
 *   @fn bool collisionSegCircle(const LX_Circle& circle,
-*                               const LX_Point& A, const LX_Point& B)
+*                               const LX_Point& A, const LX_Point& B) noexcept
 *
 *   Check the collision between a circle and the [AB] segment
 *
@@ -195,7 +195,7 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2);
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionSegCircle(const LX_Circle& circle, const LX_Point& A, const LX_Point& B);
+bool collisionSegCircle(const LX_Circle& circle, const LX_Point& A, const LX_Point& B) noexcept;
 
 /**
 *   @fn bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L)
@@ -208,10 +208,10 @@ bool collisionSegCircle(const LX_Circle& circle, const LX_Point& A, const LX_Poi
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L);
+bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 
 /**
-*   @fn bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect)
+*   @fn bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
 *
 *   Check the collision between a circle and a AABB
 *
@@ -221,12 +221,12 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L);
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect);
+bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept;
 
 
 /**
 *   @fn bool intersectSegLine(const LX_Point& A, const LX_Point& B,
-*                            const LX_Point& C, const LX_Point& D)
+*                            const LX_Point& C, const LX_Point& D) noexcept
 *
 *   Test the intersection between a line and a segment
 *
@@ -239,11 +239,11 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect);
 *
 */
 bool intersectSegLine(const LX_Point& A, const LX_Point& B,
-                      const LX_Point& C, const LX_Point& D);
+                      const LX_Point& C, const LX_Point& D) noexcept;
 
 /**
 *   @fn bool intersectSegment(const LX_Point& A, const LX_Point& B,
-*                            const LX_Point& C, const LX_Point& D)
+*                            const LX_Point& C, const LX_Point& D) noexcept
 *
 *   Test the intersection between 2 segments
 *
@@ -255,7 +255,7 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
 bool intersectSegment(const LX_Point& A, const LX_Point& B,
-                      const LX_Point& C, const LX_Point& D);
+                      const LX_Point& C, const LX_Point& D) noexcept;
 /**
 *   @fn bool intersectLine(const LX_Line& L1, const LX_Line& L2)
 *
@@ -266,7 +266,7 @@ bool intersectSegment(const LX_Point& A, const LX_Point& B,
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
-bool intersectLine(const LX_Line& L1, const LX_Line& L2);
+bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept;
 
 /**
 *   @fn bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
@@ -279,7 +279,6 @@ bool intersectLine(const LX_Line& L1, const LX_Line& L2);
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
 bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
-
 /**
 *   @fn bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *
@@ -291,7 +290,6 @@ bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
 *   @return TRUE if there is a collision, FALSE otherwise
 */
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
-
 /**
 *   @fn bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 *
@@ -303,7 +301,6 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 *   @return TRUE if there is a collision, FALSE otherwise
 */
 bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
-
 /**
 *   @fn bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 *
@@ -320,7 +317,7 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
 /**
-*   @fn void movePoint(LX_Point& P, const int vx, const int vy)
+*   @fn void movePoint(LX_Point& P, const int vx, const int vy) noexcept
 *
 *   Move a point to a direction
 *
@@ -328,18 +325,18 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
 */
-void movePoint(LX_Point& P, const int vx, const int vy);
+void movePoint(LX_Point& P, const int vx, const int vy) noexcept;
 /**
-*   @fn void movePoint(LX_Point& P, const LX_Vector2D& v)
+*   @fn void movePoint(LX_Point& P, const LX_Vector2D& v) noexcept
 *
 *   Move a point to a direction using the vector
 *
 *   @param [in] P The point to move
 *   @param [in] v The vector that indicates the direction
 */
-void movePoint(LX_Point& P, const LX_Vector2D& v);
+void movePoint(LX_Point& P, const LX_Vector2D& v) noexcept;
 /**
-*   @fn void moveRect(LX_AABB& rect, const int vx, const int vy)
+*   @fn void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept
 *
 *   Move an AABB to a direction
 *
@@ -347,18 +344,18 @@ void movePoint(LX_Point& P, const LX_Vector2D& v);
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
 */
-void moveRect(LX_AABB& rect, const int vx, const int vy);
+void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept;
 /**
-*   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v)
+*   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
 *
 *   Move an AABB to a direction using the vector
 *
 *   @param [in] rect The AABB to move
 *   @param [in] v The vector that indicates the direction
 */
-void moveRect(LX_AABB& rect, const LX_Vector2D& v);
+void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept;
 /**
-*   @fn void moveCircle(LX_Circle& C, const int vx, const int vy)
+*   @fn void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept
 *
 *   Move the circle to a direction
 *
@@ -366,18 +363,18 @@ void moveRect(LX_AABB& rect, const LX_Vector2D& v);
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
 */
-void moveCircle(LX_Circle& C, const int vx, const int vy);
+void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept;
 /**
-*   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v)
+*   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 *
 *   Move the circle to a direction using the vector
 *
 *   @param [in] C The circle to move
 *   @param [in] v The vector that indicates the direction
 */
-void moveCircle(LX_Circle& C, const LX_Vector2D& v);
+void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept;
 /**
-*   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy)
+*   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept
 *
 *   Move the polygon to a direction
 *
@@ -385,19 +382,19 @@ void moveCircle(LX_Circle& C, const LX_Vector2D& v);
 *   @param [in] vx The x direction
 *   @param [in] vy The y direction
 */
-void movePoly(LX_Polygon& poly, const float vx, const float vy);
+void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept;
 /**
-*   @fn void movePoly(LX_Polygon& poly, const LX_Vector2D& v)
+*   @fn void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
 *
 *   Move the polygon to a direction using the vector
 *
 *   @param [in] poly The polygon to move
 *   @param [in] v The vector that indicates the direction
 */
-void movePoly(LX_Polygon& poly, const LX_Vector2D& v);
+void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 
 /**
-*   @fn void movePointTo(LX_Point& P, const int xpos, const int ypos)
+*   @fn void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept
 *
 *   Move a point to an absolute position
 *
@@ -405,9 +402,9 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v);
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
 */
-void movePointTo(LX_Point& P, const int xpos, const int ypos);
+void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept;
 /**
-*   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos)
+*   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
 *
 *   Move an AABB to an absolute position
 *
@@ -415,18 +412,18 @@ void movePointTo(LX_Point& P, const int xpos, const int ypos);
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
 */
-void moveRectTo(LX_AABB& rect, const int xpos, const int ypos);
+void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept;
 /**
-*   @fn void moveRectTo(LX_AABB& rect, const LX_Point& P)
+*   @fn void moveRectTo(LX_AABB& rect, const LX_Point& P) noexcept
 *
 *   Move an AABB to an absolute position
 *
 *   @param [in] rect The AABB to move
 *   @param [in] P The new position
 */
-void moveRectTo(LX_AABB& rect, const LX_Point& P);
+void moveRectTo(LX_AABB& rect, const LX_Point& P) noexcept;
 /**
-*   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos)
+*   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
 *
 *   Move a circle to an absolute position
 *
@@ -434,16 +431,16 @@ void moveRectTo(LX_AABB& rect, const LX_Point& P);
 *   @param [in] xpos The x position
 *   @param [in] ypos The y position
 */
-void moveCircleTo(LX_Circle& C, const int xpos, const int ypos);
+void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept;
 /**
-*   @fn void moveCircleTo(LX_Circle& C, const LX_Point& P)
+*   @fn void moveCircleTo(LX_Circle& C, const LX_Point& P) noexcept
 *
 *   Move a circle to an absolute position
 *
 *   @param [in] C The circle to move
 *   @param [in] P The new position
 */
-void moveCircleTo(LX_Circle& C, const LX_Point& P);
+void moveCircleTo(LX_Circle& C, const LX_Point& P) noexcept;
 /**
 *   @fn void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 *

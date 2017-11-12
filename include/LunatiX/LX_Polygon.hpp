@@ -74,7 +74,7 @@ class LX_Polygon
 public:
 
     /// Constructor
-    LX_Polygon();
+    LX_Polygon() noexcept;
 
     /**
     *   @fn void LX_Polygon::addPoint(const int x, const int y)
@@ -103,11 +103,11 @@ public:
     void addPoints(Iterator first, Iterator last);
 
     /**
-    *   @fn unsigned long LX_Polygon::numberOfEdges() const
+    *   @fn unsigned long LX_Polygon::numberOfEdges() const noexcept
     *   Get the number of points
     *   @return The number of edges of the polygon
     */
-    unsigned long numberOfEdges() const;
+    unsigned long numberOfEdges() const noexcept;
     /**
     *   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const
     *
@@ -133,7 +133,7 @@ public:
     */
     LX_AABB getEnclosingBox() const;
     /**
-    *   @fn bool LX_Polygon::isConvex() const
+    *   @fn bool LX_Polygon::isConvex() const noexcept
     *
     *   Check the convexity of the polygon
     *
@@ -143,23 +143,23 @@ public:
     *        each time a new point in added using LX_Polygon::addPoint().
     *        The result is stored in an internal variable
     */
-    bool isConvex() const;
+    bool isConvex() const noexcept;
 
     /**
-    *   @fn void LX_Polygon::move(const float vx, const float vy)
+    *   @fn void LX_Polygon::move(const float vx, const float vy) noexcept
     *
     *   Move the polygon to a direction
     *
     *   @param [in] vx The x direction
     *   @param [in] vy The y direction
     */
-    void move(const float vx, const float vy);
+    void move(const float vx, const float vy) noexcept;
     /**
-    *   @fn void LX_Polygon::move(const LX_Vector2D& v)
+    *   @fn void LX_Polygon::move(const LX_Vector2D& v) noexcept
     *   Move the polygon to a direction
     *   @param [in] v The vector that indicates the direction
     */
-    void move(const LX_Vector2D& v);
+    void move(const LX_Vector2D& v) noexcept;
     /**
     *   @fn void LX_Polygon::moveTo(int xpos, int ypos)
     *

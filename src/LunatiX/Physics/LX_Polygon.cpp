@@ -28,17 +28,17 @@ using namespace std;
 
 namespace
 {
-inline float sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+inline float sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
 {
     return static_cast<float>(p.x + q.x);
 }
 
-inline float sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+inline float sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
 {
     return static_cast<float>(p.y + q.y);
 }
 
-inline float cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q)
+inline float cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
 {
     return static_cast<float>(p.x * q.y - p.y * q.x);
 }
@@ -70,7 +70,7 @@ class LX_Polygon_
     LX_Points_ _points;     /* A sequence of LX_Point objects   */
     bool _convex;           /* If the polygon is convex         */
 
-    void convexity_()
+    void convexity_() noexcept
     {
         LX_Vector2D AO;
         LX_Vector2D OB;
@@ -114,7 +114,7 @@ class LX_Polygon_
         _convex = true;
     }
 
-    float area_() const
+    float area_() const noexcept
     {
         float sum = 0.0f;
         const auto pbeg = _points.begin();
@@ -130,7 +130,7 @@ class LX_Polygon_
         return (sum / 2.0f);
     }
 
-    bool calculateCentroid_(LX_Point& p) const
+    bool calculateCentroid_(LX_Point& p) const noexcept
     {
         const float CMULT = 6.0f;
         const auto pbeg = _points.begin();
@@ -172,7 +172,7 @@ public:
             convexity_();
     }
 
-    unsigned long numberOfEdges() const
+    unsigned long numberOfEdges() const noexcept
     {
         return _points.size();
     }
@@ -225,13 +225,13 @@ public:
     }
 
 
-    bool isConvex() const
+    bool isConvex() const noexcept
     {
         return _convex;
     }
 
 
-    void move(const float vx, const float vy)
+    void move(const float vx, const float vy) noexcept
     {
         const int nvx = static_cast<int>(vx);
         const int nvy = static_cast<int>(vy);
@@ -267,7 +267,7 @@ public:
 
 /* Polygon, public functions */
 
-LX_Polygon::LX_Polygon() : _polyimpl(new LX_Polygon_()) {}
+LX_Polygon::LX_Polygon() noexcept: _polyimpl(new LX_Polygon_()) {}
 LX_Polygon::~LX_Polygon() {}
 
 
@@ -283,7 +283,7 @@ void LX_Polygon::addPoint(const LX_Point& p)
 }
 
 
-unsigned long LX_Polygon::numberOfEdges() const
+unsigned long LX_Polygon::numberOfEdges() const noexcept
 {
     return _polyimpl->numberOfEdges();
 }
@@ -300,19 +300,19 @@ LX_AABB LX_Polygon::getEnclosingBox() const
 }
 
 
-bool LX_Polygon::isConvex() const
+bool LX_Polygon::isConvex() const noexcept
 {
     return _polyimpl->isConvex();
 }
 
 
-void LX_Polygon::move(const float vx, const float vy)
+void LX_Polygon::move(const float vx, const float vy) noexcept
 {
     _polyimpl->move(vx,vy);
 }
 
 
-void LX_Polygon::move(const LX_Vector2D& v)
+void LX_Polygon::move(const LX_Vector2D& v) noexcept
 {
     _polyimpl->move(v.vx,v.vy);
 }
