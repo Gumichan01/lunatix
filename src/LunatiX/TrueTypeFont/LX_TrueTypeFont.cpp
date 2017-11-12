@@ -39,7 +39,7 @@ namespace
 *   Calculation of the resulting surface size of the text
 *   in order to display using the font given in parameter
 */
-inline int sizeOfText(TTF_Font *ttf, const std::string& text, int& w, int& h)
+inline int sizeOfText(TTF_Font *ttf, const std::string& text, int& w, int& h) noexcept
 {
     return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
 }
@@ -85,7 +85,7 @@ struct LX_Font_
     *   the real type (TTF_Font*) in the public interface.
     *   So, the static cast was necessary to get the real type
     */
-    inline TTF_Font * createInternalFont_(int size) const
+    inline TTF_Font * createInternalFont_(int size) const noexcept
     {
         return static_cast<TTF_Font*>(_font_buffer->getFontFromBuffer_(size));
     }
@@ -99,7 +99,7 @@ struct LX_Font_
     *
     */
     SDL_Surface * drawText_(LX_TTF_TypeText type, const UTF8string& text,
-                            unsigned int sz = 0, LX_Colour bg = {0,0,0,0})
+                            unsigned int sz = 0, LX_Colour bg = {0,0,0,0}) noexcept
     {
         TTF_Font *ttf;
         SDL_Surface *loaded = nullptr;
@@ -158,7 +158,7 @@ LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned 
 *
 *   @return A control value, 0 on success, -1 on failure
 */
-int LX_Font::sizeOfText_(std::string text, int& w, int& h) const
+int LX_Font::sizeOfText_(std::string text, int& w, int& h) const noexcept
 {
     return sizeOfText_(text, _fimpl->_font_size, w, h);
 }
@@ -174,7 +174,7 @@ int LX_Font::sizeOfText_(std::string text, int& w, int& h) const
 *
 *   @return A control value, 0 on success, -1 on failure
 */
-int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& w, int& h) const
+int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& w, int& h) const noexcept
 {
     int sz;
     TTF_Font *ttf = _fimpl->createInternalFont_(static_cast<int>(size));
@@ -200,10 +200,9 @@ int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& 
 *
 *   @return A control value, 0 on success, -1 on failure
 */
-int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const
+int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const noexcept
 {
-    const std::string s = text.utf8_str();
-    return sizeOfText_(s, size, w, h);
+    return sizeOfText_(text, size, w, h);
 }
 
 /*
@@ -216,9 +215,9 @@ int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size,
-                                      LX_Win::LX_Window& w)
+                                      LX_Win::LX_Window& w) noexcept
 {
-    return drawSolidText_(UTF8string(text), size, w);
+    return drawSolidText_(text, size, w);
 }
 
 /*
@@ -231,7 +230,7 @@ SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
-                                      LX_Win::LX_Window& w)
+                                      LX_Win::LX_Window& w) noexcept
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_TypeText::LX_TTF_SOLID, text, size);
 
@@ -255,9 +254,9 @@ SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int size,
-                                       const LX_Colour& bg, LX_Win::LX_Window& w)
+                                       const LX_Colour& bg, LX_Win::LX_Window& w) noexcept
 {
-    return drawShadedText_(UTF8string(text), size, bg, w);
+    return drawShadedText_(text, size, bg, w);
 }
 
 /*
@@ -271,7 +270,7 @@ SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int siz
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size,
-                                       const LX_Colour& bg, LX_Win::LX_Window& w)
+                                       const LX_Colour& bg, LX_Win::LX_Window& w) noexcept
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_TypeText::LX_TTF_SHADED, text, size, bg);
 
@@ -294,9 +293,9 @@ SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int size,
-                                        LX_Win::LX_Window& w)
+                                        LX_Win::LX_Window& w) noexcept
 {
-    return drawBlendedText_(UTF8string(text), size, w);
+    return drawBlendedText_(text, size, w);
 }
 
 /*
@@ -309,7 +308,7 @@ SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int si
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const UTF8string& text, unsigned int size,
-                                        LX_Win::LX_Window& w)
+                                        LX_Win::LX_Window& w) noexcept
 {
     SDL_Surface *s = _fimpl->drawText_(LX_TTF_TypeText::LX_TTF_BLENDED, text, size);
 
@@ -323,13 +322,13 @@ SDL_Texture * LX_Font::drawBlendedText_(const UTF8string& text, unsigned int siz
 }
 
 
-const LX_Colour LX_Font::getColour_()
+const LX_Colour LX_Font::getColour_() const noexcept
 {
     return _fimpl->_font_colour;
 }
 
 
-unsigned int LX_Font::getSize_()
+unsigned int LX_Font::getSize_() const noexcept
 {
     return _fimpl->_font_size;
 }
@@ -338,18 +337,18 @@ unsigned int LX_Font::getSize_()
 /*
 *   This function sets the new colour of texts.
 */
-void LX_Font::setColour_(const LX_Colour& colour)
+void LX_Font::setColour_(const LX_Colour& colour) noexcept
 {
     _fimpl->_font_colour = colour;
 }
 
-UTF8string LX_Font::getName(bool with_path)
+UTF8string LX_Font::getName(bool with_path) const noexcept
 {
     using namespace LX_FileSystem;
     return with_path ? _fimpl->_font_str : basename(_fimpl->_font_str);
 }
 
-LX_Colour LX_Font::getColour()
+LX_Colour LX_Font::getColour() const noexcept
 {
     return _fimpl->_font_colour;
 }
