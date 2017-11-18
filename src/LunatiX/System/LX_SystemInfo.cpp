@@ -30,17 +30,17 @@ const UTF8string getPlatform()
     return UTF8string(SDL_GetPlatform());
 }
 
-int getCPUCacheLineSize()
+int getCPUCacheLineSize() noexcept
 {
     return SDL_GetCPUCacheLineSize();
 }
 
-int getCPUCount()
+int getCPUCount() noexcept
 {
     return SDL_GetCPUCount();
 }
 
-int getSystemRAM()
+int getSystemRAM() noexcept
 {
     return SDL_GetSystemRAM();
 }

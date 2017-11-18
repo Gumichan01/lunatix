@@ -60,26 +60,26 @@ using LX_DisplayMode = std::vector<SDL_DisplayMode>;
 const UTF8string getPlatform();
 
 /**
-*   @fn int getCPUCacheLineSize()
+*   @fn int getCPUCacheLineSize() noexcept
 *   Get the L1 cache line size of the CPU
 *   @return The L1 cache size of the CPU, in kilobytes (KB)
 */
-int getCPUCacheLineSize();
+int getCPUCacheLineSize() noexcept;
 /**
-*   @fn int getCPUCount()
+*   @fn int getCPUCount() noexcept
 *   Get the CPU cores
 *   @return The number of logical cores of the CPU
 *
 *   @note On CPU that include hyperthreading technology,
 *   the value may be higher than the number of physical cores
 */
-int getCPUCount();
+int getCPUCount() noexcept;
 /**
-*   @fn int getSystemRAM()
+*   @fn int getSystemRAM() noexcept
 *   Get the amount of Random Access Memory (RAM) in the system
 *   @return The amount of RAM configured in the system in Megabytes (MB)
 */
-int getSystemRAM();
+int getSystemRAM() noexcept;
 
 /**
 *   @fn void getAvailableDisplayModes(LX_DisplayMode& modes)
