@@ -28,6 +28,7 @@ using namespace std;
 
 namespace
 {
+
 inline float sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
 {
     return static_cast<float>(p.x + q.x);
@@ -42,6 +43,7 @@ inline float cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q
 {
     return static_cast<float>(p.x * q.y - p.y * q.x);
 }
+
 }
 
 
