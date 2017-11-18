@@ -46,8 +46,8 @@ class LX_Chunk : public virtual LX_Sound
     std::unique_ptr<LX_Chunk_> _chkimpl;
 
     LX_Chunk(Mix_Chunk& chunk);
-    LX_Chunk(LX_Chunk& m);
-    LX_Chunk& operator =(LX_Chunk& m);
+    LX_Chunk(LX_Chunk& m) = delete;
+    LX_Chunk& operator =(LX_Chunk& m) = delete;
 
 public:
 

@@ -181,8 +181,8 @@ class LX_Window
 
     std::unique_ptr<LX_Window_> _wimpl;
 
-    LX_Window(LX_Window& w);
-    LX_Window& operator =(LX_Window& w);
+    LX_Window(LX_Window& w) = delete;
+    LX_Window& operator =(LX_Window& w) = delete;
 
     void * getRenderingSys() const noexcept;
 

@@ -38,8 +38,8 @@ class LX_Gamepad
 {
     std::unique_ptr<LX_Gamepad_> _gpimpl;
 
-    LX_Gamepad(const LX_Gamepad& g);
-    LX_Gamepad& operator =(const LX_Gamepad&);
+    LX_Gamepad(const LX_Gamepad& g) = delete;
+    LX_Gamepad& operator =(const LX_Gamepad&) = delete;
 
 public:
 

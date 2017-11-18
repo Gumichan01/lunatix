@@ -40,8 +40,8 @@ class LX_WindowManager
     LX_WindowManager();
     ~LX_WindowManager();
 
-    LX_WindowManager(LX_WindowManager&);
-    LX_WindowManager& operator =(LX_WindowManager&);
+    LX_WindowManager(LX_WindowManager&) = delete;
+    LX_WindowManager& operator =(LX_WindowManager&) = delete;
 
 public:
 

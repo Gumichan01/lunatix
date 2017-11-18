@@ -75,8 +75,8 @@ class LX_Music : public virtual LX_Sound
 {
     std::unique_ptr<LX_Music_> _mimpl;
 
-    LX_Music(LX_Music& m);
-    LX_Music& operator =(LX_Music& m);
+    LX_Music(LX_Music& m) = delete;
+    LX_Music& operator =(LX_Music& m) = delete;
 
 public:
 

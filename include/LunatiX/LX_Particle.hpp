@@ -53,8 +53,8 @@ class LX_Particle
 {
     std::unique_ptr<LX_Particle_> _pimpl;
 
-    LX_Particle(LX_Particle& p);
-    LX_Particle& operator =(LX_Particle& p);
+    LX_Particle(LX_Particle& p) = delete;
+    LX_Particle& operator =(LX_Particle& p) = delete;
 
 
 public:

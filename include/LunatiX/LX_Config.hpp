@@ -40,8 +40,8 @@ namespace LX_Config
 class LX_Configuration
 {
     LX_Configuration() noexcept;
-    LX_Configuration(LX_Configuration& c);
-    LX_Configuration& operator =(LX_Configuration& c);
+    LX_Configuration(LX_Configuration& c) = delete;
+    LX_Configuration& operator =(LX_Configuration& c) = delete;
     ~LX_Configuration();
 
     void loadFlags_() noexcept;

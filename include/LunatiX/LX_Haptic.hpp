@@ -64,8 +64,8 @@ class LX_Haptic
     friend class LX_Device::LX_Gamepad;
     std::unique_ptr<LX_Haptic_> _himpl;
 
-    LX_Haptic(LX_Haptic& h);
-    LX_Haptic& operator =(LX_Haptic& h);
+    LX_Haptic(LX_Haptic& h) = delete;
+    LX_Haptic& operator =(LX_Haptic& h) = delete;
 
     // Used by LX_Gamepad
     explicit LX_Haptic(LX_Joystick *joy) noexcept;
@@ -183,8 +183,8 @@ public:
 */
 class LX_MouseHaptic: public LX_Haptic
 {
-    LX_MouseHaptic(LX_Haptic& h);
-    LX_MouseHaptic& operator =(LX_MouseHaptic& h);
+    LX_MouseHaptic(LX_Haptic& h) = delete;
+    LX_MouseHaptic& operator =(LX_MouseHaptic& h) = delete;
 
 public:
 

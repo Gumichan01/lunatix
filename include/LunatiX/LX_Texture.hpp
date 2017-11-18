@@ -95,8 +95,8 @@ class LX_Texture
 {
     friend class LX_BufferedImage;
 
-    LX_Texture(LX_Texture&);
-    LX_Texture& operator =(LX_Texture&);
+    LX_Texture(LX_Texture&) = delete;
+    LX_Texture& operator =(LX_Texture&) = delete;
 
 protected:
 

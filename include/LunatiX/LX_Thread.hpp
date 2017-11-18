@@ -57,8 +57,8 @@ class LX_Thread
 {
     std::unique_ptr<LX_Thread_> _th;
 
-    LX_Thread(const LX_Thread& m);
-    LX_Thread& operator=(const LX_Thread& m);
+    LX_Thread(const LX_Thread& m) = delete;
+    LX_Thread& operator=(const LX_Thread& m) = delete;
 
 public:
 

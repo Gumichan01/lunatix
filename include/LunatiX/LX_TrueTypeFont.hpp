@@ -79,8 +79,8 @@ class LX_Font
     friend class LX_Graphics::LX_BlendedTextTexture;
     std::unique_ptr<LX_Font_> _fimpl;
 
-    LX_Font(LX_Font& f);
-    LX_Font& operator =(LX_Font& f);
+    LX_Font(LX_Font& f) = delete;
+    LX_Font& operator =(LX_Font& f) = delete;
 
     /* Private functions */
     int sizeOfText_(std::string text, int& w, int& h) const noexcept;

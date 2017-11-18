@@ -68,8 +68,8 @@ class LX_Polygon
 {
     std::unique_ptr<LX_Polygon_> _polyimpl;
 
-    LX_Polygon(LX_Polygon& p);
-    LX_Polygon& operator =(LX_Polygon& p);
+    LX_Polygon(LX_Polygon& p) = delete;
+    LX_Polygon& operator =(LX_Polygon& p) = delete;
 
 public:
 

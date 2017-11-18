@@ -43,8 +43,8 @@ class LX_ParticleSystem
 {
     std::unique_ptr<LX_ParticleSystem_> _psimpl;
 
-    LX_ParticleSystem(LX_ParticleSystem& ps);
-    LX_ParticleSystem& operator =(LX_ParticleSystem& ps);
+    LX_ParticleSystem(LX_ParticleSystem& ps) = delete;
+    LX_ParticleSystem& operator =(LX_ParticleSystem& ps) = delete;
 
 public:
 

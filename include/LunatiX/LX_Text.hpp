@@ -47,6 +47,10 @@ namespace LX_Text
 */
 class LX_RedrawCallback
 {
+
+    LX_RedrawCallback(LX_RedrawCallback&) = delete;
+    LX_RedrawCallback& operator =(LX_RedrawCallback&) = delete;
+
 public:
 
     LX_RedrawCallback() noexcept = default;
@@ -146,9 +150,9 @@ class LX_TextInput
 {
     std::unique_ptr<LX_TextInput_> _timpl;
 
-    LX_TextInput(LX_TextInput& t);
-    LX_TextInput(LX_TextInput&& t);
-    LX_TextInput& operator =(LX_TextInput t);
+    LX_TextInput(LX_TextInput& t) = delete;
+    LX_TextInput(LX_TextInput&& t) = delete;
+    LX_TextInput& operator =(LX_TextInput t) = delete;
 
 public:
 

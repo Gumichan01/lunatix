@@ -45,7 +45,7 @@ class LX_Mutex
     std::unique_ptr<LX_Mutex_> _mu;
 
     LX_Mutex(const LX_Mutex& m);
-    LX_Mutex& operator =(const LX_Mutex& m);
+    LX_Mutex& operator =(const LX_Mutex& m) = delete;
 
 public:
 
@@ -74,8 +74,8 @@ class LX_Cond
 {
     std::unique_ptr<LX_Cond_> _cond;
 
-    LX_Cond(const LX_Cond& c);
-    LX_Cond& operator =(const LX_Cond& c);
+    LX_Cond(const LX_Cond& c) = delete;
+    LX_Cond& operator =(const LX_Cond& c) = delete;
 
 public:
 

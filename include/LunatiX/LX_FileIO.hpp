@@ -89,8 +89,8 @@ public:
 */
 class LX_AbstractFile
 {
-    LX_AbstractFile(const LX_AbstractFile&);
-    LX_AbstractFile& operator =(const LX_AbstractFile&);
+    LX_AbstractFile(const LX_AbstractFile&) = delete;
+    LX_AbstractFile& operator =(const LX_AbstractFile&) = delete;
 
 public:
 
@@ -196,8 +196,8 @@ class LX_File: public virtual LX_AbstractFile
 {
     std::unique_ptr<LX_File_> _fimpl;
 
-    LX_File(LX_File& f);
-    LX_File& operator =(LX_File& f);
+    LX_File(LX_File& f) = delete;
+    LX_File& operator =(LX_File& f) = delete;
 
 public:
 
@@ -282,8 +282,8 @@ class LX_TmpFile: public virtual LX_AbstractFile
 {
     std::unique_ptr<LX_TmpFile_> _timpl;
 
-    LX_TmpFile(const LX_TmpFile&);
-    LX_TmpFile& operator =(const LX_TmpFile&);
+    LX_TmpFile(const LX_TmpFile&) = delete;
+    LX_TmpFile& operator =(const LX_TmpFile&) = delete;
     virtual void close() noexcept;
 
 public:
