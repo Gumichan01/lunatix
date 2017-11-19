@@ -31,6 +31,7 @@ LUNATIX_EXE=lunatix-demo
 # Path to directories
 SRC_PATH=./src/
 LUNATIX_PATH=./src/LunatiX/
+OPENGL_DIR=/usr/include/
 LIBRARIES_I_DIR=./include/
 LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
 UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
@@ -282,7 +283,7 @@ test-input.o: $(TEST_PATH)test-input.o
 # General rule
 %.o: %.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) -I $(OPENGL_DIR) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
 
 # Dependencies
 depend: $(SRC_FILES) $(SRC_TEST_FILES)
