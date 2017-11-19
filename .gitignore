@@ -27,5 +27,6 @@ html/
 *Doxyfile*
 lib/
 include/SDL2/
+include/GL/
 *.cppcheck
 Makefile.depend
