@@ -1,6 +1,6 @@
 
 #include <LunatiX/Lunatix.hpp>
-#include <GL/glu.h>
+#include <GL/gl.h>
 
 #include <sstream>
 #include <vector>
