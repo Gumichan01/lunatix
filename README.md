@@ -102,10 +102,7 @@ You can build it using the CodeBlocks project provided in the directory (*lunati
 
 ### On Linux ###
 
-The Makefile uses Clang in order to compile the library.
-So you must ensure that Clang (version 3.4 at least) is installed to compile the code.
-If not, you can compile the source code using g++ (4.7.1+), but you will have to
-modify the Makefile to do it.
+You must you have at least GNU GCC 4.8.1 to compile the code.
 
 In order to build the library, you need to get these following libraries
 installed.
