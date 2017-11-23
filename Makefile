@@ -20,7 +20,7 @@ DEBUG=yes
 # Variables
 #
 
-CC=clang++
+CC=g++
 
 # Path to the test files
 TEST_PATH=./test/
