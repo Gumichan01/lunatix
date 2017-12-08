@@ -405,19 +405,19 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) noexcept
     switch(_surface->format->format)
     {
         case LX_PIXELFORMAT_RGBA8888:
-            npixel = (v << 24) |(v << 16) | (v << 8) | a;
+            npixel = (v << 24) | (v << 16) | (v << 8) | a;
         break;
 
         case LX_PIXELFORMAT_ARGB8888:
-            npixel = a |(v << 16) | (v << 8) | v;
+            npixel = a | (v << 16) | (v << 8) | v;
         break;
 
         case LX_PIXELFORMAT_BGRA8888:
-            npixel = (v << 24) |(v << 16) | (v << 8) | a;
+            npixel = (v << 24) | (v << 16) | (v << 8) | a;
         break;
 
         case LX_PIXELFORMAT_ABGR8888:
-            npixel = a |(v << 16) | (v << 8) | v;
+            npixel = a | (v << 16) | (v << 8) | v;
         break;
 
         default:
@@ -459,19 +459,19 @@ Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 
     switch(_surface->format->format)
     {
         case LX_PIXELFORMAT_RGBA8888:
-            npixel = (r << 24) |(g << 16) | (b << 8) | a;
+            npixel = (r << 24) | (g << 16) | (b << 8) | a;
         break;
 
         case LX_PIXELFORMAT_ARGB8888:
-            npixel = a |(r << 16) | (g << 8) | b;
+            npixel = a | (r << 16) | (g << 8) | b;
         break;
 
         case LX_PIXELFORMAT_BGRA8888:
-            npixel = (b << 24) |(g << 16) | (r << 8) | a;
+            npixel = (b << 24) | (g << 16) | (r << 8) | a;
         break;
 
         case LX_PIXELFORMAT_ABGR8888:
-            npixel = a |(b << 16) | (g << 8) | r;
+            npixel = a | (b << 16) | (g << 8) | r;
         break;
 
         default:
@@ -505,13 +505,10 @@ void LX_BufferedImage::convertGrayscale() noexcept
 {
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
 
-    for (int y = 0; y < _surface->h; ++y)
+    for (int i = 0; i < _surface->w * _surface->h; ++i)
     {
-        for (int x = 0; x < _surface->w; ++x)
-        {
-            Uint32 pixel = pixels[y * _surface->w + x];
-            pixels[y * _surface->w + x] = _convertGrayscalePixel(pixel);
-        }
+        Uint32 pixel = pixels[i];
+        pixels[i] = _convertGrayscalePixel(pixel);
     }
 }
 
@@ -519,13 +516,10 @@ void LX_BufferedImage::convertNegative() noexcept
 {
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
 
-    for (int y = 0; y < _surface->h; ++y)
+    for (int i = 0; i < _surface->w * _surface->h; ++i)
     {
-        for (int x = 0; x < _surface->w; ++x)
-        {
-            Uint32 pixel = pixels[y * _surface->w + x];
-            pixels[y * _surface->w + x] = _convertNegativePixel(pixel);
-        }
+        Uint32 pixel = pixels[i];
+        pixels[i] = _convertNegativePixel(pixel);
     }
 }
 
