@@ -389,6 +389,34 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
             r = pixel & 0xFF;
         break;
 
+        case LX_PIXELFORMAT_RGBA4444:
+            r = (pixel >> 12) & 0xFF;
+            g = (pixel >> 8) & 0xFF;
+            b = (pixel >> 4) & 0xFF;
+            a = pixel & 0xFF;
+        break;
+
+        case LX_PIXELFORMAT_ARGB4444:
+            a = (pixel >> 12) & 0xFF;
+            r = (pixel >> 8) & 0xFF;
+            g = (pixel >> 4) & 0xFF;
+            b = pixel & 0xFF;
+        break;
+
+        case LX_PIXELFORMAT_BGRA4444:
+            b = (pixel >> 12) & 0xFF;
+            g = (pixel >> 8) & 0xFF;
+            r = (pixel >> 4) & 0xFF;
+            a = pixel & 0xFF;
+        break;
+
+        case LX_PIXELFORMAT_ABGR4444:
+            a = (pixel >> 12) & 0xFF;
+            b = (pixel >> 8) & 0xFF;
+            g = (pixel >> 4) & 0xFF;
+            r = pixel & 0xFF;
+        break;
+
         default:
             return false;
         break;
@@ -409,7 +437,7 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) noexcept
         break;
 
         case LX_PIXELFORMAT_ARGB8888:
-            npixel = a | (v << 16) | (v << 8) | v;
+            npixel = (a << 24) | (v << 16) | (v << 8) | v;
         break;
 
         case LX_PIXELFORMAT_BGRA8888:
@@ -417,7 +445,23 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) noexcept
         break;
 
         case LX_PIXELFORMAT_ABGR8888:
-            npixel = a | (v << 16) | (v << 8) | v;
+            npixel = (a << 24) | (v << 16) | (v << 8) | v;
+        break;
+
+        case LX_PIXELFORMAT_RGBA4444:
+            npixel = (v << 12) | (v << 8) | (v << 4) | a;
+        break;
+
+        case LX_PIXELFORMAT_ARGB4444:
+            npixel = (a << 12) | (v << 8) | (v << 4) | v;
+        break;
+
+        case LX_PIXELFORMAT_BGRA4444:
+            npixel = (v << 12) | (v << 8) | (v << 4) | a;
+        break;
+
+        case LX_PIXELFORMAT_ABGR4444:
+            npixel = (a << 12) | (v << 8) | (v << 4) | v;
         break;
 
         default:
@@ -463,7 +507,7 @@ Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 
         break;
 
         case LX_PIXELFORMAT_ARGB8888:
-            npixel = a | (r << 16) | (g << 8) | b;
+            npixel = (a << 24) | (r << 16) | (g << 8) | b;
         break;
 
         case LX_PIXELFORMAT_BGRA8888:
@@ -471,7 +515,23 @@ Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 
         break;
 
         case LX_PIXELFORMAT_ABGR8888:
-            npixel = a | (b << 16) | (g << 8) | r;
+            npixel = (a << 24) | (b << 16) | (g << 8) | r;
+        break;
+
+        case LX_PIXELFORMAT_RGBA4444:
+            npixel = (r << 12) | (g << 8) | (b << 4) | a;
+        break;
+
+        case LX_PIXELFORMAT_ARGB4444:
+            npixel = (a << 12) | (r << 8) | (g << 4) | b;
+        break;
+
+        case LX_PIXELFORMAT_BGRA4444:
+            npixel = (b << 12) | (g << 8) | (r << 4) | a;
+        break;
+
+        case LX_PIXELFORMAT_ABGR4444:
+            npixel = (a << 12) | (b << 8) | (g << 4) | r;
         break;
 
         default:
