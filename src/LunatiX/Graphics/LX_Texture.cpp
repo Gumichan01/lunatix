@@ -563,9 +563,10 @@ Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel) noexcept
 
 void LX_BufferedImage::convertGrayscale() noexcept
 {
+    const long NBPIXELS = _surface->w * _surface->h;
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
 
-    for (int i = 0; i < _surface->w * _surface->h; ++i)
+    for (long i = 0; i < NBPIXELS; ++i)
     {
         Uint32 pixel = pixels[i];
         pixels[i] = _convertGrayscalePixel(pixel);
@@ -574,9 +575,10 @@ void LX_BufferedImage::convertGrayscale() noexcept
 
 void LX_BufferedImage::convertNegative() noexcept
 {
+    const long NBPIXELS = _surface->w * _surface->h;
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
 
-    for (int i = 0; i < _surface->w * _surface->h; ++i)
+    for (long i = 0; i < NBPIXELS; ++i)
     {
         Uint32 pixel = pixels[i];
         pixels[i] = _convertNegativePixel(pixel);
