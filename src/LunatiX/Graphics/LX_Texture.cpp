@@ -417,6 +417,18 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
         r = pixel & 0xFF;
         break;
 
+    case LX_PIXELFORMAT_RGB24:
+        r = (pixel >> 16) & 0xFF;
+        g = (pixel >> 8) & 0xFF;
+        b = pixel & 0xFF;
+        break;
+
+    case LX_PIXELFORMAT_BGR24:
+        b = (pixel >> 12) & 0xFF;
+        g = (pixel >> 8) & 0xFF;
+        r = (pixel >> 4) & 0xFF;
+        break;
+
     default:
         return false;
         break;
@@ -462,6 +474,11 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) const noexcept
 
     case LX_PIXELFORMAT_ABGR4444:
         npixel = (a << 12) | (v << 8) | (v << 4) | v;
+        break;
+
+    case LX_PIXELFORMAT_BGR24:
+    case LX_PIXELFORMAT_RGB24:
+        npixel = (v << 16) | (v << 8) | v;
         break;
 
     default:
@@ -532,6 +549,14 @@ Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 
 
     case LX_PIXELFORMAT_ABGR4444:
         npixel = (a << 12) | (b << 8) | (g << 4) | r;
+        break;
+
+    case LX_PIXELFORMAT_BGR24:
+        npixel = (b << 16) | (g << 8) | r;
+        break;
+
+    case LX_PIXELFORMAT_RGB24:
+        npixel = (r << 16) | (g << 8) | b;
         break;
 
     default:
