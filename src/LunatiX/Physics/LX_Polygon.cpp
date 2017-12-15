@@ -79,14 +79,14 @@ class LX_Polygon_
 
         float sign = 0.0f;
         bool haveSign = false;
-        const auto pbeg =_points.begin();
-        const auto pend =_points.end();
+        const auto pbeg = _points.begin();
+        const auto pend = _points.end();
 
         for(auto it = pbeg; it != pend; ++it)
         {
-            AO = LX_Vector2D(*it,(it == pbeg ? *(pend - 1) : *(it - 1)));
-            OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)),*it);
-            int cross_product = static_cast<int>(vector_product(AO,OB));
+            AO = LX_Vector2D(*it, (it == pbeg ? *(pend - 1) : *(it - 1)));
+            OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)), *it);
+            int cross_product = static_cast<int>(vector_product(AO, OB));
 
             if(!haveSign)
             {
@@ -125,9 +125,9 @@ class LX_Polygon_
         for(auto it = pbeg; it != pend; ++it)
         {
             if(it == pend - 1)
-                sum += cross_(*it,*pbeg);
+                sum += cross_(*it, *pbeg);
             else
-                sum += cross_(*it,*(it + 1));
+                sum += cross_(*it, *(it + 1));
         }
         return (sum / 2.0f);
     }
@@ -147,18 +147,18 @@ class LX_Polygon_
         {
             if(it == pend - 1)
             {
-                sum_x += sumx_(*it,*pbeg) * cross_(*it,*pbeg);
-                sum_y += sumy_(*it,*pbeg) * cross_(*it,*pbeg);
+                sum_x += sumx_(*it, *pbeg) * cross_(*it, *pbeg);
+                sum_y += sumy_(*it, *pbeg) * cross_(*it, *pbeg);
             }
             else
             {
-                sum_x += sumx_(*it,*(it + 1)) * cross_(*it,*(it + 1));
-                sum_y += sumy_(*it,*(it + 1)) * cross_(*it,*(it + 1));
+                sum_x += sumx_(*it, *(it + 1)) * cross_(*it, *(it + 1));
+                sum_y += sumy_(*it, *(it + 1)) * cross_(*it, *(it + 1));
             }
         }
 
-        p.x = static_cast<int>(sum_x/p6_area);
-        p.y = static_cast<int>(sum_y/p6_area);
+        p.x = static_cast<int>(sum_x / p6_area);
+        p.y = static_cast<int>(sum_y / p6_area);
         return true;
     }
 
@@ -201,9 +201,9 @@ public:
             ym = p0.y;
         }
 
-        for(auto it = _points.begin(); it != _points.end(); ++it)
+        for(const LX_Point& p: _points)
         {
-            LX_Physics::LX_Point p(*it);
+            //LX_Physics::LX_Point p(*it);
 
             // X
             if(p.x < aabb.x)
