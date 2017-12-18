@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <map>
 
-#define N 4
+#define N 64
 
 using namespace std;
 using namespace LX_FileIO;
@@ -138,7 +138,7 @@ void test_read(void)
 
     LX_Log::log("%s is opened. Its size is %d byte(s)", f.getFilename(), f.size());
     LX_Log::log("Try to read the file");
-    read_data = f.read(buf,sizeof(char), static_cast<size_t>(f.size()));
+    read_data = f.read(buf, sizeof(char), static_cast<size_t>(f.size()));
 
     if(read_data == 0)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1 ");
