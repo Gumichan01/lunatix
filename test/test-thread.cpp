@@ -532,26 +532,20 @@ void test_channel2()
     LX_Log::log("   == TEST channel #2 ==   ");
 
     const unsigned long tid = LX_Multithreading::getID();
-    LX_Multithreading::LX_Thread s1(sender2,"sender2 #1",nullptr);
-    LX_Multithreading::LX_Thread s2(sender2,"sender2 #2",nullptr);
+    LX_Multithreading::LX_Thread s(sender2,"sender2 #1",nullptr);
     LX_Multithreading::LX_Thread forwd(fwd,"fwd",nullptr);
     LX_Multithreading::LX_Thread r(receiver2,"receiver2 #1",nullptr);
-    LX_Multithreading::LX_Thread r2(receiver2,"receiver2 #2",nullptr);
 
     LX_Log::log("(#%x): Start the communication between the threads",tid);
-    s1.start();
-    s2.start();
-    forwd.start();
     r.start();
-    r2.start();
+    forwd.start();
+    s.start();
 
     LX_Log::log("(#%x): ...",tid);
 
-    s1.join();
-    s2.join();
-    forwd.join();
     r.join();
-    r2.join();
+    forwd.join();
+    s.join();
 
     LX_Log::log("(#%x): Done",tid);
     LX_Log::log("      == END TEST ==    ");
@@ -565,7 +559,7 @@ void vsender(LX_Multithreading::LX_Data data)
 
     LX_Log::log("(#%x): running",LX_Multithreading::getID());
     std::vector<int> v = *((std::vector<int> *) data);
-    c2.vsend(v);
+    c2.vsend(v.begin(), v.end());
 }
 
 void vreceiver(LX_Multithreading::LX_Data data)
