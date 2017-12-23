@@ -76,6 +76,7 @@ public:
     */
     bool recv(T& data);
     /**
+    *   @deprecated This function will be removed in v0.13.0
     *   @fn bool vsend(const std::vector<T>& vec)
     *
     *   Send multiple data into the channel
@@ -85,6 +86,19 @@ public:
     *   @return TRUE on success, FALSE if the channel is closed
     */
     bool vsend(const std::vector<T>& vec);
+
+    /**
+    *   @fn template <typename Iterator> bool vsend(Iterator begin, Iterator end)
+    *
+    *   Send multiple data into the channel
+    *
+    *   @param [in] begin iterator to the first element
+    *   @param [in] end iterator to the last element
+    *
+    *   @return TRUE on success, FALSE if the channel is closed
+    */
+    template <typename Iterator>
+    bool vsend(Iterator begin, Iterator end);
     /**
     *   @fn bool vrecv(std::vector<T>& vec, const unsigned long nb)
     *

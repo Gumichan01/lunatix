@@ -89,6 +89,31 @@ bool LX_Channel<T>::vsend(const std::vector<T>& vec)
 }
 
 template <typename T>
+template <typename Iterator>
+bool LX_Channel<T>::vsend(Iterator begin, Iterator end)
+{
+    _mutex.lock();
+
+    if(_closed)
+    {
+        _mutex.unlock();
+        return false;
+    }
+
+    for(auto it = begin; it != end; ++it)
+    {
+        _qdata.push(*it);
+    }
+
+    if(_nbwaiters > 0)
+        _cond.signal();
+
+    _mutex.unlock();
+
+    return true;
+}
+
+template <typename T>
 bool LX_Channel<T>::vrecv(std::vector<T>& vec, const unsigned long nb)
 {
     _mutex.lock();
