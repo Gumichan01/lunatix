@@ -18,7 +18,7 @@
 
 namespace LX_Event
 {
-
+/// @todo events - make enumerations
 // Button state (keyboard, mouse, gamepad)
 const uint8_t LX_BUTTON_PRESSED  = 1;
 const uint8_t LX_BUTTON_RELEASED = 0;

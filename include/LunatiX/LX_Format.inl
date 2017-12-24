@@ -10,6 +10,7 @@
 *   luxon.jean.pierre@gmail.com
 */
 
+/// @todo format - enumerations
 const uint32_t LX_PIXELFORMAT_UNKNOWN = SDL_PIXELFORMAT_UNKNOWN;
 const uint32_t LX_PIXELFORMAT_INDEX1LSB = SDL_PIXELFORMAT_INDEX1LSB;
 const uint32_t LX_PIXELFORMAT_INDEX1MSB = SDL_PIXELFORMAT_INDEX1MSB;
