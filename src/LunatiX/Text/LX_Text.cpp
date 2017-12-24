@@ -70,12 +70,12 @@ class LX_TextInput_
             {
                 UTF8string s("Cannot set " + _u8text + "in the clipboard" + SDL_GetError());
                 LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                                 "Cannot set %s in the clipboard.",s.utf8_str());
+                                 "Cannot set %s in the clipboard.", s.utf8_str());
             }
             else
             {
                 LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                                 "Copy %s into the clipboard.",_u8text.utf8_str());
+                                 "Copy %s into the clipboard.", _u8text.utf8_str());
             }
         }
     }
@@ -112,7 +112,7 @@ class LX_TextInput_
                                  "Invalid UTF-8 string from the clipboard.");
             }
 
-            LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Paste %s",s);
+            LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "Paste %s", s);
         }
     }
 
@@ -179,7 +179,7 @@ class LX_TextInput_
 
         if(old_cursor != _cursor)
             LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
-                             "Input - _cursor at %d",_cursor);
+                             "Input - _cursor at %d", _cursor);
     }
 
     void textInput_(LX_Event::LX_EventHandler& ev) noexcept
@@ -191,7 +191,7 @@ class LX_TextInput_
 
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                          "New input : '%s' of length (in bytes) %d",
-                         tev.text.c_str(),tev.text.length());
+                         tev.text.c_str(), tev.text.length());
 
         try
         {
@@ -209,11 +209,11 @@ class LX_TextInput_
 
     void textEdit_(LX_Event::LX_EventHandler& ev) noexcept
     {
-        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Edit the text");
-        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"New edition: %s",
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "Edit the text");
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "New edition: %s",
                          ev.getTextEvent().text.c_str());
 
-        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"start: %d; len: %d",
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "start: %d; len: %d",
                          ev.getTextEvent().start, ev.getTextEvent().length);
         _u8comp = ev.getTextEvent().text.c_str();
 
@@ -237,7 +237,7 @@ class LX_TextInput_
         else
         {
             UTF8string rtmp = _u8text.utf8_substr(_cursor);
-            UTF8string ltmp = _u8text.utf8_substr(0,_cursor);
+            UTF8string ltmp = _u8text.utf8_substr(0, _cursor);
             _u8text = ltmp + ntext + rtmp;
         }
 
@@ -275,7 +275,7 @@ class LX_TextInput_
             else
             {
                 UTF8string rtmp = _u8text.utf8_substr(_cursor);
-                UTF8string ltmp = _u8text.utf8_substr(0,_cursor-1);
+                UTF8string ltmp = _u8text.utf8_substr(0, _cursor-1);
                 _u8text = ltmp + rtmp;
             }
 
@@ -298,7 +298,7 @@ class LX_TextInput_
         if(_cursor > 0 && _cursor < u8len)
         {
             UTF8string rtmp = _u8text.utf8_substr(_cursor + 1);
-            UTF8string ltmp = _u8text.utf8_substr(0,_cursor);
+            UTF8string ltmp = _u8text.utf8_substr(0, _cursor);
             _u8text = ltmp + rtmp;
             _draw = true;
         }
@@ -312,9 +312,9 @@ class LX_TextInput_
 public:
 
     LX_TextInput_() noexcept
-        : _cursor(0),_done(false),_draw(false), _composing(false)
+        : _cursor(0), _done(false), _draw(false), _composing(false)
     {
-        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"Start the input.");
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "Start the input.");
         SDL_StartTextInput();
     }
 
@@ -360,7 +360,7 @@ public:
 
     ~LX_TextInput_()
     {
-        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,"End of input.");
+        LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "End of input.");
         SDL_StopTextInput();
     }
 };

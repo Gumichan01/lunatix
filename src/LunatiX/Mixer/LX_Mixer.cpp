@@ -52,7 +52,7 @@ LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_UNKNOWN_EFFECT),
     rev_stereo(false), loops(0) {}
 
 LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) noexcept:
-    type(st.type),pan_left(st.pan_left), pan_right(st.pan_right),
+    type(st.type), pan_left(st.pan_left), pan_right(st.pan_right),
     pos_angle(st.pos_angle), pos_distance(st.pos_distance),
     rev_stereo(st.rev_stereo), loops(st.loops) {}
 
@@ -182,7 +182,7 @@ int channelAvailable(int tag) noexcept
 bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops) noexcept
 {
     if(groupCount(tag) == 0)
-        return chunk.play(-1,loops);
+        return chunk.play(-1, loops);
 
     int chan = channelAvailable(tag);
 
@@ -267,7 +267,7 @@ void haltChannel(int channel) noexcept
 
 void expireChannel(int channel, int ticks) noexcept
 {
-    Mix_ExpireChannel(channel,ticks);
+    Mix_ExpireChannel(channel, ticks);
 }
 
 
@@ -291,7 +291,7 @@ void fadeInMusic(LX_Music& music, int ms) noexcept
 
 void fadeInMusicPos(LX_Music& music, int ms, int pos) noexcept
 {
-    music.fadeInPos(ms,pos);
+    music.fadeInPos(ms, pos);
 }
 
 

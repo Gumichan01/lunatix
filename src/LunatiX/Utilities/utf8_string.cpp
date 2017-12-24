@@ -307,7 +307,7 @@ std::string UTF8string::utf8_at(const size_t index) const
         throw std::out_of_range("index value greater than the size of the string");
 
     std::string s;
-    utf8_at_(index,s);
+    utf8_at_(index, s);
     return s;
 }
 
@@ -315,7 +315,7 @@ std::string UTF8string::utf8_at(const size_t index) const
 std::string UTF8string::operator [](const size_t index) const noexcept
 {
     std::string s;
-    utf8_at_(index,s);
+    utf8_at_(index, s);
     return s;
 }
 
@@ -331,7 +331,7 @@ void UTF8string::utf8_pop()
 }
 
 
-UTF8string UTF8string::utf8_substr(size_t pos,size_t len) const
+UTF8string UTF8string::utf8_substr(size_t pos, size_t len) const
 {
     if(pos > utf8length)
         return std::string();
@@ -358,7 +358,7 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
     if(str.utf8length == 0)
         return npos;
 
-    std::map<std::string,size_t> u8map;
+    std::map<std::string, size_t> u8map;
     const size_t n = str.utf8_length();
     size_t index = pos;
 
@@ -423,7 +423,7 @@ UTF8string& UTF8string::utf8_reverse()
 {
     UTF8iterator it = utf8_end();
     UTF8string rev;
-    utf8data = (utf8_reverse_aux_(it, utf8_iterator_(), rev)).utf8data;
+    utf8data = utf8_reverse_aux_(it, utf8_iterator_(), rev).utf8data;
     return *this;
 }
 

@@ -49,7 +49,7 @@ public:
     {
         if(_lifetime > 0)
         {
-            LX_Physics::moveRect(_box,_velocity);
+            LX_Physics::moveRect(_box, _velocity);
             _lifetime--;
         }
     }
@@ -75,17 +75,17 @@ public:
 /* LX_Particle — public interface */
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
-    : _pimpl(new LX_Particle_(sp,b,LX_Physics::LX_Vector2D(0.0f,0.0f))) {}
+    : _pimpl(new LX_Particle_(sp, b, LX_Physics::LX_Vector2D(0.0f, 0.0f))) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-                         const float vx , const float vy) noexcept
-    : _pimpl(new LX_Particle_(sp,b,LX_Physics::LX_Vector2D(vx,vy))) {}
+                         const float vx, const float vy) noexcept
+    : _pimpl(new LX_Particle_(sp, b, LX_Physics::LX_Vector2D(vx, vy))) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
                          const LX_Physics::LX_Vector2D& v) noexcept
-    : _pimpl(new LX_Particle_(sp,b,v)) {}
+    : _pimpl(new LX_Particle_(sp, b, v)) {}
 
 
 LX_Particle::~LX_Particle()

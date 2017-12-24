@@ -117,8 +117,7 @@ std::size_t LX_WindowManager::nbWindows() noexcept
 
 void LX_WindowManager::updateWindows() noexcept
 {
-    std::for_each(_windows.begin(), _windows.end(),
-    [](LX_Window *w) noexcept
+    std::for_each(_windows.begin(), _windows.end(), [](LX_Window *w) noexcept
     {
         w->update();
     });
@@ -127,8 +126,7 @@ void LX_WindowManager::updateWindows() noexcept
 
 void LX_WindowManager::clearWindows() noexcept
 {
-    std::for_each(_windows.begin(), _windows.end(),
-    [](LX_Window *w) noexcept
+    std::for_each(_windows.begin(), _windows.end(), [](LX_Window *w) noexcept
     {
         w->clearWindow();
     });

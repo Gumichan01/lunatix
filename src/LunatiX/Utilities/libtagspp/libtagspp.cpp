@@ -113,7 +113,7 @@ Properties::Properties()
 /* Tag */
 
 // (Tag) Friend function
-void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
+void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread)
 {
     Aux *aux = (Aux *) ctx->aux;
 
@@ -157,7 +157,7 @@ void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
 }
 
 
-Tag::Tag(): _imdata({0,0}) {}
+Tag::Tag(): _imdata() {}
 
 
 bool Tag::readTag(const std::string& filename)

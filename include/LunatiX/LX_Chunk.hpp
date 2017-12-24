@@ -105,7 +105,7 @@ public:
     */
     bool play(int channel) noexcept;
     /**
-    *   @fn bool play(int channel,int loops) noexcept
+    *   @fn bool play(int channel, int loops) noexcept
     *
     *   Play the current sample
     *
@@ -121,7 +121,7 @@ public:
     *
     *   @note 2 — If loops == -1 → loop forever
     */
-    bool play(int channel,int loops) noexcept;
+    bool play(int channel, int loops) noexcept;
     /**
     *   @fn bool play(int channel, int loops, int ticks) noexcept
     *

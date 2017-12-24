@@ -36,8 +36,8 @@ int main(int argc, char** argv)
 
     LX_Win::LX_Window w(info);
     w.setIcon(s);
-    LX_Graphics::LX_Sprite sprite(s,w);
-    LX_Log::log("Display %s",sprite.getFileName().utf8_str());
+    LX_Graphics::LX_Sprite sprite(s, w);
+    LX_Log::log("Display %s", sprite.getFileName().utf8_str());
 
     while(go)
     {

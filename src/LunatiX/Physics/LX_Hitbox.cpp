@@ -29,7 +29,7 @@ LX_Point::LX_Point(int xpos, int ypos) noexcept: x(xpos), y(ypos) {}
 
 LX_Point::LX_Point(const LX_Point& p) noexcept: x(p.x), y(p.y) {}
 
-LX_Circle::LX_Circle() noexcept: LX_Circle(LX_Point(0,0),0) {}
+LX_Circle::LX_Circle() noexcept: LX_Circle(LX_Point(0,0), 0) {}
 
 LX_Circle::LX_Circle(const LX_Point& p, unsigned int rad) noexcept
     : center(p), radius(rad), square_radius(rad*rad) {}

@@ -71,7 +71,7 @@ class Tag
 
     Tag(Tag&);
     Tag& operator =(const Tag&);
-    friend void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f);
+    friend void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread);
 
 public:
 

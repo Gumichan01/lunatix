@@ -39,17 +39,17 @@ UTF8string gamepadToString(LX_GamepadInfo& info)
 {
     std::ostringstream stream;
     char guid[GUID_SIZE] = {'\0'};
-    SDL_JoystickGetGUIDString(info.uid,guid,GUID_SIZE);
+    SDL_JoystickGetGUIDString(info.uid, guid, GUID_SIZE);
 
-    stream << std::endl << " ==== Gamepad Information ==== " << std::endl
-           << "Gamepad - ID : " << info.id << std::endl
-           << "Gamepad - UID : " << guid << std::endl
-           << "Gamepad - Name : " << info.name << std::endl
-           << "Gamepad - Is haptic : " << info.is_haptic << std::endl
-           << "Gamepad - Number of Axes : " << info.nb_axis << std::endl
-           << "Gamepad - Number of Balls : " << info.nb_balls << std::endl
-           << "Gamepad - Number of Buttons : " << info.nb_buttons << std::endl
-           << "Gamepad - Number of Hats : " << info.nb_hats << std::endl;
+    stream << std::endl << " ==== Gamepad Information ==== "
+           << "\nGamepad - ID : "                << info.id
+           << "\nGamepad - UID : "               << guid
+           << "\nGamepad - Name : "              << info.name
+           << "\nGamepad - Is haptic : "         << info.is_haptic
+           << "\nGamepad - Number of Axes : "    << info.nb_axis
+           << "\nGamepad - Number of Balls : "   << info.nb_balls
+           << "\nGamepad - Number of Buttons : " << info.nb_buttons
+           << "\nGamepad - Number of Hats : "    << info.nb_hats << '\n';
 
     return UTF8string(stream.str());
 }

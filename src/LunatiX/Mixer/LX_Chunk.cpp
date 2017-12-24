@@ -63,17 +63,17 @@ public:
 
     bool play(int channel) noexcept
     {
-        return play(channel,LX_MIXER_NOLOOP);
+        return play(channel, LX_MIXER_NOLOOP);
     }
 
-    bool play(int channel,int loops) noexcept
+    bool play(int channel, int loops) noexcept
     {
         return Mix_PlayChannel(channel,_chunk,loops) == 0;
     }
 
-    bool play(int channel,int loops,int ticks) noexcept
+    bool play(int channel, int loops, int ticks) noexcept
     {
-        return Mix_PlayChannelTimed(channel,_chunk,loops,ticks) == 0;
+        return Mix_PlayChannelTimed(channel, _chunk, loops, ticks) == 0;
     }
 
     ~LX_Chunk_()
@@ -100,17 +100,17 @@ bool LX_Chunk::play() noexcept
 
 bool LX_Chunk::play(int channel) noexcept
 {
-    return _chkimpl->play(channel,LX_MIXER_NOLOOP);
+    return _chkimpl->play(channel, LX_MIXER_NOLOOP);
 }
 
-bool LX_Chunk::play(int channel,int loops) noexcept
+bool LX_Chunk::play(int channel, int loops) noexcept
 {
-    return _chkimpl->play(channel,loops);
+    return _chkimpl->play(channel, loops);
 }
 
-bool LX_Chunk::play(int channel,int loops,int ticks) noexcept
+bool LX_Chunk::play(int channel, int loops, int ticks) noexcept
 {
-    return _chkimpl->play(channel,loops,ticks);
+    return _chkimpl->play(channel, loops, ticks);
 }
 
 LX_Chunk::~LX_Chunk()

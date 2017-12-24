@@ -203,8 +203,6 @@ public:
 
         for(const LX_Point& p: _points)
         {
-            //LX_Physics::LX_Point p(*it);
-
             // X
             if(p.x < aabb.x)
                 aabb.x = p.x;
@@ -240,13 +238,13 @@ public:
 
         std::for_each(_points.begin(), _points.end(), [nvx, nvy] (LX_Point& p)
         {
-            movePoint(p,nvx,nvy);
+            movePoint(p, nvx, nvy);
         });
     }
 
     void moveTo(int xpos, int ypos)
     {
-        const LX_Point p(xpos,ypos);
+        const LX_Point p(xpos, ypos);
         LX_Vector2D v;
         LX_Point centroid;
 
@@ -255,12 +253,12 @@ public:
             // self-intersecting polygon. The movement is less accurate
             const LX_AABB box = getEnclosingBox();
             const LX_Point q(box.x + box.w/2, box.y + box.h/2);
-            v = LX_Vector2D(q,p);
+            v = LX_Vector2D(q, p);
         }
         else // Normal case.→ accurate movement
-            v = LX_Vector2D(centroid,p);
+            v = LX_Vector2D(centroid, p);
 
-        move(v.vx,v.vy);
+        move(v.vx, v.vy);
     }
 
     ~LX_Polygon_() = default;
@@ -275,7 +273,7 @@ LX_Polygon::~LX_Polygon() {}
 
 void LX_Polygon::addPoint(const int x, const int y)
 {
-    _polyimpl->addPoint(LX_Point(x,y));
+    _polyimpl->addPoint(LX_Point(x, y));
 }
 
 
@@ -310,19 +308,19 @@ bool LX_Polygon::isConvex() const noexcept
 
 void LX_Polygon::move(const float vx, const float vy) noexcept
 {
-    _polyimpl->move(vx,vy);
+    _polyimpl->move(vx, vy);
 }
 
 
 void LX_Polygon::move(const LX_Vector2D& v) noexcept
 {
-    _polyimpl->move(v.vx,v.vy);
+    _polyimpl->move(v.vx, v.vy);
 }
 
 
 void LX_Polygon::moveTo(int xpos, int ypos)
 {
-    _polyimpl->moveTo(xpos,ypos);
+    _polyimpl->moveTo(xpos, ypos);
 }
 
 void LX_Polygon::moveTo(const LX_Point& p)

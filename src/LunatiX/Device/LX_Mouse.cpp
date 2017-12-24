@@ -33,7 +33,7 @@ class LX_Mouse_
 public:
 
     LX_Mouse_(SDL_Surface * surface, int hot_x, int hot_y) noexcept
-        : _cursor(SDL_CreateColorCursor(surface,hot_x,hot_y)) {}
+        : _cursor(SDL_CreateColorCursor(surface, hot_x, hot_y)) {}
 
     bool isOpen() const noexcept
     {
@@ -53,8 +53,8 @@ public:
 
 
 LX_Mouse::LX_Mouse(const LX_Graphics::LX_BufferedImage& surface,
-                   int hot_x, int hot_y) noexcept:
-                   _mimpl(new LX_Mouse_(surface._surface,hot_x,hot_y)) {}
+                   int hot_x, int hot_y) noexcept
+    : _mimpl(new LX_Mouse_(surface._surface, hot_x, hot_y)) {}
 
 bool LX_Mouse::isOpen() const noexcept
 {

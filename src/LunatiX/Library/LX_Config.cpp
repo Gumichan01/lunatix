@@ -56,12 +56,12 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
     const char SHARP = '#';
     const std::string ONE("1");
     const std::string EQUAL("=");
-    const std::regex VIDEO_REG("video=[[:digit:]]+",std::regex::extended);
-    const std::regex VSYNC_REG("vsync=[[:digit:]]+",std::regex::extended);
-    const std::regex TTF_REG("ttf=[[:digit:]]+",std::regex::extended);
-    const std::regex AUDIO_REG("audio=[[:digit:]]+",std::regex::extended);
-    const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+",std::regex::extended);
-    const std::regex OPENGL_REG("opengl=[[:digit:]]+",std::regex::extended);
+    const std::regex VIDEO_REG("video=[[:digit:]]+", std::regex::extended);
+    const std::regex VSYNC_REG("vsync=[[:digit:]]+", std::regex::extended);
+    const std::regex TTF_REG("ttf=[[:digit:]]+", std::regex::extended);
+    const std::regex AUDIO_REG("audio=[[:digit:]]+", std::regex::extended);
+    const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+", std::regex::extended);
+    const std::regex OPENGL_REG("opengl=[[:digit:]]+", std::regex::extended);
 
     int cpt = 0;
     std::string line;
