@@ -28,7 +28,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 ## Examples ##
 
 
-    #include <LunatiX/LX_LunatiX.hpp>
+    #include <LunatiX/Lunatix.hpp>
 
     using namespace LX_Event;
 
