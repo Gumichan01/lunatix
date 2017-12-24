@@ -84,34 +84,44 @@ namespace LX_Mixer
 
 class LX_Music;
 class LX_Chunk;
-
+/*
 const int LX_UNKNOWN_EFFECT = 0x00000;
 const int LX_PANNING = 0x00001;
 const int LX_POSITION = 0x00010;
 const int LX_DISTANCE = 0x00100;
 const int LX_STEREO = 0x01000;
+*/
 
+/**
+*   @enum LX_MixerEffectType
+*   @brief Type of effect
+*/
+enum class LX_MixerEffectType {LX_UNKNOWN_EFFECT, LX_PANNING, LX_POSITION, LX_DISTANCE, LX_STEREO};
 
+/**
+*   @struct LX_MixerEffect
+*   @brief Mixer effect
+*/
 struct LX_MixerEffect
 {
-    int type;
+    LX_MixerEffectType type;    /**< Effect type    */
 
     // Panning
-    uint8_t pan_left;
-    uint8_t pan_right;
+    uint8_t pan_left;           /**< Left panning   */
+    uint8_t pan_right;          /**< Right panning  */
 
     // Position
-    int16_t pos_angle;
-    uint8_t  pos_distance;
+    int16_t pos_angle;          /**< Angle (position)       */
+    uint8_t pos_distance;       /**< Distance (position)    */
 
     // Distance
-    uint8_t distance;
+    uint8_t distance;           /**< Distance       */
 
     // Stereo
-    bool rev_stereo;
+    bool rev_stereo;            /**< Reverse stereo */
 
     // Loop
-    int loops;
+    int loops;                  /**< Loops          */
 
     LX_MixerEffect() noexcept;
     LX_MixerEffect(const LX_MixerEffect& st) noexcept;
