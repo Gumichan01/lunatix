@@ -89,7 +89,7 @@ int getCPUCount() noexcept;
 int getSystemRAM() noexcept;
 
 /**
-*   @fn void getAvailableDisplayModes(LX_DisplayMode& modes)
+*   @fn void getAvailableDisplayModes(LX_DisplayModes& modes)
 *
 *   Get the list of available display modes on the screen
 *
@@ -98,7 +98,7 @@ int getSystemRAM() noexcept;
 *   @note LX_DisplayMode is a struture that contains every available
 *        display modes. In order to get these following modes, you should
 *        use iterators.
-*   @note Example:
+*   @note Example
 *
 *       LX_DisplayMode modes;
 *       getAvailableDisplayModes(modes);
@@ -108,7 +108,7 @@ int getSystemRAM() noexcept;
 *       {
 *           LX_Log::log("%d × %d @ ~%d Hz", mode->w, mode->h, mode->refresh_rate);
 *       }
-*   :
+*
 *.
 */
 void getAvailableDisplayModes(LX_DisplayModes& modes);
