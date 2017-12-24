@@ -42,15 +42,15 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 			<Add option="-lSDL2_ttf -lSDL2_mixer" />
 			<Add option="-lOpenGL32 -lglu32" />
-			<Add library="lib\win32\libSDL2main.a" />
-			<Add library="lib\win32\libSDL2.a" />
-			<Add library="lib\win32\libSDL2.dll.a" />
-			<Add library="lib\win32\libSDL2_image.a" />
-			<Add library="lib\win32\libSDL2_image.dll.a" />
-			<Add library="lib\win32\libSDL2_mixer.a" />
-			<Add library="lib\win32\libSDL2_mixer.dll.a" />
-			<Add library="lib\win32\libSDL2_ttf.a" />
-			<Add library="lib\win32\libSDL2_ttf.dll.a" />
+			<Add library="lib/win32/libSDL2main.a" />
+			<Add library="lib/win32/libSDL2.a" />
+			<Add library="lib/win32/libSDL2.dll.a" />
+			<Add library="lib/win32/libSDL2_image.a" />
+			<Add library="lib/win32/libSDL2_image.dll.a" />
+			<Add library="lib/win32/libSDL2_mixer.a" />
+			<Add library="lib/win32/libSDL2_mixer.dll.a" />
+			<Add library="lib/win32/libSDL2_ttf.a" />
+			<Add library="lib/win32/libSDL2_ttf.dll.a" />
 			<Add directory="lib/win32" />
 		</Linker>
 		<Unit filename="include/LunatiX/LX_AABB.hpp" />
@@ -101,7 +101,6 @@
 		<Unit filename="include/LunatiX/LX_Version.hpp" />
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
-		<Unit filename="include/LunatiX/LX_WindowManager.tpp" />
 		<Unit filename="include/LunatiX/Lunatix.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
