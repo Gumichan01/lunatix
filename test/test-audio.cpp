@@ -233,7 +233,7 @@ void test_music()
         LX_Log::log("Format - %s", tag.properties().format.c_str());
         LX_Log::log("================================");
     }
-    catch(LX_Mixer::LX_SoundException& se)
+    catch(LX_Mixer::LX_MixerException& se)
     {
         LX_Log::log("mp3 file not loaded");
         LX_Log::log("%s", se.what());
@@ -298,7 +298,7 @@ void test_music()
         music.fadeOut(1000);
         LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,"DANGER ZONE OUT");
     }
-    catch(LX_Mixer::LX_SoundException& se)
+    catch(LX_Mixer::LX_MixerException& se)
     {
         LX_Log::log("FAILURE - not loaded");
         LX_Log::log("%s", se.what());
@@ -312,7 +312,7 @@ void test_music()
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music launched, it should not");
         delete mus;
     }
-    catch(LX_Mixer::LX_SoundException& se)
+    catch(LX_Mixer::LX_MixerException& se)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - music: not launched as expected");
         LX_Log::log("%s", se.what());
@@ -366,7 +366,7 @@ void test_chunk()
         LX_Timer::delay(9000);
         delete chunk;
     }
-    catch(LX_Mixer::LX_SoundException& se)
+    catch(LX_Mixer::LX_MixerException& se)
     {
         LX_Log::log("FAILURE - not loaded");
         LX_Log::log("%s", se.what());
@@ -380,7 +380,7 @@ void test_chunk()
         LX_Log::log("FAILURE - loaded, but it should not be");
         delete chunk;
     }
-    catch(LX_Mixer::LX_SoundException& se)
+    catch(LX_Mixer::LX_MixerException& se)
     {
         LX_Log::log("SUCCESS - not loaded, as expected");
         LX_Log::log("%s", se.what());

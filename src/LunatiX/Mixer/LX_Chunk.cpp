@@ -39,7 +39,7 @@ class LX_Chunk_
         _chunk = Mix_LoadWAV(filename.c_str());
 
         if(_chunk == nullptr)
-            throw LX_SoundException("LX_Chunk — Cannot load " + filename);
+            throw LX_MixerException("LX_Chunk — Cannot load " + filename);
     }
 
 public:

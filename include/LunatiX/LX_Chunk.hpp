@@ -63,7 +63,7 @@ public:
     *        The sample was optimized for this format. But it can work with
     *        an other file type.
     *
-    *   @exception LX_SoundException On failure
+    *   @exception LX_MixerException On failure
     */
     explicit LX_Chunk(const std::string filename);
 
@@ -79,7 +79,7 @@ public:
     *          The sample was optimized for this format. But it can work with
     *          an other file type.
     *
-    *   @exception LX_SoundException On failure
+    *   @exception LX_MixerException On failure
     */
     explicit LX_Chunk(const UTF8string filename);
 

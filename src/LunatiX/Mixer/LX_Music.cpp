@@ -69,7 +69,7 @@ class LX_Music_
         _music = Mix_LoadMUS(filename.c_str());
 
         if(_music == nullptr)
-            throw LX_SoundException("LX_Music — Cannot load " + filename);
+            throw LX_MixerException("LX_Music — Cannot load " + filename);
     }
 
 public:
