@@ -19,7 +19,7 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long long uvlong;
 
-#include <LunatiX/utils/libtagspp/tags.h>
+#include "tags.h"
 
 enum
 {

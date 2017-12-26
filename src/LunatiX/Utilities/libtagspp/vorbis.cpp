@@ -6,8 +6,7 @@
 
 #define leuint(d) (uint)(((uchar*)(d))[3]<<24 | ((uchar*)(d))[2]<<16 | ((uchar*)(d))[1]<<8 | ((uchar*)(d))[0]<<0)
 
-void
-cbvorbiscomment(Tagctx *ctx, char *k, char *v)
+void cbvorbiscomment(Tagctx *ctx, char *k, char *v)
 {
     if(*v == 0)
         return;
@@ -33,8 +32,9 @@ cbvorbiscomment(Tagctx *ctx, char *k, char *v)
         txtcb(ctx, Tgenre, v);
 }
 
-int
-tagvorbis(Tagctx *ctx)
+int tagvorbis(Tagctx *ctx);
+
+int tagvorbis(Tagctx *ctx)
 {
     char *v;
     uchar *d, h[4];

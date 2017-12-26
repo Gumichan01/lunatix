@@ -14,8 +14,7 @@
 #define synchsafe(d) (uint)(((d)[0]&127)<<21 | ((d)[1]&127)<<14 | ((d)[2]&127)<<7 | ((d)[3]&127)<<0)
 #define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
 
-static int
-v2cb(Tagctx *ctx, char *k, char *v)
+static int v2cb(Tagctx *ctx, char *k, char *v)
 {
     k++;
     if(strcmp(k, "AL") == 0 || strcmp(k, "ALB") == 0)
@@ -77,8 +76,7 @@ v2cb(Tagctx *ctx, char *k, char *v)
     return 1;
 }
 
-static int
-rva2(Tagctx *ctx, char *tag, int sz)
+static int rva2(Tagctx *ctx, char *tag, int sz)
 {
     uchar *b, *end;
 
@@ -132,8 +130,7 @@ rva2(Tagctx *ctx, char *tag, int sz)
     return 0;
 }
 
-static int
-resync(uchar *b, int sz)
+static int resync(uchar *b, int sz)
 {
     int i;
 
@@ -150,8 +147,7 @@ resync(uchar *b, int sz)
     return sz;
 }
 
-static int
-unsyncread(void *buf, int *sz)
+static int unsyncread(void *buf, int *sz)
 {
     int i;
     uchar *b;
@@ -173,8 +169,7 @@ unsyncread(void *buf, int *sz)
     return i;
 }
 
-static int
-nontext(Tagctx *ctx, uchar *d, int tsz, int unsync)
+static int nontext(Tagctx *ctx, uchar *d, int tsz, int unsync)
 {
     int n, offset;
     char *b, *tag;
@@ -245,8 +240,7 @@ nontext(Tagctx *ctx, uchar *d, int tsz, int unsync)
     return ctx->seek(ctx, tsz-n, 1) < 0 ? -1 : 0;
 }
 
-static int
-text(Tagctx *ctx, uchar *d, int tsz, int unsync)
+static int text(Tagctx *ctx, uchar *d, int tsz, int unsync)
 {
     char *b, *tag;
 
@@ -271,26 +265,30 @@ text(Tagctx *ctx, uchar *d, int tsz, int unsync)
 
     switch(tag[0])
     {
-    case 0: /* iso-8859-1 */
+    case 0:     /* iso-8859-1 */
         if(iso88591toutf8((uchar*)ctx->buf, ctx->bufsz, (uchar*)b, tsz) > 0)
             v2cb(ctx, (char*)d, ctx->buf);
         break;
-    case 1: /* utf-16 */
+
+    case 1:     /* utf-16 */
     case 2:
         if(utf16to8((uchar*)ctx->buf, ctx->bufsz, (uchar*)b, tsz) > 0)
             v2cb(ctx, (char*)d, ctx->buf);
         break;
-    case 3: /* utf-8 */
+    case 3:     /* utf-8 */
         if(*b)
             v2cb(ctx, (char*)d, b);
+        break;
+
+    default:    /* Unknown format */
+        return -1;
         break;
     }
 
     return 0;
 }
 
-static int
-isid3(uchar *d)
+static int isid3(uchar *d)
 {
     /* "ID3" version[2] flags[1] size[4] */
     return (
@@ -341,8 +339,7 @@ static const int samplesframe[4][4] =
     {0, 1152, 1152, 384},
 };
 
-static void
-getduration(Tagctx *ctx, int offset)
+static void getduration(Tagctx *ctx, int offset)
 {
     uvlong n, framelen, samplespf;
     uchar *b;
@@ -403,8 +400,9 @@ getduration(Tagctx *ctx, int offset)
         ctx->duration = (ctx->seek(ctx, 0, 2) - offset)/(ctx->bitrate / 1000) * 8;
 }
 
-int
-tagid3v2(Tagctx *ctx)
+int tagid3v2(Tagctx *ctx);
+
+int tagid3v2(Tagctx *ctx)
 {
     int sz, exsz, framesz;
     int ver, unsync, offset;
