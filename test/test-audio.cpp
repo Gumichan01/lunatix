@@ -401,9 +401,9 @@ void test_effects()
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"combine effects in a group");
         LX_Mixer::allocateChannels(255);
-        LX_Mixer::groupChannels(1,32, 64);
+        LX_Mixer::groupChannels(1, 32, 64);
         LX_Mixer::LX_MixerEffect effect;
-        effect.type = LX_Mixer::LX_PANNING | LX_Mixer::LX_STEREO | LX_Mixer::LX_DISTANCE;
+        effect.type = {true, false, true, true};
         effect.pan_left  = 1;
         effect.pan_right = 254;
         effect.distance = 32;
