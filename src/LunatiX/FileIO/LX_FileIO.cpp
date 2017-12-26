@@ -128,7 +128,7 @@ public:
 
         if(total_read != num)
         {
-            return 0;   /// @todo must return -1
+            return -1;
         }
 
         return total_read;
