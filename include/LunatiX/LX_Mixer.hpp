@@ -84,19 +84,19 @@ namespace LX_Mixer
 
 class LX_Music;
 class LX_Chunk;
-/*
-const int LX_UNKNOWN_EFFECT = 0x00000;
-const int LX_PANNING = 0x00001;
-const int LX_POSITION = 0x00010;
-const int LX_DISTANCE = 0x00100;
-const int LX_STEREO = 0x01000;
-*/
 
 /**
 *   @enum LX_MixerEffectType
 *   @brief Type of effect
 */
-enum class LX_MixerEffectType {LX_UNKNOWN_EFFECT, LX_PANNING, LX_POSITION, LX_DISTANCE, LX_STEREO};
+struct LX_MixerEffectType
+{
+    bool LX_PANNING;        /**< Panning    */
+    bool LX_POSITION;       /**< Position   */
+    bool LX_DISTANCE;       /**< Distance   */
+    bool LX_STEREO;         /**< Stereo     */
+};
+
 
 /**
 *   @struct LX_MixerEffect
