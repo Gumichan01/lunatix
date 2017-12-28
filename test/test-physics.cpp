@@ -1555,8 +1555,6 @@ void test_VectorLambda(void)
     LX_Log::log("Reset v");
 
     v = {3.0f,0.0f};
-    LX_Vector2D vv = {v.vx/vector_norm(v),v.vy/vector_norm(v)};
-
     LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
     LX_Log::log("Normalize v");
 
