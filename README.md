@@ -102,7 +102,7 @@ You can build it using the CodeBlocks project provided in the directory (*lunati
 
 ### On Linux ###
 
-You must you have at least GNU GCC 4.8.1 to compile the code.
+You must have at least GNU GCC 4.8.1 or Clang 3.4 to compile the code.
 
 In order to build the library, you need to get these following libraries
 installed.
