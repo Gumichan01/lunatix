@@ -77,6 +77,7 @@ public:
     bool recv(T& data);
     /**
     *   @deprecated This function will be removed in v0.13.0
+    *
     *   @fn bool vsend(const std::vector<T>& vec)
     *
     *   Send multiple data into the channel

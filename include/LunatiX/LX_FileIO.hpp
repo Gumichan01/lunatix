@@ -179,6 +179,7 @@ public:
     /**
     *   @fn void close()
     *   @deprecated close() is automatically called from the destructor, no need to close it manually
+    *
     *   Close the file
     */
     virtual void close() noexcept = 0;
