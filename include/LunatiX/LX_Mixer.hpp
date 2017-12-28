@@ -86,7 +86,7 @@ class LX_Music;
 class LX_Chunk;
 
 /**
-*   @enum LX_MixerEffectType
+*   @struct LX_MixerEffectType
 *   @brief Type of effect
 */
 struct LX_MixerEffectType
