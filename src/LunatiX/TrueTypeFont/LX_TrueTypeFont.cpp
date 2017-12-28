@@ -202,7 +202,7 @@ int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& 
 */
 int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const noexcept
 {
-    return sizeOfText_(text, size, w, h);
+    return sizeOfText_(std::string(text.utf8_str()), size, w, h);
 }
 
 /*
