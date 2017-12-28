@@ -8,6 +8,8 @@
 namespace
 {
 
+#define EMPTY_IMG {0,0}
+
 struct Aux
 {
     FILE * f;
@@ -17,7 +19,7 @@ struct Aux
 int ctxread(Tagctx *ctx, void *buf, int cnt)
 {
     Aux *aux = static_cast<Aux *>(ctx->aux);
-    return static_cast<int>(fread(buf,1,static_cast<size_t>(cnt),aux->f));
+    return static_cast<int>(fread(buf, 1, static_cast<size_t>(cnt), aux->f));
 }
 
 int ctxseek(Tagctx *ctx, int offset, int whence)
@@ -99,7 +101,7 @@ std::string format(int f)
     return s;
 }
 
-}
+}   // Anonymous namespace
 
 namespace libtagpp
 {
@@ -113,7 +115,7 @@ Properties::Properties()
 /* Tag */
 
 // (Tag) Friend function
-void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
+void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread)
 {
     Aux *aux = (Aux *) ctx->aux;
 
@@ -157,7 +159,7 @@ void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
 }
 
 
-Tag::Tag(): _imdata({0,0}) {}
+Tag::Tag(): _imdata(EMPTY_IMG) {}
 
 
 bool Tag::readTag(const std::string& filename)

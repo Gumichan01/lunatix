@@ -41,6 +41,9 @@ class LX_Mouse
 {
     std::unique_ptr<LX_Mouse_> _mimpl;
 
+    LX_Mouse(const LX_Mouse& m) = delete;
+    LX_Mouse& operator =(const LX_Mouse& m) = delete;
+
 public:
 
     /**

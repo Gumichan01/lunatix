@@ -85,33 +85,43 @@ namespace LX_Mixer
 class LX_Music;
 class LX_Chunk;
 
-const int LX_UNKNOWN_EFFECT = 0x00000;
-const int LX_PANNING = 0x00001;
-const int LX_POSITION = 0x00010;
-const int LX_DISTANCE = 0x00100;
-const int LX_STEREO = 0x01000;
+/**
+*   @enum LX_MixerEffectType
+*   @brief Type of effect
+*/
+struct LX_MixerEffectType
+{
+    bool LX_PANNING;        /**< Panning    */
+    bool LX_POSITION;       /**< Position   */
+    bool LX_DISTANCE;       /**< Distance   */
+    bool LX_STEREO;         /**< Stereo     */
+};
 
 
+/**
+*   @struct LX_MixerEffect
+*   @brief Mixer effect
+*/
 struct LX_MixerEffect
 {
-    int type;
+    LX_MixerEffectType type;    /**< Effect type    */
 
     // Panning
-    uint8_t pan_left;
-    uint8_t pan_right;
+    uint8_t pan_left;           /**< Left panning   */
+    uint8_t pan_right;          /**< Right panning  */
 
     // Position
-    int16_t pos_angle;
-    uint8_t  pos_distance;
+    int16_t pos_angle;          /**< Angle (position)       */
+    uint8_t pos_distance;       /**< Distance (position)    */
 
     // Distance
-    uint8_t distance;
+    uint8_t distance;           /**< Distance       */
 
     // Stereo
-    bool rev_stereo;
+    bool rev_stereo;            /**< Reverse stereo */
 
     // Loop
-    int loops;
+    int loops;                  /**< Loops          */
 
     LX_MixerEffect() noexcept;
     LX_MixerEffect(const LX_MixerEffect& st) noexcept;
@@ -191,7 +201,7 @@ unsigned short getFXVolume() noexcept;
 *   @note   This function creates a new instance of LX_Chunk.
 *          So do not forget to destroy it.
 *
-*   @exception LX_SoundException On failure
+*   @exception LX_MixerException On failure
 */
 LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file);
 

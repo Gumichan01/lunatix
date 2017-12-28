@@ -41,18 +41,28 @@ unsigned short fx_volume = LX_DEFAULT_VOLUME;
 unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
+
+struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE = {false, false, false, false};
+
+bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
+                 const LX_Mixer::LX_MixerEffectType& u)
+{
+    return t.LX_DISTANCE == u.LX_DISTANCE && t.LX_PANNING == u.LX_PANNING
+           && t.LX_POSITION == u.LX_POSITION && t.LX_STEREO == u.LX_STEREO;
+}
+
 }
 
 namespace LX_Mixer
 {
 
 
-LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_UNKNOWN_EFFECT),
+LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_EFFECT_NONE),
     pan_left(0), pan_right(0), pos_angle(0), pos_distance(0),
     rev_stereo(false), loops(0) {}
 
 LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) noexcept:
-    type(st.type),pan_left(st.pan_left), pan_right(st.pan_right),
+    type(st.type), pan_left(st.pan_left), pan_right(st.pan_right),
     pos_angle(st.pos_angle), pos_distance(st.pos_distance),
     rev_stereo(st.rev_stereo), loops(st.loops) {}
 
@@ -182,7 +192,7 @@ int channelAvailable(int tag) noexcept
 bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops) noexcept
 {
     if(groupCount(tag) == 0)
-        return chunk.play(-1,loops);
+        return chunk.play(-1, loops);
 
     int chan = channelAvailable(tag);
 
@@ -217,31 +227,23 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexc
             haltChannel(chan);
     }
 
-    if(effect.type == LX_UNKNOWN_EFFECT)
+    if(effect.type == LX_EFFECT_NONE)
         return chunk.play(chan, effect.loops);
     else
     {
         Mix_UnregisterAllEffects(chan);
 
-        if(effect.type & LX_PANNING)
-        {
+        if(effect.type.LX_PANNING)
             setPanning(chan, effect.pan_left, effect.pan_right);
-        }
 
-        if(effect.type & LX_POSITION)
-        {
+        if(effect.type.LX_POSITION)
             setPosition(chan, effect.pos_angle, effect.pos_distance);
-        }
 
-        if(effect.type & LX_DISTANCE)
-        {
+        if(effect.type.LX_DISTANCE)
             setDistance(chan, effect.distance);
-        }
 
-        if(effect.type & LX_STEREO)
-        {
+        if(effect.type.LX_STEREO)
             reverseStereo(chan, effect.rev_stereo);
-        }
     }
 
     return chunk.play(chan, effect.loops);
@@ -267,7 +269,7 @@ void haltChannel(int channel) noexcept
 
 void expireChannel(int channel, int ticks) noexcept
 {
-    Mix_ExpireChannel(channel,ticks);
+    Mix_ExpireChannel(channel, ticks);
 }
 
 
@@ -291,7 +293,7 @@ void fadeInMusic(LX_Music& music, int ms) noexcept
 
 void fadeInMusicPos(LX_Music& music, int ms, int pos) noexcept
 {
-    music.fadeInPos(ms,pos);
+    music.fadeInPos(ms, pos);
 }
 
 

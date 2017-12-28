@@ -69,7 +69,7 @@ class LX_Music_
         _music = Mix_LoadMUS(filename.c_str());
 
         if(_music == nullptr)
-            throw LX_SoundException("LX_Music — Cannot load " + filename);
+            throw LX_MixerException("LX_Music — Cannot load " + filename);
     }
 
 public:
@@ -88,12 +88,12 @@ public:
 
     void fadeIn(int ms) noexcept
     {
-        Mix_FadeInMusic(_music,LX_MIXER_NOLOOP,ms);
+        Mix_FadeInMusic(_music, LX_MIXER_NOLOOP, ms);
     }
 
-    void fadeInPos(int ms,int pos) noexcept
+    void fadeInPos(int ms, int pos) noexcept
     {
-        Mix_FadeInMusicPos(_music,LX_MIXER_NOLOOP,ms,pos);
+        Mix_FadeInMusicPos(_music, LX_MIXER_NOLOOP, ms, pos);
     }
 
     bool play() noexcept
@@ -103,7 +103,7 @@ public:
 
     bool play(int loops) noexcept
     {
-        return Mix_PlayMusic(_music,loops) == 0;
+        return Mix_PlayMusic(_music, loops) == 0;
     }
 
     const libtagpp::Tag& getInfo() noexcept
@@ -119,17 +119,16 @@ public:
         if(!mtag_set)
         {
             getInfo();
-            _mtag.title = _tag.title();
-            _mtag.artist = _tag.artist();
-            _mtag.album = _tag.album();
-            _mtag.year = _tag.year();
-            _mtag.track = _tag.track();
-            _mtag.genre = _tag.genre();
-            _mtag.format = _tag.properties().format;
+            _mtag.title    = _tag.title();
+            _mtag.artist   = _tag.artist();
+            _mtag.album    = _tag.album();
+            _mtag.year     = _tag.year();
+            _mtag.track    = _tag.track();
+            _mtag.genre    = _tag.genre();
+            _mtag.format   = _tag.properties().format;
             _mtag.duration = _tag.properties().duration;
-            _mtag.img = _loadImage(_filename, _tag.getImageMetaData());
-
-            mtag_set = true;
+            _mtag.img      = _loadImage(_filename, _tag.getImageMetaData());
+            mtag_set       = true;
         }
 
         return _mtag;
@@ -154,9 +153,9 @@ void LX_Music::fadeIn(int ms) noexcept
     _mimpl->fadeIn(ms);
 }
 
-void LX_Music::fadeInPos(int ms,int pos) noexcept
+void LX_Music::fadeInPos(int ms, int pos) noexcept
 {
-    _mimpl->fadeInPos(ms,pos);
+    _mimpl->fadeInPos(ms, pos);
 }
 
 void LX_Music::fadeOut(int ms) noexcept

@@ -87,7 +87,6 @@ public:
     *   @return TRUE on success, FALSE if the channel is closed
     */
     bool vsend(const std::vector<T>& vec);
-
     /**
     *   @fn template <typename Iterator> bool vsend(Iterator begin, Iterator end)
     *
@@ -100,6 +99,7 @@ public:
     */
     template <typename Iterator>
     bool vsend(Iterator begin, Iterator end);
+
     /**
     *   @fn bool vrecv(std::vector<T>& vec, const unsigned long nb)
     *

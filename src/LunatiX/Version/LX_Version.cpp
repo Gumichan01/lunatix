@@ -35,7 +35,7 @@ namespace
 const short LX_MAJOR_VERSION = 0;
 const short LX_MINOR_VERSION = 12;
 const short LX_PATCH_VERSION = 0;
-const char * LX_STATUS       = "alpha";
+const char * LX_STATUS       = "beta";
 const char * LX_COPYRIGHT    = "Copyright © 2017";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 }
@@ -83,47 +83,47 @@ void dependencies() noexcept
     SDL_TTF_VERSION(&ttf_compiled);
     SDL_MIXER_VERSION(&mix_compiled);
 
-    cout << endl << "Dependencies : " << endl << endl;
+    cout << "Dependencies : \n\n";
 
     cout << "Compiled against SDL version "
          << static_cast<int>(sdl_compiled.major) << "."
          << static_cast<int>(sdl_compiled.minor) << "."
-         << static_cast<int>(sdl_compiled.patch) << " ..." << endl;
+         << static_cast<int>(sdl_compiled.patch) << " ...\n\n";
 
     cout << "Linked against SDL version "
          << static_cast<int>(sdl_linked.major) << "."
          << static_cast<int>(sdl_linked.minor) << "."
-         << static_cast<int>(sdl_linked.patch) << " ..." << endl;
+         << static_cast<int>(sdl_linked.patch) << " ...\n\n";
 
-    cout << endl << "Compiled against SDL_Image version "
+    cout << "Compiled against SDL_Image version "
          << static_cast<int>(img_compiled.major) << "."
          << static_cast<int>(img_compiled.minor) << "."
-         << static_cast<int>(img_compiled.patch) << " ..." << endl;
+         << static_cast<int>(img_compiled.patch) << " ...\n\n";
 
     cout << "Linked against SDL_Image version "
          << static_cast<int>(img_linked->major) << "."
          << static_cast<int>(img_linked->minor) << "."
-         << static_cast<int>(img_linked->patch) << " ..." << endl;
+         << static_cast<int>(img_linked->patch) << " ...\n\n";
 
-    cout << endl << "Compiled against SDL_TTF version "
+    cout << "Compiled against SDL_TTF version "
          << static_cast<int>(ttf_compiled.major) << "."
          << static_cast<int>(ttf_compiled.minor) << "."
-         << static_cast<int>(ttf_compiled.patch) << " ..." << endl;
+         << static_cast<int>(ttf_compiled.patch) << " ...\n\n";
 
     cout << "Linked against SDL_TTF version "
          << static_cast<int>(ttf_linked->major) << "."
          << static_cast<int>(ttf_linked->minor) << "."
-         << static_cast<int>(ttf_linked->patch) << " ..." << endl;
+         << static_cast<int>(ttf_linked->patch) << " ...\n\n";
 
-    cout << endl << "Compiled against SDL_Mixer version "
+    cout << "Compiled against SDL_Mixer version "
          << static_cast<int>(mix_compiled.major) << "."
          << static_cast<int>(mix_compiled.minor) << "."
-         << static_cast<int>(mix_compiled.patch) << " ..." << endl;
+         << static_cast<int>(mix_compiled.patch) << " ...\n\n";
 
     cout << "Linked against SDL_Mixer version "
          << static_cast<int>(mix_linked->major) << "."
          << static_cast<int>(mix_linked->minor) << "."
-         << static_cast<int>(mix_linked->patch) << " ..." << endl << endl;;
+         << static_cast<int>(mix_linked->patch) << " ...\n\n";
 }
 
 }

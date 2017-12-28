@@ -65,7 +65,6 @@ public:
     *   @sa close()
     */
     bool open(int index) noexcept;
-
     /**
     *   @fn void close() noexcept
     *   Close the gamepad
@@ -89,7 +88,6 @@ public:
     *          FALSE otherwise
     */
     bool isConnected() const noexcept;
-
     /**
     *   @fn bool isHaptic() const noexcept
     *
@@ -106,7 +104,6 @@ public:
     *   @return The ID of the gamepad, -1 otherwise
     */
     int32_t getID() const noexcept;
-
     /**
     *   @fn LX_Haptic * getHaptic() const noexcept
     *   Get the haptic system of the gamepad
@@ -115,7 +112,6 @@ public:
     *   @note The system can be inexistent, so check the returned value
     */
     LX_Haptic * getHaptic() const noexcept;
-
     /**
     *   @fn const char * getName() const noexcept
     *   Get the name of the Gamepad
@@ -124,7 +120,6 @@ public:
     *   @sa toString
     */
     const char * getName() const noexcept;
-
     /**
     *   @fn bool stat(LX_GamepadInfo& info) const
     *

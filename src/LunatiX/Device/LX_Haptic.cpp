@@ -112,7 +112,7 @@ bool LX_Haptic::rumbleEffectInit() noexcept
 
 void LX_Haptic::rumbleEffectPlay() noexcept
 {
-    rumbleEffectPlay(1,100);
+    rumbleEffectPlay(1, 100);
 }
 
 void LX_Haptic::rumbleEffectPlay(float strength, uint32_t length) noexcept
@@ -122,28 +122,28 @@ void LX_Haptic::rumbleEffectPlay(float strength, uint32_t length) noexcept
     else if(strength > 1.0f)
         strength = 1.0f;
 
-    SDL_HapticRumblePlay(_hcimpl->_haptic,strength,length);
+    SDL_HapticRumblePlay(_hcimpl->_haptic, strength, length);
 }
 
 
 bool LX_Haptic::effectSupported(LX_HapticEffect& effect) const noexcept
 {
-    return SDL_HapticEffectSupported(_hcimpl->_haptic,&effect) == SDL_TRUE;
+    return SDL_HapticEffectSupported(_hcimpl->_haptic, &effect) == SDL_TRUE;
 }
 
 int LX_Haptic::newEffect(LX_HapticEffect& effect) noexcept
 {
-    return SDL_HapticNewEffect(_hcimpl->_haptic,&effect);
+    return SDL_HapticNewEffect(_hcimpl->_haptic, &effect);
 }
 
 void LX_Haptic::runEffect(int effect_id, uint32_t iterations) noexcept
 {
-    SDL_HapticRunEffect(_hcimpl->_haptic,effect_id,iterations);
+    SDL_HapticRunEffect(_hcimpl->_haptic, effect_id, iterations);
 }
 
 void LX_Haptic::stopEffect(int effect_id) noexcept
 {
-    SDL_HapticStopEffect(_hcimpl->_haptic,effect_id);
+    SDL_HapticStopEffect(_hcimpl->_haptic, effect_id);
 }
 
 

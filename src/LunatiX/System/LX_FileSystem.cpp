@@ -84,7 +84,7 @@ UTF8string getWorkingDirectory()
 
 UTF8string getPreferencesDirectory(const std::string& org, const std::string& app)
 {
-    char *base_path = SDL_GetPrefPath(org.c_str(),app.c_str());
+    char *base_path = SDL_GetPrefPath(org.c_str(), app.c_str());
     UTF8string path(base_path == nullptr ? "": base_path);
 
     if(base_path != nullptr)
@@ -140,12 +140,12 @@ UTF8string basename(const UTF8string& path)
     if(*it == sep)
     {
         if(end_sep)
-            return npath.utf8_substr(spos,u8len-spos - 1);
+            return npath.utf8_substr(spos, u8len-spos - 1);
         else
-            return npath.utf8_substr(spos,u8len);
+            return npath.utf8_substr(spos, u8len);
     }
 
-    return npath.utf8_substr(0,u8len - 1);
+    return npath.utf8_substr(0, u8len - 1);
 }
 
 UTF8string dirname(const UTF8string& path)
@@ -188,7 +188,7 @@ UTF8string dirname(const UTF8string& path)
     }
     else if(countSeparator(npath) == 1)
     {
-        return npath.utf8_substr(0,pos + 1);
+        return npath.utf8_substr(0, pos + 1);
     }
 
     // At this point, there are more than 1 separators

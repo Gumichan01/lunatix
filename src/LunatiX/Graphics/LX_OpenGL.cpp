@@ -72,13 +72,13 @@ bool setSwapInterval(int interval) noexcept
 
 bool getAttribute(LX_GLattr attr, int& value) noexcept
 {
-    return SDL_GL_GetAttribute(attr,&value) == 0;
+    return SDL_GL_GetAttribute(attr, &value) == 0;
 }
 
 
 bool setAttribute(LX_GLattr attr, int value) noexcept
 {
-    return SDL_GL_SetAttribute(attr,value) == 0;
+    return SDL_GL_SetAttribute(attr, value) == 0;
 }
 
 }   // LX_OpenGL::

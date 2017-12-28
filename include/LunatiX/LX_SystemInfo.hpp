@@ -21,7 +21,6 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <SDL2/SDL_video.h>
 #include <vector>
 
 /**
@@ -40,7 +39,15 @@
 namespace LX_SystemInfo
 {
 
-using LX_DisplayMode = std::vector<SDL_DisplayMode>;
+struct LX_DisplayMode
+{
+    int w;              /**< width */
+    int h;              /**< height */
+    int refresh_rate;   /**< refresh rate (or zero for unspecified) */
+
+};
+
+using LX_DisplayModes = std::vector<LX_SystemInfo::LX_DisplayMode>;
 
 /**
 *   @fn const UTF8string getPlatform()
@@ -82,7 +89,7 @@ int getCPUCount() noexcept;
 int getSystemRAM() noexcept;
 
 /**
-*   @fn void getAvailableDisplayModes(LX_DisplayMode& modes)
+*   @fn void getAvailableDisplayModes(LX_DisplayModes& modes)
 *
 *   Get the list of available display modes on the screen
 *
@@ -91,19 +98,20 @@ int getSystemRAM() noexcept;
 *   @note LX_DisplayMode is a struture that contains every available
 *        display modes. In order to get these following modes, you should
 *        use iterators.
-*   @note Example:
+*   @note Example
 *
 *       LX_DisplayMode modes;
 *       getAvailableDisplayModes(modes);
 *
 *       LX_Log::log("Display modes: ");
-*       for(auto it = modes.begin(); it != modes.end(); it++)
+*       for(auto mode: modes)
 *       {
-*           LX_Log::log("%d × %d @ ~%d Hz", it->w, it->h, it->refresh_rate);
+*           LX_Log::log("%d × %d @ ~%d Hz", mode->w, mode->h, mode->refresh_rate);
 *       }
+*
 *.
 */
-void getAvailableDisplayModes(LX_DisplayMode& modes);
+void getAvailableDisplayModes(LX_DisplayModes& modes);
 
 }
 

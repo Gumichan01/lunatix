@@ -32,25 +32,25 @@ const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
 
 
 /**
-*   @class LX_SoundException
+*   @class LX_MixerException
 *   @brief Exception class of the Audio module
 */
-class LX_SoundException : public std::exception
+class LX_MixerException : public std::exception
 {
     std::string _string_error;
 
 public:
 
     /// Constructor
-    explicit LX_SoundException(std::string err);
+    explicit LX_MixerException(std::string err);
     /// Copy constructor
-    LX_SoundException(const LX_SoundException& me);
+    LX_MixerException(const LX_MixerException& me);
 
     /// Get the error message
     virtual const char * what() const noexcept;
 
     /// Destructor
-    ~LX_SoundException() = default;
+    ~LX_MixerException() = default;
 };
 
 /**

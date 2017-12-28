@@ -57,7 +57,7 @@ class LX_Polygon;
 *
 *   @return The square distance (integer value)
 */
-unsigned int euclide_square_distance(const int x1,const int y1,const int x2,const int y2) noexcept;
+unsigned int euclide_square_distance(const int x1, const int y1, const int x2, const int y2) noexcept;
 /**
 *   @fn unsigned int euclide_square_distance(const LX_Point& p1,
 *                                            const LX_Point& p2) noexcept
@@ -96,7 +96,7 @@ float euclide_distance(const int x1, const int y1, const int x2, const int y2) n
 *
 *   @return The distance (floating-point value)
 */
-float euclide_distance(const LX_Point& p1,const LX_Point& p2) noexcept;
+float euclide_distance(const LX_Point& p1, const LX_Point& p2) noexcept;
 
 
 /* Collision detection */
@@ -125,7 +125,7 @@ bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noe
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionPointRect(const LX_Point& p,const LX_AABB& rect) noexcept;
+bool collisionPointRect(const LX_Point& p, const LX_AABB& rect) noexcept;
 
 
 /**

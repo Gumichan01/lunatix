@@ -62,27 +62,27 @@ class LX_File_
 
         if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(),"wb+");
+            _data = SDL_RWFromFile(_name.utf8_str(), "wb+");
         }
         else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(),"rb+");
+            _data = SDL_RWFromFile(_name.utf8_str(), "rb+");
         }
         else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(),"ab+");
+            _data = SDL_RWFromFile(_name.utf8_str(), "ab+");
         }
         else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(),"rb");
+            _data = SDL_RWFromFile(_name.utf8_str(), "rb");
         }
         else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(),"wb");
+            _data = SDL_RWFromFile(_name.utf8_str(), "wb");
         }
         else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(),"ab");
+            _data = SDL_RWFromFile(_name.utf8_str(), "ab");
         }
         else
             throw IOException(str + "Unrecognized mode");
@@ -104,7 +104,7 @@ public:
 
     size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
     {
-        return SDL_RWread(_data,ptr,data_size,max_num);
+        return SDL_RWread(_data, ptr, data_size, max_num);
     }
 
     size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
@@ -115,7 +115,7 @@ public:
         // Read at most num bytes
         while(total_read < num)
         {
-            size_t read_data = read(p,data_size,num);
+            size_t read_data = read(p, data_size, num);
 
             // Did it work?
             if(read_data == 0)
@@ -128,7 +128,7 @@ public:
 
         if(total_read != num)
         {
-            return 0;
+            return -1;
         }
 
         return total_read;
@@ -136,18 +136,18 @@ public:
 
     size_t write(void *ptr, size_t data_size, size_t num) noexcept
     {
-        return SDL_RWwrite(_data,ptr,data_size,num);
+        return SDL_RWwrite(_data, ptr, data_size, num);
     }
 
     size_t write(const std::string& str) noexcept
     {
         size_t len = str.size();
-        return write((void *)str.c_str(),sizeof(char),len);
+        return write((void *)str.c_str(), sizeof(char), len);
     }
 
     int64_t seek(int64_t offset, int whence) noexcept
     {
-        return SDL_RWseek(_data,offset,whence);
+        return SDL_RWseek(_data, offset, whence);
     }
 
     int64_t tell() const noexcept
@@ -184,26 +184,26 @@ public:
 /* Public functions */
 
 LX_File::LX_File(const std::string& filename, const uint32_t mode)
-    : LX_File(UTF8string(filename),mode) {}
+    : LX_File(UTF8string(filename), mode) {}
 
 LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
-    : _fimpl(new LX_File_(filename,mode)) {}
+    : _fimpl(new LX_File_(filename, mode)) {}
 
 
 size_t LX_File::read(void *ptr, size_t data_size, size_t max_num) noexcept
 {
-    return _fimpl->read(ptr,data_size,max_num);
+    return _fimpl->read(ptr, data_size, max_num);
 }
 
 size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num) noexcept
 {
-    return _fimpl->readExactly(ptr,data_size,num);
+    return _fimpl->readExactly(ptr, data_size, num);
 }
 
 
 size_t LX_File::write(void *ptr, size_t data_size, size_t num) noexcept
 {
-    return _fimpl->write(ptr,data_size,num);
+    return _fimpl->write(ptr, data_size, num);
 }
 
 size_t LX_File::write(const std::string& str) noexcept
@@ -214,7 +214,7 @@ size_t LX_File::write(const std::string& str) noexcept
 
 int64_t LX_File::seek(int64_t offset, int whence) noexcept
 {
-    return _fimpl->seek(offset,whence);
+    return _fimpl->seek(offset, whence);
 }
 
 int64_t LX_File::tell() const noexcept
@@ -264,7 +264,7 @@ public:
 
     size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
     {
-        size_t sz = fread(ptr,data_size,max_num,_f);
+        size_t sz = fread(ptr, data_size, max_num, _f);
         char * err = strerror(errno);
 
         if(ferror(_f))
@@ -281,7 +281,7 @@ public:
         // Read at most num bytes
         while(total_read < num)
         {
-            size_t read_data = read(p,data_size,num);
+            size_t read_data = read(p, data_size, num);
 
             // Did it work?
             if(read_data == 0)
@@ -297,7 +297,7 @@ public:
 
     size_t write(void *ptr, size_t data_size, size_t num) noexcept
     {
-        size_t sz = fwrite(ptr,data_size,num,_f);
+        size_t sz = fwrite(ptr, data_size, num, _f);
         char * err = strerror(errno);
 
         if(ferror(_f))
@@ -309,12 +309,12 @@ public:
     size_t write(const std::string& str) noexcept
     {
         size_t len = str.size();
-        return write((void *)str.c_str(),sizeof(char),len);
+        return write((void *)str.c_str(), sizeof(char), len);
     }
 
     int64_t seek(int64_t offset, int whence) noexcept
     {
-        return fseek(_f,offset,whence);
+        return fseek(_f, offset, whence);
     }
 
     int64_t tell() const noexcept
@@ -342,18 +342,18 @@ LX_TmpFile::LX_TmpFile(): _timpl(new LX_TmpFile_()) {}
 
 size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num) noexcept
 {
-    return _timpl->read(ptr,data_size,max_num);
+    return _timpl->read(ptr, data_size, max_num);
 }
 
 size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num) noexcept
 {
-    return _timpl->readExactly(ptr,data_size,num);
+    return _timpl->readExactly(ptr, data_size, num);
 }
 
 
 size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num) noexcept
 {
-    return _timpl->write(ptr,data_size,num);
+    return _timpl->write(ptr, data_size, num);
 }
 
 size_t LX_TmpFile::write(const std::string& str) noexcept
@@ -364,7 +364,7 @@ size_t LX_TmpFile::write(const std::string& str) noexcept
 
 int64_t LX_TmpFile::seek(int64_t offset, int whence) noexcept
 {
-    return _timpl->seek(offset,whence);
+    return _timpl->seek(offset, whence);
 }
 
 int64_t LX_TmpFile::tell() const noexcept

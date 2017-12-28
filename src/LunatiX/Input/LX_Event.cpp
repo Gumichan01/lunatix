@@ -224,17 +224,17 @@ void eventState(const LX_Event::LX_EventType ty, bool process) noexcept
 
     if(sdl_ev_ty == 1)
     {
-        SDL_EventState(SDL_JOYDEVICEADDED,state);
-        SDL_EventState(SDL_CONTROLLERDEVICEADDED,state);
+        SDL_EventState(SDL_JOYDEVICEADDED, state);
+        SDL_EventState(SDL_CONTROLLERDEVICEADDED, state);
     }
     else if(sdl_ev_ty == 2)
     {
-        SDL_EventState(SDL_JOYDEVICEREMOVED,state);
-        SDL_EventState(SDL_CONTROLLERDEVICEREMOVED,state);
+        SDL_EventState(SDL_JOYDEVICEREMOVED, state);
+        SDL_EventState(SDL_CONTROLLERDEVICEREMOVED, state);
     }
     else if(sdl_ev_ty != 0)
     {
-        SDL_EventState(sdl_ev_ty,state);
+        SDL_EventState(sdl_ev_ty, state);
     }
 }
 
@@ -434,7 +434,7 @@ LX_EventType LX_EventHandler::getEventType() const noexcept
 const LX_KeyboardState LX_EventHandler::getKeyboardState() noexcept
 {
     int sz;
-    LX_KeyboardState ks = {SDL_GetKeyboardState(&sz),sz};
+    LX_KeyboardState ks = {SDL_GetKeyboardState(&sz), sz};
     return ks;
 }
 
@@ -502,7 +502,7 @@ const LX_MButton LX_EventHandler::getMouseButton() const noexcept
 {
     const SDL_MouseButtonEvent mb = (*event).button;
     LX_MouseButton b = toMouseButton(mb.button);
-    const LX_MButton mbutton = {mb.windowID,b, mb.state, mb.clicks, mb.x, mb.y};
+    const LX_MButton mbutton = {mb.windowID, b, mb.state, mb.clicks, mb.x, mb.y};
     return mbutton;
 }
 
@@ -516,7 +516,7 @@ const LX_MMotion LX_EventHandler::getMouseMotion() const noexcept
         mmotion.state[i] = false;
     }
 
-    fillButtonState(mmotion.state,mm.state);
+    fillButtonState(mmotion.state, mm.state);
     mmotion.wid = mm.windowID;
     mmotion.x = mm.x;
     mmotion.y = mm.y;
@@ -551,7 +551,7 @@ const LX_UserEvent LX_EventHandler::getUserEvent() const noexcept
 
 const LX_TextEvent LX_EventHandler::getTextEvent() const noexcept
 {
-    LX_TextEvent t = {0,"",0,0};
+    LX_TextEvent t = {0, "", 0, 0};
     const SDL_Event& ev = (*event);
 
     if(ev.type == SDL_TEXTINPUT)

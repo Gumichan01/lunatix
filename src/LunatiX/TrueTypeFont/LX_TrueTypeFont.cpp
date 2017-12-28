@@ -41,7 +41,7 @@ namespace
 */
 inline int sizeOfText(TTF_Font *ttf, const std::string& text, int& w, int& h) noexcept
 {
-    return TTF_SizeUTF8(ttf,text.c_str(),&w,&h);
+    return TTF_SizeUTF8(ttf, text.c_str(), &w, &h);
 }
 }
 
@@ -116,15 +116,15 @@ struct LX_Font_
         switch(type)
         {
         case LX_TTF_TypeText::LX_TTF_SOLID:
-            loaded = TTF_RenderUTF8_Solid(ttf,text.utf8_str(), _font_colour);
+            loaded = TTF_RenderUTF8_Solid(ttf, text.utf8_str(), _font_colour);
             break;
 
         case LX_TTF_TypeText::LX_TTF_SHADED:
-            loaded = TTF_RenderUTF8_Shaded(ttf,text.utf8_str(), _font_colour,bg);
+            loaded = TTF_RenderUTF8_Shaded(ttf, text.utf8_str(), _font_colour,bg);
             break;
 
         case LX_TTF_TypeText::LX_TTF_BLENDED:
-            loaded = TTF_RenderUTF8_Blended(ttf,text.utf8_str(), _font_colour);
+            loaded = TTF_RenderUTF8_Blended(ttf, text.utf8_str(), _font_colour);
             break;
 
         default:
@@ -142,8 +142,8 @@ struct LX_Font_
 };
 
 
-LX_Font::LX_Font(const std::string& font_file,const LX_Colour& colour, unsigned int size)
-    : _fimpl(new LX_Font_(font_file,size,colour))
+LX_Font::LX_Font(const std::string& font_file, const LX_Colour& colour, unsigned int size)
+    : _fimpl(new LX_Font_(font_file, size, colour))
 {
     _fimpl->createBuffer_();
 }

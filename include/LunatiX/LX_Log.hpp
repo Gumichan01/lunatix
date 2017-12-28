@@ -131,14 +131,14 @@ void setErrorPriority(LX_CATEGORY category) noexcept;
 void setCriticalPriority(LX_CATEGORY category) noexcept;
 
 /**
-*   @fn void logVerbose(LX_CATEGORY category,std::string format,...) noexcept
+*   @fn void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept
 *
 *   Log a message with the verbose priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logVerbose(LX_CATEGORY category,std::string format,...) noexcept;
+void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept;
 /**
 *   @fn void logDebug(LX_CATEGORY category,std::string format,...) noexcept
 *
@@ -147,50 +147,50 @@ void logVerbose(LX_CATEGORY category,std::string format,...) noexcept;
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logDebug(LX_CATEGORY category,std::string format,...) noexcept;
+void logDebug(LX_CATEGORY category, std::string format, ...) noexcept;
 /**
-*   @fn void logInfo(LX_CATEGORY category,std::string format,...) noexcept
+*   @fn void logInfo(LX_CATEGORY category, std::string format,...) noexcept
 *
 *   Log a message with the info priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logInfo(LX_CATEGORY category,std::string format,...) noexcept;
+void logInfo(LX_CATEGORY category, std::string format, ...) noexcept;
 /**
-*   @fn void logWarning(LX_CATEGORY category,std::string format,...) noexcept
+*   @fn void logWarning(LX_CATEGORY category, std::string format,...) noexcept
 *
 *   Log a message with the warning priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logWarning(LX_CATEGORY category,std::string format,...) noexcept;
+void logWarning(LX_CATEGORY category, std::string format, ...) noexcept;
 /**
-*   @fn void logError(LX_CATEGORY category,std::string format,...) noexcept
+*   @fn void logError(LX_CATEGORY category, std::string format,...) noexcept
 *
 *   Log a message with the error priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logError(LX_CATEGORY category,std::string format,...) noexcept;
+void logError(LX_CATEGORY category, std::string format, ...) noexcept;
 /**
-*   @fn void logCritical(LX_CATEGORY category,std::string format,...) noexcept
+*   @fn void logCritical(LX_CATEGORY category, std::string format,...) noexcept
 *
 *   Log a message with the critical priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logCritical(LX_CATEGORY category,std::string format,...) noexcept;
+void logCritical(LX_CATEGORY category, std::string format, ...) noexcept;
 
 /**
-*   @fn void log(std::string format,...) noexcept
+*   @fn void log(std::string format, ...) noexcept
 *   Log a message with the info priority and the applicatiion category
 *   @param [in] format String format
 */
-void log(std::string format,...) noexcept;
+void log(std::string format, ...) noexcept;
 
 }
 

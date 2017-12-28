@@ -5,8 +5,9 @@
 #define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
 #define beuint16(d) (ushort)((d)[0]<<8 | (d)[1]<<0)
 
-int
-tagm4a(Tagctx *ctx)
+int tagm4a(Tagctx *ctx);
+
+int tagm4a(Tagctx *ctx)
 {
     uvlong duration;
     uchar *d;

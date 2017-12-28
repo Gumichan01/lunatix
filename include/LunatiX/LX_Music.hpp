@@ -85,7 +85,7 @@ public:
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
-    *   @exception LX_SoundException On failure
+    *   @exception LX_MixerException On failure
     */
     LX_Music(const std::string filename);
     /**
@@ -93,7 +93,7 @@ public:
     *   @brief Constructor
     *
     *   @param [in] filename The music filename that will be loaded
-    *   @exception LX_SoundException On failure
+    *   @exception LX_MixerException On failure
     */
     explicit LX_Music(const UTF8string filename);
 
@@ -112,7 +112,7 @@ public:
     */
     void fadeIn(int ms) noexcept;
     /**
-    *   @fn void fadeInPos(int ms,int pos) noexcept
+    *   @fn void fadeInPos(int ms, int pos) noexcept
     *
     *   Fade in the current music over some milliseconds of time
     *
@@ -125,7 +125,7 @@ public:
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
     */
-    void fadeInPos(int ms,int pos) noexcept;
+    void fadeInPos(int ms, int pos) noexcept;
     /**
     *   @fn static void fadeOut(int ms) noexcept
     *

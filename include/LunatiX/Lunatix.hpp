@@ -55,7 +55,6 @@
 #include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Polygon.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
 
 // System
 #include <LunatiX/LX_FileIO.hpp>

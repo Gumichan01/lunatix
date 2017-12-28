@@ -72,7 +72,7 @@ private:
 
 public:
 
-    LX_Gamepad_() noexcept: _gc(nullptr),_joy(nullptr),_haptic(nullptr),_closed(true) {}
+    LX_Gamepad_() noexcept: _gc(nullptr), _joy(nullptr), _haptic(nullptr), _closed(true) {}
 
     bool isConnected() const noexcept
     {
@@ -113,9 +113,9 @@ public:
         bool res;
 
         if(_gc != nullptr)
-            res = statGamepad_(_gc,info);
+            res = statGamepad_(_gc, info);
         else
-            res = statGamepad_(_joy,info);
+            res = statGamepad_(_joy, info);
 
         if(!res)
             LX_SetError(UTF8string(std::string("LX_Gamepad::stat: ") + LX_GetError()));
@@ -172,18 +172,18 @@ bool LX_Gamepad_::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
     if(joy != nullptr)
     {
         info.name = nameOf_(joy);
-        return lx_stat_(joy,info);
+        return lx_stat_(joy, info);
     }
     else if(gc != nullptr)
     {
         info.name = nameOf_(gc);
-        return lx_stat_(SDL_GameControllerGetJoystick(gc),info);
+        return lx_stat_(SDL_GameControllerGetJoystick(gc), info);
     }
     else
     {
         LX_Log::logCritical(LX_Log::LX_LOG_APPLICATION,
                             "%s:%d - Internal error: Invalid LX_Gamepad object",
-                            __FILENAME__,__LINE__);
+                            __FILENAME__, __LINE__);
         throw std::runtime_error("Internal error - Bad LX_Gamepad");
     }
 }
@@ -191,13 +191,13 @@ bool LX_Gamepad_::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
 
 bool LX_Gamepad_::statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const
 {
-    return gstat_(joy,nullptr,info);
+    return gstat_(joy, nullptr, info);
 }
 
 
 bool LX_Gamepad_::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info) const
 {
-    return gstat_(nullptr,gc,info);
+    return gstat_(nullptr, gc, info);
 }
 
 
@@ -228,6 +228,7 @@ bool LX_Gamepad::open(int index) noexcept
     if(_gpimpl->_gc == nullptr)
     {
         _gpimpl->_joy = SDL_JoystickOpen(index);
+
         if(SDL_JoystickIsHaptic(_gpimpl->_joy) == 1)
             _gpimpl->_haptic.reset(new LX_Haptic(_gpimpl->_joy));
     }

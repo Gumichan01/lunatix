@@ -111,7 +111,7 @@ LX_Thread::LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreadin
         throw std::invalid_argument("The function must be defined");
     }
 
-    _th.reset(new LX_Thread_(std::function<LX_ThreadFun_>(fun),name,data));
+    _th.reset(new LX_Thread_(std::function<LX_ThreadFun_>(fun), name, data));
 }
 
 void LX_Thread::start()

@@ -16,13 +16,13 @@ int main(int argc, char **argv)
     LX_Log::log("Number of CPU cores: %d",getCPUCount());
     LX_Log::log("RAM: %d MB\n ",getSystemRAM());
 
-    LX_DisplayMode modes;
+    LX_DisplayModes modes;
     getAvailableDisplayModes(modes);
 
     LX_Log::log("Display modes: ");
-    for(auto it = modes.begin(); it != modes.end(); it++)
+    for(auto mode: modes)
     {
-        LX_Log::log("%d × %d @ ~%d Hz",(*it).w,(*it).h,(*it).refresh_rate);
+        LX_Log::log("%d × %d @ ~%d Hz", mode.w, mode.h, mode.refresh_rate);
     }
 
     LX_Log::log(" ==== End System ==== ");

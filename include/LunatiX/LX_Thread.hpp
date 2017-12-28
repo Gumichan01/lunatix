@@ -63,6 +63,7 @@ class LX_Thread
 public:
 
     /**
+    *   @deprecated This constructor is deprecated and will be removed in v0.13.0
     *   @fn LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data)
     *   @brief Constructor
     *
@@ -74,7 +75,21 @@ public:
     */
     LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data);
 
+    /*
+    *   @todo Thread with variadic template
+    *   @fn template <class LX_Fun, class... LX_Args> LX_Thread(LX_Fun fun, const std::string& name, LX_Args args);
+    *   @brief Constructor
+    *
+    *   @param [in] fun The function launched by the thread
+    *   @param [in] args arguments of the function
+    *
+    *   @exception std::invalid_argument If the function given in argument is not defined
+    */
+    /*template <typename LX_Fun, typename... LX_Args >
+    LX_Thread(LX_Fun fun, LX_Args... args);*/
+
     /**
+    *   @deprecated This function is deprecated and will be removed in v0.13.0
     *   @fn void start()
     *
     *   Start the thread
@@ -85,6 +100,7 @@ public:
     */
     void start();
     /**
+    *   @deprecated This function is deprecated and will be removed in v0.13.0
     *   @fn void startAndDetach()
     *
     *   Start the thread and detach it
@@ -112,6 +128,7 @@ public:
     void join();
 
     /**
+    *   @deprecated This function is deprecated and will be removed in v0.13.0
     *   @fn const std::string& getName() const noexcept
     *
     *   Get the name of the thread

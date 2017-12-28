@@ -195,7 +195,6 @@ public:
     ~LX_MouseHaptic();
 };
 
-
 }
 
 #endif // LX_HAPTIC_HPP_INCLUDED

@@ -44,8 +44,8 @@ class LX_FileBuffer_
 
     Mix_Chunk * getChunkFromBuffer_() const noexcept
     {
-        SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
-        return (rw == nullptr) ? nullptr : Mix_LoadWAV_RW(rw,1);
+        SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(), static_cast<int>(_bufsize));
+        return (rw == nullptr) ? nullptr : Mix_LoadWAV_RW(rw, 1);
     }
 
 public:
@@ -60,8 +60,8 @@ public:
         size_t r = 0;
         int64_t s = 0;
 
-        LX_File reader(_name,LX_FILEIO_RDONLY);
-        reader.seek(0,LX_SEEK_END);     // Is that useful ?
+        LX_File reader(_name, LX_FILEIO_RDONLY);
+        reader.seek(0, LX_SEEK_END);     // Is that useful ?
 
         if((s = reader.size()) == -1)
             throw IOException(str + "cannot get the size of the file");
@@ -78,13 +78,13 @@ public:
         else
             _bufsize = U64(sz);
 
-        reader.seek(S64(offset),LX_SEEK_SET);
+        reader.seek(S64(offset), LX_SEEK_SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
 
         if(_buffer == nullptr)
             throw IOException(str + "not enough memory to store the file content");
 
-        r = reader.readExactly(_buffer.get(),sizeof(int8_t),_bufsize);
+        r = reader.readExactly(_buffer.get(), sizeof(int8_t), _bufsize);
 
         if(r < _bufsize)
             throw IOException(str + "cannot read the entire file");
@@ -106,13 +106,13 @@ public:
     inline SDL_Surface * getSurfaceFromBuffer() const noexcept
     {
         SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(), static_cast<int>(_bufsize));
-        return (rw == nullptr) ? nullptr : IMG_Load_RW(rw,1);
+        return (rw == nullptr) ? nullptr : IMG_Load_RW(rw, 1);
     }
 
     inline TTF_Font * getFontFromBuffer(int size) const noexcept
     {
         SDL_RWops *rw = SDL_RWFromConstMem(_buffer.get(),static_cast<int>(_bufsize));
-        return (rw == nullptr) ? nullptr : TTF_OpenFontRW(rw,1,size);
+        return (rw == nullptr) ? nullptr : TTF_OpenFontRW(rw, 1, size);
     }
 
     const char * getFilename() const noexcept

@@ -17,10 +17,21 @@
 *   @version 0.10
 */
 
-#include <SDL2/SDL_cpuinfo.h>
 #include <LunatiX/LX_SystemInfo.hpp>
 #include <LunatiX/LX_Error.hpp>
+
+#include <SDL2/SDL_cpuinfo.h>
+#include <SDL2/SDL_video.h>
 #include <new>
+
+namespace
+{
+LX_SystemInfo::LX_DisplayMode fromSDL_DisplayMode(SDL_DisplayMode& sdlmode)
+{
+    return {sdlmode.w, sdlmode.h, sdlmode.refresh_rate};
+}
+}
+
 
 namespace LX_SystemInfo
 {
@@ -45,7 +56,7 @@ int getSystemRAM() noexcept
     return SDL_GetSystemRAM();
 }
 
-void getAvailableDisplayModes(LX_DisplayMode& modes)
+void getAvailableDisplayModes(LX_DisplayModes& modes)
 {
     const int nb_displays = SDL_GetNumDisplayModes(0);
     modes.clear();
@@ -64,9 +75,9 @@ void getAvailableDisplayModes(LX_DisplayMode& modes)
     SDL_DisplayMode mode;
     for(int i = 0; i < nb_displays; i++)
     {
-        if(SDL_GetDisplayMode(0,i,&mode) == 0)
+        if(SDL_GetDisplayMode(0, i, &mode) == 0)
         {
-            modes.push_back(mode);
+            modes.push_back(fromSDL_DisplayMode(mode));
         }
     }
 }

@@ -65,7 +65,7 @@ namespace LX_Physics
 {
 
 LX_Vector2D::LX_Vector2D() noexcept: LX_Vector2D(0.0f,0.0f) {}
-LX_Vector2D::LX_Vector2D(float x,float y) noexcept: vx(x), vy(y) {}
+LX_Vector2D::LX_Vector2D(float x, float y) noexcept: vx(x), vy(y) {}
 LX_Vector2D::LX_Vector2D(const LX_Vector2D& v) noexcept: vx(v.vx), vy(v.vy) {}
 
 LX_Vector2D::LX_Vector2D(const LX_Point& ori, const LX_Point& im) noexcept
@@ -80,13 +80,13 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D& v) noexcept
 }
 
 
-bool operator ==(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
-    return (eq(u.vx,v.vx) && eq(u.vy,v.vy));
+    return (eq(u.vx, v.vx) && eq(u.vy, v.vy));
 }
 
 
-bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
     return !(u == v);
 }
@@ -94,24 +94,24 @@ bool operator !=(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 
 LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v) noexcept
 {
-    return LX_Vector2D(u.vx + v.vx,u.vy + v.vy);
+    return LX_Vector2D(u.vx + v.vx, u.vy + v.vy);
 }
 
 
-LX_Vector2D& operator +=(LX_Vector2D& u,const LX_Vector2D& v) noexcept
+LX_Vector2D& operator +=(LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
     u = u + v;
     return u;
 }
 
 
-LX_Vector2D operator -(const LX_Vector2D u,const LX_Vector2D v) noexcept
+LX_Vector2D operator -(const LX_Vector2D u, const LX_Vector2D v) noexcept
 {
-    return LX_Vector2D(u.vx - v.vx,u.vy - v.vy);
+    return LX_Vector2D(u.vx - v.vx, u.vy - v.vy);
 }
 
 
-LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v) noexcept
+LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
     u = u - v;
     return u;
@@ -120,7 +120,7 @@ LX_Vector2D& operator -=(LX_Vector2D& u,const LX_Vector2D& v) noexcept
 
 LX_Vector2D operator -(const LX_Vector2D& v) noexcept
 {
-    return LX_Vector2D(-v.vx,-v.vy);
+    return LX_Vector2D(-v.vx, -v.vy);
 }
 
 
@@ -132,7 +132,7 @@ LX_Vector2D& operator ++(LX_Vector2D& v) noexcept
 }
 
 
-LX_Vector2D operator ++(LX_Vector2D& v,int) noexcept
+LX_Vector2D operator ++(LX_Vector2D& v, int) noexcept
 {
     LX_Vector2D t = v;
     ++v;
@@ -148,7 +148,7 @@ LX_Vector2D& operator --(LX_Vector2D& v) noexcept
 }
 
 
-LX_Vector2D operator --(LX_Vector2D& v,int) noexcept
+LX_Vector2D operator --(LX_Vector2D& v, int) noexcept
 {
     LX_Vector2D t = v;
     --v;
@@ -178,13 +178,13 @@ LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept
     return v;
 }
 
-float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
     return (u.vx * v.vx) + (u.vy * v.vy);
 }
 
 
-float vector_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
     return (u.vx * v.vy) - (v.vx * u.vy);
 }
@@ -192,25 +192,25 @@ float vector_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 
 float vector_norm(const LX_Vector2D& v) noexcept
 {
-    return static_cast<float>(sqrt(scalar_product(v,v)));
+    return static_cast<float>(sqrt(scalar_product(v, v)));
 }
 
 
 bool isNullVector(const LX_Vector2D& v) noexcept
 {
-    return eq(v.vx,0.0f) && eq(v.vy,0.0f);
+    return eq(v.vx, 0.0f) && eq(v.vy, 0.0f);
 }
 
 
 bool collinear(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 {
-    return eq(vector_product(u,v),0.0f);
+    return eq(vector_product(u, v), 0.0f);
 }
 
 
-LX_Vector2D& multiply(LX_Vector2D& v,float lambda) noexcept
+LX_Vector2D& multiply(LX_Vector2D& v, float lambda) noexcept
 {
-    v = LX_Vector2D(lambda * v.vx,lambda * v.vy);
+    v = LX_Vector2D(lambda * v.vx, lambda * v.vy);
     return v;
 }
 
@@ -221,7 +221,7 @@ LX_Vector2D& normalize(LX_Vector2D& v) noexcept
         return v;
 
     float inverted_norm = 1.0f/ vector_norm(v);
-    return multiply(v,inverted_norm);
+    return multiply(v, inverted_norm);
 }
 
 }

@@ -177,8 +177,9 @@ public:
     virtual int64_t tell() const noexcept = 0;
 
     /**
+    *   @deprecated LX_AbstractFile::close() is automatically called from the destructor, no need to close it manually
+    *
     *   @fn void close()
-    *   @deprecated close() is automatically called from the destructor, no need to close it manually
     *
     *   Close the file
     */
@@ -267,7 +268,7 @@ public:
     */
     const char * getFilename() const noexcept;
 
-    /// @deprecated close() is automatically called from the destructor, no need to close it manually
+    /// @deprecated LX_File::close() is automatically called from the destructor, no need to close it manually
     virtual void close() noexcept;
 
     /// Destructor
@@ -287,6 +288,7 @@ class LX_TmpFile: public virtual LX_AbstractFile
 
     LX_TmpFile(const LX_TmpFile&) = delete;
     LX_TmpFile& operator =(const LX_TmpFile&) = delete;
+    /// @deprecated LX_TmpFile::close() is automatically called from the destructor, no need to close it manually
     virtual void close() noexcept;
 
 public:
@@ -324,7 +326,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept;
 *
 *   Write a utf-8 string into the file
 *
-*   @param [in,out] f The file to write data into
+*   @param [in, out] f The file to write data into
 *   @param [in] u8s The utf-8 string
 *
 *   @return The updated file
