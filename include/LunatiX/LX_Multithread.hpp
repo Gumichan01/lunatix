@@ -17,7 +17,7 @@
 *   @file LX_Multithread.hpp
 *   @brief The interface of LX_Multithreading
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 /**

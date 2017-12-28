@@ -14,7 +14,7 @@
 *   @file LX_Hitbox.cpp
 *   @brief The Hitbox operators implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <LunatiX/LX_Hitbox.hpp>

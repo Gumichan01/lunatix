@@ -17,7 +17,7 @@
 *   @file LX_Haptic.hpp
 *   @brief The force feedback (Haptic) interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <memory>

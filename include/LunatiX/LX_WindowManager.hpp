@@ -17,7 +17,7 @@
 *   @file LX_WindowManager.hpp
 *   @brief The window manager
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 *
 */
 

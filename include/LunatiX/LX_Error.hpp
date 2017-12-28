@@ -17,7 +17,7 @@
 *   @file LX_Error.hpp
 *   @brief The error header.
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 *
 */
 

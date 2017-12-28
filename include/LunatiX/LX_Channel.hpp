@@ -17,7 +17,7 @@
 *   @file LX_Channel.hpp
 *   @brief The channel API
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <LunatiX/LX_Sync.hpp>

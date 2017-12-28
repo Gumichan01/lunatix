@@ -17,7 +17,7 @@
 *   @file LX_FileSystem.hpp
 *   @brief The File system
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

@@ -17,7 +17,7 @@
 *   @file LX_Vector2D.hpp
 *   @brief The vector 2D library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 

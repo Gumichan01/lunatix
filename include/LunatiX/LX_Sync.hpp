@@ -17,7 +17,7 @@
 *   @file LX_Sync.hpp
 *   @brief The thread synchroization API
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <memory>

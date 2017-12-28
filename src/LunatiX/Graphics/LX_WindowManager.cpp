@@ -15,7 +15,7 @@
 *   @file LX_WindowManager.cpp
 *   @brief The window manager implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 *
 */
 

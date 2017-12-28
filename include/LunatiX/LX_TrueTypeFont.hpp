@@ -17,7 +17,7 @@
 *   @file LX_TrueTypeFont.hpp
 *   @brief The True type Font (TTF) library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

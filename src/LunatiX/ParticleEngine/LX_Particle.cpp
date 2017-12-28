@@ -13,7 +13,7 @@
 *   @file LX_Particle.cpp
 *   @brief The particle implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <LunatiX/LX_Particle.hpp>

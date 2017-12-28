@@ -17,7 +17,7 @@
 *   @file LX_Polygon.hpp
 *   @brief The polygon file
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.10
+*   @version 0.12
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
