@@ -119,7 +119,7 @@ public:
     *   @param [in] data_size The size of each object to read, in bytes
     *   @param [in] num The maximum number of objects to read
     *
-    *   @return The number of objects that are read. 0 at error or end of file
+    *   @return The number of objects that are read. -1 at error or end of file
     */
     virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept = 0;
 
@@ -183,7 +183,7 @@ public:
     *
     *   Close the file
     */
-    virtual void close() noexcept = 0;
+    //virtual void close() noexcept = 0;
 
     virtual ~LX_AbstractFile();
 };
@@ -269,7 +269,7 @@ public:
     const char * getFilename() const noexcept;
 
     /// @deprecated LX_File::close() is automatically called from the destructor, no need to close it manually
-    virtual void close() noexcept;
+    //virtual void close() noexcept;
 
     /// Destructor
     virtual ~LX_File();
@@ -289,7 +289,7 @@ class LX_TmpFile: public virtual LX_AbstractFile
     LX_TmpFile(const LX_TmpFile&) = delete;
     LX_TmpFile& operator =(const LX_TmpFile&) = delete;
     /// @deprecated LX_TmpFile::close() is automatically called from the destructor, no need to close it manually
-    virtual void close() noexcept;
+    //virtual void close() noexcept;
 
 public:
 

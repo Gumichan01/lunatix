@@ -126,12 +126,8 @@ public:
             total_read += read_data;
         }
 
-        if(total_read != num)
-        {
-            return -1;
-        }
-
-        return total_read;
+        return (total_read != 0 && total_read != num) ?
+               static_cast<size_t>(-1) : total_read;
     }
 
     size_t write(void *ptr, size_t data_size, size_t num) noexcept
@@ -233,16 +229,16 @@ const char * LX_File::getFilename() const noexcept
     return _fimpl->getFilename();
 }
 
-
+/*
 void LX_File::close() noexcept
 {
     _fimpl->close();
-}
+}*/
 
 
 LX_File::~LX_File()
 {
-    close();
+    _fimpl->close();
 }
 
 
@@ -322,15 +318,17 @@ public:
         return ftell(_f);
     }
 
+    /*
     void close() noexcept
     {
         fclose(_f);
         _f = nullptr;
-    }
+    }*/
 
     ~LX_TmpFile_()
     {
-        close();
+        fclose(_f);
+        _f = nullptr;
     }
 };
 
@@ -373,7 +371,7 @@ int64_t LX_TmpFile::tell() const noexcept
 }
 
 // private
-void LX_TmpFile::close() noexcept {}
+//void LX_TmpFile::close() noexcept {}
 
 LX_TmpFile::~LX_TmpFile() {}
 
