@@ -83,7 +83,7 @@ public:
 
         r = reader.readExactly(_buffer.get(), sizeof(int8_t), _bufsize);
 
-        if(r == -1)
+        if(r == static_cast<size_t>(-1))
             throw IOException(str + "cannot read the entire file");
     }
 
