@@ -132,8 +132,8 @@ public:
     *   @param [in] data_size The size of an object to write, in bytes
     *   @param [in] num The maximum number of objects to write
     *
-    *   @return The number of objects written.
-    *          This value will be less than num on error
+    *   @return The number of objects written succesfully.
+    *           This value may be less than num on error
     */
     virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept = 0;
     /**

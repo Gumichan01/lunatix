@@ -123,12 +123,6 @@ public:
         while(total_read < num)
         {
             size_t read_data = read(p, data_size, num);
-
-            // Did it work?
-            if(read_data == 0)
-                return 0;
-
-            // Move a the end of retrieved data
             p += read_data;
             total_read += read_data;
         }
@@ -164,14 +158,10 @@ public:
         long old_pos = tell();
         long err = seek(0, LX_SEEK_END);
 
-        if(!err)
-            fsize = tell();
-
+        if(!err) fsize = tell();
         err = seek(old_pos, LX_SEEK_END);
 
-        if(err)
-            return -1L;
-
+        if(err) return -1L;
         return fsize;
     }
 
@@ -291,12 +281,6 @@ public:
         while(total_read < num)
         {
             size_t read_data = read(p, data_size, num);
-
-            // Did it work?
-            if(read_data == 0)
-                return 0;
-
-            // Move a the end of retrieved data
             p += read_data;
             total_read += read_data;
         }
