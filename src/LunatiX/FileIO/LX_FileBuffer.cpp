@@ -68,10 +68,7 @@ public:
 
         // If offset > size of the file → failure
         if(S64(offset) > s)
-        {
-            reader.close();
             throw IOException(str + "invalid offset: offset > size of the file");
-        }
 
         if(sz == 0)
             _bufsize = U64(s) - U64(offset);
@@ -86,10 +83,8 @@ public:
 
         r = reader.readExactly(_buffer.get(), sizeof(int8_t), _bufsize);
 
-        if(r < _bufsize)
+        if(r == -1)
             throw IOException(str + "cannot read the entire file");
-
-        reader.close();
     }
 
 
