@@ -176,15 +176,6 @@ public:
     */
     virtual int64_t tell() const noexcept = 0;
 
-    /**
-    *   @deprecated LX_AbstractFile::close() is automatically called from the destructor, no need to close it manually
-    *
-    *   @fn void close()
-    *
-    *   Close the file
-    */
-    //virtual void close() noexcept = 0;
-
     virtual ~LX_AbstractFile();
 };
 
@@ -268,9 +259,6 @@ public:
     */
     const char * getFilename() const noexcept;
 
-    /// @deprecated LX_File::close() is automatically called from the destructor, no need to close it manually
-    //virtual void close() noexcept;
-
     /// Destructor
     virtual ~LX_File();
 };
@@ -288,8 +276,6 @@ class LX_TmpFile: public virtual LX_AbstractFile
 
     LX_TmpFile(const LX_TmpFile&) = delete;
     LX_TmpFile& operator =(const LX_TmpFile&) = delete;
-    /// @deprecated LX_TmpFile::close() is automatically called from the destructor, no need to close it manually
-    //virtual void close() noexcept;
 
 public:
 

@@ -229,12 +229,6 @@ const char * LX_File::getFilename() const noexcept
     return _fimpl->getFilename();
 }
 
-/*
-void LX_File::close() noexcept
-{
-    _fimpl->close();
-}*/
-
 
 LX_File::~LX_File()
 {
@@ -318,13 +312,6 @@ public:
         return ftell(_f);
     }
 
-    /*
-    void close() noexcept
-    {
-        fclose(_f);
-        _f = nullptr;
-    }*/
-
     ~LX_TmpFile_()
     {
         fclose(_f);
@@ -370,10 +357,10 @@ int64_t LX_TmpFile::tell() const noexcept
     return _timpl->tell();
 }
 
-// private
-//void LX_TmpFile::close() noexcept {}
-
-LX_TmpFile::~LX_TmpFile() {}
+LX_TmpFile::~LX_TmpFile()
+{
+    _timpl.reset(nullptr);
+}
 
 
 /// Stream
