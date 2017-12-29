@@ -54,7 +54,8 @@ LX_AbstractFile::~LX_AbstractFile() {}
 class LX_File_
 {
     UTF8string _name;        /* The name of the file         */
-    SDL_RWops *_data;        /* The internal file structure  */
+    //SDL_RWops *_data;        /* The internal file structure  */
+    FILE *_data;
 
     void open_(const uint32_t mode)
     {
@@ -62,27 +63,33 @@ class LX_File_
 
         if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(), "wb+");
+            //_data = SDL_RWFromFile(_name.utf8_str(), "wb+");
+            _data = fopen(_name.utf8_str(), "wb+");
         }
         else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(), "rb+");
+            //_data = SDL_RWFromFile(_name.utf8_str(), "rb+");
+            _data = fopen(_name.utf8_str(), "rb+");
         }
         else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(), "ab+");
+            //_data = SDL_RWFromFile(_name.utf8_str(), "ab+");
+            _data = fopen(_name.utf8_str(), "ab+");
         }
         else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(), "rb");
+            //_data = SDL_RWFromFile(_name.utf8_str(), "rb");
+            _data = fopen(_name.utf8_str(), "rb");
         }
         else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(), "wb");
+            //_data = SDL_RWFromFile(_name.utf8_str(), "wb");
+            _data = fopen(_name.utf8_str(), "wb");
         }
         else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
         {
-            _data = SDL_RWFromFile(_name.utf8_str(), "ab");
+            //_data = SDL_RWFromFile(_name.utf8_str(), "ab");
+            _data = fopen(_name.utf8_str(), "ab");
         }
         else
             throw IOException(str + "Unrecognized mode");
@@ -104,7 +111,7 @@ public:
 
     size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
     {
-        return SDL_RWread(_data, ptr, data_size, max_num);
+        return fread(ptr, data_size, max_num, _data);
     }
 
     size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
@@ -132,7 +139,7 @@ public:
 
     size_t write(void *ptr, size_t data_size, size_t num) noexcept
     {
-        return SDL_RWwrite(_data, ptr, data_size, num);
+        return fwrite(ptr, data_size, num, _data);
     }
 
     size_t write(const std::string& str) noexcept
@@ -143,17 +150,29 @@ public:
 
     int64_t seek(int64_t offset, int whence) noexcept
     {
-        return SDL_RWseek(_data, offset, whence);
+        return fseek(_data, offset, whence);
     }
 
     int64_t tell() const noexcept
     {
-        return SDL_RWtell(_data);
+        return ftell(_data);
     }
 
     int64_t size() noexcept
     {
-        return SDL_RWsize(_data);
+        long fsize = -1L;
+        long old_pos = tell();
+        long err = seek(0, LX_SEEK_END);
+
+        if(!err)
+            fsize = tell();
+
+        err = seek(old_pos, LX_SEEK_END);
+
+        if(err)
+            return -1L;
+
+        return fsize;
     }
 
     const char * getFilename() const noexcept
@@ -165,7 +184,7 @@ public:
     {
         if(_data != nullptr)
         {
-            SDL_RWclose(_data);
+            fclose(_data);
             _data = nullptr;
         }
     }
