@@ -68,7 +68,6 @@ void test_open(void)
         LX_Log::log("test open %s ...", str1);
         f1 = new LX_File(str1,LX_FILEIO_RDONLY);
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The following file was loaded : %s", str1);
-        f1->close();
         delete f1;
         f1 = nullptr;
     }
@@ -149,7 +148,6 @@ void test_read(void)
         LX_Log::log("data received : ", buf);
     }
 
-    f.close();
     LX_Log::log(" = END TEST = ");
 }
 
@@ -191,8 +189,6 @@ void test_read2(void)
                         read_data,strex);
 
     delete [] buff;
-    f.close();
-
     LX_Log::log(" = END TEST = ");
 }
 
@@ -222,7 +218,6 @@ void test_write(void)
     else
         LX_Log::log("SUCCESS - ok: 10");
 
-    f.close();
     LX_Log::log(" = END TEST = ");
 }
 
@@ -254,7 +249,6 @@ void test_tellSeek(void)
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - seek() position: 3");
 
-    f.close();
     LX_Log::log(" = END TEST = ");
 }
 
