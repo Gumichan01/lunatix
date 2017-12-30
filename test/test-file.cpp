@@ -206,7 +206,7 @@ void test_write(void)
     f << gumi;
 
     if(f.size() != 4)
-        LX_Log::log("FAILURE - expected: 4; got: %ld",f.size());
+        LX_Log::log("FAILURE - expected: 4; got: %ld", f.size());
     else
         LX_Log::log("SUCCESS - ok: 4");
 
@@ -214,7 +214,7 @@ void test_write(void)
     f << "CHAN01";
 
     if(f.size() != 10)
-        LX_Log::log("FAILURE - expected: 10; got: %ld",f.size());
+        LX_Log::log("FAILURE - expected: 10; got: %ld", f.size());
     else
         LX_Log::log("SUCCESS - ok: 10");
 
@@ -227,22 +227,17 @@ void test_tellSeek(void)
     LX_Log::log(" = TEST tellSeek = ");
     LX_File f(str.c_str(),LX_FILEIO_RDONLY);
 
-    LX_Log::log("%s is opened. Its size is %ld byte(s)", f.getFilename(),f.size());
-    Sint64 pos = f.seek(4,LX_SEEK_SET);
+    LX_Log::log("%s is opened. Its size is %ld byte(s)", f.getFilename(), f.size());
+    f.seek(4,LX_SEEK_SET);
+    size_t pos = f.tell();
 
     if(pos != 4)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - seek() Expected: 4; got: ", pos);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - seek() position: 4");
 
+    f.seek(-1,LX_SEEK_CUR);
     pos = f.tell();
-
-    if(pos != 4)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - tell() Expected: 4; got: ", pos);
-    else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - tell() position: 4");
-
-    pos = f.seek(-1,LX_SEEK_CUR);
 
     if(pos != 3)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - seek() Expected: 3; got: ", pos);
