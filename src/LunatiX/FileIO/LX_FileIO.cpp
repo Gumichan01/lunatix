@@ -142,26 +142,26 @@ public:
         return write((void *)str.c_str(), sizeof(char), len);
     }
 
-    int64_t seek(int64_t offset, int whence) noexcept
+    bool seek(long offset, int whence) noexcept
     {
-        return fseek(_data, offset, whence);
+        return fseek(_data, offset, whence) == 0;
     }
 
-    int64_t tell() const noexcept
+    size_t tell() const noexcept
     {
         return ftell(_data);
     }
 
-    int64_t size() noexcept
+    size_t size() noexcept
     {
         long fsize = -1L;
         long old_pos = tell();
-        long err = seek(0, LX_SEEK_END);
+        bool ok = seek(0, LX_SEEK_END);
 
-        if(!err) fsize = tell();
-        err = seek(old_pos, LX_SEEK_END);
+        if(ok) fsize = tell();
+        ok = seek(old_pos, LX_SEEK_END);
 
-        if(err) return -1L;
+        if(!ok) return -1L;
         return fsize;
     }
 
@@ -217,17 +217,17 @@ size_t LX_File::write(const std::string& str) noexcept
 }
 
 
-int64_t LX_File::seek(int64_t offset, int whence) noexcept
+bool LX_File::seek(long offset, int whence) noexcept
 {
     return _fimpl->seek(offset, whence);
 }
 
-int64_t LX_File::tell() const noexcept
+size_t LX_File::tell() const noexcept
 {
     return _fimpl->tell();
 }
 
-int64_t LX_File::size() noexcept
+size_t LX_File::size() noexcept
 {
     return _fimpl->size();
 }
@@ -305,12 +305,12 @@ public:
         return write((void *)str.c_str(), sizeof(char), len);
     }
 
-    int64_t seek(int64_t offset, int whence) noexcept
+    bool seek(long offset, int whence) noexcept
     {
-        return fseek(_f, offset, whence);
+        return fseek(_f, offset, whence) == 0;
     }
 
-    int64_t tell() const noexcept
+    size_t tell() const noexcept
     {
         return ftell(_f);
     }
@@ -350,12 +350,12 @@ size_t LX_TmpFile::write(const std::string& str) noexcept
 }
 
 
-int64_t LX_TmpFile::seek(int64_t offset, int whence) noexcept
+bool LX_TmpFile::seek(long offset, int whence) noexcept
 {
     return _timpl->seek(offset, whence);
 }
 
-int64_t LX_TmpFile::tell() const noexcept
+size_t LX_TmpFile::tell() const noexcept
 {
     return _timpl->tell();
 }

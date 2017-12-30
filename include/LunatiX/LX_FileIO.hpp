@@ -151,21 +151,21 @@ public:
     virtual size_t write(const std::string& str) noexcept = 0;
 
     /**
-    *   @fn virtual int64_t seek(int64_t offset, int whence) noexcept
+    *   @fn virtual bool seek(long offset, int whence) noexcept
     *
     *   Seek for a position the file
     *
     *   @param [in] offset An offset in bytes, relative to the whence; can be negative
     *   @param [in] whence Any of LX_SEEK_SET, LX_SEEK_CUR and LX_SEEK_END
     *
-    *   @return The final offset in the data stream. -1 on error
+    *   @return TRUE on success, FALSE otherwise
     *
     *   @sa read
     */
-    virtual int64_t seek(int64_t offset, int whence) noexcept = 0;
+    virtual bool seek(long offset, int whence) noexcept = 0;
 
     /**
-    *   @fn virtual int64_t tell() const noexcept
+    *   @fn virtual size_t tell() const noexcept
     *
     *   Get the position in a file
     *
@@ -174,7 +174,7 @@ public:
     *
     *   @sa seek
     */
-    virtual int64_t tell() const noexcept = 0;
+    virtual size_t tell() const noexcept = 0;
 
     virtual ~LX_AbstractFile();
 };
@@ -242,15 +242,15 @@ public:
     virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
-    virtual int64_t seek(int64_t offset, int whence) noexcept;
-    virtual int64_t tell() const noexcept;
+    virtual bool seek(long offset, int whence) noexcept;
+    virtual size_t tell() const noexcept;
 
     /**
-    *   @fn int64_t size()
+    *   @fn size_t size()
     *   Get the size of a file
     *   @return The size of the file on success. -1 on failure
     */
-    int64_t size() noexcept;
+    size_t size() noexcept;
 
     /**
     *   @fn const char * getFilename()
@@ -288,8 +288,8 @@ public:
     virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
-    virtual int64_t seek(int64_t offset, int whence) noexcept;
-    virtual int64_t tell() const noexcept;
+    virtual bool seek(long offset, int whence) noexcept;
+    virtual size_t tell() const noexcept;
 
     /// Destructor
     virtual ~LX_TmpFile();
