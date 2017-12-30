@@ -97,11 +97,11 @@ public:
     LX_AbstractFile() = default;
 
     /**
-    *   @fn virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept
+    *   @fn virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept
     *
     *   Read the file
     *
-    *   @param [out] ptr The pointer to a buffer to read data into
+    *   @param [out] buffer The pointer to a buffer to read data into
     *   @param [in] dsize The size of each object to read, in bytes
     *   @param [in] count The maximum number of objects to read
     *
@@ -109,33 +109,33 @@ public:
     *
     *   @note It can read less objects than *count*.
     */
-    virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept = 0;
+    virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept = 0;
     /**
-    *   @fn virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept
+    *   @fn virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept
     *
     *   Read exactly count bytes of the file
     *
-    *   @param [out] ptr The pointer to a buffer to read data into
+    *   @param [out] buffer The pointer to a buffer to read data into
     *   @param [in] dsize The size of each object to read, in bytes
     *   @param [in] count The maximum number of objects to read
     *
     *   @return The number of objects that are read. -1 at error or end of file
     */
-    virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept = 0;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept = 0;
 
     /**
-    *   @fn virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept
+    *   @fn virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept
     *
     *   Write on the file
     *
-    *   @param [in] ptr The pointer to a buffer containing data to write
+    *   @param [in] buffer The pointer to a buffer containing data to write
     *   @param [in] dsize The size of an object to write, in bytes
     *   @param [in] count The maximum number of objects to write
     *
     *   @return The number of objects written succesfully.
     *           This value may be less than count on error
     */
-    virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept = 0;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept = 0;
     /**
     *   @fn virtual size_t write(const std::string& str) noexcept
     *
@@ -236,10 +236,10 @@ public:
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 
-    virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept;
-    virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept;
+    virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept;
 
-    virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
     virtual bool seek(long offset, int whence) noexcept;
@@ -282,10 +282,10 @@ public:
     /// Constructor
     LX_TmpFile();
 
-    virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept;
-    virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept;
+    virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept;
 
-    virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
     virtual bool seek(long offset, int whence) noexcept;
@@ -297,7 +297,7 @@ public:
 
 
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept
 *
 *   Write a string into the file
 *
@@ -306,7 +306,7 @@ public:
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept;
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept;
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
 *
@@ -317,7 +317,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept;
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept;
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept;
 
 }
 

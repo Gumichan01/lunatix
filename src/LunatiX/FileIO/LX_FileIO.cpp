@@ -54,8 +54,7 @@ LX_AbstractFile::~LX_AbstractFile() {}
 class LX_File_
 {
     UTF8string _name;        /* The name of the file         */
-    //SDL_RWops *_data;        /* The internal file structure  */
-    FILE *_data;
+    FILE *_fstream;
 
     void open_(const uint32_t mode)
     {
@@ -63,45 +62,39 @@ class LX_File_
 
         if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
         {
-            //_data = SDL_RWFromFile(_name.utf8_str(), "wb+");
-            _data = fopen(_name.utf8_str(), "wb+");
+            _fstream = fopen(_name.utf8_str(), "wb+");
         }
         else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
         {
-            //_data = SDL_RWFromFile(_name.utf8_str(), "rb+");
-            _data = fopen(_name.utf8_str(), "rb+");
+            _fstream = fopen(_name.utf8_str(), "rb+");
         }
         else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
         {
-            //_data = SDL_RWFromFile(_name.utf8_str(), "ab+");
-            _data = fopen(_name.utf8_str(), "ab+");
+            _fstream = fopen(_name.utf8_str(), "ab+");
         }
         else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
         {
-            //_data = SDL_RWFromFile(_name.utf8_str(), "rb");
-            _data = fopen(_name.utf8_str(), "rb");
+            _fstream = fopen(_name.utf8_str(), "rb");
         }
         else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
         {
-            //_data = SDL_RWFromFile(_name.utf8_str(), "wb");
-            _data = fopen(_name.utf8_str(), "wb");
+            _fstream = fopen(_name.utf8_str(), "wb");
         }
         else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
         {
-            //_data = SDL_RWFromFile(_name.utf8_str(), "ab");
-            _data = fopen(_name.utf8_str(), "ab");
+            _fstream = fopen(_name.utf8_str(), "ab");
         }
         else
             throw IOException(str + "Unrecognized mode");
 
-        if(_data == nullptr)
+        if(_fstream == nullptr)
             throw IOException(str + LX_GetError());
     }
 
 public:
 
     LX_File_(const UTF8string& filename, const uint32_t mode)
-        : _name(filename), _data(nullptr)
+        : _name(filename), _fstream(nullptr)
     {
         if(mode == 0x00000000)
             throw IOException("LX_File: Invalid mode");
@@ -109,31 +102,31 @@ public:
         open_(mode);
     }
 
-    size_t read(void *ptr, size_t dsize, size_t count) noexcept
+    size_t read(void *buffer, size_t dsize, size_t count) noexcept
     {
-        return fread(ptr, dsize, count, _data);
+        return fread(buffer, dsize, count, _fstream);
     }
 
-    size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept
+    size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept
     {
         size_t total_read = 0;
-        char * p = static_cast<char *>(ptr);
+        char * p = static_cast<char *>(buffer);
 
         // Read at most count bytes
         while(total_read < count)
         {
-            size_t read_data = read(p, dsize, count);
-            p += read_data;
-            total_read += read_data;
+            size_t read_fstream = read(p, dsize, count);
+            p += read_fstream;
+            total_read += read_fstream;
         }
 
         return (total_read != 0 && total_read != count) ?
                static_cast<size_t>(-1) : total_read;
     }
 
-    size_t write(void *ptr, size_t dsize, size_t count) noexcept
+    size_t write(const void *buffer, size_t dsize, size_t count) noexcept
     {
-        return fwrite(ptr, dsize, count, _data);
+        return fwrite(buffer, dsize, count, _fstream);
     }
 
     size_t write(const std::string& str) noexcept
@@ -144,24 +137,26 @@ public:
 
     bool seek(long offset, int whence) noexcept
     {
-        return fseek(_data, offset, whence) == 0;
+        return fseek(_fstream, offset, whence) == 0;
     }
 
     size_t tell() const noexcept
     {
-        return ftell(_data);
+        return ftell(_fstream);
     }
 
     size_t size() noexcept
     {
-        long fsize = -1L;
-        long old_pos = tell();
+        size_t fsize = static_cast<size_t>(-1);
+        size_t old_pos = tell();
         bool ok = seek(0, LX_SEEK_END);
 
         if(ok) fsize = tell();
-        ok = seek(old_pos, LX_SEEK_END);
+        ok = seek(static_cast<long>(old_pos), LX_SEEK_SET);
 
-        if(!ok) return -1L;
+        if(!ok)
+            return static_cast<size_t>(-1);
+
         return fsize;
     }
 
@@ -172,10 +167,10 @@ public:
 
     void close() noexcept
     {
-        if(_data != nullptr)
+        if(_fstream != nullptr)
         {
-            fclose(_data);
-            _data = nullptr;
+            fclose(_fstream);
+            _fstream = nullptr;
         }
     }
 
@@ -195,20 +190,20 @@ LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
     : _fimpl(new LX_File_(filename, mode)) {}
 
 
-size_t LX_File::read(void *ptr, size_t dsize, size_t count) noexcept
+size_t LX_File::read(void *buffer, size_t dsize, size_t count) noexcept
 {
-    return _fimpl->read(ptr, dsize, count);
+    return _fimpl->read(buffer, dsize, count);
 }
 
-size_t LX_File::readExactly(void *ptr, size_t dsize, size_t count) noexcept
+size_t LX_File::readExactly(void *buffer, size_t dsize, size_t count) noexcept
 {
-    return _fimpl->readExactly(ptr, dsize, count);
+    return _fimpl->readExactly(buffer, dsize, count);
 }
 
 
-size_t LX_File::write(void *ptr, size_t dsize, size_t count) noexcept
+size_t LX_File::write(const void *buffer, size_t dsize, size_t count) noexcept
 {
-    return _fimpl->write(ptr, dsize, count);
+    return _fimpl->write(buffer, dsize, count);
 }
 
 size_t LX_File::write(const std::string& str) noexcept
@@ -261,9 +256,9 @@ public:
             throw IOException(strerror(errno));
     }
 
-    size_t read(void *ptr, size_t dsize, size_t count) noexcept
+    size_t read(void *buffer, size_t dsize, size_t count) noexcept
     {
-        size_t sz = fread(ptr, dsize, count, _f);
+        size_t sz = fread(buffer, dsize, count, _f);
         char * err = strerror(errno);
 
         if(ferror(_f))
@@ -272,25 +267,25 @@ public:
         return sz;
     }
 
-    size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept
+    size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept
     {
         size_t total_read = 0;
-        char * p = static_cast<char *>(ptr);
+        char * p = static_cast<char *>(buffer);
 
         // Read at most count bytes
         while(total_read < count)
         {
-            size_t read_data = read(p, dsize, count);
-            p += read_data;
-            total_read += read_data;
+            size_t read_fstream = read(p, dsize, count);
+            p += read_fstream;
+            total_read += read_fstream;
         }
 
         return total_read != count ? 0 : total_read;
     }
 
-    size_t write(void *ptr, size_t dsize, size_t count) noexcept
+    size_t write(const void *buffer, size_t dsize, size_t count) noexcept
     {
-        size_t sz = fwrite(ptr, dsize, count, _f);
+        size_t sz = fwrite(buffer, dsize, count, _f);
         char * err = strerror(errno);
 
         if(ferror(_f))
@@ -328,20 +323,20 @@ public:
 LX_TmpFile::LX_TmpFile(): _timpl(new LX_TmpFile_()) {}
 
 
-size_t LX_TmpFile::read(void *ptr, size_t dsize, size_t count) noexcept
+size_t LX_TmpFile::read(void *buffer, size_t dsize, size_t count) noexcept
 {
-    return _timpl->read(ptr, dsize, count);
+    return _timpl->read(buffer, dsize, count);
 }
 
-size_t LX_TmpFile::readExactly(void *ptr, size_t dsize, size_t count) noexcept
+size_t LX_TmpFile::readExactly(void *buffer, size_t dsize, size_t count) noexcept
 {
-    return _timpl->readExactly(ptr, dsize, count);
+    return _timpl->readExactly(buffer, dsize, count);
 }
 
 
-size_t LX_TmpFile::write(void *ptr, size_t dsize, size_t count) noexcept
+size_t LX_TmpFile::write(const void *buffer, size_t dsize, size_t count) noexcept
 {
-    return _timpl->write(ptr, dsize, count);
+    return _timpl->write(buffer, dsize, count);
 }
 
 size_t LX_TmpFile::write(const std::string& str) noexcept
@@ -367,13 +362,13 @@ LX_TmpFile::~LX_TmpFile()
 
 
 /// Stream
-LX_AbstractFile& operator <<(LX_AbstractFile& f, std::string s) noexcept
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept
 {
     f.write(s);
     return f;
 }
 
-LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept
 {
     f.write(u8s.utf8_str());
     return f;
