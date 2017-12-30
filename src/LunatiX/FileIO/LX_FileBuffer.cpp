@@ -57,25 +57,24 @@ public:
         : _name(filename), _bufsize(0)
     {
         std::string str("LX_FileBuffer: " + _name + " - ");
-        size_t r = 0;
-        int64_t s = 0;
+        size_t r = 0, fsize = 0;
 
         LX_File reader(_name, LX_FILEIO_RDONLY);
         reader.seek(0, LX_SEEK_END);     // Is that useful ?
 
-        if((s = reader.size()) == -1)
+        if((fsize = reader.size()) == static_cast<size_t>(-1))
             throw IOException(str + "cannot get the size of the file");
 
         // If offset > size of the file → failure
-        if(S64(offset) > s)
+        if(static_cast<size_t>(offset) > fsize)
             throw IOException(str + "invalid offset: offset > size of the file");
 
         if(sz == 0)
-            _bufsize = U64(s) - U64(offset);
+            _bufsize = U64(fsize) - U64(offset);
         else
             _bufsize = U64(sz);
 
-        reader.seek(S64(offset), LX_SEEK_SET);
+        reader.seek(static_cast<long>(offset), LX_SEEK_SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
 
         if(_buffer == nullptr)
