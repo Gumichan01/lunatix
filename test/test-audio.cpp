@@ -13,6 +13,7 @@ void test_effects();
 void test_volume();
 void test_volume2();
 void test_volume_(const unsigned ex);
+void test_info(const std::string& s);
 
 
 int main(int argc, char **argv)
@@ -38,6 +39,45 @@ int main(int argc, char **argv)
     LX_Quit();
 
     return EXIT_SUCCESS;
+}
+
+
+void test_info(const std::string& s)
+{
+    const LX_Mixer::LX_MusicTag tag = LX_Mixer::getMusicInfoFrom(s);
+
+    try
+    {
+        LX_Win::LX_WindowInfo info;
+        LX_Win::LX_initWindowInfo(info);
+        info.w = 256;
+        info.h = 256;
+        LX_Win::LX_Window w(info);
+        LX_Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - cover opened");
+
+        w.clearWindow();
+        LX_AABB box = {0,0,info.w,info.h};
+        cover->draw(&box);
+        w.update();
+        LX_Timer::delay(2000);
+        delete cover;
+    }
+    catch(LX_Graphics::LX_ImageException& ie)
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s", ie.what());
+    }
+
+    LX_Log::log("File: %s",s.c_str());
+    LX_Log::log("================================");
+    LX_Log::log("Title - %s",tag.title.utf8_str());
+    LX_Log::log("Artist - %s",tag.artist.utf8_str());
+    LX_Log::log("Album - %s",tag.album.utf8_str());
+    LX_Log::log("Year - %s",tag.year.utf8_str());
+    LX_Log::log("--------------------------------");
+    LX_Log::log("Duration - %s", tag.duration.utf8_str());
+    LX_Log::log("Format - %s", tag.format.utf8_str());
+    LX_Log::log("================================");
 }
 
 
@@ -186,58 +226,14 @@ void test_music()
     try
     {
         LX_Mixer::LX_Music music(s);
-        LX_Graphics::LX_BufferedImage * bf;
-
-        LX_Win::LX_WindowInfo info;
-        LX_Win::LX_initWindowInfo(info);
-        info.w = 256;
-        info.h = 256;
-        LX_Win::LX_Window w(info);
-        const libtagpp::Tag& tag = music.getInfo();
-
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"Get the cover of the title");
-
-        bf = LX_FileIO::LX_FileBuffer(s, tag.getImageMetaData()._img_offset,
-                                      tag.getImageMetaData()._img_size).loadBufferedImage();
-
-        try
-        {
-            LX_Graphics::LX_Sprite * cover = bf->generateSprite(w);
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - cover opened");
-
-            w.clearWindow();
-            LX_AABB box = {0,0,info.w,info.h};
-            cover->draw(&box);
-            w.update();
-            delete cover;
-        }
-        catch(LX_Graphics::LX_ImageException& ie)
-        {
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s", ie.what());
-        }
-
-        LX_Timer::delay(2000);
-        LX_Log::log("File: %s",s.c_str());
-        LX_Log::log("================================");
-        LX_Log::log("Title - %s",tag.title());
-        LX_Log::log("Artist - %s",tag.artist());
-        LX_Log::log("Album - %s",tag.album());
-        LX_Log::log("Year - %s",tag.year());
-        LX_Log::log("--------------------------------");
-        LX_Log::log("Image - position %d %d",tag.getImageMetaData()._img_offset,
-                    tag.getImageMetaData()._img_size);
-        LX_Log::log("Duration - %s", tag.properties().duration.c_str());
-        LX_Log::log("Channels - %d", tag.properties().channels);
-        LX_Log::log("Sample rate - %d Hz", tag.properties().samplerate);
-        LX_Log::log("Bitrate - %d bits/s", tag.properties().bitrate);
-        LX_Log::log("Format - %s", tag.properties().format.c_str());
-        LX_Log::log("================================");
     }
     catch(LX_Mixer::LX_MixerException& se)
     {
         LX_Log::log("mp3 file not loaded");
         LX_Log::log("%s", se.what());
     }
+
+    test_info(s);
 
     try
     {
