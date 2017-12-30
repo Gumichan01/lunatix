@@ -64,6 +64,25 @@ struct LX_MusicTag
     ~LX_MusicTag();
 };
 
+/**
+*   @fn const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept
+*   Get information about the music file
+*   @param [in] u8file the music file to get metadata from
+*   @return The metadata
+*
+*   @sa LX_MusicTag
+*/
+const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept;
+/**
+*   @fn const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept;
+*   Get information about the music file
+*   @param [in] file the music file to get metadata from
+*   @return The metadata
+*
+*   @sa LX_MusicTag
+*/
+const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept;
+
 
 class LX_Music_;
 

@@ -28,6 +28,7 @@
 
 namespace
 {
+
 LX_Graphics::
 LX_BufferedImage *_loadImage(const std::string& file,
                              const libtagpp::ImgMetaData& imgdata)
@@ -38,7 +39,8 @@ LX_BufferedImage *_loadImage(const std::string& file,
     return LX_FileIO::LX_FileBuffer(file, S32(imgdata._img_offset),
                                     S32(imgdata._img_size)).loadBufferedImage();
 }
-}
+
+}   // namespace
 
 namespace LX_Mixer
 {
@@ -50,6 +52,33 @@ LX_MusicTag::LX_MusicTag() noexcept: img(nullptr) {}
 LX_MusicTag::~LX_MusicTag()
 {
     delete img;
+}
+
+
+const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept
+{
+    return getMusicInfoFrom(u8file.utf8_str());
+}
+
+const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept
+{
+    libtagpp::Tag tag;
+    LX_MusicTag mtag;
+
+    if(!tag.readTag(file))
+        LX_SetError(std::string("Cannot get metadata from ") + file);
+
+    mtag.title    = tag.title();
+    mtag.artist   = tag.artist();
+    mtag.album    = tag.album();
+    mtag.year     = tag.year();
+    mtag.track    = tag.track();
+    mtag.genre    = tag.genre();
+    mtag.format   = tag.properties().format;
+    mtag.duration = tag.properties().duration;
+    mtag.img      = _loadImage(file, tag.getImageMetaData());
+
+    return mtag;
 }
 
 
