@@ -109,31 +109,31 @@ public:
         open_(mode);
     }
 
-    size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
+    size_t read(void *ptr, size_t dsize, size_t count) noexcept
     {
-        return fread(ptr, data_size, max_num, _data);
+        return fread(ptr, dsize, count, _data);
     }
 
-    size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
+    size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept
     {
         size_t total_read = 0;
         char * p = static_cast<char *>(ptr);
 
-        // Read at most num bytes
-        while(total_read < num)
+        // Read at most count bytes
+        while(total_read < count)
         {
-            size_t read_data = read(p, data_size, num);
+            size_t read_data = read(p, dsize, count);
             p += read_data;
             total_read += read_data;
         }
 
-        return (total_read != 0 && total_read != num) ?
+        return (total_read != 0 && total_read != count) ?
                static_cast<size_t>(-1) : total_read;
     }
 
-    size_t write(void *ptr, size_t data_size, size_t num) noexcept
+    size_t write(void *ptr, size_t dsize, size_t count) noexcept
     {
-        return fwrite(ptr, data_size, num, _data);
+        return fwrite(ptr, dsize, count, _data);
     }
 
     size_t write(const std::string& str) noexcept
@@ -195,20 +195,20 @@ LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
     : _fimpl(new LX_File_(filename, mode)) {}
 
 
-size_t LX_File::read(void *ptr, size_t data_size, size_t max_num) noexcept
+size_t LX_File::read(void *ptr, size_t dsize, size_t count) noexcept
 {
-    return _fimpl->read(ptr, data_size, max_num);
+    return _fimpl->read(ptr, dsize, count);
 }
 
-size_t LX_File::readExactly(void *ptr, size_t data_size, size_t num) noexcept
+size_t LX_File::readExactly(void *ptr, size_t dsize, size_t count) noexcept
 {
-    return _fimpl->readExactly(ptr, data_size, num);
+    return _fimpl->readExactly(ptr, dsize, count);
 }
 
 
-size_t LX_File::write(void *ptr, size_t data_size, size_t num) noexcept
+size_t LX_File::write(void *ptr, size_t dsize, size_t count) noexcept
 {
-    return _fimpl->write(ptr, data_size, num);
+    return _fimpl->write(ptr, dsize, count);
 }
 
 size_t LX_File::write(const std::string& str) noexcept
@@ -261,9 +261,9 @@ public:
             throw IOException(strerror(errno));
     }
 
-    size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
+    size_t read(void *ptr, size_t dsize, size_t count) noexcept
     {
-        size_t sz = fread(ptr, data_size, max_num, _f);
+        size_t sz = fread(ptr, dsize, count, _f);
         char * err = strerror(errno);
 
         if(ferror(_f))
@@ -272,25 +272,25 @@ public:
         return sz;
     }
 
-    size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
+    size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept
     {
         size_t total_read = 0;
         char * p = static_cast<char *>(ptr);
 
-        // Read at most num bytes
-        while(total_read < num)
+        // Read at most count bytes
+        while(total_read < count)
         {
-            size_t read_data = read(p, data_size, num);
+            size_t read_data = read(p, dsize, count);
             p += read_data;
             total_read += read_data;
         }
 
-        return total_read != num ? 0 : total_read;
+        return total_read != count ? 0 : total_read;
     }
 
-    size_t write(void *ptr, size_t data_size, size_t num) noexcept
+    size_t write(void *ptr, size_t dsize, size_t count) noexcept
     {
-        size_t sz = fwrite(ptr, data_size, num, _f);
+        size_t sz = fwrite(ptr, dsize, count, _f);
         char * err = strerror(errno);
 
         if(ferror(_f))
@@ -328,20 +328,20 @@ public:
 LX_TmpFile::LX_TmpFile(): _timpl(new LX_TmpFile_()) {}
 
 
-size_t LX_TmpFile::read(void *ptr, size_t data_size, size_t max_num) noexcept
+size_t LX_TmpFile::read(void *ptr, size_t dsize, size_t count) noexcept
 {
-    return _timpl->read(ptr, data_size, max_num);
+    return _timpl->read(ptr, dsize, count);
 }
 
-size_t LX_TmpFile::readExactly(void *ptr, size_t data_size, size_t num) noexcept
+size_t LX_TmpFile::readExactly(void *ptr, size_t dsize, size_t count) noexcept
 {
-    return _timpl->readExactly(ptr, data_size, num);
+    return _timpl->readExactly(ptr, dsize, count);
 }
 
 
-size_t LX_TmpFile::write(void *ptr, size_t data_size, size_t num) noexcept
+size_t LX_TmpFile::write(void *ptr, size_t dsize, size_t count) noexcept
 {
-    return _timpl->write(ptr, data_size, num);
+    return _timpl->write(ptr, dsize, count);
 }
 
 size_t LX_TmpFile::write(const std::string& str) noexcept

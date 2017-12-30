@@ -97,45 +97,45 @@ public:
     LX_AbstractFile() = default;
 
     /**
-    *   @fn virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept
+    *   @fn virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept
     *
     *   Read the file
     *
     *   @param [out] ptr The pointer to a buffer to read data into
-    *   @param [in] data_size The size of each object to read, in bytes
-    *   @param [in] max_num The maximum number of objects to read
+    *   @param [in] dsize The size of each object to read, in bytes
+    *   @param [in] count The maximum number of objects to read
     *
     *   @return The number of objects that are read. 0 at error or end of file
     *
-    *   @note It can read less objects than *max_num*.
+    *   @note It can read less objects than *count*.
     */
-    virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept = 0;
+    virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept = 0;
     /**
-    *   @fn virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept
+    *   @fn virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept
     *
-    *   Read exactly max_num bytes of the file
+    *   Read exactly count bytes of the file
     *
     *   @param [out] ptr The pointer to a buffer to read data into
-    *   @param [in] data_size The size of each object to read, in bytes
-    *   @param [in] num The maximum number of objects to read
+    *   @param [in] dsize The size of each object to read, in bytes
+    *   @param [in] count The maximum number of objects to read
     *
     *   @return The number of objects that are read. -1 at error or end of file
     */
-    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept = 0;
+    virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept = 0;
 
     /**
-    *   @fn virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept
+    *   @fn virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept
     *
     *   Write on the file
     *
     *   @param [in] ptr The pointer to a buffer containing data to write
-    *   @param [in] data_size The size of an object to write, in bytes
-    *   @param [in] num The maximum number of objects to write
+    *   @param [in] dsize The size of an object to write, in bytes
+    *   @param [in] count The maximum number of objects to write
     *
     *   @return The number of objects written succesfully.
-    *           This value may be less than num on error
+    *           This value may be less than count on error
     */
-    virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept = 0;
+    virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept = 0;
     /**
     *   @fn virtual size_t write(const std::string& str) noexcept
     *
@@ -236,10 +236,10 @@ public:
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 
-    virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept;
-    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept;
+    virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept;
+    virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept;
 
-    virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept;
+    virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
     virtual int64_t seek(int64_t offset, int whence) noexcept;
@@ -282,10 +282,10 @@ public:
     /// Constructor
     LX_TmpFile();
 
-    virtual size_t read(void *ptr, size_t data_size, size_t max_num) noexcept;
-    virtual size_t readExactly(void *ptr, size_t data_size, size_t num) noexcept;
+    virtual size_t read(void *ptr, size_t dsize, size_t count) noexcept;
+    virtual size_t readExactly(void *ptr, size_t dsize, size_t count) noexcept;
 
-    virtual size_t write(void *ptr, size_t data_size, size_t num) noexcept;
+    virtual size_t write(void *ptr, size_t dsize, size_t count) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
     virtual int64_t seek(int64_t offset, int whence) noexcept;
