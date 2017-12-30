@@ -66,29 +66,6 @@ bool LX_Channel<T>::recv(T& data)
 }
 
 template <typename T>
-bool LX_Channel<T>::vsend(const std::vector<T>& vec)
-{
-    _mutex.lock();
-
-    if(_closed)
-    {
-        _mutex.unlock();
-        return false;
-    }
-
-    for(T datum: vec)
-    {
-        _qdata.push(datum);
-    }
-
-    if(_nbwaiters > 0)
-        _cond.signal();
-
-    _mutex.unlock();
-    return true;
-}
-
-template <typename T>
 template <typename Iterator>
 bool LX_Channel<T>::vsend(Iterator begin, Iterator end)
 {
