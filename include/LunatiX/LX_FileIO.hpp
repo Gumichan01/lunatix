@@ -295,7 +295,6 @@ public:
     virtual ~LX_TmpFile();
 };
 
-
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept
 *
@@ -318,6 +317,21 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept;
 *   @return The updated file
 */
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept;
+
+/**
+*   @fn template <typename T> LX_AbstractFile& operator <<(LX_AbstractFile& f, const T s) noexcept
+*
+*   Write adata into the file
+*
+*   @param [in, out] f The file to write data into
+*   @param [in] data
+*
+*   @return The updated file
+*/
+template <typename T>
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept;
+
+#include "LX_FileIO.tpp"
 
 }
 
