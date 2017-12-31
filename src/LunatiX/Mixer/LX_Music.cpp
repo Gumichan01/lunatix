@@ -57,7 +57,7 @@ LX_MusicTag::~LX_MusicTag()
 
 const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept
 {
-    return getMusicInfoFrom(u8file.utf8_str());
+    return getMusicInfoFrom(u8file.utf8_sstring());
 }
 
 const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept
@@ -110,7 +110,7 @@ public:
     }
 
     explicit LX_Music_(const UTF8string& filename)
-        : _music(nullptr), _filename(filename.utf8_str()), mtag_set(false)
+        : _music(nullptr), _filename(filename.utf8_sstring()), mtag_set(false)
     {
         load_(_filename);
     }

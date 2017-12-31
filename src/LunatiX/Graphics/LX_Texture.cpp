@@ -116,7 +116,7 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
 
 LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
                        uint32_t format)
-    : LX_Texture(filename.utf8_str(), w, format) {}
+    : LX_Texture(filename.utf8_sstring(), w, format) {}
 
 
 void LX_Texture::draw() noexcept
@@ -353,7 +353,7 @@ LX_BufferedImage::LX_BufferedImage(const std::string& filename, uint32_t format)
 
 
 LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, uint32_t format)
-    : LX_BufferedImage(filename.utf8_str(), format) {}
+    : LX_BufferedImage(filename.utf8_sstring(), format) {}
 
 
 bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
@@ -898,7 +898,7 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_SolidTextTexture — Cannot create the texture " +
-                                std::string(text.utf8_str()));
+                                text.utf8_sstring());
 }
 
 
@@ -950,7 +950,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_ShadedTextTexture — Cannot create the texture: " +
-                                std::string(text.utf8_str()));
+                                text.utf8_sstring());
 }
 
 
@@ -1011,7 +1011,7 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_BlendedTextTexture — Cannot create the texture: " +
-                                std::string(text.utf8_str()));
+                                text.utf8_sstring());
 }
 
 

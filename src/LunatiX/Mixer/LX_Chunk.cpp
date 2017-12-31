@@ -53,7 +53,7 @@ public:
 
     explicit LX_Chunk_(const UTF8string filename) : _chunk(nullptr)
     {
-        load_(filename.utf8_str());
+        load_(filename.utf8_sstring());
     }
 
     bool play() noexcept

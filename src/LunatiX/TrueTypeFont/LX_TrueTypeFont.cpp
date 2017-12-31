@@ -158,7 +158,7 @@ LX_Font::LX_Font(const std::string& font_file, const LX_Colour& colour, unsigned
 *
 *   @return A control value, 0 on success, -1 on failure
 */
-int LX_Font::sizeOfText_(std::string text, int& w, int& h) const noexcept
+int LX_Font::sizeOfText_(const std::string& text, int& w, int& h) const noexcept
 {
     return sizeOfText_(text, _fimpl->_font_size, w, h);
 }
@@ -202,7 +202,7 @@ int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& 
 */
 int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const noexcept
 {
-    return sizeOfText_(std::string(text.utf8_str()), size, w, h);
+    return sizeOfText_(text.utf8_sstring(), size, w, h);
 }
 
 /*

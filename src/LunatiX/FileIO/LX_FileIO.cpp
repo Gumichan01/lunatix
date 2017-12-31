@@ -370,7 +370,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept
 
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept
 {
-    f.write(u8s.utf8_str());
+    f.write(u8s.utf8_sstring());
     return f;
 }
 

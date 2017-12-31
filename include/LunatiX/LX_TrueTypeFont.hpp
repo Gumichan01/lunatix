@@ -83,7 +83,7 @@ class LX_Font
     LX_Font& operator =(LX_Font& f) = delete;
 
     /* Private functions */
-    int sizeOfText_(std::string text, int& w, int& h) const noexcept;
+    int sizeOfText_(const std::string& text, int& w, int& h) const noexcept;
     int sizeOfText_(const std::string& text, const unsigned int size,
                     int& w, int& h) const noexcept;
     int sizeOfText_(const UTF8string& text, const unsigned int size,
