@@ -60,7 +60,6 @@ public:
         size_t r = 0, fsize = 0;
 
         LX_File reader(_name, LX_FILEIO_RDONLY);
-        reader.seek(0, LX_SEEK_END);     // Is that useful ?
 
         if((fsize = reader.size()) == static_cast<size_t>(-1))
             throw IOException(str + "cannot get the size of the file");
