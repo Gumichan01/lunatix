@@ -296,7 +296,7 @@ public:
 };
 
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept
 *
 *   Write a string into the file
 *
@@ -305,7 +305,7 @@ public:
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string s) noexcept;
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept;
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
 *
