@@ -139,7 +139,7 @@ bool UTF8string::utf8_is_valid_() const noexcept
             }
             else if(*it == '\xF4')
             {
-                if(*(it + 1) < '\x80' || *(it + 1) > '\x8F')
+                if(*(it + 1) > '\x8F')
                     return false;
             }
 
@@ -167,7 +167,7 @@ bool UTF8string::utf8_is_valid_() const noexcept
             }
             else if(*it == '\xED')
             {
-                if(*(it + 1) < '\x80' || *(it + 1) > '\x9F')
+                if(*(it + 1) > '\x9F')
                     return false;
             }
 
@@ -303,11 +303,11 @@ void UTF8string::utf8_at_(const size_t index, std::string& s) const noexcept
 
 std::string UTF8string::utf8_at(const size_t index) const
 {
-    if(index >= utf8data.size())
+    if(index >= utf8length)
         throw std::out_of_range("index value greater than the size of the string");
 
     std::string s;
-    utf8_at_(index, s);
+    utf8_at_(index,s);
     return s;
 }
 
@@ -315,7 +315,7 @@ std::string UTF8string::utf8_at(const size_t index) const
 std::string UTF8string::operator [](const size_t index) const noexcept
 {
     std::string s;
-    utf8_at_(index, s);
+    utf8_at_(index,s);
     return s;
 }
 
@@ -331,7 +331,7 @@ void UTF8string::utf8_pop()
 }
 
 
-UTF8string UTF8string::utf8_substr(size_t pos, size_t len) const
+UTF8string UTF8string::utf8_substr(size_t pos,size_t len) const
 {
     if(pos > utf8length)
         return std::string();
@@ -359,18 +359,18 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
         return npos;
 
     std::map<std::string, size_t> u8map;
-    const size_t n = str.utf8_length();
+    const size_t U8LEN = str.utf8length;
     size_t index = pos;
 
     // Preprocessing
     if(str.utf8length > 1)
     {
-        for(size_t i = n - 2; ; i--)
+        for(size_t i = U8LEN - 2; ; i--)
         {
             std::string s = str.utf8_at(i);
 
             if(u8map.find(s) == u8map.end())
-                u8map[s] = n - 1 - i;
+                u8map[s] = U8LEN - 1 - i;
 
             if(i == 0)
                 break;
@@ -378,9 +378,9 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
     }
 
     // Look for the subtring
-    while(index <= utf8length - n)
+    while(index <= utf8length - U8LEN)
     {
-        size_t j = n - 1;
+        size_t j = U8LEN - 1;
         bool found = false;
 
         while((str.utf8_at(j) == utf8_at(index + j)))
@@ -397,7 +397,7 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
         if(!found)
         {
             std::string ss = utf8_at(index + j);
-            index += (u8map.find(ss) == u8map.end()) ? n : u8map[ss];
+            index += (u8map.find(ss) == u8map.end()) ? U8LEN : u8map[ss];
         }
         else
             return index;
@@ -423,7 +423,7 @@ UTF8string& UTF8string::utf8_reverse()
 {
     UTF8iterator it = utf8_end();
     UTF8string rev;
-    utf8data = utf8_reverse_aux_(it, utf8_iterator_(), rev).utf8data;
+    utf8data = (utf8_reverse_aux_(it, utf8_iterator_(), rev)).utf8data;
     return *this;
 }
 
@@ -437,6 +437,11 @@ size_t UTF8string::utf8_size() const noexcept
 size_t UTF8string::utf8_length() const noexcept
 {
     return utf8length;
+}
+
+const std::string UTF8string::utf8_sstring() const noexcept
+{
+    return utf8data;
 }
 
 const char * UTF8string::utf8_str() const noexcept
@@ -465,7 +470,7 @@ UTF8iterator UTF8string::utf8_end() const noexcept
 
 bool operator ==(const UTF8string &str1, const UTF8string &str2) noexcept
 {
-    return std::string(str1.utf8_str()) == std::string(str2.utf8_str());
+    return str1.utf8_sstring() == str2.utf8_sstring();
 }
 
 bool operator !=(const UTF8string &str1, const UTF8string &str2) noexcept
@@ -476,54 +481,42 @@ bool operator !=(const UTF8string &str1, const UTF8string &str2) noexcept
 
 bool operator <=(const UTF8string &str1, const UTF8string &str2) noexcept
 {
-    const std::string s1 = str1.utf8_str();
-    const std::string s2 = str2.utf8_str();
-
-    return s1 <= s2;
+    return str1.utf8_sstring() <= str2.utf8_sstring();
 }
 
 
 bool operator >=(const UTF8string &str1, const UTF8string &str2) noexcept
 {
-    const std::string s1 = str1.utf8_str();
-    const std::string s2 = str2.utf8_str();
-
-    return s1 >= s2;
+    return str1.utf8_sstring() >= str2.utf8_sstring();
 }
 
 
 bool operator <(const UTF8string &str1, const UTF8string &str2) noexcept
 {
-    const std::string s1 = str1.utf8_str();
-    const std::string s2 = str2.utf8_str();
-
-    return s1 < s2;
+    return str1.utf8_sstring() < str2.utf8_sstring();
 }
 
 
 bool operator >(const UTF8string &str1, const UTF8string &str2) noexcept
 {
-    const std::string s1 = str1.utf8_str();
-    const std::string s2 = str2.utf8_str();
-
-    return s1 > s2;
+    return str1.utf8_sstring() > str2.utf8_sstring();
 }
 
 
 UTF8string operator +(const UTF8string &str1, const UTF8string &str2)
 {
-    return str1 + std::string(str2.utf8_str());
+    return str1 + str2.utf8_sstring();
 }
 
 
 UTF8string operator +(const UTF8string &str1, const std::string &str2)
 {
-    return UTF8string(std::string(str1.utf8_str()) + str2);
+    return UTF8string(str1.utf8_sstring() + str2);
 }
 
 UTF8string operator +(const std::string &str1, const UTF8string &str2)
 {
-    return UTF8string(std::string(str1 + str2.utf8_str()));
+    return UTF8string(str1 + str2.utf8_sstring());
 }
 
 
@@ -541,7 +534,7 @@ UTF8string operator +(const char * str1, const UTF8string &str2)
 
 std::ostream & operator <<(std::ostream &os, const UTF8string &str)
 {
-    os << str.utf8_str();
+    os << str.utf8_sstring();
     return os;
 }
 

@@ -14,7 +14,7 @@
 
 
 UTF8iterator::UTF8iterator(const UTF8string& u) noexcept
-    : index(0), data(u) {}
+    : index(0),data(u) {}
 
 UTF8iterator::UTF8iterator(const UTF8iterator& it) noexcept
     : index(it.index), data(it.data) {}
