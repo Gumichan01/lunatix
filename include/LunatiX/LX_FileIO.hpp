@@ -306,10 +306,11 @@ public:
 *
 *   @return The updated file
 *
-*   @warning If s if not a null-terminated string (it has not the final '\0'),
+*   @warning If s is not a null-terminated string (it has not the final '\0'),
 *            the behaviour of the function is undefined
 */
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept;
+
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept
 *
