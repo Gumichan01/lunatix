@@ -334,10 +334,15 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept;
 */
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept;
 
+// Those functions are not defined
+LX_AbstractFile& operator >>(LX_AbstractFile& f, char s[]) noexcept  = delete;
+LX_AbstractFile& operator >>(LX_AbstractFile& f, std::string& s) noexcept  = delete;
+LX_AbstractFile& operator >>(LX_AbstractFile& f, UTF8string& u8s) noexcept = delete;
+
 /**
 *   @fn template <typename T> LX_AbstractFile& operator <<(LX_AbstractFile& f, const T s) noexcept
 *
-*   Write adata into the file
+*   Write data into the file
 *
 *   @param [in, out] f The file to write data into
 *   @param [in] data
@@ -346,6 +351,19 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept
 */
 template <typename T>
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept;
+
+/**
+*   @fn template <typename T> LX_AbstractFile& operator >>(LX_AbstractFile& f, T& data) noexcept
+*
+*   Read data from the file
+*
+*   @param [in, out] f The file to read data from
+*   @param [out] data
+*
+*   @return The updated file
+*/
+template <typename T>
+LX_AbstractFile& operator >>(LX_AbstractFile& f, T& data) noexcept;
 
 #include "LX_FileIO.tpp"
 
