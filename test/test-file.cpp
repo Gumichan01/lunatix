@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstdio>
+#include <cstring>
 #include <map>
 
 #define N 64
@@ -13,7 +14,9 @@ using namespace LX_FileIO;
 void test_open(void);
 void test_read(void);
 void test_read2(void);
+void test_read3(void);
 void test_write(void);
+void test_write2(void);
 void test_tellSeek(void);
 void test_buffer(void);
 void test_buffer2(void);
@@ -23,7 +26,8 @@ void test_getChunk(void);
 
 namespace
 {
-string str("tmpFile");
+string str("./tmpFile");
+string strbin("./bin_tmpFile");
 }
 
 
@@ -40,8 +44,10 @@ int main(int argc, char **argv)
     LX_Log::log(" ==== Test File ==== ");
     test_open();
     test_write();
+    test_write2();
     test_read();
     test_read2();
+    test_read3();
     test_tellSeek();
     test_buffer();
     test_buffer2();
@@ -49,6 +55,7 @@ int main(int argc, char **argv)
     test_fs();
     test_getChunk();
     remove(str.c_str());
+    remove(strbin.c_str());
     LX_Log::log(" ==== End File ==== ");
 
     LX_Init();
@@ -121,7 +128,7 @@ void test_open(void)
     catch(IOException &ioe)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - IOException occured: %s -> ",
-        str3, ioe.what());
+                        str3, ioe.what());
     }
 
     LX_Log::log(" = END TEST = ");
@@ -129,7 +136,7 @@ void test_open(void)
 
 void test_read(void)
 {
-    LX_Log::log("test read ...");
+    LX_Log::log(" = TEST read #1 = ");
 
     size_t read_data = 0;
     char buf[N + 1];
@@ -154,7 +161,7 @@ void test_read(void)
 
 void test_read2(void)
 {
-    LX_Log::log(" = TEST read2 = ");
+    LX_Log::log(" = TEST read #2 = ");
     const char * strex = "data/bullet.png";
 
     Sint64 beg, end;
@@ -192,31 +199,125 @@ void test_read2(void)
     LX_Log::log(" = END TEST = ");
 }
 
+void test_read3(void)
+{
+    LX_Log::log(" = TEST read #3 = ");
+
+    size_t read_data = 0;
+    int i;
+    char c;
+    float fl;
+    LX_Log::log("Open %s ...", strbin.c_str());
+    LX_File f(strbin.c_str(),LX_FILEIO_RDONLY);
+
+    LX_Log::log("%s is opened. Its size is %d byte(s)", f.getFilename(), f.size());
+    LX_Log::log("Try to read the file");
+    read_data = f.read(&i, sizeof(int), 1);
+
+    if(read_data == 0)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1");
+    else
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+
+        if(i == 42)
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - 42");
+    }
+
+    read_data = f.read(&c, sizeof(char), 1);
+
+    if(read_data == 0)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1");
+    else
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+
+        if(c == 'G')
+            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - G");
+    }
+
+    read_data = f.read(&fl, sizeof(float), 1);
+
+    if(read_data == 0)
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1");
+    else
+    {
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - %f", fl);
+    }
+
+    LX_Log::log(" = END TEST = ");
+}
+
 
 void test_write(void)
 {
-    LX_Log::log(" = TEST write = ");
+    LX_Log::log(" = TEST write #1 = ");
 
     LX_Log::log("Open %s ...",str.c_str());
     LX_File f(str.c_str(),LX_FILEIO_WRONLY);
     UTF8string gumi("GUMI");
+    const char * gs = "CHAN01";
 
     LX_Log::log("%s is opened. Its size is %ld byte(s)", f.getFilename(),f.size());
     LX_Log::log("Writing %s",gumi.utf8_str());
     f << gumi;
 
-    if(f.size() != 4)
-        LX_Log::log("FAILURE - expected: 4; got: %ld", f.size());
+    if(f.size() != gumi.utf8_length())
+        LX_Log::log("FAILURE - expected: %u; got: %u", gumi.utf8_length(), f.size());
     else
-        LX_Log::log("SUCCESS - ok: 4");
+        LX_Log::log("SUCCESS - ok: %u", gumi.utf8_length());
 
     LX_Log::log("Writing the following text: CHAN01");
-    f << "CHAN01";
+    f << gs;
 
-    if(f.size() != 10)
-        LX_Log::log("FAILURE - expected: 10; got: %ld", f.size());
+    if(f.size() != (gumi.utf8_length() + strlen("CHAN01")))
+        LX_Log::log("FAILURE - expected: %u; got: %ld",
+                    gumi.utf8_length() + strlen(gs), f.size());
     else
-        LX_Log::log("SUCCESS - ok: 10");
+        LX_Log::log("SUCCESS - ok: %u", gumi.utf8_length() + strlen("CHAN01"));
+
+    LX_Log::log(" = END TEST = ");
+}
+
+void test_write2(void)
+{
+    LX_Log::log(" = TEST write #2 = ");
+
+    int i = 42;
+    char c = 'G';
+    float fl = 3.14f;
+    LX_Log::log("Open %s ...", strbin.c_str());
+    LX_File f(strbin.c_str(), LX_FILEIO_WRONLY);
+
+    LX_Log::log("%s is opened. Its size is %ld byte(s)", f.getFilename(),
+                f.size());
+    LX_Log::log("Writing %d", i);
+    f << i;
+
+    if(f.size() != sizeof(i))
+        LX_Log::log("FAILURE - expected: %u; got: %u", sizeof(i), f.size());
+    else
+        LX_Log::log("SUCCESS - ok: %u", sizeof(i));
+
+    LX_Log::log("Writing %c", c);
+    f << c;
+
+    if(f.size() != (sizeof(i) + sizeof(c)))
+        LX_Log::log("FAILURE - expected: %u; got: %u", sizeof(i) + sizeof(c),
+                    f.size());
+    else
+        LX_Log::log("SUCCESS - ok: %u", sizeof(i) + sizeof(c));
+
+    LX_Log::log("Writing %f", fl);
+    f << fl;
+
+    if(f.size() != (sizeof(i) + sizeof(c) + sizeof(fl)))
+        LX_Log::log("FAILURE - expected: %u; got: %u",
+                    sizeof(i) + sizeof(c) + sizeof(fl), f.size());
+    else
+        LX_Log::log("SUCCESS - ok: %u", sizeof(i) + sizeof(c) + sizeof(fl));
+
 
     LX_Log::log(" = END TEST = ");
 }
