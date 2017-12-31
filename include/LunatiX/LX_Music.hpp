@@ -179,7 +179,7 @@ public:
     */
     bool play(int loops) noexcept;
     /**
-    *   @fn void pause() noexcept
+    *   @fn static void pause() noexcept
     *   Pause or resume the current music
     */
     static void pause() noexcept;
