@@ -31,7 +31,6 @@
 *   Get the error message set by LX_SetError
 *
 *   @return The error message
-*
 */
 inline const char * LX_GetError()
 {
@@ -40,7 +39,7 @@ inline const char * LX_GetError()
 
 
 /**
-*   @fn inline int LX_SetError(std::string str)
+*   @fn inline int LX_SetError(const std::string str)
 *
 *   Set an error message
 *
@@ -49,13 +48,13 @@ inline const char * LX_GetError()
 *   @return Always returns -1
 *
 */
-inline int LX_SetError(std::string str)
+inline int LX_SetError(const std::string& str)
 {
     return SDL_SetError(str.c_str());
 }
 
 /**
-*   @fn inline int LX_SetError(UTF8string u8str)
+*   @fn inline int LX_SetError(const UTF8string u8str)
 *
 *   Set an error message
 *
@@ -64,9 +63,9 @@ inline int LX_SetError(std::string str)
 *   @return Always returns -1
 *
 */
-inline int LX_SetError(UTF8string u8str)
+inline int LX_SetError(const UTF8string& u8str)
 {
-    return SDL_SetError(u8str.utf8_str());
+    return LX_SetError(u8str.utf8_sstring());
 }
 
 
