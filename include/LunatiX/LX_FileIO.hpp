@@ -97,7 +97,7 @@ public:
     LX_AbstractFile() = default;
 
     /**
-    *   @fn virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept
+    *   @fn virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept
     *
     *   Read the file
     *
@@ -109,9 +109,9 @@ public:
     *
     *   @note It can read less objects than *count*.
     */
-    virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept = 0;
+    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept = 0;
     /**
-    *   @fn virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept
+    *   @fn virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept
     *
     *   Read exactly count bytes of the file
     *
@@ -121,7 +121,7 @@ public:
     *
     *   @return The number of objects that are read. -1 at error or end of file
     */
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept = 0;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept = 0;
 
     /**
     *   @fn virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept
@@ -135,7 +135,7 @@ public:
     *   @return The number of objects written succesfully.
     *           This value may be less than count on error
     */
-    virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept = 0;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept = 0;
     /**
     *   @fn virtual size_t write(const std::string& str) noexcept
     *
@@ -236,10 +236,10 @@ public:
     */
     LX_File(const UTF8string& filename, const uint32_t mode);
 
-    virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept;
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept;
+    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept;
 
-    virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
     virtual bool seek(long offset, int whence) noexcept;
@@ -282,10 +282,10 @@ public:
     /// Constructor
     LX_TmpFile();
 
-    virtual size_t read(void *buffer, size_t dsize, size_t count) noexcept;
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept;
+    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept;
 
-    virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept;
     virtual size_t write(const std::string& str) noexcept;
 
     virtual bool seek(long offset, int whence) noexcept;
@@ -340,7 +340,7 @@ LX_AbstractFile& operator >>(LX_AbstractFile& f, std::string& s) noexcept  = del
 LX_AbstractFile& operator >>(LX_AbstractFile& f, UTF8string& u8s) noexcept = delete;
 
 /**
-*   @fn template <typename T> LX_AbstractFile& operator <<(LX_AbstractFile& f, const T s) noexcept
+*   @fn template <typename T> LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept
 *
 *   Write data into the file
 *
