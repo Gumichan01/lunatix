@@ -295,6 +295,21 @@ public:
     virtual ~LX_TmpFile();
 };
 
+
+/**
+*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept
+*
+*   Write a string into the file
+*
+*   @param [in,out] f The file to write data into
+*   @param [in] s A null-terminated C string
+*
+*   @return The updated file
+*
+*   @warning If s if not a null-terminated string (it has not the final '\0'),
+*            the behaviour of the function is undefined
+*/
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept;
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept
 *

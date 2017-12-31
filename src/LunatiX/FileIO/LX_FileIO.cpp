@@ -362,6 +362,12 @@ LX_TmpFile::~LX_TmpFile()
 
 
 /// Stream
+LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept
+{
+    f.write(s, sizeof(char), strlen(s));
+    return f;
+}
+
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept
 {
     f.write(s);
