@@ -335,7 +335,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept;
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept;
 
 // Those functions are not defined
-LX_AbstractFile& operator >>(LX_AbstractFile& f, char s[]) noexcept  = delete;
+LX_AbstractFile& operator >>(LX_AbstractFile& f, char s[]) noexcept = delete;
 LX_AbstractFile& operator >>(LX_AbstractFile& f, std::string& s) noexcept  = delete;
 LX_AbstractFile& operator >>(LX_AbstractFile& f, UTF8string& u8s) noexcept = delete;
 
