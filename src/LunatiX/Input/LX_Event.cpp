@@ -60,7 +60,7 @@ LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
 
 #define LX_fromMouseButton(x) static_cast<uint8_t>(x)
 
-inline void fillButtonState(bool * state, uint32_t st) noexcept
+void fillButtonState(bool * state, uint32_t st) noexcept
 {
     const uint8_t lbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_LBUTTON);
     const uint8_t mbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_MBUTTON);
@@ -84,7 +84,7 @@ inline void fillButtonState(bool * state, uint32_t st) noexcept
         state[x2button] = true;
 }
 
-inline LX_Event::LX_WinEventID toWinEvent(uint8_t id) noexcept
+LX_Event::LX_WinEventID toWinEvent(uint8_t id) noexcept
 {
     LX_Event::LX_WinEventID wid;
 
