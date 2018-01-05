@@ -127,55 +127,55 @@ enum class LX_GamepadButton: int
 */
 enum class LX_EventType
 {
-    LX_UNKNOWN,                     /**< Unknown type           */
-    LX_QUIT,                        /**< User-requested quit    */
-    LX_WINDOWEVENT,                 /**< Window state change    */
+    UNKNOWN,                     /**< Unknown type           */
+    QUIT,                        /**< User-requested quit    */
+    WINDOWEVENT,                 /**< Window state change    */
 
     /* Keyboard events */
-    LX_KEYDOWN,                     /**< Key pressed                            */
-    LX_KEYUP,                       /**< Key released                           */
-    LX_TEXTEDITING,                 /**< Keyboard text editing (composition)    */
-    LX_TEXTINPUT,                   /**< Keyboard text input                    */
+    KEYDOWN,                     /**< Key pressed                            */
+    KEYUP,                       /**< Key released                           */
+    TEXTEDITING,                 /**< Keyboard text editing (composition)    */
+    TEXTINPUT,                   /**< Keyboard text input                    */
 
     /* Mouse events */
-    LX_MOUSEMOTION,                 /**< Mouse moved            */
-    LX_MOUSEBUTTONDOWN,             /**< Mouse button pressed   */
-    LX_MOUSEBUTTONUP,               /**< Mouse button released  */
-    LX_MOUSEWHEEL,                  /**< Mouse wheel motion     */
+    MOUSEMOTION,                 /**< Mouse moved            */
+    MOUSEBUTTONDOWN,             /**< Mouse button pressed   */
+    MOUSEBUTTONUP,               /**< Mouse button released  */
+    MOUSEWHEEL,                  /**< Mouse wheel motion     */
 
     /* Game controller events */
-    LX_CONTROLLERAXISMOTION,        /**< Game controller axis motion        */
-    LX_CONTROLLERBUTTONDOWN,        /**< Game controller button pressed     */
-    LX_CONTROLLERBUTTONUP,          /**< Game controller button released    */
-    LX_CONTROLLERDEVICEADDED,       /**< A new Game controller has been inserted into the system    */
-    LX_CONTROLLERDEVICEREMOVED,     /**< An opened Game controller has been removed                 */
+    CONTROLLERAXISMOTION,        /**< Game controller axis motion        */
+    CONTROLLERBUTTONDOWN,        /**< Game controller button pressed     */
+    CONTROLLERBUTTONUP,          /**< Game controller button released    */
+    CONTROLLERDEVICEADDED,       /**< A new Game controller has been inserted into the system    */
+    CONTROLLERDEVICEREMOVED,     /**< An opened Game controller has been removed                 */
 
     /* Drag and drop events */
-    LX_DROPFILE,                    /**< The system requests a file open    */
-    LX_USEREVENT                    /**< User-defined event                 */
+    DROPFILE,                    /**< The system requests a file open    */
+    USEREVENT                    /**< User-defined event                 */
 };
 
 /**
-*   @enum LX_WinEventID
+*   @enum LX_WinEventType
 *   @brief Window Event type
 */
-enum class LX_WinEventID
+enum class LX_WinEventType
 {
-    LX_WINEV_NONE,           /**< Never used                                            */
-    LX_WINEV_SHOWN,          /**< Window has been shown                                 */
-    LX_WINEV_HIDDEN,         /**< Window has been hidden                                */
-    LX_WINEV_EXPOSED,        /**< Window has been exposed and should be redrawn         */
-    LX_WINEV_MOVED,          /**< Window has been moved to a position (data1, data2)    */
-    LX_WINEV_RESIZED,        /**< Window has been resized to data1 × data2              */
-    LX_WINEV_SIZE_CHANGED,   /**< The window size has changed.                          */
-    LX_WINEV_MINIMIZED,      /**< Window has been minimized                             */
-    LX_WINEV_MAXIMIZED,      /**< Window has been maximized                             */
-    LX_WINEV_RESTORED,       /**< Window has been restored to normal size and position  */
-    LX_WINEV_ENTER,          /**< Window has gained mouse focus                         */
-    LX_WINEV_LEAVE,          /**< Window has lost mouse focus                           */
-    LX_WINEV_FOCUS_GAINED,   /**< Window has gained keyboard focus                      */
-    LX_WINEV_FOCUS_LOST,     /**< Window has lost keyboard focus                        */
-    LX_WINEV_CLOSE           /**< The window manager requests that the window be closed */
+    WIN_NONE,           /**< Never used                                            */
+    WIN_SHOWN,          /**< Window has been shown                                 */
+    WIN_HIDDEN,         /**< Window has been hidden                                */
+    WIN_EXPOSED,        /**< Window has been exposed and should be redrawn         */
+    WIN_MOVED,          /**< Window has been moved to a position (data1, data2)    */
+    WIN_RESIZED,        /**< Window has been resized to data1 × data2              */
+    WIN_SIZE_CHANGED,   /**< The window size has changed.                          */
+    WIN_MINIMIZED,      /**< Window has been minimized                             */
+    WIN_MAXIMIZED,      /**< Window has been maximized                             */
+    WIN_RESTORED,       /**< Window has been restored to normal size and position  */
+    WIN_ENTER,          /**< Window has gained mouse focus                         */
+    WIN_LEAVE,          /**< Window has lost mouse focus                           */
+    WIN_FOCUS_GAINED,   /**< Window has gained keyboard focus                      */
+    WIN_FOCUS_LOST,     /**< Window has lost keyboard focus                        */
+    WIN_CLOSE           /**< The window manager requests that the window be closed */
 };
 
 
@@ -314,10 +314,10 @@ struct LX_MWheel
 */
 struct LX_WEvent
 {
-    uint32_t wid;       /**< Identifier of the window where the event occured   */
-    LX_WinEventID evid; /**< Type of window event                               */
-    int data1;          /**< Event dependant data                               */
-    int data2;          /**< Event dependant data                               */
+    uint32_t wid;           /**< Identifier of the window where the event occured   */
+    LX_WinEventType evid;   /**< Type of window event                               */
+    int data1;              /**< Event dependant data                               */
+    int data2;              /**< Event dependant data                               */
 };
 
 
