@@ -46,27 +46,37 @@ union SDL_Event;
 */
 namespace LX_Event
 {
-using LX_KeyCode = SDL_Keycode;                     /**< Virtual key representation     */
-using LX_ScanCode = SDL_Scancode;                   /**< Physical key representation    */
-using LX_GamepadID = int32_t;                       /**< Identifier of the gamepad      */
+using LX_KeyCode   = SDL_Keycode;   /**< Virtual key representation     */
+using LX_ScanCode  = SDL_Scancode;  /**< Physical key representation    */
+using LX_GamepadID = int32_t;       /**< Identifier of the gamepad      */
 
 
 /**
-*   @typedef LX_GamepadAxis
+*   @enum LX_GamepadAxis
 *   @brief Gamepad axis value
 *
 *   Values:
-*   - LX_AXIS_INVALID
-*   - LX_AXIS_LEFTX
-*   - LX_AXIS_LEFTY
-*   - LX_AXIS_RIGHTX
-*   - LX_AXIS_RIGHTY
-*   - LX_AXIS_TRIGGERLEFT
-*   - LX_AXIS_TRIGGERRIGHT
-*   - LX_AXIS_MAX
+*   - INVALID
+*   - LEFTX
+*   - LEFTY
+*   - RIGHTX
+*   - RIGHTY
+*   - TRIGGERLEFT
+*   - TRIGGERRIGHT
+*   - MAX
 *
 */
-using LX_GamepadAxis = int16_t;
+enum class LX_GamepadAxis : int
+{
+    INVALID = -1,
+    LEFTX,
+    LEFTY,
+    RIGHTX,
+    RIGHTY,
+    TRIGGERLEFT,
+    TRIGGERRIGHT,
+    MAX
+};
 
 /**
 *   @enum LX_GamepadButton

@@ -20,7 +20,6 @@
 
 #include <LunatiX/LX_Event.hpp>
 
-
 namespace
 {
 
