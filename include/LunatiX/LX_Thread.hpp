@@ -74,40 +74,20 @@ public:
     *   @exception std::invalid_argument If the function given in argument is not defined
     */
     LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data);
-
     /*
     *   @todo Thread with variadic template
-    *   @fn template <class LX_Fun, class... LX_Args> LX_Thread(LX_Fun fun, const std::string& name, LX_Args args);
+    *   @fn template <class LX_Fun, class... LX_Args> LX_Thread(bool detach, LX_Fun fun, const std::string& name, LX_Args args);
     *   @brief Constructor
     *
+    *   @param [in] detach It specifies if the thread must be detached
     *   @param [in] fun The function launched by the thread
     *   @param [in] args arguments of the function
     *
     *   @exception std::invalid_argument If the function given in argument is not defined
     */
     /*template <typename LX_Fun, typename... LX_Args >
-    LX_Thread(LX_Fun fun, LX_Args... args);*/
+    LX_Thread(bool detach, LX_Fun fun, LX_Args... args);*/
 
-    /**
-    *   @deprecated This function is deprecated and will be removed in v0.13.0
-    *   @fn void start()
-    *
-    *   Start the thread
-    *
-    *   @note This function does nothing if the thread is already running
-    *   @sa startAndDetach
-    *   @sa join
-    */
-    void start();
-    /**
-    *   @deprecated This function is deprecated and will be removed in v0.13.0
-    *   @fn void startAndDetach()
-    *
-    *   Start the thread and detach it
-    *
-    *   @sa start
-    */
-    void startAndDetach();
     /**
     *   @fn bool joinable() const noexcept
     *
