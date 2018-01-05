@@ -192,7 +192,7 @@ struct LX_GButton
 {
     LX_GamepadID which;     /**< ID of the gamepad                                        */
     LX_GamepadButton value; /**< Button value                                             */
-    int16_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
+    uint8_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
 };
 
 /**
