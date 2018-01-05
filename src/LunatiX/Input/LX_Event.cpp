@@ -31,27 +31,27 @@ LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
     switch(button)
     {
     case SDL_BUTTON_LEFT:
-        m = LX_Event::LX_MouseButton::LX_MOUSE_LBUTTON;
+        m = LX_Event::LX_MouseButton::LBUTTON;
         break;
 
     case SDL_BUTTON_MIDDLE:
-        m = LX_Event::LX_MouseButton::LX_MOUSE_MBUTTON;
+        m = LX_Event::LX_MouseButton::MBUTTON;
         break;
 
     case SDL_BUTTON_RIGHT:
-        m = LX_Event::LX_MouseButton::LX_MOUSE_RBUTTON;
+        m = LX_Event::LX_MouseButton::RBUTTON;
         break;
 
     case SDL_BUTTON_X1:
-        m = LX_Event::LX_MouseButton::LX_MOUSE_X1;
+        m = LX_Event::LX_MouseButton::X1;
         break;
 
     case SDL_BUTTON_X2:
-        m = LX_Event::LX_MouseButton::LX_MOUSE_X2;
+        m = LX_Event::LX_MouseButton::X2;
         break;
 
     default:
-        m = LX_Event::LX_MouseButton::LX_MOUSE_UNKNWON;
+        m = LX_Event::LX_MouseButton::UNKNWON;
         break;
     }
 
@@ -62,11 +62,11 @@ LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
 
 void fillButtonState(bool * state, uint32_t st) noexcept
 {
-    const uint8_t lbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_LBUTTON);
-    const uint8_t mbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_MBUTTON);
-    const uint8_t rbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_RBUTTON);
-    const uint8_t x1button = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_X1);
-    const uint8_t x2button = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_X2);
+    const uint8_t lbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LBUTTON);
+    const uint8_t mbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::MBUTTON);
+    const uint8_t rbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::RBUTTON);
+    const uint8_t x1button = LX_fromMouseButton(LX_Event::LX_MouseButton::X1);
+    const uint8_t x2button = LX_fromMouseButton(LX_Event::LX_MouseButton::X2);
 
     if(st & SDL_BUTTON(lbutton))
         state[lbutton] = true;

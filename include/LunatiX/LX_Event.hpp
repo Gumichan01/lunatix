@@ -158,12 +158,12 @@ enum class LX_WinEventID
 */
 enum class LX_MouseButton: uint8_t
 {
-    LX_MOUSE_LBUTTON = 1,   /**< Left mouse button    */
-    LX_MOUSE_MBUTTON = 2,   /**< Middle mouse button  */
-    LX_MOUSE_RBUTTON = 3,   /**< Right mouse button   */
-    LX_MOUSE_X1 = 4,        /**< X1 mouse button      */
-    LX_MOUSE_X2 = 5,        /**< X2 mouse button      */
-    LX_MOUSE_UNKNWON = 0    /**< Unknown mouse button */
+    LBUTTON = 1,   /**< Left mouse button    */
+    MBUTTON = 2,   /**< Middle mouse button  */
+    RBUTTON = 3,   /**< Right mouse button   */
+    X1      = 4,   /**< X1 mouse button      */
+    X2      = 5,   /**< X2 mouse button      */
+    UNKNWON = 0    /**< Unknown mouse button */
 };
 
 /**
