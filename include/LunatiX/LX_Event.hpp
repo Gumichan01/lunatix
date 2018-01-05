@@ -166,6 +166,12 @@ enum class LX_MouseButton: uint8_t
     UNKNWON = 0    /**< Unknown mouse button */
 };
 
+/// Convert LX_MouseButton to int
+inline LX_MBIndex(const LX_MouseButton& b)
+{
+    return static_cast<uint8_t>(b);
+}
+
 /**
 *   @struct LX_GAxis
 *   @brief Axis of a gamepad
@@ -189,7 +195,6 @@ struct LX_GButton
     int16_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
 };
 
-
 /**
 *   @struct LX_MButton
 *   @brief Button of a mouse
@@ -205,7 +210,6 @@ struct LX_MButton
 };
 
 const int LX_MBUTTONS = 6;
-
 
 /**
 *   @struct LX_MMotion
@@ -228,14 +232,14 @@ const int LX_MBUTTONS = 6;
 *          {
 *              switch(evh.getEventType())
 *              {
-*                  case SDL_MOUSEMOTION:
+*                  case LX_MOUSEMOTION:
 *                      ...
 *                      LX_Log::log("state → %d %d %d %d %d",
-*                                  evh.getMouseMotion().state[LX_MOUSE_LBUTTON],
-*                                  evh.getMouseMotion().state[LX_MOUSE_MBUTTON],
-*                                  evh.getMouseMotion().state[LX_MOUSE_RBUTTON],
-*                                  evh.getMouseMotion().state[LX_MOUSE_X1],
-*                                  evh.getMouseMotion().state[LX_MOUSE_X2]);
+*                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::LBUTTON)],
+*                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::MBUTTON)],
+*                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::RBUTTON)],
+*                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::X1)],
+*                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::X2)]);
 *                      ...
 *                      break;
 *              }
