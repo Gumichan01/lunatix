@@ -160,47 +160,16 @@ LX_Texture::~LX_Texture()
 
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-                     const UTF8string filename, LX_AABB * sprite_area,
-                     LX_PIXELFORMAT format)
-    : LX_Texture(t, w, format), _sprite_area(nullptr), _filename(filename)
-{
-    setSpriteArea(sprite_area);
-}
-
+                     const UTF8string filename, LX_PIXELFORMAT format)
+    : LX_Texture(t, w, format), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      LX_PIXELFORMAT format)
-    : LX_Sprite(filename, w, nullptr,format) {}
-
-LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-                     LX_AABB * sprite_area, LX_PIXELFORMAT format)
-    : LX_Texture(filename, w, format), _sprite_area(nullptr), _filename(filename)
-{
-    setSpriteArea(sprite_area);
-}
-
+    : LX_Texture(filename, w, format), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      LX_PIXELFORMAT format)
-    : LX_Sprite(filename, w, nullptr,format) {}
-
-
-LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                     LX_AABB * sprite_area, LX_PIXELFORMAT format)
-    : LX_Texture(filename, w, format), _sprite_area(nullptr), _filename(filename)
-{
-    setSpriteArea(sprite_area);
-}
-
-
-void LX_Sprite::setSpriteArea(LX_AABB * sprite_area) noexcept
-{
-    if(sprite_area != nullptr)
-    {
-        _sprite_area = new LX_AABB();
-        *_sprite_area = *sprite_area;
-    }
-}
+    : LX_Texture(filename, w, format), _filename(filename) {}
 
 
 void LX_Sprite::draw() noexcept
@@ -221,7 +190,7 @@ void LX_Sprite::draw(LX_AABB * box, const double angle) noexcept
 
 void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror) noexcept
 {
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, _sprite_area, box,
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr, box,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
 }
 
@@ -232,12 +201,6 @@ UTF8string LX_Sprite::getFileName() noexcept
 }
 
 
-LX_Sprite::~LX_Sprite()
-{
-    delete _sprite_area;
-}
-
-
 /** LX_AnimatedSprite */
 
 // protected constructor
@@ -245,7 +208,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, bool loop,
                                      const UTF8string filename, LX_PIXELFORMAT format)
-    : LX_Sprite(t, w, filename, nullptr, format), _coordinates(coord), _SZ(coord.size()),
+    : LX_Sprite(t, w, filename, format), _coordinates(coord), _SZ(coord.size()),
       _delay(delay), _btime(0), _frame(0), _started(false), _loop(loop), _drawable(true) {}
 
 
@@ -261,7 +224,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, bool loop,
                                      LX_PIXELFORMAT format)
-    : LX_Sprite(filename, w, nullptr, format), _coordinates(coord),
+    : LX_Sprite(filename, w, format), _coordinates(coord),
       _SZ(coord.size()), _delay(delay), _btime(0), _frame(0),
       _started(false), _loop(loop), _drawable(true) {}
 
@@ -632,10 +595,10 @@ LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
                           _surface), w);
 }
 
-LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w, LX_AABB * sprite_area) const
+LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
 {
-    return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
-                         w, _filename, sprite_area);
+    return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),
+                         _surface), w, _filename);
 }
 
 LX_AnimatedSprite * LX_BufferedImage::

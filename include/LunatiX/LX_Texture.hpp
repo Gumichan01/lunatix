@@ -112,6 +112,7 @@ protected:
 public:
 
     /**
+    *   @deprecated This public constructor will be protected in 0.14.0
     *   @fn LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
     *                 LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888)
     *   @brief Constructor
@@ -169,10 +170,12 @@ public:
                LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
 
     /// Constuctor with the filename (UTF-8)
+    /// @deprecated This public constructor will be protected in 0.14.0
     LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
                LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
 
     /**
+    *   @deprecated draw() will be virtual in 0.14.0
     *   @fn virtual void draw() noexcept
     *   Draw a texture on the window
     *   @note The window is specified at object construction
@@ -180,6 +183,7 @@ public:
     virtual void draw() noexcept;
 
     /**
+    *   @deprecated bind() will be put in a new sub-class and removed from LX_Texture in 0.14.0
     *   @fn bool bind(float *iw = nullptr, float *ih = nullptr) noexcept
     *
     *   Bind a texture (its internal texture) to the OpenGL context
@@ -208,6 +212,7 @@ public:
     */
     bool bind(float *iw = nullptr, float *ih = nullptr) noexcept;
     /**
+    *   @deprecated unbind() will be put in a new sub-class and removed from LX_Texture in 0.14.0
     *   @fn bool unbind() noexcept
     *   Unbind a texture
     *   @return TRUE on success.FALSE if the operation is not supported.
@@ -242,19 +247,16 @@ class LX_Sprite: public LX_Texture
     LX_AABB *_sprite_area;
     UTF8string _filename;
 
-    void setSpriteArea(LX_AABB * sprite_area) noexcept;
-
 protected:
 
-    LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-              const UTF8string filename, LX_AABB * sprite_area = nullptr,
+    LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, const UTF8string filename,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
 
 public:
 
     /**
     *   @fn LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-    *                            LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888)
+    *                 LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888)
     *
     *   Sprite constructor with the filename
     *
@@ -266,23 +268,6 @@ public:
     */
     LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
-
-    /**
-    *   @fn LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-    *                 LX_AABB * sprite_area, LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888)
-    *
-    *   Sprite constructor with the filename
-    *
-    *   @param [in] filename
-    *   @param [in] w Window where the sprite wille drawn on
-    *   @param [in] sprite_area (Optional) Area of the sprite to display
-    *   @param [in] format (Optional) Pixel format
-    *
-    *   @note sprite_area is useful xhen the filename is a sprite sheet
-    */
-    LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-              LX_AABB * sprite_area, LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
-
     /**
     *   @fn LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
     *                            LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888)
@@ -297,22 +282,6 @@ public:
     */
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
-
-    /**
-    *   @fn LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-    *                 LX_AABB * sprite_area, LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888)
-    *
-    *   Sprite constructor with the filename (UTF-8)
-    *
-    *   @param [in] filename
-    *   @param [in] w Window where the sprite wille drawn on
-    *   @param [in] sprite_area Area of the sprite to display
-    *   @param [in] format (Optional) Pixel format
-    *
-    *   @note sprite_area is useful xhen the filename is a sprite sheet
-    */
-    LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-              LX_AABB * sprite_area, LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
 
     virtual void draw() noexcept;
     /**
@@ -390,7 +359,6 @@ class LX_AnimatedSprite: public LX_Sprite
     bool _loop;         // TRUE: Infinite loop - FALSE: one loop
     bool _drawable;
 
-protected:
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       bool loop, const UTF8string filename,
@@ -515,16 +483,13 @@ public:
     */
     LX_Texture * generateTexture(LX_Win::LX_Window& w) const;
     /**
-    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w,
-    *                                  LX_AABB * sprite_area = nullptr) const
+    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w) const
     *   Create a sprite from the current buffered image
     *
     *   @param [in] w The window to link the sprite to → see *draw()*
-    *   @param [in] sprite_area (Optional) Area of the sprite to display
     *   @return A new fresh allocated sprite on success, *nullptr* otherwise
     */
-    LX_Sprite * generateSprite(LX_Win::LX_Window& w,
-                               LX_AABB * sprite_area = nullptr) const;
+    LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
     *                                   const std::vector<LX_AABB>& coord,
