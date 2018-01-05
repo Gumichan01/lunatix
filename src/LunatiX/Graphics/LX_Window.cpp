@@ -31,19 +31,6 @@
 namespace
 {
 
-const int LX_ARGB_DEPTH = 32;                               /* Pixel depth (in bits) */
-const uint32_t LX_PIXEL_FORMAT = SDL_PIXELFORMAT_RGBA8888;  /* Pixel format          */
-
-const char * DEFAULT_TITLE = "LunatiX Demo";
-const int DEFAULT_WIN_WIDTH = 640;
-const int DEFAULT_WIN_HEIGHT = 480;
-
-// Mask values
-const uint32_t RMASK = 0xff000000;
-const uint32_t GMASK = 0x00ff0000;
-const uint32_t BMASK = 0x0000ff00;
-const uint32_t AMASK = 0x000000ff;
-
 uint32_t generateFlags(LX_Config::LX_Configuration &config)
 {
     uint32_t flag = 0x00000000;
@@ -60,6 +47,19 @@ using namespace LX_Config;
 
 namespace LX_Win
 {
+// Pixel depth (in bits)
+const int LX_ARGB_DEPTH = 32;
+
+const char * DEFAULT_TITLE = "LunatiX Demo";
+const int DEFAULT_WIN_WIDTH = 640;
+const int DEFAULT_WIN_HEIGHT = 480;
+
+// Mask values
+const uint32_t RMASK = 0xff000000;
+const uint32_t GMASK = 0x00ff0000;
+const uint32_t BMASK = 0x0000ff00;
+const uint32_t AMASK = 0x000000ff;
+
 
 void LX_initWindowInfo(LX_WindowInfo &info) noexcept
 {
@@ -186,7 +186,7 @@ struct LX_Window_
         if(sshot == nullptr)
             return false;
 
-        err = SDL_RenderReadPixels(_renderer, nullptr, LX_PIXEL_FORMAT,
+        err = SDL_RenderReadPixels(_renderer, nullptr, SDL_PIXELFORMAT_RGBA8888,
                                    sshot->pixels, sshot->pitch);
 
         if(err == -1)
