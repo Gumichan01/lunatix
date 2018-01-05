@@ -51,7 +51,8 @@ double radianToDegree(const double angle) noexcept
 }
 
 // Load a image from a file
-SDL_Surface * loadSurface_(const std::string& filename, LX_PIXELFORMAT& format) noexcept
+SDL_Surface * loadSurface_(const std::string& filename,
+                           LX_Graphics::LX_PIXELFORMAT& format) noexcept
 {
     SDL_Surface *loaded = IMG_Load(filename.c_str());
 
@@ -65,7 +66,8 @@ SDL_Surface * loadSurface_(const std::string& filename, LX_PIXELFORMAT& format) 
 
 // Load a texture from a file
 SDL_Texture * loadTexture_(const std::string& filename,
-                           LX_PIXELFORMAT& format, SDL_Renderer *r) noexcept
+                           LX_Graphics::LX_PIXELFORMAT& format,
+                           SDL_Renderer *r) noexcept
 {
     SDL_Surface *tmp_s = loadSurface_(filename, format);
 
