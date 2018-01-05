@@ -110,7 +110,7 @@ public:
 
     /**
     *   @fn LX_Graphics::
-    *       LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888) const
+    *       LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const
     *
     *   Load a buffered image from the file buffer.
     *
@@ -120,7 +120,7 @@ public:
     *
     *   @exception LX_Graphics::LX_ImageException if the buffered image cannot be created
     */
-    LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888) const;
+    LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const;
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
     *
