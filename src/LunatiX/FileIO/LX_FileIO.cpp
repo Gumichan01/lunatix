@@ -269,18 +269,23 @@ public:
 
     size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept
     {
+        const size_t FERR = static_cast<size_t>(-1);
         size_t total_read = 0;
-        char * p = static_cast<char *>(buffer);
+        uint8_t * p = static_cast<uint8_t*>(buffer);
 
         // Read at most count bytes
         while(total_read < count)
         {
-            size_t read_fstream = read(p, dsize, count);
+            size_t read_fstream = read(p, dsize, count - total_read);
+
+            if(read_fstream == FERR)
+                return FERR;
+
             p += read_fstream;
             total_read += read_fstream;
         }
 
-        return total_read != count ? 0 : total_read;
+        return total_read != count ? FERR : total_read;
     }
 
     size_t write(const void *buffer, size_t dsize, size_t count) noexcept
