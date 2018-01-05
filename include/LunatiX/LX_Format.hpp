@@ -10,6 +10,9 @@
 *   luxon.jean.pierre@gmail.com
 */
 
+#ifndef LX_FORMAT_H_INCLUDED
+#define LX_FORMAT_H_INCLUDED
+
 #include <SDL2/SDL_pixels.h>
 
 
@@ -57,3 +60,5 @@ enum class LX_PIXELFORMAT : uint32_t
 };
 
 }
+
+#endif  // LX_IMAGE_H_INCLUDED
