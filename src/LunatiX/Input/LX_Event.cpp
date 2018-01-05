@@ -289,11 +289,8 @@ bool LX_EventHandler::waitEventTimeout(int timeout) noexcept
 
 bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent) noexcept
 {
-    if(utype == UTYPE_ERR)
-    {
-        if((utype = SDL_RegisterEvents(1)) == UTYPE_ERR)
-            return false;
-    }
+    if((utype = SDL_RegisterEvents(1)) == UTYPE_ERR)
+        return false;
 
     SDL_Event ev;
     SDL_zero(ev);
