@@ -32,8 +32,6 @@ using namespace LX_Event;
 namespace
 {
 
-uint32_t DELAY = 33;
-
 // Check if the string is an End-Of-Line string (EOL)
 inline bool isEOL(const std::string& text) noexcept
 {
@@ -45,6 +43,7 @@ inline bool isEOL(const std::string& text) noexcept
 namespace LX_Text
 {
 
+const uint32_t DELAY = 33;
 
 /* Text input, private implementation   */
 

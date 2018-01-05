@@ -30,7 +30,6 @@
 
 namespace
 {
-const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
 bool intersetInterval(const int min1, const int max1, const int min2, const int max2) noexcept
 {
@@ -114,6 +113,8 @@ bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
 
 namespace LX_Physics
 {
+
+const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
 unsigned int euclide_square_distance(const int x1, const int y1,
                                      const int x2, const int y2) noexcept

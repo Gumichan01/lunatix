@@ -26,10 +26,12 @@
 
 namespace
 {
+
 LX_SystemInfo::LX_DisplayMode fromSDL_DisplayMode(SDL_DisplayMode& sdlmode)
 {
     return {sdlmode.w, sdlmode.h, sdlmode.refresh_rate};
 }
+
 }
 
 

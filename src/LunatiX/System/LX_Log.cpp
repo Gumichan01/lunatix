@@ -30,8 +30,6 @@
 
 namespace
 {
-// Debug
-bool debug_mode = false;
 
 // Get the time in millisecond
 long getMillisTime() noexcept
@@ -92,6 +90,8 @@ std::string getDate() noexcept
 
 namespace LX_Log
 {
+// Debug
+bool debug_mode = false;
 
 bool isDebugMode() noexcept
 {

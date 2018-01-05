@@ -43,6 +43,7 @@ inline int sizeOfText(TTF_Font *ttf, const std::string& text, int& w, int& h) no
 {
     return TTF_SizeUTF8(ttf, text.c_str(), &w, &h);
 }
+
 }
 
 

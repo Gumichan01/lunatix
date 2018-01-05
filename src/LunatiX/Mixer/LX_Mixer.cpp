@@ -29,6 +29,19 @@ using namespace LX_FileIO;
 
 namespace
 {
+
+bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
+                 const LX_Mixer::LX_MixerEffectType& u)
+{
+    return t.LX_DISTANCE == u.LX_DISTANCE && t.LX_PANNING == u.LX_PANNING
+           && t.LX_POSITION == u.LX_POSITION && t.LX_STEREO == u.LX_STEREO;
+}
+
+}
+
+namespace LX_Mixer
+{
+
 const unsigned short LX_DEFAULT_VOLUME = 100;
 // Overall volume in volume unit [0-100]
 unsigned short overall_volume = LX_DEFAULT_VOLUME;
@@ -43,18 +56,6 @@ unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 
 struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE = {false, false, false, false};
-
-bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
-                 const LX_Mixer::LX_MixerEffectType& u)
-{
-    return t.LX_DISTANCE == u.LX_DISTANCE && t.LX_PANNING == u.LX_PANNING
-           && t.LX_POSITION == u.LX_POSITION && t.LX_STEREO == u.LX_STEREO;
-}
-
-}
-
-namespace LX_Mixer
-{
 
 
 LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_EFFECT_NONE),
