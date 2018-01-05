@@ -19,6 +19,7 @@
 */
 
 #include <LunatiX/LX_Event.hpp>
+#include <SDL2/SDL_events.h>
 
 namespace
 {

@@ -22,7 +22,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <SDL2/SDL_keycode.h>
-#include <SDL2/SDL_mouse.h>
 
 union SDL_Event;
 
@@ -648,7 +647,5 @@ UTF8string stringOfButton(LX_GamepadButton button);
 UTF8string stringOfAxis(LX_GamepadAxis axis);
 
 }
-
-#include "LX_Event.inl"
 
 #endif // LX_EVENT_HPP_INCLUDED
