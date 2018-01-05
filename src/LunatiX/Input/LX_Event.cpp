@@ -24,6 +24,11 @@
 namespace
 {
 
+inline LX_Event::LX_State st(uint8_t s)
+{
+    return static_cast<LX_Event::LX_State>(s);
+}
+
 LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
 {
     LX_Event::LX_MouseButton m;
@@ -242,6 +247,9 @@ void eventState(const LX_Event::LX_EventType ty, bool process) noexcept
     }
 }
 
+
+
+//SDL_GameControllerButton
 }
 
 namespace LX_Event
@@ -503,7 +511,7 @@ const LX_GAxis LX_EventHandler::getAxis() const noexcept
 const LX_GButton LX_EventHandler::getButton() const noexcept
 {
     const SDL_ControllerButtonEvent bu = (*event).cbutton;
-    const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), bu.state};
+    const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), st(bu.state)};
     return gbutton;
 }
 
@@ -511,7 +519,7 @@ const LX_MButton LX_EventHandler::getMouseButton() const noexcept
 {
     const SDL_MouseButtonEvent mb = (*event).button;
     LX_MouseButton b = toMouseButton(mb.button);
-    const LX_MButton mbutton = {mb.windowID, b, mb.state, mb.clicks, mb.x, mb.y};
+    const LX_MButton mbutton = {mb.windowID, b, st(mb.state), mb.clicks, mb.x, mb.y};
     return mbutton;
 }
 

@@ -138,7 +138,7 @@ enum class LX_WinEventID
     LX_WINEV_SHOWN,          /**< Window has been shown                                 */
     LX_WINEV_HIDDEN,         /**< Window has been hidden                                */
     LX_WINEV_EXPOSED,        /**< Window has been exposed and should be redrawn         */
-    LX_WINEV_MOVED,          /**< Window has been moved to a position (data1,data2)     */
+    LX_WINEV_MOVED,          /**< Window has been moved to a position (data1, data2)    */
     LX_WINEV_RESIZED,        /**< Window has been resized to data1 × data2              */
     LX_WINEV_SIZE_CHANGED,   /**< The window size has changed.                          */
     LX_WINEV_MINIMIZED,      /**< Window has been minimized                             */
@@ -173,6 +173,17 @@ inline LX_MBIndex(const LX_MouseButton& b)
 }
 
 /**
+    @enum LX_State
+    @brief Button state (keyboard, mouse, gamepad)
+*/
+enum class LX_State: uint8_t
+{
+    PRESSED  = 1,   /**< The button is pressed  */
+    RELEASED = 0    /**< The button is released */
+};
+
+
+/**
 *   @struct LX_GAxis
 *   @brief Axis of a gamepad
 */
@@ -190,9 +201,9 @@ struct LX_GAxis
 */
 struct LX_GButton
 {
-    LX_GamepadID which;     /**< ID of the gamepad                                        */
-    LX_GamepadButton value; /**< Button value                                             */
-    uint8_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
+    LX_GamepadID which;     /**< ID of the gamepad  */
+    LX_GamepadButton value; /**< Button value       */
+    LX_State state;         /**< Button state       */
 };
 
 /**
@@ -201,12 +212,12 @@ struct LX_GButton
 */
 struct LX_MButton
 {
-    uint32_t wid;           /**< Identifier of the window where the event occured         */
-    LX_MouseButton button;  /**< Type of button                                           */
-    uint8_t state;          /**< Button state : LX_BUTTON_PRESSED or LX_BUTTON_RELEASE    */
-    uint8_t clicks;         /**< Number of clicks (1: single-click, 2: double-click, ...) */
-    int x;                  /**< X position of the mouse                                  */
-    int y;                  /**< Y position of the mouse                                  */
+    uint32_t wid;           /**< Identifier of the window where the event occured           */
+    LX_MouseButton button;  /**< Type of button                                             */
+    LX_State state;         /**< Button state                                               */
+    uint8_t clicks;         /**< Number of clicks (1: single-click, 2: double-click, ...)   */
+    int x;                  /**< X position of the mouse                                    */
+    int y;                  /**< Y position of the mouse                                    */
 };
 
 const int LX_MBUTTONS = 6;
