@@ -35,14 +35,15 @@ namespace
 const LX_AABB rnull = {0, 0, 0, 0};
 const LX_Colour cnull = {0, 0, 0, 0};
 
-SDL_RendererFlip shortToFlip_(const short mirror) noexcept
+SDL_RendererFlip shortToFlip_(const LX_Graphics::LX_MIRROR& mirror) noexcept
 {
-    if(mirror == 1)
+    return static_cast<SDL_RendererFlip>(mirror);
+    /*if(mirror == 1)
         return SDL_FLIP_HORIZONTAL;
     else if(mirror == 2)
         return SDL_FLIP_VERTICAL;
 
-    return SDL_FLIP_NONE;
+    return SDL_FLIP_NONE;*/
 }
 
 double radianToDegree(const double angle) noexcept
@@ -185,10 +186,10 @@ void LX_Sprite::draw(LX_AABB * box) noexcept
 
 void LX_Sprite::draw(LX_AABB * box, const double angle) noexcept
 {
-    draw(box, angle, LX_MIRROR_NONE);
+    draw(box, angle, LX_MIRROR::NONE);
 }
 
-void LX_Sprite::draw(LX_AABB * box, const double angle, const short mirror) noexcept
+void LX_Sprite::draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept
 {
     SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr, box,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
@@ -236,11 +237,11 @@ void LX_AnimatedSprite::draw(LX_AABB * box) noexcept
 
 void LX_AnimatedSprite::draw(LX_AABB * box, const double angle) noexcept
 {
-    draw(box, angle, LX_MIRROR_NONE);
+    draw(box, angle, LX_MIRROR::NONE);
 }
 
 
-void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const short mirror) noexcept
+void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept
 {
     if(!_started)
     {
@@ -734,11 +735,11 @@ void LX_TextTexture::draw() noexcept
 
 void LX_TextTexture::draw(const double angle) noexcept
 {
-    draw(angle, LX_MIRROR_NONE);
+    draw(angle, LX_MIRROR::NONE);
 }
 
 
-void LX_TextTexture::draw(const double angle, const short mirror) noexcept
+void LX_TextTexture::draw(const double angle, const LX_MIRROR mirror) noexcept
 {
     SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr,
                      &_dimension, (-radianToDegree(angle)), nullptr,

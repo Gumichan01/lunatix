@@ -55,13 +55,15 @@ class LX_Font;
 namespace LX_Graphics
 {
 
-/// Flag to define no mirror while drawing a texture
-const short LX_MIRROR_NONE       = 0;
-/// Flag to define horizontal mirror while drawing a texture
-const short LX_MIRROR_HORIZONTAL = 1;
-/// Flag to define vertical mirror while drawing a texture
-const short LX_MIRROR_VERTICAL   = 2;
-
+enum class LX_MIRROR : short
+{
+    /// Flag to define no mirror while drawing a texture
+    NONE       = 0,
+    /// Flag to define horizontal mirror while drawing a texture
+    HORIZONTAL = 1,
+    /// Flag to define vertical mirror while drawing a texture
+    VERTICAL   = 2,
+};
 
 /**
 *   @class LX_ImageException
@@ -311,7 +313,7 @@ public:
     */
     virtual void draw(LX_AABB * box, const double angle) noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box, const double angle, const short mirror) noexcept
+    *   @fn virtual void draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept
     *
     *   Draw the current sprite on the window with rotation
     *
@@ -327,7 +329,7 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box, const double angle, const short mirror) noexcept;
+    virtual void draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn UTF8string getFileName() noexcept
@@ -395,7 +397,7 @@ public:
 
     virtual void draw(LX_AABB * box) noexcept;
     virtual void draw(LX_AABB * box, const double angle) noexcept;
-    virtual void draw(LX_AABB * box, const double angle, const short mirror) noexcept;
+    virtual void draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn void resetAnimation() noexcept
@@ -686,7 +688,7 @@ public:
     */
     virtual void draw(const double angle) noexcept;
     /**
-    *   @fn virtual void draw(const double angle, const short mirror) noexcept
+    *   @fn virtual void draw(const double angle, const LX_MIRROR mirror) noexcept
     *
     *   Draw the current text on the window with rotation and mirror effect
     *
@@ -698,7 +700,7 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(const double angle, const short mirror) noexcept;
+    virtual void draw(const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn const UTF8string getText() const noexcept
