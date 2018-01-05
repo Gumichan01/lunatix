@@ -69,30 +69,48 @@ using LX_GamepadID = int32_t;                       /**< Identifier of the gamep
 using LX_GamepadAxis = int16_t;
 
 /**
-*   @typedef LX_GamepadButton
+*   @enum LX_GamepadButton
 *   @brief Gamepad button value
 *
 *   Values:
-*   - LX_BUTTON_INVALID
-*   - LX_BUTTON_A
-*   - LX_BUTTON_B
-*   - LX_BUTTON_X
-*   - LX_BUTTON_Y
-*   - LX_BUTTON_BACK
-*   - LX_BUTTON_GUIDE
-*   - LX_BUTTON_START
-*   - LX_BUTTON_LEFTSTICK
-*   - LX_BUTTON_RIGHTSTICK
-*   - LX_BUTTON_LEFTSHOULDER
-*   - LX_BUTTON_RIGHTSHOULDER
-*   - LX_BUTTON_DPAD_UP
-*   - LX_BUTTON_DPAD_DOWN
-*   - LX_BUTTON_DPAD_LEFT
-*   - LX_BUTTON_DPAD_RIGHT
-*   - LX_BUTTON_MAX
-*
+*   - INVALID
+*   - A
+*   - B
+*   - X
+*   - Y
+*   - BACK
+*   - GUIDE
+*   - START
+*   - LEFTSTICK
+*   - RIGHTSTICK
+*   - LEFTSHOULDER
+*   - RIGHTSHOULDER
+*   - DPAD_UP
+*   - DPAD_DOWN
+*   - DPAD_LEFT
+*   - DPAD_RIGHT
+*   - MAX
 */
-using LX_GamepadButton = int32_t;
+enum class LX_GamepadButton: int
+{
+    INVALID = -1,
+    A,
+    B,
+    X,
+    Y,
+    BACK,
+    GUIDE,
+    START,
+    LEFTSTICK,
+    RIGHTSTICK,
+    LEFTSHOULDER,
+    RIGHTSHOULDER,
+    DPAD_UP,
+    DPAD_DOWN,
+    DPAD_LEFT,
+    DPAD_RIGHT,
+    MAX
+};
 
 /**
 *   @enum LX_EventType

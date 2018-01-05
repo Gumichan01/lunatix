@@ -247,9 +247,6 @@ void eventState(const LX_Event::LX_EventType ty, bool process) noexcept
     }
 }
 
-
-
-//SDL_GameControllerButton
 }
 
 namespace LX_Event
