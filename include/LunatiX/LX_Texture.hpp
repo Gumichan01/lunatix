@@ -249,7 +249,7 @@ class LX_Sprite: public LX_Texture
 
 protected:
 
-    LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, const UTF8string filename,
+    LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, const UTF8string& filename,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
 
 public:
@@ -337,7 +337,7 @@ public:
     UTF8string getFileName() noexcept;
 
     /// Destructor
-    virtual ~LX_Sprite();
+    virtual ~LX_Sprite() = default;
 };
 
 
@@ -361,7 +361,7 @@ class LX_AnimatedSprite: public LX_Sprite
 
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
-                      bool loop, const UTF8string filename,
+                      bool loop, const UTF8string& filename,
                       LX_PIXELFORMAT format = LX_PIXELFORMAT::LX_PIXELFORMAT_RGBA8888);
 
 public:

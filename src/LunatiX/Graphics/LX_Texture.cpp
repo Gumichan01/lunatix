@@ -160,7 +160,7 @@ LX_Texture::~LX_Texture()
 
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-                     const UTF8string filename, LX_PIXELFORMAT format)
+                     const UTF8string& filename, LX_PIXELFORMAT format)
     : LX_Texture(t, w, format), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
@@ -207,7 +207,7 @@ UTF8string LX_Sprite::getFileName() noexcept
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,
                                      const uint32_t delay, bool loop,
-                                     const UTF8string filename, LX_PIXELFORMAT format)
+                                     const UTF8string& filename, LX_PIXELFORMAT format)
     : LX_Sprite(t, w, filename, format), _coordinates(coord), _SZ(coord.size()),
       _delay(delay), _btime(0), _frame(0), _started(false), _loop(loop), _drawable(true) {}
 
