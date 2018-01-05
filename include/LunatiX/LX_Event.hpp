@@ -156,7 +156,7 @@ enum class LX_WinEventID
 *   @enum LX_MouseButton
 *   @brief Representation of mouse butons
 */
-enum LX_MouseButton: uint8_t
+enum class LX_MouseButton: uint8_t
 {
     LX_MOUSE_LBUTTON = 1,   /**< Left mouse button    */
     LX_MOUSE_MBUTTON = 2,   /**< Middle mouse button  */

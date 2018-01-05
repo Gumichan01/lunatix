@@ -23,60 +23,65 @@
 
 namespace
 {
-const uint32_t UTYPE_ERR = static_cast<uint32_t>(-1);
-// Type of the user event
-uint32_t utype = UTYPE_ERR;
 
-inline LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
+LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
 {
     LX_Event::LX_MouseButton m;
 
     switch(button)
     {
     case SDL_BUTTON_LEFT:
-        m = LX_Event::LX_MOUSE_LBUTTON;
+        m = LX_Event::LX_MouseButton::LX_MOUSE_LBUTTON;
         break;
 
     case SDL_BUTTON_MIDDLE:
-        m = LX_Event::LX_MOUSE_MBUTTON;
+        m = LX_Event::LX_MouseButton::LX_MOUSE_MBUTTON;
         break;
 
     case SDL_BUTTON_RIGHT:
-        m = LX_Event::LX_MOUSE_RBUTTON;
+        m = LX_Event::LX_MouseButton::LX_MOUSE_RBUTTON;
         break;
 
     case SDL_BUTTON_X1:
-        m = LX_Event::LX_MOUSE_X1;
+        m = LX_Event::LX_MouseButton::LX_MOUSE_X1;
         break;
 
     case SDL_BUTTON_X2:
-        m = LX_Event::LX_MOUSE_X2;
+        m = LX_Event::LX_MouseButton::LX_MOUSE_X2;
         break;
 
     default:
-        m = LX_Event::LX_MOUSE_UNKNWON;
+        m = LX_Event::LX_MouseButton::LX_MOUSE_UNKNWON;
         break;
     }
 
     return m;
 }
 
+#define LX_fromMouseButton(x) static_cast<uint8_t>(x)
+
 inline void fillButtonState(bool * state, uint32_t st) noexcept
 {
-    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_LBUTTON))
-        state[LX_Event::LX_MOUSE_LBUTTON] = true;
+    const uint8_t lbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_LBUTTON);
+    const uint8_t mbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_MBUTTON);
+    const uint8_t rbutton  = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_RBUTTON);
+    const uint8_t x1button = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_X1);
+    const uint8_t x2button = LX_fromMouseButton(LX_Event::LX_MouseButton::LX_MOUSE_X2);
 
-    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_MBUTTON))
-        state[LX_Event::LX_MOUSE_MBUTTON] = true;
+    if(st & SDL_BUTTON(lbutton))
+        state[lbutton] = true;
 
-    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_RBUTTON))
-        state[LX_Event::LX_MOUSE_RBUTTON] = true;
+    if(st & SDL_BUTTON(mbutton))
+        state[mbutton] = true;
 
-    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_X1))
-        state[LX_Event::LX_MOUSE_X1] = true;
+    if(st & SDL_BUTTON(rbutton))
+        state[rbutton] = true;
 
-    if(st & SDL_BUTTON(LX_Event::LX_MOUSE_X2))
-        state[LX_Event::LX_MOUSE_X2] = true;
+    if(st & SDL_BUTTON(x1button))
+        state[x1button] = true;
+
+    if(st & SDL_BUTTON(x2button))
+        state[x2button] = true;
 }
 
 inline LX_Event::LX_WinEventID toWinEvent(uint8_t id) noexcept
@@ -242,6 +247,11 @@ void eventState(const LX_Event::LX_EventType ty, bool process) noexcept
 
 namespace LX_Event
 {
+
+const uint32_t UTYPE_ERR = static_cast<uint32_t>(-1);
+// Type of the user event
+uint32_t utype = UTYPE_ERR;
+
 // LX_Event
 
 LX_EventHandler::LX_EventHandler() noexcept: event(new SDL_Event())
