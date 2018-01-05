@@ -475,6 +475,7 @@ public:
     void convertNegative() noexcept;
 
     /**
+    *   @deprecated LX_Texture will be abstract, so generateTexture() will be removed in 0.14.0
     *   @fn LX_Texture * generateTexture() const
     *   Create a texture from the current buffered image
     *
