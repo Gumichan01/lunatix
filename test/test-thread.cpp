@@ -1,7 +1,7 @@
 
 #include <LunatiX/Lunatix.hpp>
 #include <system_error>
-#include <stdexcept>
+#include <functional>
 #include <sstream>
 #include <vector>
 
@@ -46,7 +46,7 @@ void sender2();
 void fwd();
 void receiver2();
 
-void vsender(std::vector<int>& v);
+void vsender(const std::vector<int>& v);
 void vreceiver();
 
 void test_thread();
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 
 void foo0()
 {
-    LX_Log::log("FAILURE - should not be called", LX_Multithreading::getCurrentThreadID());
+    LX_Log::log("(#%x) Hello World! from foo0", LX_Multithreading::getCurrentThreadID());
 }
 
 void foo1()
@@ -156,9 +156,8 @@ void test_thread()
     try
     {
         {
-            LX_Multithreading::LX_Thread th1(false, foo0);
-            th1.join();
-            LX_Log::log("(#%x): No mesage should be displayed", tid);
+            LX_Multithreading::LX_Thread(false, foo0).join();
+            LX_Multithreading::LX_Thread(false, foo1).join();
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -166,9 +165,6 @@ void test_thread()
     {
         LX_Log::log("(#%x): FAILURE - CRITICAL → basic thread #1", tid);
     }
-
-    LX_Log::log("(#%x): Basic thread #2 (create, start and join the thread)",
-                tid);
 
     LX_Log::log("(#%x): Basic thread #3 (create, and detach the thread)",
                 tid);
@@ -212,27 +208,7 @@ void test_thread_fail()
 
     const size_t tid = LX_Multithreading::getCurrentThreadID();
 
-    LX_Log::log("(#%x): fail thread #1 (create a thread with a null function pointer)",
-                tid);
-    try
-    {
-        {
-            LX_Multithreading::LX_Thread th1(false, nullptr);
-            th1.join();
-        }
-        LX_Log::log("(#%x): FAILURE - should crash → #1", tid);
-    }
-    catch(std::system_error& iv)
-    {
-        LX_Log::log("(#%x): %s", tid, iv.what());
-        LX_Log::log("(#%x): SUCCESS - exception occurred", tid);
-    }
-    catch(...)
-    {
-        LX_Log::log("(#%x): ERROR - unknown exception", tid);
-    }
-
-    LX_Log::log("(#%x): fail thread #4 (join a thread that was already joined)",
+    LX_Log::log("(#%x): fail thread #1 (join a thread that was already joined)",
                 tid);
     try
     {
@@ -254,7 +230,7 @@ void test_thread_fail()
     }
 
 
-    LX_Log::log("(#%x): fail thread #5 (join a detached thread)",tid);
+    LX_Log::log("(#%x): fail thread #2 (join a detached thread)",tid);
     try
     {
         {
@@ -479,7 +455,7 @@ void test_channel2()
 }
 
 
-void vsender(std::vector<int>& v)
+void vsender(const std::vector<int>& v)
 {
     LX_Log::log("(#%x): running",LX_Multithreading::getCurrentThreadID());
     c2.vsend(v.begin(), v.end());
