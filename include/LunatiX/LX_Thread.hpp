@@ -21,6 +21,7 @@
 */
 
 #include <thread>
+#include <future>
 
 
 /**
@@ -45,7 +46,7 @@ size_t getCurrentThreadID() noexcept;
 *   @class LX_Thread
 *   @brief The thread
 *
-*   LX_Thread
+*   LX_Thread is a simple wrapper of std::thread
 */
 class LX_Thread
 {
@@ -53,7 +54,9 @@ class LX_Thread
 
     LX_Thread() = delete;
     LX_Thread(const LX_Thread&) = delete;
+    LX_Thread(const LX_Thread&&) = delete;
     LX_Thread& operator =(const LX_Thread&) = delete;
+    LX_Thread&& operator =(const LX_Thread&&) = delete;
 
 public:
     /**
@@ -104,6 +107,53 @@ public:
 
     /// Destructor
     ~LX_Thread() = default;
+};
+
+/**
+*   @brief Asynchronous task
+*
+*   @arg ReturnValue The returned value of the task
+*
+*/
+template <class ReturnValue>
+class LX_ASyncTask
+{
+    std::future<ReturnValue> _future;
+
+    LX_ASyncTask() = delete;
+    LX_ASyncTask(const LX_ASyncTask&) = delete;
+    LX_ASyncTask(const LX_ASyncTask&&) = delete;
+    LX_ASyncTask& operator =(const LX_ASyncTask&) = delete;
+    LX_ASyncTask&& operator =(const LX_ASyncTask&&) = delete;
+
+public:
+
+    /**
+    *   @fn template <class LX_Fun, class... LX_Args > LX_ASyncTask(bool detach, LX_Fun&& fun, LX_Args&&... args);
+    *   @brief Constructor
+    *
+    *   @param [in] fun The function launched by the thread
+    *   @param [in] args arguments of the function
+    *
+    *   @exception std::system_error If the thread cannot be started
+    *
+    */
+    template <class LX_Fun, class... LX_Args >
+    LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args);
+
+    /**
+    *   @fn ReturnValue getResult()
+    *
+    *   Return the result of the execution of the task
+    *
+    *   @return The result
+    *
+    *   @exception If an exception occured during the execution of the function
+    *              in the asynchronous task, then this exception is thrown.
+    */
+    ReturnValue getResult();
+
+    ~LX_ASyncTask() = default;
 };
 
 #include "LX_Thread.tpp"
