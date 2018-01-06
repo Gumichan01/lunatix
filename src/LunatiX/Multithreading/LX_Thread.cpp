@@ -12,7 +12,6 @@
 
 #include <LunatiX/LX_Thread.hpp>
 #include <system_error>
-//#include <functional>
 
 
 namespace LX_Multithreading
