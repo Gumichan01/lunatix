@@ -20,20 +20,14 @@
 *   @version 0.12
 */
 
-#include <memory>
 
-namespace tthread
-{
-class mutex;
-class condition_variable;
-}
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 
 namespace LX_Multithreading
 {
-
-class LX_Mutex_;
-class LX_Cond_;
 
 /**
 *   @class LX_Mutex
@@ -42,27 +36,30 @@ class LX_Cond_;
 class LX_Mutex
 {
     friend class LX_Cond;
-    std::unique_ptr<LX_Mutex_> _mu;
+    std::mutex _lock;
+    std::unique_lock<std::mutex> _mutex;
 
-    LX_Mutex(const LX_Mutex& m);
+    LX_Mutex(const LX_Mutex& m) = delete;
+    LX_Mutex(const LX_Mutex&& m) = delete;
     LX_Mutex& operator =(const LX_Mutex& m) = delete;
+    LX_Mutex&& operator =(const LX_Mutex&& m) = delete;
 
 public:
 
     /// Constructor
-    LX_Mutex() noexcept;
+    LX_Mutex();
     /**
-    *   @fn void lock() noexcept
+    *   @fn void lock()
     *   Take the mutex (lock)
     */
-    void lock() noexcept;
+    void lock();
     /**
-    *   @fn void unlock() noexcept
+    *   @fn void unlock()
     *   Release the mutex (unlock)
     */
-    void unlock() noexcept;
+    void unlock();
     /// Destructor
-    ~LX_Mutex();
+    ~LX_Mutex() = default;
 };
 
 
@@ -70,20 +67,21 @@ public:
 *   @class LX_Cond
 *   @brief The condition variable
 */
-class LX_Cond
+/*class LX_Cond
 {
-    std::unique_ptr<LX_Cond_> _cond;
+    std::condition_variable _cond;
 
     LX_Cond(const LX_Cond& c) = delete;
+    LX_Cond(const LX_Cond&& c) = delete;
     LX_Cond& operator =(const LX_Cond& c) = delete;
+    LX_Cond&& operator =(const LX_Cond&& c) = delete;
 
-public:
+public:*/
 
     /// Constructor
-    LX_Cond() noexcept;
-
+    //LX_Cond();
     /**
-    *   @fn void wait(LX_Mutex& mutex) noexcept
+    *   @fn void wait(LX_Mutex& mutex)
     *
     *   Wait on the current condition variable
     *
@@ -109,9 +107,9 @@ public:
     *   @sa signal
     *   @sa broadcast
     */
-    void wait(LX_Mutex& mutex) noexcept;
+    //void wait(LX_Mutex& mutex);
     /**
-    *   @fn void signal() noexcept
+    *   @fn void signal()
     *
     *   Unblock a thread taht is blocked on the current condition variable
     *
@@ -122,9 +120,9 @@ public:
     *
     *   @sa broadcast
     */
-    void signal() noexcept;
+    //void signal();
     /**
-    *   @fn void broadcast() noexcept
+    *   @fn void broadcast()
     *
     *   Unblock all threads that are blocked on the current condition variable
     *
@@ -136,10 +134,10 @@ public:
     *
     *   @sa signal
     */
-    void broadcast() noexcept;
+    //void broadcast();
     /// Destructor
-    ~LX_Cond();
-};
+    //~LX_Cond() = default;
+//};
 
 }
 
