@@ -12,7 +12,7 @@
 
 #include <LunatiX/LX_Thread.hpp>
 #include <system_error>
-#include <functional>
+//#include <functional>
 
 
 namespace LX_Multithreading
@@ -24,11 +24,6 @@ size_t getCurrentThreadID() noexcept
 }
 
 // Class
-
-template <class LX_Fun, class... LX_Args >
-LX_Thread::LX_Thread(bool detach, LX_Fun&& fun, LX_Args&&... args)
-: thread(fun, args...) {}
-
 
 bool LX_Thread::joinable() const noexcept
 {

@@ -101,6 +101,8 @@ public:
     ~LX_Thread();
 };
 
+#include "LX_Thread.tpp"
+
 }
 
 #endif  // LX_THREAD_HPP_INCLUDED
