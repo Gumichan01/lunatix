@@ -98,7 +98,7 @@ public:
     size_t getID() noexcept;
 
     /// Destructor
-    ~LX_Thread();
+    ~LX_Thread() = default;
 };
 
 #include "LX_Thread.tpp"
