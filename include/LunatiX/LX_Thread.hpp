@@ -36,18 +36,12 @@ class LX_Thread_;
 namespace LX_Multithreading
 {
 
-/// Data used in argument in the function executed by the thread
-using LX_Data = void *;
-
-/// Signature of the function executed by the thread
-typedef void (* LX_ThreadFun) (void *data);
-
 /**
 *   @fn unsigned long getID();
 *   The the id of the current thread
 *   @return The thread identifier of the current thread
 */
-unsigned long getID() noexcept;
+unsigned long getCurrentID() noexcept;
 
 /**
 *   @class LX_Thread
@@ -55,25 +49,8 @@ unsigned long getID() noexcept;
 */
 class LX_Thread
 {
-    std::unique_ptr<LX_Thread_> _th;
-
-    LX_Thread(const LX_Thread& m) = delete;
-    LX_Thread& operator=(const LX_Thread& m) = delete;
 
 public:
-
-    /**
-    *   @deprecated This constructor is deprecated and will be removed in v0.13.0
-    *   @fn LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data)
-    *   @brief Constructor
-    *
-    *   @param [in] fun The function launched by the thread
-    *   @param [in] name The name of the thread
-    *   @param [in] data argument of the function (fun)
-    *
-    *   @exception std::invalid_argument If the function given in argument is not defined
-    */
-    LX_Thread(LX_ThreadFun fun, const std::string& name, LX_Multithreading::LX_Data data);
     /*
     *   @todo Thread with variadic template
     *   @fn template <class LX_Fun, class... LX_Args> LX_Thread(bool detach, LX_Fun fun, const std::string& name, LX_Args args);
@@ -106,17 +83,6 @@ public:
     *   @sa joinable
     */
     void join();
-
-    /**
-    *   @deprecated This function is deprecated and will be removed in v0.13.0
-    *   @fn const std::string& getName() const noexcept
-    *
-    *   Get the name of the thread
-    *
-    *   @return The name of the thread
-    *   @sa LX_Multithreading::getID
-    */
-    const std::string& getName() const noexcept;
 
     /// Destructor
     ~LX_Thread();
