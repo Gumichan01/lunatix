@@ -466,6 +466,7 @@ void test_channel2()
     LX_Multithreading::LX_Thread forwd(false, fwd);
     LX_Multithreading::LX_Thread r(false, receiver2);
 
+    LX_Timer::delay(1000);
     r.join();
     forwd.join();
     s.join();
@@ -514,6 +515,7 @@ void test_channel3()
     LX_Multithreading::LX_Thread s2(true, vsender, v2);
     LX_Multithreading::LX_Thread r(false, vreceiver);
 
+    LX_Timer::delay(1000);
     c2.close();
     r.join();
 
