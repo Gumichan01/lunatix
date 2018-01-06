@@ -11,12 +11,7 @@
 */
 
 #include <LunatiX/LX_Thread.hpp>
-//#include <LunatiX/utils/tinythread/tinythread.h>
-//#include <LunatiX/LX_Log.hpp>
-
 #include <system_error>
-//#include <functional>
-//#include <stdexcept>
 
 
 namespace LX_Multithreading

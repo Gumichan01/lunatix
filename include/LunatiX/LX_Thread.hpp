@@ -20,7 +20,6 @@
 *   @version 0.12
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
 #include <thread>
 
 
