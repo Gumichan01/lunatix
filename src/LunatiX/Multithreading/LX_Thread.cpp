@@ -12,14 +12,15 @@
 
 #include <LunatiX/LX_Thread.hpp>
 #include <system_error>
+#include <functional>
 
 
 namespace LX_Multithreading
 {
 
-std::thread::id getCurrentThreadID() noexcept
+size_t getCurrentThreadID() noexcept
 {
-    return std::this_thread::get_id();
+    return std::hash<std::thread::id>()(std::this_thread::get_id());
 }
 
 // Class
@@ -39,9 +40,9 @@ void LX_Thread::join()
     thread.join();
 }
 
-std::thread::id LX_Thread::getID() noexcept
+size_t LX_Thread::getID() noexcept
 {
-    return thread.get_id();
+    return std::hash<std::thread::id>()(thread.get_id());
 }
 
 }

@@ -35,11 +35,11 @@ namespace LX_Multithreading
 {
 
 /**
-*   @fn unsigned long getID();
+*   @fn size_t getCurrentThreadID() noexcept
 *   The the id of the current thread
 *   @return The thread identifier of the current thread
 */
-std::thread::id getCurrentThreadID() noexcept;
+size_t getCurrentThreadID() noexcept;
 
 /**
 *   @class LX_Thread
@@ -91,11 +91,11 @@ public:
     */
     void join();
     /**
-    *   @fn std::thread::id getD() noexcept
+    *   @fn size_t getD() noexcept
     *   The the id of the thread
     *   @return The thread identifier of the thread
     */
-    std::thread::id getID() noexcept;
+    size_t getID() noexcept;
 
     /// Destructor
     ~LX_Thread();
