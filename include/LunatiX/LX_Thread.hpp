@@ -21,9 +21,8 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
-#include <memory>
+#include <thread>
 
-class LX_Thread_;
 
 /**
     @ingroup Multithread
@@ -41,7 +40,7 @@ namespace LX_Multithreading
 *   The the id of the current thread
 *   @return The thread identifier of the current thread
 */
-unsigned long getCurrentID() noexcept;
+std::thread::id getCurrentThreadID() noexcept;
 
 /**
 *   @class LX_Thread
@@ -49,6 +48,12 @@ unsigned long getCurrentID() noexcept;
 */
 class LX_Thread
 {
+
+    std::thread thread;
+
+    LX_Thread() = delete;
+    LX_Thread(const LX_Thread&) = delete;
+    LX_Thread& operator =(const LX_Thread&) = delete;
 
 public:
     /*
@@ -62,15 +67,15 @@ public:
     *
     *   @exception std::invalid_argument If the function given in argument is not defined
     */
-    /*template <typename LX_Fun, typename... LX_Args >
-    LX_Thread(bool detach, LX_Fun fun, LX_Args... args);*/
+    template <class LX_Fun, class... LX_Args >
+    LX_Thread(bool detach, LX_Fun&& fun, LX_Args&&... args);
 
     /**
     *   @fn bool joinable() const noexcept
     *
     *   Check if the thread is joinable (not joined and not detached)
     *
-    *   @return TRUE if the thread is joinable, false otherwise
+    *   @return true if the thread is joinable, false otherwise
     *   @sa join
     */
     bool joinable() const noexcept;
@@ -79,10 +84,19 @@ public:
     *
     *   Wait for the thread to terminate
     *
-    *   @exception std::invalid_argument If the thread is not joinable (joined or detached)
+    *   @exception std::system_error if one of those errors occurred:
+    *               - the thread tries to join itself
+    *               - the thread is not valid
+    *               - the thread is not joinable
     *   @sa joinable
     */
     void join();
+    /**
+    *   @fn std::thread::id getD() noexcept
+    *   The the id of the thread
+    *   @return The thread identifier of the thread
+    */
+    std::thread::id getID() noexcept;
 
     /// Destructor
     ~LX_Thread();
