@@ -56,7 +56,26 @@ void test_cond();
 void test_channel();
 void test_channel2();
 void test_channel3();
+void test_async();
 
+unsigned long fact_(unsigned long n, unsigned long acc) noexcept;
+unsigned long fact(long n);
+
+unsigned long fact_(unsigned long n, unsigned long acc) noexcept
+{
+    if(n == 0 || n == 1)
+        return acc;
+
+    return fact_(n - 1, acc * n);
+}
+
+unsigned long fact(long n)
+{
+    if(n < 0)
+        throw std::invalid_argument("n is negative");
+
+    return fact_(static_cast<unsigned long>(n), 1);
+}
 
 int main(int argc, char **argv)
 {
@@ -77,6 +96,7 @@ int main(int argc, char **argv)
     test_channel();
     test_channel2();
     test_channel3();
+    test_async();
 
     LX_Log::log(" ==== END TEST ==== ");
     LX_Quit();
@@ -503,5 +523,55 @@ void test_channel3()
     LX_Log::log("(#%x): %s", tid, str.c_str());
 
     LX_Log::log("(#%x): Done",tid);
+    LX_Log::log("      == END TEST ==    ");
+}
+
+void test_async()
+{
+    LX_Log::log("   == TEST async task ==   ");
+
+    const size_t tid = LX_Multithreading::getCurrentThreadID();
+    LX_Log::log("(#%x): AsyncTask - normal case", tid);
+    LX_Random::initRand();
+
+    long param1 = static_cast<long>(LX_Random::crand() % 10);
+    long param2 = static_cast<long>(LX_Random::crand() % 10);
+    unsigned long expected1 = fact(param1);
+    unsigned long expected2 = fact(param2);
+
+    LX_Multithreading::LX_ASyncTask<unsigned long> async(fact, param1);
+
+    LX_Log::log("(#%x): AsyncTask - simulate synchonous", tid);
+    unsigned long r = LX_Multithreading::LX_ASyncTask<unsigned long>(fact, param2).getResult();
+    LX_Log::log("(#%x): AsyncTask - simulate synchonous DONE", tid);
+
+    LX_Log::log("(#%x): sync -  %u | %u", tid, r, expected2);
+
+    if(r == expected2)
+        LX_Log::log("(#%x): SUCCESS - sync OK", tid);
+    else
+        LX_Log::log("(#%x): FAILURE - sync KO", tid);
+
+    LX_Log::log("(#%x): AsyncTask - normal case - get result", tid);
+
+    r = async.getResult();
+    LX_Log::log("(#%x): async - %u | %u", tid, r, expected1);
+
+    if(r == expected1)
+        LX_Log::log("(#%x): SUCCESS - normal case -  OK", tid);
+    else
+        LX_Log::log("(#%x): FAILURE - normal case - KO", tid);
+
+
+    try
+    {
+        LX_Multithreading::LX_ASyncTask<unsigned long>(fact, -1L).getResult();
+        LX_Log::log("(#%x): FAILURE - an exception should occur", tid);
+    }
+    catch(const std::invalid_argument& inv)
+    {
+        LX_Log::log("(#%x): SUCCESS - %s - OK", tid, inv.what());
+    }
+
     LX_Log::log("      == END TEST ==    ");
 }
