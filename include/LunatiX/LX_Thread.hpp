@@ -44,10 +44,11 @@ size_t getCurrentThreadID() noexcept;
 /**
 *   @class LX_Thread
 *   @brief The thread
+*
+*   LX_Thread
 */
 class LX_Thread
 {
-
     std::thread thread;
 
     LX_Thread() = delete;
@@ -55,8 +56,7 @@ class LX_Thread
     LX_Thread& operator =(const LX_Thread&) = delete;
 
 public:
-    /*
-    *   @todo Thread with variadic template
+    /**
     *   @fn template <class LX_Fun, class... LX_Args> LX_Thread(bool detach, LX_Fun fun, const std::string& name, LX_Args args);
     *   @brief Constructor
     *
@@ -64,7 +64,12 @@ public:
     *   @param [in] fun The function launched by the thread
     *   @param [in] args arguments of the function
     *
-    *   @exception std::invalid_argument If the function given in argument is not defined
+    *   @exception std::system_error If the thread cannot be started
+    *
+    *   @note Any return value from the function is ignored.
+    *         If the function throws an exception, std::terminate is called.
+    *         In order to pass return values or exceptions back to the calling thread,
+    *         std::promise or std::async may be used (STL).
     */
     template <class LX_Fun, class... LX_Args >
     LX_Thread(bool detach, LX_Fun&& fun, LX_Args&&... args);
