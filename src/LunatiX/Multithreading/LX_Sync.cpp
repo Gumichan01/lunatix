@@ -32,12 +32,12 @@ void LX_Mutex::unlock()
 }
 
 // Condition variable
-/*LX_Cond::LX_Cond() : _cond() {}
+LX_Cond::LX_Cond() : _cond() {}
 
 
 void LX_Cond::wait(LX_Mutex& mutex)
 {
-    _cond.wait(std::unique_lock(mutex._mutex, std::adopt_lock_t));
+    _cond.wait(mutex._mutex);
 }
 
 
@@ -50,6 +50,6 @@ void LX_Cond::signal()
 void LX_Cond::broadcast()
 {
     _cond.notify_all();
-}*/
+}
 
 }

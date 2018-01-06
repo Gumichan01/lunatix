@@ -58,7 +58,12 @@ public:
     *   Release the mutex (unlock)
     */
     void unlock();
-    /// Destructor
+    /**
+    *   @fn ~LX_Mutex() = default
+    *   @brief Destructor
+    *
+    *   @note If a thread owns the mutex, tit is automatically unlocked
+    */
     ~LX_Mutex() = default;
 };
 
@@ -67,7 +72,7 @@ public:
 *   @class LX_Cond
 *   @brief The condition variable
 */
-/*class LX_Cond
+class LX_Cond
 {
     std::condition_variable _cond;
 
@@ -76,10 +81,10 @@ public:
     LX_Cond& operator =(const LX_Cond& c) = delete;
     LX_Cond&& operator =(const LX_Cond&& c) = delete;
 
-public:*/
+public:
 
     /// Constructor
-    //LX_Cond();
+    LX_Cond();
     /**
     *   @fn void wait(LX_Mutex& mutex)
     *
@@ -107,7 +112,7 @@ public:*/
     *   @sa signal
     *   @sa broadcast
     */
-    //void wait(LX_Mutex& mutex);
+    void wait(LX_Mutex& mutex);
     /**
     *   @fn void signal()
     *
@@ -120,7 +125,7 @@ public:*/
     *
     *   @sa broadcast
     */
-    //void signal();
+    void signal();
     /**
     *   @fn void broadcast()
     *
@@ -134,10 +139,10 @@ public:*/
     *
     *   @sa signal
     */
-    //void broadcast();
+    void broadcast();
     /// Destructor
-    //~LX_Cond() = default;
-//};
+    ~LX_Cond() = default;
+};
 
 }
 
