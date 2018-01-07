@@ -194,7 +194,7 @@ enum class LX_MouseButton: uint8_t
 };
 
 /// Convert LX_MouseButton to int
-inline LX_MBIndex(const LX_MouseButton& b)
+inline uint8_t LX_MBIndex(const LX_MouseButton& b)
 {
     return static_cast<uint8_t>(b);
 }
