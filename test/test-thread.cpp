@@ -1,5 +1,11 @@
 
-#include <LunatiX/Lunatix.hpp>
+#include <LunatiX/LX_Library.hpp>
+#include <LunatiX/LX_Thread.hpp>
+#include <LunatiX/LX_Sync.hpp>
+#include <LunatiX/LX_Timer.hpp>
+#include <LunatiX/LX_Channel.hpp>
+#include <LunatiX/LX_Random.hpp>
+#include <LunatiX/LX_Log.hpp>
 #include <system_error>
 #include <functional>
 #include <sstream>
@@ -79,13 +85,6 @@ unsigned long fact(long n)
 
 int main(int argc, char **argv)
 {
-    bool err = LX_Init();
-
-    if(!err)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
-    else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
-
     LX_Log::log(" ==== TEST Multithread ==== ");
     LX_Log::setDebugMode();
 
@@ -139,16 +138,9 @@ void countValueAgain()
 {
     LX_Log::log("countValueAgain - New thread(#%x) is running",LX_Multithreading::getCurrentThreadID());
     mutex2.lock();
-    for(int j = 0; j < 10; j++)
-    {
-        if(val == 10)
-        {
-            w += 1;
-            cond.wait(mutex2);
-            w -= 1;
-        }
-        val++;
-    }
+    w += 1;
+    cond.wait(mutex2);
+    w -= 1;
     mutex2.unlock();
 }
 
@@ -158,9 +150,8 @@ void sigValue()
 
     while(w > 0)
     {
-        mutex2.lock();
         cond.signal();
-        mutex2.unlock();
+        LX_Timer::delay(100);
     }
 }
 
@@ -313,10 +304,10 @@ void test_cond()
     LX_Multithreading::LX_Thread th3(false, countValueAgain);
     LX_Multithreading::LX_Thread th4(false, countValueAgain);
 
-    LX_Timer::delay(256);
+    LX_Timer::delay(100);
 
     LX_Log::log("(#%x): Start and detach the signal thread",tid);
-    LX_Multithreading::LX_Thread thsig(true, sigValue);
+    LX_Multithreading::LX_Thread(false, sigValue).join();
 
     th1.join();
     th2.join();
@@ -441,7 +432,7 @@ void test_channel()
 
     const size_t tid = LX_Multithreading::getCurrentThreadID();
     LX_Log::log("(#%x): Start the communication between the threads — int", tid);
-    LX_Log::log("(#%x): ..." ,tid);
+    LX_Log::log("(#%x): ...",tid);
 
     LX_Multithreading::LX_Thread s(false, sender);
     LX_Multithreading::LX_Thread r(false, receiver);
@@ -488,7 +479,7 @@ void vreceiver()
     std::vector<int> v;
     std::ostringstream ss;
 
-    LX_Log::log("(#%x): running" ,LX_Multithreading::getCurrentThreadID());
+    LX_Log::log("(#%x): running",LX_Multithreading::getCurrentThreadID());
     while(c2.vrecv(v, SZ));
 
     for(int n: v)
