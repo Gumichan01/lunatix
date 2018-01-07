@@ -113,6 +113,13 @@ public:
     *   @sa broadcast
     */
     void wait(LX_Mutex& mutex);
+    /// another definition ow wait
+    template<class Pred>
+    void wait(LX_Mutex& mutex, Pred p)
+    {
+        while(!p())
+            wait(mutex);
+    }
     /**
     *   @fn void signal()
     *
