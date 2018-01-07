@@ -164,7 +164,7 @@ int main(int argc, char **argv)
     {
         while(e.pollEvent())
         {
-            if(e.getEventType() == LX_EventType::LX_QUIT)
+            if(e.getEventType() == LX_EventType::QUIT)
                 go = 0;
         }
 
