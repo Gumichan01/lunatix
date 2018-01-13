@@ -17,39 +17,17 @@
 namespace LX_Multithreading
 {
 
-LX_Mutex::LX_Mutex() : _lock(), _mutex(_lock, std::defer_lock_t()) {}
+LX_Semaphore::LX_Semaphore(unsigned long value)
+    : _mutex(), _cond(), _count(value) {}
 
-
-void LX_Mutex::lock()
+void LX_Semaphore::wait()
 {
-    _mutex.lock();
+
 }
 
-
-void LX_Mutex::unlock()
+void LX_Semaphore::notify()
 {
-    _mutex.unlock();
-}
 
-// Condition variable
-LX_Cond::LX_Cond() : _cond() {}
-
-
-void LX_Cond::wait(LX_Mutex& mutex)
-{
-    _cond.wait(mutex._mutex);
-}
-
-
-void LX_Cond::signal()
-{
-    _cond.notify_one();
-}
-
-
-void LX_Cond::broadcast()
-{
-    _cond.notify_all();
 }
 
 }
