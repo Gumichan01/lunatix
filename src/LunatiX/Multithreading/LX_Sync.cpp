@@ -22,12 +22,16 @@ LX_Semaphore::LX_Semaphore(unsigned long value)
 
 void LX_Semaphore::wait()
 {
-
+    std::unique_lock<std::mutex> lock(_mutex);
+    _cond.wait(lock, [this] { return _count != 0;});
+    --_count;
 }
 
 void LX_Semaphore::notify()
 {
-
+    std::unique_lock<std::mutex> lock(_mutex);
+    ++_count;
+    _cond.notify_one();
 }
 
 }

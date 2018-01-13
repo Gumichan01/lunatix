@@ -40,7 +40,7 @@ class LX_Semaphore
     LX_Semaphore& operator =(const LX_Semaphore&) = delete;
     LX_Semaphore&& operator =(const LX_Semaphore&&) = delete;
 
-private:
+public:
 
     LX_Semaphore(unsigned long value = 0);
 
