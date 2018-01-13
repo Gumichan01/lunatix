@@ -55,19 +55,17 @@
 		</Linker>
 		<Unit filename="include/LunatiX/LX_AABB.hpp" />
 		<Unit filename="include/LunatiX/LX_Audio.hpp" />
-		<Unit filename="include/LunatiX/LX_Channel.hpp" />
-		<Unit filename="include/LunatiX/LX_Channel.tpp" />
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Colour.hpp" />
 		<Unit filename="include/LunatiX/LX_Config.hpp" />
 		<Unit filename="include/LunatiX/LX_Device.hpp" />
 		<Unit filename="include/LunatiX/LX_Error.hpp" />
 		<Unit filename="include/LunatiX/LX_Event.hpp" />
-		<Unit filename="include/LunatiX/LX_Event.inl" />
 		<Unit filename="include/LunatiX/LX_FileBuffer.hpp" />
 		<Unit filename="include/LunatiX/LX_FileIO.hpp" />
+		<Unit filename="include/LunatiX/LX_FileIO.tpp" />
 		<Unit filename="include/LunatiX/LX_FileSystem.hpp" />
-		<Unit filename="include/LunatiX/LX_Format.inl" />
+		<Unit filename="include/LunatiX/LX_Format.hpp" />
 		<Unit filename="include/LunatiX/LX_Gamepad.hpp" />
 		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
@@ -95,6 +93,9 @@
 		<Unit filename="include/LunatiX/LX_Text.hpp" />
 		<Unit filename="include/LunatiX/LX_Texture.hpp" />
 		<Unit filename="include/LunatiX/LX_Thread.hpp" />
+		<Unit filename="include/LunatiX/LX_Thread.tpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="include/LunatiX/LX_Timer.hpp" />
 		<Unit filename="include/LunatiX/LX_TrueTypeFont.hpp" />
 		<Unit filename="include/LunatiX/LX_Vector2D.hpp" />
@@ -151,7 +152,10 @@
 		<Unit filename="src/LunatiX/Utilities/libtagspp/tags.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/utf16.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/vorbis.cpp" />
-		<Unit filename="src/LunatiX/Utilities/tinythread/tinythread.cpp" />
+		<Unit filename="src/LunatiX/Utilities/tinythread/tinythread.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/LunatiX/Utilities/utf8_iterator.cpp" />
 		<Unit filename="src/LunatiX/Utilities/utf8_string.cpp" />
 		<Unit filename="src/LunatiX/Version/LX_Version.cpp" />
