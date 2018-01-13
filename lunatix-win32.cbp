@@ -106,8 +106,6 @@
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tagspriv.h" />
-		<Unit filename="include/LunatiX/utils/tinythread/fast_mutex.h" />
-		<Unit filename="include/LunatiX/utils/tinythread/tinythread.h" />
 		<Unit filename="include/LunatiX/utils/utf8_iterator.hpp" />
 		<Unit filename="include/LunatiX/utils/utf8_string.hpp" />
 		<Unit filename="src/LunatiX/Device/LX_Device.cpp" />
@@ -152,10 +150,6 @@
 		<Unit filename="src/LunatiX/Utilities/libtagspp/tags.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/utf16.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/vorbis.cpp" />
-		<Unit filename="src/LunatiX/Utilities/tinythread/tinythread.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
 		<Unit filename="src/LunatiX/Utilities/utf8_iterator.cpp" />
 		<Unit filename="src/LunatiX/Utilities/utf8_string.cpp" />
 		<Unit filename="src/LunatiX/Version/LX_Version.cpp" />
