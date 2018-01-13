@@ -35,7 +35,6 @@ OPENGL_DIR=/usr/include/
 LIBRARIES_I_DIR=./include/
 LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
 UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
-TINYTHREAD_I_PATH=$(UTILS_I_PATH)tinythread/
 LIBTAGSPP_I_PATH=$(UTILS_I_PATH)libtagspp/
 SDL2_I_PATH=`pkg-config --cflags sdl2 SDL2_image SDL2_mixer SDL2_ttf`
 
@@ -57,7 +56,6 @@ SRC_TEXT_PATH=$(LUNATIX_PATH)Text/
 SRC_TTF_PATH=$(LUNATIX_PATH)TrueTypeFont/
 SRC_VERSION_PATH=$(LUNATIX_PATH)Version/
 SRC_UTILS_PATH=$(LUNATIX_PATH)Utilities/
-SRC_TINYTHREAD_PATH=$(SRC_UTILS_PATH)tinythread/
 SRC_LIBTAGSPP_PATH=$(SRC_UTILS_PATH)libtagspp/
 
 # Path to the different sources files
@@ -81,12 +79,11 @@ $(SRC_SYSTEM_PATH)LX_Log.cpp $(SRC_SYSTEM_PATH)LX_FileSystem.cpp \
 $(SRC_TEXT_PATH)LX_Text.cpp $(SRC_TTF_PATH)LX_TrueTypeFont.cpp \
 $(SRC_VERSION_PATH)LX_Version.cpp \
 $(SRC_UTILS_PATH)utf8_string.cpp $(SRC_UTILS_PATH)utf8_iterator.cpp \
-$(SRC_TINYTHREAD_PATH)tinythread.cpp $(SRC_LIBTAGSPP_PATH)8859.cpp \
-$(SRC_LIBTAGSPP_PATH)flac.cpp $(SRC_LIBTAGSPP_PATH)id3genres.cpp \
-$(SRC_LIBTAGSPP_PATH)id3v1.cpp $(SRC_LIBTAGSPP_PATH)id3v2.cpp \
-$(SRC_LIBTAGSPP_PATH)m4a.cpp $(SRC_LIBTAGSPP_PATH)tags.cpp \
-$(SRC_LIBTAGSPP_PATH)utf16.cpp $(SRC_LIBTAGSPP_PATH)vorbis.cpp \
-$(SRC_LIBTAGSPP_PATH)libtagspp.cpp
+$(SRC_LIBTAGSPP_PATH)8859.cpp $(SRC_LIBTAGSPP_PATH)flac.cpp \
+$(SRC_LIBTAGSPP_PATH)id3genres.cpp $(SRC_LIBTAGSPP_PATH)id3v1.cpp \
+$(SRC_LIBTAGSPP_PATH)id3v2.cpp $(SRC_LIBTAGSPP_PATH)m4a.cpp \
+$(SRC_LIBTAGSPP_PATH)tags.cpp $(SRC_LIBTAGSPP_PATH)utf16.cpp \
+$(SRC_LIBTAGSPP_PATH)vorbis.cpp $(SRC_LIBTAGSPP_PATH)libtagspp.cpp
 
 # Test files
 SRC_TEST_FILES=$(TEST_PATH)test-init.cpp $(TEST_PATH)test-config.cpp \
