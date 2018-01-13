@@ -26,7 +26,6 @@
 *   @brief Multithreading and synchronization
 */
 
-#include "LX_Channel.hpp"
 #include "LX_Thread.hpp"
 #include "LX_Sync.hpp"
 
