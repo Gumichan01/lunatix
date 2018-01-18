@@ -54,9 +54,9 @@ UTF8string gamepadToString(LX_GamepadInfo& info)
     return UTF8string(stream.str());
 }
 
-int mouseCursorDisplay(int toggle) noexcept
+LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept
 {
-    return SDL_ShowCursor(toggle);
+    return static_cast<LX_MouseToggle>(SDL_ShowCursor(static_cast<int>(toggle)));
 }
 
 }

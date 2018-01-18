@@ -45,9 +45,16 @@
 namespace LX_Device
 {
 
-const int LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
-const int LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
-const int LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
+/**
+*   @enum LX_MouseToggle
+*   @brief State of the mouse (display)
+*/
+enum class LX_MouseToggle
+{
+    SHOW  = 1,      /**< Enable the mouse display   */
+    HIDE  = 0,      /**< Disable the mouse display  */
+    QUERY = -1      /**< Get the mouse status       */
+};
 
 using LX_DeviceID = int32_t;
 using LX_DeviceGUID = SDL_JoystickGUID;
@@ -90,19 +97,15 @@ int numberOfDevices() noexcept;
 UTF8string gamepadToString(LX_GamepadInfo& info);
 
 /**
-*   @fn int mouseCursorDisplay(int toggle) noexcept
+*   @fn LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept
 *
 *   Define if the cursor will be shown or not
 *
-*   @param [in] toggle One of these following values :
-*           - ::LX_MOUSE_SHOW:  to show it
-*           - ::LX_MOUSE_HIDE:  to hide
-*           - ::LX_MOUSE_QUERY: to get the current state
+*   @param [in] toggle show, hide or query
 *
-*   @return LX_MOUSE_SHOW if the cursor is shown, LX_MOUSE_HIDE if it is hidden,
-*          a negative value on failure.
+*   @return The status of the mouse.
 */
-int mouseCursorDisplay(int toggle) noexcept;
+LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept;
 
 }
 
