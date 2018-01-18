@@ -56,10 +56,17 @@ namespace LX_OpenGL
 using LX_GLattr = SDL_GLattr;
 using LX_GLContext = SDL_GLContext;
 
-const int LX_GL_NO_VSYNC        =  0;   /**< No VSync                   */
-const int LX_GL_VSYNC           =  1;   /**< VSync                      */
-const int LX_GL_NOT_SUPPORTED   = -1;   /**< Operation not supported    */
-const int LX_GL_TEARING         = -1;   /**< Late swap Tearing          */
+/**
+*   @enum LX_GL_SwapInterval
+*   @brief The enumeration used to define the swap interval
+*/
+enum class LX_GL_SwapInterval
+{
+    NO_VSYNC      =  0,     /**< No VSync               */
+    VSYNC         =  1,     /**< VSync                  */
+    TEARING       = -1,     /**< Late swap Tearing      */
+    NOT_SUPPORTED = -2      /**< Unsuported operation   */
+};
 
 /**
 *   @fn bool extensionSupported(std::string extension) noexcept
@@ -155,28 +162,28 @@ T getProcAddress(const std::string proc) noexcept;
 LX_GLContext getCurrentContext() noexcept;
 
 /**
-*   @fn int getSwapInterval() noexcept
+*   @fn LX_GL_SwapInterval getSwapInterval() noexcept
 *
 *   Get the swap interval for the current OpenGL context
 *
 *   @return
-*          - LX_GL_NO_VSYNC if there is no Vertical synchronization
-*          - LX_GL_VSYNC if the swap is synchonized with the vertical retrace
-*          - LX_GL_NOT_SUPPORTED if the swap interval is not supported.
+*          - LX_GL_SwapInterval::NO_VSYNC if there is no Vertical synchronization
+*          - LX_GL_SwapInterval::VSYNC if the swap is synchonized with the vertical retrace
+*          - LX_GL_SwapInterval::NOT_SUPPORTED if the swap interval is not supported.
 *            Call LX_GetError() for more information
 *
 *   @sa setSwapInterval
 */
-int getSwapInterval() noexcept;
+LX_GL_SwapInterval getSwapInterval() noexcept;
 /**
-*   @fn bool setSwapInterval(int interval) noexcept
+*   @fn bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept
 *
 *   Set the swap interval for the current OpenGL context
 *
 *   @param [in] interval One of the following values:
-*          - ::LX_GL_NO_VSYNC : for immediate updates
-*          - ::LX_GL_VSYNC    : for Vertical Synchronization (VSync)
-*          - ::LX_GL_TEARING  : for late swap tearing
+*          - LX_GL_SwapInterval::NO_VSYNC : for immediate updates
+*          - LX_GL_SwapInterval::VSYNC    : for Vertical Synchronization (VSync)
+*          - LX_GL_SwapInterval::TEARING  : for late swap tearing
 *
 *   @return TRUE on success. FALSE if the setting is not supported.
 *          Call LX_GetError() for more information
@@ -193,7 +200,7 @@ int getSwapInterval() noexcept;
 *
 *   @sa getSwapInterval
 */
-bool setSwapInterval(int interval) noexcept;
+bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept;
 
 /**
 *   @fn bool getAttribute(LX_GLattr attr, int& value) noexcept
