@@ -424,7 +424,6 @@ public:
     *   @param [out] info The information structure to fill in
     */
     void getInfo(LX_WindowInfo &info) const noexcept;
-
     /**
     *   @fn int getWidth() const noexcept
     *   Get the width of the window
@@ -449,7 +448,6 @@ public:
     *   @return The logical height
     */
     int getLogicalHeight() const noexcept;
-
     /**
     *   @fn void glGetDrawableSize(int& w, int& h) const noexcept
     *
