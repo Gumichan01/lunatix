@@ -138,7 +138,6 @@ bool LX_Init() noexcept
                                              LX_GL_MINOR_VERSION);
     }
 
-    LX_Win::LX_WindowManager::init();
     return true;
 }
 
@@ -157,8 +156,6 @@ const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 
 void LX_Quit() noexcept
 {
-    LX_Win::LX_WindowManager::destroy();
-
     Mix_CloseAudio();
     Mix_Quit();
     TTF_Quit();
