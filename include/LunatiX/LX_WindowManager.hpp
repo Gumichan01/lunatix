@@ -37,40 +37,22 @@ class LX_Window;
 */
 class LX_WindowManager
 {
-    LX_WindowManager();
-    ~LX_WindowManager();
+    LX_WindowManager()  = default;
+    ~LX_WindowManager() = default;
 
-    LX_WindowManager(const LX_WindowManager&) = delete;
+    LX_WindowManager(const LX_WindowManager&)  = delete;
     LX_WindowManager(const LX_WindowManager&&) = delete;
-    LX_WindowManager& operator =(const LX_WindowManager&) = delete;
+    LX_WindowManager& operator =(const LX_WindowManager&)   = delete;
     LX_WindowManager&& operator =(const LX_WindowManager&&) = delete;
 
 public:
 
-    /**
-    *   @deprecated do not use init() anymore, it ibecame useless, just use getInstance()
-    *   @fn void LX_WindowManager::init() noexcept
-    *   Initialize the window manager
-    */
-    static void init() noexcept;
     /**
     *   @fn LX_WindowManager * LX_WindowManager::getInstance() noexcept
     *   Return a unique instance of the window manager
     *   @return The windo manager
     */
     static LX_WindowManager * getInstance() noexcept;
-    /**
-    *   @deprecated do not use desstroy() anymore, it ibecame useless
-    *   @fn void LX_WindowManager::destroy() noexcept
-    *
-    *   Destroy the instance of the singleton
-    *
-    *   @warning The windows contained in the window manager
-    *           are not destroyed. So it is necessary to keep an external
-    *           pointer to the windows added in the manager.
-    */
-    static void destroy() noexcept;
-
     /**
     *   @fn bool LX_WindowManager::addWindow(LX_Window& w) noexcept
     *

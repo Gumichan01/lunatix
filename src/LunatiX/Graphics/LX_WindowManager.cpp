@@ -25,7 +25,6 @@
 #include <algorithm>
 #include <list>
 
-static LX_Win::LX_WindowManager *win_instance = nullptr;
 
 namespace LX_Win
 {
@@ -39,31 +38,11 @@ LX_WindowManager * getWindowManager() noexcept
 }
 
 
-void LX_WindowManager::init() noexcept
-{
-    if(win_instance == nullptr)
-        win_instance = new LX_WindowManager();
-}
-
-
 LX_WindowManager * LX_WindowManager::getInstance() noexcept
 {
     static LX_WindowManager *win_instance = nullptr;
     return win_instance;
 }
-
-
-void LX_WindowManager::destroy() noexcept
-{
-    delete win_instance;
-}
-
-
-// Create the instance
-LX_WindowManager::LX_WindowManager() {}
-
-// Destroy the instance,
-LX_WindowManager::~LX_WindowManager() {}
 
 
 bool LX_WindowManager::addWindow(LX_Window& w) noexcept
