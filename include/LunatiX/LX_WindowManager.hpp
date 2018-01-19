@@ -40,25 +40,27 @@ class LX_WindowManager
     LX_WindowManager();
     ~LX_WindowManager();
 
-    LX_WindowManager(LX_WindowManager&) = delete;
-    LX_WindowManager& operator =(LX_WindowManager&) = delete;
+    LX_WindowManager(const LX_WindowManager&) = delete;
+    LX_WindowManager(const LX_WindowManager&&) = delete;
+    LX_WindowManager& operator =(const LX_WindowManager&) = delete;
+    LX_WindowManager&& operator =(const LX_WindowManager&&) = delete;
 
 public:
 
     /**
+    *   @deprecated do not use init() anymore, it ibecame useless, just use getInstance()
     *   @fn void LX_WindowManager::init() noexcept
     *   Initialize the window manager
     */
     static void init() noexcept;
-
     /**
     *   @fn LX_WindowManager * LX_WindowManager::getInstance() noexcept
     *   Return a unique instance of the window manager
-    *   @return The singleton
+    *   @return The windo manager
     */
     static LX_WindowManager * getInstance() noexcept;
-
     /**
+    *   @deprecated do not use desstroy() anymore, it ibecame useless
     *   @fn void LX_WindowManager::destroy() noexcept
     *
     *   Destroy the instance of the singleton
@@ -70,30 +72,27 @@ public:
     static void destroy() noexcept;
 
     /**
-    *   @fn uint32_t LX_WindowManager::addWindow(LX_Window *w) noexcept
+    *   @fn bool LX_WindowManager::addWindow(LX_Window& w) noexcept
     *
     *   Add a window in the manager
     *
     *   @param [in] w The window
     *
-    *   @return The ID of the window that was added if the instance is valid,
-    *          ((uint32_t) -1 ) otherwise
+    *   @return true on success, false otherwise
     *
     *   @sa LX_Window
     *   @sa removeWindow
     */
-    uint32_t addWindow(LX_Window *w) noexcept;
-
+    bool addWindow(LX_Window& w) noexcept;
     /**
-    *   @fn LX_Window * LX_WindowManager::removeWindow(const uint32_t id) noexcept
+    *   @fn bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
     *
     *   Delete a window from the list acording to its ID
     *   and returns the pointer to it.
     *
     *   @param [in] id The ID of the window that must be deleted
     *
-    *   @return A valid pointer to a window if the ID refers to a valid window,
-    *          a null pointer otherwise
+    *   @return true on success, false otherwise
     *
     *   @note This function does not destroy the window, because each instance
     *        of a window in the list can be statically or dymanically allocated
@@ -101,27 +100,7 @@ public:
     *
     *   @sa addWindow
     */
-    LX_Window * removeWindow(const uint32_t id) noexcept;
-
-    /**
-    *   @fn std::size_t LX_WindowManager::nbWindows() noexcept
-    *   Count the number of windows
-    *   @return The number of registered windows
-    */
-    std::size_t nbWindows() noexcept;
-
-    /**
-    *   @fn void LX_WindowManager::updateWindows() noexcept
-    *   Update the windows
-    */
-    void updateWindows() noexcept;
-
-    /**
-    *   @fn void LX_WindowManager::clearWindows() noexcept
-    *   Clear the content of the windows
-    */
-    void clearWindows() noexcept;
-
+    bool removeWindow(const uint32_t id) noexcept;
     /**
     *   @fn LX_Window * LX_WindowManager::getWindow(const uint32_t id) noexcept
     *
@@ -132,7 +111,24 @@ public:
     *   @return A valid pointer to a LX_Window instance if it exists,
     *          a null pointer otherwise
     */
-    LX_Window * getWindow(const uint32_t id) noexcept;
+    LX_Window * getWindow(const uint32_t id) const noexcept;
+    /**
+    *   @fn std::size_t LX_WindowManager::nbWindows() noexcept
+    *   Count the number of windows
+    *   @return The number of registered windows
+    */
+    std::size_t nbWindows() const noexcept;
+
+    /**
+    *   @fn void LX_WindowManager::updateWindows() noexcept
+    *   Update the windows
+    */
+    void updateWindows() noexcept;
+    /**
+    *   @fn void LX_WindowManager::clearWindows() noexcept
+    *   Clear the content of the windows
+    */
+    void clearWindows() noexcept;
 };
 
 /**
