@@ -23,7 +23,7 @@
 #include <LunatiX/LX_Window.hpp>
 
 #include <algorithm>
-#include <set>
+#include <unordered_map>
 
 
 namespace LX_Win
@@ -31,7 +31,7 @@ namespace LX_Win
 
 struct LX_WM_
 {
-std::set<LX_Win::LX_Window*> windows;
+std::unordered_map<uint32_t, LX_Win::LX_Window&> windows;
 };
 
 LX_WindowManager& getWindowManager() noexcept
@@ -49,25 +49,14 @@ LX_WindowManager& LX_WindowManager::getInstance() noexcept
 
 bool LX_WindowManager::addWindow(LX_Window& w) noexcept
 {
-    const auto wend = _wmpimpl->windows.cend();
-    const uint32_t no = static_cast<uint32_t>(-1);
-
-    bool found = std::any_of(_wmpimpl->windows.cbegin(), wend, [&w](const LX_Window * win) noexcept
-    {
-        return win->getID() == w.getID();
-    });
-
-    if(found)
-        return no;
-
-    _wmpimpl->windows.insert(&w);
+    //_wmpimpl->windows.insert(&w);
     return true;
 }
 
 
 bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
 {
-    LX_Window *w = nullptr;
+    /*LX_Window *w = nullptr;
 
     if(_wmpimpl->windows.empty())
         return false;
@@ -82,7 +71,7 @@ bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
     {
         w = *it;
         _wmpimpl->windows.erase(it);
-    }
+    }*/
 
     return true;
 }
@@ -96,26 +85,26 @@ std::size_t LX_WindowManager::nbWindows() const noexcept
 
 void LX_WindowManager::updateWindows() noexcept
 {
-    std::for_each(_wmpimpl->windows.begin(), _wmpimpl->windows.end(), [](LX_Window *w) noexcept
+    /*std::for_each(_wmpimpl->windows.begin(), _wmpimpl->windows.end(), [](LX_Window *w) noexcept
     {
         w->update();
-    });
+    });*/
 }
 
 
 void LX_WindowManager::clearWindows() noexcept
 {
-    std::for_each(_wmpimpl->windows.begin(), _wmpimpl->windows.end(), [](LX_Window *w) noexcept
+    /*std::for_each(_wmpimpl->windows.begin(), _wmpimpl->windows.end(), [](LX_Window *w) noexcept
     {
         w->clearWindow();
-    });
+    });*/
 }
 
 
 LX_Window * LX_WindowManager::getWindow(uint32_t id) const noexcept
 {
     LX_Window *w = nullptr;
-    const auto wend = _wmpimpl->windows.cend();
+    /*const auto wend = _wmpimpl->windows.cend();
 
     auto it = std::find_if(_wmpimpl->windows.cbegin(), wend, [&id](const LX_Window * win) noexcept
     {
@@ -123,7 +112,7 @@ LX_Window * LX_WindowManager::getWindow(uint32_t id) const noexcept
     });
 
     if(it != wend)
-        w = (*it);
+        w = (*it);*/
 
     return w;
 }
