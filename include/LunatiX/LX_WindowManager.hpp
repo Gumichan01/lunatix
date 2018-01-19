@@ -22,11 +22,13 @@
 */
 
 #include <cinttypes>
+#include <memory>
 
 namespace LX_Win
 {
 
 class LX_Window;
+class LX_WM_;
 
 /**
 *   @class LX_WindowManager
@@ -37,6 +39,8 @@ class LX_Window;
 */
 class LX_WindowManager
 {
+    std::unique_ptr<LX_WM_> _wmppimpl;
+
     LX_WindowManager()  = default;
     ~LX_WindowManager() = default;
 
