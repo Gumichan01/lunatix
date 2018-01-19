@@ -39,7 +39,7 @@ class LX_WM_;
 */
 class LX_WindowManager
 {
-    std::unique_ptr<LX_WM_> _wmppimpl;
+    std::unique_ptr<LX_WM_> _wmpimpl;
 
     LX_WindowManager()  = default;
     ~LX_WindowManager() = default;
@@ -52,11 +52,11 @@ class LX_WindowManager
 public:
 
     /**
-    *   @fn LX_WindowManager * LX_WindowManager::getInstance() noexcept
+    *   @fn LX_WindowManager& LX_WindowManager::getInstance() noexcept
     *   Return a unique instance of the window manager
     *   @return The windo manager
     */
-    static LX_WindowManager * getInstance() noexcept;
+    static LX_WindowManager& getInstance() noexcept;
     /**
     *   @fn bool LX_WindowManager::addWindow(LX_Window& w) noexcept
     *
@@ -118,14 +118,14 @@ public:
 };
 
 /**
-*   @fn LX_WindowManager * getWindowManager() noexcept
+*   @fn LX_WindowManager& getWindowManager() noexcept
 *
 *   Return the singleton, if allocated
 *
 *   @return The unique instance of LX_WindowManager
 *   @note This function is equivalent to LX_WindowManager::getInstance
 */
-LX_WindowManager * getWindowManager() noexcept;
+LX_WindowManager& getWindowManager() noexcept;
 
 }
 
