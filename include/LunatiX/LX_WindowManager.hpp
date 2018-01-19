@@ -30,6 +30,26 @@ namespace LX_Win
 class LX_Window;
 class LX_WM_;
 
+
+class LX_WindowNotFoundException : public std::exception
+{
+    std::string _string_error;
+
+    LX_WindowNotFoundException& operator =(const LX_WindowNotFoundException& w) = delete;
+
+public:
+
+    /// Constructor
+    explicit LX_WindowNotFoundException(std::string err);
+
+    /// Get the error message
+    const char * what() const noexcept;
+
+    /// Destructor
+    ~LX_WindowNotFoundException() noexcept = default;
+
+};
+
 /**
 *   @class LX_WindowManager
 *   @brief The windows manager
@@ -42,7 +62,7 @@ class LX_WindowManager
     std::unique_ptr<LX_WM_> _wmpimpl;
 
     LX_WindowManager()  = default;
-    ~LX_WindowManager() = default;
+    ~LX_WindowManager();
 
     LX_WindowManager(const LX_WindowManager&)  = delete;
     LX_WindowManager(const LX_WindowManager&&) = delete;
@@ -88,7 +108,7 @@ public:
     */
     bool removeWindow(const uint32_t id) noexcept;
     /**
-    *   @fn LX_Window * LX_WindowManager::getWindow(const uint32_t id) noexcept
+    *   @fn LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
     *
     *   Get a window according to its ID
     *
@@ -97,7 +117,7 @@ public:
     *   @return A valid pointer to a LX_Window instance if it exists,
     *          a null pointer otherwise
     */
-    LX_Window * getWindow(const uint32_t id) const noexcept;
+    LX_Window& getWindow(const uint32_t id) const;
     /**
     *   @fn std::size_t LX_WindowManager::nbWindows() noexcept
     *   Count the number of windows

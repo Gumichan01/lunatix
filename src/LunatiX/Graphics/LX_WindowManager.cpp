@@ -22,12 +22,22 @@
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
 
-#include <algorithm>
 #include <unordered_map>
 
 
 namespace LX_Win
 {
+
+LX_WindowNotFoundException::LX_WindowNotFoundException(std::string err)
+    : _string_error(err) {}
+
+const char * LX_WindowNotFoundException::what() const noexcept
+{
+    return _string_error.c_str();
+}
+
+
+/* LX_Window implementation */
 
 struct LX_WM_
 {
@@ -40,6 +50,11 @@ LX_WindowManager& getWindowManager() noexcept
 }
 
 
+LX_WindowManager::~LX_WindowManager()
+{
+    _wmpimpl->windows.clear();
+}
+
 LX_WindowManager& LX_WindowManager::getInstance() noexcept
 {
     static LX_WindowManager singleton;
@@ -49,31 +64,22 @@ LX_WindowManager& LX_WindowManager::getInstance() noexcept
 
 bool LX_WindowManager::addWindow(LX_Window& w) noexcept
 {
-    //_wmpimpl->windows.insert(&w);
+    _wmpimpl->windows.insert({w.getID(), w});
     return true;
 }
 
 
 bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
 {
-    /*LX_Window *w = nullptr;
+    auto it = _wmpimpl->windows.find(id);
 
-    if(_wmpimpl->windows.empty())
-        return false;
-
-    const auto wend = _wmpimpl->windows.end();
-    auto it = std::find_if(_wmpimpl->windows.begin(), wend, [&id](const LX_Window * win) noexcept
+    if(it != _wmpimpl->windows.end())
     {
-        return win->getID() == id;
-    });
-
-    if(it != wend)
-    {
-        w = *it;
         _wmpimpl->windows.erase(it);
-    }*/
+        return true;
+    }
 
-    return true;
+    return false;
 }
 
 
@@ -85,36 +91,30 @@ std::size_t LX_WindowManager::nbWindows() const noexcept
 
 void LX_WindowManager::updateWindows() noexcept
 {
-    /*std::for_each(_wmpimpl->windows.begin(), _wmpimpl->windows.end(), [](LX_Window *w) noexcept
+    for(auto& it : _wmpimpl->windows)
     {
-        w->update();
-    });*/
+        it.second.update();
+    }
 }
 
 
 void LX_WindowManager::clearWindows() noexcept
 {
-    /*std::for_each(_wmpimpl->windows.begin(), _wmpimpl->windows.end(), [](LX_Window *w) noexcept
+    for(auto& it : _wmpimpl->windows)
     {
-        w->clearWindow();
-    });*/
+        it.second.clearWindow();
+    }
 }
 
 
-LX_Window * LX_WindowManager::getWindow(uint32_t id) const noexcept
+LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
 {
-    LX_Window *w = nullptr;
-    /*const auto wend = _wmpimpl->windows.cend();
+    auto it = _wmpimpl->windows.find(id);
 
-    auto it = std::find_if(_wmpimpl->windows.cbegin(), wend, [&id](const LX_Window * win) noexcept
-    {
-        return win->getID() == id;
-    });
+    if(it == _wmpimpl->windows.end())
+        throw LX_WindowNotFoundException("Not found window with identifer" + id);
 
-    if(it != wend)
-        w = (*it);*/
-
-    return w;
+    return it->second;
 }
 
 }
