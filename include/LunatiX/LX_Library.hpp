@@ -51,7 +51,7 @@
 bool LX_Init() noexcept;
 
 /**
-*   @fn bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept
+*   @fn bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value) noexcept
 *
 *   Set a configuration hint
 *
@@ -60,7 +60,7 @@ bool LX_Init() noexcept;
 *
 *   @return TRUE on SUCCESS, FALSE otherwise.
 */
-bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept;
+bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value) noexcept;
 /**
 *   @fn const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 *

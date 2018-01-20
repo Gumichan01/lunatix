@@ -161,7 +161,7 @@ bool LX_Init() noexcept
 }
 
 
-bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept
+bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value) noexcept
 {
     return SDL_SetHint(sdlconfig_name.c_str(), sdlconfig_value.c_str()) == SDL_TRUE;
 }
