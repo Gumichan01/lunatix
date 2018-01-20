@@ -56,6 +56,9 @@ namespace LX_OpenGL
 using LX_GLattr = SDL_GLattr;
 using LX_GLContext = SDL_GLContext;
 
+const int GL_MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by the library */
+const int GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the library */
+
 /**
 *   @enum LX_GL_SwapInterval
 *   @brief The enumeration used to define the swap interval

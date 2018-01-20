@@ -24,8 +24,6 @@
 #include <LunatiX/LX_Config.hpp>
 #include <SDL2/SDL.h>
 
-const int LX_GL_MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by the library */
-const int LX_GL_MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the library */
 
 /**
 *   @defgroup Config Configuration
@@ -63,7 +61,6 @@ bool LX_Init() noexcept;
 *   @return TRUE on SUCCESS, FALSE otherwise.
 */
 bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept;
-
 /**
 *   @fn const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 *

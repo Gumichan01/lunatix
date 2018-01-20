@@ -48,55 +48,42 @@ bool LX_Mixer_Init() noexcept
     return true;
 }
 
-}
-
-
-bool LX_Init() noexcept
+bool loadMainSystem()
 {
-    const std::string mappingFile = "config/gamecontrollerdb.txt";
+    uint32_t sdl_flags = 0;
 
-    uint32_t sdl_flags = 0x00000000;                // The flags for SDL_Init
-    int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;      // The IMG flag for SDL_Image
-
-    // Load the configuration
-    const LX_Configuration& configuration = LX_Configuration::getInstance();
+    const LX_Configuration& config = LX_Configuration::getInstance();
 
     // Video flag
-    if(configuration.getVideoFlag())
-    {
+    if(config.getVideoFlag())
         sdl_flags |= SDL_INIT_VIDEO;
-    }
 
     // Audio flag
-    if(configuration.getAudioFlag())
-    {
+    if(config.getAudioFlag())
         sdl_flags |= SDL_INIT_AUDIO;
-    }
 
     // Gamepad flag
-    if(configuration.getGamepadFlag())
-    {
+    if(config.getGamepadFlag())
         sdl_flags |= SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
-    }
 
-    // Init SDL
-    if(sdl_flags == 0 || SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
-    {
-        if(sdl_flags == 0)
-            LX_SetError("No flag is set in the configuration file");
+    return SDL_Init(sdl_flags|SDL_INIT_TIMER) == 0;
+}
 
-        return false;
-    }
-
+void loadGamepadSubSystem()
+{
     // Load mappings from another configuration file
-    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER) != 0)
-    {
-        SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
-    }
+    const std::string mappingFile("config/gamecontrollerdb.txt");
 
-    if(configuration.getVideoFlag())
+    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER) != 0)
+        SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
+}
+
+bool loadImgSubSystem()
+{
+    int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;
+
+    if(LX_Configuration::getInstance().getVideoFlag())
     {
-        // Init SDL_Image
         if(IMG_Init(img_flags) != img_flags)
         {
             SDL_Quit();
@@ -104,9 +91,13 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration.getTTFFlag())
+    return true;
+}
+
+bool loadTrueTypeFontSubSystem()
+{
+    if(LX_Configuration::getInstance().getTTFFlag())
     {
-        // Init SDL_ttf
         if(TTF_Init() == -1)
         {
             IMG_Quit();
@@ -115,9 +106,13 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration.getAudioFlag())
+    return true;
+}
+
+bool loadAudioSubSystem()
+{
+    if(LX_Configuration::getInstance().getAudioFlag())
     {
-        // Init SDL_Mixer
         if(!LX_Mixer_Init())
         {
             TTF_Quit();
@@ -127,16 +122,41 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration.getOpenGLFlag())
+    return true;
+}
+
+void loadOpenGLSubSystem()
+{
+    if(LX_Configuration::getInstance().getOpenGLFlag())
     {
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                                              SDL_GL_CONTEXT_PROFILE_CORE);
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,
-                                             LX_GL_MAJOR_VERSION);
+                                             LX_Graphics::LX_OpenGL::GL_MAJOR_VERSION);
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MINOR_VERSION,
-                                             LX_GL_MINOR_VERSION);
+                                             LX_Graphics::LX_OpenGL::GL_MINOR_VERSION);
     }
+}
 
+}
+
+
+bool LX_Init() noexcept
+{
+    if(!loadMainSystem())
+        return false;
+
+    if(!loadImgSubSystem())
+        return false;
+
+    if(!loadTrueTypeFontSubSystem())
+        return false;
+
+    if(!loadAudioSubSystem())
+        return false;
+
+    loadGamepadSubSystem();
+    loadOpenGLSubSystem();
     return true;
 }
 
