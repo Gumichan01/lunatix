@@ -31,7 +31,7 @@
 namespace
 {
 
-uint32_t generateFlags(LX_Config::LX_Configuration &config)
+uint32_t generateFlags(const LX_Config::LX_Configuration& config)
 {
     uint32_t flag = 0x00000000;
 
@@ -78,23 +78,18 @@ void LX_initWindowInfo(LX_WindowInfo &info) noexcept
 
 void LX_loadWindowConfig(LX_WindowInfo &info) noexcept
 {
-    LX_Configuration *config = LX_Configuration::getInstance();
+    const LX_Configuration& config = LX_Configuration::getInstance();
 
-    if(config == nullptr)
-        LX_initWindowInfo(info);
-    else
-    {
-        info.id = 0;
-        info.title = DEFAULT_TITLE;
-        info.x = SDL_WINDOWPOS_CENTERED;
-        info.y = SDL_WINDOWPOS_CENTERED;
-        info.w = DEFAULT_WIN_WIDTH;
-        info.h = DEFAULT_WIN_HEIGHT;
-        info.lw = 0;
-        info.lh = 0;
-        info.flag = generateFlags(*config);
-        info.accel = true;
-    }
+    info.id = 0;
+    info.title = DEFAULT_TITLE;
+    info.x = SDL_WINDOWPOS_CENTERED;
+    info.y = SDL_WINDOWPOS_CENTERED;
+    info.w = DEFAULT_WIN_WIDTH;
+    info.h = DEFAULT_WIN_HEIGHT;
+    info.lw = 0;
+    info.lh = 0;
+    info.flag = generateFlags(config);
+    info.accel = true;
 }
 
 
@@ -130,7 +125,12 @@ struct LX_Window_
         _original_height(info.h)
     {
         uint32_t rflag = 0x00000000;
-        LX_Configuration *config = LX_Configuration::getInstance();
+        const LX_Configuration& config = LX_Configuration::getInstance();
+
+        // Video flag and VSync flag actives -> add the option
+        if(config.getVideoFlag() && config.getVSyncFlag())
+            SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
+
         _window = SDL_CreateWindow(info.title.c_str(), info.x, info.y, info.w,
                                    info.h, info.flag);
 
@@ -142,11 +142,6 @@ struct LX_Window_
 
         // Hardware acceleration or software rendering
         rflag = info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
-
-        // Video flag and VSync flag actives -> add the option
-        if(config->getVideoFlag() && config->getVSyncFlag())
-            SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
-
         _renderer = SDL_CreateRenderer(_window, -1, rflag);
 
         if(_renderer == nullptr)

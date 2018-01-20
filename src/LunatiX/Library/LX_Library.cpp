@@ -59,23 +59,22 @@ bool LX_Init() noexcept
     int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;      // The IMG flag for SDL_Image
 
     // Load the configuration
-    LX_Configuration::initConfig();
-    LX_Configuration *configuration = LX_Configuration::getInstance();
+    const LX_Configuration& configuration = LX_Configuration::getInstance();
 
     // Video flag
-    if(configuration->getVideoFlag())
+    if(configuration.getVideoFlag())
     {
         sdl_flags |= SDL_INIT_VIDEO;
     }
 
     // Audio flag
-    if(configuration->getAudioFlag())
+    if(configuration.getAudioFlag())
     {
         sdl_flags |= SDL_INIT_AUDIO;
     }
 
     // Gamepad flag
-    if(configuration->getGamepadFlag())
+    if(configuration.getGamepadFlag())
     {
         sdl_flags |= SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
     }
@@ -95,7 +94,7 @@ bool LX_Init() noexcept
         SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
     }
 
-    if(configuration->getVideoFlag())
+    if(configuration.getVideoFlag())
     {
         // Init SDL_Image
         if(IMG_Init(img_flags) != img_flags)
@@ -105,7 +104,7 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration->getTTFFlag())
+    if(configuration.getTTFFlag())
     {
         // Init SDL_ttf
         if(TTF_Init() == -1)
@@ -116,7 +115,7 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration->getAudioFlag())
+    if(configuration.getAudioFlag())
     {
         // Init SDL_Mixer
         if(!LX_Mixer_Init())
@@ -128,7 +127,7 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration->getOpenGLFlag())
+    if(configuration.getOpenGLFlag())
     {
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                                              SDL_GL_CONTEXT_PROFILE_CORE);
@@ -161,6 +160,4 @@ void LX_Quit() noexcept
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
-
-    LX_Configuration::destroy();
 }

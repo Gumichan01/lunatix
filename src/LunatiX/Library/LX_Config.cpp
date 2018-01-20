@@ -29,10 +29,6 @@
 namespace LX_Config
 {
 
-// unique instance
-static LX_Configuration *instance = nullptr;
-
-
 /* LX_ConfigLoader */
 
 struct LX_InternalConfig
@@ -156,34 +152,12 @@ LX_Configuration::LX_Configuration() noexcept
     loadFlags_();
 }
 
-LX_Configuration::~LX_Configuration() {}
-
-void LX_Configuration::initConfig() noexcept
+LX_Configuration& LX_Configuration::getInstance() noexcept
 {
-    if(instance == nullptr)
-    {
-        try
-        {
-            instance = new LX_Configuration();
-        }
-        catch(std::exception & ex_conf)
-        {
-            LX_SetError(ex_conf.what());
-            instance = nullptr;
-        }
-    }
+    static LX_Configuration singleton;
+    return singleton;
 }
 
-LX_Configuration * LX_Configuration::getInstance() noexcept
-{
-    return instance;
-}
-
-void LX_Configuration::destroy() noexcept
-{
-    delete instance;
-    instance = nullptr;
-}
 
 void LX_Configuration::loadFlags_() noexcept
 {
