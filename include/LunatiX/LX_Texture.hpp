@@ -75,15 +75,10 @@ class LX_ImageException : public std::exception
 
 public:
 
-    /// Constructor
     explicit LX_ImageException(std::string err);
-    /// Copy constructor
     LX_ImageException(const LX_ImageException& me);
-
     /// Get the error message
     virtual const char * what() const noexcept;
-
-    /// Destructor
     ~LX_ImageException() = default;
 };
 
@@ -99,7 +94,9 @@ class LX_Texture
     friend class LX_BufferedImage;
 
     LX_Texture(LX_Texture&) = delete;
-    LX_Texture& operator =(LX_Texture&) = delete;
+    LX_Texture(LX_Texture&&) = delete;
+    LX_Texture& operator =(const LX_Texture&) = delete;
+    LX_Texture&& operator =(const LX_Texture&&) = delete;
 
 protected:
 
@@ -111,73 +108,15 @@ protected:
     LX_Texture(SDL_Texture *t, LX_Win::LX_Window& w,
                LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-public:
-
-    /**
-    *   @deprecated This public constructor will be protected in 0.14.0
-    *   @fn LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-    *                 LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *   @brief Constructor
-    *
-    *   Build the texture from a filename
-    *
-    *   @param [in] filename The image file to load
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the texture
-    *
-    *   |       Format Values        |                                              |
-    *   |            ---             |                     ---                      |
-    *   | LX_PIXELFORMAT::UNKNOWN     |                                              |
-    *   | LX_PIXELFORMAT::INDEX1LSB   |                                              |
-    *   | LX_PIXELFORMAT::INDEX1MSB   |                                              |
-    *   | LX_PIXELFORMAT::INDEX4LSB   |                                              |
-    *   | LX_PIXELFORMAT::INDEX4MSB   |                                              |
-    *   | LX_PIXELFORMAT::INDEX8      |                                              |
-    *   | LX_PIXELFORMAT::RGB332      |  RGB: 2 bit for blue, 3 bits for the others  |
-    *   | LX_PIXELFORMAT::RGB444      |            RGB : 4 bits per channel          |
-    *   | LX_PIXELFORMAT::RGB555      |            RGB : 5 bits per channel          |
-    *   | LX_PIXELFORMAT::BGR555      |            BGR : 5 bits per channel          |
-    *   | LX_PIXELFORMAT::ARGB4444    |            ARGB: 4 bits per channel          |
-    *   | LX_PIXELFORMAT::RGBA4444    |            RGBA: 4 bits per channel          |
-    *   | LX_PIXELFORMAT::ABGR4444    |            ABGR: 4 bits per channel          |
-    *   | LX_PIXELFORMAT::BGRA4444    |            BGRA: 4 bits per channel          |
-    *   | LX_PIXELFORMAT::ARGB1555    | ARGB: 1 bit for alpha, 5 bits for the others |
-    *   | LX_PIXELFORMAT::RGBA5551    | RGBA: 1 bit for alpha, 5 bits for the others |
-    *   | LX_PIXELFORMAT::ABGR1555    | ABGR: 1 bit for alpha, 5 bits for the others |
-    *   | LX_PIXELFORMAT::BGRA5551    | BGRA: 1 bit for alpha, 5 bits for the others |
-    *   | LX_PIXELFORMAT::RGB565      | RGB: 6 bit for green, 5 bits for the others  |
-    *   | LX_PIXELFORMAT::BGR565      | BGR: 6 bit for green, 5 bits for the others  |
-    *   | LX_PIXELFORMAT::RGB24       |                                              |
-    *   | LX_PIXELFORMAT::BGR24       |                                              |
-    *   | LX_PIXELFORMAT::RGB888      |                                              |
-    *   | LX_PIXELFORMAT::RGBX8888    |          RGBX: 8 bits per channel            |
-    *   | LX_PIXELFORMAT::BGR888      |          BGR:  8 bits per channel            |
-    *   | LX_PIXELFORMAT::BGRX8888    |          BGRX: 8 bits per channel            |
-    *   | LX_PIXELFORMAT::ARGB8888    |          ARGB: 8 bits per channel            |
-    *   | LX_PIXELFORMAT::RGBA8888    |          RGBA: 8 bits per channel            |
-    *   | LX_PIXELFORMAT::ABGR8888    |          ABGR: 8 bits per channel            |
-    *   | LX_PIXELFORMAT::BGRA8888    |          BGRA: 8 bits per channel            |
-    *   | LX_PIXELFORMAT::ARGB2101010 |                                              |
-    *   | LX_PIXELFORMAT::YV12        |      planar mode: Y + V + U (3 planes)       |
-    *   | LX_PIXELFORMAT::IYUV        |      planar mode: Y + U + V (3 planes)       |
-    *   | LX_PIXELFORMAT::YUY2        |      packed mode: Y0+U0+Y1+V0 (1 plane)      |
-    *   | LX_PIXELFORMAT::UYVY        |      packed mode: U0+Y0+V0+Y1 (1 plane)      |
-    *   | LX_PIXELFORMAT::YVYU        |      packed mode: Y0+V0+Y1+U0 (1 plane)      |
-    *
-    *   The default value is **LX_PIXELFORMAT::RGBA8888**
-    *
-    *   @exception LX_ImageException On failure
-    */
     LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
                LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Constuctor with the filename (UTF-8)
-    /// @deprecated This public constructor will be protected in 0.14.0
     LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
                LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
+public:
 
     /**
-    *   @deprecated draw() will be virtual in 0.14.0
+    *   @deprecated draw() will be pure virtual in 0.14.0
     *   @fn virtual void draw() noexcept
     *   Draw a texture on the window
     *   @note The window is specified at object construction
@@ -234,7 +173,7 @@ public:
     */
     LX_PIXELFORMAT getFormat() const noexcept;
 
-    /// Destructor
+
     virtual ~LX_Texture();
 };
 
@@ -263,10 +202,11 @@ public:
     *   Sprite constructor with the filename
     *
     *   @param [in] filename
-    *   @param [in] w Window where the sprite wille drawn on
+    *   @param [in] w Window where the sprite wil be drawn on
     *   @param [in] format (Optional) Pixel format
     *
     *   @note sprite_area is useful xhen the filename is a sprite sheet
+    *   @exception LX_ImageException On failure
     */
     LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
@@ -277,10 +217,11 @@ public:
     *   Sprite constructor with the filename (UTF-8)
     *
     *   @param [in] filename
-    *   @param [in] w Window where the sprite wille drawn on
+    *   @param [in] w Window where the sprite wil be drawn on
     *   @param [in] format (Optional) Pixel format
     *
     *   @note sprite_area is useful xhen the filename is a sprite sheet
+    *   @exception LX_ImageException On failure
     */
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
@@ -338,7 +279,7 @@ public:
     */
     UTF8string getFileName() noexcept;
 
-    /// Destructor
+
     virtual ~LX_Sprite() = default;
 };
 
@@ -382,6 +323,8 @@ public:
     *   @param [in] loop Boolean value that specify if the animation must be looped infinitely
     *   @param [in] format Optional argument that specified the format of every sprites
     *
+    *   @exception LX_ImageException On failure
+    *
     *   @sa LX_Sprite
     *   @sa LX_Texture
     */
@@ -418,7 +361,7 @@ public:
     */
     bool isInfinitelyLooped() const noexcept;
 
-    /// Destructor
+
     ~LX_AnimatedSprite() = default;
 };
 
@@ -456,23 +399,25 @@ class LX_BufferedImage
 
 public:
 
-    /// Constructor
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BufferedImage(const std::string& filename,
                      LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Constructor (UTF-8)
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BufferedImage(const UTF8string& filename,
                      LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
     /**
     *   @fn void convertGrayscale() noexcept
-    *   Convert the image to grayscale
     */
     void convertGrayscale() noexcept;
 
     /**
     *   @fn void convertNegative()
-    *   Convert the image to grayscale
     */
     void convertNegative() noexcept;
 
@@ -491,6 +436,7 @@ public:
     *
     *   @param [in] w The window to link the sprite to → see *draw()*
     *   @return A new fresh allocated sprite on success, *nullptr* otherwise
+    *   @exception LX_ImageException On failure
     */
     LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
     /**
@@ -506,6 +452,7 @@ public:
     *   @param [in] loop Boolean value that specify if the animation must be looped infinitely
     *
     *   @return A new fresh allocated animated sprite on success, *nullptr* otherwise
+    *   @exception LX_ImageException On failure
     */
     LX_AnimatedSprite *
     generateAnimatedSprite(LX_Win::LX_Window& w,
@@ -519,7 +466,7 @@ public:
     */
     UTF8string getFileName() noexcept;
 
-    /// Destructor
+
     ~LX_BufferedImage();
 };
 
@@ -538,14 +485,7 @@ class LX_StreamingTexture: public LX_Texture
 public:
 
     /**
-    *   @fn LX_StreamingTexture(LX_Win::LX_Window& w,
-    *                          LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *
-    *   Build the texture
-    *
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the t
-    *   @sa LX_Texture
+    *   @exception LX_ImageException On failure
     */
     LX_StreamingTexture(LX_Win::LX_Window& w,
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
@@ -570,7 +510,6 @@ public:
     */
     void update() noexcept;
 
-    /// Destructor
     virtual ~LX_StreamingTexture();
 };
 
@@ -594,87 +533,26 @@ protected:
 
     virtual void updateTexture_() noexcept = 0;
 
-public:
-
-    /**
-    *   @fn LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                     LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *   @brief Constructor
-    *
-    *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the texture
-    *
-    *   @sa LX_Texture
-    */
     LX_TextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                    LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /**
-    *   @fn LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
-    *                      LX_Win::LX_Window& w, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *   @brief Constructor
-    *
-    *   @param [in] text The text that will be drawn on the screen
-    *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the texture
-    *
-    *   @sa LX_Texture
-    */
     LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                    LX_Win::LX_Window& w,
                    LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-    /**
-    *   @fn LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
-    *                      LX_Win::LX_Window& w, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *   @brief Constructor
-    *
-    *   @param [in] text The text that will be drawn on the screen
-    *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the texture
-    *
-    *   @sa LX_Texture
-    */
+
     LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                    LX_Win::LX_Window& w,
                    LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /**
-    *   @fn LX_TextTexture(const std::string& text, unsigned int sz,
-    *                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                     LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *   @brief Constructor
-    *
-    *   @param [in] text The text that will be drawn on the screen
-    *   @param [in] sz The size of the text
-    *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the texture
-    *
-    *   @sa LX_Texture
-    */
     LX_TextTexture(const std::string& text, unsigned int sz,
                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                    LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-    /**
-    *   @fn LX_TextTexture(const UTF8string& text, unsigned int sz,
-    *                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-    *                     LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *   @brief Constructor
-    *
-    *   @param [in] text The text that will be drawn on the screen
-    *   @param [in] sz The size of the text
-    *   @param [in] font The font that will be used for drawing the text
-    *   @param [in] w The window the texture will be drawn on → see *draw()*
-    *   @param [in] format Optional argument that specified the format of the texture
-    *
-    *   @sa LX_Texture
-    */
+
     LX_TextTexture(const UTF8string& text, unsigned int sz,
                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                    LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
+
+public:
 
     virtual void draw() noexcept;
     /**
@@ -722,7 +600,6 @@ public:
     *   @param [out] h Height value returned by this function
     */
     void getTextDimension(int& w, int& h) noexcept;
-
     /**
     *   @fn int getTextWidth() noexcept
     *   Get the width of the text displayed on the screen
@@ -740,7 +617,6 @@ public:
     *   Get the text colour
     *   @return The text size
     */
-
     LX_Colour getTextColour() const noexcept;
     /**
     *   @fn void setPosition(int x, int y) noexcept
@@ -751,7 +627,6 @@ public:
     *   @param [in] y The new Y position
     */
     void setPosition(int x, int y) noexcept;
-
     /**
     *   @fn virtual void setText(const std::string& text) noexcept
     *
@@ -775,7 +650,6 @@ public:
     *
     *   @param [in] text The text to set
     *   @param [in] sz The new size of the text
-    *
     *   @note This function updates the texture of the text
     */
     virtual void setText(const std::string& text, unsigned int sz) noexcept;
@@ -789,7 +663,6 @@ public:
     *   @note This function updates the texture of the text
     */
     virtual void setText(const UTF8string& text, unsigned int sz) noexcept;
-
     /**
     *   @fn virtual void setTextSize(unsigned int sz) noexcept
     *
@@ -809,7 +682,6 @@ public:
     */
     virtual void setTextColour(const LX_Colour& c) noexcept;
 
-    /// Destructor
     virtual ~LX_TextTexture();
 };
 
@@ -832,31 +704,36 @@ protected:
 
 public:
 
-    /// Constructor without the text
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the text
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_SolidTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w,
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the utf-8 text
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                         LX_Win::LX_Window& w,
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the text and the text size
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_SolidTextTexture(const std::string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the utf-8 text and the text size
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Destructor
     ~LX_SolidTextTexture() = default;
 };
 
@@ -882,27 +759,33 @@ protected:
 
 public:
 
-    /// Constructor without the text
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                          LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the text
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_ShadedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                          const LX_Colour& bg, LX_Win::LX_Window& w,
                          LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the utf-8 text
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_ShadedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                          const LX_Colour& bg, LX_Win::LX_Window& w,
                          LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the text and the text size
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_ShadedTextTexture(const std::string& text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
                          LX_Win::LX_Window& w,
                          LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Constructor using the utf-8 text and the text size
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                          LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
                          LX_Win::LX_Window& w,
@@ -915,7 +798,6 @@ public:
     *   @return THe background colour
     */
     LX_Colour getBgColour() noexcept;
-
     /**
     *   @fn void setBgColour(const LX_Colour& bg) noexcept
     *
@@ -926,7 +808,6 @@ public:
     */
     void setBgColour(const LX_Colour& bg) noexcept;
 
-    /// Destructor
     ~LX_ShadedTextTexture() = default;
 };
 
@@ -974,7 +855,6 @@ public:
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Destructor
     ~LX_BlendedTextTexture() = default;
 };
 
