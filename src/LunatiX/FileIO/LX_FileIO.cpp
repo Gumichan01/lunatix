@@ -350,11 +350,6 @@ size_t LX_TmpFile::tell() const noexcept
     return _timpl->tell();
 }
 
-LX_TmpFile::~LX_TmpFile()
-{
-    _timpl.reset(nullptr);
-}
-
 
 /// Stream
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept

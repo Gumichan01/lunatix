@@ -66,7 +66,7 @@ public:
     */
     void setMouse() noexcept;
 
-    ~LX_Mouse();
+    ~LX_Mouse() = default;
 };
 
 }

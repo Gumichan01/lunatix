@@ -33,44 +33,14 @@ namespace LX_ParticleEngine
 
 class LX_ParticleSystem_
 {
-    // Array of particles
     std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
-    // The number of particles
     const unsigned int _nb_particles;
-
-    /*
-    *   Allocate the particle array
-    *
-    *   This function is automatically called by
-    *   the constructor of the particle system
-    */
-    inline void allocateParticles_()
-    {
-        try
-        {
-            _particles.reset(new std::unique_ptr<LX_Particle>[_nb_particles]);
-        }
-        catch(std::bad_alloc& ba)   // Ok, I can't allocate more memory
-        {
-            LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
-                                "Particle system: Cannot allocate the particles\n");
-            throw ba;
-        }
-        catch(...)  // Something very bad happened
-        {
-            LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
-                                "Particle system: Unknown exception\n");
-            std::terminate();
-        }
-    }
 
 public:
 
     explicit LX_ParticleSystem_(const unsigned int nbPart) noexcept
-        : _particles(nullptr), _nb_particles(nbPart)
-    {
-        allocateParticles_();
-    }
+        : _particles(new std::unique_ptr<LX_Particle>[_nb_particles]),
+          _nb_particles(nbPart) {}
 
     bool addParticle(LX_Particle *p) const noexcept
     {

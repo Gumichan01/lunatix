@@ -186,7 +186,7 @@ public:
 
     LX_MouseHaptic() noexcept;
     virtual bool isOpened() const noexcept;
-    ~LX_MouseHaptic();
+    ~LX_MouseHaptic() = default;
 };
 
 }

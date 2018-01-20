@@ -66,9 +66,4 @@ void LX_Mouse::setMouse() noexcept
     _mimpl->setMouse();
 }
 
-LX_Mouse::~LX_Mouse()
-{
-    _mimpl.reset();
-}
-
 }

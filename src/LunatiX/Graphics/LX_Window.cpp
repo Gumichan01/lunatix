@@ -510,7 +510,6 @@ bool LX_Window::glMakeCurrent() noexcept
     return SDL_GL_MakeCurrent(_wimpl->_window, _wimpl->_glcontext) == 0;
 }
 
-
 LX_Window::~LX_Window()
 {
     _wimpl.reset();

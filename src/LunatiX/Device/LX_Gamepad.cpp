@@ -134,7 +134,7 @@ public:
         return UTF8string("Unknown gamepad");
     }
 
-    ~LX_Gamepad_() = default;
+    ~LX_Gamepad_();
 };
 
 
@@ -204,11 +204,6 @@ bool LX_Gamepad_::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info) co
 
 LX_Gamepad::LX_Gamepad() noexcept: _gpimpl(new LX_Gamepad_()) {}
 
-
-LX_Gamepad::~LX_Gamepad()
-{
-    _gpimpl.reset();
-}
 
 
 bool LX_Gamepad::open(int index) noexcept

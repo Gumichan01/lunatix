@@ -110,10 +110,7 @@ public:
         return _name.c_str();
     }
 
-    ~LX_FileBuffer_()
-    {
-        _buffer.reset();
-    }
+    ~LX_FileBuffer_() = default;
 };
 
 
@@ -150,7 +147,6 @@ const char * LX_FileBuffer::getFilename() const noexcept
 {
     return _bimpl->getFilename();
 }
-
 
 LX_FileBuffer::~LX_FileBuffer()
 {

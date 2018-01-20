@@ -89,12 +89,6 @@ LX_Haptic::LX_Haptic(LX_GameController *gc) noexcept
     : LX_Haptic(SDL_GameControllerGetJoystick(gc)) {}
 
 
-LX_Haptic::~LX_Haptic()
-{
-    _hcimpl.reset();
-    _himpl.reset();
-}
-
 
 bool LX_Haptic::isOpened() const noexcept
 {
@@ -152,6 +146,11 @@ int LX_Haptic::numberOfEffects() const noexcept
     return SDL_HapticNumEffects(_hcimpl->_haptic);
 }
 
+LX_Haptic::~LX_Haptic()
+{
+    _hcimpl.reset();
+}
+
 /* LX_MouseHaptic */
 
 LX_MouseHaptic::LX_MouseHaptic() noexcept: LX_Haptic()
@@ -163,7 +162,5 @@ bool LX_MouseHaptic::isOpened() const noexcept
 {
     return _hcimpl != nullptr;
 }
-
-LX_MouseHaptic::~LX_MouseHaptic() {}
 
 }
