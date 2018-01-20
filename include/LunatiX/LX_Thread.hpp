@@ -61,7 +61,6 @@ class LX_Thread
 public:
     /**
     *   @fn template <class LX_Fun, class... LX_Args> LX_Thread(bool detach, LX_Fun fun, const std::string& name, LX_Args args);
-    *   @brief Constructor
     *
     *   @param [in] detach It specifies if the thread must be detached
     *   @param [in] fun The function launched by the thread
@@ -129,24 +128,21 @@ class LX_ASyncTask
 public:
 
     /**
-    *   @fn template <class LX_Fun, class... LX_Args > LX_ASyncTask(bool detach, LX_Fun&& fun, LX_Args&&... args);
-    *   @brief Constructor
+    *   @fn template <class LX_Fun, class... LX_Args > LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args)
     *
     *   @param [in] fun The function launched by the thread
     *   @param [in] args arguments of the function
     *
     *   @exception std::system_error If the thread cannot be started
-    *
     */
     template <class LX_Fun, class... LX_Args >
     LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args);
 
     /**
     *   @fn ReturnValue getResult()
+    *   Get the result of the execution of the task
     *
-    *   Return the result of the execution of the task
-    *
-    *   @return The result
+    *   @return The result, or throw an exception
     *
     *   @exception If an exception occured during the execution of the function
     *              in the asynchronous task, then this exception is thrown.
