@@ -156,7 +156,6 @@ class LX_TextInput
 
 public:
 
-    /// Constructor
     LX_TextInput() noexcept;
     /**
     *   @fn void eventLoop(LX_RedrawCallback& redraw) noexcept
@@ -164,8 +163,7 @@ public:
     *   @param [in] redraw Callback function to call
     */
     void eventLoop(LX_RedrawCallback& redraw) noexcept;
-    /// Destructor
-    ~LX_TextInput();
+    ~LX_TextInput() noexcept;
 };
 
 }

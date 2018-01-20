@@ -358,7 +358,7 @@ public:
     }
 
 
-    ~LX_TextInput_()
+    ~LX_TextInput_() noexcept
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "End of input.");
         SDL_StopTextInput();
@@ -380,7 +380,7 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw) noexcept
     _timpl->eventLoop_(redraw);
 }
 
-LX_TextInput::~LX_TextInput()
+LX_TextInput::~LX_TextInput() noexcept
 {
     _timpl.reset();
 }
