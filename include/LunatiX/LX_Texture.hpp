@@ -115,13 +115,7 @@ protected:
                LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 public:
 
-    /**
-    *   @deprecated draw() will be pure virtual in 0.14.0
-    *   @fn virtual void draw() noexcept
-    *   Draw a texture on the window
-    *   @note The window is specified at object construction
-    */
-    virtual void draw() noexcept;
+    virtual void draw() noexcept = 0;
 
     /**
     *   @deprecated bind() will be put in a new sub-class and removed from LX_Texture in 0.14.0
@@ -196,31 +190,11 @@ protected:
 public:
 
     /**
-    *   @fn LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-    *                 LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *
-    *   Sprite constructor with the filename
-    *
-    *   @param [in] filename
-    *   @param [in] w Window where the sprite wil be drawn on
-    *   @param [in] format (Optional) Pixel format
-    *
-    *   @note sprite_area is useful xhen the filename is a sprite sheet
     *   @exception LX_ImageException On failure
     */
     LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
     /**
-    *   @fn LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-    *                            LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
-    *
-    *   Sprite constructor with the filename (UTF-8)
-    *
-    *   @param [in] filename
-    *   @param [in] w Window where the sprite wil be drawn on
-    *   @param [in] format (Optional) Pixel format
-    *
-    *   @note sprite_area is useful xhen the filename is a sprite sheet
     *   @exception LX_ImageException On failure
     */
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
@@ -314,7 +288,7 @@ public:
     *                        const std::vector<LX_AABB>& coord, const uint32_t delay,
     *                        bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
     *
-    *   Build an animated sprite using a filename
+    *   Build an animated sprite from a sprite sheet
     *
     *   @param [in] filename The sprite sheet file to load
     *   @param [in] w The window the animated sprite will be drawn on → see *draw()*
@@ -331,8 +305,9 @@ public:
     LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
-    /// Animated Sprite constructor with the filename (UTF-8)
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                       const std::vector<LX_AABB>& coord, const uint32_t delay,
                       bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
@@ -421,15 +396,6 @@ public:
     */
     void convertNegative() noexcept;
 
-    /**
-    *   @deprecated LX_Texture will be abstract, so generateTexture() will be removed in 0.14.0
-    *   @fn LX_Texture * generateTexture() const
-    *   Create a texture from the current buffered image
-    *
-    *   @param [in] w The window to link the sprite to → see *draw()*
-    *   @return A new fresh allocated texture on success, *nullptr* otherwise
-    */
-    LX_Texture * generateTexture(LX_Win::LX_Window& w) const;
     /**
     *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w) const
     *   Create a sprite from the current buffered image

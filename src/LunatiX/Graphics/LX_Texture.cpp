@@ -117,13 +117,6 @@ LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
                        LX_PIXELFORMAT format)
     : LX_Texture(filename.utf8_sstring(), w, format) {}
 
-
-void LX_Texture::draw() noexcept
-{
-    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
-}
-
-
 bool LX_Texture::bind(float *iw, float *ih) noexcept
 {
     return _win.glMakeCurrent() && SDL_GL_BindTexture(_texture, iw, ih) == 0;
@@ -170,7 +163,7 @@ LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
 
 void LX_Sprite::draw() noexcept
 {
-    LX_Texture::draw();
+    SDL_RenderCopy(RENDER(_win.getRenderingSys()), nullptr, nullptr, nullptr);
 }
 
 void LX_Sprite::draw(LX_AABB * box) noexcept
@@ -582,13 +575,6 @@ void LX_BufferedImage::convertNegative() noexcept
         Uint32 pixel = pixels[i];
         pixels[i] = _convertNegativePixel(pixel);
     }
-}
-
-
-LX_Texture * LX_BufferedImage::generateTexture(LX_Win::LX_Window& w) const
-{
-    return new LX_Texture(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),
-                          _surface), w);
 }
 
 LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
