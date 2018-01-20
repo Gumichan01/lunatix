@@ -1,5 +1,4 @@
 
-
 /*
 *   Copyright © 2018 Luxon Jean-Pierre
 *   https://gumichan01.github.io/
@@ -41,7 +40,7 @@ const char * LX_WindowNotFoundException::what() const noexcept
 
 struct LX_WM_
 {
-std::unordered_map<uint32_t, LX_Win::LX_Window&> windows;
+    std::unordered_map<uint32_t, LX_Win::LX_Window&> windows;
 };
 
 LX_WindowManager& getWindowManager() noexcept

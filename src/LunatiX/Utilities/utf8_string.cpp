@@ -407,9 +407,10 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
 }
 
 // Terminal recursive function that reverse the string
-UTF8string UTF8string::utf8_reverse_aux_(UTF8iterator& it,
-                                         const UTF8iterator& end,
-                                         UTF8string& res)
+UTF8string
+UTF8string::utf8_reverse_aux_(UTF8iterator& it,
+                              const UTF8iterator& end,
+                              UTF8string& res)
 {
     if(it == end)
         return res;
