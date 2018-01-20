@@ -41,15 +41,9 @@ class LX_MixerException : public std::exception
 
 public:
 
-    /// Constructor
     explicit LX_MixerException(std::string err);
-    /// Copy constructor
     LX_MixerException(const LX_MixerException& me);
-
-    /// Get the error message
     virtual const char * what() const noexcept;
-
-    /// Destructor
     ~LX_MixerException() = default;
 };
 
@@ -61,9 +55,7 @@ class LX_Sound
 {
 
 public:
-    /// Play something
     virtual bool play() noexcept = 0;
-    /// Destructor
     virtual ~LX_Sound();
 };
 

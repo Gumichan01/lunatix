@@ -145,15 +145,10 @@ class LX_WindowException : public std::exception
 
 public:
 
-    /// Constructor
     explicit LX_WindowException(std::string err);
-    /// Copy constructor
     LX_WindowException(const LX_WindowException& w);
-
-    /// Get the error message
     const char * what() const noexcept;
 
-    /// Destructor
     ~LX_WindowException() noexcept;
 };
 
@@ -466,7 +461,6 @@ public:
     */
     bool glMakeCurrent() noexcept;
 
-    /// Destructor
     ~LX_Window();
 };
 

@@ -37,15 +37,10 @@ struct LX_Vector2D
     float vx;   /**< The x velocity */
     float vy;   /**< The y velocity */
 
-    /// No argument constructor
     LX_Vector2D() noexcept;
-    /// Construct a vector using coordinates
     LX_Vector2D(float x, float y) noexcept;
-    /// Construct a vector using points
     LX_Vector2D(const LX_Point& ori, const LX_Point& im) noexcept;
-    /// Construct a vector using coordinates
     LX_Vector2D(const LX_Vector2D& v) noexcept;
-    /// Vector2D assignment
     LX_Vector2D& operator =(const LX_Vector2D& v) noexcept;
 };
 

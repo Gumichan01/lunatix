@@ -169,7 +169,6 @@ public:
     */
     virtual int numberOfEffects() const noexcept;
 
-    /// Destructor
     virtual ~LX_Haptic();
 };
 
@@ -185,10 +184,8 @@ class LX_MouseHaptic: public LX_Haptic
 
 public:
 
-    /// Constructor
     LX_MouseHaptic() noexcept;
     virtual bool isOpened() const noexcept;
-    /// Desstructor
     ~LX_MouseHaptic();
 };
 

@@ -43,17 +43,10 @@ class LX_PolygonException : public std::exception
 
 public:
 
-    /// Constructor
     explicit LX_PolygonException(std::string err);
-    /// Copy constructor
     LX_PolygonException(const LX_PolygonException& pex);
-    /// '=' operator
     LX_PolygonException& operator =(const LX_PolygonException& pex);
-
-    /// Get the error message
     const char * what() const noexcept;
-
-    /// Destructor
     ~LX_PolygonException() noexcept;
 };
 
@@ -73,7 +66,6 @@ class LX_Polygon
 
 public:
 
-    /// Constructor
     LX_Polygon() noexcept;
 
     /**
@@ -177,7 +169,7 @@ public:
     *   @param [in] p The new position
     */
     void moveTo(const LX_Point& p);
-    /// Destructor
+
     ~LX_Polygon();
 };
 

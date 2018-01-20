@@ -143,7 +143,6 @@ public:
     */
     LX_Colour getColour()const noexcept;
 
-    /// Destructor
     ~LX_Font();
 };
 

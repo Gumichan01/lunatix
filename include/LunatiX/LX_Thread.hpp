@@ -104,7 +104,6 @@ public:
     */
     size_t getID() noexcept;
 
-    /// Destructor
     ~LX_Thread() = default;
 };
 

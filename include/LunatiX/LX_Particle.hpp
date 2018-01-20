@@ -109,7 +109,6 @@ public:
     */
     unsigned int getDelay() const noexcept;
 
-    /// Destructor
     ~LX_Particle();
 };
 

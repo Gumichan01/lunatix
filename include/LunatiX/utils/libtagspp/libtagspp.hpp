@@ -73,7 +73,6 @@ class Tag
 
 public:
 
-    /// Constructor
     Tag();
 
     Tag(Tag&) = delete;
@@ -115,7 +114,6 @@ public:
     /// Get the music properties
     const Properties& properties() const;
 
-    /// Destructor
     ~Tag() = default;
 };
 

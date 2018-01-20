@@ -66,7 +66,6 @@ public:
     */
     void setMouse() noexcept;
 
-    /// Destructor
     ~LX_Mouse();
 };
 

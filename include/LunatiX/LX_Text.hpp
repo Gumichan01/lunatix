@@ -74,7 +74,7 @@ public:
     */
     virtual void operator ()(UTF8string& u8str, UTF8string& u8comp, const bool update,
                              size_t cursor, size_t prev_cur) noexcept = 0;
-    /// Destructor
+
     virtual ~LX_RedrawCallback() = default;
 };
 

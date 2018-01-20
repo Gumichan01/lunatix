@@ -35,13 +35,9 @@ struct LX_Point
     int x;      /**< The x position of the point */
     int y;      /**< The y position of the point */
 
-    /// No argument constructor
     LX_Point() noexcept;
-    /// Construct a point using coordinates
     LX_Point(int xpos, int ypos) noexcept;
-    /// Construct a point using another point
     LX_Point(const LX_Point& p) noexcept;
-    /// Point assignment
     LX_Point& operator=(const LX_Point& p) noexcept;
 };
 
@@ -55,13 +51,9 @@ struct LX_Line
     LX_Point o;     /**< Origin point       */
     LX_Vector2D v;  /**< Direction vector   */
 
-    /// Default Constructor
     LX_Line() noexcept;
-    /// Copy destructor
     LX_Line(const LX_Line& l) noexcept;
-    /// Construct the line using the point and the direction vector
     LX_Line(const LX_Point& p, const LX_Vector2D& dv) noexcept;
-    /// Line assignment
     LX_Line& operator=(const LX_Line& l) noexcept;
 
     /**
@@ -95,13 +87,9 @@ struct LX_Circle
     unsigned int radius;        /**< The circle radius                      */
     unsigned int square_radius; /**< The square radius                      */
 
-    /// No argument constructor
     LX_Circle() noexcept;
-    /// Construct a circle using a point and a radius
     LX_Circle(const LX_Point& p, unsigned int rad) noexcept;
-    /// Construct a circle using another circle
     LX_Circle(const LX_Circle& c) noexcept;
-    /// Circle assignment
     LX_Circle& operator=(const LX_Circle& c) noexcept;
 };
 

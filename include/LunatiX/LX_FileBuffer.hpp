@@ -132,7 +132,6 @@ public:
     */
     const char * getFilename() const noexcept;
 
-    /// Destructor
     ~LX_FileBuffer();
 };
 

@@ -204,7 +204,6 @@ public:
     */
     const LX_MusicTag& metaData() noexcept;
 
-    /// Destructor
     ~LX_Music();
 };
 

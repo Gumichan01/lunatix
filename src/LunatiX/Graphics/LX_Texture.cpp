@@ -200,7 +200,7 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
     : LX_Sprite(t, w, filename, format), _coordinates(coord), _SZ(coord.size()),
       _delay(delay), _btime(0), _frame(0), _started(false), _loop(loop), _drawable(true) {}
 
-
+// public constructor
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
                                      LX_Win::LX_Window& w,
                                      const std::vector<LX_AABB>& coord,

@@ -70,15 +70,9 @@ class IOException: public std::exception
 
 public:
 
-    /// Constructor
     explicit IOException(std::string err);
-    /// Copy cnstructor
     IOException(const IOException& io);
-
-    /// Get the error message
     const char * what() const noexcept;
-
-    /// Destructor
     ~IOException() noexcept;
 };
 
@@ -257,7 +251,6 @@ public:
     */
     const char * getFilename() const noexcept;
 
-    /// Destructor
     virtual ~LX_File();
 };
 

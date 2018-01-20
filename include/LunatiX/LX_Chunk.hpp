@@ -126,7 +126,6 @@ public:
     */
     bool play(int channel, int loops, int ticks) noexcept;
 
-    /// Destructor
     ~LX_Chunk();
 };
 

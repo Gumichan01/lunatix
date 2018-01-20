@@ -91,7 +91,6 @@ public:
     */
     unsigned int nbTotalParticles() const noexcept;
 
-    /// Destructor
     ~LX_ParticleSystem();
 };
 

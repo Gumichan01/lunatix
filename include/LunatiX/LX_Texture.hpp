@@ -797,26 +797,21 @@ protected:
 
 public:
 
-    /// Constructor without the text
     LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Constructor using the text
     LX_BlendedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                           LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Constructor using the utf-8 text
     LX_BlendedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                           LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Constructor using the text with the text size
     LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
-    /// Constructor using the utf-8 text with the text size
     LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);

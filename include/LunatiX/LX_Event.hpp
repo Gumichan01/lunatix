@@ -385,7 +385,6 @@ class LX_EventHandler
 
 public:
 
-    /// Constructor
     LX_EventHandler() noexcept;
 
     /**
@@ -576,7 +575,6 @@ public:
     */
     const LX_DropEvent getDropEvent() const noexcept;
 
-    /// Default Destructor
     ~LX_EventHandler();
 };
 
