@@ -194,11 +194,6 @@ int LX_Font::sizeOfText_(const std::string& text, const unsigned int size, int& 
 *   Calculate the resulting texture dimension of the utf-8 text
 *   rendererd using the default font
 *
-*   @param [in] text The utf-8 string to size up
-*   @param [in] size The size of the text
-*   @param [out] w The reference of an integral to fill in the text width
-*   @param [out] h The reference of an integral to fill in the text height
-*
 *   @return A control value, 0 on success, -1 on failure
 */
 int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w, int& h) const noexcept
@@ -208,11 +203,6 @@ int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w
 
 /*
 *   Render the text in solid mode. The size has to be specified
-*
-*   @param [in] text The string to display
-*   @param [in] size The size defined by the user
-*   @param [in] w The window to link the texture with
-*
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size,
@@ -223,11 +213,6 @@ SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size
 
 /*
 *   Render the UTF-8 encoded text in solid mode. The size has to be specified
-*
-*   @param [in] text The utf-8 string to display
-*   @param [in] size The size defined by the user
-*   @param [in] w The window to link the texture with
-*
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
@@ -246,12 +231,6 @@ SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
 
 /*
 *   Render the text in shaded mode. The size has to be specified
-*
-*   @param [in] text The string to display
-*   @param [in] size The size defined by the user
-*   @param [in] bg The background colour behind the text
-*   @param [in] w The window to link the texture with
-*
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int size,
@@ -262,12 +241,6 @@ SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int siz
 
 /*
 *   Render the UTF-8 encoded text in shaded mode. The size has to be specified
-*
-*   @param [in] text The utf-8 string to display
-*   @param [in] size The size defined by the user
-*   @param [in] bg The background colour behind the text
-*   @param [in] w The window to link the texture with
-*
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size,
@@ -286,11 +259,6 @@ SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size
 
 /*
 *   Render the text in blended mode. The size has to be specified
-*
-*   @param [in] text The string to display
-*   @param [in] size The size defined by the user
-*   @param [in] w The window to link the texture with
-*
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int size,
@@ -301,11 +269,6 @@ SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int si
 
 /*
 *   Render the UTF-8 encoded text in blended mode. The size has to be specified
-*
-*   @param [in] text The utf-8 string to display
-*   @param [in] size The size defined by the user
-*   @param [in] w The window to link the texture with
-*
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_(const UTF8string& text, unsigned int size,
