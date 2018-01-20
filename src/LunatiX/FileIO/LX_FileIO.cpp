@@ -30,7 +30,7 @@
 namespace LX_FileIO
 {
 
-IOException::IOException(std::string err) : _string_error(err) {}
+IOException::IOException(const std::string& err) : _string_error(err) {}
 
 IOException::IOException(const IOException& io) : _string_error(io._string_error) {}
 
@@ -42,63 +42,53 @@ const char * IOException::what() const noexcept
 IOException::~IOException() noexcept {}
 
 
-/// LX_AbstractFile
-
-LX_AbstractFile::~LX_AbstractFile() {}
-
-
 /// LX_File
 
 /* Private implementation */
 
 class LX_File_
 {
-    UTF8string _name;        /* The name of the file         */
+    UTF8string _name;
     FILE *_fstream;
 
-    void open_(const uint32_t mode)
+    void open_(const LX_FileMode mode)
     {
         std::string str = "LX_File: ";
 
-        if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
+        switch(mode)
         {
-            _fstream = fopen(_name.utf8_str(), "wb+");
-        }
-        else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
-        {
-            _fstream = fopen(_name.utf8_str(), "rb+");
-        }
-        else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
-        {
-            _fstream = fopen(_name.utf8_str(), "ab+");
-        }
-        else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
-        {
+        case LX_FileMode::RDONLY:
             _fstream = fopen(_name.utf8_str(), "rb");
-        }
-        else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
-        {
+            break;
+        case LX_FileMode::WRONLY:
             _fstream = fopen(_name.utf8_str(), "wb");
-        }
-        else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
-        {
+            break;
+        case LX_FileMode::APPEND:
             _fstream = fopen(_name.utf8_str(), "ab");
+            break;
+        case LX_FileMode::RDWR:
+            _fstream = fopen(_name.utf8_str(), "rb+");
+            break;
+        case LX_FileMode::RDAP:
+            _fstream = fopen(_name.utf8_str(), "ab+");
+            break;
+        case LX_FileMode::WRTR:
+            _fstream = fopen(_name.utf8_str(), "wb+");
+            break;
+        default:
+            throw IOException("LX_File: Unrecognized mode");
+            break;
         }
-        else
-            throw IOException(str + "Unrecognized mode");
 
         if(_fstream == nullptr)
-            throw IOException(str + LX_GetError());
+            throw IOException(LX_GetError());
     }
 
 public:
 
-    LX_File_(const UTF8string& filename, const uint32_t mode)
+    LX_File_(const UTF8string& filename, const LX_FileMode mode)
         : _name(filename), _fstream(nullptr)
     {
-        if(mode == 0x00000000)
-            throw IOException("LX_File: Invalid mode");
-
         open_(mode);
     }
 
@@ -183,10 +173,10 @@ public:
 
 /* Public functions */
 
-LX_File::LX_File(const std::string& filename, const uint32_t mode)
+LX_File::LX_File(const std::string& filename, const LX_FileMode mode)
     : LX_File(UTF8string(filename), mode) {}
 
-LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
+LX_File::LX_File(const UTF8string& filename, const LX_FileMode mode)
     : _fimpl(new LX_File_(filename, mode)) {}
 
 

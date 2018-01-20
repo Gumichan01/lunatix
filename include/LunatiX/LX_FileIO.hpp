@@ -42,12 +42,19 @@ struct SDL_RWops;
 namespace LX_FileIO
 {
 
-const uint32_t LX_FILEIO_RDONLY = 0x00000001;                           /**< Read only mode (r)     */
-const uint32_t LX_FILEIO_WRONLY = 0x00000010;                           /**< Write only mode (w)    */
-const uint32_t LX_FILEIO_APPEND = 0x00000100;                           /**< Append mode (a)        */
-const uint32_t LX_FILEIO_RDWR   = (LX_FILEIO_RDONLY|LX_FILEIO_WRONLY);  /**< Read/Write mode (r+)   */
-const uint32_t LX_FILEIO_RDAP   = (LX_FILEIO_RDONLY|LX_FILEIO_APPEND);  /**< Read/Append mode (a+)  */
-const uint32_t LX_FILEIO_WRTR   = (0x00001000|LX_FILEIO_RDWR);          /**< Write but can read mode (w+) */
+/**
+*   @enum LX_FileMode
+*   @brief The file access mode
+*/
+enum class LX_FileMode : int
+{
+    RDONLY = 0x00000001,                           /**< Read only mode (r)     */
+    WRONLY = 0x00000010,                           /**< Write only mode (w)    */
+    APPEND = 0x00000100,                           /**< Append mode (a)        */
+    RDWR   = (RDONLY|WRONLY),  /**< Read/Write mode (r+)   */
+    RDAP   = (RDONLY|APPEND),  /**< Read/Append mode (a+)  */
+    WRTR   = (0x00001000|RDWR),          /**< Write but can read mode (w+) */
+};
 
 const uint32_t LX_SEEK_SET = 0;     /**< Beginning of data      */
 const uint32_t LX_SEEK_CUR = 1;     /**< The current read point */
@@ -70,7 +77,7 @@ class IOException: public std::exception
 
 public:
 
-    explicit IOException(std::string err);
+    explicit IOException(const std::string& err);
     IOException(const IOException& io);
     const char * what() const noexcept;
     ~IOException() noexcept;
@@ -170,7 +177,7 @@ public:
     */
     virtual size_t tell() const noexcept = 0;
 
-    virtual ~LX_AbstractFile();
+    virtual ~LX_AbstractFile() = default;
 };
 
 
@@ -190,7 +197,7 @@ class LX_File: public virtual LX_AbstractFile
 public:
 
     /**
-    *   @fn LX_File(const std::string& filename, const uint32_t mode)
+    *   @fn LX_File(const std::string& filename, const LX_FileMode mode)
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -207,9 +214,9 @@ public:
     *   @exception IOException If one of these aruguments are invalid
     *             or the file is not openable
     */
-    LX_File(const std::string& filename, const uint32_t mode);
+    LX_File(const std::string& filename, const LX_FileMode mode);
     /**
-    *   @fn LX_File(const UTF8string& filename, const uint32_t mode)
+    *   @fn LX_File(const UTF8string& filename, const LX_FileMode mode)
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -226,7 +233,7 @@ public:
     *   @exception IOException If one of these aruguments are invalid
     *             or the file is not openable
     */
-    LX_File(const UTF8string& filename, const uint32_t mode);
+    LX_File(const UTF8string& filename, const LX_FileMode mode);
 
     virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept;
     virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept;
