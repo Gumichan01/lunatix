@@ -1,7 +1,7 @@
 
 #
 #   Copyright © 2017 Luxon Jean-Pierre
-#   gumichan01.cpplympe.in
+#   https://gumichan01.github.io/
 #
 #   LunatiX is a free, SDL2-based library.
 #   It can be used for open-source or commercial games thanks to the zlib/libpng license.
