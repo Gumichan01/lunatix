@@ -43,18 +43,14 @@ class LX_Gamepad
 
 public:
 
-    /**
-    *   @fn LX_Gamepad() noexcept
-    *   @brief Constructor
-    */
     LX_Gamepad() noexcept;
 
     /**
     *   @fn bool open(int index)
     *
-    *   Open the gamepad
+    *   Get access to a gamepad
     *
-    *   @param [in] index The index of the joystick to query
+    *   @param [in] index The index of the gamepad to query
     *
     *   @return TRUE on success, FALSE if the gamepad is already opened and
     *          connected to another device.
@@ -78,11 +74,8 @@ public:
     *   @sa open()
     */
     void close() noexcept;
-
     /**
     *   @fn bool isConnected() const noexcept
-    *
-    *   Get the status of the gamepad
     *
     *   @return TRUE if the gamepad is opened and connected,
     *          FALSE otherwise
@@ -91,32 +84,26 @@ public:
     /**
     *   @fn bool isHaptic() const noexcept
     *
-    *   Check if the gamepad is haptic
+    *   Check if the gamepad has force feedback support
     *
     *   @return TRUE if the gamepad has force feedback support,
     *          FALSE otherwise
     */
     bool isHaptic() const noexcept;
-
     /**
     *   @fn int32_t getID() const noexcept
-    *   Get the ID of the gamepad
     *   @return The ID of the gamepad, -1 otherwise
     */
     int32_t getID() const noexcept;
     /**
     *   @fn LX_Haptic * getHaptic() const noexcept
-    *   Get the haptic system of the gamepad
     *   @return The haptic system
-    *
     *   @note The system can be inexistent, so check the returned value
     */
     LX_Haptic * getHaptic() const noexcept;
     /**
     *   @fn const char * getName() const noexcept
-    *   Get the name of the Gamepad
     *   @return The name of the gamepad, a null pointer otherwise
-    *
     *   @sa toString
     */
     const char * getName() const noexcept;
@@ -138,7 +125,6 @@ public:
     */
     UTF8string toString() const;
 
-    /// Destructor
     ~LX_Gamepad();
 };
 

@@ -68,9 +68,6 @@ public:
 
     /**
     *   @fn LX_FileBuffer(const std::string filename, uint32_t offset = 0, uint32_t sz = 0)
-    *   @brief Constructor
-    *
-    *   Read the file given in argument and put it in the buffer
     *
     *   @param [in] filename The file to read
     *   @param [in] offset The position in the file to start reading (default value: 0)
@@ -88,9 +85,6 @@ public:
     LX_FileBuffer(const std::string filename, uint32_t offset = 0, uint32_t sz = 0);
     /**
     *   @fn explicit LX_FileBuffer(const UTF8string filename, uint32_t offset = 0, uint32_t sz = 0)
-    *   @brief Constructor
-    *
-    *   Read the file given in argument and put it in the buffer
     *
     *   @param [in] filename The file to read
     *   @param [in] offset The position in the file to start reading (default value: 0)

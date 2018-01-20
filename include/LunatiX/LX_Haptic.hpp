@@ -80,9 +80,6 @@ public:
 
     /**
     *   @fn LX_Haptic(int index) noexcept
-    *   @brief Constructor
-    *
-    *   Create the instance of the haptic system using the index
     *   @param [in] index The index of the device to open
     */
     explicit LX_Haptic(int index) noexcept;

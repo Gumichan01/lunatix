@@ -113,9 +113,6 @@ public:
     /**
     *   @fn LX_Font(const std::string& font_file, const LX_Colour& colour,
     *               unsigned int size)
-    *   @brief Constructor
-    *
-    *   Construct the font with a font file, a colour and a size.
     *
     *   @param [in] font_file The font file to load
     *   @param [in] colour The colour for rendering the text

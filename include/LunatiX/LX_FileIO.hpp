@@ -197,7 +197,6 @@ public:
 
     /**
     *   @fn LX_File(const std::string& filename, const uint32_t mode)
-    *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -217,7 +216,6 @@ public:
     LX_File(const std::string& filename, const uint32_t mode);
     /**
     *   @fn LX_File(const UTF8string& filename, const uint32_t mode)
-    *   @brief Constructor
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -279,7 +277,6 @@ class LX_TmpFile: public virtual LX_AbstractFile
 
 public:
 
-    /// Constructor
     LX_TmpFile();
 
     virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept;
@@ -291,7 +288,6 @@ public:
     virtual bool seek(long offset, int whence) noexcept;
     virtual size_t tell() const noexcept;
 
-    /// Destructor
     virtual ~LX_TmpFile();
 };
 

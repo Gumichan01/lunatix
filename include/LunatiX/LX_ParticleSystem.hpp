@@ -50,19 +50,12 @@ public:
 
     /**
     *   @fn LX_ParticleSystem(const unsigned int nbPart) noexcept
-    *   @brief Constructor
-    *
-    *   Create the instance with a number of particles
-    *
     *   @param [in] nbPart The number of particles to define in the system
     */
     explicit LX_ParticleSystem(const unsigned int nbPart) noexcept;
 
     /**
     *   @fn bool addParticle(LX_Particle *p) noexcept
-    *
-    *   Add a particle into the particle system
-    *
     *   @param [in] p The particle to add
     *
     *   @return TRUE if the system had the particle with succes.
@@ -71,12 +64,11 @@ public:
     bool addParticle(LX_Particle *p) noexcept;
     /**
     *   @fn void updateParticles() noexcept
-    *   Update the particles
+    *   Update the status of the particles
     */
     void updateParticles() noexcept;
     /**
     *   @fn void displayParticles() const noexcept
-    *   Display the particles
     */
     void displayParticles() const noexcept;
 

@@ -61,10 +61,6 @@ public:
 
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
-    *   @brief Constructor
-    *
-    *   Create the instance using an AABB
-    *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     */
@@ -72,9 +68,6 @@ public:
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
     *                  const float vx, const float vy) noexcept
-    *   @brief Constructor
-    *
-    *   Create the instance using an AABB and the velocity
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
@@ -85,9 +78,6 @@ public:
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
     *                  const LX_Physics::LX_Vector2D& v) noexcept
-    *   @brief Constructor
-    *
-    *   Create the instance using an AABB and the velocity
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height

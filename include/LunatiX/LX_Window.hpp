@@ -190,10 +190,6 @@ public:
 
     /**
     *   @fn LX_Window(LX_WindowInfo &info)
-    *   @brief Constructor
-    *
-    *   Create a window using information from the struture given in argument
-    *
     *   @param [in, out] info The structure that contains information about the window
     *   @note The structure is updated when the window is created
     *   @exception LX_WindowException if the window cannot be created
