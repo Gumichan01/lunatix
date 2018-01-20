@@ -50,9 +50,6 @@ class LX_FileBuffer_
 
 public:
 
-    explicit LX_FileBuffer_(const UTF8string filename, uint32_t offset, uint32_t sz)
-        : LX_FileBuffer_(filename.utf8_sstring(), offset, sz) {}
-
     explicit LX_FileBuffer_(const std::string& filename, uint32_t offset, uint32_t sz)
         : _name(filename), _bufsize(0)
     {
@@ -128,13 +125,13 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const noexcept
 
 
 /** LX_Filebuffer — public functions */
-LX_FileBuffer::LX_FileBuffer(const std::string filename, uint32_t offset,
+LX_FileBuffer::LX_FileBuffer(const std::string& filename, uint32_t offset,
                              uint32_t sz)
     : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 
-LX_FileBuffer::LX_FileBuffer(const UTF8string filename, uint32_t offset,
+LX_FileBuffer::LX_FileBuffer(const UTF8string& filename, uint32_t offset,
                              uint32_t sz)
-    : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
+    : _bimpl(new LX_FileBuffer_(filename.utf8_sstring(), offset, sz)) {}
 
 
 LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format) const
