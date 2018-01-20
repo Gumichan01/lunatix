@@ -56,7 +56,7 @@ public:
         std::string str("LX_FileBuffer: " + _name + " - ");
         size_t r = 0, fsize = 0;
 
-        LX_File reader(_name, LX_FILEIO_RDONLY);
+        LX_File reader(_name, LX_FileMode::RDONLY);
 
         if((fsize = reader.size()) == static_cast<size_t>(-1))
             throw IOException(str + "cannot get the size of the file");
@@ -70,7 +70,7 @@ public:
         else
             _bufsize = U64(sz);
 
-        reader.seek(static_cast<long>(offset), LX_SEEK_SET);
+        reader.seek(static_cast<long>(offset), LX_FileWhence::SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
 
         if(_buffer == nullptr)

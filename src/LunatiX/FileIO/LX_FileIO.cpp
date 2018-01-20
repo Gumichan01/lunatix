@@ -125,9 +125,9 @@ public:
         return write((void *)str.c_str(), sizeof(char), len);
     }
 
-    bool seek(long offset, int whence) noexcept
+    bool seek(long offset, LX_FileWhence whence) noexcept
     {
-        return fseek(_fstream, offset, whence) == 0;
+        return fseek(_fstream, offset, static_cast<int>(whence)) == 0;
     }
 
     size_t tell() const noexcept
@@ -139,10 +139,10 @@ public:
     {
         size_t fsize = static_cast<size_t>(-1);
         size_t old_pos = tell();
-        bool ok = seek(0, LX_SEEK_END);
+        bool ok = seek(0, LX_FileWhence::END);
 
         if(ok) fsize = tell();
-        ok = seek(static_cast<long>(old_pos), LX_SEEK_SET);
+        ok = seek(static_cast<long>(old_pos), LX_FileWhence::SET);
 
         if(!ok)
             return static_cast<size_t>(-1);
@@ -202,7 +202,7 @@ size_t LX_File::write(const std::string& str) noexcept
 }
 
 
-bool LX_File::seek(long offset, int whence) noexcept
+bool LX_File::seek(long offset, LX_FileWhence whence) noexcept
 {
     return _fimpl->seek(offset, whence);
 }
@@ -295,9 +295,9 @@ public:
         return write((void *)str.c_str(), sizeof(char), len);
     }
 
-    bool seek(long offset, int whence) noexcept
+    bool seek(long offset, LX_FileWhence whence) noexcept
     {
-        return fseek(_f, offset, whence) == 0;
+        return fseek(_f, offset, static_cast<int>(whence)) == 0;
     }
 
     size_t tell() const noexcept
@@ -340,7 +340,7 @@ size_t LX_TmpFile::write(const std::string& str) noexcept
 }
 
 
-bool LX_TmpFile::seek(long offset, int whence) noexcept
+bool LX_TmpFile::seek(long offset, LX_FileWhence whence) noexcept
 {
     return _timpl->seek(offset, whence);
 }
