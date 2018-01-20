@@ -497,39 +497,39 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         LX_Log::log("SUCCESS - The window exists");
 
-    uint32_t id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
+    bool r = LX_Win::getWindowManager().addWindow(*win);
 
-    if(id == static_cast<uint32_t>(-1))
+    if(r == false)
         LX_Log::log("FAILURE - cannot add a window: %s", LX_GetError());
     else
         LX_Log::log("SUCCESS - the window was added into the window manager");
 
 
-    LX_Win::LX_Window *lxw = LX_Win::LX_WindowManager::getInstance()->getWindow(id);
+    LX_Win::LX_Window& lxw = LX_Win::getWindowManager().getWindow(win->getID());
 
-    if(lxw == win)
+    if(&lxw == win)
         LX_Log::log("SUCCESS - (getWindow) the window is exactly what we added");
     else
         LX_Log::log("FAILURE - (getWindow) the window is not exactly what we added");
 
-    LX_Win::LX_WindowManager::getInstance()->clearWindows();
+    LX_Win::getWindowManager().clearWindows();
     img.draw();
-    LX_Win::LX_WindowManager::getInstance()->updateWindows();
+    LX_Win::getWindowManager().updateWindows();
     LX_Timer::delay(512);
 
     LX_Log::log("Remove the same window");
-    LX_Win::LX_Window *wi = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+    bool r2 = LX_Win::getWindowManager().removeWindow(win->getID());
 
-    if(wi == win)
+    if(r2)
         LX_Log::log("SUCCESS - The removed window is exactly what we added");
     else
         LX_Log::log("FAILURE - The removed window is not exactly what we added");
 
     LX_Log::log("Remove the same window (again)");
-    LX_Win::LX_Window *null = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+    bool r3 = LX_Win::getWindowManager().removeWindow(win->getID());
 
-    if(null == nullptr)
-        LX_Log::log("SUCCESS - nullptr: expected");
+    if(!r3)
+        LX_Log::log("SUCCESS - false expected");
     else
         LX_Log::log("FAILURE - The window must not be in the manager");
 

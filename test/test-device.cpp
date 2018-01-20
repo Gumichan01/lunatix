@@ -170,9 +170,9 @@ void test_mouse(void)
             {
             case LX_Event::LX_EventType::MOUSEBUTTONUP:
                 if(ev.getMouseButton().button == LX_Event::LX_MouseButton::LBUTTON)
-                    LX_Device::mouseCursorDisplay(0);
+                    LX_Device::mouseCursorDisplay(LX_Device::LX_MouseToggle::HIDE);
                 else
-                    LX_Device::mouseCursorDisplay(1);
+                    LX_Device::mouseCursorDisplay(LX_Device::LX_MouseToggle::SHOW);
                 break;
 
             default:
