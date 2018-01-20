@@ -101,17 +101,11 @@ public:
 
     /**
     *   @fn LX_Music(const std::string filename)
-    *   @brief Constructor
-    *
-    *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MixerException On failure
     */
     LX_Music(const std::string filename);
     /**
     *   @fn LX_Music(const UTF8string filename)
-    *   @brief Constructor
-    *
-    *   @param [in] filename The music filename that will be loaded
     *   @exception LX_MixerException On failure
     */
     explicit LX_Music(const UTF8string filename);
