@@ -24,7 +24,6 @@
 
 #include <exception>
 #include <array>
-#include <new>
 
 
 namespace LX_ParticleEngine
@@ -45,16 +44,23 @@ class LX_ParticleSystem_
     *   This function is automatically called by
     *   the constructor of the particle system
     */
-    inline void allocateParticles_() noexcept
+    inline void allocateParticles_()
     {
-        _particles.reset(new (std::nothrow) std::unique_ptr<LX_Particle>[_nb_particles]);
-
-        if(_particles == nullptr)
+        try
         {
-            /// !!! This code must not be executed !!!
+            _particles.reset(new std::unique_ptr<LX_Particle>[_nb_particles]);
+        }
+        catch(std::bad_alloc& ba)   // Ok, I can't allocate more memory
+        {
             LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
                                 "Particle system: Cannot allocate the particles\n");
-            LX_SetError("Particle system: Cannot allocate the particles\n");
+            throw ba;
+        }
+        catch(...)  // Something very bad happened
+        {
+            LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
+                                "Particle system: Unknown exception\n");
+            std::terminate();
         }
     }
 
