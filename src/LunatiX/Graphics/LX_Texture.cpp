@@ -742,18 +742,18 @@ unsigned int LX_TextTexture::getTextSize() const noexcept
     return _size;
 }
 
-void LX_TextTexture::getTextDimension(int& w, int& h) noexcept
+void LX_TextTexture::getTextDimension(int& w, int& h) const noexcept
 {
     w = _dimension.w;
     h = _dimension.h;
 }
 
-int LX_TextTexture::getTextWidth() noexcept
+int LX_TextTexture::getTextWidth() const noexcept
 {
     return _dimension.w;
 }
 
-int LX_TextTexture::getTextHeight() noexcept
+int LX_TextTexture::getTextHeight() const noexcept
 {
     return _dimension.h;
 }

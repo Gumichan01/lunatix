@@ -149,7 +149,9 @@ public:
     /**
     *   @deprecated unbind() will be put in a new sub-class and removed from LX_Texture in 0.14.0
     *   @fn bool unbind() noexcept
+    *
     *   Unbind a texture
+    *
     *   @return TRUE on success.FALSE if the operation is not supported.
     */
     bool unbind() noexcept;
@@ -561,25 +563,25 @@ public:
     */
     unsigned int getTextSize() const noexcept;
     /**
-    *   @fn void getTextDimension(int& w, int& h) noexcept
+    *   @fn void getTextDimension(int& w, int& h) const noexcept
     *   Get the dimension of the text displayed on the screen (width/height)
     *
     *   @param [out] w Width value returned by this function
     *   @param [out] h Height value returned by this function
     */
-    void getTextDimension(int& w, int& h) noexcept;
+    void getTextDimension(int& w, int& h) const noexcept;
     /**
-    *   @fn int getTextWidth() noexcept
+    *   @fn int getTextWidth() const noexcept
     *   Get the width of the text displayed on the screen
     *   @return The width
     */
-    int getTextWidth() noexcept;
+    int getTextWidth() const noexcept;
     /**
-    *   @fn int getTextHeight() noexcept
+    *   @fn int getTextHeight() const noexcept
     *   Get the height of the text displayed on the screen
     *   @return The height
     */
-    int getTextHeight() noexcept;
+    int getTextHeight() const noexcept;
     /**
     *   @fn LX_Colour getTextColour() const noexcept
     *   Get the text colour
