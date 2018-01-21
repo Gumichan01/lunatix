@@ -83,7 +83,14 @@ Float& operator /=(Float& x, const Float y)
     return x;
 }
 
-
+/*
+*   Implementation of a "safe" floating point comparison
+*
+*   This implementation is based on Nerdylicious's implementation
+*   of floating point comparison program
+*
+*   https://github.com/Nerdylicious/FloatingPointComparison
+*/
 bool operator ==(const Float& x, const Float& y)
 {
     static const float EPSILON = std::numeric_limits<float>::epsilon();
