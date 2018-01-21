@@ -138,6 +138,7 @@ public:
     bool isConvex() const noexcept;
 
     /**
+    *   @deprecated This function signature is deprecated
     *   @fn void LX_Polygon::move(const float vx, const float vy) noexcept
     *
     *   Move the polygon to a direction
@@ -153,6 +154,7 @@ public:
     */
     void move(const LX_Vector2D& v) noexcept;
     /**
+    *   @deprecated This function signature is deprecated
     *   @fn void LX_Polygon::moveTo(int xpos, int ypos)
     *
     *   Move the polygon to an absolute position
