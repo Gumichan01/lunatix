@@ -48,6 +48,7 @@ LX_WindowManager& getWindowManager() noexcept
     return LX_WindowManager::getInstance();
 }
 
+LX_WindowManager::LX_WindowManager(): _wmpimpl(new LX_WM_()) {}
 
 LX_WindowManager::~LX_WindowManager()
 {

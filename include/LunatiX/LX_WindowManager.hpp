@@ -56,7 +56,7 @@ class LX_WindowManager
 {
     std::unique_ptr<LX_WM_> _wmpimpl;
 
-    LX_WindowManager()  = default;
+    LX_WindowManager();
     ~LX_WindowManager();
 
     LX_WindowManager(const LX_WindowManager&)  = delete;
