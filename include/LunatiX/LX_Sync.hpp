@@ -29,6 +29,10 @@
 namespace LX_Multithreading
 {
 
+/**
+*   @class LX_Semaphore
+*   @brief Semaphore
+*/
 class LX_Semaphore
 {
     std::mutex _mutex;
