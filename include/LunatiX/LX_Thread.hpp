@@ -71,7 +71,7 @@ public:
     *   @note Any return value from the function is ignored.
     *         If the function throws an exception, std::terminate is called.
     *         In order to pass return values or exceptions back to the calling thread,
-    *         std::promise or std::async may be used (STL).
+    *         LX_ASyncTask may be used.
     */
     template <class LX_Fun, class... LX_Args>
     LX_Thread(bool detach, LX_Fun&& fun, LX_Args&&... args);
@@ -106,10 +106,8 @@ public:
 };
 
 /**
+*   @class LX_ASyncTask
 *   @brief Asynchronous task
-*
-*   @arg ReturnValue The returned value of the task
-*
 */
 template <class ReturnValue>
 class LX_ASyncTask
@@ -125,19 +123,18 @@ class LX_ASyncTask
 public:
 
     /**
-    *   @fn template <class LX_Fun, class... LX_Args > LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args)
+    *   @fn template <class LX_Fun, class... LX_Args> LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args)
     *
     *   @param [in] fun The function launched by the thread
     *   @param [in] args arguments of the function
     *
     *   @exception std::system_error If the thread cannot be started
     */
-    template <class LX_Fun, class... LX_Args >
+    template <class LX_Fun, class... LX_Args>
     LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args);
 
     /**
     *   @fn ReturnValue getResult()
-    *   Get the result of the execution of the task
     *
     *   @return The result, or throw an exception
     *
