@@ -157,7 +157,7 @@ public:
     *   Seek for a position the file
     *
     *   @param [in] offset An offset in bytes, relative to the whence; can be negative
-    *   @param [in] whence Any of ::SEEK_SET, ::SEEK_CUR and ::SEEK_END
+    *   @param [in] whence Any of ::SET, ::CUR and ::END
     *
     *   @return TRUE on success, FALSE otherwise
     *
