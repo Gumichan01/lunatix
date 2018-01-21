@@ -30,7 +30,7 @@
 namespace
 {
 
-constexpr Float fc(float x)
+Float fc(float x)
 {
     return {x};
 }
