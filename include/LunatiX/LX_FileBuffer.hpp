@@ -103,22 +103,17 @@ public:
     explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset = 0, uint32_t sz = 0);
 
     /**
-    *   @fn LX_Graphics::
-    *       LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const
-    *
-    *   Load a buffered image from the file buffer.
+    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const
     *
     *   @param [in] format Optional argument that specified the format of the image
     *
-    *   @return A pointer to new an allocated buffered image on success,
+    *   @return A pointer to an allocated buffered image on success,
     *
     *   @exception LX_Graphics::LX_ImageException if the buffered image cannot be created
     */
     LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const;
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
-    *
-    *   Load a sample from the current file buffer
     *
     *   @return A pointer to an allocated LX_Chunk object,
     *          *nullptr* if the file buffer is not a sample to load
@@ -127,7 +122,6 @@ public:
 
     /**
     *   @fn const char * getFilename() const
-    *   Get the name of the file the buffer refers to
     *   @return The name of the file
     */
     const char * getFilename() const noexcept;
