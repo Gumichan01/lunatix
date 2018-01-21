@@ -32,7 +32,7 @@ void LX_Thread::join()
     thread.join();
 }
 
-size_t LX_Thread::getID() noexcept
+size_t LX_Thread::getID() const noexcept
 {
     return std::hash<std::thread::id>()(thread.get_id());
 }
