@@ -38,9 +38,9 @@ class LX_ParticleSystem_
 
 public:
 
-    explicit LX_ParticleSystem_(const unsigned int nbPart) noexcept
-        : _particles(new std::unique_ptr<LX_Particle>[_nb_particles]),
-          _nb_particles(nbPart) {}
+    explicit LX_ParticleSystem_(const unsigned int nb_part) noexcept
+        : _particles(new std::unique_ptr<LX_Particle>[nb_part]),
+          _nb_particles(nb_part) {}
 
     bool addParticle(LX_Particle *p) const noexcept
     {
