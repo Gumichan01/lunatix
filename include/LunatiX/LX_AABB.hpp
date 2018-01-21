@@ -29,8 +29,9 @@ struct SDL_Rect;
 *
 *   Structure:
 *
-*      int x, int y;   // Coordinates
-*      int w, int h;   // Dimension
+*       int x, int y;   // Coordinates
+*       int w, int h;   // Dimension
+*
 *
 *   Very useful for collision detection, image positioning, ...
 */
