@@ -732,7 +732,9 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Physics::LX_Vector2D u(256.0f,128.0f);
     LX_Physics::LX_Vector2D v(2048.0f,0.0f);
     LX_AABB b = {128,128,512,100};
+    LX_Colour c = {255,0,0,255};
 
+    win->setDrawColour(c);
     win->clearWindow();
     win->drawSegment(M,N);
     win->update();
@@ -744,8 +746,6 @@ void test_drawing(LX_Win::LX_Window *win)
     win->update();
     LX_Timer::delay(1000);
 
-    LX_Colour c = {255,0,0,255};
-    win->setDrawColour(c);
     LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
     LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");
     win->clearWindow();
