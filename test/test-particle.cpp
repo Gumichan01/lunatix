@@ -117,7 +117,6 @@ public:
 int main(int argc, char **argv)
 {
     Dot *dot;
-    LX_Win::LX_Window *w = nullptr;
     Uint32 begin_time;
 
     bool err = LX_Init();
@@ -134,14 +133,14 @@ int main(int argc, char **argv)
     LX_Win::LX_loadWindowConfig(winfo);
     winfo.title = "Test particle";
 
-    w = new LX_Win::LX_Window(winfo);
-    LX_Win::LX_WindowManager::getInstance()->addWindow(w);
+    LX_Win::LX_Window w(winfo);
+    LX_Win::getWindowManager().addWindow(w);
 
     try
     {
-        red = new LX_Sprite("test/asset/red.bmp",*w);
-        green = new LX_Sprite("test/asset/green.bmp",*w);
-        blue = new LX_Sprite("test/asset/blue.bmp",*w);
+        red = new LX_Sprite("test/asset/red.bmp", w);
+        green = new LX_Sprite("test/asset/green.bmp", w);
+        blue = new LX_Sprite("test/asset/blue.bmp", w);
         LX_Log::log("SUCCESS - The three assets were successfully loaded");
     }
     catch(LX_Graphics::LX_ImageException& ie)
@@ -168,20 +167,19 @@ int main(int argc, char **argv)
                 go = 0;
         }
 
-        LX_Win::LX_WindowManager::getInstance()->clearWindows();
+        LX_Win::getWindowManager().clearWindows();
         dot->update();
-        LX_Win::LX_WindowManager::getInstance()->updateWindows();
+        LX_Win::getWindowManager().updateWindows();
         LX_Timer::delay(16);
     }
 
-    LX_Win::LX_WindowManager::getInstance()->removeWindow(0);
+    LX_Win::getWindowManager().removeWindow(0);
     LX_Log::log("End of program");
 
     delete dot;
     delete blue;
     delete green;
     delete red;
-    delete w;
     LX_Quit();
 
     LX_Log::log(" ==== END Particle ==== \n");

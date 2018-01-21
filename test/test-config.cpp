@@ -13,36 +13,29 @@ string boolState(const bool b)
 
 int main(int argc, char **argv)
 {
-    LX_Config::LX_Configuration *configuration = nullptr;
-    LX_Config::LX_Configuration *configuration2 = nullptr;
-    bool err = LX_Init();
-
-    if(!err)
+    using namespace LX_Config;
+    if(!LX_Init())
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
+    const LX_Configuration& configuration  = LX_Config::LX_Configuration::getInstance();
+    const LX_Configuration& configuration2 = LX_Config::LX_Configuration::getInstance();
+
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Config ==== ");
-    configuration  = LX_Config::LX_Configuration::getInstance();
-    configuration2 = LX_Config::LX_Configuration::getInstance();
 
-    if(configuration == nullptr)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - The configuration is not initialized");
-    else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The configuration is initialized");
-
-    if(configuration != configuration2)
+    if(&configuration != &configuration2)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - The configuration class is not instantiated as a singleton");
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The configuration class is instantiated as a singleton");
 
-    bool video   = configuration->getVideoFlag();
-    bool vsync   = configuration->getVSyncFlag();
-    bool ttfont  = configuration->getTTFFlag();
-    bool sound   = configuration->getAudioFlag();
-    bool gamepad = configuration->getGamepadFlag();
-    bool opengl  = configuration->getOpenGLFlag();
+    bool video   = configuration.getVideoFlag();
+    bool vsync   = configuration.getVSyncFlag();
+    bool ttfont  = configuration.getTTFFlag();
+    bool sound   = configuration.getAudioFlag();
+    bool gamepad = configuration.getGamepadFlag();
+    bool opengl  = configuration.getOpenGLFlag();
 
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"======== Configuration ========");
     LX_Log::logInfo(LX_Log::LX_LOG_TEST,"video: %s", boolState(video).c_str());
