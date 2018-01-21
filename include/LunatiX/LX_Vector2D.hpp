@@ -20,6 +20,7 @@
 *   @version 0.12
 */
 
+#include <LunatiX/utils/float.hpp>
 
 namespace LX_Physics
 {
@@ -34,8 +35,8 @@ struct LX_Point;
 */
 struct LX_Vector2D
 {
-    float vx;   /**< The x velocity */
-    float vy;   /**< The y velocity */
+    Float vx;   /**< The x velocity */
+    Float vy;   /**< The y velocity */
 
     LX_Vector2D() noexcept;
     LX_Vector2D(float x, float y) noexcept;
