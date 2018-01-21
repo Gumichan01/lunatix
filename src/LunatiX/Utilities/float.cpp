@@ -39,6 +39,7 @@ Float operator --(Float& x, int)
     return tmp;
 }
 
+
 Float operator +(const Float x, const Float y)
 {
     return Float{ x.v + y.v };
@@ -58,6 +59,28 @@ Float operator /(const Float x, const Float y)
 {
     return Float{ x.v / y.v };
 }
+
+
+Float operator +(const Float x, float y)
+{
+    return Float{ x.v + y };
+}
+
+Float operator -(const Float x, float y)
+{
+    return Float{ x.v - y };
+}
+
+Float operator *(const Float x, float y)
+{
+    return Float{ x.v * y };
+}
+
+Float operator /(const Float x, float y)
+{
+    return Float{ x.v / y };
+}
+
 
 Float& operator +=(Float& x, const Float y)
 {
@@ -82,6 +105,32 @@ Float& operator /=(Float& x, const Float y)
     x.v /= y.v;
     return x;
 }
+
+
+Float& operator +=(Float& x, float y)
+{
+    x.v += y;
+    return x;
+}
+
+Float& operator -=(Float& x, float y)
+{
+    x.v -= y;
+    return x;
+}
+
+Float& operator *=(Float& x, float y)
+{
+    x.v *= y;
+    return x;
+}
+
+Float& operator /=(Float& x, float y)
+{
+    x.v /= y;
+    return x;
+}
+
 
 /*
 *   Implementation of a "safe" floating point comparison
@@ -112,6 +161,7 @@ bool operator ==(const Float& x, const Float& y)
                                 std::numeric_limits<float>::max())) < EPSILON;
     }
 }
+
 
 bool operator !=(const Float& x, const Float& y)
 {

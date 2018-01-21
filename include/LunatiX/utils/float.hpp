@@ -27,10 +27,20 @@ Float operator -(const Float x, const Float y);
 Float operator *(const Float x, const Float y);
 Float operator /(const Float x, const Float y);
 
+Float operator +(const Float x, float y);
+Float operator -(const Float x, float y);
+Float operator *(const Float x, float y);
+Float operator /(const Float x, float y);
+
 Float& operator +=(Float& x, const Float y);
 Float& operator -=(Float& x, const Float y);
 Float& operator *=(Float& x, const Float y);
 Float& operator /=(Float& x, const Float y);
+
+Float& operator +=(Float& x, float y);
+Float& operator -=(Float& x, float y);
+Float& operator *=(Float& x, float y);
+Float& operator /=(Float& x, float y);
 
 bool operator ==(const Float& x, const Float& y);
 bool operator !=(const Float& x, const Float& y);
