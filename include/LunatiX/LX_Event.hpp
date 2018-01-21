@@ -442,7 +442,7 @@ public:
     *
     *   @param ty The type of event to process
     *   @note 1 — By default, every events are enabled by default
-    *   @note 2 — ::LX_TEXTEDITING and ::LX_TEXTINPUT cannot be set for processing
+    *   @note 2 — ::TEXTEDITING and ::TEXTINPUT cannot be set for processing
     *   using this function because the operation is done by LX_Text
     *
     *   @sa ignoreEvent
@@ -454,7 +454,7 @@ public:
     *   Ingore a type of event
     *
     *   @param ty The type of event to ignore
-    *   @note ::LX_TEXTEDITING and ::LX_TEXTINPUT cannot be ignored using
+    *   @note ::TEXTEDITING and ::TEXTINPUT cannot be ignored using
     *   this function because the operation is done by LX_Text
     *
     *   @sa processEvent
