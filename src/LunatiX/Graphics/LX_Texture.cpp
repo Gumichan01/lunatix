@@ -163,7 +163,7 @@ LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
 
 void LX_Sprite::draw() noexcept
 {
-    SDL_RenderCopy(RENDER(_win.getRenderingSys()), nullptr, nullptr, nullptr);
+    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
 }
 
 void LX_Sprite::draw(LX_AABB * box) noexcept
