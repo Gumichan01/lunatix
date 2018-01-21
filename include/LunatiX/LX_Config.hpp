@@ -26,14 +26,14 @@
 /**
 *   @ingroup Config
 *   @namespace LX_Config
-*   @brief The configuration loader
+*   @brief The configuration
 */
 namespace LX_Config
 {
 
 /**
 *   @class LX_Configuration
-*   @brief The The LunatiX configuration
+*   @brief The configuration loader of Lunatix
 *
 *   This class is responsible of loading the configuration of the library
 */
