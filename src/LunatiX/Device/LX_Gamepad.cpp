@@ -134,7 +134,10 @@ public:
         return UTF8string("Unknown gamepad");
     }
 
-    ~LX_Gamepad_();
+    ~LX_Gamepad_()
+    {
+        _haptic.reset();
+    }
 };
 
 
@@ -298,6 +301,11 @@ bool LX_Gamepad::stat(LX_GamepadInfo& info) const
 UTF8string LX_Gamepad::toString() const
 {
     return _gpimpl->toString();
+}
+
+LX_Gamepad::~LX_Gamepad()
+{
+    _gpimpl.reset();
 }
 
 }

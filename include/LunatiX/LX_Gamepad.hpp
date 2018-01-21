@@ -125,7 +125,7 @@ public:
     */
     UTF8string toString() const;
 
-    ~LX_Gamepad() = default;
+    ~LX_Gamepad();
 };
 
 }

@@ -288,7 +288,7 @@ public:
     virtual bool seek(long offset, LX_FileWhence whence) noexcept;
     virtual size_t tell() const noexcept;
 
-    virtual ~LX_TmpFile() = default;
+    virtual ~LX_TmpFile();
 };
 
 

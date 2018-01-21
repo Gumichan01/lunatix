@@ -664,9 +664,14 @@ void LX_StreamingTexture::update() noexcept
     }
 }
 
+void LX_StreamingTexture::draw() noexcept
+{
+    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
+}
 
 LX_StreamingTexture::~LX_StreamingTexture()
 {
+    SDL_DestroyTexture(_texture);
     SDL_FreeSurface(_screen);
 }
 
