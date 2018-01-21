@@ -132,9 +132,9 @@ void loadOpenGLSubSystem()
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                                              SDL_GL_CONTEXT_PROFILE_CORE);
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,
-                                             LX_Graphics::LX_OpenGL::GL_MAJOR_VERSION);
+                                             LX_Graphics::LX_OpenGL::MAJOR_VERSION);
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MINOR_VERSION,
-                                             LX_Graphics::LX_OpenGL::GL_MINOR_VERSION);
+                                             LX_Graphics::LX_OpenGL::MINOR_VERSION);
     }
 }
 
