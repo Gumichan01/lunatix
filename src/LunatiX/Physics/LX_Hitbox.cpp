@@ -23,13 +23,7 @@
 namespace LX_Physics
 {
 
-LX_Point::LX_Point() noexcept: LX_Point(0,0) {}
-
-LX_Point::LX_Point(int xpos, int ypos) noexcept: x(xpos), y(ypos) {}
-
-LX_Point::LX_Point(const LX_Point& p) noexcept: x(p.x), y(p.y) {}
-
-LX_Circle::LX_Circle() noexcept: LX_Circle(LX_Point(0,0), 0) {}
+LX_Circle::LX_Circle() noexcept: LX_Circle(LX_Point{0,0}, 0) {}
 
 LX_Circle::LX_Circle(const LX_Point& p, unsigned int rad) noexcept
     : center(p), radius(rad), square_radius(rad*rad) {}
@@ -38,15 +32,7 @@ LX_Circle::LX_Circle(const LX_Circle& c) noexcept
     : center(c.center),radius(c.radius),square_radius(c.square_radius) {}
 
 
-LX_Point& LX_Point::operator =(const LX_Point& p) noexcept
-{
-    x = p.x;
-    y = p.y;
-    return *this;
-}
-
-
-LX_Line::LX_Line() noexcept: o(LX_Point(0,0)), v(LX_Vector2D{0.0f, 0.0f}) {}
+LX_Line::LX_Line() noexcept: o(LX_Point{0,0}), v(LX_Vector2D{0.0f, 0.0f}) {}
 
 LX_Line::LX_Line(const LX_Line& l) noexcept: o(l.o), v(l.v) {}
 

@@ -21,7 +21,7 @@
 */
 
 #include <LunatiX/LX_AABB.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
+#include <LunatiX/LX_Vector2D.hpp>  /// @todo remove it
 
 namespace LX_Physics
 {
@@ -32,14 +32,8 @@ namespace LX_Physics
 */
 struct LX_Point
 {
-    int x;      /**< The x position of the point */
-    int y;      /**< The y position of the point */
-
-    /// @todo remove those functions
-    LX_Point() noexcept;
-    LX_Point(int xpos, int ypos) noexcept;
-    LX_Point(const LX_Point& p) noexcept;
-    LX_Point& operator=(const LX_Point& p) noexcept;
+    int x;      /**< X position */
+    int y;      /**< Y position */
 };
 
 
