@@ -1197,8 +1197,6 @@ void test_operator(void)
     LX_Circle E(LX_Point(4,9),32);
     LX_Circle F(LX_Point(8,21),10);
 
-    /// @todo TEST FAILURE
-
     LX_Vector2D v{-3.14f, 1.59f};
     LX_Vector2D u = v;
     LX_Vector2D w{3.140001f,1.590001f};
