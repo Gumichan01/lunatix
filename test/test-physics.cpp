@@ -435,9 +435,9 @@ void testLine()
     LX_Line l2(LX_Point(5,21), u);
     LX_Line l3(LX_Point(1,1), w);
 
-    LX_Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx, l1.v.vy);
-    LX_Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx, l2.v.vy);
-    LX_Log::log("line #3: (%d, %d) - (%f, %f)", l3.o.x, l3.o.y, l3.v.vx, l3.v.vy);
+    LX_Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx.v, l1.v.vy.v);
+    LX_Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx.v, l2.v.vy.v);
+    LX_Log::log("line #3: (%d, %d) - (%f, %f)", l3.o.x, l3.o.y, l3.v.vx.v, l3.v.vy.v);
 
     if(l1.isParralelWith(l2))
         LX_Log::log("SUCCESS - parralel: l1 and l2");
@@ -483,10 +483,10 @@ void test_Vector2D(void)
     LX_Vector2D w{q.x - p.x, q.y - p.y};
 
     LX_Log::log(" = TEST Vector2D = ");
-    LX_Log::log("v(%f,%f)", v.vx, v.vy);
-    LX_Log::log("u(%f,%f)", u.vx, u.vy);
-    LX_Log::log("z(%f,%f)", z.vx, z.vy);
-    LX_Log::log("w(%f,%f)", w.vx, w.vy);
+    LX_Log::log("v(%f,%f)", v.vx.v, v.vy.v);
+    LX_Log::log("u(%f,%f)", u.vx.v, u.vy.v);
+    LX_Log::log("z(%f,%f)", z.vx.v, z.vy.v);
+    LX_Log::log("w(%f,%f)", w.vx.v, w.vy.v);
     LX_Log::log("scalar product (v,u)");
     float d = scalar_product(v,u);
 
@@ -1171,21 +1171,21 @@ void test_assignment(void)
                     D.center.x, D.center.y, D.radius, D.square_radius);
 
     LX_Vector2D v = {3.14f,1.59f};
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
 
     LX_Vector2D u = v;  // assignment
 
     if(u == v)
-        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", u.vx, u.vy);
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", u.vx.v, u.vy.v);
     else
-        LX_Log::log("FAILURE - expected: u(3.14,1.59); Got: u(%f,%f)", u.vx, u.vy);
+        LX_Log::log("FAILURE - expected: u(3.14,1.59); Got: u(%f,%f)", u.vx.v, u.vy.v);
 
     LX_Vector2D t{0.0f,0.0f}, w{0.0f,0.0f};
 
     if(t == w)
-        LX_Log::log("SUCCESS - Vector2D t(%f,%f)", t.vx, t.vy);
+        LX_Log::log("SUCCESS - Vector2D t(%f,%f)", t.vx.v, t.vy.v);
     else
-        LX_Log::log("FAILURE - expected: w(0.0f,0.0f); Got: u(%f,%f)", w.vx, w.vy);
+        LX_Log::log("FAILURE - expected: w(0.0f,0.0f); Got: u(%f,%f)", w.vx.v, w.vy.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1197,21 +1197,28 @@ void test_operator(void)
     LX_Circle E(LX_Point(4,9),32);
     LX_Circle F(LX_Point(8,21),10);
 
-    LX_Vector2D v = {-3.14f,1.59f};
+    /// @todo TEST FAILURE
+
+    LX_Vector2D v{-3.14f, 1.59f};
     LX_Vector2D u = v;
-    LX_Vector2D w = {3.14f,1.59f};
-    LX_Vector2D i = {2.56f,1.59f};
-    LX_Vector2D j = {-0.14f,-1.28f};
+    LX_Vector2D w{3.140001f,1.590001f};
+    LX_Vector2D i{2.56f,1.59f};
+    LX_Vector2D j{-0.14f,-1.28f};
 
     LX_Log::log(" = TEST operators = ");
 
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("C{(%d,%d),%d}; square radius = %d", C.center.x, C.center.y,
                 C.radius, C.square_radius);
     LX_Log::log("E{(%d,%d),%d}; square radius = %d", E.center.x, E.center.y,
                 E.radius, E.square_radius);
     LX_Log::log("F{(%d,%d),%d}; square radius = %d", F.center.x, F.center.y,
                 F.radius, F.square_radius);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
+    LX_Log::log("Vector2D w(%f,%f)", w.vx.v, w.vy.v);
+    LX_Log::log("Vector2D i(%f,%f)", i.vx.v, i.vy.v);
+    LX_Log::log("Vector2D j(%f,%f)", j.vx.v, j.vy.v);
 
     if(E > C)
         LX_Log::log("SUCCESS - E > C");
@@ -1260,21 +1267,15 @@ void test_operator(void)
     else
         LX_Log::log("FAILURE - E == C");
 
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
-    LX_Log::log("Vector2D w(%f,%f)", w.vx, w.vy);
-    LX_Log::log("Vector2D i(%f,%f)", i.vx, i.vy);
-    LX_Log::log("Vector2D j(%f,%f)", j.vx, j.vy);
-
     if(u == v)
         LX_Log::log("SUCCESS - u == v");
     else
         LX_Log::log("FAILURE - expected: u == v; Got: u(%f,%f) ≠ v(%f,%f)",
-                    u.vx, u.vy, v.vx, v.vy);
+                    u.vx.v, u.vy.v, v.vx.v, v.vy.v);
 
     if(v == w)
         LX_Log::log("FAILURE - expected: v ≠ w; Got: v(%f,%f) ≠ w(%f,%f)",
-                    v.vx, v.vy, w.vx, w.vy);
+                    v.vx.v, v.vy.v, w.vx.v, w.vy.v);
     else
         LX_Log::log("SUCCESS - v ≠ w");
 
@@ -1282,13 +1283,13 @@ void test_operator(void)
         LX_Log::log("SUCCESS - v ≠ i");
     else
         LX_Log::log("FAILURE - expected: v ≠ i; Got: v(%f,%f) ≠ i(%f,%f)",
-                    v.vx, v.vy, i.vx, i.vy);
+                    v.vx.v, v.vy.v, i.vx.v, i.vy.v);
 
     if(j != i)
         LX_Log::log("SUCCESS - j ≠ i");
     else
         LX_Log::log("FAILURE - expected: j ≠ i; Got: j(%f,%f) ≠ i(%f,%f)",
-                    j.vx, j.vy, i.vx, i.vy);
+                    j.vx.v, j.vy.v, i.vx.v, i.vy.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1315,59 +1316,59 @@ void test_VectorPlusMinusOp(void)
     LX_Log::log(" = TEST Vector arithmetic = ");
     LX_Log::log(" '+','+=','-','-='");
 
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("w = u + v;");
 
     w = u + v;
-    LX_Log::log("Vector2D w(%f,%f)", w.vx, w.vy);
+    LX_Log::log("Vector2D w(%f,%f)", w.vx.v, w.vy.v);
 
     if(w == exp_sum_vec)
-        LX_Log::log("SUCCESS - w(%f,%f) as expected", w.vx, w.vy);
+        LX_Log::log("SUCCESS - w(%f,%f) as expected", w.vx.v, w.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: w(%f,%f)",
-                    exp_sum_vec.vx, exp_sum_vec.vy, w.vx, w.vy);
+                    exp_sum_vec.vx.v, exp_sum_vec.vy.v, w.vx.v, w.vy.v);
 
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("u += z;");
 
     u += z;
 
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
 
     if(u == exp_add_vec)
-        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx, u.vy);
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx.v, u.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
-                    exp_add_vec.vx, exp_add_vec.vy, u.vx, u.vy);
+                    exp_add_vec.vx.v, exp_add_vec.vy.v, u.vx.v, u.vy.v);
 
-    LX_Log::log("Vector2D a(%f,%f)", a.vx, a.vy);
-    LX_Log::log("Vector2D b(%f,%f)", b.vx, b.vy);
+    LX_Log::log("Vector2D a(%f,%f)", a.vx.v, a.vy.v);
+    LX_Log::log("Vector2D b(%f,%f)", b.vx.v, b.vy.v);
     LX_Log::log("d = a - b;");
 
     d = a - b;
 
-    LX_Log::log("Vector2D d(%f,%f)", d.vx, d.vy);
+    LX_Log::log("Vector2D d(%f,%f)", d.vx.v, d.vy.v);
 
     if(d == exp_diff_vec)
-        LX_Log::log("SUCCESS - d(%f,%f) as expected", d.vx, d.vy);
+        LX_Log::log("SUCCESS - d(%f,%f) as expected", d.vx.v, d.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: d(%f,%f)",
-                    exp_diff_vec.vx, exp_diff_vec.vy, d.vx, d.vy);
+                    exp_diff_vec.vx.v, exp_diff_vec.vy.v, d.vx.v, d.vy.v);
 
 
-    LX_Log::log("Vector2D a(%f,%f)", a.vx, a.vy);
-    LX_Log::log("Vector2D b(%f,%f)", b.vx, b.vy);
+    LX_Log::log("Vector2D a(%f,%f)", a.vx.v, a.vy.v);
+    LX_Log::log("Vector2D b(%f,%f)", b.vx.v, b.vy.v);
     LX_Log::log("a -= c;");
 
     a -= c;
 
     if(a == exp_sub_vec)
-        LX_Log::log("SUCCESS - a(%f,%f) as expected", a.vx, a.vy);
+        LX_Log::log("SUCCESS - a(%f,%f) as expected", a.vx.v, a.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: a(%f,%f)",
-                    exp_sub_vec.vx, exp_sub_vec.vy, a.vx, a.vy);
+                    exp_sub_vec.vx.v, exp_sub_vec.vy.v, a.vx.v, a.vy.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1378,16 +1379,16 @@ void test_VectorOpposite(void)
     LX_Log::log(" = TEST Vector Opposite = ");
 
     LX_Vector2D u = {3.14f,-2.56f};
-    LX_Vector2D expected_vec = {-u.vx,-u.vy};
+    LX_Vector2D expected_vec = {-u.vx.v,-u.vy};
 
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
     LX_Log::log("-u;");
 
     if(expected_vec == (-u) )
-        LX_Log::log("SUCCESS - u(%f,%f) as expected", (-u).vx, (-u).vy);
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", (-u).vx.v, (-u).vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
-                    expected_vec.vx, expected_vec.vy, (-u).vx, (-u).vy);
+                    expected_vec.vx.v, expected_vec.vy.v, (-u).vx.v, (-u).vy.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1405,53 +1406,53 @@ void test_VectorIncDec(void)
     LX_Vector2D exp_dec_post_vec = {u.vx - 1.0f,u.vy - 1.0f};
 
     LX_Log::log("Increment");
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
     LX_Log::log("++u;");
 
     ++u;
 
     if(u == exp_inc_pre_vec)
-        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx, u.vy);
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx.v, u.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
-                    exp_inc_pre_vec.vx, exp_inc_pre_vec.vy, u.vx, u.vy);
+                    exp_inc_pre_vec.vx.v, exp_inc_pre_vec.vy.v, u.vx.v, u.vy.v);
 
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("v++;");
 
     v++;
 
     if(v == exp_inc_post_vec)
-        LX_Log::log("SUCCESS - v(%f,%f) as expected", v.vx, v.vy);
+        LX_Log::log("SUCCESS - v(%f,%f) as expected", v.vx.v, v.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: v(%f,%f)",
-                    exp_inc_post_vec.vx, exp_inc_post_vec.vy, v.vx, v.vy);
+                    exp_inc_post_vec.vx.v, exp_inc_post_vec.vy.v, v.vx.v, v.vy.v);
 
     u = {1.41f,-5.92f};
     v = u;
 
     LX_Log::log("Decrement");
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
     LX_Log::log("--u;");
 
     --u;
 
     if(u == exp_dec_pre_vec)
-        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx, u.vy);
+        LX_Log::log("SUCCESS - u(%f,%f) as expected", u.vx.v, u.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
-                    exp_dec_pre_vec.vx, exp_dec_pre_vec.vy, u.vx, u.vy);
+                    exp_dec_pre_vec.vx.v, exp_dec_pre_vec.vy.v, u.vx.v, u.vy.v);
 
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("v--;");
 
     v--;
 
     if(v == exp_dec_post_vec)
-        LX_Log::log("SUCCESS - v(%f,%f) as expected", v.vx, v.vy);
+        LX_Log::log("SUCCESS - v(%f,%f) as expected", v.vx.v, v.vy.v);
     else
         LX_Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: v(%f,%f)",
-                    exp_dec_post_vec.vx, exp_dec_post_vec.vy, v.vx, v.vy);
+                    exp_dec_post_vec.vx.v, exp_dec_post_vec.vy.v, v.vx.v, v.vy.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1467,23 +1468,23 @@ void test_VectorCollinear(void)
     LX_Vector2D o = {0.0f, 0.0f};
     LX_Vector2D t = {2.01f, 4.12f};
 
-    LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
-    LX_Log::log("Vector2D w(%f,%f)", w.vx, w.vy);
-    LX_Log::log("Vector2D o(%f,%f)", o.vx, o.vy);
-    LX_Log::log("Vector2D t(%f,%f)", t.vx, t.vy);
+    LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
+    LX_Log::log("Vector2D w(%f,%f)", w.vx.v, w.vy.v);
+    LX_Log::log("Vector2D o(%f,%f)", o.vx.v, o.vy.v);
+    LX_Log::log("Vector2D t(%f,%f)", t.vx.v, t.vy.v);
 
     LX_Log::log("test: zero vector");
 
     if(isNullVector(o))
-        LX_Log::log("SUCCESS - o is a zero vector: o(%f,%f)", o.vx, o.vy);
+        LX_Log::log("SUCCESS - o is a zero vector: o(%f,%f)", o.vx.v, o.vy.v);
     else
-        LX_Log::log("FAILURE - o is not a zero vector: o(%f,%f)", o.vx, o.vy);
+        LX_Log::log("FAILURE - o is not a zero vector: o(%f,%f)", o.vx.v, o.vy.v);
 
     if(!isNullVector(t))
-        LX_Log::log("SUCCESS - t is not a zero vector: t(%f,%f)", t.vx, t.vy);
+        LX_Log::log("SUCCESS - t is not a zero vector: t(%f,%f)", t.vx.v, t.vy.v);
     else
-        LX_Log::log("FAILURE - t is a zero vector: t(%f,%f)", t.vx, t.vy);
+        LX_Log::log("FAILURE - t is a zero vector: t(%f,%f)", t.vx.v, t.vy.v);
 
     LX_Log::log("test: collinearity between u and v");
 
@@ -1491,7 +1492,7 @@ void test_VectorCollinear(void)
         LX_Log::log("SUCCESS - u and v are colinear");
     else
         LX_Log::log("FAILURE - expected: u and v must be colinear; Got: u(%f,%f) and v(%f,%f)",
-                    u.vx, u.vy, v.vx, v.vy);
+                    u.vx.v, u.vy.v, v.vx.v, v.vy.v);
 
 
     LX_Log::log("test: collinearity between u and w");
@@ -1500,7 +1501,7 @@ void test_VectorCollinear(void)
         LX_Log::log("SUCCESS - u and w are colinear");
     else
         LX_Log::log("FAILURE - expected: u and w must be colinear; Got: u(%f,%f) and w(%f,%f)",
-                    u.vx, u.vy, w.vx, w.vy);
+                    u.vx.v, u.vy.v, w.vx.v, w.vy.v);
 
     LX_Log::log("test: collinearity between u and o");
 
@@ -1508,7 +1509,7 @@ void test_VectorCollinear(void)
         LX_Log::log("SUCCESS - u and o are colinear");
     else
         LX_Log::log("FAILURE - expected: u and o must be colinear; Got: u(%f,%f) and o(%f,%f)",
-                    u.vx, u.vy, o.vx, o.vy);
+                    u.vx.v, u.vy.v, o.vx.v, o.vy.v);
 
     LX_Log::log("test: collinearity between u and t");
 
@@ -1516,7 +1517,7 @@ void test_VectorCollinear(void)
         LX_Log::log("SUCCESS - u and t are colinear");
     else
         LX_Log::log("FAILURE - expected: u and t must be colinear; Got: u(%f,%f) and t(%f,%f)",
-                    u.vx, u.vy, t.vx, t.vy);
+                    u.vx.v, u.vy.v, t.vx.v, t.vy.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1532,50 +1533,50 @@ void test_VectorLambda(void)
     LX_Vector2D w{v.vx * lambda1,v.vy * lambda1};
     LX_Vector2D t{0.0f, 0.0f};
 
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
 
     v = v * lambda1;
 
     if(v == w)
-        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx, v.vy);
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     else
-        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", w.vx, w.vy,
-                    v.vx, v.vy);
+        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", w.vx.v, w.vy.v,
+                    v.vx.v, v.vy.v);
 
     v = v * lambda2;
 
     if(v == t)
-        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx, v.vy);
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     else
-        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx, t.vy,
-                    v.vx, v.vy);
+        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx.v, t.vy.v,
+                    v.vx.v, v.vy.v);
 
     // Test normalization
     LX_Log::log("Reset v");
 
     v = {3.0f,0.0f};
-    LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
+    LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("Normalize v");
 
     normalize(v);
     float n = vector_norm(v);
 
     if(n == 1.0f)
-        LX_Log::log("SUCCESS - Vector2D v(%f,%f) normalized, norm: %f", v.vx, v.vy, n);
+        LX_Log::log("SUCCESS - Vector2D v(%f,%f) normalized, norm: %f", v.vx.v, v.vy.v, n);
     else
-        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx, t.vy,
-                    v.vx, v.vy);
+        LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx.v, t.vy.v,
+                    v.vx.v, v.vy.v);
 
     LX_Log::logWarning(LX_Log::LX_LOG_TEST,"The previous test may fail with some complex float values in the vector");
     LX_Log::logWarning(LX_Log::LX_LOG_TEST,"Try it with V(3.14,2.56)");
 
-    LX_Log::log("Vector2D t(%f,%f)", t.vx, t.vy);
+    LX_Log::log("Vector2D t(%f,%f)", t.vx.v, t.vy.v);
     LX_Log::log("Normalize t");
 
     normalize(t);   // t is a null vector
 
     if(t == t)
-        LX_Log::log("SUCCESS - Vector2D t(%f,%f) normalized, norm: %f", v.vx, v.vy, n);
+        LX_Log::log("SUCCESS - Vector2D t(%f,%f) normalized, norm: %f", v.vx.v, v.vy.v, n);
     else
         LX_Log::log("FAILURE - a zero vector must be normalized to 0");
 
