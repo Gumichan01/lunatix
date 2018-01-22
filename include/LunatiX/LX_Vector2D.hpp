@@ -37,12 +37,6 @@ struct LX_Vector2D
 {
     Float vx;   /**< The x velocity */
     Float vy;   /**< The y velocity */
-
-    LX_Vector2D() noexcept;
-    LX_Vector2D(float x, float y) noexcept;
-    LX_Vector2D(const LX_Point& ori, const LX_Point& im) noexcept;
-    LX_Vector2D(const LX_Vector2D& v) noexcept;
-    LX_Vector2D& operator =(const LX_Vector2D& v) noexcept;
 };
 
 /**
