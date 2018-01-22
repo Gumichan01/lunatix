@@ -198,9 +198,9 @@ bool collisionSegCircle(const LX_Circle& circle,
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
         return true;
 
-    AB = LX_Vector2D(B.x - A.x, B.y - A.y);
-    AO = LX_Vector2D(O.x - A.x, O.y - A.y);
-    BO = LX_Vector2D(O.x - B.x, O.y - B.y);
+    AB = LX_Vector2D{B.x - A.x, B.y - A.y};
+    AO = LX_Vector2D{O.x - A.x, O.y - A.y};
+    BO = LX_Vector2D{O.x - B.x, O.y - B.y};
 
     // Using the opposite value of vx for scal2
     scal1 = scalar_product(AB, AO);
@@ -242,10 +242,10 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
         return true;
 
     LX_Line sides[RECT_SIDES];
-    sides[0] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
-    sides[1] = LX_Line(LX_Point(rect.x, rect.y + rect.h), LX_Vector2D(PFL(rect.w), 0.0f));
-    sides[2] = LX_Line(LX_Point(rect.x + rect.w, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
-    sides[3] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(PFL(rect.w), 0.0f));
+    sides[0] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D{0.0f, PFL(rect.h)});
+    sides[1] = LX_Line(LX_Point(rect.x, rect.y + rect.h), LX_Vector2D{PFL(rect.w), 0.0f});
+    sides[2] = LX_Line(LX_Point(rect.x + rect.w, rect.y), LX_Vector2D{0.0f, PFL(rect.h)});
+    sides[3] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D{PFL(rect.w), 0.0f});
 
     for(int i = 0; i < RECT_SIDES; i++)
     {
@@ -263,9 +263,9 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
     LX_Vector2D AC, AD, AB;
     float d;
 
-    AB = LX_Vector2D(B.x - A.x, B.y - A.y);
-    AC = LX_Vector2D(C.x - A.x, C.y - A.y);
-    AD = LX_Vector2D(D.x - A.x, D.y - A.y);
+    AB = LX_Vector2D{B.x - A.x, B.y - A.y};
+    AC = LX_Vector2D{C.x - A.x, C.y - A.y};
+    AD = LX_Vector2D{D.x - A.x, D.y - A.y};
     d = vector_product(AB, AD) * vector_product(AB, AC);
 
     return (d <= 0.0f);

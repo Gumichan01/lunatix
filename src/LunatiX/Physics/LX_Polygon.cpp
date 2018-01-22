@@ -84,8 +84,12 @@ class LX_Polygon_
 
         for(auto it = pbeg; it != pend; ++it)
         {
-            AO = LX_Vector2D(*it, (it == pbeg ? *(pend - 1) : *(it - 1)));
-            OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)), *it);
+            const LX_Point& ori1 = *it;
+            const LX_Point& img1 = (it == pbeg ? *(pend - 1) : *(it - 1));
+            const LX_Point& ori2 = (it == pend-1 ? *pbeg : *(it + 1));
+            const LX_Point& img2 = ori1;
+            AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
+            OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
             int cross_product = static_cast<int>(vector_product(AO, OB));
 
             if(!haveSign)
@@ -253,10 +257,10 @@ public:
             // self-intersecting polygon. The movement is less accurate
             const LX_AABB box = getEnclosingBox();
             const LX_Point q(box.x + box.w/2, box.y + box.h/2);
-            v = LX_Vector2D(q, p);
+            v = LX_Vector2D{p.x - q.x, p.y - q.y};
         }
         else // Normal case.→ accurate movement
-            v = LX_Vector2D(centroid, p);
+            v = LX_Vector2D{p.x - centroid.x, p.y - centroid.y};
 
         move(v.vx, v.vy);
     }

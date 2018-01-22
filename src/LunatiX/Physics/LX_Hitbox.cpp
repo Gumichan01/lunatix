@@ -46,7 +46,7 @@ LX_Point& LX_Point::operator =(const LX_Point& p) noexcept
 }
 
 
-LX_Line::LX_Line() noexcept: o(LX_Point(0,0)), v(LX_Vector2D(0.0f, 0.0f)) {}
+LX_Line::LX_Line() noexcept: o(LX_Point(0,0)), v(LX_Vector2D{0.0f, 0.0f}) {}
 
 LX_Line::LX_Line(const LX_Line& l) noexcept: o(l.o), v(l.v) {}
 
