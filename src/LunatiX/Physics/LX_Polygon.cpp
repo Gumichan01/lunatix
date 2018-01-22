@@ -235,34 +235,28 @@ public:
     }
 
 
-    void move(const float vx, const float vy) noexcept
+    void _move(const LX_Vector2D& v) noexcept
     {
-        const int nvx = static_cast<int>(vx);
-        const int nvy = static_cast<int>(vy);
-
-        std::for_each(_points.begin(), _points.end(), [nvx, nvy] (LX_Point& p)
+        std::for_each(_points.begin(), _points.end(), [&v] (LX_Point& p)
         {
-            movePoint(p, nvx, nvy);
+            movePoint(p, v);
         });
     }
 
     void moveTo(int xpos, int ypos)
     {
-        const LX_Point p(xpos, ypos);
-        LX_Vector2D v;
         LX_Point centroid;
+        const LX_Point p(xpos, ypos);
 
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
-            const LX_AABB box = getEnclosingBox();
+            const LX_AABB& box = getEnclosingBox();
             const LX_Point q(box.x + box.w/2, box.y + box.h/2);
-            v = LX_Vector2D{p.x - q.x, p.y - q.y};
+            _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
-            v = LX_Vector2D{p.x - centroid.x, p.y - centroid.y};
-
-        move(v.vx, v.vy);
+            _move(LX_Vector2D{p.x - centroid.x, p.y - centroid.y});
     }
 
     ~LX_Polygon_() = default;
@@ -312,13 +306,13 @@ bool LX_Polygon::isConvex() const noexcept
 
 void LX_Polygon::move(const float vx, const float vy) noexcept
 {
-    _polyimpl->move(vx, vy);
+    _polyimpl->_move({vx, vy});
 }
 
 
 void LX_Polygon::move(const LX_Vector2D& v) noexcept
 {
-    _polyimpl->move(v.vx, v.vy);
+    _polyimpl->_move(v);
 }
 
 
