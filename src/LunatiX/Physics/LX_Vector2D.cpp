@@ -130,21 +130,21 @@ LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept
     return v;
 }
 
-float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+Float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
-    return (u.vx * v.vx) + (u.vy * v.vy);
+    return {(u.vx * v.vx) + (u.vy * v.vy)};
 }
 
 
-float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
-    return (u.vx * v.vy) - (v.vx * u.vy);
+    return {(u.vx * v.vy) - (v.vx * u.vy)};
 }
 
 
-float vector_norm(const LX_Vector2D& v) noexcept
+Float vector_norm(const LX_Vector2D& v) noexcept
 {
-    return static_cast<float>(sqrt(scalar_product(v, v)));
+    return {static_cast<float>(sqrt(scalar_product(v, v)))};
 }
 
 

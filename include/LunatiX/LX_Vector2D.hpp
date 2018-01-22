@@ -198,7 +198,7 @@ LX_Vector2D operator /(LX_Vector2D v, float lambda) noexcept;
 LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept;
 
 /**
-*   @fn float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+*   @fn Float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 *
 *   Calculate the scalar product of 2 vectors
 *
@@ -207,9 +207,9 @@ LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept;
 *
 *   @return The scalar product
 */
-float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+Float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
-*   @fn float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
 *   Calculate the vector product of 2 vectors
 *
@@ -218,15 +218,15 @@ float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The vector product
 */
-float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
-*   @fn float vector_norm(const LX_Vector2D& v) noexcept
+*   @fn Float vector_norm(const LX_Vector2D& v) noexcept
 *
 *   @param [in] v The vector
 *
 *   @return The norm of the vector
 */
-float vector_norm(const LX_Vector2D& v) noexcept;
+Float vector_norm(const LX_Vector2D& v) noexcept;
 
 /**
 *   @fn bool isNullVector(const LX_Vector2D& v) noexcept
