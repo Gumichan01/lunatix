@@ -428,9 +428,9 @@ void testLine()
 {
     LX_Log::log("= TEST Vector2D =");
 
-    LX_Vector2D v(0.0f,4.0f);
-    LX_Vector2D u(0.0f,42.0f);
-    LX_Vector2D w(21.0f,0.0f);
+    LX_Vector2D v{0.0f,4.0f};
+    LX_Vector2D u{0.0f,42.0f};
+    LX_Vector2D w{21.0f,0.0f};
     LX_Line l1(LX_Point(1,1), v);
     LX_Line l2(LX_Point(5,21), u);
     LX_Line l3(LX_Point(1,1), w);
@@ -476,12 +476,11 @@ void testLine()
 void test_Vector2D(void)
 {
     LX_Point p(1,2), q(2,-1);
-    LX_Vector2D v,u,z,w;
 
-    v = {1.0f,2.0f};
-    u = {2.0f,-1.0f};
-    z = {0.0f,0.0f};
-    w = LX_Vector2D(p,q);
+    LX_Vector2D v{1.0f,2.0f};
+    LX_Vector2D u{2.0f,-1.0f};
+    LX_Vector2D z{0.0f,0.0f};
+    LX_Vector2D w{q.x - p.x, q.y - p.y};
 
     LX_Log::log(" = TEST Vector2D = ");
     LX_Log::log("v(%f,%f)", v.vx, v.vy);
@@ -1042,7 +1041,7 @@ void test_move(void)
 
     const int X = -4;
     const int Y = 8;
-    LX_Vector2D v(X,Y);
+
     LX_Polygon poly;
     LX_Polygon expoly;
 
@@ -1181,7 +1180,7 @@ void test_assignment(void)
     else
         LX_Log::log("FAILURE - expected: u(3.14,1.59); Got: u(%f,%f)", u.vx, u.vy);
 
-    LX_Vector2D t(0.0f,0.0f), w(0.0f,0.0f);
+    LX_Vector2D t{0.0f,0.0f}, w{0.0f,0.0f};
 
     if(t == w)
         LX_Log::log("SUCCESS - Vector2D t(%f,%f)", t.vx, t.vy);
@@ -1529,13 +1528,13 @@ void test_VectorLambda(void)
 
     float lambda1 = 2.0f;
     float lambda2 = 0.0f;
-    LX_Vector2D v = {3.14f,1.59f};
-    LX_Vector2D w = {v.vx * lambda1,v.vy * lambda1};
-    LX_Vector2D t = {0.0f,0.0f};
+    LX_Vector2D v{3.14f,1.59f};
+    LX_Vector2D w{v.vx * lambda1,v.vy * lambda1};
+    LX_Vector2D t{0.0f, 0.0f};
 
     LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
 
-    multiply(v,lambda1);
+    v = v * lambda1;
 
     if(v == w)
         LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx, v.vy);
@@ -1543,7 +1542,7 @@ void test_VectorLambda(void)
         LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", w.vx, w.vy,
                     v.vx, v.vy);
 
-    multiply(v,lambda2);
+    v = v * lambda2;
 
     if(v == t)
         LX_Log::log("SUCCESS - Vector2D v(%f,%f)", v.vx, v.vy);
