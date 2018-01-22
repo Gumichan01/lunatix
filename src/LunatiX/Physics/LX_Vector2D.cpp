@@ -44,7 +44,7 @@ bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 
 LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v) noexcept
 {
-    return LX_Vector2D{v.vx + v.vx, u.vy + v.vy};
+    return LX_Vector2D{u.vx + v.vx, u.vy + v.vy};
 }
 
 
