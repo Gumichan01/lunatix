@@ -9,6 +9,9 @@
 *   luxon.jean.pierre@gmail.com
 */
 
+#ifndef FLOAT_HPP
+#define FLOAT_HPP
+
 struct Float
 {
     float v;
@@ -48,3 +51,5 @@ bool operator <(const Float& x, const Float& y);
 bool operator >(const Float& x, const Float& y);
 bool operator <=(const Float& x, const Float& y);
 bool operator >=(const Float& x, const Float& y);
+
+#endif // FLOAT_HPP
