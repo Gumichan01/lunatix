@@ -1400,10 +1400,10 @@ void test_VectorIncDec(void)
 
     LX_Vector2D u = {1.41f,-5.92f};
     LX_Vector2D v = u;
-    LX_Vector2D exp_inc_pre_vec = {u.vx + 1,u.vy + 1};
-    LX_Vector2D exp_inc_post_vec = {u.vx + 1,u.vy + 1};
-    LX_Vector2D exp_dec_pre_vec = {u.vx - 1,u.vy - 1};
-    LX_Vector2D exp_dec_post_vec = {u.vx - 1,u.vy - 1};
+    LX_Vector2D exp_inc_pre_vec = {u.vx + 1.0f,u.vy + 1.0f};
+    LX_Vector2D exp_inc_post_vec = {u.vx + 1.0f,u.vy + 1.0f};
+    LX_Vector2D exp_dec_pre_vec = {u.vx - 1.0f,u.vy - 1.0f};
+    LX_Vector2D exp_dec_post_vec = {u.vx - 1.0f,u.vy - 1.0f};
 
     LX_Log::log("Increment");
     LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
@@ -1462,11 +1462,11 @@ void test_VectorCollinear(void)
 {
     LX_Log::log(" = TEST Vector collinearity = ");
 
-    LX_Vector2D u = {1.41f,-2.48f};
-    LX_Vector2D v = {u.vx *2,u.vy *2};
+    LX_Vector2D u = {1.41f, -2.48f};
+    LX_Vector2D v = {u.vx *2.0f, u.vy *2.0f};
     LX_Vector2D w = u;
-    LX_Vector2D o = {0.0f,0.0f};
-    LX_Vector2D t = {2.01f,4.12f};
+    LX_Vector2D o = {0.0f, 0.0f};
+    LX_Vector2D t = {2.01f, 4.12f};
 
     LX_Log::log("Vector2D u(%f,%f)", u.vx, u.vy);
     LX_Log::log("Vector2D v(%f,%f)", v.vx, v.vy);
