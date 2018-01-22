@@ -35,14 +35,12 @@ struct LX_Point;
 */
 struct LX_Vector2D
 {
-    Float vx;   /**< The x velocity */
-    Float vy;   /**< The y velocity */
+    Float vx;   /**< X velocity */
+    Float vy;   /**< Y velocity */
 };
 
 /**
 *   @fn bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
-*
-*   Check if two vectors are equal
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -53,8 +51,6 @@ struct LX_Vector2D
 bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
 *   @fn bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
-*
-*   Check if two vectors are not equal
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -109,7 +105,7 @@ LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D& v) noexcept
 *
-*   Get the opposite of the vector
+*   The opposite of the vector
 *
 *   @param [in] v The vector
 *
@@ -159,7 +155,7 @@ LX_Vector2D operator --(LX_Vector2D& v, int) noexcept;
 /**
 *   @fn LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept
 *
-*   Scalar multiplication (syntactic sugar of multiply)
+*   Scalar multiplication
 *
 *   @param [in] v The vector
 *   @param [in] lambda The scalar value
@@ -170,7 +166,7 @@ LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept;
 /**
 *   @fn LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept
 *
-*   Scalar multiplication (syntactic sugar of multiply) -> 'u *= λ' <=> 'u = u * λ'
+*   Scalar multiplication -> 'u *= λ' <=> 'u = u * λ'
 *
 *   @param [in, out] v The vector
 *   @param [in] lambda The scalar value
@@ -226,8 +222,6 @@ float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
 *   @fn float vector_norm(const LX_Vector2D& v) noexcept
 *
-*   Calculate the norm of a vector
-*
 *   @param [in] v The vector
 *
 *   @return The norm of the vector
@@ -237,8 +231,6 @@ float vector_norm(const LX_Vector2D& v) noexcept;
 /**
 *   @fn bool isNullVector(const LX_Vector2D& v) noexcept
 *
-*   Check if the vector is a zero vector
-*
 *   @param [in] v The vector
 *
 *   @return True if the vector has coordinates equal to 0, False otherwise
@@ -247,30 +239,14 @@ bool isNullVector(const LX_Vector2D& v) noexcept;
 /**
 *   @fn bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
-*   Check if two vectors are colinear
-*
 *   @param [in] u The first vector
 *   @param [in] v The second vector
 *
 *   @return True if they are colinear, False otherwise
 */
 bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
-
-/**
-*   @fn LX_Vector2D& multiply(LX_Vector2D& v, float lambda) noexcept
-*
-*   Scalar multiplication
-*
-*   @param [in,out] v The vector
-*   @param [in] lambda The scalar value
-*
-*   @return The new vector after the multiplication
-*/
-LX_Vector2D& multiply(LX_Vector2D& v, float lambda) noexcept;
 /**
 *   @fn LX_Vector2D& normalize(LX_Vector2D& v) noexcept
-*
-*   Vector normalization
 *
 *   @param [in, out] v The vector
 *

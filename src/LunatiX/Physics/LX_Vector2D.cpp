@@ -21,21 +21,8 @@
 */
 
 #include <LunatiX/LX_Vector2D.hpp>
-#include <LunatiX/LX_Hitbox.hpp>
-
 #include <cmath>
-#include <algorithm>
-#include <limits>
 
-namespace
-{
-
-Float fc(float x)
-{
-    return {x};
-}
-
-}
 
 namespace LX_Physics
 {
@@ -171,14 +158,6 @@ bool collinear(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 {
     return vector_product(u, v) == ZERO;
 }
-
-
-LX_Vector2D& multiply(LX_Vector2D& v, float lambda) noexcept
-{
-    //v = LX_Vector2D(lambda * v.vx, lambda * v.vy);
-    return v;
-}
-
 
 LX_Vector2D& normalize(LX_Vector2D& v) noexcept
 {
