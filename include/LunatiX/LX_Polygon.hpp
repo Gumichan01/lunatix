@@ -69,6 +69,7 @@ public:
     LX_Polygon() noexcept;
 
     /**
+    *   @deprecated This function signature is deprecated
     *   @fn void LX_Polygon::addPoint(const int x, const int y)
     *
     *   Set a new point into the polygon according to its coordinates
