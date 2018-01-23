@@ -29,47 +29,25 @@
 
 namespace
 {
-const float EPSILON =  0.00001f;
 
-/*
-*   Implementation of a "safe" floating point comparison
-*
-*   This implementation is based on Nerdylicious's implementation
-*   of floating point comparison program
-*
-*   https://github.com/Nerdylicious/FloatingPointComparison
-*/
-bool eq(float x, float y) noexcept
+constexpr Float fc(float x)
 {
-    float abs_x = fabsf(x);
-    float abs_y = fabsf(y);
-    float diff = fabsf(x - y);
-
-    if(x == y)
-    {
-        return true;
-    }
-    else if(x == 0.0f || y == 0.0f || diff < std::numeric_limits<float>::min())
-    {
-        return diff < (EPSILON * std::numeric_limits<float>::min());
-    }
-    else
-    {
-        return (diff / std::min((abs_x + abs_y),
-                                std::numeric_limits<float>::max())) < EPSILON;
-    }
+    return {x};
 }
+
 }
 
 namespace LX_Physics
 {
 
+const Float ZERO{0.0f};
+
 LX_Vector2D::LX_Vector2D() noexcept: LX_Vector2D(0.0f,0.0f) {}
-LX_Vector2D::LX_Vector2D(float x, float y) noexcept: vx(x), vy(y) {}
+LX_Vector2D::LX_Vector2D(float x, float y) noexcept : vx(fc(x)), vy(fc(y)) {}
 LX_Vector2D::LX_Vector2D(const LX_Vector2D& v) noexcept: vx(v.vx), vy(v.vy) {}
 
 LX_Vector2D::LX_Vector2D(const LX_Point& ori, const LX_Point& im) noexcept
-    : vx(im.x - ori.x), vy(im.y - ori.y) {}
+    : vx(fc(im.x - ori.x)), vy(fc(im.y - ori.y)) {}
 
 
 LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D& v) noexcept
@@ -82,7 +60,7 @@ LX_Vector2D& LX_Vector2D::operator =(const LX_Vector2D& v) noexcept
 
 bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
-    return (eq(u.vx, v.vx) && eq(u.vy, v.vy));
+    return u.vx == v.vx && u.vy == v.vy;
 }
 
 
@@ -126,8 +104,8 @@ LX_Vector2D operator -(const LX_Vector2D& v) noexcept
 
 LX_Vector2D& operator ++(LX_Vector2D& v) noexcept
 {
-    v.vx += 1;
-    v.vy += 1;
+    v.vx += 1.0f;
+    v.vy += 1.0f;
     return v;
 }
 
@@ -142,8 +120,8 @@ LX_Vector2D operator ++(LX_Vector2D& v, int) noexcept
 
 LX_Vector2D& operator --(LX_Vector2D& v) noexcept
 {
-    v.vx -= 1;
-    v.vy -= 1;
+    v.vx -= 1.0f;
+    v.vy -= 1.0f;
     return v;
 }
 
@@ -198,13 +176,13 @@ float vector_norm(const LX_Vector2D& v) noexcept
 
 bool isNullVector(const LX_Vector2D& v) noexcept
 {
-    return eq(v.vx, 0.0f) && eq(v.vy, 0.0f);
+    return v.vx == ZERO && v.vy == ZERO;
 }
 
 
 bool collinear(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 {
-    return eq(vector_product(u, v), 0.0f);
+    return vector_product(u, v) == ZERO;
 }
 
 

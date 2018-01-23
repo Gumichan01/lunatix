@@ -35,6 +35,7 @@ struct LX_Point
     int x;      /**< The x position of the point */
     int y;      /**< The y position of the point */
 
+    /// @todo remove those functions
     LX_Point() noexcept;
     LX_Point(int xpos, int ypos) noexcept;
     LX_Point(const LX_Point& p) noexcept;
@@ -85,8 +86,10 @@ struct LX_Circle
 {
     LX_Point center;            /**< The point that represents the center   */
     unsigned int radius;        /**< The circle radius                      */
+    /// @todo remove square_radius
     unsigned int square_radius; /**< The square radius                      */
 
+    /// @todo remove those functions
     LX_Circle() noexcept;
     LX_Circle(const LX_Point& p, unsigned int rad) noexcept;
     LX_Circle(const LX_Circle& c) noexcept;

@@ -45,6 +45,7 @@ struct LX_Vector2D;
 class LX_Polygon;
 
 /**
+*   @deprecated This function signature is deprecated
 *   @fn unsigned int euclide_square_distance(const int x1, const int y1,
 *                                            const int x2, const int y2) noexcept
 *
@@ -72,6 +73,7 @@ unsigned int euclide_square_distance(const int x1, const int y1, const int x2, c
 unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2) noexcept;
 
 /**
+*   @deprecated This function signature is deprecated
 *   @fn float euclide_distance(const int x1, const int y1,
 *                              const int x2, const int y2) noexcept
 *
@@ -102,6 +104,7 @@ float euclide_distance(const LX_Point& p1, const LX_Point& p2) noexcept;
 /* Collision detection */
 
 /**
+*   @deprecated This function signature is deprecated
 *   @fn bool collisionPointRect(const int xpos, const int ypos,
 *                               const LX_AABB& rect) noexcept
 *
@@ -129,6 +132,7 @@ bool collisionPointRect(const LX_Point& p, const LX_AABB& rect) noexcept;
 
 
 /**
+*   @deprecated This function signature is deprecated
 *   @fn bool collisionPointCircle(const int xpos, const int ypos,
 *                                 const LX_Circle& circle) noexcept
 *
@@ -317,6 +321,7 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void movePoint(LX_Point& P, const int vx, const int vy) noexcept
 *
 *   Move a point to a direction
@@ -336,6 +341,7 @@ void movePoint(LX_Point& P, const int vx, const int vy) noexcept;
 */
 void movePoint(LX_Point& P, const LX_Vector2D& v) noexcept;
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept
 *
 *   Move an AABB to a direction
@@ -355,6 +361,7 @@ void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept;
 */
 void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept;
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept
 *
 *   Move the circle to a direction
@@ -374,6 +381,7 @@ void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept;
 */
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept;
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept
 *
 *   Move the polygon to a direction
@@ -394,6 +402,7 @@ void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept;
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept
 *
 *   Move a point to an absolute position
@@ -403,7 +412,11 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 *   @param [in] ypos The y position
 */
 void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept;
+
+/// @todo void movePointTo(LX_Point& P, const LX_Point& dest) noexcept;
+
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
 *
 *   Move an AABB to an absolute position
@@ -423,6 +436,7 @@ void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept;
 */
 void moveRectTo(LX_AABB& rect, const LX_Point& P) noexcept;
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
 *
 *   Move a circle to an absolute position
@@ -442,6 +456,7 @@ void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept;
 */
 void moveCircleTo(LX_Circle& C, const LX_Point& P) noexcept;
 /**
+*   @deprecated This function signature is deprecated
 *   @fn void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
 *
 *   Move a polygon to an absolute position
