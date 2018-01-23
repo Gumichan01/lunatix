@@ -170,10 +170,10 @@ public:
 };
 
 /* LX_Music: public functions */
-LX_Music::LX_Music(const std::string filename)
+LX_Music::LX_Music(const std::string& filename)
     : _mimpl(new LX_Music_(filename)) {}
 
-LX_Music::LX_Music(const UTF8string filename)
+LX_Music::LX_Music(const UTF8string& filename)
     : _mimpl(new LX_Music_(filename)) {}
 
 

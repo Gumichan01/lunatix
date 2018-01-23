@@ -100,15 +100,15 @@ class LX_Music : public virtual LX_Sound
 public:
 
     /**
-    *   @fn LX_Music(const std::string filename)
+    *   @fn LX_Music(const std::string& filename)
     *   @exception LX_MixerException On failure
     */
-    LX_Music(const std::string filename);
+    LX_Music(const std::string& filename);
     /**
-    *   @fn LX_Music(const UTF8string filename)
+    *   @fn LX_Music(const UTF8string& filename)
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Music(const UTF8string filename);
+    LX_Music(const UTF8string& filename);
 
     /**
     *   @fn void fadeIn(int ms) noexcept
