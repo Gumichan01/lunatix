@@ -285,7 +285,7 @@ LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, LX_PIXELFORMAT format)
     : LX_BufferedImage(s, "", format) {}
 
 
-LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string filename,
+LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string& filename,
                                    LX_PIXELFORMAT format)
     : _surface(s), _filename(filename)
 {

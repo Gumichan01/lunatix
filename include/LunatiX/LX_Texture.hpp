@@ -363,7 +363,7 @@ class LX_BufferedImage
 
     LX_BufferedImage(SDL_Surface * s,
                      LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-    LX_BufferedImage(SDL_Surface * s, const std::string filename,
+    LX_BufferedImage(SDL_Surface * s, const std::string& filename,
                      LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
     bool _retrieveColours(Uint32 pixel, Uint8& r, Uint8& g, Uint8& b, Uint8& a) const noexcept;

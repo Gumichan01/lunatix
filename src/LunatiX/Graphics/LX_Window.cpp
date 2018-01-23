@@ -142,7 +142,7 @@ struct LX_Window_
             _glcontext = SDL_GL_CreateContext(_window);
 
         // Hardware acceleration or software rendering
-        uint32_t rflag = && info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
+        uint32_t rflag = info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
         _renderer = SDL_CreateRenderer(_window, -1, rflag);
 
         if(_renderer == nullptr)
