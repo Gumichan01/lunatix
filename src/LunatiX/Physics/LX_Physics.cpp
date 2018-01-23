@@ -187,49 +187,38 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcep
 bool collisionSegCircle(const LX_Circle& circle,
                         const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept
 {
-    int sum;
-    double t;
-    double x, y;
-    float scal, scal1, scal2;
-
-    LX_Vector2D AB, AO, BO;
-    LX_FloatPosition O = circle.center;
-
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
         return true;
 
-    AB = LX_Vector2D{B.x - A.x, B.y - A.y};
-    AO = LX_Vector2D{O.x - A.x, O.y - A.y};
-    BO = LX_Vector2D{O.x - B.x, O.y - B.y};
+    LX_FloatPosition O = circle.center;
+    LX_Vector2D AB = LX_Vector2D{B.x - A.x, B.y - A.y};
+    LX_Vector2D AO = LX_Vector2D{O.x - A.x, O.y - A.y};
+    LX_Vector2D BO = LX_Vector2D{O.x - B.x, O.y - B.y};
 
     // Using the opposite value of vx for scal2
-    scal1 = scalar_product(AB, AO);
-    scal2 = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
+    Float scal_ab_ao = scalar_product(AB, AO);
+    Float scal_mab_bo = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
-    if(scal1 < 0 || scal2 < 0)
+    if(scal_ab_ao < 0 || scal_mab_bo < 0)
         return false;
 
     // Find the projection point of O
-    scal = scalar_product(AB, AB);
-    sum = static_cast<int>(scal);
+    Float scalp = scalar_product(AB, AB);
 
-    if(sum == 0)        // A and B are the same point
+    if(scalp == 0.0f)        // A and B are the same point
         return false;
 
-    t = scal1/scal;
-    x = A.x + (t*AB.vx);
-    y = A.y + (t*AB.vy);
+    Float t = scal_ab_ao / scalp;
+    Float x = A.x + (t * AB.vx);
+    Float y = A.y + (t * AB.vy);
 
-    // M is the projection point of O
-    LX_FloatPosition M{static_cast<int>(x), static_cast<int>(y)};
-
-    return collisionPointCircle(M, circle);
+    // Ok I can calculate the collision by using ↓ the projection point
+    return collisionPointCircle(LX_FloatPosition{x, y}, circle);
 }
 
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
 {
-    const LX_FloatPosition Q{L.o.x + static_cast<int>(L.v.vx),
-                     L.o.y + static_cast<int>(L.v.vy)};
+    const LX_FloatPosition Q{L.o.x + L.v.vx, L.o.y + L.v.vy};
     return collisionSegCircle(circle, L.o, Q);
 }
 
@@ -287,14 +276,14 @@ bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept
 
 bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
-    int count = 0;
-    LX_FloatPosition I;
+    int nb_intersections = 0;
 
     const int v = 10000;
     const unsigned long n = poly.numberOfEdges();
 
-    I.x = v + LX_Random::crand100();
-    I.y = v + LX_Random::crand100();
+    const float rix = static_cast<float>(LX_Random::crand100());
+    const float riy = static_cast<float>(LX_Random::crand100());
+    LX_FloatPosition I{v + rix, v + riy};
 
     for(unsigned int i = 0; i < n; i++)
     {
@@ -304,7 +293,7 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
             LX_FloatPosition p2 = poly.getPoint(i);
 
             if(intersectSegment(P, I, p1, p2))
-                count++;
+                nb_intersections++;
         }
         else
         {
@@ -312,11 +301,11 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
             LX_FloatPosition p4 = poly.getPoint(i);
 
             if(intersectSegment(P, I, p3, p4))
-                count++;
+                nb_intersections++;
         }
     }
 
-    return (count%2 == 1);
+    return (nb_intersections % 2 == 1);
 }
 
 
@@ -448,8 +437,8 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
 
 void movePointTo(LX_FloatPosition& P, const int xpos, const int ypos) noexcept
 {
-    P.x = xpos;
-    P.y = ypos;
+    P.x = {xpos};
+    P.y = {ypos};
 }
 
 
