@@ -23,20 +23,20 @@
 namespace LX_Physics
 {
 
-LX_Circle::LX_Circle() noexcept: LX_Circle(LX_Point{0,0}, 0) {}
+LX_Circle::LX_Circle() noexcept: LX_Circle(LX_FloatPosition{0,0}, 0) {}
 
-LX_Circle::LX_Circle(const LX_Point& p, unsigned int rad) noexcept
+LX_Circle::LX_Circle(const LX_FloatPosition& p, unsigned int rad) noexcept
     : center(p), radius(rad), square_radius(rad*rad) {}
 
 LX_Circle::LX_Circle(const LX_Circle& c) noexcept
     : center(c.center),radius(c.radius),square_radius(c.square_radius) {}
 
 
-LX_Line::LX_Line() noexcept: o(LX_Point{0,0}), v(LX_Vector2D{0.0f, 0.0f}) {}
+LX_Line::LX_Line() noexcept: o(LX_FloatPosition{0,0}), v(LX_Vector2D{0.0f, 0.0f}) {}
 
 LX_Line::LX_Line(const LX_Line& l) noexcept: o(l.o), v(l.v) {}
 
-LX_Line::LX_Line(const LX_Point& p, const LX_Vector2D& dv) noexcept: o(p), v(dv) {}
+LX_Line::LX_Line(const LX_FloatPosition& p, const LX_Vector2D& dv) noexcept: o(p), v(dv) {}
 
 LX_Line& LX_Line::operator=(const LX_Line& l) noexcept
 {
@@ -65,13 +65,13 @@ LX_Circle& LX_Circle::operator =(const LX_Circle& c) noexcept
 }
 
 
-bool operator ==(const LX_Point& a, const LX_Point& b) noexcept
+bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 {
     return a.x == b.x && a.y == b.y;
 }
 
 
-bool operator !=(const LX_Point& a, const LX_Point& b) noexcept
+bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 {
     return a.x != b.x || a.y != b.y;
 }

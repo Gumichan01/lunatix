@@ -22,6 +22,7 @@
 
 #include <LunatiX/LX_AABB.hpp>
 #include <LunatiX/LX_Vector2D.hpp>  /// @todo remove it
+//#include <LunatiX/utils/float.hpp>
 
 namespace LX_Physics
 {
@@ -36,6 +37,19 @@ struct LX_Point
     int y;      /**< Y position */
 };
 
+/**
+*   @struct LX_FloatPosition
+*   @brief The position in floating-point value
+*/
+struct LX_FloatPosition
+{
+    Float x;
+    Float y;
+};
+
+/// @todo those two functions
+//LX_Point toPixelUnit(LX_AABB& aabb);
+//void toPixelUnit(LX_Physics::LX_Circle& circle);
 
 /**
 *   @struct LX_Line
@@ -43,12 +57,12 @@ struct LX_Point
 */
 struct LX_Line
 {
-    LX_Point o;     /**< Origin point       */
+    LX_FloatPosition o;     /**< Origin point       */
     LX_Vector2D v;  /**< Direction vector   */
 
     LX_Line() noexcept;
     LX_Line(const LX_Line& l) noexcept;
-    LX_Line(const LX_Point& p, const LX_Vector2D& dv) noexcept;
+    LX_Line(const LX_FloatPosition& p, const LX_Vector2D& dv) noexcept;
     LX_Line& operator=(const LX_Line& l) noexcept;
 
     /**
@@ -78,14 +92,14 @@ struct LX_Line
 */
 struct LX_Circle
 {
-    LX_Point center;            /**< The point that represents the center   */
+    LX_FloatPosition center;            /**< The point that represents the center   */
     unsigned int radius;        /**< The circle radius                      */
     /// @todo remove square_radius
     unsigned int square_radius; /**< The square radius                      */
 
     /// @todo remove those functions
     LX_Circle() noexcept;
-    LX_Circle(const LX_Point& p, unsigned int rad) noexcept;
+    LX_Circle(const LX_FloatPosition& p, unsigned int rad) noexcept;
     LX_Circle(const LX_Circle& c) noexcept;
     LX_Circle& operator=(const LX_Circle& c) noexcept;
 };
@@ -93,7 +107,7 @@ struct LX_Circle
 
 // Operators of points and circles
 /**
-*   @fn bool operator ==(const LX_Point& a, const LX_Point& b) noexcept
+*   @fn bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 *
 *   Check If two points are identical
 *
@@ -103,9 +117,9 @@ struct LX_Circle
 *   @return TRUE If these points have exactly the same coordinates,
 *          FALSE otherwise
 */
-bool operator ==(const LX_Point& a, const LX_Point& b) noexcept;
+bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
 /**
-*   @fn bool operator !=(const LX_Point& a, const LX_Point& b) noexcept
+*   @fn bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 *
 *   Check If two points are dIfferent
 *
@@ -114,7 +128,7 @@ bool operator ==(const LX_Point& a, const LX_Point& b) noexcept;
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
-bool operator !=(const LX_Point& a, const LX_Point& b) noexcept;
+bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
 /**
 *   @fn bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
 *
