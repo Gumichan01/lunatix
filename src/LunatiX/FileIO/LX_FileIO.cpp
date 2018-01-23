@@ -53,8 +53,6 @@ class LX_File_
 
     void open_(const LX_FileMode mode)
     {
-        std::string str = "LX_File: ";
-
         switch(mode)
         {
         case LX_FileMode::RDONLY:
