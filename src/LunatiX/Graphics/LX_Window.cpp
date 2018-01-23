@@ -124,7 +124,6 @@ struct LX_Window_
         _renderer(nullptr), _glcontext(nullptr), _original_width(info.w),
         _original_height(info.h)
     {
-        uint32_t rflag = 0x00000000;
         const LX_Configuration& config = LX_Configuration::getInstance();
 
         // Video flag and VSync flag actives -> add the option
@@ -137,11 +136,13 @@ struct LX_Window_
         if(_window == nullptr)
             throw LX_WindowException(LX_GetError());
 
-        if((info.flag&LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL)
+        bool opengl_support = ((info.flag & LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL);
+
+        if(opengl_support)
             _glcontext = SDL_GL_CreateContext(_window);
 
         // Hardware acceleration or software rendering
-        rflag = info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
+        uint32_t rflag = && info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
         _renderer = SDL_CreateRenderer(_window, -1, rflag);
 
         if(_renderer == nullptr)
@@ -426,7 +427,7 @@ void LX_Window::update() noexcept
 
 void LX_Window::clearWindow() noexcept
 {
-    if(_wimpl->_glcontext)
+    if(_wimpl->_glcontext != nullptr)
     {
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
