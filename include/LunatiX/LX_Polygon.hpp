@@ -28,7 +28,7 @@ namespace LX_Physics
 {
 
 struct LX_Vector2D;
-struct LX_Point;
+struct LX_FloatPosition;
 
 /**
 *   @class LX_PolygonException
@@ -78,11 +78,11 @@ public:
     */
     void addPoint(const int x, const int y);
     /**
-    *   @fn void LX_Polygon::addPoint(const LX_Point& p)
+    *   @fn void LX_Polygon::addPoint(const LX_FloatPosition& p)
     *   Set a new point into the polygon
     *   @param [in] p The new edge to add
     */
-    void addPoint(const LX_Point& p);
+    void addPoint(const LX_FloatPosition& p);
     /**
     *   @fn template <typename Iterator> void addPoints(Iterator first, Iterator last)
     *
@@ -101,7 +101,7 @@ public:
     */
     unsigned long numberOfEdges() const noexcept;
     /**
-    *   @fn LX_Point LX_Polygon::getPoint(const unsigned int index) const
+    *   @fn LX_FloatPosition LX_Polygon::getPoint(const unsigned int index) const
     *
     *   Get the point at a specified position
     *
@@ -112,7 +112,7 @@ public:
     *   @exception  LX_PolygonException If the index refers
     *              to an out of bounds position
     */
-    LX_Point getPoint(const unsigned int index) const;
+    LX_FloatPosition getPoint(const unsigned int index) const;
     /**
     *   @fn LX_AABB getEnclosingBox() const
     *
@@ -164,13 +164,13 @@ public:
     */
     void moveTo(int xpos, int ypos);
     /**
-    *   @fn void moveTo(const LX_Point& p)
+    *   @fn void moveTo(const LX_FloatPosition& p)
     *
     *   Move the polygon to an absolute position
     *
     *   @param [in] p The new position
     */
-    void moveTo(const LX_Point& p);
+    void moveTo(const LX_FloatPosition& p);
 
     ~LX_Polygon();
 };

@@ -25,8 +25,6 @@
 namespace LX_Physics
 {
 
-struct LX_Point;
-
 /**
 *   @struct LX_Vector2D
 *   @brief The vector2D structure
