@@ -246,13 +246,13 @@ public:
     void moveTo(int xpos, int ypos)
     {
         LX_Point centroid;
-        const LX_Point p(xpos, ypos);
+        const LX_Point p{xpos, ypos};
 
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
             const LX_AABB& box = getEnclosingBox();
-            const LX_Point q(box.x + box.w/2, box.y + box.h/2);
+            const LX_Point q{box.x + box.w/2, box.y + box.h/2};
             _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
@@ -271,7 +271,7 @@ LX_Polygon::~LX_Polygon() {}
 
 void LX_Polygon::addPoint(const int x, const int y)
 {
-    _polyimpl->addPoint(LX_Point(x, y));
+    _polyimpl->addPoint(LX_Point{x, y});
 }
 
 

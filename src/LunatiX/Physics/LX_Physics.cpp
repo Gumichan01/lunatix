@@ -158,7 +158,7 @@ bool collisionPointRect(const LX_Point& p,const LX_AABB& rect) noexcept
 
 bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle) noexcept
 {
-    return collisionPointCircle(LX_Point(xpos, ypos), circle);
+    return collisionPointCircle(LX_Point{xpos, ypos}, circle);
 }
 
 
@@ -221,15 +221,15 @@ bool collisionSegCircle(const LX_Circle& circle,
     y = A.y + (t*AB.vy);
 
     // M is the projection point of O
-    LX_Point M = LX_Point(static_cast<int>(x), static_cast<int>(y));
+    LX_Point M{static_cast<int>(x), static_cast<int>(y)};
 
     return collisionPointCircle(M, circle);
 }
 
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
 {
-    const LX_Point Q(L.o.x + static_cast<int>(L.v.vx),
-                     L.o.y + static_cast<int>(L.v.vy));
+    const LX_Point Q{L.o.x + static_cast<int>(L.v.vx),
+                     L.o.y + static_cast<int>(L.v.vy)};
     return collisionSegCircle(circle, L.o, Q);
 }
 
@@ -242,10 +242,10 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
         return true;
 
     LX_Line sides[RECT_SIDES];
-    sides[0] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D{0.0f, PFL(rect.h)});
-    sides[1] = LX_Line(LX_Point(rect.x, rect.y + rect.h), LX_Vector2D{PFL(rect.w), 0.0f});
-    sides[2] = LX_Line(LX_Point(rect.x + rect.w, rect.y), LX_Vector2D{0.0f, PFL(rect.h)});
-    sides[3] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D{PFL(rect.w), 0.0f});
+    sides[0] = LX_Line(LX_Point{rect.x, rect.y}, LX_Vector2D{0.0f, PFL(rect.h)});
+    sides[1] = LX_Line(LX_Point{rect.x, rect.y + rect.h}, LX_Vector2D{PFL(rect.w), 0.0f});
+    sides[2] = LX_Line(LX_Point{rect.x + rect.w, rect.y}, LX_Vector2D{0.0f, PFL(rect.h)});
+    sides[3] = LX_Line(LX_Point{rect.x, rect.y}, LX_Vector2D{PFL(rect.w), 0.0f});
 
     for(int i = 0; i < RECT_SIDES; i++)
     {
@@ -348,13 +348,12 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 
 bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 {
+    LX_Point A = LX_Point{rect.x, rect.y};
+    LX_Point B = LX_Point{rect.x + rect.w, rect.y};
+    LX_Point C = LX_Point{rect.x + rect.w, rect.y + rect.h};
+    LX_Point D = LX_Point{rect.x, rect.y + rect.h};
+
     LX_Point E, F;
-
-    LX_Point A = LX_Point(rect.x, rect.y);
-    LX_Point B = LX_Point(rect.x + rect.w, rect.y);
-    LX_Point C = LX_Point(rect.x + rect.w, rect.y + rect.h);
-    LX_Point D = LX_Point(rect.x, rect.y + rect.h);
-
     const unsigned long n = poly.numberOfEdges();
 
     for(unsigned int j = 0; j < n; j++)

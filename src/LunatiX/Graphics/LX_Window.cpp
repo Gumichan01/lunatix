@@ -242,8 +242,8 @@ void LX_Window::drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 {
     const int vx = static_cast<int>(v.vx);
     const int vy = static_cast<int>(v.vy);
-    drawSegment(p, LX_Physics::LX_Point(p.x + vx, p.y + vy));
-    drawSegment(p, LX_Physics::LX_Point(p.x - vx, p.y - vy));
+    drawSegment(p, LX_Physics::LX_Point{p.x + vx, p.y + vy});
+    drawSegment(p, LX_Physics::LX_Point{p.x - vx, p.y - vy});
 }
 
 
@@ -324,14 +324,14 @@ void LX_Window::fillCircle(const LX_Physics::LX_Circle& c) noexcept
 
     while(y >= x)
     {
-        drawSegment(LX_Physics::LX_Point(x_center - y, y_center + x),
-                    LX_Physics::LX_Point(x_center + y, y_center + x));
-        drawSegment(LX_Physics::LX_Point(x_center - x,y_center + y),
-                    LX_Physics::LX_Point(x_center + x, y_center + y));
-        drawSegment(LX_Physics::LX_Point(x_center - x, y_center - y),
-                    LX_Physics::LX_Point(x_center + x, y_center - y));
-        drawSegment(LX_Physics::LX_Point(x_center - y, y_center - x),
-                    LX_Physics::LX_Point(x_center + y, y_center - x));
+        drawSegment(LX_Physics::LX_Point{x_center - y, y_center + x},
+                    LX_Physics::LX_Point{x_center + y, y_center + x});
+        drawSegment(LX_Physics::LX_Point{x_center - x,y_center + y},
+                    LX_Physics::LX_Point{x_center + x, y_center + y});
+        drawSegment(LX_Physics::LX_Point{x_center - x, y_center - y},
+                    LX_Physics::LX_Point{x_center + x, y_center - y});
+        drawSegment(LX_Physics::LX_Point{x_center - y, y_center - x},
+                    LX_Physics::LX_Point{x_center + y, y_center - x});
 
         if(d >= 2*x)
         {
