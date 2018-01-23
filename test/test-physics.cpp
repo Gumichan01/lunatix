@@ -140,12 +140,12 @@ void test_euclide(void)
 
 void test_collisionPointCircle(void)
 {
-    LX_Circle circle(LX_Point(100,100),10);
+    LX_Circle circle(LX_Point{100,100},10);
 
-    LX_Point A = {100,100};
-    LX_Point B = {50,50};
-    LX_Point C = {105,105};
-    LX_Point D = {100,125};
+    LX_Point A{100,100};
+    LX_Point B{50,50};
+    LX_Point C{105,105};
+    LX_Point D{100,125};
 
     LX_Log::log(" = TEST POINT/CIRCLE = ");
     LX_Log::log("A(%d,%d)",A.x,A.y);
@@ -225,9 +225,9 @@ void test_collisionPointRect(void)
 
 void test_collision2Circle(void)
 {
-    LX_Circle A(LX_Point(10,10),5);
-    LX_Circle B(LX_Point(13,12),3);
-    LX_Circle C(LX_Point(100,100),50);
+    LX_Circle A(LX_Point{10,10},5);
+    LX_Circle B(LX_Point{13,12},3);
+    LX_Circle C(LX_Point{100,100},50);
 
     LX_Log::log(" = TEST CIRCLE/CIRCLE = ");
     LX_Log::log("A{(%d,%d),%d}", A.center.x, A.center.y, A.radius);
@@ -305,12 +305,10 @@ void test_collision2Rect(void)
 
 void test_collisionRectCircle(void)
 {
-    LX_AABB R1;
-
-    R1 = {0,0,50,25};
-    LX_Circle A(LX_Point(10,10),5);
-    LX_Circle B(LX_Point(51,26),15);
-    LX_Circle C(LX_Point(100,100),40);
+    LX_AABB R1{0,0,50,25};
+    LX_Circle A(LX_Point{10,10},5);
+    LX_Circle B(LX_Point{51,26},15);
+    LX_Circle C(LX_Point{100,100},40);
 
     LX_Log::log(" = TEST RECT/CIRCLE = ");
     LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
@@ -431,9 +429,9 @@ void testLine()
     LX_Vector2D v{0.0f,4.0f};
     LX_Vector2D u{0.0f,42.0f};
     LX_Vector2D w{21.0f,0.0f};
-    LX_Line l1(LX_Point(1,1), v);
-    LX_Line l2(LX_Point(5,21), u);
-    LX_Line l3(LX_Point(1,1), w);
+    LX_Line l1(LX_Point{1,1}, v);
+    LX_Line l2(LX_Point{5,21}, u);
+    LX_Line l3(LX_Point{1,1}, w);
 
     LX_Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx.v, l1.v.vy.v);
     LX_Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx.v, l2.v.vy.v);
@@ -475,7 +473,7 @@ void testLine()
 
 void test_Vector2D(void)
 {
-    LX_Point p(1,2), q(2,-1);
+    LX_Point p{1,2}, q{2,-1};
 
     LX_Vector2D v{1.0f,2.0f};
     LX_Vector2D u{2.0f,-1.0f};
@@ -720,10 +718,10 @@ void test_collisionPointPolygon(void)
 
 void test_collisionCirclePolygon(void)
 {
-    LX_Circle M(LX_Point(12,7),1);
-    LX_Circle N(LX_Point(12,7),2);
-    LX_Circle O(LX_Point(9,7),10);
-    LX_Circle S(LX_Point(2,2),2);
+    LX_Circle M(LX_Point{12,7},1);
+    LX_Circle N(LX_Point{2,7},2);
+    LX_Circle O(LX_Point{9,7},10);
+    LX_Circle S(LX_Point{2,2},2);
     LX_Polygon poly;
 
     poly.addPoint(10,5);
@@ -1128,11 +1126,11 @@ void test_move(void)
     // reset
     movePoly(poly,-X,-Y);
     LX_AABB box = expoly.getEnclosingBox();
-    LX_Point q(box.x + box.w/2, box.y + box.h/2);
+    LX_Point q{box.x + box.w/2, box.y + box.h/2};
 
     movePolyTo(poly, q.x, q.y);
     LX_AABB b = poly.getEnclosingBox();
-    LX_Point s(b.x + b.w/2, b.y + b.h/2);
+    LX_Point s{b.x + b.w/2, b.y + b.h/2};
     LX_Log::log("centroid of poly: s(%d,%d)", s.x, s.y);
     LX_Log::log("centroid of expoly: q(%d,%d)", q.x, q.y);
 
@@ -1156,7 +1154,7 @@ void test_assignment(void)
     else
         LX_Log::log("FAILURE - expected: Q(1,2); Got: Q(%d,%d)", Q.x, Q.y);
 
-    LX_Circle C(LX_Point(4,9),10);
+    LX_Circle C(LX_Point{4,9},10);
 
     LX_Log::log("C{(%d,%d),%d}; square radius: %d", C.center.x, C.center.y,
                 C.radius, C.square_radius);
@@ -1193,9 +1191,9 @@ void test_assignment(void)
 
 void test_operator(void)
 {
-    LX_Circle C(LX_Point(2,3),10);
-    LX_Circle E(LX_Point(4,9),32);
-    LX_Circle F(LX_Point(8,21),10);
+    LX_Circle C(LX_Point{2,3},10);
+    LX_Circle E(LX_Point{4,9},32);
+    LX_Circle F(LX_Point{8,21},10);
 
     LX_Vector2D v{-3.14f, 1.59f};
     LX_Vector2D u = v;
