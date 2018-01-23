@@ -52,7 +52,7 @@ class LX_Chunk : public virtual LX_Sound
 public:
 
     /**
-    *   @fn LX_Chunk(const std::string filename)
+    *   @fn LX_Chunk(const std::string& filename)
     *   @brief Load a sample from a file
     *   @note It is better to give a .wav file to the constructor.
     *        The sample was optimized for this format. But it can work with
@@ -60,10 +60,10 @@ public:
     *
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Chunk(const std::string filename);
+    explicit LX_Chunk(const std::string& filename);
 
     /**
-    *   @fn LX_Chunk(const UTF8string filename)
+    *   @fn LX_Chunk(const UTF8string& filename)
     *   @brief Load a sample from a file
     *   @note It is better to give a .wav file to the constructor.
     *          The sample was optimized for this format. But it can work with
@@ -71,7 +71,7 @@ public:
     *
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Chunk(const UTF8string filename);
+    explicit LX_Chunk(const UTF8string& filename);
 
     /**
     *   @fn bool play() noexcept

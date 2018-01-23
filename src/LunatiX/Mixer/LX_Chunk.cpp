@@ -51,7 +51,7 @@ public:
         load_(filename);
     }
 
-    explicit LX_Chunk_(const UTF8string filename) : _chunk(nullptr)
+    explicit LX_Chunk_(const UTF8string& filename) : _chunk(nullptr)
     {
         load_(filename.utf8_sstring());
     }
@@ -88,9 +88,9 @@ public:
 LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
 
 // Public constructors
-LX_Chunk::LX_Chunk(const std::string filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const std::string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
-LX_Chunk::LX_Chunk(const UTF8string filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 
 bool LX_Chunk::play() noexcept
