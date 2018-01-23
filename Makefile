@@ -83,7 +83,8 @@ $(SRC_LIBTAGSPP_PATH)8859.cpp $(SRC_LIBTAGSPP_PATH)flac.cpp \
 $(SRC_LIBTAGSPP_PATH)id3genres.cpp $(SRC_LIBTAGSPP_PATH)id3v1.cpp \
 $(SRC_LIBTAGSPP_PATH)id3v2.cpp $(SRC_LIBTAGSPP_PATH)m4a.cpp \
 $(SRC_LIBTAGSPP_PATH)tags.cpp $(SRC_LIBTAGSPP_PATH)utf16.cpp \
-$(SRC_LIBTAGSPP_PATH)vorbis.cpp $(SRC_LIBTAGSPP_PATH)libtagspp.cpp
+$(SRC_LIBTAGSPP_PATH)vorbis.cpp $(SRC_LIBTAGSPP_PATH)libtagspp.cpp \
+$(SRC_UTILS_PATH)float.cpp
 
 # Test files
 SRC_TEST_FILES=$(TEST_PATH)test-init.cpp $(TEST_PATH)test-config.cpp \
@@ -203,6 +204,7 @@ LX_Log.o: $(SRC_SYSTEM_PATH)LX_Log.o
 LX_Text.o: $(SRC_TEXT_PATH)LX_Text.o
 LX_TrueTypeFont.o: $(SRC_TTF_PATH)LX_TrueTypeFont.o
 LX_Version.o: $(SRC_VERSION_PATH)LX_Version.o
+float.o: $(SRC_UTILS_PATH)float.o
 
 
 ##########
