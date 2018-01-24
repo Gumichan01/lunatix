@@ -460,7 +460,7 @@ void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 
 void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
 {
-    movePolyTo(poly, P.x, P.y);
+    movePolyTo(poly, P);
 }
 
 }

@@ -456,17 +456,6 @@ void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept;
 */
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
-*
-*   Move a polygon to an absolute position
-*
-*   @param [in] poly The polygon to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
-/**
 *   @fn void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
 *
 *   Move a polygon to an absolute position
