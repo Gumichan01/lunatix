@@ -19,6 +19,11 @@ struct Float
     operator float() const;
 };
 
+inline Float fbox(float x)
+{
+    return Float{x};
+}
+
 Float operator -(const Float& x);
 Float& operator ++(Float& x);
 Float operator ++(Float& x, int);
