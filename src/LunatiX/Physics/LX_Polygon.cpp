@@ -50,6 +50,8 @@ inline float cross_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_
 namespace LX_Physics
 {
 
+const unsigned long TRIANGLE_SIDES = 3;
+
 LX_PolygonException::LX_PolygonException(std::string err) : _string_error(err) {}
 
 LX_PolygonException::LX_PolygonException(const LX_PolygonException& pex)
@@ -71,54 +73,6 @@ class LX_Polygon_
 {
     LX_FloatPositions_ _points;     /* A sequence of LX_FloatPosition objects   */
     bool _convex;           /* If the polygon is convex         */
-
-    void convexity_() noexcept
-    {
-        LX_Vector2D AO;
-        LX_Vector2D OB;
-
-        float sign = 0.0f;
-        bool haveSign = false;
-        const auto pbeg = _points.begin();
-        const auto pend = _points.end();
-
-        for(auto it = pbeg; it != pend; ++it)
-        {
-            const LX_FloatPosition& ori1 = *it;
-            const LX_FloatPosition& img1 = (it == pbeg ? *(pend - 1) : *(it - 1));
-            const LX_FloatPosition& ori2 = (it == pend-1 ? *pbeg : *(it + 1));
-            const LX_FloatPosition& img2 = ori1;
-            AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
-            OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
-            int cross_product = static_cast<int>(vector_product(AO, OB));
-
-            if(!haveSign)
-            {
-                if(cross_product > 0)
-                    sign = 1.0f;
-                else if(cross_product < 0)
-                    sign = -1.0f;
-                else
-                {
-                    _convex = false;
-                    return;
-                }
-
-                haveSign = true;
-            }
-            else
-            {
-                if((sign > 0.0f && cross_product < 0)
-                        || (sign < 0.0f && cross_product > 0))
-                {
-                    _convex = false;
-                    return;
-                }
-            }
-        }
-
-        _convex = true;
-    }
 
     float area_() const noexcept
     {
@@ -170,12 +124,58 @@ public:
 
     LX_Polygon_() : _convex(false) {}
 
+    void convexity_() noexcept
+    {
+        LX_Vector2D AO;
+        LX_Vector2D OB;
+
+        float sign = 0.0f;
+        bool haveSign = false;
+        const auto pbeg = _points.begin();
+        const auto pend = _points.end();
+
+        for(auto it = pbeg; it != pend; ++it)
+        {
+            const LX_FloatPosition& ori1 = *it;
+            const LX_FloatPosition& img1 = (it == pbeg ? *(pend - 1) : *(it - 1));
+            const LX_FloatPosition& ori2 = (it == pend-1 ? *pbeg : *(it + 1));
+            const LX_FloatPosition& img2 = ori1;
+            AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
+            OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
+            int cross_product = static_cast<int>(vector_product(AO, OB));
+
+            if(!haveSign)
+            {
+                if(cross_product > 0)
+                    sign = 1.0f;
+                else if(cross_product < 0)
+                    sign = -1.0f;
+                else
+                {
+                    _convex = false;
+                    return;
+                }
+
+                haveSign = true;
+            }
+            else
+            {
+                if((sign > 0.0f && cross_product < 0)
+                        || (sign < 0.0f && cross_product > 0))
+                {
+                    _convex = false;
+                    return;
+                }
+            }
+        }
+
+        _convex = true;
+    }
+
+
     void addPoint(const LX_FloatPosition& p)
     {
         _points.push_back(p);
-        // Update the convexity when the polygon has at least 3 edges
-        if(_points.size() >= 3)
-            convexity_();
     }
 
     unsigned long numberOfEdges() const noexcept
@@ -243,17 +243,15 @@ public:
         });
     }
 
-    void moveTo(int xpos, int ypos)
+    void moveTo(const LX_FloatPosition& p)
     {
-        /// @not no need to fix warnings here, this function will be removed
         LX_FloatPosition centroid;
-        const LX_FloatPosition p{xpos, ypos};
 
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
             const LX_AABB& box = getEnclosingBox();
-            const LX_FloatPosition q{box.x + box.w/2, box.y + box.h/2};
+            const LX_FloatPosition q{box.x + box.w / 2.0f, box.y + box.h / 2.0f};
             _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
@@ -269,25 +267,29 @@ public:
 LX_Polygon::LX_Polygon() noexcept: _polyimpl(new LX_Polygon_()) {}
 LX_Polygon::~LX_Polygon() {}
 
-
-void LX_Polygon::addPoint(const int x, const int y)
+void LX_Polygon::convexity_() noexcept
 {
-    /// @not need to fix thi warning - deprecated
-    _polyimpl->addPoint(LX_FloatPosition{x, y});
+    // Update the convexity when the polygon has at least 3 edges
+    if(_polyimpl->numberOfEdges() >= TRIANGLE_SIDES)
+        _polyimpl->convexity_();
 }
 
-
-void LX_Polygon::addPoint(const LX_FloatPosition& p)
+// iIt is used by the function template
+void LX_Polygon::addPoint_(const LX_FloatPosition& p)
 {
     _polyimpl->addPoint(p);
 }
 
+void LX_Polygon::addPoint(const LX_FloatPosition& p)
+{
+    _polyimpl->addPoint(p);
+    convexity_();
+}
 
 unsigned long LX_Polygon::numberOfEdges() const noexcept
 {
     return _polyimpl->numberOfEdges();
 }
-
 
 LX_FloatPosition LX_Polygon::getPoint(const unsigned int index) const
 {
@@ -299,33 +301,19 @@ LX_AABB LX_Polygon::getEnclosingBox() const
     return _polyimpl->getEnclosingBox();
 }
 
-
 bool LX_Polygon::isConvex() const noexcept
 {
     return _polyimpl->isConvex();
 }
-
-
-void LX_Polygon::move(const float vx, const float vy) noexcept
-{
-    _polyimpl->_move({vx, vy});
-}
-
 
 void LX_Polygon::move(const LX_Vector2D& v) noexcept
 {
     _polyimpl->_move(v);
 }
 
-
-void LX_Polygon::moveTo(int xpos, int ypos)
-{
-    _polyimpl->moveTo(xpos, ypos);
-}
-
 void LX_Polygon::moveTo(const LX_FloatPosition& p)
 {
-    _polyimpl->moveTo(p.x, p.y);
+    _polyimpl->moveTo(p);
 }
 
 }
