@@ -424,11 +424,6 @@ void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 }
 
 
-void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept
-{
-    poly.move(vx, vy);
-}
-
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
 {
     poly.move(v);
@@ -461,11 +456,6 @@ void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 {
     moveCircleTo(C, P.x, P.y);
-}
-
-void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
-{
-    poly.moveTo(xpos, ypos);
 }
 
 void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
