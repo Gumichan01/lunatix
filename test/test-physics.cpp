@@ -89,10 +89,10 @@ int main(int argc, char **argv)
 // Test the euclidean functions
 void test_euclide(void)
 {
-    LX_Point A = {1,1};
-    LX_Point B = {10,1};
-    LX_Point C = {0,0};
-    LX_Point D = {10,10};
+    LX_FloatPosition A = {1,1};
+    LX_FloatPosition B = {10,1};
+    LX_FloatPosition C = {0,0};
+    LX_FloatPosition D = {10,10};
 
     LX_Log::log(" = TEST EUCLIDE = ");
     LX_Log::log("A(%d,%d)",A.x,A.y);
@@ -140,12 +140,12 @@ void test_euclide(void)
 
 void test_collisionPointCircle(void)
 {
-    LX_Circle circle(LX_Point{100,100},10);
+    LX_Circle circle(LX_FloatPosition{100,100},10);
 
-    LX_Point A{100,100};
-    LX_Point B{50,50};
-    LX_Point C{105,105};
-    LX_Point D{100,125};
+    LX_FloatPosition A{100,100};
+    LX_FloatPosition B{50,50};
+    LX_FloatPosition C{105,105};
+    LX_FloatPosition D{100,125};
 
     LX_Log::log(" = TEST POINT/CIRCLE = ");
     LX_Log::log("A(%d,%d)",A.x,A.y);
@@ -191,7 +191,7 @@ void test_collisionPointCircle(void)
 
 void test_collisionPointRect(void)
 {
-    LX_Point A,B;
+    LX_FloatPosition A,B;
     LX_AABB aabb;
 
     A = {100,100};
@@ -225,9 +225,9 @@ void test_collisionPointRect(void)
 
 void test_collision2Circle(void)
 {
-    LX_Circle A(LX_Point{10,10},5);
-    LX_Circle B(LX_Point{13,12},3);
-    LX_Circle C(LX_Point{100,100},50);
+    LX_Circle A(LX_FloatPosition{10,10},5);
+    LX_Circle B(LX_FloatPosition{13,12},3);
+    LX_Circle C(LX_FloatPosition{100,100},50);
 
     LX_Log::log(" = TEST CIRCLE/CIRCLE = ");
     LX_Log::log("A{(%d,%d),%d}", A.center.x, A.center.y, A.radius);
@@ -306,9 +306,9 @@ void test_collision2Rect(void)
 void test_collisionRectCircle(void)
 {
     LX_AABB R1{0,0,50,25};
-    LX_Circle A(LX_Point{10,10},5);
-    LX_Circle B(LX_Point{51,26},15);
-    LX_Circle C(LX_Point{100,100},40);
+    LX_Circle A(LX_FloatPosition{10,10},5);
+    LX_Circle B(LX_FloatPosition{51,26},15);
+    LX_Circle C(LX_FloatPosition{100,100},40);
 
     LX_Log::log(" = TEST RECT/CIRCLE = ");
     LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
@@ -347,7 +347,7 @@ void test_collisionRectCircle(void)
 void testPolygon(void)
 {
     LX_Polygon poly;
-    LX_Point p, q, r;
+    LX_FloatPosition p, q, r;
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -429,9 +429,9 @@ void testLine()
     LX_Vector2D v{0.0f,4.0f};
     LX_Vector2D u{0.0f,42.0f};
     LX_Vector2D w{21.0f,0.0f};
-    LX_Line l1(LX_Point{1,1}, v);
-    LX_Line l2(LX_Point{5,21}, u);
-    LX_Line l3(LX_Point{1,1}, w);
+    LX_Line l1(LX_FloatPosition{1,1}, v);
+    LX_Line l2(LX_FloatPosition{5,21}, u);
+    LX_Line l3(LX_FloatPosition{1,1}, w);
 
     LX_Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx.v, l1.v.vy.v);
     LX_Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx.v, l2.v.vy.v);
@@ -473,7 +473,7 @@ void testLine()
 
 void test_Vector2D(void)
 {
-    LX_Point p{1,2}, q{2,-1};
+    LX_FloatPosition p{1,2}, q{2,-1};
 
     LX_Vector2D v{1.0f,2.0f};
     LX_Vector2D u{2.0f,-1.0f};
@@ -550,21 +550,8 @@ void test_Vector2D(void)
 
 void test_collisionSeg(void)
 {
-    LX_Point A,B,C,D,E,F;
-    bool d;
-
-    A.x =  5;
-    A.y =  5;
-    B.x = 10;
-    B.y = 10;
-    C.x =  5;
-    C.y = 10;
-    D.x = 10;
-    D.y =  5;
-    E.x = 20;
-    E.y =  5;
-    F.x = 15;
-    F.y =  5;
+    LX_FloatPosition A{{5.0f}, {5.0f}},B{{10.0f}, {10.0f}},C{{5.0f}, {10.0f}};
+    LX_FloatPosition D{{10.0f}, {5.0f}},E{{20.0f}, {5.0f}},F{{15.0f},{5.0f}};
 
     LX_Log::log(" = TEST Collision Segment = ");
     LX_Log::log("A(%d,%d)", A.x, A.y);
@@ -575,7 +562,7 @@ void test_collisionSeg(void)
     LX_Log::log("F(%d,%d)", F.x, F.y);
     LX_Log::log("collision segement [AB]/[CD]");
 
-    d = intersectSegment(A,B,C,D);
+    bool d = intersectSegment(A,B,C,D);
 
     if(d != true)
         LX_Log::log("FAILURE - intersect [AB]/[CD] expected: TRUE; Got: FALSE");
@@ -627,13 +614,13 @@ void test_collisionPointPolygon(void)
     */
     LX_Polygon poly, polyc2;
 
-    LX_Point N = {12,7};
-    LX_Point O = {9,7};
-    LX_Point P = {6,5};
-    LX_Point Q = {6,4};
-    LX_Point R = {1024,2048};
-    LX_Point S = {2,2};
-    LX_Point T = {10,5};
+    LX_FloatPosition N = {12,7};
+    LX_FloatPosition O = {9,7};
+    LX_FloatPosition P = {6,5};
+    LX_FloatPosition Q = {6,4};
+    LX_FloatPosition R = {1024,2048};
+    LX_FloatPosition S = {2,2};
+    LX_FloatPosition T = {10,5};
 
     poly.addPoint(10,5);
     poly.addPoint(10,10);
@@ -718,10 +705,10 @@ void test_collisionPointPolygon(void)
 
 void test_collisionCirclePolygon(void)
 {
-    LX_Circle M(LX_Point{12,7},1);
-    LX_Circle N(LX_Point{2,7},2);
-    LX_Circle O(LX_Point{9,7},10);
-    LX_Circle S(LX_Point{2,2},2);
+    LX_Circle M(LX_FloatPosition{12,7},1);
+    LX_Circle N(LX_FloatPosition{2,7},2);
+    LX_Circle O(LX_FloatPosition{9,7},10);
+    LX_Circle S(LX_FloatPosition{2,2},2);
     LX_Polygon poly;
 
     poly.addPoint(10,5);
@@ -1034,30 +1021,30 @@ void test_collision2PolygonAgain(void)
 
 void test_move(void)
 {
-    LX_Point P = {1,2};
+    LX_FloatPosition P{{1.0f}, {2.0f}};
     LX_AABB R = {8,4,10,10};
 
-    const int X = -4;
-    const int Y = 8;
+    const float X = {-4.0f};
+    const float Y = {8.0f};
 
     LX_Polygon poly;
     LX_Polygon expoly;
 
-    poly.addPoint(24,32);
-    poly.addPoint(48,32);
-    poly.addPoint(128,64);
-    poly.addPoint(64,64);
-    poly.addPoint(32,32);
+    poly.addPoint({{24.0f}, {32.0f}});
+    poly.addPoint({{48.0f}, {32.0f}});
+    poly.addPoint({{128.0f}, {64.0f}});
+    poly.addPoint({{64.0f}, {64.0f}});
+    poly.addPoint({{32.0f}, {32.0f}});
     // expected polygon
-    expoly.addPoint(24+X,32+Y);
-    expoly.addPoint(48+X,32+Y);
-    expoly.addPoint(128+X,64+Y);
-    expoly.addPoint(64+X,64+Y);
-    expoly.addPoint(32+X,32+Y);
+    expoly.addPoint({{24.0f + X}, {32.0f + Y}});
+    expoly.addPoint({{48.0f + X}, {32.0f + Y}});
+    expoly.addPoint({{128.0f + X}, {64.0f + Y}});
+    expoly.addPoint({{64.0f + X}, {64.0f + Y}});
+    expoly.addPoint({{32.0f + X}, {32.0f + Y}});
 
     LX_Log::log(" = TEST Move = ");
 
-    LX_Log::log("P(%d,%d)", P.x, P.y);
+    LX_Log::log("P(%d,%d)", P.x.v, P.y.v);
     LX_Log::log("R{(%d,%d),%d,%d}", R.x, R.y, R.w, R.h);
     LX_Log::log("poly");
     displayPoly(poly);
@@ -1066,18 +1053,18 @@ void test_move(void)
 
     LX_Log::log("Point");
 
-    LX_Point expected_point = {P.x +1, P.y +1};
-    movePoint(P,1,1);
+    LX_FloatPosition expected_point{P.x.v + 1.0f, P.y.v + 1.0f};
+    movePoint(P, LX_Vector2D{{1.0f}, {1.0f}});
 
     if(P.x == expected_point.x && P.y == expected_point.y)
-        LX_Log::log("Point P(%d,%d)", P.x, P.y);
+        LX_Log::log("Point P(%d,%d)", P.x.v, P.y.v);
     else
-        LX_Log::log("FAILURE - expected : Point P(2,3); Got: P(%d,%d)", P.x, P.y);
+        LX_Log::log("FAILURE - expected : Point P(2,3); Got: P(%d,%d)", P.x.v, P.y.v);
 
     LX_Log::log("Rectangle");
 
-    LX_AABB expected_aabb = {R.x +2, R.y +3, R.w, R.h};
-    moveRect(R,2,3);
+    LX_AABB expected_aabb = {R.x + 2, R.y + 3, R.w, R.h};
+    moveRect(R, LX_Vector2D{{2.0f}, {3.0f}});
 
     if(R.x == expected_aabb.x && R.y == expected_aabb.y)
         LX_Log::log("SUCCESS - Rectangle R{(%d,%d),%d,%d}", R.x, R.y, R.w, R.h);
@@ -1085,7 +1072,7 @@ void test_move(void)
         LX_Log::log("FAILURE - expected : Rectangle R(3,6,10,10); got: R{(%d,%d),%d,%d}",
                     R.x, R.y, R.w, R.h);
 
-    movePoly(poly,X,Y);
+    movePoly(poly, LX_Vector2D{fbox(X), fbox(Y)});
     const unsigned long n = poly.numberOfEdges();
     const unsigned long m = expoly.numberOfEdges();
 
@@ -1104,12 +1091,13 @@ void test_move(void)
         bool ok = true;
         for(unsigned int j = 0; j < n; j++)
         {
-            LX_Point p1 = poly.getPoint(j);
-            LX_Point p2 = expoly.getPoint(j);
+            LX_FloatPosition p1 = poly.getPoint(j);
+            LX_FloatPosition p2 = expoly.getPoint(j);
             if(p1 != p2)
             {
-                LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - at j = %d → ≠ point; expected: (%d,%d); got: (%d,%d)",
-                                j,p2.x,p2.y,p1.x,p1.y);
+                LX_Log::logInfo(LX_Log::LX_LOG_TEST,
+                                "FAILURE - at j = %d → ≠ point; expected: (%d,%d); got: (%d,%d)",
+                                j, p2.x.v, p2.y.v, p1.x.v,p1.y.v);
                 ok = false;
                 break;
             }
@@ -1124,15 +1112,15 @@ void test_move(void)
     }
 
     // reset
-    movePoly(poly,-X,-Y);
+    movePoly(poly, LX_Vector2D{fbox(-X), fbox(-Y)});
     LX_AABB box = expoly.getEnclosingBox();
-    LX_Point q{box.x + box.w/2, box.y + box.h/2};
+    const LX_FloatPosition q{box.x + box.w / 2.0f, box.y + box.h / 2.0f};
 
-    movePolyTo(poly, q.x, q.y);
+    movePolyTo(poly, q);
     LX_AABB b = poly.getEnclosingBox();
-    LX_Point s{b.x + b.w/2, b.y + b.h/2};
-    LX_Log::log("centroid of poly: s(%d,%d)", s.x, s.y);
-    LX_Log::log("centroid of expoly: q(%d,%d)", q.x, q.y);
+    LX_FloatPosition s{b.x + b.w / 2.0f, b.y + b.h / 2.0f};
+    LX_Log::log("centroid of poly: s(%d,%d)", s.x.v, s.y.v);
+    LX_Log::log("centroid of expoly: q(%d,%d)", q.x.v, q.y.v);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -1142,33 +1130,31 @@ void test_assignment(void)
 {
     LX_Log::log(" = TEST Assignement = ");
 
-    LX_Point P = {1,2};
-    LX_Point Q;
+    LX_FloatPosition P{1.0f, 2.0f};
+    LX_FloatPosition Q = P;
 
-    LX_Log::log("P(%d,%d)", P.x, P.y);
-
-    Q = P;  // assignment
+    LX_Log::log("P(%d,%d)", P.x.v, P.y.v);
 
     if(Q == P)
-        LX_Log::log("SUCCESS - Point Q(%d,%d)", Q.x, Q.y);
+        LX_Log::log("SUCCESS - Point Q(%d,%d)", Q.x.v, Q.y.v);
     else
-        LX_Log::log("FAILURE - expected: Q(1,2); Got: Q(%d,%d)", Q.x, Q.y);
+        LX_Log::log("FAILURE - expected: Q(1,2); Got: Q(%d,%d)", Q.x.v, Q.y.v);
 
-    LX_Circle C(LX_Point{4,9},10);
+    LX_Circle C(LX_FloatPosition{4.0f, 9.0f},10);
 
-    LX_Log::log("C{(%d,%d),%d}; square radius: %d", C.center.x, C.center.y,
+    LX_Log::log("C{(%d,%d),%d}; square radius: %d", C.center.x.v, C.center.y.v,
                 C.radius, C.square_radius);
 
     LX_Circle D = C;  // assignment
 
     if(D == C)
-        LX_Log::log("SUCCESS - Circle D{(%d,%d),%d}; square radius =  %d", D.center.x, D.center.y,
+        LX_Log::log("SUCCESS - Circle D{(%d,%d),%d}; square radius =  %d", D.center.x.v, D.center.y.v,
                     D.radius, D.square_radius);
     else
         LX_Log::log("FAILURE - expected: Circle D{{4,9},10} with suare radius = 100; Got: D{(%d,%d),%d}; square radius = %d",
-                    D.center.x, D.center.y, D.radius, D.square_radius);
+                    D.center.x.v, D.center.y.v, D.radius, D.square_radius);
 
-    LX_Vector2D v = {3.14f,1.59f};
+    LX_Vector2D v{3.14f,1.59f};
     LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
 
     LX_Vector2D u = v;  // assignment
@@ -1191,9 +1177,9 @@ void test_assignment(void)
 
 void test_operator(void)
 {
-    LX_Circle C(LX_Point{2,3},10);
-    LX_Circle E(LX_Point{4,9},32);
-    LX_Circle F(LX_Point{8,21},10);
+    LX_Circle C(LX_FloatPosition{2,3},10);
+    LX_Circle E(LX_FloatPosition{4,9},32);
+    LX_Circle F(LX_FloatPosition{8,21},10);
 
     LX_Vector2D v{-3.14f, 1.59f};
     LX_Vector2D u = v;
@@ -1303,11 +1289,11 @@ void test_VectorPlusMinusOp(void)
     LX_Vector2D c = {-2.56f,10.24f};
     LX_Vector2D d;
 
-    LX_Vector2D exp_sum_vec = {u.vx + v.vx , u.vy + v.vy};
-    LX_Vector2D exp_add_vec = {u.vx + z.vx , u.vy + z.vy};
+    LX_Vector2D exp_sum_vec = {u.vx + v.vx, u.vy + v.vy};
+    LX_Vector2D exp_add_vec = {u.vx + z.vx, u.vy + z.vy};
 
-    LX_Vector2D exp_diff_vec = {a.vx - b.vx , a.vy - b.vy};
-    LX_Vector2D exp_sub_vec = {a.vx - c.vx , a.vy - c.vy};
+    LX_Vector2D exp_diff_vec = {a.vx - b.vx, a.vy - b.vy};
+    LX_Vector2D exp_sub_vec = {a.vx - c.vx, a.vy - c.vy};
 
     LX_Log::log(" = TEST Vector arithmetic = ");
     LX_Log::log(" '+','+=','-','-='");
@@ -1587,7 +1573,7 @@ void displayPoly(LX_Polygon& poly)
     for(unsigned int i = 0; i < n; i++)
     {
         os << "(" << (poly.getPoint(i)).x << ","
-             << (poly.getPoint(i)).y << ")";
+           << (poly.getPoint(i)).y << ")";
         if(i != n)
             os << ";";
     }
