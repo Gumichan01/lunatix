@@ -72,21 +72,6 @@ float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 /* Collision detection */
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn bool collisionPointRect(const int xpos, const int ypos,
-*                               const LX_AABB& rect) noexcept
-*
-*   Check the collision between a point and an Axis Aligned Bouding Box (AABB)
-*
-*   @param [in] xpos The x position of the point
-*   @param [in] ypos The y position of the point
-*   @param [in] rect The AABB
-*
-*   @return TRUE if there is a collision, FALSE otherwise
-*/
-bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noexcept;
-
-/**
 *   @fn bool collisionPointRect(const LX_FloatPosition& p,const LX_AABB& rect) noexcept
 *
 *   Check the collision between a point and an AABB
@@ -97,23 +82,6 @@ bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noe
 *   @return TRUE if there is a collision, FALSE otherwise
 */
 bool collisionPointRect(const LX_FloatPosition& p, const LX_AABB& rect) noexcept;
-
-
-/**
-*   @deprecated This function signature is deprecated
-*   @fn bool collisionPointCircle(const int xpos, const int ypos,
-*                                 const LX_Circle& circle) noexcept
-*
-*   Check the collision between a point and a circle
-*
-*   @param [in] xpos The x position of the point
-*   @param [in] ypos The y position of the point
-*   @param [in] circle The circle
-*
-*   @return TRUE if there is a collision, FALSE otherwise
-*/
-bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle) noexcept;
-
 /**
 *   @fn bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept
 *
@@ -126,8 +94,6 @@ bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circl
 *
 */
 bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept;
-
-
 /**
 *   @fn bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept
 *
@@ -153,7 +119,6 @@ bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept;
 *
 */
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept;
-
 /**
 *   @fn bool collisionSegCircle(const LX_Circle& circle,
 *                               const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept
@@ -168,7 +133,6 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcep
 *
 */
 bool collisionSegCircle(const LX_Circle& circle, const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept;
-
 /**
 *   @fn bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L)
 *
@@ -181,7 +145,6 @@ bool collisionSegCircle(const LX_Circle& circle, const LX_FloatPosition& A, cons
 *
 */
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
-
 /**
 *   @fn bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
 *
@@ -194,7 +157,6 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 *
 */
 bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept;
-
 
 /**
 *   @fn bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,

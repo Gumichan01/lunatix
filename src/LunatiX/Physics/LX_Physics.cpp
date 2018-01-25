@@ -123,35 +123,22 @@ float euclide_square_distance(const LX_FloatPosition& p1,
     return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y);
 }
 
-
 float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 {
     return sqrtf(euclide_square_distance(p1, p2));
 }
 
 
-bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noexcept
+bool collisionPointRect(const LX_FloatPosition& p, const LX_AABB& rect) noexcept
 {
-    return !(xpos <= rect.x || ypos >= (rect.y + rect.h) || ypos <= rect.y
-             || xpos >= (rect.x + rect.w));
-}
-
-
-bool collisionPointRect(const LX_FloatPosition& p,const LX_AABB& rect) noexcept
-{
-    return collisionPointRect(p.x, p.y, rect);
-}
-
-
-bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle) noexcept
-{
-    return collisionPointCircle(LX_FloatPosition{xpos, ypos}, circle);
+    return !(p.x <= rect.x || p.y >= (rect.y + rect.h) || p.y <= rect.y
+             || p.x >= (rect.x + rect.w));
 }
 
 
 bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept
 {
-    return(euclide_square_distance(p, circle.center) <= (circle.square_radius));
+    return(euclide_square_distance(p, circle.center) <= (circle.radius * circle.radius));
 }
 
 
