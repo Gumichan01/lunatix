@@ -87,12 +87,6 @@ struct LX_Circle
     unsigned int radius;        /**< The circle radius                      */
     /// @todo remove square_radius
     unsigned int square_radius; /**< The square radius                      */
-
-    /// @todo remove those functions
-    LX_Circle() noexcept;
-    LX_Circle(const LX_FloatPosition& p, unsigned int rad) noexcept;
-    LX_Circle(const LX_Circle& c) noexcept;
-    LX_Circle& operator=(const LX_Circle& c) noexcept;
 };
 
 
