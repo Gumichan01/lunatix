@@ -389,20 +389,15 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 }
 
 
-void movePoint(LX_FloatPosition& P, const int vx, const int vy) noexcept
-{
-    P.x += vx;
-    P.y += vy;
-}
-
 void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
 {
-    movePoint(P, static_cast<int>(v.vx), static_cast<int>(v.vy));
+    P.x += v.vx;
+    P.y += v.vy;
 }
 
 void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
 {
-    rect.x += static_cast<int>(vx);
+    rect.x += static_cast<int>(v.vx);
     rect.y += static_cast<int>(v.vy);
 }
 

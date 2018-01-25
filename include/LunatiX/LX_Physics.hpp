@@ -321,17 +321,6 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePoint(LX_FloatPosition& P, const int vx, const int vy) noexcept
-*
-*   Move a point to a direction
-*
-*   @param [in] P The point to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void movePoint(LX_FloatPosition& P, const int vx, const int vy) noexcept;
-/**
 *   @fn void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
 *
 *   Move a point to a direction using the vector
