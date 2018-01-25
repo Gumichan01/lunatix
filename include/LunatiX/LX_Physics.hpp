@@ -341,17 +341,6 @@ void movePoint(LX_FloatPosition& P, const int vx, const int vy) noexcept;
 */
 void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept
-*
-*   Move an AABB to a direction
-*
-*   @param [in] rect The AABB to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept;
-/**
 *   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
 *
 *   Move an AABB to a direction using the vector
@@ -360,17 +349,6 @@ void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept;
 *   @param [in] v The vector that indicates the direction
 */
 void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept;
-/**
-*   @deprecated This function signature is deprecated
-*   @fn void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept
-*
-*   Move the circle to a direction
-*
-*   @param [in] C The circle to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept;
 /**
 *   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 *
