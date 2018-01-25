@@ -32,20 +32,6 @@ LX_Circle::LX_Circle(const LX_Circle& c) noexcept
     : center(c.center),radius(c.radius),square_radius(c.square_radius) {}
 
 
-LX_Line::LX_Line() noexcept: o(LX_FloatPosition{0,0}), v(LX_Vector2D{0.0f, 0.0f}) {}
-
-LX_Line::LX_Line(const LX_Line& l) noexcept: o(l.o), v(l.v) {}
-
-LX_Line::LX_Line(const LX_FloatPosition& p, const LX_Vector2D& dv) noexcept: o(p), v(dv) {}
-
-LX_Line& LX_Line::operator=(const LX_Line& l) noexcept
-{
-    o = l.o;
-    v = l.v;
-    return *this;
-}
-
-
 bool LX_Line::isParralelWith(const LX_Line& l) const noexcept
 {
     return collinear(v, l.v);
@@ -53,7 +39,7 @@ bool LX_Line::isParralelWith(const LX_Line& l) const noexcept
 
 bool LX_Line::isPerpendicularTo(const LX_Line& l) const noexcept
 {
-    return scalar_product(v, l.v) == 0.0f;
+    return scalar_product(v, l.v) == fbox(0.0f);
 }
 
 LX_Circle& LX_Circle::operator =(const LX_Circle& c) noexcept

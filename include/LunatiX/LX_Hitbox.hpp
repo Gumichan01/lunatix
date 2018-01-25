@@ -29,7 +29,7 @@ namespace LX_Physics
 
 /**
 *   @struct LX_Point
-*   @brief The point structure
+*   @brief The position
 */
 struct LX_Point
 {
@@ -57,13 +57,8 @@ struct LX_FloatPosition
 */
 struct LX_Line
 {
-    LX_FloatPosition o;     /**< Origin point       */
-    LX_Vector2D v;  /**< Direction vector   */
-
-    LX_Line() noexcept;
-    LX_Line(const LX_Line& l) noexcept;
-    LX_Line(const LX_FloatPosition& p, const LX_Vector2D& dv) noexcept;
-    LX_Line& operator=(const LX_Line& l) noexcept;
+    LX_FloatPosition o; /**< Origin point       */
+    LX_Vector2D v;      /**< Direction vector   */
 
     /**
     *   @fn bool isParralelWith(const LX_Line& l) const noexcept
