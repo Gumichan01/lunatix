@@ -24,6 +24,9 @@
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/utils/float.hpp>
 
+#include <SDL2/SDL_rect.h>
+
+
 namespace LX_Physics
 {
 
@@ -50,6 +53,37 @@ struct LX_FloatPosition
 LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
 /// @todo define LX_Segment
+
+/**
+*   @typedef LX_AABB
+*   @brief The Axis-Aligned Bounding Box (AABB)
+*
+*   Structure:
+*
+*       int x, int y;   // Coordinates
+*       int w, int h;   // Dimension
+*
+*
+*   Very useful for collision detection, image positioning, ...
+*/
+//using LX_AABB = SDL_Rect;
+
+/// @todo integrate the floating box into LX_Physics
+/// @todo conversion LX_FloatingBox → LX_Graphics::ImgRect
+
+/**
+*   @struct LX_FloatingBox
+*   @brief The logical hitbox (Axis-Aligned Bounding Box)
+*
+*   @note If you want to use an Oriented Bounding Box (OBB),
+*         you need to use ::LX_Polygon instead
+*/
+struct LX_FloatingBox
+{
+    LX_FloatPosition fpoint;    /**< Position   */
+    LX_Vector2D v;              /**< Dimension  */
+};
+
 
 /**
 *   @struct LX_Line

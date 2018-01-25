@@ -15,6 +15,7 @@
 
 /**
 *   @file LX_AABB.hpp
+*   @todo remove this file?
 *   @brief The definition of LX_AABB
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.12
@@ -36,6 +37,19 @@ struct SDL_Rect;
 *   Very useful for collision detection, image positioning, ...
 */
 using LX_AABB = SDL_Rect;
+
+/// @todo Create an ImgRect from LX_Graphics
+/**
+    This structure will be used by LX_Texture
+
+    ImgRect
+    {
+        LX_Point p;
+        int w, h;
+    }
+
+    + conversion ImgRect → SDL_Rect + vice-versa?
+*/
 
 #include <SDL2/SDL_rect.h>
 
