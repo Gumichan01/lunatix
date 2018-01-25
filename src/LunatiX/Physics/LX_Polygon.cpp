@@ -126,9 +126,6 @@ public:
 
     void convexity_() noexcept
     {
-        LX_Vector2D AO;
-        LX_Vector2D OB;
-
         float sign = 0.0f;
         bool haveSign = false;
         const auto pbeg = _points.begin();
@@ -140,8 +137,9 @@ public:
             const LX_FloatPosition& img1 = (it == pbeg ? *(pend - 1) : *(it - 1));
             const LX_FloatPosition& ori2 = (it == pend-1 ? *pbeg : *(it + 1));
             const LX_FloatPosition& img2 = ori1;
-            AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
-            OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
+
+            LX_Vector2D AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
+            LX_Vector2D OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
             int cross_product = static_cast<int>(vector_product(AO, OB));
 
             if(!haveSign)
@@ -194,8 +192,8 @@ public:
         if(_points.size() < 3)
             throw LX_PolygonException("LX_Polygon: Cannot get the enclosing bounding box");
 
-        int xm, ym;
-        LX_AABB aabb = {0,0,0,0};
+        int xm = 0, ym = 0;
+        LX_AABB aabb{0,0,0,0};
 
         {
             const LX_FloatPosition& p0 = _points.at(0);
@@ -265,7 +263,11 @@ public:
 /* Polygon, public functions */
 
 LX_Polygon::LX_Polygon() noexcept: _polyimpl(new LX_Polygon_()) {}
-LX_Polygon::~LX_Polygon() {}
+
+LX_Polygon::~LX_Polygon()
+{
+    _polyimpl.reset();
+}
 
 void LX_Polygon::convexity_() noexcept
 {
