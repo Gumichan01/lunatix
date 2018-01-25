@@ -23,6 +23,11 @@
 namespace LX_Physics
 {
 
+LX_Point toPixelUnit(const LX_FloatPosition& p) noexcept
+{
+    return LX_Point{static_cast<int>(p.x.v), static_cast<int>(p.y.v)};
+}
+
 bool LX_Line::isParralelWith(const LX_Line& l) const noexcept
 {
     return collinear(v, l.v);

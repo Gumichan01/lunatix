@@ -48,8 +48,7 @@ struct LX_FloatPosition
 };
 
 /// @todo those two functions
-//LX_Point toPixelUnit(LX_AABB& aabb);
-//void toPixelUnit(LX_Physics::LX_Circle& circle);
+LX_Point toPixelUnit(const LX_FloatPosition& p) noexcept;
 
 /**
 *   @struct LX_Line
