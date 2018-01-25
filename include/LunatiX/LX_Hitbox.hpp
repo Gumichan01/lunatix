@@ -89,10 +89,28 @@ struct LX_Circle
 
 // Operators of points and circles
 /**
+*   @fn bool operator ==(const LX_Point& a, const LX_Point& b) noexcept
+*
+*   @param [in] a The first point
+*   @param [in] b The second point
+*
+*   @return TRUE If these points have exactly the same coordinates,
+*          FALSE otherwise
+*/
+bool operator ==(const LX_Point& a, const LX_Point& b) noexcept;
+/**
+*   @fn bool operator !=(const LX_Point& a, const LX_Point& b) noexcept
+*
+*   @param [in] a The first point
+*   @param [in] b The second point
+*
+*   @return TRUE If these points have not the same coordinates, FALSE otherwise
+*/
+bool operator !=(const LX_Point& a, const LX_Point& b) noexcept;
+
+/**
 *   @fn bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
-*
-*   Check If two points are identical
-*
+
 *   @param [in] a The first point
 *   @param [in] b The second point
 *
@@ -102,8 +120,6 @@ struct LX_Circle
 bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
 /**
 *   @fn bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
-*
-*   Check If two points are dIfferent
 *
 *   @param [in] a The first point
 *   @param [in] b The second point

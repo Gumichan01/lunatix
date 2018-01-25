@@ -39,11 +39,21 @@ bool LX_Line::isPerpendicularTo(const LX_Line& l) const noexcept
 }
 
 
-bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
+bool operator ==(const LX_Point& a, const LX_Point& b) noexcept
 {
     return a.x == b.x && a.y == b.y;
 }
 
+bool operator !=(const LX_Point& a, const LX_Point& b) noexcept
+{
+    return !(a == b);
+}
+
+
+bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
+{
+    return a.x == b.x && a.y == b.y;
+}
 
 bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 {
@@ -56,30 +66,25 @@ bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
     return a.center == b.center && a.radius == b.radius;
 }
 
-
 bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept
 {
     return a.center != b.center || a.radius != b.radius;
 }
-
 
 bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept
 {
     return a.radius > b.radius;
 }
 
-
 bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept
 {
     return a.radius < b.radius;
 }
 
-
 bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept
 {
     return a.radius >= b.radius;
 }
-
 
 bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept
 {
