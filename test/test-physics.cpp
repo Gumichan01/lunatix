@@ -140,7 +140,7 @@ void test_euclide(void)
 
 void test_collisionPointCircle(void)
 {
-    LX_Circle circle(LX_FloatPosition{100,100},10);
+    LX_Circle circle{LX_FloatPosition{100,100},10};
 
     LX_FloatPosition A{100,100};
     LX_FloatPosition B{50,50};
@@ -222,9 +222,9 @@ void test_collisionPointRect(void)
 
 void test_collision2Circle(void)
 {
-    LX_Circle A(LX_FloatPosition{10.f, 10.0f}, 5);
-    LX_Circle B(LX_FloatPosition{13.0f, 12.0f}, 3);
-    LX_Circle C(LX_FloatPosition{100.0f, 100.0f}, 50);
+    LX_Circle A{LX_FloatPosition{10.f, 10.0f}, 5};
+    LX_Circle B{LX_FloatPosition{13.0f, 12.0f}, 3};
+    LX_Circle C{LX_FloatPosition{100.0f, 100.0f}, 50};
 
     LX_Log::log(" = TEST CIRCLE/CIRCLE = ");
     LX_Log::log("A{(%d,%d),%d}", A.center.x.v, A.center.y.v, A.radius);
@@ -303,9 +303,9 @@ void test_collision2Rect(void)
 void test_collisionRectCircle(void)
 {
     LX_AABB R1{0,0,50,25};
-    LX_Circle A(LX_FloatPosition{10,10},5);
-    LX_Circle B(LX_FloatPosition{51,26},15);
-    LX_Circle C(LX_FloatPosition{100,100},40);
+    LX_Circle A{LX_FloatPosition{10,10},5};
+    LX_Circle B{LX_FloatPosition{51,26},15};
+    LX_Circle C{LX_FloatPosition{100,100},40};
 
     LX_Log::log(" = TEST RECT/CIRCLE = ");
     LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
@@ -704,10 +704,10 @@ void test_collisionPointPolygon(void)
 
 void test_collisionCirclePolygon(void)
 {
-    LX_Circle M(LX_FloatPosition{12.0f, 7.0f}, 1.0f);
-    LX_Circle N(LX_FloatPosition{2.0f, 7.0f}, 2.0f);
-    LX_Circle O(LX_FloatPosition{9.0f, 7.0f}, 10.0f);
-    LX_Circle S(LX_FloatPosition{2.0f, 2.0f}, 2.0f);
+    LX_Circle M{LX_FloatPosition{12.0f, 7.0f}, 1};
+    LX_Circle N{LX_FloatPosition{2.0f, 7.0f}, 2};
+    LX_Circle O{LX_FloatPosition{9.0f, 7.0f}, 10};
+    LX_Circle S{LX_FloatPosition{2.0f, 2.0f}, 2};
     LX_Polygon poly;
 
     poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
@@ -1139,7 +1139,7 @@ void test_assignment(void)
     else
         LX_Log::log("FAILURE - expected: Q(1,2); Got: Q(%d,%d)", Q.x.v, Q.y.v);
 
-    LX_Circle C(LX_FloatPosition{4.0f, 9.0f},10);
+    LX_Circle C{LX_FloatPosition{4.0f, 9.0f},10};
 
     LX_Log::log("C{(%d,%d),%d}; square radius: %d", C.center.x.v, C.center.y.v,
                 C.radius, C.square_radius);
@@ -1176,9 +1176,9 @@ void test_assignment(void)
 
 void test_operator(void)
 {
-    LX_Circle C(LX_FloatPosition{2.0f, 3.0f}, 10);
-    LX_Circle E(LX_FloatPosition{4.0f, 9.0f}, 32);
-    LX_Circle F(LX_FloatPosition{8.0f, 21.0f}, 10);
+    LX_Circle C{LX_FloatPosition{2.0f, 3.0f}, 10};
+    LX_Circle E{LX_FloatPosition{4.0f, 9.0f}, 32};
+    LX_Circle F{LX_FloatPosition{8.0f, 21.0f}, 10};
 
     LX_Vector2D v{-3.14f, 1.59f};
     LX_Vector2D u = v;
