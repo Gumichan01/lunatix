@@ -446,11 +446,6 @@ void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept
     moveRectTo(rect, P.x, P.y);
 }
 
-void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
-{
-    //movePointTo(C.center, xpos, ypos);
-}
-
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 {
     movePointTo(C.center, P);

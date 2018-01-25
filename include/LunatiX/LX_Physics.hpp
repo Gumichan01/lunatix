@@ -431,17 +431,6 @@ void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept;
 */
 void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
-*
-*   Move a circle to an absolute position
-*
-*   @param [in] C The circle to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept;
-/**
 *   @fn void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 *
 *   Move a circle to an absolute position
