@@ -400,16 +400,10 @@ void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
     movePoint(P, static_cast<int>(v.vx), static_cast<int>(v.vy));
 }
 
-
-void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept
-{
-    rect.x += vx;
-    rect.y += vy;
-}
-
 void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
 {
-    moveRect(rect, static_cast<int>(v.vx), static_cast<int>(v.vy));
+    rect.x += static_cast<int>(vx);
+    rect.y += static_cast<int>(v.vy);
 }
 
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
