@@ -63,16 +63,12 @@ struct LX_Line
     /**
     *   @fn bool isParralelWith(const LX_Line& l) const noexcept
     *
-    *   Check if the line is parralel with the line given in argument
-    *
     *   @param [in] l The line to compare
-    *   @return TRUE if the two lines are paralel, FALSE otherwise
+    *   @return TRUE if the two lines are parralel, FALSE otherwise
     */
     bool isParralelWith(const LX_Line& l) const noexcept;
     /**
     *   @fn bool isPerpendicularTo(const LX_Line& l) const noexcept
-    *
-    *   Check if the line is perpendicular to the line given in argument
     *
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are perpendicular, FALSE otherwise
@@ -87,7 +83,7 @@ struct LX_Line
 */
 struct LX_Circle
 {
-    LX_FloatPosition center;            /**< The point that represents the center   */
+    LX_FloatPosition center;    /**< The point that represents the center   */
     unsigned int radius;        /**< The circle radius                      */
     /// @todo remove square_radius
     unsigned int square_radius; /**< The square radius                      */
