@@ -1141,17 +1141,16 @@ void test_assignment(void)
 
     LX_Circle C{LX_FloatPosition{4.0f, 9.0f},10};
 
-    LX_Log::log("C{(%d,%d),%d}; square radius: %d", C.center.x.v, C.center.y.v,
-                C.radius, C.square_radius);
+    LX_Log::log("C{(%d,%d),%d}", C.center.x.v, C.center.y.v, C.radius);
 
     LX_Circle D = C;  // assignment
 
     if(D == C)
-        LX_Log::log("SUCCESS - Circle D{(%d,%d),%d}; square radius =  %d", D.center.x.v, D.center.y.v,
-                    D.radius, D.square_radius);
+        LX_Log::log("SUCCESS - Circle D{(%d,%d),%d}", D.center.x.v,
+        D.center.y.v, D.radius);
     else
-        LX_Log::log("FAILURE - expected: Circle D{{4,9},10} with suare radius = 100; Got: D{(%d,%d),%d}; square radius = %d",
-                    D.center.x.v, D.center.y.v, D.radius, D.square_radius);
+        LX_Log::log("FAILURE - expected: Circle D{{4,9},10}; Got: D{(%d,%d),%d}",
+                    D.center.x.v, D.center.y.v, D.radius);
 
     LX_Vector2D v{3.14f,1.59f};
     LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
@@ -1189,12 +1188,9 @@ void test_operator(void)
     LX_Log::log(" = TEST operators = ");
 
     LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
-    LX_Log::log("C{(%d,%d),%d}; square radius = %d", C.center.x, C.center.y,
-                C.radius, C.square_radius);
-    LX_Log::log("E{(%d,%d),%d}; square radius = %d", E.center.x, E.center.y,
-                E.radius, E.square_radius);
-    LX_Log::log("F{(%d,%d),%d}; square radius = %d", F.center.x, F.center.y,
-                F.radius, F.square_radius);
+    LX_Log::log("C{(%d,%d),%d};", C.center.x, C.center.y,C.radius);
+    LX_Log::log("E{(%d,%d),%d};", E.center.x, E.center.y, E.radius);
+    LX_Log::log("F{(%d,%d),%d};", F.center.x, F.center.y, F.radius);
     LX_Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
     LX_Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     LX_Log::log("Vector2D w(%f,%f)", w.vx.v, w.vy.v);
