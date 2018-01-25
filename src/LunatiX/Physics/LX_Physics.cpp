@@ -423,7 +423,6 @@ void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
     moveCircle(C, static_cast<int>(v.vx), static_cast<int>(v.vy));
 }
 
-
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
 {
     poly.move(v);

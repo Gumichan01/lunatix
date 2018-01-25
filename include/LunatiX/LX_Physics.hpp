@@ -381,17 +381,6 @@ void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept;
 */
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept
-*
-*   Move the polygon to a direction
-*
-*   @param [in] poly The polygon to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept;
-/**
 *   @fn void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
 *
 *   Move the polygon to a direction using the vector
