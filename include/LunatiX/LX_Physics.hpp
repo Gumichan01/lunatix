@@ -35,6 +35,9 @@
 *
 *   It handles operations on bodies (collision, movement, ...)
 */
+
+#include <LunatiX/utils/float.hpp>
+
 namespace LX_Physics
 {
 
@@ -45,7 +48,7 @@ struct LX_Vector2D;
 class LX_Polygon;
 
 /**
-*   @fn float euclide_square_distance(const LX_FloatPosition& p1,
+*   @fn Float euclide_square_distance(const LX_FloatPosition& p1,
 *                                     const LX_FloatPosition& p2) noexcept
 *
 *   Euclidean square distance
@@ -55,9 +58,9 @@ class LX_Polygon;
 *
 *   @return The square distance
 */
-float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
+Float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 /**
-*   @fn float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
+*   @fn Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 *
 *   Euclidean distance
 *
@@ -66,7 +69,7 @@ float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition
 *
 *   @return The distance (floating-point value)
 */
-float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
+Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 
 
 /* Collision detection */

@@ -20,8 +20,8 @@
 */
 
 #include <LunatiX/LX_Physics.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Polygon.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Random.hpp>
 #include <stdexcept>
@@ -117,15 +117,15 @@ namespace LX_Physics
 const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
 
-float euclide_square_distance(const LX_FloatPosition& p1,
+Float euclide_square_distance(const LX_FloatPosition& p1,
                               const LX_FloatPosition& p2) noexcept
 {
     return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y);
 }
 
-float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
+Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 {
-    return sqrtf(euclide_square_distance(p1, p2));
+    return fbox(sqrtf(euclide_square_distance(p1, p2)));
 }
 
 
