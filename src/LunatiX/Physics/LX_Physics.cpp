@@ -412,15 +412,9 @@ void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
     moveRect(rect, static_cast<int>(v.vx), static_cast<int>(v.vy));
 }
 
-
-void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept
-{
-    movePoint(C.center, vx, vy);
-}
-
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 {
-    moveCircle(C, static_cast<int>(v.vx), static_cast<int>(v.vy));
+    movePoint(C.center, v);
 }
 
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
