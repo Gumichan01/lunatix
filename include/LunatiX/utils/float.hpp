@@ -15,10 +15,11 @@
 struct Float
 {
     float v;
-    // static_cast<float>(Float)
+    /// Unboxing ≡ static_cast<float>(Float)
     operator float() const;
 };
 
+/// Boxing
 inline Float fbox(float x)
 {
     return Float{x};
