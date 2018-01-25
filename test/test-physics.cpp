@@ -428,9 +428,9 @@ void testLine()
     LX_Vector2D v{0.0f,4.0f};
     LX_Vector2D u{0.0f,42.0f};
     LX_Vector2D w{21.0f,0.0f};
-    LX_Line l1(LX_FloatPosition{1.0f, 1.0f}, v);
-    LX_Line l2(LX_FloatPosition{5.0f, 21.0f}, u);
-    LX_Line l3(LX_FloatPosition{1.0f, 1.0f}, w);
+    LX_Line l1{LX_FloatPosition{1.0f, 1.0f}, v};
+    LX_Line l2{LX_FloatPosition{5.0f, 21.0f}, u};
+    LX_Line l3{LX_FloatPosition{1.0f, 1.0f}, w};
 
     LX_Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx.v, l1.v.vy.v);
     LX_Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx.v, l2.v.vy.v);
