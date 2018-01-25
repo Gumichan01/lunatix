@@ -435,15 +435,10 @@ void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept
     P.y = dest.y;
 }
 
-void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
-{
-    rect.x = xpos;
-    rect.y = ypos;
-}
-
 void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept
 {
-    moveRectTo(rect, P.x, P.y);
+    rect.x = static_cast<int>(P.x.v);
+    rect.y = static_cast<int>(P.x.v);
 }
 
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept

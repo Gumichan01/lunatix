@@ -411,17 +411,6 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 */
 void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
-*
-*   Move an AABB to an absolute position
-*
-*   @param [in] rect The AABB to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept;
-/**
 *   @fn void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept
 *
 *   Move an AABB to an absolute position
