@@ -116,30 +116,17 @@ namespace LX_Physics
 
 const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
-unsigned int euclide_square_distance(const int x1, const int y1,
-                                     const int x2, const int y2) noexcept
+
+float euclide_square_distance(const LX_FloatPosition& p1,
+                              const LX_FloatPosition& p2) noexcept
 {
-    return static_cast<unsigned int>( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
-}
-
-
-float euclide_distance(const int x1, const int y1,
-                       const int x2, const int y2) noexcept
-{
-    return static_cast<float>(sqrt(euclide_square_distance(x1, y1, x2, y2)));
-}
-
-
-unsigned int euclide_square_distance(const LX_FloatPosition& p1,
-                                     const LX_FloatPosition& p2) noexcept
-{
-    return euclide_square_distance(p1.x, p1.y, p2.x, p2.y);
+    return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y);
 }
 
 
 float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 {
-    return static_cast<float>(sqrt(euclide_square_distance(p1, p2)));
+    return sqrtf(euclide_square_distance(p1, p2));
 }
 
 

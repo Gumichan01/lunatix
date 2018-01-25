@@ -45,53 +45,21 @@ struct LX_Vector2D;
 class LX_Polygon;
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn unsigned int euclide_square_distance(const int x1, const int y1,
-*                                            const int x2, const int y2) noexcept
+*   @fn float euclide_square_distance(const LX_FloatPosition& p1,
+*                                     const LX_FloatPosition& p2) noexcept
 *
-*   This function calculates the euclidean square distance between 2 coordinates
-*
-*   @param [in] x1 The x location of the first point
-*   @param [in] y1 The y location of the first point
-*   @param [in] x2 The x location of the second point
-*   @param [in] y2 The y location of the second point
-*
-*   @return The square distance (integer value)
-*/
-unsigned int euclide_square_distance(const int x1, const int y1, const int x2, const int y2) noexcept;
-/**
-*   @fn unsigned int euclide_square_distance(const LX_FloatPosition& p1,
-*                                            const LX_FloatPosition& p2) noexcept
-*
-*   This function calculates the euclidean square distance
+*   Euclidean square distance
 *
 *   @param [in] p1 The first point
 *   @param [in] p2 The second point
 *
-*   @return The square distance (integer value)
+*   @return The square distance
 */
-unsigned int euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
-
-/**
-*   @deprecated This function signature is deprecated
-*   @fn float euclide_distance(const int x1, const int y1,
-*                              const int x2, const int y2) noexcept
-*
-*   This function calculates the euclidean distance with accuracy
-*
-*   @param [in] x1 The x location of the first point
-*   @param [in] y1 The y location of the first point
-*   @param [in] x2 The x location of the second point
-*   @param [in] y2 The y location of the second point
-*
-*   @return The distance (floating-point value)
-*/
-float euclide_distance(const int x1, const int y1, const int x2, const int y2) noexcept;
-
+float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 /**
 *   @fn float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 *
-*   This function calculates the euclidean distance with accuracy
+*   Euclidean distance
 *
 *   @param [in] p1 The first point
 *   @param [in] p2 The second point
@@ -319,6 +287,7 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 *   @exception std::invalid_argument If a polygon has not at least 3 sides
 */
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
+
 
 /**
 *   @fn void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
