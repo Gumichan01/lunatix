@@ -402,18 +402,6 @@ void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept;
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePointTo(LX_FloatPosition& P, const int xpos, const int ypos) noexcept
-*
-*   Move a point to an absolute position
-*
-*   @param [in] P The point to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void movePointTo(LX_FloatPosition& P, const int xpos, const int ypos) noexcept;
-
-/**
 *   @fn void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept
 *
 *   Move a point to an absolute position
@@ -422,7 +410,6 @@ void movePointTo(LX_FloatPosition& P, const int xpos, const int ypos) noexcept;
 *   @param [in] dest The position
 */
 void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept;
-
 /**
 *   @deprecated This function signature is deprecated
 *   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
