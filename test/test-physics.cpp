@@ -36,6 +36,8 @@ void test_VectorIncDec(void);
 void test_VectorCollinear(void);
 void test_VectorLambda(void);
 
+void test_conversion(void);
+
 using namespace LX_Physics;
 
 void displayPoly(LX_Polygon& poly);
@@ -79,6 +81,7 @@ int main(int argc, char **argv)
     test_VectorIncDec();
     test_VectorCollinear();
     test_VectorLambda();
+    test_conversion();
 
     LX_Quit();
     LX_Log::log(" ==== END Physics ==== \n");
@@ -101,9 +104,9 @@ void test_euclide(void)
     LX_Log::log("D(%d,%d)",D.x,D.y);
     LX_Log::log("Square distance AB");
 
-    float d = euclide_square_distance(A,B);
+    Float d = euclide_square_distance(A,B);
 
-    if(d != 81.0f)
+    if(d != fbox(81.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance AB - expected: 81; Got: %f",d);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance AB: %f",d);
@@ -111,7 +114,7 @@ void test_euclide(void)
     LX_Log::log("Distance between A and B");
     d = euclide_distance(A,B);
 
-    if(d != 9.0f)
+    if(d != fbox(9.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance AB - expected: 9; Got: %f",d);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good distance AB: %f",d);
@@ -120,7 +123,7 @@ void test_euclide(void)
     LX_Log::log("Square distance CD");
     d = euclide_square_distance(C,D);
 
-    if(d != 200.0f)
+    if(d != fbox(200.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance CD - expected: 81; Got: %f",d);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %f",d);
@@ -364,13 +367,13 @@ void testPolygon(void)
     LX_FloatPosition p = poly.getPoint(0);
     LX_Log::log("poly.getPoint(0): (%d,%d)", p.x.v, p.y.v);
 
-    if(p.x != 10)
+    if(p.x != fbox(10.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - x position expected: 10; Got: %d",
         p.x.v);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - x = %d", p.x.v);
 
-    if(p.y != 5)
+    if(p.y != fbox(5.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - y position expected: 5; Got: %d",
         p.y.v);
     else
@@ -485,9 +488,9 @@ void test_Vector2D(void)
     LX_Log::log("z(%f,%f)", z.vx.v, z.vy.v);
     LX_Log::log("w(%f,%f)", w.vx.v, w.vy.v);
     LX_Log::log("scalar product (v, u)");
-    float d = scalar_product(v,u);
+    Float d = scalar_product(v,u);
 
-    if(d != 0.0f)
+    if(d != fbox(0.0f))
         LX_Log::log("FAILURE - scalar product v(1,2).u(2,-1) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - scalar product v(1,2).u(2,-1) = 0");
@@ -495,7 +498,7 @@ void test_Vector2D(void)
     LX_Log::log("scalar product (z,z)");
     d = scalar_product(z,z);
 
-    if(d != 0.0f)
+    if(d != fbox(0.0f))
         LX_Log::log("FAILURE - scalar product z.z (z is a null vector) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - scalar product z.z = 0");
@@ -503,7 +506,7 @@ void test_Vector2D(void)
     LX_Log::log("norm of z");
     d = vector_norm(z);
 
-    if(d != 0.0f)
+    if(d != fbox(0.0f))
         LX_Log::log("FAILURE - norm of z (z is a null vector) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - norm of z = 0");
@@ -530,7 +533,7 @@ void test_Vector2D(void)
 
     d = vector_product(u,v);
 
-    if(d != 5.0f)
+    if(d != fbox(5.0f))
         LX_Log::log("FAILURE - vector product u(2,-1).v(1,2) expected: 5.0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - vector product u(2,-1).v(1,2) = %f", d);
@@ -538,7 +541,7 @@ void test_Vector2D(void)
 
     d = vector_product(z,z);
 
-    if(d != 0.0f)
+    if(d != fbox(0.0f))
         LX_Log::log("FAILURE - vector product z.z (z is a null vector) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - vector product z.z = 0");
@@ -1533,9 +1536,9 @@ void test_VectorLambda(void)
     LX_Log::log("Normalize v");
 
     normalize(v);
-    float n = vector_norm(v);
+    Float n = vector_norm(v);
 
-    if(n == 1.0f)
+    if(n == fbox(1.0f))
         LX_Log::log("SUCCESS - Vector2D v(%f,%f) normalized, norm: %f", v.vx.v, v.vy.v, n);
     else
         LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx.v, t.vy.v,
@@ -1557,12 +1560,39 @@ void test_VectorLambda(void)
     LX_Log::log(" = END TEST = ");
 }
 
+#define i32(x) static_cast<int>(x)
+
+void test_conversion(void)
+{
+    LX_Log::log(" = TEST conversion = ");
+
+    LX_FloatPosition fp1{0.0f, 0.0f};
+    LX_FloatPosition fp2{64.0f, 128.0f};
+    LX_Point exp1{i32(fp1.x.v), i32(fp1.y.v)};
+    LX_Point exp2{i32(fp2.x.v), i32(fp2.y.v)};
+
+    LX_Point p1 = toPixelPosition(fp1);
+    LX_Point p2 = toPixelPosition(fp2);
+
+    if(p1 == exp1)
+        LX_Log::log("SUCCESS - p1(%d, %d)", p1.x, p1.y);
+    else
+        LX_Log::log("FAILURE - p1");
+
+    if(p2 == exp2)
+        LX_Log::log("SUCCESS - p2(%d, %d)", p2.x, p2.y);
+    else
+        LX_Log::log("FAILURE - p2");
+
+    LX_Log::log(" = END TEST = ");
+}
+
 void displayPoly(LX_Polygon& poly)
 {
     ostringstream os;
     os << "{";
     const unsigned long n = poly.numberOfEdges();
-    for(unsigned int i = 0; i < n; i++)
+    for(unsigned long i = 0; i < n; ++i)
     {
         os << "(" << (poly.getPoint(i)).x << ","
            << (poly.getPoint(i)).y << ")";
