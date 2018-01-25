@@ -21,8 +21,8 @@
 */
 
 #include <LunatiX/LX_AABB.hpp>
-#include <LunatiX/LX_Vector2D.hpp>  /// @todo remove it
-//#include <LunatiX/utils/float.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
+#include <LunatiX/utils/float.hpp>
 
 namespace LX_Physics
 {
@@ -47,7 +47,6 @@ struct LX_FloatPosition
     Float y;
 };
 
-/// @todo those two functions
 LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
 /**
