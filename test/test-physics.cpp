@@ -148,13 +148,13 @@ void test_collisionPointCircle(void)
     LX_FloatPosition D{100,125};
 
     LX_Log::log(" = TEST POINT/CIRCLE = ");
-    LX_Log::log("A(%d,%d)",A.x,A.y);
-    LX_Log::log("B(%d,%d)",B.x,B.y);
-    LX_Log::log("C(%d,%d)",C.x,C.y);
-    LX_Log::log("D(%d,%d)",D.x,D.y);
+    LX_Log::log("A(%d,%d)",A.x.v, A.y.v);
+    LX_Log::log("B(%d,%d)",B.x.v, B.y.v);
+    LX_Log::log("C(%d,%d)",C.x.v, C.y.v);
+    LX_Log::log("D(%d,%d)",D.x.v, D.y.v);
 
     LX_Log::log("Collision Point A/Circle");
-    bool d = collisionPointCircle(A.x,A.y,circle);
+    bool d = collisionPointCircle(A, circle);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; Got: %d",d);
@@ -162,7 +162,7 @@ void test_collisionPointCircle(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is in the circle: %d",d);
 
     LX_Log::log("Collision Point B/Circle");
-    d = collisionPointCircle(B.x,B.y,circle);
+    d = collisionPointCircle(B, circle);
 
     if(d != false)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: FALSE; Got: TRUE");
@@ -201,7 +201,7 @@ void test_collisionPointRect(void)
     LX_Log::log("AABB{(%d,%d),%d,%d}", aabb.x, aabb.y, aabb.w, aabb.h);
 
     LX_Log::log("Collision Point A/AABB");
-    bool d = collisionPointRect(A.x, A.y, aabb);
+    bool d = collisionPointRect(A, aabb);
 
     if(d != false)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: FALSE; Got: TRUE");
@@ -209,7 +209,7 @@ void test_collisionPointRect(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is out of the rectangle");
 
     LX_Log::log("Collision Point B/AABB");
-    d = collisionPointRect(B.x, B.y, aabb);
+    d = collisionPointRect(B, aabb);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; Got: FALSE");
@@ -222,9 +222,9 @@ void test_collisionPointRect(void)
 
 void test_collision2Circle(void)
 {
-    LX_Circle A(LX_FloatPosition{10.f, 10.0f},5);
-    LX_Circle B(LX_FloatPosition{13.0f, 12.0f},3);
-    LX_Circle C(LX_FloatPosition{100.0f, 100.0f},50);
+    LX_Circle A(LX_FloatPosition{10.f, 10.0f}, 5);
+    LX_Circle B(LX_FloatPosition{13.0f, 12.0f}, 3);
+    LX_Circle C(LX_FloatPosition{100.0f, 100.0f}, 50);
 
     LX_Log::log(" = TEST CIRCLE/CIRCLE = ");
     LX_Log::log("A{(%d,%d),%d}", A.center.x.v, A.center.y.v, A.radius);
@@ -1071,7 +1071,7 @@ void test_move(void)
         LX_Log::log("FAILURE - expected : Rectangle R(3,6,10,10); got: R{(%d,%d),%d,%d}",
                     R.x, R.y, R.w, R.h);
 
-    movePoly(poly, LX_Vector2D{fbox(X), fbox(Y)});
+    movePoly(poly, LX_Vector2D{X, Y});
     const unsigned long n = poly.numberOfEdges();
     const unsigned long m = expoly.numberOfEdges();
 
@@ -1111,7 +1111,7 @@ void test_move(void)
     }
 
     // reset
-    movePoly(poly, LX_Vector2D{fbox(-X), fbox(-Y)});
+    movePoly(poly, LX_Vector2D{-X, -Y});
     LX_AABB box = expoly.getEnclosingBox();
     const LX_FloatPosition q{box.x + box.w / 2.0f, box.y + box.h / 2.0f};
 
