@@ -85,8 +85,6 @@ struct LX_Circle
 {
     LX_FloatPosition center;    /**< The point that represents the center   */
     unsigned int radius;        /**< The circle radius                      */
-    /// @todo remove square_radius
-    unsigned int square_radius; /**< The square radius                      */
 };
 
 

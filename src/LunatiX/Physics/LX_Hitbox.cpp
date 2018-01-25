@@ -48,39 +48,37 @@ bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 
 bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
 {
-    return a.center == b.center && a.radius == b.radius
-           && a.square_radius == b.square_radius;
+    return a.center == b.center && a.radius == b.radius;
 }
 
 
 bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept
 {
-    return a.center != b.center || a.radius != b.radius
-           || a.square_radius != b.square_radius;
+    return a.center != b.center || a.radius != b.radius;
 }
 
 
 bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept
 {
-    return a.radius > b.radius && a.square_radius > b.square_radius;
+    return a.radius > b.radius;
 }
 
 
 bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept
 {
-    return a.radius < b.radius && a.square_radius < b.square_radius;
+    return a.radius < b.radius;
 }
 
 
 bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept
 {
-    return a.radius >= b.radius && a.square_radius >= b.square_radius;
+    return a.radius >= b.radius;
 }
 
 
 bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept
 {
-    return a.radius <= b.radius && a.square_radius <= b.square_radius;
+    return a.radius <= b.radius;
 }
 
 }
