@@ -48,7 +48,7 @@ struct LX_FloatPosition
 };
 
 /// @todo those two functions
-LX_Point toPixelUnit(const LX_FloatPosition& p) noexcept;
+LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
 /**
 *   @struct LX_Line

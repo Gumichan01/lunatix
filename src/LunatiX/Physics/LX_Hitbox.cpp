@@ -23,7 +23,7 @@
 namespace LX_Physics
 {
 
-LX_Point toPixelUnit(const LX_FloatPosition& p) noexcept
+LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept
 {
     return LX_Point{static_cast<int>(p.x.v), static_cast<int>(p.y.v)};
 }
