@@ -29,19 +29,19 @@ using namespace std;
 namespace
 {
 
-inline float sumx_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
+inline Float sumx_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
 {
-    return static_cast<float>(p.x + q.x);
+    return p.x + q.x;
 }
 
-inline float sumy_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
+inline Float sumy_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
 {
-    return static_cast<float>(p.y + q.y);
+    return p.y + q.y;
 }
 
-inline float cross_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
+inline Float cross_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
 {
-    return static_cast<float>(p.x * q.y - p.y * q.x);
+    return p.x * q.y - p.y * q.x;
 }
 
 }
@@ -74,9 +74,9 @@ class LX_Polygon_
     LX_FloatPositions_ _points;     /* A sequence of LX_FloatPosition objects   */
     bool _convex;           /* If the polygon is convex         */
 
-    float area_() const noexcept
+    Float area_() const noexcept
     {
-        float sum = 0.0f;
+        Float sum{0.0f};
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
 
@@ -87,7 +87,7 @@ class LX_Polygon_
             else
                 sum += cross_(*it, *(it + 1));
         }
-        return (sum / 2.0f);
+        return sum / fbox(2.0f);
     }
 
     bool calculateCentroid_(LX_FloatPosition& p) const noexcept
@@ -95,8 +95,8 @@ class LX_Polygon_
         const Float CMULT{6.0f};
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
+        const Float p6_area = CMULT * area_();
         Float sum_x{0.0f}, sum_y{0.0f};
-        const float p6_area = CMULT * area_();
 
         if(p6_area <= 0.0f) // self-intersecting polygon
             return false;

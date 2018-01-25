@@ -76,8 +76,8 @@ LX_Vector2D operator -(const LX_Vector2D& v) noexcept
 
 LX_Vector2D& operator ++(LX_Vector2D& v) noexcept
 {
-    v.vx += 1.0f;
-    v.vy += 1.0f;
+    v.vx += fbox(1.0f);
+    v.vy += fbox(1.0f);
     return v;
 }
 
@@ -92,8 +92,8 @@ LX_Vector2D operator ++(LX_Vector2D& v, int) noexcept
 
 LX_Vector2D& operator --(LX_Vector2D& v) noexcept
 {
-    v.vx -= 1.0f;
-    v.vy -= 1.0f;
+    v.vx -= fbox(1.0f);
+    v.vy -= fbox(1.0f);
     return v;
 }
 
@@ -113,8 +113,8 @@ LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept
 
 LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept
 {
-    v.vx *= lambda;
-    v.vy *= lambda;
+    v.vx *= fbox(lambda);
+    v.vy *= fbox(lambda);
     return v;
 }
 
@@ -125,8 +125,8 @@ LX_Vector2D operator /(LX_Vector2D v, float lambda) noexcept
 
 LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept
 {
-    v.vx /= lambda;
-    v.vy /= lambda;
+    v.vx /= fbox(lambda);
+    v.vy /= fbox(lambda);
     return v;
 }
 
