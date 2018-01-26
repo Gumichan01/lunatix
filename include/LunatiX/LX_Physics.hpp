@@ -20,7 +20,7 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_AABB.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
 
 
 /**
@@ -75,7 +75,7 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 /* Collision detection */
 
 /**
-*   @fn bool collisionPointRect(const LX_FloatPosition& p,const LX_AABB& rect) noexcept
+*   @fn bool collisionPointRect(const LX_FloatPosition& p,const LX_FloatingBox& rect) noexcept
 *
 *   Check the collision between a point and an AABB
 *
@@ -84,7 +84,7 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionPointRect(const LX_FloatPosition& p, const LX_AABB& rect) noexcept;
+bool collisionPointRect(const LX_FloatPosition& p, const LX_FloatingBox& rect) noexcept;
 /**
 *   @fn bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept
 *
@@ -98,7 +98,7 @@ bool collisionPointRect(const LX_FloatPosition& p, const LX_AABB& rect) noexcept
 */
 bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept;
 /**
-*   @fn bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept
+*   @fn bool collisionRect(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noexcept
 *
 *   Check the collision between two Axis Aligned Bounding Box (AABB)
 *
@@ -108,7 +108,7 @@ bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) no
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept;
+bool collisionRect(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noexcept;
 
 /**
 *   @fn bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept
@@ -149,7 +149,7 @@ bool collisionSegCircle(const LX_Circle& circle, const LX_FloatPosition& A, cons
 */
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 /**
-*   @fn bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
+*   @fn bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) noexcept
 *
 *   Check the collision between a circle and a AABB
 *
@@ -159,7 +159,7 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept;
+bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) noexcept;
 
 /**
 *   @fn bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
@@ -228,7 +228,7 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly);
 */
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 /**
-*   @fn bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
+*   @fn bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
 *
 *   Test the intersection between an AABB and a polygon
 *
@@ -237,7 +237,7 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
+bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly);
 /**
 *   @fn bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 *
@@ -263,14 +263,14 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 */
 void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept;
 /**
-*   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
+*   @fn void moveRect(LX_FloatingBox& rect, const LX_Vector2D& v) noexcept
 *
 *   Move an AABB to a direction using the vector
 *
 *   @param [in] rect The AABB to move
 *   @param [in] v The vector that indicates the direction
 */
-void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept;
+void moveRect(LX_FloatingBox& rect, const LX_Vector2D& v) noexcept;
 /**
 *   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 *
@@ -300,14 +300,14 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 */
 void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept;
 /**
-*   @fn void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept
+*   @fn void moveRectTo(LX_FloatingBox& rect, const LX_FloatPosition& P) noexcept
 *
 *   Move an AABB to an absolute position
 *
 *   @param [in] rect The AABB to move
 *   @param [in] P The new position
 */
-void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept;
+void moveRectTo(LX_FloatingBox& rect, const LX_FloatPosition& P) noexcept;
 /**
 *   @fn void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 *
