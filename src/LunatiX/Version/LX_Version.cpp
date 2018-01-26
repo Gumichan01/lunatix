@@ -35,9 +35,9 @@ namespace LX_VersionInfo
 // Constants
 
 const short LX_MAJOR_VERSION = 0;
-const short LX_MINOR_VERSION = 12;
+const short LX_MINOR_VERSION = 13;
 const short LX_PATCH_VERSION = 0;
-const char * LX_STATUS       = "stable";
+const char * LX_STATUS       = "unstable";
 const char * LX_COPYRIGHT    = "Copyright © 2018";
 const char * LX_AUTHOR       = "Luxon Jean-Pierre";
 
