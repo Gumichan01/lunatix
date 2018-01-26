@@ -20,8 +20,6 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_AABB.hpp>
-
 #include <memory>
 
 
@@ -38,6 +36,7 @@ class LX_Sprite;
 namespace LX_Physics
 {
 struct LX_Vector2D;
+struct LX_FloatingBox;
 }
 
 namespace LX_ParticleEngine
@@ -60,20 +59,21 @@ class LX_Particle
 public:
 
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b) noexcept
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     */
-    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept;
+    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b) noexcept;
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b,
     *                  const LX_Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     *   @param [in] v The vector that store the velocity
     */
-    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const LX_Physics::LX_Vector2D& v) noexcept;
+    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b,
+                const LX_Physics::LX_Vector2D& v) noexcept;
 
     /**
     *   @fn void update() noexcept

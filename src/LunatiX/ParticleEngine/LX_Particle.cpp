@@ -19,6 +19,7 @@
 #include <LunatiX/LX_Particle.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Random.hpp>
 #include <LunatiX/LX_Texture.hpp>
 
@@ -36,14 +37,14 @@ const LX_Vector2D V0{0.0f, 0.0f};
 
 class LX_Particle_
 {
-    LX_AABB _box;                       /* The box of the particle                 */
+    LX_FloatingBox _box;                       /* The box of the particle                 */
     unsigned int _lifetime;             /* The delay to stay displayable           */
     LX_Physics::LX_Vector2D _velocity;  /* The velocity of the particle            */
     LX_Graphics::LX_Sprite& _texture;   /* The texture (for the texture rendering) */
 
 public:
 
-    LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+    LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
                  const LX_Physics::LX_Vector2D& v) noexcept
         : _box(b), _lifetime(xorshiftRand()%DELAY), _velocity(v), _texture(sp) {}
 
@@ -58,7 +59,8 @@ public:
 
     void draw() noexcept
     {
-        _texture.draw(&_box);
+        /// @todo convert LX_FloatingBox into ImgRect
+        //_texture.draw(&_box);
     }
 
     bool isDead() const noexcept
@@ -76,11 +78,11 @@ public:
 
 /* LX_Particle — public interface */
 
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
+LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b) noexcept
     : _pimpl(new LX_Particle_(sp, b, V0)) {}
 
 
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
                          const LX_Physics::LX_Vector2D& v) noexcept
     : _pimpl(new LX_Particle_(sp, b, v)) {}
 
