@@ -73,7 +73,7 @@ public:
         LX_AABB hitbox;
 
         sys->updateParticles();
-        moveRect(box,10,0);
+        moveRect(box,LX_Vector2D{10.0f, 0.0f});
 
         for(int i = 0; i < N; i++)
         {

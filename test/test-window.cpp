@@ -726,11 +726,11 @@ void test_drawing(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST draw = ");
     LX_Log::log("Draw a segment with M(32,32) and N(64,448)");
-    LX_Physics::LX_Point M(32,32);
-    LX_Physics::LX_Point N(64,448);
-    LX_Physics::LX_Point O(512,256);
-    LX_Physics::LX_Vector2D u(256.0f,128.0f);
-    LX_Physics::LX_Vector2D v(2048.0f,0.0f);
+    LX_Physics::LX_Point M{32,32};
+    LX_Physics::LX_Point N{64,448};
+    LX_Physics::LX_Point O{512,256};
+    LX_Physics::LX_Vector2D u{256.0f,128.0f};
+    LX_Physics::LX_Vector2D v{2048.0f,0.0f};
     LX_AABB b = {128,128,512,100};
     LX_Colour c = {255,0,0,255};
 
@@ -749,10 +749,12 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
     LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");
     win->clearWindow();
-    for(float j = 0.0f; j < 256; j++)
+    const Float fend{256.0f};
+
+    for(Float j{0.0f}; j < fend; ++j)
     {
         win->drawLine(O,v);
-        v.vy += j + 64;
+        v.vy += j + Float{64.0f};
         win->update();
         LX_Timer::delay(16);
     }
@@ -796,10 +798,12 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Timer::delay(1000);
     win->clearWindow();
 
+    LX_Physics::LX_Circle C{LX_Physics::LX_FloatPosition{512.0f,300.0f},0};
+
     LX_Log::log("Draw circles");
     for(unsigned int i = 0; i < 300; i++)
     {
-        LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),i);
+        C.radius = i;
         win->clearWindow();
         win->drawCircle(C);
         win->update();
@@ -809,7 +813,7 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Log::log("Draw filled circles");
     for(unsigned int j = 0; j < 300; j++)
     {
-        LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),j);
+        C.radius = j;
         win->clearWindow();
         win->fillCircle(C);
         win->update();
