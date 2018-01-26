@@ -67,16 +67,6 @@ public:
     LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept;
     /**
     *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-    *                  const float vx, const float vy) noexcept
-    *
-    *   @param [in] sp The sprite of the particle
-    *   @param [in] b The AABB that contains the coordinates, the width and the height
-    *   @param [in] vx The X velocity
-    *   @param [in] vy The Y velocity
-    */
-    LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b, const float vx, const float vy) noexcept;
-    /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
     *                  const LX_Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] sp The sprite of the particle

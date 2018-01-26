@@ -81,11 +81,6 @@ LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-                         const float vx, const float vy) noexcept
-    : _pimpl(new LX_Particle_(sp, b, LX_Vector2D{vx, vy})) {}
-
-
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
                          const LX_Physics::LX_Vector2D& v) noexcept
     : _pimpl(new LX_Particle_(sp, b, v)) {}
 
