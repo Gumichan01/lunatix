@@ -20,7 +20,6 @@
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
-#include <LunatiX/LX_Hitbox.hpp>
 #include <vector>
 
 using namespace std;
@@ -187,43 +186,35 @@ public:
         return _points.at(index);
     }
 
-    LX_AABB getEnclosingBox() const
+    LX_FloatingBox getEnclosingBox() const
     {
         if(_points.size() < 3)
             throw LX_PolygonException("LX_Polygon: Cannot get the enclosing bounding box");
 
-        int xm = 0, ym = 0;
-        LX_AABB aabb{0,0,0,0};
-
-        {
-            const LX_FloatPosition& p0 = _points.at(0);
-            aabb.x = p0.x;
-            aabb.y = p0.y;
-            xm = p0.x;
-            ym = p0.y;
-        }
+        LX_FloatPosition p0 = _points.at(0);
+        LX_FloatingBox box{p0, 0, 0}; ;
 
         for(const LX_FloatPosition& p: _points)
         {
             // X
-            if(p.x < aabb.x)
-                aabb.x = p.x;
+            if(p.x < box.fpoint.x)
+                box.fpoint.x = p.x;
 
-            if(p.x > xm)
-                xm = p.x;
+            if(p.x > p0.x)
+                p0.x = p.x;
 
             // Y
-            if(p.y < aabb.y)
-                aabb.y = p.y;
+            if(p.y < box.fpoint.y)
+                box.fpoint.y = p.y;
 
-            if(p.y > ym)
-                ym = p.y;
+            if(p.y > p0.y)
+                p0.y = p.y;
         }
 
-        aabb.w = xm - aabb.x;
-        aabb.h = ym - aabb.y;
+        box.w = static_cast<int>(p0.x - box.fpoint.x) + 1;
+        box.h = static_cast<int>(p0.y - box.fpoint.y) + 1;
 
-        return aabb;
+        return box;
     }
 
 
@@ -248,8 +239,10 @@ public:
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
-            const LX_AABB& box = getEnclosingBox();
-            const LX_FloatPosition q{box.x + box.w / 2.0f, box.y + box.h / 2.0f};
+            const LX_FloatingBox& box = getEnclosingBox();
+            const float fw = static_cast<float>(box.w);
+            const float fh = static_cast<float>(box.h);
+            const LX_FloatPosition q{box.fpoint.x + fw / 2.0f, box.fpoint.y + fh / 2.0f};
             _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
@@ -298,7 +291,7 @@ LX_FloatPosition LX_Polygon::getPoint(const unsigned long index) const
     return _polyimpl->getPoint(index);
 }
 
-LX_AABB LX_Polygon::getEnclosingBox() const
+LX_FloatingBox LX_Polygon::getEnclosingBox() const
 {
     return _polyimpl->getEnclosingBox();
 }
