@@ -25,8 +25,6 @@
 namespace LX_Physics
 {
 
-struct LX_Point;
-
 /**
 *   @struct LX_Vector2D
 *   @brief The vector2D structure
@@ -35,20 +33,12 @@ struct LX_Point;
 */
 struct LX_Vector2D
 {
-    Float vx;   /**< The x velocity */
-    Float vy;   /**< The y velocity */
-
-    LX_Vector2D() noexcept;
-    LX_Vector2D(float x, float y) noexcept;
-    LX_Vector2D(const LX_Point& ori, const LX_Point& im) noexcept;
-    LX_Vector2D(const LX_Vector2D& v) noexcept;
-    LX_Vector2D& operator =(const LX_Vector2D& v) noexcept;
+    Float vx;   /**< X velocity */
+    Float vy;   /**< Y velocity */
 };
 
 /**
 *   @fn bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
-*
-*   Check if two vectors are equal
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -59,8 +49,6 @@ struct LX_Vector2D
 bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
 *   @fn bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
-*
-*   Check if two vectors are not equal
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -115,7 +103,7 @@ LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D& v) noexcept
 *
-*   Get the opposite of the vector
+*   The opposite of the vector
 *
 *   @param [in] v The vector
 *
@@ -165,7 +153,7 @@ LX_Vector2D operator --(LX_Vector2D& v, int) noexcept;
 /**
 *   @fn LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept
 *
-*   Scalar multiplication (syntactic sugar of multiply)
+*   Scalar multiplication
 *
 *   @param [in] v The vector
 *   @param [in] lambda The scalar value
@@ -176,7 +164,7 @@ LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept;
 /**
 *   @fn LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept
 *
-*   Scalar multiplication (syntactic sugar of multiply) -> 'u *= λ' <=> 'u = u * λ'
+*   Scalar multiplication -> 'u *= λ' <=> 'u = u * λ'
 *
 *   @param [in, out] v The vector
 *   @param [in] lambda The scalar value
@@ -208,7 +196,7 @@ LX_Vector2D operator /(LX_Vector2D v, float lambda) noexcept;
 LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept;
 
 /**
-*   @fn float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+*   @fn Float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 *
 *   Calculate the scalar product of 2 vectors
 *
@@ -217,9 +205,9 @@ LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept;
 *
 *   @return The scalar product
 */
-float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+Float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
-*   @fn float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
 *   Calculate the vector product of 2 vectors
 *
@@ -228,22 +216,18 @@ float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The vector product
 */
-float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 /**
-*   @fn float vector_norm(const LX_Vector2D& v) noexcept
-*
-*   Calculate the norm of a vector
+*   @fn Float vector_norm(const LX_Vector2D& v) noexcept
 *
 *   @param [in] v The vector
 *
 *   @return The norm of the vector
 */
-float vector_norm(const LX_Vector2D& v) noexcept;
+Float vector_norm(const LX_Vector2D& v) noexcept;
 
 /**
 *   @fn bool isNullVector(const LX_Vector2D& v) noexcept
-*
-*   Check if the vector is a zero vector
 *
 *   @param [in] v The vector
 *
@@ -253,30 +237,14 @@ bool isNullVector(const LX_Vector2D& v) noexcept;
 /**
 *   @fn bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
-*   Check if two vectors are colinear
-*
 *   @param [in] u The first vector
 *   @param [in] v The second vector
 *
 *   @return True if they are colinear, False otherwise
 */
 bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
-
-/**
-*   @fn LX_Vector2D& multiply(LX_Vector2D& v, float lambda) noexcept
-*
-*   Scalar multiplication
-*
-*   @param [in,out] v The vector
-*   @param [in] lambda The scalar value
-*
-*   @return The new vector after the multiplication
-*/
-LX_Vector2D& multiply(LX_Vector2D& v, float lambda) noexcept;
 /**
 *   @fn LX_Vector2D& normalize(LX_Vector2D& v) noexcept
-*
-*   Vector normalization
 *
 *   @param [in, out] v The vector
 *

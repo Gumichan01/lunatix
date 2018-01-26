@@ -23,12 +23,14 @@
 #include <LunatiX/LX_Texture.hpp>
 
 using namespace LX_Random;
+using namespace LX_Physics;
 
 
 namespace LX_ParticleEngine
 {
 
 const int DELAY = 16;
+const LX_Vector2D V0{0.0f, 0.0f};
 
 /* LX_Particle — private implementation */
 
@@ -75,12 +77,12 @@ public:
 /* LX_Particle — public interface */
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
-    : _pimpl(new LX_Particle_(sp, b, LX_Physics::LX_Vector2D(0.0f, 0.0f))) {}
+    : _pimpl(new LX_Particle_(sp, b, V0)) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
                          const float vx, const float vy) noexcept
-    : _pimpl(new LX_Particle_(sp, b, LX_Physics::LX_Vector2D(vx, vy))) {}
+    : _pimpl(new LX_Particle_(sp, b, LX_Vector2D{vx, vy})) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,

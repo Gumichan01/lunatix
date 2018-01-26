@@ -20,8 +20,8 @@
 */
 
 #include <LunatiX/LX_Physics.hpp>
-#include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Polygon.hpp>
+#include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Random.hpp>
 #include <stdexcept>
@@ -74,7 +74,7 @@ bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
 bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
                         const LX_Physics::LX_Polygon& poly2)
 {
-    LX_Physics::LX_Point A, B, C, D;
+    LX_Physics::LX_FloatPosition A, B, C, D;
     const unsigned long S1 = poly1.numberOfEdges();
     const unsigned long S2 = poly2.numberOfEdges();
 
@@ -101,8 +101,8 @@ bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
         }
     }
 
-    LX_Physics::LX_Point origin1 = poly1.getPoint(0);
-    LX_Physics::LX_Point origin2 = poly2.getPoint(0);
+    LX_Physics::LX_FloatPosition origin1 = poly1.getPoint(0);
+    LX_Physics::LX_FloatPosition origin2 = poly2.getPoint(0);
 
     return (collisionPointPoly(origin1, poly2)
             || collisionPointPoly(origin2, poly1));
@@ -116,55 +116,29 @@ namespace LX_Physics
 
 const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
 
-unsigned int euclide_square_distance(const int x1, const int y1,
-                                     const int x2, const int y2) noexcept
+
+Float euclide_square_distance(const LX_FloatPosition& p1,
+                              const LX_FloatPosition& p2) noexcept
 {
-    return static_cast<unsigned int>( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+    return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y);
+}
+
+Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
+{
+    return fbox(sqrtf(euclide_square_distance(p1, p2)));
 }
 
 
-float euclide_distance(const int x1, const int y1,
-                       const int x2, const int y2) noexcept
+bool collisionPointRect(const LX_FloatPosition& p, const LX_AABB& rect) noexcept
 {
-    return static_cast<float>(sqrt(euclide_square_distance(x1, y1, x2, y2)));
+    return !(p.x <= rect.x || p.y >= (rect.y + rect.h) || p.y <= rect.y
+             || p.x >= (rect.x + rect.w));
 }
 
 
-unsigned int euclide_square_distance(const LX_Point& p1,
-                                     const LX_Point& p2) noexcept
+bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept
 {
-    return euclide_square_distance(p1.x, p1.y, p2.x, p2.y);
-}
-
-
-float euclide_distance(const LX_Point& p1, const LX_Point& p2) noexcept
-{
-    return static_cast<float>(sqrt(euclide_square_distance(p1, p2)));
-}
-
-
-bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noexcept
-{
-    return !(xpos <= rect.x || ypos >= (rect.y + rect.h) || ypos <= rect.y
-             || xpos >= (rect.x + rect.w));
-}
-
-
-bool collisionPointRect(const LX_Point& p,const LX_AABB& rect) noexcept
-{
-    return collisionPointRect(p.x, p.y, rect);
-}
-
-
-bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle) noexcept
-{
-    return collisionPointCircle(LX_Point(xpos, ypos), circle);
-}
-
-
-bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle) noexcept
-{
-    return(euclide_square_distance(p, circle.center) <= (circle.square_radius));
+    return(euclide_square_distance(p, circle.center) <= (circle.radius * circle.radius));
 }
 
 
@@ -185,51 +159,40 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcep
 
 
 bool collisionSegCircle(const LX_Circle& circle,
-                        const LX_Point& A, const LX_Point& B) noexcept
+                        const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept
 {
-    int sum;
-    double t;
-    double x, y;
-    float scal, scal1, scal2;
-
-    LX_Vector2D AB, AO, BO;
-    LX_Point O = circle.center;
-
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
         return true;
 
-    AB = LX_Vector2D(B.x - A.x, B.y - A.y);
-    AO = LX_Vector2D(O.x - A.x, O.y - A.y);
-    BO = LX_Vector2D(O.x - B.x, O.y - B.y);
+    LX_FloatPosition O = circle.center;
+    LX_Vector2D AB = LX_Vector2D{B.x - A.x, B.y - A.y};
+    LX_Vector2D AO = LX_Vector2D{O.x - A.x, O.y - A.y};
+    LX_Vector2D BO = LX_Vector2D{O.x - B.x, O.y - B.y};
 
     // Using the opposite value of vx for scal2
-    scal1 = scalar_product(AB, AO);
-    scal2 = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
+    Float scal_ab_ao = scalar_product(AB, AO);
+    Float scal_mab_bo = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
-    if(scal1 < 0 || scal2 < 0)
+    if(scal_ab_ao < 0 || scal_mab_bo < 0)
         return false;
 
     // Find the projection point of O
-    scal = scalar_product(AB, AB);
-    sum = static_cast<int>(scal);
+    Float scalp = scalar_product(AB, AB);
 
-    if(sum == 0)        // A and B are the same point
+    if(scalp == 0.0f)        // A and B are the same point
         return false;
 
-    t = scal1/scal;
-    x = A.x + (t*AB.vx);
-    y = A.y + (t*AB.vy);
+    Float t = scal_ab_ao / scalp;
+    Float x = A.x + (t * AB.vx);
+    Float y = A.y + (t * AB.vy);
 
-    // M is the projection point of O
-    LX_Point M = LX_Point(static_cast<int>(x), static_cast<int>(y));
-
-    return collisionPointCircle(M, circle);
+    // Ok I can calculate the collision by using ↓ the projection point
+    return collisionPointCircle(LX_FloatPosition{x, y}, circle);
 }
 
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
 {
-    const LX_Point Q(L.o.x + static_cast<int>(L.v.vx),
-                     L.o.y + static_cast<int>(L.v.vy));
+    const LX_FloatPosition Q{L.o.x + L.v.vx, L.o.y + L.v.vy};
     return collisionSegCircle(circle, L.o, Q);
 }
 
@@ -242,10 +205,10 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
         return true;
 
     LX_Line sides[RECT_SIDES];
-    sides[0] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
-    sides[1] = LX_Line(LX_Point(rect.x, rect.y + rect.h), LX_Vector2D(PFL(rect.w), 0.0f));
-    sides[2] = LX_Line(LX_Point(rect.x + rect.w, rect.y), LX_Vector2D(0.0f, PFL(rect.h)));
-    sides[3] = LX_Line(LX_Point(rect.x, rect.y), LX_Vector2D(PFL(rect.w), 0.0f));
+    sides[0] = LX_Line{LX_FloatPosition{rect.x, rect.y}, LX_Vector2D{0.0f, PFL(rect.h)}};
+    sides[1] = LX_Line{LX_FloatPosition{rect.x, rect.y + rect.h}, LX_Vector2D{PFL(rect.w), 0.0f}};
+    sides[2] = LX_Line{LX_FloatPosition{rect.x + rect.w, rect.y}, LX_Vector2D{0.0f, PFL(rect.h)}};
+    sides[3] = LX_Line{LX_FloatPosition{rect.x, rect.y}, LX_Vector2D{PFL(rect.w), 0.0f}};
 
     for(int i = 0; i < RECT_SIDES; i++)
     {
@@ -257,23 +220,23 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
 }
 
 
-bool intersectSegLine(const LX_Point& A, const LX_Point& B,
-                      const LX_Point& C, const LX_Point& D) noexcept
+bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
+                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 {
     LX_Vector2D AC, AD, AB;
     float d;
 
-    AB = LX_Vector2D(B.x - A.x, B.y - A.y);
-    AC = LX_Vector2D(C.x - A.x, C.y - A.y);
-    AD = LX_Vector2D(D.x - A.x, D.y - A.y);
+    AB = LX_Vector2D{B.x - A.x, B.y - A.y};
+    AC = LX_Vector2D{C.x - A.x, C.y - A.y};
+    AD = LX_Vector2D{D.x - A.x, D.y - A.y};
     d = vector_product(AB, AD) * vector_product(AB, AC);
 
     return (d <= 0.0f);
 }
 
 
-bool intersectSegment(const LX_Point& A, const LX_Point& B,
-                      const LX_Point& C, const LX_Point& D) noexcept
+bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
+                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 {
     return (intersectSegLine(A, B, C, D) && intersectSegLine(C, D, A, B));
 }
@@ -285,45 +248,45 @@ bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept
 }
 
 
-bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
+bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
-    int count = 0;
-    LX_Point I;
+    int nb_intersections = 0;
 
     const int v = 10000;
     const unsigned long n = poly.numberOfEdges();
 
-    I.x = v + LX_Random::crand100();
-    I.y = v + LX_Random::crand100();
+    const float rix = static_cast<float>(LX_Random::crand100());
+    const float riy = static_cast<float>(LX_Random::crand100());
+    LX_FloatPosition I{v + rix, v + riy};
 
     for(unsigned int i = 0; i < n; i++)
     {
         if(i == n-1)
         {
-            LX_Point p1 = poly.getPoint(0);
-            LX_Point p2 = poly.getPoint(i);
+            LX_FloatPosition p1 = poly.getPoint(0);
+            LX_FloatPosition p2 = poly.getPoint(i);
 
             if(intersectSegment(P, I, p1, p2))
-                count++;
+                nb_intersections++;
         }
         else
         {
-            LX_Point p3 = poly.getPoint(i+1);
-            LX_Point p4 = poly.getPoint(i);
+            LX_FloatPosition p3 = poly.getPoint(i+1);
+            LX_FloatPosition p4 = poly.getPoint(i);
 
             if(intersectSegment(P, I, p3, p4))
-                count++;
+                nb_intersections++;
         }
     }
 
-    return (count%2 == 1);
+    return (nb_intersections % 2 == 1);
 }
 
 
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 {
-    LX_Point A, B;
-    const LX_Point P = C.center;
+    LX_FloatPosition A, B;
+    const LX_FloatPosition P = C.center;
     const unsigned long n = poly.numberOfEdges();
 
     if(collisionPointPoly(P, poly) == true)
@@ -348,13 +311,12 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 
 bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
 {
-    LX_Point E, F;
+    LX_FloatPosition A = LX_FloatPosition{rect.x, rect.y};
+    LX_FloatPosition B = LX_FloatPosition{rect.x + rect.w, rect.y};
+    LX_FloatPosition C = LX_FloatPosition{rect.x + rect.w, rect.y + rect.h};
+    LX_FloatPosition D = LX_FloatPosition{rect.x, rect.y + rect.h};
 
-    LX_Point A = LX_Point(rect.x, rect.y);
-    LX_Point B = LX_Point(rect.x + rect.w, rect.y);
-    LX_Point C = LX_Point(rect.x + rect.w, rect.y + rect.h);
-    LX_Point D = LX_Point(rect.x, rect.y + rect.h);
-
+    LX_FloatPosition E, F;
     const unsigned long n = poly.numberOfEdges();
 
     for(unsigned int j = 0; j < n; j++)
@@ -401,44 +363,21 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 }
 
 
-void movePoint(LX_Point& P, const int vx, const int vy) noexcept
+void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
 {
-    P.x += vx;
-    P.y += vy;
-}
-
-void movePoint(LX_Point& P, const LX_Vector2D& v) noexcept
-{
-    movePoint(P, static_cast<int>(v.vx), static_cast<int>(v.vy));
-}
-
-
-void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept
-{
-    rect.x += vx;
-    rect.y += vy;
+    P.x += v.vx;
+    P.y += v.vy;
 }
 
 void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
 {
-    moveRect(rect, static_cast<int>(v.vx), static_cast<int>(v.vy));
-}
-
-
-void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept
-{
-    movePoint(C.center, vx, vy);
+    rect.x += static_cast<int>(v.vx);
+    rect.y += static_cast<int>(v.vy);
 }
 
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 {
-    moveCircle(C, static_cast<int>(v.vx), static_cast<int>(v.vy));
-}
-
-
-void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept
-{
-    poly.move(vx, vy);
+    movePoint(C.center, v);
 }
 
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
@@ -446,43 +385,26 @@ void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
     poly.move(v);
 }
 
-
-void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept
+void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept
 {
-    P.x = xpos;
-    P.y = ypos;
+    P.x = dest.x;
+    P.y = dest.y;
 }
 
-
-void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
+void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept
 {
-    rect.x = xpos;
-    rect.y = ypos;
+    rect.x = static_cast<int>(P.x.v);
+    rect.y = static_cast<int>(P.x.v);
 }
 
-void moveRectTo(LX_AABB& rect, const LX_Point& P) noexcept
+void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 {
-    moveRectTo(rect, P.x, P.y);
+    movePointTo(C.center, P);
 }
 
-void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
+void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
 {
-    movePointTo(C.center, xpos, ypos);
-}
-
-void moveCircleTo(LX_Circle& C, const LX_Point& P) noexcept
-{
-    moveCircleTo(C, P.x, P.y);
-}
-
-void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
-{
-    poly.moveTo(xpos, ypos);
-}
-
-void movePolyTo(LX_Polygon& poly, const LX_Point& P)
-{
-    movePolyTo(poly, P.x, P.y);
+    poly.moveTo(P);
 }
 
 }

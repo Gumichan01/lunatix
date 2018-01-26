@@ -35,91 +35,47 @@
 *
 *   It handles operations on bodies (collision, movement, ...)
 */
+
+#include <LunatiX/utils/float.hpp>
+
 namespace LX_Physics
 {
 
-struct LX_Point;
+struct LX_FloatPosition;
 struct LX_Line;
 struct LX_Circle;
 struct LX_Vector2D;
 class LX_Polygon;
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn unsigned int euclide_square_distance(const int x1, const int y1,
-*                                            const int x2, const int y2) noexcept
+*   @fn Float euclide_square_distance(const LX_FloatPosition& p1,
+*                                     const LX_FloatPosition& p2) noexcept
 *
-*   This function calculates the euclidean square distance between 2 coordinates
-*
-*   @param [in] x1 The x location of the first point
-*   @param [in] y1 The y location of the first point
-*   @param [in] x2 The x location of the second point
-*   @param [in] y2 The y location of the second point
-*
-*   @return The square distance (integer value)
-*/
-unsigned int euclide_square_distance(const int x1, const int y1, const int x2, const int y2) noexcept;
-/**
-*   @fn unsigned int euclide_square_distance(const LX_Point& p1,
-*                                            const LX_Point& p2) noexcept
-*
-*   This function calculates the euclidean square distance
+*   Euclidean square distance
 *
 *   @param [in] p1 The first point
 *   @param [in] p2 The second point
 *
-*   @return The square distance (integer value)
+*   @return The square distance
 */
-unsigned int euclide_square_distance(const LX_Point& p1, const LX_Point& p2) noexcept;
-
+Float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn float euclide_distance(const int x1, const int y1,
-*                              const int x2, const int y2) noexcept
+*   @fn Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 *
-*   This function calculates the euclidean distance with accuracy
-*
-*   @param [in] x1 The x location of the first point
-*   @param [in] y1 The y location of the first point
-*   @param [in] x2 The x location of the second point
-*   @param [in] y2 The y location of the second point
-*
-*   @return The distance (floating-point value)
-*/
-float euclide_distance(const int x1, const int y1, const int x2, const int y2) noexcept;
-
-/**
-*   @fn float euclide_distance(const LX_Point& p1, const LX_Point& p2) noexcept
-*
-*   This function calculates the euclidean distance with accuracy
+*   Euclidean distance
 *
 *   @param [in] p1 The first point
 *   @param [in] p2 The second point
 *
 *   @return The distance (floating-point value)
 */
-float euclide_distance(const LX_Point& p1, const LX_Point& p2) noexcept;
+Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 
 
 /* Collision detection */
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn bool collisionPointRect(const int xpos, const int ypos,
-*                               const LX_AABB& rect) noexcept
-*
-*   Check the collision between a point and an Axis Aligned Bouding Box (AABB)
-*
-*   @param [in] xpos The x position of the point
-*   @param [in] ypos The y position of the point
-*   @param [in] rect The AABB
-*
-*   @return TRUE if there is a collision, FALSE otherwise
-*/
-bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noexcept;
-
-/**
-*   @fn bool collisionPointRect(const LX_Point& p,const LX_AABB& rect) noexcept
+*   @fn bool collisionPointRect(const LX_FloatPosition& p,const LX_AABB& rect) noexcept
 *
 *   Check the collision between a point and an AABB
 *
@@ -128,26 +84,9 @@ bool collisionPointRect(const int xpos, const int ypos, const LX_AABB& rect) noe
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionPointRect(const LX_Point& p, const LX_AABB& rect) noexcept;
-
-
+bool collisionPointRect(const LX_FloatPosition& p, const LX_AABB& rect) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn bool collisionPointCircle(const int xpos, const int ypos,
-*                                 const LX_Circle& circle) noexcept
-*
-*   Check the collision between a point and a circle
-*
-*   @param [in] xpos The x position of the point
-*   @param [in] ypos The y position of the point
-*   @param [in] circle The circle
-*
-*   @return TRUE if there is a collision, FALSE otherwise
-*/
-bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circle) noexcept;
-
-/**
-*   @fn bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle) noexcept
+*   @fn bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept
 *
 *   Check the collision between a point and a circle
 *
@@ -157,9 +96,7 @@ bool collisionPointCircle(const int xpos, const int ypos, const LX_Circle& circl
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionPointCircle(const LX_Point& p, const LX_Circle& circle) noexcept;
-
-
+bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept;
 /**
 *   @fn bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept
 *
@@ -185,10 +122,9 @@ bool collisionRect(const LX_AABB& rect1, const LX_AABB& rect2) noexcept;
 *
 */
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept;
-
 /**
 *   @fn bool collisionSegCircle(const LX_Circle& circle,
-*                               const LX_Point& A, const LX_Point& B) noexcept
+*                               const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept
 *
 *   Check the collision between a circle and the [AB] segment
 *
@@ -199,8 +135,7 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcep
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionSegCircle(const LX_Circle& circle, const LX_Point& A, const LX_Point& B) noexcept;
-
+bool collisionSegCircle(const LX_Circle& circle, const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept;
 /**
 *   @fn bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L)
 *
@@ -213,7 +148,6 @@ bool collisionSegCircle(const LX_Circle& circle, const LX_Point& A, const LX_Poi
 *
 */
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
-
 /**
 *   @fn bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
 *
@@ -227,10 +161,9 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 */
 bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept;
 
-
 /**
-*   @fn bool intersectSegLine(const LX_Point& A, const LX_Point& B,
-*                            const LX_Point& C, const LX_Point& D) noexcept
+*   @fn bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
+*                            const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 *
 *   Test the intersection between a line and a segment
 *
@@ -242,12 +175,12 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept;
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 */
-bool intersectSegLine(const LX_Point& A, const LX_Point& B,
-                      const LX_Point& C, const LX_Point& D) noexcept;
+bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
+                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept;
 
 /**
-*   @fn bool intersectSegment(const LX_Point& A, const LX_Point& B,
-*                            const LX_Point& C, const LX_Point& D) noexcept
+*   @fn bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
+*                            const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 *
 *   Test the intersection between 2 segments
 *
@@ -258,8 +191,8 @@ bool intersectSegLine(const LX_Point& A, const LX_Point& B,
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
-bool intersectSegment(const LX_Point& A, const LX_Point& B,
-                      const LX_Point& C, const LX_Point& D) noexcept;
+bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
+                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept;
 /**
 *   @fn bool intersectLine(const LX_Line& L1, const LX_Line& L2)
 *
@@ -273,7 +206,7 @@ bool intersectSegment(const LX_Point& A, const LX_Point& B,
 bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept;
 
 /**
-*   @fn bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly)
+*   @fn bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 *
 *   Test the collision between a point and a polygon
 *
@@ -282,7 +215,7 @@ bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept;
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
-bool collisionPointPoly(const LX_Point& P, const LX_Polygon& poly);
+bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly);
 /**
 *   @fn bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *
@@ -320,37 +253,16 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 */
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
+
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePoint(LX_Point& P, const int vx, const int vy) noexcept
-*
-*   Move a point to a direction
-*
-*   @param [in] P The point to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void movePoint(LX_Point& P, const int vx, const int vy) noexcept;
-/**
-*   @fn void movePoint(LX_Point& P, const LX_Vector2D& v) noexcept
+*   @fn void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
 *
 *   Move a point to a direction using the vector
 *
 *   @param [in] P The point to move
 *   @param [in] v The vector that indicates the direction
 */
-void movePoint(LX_Point& P, const LX_Vector2D& v) noexcept;
-/**
-*   @deprecated This function signature is deprecated
-*   @fn void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept
-*
-*   Move an AABB to a direction
-*
-*   @param [in] rect The AABB to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept;
+void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept;
 /**
 *   @fn void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept
 *
@@ -361,17 +273,6 @@ void moveRect(LX_AABB& rect, const int vx, const int vy) noexcept;
 */
 void moveRect(LX_AABB& rect, const LX_Vector2D& v) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept
-*
-*   Move the circle to a direction
-*
-*   @param [in] C The circle to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept;
-/**
 *   @fn void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
 *
 *   Move the circle to a direction using the vector
@@ -380,17 +281,6 @@ void moveCircle(LX_Circle& C, const int vx, const int vy) noexcept;
 *   @param [in] v The vector that indicates the direction
 */
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept;
-/**
-*   @deprecated This function signature is deprecated
-*   @fn void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept
-*
-*   Move the polygon to a direction
-*
-*   @param [in] poly The polygon to move
-*   @param [in] vx The x direction
-*   @param [in] vy The y direction
-*/
-void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept;
 /**
 *   @fn void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept
 *
@@ -402,79 +292,41 @@ void movePoly(LX_Polygon& poly, const float vx, const float vy) noexcept;
 void movePoly(LX_Polygon& poly, const LX_Vector2D& v) noexcept;
 
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept
+*   @fn void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept
 *
 *   Move a point to an absolute position
 *
 *   @param [in] P The point to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
+*   @param [in] dest The position
 */
-void movePointTo(LX_Point& P, const int xpos, const int ypos) noexcept;
-
-/// @todo void movePointTo(LX_Point& P, const LX_Point& dest) noexcept;
-
+void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept
-*
-*   Move an AABB to an absolute position
-*
-*   @param [in] rect The AABB to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void moveRectTo(LX_AABB& rect, const int xpos, const int ypos) noexcept;
-/**
-*   @fn void moveRectTo(LX_AABB& rect, const LX_Point& P) noexcept
+*   @fn void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept
 *
 *   Move an AABB to an absolute position
 *
 *   @param [in] rect The AABB to move
 *   @param [in] P The new position
 */
-void moveRectTo(LX_AABB& rect, const LX_Point& P) noexcept;
+void moveRectTo(LX_AABB& rect, const LX_FloatPosition& P) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept
-*
-*   Move a circle to an absolute position
-*
-*   @param [in] C The circle to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void moveCircleTo(LX_Circle& C, const int xpos, const int ypos) noexcept;
-/**
-*   @fn void moveCircleTo(LX_Circle& C, const LX_Point& P) noexcept
+*   @fn void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
 *
 *   Move a circle to an absolute position
 *
 *   @param [in] C The circle to move
 *   @param [in] P The new position
 */
-void moveCircleTo(LX_Circle& C, const LX_Point& P) noexcept;
+void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept;
 /**
-*   @deprecated This function signature is deprecated
-*   @fn void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos)
-*
-*   Move a polygon to an absolute position
-*
-*   @param [in] poly The polygon to move
-*   @param [in] xpos The x position
-*   @param [in] ypos The y position
-*/
-void movePolyTo(LX_Polygon& poly, const int xpos, const int ypos);
-/**
-*   @fn void movePolyTo(LX_Polygon& poly, const LX_Point& P)
+*   @fn void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
 *
 *   Move a polygon to an absolute position
 *
 *   @param [in] poly The polygon to move
 *   @param [in] P The new position
 */
-void movePolyTo(LX_Polygon& poly, const LX_Point& P);
+void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P);
 
 }
 
