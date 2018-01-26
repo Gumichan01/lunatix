@@ -53,21 +53,6 @@ struct LX_FloatPosition
 LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
 /// @todo define LX_Segment
-
-/**
-*   @typedef LX_AABB
-*   @brief The Axis-Aligned Bounding Box (AABB)
-*
-*   Structure:
-*
-*       int x, int y;   // Coordinates
-*       int w, int h;   // Dimension
-*
-*
-*   Very useful for collision detection, image positioning, ...
-*/
-//using LX_AABB = SDL_Rect;
-
 /// @todo integrate the floating box into LX_Physics
 /// @todo conversion LX_FloatingBox → LX_Graphics::ImgRect
 
@@ -81,7 +66,8 @@ LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 struct LX_FloatingBox
 {
     LX_FloatPosition fpoint;    /**< Position   */
-    LX_Vector2D v;              /**< Dimension  */
+    int w;                      /**< Width      */
+    int h;                      /**< Height     */
 };
 
 
