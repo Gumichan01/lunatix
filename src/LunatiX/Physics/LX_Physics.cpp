@@ -41,13 +41,24 @@ bool intersetInterval(const int min1, const int max1, const int min2, const int 
 bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
                       const LX_Physics::LX_Polygon& poly2) noexcept
 {
-    int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
-    int p2_xmin, p2_xmax, p2_ymin, p2_ymax;
-    const LX_FloatingBox& box1 = poly1.getEnclosingBox();
-    const LX_FloatingBox& box2 = poly2.getEnclosingBox();
+    /*int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
+    int p2_xmin, p2_xmax, p2_ymin, p2_ymax;*/
+    const LX_Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
+    const LX_Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
+
+    LX_Physics::LX_FloatPosition P1_min = box1.fpoint;
+    LX_Physics::LX_FloatPosition P2_min = box2.fpoint;
+    LX_Physics::LX_FloatPosition P1_max = box1.fpoint;
+    LX_Physics::LX_FloatPosition P2_max = box2.fpoint;
+
+
+    P1_max.x += Float{static_cast<float>(box1.w)};
+    P1_max.y += Float{static_cast<float>(box1.h)};
+    P2_max.x += Float{static_cast<float>(box2.w)};
+    P2_max.y += Float{static_cast<float>(box2.h)};
 
     // min values
-    p1_xmin = box1.x;
+    /*p1_xmin = box1.x;
     p1_ymin = box1.y;
     p2_xmin = box2.x;
     p2_ymin = box2.y;
@@ -55,18 +66,18 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     p1_xmax = box1.x + box1.w;
     p1_ymax = box1.y + box1.h;
     p2_xmax = box2.x + box2.w;
-    p2_ymax = box2.y + box2.h;
+    p2_ymax = box2.y + box2.h;*/
 
-    return intersetInterval(p1_xmin, p1_xmax, p2_xmin, p2_xmax)
-           && intersetInterval(p1_ymin, p1_ymax, p2_ymin, p2_ymax);
+    return intersetInterval(P1_min.x, P1_max.x, P2_min.x, P2_max.x)
+           && intersetInterval(P1_min.y, P1_max.y, P2_min.y, P2_max.y);
 }
 
 // Collision detection between polygons using their AABB
 bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
                                 const LX_Physics::LX_Polygon& poly2)
 {
-    const LX_FloatingBox& box1 = poly1.getEnclosingBox();
-    const LX_FloatingBox& box2 = poly2.getEnclosingBox();
+    const LX_Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
+    const LX_Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
     return LX_Physics::collisionRect(box1, box2);
 }
 
@@ -131,8 +142,8 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 
 bool collisionPointRect(const LX_FloatPosition& p, const LX_FloatingBox& rect) noexcept
 {
-    return !(p.x <= rect.x || p.y >= (rect.y + rect.h) || p.y <= rect.y
-             || p.x >= (rect.x + rect.w));
+    return !(p.x <= rect.fpoint.x || p.y >= (rect.fpoint.y + rect.h)
+             || p.y <= rect.fpoint.y || p.x >= (rect.fpoint.x + rect.w));
 }
 
 
@@ -144,8 +155,10 @@ bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) no
 
 bool collisionRect(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noexcept
 {
-    return !((rect1.x >= (rect2.x + rect2.w)) || (rect1.y >= (rect2.y + rect2.h))
-             || ((rect1.x + rect1.w) <= rect2.x) || ((rect1.y + rect1.h) <= rect2.y));
+    return !((rect1.fpoint.x >= (rect2.fpoint.x + rect2.w))
+             || (rect1.fpoint.y >= (rect2.fpoint.y + rect2.h))
+             || ((rect1.fpoint.x + rect1.w) <= rect2.fpoint.x)
+             || ((rect1.fpoint.y + rect1.h) <= rect2.fpoint.y));
 }
 
 
@@ -251,10 +264,10 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
     const int v = 10000;
     const unsigned long N = poly.numberOfEdges();
-    const float rix = static_cast<float>(LX_Random::crand100());
-    const float riy = static_cast<float>(LX_Random::crand100());
-    const LX_FloatPosition I{v + rix, v + riy};
+    const float RIX = static_cast<float>(LX_Random::crand100());
+    const float RIY = static_cast<float>(LX_Random::crand100());
 
+    LX_FloatPosition I{v + RIX, v + RIY};
     unsigned long nb_intersections = 0;
 
     for(unsigned long i = 0UL; i < N; i++)
@@ -297,10 +310,10 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
 {
     const unsigned long n = poly.numberOfEdges();
-    LX_FloatPosition A{rect.x, rect.y};
-    LX_FloatPosition B{rect.x + rect.w, rect.y};
-    LX_FloatPosition C{rect.x + rect.w, rect.y + rect.h};
-    LX_FloatPosition D{rect.x, rect.y + rect.h};
+    LX_FloatPosition A{rect.fpoint.x, rect.fpoint.y};
+    LX_FloatPosition B{rect.fpoint.x + rect.w, rect.fpoint.y};
+    LX_FloatPosition C{rect.fpoint.x + rect.w, rect.fpoint.y + rect.h};
+    LX_FloatPosition D{rect.fpoint.x, rect.fpoint.y + rect.h};
     LX_FloatPosition E, F;
 
     for(unsigned long j = 0UL; j < n; j++)

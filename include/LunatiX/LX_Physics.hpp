@@ -20,8 +20,6 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_Hitbox.hpp>
-
 
 /**
 *   @defgroup Physics Physics
@@ -42,6 +40,7 @@ namespace LX_Physics
 {
 
 struct LX_FloatPosition;
+struct LX_FloatingBox;
 struct LX_Line;
 struct LX_Circle;
 struct LX_Vector2D;
