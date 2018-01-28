@@ -41,6 +41,7 @@ namespace LX_Physics
 
 struct LX_FloatPosition;
 struct LX_FloatingBox;
+struct LX_Segment;
 struct LX_Line;
 struct LX_Circle;
 struct LX_Vector2D;
@@ -66,6 +67,14 @@ Float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition
 */
 Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 
+/**
+*   @fn Float segLength(const LX_Segment& S) noexcept
+*
+*   @param [in] S The segment
+*
+*   @return The length of the segment (the euclidean distance betwwen its two points)
+*/
+Float segLength(const LX_Segment& S) noexcept;
 
 /* Collision detection */
 
@@ -124,13 +133,12 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcep
 *   Check the collision between a circle and the [AB] segment
 *
 *   @param [in] circle The circle
-*   @param [in] A The first point of the segment
-*   @param [in] B The other point of the segment
+*   @param [in] S The segment
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionSegCircle(const LX_Circle& circle, const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept;
+bool collisionSegCircle(const LX_Circle& circle, const LX_Segment& S) noexcept;
 /**
 *   @fn bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L)
 *
@@ -157,20 +165,16 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 bool collisionCircleBox(const LX_Circle& circle, const LX_FloatingBox& box) noexcept;
 
 /**
-*   @fn bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
-*                            const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
+*   @fn bool intersectSegment(const LX_Segment& S, const LX_Segment& T) noexcept
 *
 *   Test the intersection between 2 segments
 *
-*   @param [in] A the first point of the first segment
-*   @param [in] B the second point of the first segment
-*   @param [in] C the first point of the second segment
-*   @param [in] D the second point of the second segment
+*   @param [in] S The first segment
+*   @param [in] T The second segment
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
-bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
-                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept;
+bool intersectSegment(const LX_Segment& S, const LX_Segment& T) noexcept;
 /**
 *   @fn bool intersectLine(const LX_Line& L1, const LX_Line& L2)
 *
