@@ -49,6 +49,8 @@ struct LX_FloatPosition
 
 LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
+/// @todo define LX_Segment
+
 /**
 *   @struct LX_Line
 *   @brief The line structure

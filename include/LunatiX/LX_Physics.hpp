@@ -253,7 +253,6 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly);
 */
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
-
 /**
 *   @fn void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
 *
