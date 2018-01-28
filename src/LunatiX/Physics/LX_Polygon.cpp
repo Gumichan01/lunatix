@@ -81,10 +81,7 @@ class LX_Polygon_
 
         for(auto it = pbeg; it != pend; ++it)
         {
-            if(it == pend - 1)
-                sum += cross_(*it, *pbeg);
-            else
-                sum += cross_(*it, *(it + 1));
+            sum += cross_(*it, (it == pend - 1) ? *pbeg : *(it + 1));
         }
         return sum / fbox(2.0f);
     }
@@ -102,16 +99,9 @@ class LX_Polygon_
 
         for(auto it = pbeg; it != pend; ++it)
         {
-            if(it == pend - 1)
-            {
-                sum_x += sumx_(*it, *pbeg) * cross_(*it, *pbeg);
-                sum_y += sumy_(*it, *pbeg) * cross_(*it, *pbeg);
-            }
-            else
-            {
-                sum_x += sumx_(*it, *(it + 1)) * cross_(*it, *(it + 1));
-                sum_y += sumy_(*it, *(it + 1)) * cross_(*it, *(it + 1));
-            }
+            const LX_FloatPosition& next_fpos = (it == pend - 1) ? *pbeg : *(it + 1);
+            sum_x += sumx_(*it, next_fpos) * cross_(*it, next_fpos);
+            sum_y += sumy_(*it, next_fpos) * cross_(*it, next_fpos);
         }
 
         p.x = {sum_x / p6_area};
@@ -126,7 +116,9 @@ public:
     void convexity_() noexcept
     {
         float sign = 0.0f;
-        bool haveSign = false;
+        bool have_sign = false;
+
+        const Float FNULL{0.0f};
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
 
@@ -139,13 +131,13 @@ public:
 
             LX_Vector2D AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
             LX_Vector2D OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
-            int cross_product = static_cast<int>(vector_product(AO, OB));
+            Float cross_product = vector_product(AO, OB);
 
-            if(!haveSign)
+            if(!have_sign)
             {
-                if(cross_product > 0)
+                if(cross_product > FNULL)
                     sign = 1.0f;
-                else if(cross_product < 0)
+                else if(cross_product < FNULL)
                     sign = -1.0f;
                 else
                 {
@@ -153,12 +145,12 @@ public:
                     return;
                 }
 
-                haveSign = true;
+                have_sign = true;
             }
             else
             {
-                if((sign > 0.0f && cross_product < 0)
-                        || (sign < 0.0f && cross_product > 0))
+                if((sign > 0.0f && cross_product < FNULL)
+                        || (sign < 0.0f && cross_product > FNULL))
                 {
                     _convex = false;
                     return;
