@@ -25,7 +25,7 @@ LX_Sprite *blue;
 class Dot
 {
     LX_ParticleSystem *sys;
-    LX_AABB box;
+    LX_ImgRect box;
 
     Dot(Dot& d);
 
@@ -35,7 +35,7 @@ public:
     {
         LX_Particle *p = nullptr;
         LX_Random::initRand();
-        LX_AABB hitbox;
+        LX_ImgRect hitbox;
 
         sys = new LX_ParticleSystem(N);
         box = {100,100,20,20};
@@ -70,7 +70,7 @@ public:
     void update()
     {
         LX_Particle *p = nullptr;
-        LX_AABB hitbox;
+        LX_ImgRect hitbox;
 
         sys->updateParticles();
         moveRect(box,LX_Vector2D{10.0f, 0.0f});
