@@ -41,8 +41,6 @@ bool intersetInterval(const int min1, const int max1, const int min2, const int 
 bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
                       const LX_Physics::LX_Polygon& poly2) noexcept
 {
-    /*int p1_xmin, p1_xmax, p1_ymin, p1_ymax;
-    int p2_xmin, p2_xmax, p2_ymin, p2_ymax;*/
     const LX_Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
     const LX_Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
 
@@ -56,17 +54,6 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     P1_max.y += Float{static_cast<float>(box1.h)};
     P2_max.x += Float{static_cast<float>(box2.w)};
     P2_max.y += Float{static_cast<float>(box2.h)};
-
-    // min values
-    /*p1_xmin = box1.x;
-    p1_ymin = box1.y;
-    p2_xmin = box2.x;
-    p2_ymin = box2.y;
-    // max values
-    p1_xmax = box1.x + box1.w;
-    p1_ymax = box1.y + box1.h;
-    p2_xmax = box2.x + box2.w;
-    p2_ymax = box2.y + box2.h;*/
 
     return intersetInterval(P1_min.x, P1_max.x, P2_min.x, P2_max.x)
            && intersetInterval(P1_min.y, P1_max.y, P2_min.y, P2_max.y);
@@ -124,9 +111,6 @@ bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
 
 namespace LX_Physics
 {
-
-const int RECT_SIDES = 4;   // The number of sides of a rectangle (AABB)
-
 
 Float euclide_square_distance(const LX_FloatPosition& p1,
                               const LX_FloatPosition& p2) noexcept
@@ -218,7 +202,7 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) no
     if(collisionPointRect(circle.center, rect))
         return true;
 
-    LX_Line sides[RECT_SIDES] =
+    const LX_Line sides[] =
     {
         LX_Line{ rect.fpoint, LX_Vector2D{ 0.0f, PFL(rect.h) } },
 
