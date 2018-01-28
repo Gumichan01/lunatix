@@ -49,7 +49,7 @@ inline Float cross_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_
 namespace LX_Physics
 {
 
-const unsigned long TRIANGLE_SIDES = 3;
+const unsigned long TRIANGLE_SIDES = 3UL;
 
 LX_PolygonException::LX_PolygonException(std::string err) : _string_error(err) {}
 
@@ -180,7 +180,7 @@ public:
 
     LX_FloatingBox getEnclosingBox() const
     {
-        if(_points.size() < 3)
+        if(_points.size() < TRIANGLE_SIDES)
             throw LX_PolygonException("LX_Polygon: Cannot get the enclosing bounding box");
 
         LX_FloatPosition p0 = _points.at(0);

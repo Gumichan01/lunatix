@@ -78,9 +78,9 @@ public:
     *
     *   @note 1 - This function is not very efficient it you use it to add multiple points,
     *             because at each addition of the point,
-    *             the convexity of the polygon is calculated.
-    *   @note 2 - Complexity: O(n²) if n >= 3, O(n) otherwise,
-    *             **n** is the number of edges of the polygon
+    *             the convexity of the polygon is updated.
+    *   @note 2 - Complexity: O(n) if n >= 3, O(1) otherwise,
+    *             **n** is the number of edges of the polygon.
     */
     void addPoint(const LX_FloatPosition& p);
     /**
@@ -92,8 +92,8 @@ public:
     *   @param [in] last Iterator of the structure pointing to the position after the last point
     *
     *   @note 1 - This function is efficient because it adds every points in a row
-    *         and calculate the convexity only after that
-    *   @note 2 - Complexity: Amortized O(n + m) if n + m >= 3, O(m) otherwise,
+    *             and calculate the convexity only after the operation
+    *   @note 2 - Complexity: Amortized O(n + m) if n + m > 3, O(m) otherwise,
     *             **n** is the number of edges of the polygon,
     *             **m** is the number of points to add.
     */
@@ -123,6 +123,7 @@ public:
     *
     *   @return The enclosing box
     *
+    *   @note Complexity: O(n) — n > 2 is the number of vertices in the polygon
     *   @exception  LX_PolygonException If the polygon has less than 3 sides
     */
     LX_FloatingBox getEnclosingBox() const;
@@ -134,7 +135,7 @@ public:
     *   @return TRUE if the polygon is convex, false otherwise
     *
     *   @note Actually, the convexity of the polygon is dynamically evaluated
-    *        each time a new point in added using LX_Polygon::addPoint().
+    *        each time a new point in added using ::addPoint() or ::addPoints().
     *        The result is stored in an internal variable
     */
     bool isConvex() const noexcept;
@@ -142,11 +143,13 @@ public:
     /**
     *   @fn void LX_Polygon::move(const LX_Vector2D& v) noexcept
     *   @param [in] v The vector that indicates the direction
+    *   @note Complexity: O(n) — n is the number of vertices of the polygon
     */
     void move(const LX_Vector2D& v) noexcept;
     /**
     *   @fn void moveTo(const LX_FloatPosition& p)
     *   @param [in] p The new position
+    *   @note Complexity: O(n) — n is the number of vertices of the polygon
     */
     void moveTo(const LX_FloatPosition& p);
 

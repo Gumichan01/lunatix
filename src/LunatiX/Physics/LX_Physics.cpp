@@ -36,8 +36,20 @@ bool intersetInterval(const int min1, const int max1, const int min2, const int 
     return (min1 < min2) ? max1 > min2 : max2 > min1;
 }
 
-// Calcute the collision between two polygons using the Separating Axis Theorem (SAT)
-// pre-condition : poly1 and poly2 must be convex with at least 4 sides
+/*
+*   Calculate the collision between two polygons
+*   by using the Separating Axis Theorem (SAT).
+*
+*   http://www.dyn4j.org/2010/01/sat/
+*
+*   Thanks to the SAT, it is possible to calculate the collision between two polygons
+*   in linear time. But it does not work on triangles or non-convex polygons
+*
+*   Hypothesis/pre-condition : poly1 and poly2 must be convex with at least 4 edges
+*
+*   Complexity: O(m + n) — m > 3 is the number of vertices in poly1,
+*                          n > 3 is the number of vertices in poly2
+*/
 bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
                       const LX_Physics::LX_Polygon& poly2) noexcept
 {
@@ -49,7 +61,6 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     LX_Physics::LX_FloatPosition P1_max = box1.fpoint;
     LX_Physics::LX_FloatPosition P2_max = box2.fpoint;
 
-
     P1_max.x += Float{static_cast<float>(box1.w)};
     P1_max.y += Float{static_cast<float>(box1.h)};
     P2_max.x += Float{static_cast<float>(box2.w)};
@@ -59,7 +70,19 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
            && intersetInterval(P1_min.y, P1_max.y, P2_min.y, P2_max.y);
 }
 
-// Collision detection between polygons using their AABB
+/*
+*   Calculate the collision detection between two polygons
+*   by using their encloging box.
+*
+*   See LX_Polygon::getEnclosingBox()
+*
+*   It can be used to check collision betwwen polygons (including triangles)
+*
+*   Hypothesis/pre-condition: poly1 and poly2 must have at least 3 sides
+*
+*   Complexity: O(m + n) — m >= 3 is the number of vertices in poly1,
+*                          n >= 3 is the number of vertices in poly2
+*/
 bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
                                 const LX_Physics::LX_Polygon& poly2)
 {
@@ -68,7 +91,17 @@ bool approximativeCollisionPoly(const LX_Physics::LX_Polygon& poly1,
     return LX_Physics::collisionRect(box1, box2);
 }
 
-
+/*
+*   The basic (and naive) collision detection
+*
+*   This naive implementation is only used for non-convex polygons.
+*
+*   pre-condition: poly1 and poly2 must have at least 3 sides
+*
+*   Complexity: O(n²)
+*               m is the number of vertices in poly1,
+*               n is the number of vertices in poly2
+*/
 bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
                         const LX_Physics::LX_Polygon& poly2)
 {
@@ -161,7 +194,7 @@ bool collisionRect(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noe
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept
 {
     const unsigned int sum_radius = circle1.radius + circle2.radius;
-    const unsigned int d = sum_radius * sum_radius;
+    const Float d{static_cast<float>(sum_radius * sum_radius)};
 
     return (euclide_square_distance(circle1.center, circle2.center) <= d);
 }
@@ -176,9 +209,6 @@ bool collisionSegCircle(const LX_Circle& circle,
 
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
 {
-    /*const LX_FloatPosition Q{L.o.x + L.v.vx, L.o.y + L.v.vy};
-    return collisionSegCircle(circle, L.o, Q);*/
-
     const LX_FloatPosition& A = L.o;
     const LX_FloatPosition B{L.o.x + L.v.vx, L.o.y + L.v.vy};
 
@@ -269,7 +299,7 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
     LX_FloatPosition I{v + RIX, v + RIY};
     unsigned long nb_intersections = 0;
 
-    for(unsigned long i = 0UL; i < N; i++)
+    for(unsigned long i = 0UL; i < N; ++i)
     {
         const LX_FloatPosition& A = poly.getPoint(i);
         const LX_FloatPosition& B = poly.getPoint((i == N - 1UL) ? 0UL: i + 1UL);
@@ -293,7 +323,7 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
     if(collisionPointPoly(P, poly) == true)
         return true;
 
-    for(unsigned long i = 0UL; i < N; i++)
+    for(unsigned long i = 0UL; i < N; ++i)
     {
         const LX_FloatPosition& A = poly.getPoint(i);
         const LX_FloatPosition& B = poly.getPoint((i == N - 1UL) ? 0UL: i + 1UL);
@@ -314,15 +344,10 @@ bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
     const LX_FloatPosition C{rect.fpoint.x + rect.w, rect.fpoint.y + rect.h};
     const LX_FloatPosition D{rect.fpoint.x, rect.fpoint.y + rect.h};
 
-    for(unsigned long j = 0UL; j < n; j++)
+    for(unsigned long j = 0UL; j < n; ++j)
     {
         const LX_FloatPosition& E = poly.getPoint(j);
         const LX_FloatPosition& F = poly.getPoint((j == n - 1UL) ? 0UL : j + 1UL);
-
-        /*if()
-            const LX_FloatPosition& F = poly.getPoint(0UL);
-        else
-            F = poly.getPoint(j + 1UL);*/
 
         if(intersectSegment(A, B, E, F) || intersectSegment(B, C, E, F) ||
                 intersectSegment(C, D, E, F) || intersectSegment(D, A, E, F))
@@ -339,22 +364,23 @@ bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
 
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 {
-    const unsigned int NUM_SIDES = 3;
+    const unsigned long NUM_SIDES = 3UL;
     const unsigned long N = poly1.numberOfEdges();
     const unsigned long M = poly2.numberOfEdges();
 
     if(N < NUM_SIDES || M < NUM_SIDES)
         throw std::invalid_argument("The polygons must have at least 3 sides to calculate the collision");
 
-    // Detect the collision using the AABB of the polygons
+    // Detect the collision by using the AABB of the polygons -> O(n)
     if(!approximativeCollisionPoly(poly1, poly2))
         return false;
 
     // If the two polygons are convex and have at least 4 sides,
-    // use the SAT to detect the collision between then.
+    // use the SAT to detect the collision between then. -> O(n)
     if(poly1.isConvex() && poly2.isConvex() && N > NUM_SIDES && M > NUM_SIDES)
         return collisionPolySAT(poly1, poly2);
 
+    // On of the polygons is not convex -> naive algorithm, -> O(n²)
     return basicCollisionPoly(poly1, poly2);
 }
 

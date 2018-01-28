@@ -50,8 +50,6 @@ class LX_Polygon;
 *   @fn Float euclide_square_distance(const LX_FloatPosition& p1,
 *                                     const LX_FloatPosition& p2) noexcept
 *
-*   Euclidean square distance
-*
 *   @param [in] p1 The first point
 *   @param [in] p2 The second point
 *
@@ -60,8 +58,6 @@ class LX_Polygon;
 Float euclide_square_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept;
 /**
 *   @fn Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
-*
-*   Euclidean distance
 *
 *   @param [in] p1 The first point
 *   @param [in] p2 The second point
@@ -74,9 +70,9 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 /* Collision detection */
 
 /**
-*   @fn bool collisionPointRect(const LX_FloatPosition& p,const LX_FloatingBox& rect) noexcept
+*   @fn bool collisionPointRect(const LX_FloatPosition& p, const LX_FloatingBox& rect) noexcept
 *
-*   Check the collision between a point and an AABB
+*   Check if a point is in an Axis Aligned Bounding Box (AABB)
 *
 *   @param [in] p The point
 *   @param [in] rect The AABB
@@ -87,7 +83,7 @@ bool collisionPointRect(const LX_FloatPosition& p, const LX_FloatingBox& rect) n
 /**
 *   @fn bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) noexcept
 *
-*   Check the collision between a point and a circle
+*   Check if a point is in a circle
 *
 *   @param [in] p The point
 *   @param [in] circle The circle
@@ -178,19 +174,19 @@ bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
 /**
 *   @fn bool intersectLine(const LX_Line& L1, const LX_Line& L2)
 *
-*   Test the intersection between 2 lines
-*
 *   @param [in] L1 the first line
 *   @param [in] L2 the second line
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
+*
+*   @note Actually, it just checks if the two lines are not parralel
 */
 bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept;
 
 /**
 *   @fn bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 *
-*   Test the collision between a point and a polygon
+*   Check if a point is in a polygon
 *
 *   @param [in] P The point to test
 *   @param [in] poly The polygon
@@ -201,8 +197,6 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly);
 /**
 *   @fn bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 *
-*   Test the intersection between a circle and a polygon
-*
 *   @param [in] C The circular hitbox
 *   @param [in] poly The polygon
 *
@@ -211,8 +205,6 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly);
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly);
 /**
 *   @fn bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
-*
-*   Test the intersection between an AABB and a polygon
 *
 *   @param [in] rect The AABB
 *   @param [in] poly The polygon
@@ -223,15 +215,13 @@ bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly);
 /**
 *   @fn bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
 *
-*   Test the intersection between 2 polygons
-*
 *   @param [in] poly1 The first polygon
 *   @param [in] poly2 The second polygon
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 *   @note The function only works on polygons with at least 3 sides.
-*   @exception std::invalid_argument If a polygon has not at least 3 sides
+*   @exception std::invalid_argument If a polygon has less than 3 sides
 */
 bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2);
 
