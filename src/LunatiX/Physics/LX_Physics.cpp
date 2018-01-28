@@ -261,6 +261,9 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 
     for(unsigned int i = 0; i < n; i++)
     {
+        if(P == poly.getPoint(i))
+            return true;
+
         if(i == n-1)
         {
             LX_FloatPosition p1 = poly.getPoint(0);
