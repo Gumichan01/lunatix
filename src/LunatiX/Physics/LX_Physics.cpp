@@ -250,16 +250,15 @@ bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept
 
 bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
-    int nb_intersections = 0;
-
     const int v = 10000;
     const unsigned long N = poly.numberOfEdges();
 
     const float rix = static_cast<float>(LX_Random::crand100());
     const float riy = static_cast<float>(LX_Random::crand100());
     const LX_FloatPosition I{v + rix, v + riy};
+    unsigned long nb_intersections = 0;
 
-    for(unsigned int i = 0; i < N; i++)
+    for(unsigned long i = 0; i < N; i++)
     {
         const LX_FloatPosition& A = poly.getPoint(i);
         const LX_FloatPosition& B = poly.getPoint((i == N - 1) ? 0: i + 1);
@@ -271,7 +270,7 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
             nb_intersections++;
     }
 
-    return (nb_intersections % 2 == 1);
+    return (nb_intersections % 2L == 1L);
 }
 
 
