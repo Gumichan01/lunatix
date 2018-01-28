@@ -229,11 +229,11 @@ public:
     */
     void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept;
     /**
-    *   @fn void drawRect(const LX_AABB& box) noexcept
+    *   @fn void drawRect(const LX_ImgRect& box) noexcept
     *   Draw a rectangle on a window
     *   @param [in] box The rectangle
     */
-    void drawRect(const LX_AABB& box) noexcept;
+    void drawRect(const LX_ImgRect& box) noexcept;
     /**
     *   @fn void drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
     *
@@ -252,11 +252,11 @@ public:
     void drawCircle(const LX_Physics::LX_Circle& c) noexcept;
 
     /**
-    *   @fn void fillRect(const LX_AABB& box) noexcept
+    *   @fn void fillRect(const LX_ImgRect& box) noexcept
     *   Fill a rectangle on a window
     *   @param [in] box The rectangle to fill
     */
-    void fillRect(const LX_AABB& box) noexcept;
+    void fillRect(const LX_ImgRect& box) noexcept;
     /**
     *   @fn void fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
     *
@@ -350,23 +350,23 @@ public:
     */
     void setWindowSize(int w, int h) noexcept;
     /**
-    *   @fn bool setViewPort(LX_AABB * viewport) noexcept
+    *   @fn bool setViewPort(LX_ImgRect * viewport) noexcept
     *
     *   et a specific drawing area (viewport) for rendering
     *
     *   @param [in] viewport The drawing area to set. *nullptr* defines the entire target
     *   @return TRUE on success, FALSE otherwise
     */
-    bool setViewPort(LX_AABB * viewport) noexcept;
+    bool setViewPort(LX_ImgRect * viewport) noexcept;
     /**
-    *   @fn void getViewPort(LX_AABB& viewport) const noexcept
+    *   @fn void getViewPort(LX_ImgRect& viewport) const noexcept
     *
     *   Get the drawing area (viewport) for rendering
     *
     *   @param [out] viewport The drawing area to fill
     *
     */
-    void getViewPort(LX_AABB& viewport) const noexcept;
+    void getViewPort(LX_ImgRect& viewport) const noexcept;
 
     /**
     *   @fn void toggleFullscreen(uint32_t flag) noexcept

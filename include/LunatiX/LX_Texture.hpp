@@ -181,7 +181,7 @@ public:
 class LX_Sprite: public LX_Texture
 {
     friend class LX_BufferedImage;
-    LX_AABB *_sprite_area;
+    LX_ImgRect *_sprite_area;
     UTF8string _filename;
 
 protected:
@@ -204,7 +204,7 @@ public:
 
     virtual void draw() noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box) noexcept
+    *   @fn virtual void draw(LX_ImgRect * box) noexcept
     *
     *   Draw the current sprite on the window
     *
@@ -214,9 +214,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box) noexcept;
+    virtual void draw(LX_ImgRect * box) noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box, const double angle) noexcept
+    *   @fn virtual void draw(LX_ImgRect * box, const double angle) noexcept
     *
     *   Draw an area of the current sprite on the window with rotation
     *
@@ -228,9 +228,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box, const double angle) noexcept;
+    virtual void draw(LX_ImgRect * box, const double angle) noexcept;
     /**
-    *   @fn virtual void draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept
+    *   @fn virtual void draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept
     *
     *   Draw the current sprite on the window with rotation
     *
@@ -246,7 +246,7 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept;
+    virtual void draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn UTF8string getFileName() noexcept
@@ -269,7 +269,7 @@ public:
 class LX_AnimatedSprite: public LX_Sprite
 {
     friend class LX_BufferedImage;
-    const std::vector<LX_AABB> _coordinates;
+    const std::vector<LX_ImgRect> _coordinates;
     const size_t _SZ;
     uint32_t _delay;    // Delay to display a part of the sprite sheet
     uint32_t _btime;
@@ -279,7 +279,7 @@ class LX_AnimatedSprite: public LX_Sprite
     bool _drawable;
 
     LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                       bool loop, const UTF8string& filename,
                       LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
@@ -287,7 +287,7 @@ public:
 
     /**
     *   @fn LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
-    *                        const std::vector<LX_AABB>& coord, const uint32_t delay,
+    *                        const std::vector<LX_ImgRect>& coord, const uint32_t delay,
     *                        bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888)
     *
     *   Build an animated sprite from a sprite sheet
@@ -305,19 +305,19 @@ public:
     *   @sa LX_Texture
     */
     LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                       bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
     /**
     *   @exception LX_ImageException On failure
     */
     LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                      const std::vector<LX_AABB>& coord, const uint32_t delay,
+                      const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                       bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
 
-    virtual void draw(LX_AABB * box) noexcept;
-    virtual void draw(LX_AABB * box, const double angle) noexcept;
-    virtual void draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept;
+    virtual void draw(LX_ImgRect * box) noexcept;
+    virtual void draw(LX_ImgRect * box, const double angle) noexcept;
+    virtual void draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn void resetAnimation() noexcept
@@ -409,7 +409,7 @@ public:
     LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
-    *                                   const std::vector<LX_AABB>& coord,
+    *                                   const std::vector<LX_ImgRect>& coord,
     *                                   const uint32_t delay) const
     *
     *   Create an animated sprite from the current buffered image
@@ -424,7 +424,7 @@ public:
     */
     LX_AnimatedSprite *
     generateAnimatedSprite(LX_Win::LX_Window& w,
-                           const std::vector<LX_AABB>& coord,
+                           const std::vector<LX_ImgRect>& coord,
                            const uint32_t delay, bool loop) const;
 
     /**
@@ -459,7 +459,7 @@ public:
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
     /**
-    *   @fn bool blit(LX_BufferedImage& s, LX_AABB& rect) noexcept
+    *   @fn bool blit(LX_BufferedImage& s, LX_ImgRect& rect) noexcept
     *
     *   Put the surface given in argument on the current texture
     *
@@ -468,7 +468,7 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     */
-    bool blit(LX_BufferedImage& s, LX_AABB& rect) noexcept;
+    bool blit(LX_BufferedImage& s, LX_ImgRect& rect) noexcept;
     /**
     *   @fn void update() noexcept
     *   Update the texture in order to be drawn on the window
@@ -499,7 +499,7 @@ protected:
     LX_TrueTypeFont::LX_Font& _font;
     unsigned int _size;
     LX_Colour _colour;
-    LX_AABB _dimension;
+    LX_ImgRect _dimension;
 
     virtual void updateTexture_() noexcept = 0;
 

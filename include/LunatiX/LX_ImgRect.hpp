@@ -10,33 +10,28 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_AABB_H_INCLUDED
-#define LX_AABB_H_INCLUDED
+#ifndef LX_IMGRECT_H_INCLUDED
+#define LX_IMGRECT_H_INCLUDED
 
 /**
 *   @file LX_ImgRect.hpp
 *   @todo remove this file?
-*   @brief The definition of LX_AABB
+*   @brief The definition of LX_ImgRect
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.12
 */
 
-// LX_AABB is just an alias of SDL_Rect
+// LX_ImgRect is just an alias of SDL_Rect
 struct SDL_Rect;
 /**
-*   @ingroup Physics
-*   @typedef LX_AABB
-*   @brief The Axis-Aligned Bounding Box (AABB)
+*   @ingroup Graphics
+*   @typedef LX_ImgRect
+*   @brief The Image box
 *
-*   Structure:
-*
-*       int x, int y;   // Coordinates
-*       int w, int h;   // Dimension
-*
-*
-*   Very useful for collision detection, image positioning, ...
+*   This box, defined as an Axis-Aligned Bounding Box (AABB) contains information
+*   about the position and the dimension of the image to display
 */
-using LX_AABB = SDL_Rect;
+using LX_ImgRect = SDL_Rect;
 
 /// @todo Create an ImgRect from LX_Graphics
 /**
@@ -53,4 +48,4 @@ using LX_AABB = SDL_Rect;
 
 #include <SDL2/SDL_rect.h>
 
-#endif  /* LX_AABB_H_INCLUDED */
+#endif  /* LX_IMGRECT_H_INCLUDED */

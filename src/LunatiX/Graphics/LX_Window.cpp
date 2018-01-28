@@ -248,7 +248,7 @@ void LX_Window::drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 }
 
 
-void LX_Window::drawRect(const LX_AABB& box) noexcept
+void LX_Window::drawRect(const LX_ImgRect& box) noexcept
 {
     SDL_RenderDrawRect(_wimpl->_renderer,&box);
 }
@@ -257,7 +257,7 @@ void LX_Window::drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 {
     int w = static_cast<int>(v.vx);
     int h = static_cast<int>(v.vy);
-    const LX_AABB box = {p.x, p.y, w, h};
+    const LX_ImgRect box = {p.x, p.y, w, h};
     drawRect(box);
 }
 
@@ -301,7 +301,7 @@ void LX_Window::drawCircle(const LX_Physics::LX_Circle& c) noexcept
 }
 
 
-void LX_Window::fillRect(const LX_AABB& box) noexcept
+void LX_Window::fillRect(const LX_ImgRect& box) noexcept
 {
     SDL_RenderFillRect(_wimpl->_renderer,&box);
 }
@@ -310,7 +310,7 @@ void LX_Window::fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 {
     int w = static_cast<int>(v.vx);
     int h = static_cast<int>(v.vy);
-    const LX_AABB box = {p.x, p.y, w, h};
+    const LX_ImgRect box = {p.x, p.y, w, h};
     fillRect(box);
 }
 
@@ -389,12 +389,12 @@ void LX_Window::setWindowSize(int w, int h) noexcept
 }
 
 
-bool LX_Window::setViewPort(LX_AABB * viewport) noexcept
+bool LX_Window::setViewPort(LX_ImgRect * viewport) noexcept
 {
     return SDL_RenderSetViewport(_wimpl->_renderer, viewport) == 0;
 }
 
-void LX_Window::getViewPort(LX_AABB& viewport) const noexcept
+void LX_Window::getViewPort(LX_ImgRect& viewport) const noexcept
 {
     SDL_RenderGetViewport(_wimpl->_renderer, &viewport);
 }

@@ -76,7 +76,7 @@ SDL_Texture * loadTexture_(const std::string& filename,
 namespace LX_Graphics
 {
 
-const LX_AABB rnull = {0, 0, 0, 0};
+const LX_ImgRect rnull = {0, 0, 0, 0};
 const LX_Colour cnull = {0, 0, 0, 0};
 
 
@@ -166,18 +166,18 @@ void LX_Sprite::draw() noexcept
     SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
 }
 
-void LX_Sprite::draw(LX_AABB * box) noexcept
+void LX_Sprite::draw(LX_ImgRect * box) noexcept
 {
     draw(box, 0.0);
 }
 
 
-void LX_Sprite::draw(LX_AABB * box, const double angle) noexcept
+void LX_Sprite::draw(LX_ImgRect * box, const double angle) noexcept
 {
     draw(box, angle, LX_MIRROR::NONE);
 }
 
-void LX_Sprite::draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept
+void LX_Sprite::draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept
 {
     SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr, box,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
@@ -194,7 +194,7 @@ UTF8string LX_Sprite::getFileName() noexcept
 
 // protected constructor
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
-                                     const std::vector<LX_AABB>& coord,
+                                     const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
                                      const UTF8string& filename, LX_PIXELFORMAT format)
     : LX_Sprite(t, w, filename, format), _coordinates(coord), _SZ(coord.size()),
@@ -203,14 +203,14 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
 // public constructor
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
                                      LX_Win::LX_Window& w,
-                                     const std::vector<LX_AABB>& coord,
+                                     const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
                                      LX_PIXELFORMAT format)
     : LX_AnimatedSprite(UTF8string(filename), w, coord, delay, loop, format) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                                     const std::vector<LX_AABB>& coord,
+                                     const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
                                      LX_PIXELFORMAT format)
     : LX_Sprite(filename, w, format), _coordinates(coord),
@@ -218,18 +218,18 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
       _started(false), _loop(loop), _drawable(true) {}
 
 
-void LX_AnimatedSprite::draw(LX_AABB * box) noexcept
+void LX_AnimatedSprite::draw(LX_ImgRect * box) noexcept
 {
     draw(box, 0.0);
 }
 
-void LX_AnimatedSprite::draw(LX_AABB * box, const double angle) noexcept
+void LX_AnimatedSprite::draw(LX_ImgRect * box, const double angle) noexcept
 {
     draw(box, angle, LX_MIRROR::NONE);
 }
 
 
-void LX_AnimatedSprite::draw(LX_AABB * box, const double angle, const LX_MIRROR mirror) noexcept
+void LX_AnimatedSprite::draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept
 {
     if(!_started)
     {
@@ -584,7 +584,7 @@ LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
 }
 
 LX_AnimatedSprite * LX_BufferedImage::
-generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_AABB>& coord,
+generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_ImgRect>& coord,
                        const uint32_t delay, bool loop) const
 {
     return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
@@ -644,7 +644,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PIXELFORMAT fo
 }
 
 
-bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_AABB& rect) noexcept
+bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_ImgRect& rect) noexcept
 {
     bool b = (SDL_BlitScaled(s._surface, nullptr, _screen, &rect) == 0);
 
