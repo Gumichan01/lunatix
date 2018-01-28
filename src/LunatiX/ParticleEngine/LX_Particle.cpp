@@ -52,7 +52,7 @@ public:
     {
         if(_lifetime > 0)
         {
-            LX_Physics::moveRect(_box, _velocity);
+            LX_Physics::moveBox(_box, _velocity);
             _lifetime--;
         }
     }

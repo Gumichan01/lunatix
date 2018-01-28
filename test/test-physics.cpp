@@ -10,10 +10,10 @@ using namespace LX_Physics;
 
 void test_euclide(void);
 void test_collisionPointCircle(void);
-void test_collisionPointRect(void);
+void test_collisionPointBox(void);
 void test_collision2Circle(void);
-void test_collision2Rect(void);
-void test_collisionRectCircle(void);
+void test_collision2Box(void);
+void test_collisionBoxCircle(void);
 
 void testLine();
 void test_Vector2D(void);
@@ -22,7 +22,7 @@ void testPolygon(void);
 void test_collisionSeg(void);
 void test_collisionPointPolygon(void);
 void test_collisionCirclePolygon(void);
-void test_collisionRectPolygon(void);
+void test_collisionBoxPolygon(void);
 void test_collision2Polygon(void);
 void test_collision2PolygonAgain(void);
 
@@ -56,10 +56,10 @@ int main(int argc, char **argv)
 
     test_euclide();
     test_collisionPointCircle();
-    test_collisionPointRect();
+    test_collisionPointBox();
     test_collision2Circle();
-    test_collision2Rect();
-    test_collisionRectCircle();
+    test_collision2Box();
+    test_collisionBoxCircle();
 
     testLine();
     test_Vector2D();
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     test_collisionSeg();
     test_collisionPointPolygon();
     test_collisionCirclePolygon();
-    test_collisionRectPolygon();
+    test_collisionBoxPolygon();
     test_collision2Polygon();
     test_collision2PolygonAgain();
 
@@ -192,7 +192,7 @@ void test_collisionPointCircle(void)
 }
 
 
-void test_collisionPointRect(void)
+void test_collisionPointBox(void)
 {
     LX_FloatPosition A{100,100}, B{50,50};
     LX_FloatingBox aabb{LX_FloatPosition{40.0f, 40.0f}, 30, 30};
@@ -203,7 +203,7 @@ void test_collisionPointRect(void)
     LX_Log::log("AABB{(%d,%d),%d,%d}", aabb.fpoint.x.v, aabb.fpoint.y.v, aabb.w, aabb.h);
 
     LX_Log::log("Collision Point A/AABB");
-    bool d = collisionPointRect(A, aabb);
+    bool d = collisionPointBox(A, aabb);
 
     if(d != false)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: FALSE; Got: TRUE");
@@ -211,7 +211,7 @@ void test_collisionPointRect(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is out of the rectangle");
 
     LX_Log::log("Collision Point B/AABB");
-    d = collisionPointRect(B, aabb);
+    d = collisionPointBox(B, aabb);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; Got: FALSE");
@@ -261,7 +261,7 @@ void test_collision2Circle(void)
 }
 
 
-void test_collision2Rect(void)
+void test_collision2Box(void)
 {
     const LX_FloatingBox R1{LX_FloatPosition{0.0f, 0.0f},50,25};
     const LX_FloatingBox R2{LX_FloatPosition{40.0f, 21.0f},32,25};
@@ -273,7 +273,7 @@ void test_collision2Rect(void)
     LX_Log::log("R3{(%d,%d),%d,%d}", R3.fpoint.x.v, R3.fpoint.y.v, R3.w, R3.h);
 
     LX_Log::log("Collision AABB R1/R2");
-    bool d = collisionRect(R1,R2);
+    bool d = collisionBox(R1,R2);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE -collision R1/R2 expected: TRUE; Got: FALSE");
@@ -281,7 +281,7 @@ void test_collision2Rect(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision R1/R2 OK");
 
     LX_Log::log("Collision AABB R2/R3");
-    d = collisionRect(R2,R3);
+    d = collisionBox(R2,R3);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE -collision R2/R3 expected: TRUE; Got: FALSE");
@@ -289,7 +289,7 @@ void test_collision2Rect(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision R2/R3 OK");
 
     LX_Log::log("Collision AABB R3/R1");
-    d = collisionRect(R3,R1);
+    d = collisionBox(R3,R1);
 
     if(d != false)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collisoon R3/R1 expected: FALSE; Got: TRUE");
@@ -300,7 +300,7 @@ void test_collision2Rect(void)
 }
 
 
-void test_collisionRectCircle(void)
+void test_collisionBoxCircle(void)
 {
     LX_FloatingBox R1{LX_FloatPosition{0.0f, 0.0f},50,25};
     LX_Circle A{LX_FloatPosition{10.0f,10.0f}, 5};
@@ -313,24 +313,24 @@ void test_collisionRectCircle(void)
     LX_Log::log("B{(%f,%f),%u}", B.center.x.v, B.center.y.v, B.radius);
     LX_Log::log("C{(%f,%f),%u}", C.center.x.v, C.center.y.v, C.radius);
 
-    LX_Log::log("Collision Circle/Rect AABB A/R1");
-    bool d = collisionCircleRect(A,R1);
+    LX_Log::log("Collision Circle/Box AABB A/R1");
+    bool d = collisionCircleBox(A,R1);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collision A/R1 expected: TRUE; Got: FALSE");
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision A/R1 OK");
 
-    LX_Log::log("Collision Circle/Rect AABB B/R1");
-    d = collisionCircleRect(B,R1);
+    LX_Log::log("Collision Circle/Box AABB B/R1");
+    d = collisionCircleBox(B,R1);
 
     if(d != true)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collision B/R1 expected: TRUE; Got: FALSE");
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision B/R1 OK");
 
-    LX_Log::log("Collision Circle/Rect AABB C/R1");
-    d = collisionCircleRect(C,R1);
+    LX_Log::log("Collision Circle/Box AABB C/R1");
+    d = collisionCircleBox(C,R1);
 
     if(d != false)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collision C/R1 expected: FALSE; Got: TRUE");
@@ -761,7 +761,7 @@ void test_collisionCirclePolygon(void)
 }
 
 
-void test_collisionRectPolygon(void)
+void test_collisionBoxPolygon(void)
 {
     const LX_FloatingBox R1{LX_FloatPosition{1.0f, 1.0f},2,2};
     const LX_FloatingBox R2{LX_FloatPosition{8.0f, 3.0f},10,4};
@@ -777,7 +777,7 @@ void test_collisionRectPolygon(void)
     poly.addPoint(LX_FloatPosition{7.0f, 2.0f});
     poly.addPoint(LX_FloatPosition{6.0f, 5.0f});
 
-    LX_Log::log(" = TEST Collision Rect/Polygon = ");
+    LX_Log::log(" = TEST Collision Box/Polygon = ");
     LX_Log::log("R1{(%d,%d),%d,%d}", R1.fpoint.x.v, R1.fpoint.y.v, R1.w, R1.h);
     LX_Log::log("R2{(%d,%d),%d,%d}", R2.fpoint.x.v, R2.fpoint.y.v, R2.w, R2.h);
     LX_Log::log("R3{(%d,%d),%d,%d}", R3.fpoint.x.v, R3.fpoint.y.v, R3.w, R3.h);
@@ -785,7 +785,7 @@ void test_collisionRectPolygon(void)
     LX_Log::log("poly");
     displayPoly(poly);
 
-    bool d = collisionRectPoly(R1,poly);
+    bool d = collisionBoxPoly(R1,poly);
 
     if(d != false)
         LX_Log::log("FAILURE - test R1 not in the polygon. expected: FALSE; Got: TRUE");
@@ -793,7 +793,7 @@ void test_collisionRectPolygon(void)
         LX_Log::log("SUCCESS - R1 not in the polygon OK");
 
     // A point of R2 in the polygon
-    d = collisionRectPoly(R2,poly);
+    d = collisionBoxPoly(R2,poly);
 
     if(d != true)
         LX_Log::log("FAILURE - test R2 touch the polygon. expected: TRUE; Got: FALSE");
@@ -801,7 +801,7 @@ void test_collisionRectPolygon(void)
         LX_Log::log("SUCCESS - R2 touch the polygon OK");
 
     // Some Segments of R3 in the polygon (no point inside)
-    d = collisionRectPoly(R3,poly);
+    d = collisionBoxPoly(R3,poly);
 
     if(d != true)
         LX_Log::log("FAILURE - test R3 touch the polygon. expected: TRUE; Got: FALSE");
@@ -809,7 +809,7 @@ void test_collisionRectPolygon(void)
         LX_Log::log("SUCCESS - R3 touch the polygon OK");
 
     // R4 into the polygon
-    d = collisionRectPoly(R4,poly);
+    d = collisionBoxPoly(R4,poly);
 
     if(d != true)
         LX_Log::log("FAILURE - test R4 touch the polygon. expected: TRUE; Got: FALSE");
@@ -817,7 +817,7 @@ void test_collisionRectPolygon(void)
         LX_Log::log("SUCCESS - R4 touch the polygon OK");
 
     // The polygon into R5
-    d = collisionRectPoly(R5,poly);
+    d = collisionBoxPoly(R5,poly);
 
     if(d != true)
         LX_Log::log("FAILURE - test polygon into R5. expected: TRUE; Got: FALSE");
@@ -1063,7 +1063,7 @@ void test_move(void)
     LX_Log::log("Rectangle");
 
     const LX_FloatingBox expected_aabb{R.fpoint.x + 2, R.fpoint.y + 3, R.w, R.h};
-    moveRect(R, LX_Vector2D{{2.0f}, {3.0f}});
+    moveBox(R, LX_Vector2D{{2.0f}, {3.0f}});
 
     if(R.fpoint == expected_aabb.fpoint)
         LX_Log::log("SUCCESS - Rectangle R{(%d,%d),%d,%d}", R.fpoint.x.v, R.fpoint.y.v, R.w, R.h);
