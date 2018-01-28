@@ -217,14 +217,22 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) no
     if(collisionPointRect(circle.center, rect))
         return true;
 
-    LX_Line sides[RECT_SIDES] = { LX_Line{LX_FloatPosition{rect.x, rect.y},
-                                          LX_Vector2D{0.0f, PFL(rect.h)}},
-                                  LX_Line{LX_FloatPosition{rect.x, rect.y + rect.h},
-                                          LX_Vector2D{PFL(rect.w), 0.0f}},
-                                  LX_Line{LX_FloatPosition{rect.x + rect.w, rect.y},
-                                          LX_Vector2D{0.0f, PFL(rect.h)}},
-                                  LX_Line{LX_FloatPosition{rect.x, rect.y},
-                                          LX_Vector2D{PFL(rect.w), 0.0f}} };
+    LX_Line sides[RECT_SIDES] =
+    {
+        LX_Line{ rect.fpoint, LX_Vector2D{ 0.0f, PFL(rect.h) } },
+
+        LX_Line{
+            LX_FloatPosition{ rect.fpoint.x, rect.fpoint.y + rect.h },
+            LX_Vector2D{ PFL(rect.w), 0.0f }
+        },
+
+        LX_Line{
+            LX_FloatPosition{ rect.fpoint.x + rect.w, rect.fpoint.y },
+            LX_Vector2D{ 0.0f, PFL(rect.h) }
+        },
+
+        LX_Line{ rect.fpoint, LX_Vector2D{ PFL(rect.w), 0.0f } }
+    };
 
     for(const LX_Line& l : sides)
     {
