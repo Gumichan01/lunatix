@@ -106,7 +106,7 @@ public:
     */
     unsigned long numberOfEdges() const noexcept;
     /**
-    *   @fn LX_FloatPosition LX_Polygon::getPoint(const unsigned int index) const
+    *   @fn LX_FloatPosition LX_Polygon::getPoint(const unsigned long index) const
     *
     *   @param [in] index The index of the point
     *
@@ -114,7 +114,7 @@ public:
     *
     *   @exception  LX_PolygonException If the index is out of bounds
     */
-    LX_FloatPosition getPoint(const unsigned int index) const;
+    LX_FloatPosition getPoint(const unsigned long index) const;
     /**
     *   @fn LX_AABB getEnclosingBox() const
     *

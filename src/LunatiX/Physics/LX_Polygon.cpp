@@ -72,7 +72,7 @@ using LX_FloatPositions_ = std::vector<LX_FloatPosition>;
 class LX_Polygon_
 {
     LX_FloatPositions_ _points;     /* A sequence of LX_FloatPosition objects   */
-    bool _convex;           /* If the polygon is convex         */
+    bool _convex;                   /* If the polygon is convex                 */
 
     Float area_() const noexcept
     {
@@ -182,7 +182,7 @@ public:
     }
 
 
-    LX_FloatPosition getPoint(const unsigned int index) const
+    LX_FloatPosition getPoint(const unsigned long index) const
     {
         return _points.at(index);
     }
@@ -293,7 +293,7 @@ unsigned long LX_Polygon::numberOfEdges() const noexcept
     return _polyimpl->numberOfEdges();
 }
 
-LX_FloatPosition LX_Polygon::getPoint(const unsigned int index) const
+LX_FloatPosition LX_Polygon::getPoint(const unsigned long index) const
 {
     return _polyimpl->getPoint(index);
 }
