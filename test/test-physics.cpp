@@ -195,13 +195,12 @@ void test_collisionPointCircle(void)
 void test_collisionPointRect(void)
 {
     LX_FloatPosition A{100,100}, B{50,50};
-    LX_AABB aabb;
-    aabb = {40, 40, 30, 30};
+    LX_FloatingBox aabb{LX_FloatPosition{40.0f, 40.0f}, 30, 30};
 
     LX_Log::log(" = TEST POINT/AABB = ");
     LX_Log::log("A(%f,%f)", A.x.v, A.y.v);
     LX_Log::log("B(%f,%f)", B.x.v, B.y.v);
-    LX_Log::log("AABB{(%d,%d),%d,%d}", aabb.x, aabb.y, aabb.w, aabb.h);
+    LX_Log::log("AABB{(%d,%d),%d,%d}", aabb.fpoint.x.v, aabb.fpoint.y.v, aabb.w, aabb.h);
 
     LX_Log::log("Collision Point A/AABB");
     bool d = collisionPointRect(A, aabb);
@@ -264,16 +263,14 @@ void test_collision2Circle(void)
 
 void test_collision2Rect(void)
 {
-    LX_AABB R1,R2,R3;
-
-    R1 = {0,0,50,25};
-    R2 = {40,21,32,25};
-    R3 = {64,32,10,100};
+    const LX_FloatingBox R1{LX_FloatPosition{0.0f, 0.0f},50,25};
+    const LX_FloatingBox R2{LX_FloatPosition{40.0f, 21.0f},32,25};
+    const LX_FloatingBox R3{LX_FloatPosition{64.0f, 32.0f},10,100};
 
     LX_Log::log(" = TEST RECT/RECT = ");
-    LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
-    LX_Log::log("R2{(%d,%d),%d,%d}", R2.x, R2.y, R2.w, R2.h);
-    LX_Log::log("R3{(%d,%d),%d,%d}", R3.x, R3.y, R3.w, R3.h);
+    LX_Log::log("R1{(%d,%d),%d,%d}", R1.fpoint.x.v, R1.fpoint.y.v, R1.w, R1.h);
+    LX_Log::log("R2{(%d,%d),%d,%d}", R2.fpoint.x.v, R2.fpoint.y.v, R2.w, R2.h);
+    LX_Log::log("R3{(%d,%d),%d,%d}", R3.fpoint.x.v, R3.fpoint.y.v, R3.w, R3.h);
 
     LX_Log::log("Collision AABB R1/R2");
     bool d = collisionRect(R1,R2);
@@ -305,13 +302,13 @@ void test_collision2Rect(void)
 
 void test_collisionRectCircle(void)
 {
-    LX_AABB R1{0,0,50,25};
+    LX_FloatingBox R1{LX_FloatPosition{0.0f, 0.0f},50,25};
     LX_Circle A{LX_FloatPosition{10.0f,10.0f}, 5};
     LX_Circle B{LX_FloatPosition{51.0f,26.0f}, 15};
     LX_Circle C{LX_FloatPosition{100.0f,100.0f}, 40};
 
     LX_Log::log(" = TEST RECT/CIRCLE = ");
-    LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
+    LX_Log::log("R1{(%d,%d),%d,%d}", R1.fpoint.x.v, R1.fpoint.y.v, R1.w, R1.h);
     LX_Log::log("A{(%f,%f),%u}", A.center.x.v, A.center.y.v, A.radius);
     LX_Log::log("B{(%f,%f),%u}", B.center.x.v, B.center.y.v, B.radius);
     LX_Log::log("C{(%f,%f),%u}", C.center.x.v, C.center.y.v, C.radius);
@@ -347,7 +344,6 @@ void test_collisionRectCircle(void)
 void testPolygon(void)
 {
     LX_Polygon poly;
-
     poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
     poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
     poly.addPoint(LX_FloatPosition{5.0f, 5.0f});
@@ -358,7 +354,7 @@ void testPolygon(void)
 
     if(d != 3)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - number of real edges expected: 3; Got: %u",
-        d);
+                        d);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - number of real edges: %u", d);
 
@@ -369,13 +365,13 @@ void testPolygon(void)
 
     if(p.x != fbox(10.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - x position expected: 10; Got: %d",
-        p.x.v);
+                        p.x.v);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - x = %d", p.x.v);
 
     if(p.y != fbox(5.0f))
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - y position expected: 5; Got: %d",
-        p.y.v);
+                        p.y.v);
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - y = %d", p.y.v);
 
@@ -387,8 +383,9 @@ void testPolygon(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The triangle is a convex polygon, well done !");
 
     {
-        LX_AABB b = poly.getEnclosingBox();
-        LX_Log::log("enclosing box {%d, %d, %d, %d}", b.x, b.y, b.w, b.h);
+        const LX_FloatingBox& b = poly.getEnclosingBox();
+        LX_Log::log("enclosing box {%d, %d, %d, %d}", b.fpoint.x.v, b.fpoint.y.v,
+                    b.w, b.h);
     }
 
     // Now we have a polygon with 4 edges
@@ -416,8 +413,9 @@ void testPolygon(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (6,5). This is not a convex polygon");
 
     {
-        LX_AABB b = poly.getEnclosingBox();
-        LX_Log::log("enclosing box {%d, %d, %d, %d}", b.x, b.y, b.w, b.h);
+        const LX_FloatingBox& b = poly.getEnclosingBox();
+        LX_Log::log("enclosing box {%d, %d, %d, %d}", b.fpoint.x.v, b.fpoint.y.v,
+                    b.w, b.h);
     }
 
     LX_Log::log(" = END TEST = ");
@@ -765,14 +763,13 @@ void test_collisionCirclePolygon(void)
 
 void test_collisionRectPolygon(void)
 {
-    LX_AABB R1,R2,R3,R4,R5;
-    LX_Polygon poly;
+    const LX_FloatingBox R1{LX_FloatPosition{1.0f, 1.0f},2,2};
+    const LX_FloatingBox R2{LX_FloatPosition{8.0f, 3.0f},10,4};
+    const LX_FloatingBox R3{LX_FloatPosition{2.0f, 7.0f},20,2};
+    const LX_FloatingBox R4{LX_FloatPosition{8.0f, 6.0f},1,1};
+    const LX_FloatingBox R5{LX_FloatPosition{2.0f, 0.0f},16,16};
 
-    R1 = {1,1,2,2};
-    R2 = {8,3,10,4};
-    R3 = {2,7,20,2};
-    R4 = {8,6,1,1};
-    R5 = {2,0,16,16};
+    LX_Polygon poly;
 
     poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
     poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
@@ -781,10 +778,10 @@ void test_collisionRectPolygon(void)
     poly.addPoint(LX_FloatPosition{6.0f, 5.0f});
 
     LX_Log::log(" = TEST Collision Rect/Polygon = ");
-    LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
-    LX_Log::log("R2{(%d,%d),%d,%d}", R2.x, R2.y, R2.w, R2.h);
-    LX_Log::log("R3{(%d,%d),%d,%d}", R3.x, R3.y, R3.w, R3.h);
-    LX_Log::log("R4{(%d,%d),%d,%d}", R4.x, R4.y, R4.w, R4.h);
+    LX_Log::log("R1{(%d,%d),%d,%d}", R1.fpoint.x.v, R1.fpoint.y.v, R1.w, R1.h);
+    LX_Log::log("R2{(%d,%d),%d,%d}", R2.fpoint.x.v, R2.fpoint.y.v, R2.w, R2.h);
+    LX_Log::log("R3{(%d,%d),%d,%d}", R3.fpoint.x.v, R3.fpoint.y.v, R3.w, R3.h);
+    LX_Log::log("R4{(%d,%d),%d,%d}", R4.fpoint.x.v, R4.fpoint.y.v, R4.w, R4.h);
     LX_Log::log("poly");
     displayPoly(poly);
 
@@ -1024,7 +1021,7 @@ void test_collision2PolygonAgain(void)
 void test_move(void)
 {
     LX_FloatPosition P{{1.0f}, {2.0f}};
-    LX_AABB R = {8,4,10,10};
+    LX_FloatingBox R{LX_FloatPosition{8.f, 4.0f},10,10};
 
     const float X = {-4.0f};
     const float Y = {8.0f};
@@ -1047,7 +1044,7 @@ void test_move(void)
     LX_Log::log(" = TEST Move = ");
 
     LX_Log::log("P(%d,%d)", P.x.v, P.y.v);
-    LX_Log::log("R{(%d,%d),%d,%d}", R.x, R.y, R.w, R.h);
+    LX_Log::log("R{(%d,%d),%d,%d}", R.fpoint.x.v, R.fpoint.y.v, R.w, R.h);
     LX_Log::log("poly");
     displayPoly(poly);
     LX_Log::log("expoly");
@@ -1065,14 +1062,14 @@ void test_move(void)
 
     LX_Log::log("Rectangle");
 
-    LX_AABB expected_aabb = {R.x + 2, R.y + 3, R.w, R.h};
+    const LX_FloatingBox expected_aabb{R.fpoint.x + 2, R.fpoint.y + 3, R.w, R.h};
     moveRect(R, LX_Vector2D{{2.0f}, {3.0f}});
 
-    if(R.x == expected_aabb.x && R.y == expected_aabb.y)
-        LX_Log::log("SUCCESS - Rectangle R{(%d,%d),%d,%d}", R.x, R.y, R.w, R.h);
+    if(R.fpoint == expected_aabb.fpoint)
+        LX_Log::log("SUCCESS - Rectangle R{(%d,%d),%d,%d}", R.fpoint.x.v, R.fpoint.y.v, R.w, R.h);
     else
         LX_Log::log("FAILURE - expected : Rectangle R(3,6,10,10); got: R{(%d,%d),%d,%d}",
-                    R.x, R.y, R.w, R.h);
+                    R.fpoint.x.v, R.fpoint.y.v, R.w, R.h);
 
     movePoly(poly, LX_Vector2D{X, Y});
     const unsigned long n = poly.numberOfEdges();
@@ -1091,7 +1088,7 @@ void test_move(void)
     try
     {
         bool ok = true;
-        for(unsigned int j = 0; j < n; j++)
+        for(unsigned long j = 0; j < n; j++)
         {
             LX_FloatPosition p1 = poly.getPoint(j);
             LX_FloatPosition p2 = expoly.getPoint(j);
@@ -1115,12 +1112,12 @@ void test_move(void)
 
     // reset
     movePoly(poly, LX_Vector2D{-X, -Y});
-    LX_AABB box = expoly.getEnclosingBox();
-    const LX_FloatPosition q{box.x + box.w / 2.0f, box.y + box.h / 2.0f};
+    const LX_FloatingBox& box = expoly.getEnclosingBox();
+    const LX_FloatPosition q{box.fpoint.x + box.w / 2.0f, box.fpoint.y + box.h / 2.0f};
 
     movePolyTo(poly, q);
-    LX_AABB b = poly.getEnclosingBox();
-    LX_FloatPosition s{b.x + b.w / 2.0f, b.y + b.h / 2.0f};
+    const LX_FloatingBox& b = poly.getEnclosingBox();
+    LX_FloatPosition s{b.fpoint.x + b.w / 2.0f, b.fpoint.y + b.h / 2.0f};
     LX_Log::log("centroid of poly: s(%d,%d)", s.x.v, s.y.v);
     LX_Log::log("centroid of expoly: q(%d,%d)", q.x.v, q.y.v);
 
@@ -1150,7 +1147,7 @@ void test_assignment(void)
 
     if(D == C)
         LX_Log::log("SUCCESS - Circle D{(%d,%d),%d}", D.center.x.v,
-        D.center.y.v, D.radius);
+                    D.center.y.v, D.radius);
     else
         LX_Log::log("FAILURE - expected: Circle D{{4,9},10}; Got: D{(%d,%d),%d}",
                     D.center.x.v, D.center.y.v, D.radius);
