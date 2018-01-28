@@ -177,6 +177,7 @@ bool collisionSegCircle(const LX_Circle& circle,
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
         return true;
 
+    const Float ZERO{0.0f};
     LX_FloatPosition O = circle.center;
     LX_Vector2D AB{B.x - A.x, B.y - A.y};
     LX_Vector2D AO{O.x - A.x, O.y - A.y};
@@ -186,13 +187,13 @@ bool collisionSegCircle(const LX_Circle& circle,
     Float scal_ab_ao = scalar_product(AB, AO);
     Float scal_mab_bo = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
-    if(scal_ab_ao < 0 || scal_mab_bo < 0)
+    if(scal_ab_ao < ZERO || scal_mab_bo < ZERO)
         return false;
 
     // Find the projection point of O
     Float scalp = scalar_product(AB, AB);
 
-    if(scalp == 0.0f)        // A and B are the same point
+    if(scalp == ZERO)        // A and B are the same point
         return false;
 
     Float t = scal_ab_ao / scalp;
@@ -318,20 +319,20 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
 {
     const unsigned long n = poly.numberOfEdges();
-    LX_FloatPosition A{rect.fpoint.x, rect.fpoint.y};
-    LX_FloatPosition B{rect.fpoint.x + rect.w, rect.fpoint.y};
-    LX_FloatPosition C{rect.fpoint.x + rect.w, rect.fpoint.y + rect.h};
-    LX_FloatPosition D{rect.fpoint.x, rect.fpoint.y + rect.h};
-    LX_FloatPosition E, F;
+    const LX_FloatPosition A{rect.fpoint.x, rect.fpoint.y};
+    const LX_FloatPosition B{rect.fpoint.x + rect.w, rect.fpoint.y};
+    const LX_FloatPosition C{rect.fpoint.x + rect.w, rect.fpoint.y + rect.h};
+    const LX_FloatPosition D{rect.fpoint.x, rect.fpoint.y + rect.h};
 
     for(unsigned long j = 0UL; j < n; j++)
     {
-        E = poly.getPoint(j);
+        const LX_FloatPosition& E = poly.getPoint(j);
+        const LX_FloatPosition& F = poly.getPoint((j == n - 1UL) ? 0UL : j + 1UL);
 
-        if(j == n - 1UL)
-            F = poly.getPoint(0UL);
+        /*if()
+            const LX_FloatPosition& F = poly.getPoint(0UL);
         else
-            F = poly.getPoint(j + 1UL);
+            F = poly.getPoint(j + 1UL);*/
 
         if(intersectSegment(A, B, E, F) || intersectSegment(B, C, E, F) ||
                 intersectSegment(C, D, E, F) || intersectSegment(D, A, E, F))
