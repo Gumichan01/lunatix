@@ -253,33 +253,22 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
     int nb_intersections = 0;
 
     const int v = 10000;
-    const unsigned long n = poly.numberOfEdges();
+    const unsigned long N = poly.numberOfEdges();
 
     const float rix = static_cast<float>(LX_Random::crand100());
     const float riy = static_cast<float>(LX_Random::crand100());
-    LX_FloatPosition I{v + rix, v + riy};
+    const LX_FloatPosition I{v + rix, v + riy};
 
-    for(unsigned int i = 0; i < n; i++)
+    for(unsigned int i = 0; i < N; i++)
     {
-        if(P == poly.getPoint(i))
+        const LX_FloatPosition& A = poly.getPoint(i);
+        const LX_FloatPosition& B = poly.getPoint((i == N - 1) ? 0: i + 1);
+
+        if(P == A)
             return true;
 
-        if(i == n-1)
-        {
-            LX_FloatPosition p1 = poly.getPoint(0);
-            LX_FloatPosition p2 = poly.getPoint(i);
-
-            if(intersectSegment(P, I, p1, p2))
-                nb_intersections++;
-        }
-        else
-        {
-            LX_FloatPosition p3 = poly.getPoint(i+1);
-            LX_FloatPosition p4 = poly.getPoint(i);
-
-            if(intersectSegment(P, I, p3, p4))
-                nb_intersections++;
-        }
+        if(intersectSegment(P, I, A, B))
+            nb_intersections++;
     }
 
     return (nb_intersections % 2 == 1);
@@ -288,21 +277,16 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 
 bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 {
-    LX_FloatPosition A, B;
     const LX_FloatPosition P = C.center;
-    const unsigned long n = poly.numberOfEdges();
+    const unsigned long N = poly.numberOfEdges();
 
     if(collisionPointPoly(P, poly) == true)
         return true;
 
-    for(unsigned int i = 0; i < n; i++)
+    for(unsigned int i = 0; i < N; i++)
     {
-        A = poly.getPoint(i);
-
-        if(i == n-1)
-            B = poly.getPoint(0);
-        else
-            B = poly.getPoint(i+1);
+        const LX_FloatPosition& A = poly.getPoint(i);
+        const LX_FloatPosition& B = poly.getPoint((i == N - 1) ? 0: i + 1);
 
         if(collisionSegCircle(C, A, B) == true)
             return true;
