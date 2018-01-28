@@ -72,8 +72,20 @@ struct LX_FloatingBox
 
 
 /**
+*   @struct LX_Segment
+*   @brief The segment
+*
+*   @note If you want to use an inifinite line, use LX_Line instead
+*/
+struct LX_Segment
+{
+    LX_FloatPosition p;
+    LX_FloatPosition q;
+};
+
+/**
 *   @struct LX_Line
-*   @brief The line structure
+*   @brief The line
 */
 struct LX_Line
 {
