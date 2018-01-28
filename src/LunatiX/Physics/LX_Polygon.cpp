@@ -162,18 +162,18 @@ public:
     }
 
 
-    void addPoint(const LX_FloatPosition& p)
+    inline void addPoint(const LX_FloatPosition& p)
     {
         _points.push_back(p);
     }
 
-    unsigned long numberOfEdges() const noexcept
+    inline unsigned long numberOfEdges() const noexcept
     {
         return _points.size();
     }
 
 
-    LX_FloatPosition getPoint(const unsigned long index) const
+    inline LX_FloatPosition getPoint(const unsigned long index) const
     {
         return _points.at(index);
     }
@@ -210,7 +210,7 @@ public:
     }
 
 
-    bool isConvex() const noexcept
+    inline bool isConvex() const noexcept
     {
         return _convex;
     }
