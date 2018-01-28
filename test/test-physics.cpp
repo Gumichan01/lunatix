@@ -199,8 +199,8 @@ void test_collisionPointRect(void)
     aabb = {40, 40, 30, 30};
 
     LX_Log::log(" = TEST POINT/AABB = ");
-    LX_Log::log("A(%d,%d)", A.x, A.y);
-    LX_Log::log("B(%d,%d)", B.x, B.y);
+    LX_Log::log("A(%f,%f)", A.x.v, A.y.v);
+    LX_Log::log("B(%f,%f)", B.x.v, B.y.v);
     LX_Log::log("AABB{(%d,%d),%d,%d}", aabb.x, aabb.y, aabb.w, aabb.h);
 
     LX_Log::log("Collision Point A/AABB");
@@ -306,15 +306,15 @@ void test_collision2Rect(void)
 void test_collisionRectCircle(void)
 {
     LX_AABB R1{0,0,50,25};
-    LX_Circle A{LX_FloatPosition{10,10},5};
-    LX_Circle B{LX_FloatPosition{51,26},15};
-    LX_Circle C{LX_FloatPosition{100,100},40};
+    LX_Circle A{LX_FloatPosition{10.0f,10.0f}, 5};
+    LX_Circle B{LX_FloatPosition{51.0f,26.0f}, 15};
+    LX_Circle C{LX_FloatPosition{100.0f,100.0f}, 40};
 
     LX_Log::log(" = TEST RECT/CIRCLE = ");
     LX_Log::log("R1{(%d,%d),%d,%d}", R1.x, R1.y, R1.w, R1.h);
-    LX_Log::log("A{(%d,%d),%d}", A.center.x, A.center.y, A.radius);
-    LX_Log::log("B{(%d,%d),%d}", B.center.x, B.center.y, B.radius);
-    LX_Log::log("C{(%d,%d),%d}", C.center.x, C.center.y, C.radius);
+    LX_Log::log("A{(%f,%f),%u}", A.center.x.v, A.center.y.v, A.radius);
+    LX_Log::log("B{(%f,%f),%u}", B.center.x.v, B.center.y.v, B.radius);
+    LX_Log::log("C{(%f,%f),%u}", C.center.x.v, C.center.y.v, C.radius);
 
     LX_Log::log("Collision Circle/Rect AABB A/R1");
     bool d = collisionCircleRect(A,R1);
