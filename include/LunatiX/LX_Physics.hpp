@@ -290,14 +290,14 @@ void moveRectTo(LX_FloatingBox& rect, const LX_FloatPosition& P) noexcept;
 */
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept;
 /**
-*   @fn void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
+*   @fn void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P) noexcept
 *
 *   Move a polygon to an absolute position
 *
 *   @param [in] poly The polygon to move
 *   @param [in] P The new position
 */
-void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P);
+void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P) noexcept;
 
 }
 

@@ -422,7 +422,7 @@ void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
     movePointTo(C.center, P);
 }
 
-void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P)
+void movePolyTo(LX_Polygon& poly, const LX_FloatPosition& P) noexcept
 {
     poly.moveTo(P);
 }

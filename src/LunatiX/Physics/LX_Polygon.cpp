@@ -224,7 +224,7 @@ public:
         });
     }
 
-    void moveTo(const LX_FloatPosition& p)
+    void moveTo(const LX_FloatPosition& p) noexcept
     {
         LX_FloatPosition centroid;
 
@@ -261,7 +261,7 @@ void LX_Polygon::convexity_() noexcept
         _polyimpl->convexity_();
 }
 
-// iIt is used by the function template
+// It is used by the function template
 void LX_Polygon::addPoint_(const LX_FloatPosition& p)
 {
     _polyimpl->addPoint(p);
@@ -298,7 +298,7 @@ void LX_Polygon::move(const LX_Vector2D& v) noexcept
     _polyimpl->_move(v);
 }
 
-void LX_Polygon::moveTo(const LX_FloatPosition& p)
+void LX_Polygon::moveTo(const LX_FloatPosition& p) noexcept
 {
     _polyimpl->moveTo(p);
 }

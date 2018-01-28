@@ -136,7 +136,7 @@ public:
     *
     *   @note Actually, the convexity of the polygon is dynamically evaluated
     *        each time a new point in added using ::addPoint() or ::addPoints().
-    *        The result is stored in an internal variable
+    *        The result is stored in an internal variable.
     */
     bool isConvex() const noexcept;
 
@@ -147,11 +147,12 @@ public:
     */
     void move(const LX_Vector2D& v) noexcept;
     /**
-    *   @fn void moveTo(const LX_FloatPosition& p)
+    *   @fn void moveTo(const LX_FloatPosition& p) noexcept
     *   @param [in] p The new position
     *   @note Complexity: O(n) — n is the number of vertices of the polygon
+    *   @warning If the polygon has less than 3 sides, the behaviour is undefined
     */
-    void moveTo(const LX_FloatPosition& p);
+    void moveTo(const LX_FloatPosition& p) noexcept;
 
     ~LX_Polygon();
 };
