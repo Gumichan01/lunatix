@@ -165,9 +165,9 @@ bool collisionSegCircle(const LX_Circle& circle,
         return true;
 
     LX_FloatPosition O = circle.center;
-    LX_Vector2D AB = LX_Vector2D{B.x - A.x, B.y - A.y};
-    LX_Vector2D AO = LX_Vector2D{O.x - A.x, O.y - A.y};
-    LX_Vector2D BO = LX_Vector2D{O.x - B.x, O.y - B.y};
+    LX_Vector2D AB{B.x - A.x, B.y - A.y};
+    LX_Vector2D AO{O.x - A.x, O.y - A.y};
+    LX_Vector2D BO{O.x - B.x, O.y - B.y};
 
     // Using the opposite value of vx for scal2
     Float scal_ab_ao = scalar_product(AB, AO);
