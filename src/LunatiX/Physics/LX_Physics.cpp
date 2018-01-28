@@ -223,22 +223,18 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
 bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
                       const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 {
-    LX_Vector2D AC, AD, AB;
-    float d;
+    LX_Vector2D AB{B.x - A.x, B.y - A.y};
+    LX_Vector2D AC{C.x - A.x, C.y - A.y};
+    LX_Vector2D AD{D.x - A.x, D.y - A.y};
 
-    AB = LX_Vector2D{B.x - A.x, B.y - A.y};
-    AC = LX_Vector2D{C.x - A.x, C.y - A.y};
-    AD = LX_Vector2D{D.x - A.x, D.y - A.y};
-    d = vector_product(AB, AD) * vector_product(AB, AC);
-
-    return (d <= 0.0f);
+    return (vector_product(AB, AD) * vector_product(AB, AC)) <= Float{0.0f};
 }
 
 
 bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
                       const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 {
-    return (intersectSegLine(A, B, C, D) && intersectSegLine(C, D, A, B));
+    return intersectSegLine(A, B, C, D) && intersectSegLine(C, D, A, B);
 }
 
 
@@ -252,16 +248,16 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
     const int v = 10000;
     const unsigned long N = poly.numberOfEdges();
-
     const float rix = static_cast<float>(LX_Random::crand100());
     const float riy = static_cast<float>(LX_Random::crand100());
     const LX_FloatPosition I{v + rix, v + riy};
+
     unsigned long nb_intersections = 0;
 
-    for(unsigned long i = 0; i < N; i++)
+    for(unsigned long i = 0UL; i < N; i++)
     {
         const LX_FloatPosition& A = poly.getPoint(i);
-        const LX_FloatPosition& B = poly.getPoint((i == N - 1) ? 0: i + 1);
+        const LX_FloatPosition& B = poly.getPoint((i == N - 1UL) ? 0UL: i + 1UL);
 
         if(P == A)
             return true;
@@ -270,7 +266,7 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
             nb_intersections++;
     }
 
-    return (nb_intersections % 2L == 1L);
+    return (nb_intersections % 2UL == 1UL);
 }
 
 
@@ -282,10 +278,10 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
     if(collisionPointPoly(P, poly) == true)
         return true;
 
-    for(unsigned int i = 0; i < N; i++)
+    for(unsigned long i = 0UL; i < N; i++)
     {
         const LX_FloatPosition& A = poly.getPoint(i);
-        const LX_FloatPosition& B = poly.getPoint((i == N - 1) ? 0: i + 1);
+        const LX_FloatPosition& B = poly.getPoint((i == N - 1UL) ? 0UL: i + 1UL);
 
         if(collisionSegCircle(C, A, B) == true)
             return true;
@@ -305,14 +301,14 @@ bool collisionRectPoly(const LX_AABB& rect, const LX_Polygon& poly)
     LX_FloatPosition E, F;
     const unsigned long n = poly.numberOfEdges();
 
-    for(unsigned int j = 0; j < n; j++)
+    for(unsigned long j = 0UL; j < n; j++)
     {
         E = poly.getPoint(j);
 
-        if(j == n-1)
-            F = poly.getPoint(0);
+        if(j == n - 1UL)
+            F = poly.getPoint(0UL);
         else
-            F = poly.getPoint(j+1);
+            F = poly.getPoint(j + 1UL);
 
         if(intersectSegment(A, B, E, F) || intersectSegment(B, C, E, F) ||
                 intersectSegment(C, D, E, F) || intersectSegment(D, A, E, F))
