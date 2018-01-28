@@ -169,10 +169,10 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 }
 
 
-bool collisionPointRect(const LX_FloatPosition& p, const LX_FloatingBox& rect) noexcept
+bool collisionPointRect(const LX_FloatPosition& p, const LX_FloatingBox& box) noexcept
 {
-    return !(p.x <= rect.fpoint.x || p.y >= (rect.fpoint.y + rect.h)
-             || p.y <= rect.fpoint.y || p.x >= (rect.fpoint.x + rect.w));
+    return !(p.x <= box.fpoint.x || p.y >= (box.fpoint.y + box.h)
+             || p.y <= box.fpoint.y || p.x >= (box.fpoint.x + box.w));
 }
 
 
@@ -244,27 +244,27 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
 
 #define PFL(x) static_cast<float>(x)
 
-bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) noexcept
+bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& box) noexcept
 {
     // Check if the center of the circle is in the AABB
-    if(collisionPointRect(circle.center, rect))
+    if(collisionPointRect(circle.center, box))
         return true;
 
     const LX_Line sides[] =
     {
-        LX_Line{ rect.fpoint, LX_Vector2D{ 0.0f, PFL(rect.h) } },
+        LX_Line{ box.fpoint, LX_Vector2D{ 0.0f, PFL(box.h) } },
 
         LX_Line{
-            LX_FloatPosition{ rect.fpoint.x, rect.fpoint.y + rect.h },
-            LX_Vector2D{ PFL(rect.w), 0.0f }
+            LX_FloatPosition{ box.fpoint.x, box.fpoint.y + box.h },
+            LX_Vector2D{ PFL(box.w), 0.0f }
         },
 
         LX_Line{
-            LX_FloatPosition{ rect.fpoint.x + rect.w, rect.fpoint.y },
-            LX_Vector2D{ 0.0f, PFL(rect.h) }
+            LX_FloatPosition{ box.fpoint.x + box.w, box.fpoint.y },
+            LX_Vector2D{ 0.0f, PFL(box.h) }
         },
 
-        LX_Line{ rect.fpoint, LX_Vector2D{ PFL(rect.w), 0.0f } }
+        LX_Line{ box.fpoint, LX_Vector2D{ PFL(box.w), 0.0f } }
     };
 
     for(const LX_Line& l : sides)
@@ -336,13 +336,13 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 }
 
 
-bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
+bool collisionRectPoly(const LX_FloatingBox& box, const LX_Polygon& poly)
 {
     const unsigned long n = poly.numberOfEdges();
-    const LX_FloatPosition A{rect.fpoint.x, rect.fpoint.y};
-    const LX_FloatPosition B{rect.fpoint.x + rect.w, rect.fpoint.y};
-    const LX_FloatPosition C{rect.fpoint.x + rect.w, rect.fpoint.y + rect.h};
-    const LX_FloatPosition D{rect.fpoint.x, rect.fpoint.y + rect.h};
+    const LX_FloatPosition A{box.fpoint.x, box.fpoint.y};
+    const LX_FloatPosition B{box.fpoint.x + box.w, box.fpoint.y};
+    const LX_FloatPosition C{box.fpoint.x + box.w, box.fpoint.y + box.h};
+    const LX_FloatPosition D{box.fpoint.x, box.fpoint.y + box.h};
 
     for(unsigned long j = 0UL; j < n; ++j)
     {
@@ -353,7 +353,7 @@ bool collisionRectPoly(const LX_FloatingBox& rect, const LX_Polygon& poly)
                 intersectSegment(C, D, E, F) || intersectSegment(D, A, E, F))
             return true;
 
-        if(collisionPointRect(E, rect))
+        if(collisionPointRect(E, box))
             return true;
     }
 
@@ -391,10 +391,10 @@ void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
     P.y += v.vy;
 }
 
-void moveRect(LX_FloatingBox& rect, const LX_Vector2D& v) noexcept
+void moveRect(LX_FloatingBox& box, const LX_Vector2D& v) noexcept
 {
-    rect.fpoint.x += v.vx;
-    rect.fpoint.y += v.vy;
+    box.fpoint.x += v.vx;
+    box.fpoint.y += v.vy;
 }
 
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
@@ -412,9 +412,9 @@ void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept
     P = dest;
 }
 
-void moveRectTo(LX_FloatingBox& rect, const LX_FloatPosition& P) noexcept
+void moveRectTo(LX_FloatingBox& box, const LX_FloatPosition& P) noexcept
 {
-    rect.fpoint = P;
+    box.fpoint = P;
 }
 
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept
