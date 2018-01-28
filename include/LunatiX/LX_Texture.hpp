@@ -20,7 +20,7 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_AABB.hpp>
+#include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_Format.hpp>
 #include <LunatiX/utils/utf8_string.hpp>

@@ -14,7 +14,7 @@
 #define LX_AABB_H_INCLUDED
 
 /**
-*   @file LX_AABB.hpp
+*   @file LX_ImgRect.hpp
 *   @todo remove this file?
 *   @brief The definition of LX_AABB
 *   @author Luxon Jean-Pierre(Gumichan01)

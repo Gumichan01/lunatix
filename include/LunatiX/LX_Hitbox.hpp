@@ -20,7 +20,7 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_AABB.hpp>
+#include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/utils/float.hpp>
 
