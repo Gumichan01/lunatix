@@ -657,9 +657,9 @@ void test_collisionPointPolygon(void)
     d = collisionPointPoly(O,poly);
 
     if(d != true)
-        LX_Log::log("FAILURE - N not in the polygon. expected: TRUE; Got: FALSE");
+        LX_Log::log("FAILURE - O not in the polygon. expected: TRUE; Got: FALSE");
     else
-        LX_Log::log("SUCCESS - N in the polygon OK");
+        LX_Log::log("SUCCESS - O in the polygon OK");
 
     LX_Log::log("collision Point P/Polygon");
     d = collisionPointPoly(P,poly);
@@ -708,7 +708,7 @@ void test_collisionPointPolygon(void)
 void test_collisionCirclePolygon(void)
 {
     LX_Circle M{LX_FloatPosition{12.0f, 7.0f}, 1};
-    LX_Circle N{LX_FloatPosition{2.0f, 7.0f}, 2};
+    LX_Circle N{LX_FloatPosition{7.0f, 2.0f}, 2};
     LX_Circle O{LX_FloatPosition{9.0f, 7.0f}, 10};
     LX_Circle S{LX_FloatPosition{2.0f, 2.0f}, 2};
     LX_Polygon poly;
@@ -731,33 +731,33 @@ void test_collisionCirclePolygon(void)
     bool d = collisionCirclePoly(M,poly);
 
     if(d != false)
-        LX_Log::log("FAILURE - M in the polygon. expected: FALSE; Got: TRUE");
+        LX_Log::log("FAILURE - Circle M in the polygon. expected: FALSE; Got: TRUE");
     else
-        LX_Log::log("SUCCESS - M not in the polygon OK");
+        LX_Log::log("SUCCESS - Circle M not in the polygon OK");
 
     LX_Log::log("Collision Circle S/Polygon");
     d = collisionCirclePoly(S,poly);
 
     if(d != false)
-        LX_Log::log("FAILURE - S in the polygon. expected: FALSE; Got: TRUE");
+        LX_Log::log("FAILURE - Circle S in the polygon. expected: FALSE; Got: TRUE");
     else
-        LX_Log::log("SUCCESS - S not in the polygon OK");
+        LX_Log::log("SUCCESS - Circle S not in the polygon OK");
 
     LX_Log::log("Collision Circle N/Polygon");
     d = collisionCirclePoly(N,poly);
 
     if(d != true)
-        LX_Log::log("FAILURE - N not in the polygon. expected: TRUE; Got: FALSE");
+        LX_Log::log("FAILURE - Circle N not in the polygon. expected: TRUE; Got: FALSE");
     else
-        LX_Log::log("SUCCESS - N in the polygon OK");
+        LX_Log::log("SUCCESS - Circle N in the polygon OK");
 
     LX_Log::log("Collision Circle O/Polygon");
     d = collisionCirclePoly(O,poly);
 
     if(d != true)
-        LX_Log::log("FAILURE - O not in the polygon. expected: TRUE; Got: FALSE");
+        LX_Log::log("FAILURE - Circle O not in the polygon. expected: TRUE; Got: FALSE");
     else
-        LX_Log::log("SUCCESS - O in the polygon OK");
+        LX_Log::log("SUCCESS - Circle O in the polygon OK");
 
     LX_Log::log(" = END TEST = ");
 }
