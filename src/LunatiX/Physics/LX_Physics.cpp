@@ -204,15 +204,18 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_AABB& rect) noexcept
     if(collisionPointRect(circle.center, rect))
         return true;
 
-    LX_Line sides[RECT_SIDES];
-    sides[0] = LX_Line{LX_FloatPosition{rect.x, rect.y}, LX_Vector2D{0.0f, PFL(rect.h)}};
-    sides[1] = LX_Line{LX_FloatPosition{rect.x, rect.y + rect.h}, LX_Vector2D{PFL(rect.w), 0.0f}};
-    sides[2] = LX_Line{LX_FloatPosition{rect.x + rect.w, rect.y}, LX_Vector2D{0.0f, PFL(rect.h)}};
-    sides[3] = LX_Line{LX_FloatPosition{rect.x, rect.y}, LX_Vector2D{PFL(rect.w), 0.0f}};
+    LX_Line sides[RECT_SIDES] = { LX_Line{LX_FloatPosition{rect.x, rect.y},
+                                          LX_Vector2D{0.0f, PFL(rect.h)}},
+                                  LX_Line{LX_FloatPosition{rect.x, rect.y + rect.h},
+                                          LX_Vector2D{PFL(rect.w), 0.0f}},
+                                  LX_Line{LX_FloatPosition{rect.x + rect.w, rect.y},
+                                          LX_Vector2D{0.0f, PFL(rect.h)}},
+                                  LX_Line{LX_FloatPosition{rect.x, rect.y},
+                                          LX_Vector2D{PFL(rect.w), 0.0f}} };
 
-    for(int i = 0; i < RECT_SIDES; i++)
+    for(const LX_Line& l : sides)
     {
-        if(collisionLineCircle(circle, sides[i]))
+        if(collisionLineCircle(circle, l))
             return true;
     }
 
