@@ -552,6 +552,13 @@ void test_collisionSeg(void)
 {
     LX_FloatPosition A{5.0f, 5.0f}, B{10.0f, 10.0f}, C{5.0f, 10.0f};
     LX_FloatPosition D{10.0f, 5.0f}, E{20.0f, 5.0f}, F{15.0f,5.0f};
+    const LX_Segment AB{A, B};
+    const LX_Segment AC{A, C};
+    const LX_Segment AD{A, D};
+    const LX_Segment AE{A, E};
+    const LX_Segment FE{F, E};
+    const LX_Segment BD{B, D};
+    const LX_Segment CD{C, D};
 
     LX_Log::log(" = TEST Collision Segment = ");
     LX_Log::log("A(%d,%d)", A.x.v, A.y.v);
@@ -562,7 +569,7 @@ void test_collisionSeg(void)
     LX_Log::log("F(%d,%d)", F.x.v, F.y.v);
     LX_Log::log("collision segement [AB]/[CD]");
 
-    bool d = intersectSegment(A,B,C,D);
+    bool d = intersectSegment(AB, CD);
 
     if(d != true)
         LX_Log::log("FAILURE - intersect [AB]/[CD] expected: TRUE; Got: FALSE");
@@ -571,7 +578,7 @@ void test_collisionSeg(void)
 
 
     LX_Log::log("collision segement [AC]/[BD]");
-    d = intersectSegment(A,C,B,D);
+    d = intersectSegment(AC, BD);
 
     if(d != false)
         LX_Log::log("FAILURE - intersect [AC]/[BD] expected: FALSE; Got: TRUE");
@@ -579,7 +586,7 @@ void test_collisionSeg(void)
         LX_Log::log("SUCCESS - no intersect [AC]/[BD] OK");
 
     LX_Log::log("collision segement [AB]/[AD]");
-    d = intersectSegment(A,B,A,D);
+    d = intersectSegment(AB, AD);
 
     if(d != true)
         LX_Log::log("FAILURE - intersect [AB]/[AD] expected: TRUE; Got: FALSE");
@@ -587,7 +594,7 @@ void test_collisionSeg(void)
         LX_Log::log("SUCCESS - intersect [AB]/[AD] OK");
 
     LX_Log::log("collision segement [AD]/[AE]");
-    d = intersectSegment(A,D,A,E);
+    d = intersectSegment(AD, AE);
 
     if(d != true)
         LX_Log::log("FAILURE - intersect [AD]/[AE] expected: TRUE; Got: FALSE");
@@ -595,7 +602,7 @@ void test_collisionSeg(void)
         LX_Log::log("SUCCESS - intersect [AD]/[AE] OK");
 
     LX_Log::log("collision segement [AD]/[FE]");
-    d = intersectSegment(A,D,F,E);
+    d = intersectSegment(AD, FE);
 
     if(d != true)
         LX_Log::log("FAILURE - intersect [AD]/[FE] expected: FALSE; Got: TRUE");
