@@ -106,6 +106,18 @@ bool basicCollisionPoly(const LX_Physics::LX_Polygon& poly1,
             || collisionPointPoly(origin2, poly1));
 }
 
+bool intersectSeg_(const LX_Physics::LX_FloatPosition& A,
+                   const LX_Physics::LX_FloatPosition& B,
+                   const LX_Physics::LX_FloatPosition& C,
+                   const LX_Physics::LX_FloatPosition& D) noexcept
+{
+    LX_Physics::LX_Vector2D AB{B.x - A.x, B.y - A.y};
+    LX_Physics::LX_Vector2D AC{C.x - A.x, C.y - A.y};
+    LX_Physics::LX_Vector2D AD{D.x - A.x, D.y - A.y};
+
+    return (vector_product(AB, AD) * vector_product(AB, AC)) <= Float{0.0f};
+}
+
 }
 
 
@@ -156,26 +168,38 @@ bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcep
 
 
 bool collisionSegCircle(const LX_Circle& circle,
-                        const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept
+                        const LX_FloatPosition& A,
+                        const LX_FloatPosition& B) noexcept
 {
+    return collisionLineCircle(circle, LX_Line{A, LX_Vector2D{B.x - A.x, B.y - A.y}});
+}
+
+bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
+{
+    /*const LX_FloatPosition Q{L.o.x + L.v.vx, L.o.y + L.v.vy};
+    return collisionSegCircle(circle, L.o, Q);*/
+
+    const LX_FloatPosition& A = L.o;
+    const LX_FloatPosition B{L.o.x + L.v.vx, L.o.y + L.v.vy};
+
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
         return true;
 
     const Float ZERO{0.0f};
-    LX_FloatPosition O = circle.center;
+    const LX_FloatPosition O = circle.center;
     LX_Vector2D AB{B.x - A.x, B.y - A.y};
     LX_Vector2D AO{O.x - A.x, O.y - A.y};
     LX_Vector2D BO{O.x - B.x, O.y - B.y};
 
     // Using the opposite value of vx for scal2
-    Float scal_ab_ao = scalar_product(AB, AO);
-    Float scal_mab_bo = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
+    const Float& scal_ab_ao  = scalar_product(AB, AO);
+    const Float& scal_mab_bo = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
     if(scal_ab_ao < ZERO || scal_mab_bo < ZERO)
         return false;
 
     // Find the projection point of O
-    Float scalp = scalar_product(AB, AB);
+    const Float& scalp = scalar_product(AB, AB);
 
     if(scalp == ZERO)        // A and B are the same point
         return false;
@@ -186,12 +210,6 @@ bool collisionSegCircle(const LX_Circle& circle,
 
     // Ok I can calculate the collision by using ↓ the projection point
     return collisionPointCircle(LX_FloatPosition{x, y}, circle);
-}
-
-bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
-{
-    const LX_FloatPosition Q{L.o.x + L.v.vx, L.o.y + L.v.vy};
-    return collisionSegCircle(circle, L.o, Q);
 }
 
 #define PFL(x) static_cast<float>(x)
@@ -229,23 +247,11 @@ bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) no
 }
 
 
-bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
-                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
-{
-    LX_Vector2D AB{B.x - A.x, B.y - A.y};
-    LX_Vector2D AC{C.x - A.x, C.y - A.y};
-    LX_Vector2D AD{D.x - A.x, D.y - A.y};
-
-    return (vector_product(AB, AD) * vector_product(AB, AC)) <= Float{0.0f};
-}
-
-
 bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
                       const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 {
-    return intersectSegLine(A, B, C, D) && intersectSegLine(C, D, A, B);
+    return intersectSeg_(A, B, C, D) && intersectSeg_(C, D, A, B);
 }
-
 
 bool intersectLine(const LX_Line& L1, const LX_Line& L2) noexcept
 {

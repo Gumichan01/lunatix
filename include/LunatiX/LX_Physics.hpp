@@ -161,23 +161,6 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept;
 bool collisionCircleRect(const LX_Circle& circle, const LX_FloatingBox& rect) noexcept;
 
 /**
-*   @fn bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
-*                            const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
-*
-*   Test the intersection between a line and a segment
-*
-*   @param [in] A the first point of the segment
-*   @param [in] B the second point of the segment
-*   @param [in] C the first point of the line
-*   @param [in] D the second point of the line
-*
-*   @return TRUE if there is an intersection, FALSE otherwise
-*
-*/
-bool intersectSegLine(const LX_FloatPosition& A, const LX_FloatPosition& B,
-                      const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept;
-
-/**
 *   @fn bool intersectSegment(const LX_FloatPosition& A, const LX_FloatPosition& B,
 *                            const LX_FloatPosition& C, const LX_FloatPosition& D) noexcept
 *
