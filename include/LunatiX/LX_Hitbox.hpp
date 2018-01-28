@@ -52,8 +52,6 @@ struct LX_FloatPosition
 
 LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
-/// @todo define LX_Segment
-/// @todo integrate the floating box into LX_Physics
 /// @todo conversion LX_FloatingBox → LX_Graphics::ImgRect
 
 /**
