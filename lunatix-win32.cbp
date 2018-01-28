@@ -53,7 +53,6 @@
 			<Add library="lib/win32/libSDL2_ttf.dll.a" />
 			<Add directory="lib/win32" />
 		</Linker>
-		<Unit filename="include/LunatiX/LX_AABB.hpp" />
 		<Unit filename="include/LunatiX/LX_Audio.hpp" />
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Colour.hpp" />
@@ -70,6 +69,7 @@
 		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
 		<Unit filename="include/LunatiX/LX_Hitbox.hpp" />
+		<Unit filename="include/LunatiX/LX_ImgRect.hpp" />
 		<Unit filename="include/LunatiX/LX_Library.hpp" />
 		<Unit filename="include/LunatiX/LX_Log.hpp" />
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
@@ -103,6 +103,7 @@
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
 		<Unit filename="include/LunatiX/Lunatix.hpp" />
+		<Unit filename="include/LunatiX/utils/float.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tagspriv.h" />
@@ -140,6 +141,7 @@
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/Text/LX_Text.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
+		<Unit filename="src/LunatiX/Utilities/float.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/8859.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/flac.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/id3genres.cpp" />
