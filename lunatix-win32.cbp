@@ -115,6 +115,7 @@
 		<Unit filename="src/LunatiX/Device/LX_Mouse.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileBuffer.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileIO.cpp" />
+		<Unit filename="src/LunatiX/Graphics/LX_ImgRect.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_OpenGL.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Texture.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Window.cpp" />
