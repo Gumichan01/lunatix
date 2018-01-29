@@ -37,7 +37,7 @@ const LX_Vector2D V0{0.0f, 0.0f};
 
 class LX_Particle_
 {
-    LX_FloatingBox _box;                       /* The box of the particle                 */
+    LX_FloatingBox _box;                /* The box of the particle                 */
     unsigned int _lifetime;             /* The delay to stay displayable           */
     LX_Physics::LX_Vector2D _velocity;  /* The velocity of the particle            */
     LX_Graphics::LX_Sprite& _texture;   /* The texture (for the texture rendering) */
