@@ -22,8 +22,8 @@
 #include <LunatiX/LX_Config.hpp>
 #include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_ImgRect.hpp>
-/// @todo v0.14.0 remove it (impl)
 #include <LunatiX/LX_Hitbox.hpp>
+/// @todo v0.14.0 remove it (impl)
 #include <LunatiX/LX_Vector2D.hpp>
 /// end
 
@@ -268,6 +268,12 @@ void LX_Window::drawLine(const LX_Graphics::LX_ImgCoord& p,
 void LX_Window::drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
 {
     SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) p, count);
+}
+
+void LX_Window::drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept
+{
+    SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) &vpoints[0],
+                        vpoints.size());
 }
 
 void LX_Window::drawLine(const LX_Graphics::LX_ImgCoord& p,

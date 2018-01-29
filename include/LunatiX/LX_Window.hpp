@@ -23,7 +23,9 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Colour.hpp>
+
 #include <memory>
+#include <vector>
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -45,13 +47,13 @@ namespace LX_TrueTypeFont
 class LX_Font;
 }
 
-/// @todo version 0.14.0 remove it
 namespace LX_Physics
 {
 struct LX_Circle;
+/// @todo version 0.14.0 remove it
 struct LX_Vector2D;
-}
 /// end
+}
 
 
 /**
@@ -202,26 +204,30 @@ public:
     void setIcon(const std::string& ficon) noexcept;
 
     /**
-    *   @deprecated will be removed in v0.14.0
     *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
     void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept;
-    /// @todo draw segment
-    //void drawLine(const LX_Physics::LX_Segment& segment) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
     *   @fn void drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
     *
-    *   @param [in] p A array of points
+    *   @param [in] p An array of points
     *   @param [in] count The number of points, drawing count-1 segments
     */
     void drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept;
-    /// @todo draw multiple segments
-    //void drawLine(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
+    /**
+    *   @fn void drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
+    *
+    *   Draw several connected segments on the window
+    *
+    *   @param [in] vpoints An array of points
+    *   @note pre-condition: *vpoints.size()* > 0
+    */
+    void drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
     *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
@@ -233,7 +239,6 @@ public:
     *        The length is calculating according to this formula: ||v||*2
     */
     void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept;
-
     /**
     *   @fn void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept
     *   @param [in] box The rectangle
