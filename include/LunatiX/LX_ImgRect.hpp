@@ -21,31 +21,78 @@
 *   @version 0.12
 */
 
-// LX_ImgRect is just an alias of SDL_Rect
-struct SDL_Rect;
+#include <LunatiX/LX_Hitbox.hpp>
+
+namespace LX_Physics
+{
+struct LX_FloatPosition;
+struct LX_FloatingBox;
+}
+
+namespace LX_Graphics
+{
+
 /**
 *   @ingroup Graphics
-*   @typedef LX_ImgRect
+*   @struct LX_ImgCoord
+*   @brief Image coordinates
+*/
+struct LX_ImgCoord
+{
+    int x;      /**< X position */
+    int y;      /**< Y position */
+};
+
+/**
+*   @fn LX_ImgCoord toPixelPosition(const LX_Physics::LX_FloatPosition& p) noexcept
+*
+*   @param p
+*   @return The LX_ImgCoord
+*/
+LX_ImgCoord toPixelPosition(const LX_Physics::LX_FloatPosition& p) noexcept;
+
+/**
+*   @ingroup Graphics
+*   @struct LX_ImgRect
 *   @brief The Image box
 *
 *   This box, defined as an Axis-Aligned Bounding Box (AABB) contains information
 *   about the position and the dimension of the image to display
 */
-using LX_ImgRect = SDL_Rect;
+struct LX_ImgRect
+{
+    LX_ImgCoord p;  /**< Position   */
+    int w, h;       /**< Dimension  */
+};
 
-/// @todo Create an ImgRect from LX_Graphics
 /**
-    This structure will be used by LX_Texture
-
-    ImgRect
-    {
-        LX_Point p;
-        int w, h;
-    }
-
-    + conversion ImgRect → SDL_Rect + vice-versa?
+*   @fn LX_ImgRect toImgRect(const LX_Physics::LX_FloatingBox& b) noexcept
+*
+*   @param b
+*   @return The LX_ImgRect
 */
+LX_ImgRect toImgRect(const LX_Physics::LX_FloatingBox& b) noexcept;
 
-#include <SDL2/SDL_rect.h>
+/**
+*   @fn bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept
+*
+*   @param [in] a The first point
+*   @param [in] b The second point
+*
+*   @return TRUE If these points have exactly the same coordinates,
+*          FALSE otherwise
+*/
+bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
+/**
+*   @fn bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept
+*
+*   @param [in] a The first point
+*   @param [in] b The second point
+*
+*   @return TRUE If these points have not the same coordinates, FALSE otherwise
+*/
+bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
+
+}
 
 #endif  /* LX_IMGRECT_H_INCLUDED */
