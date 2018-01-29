@@ -259,13 +259,13 @@ void LX_Window::setIcon(const std::string& ficon) noexcept
 }
 
 
-void LX_Window::drawSegment(const LX_Graphics::LX_ImgCoord& p,
-                            const LX_Graphics::LX_ImgCoord& q) noexcept
+void LX_Window::drawLine(const LX_Graphics::LX_ImgCoord& p,
+                         const LX_Graphics::LX_ImgCoord& q) noexcept
 {
     SDL_RenderDrawLine(_wimpl->_renderer, p.x, p.y, q.x, q.y);
 }
 
-void LX_Window::drawSegments(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
+void LX_Window::drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
 {
     SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) p, count);
 }
@@ -275,8 +275,8 @@ void LX_Window::drawLine(const LX_Graphics::LX_ImgCoord& p,
 {
     const int vx = static_cast<int>(v.vx);
     const int vy = static_cast<int>(v.vy);
-    drawSegment(p, LX_Graphics::LX_ImgCoord{p.x + vx, p.y + vy});
-    drawSegment(p, LX_Graphics::LX_ImgCoord{p.x - vx, p.y - vy});
+    drawLine(p, LX_Graphics::LX_ImgCoord{p.x + vx, p.y + vy});
+    drawLine(p, LX_Graphics::LX_ImgCoord{p.x - vx, p.y - vy});
 }
 
 
@@ -358,14 +358,14 @@ void LX_Window::fillCircle(const LX_Physics::LX_Circle& c) noexcept
 
     while(y >= x)
     {
-        drawSegment(LX_Graphics::LX_ImgCoord{P.x - y, P.y + x},
-                    LX_Graphics::LX_ImgCoord{P.x + y, P.y + x});
-        drawSegment(LX_Graphics::LX_ImgCoord{P.x - x,P.y + y},
-                    LX_Graphics::LX_ImgCoord{P.x + x, P.y + y});
-        drawSegment(LX_Graphics::LX_ImgCoord{P.x - x, P.y - y},
-                    LX_Graphics::LX_ImgCoord{P.x + x, P.y - y});
-        drawSegment(LX_Graphics::LX_ImgCoord{P.x - y, P.y - x},
-                    LX_Graphics::LX_ImgCoord{P.x + y, P.y - x});
+        drawLine(LX_Graphics::LX_ImgCoord{P.x - y, P.y + x},
+                 LX_Graphics::LX_ImgCoord{P.x + y, P.y + x});
+        drawLine(LX_Graphics::LX_ImgCoord{P.x - x,P.y + y},
+                 LX_Graphics::LX_ImgCoord{P.x + x, P.y + y});
+        drawLine(LX_Graphics::LX_ImgCoord{P.x - x, P.y - y},
+                 LX_Graphics::LX_ImgCoord{P.x + x, P.y - y});
+        drawLine(LX_Graphics::LX_ImgCoord{P.x - y, P.y - x},
+                 LX_Graphics::LX_ImgCoord{P.x + y, P.y - x});
 
         if(d >= 2 * x)
         {

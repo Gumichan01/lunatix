@@ -203,26 +203,25 @@ public:
 
     /**
     *   @deprecated will be removed in v0.14.0
-    *   @fn void drawSegment(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept
+    *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
-    void drawSegment(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept;
+    void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept;
     /// @todo draw segment
-    //void drawSegment(const LX_Physics::LX_Segment& segment) noexcept;
+    //void drawLine(const LX_Physics::LX_Segment& segment) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
-    *   @fn void drawSegments(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
+    *   @fn void drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
     *
     *   @param [in] p A array of points
     *   @param [in] count The number of points, drawing count-1 segments
     */
-    void drawSegments(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept;
-
+    void drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept;
     /// @todo draw multiple segments
-    //void drawSegments(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
+    //void drawLine(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
     *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
@@ -234,8 +233,7 @@ public:
     *        The length is calculating according to this formula: ||v||*2
     */
     void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept;
-    /// @todo draw line
-    //void drawLine(const LX_Physics::LX_Line& line) noexcept;
+
     /**
     *   @fn void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept
     *   @param [in] box The rectangle
