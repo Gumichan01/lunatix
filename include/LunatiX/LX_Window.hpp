@@ -81,18 +81,19 @@ const uint32_t LX_WINDOW_MAXIMIZED = 0x00000080;            /**< Window is maxim
 *   @brief Define the blend mode for drawing operations
 *
 */
-enum LX_BlendMode: uint32_t
+enum class LX_BlendMode
 {
-    LX_BLENDMODE_NONE = 0x00000000,     /**< no blending dstRGBA = srcRGBA */
-    LX_BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
-                                              dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
-                                              dstA = srcA + (dstA * (1-srcA)) */
-    LX_BLENDMODE_ADD = 0x00000002,      /**< additive blending
-                                              dstRGB = (srcRGB * srcA) + dstRGB
-                                              dstA = dstA */
-    LX_BLENDMODE_MOD = 0x00000004       /**< colour modulate
-                                              dstRGB = srcRGB * dstRGB
-                                              dstA = dstA */
+    LX_BLENDMODE_NONE,     /**< no blending dstRGBA = srcRGBA */
+
+    LX_BLENDMODE_BLEND,    /**< alpha blending
+                                dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                                dstA = srcA + (dstA * (1-srcA)) */
+    LX_BLENDMODE_ADD,      /**< additive blending
+                                dstRGB = (srcRGB * srcA) + dstRGB
+                                dstA = dstA */
+    LX_BLENDMODE_MOD       /**< colour modulate
+                                dstRGB = srcRGB * dstRGB
+                                dstA = dstA */
 };
 
 /**
@@ -280,7 +281,7 @@ public:
     */
     void setDrawColour(const LX_Colour& colour) noexcept;
     /**
-    *   @fn void setDrawBlendMode(LX_BlendMode mode) noexcept
+    *   @fn void setDrawBlendMode(const LX_BlendMode mode) noexcept
     *
     *   Set the blend mode for drawing operations (Fill, Line)
     *
@@ -299,7 +300,7 @@ public:
     *   |                     | destRGB = srcRGB * destRGB                       |
     *   |                     | destA = destA                                    |
     */
-    void setDrawBlendMode(LX_BlendMode mode) noexcept;
+    void setDrawBlendMode(const LX_BlendMode mode) noexcept;
     /**
     *   @fn void getDrawColour(const LX_Colour& colour) const noexcept
     *   Get the colour used for drawing operations (Lines, Rectangles, Circles)

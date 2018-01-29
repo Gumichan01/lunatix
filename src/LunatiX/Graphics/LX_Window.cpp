@@ -41,6 +41,33 @@ uint32_t generateFlags(const LX_Config::LX_Configuration& config)
     return flag;
 }
 
+using LX_Win::LX_BlendMode;
+
+SDL_BlendMode sdlBlend_(const LX_BlendMode& mode)
+{
+    SDL_BlendMode m;
+
+    switch(mode)
+    {
+    case LX_BlendMode::LX_BLENDMODE_BLEND:
+        m = SDL_BLENDMODE_BLEND;
+        break;
+
+    case LX_BlendMode::LX_BLENDMODE_ADD:
+        m = SDL_BLENDMODE_ADD;
+        break;
+
+    case LX_BlendMode::LX_BLENDMODE_MOD:
+        m = SDL_BLENDMODE_MOD;
+        break;
+    default:
+        m = SDL_BLENDMODE_NONE;
+        break;
+    }
+
+    return m;
+}
+
 }
 
 using namespace LX_Config;
@@ -365,14 +392,15 @@ void LX_Window::getDrawColour(LX_Colour& colour) const noexcept
 }
 
 
-void LX_Window::setDrawBlendMode(LX_BlendMode mode) noexcept
+void LX_Window::setDrawBlendMode(const LX_BlendMode mode) noexcept
 {
-    SDL_SetRenderDrawBlendMode(_wimpl->_renderer, static_cast<SDL_BlendMode>(mode));
+    SDL_SetRenderDrawBlendMode(_wimpl->_renderer, sdlBlend_(mode));
 }
 
 void LX_Window::getDrawBlendMode(LX_BlendMode& mode) const noexcept
 {
-    SDL_GetRenderDrawBlendMode(_wimpl->_renderer, reinterpret_cast<SDL_BlendMode*>(&mode));
+    SDL_BlendMode sdlm = sdlBlend_(mode);
+    SDL_GetRenderDrawBlendMode(_wimpl->_renderer, &sdlm);
 }
 
 
