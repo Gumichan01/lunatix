@@ -758,6 +758,11 @@ void LX_TextTexture::getTextDimension(int& w, int& h) const noexcept
     h = _dimension.h;
 }
 
+std::pair<int, int> LX_TextTexture::getTextDimension() const noexcept
+{
+    return std::make_pair(_dimension.w, _dimension.h);
+}
+
 int LX_TextTexture::getTextWidth() const noexcept
 {
     return _dimension.w;
@@ -807,6 +812,10 @@ void LX_TextTexture::setPosition(int x, int y) noexcept
     _dimension.p.y = y;
 }
 
+void LX_TextTexture::setPosition(const LX_Graphics::LX_ImgCoord& pos) noexcept
+{
+    _dimension.p = pos;
+}
 
 void LX_TextTexture::setTextSize(unsigned int sz) noexcept
 {

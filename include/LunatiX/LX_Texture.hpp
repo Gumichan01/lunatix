@@ -25,6 +25,7 @@
 #include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
 
+#include <utility>
 #include <exception>
 #include <vector>
 
@@ -339,7 +340,6 @@ public:
     */
     bool isInfinitelyLooped() const noexcept;
 
-
     ~LX_AnimatedSprite() = default;
 };
 
@@ -564,13 +564,18 @@ public:
     */
     unsigned int getTextSize() const noexcept;
     /**
+    *   @deprecated will be removed in v0.14.0
     *   @fn void getTextDimension(int& w, int& h) const noexcept
-    *   Get the dimension of the text displayed on the screen (width/height)
     *
     *   @param [out] w Width value returned by this function
     *   @param [out] h Height value returned by this function
     */
     void getTextDimension(int& w, int& h) const noexcept;
+    /**
+    *   @fn std::pair<int, int> getTextDimension() const noexcept
+    *   @return The dimension — a pair of integers
+    */
+    std::pair<int, int> getTextDimension() const noexcept;
     /**
     *   @fn int getTextWidth() const noexcept
     *   Get the width of the text displayed on the screen
@@ -590,6 +595,7 @@ public:
     */
     LX_Colour getTextColour() const noexcept;
     /**
+    *   @deprecated will be removed in v0.14.0
     *   @fn void setPosition(int x, int y) noexcept
     *
     *   Set the position of the current text
@@ -598,6 +604,11 @@ public:
     *   @param [in] y The new Y position
     */
     void setPosition(int x, int y) noexcept;
+    /**
+    *   @fn void setPosition(const LX_Graphics::LX_ImgCoord& pos) noexcept
+    *   @param [in] pos
+    */
+    void setPosition(const LX_Graphics::LX_ImgCoord& pos) noexcept;
     /**
     *   @fn virtual void setText(const std::string& text) noexcept
     *
