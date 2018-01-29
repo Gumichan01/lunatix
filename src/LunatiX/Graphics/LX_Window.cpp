@@ -31,7 +31,7 @@
 namespace
 {
 
-uint32_t generateFlags(const LX_Config::LX_Configuration& config)
+uint32_t genFlags_(const LX_Config::LX_Configuration& config)
 {
     uint32_t flag = 0x00000000;
 
@@ -115,7 +115,7 @@ void LX_loadWindowConfig(LX_WindowInfo &info) noexcept
     info.h = DEFAULT_WIN_HEIGHT;
     info.lw = 0;
     info.lh = 0;
-    info.flag = generateFlags(config);
+    info.flag = genFlags_(config);
     info.accel = true;
 }
 
