@@ -20,9 +20,9 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/LX_Colour.hpp>
 #include <LunatiX/LX_Format.hpp>
+#include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/utils/utf8_string.hpp>
 
 #include <exception>
@@ -54,6 +54,8 @@ class LX_Font;
 
 namespace LX_Graphics
 {
+
+struct LX_ImgRect;
 
 enum class LX_MIRROR : short
 {
@@ -181,7 +183,6 @@ public:
 class LX_Sprite: public LX_Texture
 {
     friend class LX_BufferedImage;
-    LX_ImgRect *_sprite_area;
     UTF8string _filename;
 
 protected:
@@ -204,7 +205,7 @@ public:
 
     virtual void draw() noexcept;
     /**
-    *   @fn virtual void draw(LX_ImgRect * box) noexcept
+    *   @fn virtual void draw(const LX_ImgRect& box) noexcept
     *
     *   Draw the current sprite on the window
     *
@@ -214,9 +215,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_ImgRect * box) noexcept;
+    virtual void draw(const LX_ImgRect& box) noexcept;
     /**
-    *   @fn virtual void draw(LX_ImgRect * box, const double angle) noexcept
+    *   @fn virtual void draw(const LX_ImgRect& box, const double angle) noexcept
     *
     *   Draw an area of the current sprite on the window with rotation
     *
@@ -228,9 +229,9 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_ImgRect * box, const double angle) noexcept;
+    virtual void draw(const LX_ImgRect& box, const double angle) noexcept;
     /**
-    *   @fn virtual void draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept
+    *   @fn virtual void draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept
     *
     *   Draw the current sprite on the window with rotation
     *
@@ -246,7 +247,7 @@ public:
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept;
+    virtual void draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn UTF8string getFileName() noexcept
@@ -315,9 +316,9 @@ public:
                       bool loop, LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
 
-    virtual void draw(LX_ImgRect * box) noexcept;
-    virtual void draw(LX_ImgRect * box, const double angle) noexcept;
-    virtual void draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept;
+    virtual void draw(const LX_ImgRect& box) noexcept;
+    virtual void draw(const LX_ImgRect& box, const double angle) noexcept;
+    virtual void draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept;
 
     /**
     *   @fn void resetAnimation() noexcept
@@ -459,7 +460,7 @@ public:
                         LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
     /**
-    *   @fn bool blit(LX_BufferedImage& s, LX_ImgRect& rect) noexcept
+    *   @fn bool blit(LX_BufferedImage& s, const LX_ImgRect& rect) noexcept
     *
     *   Put the surface given in argument on the current texture
     *
@@ -468,7 +469,7 @@ public:
     *
     *   @return TRUE on success, FALSE otherwise
     */
-    bool blit(LX_BufferedImage& s, LX_ImgRect& rect) noexcept;
+    bool blit(LX_BufferedImage& s, const LX_ImgRect& rect) noexcept;
     /**
     *   @fn void update() noexcept
     *   Update the texture in order to be drawn on the window

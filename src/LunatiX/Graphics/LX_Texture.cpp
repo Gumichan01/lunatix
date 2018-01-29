@@ -71,13 +71,18 @@ SDL_Texture * loadTexture_(const std::string& filename,
     return tmp_t;
 }
 
+SDL_Rect sdl_rect_(const LX_Graphics::LX_ImgRect& imgr)
+{
+    return SDL_Rect{imgr.p.x, imgr.p.y, imgr.w, imgr.h};
+}
+
 }
 
 namespace LX_Graphics
 {
 
-const LX_ImgRect rnull = {0, 0, 0, 0};
-const LX_Colour cnull = {0, 0, 0, 0};
+const LX_ImgRect rnull{{0, 0}, 0, 0};
+const LX_Colour cnull{0, 0, 0, 0};
 
 
 LX_ImageException::LX_ImageException(std::string err) : _string_error(err) {}
@@ -166,20 +171,21 @@ void LX_Sprite::draw() noexcept
     SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
 }
 
-void LX_Sprite::draw(LX_ImgRect * box) noexcept
+void LX_Sprite::draw(const LX_ImgRect& box) noexcept
 {
     draw(box, 0.0);
 }
 
 
-void LX_Sprite::draw(LX_ImgRect * box, const double angle) noexcept
+void LX_Sprite::draw(const LX_ImgRect& box, const double angle) noexcept
 {
     draw(box, angle, LX_MIRROR::NONE);
 }
 
-void LX_Sprite::draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept
+void LX_Sprite::draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept
 {
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr, box,
+    const SDL_Rect SDL_RECT = sdl_rect_(box);
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr, &SDL_RECT,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
 }
 
@@ -218,18 +224,18 @@ LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Wind
       _started(false), _loop(loop), _drawable(true) {}
 
 
-void LX_AnimatedSprite::draw(LX_ImgRect * box) noexcept
+void LX_AnimatedSprite::draw(const LX_ImgRect& box) noexcept
 {
     draw(box, 0.0);
 }
 
-void LX_AnimatedSprite::draw(LX_ImgRect * box, const double angle) noexcept
+void LX_AnimatedSprite::draw(const LX_ImgRect& box, const double angle) noexcept
 {
     draw(box, angle, LX_MIRROR::NONE);
 }
 
 
-void LX_AnimatedSprite::draw(LX_ImgRect * box, const double angle, const LX_MIRROR mirror) noexcept
+void LX_AnimatedSprite::draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept
 {
     if(!_started)
     {
@@ -253,8 +259,10 @@ void LX_AnimatedSprite::draw(LX_ImgRect * box, const double angle, const LX_MIRR
 
     if(_drawable)
     {
+        const SDL_Rect SDL_RECT = sdl_rect_(box);
+        const SDL_Rect COORD = sdl_rect_(_coordinates[_frame]);
         SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture,
-                         &_coordinates[_frame], box, (-radianToDegree(angle)),
+                         &COORD, &SDL_RECT, (-radianToDegree(angle)),
                          nullptr, shortToFlip_(mirror));
     }
 }
@@ -644,9 +652,10 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PIXELFORMAT fo
 }
 
 
-bool LX_StreamingTexture::blit(LX_BufferedImage& s, LX_ImgRect& rect) noexcept
+bool LX_StreamingTexture::blit(LX_BufferedImage& s, const LX_ImgRect& rect) noexcept
 {
-    bool b = (SDL_BlitScaled(s._surface, nullptr, _screen, &rect) == 0);
+    SDL_Rect SDL_RECT = sdl_rect_(rect);
+    bool b = (SDL_BlitScaled(s._surface, nullptr, _screen, &SDL_RECT) == 0);
 
     if(!_update)
         _update = b;
@@ -727,8 +736,9 @@ void LX_TextTexture::draw(const double angle) noexcept
 
 void LX_TextTexture::draw(const double angle, const LX_MIRROR mirror) noexcept
 {
+    const SDL_Rect DIM = sdl_rect_(_dimension);
     SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr,
-                     &_dimension, (-radianToDegree(angle)), nullptr,
+                     &DIM, (-radianToDegree(angle)), nullptr,
                      shortToFlip_(mirror));
 }
 
@@ -793,8 +803,8 @@ void LX_TextTexture::setText(const UTF8string& text, unsigned int sz) noexcept
 
 void LX_TextTexture::setPosition(int x, int y) noexcept
 {
-    _dimension.x = x;
-    _dimension.y = y;
+    _dimension.p.x = x;
+    _dimension.p.y = y;
 }
 
 
