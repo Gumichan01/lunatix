@@ -68,6 +68,7 @@ struct LX_FloatingBox
     int h;                      /**< Height     */
 };
 
+LX_ImgRect toImgRect(const LX_FloatingBox& b) noexcept;
 
 /**
 *   @struct LX_Segment
