@@ -25,7 +25,7 @@ LX_Sprite *blue;
 class Dot
 {
     LX_ParticleSystem *sys;
-    LX_ImgRect box;
+    LX_FloatingBox box;
 
     Dot(Dot& d);
 
@@ -35,14 +35,14 @@ public:
     {
         LX_Particle *p = nullptr;
         LX_Random::initRand();
-        LX_ImgRect hitbox;
 
         sys = new LX_ParticleSystem(N);
-        box = {100,100,20,20};
+        box = LX_FloatingBox{LX_FloatPosition{100.0f, 100.0f}, 20, 20};
 
         for(int i = 0; i < N; i++)
         {
-            hitbox = {box.x - 5 + (rand()%25), box.y - 5 + (rand()%25),5,5};
+            LX_FloatingBox hitbox{LX_FloatPosition{box.fpoint.x - fbox(5.0f) + fbox(rand()%25),
+                                  box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
@@ -70,14 +70,13 @@ public:
     void update()
     {
         LX_Particle *p = nullptr;
-        LX_ImgRect hitbox;
-
         sys->updateParticles();
-        moveRect(box,LX_Vector2D{10.0f, 0.0f});
+        moveBox(box, LX_Vector2D{10.0f, 0.0f});
 
         for(int i = 0; i < N; i++)
         {
-            hitbox = {box.x - 5 + (rand()%25), box.y - 5 + (rand()%25),5,5};
+            LX_FloatingBox hitbox{LX_FloatPosition{box.fpoint.x - fbox(5.0f) + fbox(rand()%25),
+                                  box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
