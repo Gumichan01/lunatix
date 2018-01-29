@@ -34,7 +34,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
     int main(int argc, char** argv)
     {
-        LX_AABB position = {0,0,256,256};
+        LX_Graphics::LX_ImgRect position{{0,0},256,256};
         LX_EventHandler ev;
         bool go = true;
 
@@ -68,7 +68,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
             }
 
             w.clearWindow();
-            sprite.draw(&position);
+            sprite.draw(position);
             w.update();
             LX_Timer::delay(33);
         }
