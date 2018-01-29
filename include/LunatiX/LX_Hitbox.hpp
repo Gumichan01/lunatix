@@ -20,25 +20,12 @@
 *   @version 0.12
 */
 
-#include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/utils/float.hpp>
-
-#include <SDL2/SDL_rect.h>
 
 
 namespace LX_Physics
 {
-
-/**
-*   @struct LX_Point
-*   @brief The position
-*/
-struct LX_Point
-{
-    int x;      /**< X position */
-    int y;      /**< Y position */
-};
 
 /**
 *   @struct LX_FloatPosition
@@ -49,16 +36,6 @@ struct LX_FloatPosition
     Float x;
     Float y;
 };
-
-/**
-*   @fn LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept
-*
-*   @param p
-*   @return The LX_Point
-*/
-LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
-
-/// @todo conversion LX_FloatingBox → LX_Graphics::ImgRect
 
 /**
 *   @struct LX_FloatingBox
@@ -73,14 +50,6 @@ struct LX_FloatingBox
     int w;                      /**< Width      */
     int h;                      /**< Height     */
 };
-
-/**
-*   @fn LX_ImgRect toImgRect(const LX_FloatingBox& b) noexcept
-*
-*   @param b
-*   @return The LX_ImgRect
-*/
-LX_ImgRect toImgRect(const LX_FloatingBox& b) noexcept;
 
 /**
 *   @struct LX_Segment
@@ -132,26 +101,6 @@ struct LX_Circle
 
 
 // Operators of points and circles
-/**
-*   @fn bool operator ==(const LX_Point& a, const LX_Point& b) noexcept
-*
-*   @param [in] a The first point
-*   @param [in] b The second point
-*
-*   @return TRUE If these points have exactly the same coordinates,
-*          FALSE otherwise
-*/
-bool operator ==(const LX_Point& a, const LX_Point& b) noexcept;
-/**
-*   @fn bool operator !=(const LX_Point& a, const LX_Point& b) noexcept
-*
-*   @param [in] a The first point
-*   @param [in] b The second point
-*
-*   @return TRUE If these points have not the same coordinates, FALSE otherwise
-*/
-bool operator !=(const LX_Point& a, const LX_Point& b) noexcept;
-
 /**
 *   @fn bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 
