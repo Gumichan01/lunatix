@@ -50,6 +50,12 @@ struct LX_FloatPosition
     Float y;
 };
 
+/**
+*   @fn LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept
+*
+*   @param p
+*   @return The LX_Point
+*/
 LX_Point toPixelPosition(const LX_FloatPosition& p) noexcept;
 
 /// @todo conversion LX_FloatingBox → LX_Graphics::ImgRect
@@ -68,6 +74,12 @@ struct LX_FloatingBox
     int h;                      /**< Height     */
 };
 
+/**
+*   @fn LX_ImgRect toImgRect(const LX_FloatingBox& b) noexcept
+*
+*   @param b
+*   @return The LX_ImgRect
+*/
 LX_ImgRect toImgRect(const LX_FloatingBox& b) noexcept;
 
 /**
