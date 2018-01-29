@@ -200,15 +200,16 @@ public:
     void setIcon(const std::string& ficon) noexcept;
 
     /**
+    *   @deprecated will be removed in v0.14.0
     *   @fn void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
-    *
-    *   Draw a segment on the window
-    *
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
     void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept;
+    /// @todo draw segment
+    //void drawSegment(const LX_Physics::LX_Segment& segment) noexcept;
     /**
+    *   @deprecated will be removed in v0.14.0
     *   @fn void drawSegments(const LX_Physics::LX_Point * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
@@ -217,10 +218,13 @@ public:
     *   @param [in] count The number of points, drawing count-1 segments
     */
     void drawSegments(const LX_Physics::LX_Point * p, const int count) noexcept;
+
+    /// @todo draw multiple segments
+    /*template <typename Iterator>
+    void drawSegments(Iterator first, Iterator last) noexcept;*/
     /**
+    *   @deprecated will be removed in v0.14.0
     *   @fn void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
-    *
-    *   Draw a line on the window
     *
     *   @param [in] p The point
     *   @param [in] v The direction vector
@@ -229,17 +233,16 @@ public:
     *        The length is calculating according to this formula: ||v||*2
     */
     void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept;
+    /// @todo draw line
+    //void drawLine(const LX_Physics::LX_Line& line) noexcept;
     /**
     *   @fn void drawRect(const LX_ImgRect& box) noexcept
-    *   Draw a rectangle on a window
     *   @param [in] box The rectangle
     */
     void drawRect(const LX_ImgRect& box) noexcept;
     /**
+    *   @deprecated will be removed in v0.14.0
     *   @fn void drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
-    *
-    *   Draw a rectangle using a point and a vector
-    *
     *   @param [in] p The point
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *

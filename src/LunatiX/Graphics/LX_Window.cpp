@@ -284,43 +284,41 @@ void LX_Window::drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 {
     int w = static_cast<int>(v.vx);
     int h = static_cast<int>(v.vy);
-    const LX_ImgRect box = {p.x, p.y, w, h};
-    drawRect(box);
+    drawRect(LX_ImgRect{p.x, p.y, w, h});
 }
 
 void LX_Window::drawCircle(const LX_Physics::LX_Circle& c) noexcept
 {
-    const int x_center = c.center.x;
-    const int y_center = c.center.y;
-    const int r = static_cast<int>(c.radius);
+    const LX_Physics::LX_Point& P = LX_Physics::toPixelPosition(c.center);
+    const int R = static_cast<int>(c.radius);
     int x = 0;
-    int y = r;
-    int d = r - 1;
+    int y = R;
+    int d = R - 1;
 
     while(y >= x)
     {
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + x, y_center + y);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + y, y_center + x);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - x, y_center + y);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - y, y_center + x);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + x, y_center - y);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center + y, y_center - x);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - x, y_center - y);
-        SDL_RenderDrawPoint(_wimpl->_renderer, x_center - y, y_center - x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x + x, P.y + y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x + y, P.y + x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x - x, P.y + y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x - y, P.y + x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x + x, P.y - y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x + y, P.y - x);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x - x, P.y - y);
+        SDL_RenderDrawPoint(_wimpl->_renderer, P.x - y, P.y - x);
 
-        if(d >= 2*x)
+        if(d >= 2 * x)
         {
-            d -= 2*x + 1;
+            d -= 2 * x + 1;
             x +=1;
         }
-        else if(d < 2*(r-y))
+        else if(d < 2 * (R - y))
         {
-            d += 2*y - 1;
+            d += 2 * y - 1;
             y -= 1;
         }
         else
         {
-            d += 2*(y - x - 1);
+            d += 2 * (y - x - 1);
             y -= 1;
             x += 1;
         }
@@ -337,43 +335,41 @@ void LX_Window::fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vec
 {
     int w = static_cast<int>(v.vx);
     int h = static_cast<int>(v.vy);
-    const LX_ImgRect box = {p.x, p.y, w, h};
-    fillRect(box);
+    fillRect(LX_ImgRect{p.x, p.y, w, h});
 }
 
 void LX_Window::fillCircle(const LX_Physics::LX_Circle& c) noexcept
 {
-    const int x_center = c.center.x;
-    const int y_center = c.center.y;
-    const int r = static_cast<int>(c.radius);
+    const LX_Physics::LX_Point& P = LX_Physics::toPixelPosition(c.center);
+    const int R = static_cast<int>(c.radius);
     int x = 0;
-    int y = r;
-    int d = r - 1;
+    int y = R;
+    int d = R - 1;
 
     while(y >= x)
     {
-        drawSegment(LX_Physics::LX_Point{x_center - y, y_center + x},
-                    LX_Physics::LX_Point{x_center + y, y_center + x});
-        drawSegment(LX_Physics::LX_Point{x_center - x,y_center + y},
-                    LX_Physics::LX_Point{x_center + x, y_center + y});
-        drawSegment(LX_Physics::LX_Point{x_center - x, y_center - y},
-                    LX_Physics::LX_Point{x_center + x, y_center - y});
-        drawSegment(LX_Physics::LX_Point{x_center - y, y_center - x},
-                    LX_Physics::LX_Point{x_center + y, y_center - x});
+        drawSegment(LX_Physics::LX_Point{P.x - y, P.y + x},
+                    LX_Physics::LX_Point{P.x + y, P.y + x});
+        drawSegment(LX_Physics::LX_Point{P.x - x,P.y + y},
+                    LX_Physics::LX_Point{P.x + x, P.y + y});
+        drawSegment(LX_Physics::LX_Point{P.x - x, P.y - y},
+                    LX_Physics::LX_Point{P.x + x, P.y - y});
+        drawSegment(LX_Physics::LX_Point{P.x - y, P.y - x},
+                    LX_Physics::LX_Point{P.x + y, P.y - x});
 
-        if(d >= 2*x)
+        if(d >= 2 * x)
         {
-            d -= 2*x + 1;
+            d -= 2 * x + 1;
             x +=1;
         }
-        else if(d < 2*(r-y))
+        else if(d < 2 * (R - y))
         {
-            d += 2*y - 1;
+            d += 2 * y - 1;
             y -= 1;
         }
         else
         {
-            d += 2*(y - x - 1);
+            d += 2 * (y - x - 1);
             y -= 1;
             x += 1;
         }
