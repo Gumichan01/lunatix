@@ -23,7 +23,6 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/LX_Colour.hpp>
-#include <LunatiX/LX_ImgRect.hpp>
 #include <memory>
 
 struct SDL_Window;
@@ -37,6 +36,8 @@ class LX_StreamingTexture;
 class LX_AnimatedSprite;
 class LX_TextTexture;
 class LX_BufferedImage;
+class LX_ImgCoord;
+class LX_ImgRect;
 }
 
 namespace LX_TrueTypeFont
@@ -44,12 +45,13 @@ namespace LX_TrueTypeFont
 class LX_Font;
 }
 
+/// @todo version 0.14.0 remove it
 namespace LX_Physics
 {
-struct LX_Point;
 struct LX_Circle;
 struct LX_Vector2D;
 }
+/// end
 
 
 /**
@@ -201,30 +203,29 @@ public:
 
     /**
     *   @deprecated will be removed in v0.14.0
-    *   @fn void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
+    *   @fn void drawSegment(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
-    void drawSegment(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept;
+    void drawSegment(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept;
     /// @todo draw segment
     //void drawSegment(const LX_Physics::LX_Segment& segment) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
-    *   @fn void drawSegments(const LX_Physics::LX_Point * p, const int count) noexcept
+    *   @fn void drawSegments(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
     *
     *   @param [in] p A array of points
     *   @param [in] count The number of points, drawing count-1 segments
     */
-    void drawSegments(const LX_Physics::LX_Point * p, const int count) noexcept;
+    void drawSegments(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept;
 
     /// @todo draw multiple segments
-    /*template <typename Iterator>
-    void drawSegments(Iterator first, Iterator last) noexcept;*/
+    //void drawSegments(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
-    *   @fn void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] p The point
     *   @param [in] v The direction vector
@@ -232,22 +233,22 @@ public:
     *   @note The length of a line depends on the norm of the direction vector
     *        The length is calculating according to this formula: ||v||*2
     */
-    void drawLine(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept;
+    void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept;
     /// @todo draw line
     //void drawLine(const LX_Physics::LX_Line& line) noexcept;
     /**
-    *   @fn void drawRect(const LX_ImgRect& box) noexcept
+    *   @fn void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept
     *   @param [in] box The rectangle
     */
-    void drawRect(const LX_ImgRect& box) noexcept;
+    void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept;
     /**
     *   @deprecated will be removed in v0.14.0
-    *   @fn void drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
     *   @param [in] p The point
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *
     */
-    void drawRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept;
+    void drawRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept;
     /**
     *   @fn void drawCircle(const LX_Physics::LX_Circle& c) noexcept
     *   Draw a circle on a window
@@ -256,20 +257,21 @@ public:
     void drawCircle(const LX_Physics::LX_Circle& c) noexcept;
 
     /**
-    *   @fn void fillRect(const LX_ImgRect& box) noexcept
+    *   @fn void fillRect(const LX_Graphics::LX_ImgRect& box) noexcept
     *   Fill a rectangle on a window
     *   @param [in] box The rectangle to fill
     */
-    void fillRect(const LX_ImgRect& box) noexcept;
+    void fillRect(const LX_Graphics::LX_ImgRect& box) noexcept;
     /**
-    *   @fn void fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept
+    *   @deprecated will be removed in v0.14.0
+    *   @fn void fillRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
     *
     *   Fill a rectangle using a point and a 2D vector
     *
     *   @param [in] p The point
     *   @param [in] v The vector
     */
-    void fillRect(const LX_Physics::LX_Point& p, const LX_Physics::LX_Vector2D& v) noexcept;
+    void fillRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept;
     /**
     *   @fn void fillCircle(const LX_Physics::LX_Circle& c) noexcept
     *   Fill a circle on a window
@@ -354,23 +356,23 @@ public:
     */
     void setWindowSize(int w, int h) noexcept;
     /**
-    *   @fn bool setViewPort(LX_ImgRect * viewport) noexcept
+    *   @fn bool setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
     *
     *   et a specific drawing area (viewport) for rendering
     *
     *   @param [in] viewport The drawing area to set. *nullptr* defines the entire target
     *   @return TRUE on success, FALSE otherwise
     */
-    bool setViewPort(LX_ImgRect * viewport) noexcept;
+    bool setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept;
     /**
-    *   @fn void getViewPort(LX_ImgRect& viewport) const noexcept
+    *   @fn void getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept
     *
     *   Get the drawing area (viewport) for rendering
     *
     *   @param [out] viewport The drawing area to fill
     *
     */
-    void getViewPort(LX_ImgRect& viewport) const noexcept;
+    void getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept;
 
     /**
     *   @fn void toggleFullscreen(uint32_t flag) noexcept
