@@ -361,12 +361,16 @@ public:
     /**
     *   @fn bool setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
     *
-    *   et a specific drawing area (viewport) for rendering
+    *   Set a specific drawing area (viewport) for rendering
     *
-    *   @param [in] viewport The drawing area to set. *nullptr* defines the entire target
+    *   @param [in] viewport The drawing area to set.
     *   @return TRUE on success, FALSE otherwise
     */
     bool setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept;
+    /**
+    *   @fn void resetViewPort() noexcept
+    */
+    void resetViewPort() noexcept;
     /**
     *   @fn void getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept
     *
