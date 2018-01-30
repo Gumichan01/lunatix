@@ -42,7 +42,7 @@ public:
         for(int i = 0; i < N; i++)
         {
             LX_FloatingBox hitbox{LX_FloatPosition{box.fpoint.x - fbox(5.0f) + fbox(rand()%25),
-                                  box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
+                                                   box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
@@ -76,7 +76,7 @@ public:
         for(int i = 0; i < N; i++)
         {
             LX_FloatingBox hitbox{LX_FloatPosition{box.fpoint.x - fbox(5.0f) + fbox(rand()%25),
-                                  box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
+                                                   box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {

@@ -250,7 +250,7 @@ void test_image(LX_Win::LX_Window *win)
         for(double i = 0.00; i < PI2; i += 0.02)
         {
             win->clearWindow();
-            img.draw(&box,i);
+            img.draw(box, i);
             win->update();
             LX_Timer::delay(16);
         }
@@ -260,9 +260,9 @@ void test_image(LX_Win::LX_Window *win)
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 512; i++)
         {
-            box.x += 1;
+            box.p.x += 1;
             win->clearWindow();
-            img.draw(&box);
+            img.draw(box);
             win->update();
             LX_Timer::delay(16);
         }
@@ -298,7 +298,7 @@ void test_image(LX_Win::LX_Window *win)
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 64; i++)
         {
-            box.x += 4;
+            box.p.x += 4;
             img.blit(data,box);
             img.update();
             win->clearWindow();
@@ -391,7 +391,7 @@ void test_image(LX_Win::LX_Window *win)
             for(int i = 0; i < 512; i++)
             {
                 win->clearWindow();
-                sprite.draw(&rect);
+                sprite.draw(rect);
                 win->update();
                 LX_Timer::delay(16);
             }
@@ -414,7 +414,7 @@ void test_image(LX_Win::LX_Window *win)
                 while((LX_Timer::getTicks() - t) < 2000)
                 {
                     win->clearWindow();
-                    sprite.draw(&rect);
+                    sprite.draw(rect);
                     win->update();
                     LX_Timer::delay(16);
                 }
@@ -457,27 +457,27 @@ void test_viewport(LX_Win::LX_Window *win)
     coordinates.push_back({1272,449,211,448});
     coordinates.push_back({1484,449,211,448});
 
-    LX_Graphics::LX_Sprite img(name,*win);
+    LX_Graphics::LX_Sprite img(name, *win);
     LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
 
-    LX_ImgRect viewport{win->getWidth()/2, 0,win->getWidth()/2, win->getHeight()/2};
+    LX_ImgRect viewport{{win->getWidth()/2, 0}, win->getWidth()/2, win->getHeight()/2};
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Viewport: {%d,%d,%d,%d}",
-                    viewport.x,viewport.y,viewport.w,viewport.h);
+                    viewport.p.x, viewport.p.y, viewport.w, viewport.h);
 
     Uint32 b = SDL_GetTicks();
     LX_ImgRect brect{0, 0, win->getWidth()/2, win->getHeight()/2};
-    LX_Colour bcolour = {0,0,0,255};
+    LX_Colour bcolour{0, 0, 0, 255};
 
     while(SDL_GetTicks() - b < 4096)
     {
         win->clearWindow();
-        win->setViewPort(nullptr);
+        win->resetViewPort();
         img.draw();
 
-        win->setViewPort(&viewport);
+        win->setViewPort(viewport);
         win->setDrawColour(bcolour);
         win->fillRect(brect);
-        sprite.draw(&rect);
+        sprite.draw(rect);
 
         win->update();
         LX_Timer::delay(16);
@@ -726,9 +726,9 @@ void test_drawing(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST draw = ");
     LX_Log::log("Draw a segment with M(32,32) and N(64,448)");
-    LX_Physics::LX_Point M{32,32};
-    LX_Physics::LX_Point N{64,448};
-    LX_Physics::LX_Point O{512,256};
+    LX_ImgCoord M{32,32};
+    LX_ImgCoord N{64,448};
+    LX_ImgCoord O{512,256};
     LX_Physics::LX_Vector2D u{256.0f,128.0f};
     LX_Physics::LX_Vector2D v{2048.0f,0.0f};
     LX_ImgRect b{128,128,512,100};
@@ -736,7 +736,7 @@ void test_drawing(LX_Win::LX_Window *win)
 
     win->setDrawColour(c);
     win->clearWindow();
-    win->drawSegment(M,N);
+    win->drawLine(M, N);
     win->update();
     LX_Timer::delay(1000);
 
@@ -761,14 +761,14 @@ void test_drawing(LX_Win::LX_Window *win)
 
     LX_Timer::delay(2048);
     LX_Log::log("Draw multiple lines using several points");
-    LX_Physics::LX_Point points[8] = {{64,64},{128,32},{256,64},{768,512},
+    std::vector<LX_ImgCoord> points = {{64,64},{128,32},{256,64},{768,512},
         {512,256},{16,448},{32,512},{256,42}
     };
 
     c = {255,255,255,255};
     win->setDrawColour(c);
     win->clearWindow();
-    win->drawSegments(points,8);
+    win->drawLines(points);
     win->update();
     LX_Timer::delay(2048);
 

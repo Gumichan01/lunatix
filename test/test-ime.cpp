@@ -16,7 +16,10 @@ public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
         : LX_Text::LX_RedrawCallback(), _w(win),
-        _font(fname, {255,255,255,0}, 32) {}
+          _font(fname,
+    {
+        255,255,255,0
+    }, 32) {}
 
     void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
                      size_t cursor, size_t prev_cur) noexcept
