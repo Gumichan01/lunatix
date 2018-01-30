@@ -429,10 +429,10 @@ void LX_Window::setWindowSize(int w, int h) noexcept
 }
 
 
-bool LX_Window::setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
+void LX_Window::setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
 {
     const SDL_Rect VPORT{viewport.p.x, viewport.p.y, viewport.w, viewport.h};
-    return SDL_RenderSetViewport(_wimpl->_renderer, &VPORT) == 0;
+    SDL_RenderSetViewport(_wimpl->_renderer, &VPORT);
 }
 
 void LX_Window::resetViewPort() noexcept
