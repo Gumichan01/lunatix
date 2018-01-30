@@ -316,17 +316,17 @@ void setPanning(int chan, uint8_t left, uint8_t right) noexcept
 
 void removePanning() noexcept
 {
-    setPanning(LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
+    setPanning(LX_MIX_FX_LOUD, LX_MIX_FX_LOUD);
 }
 
 void removePanning(int chan) noexcept
 {
-    setPanning(chan, LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
+    setPanning(chan, LX_MIX_FX_LOUD, LX_MIX_FX_LOUD);
 }
 
 void setPosition(int16_t angle) noexcept
 {
-    setPosition(angle, LX_MIXER_EFFECT_NO_DISTANCE);
+    setPosition(angle, LX_MIX_FX_NO_DISTANCE);
 }
 
 
@@ -343,13 +343,13 @@ void setPosition(int chan, int16_t angle, uint8_t distance) noexcept
 
 void resetPosition() noexcept
 {
-    Mix_SetPosition(MIX_CHANNEL_POST, LX_MIXER_EFFECT_NO_ANGLE,
-                    LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(MIX_CHANNEL_POST, LX_MIX_FX_NO_ANGLE,
+                    LX_MIX_FX_NO_DISTANCE);
 }
 
 void resetPosition(int chan) noexcept
 {
-    Mix_SetPosition(chan, LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(chan, LX_MIX_FX_NO_ANGLE, LX_MIX_FX_NO_DISTANCE);
 }
 
 void reverseStereo(bool flip) noexcept

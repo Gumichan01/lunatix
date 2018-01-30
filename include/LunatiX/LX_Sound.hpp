@@ -27,8 +27,8 @@
 namespace LX_Mixer
 {
 
-const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */
-const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
+const int LX_MIX_LOOP = -1;   /**< Activate the loop      */
+const int LX_MIX_NOLOOP = 0;  /**< No loop is activated   */
 
 
 /**

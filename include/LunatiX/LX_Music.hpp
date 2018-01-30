@@ -156,7 +156,7 @@ public:
     *   Play the music specified in the LX_Music class
     *   @return TRUE on success, FALSE otherwise
     *
-    *   @note This function internally calls play(int loops) with LX_MIXER_NOLOOP
+    *   @note This function internally calls play(int loops) with LX_MIX_NOLOOP
     */
     virtual bool play() noexcept;
     /**
@@ -168,8 +168,8 @@ public:
     *
     *   @return TRUE on success,FALSE otherwise
     *
-    *   @note If loops is set to LX_MIXER_NOLOOP, the music is played only once.
-    *   @note If loops is set to LX_MIXER_LOOP, the music is played forever.
+    *   @note If loops is set to LX_MIX_NOLOOP, the music is played only once.
+    *   @note If loops is set to LX_MIX_LOOP, the music is played forever.
     */
     bool play(int loops) noexcept;
     /**

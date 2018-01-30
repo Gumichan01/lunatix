@@ -117,17 +117,17 @@ public:
 
     void fadeIn(int ms) noexcept
     {
-        Mix_FadeInMusic(_music, LX_MIXER_NOLOOP, ms);
+        Mix_FadeInMusic(_music, LX_MIX_NOLOOP, ms);
     }
 
     void fadeInPos(int ms, int pos) noexcept
     {
-        Mix_FadeInMusicPos(_music, LX_MIXER_NOLOOP, ms, pos);
+        Mix_FadeInMusicPos(_music, LX_MIX_NOLOOP, ms, pos);
     }
 
     bool play() noexcept
     {
-        return play(LX_MIXER_NOLOOP);
+        return play(LX_MIX_NOLOOP);
     }
 
     bool play(int loops) noexcept
