@@ -59,8 +59,7 @@ public:
 
     void draw() noexcept
     {
-        /// @todo convert LX_FloatingBox into ImgRect
-        //_texture.draw(&_box);
+        _texture.draw(LX_Graphics::toImgRect(_box));
     }
 
     bool isDead() const noexcept
