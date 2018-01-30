@@ -28,8 +28,6 @@
 namespace LX_Device
 {
 
-const short GUID_SIZE = 33;          // Size of the data in SDL_JoystickGUID
-
 int numberOfDevices() noexcept
 {
     return SDL_NumJoysticks();
@@ -37,11 +35,12 @@ int numberOfDevices() noexcept
 
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
-    std::ostringstream stream;
+    const short GUID_SIZE = 33;     // Size of the data in SDL_JoystickGUID
     char guid[GUID_SIZE] = {'\0'};
     SDL_JoystickGetGUIDString(info.uid, guid, GUID_SIZE);
 
-    stream << std::endl << " ==== Gamepad Information ==== "
+    std::ostringstream stream;
+    stream << "\n ==== Gamepad Information ==== "
            << "\nGamepad - ID : "                << info.id
            << "\nGamepad - UID : "               << guid
            << "\nGamepad - Name : "              << info.name
