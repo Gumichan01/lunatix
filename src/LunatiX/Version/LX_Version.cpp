@@ -19,6 +19,8 @@
 */
 
 #include <LunatiX/LX_Version.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
+
 #include <SDL2/SDL_version.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -37,9 +39,9 @@ namespace LX_VersionInfo
 const short LX_MAJOR_VERSION = 0;
 const short LX_MINOR_VERSION = 13;
 const short LX_PATCH_VERSION = 0;
-const char * LX_STATUS       = "unstable";
-const char * LX_COPYRIGHT    = "Copyright © 2018";
-const char * LX_AUTHOR       = "Luxon Jean-Pierre";
+const UTF8string LX_STATUS("unstable");
+const UTF8string LX_COPYRIGHT("Copyright © 2018");
+const UTF8string LX_AUTHOR("Luxon Jean-Pierre");
 
 // Functions
 
@@ -48,9 +50,9 @@ void info() noexcept
     LX_Version luna;
     getVersion(luna);
 
-    cout << endl << "LunatiX v" << luna.major
+    cout << "\nLunatiX v" << luna.major
          << "."  << luna.minor << "." <<  luna.patch << "-" << luna.status
-         << endl << LX_COPYRIGHT << " " << LX_AUTHOR << endl;
+         << "\n" << LX_COPYRIGHT << " " << LX_AUTHOR << "\n";
 }
 
 
@@ -59,7 +61,7 @@ void getVersion(LX_Version& version) noexcept
     version.major = LX_MAJOR_VERSION;
     version.minor = LX_MINOR_VERSION;
     version.patch = LX_PATCH_VERSION;
-    strcpy(version.status, LX_STATUS);
+    version.status = LX_AUTHOR.utf8_sstring();
 }
 
 

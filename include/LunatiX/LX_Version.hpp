@@ -20,6 +20,8 @@
 *   @version 0.12
 */
 
+#include <string>
+
 /**
 *   @ingroup Config
 *   @namespace LX_VersionInfo
@@ -27,8 +29,6 @@
 */
 namespace LX_VersionInfo
 {
-
-const int STATUS_LEN = 8;
 
 /**
 *   @struct LX_Version
@@ -40,7 +40,7 @@ struct LX_Version
     short major;         /**< Information about the major version */
     short minor;         /**< Information about the minor version */
     short patch;         /**< Information about the patch version */
-    char status[STATUS_LEN];
+    std::string status;
 };
 
 /**
