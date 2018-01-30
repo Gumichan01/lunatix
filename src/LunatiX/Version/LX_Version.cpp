@@ -58,10 +58,10 @@ void info() noexcept
 
 void getVersion(LX_Version& version) noexcept
 {
-    version.major = LX_MAJOR_VERSION;
-    version.minor = LX_MINOR_VERSION;
-    version.patch = LX_PATCH_VERSION;
-    version.status = LX_AUTHOR.utf8_sstring();
+    version.major  = LX_MAJOR_VERSION;
+    version.minor  = LX_MINOR_VERSION;
+    version.patch  = LX_PATCH_VERSION;
+    version.status = LX_STATUS.utf8_sstring();
 }
 
 
