@@ -10,14 +10,11 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-template <typename T, typename std::enable_if<!std::is_same<T, char>::value, T>::type>
-T xrand();
 
-template <typename T, typename std::enable_if<!std::is_same<T, bool>::value, T>::type>
-T xrand();
-
-template <typename Num, typename std::enable_if<std::is_integral<Num>::value, Num>::type >
-Num xrand()
+template <typename Num>
+typename std::enable_if<std::is_integral<Num>::value &&
+                        !std::is_same<Num, bool>::value &&
+                        !std::is_same<Num, char>::value, Num>::type xrand()
 {
     return static_cast<Num>(1024); // for testing
 }

@@ -43,11 +43,16 @@ namespace LX_Random
 */
 void initRand() noexcept;
 
-template <typename Num, typename std::enable_if<std::is_integral<Num>::value, Num>::type >
-Num xrand();
-/*{
-    return static_cast<Num>(1024); // for testing
-}*/
+/*template <typename T>
+typename std::enable_if<, T>::type xrand();
+
+template <typename T>
+typename std::enable_if<, T>::type xrand();*/
+
+template <typename Num>
+typename std::enable_if<std::is_integral<Num>::value &&
+                        !std::is_same<Num, bool>::value &&
+                        !std::is_same<Num, char>::value, Num>::type xrand();
 
 /**
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
