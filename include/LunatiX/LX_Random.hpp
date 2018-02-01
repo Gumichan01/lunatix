@@ -20,6 +20,7 @@
 *   @version 0.12
 */
 
+#include <type_traits>
 #include <cstdint>
 
 #pragma message "Some functions in LX_Random are deprecated, please check the documentation"
@@ -41,6 +42,18 @@ namespace LX_Random
 *   setting a seed
 */
 void initRand() noexcept;
+
+template <typename T, typename std::enable_if<!std::is_same<T, char>::value, T>::type>
+T xrand();
+
+template <typename T, typename std::enable_if<!std::is_same<T, bool>::value, T>::type>
+T xrand();
+
+template <typename Num, typename std::enable_if<std::is_integral<Num>::value, Num>::type >
+Num xrand()
+{
+    return static_cast<Num>(1024); // for testing
+}
 
 /**
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
