@@ -29,6 +29,8 @@
 #include <exception>
 #include <vector>
 
+#pragma message "Some functions in LX_Texture are deprecated, please check the documentation"
+
 struct SDL_Surface;
 struct SDL_Texture;
 
@@ -564,7 +566,7 @@ public:
     */
     unsigned int getTextSize() const noexcept;
     /**
-    *   @deprecated will be removed in v0.14.0
+    *   @deprecated This signature will be removed in v0.14.0
     *   @fn void getTextDimension(int& w, int& h) const noexcept
     *
     *   @param [out] w Width value returned by this function
@@ -595,7 +597,7 @@ public:
     */
     LX_Colour getTextColour() const noexcept;
     /**
-    *   @deprecated will be removed in v0.14.0
+    *   @deprecated This signature will be removed in v0.14.0
     *   @fn void setPosition(int x, int y) noexcept
     *
     *   Set the position of the current text

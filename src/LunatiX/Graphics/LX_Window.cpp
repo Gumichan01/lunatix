@@ -23,7 +23,7 @@
 #include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_ImgRect.hpp>
 #include <LunatiX/LX_Hitbox.hpp>
-/// @todo v0.14.0 remove it (impl)
+/// todo v0.14.0 remove it (impl)
 #include <LunatiX/LX_Vector2D.hpp>
 /// end
 

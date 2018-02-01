@@ -64,7 +64,7 @@ uint64_t xorshiftRand() noexcept
     x ^= x >> 12; // a
     x ^= x << 25; // b
     x ^= x >> 27; // c
-    return x * UINT64_C(2685821657736338717);
+    return x * UINT64_C(0x2545F4914F6CDD1D);
 }
 
 
