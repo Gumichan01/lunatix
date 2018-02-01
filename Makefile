@@ -65,7 +65,7 @@ $(SRC_DEVICE_PATH)LX_Haptic.cpp $(SRC_DEVICE_PATH)LX_Mouse.cpp \
 $(SRC_FILEIO_PATH)LX_FileIO.cpp $(SRC_FILEIO_PATH)LX_FileBuffer.cpp \
 $(SRC_GRAPHICS_PATH)LX_OpenGL.cpp $(SRC_GRAPHICS_PATH)LX_Window.cpp \
 $(SRC_GRAPHICS_PATH)LX_WindowManager.cpp $(SRC_GRAPHICS_PATH)LX_Texture.cpp \
-$(SRC_INPUT_PATH)LX_Event.cpp \
+$(SRC_GRAPHICS_PATH)LX_ImgRect.cpp $(SRC_INPUT_PATH)LX_Event.cpp \
 $(SRC_LIBRARY_PATH)LX_Config.cpp $(SRC_LIBRARY_PATH)LX_Library.cpp \
 $(SRC_MIXER_PATH)LX_Sound.cpp $(SRC_MIXER_PATH)LX_Chunk.cpp \
 $(SRC_MIXER_PATH)LX_Music.cpp $(SRC_MIXER_PATH)LX_Mixer.cpp \
