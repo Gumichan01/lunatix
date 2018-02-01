@@ -47,7 +47,6 @@ void initRand() noexcept
     srand(static_cast<unsigned int>(time(nullptr)));
 }
 
-
 uint64_t xorshiftRand() noexcept
 {
     static uint64_t x = 0;
