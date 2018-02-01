@@ -43,6 +43,7 @@ namespace LX_Random
 void initRand() noexcept;
 
 /**
+*   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
 *   @fn uint64_t xorshiftRand() noexcept
 *   Returns a pseudorandom number between 0 and (2^64 - 1)
 *   @return An integer value between 0 and 2^64 - 1
