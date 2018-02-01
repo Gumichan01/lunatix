@@ -16,6 +16,7 @@
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-O0" />
 				</Compiler>
 			</Target>
 			<Target title="Dynamic_library">
@@ -87,6 +88,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="include/LunatiX/LX_Random.hpp" />
+		<Unit filename="include/LunatiX/LX_Random.tpp" />
 		<Unit filename="include/LunatiX/LX_Sound.hpp" />
 		<Unit filename="include/LunatiX/LX_Sync.hpp" />
 		<Unit filename="include/LunatiX/LX_SystemInfo.hpp" />
