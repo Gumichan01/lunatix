@@ -135,7 +135,7 @@ public:
     *   @return TRUE if the polygon is convex, false otherwise
     *
     *   @note Actually, the convexity of the polygon is dynamically evaluated
-    *        each time a new point in added using ::addPoint() or ::addPoints().
+    *        each time a new point in added using addPoint() or addPoints().
     *        The result is stored in an internal variable.
     */
     bool isConvex() const noexcept;

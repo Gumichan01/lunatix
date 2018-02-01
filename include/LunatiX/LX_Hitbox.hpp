@@ -42,7 +42,7 @@ struct LX_FloatPosition
 *   @brief The logical hitbox (Axis-Aligned Bounding Box)
 *
 *   @note If you want to use an Oriented Bounding Box (OBB),
-*         you need to use ::LX_Polygon instead
+*         you need to use LX_Polygon instead
 */
 struct LX_FloatingBox
 {
