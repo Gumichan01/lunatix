@@ -995,8 +995,8 @@ void test_collision2PolygonAgain(void)
     LX_Log::log("Generate two random polygons with %d sides",N);
     for(unsigned int i = 0; i < N; i++)
     {
-        poly1.addPoint(LX_FloatPosition{LX_Random::xorshiftRand()%M, LX_Random::xorshiftRand()%M});
-        poly2.addPoint(LX_FloatPosition{LX_Random::xorshiftRand()%M, LX_Random::xorshiftRand()%M});
+        poly1.addPoint(LX_FloatPosition{LX_Random::xrand<long>()%M, LX_Random::xrand<long>()%M});
+        poly2.addPoint(LX_FloatPosition{LX_Random::xrand<long>()%M, LX_Random::xrand<long>()%M});
     }
 
     LX_Log::log("Calculate the collision #1");
@@ -1009,8 +1009,8 @@ void test_collision2PolygonAgain(void)
     LX_Log::log("Generate two other random polygons with %d sides in two different areas",N);
     for(unsigned int i = 0; i < N; i++)
     {
-        poly3.addPoint(LX_FloatPosition{LX_Random::xorshiftRand()%M, LX_Random::xorshiftRand()%M});
-        poly4.addPoint(LX_FloatPosition{LX_Random::xorshiftRand()%M + N, LX_Random::xorshiftRand()%M + N});
+        poly3.addPoint(LX_FloatPosition{LX_Random::xrand<long>()%M, LX_Random::xrand<long>()%M});
+        poly4.addPoint(LX_FloatPosition{LX_Random::xrand<long>()%M + N, LX_Random::xrand<long>()%M + N});
     }
 
     LX_Log::log("Calculate the collision #2");
