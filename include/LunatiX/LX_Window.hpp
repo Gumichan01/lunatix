@@ -206,12 +206,14 @@ public:
 
     /**
     *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept
+    *
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
     void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
+    *
     *   @fn void drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
@@ -231,6 +233,7 @@ public:
     void drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
     /**
     *   @deprecated This signature of DrawLine is deprecated and will be removed in v0.14.0
+    *
     *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] p The point
@@ -247,6 +250,7 @@ public:
     void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept;
     /**
     *   @deprecated This signature of DrawRect will be removed in v0.14.0
+    *
     *   @fn void drawRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
     *   @param [in] p The point
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
@@ -268,6 +272,7 @@ public:
     void fillRect(const LX_Graphics::LX_ImgRect& box) noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
+    *
     *   @fn void fillRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
     *
     *   Fill a rectangle using a point and a 2D vector

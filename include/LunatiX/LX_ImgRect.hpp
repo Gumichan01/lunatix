@@ -15,7 +15,6 @@
 
 /**
 *   @file LX_ImgRect.hpp
-*   @todo remove this file?
 *   @brief The definition of LX_ImgRect
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.12

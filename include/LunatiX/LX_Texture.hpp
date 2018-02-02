@@ -123,6 +123,7 @@ public:
 
     /**
     *   @deprecated bind() will be put in a new sub-class and removed from LX_Texture in 0.14.0
+    *
     *   @fn bool bind(float *iw = nullptr, float *ih = nullptr) noexcept
     *
     *   Bind a texture (its internal texture) to the OpenGL context
@@ -152,6 +153,7 @@ public:
     bool bind(float *iw = nullptr, float *ih = nullptr) noexcept;
     /**
     *   @deprecated unbind() will be put in a new sub-class and removed from LX_Texture in 0.14.0
+    *
     *   @fn bool unbind() noexcept
     *
     *   Unbind a texture
@@ -566,6 +568,7 @@ public:
     unsigned int getTextSize() const noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
+    *
     *   @fn void getTextDimension(int& w, int& h) const noexcept
     *
     *   @param [out] w Width value returned by this function
@@ -597,6 +600,7 @@ public:
     LX_Colour getTextColour() const noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
+    *
     *   @fn void setPosition(int x, int y) noexcept
     *
     *   Set the position of the current text
