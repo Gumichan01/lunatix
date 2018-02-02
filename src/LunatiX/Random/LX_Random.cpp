@@ -47,12 +47,12 @@ void initRand() noexcept
     srand(static_cast<unsigned int>(time(nullptr)));
 }
 
-uint64_t xorshiftRand() noexcept
+uint64_t _Prand::rand()
 {
     static uint64_t x = 0;
     static bool first_call = false;
 
-    if(first_call == false)
+    if(!first_call)
     {
         // x must be a nonzero value
         x = static_cast<uint64_t>(crand() + 1);
@@ -66,6 +66,10 @@ uint64_t xorshiftRand() noexcept
     return x * UINT64_C(0x2545F4914F6CDD1D);
 }
 
+uint64_t xorshiftRand() noexcept
+{
+    return _Prand::rand();
+}
 
 int crand() noexcept
 {

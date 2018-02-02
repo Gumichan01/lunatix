@@ -11,10 +11,30 @@
 */
 
 
+class _Prand
+{
+private:
+
+    template <typename Num>
+    friend typename std::enable_if<std::is_integral<Num>::value &&
+                                   !std::is_same<Num, bool>::value &&
+                                   !std::is_same<Num, char>::value, Num>::type xrand();
+    friend uint64_t xorshiftRand() noexcept;
+
+    _Prand() = delete;
+    ~_Prand() = delete;
+    _Prand(const _Prand& other) = delete;
+    _Prand(_Prand&& other) = delete;
+    _Prand& operator=(const _Prand& other) = delete;
+    _Prand& operator=(_Prand&& other) = delete;
+
+    static uint64_t rand();
+};
+
 template <typename Num>
 typename std::enable_if<std::is_integral<Num>::value &&
                         !std::is_same<Num, bool>::value &&
                         !std::is_same<Num, char>::value, Num>::type xrand()
 {
-    return static_cast<Num>(1024); // for testing
+    return static_cast<Num>(_Prand::rand());
 }
