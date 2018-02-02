@@ -46,7 +46,8 @@ public:
 
     LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
                  const LX_Physics::LX_Vector2D& v) noexcept
-        : _box(b), _lifetime(xorshiftRand()%DELAY), _velocity(v), _texture(sp) {}
+        : _box(b), _lifetime(xrand<unsigned int>()%DELAY), _velocity(v),
+          _texture(sp) {}
 
     void update() noexcept
     {
