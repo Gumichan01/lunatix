@@ -29,7 +29,6 @@
 #include <exception>
 #include <vector>
 
-#pragma message "Some functions in LX_Texture are deprecated, please check the documentation"
 
 struct SDL_Surface;
 struct SDL_Texture;

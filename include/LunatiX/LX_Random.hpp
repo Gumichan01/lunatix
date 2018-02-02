@@ -23,7 +23,6 @@
 #include <type_traits>
 #include <cstdint>
 
-#pragma message "Some functions in LX_Random are deprecated, please check the documentation"
 
 /**
 *   @ingroup System

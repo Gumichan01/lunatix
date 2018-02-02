@@ -27,7 +27,6 @@
 #include <memory>
 #include <vector>
 
-#pragma message "Some functions in LX_Window are deprecated, please check the documentation"
 
 struct SDL_Window;
 struct SDL_Renderer;
