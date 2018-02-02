@@ -21,6 +21,7 @@
 */
 
 #include <type_traits>
+#include <limits>
 #include <cstdint>
 
 
@@ -46,8 +47,9 @@ void initRand() noexcept;
 /// @todo doc
 template <typename Num>
 typename std::enable_if<std::is_integral<Num>::value &&
-                        !std::is_same<Num, bool>::value &&
-                        !std::is_same<Num, char>::value, Num>::type xrand();
+!std::is_same<Num, bool>::value &&
+!std::is_same<Num, char>::value, Num>::type xrand(Num min = 0,
+        Num max = std::numeric_limits<Num>::max());
 
 
 

@@ -64,8 +64,8 @@ uint64_t _Prand::rand()
     x ^= x << 25; // b
     x ^= x >> 27; // c
     return x * UINT64_C(0x2545F4914F6CDD1D);
-}
 
+}
 uint64_t xorshiftRand() noexcept
 {
     return _Prand::rand();
