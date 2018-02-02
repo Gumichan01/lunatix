@@ -30,23 +30,23 @@ using namespace LX_Physics;
 namespace LX_ParticleEngine
 {
 
-const int DELAY = 16;
-const LX_Vector2D V0{0.0f, 0.0f};
+const unsigned int DELAY = 16;
+const LX_Vector2D VNULL{0.0f, 0.0f};
 
 /* LX_Particle — private implementation */
 
 class LX_Particle_
 {
-    LX_FloatingBox _box;                /* The box of the particle                 */
-    unsigned int _lifetime;             /* The delay to stay displayable           */
-    LX_Physics::LX_Vector2D _velocity;  /* The velocity of the particle            */
-    LX_Graphics::LX_Sprite& _texture;   /* The texture (for the texture rendering) */
+    LX_FloatingBox _box;
+    unsigned int _lifetime;             /* The delay to stay displayable */
+    LX_Physics::LX_Vector2D _velocity;
+    LX_Graphics::LX_Sprite& _texture;
 
 public:
 
     LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
                  const LX_Physics::LX_Vector2D& v) noexcept
-        : _box(b), _lifetime(xrand<unsigned int>()%DELAY), _velocity(v),
+        : _box(b), _lifetime(xrand<unsigned int>(0, DELAY)), _velocity(v),
           _texture(sp) {}
 
     void update() noexcept
@@ -79,7 +79,7 @@ public:
 /* LX_Particle — public interface */
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b) noexcept
-    : _pimpl(new LX_Particle_(sp, b, V0)) {}
+    : _pimpl(new LX_Particle_(sp, b, VNULL)) {}
 
 
 LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
