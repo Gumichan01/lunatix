@@ -43,22 +43,33 @@ namespace LX_Random
 */
 void initRand() noexcept;
 
-#define LX_Num \
-typename std::enable_if<                                \
-std::is_integral<Num>::value &&                         \
-std::is_unsigned<Num>::value &&                         \
-!std::is_same<Num, bool>::value &&                      \
-!std::is_same<Num, unsigned char>::value, Num >::type   \
-
 /**
-*   @fn template <typename Num> LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept
-*   Returns a pseudorandom number between 0 and (2⁶⁴ - 1)
-*   @return An integer value between 0 and 2⁶⁴ - 1
-*
-*   @note This function uses the Xorshift* Random Number generator
+*   @typedef template <typename Num> LX_Num
+*   @brief Statically define a positive Number
+*   @param Num
 */
 template <typename Num>
-LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
+using LX_Num =
+    typename std::enable_if<std::is_integral<Num>::value &&
+    std::is_unsigned<Num>::value &&
+    !std::is_same<Num, bool>::value &&
+    !std::is_same<Num, unsigned char>::value, Num >::type;
+
+/**
+*   @fn template <typename Num> LX_Num<Num> xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept
+*   Returns a pseudorandom number between min and max
+*
+*   @param min
+*   @param max
+*
+*   @return An integer value between 0 and 2⁶⁴ - 1
+*
+*   @pre min > 0 ∧ min < max
+*
+*   @note 1 — This function uses the Xorshift* Random Number generator
+*/
+template <typename Num>
+LX_Num<Num> xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
 
 
 /**

@@ -99,28 +99,14 @@ struct LX_MixerEffectType
 */
 struct LX_MixerEffect
 {
-    LX_MixerEffectType type;    /**< Effect type    */
-
-    // Panning
-    uint8_t pan_left;           /**< Left panning   */
-    uint8_t pan_right;          /**< Right panning  */
-
-    // Position
+    LX_MixerEffectType type;    /**< Effect type            */
+    uint8_t pan_left;           /**< Left panning           */
+    uint8_t pan_right;          /**< Right panning          */
     int16_t pos_angle;          /**< Angle (position)       */
     uint8_t pos_distance;       /**< Distance (position)    */
-
-    // Distance
-    uint8_t distance;           /**< Distance       */
-
-    // Stereo
-    bool rev_stereo;            /**< Reverse stereo */
-
-    // Loop
-    int loops;                  /**< Loops          */
-
-    LX_MixerEffect() noexcept;
-    LX_MixerEffect(const LX_MixerEffect& st) noexcept;
-    LX_MixerEffect& operator = (const LX_MixerEffect& st) noexcept;
+    uint8_t distance;           /**< Distance               */
+    bool rev_stereo;            /**< Reverse stereo         */
+    int loops;                  /**< Loops                  */
 };
 
 /* == Volume == */

@@ -55,8 +55,11 @@ class LX_Sound
 {
 
 public:
+    /**
+    *   @fn virtual bool play() noexcept = 0
+    */
     virtual bool play() noexcept = 0;
-    virtual ~LX_Sound();
+    virtual ~LX_Sound() = default;
 };
 
 }

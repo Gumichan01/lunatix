@@ -54,6 +54,7 @@ public:
     /**
     *   @fn LX_Chunk(const std::string& filename)
     *   @brief Load a sample from a file
+    *   @param filename
     *   @note It is better to give a .wav file to the constructor.
     *        The sample was optimized for this format. But it can work with
     *        an other file type.
@@ -65,6 +66,7 @@ public:
     /**
     *   @fn LX_Chunk(const UTF8string& filename)
     *   @brief Load a sample from a file
+    *   @param filename
     *   @note It is better to give a .wav file to the constructor.
     *          The sample was optimized for this format. But it can work with
     *          an other file type.

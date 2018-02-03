@@ -127,8 +127,7 @@ bool collisionBox(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noex
 */
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept;
 /**
-*   @fn bool collisionSegCircle(const LX_Circle& circle,
-*                               const LX_FloatPosition& A, const LX_FloatPosition& B) noexcept
+*   @fn bool collisionSegCircle(const LX_Circle& circle, const LX_Segment& S) noexcept
 *
 *   Check the collision between a circle and the [AB] segment
 *

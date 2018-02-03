@@ -16,7 +16,7 @@ class _Prand
 private:
 
     template <typename Num>
-    friend LX_Num xrand(Num, Num) noexcept;
+    friend LX_Num<Num> xrand(Num, Num) noexcept;
     friend uint64_t xorshiftRand() noexcept;
 
     _Prand() = delete;
@@ -30,7 +30,7 @@ private:
 };
 
 template <typename Num>
-LX_Num xrand(Num min, Num max) noexcept
+LX_Num<Num> xrand(Num min, Num max) noexcept
 {
     return ( static_cast<Num>(_Prand::rand()) % (max - min) ) + min;
 }

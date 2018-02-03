@@ -38,7 +38,10 @@
 */
 namespace LX_SystemInfo
 {
-
+/**
+*   @struct LX_DisplayMode
+*   @brief Information about a display mode
+*/
 struct LX_DisplayMode
 {
     int w;              /**< width */
@@ -47,6 +50,10 @@ struct LX_DisplayMode
 
 };
 
+/**
+*   @typedef LX_DisplayModes
+*   @brief Array of modes
+*/
 using LX_DisplayModes = std::vector<LX_SystemInfo::LX_DisplayMode>;
 
 /**

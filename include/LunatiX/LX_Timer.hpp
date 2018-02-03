@@ -30,13 +30,20 @@
 */
 namespace LX_Timer
 {
-/// Get the number of milliseconds since the initialization of the engine
+/**
+*   @fn inline uint32_t getTicks()
+*   Get the number of milliseconds since the initialization of the engine
+*   @return The tick
+*/
 inline uint32_t getTicks()
 {
     return SDL_GetTicks();
 }
-
-/// Wait for a certain number of milliseconds before returning
+/**
+*   @fn inline void delay(uint32_t ms)
+*   Wait for a certain number of milliseconds before returning
+*   @param ms The delay
+*/
 inline void delay(uint32_t ms)
 {
     SDL_Delay(ms);

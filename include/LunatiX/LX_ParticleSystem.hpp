@@ -69,6 +69,7 @@ public:
     void updateParticles() noexcept;
     /**
     *   @fn void displayParticles() const noexcept
+    *   Display the particles
     */
     void displayParticles() const noexcept;
 

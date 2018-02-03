@@ -52,8 +52,13 @@ namespace LX_Graphics
 */
 namespace LX_OpenGL
 {
-
+/**
+*   @typedef LX_GLattr
+*/
 using LX_GLattr = SDL_GLattr;
+/**
+*   @typedef LX_GLContext
+*/
 using LX_GLContext = SDL_GLContext;
 
 const int MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by the library */

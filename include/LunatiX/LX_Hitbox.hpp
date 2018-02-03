@@ -33,8 +33,8 @@ namespace LX_Physics
 */
 struct LX_FloatPosition
 {
-    Float x;
-    Float y;
+    Float x;    /**< X coordinates  */
+    Float y;    /**< Y coordinates  */
 };
 
 /**
@@ -59,8 +59,8 @@ struct LX_FloatingBox
 */
 struct LX_Segment
 {
-    LX_FloatPosition p;
-    LX_FloatPosition q;
+    LX_FloatPosition p;     /**< First point    */
+    LX_FloatPosition q;     /**< Second point   */
 };
 
 /**

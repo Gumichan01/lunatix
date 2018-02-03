@@ -99,6 +99,7 @@ public:
     void join();
     /**
     *   @fn size_t getID() const noexcept
+    *   @return the identifier of the thread
     */
     size_t getID() const noexcept;
 

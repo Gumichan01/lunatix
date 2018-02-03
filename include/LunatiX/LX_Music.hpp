@@ -101,11 +101,13 @@ public:
 
     /**
     *   @fn LX_Music(const std::string& filename)
+    *   @param filename
     *   @exception LX_MixerException On failure
     */
     LX_Music(const std::string& filename);
     /**
     *   @fn LX_Music(const UTF8string& filename)
+    *   @param filename
     *   @exception LX_MixerException On failure
     */
     LX_Music(const UTF8string& filename);

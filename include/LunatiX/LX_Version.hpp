@@ -37,10 +37,10 @@ namespace LX_VersionInfo
 */
 struct LX_Version
 {
-    short major;         /**< Information about the major version */
-    short minor;         /**< Information about the minor version */
-    short patch;         /**< Information about the patch version */
-    std::string status;
+    short major;        /**< Major version  */
+    short minor;        /**< Minor version  */
+    short patch;        /**< Patch version  */
+    std::string status; /**< Status         */
 };
 
 /**
