@@ -32,6 +32,5 @@ private:
 template <typename Num>
 LX_Num xrand(Num min, Num max)
 {
-    const Num n = static_cast<Num>(_Prand::rand());
-    return ( n % (max - min) ) + min;
+    return ( static_cast<Num>(_Prand::rand()) % (max - min) ) + min;
 }
