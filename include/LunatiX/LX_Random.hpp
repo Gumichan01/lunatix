@@ -50,7 +50,13 @@ std::is_unsigned<Num>::value &&                         \
 !std::is_same<Num, bool>::value &&                      \
 !std::is_same<Num, unsigned char>::value, Num >::type   \
 
-/// @todo doc
+/**
+*   @fn template <typename Num> LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept
+*   Returns a pseudorandom number between 0 and (2⁶⁴ - 1)
+*   @return An integer value between 0 and 2⁶⁴ - 1
+*
+*   @note This function uses the Xorshift* Random Number generator
+*/
 template <typename Num>
 LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
 
@@ -59,8 +65,8 @@ LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
 *
 *   @fn uint64_t xorshiftRand() noexcept
-*   Returns a pseudorandom number between 0 and (2^64 - 1)
-*   @return An integer value between 0 and 2^64 - 1
+*   Returns a pseudorandom number between 0 and (2⁶⁴ - 1)
+*   @return An integer value between 0 and 2⁶⁴ - 1
 *
 *   @note This function uses the Xorshift* generator
 */
