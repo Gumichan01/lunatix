@@ -21,7 +21,6 @@
 */
 
 #include <LunatiX/LX_Vector2D.hpp>
-#include <LunatiX/utils/float.hpp>
 
 
 namespace LX_Physics

@@ -55,30 +55,7 @@ unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 
-struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE = {false, false, false, false};
-
-
-LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_EFFECT_NONE),
-    pan_left(0), pan_right(0), pos_angle(0), pos_distance(0),
-    rev_stereo(false), loops(0) {}
-
-LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) noexcept:
-    type(st.type), pan_left(st.pan_left), pan_right(st.pan_right),
-    pos_angle(st.pos_angle), pos_distance(st.pos_distance),
-    rev_stereo(st.rev_stereo), loops(st.loops) {}
-
-LX_MixerEffect& LX_MixerEffect::operator = (const LX_MixerEffect& st) noexcept
-{
-    type = st.type;
-    pan_left = st.pan_left;
-    pan_right = st.pan_right;
-    pos_angle = st.pos_angle;
-    pos_distance = st.pos_distance;
-    rev_stereo = st.rev_stereo;
-    loops = st.loops;
-
-    return *this;
-}
+const struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE{false, false, false, false};
 
 
 void setOverallVolume(unsigned short volume) noexcept
