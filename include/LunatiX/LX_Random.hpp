@@ -43,13 +43,16 @@ namespace LX_Random
 */
 void initRand() noexcept;
 
+#define LX_Num \
+typename std::enable_if<                                \
+std::is_integral<Num>::value &&                         \
+std::is_unsigned<Num>::value &&                         \
+!std::is_same<Num, bool>::value &&                      \
+!std::is_same<Num, unsigned char>::value, Num >::type   \
 
 /// @todo doc
 template <typename Num>
-typename std::enable_if<std::is_integral<Num>::value &&
-!std::is_same<Num, bool>::value &&
-!std::is_same<Num, char>::value, Num>::type xrand(Num min = 0,
-        Num max = std::numeric_limits<Num>::max());
+LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max());
 
 
 /**

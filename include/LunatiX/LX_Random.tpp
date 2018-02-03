@@ -16,9 +16,7 @@ class _Prand
 private:
 
     template <typename Num>
-    friend typename std::enable_if<std::is_integral<Num>::value &&
-    !std::is_same<Num, bool>::value &&
-    !std::is_same<Num, char>::value, Num>::type xrand(Num, Num);
+    friend LX_Num xrand(Num, Num);
     friend uint64_t xorshiftRand() noexcept;
 
     _Prand() = delete;
@@ -32,9 +30,8 @@ private:
 };
 
 template <typename Num>
-typename std::enable_if<std::is_integral<Num>::value &&
-!std::is_same<Num, bool>::value &&
-!std::is_same<Num, char>::value, Num>::type xrand(Num min, Num max)
+LX_Num xrand(Num min, Num max)
 {
-    return ( static_cast<Num>(_Prand::rand()) % (max - min) ) + min;
+    const Num n = static_cast<Num>(_Prand::rand());
+    return ( n % (max - min) ) + min;
 }
