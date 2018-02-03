@@ -62,15 +62,30 @@ using LX_Num =
 *   @param min
 *   @param max
 *
-*   @return An integer value between 0 and 2⁶⁴ - 1
+*   @return An integer value between min and max
 *
 *   @pre min > 0 ∧ min < max
 *
-*   @note 1 — This function uses the Xorshift* Random Number generator
+*   @note This function uses the Xorshift* Random Number generator
 */
 template <typename Num>
 LX_Num<Num> xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
 
+
+/**
+*   @fn float fxrand(float minf = 0.0f, float maxf = 1.0f) noexcept
+*   Returns a pseudorandom number between min andf maxf
+*
+*   @param minf
+*   @param maxf
+*
+*   @return An integer value between minf and maxf
+*
+*   @pre minf > 0.0f ∧ minf < maxf
+*
+*   @note This function uses the Xorshift* Random Number generator
+*/
+float fxrand(float minf = 0.0f, float maxf = 1.0f) noexcept;
 
 /**
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
