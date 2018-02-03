@@ -52,7 +52,6 @@ typename std::enable_if<std::is_integral<Num>::value &&
         Num max = std::numeric_limits<Num>::max());
 
 
-
 /**
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
 *
