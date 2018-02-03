@@ -47,7 +47,7 @@ void initRand() noexcept
     srand(static_cast<unsigned int>(time(nullptr)));
 }
 
-uint64_t _Prand::rand()
+uint64_t _Prand::rand() noexcept
 {
     static uint64_t x = 0;
     static bool first_call = false;

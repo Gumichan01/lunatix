@@ -52,7 +52,7 @@ std::is_unsigned<Num>::value &&                         \
 
 /// @todo doc
 template <typename Num>
-LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max());
+LX_Num xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
 
 
 /**
