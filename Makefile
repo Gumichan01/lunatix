@@ -283,7 +283,8 @@ test-input.o: $(TEST_PATH)test-input.o
 # General rule
 %.o: %.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) -I $(OPENGL_DIR) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) -I $(OPENGL_DIR) \
+	$(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
 
 # Dependencies
 depend: $(SRC_FILES) $(SRC_TEST_FILES)
