@@ -38,14 +38,16 @@ UTF8string removeTrailingSep(const UTF8string& u8str) noexcept
 
         if(*it == separator)
         {
-            while(it != u8end && *it == separator)
+            UTF8iterator tmp_it = it + 1;
+            while(tmp_it != u8end && *tmp_it == separator)
             {
-                ++it;
+                ++tmp_it;
             }
-            --it;
-        }
 
-        ++it;
+            it = tmp_it;
+        }
+        else
+            ++it;
     }
 
     return u8s;
@@ -142,7 +144,7 @@ UTF8string basename(const UTF8string& path) noexcept
     if(*it == sep)
     {
         if(end_sep)
-            return npath.utf8_substr(spos, u8len-spos - 1);
+            return npath.utf8_substr(spos, u8len - spos - 1);
         else
             return npath.utf8_substr(spos, u8len);
     }
