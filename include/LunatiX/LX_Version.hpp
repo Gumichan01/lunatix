@@ -45,16 +45,16 @@ struct LX_Version
 
 /**
 *   @fn void info() noexcept
-*   Get information about the library
+*   Display information about the library
 */
 void info() noexcept;
 
 /**
-*   @fn void getVersion(LX_Version& version) noexcept
+*   @fn const LX_Version getVersion() noexcept
 *   Get the version of the library
-*   @param [out] version The structure to fill in.
+*   @return Information about the version
 */
-void getVersion(LX_Version& version) noexcept;
+const LX_Version getVersion() noexcept;
 
 /**
 *   @fn void dependencies() noexcept

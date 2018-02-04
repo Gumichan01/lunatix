@@ -47,21 +47,18 @@ const UTF8string LX_AUTHOR("Luxon Jean-Pierre");
 
 void info() noexcept
 {
-    LX_Version luna;
-    getVersion(luna);
+    const LX_Version& luna = getVersion();
 
-    cout << "\nLunatiX v" << luna.major
-         << "."  << luna.minor << "." <<  luna.patch << "-" << luna.status
-         << "\n" << LX_COPYRIGHT << " " << LX_AUTHOR << "\n";
+    cout << "\nLunatiX v" << luna.major << "."  << luna.minor << "."
+         <<  luna.patch << "-" << luna.status << "\n"
+         << LX_COPYRIGHT << " " << LX_AUTHOR << "\n";
 }
 
 
-void getVersion(LX_Version& version) noexcept
+const LX_Version getVersion() noexcept
 {
-    version.major  = LX_MAJOR_VERSION;
-    version.minor  = LX_MINOR_VERSION;
-    version.patch  = LX_PATCH_VERSION;
-    version.status = LX_STATUS.utf8_sstring();
+    return LX_Version{LX_MAJOR_VERSION, LX_MINOR_VERSION,
+                      LX_PATCH_VERSION, LX_STATUS.utf8_sstring()};
 }
 
 
@@ -85,47 +82,30 @@ void dependencies() noexcept
     SDL_TTF_VERSION(&ttf_compiled);
     SDL_MIXER_VERSION(&mix_compiled);
 
-    cout << "Dependencies : \n\n";
+    cout << "Dependencies : \n\n"
+         << "Compiled against SDL version " << sdl_compiled.major << "."
+         << sdl_compiled.minor << "." << sdl_compiled.patch << " ...\n\n"
 
-    cout << "Compiled against SDL version "
-         << static_cast<int>(sdl_compiled.major) << "."
-         << static_cast<int>(sdl_compiled.minor) << "."
-         << static_cast<int>(sdl_compiled.patch) << " ...\n\n";
+         << "Linked against SDL version " << sdl_linked.major << "."
+         << sdl_linked.minor << "." << sdl_linked.patch << " ...\n\n"
 
-    cout << "Linked against SDL version "
-         << static_cast<int>(sdl_linked.major) << "."
-         << static_cast<int>(sdl_linked.minor) << "."
-         << static_cast<int>(sdl_linked.patch) << " ...\n\n";
+         << "Compiled against SDL_Image version " << img_compiled.major << "."
+         << img_compiled.minor << "." << img_compiled.patch << " ...\n\n"
 
-    cout << "Compiled against SDL_Image version "
-         << static_cast<int>(img_compiled.major) << "."
-         << static_cast<int>(img_compiled.minor) << "."
-         << static_cast<int>(img_compiled.patch) << " ...\n\n";
+         << "Linked against SDL_Image version " << img_linked->major << "."
+         << img_linked->minor << "." << img_linked->patch << " ...\n\n"
 
-    cout << "Linked against SDL_Image version "
-         << static_cast<int>(img_linked->major) << "."
-         << static_cast<int>(img_linked->minor) << "."
-         << static_cast<int>(img_linked->patch) << " ...\n\n";
+         << "Compiled against SDL_TTF version " << ttf_compiled.major << "."
+         << ttf_compiled.minor << "." << ttf_compiled.patch << " ...\n\n"
 
-    cout << "Compiled against SDL_TTF version "
-         << static_cast<int>(ttf_compiled.major) << "."
-         << static_cast<int>(ttf_compiled.minor) << "."
-         << static_cast<int>(ttf_compiled.patch) << " ...\n\n";
+         << "Linked against SDL_TTF version " << ttf_linked->major << "."
+         << ttf_linked->minor << "." << ttf_linked->patch << " ...\n\n"
 
-    cout << "Linked against SDL_TTF version "
-         << static_cast<int>(ttf_linked->major) << "."
-         << static_cast<int>(ttf_linked->minor) << "."
-         << static_cast<int>(ttf_linked->patch) << " ...\n\n";
+         << "Compiled against SDL_Mixer version " << mix_compiled.major << "."
+         << mix_compiled.minor << "." << mix_compiled.patch << " ...\n\n"
 
-    cout << "Compiled against SDL_Mixer version "
-         << static_cast<int>(mix_compiled.major) << "."
-         << static_cast<int>(mix_compiled.minor) << "."
-         << static_cast<int>(mix_compiled.patch) << " ...\n\n";
-
-    cout << "Linked against SDL_Mixer version "
-         << static_cast<int>(mix_linked->major) << "."
-         << static_cast<int>(mix_linked->minor) << "."
-         << static_cast<int>(mix_linked->patch) << " ...\n\n";
+         << "Linked against SDL_Mixer version " << mix_linked->major << "."
+         << mix_linked->minor << "." << mix_linked->patch << " ...\n\n";
 }
 
 }
