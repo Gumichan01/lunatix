@@ -534,6 +534,11 @@ void test_fs(void)
     const UTF8string totopath(sep + tmp + sep + toto);
     const UTF8string libpath(sep + usr + sep + lib + sep);
     const UTF8string libpathex(sep2 + sep2 + usr + sep2 + sep2 + lib + sep2);
+    const UTF8string lunapath(sep + "d" + sep+ "git_dir" + sep+ "." + sep +
+                              "lunatix_github" + sep+ ".." + sep +
+                              "lunatix-github" + sep);
+    const UTF8string lunabase("lunatix-github");
+    const UTF8string lunadir(sep +"d" + sep + "git_dir" + sep + "." + sep + "lunatix_github" + sep + "..");
 
     u8map basename_ctest;   // Test suite for basename
     u8map dirname_ctest;    // Test suite for basename
@@ -554,6 +559,7 @@ void test_fs(void)
     basename_ctest.insert(u8pair(totopath,toto));
     basename_ctest.insert(u8pair(libpath,lib));
     basename_ctest.insert(u8pair(libpathex,lib));
+    basename_ctest.insert(u8pair(lunapath,lunabase));
 
     dirname_ctest.insert(u8pair(u8empty,current));
     dirname_ctest.insert(u8pair(current,current));
@@ -571,6 +577,7 @@ void test_fs(void)
     dirname_ctest.insert(u8pair(totopath,sep + tmp));
     dirname_ctest.insert(u8pair(libpath,sep + usr));
     dirname_ctest.insert(u8pair(libpathex,sep + usr));
+    dirname_ctest.insert(u8pair(lunapath,lunadir));
 
 
     LX_Log::log(" == TEST basename() == ");
