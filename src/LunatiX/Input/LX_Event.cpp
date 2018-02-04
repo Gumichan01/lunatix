@@ -606,12 +606,12 @@ LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept
     return SDL_GetScancodeFromKey(keycode);
 }
 
-UTF8string stringOfScanCode(LX_ScanCode scancode)
+UTF8string stringOfScanCode(LX_ScanCode scancode) noexcept
 {
     return UTF8string(SDL_GetScancodeName(scancode));
 }
 
-UTF8string stringOfKeyCode(LX_KeyCode keycode)
+UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept
 {
     return UTF8string(SDL_GetKeyName(keycode));
 }
@@ -619,16 +619,16 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode)
 
 // Gamepad
 
-UTF8string stringOfButton(LX_GamepadButton button)
+UTF8string stringOfButton(LX_GamepadButton button) noexcept
 {
     const char * s = SDL_GameControllerGetStringForButton(static_cast<SDL_GameControllerButton>(button));
-    return UTF8string(s == nullptr ? "null" : s);
+    return UTF8string(s == nullptr ? "<null>" : s);
 }
 
-UTF8string stringOfAxis(LX_GamepadAxis axis)
+UTF8string stringOfAxis(LX_GamepadAxis axis) noexcept
 {
     const char * s = SDL_GameControllerGetStringForAxis(static_cast<SDL_GameControllerAxis>(axis));
-    return UTF8string(s == nullptr ? "null" : s);
+    return UTF8string(s == nullptr ? "<null>" : s);
 }
 
 }
