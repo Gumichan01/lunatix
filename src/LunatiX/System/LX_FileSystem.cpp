@@ -56,16 +56,14 @@ UTF8string removeTrailingSep(const UTF8string& u8str) noexcept
 size_t countSeparator(const UTF8string& u8str) noexcept
 {
     const UTF8iterator e = u8str.utf8_end();
-    UTF8iterator it = u8str.utf8_begin();
     size_t counter = 0;
 
-    while(it != e)
+    for(UTF8iterator it = u8str.utf8_begin(); it != e; ++it)
     {
         if(*it == separator)
             ++counter;
-
-        ++it;
     }
+
     return counter;
 }
 
@@ -176,6 +174,7 @@ UTF8string dirname(const UTF8string& path) noexcept
 
     const size_t pos = npath.utf8_find(sep);
     const size_t u8len = npath.utf8_length();
+
     // No separator → current directory
     if(pos == UTF8string::npos)
         return current;
