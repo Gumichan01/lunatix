@@ -76,11 +76,13 @@ public:
     *   @note 1 — By default, the entire file is read from the beginning.
     *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
     *
+    *   @pre offset ≤ sz
+    *
     *   @warning If the value of *offset* is greater than the size of the file,
     *           then an IOException will be thrown
     *
     *   @exception std::logic_error If the filename is not defined
-    *   @exception IOException If the file cannot be read by the instance
+    *   @exception IOException If the file cannot be read
     */
     LX_FileBuffer(const std::string& filename, uint32_t offset = 0, uint32_t sz = 0);
     /**
@@ -92,6 +94,8 @@ public:
     *
     *   @note 1 — By default, the entire file is read from the beginning.
     *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
+    *
+    *   @pre offset ≤ sz
     *
     *   @warning If the value of *offset* is greater than the size of the file,
     *           then an IOException will be thrown
