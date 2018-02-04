@@ -35,7 +35,7 @@ int numberOfDevices() noexcept
 
 UTF8string gamepadToString(LX_GamepadInfo& info)
 {
-    const short GUID_SIZE = 33;     // Size of the data in SDL_JoystickGUID
+    const int GUID_SIZE = 33;       // Size of the data in SDL_JoystickGUID
     char guid[GUID_SIZE] = {'\0'};
     SDL_JoystickGetGUIDString(info.uid, guid, GUID_SIZE);
 
@@ -48,7 +48,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info)
            << "\nGamepad - Number of Axes : "    << info.nb_axis
            << "\nGamepad - Number of Balls : "   << info.nb_balls
            << "\nGamepad - Number of Buttons : " << info.nb_buttons
-           << "\nGamepad - Number of Hats : "    << info.nb_hats << '\n';
+           << "\nGamepad - Number of Hats : "    << info.nb_hats << "\n";
 
     return UTF8string(stream.str());
 }

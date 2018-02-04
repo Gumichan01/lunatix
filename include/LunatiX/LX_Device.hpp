@@ -49,7 +49,7 @@ namespace LX_Device
 *   @enum LX_MouseToggle
 *   @brief State of the mouse (display)
 */
-enum class LX_MouseToggle
+enum class LX_MouseToggle: int
 {
     SHOW  = 1,      /**< Enable the mouse display   */
     HIDE  = 0,      /**< Disable the mouse display  */
@@ -91,7 +91,7 @@ int numberOfDevices() noexcept;
 *   @param [in] info The information structure
 *   @return Always returns a valid string
 *
-*   @note This function never returns an invalid string
+*   @post The returned string is valid
 *   @sa statGamepad
 */
 UTF8string gamepadToString(LX_GamepadInfo& info);
