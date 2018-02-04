@@ -33,7 +33,7 @@ int numberOfDevices() noexcept
     return SDL_NumJoysticks();
 }
 
-UTF8string gamepadToString(LX_GamepadInfo& info)
+UTF8string gamepadToString(LX_GamepadInfo& info) noexcept
 {
     const int GUID_SIZE = 33;       // Size of the data in SDL_JoystickGUID
     char guid[GUID_SIZE] = {'\0'};

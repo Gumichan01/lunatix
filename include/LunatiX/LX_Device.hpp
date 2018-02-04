@@ -84,7 +84,7 @@ struct LX_GamepadInfo
 int numberOfDevices() noexcept;
 
 /**
-*   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
+*   @fn UTF8string gamepadToString(LX_GamepadInfo& info) noexcept
 *
 *   Get the string format of the information structure
 *
@@ -94,7 +94,7 @@ int numberOfDevices() noexcept;
 *   @post The returned string is valid
 *   @sa statGamepad
 */
-UTF8string gamepadToString(LX_GamepadInfo& info);
+UTF8string gamepadToString(LX_GamepadInfo& info) noexcept;
 
 /**
 *   @fn LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept
