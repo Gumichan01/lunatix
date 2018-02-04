@@ -43,8 +43,6 @@ namespace LX_FileSystem
 *          - './' on POSIX systems
 *          - '.\' on Windows
 *
-*   @post The returned string is always valid
-*
 *   @note The return path will be guaranteed to end with a
 *        path separator ('\' on Windows, '/' on most other platforms)
 */
@@ -61,8 +59,6 @@ UTF8string getWorkingDirectory() noexcept;
 *   @return The working directory in absolute path, UTF-8 encoded.
 *          If the function cannot retrieve the directory,
 *          it returns an empty string ("").
-*
-*   @post The returned string is always valid
 *
 *   @note 1 — The directory is unique per user and per application.
 *   @note 2 — The returned directory has the following syntax:
@@ -87,8 +83,6 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
 *   @param path The path, utf-8 encoded.
 *   @return The basename in utf-8 format.
 *
-*   @post The returned string is always valid
-*
 *   @note Trailing '\' (on Windows) or '/' (on Linux) are not counted
 *        as part of the path name.
 */
@@ -97,7 +91,6 @@ UTF8string basename(const UTF8string& path) noexcept;
 *   @fn UTF8string dirname(const UTF8string& path) noexcept
 *   @param path The path, utf-8 encoded.
 *   @return The basename in utf-8 format.
-*   @post The returned string is always valid
 */
 UTF8string dirname(const UTF8string& path) noexcept;
 
