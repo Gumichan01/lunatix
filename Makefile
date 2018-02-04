@@ -257,6 +257,8 @@ test-thread: $(TEST_PATH)test-thread.o $(OBJ_FILES)
 
 test-input: $(TEST_PATH)test-input.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+test-random: $(TEST_PATH)test-random.o $(OBJ_FILES)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
 # Object files (test)
 test-init.o: $(TEST_PATH)test-init.o
@@ -272,6 +274,7 @@ test-ime.o: $(TEST_PATH)test-ime.o
 test-audio.o: $(TEST_PATH)test-audio.o
 test-thread.o: $(TEST_PATH)test-thread.o
 test-input.o: $(TEST_PATH)test-input.o
+test-random.o: $(TEST_PATH)test-random.o
 
 
 ################################
