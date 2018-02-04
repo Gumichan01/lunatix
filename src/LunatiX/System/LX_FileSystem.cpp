@@ -60,12 +60,11 @@ UTF8string removeTrailingSep(const UTF8string& u8str) noexcept
 
 size_t countSeparator(const UTF8string& u8str) noexcept
 {
-    const UTF8iterator e = u8str.utf8_end();
     size_t counter = 0;
 
-    for(UTF8iterator it = u8str.utf8_begin(); it != e; ++it)
+    for(const std::string& s: u8str)
     {
-        if(*it == SEPARATOR)
+        if(s == SEPARATOR)
             ++counter;
     }
 
