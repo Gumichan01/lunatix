@@ -19,10 +19,10 @@ namespace
 
 #ifdef __WIN32__
 const char * current_dir = ".\\";
-const char * separator = "\\";
+const std::string separator("\\");
 #else
 const char * current_dir = "./";
-const char * separator = "/";
+const std::string separator("/");
 #endif
 
 // separator: '/' on POSIX system, '\' on Windows
@@ -59,7 +59,9 @@ size_t countSeparator(const UTF8string& u8str) noexcept
 
     while(it != e)
     {
-        if(*it == separator) ++counter;
+        if(*it == separator)
+            ++counter;
+
         ++it;
     }
     return counter;
@@ -73,7 +75,7 @@ namespace LX_FileSystem
 
 UTF8string getWorkingDirectory() noexcept
 {
-    char *base_path = SDL_GetBasePath();
+    char * base_path = SDL_GetBasePath();
     UTF8string path(base_path == nullptr ? current_dir: base_path);
 
     if(base_path != nullptr)
@@ -84,7 +86,7 @@ UTF8string getWorkingDirectory() noexcept
 
 UTF8string getPreferencesDirectory(const std::string& org, const std::string& app) noexcept
 {
-    char *base_path = SDL_GetPrefPath(org.c_str(), app.c_str());
+    char * base_path = SDL_GetPrefPath(org.c_str(), app.c_str());
     UTF8string path(base_path == nullptr ? "": base_path);
 
     if(base_path != nullptr)
