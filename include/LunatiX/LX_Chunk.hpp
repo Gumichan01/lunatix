@@ -105,7 +105,7 @@ public:
     *   @param [in] loops number of loops
     *
     *   @return TRUE on success, FALSE otherwise
-    *   @note 1 — The sample is played loops +1 time
+    *   @note 1 — The sample is played loops + 1 time
     *            For example:
     *              - If loop == 0 → play the sample once
     *              - If loop == 1 → play the sample 2 times, ...
