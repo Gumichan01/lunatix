@@ -25,8 +25,8 @@ const char * current_dir = "./";
 const char * separator = "/";
 #endif
 
-/// Remove trailing separators ('/' on POSIX system, '\' on Windows)
-UTF8string removeTrailingSep(const UTF8string& u8str)
+// separator: '/' on POSIX system, '\' on Windows
+UTF8string removeTrailingSep(const UTF8string& u8str) noexcept
 {
     const UTF8iterator u8end = u8str.utf8_end();
     UTF8iterator it = u8str.utf8_begin();
@@ -51,7 +51,7 @@ UTF8string removeTrailingSep(const UTF8string& u8str)
     return u8s;
 }
 
-size_t countSeparator(const UTF8string& u8str)
+size_t countSeparator(const UTF8string& u8str) noexcept
 {
     const UTF8iterator e = u8str.utf8_end();
     UTF8iterator it = u8str.utf8_begin();
@@ -71,7 +71,7 @@ size_t countSeparator(const UTF8string& u8str)
 namespace LX_FileSystem
 {
 
-UTF8string getWorkingDirectory()
+UTF8string getWorkingDirectory() noexcept
 {
     char *base_path = SDL_GetBasePath();
     UTF8string path(base_path == nullptr ? current_dir: base_path);
@@ -82,7 +82,7 @@ UTF8string getWorkingDirectory()
     return path;
 }
 
-UTF8string getPreferencesDirectory(const std::string& org, const std::string& app)
+UTF8string getPreferencesDirectory(const std::string& org, const std::string& app) noexcept
 {
     char *base_path = SDL_GetPrefPath(org.c_str(), app.c_str());
     UTF8string path(base_path == nullptr ? "": base_path);
@@ -93,7 +93,7 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
     return path;
 }
 
-UTF8string basename(const UTF8string& path)
+UTF8string basename(const UTF8string& path) noexcept
 {
     const UTF8string current(".");
     const UTF8string parent("..");
@@ -148,7 +148,7 @@ UTF8string basename(const UTF8string& path)
     return npath.utf8_substr(0, u8len - 1);
 }
 
-UTF8string dirname(const UTF8string& path)
+UTF8string dirname(const UTF8string& path) noexcept
 {
     const UTF8string current(".");
     const UTF8string parent("..");
