@@ -27,56 +27,56 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 ## Examples ##
 
+```cpp
+#include <LunatiX/Lunatix.hpp>
 
-    #include <LunatiX/Lunatix.hpp>
+using namespace LX_Event;
 
-    using namespace LX_Event;
+int main(int argc, char** argv)
+{
+    LX_AABB position = {0,0,256,256};
+    LX_EventHandler ev;
+    bool go = true;
 
-    int main(int argc, char** argv)
+    if(!LX_Init())
     {
-        LX_AABB position = {0,0,256,256};
-        LX_EventHandler ev;
-        bool go = true;
-
-        if(!LX_Init())
-        {
-            LX_Log::log("Cannot load the library: %s",LX_GetError());
-            return -1;
-        }
-
-        // Information about how to build the window
-        LX_Win::LX_WindowInfo info;
-        LX_Win::LX_loadWindowConfig(info);
-        info.w = 256;
-        info.h = 256;
-
-        LX_Win::LX_Window w(info);
-        LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
-
-        while(go)
-        {
-            while(ev.pollEvent())
-            {
-                switch(ev.getEventType())
-                {
-                case LX_EventType::LX_QUIT:
-                    go = false;
-                    break;
-                default:
-                    break;
-                }
-            }
-
-            w.clearWindow();
-            sprite.draw(&position);
-            w.update();
-            LX_Timer::delay(33);
-        }
-
-        LX_Quit();
-        return 0;
+        LX_Log::log("Cannot load the library: %s",LX_GetError());
+        return -1;
     }
 
+    // Information about how to build the window
+    LX_Win::LX_WindowInfo info;
+    LX_Win::LX_loadWindowConfig(info);
+    info.w = 256;
+    info.h = 256;
+
+    LX_Win::LX_Window w(info);
+    LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+
+    while(go)
+    {
+        while(ev.pollEvent())
+        {
+            switch(ev.getEventType())
+            {
+            case LX_EventType::LX_QUIT:
+                go = false;
+                break;
+            default:
+                break;
+            }
+        }
+
+        w.clearWindow();
+        sprite.draw(&position);
+        w.update();
+        LX_Timer::delay(33);
+    }
+
+    LX_Quit();
+    return 0;
+}
+```
 
 ## Contribute ##
 
