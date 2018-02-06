@@ -28,6 +28,8 @@
 namespace LX_Config
 {
 
+const unsigned int NB_CONFIG = 6;
+
 /* LX_ConfigLoader */
 
 struct LX_InternalConfig
@@ -42,15 +44,21 @@ struct LX_InternalConfig
 
 static LX_InternalConfig _conf;
 
-
+int checkLine_(unsigned int cpt, LX_InternalConfig& config,
+               const std::string& line, const std::string& sub) noexcept;
 void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept;
 void loadFileConfig_(LX_InternalConfig& config) noexcept;
 
-void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
+/*
+    Return 1 if a configuration has been found, 0 otherwise
+*/
+int checkLine_(unsigned int cpt, LX_InternalConfig& config,
+               const std::string& line, const std::string& sub) noexcept
 {
-    const char SHARP = '#';
+    if(cpt >= NB_CONFIG)
+        return 0;
+
     const std::string ONE("1");
-    const std::string EQUAL("=");
     const std::regex VIDEO_REG("video=[[:digit:]]+", std::regex::extended);
     const std::regex VSYNC_REG("vsync=[[:digit:]]+", std::regex::extended);
     const std::regex TTF_REG("ttf=[[:digit:]]+", std::regex::extended);
@@ -58,7 +66,72 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
     const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+", std::regex::extended);
     const std::regex OPENGL_REG("opengl=[[:digit:]]+", std::regex::extended);
 
-    int cpt = 0;
+    unsigned int ret = 0;
+    const bool is_one = (sub == ONE);
+
+    switch(cpt)
+    {
+    case 0:
+        if(std::regex_match(line, VIDEO_REG))
+        {
+            config.video_flag = is_one;
+            ret = 1;
+        }
+        break;
+
+    case 1:
+        if(std::regex_match(line, VSYNC_REG))
+        {
+            config.vsync_flag = is_one;
+            ret = 1;
+        }
+        break;
+
+    case 2:
+        if(std::regex_match(line, TTF_REG))
+        {
+            config.ttf_flag = is_one;
+            ret = 1;
+        }
+        break;
+
+    case 3:
+        if(std::regex_match(line, AUDIO_REG))
+        {
+            config.audio_flag = is_one;
+            ret = 1;
+        }
+        break;
+
+    case 4:
+        if(std::regex_match(line, GAMEPAD_REG))
+        {
+            config.gamepad_flag = is_one;
+            ret = 1;
+        }
+        break;
+
+    case 5:
+        if(std::regex_match(line, OPENGL_REG))
+        {
+            config.opengl_flag = is_one;
+            ret = 1;
+        }
+        break;
+
+    default:        // unreachable code
+        break;
+    }
+
+    return ret;
+}
+
+void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept
+{
+    const char SHARP = '#';
+    const std::string EQUAL("=");
+
+    unsigned int cpt = 0;
     std::string line;
 
     while(getline(f, line))
@@ -69,62 +142,9 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
                 || (pos = line.find(EQUAL)) == std::string::npos)
             continue;
 
-        // Get the string strating by the first character after '='
-        const std::string& s = line.substr(pos + 1);
-
-        switch(cpt)
-        {
-        case 0:
-            if(std::regex_match(line, VIDEO_REG))
-            {
-                config.video_flag = (s == ONE);
-                cpt++;
-            }
-            break;
-
-        case 1:
-            if(std::regex_match(line, VSYNC_REG))
-            {
-                config.vsync_flag = (s == ONE);
-                cpt++;
-            }
-            break;
-
-        case 2:
-            if(std::regex_match(line, TTF_REG))
-            {
-                config.ttf_flag = (s == ONE);
-                cpt++;
-            }
-            break;
-
-        case 3:
-            if(std::regex_match(line, AUDIO_REG))
-            {
-                config.audio_flag = (s == ONE);
-                cpt++;
-            }
-            break;
-
-        case 4:
-            if(std::regex_match(line, GAMEPAD_REG))
-            {
-                config.gamepad_flag = (s == ONE);
-                cpt++;
-            }
-            break;
-
-        case 5:
-            if(std::regex_match(line, OPENGL_REG))
-            {
-                config.opengl_flag = (s == ONE);
-                cpt++;
-            }
-            break;
-
-        default:
-            break;
-        }
+        // Get the string strating by the first character after '=' (substr())
+        // check the line of a file
+        cpt += checkLine_(cpt, config, line, line.substr(pos + 1));
     }
 }
 
