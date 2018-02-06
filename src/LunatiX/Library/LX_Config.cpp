@@ -127,21 +127,20 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
 
 void loadFileConfig_(LX_InternalConfig& config) noexcept
 {
-    const char * LX_CFG_FILE = "config/lunatix.cfg";
+    const std::string LX_CFG_FILE("config/lunatix.cfg");
+    std::ifstream f(LX_CFG_FILE, std::ios::in);
 
-    std::ifstream f;
-    f.open(LX_CFG_FILE,std::ios::in);
-
-    if(f.is_open() == false)
+    if(f.is_open())
     {
-        LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM,
-                            "loadFileConfig - Cannot open %s",LX_CFG_FILE);
-        return;
+        _conf = {0,0,0,0,0,0};
+        readFile_(f,config);
+        f.close();
     }
-
-    _conf = {0,0,0,0,0,0};
-    readFile_(f,config);
-    f.close();
+    else
+    {
+        LX_Log::logCritical(LX_Log::LX_LOG_SYSTEM, "config - Cannot open %s",
+                            LX_CFG_FILE.c_str());
+    }
 }
 
 
