@@ -134,7 +134,7 @@ void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept
     unsigned int cpt = 0;
     std::string line;
 
-    while(getline(f, line))
+    while(cpt < NB_CONFIG && getline(f, line))
     {
         size_t pos = 0;
 
