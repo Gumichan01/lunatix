@@ -260,7 +260,6 @@ public:
     */
     UTF8string getFileName() noexcept;
 
-
     virtual ~LX_Sprite() = default;
 };
 
@@ -437,7 +436,6 @@ public:
     *   @return The name of the file (UTF-8 format)
     */
     UTF8string getFileName() noexcept;
-
 
     ~LX_BufferedImage();
 };
@@ -817,22 +815,32 @@ protected:
     virtual void updateTexture_() noexcept;
 
 public:
-
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font,LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BlendedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                           LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BlendedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                           LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
-
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);

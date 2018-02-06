@@ -701,6 +701,7 @@ LX_TextTexture::LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font
                                LX_Win::LX_Window& w, LX_PIXELFORMAT format)
     : LX_TextTexture(UTF8string(text), font.getSize_(), font, w, format) {}
 
+
 LX_TextTexture::LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, LX_PIXELFORMAT format)
     : LX_TextTexture(text, font.getSize_(), font, w, format) {}
@@ -859,6 +860,7 @@ LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                     LX_Win::LX_Window& w, LX_PIXELFORMAT format)
     : LX_SolidTextTexture(text, font.getSize_(), font, w, format) {}
 
+
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, unsigned int sz,
                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
@@ -904,6 +906,7 @@ LX_ShadedTextTexture::
 LX_ShadedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                      const LX_Colour& bg, LX_Win::LX_Window& w, LX_PIXELFORMAT format)
     : LX_ShadedTextTexture(UTF8string(text), font, bg, w, format) {}
+
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
@@ -967,6 +970,7 @@ LX_BlendedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, LX_PIXELFORMAT format)
     : LX_BlendedTextTexture(UTF8string(text), font, w, format) {}
 
+
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
                       LX_Win::LX_Window& w, LX_PIXELFORMAT format)
@@ -978,6 +982,7 @@ LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                       LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                       LX_PIXELFORMAT format)
     : LX_BlendedTextTexture(UTF8string(text), sz, font, w, format) {}
+
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
