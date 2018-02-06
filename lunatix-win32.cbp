@@ -35,7 +35,6 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-march=i486" />
 			<Add option="-std=c++11" />
 			<Add directory="include" />
 		</Compiler>
