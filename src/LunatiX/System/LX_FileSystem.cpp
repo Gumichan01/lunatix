@@ -86,11 +86,13 @@ bool dirname_check(const UTF8string& npath)
     const size_t POS = npath.utf8_find(SEP);
     const size_t U8LEN = npath.utf8_length();
 
+    // Empty string or current directory or parent → current
     // "." or ".." between separators → current directory
     // OR No separator → CURRENT directory
     // OR The path contains at least one separator
     // and the first separator is at the end of string → it is unique
-    return npath == SCURS || npath == SPARS || POS == UTF8string::npos
+    return npath.utf8_empty() || npath == CURRENT || npath == PARENT
+           || npath == SCURS || npath == SPARS || POS == UTF8string::npos
            || POS == U8LEN -1;
 }
 
@@ -173,19 +175,17 @@ UTF8string dirname(const UTF8string& path) noexcept
 {
     const UTF8string npath = removeTrailingSep(path);
 
-    // Empty string or parent → current
-    if(npath.utf8_empty() || npath == PARENT)
-        return CURRENT;
-
-    // "." or root directory → return the path
-    if(npath == CURRENT || npath == ROOT)
+    // root directory → return the path
+    if(npath == ROOT)
         return npath;
 
+    // Other particular cases
     if(dirname_check(npath))
         return CURRENT;
 
     const size_t POS = npath.utf8_find(SEP);
     const size_t U8LEN = npath.utf8_length();
+
     // If a unique separator was found and is at position 0 → root
     if(POS == 0 && countSeparator(npath) == 1)
     {
