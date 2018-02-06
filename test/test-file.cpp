@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test File ==== ");
-    /*test_open();
+    test_open();
     test_write();
     test_write2();
     test_read();
@@ -55,9 +55,9 @@ int main(int argc, char **argv)
     test_tellSeek();
     test_buffer();
     test_buffer2();
-    test_tmp();*/
+    test_tmp();
     test_fs();
-    //test_getChunk();
+    test_getChunk();
     remove(str.c_str());
     remove(strbin.c_str());
     LX_Log::log(" ==== End File ==== ");
