@@ -22,7 +22,6 @@
 #include <LunatiX/LX_Error.hpp>
 #include <LunatiX/LX_Log.hpp>
 
-#include <exception>
 #include <fstream>
 #include <regex>
 
@@ -44,7 +43,7 @@ struct LX_InternalConfig
 static LX_InternalConfig _conf;
 
 
-void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept;
+void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept;
 void loadFileConfig_(LX_InternalConfig& config) noexcept;
 
 void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
@@ -62,17 +61,21 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
     int cpt = 0;
     std::string line;
 
-    while(getline(f,line))
+    while(getline(f, line))
     {
-        if(line.empty() || line[0] == SHARP)
+        size_t pos = 0;
+
+        if(line.empty() || line[0] == SHARP
+                || (pos = line.find(EQUAL)) == std::string::npos)
             continue;
 
-        const std::string s = line.substr(line.find(EQUAL) + 1);
+        // Get the string strating by the first character after '='
+        const std::string& s = line.substr(pos + 1);
 
         switch(cpt)
         {
         case 0:
-            if(std::regex_match(line,VIDEO_REG))
+            if(std::regex_match(line, VIDEO_REG))
             {
                 config.video_flag = (s == ONE);
                 cpt++;
@@ -80,7 +83,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
             break;
 
         case 1:
-            if(std::regex_match(line,VSYNC_REG))
+            if(std::regex_match(line, VSYNC_REG))
             {
                 config.vsync_flag = (s == ONE);
                 cpt++;
@@ -88,7 +91,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
             break;
 
         case 2:
-            if(std::regex_match(line,TTF_REG))
+            if(std::regex_match(line, TTF_REG))
             {
                 config.ttf_flag = (s == ONE);
                 cpt++;
@@ -96,7 +99,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
             break;
 
         case 3:
-            if(std::regex_match(line,AUDIO_REG))
+            if(std::regex_match(line, AUDIO_REG))
             {
                 config.audio_flag = (s == ONE);
                 cpt++;
@@ -104,7 +107,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
             break;
 
         case 4:
-            if(std::regex_match(line,GAMEPAD_REG))
+            if(std::regex_match(line, GAMEPAD_REG))
             {
                 config.gamepad_flag = (s == ONE);
                 cpt++;
@@ -112,7 +115,7 @@ void readFile_(std::ifstream& f,LX_InternalConfig& config) noexcept
             break;
 
         case 5:
-            if(std::regex_match(line,OPENGL_REG))
+            if(std::regex_match(line, OPENGL_REG))
             {
                 config.opengl_flag = (s == ONE);
                 cpt++;

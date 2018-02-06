@@ -21,7 +21,6 @@
 *
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
 
 /**
 *   @ingroup Config
