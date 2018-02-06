@@ -81,19 +81,22 @@ bool basename_check(const UTF8string& npath)
 
 bool dirname_check(const UTF8string& npath)
 {
+    // Empty string
+    if(npath.utf8_empty())
+        return true;
+
     const UTF8string SCURS(SEP + CURRENT + SEP);
     const UTF8string SPARS(SEP + PARENT + SEP);
     const size_t POS = npath.utf8_find(SEP);
     const size_t U8LEN = npath.utf8_length();
 
-    // Empty string or current directory or parent → current
+    // Current directory or parent → current
     // "." or ".." between separators → current directory
     // OR No separator → CURRENT directory
     // OR The path contains at least one separator
     // and the first separator is at the end of string → it is unique
-    return npath.utf8_empty() || npath == CURRENT || npath == PARENT
-           || npath == SCURS || npath == SPARS || POS == UTF8string::npos
-           || POS == U8LEN -1;
+    return npath == CURRENT || npath == PARENT || npath == SCURS
+           || npath == SPARS || POS == UTF8string::npos || POS == U8LEN -1;
 }
 
 }
