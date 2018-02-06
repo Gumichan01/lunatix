@@ -28,9 +28,12 @@ namespace LX_Device
 
 class LX_Mouse_
 {
-    SDL_Cursor * _cursor;
+    SDL_Cursor * _cursor = nullptr;
 
 public:
+
+    LX_Mouse_(const LX_Mouse_&) = delete;
+    LX_Mouse_& operator =(const LX_Mouse_&) = delete;
 
     LX_Mouse_(SDL_Surface * surface, int hot_x, int hot_y) noexcept
         : _cursor(SDL_CreateColorCursor(surface, hot_x, hot_y)) {}

@@ -42,7 +42,10 @@ bool mouseIsHaptic() noexcept
 // Specific to LX_Haptic
 struct LX_Haptic_
 {
-    int _instanceID;
+    int _instanceID = -1;
+
+    LX_Haptic_(const LX_Haptic_&) = delete;
+    LX_Haptic_& operator =(const LX_Haptic_&) = delete;
 
     explicit LX_Haptic_(int i) noexcept
     {
@@ -55,7 +58,10 @@ struct LX_Haptic_
 // Common data
 struct LX_Haptic_common
 {
-    SDL_Haptic *_haptic;
+    SDL_Haptic *_haptic = nullptr;
+
+    LX_Haptic_common(const LX_Haptic_common&) = delete;
+    LX_Haptic_common& operator =(const LX_Haptic_common&) = delete;
 
     explicit LX_Haptic_common(SDL_Haptic *h) noexcept
     {

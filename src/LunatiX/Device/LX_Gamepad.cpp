@@ -59,12 +59,15 @@ const char * nameOf_(SDL_GameController * controller) noexcept
 // Private implementation
 struct LX_Gamepad_
 {
-    SDL_GameController *_gc;
-    SDL_Joystick *_joy;
-    std::unique_ptr<LX_Haptic> _haptic;
+    SDL_GameController *_gc = nullptr;
+    SDL_Joystick *_joy = nullptr;
+    std::unique_ptr<LX_Haptic> _haptic = nullptr;
     bool _closed = true;
 
 private:
+
+    LX_Gamepad_(const LX_Gamepad_& g) = delete;
+    LX_Gamepad_& operator =(const LX_Gamepad_&) = delete;
 
     bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
     bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;

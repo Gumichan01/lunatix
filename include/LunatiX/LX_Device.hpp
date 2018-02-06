@@ -65,14 +65,14 @@ using LX_DeviceGUID = SDL_JoystickGUID;
 */
 struct LX_GamepadInfo
 {
-    LX_DeviceID id;         /**< The joystick ID            */
-    LX_DeviceGUID uid;      /**< The joystick UID           */
-    UTF8string name;        /**< The name of the joystick   */
-    UTF8string is_haptic;   /**< Haptic joystick or not     */
-    int nb_axis;            /**< The number of axes         */
-    int nb_balls;           /**< The number of balls        */
-    int nb_buttons;         /**< The number of buttons      */
-    int nb_hats;            /**< The number of hats         */
+    LX_DeviceID id = 0;     /**< The joystick ID            */
+    LX_DeviceGUID uid{{0}};      /**< The joystick UID           */
+    UTF8string name{""};        /**< The name of the joystick   */
+    UTF8string is_haptic{""};   /**< Haptic joystick or not     */
+    int nb_axis = 0;        /**< The number of axes         */
+    int nb_balls = 0;       /**< The number of balls        */
+    int nb_buttons = 0;     /**< The number of buttons      */
+    int nb_hats = 0;        /**< The number of hats         */
 };
 
 
