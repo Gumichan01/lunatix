@@ -50,17 +50,17 @@ namespace LX_Mixer
 */
 struct LX_MusicTag
 {
-    UTF8string title;                   /**< Title  */
-    UTF8string artist;                  /**< Artist */
-    UTF8string album;                   /**< Album  */
-    UTF8string year;                    /**< Year (2016, 2014/02/01)         */
-    UTF8string track;                   /**< Track number ("1", "01", "1/4") */
-    UTF8string genre;                   /**< Genre  */
-    UTF8string format;                  /**< Format (MP3, OGG, FLAC, M4A)    */
-    UTF8string duration;                /**< Duration, in HH:MM:SS format    */
-    LX_Graphics::LX_BufferedImage *img; /**< Album cover, if it exists       */
+    UTF8string title{""};                   /**< Title  */
+    UTF8string artist{""};                  /**< Artist */
+    UTF8string album{""};                   /**< Album  */
+    UTF8string year{""};                    /**< Year (2016, 2014/02/01)         */
+    UTF8string track{""};                   /**< Track number ("1", "01", "1/4") */
+    UTF8string genre{""};                   /**< Genre  */
+    UTF8string format{""};                  /**< Format (MP3, OGG, FLAC, M4A)    */
+    UTF8string duration{""};                /**< Duration, in HH:MM:SS format    */
+    LX_Graphics::LX_BufferedImage *img = nullptr;   /**< Album cover, if it exists  */
 
-    LX_MusicTag() noexcept;
+    //LX_MusicTag() noexcept;
     ~LX_MusicTag();
 };
 
@@ -94,8 +94,8 @@ class LX_Music : public virtual LX_Sound
 {
     std::unique_ptr<LX_Music_> _mimpl;
 
-    LX_Music(LX_Music& m) = delete;
-    LX_Music& operator =(LX_Music& m) = delete;
+    LX_Music(const LX_Music& m) = delete;
+    LX_Music& operator =(const LX_Music& m) = delete;
 
 public:
 

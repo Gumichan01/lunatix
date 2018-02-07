@@ -31,7 +31,10 @@ namespace LX_Mixer
 
 class LX_Chunk_
 {
-    Mix_Chunk *_chunk;
+    Mix_Chunk *_chunk = nullptr;
+
+    LX_Chunk_(const LX_Chunk_& m) = delete;
+    LX_Chunk_& operator =(const LX_Chunk_& m) = delete;
 
     void load_(const std::string& filename)
     {
