@@ -34,19 +34,38 @@
 namespace
 {
 
-uint32_t genFlags_(const LX_Config::LX_Configuration& config)
+constexpr uint32_t OPENGL_U = static_cast<uint32_t>(LX_Win::LX_WinMode::OPENGL);
+
+inline constexpr uint32_t openglFlag() noexcept
+{
+    using LX_Win::LX_WinMode;
+    return static_cast<uint32_t>(LX_WinMode::SHOWN) | OPENGL_U;
+}
+
+inline uint32_t renderFlag(const LX_Win::LX_WindowInfo& info) noexcept
+{
+    return info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
+}
+
+inline bool hasOpenGLsupport(const LX_Win::LX_WindowInfo& info) noexcept
+{
+    using LX_Win::LX_WinMode;
+    return (info.flag & OPENGL_U) == OPENGL_U;
+}
+
+uint32_t genFlags_(const LX_Config::LX_Configuration& config) noexcept
 {
     uint32_t flag = 0x00000000;
 
     if(config.getVideoFlag() && config.getOpenGLFlag())
-        flag |= LX_Win::LX_WINDOW_SHOWN|LX_Win::LX_WINDOW_OPENGL;
+        flag |= openglFlag();
 
     return flag;
 }
 
 using LX_Win::LX_BlendMode;
 
-SDL_BlendMode sdlBlend_(const LX_BlendMode& mode)
+SDL_BlendMode sdlBlend_(const LX_BlendMode& mode) noexcept
 {
     SDL_BlendMode m;
 
@@ -135,9 +154,6 @@ const char * LX_WindowException::what() const noexcept
     return _string_error.c_str();
 }
 
-LX_WindowException::~LX_WindowException() noexcept {}
-
-
 
 /* LX_Window, private implementation */
 
@@ -168,14 +184,11 @@ struct LX_Window_
         if(_window == nullptr)
             throw LX_WindowException(LX_GetError());
 
-        bool opengl_support = ((info.flag & LX_WINDOW_OPENGL) == LX_WINDOW_OPENGL);
-
-        if(opengl_support)
+        if(hasOpenGLsupport(info))
             _glcontext = SDL_GL_CreateContext(_window);
 
         // Hardware acceleration or software rendering
-        uint32_t rflag = info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
-        _renderer = SDL_CreateRenderer(_window, -1, rflag);
+        _renderer = SDL_CreateRenderer(_window, -1, renderFlag(info));
 
         if(_renderer == nullptr)
         {
@@ -449,11 +462,11 @@ void LX_Window::toggleFullscreen(uint32_t flag) noexcept
 {
     SDL_SetWindowFullscreen(_wimpl->_window, flag);
 
-    if(flag == LX_WINDOW_NO_FULLSCREEN)   // set the window at the original size
+    if(flag == static_cast<uint32_t>(LX_WinMode::FULLSCREEN))   // set the window at the original size
     {
         setWindowSize(_wimpl->_original_width, _wimpl->_original_height);
     }
-    else if(flag == LX_WINDOW_FULLSCREEN)
+    else if(flag == static_cast<uint32_t>(LX_WinMode::FULLSCREEN))
     {
         SDL_RenderSetLogicalSize(_wimpl->_renderer, _wimpl->_original_width,
                                  _wimpl->_original_height);

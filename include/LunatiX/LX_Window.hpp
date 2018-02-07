@@ -69,17 +69,20 @@ struct LX_Vector2D;
 namespace LX_Win
 {
 
-// Fullscreen modes
-const uint32_t LX_WINDOW_FULLSCREEN = 0x00000001;           /**< Fullscreen mode with original resolution   */
-const uint32_t LX_WINDOW_FULLSCREEN_DESKTOP = 0x00001001;   /**< Fullscreen with the current desktop size   */
-const uint32_t LX_WINDOW_NO_FULLSCREEN = 0x00000000;        /**< Original resolution in window              */
-const uint32_t LX_WINDOW_OPENGL = 0x00000002;               /**< Window usable with OpenGL context          */
-const uint32_t LX_WINDOW_SHOWN = 0x00000004;                /**< Window is visible                          */
-const uint32_t LX_WINDOW_HIDDEN = 0x00000008;               /**< Window is not visible                      */
-const uint32_t LX_WINDOW_BORDERLESS = 0x00000010;           /**< No window decoration                       */
-const uint32_t LX_WINDOW_RESIZABLE = 0x00000020;            /**< Window can be resized                      */
-const uint32_t LX_WINDOW_MINIMIZED = 0x00000040;            /**< Window is minimized                        */
-const uint32_t LX_WINDOW_MAXIMIZED = 0x00000080;            /**< Window is maximized                        */
+enum class LX_WinMode : uint32_t
+{
+    FULLSCREEN = 0x00000001,            /**< Fullscreen mode with original resolution   */
+    FULLSCREEN_DESKTOP = 0x00001001,    /**< Fullscreen with the current desktop size   */
+    NO_FULLSCREEN = 0x00000000,         /**< Original resolution in window              */
+    OPENGL = 0x00000002,                /**< Window usable with OpenGL context          */
+    SHOWN  = 0x00000004,                /**< Window is visible                          */
+    HIDDEN = 0x00000008,                /**< Window is not visible                      */
+    BORDERLESS = 0x00000010,            /**< No window decoration                       */
+    RESIZABLE  = 0x00000020,            /**< Window can be resized                      */
+    MINIMIZED  = 0x00000040,            /**< Window is minimized                        */
+    MAXIMIZED  = 0x00000080             /**< Window is maximized                        */
+};
+
 
 /**
 *   @enum LX_BlendMode
@@ -155,7 +158,7 @@ public:
     LX_WindowException(const LX_WindowException& w);
     const char * what() const noexcept;
 
-    ~LX_WindowException() noexcept;
+    ~LX_WindowException() noexcept = default;
 };
 
 
