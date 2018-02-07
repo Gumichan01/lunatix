@@ -40,7 +40,7 @@ const char * LX_WindowNotFoundException::what() const noexcept
 
 struct LX_WM_
 {
-    std::unordered_map<uint32_t, LX_Win::LX_Window&> windows;
+    std::unordered_map<uint32_t, LX_Win::LX_Window&> windows{};
 };
 
 LX_WindowManager& getWindowManager() noexcept
@@ -112,7 +112,7 @@ LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
     auto it = _wmpimpl->windows.find(id);
 
     if(it == _wmpimpl->windows.end())
-        throw LX_WindowNotFoundException("Not found window with identifer" + id);
+        throw LX_WindowNotFoundException("Not found window with identifer: " + id);
 
     return it->second;
 }

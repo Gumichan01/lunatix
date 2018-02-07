@@ -143,12 +143,14 @@ LX_WindowException::~LX_WindowException() noexcept {}
 
 struct LX_Window_
 {
-    SDL_Window *_window;        /* The internal window structure        */
-    SDL_Renderer *_renderer;    /* The main renderer                    */
-    SDL_GLContext _glcontext;   /* The context (only used in OpenGL)    */
-    int _original_width;        /* The width of the window              */
-    int _original_height;       /* The height of the window             */
+    SDL_Window *_window      = nullptr;             /* The internal window structure        */
+    SDL_Renderer *_renderer  = nullptr;             /* The main renderer                    */
+    SDL_GLContext _glcontext = nullptr;             /* The context (only used in OpenGL)    */
+    int _original_width      = DEFAULT_WIN_WIDTH;   /* The width of the window              */
+    int _original_height     = DEFAULT_WIN_WIDTH;   /* The height of the window             */
 
+    LX_Window_(const LX_Window_&) = delete;
+    LX_Window_& operator =(const LX_Window_&) = delete;
 
     explicit LX_Window_(const LX_WindowInfo& info): _window(nullptr),
         _renderer(nullptr), _glcontext(nullptr), _original_width(info.w),
@@ -184,11 +186,6 @@ struct LX_Window_
             SDL_DestroyWindow(_window);
             throw LX_WindowException(err_msg);
         }
-    }
-
-    inline void updateRenderer_() noexcept
-    {
-        SDL_RenderPresent(_renderer);
     }
 
     void clearRenderer_() noexcept
@@ -469,7 +466,7 @@ void LX_Window::update() noexcept
     if(_wimpl->_glcontext != nullptr)
         SDL_GL_SwapWindow(_wimpl->_window);
     else
-        _wimpl->updateRenderer_();
+        SDL_RenderPresent(_wimpl->_renderer);
 }
 
 
