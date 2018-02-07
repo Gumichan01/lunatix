@@ -361,8 +361,11 @@ class LX_BufferedImage
     friend class LX_Device::LX_Mouse;
     friend class LX_FileIO::LX_FileBuffer;
     friend class LX_Win::LX_Window;
-    SDL_Surface * _surface;
-    UTF8string _filename;
+    SDL_Surface * _surface = nullptr;
+    UTF8string _filename{""};
+
+    LX_BufferedImage(const LX_BufferedImage&) = delete;
+    LX_BufferedImage& operator =(const LX_BufferedImage&) = delete;
 
     LX_BufferedImage(SDL_Surface * s,
                      LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
@@ -449,8 +452,11 @@ public:
 */
 class LX_StreamingTexture: public LX_Texture
 {
-    SDL_Surface *_screen;
-    bool _update;
+    SDL_Surface *_screen = nullptr;
+    bool _update = false;
+
+    LX_StreamingTexture(const LX_StreamingTexture&) = delete;
+    LX_StreamingTexture& operator =(const LX_StreamingTexture&) = delete;
 
 public:
 

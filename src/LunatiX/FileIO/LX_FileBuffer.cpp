@@ -51,7 +51,7 @@ class LX_FileBuffer_
 public:
 
     explicit LX_FileBuffer_(const std::string& filename, uint32_t offset, uint32_t sz)
-        : _name(filename), _bufsize(0)
+        : _name(filename), _buffer(nullptr), _bufsize(0)
     {
         std::string str("LX_FileBuffer: " + _name + " - ");
         size_t r = 0, fsize = 0;

@@ -48,8 +48,11 @@ IOException::~IOException() noexcept {}
 
 class LX_File_
 {
-    UTF8string _name;
-    FILE *_fstream;
+    UTF8string _name{""};
+    FILE *_fstream = nullptr;
+
+    LX_File_(const LX_File_&) = delete;
+    LX_File_& operator =(const LX_File_&) = delete;
 
     void open_(const LX_FileMode mode)
     {
@@ -234,7 +237,10 @@ LX_File::~LX_File()
 
 class LX_TmpFile_
 {
-    FILE * _f;
+    FILE * _f = nullptr;
+
+    LX_TmpFile_(const LX_TmpFile_&) = delete;
+    LX_TmpFile_& operator =(const LX_TmpFile_&) = delete;
 
 public:
 
