@@ -312,7 +312,8 @@ class LX_TextInput_
 public:
 
     LX_TextInput_() noexcept
-        : _cursor(0), _done(false), _draw(false), _composing(false)
+        : _u8text(), _u8comp(), _cursor(0), _done(false), _draw(false),
+          _composing(false)
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "Start the input.");
         SDL_StartTextInput();

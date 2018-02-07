@@ -111,7 +111,7 @@ class LX_Polygon_
 
 public:
 
-    LX_Polygon_() : _convex(false) {}
+    LX_Polygon_() : _points(),_convex(false) {}
 
     void convexity_() noexcept
     {

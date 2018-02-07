@@ -452,8 +452,8 @@ public:
 */
 class LX_StreamingTexture: public LX_Texture
 {
-    SDL_Surface *_screen = nullptr;
-    bool _update = false;
+    SDL_Surface *_screen;
+    bool _update;
 
     LX_StreamingTexture(const LX_StreamingTexture&) = delete;
     LX_StreamingTexture& operator =(const LX_StreamingTexture&) = delete;
