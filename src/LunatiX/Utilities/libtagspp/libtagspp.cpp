@@ -159,19 +159,21 @@ void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread)
 }
 
 
-Tag::Tag(): _imdata(EMPTY_IMG) {}
+Tag::Tag(): _title(), _artist(), _album(), _year(), _track(), _genre(),
+    _albumgain(), _albumpeak(), _trackgain(), _trackpeak(),
+    _imdata(EMPTY_IMG), _properties() {}
 
 
 bool Tag::readTag(const std::string& filename)
 {
     const char * f = filename.c_str();
     char buf[256];
-    Aux aux = { NULL, *this };
-    Tagctx ctx = { NULL, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf),
+    Aux aux = { nullptr, *this };
+    Tagctx ctx = { nullptr, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf),
                    0, 0, 0, 0, 0, 0, 0
                  };
 
-    if((aux.f = fopen(f, "rb")) == NULL)
+    if((aux.f = fopen(f, "rb")) == nullptr)
     {
         fprintf(stderr, "failed to open: %s does not exist\n",f);
         return false;
