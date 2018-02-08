@@ -11,6 +11,7 @@
 */
 
 #include <LunatiX/utils/utf8_string.hpp>
+
 #include <unordered_map>
 #include <stdexcept>
 
