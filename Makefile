@@ -105,7 +105,7 @@ LUNATIX_STATIC_LIB=$(LUNATIX_LIB_DIR)libLunatix.a
 LUNATIX_SHARED_LIB=$(LUNATIX_LIB_DIR)libLunatix.so
 
 # Warning flags
-WFLAGS=-Wall -Wextra
+WFLAGS=-Wall -Wextra -Weffc++
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
