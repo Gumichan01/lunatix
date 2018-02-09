@@ -34,11 +34,13 @@
 namespace
 {
 
+using LX_Win::LX_WinMode;
+using LX_Win::LX_BlendMode;
+
 constexpr uint32_t OPENGL_U = static_cast<uint32_t>(LX_Win::LX_WinMode::OPENGL);
 
 inline constexpr uint32_t openglFlag() noexcept
 {
-    using LX_Win::LX_WinMode;
     return static_cast<uint32_t>(LX_WinMode::SHOWN) | OPENGL_U;
 }
 
@@ -49,7 +51,6 @@ inline uint32_t renderFlag(const LX_Win::LX_WindowInfo& info) noexcept
 
 inline bool hasOpenGLsupport(const LX_Win::LX_WindowInfo& info) noexcept
 {
-    using LX_Win::LX_WinMode;
     return (info.flag & OPENGL_U) == OPENGL_U;
 }
 
@@ -63,7 +64,14 @@ uint32_t genFlags_(const LX_Config::LX_Configuration& config) noexcept
     return flag;
 }
 
-using LX_Win::LX_BlendMode;
+bool fullscreenValidMode_(const LX_WinMode& mode)
+{
+    return mode == LX_WinMode::FULLSCREEN || mode == LX_WinMode::NO_FULLSCREEN
+    || mode == LX_WinMode::FULLSCREEN_DESKTOP;
+
+}
+
+
 
 SDL_BlendMode sdlBlend_(const LX_BlendMode& mode) noexcept
 {
@@ -458,18 +466,21 @@ void LX_Window::getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept
 }
 
 
-void LX_Window::toggleFullscreen(uint32_t flag) noexcept
+void LX_Window::toggleFullscreen(const LX_WinMode flag) noexcept
 {
-    SDL_SetWindowFullscreen(_wimpl->_window, flag);
+    if(fullscreenValidMode_(flag))
+    {
+        SDL_SetWindowFullscreen(_wimpl->_window, static_cast<uint32_t>(flag));
 
-    if(flag == static_cast<uint32_t>(LX_WinMode::FULLSCREEN))   // set the window at the original size
-    {
-        setWindowSize(_wimpl->_original_width, _wimpl->_original_height);
-    }
-    else if(flag == static_cast<uint32_t>(LX_WinMode::FULLSCREEN))
-    {
-        SDL_RenderSetLogicalSize(_wimpl->_renderer, _wimpl->_original_width,
-                                 _wimpl->_original_height);
+        if(flag == LX_WinMode::FULLSCREEN)
+        {
+            setWindowSize(_wimpl->_original_width, _wimpl->_original_height);
+        }
+        else if(flag == LX_WinMode::FULLSCREEN)
+        {
+            SDL_RenderSetLogicalSize(_wimpl->_renderer, _wimpl->_original_width,
+                                     _wimpl->_original_height);
+        }
     }
 }
 
