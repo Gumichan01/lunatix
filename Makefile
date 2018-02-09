@@ -215,7 +215,7 @@ float.o: $(SRC_UTILS_PATH)float.o
 ##########
 
 test: depend test-init test-config test-system test-device test-file test-physics \
-test-audio test-window test-ttf test-particle test-ime test-thread
+test-audio test-window test-ttf test-particle test-ime test-thread test-random
 
 
 # Test (object files + executable)
@@ -257,6 +257,7 @@ test-thread: $(TEST_PATH)test-thread.o $(OBJ_FILES)
 
 test-input: $(TEST_PATH)test-input.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+
 test-random: $(TEST_PATH)test-random.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
