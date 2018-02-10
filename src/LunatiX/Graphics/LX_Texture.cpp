@@ -76,6 +76,11 @@ SDL_Rect sdl_rect_(const LX_Graphics::LX_ImgRect& imgr)
     return SDL_Rect{imgr.p.x, imgr.p.y, imgr.w, imgr.h};
 }
 
+inline bool isNull_(const SDL_Rect& rect)
+{
+    return rect.x == 0 && rect.y == 0 && rect.w == 0 && rect.h == 0;
+}
+
 }
 
 namespace LX_Graphics
@@ -155,21 +160,34 @@ LX_Texture::~LX_Texture()
 
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
-                     const UTF8string& filename, LX_PIXELFORMAT format)
-    : LX_Texture(t, w, format), _filename(filename) {}
+                     const UTF8string& filename,
+                     const LX_ImgRect& img_rect, LX_PIXELFORMAT format)
+    : LX_Texture(t, w, format), _img_rect(img_rect), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
                      LX_PIXELFORMAT format)
-    : LX_Texture(filename, w, format), _filename(filename) {}
+    : LX_Texture(filename, w, format), _img_rect(), _filename(filename) {}
+
+LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
+                     const LX_ImgRect& img_rect, LX_PIXELFORMAT format)
+    : LX_Texture(filename, w, format), _img_rect(img_rect),
+      _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
                      LX_PIXELFORMAT format)
-    : LX_Texture(filename, w, format), _filename(filename) {}
+    : LX_Texture(filename, w, format), _img_rect(), _filename(filename) {}
+
+LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
+                     const LX_ImgRect& img_rect, LX_PIXELFORMAT format)
+    : LX_Texture(filename, w, format), _img_rect(img_rect),
+      _filename(filename) {}
 
 
 void LX_Sprite::draw() noexcept
 {
-    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
+    const SDL_Rect SDL_SRC = sdl_rect_(_img_rect);
+    const SDL_Rect * SDL_SRCP = isNull_(SDL_SRC) ? nullptr : &SDL_SRC;
+    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, SDL_SRCP, nullptr);
 }
 
 void LX_Sprite::draw(const LX_ImgRect& box) noexcept
@@ -186,7 +204,9 @@ void LX_Sprite::draw(const LX_ImgRect& box, const double angle) noexcept
 void LX_Sprite::draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept
 {
     const SDL_Rect SDL_RECT = sdl_rect_(box);
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr, &SDL_RECT,
+    const SDL_Rect SDL_SRC = sdl_rect_(_img_rect);
+    const SDL_Rect * SDL_SRCP = isNull_(SDL_SRC) ? nullptr : &SDL_SRC;
+    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, SDL_SRCP, &SDL_RECT,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
 }
 
@@ -204,8 +224,9 @@ LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
                                      const UTF8string& filename, LX_PIXELFORMAT format)
-    : LX_Sprite(t, w, filename, format), _coordinates(coord), _SZ(coord.size()),
-      _delay(delay), _btime(0), _frame(0), _started(false), _loop(loop), _drawable(true) {}
+    : LX_Sprite(t, w, filename, LX_ImgRect{0,0,0,0}, format),
+      _coordinates(coord), _SZ(coord.size()), _delay(delay), _btime(0),
+      _frame(0), _started(false), _loop(loop), _drawable(true) {}
 
 // public constructor
 LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
@@ -586,10 +607,10 @@ void LX_BufferedImage::convertNegative() noexcept
     }
 }
 
-LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w) const
+LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const
 {
     return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),
-                         _surface), w, _filename);
+                         _surface), w, _filename, area);
 }
 
 LX_AnimatedSprite * LX_BufferedImage::

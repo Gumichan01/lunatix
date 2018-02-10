@@ -187,11 +187,13 @@ public:
 class LX_Sprite: public LX_Texture
 {
     friend class LX_BufferedImage;
+    LX_ImgRect _img_rect;
     UTF8string _filename;
 
 protected:
 
     LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w, const UTF8string& filename,
+              const LX_ImgRect& img_rect,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
 public:
@@ -204,7 +206,19 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
+    LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
+              const LX_ImgRect& img_rect,
+              LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
+    /**
+    *   @exception LX_ImageException On failure
+    */
     LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
+              LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
+    /**
+    *   @exception LX_ImageException On failure
+    */
+    LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
+              const LX_ImgRect& img_rect,
               LX_PIXELFORMAT format = LX_PIXELFORMAT::RGBA8888);
 
     virtual void draw() noexcept;
@@ -405,14 +419,15 @@ public:
     void convertNegative() noexcept;
 
     /**
-    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w) const
+    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const
     *   Create a sprite from the current buffered image
     *
     *   @param [in] w The window to link the sprite to → see *draw()*
+    *   @param [in] area (Optional) Area of the sprite to display
     *   @return A new fresh allocated sprite on success, *nullptr* otherwise
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite * generateSprite(LX_Win::LX_Window& w) const;
+    LX_Sprite * generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
     *                                   const std::vector<LX_ImgRect>& coord,
