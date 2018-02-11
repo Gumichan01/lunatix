@@ -71,8 +71,6 @@ bool fullscreenValidMode_(const LX_WinMode& mode)
 
 }
 
-
-
 SDL_BlendMode sdlBlend_(const LX_BlendMode& mode) noexcept
 {
     SDL_BlendMode m;
