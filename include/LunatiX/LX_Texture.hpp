@@ -427,7 +427,8 @@ public:
     *   @return A new fresh allocated sprite on success, *nullptr* otherwise
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite * generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const;
+    LX_Sprite * generateSprite(LX_Win::LX_Window& w,
+                               const LX_ImgRect& area = LX_ImgRect{{0,0},0,0}) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
     *                                   const std::vector<LX_ImgRect>& coord,
