@@ -482,6 +482,15 @@ void LX_Window::toggleFullscreen(const LX_WinMode flag) noexcept
     }
 }
 
+void LX_Window::show() noexcept
+{
+    SDL_ShowWindow(_wimpl->_window);
+}
+
+void LX_Window::hide() noexcept
+{
+    SDL_HideWindow(_wimpl->_window);
+}
 
 void LX_Window::update() noexcept
 {
@@ -490,7 +499,6 @@ void LX_Window::update() noexcept
     else
         SDL_RenderPresent(_wimpl->_renderer);
 }
-
 
 void LX_Window::clearWindow() noexcept
 {

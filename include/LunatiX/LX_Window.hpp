@@ -406,6 +406,16 @@ public:
     void toggleFullscreen(const LX_WinMode flag) noexcept;
 
     /**
+    *   @fn void show() noexcept
+    *   Show the window
+    */
+    void show() noexcept;
+    /**
+    *   @fn void hide() noexcept
+    *   Hide the window
+    */
+    void hide() noexcept;
+    /**
     *   @fn void update() noexcept
     *   Updates the window's display
     *   @note This function can be used with OpenGL
