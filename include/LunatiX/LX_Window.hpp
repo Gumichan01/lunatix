@@ -110,16 +110,16 @@ enum class LX_BlendMode
 */
 struct LX_WindowInfo
 {
-    uint32_t id = 0;        /**< Identifier of the window (read-only)   */
-    std::string title{""};  /**< Title                      */
-    int x  = 0;              /**< X position                 */
-    int y  = 0;              /**< Y position                 */
-    int w  = 0;              /**< Window Width               */
-    int h  = 0;              /**< Window Height              */
-    int lw = 0;             /**< Independant device width   */
-    int lh = 0;             /**< Independant device height  */
-    uint32_t flag = 0;      /**< Flags                      */
-    bool accel = false;         /**< Hardware acceleration      */
+    uint32_t id = 0;        /**< Id of the window (read-only)   */
+    std::string title{""};  /**< Title                          */
+    int x  = 0;             /**< X position                     */
+    int y  = 0;             /**< Y position                     */
+    int w  = 0;             /**< Window Width                   */
+    int h  = 0;             /**< Window Height                  */
+    int lw = 0;             /**< Independant device width       */
+    int lh = 0;             /**< Independant device height      */
+    uint32_t flag = 0;      /**< Flags                          */
+    bool accel = false;     /**< Hardware acceleration          */
 
 };
 
