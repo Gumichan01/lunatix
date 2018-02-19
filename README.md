@@ -34,15 +34,15 @@ using namespace LX_Event;
 
 int main(int argc, char** argv)
 {
-    LX_AABB position = {0,0,256,256};
-    LX_EventHandler ev;
-    bool go = true;
+	LX_Graphics::LX_ImgRect position{{0,0},256,256};
+	LX_EventHandler ev;
+	bool go = true;
 
-    if(!LX_Init())
-    {
-        LX_Log::log("Cannot load the library: %s",LX_GetError());
-        return -1;
-    }
+	if(!LX_Init())
+	{
+		LX_Log::log("Cannot load the library: %s",LX_GetError());
+		return -1;
+	}
 
     // Information about how to build the window
     LX_Win::LX_WindowInfo info;

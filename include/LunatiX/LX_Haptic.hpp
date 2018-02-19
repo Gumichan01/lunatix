@@ -80,9 +80,6 @@ public:
 
     /**
     *   @fn LX_Haptic(int index) noexcept
-    *   @brief Constructor
-    *
-    *   Create the instance of the haptic system using the index
     *   @param [in] index The index of the device to open
     */
     explicit LX_Haptic(int index) noexcept;
@@ -172,7 +169,6 @@ public:
     */
     virtual int numberOfEffects() const noexcept;
 
-    /// Destructor
     virtual ~LX_Haptic();
 };
 
@@ -188,11 +184,9 @@ class LX_MouseHaptic: public LX_Haptic
 
 public:
 
-    /// Constructor
     LX_MouseHaptic() noexcept;
     virtual bool isOpened() const noexcept;
-    /// Desstructor
-    ~LX_MouseHaptic();
+    ~LX_MouseHaptic() = default;
 };
 
 }

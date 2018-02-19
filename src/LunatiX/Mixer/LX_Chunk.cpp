@@ -31,7 +31,10 @@ namespace LX_Mixer
 
 class LX_Chunk_
 {
-    Mix_Chunk *_chunk;
+    Mix_Chunk *_chunk = nullptr;
+
+    LX_Chunk_(const LX_Chunk_& m) = delete;
+    LX_Chunk_& operator =(const LX_Chunk_& m) = delete;
 
     void load_(const std::string& filename)
     {
@@ -51,7 +54,7 @@ public:
         load_(filename);
     }
 
-    explicit LX_Chunk_(const UTF8string filename) : _chunk(nullptr)
+    explicit LX_Chunk_(const UTF8string& filename) : _chunk(nullptr)
     {
         load_(filename.utf8_sstring());
     }
@@ -63,7 +66,7 @@ public:
 
     bool play(int channel) noexcept
     {
-        return play(channel, LX_MIXER_NOLOOP);
+        return play(channel, LX_MIX_NOLOOP);
     }
 
     bool play(int channel, int loops) noexcept
@@ -88,9 +91,9 @@ public:
 LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
 
 // Public constructors
-LX_Chunk::LX_Chunk(const std::string filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const std::string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
-LX_Chunk::LX_Chunk(const UTF8string filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk(const UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
 
 
 bool LX_Chunk::play() noexcept
@@ -100,7 +103,7 @@ bool LX_Chunk::play() noexcept
 
 bool LX_Chunk::play(int channel) noexcept
 {
-    return _chkimpl->play(channel, LX_MIXER_NOLOOP);
+    return _chkimpl->play(channel, LX_MIX_NOLOOP);
 }
 
 bool LX_Chunk::play(int channel, int loops) noexcept

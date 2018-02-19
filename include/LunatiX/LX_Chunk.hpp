@@ -46,42 +46,34 @@ class LX_Chunk : public virtual LX_Sound
     std::unique_ptr<LX_Chunk_> _chkimpl;
 
     LX_Chunk(Mix_Chunk& chunk);
-    LX_Chunk(LX_Chunk& m) = delete;
-    LX_Chunk& operator =(LX_Chunk& m) = delete;
+    LX_Chunk(const LX_Chunk& m) = delete;
+    LX_Chunk& operator =(const LX_Chunk& m) = delete;
 
 public:
 
     /**
-    *   @fn LX_Chunk(const std::string filename)
-    *   @brief Constructor
-    *
-    *   Load a sample from a file
-    *
-    *   @param [in] filename The file to create the sample from
-    *
+    *   @fn LX_Chunk(const std::string& filename)
+    *   @brief Load a sample from a file
+    *   @param filename
     *   @note It is better to give a .wav file to the constructor.
     *        The sample was optimized for this format. But it can work with
     *        an other file type.
     *
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Chunk(const std::string filename);
+    explicit LX_Chunk(const std::string& filename);
 
     /**
-    *   @fn LX_Chunk(const UTF8string filename)
-    *   @brief Constructor
-    *
-    *   Load a sample from a file
-    *
-    *   @param [in] filename The file to create the sample from
-    *
+    *   @fn LX_Chunk(const UTF8string& filename)
+    *   @brief Load a sample from a file
+    *   @param filename
     *   @note It is better to give a .wav file to the constructor.
     *          The sample was optimized for this format. But it can work with
     *          an other file type.
     *
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Chunk(const UTF8string filename);
+    explicit LX_Chunk(const UTF8string& filename);
 
     /**
     *   @fn bool play() noexcept
@@ -113,7 +105,7 @@ public:
     *   @param [in] loops number of loops
     *
     *   @return TRUE on success, FALSE otherwise
-    *   @note 1 — The sample is played loops +1 time
+    *   @note 1 — The sample is played loops + 1 time
     *            For example:
     *              - If loop == 0 → play the sample once
     *              - If loop == 1 → play the sample 2 times, ...
@@ -136,7 +128,6 @@ public:
     */
     bool play(int channel, int loops, int ticks) noexcept;
 
-    /// Destructor
     ~LX_Chunk();
 };
 

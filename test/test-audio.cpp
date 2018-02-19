@@ -57,8 +57,8 @@ void test_info(const std::string& s)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - cover opened");
 
         w.clearWindow();
-        LX_AABB box = {0,0,info.w,info.h};
-        cover->draw(&box);
+        LX_Graphics::LX_ImgRect box{0,0,info.w,info.h};
+        cover->draw(box);
         w.update();
         LX_Timer::delay(2000);
         delete cover;

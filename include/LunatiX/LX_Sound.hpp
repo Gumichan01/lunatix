@@ -27,8 +27,8 @@
 namespace LX_Mixer
 {
 
-const int LX_MIXER_LOOP = -1;   /**< Activate the loop      */
-const int LX_MIXER_NOLOOP = 0;  /**< No loop is activated   */
+const int LX_MIX_LOOP = -1;   /**< Activate the loop      */
+const int LX_MIX_NOLOOP = 0;  /**< No loop is activated   */
 
 
 /**
@@ -41,15 +41,9 @@ class LX_MixerException : public std::exception
 
 public:
 
-    /// Constructor
     explicit LX_MixerException(std::string err);
-    /// Copy constructor
     LX_MixerException(const LX_MixerException& me);
-
-    /// Get the error message
     virtual const char * what() const noexcept;
-
-    /// Destructor
     ~LX_MixerException() = default;
 };
 
@@ -61,10 +55,11 @@ class LX_Sound
 {
 
 public:
-    /// Play something
+    /**
+    *   @fn virtual bool play() noexcept = 0
+    */
     virtual bool play() noexcept = 0;
-    /// Destructor
-    virtual ~LX_Sound();
+    virtual ~LX_Sound() = default;
 };
 
 }

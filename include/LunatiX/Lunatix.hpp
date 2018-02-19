@@ -30,6 +30,10 @@
 #error "Not supported system"
 #endif
 
+#pragma message "LX_Random: Some functions are deprecated, please check the documentation"
+#pragma message "LX_Texture: Some functions are deprecated, please check the documentation"
+#pragma message "LX_Window: Some functions are deprecated, please check the documentation"
+
 // Initialization
 #include <LunatiX/LX_Library.hpp>
 #include <LunatiX/LX_Version.hpp>
@@ -72,5 +76,6 @@
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Text.hpp>
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
+#include <LunatiX/utils/float.hpp>
 
 #endif // LUNATIX_H_INCLUDED

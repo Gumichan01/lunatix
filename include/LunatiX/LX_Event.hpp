@@ -385,7 +385,6 @@ class LX_EventHandler
 
 public:
 
-    /// Constructor
     LX_EventHandler() noexcept;
 
     /**
@@ -443,7 +442,7 @@ public:
     *
     *   @param ty The type of event to process
     *   @note 1 — By default, every events are enabled by default
-    *   @note 2 — ::LX_TEXTEDITING and ::LX_TEXTINPUT cannot be set for processing
+    *   @note 2 — ::TEXTEDITING and ::TEXTINPUT cannot be set for processing
     *   using this function because the operation is done by LX_Text
     *
     *   @sa ignoreEvent
@@ -455,7 +454,7 @@ public:
     *   Ingore a type of event
     *
     *   @param ty The type of event to ignore
-    *   @note ::LX_TEXTEDITING and ::LX_TEXTINPUT cannot be ignored using
+    *   @note ::TEXTEDITING and ::TEXTINPUT cannot be ignored using
     *   this function because the operation is done by LX_Text
     *
     *   @sa processEvent
@@ -576,7 +575,6 @@ public:
     */
     const LX_DropEvent getDropEvent() const noexcept;
 
-    /// Default Destructor
     ~LX_EventHandler();
 };
 
@@ -605,46 +603,46 @@ LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode) noexcept;
 LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept;
 
 /**
-*   @fn UTF8string stringOfScanCode(LX_ScanCode scancode)
+*   @fn UTF8string stringOfScanCode(LX_ScanCode scancode) noexcept
 *
 *   Get the string value of the physical key value given in argument
 *
 *   @param [in] scancode The physical key value to get the string from
 *   @return A non-empty string on success, "" otherwise
 */
-UTF8string stringOfScanCode(LX_ScanCode scancode);
+UTF8string stringOfScanCode(LX_ScanCode scancode) noexcept;
 /**
-*   @fn UTF8string stringOfKeyCode(LX_KeyCode keycode)
+*   @fn UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept
 *
 *   Get the string value of the virtual key value given in argument
 *
 *   @param [in] keycode The virtual key value to get the string from
 *   @return A non-empty string on success, "" otherwise
 */
-UTF8string stringOfKeyCode(LX_KeyCode keycode);
+UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept;
 
 
 // Gamepad
 /**
-*   @fn UTF8string stringOfButton(LX_GamepadButton button)
+*   @fn UTF8string stringOfButton(LX_GamepadButton button) noexcept
 *
 *   Get the string value of a button specified by the enum
 *   given in argument
 *
 *   @param [in] button The enumeration to get the string from
-*   @return The string on success, "null" otherwise
+*   @return The string on success, "<null>" otherwise
 */
-UTF8string stringOfButton(LX_GamepadButton button);
+UTF8string stringOfButton(LX_GamepadButton button) noexcept;
 /**
-*   @fn UTF8string stringOfAxis(LX_GamepadAxis axis)
+*   @fn UTF8string stringOfAxis(LX_GamepadAxis axis) noexcept
 *
 *   Get the string value of an axis specified by the enum
 *   given in argument
 *
 *   @param [in] axis The enumeration to get the string from
-*   @return The string on success, "null" otherwise
+*   @return The string on success, "<null>" otherwise
 */
-UTF8string stringOfAxis(LX_GamepadAxis axis);
+UTF8string stringOfAxis(LX_GamepadAxis axis) noexcept;
 
 }
 

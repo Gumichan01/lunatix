@@ -30,6 +30,7 @@ echo "\n============================= Begin Report ============================\
 ./test-physics 2>&1  | tee -a ${LOG_TMP_FILE}
 ./test-audio 2>&1    | tee -a ${LOG_TMP_FILE}
 ./test-thread 2>&1   | tee -a ${LOG_TMP_FILE}
+./test-random 2>&1   | tee -a ${LOG_TMP_FILE}
 
 # Rate of success
 NB_OK=`grep ${SUCCESS_TAG} ${LOG_TMP_FILE} | wc -l | tr -s ' ' | cut -d ' ' -f1`

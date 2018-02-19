@@ -58,15 +58,18 @@ LX_GLContext getCurrentContext() noexcept
 }
 
 
-int getSwapInterval() noexcept
+LX_GL_SwapInterval getSwapInterval() noexcept
 {
-    return SDL_GL_GetSwapInterval();
+    int tmp = SDL_GL_GetSwapInterval();
+
+    return tmp == -1 ? LX_GL_SwapInterval::NOT_SUPPORTED :
+           static_cast<LX_GL_SwapInterval>(tmp);
 }
 
 
-bool setSwapInterval(int interval) noexcept
+bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept
 {
-    return SDL_GL_SetSwapInterval(interval) == 0;
+    return SDL_GL_SetSwapInterval(static_cast<int>(interval)) == 0;
 }
 
 

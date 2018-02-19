@@ -47,13 +47,13 @@ void initRand() noexcept
     srand(static_cast<unsigned int>(time(nullptr)));
 }
 
-
-uint64_t xorshiftRand() noexcept
+// private
+uint64_t _Prand::rand() noexcept
 {
     static uint64_t x = 0;
     static bool first_call = false;
 
-    if(first_call == false)
+    if(!first_call)
     {
         // x must be a nonzero value
         x = static_cast<uint64_t>(crand() + 1);
@@ -64,9 +64,22 @@ uint64_t xorshiftRand() noexcept
     x ^= x >> 12; // a
     x ^= x << 25; // b
     x ^= x >> 27; // c
-    return x * UINT64_C(2685821657736338717);
+    return x * UINT64_C(0x2545F4914F6CDD1D);
+
 }
 
+float fxrand(float minf, float maxf) noexcept
+{
+    const float UF_MAX = static_cast<float>(std::numeric_limits<uint32_t>::max());
+    const float r = static_cast<float>(xrand<uint32_t>());
+
+    return ( (r / UF_MAX) + minf ) * maxf;
+}
+
+uint64_t xorshiftRand() noexcept
+{
+    return _Prand::rand();
+}
 
 int crand() noexcept
 {

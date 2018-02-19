@@ -116,19 +116,8 @@ class LX_TextInput_
     }
 
     // Input
-    void keyboardInput_(LX_Event::LX_EventHandler& ev) noexcept
+    void keyCode(const LX_Event::LX_EventHandler& ev)
     {
-        const size_t old_cursor = _cursor;
-
-        if(ev.getKeyCode() == SDLK_ESCAPE)
-        {
-            _done = true;
-            return;
-        }
-
-        if(_composing)
-            return;
-
         switch(ev.getKeyCode())
         {
 
@@ -142,16 +131,12 @@ class LX_TextInput_
 
         case SDLK_LEFT:
             if(_cursor > 0)
-            {
                 _cursor -= 1;
-            }
             break;
 
         case SDLK_RIGHT:
             if(_cursor < _u8text.utf8_length())
-            {
                 _cursor += 1;
-            }
             break;
 
         case SDLK_HOME:
@@ -165,11 +150,27 @@ class LX_TextInput_
         default:
             break;
         }
+    }
 
+    void keyboardInput_(LX_Event::LX_EventHandler& ev) noexcept
+    {
+        const size_t old_cursor = _cursor;
+
+        if(ev.getKeyCode() == SDLK_ESCAPE)
+        {
+            _done = true;
+            return;
+        }
+
+        if(_composing)
+            return;
+
+        keyCode(ev);
         LX_Event::LX_ScanCode sc = ev.getScanCode();
 
         if(sc == SDL_SCANCODE_C)
             save_();
+
         else if(sc == SDL_SCANCODE_V)
         {
             paste_();
@@ -311,7 +312,8 @@ class LX_TextInput_
 public:
 
     LX_TextInput_() noexcept
-        : _cursor(0), _done(false), _draw(false), _composing(false)
+        : _u8text(), _u8comp(), _cursor(0), _done(false), _draw(false),
+          _composing(false)
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "Start the input.");
         SDL_StartTextInput();
@@ -357,7 +359,7 @@ public:
     }
 
 
-    ~LX_TextInput_()
+    ~LX_TextInput_() noexcept
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "End of input.");
         SDL_StopTextInput();
@@ -379,7 +381,7 @@ void LX_TextInput::eventLoop(LX_RedrawCallback& redraw) noexcept
     _timpl->eventLoop_(redraw);
 }
 
-LX_TextInput::~LX_TextInput()
+LX_TextInput::~LX_TextInput() noexcept
 {
     _timpl.reset();
 }

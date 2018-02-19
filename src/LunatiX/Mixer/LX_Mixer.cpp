@@ -55,30 +55,10 @@ unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 
-struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE = {false, false, false, false};
-
-
-LX_MixerEffect::LX_MixerEffect() noexcept: type(LX_EFFECT_NONE),
-    pan_left(0), pan_right(0), pos_angle(0), pos_distance(0),
-    rev_stereo(false), loops(0) {}
-
-LX_MixerEffect::LX_MixerEffect(const LX_MixerEffect& st) noexcept:
-    type(st.type), pan_left(st.pan_left), pan_right(st.pan_right),
-    pos_angle(st.pos_angle), pos_distance(st.pos_distance),
-    rev_stereo(st.rev_stereo), loops(st.loops) {}
-
-LX_MixerEffect& LX_MixerEffect::operator = (const LX_MixerEffect& st) noexcept
+const struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE
 {
-    type = st.type;
-    pan_left = st.pan_left;
-    pan_right = st.pan_right;
-    pos_angle = st.pos_angle;
-    pos_distance = st.pos_distance;
-    rev_stereo = st.rev_stereo;
-    loops = st.loops;
-
-    return *this;
-}
+    false, false, false, false
+};
 
 
 void setOverallVolume(unsigned short volume) noexcept
@@ -316,17 +296,17 @@ void setPanning(int chan, uint8_t left, uint8_t right) noexcept
 
 void removePanning() noexcept
 {
-    setPanning(LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
+    setPanning(LX_MIX_FX_LOUD, LX_MIX_FX_LOUD);
 }
 
 void removePanning(int chan) noexcept
 {
-    setPanning(chan, LX_MIXER_EFFECT_LOUD, LX_MIXER_EFFECT_LOUD);
+    setPanning(chan, LX_MIX_FX_LOUD, LX_MIX_FX_LOUD);
 }
 
 void setPosition(int16_t angle) noexcept
 {
-    setPosition(angle, LX_MIXER_EFFECT_NO_DISTANCE);
+    setPosition(angle, LX_MIX_FX_NO_DISTANCE);
 }
 
 
@@ -343,13 +323,13 @@ void setPosition(int chan, int16_t angle, uint8_t distance) noexcept
 
 void resetPosition() noexcept
 {
-    Mix_SetPosition(MIX_CHANNEL_POST, LX_MIXER_EFFECT_NO_ANGLE,
-                    LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(MIX_CHANNEL_POST, LX_MIX_FX_NO_ANGLE,
+                    LX_MIX_FX_NO_DISTANCE);
 }
 
 void resetPosition(int chan) noexcept
 {
-    Mix_SetPosition(chan, LX_MIXER_EFFECT_NO_ANGLE, LX_MIXER_EFFECT_NO_DISTANCE);
+    Mix_SetPosition(chan, LX_MIX_FX_NO_ANGLE, LX_MIX_FX_NO_DISTANCE);
 }
 
 void reverseStereo(bool flip) noexcept

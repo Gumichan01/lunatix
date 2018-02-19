@@ -22,8 +22,6 @@ size_t getCurrentThreadID() noexcept
     return std::hash<std::thread::id>()(std::this_thread::get_id());
 }
 
-// Class
-
 bool LX_Thread::joinable() const noexcept
 {
     return thread.joinable();
@@ -34,7 +32,7 @@ void LX_Thread::join()
     thread.join();
 }
 
-size_t LX_Thread::getID() noexcept
+size_t LX_Thread::getID() const noexcept
 {
     return std::hash<std::thread::id>()(thread.get_id());
 }

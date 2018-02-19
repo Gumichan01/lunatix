@@ -41,17 +41,13 @@ class LX_Mouse
 {
     std::unique_ptr<LX_Mouse_> _mimpl;
 
-    LX_Mouse(const LX_Mouse& m) = delete;
-    LX_Mouse& operator =(const LX_Mouse& m) = delete;
+    LX_Mouse(const LX_Mouse&) = delete;
+    LX_Mouse& operator =(const LX_Mouse&) = delete;
 
 public:
 
     /**
     *   @fn LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y) noexcept
-    *   @brief Constructor
-    *
-    *   Construct the mouse cursor using a surface and the coordinates of
-    *   the mouse clicking zone
     *
     *   @param [in] surface The buffered image to load the cursor from
     *   @param [in] hot_x The x hot spot position
@@ -70,7 +66,6 @@ public:
     */
     void setMouse() noexcept;
 
-    /// Destructor
     ~LX_Mouse();
 };
 

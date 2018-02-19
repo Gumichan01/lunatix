@@ -21,19 +21,18 @@
 *
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
 
 /**
 *   @ingroup Config
 *   @namespace LX_Config
-*   @brief The configuration loader
+*   @brief The configuration
 */
 namespace LX_Config
 {
 
 /**
 *   @class LX_Configuration
-*   @brief The The LunatiX configuration
+*   @brief The configuration loader of Lunatix
 *
 *   This class is responsible of loading the configuration of the library
 */
@@ -41,43 +40,22 @@ class LX_Configuration
 {
     LX_Configuration() noexcept;
     LX_Configuration(LX_Configuration& c) = delete;
+    LX_Configuration(LX_Configuration&& c) = delete;
     LX_Configuration& operator =(LX_Configuration& c) = delete;
-    ~LX_Configuration();
+    LX_Configuration&& operator =(LX_Configuration&& c) = delete;
+    ~LX_Configuration() = default;
 
     void loadFlags_() noexcept;
 
 public:
 
-    /**
-    *   @fn void initConfig() noexcept
-    *
-    *   Launch the system configuration
-    *
-    *   @note 1 — This function is automatically called in LX_Init()
-    *   @note 2 — The instance of LX_Configuration may not be created.
-    *          So, it will be necessary to call LX_GetError() to get
-    *          the error message.
-    */
-    static void initConfig() noexcept;
 
     /**
-    *   @fn LX_Configuration * getInstance() noexcept
-    *   Get the unique instance of the LX_Configuration class
+    *   @fn LX_Configuration& getInstance() noexcept
+    *   Get the singleton of the LX_Configuration class
     *   @return The instance of LX_Configuration
-    *
-    *   @note The instance can be a null pointer if *initConfig()* failed.
     */
-    static LX_Configuration * getInstance() noexcept;
-
-    /**
-    *   @fn void destroy() noexcept
-    *
-    *   Destroy the unique instance
-    *
-    *   @note It is not necessary to call this function because it is
-    *        automatically called when the library subsystems are shut down
-    */
-    static void destroy() noexcept;
+    static LX_Configuration& getInstance() noexcept;
 
     /**
     *   @fn bool getVideoFlag() const noexcept

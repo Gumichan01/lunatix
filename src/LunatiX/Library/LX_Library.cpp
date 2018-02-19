@@ -33,13 +33,17 @@ using namespace LX_Config;
 namespace
 {
 
+const int LX_MIX_AUDIO_FREQUENCY = 44100;   /**< The default audio frequency                */
+const int LX_MIX_STEREO_SOUND = 2;          /**< The stereo variable for the mix namespace  */
+const int LX_MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mix namespace */
+
 bool LX_Mixer_Init() noexcept
 {
     if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == 0)
         return false;
 
-    if(Mix_OpenAudio(LX_MIXER_AUDIO_FREQUENCY,MIX_DEFAULT_FORMAT,
-                     LX_MIXER_STEREO_SOUND,LX_MIXER_DEFAULT_CHUNKSIZE) == -1)
+    if(Mix_OpenAudio(LX_MIX_AUDIO_FREQUENCY, MIX_DEFAULT_FORMAT,
+                     LX_MIX_STEREO_SOUND, LX_MIX_DEFAULT_CHUNKSIZE) == -1)
     {
         Mix_Quit();
         return false;
@@ -48,56 +52,42 @@ bool LX_Mixer_Init() noexcept
     return true;
 }
 
-}
-
-
-bool LX_Init() noexcept
+bool loadMainSystem()
 {
-    const std::string mappingFile = "config/gamecontrollerdb.txt";
+    uint32_t sdl_flags = 0;
 
-    uint32_t sdl_flags = 0x00000000;                // The flags for SDL_Init
-    int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;      // The IMG flag for SDL_Image
-
-    // Load the configuration
-    LX_Configuration::initConfig();
-    LX_Configuration *configuration = LX_Configuration::getInstance();
+    const LX_Configuration& config = LX_Configuration::getInstance();
 
     // Video flag
-    if(configuration->getVideoFlag())
-    {
+    if(config.getVideoFlag())
         sdl_flags |= SDL_INIT_VIDEO;
-    }
 
     // Audio flag
-    if(configuration->getAudioFlag())
-    {
+    if(config.getAudioFlag())
         sdl_flags |= SDL_INIT_AUDIO;
-    }
 
     // Gamepad flag
-    if(configuration->getGamepadFlag())
-    {
+    if(config.getGamepadFlag())
         sdl_flags |= SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
-    }
 
-    // Init SDL
-    if(sdl_flags == 0 || SDL_Init(sdl_flags|SDL_INIT_TIMER) == -1)
-    {
-        if(sdl_flags == 0)
-            LX_SetError("No flag is set in the configuration file");
+    return SDL_Init(sdl_flags|SDL_INIT_TIMER) == 0;
+}
 
-        return false;
-    }
-
+void loadGamepadSubSystem()
+{
     // Load mappings from another configuration file
-    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER) != 0)
-    {
-        SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
-    }
+    const std::string mappingFile("config/gamecontrollerdb.txt");
 
-    if(configuration->getVideoFlag())
+    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER) != 0)
+        SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
+}
+
+bool loadImgSubSystem()
+{
+    int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;
+
+    if(LX_Configuration::getInstance().getVideoFlag())
     {
-        // Init SDL_Image
         if(IMG_Init(img_flags) != img_flags)
         {
             SDL_Quit();
@@ -105,9 +95,13 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration->getTTFFlag())
+    return true;
+}
+
+bool loadTrueTypeFontSubSystem()
+{
+    if(LX_Configuration::getInstance().getTTFFlag())
     {
-        // Init SDL_ttf
         if(TTF_Init() == -1)
         {
             IMG_Quit();
@@ -116,9 +110,13 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration->getAudioFlag())
+    return true;
+}
+
+bool loadAudioSubSystem()
+{
+    if(LX_Configuration::getInstance().getAudioFlag())
     {
-        // Init SDL_Mixer
         if(!LX_Mixer_Init())
         {
             TTF_Quit();
@@ -128,22 +126,46 @@ bool LX_Init() noexcept
         }
     }
 
-    if(configuration->getOpenGLFlag())
+    return true;
+}
+
+void loadOpenGLSubSystem()
+{
+    if(LX_Configuration::getInstance().getOpenGLFlag())
     {
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                                              SDL_GL_CONTEXT_PROFILE_CORE);
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,
-                                             LX_GL_MAJOR_VERSION);
+                                             LX_Graphics::LX_OpenGL::MAJOR_VERSION);
         LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MINOR_VERSION,
-                                             LX_GL_MINOR_VERSION);
+                                             LX_Graphics::LX_OpenGL::MINOR_VERSION);
     }
+}
 
-    LX_Win::LX_WindowManager::init();
+}
+
+
+bool LX_Init() noexcept
+{
+    if(!loadMainSystem())
+        return false;
+
+    if(!loadImgSubSystem())
+        return false;
+
+    if(!loadTrueTypeFontSubSystem())
+        return false;
+
+    if(!loadAudioSubSystem())
+        return false;
+
+    loadGamepadSubSystem();
+    loadOpenGLSubSystem();
     return true;
 }
 
 
-bool setSDLConfig(const std::string sdlconfig_name, const std::string sdlconfig_value) noexcept
+bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value) noexcept
 {
     return SDL_SetHint(sdlconfig_name.c_str(), sdlconfig_value.c_str()) == SDL_TRUE;
 }
@@ -157,13 +179,9 @@ const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 
 void LX_Quit() noexcept
 {
-    LX_Win::LX_WindowManager::destroy();
-
     Mix_CloseAudio();
     Mix_Quit();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
-
-    LX_Configuration::destroy();
 }

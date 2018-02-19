@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_MIXER_H_INCLUDED
-#define LX_MIXER_H_INCLUDED
+#ifndef LX_MIX_H_INCLUDED
+#define LX_MIX_H_INCLUDED
 
 /**
 *   @file LX_Mixer.hpp
@@ -23,15 +23,10 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
-const int LX_MIXER_AUDIO_FREQUENCY = 44100;     /**< The default audio frequency             */
-const int LX_MIXER_STEREO_SOUND = 2;            /**< The stereo variable for the mix namespace  */
-const int LX_MIXER_MONO_SOUND = 1;              /**< The mono variable for the mix namespace    */
-const int LX_MIXER_DEFAULT_CHUNKSIZE = 1024;    /**< The default chunsize for the mix namespace */
-
-const uint8_t LX_MIXER_EFFECT_LOUD = 255;        /**< Loud (for effect functions)    */
-const uint8_t LX_MIXER_EFFECT_SILENCE = 0;       /**< Silence (for effect functions) */
-const uint8_t LX_MIXER_EFFECT_NO_DISTANCE = 0;   /**< The distance between the source and the listener */
-const uint16_t LX_MIXER_EFFECT_NO_ANGLE = 0;     /**< The angle between the source and the front */
+const uint8_t LX_MIX_FX_LOUD = 255;         /**< Loud (for effect functions)    */
+const uint8_t LX_MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) */
+const uint8_t LX_MIX_FX_NO_DISTANCE = 0;    /**< The distance between the source and the listener */
+const uint16_t LX_MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
 
 
 namespace LX_FileIO
@@ -104,28 +99,14 @@ struct LX_MixerEffectType
 */
 struct LX_MixerEffect
 {
-    LX_MixerEffectType type;    /**< Effect type    */
-
-    // Panning
-    uint8_t pan_left;           /**< Left panning   */
-    uint8_t pan_right;          /**< Right panning  */
-
-    // Position
+    LX_MixerEffectType type;    /**< Effect type            */
+    uint8_t pan_left;           /**< Left panning           */
+    uint8_t pan_right;          /**< Right panning          */
     int16_t pos_angle;          /**< Angle (position)       */
     uint8_t pos_distance;       /**< Distance (position)    */
-
-    // Distance
-    uint8_t distance;           /**< Distance       */
-
-    // Stereo
-    bool rev_stereo;            /**< Reverse stereo */
-
-    // Loop
-    int loops;                  /**< Loops          */
-
-    LX_MixerEffect() noexcept;
-    LX_MixerEffect(const LX_MixerEffect& st) noexcept;
-    LX_MixerEffect& operator = (const LX_MixerEffect& st) noexcept;
+    uint8_t distance;           /**< Distance               */
+    bool rev_stereo;            /**< Reverse stereo         */
+    int loops;                  /**< Loops                  */
 };
 
 /* == Volume == */
@@ -500,7 +481,7 @@ void removePanning(int chan) noexcept;
 *   Set the virtual position of the audio source.
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
-*   @note This function call setPosition(angle, LX_MIXER_EFFECT_NO_DISTANCE)
+*   @note This function call setPosition(angle, LX_MIX_FX_NO_DISTANCE)
 */
 void setPosition(int16_t angle) noexcept;
 /**
@@ -574,4 +555,4 @@ void setDistance(int chan, uint8_t distance) noexcept;
 
 }
 
-#endif // LX_MIXER_H_INCLUDED
+#endif // LX_MIX_H_INCLUDED

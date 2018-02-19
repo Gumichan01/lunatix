@@ -30,7 +30,7 @@
 namespace LX_FileIO
 {
 
-IOException::IOException(std::string err) : _string_error(err) {}
+IOException::IOException(const std::string& err) : _string_error(err) {}
 
 IOException::IOException(const IOException& io) : _string_error(io._string_error) {}
 
@@ -42,63 +42,54 @@ const char * IOException::what() const noexcept
 IOException::~IOException() noexcept {}
 
 
-/// LX_AbstractFile
-
-LX_AbstractFile::~LX_AbstractFile() {}
-
-
 /// LX_File
 
 /* Private implementation */
 
 class LX_File_
 {
-    UTF8string _name;        /* The name of the file         */
-    FILE *_fstream;
+    UTF8string _name{""};
+    FILE *_fstream = nullptr;
 
-    void open_(const uint32_t mode)
+    LX_File_(const LX_File_&) = delete;
+    LX_File_& operator =(const LX_File_&) = delete;
+
+    void open_(const LX_FileMode mode)
     {
-        std::string str = "LX_File: ";
-
-        if((mode&LX_FILEIO_WRTR) == LX_FILEIO_WRTR)
+        switch(mode)
         {
-            _fstream = fopen(_name.utf8_str(), "wb+");
-        }
-        else if((mode&LX_FILEIO_RDWR) == LX_FILEIO_RDWR)
-        {
-            _fstream = fopen(_name.utf8_str(), "rb+");
-        }
-        else if((mode&LX_FILEIO_RDAP) == LX_FILEIO_RDAP)
-        {
-            _fstream = fopen(_name.utf8_str(), "ab+");
-        }
-        else if((mode&LX_FILEIO_RDONLY) == LX_FILEIO_RDONLY)
-        {
+        case LX_FileMode::RDONLY:
             _fstream = fopen(_name.utf8_str(), "rb");
-        }
-        else if((mode&LX_FILEIO_WRONLY) == LX_FILEIO_WRONLY)
-        {
+            break;
+        case LX_FileMode::WRONLY:
             _fstream = fopen(_name.utf8_str(), "wb");
-        }
-        else if((mode&LX_FILEIO_APPEND) == LX_FILEIO_APPEND)
-        {
+            break;
+        case LX_FileMode::APPEND:
             _fstream = fopen(_name.utf8_str(), "ab");
+            break;
+        case LX_FileMode::RDWR:
+            _fstream = fopen(_name.utf8_str(), "rb+");
+            break;
+        case LX_FileMode::RDAP:
+            _fstream = fopen(_name.utf8_str(), "ab+");
+            break;
+        case LX_FileMode::WRTR:
+            _fstream = fopen(_name.utf8_str(), "wb+");
+            break;
+        default:
+            throw IOException("LX_File: Unrecognized mode");
+            break;
         }
-        else
-            throw IOException(str + "Unrecognized mode");
 
         if(_fstream == nullptr)
-            throw IOException(str + LX_GetError());
+            throw IOException(LX_GetError());
     }
 
 public:
 
-    LX_File_(const UTF8string& filename, const uint32_t mode)
+    LX_File_(const UTF8string& filename, const LX_FileMode mode)
         : _name(filename), _fstream(nullptr)
     {
-        if(mode == 0x00000000)
-            throw IOException("LX_File: Invalid mode");
-
         open_(mode);
     }
 
@@ -135,9 +126,9 @@ public:
         return write((void *)str.c_str(), sizeof(char), len);
     }
 
-    bool seek(long offset, int whence) noexcept
+    bool seek(long offset, LX_FileWhence whence) noexcept
     {
-        return fseek(_fstream, offset, whence) == 0;
+        return fseek(_fstream, offset, static_cast<int>(whence)) == 0;
     }
 
     size_t tell() const noexcept
@@ -149,10 +140,10 @@ public:
     {
         size_t fsize = static_cast<size_t>(-1);
         size_t old_pos = tell();
-        bool ok = seek(0, LX_SEEK_END);
+        bool ok = seek(0, LX_FileWhence::END);
 
         if(ok) fsize = tell();
-        ok = seek(static_cast<long>(old_pos), LX_SEEK_SET);
+        ok = seek(static_cast<long>(old_pos), LX_FileWhence::SET);
 
         if(!ok)
             return static_cast<size_t>(-1);
@@ -183,10 +174,10 @@ public:
 
 /* Public functions */
 
-LX_File::LX_File(const std::string& filename, const uint32_t mode)
+LX_File::LX_File(const std::string& filename, const LX_FileMode mode)
     : LX_File(UTF8string(filename), mode) {}
 
-LX_File::LX_File(const UTF8string& filename, const uint32_t mode)
+LX_File::LX_File(const UTF8string& filename, const LX_FileMode mode)
     : _fimpl(new LX_File_(filename, mode)) {}
 
 
@@ -212,7 +203,7 @@ size_t LX_File::write(const std::string& str) noexcept
 }
 
 
-bool LX_File::seek(long offset, int whence) noexcept
+bool LX_File::seek(long offset, LX_FileWhence whence) noexcept
 {
     return _fimpl->seek(offset, whence);
 }
@@ -246,7 +237,10 @@ LX_File::~LX_File()
 
 class LX_TmpFile_
 {
-    FILE * _f;
+    FILE * _f = nullptr;
+
+    LX_TmpFile_(const LX_TmpFile_&) = delete;
+    LX_TmpFile_& operator =(const LX_TmpFile_&) = delete;
 
 public:
 
@@ -305,9 +299,9 @@ public:
         return write((void *)str.c_str(), sizeof(char), len);
     }
 
-    bool seek(long offset, int whence) noexcept
+    bool seek(long offset, LX_FileWhence whence) noexcept
     {
-        return fseek(_f, offset, whence) == 0;
+        return fseek(_f, offset, static_cast<int>(whence)) == 0;
     }
 
     size_t tell() const noexcept
@@ -350,7 +344,7 @@ size_t LX_TmpFile::write(const std::string& str) noexcept
 }
 
 
-bool LX_TmpFile::seek(long offset, int whence) noexcept
+bool LX_TmpFile::seek(long offset, LX_FileWhence whence) noexcept
 {
     return _timpl->seek(offset, whence);
 }
@@ -362,9 +356,8 @@ size_t LX_TmpFile::tell() const noexcept
 
 LX_TmpFile::~LX_TmpFile()
 {
-    _timpl.reset(nullptr);
+    _timpl.reset();
 }
-
 
 /// Stream
 LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept

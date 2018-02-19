@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 {
     UNUSED(argc);
     UNUSED(argv);
-    LX_AABB position = {0,0,256,256};
+    LX_Graphics::LX_ImgRect position{{0,0},256,256};
     LX_EventHandler event;
     bool go = true;
     std::string s("data/bullet.png");
@@ -54,7 +54,7 @@ int main(int argc, char** argv)
         }
 
         w.clearWindow();
-        sprite.draw(&position);
+        sprite.draw(position);
         w.update();
         LX_Timer::delay(33);
     }

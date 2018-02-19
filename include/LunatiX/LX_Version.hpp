@@ -20,6 +20,8 @@
 *   @version 0.12
 */
 
+#include <string>
+
 /**
 *   @ingroup Config
 *   @namespace LX_VersionInfo
@@ -28,8 +30,6 @@
 namespace LX_VersionInfo
 {
 
-const int STATUS_LEN = 8;
-
 /**
 *   @struct LX_Version
 *   @brief The version structure
@@ -37,24 +37,24 @@ const int STATUS_LEN = 8;
 */
 struct LX_Version
 {
-    short major;         /**< Information about the major version */
-    short minor;         /**< Information about the minor version */
-    short patch;         /**< Information about the patch version */
-    char status[STATUS_LEN];
+    short major;        /**< Major version  */
+    short minor;        /**< Minor version  */
+    short patch;        /**< Patch version  */
+    std::string status; /**< Status         */
 };
 
 /**
 *   @fn void info() noexcept
-*   Get information about the library
+*   Display information about the library
 */
 void info() noexcept;
 
 /**
-*   @fn void getVersion(LX_Version& version) noexcept
+*   @fn const LX_Version getVersion() noexcept
 *   Get the version of the library
-*   @param [out] version The structure to fill in.
+*   @return Information about the version
 */
-void getVersion(LX_Version& version) noexcept;
+const LX_Version getVersion() noexcept;
 
 /**
 *   @fn void dependencies() noexcept

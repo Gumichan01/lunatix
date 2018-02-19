@@ -33,6 +33,4 @@ const char * LX_MixerException::what() const noexcept
     return _string_error.c_str();
 }
 
-LX_Sound::~LX_Sound() {}
-
 }

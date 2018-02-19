@@ -30,3 +30,4 @@ include/SDL2/
 include/GL/
 *.cppcheck
 Makefile.depend
+cscope*

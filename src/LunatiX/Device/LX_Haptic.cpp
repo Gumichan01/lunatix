@@ -42,7 +42,10 @@ bool mouseIsHaptic() noexcept
 // Specific to LX_Haptic
 struct LX_Haptic_
 {
-    int _instanceID;
+    int _instanceID = -1;
+
+    LX_Haptic_(const LX_Haptic_&) = delete;
+    LX_Haptic_& operator =(const LX_Haptic_&) = delete;
 
     explicit LX_Haptic_(int i) noexcept
     {
@@ -55,7 +58,10 @@ struct LX_Haptic_
 // Common data
 struct LX_Haptic_common
 {
-    SDL_Haptic *_haptic;
+    SDL_Haptic *_haptic = nullptr;
+
+    LX_Haptic_common(const LX_Haptic_common&) = delete;
+    LX_Haptic_common& operator =(const LX_Haptic_common&) = delete;
 
     explicit LX_Haptic_common(SDL_Haptic *h) noexcept
     {
@@ -88,12 +94,6 @@ LX_Haptic::LX_Haptic(LX_Joystick *joy) noexcept
 LX_Haptic::LX_Haptic(LX_GameController *gc) noexcept
     : LX_Haptic(SDL_GameControllerGetJoystick(gc)) {}
 
-
-LX_Haptic::~LX_Haptic()
-{
-    _hcimpl.reset();
-    _himpl.reset();
-}
 
 
 bool LX_Haptic::isOpened() const noexcept
@@ -152,6 +152,11 @@ int LX_Haptic::numberOfEffects() const noexcept
     return SDL_HapticNumEffects(_hcimpl->_haptic);
 }
 
+LX_Haptic::~LX_Haptic()
+{
+    _hcimpl.reset();
+}
+
 /* LX_MouseHaptic */
 
 LX_MouseHaptic::LX_MouseHaptic() noexcept: LX_Haptic()
@@ -163,7 +168,5 @@ bool LX_MouseHaptic::isOpened() const noexcept
 {
     return _hcimpl != nullptr;
 }
-
-LX_MouseHaptic::~LX_MouseHaptic() {}
 
 }

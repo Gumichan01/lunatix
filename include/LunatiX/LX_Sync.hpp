@@ -29,6 +29,10 @@
 namespace LX_Multithreading
 {
 
+/**
+*   @class LX_Semaphore
+*   @brief Semaphore
+*/
 class LX_Semaphore
 {
     std::mutex _mutex;
@@ -42,9 +46,15 @@ class LX_Semaphore
 
 public:
 
+    /**
+    *   @fn LX_Semaphore(unsigned long value = 0)
+    *   @param value
+    */
     LX_Semaphore(unsigned long value = 0);
 
+    /// Decrement the counter, if > 0, block otherwise
     void wait();
+    /// Increment the counter, and awake a blocked thread
     void notify();
 
     ~LX_Semaphore() = default;

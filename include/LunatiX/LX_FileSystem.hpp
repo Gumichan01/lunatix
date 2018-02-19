@@ -33,7 +33,7 @@ namespace LX_FileSystem
 {
 
 /**
-*   @fn UTF8string getWorkingDirectory()
+*   @fn UTF8string getWorkingDirectory() noexcept
 *
 *   Get the directory where the program was run from.
 *
@@ -46,9 +46,9 @@ namespace LX_FileSystem
 *   @note The return path will be guaranteed to end with a
 *        path separator ('\' on Windows, '/' on most other platforms)
 */
-UTF8string getWorkingDirectory();
+UTF8string getWorkingDirectory() noexcept;
 /**
-*   @fn UTF8string getPreferencesDirectory(const std::string& org, const std::string& app)
+*   @fn UTF8string getPreferencesDirectory(const std::string& org, const std::string& app) noexcept
 *
 *   Get the preference directory. That means the directory where
 *   the program can write personnal files (Preferences, game save, ...).
@@ -58,7 +58,7 @@ UTF8string getWorkingDirectory();
 *
 *   @return The working directory in absolute path, UTF-8 encoded.
 *          If the function cannot retrieve the directory,
-*          it returns an empty string.
+*          it returns an empty string ("").
 *
 *   @note 1 — The directory is unique per user and per application.
 *   @note 2 — The returned directory has the following syntax:
@@ -73,10 +73,10 @@ UTF8string getWorkingDirectory();
 *             or even the parent of the returned path,
 *             aren't where you should be writing things).
 */
-UTF8string getPreferencesDirectory(const std::string& org, const std::string& app);
+UTF8string getPreferencesDirectory(const std::string& org, const std::string& app) noexcept;
 
 /**
-*   @fn UTF8string basename(const UTF8string& path)
+*   @fn UTF8string basename(const UTF8string& path) noexcept
 *
 *   Get the basename of the path given in argument
 *
@@ -86,13 +86,13 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
 *   @note Trailing '\' (on Windows) or '/' (on Linux) are not counted
 *        as part of the path name.
 */
-UTF8string basename(const UTF8string& path);
+UTF8string basename(const UTF8string& path) noexcept;
 /**
-*   @fn UTF8string dirname(const UTF8string& path)
+*   @fn UTF8string dirname(const UTF8string& path) noexcept
 *   @param path The path, utf-8 encoded.
 *   @return The basename in utf-8 format.
 */
-UTF8string dirname(const UTF8string& path);
+UTF8string dirname(const UTF8string& path) noexcept;
 
 }
 

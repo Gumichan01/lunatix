@@ -19,44 +19,48 @@
 #include <LunatiX/LX_Particle.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
 #include <LunatiX/LX_Physics.hpp>
+#include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Random.hpp>
 #include <LunatiX/LX_Texture.hpp>
 
 using namespace LX_Random;
+using namespace LX_Physics;
 
 
 namespace LX_ParticleEngine
 {
 
-const int DELAY = 16;
+const unsigned int DELAY = 16;
+const LX_Vector2D VNULL{0.0f, 0.0f};
 
 /* LX_Particle — private implementation */
 
 class LX_Particle_
 {
-    LX_AABB _box;                       /* The box of the particle                 */
-    unsigned int _lifetime;             /* The delay to stay displayable           */
-    LX_Physics::LX_Vector2D _velocity;  /* The velocity of the particle            */
-    LX_Graphics::LX_Sprite& _texture;   /* The texture (for the texture rendering) */
+    LX_FloatingBox _box;
+    unsigned int _lifetime;             /* The delay to stay displayable */
+    LX_Physics::LX_Vector2D _velocity;
+    LX_Graphics::LX_Sprite& _texture;
 
 public:
 
-    LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+    LX_Particle_(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
                  const LX_Physics::LX_Vector2D& v) noexcept
-        : _box(b), _lifetime(xorshiftRand()%DELAY), _velocity(v), _texture(sp) {}
+        : _box(b), _lifetime(xrand<unsigned int>(0, DELAY)), _velocity(v),
+          _texture(sp) {}
 
     void update() noexcept
     {
         if(_lifetime > 0)
         {
-            LX_Physics::moveRect(_box, _velocity);
+            LX_Physics::moveBox(_box, _velocity);
             _lifetime--;
         }
     }
 
     void draw() noexcept
     {
-        _texture.draw(&_box);
+        _texture.draw(LX_Graphics::toImgRect(_box));
     }
 
     bool isDead() const noexcept
@@ -74,24 +78,14 @@ public:
 
 /* LX_Particle — public interface */
 
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b) noexcept
-    : _pimpl(new LX_Particle_(sp, b, LX_Physics::LX_Vector2D(0.0f, 0.0f))) {}
+LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b) noexcept
+    : _pimpl(new LX_Particle_(sp, b, VNULL)) {}
 
 
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
-                         const float vx, const float vy) noexcept
-    : _pimpl(new LX_Particle_(sp, b, LX_Physics::LX_Vector2D(vx, vy))) {}
-
-
-LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_AABB& b,
+LX_Particle::LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
                          const LX_Physics::LX_Vector2D& v) noexcept
     : _pimpl(new LX_Particle_(sp, b, v)) {}
 
-
-LX_Particle::~LX_Particle()
-{
-    _pimpl.reset();
-}
 
 void LX_Particle::update() noexcept
 {
@@ -114,6 +108,11 @@ bool LX_Particle::isDead() const noexcept
 unsigned int LX_Particle::getDelay() const noexcept
 {
     return _pimpl->getDelay();
+}
+
+LX_Particle::~LX_Particle()
+{
+    _pimpl.reset();
 }
 
 }

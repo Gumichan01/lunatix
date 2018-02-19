@@ -50,16 +50,13 @@ class LX_FileBuffer_
 
 public:
 
-    explicit LX_FileBuffer_(const UTF8string filename, uint32_t offset, uint32_t sz)
-        : LX_FileBuffer_(filename.utf8_sstring(), offset, sz) {}
-
     explicit LX_FileBuffer_(const std::string& filename, uint32_t offset, uint32_t sz)
-        : _name(filename), _bufsize(0)
+        : _name(filename), _buffer(nullptr), _bufsize(0)
     {
         std::string str("LX_FileBuffer: " + _name + " - ");
         size_t r = 0, fsize = 0;
 
-        LX_File reader(_name, LX_FILEIO_RDONLY);
+        LX_File reader(_name, LX_FileMode::RDONLY);
 
         if((fsize = reader.size()) == static_cast<size_t>(-1))
             throw IOException(str + "cannot get the size of the file");
@@ -73,7 +70,7 @@ public:
         else
             _bufsize = U64(sz);
 
-        reader.seek(static_cast<long>(offset), LX_SEEK_SET);
+        reader.seek(static_cast<long>(offset), LX_FileWhence::SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
 
         if(_buffer == nullptr)
@@ -113,10 +110,7 @@ public:
         return _name.c_str();
     }
 
-    ~LX_FileBuffer_()
-    {
-        _buffer.reset();
-    }
+    ~LX_FileBuffer_() = default;
 };
 
 
@@ -128,13 +122,13 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const noexcept
 
 
 /** LX_Filebuffer — public functions */
-LX_FileBuffer::LX_FileBuffer(const std::string filename, uint32_t offset,
+LX_FileBuffer::LX_FileBuffer(const std::string& filename, uint32_t offset,
                              uint32_t sz)
     : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 
-LX_FileBuffer::LX_FileBuffer(const UTF8string filename, uint32_t offset,
+LX_FileBuffer::LX_FileBuffer(const UTF8string& filename, uint32_t offset,
                              uint32_t sz)
-    : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
+    : _bimpl(new LX_FileBuffer_(filename.utf8_sstring(), offset, sz)) {}
 
 
 LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format) const
@@ -153,7 +147,6 @@ const char * LX_FileBuffer::getFilename() const noexcept
 {
     return _bimpl->getFilename();
 }
-
 
 LX_FileBuffer::~LX_FileBuffer()
 {

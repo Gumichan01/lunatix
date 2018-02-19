@@ -1,5 +1,4 @@
 
-
 /*
 *   Copyright © 2018 Luxon Jean-Pierre
 *   https://gumichan01.github.io/
@@ -22,131 +21,100 @@
 #include <LunatiX/LX_WindowManager.hpp>
 #include <LunatiX/LX_Window.hpp>
 
-#include <algorithm>
-#include <list>
+#include <unordered_map>
 
-static LX_Win::LX_WindowManager *win_instance = nullptr;
 
 namespace LX_Win
 {
 
-// Lit of windows
-std::list<LX_Win::LX_Window*> _windows;
+LX_WindowNotFoundException::LX_WindowNotFoundException(std::string err)
+    : _string_error(err) {}
 
-LX_WindowManager * getWindowManager() noexcept
+const char * LX_WindowNotFoundException::what() const noexcept
+{
+    return _string_error.c_str();
+}
+
+
+/* LX_Window implementation */
+
+struct LX_WM_
+{
+    std::unordered_map<uint32_t, LX_Win::LX_Window&> windows{};
+};
+
+LX_WindowManager& getWindowManager() noexcept
 {
     return LX_WindowManager::getInstance();
 }
 
+LX_WindowManager::LX_WindowManager(): _wmpimpl(new LX_WM_()) {}
 
-void LX_WindowManager::init() noexcept
+LX_WindowManager::~LX_WindowManager()
 {
-    if(win_instance == nullptr)
-        win_instance = new LX_WindowManager();
+    _wmpimpl->windows.clear();
+}
+
+LX_WindowManager& LX_WindowManager::getInstance() noexcept
+{
+    static LX_WindowManager singleton;
+    return singleton;
 }
 
 
-LX_WindowManager * LX_WindowManager::getInstance() noexcept
+bool LX_WindowManager::addWindow(LX_Window& w) noexcept
 {
-    return win_instance;
+    _wmpimpl->windows.insert({w.getID(), w});
+    return true;
 }
 
 
-void LX_WindowManager::destroy() noexcept
+bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
 {
-    delete win_instance;
-}
+    auto it = _wmpimpl->windows.find(id);
 
-
-// Create the instance
-LX_WindowManager::LX_WindowManager() {}
-
-// Destroy the instance,
-LX_WindowManager::~LX_WindowManager() {}
-
-
-uint32_t LX_WindowManager::addWindow(LX_Window *w) noexcept
-{
-    const auto wend = _windows.cend();
-    const uint32_t no = static_cast<uint32_t>(-1);
-
-    if(w == nullptr)
-        return no;
-
-    bool found = std::any_of(_windows.cbegin(), wend, [&w](const LX_Window * win) noexcept
+    if(it != _wmpimpl->windows.end())
     {
-        return win->getID() == w->getID();
-    });
-
-    if(found)
-        return no;
-
-    _windows.push_back(w);
-    return w->getID();
-}
-
-
-LX_Window * LX_WindowManager::removeWindow(const uint32_t id) noexcept
-{
-    LX_Window *w = nullptr;
-
-    if(_windows.empty())
-        return nullptr;
-
-    const auto wend = _windows.end();
-    auto it = std::find_if(_windows.begin(), wend, [&id](const LX_Window * win) noexcept
-    {
-        return win->getID() == id;
-    });
-
-    if(it != wend)
-    {
-        w = *it;
-        _windows.erase(it);
+        _wmpimpl->windows.erase(it);
+        return true;
     }
 
-    return w;
+    return false;
 }
 
 
-std::size_t LX_WindowManager::nbWindows() noexcept
+std::size_t LX_WindowManager::nbWindows() const noexcept
 {
-    return _windows.size();
+    return _wmpimpl->windows.size();
 }
 
 
 void LX_WindowManager::updateWindows() noexcept
 {
-    std::for_each(_windows.begin(), _windows.end(), [](LX_Window *w) noexcept
+    for(auto& it : _wmpimpl->windows)
     {
-        w->update();
-    });
+        it.second.update();
+    }
 }
 
 
 void LX_WindowManager::clearWindows() noexcept
 {
-    std::for_each(_windows.begin(), _windows.end(), [](LX_Window *w) noexcept
+    for(auto& it : _wmpimpl->windows)
     {
-        w->clearWindow();
-    });
+        it.second.clearWindow();
+    }
 }
 
 
-LX_Window * LX_WindowManager::getWindow(uint32_t id) noexcept
+LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
 {
-    LX_Window *w = nullptr;
-    const auto wend = _windows.cend();
+    auto it = _wmpimpl->windows.find(id);
 
-    auto it = std::find_if(_windows.cbegin(), wend, [&id](const LX_Window * win) noexcept
-    {
-        return win->getID() == id;
-    });
+    if(it == _wmpimpl->windows.end())
+        throw LX_WindowNotFoundException("Not found window with identifer: " + id);
 
-    if(it != wend)
-        w = (*it);
-
-    return w;
+    return it->second;
 }
 
 }

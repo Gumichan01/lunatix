@@ -45,9 +45,16 @@
 namespace LX_Device
 {
 
-const int LX_MOUSE_SHOW  = 1;     /**< Enable the mouse display   */
-const int LX_MOUSE_HIDE  = 0;     /**< Disable the mouse display  */
-const int LX_MOUSE_QUERY = -1;    /**< Get the mouse status       */
+/**
+*   @enum LX_MouseToggle
+*   @brief State of the mouse (display)
+*/
+enum class LX_MouseToggle: int
+{
+    SHOW  = 1,      /**< Enable the mouse display   */
+    HIDE  = 0,      /**< Disable the mouse display  */
+    QUERY = -1      /**< Get the mouse status       */
+};
 
 using LX_DeviceID = int32_t;
 using LX_DeviceGUID = SDL_JoystickGUID;
@@ -58,14 +65,14 @@ using LX_DeviceGUID = SDL_JoystickGUID;
 */
 struct LX_GamepadInfo
 {
-    LX_DeviceID id;         /**< The joystick ID            */
-    LX_DeviceGUID uid;      /**< The joystick UID           */
-    UTF8string name;        /**< The name of the joystick   */
-    UTF8string is_haptic;   /**< Haptic joystick or not     */
-    int nb_axis;            /**< The number of axes         */
-    int nb_balls;           /**< The number of balls        */
-    int nb_buttons;         /**< The number of buttons      */
-    int nb_hats;            /**< The number of hats         */
+    LX_DeviceID id = 0;     /**< The joystick ID            */
+    LX_DeviceGUID uid{{0}};      /**< The joystick UID           */
+    UTF8string name{""};        /**< The name of the joystick   */
+    UTF8string is_haptic{""};   /**< Haptic joystick or not     */
+    int nb_axis = 0;        /**< The number of axes         */
+    int nb_balls = 0;       /**< The number of balls        */
+    int nb_buttons = 0;     /**< The number of buttons      */
+    int nb_hats = 0;        /**< The number of hats         */
 };
 
 
@@ -77,32 +84,28 @@ struct LX_GamepadInfo
 int numberOfDevices() noexcept;
 
 /**
-*   @fn UTF8string gamepadToString(LX_GamepadInfo& info)
+*   @fn UTF8string gamepadToString(LX_GamepadInfo& info) noexcept
 *
 *   Get the string format of the information structure
 *
 *   @param [in] info The information structure
 *   @return Always returns a valid string
 *
-*   @note This function never returns an invalid string
+*   @post The returned string is valid
 *   @sa statGamepad
 */
-UTF8string gamepadToString(LX_GamepadInfo& info);
+UTF8string gamepadToString(LX_GamepadInfo& info) noexcept;
 
 /**
-*   @fn int mouseCursorDisplay(int toggle) noexcept
+*   @fn LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept
 *
 *   Define if the cursor will be shown or not
 *
-*   @param [in] toggle One of these following values :
-*           - ::LX_MOUSE_SHOW:  to show it
-*           - ::LX_MOUSE_HIDE:  to hide
-*           - ::LX_MOUSE_QUERY: to get the current state
+*   @param [in] toggle show, hide or query
 *
-*   @return LX_MOUSE_SHOW if the cursor is shown, LX_MOUSE_HIDE if it is hidden,
-*          a negative value on failure.
+*   @return The status of the mouse.
 */
-int mouseCursorDisplay(int toggle) noexcept;
+LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept;
 
 }
 

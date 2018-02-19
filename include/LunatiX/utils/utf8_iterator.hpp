@@ -29,12 +29,14 @@ class UTF8string;
 */
 class UTF8iterator
 {
-    size_t index;
+    size_t index = 0;
     UTF8string data;
 
     char& operator ->();
 
 public:
+
+    UTF8iterator() = delete;
 
     /**
     *   @fn explicit UTF8iterator(const UTF8string& u) noexcept
@@ -133,7 +135,7 @@ public:
     UTF8iterator operator -(const size_t n) const noexcept;
 
     /**
-    *   @fn const std::string operator *() const noexcept
+    *   @fn const std::string operator *() const
     *
     *   Dereferences the pointer returning the codepoint
     *   pointed by the iterator at its current potision
@@ -142,9 +144,9 @@ public:
     *   @note This function will throw an *std::out_of_range* exception
     *         if the iterator does not point to a codepoint
     */
-    const std::string operator *() const noexcept;
+    const std::string operator *() const;
 
-    ~UTF8iterator();
+    ~UTF8iterator() = default;
 };
 
 #endif // UTF8_ITERATOR_HPP_INCLUDED

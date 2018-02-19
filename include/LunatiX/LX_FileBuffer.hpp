@@ -67,10 +67,7 @@ class LX_FileBuffer
 public:
 
     /**
-    *   @fn LX_FileBuffer(const std::string filename, uint32_t offset = 0, uint32_t sz = 0)
-    *   @brief Constructor
-    *
-    *   Read the file given in argument and put it in the buffer
+    *   @fn LX_FileBuffer(const std::string& filename, uint32_t offset = 0, uint32_t sz = 0)
     *
     *   @param [in] filename The file to read
     *   @param [in] offset The position in the file to start reading (default value: 0)
@@ -79,18 +76,17 @@ public:
     *   @note 1 — By default, the entire file is read from the beginning.
     *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
     *
+    *   @pre offset ≤ sz
+    *
     *   @warning If the value of *offset* is greater than the size of the file,
     *           then an IOException will be thrown
     *
     *   @exception std::logic_error If the filename is not defined
-    *   @exception IOException If the file cannot be read by the instance
+    *   @exception IOException If the file cannot be read
     */
-    LX_FileBuffer(const std::string filename, uint32_t offset = 0, uint32_t sz = 0);
+    LX_FileBuffer(const std::string& filename, uint32_t offset = 0, uint32_t sz = 0);
     /**
-    *   @fn explicit LX_FileBuffer(const UTF8string filename, uint32_t offset = 0, uint32_t sz = 0)
-    *   @brief Constructor
-    *
-    *   Read the file given in argument and put it in the buffer
+    *   @fn explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset = 0, uint32_t sz = 0)
     *
     *   @param [in] filename The file to read
     *   @param [in] offset The position in the file to start reading (default value: 0)
@@ -99,6 +95,8 @@ public:
     *   @note 1 — By default, the entire file is read from the beginning.
     *   @note 2 — If *sz* if 0, the file is read from *offset* to the end
     *
+    *   @pre offset ≤ sz
+    *
     *   @warning If the value of *offset* is greater than the size of the file,
     *           then an IOException will be thrown
     *
@@ -106,25 +104,20 @@ public:
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    explicit LX_FileBuffer(const UTF8string filename, uint32_t offset = 0, uint32_t sz = 0);
+    explicit LX_FileBuffer(const UTF8string& filename, uint32_t offset = 0, uint32_t sz = 0);
 
     /**
-    *   @fn LX_Graphics::
-    *       LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const
-    *
-    *   Load a buffered image from the file buffer.
+    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const
     *
     *   @param [in] format Optional argument that specified the format of the image
     *
-    *   @return A pointer to new an allocated buffered image on success,
+    *   @return A pointer to an allocated buffered image on success,
     *
     *   @exception LX_Graphics::LX_ImageException if the buffered image cannot be created
     */
     LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const;
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
-    *
-    *   Load a sample from the current file buffer
     *
     *   @return A pointer to an allocated LX_Chunk object,
     *          *nullptr* if the file buffer is not a sample to load
@@ -133,12 +126,10 @@ public:
 
     /**
     *   @fn const char * getFilename() const
-    *   Get the name of the file the buffer refers to
     *   @return The name of the file
     */
     const char * getFilename() const noexcept;
 
-    /// Destructor
     ~LX_FileBuffer();
 };
 

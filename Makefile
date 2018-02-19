@@ -65,7 +65,7 @@ $(SRC_DEVICE_PATH)LX_Haptic.cpp $(SRC_DEVICE_PATH)LX_Mouse.cpp \
 $(SRC_FILEIO_PATH)LX_FileIO.cpp $(SRC_FILEIO_PATH)LX_FileBuffer.cpp \
 $(SRC_GRAPHICS_PATH)LX_OpenGL.cpp $(SRC_GRAPHICS_PATH)LX_Window.cpp \
 $(SRC_GRAPHICS_PATH)LX_WindowManager.cpp $(SRC_GRAPHICS_PATH)LX_Texture.cpp \
-$(SRC_INPUT_PATH)LX_Event.cpp \
+$(SRC_GRAPHICS_PATH)LX_ImgRect.cpp $(SRC_INPUT_PATH)LX_Event.cpp \
 $(SRC_LIBRARY_PATH)LX_Config.cpp $(SRC_LIBRARY_PATH)LX_Library.cpp \
 $(SRC_MIXER_PATH)LX_Sound.cpp $(SRC_MIXER_PATH)LX_Chunk.cpp \
 $(SRC_MIXER_PATH)LX_Music.cpp $(SRC_MIXER_PATH)LX_Mixer.cpp \
@@ -83,7 +83,8 @@ $(SRC_LIBTAGSPP_PATH)8859.cpp $(SRC_LIBTAGSPP_PATH)flac.cpp \
 $(SRC_LIBTAGSPP_PATH)id3genres.cpp $(SRC_LIBTAGSPP_PATH)id3v1.cpp \
 $(SRC_LIBTAGSPP_PATH)id3v2.cpp $(SRC_LIBTAGSPP_PATH)m4a.cpp \
 $(SRC_LIBTAGSPP_PATH)tags.cpp $(SRC_LIBTAGSPP_PATH)utf16.cpp \
-$(SRC_LIBTAGSPP_PATH)vorbis.cpp $(SRC_LIBTAGSPP_PATH)libtagspp.cpp
+$(SRC_LIBTAGSPP_PATH)vorbis.cpp $(SRC_LIBTAGSPP_PATH)libtagspp.cpp \
+$(SRC_UTILS_PATH)float.cpp
 
 # Test files
 SRC_TEST_FILES=$(TEST_PATH)test-init.cpp $(TEST_PATH)test-config.cpp \
@@ -104,7 +105,7 @@ LUNATIX_STATIC_LIB=$(LUNATIX_LIB_DIR)libLunatix.a
 LUNATIX_SHARED_LIB=$(LUNATIX_LIB_DIR)libLunatix.so
 
 # Warning flags
-WFLAGS=-Wall -Wextra
+WFLAGS=-Wall -Wextra -Weffc++
 
 # Select flags according to the compilation mode
 ifeq ($(DEBUG),yes)
@@ -181,6 +182,7 @@ LX_OpenGL.o: $(SRC_GRAPHICS_PATH)LX_OpenGL.o
 LX_Window.o: $(SRC_GRAPHICS_PATH)LX_Window.o
 LX_WindowManager.o: $(SRC_GRAPHICS_PATH)LX_WindowManager.o
 LX_Texture.o: $(SRC_GRAPHICS_PATH)LX_Texture.o
+LX_ImgRect.o: $(SRC_GRAPHICS_PATH)LX_ImgRect.o
 LX_Event.o: $(SRC_INPUT_PATH)LX_Event.o
 LX_Config.o: $(SRC_LIBRARY_PATH)LX_Config.o
 LX_Library.o: $(SRC_LIBRARY_PATH)LX_Library.o
@@ -203,6 +205,7 @@ LX_Log.o: $(SRC_SYSTEM_PATH)LX_Log.o
 LX_Text.o: $(SRC_TEXT_PATH)LX_Text.o
 LX_TrueTypeFont.o: $(SRC_TTF_PATH)LX_TrueTypeFont.o
 LX_Version.o: $(SRC_VERSION_PATH)LX_Version.o
+float.o: $(SRC_UTILS_PATH)float.o
 
 
 ##########
@@ -212,7 +215,7 @@ LX_Version.o: $(SRC_VERSION_PATH)LX_Version.o
 ##########
 
 test: depend test-init test-config test-system test-device test-file test-physics \
-test-audio test-window test-ttf test-particle test-ime test-thread
+test-audio test-window test-ttf test-particle test-ime test-thread test-random
 
 
 # Test (object files + executable)
@@ -255,6 +258,9 @@ test-thread: $(TEST_PATH)test-thread.o $(OBJ_FILES)
 test-input: $(TEST_PATH)test-input.o $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
 
+test-random: $(TEST_PATH)test-random.o $(OBJ_FILES)
+	@$(CC) -o $@ $^ $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE) $(LFLAGS)
+
 # Object files (test)
 test-init.o: $(TEST_PATH)test-init.o
 test-config.o: $(TEST_PATH)test-config.o
@@ -269,6 +275,7 @@ test-ime.o: $(TEST_PATH)test-ime.o
 test-audio.o: $(TEST_PATH)test-audio.o
 test-thread.o: $(TEST_PATH)test-thread.o
 test-input.o: $(TEST_PATH)test-input.o
+test-random.o: $(TEST_PATH)test-random.o
 
 
 ################################
@@ -280,7 +287,8 @@ test-input.o: $(TEST_PATH)test-input.o
 # General rule
 %.o: %.cpp
 	@echo $@" - Compiling "$<
-	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) -I $(OPENGL_DIR) $(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
+	@$(CC) -c -o $@ $< -I $(SDL2_I_PATH) -I $(LIBRARIES_I_DIR) -I $(OPENGL_DIR) \
+	$(CFLAGS) $(OPTIMIZE) $(OPT_SIZE)
 
 # Dependencies
 depend: $(SRC_FILES) $(SRC_TEST_FILES)

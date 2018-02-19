@@ -20,7 +20,6 @@
 #include <LunatiX/LX_Polygon.hpp>
 #include <LunatiX/LX_Physics.hpp>
 #include <LunatiX/LX_Vector2D.hpp>
-#include <LunatiX/LX_Hitbox.hpp>
 #include <vector>
 
 using namespace std;
@@ -29,19 +28,19 @@ using namespace std;
 namespace
 {
 
-inline float sumx_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
+inline Float sumx_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
 {
-    return static_cast<float>(p.x + q.x);
+    return p.x + q.x;
 }
 
-inline float sumy_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
+inline Float sumy_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
 {
-    return static_cast<float>(p.y + q.y);
+    return p.y + q.y;
 }
 
-inline float cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q) noexcept
+inline Float cross_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
 {
-    return static_cast<float>(p.x * q.y - p.y * q.x);
+    return p.x * q.y - p.y * q.x;
 }
 
 }
@@ -49,6 +48,8 @@ inline float cross_(const LX_Physics::LX_Point& p, const LX_Physics::LX_Point& q
 
 namespace LX_Physics
 {
+
+const unsigned long TRIANGLE_SIDES = 3UL;
 
 LX_PolygonException::LX_PolygonException(std::string err) : _string_error(err) {}
 
@@ -65,34 +66,78 @@ LX_PolygonException::~LX_PolygonException() noexcept {}
 
 /* Polygon - private implementation */
 
-using LX_Points_ = std::vector<LX_Point>;
+using LX_FloatPositions_ = std::vector<LX_FloatPosition>;
 
 class LX_Polygon_
 {
-    LX_Points_ _points;     /* A sequence of LX_Point objects   */
-    bool _convex;           /* If the polygon is convex         */
+    LX_FloatPositions_ _points;     /* A sequence of LX_FloatPosition objects   */
+    bool _convex;                   /* If the polygon is convex                 */
 
-    void convexity_() noexcept
+    Float area_() const noexcept
     {
-        LX_Vector2D AO;
-        LX_Vector2D OB;
-
-        float sign = 0.0f;
-        bool haveSign = false;
+        Float sum{0.0f};
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
 
         for(auto it = pbeg; it != pend; ++it)
         {
-            AO = LX_Vector2D(*it, (it == pbeg ? *(pend - 1) : *(it - 1)));
-            OB = LX_Vector2D((it == pend-1 ? *pbeg : *(it + 1)), *it);
-            int cross_product = static_cast<int>(vector_product(AO, OB));
+            sum += cross_(*it, (it == pend - 1) ? *pbeg : *(it + 1));
+        }
+        return sum / fbox(2.0f);
+    }
 
-            if(!haveSign)
+    bool calculateCentroid_(LX_FloatPosition& p) const noexcept
+    {
+        const Float CMULT{6.0f};
+        const auto pbeg = _points.begin();
+        const auto pend = _points.end();
+        const Float p6_area = CMULT * area_();
+        Float sum_x{0.0f}, sum_y{0.0f};
+
+        if(p6_area <= 0.0f) // self-intersecting polygon
+            return false;
+
+        for(auto it = pbeg; it != pend; ++it)
+        {
+            const LX_FloatPosition& next_fpos = (it == pend - 1) ? *pbeg : *(it + 1);
+            sum_x += sumx_(*it, next_fpos) * cross_(*it, next_fpos);
+            sum_y += sumy_(*it, next_fpos) * cross_(*it, next_fpos);
+        }
+
+        p.x = {sum_x / p6_area};
+        p.y = {sum_y / p6_area};
+        return true;
+    }
+
+public:
+
+    LX_Polygon_() : _points(),_convex(false) {}
+
+    void convexity_() noexcept
+    {
+        float sign = 0.0f;
+        bool have_sign = false;
+
+        const Float FNULL{0.0f};
+        const auto pbeg = _points.begin();
+        const auto pend = _points.end();
+
+        for(auto it = pbeg; it != pend; ++it)
+        {
+            const LX_FloatPosition& ori1 = *it;
+            const LX_FloatPosition& img1 = (it == pbeg ? *(pend - 1) : *(it - 1));
+            const LX_FloatPosition& ori2 = (it == pend-1 ? *pbeg : *(it + 1));
+            const LX_FloatPosition& img2 = ori1;
+
+            LX_Vector2D AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
+            LX_Vector2D OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
+            Float cross_product = vector_product(AO, OB);
+
+            if(!have_sign)
             {
-                if(cross_product > 0)
+                if(cross_product > FNULL)
                     sign = 1.0f;
-                else if(cross_product < 0)
+                else if(cross_product < FNULL)
                     sign = -1.0f;
                 else
                 {
@@ -100,12 +145,12 @@ class LX_Polygon_
                     return;
                 }
 
-                haveSign = true;
+                have_sign = true;
             }
             else
             {
-                if((sign > 0.0f && cross_product < 0)
-                        || (sign < 0.0f && cross_product > 0))
+                if((sign > 0.0f && cross_product < FNULL)
+                        || (sign < 0.0f && cross_product > FNULL))
                 {
                     _convex = false;
                     return;
@@ -116,149 +161,84 @@ class LX_Polygon_
         _convex = true;
     }
 
-    float area_() const noexcept
-    {
-        float sum = 0.0f;
-        const auto pbeg = _points.begin();
-        const auto pend = _points.end();
 
-        for(auto it = pbeg; it != pend; ++it)
-        {
-            if(it == pend - 1)
-                sum += cross_(*it, *pbeg);
-            else
-                sum += cross_(*it, *(it + 1));
-        }
-        return (sum / 2.0f);
-    }
-
-    bool calculateCentroid_(LX_Point& p) const noexcept
-    {
-        const float CMULT = 6.0f;
-        const auto pbeg = _points.begin();
-        const auto pend = _points.end();
-        float sum_x = 0, sum_y = 0;
-        const float p6_area = CMULT * area_();
-
-        if(p6_area <= 0.0f) // self-intersecting polygon
-            return false;
-
-        for(auto it = pbeg; it != pend; ++it)
-        {
-            if(it == pend - 1)
-            {
-                sum_x += sumx_(*it, *pbeg) * cross_(*it, *pbeg);
-                sum_y += sumy_(*it, *pbeg) * cross_(*it, *pbeg);
-            }
-            else
-            {
-                sum_x += sumx_(*it, *(it + 1)) * cross_(*it, *(it + 1));
-                sum_y += sumy_(*it, *(it + 1)) * cross_(*it, *(it + 1));
-            }
-        }
-
-        p.x = static_cast<int>(sum_x / p6_area);
-        p.y = static_cast<int>(sum_y / p6_area);
-        return true;
-    }
-
-public:
-
-    LX_Polygon_() : _convex(false) {}
-
-    void addPoint(const LX_Point& p)
+    inline void addPoint(const LX_FloatPosition& p)
     {
         _points.push_back(p);
-        // Update the convexity when the polygon has at least 3 edges
-        if(_points.size() >= 3)
-            convexity_();
     }
 
-    unsigned long numberOfEdges() const noexcept
+    inline unsigned long numberOfEdges() const noexcept
     {
         return _points.size();
     }
 
 
-    LX_Point getPoint(const unsigned int index) const
+    inline LX_FloatPosition getPoint(const unsigned long index) const
     {
         return _points.at(index);
     }
 
-    LX_AABB getEnclosingBox() const
+    LX_FloatingBox getEnclosingBox() const
     {
-        if(_points.size() < 3)
+        if(_points.size() < TRIANGLE_SIDES)
             throw LX_PolygonException("LX_Polygon: Cannot get the enclosing bounding box");
 
-        int xm, ym;
-        LX_AABB aabb = {0,0,0,0};
+        LX_FloatPosition p0 = _points.at(0);
+        LX_FloatingBox box{p0, 0, 0}; ;
 
-        {
-            const LX_Point& p0 = _points.at(0);
-            aabb.x = p0.x;
-            aabb.y = p0.y;
-            xm = p0.x;
-            ym = p0.y;
-        }
-
-        for(const LX_Point& p: _points)
+        for(const LX_FloatPosition& p: _points)
         {
             // X
-            if(p.x < aabb.x)
-                aabb.x = p.x;
+            if(p.x < box.fpoint.x)
+                box.fpoint.x = p.x;
 
-            if(p.x > xm)
-                xm = p.x;
+            if(p.x > p0.x)
+                p0.x = p.x;
 
             // Y
-            if(p.y < aabb.y)
-                aabb.y = p.y;
+            if(p.y < box.fpoint.y)
+                box.fpoint.y = p.y;
 
-            if(p.y > ym)
-                ym = p.y;
+            if(p.y > p0.y)
+                p0.y = p.y;
         }
 
-        aabb.w = xm - aabb.x;
-        aabb.h = ym - aabb.y;
+        box.w = static_cast<int>(p0.x - box.fpoint.x) + 1;
+        box.h = static_cast<int>(p0.y - box.fpoint.y) + 1;
 
-        return aabb;
+        return box;
     }
 
 
-    bool isConvex() const noexcept
+    inline bool isConvex() const noexcept
     {
         return _convex;
     }
 
 
-    void move(const float vx, const float vy) noexcept
+    void _move(const LX_Vector2D& v) noexcept
     {
-        const int nvx = static_cast<int>(vx);
-        const int nvy = static_cast<int>(vy);
-
-        std::for_each(_points.begin(), _points.end(), [nvx, nvy] (LX_Point& p)
+        std::for_each(_points.begin(), _points.end(), [&v] (LX_FloatPosition& p)
         {
-            movePoint(p, nvx, nvy);
+            movePoint(p, v);
         });
     }
 
-    void moveTo(int xpos, int ypos)
+    void moveTo(const LX_FloatPosition& p) noexcept
     {
-        const LX_Point p(xpos, ypos);
-        LX_Vector2D v;
-        LX_Point centroid;
+        LX_FloatPosition centroid;
 
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
-            const LX_AABB box = getEnclosingBox();
-            const LX_Point q(box.x + box.w/2, box.y + box.h/2);
-            v = LX_Vector2D(q, p);
+            const LX_FloatingBox& box = getEnclosingBox();
+            const float fw = static_cast<float>(box.w);
+            const float fh = static_cast<float>(box.h);
+            const LX_FloatPosition q{box.fpoint.x + fw / 2.0f, box.fpoint.y + fh / 2.0f};
+            _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
-            v = LX_Vector2D(centroid, p);
-
-        move(v.vx, v.vy);
+            _move(LX_Vector2D{p.x - centroid.x, p.y - centroid.y});
     }
 
     ~LX_Polygon_() = default;
@@ -268,64 +248,59 @@ public:
 /* Polygon, public functions */
 
 LX_Polygon::LX_Polygon() noexcept: _polyimpl(new LX_Polygon_()) {}
-LX_Polygon::~LX_Polygon() {}
 
-
-void LX_Polygon::addPoint(const int x, const int y)
+LX_Polygon::~LX_Polygon()
 {
-    _polyimpl->addPoint(LX_Point(x, y));
+    _polyimpl.reset();
 }
 
+void LX_Polygon::convexity_() noexcept
+{
+    // Update the convexity when the polygon has at least 3 edges
+    if(_polyimpl->numberOfEdges() >= TRIANGLE_SIDES)
+        _polyimpl->convexity_();
+}
 
-void LX_Polygon::addPoint(const LX_Point& p)
+// It is used by the function template
+void LX_Polygon::addPoint_(const LX_FloatPosition& p)
 {
     _polyimpl->addPoint(p);
 }
 
+void LX_Polygon::addPoint(const LX_FloatPosition& p)
+{
+    _polyimpl->addPoint(p);
+    convexity_();
+}
 
 unsigned long LX_Polygon::numberOfEdges() const noexcept
 {
     return _polyimpl->numberOfEdges();
 }
 
-
-LX_Point LX_Polygon::getPoint(const unsigned int index) const
+LX_FloatPosition LX_Polygon::getPoint(const unsigned long index) const
 {
     return _polyimpl->getPoint(index);
 }
 
-LX_AABB LX_Polygon::getEnclosingBox() const
+LX_FloatingBox LX_Polygon::getEnclosingBox() const
 {
     return _polyimpl->getEnclosingBox();
 }
-
 
 bool LX_Polygon::isConvex() const noexcept
 {
     return _polyimpl->isConvex();
 }
 
-
-void LX_Polygon::move(const float vx, const float vy) noexcept
-{
-    _polyimpl->move(vx, vy);
-}
-
-
 void LX_Polygon::move(const LX_Vector2D& v) noexcept
 {
-    _polyimpl->move(v.vx, v.vy);
+    _polyimpl->_move(v);
 }
 
-
-void LX_Polygon::moveTo(int xpos, int ypos)
+void LX_Polygon::moveTo(const LX_FloatPosition& p) noexcept
 {
-    _polyimpl->moveTo(xpos, ypos);
-}
-
-void LX_Polygon::moveTo(const LX_Point& p)
-{
-    _polyimpl->moveTo(p.x, p.y);
+    _polyimpl->moveTo(p);
 }
 
 }

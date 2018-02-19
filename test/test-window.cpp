@@ -239,7 +239,7 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         LX_Graphics::LX_Sprite img(name,*win);
-        LX_AABB box = {64,64,256,128};
+        LX_ImgRect box{64,64,256,128};
 
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Sprite example");
@@ -250,7 +250,7 @@ void test_image(LX_Win::LX_Window *win)
         for(double i = 0.00; i < PI2; i += 0.02)
         {
             win->clearWindow();
-            img.draw(&box,i);
+            img.draw(box, i);
             win->update();
             LX_Timer::delay(16);
         }
@@ -260,9 +260,9 @@ void test_image(LX_Win::LX_Window *win)
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 512; i++)
         {
-            box.x += 1;
+            box.p.x += 1;
             win->clearWindow();
-            img.draw(&box);
+            img.draw(box);
             win->update();
             LX_Timer::delay(16);
         }
@@ -282,7 +282,7 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_StreamingTexture img(*win);
         LX_BufferedImage data(name);
-        LX_AABB box = {256,256,256,128};
+        LX_ImgRect box{256,256,256,128};
 
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Streaming image created");
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"put a surface in a streaming image");
@@ -298,7 +298,7 @@ void test_image(LX_Win::LX_Window *win)
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 64; i++)
         {
-            box.x += 4;
+            box.p.x += 4;
             img.blit(data,box);
             img.update();
             win->clearWindow();
@@ -319,7 +319,7 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
     UTF8string u8_str(sp_str);
-    std::vector<LX_AABB> c;
+    std::vector<LX_ImgRect> c;
 
     try
     {
@@ -363,7 +363,7 @@ void test_image(LX_Win::LX_Window *win)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Animation");
         Uint32 delay = 125;
-        std::vector<LX_AABB> coordinates;
+        std::vector<LX_ImgRect> coordinates;
         coordinates.push_back({212,0,211,448});
         coordinates.push_back({424,0,211,448});
         coordinates.push_back({636,0,211,448});
@@ -382,7 +382,7 @@ void test_image(LX_Win::LX_Window *win)
 
         {
             // Infinite animation
-            LX_AABB rect = {256,64,211,448};
+            LX_ImgRect rect{256,64,211,448};
             LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
@@ -391,7 +391,7 @@ void test_image(LX_Win::LX_Window *win)
             for(int i = 0; i < 512; i++)
             {
                 win->clearWindow();
-                sprite.draw(&rect);
+                sprite.draw(rect);
                 win->update();
                 LX_Timer::delay(16);
             }
@@ -402,7 +402,7 @@ void test_image(LX_Win::LX_Window *win)
 
         {
             // Animation
-            LX_AABB rect = {420,100,211,448};
+            LX_ImgRect rect{420,100,211,448};
             LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
             LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
@@ -414,7 +414,7 @@ void test_image(LX_Win::LX_Window *win)
                 while((LX_Timer::getTicks() - t) < 2000)
                 {
                     win->clearWindow();
-                    sprite.draw(&rect);
+                    sprite.draw(rect);
                     win->update();
                     LX_Timer::delay(16);
                 }
@@ -439,8 +439,8 @@ void test_viewport(LX_Win::LX_Window *win)
     std::string name = "data/bullet.png";
 
     Uint32 delay = 125;
-    LX_AABB rect = {0, 0,win->getWidth()/4,win->getHeight()/2};
-    std::vector<LX_AABB> coordinates;
+    LX_ImgRect rect{0, 0,win->getWidth()/4,win->getHeight()/2};
+    std::vector<LX_ImgRect> coordinates;
     coordinates.push_back({212,0,211,448});
     coordinates.push_back({424,0,211,448});
     coordinates.push_back({636,0,211,448});
@@ -457,27 +457,27 @@ void test_viewport(LX_Win::LX_Window *win)
     coordinates.push_back({1272,449,211,448});
     coordinates.push_back({1484,449,211,448});
 
-    LX_Graphics::LX_Sprite img(name,*win);
+    LX_Graphics::LX_Sprite img(name, *win);
     LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
 
-    LX_AABB viewport = {win->getWidth()/2, 0,win->getWidth()/2, win->getHeight()/2};
+    LX_ImgRect viewport{{win->getWidth()/2, 0}, win->getWidth()/2, win->getHeight()/2};
     LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Viewport: {%d,%d,%d,%d}",
-                    viewport.x,viewport.y,viewport.w,viewport.h);
+                    viewport.p.x, viewport.p.y, viewport.w, viewport.h);
 
     Uint32 b = SDL_GetTicks();
-    LX_AABB brect = {0, 0, win->getWidth()/2, win->getHeight()/2};
-    LX_Colour bcolour = {0,0,0,255};
+    LX_ImgRect brect{0, 0, win->getWidth()/2, win->getHeight()/2};
+    LX_Colour bcolour{0, 0, 0, 255};
 
     while(SDL_GetTicks() - b < 4096)
     {
         win->clearWindow();
-        win->setViewPort(nullptr);
+        win->resetViewPort();
         img.draw();
 
-        win->setViewPort(&viewport);
+        win->setViewPort(viewport);
         win->setDrawColour(bcolour);
         win->fillRect(brect);
-        sprite.draw(&rect);
+        sprite.draw(rect);
 
         win->update();
         LX_Timer::delay(16);
@@ -497,39 +497,39 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         LX_Log::log("SUCCESS - The window exists");
 
-    uint32_t id = LX_Win::LX_WindowManager::getInstance()->addWindow(win);
+    bool r = LX_Win::getWindowManager().addWindow(*win);
 
-    if(id == static_cast<uint32_t>(-1))
+    if(r == false)
         LX_Log::log("FAILURE - cannot add a window: %s", LX_GetError());
     else
         LX_Log::log("SUCCESS - the window was added into the window manager");
 
 
-    LX_Win::LX_Window *lxw = LX_Win::LX_WindowManager::getInstance()->getWindow(id);
+    LX_Win::LX_Window& lxw = LX_Win::getWindowManager().getWindow(win->getID());
 
-    if(lxw == win)
+    if(&lxw == win)
         LX_Log::log("SUCCESS - (getWindow) the window is exactly what we added");
     else
         LX_Log::log("FAILURE - (getWindow) the window is not exactly what we added");
 
-    LX_Win::LX_WindowManager::getInstance()->clearWindows();
+    LX_Win::getWindowManager().clearWindows();
     img.draw();
-    LX_Win::LX_WindowManager::getInstance()->updateWindows();
+    LX_Win::getWindowManager().updateWindows();
     LX_Timer::delay(512);
 
     LX_Log::log("Remove the same window");
-    LX_Win::LX_Window *wi = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+    bool r2 = LX_Win::getWindowManager().removeWindow(win->getID());
 
-    if(wi == win)
+    if(r2)
         LX_Log::log("SUCCESS - The removed window is exactly what we added");
     else
         LX_Log::log("FAILURE - The removed window is not exactly what we added");
 
     LX_Log::log("Remove the same window (again)");
-    LX_Win::LX_Window *null = LX_Win::LX_WindowManager::getInstance()->removeWindow(id);
+    bool r3 = LX_Win::getWindowManager().removeWindow(win->getID());
 
-    if(null == nullptr)
-        LX_Log::log("SUCCESS - nullptr: expected");
+    if(!r3)
+        LX_Log::log("SUCCESS - false expected");
     else
         LX_Log::log("FAILURE - The window must not be in the manager");
 
@@ -726,15 +726,17 @@ void test_drawing(LX_Win::LX_Window *win)
 {
     LX_Log::log(" = TEST draw = ");
     LX_Log::log("Draw a segment with M(32,32) and N(64,448)");
-    LX_Physics::LX_Point M(32,32);
-    LX_Physics::LX_Point N(64,448);
-    LX_Physics::LX_Point O(512,256);
-    LX_Physics::LX_Vector2D u(256.0f,128.0f);
-    LX_Physics::LX_Vector2D v(2048.0f,0.0f);
-    LX_AABB b = {128,128,512,100};
+    LX_ImgCoord M{32,32};
+    LX_ImgCoord N{64,448};
+    LX_ImgCoord O{512,256};
+    LX_Physics::LX_Vector2D u{256.0f,128.0f};
+    LX_Physics::LX_Vector2D v{2048.0f,0.0f};
+    LX_ImgRect b{128,128,512,100};
+    LX_Colour c = {255,0,0,255};
 
+    win->setDrawColour(c);
     win->clearWindow();
-    win->drawSegment(M,N);
+    win->drawLine(M, N);
     win->update();
     LX_Timer::delay(1000);
 
@@ -744,29 +746,29 @@ void test_drawing(LX_Win::LX_Window *win)
     win->update();
     LX_Timer::delay(1000);
 
-    LX_Colour c = {255,0,0,255};
-    win->setDrawColour(c);
     LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
     LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");
     win->clearWindow();
-    for(float j = 0.0f; j < 256; j++)
+    const Float fend{256.0f};
+
+    for(Float j{0.0f}; j < fend; ++j)
     {
         win->drawLine(O,v);
-        v.vy += j + 64;
+        v.vy += j + Float{64.0f};
         win->update();
         LX_Timer::delay(16);
     }
 
     LX_Timer::delay(2048);
     LX_Log::log("Draw multiple lines using several points");
-    LX_Physics::LX_Point points[8] = {{64,64},{128,32},{256,64},{768,512},
+    std::vector<LX_ImgCoord> points = {{64,64},{128,32},{256,64},{768,512},
         {512,256},{16,448},{32,512},{256,42}
     };
 
     c = {255,255,255,255};
     win->setDrawColour(c);
     win->clearWindow();
-    win->drawSegments(points,8);
+    win->drawLines(points);
     win->update();
     LX_Timer::delay(2048);
 
@@ -796,10 +798,12 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Timer::delay(1000);
     win->clearWindow();
 
+    LX_Physics::LX_Circle C{LX_Physics::LX_FloatPosition{512.0f,300.0f},0};
+
     LX_Log::log("Draw circles");
     for(unsigned int i = 0; i < 300; i++)
     {
-        LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),i);
+        C.radius = i;
         win->clearWindow();
         win->drawCircle(C);
         win->update();
@@ -809,7 +813,7 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_Log::log("Draw filled circles");
     for(unsigned int j = 0; j < 300; j++)
     {
-        LX_Physics::LX_Circle C = LX_Physics::LX_Circle(LX_Physics::LX_Point(512,300),j);
+        C.radius = j;
         win->clearWindow();
         win->fillCircle(C);
         win->update();

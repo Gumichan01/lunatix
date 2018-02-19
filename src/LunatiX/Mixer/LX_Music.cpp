@@ -47,7 +47,7 @@ namespace LX_Mixer
 
 /* Music tag */
 
-LX_MusicTag::LX_MusicTag() noexcept: img(nullptr) {}
+//LX_MusicTag::LX_MusicTag() noexcept: img(nullptr) {}
 
 LX_MusicTag::~LX_MusicTag()
 {
@@ -92,6 +92,9 @@ class LX_Music_
     LX_MusicTag _mtag;
     bool mtag_set;
 
+    LX_Music_(const LX_Music_& m) = delete;
+    LX_Music_& operator =(const LX_Music_& m) = delete;
+
     void load_(const std::string& filename)
     {
         Mix_FreeMusic(_music);
@@ -104,30 +107,27 @@ class LX_Music_
 public:
 
     explicit LX_Music_(const std::string& filename)
-        : _music(nullptr), _filename(filename), mtag_set(false)
+        : _music(nullptr), _filename(filename), _tag(), _mtag(), mtag_set(false)
     {
         load_(filename);
     }
 
     explicit LX_Music_(const UTF8string& filename)
-        : _music(nullptr), _filename(filename.utf8_sstring()), mtag_set(false)
-    {
-        load_(_filename);
-    }
+        : LX_Music_(filename.utf8_sstring()) {}
 
     void fadeIn(int ms) noexcept
     {
-        Mix_FadeInMusic(_music, LX_MIXER_NOLOOP, ms);
+        Mix_FadeInMusic(_music, LX_MIX_NOLOOP, ms);
     }
 
     void fadeInPos(int ms, int pos) noexcept
     {
-        Mix_FadeInMusicPos(_music, LX_MIXER_NOLOOP, ms, pos);
+        Mix_FadeInMusicPos(_music, LX_MIX_NOLOOP, ms, pos);
     }
 
     bool play() noexcept
     {
-        return play(LX_MIXER_NOLOOP);
+        return play(LX_MIX_NOLOOP);
     }
 
     bool play(int loops) noexcept
@@ -170,10 +170,10 @@ public:
 };
 
 /* LX_Music: public functions */
-LX_Music::LX_Music(const std::string filename)
+LX_Music::LX_Music(const std::string& filename)
     : _mimpl(new LX_Music_(filename)) {}
 
-LX_Music::LX_Music(const UTF8string filename)
+LX_Music::LX_Music(const UTF8string& filename)
     : _mimpl(new LX_Music_(filename)) {}
 
 

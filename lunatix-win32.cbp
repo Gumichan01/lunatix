@@ -12,10 +12,12 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Weffc++" />
 					<Add option="-pedantic" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-O0" />
 				</Compiler>
 			</Target>
 			<Target title="Dynamic_library">
@@ -34,7 +36,6 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-march=i486" />
 			<Add option="-std=c++11" />
 			<Add directory="include" />
 		</Compiler>
@@ -53,7 +54,6 @@
 			<Add library="lib/win32/libSDL2_ttf.dll.a" />
 			<Add directory="lib/win32" />
 		</Linker>
-		<Unit filename="include/LunatiX/LX_AABB.hpp" />
 		<Unit filename="include/LunatiX/LX_Audio.hpp" />
 		<Unit filename="include/LunatiX/LX_Chunk.hpp" />
 		<Unit filename="include/LunatiX/LX_Colour.hpp" />
@@ -70,6 +70,7 @@
 		<Unit filename="include/LunatiX/LX_Graphics.hpp" />
 		<Unit filename="include/LunatiX/LX_Haptic.hpp" />
 		<Unit filename="include/LunatiX/LX_Hitbox.hpp" />
+		<Unit filename="include/LunatiX/LX_ImgRect.hpp" />
 		<Unit filename="include/LunatiX/LX_Library.hpp" />
 		<Unit filename="include/LunatiX/LX_Log.hpp" />
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
@@ -87,6 +88,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="include/LunatiX/LX_Random.hpp" />
+		<Unit filename="include/LunatiX/LX_Random.tpp" />
 		<Unit filename="include/LunatiX/LX_Sound.hpp" />
 		<Unit filename="include/LunatiX/LX_Sync.hpp" />
 		<Unit filename="include/LunatiX/LX_SystemInfo.hpp" />
@@ -103,6 +105,7 @@
 		<Unit filename="include/LunatiX/LX_Window.hpp" />
 		<Unit filename="include/LunatiX/LX_WindowManager.hpp" />
 		<Unit filename="include/LunatiX/Lunatix.hpp" />
+		<Unit filename="include/LunatiX/utils/float.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tags.h" />
 		<Unit filename="include/LunatiX/utils/libtagspp/tagspriv.h" />
@@ -114,6 +117,7 @@
 		<Unit filename="src/LunatiX/Device/LX_Mouse.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileBuffer.cpp" />
 		<Unit filename="src/LunatiX/FileIO/LX_FileIO.cpp" />
+		<Unit filename="src/LunatiX/Graphics/LX_ImgRect.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_OpenGL.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Texture.cpp" />
 		<Unit filename="src/LunatiX/Graphics/LX_Window.cpp" />
@@ -140,6 +144,7 @@
 		<Unit filename="src/LunatiX/System/LX_SystemInfo.cpp" />
 		<Unit filename="src/LunatiX/Text/LX_Text.cpp" />
 		<Unit filename="src/LunatiX/TrueTypeFont/LX_TrueTypeFont.cpp" />
+		<Unit filename="src/LunatiX/Utilities/float.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/8859.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/flac.cpp" />
 		<Unit filename="src/LunatiX/Utilities/libtagspp/id3genres.cpp" />
