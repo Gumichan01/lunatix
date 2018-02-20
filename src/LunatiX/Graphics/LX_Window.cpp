@@ -470,7 +470,7 @@ void LX_Window::toggleFullscreen(const LX_WinMode flag) noexcept
     {
         SDL_SetWindowFullscreen(_wimpl->_window, static_cast<uint32_t>(flag));
 
-        if(flag == LX_WinMode::FULLSCREEN)
+        if(flag == LX_WinMode::NO_FULLSCREEN)
         {
             setWindowSize(_wimpl->_original_width, _wimpl->_original_height);
         }
