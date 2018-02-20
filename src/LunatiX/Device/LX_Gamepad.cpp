@@ -113,7 +113,7 @@ public:
             return nameOf_(_joy);
     }
 
-    bool stat(LX_GamepadInfo& info) const noexcept
+    bool stat(LX_GamepadInfo& info) const
     {
         bool res;
 
@@ -132,8 +132,12 @@ public:
     {
         LX_GamepadInfo gi;
 
-        if(stat(gi))
-            return gamepadToString(gi);
+        try
+        {
+            if(stat(gi))
+                return gamepadToString(gi);
+        }
+        catch (...) {}
 
         return UTF8string("Unknown gamepad");
     }
