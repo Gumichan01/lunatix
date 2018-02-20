@@ -13,13 +13,23 @@
 #include <LunatiX/utils/utf8_string.hpp>
 
 #include <unordered_map>
-#include <stdexcept>
+#include <utility>
 
-
-typedef char byte_t;
 
 namespace
 {
+
+std::basic_string<unsigned char> toUstring(const std::string& str)
+{
+    return std::basic_string<unsigned char>(str.begin(), str.end());
+}
+
+inline std::string toString(const std::basic_string<unsigned char>& u8str)
+{
+    return std::string(u8str.begin(), u8str.end());
+}
+
+// Used in utf8_find
 void preprocess(const UTF8string& str,
                 std::unordered_map<std::string, size_t>& u8map) noexcept
 {
@@ -30,7 +40,7 @@ void preprocess(const UTF8string& str,
     {
         for(size_t i = U8LEN - 2U; ; --i)
         {
-            const std::string& s = str.utf8_at(i);
+            const std::string& s = str[i];
 
             if(u8map.find(s) == u8map.end())
                 u8map[s] = U8LEN - 1 - i;
@@ -45,110 +55,123 @@ void preprocess(const UTF8string& str,
 
 
 UTF8string::UTF8string(const std::string& str)
-    : utf8data(str)
+    : _utf8data(str.cbegin(), str.cend())
 {
     if(!utf8_is_valid_())
         throw std::invalid_argument("Invalid UTF-8 string\n");
 
-    utf8length = utf8_length_();
+    _utf8length = utf8_length_();
+    _string = str;
+    _cached = true;
 }
 
 
 UTF8string::UTF8string(const UTF8string& u8str) noexcept
-    : utf8data(u8str.utf8data), utf8length(u8str.utf8length) {}
+    : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
+      _string(u8str._string), _cached(u8str._cached) {}
 
 
 const UTF8string& UTF8string::operator =(const char * str)
 {
-    utf8data = str;
+    const std::string S(str);
+    _utf8data = std::move(toUstring(S));
 
     if(!utf8_is_valid_())
         throw std::invalid_argument("Invalid UTF-8 string\n");
 
-    utf8length = utf8_length_();
+    _utf8length = utf8_length_();
+    _string = S;
+    _cached = true;
     return *this;
 }
 
 
 const UTF8string& UTF8string::operator =(const std::string& str)
 {
-    utf8data = str;
+    _utf8data = std::move(toUstring(str));
 
     if(!utf8_is_valid_())
         throw std::invalid_argument("Invalid UTF-8 string\n");
 
-    utf8length = utf8_length_();
+    _utf8length = utf8_length_();
+    _string = str;
+    _cached = true;
     return *this;
 }
 
 
 UTF8string& UTF8string::operator =(const UTF8string& u8str) noexcept
 {
-    utf8data = u8str.utf8data;
-    utf8length = u8str.utf8length;
+    _utf8data = u8str._utf8data;
+    _utf8length = u8str._utf8length;
+    _string = u8str._string;
+    _cached = u8str._cached;
     return *this;
 }
 
 
 const UTF8string& UTF8string::operator +=(const std::string& str)
 {
-    std::string s = utf8data;
-    utf8data += str;
+    UTF8string::u8string s = _utf8data;
+    _utf8data += std::move(toUstring(str));
 
     if(!utf8_is_valid_())
     {
-        utf8data = s;
+        _utf8data = s;
         throw std::invalid_argument("Invalid UTF-8 string\n");
     }
 
-    utf8length = utf8_length_();
+    _utf8length = utf8_length_();
+    _cached = false;
     return *this;
 }
 
 
 const UTF8string& UTF8string::operator +=(const UTF8string& u8str)
 {
-    utf8data  += u8str.utf8data;
-    utf8length = utf8_length_();
+    _utf8data  += u8str._utf8data;
+    _utf8length = utf8_length_();
+    _cached = false;
     return *this;
 }
 
 
 const UTF8string& UTF8string::operator +=(const char * str)
 {
-    std::string s = utf8data;
-    utf8data += str;
+    UTF8string::u8string s = _utf8data;
+    _utf8data += std::move(toUstring(std::string(str)));
 
     if(!utf8_is_valid_())
     {
-        utf8data = s;
+        _utf8data = s;
         throw std::invalid_argument("Invalid UTF-8 string\n");
     }
 
-    utf8length = utf8_length_();
+    _utf8length = utf8_length_();
+    _cached = false;
     return *this;
 }
 
 
 bool UTF8string::utf8_is_valid_() const noexcept
 {
-    auto it = utf8data.begin();
-    const auto itend = utf8data.end();
+    auto it = _utf8data.begin();
+    const auto ITEND = _utf8data.end();
 
-    while(it < itend)
+    while(it < ITEND)
     {
-        if((0xF8&  *it) == 0xF0)
+        if((0xF8 & *it) == 0xF0 && *it <= 0xF4)
         {
             // The UTF-8 codepoint begin with 0b11110xxx -> 4-byte codepoint
             // If the iterator reach the end of the string before the
             // end of the 4-byte codepoint -> invalid string
-            if((it + 1) == itend || (it + 2) == itend || (it + 3) == itend)
+            if((it + 1) == ITEND || (it + 2) == ITEND || (it + 3) == ITEND)
                 return false;
 
             // Each of the following bytes is a value
             // between 0x80 and 0xBF
-            if(((0xC0&  *(it + 1)) != 0x80) || ((0xC0&  *(it + 2)) != 0x80)
-                    || ((0xC0&  *(it + 3)) != 0x80))
+            if(((0xC0 & *(it + 1)) != 0x80) || ((0xC0 & *(it + 2)) != 0x80)
+                    || ((0xC0 & *(it + 3)) != 0x80))
             {
                 return false;
             }
@@ -157,60 +180,60 @@ bool UTF8string::utf8_is_valid_() const noexcept
             // then the first continuation byte must be between 0x90 and 0xBF
             // otherwise, if the byte is 0xF4
             // then the first continuation byte must be between 0x80 and 0x8F
-            if(*it == '\xF0')
+            if(*it == 0xF0)
             {
-                if(*(it + 1) < '\x90' || *(it + 1) > '\xBF')
+                if(*(it + 1) < 0x90 || *(it + 1) > 0xBF)
                     return false;
             }
-            else if(*it == '\xF4')
+            else if(*it == 0xF4)
             {
-                if(*(it + 1) > '\x8F')
+                if(*(it + 1) < 0x80 || *(it + 1) > 0x8F)
                     return false;
             }
 
             it += 4;    // Jump to the next codepoint
         }
-        else if((0xF0&  *it) == 0xE0)
+        else if((0xF0 & *it) == 0xE0)
         {
             // The UTF-8 codepoint begin with 0b1110xxxx -> 3-byte codepoint
-            if((it + 1) == itend || (it + 2) == itend)
+            if((it + 1) == ITEND || (it + 2) == ITEND)
                 return false;
 
             // Each of the following bytes starts with
             // 0b10xxxxxx in a valid string
-            if(((0xC0&  *(it + 1)) != 0x80) || ((0xC0&  *(it + 2)) != 0x80))
+            if(((0xC0 & *(it + 1)) != 0x80) || ((0xC0 & *(it + 2)) != 0x80))
                 return false;
 
             // If the first byte of the sequence is 0xE0
             // then the first continuation byte must be between 0xA0 and 0xBF
             // otherwise, if the byte is 0xF4
             // then the first continuation byte must be between 0x80 and 0x9F
-            if(*it == '\xE0')
+            if(*it == 0xE0)
             {
-                if(*(it + 1) < '\xA0' || *(it + 1) > '\xBF')
+                if(*(it + 1) < 0xA0 || *(it + 1) > 0xBF)
                     return false;
             }
-            else if(*it == '\xED')
+            else if(*it == 0xED)
             {
-                if(*(it + 1) > '\x9F')
+                if(*(it + 1) > 0x9F)
                     return false;
             }
 
             it += 3;
         }
-        else if((0xE0&  *it) == 0xC0)
+        else if((0xE0 & *it) == 0xC0)
         {
             // The UTF-8 codepoint begin with 0b110xxxxx -> 2-byte codepoint
-            if((it + 1) == itend)
+            if((it + 1) == ITEND)
                 return false;
 
             // The following byte starts with 0b10xxxxxx in a valid string
-            if((0xC0&  *(it + 1)) != 0x80)
+            if((0xC0 & *(it + 1)) != 0x80)
                 return false;
 
             it += 2;
         }
-        else if((0x80&  *it) == 0x00)
+        else if((0x80 & *it) == 0x00)
         {
             // The UTF-8 codepoint begin with 0b0xxxxxxx -> 1-byte codepoint
             it += 1;
@@ -228,26 +251,26 @@ bool UTF8string::utf8_is_valid_() const noexcept
 // Compute the length of the utf-8 string (in number of codepoints)
 size_t UTF8string::utf8_length_() const noexcept
 {
-    auto end_data = utf8data.end();
-    auto it = utf8data.begin();
+    auto end_data = _utf8data.end();
+    auto it = _utf8data.begin();
     size_t len = 0;
 
     while(it != end_data)
     {
         byte_t byte = *it;
 
-        if (0xf0 == (0xf8&  byte))
+        if (0xf0 == (0xf8 & byte))
         {
             // 4-byte utf8 character
             // (0b11110xxx 0bxxxxxxxx 0bxxxxxxxx 0bxxxxxxxx)
             it += 4;
         }
-        else if (0xe0 == (0xf0&  byte))
+        else if (0xe0 == (0xf0 & byte))
         {
             // 3-byte utf8 code point (0b110xxxxx 0bxxxxxxxx 0bxxxxxxxx)
             it += 3;
         }
-        else if (0xc0 == (0xe0&  byte))
+        else if (0xc0 == (0xe0 & byte))
         {
             // 2-byte utf8 code point (0b110xxxxx 0bxxxxxxxx)
             it += 2;
@@ -268,15 +291,15 @@ size_t UTF8string::utf8_length_() const noexcept
 // Compute the memory size of a codepoint in the string (in byte)
 size_t UTF8string::utf8_codepoint_len_(const size_t j) const noexcept
 {
-    if (0xf0 == (0xf8&  utf8data[j]))
+    if (0xf0 == (0xf8 & _utf8data[j]))
     {
         return 4;
     }
-    else if (0xe0 == (0xf0&  utf8data[j]))
+    else if (0xe0 == (0xf0 & _utf8data[j]))
     {
         return 3;
     }
-    else if (0xc0 == (0xe0&  utf8data[j]))
+    else if (0xc0 == (0xe0 & _utf8data[j]))
     {
         return 2;
     }
@@ -287,14 +310,16 @@ size_t UTF8string::utf8_codepoint_len_(const size_t j) const noexcept
 
 void UTF8string::utf8_clear() noexcept
 {
-    utf8data.clear();
-    utf8length = 0;
+    _utf8data.clear();
+    _string.clear();
+    _utf8length = 0;
+    _cached = true;
 }
 
 
 bool UTF8string::utf8_empty() const noexcept
 {
-    return utf8length == 0;
+    return _utf8length == 0;
 }
 
 /*
@@ -304,9 +329,9 @@ bool UTF8string::utf8_empty() const noexcept
 size_t UTF8string::utf8_bpos_at_(const size_t cpos) const noexcept
 {
     size_t bpos = 0;
-    const size_t u8size = utf8_size();
+    const size_t U8SIZE = utf8_size();
 
-    for(size_t i = 0; bpos < u8size && i < cpos; i++)
+    for(size_t i = 0; bpos < U8SIZE && i < cpos; i++)
     {
         bpos += utf8_codepoint_len_(bpos);
     }
@@ -314,54 +339,59 @@ size_t UTF8string::utf8_bpos_at_(const size_t cpos) const noexcept
 }
 
 
-std::string UTF8string::utf8_at_(const size_t index) const noexcept
+UTF8string::u8string UTF8string::utf8_at_(const size_t index) const noexcept
 {
     size_t bpos    = utf8_bpos_at_(index);
-    const size_t n = utf8_codepoint_len_(bpos);
-    return utf8data.substr(bpos, n);
+    const size_t N = utf8_codepoint_len_(bpos);
+    return _utf8data.substr(bpos, N);
 }
 
 
 std::string UTF8string::utf8_at(const size_t index) const
 {
-    if(index >= utf8length)
+    if(index >= _utf8length)
         throw std::out_of_range("index value greater than the size of the string");
 
-    return utf8_at_(index);
+    return toString(utf8_at_(index));
 }
 
 
 std::string UTF8string::operator [](const size_t index) const noexcept
 {
-    return utf8_at_(index);
+    return toString(utf8_at_(index));
 }
 
 
 void UTF8string::utf8_pop()
 {
-    if(utf8length == 0)
+    if(_utf8length == 0)
         throw std::length_error("Cannot remove the last element from an empty string");
 
-    size_t bpos = utf8_bpos_at_(utf8length - 1);
-    utf8data.erase(bpos);
-    utf8length -= 1;
+    size_t bpos = utf8_bpos_at_(_utf8length - 1);
+    _utf8data.erase(bpos);
+    _utf8length -= 1;
+
+    // If the cache was valid before tis operation,
+    // keep the cache valid!
+    if(_cached)
+        _string.erase(bpos);
 }
 
 
-UTF8string UTF8string::utf8_substr(size_t pos,size_t len) const
+UTF8string UTF8string::utf8_substr(size_t pos, size_t len) const
 {
-    if(pos > utf8length)
+    if(pos > _utf8length)
         return UTF8string();
 
     // Length of the substring (number of code points)
-    const size_t n = (len == npos || (pos + len) > utf8length) ?
-                     (utf8length - pos) : len;
+    const size_t N = (len == UTF8string::npos || (pos + len) > _utf8length) ?
+                     (_utf8length - pos) : len;
 
     UTF8iterator it = utf8_iterator_() + pos;
-    const UTF8iterator _end = (it + n);
+    const UTF8iterator _END = (it + N);
     std::string s;
 
-    while(it != _end)
+    while(it != _END)
     {
         s += *(it++);
     }
@@ -372,18 +402,18 @@ UTF8string UTF8string::utf8_substr(size_t pos,size_t len) const
 // This function implements the Boyer-Moore string search algorithm
 size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
 {
-    if(str.utf8length == 0)
-        return npos;
+    if(str._utf8length == 0)
+        return UTF8string::npos;
 
     // Preprocessing
     std::unordered_map<std::string, size_t> u8map;
     preprocess(str, u8map);
 
-    const size_t U8LEN = str.utf8length;
+    const size_t U8LEN = str._utf8length;
     size_t index = pos;
 
     // Look for the subtring
-    while(index <= utf8length - U8LEN)
+    while(index <= _utf8length - U8LEN)
     {
         size_t j = U8LEN - 1;
         bool found = false;
@@ -408,10 +438,10 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
             return index;
     }
 
-    return npos;
+    return UTF8string::npos;
 }
 
-// Terminal recursive function that reverse the string
+// Tail-recursive function that reverse the string
 UTF8string UTF8string::utf8_reverse_aux_(UTF8iterator& it,
         const UTF8iterator& _end,
         UTF8string& res)
@@ -426,32 +456,47 @@ UTF8string UTF8string::utf8_reverse_aux_(UTF8iterator& it,
 
 UTF8string& UTF8string::utf8_reverse()
 {
-    UTF8iterator it = utf8_end();
-    UTF8string rev;
-    utf8data = (utf8_reverse_aux_(it, utf8_iterator_(), rev)).utf8data;
+    if(_utf8length > 1)
+    {
+        UTF8iterator it = utf8_end();
+        UTF8string rev;
+        _utf8data = (utf8_reverse_aux_(it, utf8_iterator_(), rev))._utf8data;
+        _cached = false;
+    }
+
     return *this;
 }
 
 
 size_t UTF8string::utf8_size() const noexcept
 {
-    return utf8data.size();
+    return _utf8data.size();
 }
 
 
 size_t UTF8string::utf8_length() const noexcept
 {
-    return utf8length;
+    return _utf8length;
 }
 
 const std::string UTF8string::utf8_sstring() const noexcept
 {
-    return utf8data;
+    if(!_cached)
+    {
+        _string = std::move(toString(_utf8data));
+        _cached = true;
+    }
+    return _string;
 }
 
 const char * UTF8string::utf8_str() const noexcept
 {
-    return utf8data.c_str();
+    if(!_cached)
+    {
+        _string = std::move(toString(_utf8data));
+        _cached = true;
+    }
+    return _string.c_str();
 }
 
 // Internal function that creates an iterator of the current string
@@ -469,7 +514,7 @@ UTF8iterator UTF8string::utf8_begin() const noexcept
 
 UTF8iterator UTF8string::utf8_end() const noexcept
 {
-    return utf8_begin() + utf8length;
+    return utf8_begin() + _utf8length;
 }
 
 
@@ -481,7 +526,7 @@ UTF8iterator UTF8string::begin() const noexcept
 
 UTF8iterator UTF8string::end() const noexcept
 {
-    return utf8_begin() + utf8length;
+    return utf8_begin() + _utf8length;
 }
 
 
@@ -559,7 +604,7 @@ std::ostream& operator <<(std::ostream& os, const UTF8string& str)
 std::istream& operator >>(std::istream& is, UTF8string& str)
 {
     std::string tmp;
-    std::getline(is,tmp);
+    std::getline(is, tmp);
     str = tmp;
     return is;
 }

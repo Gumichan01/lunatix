@@ -32,14 +32,19 @@ class UTF8iterator;
 */
 class UTF8string
 {
-    std::string utf8data{""};
-    size_t utf8length = 0;
+    using byte_t = unsigned char;
+    using u8string = std::basic_string<unsigned char>;
+
+    u8string _utf8data{};
+    size_t _utf8length = 0;
+    mutable std::string _string{""};
+    mutable bool _cached = false;
 
     bool utf8_is_valid_() const noexcept;
     size_t utf8_length_() const noexcept;
     size_t utf8_codepoint_len_(const size_t j) const noexcept;
     size_t utf8_bpos_at_(const size_t cpos) const noexcept;
-    std::string utf8_at_(const size_t index) const noexcept;
+    u8string utf8_at_(const size_t index) const noexcept;
 
     UTF8iterator utf8_iterator_() const noexcept;
     UTF8string utf8_reverse_aux_(UTF8iterator& it,
@@ -63,7 +68,7 @@ public:
     *   it is the largest possible representable value for this type.
     *
     */
-    const static size_t npos = static_cast<const size_t>(-1);
+    constexpr static size_t npos = static_cast<const size_t>(-1);
 
     /**
     *   @fn UTF8string() = default
