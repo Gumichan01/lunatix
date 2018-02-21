@@ -86,11 +86,11 @@ const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept
 
 class LX_Music_
 {
-    Mix_Music *_music;
-    std::string _filename;
+    Mix_Music *_music = nullptr;
+    std::string _filename{};
     libtagpp::Tag _tag;
     LX_MusicTag _mtag;
-    bool mtag_set;
+    bool mtag_set = false;
 
     LX_Music_(const LX_Music_& m) = delete;
     LX_Music_& operator =(const LX_Music_& m) = delete;
