@@ -123,7 +123,7 @@ public:
     *
     *   @return The enclosing box
     *
-    *   @note Complexity: O(n) — n > 2 is the number of vertices in the polygon
+    *   @note Complexity: O(n) with n > 2. n is the number of vertices in the polygon
     *   @exception  LX_PolygonException If the polygon has less than 3 sides
     */
     LX_FloatingBox getEnclosingBox() const;
@@ -143,16 +143,16 @@ public:
     /**
     *   @fn void LX_Polygon::move(const LX_Vector2D& v) noexcept
     *   @param [in] v The vector that indicates the direction
-    *   @note Complexity: O(n) — n is the number of vertices of the polygon
+    *   @note Complexity: O(n), n the number of vertices of the polygon
     */
     void move(const LX_Vector2D& v) noexcept;
     /**
-    *   @fn void moveTo(const LX_FloatPosition& p) noexcept
+    *   @fn void moveTo(const LX_FloatPosition& p)
     *   @param [in] p The new position
-    *   @note Complexity: O(n) — n is the number of vertices of the polygon
-    *   @warning If the polygon has less than 3 sides, the behaviour is undefined
+    *   @note Complexity: O(n), n is the number of vertices of the polygon
+    *   @exception  LX_PolygonException If the polygon has less than 3 sides
     */
-    void moveTo(const LX_FloatPosition& p) noexcept;
+    void moveTo(const LX_FloatPosition& p);
 
     ~LX_Polygon();
 };
