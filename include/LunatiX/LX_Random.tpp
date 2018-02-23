@@ -17,7 +17,7 @@ private:
 
     template <typename Num>
     friend LX_Num<Num> xrand(Num, Num) noexcept;
-    friend uint64_t xorshiftRand() noexcept;
+    friend unsigned long long xorshiftRand() noexcept;
 
     _Prand() = delete;
     ~_Prand() = delete;
@@ -26,7 +26,7 @@ private:
     _Prand& operator=(const _Prand& other) = delete;
     _Prand& operator=(_Prand&& other) = delete;
 
-    static uint64_t rand() noexcept;
+    static unsigned long long rand() noexcept;
 };
 
 template <typename Num>

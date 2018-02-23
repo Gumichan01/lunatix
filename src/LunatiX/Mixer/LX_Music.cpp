@@ -66,7 +66,7 @@ const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept
     LX_MusicTag mtag;
 
     if(!tag.readTag(file))
-        LX_SetError(std::string("Cannot get metadata from ") + file);
+        LX_setError(std::string("Cannot get metadata from ") + file);
 
     mtag.title    = tag.title();
     mtag.artist   = tag.artist();
@@ -86,11 +86,11 @@ const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept
 
 class LX_Music_
 {
-    Mix_Music *_music;
-    std::string _filename;
+    Mix_Music *_music = nullptr;
+    std::string _filename{};
     libtagpp::Tag _tag;
     LX_MusicTag _mtag;
-    bool mtag_set;
+    bool mtag_set = false;
 
     LX_Music_(const LX_Music_& m) = delete;
     LX_Music_& operator =(const LX_Music_& m) = delete;
@@ -138,7 +138,7 @@ public:
     const libtagpp::Tag& getInfo() noexcept
     {
         if(!_tag.readTag(_filename.c_str()))
-            LX_SetError("Cannot get metadata");
+            LX_setError("Cannot get metadata");
 
         return _tag;
     }

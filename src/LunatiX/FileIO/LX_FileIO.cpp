@@ -82,7 +82,7 @@ class LX_File_
         }
 
         if(_fstream == nullptr)
-            throw IOException(LX_GetError());
+            throw IOException(LX_getError());
     }
 
 public:
@@ -256,7 +256,7 @@ public:
         char * err = strerror(errno);
 
         if(ferror(_f))
-            LX_SetError(err);
+            LX_setError(err);
 
         return sz;
     }
@@ -288,7 +288,7 @@ public:
         char * err = strerror(errno);
 
         if(ferror(_f))
-            LX_SetError(err);
+            LX_setError(err);
 
         return sz;
     }

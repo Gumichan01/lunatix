@@ -224,7 +224,7 @@ public:
         });
     }
 
-    void moveTo(const LX_FloatPosition& p) noexcept
+    void moveTo(const LX_FloatPosition& p)
     {
         LX_FloatPosition centroid;
 
@@ -298,7 +298,7 @@ void LX_Polygon::move(const LX_Vector2D& v) noexcept
     _polyimpl->_move(v);
 }
 
-void LX_Polygon::moveTo(const LX_FloatPosition& p) noexcept
+void LX_Polygon::moveTo(const LX_FloatPosition& p)
 {
     _polyimpl->moveTo(p);
 }

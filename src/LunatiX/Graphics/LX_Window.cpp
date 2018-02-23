@@ -188,7 +188,7 @@ struct LX_Window_
                                    info.h, info.flag);
 
         if(_window == nullptr)
-            throw LX_WindowException(LX_GetError());
+            throw LX_WindowException(LX_getError());
 
         if(hasOpenGLsupport(info))
             _glcontext = SDL_GL_CreateContext(_window);
@@ -199,7 +199,7 @@ struct LX_Window_
         if(_renderer == nullptr)
         {
             std::string err_msg = "Rendering creation: ";
-            err_msg = err_msg + LX_GetError();
+            err_msg = err_msg + LX_getError();
 
             SDL_GL_DeleteContext(_glcontext);
             SDL_DestroyWindow(_window);
@@ -470,7 +470,7 @@ void LX_Window::toggleFullscreen(const LX_WinMode flag) noexcept
     {
         SDL_SetWindowFullscreen(_wimpl->_window, static_cast<uint32_t>(flag));
 
-        if(flag == LX_WinMode::FULLSCREEN)
+        if(flag == LX_WinMode::NO_FULLSCREEN)
         {
             setWindowSize(_wimpl->_original_width, _wimpl->_original_height);
         }
@@ -575,7 +575,7 @@ bool LX_Window::glMakeCurrent() noexcept
 {
     if(_wimpl->_glcontext == nullptr)
     {
-        LX_SetError("The current window is not an OpenGL window");
+        LX_setError("The current window is not an OpenGL window");
         return false;
     }
 

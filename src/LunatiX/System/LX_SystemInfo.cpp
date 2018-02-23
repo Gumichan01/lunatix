@@ -65,12 +65,12 @@ void getAvailableDisplayModes(LX_DisplayModes& modes)
 
     if(nb_displays == 0)
     {
-        LX_SetError("No display available");
+        LX_setError("No display available");
         return;
     }
     else if(nb_displays < 0)
     {
-        LX_SetError("Cannot get the number of display modes");
+        LX_setError("Cannot get the number of display modes");
         return;
     }
 

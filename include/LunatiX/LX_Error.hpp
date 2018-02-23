@@ -26,46 +26,43 @@
 
 
 /**
-*   @fn inline const char * LX_GetError()
-*
-*   Get the error message set by LX_SetError
-*
+*   @fn inline const char * LX_getError()
+*   Get the error message set by LX_setError
 *   @return The error message
 */
-inline const char * LX_GetError()
+inline const char * LX_getError()
 {
     return SDL_GetError();
 }
 
-
 /**
-*   @fn inline int LX_SetError(const std::string str)
-*
+*   @fn inline void LX_setError(const char * str) noexcept
 *   Set an error message
-*
 *   @param [in] str The error string
-*
-*   @return Always returns -1
-*
 */
-inline int LX_SetError(const std::string& str)
+inline void LX_setError(const char * str)
 {
-    return SDL_SetError(str.c_str());
+    SDL_SetError(str);
 }
 
 /**
-*   @fn inline int LX_SetError(const UTF8string u8str)
-*
+*   @fn inline void LX_setError(const std::string str) noexcept
 *   Set an error message
-*
-*   @param [in] u8str The error utf-8 string
-*
-*   @return Always returns -1
-*
+*   @param [in] str The error string
 */
-inline int LX_SetError(const UTF8string& u8str)
+inline void LX_setError(const std::string& str) noexcept
 {
-    return LX_SetError(u8str.utf8_sstring());
+    LX_setError(str.c_str());
+}
+
+/**
+*   @fn inline void LX_setError(const UTF8string u8str) noexcept
+*   Set an error message (utf-8)
+*   @param [in] u8str The error utf-8 string
+*/
+inline void LX_setError(const UTF8string& u8str) noexcept
+{
+    LX_setError(u8str.utf8_sstring());
 }
 
 

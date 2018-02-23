@@ -113,7 +113,7 @@ public:
             return nameOf_(_joy);
     }
 
-    bool stat(LX_GamepadInfo& info) const noexcept
+    bool stat(LX_GamepadInfo& info) const
     {
         bool res;
 
@@ -123,7 +123,7 @@ public:
             res = statGamepad_(_joy, info);
 
         if(!res)
-            LX_SetError(std::string("LX_Gamepad::stat: ") + LX_GetError());
+            LX_setError(std::string("LX_Gamepad::stat: ") + LX_getError());
 
         return res;
     }
@@ -132,8 +132,12 @@ public:
     {
         LX_GamepadInfo gi;
 
-        if(stat(gi))
-            return gamepadToString(gi);
+        try
+        {
+            if(stat(gi))
+                return gamepadToString(gi);
+        }
+        catch (...) {}
 
         return UTF8string("Unknown gamepad");
     }
@@ -171,7 +175,7 @@ bool LX_Gamepad_::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const
 {
     if(joy == nullptr)
     {
-        LX_SetError("Invalid joystick\n");
+        LX_setError("Invalid joystick\n");
         return false;
     }
 
@@ -187,7 +191,7 @@ bool LX_Gamepad_::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const
     if(info.id == -1 || info.nb_axis == -1 || info.nb_balls == -1
             || info.nb_buttons == -1 || info.nb_hats == -1)
     {
-        LX_SetError("Cannot get information\n");
+        LX_setError("Cannot get information\n");
         return false;
     }
 
@@ -243,7 +247,7 @@ bool LX_Gamepad::open(int index) noexcept
 
         LX_Log::logError(LX_Log::LX_LOG_SYSTEM,
                          "Gamepad opened and connected to %s", s.c_str());
-        LX_SetError("Instance of gamepad already connected to another device");
+        LX_setError("Instance of gamepad already connected to another device");
         return false;
     }
 

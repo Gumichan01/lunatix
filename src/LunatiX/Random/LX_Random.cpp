@@ -12,32 +12,15 @@
 */
 
 #include <LunatiX/LX_Random.hpp>
-#include <cinttypes>
 #include <cstdlib>
 #include <ctime>
 
-
-// If UINT64_C was defined, we undefine it
-#ifdef UINT64_C
-#undef UINT64_C
-#endif
-
-// This macro expands to integer constants
-#ifdef _MSC_VER
-typedef unsigned __int64 uint64_t;
-#define UINT64_C(val) (val##ui64)
-#else
-#define UINT64_C(val) (val##ULL)
-#endif
-
-
-/**
-*   @file LX_Random.cpp
-*   @brief The Random Number Generator implementation
-*   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
-*
-*/
+namespace
+{
+using uint32 = unsigned int;
+constexpr unsigned long long UINT64_V = 0x2545F4914F6CDD1DULL;
+constexpr float UF_MAX = static_cast<float>(std::numeric_limits<uint32>::max());
+}
 
 namespace LX_Random
 {
@@ -48,15 +31,15 @@ void initRand() noexcept
 }
 
 // private
-uint64_t _Prand::rand() noexcept
+unsigned long long _Prand::rand() noexcept
 {
-    static uint64_t x = 0;
+    static unsigned long long x = 0;
     static bool first_call = false;
 
     if(!first_call)
     {
         // x must be a nonzero value
-        x = static_cast<uint64_t>(crand() + 1);
+        x = static_cast<unsigned long long>(crand() + 1);
         first_call = true;
     }
 
@@ -64,19 +47,17 @@ uint64_t _Prand::rand() noexcept
     x ^= x >> 12; // a
     x ^= x << 25; // b
     x ^= x >> 27; // c
-    return x * UINT64_C(0x2545F4914F6CDD1D);
+    return x * UINT64_V;
 
 }
 
 float fxrand(float minf, float maxf) noexcept
 {
-    const float UF_MAX = static_cast<float>(std::numeric_limits<uint32_t>::max());
-    const float r = static_cast<float>(xrand<uint32_t>());
-
+    const float r = static_cast<float>(xrand<unsigned int>());
     return ( (r / UF_MAX) + minf ) * maxf;
 }
 
-uint64_t xorshiftRand() noexcept
+unsigned long long xorshiftRand() noexcept
 {
     return _Prand::rand();
 }
