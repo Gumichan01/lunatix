@@ -37,16 +37,16 @@ inline const char * LX_GetError()
     return SDL_GetError();
 }
 
+inline int LX_SetError(const char * str)
+{
+    return SDL_SetError(str);
+}
 
 /**
 *   @fn inline int LX_SetError(const std::string str)
-*
 *   Set an error message
-*
 *   @param [in] str The error string
-*
 *   @return Always returns -1
-*
 */
 inline int LX_SetError(const std::string& str)
 {
@@ -55,13 +55,9 @@ inline int LX_SetError(const std::string& str)
 
 /**
 *   @fn inline int LX_SetError(const UTF8string u8str)
-*
 *   Set an error message
-*
 *   @param [in] u8str The error utf-8 string
-*
 *   @return Always returns -1
-*
 */
 inline int LX_SetError(const UTF8string& u8str)
 {
