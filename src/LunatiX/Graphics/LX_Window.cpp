@@ -575,7 +575,7 @@ bool LX_Window::glMakeCurrent() noexcept
 {
     if(_wimpl->_glcontext == nullptr)
     {
-        LX_SetError("The current window is not an OpenGL window");
+        LX_setError("The current window is not an OpenGL window");
         return false;
     }
 

@@ -256,7 +256,7 @@ public:
         char * err = strerror(errno);
 
         if(ferror(_f))
-            LX_SetError(err);
+            LX_setError(err);
 
         return sz;
     }
@@ -288,7 +288,7 @@ public:
         char * err = strerror(errno);
 
         if(ferror(_f))
-            LX_SetError(err);
+            LX_setError(err);
 
         return sz;
     }
