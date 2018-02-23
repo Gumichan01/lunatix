@@ -19,7 +19,7 @@
 namespace
 {
 
-std::basic_string<unsigned char> toUstring(const std::string& str)
+inline std::basic_string<unsigned char> toUstring(const std::string& str)
 {
     return std::basic_string<unsigned char>(str.begin(), str.end());
 }
@@ -54,6 +54,10 @@ void preprocess(const UTF8string& str,
 }
 
 
+UTF8string::UTF8string(const char * str)
+    : UTF8string(std::string(str)) {}
+
+
 UTF8string::UTF8string(const std::string& str)
     : _utf8data(str.cbegin(), str.cend())
 {
@@ -70,8 +74,16 @@ UTF8string::UTF8string(const UTF8string& u8str) noexcept
     : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
       _string(u8str._string), _cached(u8str._cached) {}
 
+UTF8string::UTF8string(UTF8string&& u8str) noexcept
+    : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
+      _string(u8str._string), _cached(u8str._cached)
+{
+    u8str.utf8_clear();
+    u8str._utf8data.shrink_to_fit();
+    u8str._string.shrink_to_fit();
+}
 
-const UTF8string& UTF8string::operator =(const char * str)
+UTF8string& UTF8string::operator =(const char * str)
 {
     const std::string S(str);
     _utf8data = std::move(toUstring(S));
@@ -86,7 +98,7 @@ const UTF8string& UTF8string::operator =(const char * str)
 }
 
 
-const UTF8string& UTF8string::operator =(const std::string& str)
+UTF8string& UTF8string::operator =(const std::string& str)
 {
     _utf8data = std::move(toUstring(str));
 
@@ -109,6 +121,19 @@ UTF8string& UTF8string::operator =(const UTF8string& u8str) noexcept
     return *this;
 }
 
+UTF8string& UTF8string::operator =(UTF8string&& u8str) noexcept
+{
+    _utf8data = u8str._utf8data;
+    _utf8length = u8str._utf8length;
+    _string = u8str._string;
+    _cached = u8str._cached;
+
+    u8str.utf8_clear();
+    u8str._utf8data.shrink_to_fit();
+    u8str._string.shrink_to_fit();
+
+    return *this;
+}
 
 const UTF8string& UTF8string::operator +=(const std::string& str)
 {
@@ -396,7 +421,7 @@ UTF8string UTF8string::utf8_substr(size_t pos, size_t len) const
         s += *(it++);
     }
 
-    return s;
+    return UTF8string(s);
 }
 
 // This function implements the Boyer-Moore string search algorithm

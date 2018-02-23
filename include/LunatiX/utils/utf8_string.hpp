@@ -33,7 +33,7 @@ class UTF8iterator;
 class UTF8string
 {
     using byte_t = unsigned char;
-    using u8string = std::basic_string<unsigned char>;
+    using u8string = std::basic_string<byte_t>;
 
     u8string _utf8data{};
     size_t _utf8length = 0;
@@ -75,39 +75,56 @@ public:
     */
     UTF8string() = default;
     /**
+    *   @fn UTF8string(const char * str)
+    *   @param str
+    *   @pre str is not null
+    *   @exception std::invalid_argument If the string is not valid
+    */
+    UTF8string(const char * str);
+    /**
     *   @fn UTF8string(const std::string& str)
-    *   @param str The string to convert from
+    *   @param str
     *   @exception std::invalid_argument If the string is not valid
     */
     UTF8string(const std::string& str);
     /**
     *   @fn UTF8string(const UTF8string& u8str) noexcept
-    *   @param u8str The string to convert from
-    *   @exception std::invalid_argument If the string is not valid
+    *   @param u8str
     */
     UTF8string(const UTF8string& u8str) noexcept;
+    /**
+    *   @fn UTF8string(UTF8string&& u8str) noexcept
+    *   @param u8str
+    */
+    UTF8string(UTF8string&& u8str) noexcept;
 
     /**
-    *   @fn const UTF8string& operator =(const char * str)
+    *   @fn UTF8string& operator =(const char * str)
     *   @param str C-string that will be converted
     *   @return A reference to the new utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
-    const UTF8string& operator =(const char * str);
+    UTF8string& operator =(const char * str);
     /**
-    *   @fn const UTF8string& operator =(const std::string& str)
+    *   @fn UTF8string& operator =(const std::string& str)
     *   @param str The string that will be converted and checked
     *   @return A reference to the new utf-8 string
     *   @exception std::invalid_argument If the string is not valid
     */
-    const UTF8string& operator =(const std::string& str);
+    UTF8string& operator =(const std::string& str);
     /**
     *   @fn UTF8string& operator =(const UTF8string& u8str)
     *   @param u8str The utf-8 string
     *   @return A reference to the new utf-8 string
-    *   @exception std::invalid_argument If the string is not valid
     */
     UTF8string& operator =(const UTF8string& u8str) noexcept;
+    /**
+    *   @fn UTF8string& operator =(UTF8string&& u8str)
+    *   @param u8str The utf-8 string
+    *   @return A reference to the new utf-8 string
+    */
+    UTF8string& operator =(UTF8string&& u8str) noexcept;
+
     /**
     *   @fn const UTF8string& operator +=(const UTF8string& u8str)
     *
@@ -200,16 +217,16 @@ public:
     /**
     *   @fn size_t utf8_find(const UTF8string& str, size_t pos = 0) const
     *
-    *   Search the utf8 string for the first occurrence of
-    *   the sequence specified by its argument.
+    *   Search for the first occurrence of utf8 string
+    *   specified in argument.
     *
     *   When pos is specified, the search only includes characters
     *   at or after position pos, ignoring any possible occurrences
     *   that include characters before pos.
     *
     *   @param str The string to look for
-    *   @param pos The osition to start the search
-    *   @return The position of the subtring if it was found
+    *   @param pos The position to start the search
+    *   @return The position of the substring if it was found
     *           (in number of codepoints), UTF8string::npos otherwise.
     */
     size_t utf8_find(const UTF8string& str, size_t pos = 0) const;
