@@ -188,7 +188,7 @@ struct LX_Window_
                                    info.h, info.flag);
 
         if(_window == nullptr)
-            throw LX_WindowException(LX_GetError());
+            throw LX_WindowException(LX_getError());
 
         if(hasOpenGLsupport(info))
             _glcontext = SDL_GL_CreateContext(_window);
@@ -199,7 +199,7 @@ struct LX_Window_
         if(_renderer == nullptr)
         {
             std::string err_msg = "Rendering creation: ";
-            err_msg = err_msg + LX_GetError();
+            err_msg = err_msg + LX_getError();
 
             SDL_GL_DeleteContext(_glcontext);
             SDL_DestroyWindow(_window);

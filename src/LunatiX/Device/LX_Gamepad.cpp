@@ -123,7 +123,7 @@ public:
             res = statGamepad_(_joy, info);
 
         if(!res)
-            LX_setError(std::string("LX_Gamepad::stat: ") + LX_GetError());
+            LX_setError(std::string("LX_Gamepad::stat: ") + LX_getError());
 
         return res;
     }

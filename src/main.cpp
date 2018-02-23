@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 
     if(!LX_Init())
     {
-        LX_Log::log("Cannot load the library: %s",LX_GetError());
+        LX_Log::log("Cannot load the library: %s", LX_getError());
         return -1;
     }
 

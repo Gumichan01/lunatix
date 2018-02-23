@@ -26,11 +26,11 @@
 
 
 /**
-*   @fn inline const char * LX_GetError()
+*   @fn inline const char * LX_getError()
 *   Get the error message set by LX_setError
 *   @return The error message
 */
-inline const char * LX_GetError()
+inline const char * LX_getError()
 {
     return SDL_GetError();
 }

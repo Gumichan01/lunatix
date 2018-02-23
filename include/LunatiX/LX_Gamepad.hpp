@@ -113,7 +113,7 @@ public:
     *
     *   @param [out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
-    *          Call LX_GetError() to get the error message
+    *          Call LX_getError() to get the error message
     */
     bool stat(LX_GamepadInfo& info) const noexcept;
 

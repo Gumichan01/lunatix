@@ -82,7 +82,7 @@ class LX_File_
         }
 
         if(_fstream == nullptr)
-            throw IOException(LX_GetError());
+            throw IOException(LX_getError());
     }
 
 public:
