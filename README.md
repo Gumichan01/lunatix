@@ -40,7 +40,7 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
         if(!LX_Init())
         {
-            LX_Log::log("Cannot load the library: %s",LX_GetError());
+            LX_Log::log("Cannot load the library: %s",LX_getError());
             return -1;
         }
 
