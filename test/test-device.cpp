@@ -106,7 +106,7 @@ void test_haptic(void)
         int effectid = haptic.newEffect(effect);
 
         if(effectid < 0)
-            LX_Log::logError(LX_Log::LX_LOG_TEST,"Cannot add effect: %s",LX_GetError());
+            LX_Log::logError(LX_Log::LX_LOG_TEST,"Cannot add effect: %s",LX_getError());
         else
         {
             LX_Log::log("Run the effect");

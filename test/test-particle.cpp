@@ -137,9 +137,9 @@ int main(int argc, char **argv)
 
     try
     {
-        red = new LX_Sprite("test/asset/red.bmp", w);
-        green = new LX_Sprite("test/asset/green.bmp", w);
-        blue = new LX_Sprite("test/asset/blue.bmp", w);
+        red = new LX_Sprite(std::string("test/asset/red.bmp"), w);
+        green = new LX_Sprite(std::string("test/asset/green.bmp"), w);
+        blue = new LX_Sprite(std::string("test/asset/blue.bmp"), w);
         LX_Log::log("SUCCESS - The three assets were successfully loaded");
     }
     catch(LX_Graphics::LX_ImageException& ie)

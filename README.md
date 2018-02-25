@@ -38,11 +38,11 @@ int main(int argc, char** argv)
     LX_EventHandler ev;
     bool go = true;
 
-    if(!LX_Init())
-    {
-	    LX_Log::log("Cannot load the library: %s", LX_getError());
-	    return -1;
-    }
+	if(!LX_Init())
+	{
+		LX_Log::log("Cannot load the library: %s",LX_getError());
+		return -1;
+	}
 
     // Information about how to build the window
     LX_Win::LX_WindowInfo info;
