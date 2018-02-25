@@ -304,7 +304,7 @@ void test_music()
 
     try
     {
-        LX_Mixer::LX_Music *mus = new LX_Mixer::LX_Music("");
+        LX_Mixer::LX_Music *mus = new LX_Mixer::LX_Music(std::string());
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - music launched, it should not");
         delete mus;
     }
@@ -372,7 +372,7 @@ void test_chunk()
 
     try
     {
-        chunk = new LX_Mixer::LX_Chunk("");
+        chunk = new LX_Mixer::LX_Chunk(std::string());
         LX_Log::log("FAILURE - loaded, but it should not be");
         delete chunk;
     }

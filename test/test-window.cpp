@@ -213,7 +213,7 @@ void test_image(LX_Win::LX_Window *win)
 
     try
     {
-        LX_BufferedImage data("<invalid>");
+        LX_BufferedImage data(std::string("<invalid>"));
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
     }
     catch(LX_Graphics::LX_ImageException& ie)
@@ -500,7 +500,7 @@ void test_winManager(LX_Win::LX_Window *win)
     bool r = LX_Win::getWindowManager().addWindow(*win);
 
     if(r == false)
-        LX_Log::log("FAILURE - cannot add a window: %s", LX_GetError());
+        LX_Log::log("FAILURE - cannot add a window: %s", LX_getError());
     else
         LX_Log::log("SUCCESS - the window was added into the window manager");
 
@@ -663,13 +663,13 @@ void test_opengl2()
         if(w1.glMakeCurrent())
             LX_Log::log("SUCCESS - OpenGl window #1 OK → current context defined");
         else
-            LX_Log::log("FAILURE - %s",LX_GetError());
+            LX_Log::log("FAILURE - %s",LX_getError());
 
         LX_Log::log("Define window #2 as the current OpenGL window");
         if(w2.glMakeCurrent())
             LX_Log::log("SUCCESS - OpenGl window #2 OK → current context defined");
         else
-            LX_Log::log("FAILURE - %s",LX_GetError());
+            LX_Log::log("FAILURE - %s",LX_getError());
 
 
         LX_Log::log("Blue colour on window #1");
@@ -689,7 +689,7 @@ void test_opengl2()
         LX_Timer::delay(2000);
 
         {
-            LX_Graphics::LX_Sprite img("data/bullet.png",w1);
+            LX_Graphics::LX_Sprite img(std::string("data/bullet.png"), w1);
             LX_Log::log("Bind the sprite to the first window → #1");
             float w, h;
             bool b = img.bind(&w,&h);
@@ -697,7 +697,7 @@ void test_opengl2()
             if(b)
                 LX_Log::log("OK");
             else
-                LX_Log::log("KO: %s",LX_GetError());
+                LX_Log::log("KO: %s",LX_getError());
 
 
             LX_Log::log("Green colour on window #2");
@@ -714,7 +714,7 @@ void test_opengl2()
             if(b)
                 LX_Log::log("OK");
             else
-                LX_Log::log("KO: %s",LX_GetError());
+                LX_Log::log("KO: %s",LX_getError());
         }
 
     }

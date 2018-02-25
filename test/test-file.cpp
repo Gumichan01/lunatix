@@ -72,44 +72,28 @@ void test_open(void)
     LX_Log::log(" = TEST open = ");
 
     LX_File *f1 = nullptr;
-    const char * str1 = "data/bullet.png";
+    const std::string str1("data/bullet.png");
     // valid file
     try
     {
-        LX_Log::log("test open %s ...", str1);
+        LX_Log::log("test open %s ...", str1.c_str());
         f1 = new LX_File(str1, LX_FileMode::RDONLY);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The following file was loaded : %s", str1);
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The following file was loaded : %s", str1.c_str());
         delete f1;
         f1 = nullptr;
     }
     catch(IOException &e)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot load %s; Expected : a valid refence; Got : %s",
-                        str1, e.what());
-    }
-
-    // null string
-    try
-    {
-        LX_Log::log("test open nullptr ... ");
-        const char * null = nullptr;
-        LX_File *invalid_str = new LX_File(null, LX_FileMode::RDONLY);
-
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - nullptr was loaded (o_o); Expected: IOexception; got: a valid reference");
-        delete invalid_str;
-    }
-    catch(std::logic_error& le)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - std::logic_error occured : -> ",
-                        le.what());
+                        str1.c_str(), e.what());
     }
 
     // invalid file
-    const char * str3 = "invalid_file";
+    const std::string str3("invalid_file");
 
     try
     {
-        LX_Log::log("test open %s that does not exist...", str3);
+        LX_Log::log("test open %s that does not exist...", str3.c_str());
         LX_File *not_exist_file = new LX_File(str3, LX_FileMode::RDONLY);
 
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - An invalid file was loaded (o_o); Expected: IOexception; got: a valid reference");
@@ -118,7 +102,7 @@ void test_open(void)
     catch(IOException &ioe)
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - IOException occured: %s -> ",
-                        str3, ioe.what());
+                        str3.c_str(), ioe.what());
     }
 
     LX_Log::log(" = END TEST = ");
@@ -130,7 +114,7 @@ void test_read(void)
 
     size_t read_data = 0;
     char buf[N + 1];
-    LX_File f(str.c_str(), LX_FileMode::RDONLY);
+    LX_File f(str, LX_FileMode::RDONLY);
 
     LX_Log::log("%s is opened. Its size is %d byte(s)", f.getFilename(), f.size());
     LX_Log::log("Try to read the file");
@@ -152,7 +136,7 @@ void test_read(void)
 void test_read2(void)
 {
     LX_Log::log(" = TEST read #2 = ");
-    const char * strex = "data/bullet.png";
+    const std::string strex("data/bullet.png");
 
     Sint64 beg, end;
     size_t read_data = 0;
@@ -183,7 +167,7 @@ void test_read2(void)
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: non-zero value; got : 0");
     else
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %u bytes from %s",
-                        read_data,strex);
+                        read_data, strex.c_str());
 
     delete [] buff;
     LX_Log::log(" = END TEST = ");
@@ -198,7 +182,7 @@ void test_read3(void)
     char c;
     float fl;
     LX_Log::log("Open %s ...", strbin.c_str());
-    LX_File f(strbin.c_str(), LX_FileMode::RDONLY);
+    LX_File f(strbin, LX_FileMode::RDONLY);
 
     LX_Log::log("%s is opened. Its size is %d byte(s)", f.getFilename(), f.size());
     LX_Log::log("Try to read the file");
@@ -402,20 +386,6 @@ void test_tellSeek(void)
 void test_buffer(void)
 {
     LX_Log::log(" = TEST Buffer #1 = ");
-
-    try
-    {
-        const char *null = nullptr;
-        LX_Log::log("Open nullptr ...");
-        LX_FileBuffer *invalid = new LX_FileBuffer(null);
-
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - nullptr was loaded (o_o); Expected : IOexception");
-        delete invalid;
-    }
-    catch(logic_error& ex)
-    {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - IOException occured as expected: nullptr -> %s", ex.what());
-    }
 
     // Valid file
     string str1 = "data/bullet.png";
@@ -627,11 +597,11 @@ void test_fs(void)
 void test_getChunk(void)
 {
     LX_Mixer::LX_Chunk * lxmix = nullptr;
-    const char * fname = "data/explosion.wav";
+    const std::string fname("data/explosion.wav");
 
     LX_Log::log(" = TEST Chunk from buffer = ");
-    LX_Log::log("Open \"%s\" ...", fname);
-    LX_FileBuffer f("data/explosion.wav");
+    LX_Log::log("Open \"%s\" ...", fname.c_str());
+    LX_FileBuffer f(fname);
 
     try
     {
@@ -647,7 +617,7 @@ void test_getChunk(void)
     lxmix = LX_Mixer::loadSample(f);
 
     if(lxmix == nullptr)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - nullptr -> %s",LX_GetError());
+        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - nullptr -> %s",LX_getError());
     else
     {
         LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - loaded from %s",f.getFilename());
