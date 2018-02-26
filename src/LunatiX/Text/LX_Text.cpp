@@ -102,8 +102,7 @@ class LX_TextInput_
 
             try
             {
-                UTF8string ntext(s);
-                u8stringInput_(ntext);
+                u8stringInput_(UTF8string(s));
             }
             catch(...)
             {
@@ -130,17 +129,17 @@ class LX_TextInput_
             break;
 
         case SDLK_LEFT:
-            if(_cursor > 0)
-                _cursor -= 1;
+            if(_cursor > 0U)
+                _cursor -= 1U;
             break;
 
         case SDLK_RIGHT:
             if(_cursor < _u8text.utf8_length())
-                _cursor += 1;
+                _cursor += 1U;
             break;
 
         case SDLK_HOME:
-            _cursor = 0;
+            _cursor = 0U;
             break;
 
         case SDLK_END:
@@ -152,7 +151,7 @@ class LX_TextInput_
         }
     }
 
-    void keyboardInput_(LX_Event::LX_EventHandler& ev) noexcept
+    void keyboardInput_(const LX_Event::LX_EventHandler& ev) noexcept
     {
         const size_t old_cursor = _cursor;
 
@@ -182,7 +181,7 @@ class LX_TextInput_
                              "Input - _cursor at %d", _cursor);
     }
 
-    void textInput_(LX_Event::LX_EventHandler& ev) noexcept
+    void textInput_(const LX_Event::LX_EventHandler& ev) noexcept
     {
         const LX_Event::LX_TextEvent tev = ev.getTextEvent();
 
@@ -195,8 +194,7 @@ class LX_TextInput_
 
         try
         {
-            UTF8string ntext(tev.text);
-            u8stringInput_(ntext);
+            u8stringInput_(UTF8string(tev.text));
             _draw = true;
             _u8comp = "";
         }
@@ -207,7 +205,7 @@ class LX_TextInput_
         }
     }
 
-    void textEdit_(LX_Event::LX_EventHandler& ev) noexcept
+    void textEdit_(const LX_Event::LX_EventHandler& ev) noexcept
     {
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "Edit the text");
         LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT, "New edition: %s",
@@ -226,7 +224,7 @@ class LX_TextInput_
     }
 
     // Operation on the string
-    void u8stringInput_(UTF8string& ntext) noexcept
+    void u8stringInput_(const UTF8string& ntext) noexcept
     {
         const size_t u8len = _u8text.utf8_length();
 
@@ -236,8 +234,8 @@ class LX_TextInput_
         }
         else
         {
-            UTF8string rtmp = _u8text.utf8_substr(_cursor);
-            UTF8string ltmp = _u8text.utf8_substr(0, _cursor);
+            const UTF8string& rtmp = _u8text.utf8_substr(_cursor);
+            const UTF8string& ltmp = _u8text.utf8_substr(0, _cursor);
             _u8text = ltmp + ntext + rtmp;
         }
 
@@ -262,11 +260,11 @@ class LX_TextInput_
 
     void backslashKey_() noexcept
     {
-        if(_cursor > 0)
+        if(_cursor > 0U)
         {
             LX_Log::logDebug(LX_Log::LX_CATEGORY::LX_LOG_INPUT,
                              "Backslash key - Remove the following codepoint at %d: %s",
-                             _cursor-1, _u8text.utf8_at(_cursor-1).c_str());
+                             _cursor - 1, _u8text.utf8_at(_cursor - 1).c_str());
 
             if(_cursor == _u8text.utf8_length())
             {
@@ -274,12 +272,10 @@ class LX_TextInput_
             }
             else
             {
-                UTF8string rtmp = _u8text.utf8_substr(_cursor);
-                UTF8string ltmp = _u8text.utf8_substr(0, _cursor-1);
-                _u8text = ltmp + rtmp;
+                _u8text.utf8_erase(_u8text.utf8_begin() + _cursor - 1U);
             }
 
-            _cursor -= 1;
+            _cursor -= 1U;
             _draw = true;
         }
     }
@@ -295,16 +291,14 @@ class LX_TextInput_
                              _cursor, _u8text.utf8_at(_cursor).c_str());
         }
 
-        if(_cursor > 0 && _cursor < u8len)
+        if(_cursor > 0U && _cursor < u8len)
         {
-            UTF8string rtmp = _u8text.utf8_substr(_cursor + 1);
-            UTF8string ltmp = _u8text.utf8_substr(0, _cursor);
-            _u8text = ltmp + rtmp;
+            _u8text.utf8_erase(_u8text.utf8_begin() + _cursor);
             _draw = true;
         }
         else if(_cursor == 0)
         {
-            _u8text = _u8text.utf8_substr(_cursor + 1);
+            _u8text = _u8text.utf8_substr(_cursor + 1U);
             _draw = true;
         }
     }
