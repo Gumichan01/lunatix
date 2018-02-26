@@ -12,6 +12,8 @@
 
 #include <LunatiX/utils/utf8_string.hpp>
 
+#include <stdexcept>
+
 
 UTF8iterator::UTF8iterator(const UTF8string& u) noexcept
     : _index(0), _data(u) {}
@@ -70,7 +72,7 @@ UTF8iterator UTF8iterator::operator --(int) noexcept
 
 bool UTF8iterator::operator ==(const UTF8iterator& it) const noexcept
 {
-    return (_index == it._index) && (_data == it._data);
+    return (_data == it._data) && (_index == it._index);
 }
 
 
@@ -79,6 +81,26 @@ bool UTF8iterator::operator !=(const UTF8iterator& it) const noexcept
     return !(*this == it);
 }
 
+
+bool UTF8iterator::operator <(const UTF8iterator& it) const noexcept
+{
+    return (_data == it._data) && (_index < it._index);
+}
+
+bool UTF8iterator::operator >(const UTF8iterator& it) const noexcept
+{
+    return (_data == it._data) && (_index > it._index);
+}
+
+bool UTF8iterator::operator <=(const UTF8iterator& it) const noexcept
+{
+    return (_data == it._data) && (_index <= it._index);
+}
+
+bool UTF8iterator::operator >=(const UTF8iterator& it) const noexcept
+{
+    return (_data == it._data) && (_index >= it._index);
+}
 
 const std::string UTF8iterator::operator *() const
 {
@@ -110,4 +132,12 @@ UTF8iterator UTF8iterator::operator -(const size_t n) const noexcept
         newit._index = 0;
 
     return newit;
+}
+
+long UTF8iterator::operator -(const UTF8iterator& it) const
+{
+    if(_data != it._data)
+        throw std::invalid_argument("iterators don't point to the same data");
+
+    return static_cast<long>(_index) - static_cast<long>(it._index);
 }

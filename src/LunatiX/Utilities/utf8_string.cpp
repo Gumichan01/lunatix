@@ -19,6 +19,11 @@
 namespace
 {
 
+constexpr size_t min(size_t a, size_t b)
+{
+    return a < b ? a : b;
+}
+
 inline std::basic_string<unsigned char> toUstring(const std::string& str)
 {
     return std::basic_string<unsigned char>(str.begin(), str.end());
@@ -73,6 +78,9 @@ UTF8string::UTF8string(const std::string& str)
 UTF8string::UTF8string(const UTF8string& u8str) noexcept
     : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
       _string(u8str._string), _cached(u8str._cached) {}
+
+UTF8string::UTF8string(const UTF8string& u8str, size_t pos, size_t len) noexcept
+    : UTF8string(u8str.utf8_substr(pos, len)) {}
 
 UTF8string::UTF8string(UTF8string&& u8str) noexcept
     : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
@@ -366,9 +374,8 @@ size_t UTF8string::utf8_bpos_at_(const size_t cpos) const noexcept
 
 UTF8string::u8string UTF8string::utf8_at_(const size_t index) const noexcept
 {
-    size_t bpos    = utf8_bpos_at_(index);
-    const size_t N = utf8_codepoint_len_(bpos);
-    return _utf8data.substr(bpos, N);
+    size_t bpos = utf8_bpos_at_(index);
+    return _utf8data.substr(bpos, utf8_codepoint_len_(bpos));
 }
 
 
@@ -396,12 +403,75 @@ void UTF8string::utf8_pop()
     _utf8data.erase(bpos);
     _utf8length -= 1;
 
-    // If the cache was valid before tis operation,
+    // If the cache was valid before this operation,
     // keep the cache valid!
     if(_cached)
         _string.erase(bpos);
 }
 
+UTF8string& UTF8string::utf8_erase(const size_t index, const size_t count)
+{
+    if(index > _utf8length)
+        throw std::out_of_range("utf8_range - index out of range");
+
+    const size_t COUNT = min(count, _utf8length - index);
+
+    if(_utf8length == 0 || COUNT == 0)
+        return *this;
+
+    const size_t BFIRST = utf8_bpos_at_(index);
+    const size_t BLAST  = utf8_bpos_at_(index + COUNT);
+    const size_t N      = _utf8data.size();
+    u8string u8s;
+
+    for(size_t i = 0U; i < N; ++i)
+    {
+        if(i < BFIRST || i > BLAST - 1)
+            u8s += _utf8data[i];
+    }
+
+    _utf8data = u8s;
+    _utf8length = utf8_length_();
+    _cached = false;
+    return *this;
+}
+
+UTF8iterator UTF8string::utf8_erase(const UTF8iterator& position)
+{
+    if(position == utf8_end())
+        return utf8_end();
+
+    if(position == utf8_end() - 1)
+    {
+        utf8_pop();
+        return utf8_end();
+    }
+
+    const size_t d = static_cast<size_t>(position - utf8_begin());
+    utf8_erase(d, 1U);
+    return utf8_begin() + d;
+}
+
+UTF8iterator UTF8string::utf8_erase(const UTF8iterator& first, const UTF8iterator& last)
+{
+    if(first == last)
+        return utf8_end();
+
+    if(first == utf8_begin() && last == utf8_end())
+    {
+        utf8_clear();
+        return utf8_end();
+    }
+
+    const UTF8iterator& REAL_FIRST = first < last ? first : last;
+    const UTF8iterator& REAL_LAST  = first < last ? last : first;
+
+    const size_t INDEX = static_cast<size_t>(REAL_FIRST - utf8_begin());
+    const size_t COUNT = static_cast<size_t>(REAL_LAST - REAL_FIRST);
+    utf8_erase(INDEX, COUNT);
+
+    return utf8_begin() + INDEX;
+}
 
 UTF8string UTF8string::utf8_substr(size_t pos, size_t len) const
 {

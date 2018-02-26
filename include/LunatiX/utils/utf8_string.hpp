@@ -36,7 +36,7 @@ class UTF8string
     using u8string = std::basic_string<byte_t>;
 
     u8string _utf8data{};
-    size_t _utf8length = 0;
+    size_t _utf8length = 0U;
     mutable std::string _string{""};
     mutable bool _cached = false;
 
@@ -92,6 +92,13 @@ public:
     *   @param u8str
     */
     UTF8string(const UTF8string& u8str) noexcept;
+    /**
+    *   @fn UTF8string(const UTF8string& u8str, size_t pos, size_t len = npos) noexcept
+    *   @param u8str
+    *   @param pos The beginning position of the substring
+    *   @param len The length of the substring (in number of codepoints, default value = npos)
+    */
+    UTF8string(const UTF8string& u8str, size_t pos, size_t len = npos) noexcept;
     /**
     *   @fn UTF8string(UTF8string&& u8str) noexcept
     *   @param u8str
@@ -199,6 +206,35 @@ public:
     *   @exception std::length_error If the string is empty
     */
     void utf8_pop();
+    /**
+    *   @fn UTF8string& utf8_erase(const size_t index = 0, const size_t count = npos)
+    *
+    *   Removes min(count, utf8_size() - index) characters starting at index
+    *
+    *   @return *this
+    *   @exception std::out_of_range if ```index > utf8_size()```
+    */
+    UTF8string& utf8_erase(const size_t index = 0, const size_t count = npos);
+    /**
+    *   @fn UTF8iterator utf8_erase(const UTF8iterator& position)
+    *
+    *   Removes the character at position
+    *
+    *   @return Iterator pointing to the character immediately following the character erased,
+    *           or utf8_end() if no such character exists
+    *   @note If the iterator does not point to *this, the behaviour is undefined
+    */
+    UTF8iterator utf8_erase(const UTF8iterator& position);
+    /**
+    *   @fn UTF8iterator utf8_erase(const UTF8iterator& first, const UTF8iterator& last)
+    *
+    *   Removes the character in the range [first, last[
+    *
+    *   @return Iterator pointing to the character ```last```before the erase,
+    *           or utf8_end() if no such character exists
+    *   @note If one of the iterators does not point to *this, the behaviour is undefined
+    */
+    UTF8iterator utf8_erase(const UTF8iterator& first, const UTF8iterator& last);
 
     /**
     *   @fn UTF8string utf8_substr(size_t pos = 0, size_t len = npos) const
