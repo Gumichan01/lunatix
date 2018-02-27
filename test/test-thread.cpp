@@ -178,7 +178,7 @@ void test_thread()
     {
         {
             LX_Multithreading::LX_Thread th4(true, foo2);
-            LX_Timer::delay(256);
+            LX_Timer::delay(128);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -286,7 +286,7 @@ void test_semaphore()
     LX_Multithreading::LX_Thread t9(true, incrValue);
     LX_Multithreading::LX_Thread t10(true, incrValue);
 
-    LX_Timer::delay(750);
+    LX_Timer::delay(256);
     LX_Multithreading::LX_Thread(false,
                                  []
     {
@@ -313,7 +313,7 @@ void test_semaphore2()
     LX_Log::log("(#%x): launch threads", tid);
     LX_Multithreading::LX_Thread th1(false, countValue);
     LX_Multithreading::LX_Thread th2(false, countValue);
-    LX_Timer::delay(200);
+    LX_Timer::delay(128);
 
     th1.join();
     th2.join();
@@ -332,7 +332,7 @@ void test_semaphore3()
     LX_Multithreading::LX_Thread(true, countValue);
     LX_Multithreading::LX_Thread(true, countValue);
     LX_Multithreading::LX_Thread(true, countValue);
-    LX_Timer::delay(200);
+    LX_Timer::delay(128);
 
     LX_Multithreading::LX_Thread(false, sigValue).join();
 
