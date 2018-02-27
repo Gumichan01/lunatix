@@ -22,12 +22,39 @@
 
 
 #include <thread>
+#include <atomic>
 #include <mutex>
 #include <condition_variable>
 
 
+
 namespace LX_Multithreading
 {
+
+class LX_Mutex
+{
+    const static int IDLE = -1;
+    constexpr static int MAX_LEVEL = 1000;
+    constexpr static size_t MOD = static_cast<size_t>(MAX_LEVEL) + 1U;
+    constexpr static int SIZE = MAX_LEVEL;
+    std::atomic<int> level[SIZE];
+    std::atomic<int> victim[SIZE - 1];
+
+    LX_Mutex(const LX_Mutex&)  = delete;
+    LX_Mutex(const LX_Mutex&&) = delete;
+    LX_Mutex& operator =(const LX_Mutex&)  = delete;
+    LX_Mutex& operator =(const LX_Mutex&&) = delete;
+
+    bool _sameOrHigher(int me, int my_level) noexcept;
+
+public:
+
+    LX_Mutex() = default;
+    void lock() noexcept;
+    void unlock() noexcept;
+    ~LX_Mutex() = default;
+
+};
 
 /**
 *   @class LX_Semaphore
@@ -39,10 +66,10 @@ class LX_Semaphore
     std::condition_variable _cond;
     volatile unsigned long _count;
 
-    LX_Semaphore(const LX_Semaphore&) = delete;
+    LX_Semaphore(const LX_Semaphore&)  = delete;
     LX_Semaphore(const LX_Semaphore&&) = delete;
-    LX_Semaphore& operator =(const LX_Semaphore&) = delete;
-    LX_Semaphore&& operator =(const LX_Semaphore&&) = delete;
+    LX_Semaphore& operator =(const LX_Semaphore&)  = delete;
+    LX_Semaphore& operator =(const LX_Semaphore&&) = delete;
 
 public:
 
