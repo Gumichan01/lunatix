@@ -53,6 +53,7 @@ void test_semaphore();
 void test_semaphore2();
 void test_semaphore3();
 void test_async();
+void test_mutex();
 
 unsigned long fact_(unsigned long n, unsigned long acc) noexcept;
 unsigned long fact(long n);
@@ -80,6 +81,7 @@ int main(int argc, char **argv)
 
     test_thread();
     test_thread_fail();
+    test_mutex();
     test_semaphore();
     test_semaphore2();
     test_semaphore3();
@@ -148,6 +150,34 @@ void sigValue()
         sync_sem.notify();
         LX_Timer::delay(100);
     }
+}
+
+LX_Multithreading::LX_Mutex mutex;
+int mvalue = 0;
+
+void mut()
+{
+    const thread_local size_t tid = LX_Multithreading::getCurrentThreadID();
+    mutex.lock();
+    mvalue += 1;
+    mutex.unlock();
+}
+
+void test_mutex()
+{
+    LX_Log::log("   == TEST mutex ==   ");
+
+    LX_Multithreading::LX_Thread th1(false, mut);
+    LX_Multithreading::LX_Thread th2(false, mut);
+    LX_Multithreading::LX_Thread th3 (false, mut);
+
+    th1.join();
+    th2.join();
+    th3.join();
+
+    std::cout << "mvalue: " << mvalue << "\n";
+
+    LX_Log::log("    == END TEST ==    ");
 }
 
 
