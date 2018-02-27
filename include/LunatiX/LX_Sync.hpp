@@ -37,7 +37,7 @@ class LX_Semaphore
 {
     std::mutex _mutex;
     std::condition_variable _cond;
-    unsigned long _count;
+    volatile unsigned long _count;
 
     LX_Semaphore(const LX_Semaphore&) = delete;
     LX_Semaphore(const LX_Semaphore&&) = delete;
