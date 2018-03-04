@@ -22,6 +22,7 @@
 #include <LunatiX/LX_Window.hpp>
 
 #include <unordered_map>
+//#include <sstream>
 
 
 namespace LX_Win
@@ -112,7 +113,7 @@ LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
     auto it = _wmpimpl->windows.find(id);
 
     if(it == _wmpimpl->windows.end())
-        throw LX_WindowNotFoundException("Not found window with identifer: " + id);
+        throw LX_WindowNotFoundException("Not found window with identifer: %u" + id);
 
     return it->second;
 }
