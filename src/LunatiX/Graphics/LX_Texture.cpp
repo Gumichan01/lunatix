@@ -583,7 +583,7 @@ Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel) const noexcept
 }
 
 
-void LX_BufferedImage::convertGrayscale() noexcept
+LX_BufferedImage& LX_BufferedImage::convertGrayscale() noexcept
 {
     const long NBPIXELS = _surface->w * _surface->h;
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
@@ -593,9 +593,11 @@ void LX_BufferedImage::convertGrayscale() noexcept
         Uint32 pixel = pixels[i];
         pixels[i] = _convertGrayscalePixel(pixel);
     }
+
+    return *this;
 }
 
-void LX_BufferedImage::convertNegative() noexcept
+LX_BufferedImage& LX_BufferedImage::convertNegative() noexcept
 {
     const long NBPIXELS = _surface->w * _surface->h;
     Uint32 * pixels = static_cast<Uint32*>(_surface->pixels);
@@ -605,6 +607,8 @@ void LX_BufferedImage::convertNegative() noexcept
         Uint32 pixel = pixels[i];
         pixels[i] = _convertNegativePixel(pixel);
     }
+
+    return *this;
 }
 
 LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const

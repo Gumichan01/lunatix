@@ -411,12 +411,12 @@ public:
     /**
     *   @fn void convertGrayscale() noexcept
     */
-    void convertGrayscale() noexcept;
+    LX_BufferedImage& convertGrayscale() noexcept;
 
     /**
     *   @fn void convertNegative()
     */
-    void convertNegative() noexcept;
+    LX_BufferedImage& convertNegative() noexcept;
 
     /**
     *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const
