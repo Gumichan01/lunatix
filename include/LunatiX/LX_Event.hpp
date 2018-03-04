@@ -56,16 +56,16 @@ using LX_GamepadID = int32_t;       /**< Identifier of the gamepad      */
 *
 *   Values:
 *   - INVALID
-*   - LEFTX
-*   - LEFTY
-*   - RIGHTX
-*   - RIGHTY
-*   - TRIGGERLEFT
-*   - TRIGGERRIGHT
+*   - LEFTX:        X Left axis of the gamepad (left-right)
+*   - LEFTY:        Y Left axis of the gamepad (top-down)
+*   - RIGHTX:       X Left axis of the gamepad (left-right)
+*   - RIGHTY:       Y Left axis of the gamepad (top-down)
+*   - TRIGGERLEFT:  Left trigger
+*   - TRIGGERRIGHT: Right trigger
 *   - MAX
 *
 */
-enum class LX_GamepadAxis : int
+enum class LX_GamepadAxis : char
 {
     INVALID = -1,
     LEFTX,
