@@ -39,7 +39,7 @@ class LX_WindowNotFoundException : public std::exception
 
 public:
 
-    explicit LX_WindowNotFoundException(std::string err);
+    explicit LX_WindowNotFoundException(const std::string& err);
     const char * what() const noexcept;
     ~LX_WindowNotFoundException() noexcept = default;
 

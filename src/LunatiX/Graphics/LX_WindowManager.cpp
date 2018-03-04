@@ -22,13 +22,12 @@
 #include <LunatiX/LX_Window.hpp>
 
 #include <unordered_map>
-//#include <sstream>
 
 
 namespace LX_Win
 {
 
-LX_WindowNotFoundException::LX_WindowNotFoundException(std::string err)
+LX_WindowNotFoundException::LX_WindowNotFoundException(const std::string& err)
     : _string_error(err) {}
 
 const char * LX_WindowNotFoundException::what() const noexcept
@@ -113,7 +112,10 @@ LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
     auto it = _wmpimpl->windows.find(id);
 
     if(it == _wmpimpl->windows.end())
-        throw LX_WindowNotFoundException("Not found window with identifer: %u" + id);
+    {
+        const std::string errstr("Not found window with identifer: " + id);
+        throw LX_WindowNotFoundException(errstr);
+    }
 
     return it->second;
 }
