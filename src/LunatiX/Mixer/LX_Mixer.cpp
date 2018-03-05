@@ -55,7 +55,7 @@ unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 
-const struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE
+constexpr struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE
 {
     false, false, false, false
 };

@@ -24,7 +24,7 @@
 namespace
 {
 
-inline LX_Event::LX_State st(uint8_t s)
+inline constexpr LX_Event::LX_State u8st(uint8_t s)
 {
     return static_cast<LX_Event::LX_State>(s);
 }
@@ -505,15 +505,15 @@ const LX_GAxis LX_EventHandler::getAxis() const noexcept
 const LX_GButton LX_EventHandler::getButton() const noexcept
 {
     const SDL_ControllerButtonEvent bu = (*event).cbutton;
-    const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), st(bu.state)};
+    const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), u8st(bu.state)};
     return gbutton;
 }
 
 const LX_MButton LX_EventHandler::getMouseButton() const noexcept
 {
     const SDL_MouseButtonEvent mb = (*event).button;
-    LX_MouseButton b = toMouseButton(mb.button);
-    const LX_MButton mbutton = {mb.windowID, b, st(mb.state), mb.clicks, mb.x, mb.y};
+    const LX_MouseButton b = toMouseButton(mb.button);
+    const LX_MButton mbutton = {mb.windowID, b, u8st(mb.state), mb.clicks, mb.x, mb.y};
     return mbutton;
 }
 
@@ -556,7 +556,7 @@ const LX_WEvent LX_EventHandler::getWindowEvent() const noexcept
 const LX_UserEvent LX_EventHandler::getUserEvent() const noexcept
 {
     const SDL_UserEvent usr = (*event).user;
-    const LX_UserEvent uev = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
+    const LX_UserEvent uev  = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
     return uev;
 }
 
