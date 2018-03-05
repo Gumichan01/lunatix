@@ -33,8 +33,8 @@ namespace
 bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
                  const LX_Mixer::LX_MixerEffectType& u)
 {
-    return t.LX_DISTANCE == u.LX_DISTANCE && t.LX_PANNING == u.LX_PANNING
-           && t.LX_POSITION == u.LX_POSITION && t.LX_STEREO == u.LX_STEREO;
+    return t.DISTANCE == u.DISTANCE && t.PANNING == u.PANNING
+           && t.POSITION == u.POSITION && t.STEREO == u.STEREO;
 }
 
 }
@@ -210,20 +210,21 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexc
 
     if(effect.type == LX_EFFECT_NONE)
         return chunk.play(chan, effect.loops);
+
     else
     {
         Mix_UnregisterAllEffects(chan);
 
-        if(effect.type.LX_PANNING)
+        if(effect.type.PANNING)
             setPanning(chan, effect.pan_left, effect.pan_right);
 
-        if(effect.type.LX_POSITION)
+        if(effect.type.POSITION)
             setPosition(chan, effect.pos_angle, effect.pos_distance);
 
-        if(effect.type.LX_DISTANCE)
+        if(effect.type.DISTANCE)
             setDistance(chan, effect.distance);
 
-        if(effect.type.LX_STEREO)
+        if(effect.type.STEREO)
             reverseStereo(chan, effect.rev_stereo);
     }
 
