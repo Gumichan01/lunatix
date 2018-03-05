@@ -37,4 +37,14 @@ bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept
     return !(a == b);
 }
 
+bool operator ==(const LX_ImgRect& a, const LX_ImgRect& b) noexcept
+{
+    return a.p == b.p && a.w == b.w && a.h == b.h;
+}
+
+bool operator !=(const LX_ImgRect& a, const LX_ImgRect& b) noexcept
+{
+    return !(a == b);
+}
+
 }

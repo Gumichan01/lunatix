@@ -91,6 +91,25 @@ bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
 bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
+/**
+*   @fn bool operator ==(const LX_ImgRect& a, const LX_ImgRect& b) noexcept
+*
+*   @param [in] a The first rectangle
+*   @param [in] b The second rectangle
+*
+*   @return TRUE If these points have exactly the same coordinates,
+*          FALSE otherwise
+*/
+bool operator ==(const LX_ImgRect& a, const LX_ImgRect& b) noexcept;
+/**
+*   @fn bool operator !=(const LX_ImgRect& a, const LX_ImgRect& b) noexcept
+*
+*   @param [in] a The first rectangle
+*   @param [in] b The second rectangle
+*
+*   @return TRUE If these points have not the same coordinates, FALSE otherwise
+*/
+bool operator !=(const LX_ImgRect& a, const LX_ImgRect& b) noexcept;
 
 }
 
