@@ -24,7 +24,7 @@ LX_ImgCoord toPixelPosition(const LX_Physics::LX_FloatPosition& p) noexcept
 
 LX_ImgRect toImgRect(const LX_Physics::LX_FloatingBox& b) noexcept
 {
-    return LX_ImgRect{toPixelPosition(b.fpoint), b.w, b.h};
+    return LX_ImgRect{toPixelPosition(b.p), b.w, b.h};
 }
 
 bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept

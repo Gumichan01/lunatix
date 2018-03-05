@@ -29,6 +29,8 @@
 
 #define PFL(x) static_cast<float>(x)
 
+/// @todo code review physics
+
 namespace
 {
 
@@ -57,10 +59,10 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     const LX_Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
     const LX_Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
 
-    LX_Physics::LX_FloatPosition P1_min = box1.fpoint;
-    LX_Physics::LX_FloatPosition P2_min = box2.fpoint;
-    LX_Physics::LX_FloatPosition P1_max = box1.fpoint;
-    LX_Physics::LX_FloatPosition P2_max = box2.fpoint;
+    LX_Physics::LX_FloatPosition P1_min = box1.p;
+    LX_Physics::LX_FloatPosition P2_min = box2.p;
+    LX_Physics::LX_FloatPosition P1_max = box1.p;
+    LX_Physics::LX_FloatPosition P2_max = box2.p;
 
     P1_max.x += Float{PFL(box1.w)};
     P1_max.y += Float{PFL(box1.h)};
@@ -166,8 +168,8 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 
 bool collisionPointBox(const LX_FloatPosition& p, const LX_FloatingBox& box) noexcept
 {
-    return !(p.x <= box.fpoint.x || p.y >= (box.fpoint.y + box.h)
-             || p.y <= box.fpoint.y || p.x >= (box.fpoint.x + box.w));
+    return !(p.x <= box.p.x || p.y >= (box.p.y + box.h)
+             || p.y <= box.p.y || p.x >= (box.p.x + box.w));
 }
 
 
@@ -179,10 +181,10 @@ bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) no
 
 bool collisionBox(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noexcept
 {
-    return !((rect1.fpoint.x >= (rect2.fpoint.x + rect2.w))
-             || (rect1.fpoint.y >= (rect2.fpoint.y + rect2.h))
-             || ((rect1.fpoint.x + rect1.w) <= rect2.fpoint.x)
-             || ((rect1.fpoint.y + rect1.h) <= rect2.fpoint.y));
+    return !((rect1.p.x >= (rect2.p.x + rect2.w))
+             || (rect1.p.y >= (rect2.p.y + rect2.h))
+             || ((rect1.p.x + rect1.w) <= rect2.p.x)
+             || ((rect1.p.y + rect1.h) <= rect2.p.y));
 }
 
 
@@ -246,19 +248,19 @@ bool collisionCircleBox(const LX_Circle& circle, const LX_FloatingBox& box) noex
 
     const LX_Line sides[] =
     {
-        LX_Line{ box.fpoint, LX_Vector2D{ 0.0f, PFL(box.h) } },
+        LX_Line{ box.p, LX_Vector2D{ 0.0f, PFL(box.h) } },
 
         LX_Line{
-            LX_FloatPosition{ box.fpoint.x, box.fpoint.y + box.h },
+            LX_FloatPosition{ box.p.x, box.p.y + box.h },
             LX_Vector2D{ PFL(box.w), 0.0f }
         },
 
         LX_Line{
-            LX_FloatPosition{ box.fpoint.x + box.w, box.fpoint.y },
+            LX_FloatPosition{ box.p.x + box.w, box.p.y },
             LX_Vector2D{ 0.0f, PFL(box.h) }
         },
 
-        LX_Line{ box.fpoint, LX_Vector2D{ PFL(box.w), 0.0f } }
+        LX_Line{ box.p, LX_Vector2D{ PFL(box.w), 0.0f } }
     };
 
     for(const LX_Line& l : sides)
@@ -332,10 +334,10 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 bool collisionBoxPoly(const LX_FloatingBox& box, const LX_Polygon& poly)
 {
     const unsigned long n = poly.numberOfEdges();
-    const LX_FloatPosition A{box.fpoint.x, box.fpoint.y};
-    const LX_FloatPosition B{box.fpoint.x + box.w, box.fpoint.y};
-    const LX_FloatPosition C{box.fpoint.x + box.w, box.fpoint.y + box.h};
-    const LX_FloatPosition D{box.fpoint.x, box.fpoint.y + box.h};
+    const LX_FloatPosition A{box.p.x, box.p.y};
+    const LX_FloatPosition B{box.p.x + box.w, box.p.y};
+    const LX_FloatPosition C{box.p.x + box.w, box.p.y + box.h};
+    const LX_FloatPosition D{box.p.x, box.p.y + box.h};
 
     for(unsigned long j = 0UL; j < n; ++j)
     {
@@ -389,8 +391,8 @@ void movePoint(LX_FloatPosition& P, const LX_Vector2D& v) noexcept
 
 void moveBox(LX_FloatingBox& box, const LX_Vector2D& v) noexcept
 {
-    box.fpoint.x += v.vx;
-    box.fpoint.y += v.vy;
+    box.p.x += v.vx;
+    box.p.y += v.vy;
 }
 
 void moveCircle(LX_Circle& C, const LX_Vector2D& v) noexcept
@@ -410,7 +412,7 @@ void movePointTo(LX_FloatPosition& P, const LX_FloatPosition& dest) noexcept
 
 void moveBoxTo(LX_FloatingBox& box, const LX_FloatPosition& P) noexcept
 {
-    box.fpoint = P;
+    box.p = P;
 }
 
 void moveCircleTo(LX_Circle& C, const LX_FloatPosition& P) noexcept

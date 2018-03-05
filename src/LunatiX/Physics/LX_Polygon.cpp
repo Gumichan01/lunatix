@@ -24,6 +24,7 @@
 
 using namespace std;
 
+/// @todo code review polygon
 
 namespace
 {
@@ -189,22 +190,22 @@ public:
         for(const LX_FloatPosition& p: _points)
         {
             // X
-            if(p.x < box.fpoint.x)
-                box.fpoint.x = p.x;
+            if(p.x < box.p.x)
+                box.p.x = p.x;
 
             if(p.x > p0.x)
                 p0.x = p.x;
 
             // Y
-            if(p.y < box.fpoint.y)
-                box.fpoint.y = p.y;
+            if(p.y < box.p.y)
+                box.p.y = p.y;
 
             if(p.y > p0.y)
                 p0.y = p.y;
         }
 
-        box.w = static_cast<int>(p0.x - box.fpoint.x) + 1;
-        box.h = static_cast<int>(p0.y - box.fpoint.y) + 1;
+        box.w = static_cast<int>(p0.x - box.p.x) + 1;
+        box.h = static_cast<int>(p0.y - box.p.y) + 1;
 
         return box;
     }
@@ -234,7 +235,7 @@ public:
             const LX_FloatingBox& box = getEnclosingBox();
             const float fw = static_cast<float>(box.w);
             const float fh = static_cast<float>(box.h);
-            const LX_FloatPosition q{box.fpoint.x + fw / 2.0f, box.fpoint.y + fh / 2.0f};
+            const LX_FloatPosition q{box.p.x + fw / 2.0f, box.p.y + fh / 2.0f};
             _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
