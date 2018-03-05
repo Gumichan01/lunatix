@@ -23,12 +23,10 @@
 #include <LunatiX/LX_Vector2D.hpp>
 #include <cmath>
 
+using namespace FloatBox;
 
 namespace LX_Physics
 {
-
-const Float ZERO{0.0f};
-
 
 bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
@@ -132,31 +130,32 @@ LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept
 
 Float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
-    return {(u.vx * v.vx) + (u.vy * v.vy)};
+    return (u.vx * v.vx) + (u.vy * v.vy);
 }
 
 
 Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 {
-    return {(u.vx * v.vy) - (v.vx * u.vy)};
+    return (u.vx * v.vy) - (v.vx * u.vy);
 }
 
 
 Float vector_norm(const LX_Vector2D& v) noexcept
 {
-    return {static_cast<float>(sqrt(scalar_product(v, v)))};
+    Float tmp = scalar_product(v, v);
+    return FloatMath::sqrt(tmp);
 }
 
 
 bool isNullVector(const LX_Vector2D& v) noexcept
 {
-    return v.vx == ZERO && v.vy == ZERO;
+    return v.vx == FNIL && v.vy == FNIL;
 }
 
 
 bool collinear(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
 {
-    return vector_product(u, v) == ZERO;
+    return vector_product(u, v) == FNIL;
 }
 
 LX_Vector2D& normalize(LX_Vector2D& v) noexcept
@@ -164,7 +163,7 @@ LX_Vector2D& normalize(LX_Vector2D& v) noexcept
     if(isNullVector(v))
         return v;
 
-    v *= (1.0f / vector_norm(v));
+    v *= ( fbox(1.0f) / vector_norm(v) );
     return v;
 }
 
