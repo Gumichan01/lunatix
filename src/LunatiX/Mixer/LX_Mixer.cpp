@@ -30,6 +30,11 @@ using namespace LX_FileIO;
 namespace
 {
 
+const uint8_t LX_MIX_FX_LOUD = 255;         /**< Loud (for effect functions)    */
+const uint8_t LX_MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) */
+const uint8_t LX_MIX_FX_NO_DISTANCE = 0;    /**< The distance between the source and the listener */
+const uint16_t LX_MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
+
 constexpr bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
                            const LX_Mixer::LX_MixerEffectType& u)
 {
