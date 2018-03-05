@@ -29,6 +29,10 @@
 namespace
 {
 
+const int LX_NOLOOP  = 0;
+const int LX_INFLOOP = -1;
+
+
 LX_Graphics::
 LX_BufferedImage *_loadImage(const std::string& file,
                              const libtagpp::ImgMetaData& imgdata)
@@ -46,8 +50,6 @@ namespace LX_Mixer
 {
 
 /* Music tag */
-
-//LX_MusicTag::LX_MusicTag() noexcept: img(nullptr) {}
 
 LX_MusicTag::~LX_MusicTag()
 {
@@ -117,20 +119,25 @@ public:
 
     void fadeIn(int ms) noexcept
     {
-        Mix_FadeInMusic(_music, LX_MIX_NOLOOP, ms);
+        Mix_FadeInMusic(_music, LX_NOLOOP, ms);
     }
 
     void fadeInPos(int ms, int pos) noexcept
     {
-        Mix_FadeInMusicPos(_music, LX_MIX_NOLOOP, ms, pos);
+        Mix_FadeInMusicPos(_music, LX_NOLOOP, ms, pos);
     }
 
     bool play() noexcept
     {
-        return play(LX_MIX_NOLOOP);
+        return play(false);
     }
 
-    bool play(int loops) noexcept
+    bool play(bool infinite) noexcept
+    {
+        return Mix_PlayMusic(_music, infinite ? LX_INFLOOP : LX_NOLOOP) == 0;
+    }
+
+    bool play(unsigned int loops) noexcept
     {
         return Mix_PlayMusic(_music, loops) == 0;
     }
@@ -198,7 +205,12 @@ bool LX_Music::play() noexcept
     return _mimpl->play();
 }
 
-bool LX_Music::play(int loops) noexcept
+bool LX_Music::play(bool infinite_loop) noexcept
+{
+    return _mimpl->play(infinite_loop);
+}
+
+bool LX_Music::play(unsigned int loops) noexcept
 {
     return _mimpl->play(loops);
 }

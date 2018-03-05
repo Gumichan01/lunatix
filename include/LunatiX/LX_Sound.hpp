@@ -27,10 +27,6 @@
 namespace LX_Mixer
 {
 
-const int LX_MIX_LOOP = -1;   /**< Activate the loop      */
-const int LX_MIX_NOLOOP = 0;  /**< No loop is activated   */
-
-
 /**
 *   @class LX_MixerException
 *   @brief Exception class of the Audio module

@@ -155,25 +155,24 @@ public:
 
     /**
     *   @fn virtual bool play() noexcept
-    *   Play the music specified in the LX_Music class
+    *   Play the music
     *   @return TRUE on success, FALSE otherwise
-    *
-    *   @note This function internally calls play(int loops) with LX_MIX_NOLOOP
     */
     virtual bool play() noexcept;
     /**
-    *   @fn bool play(int loops) noexcept
-    *
-    *   Play the music specified in the LX_Music class
-    *
-    *   @param [in] loops The loop constant
-    *
-    *   @return TRUE on success,FALSE otherwise
-    *
-    *   @note If loops is set to LX_MIX_NOLOOP, the music is played only once.
-    *   @note If loops is set to LX_MIX_LOOP, the music is played forever.
+    *   @fn bool play(bool infinite_loop) noexcept
+    *   Play the music
+    *   @param inifinite_loop true for inifinite loop, false otherwise
+    *   @return TRUE on success, FALSE otherwise
     */
-    bool play(int loops) noexcept;
+    bool play(bool infinite_loop) noexcept;
+    /**
+    *   @fn bool play(unsigned int loops) noexcept
+    *   Play the music specified in the LX_Music class
+    *   @param [in] loops The loop constant
+    *   @return TRUE on success,FALSE otherwise
+    */
+    bool play(unsigned int loops) noexcept;
     /**
     *   @fn static void pause() noexcept
     *   Pause or resume the current music

@@ -66,12 +66,12 @@ public:
 
     bool play(int channel) noexcept
     {
-        return play(channel, LX_MIX_NOLOOP);
+        return play(channel, 0);
     }
 
     bool play(int channel, int loops) noexcept
     {
-        return Mix_PlayChannel(channel,_chunk,loops) == 0;
+        return Mix_PlayChannel(channel, _chunk, loops) == 0;
     }
 
     bool play(int channel, int loops, int ticks) noexcept
@@ -103,7 +103,7 @@ bool LX_Chunk::play() noexcept
 
 bool LX_Chunk::play(int channel) noexcept
 {
-    return _chkimpl->play(channel, LX_MIX_NOLOOP);
+    return _chkimpl->play(channel);
 }
 
 bool LX_Chunk::play(int channel, int loops) noexcept

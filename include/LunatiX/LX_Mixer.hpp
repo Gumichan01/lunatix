@@ -86,10 +86,10 @@ class LX_Chunk;
 */
 struct LX_MixerEffectType
 {
-    bool LX_PANNING;        /**< Panning    */
-    bool LX_POSITION;       /**< Position   */
-    bool LX_DISTANCE;       /**< Distance   */
-    bool LX_STEREO;         /**< Stereo     */
+    bool PANNING;       /**< Panning    */
+    bool POSITION;      /**< Position   */
+    bool DISTANCE;      /**< Distance   */
+    bool STEREO;        /**< Stereo     */
 };
 
 
@@ -294,7 +294,6 @@ int channelAvailable(int tag) noexcept;
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
 bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0) noexcept;
-
 /**
 *   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexcept
 *

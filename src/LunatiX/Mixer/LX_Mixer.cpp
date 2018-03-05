@@ -30,8 +30,8 @@ using namespace LX_FileIO;
 namespace
 {
 
-bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
-                 const LX_Mixer::LX_MixerEffectType& u)
+constexpr bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
+                           const LX_Mixer::LX_MixerEffectType& u)
 {
     return t.DISTANCE == u.DISTANCE && t.PANNING == u.PANNING
            && t.POSITION == u.POSITION && t.STEREO == u.STEREO;
