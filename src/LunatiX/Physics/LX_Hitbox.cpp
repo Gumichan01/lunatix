@@ -18,10 +18,24 @@
 */
 
 #include <LunatiX/LX_Hitbox.hpp>
+#include <LunatiX/LX_ImgRect.hpp>
 
 
 namespace LX_Physics
 {
+
+LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
+{
+    /// @todo integrate new version of Float
+    return LX_FloatPosition{static_cast<float>(coord.x), static_cast<float>(coord.y)};
+}
+
+
+LX_FloatingBox toFloatPosition(const LX_Graphics::LX_ImgRect& rect) noexcept
+{
+    return LX_FloatingBox{toFloatPosition(rect.p), rect.w, rect.h};
+}
+
 
 bool LX_Line::isParralelWith(const LX_Line& l) const noexcept
 {
