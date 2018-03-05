@@ -20,6 +20,7 @@
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_ImgRect.hpp>
 
+using namespace FloatBox;
 
 namespace LX_Physics
 {
@@ -27,7 +28,7 @@ namespace LX_Physics
 LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
 {
     /// @todo integrate new version of Float
-    return LX_FloatPosition{static_cast<float>(coord.x), static_cast<float>(coord.y)};
+    return LX_FloatPosition{fbox(coord.x), fbox(coord.y)};
 }
 
 
@@ -44,7 +45,7 @@ bool LX_Line::isParralelWith(const LX_Line& l) const noexcept
 
 bool LX_Line::isPerpendicularTo(const LX_Line& l) const noexcept
 {
-    return scalar_product(v, l.v) == fbox(0.0f);
+    return scalar_product(v, l.v) == FNIL;
 }
 
 

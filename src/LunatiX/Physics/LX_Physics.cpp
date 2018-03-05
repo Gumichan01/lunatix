@@ -27,8 +27,8 @@
 #include <stdexcept>
 #include <cmath>
 
-#define PFL(x) static_cast<float>(x)
 
+using namespace FloatBox;
 /// @todo code review physics
 
 namespace
@@ -64,10 +64,10 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     LX_Physics::LX_FloatPosition P1_max = box1.p;
     LX_Physics::LX_FloatPosition P2_max = box2.p;
 
-    P1_max.x += Float{PFL(box1.w)};
-    P1_max.y += Float{PFL(box1.h)};
-    P2_max.x += Float{PFL(box2.w)};
-    P2_max.y += Float{PFL(box2.h)};
+    P1_max.x += fbox(box1.w);
+    P1_max.y += fbox(box1.h);
+    P2_max.x += fbox(box2.w);
+    P2_max.y += fbox(box2.h);
 
     return intersetInterval(P1_min.x, P1_max.x, P2_min.x, P2_max.x)
            && intersetInterval(P1_min.y, P1_max.y, P2_min.y, P2_max.y);
@@ -191,7 +191,7 @@ bool collisionBox(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noex
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept
 {
     const unsigned int sum_radius = circle1.radius + circle2.radius;
-    const Float d{PFL(sum_radius * sum_radius)};
+    const Float d = fbox(sum_radius * sum_radius);
 
     return (euclide_square_distance(circle1.center, circle2.center) <= d);
 }
@@ -212,7 +212,6 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
         return true;
 
-    const Float ZERO{0.0f};
     const LX_FloatPosition O = circle.center;
     LX_Vector2D AB{B.x - A.x, B.y - A.y};
     LX_Vector2D AO{O.x - A.x, O.y - A.y};
@@ -222,13 +221,13 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
     const Float& scal_ab_ao  = scalar_product(AB, AO);
     const Float& scal_mab_bo = ((-AB.vx) * BO.vx) + ((-AB.vy) * BO.vy);
 
-    if(scal_ab_ao < ZERO || scal_mab_bo < ZERO)
+    if(scal_ab_ao < FNIL || scal_mab_bo < FNIL)
         return false;
 
     // Find the projection point of O
     const Float& scalp = scalar_product(AB, AB);
 
-    if(scalp == ZERO)        // A and B are the same point
+    if(scalp == FNIL)        // A and B are the same point
         return false;
 
     Float t = scal_ab_ao / scalp;
@@ -248,19 +247,19 @@ bool collisionCircleBox(const LX_Circle& circle, const LX_FloatingBox& box) noex
 
     const LX_Line sides[] =
     {
-        LX_Line{ box.p, LX_Vector2D{ 0.0f, PFL(box.h) } },
+        LX_Line{ box.p, LX_Vector2D{ FNIL, fbox(box.h) } },
 
         LX_Line{
             LX_FloatPosition{ box.p.x, box.p.y + box.h },
-            LX_Vector2D{ PFL(box.w), 0.0f }
+            LX_Vector2D{ fbox(box.w), FNIL }
         },
 
         LX_Line{
             LX_FloatPosition{ box.p.x + box.w, box.p.y },
-            LX_Vector2D{ 0.0f, PFL(box.h) }
+            LX_Vector2D{ FNIL, fbox(box.h) }
         },
 
-        LX_Line{ box.p, LX_Vector2D{ PFL(box.w), 0.0f } }
+        LX_Line{ box.p, LX_Vector2D{ fbox(box.w), FNIL } }
     };
 
     for(const LX_Line& l : sides)
@@ -288,8 +287,8 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
     const int v = 10000;
     const unsigned long N = poly.numberOfEdges();
-    const float RIX = PFL(LX_Random::crand100());
-    const float RIY = PFL(LX_Random::crand100());
+    const float RIX = LX_Random::fxrand(0.0f, 100.0f);//PFL(LX_Random::crand100());
+    const float RIY = LX_Random::fxrand(0.0f, 100.0f);//PFL(LX_Random::crand100());
 
     LX_FloatPosition I{v + RIX, v + RIY};
     unsigned long nb_intersections = 0;

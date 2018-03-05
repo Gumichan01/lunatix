@@ -23,6 +23,7 @@
 #include <vector>
 
 using namespace std;
+using namespace FloatBox;
 
 /// @todo code review polygon
 
