@@ -1,5 +1,4 @@
 
-
 /*
 *   Copyright © 2018 Luxon Jean-Pierre
 *   https://gumichan01.github.io/
@@ -21,7 +20,6 @@
 */
 
 #include <LunatiX/LX_Vector2D.hpp>
-#include <cmath>
 
 using namespace FloatBox;
 

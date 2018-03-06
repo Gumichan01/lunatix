@@ -1,5 +1,4 @@
 
-
 /*
 *   Copyright © 2018 Luxon Jean-Pierre
 *   https://gumichan01.github.io/
@@ -25,7 +24,6 @@
 #include <LunatiX/LX_Hitbox.hpp>
 #include <LunatiX/LX_Random.hpp>
 #include <stdexcept>
-#include <cmath>
 
 
 using namespace FloatBox;
@@ -34,7 +32,8 @@ using namespace FloatBox;
 namespace
 {
 
-bool intersetInterval(const int min1, const int max1, const int min2, const int max2) noexcept
+constexpr bool intersetInterval(const int min1, const int max1,
+                                const int min2, const int max2) noexcept
 {
     return (min1 < min2) ? max1 > min2 : max2 > min1;
 }
@@ -162,7 +161,8 @@ Float euclide_square_distance(const LX_FloatPosition& p1,
 
 Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 {
-    return fbox(sqrtf(euclide_square_distance(p1, p2)));
+    Float tmp = euclide_square_distance(p1, p2);
+    return FloatMath::sqrt(tmp);
 }
 
 

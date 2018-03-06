@@ -233,10 +233,11 @@ public:
         if(!calculateCentroid_(centroid))
         {
             // self-intersecting polygon. The movement is less accurate
+            constexpr Float TWO{2.0f};
             const LX_FloatingBox& box = getEnclosingBox();
-            const float fw = static_cast<float>(box.w);
-            const float fh = static_cast<float>(box.h);
-            const LX_FloatPosition q{box.p.x + fw / 2.0f, box.p.y + fh / 2.0f};
+            const Float FW = fbox(box.w);
+            const Float FH = fbox(box.h);
+            const LX_FloatPosition q{box.p.x + fw / TWO, box.p.y + fh / TWO};
             _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
