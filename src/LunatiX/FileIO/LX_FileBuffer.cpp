@@ -50,7 +50,7 @@ class LX_FileBuffer_
 
 public:
 
-    explicit LX_FileBuffer_(const std::string& filename, uint32_t offset, uint32_t sz)
+    explicit LX_FileBuffer_(const std::string& filename, size_t offset, size_t sz)
         : _name(filename), _buffer(nullptr), _bufsize(0)
     {
         std::string str("LX_FileBuffer: " + _name + " - ");
@@ -62,7 +62,7 @@ public:
             throw IOException(str + "cannot get the size of the file");
 
         // If offset > size of the file → failure
-        if(static_cast<size_t>(offset) > fsize)
+        if(offset > fsize)
             throw IOException(str + "invalid offset: offset > size of the file");
 
         if(sz == 0)
@@ -122,12 +122,12 @@ void * LX_FileBuffer::getFontFromBuffer_(int size) const noexcept
 
 
 /** LX_Filebuffer — public functions */
-LX_FileBuffer::LX_FileBuffer(const std::string& filename, uint32_t offset,
-                             uint32_t sz)
+LX_FileBuffer::LX_FileBuffer(const std::string& filename, size_t offset,
+                             size_t sz)
     : _bimpl(new LX_FileBuffer_(filename, offset, sz)) {}
 
-LX_FileBuffer::LX_FileBuffer(const UTF8string& filename, uint32_t offset,
-                             uint32_t sz)
+LX_FileBuffer::LX_FileBuffer(const UTF8string& filename, size_t offset,
+                             size_t sz)
     : _bimpl(new LX_FileBuffer_(filename.utf8_sstring(), offset, sz)) {}
 
 
