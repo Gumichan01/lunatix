@@ -20,7 +20,7 @@ namespace LX_OpenGL
 template<typename T>
 T getProcAddress(const std::string proc) noexcept
 {
-    T t = (T) SDL_GL_GetProcAddress(proc.c_str());
+    T t = reinterpret_cast<T>(SDL_GL_GetProcAddress(proc.c_str()));
     return t;
 }
 

@@ -83,7 +83,7 @@ std::string getDate() noexcept
     strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", tmp);
     ss << getMillisTime() << "] ";
 
-    return std::string(datestr + ss.str());
+    return datestr + ss.str();
 }
 
 }   // namespace

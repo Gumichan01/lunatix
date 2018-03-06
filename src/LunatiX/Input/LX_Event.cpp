@@ -568,7 +568,7 @@ const LX_TextEvent LX_EventHandler::getTextEvent() const noexcept
     if(ev.type == SDL_TEXTINPUT)
     {
         const SDL_TextInputEvent ti = ev.text;
-        t = {ti.windowID, ti.text, 0, static_cast<size_t>(std::string(ti.text).length())};
+        t = {ti.windowID, ti.text, 0, std::string(ti.text).length()};
     }
     else
     {
