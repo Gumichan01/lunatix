@@ -33,6 +33,8 @@ namespace
 {
 
 constexpr double DEGREE_180 = 180.0;
+const LX_Graphics::LX_ImgRect RNULL{{0, 0}, 0, 0};
+const LX_Colour CNULL{0, 0, 0, 0};
 
 inline constexpr SDL_RendererFlip shortToFlip_(const LX_Graphics::LX_MIRROR& mirror) noexcept
 {
@@ -87,10 +89,6 @@ inline constexpr bool isNull_(const SDL_Rect& rect)
 
 namespace LX_Graphics
 {
-
-const LX_ImgRect rnull{{0, 0}, 0, 0};
-const LX_Colour cnull{0, 0, 0, 0};
-
 
 LX_ImageException::LX_ImageException(std::string err) : _string_error(err) {}
 
@@ -715,8 +713,8 @@ LX_StreamingTexture::~LX_StreamingTexture()
 
 LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, LX_PIXELFORMAT format)
-    : LX_Texture(w, format), _text(""), _font(font), _size(0), _colour(cnull),
-      _dimension(rnull)
+    : LX_Texture(w, format), _text(""), _font(font), _size(0), _colour(CNULL),
+      _dimension(RNULL)
 {
     _colour = _font.getColour_();
     _size = _font.getSize_();
@@ -743,7 +741,7 @@ LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
                                LX_TrueTypeFont::LX_Font& font,
                                LX_Win::LX_Window& w, LX_PIXELFORMAT format)
     : LX_Texture(w, format), _text(text), _font(font), _size(sz),
-      _colour(_font.getColour_()), _dimension(rnull)
+      _colour(_font.getColour_()), _dimension(RNULL)
 {
     _font.sizeOfText_(_text, _size, _dimension.w, _dimension.h);
 }
@@ -927,7 +925,7 @@ void LX_SolidTextTexture::updateTexture_() noexcept
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                      LX_PIXELFORMAT format)
-    : LX_TextTexture(font, w, format), _bgcolour(cnull) {}
+    : LX_TextTexture(font, w, format), _bgcolour(CNULL) {}
 
 
 LX_ShadedTextTexture::

@@ -375,6 +375,8 @@ class LX_BufferedImage
     friend class LX_Device::LX_Mouse;
     friend class LX_FileIO::LX_FileBuffer;
     friend class LX_Win::LX_Window;
+
+    static constexpr LX_ImgRect R{{0,0},0,0};
     SDL_Surface * _surface = nullptr;
     UTF8string _filename{""};
 
@@ -428,7 +430,7 @@ public:
     *   @exception LX_ImageException On failure
     */
     LX_Sprite * generateSprite(LX_Win::LX_Window& w,
-                               const LX_ImgRect& area = LX_ImgRect{{0,0},0,0}) const;
+                               const LX_ImgRect& area = R) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
     *                                   const std::vector<LX_ImgRect>& coord,
