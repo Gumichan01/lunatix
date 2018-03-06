@@ -32,14 +32,16 @@
 namespace
 {
 
-inline SDL_RendererFlip shortToFlip_(const LX_Graphics::LX_MIRROR& mirror) noexcept
+constexpr double DEGREE_180 = 180.0;
+
+inline constexpr SDL_RendererFlip shortToFlip_(const LX_Graphics::LX_MIRROR& mirror) noexcept
 {
     return static_cast<SDL_RendererFlip>(mirror);
 }
 
-inline double radianToDegree(const double angle) noexcept
+inline constexpr double radianToDegree(const double angle) noexcept
 {
-    return angle * 180 / M_PI;
+    return angle * DEGREE_180 / M_PI;
 }
 
 // Load a image from a file
@@ -71,12 +73,12 @@ SDL_Texture * loadTexture_(const std::string& filename,
     return tmp_t;
 }
 
-SDL_Rect sdl_rect_(const LX_Graphics::LX_ImgRect& imgr)
+inline constexpr SDL_Rect sdl_rect_(const LX_Graphics::LX_ImgRect& imgr)
 {
     return SDL_Rect{imgr.p.x, imgr.p.y, imgr.w, imgr.h};
 }
 
-inline bool isNull_(const SDL_Rect& rect)
+inline constexpr bool isNull_(const SDL_Rect& rect)
 {
     return rect.x == 0 && rect.y == 0 && rect.w == 0 && rect.h == 0;
 }
@@ -492,7 +494,6 @@ Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel) const noexcept
     const float GREEN_RATIO = 0.715160f;
     const float BLUE_RATIO  = 0.072169f;
 
-    Uint8 v = 0;
     Uint8 r = 0, g = 0, b = 0, a = 0;
 
     if(!_retrieveColours(pixel, r, g, b, a))
@@ -501,8 +502,7 @@ Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel) const noexcept
         return pixel;
     }
 
-    v = static_cast<Uint8>(RED_RATIO * FL(r) + GREEN_RATIO * FL(g) + BLUE_RATIO * FL(b));
-
+    Uint8 v = static_cast<Uint8>(RED_RATIO * FL(r) + GREEN_RATIO * FL(g) + BLUE_RATIO * FL(b));
     return _updateGrayscaleColour(a, v);
 }
 
