@@ -237,7 +237,7 @@ public:
             const LX_FloatingBox& box = getEnclosingBox();
             const Float FW = fbox(box.w);
             const Float FH = fbox(box.h);
-            const LX_FloatPosition q{box.p.x + fw / TWO, box.p.y + fh / TWO};
+            const LX_FloatPosition q{box.p.x + FW / TWO, box.p.y + FH / TWO};
             _move(LX_Vector2D{p.x - q.x, p.y - q.y});
         }
         else // Normal case.→ accurate movement
