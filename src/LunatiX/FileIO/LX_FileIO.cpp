@@ -123,7 +123,7 @@ public:
     size_t write(const std::string& str) noexcept
     {
         size_t len = str.size();
-        return write((void *)str.c_str(), sizeof(char), len);
+        return write(reinterpret_cast<const void *>(str.c_str()), sizeof(char), len);
     }
 
     bool seek(long offset, LX_FileWhence whence) noexcept
@@ -296,7 +296,7 @@ public:
     size_t write(const std::string& str) noexcept
     {
         size_t len = str.size();
-        return write((void *)str.c_str(), sizeof(char), len);
+        return write(reinterpret_cast<const void *>(str.c_str()), sizeof(char), len);
     }
 
     bool seek(long offset, LX_FileWhence whence) noexcept
