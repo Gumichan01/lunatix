@@ -53,8 +53,8 @@ unsigned long long _Prand::rand() noexcept
 
 float fxrand(float minf, float maxf) noexcept
 {
-    const float r = static_cast<float>(xrand<unsigned int>());
-    return ( (r / UF_MAX) + minf ) * maxf;
+    const float R = static_cast<float>(xrand<unsigned int>());
+    return ( (R / UF_MAX) + minf ) * maxf;
 }
 
 unsigned long long xorshiftRand() noexcept
