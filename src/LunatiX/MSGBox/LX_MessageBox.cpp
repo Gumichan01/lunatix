@@ -21,12 +21,27 @@
 #include <SDL2/SDL_messagebox.h>
 
 
+namespace
+{
+
+using namespace LX_MSGBox;
+
+inline constexpr touint(const LX_MsgType& type) noexcept
+{
+    return type == LX_MsgType::ERR ? SDL_MESSAGEBOX_ERROR :
+           type == LX_MsgType::WARN ? SDL_MESSAGEBOX_ERROR :
+           SDL_MESSAGEBOX_INFORMATION;
+
+}
+
+}
+
 namespace LX_MSGBox
 {
 
-bool showMSG(uint32_t flag, std::string title, std::string msg) noexcept
+void showMSG(LX_MsgType flag, std::string title, std::string msg) noexcept
 {
-    return SDL_ShowSimpleMessageBox(flag, title.c_str(), msg.c_str(), nullptr) == 0;
+    SDL_ShowSimpleMessageBox(touint(flag), title.c_str(), msg.c_str(), nullptr);
 }
 
 }

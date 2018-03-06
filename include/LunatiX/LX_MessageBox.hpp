@@ -29,14 +29,23 @@
 */
 namespace LX_MSGBox
 {
-const uint32_t LX_MSG_ERR  = 0x00000010;    /**< Error message          */
-const uint32_t LX_MSG_WARN = 0x00000020;    /**< Warning message        */
-const uint32_t LX_MSG_INFO = 0x00000040;    /**< Information message    */
 
 /**
-*   @fn bool showMSG(uint32_t flag, std::string title, std::string msg) noexcept
+*   @enum LX_MsgType
+*   @brief Type of message
 *
-*   Display a simple message box
+*/
+enum class LX_MsgType: unsigned int
+{
+    ERR,    /**< Error message          */
+    WARN,   /**< Warning message        */
+    INFO    /**< Information message    */
+};
+
+/**
+*   @fn void showMSG(uint32_t flag, std::string title, std::string msg) noexcept
+*
+*   Display a message box
 *
 *   @param [in] flag One of these following flags:
 *              - LX_MSG_ERR : Error megssage
@@ -44,10 +53,8 @@ const uint32_t LX_MSG_INFO = 0x00000040;    /**< Information message    */
 *              - LX_MSG_INFO : Information message
 *   @param [in] title The title of the box, UTF-8 format
 *   @param [in] msg The text to display in the box, UTF-8 format
-*
-*   @return TRUE on success, FALSE on error
 */
-bool showMSG(uint32_t flag, std::string title, std::string msg) noexcept;
+void showMSG(LX_MsgType flag, std::string title, std::string msg) noexcept;
 
 }
 
