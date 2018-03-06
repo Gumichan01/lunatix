@@ -71,6 +71,7 @@ bool fullscreenValidMode_(const LX_WinMode& mode)
 
 }
 
+
 SDL_BlendMode sdlBlend_(const LX_BlendMode& mode) noexcept
 {
     SDL_BlendMode m;
@@ -283,12 +284,14 @@ void LX_Window::drawLine(const LX_Graphics::LX_ImgCoord& p,
 
 void LX_Window::drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
 {
-    SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) p, count);
+    SDL_RenderDrawLines(_wimpl->_renderer,
+                        reinterpret_cast<const SDL_Point *>(p), count);
 }
 
 void LX_Window::drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept
 {
-    SDL_RenderDrawLines(_wimpl->_renderer,(const SDL_Point*) &vpoints[0],
+    SDL_RenderDrawLines(_wimpl->_renderer,
+                        reinterpret_cast<const SDL_Point*>(&vpoints[0]),
                         vpoints.size());
 }
 
