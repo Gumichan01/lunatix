@@ -44,12 +44,12 @@ inline constexpr uint32_t openglFlag() noexcept
     return static_cast<uint32_t>(LX_WinMode::SHOWN) | OPENGL_U;
 }
 
-inline uint32_t renderFlag(const LX_Win::LX_WindowInfo& info) noexcept
+inline constexpr uint32_t renderFlag(const LX_Win::LX_WindowInfo& info) noexcept
 {
     return info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
 }
 
-inline bool hasOpenGLsupport(const LX_Win::LX_WindowInfo& info) noexcept
+inline constexpr bool hasOpenGLsupport(const LX_Win::LX_WindowInfo& info) noexcept
 {
     return (info.flag & OPENGL_U) == OPENGL_U;
 }
@@ -67,7 +67,7 @@ uint32_t genFlags_(const LX_Config::LX_Configuration& config) noexcept
 bool fullscreenValidMode_(const LX_WinMode& mode)
 {
     return mode == LX_WinMode::FULLSCREEN || mode == LX_WinMode::NO_FULLSCREEN
-    || mode == LX_WinMode::FULLSCREEN_DESKTOP;
+           || mode == LX_WinMode::FULLSCREEN_DESKTOP;
 
 }
 
@@ -105,7 +105,7 @@ namespace LX_Win
 // Pixel depth (in bits)
 const int LX_ARGB_DEPTH = 32;
 
-const char * DEFAULT_TITLE = "LunatiX Demo";
+const std::string DEFAULT_TITLE("LunatiX Demo");
 const int DEFAULT_WIN_WIDTH = 640;
 const int DEFAULT_WIN_HEIGHT = 480;
 

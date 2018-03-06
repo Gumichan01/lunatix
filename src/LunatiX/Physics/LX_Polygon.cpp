@@ -30,17 +30,20 @@ using namespace FloatBox;
 namespace
 {
 
-inline Float sumx_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
+inline constexpr Float sumx_(const LX_Physics::LX_FloatPosition& p,
+                             const LX_Physics::LX_FloatPosition& q) noexcept
 {
     return p.x + q.x;
 }
 
-inline Float sumy_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
+inline constexpr Float sumy_(const LX_Physics::LX_FloatPosition& p,
+                             const LX_Physics::LX_FloatPosition& q) noexcept
 {
     return p.y + q.y;
 }
 
-inline Float cross_(const LX_Physics::LX_FloatPosition& p, const LX_Physics::LX_FloatPosition& q) noexcept
+inline constexpr Float cross_(const LX_Physics::LX_FloatPosition& p,
+                              const LX_Physics::LX_FloatPosition& q) noexcept
 {
     return p.x * q.y - p.y * q.x;
 }
