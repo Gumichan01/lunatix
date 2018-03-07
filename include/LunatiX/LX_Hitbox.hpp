@@ -50,7 +50,7 @@ struct LX_FloatPosition
 */
 struct LX_FloatingBox
 {
-    LX_FloatPosition p;    /**< Position   */
+    LX_FloatPosition p;         /**< Position   */
     int w;                      /**< Width      */
     int h;                      /**< Height     */
 };
