@@ -162,7 +162,7 @@ public:
     /**
     *   @fn bool play(bool infinite_loop) noexcept
     *   Play the music
-    *   @param inifinite_loop true for inifinite loop, false otherwise
+    *   @param infinite_loop true for inifinite loop, false otherwise
     *   @return TRUE on success, FALSE otherwise
     */
     bool play(bool infinite_loop) noexcept;
