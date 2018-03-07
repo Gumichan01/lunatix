@@ -26,7 +26,7 @@ namespace
 
 using namespace LX_MSGBox;
 
-inline constexpr touint(const LX_MsgType& type) noexcept
+inline constexpr uint32_t touint(const LX_MsgType& type) noexcept
 {
     return type == LX_MsgType::ERR ? SDL_MESSAGEBOX_ERROR :
            type == LX_MsgType::WARN ? SDL_MESSAGEBOX_ERROR :
