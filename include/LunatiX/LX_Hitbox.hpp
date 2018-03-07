@@ -63,11 +63,11 @@ struct LX_FloatingBox
 */
 LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept;
 /**
-*   @fn LX_FloatingBox toFloatPosition(const LX_Graphics::LX_ImgRect& rect) noexcept
+*   @fn LX_FloatingBox totoFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
 *   @param rect
-*   @return The float position
+*   @return The floating box
 */
-LX_FloatingBox toFloatPosition(const LX_Graphics::LX_ImgRect& rect) noexcept;
+LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept;
 
 /**
 *   @struct LX_Segment

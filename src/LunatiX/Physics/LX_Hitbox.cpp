@@ -27,12 +27,11 @@ namespace LX_Physics
 
 LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
 {
-    /// @todo integrate new version of Float
     return LX_FloatPosition{fbox(coord.x), fbox(coord.y)};
 }
 
 
-LX_FloatingBox toFloatPosition(const LX_Graphics::LX_ImgRect& rect) noexcept
+LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
 {
     return LX_FloatingBox{toFloatPosition(rect.p), rect.w, rect.h};
 }
