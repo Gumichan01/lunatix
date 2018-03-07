@@ -57,8 +57,6 @@ class LX_Font;
 namespace LX_Graphics
 {
 
-struct LX_ImgRect;
-
 enum class LX_MIRROR : short
 {
     /// Flag to define no mirror while drawing a texture
@@ -68,6 +66,9 @@ enum class LX_MIRROR : short
     /// Flag to define vertical mirror while drawing a texture
     VERTICAL   = 2,
 };
+
+/// Not supposed to be used
+static constexpr LX_ImgRect RNULL = {{0,0},0,0};
 
 /**
 *   @class LX_ImageException
@@ -376,7 +377,6 @@ class LX_BufferedImage
     friend class LX_FileIO::LX_FileBuffer;
     friend class LX_Win::LX_Window;
 
-    static constexpr LX_ImgRect R{{0,0},0,0};
     SDL_Surface * _surface = nullptr;
     UTF8string _filename{""};
 
@@ -430,7 +430,7 @@ public:
     *   @exception LX_ImageException On failure
     */
     LX_Sprite * generateSprite(LX_Win::LX_Window& w,
-                               const LX_ImgRect& area = R) const;
+                               const LX_ImgRect& area = RNULL) const;
     /**
     *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
     *                                   const std::vector<LX_ImgRect>& coord,
