@@ -4,6 +4,7 @@
 
 using namespace std;
 using namespace LX_Event;
+using namespace FloatBox;
 
 using namespace LX_Graphics;
 using namespace LX_TrueTypeFont;
@@ -41,8 +42,8 @@ public:
 
         for(int i = 0; i < N; i++)
         {
-            LX_FloatingBox hitbox{LX_FloatPosition{box.fpoint.x - fbox(5.0f) + fbox(rand()%25),
-                                                   box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
+            LX_FloatingBox hitbox{LX_FloatPosition{box.p.x - fbox(5.0f) + fbox(rand()%25),
+                                                   box.p.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
@@ -75,8 +76,8 @@ public:
 
         for(int i = 0; i < N; i++)
         {
-            LX_FloatingBox hitbox{LX_FloatPosition{box.fpoint.x - fbox(5.0f) + fbox(rand()%25),
-                                                   box.fpoint.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
+            LX_FloatingBox hitbox{LX_FloatPosition{box.p.x - fbox(5.0f) + fbox(rand()%25),
+                                                   box.p.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
