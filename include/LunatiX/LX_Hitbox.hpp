@@ -63,7 +63,7 @@ struct LX_FloatingBox
 */
 LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept;
 /**
-*   @fn LX_FloatingBox totoFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
+*   @fn LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
 *   @param rect
 *   @return The floating box
 */
