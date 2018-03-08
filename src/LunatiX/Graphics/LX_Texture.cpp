@@ -48,7 +48,7 @@ inline constexpr double radianToDegree(const double angle) noexcept
 
 // Load a image from a file
 SDL_Surface * loadSurface_(const std::string& filename,
-                           LX_Graphics::LX_PIXELFORMAT& format) noexcept
+                           LX_Graphics::LX_PixelFormat& format) noexcept
 {
     SDL_Surface *loaded = IMG_Load(filename.c_str());
 
@@ -62,7 +62,7 @@ SDL_Surface * loadSurface_(const std::string& filename,
 
 // Load a texture from a file
 SDL_Texture * loadTexture_(const std::string& filename,
-                           LX_Graphics::LX_PIXELFORMAT& format,
+                           LX_Graphics::LX_PixelFormat& format,
                            SDL_Renderer *r) noexcept
 {
     SDL_Surface *tmp_s = loadSurface_(filename, format);
@@ -104,16 +104,16 @@ const char * LX_ImageException::what() const noexcept
 /** LX_Texture */
 
 //  protected zero-argument constructor
-LX_Texture::LX_Texture(LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+LX_Texture::LX_Texture(LX_Win::LX_Window& w, LX_PixelFormat format)
     : _texture(nullptr), _win(w), _format(format) {}
 
 
-LX_Texture::LX_Texture(SDL_Texture *t, LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+LX_Texture::LX_Texture(SDL_Texture *t, LX_Win::LX_Window& w, LX_PixelFormat format)
     : _texture(t), _win(w), _format(format) {}
 
 
 LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
-                       LX_PIXELFORMAT format)
+                       LX_PixelFormat format)
     : _texture(nullptr), _win(w), _format(format)
 {
     _texture = loadTexture_(filename, format, RENDER(w.getRenderingSys()));
@@ -124,7 +124,7 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
 
 
 LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
-                       LX_PIXELFORMAT format)
+                       LX_PixelFormat format)
     : LX_Texture(filename.utf8_sstring(), w, format) {}
 
 bool LX_Texture::bind(float *iw, float *ih) noexcept
@@ -143,7 +143,7 @@ LX_Win::LX_Window& LX_Texture::getWindow() const noexcept
     return _win;
 }
 
-LX_PIXELFORMAT LX_Texture::getFormat() const noexcept
+LX_PixelFormat LX_Texture::getFormat() const noexcept
 {
     return _format;
 }
@@ -161,24 +161,24 @@ LX_Texture::~LX_Texture()
 // protected constructor
 LX_Sprite::LX_Sprite(SDL_Texture *t, LX_Win::LX_Window& w,
                      const UTF8string& filename,
-                     const LX_ImgRect& img_rect, LX_PIXELFORMAT format)
+                     const LX_ImgRect& img_rect, LX_PixelFormat format)
     : LX_Texture(t, w, format), _img_rect(img_rect), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-                     LX_PIXELFORMAT format)
+                     LX_PixelFormat format)
     : LX_Texture(filename, w, format), _img_rect(), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const std::string& filename, LX_Win::LX_Window& w,
-                     const LX_ImgRect& img_rect, LX_PIXELFORMAT format)
+                     const LX_ImgRect& img_rect, LX_PixelFormat format)
     : LX_Texture(filename, w, format), _img_rect(img_rect),
       _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                     LX_PIXELFORMAT format)
+                     LX_PixelFormat format)
     : LX_Texture(filename, w, format), _img_rect(), _filename(filename) {}
 
 LX_Sprite::LX_Sprite(const UTF8string& filename, LX_Win::LX_Window& w,
-                     const LX_ImgRect& img_rect, LX_PIXELFORMAT format)
+                     const LX_ImgRect& img_rect, LX_PixelFormat format)
     : LX_Texture(filename, w, format), _img_rect(img_rect),
       _filename(filename) {}
 
@@ -223,7 +223,7 @@ UTF8string LX_Sprite::getFileName() noexcept
 LX_AnimatedSprite::LX_AnimatedSprite(SDL_Texture *t, LX_Win::LX_Window& w,
                                      const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
-                                     const UTF8string& filename, LX_PIXELFORMAT format)
+                                     const UTF8string& filename, LX_PixelFormat format)
     : LX_Sprite(t, w, filename, LX_ImgRect{0,0,0,0}, format),
       _coordinates(coord), _SZ(coord.size()), _delay(delay), _btime(0),
       _frame(0), _started(false), _loop(loop), _drawable(true) {}
@@ -233,14 +233,14 @@ LX_AnimatedSprite::LX_AnimatedSprite(const std::string& filename,
                                      LX_Win::LX_Window& w,
                                      const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
-                                     LX_PIXELFORMAT format)
+                                     LX_PixelFormat format)
     : LX_AnimatedSprite(UTF8string(filename), w, coord, delay, loop, format) {}
 
 
 LX_AnimatedSprite::LX_AnimatedSprite(const UTF8string& filename, LX_Win::LX_Window& w,
                                      const std::vector<LX_ImgRect>& coord,
                                      const uint32_t delay, bool loop,
-                                     LX_PIXELFORMAT format)
+                                     LX_PixelFormat format)
     : LX_Sprite(filename, w, format), _coordinates(coord),
       _SZ(coord.size()), _delay(delay), _btime(0), _frame(0),
       _started(false), _loop(loop), _drawable(true) {}
@@ -311,12 +311,12 @@ bool LX_AnimatedSprite::isInfinitelyLooped() const noexcept
 
 /** LX_BufferedImage */
 
-LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, LX_PIXELFORMAT format)
+LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, LX_PixelFormat format)
     : LX_BufferedImage(s, "", format) {}
 
 
 LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string& filename,
-                                   LX_PIXELFORMAT format)
+                                   LX_PixelFormat format)
     : _surface(s), _filename(filename)
 {
     uint32_t tmpf = U32(format);
@@ -329,7 +329,7 @@ LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string& filename,
 }
 
 
-LX_BufferedImage::LX_BufferedImage(const std::string& filename, LX_PIXELFORMAT format)
+LX_BufferedImage::LX_BufferedImage(const std::string& filename, LX_PixelFormat format)
     : _surface(nullptr), _filename(filename)
 {
     _surface = loadSurface_(filename, format);
@@ -339,82 +339,82 @@ LX_BufferedImage::LX_BufferedImage(const std::string& filename, LX_PIXELFORMAT f
 }
 
 
-LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, LX_PIXELFORMAT format)
+LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, LX_PixelFormat format)
     : LX_BufferedImage(filename.utf8_sstring(), format) {}
 
 
 bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
                                         Uint8& b, Uint8& a) const noexcept
 {
-    LX_PIXELFORMAT fmt = static_cast<LX_PIXELFORMAT>(_surface->format->format);
+    LX_PixelFormat fmt = static_cast<LX_PixelFormat>(_surface->format->format);
 
     switch(fmt)
     {
-    case LX_PIXELFORMAT::RGBA8888:
+    case LX_PixelFormat::RGBA8888:
         r = (pixel >> 24) & 0xFF;
         g = (pixel >> 16) & 0xFF;
         b = (pixel >> 8) & 0xFF;
         a = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::ARGB8888:
+    case LX_PixelFormat::ARGB8888:
         a = (pixel >> 24) & 0xFF;
         r = (pixel >> 16) & 0xFF;
         g = (pixel >> 8) & 0xFF;
         b = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::BGRA8888:
+    case LX_PixelFormat::BGRA8888:
         b = (pixel >> 24) & 0xFF;
         g = (pixel >> 16) & 0xFF;
         r = (pixel >> 8) & 0xFF;
         a = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::ABGR8888:
+    case LX_PixelFormat::ABGR8888:
         a = (pixel >> 24) & 0xFF;
         b = (pixel >> 16) & 0xFF;
         g = (pixel >> 8) & 0xFF;
         r = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::RGBA4444:
+    case LX_PixelFormat::RGBA4444:
         r = (pixel >> 12) & 0xFF;
         g = (pixel >> 8) & 0xFF;
         b = (pixel >> 4) & 0xFF;
         a = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::ARGB4444:
+    case LX_PixelFormat::ARGB4444:
         a = (pixel >> 12) & 0xFF;
         r = (pixel >> 8) & 0xFF;
         g = (pixel >> 4) & 0xFF;
         b = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::BGRA4444:
+    case LX_PixelFormat::BGRA4444:
         b = (pixel >> 12) & 0xFF;
         g = (pixel >> 8) & 0xFF;
         r = (pixel >> 4) & 0xFF;
         a = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::ABGR4444:
+    case LX_PixelFormat::ABGR4444:
         a = (pixel >> 12) & 0xFF;
         b = (pixel >> 8) & 0xFF;
         g = (pixel >> 4) & 0xFF;
         r = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::RGB24:
-    case LX_PIXELFORMAT::RGB888:
+    case LX_PixelFormat::RGB24:
+    case LX_PixelFormat::RGB888:
         r = (pixel >> 16) & 0xFF;
         g = (pixel >> 8) & 0xFF;
         b = pixel & 0xFF;
         break;
 
-    case LX_PIXELFORMAT::BGR24:
-    case LX_PIXELFORMAT::BGR888:
+    case LX_PixelFormat::BGR24:
+    case LX_PixelFormat::BGR888:
         b = (pixel >> 12) & 0xFF;
         g = (pixel >> 8) & 0xFF;
         r = (pixel >> 4) & 0xFF;
@@ -432,46 +432,46 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
 Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) const noexcept
 {
     Uint32 npixel = 0;
-    LX_PIXELFORMAT fmt = static_cast<LX_PIXELFORMAT>(_surface->format->format);
+    LX_PixelFormat fmt = static_cast<LX_PixelFormat>(_surface->format->format);
 
     switch(fmt)
     {
-    case LX_PIXELFORMAT::RGBA8888:
+    case LX_PixelFormat::RGBA8888:
         npixel = (v << 24) | (v << 16) | (v << 8) | a;
         break;
 
-    case LX_PIXELFORMAT::ARGB8888:
+    case LX_PixelFormat::ARGB8888:
         npixel = (a << 24) | (v << 16) | (v << 8) | v;
         break;
 
-    case LX_PIXELFORMAT::BGRA8888:
+    case LX_PixelFormat::BGRA8888:
         npixel = (v << 24) | (v << 16) | (v << 8) | a;
         break;
 
-    case LX_PIXELFORMAT::ABGR8888:
+    case LX_PixelFormat::ABGR8888:
         npixel = (a << 24) | (v << 16) | (v << 8) | v;
         break;
 
-    case LX_PIXELFORMAT::RGBA4444:
+    case LX_PixelFormat::RGBA4444:
         npixel = (v << 12) | (v << 8) | (v << 4) | a;
         break;
 
-    case LX_PIXELFORMAT::ARGB4444:
+    case LX_PixelFormat::ARGB4444:
         npixel = (a << 12) | (v << 8) | (v << 4) | v;
         break;
 
-    case LX_PIXELFORMAT::BGRA4444:
+    case LX_PixelFormat::BGRA4444:
         npixel = (v << 12) | (v << 8) | (v << 4) | a;
         break;
 
-    case LX_PIXELFORMAT::ABGR4444:
+    case LX_PixelFormat::ABGR4444:
         npixel = (a << 12) | (v << 8) | (v << 4) | v;
         break;
 
-    case LX_PIXELFORMAT::BGR24:
-    case LX_PIXELFORMAT::RGB24:
-    case LX_PIXELFORMAT::BGR888:
-    case LX_PIXELFORMAT::RGB888:
+    case LX_PixelFormat::BGR24:
+    case LX_PixelFormat::RGB24:
+    case LX_PixelFormat::BGR888:
+    case LX_PixelFormat::RGB888:
         npixel = (v << 16) | (v << 8) | v;
         break;
 
@@ -508,49 +508,49 @@ Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel) const noexcept
 Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const noexcept
 {
     Uint32 npixel = 0;
-    LX_PIXELFORMAT fmt = static_cast<LX_PIXELFORMAT>(_surface->format->format);
+    LX_PixelFormat fmt = static_cast<LX_PixelFormat>(_surface->format->format);
 
     switch(fmt)
     {
-    case LX_PIXELFORMAT::RGBA8888:
+    case LX_PixelFormat::RGBA8888:
         npixel = (r << 24) | (g << 16) | (b << 8) | a;
         break;
 
-    case LX_PIXELFORMAT::ARGB8888:
+    case LX_PixelFormat::ARGB8888:
         npixel = (a << 24) | (r << 16) | (g << 8) | b;
         break;
 
-    case LX_PIXELFORMAT::BGRA8888:
+    case LX_PixelFormat::BGRA8888:
         npixel = (b << 24) | (g << 16) | (r << 8) | a;
         break;
 
-    case LX_PIXELFORMAT::ABGR8888:
+    case LX_PixelFormat::ABGR8888:
         npixel = (a << 24) | (b << 16) | (g << 8) | r;
         break;
 
-    case LX_PIXELFORMAT::RGBA4444:
+    case LX_PixelFormat::RGBA4444:
         npixel = (r << 12) | (g << 8) | (b << 4) | a;
         break;
 
-    case LX_PIXELFORMAT::ARGB4444:
+    case LX_PixelFormat::ARGB4444:
         npixel = (a << 12) | (r << 8) | (g << 4) | b;
         break;
 
-    case LX_PIXELFORMAT::BGRA4444:
+    case LX_PixelFormat::BGRA4444:
         npixel = (b << 12) | (g << 8) | (r << 4) | a;
         break;
 
-    case LX_PIXELFORMAT::ABGR4444:
+    case LX_PixelFormat::ABGR4444:
         npixel = (a << 12) | (b << 8) | (g << 4) | r;
         break;
 
-    case LX_PIXELFORMAT::BGR24:
-    case LX_PIXELFORMAT::BGR888:
+    case LX_PixelFormat::BGR24:
+    case LX_PixelFormat::BGR888:
         npixel = (b << 16) | (g << 8) | r;
         break;
 
-    case LX_PIXELFORMAT::RGB24:
-    case LX_PIXELFORMAT::RGB888:
+    case LX_PixelFormat::RGB24:
+    case LX_PixelFormat::RGB888:
         npixel = (r << 16) | (g << 8) | b;
         break;
 
@@ -639,7 +639,7 @@ LX_BufferedImage::~LX_BufferedImage()
 
 /** LX_StreamingTexture */
 
-LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_Texture(w,format), _screen(nullptr), _update(false)
 {
     int bpp, width, height;
@@ -648,7 +648,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PIXELFORMAT fo
     if(SDL_PixelFormatEnumToMasks(U32(_format), &bpp, &r, &g, &b, &a) != SDL_TRUE)
     {
         SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_RGBA8888, &bpp, &r, &g, &b, &a);
-        _format = LX_PIXELFORMAT::RGBA8888;
+        _format = LX_PixelFormat::RGBA8888;
     }
 
     LX_Win::LX_WindowInfo info;
@@ -712,7 +712,7 @@ LX_StreamingTexture::~LX_StreamingTexture()
 /** LX_TextTexture */
 
 LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
-                               LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                               LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_Texture(w, format), _text(""), _font(font), _size(0), _colour(CNULL),
       _dimension(RNULL)
 {
@@ -722,24 +722,24 @@ LX_TextTexture::LX_TextTexture(LX_TrueTypeFont::LX_Font& font,
 
 
 LX_TextTexture::LX_TextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
-                               LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                               LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_TextTexture(UTF8string(text), font.getSize_(), font, w, format) {}
 
 
 LX_TextTexture::LX_TextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
-                               LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                               LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_TextTexture(text, font.getSize_(), font, w, format) {}
 
 
 LX_TextTexture::LX_TextTexture(const std::string& text, unsigned int sz,
                                LX_TrueTypeFont::LX_Font& font,
-                               LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                               LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_TextTexture(UTF8string(text), sz, font, w, format) {}
 
 
 LX_TextTexture::LX_TextTexture(const UTF8string& text, unsigned int sz,
                                LX_TrueTypeFont::LX_Font& font,
-                               LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                               LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_Texture(w, format), _text(text), _font(font), _size(sz),
       _colour(_font.getColour_()), _dimension(RNULL)
 {
@@ -869,33 +869,33 @@ LX_TextTexture::~LX_TextTexture() {}
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                    LX_PIXELFORMAT format)
+                    LX_PixelFormat format)
     : LX_TextTexture(font, w, format) {}
 
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
-                    LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                    LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_SolidTextTexture(UTF8string(text), font, w, format) {}
 
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
-                    LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                    LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_SolidTextTexture(text, font.getSize_(), font, w, format) {}
 
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const std::string& text, unsigned int sz,
                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                    LX_PIXELFORMAT format)
+                    LX_PixelFormat format)
     : LX_SolidTextTexture(UTF8string(text), sz, font, w, format) {}
 
 
 LX_SolidTextTexture::
 LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
                     LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                    LX_PIXELFORMAT format)
+                    LX_PixelFormat format)
     : LX_TextTexture(text, sz, font, w, format)
 {
     _texture = _font.drawSolidText_(_text, _size, _win);
@@ -924,33 +924,33 @@ void LX_SolidTextTexture::updateTexture_() noexcept
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                     LX_PIXELFORMAT format)
+                     LX_PixelFormat format)
     : LX_TextTexture(font, w, format), _bgcolour(CNULL) {}
 
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
-                     const LX_Colour& bg, LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                     const LX_Colour& bg, LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_ShadedTextTexture(UTF8string(text), font, bg, w, format) {}
 
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
-                     const LX_Colour& bg, LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                     const LX_Colour& bg, LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_ShadedTextTexture(text, font.getSize_(), font, bg, w,format) {}
 
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(const std::string& text, unsigned int sz,
                      LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
-                     LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                     LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_ShadedTextTexture(UTF8string(text), sz, font, bg, w, format) {}
 
 
 LX_ShadedTextTexture::
 LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
                      LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
-                     LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                     LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_TextTexture(text, sz, font, w, format), _bgcolour(bg)
 {
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
@@ -989,33 +989,33 @@ void LX_ShadedTextTexture::setBgColour(const LX_Colour& bg) noexcept
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                      LX_PIXELFORMAT format)
+                      LX_PixelFormat format)
     : LX_TextTexture(font, w, format) {}
 
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const std::string& text, LX_TrueTypeFont::LX_Font& font,
-                      LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                      LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_BlendedTextTexture(UTF8string(text), font, w, format) {}
 
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
-                      LX_Win::LX_Window& w, LX_PIXELFORMAT format)
+                      LX_Win::LX_Window& w, LX_PixelFormat format)
     : LX_BlendedTextTexture(text, font.getSize_(), font, w, format) {}
 
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const std::string& text, unsigned int sz,
                       LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                      LX_PIXELFORMAT format)
+                      LX_PixelFormat format)
     : LX_BlendedTextTexture(UTF8string(text), sz, font, w, format) {}
 
 
 LX_BlendedTextTexture::
 LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
                       LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
-                      LX_PIXELFORMAT format)
+                      LX_PixelFormat format)
     : LX_TextTexture(text, sz, font, w, format)
 {
     _texture = _font.drawBlendedText_(_text, _size, _win);

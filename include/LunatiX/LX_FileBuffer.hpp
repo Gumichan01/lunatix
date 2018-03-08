@@ -107,7 +107,7 @@ public:
     explicit LX_FileBuffer(const UTF8string& filename, size_t offset = 0, size_t sz = 0);
 
     /**
-    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const
+    *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PixelFormat format = LX_Graphics::LX_PixelFormat::RGBA8888) const
     *
     *   @param [in] format Optional argument that specified the format of the image
     *
@@ -115,7 +115,7 @@ public:
     *
     *   @exception LX_Graphics::LX_ImageException if the buffered image cannot be created
     */
-    LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PIXELFORMAT format = LX_Graphics::LX_PIXELFORMAT::RGBA8888) const;
+    LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PixelFormat format = LX_Graphics::LX_PixelFormat::RGBA8888) const;
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
     *
