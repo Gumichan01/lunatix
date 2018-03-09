@@ -27,7 +27,6 @@
 
 
 using namespace FloatBox;
-/// @todo code review physics
 
 namespace
 {
@@ -144,7 +143,7 @@ bool intersectSeg_(const LX_Physics::LX_FloatPosition& A,
     LX_Physics::LX_Vector2D AC{C.x - A.x, C.y - A.y};
     LX_Physics::LX_Vector2D AD{D.x - A.x, D.y - A.y};
 
-    return (vector_product(AB, AD) * vector_product(AB, AC)) <= Float{0.0f};
+    return (vector_product(AB, AD) * vector_product(AB, AC)) <= FNIL;
 }
 
 }
@@ -161,8 +160,7 @@ Float euclide_square_distance(const LX_FloatPosition& p1,
 
 Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) noexcept
 {
-    Float tmp = euclide_square_distance(p1, p2);
-    return FloatMath::sqrt(tmp);
+    return FloatMath::sqrt(euclide_square_distance(p1, p2));
 }
 
 
@@ -190,23 +188,21 @@ bool collisionBox(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noex
 
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept
 {
-    const unsigned int sum_radius = circle1.radius + circle2.radius;
-    const Float d = fbox(sum_radius * sum_radius);
-
-    return (euclide_square_distance(circle1.center, circle2.center) <= d);
+    const unsigned int SUM_RADIUS = circle1.radius + circle2.radius;
+    return euclide_square_distance(circle1.center,
+                                   circle2.center) <= fbox(SUM_RADIUS * SUM_RADIUS);
 }
 
 
 bool collisionSegCircle(const LX_Circle& circle, const LX_Segment& S) noexcept
 {
-    return collisionLineCircle(circle, LX_Line{S.p,
-                               LX_Vector2D{ S.q.x - S.p.x,
-                                            S.q.y - S.p.y } });
+    const LX_Vector2D V{ S.q.x - S.p.x, S.q.y - S.p.y };
+    return collisionLineCircle(circle, LX_Line{ S.p, V });
 }
 
 bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
 {
-    const LX_FloatPosition& A = L.o;
+    const LX_FloatPosition A = L.o;
     const LX_FloatPosition B{L.o.x + L.v.vx, L.o.y + L.v.vy};
 
     if(collisionPointCircle(A, circle) || collisionPointCircle(B, circle))
@@ -230,9 +226,9 @@ bool collisionLineCircle(const LX_Circle& circle, const LX_Line& L) noexcept
     if(scalp == FNIL)        // A and B are the same point
         return false;
 
-    Float t = scal_ab_ao / scalp;
-    Float x = A.x + (t * AB.vx);
-    Float y = A.y + (t * AB.vy);
+    const Float& T = scal_ab_ao / scalp;
+    const Float& x = A.x + (T * AB.vx);
+    const Float& y = A.y + (T * AB.vy);
 
     // Ok I can calculate the collision by using ↓ the projection point
     return collisionPointCircle(LX_FloatPosition{x, y}, circle);
@@ -287,8 +283,8 @@ bool collisionPointPoly(const LX_FloatPosition& P, const LX_Polygon& poly)
 {
     const int v = 10000;
     const unsigned long N = poly.numberOfEdges();
-    const float RIX = LX_Random::fxrand(0.0f, 100.0f);//PFL(LX_Random::crand100());
-    const float RIY = LX_Random::fxrand(0.0f, 100.0f);//PFL(LX_Random::crand100());
+    const float RIX = LX_Random::fxrand(0.0f, 100.0f);
+    const float RIY = LX_Random::fxrand(0.0f, 100.0f);
 
     LX_FloatPosition I{v + RIX, v + RIY};
     unsigned long nb_intersections = 0;
@@ -333,10 +329,10 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 bool collisionBoxPoly(const LX_FloatingBox& box, const LX_Polygon& poly)
 {
     const unsigned long n = poly.numberOfEdges();
-    const LX_FloatPosition A{box.p.x, box.p.y};
-    const LX_FloatPosition B{box.p.x + box.w, box.p.y};
-    const LX_FloatPosition C{box.p.x + box.w, box.p.y + box.h};
-    const LX_FloatPosition D{box.p.x, box.p.y + box.h};
+    const LX_FloatPosition A = box.p;
+    const LX_FloatPosition B = {box.p.x + box.w, box.p.y};
+    const LX_FloatPosition C = {box.p.x + box.w, box.p.y + box.h};
+    const LX_FloatPosition D = {box.p.x, box.p.y + box.h};
 
     for(unsigned long j = 0UL; j < n; ++j)
     {
@@ -366,7 +362,8 @@ bool collisionPoly(const LX_Polygon& poly1, const LX_Polygon& poly2)
     const unsigned long M = poly2.numberOfEdges();
 
     if(N < NUM_SIDES || M < NUM_SIDES)
-        throw std::invalid_argument("The polygons must have at least 3 sides to calculate the collision");
+        throw std::invalid_argument("The polygons must have at least "
+                                    "3 sides to calculate the collision");
 
     // Detect the collision by using the AABB of the polygons -> O(n)
     if(!approximativeCollisionPoly(poly1, poly2))

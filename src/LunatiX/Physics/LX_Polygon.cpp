@@ -25,7 +25,6 @@
 using namespace std;
 using namespace FloatBox;
 
-/// @todo code review polygon
 
 namespace
 {
@@ -80,7 +79,7 @@ class LX_Polygon_
 
     Float area_() const noexcept
     {
-        Float sum{0.0f};
+        Float sum = FNIL;
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
 
@@ -97,9 +96,9 @@ class LX_Polygon_
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
         const Float p6_area = CMULT * area_();
-        Float sum_x{0.0f}, sum_y{0.0f};
+        Float sum_x = FNIL, sum_y = FNIL;
 
-        if(p6_area <= 0.0f) // self-intersecting polygon
+        if(p6_area <= FNIL) // self-intersecting polygon
             return false;
 
         for(auto it = pbeg; it != pend; ++it)
@@ -123,7 +122,6 @@ public:
         float sign = 0.0f;
         bool have_sign = false;
 
-        const Float FNULL{0.0f};
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
 
@@ -140,9 +138,9 @@ public:
 
             if(!have_sign)
             {
-                if(cross_product > FNULL)
+                if(cross_product > FNIL)
                     sign = 1.0f;
-                else if(cross_product < FNULL)
+                else if(cross_product < FNIL)
                     sign = -1.0f;
                 else
                 {
@@ -154,8 +152,8 @@ public:
             }
             else
             {
-                if((sign > 0.0f && cross_product < FNULL)
-                        || (sign < 0.0f && cross_product > FNULL))
+                if((sign > 0.0f && cross_product < FNIL)
+                        || (sign < 0.0f && cross_product > FNIL))
                 {
                     _convex = false;
                     return;
