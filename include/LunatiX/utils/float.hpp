@@ -12,7 +12,9 @@
 #ifndef FLOAT_HPP
 #define FLOAT_HPP
 
+#include <cmath>
 #include <type_traits>
+
 
 struct Float
 {
@@ -88,30 +90,92 @@ bool operator !=(const Float& x, const Float& y) noexcept;
 namespace FloatMath
 {
 
-Float& abs(Float& f) noexcept;
+inline constexpr Float abs(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::abs(f.v));
+}
 
-Float& acos(Float& f) noexcept;
-Float& asin(Float& f) noexcept;
-Float& atan(Float& f) noexcept;
+inline constexpr Float acos(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::acos(f.v));
+}
 
-Float& cos(Float& f) noexcept;
-Float& cosh(Float& f) noexcept;
+inline constexpr Float asin(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::asin(f.v));
+}
 
-Float& sin(Float& f) noexcept;
-Float& sinh(Float& f) noexcept;
+inline constexpr Float atan(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::atan(f.v));
+}
 
-Float& tan(Float& f) noexcept;
-Float& tanh(Float& f) noexcept;
+inline constexpr Float ceil(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::ceil(f.v));
+}
 
-Float& ceil(Float& f) noexcept;
-Float& floor(Float& f) noexcept;
+inline constexpr Float cos(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::cos(f.v));
+}
 
-Float& exp(Float& f) noexcept;
-Float& log(Float& f) noexcept;
-Float& log10(Float& f) noexcept;
+inline constexpr Float cosh(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::cosh(f.v));
+}
 
-Float& pow(Float& f) noexcept;
-Float& sqrt(Float& f) noexcept;
+inline constexpr Float exp(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::exp(f.v));
+}
+
+
+inline constexpr Float floor(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::floor(f.v));
+}
+
+
+inline constexpr Float log(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::log(f.v));
+}
+
+inline constexpr Float log10(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::log10(f.v));
+}
+
+inline constexpr Float pow(Float& f, const Float& p) noexcept
+{
+    return FloatBox::fbox(std::pow(f.v, p.v));
+}
+
+inline constexpr Float sin(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::sin(f.v));
+}
+
+inline constexpr Float sinh(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::sinh(f.v));
+}
+
+inline constexpr Float sqrt(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::sqrt(f.v));
+}
+
+inline constexpr Float tan(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::tan(f.v));
+}
+
+inline constexpr Float tanh(const Float& f) noexcept
+{
+    return FloatBox::fbox(std::tanh(f.v));
+}
 
 }
 
