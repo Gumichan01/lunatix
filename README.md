@@ -59,7 +59,7 @@ int main(int argc, char** argv)
         {
             switch(ev.getEventType())
             {
-            case LX_EventType::LX_QUIT:
+            case LX_EventType::QUIT:
                 go = false;
                 break;
             default:
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
         }
 
         w.clearWindow();
-        sprite.draw(&position);
+        sprite.draw(position);
         w.update();
         LX_Timer::delay(33);
     }
