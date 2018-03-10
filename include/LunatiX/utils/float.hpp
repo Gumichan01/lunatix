@@ -12,6 +12,12 @@
 #ifndef FLOAT_HPP
 #define FLOAT_HPP
 
+/**
+*   @file float.hpp
+*   @brief The header file of Float, a simple object wrapper of floating-point values
+*   @author Luxon Jean-Pierre(Gumichan01)
+*/
+
 #include <cmath>
 #include <type_traits>
 
@@ -19,10 +25,15 @@
 struct Float
 {
     float v;
-    /// Unboxing ≡ static_cast<float>(Float)
+    // Unboxing ≡ static_cast<float>(Float)
     operator float() const noexcept;
 };
 
+/**
+*   @ingroup Utils
+*   @namespace FloatBox
+*   @brief Boxing
+*/
 namespace FloatBox
 {
 
@@ -30,21 +41,39 @@ template <typename N>
 using Ftype = typename std::enable_if< std::is_arithmetic<N>::value &&
               !std::is_same<N,float>::value >::type;
 
-/// Boxing
+/**
+*   @fn template <typename N> inline constexpr Float fbox(Ftype<N> x) noexcept
+*   Box any arithmetic value
+*
+*   @param x
+*   @return The boxed value
+*/
 template <typename N>
 inline constexpr Float fbox(Ftype<N> x) noexcept
 {
     return Float{static_cast<float>(x)};
 }
 
+/**
+*   @fn inline constexpr Float fbox(float x) noexcept
+*   Box a floating-point value
+*
+*   @param x
+*   @return The boxed value
+*/
 inline constexpr Float fbox(float x) noexcept
 {
     return Float{ x };
 }
 
+/**
+*   @var constexpr Float FNIL
+*   @brief Zero
+*/
 constexpr Float FNIL = fbox(0.0f);
 
 }
+
 
 Float& operator ++(Float& x) noexcept;
 Float operator ++(Float& x, int) noexcept;
@@ -86,7 +115,11 @@ Float& operator /=(Float& x, const Float& y) noexcept;
 bool operator ==(const Float& x, const Float& y) noexcept;
 bool operator !=(const Float& x, const Float& y) noexcept;
 
-
+/**
+*   @ingroup Utils
+*   @namespace FloatMath
+*   @brief Maths with boxed floating-point values
+*/
 namespace FloatMath
 {
 

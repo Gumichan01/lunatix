@@ -16,6 +16,7 @@ typedef int (*Tagread)(void *buf, int *cnt);
 
 
 /**
+*   @ingroup Utilities
 *   @namespace libtagpp
 *   @brief The metadata reader namespace
 */

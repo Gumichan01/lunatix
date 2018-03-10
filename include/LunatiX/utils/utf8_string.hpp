@@ -25,6 +25,7 @@
 class UTF8iterator;
 
 /**
+*   @ingroup Utils
 *   @class UTF8string
 *   @brief UTF-8 string class
 *

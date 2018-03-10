@@ -72,10 +72,17 @@
 // Multithread
 #include <LunatiX/LX_Multithread.hpp>
 
-// Utils
+// Others
 #include <LunatiX/LX_Timer.hpp>
 #include <LunatiX/LX_Text.hpp>
+
+// Utils
+/**
+*   @defgroup Utils Utilities
+*   @brief Miscellaneous namespaces/classes/functions
+*/
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
+#include <LunatiX/utils/utf8_string.hpp>
 #include <LunatiX/utils/float.hpp>
 
 #endif // LUNATIX_H_INCLUDED
