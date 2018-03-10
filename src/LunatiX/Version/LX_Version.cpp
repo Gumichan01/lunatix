@@ -39,7 +39,7 @@ namespace LX_VersionInfo
 const short LX_MAJOR_VERSION = 0;
 const short LX_MINOR_VERSION = 13;
 const short LX_PATCH_VERSION = 0;
-const UTF8string LX_STATUS("alpha2");
+const UTF8string LX_STATUS("beta");
 const UTF8string LX_COPYRIGHT("Copyright © 2018");
 const UTF8string LX_AUTHOR("Luxon Jean-Pierre");
 
