@@ -17,7 +17,7 @@
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-g" />
-					<Add option="-O0" />
+					<Add option="-O0 -Wlogical-op -Wuseless-cast -Wdouble-promotion -Wformat=2" />
 				</Compiler>
 			</Target>
 			<Target title="Dynamic_library">
