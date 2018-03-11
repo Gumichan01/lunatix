@@ -13,6 +13,13 @@
 #ifndef LX_FORMAT_H_INCLUDED
 #define LX_FORMAT_H_INCLUDED
 
+/**
+*   @file LX_Format.hpp
+*   @brief The Format
+*   @author Luxon Jean-Pierre(Gumichan01)
+*   @version 0.12
+*/
+
 #include <SDL2/SDL_pixels.h>
 
 
