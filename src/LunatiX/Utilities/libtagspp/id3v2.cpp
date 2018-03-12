@@ -87,21 +87,21 @@ static int rva2(Tagctx *ctx, char *tag, int sz)
     {
         int type = b[0];
         float peak;
-        float va = (float)(b[1]<<8 | b[2]) / 512.0f;
+        float va = static_cast<float>(b[1]<<8 | b[2]) / 512.0f;
 
         if(b[3] == 24)
         {
-            peak = (float)(b[4]<<16 | b[5]<<8 | b[6]) / 32768.0f;
+            peak = static_cast<float>(b[4]<<16 | b[5]<<8 | b[6]) / 32768.0f;
             b += 2;
         }
         else if(b[3] == 16)
         {
-            peak = (float)(b[4]<<8 | b[5]) / 32768.0f;
+            peak = static_cast<float>(b[4]<<8 | b[5]) / 32768.0f;
             b += 1;
         }
         else if(b[3] == 8)
         {
-            peak = (float)b[4] / 32768.0f;
+            peak = static_cast<float>(b[4]) / 32768.0f;
         }
         else
             return -1;
@@ -109,17 +109,17 @@ static int rva2(Tagctx *ctx, char *tag, int sz)
         if(type == 1)  /* master volume */
         {
             char vas[16], peaks[8];
-            snprint(vas, sizeof(vas), "%+.5f dB", va);
-            snprint(peaks, sizeof(peaks), "%.5f", peak);
+            snprint(vas, sizeof(vas), "%+.5f dB", static_cast<double>(va));
+            snprint(peaks, sizeof(peaks), "%.5f", static_cast<double>(peak));
             vas[sizeof(vas)-1] = 0;
             peaks[sizeof(peaks)-1] = 0;
 
-            if(strcmp((char*)tag, "track") == 0)
+            if(strcmp(tag, "track") == 0)
             {
                 txtcb(ctx, Ttrackgain, vas);
                 txtcb(ctx, Ttrackpeak, peaks);
             }
-            else if(strcmp((char*)tag, "album") == 0)
+            else if(strcmp(tag, "album") == 0)
             {
                 txtcb(ctx, Talbumgain, vas);
                 txtcb(ctx, Talbumpeak, peaks);
