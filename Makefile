@@ -69,8 +69,7 @@ $(SRC_GRAPHICS_PATH)LX_ImgRect.cpp $(SRC_INPUT_PATH)LX_Event.cpp \
 $(SRC_LIBRARY_PATH)LX_Config.cpp $(SRC_LIBRARY_PATH)LX_Library.cpp \
 $(SRC_MIXER_PATH)LX_Sound.cpp $(SRC_MIXER_PATH)LX_Chunk.cpp \
 $(SRC_MIXER_PATH)LX_Music.cpp $(SRC_MIXER_PATH)LX_Mixer.cpp \
-$(SRC_MSG_PATH)LX_MessageBox.cpp \
-$(SRC_MULTITHREAD_PATH)LX_Thread.cpp $(SRC_MULTITHREAD_PATH)LX_Sync.cpp \
+$(SRC_MSG_PATH)LX_MessageBox.cpp $(SRC_MULTITHREAD_PATH)LX_Thread.cpp \
 $(SRC_PARTICLE_PATH)LX_Particle.cpp $(SRC_PARTICLE_PATH)LX_ParticleSystem.cpp \
 $(SRC_PHYSICS_PATH)LX_Hitbox.cpp $(SRC_PHYSICS_PATH)LX_Physics.cpp \
 $(SRC_PHYSICS_PATH)LX_Polygon.cpp $(SRC_PHYSICS_PATH)LX_Vector2D.cpp \
@@ -192,7 +191,6 @@ LX_Music.o: $(SRC_MIXER_PATH)LX_Music.o
 LX_Mixer.o: $(SRC_MIXER_PATH)LX_Mixer.o
 LX_MessageBox.o: $(SRC_MSG_PATH)LX_MessageBox.o
 LX_Thread.o: $(SRC_MULTITHREAD_PATH)LX_Thread.o
-LX_Sync.o: $(SRC_MULTITHREAD_PATH)LX_Sync.o
 LX_Particle.o: $(SRC_PARTICLE_PATH)LX_Particle.o
 LX_ParticleSystem.o: $(SRC_PARTICLE_PATH)LX_ParticleSystem.o
 LX_Physics.o: $(SRC_PHYSICS_PATH)LX_Physics.o
