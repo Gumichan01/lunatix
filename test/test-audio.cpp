@@ -400,6 +400,7 @@ void test_effects()
         LX_Mixer::groupChannels(1, 32, 64);
         LX_Mixer::LX_MixerEffect effect;
         effect.type = {true, false, true, true};
+        effect.loops = 0;
         effect.pan_left  = 1;
         effect.pan_right = 254;
         effect.distance = 32;
@@ -413,7 +414,7 @@ void test_effects()
             effect.pan_right--;
         }
 
-        LX_Mixer::groupChannels(1,32, -1);
+        LX_Mixer::groupChannels(1, 32, -1);
         LX_Mixer::allocateChannels(8);
     }
 
