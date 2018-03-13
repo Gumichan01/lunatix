@@ -70,7 +70,7 @@
 #include <LunatiX/LX_FileSystem.hpp>
 
 // Multithread
-#include <LunatiX/LX_Multithread.hpp>
+#include <LunatiX/LX_Thread.hpp>
 
 // Others
 #include <LunatiX/LX_Timer.hpp>

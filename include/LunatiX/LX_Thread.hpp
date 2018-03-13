@@ -25,6 +25,12 @@
 
 
 /**
+*   @ingroup System
+*   @defgroup Multithread Multithreading
+*   @brief Multithreading and synchronization
+*/
+
+/**
     @ingroup Multithread
 *   @namespace LX_Multithreading
 *   @brief The Multithreading namespace
