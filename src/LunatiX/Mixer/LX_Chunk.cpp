@@ -61,7 +61,7 @@ public:
 
     bool play() noexcept
     {
-        return play(0);
+        return play(-1);
     }
 
     bool play(int channel) noexcept
