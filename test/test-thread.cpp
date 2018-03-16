@@ -200,8 +200,8 @@ void test_async()
 
     const size_t tid = LX_Multithreading::getCurrentThreadID();
     LX_Log::log("(#%x): AsyncTask - normal case", tid);
-    LX_Random::initRand();
 
+    LX_Random::initRand();
     long param1 = static_cast<long>(LX_Random::crand() % 10);
     long param2 = static_cast<long>(LX_Random::crand() % 10);
     unsigned long expected1 = fact(param1);
@@ -211,8 +211,8 @@ void test_async()
 
     LX_Log::log("(#%x): AsyncTask - simulate synchonous", tid);
     unsigned long r = LX_Multithreading::LX_ASyncTask<unsigned long>(fact, param2).getResult();
-    LX_Log::log("(#%x): AsyncTask - simulate synchonous DONE", tid);
 
+    LX_Log::log("(#%x): AsyncTask - simulate synchonous DONE", tid);
     LX_Log::log("(#%x): sync -  %u | %u", tid, r, expected2);
 
     if(r == expected2)
@@ -229,7 +229,6 @@ void test_async()
         LX_Log::log("(#%x): SUCCESS - normal case -  OK", tid);
     else
         LX_Log::log("(#%x): FAILURE - normal case - KO", tid);
-
 
     try
     {

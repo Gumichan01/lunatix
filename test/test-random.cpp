@@ -5,8 +5,6 @@
 void rand_unsigned();
 void rand_float();
 
-
-
 int main(int argc, char * argv[])
 {
     LX_Random::initRand();
