@@ -226,17 +226,17 @@ class LX_TextInput_
     // Operation on the string
     void u8stringInput_(const UTF8string& ntext) noexcept
     {
-        const size_t u8len = _u8text.utf8_length();
+        const size_t U8LEN = _u8text.utf8_length();
 
-        if(_cursor == u8len)
+        if(_cursor == U8LEN)
         {
             _u8text += ntext;
         }
         else
         {
-            const UTF8string& rtmp = _u8text.utf8_substr(_cursor);
-            const UTF8string& ltmp = _u8text.utf8_substr(0, _cursor);
-            _u8text = ltmp + ntext + rtmp;
+            const UTF8string& RTMP = _u8text.utf8_substr(_cursor);
+            const UTF8string& LTMP = _u8text.utf8_substr(0, _cursor);
+            _u8text = LTMP + ntext + RTMP;
         }
 
         _cursor += ntext.utf8_length();
@@ -282,16 +282,16 @@ class LX_TextInput_
 
     void deleteKey_() noexcept
     {
-        const size_t u8len = _u8text.utf8_length();
+        const size_t U8LEN = _u8text.utf8_length();
 
-        if(_cursor < u8len)
+        if(_cursor < U8LEN)
         {
             LX_Log::logDebug(LX_Log::LX_LogType::INPUT,
                              "Delete key - Remove the following codepoint at %d: %s",
                              _cursor, _u8text.utf8_at(_cursor).c_str());
         }
 
-        if(_cursor > 0U && _cursor < u8len)
+        if(_cursor > 0U && _cursor < U8LEN)
         {
             _u8text.utf8_erase(_u8text.utf8_begin() + _cursor);
             _draw = true;

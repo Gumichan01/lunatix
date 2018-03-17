@@ -67,14 +67,14 @@ int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     const std::regex OPENGL_REG("opengl=[[:digit:]]+", std::regex::extended);
 
     unsigned int ret = 0;
-    const bool is_one = (sub == ONE);
+    const bool IS_ONE = (sub == ONE);
 
     switch(cpt)
     {
     case 0:
         if(std::regex_match(line, VIDEO_REG))
         {
-            config.video_flag = is_one;
+            config.video_flag = IS_ONE;
             ret = 1;
         }
         break;
@@ -82,7 +82,7 @@ int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     case 1:
         if(std::regex_match(line, VSYNC_REG))
         {
-            config.vsync_flag = is_one;
+            config.vsync_flag = IS_ONE;
             ret = 1;
         }
         break;
@@ -90,7 +90,7 @@ int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     case 2:
         if(std::regex_match(line, TTF_REG))
         {
-            config.ttf_flag = is_one;
+            config.ttf_flag = IS_ONE;
             ret = 1;
         }
         break;
@@ -98,7 +98,7 @@ int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     case 3:
         if(std::regex_match(line, AUDIO_REG))
         {
-            config.audio_flag = is_one;
+            config.audio_flag = IS_ONE;
             ret = 1;
         }
         break;
@@ -106,7 +106,7 @@ int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     case 4:
         if(std::regex_match(line, GAMEPAD_REG))
         {
-            config.gamepad_flag = is_one;
+            config.gamepad_flag = IS_ONE;
             ret = 1;
         }
         break;
@@ -114,7 +114,7 @@ int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     case 5:
         if(std::regex_match(line, OPENGL_REG))
         {
-            config.opengl_flag = is_one;
+            config.opengl_flag = IS_ONE;
             ret = 1;
         }
         break;

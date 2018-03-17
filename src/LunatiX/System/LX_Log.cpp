@@ -59,9 +59,9 @@ std::string getDate() noexcept
 {
     const size_t SZ = 256;
     char datestr[SZ] = {'\0'};
-    const time_t t = time(nullptr);
+    const time_t TIME = time(nullptr);
 
-    if(t == -1)
+    if(TIME == -1)
     {
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
@@ -69,9 +69,9 @@ std::string getDate() noexcept
         return std::string();
     }
 
-    const struct tm *tmp = localtime(&t);
+    const struct tm * const TMP = localtime(&TIME);
 
-    if(tmp == nullptr)
+    if(TMP == nullptr)
     {
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
@@ -80,7 +80,7 @@ std::string getDate() noexcept
     }
 
     std::ostringstream ss;
-    strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", tmp);
+    strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", TMP);
     ss << getMillisTime() << "] ";
 
     return datestr + ss.str();

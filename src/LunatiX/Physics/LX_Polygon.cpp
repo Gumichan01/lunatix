@@ -92,7 +92,7 @@ class LX_Polygon_
 
     bool calculateCentroid_(LX_FloatPosition& p) const noexcept
     {
-        const Float CMULT{6.0f};
+        const Float CMULT = fbox(6.0f);
         const auto pbeg = _points.begin();
         const auto pend = _points.end();
         const Float p6_area = CMULT * area_();
@@ -108,8 +108,8 @@ class LX_Polygon_
             sum_y += sumy_(*it, next_fpos) * cross_(*it, next_fpos);
         }
 
-        p.x = {sum_x / p6_area};
-        p.y = {sum_y / p6_area};
+        p.x = { sum_x / p6_area };
+        p.y = { sum_y / p6_area };
         return true;
     }
 
@@ -212,12 +212,10 @@ public:
         return box;
     }
 
-
     inline bool isConvex() const noexcept
     {
         return _convex;
     }
-
 
     void _move(const LX_Vector2D& v) noexcept
     {

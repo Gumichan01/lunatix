@@ -8,7 +8,7 @@
 namespace
 {
 
-#define EMPTY_IMG {0,0}
+const libtagpp::ImgMetaData EMPTY_IMG = {0,0};
 
 struct Aux
 {
