@@ -59,7 +59,7 @@ std::string getDate() noexcept
 {
     const size_t SZ = 256;
     char datestr[SZ] = {'\0'};
-    const time_t TIME = time(nullptr);
+    const std::time_t TIME = std::time(nullptr);
 
     if(TIME == -1)
     {
@@ -80,7 +80,7 @@ std::string getDate() noexcept
     }
 
     std::ostringstream ss;
-    strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", TMP);
+    std::strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", TMP);
     ss << getMillisTime() << "] ";
 
     return datestr + ss.str();
