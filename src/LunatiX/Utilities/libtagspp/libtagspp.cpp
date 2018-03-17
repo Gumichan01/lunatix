@@ -8,7 +8,7 @@
 namespace
 {
 
-#define EMPTY_IMG {0,0}
+const libtagpp::ImgMetaData EMPTY_IMG = {0,0};
 
 struct Aux
 {
@@ -19,14 +19,14 @@ struct Aux
 int ctxread(Tagctx *ctx, void *buf, int cnt)
 {
     Aux *aux = static_cast<Aux *>(ctx->aux);
-    return static_cast<int>(fread(buf, 1, static_cast<size_t>(cnt), aux->f));
+    return static_cast<int>(std::fread(buf, 1U, static_cast<size_t>(cnt), aux->f));
 }
 
 int ctxseek(Tagctx *ctx, int offset, int whence)
 {
     Aux *aux = static_cast<Aux *>(ctx->aux);
-    fseek(aux->f, offset, whence);
-    return static_cast<int>(ftell(aux->f));
+    std::fseek(aux->f, offset, whence);
+    return static_cast<int>(std::ftell(aux->f));
 }
 
 inline const char * sec_(int second)
@@ -44,17 +44,17 @@ std::string duration(int t)
     std::ostringstream ss;
     const int H_MINUTE = 60;
     const int M_SECOND = 60;
-    const int d = t / 1000;
+    const int D = t / 1000;
     int hour, minute, second;
 
     hour = 0;
     minute = 0;
     second = 0;
 
-    if(d > M_SECOND)
+    if(D > M_SECOND)
     {
-        minute = d / M_SECOND;
-        second = d % M_SECOND;
+        minute = D / M_SECOND;
+        second = D % M_SECOND;
 
         if(minute > H_MINUTE)
         {
@@ -63,7 +63,7 @@ std::string duration(int t)
         }
     }
     else
-        second = d;
+        second = D;
 
     if(hour > 0)
         ss << hour << ":" << minute_(minute) << minute << ":" << sec_(second) << second;
@@ -173,14 +173,14 @@ bool Tag::readTag(const std::string& filename)
                    0, 0, 0, 0, 0, 0, 0
                  };
 
-    if((aux.f = fopen(f, "rb")) == nullptr)
+    if((aux.f = std::fopen(f, "rb")) == nullptr)
     {
-        fprintf(stderr, "failed to open: %s does not exist\n",f);
+        std::fprintf(stderr, "failed to open: %s does not exist\n",f);
         return false;
     }
 
     bool success = tagsget(&ctx) == 0;
-    fclose(aux.f);
+    std::fclose(aux.f);
 
     if(success)
     {

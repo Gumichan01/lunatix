@@ -31,9 +31,9 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Window ==== ");
@@ -116,49 +116,49 @@ void test_image(LX_Win::LX_Window *win)
     UTF8string u8name("data/bullet.png");
 
     LX_Log::log("|> LX_Sprite");
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
+    LX_Log::logInfo(LX_Log::APPLICATION,"open new image: %s",name.c_str());
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+        LX_Log::logInfo(LX_Log::APPLICATION,"UTF8string argument");
         LX_Graphics::LX_Sprite img(u8name,*win);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - image loaded");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - image from file: should be loaded");
         LX_Log::log("%s", ie.what());
     }
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a image file using the file buffer");
+        LX_Log::logInfo(LX_Log::APPLICATION,"open a image file using the file buffer");
         LX_FileIO::LX_FileBuffer b(name);
         LX_Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
         LX_Graphics::LX_Sprite *img = bf->generateSprite(*win);
         delete bf;
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded from memory");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - image loaded from memory");
 
         delete img;
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from memory: should be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - image from memory: should be loaded");
         LX_Log::log("%s", ie.what());
     }
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
+        LX_Log::logInfo(LX_Log::APPLICATION,"open a file that is not an image from memory");
         LX_Graphics::LX_Sprite *img = LX_Graphics::LX_BufferedImage(mname).generateSprite(*win);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - should not be loaded");
         delete img;
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - failure expected");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - failure expected");
         LX_Log::log("%s", ie.what());
     }
 
@@ -166,72 +166,72 @@ void test_image(LX_Win::LX_Window *win)
     LX_Log::log("||> LX_BufferedImage");
 
     /// NORMAL CASE
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a surface");
+    LX_Log::logInfo(LX_Log::APPLICATION,"create a surface");
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"std::string argument");
+        LX_Log::logInfo(LX_Log::APPLICATION,"std::string argument");
         LX_BufferedImage data(name);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Surface created");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Surface; it should be created");
         LX_Log::log("%s", ie.what());
     }
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+        LX_Log::logInfo(LX_Log::APPLICATION,"UTF8string argument");
         LX_BufferedImage data(u8name);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Surface created");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Surface; it should be created");
         LX_Log::log("%s", ie.what());
     }
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"FileBuffer argument");
+        LX_Log::logInfo(LX_Log::APPLICATION,"FileBuffer argument");
         LX_FileIO::LX_FileBuffer b(name);
         LX_BufferedImage *data = b.loadBufferedImage();
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Surface created");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Surface created");
         delete data;
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface; it should be created");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Surface; it should be created");
         LX_Log::log("%s", ie.what());
     }
 
     /// ERROR CASE
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
+    LX_Log::logInfo(LX_Log::APPLICATION,"invalid argument");
 
     try
     {
         LX_BufferedImage data(std::string("<invalid>"));
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Surface created. It must not");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - expected");
         LX_Log::log("%s", ie.what());
     }
 
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"invalid argument");
+    LX_Log::logInfo(LX_Log::APPLICATION,"invalid argument");
 
     try
     {
         LX_BufferedImage data(mname);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Surface created. It must not");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Surface created. It must not");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - expected");
         LX_Log::log("%s", ie.what());
     }
 
@@ -241,9 +241,9 @@ void test_image(LX_Win::LX_Window *win)
         LX_Graphics::LX_Sprite img(name,*win);
         LX_ImgRect box{64,64,256,128};
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - image loaded");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_Sprite example");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Draw the image (angle: 0 → 2π)");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - image loaded");
+        LX_Log::logInfo(LX_Log::APPLICATION,"LX_Sprite example");
+        LX_Log::logInfo(LX_Log::APPLICATION,"Draw the image (angle: 0 → 2π)");
 
         const double PI2 = M_PI * 2;
 
@@ -255,7 +255,7 @@ void test_image(LX_Win::LX_Window *win)
             LX_Timer::delay(16);
         }
 
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Movement of the sprite");
+        LX_Log::logInfo(LX_Log::APPLICATION,"Movement of the sprite");
 
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 512; i++)
@@ -267,16 +267,16 @@ void test_image(LX_Win::LX_Window *win)
             LX_Timer::delay(16);
         }
         Uint32 t2 = SDL_GetTicks();
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
+        LX_Log::logInfo(LX_Log::APPLICATION,"Done in %d ms",t2-t1);
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - image from file: should be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - image from file: should be loaded");
         LX_Log::log("%s", ie.what());
     }
 
     LX_Log::log("||> Streaming");
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"create a streaming image");
+    LX_Log::logInfo(LX_Log::APPLICATION,"create a streaming image");
 
     try
     {
@@ -284,16 +284,16 @@ void test_image(LX_Win::LX_Window *win)
         LX_BufferedImage data(name);
         LX_ImgRect box{256,256,256,128};
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Streaming image created");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"put a surface in a streaming image");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Streaming image created");
+        LX_Log::logInfo(LX_Log::APPLICATION,"put a surface in a streaming image");
 
         if(img.blit(data,box))
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - surface on the image");
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - surface on the image");
         else
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; got: FALSE");
+            LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: TRUE; got: FALSE");
 
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Update the stream");
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"LX_StreamingTexture example, with LX_BufferedImage");
+        LX_Log::logInfo(LX_Log::APPLICATION,"Update the stream");
+        LX_Log::logInfo(LX_Log::APPLICATION,"LX_StreamingTexture example, with LX_BufferedImage");
 
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 64; i++)
@@ -307,61 +307,61 @@ void test_image(LX_Win::LX_Window *win)
             LX_Timer::delay(16);
         }
         Uint32 t2 = SDL_GetTicks();
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Done in %d ms",t2-t1);
+        LX_Log::logInfo(LX_Log::APPLICATION,"Done in %d ms",t2-t1);
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Streaming image; it should be created");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Streaming image; it should be created");
         LX_Log::log("%s", ie.what());
     }
 
     LX_Log::log("|> LX_AnimatedSprite");
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open new image: %s",name.c_str());
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"UTF8string argument");
+    LX_Log::logInfo(LX_Log::APPLICATION,"open new image: %s",name.c_str());
+    LX_Log::logInfo(LX_Log::APPLICATION,"UTF8string argument");
     UTF8string u8_str(sp_str);
     std::vector<LX_ImgRect> c;
 
     try
     {
         LX_Graphics::LX_AnimatedSprite img(u8_str,*win,c,0,false);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - animated sprite loaded");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - animated sprite from file: should be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - animated sprite from file: should be loaded");
         LX_Log::log("%s", ie.what());
     }
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a sprite sheet file using the bufered image");
+        LX_Log::logInfo(LX_Log::APPLICATION,"open a sprite sheet file using the bufered image");
         LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0, false);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite loaded from memory");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - animated sprite loaded from memory");
         delete img;
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - animated sprite from memory: should be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - animated sprite from memory: should be loaded");
         LX_Log::log("%s", ie.what());
     }
 
     try
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"open a file that is not an image from memory");
+        LX_Log::logInfo(LX_Log::APPLICATION,"open a file that is not an image from memory");
         LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0,false);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - should not be loaded");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - should not be loaded");
         delete img;
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - animated sprite failure expected");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - animated sprite failure expected");
         LX_Log::log("%s", ie.what());
     }
 
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Animation");
+        LX_Log::logInfo(LX_Log::APPLICATION,"Animation");
         Uint32 delay = 125;
         std::vector<LX_ImgRect> coordinates;
         coordinates.push_back({212,0,211,448});
@@ -384,7 +384,7 @@ void test_image(LX_Win::LX_Window *win)
             // Infinite animation
             LX_ImgRect rect{256,64,211,448};
             LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — infinitely looped: %s",
+            LX_Log::logInfo(LX_Log::TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             LX_Log::log("frame delay: %u ms", sprite.getFrameDelay());
 
@@ -404,7 +404,7 @@ void test_image(LX_Win::LX_Window *win)
             // Animation
             LX_ImgRect rect{420,100,211,448};
             LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"animated sprite — infinitely looped: %s",
+            LX_Log::logInfo(LX_Log::TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             LX_Log::log("frame delay: %u ms", sprite.getFrameDelay());
 
@@ -461,7 +461,7 @@ void test_viewport(LX_Win::LX_Window *win)
     LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
 
     LX_ImgRect viewport{{win->getWidth()/2, 0}, win->getWidth()/2, win->getHeight()/2};
-    LX_Log::logInfo(LX_Log::LX_LOG_APPLICATION,"Viewport: {%d,%d,%d,%d}",
+    LX_Log::logInfo(LX_Log::APPLICATION,"Viewport: {%d,%d,%d,%d}",
                     viewport.p.x, viewport.p.y, viewport.w, viewport.h);
 
     Uint32 b = SDL_GetTicks();

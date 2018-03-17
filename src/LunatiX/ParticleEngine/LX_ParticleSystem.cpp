@@ -34,13 +34,13 @@ namespace LX_ParticleEngine
 class LX_ParticleSystem_
 {
     std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
-    const unsigned int _nb_particles;
+    const unsigned int _NB_PARTICLES;
 
 public:
 
     explicit LX_ParticleSystem_(const unsigned int nb_part) noexcept
         : _particles(new std::unique_ptr<LX_Particle>[nb_part]),
-          _nb_particles(nb_part) {}
+          _NB_PARTICLES(nb_part) {}
 
     bool addParticle(LX_Particle *p) const noexcept
     {
@@ -49,7 +49,7 @@ public:
 
         bool done = false;
 
-        for(unsigned int i = 0; i < _nb_particles; i++)
+        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
         {
             if(_particles[i] == nullptr)
             {
@@ -64,7 +64,7 @@ public:
 
     bool rmParticle(unsigned int index) const noexcept
     {
-        if(index > _nb_particles || _particles == nullptr
+        if(index > _NB_PARTICLES || _particles == nullptr
                 || _particles[index] == nullptr)
             return false;
 
@@ -77,7 +77,7 @@ public:
         if(_particles == nullptr)
             return;
 
-        for(unsigned int i = 0; i < _nb_particles; i++)
+        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
         {
             if(_particles[i] != nullptr)
             {
@@ -94,7 +94,7 @@ public:
         if(_particles == nullptr)
             return;
 
-        for(unsigned int i = 0; i < _nb_particles; i++)
+        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
         {
             if(_particles[i] != nullptr)
             {
@@ -112,7 +112,7 @@ public:
 
         unsigned int nb = 0;
 
-        for(unsigned int i = 0; i < _nb_particles; i++)
+        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
         {
             if(_particles[i] == nullptr)
                 nb++;
@@ -123,19 +123,19 @@ public:
 
     unsigned int nbActiveParticles() const noexcept
     {
-        return (_particles == nullptr) ? 0 : _nb_particles - nbEmptyParticles();
+        return (_particles == nullptr) ? 0 : _NB_PARTICLES - nbEmptyParticles();
     }
 
     unsigned int nbTotalParticles() const noexcept
     {
-        return _nb_particles;
+        return _NB_PARTICLES;
     }
 
     ~LX_ParticleSystem_()
     {
         if(_particles != nullptr)
         {
-            for(unsigned int i = 0; i < _nb_particles; i++)
+            for(unsigned int i = 0; i < _NB_PARTICLES; i++)
             {
                 _particles[i].reset();
             }

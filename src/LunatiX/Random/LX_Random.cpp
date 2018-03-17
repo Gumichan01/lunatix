@@ -31,7 +31,7 @@ void initRand() noexcept
 }
 
 // private
-unsigned long long _Prand::rand() noexcept
+unsigned long long _Prand::rand_() noexcept
 {
     static unsigned long long x = 0;
     static bool first_call = false;
@@ -59,7 +59,7 @@ float fxrand(float minf, float maxf) noexcept
 
 unsigned long long xorshiftRand() noexcept
 {
-    return _Prand::rand();
+    return _Prand::rand_();
 }
 
 int crand() noexcept

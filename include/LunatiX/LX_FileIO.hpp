@@ -243,20 +243,23 @@ public:
 
     virtual bool seek(long offset, LX_FileWhence whence) noexcept;
     virtual size_t tell() const noexcept;
-
     /**
     *   @fn size_t size()
     *   Get the size of a file
     *   @return The size of the file on success. -1 on failure
     */
     size_t size() noexcept;
-
     /**
     *   @fn const char * getFilename()
-    *   Get the name of the file the instance refers to
+    *   Get the name of the file
     *   @return The name of the file
     */
     const char * getFilename() const noexcept;
+    /**
+    *   @fn void close() noexcept
+    *   Close
+    */
+    void close() noexcept;
 
     virtual ~LX_File();
 };

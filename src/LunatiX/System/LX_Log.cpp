@@ -59,9 +59,9 @@ std::string getDate() noexcept
 {
     const size_t SZ = 256;
     char datestr[SZ] = {'\0'};
-    const time_t t = time(nullptr);
+    const std::time_t TIME = std::time(nullptr);
 
-    if(t == -1)
+    if(TIME == -1)
     {
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
@@ -69,9 +69,9 @@ std::string getDate() noexcept
         return std::string();
     }
 
-    const struct tm *tmp = localtime(&t);
+    const struct tm * const TMP = localtime(&TIME);
 
-    if(tmp == nullptr)
+    if(TMP == nullptr)
     {
         // This error must not happen
         SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
@@ -80,7 +80,7 @@ std::string getDate() noexcept
     }
 
     std::ostringstream ss;
-    strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", tmp);
+    std::strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", TMP);
     ss << getMillisTime() << "] ";
 
     return datestr + ss.str();
@@ -115,38 +115,38 @@ void setDefaultPriority() noexcept
     SDL_LogResetPriorities();
 }
 
-void setVerbosePriority(LX_CATEGORY category) noexcept
+void setVerbosePriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_VERBOSE);
 }
 
-void setDebugPriority(LX_CATEGORY category) noexcept
+void setDebugPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_DEBUG);
 }
 
-void setInfoPriority(LX_CATEGORY category) noexcept
+void setInfoPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_INFO);
 }
 
-void setWarningPriority(LX_CATEGORY category) noexcept
+void setWarningPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_WARN);
 }
 
-void setErrorPriority(LX_CATEGORY category) noexcept
+void setErrorPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_ERROR);
 }
 
-void setCriticalPriority(LX_CATEGORY category) noexcept
+void setCriticalPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_CRITICAL);
 }
 
 
-void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept
+void logVerbose(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -155,7 +155,7 @@ void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logDebug(LX_CATEGORY category, std::string format, ...) noexcept
+void logDebug(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -164,7 +164,7 @@ void logDebug(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logInfo(LX_CATEGORY category, std::string format, ...) noexcept
+void logInfo(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -173,7 +173,7 @@ void logInfo(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logWarning(LX_CATEGORY category, std::string format, ...) noexcept
+void logWarning(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -182,7 +182,7 @@ void logWarning(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logError(LX_CATEGORY category, std::string format, ...) noexcept
+void logError(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -191,7 +191,7 @@ void logError(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logCritical(LX_CATEGORY category, std::string format, ...) noexcept
+void logCritical(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -205,7 +205,7 @@ void log(std::string format, ...) noexcept
     va_list args;
     va_start(args, format);
     std::string str = "    " + getDate() + format;
-    SDL_LogMessageV(LX_LOG_APPLICATION, SDL_LOG_PRIORITY_INFO, str.c_str(), args);
+    SDL_LogMessageV(APPLICATION, SDL_LOG_PRIORITY_INFO, str.c_str(), args);
     va_end(args);
 }
 

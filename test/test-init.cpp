@@ -11,9 +11,9 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Quit();
     LX_Log::log(" ==== END Test Init ==== \n");

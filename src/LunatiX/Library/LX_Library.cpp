@@ -172,8 +172,8 @@ bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfi
 
 const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
 {
-    const char * res = SDL_GetHint(sdlconfig_name.c_str());
-    return res == nullptr ? "" : std::string(res);
+    const char * SDL_CONFIG = SDL_GetHint(sdlconfig_name.c_str());
+    return SDL_CONFIG == nullptr ? "" : std::string(SDL_CONFIG);
 }
 
 

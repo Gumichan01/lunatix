@@ -48,9 +48,9 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Physics ==== \n");
@@ -108,35 +108,35 @@ void test_euclide(void)
     Float d = euclide_square_distance(A,B);
 
     if(d != fbox(81.0f))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance AB - expected: 81; Got: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Bad square distance AB - expected: 81; Got: %f",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance AB: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Good square distance AB: %f",d);
 
     LX_Log::log("Distance between A and B");
     d = euclide_distance(A,B);
 
     if(d != fbox(9.0f))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance AB - expected: 9; Got: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Bad distance AB - expected: 9; Got: %f",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good distance AB: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Good distance AB: %f",d);
 
     // Test CD
     LX_Log::log("Square distance CD");
     d = euclide_square_distance(C,D);
 
     if(d != fbox(200.0f))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad square distance CD - expected: 81; Got: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Bad square distance CD - expected: 81; Got: %f",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Good square distance CD: %f",d);
 
     LX_Log::log("Distance between C and D");
     d = euclide_distance(C,D);
 
     if(static_cast<int>(d) != static_cast<int>(sqrt(200)))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Bad distance CD - expected: %f; Got: %f",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Bad distance CD - expected: %f; Got: %f",
                         static_cast<float>(sqrt(200)),d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Good square distance CD: %f",d);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Good square distance CD: %f",d);
 
     LX_Log::log(" = END TEST = ");
 }
@@ -161,33 +161,33 @@ void test_collisionPointCircle(void)
     bool d = collisionPointCircle(A, circle);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; Got: %d",d);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: TRUE; Got: %d",d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is in the circle: %d",d);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision, the point is in the circle: %d",d);
 
     LX_Log::log("Collision Point B/Circle");
     d = collisionPointCircle(B, circle);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is not in the circle");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision, the point is not in the circle");
 
     LX_Log::log("Collision Point C/Circle");
     d = collisionPointCircle(C,circle);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is in the circle");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision, the point is in the circle");
 
     LX_Log::log("Collision Point D/Circle");
     d = collisionPointCircle(D,circle);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is not in the circle");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision, the point is not in the circle");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -207,17 +207,17 @@ void test_collisionPointBox(void)
     bool d = collisionPointBox(A, aabb);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is out of the rectangle");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision, the point is out of the rectangle");
 
     LX_Log::log("Collision Point B/AABB");
     d = collisionPointBox(B, aabb);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision, the point is into the rectangle");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision, the point is into the rectangle");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -238,25 +238,25 @@ void test_collision2Circle(void)
     bool d = collisionCircle(A,B);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE -collision A/B expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE -collision A/B expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision between two circles A and B");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision between two circles A and B");
 
     LX_Log::log("Collision Circles C/B");
     d = collisionCircle(C,B);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collisoon C/B expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - collisoon C/B expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - no collision between two circles C and B");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - no collision between two circles C and B");
 
     LX_Log::log("Collision Circles A/C");
     d = collisionCircle(A,C);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collisoon C/B expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - collisoon C/B expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - no collision between two circles A and C");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - no collision between two circles A and C");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -277,25 +277,25 @@ void test_collision2Box(void)
     bool d = collisionBox(R1,R2);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE -collision R1/R2 expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE -collision R1/R2 expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision R1/R2 OK");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision R1/R2 OK");
 
     LX_Log::log("Collision AABB R2/R3");
     d = collisionBox(R2,R3);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE -collision R2/R3 expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE -collision R2/R3 expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision R2/R3 OK");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision R2/R3 OK");
 
     LX_Log::log("Collision AABB R3/R1");
     d = collisionBox(R3,R1);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collisoon R3/R1 expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - collisoon R3/R1 expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - no collision R3/R1 OK");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - no collision R3/R1 OK");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -318,25 +318,25 @@ void test_collisionBoxCircle(void)
     bool d = collisionCircleBox(A,R1);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collision A/R1 expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - collision A/R1 expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision A/R1 OK");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision A/R1 OK");
 
     LX_Log::log("Collision Circle/Box AABB B/R1");
     d = collisionCircleBox(B,R1);
 
     if(d != true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collision B/R1 expected: TRUE; Got: FALSE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - collision B/R1 expected: TRUE; Got: FALSE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision B/R1 OK");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision B/R1 OK");
 
     LX_Log::log("Collision Circle/Box AABB C/R1");
     d = collisionCircleBox(C,R1);
 
     if(d != false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - collision C/R1 expected: FALSE; Got: TRUE");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - collision C/R1 expected: FALSE; Got: TRUE");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - collision C/R1 OK");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - collision C/R1 OK");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -354,10 +354,10 @@ void testPolygon(void)
     unsigned long d = poly.numberOfEdges();
 
     if(d != 3)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - number of real edges expected: 3; Got: %u",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - number of real edges expected: 3; Got: %u",
                         d);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - number of real edges: %u", d);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - number of real edges: %u", d);
 
     displayPoly(poly);
 
@@ -365,23 +365,23 @@ void testPolygon(void)
     LX_Log::log("poly.getPoint(0): (%d,%d)", p.x.v, p.y.v);
 
     if(p.x != fbox(10.0f))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - x position expected: 10; Got: %d",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - x position expected: 10; Got: %d",
                         p.x.v);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - x = %d", p.x.v);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - x = %d", p.x.v);
 
     if(p.y != fbox(5.0f))
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - y position expected: 5; Got: %d",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - y position expected: 5; Got: %d",
                         p.y.v);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - y = %d", p.y.v);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - y = %d", p.y.v);
 
     // Is the triangle convex ?
     LX_Log::log("Test the convexity of the polygon.");
     if(poly.isConvex() == false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - A triangle is not a non-convex polygon");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - A triangle is not a non-convex polygon");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The triangle is a convex polygon, well done !");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The triangle is a convex polygon, well done !");
 
     {
         const LX_FloatingBox& b = poly.getEnclosingBox();
@@ -397,9 +397,9 @@ void testPolygon(void)
     // It must be convex
     LX_Log::log("Test the convexity of the polygon with the new point.");
     if(poly.isConvex() == false)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: convex; Got: non-convex");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected: convex; Got: non-convex");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (7,2). This is still a convex polygon, well done !");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Added (7,2). This is still a convex polygon, well done !");
 
     // New edge
     LX_FloatPosition r{6.0f, 5.0f};
@@ -409,9 +409,9 @@ void testPolygon(void)
     // It must be non-convex
     LX_Log::log("Test the convexity of the polygon with the new point (again).");
     if(poly.isConvex() == true)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: non-convex; Got: convex");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected: non-convex; Got: convex");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Added (6,5). This is not a convex polygon");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Added (6,5). This is not a convex polygon");
 
     {
         const LX_FloatingBox& b = poly.getEnclosingBox();
@@ -1091,9 +1091,9 @@ void test_move(void)
     displayPoly(poly);
 
     if(n != m)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - ≠ degree. #edges expected: %d, got: %d",m,n);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - ≠ degree. #edges expected: %d, got: %d",m,n);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - these polygons have the same degree");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - these polygons have the same degree");
 
     try
     {
@@ -1104,7 +1104,7 @@ void test_move(void)
             LX_FloatPosition p2 = expoly.getPoint(j);
             if(p1 != p2)
             {
-                LX_Log::logInfo(LX_Log::LX_LOG_TEST,
+                LX_Log::logInfo(LX_Log::TEST,
                                 "FAILURE - at j = %d → ≠ point; expected: (%d,%d); got: (%d,%d)",
                                 j, p2.x.v, p2.y.v, p1.x.v,p1.y.v);
                 ok = false;
@@ -1113,11 +1113,11 @@ void test_move(void)
         }
 
         if(ok)
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The 2 polygons are identical");
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The 2 polygons are identical");
     }
     catch(...)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - uncaught exception at %s:%d",__FILE__,__LINE__);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - uncaught exception at %s:%d",__FILE__,__LINE__);
     }
 
     // reset
@@ -1551,8 +1551,8 @@ void test_VectorLambda(void)
         LX_Log::log("FAILURE - expected: v(%f,%f); Got: v(%f,%f)", t.vx.v, t.vy.v,
                     v.vx.v, v.vy.v);
 
-    LX_Log::logWarning(LX_Log::LX_LOG_TEST,"The previous test may fail with some complex float values in the vector");
-    LX_Log::logWarning(LX_Log::LX_LOG_TEST,"Try it with V(3.14,2.56)");
+    LX_Log::logWarning(LX_Log::TEST,"The previous test may fail with some complex float values in the vector");
+    LX_Log::logWarning(LX_Log::TEST,"Try it with V(3.14,2.56)");
 
     LX_Log::log("Vector2D t(%f,%f)", t.vx.v, t.vy.v);
     LX_Log::log("Normalize t");

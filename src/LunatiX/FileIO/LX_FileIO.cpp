@@ -49,7 +49,7 @@ IOException::~IOException() noexcept {}
 class LX_File_
 {
     UTF8string _name{""};
-    FILE *_fstream = nullptr;
+    std::FILE *_file = nullptr;
 
     LX_File_(const LX_File_&) = delete;
     LX_File_& operator =(const LX_File_&) = delete;
@@ -59,43 +59,43 @@ class LX_File_
         switch(mode)
         {
         case LX_FileMode::RDONLY:
-            _fstream = fopen(_name.utf8_str(), "rb");
+            _file = std::fopen(_name.utf8_str(), "rb");
             break;
         case LX_FileMode::WRONLY:
-            _fstream = fopen(_name.utf8_str(), "wb");
+            _file = std::fopen(_name.utf8_str(), "wb");
             break;
         case LX_FileMode::APPEND:
-            _fstream = fopen(_name.utf8_str(), "ab");
+            _file = std::fopen(_name.utf8_str(), "ab");
             break;
         case LX_FileMode::RDWR:
-            _fstream = fopen(_name.utf8_str(), "rb+");
+            _file = std::fopen(_name.utf8_str(), "rb+");
             break;
         case LX_FileMode::RDAP:
-            _fstream = fopen(_name.utf8_str(), "ab+");
+            _file = std::fopen(_name.utf8_str(), "ab+");
             break;
         case LX_FileMode::WRTR:
-            _fstream = fopen(_name.utf8_str(), "wb+");
+            _file = std::fopen(_name.utf8_str(), "wb+");
             break;
         default:
             throw IOException("LX_File: Unrecognized mode");
             break;
         }
 
-        if(_fstream == nullptr)
+        if(_file == nullptr)
             throw IOException(LX_getError());
     }
 
 public:
 
     LX_File_(const UTF8string& filename, const LX_FileMode mode)
-        : _name(filename), _fstream(nullptr)
+        : _name(filename), _file(nullptr)
     {
         open_(mode);
     }
 
     size_t read(void *buffer, size_t dsize, size_t count) noexcept
     {
-        return fread(buffer, dsize, count, _fstream);
+        return std::fread(buffer, dsize, count, _file);
     }
 
     size_t readExactly(void *buffer, size_t dsize, size_t count) noexcept
@@ -106,9 +106,9 @@ public:
         // Read at most count bytes
         while(total_read < count)
         {
-            size_t read_fstream = read(p, dsize, count);
-            p += read_fstream;
-            total_read += read_fstream;
+            size_t read_file = read(p, dsize, count);
+            p += read_file;
+            total_read += read_file;
         }
 
         return (total_read != 0 && total_read != count) ?
@@ -117,7 +117,7 @@ public:
 
     size_t write(const void *buffer, size_t dsize, size_t count) noexcept
     {
-        return fwrite(buffer, dsize, count, _fstream);
+        return std::fwrite(buffer, dsize, count, _file);
     }
 
     size_t write(const std::string& str) noexcept
@@ -128,12 +128,12 @@ public:
 
     bool seek(long offset, LX_FileWhence whence) noexcept
     {
-        return fseek(_fstream, offset, static_cast<int>(whence)) == 0;
+        return std::fseek(_file, offset, static_cast<int>(whence)) == 0;
     }
 
     size_t tell() const noexcept
     {
-        return ftell(_fstream);
+        return std::ftell(_file);
     }
 
     size_t size() noexcept
@@ -158,10 +158,10 @@ public:
 
     void close() noexcept
     {
-        if(_fstream != nullptr)
+        if(_file != nullptr)
         {
-            fclose(_fstream);
-            _fstream = nullptr;
+            std::fclose(_file);
+            _file = nullptr;
         }
     }
 
@@ -224,6 +224,12 @@ const char * LX_File::getFilename() const noexcept
     return _fimpl->getFilename();
 }
 
+void LX_File::close() noexcept
+{
+    _fimpl->close();
+}
+
+
 
 LX_File::~LX_File()
 {
@@ -252,10 +258,10 @@ public:
 
     size_t read(void *buffer, size_t dsize, size_t count) noexcept
     {
-        size_t sz = fread(buffer, dsize, count, _f);
-        char * err = strerror(errno);
+        size_t sz = std::fread(buffer, dsize, count, _f);
+        char * err = std::strerror(errno);
 
-        if(ferror(_f))
+        if(std::ferror(_f))
             LX_setError(err);
 
         return sz;
@@ -270,13 +276,13 @@ public:
         // Read at most count bytes
         while(total_read < count)
         {
-            size_t read_fstream = read(p, dsize, count - total_read);
+            size_t read_file = read(p, dsize, count - total_read);
 
-            if(read_fstream == FERR)
+            if(read_file == FERR)
                 return FERR;
 
-            p += read_fstream;
-            total_read += read_fstream;
+            p += read_file;
+            total_read += read_file;
         }
 
         return total_read != count ? FERR : total_read;

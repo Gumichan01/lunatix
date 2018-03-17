@@ -18,20 +18,20 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test Device ==== ");
 
     if(SDL_WasInit(flag) != flag)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - The device subsystem has not been initialized");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - The device subsystem has not been initialized");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The device subsystem has been initialized");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The device subsystem has been initialized");
 
     // Joystick and Game controller
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"You have %d gamepad(s) connected", numberOfDevices());
+    LX_Log::logInfo(LX_Log::TEST,"You have %d gamepad(s) connected", numberOfDevices());
 
     test_gamepad();
     test_haptic();
@@ -106,7 +106,7 @@ void test_haptic(void)
         int effectid = haptic.newEffect(effect);
 
         if(effectid < 0)
-            LX_Log::logError(LX_Log::LX_LOG_TEST,"Cannot add effect: %s",LX_getError());
+            LX_Log::logError(LX_Log::TEST,"Cannot add effect: %s",LX_getError());
         else
         {
             LX_Log::log("Run the effect");
@@ -137,9 +137,9 @@ void test_mouse(void)
     LX_Device::LX_Mouse c(LX_Graphics::LX_BufferedImage(s),0,0);
 
     if(c.isOpen())
-        LX_Log::logDebug(LX_Log::LX_LOG_TEST,"SUCCESS - the mouse cursor was loaded");
+        LX_Log::logDebug(LX_Log::TEST,"SUCCESS - the mouse cursor was loaded");
     else
-        LX_Log::logDebug(LX_Log::LX_LOG_TEST,"FAILURE - not loaded; expeected: OK");
+        LX_Log::logDebug(LX_Log::TEST,"FAILURE - not loaded; expeected: OK");
 
     c.setMouse();
 

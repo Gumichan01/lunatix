@@ -66,26 +66,26 @@ LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
 
 void fillButtonState(bool * state, uint32_t st) noexcept
 {
-    const uint8_t lbutton  = LX_MBIndex(LX_Event::LX_MouseButton::LBUTTON);
-    const uint8_t mbutton  = LX_MBIndex(LX_Event::LX_MouseButton::MBUTTON);
-    const uint8_t rbutton  = LX_MBIndex(LX_Event::LX_MouseButton::RBUTTON);
-    const uint8_t x1button = LX_MBIndex(LX_Event::LX_MouseButton::X1);
-    const uint8_t x2button = LX_MBIndex(LX_Event::LX_MouseButton::X2);
+    const uint8_t LBUTTON  = LX_MBIndex(LX_Event::LX_MouseButton::LBUTTON);
+    const uint8_t MBUTTON  = LX_MBIndex(LX_Event::LX_MouseButton::MBUTTON);
+    const uint8_t RBUTTON  = LX_MBIndex(LX_Event::LX_MouseButton::RBUTTON);
+    const uint8_t X1BUTTON = LX_MBIndex(LX_Event::LX_MouseButton::X1);
+    const uint8_t X2BUTTON = LX_MBIndex(LX_Event::LX_MouseButton::X2);
 
-    if(st & SDL_BUTTON(lbutton))
-        state[lbutton] = true;
+    if(st & SDL_BUTTON(LBUTTON))
+        state[LBUTTON] = true;
 
-    if(st & SDL_BUTTON(mbutton))
-        state[mbutton] = true;
+    if(st & SDL_BUTTON(MBUTTON))
+        state[MBUTTON] = true;
 
-    if(st & SDL_BUTTON(rbutton))
-        state[rbutton] = true;
+    if(st & SDL_BUTTON(RBUTTON))
+        state[RBUTTON] = true;
 
-    if(st & SDL_BUTTON(x1button))
-        state[x1button] = true;
+    if(st & SDL_BUTTON(X1BUTTON))
+        state[X1BUTTON] = true;
 
-    if(st & SDL_BUTTON(x2button))
-        state[x2button] = true;
+    if(st & SDL_BUTTON(X2BUTTON))
+        state[X2BUTTON] = true;
 }
 
 LX_Event::LX_WinEventType toWinEvent(uint8_t id) noexcept
@@ -292,14 +292,14 @@ bool LX_EventHandler::pushUserEvent(LX_UserEvent& uevent) noexcept
     if((utype = SDL_RegisterEvents(1)) == UTYPE_ERR)
         return false;
 
-    SDL_Event ev;
-    SDL_zero(ev);
+    SDL_Event user_event;
+    SDL_zero(user_event);
 
     uevent.type = utype;
-    ev.type = SDL_USEREVENT;
-    ev.user = {uevent.type, 0, uevent.wid, uevent.code, uevent.data1, uevent.data2};
+    user_event.type = SDL_USEREVENT;
+    user_event.user = {uevent.type, 0, uevent.wid, uevent.code, uevent.data1, uevent.data2};
 
-    return SDL_PushEvent(&ev) == 1;
+    return SDL_PushEvent(&user_event) == 1;
 }
 
 
@@ -318,42 +318,42 @@ void LX_EventHandler::ignoreEvent(const LX_EventType ty) noexcept
 uint32_t LX_EventHandler::getWindowID() const noexcept
 {
     uint32_t id = 0;
-    const SDL_Event& ev = (*event);
+    const SDL_Event& EV = (*event);
 
-    switch(ev.type)
+    switch(EV.type)
     {
     case SDL_WINDOWEVENT:
-        id = ev.window.windowID;
+        id = EV.window.windowID;
         break;
 
     case SDL_KEYDOWN:
     case SDL_KEYUP:
-        id = ev.key.windowID;
+        id = EV.key.windowID;
         break;
 
     case SDL_TEXTEDITING:
-        id = ev.edit.windowID;
+        id = EV.edit.windowID;
         break;
 
     case SDL_TEXTINPUT:
-        id = ev.text.windowID;
+        id = EV.text.windowID;
         break;
 
     case SDL_MOUSEMOTION:
-        id = ev.motion.windowID;
+        id = EV.motion.windowID;
         break;
 
     case SDL_MOUSEBUTTONDOWN:
     case SDL_MOUSEBUTTONUP:
-        id = ev.button.windowID;
+        id = EV.button.windowID;
         break;
 
     case SDL_MOUSEWHEEL:
-        id = ev.wheel.windowID;
+        id = EV.wheel.windowID;
         break;
 
     case SDL_USEREVENT:
-        id = ev.user.windowID;
+        id = EV.user.windowID;
         break;
 
     default:
@@ -367,9 +367,9 @@ uint32_t LX_EventHandler::getWindowID() const noexcept
 LX_EventType LX_EventHandler::getEventType() const noexcept
 {
     LX_EventType ty;
-    const SDL_Event& ev = (*event);
+    const SDL_Event& EV = (*event);
 
-    switch(ev.type)
+    switch(EV.type)
     {
     case SDL_QUIT:
         ty = LX_EventType::QUIT;
@@ -462,28 +462,28 @@ LX_ScanCode LX_EventHandler::getScanCode() const noexcept
 LX_GamepadID LX_EventHandler::getGamepadID() const noexcept
 {
     LX_GamepadID id;
-    const SDL_Event& ev = (*event);
+    const SDL_Event& EVENT = (*event);
 
-    switch(ev.type)
+    switch(EVENT.type)
     {
     case SDL_CONTROLLERBUTTONDOWN:
     case SDL_CONTROLLERBUTTONUP:
-        id = ev.cbutton.which;
+        id = EVENT.cbutton.which;
         break;
 
     case SDL_CONTROLLERAXISMOTION:
-        id = ev.caxis.which;
+        id = EVENT.caxis.which;
         break;
 
     case SDL_CONTROLLERDEVICEADDED:
     case SDL_CONTROLLERDEVICEREMOVED:
     case SDL_CONTROLLERDEVICEREMAPPED:
-        id = ev.cdevice.which;
+        id = EVENT.cdevice.which;
         break;
 
     case SDL_JOYDEVICEADDED:
     case SDL_JOYDEVICEREMOVED:
-        id = ev.jdevice.which;
+        id = EVENT.jdevice.which;
         break;
 
     default:
@@ -497,97 +497,92 @@ LX_GamepadID LX_EventHandler::getGamepadID() const noexcept
 
 const LX_GAxis LX_EventHandler::getAxis() const noexcept
 {
-    const SDL_ControllerAxisEvent ax = (*event).caxis;
-    const LX_GAxis gax = {ax.which, static_cast<LX_GamepadAxis>(ax.axis), ax.value};
-    return gax;
+    const SDL_ControllerAxisEvent AX = (*event).caxis;
+    const LX_GAxis GAX = {AX.which, static_cast<LX_GamepadAxis>(AX.axis), AX.value};
+    return GAX;
 }
 
 const LX_GButton LX_EventHandler::getButton() const noexcept
 {
-    const SDL_ControllerButtonEvent bu = (*event).cbutton;
-    const LX_GButton gbutton = {bu.which, static_cast<LX_GamepadButton>(bu.button), u8st(bu.state)};
-    return gbutton;
+    const SDL_ControllerButtonEvent BU = (*event).cbutton;
+    const LX_GButton GBUTTON = {BU.which, static_cast<LX_GamepadButton>(BU.button), u8st(BU.state)};
+    return GBUTTON;
 }
 
 const LX_MButton LX_EventHandler::getMouseButton() const noexcept
 {
-    const SDL_MouseButtonEvent mb = (*event).button;
-    const LX_MouseButton b = toMouseButton(mb.button);
-    const LX_MButton mbutton = {mb.windowID, b, u8st(mb.state), mb.clicks, mb.x, mb.y};
-    return mbutton;
+    const SDL_MouseButtonEvent MB = (*event).button;
+    const LX_MouseButton B = toMouseButton(MB.button);
+    const LX_MButton MBUTTON = {MB.windowID, B, u8st(MB.state), MB.clicks, MB.x, MB.y};
+    return MBUTTON;
 }
 
 const LX_MMotion LX_EventHandler::getMouseMotion() const noexcept
 {
     LX_MMotion mmotion;
-    const SDL_MouseMotionEvent mm = (*event).motion;
+    const SDL_MouseMotionEvent MOUSE_MOTION_EVENT = (*event).motion;
 
     for(int i = 0; i < LX_MBUTTONS; i++)
     {
         mmotion.state[i] = false;
     }
 
-    fillButtonState(mmotion.state, mm.state);
-    mmotion.wid = mm.windowID;
-    mmotion.x = mm.x;
-    mmotion.y = mm.y;
-    mmotion.xrel = mm.xrel;
-    mmotion.yrel = mm.yrel;
+    fillButtonState(mmotion.state, MOUSE_MOTION_EVENT.state);
+    mmotion.wid = MOUSE_MOTION_EVENT.windowID;
+    mmotion.x = MOUSE_MOTION_EVENT.x;
+    mmotion.y = MOUSE_MOTION_EVENT.y;
+    mmotion.xrel = MOUSE_MOTION_EVENT.xrel;
+    mmotion.yrel = MOUSE_MOTION_EVENT.yrel;
 
     return mmotion;
 }
 
 const LX_MWheel LX_EventHandler::getMouseWheel() const noexcept
 {
-    const SDL_MouseWheelEvent mw = (*event).wheel;
-    const LX_MWheel mwheel = {mw.windowID, mw.x, mw.y};
-    return mwheel;
+    const SDL_MouseWheelEvent MOUSE_WHEEL_EVENT = (*event).wheel;
+    return LX_MWheel{MOUSE_WHEEL_EVENT.windowID, MOUSE_WHEEL_EVENT.x, MOUSE_WHEEL_EVENT.y};
 }
 
 const LX_WEvent LX_EventHandler::getWindowEvent() const noexcept
 {
-    const SDL_WindowEvent winev = (*event).window;
-    const LX_WEvent we = {winev.windowID,
-                          toWinEvent(winev.event), winev.data1, winev.data2
-                         };
-    return we;
+    const SDL_WindowEvent WIN_EVENT = (*event).window;
+    return LX_WEvent{WIN_EVENT.windowID,
+                     toWinEvent(WIN_EVENT.event), WIN_EVENT.data1,
+                     WIN_EVENT.data2
+                    };
 }
 
 const LX_UserEvent LX_EventHandler::getUserEvent() const noexcept
 {
-    const SDL_UserEvent usr = (*event).user;
-    const LX_UserEvent uev  = {usr.type, usr.windowID, usr.code, usr.data1, usr.data2};
-    return uev;
+    const SDL_UserEvent USR = (*event).user;
+    return LX_UserEvent{USR.type, USR.windowID, USR.code, USR.data1, USR.data2};
 }
 
 const LX_TextEvent LX_EventHandler::getTextEvent() const noexcept
 {
-    LX_TextEvent t = {0, "", 0, 0};
-    const SDL_Event& ev = (*event);
+    const SDL_Event EVENT = (*event);
 
-    if(ev.type == SDL_TEXTINPUT)
+    if(EVENT.type == SDL_TEXTINPUT)
     {
-        const SDL_TextInputEvent ti = ev.text;
-        t = {ti.windowID, ti.text, 0, std::string(ti.text).length()};
+        const SDL_TextInputEvent TINPOUT = EVENT.text;
+        return LX_TextEvent{TINPOUT.windowID, TINPOUT.text, 0, std::string(TINPOUT.text).length()};
     }
     else
     {
-        const SDL_TextEditingEvent te = ev.edit;
-        t = {te.windowID, te.text, te.start, static_cast<size_t>(te.length)};
+        const SDL_TextEditingEvent TEDIT = EVENT.edit;
+        return LX_TextEvent{TEDIT.windowID, TEDIT.text, TEDIT.start, static_cast<size_t>(TEDIT.length)};
     }
-
-    return t;
 }
 
 const LX_DropEvent LX_EventHandler::getDropEvent() const noexcept
 {
     LX_DropEvent drop = {""};
-    const SDL_DropEvent dev = (*event).drop;
+    const SDL_DropEvent DROP_EVENT = (*event).drop;
 
-    if((*event).type == SDL_DROPFILE && dev.file != nullptr)
+    if((*event).type == SDL_DROPFILE && DROP_EVENT.file != nullptr)
     {
-        drop.file = dev.file;
-        SDL_free(dev.file);
+        drop.file = DROP_EVENT.file;
+        SDL_free(DROP_EVENT.file);
     }
 
     return drop;
@@ -621,14 +616,14 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept
 
 UTF8string stringOfButton(LX_GamepadButton button) noexcept
 {
-    const char * s = SDL_GameControllerGetStringForButton(static_cast<SDL_GameControllerButton>(button));
-    return UTF8string(s == nullptr ? "<null>" : s);
+    const char * S = SDL_GameControllerGetStringForButton(static_cast<SDL_GameControllerButton>(button));
+    return UTF8string(S == nullptr ? "<null>" : S);
 }
 
 UTF8string stringOfAxis(LX_GamepadAxis axis) noexcept
 {
-    const char * s = SDL_GameControllerGetStringForAxis(static_cast<SDL_GameControllerAxis>(axis));
-    return UTF8string(s == nullptr ? "<null>" : s);
+    const char * S = SDL_GameControllerGetStringForAxis(static_cast<SDL_GameControllerAxis>(axis));
+    return UTF8string(S == nullptr ? "<null>" : S);
 }
 
 }

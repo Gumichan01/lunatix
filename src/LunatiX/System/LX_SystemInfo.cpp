@@ -60,22 +60,22 @@ int getSystemRAM() noexcept
 
 void getAvailableDisplayModes(LX_DisplayModes& modes)
 {
-    const int nb_displays = SDL_GetNumDisplayModes(0);
+    const int NB_DISPLAYS = SDL_GetNumDisplayModes(0);
     modes.clear();
 
-    if(nb_displays == 0)
+    if(NB_DISPLAYS == 0)
     {
         LX_setError("No display available");
         return;
     }
-    else if(nb_displays < 0)
+    else if(NB_DISPLAYS < 0)
     {
         LX_setError("Cannot get the number of display modes");
         return;
     }
 
     SDL_DisplayMode mode;
-    for(int i = 0; i < nb_displays; i++)
+    for(int i = 0; i < NB_DISPLAYS; i++)
     {
         if(SDL_GetDisplayMode(0, i, &mode) == 0)
         {

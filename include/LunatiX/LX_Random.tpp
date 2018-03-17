@@ -26,11 +26,11 @@ private:
     _Prand& operator=(const _Prand& other) = delete;
     _Prand& operator=(_Prand&& other) = delete;
 
-    static unsigned long long rand() noexcept;
+    static unsigned long long rand_() noexcept;
 };
 
 template <typename Num>
 LX_Num<Num> xrand(Num min, Num max) noexcept
 {
-    return ( static_cast<Num>(_Prand::rand()) % (max - min) ) + min;
+    return ( static_cast<Num>(_Prand::rand_()) % (max - min) ) + min;
 }
