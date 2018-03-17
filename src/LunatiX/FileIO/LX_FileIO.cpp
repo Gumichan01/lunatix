@@ -224,6 +224,12 @@ const char * LX_File::getFilename() const noexcept
     return _fimpl->getFilename();
 }
 
+void LX_File::close() noexcept
+{
+    _fimpl->close();
+}
+
+
 
 LX_File::~LX_File()
 {
