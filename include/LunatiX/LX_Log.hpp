@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_LOG_HPP_INCLUDED
-#define LX_LOG_HPP_INCLUDED
+#ifndef HPP_INCLUDED
+#define HPP_INCLUDED
 
 /**
 *   @file LX_Log.hpp
@@ -43,9 +43,9 @@
 *
 *   |      Category      |      Level     |
 *   |--------------------|----------------|
-*   | LX_LOG_APPLICATION | Info           |
-*   | LX_LOG_ASSERT      | Warning        |
-*   | LX_LOG_TEST        | Verbose        |
+*   | APPLICATION | Info           |
+*   | ASSERT      | Warning        |
+*   | TEST        | Verbose        |
 *   | Everything else    | Critical       |
 *
 *
@@ -59,19 +59,19 @@ namespace LX_Log
 
 // Category of log
 /**
-*   @enum LX_CATEGORY
-*   @brief The log categories of the program
+*   @enum LX_LogType
+*   @brief The log types of the program
 *
 */
-enum LX_CATEGORY: int {LX_LOG_APPLICATION = 0,  /**< Application log    */
-                       LX_LOG_ASSERT = 1,       /**< Assertion log      */
-                       LX_LOG_ERROR = 2,        /**< Error log          */
-                       LX_LOG_SYSTEM = 3,       /**< System log         */
-                       LX_LOG_AUDIO = 4,        /**< Audio log          */
-                       LX_LOG_VIDEO = 5,        /**< Video log          */
-                       LX_LOG_RENDER = 6,       /**< Rendering log      */
-                       LX_LOG_INPUT = 7,        /**< Input log          */
-                       LX_LOG_TEST = 8          /**< Test log           */
+enum LX_LogType: int {APPLICATION = 0,  /**< Application log    */
+                       ASSERT = 1,       /**< Assertion log      */
+                       ERROR = 2,        /**< Error log          */
+                       SYSTEM = 3,       /**< System log         */
+                       AUDIO = 4,        /**< Audio log          */
+                       VIDEO = 5,        /**< Video log          */
+                       RENDER = 6,       /**< Rendering log      */
+                       INPUT = 7,        /**< Input log          */
+                       TEST = 8          /**< Test log           */
                       };
 
 /**
@@ -93,97 +93,97 @@ void setDebugMode(bool debug = true) noexcept;
 */
 void setDefaultPriority() noexcept;
 /**
-*   @fn void setVerbosePriority(LX_CATEGORY category) noexcept
+*   @fn void setVerbosePriority(LX_LogType category) noexcept
 *   Set the verbose priority to a log category
 *   @param [in] category
 */
-void setVerbosePriority(LX_CATEGORY category) noexcept;
+void setVerbosePriority(LX_LogType category) noexcept;
 /**
-*   @fn void setDebugPriority(LX_CATEGORY category) noexcept
+*   @fn void setDebugPriority(LX_LogType category) noexcept
 *   Set the debug priority to a log category
 *   @param [in] category
 */
-void setDebugPriority(LX_CATEGORY category) noexcept;
+void setDebugPriority(LX_LogType category) noexcept;
 /**
-*   @fn void setInfoPriority(LX_CATEGORY category) noexcept
+*   @fn void setInfoPriority(LX_LogType category) noexcept
 *   Set the info priority to a log category
 *   @param [in] category
 */
-void setInfoPriority(LX_CATEGORY category) noexcept;
+void setInfoPriority(LX_LogType category) noexcept;
 /**
-*   @fn void setWarningPriority(LX_CATEGORY category) noexcept
+*   @fn void setWarningPriority(LX_LogType category) noexcept
 *   Set the warning priority to a log category
 *   @param [in] category
 */
-void setWarningPriority(LX_CATEGORY category) noexcept;
+void setWarningPriority(LX_LogType category) noexcept;
 
 /**
-*   @fn void setErrorPriority(LX_CATEGORY category) noexcept
+*   @fn void setErrorPriority(LX_LogType category) noexcept
 *   Set the error priority to a log category
 *   @param [in] category
 */
-void setErrorPriority(LX_CATEGORY category) noexcept;
+void setErrorPriority(LX_LogType category) noexcept;
 /**
-*   @fn void setCriticalPriority(LX_CATEGORY category) noexcept
+*   @fn void setCriticalPriority(LX_LogType category) noexcept
 *   Set the critical priority to a log category
 *   @param [in] category
 */
-void setCriticalPriority(LX_CATEGORY category) noexcept;
+void setCriticalPriority(LX_LogType category) noexcept;
 
 /**
-*   @fn void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept
+*   @fn void logVerbose(LX_LogType category, std::string format, ...) noexcept
 *
 *   Log a message with the verbose priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept;
+void logVerbose(LX_LogType category, std::string format, ...) noexcept;
 /**
-*   @fn void logDebug(LX_CATEGORY category,std::string format,...) noexcept
+*   @fn void logDebug(LX_LogType category,std::string format,...) noexcept
 *
 *   Log a message with the debug priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logDebug(LX_CATEGORY category, std::string format, ...) noexcept;
+void logDebug(LX_LogType category, std::string format, ...) noexcept;
 /**
-*   @fn void logInfo(LX_CATEGORY category, std::string format,...) noexcept
+*   @fn void logInfo(LX_LogType category, std::string format,...) noexcept
 *
 *   Log a message with the info priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logInfo(LX_CATEGORY category, std::string format, ...) noexcept;
+void logInfo(LX_LogType category, std::string format, ...) noexcept;
 /**
-*   @fn void logWarning(LX_CATEGORY category, std::string format,...) noexcept
+*   @fn void logWarning(LX_LogType category, std::string format,...) noexcept
 *
 *   Log a message with the warning priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logWarning(LX_CATEGORY category, std::string format, ...) noexcept;
+void logWarning(LX_LogType category, std::string format, ...) noexcept;
 /**
-*   @fn void logError(LX_CATEGORY category, std::string format,...) noexcept
+*   @fn void logError(LX_LogType category, std::string format,...) noexcept
 *
 *   Log a message with the error priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logError(LX_CATEGORY category, std::string format, ...) noexcept;
+void logError(LX_LogType category, std::string format, ...) noexcept;
 /**
-*   @fn void logCritical(LX_CATEGORY category, std::string format,...) noexcept
+*   @fn void logCritical(LX_LogType category, std::string format,...) noexcept
 *
 *   Log a message with the critical priority and a specified category
 *
 *   @param [in] category Category of the log
 *   @param [in] format   String format
 */
-void logCritical(LX_CATEGORY category, std::string format, ...) noexcept;
+void logCritical(LX_LogType category, std::string format, ...) noexcept;
 
 /**
 *   @fn void log(std::string format, ...) noexcept
@@ -194,4 +194,4 @@ void log(std::string format, ...) noexcept;
 
 }
 
-#endif // LX_LOG_HPP_INCLUDED
+#endif // HPP_INCLUDED

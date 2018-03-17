@@ -38,9 +38,9 @@ int main(int argc, char **argv)
     bool err = LX_Init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
     LX_Log::setDebugMode();
     LX_Log::log(" ==== Test File ==== ");
@@ -78,13 +78,13 @@ void test_open(void)
     {
         LX_Log::log("test open %s ...", str1.c_str());
         f1 = new LX_File(str1, LX_FileMode::RDONLY);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The following file was loaded : %s", str1.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The following file was loaded : %s", str1.c_str());
         delete f1;
         f1 = nullptr;
     }
     catch(IOException &e)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot load %s; Expected : a valid refence; Got : %s",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot load %s; Expected : a valid refence; Got : %s",
                         str1.c_str(), e.what());
     }
 
@@ -96,12 +96,12 @@ void test_open(void)
         LX_Log::log("test open %s that does not exist...", str3.c_str());
         LX_File *not_exist_file = new LX_File(str3, LX_FileMode::RDONLY);
 
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - An invalid file was loaded (o_o); Expected: IOexception; got: a valid reference");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - An invalid file was loaded (o_o); Expected: IOexception; got: a valid reference");
         delete not_exist_file;
     }
     catch(IOException &ioe)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - IOException occured: %s -> ",
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - IOException occured: %s -> ",
                         str3.c_str(), ioe.what());
     }
 
@@ -121,10 +121,10 @@ void test_read(void)
     read_data = f.read(buf, sizeof(char), static_cast<size_t>(f.size()));
 
     if(read_data == 0)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1 ");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected : a positive value or zero; got : -1 ");
     else
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
         buf[read_data] = 0;
         LX_Log::log("data received : ", buf);
     }
@@ -147,26 +147,26 @@ void test_read2(void)
     end = f.seek(0, LX_FileWhence::END);
 
     if(end == -1)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot go at the end of the file");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot go at the end of the file");
 
     Sint64 size = f.tell();
 
     if(size == -1)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot get the size of the file");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot get the size of the file");
 
     beg = f.seek(0, LX_FileWhence::SET);
 
     if(beg == -1)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot go at the beginning of the file");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot go at the beginning of the file");
 
     buff = new char[size];
 
     read_data = f.read(buff,sizeof(char),static_cast<size_t>(size));
 
     if(read_data == 0)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected: non-zero value; got : 0");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected: non-zero value; got : 0");
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %u bytes from %s",
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Received %u bytes from %s",
                         read_data, strex.c_str());
 
     delete [] buff;
@@ -189,35 +189,35 @@ void test_read3(void)
     read_data = f.read(&i, sizeof(int));
 
     if(read_data == 0)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected : a positive value or zero; got : -1");
     else
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
 
         if(i == 42)
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - 42");
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - 42");
     }
 
     read_data = f.read(&c, sizeof(char));
 
     if(read_data == 0)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected : a positive value or zero; got : -1");
     else
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
 
         if(c == 'G')
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - G");
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - G");
     }
 
     read_data = f.read(&fl, sizeof(float));
 
     if(read_data == 0)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Expected : a positive value or zero; got : -1");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Expected : a positive value or zero; got : -1");
     else
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - %f", fl);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - Received %d bytes from %s", read_data, str.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - %f", fl);
     }
 
     LX_Log::log(" = END TEST = ");
@@ -238,15 +238,15 @@ void test_read4(void)
 
     f >> i;
 
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"value: %d", i);
+    LX_Log::logInfo(LX_Log::TEST,"value: %d", i);
 
     f >> c;
 
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"value: %c", c);
+    LX_Log::logInfo(LX_Log::TEST,"value: %c", c);
 
     f >> fl;
 
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"value: %f", fl);
+    LX_Log::logInfo(LX_Log::TEST,"value: %f", fl);
     LX_Log::log(" = END TEST = ");
 }
 
@@ -350,9 +350,9 @@ void test_RW()
         LX_File fr(fs, LX_FileMode::RDONLY);
         fr >> i >> c >> fl;
     }
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"fr - value: %d", i);
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"fr - value: %c", c);
-    LX_Log::logInfo(LX_Log::LX_LOG_TEST,"fr - value: %f", fl);
+    LX_Log::logInfo(LX_Log::TEST,"fr - value: %d", i);
+    LX_Log::logInfo(LX_Log::TEST,"fr - value: %c", c);
+    LX_Log::logInfo(LX_Log::TEST,"fr - value: %f", fl);
     remove(fs.c_str());
     LX_Log::log(" = END TEST = ");
 }
@@ -367,17 +367,17 @@ void test_tellSeek(void)
     size_t pos = f.tell();
 
     if(pos != 4)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - seek() Expected: 4; got: ", pos);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - seek() Expected: 4; got: ", pos);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - seek() position: 4");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - seek() position: 4");
 
     f.seek(-1, LX_FileWhence::CUR);
     pos = f.tell();
 
     if(pos != 3)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - seek() Expected: 3; got: ", pos);
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - seek() Expected: 3; got: ", pos);
     else
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - seek() position: 3");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - seek() position: 3");
 
     LX_Log::log(" = END TEST = ");
 }
@@ -394,12 +394,12 @@ void test_buffer(void)
     {
         LX_Log::log("Open %s ...", str1.c_str());
         LX_FileBuffer *f = new LX_FileBuffer(str1);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The following file was loaded: ", str1.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The following file was loaded: ", str1.c_str());
         delete f;
     }
     catch(IOException &e)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot load %s; Expected : a valid refence; Got : %s",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot load %s; Expected : a valid refence; Got : %s",
                         str1.c_str(), e.what());
     }
 
@@ -420,12 +420,12 @@ void test_buffer2(void)
     {
         LX_Log::log("Open %s at %u and read %u bytes ...", str1.c_str(),off1,sz1);
         LX_FileBuffer *f = new LX_FileBuffer(str1, off1, sz1);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - The following file was loaded: ", str1.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The following file was loaded: ", str1.c_str());
         delete f;
     }
     catch(IOException &e)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot load %s; %s",
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot load %s; %s",
                         e.what(), str1.c_str());
     }
 
@@ -434,12 +434,12 @@ void test_buffer2(void)
     {
         LX_Log::log("Open %s at %u and read %u bytes ...", str2.c_str(), off2, sz2);
         LX_FileBuffer *f = new LX_FileBuffer(str2, off2, sz2);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - it should fail: %s", str2.c_str());
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - it should fail: %s", str2.c_str());
         delete f;
     }
     catch(IOException &)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - IOException occurred as expected");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - IOException occurred as expected");
     }
 
     LX_Log::log(" = END TEST = ");
@@ -462,11 +462,11 @@ void test_tmp(void)
         tmp.read(buf,1024);
         LX_Log::log("Read the tmp file from the beginning ...");
         LX_Log::log("got: %s",buf);
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - temporary file done",buf);
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - temporary file done",buf);
     }
     catch(LX_FileIO::IOException &ioe)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - %s",ioe.what());
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - %s",ioe.what());
     }
 
     LX_Log::log(" = END TEST = ");
@@ -554,17 +554,17 @@ void test_fs(void)
 
     for(auto it = basename_ctest.begin(); it != basename_ctest.end(); it++)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST," → basename of %s",
+        LX_Log::logInfo(LX_Log::TEST," → basename of %s",
                         (it->first.utf8_empty() ? "<empty>" : it->first.utf8_str()) );
         UTF8string u8got = LX_FileSystem::basename(it->first);
         if(u8got != it->second)
         {
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: %s; got: %s",
+            LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: %s; got: %s",
                             it->second.utf8_str(),u8got.utf8_str());
         }
         else
         {
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected: %s; got: %s",
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - expected: %s; got: %s",
                             it->second.utf8_str(),u8got.utf8_str());
         }
     }
@@ -574,17 +574,17 @@ void test_fs(void)
 
     for(auto it = dirname_ctest.begin(); it != dirname_ctest.end(); it++)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST," → dirname of %s",
+        LX_Log::logInfo(LX_Log::TEST," → dirname of %s",
                         (it->first.utf8_empty() ? "<empty>" : it->first.utf8_str()) );
         UTF8string u8got = LX_FileSystem::dirname(it->first);
         if(u8got != it->second)
         {
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - expected: %s; got: %s",
+            LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: %s; got: %s",
                             it->second.utf8_str(),u8got.utf8_str());
         }
         else
         {
-            LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - expected: %s; got: %s",
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - expected: %s; got: %s",
                             it->second.utf8_str(),u8got.utf8_str());
         }
     }
@@ -606,21 +606,21 @@ void test_getChunk(void)
     try
     {
         LX_Mixer::LX_Chunk *dump = f.loadSample();
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - LX_Chunk instanciation done.");
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - LX_Chunk instanciation done.");
         delete dump;
     }
     catch(IOException & ioe)
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - Cannot instanciate LX_Chunk with a file buffer as argument");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - Cannot instanciate LX_Chunk with a file buffer as argument");
     }
 
     lxmix = LX_Mixer::loadSample(f);
 
     if(lxmix == nullptr)
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"FAILURE - nullptr -> %s",LX_getError());
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - nullptr -> %s",LX_getError());
     else
     {
-        LX_Log::logInfo(LX_Log::LX_LOG_TEST,"SUCCESS - loaded from %s",f.getFilename());
+        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - loaded from %s",f.getFilename());
         delete lxmix;
     }
 

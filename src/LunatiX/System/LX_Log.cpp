@@ -115,38 +115,38 @@ void setDefaultPriority() noexcept
     SDL_LogResetPriorities();
 }
 
-void setVerbosePriority(LX_CATEGORY category) noexcept
+void setVerbosePriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_VERBOSE);
 }
 
-void setDebugPriority(LX_CATEGORY category) noexcept
+void setDebugPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_DEBUG);
 }
 
-void setInfoPriority(LX_CATEGORY category) noexcept
+void setInfoPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_INFO);
 }
 
-void setWarningPriority(LX_CATEGORY category) noexcept
+void setWarningPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_WARN);
 }
 
-void setErrorPriority(LX_CATEGORY category) noexcept
+void setErrorPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_ERROR);
 }
 
-void setCriticalPriority(LX_CATEGORY category) noexcept
+void setCriticalPriority(LX_LogType category) noexcept
 {
     SDL_LogSetPriority(category, SDL_LOG_PRIORITY_CRITICAL);
 }
 
 
-void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept
+void logVerbose(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -155,7 +155,7 @@ void logVerbose(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logDebug(LX_CATEGORY category, std::string format, ...) noexcept
+void logDebug(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -164,7 +164,7 @@ void logDebug(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logInfo(LX_CATEGORY category, std::string format, ...) noexcept
+void logInfo(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -173,7 +173,7 @@ void logInfo(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logWarning(LX_CATEGORY category, std::string format, ...) noexcept
+void logWarning(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -182,7 +182,7 @@ void logWarning(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logError(LX_CATEGORY category, std::string format, ...) noexcept
+void logError(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -191,7 +191,7 @@ void logError(LX_CATEGORY category, std::string format, ...) noexcept
     va_end(args);
 }
 
-void logCritical(LX_CATEGORY category, std::string format, ...) noexcept
+void logCritical(LX_LogType category, std::string format, ...) noexcept
 {
     va_list args;
     va_start(args, format);
@@ -205,7 +205,7 @@ void log(std::string format, ...) noexcept
     va_list args;
     va_start(args, format);
     std::string str = "    " + getDate() + format;
-    SDL_LogMessageV(LX_LOG_APPLICATION, SDL_LOG_PRIORITY_INFO, str.c_str(), args);
+    SDL_LogMessageV(APPLICATION, SDL_LOG_PRIORITY_INFO, str.c_str(), args);
     va_end(args);
 }
 

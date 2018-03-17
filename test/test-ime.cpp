@@ -136,7 +136,7 @@ int main(int argc, char** argv)
     }
     catch(...)
     {
-        LX_Log::logError(LX_Log::LX_CATEGORY::LX_LOG_TEST,
+        LX_Log::logError(LX_Log::LX_LogType::TEST,
                          "FAILURE - Unexpected exception!");
     }
 
