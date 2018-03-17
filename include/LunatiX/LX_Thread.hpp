@@ -56,7 +56,7 @@ size_t getCurrentThreadID() noexcept;
 */
 class LX_Thread
 {
-    std::thread thread;
+    std::thread _thread;
 
     LX_Thread() = delete;
     LX_Thread(const LX_Thread&) = delete;
