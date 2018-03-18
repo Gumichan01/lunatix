@@ -240,7 +240,6 @@ void test_music()
         LX_Mixer::LX_Music music(sm);
         LX_Log::log("SUCCESS - Loaded");
 
-        const libtagpp::Tag& tag = music.getInfo();
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - music loaded");
         LX_Log::logInfo(LX_Log::TEST,"play music");
 
@@ -260,6 +259,7 @@ void test_music()
         else
             LX_Log::logInfo(LX_Log::TEST,"FAILURE - play music KO");
 
+        const libtagpp::Tag& tag = music.getInfo();
         LX_Log::log("================================");
         LX_Log::log("Title - %s",tag.title());
         LX_Log::log("Artist - %s",tag.artist());
@@ -399,7 +399,9 @@ void test_effects()
         LX_Mixer::allocateChannels(255);
         LX_Mixer::groupChannels(1, 32, 64);
         LX_Mixer::LX_MixerEffect effect;
-        effect.type = {true, false, true, true};
+        effect.type.panning = true;
+        effect.type.distance = true;
+        effect.type.reverse_stereo = true;
         effect.loops = 0;
         effect.pan_left  = 1;
         effect.pan_right = 254;
