@@ -64,15 +64,15 @@ namespace LX_Log
 *
 */
 enum LX_LogType: int {APPLICATION = 0,  /**< Application log    */
-                       ASSERT = 1,       /**< Assertion log      */
-                       ERROR = 2,        /**< Error log          */
-                       SYSTEM = 3,       /**< System log         */
-                       AUDIO = 4,        /**< Audio log          */
-                       VIDEO = 5,        /**< Video log          */
-                       RENDER = 6,       /**< Rendering log      */
-                       INPUT = 7,        /**< Input log          */
-                       TEST = 8          /**< Test log           */
-                      };
+                      ASSERT = 1,       /**< Assertion log      */
+                      ERROR = 2,        /**< Error log          */
+                      SYSTEM = 3,       /**< System log         */
+                      AUDIO = 4,        /**< Audio log          */
+                      VIDEO = 5,        /**< Video log          */
+                      RENDER = 6,       /**< Rendering log      */
+                      INPUT = 7,        /**< Input log          */
+                      TEST = 8          /**< Test log           */
+                     };
 
 /**
 *   @fn bool isDebugMode() noexcept
