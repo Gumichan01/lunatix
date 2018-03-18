@@ -81,10 +81,10 @@ class LX_Chunk;
 */
 struct LX_MixerEffectType
 {
-    bool PANNING = false;       /**< Panning    */
-    bool POSITION = false;      /**< Position   */
-    bool DISTANCE = false;      /**< Distance   */
-    bool STEREO = false;        /**< Stereo     */
+    bool panning = false;           /**< Panning        */
+    bool position = false;          /**< Position       */
+    bool distance = false;          /**< Distance       */
+    bool reverse_stereo = false;    /**< Reverse Stereo */
 };
 
 
@@ -478,7 +478,7 @@ void removePanning(int chan) noexcept;
 *   Set the virtual position of the audio source.
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
-*   @note This function call setPosition(angle, LX_MIX_FX_NO_DISTANCE)
+*   @note This function call setPosition(angle, LX_MIX_FX_NO_distance)
 */
 void setPosition(int16_t angle) noexcept;
 /**

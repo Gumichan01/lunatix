@@ -32,14 +32,22 @@ namespace
 
 const uint8_t LX_MIX_FX_LOUD = 255;         /**< Loud (for effect functions)    */
 const uint8_t LX_MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) */
-const uint8_t LX_MIX_FX_NO_DISTANCE = 0;    /**< The distance between the source and the listener */
+const uint8_t LX_MIX_FX_NO_distance = 0;    /**< The distance between the source and the listener */
 const uint16_t LX_MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
+
+constexpr struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE;
 
 constexpr bool operator ==(const LX_Mixer::LX_MixerEffectType& t,
                            const LX_Mixer::LX_MixerEffectType& u)
 {
-    return t.DISTANCE == u.DISTANCE && t.PANNING == u.PANNING
-           && t.POSITION == u.POSITION && t.STEREO == u.STEREO;
+    return t.distance == u.distance && t.panning == u.panning
+           && t.position == u.position && t.reverse_stereo == u.reverse_stereo;
+}
+
+constexpr bool operator !=(const LX_Mixer::LX_MixerEffectType& t,
+                           const LX_Mixer::LX_MixerEffectType& u)
+{
+    return !(t == u);
 }
 
 }
@@ -59,8 +67,6 @@ unsigned short fx_volume = LX_DEFAULT_VOLUME;
 unsigned short music_pvolume = LX_DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
-
-constexpr struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE;;
 
 
 void setOverallVolume(unsigned short volume) noexcept
@@ -187,17 +193,16 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops) noexcept
             haltChannel(chan);
     }
 
+    Mix_UnregisterAllEffects(chan);
     return chunk.play(chan, loops);
 }
 
 bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexcept
 {
     int chan = -1;
-    int _tag;
+    int _tag = -1;
 
-    if(groupCount(tag) == 0)
-        _tag = -1;
-    else
+    if(groupCount(tag) != 0)
         _tag = tag;
 
     chan = channelAvailable(_tag);
@@ -210,23 +215,20 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexc
             haltChannel(chan);
     }
 
-    if(effect.type == LX_EFFECT_NONE)
-        return chunk.play(chan, effect.loops);
+    Mix_UnregisterAllEffects(chan);
 
-    else
+    if(effect.type != LX_EFFECT_NONE)
     {
-        Mix_UnregisterAllEffects(chan);
-
-        if(effect.type.PANNING)
+        if(effect.type.panning)
             setPanning(chan, effect.pan_left, effect.pan_right);
 
-        if(effect.type.POSITION)
+        if(effect.type.position)
             setPosition(chan, effect.pos_angle, effect.pos_distance);
 
-        if(effect.type.DISTANCE)
+        if(effect.type.distance)
             setDistance(chan, effect.distance);
 
-        if(effect.type.STEREO)
+        if(effect.type.reverse_stereo)
             reverseStereo(chan, effect.rev_stereo);
     }
 
@@ -309,7 +311,7 @@ void removePanning(int chan) noexcept
 
 void setPosition(int16_t angle) noexcept
 {
-    setPosition(angle, LX_MIX_FX_NO_DISTANCE);
+    setPosition(angle, LX_MIX_FX_NO_distance);
 }
 
 
@@ -327,12 +329,12 @@ void setPosition(int chan, int16_t angle, uint8_t distance) noexcept
 void resetPosition() noexcept
 {
     Mix_SetPosition(MIX_CHANNEL_POST, LX_MIX_FX_NO_ANGLE,
-                    LX_MIX_FX_NO_DISTANCE);
+                    LX_MIX_FX_NO_distance);
 }
 
 void resetPosition(int chan) noexcept
 {
-    Mix_SetPosition(chan, LX_MIX_FX_NO_ANGLE, LX_MIX_FX_NO_DISTANCE);
+    Mix_SetPosition(chan, LX_MIX_FX_NO_ANGLE, LX_MIX_FX_NO_distance);
 }
 
 void reverseStereo(bool flip) noexcept
