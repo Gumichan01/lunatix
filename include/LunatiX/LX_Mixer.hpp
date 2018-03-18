@@ -81,10 +81,10 @@ class LX_Chunk;
 */
 struct LX_MixerEffectType
 {
-    bool PANNING;       /**< Panning    */
-    bool POSITION;      /**< Position   */
-    bool DISTANCE;      /**< Distance   */
-    bool STEREO;        /**< Stereo     */
+    bool PANNING = false;       /**< Panning    */
+    bool POSITION = false;      /**< Position   */
+    bool DISTANCE = false;      /**< Distance   */
+    bool STEREO = false;        /**< Stereo     */
 };
 
 
@@ -94,14 +94,14 @@ struct LX_MixerEffectType
 */
 struct LX_MixerEffect
 {
-    LX_MixerEffectType type;    /**< Effect type            */
-    uint8_t pan_left;           /**< Left panning           */
-    uint8_t pan_right;          /**< Right panning          */
-    int16_t pos_angle;          /**< Angle (position)       */
-    uint8_t pos_distance;       /**< Distance (position)    */
-    uint8_t distance;           /**< Distance               */
-    bool rev_stereo;            /**< Reverse stereo         */
-    int loops;                  /**< Loops                  */
+    LX_MixerEffectType type;        /**< Effect type            */
+    uint8_t pan_left = 0;           /**< Left panning           */
+    uint8_t pan_right = 0;          /**< Right panning          */
+    int16_t pos_angle = 0;          /**< Angle (position)       */
+    uint8_t pos_distance = 0;       /**< Distance (position)    */
+    uint8_t distance = 0;           /**< Distance               */
+    bool rev_stereo = false;        /**< Reverse stereo         */
+    int loops = 0;                  /**< Loops                  */
 };
 
 /* == Volume == */
