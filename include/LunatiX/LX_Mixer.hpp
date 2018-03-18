@@ -273,6 +273,9 @@ int groupCount(int tag) noexcept;
 int channelAvailable(int tag) noexcept;
 
 /**
+*   @deprecated This function will be removed in LunatiX v0.14.0.
+*   You must use the second signature instead
+*
 *   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0) noexcept
 *
 *   Play the chunk on a channel of the group specified by the tag

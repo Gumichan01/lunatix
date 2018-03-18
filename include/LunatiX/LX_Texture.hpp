@@ -590,6 +590,7 @@ public:
     unsigned int getTextSize() const noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
+    *   Please use the other version that returns a pair
     *
     *   @fn void getTextDimension(int& w, int& h) const noexcept
     *
@@ -621,8 +622,6 @@ public:
     */
     LX_Colour getTextColour() const noexcept;
     /**
-    *   @deprecated This signature will be removed in v0.14.0
-    *
     *   @fn void setPosition(int x, int y) noexcept
     *
     *   Set the position of the current text

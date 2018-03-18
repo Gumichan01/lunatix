@@ -88,6 +88,7 @@ float fxrand(float minf = 0.0f, float maxf = 1.0f) noexcept;
 
 /**
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0
+*   Please use ::xrand() instead.
 *
 *   @fn unsigned long long xorshiftRand() noexcept
 *   Returns a pseudorandom number between 0 and (2⁶⁴ - 1)
@@ -99,6 +100,7 @@ unsigned long long xorshiftRand() noexcept;
 
 /**
 *   @deprecated crand() is deprecated and will be removed in v0.14.0
+*   Please use ::xrand() instead.
 *
 *   @fn int crand() noexcept
 *
@@ -123,6 +125,7 @@ inline unsigned long long xorshiftRand100() noexcept
 
 /**
 *   @deprecated crand100() is deprecated and will be removed in v0.14.0
+*   Please use ::xrand() instead.
 *
 *   @fn inline int crand100() noexcept
 *   C random value between 0 and 100
