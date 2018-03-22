@@ -29,11 +29,6 @@ inline std::basic_string<unsigned char> toUstring(const std::string& str)
     return std::basic_string<unsigned char>(str.begin(), str.end());
 }
 
-inline std::string toString(const std::basic_string<unsigned char>& u8str)
-{
-    return std::string(u8str.begin(), u8str.end());
-}
-
 // Used in utf8_find
 void preprocess(const UTF8string& str,
                 std::unordered_map<UTF8string::u8char, size_t>& u8map) noexcept
@@ -64,140 +59,123 @@ UTF8string::UTF8string(const char * str)
 
 
 UTF8string::UTF8string(const std::string& str)
-    : _utf8data(str.cbegin(), str.cend())
+    : _utf8string(str)
 {
     if(!utf8_is_valid_())
         throw std::invalid_argument("Invalid UTF-8 string\n");
 
     _utf8length = utf8_length_();
-    _string = str;
-    _cached = true;
 }
 
 
 UTF8string::UTF8string(const UTF8string& u8str) noexcept
-    : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
-      _string(u8str._string), _cached(u8str._cached) {}
+    : _utf8string(u8str._utf8string), _utf8length(u8str._utf8length) {}
 
 UTF8string::UTF8string(const UTF8string& u8str, size_t pos, size_t len) noexcept
     : UTF8string(u8str.utf8_substr(pos, len)) {}
 
 UTF8string::UTF8string(UTF8string&& u8str) noexcept
-    : _utf8data(u8str._utf8data), _utf8length(u8str._utf8length),
-      _string(u8str._string), _cached(u8str._cached)
+    : _utf8string(u8str._utf8string), _utf8length(u8str._utf8length)
 {
     u8str.utf8_clear();
-    u8str._utf8data.shrink_to_fit();
-    u8str._string.shrink_to_fit();
+    u8str._utf8string.shrink_to_fit();
 }
 
 UTF8string& UTF8string::operator =(const char * str)
 {
-    const std::string S(str);
-    const UTF8string::u8string BACKUP = _utf8data;
-    _utf8data = std::move(toUstring(S));
+    const UTF8string::u8string BACKUP = _utf8string;
+    _utf8string = std::string(str);
 
     if(!utf8_is_valid_())
     {
-        _utf8data = BACKUP;
+        _utf8string = BACKUP;
         throw std::invalid_argument("Invalid UTF-8 string\n");
     }
 
     _utf8length = utf8_length_();
-    _string = S;
-    _cached = true;
     return *this;
 }
 
 
 UTF8string& UTF8string::operator =(const std::string& str)
 {
-    const UTF8string::u8string BACKUP = _utf8data;
-    _utf8data = std::move(toUstring(str));
+    const UTF8string::u8string BACKUP = _utf8string;
+    _utf8string = str;
 
     if(!utf8_is_valid_())
     {
-        _utf8data = BACKUP;
+        _utf8string = BACKUP;
         throw std::invalid_argument("Invalid UTF-8 string\n");
     }
 
     _utf8length = utf8_length_();
-    _string = str;
-    _cached = true;
     return *this;
 }
 
 
 UTF8string& UTF8string::operator =(const UTF8string& u8str) noexcept
 {
-    _utf8data = u8str._utf8data;
+    _utf8string = u8str._utf8string;
     _utf8length = u8str._utf8length;
-    _string = u8str._string;
-    _cached = u8str._cached;
     return *this;
 }
 
 UTF8string& UTF8string::operator =(UTF8string&& u8str) noexcept
 {
-    _utf8data = u8str._utf8data;
+    _utf8string = u8str._utf8string;
     _utf8length = u8str._utf8length;
-    _string = u8str._string;
-    _cached = u8str._cached;
 
     u8str.utf8_clear();
-    u8str._utf8data.shrink_to_fit();
-    u8str._string.shrink_to_fit();
+    u8str._utf8string.shrink_to_fit();
 
     return *this;
 }
 
 const UTF8string& UTF8string::operator +=(const std::string& str)
 {
-    const UTF8string::u8string BACKUP = _utf8data;
-    _utf8data += std::move(toUstring(str));
+    const UTF8string::u8string BACKUP = _utf8string;
+    _utf8string += str;
 
     if(!utf8_is_valid_())
     {
-        _utf8data = BACKUP;
+        _utf8string = BACKUP;
         throw std::invalid_argument("Invalid UTF-8 string\n");
     }
 
     _utf8length = utf8_length_();
-    _cached = false;
     return *this;
 }
 
 
 const UTF8string& UTF8string::operator +=(const UTF8string& u8str)
 {
-    _utf8data  += u8str._utf8data;
+    _utf8string  += u8str._utf8string;
     _utf8length = utf8_length_();
-    _cached = false;
     return *this;
 }
 
 
 const UTF8string& UTF8string::operator +=(const char * str)
 {
-    UTF8string::u8string BACKUP = _utf8data;
-    _utf8data += std::move(toUstring(std::string(str)));
+    UTF8string::u8string BACKUP = _utf8string;
+    _utf8string += std::move(UTF8string::u8string(str));
 
     if(!utf8_is_valid_())
     {
-        _utf8data = BACKUP;
+        _utf8string = BACKUP;
         throw std::invalid_argument("Invalid UTF-8 string\n");
     }
 
     _utf8length = utf8_length_();
-    _cached = false;
     return *this;
 }
 
 
 bool UTF8string::utf8_is_valid_() const noexcept
 {
-    auto it = _utf8data.begin();
-    const auto ITEND = _utf8data.end();
+    const std::basic_string<unsigned char> U8STRING = toUstring(_utf8string);
+    auto it = U8STRING.begin();
+    const auto ITEND = U8STRING.cend();
 
     while(it < ITEND)
     {
@@ -292,8 +270,8 @@ bool UTF8string::utf8_is_valid_() const noexcept
 // Compute the length of the utf-8 string (in number of codepoints)
 size_t UTF8string::utf8_length_() const noexcept
 {
-    auto end_data = _utf8data.end();
-    auto it = _utf8data.begin();
+    auto end_data = _utf8string.end();
+    auto it = _utf8string.begin();
     size_t len = 0;
 
     while(it != end_data)
@@ -332,15 +310,15 @@ size_t UTF8string::utf8_length_() const noexcept
 // Compute the memory size of a codepoint in the string (in byte)
 size_t UTF8string::utf8_codepoint_len_(const size_t j) const noexcept
 {
-    if (0xf0 == (0xf8 & _utf8data[j]))
+    if (0xf0 == (0xf8 & _utf8string[j]))
     {
         return 4;
     }
-    else if (0xe0 == (0xf0 & _utf8data[j]))
+    else if (0xe0 == (0xf0 & _utf8string[j]))
     {
         return 3;
     }
-    else if (0xc0 == (0xe0 & _utf8data[j]))
+    else if (0xc0 == (0xe0 & _utf8string[j]))
     {
         return 2;
     }
@@ -351,10 +329,8 @@ size_t UTF8string::utf8_codepoint_len_(const size_t j) const noexcept
 
 void UTF8string::utf8_clear() noexcept
 {
-    _utf8data.clear();
-    _string.clear();
+    _utf8string.clear();
     _utf8length = 0;
-    _cached = true;
 }
 
 
@@ -383,7 +359,7 @@ size_t UTF8string::utf8_bpos_at_(const size_t cpos) const noexcept
 UTF8string::u8string UTF8string::utf8_at_(const size_t index) const noexcept
 {
     size_t bpos = utf8_bpos_at_(index);
-    return _utf8data.substr(bpos, utf8_codepoint_len_(bpos));
+    return _utf8string.substr(bpos, utf8_codepoint_len_(bpos));
 }
 
 
@@ -392,13 +368,13 @@ UTF8string::u8char UTF8string::utf8_at(const size_t index) const
     if(index >= _utf8length)
         throw std::out_of_range("index value greater than the size of the string");
 
-    return toString(utf8_at_(index));
+    return utf8_at_(index);
 }
 
 
 UTF8string::u8char UTF8string::operator [](const size_t index) const noexcept
 {
-    return toString(utf8_at_(index));
+    return utf8_at_(index);
 }
 
 
@@ -408,13 +384,8 @@ void UTF8string::utf8_pop()
         throw std::length_error("Cannot remove the last element from an empty string");
 
     size_t bpos = utf8_bpos_at_(_utf8length - 1);
-    _utf8data.erase(bpos);
+    _utf8string.erase(bpos);
     _utf8length -= 1;
-
-    // If the cache was valid before this operation,
-    // keep the cache valid!
-    if(_cached)
-        _string.erase(bpos);
 }
 
 UTF8string& UTF8string::utf8_erase(const size_t index, const size_t count)
@@ -429,18 +400,17 @@ UTF8string& UTF8string::utf8_erase(const size_t index, const size_t count)
 
     const size_t BFIRST = utf8_bpos_at_(index);
     const size_t BLAST  = utf8_bpos_at_(index + COUNT);
-    const size_t N      = _utf8data.size();
+    const size_t N      = _utf8string.size();
     u8string u8s;
 
     for(size_t i = 0U; i < N; ++i)
     {
         if(i < BFIRST || i > BLAST - 1)
-            u8s += _utf8data[i];
+            u8s += _utf8string[i];
     }
 
-    _utf8data = u8s;
+    _utf8string = u8s;
     _utf8length = utf8_length_();
-    _cached = false;
     return *this;
 }
 
@@ -545,9 +515,7 @@ size_t UTF8string::utf8_find(const UTF8string& str, size_t pos) const
 }
 
 // Tail-recursive function that reverse the string
-UTF8string UTF8string::utf8_reverse_aux_(UTF8iterator& it,
-        const UTF8iterator& _end,
-        UTF8string& res)
+UTF8string UTF8string::utf8_reverse_aux_(UTF8iterator& it, const UTF8iterator& _end, UTF8string& res)
 {
     if(it == _end)
         return res;
@@ -563,8 +531,7 @@ UTF8string& UTF8string::utf8_reverse()
     {
         UTF8iterator it = utf8_end();
         UTF8string rev;
-        _utf8data = (utf8_reverse_aux_(it, utf8_iterator_(), rev))._utf8data;
-        _cached = false;
+        _utf8string = (utf8_reverse_aux_(it, utf8_iterator_(), rev))._utf8string;
     }
 
     return *this;
@@ -573,7 +540,7 @@ UTF8string& UTF8string::utf8_reverse()
 
 size_t UTF8string::utf8_size() const noexcept
 {
-    return _utf8data.size();
+    return _utf8string.size();
 }
 
 
@@ -584,22 +551,12 @@ size_t UTF8string::utf8_length() const noexcept
 
 const std::string UTF8string::utf8_sstring() const noexcept
 {
-    if(!_cached)
-    {
-        _string = std::move(toString(_utf8data));
-        _cached = true;
-    }
-    return _string;
+    return _utf8string;
 }
 
 const char * UTF8string::utf8_str() const noexcept
 {
-    if(!_cached)
-    {
-        _string = std::move(toString(_utf8data));
-        _cached = true;
-    }
-    return _string.c_str();
+    return _utf8string.c_str();
 }
 
 size_t UTF8string::hash() const noexcept
@@ -608,7 +565,7 @@ size_t UTF8string::hash() const noexcept
     // of the Fowler-Noll-Vo hash function
     size_t result = 2166136261;
 
-    for(const unsigned char& c : _utf8data)
+    for(const unsigned char& c : _utf8string)
     {
         result = (result * 16777619) ^ c;
     }

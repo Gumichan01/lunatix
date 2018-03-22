@@ -25,7 +25,6 @@
 class UTF8iterator;
 
 /**
-*   @ingroup Utils
 *   @class UTF8string
 *   @brief UTF-8 string class
 *
@@ -34,12 +33,10 @@ class UTF8iterator;
 class UTF8string
 {
     using byte_t = unsigned char;
-    using u8string = std::basic_string<byte_t>;
+    using u8string = std::string;
 
-    u8string _utf8data{};
+    u8string _utf8string = {};
     size_t _utf8length = 0U;
-    mutable std::string _string{""};
-    mutable bool _cached = false;
 
     bool utf8_is_valid_() const noexcept;
     size_t utf8_length_() const noexcept;
@@ -55,7 +52,7 @@ public:
 
     /**
     *   @typedef u8char
-    *   @brief the UTF-8 character
+    *   @brief The UTF-8 character
     */
     using u8char = std::string;
 
