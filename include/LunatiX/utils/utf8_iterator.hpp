@@ -22,13 +22,12 @@ class UTF8string;
 
 
 /**
-*   @ingroup Utils
-*   @class UTF8iterator
+*   @class UTF8iterator final
 *   @brief Iterator on UTF8 string
 *
 *   This class defines the iterator of UTF-8 string
 */
-class UTF8iterator
+class UTF8iterator final
 {
     size_t _index = 0;
     UTF8string _data;
