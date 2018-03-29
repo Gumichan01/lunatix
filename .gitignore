@@ -87,7 +87,16 @@ Session.vim
 # auto-generated tag files
 tags
 
-### Others ###
+### CodeBlocks ###
+# specific to CodeBlocks IDE
+*.layout
+*.depend
+
+# generated directories
+bin/
+obj/
+
+### Others (custom) ###
 *.log
 win-*
 html/
@@ -98,5 +107,6 @@ include/GL/
 *.cppcheck
 Makefile.depend
 cscope*
+lunatix.cbp
 
 # End of https://www.gitignore.io/api/vim,c++,linux,macos
