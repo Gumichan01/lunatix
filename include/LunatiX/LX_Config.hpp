@@ -36,7 +36,7 @@ namespace LX_Config
 *
 *   This class is responsible of loading the configuration of the library
 */
-class LX_Configuration
+class LX_Configuration final
 {
     LX_Configuration() noexcept;
     LX_Configuration(LX_Configuration& c) = delete;

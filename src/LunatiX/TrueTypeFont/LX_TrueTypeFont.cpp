@@ -57,7 +57,7 @@ enum class LX_TTF_TypeText
 
 /* Private implementation */
 
-struct LX_Font_
+struct LX_Font_ final
 {
     UTF8string _font_str;                    /* The font file       */
     unsigned int _font_size;                 /* The font size       */

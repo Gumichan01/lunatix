@@ -71,10 +71,10 @@ enum class LX_MIRROR : short
 static constexpr LX_ImgRect RNULL = {{0,0},0,0};
 
 /**
-*   @class LX_ImageException
+*   @class LX_ImageException final
 *   @brief Exception class related to the image handling
 */
-class LX_ImageException : public std::exception
+class LX_ImageException final : public std::exception
 {
     std::string _string_error;
 
@@ -83,7 +83,7 @@ public:
     explicit LX_ImageException(std::string err);
     LX_ImageException(const LX_ImageException& me);
     /// Get the error message
-    virtual const char * what() const noexcept;
+    virtual const char * what() const noexcept override;
     ~LX_ImageException() = default;
 };
 
@@ -222,7 +222,7 @@ public:
               const LX_ImgRect& img_rect,
               LX_PixelFormat format = LX_PixelFormat::RGBA8888);
 
-    virtual void draw() noexcept;
+    virtual void draw() noexcept override;
     /**
     *   @fn virtual void draw(const LX_ImgRect& box) noexcept
     *
@@ -280,12 +280,12 @@ public:
 
 
 /**
-*   @class LX_AnimatedSprite
+*   @class LX_AnimatedSprite final
 *   @brief The animated sprite
 *
 *   This class describes a sprite sheet used for animation.
 */
-class LX_AnimatedSprite: public LX_Sprite
+class LX_AnimatedSprite final : public LX_Sprite
 {
     friend class LX_BufferedImage;
     const std::vector<LX_ImgRect> _coordinates;
@@ -334,9 +334,10 @@ public:
                       bool loop, LX_PixelFormat format = LX_PixelFormat::RGBA8888);
 
 
-    virtual void draw(const LX_ImgRect& box) noexcept;
-    virtual void draw(const LX_ImgRect& box, const double angle) noexcept;
-    virtual void draw(const LX_ImgRect& box, const double angle, const LX_MIRROR mirror) noexcept;
+    virtual void draw(const LX_ImgRect& box) noexcept override;
+    virtual void draw(const LX_ImgRect& box, const double angle) noexcept override;
+    virtual void draw(const LX_ImgRect& box, const double angle,
+                      const LX_MIRROR mirror) noexcept override;
 
     /**
     *   @fn void resetAnimation() noexcept
@@ -362,7 +363,7 @@ public:
 
 
 /**
-*   @class LX_BufferedImage
+*   @class LX_BufferedImage final
 *   @brief The Buffered image
 *
 *   This class describes an image stored in memory.
@@ -370,7 +371,7 @@ public:
 *
 *   @note This class throws LX_ImageException if an object cannot be created
 */
-class LX_BufferedImage
+class LX_BufferedImage final
 {
     friend class LX_StreamingTexture;
     friend class LX_Device::LX_Mouse;
@@ -463,12 +464,12 @@ public:
 
 
 /**
-*   @class LX_StreamingTexture
+*   @class LX_StreamingTexture final
 *   @brief A special texture for texture streaming.
 *
 *   This class describes a texture for streaming.
 */
-class LX_StreamingTexture: public LX_Texture
+class LX_StreamingTexture final : public LX_Texture
 {
     SDL_Surface *_screen;
     bool _update;
@@ -504,7 +505,7 @@ public:
     */
     void update() noexcept;
 
-    void draw() noexcept;
+    virtual void draw() noexcept override;
 
     virtual ~LX_StreamingTexture();
 };
@@ -550,7 +551,7 @@ protected:
 
 public:
 
-    virtual void draw() noexcept;
+    virtual void draw() noexcept override;
     /**
     *   @fn virtual void draw(const double angle) noexcept
     *
@@ -695,7 +696,7 @@ public:
 
 
 /**
-*   @class LX_SolidTextTexture
+*   @class LX_SolidTextTexture final
 *   @brief The solid text texture
 *
 *   This class describes a solid text texture.
@@ -704,7 +705,7 @@ public:
 *
 *   Using this class for drawing text is fast.
 */
-class LX_SolidTextTexture: public LX_TextTexture
+class LX_SolidTextTexture final : public LX_TextTexture
 {
 protected:
 
@@ -747,7 +748,7 @@ public:
 
 
 /**
-*   @class LX_ShadedTextTexture
+*   @class LX_ShadedTextTexture final
 *   @brief The shaded text texture
 *
 *   This class describes a shaded text texture.
@@ -757,7 +758,7 @@ public:
 *   By default, at instantiation, the background colour is black, but it can be
 *   set using *setBgColour()*
 */
-class LX_ShadedTextTexture: public LX_TextTexture
+class LX_ShadedTextTexture final : public LX_TextTexture
 {
     LX_Colour _bgcolour;
 
@@ -821,7 +822,7 @@ public:
 
 
 /**
-*   @class LX_BlendedTextTexture
+*   @class LX_BlendedTextTexture final
 *   @brief The blended text texture
 *
 *   This class describes a blended text texture.
@@ -831,7 +832,7 @@ public:
 *   Using this class for drawing text should be very slow, in particular if
 *   you call LX_BlendedImage::setText() and LX_BlendedImage::setTextSize() frequently.
 */
-class LX_BlendedTextTexture: public LX_TextTexture
+class LX_BlendedTextTexture final : public LX_TextTexture
 {
 protected:
 

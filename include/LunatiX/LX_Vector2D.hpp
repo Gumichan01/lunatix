@@ -26,12 +26,12 @@ namespace LX_Physics
 {
 
 /**
-*   @struct LX_Vector2D
+*   @struct LX_Vector2D final
 *   @brief The vector2D structure
 *
 *   This structure describes a 2-dimension vector
 */
-struct LX_Vector2D
+struct LX_Vector2D final
 {
     Float vx;   /**< X velocity */
     Float vy;   /**< Y velocity */

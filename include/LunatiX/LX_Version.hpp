@@ -31,11 +31,11 @@ namespace LX_VersionInfo
 {
 
 /**
-*   @struct LX_Version
+*   @struct LX_Version final
 *   @brief The version structure
 *   The current version of the library
 */
-struct LX_Version
+struct LX_Version final
 {
     short major;        /**< Major version  */
     short minor;        /**< Minor version  */

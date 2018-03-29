@@ -40,7 +40,7 @@ bool mouseIsHaptic() noexcept
 /* Private implementation */
 
 // Specific to LX_Haptic
-struct LX_Haptic_
+struct LX_Haptic_ final
 {
     int _instanceID = -1;
 
@@ -56,7 +56,7 @@ struct LX_Haptic_
 };
 
 // Common data
-struct LX_Haptic_common
+struct LX_Haptic_common final
 {
     SDL_Haptic *_haptic = nullptr;
 

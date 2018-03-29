@@ -29,13 +29,13 @@ using namespace LX_Physics;
 
 namespace LX_ParticleEngine
 {
-
+using FloatBox::fbox;
 const unsigned int DELAY = 16;
-const LX_Vector2D VNULL{0.0f, 0.0f};
+constexpr LX_Vector2D VNULL = {fbox(0.0f), fbox(0.0f)};
 
 /* LX_Particle — private implementation */
 
-class LX_Particle_
+class LX_Particle_ final
 {
     LX_FloatingBox _box;
     unsigned int _lifetime;             /* The delay to stay displayable */

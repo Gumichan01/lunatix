@@ -28,10 +28,10 @@ namespace LX_Mixer
 {
 
 /**
-*   @class LX_MixerException
+*   @class LX_MixerException final
 *   @brief Exception class of the Audio module
 */
-class LX_MixerException : public std::exception
+class LX_MixerException final : public std::exception
 {
     std::string _string_error;
 
@@ -39,7 +39,7 @@ public:
 
     explicit LX_MixerException(std::string err);
     LX_MixerException(const LX_MixerException& me);
-    virtual const char * what() const noexcept;
+    virtual const char * what() const noexcept override;
     ~LX_MixerException() = default;
 };
 

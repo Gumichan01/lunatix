@@ -37,7 +37,7 @@ class LX_Mouse_;
 *   @brief The mouse cursor
 *   It handles a user-defined mouse (with custom cursor)
 */
-class LX_Mouse
+class LX_Mouse final
 {
     std::unique_ptr<LX_Mouse_> _mimpl;
 

@@ -38,7 +38,7 @@ const char * LX_WindowNotFoundException::what() const noexcept
 
 /* LX_Window implementation */
 
-struct LX_WM_
+struct LX_WM_ final
 {
     std::unordered_map<uint32_t, LX_Win::LX_Window&> windows{};
 };

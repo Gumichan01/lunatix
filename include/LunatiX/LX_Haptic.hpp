@@ -173,11 +173,11 @@ public:
 };
 
 /**
-*   @class LX_MouseHaptic
+*   @class LX_MouseHaptic final
 *   @brief The mouse haptic device
 *   This class describes the force feedback system related to the mouse.
 */
-class LX_MouseHaptic: public LX_Haptic
+class LX_MouseHaptic final : public LX_Haptic
 {
     LX_MouseHaptic(LX_Haptic& h) = delete;
     LX_MouseHaptic& operator =(LX_MouseHaptic& h) = delete;
@@ -185,7 +185,7 @@ class LX_MouseHaptic: public LX_Haptic
 public:
 
     LX_MouseHaptic() noexcept;
-    virtual bool isOpened() const noexcept;
+    virtual bool isOpened() const noexcept override;
     ~LX_MouseHaptic() = default;
 };
 

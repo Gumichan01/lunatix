@@ -47,13 +47,13 @@ namespace LX_FileIO
 class LX_FileBuffer_;
 
 /**
-*   @class LX_FileBuffer
+*   @class LX_FileBuffer final
 *   @brief The file buffer class
 *
 *   This class contains information about a file buffer.
 *   It stores a memory copy of a file content into a buffer.
 */
-class LX_FileBuffer
+class LX_FileBuffer final
 {
     friend struct LX_TrueTypeFont::LX_Font_;
     std::unique_ptr<LX_FileBuffer_> _bimpl;

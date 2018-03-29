@@ -11,7 +11,7 @@
 */
 
 
-class _Prand
+class _Prand final
 {
 private:
 

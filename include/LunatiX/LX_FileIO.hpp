@@ -70,14 +70,14 @@ enum class LX_FileWhence : int
 
 
 /**
-*   @class IOException
+*   @class IOException final
 *   @brief The Input/Output file exception
 *
 *   This exception class occured when
 *   there is a problem on the LX_File constructor
 *
 */
-class IOException: public std::exception
+class IOException final : public std::exception
 {
     std::string _string_error;
 
@@ -87,7 +87,7 @@ public:
 
     explicit IOException(const std::string& err);
     IOException(const IOException& io);
-    const char * what() const noexcept;
+    const char * what() const noexcept override;
     ~IOException() noexcept;
 };
 
@@ -184,10 +184,10 @@ public:
 class LX_File_;
 
 /**
-*   @class LX_File
+*   @class LX_File final
 *   @brief The file handler
 */
-class LX_File: public virtual LX_AbstractFile
+class LX_File final : public virtual LX_AbstractFile
 {
     std::unique_ptr<LX_File_> _fimpl;
 
@@ -235,11 +235,11 @@ public:
     */
     LX_File(const UTF8string& filename, const LX_FileMode mode);
 
-    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept;
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept;
+    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept override;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept override;
 
-    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept;
-    virtual size_t write(const std::string& str) noexcept;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept override;
+    virtual size_t write(const std::string& str) noexcept override;
 
     virtual bool seek(long offset, LX_FileWhence whence) noexcept;
     virtual size_t tell() const noexcept;
@@ -268,10 +268,10 @@ public:
 class LX_TmpFile_;
 
 /**
-*   @class LX_TmpFile
+*   @class LX_TmpFile final
 *   @brief The temporary file
 */
-class LX_TmpFile: public virtual LX_AbstractFile
+class LX_TmpFile final : public virtual LX_AbstractFile
 {
     std::unique_ptr<LX_TmpFile_> _timpl;
 
@@ -282,13 +282,13 @@ public:
 
     LX_TmpFile();
 
-    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept;
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept;
+    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept override;
+    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept override;
 
-    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept;
-    virtual size_t write(const std::string& str) noexcept;
+    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept override;
+    virtual size_t write(const std::string& str) noexcept override;
 
-    virtual bool seek(long offset, LX_FileWhence whence) noexcept;
+    virtual bool seek(long offset, LX_FileWhence whence) noexcept override;
     virtual size_t tell() const noexcept;
 
     virtual ~LX_TmpFile();

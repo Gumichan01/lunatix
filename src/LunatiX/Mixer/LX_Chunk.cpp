@@ -29,7 +29,7 @@ namespace LX_Mixer
 
 /* LX_Chunk (private implementation) */
 
-class LX_Chunk_
+class LX_Chunk_ final
 {
     Mix_Chunk *_chunk = nullptr;
 

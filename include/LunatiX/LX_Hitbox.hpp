@@ -32,23 +32,23 @@ namespace LX_Physics
 {
 
 /**
-*   @struct LX_FloatPosition
+*   @struct LX_FloatPosition final
 *   @brief The position in floating-point value
 */
-struct LX_FloatPosition
+struct LX_FloatPosition final
 {
     Float x;    /**< X coordinates  */
     Float y;    /**< Y coordinates  */
 };
 
 /**
-*   @struct LX_FloatingBox
+*   @struct LX_FloatingBox final
 *   @brief The logical hitbox (Axis-Aligned Bounding Box)
 *
 *   @note If you want to use an Oriented Bounding Box (OBB),
 *         you need to use LX_Polygon instead
 */
-struct LX_FloatingBox
+struct LX_FloatingBox final
 {
     LX_FloatPosition p;         /**< Position   */
     int w;                      /**< Width      */
@@ -70,22 +70,22 @@ LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
 LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept;
 
 /**
-*   @struct LX_Segment
+*   @struct LX_Segment final
 *   @brief The segment
 *
 *   @note If you want to use an inifinite line, use LX_Line instead
 */
-struct LX_Segment
+struct LX_Segment final
 {
     LX_FloatPosition p;     /**< First point    */
     LX_FloatPosition q;     /**< Second point   */
 };
 
 /**
-*   @struct LX_Line
+*   @struct LX_Line final
 *   @brief The line
 */
-struct LX_Line
+struct LX_Line final
 {
     LX_FloatPosition o; /**< Origin point       */
     LX_Vector2D v;      /**< Direction vector   */
@@ -108,10 +108,10 @@ struct LX_Line
 
 
 /**
-*   @struct LX_Circle
+*   @struct LX_Circle final
 *   @brief The circle structure
 */
-struct LX_Circle
+struct LX_Circle final
 {
     LX_FloatPosition center;    /**< The point that represents the center   */
     unsigned int radius;        /**< The circle radius                      */

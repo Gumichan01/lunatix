@@ -39,10 +39,10 @@
 namespace LX_SystemInfo
 {
 /**
-*   @struct LX_DisplayMode
+*   @struct LX_DisplayMode final
 *   @brief Information about a display mode
 */
-struct LX_DisplayMode
+struct LX_DisplayMode final
 {
     int w;              /**< width */
     int h;              /**< height */

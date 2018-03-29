@@ -31,10 +31,10 @@ struct LX_Gamepad_;
 struct LX_GamepadInfo;
 
 /**
-*   @class LX_Gamepad
+*   @class LX_Gamepad final
 *   @brief The gamepad
 */
-class LX_Gamepad
+class LX_Gamepad final
 {
     std::unique_ptr<LX_Gamepad_> _gpimpl;
 

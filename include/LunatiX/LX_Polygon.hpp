@@ -31,13 +31,13 @@ struct LX_Vector2D;
 struct LX_FloatPosition;
 
 /**
-*   @class LX_PolygonException
+*   @class LX_PolygonException final
 *   @brief The exception class of LX_Window
 *
 *   This class describes the exception occured when
 *   the polygon cannot be loaded.
 */
-class LX_PolygonException : public std::exception
+class LX_PolygonException final : public std::exception
 {
     std::string _string_error;
 
@@ -46,7 +46,7 @@ public:
     explicit LX_PolygonException(std::string err);
     LX_PolygonException(const LX_PolygonException& pex);
     LX_PolygonException& operator =(const LX_PolygonException& pex);
-    const char * what() const noexcept;
+    const char * what() const noexcept override;
     ~LX_PolygonException() noexcept;
 };
 
@@ -57,7 +57,7 @@ class LX_Polygon_;
 *   @class LX_Polygon
 *   @brief The polygon
 */
-class LX_Polygon
+class LX_Polygon final
 {
     std::unique_ptr<LX_Polygon_> _polyimpl;
 

@@ -57,7 +57,7 @@ const char * nameOf_(SDL_GameController * controller) noexcept
 }
 
 // Private implementation
-struct LX_Gamepad_
+struct LX_Gamepad_ final
 {
     SDL_GameController *_gc = nullptr;
     SDL_Joystick *_joy = nullptr;

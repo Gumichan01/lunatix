@@ -211,10 +211,10 @@ enum class LX_State: uint8_t
 
 
 /**
-*   @struct LX_GAxis
+*   @struct LX_GAxis final
 *   @brief Axis of a gamepad
 */
-struct LX_GAxis
+struct LX_GAxis final
 {
     LX_GamepadID id;        /**< ID of the gamepad        */
     LX_GamepadAxis axis;    /**< Axis type                */
@@ -223,10 +223,10 @@ struct LX_GAxis
 
 
 /**
-*   @struct LX_GButton
+*   @struct LX_GButton final
 *   @brief Button of a gamepad
 */
-struct LX_GButton
+struct LX_GButton final
 {
     LX_GamepadID which;     /**< ID of the gamepad  */
     LX_GamepadButton value; /**< Button value       */
@@ -237,7 +237,7 @@ struct LX_GButton
 *   @struct LX_MButton
 *   @brief Button of a mouse
 */
-struct LX_MButton
+struct LX_MButton final
 {
     uint32_t wid;           /**< Identifier of the window where the event occured           */
     LX_MouseButton button;  /**< Type of button                                             */
@@ -250,7 +250,7 @@ struct LX_MButton
 const int LX_MBUTTONS = 6;
 
 /**
-*   @struct LX_MMotion
+*   @struct LX_MMotion final
 *   @brief Mouse movement
 *
 *   @note state is a boolean array that contains information
@@ -285,7 +285,7 @@ const int LX_MBUTTONS = 6;
 *      }
 *
 */
-struct LX_MMotion
+struct LX_MMotion final
 {
     uint32_t wid;               /**< Identifier of the window where the event occured   */
     bool state[LX_MBUTTONS];    /**< The state of each button of the mouse              */
@@ -297,10 +297,10 @@ struct LX_MMotion
 
 
 /**
-*   @struct LX_MWheel
+*   @struct LX_MWheel final
 *   @brief Mouse wheel
 */
-struct LX_MWheel
+struct LX_MWheel final
 {
     uint32_t wid;   /**< Identifier of the window where the event occured   */
     int x;          /**< X direction of the wheel                           */
@@ -309,10 +309,10 @@ struct LX_MWheel
 
 
 /**
-*   @struct LX_WEvent
+*   @struct LX_WEvent final
 *   @brief Window event
 */
-struct LX_WEvent
+struct LX_WEvent final
 {
     uint32_t wid;           /**< Identifier of the window where the event occured   */
     LX_WinEventType evid;   /**< Type of window event                               */
@@ -322,10 +322,10 @@ struct LX_WEvent
 
 
 /**
-*   @struct LX_UserEvent
+*   @struct LX_UserEvent final
 *   @brief User-defined event
 */
-struct LX_UserEvent
+struct LX_UserEvent final
 {
     uint32_t type;  /* User defined type (internal use)                     */
     uint32_t wid;   /**< Identifier of the window where the event occured   */
@@ -336,10 +336,10 @@ struct LX_UserEvent
 
 
 /**
-*   @struct LX_TextEvent
+*   @struct LX_TextEvent final
 *   @brief Text event
 */
-struct LX_TextEvent
+struct LX_TextEvent final
 {
     uint32_t wid;       /**< Identifier of the window where the event occured   */
     std::string text;   /**< UTF-8 string                                       */
@@ -348,26 +348,26 @@ struct LX_TextEvent
 };
 
 /**
-*   @struct LX_DropEvent
+*   @struct LX_DropEvent final
 *   @brief Drop event (file request)
 */
-struct LX_DropEvent
+struct LX_DropEvent final
 {
     std::string file;   /**< The name of the file that is requested */
 };
 
 /**
-*   @struct LX_KeyboardState
+*   @struct LX_KeyboardState final
 *   @brief Keyboard state
 */
-struct LX_KeyboardState
+struct LX_KeyboardState final
 {
     const uint8_t * state;  /**< The state of each key (Scan Code) of the keyboard  */
     const int sz;           /**< The number of states (size of the array)           */
 };
 
 /**
-*   @class LX_EventHandler
+*   @class LX_EventHandler final
 *   @brief The class for event handling
 *
 *   This class is reponsible of handling event (pushing, retrieving)
@@ -376,7 +376,7 @@ struct LX_KeyboardState
 *   calling pollEvent()/waitEvent*(). If not, the behaviour is undefined.
 *
 */
-class LX_EventHandler
+class LX_EventHandler final
 {
     SDL_Event *event;
 

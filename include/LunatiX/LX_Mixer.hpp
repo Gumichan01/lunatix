@@ -76,10 +76,10 @@ class LX_Music;
 class LX_Chunk;
 
 /**
-*   @struct LX_MixerEffectType
+*   @struct LX_MixerEffectType final
 *   @brief Type of effect
 */
-struct LX_MixerEffectType
+struct LX_MixerEffectType final
 {
     bool panning = false;           /**< Panning        */
     bool position = false;          /**< Position       */
@@ -89,10 +89,10 @@ struct LX_MixerEffectType
 
 
 /**
-*   @struct LX_MixerEffect
+*   @struct LX_MixerEffect final
 *   @brief Mixer effect
 */
-struct LX_MixerEffect
+struct LX_MixerEffect final
 {
     LX_MixerEffectType type;        /**< Effect type            */
     uint8_t pan_left = 0;           /**< Left panning           */

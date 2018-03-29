@@ -32,7 +32,7 @@ const unsigned int NB_CONFIG = 6;
 
 /* LX_ConfigLoader */
 
-struct LX_InternalConfig
+struct LX_InternalConfig final
 {
     bool video_flag;        // Video flag
     bool vsync_flag;        // VSync flag

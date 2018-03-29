@@ -81,7 +81,7 @@ public:
 class LX_TextInput_;
 
 /**
-*   @class LX_TextInput
+*   @class LX_TextInput final
 *   @brief Text input class
 *
 *   LX_TextInput is a class that handles text input. The text input is activated
@@ -98,7 +98,8 @@ class LX_TextInput_;
 *   - Define a class as a subclass of the pure virtual class *LX_RedrawCallback*.
 *   - Define the operator () provided by *LX_RedrawCallback*.
 *   - Declare an object of type *LX_TextInput*.
-*   - Call the function **LX_TextInput::eventLoop** of this object giving the callback function in argument.
+*   - Call the function **LX_TextInput::eventLoop** of this object by giving
+*     the callback function in argument.
 *
 *   Example of code :
 *
@@ -146,7 +147,7 @@ class LX_TextInput_;
 *
 *   LX_TextInput also support clipboard handling.
 */
-class LX_TextInput
+class LX_TextInput final
 {
     std::unique_ptr<LX_TextInput_> _timpl;
 

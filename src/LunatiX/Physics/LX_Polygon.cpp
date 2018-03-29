@@ -72,7 +72,7 @@ LX_PolygonException::~LX_PolygonException() noexcept {}
 
 using LX_FloatPositions_ = std::vector<LX_FloatPosition>;
 
-class LX_Polygon_
+class LX_Polygon_ final
 {
     LX_FloatPositions_ _points;     /* A sequence of LX_FloatPosition objects   */
     bool _convex;                   /* If the polygon is convex                 */

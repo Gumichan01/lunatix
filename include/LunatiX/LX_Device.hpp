@@ -60,10 +60,10 @@ using LX_DeviceID = int32_t;
 using LX_DeviceGUID = SDL_JoystickGUID;
 
 /**
-*   @struct LX_GamepadInfo
+*   @struct LX_GamepadInfo final
 *   @brief Information about gamepad
 */
-struct LX_GamepadInfo
+struct LX_GamepadInfo final
 {
     LX_DeviceID id = 0;     /**< The joystick ID            */
     LX_DeviceGUID uid{{0}};      /**< The joystick UID           */

@@ -47,7 +47,7 @@ const uint32_t DELAY = 33;
 
 /* Text input, private implementation   */
 
-class LX_TextInput_
+class LX_TextInput_ final
 {
     UTF8string _u8text;
     UTF8string _u8comp;

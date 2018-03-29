@@ -37,10 +37,10 @@ namespace LX_Mixer
 class LX_Chunk_;
 
 /**
-*   @class LX_Chunk
+*   @class LX_Chunk final
 *   @brief The sample class
 */
-class LX_Chunk : public virtual LX_Sound
+class LX_Chunk final : public virtual LX_Sound
 {
     friend class LX_FileIO::LX_FileBuffer_;
     std::unique_ptr<LX_Chunk_> _chkimpl;
@@ -76,7 +76,7 @@ public:
     explicit LX_Chunk(const UTF8string& filename);
 
     /**
-    *   @fn bool play() noexcept
+    *   @fn virtual bool play() noexcept override
     *
     *   Play the current sample
     *
@@ -84,7 +84,7 @@ public:
     *   @note This function plays the sample on the first unserved channel
     *        with the no loop option
     */
-    bool play() noexcept;
+    virtual bool play() noexcept override;
     /**
     *   @fn bool play(int channel) noexcept
     *

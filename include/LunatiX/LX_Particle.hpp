@@ -45,10 +45,10 @@ namespace LX_ParticleEngine
 class LX_Particle_;
 
 /**
-*   @class LX_Particle
+*   @class LX_Particle final
 *   @brief The particle
 */
-class LX_Particle
+class LX_Particle final
 {
     std::unique_ptr<LX_Particle_> _pimpl;
 

@@ -50,7 +50,7 @@ using LX_Colour = SDL_Colour;
 
 /**
 *   @ingroup Graphics
-*   @struct LX_glColour
+*   @struct LX_glColour final
 *   @brief Colour representation (in OpenGL format)
 *
 *   This representation defines the colour as three floating-point values
@@ -63,7 +63,7 @@ using LX_Colour = SDL_Colour;
 *      ⇒ LX_Colour: { r = 1.0f, g = 0.647058f, b = 1.0f, a = 1.0f }
 *
 */
-struct LX_glColour
+struct LX_glColour final
 {
     float r;    /**< Red      */
     float g;    /**< Green    */

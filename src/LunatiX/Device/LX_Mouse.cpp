@@ -26,7 +26,7 @@
 namespace LX_Device
 {
 
-class LX_Mouse_
+class LX_Mouse_ final
 {
     SDL_Cursor * _cursor = nullptr;
 

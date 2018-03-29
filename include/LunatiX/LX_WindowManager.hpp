@@ -31,7 +31,7 @@ class LX_Window;
 class LX_WM_;
 
 
-class LX_WindowNotFoundException : public std::exception
+class LX_WindowNotFoundException final : public std::exception
 {
     std::string _string_error;
 
@@ -40,19 +40,19 @@ class LX_WindowNotFoundException : public std::exception
 public:
 
     explicit LX_WindowNotFoundException(const std::string& err);
-    const char * what() const noexcept;
+    const char * what() const noexcept override;
     ~LX_WindowNotFoundException() noexcept = default;
 
 };
 
 /**
-*   @class LX_WindowManager
+*   @class LX_WindowManager final
 *   @brief The windows manager
 *
 *   LX_WindowManager allows the user to handle several windows
 *   inside an application.
 */
-class LX_WindowManager
+class LX_WindowManager final
 {
     std::unique_ptr<LX_WM_> _wmpimpl;
 

@@ -36,10 +36,10 @@ class LX_Particle;
 class LX_ParticleSystem_;
 
 /**
-*   @class LX_ParticleSystem
+*   @class LX_ParticleSystem final
 *   @brief The particle system
 */
-class LX_ParticleSystem
+class LX_ParticleSystem final
 {
     std::unique_ptr<LX_ParticleSystem_> _psimpl;
 

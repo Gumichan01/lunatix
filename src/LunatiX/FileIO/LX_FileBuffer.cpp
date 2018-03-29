@@ -36,7 +36,7 @@ namespace LX_FileIO
 
 /* LX_fileBuffer — private implementation */
 
-class LX_FileBuffer_
+class LX_FileBuffer_ final
 {
     std::string _name;                      /* The name of the file refered by the buffer */
     std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */

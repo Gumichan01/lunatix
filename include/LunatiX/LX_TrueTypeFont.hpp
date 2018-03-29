@@ -71,7 +71,7 @@ enum class LX_TTF_TypeText;
 *   This class describes the font.
 *   @note It supports the UTF-8 format
 */
-class LX_Font
+class LX_Font final
 {
     friend class LX_Graphics::LX_TextTexture;
     friend class LX_Graphics::LX_SolidTextTexture;

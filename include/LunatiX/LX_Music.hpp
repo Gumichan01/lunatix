@@ -154,11 +154,11 @@ public:
     static void fadeOut(int ms) noexcept;
 
     /**
-    *   @fn virtual bool play() noexcept
+    *   @fn virtual bool play() noexcept override
     *   Play the music
     *   @return TRUE on success, FALSE otherwise
     */
-    virtual bool play() noexcept;
+    virtual bool play() noexcept override;
     /**
     *   @fn bool play(bool infinite_loop) noexcept
     *   Play the music

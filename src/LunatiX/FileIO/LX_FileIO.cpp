@@ -46,7 +46,7 @@ IOException::~IOException() noexcept {}
 
 /* Private implementation */
 
-class LX_File_
+class LX_File_ final
 {
     UTF8string _name{""};
     std::FILE *_file = nullptr;
@@ -241,7 +241,7 @@ LX_File::~LX_File()
 
 /* Private implementation */
 
-class LX_TmpFile_
+class LX_TmpFile_ final
 {
     FILE * _f = nullptr;
 

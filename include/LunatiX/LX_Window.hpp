@@ -105,21 +105,21 @@ enum class LX_BlendMode
 };
 
 /**
-*   @struct LX_WindowInfo
+*   @struct LX_WindowInfo final
 *   @brief Information about the window
 */
-struct LX_WindowInfo
+struct LX_WindowInfo final
 {
-    uint32_t id = 0;        /**< Id of the window (read-only)   */
-    std::string title{""};  /**< Title                          */
-    int x  = 0;             /**< X position                     */
-    int y  = 0;             /**< Y position                     */
-    int w  = 0;             /**< Window Width                   */
-    int h  = 0;             /**< Window Height                  */
-    int lw = 0;             /**< Independant device width       */
-    int lh = 0;             /**< Independant device height      */
-    uint32_t flag = 0;      /**< Flags                          */
-    bool accel = false;     /**< Hardware acceleration          */
+    uint32_t id = 0;            /**< Id of the window (read-only)   */
+    std::string title = {""};   /**< Title                          */
+    int x  = 0;                 /**< X position                     */
+    int y  = 0;                 /**< Y position                     */
+    int w  = 0;                 /**< Window Width                   */
+    int h  = 0;                 /**< Window Height                  */
+    int lw = 0;                 /**< Independant device width       */
+    int lh = 0;                 /**< Independant device height      */
+    uint32_t flag = 0;          /**< Flags                          */
+    bool accel = false;         /**< Hardware acceleration          */
 
 };
 
@@ -139,14 +139,14 @@ void LX_loadWindowConfig(LX_WindowInfo &info) noexcept;
 
 
 /**
-*   @class LX_WindowException
+*   @class LX_WindowException final
 *   @brief The exception class of LX_Window
 *
 *   This class describes the exception occured when
 *   the SDL_Window instance cannot be loaded.
 *
 */
-class LX_WindowException : public std::exception
+class LX_WindowException final : public std::exception
 {
     std::string _string_error;
 
@@ -165,7 +165,7 @@ public:
 struct LX_Window_;
 
 /**
-*   @class LX_Window
+*   @class LX_Window final
 *   @brief The window
 *
 *   @warning The LX_Window class must be defined only after
@@ -173,7 +173,7 @@ struct LX_Window_;
 *   @warning A LX_WindowException may be occured if the window creation fails
 *
 */
-class LX_Window
+class LX_Window final
 {
     friend class LX_Graphics::LX_Texture;
     friend class LX_Graphics::LX_Sprite;

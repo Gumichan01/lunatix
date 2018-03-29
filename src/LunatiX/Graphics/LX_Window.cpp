@@ -164,7 +164,7 @@ const char * LX_WindowException::what() const noexcept
 
 /* LX_Window, private implementation */
 
-struct LX_Window_
+struct LX_Window_ final
 {
     SDL_Window *_window      = nullptr;             /* The internal window structure        */
     SDL_Renderer *_renderer  = nullptr;             /* The main renderer                    */

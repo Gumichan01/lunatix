@@ -33,10 +33,10 @@ namespace LX_Graphics
 
 /**
 *   @ingroup Graphics
-*   @struct LX_ImgCoord
+*   @struct LX_ImgCoord final
 *   @brief Image coordinates
 */
-struct LX_ImgCoord
+struct LX_ImgCoord final
 {
     int x;      /**< X position */
     int y;      /**< Y position */
@@ -52,13 +52,13 @@ LX_ImgCoord toPixelPosition(const LX_Physics::LX_FloatPosition& p) noexcept;
 
 /**
 *   @ingroup Graphics
-*   @struct LX_ImgRect
+*   @struct LX_ImgRect final
 *   @brief The Image box
 *
 *   This box, defined as an Axis-Aligned Bounding Box (AABB) contains information
 *   about the position and the dimension of the image to display
 */
-struct LX_ImgRect
+struct LX_ImgRect final
 {
     LX_ImgCoord p;  /**< Position   */
     int w, h;       /**< Dimension  */

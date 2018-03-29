@@ -31,7 +31,7 @@ namespace LX_ParticleEngine
 
 /* Private implementation */
 
-class LX_ParticleSystem_
+class LX_ParticleSystem_ final
 {
     std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
     const unsigned int _NB_PARTICLES;
