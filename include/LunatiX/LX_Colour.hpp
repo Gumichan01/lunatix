@@ -162,7 +162,8 @@ inline constexpr LX_Colour fromGLColour(const LX_glColour& colour) noexcept
 */
 inline constexpr uint32_t toRGBAvalue(const LX_Colour& colour) noexcept
 {
-    return (colour.r << 24) | (colour.g << 16) | (colour.b << 8) | colour.a;
+    return static_cast<uint32_t>((colour.r << 24) | (colour.g << 16) |
+                                 (colour.b << 8) | colour.a);
 }
 /**
 *   @ingroup Graphics
@@ -175,10 +176,10 @@ inline constexpr uint32_t toRGBAvalue(const LX_Colour& colour) noexcept
 */
 inline LX_Colour fromRGBAvalue(const uint32_t rgba) noexcept
 {
-    const uint8_t r = (rgba >> 24) & 0x000000FF;
-    const uint8_t g = (rgba >> 16) & 0x000000FF;
-    const uint8_t b = (rgba >> 8) & 0x000000FF;
-    const uint8_t a = rgba & 0x000000FF;
+    const uint8_t r = static_cast<uint8_t>((rgba >> 24) & 0x000000FF);
+    const uint8_t g = static_cast<uint8_t>((rgba >> 16) & 0x000000FF);
+    const uint8_t b = static_cast<uint8_t>((rgba >> 8) & 0x000000FF);
+    const uint8_t a = static_cast<uint8_t>(rgba & 0x000000FF);
 
     return LX_Colour{r, g, b, a};
 }
