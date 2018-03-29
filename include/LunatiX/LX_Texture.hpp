@@ -333,7 +333,7 @@ public:
                       const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                       bool loop, LX_PixelFormat format = LX_PixelFormat::RGBA8888);
 
-
+    using LX_Sprite::draw;
     virtual void draw(const LX_ImgRect& box) noexcept override;
     virtual void draw(const LX_ImgRect& box, const double angle) noexcept override;
     virtual void draw(const LX_ImgRect& box, const double angle,
