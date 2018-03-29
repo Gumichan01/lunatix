@@ -17,7 +17,7 @@
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-g" />
-					<Add option="-O0 -Wlogical-op -Wuseless-cast -Wdouble-promotion -Wformat=2" />
+					<Add option="-O0 -Wconversion -Wsign-conversion -Wlogical-op -Wuseless-cast -Wdouble-promotion -Wformat=2 -Wmissing-declarations -Woverloaded-virtual  -fno-common" />
 				</Compiler>
 			</Target>
 			<Target title="Dynamic_library">
@@ -36,7 +36,6 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
@@ -76,7 +75,6 @@
 		<Unit filename="include/LunatiX/LX_MessageBox.hpp" />
 		<Unit filename="include/LunatiX/LX_Mixer.hpp" />
 		<Unit filename="include/LunatiX/LX_Mouse.hpp" />
-		<Unit filename="include/LunatiX/LX_Multithread.hpp" />
 		<Unit filename="include/LunatiX/LX_Music.hpp" />
 		<Unit filename="include/LunatiX/LX_OpenGL.hpp" />
 		<Unit filename="include/LunatiX/LX_OpenGL.tpp" />
