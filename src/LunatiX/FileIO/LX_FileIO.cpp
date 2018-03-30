@@ -133,7 +133,7 @@ public:
 
     size_t tell() const noexcept
     {
-        return std::ftell(_file);
+        return static_cast<size_t>(std::ftell(_file));
     }
 
     size_t size() noexcept
@@ -142,7 +142,9 @@ public:
         size_t old_pos = tell();
         bool ok = seek(0, LX_FileWhence::END);
 
-        if(ok) fsize = tell();
+        if(ok)
+            fsize = tell();
+
         ok = seek(static_cast<long>(old_pos), LX_FileWhence::SET);
 
         if(!ok)
@@ -307,12 +309,12 @@ public:
 
     bool seek(long offset, LX_FileWhence whence) noexcept
     {
-        return fseek(_f, offset, static_cast<int>(whence)) == 0;
+        return std::fseek(_f, offset, static_cast<int>(whence)) == 0;
     }
 
     size_t tell() const noexcept
     {
-        return ftell(_f);
+        return static_cast<size_t>(std::ftell(_f));
     }
 
     ~LX_TmpFile_()

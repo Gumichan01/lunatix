@@ -151,6 +151,7 @@ public:
     */
     virtual size_t write(const std::string& str) noexcept = 0;
 
+    // TODO refactor seek() -> long instead of size_t
     /**
     *   @fn virtual bool seek(long offset, LX_FileWhence whence) noexcept
     *
@@ -165,6 +166,7 @@ public:
     */
     virtual bool seek(long offset, LX_FileWhence whence) noexcept = 0;
 
+    // TODO refactor tell() -> long instead of size_t
     /**
     *   @fn virtual size_t tell() const noexcept
     *
