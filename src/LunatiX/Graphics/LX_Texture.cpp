@@ -520,45 +520,45 @@ Uint32 LX_BufferedImage::_updateNegativeColour(Uint8 r, Uint8 g, Uint8 b, Uint8 
     switch(fmt)
     {
     case LX_PixelFormat::RGBA8888:
-        npixel = (r << 24) | (g << 16) | (b << 8) | a;
+        npixel = static_cast<Uint32>((r << 24) | (g << 16) | (b << 8) | a);
         break;
 
     case LX_PixelFormat::ARGB8888:
-        npixel = (a << 24) | (r << 16) | (g << 8) | b;
+        npixel = static_cast<Uint32>((a << 24) | (r << 16) | (g << 8) | b);
         break;
 
     case LX_PixelFormat::BGRA8888:
-        npixel = (b << 24) | (g << 16) | (r << 8) | a;
+        npixel = static_cast<Uint32>((r << 24) | (g << 16) | (b << 8) | a);
         break;
 
     case LX_PixelFormat::ABGR8888:
-        npixel = (a << 24) | (b << 16) | (g << 8) | r;
+        npixel = static_cast<Uint32>((a << 24) | (r << 16) | (g << 8) | b);
         break;
 
     case LX_PixelFormat::RGBA4444:
-        npixel = (r << 12) | (g << 8) | (b << 4) | a;
+        npixel = static_cast<Uint32>((r << 12) | (g << 8) | (b << 4) | a);
         break;
 
     case LX_PixelFormat::ARGB4444:
-        npixel = (a << 12) | (r << 8) | (g << 4) | b;
+        npixel = static_cast<Uint32>((a << 12) | (r << 8) | (g << 4) | b);
         break;
 
     case LX_PixelFormat::BGRA4444:
-        npixel = (b << 12) | (g << 8) | (r << 4) | a;
+        npixel = static_cast<Uint32>((b << 12) | (g << 8) | (r << 4) | a);
         break;
 
     case LX_PixelFormat::ABGR4444:
-        npixel = (a << 12) | (b << 8) | (g << 4) | r;
+        npixel = static_cast<Uint32>((a << 12) | (r << 8) | (g << 4) | b);
         break;
 
     case LX_PixelFormat::BGR24:
     case LX_PixelFormat::BGR888:
-        npixel = (b << 16) | (g << 8) | r;
+        npixel = static_cast<Uint32>((b << 16) | (g << 8) | r);
         break;
 
     case LX_PixelFormat::RGB24:
     case LX_PixelFormat::RGB888:
-        npixel = (r << 16) | (g << 8) | b;
+        npixel = static_cast<Uint32>((r << 16) | (g << 8) | b);
         break;
 
     default:
