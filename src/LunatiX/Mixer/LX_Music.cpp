@@ -139,7 +139,7 @@ public:
 
     bool play(unsigned int loops) noexcept
     {
-        return Mix_PlayMusic(_music, loops) == 0;
+        return Mix_PlayMusic(_music, static_cast<int>(loops)) == 0;
     }
 
     const libtagpp::Tag& getInfo() noexcept

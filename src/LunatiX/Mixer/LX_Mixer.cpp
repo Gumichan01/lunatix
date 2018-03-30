@@ -25,6 +25,8 @@
 #include <LunatiX/LX_FileBuffer.hpp>
 #include <SDL2/SDL_mixer.h>
 
+#include <functional>
+
 using namespace LX_FileIO;
 
 namespace
@@ -50,11 +52,22 @@ constexpr bool operator !=(const LX_Mixer::LX_MixerEffectType& t,
     return !(t == u);
 }
 
+// In C++14, this function can be constexpr
+inline unsigned short adaptVolume_(unsigned short pvol, unsigned short ov, unsigned short maxv)
+{
+    // I use std::divides and std::multiplies because the compiler
+    // seems to convert unsigned short values to integer become applying
+    // the calculation
+    using uint16 = unsigned short;
+    return std::divides<uint16>()(std::multiplies<uint16>()(pvol, ov), maxv);
+}
+
 }
 
 namespace LX_Mixer
 {
 
+const unsigned short LX_MAX_VOLUME = 100;
 const unsigned short LX_DEFAULT_VOLUME = 100;
 // Overall volume in volume unit [0-100]
 unsigned short overall_volume = LX_DEFAULT_VOLUME;
@@ -71,8 +84,8 @@ unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
 
 void setOverallVolume(unsigned short volume) noexcept
 {
-    if(volume > LX_DEFAULT_VOLUME)
-        overall_volume = LX_DEFAULT_VOLUME;
+    if(volume > LX_MAX_VOLUME)
+        overall_volume = LX_MAX_VOLUME;
     else
         overall_volume = volume;
 
@@ -82,12 +95,13 @@ void setOverallVolume(unsigned short volume) noexcept
 
 void setMusicVolume(unsigned short pvolume) noexcept
 {
-    if (pvolume > 100) pvolume = 100;
+    if(pvolume > LX_MAX_VOLUME)
+        pvolume = LX_MAX_VOLUME;
 
     if(overall_volume == 0)
         music_volume = 0;
     else
-        music_volume = pvolume * overall_volume/100;
+        music_volume = adaptVolume_(pvolume, overall_volume, LX_MAX_VOLUME);
 
     Mix_VolumeMusic(music_volume);
     music_pvolume = pvolume;
@@ -95,12 +109,13 @@ void setMusicVolume(unsigned short pvolume) noexcept
 
 void setFXVolume(unsigned short pvolume) noexcept
 {
-    if (pvolume > 100) pvolume = 100;
+    if(pvolume > LX_MAX_VOLUME)
+        pvolume = LX_MAX_VOLUME;
 
     if(overall_volume == 0)
         fx_volume = 0;
     else
-        fx_volume = pvolume * overall_volume/100;
+        fx_volume = adaptVolume_(pvolume, overall_volume, LX_MAX_VOLUME);
 
     if(allocateChannels(-1) > 0)
         Mix_Volume(-1, fx_volume);

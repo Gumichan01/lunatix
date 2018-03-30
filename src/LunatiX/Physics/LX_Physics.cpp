@@ -30,9 +30,9 @@ using namespace FloatBox;
 
 namespace
 {
-
-constexpr bool intersetInterval(const int min1, const int max1,
-                                const int min2, const int max2) noexcept
+/// @todo fix non-constexpr
+/*constexpr*/ bool intersetInterval(const Float& min1, const Float& max1,
+                                const Float& min2, const Float& max2) noexcept
 {
     return (min1 < min2) ? max1 > min2 : max2 > min1;
 }
