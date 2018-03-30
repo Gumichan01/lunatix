@@ -26,6 +26,8 @@
 
 #include <SDL2/SDL_image.h>
 
+#include <functional>
+
 #define RENDER(x) static_cast<SDL_Renderer*>(x)
 #define U32(x) static_cast<uint32_t>(x)
 
@@ -346,78 +348,79 @@ LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, LX_PixelFormat fo
 bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
                                         Uint8& b, Uint8& a) const noexcept
 {
-    LX_PixelFormat fmt = static_cast<LX_PixelFormat>(_surface->format->format);
+    const LX_PixelFormat fmt = static_cast<LX_PixelFormat>(_surface->format->format);
+    Uint32 tmp_r, tmp_g, tmp_b, tmp_a;
 
     switch(fmt)
     {
     case LX_PixelFormat::RGBA8888:
-        r = (pixel >> 24) & 0xFF;
-        g = (pixel >> 16) & 0xFF;
-        b = (pixel >> 8) & 0xFF;
-        a = pixel & 0xFF;
+        tmp_r = (pixel >> 24) & 0xFF;
+        tmp_g = (pixel >> 16) & 0xFF;
+        tmp_b = (pixel >> 8) & 0xFF;
+        tmp_a = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::ARGB8888:
-        a = (pixel >> 24) & 0xFF;
-        r = (pixel >> 16) & 0xFF;
-        g = (pixel >> 8) & 0xFF;
-        b = pixel & 0xFF;
+        tmp_a = (pixel >> 24) & 0xFF;
+        tmp_r = (pixel >> 16) & 0xFF;
+        tmp_g = (pixel >> 8) & 0xFF;
+        tmp_b = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::BGRA8888:
-        b = (pixel >> 24) & 0xFF;
-        g = (pixel >> 16) & 0xFF;
-        r = (pixel >> 8) & 0xFF;
-        a = pixel & 0xFF;
+        tmp_b = (pixel >> 24) & 0xFF;
+        tmp_g = (pixel >> 16) & 0xFF;
+        tmp_r = (pixel >> 8) & 0xFF;
+        tmp_a = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::ABGR8888:
-        a = (pixel >> 24) & 0xFF;
-        b = (pixel >> 16) & 0xFF;
-        g = (pixel >> 8) & 0xFF;
-        r = pixel & 0xFF;
+        tmp_a = (pixel >> 24) & 0xFF;
+        tmp_b = (pixel >> 16) & 0xFF;
+        tmp_g = (pixel >> 8) & 0xFF;
+        tmp_r = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::RGBA4444:
-        r = (pixel >> 12) & 0xFF;
-        g = (pixel >> 8) & 0xFF;
-        b = (pixel >> 4) & 0xFF;
-        a = pixel & 0xFF;
+        tmp_r = (pixel >> 12) & 0xFF;
+        tmp_g = (pixel >> 8) & 0xFF;
+        tmp_b = (pixel >> 4) & 0xFF;
+        tmp_a = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::ARGB4444:
-        a = (pixel >> 12) & 0xFF;
-        r = (pixel >> 8) & 0xFF;
-        g = (pixel >> 4) & 0xFF;
-        b = pixel & 0xFF;
+        tmp_a = (pixel >> 12) & 0xFF;
+        tmp_r = (pixel >> 8) & 0xFF;
+        tmp_g = (pixel >> 4) & 0xFF;
+        tmp_b = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::BGRA4444:
-        b = (pixel >> 12) & 0xFF;
-        g = (pixel >> 8) & 0xFF;
-        r = (pixel >> 4) & 0xFF;
-        a = pixel & 0xFF;
+        tmp_b = (pixel >> 12) & 0xFF;
+        tmp_g = (pixel >> 8) & 0xFF;
+        tmp_r = (pixel >> 4) & 0xFF;
+        tmp_a = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::ABGR4444:
-        a = (pixel >> 12) & 0xFF;
-        b = (pixel >> 8) & 0xFF;
-        g = (pixel >> 4) & 0xFF;
-        r = pixel & 0xFF;
+        tmp_a = (pixel >> 12) & 0xFF;
+        tmp_b = (pixel >> 8) & 0xFF;
+        tmp_g = (pixel >> 4) & 0xFF;
+        tmp_r = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::RGB24:
     case LX_PixelFormat::RGB888:
-        r = (pixel >> 16) & 0xFF;
-        g = (pixel >> 8) & 0xFF;
-        b = pixel & 0xFF;
+        tmp_r = (pixel >> 16) & 0xFF;
+        tmp_g = (pixel >> 8) & 0xFF;
+        tmp_b = pixel & 0xFF;
         break;
 
     case LX_PixelFormat::BGR24:
     case LX_PixelFormat::BGR888:
-        b = (pixel >> 12) & 0xFF;
-        g = (pixel >> 8) & 0xFF;
-        r = (pixel >> 4) & 0xFF;
+        tmp_b = (pixel >> 12) & 0xFF;
+        tmp_g = (pixel >> 8) & 0xFF;
+        tmp_r = (pixel >> 4) & 0xFF;
         break;
 
     default:
@@ -425,6 +428,10 @@ bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
         break;
     }
 
+    r = static_cast<uint8_t>(tmp_r);
+    g = static_cast<uint8_t>(tmp_g);
+    b = static_cast<uint8_t>(tmp_b);
+    a = static_cast<uint8_t>(tmp_a);
     return true;
 }
 
@@ -437,42 +444,42 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(Uint8 a, Uint8 v) const noexcept
     switch(fmt)
     {
     case LX_PixelFormat::RGBA8888:
-        npixel = (v << 24) | (v << 16) | (v << 8) | a;
+        npixel = static_cast<Uint32>((v << 24) | (v << 16) | (v << 8) | a);
         break;
 
     case LX_PixelFormat::ARGB8888:
-        npixel = (a << 24) | (v << 16) | (v << 8) | v;
+        npixel = static_cast<Uint32>((a << 24) | (v << 16) | (v << 8) | v);
         break;
 
     case LX_PixelFormat::BGRA8888:
-        npixel = (v << 24) | (v << 16) | (v << 8) | a;
+        npixel = static_cast<Uint32>((v << 24) | (v << 16) | (v << 8) | a);
         break;
 
     case LX_PixelFormat::ABGR8888:
-        npixel = (a << 24) | (v << 16) | (v << 8) | v;
+        npixel = static_cast<Uint32>((a << 24) | (v << 16) | (v << 8) | v);
         break;
 
     case LX_PixelFormat::RGBA4444:
-        npixel = (v << 12) | (v << 8) | (v << 4) | a;
+        npixel = static_cast<Uint32>((v << 12) | (v << 8) | (v << 4) | a);
         break;
 
     case LX_PixelFormat::ARGB4444:
-        npixel = (a << 12) | (v << 8) | (v << 4) | v;
+        npixel = static_cast<Uint32>((a << 12) | (v << 8) | (v << 4) | v);
         break;
 
     case LX_PixelFormat::BGRA4444:
-        npixel = (v << 12) | (v << 8) | (v << 4) | a;
+        npixel = static_cast<Uint32>((v << 12) | (v << 8) | (v << 4) | a);
         break;
 
     case LX_PixelFormat::ABGR4444:
-        npixel = (a << 12) | (v << 8) | (v << 4) | v;
+        npixel = static_cast<Uint32>((a << 12) | (v << 8) | (v << 4) | v);
         break;
 
     case LX_PixelFormat::BGR24:
     case LX_PixelFormat::RGB24:
     case LX_PixelFormat::BGR888:
     case LX_PixelFormat::RGB888:
-        npixel = (v << 16) | (v << 8) | v;
+        npixel = static_cast<Uint32>((v << 16) | (v << 8) | v);
         break;
 
     default:
@@ -573,9 +580,10 @@ Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel) const noexcept
         return pixel;
     }
 
-    r = MAX_UINT - r;
-    g = MAX_UINT - g;
-    b = MAX_UINT - b;
+    const std::minus<Uint8> MINUS;
+    r = MINUS(MAX_UINT, r);
+    g = MINUS(MAX_UINT, g);
+    b = MINUS(MAX_UINT, b);
 
     return _updateNegativeColour(r, g, b, a);
 }

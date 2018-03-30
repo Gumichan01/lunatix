@@ -27,8 +27,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <new>
 
-#define U64(x) static_cast<uint64_t>(x)
-#define S64(x) static_cast<int64_t>(x)
 
 
 namespace LX_FileIO
@@ -40,7 +38,7 @@ class LX_FileBuffer_ final
 {
     std::string _name;                      /* The name of the file refered by the buffer */
     std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */
-    uint64_t _bufsize;                      /* The size of the buffer                     */
+    size_t _bufsize;                        /* The size of the buffer                     */
 
     Mix_Chunk * getChunkFromBuffer_() const noexcept
     {
@@ -66,9 +64,9 @@ public:
             throw IOException(str + "invalid offset: offset > size of the file");
 
         if(sz == 0)
-            _bufsize = U64(fsize) - U64(offset);
+            _bufsize = fsize - offset;
         else
-            _bufsize = U64(sz);
+            _bufsize = sz;
 
         reader.seek(static_cast<long>(offset), LX_FileWhence::SET);
         _buffer.reset(new (std::nothrow) int8_t[_bufsize]);
