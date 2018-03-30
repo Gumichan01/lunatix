@@ -44,15 +44,15 @@ struct LX_InternalConfig final
 
 static LX_InternalConfig _conf;
 
-int checkLine_(unsigned int cpt, LX_InternalConfig& config,
-               const std::string& line, const std::string& sub) noexcept;
+unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
+                        const std::string& line, const std::string& sub) noexcept;
 void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept;
 void loadFileConfig_(LX_InternalConfig& config) noexcept;
 
 /*
     Return 1 if a configuration has been found, 0 otherwise
 */
-int checkLine_(unsigned int cpt, LX_InternalConfig& config,
+unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
                const std::string& line, const std::string& sub) noexcept
 {
     if(cpt >= NB_CONFIG)
@@ -131,7 +131,7 @@ void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept
     const char SHARP = '#';
     const std::string EQUAL("=");
 
-    unsigned int cpt = 0;
+    unsigned int cpt = 0U;
     std::string line;
 
     while(cpt < NB_CONFIG && getline(f, line))
@@ -142,7 +142,7 @@ void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept
                 || (pos = line.find(EQUAL)) == std::string::npos)
             continue;
 
-        // Get the string strating by the first character after '=' (substr())
+        // Get the string starting by the first character after '=' (substr())
         // check the line of a file
         cpt += checkLine_(cpt, config, line, line.substr(pos + 1));
     }
