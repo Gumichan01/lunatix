@@ -292,7 +292,7 @@ void LX_Window::drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) 
 {
     SDL_RenderDrawLines(_wimpl->_renderer,
                         reinterpret_cast<const SDL_Point*>(&vpoints[0]),
-                        vpoints.size());
+                        static_cast<int>(vpoints.size()));
 }
 
 void LX_Window::drawLine(const LX_Graphics::LX_ImgCoord& p,
