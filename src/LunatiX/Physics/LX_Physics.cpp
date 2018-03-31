@@ -31,7 +31,7 @@ using namespace FloatBox;
 namespace
 {
 /// @todo fix non-constexpr
-/*constexpr*/ bool intersetInterval(const Float& min1, const Float& max1,
+constexpr bool intersetInterval(const Float& min1, const Float& max1,
                                 const Float& min2, const Float& max2) noexcept
 {
     return (min1 < min2) ? max1 > min2 : max2 > min1;
@@ -62,10 +62,10 @@ bool collisionPolySAT(const LX_Physics::LX_Polygon& poly1,
     LX_Physics::LX_FloatPosition P1_max = box1.p;
     LX_Physics::LX_FloatPosition P2_max = box2.p;
 
-    P1_max.x += fbox(box1.w);
-    P1_max.y += fbox(box1.h);
-    P2_max.x += fbox(box2.w);
-    P2_max.y += fbox(box2.h);
+    P1_max.x += fbox<decltype(box1.w)>(box1.w);
+    P1_max.y += fbox<decltype(box1.h)>(box1.h);
+    P2_max.x += fbox<decltype(box2.w)>(box2.w);
+    P2_max.y += fbox<decltype(box2.h)>(box2.h);
 
     return intersetInterval(P1_min.x, P1_max.x, P2_min.x, P2_max.x)
            && intersetInterval(P1_min.y, P1_max.y, P2_min.y, P2_max.y);
@@ -166,8 +166,8 @@ Float euclide_distance(const LX_FloatPosition& p1, const LX_FloatPosition& p2) n
 
 bool collisionPointBox(const LX_FloatPosition& p, const LX_FloatingBox& box) noexcept
 {
-    return !(p.x <= box.p.x || p.y >= (box.p.y + box.h)
-             || p.y <= box.p.y || p.x >= (box.p.x + box.w));
+    return !(p.x <= box.p.x || p.y >= (box.p.y + fbox<decltype(box.h)>(box.h))
+             || p.y <= box.p.y || p.x >= (box.p.x + fbox<decltype(box.w)>(box.w)));
 }
 
 
@@ -179,18 +179,18 @@ bool collisionPointCircle(const LX_FloatPosition& p, const LX_Circle& circle) no
 
 bool collisionBox(const LX_FloatingBox& rect1, const LX_FloatingBox& rect2) noexcept
 {
-    return !((rect1.p.x >= (rect2.p.x + rect2.w))
-             || (rect1.p.y >= (rect2.p.y + rect2.h))
-             || ((rect1.p.x + rect1.w) <= rect2.p.x)
-             || ((rect1.p.y + rect1.h) <= rect2.p.y));
+    return !((rect1.p.x >= (rect2.p.x + fbox<decltype(rect2.w)>(rect2.w)))
+             || (rect1.p.y >= (rect2.p.y + fbox<decltype(rect2.h)>(rect2.h)))
+             || ((rect1.p.x + fbox<decltype(rect1.w)>(rect1.w)) <= rect2.p.x)
+             || ((rect1.p.y + fbox<decltype(rect1.h)>(rect1.h)) <= rect2.p.y));
 }
 
 
 bool collisionCircle(const LX_Circle& circle1, const LX_Circle& circle2) noexcept
 {
-    const unsigned int SUM_RADIUS = circle1.radius + circle2.radius;
+    const uint32_t TMP_R = circle1.radius + circle2.radius;
     return euclide_square_distance(circle1.center,
-                                   circle2.center) <= fbox(SUM_RADIUS * SUM_RADIUS);
+                                   circle2.center) <= fbox<decltype(TMP_R)>(TMP_R * TMP_R);
 }
 
 
@@ -240,22 +240,23 @@ bool collisionCircleBox(const LX_Circle& circle, const LX_FloatingBox& box) noex
     // Check if the center of the circle is in the AABB
     if(collisionPointBox(circle.center, box))
         return true;
-
+    const Float BOX_W = fbox<decltype(box.w)>(box.w);
+    const Float BOX_H = fbox<decltype(box.h)>(box.h);
     const LX_Line sides[] =
     {
-        LX_Line{ box.p, LX_Vector2D{ FNIL, fbox(box.h) } },
+        LX_Line{ box.p, LX_Vector2D{ FNIL, BOX_H } },
 
         LX_Line{
-            LX_FloatPosition{ box.p.x, box.p.y + box.h },
-            LX_Vector2D{ fbox(box.w), FNIL }
+            LX_FloatPosition{ box.p.x, box.p.y + BOX_H },
+            LX_Vector2D{ BOX_W, FNIL }
         },
 
         LX_Line{
-            LX_FloatPosition{ box.p.x + box.w, box.p.y },
-            LX_Vector2D{ FNIL, fbox(box.h) }
+            LX_FloatPosition{ box.p.x + BOX_W, box.p.y },
+            LX_Vector2D{ FNIL, BOX_H }
         },
 
-        LX_Line{ box.p, LX_Vector2D{ fbox(box.w), FNIL } }
+        LX_Line{ box.p, LX_Vector2D{ BOX_W, FNIL } }
     };
 
     for(const LX_Line& l : sides)
@@ -329,10 +330,12 @@ bool collisionCirclePoly(const LX_Circle& C, const LX_Polygon& poly)
 bool collisionBoxPoly(const LX_FloatingBox& box, const LX_Polygon& poly)
 {
     const unsigned long n = poly.numberOfEdges();
+    const Float BOX_W = fbox<decltype(box.w)>(box.w);
+    const Float BOX_H = fbox<decltype(box.h)>(box.h);
     const LX_FloatPosition A = box.p;
-    const LX_FloatPosition B = {box.p.x + box.w, box.p.y};
-    const LX_FloatPosition C = {box.p.x + box.w, box.p.y + box.h};
-    const LX_FloatPosition D = {box.p.x, box.p.y + box.h};
+    const LX_FloatPosition B = { box.p.x + BOX_W, box.p.y };
+    const LX_FloatPosition C = { box.p.x + BOX_W, box.p.y + BOX_H };
+    const LX_FloatPosition D = { box.p.x, box.p.y + BOX_H };
 
     for(unsigned long j = 0UL; j < n; ++j)
     {
