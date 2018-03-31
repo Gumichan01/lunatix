@@ -47,15 +47,15 @@ void initRand() noexcept;
 *   @brief Statically define a positive Number
 *   @param Num
 */
-template <typename Num>
+template <typename N>
 using LX_Num =
-    typename std::enable_if<std::is_integral<Num>::value &&
-    std::is_unsigned<Num>::value &&
-    !std::is_same<Num, bool>::value &&
-    !std::is_same<Num, unsigned char>::value, Num >::type;
+    typename std::enable_if< std::is_integral< N >::value &&
+    std::is_unsigned< N >::value &&
+    !std::is_same< N, bool >::value &&
+    !std::is_same< N, unsigned char >::value, N >::type;
 
 /**
-*   @fn template <typename Num> LX_Num<Num> xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept
+*   @fn template <typename T> LX_Num<T> xrand(T min = 0, T max = std::numeric_limits<T>::max()) noexcept
 *   Returns a pseudorandom number between min and max
 *
 *   @param min
@@ -63,12 +63,12 @@ using LX_Num =
 *
 *   @return An integer value between min and max
 *
-*   @pre min > 0 ∧ min < max
+*   @pre min >= 0 ∧ min < max
 *
 *   @note This function uses the Xorshift* Random Number generator
 */
-template <typename Num>
-LX_Num<Num> xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexcept;
+template <typename T>
+LX_Num<T> xrand(T min = 0U, T max = std::numeric_limits< T >::max()) noexcept;
 
 
 /**
@@ -80,7 +80,7 @@ LX_Num<Num> xrand(Num min = 0, Num max = std::numeric_limits<Num>::max()) noexce
 *
 *   @return An integer value between minf and maxf
 *
-*   @pre minf > 0.0f ∧ minf < maxf
+*   @pre minf >= 0.0f ∧ minf < maxf
 *
 *   @note This function uses the Xorshift* Random Number generator
 */
@@ -120,7 +120,7 @@ int crand() noexcept;
 */
 inline unsigned long long xorshiftRand100() noexcept
 {
-    return LX_Random::xorshiftRand()%100;
+    return LX_Random::xorshiftRand() % 100;
 }
 
 /**
@@ -133,7 +133,7 @@ inline unsigned long long xorshiftRand100() noexcept
 */
 inline int crand100() noexcept
 {
-    return LX_Random::crand()%100;
+    return LX_Random::crand() % 100;
 }
 
 #include "LX_Random.tpp"
