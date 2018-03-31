@@ -22,7 +22,7 @@
 #include <type_traits>
 
 
-struct Float
+struct Float final
 {
     float v;
     // Unboxing ≡ static_cast<float>(Float)
@@ -30,7 +30,6 @@ struct Float
 };
 
 /**
-*   @ingroup Utils
 *   @namespace FloatBox
 *   @brief Boxing
 */
@@ -38,8 +37,8 @@ namespace FloatBox
 {
 
 template <typename N>
-using Ftype = typename std::enable_if< std::is_arithmetic<N>::value &&
-              !std::is_same<N,float>::value >::type;
+using Ftype = typename std::enable_if< std::is_arithmetic< N >::value &&
+              !std::is_same< N, float >::value, N >::type;
 
 /**
 *   @fn template <typename N> inline constexpr Float fbox(Ftype<N> x) noexcept
@@ -49,9 +48,9 @@ using Ftype = typename std::enable_if< std::is_arithmetic<N>::value &&
 *   @return The boxed value
 */
 template <typename N>
-inline constexpr Float fbox(Ftype<N> x) noexcept
+inline constexpr Float fbox(const Ftype<N> x) noexcept
 {
-    return Float{static_cast<float>(x)};
+    return Float{ static_cast<float>(x) };
 }
 
 /**
@@ -61,7 +60,7 @@ inline constexpr Float fbox(Ftype<N> x) noexcept
 *   @param x
 *   @return The boxed value
 */
-inline constexpr Float fbox(float x) noexcept
+inline constexpr Float fbox(const float x) noexcept
 {
     return Float{ x };
 }
@@ -81,27 +80,27 @@ Float& operator --(Float& x) noexcept;
 Float operator --(Float& x, int) noexcept;
 
 
-constexpr Float operator -(const Float& x) noexcept
+inline constexpr Float operator -(const Float& x) noexcept
 {
     return Float{ -x.v };
 }
 
-constexpr Float operator +(const Float& x, const Float& y) noexcept
+inline constexpr Float operator +(const Float& x, const Float& y) noexcept
 {
     return Float{ x.v + y.v };
 }
 
-constexpr Float operator -(const Float& x, const Float& y) noexcept
+inline constexpr Float operator -(const Float& x, const Float& y) noexcept
 {
     return Float{ x.v - y.v };
 }
 
-constexpr Float operator *(const Float& x, const Float& y) noexcept
+inline constexpr Float operator *(const Float& x, const Float& y) noexcept
 {
     return Float{ x.v * y.v };
 }
 
-constexpr Float operator /(const Float& x, const Float& y) noexcept
+inline constexpr Float operator /(const Float& x, const Float& y) noexcept
 {
     return Float{ x.v / y.v };
 }
@@ -114,6 +113,26 @@ Float& operator /=(Float& x, const Float& y) noexcept;
 
 bool operator ==(const Float& x, const Float& y) noexcept;
 bool operator !=(const Float& x, const Float& y) noexcept;
+
+inline constexpr bool operator <(const Float& x, const Float& y) noexcept
+{
+    return x.v < y.v;
+}
+
+inline constexpr bool operator >(const Float& x, const Float& y) noexcept
+{
+    return x.v > y.v;
+}
+
+inline constexpr bool operator <=(const Float& x, const Float& y) noexcept
+{
+    return !(x.v > y.v);
+}
+
+inline constexpr bool operator >=(const Float& x, const Float& y) noexcept
+{
+    return !(x.v < y.v);
+}
 
 /**
 *   @ingroup Utils
