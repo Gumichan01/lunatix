@@ -46,7 +46,7 @@ long getMillisTime() noexcept
 
     struct timespec t;
     clock_gettime(CLOCK_REALTIME, &t);
-    ms = static_cast<long>(round(t.tv_nsec / 1.0e6));
+    ms = static_cast<long>(std::round(static_cast<double>(t.tv_nsec) / 1.0e6));
 
 #else   // Other system
 #error "Unrecognized operating system"
