@@ -15,7 +15,7 @@ int tagflac(Tagctx *ctx)
 
     d = (uchar*)ctx->buf;
     /* 8 bytes for marker, block type, length. 18 bytes for the stream info */
-    if(ctx->read(ctx, d, 8+18) != 8+18 || memcmp(d, "fLaC\x00", 5) != 0)
+    if(ctx->read(ctx, d, 8+18) != 8+18 || std::memcmp(d, "fLaC\x00", 5) != 0)
         return -1;
 
     sz = beu3(&d[5]); /* size of the stream info */

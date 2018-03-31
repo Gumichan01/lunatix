@@ -10,7 +10,7 @@ namespace
 
 const libtagpp::ImgMetaData EMPTY_IMG = {0,0};
 
-struct Aux
+struct Aux final
 {
     FILE * f;
     libtagpp::Tag& tag;

@@ -23,7 +23,7 @@ int tagid3v1(Tagctx *ctx)
 
     if(ctx->seek(ctx, -Insz, 2) < 0)
         return -1;
-    if(ctx->read(ctx, in, Insz) != Insz || memcmp(in, "TAG", 3) != 0)
+    if(ctx->read(ctx, in, Insz) != Insz || std::memcmp(in, "TAG", 3) != 0)
         return -1;
 
     if((ctx->found & 1<<Ttitle) == 0 && iso88591toutf8(out, Outsz, &in[3], 30) > 0)

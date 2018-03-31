@@ -17,17 +17,18 @@
 static int v2cb(Tagctx *ctx, char *k, char *v)
 {
     k++;
-    if(strcmp(k, "AL") == 0 || strcmp(k, "ALB") == 0)
+    if(std::strcmp(k, "AL") == 0 || std::strcmp(k, "ALB") == 0)
         txtcb(ctx, Talbum, v);
-    else if(strcmp(k, "PE1") == 0 || strcmp(k, "PE2") == 0 || strcmp(k, "P1") == 0 || strcmp(k, "P2") == 0)
+    else if(std::strcmp(k, "PE1") == 0 || std::strcmp(k, "PE2") == 0 ||
+            std::strcmp(k, "P1") == 0 || std::strcmp(k, "P2") == 0)
         txtcb(ctx, Tartist, v);
-    else if(strcmp(k, "IT2") == 0 || strcmp(k, "T2") == 0)
+    else if(std::strcmp(k, "IT2") == 0 || std::strcmp(k, "T2") == 0)
         txtcb(ctx, Ttitle, v);
-    else if(strcmp(k, "YE") == 0 || strcmp(k, "YER") == 0 || strcmp(k, "DRC") == 0)
+    else if(std::strcmp(k, "YE") == 0 || std::strcmp(k, "YER") == 0 || std::strcmp(k, "DRC") == 0)
         txtcb(ctx, Tdate, v);
-    else if(strcmp(k, "RK") == 0 || strcmp(k, "RCK") == 0)
+    else if(std::strcmp(k, "RK") == 0 || std::strcmp(k, "RCK") == 0)
         txtcb(ctx, Ttrack, v);
-    else if(strcmp(k, "CO") == 0 || strcmp(k, "CON") == 0)
+    else if(std::strcmp(k, "CO") == 0 || std::strcmp(k, "CON") == 0)
     {
         for(; v[0]; v++)
         {
@@ -46,24 +47,24 @@ static int v2cb(Tagctx *ctx, char *k, char *v)
             }
         }
     }
-    else if(strcmp(k, "XXX") == 0 && strncmp(v, "REPLAYGAIN_", 11) == 0)
+    else if(std::strcmp(k, "XXX") == 0 && std::strncmp(v, "REPLAYGAIN_", 11) == 0)
     {
         int type = -1;
         v += 11;
-        if(strncmp(v, "TRACK_", 6) == 0)
+        if(std::strncmp(v, "TRACK_", 6) == 0)
         {
             v += 6;
-            if(strcmp(v, "GAIN") == 0)
+            if(std::strcmp(v, "GAIN") == 0)
                 type = Ttrackgain;
-            else if(strcmp(v, "PEAK") == 0)
+            else if(std::strcmp(v, "PEAK") == 0)
                 type = Ttrackpeak;
         }
-        else if(strncmp(v, "ALBUM_", 6) == 0)
+        else if(std::strncmp(v, "ALBUM_", 6) == 0)
         {
             v += 6;
-            if(strcmp(v, "GAIN") == 0)
+            if(std::strcmp(v, "GAIN") == 0)
                 type = Talbumgain;
-            else if(strcmp(v, "PEAK") == 0)
+            else if(std::strcmp(v, "PEAK") == 0)
                 type = Talbumpeak;
         }
         if(type >= 0)
@@ -80,28 +81,28 @@ static int rva2(Tagctx *ctx, char *tag, int sz)
 {
     uchar *b, *end;
 
-    if((b = (uchar*) memchr(tag, 0, sz)) == nil)
+    if((b = (uchar*) std::memchr(tag, 0, sz)) == nil)
         return -1;
     b++;
     for(end = (uchar*)tag+sz; b+4 < end; b += 5)
     {
         int type = b[0];
         float peak;
-        float va = static_cast<float>(b[1]<<8 | b[2]) / 512.0f;
+        float va = (float)(b[1]<<8 | b[2]) / 512.0f;
 
         if(b[3] == 24)
         {
-            peak = static_cast<float>(b[4]<<16 | b[5]<<8 | b[6]) / 32768.0f;
+            peak = (float)(b[4]<<16 | b[5]<<8 | b[6]) / 32768.0f;
             b += 2;
         }
         else if(b[3] == 16)
         {
-            peak = static_cast<float>(b[4]<<8 | b[5]) / 32768.0f;
+            peak = (float)(b[4]<<8 | b[5]) / 32768.0f;
             b += 1;
         }
         else if(b[3] == 8)
         {
-            peak = static_cast<float>(b[4]) / 32768.0f;
+            peak = (float)b[4] / 32768.0f;
         }
         else
             return -1;
@@ -109,17 +110,17 @@ static int rva2(Tagctx *ctx, char *tag, int sz)
         if(type == 1)  /* master volume */
         {
             char vas[16], peaks[8];
-            snprint(vas, sizeof(vas), "%+.5f dB", static_cast<double>(va));
-            snprint(peaks, sizeof(peaks), "%.5f", static_cast<double>(peak));
+            snprint(vas, sizeof(vas), "%+.5f dB", va);
+            snprint(peaks, sizeof(peaks), "%.5f", peak);
             vas[sizeof(vas)-1] = 0;
             peaks[sizeof(peaks)-1] = 0;
 
-            if(strcmp(tag, "track") == 0)
+            if(std::strcmp((char*)tag, "track") == 0)
             {
                 txtcb(ctx, Ttrackgain, vas);
                 txtcb(ctx, Ttrackpeak, peaks);
             }
-            else if(strcmp(tag, "album") == 0)
+            else if(std::strcmp((char*)tag, "album") == 0)
             {
                 txtcb(ctx, Talbumgain, vas);
                 txtcb(ctx, Talbumpeak, peaks);
@@ -140,7 +141,7 @@ static int resync(uchar *b, int sz)
     {
         if(b[i] == 0xff && b[i+1] == 0x00 && (b[i+2] & 0xe0) == 0xe0)
         {
-            memmove(&b[i+1], &b[i+2], sz-i-2);
+            std::memmove(&b[i+1], &b[i+2], sz-i-2);
             sz--;
         }
     }
@@ -161,7 +162,7 @@ static int unsyncread(void *buf, int *sz)
                 break;
             if(b[i+1] == 0x00 && (b[i+2] & 0xe0) == 0xe0)
             {
-                memmove(&b[i+1], &b[i+2], *sz-i-2);
+                std::memmove(&b[i+1], &b[i+2], *sz-i-2);
                 (*sz)--;
             }
         }
@@ -178,7 +179,7 @@ static int nontext(Tagctx *ctx, uchar *d, int tsz, int unsync)
     tag = ctx->buf;
     n = 0;
     f = unsync ? unsyncread : nil;
-    if(strcmp((char*)d, "APIC") == 0)
+    if(std::strcmp((char*)d, "APIC") == 0)
     {
         offset = ctx->seek(ctx, 0, 1);
         if((n = ctx->read(ctx, tag, 256)) == 256)  /* APIC mime and description should fit */
@@ -204,7 +205,7 @@ static int nontext(Tagctx *ctx, uchar *d, int tsz, int unsync)
             n = 256;
         }
     }
-    else if(strcmp((char*)d, "PIC") == 0)
+    else if(std::strcmp((char*)d, "PIC") == 0)
     {
         offset = ctx->seek(ctx, 0, 1);
         if((n = ctx->read(ctx, tag, 256)) == 256)  /* PIC description should fit */
@@ -226,11 +227,11 @@ static int nontext(Tagctx *ctx, uchar *d, int tsz, int unsync)
                     break;
                 }
             }
-            tagscallcb(ctx, Timage, strcmp(b, "JPG") == 0 ? "image/jpeg" : "image/png", offset+n, tsz-n, f);
+            tagscallcb(ctx, Timage, std::strcmp(b, "JPG") == 0 ? "image/jpeg" : "image/png", offset+n, tsz-n, f);
             n = 256;
         }
     }
-    else if(strcmp((char*)d, "RVA2") == 0 && tsz >= 6+5)
+    else if(std::strcmp((char*)d, "RVA2") == 0 && tsz >= 6+5)
     {
         /* replay gain. 6 = "track\0", 5 = other */
         if(ctx->bufsz >= tsz && (n = ctx->read(ctx, tag, tsz)) == tsz)
@@ -498,7 +499,7 @@ header:
     {
         if(ctx->read(ctx, ctx->buf, sz) != sz)
             break;
-        for(b = (uchar*)ctx->buf; (b = (uchar*) memchr(b, 'I', sz - 1 - ((char*)b - ctx->buf))) != nil; b++)
+        for(b = (uchar*)ctx->buf; (b = (uchar*) std::memchr(b, 'I', sz - 1 - ((char*)b - ctx->buf))) != nil; b++)
         {
             ctx->seek(ctx, (char*)b - ctx->buf + offset + exsz, 0);
             if(ctx->read(ctx, d, sizeof(d)) != sizeof(d))
@@ -506,7 +507,7 @@ header:
             if(isid3(d))
                 goto header;
         }
-        if((b = (uchar*) memchr(ctx->buf, 0xff, sz-1)) != nil && (b[1] & 0xe0) == 0xe0)
+        if((b = (uchar*) std::memchr(ctx->buf, 0xff, sz-1)) != nil && (b[1] & 0xe0) == 0xe0)
         {
             offset = ctx->seek(ctx, (char*)b - ctx->buf + offset + exsz, 0);
             break;

@@ -15,7 +15,7 @@ int tagm4a(Tagctx *ctx)
 
     d = (uchar*)ctx->buf;
     /* 4 bytes for atom size, 4 for type, 4 for data - exect "ftyp" to come first */
-    if(ctx->read(ctx, d, 4+4+4) != 4+4+4 || memcmp(d+4, "ftypM4A ", 8) != 0)
+    if(ctx->read(ctx, d, 4+4+4) != 4+4+4 || std::memcmp(d+4, "ftypM4A ", 8) != 0)
         return -1;
     sz = beuint(d) - 4; /* already have 8 bytes */
 
@@ -35,23 +35,23 @@ int tagm4a(Tagctx *ctx)
 
         d[4] = 0;
 
-        if(memcmp(d, "meta", 4) == 0)
+        if(std::memcmp(d, "meta", 4) == 0)
         {
             sz = 4;
             continue;
         }
         else if(
-            memcmp(d, "udta", 4) == 0 ||
-            memcmp(d, "ilst", 4) == 0 ||
-            memcmp(d, "trak", 4) == 0 ||
-            memcmp(d, "mdia", 4) == 0 ||
-            memcmp(d, "minf", 4) == 0 ||
-            memcmp(d, "stbl", 4) == 0)
+            std::memcmp(d, "udta", 4) == 0 ||
+            std::memcmp(d, "ilst", 4) == 0 ||
+            std::memcmp(d, "trak", 4) == 0 ||
+            std::memcmp(d, "mdia", 4) == 0 ||
+            std::memcmp(d, "minf", 4) == 0 ||
+            std::memcmp(d, "stbl", 4) == 0)
         {
             sz = 0;
             continue;
         }
-        else if(memcmp(d, "stsd", 4) == 0)
+        else if(std::memcmp(d, "stsd", 4) == 0)
         {
             sz -= 8;
             if(ctx->read(ctx, d, 8) != 8)
@@ -65,7 +65,7 @@ int tagm4a(Tagctx *ctx)
                 sz -= 8;
                 skip = beuint(d) - 8;
 
-                if(memcmp(&d[4], "mp4a", 4) == 0)  /* audio */
+                if(std::memcmp(&d[4], "mp4a", 4) == 0)  /* audio */
                 {
                     n = 6+2 + 2+4+2 + 2+2 + 2+2 + 4; /* read a bunch at once */
                     /* reserved+id, ver+rev+vendor, channels+bps, ?+?, sample rate */
@@ -86,21 +86,21 @@ int tagm4a(Tagctx *ctx)
 
         sz -= 8;
         type = -1;
-        if(memcmp(d, "\251nam", 4) == 0)
+        if(std::memcmp(d, "\251nam", 4) == 0)
             type = Ttitle;
-        else if(memcmp(d, "\251alb", 4) == 0)
+        else if(std::memcmp(d, "\251alb", 4) == 0)
             type = Talbum;
-        else if(memcmp(d, "\251ART", 4) == 0)
+        else if(std::memcmp(d, "\251ART", 4) == 0)
             type = Tartist;
-        else if(memcmp(d, "\251gen", 4) == 0 || memcmp(d, "gnre", 4) == 0)
+        else if(std::memcmp(d, "\251gen", 4) == 0 || std::memcmp(d, "gnre", 4) == 0)
             type = Tgenre;
-        else if(memcmp(d, "\251day", 4) == 0)
+        else if(std::memcmp(d, "\251day", 4) == 0)
             type = Tdate;
-        else if(memcmp(d, "covr", 4) == 0)
+        else if(std::memcmp(d, "covr", 4) == 0)
             type = Timage;
-        else if(memcmp(d, "trkn", 4) == 0)
+        else if(std::memcmp(d, "trkn", 4) == 0)
             type = Ttrack;
-        else if(memcmp(d, "mdhd", 4) == 0)
+        else if(std::memcmp(d, "mdhd", 4) == 0)
         {
             if(ctx->read(ctx, d, 4) != 4)
                 return -1;
