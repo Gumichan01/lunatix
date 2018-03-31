@@ -64,6 +64,17 @@ LX_Event::LX_MouseButton toMouseButton(uint8_t button) noexcept
 }
 
 
+/*
+    Test if a mouse button is activated
+
+    - st is the state of the mouse
+    - b is the button state
+*/
+inline constexpr bool hasState(uint32_t st, uint8_t b)
+{
+    return (st & static_cast<uint32_t>(b)) != 0;
+}
+
 void fillButtonState(bool * state, uint32_t st) noexcept
 {
     const uint8_t LBUTTON  = LX_MBIndex(LX_Event::LX_MouseButton::LBUTTON);
@@ -72,19 +83,19 @@ void fillButtonState(bool * state, uint32_t st) noexcept
     const uint8_t X1BUTTON = LX_MBIndex(LX_Event::LX_MouseButton::X1);
     const uint8_t X2BUTTON = LX_MBIndex(LX_Event::LX_MouseButton::X2);
 
-    if(st & SDL_BUTTON(LBUTTON))
+    if(hasState(st, LBUTTON))
         state[LBUTTON] = true;
 
-    if(st & SDL_BUTTON(MBUTTON))
+    if(hasState(st, MBUTTON))
         state[MBUTTON] = true;
 
-    if(st & SDL_BUTTON(RBUTTON))
+    if(hasState(st, RBUTTON))
         state[RBUTTON] = true;
 
-    if(st & SDL_BUTTON(X1BUTTON))
+    if(hasState(st, X1BUTTON))
         state[X1BUTTON] = true;
 
-    if(st & SDL_BUTTON(X2BUTTON))
+    if(hasState(st, X2BUTTON))
         state[X2BUTTON] = true;
 }
 
