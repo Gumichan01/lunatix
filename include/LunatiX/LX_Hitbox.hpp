@@ -37,8 +37,8 @@ namespace LX_Physics
 */
 struct LX_FloatPosition final
 {
-    Float x;    /**< X coordinates  */
-    Float y;    /**< Y coordinates  */
+    Float x = FloatBox::FNIL;   /**< X coordinates  */
+    Float y = FloatBox::FNIL;   /**< Y coordinates  */
 };
 
 /**
@@ -51,8 +51,8 @@ struct LX_FloatPosition final
 struct LX_FloatingBox final
 {
     LX_FloatPosition p;         /**< Position   */
-    int w;                      /**< Width      */
-    int h;                      /**< Height     */
+    int w = 0;                  /**< Width      */
+    int h = 0;                  /**< Height     */
 };
 
 
