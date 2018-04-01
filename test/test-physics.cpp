@@ -489,7 +489,7 @@ void test_Vector2D(void)
     LX_Log::log("scalar product (v, u)");
     Float d = scalar_product(v,u);
 
-    if(d != fbox(0.0f))
+    if(d != FNIL)
         LX_Log::log("FAILURE - scalar product v(1,2).u(2,-1) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - scalar product v(1,2).u(2,-1) = 0");
@@ -497,7 +497,7 @@ void test_Vector2D(void)
     LX_Log::log("scalar product (z,z)");
     d = scalar_product(z,z);
 
-    if(d != fbox(0.0f))
+    if(d != FNIL)
         LX_Log::log("FAILURE - scalar product z.z (z is a null vector) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - scalar product z.z = 0");
@@ -505,7 +505,7 @@ void test_Vector2D(void)
     LX_Log::log("norm of z");
     d = vector_norm(z);
 
-    if(d != fbox(0.0f))
+    if(d != FNIL)
         LX_Log::log("FAILURE - norm of z (z is a null vector) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - norm of z = 0");
@@ -540,7 +540,7 @@ void test_Vector2D(void)
 
     d = vector_product(z,z);
 
-    if(d != fbox(0.0f))
+    if(d != FNIL)
         LX_Log::log("FAILURE - vector product z.z (z is a null vector) expected: 0; Got: %f", d);
     else
         LX_Log::log("SUCCESS - vector product z.z = 0");
