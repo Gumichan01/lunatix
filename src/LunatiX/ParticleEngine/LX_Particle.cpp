@@ -29,9 +29,9 @@ using namespace LX_Physics;
 
 namespace LX_ParticleEngine
 {
-using FloatBox::fbox;
+using FloatBox::FNIL;
 const unsigned int DELAY = 16;
-constexpr LX_Vector2D VNULL = {fbox(0.0f), fbox(0.0f)};
+constexpr LX_Vector2D VNULL = {FNIL, FNIL};
 
 /* LX_Particle — private implementation */
 
