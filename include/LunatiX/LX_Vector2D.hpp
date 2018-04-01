@@ -33,8 +33,8 @@ namespace LX_Physics
 */
 struct LX_Vector2D final
 {
-    Float vx = FloatBox::FNIL;  /**< X velocity */
-    Float vy = FloatBox::FNIL;  /**< Y velocity */
+    Float vx;   /**< X velocity */
+    Float vy;   /**< Y velocity */
 };
 
 /**
