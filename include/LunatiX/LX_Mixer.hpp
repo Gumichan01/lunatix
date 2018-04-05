@@ -85,6 +85,10 @@ struct LX_MixerEffectType final
     bool position = false;          /**< Position       */
     bool distance = false;          /**< Distance       */
     bool reverse_stereo = false;    /**< Reverse Stereo */
+
+    LX_MixerEffectType() = default;
+    LX_MixerEffectType(const LX_MixerEffectType&) = default;
+    LX_MixerEffectType& operator =(const LX_MixerEffectType&) = default;
 };
 
 
