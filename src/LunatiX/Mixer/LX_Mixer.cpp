@@ -373,4 +373,6 @@ void setDistance(int chan, uint8_t distance) noexcept
     Mix_SetDistance(chan, distance);
 }
 
+LX_MixerEffect::LX_MixerEffect() : type() {}
+
 }
