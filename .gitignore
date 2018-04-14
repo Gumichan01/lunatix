@@ -108,7 +108,7 @@ include/GL/
 Makefile.depend
 cscope*
 lunatix.cbp
-lx-package-log.txt
+*log.txt
 lx-package-win32.sh
 
 # End of https://www.gitignore.io/api/vim,c++,linux,macos
