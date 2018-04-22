@@ -121,11 +121,13 @@ struct LX_Font_ final
             break;
 
         case LX_TTF_TypeText::LX_TTF_SHADED:
-            loaded = TTF_RenderUTF8_Shaded(ttf, text.utf8_str(), _font_colour,bg);
+            loaded = TTF_RenderUTF8_Shaded(ttf, text.utf8_str(), _font_colour, bg);
+            SDL_SetSurfaceBlendMode(loaded, SDL_BLENDMODE_BLEND);
             break;
 
         case LX_TTF_TypeText::LX_TTF_BLENDED:
             loaded = TTF_RenderUTF8_Blended(ttf, text.utf8_str(), _font_colour);
+            SDL_SetSurfaceBlendMode(loaded, SDL_BLENDMODE_BLEND);
             break;
 
         default:

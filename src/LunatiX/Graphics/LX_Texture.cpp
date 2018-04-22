@@ -855,7 +855,9 @@ void LX_TextTexture::setTextSize(unsigned int sz) noexcept
     if(_size != sz)
     {
         _size = sz;
-        if(!_text.utf8_empty()) updateTexture_();
+
+        if(!_text.utf8_empty())
+            updateTexture_();
     }
 }
 
@@ -909,6 +911,7 @@ LX_SolidTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text, sz, font, w, format)
 {
     _texture = _font.drawSolidText_(_text, _size, _win);
+    SDL_SetTextureAlphaMod(_texture, _colour.a);
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_SolidTextTexture — Cannot create the texture " +
@@ -968,6 +971,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text, sz, font, w, format), _bgcolour(bg)
 {
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
+    SDL_SetTextureAlphaMod(_texture, _colour.a);
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_ShadedTextTexture — Cannot create the texture: " +
@@ -984,6 +988,7 @@ void LX_ShadedTextTexture::updateTexture_() noexcept
 
     _font.setColour_(_colour);
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
+    SDL_SetTextureAlphaMod(_texture, _colour.a);
     _font.sizeOfText_(_text, _size, _dimension.w, _dimension.h);
     _font.setColour_(tmp);
 }
@@ -1035,6 +1040,7 @@ LX_BlendedTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text, sz, font, w, format)
 {
     _texture = _font.drawBlendedText_(_text, _size, _win);
+    SDL_SetTextureAlphaMod(_texture, _colour.a);
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_BlendedTextTexture — Cannot create the texture: " +
@@ -1051,6 +1057,7 @@ void LX_BlendedTextTexture::updateTexture_() noexcept
 
     _font.setColour_(_colour);
     _texture = _font.drawBlendedText_(_text, _size, _win);
+    SDL_SetTextureAlphaMod(_texture, _colour.a);
     _font.sizeOfText_(_text, _size, _dimension.w, _dimension.h);
     _font.setColour_(tmp);
 }
