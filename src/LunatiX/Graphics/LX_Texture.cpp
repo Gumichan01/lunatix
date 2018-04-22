@@ -865,7 +865,9 @@ void LX_TextTexture::setTextColour(const LX_Colour& c) noexcept
     if(_colour != c)
     {
         _colour = c;
-        if(!_text.utf8_empty()) updateTexture_();
+
+        if(!_text.utf8_empty())
+            updateTexture_();
     }
 }
 
@@ -923,6 +925,10 @@ void LX_SolidTextTexture::updateTexture_() noexcept
 
     _font.setColour_(_colour);
     _texture = _font.drawSolidText_(_text, _size, _win);
+
+    /* Transparent colour */
+    SDL_SetTextureAlphaMod(_texture, _colour.a);
+
     _font.sizeOfText_(_text, _size, _dimension.w, _dimension.h);
     _font.setColour_(tmp);
 }
@@ -988,7 +994,9 @@ void LX_ShadedTextTexture::setBgColour(const LX_Colour& bg) noexcept
     if(_bgcolour != bg)
     {
         _bgcolour = bg;
-        if(!_text.utf8_empty()) updateTexture_();
+
+        if(!_text.utf8_empty())
+            updateTexture_();
     }
 }
 
