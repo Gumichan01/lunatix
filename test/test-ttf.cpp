@@ -87,8 +87,8 @@ void test_font(void)
 
 void test_SolidText()
 {
-    LX_Colour dcolour = {255,0,255,0};
-    LX_Colour bcolour = {255,255,255,0};
+    LX_Colour dcolour = {255,0,255,127};
+    LX_Colour bcolour = {255,255,255, 127};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -152,9 +152,9 @@ void test_SolidText()
 
 void test_ShadedText()
 {
-    LX_Colour colour = {0,0,0,0};
-    LX_Colour bg = {255,200,127,0};
-    LX_Colour bg2 = {64,40,4,0};
+    LX_Colour colour = {0,0,0,240};
+    LX_Colour bg = {255,200,127,127};
+    LX_Colour bg2 = {64,40,4,164};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -182,7 +182,7 @@ void test_ShadedText()
         win.update();
         LX_Timer::delay(1024);
 
-        simg2.setTextColour({255,0,255,0});
+        simg2.setTextColour({255,0,255,127});
         simg2.setPosition(100,400);
         simg2.setBgColour(bg2);
         simg2.setText(str);
@@ -220,7 +220,7 @@ void test_ShadedText()
 
 void test_BlendedText()
 {
-    LX_Colour colour = {255,255,255,255};
+    LX_Colour colour = {255,255,255,127};
 
     UTF8string str("がんばつて Gumichan01");
     LX_Win::LX_WindowInfo winfo;
@@ -230,7 +230,7 @@ void test_BlendedText()
     LX_Win::LX_Window win(winfo);
     LX_Font font(fname,colour, 32);
 
-    LX_Log::log("Load a solid text image and display it");
+    LX_Log::log("Load a blended text image and display it");
 
     {
         LX_Graphics::LX_BlendedTextTexture simg(str,font,win);
@@ -247,7 +247,7 @@ void test_BlendedText()
         win.update();
         LX_Timer::delay(1024);
 
-        simg2.setTextColour({255,0,255,0});
+        simg2.setTextColour({255,0,255,127});
         simg2.setPosition(100,400);
         simg2.setText(str,48);
 
