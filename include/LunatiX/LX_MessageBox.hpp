@@ -35,7 +35,7 @@ namespace LX_MSGBox
 *   @brief Type of message
 *
 */
-enum class LX_MsgType: unsigned int
+enum class LX_MsgType
 {
     ERR,    /**< Error message          */
     WARN,   /**< Warning message        */

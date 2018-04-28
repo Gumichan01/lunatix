@@ -47,7 +47,7 @@ namespace LX_FileIO
 *   @enum LX_FileMode
 *   @brief The file access mode
 */
-enum class LX_FileMode : int
+enum class LX_FileMode
 {
     RDONLY = 0x00000001,            /**< Read only mode (r)             */
     WRONLY = 0x00000010,            /**< Write only mode (w)            */
@@ -61,7 +61,7 @@ enum class LX_FileMode : int
 *   @enum LX_FileWhence
 *   @brief The position used as reference in the file
 */
-enum class LX_FileWhence : int
+enum class LX_FileWhence
 {
     SET = SEEK_SET,     /**< Beginning of data      */
     CUR = SEEK_CUR,     /**< The current read point */

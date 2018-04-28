@@ -57,7 +57,7 @@ class LX_Font;
 namespace LX_Graphics
 {
 
-enum class LX_MIRROR : short
+enum class LX_MIRROR
 {
     /// Flag to define no mirror while drawing a texture
     NONE       = 0,

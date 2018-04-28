@@ -30,7 +30,7 @@ namespace LX_Graphics
 *   @enum LX_PixelFormat
 *   @brief Enumerate values related to the pixel format
 */
-enum class LX_PixelFormat : uint32_t
+enum class LX_PixelFormat
 {
     UNKNOWN     = SDL_PIXELFORMAT_UNKNOWN,
     INDEX1LSB   = SDL_PIXELFORMAT_INDEX1LSB,

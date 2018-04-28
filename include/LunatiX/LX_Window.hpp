@@ -69,7 +69,7 @@ struct LX_Vector2D;
 namespace LX_Win
 {
 
-enum class LX_WinMode : uint32_t
+enum class LX_WinMode
 {
     FULLSCREEN = 0x00000001,            /**< Fullscreen mode with original resolution   */
     FULLSCREEN_DESKTOP = 0x00001001,    /**< Fullscreen with the current desktop size   */

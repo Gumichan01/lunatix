@@ -65,7 +65,7 @@ using LX_GamepadID = int32_t;       /**< Identifier of the gamepad      */
 *   - MAX
 *
 */
-enum class LX_GamepadAxis : char
+enum class LX_GamepadAxis
 {
     INVALID = -1,
     LEFTX,
@@ -100,7 +100,7 @@ enum class LX_GamepadAxis : char
 *   - DPAD_RIGHT
 *   - MAX
 */
-enum class LX_GamepadButton: int
+enum class LX_GamepadButton
 {
     INVALID = -1,
     A,
@@ -183,7 +183,7 @@ enum class LX_WinEventType
 *   @enum LX_MouseButton
 *   @brief Representation of mouse butons
 */
-enum class LX_MouseButton: uint8_t
+enum class LX_MouseButton
 {
     LBUTTON = 1,   /**< Left mouse button    */
     MBUTTON = 2,   /**< Middle mouse button  */
@@ -203,7 +203,7 @@ inline uint8_t LX_MBIndex(const LX_MouseButton& b)
     @enum LX_State
     @brief Button state (keyboard, mouse, gamepad)
 */
-enum class LX_State: uint8_t
+enum class LX_State
 {
     PRESSED  = 1,   /**< The button is pressed  */
     RELEASED = 0    /**< The button is released */
