@@ -971,7 +971,7 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text, sz, font, w, format), _bgcolour(bg)
 {
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
-    SDL_SetTextureAlphaMod(_texture, _colour.a);
+    SDL_SetTextureAlphaMod(_texture, (_colour.a / 2) + (_bgcolour.a / 2));
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_ShadedTextTexture — Cannot create the texture: " +
@@ -988,7 +988,8 @@ void LX_ShadedTextTexture::updateTexture_() noexcept
 
     _font.setColour_(_colour);
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
-    SDL_SetTextureAlphaMod(_texture, _colour.a);
+
+    SDL_SetTextureAlphaMod(_texture, (_colour.a / 2) + (_bgcolour.a / 2));
     _font.sizeOfText_(_text, _size, _dimension.w, _dimension.h);
     _font.setColour_(tmp);
 }
