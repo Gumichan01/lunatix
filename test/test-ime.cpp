@@ -5,7 +5,7 @@
 using namespace LX_Event;
 
 const char * fname = "font/AozoraMinchoMedium.ttf";
-constexpr LX_Colour COLOUR = {255,255,255,0};
+constexpr LX_Colour COLOUR = {255,255,255,255};
 
 void generateInput();
 
