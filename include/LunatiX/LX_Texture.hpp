@@ -757,6 +757,11 @@ public:
 *
 *   By default, at instantiation, the background colour is black, but it can be
 *   set using *setBgColour()*
+*
+*   @note If the format of the texture supoports transparency,
+*         the alpha value of the entire texture is calculated as the average of
+*         the background colour and the text colour
+*   @note → ``` alpha = (bgcolour + textcolour) / 2 ```
 */
 class LX_ShadedTextTexture final : public LX_TextTexture
 {
