@@ -28,7 +28,7 @@
 
 #include <functional>
 
-#define RENDER(x) static_cast<SDL_Renderer*>(x)
+//#define render(x) static_cast<SDL_Renderer*>(x)
 #define U32(x) static_cast<uint32_t>(x)
 
 namespace
@@ -37,6 +37,12 @@ namespace
 constexpr double DEGREE_180 = 180.0;
 const LX_Graphics::LX_ImgRect RNULL{{0, 0}, 0, 0};
 const LX_Colour CNULL{0, 0, 0, 0};
+
+
+inline constexpr SDL_Renderer * render(void * r)
+{
+    return static_cast<SDL_Renderer*>(r);
+}
 
 inline constexpr SDL_RendererFlip shortToFlip_(const LX_Graphics::LX_MIRROR& mirror) noexcept
 {
@@ -118,7 +124,7 @@ LX_Texture::LX_Texture(const std::string& filename, LX_Win::LX_Window& w,
                        LX_PixelFormat format)
     : _texture(nullptr), _win(w), _format(format)
 {
-    _texture = loadTexture_(filename, format, RENDER(w.getRenderingSys()));
+    _texture = loadTexture_(filename, format, render(w.getRenderingSys()));
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_Texture — Cannot load " + filename);
@@ -189,7 +195,7 @@ void LX_Sprite::draw() noexcept
 {
     const SDL_Rect SDL_SRC = sdl_rect_(_img_rect);
     const SDL_Rect * SDL_SRCP = isNull_(SDL_SRC) ? nullptr : &SDL_SRC;
-    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, SDL_SRCP, nullptr);
+    SDL_RenderCopy(render(_win.getRenderingSys()), _texture, SDL_SRCP, nullptr);
 }
 
 void LX_Sprite::draw(const LX_ImgRect& box) noexcept
@@ -208,7 +214,7 @@ void LX_Sprite::draw(const LX_ImgRect& box, const double angle, const LX_MIRROR 
     const SDL_Rect SDL_RECT = sdl_rect_(box);
     const SDL_Rect SDL_SRC = sdl_rect_(_img_rect);
     const SDL_Rect * SDL_SRCP = isNull_(SDL_SRC) ? nullptr : &SDL_SRC;
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, SDL_SRCP, &SDL_RECT,
+    SDL_RenderCopyEx(render(_win.getRenderingSys()), _texture, SDL_SRCP, &SDL_RECT,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
 }
 
@@ -285,7 +291,7 @@ void LX_AnimatedSprite::draw(const LX_ImgRect& box, const double angle, const LX
     {
         const SDL_Rect SDL_RECT = sdl_rect_(box);
         const SDL_Rect COORD = sdl_rect_(_coordinates[_frame]);
-        SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture,
+        SDL_RenderCopyEx(render(_win.getRenderingSys()), _texture,
                          &COORD, &SDL_RECT, (-radianToDegree(angle)),
                          nullptr, shortToFlip_(mirror));
     }
@@ -619,7 +625,7 @@ LX_BufferedImage& LX_BufferedImage::convertNegative() noexcept
 
 LX_Sprite * LX_BufferedImage::generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const
 {
-    return new LX_Sprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()),
+    return new LX_Sprite(SDL_CreateTextureFromSurface(render(w.getRenderingSys()),
                          _surface), w, _filename, area);
 }
 
@@ -627,7 +633,7 @@ LX_AnimatedSprite * LX_BufferedImage::
 generateAnimatedSprite(LX_Win::LX_Window& w, const std::vector<LX_ImgRect>& coord,
                        const uint32_t delay, bool loop) const
 {
-    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), _surface),
+    return new LX_AnimatedSprite(SDL_CreateTextureFromSurface(render(w.getRenderingSys()), _surface),
                                  w, coord, delay, loop, _filename);
 }
 
@@ -678,7 +684,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PixelFormat fo
     else
     {
         _screen  = SDL_CreateRGBSurface(0, width, height, bpp, r, g, b, a);
-        _texture = SDL_CreateTexture(RENDER(w.getRenderingSys()), U32(_format),
+        _texture = SDL_CreateTexture(render(w.getRenderingSys()), U32(_format),
                                      SDL_TEXTUREACCESS_STREAMING, width, height);
     }
 }
@@ -707,7 +713,7 @@ void LX_StreamingTexture::update() noexcept
 
 void LX_StreamingTexture::draw() noexcept
 {
-    SDL_RenderCopy(RENDER(_win.getRenderingSys()), _texture, nullptr, nullptr);
+    SDL_RenderCopy(render(_win.getRenderingSys()), _texture, nullptr, nullptr);
 }
 
 LX_StreamingTexture::~LX_StreamingTexture()
@@ -770,7 +776,7 @@ void LX_TextTexture::draw(const double angle) noexcept
 void LX_TextTexture::draw(const double angle, const LX_MIRROR mirror) noexcept
 {
     const SDL_Rect DIM = sdl_rect_(_dimension);
-    SDL_RenderCopyEx(RENDER(_win.getRenderingSys()), _texture, nullptr,
+    SDL_RenderCopyEx(render(_win.getRenderingSys()), _texture, nullptr,
                      &DIM, (-radianToDegree(angle)), nullptr,
                      shortToFlip_(mirror));
 }
