@@ -357,7 +357,7 @@ LX_BufferedImage::LX_BufferedImage(const UTF8string& filename, LX_PixelFormat fo
     : LX_BufferedImage(filename.utf8_sstring(), format) {}
 
 
-bool LX_BufferedImage::_retrieveColours(Uint32 pixel, Uint8& r, Uint8& g,
+bool LX_BufferedImage::_retrieveColours(const Uint32 pixel, Uint8& r, Uint8& g,
                                         Uint8& b, Uint8& a) const noexcept
 {
     const LX_PixelFormat fmt = static_cast<LX_PixelFormat>(_surface->format->format);
@@ -502,11 +502,8 @@ Uint32 LX_BufferedImage::_updateGrayscaleColour(const Uint8 ALPHA, const Uint8 V
 }
 
 
-Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel) const noexcept
+Uint32 LX_BufferedImage::_convertGrayscalePixel(const Uint32 pixel) const noexcept
 {
-
-#define FL(x) static_cast<float>(x)
-
     const float RED_RATIO   = 0.212671f;
     const float GREEN_RATIO = 0.715160f;
     const float BLUE_RATIO  = 0.072169f;
@@ -586,7 +583,7 @@ Uint32 LX_BufferedImage::_updateNegativeColour(const Uint8 R, const Uint8 G,
 }
 
 
-Uint32 LX_BufferedImage::_convertNegativePixel(Uint32 pixel) const noexcept
+Uint32 LX_BufferedImage::_convertNegativePixel(const Uint32 pixel) const noexcept
 {
     Uint8 red = 0, green = 0, blue = 0, alpha = 0;
 
@@ -613,7 +610,7 @@ LX_BufferedImage& LX_BufferedImage::convertGrayscale() noexcept
 
     for (long i = 0; i < NBPIXELS; ++i)
     {
-        Uint32 pixel = pixels[i];
+        const Uint32 pixel = pixels[i];
         pixels[i] = _convertGrayscalePixel(pixel);
     }
 
@@ -627,7 +624,7 @@ LX_BufferedImage& LX_BufferedImage::convertNegative() noexcept
 
     for (long i = 0; i < NBPIXELS; ++i)
     {
-        Uint32 pixel = pixels[i];
+        const Uint32 pixel = pixels[i];
         pixels[i] = _convertNegativePixel(pixel);
     }
 
