@@ -29,7 +29,7 @@
 #include <functional>
 
 //#define render(x) static_cast<SDL_Renderer*>(x)
-#define U32(x) static_cast<uint32_t>(x)
+//#define u32(x) static_cast<uint32_t>(x)
 
 namespace
 {
@@ -42,6 +42,11 @@ const LX_Colour CNULL{0, 0, 0, 0};
 inline constexpr SDL_Renderer * render(void * r)
 {
     return static_cast<SDL_Renderer*>(r);
+}
+
+inline constexpr uint32_t u32(LX_Graphics::LX_PixelFormat& x)
+{
+    return static_cast<uint32_t>(x);
 }
 
 inline constexpr SDL_RendererFlip shortToFlip_(const LX_Graphics::LX_MIRROR& mirror) noexcept
@@ -63,7 +68,7 @@ SDL_Surface * loadSurface_(const std::string& filename,
     if(loaded == nullptr)
         return nullptr;
 
-    SDL_Surface *optimized = SDL_ConvertSurfaceFormat(loaded, U32(format), 0);
+    SDL_Surface *optimized = SDL_ConvertSurfaceFormat(loaded, u32(format), 0);
     SDL_FreeSurface(loaded);
     return optimized;
 }
@@ -327,7 +332,7 @@ LX_BufferedImage::LX_BufferedImage(SDL_Surface * s, const std::string& filename,
                                    LX_PixelFormat format)
     : _surface(s), _filename(filename)
 {
-    uint32_t tmpf = U32(format);
+    uint32_t tmpf = u32(format);
 
     if(s->format->format != tmpf)
     {
@@ -659,7 +664,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PixelFormat fo
     int bpp, width, height;
     uint32_t r, g, b, a;
 
-    if(SDL_PixelFormatEnumToMasks(U32(_format), &bpp, &r, &g, &b, &a) != SDL_TRUE)
+    if(SDL_PixelFormatEnumToMasks(u32(_format), &bpp, &r, &g, &b, &a) != SDL_TRUE)
     {
         SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_RGBA8888, &bpp, &r, &g, &b, &a);
         _format = LX_PixelFormat::RGBA8888;
@@ -684,7 +689,7 @@ LX_StreamingTexture::LX_StreamingTexture(LX_Win::LX_Window& w, LX_PixelFormat fo
     else
     {
         _screen  = SDL_CreateRGBSurface(0, width, height, bpp, r, g, b, a);
-        _texture = SDL_CreateTexture(render(w.getRenderingSys()), U32(_format),
+        _texture = SDL_CreateTexture(render(w.getRenderingSys()), u32(_format),
                                      SDL_TEXTUREACCESS_STREAMING, width, height);
     }
 }
