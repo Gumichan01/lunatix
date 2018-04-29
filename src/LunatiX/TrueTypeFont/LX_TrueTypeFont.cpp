@@ -28,7 +28,6 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
 
-//#define render(x) static_cast<SDL_Renderer*>(x)
 
 using namespace LX_Config;
 using namespace LX_FileIO;

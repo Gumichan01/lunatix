@@ -24,7 +24,6 @@
 #include <LunatiX/utils/libtagspp/libtagspp.hpp>
 #include <SDL2/SDL_mixer.h>
 
-#define S32(x) static_cast<uint32_t>(x)
 
 namespace
 {

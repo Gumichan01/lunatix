@@ -28,8 +28,6 @@
 
 #include <functional>
 
-//#define render(x) static_cast<SDL_Renderer*>(x)
-//#define u32(x) static_cast<uint32_t>(x)
 
 namespace
 {
