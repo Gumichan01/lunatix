@@ -28,13 +28,19 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
 
-#define RENDER(x) static_cast<SDL_Renderer*>(x)
+//#define render(x) static_cast<SDL_Renderer*>(x)
 
 using namespace LX_Config;
 using namespace LX_FileIO;
 
 namespace
 {
+
+inline constexpr SDL_Renderer * render(void * renderer)
+{
+    return static_cast<SDL_Renderer*>(renderer);
+}
+
 /*
 *   Calculation of the resulting surface size of the text
 *   in order to display using the font given in parameter
@@ -225,7 +231,7 @@ SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
     if(s == nullptr)
         return nullptr;
 
-    SDL_Texture *t = SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), s);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(render(w.getRenderingSys()), s);
     SDL_FreeSurface(s);
 
     return t;
@@ -253,7 +259,7 @@ SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size
     if(s == nullptr)
         return nullptr;
 
-    SDL_Texture *t = SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), s);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(render(w.getRenderingSys()), s);
     SDL_FreeSurface(s);
 
     return t;
@@ -281,7 +287,7 @@ SDL_Texture * LX_Font::drawBlendedText_(const UTF8string& text, unsigned int siz
     if(s == nullptr)
         return nullptr;
 
-    SDL_Texture *t = SDL_CreateTextureFromSurface(RENDER(w.getRenderingSys()), s);
+    SDL_Texture *t = SDL_CreateTextureFromSurface(render(w.getRenderingSys()), s);
     SDL_FreeSurface(s);
 
     return t;
