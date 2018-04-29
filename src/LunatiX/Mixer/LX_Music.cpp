@@ -40,8 +40,10 @@ LX_BufferedImage *_loadImage(const std::string& file,
     if(imgdata._img_offset <= 0 && imgdata._img_size <= 0)
         return nullptr;
 
-    return LX_FileIO::LX_FileBuffer(file, S32(imgdata._img_offset),
-                                    S32(imgdata._img_size)).loadBufferedImage();
+    const size_t IMG_OFFSET = imgdata._img_offset;
+    const size_t IMG_SZ     = imgdata._img_size;
+
+    return LX_FileIO::LX_FileBuffer(file, IMG_OFFSET, IMG_SZ).loadBufferedImage();
 }
 
 }   // namespace
