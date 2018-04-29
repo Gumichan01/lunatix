@@ -138,6 +138,7 @@ LX_Texture::LX_Texture(const UTF8string& filename, LX_Win::LX_Window& w,
                        LX_PixelFormat format)
     : LX_Texture(filename.utf8_sstring(), w, format) {}
 
+
 bool LX_Texture::bind(float *iw, float *ih) noexcept
 {
     return _win.glMakeCurrent() && SDL_GL_BindTexture(_texture, iw, ih) == 0;
@@ -217,6 +218,7 @@ void LX_Sprite::draw(const LX_ImgRect& box, const double angle, const LX_MIRROR 
     const SDL_Rect SDL_RECT = sdl_rect_(box);
     const SDL_Rect SDL_SRC = sdl_rect_(_img_rect);
     const SDL_Rect * SDL_SRCP = isNull_(SDL_SRC) ? nullptr : &SDL_SRC;
+
     SDL_RenderCopyEx(render(_win.getRenderingSys()), _texture, SDL_SRCP, &SDL_RECT,
                      (-radianToDegree(angle)), nullptr, shortToFlip_(mirror));
 }
@@ -294,6 +296,7 @@ void LX_AnimatedSprite::draw(const LX_ImgRect& box, const double angle, const LX
     {
         const SDL_Rect SDL_RECT = sdl_rect_(box);
         const SDL_Rect COORD = sdl_rect_(_coordinates[_frame]);
+
         SDL_RenderCopyEx(render(_win.getRenderingSys()), _texture,
                          &COORD, &SDL_RECT, (-radianToDegree(angle)),
                          nullptr, shortToFlip_(mirror));
@@ -516,7 +519,11 @@ Uint32 LX_BufferedImage::_convertGrayscalePixel(Uint32 pixel) const noexcept
         return pixel;
     }
 
-    Uint8 v = static_cast<Uint8>(RED_RATIO * FL(r) + GREEN_RATIO * FL(g) + BLUE_RATIO * FL(b));
+    const float R = static_cast<float>(r);
+    const float G = static_cast<float>(g);
+    const float B = static_cast<float>(b);
+
+    Uint8 v = static_cast<Uint8>(RED_RATIO * R + GREEN_RATIO * G + BLUE_RATIO * B);
     return _updateGrayscaleColour(a, v);
 }
 
