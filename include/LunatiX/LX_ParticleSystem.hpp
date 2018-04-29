@@ -36,7 +36,7 @@ class LX_Particle;
 class LX_ParticleSystem_;
 
 /**
-*   @class LX_ParticleSystem final
+*   @class LX_ParticleSystem
 *   @brief The particle system
 */
 class LX_ParticleSystem final

@@ -47,7 +47,7 @@ namespace LX_FileIO
 class LX_FileBuffer_;
 
 /**
-*   @class LX_FileBuffer final
+*   @class LX_FileBuffer
 *   @brief The file buffer class
 *
 *   This class contains information about a file buffer.

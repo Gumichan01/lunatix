@@ -31,7 +31,7 @@ struct LX_Gamepad_;
 struct LX_GamepadInfo;
 
 /**
-*   @class LX_Gamepad final
+*   @class LX_Gamepad
 *   @brief The gamepad
 */
 class LX_Gamepad final

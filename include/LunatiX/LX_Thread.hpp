@@ -49,7 +49,7 @@ namespace LX_Multithreading
 size_t getCurrentThreadID() noexcept;
 
 /**
-*   @class LX_Thread final
+*   @class LX_Thread
 *   @brief The thread
 *
 *   LX_Thread is a simple wrapper of std::thread
@@ -113,7 +113,7 @@ public:
 };
 
 /**
-*   @class LX_ASyncTask final
+*   @class LX_ASyncTask
 *   @brief Asynchronous task
 */
 template <class ReturnValue>

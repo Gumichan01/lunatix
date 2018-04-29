@@ -71,7 +71,7 @@ enum class LX_MIRROR
 static constexpr LX_ImgRect RNULL = {{0,0},0,0};
 
 /**
-*   @class LX_ImageException final
+*   @class LX_ImageException
 *   @brief Exception class related to the image handling
 */
 class LX_ImageException final : public std::exception
@@ -280,7 +280,7 @@ public:
 
 
 /**
-*   @class LX_AnimatedSprite final
+*   @class LX_AnimatedSprite
 *   @brief The animated sprite
 *
 *   This class describes a sprite sheet used for animation.
@@ -363,7 +363,7 @@ public:
 
 
 /**
-*   @class LX_BufferedImage final
+*   @class LX_BufferedImage
 *   @brief The Buffered image
 *
 *   This class describes an image stored in memory.
@@ -464,7 +464,7 @@ public:
 
 
 /**
-*   @class LX_StreamingTexture final
+*   @class LX_StreamingTexture
 *   @brief A special texture for texture streaming.
 *
 *   This class describes a texture for streaming.
@@ -696,7 +696,7 @@ public:
 
 
 /**
-*   @class LX_SolidTextTexture final
+*   @class LX_SolidTextTexture
 *   @brief The solid text texture
 *
 *   This class describes a solid text texture.
@@ -748,7 +748,7 @@ public:
 
 
 /**
-*   @class LX_ShadedTextTexture final
+*   @class LX_ShadedTextTexture
 *   @brief The shaded text texture
 *
 *   This class describes a shaded text texture.
@@ -827,7 +827,7 @@ public:
 
 
 /**
-*   @class LX_BlendedTextTexture final
+*   @class LX_BlendedTextTexture
 *   @brief The blended text texture
 *
 *   This class describes a blended text texture.

@@ -32,7 +32,7 @@ namespace LX_Physics
 {
 
 /**
-*   @struct LX_FloatPosition final
+*   @struct LX_FloatPosition
 *   @brief The position in floating-point value
 */
 struct LX_FloatPosition final
@@ -42,7 +42,7 @@ struct LX_FloatPosition final
 };
 
 /**
-*   @struct LX_FloatingBox final
+*   @struct LX_FloatingBox
 *   @brief The logical hitbox (Axis-Aligned Bounding Box)
 *
 *   @note If you want to use an Oriented Bounding Box (OBB),
@@ -70,7 +70,7 @@ LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
 LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept;
 
 /**
-*   @struct LX_Segment final
+*   @struct LX_Segment
 *   @brief The segment
 *
 *   @note If you want to use an inifinite line, use LX_Line instead
@@ -82,7 +82,7 @@ struct LX_Segment final
 };
 
 /**
-*   @struct LX_Line final
+*   @struct LX_Line
 *   @brief The line
 */
 struct LX_Line final
@@ -108,7 +108,7 @@ struct LX_Line final
 
 
 /**
-*   @struct LX_Circle final
+*   @struct LX_Circle
 *   @brief The circle structure
 */
 struct LX_Circle final

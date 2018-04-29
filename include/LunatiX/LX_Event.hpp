@@ -211,7 +211,7 @@ enum class LX_State
 
 
 /**
-*   @struct LX_GAxis final
+*   @struct LX_GAxis
 *   @brief Axis of a gamepad
 */
 struct LX_GAxis final
@@ -223,7 +223,7 @@ struct LX_GAxis final
 
 
 /**
-*   @struct LX_GButton final
+*   @struct LX_GButton
 *   @brief Button of a gamepad
 */
 struct LX_GButton final
@@ -250,7 +250,7 @@ struct LX_MButton final
 const int LX_MBUTTONS = 6;
 
 /**
-*   @struct LX_MMotion final
+*   @struct LX_MMotion
 *   @brief Mouse movement
 *
 *   @note state is a boolean array that contains information
@@ -297,7 +297,7 @@ struct LX_MMotion final
 
 
 /**
-*   @struct LX_MWheel final
+*   @struct LX_MWheel
 *   @brief Mouse wheel
 */
 struct LX_MWheel final
@@ -309,7 +309,7 @@ struct LX_MWheel final
 
 
 /**
-*   @struct LX_WEvent final
+*   @struct LX_WEvent
 *   @brief Window event
 */
 struct LX_WEvent final
@@ -322,7 +322,7 @@ struct LX_WEvent final
 
 
 /**
-*   @struct LX_UserEvent final
+*   @struct LX_UserEvent
 *   @brief User-defined event
 */
 struct LX_UserEvent final
@@ -336,7 +336,7 @@ struct LX_UserEvent final
 
 
 /**
-*   @struct LX_TextEvent final
+*   @struct LX_TextEvent
 *   @brief Text event
 */
 struct LX_TextEvent final
@@ -348,7 +348,7 @@ struct LX_TextEvent final
 };
 
 /**
-*   @struct LX_DropEvent final
+*   @struct LX_DropEvent
 *   @brief Drop event (file request)
 */
 struct LX_DropEvent final
@@ -357,7 +357,7 @@ struct LX_DropEvent final
 };
 
 /**
-*   @struct LX_KeyboardState final
+*   @struct LX_KeyboardState
 *   @brief Keyboard state
 */
 struct LX_KeyboardState final
@@ -367,7 +367,7 @@ struct LX_KeyboardState final
 };
 
 /**
-*   @class LX_EventHandler final
+*   @class LX_EventHandler
 *   @brief The class for event handling
 *
 *   This class is reponsible of handling event (pushing, retrieving)

@@ -31,7 +31,7 @@ namespace LX_VersionInfo
 {
 
 /**
-*   @struct LX_Version final
+*   @struct LX_Version
 *   @brief The version structure
 *   The current version of the library
 */

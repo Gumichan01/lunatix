@@ -81,7 +81,7 @@ public:
 class LX_TextInput_;
 
 /**
-*   @class LX_TextInput final
+*   @class LX_TextInput
 *   @brief Text input class
 *
 *   LX_TextInput is a class that handles text input. The text input is activated

@@ -26,7 +26,7 @@ namespace LX_Physics
 {
 
 /**
-*   @struct LX_Vector2D final
+*   @struct LX_Vector2D
 *   @brief The vector2D structure
 *
 *   This structure describes a 2-dimension vector

@@ -46,7 +46,7 @@ public:
 };
 
 /**
-*   @class LX_WindowManager final
+*   @class LX_WindowManager
 *   @brief The windows manager
 *
 *   LX_WindowManager allows the user to handle several windows

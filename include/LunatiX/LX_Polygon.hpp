@@ -31,7 +31,7 @@ struct LX_Vector2D;
 struct LX_FloatPosition;
 
 /**
-*   @class LX_PolygonException final
+*   @class LX_PolygonException
 *   @brief The exception class of LX_Window
 *
 *   This class describes the exception occured when

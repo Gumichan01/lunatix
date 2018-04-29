@@ -28,7 +28,7 @@ namespace LX_Mixer
 {
 
 /**
-*   @class LX_MixerException final
+*   @class LX_MixerException
 *   @brief Exception class of the Audio module
 */
 class LX_MixerException final : public std::exception

@@ -45,7 +45,7 @@ namespace LX_ParticleEngine
 class LX_Particle_;
 
 /**
-*   @class LX_Particle final
+*   @class LX_Particle
 *   @brief The particle
 */
 class LX_Particle final

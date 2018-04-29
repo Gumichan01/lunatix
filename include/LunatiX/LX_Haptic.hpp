@@ -173,7 +173,7 @@ public:
 };
 
 /**
-*   @class LX_MouseHaptic final
+*   @class LX_MouseHaptic
 *   @brief The mouse haptic device
 *   This class describes the force feedback system related to the mouse.
 */

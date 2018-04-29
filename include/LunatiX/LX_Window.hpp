@@ -105,7 +105,7 @@ enum class LX_BlendMode
 };
 
 /**
-*   @struct LX_WindowInfo final
+*   @struct LX_WindowInfo
 *   @brief Information about the window
 */
 struct LX_WindowInfo final
@@ -139,7 +139,7 @@ void LX_loadWindowConfig(LX_WindowInfo &info) noexcept;
 
 
 /**
-*   @class LX_WindowException final
+*   @class LX_WindowException
 *   @brief The exception class of LX_Window
 *
 *   This class describes the exception occured when
@@ -165,7 +165,7 @@ public:
 struct LX_Window_;
 
 /**
-*   @class LX_Window final
+*   @class LX_Window
 *   @brief The window
 *
 *   @warning The LX_Window class must be defined only after

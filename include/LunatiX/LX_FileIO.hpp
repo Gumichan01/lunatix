@@ -70,7 +70,7 @@ enum class LX_FileWhence
 
 
 /**
-*   @class IOException final
+*   @class IOException
 *   @brief The Input/Output file exception
 *
 *   This exception class occured when
@@ -186,7 +186,7 @@ public:
 class LX_File_;
 
 /**
-*   @class LX_File final
+*   @class LX_File
 *   @brief The file handler
 */
 class LX_File final : public virtual LX_AbstractFile
@@ -270,7 +270,7 @@ public:
 class LX_TmpFile_;
 
 /**
-*   @class LX_TmpFile final
+*   @class LX_TmpFile
 *   @brief The temporary file
 */
 class LX_TmpFile final : public virtual LX_AbstractFile

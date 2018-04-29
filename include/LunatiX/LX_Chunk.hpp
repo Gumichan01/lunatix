@@ -37,7 +37,7 @@ namespace LX_Mixer
 class LX_Chunk_;
 
 /**
-*   @class LX_Chunk final
+*   @class LX_Chunk
 *   @brief The sample class
 */
 class LX_Chunk final : public virtual LX_Sound
