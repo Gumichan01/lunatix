@@ -39,8 +39,8 @@ LX_BufferedImage *_loadImage(const std::string& file,
     if(imgdata._img_offset <= 0 && imgdata._img_size <= 0)
         return nullptr;
 
-    const size_t IMG_OFFSET = imgdata._img_offset;
-    const size_t IMG_SZ     = imgdata._img_size;
+    const size_t IMG_OFFSET = static_cast<size_t>(imgdata._img_offset);
+    const size_t IMG_SZ     = static_cast<size_t>(imgdata._img_size);
 
     return LX_FileIO::LX_FileBuffer(file, IMG_OFFSET, IMG_SZ).loadBufferedImage();
 }
