@@ -985,11 +985,21 @@ LX_ShadedTextTexture(const UTF8string& text, unsigned int sz,
     : LX_TextTexture(text, sz, font, w, format), _bgcolour(bg)
 {
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
-    SDL_SetTextureAlphaMod(_texture, (_colour.a / 2) + (_bgcolour.a / 2));
+
+    SDL_SetTextureAlphaMod(_texture, alpha_());
 
     if(_texture == nullptr)
         throw LX_ImageException("LX_ShadedTextTexture — Cannot create the texture: " +
                                 text.utf8_sstring());
+}
+
+/*
+    Set the alpha value as te measn of colour.a and bgcolour.a
+*/
+uint8_t LX_ShadedTextTexture::alpha_()
+{
+    const std::divides<Uint8> DIV;
+    return std::plus<Uint8>()( DIV(_colour.a, 2), DIV(_bgcolour.a, 2) );
 }
 
 
@@ -1003,7 +1013,7 @@ void LX_ShadedTextTexture::updateTexture_() noexcept
     _font.setColour_(_colour);
     _texture = _font.drawShadedText_(_text, _size, _bgcolour, _win);
 
-    SDL_SetTextureAlphaMod(_texture, (_colour.a / 2) + (_bgcolour.a / 2));
+    SDL_SetTextureAlphaMod(_texture, alpha_());
     _font.sizeOfText_(_text, _size, _dimension.w, _dimension.h);
     _font.setColour_(tmp);
 }

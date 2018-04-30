@@ -767,6 +767,8 @@ class LX_ShadedTextTexture final : public LX_TextTexture
 {
     LX_Colour _bgcolour;
 
+    uint8_t alpha_();
+
 protected:
 
     virtual void updateTexture_() noexcept;
