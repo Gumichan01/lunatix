@@ -53,7 +53,7 @@ void loadFileConfig_(LX_InternalConfig& config) noexcept;
     Return 1 if a configuration has been found, 0 otherwise
 */
 unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
-               const std::string& line, const std::string& sub) noexcept
+                        const std::string& line, const std::string& sub) noexcept
 {
     if(cpt >= NB_CONFIG)
         return 0;
