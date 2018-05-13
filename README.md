@@ -117,6 +117,8 @@ installed.
 | SDL2_Mixer |      2.0.0+     |
 |   OpenGL   |       3.0+      |
 
+[How to build LunatiX properly][howto]
+
 You also need to clone the project and execute `git-lfs pull`.
 
 If you want to generate the library files you just need to execute
@@ -155,5 +157,6 @@ using the **dox** configuration file.
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
 [libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.12.0
 [MinGW]: http://www.mingw.org/
+[howto]: https://gist.github.com/Gumichan01/0731cb32832df3ff293b90601b34e0dc
 [tx]: https://github.com/Gumichan01/target-xplosion/
 [br]: https://github.com/Gumichan01/br8k0ut/
