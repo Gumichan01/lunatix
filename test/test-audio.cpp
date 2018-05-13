@@ -56,6 +56,17 @@ void test_info(const std::string& s)
 
         if(tag.img != nullptr)
         {
+            LX_Log::log("File: %s",s.c_str());
+            LX_Log::log("================================");
+            LX_Log::log("Title - %s",tag.title.utf8_str());
+            LX_Log::log("Artist - %s",tag.artist.utf8_str());
+            LX_Log::log("Album - %s",tag.album.utf8_str());
+            LX_Log::log("Year - %s",tag.year.utf8_str());
+            LX_Log::log("--------------------------------");
+            LX_Log::log("Duration - %s", tag.duration.utf8_str());
+            LX_Log::log("Format - %s", tag.format.utf8_str());
+            LX_Log::log("================================");
+
             LX_Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
             LX_Log::logInfo(LX_Log::TEST,"SUCCESS - cover opened");
 
@@ -71,17 +82,6 @@ void test_info(const std::string& s)
     {
         LX_Log::logInfo(LX_Log::TEST,"FAILURE - %s", ie.what());
     }
-
-    LX_Log::log("File: %s",s.c_str());
-    LX_Log::log("================================");
-    LX_Log::log("Title - %s",tag.title.utf8_str());
-    LX_Log::log("Artist - %s",tag.artist.utf8_str());
-    LX_Log::log("Album - %s",tag.album.utf8_str());
-    LX_Log::log("Year - %s",tag.year.utf8_str());
-    LX_Log::log("--------------------------------");
-    LX_Log::log("Duration - %s", tag.duration.utf8_str());
-    LX_Log::log("Format - %s", tag.format.utf8_str());
-    LX_Log::log("================================");
 }
 
 
