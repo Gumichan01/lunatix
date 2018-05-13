@@ -112,7 +112,7 @@ installed.
 |    SDL2    |      2.0.3+     |
 | SDL2_image |      2.0.0+     |
 |  SDL2_TTF  |      2.0.12+    |
-| SDL2_Mixer |      2.0.2+     |
+| SDL2_Mixer |      2.0.0+     |
 |   OpenGL   |       3.0+      |
 
 
