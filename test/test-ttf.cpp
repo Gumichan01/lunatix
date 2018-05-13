@@ -96,11 +96,11 @@ void test_SolidText()
     winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
-    LX_Font font(fname, dcolour, 32);
 
     LX_Log::log("Load a solid text image and display it");
 
     {
+        LX_Font font(fname, dcolour, 32);
         LX_Graphics::LX_SolidTextTexture simg(str,font,win);
         LX_Graphics::LX_SolidTextTexture simg2(font,win);
         LX_Log::log("SUCCESS - Image loaded");
