@@ -68,7 +68,7 @@ void test_info(const std::string& s)
             LX_Log::log("================================");
 
             LX_Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
-            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - cover opened");
+            LX_Log::logInfo(LX_Log::TEST,"cover opened");
 
             w.clearWindow();
             LX_Graphics::LX_ImgRect box{0,0,info.w,info.h};
