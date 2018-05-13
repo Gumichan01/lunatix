@@ -95,6 +95,8 @@ First of all, download the stable development and runtime [libraries][] (v0.12.0
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
+You also need to clone the project and execute `git-lfs pull`.
+
 The source code is compilable using [MinGW][].
 It should work with Visual C++ (if you are lucky).
 
@@ -115,6 +117,7 @@ installed.
 | SDL2_Mixer |      2.0.2+     |
 |   OpenGL   |       3.0+      |
 
+You also need to clone the project and execute `git-lfs pull`.
 
 If you want to generate the library files you just need to execute
 the following command:
