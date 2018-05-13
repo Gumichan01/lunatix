@@ -53,15 +53,19 @@ void test_info(const std::string& s)
         info.w = 256;
         info.h = 256;
         LX_Win::LX_Window w(info);
-        LX_Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
-        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - cover opened");
 
-        w.clearWindow();
-        LX_Graphics::LX_ImgRect box{0,0,info.w,info.h};
-        cover->draw(box);
-        w.update();
-        LX_Timer::delay(2000);
-        delete cover;
+        if(tag.img != nullptr)
+        {
+            LX_Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
+            LX_Log::logInfo(LX_Log::TEST,"SUCCESS - cover opened");
+
+            w.clearWindow();
+            LX_Graphics::LX_ImgRect box{0,0,info.w,info.h};
+            cover->draw(box);
+            w.update();
+            LX_Timer::delay(2000);
+            delete cover;
+        }
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
