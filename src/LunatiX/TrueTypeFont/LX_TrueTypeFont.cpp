@@ -215,7 +215,7 @@ int LX_Font::sizeOfText_(const UTF8string& text, const unsigned int size, int& w
 SDL_Texture * LX_Font::drawSolidText_(const std::string& text, unsigned int size,
                                       LX_Win::LX_Window& w) noexcept
 {
-    return drawSolidText_(text, size, w);
+    return drawSolidText_(UTF8string(text), size, w);
 }
 
 /*
@@ -243,7 +243,7 @@ SDL_Texture * LX_Font::drawSolidText_(const UTF8string& text, unsigned int size,
 SDL_Texture * LX_Font::drawShadedText_(const std::string& text, unsigned int size,
                                        const LX_Colour& bg, LX_Win::LX_Window& w) noexcept
 {
-    return drawShadedText_(text, size, bg, w);
+    return drawShadedText_(UTF8string(text), size, bg, w);
 }
 
 /*
@@ -271,7 +271,7 @@ SDL_Texture * LX_Font::drawShadedText_(const UTF8string& text, unsigned int size
 SDL_Texture * LX_Font::drawBlendedText_(const std::string& text, unsigned int size,
                                         LX_Win::LX_Window& w) noexcept
 {
-    return drawBlendedText_(text, size, w);
+    return drawBlendedText_(UTF8string(text), size, w);
 }
 
 /*
