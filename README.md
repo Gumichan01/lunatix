@@ -119,26 +119,6 @@ installed.
 
 [How to build LunatiX properly][howto]
 
-You also need to clone the project and execute `git-lfs pull`.
-
-If you want to generate the library files you just need to execute
-the following command:
-
-    $ make
-
-These two library files are generated into the *lib/linux/* directory.
-
-If you just want to compile and launch the example code,
-execute the following command:
-
-    $ make lunatix-demo
-    $ ./lunatix-demo
-
-To test the library, execute the following command:
-
-    $ make test
-    $ bash ./test/test.sh
-
 ## Documentation ##
 
 The documentation of the library can be built with Doxygen,
