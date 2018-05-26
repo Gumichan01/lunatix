@@ -81,7 +81,7 @@ int main( int argc, char** argv )
 ## Contribute ##
 
 You may take a look on the library or get the development version on [Github][].
-The library reference is also available [here][] (version 0.12.0).
+The library reference is also available [here][].
 
 ### Prerequisites ###
 
@@ -91,7 +91,7 @@ You must install [git-lfs][] in your computer in order to retrieve the repositor
 
 ### On Windows ###
 
-First of all, download the stable development and runtime [libraries][] (v0.12.0).
+First of all, download the stable development and runtime [libraries][].
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
@@ -155,7 +155,7 @@ using the **dox** configuration file.
 [Github]: https://github.com/Gumichan01/lunatix
 [here]: https://github.com/Gumichan01/lunatix/tree/gh-pages/reference
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
-[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.12.0
+[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.13.0
 [MinGW]: http://www.mingw.org/
 [howto]: https://gist.github.com/Gumichan01/0731cb32832df3ff293b90601b34e0dc
 [tx]: https://github.com/Gumichan01/target-xplosion/
