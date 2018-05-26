@@ -34,13 +34,9 @@ using namespace LX_Event;
 
 int main(int argc, char** argv)
 {
-    LX_Graphics::LX_ImgRect position{{0,0},256,256};
-    LX_EventHandler ev;
-    bool go = true;
-
 	if(!LX_Init())
 	{
-		LX_Log::log("Cannot load the library: %s",LX_getError());
+		LX_Log::log("Cannot load the library: %s", LX_getError());
 		return -1;
 	}
 
@@ -51,7 +47,11 @@ int main(int argc, char** argv)
     info.h = 256;
 
     LX_Win::LX_Window w(info);
-    LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+    const std::string s = "data/bullet.png";
+    LX_Graphics::LX_Sprite sprite(s, w);
+    const LX_Graphics::LX_ImgRect position = {{0,0},256,256};
+    LX_EventHandler ev;
+    bool go = true;
 
     while(go)
     {
