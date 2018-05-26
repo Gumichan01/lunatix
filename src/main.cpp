@@ -32,16 +32,16 @@ int main( int argc, char** argv )
 
     LX_Win::LX_Window w( info );
     const std::string s = "data/bullet.png";
-    const LX_Graphics::LX_ImgRect position = {{0,0},256,256};
-    LX_Graphics::LX_Sprite sprite(s, w);
+    const LX_Graphics::LX_ImgRect position = { { 0,0 }, 256, 256 };
+    LX_Graphics::LX_Sprite sprite( s, w );
     LX_EventHandler ev;
     bool go = true;
 
-    while(go)
+    while ( go )
     {
-        while(ev.pollEvent())
+        while ( ev.pollEvent() )
         {
-            switch(ev.getEventType())
+            switch ( ev.getEventType() )
             {
             case LX_EventType::QUIT:
                 go = false;
@@ -52,9 +52,9 @@ int main( int argc, char** argv )
         }
 
         w.clearWindow();
-        sprite.draw(position);
+        sprite.draw( position );
         w.update();
-        LX_Timer::delay(33);
+        LX_Timer::delay( 33 );
     }
 
     LX_VersionInfo::info();
