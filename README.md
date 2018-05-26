@@ -32,32 +32,32 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 using namespace LX_Event;
 
-int main(int argc, char** argv)
+int main( int argc, char** argv )
 {
-    LX_Graphics::LX_ImgRect position{{0,0},256,256};
-    LX_EventHandler ev;
-    bool go = true;
-
-	if(!LX_Init())
+	if ( !LX_Init() )
 	{
-		LX_Log::log("Cannot load the library: %s",LX_getError());
+		LX_Log::log( "Cannot load the library: %s", LX_getError() );
 		return -1;
 	}
 
     // Information about how to build the window
     LX_Win::LX_WindowInfo info;
-    LX_Win::LX_loadWindowConfig(info);
+    LX_Win::LX_loadWindowConfig( info );
     info.w = 256;
     info.h = 256;
 
-    LX_Win::LX_Window w(info);
-    LX_Graphics::LX_Sprite sprite("data/bullet.png",w);
+    LX_Win::LX_Window w( info );
+    const std::string s = "data/bullet.png";
+    LX_Graphics::LX_Sprite sprite( s, w );
+    const LX_Graphics::LX_ImgRect position = { { 0, 0 }, 256, 256 };
+    LX_EventHandler ev;
+    bool go = true;
 
-    while(go)
+    while ( go )
     {
-        while(ev.pollEvent())
+        while ( ev.pollEvent() )
         {
-            switch(ev.getEventType())
+            switch ( ev.getEventType() )
             {
             case LX_EventType::QUIT:
                 go = false;
@@ -68,9 +68,9 @@ int main(int argc, char** argv)
         }
 
         w.clearWindow();
-        sprite.draw(position);
+        sprite.draw( position );
         w.update();
-        LX_Timer::delay(33);
+        LX_Timer::delay( 33 );
     }
 
     LX_Quit();
@@ -81,7 +81,7 @@ int main(int argc, char** argv)
 ## Contribute ##
 
 You may take a look on the library or get the development version on [Github][].
-The library reference is also available [here][] (version 0.12.0).
+The library reference is also available [here][].
 
 ### Prerequisites ###
 
@@ -91,7 +91,7 @@ You must install [git-lfs][] in your computer in order to retrieve the repositor
 
 ### On Windows ###
 
-First of all, download the stable development and runtime [libraries][] (v0.12.0).
+First of all, download the stable development and runtime [libraries][].
 It includes the library files and all necessary materials (SDL2 libraries)
 to develop any project.
 
@@ -135,7 +135,7 @@ using the **dox** configuration file.
 [Github]: https://github.com/Gumichan01/lunatix
 [here]: https://github.com/Gumichan01/lunatix/tree/gh-pages/reference
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
-[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.12.0
+[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.13.0
 [MinGW]: http://www.mingw.org/
 [howto]: https://gist.github.com/Gumichan01/0731cb32832df3ff293b90601b34e0dc
 [tx]: https://github.com/Gumichan01/target-xplosion/
