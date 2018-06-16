@@ -171,6 +171,7 @@ struct LX_Window_ final
     SDL_GLContext _glcontext = nullptr;             /* The context (only used in OpenGL)    */
     int _original_width      = DEFAULT_WIN_WIDTH;   /* The width of the window              */
     int _original_height     = DEFAULT_WIN_WIDTH;   /* The height of the window             */
+    LX_Graphics::LX_ImgRect _viewport     = { { 0,0 }, 0, 0 };
 
     LX_Window_(const LX_Window_&) = delete;
     LX_Window_& operator =(const LX_Window_&) = delete;
@@ -206,6 +207,8 @@ struct LX_Window_ final
             SDL_DestroyWindow(_window);
             throw LX_WindowException(err_msg);
         }
+
+
     }
 
     void clearRenderer_() noexcept
@@ -262,6 +265,7 @@ LX_Window::LX_Window(LX_WindowInfo &info)
     : _wimpl(new LX_Window_(info))
 {
     getInfo(info);
+    getViewPort(_wimpl->_viewport);
 }
 
 // private function
@@ -445,6 +449,7 @@ void LX_Window::setWindowSize(int w, int h) noexcept
     SDL_SetWindowSize(_wimpl->_window, w, h);
     _wimpl->_original_width = w;
     _wimpl->_original_height = h;
+    getViewPort(_wimpl->_viewport);
 }
 
 
@@ -456,14 +461,15 @@ void LX_Window::setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
 
 void LX_Window::resetViewPort() noexcept
 {
-    SDL_RenderSetViewport(_wimpl->_renderer, nullptr);
+    setViewPort(_wimpl->_viewport);
+    //SDL_RenderSetViewport(_wimpl->_renderer, nullptr);
 }
 
 void LX_Window::getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept
 {
     SDL_Rect rect;
     SDL_RenderGetViewport(_wimpl->_renderer, &rect);
-    viewport = {LX_Graphics::LX_ImgCoord{rect.x, rect.y}, rect.w, rect.h};
+    viewport = { { rect.x, rect.y }, rect.w, rect.h };
 }
 
 
@@ -482,6 +488,8 @@ void LX_Window::toggleFullscreen(const LX_WinMode flag) noexcept
             SDL_RenderSetLogicalSize(_wimpl->_renderer, _wimpl->_original_width,
                                      _wimpl->_original_height);
         }
+
+        getViewPort(_wimpl->_viewport);
     }
 }
 
