@@ -462,7 +462,6 @@ void LX_Window::setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
 void LX_Window::resetViewPort() noexcept
 {
     setViewPort(_wimpl->_viewport);
-    //SDL_RenderSetViewport(_wimpl->_renderer, nullptr);
 }
 
 void LX_Window::getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept
