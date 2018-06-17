@@ -124,6 +124,10 @@ else
 
 endif
 
+ifeq ($(PREFIX),)
+	PREFIX=/usr/local
+endif
+
 
 # Linking flags
 LFLAGS=`pkg-config --libs sdl2 SDL2_image SDL2_mixer SDL2_ttf gl`
@@ -138,7 +142,24 @@ DOXY_FILE=dox
 
 .PHONY: depend test clean cleandoc documentation $(DEPENDENCY)
 
+all: library
+
 library: depend $(LUNATIX_STATIC_LIB) $(LUNATIX_SHARED_LIB)
+
+install: install-hdrs install-libs
+
+install-hdrs:
+	install -d $(DESTDIR)/$(PREFIX)/include/
+	cp -R ./include/LunatiX/ $(DESTDIR)/$(PREFIX)/include/
+
+install-libs: library
+	install -d $(DESTDIR)/$(PREFIX)/lib/
+	install -m 644 $(LUNATIX_STATIC_LIB) $(DESTDIR)/$(PREFIX)/lib/
+	install -m 744 $(LUNATIX_SHARED_LIB) $(DESTDIR)/$(PREFIX)/lib/
+
+uninstall:
+	rm -f $(DESTDIR)/$(PREFIX)/lib/libLunatix.a
+	rm -f $(DESTDIR)/$(PREFIX)/lib/libLunatix.so
 
 $(LUNATIX_STATIC_LIB): $(OBJ_FILES)
 	@echo -n "Generating the static library → "$@"... "
