@@ -153,6 +153,7 @@ install-hdrs:
 	cp -R ./include/LunatiX/ $(DESTDIR)/$(PREFIX)/include/
 
 install-libs: library
+	@rm -f $(DEPENDENCY)
 	install -d $(DESTDIR)/$(PREFIX)/lib/
 	install -m 644 $(LUNATIX_STATIC_LIB) $(DESTDIR)/$(PREFIX)/lib/
 	install -m 744 $(LUNATIX_SHARED_LIB) $(DESTDIR)/$(PREFIX)/lib/
