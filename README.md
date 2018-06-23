@@ -135,7 +135,7 @@ using the **dox** configuration file.
 [Github]: https://github.com/Gumichan01/lunatix
 [here]: https://github.com/Gumichan01/lunatix/tree/gh-pages/reference
 [git-lfs]: https://github.com/git-lfs/git-lfs/wiki/Installation
-[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.13.0
+[libraries]: https://github.com/Gumichan01/lunatix-engine/releases/tag/LX-v0.13.1
 [MinGW]: http://www.mingw.org/
 [howto]: https://gist.github.com/Gumichan01/0731cb32832df3ff293b90601b34e0dc
 [tx]: https://github.com/Gumichan01/target-xplosion/
