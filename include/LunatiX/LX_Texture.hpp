@@ -17,7 +17,7 @@
 *   @file LX_Texture.hpp
 *   @brief The Texture header file
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/LX_Colour.hpp>

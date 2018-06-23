@@ -17,7 +17,7 @@
 *   @file LX_FileBuffer.hpp
 *   @brief The file buffer
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

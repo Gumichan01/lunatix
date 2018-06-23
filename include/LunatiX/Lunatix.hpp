@@ -17,7 +17,7 @@
 *   @file Lunatix.hpp
 *   @brief The header file of LunatiX
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #if defined(WIN32) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)

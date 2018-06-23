@@ -14,7 +14,7 @@
 *   @file LX_Polygon.cpp
 *   @brief The Implementation of the polygon
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/LX_Polygon.hpp>

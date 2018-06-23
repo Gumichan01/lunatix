@@ -17,7 +17,7 @@
 *   @file LX_ImgRect.hpp
 *   @brief The definition of LX_ImgRect
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/LX_Hitbox.hpp>

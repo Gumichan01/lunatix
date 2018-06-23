@@ -14,7 +14,7 @@
 *   @file LX_Version.cpp
 *   @brief The version implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 *
 */
 

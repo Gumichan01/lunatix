@@ -17,7 +17,7 @@
 *   @file LX_SystemInfo.hpp
 *   @brief The System information library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/utils/utf8_string.hpp>

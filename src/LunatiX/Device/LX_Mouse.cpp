@@ -14,7 +14,7 @@
 *   @file LX_Mouse.cpp
 *   @brief The implementation of the mouse
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 *
 */
 

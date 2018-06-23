@@ -17,7 +17,7 @@
 *   @file LX_Timer.hpp
 *   @brief The timer interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <SDL2/SDL_timer.h>

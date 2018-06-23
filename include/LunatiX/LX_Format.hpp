@@ -17,7 +17,7 @@
 *   @file LX_Format.hpp
 *   @brief The Format
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <SDL2/SDL_pixels.h>

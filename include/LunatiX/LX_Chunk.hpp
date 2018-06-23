@@ -17,7 +17,7 @@
 *   @file LX_Chunk.hpp
 *   @brief The sample header
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/LX_Sound.hpp>

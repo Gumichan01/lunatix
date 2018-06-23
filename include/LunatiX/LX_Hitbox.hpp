@@ -17,7 +17,7 @@
 *   @file LX_Hitbox.hpp
 *   @brief The hitbox library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.12
+*   @version 0.13
 */
 
 #include <LunatiX/LX_Vector2D.hpp>
