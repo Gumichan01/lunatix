@@ -64,12 +64,12 @@ class LX_Haptic
     friend class LX_Device::LX_Gamepad;
     std::unique_ptr<LX_Haptic_> _himpl;
 
-    LX_Haptic(LX_Haptic& h) = delete;
-    LX_Haptic& operator =(LX_Haptic& h) = delete;
+    LX_Haptic( LX_Haptic& h ) = delete;
+    LX_Haptic& operator =( LX_Haptic& h ) = delete;
 
     // Used by LX_Gamepad
-    explicit LX_Haptic(LX_Joystick *joy) noexcept;
-    explicit LX_Haptic(LX_GameController *gc) noexcept;
+    explicit LX_Haptic( LX_Joystick * joy ) noexcept;
+    explicit LX_Haptic( LX_GameController * gc ) noexcept;
 
 protected:
 
@@ -82,7 +82,7 @@ public:
     *   @fn LX_Haptic(int index) noexcept
     *   @param [in] index The index of the device to open
     */
-    explicit LX_Haptic(int index) noexcept;
+    explicit LX_Haptic( int index ) noexcept;
 
     /**
     *   @fn virtual bool isOpened() const noexcept
@@ -110,7 +110,7 @@ public:
     *         (between 0.0 and 1.0)
     *   @param [in] length Length of the rumble to play in milliseconds
     */
-    virtual void rumbleEffectPlay(float strength, uint32_t length) noexcept;
+    virtual void rumbleEffectPlay( float strength, uint32_t length ) noexcept;
 
     /**
     *   @fn virtual bool effectSupported(LX_HapticEffect& effect) const
@@ -122,7 +122,7 @@ public:
     *
     *   @sa newEffect
     */
-    virtual bool effectSupported(LX_HapticEffect& effect) const noexcept;
+    virtual bool effectSupported( LX_HapticEffect& effect ) const noexcept;
     /**
     *   @fn virtual int newEffect(LX_HapticEffect& effect)
     *
@@ -134,7 +134,7 @@ public:
     *   @sa runEffect
     *   @sa stopEffect
     */
-    virtual int newEffect(LX_HapticEffect& effect) noexcept;
+    virtual int newEffect( LX_HapticEffect& effect ) noexcept;
     /**
     *   @fn virtual void runEffect(int effect_id, uint32_t iterations)
     *
@@ -147,7 +147,7 @@ public:
     *   @sa newEffect
     *   @sa stopEffect
     */
-    virtual void runEffect(int effect_id, uint32_t iterations) noexcept;
+    virtual void runEffect( int effect_id, uint32_t iterations ) noexcept;
     /**
     *   @fn virtual void stopEffect(int effect_id)
     *   Stop the effect
@@ -156,7 +156,7 @@ public:
     *   @sa newEffect
     *   @sa runEffect
     */
-    virtual void stopEffect(int effect_id) noexcept;
+    virtual void stopEffect( int effect_id ) noexcept;
 
     /**
     *   @fn virtual int numberOfEffects() const
@@ -179,8 +179,8 @@ public:
 */
 class LX_MouseHaptic final : public LX_Haptic
 {
-    LX_MouseHaptic(LX_Haptic& h) = delete;
-    LX_MouseHaptic& operator =(LX_MouseHaptic& h) = delete;
+    LX_MouseHaptic( LX_Haptic& h ) = delete;
+    LX_MouseHaptic& operator =( LX_MouseHaptic& h ) = delete;
 
 public:
 

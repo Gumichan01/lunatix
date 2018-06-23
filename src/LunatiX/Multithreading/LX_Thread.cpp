@@ -19,7 +19,7 @@ namespace LX_Multithreading
 
 size_t getCurrentThreadID() noexcept
 {
-    return std::hash<std::thread::id>()(std::this_thread::get_id());
+    return std::hash<std::thread::id>()( std::this_thread::get_id() );
 }
 
 bool LX_Thread::joinable() const noexcept
@@ -34,7 +34,7 @@ void LX_Thread::join()
 
 size_t LX_Thread::getID() const noexcept
 {
-    return std::hash<std::thread::id>()(_thread.get_id());
+    return std::hash<std::thread::id>()( _thread.get_id() );
 }
 
 }

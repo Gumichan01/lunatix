@@ -48,8 +48,8 @@ namespace LX_Text
 class LX_RedrawCallback
 {
 
-    LX_RedrawCallback(LX_RedrawCallback&) = delete;
-    LX_RedrawCallback& operator =(LX_RedrawCallback&) = delete;
+    LX_RedrawCallback( LX_RedrawCallback& ) = delete;
+    LX_RedrawCallback& operator =( LX_RedrawCallback& ) = delete;
 
 public:
 
@@ -72,8 +72,8 @@ public:
     *   @note 3 — u8comp is the string that is currently composed but
     *          not yet validated by the user (often used for non-latin words)
     */
-    virtual void operator ()(UTF8string& u8str, UTF8string& u8comp, const bool update,
-                             size_t cursor, size_t prev_cur) noexcept = 0;
+    virtual void operator ()( UTF8string& u8str, UTF8string& u8comp, const bool update,
+                              size_t cursor, size_t prev_cur ) noexcept = 0;
 
     virtual ~LX_RedrawCallback() = default;
 };
@@ -151,9 +151,9 @@ class LX_TextInput final
 {
     std::unique_ptr<LX_TextInput_> _timpl;
 
-    LX_TextInput(LX_TextInput& t) = delete;
-    LX_TextInput(LX_TextInput&& t) = delete;
-    LX_TextInput& operator =(LX_TextInput t) = delete;
+    LX_TextInput( LX_TextInput& t ) = delete;
+    LX_TextInput( LX_TextInput&& t ) = delete;
+    LX_TextInput& operator =( LX_TextInput t ) = delete;
 
 public:
 
@@ -163,7 +163,7 @@ public:
     *   Launch the event loop
     *   @param [in] redraw Callback function to call
     */
-    void eventLoop(LX_RedrawCallback& redraw) noexcept;
+    void eventLoop( LX_RedrawCallback& redraw ) noexcept;
     ~LX_TextInput() noexcept;
 };
 

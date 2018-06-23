@@ -32,11 +32,11 @@ class LX_Mouse_ final
 
 public:
 
-    LX_Mouse_(const LX_Mouse_&) = delete;
-    LX_Mouse_& operator =(const LX_Mouse_&) = delete;
+    LX_Mouse_( const LX_Mouse_& ) = delete;
+    LX_Mouse_& operator =( const LX_Mouse_& ) = delete;
 
-    LX_Mouse_(SDL_Surface * surface, int hot_x, int hot_y) noexcept
-        : _cursor(SDL_CreateColorCursor(surface, hot_x, hot_y)) {}
+    LX_Mouse_( SDL_Surface * surface, int hot_x, int hot_y ) noexcept
+        : _cursor( SDL_CreateColorCursor( surface, hot_x, hot_y ) ) {}
 
     bool isOpen() const noexcept
     {
@@ -45,19 +45,19 @@ public:
 
     void setMouse() noexcept
     {
-        SDL_SetCursor(_cursor);
+        SDL_SetCursor( _cursor );
     }
 
     ~LX_Mouse_()
     {
-        SDL_FreeCursor(_cursor);
+        SDL_FreeCursor( _cursor );
     }
 };
 
 
-LX_Mouse::LX_Mouse(const LX_Graphics::LX_BufferedImage& surface,
-                   int hot_x, int hot_y) noexcept
-    : _mimpl(new LX_Mouse_(surface._surface, hot_x, hot_y)) {}
+LX_Mouse::LX_Mouse( const LX_Graphics::LX_BufferedImage& surface,
+                    int hot_x, int hot_y ) noexcept
+    : _mimpl( new LX_Mouse_( surface._surface, hot_x, hot_y ) ) {}
 
 bool LX_Mouse::isOpen() const noexcept
 {

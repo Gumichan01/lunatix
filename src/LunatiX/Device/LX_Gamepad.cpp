@@ -44,14 +44,14 @@ const char LX_SEP = '/';
 namespace
 {
 
-const char * nameOf_(SDL_Joystick * joy) noexcept
+const char * nameOf_( SDL_Joystick * joy ) noexcept
 {
-    return SDL_JoystickName(joy);
+    return SDL_JoystickName( joy );
 }
 
-const char * nameOf_(SDL_GameController * controller) noexcept
+const char * nameOf_( SDL_GameController * controller ) noexcept
 {
-    return SDL_GameControllerName(controller);
+    return SDL_GameControllerName( controller );
 }
 
 }
@@ -59,20 +59,20 @@ const char * nameOf_(SDL_GameController * controller) noexcept
 // Private implementation
 struct LX_Gamepad_ final
 {
-    SDL_GameController *_gc = nullptr;
-    SDL_Joystick *_joy = nullptr;
+    SDL_GameController * _gc = nullptr;
+    SDL_Joystick * _joy = nullptr;
     std::unique_ptr<LX_Haptic> _haptic = nullptr;
     bool _closed = true;
 
 private:
 
-    LX_Gamepad_(const LX_Gamepad_& g) = delete;
-    LX_Gamepad_& operator =(const LX_Gamepad_&) = delete;
+    LX_Gamepad_( const LX_Gamepad_& g ) = delete;
+    LX_Gamepad_& operator =( const LX_Gamepad_& ) = delete;
 
-    bool lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
-    bool gstat_(SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info) const;
-    bool statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const;
-    bool statGamepad_(SDL_GameController * gp, LX_GamepadInfo& info) const;
+    bool lx_stat_( SDL_Joystick * joy, LX_GamepadInfo& info ) const;
+    bool gstat_( SDL_Joystick * joy, SDL_GameController * gc, LX_GamepadInfo& info ) const;
+    bool statGamepad_( SDL_Joystick * joy, LX_GamepadInfo& info ) const;
+    bool statGamepad_( SDL_GameController * gp, LX_GamepadInfo& info ) const;
 
 public:
 
@@ -81,10 +81,10 @@ public:
 
     bool isConnected() const noexcept
     {
-        if(_gc != nullptr)
-            return SDL_GameControllerGetAttached(_gc) == SDL_TRUE;
+        if ( _gc != nullptr )
+            return SDL_GameControllerGetAttached( _gc ) == SDL_TRUE;
         else
-            return SDL_JoystickGetAttached(_joy) == SDL_TRUE;
+            return SDL_JoystickGetAttached( _joy ) == SDL_TRUE;
     }
 
     bool isHaptic() const
@@ -94,10 +94,10 @@ public:
 
     int32_t getID() const
     {
-        if(_gc != nullptr)
-            return SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(_gc));
+        if ( _gc != nullptr )
+            return SDL_JoystickInstanceID( SDL_GameControllerGetJoystick( _gc ) );
         else
-            return SDL_JoystickInstanceID(_joy);
+            return SDL_JoystickInstanceID( _joy );
     }
 
     LX_Haptic * getHaptic() const
@@ -107,23 +107,23 @@ public:
 
     const char * getName() const noexcept
     {
-        if(_gc != nullptr)
-            return nameOf_(_gc);
+        if ( _gc != nullptr )
+            return nameOf_( _gc );
         else
-            return nameOf_(_joy);
+            return nameOf_( _joy );
     }
 
-    bool stat(LX_GamepadInfo& info) const
+    bool stat( LX_GamepadInfo& info ) const
     {
         bool res;
 
-        if(_gc != nullptr)
-            res = statGamepad_(_gc, info);
+        if ( _gc != nullptr )
+            res = statGamepad_( _gc, info );
         else
-            res = statGamepad_(_joy, info);
+            res = statGamepad_( _joy, info );
 
-        if(!res)
-            LX_setError(std::string("LX_Gamepad::stat: ") + LX_getError());
+        if ( !res )
+            LX_setError( std::string( "LX_Gamepad::stat: " ) + LX_getError() );
 
         return res;
     }
@@ -134,12 +134,12 @@ public:
 
         try
         {
-            if(stat(gi))
-                return gamepadToString(gi);
+            if ( stat( gi ) )
+                return gamepadToString( gi );
         }
-        catch (...) {}
+        catch ( ... ) {}
 
-        return UTF8string("Unknown gamepad");
+        return UTF8string( "Unknown gamepad" );
     }
 
     ~LX_Gamepad_()
@@ -155,43 +155,43 @@ void LX_Gamepad_::close() noexcept
 {
     _haptic.reset();
 
-    if(!_closed)
+    if ( !_closed )
     {
-        if(_gc != nullptr)
+        if ( _gc != nullptr )
         {
-            SDL_GameControllerClose(_gc);
+            SDL_GameControllerClose( _gc );
             _gc = nullptr;
         }
-        else if(_joy != nullptr)
+        else if ( _joy != nullptr )
         {
-            SDL_JoystickClose(_joy);
+            SDL_JoystickClose( _joy );
             _joy = nullptr;
         }
         _closed = true;
     }
 }
 
-bool LX_Gamepad_::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const
+bool LX_Gamepad_::lx_stat_( SDL_Joystick * joy, LX_GamepadInfo& info ) const
 {
-    if(joy == nullptr)
+    if ( joy == nullptr )
     {
-        LX_setError("Invalid joystick\n");
+        LX_setError( "Invalid joystick\n" );
         return false;
     }
 
     // Get information
-    info.id = SDL_JoystickInstanceID(joy);
-    info.uid = SDL_JoystickGetGUID(joy);
+    info.id = SDL_JoystickInstanceID( joy );
+    info.uid = SDL_JoystickGetGUID( joy );
     info.is_haptic = isHaptic() ? "Yes" : "No";
-    info.nb_axis = SDL_JoystickNumAxes(joy);
-    info.nb_balls = SDL_JoystickNumBalls(joy);
-    info.nb_buttons = SDL_JoystickNumButtons(joy);
-    info.nb_hats = SDL_JoystickNumHats(joy);
+    info.nb_axis = SDL_JoystickNumAxes( joy );
+    info.nb_balls = SDL_JoystickNumBalls( joy );
+    info.nb_buttons = SDL_JoystickNumButtons( joy );
+    info.nb_hats = SDL_JoystickNumHats( joy );
 
-    if(info.id == -1 || info.nb_axis == -1 || info.nb_balls == -1
-            || info.nb_buttons == -1 || info.nb_hats == -1)
+    if ( info.id == -1 || info.nb_axis == -1 || info.nb_balls == -1
+            || info.nb_buttons == -1 || info.nb_hats == -1 )
     {
-        LX_setError("Cannot get information\n");
+        LX_setError( "Cannot get information\n" );
         return false;
     }
 
@@ -199,72 +199,72 @@ bool LX_Gamepad_::lx_stat_(SDL_Joystick * joy, LX_GamepadInfo& info) const
 }
 
 
-bool LX_Gamepad_::gstat_(SDL_Joystick * joy, SDL_GameController * gc,
-                         LX_GamepadInfo& info) const
+bool LX_Gamepad_::gstat_( SDL_Joystick * joy, SDL_GameController * gc,
+                          LX_GamepadInfo& info ) const
 {
-    if(joy != nullptr)
+    if ( joy != nullptr )
     {
-        info.name = nameOf_(joy);
-        return lx_stat_(joy, info);
+        info.name = nameOf_( joy );
+        return lx_stat_( joy, info );
     }
-    else if(gc != nullptr)
+    else if ( gc != nullptr )
     {
-        info.name = nameOf_(gc);
-        return lx_stat_(SDL_GameControllerGetJoystick(gc), info);
+        info.name = nameOf_( gc );
+        return lx_stat_( SDL_GameControllerGetJoystick( gc ), info );
     }
     else
     {
-        LX_Log::logCritical(LX_Log::APPLICATION,
-                            "%s:%d - Internal error: Invalid LX_Gamepad object",
-                            __FILENAME__, __LINE__);
-        throw std::runtime_error("Internal error - Bad LX_Gamepad");
+        LX_Log::logCritical( LX_Log::APPLICATION,
+                             "%s:%d - Internal error: Invalid LX_Gamepad object",
+                             __FILENAME__, __LINE__ );
+        throw std::runtime_error( "Internal error - Bad LX_Gamepad" );
     }
 }
 
 
-bool LX_Gamepad_::statGamepad_(SDL_Joystick * joy, LX_GamepadInfo& info) const
+bool LX_Gamepad_::statGamepad_( SDL_Joystick * joy, LX_GamepadInfo& info ) const
 {
-    return gstat_(joy, nullptr, info);
+    return gstat_( joy, nullptr, info );
 }
 
 
-bool LX_Gamepad_::statGamepad_(SDL_GameController * gc, LX_GamepadInfo& info) const
+bool LX_Gamepad_::statGamepad_( SDL_GameController * gc, LX_GamepadInfo& info ) const
 {
-    return gstat_(nullptr, gc, info);
+    return gstat_( nullptr, gc, info );
 }
 
 
 /* Gamepad - public class */
 
-LX_Gamepad::LX_Gamepad() noexcept: _gpimpl(new LX_Gamepad_()) {}
+LX_Gamepad::LX_Gamepad() noexcept: _gpimpl( new LX_Gamepad_() ) {}
 
 
-bool LX_Gamepad::open(int index) noexcept
+bool LX_Gamepad::open( int index ) noexcept
 {
-    if(!_gpimpl->_closed)
+    if ( !_gpimpl->_closed )
     {
         std::string s = getName();
 
-        LX_Log::logError(LX_Log::SYSTEM,
-                         "Gamepad opened and connected to %s", s.c_str());
-        LX_setError("Instance of gamepad already connected to another device");
+        LX_Log::logError( LX_Log::SYSTEM,
+                          "Gamepad opened and connected to %s", s.c_str() );
+        LX_setError( "Instance of gamepad already connected to another device" );
         return false;
     }
 
-    if(index < numberOfDevices() && SDL_IsGameController(index))
-        _gpimpl->_gc = SDL_GameControllerOpen(index);
+    if ( index < numberOfDevices() && SDL_IsGameController( index ) )
+        _gpimpl->_gc = SDL_GameControllerOpen( index );
 
-    if(_gpimpl->_gc == nullptr)
+    if ( _gpimpl->_gc == nullptr )
     {
-        _gpimpl->_joy = SDL_JoystickOpen(index);
+        _gpimpl->_joy = SDL_JoystickOpen( index );
 
-        if(SDL_JoystickIsHaptic(_gpimpl->_joy) == 1)
-            _gpimpl->_haptic.reset(new LX_Haptic(_gpimpl->_joy));
+        if ( SDL_JoystickIsHaptic( _gpimpl->_joy ) == 1 )
+            _gpimpl->_haptic.reset( new LX_Haptic( _gpimpl->_joy ) );
     }
     else
     {
-        if(SDL_JoystickIsHaptic(SDL_GameControllerGetJoystick(_gpimpl->_gc)) == 1)
-            _gpimpl->_haptic.reset(new LX_Haptic(_gpimpl->_gc));
+        if ( SDL_JoystickIsHaptic( SDL_GameControllerGetJoystick( _gpimpl->_gc ) ) == 1 )
+            _gpimpl->_haptic.reset( new LX_Haptic( _gpimpl->_gc ) );
     }
 
     _gpimpl->_closed = false;
@@ -308,9 +308,9 @@ const char * LX_Gamepad::getName() const noexcept
 }
 
 
-bool LX_Gamepad::stat(LX_GamepadInfo& info) const noexcept
+bool LX_Gamepad::stat( LX_GamepadInfo& info ) const noexcept
 {
-    return _gpimpl->stat(info);
+    return _gpimpl->stat( info );
 }
 
 

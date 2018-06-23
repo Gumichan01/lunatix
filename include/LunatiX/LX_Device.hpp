@@ -94,7 +94,7 @@ int numberOfDevices() noexcept;
 *   @post The returned string is valid
 *   @sa statGamepad
 */
-UTF8string gamepadToString(LX_GamepadInfo& info) noexcept;
+UTF8string gamepadToString( LX_GamepadInfo& info ) noexcept;
 
 /**
 *   @fn LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept
@@ -105,7 +105,7 @@ UTF8string gamepadToString(LX_GamepadInfo& info) noexcept;
 *
 *   @return The status of the mouse.
 */
-LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept;
+LX_MouseToggle mouseCursorDisplay( const LX_MouseToggle& toggle ) noexcept;
 
 }
 

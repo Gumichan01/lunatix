@@ -35,11 +35,11 @@ class LX_WindowNotFoundException final : public std::exception
 {
     std::string _string_error;
 
-    LX_WindowNotFoundException& operator =(const LX_WindowNotFoundException& w) = delete;
+    LX_WindowNotFoundException& operator =( const LX_WindowNotFoundException& w ) = delete;
 
 public:
 
-    explicit LX_WindowNotFoundException(const std::string& err);
+    explicit LX_WindowNotFoundException( const std::string& err );
     const char * what() const noexcept override;
     ~LX_WindowNotFoundException() noexcept = default;
 
@@ -59,10 +59,10 @@ class LX_WindowManager final
     LX_WindowManager();
     ~LX_WindowManager();
 
-    LX_WindowManager(const LX_WindowManager&)  = delete;
-    LX_WindowManager(const LX_WindowManager&&) = delete;
-    LX_WindowManager& operator =(const LX_WindowManager&)   = delete;
-    LX_WindowManager&& operator =(const LX_WindowManager&&) = delete;
+    LX_WindowManager( const LX_WindowManager& )  = delete;
+    LX_WindowManager( const LX_WindowManager&& ) = delete;
+    LX_WindowManager& operator =( const LX_WindowManager& )   = delete;
+    LX_WindowManager&& operator =( const LX_WindowManager&& ) = delete;
 
 public:
 
@@ -84,7 +84,7 @@ public:
     *   @sa LX_Window
     *   @sa removeWindow
     */
-    bool addWindow(LX_Window& w) noexcept;
+    bool addWindow( LX_Window& w ) noexcept;
     /**
     *   @fn bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
     *
@@ -101,7 +101,7 @@ public:
     *
     *   @sa addWindow
     */
-    bool removeWindow(const uint32_t id) noexcept;
+    bool removeWindow( const uint32_t id ) noexcept;
     /**
     *   @fn LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
     *
@@ -112,7 +112,7 @@ public:
     *   @return A valid pointer to a LX_Window instance if it exists,
     *          a null pointer otherwise
     */
-    LX_Window& getWindow(const uint32_t id) const;
+    LX_Window& getWindow( const uint32_t id ) const;
     /**
     *   @fn std::size_t LX_WindowManager::nbWindows() noexcept
     *   Count the number of windows

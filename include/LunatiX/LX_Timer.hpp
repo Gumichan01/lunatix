@@ -44,9 +44,9 @@ inline uint32_t getTicks()
 *   Wait for a certain number of milliseconds before returning
 *   @param ms The delay
 */
-inline void delay(uint32_t ms)
+inline void delay( uint32_t ms )
 {
-    SDL_Delay(ms);
+    SDL_Delay( ms );
 }
 
 }

@@ -46,7 +46,7 @@ struct LX_Vector2D final
 *   @return TRUE if they are equal, FALSE otherwise
 
 */
-bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+bool operator ==( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
@@ -55,7 +55,7 @@ bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return TRUE if they are not equal, FALSE otherwise
 */
-bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+bool operator !=( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v) noexcept
 *
@@ -66,7 +66,7 @@ bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D operator +(const LX_Vector2D u, const LX_Vector2D v) noexcept;
+LX_Vector2D operator +( const LX_Vector2D u, const LX_Vector2D v ) noexcept;
 /**
 *   @fn LX_Vector2D& operator +=(LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
@@ -77,7 +77,7 @@ LX_Vector2D operator +(const LX_Vector2D u, const LX_Vector2D v) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D& operator +=(LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+LX_Vector2D& operator +=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D u, const LX_Vector2D v) noexcept
 *
@@ -88,7 +88,7 @@ LX_Vector2D& operator +=(LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D operator -(const LX_Vector2D u, const LX_Vector2D v) noexcept;
+LX_Vector2D operator -( const LX_Vector2D u, const LX_Vector2D v ) noexcept;
 /**
 *   @fn LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
@@ -99,7 +99,7 @@ LX_Vector2D operator -(const LX_Vector2D u, const LX_Vector2D v) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+LX_Vector2D& operator -=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D operator -(const LX_Vector2D& v) noexcept
 *
@@ -109,7 +109,7 @@ LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The opposite vector
 */
-LX_Vector2D operator -(const LX_Vector2D& v) noexcept;
+LX_Vector2D operator -( const LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D& operator ++(LX_Vector2D& v) noexcept
 *
@@ -119,7 +119,7 @@ LX_Vector2D operator -(const LX_Vector2D& v) noexcept;
 *
 *   @return The incremented vector
 */
-LX_Vector2D& operator ++(LX_Vector2D& v) noexcept;
+LX_Vector2D& operator ++( LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D operator ++(LX_Vector2D& v,int) noexcept
 *
@@ -129,7 +129,7 @@ LX_Vector2D& operator ++(LX_Vector2D& v) noexcept;
 *
 *   @return The vector before the incrementation
 */
-LX_Vector2D operator ++(LX_Vector2D& v, int) noexcept;
+LX_Vector2D operator ++( LX_Vector2D& v, int ) noexcept;
 /**
 *   @fn LX_Vector2D& operator --(LX_Vector2D& v) noexcept
 *
@@ -139,7 +139,7 @@ LX_Vector2D operator ++(LX_Vector2D& v, int) noexcept;
 *
 *   @return The incremented vector
 */
-LX_Vector2D& operator --(LX_Vector2D& v) noexcept;
+LX_Vector2D& operator --( LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D operator --(LX_Vector2D& v, int) noexcept
 *
@@ -149,7 +149,7 @@ LX_Vector2D& operator --(LX_Vector2D& v) noexcept;
 *
 *   @return The vector before the incrementation
 */
-LX_Vector2D operator --(LX_Vector2D& v, int) noexcept;
+LX_Vector2D operator --( LX_Vector2D& v, int ) noexcept;
 /**
 *   @fn LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept
 *
@@ -160,7 +160,7 @@ LX_Vector2D operator --(LX_Vector2D& v, int) noexcept;
 *
 *   @return A new vector after the multiplication
 */
-LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept;
+LX_Vector2D operator *( LX_Vector2D v, float lambda ) noexcept;
 /**
 *   @fn LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept
 *
@@ -171,7 +171,7 @@ LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept;
 *
 *   @return A new vector after the multiplication
 */
-LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept;
+LX_Vector2D& operator *=( LX_Vector2D& v, float lambda ) noexcept;
 /**
 *   @fn LX_Vector2D& operator /(LX_Vector2D v, float lambda) noexcept
 *
@@ -182,7 +182,7 @@ LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept;
 *
 *   @return The vector after the division
 */
-LX_Vector2D operator /(LX_Vector2D v, float lambda) noexcept;
+LX_Vector2D operator /( LX_Vector2D v, float lambda ) noexcept;
 /**
 *   @fn LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept
 *
@@ -193,7 +193,7 @@ LX_Vector2D operator /(LX_Vector2D v, float lambda) noexcept;
 *
 *   @return The vector after the division
 */
-LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept;
+LX_Vector2D& operator /=( LX_Vector2D& v, float lambda ) noexcept;
 
 /**
 *   @fn Float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
@@ -205,7 +205,7 @@ LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept;
 *
 *   @return The scalar product
 */
-Float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+Float scalar_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
@@ -216,7 +216,7 @@ Float scalar_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The vector product
 */
-Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+Float vector_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn Float vector_norm(const LX_Vector2D& v) noexcept
 *
@@ -224,7 +224,7 @@ Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @return The norm of the vector
 */
-Float vector_norm(const LX_Vector2D& v) noexcept;
+Float vector_norm( const LX_Vector2D& v ) noexcept;
 
 /**
 *   @fn bool isNullVector(const LX_Vector2D& v) noexcept
@@ -233,7 +233,7 @@ Float vector_norm(const LX_Vector2D& v) noexcept;
 *
 *   @return True if the vector has coordinates equal to 0, False otherwise
 */
-bool isNullVector(const LX_Vector2D& v) noexcept;
+bool isNullVector( const LX_Vector2D& v ) noexcept;
 /**
 *   @fn bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
 *
@@ -242,7 +242,7 @@ bool isNullVector(const LX_Vector2D& v) noexcept;
 *
 *   @return True if they are colinear, False otherwise
 */
-bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
+bool collinear( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 /**
 *   @fn LX_Vector2D& normalize(LX_Vector2D& v) noexcept
 *
@@ -252,7 +252,7 @@ bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept;
 *
 *   @note If the vector is a null vector, then the same vector is returned
 */
-LX_Vector2D& normalize(LX_Vector2D& v) noexcept;
+LX_Vector2D& normalize( LX_Vector2D& v ) noexcept;
 
 }
 

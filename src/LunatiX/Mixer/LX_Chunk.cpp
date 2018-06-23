@@ -31,69 +31,69 @@ namespace LX_Mixer
 
 class LX_Chunk_ final
 {
-    Mix_Chunk *_chunk = nullptr;
+    Mix_Chunk * _chunk = nullptr;
 
-    LX_Chunk_(const LX_Chunk_& m) = delete;
-    LX_Chunk_& operator =(const LX_Chunk_& m) = delete;
+    LX_Chunk_( const LX_Chunk_& m ) = delete;
+    LX_Chunk_& operator =( const LX_Chunk_& m ) = delete;
 
-    void load_(const std::string& filename)
+    void load_( const std::string& filename )
     {
-        Mix_FreeChunk(_chunk);
-        _chunk = Mix_LoadWAV(filename.c_str());
+        Mix_FreeChunk( _chunk );
+        _chunk = Mix_LoadWAV( filename.c_str() );
 
-        if(_chunk == nullptr)
-            throw LX_MixerException("LX_Chunk — Cannot load " + filename);
+        if ( _chunk == nullptr )
+            throw LX_MixerException( "LX_Chunk — Cannot load " + filename );
     }
 
 public:
 
-    explicit LX_Chunk_(Mix_Chunk& chunk): _chunk(&chunk) {}
+    explicit LX_Chunk_( Mix_Chunk& chunk ): _chunk( &chunk ) {}
 
-    explicit LX_Chunk_(const std::string& filename) : _chunk(nullptr)
+    explicit LX_Chunk_( const std::string& filename ) : _chunk( nullptr )
     {
-        load_(filename);
+        load_( filename );
     }
 
-    explicit LX_Chunk_(const UTF8string& filename) : _chunk(nullptr)
+    explicit LX_Chunk_( const UTF8string& filename ) : _chunk( nullptr )
     {
-        load_(filename.utf8_sstring());
+        load_( filename.utf8_sstring() );
     }
 
     bool play() noexcept
     {
-        return play(-1);
+        return play( -1 );
     }
 
-    bool play(int channel) noexcept
+    bool play( int channel ) noexcept
     {
-        return play(channel, 0);
+        return play( channel, 0 );
     }
 
-    bool play(int channel, int loops) noexcept
+    bool play( int channel, int loops ) noexcept
     {
-        return Mix_PlayChannel(channel, _chunk, loops) == 0;
+        return Mix_PlayChannel( channel, _chunk, loops ) == 0;
     }
 
-    bool play(int channel, int loops, int ticks) noexcept
+    bool play( int channel, int loops, int ticks ) noexcept
     {
-        return Mix_PlayChannelTimed(channel, _chunk, loops, ticks) == 0;
+        return Mix_PlayChannelTimed( channel, _chunk, loops, ticks ) == 0;
     }
 
     ~LX_Chunk_()
     {
-        Mix_FreeChunk(_chunk);
+        Mix_FreeChunk( _chunk );
     }
 };
 
 /* LX_Chunk */
 
 // Private constructor used for internal uses
-LX_Chunk::LX_Chunk(Mix_Chunk& chunk) : _chkimpl(new LX_Chunk_(chunk)) {}
+LX_Chunk::LX_Chunk( Mix_Chunk& chunk ) : _chkimpl( new LX_Chunk_( chunk ) ) {}
 
 // Public constructors
-LX_Chunk::LX_Chunk(const std::string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk( const std::string& filename ) : _chkimpl( new LX_Chunk_( filename ) ) {}
 
-LX_Chunk::LX_Chunk(const UTF8string& filename) : _chkimpl(new LX_Chunk_(filename)) {}
+LX_Chunk::LX_Chunk( const UTF8string& filename ) : _chkimpl( new LX_Chunk_( filename ) ) {}
 
 
 bool LX_Chunk::play() noexcept
@@ -101,19 +101,19 @@ bool LX_Chunk::play() noexcept
     return _chkimpl->play();
 }
 
-bool LX_Chunk::play(int channel) noexcept
+bool LX_Chunk::play( int channel ) noexcept
 {
-    return _chkimpl->play(channel);
+    return _chkimpl->play( channel );
 }
 
-bool LX_Chunk::play(int channel, int loops) noexcept
+bool LX_Chunk::play( int channel, int loops ) noexcept
 {
-    return _chkimpl->play(channel, loops);
+    return _chkimpl->play( channel, loops );
 }
 
-bool LX_Chunk::play(int channel, int loops, int ticks) noexcept
+bool LX_Chunk::play( int channel, int loops, int ticks ) noexcept
 {
-    return _chkimpl->play(channel, loops, ticks);
+    return _chkimpl->play( channel, loops, ticks );
 }
 
 LX_Chunk::~LX_Chunk()

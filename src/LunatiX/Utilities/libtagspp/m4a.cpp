@@ -5,79 +5,79 @@
 #define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
 #define beuint16(d) (ushort)((d)[0]<<8 | (d)[1]<<0)
 
-int tagm4a(Tagctx *ctx);
+int tagm4a( Tagctx * ctx );
 
-int tagm4a(Tagctx *ctx)
+int tagm4a( Tagctx * ctx )
 {
     uvlong duration;
-    uchar *d;
+    uchar * d;
     int sz, type, dtype, i, skip, n;
 
-    d = (uchar*)ctx->buf;
+    d = ( uchar * )ctx->buf;
     /* 4 bytes for atom size, 4 for type, 4 for data - exect "ftyp" to come first */
-    if(ctx->read(ctx, d, 4+4+4) != 4+4+4 || std::memcmp(d+4, "ftypM4A ", 8) != 0)
+    if ( ctx->read( ctx, d, 4 + 4 + 4 ) != 4 + 4 + 4 || std::memcmp( d + 4, "ftypM4A ", 8 ) != 0 )
         return -1;
-    sz = beuint(d) - 4; /* already have 8 bytes */
+    sz = beuint( d ) - 4; /* already have 8 bytes */
 
-    for(;;)
+    for ( ;; )
     {
-        if(ctx->seek(ctx, sz, 1) < 0)
+        if ( ctx->seek( ctx, sz, 1 ) < 0 )
             return -1;
-        if(ctx->read(ctx, d, 4) != 4) /* size */
+        if ( ctx->read( ctx, d, 4 ) != 4 ) /* size */
             break;
-        sz = beuint(d);
-        if(sz == 0)
+        sz = beuint( d );
+        if ( sz == 0 )
             continue;
-        if(ctx->read(ctx, d, 4) != 4) /* type */
+        if ( ctx->read( ctx, d, 4 ) != 4 ) /* type */
             return -1;
-        if(sz < 8)
+        if ( sz < 8 )
             continue;
 
         d[4] = 0;
 
-        if(std::memcmp(d, "meta", 4) == 0)
+        if ( std::memcmp( d, "meta", 4 ) == 0 )
         {
             sz = 4;
             continue;
         }
-        else if(
-            std::memcmp(d, "udta", 4) == 0 ||
-            std::memcmp(d, "ilst", 4) == 0 ||
-            std::memcmp(d, "trak", 4) == 0 ||
-            std::memcmp(d, "mdia", 4) == 0 ||
-            std::memcmp(d, "minf", 4) == 0 ||
-            std::memcmp(d, "stbl", 4) == 0)
+        else if (
+            std::memcmp( d, "udta", 4 ) == 0 ||
+            std::memcmp( d, "ilst", 4 ) == 0 ||
+            std::memcmp( d, "trak", 4 ) == 0 ||
+            std::memcmp( d, "mdia", 4 ) == 0 ||
+            std::memcmp( d, "minf", 4 ) == 0 ||
+            std::memcmp( d, "stbl", 4 ) == 0 )
         {
             sz = 0;
             continue;
         }
-        else if(std::memcmp(d, "stsd", 4) == 0)
+        else if ( std::memcmp( d, "stsd", 4 ) == 0 )
         {
             sz -= 8;
-            if(ctx->read(ctx, d, 8) != 8)
+            if ( ctx->read( ctx, d, 8 ) != 8 )
                 return -1;
             sz -= 8;
 
-            for(i = beuint(&d[4]); i > 0 && sz > 0; i--)
+            for ( i = beuint( &d[4] ); i > 0 && sz > 0; i-- )
             {
-                if(ctx->read(ctx, d, 8) != 8) /* size + format */
+                if ( ctx->read( ctx, d, 8 ) != 8 ) /* size + format */
                     return -1;
                 sz -= 8;
-                skip = beuint(d) - 8;
+                skip = beuint( d ) - 8;
 
-                if(std::memcmp(&d[4], "mp4a", 4) == 0)  /* audio */
+                if ( std::memcmp( &d[4], "mp4a", 4 ) == 0 ) /* audio */
                 {
-                    n = 6+2 + 2+4+2 + 2+2 + 2+2 + 4; /* read a bunch at once */
+                    n = 6 + 2 + 2 + 4 + 2 + 2 + 2 + 2 + 2 + 4; /* read a bunch at once */
                     /* reserved+id, ver+rev+vendor, channels+bps, ?+?, sample rate */
-                    if(ctx->read(ctx, d, n) != n)
+                    if ( ctx->read( ctx, d, n ) != n )
                         return -1;
                     skip -= n;
                     sz -= n;
-                    ctx->channels = beuint16(&d[16]);
-                    ctx->samplerate = beuint(&d[24])>>16;
+                    ctx->channels = beuint16( &d[16] );
+                    ctx->samplerate = beuint( &d[24] ) >> 16;
                 }
 
-                if(ctx->seek(ctx, skip, 1) < 0)
+                if ( ctx->seek( ctx, skip, 1 ) < 0 )
                     return -1;
                 sz -= skip;
             }
@@ -86,86 +86,86 @@ int tagm4a(Tagctx *ctx)
 
         sz -= 8;
         type = -1;
-        if(std::memcmp(d, "\251nam", 4) == 0)
+        if ( std::memcmp( d, "\251nam", 4 ) == 0 )
             type = Ttitle;
-        else if(std::memcmp(d, "\251alb", 4) == 0)
+        else if ( std::memcmp( d, "\251alb", 4 ) == 0 )
             type = Talbum;
-        else if(std::memcmp(d, "\251ART", 4) == 0)
+        else if ( std::memcmp( d, "\251ART", 4 ) == 0 )
             type = Tartist;
-        else if(std::memcmp(d, "\251gen", 4) == 0 || std::memcmp(d, "gnre", 4) == 0)
+        else if ( std::memcmp( d, "\251gen", 4 ) == 0 || std::memcmp( d, "gnre", 4 ) == 0 )
             type = Tgenre;
-        else if(std::memcmp(d, "\251day", 4) == 0)
+        else if ( std::memcmp( d, "\251day", 4 ) == 0 )
             type = Tdate;
-        else if(std::memcmp(d, "covr", 4) == 0)
+        else if ( std::memcmp( d, "covr", 4 ) == 0 )
             type = Timage;
-        else if(std::memcmp(d, "trkn", 4) == 0)
+        else if ( std::memcmp( d, "trkn", 4 ) == 0 )
             type = Ttrack;
-        else if(std::memcmp(d, "mdhd", 4) == 0)
+        else if ( std::memcmp( d, "mdhd", 4 ) == 0 )
         {
-            if(ctx->read(ctx, d, 4) != 4)
+            if ( ctx->read( ctx, d, 4 ) != 4 )
                 return -1;
             sz -= 4;
             duration = 0;
-            if(d[0] == 0)  /* version 0 */
+            if ( d[0] == 0 ) /* version 0 */
             {
-                if(ctx->read(ctx, d, 16) != 16)
+                if ( ctx->read( ctx, d, 16 ) != 16 )
                     return -1;
                 sz -= 16;
-                duration = beuint(&d[12]) / beuint(&d[8]);
+                duration = beuint( &d[12] ) / beuint( &d[8] );
             }
-            else if(d[1] == 1)   /* version 1 */
+            else if ( d[1] == 1 ) /* version 1 */
             {
-                if(ctx->read(ctx, d, 28) != 28)
+                if ( ctx->read( ctx, d, 28 ) != 28 )
                     return -1;
                 sz -= 28;
-                duration = ((uvlong)beuint(&d[20])<<32 | beuint(&d[24])) / (uvlong)beuint(&d[16]);
+                duration = ( ( uvlong )beuint( &d[20] ) << 32 | beuint( &d[24] ) ) / ( uvlong )beuint( &d[16] );
             }
             ctx->duration = duration * 1000;
             continue;
         }
 
-        if(type < 0)
+        if ( type < 0 )
             continue;
 
-        if(ctx->seek(ctx, 8, 1) < 0) /* skip size and "data" */
+        if ( ctx->seek( ctx, 8, 1 ) < 0 ) /* skip size and "data" */
             return -1;
         sz -= 8;
-        if(ctx->read(ctx, d, 8) != 8) /* read data type and 4 bytes of whatever else */
+        if ( ctx->read( ctx, d, 8 ) != 8 ) /* read data type and 4 bytes of whatever else */
             return -1;
         sz -= 8;
         d[0] = 0;
-        dtype = beuint(d);
+        dtype = beuint( d );
 
-        if(type == Ttrack)
+        if ( type == Ttrack )
         {
-            if(ctx->read(ctx, d, 4) != 4)
+            if ( ctx->read( ctx, d, 4 ) != 4 )
                 return -1;
             sz -= 4;
-            snprint((char*)d, ctx->bufsz, "%d", beuint(d));
-            txtcb(ctx, type, d);
+            snprint( ( char * )d, ctx->bufsz, "%d", beuint( d ) );
+            txtcb( ctx, type, d );
         }
-        else if(type == Tgenre)
+        else if ( type == Tgenre )
         {
-            if(ctx->read(ctx, d, 2) != 2)
+            if ( ctx->read( ctx, d, 2 ) != 2 )
                 return -1;
             sz -= 2;
-            if((i = d[1]-1) >= 0 && i < Numgenre)
-                txtcb(ctx, type, id3genres[i]);
+            if ( ( i = d[1] - 1 ) >= 0 && i < Numgenre )
+                txtcb( ctx, type, id3genres[i] );
         }
-        else if(dtype == 1)   /* text */
+        else if ( dtype == 1 ) /* text */
         {
-            if(sz >= ctx->bufsz) /* skip tags that can't fit into memory. ">=" because of '\0' */
+            if ( sz >= ctx->bufsz ) /* skip tags that can't fit into memory. ">=" because of '\0' */
                 continue;
-            if(ctx->read(ctx, d, sz) != sz)
+            if ( ctx->read( ctx, d, sz ) != sz )
                 return -1;
             d[sz] = 0;
-            txtcb(ctx, type, d);
+            txtcb( ctx, type, d );
             sz = 0;
         }
-        else if(type == Timage && dtype == 13)  /* jpeg cover image */
-            tagscallcb(ctx, Timage, "image/jpeg", ctx->seek(ctx, 0, 1), sz, nil);
-        else if(type == Timage && dtype == 14) /* png cover image */
-            tagscallcb(ctx, Timage, "image/png", ctx->seek(ctx, 0, 1), sz, nil);
+        else if ( type == Timage && dtype == 13 ) /* jpeg cover image */
+            tagscallcb( ctx, Timage, "image/jpeg", ctx->seek( ctx, 0, 1 ), sz, nil );
+        else if ( type == Timage && dtype == 14 ) /* png cover image */
+            tagscallcb( ctx, Timage, "image/png", ctx->seek( ctx, 0, 1 ), sz, nil );
     }
 
     return 0;

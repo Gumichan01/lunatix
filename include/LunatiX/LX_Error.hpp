@@ -40,9 +40,9 @@ inline const char * LX_getError()
 *   Set an error message
 *   @param [in] str The error string
 */
-inline void LX_setError(const char * str)
+inline void LX_setError( const char * str )
 {
-    SDL_SetError(str);
+    SDL_SetError( str );
 }
 
 /**
@@ -50,9 +50,9 @@ inline void LX_setError(const char * str)
 *   Set an error message
 *   @param [in] str The error string
 */
-inline void LX_setError(const std::string& str) noexcept
+inline void LX_setError( const std::string& str ) noexcept
 {
-    LX_setError(str.c_str());
+    LX_setError( str.c_str() );
 }
 
 /**
@@ -60,9 +60,9 @@ inline void LX_setError(const std::string& str) noexcept
 *   Set an error message (utf-8)
 *   @param [in] u8str The error utf-8 string
 */
-inline void LX_setError(const UTF8string& u8str) noexcept
+inline void LX_setError( const UTF8string& u8str ) noexcept
 {
-    LX_setError(u8str.utf8_sstring());
+    LX_setError( u8str.utf8_sstring() );
 }
 
 

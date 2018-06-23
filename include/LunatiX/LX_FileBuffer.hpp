@@ -58,11 +58,11 @@ class LX_FileBuffer final
     friend struct LX_TrueTypeFont::LX_Font_;
     std::unique_ptr<LX_FileBuffer_> _bimpl;
 
-    LX_FileBuffer(LX_FileBuffer& fb);
-    LX_FileBuffer& operator =(LX_FileBuffer& fb);
+    LX_FileBuffer( LX_FileBuffer& fb );
+    LX_FileBuffer& operator =( LX_FileBuffer& fb );
 
     // private function
-    void * getFontFromBuffer_(int size) const noexcept;  // used by LX_TrueTypeFont::LX_Font
+    void * getFontFromBuffer_( int size ) const noexcept; // used by LX_TrueTypeFont::LX_Font
 
 public:
 
@@ -84,7 +84,7 @@ public:
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read
     */
-    LX_FileBuffer(const std::string& filename, size_t offset = 0, size_t sz = 0);
+    LX_FileBuffer( const std::string& filename, size_t offset = 0, size_t sz = 0 );
     /**
     *   @fn explicit LX_FileBuffer(const UTF8string& filename, size_t offset = 0, size_t sz = 0)
     *
@@ -104,7 +104,7 @@ public:
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    explicit LX_FileBuffer(const UTF8string& filename, size_t offset = 0, size_t sz = 0);
+    explicit LX_FileBuffer( const UTF8string& filename, size_t offset = 0, size_t sz = 0 );
 
     /**
     *   @fn LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PixelFormat format = LX_Graphics::LX_PixelFormat::RGBA8888) const
@@ -115,7 +115,7 @@ public:
     *
     *   @exception LX_Graphics::LX_ImageException if the buffered image cannot be created
     */
-    LX_Graphics::LX_BufferedImage * loadBufferedImage(LX_Graphics::LX_PixelFormat format = LX_Graphics::LX_PixelFormat::RGBA8888) const;
+    LX_Graphics::LX_BufferedImage * loadBufferedImage( LX_Graphics::LX_PixelFormat format = LX_Graphics::LX_PixelFormat::RGBA8888 ) const;
     /**
     *   @fn LX_Mixer::LX_Chunk * loadSample() const
     *

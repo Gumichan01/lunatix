@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 typedef struct Tagctx Tagctx;
-typedef int (*Tagread)(void *buf, int *cnt);
+typedef int ( *Tagread )( void * buf, int * cnt );
 
 /* Tag type. */
 enum
@@ -38,13 +38,13 @@ enum
 struct Tagctx
 {
     /* Set it to the filename. Doesn't have to be a full path, but extension must be there. */
-    const char *filename;
+    const char * filename;
 
     /* Read function. This is what libtags uses to read the file. */
-    int (*read)(Tagctx *ctx, void *buf, int cnt);
+    int ( *read )( Tagctx * ctx, void * buf, int cnt );
 
     /* Seek function. This is what libtags uses to seek through the file. */
-    int (*seek)(Tagctx *ctx, int offset, int whence);
+    int ( *seek )( Tagctx * ctx, int offset, int whence );
 
     /* Callback that is used by libtags to inform about the tags of a file.
      * "type" is the tag's type (Tartist, ...). "s" is the null-terminated string unless "type" is
@@ -53,13 +53,13 @@ struct Tagctx
      * operations on the data, in which case you need to read the image cover as a stream and call this
      * function to apply these operations on the contents read.
      */
-    void (*tag)(Tagctx *ctx, int type, const char *s, int offset, int size, Tagread f);
+    void ( *tag )( Tagctx * ctx, int type, const char * s, int offset, int size, Tagread f );
 
     /* Auxiliary data. Not used by libtags. */
-    void *aux;
+    void * aux;
 
     /* Memory buffer to work in. */
-    char *buf;
+    char * buf;
 
     /* Size of the buffer. Must be at least 256 bytes. */
     int bufsz;
@@ -79,7 +79,7 @@ struct Tagctx
 };
 
 /* Parse the file using this function. Returns 0 on success. */
-extern int tagsget(Tagctx *ctx);
+extern int tagsget( Tagctx * ctx );
 
 #ifdef __cplusplus
 }

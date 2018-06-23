@@ -59,10 +59,10 @@ class LX_Thread final
     std::thread _thread;
 
     LX_Thread() = delete;
-    LX_Thread(const LX_Thread&) = delete;
-    LX_Thread(const LX_Thread&&) = delete;
-    LX_Thread& operator =(const LX_Thread&) = delete;
-    LX_Thread&& operator =(const LX_Thread&&) = delete;
+    LX_Thread( const LX_Thread& ) = delete;
+    LX_Thread( const LX_Thread&& ) = delete;
+    LX_Thread& operator =( const LX_Thread& ) = delete;
+    LX_Thread&& operator =( const LX_Thread&& ) = delete;
 
 public:
     /**
@@ -80,7 +80,7 @@ public:
     *         LX_ASyncTask may be used.
     */
     template <class LX_Fun, class... LX_Args>
-    LX_Thread(bool detach, LX_Fun&& fun, LX_Args&&... args);
+    LX_Thread( bool detach, LX_Fun&& fun, LX_Args&& ... args );
 
     /**
     *   @fn bool joinable() const noexcept
@@ -122,10 +122,10 @@ class LX_ASyncTask final
     std::future<ReturnValue> _future;
 
     LX_ASyncTask() = delete;
-    LX_ASyncTask(const LX_ASyncTask&) = delete;
-    LX_ASyncTask(const LX_ASyncTask&&) = delete;
-    LX_ASyncTask& operator =(const LX_ASyncTask&) = delete;
-    LX_ASyncTask&& operator =(const LX_ASyncTask&&) = delete;
+    LX_ASyncTask( const LX_ASyncTask& ) = delete;
+    LX_ASyncTask( const LX_ASyncTask&& ) = delete;
+    LX_ASyncTask& operator =( const LX_ASyncTask& ) = delete;
+    LX_ASyncTask&& operator =( const LX_ASyncTask&& ) = delete;
 
 public:
 
@@ -138,7 +138,7 @@ public:
     *   @exception std::system_error If the thread cannot be started
     */
     template <class LX_Fun, class... LX_Args>
-    LX_ASyncTask(LX_Fun&& fun, LX_Args&&... args);
+    LX_ASyncTask( LX_Fun&& fun, LX_Args&& ... args );
 
     /**
     *   @fn ReturnValue getResult()

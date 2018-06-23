@@ -54,7 +54,7 @@ enum class LX_MsgType
 *   @param [in] title The title of the box, UTF-8 format
 *   @param [in] msg The text to display in the box, UTF-8 format
 */
-void showMSG(LX_MsgType flag, std::string title, std::string msg) noexcept;
+void showMSG( LX_MsgType flag, std::string title, std::string msg ) noexcept;
 
 }
 

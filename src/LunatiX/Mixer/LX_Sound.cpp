@@ -23,10 +23,10 @@
 namespace LX_Mixer
 {
 
-LX_MixerException::LX_MixerException(std::string err) : _string_error(err) {}
+LX_MixerException::LX_MixerException( std::string err ) : _string_error( err ) {}
 
-LX_MixerException::LX_MixerException(const LX_MixerException& me)
-    : _string_error(me._string_error) {}
+LX_MixerException::LX_MixerException( const LX_MixerException& me )
+    : _string_error( me._string_error ) {}
 
 const char * LX_MixerException::what() const noexcept
 {

@@ -28,21 +28,21 @@ namespace LX_Graphics
 namespace LX_OpenGL
 {
 
-bool extensionSupported(std::string extension) noexcept
+bool extensionSupported( std::string extension ) noexcept
 {
-    return SDL_GL_ExtensionSupported(extension.c_str());
+    return SDL_GL_ExtensionSupported( extension.c_str() );
 }
 
 
 bool loadDefaultLibrary() noexcept
 {
-    return SDL_GL_LoadLibrary(nullptr) == 0;
+    return SDL_GL_LoadLibrary( nullptr ) == 0;
 }
 
 
-bool loadLibrary(std::string path) noexcept
+bool loadLibrary( std::string path ) noexcept
 {
-    return SDL_GL_LoadLibrary(path.c_str()) == 0;
+    return SDL_GL_LoadLibrary( path.c_str() ) == 0;
 }
 
 
@@ -63,25 +63,25 @@ LX_GL_SwapInterval getSwapInterval() noexcept
     int tmp = SDL_GL_GetSwapInterval();
 
     return tmp == -1 ? LX_GL_SwapInterval::NOT_SUPPORTED :
-           static_cast<LX_GL_SwapInterval>(tmp);
+           static_cast<LX_GL_SwapInterval>( tmp );
 }
 
 
-bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept
+bool setSwapInterval( const LX_GL_SwapInterval& interval ) noexcept
 {
-    return SDL_GL_SetSwapInterval(static_cast<int>(interval)) == 0;
+    return SDL_GL_SetSwapInterval( static_cast<int>( interval ) ) == 0;
 }
 
 
-bool getAttribute(LX_GLattr attr, int& value) noexcept
+bool getAttribute( LX_GLattr attr, int& value ) noexcept
 {
-    return SDL_GL_GetAttribute(attr, &value) == 0;
+    return SDL_GL_GetAttribute( attr, &value ) == 0;
 }
 
 
-bool setAttribute(LX_GLattr attr, int value) noexcept
+bool setAttribute( LX_GLattr attr, int value ) noexcept
 {
-    return SDL_GL_SetAttribute(attr, value) == 0;
+    return SDL_GL_SetAttribute( attr, value ) == 0;
 }
 
 }   // LX_OpenGL::

@@ -84,7 +84,7 @@ enum class LX_GL_SwapInterval
 *   @param [in] extension The name of the extension to check
 *   @return TRUE if the extension is supported, FALSE otherwise
 */
-bool extensionSupported(std::string extension) noexcept;
+bool extensionSupported( std::string extension ) noexcept;
 
 /**
 *   @fn bool loadDefaultLibrary() noexcept
@@ -113,7 +113,7 @@ bool loadDefaultLibrary() noexcept;
 *   @note 3 - If you do this, you need to retrieve all of the OpenGL functions
 *            used in your program from the dynamic library using *getProcAddress()*
 */
-bool loadLibrary(std::string path) noexcept;
+bool loadLibrary( std::string path ) noexcept;
 /**
 *   @fn void UnloadLibrary() noexcept
 *
@@ -156,7 +156,7 @@ void UnloadLibrary() noexcept;
 *   where this matters (Win32) thereby avoiding stack corruption.
 */
 template<typename T>
-T getProcAddress(const std::string proc) noexcept;
+T getProcAddress( const std::string proc ) noexcept;
 
 
 /**
@@ -208,7 +208,7 @@ LX_GL_SwapInterval getSwapInterval() noexcept;
 *
 *   @sa getSwapInterval
 */
-bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept;
+bool setSwapInterval( const LX_GL_SwapInterval& interval ) noexcept;
 
 /**
 *   @fn bool getAttribute(LX_GLattr attr, int& value) noexcept
@@ -228,7 +228,7 @@ bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept;
 *
 *   @sa setAttribute
 */
-bool getAttribute(LX_GLattr attr, int& value) noexcept;
+bool getAttribute( LX_GLattr attr, int& value ) noexcept;
 /**
 *   @fn bool setAttribute(LX_GLattr attr, int value) noexcept
 *
@@ -248,7 +248,7 @@ bool getAttribute(LX_GLattr attr, int& value) noexcept;
 *
 *   @sa getAttribute
 */
-bool setAttribute(LX_GLattr attr, int value) noexcept;
+bool setAttribute( LX_GLattr attr, int value ) noexcept;
 
 }   // LX_OpenGL
 

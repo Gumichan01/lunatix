@@ -73,7 +73,7 @@ UTF8string getWorkingDirectory() noexcept;
 *             or even the parent of the returned path,
 *             aren't where you should be writing things).
 */
-UTF8string getPreferencesDirectory(const std::string& org, const std::string& app) noexcept;
+UTF8string getPreferencesDirectory( const std::string& org, const std::string& app ) noexcept;
 
 /**
 *   @fn UTF8string basename(const UTF8string& path) noexcept
@@ -86,13 +86,13 @@ UTF8string getPreferencesDirectory(const std::string& org, const std::string& ap
 *   @note Trailing '\' (on Windows) or '/' (on Linux) are not counted
 *        as part of the path name.
 */
-UTF8string basename(const UTF8string& path) noexcept;
+UTF8string basename( const UTF8string& path ) noexcept;
 /**
 *   @fn UTF8string dirname(const UTF8string& path) noexcept
 *   @param path The path, utf-8 encoded.
 *   @return The basename in utf-8 format.
 */
-UTF8string dirname(const UTF8string& path) noexcept;
+UTF8string dirname( const UTF8string& path ) noexcept;
 
 }
 

@@ -41,8 +41,8 @@ class LX_Mouse final
 {
     std::unique_ptr<LX_Mouse_> _mimpl;
 
-    LX_Mouse(const LX_Mouse&) = delete;
-    LX_Mouse& operator =(const LX_Mouse&) = delete;
+    LX_Mouse( const LX_Mouse& ) = delete;
+    LX_Mouse& operator =( const LX_Mouse& ) = delete;
 
 public:
 
@@ -53,7 +53,7 @@ public:
     *   @param [in] hot_x The x hot spot position
     *   @param [in] hot_y The y hot spot position
     */
-    LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y) noexcept;
+    LX_Mouse( const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y ) noexcept;
     /**
     *   @fn bool isOpen() const noexcept
     *   Check if the mouse is loaded without issues

@@ -37,8 +37,8 @@ class LX_MixerException final : public std::exception
 
 public:
 
-    explicit LX_MixerException(std::string err);
-    LX_MixerException(const LX_MixerException& me);
+    explicit LX_MixerException( std::string err );
+    LX_MixerException( const LX_MixerException& me );
     virtual const char * what() const noexcept override;
     ~LX_MixerException() = default;
 };

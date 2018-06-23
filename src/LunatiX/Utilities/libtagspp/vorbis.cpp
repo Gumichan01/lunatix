@@ -6,123 +6,123 @@
 
 #define leuint(d) (uint)(((uchar*)(d))[3]<<24 | ((uchar*)(d))[2]<<16 | ((uchar*)(d))[1]<<8 | ((uchar*)(d))[0]<<0)
 
-void cbvorbiscomment(Tagctx *ctx, char *k, char *v)
+void cbvorbiscomment( Tagctx * ctx, char * k, char * v )
 {
-    if(*v == 0)
+    if ( *v == 0 )
         return;
-    if(cistrcmp(k, "album") == 0)
-        txtcb(ctx, Talbum, v);
-    else if(cistrcmp(k, "title") == 0)
-        txtcb(ctx, Ttitle, v);
-    else if(cistrcmp(k, "artist") == 0 || cistrcmp(k, "performer") == 0)
-        txtcb(ctx, Tartist, v);
-    else if(cistrcmp(k, "tracknumber") == 0)
-        txtcb(ctx, Ttrack, v);
-    else if(cistrcmp(k, "date") == 0)
-        txtcb(ctx, Tdate, v);
-    else if(cistrcmp(k, "replaygain_track_peak") == 0)
-        txtcb(ctx, Ttrackpeak, v);
-    else if(cistrcmp(k, "replaygain_track_gain") == 0)
-        txtcb(ctx, Ttrackgain, v);
-    else if(cistrcmp(k, "replaygain_album_peak") == 0)
-        txtcb(ctx, Talbumpeak, v);
-    else if(cistrcmp(k, "replaygain_album_gain") == 0)
-        txtcb(ctx, Talbumgain, v);
-    else if(cistrcmp(k, "genre") == 0)
-        txtcb(ctx, Tgenre, v);
+    if ( cistrcmp( k, "album" ) == 0 )
+        txtcb( ctx, Talbum, v );
+    else if ( cistrcmp( k, "title" ) == 0 )
+        txtcb( ctx, Ttitle, v );
+    else if ( cistrcmp( k, "artist" ) == 0 || cistrcmp( k, "performer" ) == 0 )
+        txtcb( ctx, Tartist, v );
+    else if ( cistrcmp( k, "tracknumber" ) == 0 )
+        txtcb( ctx, Ttrack, v );
+    else if ( cistrcmp( k, "date" ) == 0 )
+        txtcb( ctx, Tdate, v );
+    else if ( cistrcmp( k, "replaygain_track_peak" ) == 0 )
+        txtcb( ctx, Ttrackpeak, v );
+    else if ( cistrcmp( k, "replaygain_track_gain" ) == 0 )
+        txtcb( ctx, Ttrackgain, v );
+    else if ( cistrcmp( k, "replaygain_album_peak" ) == 0 )
+        txtcb( ctx, Talbumpeak, v );
+    else if ( cistrcmp( k, "replaygain_album_gain" ) == 0 )
+        txtcb( ctx, Talbumgain, v );
+    else if ( cistrcmp( k, "genre" ) == 0 )
+        txtcb( ctx, Tgenre, v );
 }
 
-int tagvorbis(Tagctx *ctx);
+int tagvorbis( Tagctx * ctx );
 
-int tagvorbis(Tagctx *ctx)
+int tagvorbis( Tagctx * ctx )
 {
-    char *v;
-    uchar *d, h[4];
+    char * v;
+    uchar * d, h[4];
     int sz, numtags, i, npages;
 
-    d = (uchar*)ctx->buf;
+    d = ( uchar * )ctx->buf;
     /* need to find vorbis frame with type=3 */
-    for(npages = 0; npages < 2; npages++)  /* vorbis comment is the second header */
+    for ( npages = 0; npages < 2; npages++ ) /* vorbis comment is the second header */
     {
         int nsegs;
-        if(ctx->read(ctx, d, 27) != 27)
+        if ( ctx->read( ctx, d, 27 ) != 27 )
             return -1;
-        if(std::memcmp(d, "OggS", 4) != 0)
+        if ( std::memcmp( d, "OggS", 4 ) != 0 )
             return -1;
 
         /* calculate the size of the packet */
         nsegs = d[26];
-        if(ctx->read(ctx, d, nsegs+1) != nsegs+1)
+        if ( ctx->read( ctx, d, nsegs + 1 ) != nsegs + 1 )
             return -1;
-        for(sz = i = 0; i < nsegs; sz += d[i++]);
+        for ( sz = i = 0; i < nsegs; sz += d[i++] );
 
-        if(d[nsegs] == 3) /* comment */
+        if ( d[nsegs] == 3 ) /* comment */
             break;
-        if(d[nsegs] == 1 && sz >= 28)  /* identification */
+        if ( d[nsegs] == 1 && sz >= 28 ) /* identification */
         {
-            if(ctx->read(ctx, d, 28) != 28)
+            if ( ctx->read( ctx, d, 28 ) != 28 )
                 return -1;
             sz -= 28;
             ctx->channels = d[10];
-            ctx->samplerate = leuint(&d[11]);
-            if((ctx->bitrate = leuint(&d[15])) == 0) /* maximum */
-                ctx->bitrate = leuint(&d[19]); /* nominal */
+            ctx->samplerate = leuint( &d[11] );
+            if ( ( ctx->bitrate = leuint( &d[15] ) ) == 0 ) /* maximum */
+                ctx->bitrate = leuint( &d[19] ); /* nominal */
         }
 
-        ctx->seek(ctx, sz-1, 1);
+        ctx->seek( ctx, sz - 1, 1 );
     }
 
-    if(ctx->read(ctx, &d[1], 10) != 10 || std::memcmp(&d[1], "vorbis", 6) != 0)
+    if ( ctx->read( ctx, &d[1], 10 ) != 10 || std::memcmp( &d[1], "vorbis", 6 ) != 0 )
         return -1;
-    sz = leuint(&d[7]);
-    if(ctx->seek(ctx, sz, 1) < 0 || ctx->read(ctx, h, 4) != 4)
+    sz = leuint( &d[7] );
+    if ( ctx->seek( ctx, sz, 1 ) < 0 || ctx->read( ctx, h, 4 ) != 4 )
         return -1;
-    numtags = leuint(h);
+    numtags = leuint( h );
 
-    for(i = 0; i < numtags; i++)
+    for ( i = 0; i < numtags; i++ )
     {
-        if(ctx->read(ctx, h, 4) != 4)
+        if ( ctx->read( ctx, h, 4 ) != 4 )
             return -1;
-        if((sz = leuint(h)) < 0)
+        if ( ( sz = leuint( h ) ) < 0 )
             return -1;
 
-        if(ctx->bufsz < sz+1)
+        if ( ctx->bufsz < sz + 1 )
         {
-            if(ctx->seek(ctx, sz, 1) < 0)
+            if ( ctx->seek( ctx, sz, 1 ) < 0 )
                 return -1;
             continue;
         }
-        if(ctx->read(ctx, ctx->buf, sz) != sz)
+        if ( ctx->read( ctx, ctx->buf, sz ) != sz )
             return -1;
         ctx->buf[sz] = 0;
 
-        if((v = strchr(ctx->buf, '=')) == nil)
+        if ( ( v = strchr( ctx->buf, '=' ) ) == nil )
             return -1;
         *v++ = 0;
-        cbvorbiscomment(ctx, ctx->buf, v);
+        cbvorbiscomment( ctx, ctx->buf, v );
     }
 
     /* calculate the duration */
-    if(ctx->samplerate > 0)
+    if ( ctx->samplerate > 0 )
     {
         sz = ctx->bufsz <= 4096 ? ctx->bufsz : 4096;
-        for(i = sz; i < 65536+16; i += sz - 16)
+        for ( i = sz; i < 65536 + 16; i += sz - 16 )
         {
-            if(ctx->seek(ctx, -i, 2) <= 0)
+            if ( ctx->seek( ctx, -i, 2 ) <= 0 )
                 break;
             v = ctx->buf;
-            if(ctx->read(ctx, v, sz) != sz)
+            if ( ctx->read( ctx, v, sz ) != sz )
                 break;
-            for(; v != nil && v < ctx->buf+sz;)
+            for ( ; v != nil && v < ctx->buf + sz; )
             {
-                v = (char*) std::memchr(v, 'O', ctx->buf+sz - v - 14);
-                if(v != nil && v[1] == 'g' && v[2] == 'g' && v[3] == 'S' && (v[5] & 4) == 4)  /* last page */
+                v = ( char * ) std::memchr( v, 'O', ctx->buf + sz - v - 14 );
+                if ( v != nil && v[1] == 'g' && v[2] == 'g' && v[3] == 'S' && ( v[5] & 4 ) == 4 ) /* last page */
                 {
-                    uvlong g = leuint(v+6) | (uvlong)leuint(v+10)<<32;
+                    uvlong g = leuint( v + 6 ) | ( uvlong )leuint( v + 10 ) << 32;
                     ctx->duration = g * 1000 / ctx->samplerate;
                     return 0;
                 }
-                if(v != nil)
+                if ( v != nil )
                     v++;
             }
         }

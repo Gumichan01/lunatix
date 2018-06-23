@@ -194,9 +194,9 @@ enum class LX_MouseButton
 };
 
 /// Convert LX_MouseButton to int
-inline uint8_t LX_MBIndex(const LX_MouseButton& b)
+inline uint8_t LX_MBIndex( const LX_MouseButton& b )
 {
-    return static_cast<uint8_t>(b);
+    return static_cast<uint8_t>( b );
 }
 
 /**
@@ -330,8 +330,8 @@ struct LX_UserEvent final
     uint32_t type;  /* User defined type (internal use)                     */
     uint32_t wid;   /**< Identifier of the window where the event occured   */
     int code;       /**< User defined event code                            */
-    void *data1;    /**< user defined data pointer                          */
-    void *data2;    /**< user defined data pointer                          */
+    void * data1;   /**< user defined data pointer                          */
+    void * data2;   /**< user defined data pointer                          */
 };
 
 
@@ -378,10 +378,10 @@ struct LX_KeyboardState final
 */
 class LX_EventHandler final
 {
-    SDL_Event *event;
+    SDL_Event * event;
 
-    LX_EventHandler(const LX_EventHandler&) = delete;
-    LX_EventHandler& operator =(const LX_EventHandler&) = delete;
+    LX_EventHandler( const LX_EventHandler& ) = delete;
+    LX_EventHandler& operator =( const LX_EventHandler& ) = delete;
 
 public:
 
@@ -423,7 +423,7 @@ public:
     *   The event is removed from the event queue.
     *   @sa pollEvent()
     */
-    bool waitEventTimeout(int timeout) noexcept;
+    bool waitEventTimeout( int timeout ) noexcept;
     /**
     *   @fn bool pushUserEvent(LX_UserEvent& uevent) noexcept
     *   Push a user event to the event queue
@@ -433,7 +433,7 @@ public:
     *   @return TRUE on success, FALSE otherwise.
     *   Use LX_getError() for more information on failure.
     */
-    bool pushUserEvent(LX_UserEvent& uevent) noexcept;
+    bool pushUserEvent( LX_UserEvent& uevent ) noexcept;
 
     /**
     *   @fn static void processEvent(const LX_EventType ty) noexcept
@@ -447,7 +447,7 @@ public:
     *
     *   @sa ignoreEvent
     */
-    static void processEvent(const LX_EventType ty) noexcept;
+    static void processEvent( const LX_EventType ty ) noexcept;
     /**
     *   @fn static void ignoreEvent(const LX_EventType ty) noexcept
     *
@@ -459,7 +459,7 @@ public:
     *
     *   @sa processEvent
     */
-    static void ignoreEvent(const LX_EventType ty) noexcept;
+    static void ignoreEvent( const LX_EventType ty ) noexcept;
 
     /**
     *   @fn uint32_t getWindowID() const noexcept
@@ -590,7 +590,7 @@ public:
 *   @return The virtual key that corresponds to the physical key
 *   @sa getScanCodeFrom()
 */
-LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode) noexcept;
+LX_KeyCode getKeyCodeFrom( LX_ScanCode scancode ) noexcept;
 /**
 *   @fn LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept
 *
@@ -600,7 +600,7 @@ LX_KeyCode getKeyCodeFrom(LX_ScanCode scancode) noexcept;
 *   @param [in] keycode The physical key value
 *   @return The physical key that corresponds to the virtual key
 */
-LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept;
+LX_ScanCode getScanCodeFrom( LX_KeyCode keycode ) noexcept;
 
 /**
 *   @fn UTF8string stringOfScanCode(LX_ScanCode scancode) noexcept
@@ -610,7 +610,7 @@ LX_ScanCode getScanCodeFrom(LX_KeyCode keycode) noexcept;
 *   @param [in] scancode The physical key value to get the string from
 *   @return A non-empty string on success, "" otherwise
 */
-UTF8string stringOfScanCode(LX_ScanCode scancode) noexcept;
+UTF8string stringOfScanCode( LX_ScanCode scancode ) noexcept;
 /**
 *   @fn UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept
 *
@@ -619,7 +619,7 @@ UTF8string stringOfScanCode(LX_ScanCode scancode) noexcept;
 *   @param [in] keycode The virtual key value to get the string from
 *   @return A non-empty string on success, "" otherwise
 */
-UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept;
+UTF8string stringOfKeyCode( LX_KeyCode keycode ) noexcept;
 
 
 // Gamepad
@@ -632,7 +632,7 @@ UTF8string stringOfKeyCode(LX_KeyCode keycode) noexcept;
 *   @param [in] button The enumeration to get the string from
 *   @return The string on success, "<null>" otherwise
 */
-UTF8string stringOfButton(LX_GamepadButton button) noexcept;
+UTF8string stringOfButton( LX_GamepadButton button ) noexcept;
 /**
 *   @fn UTF8string stringOfAxis(LX_GamepadAxis axis) noexcept
 *
@@ -642,7 +642,7 @@ UTF8string stringOfButton(LX_GamepadButton button) noexcept;
 *   @param [in] axis The enumeration to get the string from
 *   @return The string on success, "<null>" otherwise
 */
-UTF8string stringOfAxis(LX_GamepadAxis axis) noexcept;
+UTF8string stringOfAxis( LX_GamepadAxis axis ) noexcept;
 
 }
 

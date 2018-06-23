@@ -44,35 +44,35 @@ struct LX_InternalConfig final
 
 static LX_InternalConfig _conf;
 
-unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
-                        const std::string& line, const std::string& sub) noexcept;
-void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept;
-void loadFileConfig_(LX_InternalConfig& config) noexcept;
+unsigned int checkLine_( unsigned int cpt, LX_InternalConfig& config,
+                         const std::string& line, const std::string& sub ) noexcept;
+void readFile_( std::ifstream& f, LX_InternalConfig& config ) noexcept;
+void loadFileConfig_( LX_InternalConfig& config ) noexcept;
 
 /*
     Return 1 if a configuration has been found, 0 otherwise
 */
-unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
-                        const std::string& line, const std::string& sub) noexcept
+unsigned int checkLine_( unsigned int cpt, LX_InternalConfig& config,
+                         const std::string& line, const std::string& sub ) noexcept
 {
-    if(cpt >= NB_CONFIG)
+    if ( cpt >= NB_CONFIG )
         return 0;
 
-    const std::string ONE("1");
-    const std::regex VIDEO_REG("video=[[:digit:]]+", std::regex::extended);
-    const std::regex VSYNC_REG("vsync=[[:digit:]]+", std::regex::extended);
-    const std::regex TTF_REG("ttf=[[:digit:]]+", std::regex::extended);
-    const std::regex AUDIO_REG("audio=[[:digit:]]+", std::regex::extended);
-    const std::regex GAMEPAD_REG("gamepad=[[:digit:]]+", std::regex::extended);
-    const std::regex OPENGL_REG("opengl=[[:digit:]]+", std::regex::extended);
+    const std::string ONE( "1" );
+    const std::regex VIDEO_REG( "video=[[:digit:]]+", std::regex::extended );
+    const std::regex VSYNC_REG( "vsync=[[:digit:]]+", std::regex::extended );
+    const std::regex TTF_REG( "ttf=[[:digit:]]+", std::regex::extended );
+    const std::regex AUDIO_REG( "audio=[[:digit:]]+", std::regex::extended );
+    const std::regex GAMEPAD_REG( "gamepad=[[:digit:]]+", std::regex::extended );
+    const std::regex OPENGL_REG( "opengl=[[:digit:]]+", std::regex::extended );
 
     unsigned int ret = 0;
-    const bool IS_ONE = (sub == ONE);
+    const bool IS_ONE = ( sub == ONE );
 
-    switch(cpt)
+    switch ( cpt )
     {
     case 0:
-        if(std::regex_match(line, VIDEO_REG))
+        if ( std::regex_match( line, VIDEO_REG ) )
         {
             config.video_flag = IS_ONE;
             ret = 1;
@@ -80,7 +80,7 @@ unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
         break;
 
     case 1:
-        if(std::regex_match(line, VSYNC_REG))
+        if ( std::regex_match( line, VSYNC_REG ) )
         {
             config.vsync_flag = IS_ONE;
             ret = 1;
@@ -88,7 +88,7 @@ unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
         break;
 
     case 2:
-        if(std::regex_match(line, TTF_REG))
+        if ( std::regex_match( line, TTF_REG ) )
         {
             config.ttf_flag = IS_ONE;
             ret = 1;
@@ -96,7 +96,7 @@ unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
         break;
 
     case 3:
-        if(std::regex_match(line, AUDIO_REG))
+        if ( std::regex_match( line, AUDIO_REG ) )
         {
             config.audio_flag = IS_ONE;
             ret = 1;
@@ -104,7 +104,7 @@ unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
         break;
 
     case 4:
-        if(std::regex_match(line, GAMEPAD_REG))
+        if ( std::regex_match( line, GAMEPAD_REG ) )
         {
             config.gamepad_flag = IS_ONE;
             ret = 1;
@@ -112,7 +112,7 @@ unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
         break;
 
     case 5:
-        if(std::regex_match(line, OPENGL_REG))
+        if ( std::regex_match( line, OPENGL_REG ) )
         {
             config.opengl_flag = IS_ONE;
             ret = 1;
@@ -126,43 +126,43 @@ unsigned int checkLine_(unsigned int cpt, LX_InternalConfig& config,
     return ret;
 }
 
-void readFile_(std::ifstream& f, LX_InternalConfig& config) noexcept
+void readFile_( std::ifstream& f, LX_InternalConfig& config ) noexcept
 {
     const char SHARP = '#';
-    const std::string EQUAL("=");
+    const std::string EQUAL( "=" );
 
     unsigned int cpt = 0U;
     std::string line;
 
-    while(cpt < NB_CONFIG && getline(f, line))
+    while ( cpt < NB_CONFIG && getline( f, line ) )
     {
         size_t pos = 0;
 
-        if(line.empty() || line[0] == SHARP
-                || (pos = line.find(EQUAL)) == std::string::npos)
+        if ( line.empty() || line[0] == SHARP
+                || ( pos = line.find( EQUAL ) ) == std::string::npos )
             continue;
 
         // Get the string starting by the first character after '=' (substr())
         // check the line of a file
-        cpt += checkLine_(cpt, config, line, line.substr(pos + 1));
+        cpt += checkLine_( cpt, config, line, line.substr( pos + 1 ) );
     }
 }
 
-void loadFileConfig_(LX_InternalConfig& config) noexcept
+void loadFileConfig_( LX_InternalConfig& config ) noexcept
 {
-    const std::string LX_CFG_FILE("config/lunatix.cfg");
-    std::ifstream f(LX_CFG_FILE, std::ios::in);
+    const std::string LX_CFG_FILE( "config/lunatix.cfg" );
+    std::ifstream f( LX_CFG_FILE, std::ios::in );
 
-    if(f.is_open())
+    if ( f.is_open() )
     {
-        _conf = {0,0,0,0,0,0};
-        readFile_(f,config);
+        _conf = {0, 0, 0, 0, 0, 0};
+        readFile_( f, config );
         f.close();
     }
     else
     {
-        LX_Log::logCritical(LX_Log::SYSTEM, "config - Cannot open %s",
-                            LX_CFG_FILE.c_str());
+        LX_Log::logCritical( LX_Log::SYSTEM, "config - Cannot open %s",
+                             LX_CFG_FILE.c_str() );
     }
 }
 
@@ -183,7 +183,7 @@ LX_Configuration& LX_Configuration::getInstance() noexcept
 
 void LX_Configuration::loadFlags_() noexcept
 {
-    LX_Config::loadFileConfig_(_conf);
+    LX_Config::loadFileConfig_( _conf );
 }
 
 bool LX_Configuration::getVideoFlag() const noexcept

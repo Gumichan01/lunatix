@@ -13,7 +13,7 @@
 
 using namespace LX_Event;
 
-int main( int argc, char** argv )
+int main( int argc, char ** argv )
 {
     UNUSED( argc );
     UNUSED( argv );
@@ -26,13 +26,13 @@ int main( int argc, char** argv )
 
     // Information about how to build the window
     LX_Win::LX_WindowInfo info;
-    LX_Win::LX_loadWindowConfig(info);
+    LX_Win::LX_loadWindowConfig( info );
     info.w = 256;
     info.h = 256;
 
     LX_Win::LX_Window w( info );
     const std::string s = "data/bullet.png";
-    const LX_Graphics::LX_ImgRect position = { { 0,0 }, 256, 256 };
+    const LX_Graphics::LX_ImgRect position = { { 0, 0 }, 256, 256 };
     LX_Graphics::LX_Sprite sprite( s, w );
     LX_EventHandler ev;
     bool go = true;

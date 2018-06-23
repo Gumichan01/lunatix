@@ -39,14 +39,14 @@ long getMillisTime() noexcept
 #if defined(__WIN32__)  // Windows
 
     SYSTEMTIME st;
-    GetSystemTime(&st);
-    ms = static_cast<long>(st.wMilliseconds);
+    GetSystemTime( &st );
+    ms = static_cast<long>( st.wMilliseconds );
 
 #elif defined(linux) || defined(__linux) || defined(__linux__)  // Unix/Linux
 
     struct timespec t;
-    clock_gettime(CLOCK_REALTIME, &t);
-    ms = static_cast<long>(std::round(static_cast<double>(t.tv_nsec) / 1.0e6));
+    clock_gettime( CLOCK_REALTIME, &t );
+    ms = static_cast<long>( std::round( static_cast<double>( t.tv_nsec ) / 1.0e6 ) );
 
 #else   // Other system
 #error "Unrecognized operating system"
@@ -59,28 +59,28 @@ std::string getDate() noexcept
 {
     const size_t SZ = 256;
     char datestr[SZ] = {'\0'};
-    const std::time_t TIME = std::time(nullptr);
+    const std::time_t TIME = std::time( nullptr );
 
-    if(TIME == -1)
+    if ( TIME == -1 )
     {
         // This error must not happen
-        SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
-                        "Internal error - Cannot get the time: %s");
+        SDL_LogCritical( SDL_LOG_CATEGORY_ERROR,
+                         "Internal error - Cannot get the time: %s" );
         return std::string();
     }
 
-    const struct tm * const TMP = localtime(&TIME);
+    const struct tm * const TMP = localtime( &TIME );
 
-    if(TMP == nullptr)
+    if ( TMP == nullptr )
     {
         // This error must not happen
-        SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
-                        "Internal error - Cannot get the local time");
+        SDL_LogCritical( SDL_LOG_CATEGORY_ERROR,
+                         "Internal error - Cannot get the local time" );
         return std::string();
     }
 
     std::ostringstream ss;
-    std::strftime(datestr, SZ, "[%Y-%m-%d %H:%M:%S.", TMP);
+    std::strftime( datestr, SZ, "[%Y-%m-%d %H:%M:%S.", TMP );
     ss << getMillisTime() << "] ";
 
     return datestr + ss.str();
@@ -99,10 +99,10 @@ bool isDebugMode() noexcept
 }
 
 
-void setDebugMode(bool debug) noexcept
+void setDebugMode( bool debug ) noexcept
 {
-    if(debug)
-        SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
+    if ( debug )
+        SDL_LogSetAllPriority( SDL_LOG_PRIORITY_DEBUG );
     else
         setDefaultPriority();
 
@@ -115,98 +115,98 @@ void setDefaultPriority() noexcept
     SDL_LogResetPriorities();
 }
 
-void setVerbosePriority(LX_LogType category) noexcept
+void setVerbosePriority( LX_LogType category ) noexcept
 {
-    SDL_LogSetPriority(category, SDL_LOG_PRIORITY_VERBOSE);
+    SDL_LogSetPriority( category, SDL_LOG_PRIORITY_VERBOSE );
 }
 
-void setDebugPriority(LX_LogType category) noexcept
+void setDebugPriority( LX_LogType category ) noexcept
 {
-    SDL_LogSetPriority(category, SDL_LOG_PRIORITY_DEBUG);
+    SDL_LogSetPriority( category, SDL_LOG_PRIORITY_DEBUG );
 }
 
-void setInfoPriority(LX_LogType category) noexcept
+void setInfoPriority( LX_LogType category ) noexcept
 {
-    SDL_LogSetPriority(category, SDL_LOG_PRIORITY_INFO);
+    SDL_LogSetPriority( category, SDL_LOG_PRIORITY_INFO );
 }
 
-void setWarningPriority(LX_LogType category) noexcept
+void setWarningPriority( LX_LogType category ) noexcept
 {
-    SDL_LogSetPriority(category, SDL_LOG_PRIORITY_WARN);
+    SDL_LogSetPriority( category, SDL_LOG_PRIORITY_WARN );
 }
 
-void setErrorPriority(LX_LogType category) noexcept
+void setErrorPriority( LX_LogType category ) noexcept
 {
-    SDL_LogSetPriority(category, SDL_LOG_PRIORITY_ERROR);
+    SDL_LogSetPriority( category, SDL_LOG_PRIORITY_ERROR );
 }
 
-void setCriticalPriority(LX_LogType category) noexcept
+void setCriticalPriority( LX_LogType category ) noexcept
 {
-    SDL_LogSetPriority(category, SDL_LOG_PRIORITY_CRITICAL);
+    SDL_LogSetPriority( category, SDL_LOG_PRIORITY_CRITICAL );
 }
 
 
-void logVerbose(LX_LogType category, std::string format, ...) noexcept
+void logVerbose( LX_LogType category, std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = getDate() + format;
-    SDL_LogMessageV(category, SDL_LOG_PRIORITY_VERBOSE, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( category, SDL_LOG_PRIORITY_VERBOSE, str.c_str(), args );
+    va_end( args );
 }
 
-void logDebug(LX_LogType category, std::string format, ...) noexcept
+void logDebug( LX_LogType category, std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = "   " +  getDate() + format;
-    SDL_LogMessageV(category, SDL_LOG_PRIORITY_DEBUG, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( category, SDL_LOG_PRIORITY_DEBUG, str.c_str(), args );
+    va_end( args );
 }
 
-void logInfo(LX_LogType category, std::string format, ...) noexcept
+void logInfo( LX_LogType category, std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = "    " + getDate() + format;
-    SDL_LogMessageV(category, SDL_LOG_PRIORITY_INFO, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( category, SDL_LOG_PRIORITY_INFO, str.c_str(), args );
+    va_end( args );
 }
 
-void logWarning(LX_LogType category, std::string format, ...) noexcept
+void logWarning( LX_LogType category, std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = "    " + getDate() + format;
-    SDL_LogMessageV(category, SDL_LOG_PRIORITY_WARN, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( category, SDL_LOG_PRIORITY_WARN, str.c_str(), args );
+    va_end( args );
 }
 
-void logError(LX_LogType category, std::string format, ...) noexcept
+void logError( LX_LogType category, std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = "   " + getDate() + format;
-    SDL_LogMessageV(category, SDL_LOG_PRIORITY_ERROR, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( category, SDL_LOG_PRIORITY_ERROR, str.c_str(), args );
+    va_end( args );
 }
 
-void logCritical(LX_LogType category, std::string format, ...) noexcept
+void logCritical( LX_LogType category, std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = getDate() + format;
-    SDL_LogMessageV(category, SDL_LOG_PRIORITY_CRITICAL, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( category, SDL_LOG_PRIORITY_CRITICAL, str.c_str(), args );
+    va_end( args );
 }
 
-void log(std::string format, ...) noexcept
+void log( std::string format, ... ) noexcept
 {
     va_list args;
-    va_start(args, format);
+    va_start( args, format );
     std::string str = "    " + getDate() + format;
-    SDL_LogMessageV(APPLICATION, SDL_LOG_PRIORITY_INFO, str.c_str(), args);
-    va_end(args);
+    SDL_LogMessageV( APPLICATION, SDL_LOG_PRIORITY_INFO, str.c_str(), args );
+    va_end( args );
 }
 
 }

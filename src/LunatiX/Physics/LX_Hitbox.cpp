@@ -25,66 +25,66 @@ using namespace FloatBox;
 namespace LX_Physics
 {
 
-LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
+LX_FloatPosition toFloatPosition( const LX_Graphics::LX_ImgCoord& coord ) noexcept
 {
-    return LX_FloatPosition{ fbox<decltype(coord.x)>(coord.x), fbox<decltype(coord.x)>(coord.y) };
+    return LX_FloatPosition{ fbox<decltype( coord.x )>( coord.x ), fbox<decltype( coord.x )>( coord.y ) };
 }
 
 
-LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
+LX_FloatingBox toFloatingBox( const LX_Graphics::LX_ImgRect& rect ) noexcept
 {
-    return LX_FloatingBox{ toFloatPosition(rect.p), rect.w, rect.h };
+    return LX_FloatingBox{ toFloatPosition( rect.p ), rect.w, rect.h };
 }
 
 
-bool LX_Line::isParralelWith(const LX_Line& l) const noexcept
+bool LX_Line::isParralelWith( const LX_Line& l ) const noexcept
 {
-    return collinear(v, l.v);
+    return collinear( v, l.v );
 }
 
-bool LX_Line::isPerpendicularTo(const LX_Line& l) const noexcept
+bool LX_Line::isPerpendicularTo( const LX_Line& l ) const noexcept
 {
-    return scalar_product(v, l.v) == FNIL;
+    return scalar_product( v, l.v ) == FNIL;
 }
 
 
-bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
+bool operator ==( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcept
 {
     return a.x == b.x && a.y == b.y;
 }
 
-bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
+bool operator !=( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcept
 {
     return a.x != b.x || a.y != b.y;
 }
 
 
-bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
+bool operator ==( const LX_Circle& a, const LX_Circle& b ) noexcept
 {
     return a.center == b.center && a.radius == b.radius;
 }
 
-bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept
+bool operator !=( const LX_Circle& a, const LX_Circle& b ) noexcept
 {
     return a.center != b.center || a.radius != b.radius;
 }
 
-bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept
+bool operator >( const LX_Circle& a, const LX_Circle& b ) noexcept
 {
     return a.radius > b.radius;
 }
 
-bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept
+bool operator <( const LX_Circle& a, const LX_Circle& b ) noexcept
 {
     return a.radius < b.radius;
 }
 
-bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept
+bool operator >=( const LX_Circle& a, const LX_Circle& b ) noexcept
 {
     return a.radius >= b.radius;
 }
 
-bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept
+bool operator <=( const LX_Circle& a, const LX_Circle& b ) noexcept
 {
     return a.radius <= b.radius;
 }

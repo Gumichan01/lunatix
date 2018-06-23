@@ -61,13 +61,13 @@ struct LX_FloatingBox final
 *   @param coord
 *   @return The float position
 */
-LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept;
+LX_FloatPosition toFloatPosition( const LX_Graphics::LX_ImgCoord& coord ) noexcept;
 /**
 *   @fn LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
 *   @param rect
 *   @return The floating box
 */
-LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept;
+LX_FloatingBox toFloatingBox( const LX_Graphics::LX_ImgRect& rect ) noexcept;
 
 /**
 *   @struct LX_Segment
@@ -96,14 +96,14 @@ struct LX_Line final
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are parralel, FALSE otherwise
     */
-    bool isParralelWith(const LX_Line& l) const noexcept;
+    bool isParralelWith( const LX_Line& l ) const noexcept;
     /**
     *   @fn bool isPerpendicularTo(const LX_Line& l) const noexcept
     *
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are perpendicular, FALSE otherwise
     */
-    bool isPerpendicularTo(const LX_Line& l) const noexcept;
+    bool isPerpendicularTo( const LX_Line& l ) const noexcept;
 };
 
 
@@ -128,7 +128,7 @@ struct LX_Circle final
 *   @return TRUE If these points have exactly the same coordinates,
 *          FALSE otherwise
 */
-bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
+bool operator ==( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcept;
 /**
 *   @fn bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
 *
@@ -137,7 +137,7 @@ bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
-bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
+bool operator !=( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcept;
 /**
 *   @fn bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
 *
@@ -148,7 +148,7 @@ bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept;
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 */
-bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept;
+bool operator ==( const LX_Circle& a, const LX_Circle& b ) noexcept;
 /**
 *   @fn bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept
 *
@@ -159,7 +159,7 @@ bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept;
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 */
-bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept;
+bool operator !=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 /**
 *   @fn bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept
 *
@@ -171,7 +171,7 @@ bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept;
 *   @return TRUE If the first circle is greater than the second circle,
 *          FALSE otherwise
 */
-bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept;
+bool operator >( const LX_Circle& a, const LX_Circle& b ) noexcept;
 /**
 *   @fn bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept
 *
@@ -183,7 +183,7 @@ bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept;
 *   @return TRUE If the first circle is smaller than the second circle,
 *          FALSE otherwise
 */
-bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept;
+bool operator <( const LX_Circle& a, const LX_Circle& b ) noexcept;
 /**
 *   @fn bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept
 *
@@ -197,7 +197,7 @@ bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept;
 *          or if have the same radius length, FALSE otherwise
 *
 */
-bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept;
+bool operator >=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 /**
 *   @fn bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept
 *
@@ -210,7 +210,7 @@ bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept;
 *   @return TRUE If the first circle is smaller than the second circle,
 *          or if the two circles have the same radius length, FALSE otherwise
 */
-bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept;
+bool operator <=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 
 }
 

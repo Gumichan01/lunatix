@@ -52,9 +52,9 @@ enum class LX_FileMode
     RDONLY = 0x00000001,            /**< Read only mode (r)             */
     WRONLY = 0x00000010,            /**< Write only mode (w)            */
     APPEND = 0x00000100,            /**< Append mode (a)                */
-    RDWR   = (RDONLY|WRONLY),       /**< Read/Write mode (r+)           */
-    RDAP   = (RDONLY|APPEND),       /**< Read/Append mode (a+)          */
-    WRTR   = (0x00001000|RDWR)      /**< Write but can read mode (w+)   */
+    RDWR   = ( RDONLY | WRONLY ),   /**< Read/Write mode (r+)           */
+    RDAP   = ( RDONLY | APPEND ),   /**< Read/Append mode (a+)          */
+    WRTR   = ( 0x00001000 | RDWR )  /**< Write but can read mode (w+)   */
 };
 
 /**
@@ -81,12 +81,12 @@ class IOException final : public std::exception
 {
     std::string _string_error;
 
-    IOException& operator =(const IOException& io);
+    IOException& operator =( const IOException& io );
 
 public:
 
-    explicit IOException(const std::string& err);
-    IOException(const IOException& io);
+    explicit IOException( const std::string& err );
+    IOException( const IOException& io );
     const char * what() const noexcept override;
     ~IOException() noexcept;
 };
@@ -98,8 +98,8 @@ public:
 */
 class LX_AbstractFile
 {
-    LX_AbstractFile(const LX_AbstractFile&) = delete;
-    LX_AbstractFile& operator =(const LX_AbstractFile&) = delete;
+    LX_AbstractFile( const LX_AbstractFile& ) = delete;
+    LX_AbstractFile& operator =( const LX_AbstractFile& ) = delete;
 
 public:
 
@@ -116,7 +116,7 @@ public:
     *
     *   @note It can read less objects than *count*.
     */
-    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept = 0;
+    virtual size_t read( void * buffer, size_t dsize, size_t count = 1 ) noexcept = 0;
     /**
     *   @fn virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept
     *
@@ -126,7 +126,7 @@ public:
     *
     *   @return The number of objects that are read. -1 at error or end of file
     */
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept = 0;
+    virtual size_t readExactly( void * buffer, size_t dsize, size_t count = 1 ) noexcept = 0;
 
     /**
     *   @fn virtual size_t write(const void *buffer, size_t dsize, size_t count) noexcept
@@ -138,7 +138,7 @@ public:
     *   @return The number of objects written succesfully.
     *           This value may be less than count on error
     */
-    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept = 0;
+    virtual size_t write( const void * buffer, size_t dsize, size_t count = 1 ) noexcept = 0;
     /**
     *   @fn virtual size_t write(const std::string& str) noexcept
     *
@@ -149,7 +149,7 @@ public:
     *
     *   @sa read
     */
-    virtual size_t write(const std::string& str) noexcept = 0;
+    virtual size_t write( const std::string& str ) noexcept = 0;
 
     // TODO refactor seek() -> long instead of size_t
     /**
@@ -164,7 +164,7 @@ public:
     *
     *   @sa read
     */
-    virtual bool seek(long offset, LX_FileWhence whence) noexcept = 0;
+    virtual bool seek( long offset, LX_FileWhence whence ) noexcept = 0;
 
     // TODO refactor tell() -> long instead of size_t
     /**
@@ -193,8 +193,8 @@ class LX_File final : public virtual LX_AbstractFile
 {
     std::unique_ptr<LX_File_> _fimpl;
 
-    LX_File(LX_File& f) = delete;
-    LX_File& operator =(LX_File& f) = delete;
+    LX_File( LX_File& f ) = delete;
+    LX_File& operator =( LX_File& f ) = delete;
 
 public:
 
@@ -216,7 +216,7 @@ public:
     *   @exception IOException If one of these aruguments are invalid
     *             or the file is not openable
     */
-    LX_File(const std::string& filename, const LX_FileMode mode);
+    LX_File( const std::string& filename, const LX_FileMode mode );
     /**
     *   @fn LX_File(const UTF8string& filename, const LX_FileMode mode)
     *
@@ -235,15 +235,15 @@ public:
     *   @exception IOException If one of these aruguments are invalid
     *             or the file is not openable
     */
-    LX_File(const UTF8string& filename, const LX_FileMode mode);
+    LX_File( const UTF8string& filename, const LX_FileMode mode );
 
-    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept override;
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept override;
+    virtual size_t read( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
+    virtual size_t readExactly( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
 
-    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept override;
-    virtual size_t write(const std::string& str) noexcept override;
+    virtual size_t write( const void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
+    virtual size_t write( const std::string& str ) noexcept override;
 
-    virtual bool seek(long offset, LX_FileWhence whence) noexcept;
+    virtual bool seek( long offset, LX_FileWhence whence ) noexcept;
     virtual size_t tell() const noexcept;
     /**
     *   @fn size_t size()
@@ -277,20 +277,20 @@ class LX_TmpFile final : public virtual LX_AbstractFile
 {
     std::unique_ptr<LX_TmpFile_> _timpl;
 
-    LX_TmpFile(const LX_TmpFile&) = delete;
-    LX_TmpFile& operator =(const LX_TmpFile&) = delete;
+    LX_TmpFile( const LX_TmpFile& ) = delete;
+    LX_TmpFile& operator =( const LX_TmpFile& ) = delete;
 
 public:
 
     LX_TmpFile();
 
-    virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept override;
-    virtual size_t readExactly(void *buffer, size_t dsize, size_t count = 1) noexcept override;
+    virtual size_t read( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
+    virtual size_t readExactly( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
 
-    virtual size_t write(const void *buffer, size_t dsize, size_t count = 1) noexcept override;
-    virtual size_t write(const std::string& str) noexcept override;
+    virtual size_t write( const void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
+    virtual size_t write( const std::string& str ) noexcept override;
 
-    virtual bool seek(long offset, LX_FileWhence whence) noexcept override;
+    virtual bool seek( long offset, LX_FileWhence whence ) noexcept override;
     virtual size_t tell() const noexcept;
 
     virtual ~LX_TmpFile();
@@ -310,7 +310,7 @@ public:
 *   @warning If s is not a null-terminated string (it has not the final '\0'),
 *            the behaviour of the function is undefined
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept;
+LX_AbstractFile& operator <<( LX_AbstractFile& f, const char s[] ) noexcept;
 
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept
@@ -322,7 +322,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept;
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept;
+LX_AbstractFile& operator <<( LX_AbstractFile& f, const std::string& s ) noexcept;
 /**
 *   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
 *
@@ -333,12 +333,12 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept;
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<(LX_AbstractFile& f, const UTF8string& u8s) noexcept;
+LX_AbstractFile& operator <<( LX_AbstractFile& f, const UTF8string& u8s ) noexcept;
 
 // Those functions are not defined
-LX_AbstractFile& operator >>(LX_AbstractFile& f, char s[]) noexcept = delete;
-LX_AbstractFile& operator >>(LX_AbstractFile& f, std::string& s) noexcept  = delete;
-LX_AbstractFile& operator >>(LX_AbstractFile& f, UTF8string& u8s) noexcept = delete;
+LX_AbstractFile& operator >>( LX_AbstractFile& f, char s[] ) noexcept = delete;
+LX_AbstractFile& operator >>( LX_AbstractFile& f, std::string& s ) noexcept  = delete;
+LX_AbstractFile& operator >>( LX_AbstractFile& f, UTF8string& u8s ) noexcept = delete;
 
 /**
 *   @fn template <typename T> LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept
@@ -351,7 +351,7 @@ LX_AbstractFile& operator >>(LX_AbstractFile& f, UTF8string& u8s) noexcept = del
 *   @return The updated file
 */
 template <typename T>
-LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept;
+LX_AbstractFile& operator <<( LX_AbstractFile& f, const T data ) noexcept;
 
 /**
 *   @fn template <typename T> LX_AbstractFile& operator >>(LX_AbstractFile& f, T& data) noexcept
@@ -364,7 +364,7 @@ LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept;
 *   @return The updated file
 */
 template <typename T>
-LX_AbstractFile& operator >>(LX_AbstractFile& f, T& data) noexcept;
+LX_AbstractFile& operator >>( LX_AbstractFile& f, T& data ) noexcept;
 
 #include "LX_FileIO.tpp"
 

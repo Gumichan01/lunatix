@@ -58,7 +58,7 @@ struct LX_MusicTag
     UTF8string genre{""};                   /**< Genre  */
     UTF8string format{""};                  /**< Format (MP3, OGG, FLAC, M4A)    */
     UTF8string duration{""};                /**< Duration, in HH:MM:SS format    */
-    LX_Graphics::LX_BufferedImage *img = nullptr;   /**< Album cover, if it exists  */
+    LX_Graphics::LX_BufferedImage * img = nullptr;  /**< Album cover, if it exists  */
 
     //LX_MusicTag() noexcept;
     ~LX_MusicTag();
@@ -72,7 +72,7 @@ struct LX_MusicTag
 *
 *   @sa LX_MusicTag
 */
-const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept;
+const LX_MusicTag getMusicInfoFrom( const UTF8string& u8file ) noexcept;
 /**
 *   @fn const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept;
 *   Get information about the music file
@@ -81,7 +81,7 @@ const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept;
 *
 *   @sa LX_MusicTag
 */
-const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept;
+const LX_MusicTag getMusicInfoFrom( const std::string& file ) noexcept;
 
 
 class LX_Music_;
@@ -94,8 +94,8 @@ class LX_Music : public virtual LX_Sound
 {
     std::unique_ptr<LX_Music_> _mimpl;
 
-    LX_Music(const LX_Music& m) = delete;
-    LX_Music& operator =(const LX_Music& m) = delete;
+    LX_Music( const LX_Music& m ) = delete;
+    LX_Music& operator =( const LX_Music& m ) = delete;
 
 public:
 
@@ -104,13 +104,13 @@ public:
     *   @param filename
     *   @exception LX_MixerException On failure
     */
-    LX_Music(const std::string& filename);
+    LX_Music( const std::string& filename );
     /**
     *   @fn LX_Music(const UTF8string& filename)
     *   @param filename
     *   @exception LX_MixerException On failure
     */
-    LX_Music(const UTF8string& filename);
+    LX_Music( const UTF8string& filename );
 
     /**
     *   @fn void fadeIn(int ms) noexcept
@@ -125,7 +125,7 @@ public:
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
     */
-    void fadeIn(int ms) noexcept;
+    void fadeIn( int ms ) noexcept;
     /**
     *   @fn void fadeInPos(int ms, int pos) noexcept
     *
@@ -140,7 +140,7 @@ public:
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
     */
-    void fadeInPos(int ms, int pos) noexcept;
+    void fadeInPos( int ms, int pos ) noexcept;
     /**
     *   @fn static void fadeOut(int ms) noexcept
     *
@@ -151,7 +151,7 @@ public:
     *   @note This functions works only when music is playing and
     *         no fading is already set to fade out
     */
-    static void fadeOut(int ms) noexcept;
+    static void fadeOut( int ms ) noexcept;
 
     /**
     *   @fn virtual bool play() noexcept override
@@ -165,14 +165,14 @@ public:
     *   @param infinite_loop true for inifinite loop, false otherwise
     *   @return TRUE on success, FALSE otherwise
     */
-    bool play(bool infinite_loop) noexcept;
+    bool play( bool infinite_loop ) noexcept;
     /**
     *   @fn bool play(unsigned int loops) noexcept
     *   Play the music specified in the LX_Music class
     *   @param [in] loops The loop constant
     *   @return TRUE on success,FALSE otherwise
     */
-    bool play(unsigned int loops) noexcept;
+    bool play( unsigned int loops ) noexcept;
     /**
     *   @fn static void pause() noexcept
     *   Pause or resume the current music

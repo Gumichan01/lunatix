@@ -27,7 +27,7 @@
 namespace
 {
 
-LX_SystemInfo::LX_DisplayMode fromSDL_DisplayMode(SDL_DisplayMode& sdlmode)
+LX_SystemInfo::LX_DisplayMode fromSDL_DisplayMode( SDL_DisplayMode& sdlmode )
 {
     return {sdlmode.w, sdlmode.h, sdlmode.refresh_rate};
 }
@@ -40,7 +40,7 @@ namespace LX_SystemInfo
 
 const UTF8string getPlatform()
 {
-    return UTF8string(SDL_GetPlatform());
+    return UTF8string( SDL_GetPlatform() );
 }
 
 int getCPUCacheLineSize() noexcept
@@ -58,28 +58,28 @@ int getSystemRAM() noexcept
     return SDL_GetSystemRAM();
 }
 
-void getAvailableDisplayModes(LX_DisplayModes& modes)
+void getAvailableDisplayModes( LX_DisplayModes& modes )
 {
-    const int NB_DISPLAYS = SDL_GetNumDisplayModes(0);
+    const int NB_DISPLAYS = SDL_GetNumDisplayModes( 0 );
     modes.clear();
 
-    if(NB_DISPLAYS == 0)
+    if ( NB_DISPLAYS == 0 )
     {
-        LX_setError("No display available");
+        LX_setError( "No display available" );
         return;
     }
-    else if(NB_DISPLAYS < 0)
+    else if ( NB_DISPLAYS < 0 )
     {
-        LX_setError("Cannot get the number of display modes");
+        LX_setError( "Cannot get the number of display modes" );
         return;
     }
 
     SDL_DisplayMode mode;
-    for(int i = 0; i < NB_DISPLAYS; i++)
+    for ( int i = 0; i < NB_DISPLAYS; i++ )
     {
-        if(SDL_GetDisplayMode(0, i, &mode) == 0)
+        if ( SDL_GetDisplayMode( 0, i, &mode ) == 0 )
         {
-            modes.push_back(fromSDL_DisplayMode(mode));
+            modes.push_back( fromSDL_DisplayMode( mode ) );
         }
     }
 }

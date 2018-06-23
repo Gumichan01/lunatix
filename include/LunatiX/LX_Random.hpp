@@ -49,7 +49,7 @@ void initRand() noexcept;
 */
 template <typename N>
 using LX_Num =
-    typename std::enable_if< std::is_integral< N >::value &&
+    typename std::enable_if < std::is_integral< N >::value &&
     std::is_unsigned< N >::value &&
     !std::is_same< N, bool >::value &&
     !std::is_same< N, unsigned char >::value, N >::type;
@@ -68,7 +68,7 @@ using LX_Num =
 *   @note This function uses the Xorshift* Random Number generator
 */
 template <typename T>
-LX_Num<T> xrand(T min = 0U, T max = std::numeric_limits< T >::max()) noexcept;
+LX_Num<T> xrand( T min = 0U, T max = std::numeric_limits< T >::max() ) noexcept;
 
 
 /**
@@ -84,7 +84,7 @@ LX_Num<T> xrand(T min = 0U, T max = std::numeric_limits< T >::max()) noexcept;
 *
 *   @note This function uses the Xorshift* Random Number generator
 */
-float fxrand(float minf = 0.0f, float maxf = 1.0f) noexcept;
+float fxrand( float minf = 0.0f, float maxf = 1.0f ) noexcept;
 
 /**
 *   @deprecated xorshiftRand() is deprecated and will be removed in v0.14.0

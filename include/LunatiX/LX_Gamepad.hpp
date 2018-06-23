@@ -38,8 +38,8 @@ class LX_Gamepad final
 {
     std::unique_ptr<LX_Gamepad_> _gpimpl;
 
-    LX_Gamepad(const LX_Gamepad& g) = delete;
-    LX_Gamepad& operator =(const LX_Gamepad&) = delete;
+    LX_Gamepad( const LX_Gamepad& g ) = delete;
+    LX_Gamepad& operator =( const LX_Gamepad& ) = delete;
 
 public:
 
@@ -60,7 +60,7 @@ public:
     *
     *   @sa close()
     */
-    bool open(int index) noexcept;
+    bool open( int index ) noexcept;
     /**
     *   @fn void close() noexcept
     *   Close the gamepad
@@ -115,7 +115,7 @@ public:
     *   @return TRUE on success, FALSE otherwise.
     *          Call LX_getError() to get the error message
     */
-    bool stat(LX_GamepadInfo& info) const noexcept;
+    bool stat( LX_GamepadInfo& info ) const noexcept;
 
     /**
     *   @fn UTF8string toString() const noexcept

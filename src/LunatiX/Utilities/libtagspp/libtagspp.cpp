@@ -8,7 +8,7 @@
 namespace
 {
 
-const libtagpp::ImgMetaData EMPTY_IMG = {0,0};
+const libtagpp::ImgMetaData EMPTY_IMG = {0, 0};
 
 struct Aux final
 {
@@ -16,30 +16,30 @@ struct Aux final
     libtagpp::Tag& tag;
 };
 
-int ctxread(Tagctx *ctx, void *buf, int cnt)
+int ctxread( Tagctx * ctx, void * buf, int cnt )
 {
-    Aux *aux = static_cast<Aux *>(ctx->aux);
-    return static_cast<int>(std::fread(buf, 1U, static_cast<size_t>(cnt), aux->f));
+    Aux * aux = static_cast<Aux *>( ctx->aux );
+    return static_cast<int>( std::fread( buf, 1U, static_cast<size_t>( cnt ), aux->f ) );
 }
 
-int ctxseek(Tagctx *ctx, int offset, int whence)
+int ctxseek( Tagctx * ctx, int offset, int whence )
 {
-    Aux *aux = static_cast<Aux *>(ctx->aux);
-    std::fseek(aux->f, offset, whence);
-    return static_cast<int>(std::ftell(aux->f));
+    Aux * aux = static_cast<Aux *>( ctx->aux );
+    std::fseek( aux->f, offset, whence );
+    return static_cast<int>( std::ftell( aux->f ) );
 }
 
-inline const char * sec_(int second)
+inline const char * sec_( int second )
 {
-    return second < 10 ? "0":"";
+    return second < 10 ? "0" : "";
 }
 
-inline const char * minute_(int minute)
+inline const char * minute_( int minute )
 {
-    return minute < 10 ? "0":"";
+    return minute < 10 ? "0" : "";
 }
 
-std::string duration(int t)
+std::string duration( int t )
 {
     std::ostringstream ss;
     const int H_MINUTE = 60;
@@ -51,12 +51,12 @@ std::string duration(int t)
     minute = 0;
     second = 0;
 
-    if(D > M_SECOND)
+    if ( D > M_SECOND )
     {
         minute = D / M_SECOND;
         second = D % M_SECOND;
 
-        if(minute > H_MINUTE)
+        if ( minute > H_MINUTE )
         {
             hour = minute / H_MINUTE;
             minute = minute % H_MINUTE;
@@ -65,21 +65,21 @@ std::string duration(int t)
     else
         second = D;
 
-    if(hour > 0)
-        ss << hour << ":" << minute_(minute) << minute << ":" << sec_(second) << second;
-    else if(minute > 0)
-        ss << minute << ":" << sec_(second) << second;
+    if ( hour > 0 )
+        ss << hour << ":" << minute_( minute ) << minute << ":" << sec_( second ) << second;
+    else if ( minute > 0 )
+        ss << minute << ":" << sec_( second ) << second;
     else
         ss << second << "s";
 
     return ss.str();
 }
 
-std::string format(int f)
+std::string format( int f )
 {
     std::string s;
 
-    switch(f)
+    switch ( f )
     {
     case 0:
         s = "MP3";
@@ -109,17 +109,17 @@ namespace libtagpp
 /* Properties */
 
 Properties::Properties()
-    : channels(0), samplerate(0), bitrate(0), duration(""), format("") {}
+    : channels( 0 ), samplerate( 0 ), bitrate( 0 ), duration( "" ), format( "" ) {}
 
 
 /* Tag */
 
 // (Tag) Friend function
-void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread)
+void ctxtag( Tagctx * ctx, int t, const char * v, int offset, int size, Tagread )
 {
-    Aux *aux = (Aux *) ctx->aux;
+    Aux * aux = ( Aux * ) ctx->aux;
 
-    switch(t)
+    switch ( t )
     {
     case Tartist:
         aux->tag._artist = v;
@@ -161,34 +161,34 @@ void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread)
 
 Tag::Tag(): _title(), _artist(), _album(), _year(), _track(), _genre(),
     _albumgain(), _albumpeak(), _trackgain(), _trackpeak(),
-    _imdata(EMPTY_IMG), _properties() {}
+    _imdata( EMPTY_IMG ), _properties() {}
 
 
-bool Tag::readTag(const std::string& filename)
+bool Tag::readTag( const std::string& filename )
 {
     const char * f = filename.c_str();
     char buf[256];
     Aux aux = { nullptr, *this };
-    Tagctx ctx = { nullptr, ctxread, ctxseek, ctxtag, &aux, buf, sizeof(buf),
+    Tagctx ctx = { nullptr, ctxread, ctxseek, ctxtag, &aux, buf, sizeof( buf ),
                    0, 0, 0, 0, 0, 0, 0
                  };
 
-    if((aux.f = std::fopen(f, "rb")) == nullptr)
+    if ( ( aux.f = std::fopen( f, "rb" ) ) == nullptr )
     {
-        std::fprintf(stderr, "failed to open: %s does not exist\n",f);
+        std::fprintf( stderr, "failed to open: %s does not exist\n", f );
         return false;
     }
 
-    bool success = tagsget(&ctx) == 0;
-    std::fclose(aux.f);
+    bool success = tagsget( &ctx ) == 0;
+    std::fclose( aux.f );
 
-    if(success)
+    if ( success )
     {
         _properties.channels   = ctx.channels;
         _properties.samplerate = ctx.samplerate;
         _properties.bitrate    = ctx.bitrate;
-        _properties.duration   = duration(ctx.duration);
-        _properties.format     = format(ctx.format);
+        _properties.duration   = duration( ctx.duration );
+        _properties.format     = format( ctx.format );
         return true;
     }
 

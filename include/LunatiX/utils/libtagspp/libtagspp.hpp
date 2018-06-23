@@ -11,7 +11,7 @@
 #include <string>
 
 struct Tagctx;
-typedef int (*Tagread)(void *buf, int *cnt);
+typedef int ( *Tagread )( void * buf, int * cnt );
 
 
 /**
@@ -69,17 +69,17 @@ class Tag final
     ImgMetaData _imdata;
     Properties _properties;
 
-    friend void ctxtag(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread);
+    friend void ctxtag( Tagctx * ctx, int t, const char * v, int offset, int size, Tagread );
 
 public:
 
     /// Constructor
     Tag();
 
-    Tag(Tag&) = delete;
-    Tag(Tag&&) = delete;
-    Tag& operator =(const Tag&) = delete;
-    Tag&& operator =(const Tag&&) = delete;
+    Tag( Tag& ) = delete;
+    Tag( Tag&& ) = delete;
+    Tag& operator =( const Tag& ) = delete;
+    Tag&& operator =( const Tag&& ) = delete;
 
     /**
     *   @fn bool readTag(const std::string& filename)
@@ -89,7 +89,7 @@ public:
     *   @param [in] filename The name of the music file
     *   @return TRUE on success, and metadat are set, FALSE otherwise
     */
-    bool readTag(const std::string& filename);
+    bool readTag( const std::string& filename );
     /// Get the title
     const char * title() const;
     /// Get the artist

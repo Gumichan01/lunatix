@@ -43,8 +43,8 @@ class LX_ParticleSystem final
 {
     std::unique_ptr<LX_ParticleSystem_> _psimpl;
 
-    LX_ParticleSystem(LX_ParticleSystem& ps) = delete;
-    LX_ParticleSystem& operator =(LX_ParticleSystem& ps) = delete;
+    LX_ParticleSystem( LX_ParticleSystem& ps ) = delete;
+    LX_ParticleSystem& operator =( LX_ParticleSystem& ps ) = delete;
 
 public:
 
@@ -52,7 +52,7 @@ public:
     *   @fn LX_ParticleSystem(const unsigned int nbPart) noexcept
     *   @param [in] nbPart The number of particles to define in the system
     */
-    explicit LX_ParticleSystem(const unsigned int nbPart) noexcept;
+    explicit LX_ParticleSystem( const unsigned int nbPart ) noexcept;
 
     /**
     *   @fn bool addParticle(LX_Particle *p) noexcept
@@ -61,7 +61,7 @@ public:
     *   @return TRUE if the system had the particle with succes.
     *          FALSE if the particle is a null pointer or the system cannot add it
     */
-    bool addParticle(LX_Particle *p) noexcept;
+    bool addParticle( LX_Particle * p ) noexcept;
     /**
     *   @fn void updateParticles() noexcept
     *   Update the status of the particles

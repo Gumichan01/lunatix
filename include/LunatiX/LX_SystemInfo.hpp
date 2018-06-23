@@ -117,7 +117,7 @@ int getSystemRAM() noexcept;
 *       }
 *
 */
-void getAvailableDisplayModes(LX_DisplayModes& modes);
+void getAvailableDisplayModes( LX_DisplayModes& modes );
 
 }
 

@@ -87,8 +87,8 @@ struct LX_MixerEffectType final
     bool reverse_stereo = false;    /**< Reverse Stereo */
 
     LX_MixerEffectType() = default;
-    LX_MixerEffectType(const LX_MixerEffectType&) = default;
-    LX_MixerEffectType& operator =(const LX_MixerEffectType&) = default;
+    LX_MixerEffectType( const LX_MixerEffectType& ) = default;
+    LX_MixerEffectType& operator =( const LX_MixerEffectType& ) = default;
 };
 
 
@@ -121,7 +121,7 @@ struct LX_MixerEffect final
 *
 *   @note if volume > 100, then the overall volume is set to 100
 */
-void setOverallVolume(unsigned short volume) noexcept;
+void setOverallVolume( unsigned short volume ) noexcept;
 /**
 *   @fn void setMusicVolume(unsigned short pvolume) noexcept
 *
@@ -133,7 +133,7 @@ void setOverallVolume(unsigned short volume) noexcept;
 *        is 50 * 60 / 100.
 *   @note The music volume ca be get using ::getMusicVolume()
 */
-void setMusicVolume(unsigned short pvolume) noexcept;
+void setMusicVolume( unsigned short pvolume ) noexcept;
 /**
 *   @fn void setFXVolume(unsigned short pvolume) noexcept
 *
@@ -146,7 +146,7 @@ void setMusicVolume(unsigned short pvolume) noexcept;
 *        is 50 * 60 / 100.
 *   @note The FX volume ca be get using ::getFXVolume()
 */
-void setFXVolume(unsigned short pvolume) noexcept;
+void setFXVolume( unsigned short pvolume ) noexcept;
 
 /**
 *   @fn unsigned short getOverallVolume() noexcept
@@ -185,7 +185,7 @@ unsigned short getFXVolume() noexcept;
 *
 *   @exception LX_MixerException On failure
 */
-LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file);
+LX_Chunk * loadSample( LX_FileIO::LX_FileBuffer& file );
 
 /**
 *   @fn void setMusicPosition(double pos) noexcept
@@ -199,7 +199,7 @@ LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file);
 *        - OGG
 *        - MP3
 */
-void setMusicPosition(double pos) noexcept;
+void setMusicPosition( double pos ) noexcept;
 
 /**
 *   @fn int allocateChannels(int num) noexcept
@@ -215,7 +215,7 @@ void setMusicPosition(double pos) noexcept;
 *   @note   If *num* is less than the current number of channels,
 *          then the higher channels will be stopped, freed, and not mixed.
 */
-int allocateChannels(int num) noexcept;
+int allocateChannels( int num ) noexcept;
 /**
 *   @fn int reserveChannels(int numchans) noexcept
 *
@@ -226,7 +226,7 @@ int allocateChannels(int num) noexcept;
 *   @return The number of channels reserved
 *   @note If *num* is 0, then all channels will be unreserved
 */
-int reserveChannels(int numchans) noexcept;
+int reserveChannels( int numchans ) noexcept;
 
 /**
 *   @fn bool groupChannel(int chan, int tag) noexcept
@@ -239,7 +239,7 @@ int reserveChannels(int numchans) noexcept;
 *   @return TRUE on success, FALSE otherwise
 *   @note Setting -1 in *tag* put the channel in the default group
 */
-bool groupChannel(int chan, int tag) noexcept;
+bool groupChannel( int chan, int tag ) noexcept;
 /**
 *   @fn int groupChannels(int from, int to, int tag) noexcept
 *
@@ -254,7 +254,7 @@ bool groupChannel(int chan, int tag) noexcept;
 *          some channels were no tagged because they didn't exist
 *   @note Setting -1 in *tag* reset the group to the default channel
 */
-int groupChannels(int from, int to, int tag) noexcept;
+int groupChannels( int from, int to, int tag ) noexcept;
 
 /**
 *   @fn int groupCount(int tag) noexcept
@@ -266,7 +266,7 @@ int groupChannels(int from, int to, int tag) noexcept;
 *   @return The number of channels found in the group. This function never fails
 *   @note Setting -1 in *tag* will count all channels
 */
-int groupCount(int tag) noexcept;
+int groupCount( int tag ) noexcept;
 /**
 *   @fn int channelAvailable(int tag) noexcept
 *
@@ -276,7 +276,7 @@ int groupCount(int tag) noexcept;
 *
 *   @return The channel id on success. -1 if no channel is available.
 */
-int channelAvailable(int tag) noexcept;
+int channelAvailable( int tag ) noexcept;
 
 /**
 *   @deprecated This function will be removed in LunatiX v0.14.0.
@@ -297,7 +297,7 @@ int channelAvailable(int tag) noexcept;
 *   @note If no channel of the group is available for playing, the oldest
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
-bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0) noexcept;
+bool groupPlayChunk( LX_Chunk& chunk, int tag, int loops = 0 ) noexcept;
 /**
 *   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexcept
 *
@@ -314,7 +314,7 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0) noexcept;
 *   @note If no channel of the group is available for playing, the oldest
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
-bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexcept;
+bool groupPlayChunk( LX_Chunk& chunk, int tag, const LX_MixerEffect effect ) noexcept;
 
 /**
 *   @fn void pause(int channel) noexcept
@@ -324,7 +324,7 @@ bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexc
 *   @param [in] channel The channel to pause
 *   @note If channel is -1, then all channels will be paused
 */
-void pause(int channel) noexcept;
+void pause( int channel ) noexcept;
 /**
 *   @fn void resume(int channel) noexcept
 *
@@ -333,7 +333,7 @@ void pause(int channel) noexcept;
 *   @param [in] channel The channel to resume playing
 *   @note If channel is -1, then all channels will be unpaused
 */
-void resume(int channel) noexcept;
+void resume( int channel ) noexcept;
 
 /**
 *   @fn void haltChannel(int channel) noexcept
@@ -343,7 +343,7 @@ void resume(int channel) noexcept;
 *   @param [in] channel The channel to stop playing
 *   @note If channel is -1, then all channels will be stopped
 */
-void haltChannel(int channel) noexcept;
+void haltChannel( int channel ) noexcept;
 /**
 *   @fn void expireChannel(int channel, int ticks) noexcept
 *
@@ -353,7 +353,7 @@ void haltChannel(int channel) noexcept;
 *   @param [in] ticks The time in millisecond
 *   @note If channel is -1, then all channels will be stopped
 */
-void expireChannel(int channel, int ticks) noexcept;
+void expireChannel( int channel, int ticks ) noexcept;
 
 /**
 *   @fn int isPlaying(int channel) noexcept
@@ -366,7 +366,7 @@ void expireChannel(int channel, int ticks) noexcept;
 *   @note If channel is -1, then all channels will be tested
 *          and the number of channels playing is returned
 */
-int isPlaying(int channel) noexcept;
+int isPlaying( int channel ) noexcept;
 /**
 *   @fn int isPaused(int channel) noexcept
 *
@@ -378,7 +378,7 @@ int isPlaying(int channel) noexcept;
 *   @note If channel is -1, then all channels will be tested
 *          and the number of aused channels is returned
 */
-int isPaused(int channel) noexcept;
+int isPaused( int channel ) noexcept;
 
 
 /* == Effects == */
@@ -397,7 +397,7 @@ int isPaused(int channel) noexcept;
 *   @note Any previous music will be halted, or if it is fading out
 *          it will wait (blocking) for the fade to complete
 */
-void fadeInMusic(LX_Music& music, int ms) noexcept;
+void fadeInMusic( LX_Music& music, int ms ) noexcept;
 /**
 *   @fn void void fadeInMusicPos(LX_Music& music,int ms, int pos) noexcept
 *
@@ -413,7 +413,7 @@ void fadeInMusic(LX_Music& music, int ms) noexcept;
 *   @note Any previous music will be halted, or if it is fading out
 *          it will wait (blocking) for the fade to complete
 */
-void fadeInMusicPos(LX_Music& music, int ms, int pos) noexcept;
+void fadeInMusicPos( LX_Music& music, int ms, int pos ) noexcept;
 /**
 *   @fn void fadeOutMusic(int ms) noexcept
 *
@@ -424,7 +424,7 @@ void fadeInMusicPos(LX_Music& music, int ms, int pos) noexcept;
 *   @note This functions works only when music is playing and
 *          no fading is already set to fade out
 */
-void fadeOutMusic(int ms) noexcept;
+void fadeOutMusic( int ms ) noexcept;
 
 /**
 *   @fn void setPanning(uint8_t left, uint8_t right) noexcept
@@ -444,7 +444,7 @@ void fadeOutMusic(int ms) noexcept;
 *   @note 3 — To unregister this effect, use this function with 255 as left and right value
 *        or simply use LX_Mixer::removePanning().
 */
-void setPanning(uint8_t left, uint8_t right) noexcept;
+void setPanning( uint8_t left, uint8_t right ) noexcept;
 /**
 *   @fn void setPanning(int chan, uint8_t left, uint8_t right) noexcept
 *
@@ -462,7 +462,7 @@ void setPanning(uint8_t left, uint8_t right) noexcept;
 *   @note 2 — To unregister this effect, use this function with 255 as left and right value
 *        or simply use LX_Mixer::removePanning(int chan).
 */
-void setPanning(int chan, uint8_t left, uint8_t right) noexcept;
+void setPanning( int chan, uint8_t left, uint8_t right ) noexcept;
 /**
 *   @fn void removePanning() noexcept
 *   Remove the panning effect applied on every channels
@@ -474,7 +474,7 @@ void removePanning() noexcept;
 *   @param [in] chan The channel to remove the effect from
 *   @note This function also remove the post-processing effects
 */
-void removePanning(int chan) noexcept;
+void removePanning( int chan ) noexcept;
 
 // 3D Position
 
@@ -486,7 +486,7 @@ void removePanning(int chan) noexcept;
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @note This function call setPosition(angle, LX_MIX_FX_NO_distance)
 */
-void setPosition(int16_t angle) noexcept;
+void setPosition( int16_t angle ) noexcept;
 /**
 *   @fn void setPosition(int16_t angle, uint8_t distance) noexcept
 *
@@ -495,7 +495,7 @@ void setPosition(int16_t angle) noexcept;
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @param [in] distance The distance between the source and the listener
 */
-void setPosition(int16_t angle, uint8_t distance) noexcept;
+void setPosition( int16_t angle, uint8_t distance ) noexcept;
 /**
 *   @fn void setPosition(int chan, int16_t angle, uint8_t distance) noexcept
 *
@@ -505,7 +505,7 @@ void setPosition(int16_t angle, uint8_t distance) noexcept;
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
 *   @param [in] distance The distance between the source and the listener
 */
-void setPosition(int chan, int16_t angle, uint8_t distance) noexcept;
+void setPosition( int chan, int16_t angle, uint8_t distance ) noexcept;
 /**
 *   @fn void resetPosition() noexcept
 *   Reset the virtual position of the audio source.
@@ -516,7 +516,7 @@ void resetPosition() noexcept;
 *   Reset the virtual position of the audio source.
 *   @param [in] chan The channel
 */
-void resetPosition(int chan) noexcept;
+void resetPosition( int chan ) noexcept;
 
 // Reverse stereo
 
@@ -528,7 +528,7 @@ void resetPosition(int chan) noexcept;
 *   @param [in] flip TRUE to set the effect, FALSE to unregister the effect
 *   @note If you want to unregister the effect on a channel, set flip as false
 */
-void reverseStereo(bool flip) noexcept;
+void reverseStereo( bool flip ) noexcept;
 /**
 *   @fn void reverseStereo(int chan, bool flip) noexcept
 *
@@ -538,7 +538,7 @@ void reverseStereo(bool flip) noexcept;
 *   @param [in] flip TRUE to set the effect, FALSE to unregister the effect
 *   @note If you want to unregister the effect on a channel, set flip as false
 */
-void reverseStereo(int chan, bool flip) noexcept;
+void reverseStereo( int chan, bool flip ) noexcept;
 
 // Distance
 
@@ -547,14 +547,14 @@ void reverseStereo(int chan, bool flip) noexcept;
 *   Set the distance to all channels
 *   @param [in] distance The virtual distance between the user and the source
 */
-void setDistance(uint8_t distance) noexcept;
+void setDistance( uint8_t distance ) noexcept;
 /**
 *   @fn void setDistance(int chan, uint8_t distance) noexcept
 *   Set the distance to a specific channel
 *   @param [in] chan The channel
 *   @param [in] distance The virtual distance between the user and the source
 */
-void setDistance(int chan, uint8_t distance) noexcept;
+void setDistance( int chan, uint8_t distance ) noexcept;
 
 }
 

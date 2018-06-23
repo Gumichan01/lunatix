@@ -43,9 +43,9 @@ class LX_PolygonException final : public std::exception
 
 public:
 
-    explicit LX_PolygonException(std::string err);
-    LX_PolygonException(const LX_PolygonException& pex);
-    LX_PolygonException& operator =(const LX_PolygonException& pex);
+    explicit LX_PolygonException( std::string err );
+    LX_PolygonException( const LX_PolygonException& pex );
+    LX_PolygonException& operator =( const LX_PolygonException& pex );
     const char * what() const noexcept override;
     ~LX_PolygonException() noexcept;
 };
@@ -61,11 +61,11 @@ class LX_Polygon final
 {
     std::unique_ptr<LX_Polygon_> _polyimpl;
 
-    LX_Polygon(LX_Polygon& p) = delete;
-    LX_Polygon& operator =(LX_Polygon& p) = delete;
+    LX_Polygon( LX_Polygon& p ) = delete;
+    LX_Polygon& operator =( LX_Polygon& p ) = delete;
 
     void convexity_() noexcept;
-    void addPoint_(const LX_FloatPosition& p);
+    void addPoint_( const LX_FloatPosition& p );
 
 public:
 
@@ -82,7 +82,7 @@ public:
     *   @note 2 - Complexity: O(n) if n >= 3, O(1) otherwise,
     *             **n** is the number of edges of the polygon.
     */
-    void addPoint(const LX_FloatPosition& p);
+    void addPoint( const LX_FloatPosition& p );
     /**
     *   @fn template <typename Iterator> void addPoints(Iterator first, Iterator last)
     *
@@ -98,7 +98,7 @@ public:
     *             **m** is the number of points to add.
     */
     template <typename Iterator>
-    void addPoints(Iterator first, Iterator last);
+    void addPoints( Iterator first, Iterator last );
 
     /**
     *   @fn unsigned long LX_Polygon::numberOfEdges() const noexcept
@@ -114,7 +114,7 @@ public:
     *
     *   @exception  LX_PolygonException If the index is out of bounds
     */
-    LX_FloatPosition getPoint(const unsigned long index) const;
+    LX_FloatPosition getPoint( const unsigned long index ) const;
     /**
     *   @fn LX_FloatingBox getEnclosingBox() const
     *
@@ -145,14 +145,14 @@ public:
     *   @param [in] v The vector that indicates the direction
     *   @note Complexity: O(n), n the number of vertices of the polygon
     */
-    void move(const LX_Vector2D& v) noexcept;
+    void move( const LX_Vector2D& v ) noexcept;
     /**
     *   @fn void moveTo(const LX_FloatPosition& p)
     *   @param [in] p The new position
     *   @note Complexity: O(n), n is the number of vertices of the polygon
     *   @exception  LX_PolygonException If the polygon has less than 3 sides
     */
-    void moveTo(const LX_FloatPosition& p);
+    void moveTo( const LX_FloatPosition& p );
 
     ~LX_Polygon();
 };

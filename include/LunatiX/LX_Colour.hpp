@@ -83,7 +83,7 @@ struct LX_glColour final
 *   @return TRUE if they are identical, FALSE otherwise
 *
 */
-inline constexpr bool operator ==(const LX_Colour& a, const LX_Colour& b) noexcept
+inline constexpr bool operator ==( const LX_Colour& a, const LX_Colour& b ) noexcept
 {
     return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 }
@@ -99,9 +99,9 @@ inline constexpr bool operator ==(const LX_Colour& a, const LX_Colour& b) noexce
 *   @return TRUE if they are different, FALSE otherwise
 *
 */
-inline constexpr bool operator !=(const LX_Colour& a, const LX_Colour& b) noexcept
+inline constexpr bool operator !=( const LX_Colour& a, const LX_Colour& b ) noexcept
 {
-    return !(a == b);
+    return !( a == b );
 }
 
 /**
@@ -118,13 +118,13 @@ inline constexpr bool operator !=(const LX_Colour& a, const LX_Colour& b) noexce
 *
 *   @sa fromGLColour
 */
-inline constexpr LX_glColour from8BitColour(const LX_Colour& colour) noexcept
+inline constexpr LX_glColour from8BitColour( const LX_Colour& colour ) noexcept
 {
     // 255.0f is the max Max 8-bit colour
-    return LX_glColour{static_cast<float>(colour.r) / 255.0f,
-                       static_cast<float>(colour.g) / 255.0f,
-                       static_cast<float>(colour.b) / 255.0f,
-                       static_cast<float>(colour.a) / 255.0f
+    return LX_glColour{static_cast<float>( colour.r ) / 255.0f,
+                       static_cast<float>( colour.g ) / 255.0f,
+                       static_cast<float>( colour.b ) / 255.0f,
+                       static_cast<float>( colour.a ) / 255.0f
                       };
 }
 /**
@@ -141,13 +141,13 @@ inline constexpr LX_glColour from8BitColour(const LX_Colour& colour) noexcept
 *
 *   @sa from8BitColour
 */
-inline constexpr LX_Colour fromGLColour(const LX_glColour& colour) noexcept
+inline constexpr LX_Colour fromGLColour( const LX_glColour& colour ) noexcept
 {
     // 255.0f is the max Max 8-bit colour
-    return LX_Colour{static_cast<uint8_t>(colour.r * 255.0f),
-                     static_cast<uint8_t>(colour.g * 255.0f),
-                     static_cast<uint8_t>(colour.b * 255.0f),
-                     static_cast<uint8_t>(colour.a * 255.0f)
+    return LX_Colour{static_cast<uint8_t>( colour.r * 255.0f ),
+                     static_cast<uint8_t>( colour.g * 255.0f ),
+                     static_cast<uint8_t>( colour.b * 255.0f ),
+                     static_cast<uint8_t>( colour.a * 255.0f )
                     };
 }
 
@@ -160,10 +160,10 @@ inline constexpr LX_Colour fromGLColour(const LX_glColour& colour) noexcept
 *   @param [in] colour Colour in 8-bit notation
 *   @return The colour in RGBA notation in one integer value
 */
-inline constexpr uint32_t toRGBAvalue(const LX_Colour& colour) noexcept
+inline constexpr uint32_t toRGBAvalue( const LX_Colour& colour ) noexcept
 {
-    return static_cast<uint32_t>((colour.r << 24) | (colour.g << 16) |
-                                 (colour.b << 8) | colour.a);
+    return static_cast<uint32_t>( ( colour.r << 24 ) | ( colour.g << 16 ) |
+                                  ( colour.b << 8 ) | colour.a );
 }
 /**
 *   @ingroup Graphics
@@ -174,12 +174,12 @@ inline constexpr uint32_t toRGBAvalue(const LX_Colour& colour) noexcept
 *   @param [in] rgba The colour in one unsigned integer value
 *   @return The colour structure
 */
-inline LX_Colour fromRGBAvalue(const uint32_t rgba) noexcept
+inline LX_Colour fromRGBAvalue( const uint32_t rgba ) noexcept
 {
-    const uint8_t r = static_cast<uint8_t>((rgba >> 24) & 0x000000FF);
-    const uint8_t g = static_cast<uint8_t>((rgba >> 16) & 0x000000FF);
-    const uint8_t b = static_cast<uint8_t>((rgba >> 8) & 0x000000FF);
-    const uint8_t a = static_cast<uint8_t>(rgba & 0x000000FF);
+    const uint8_t r = static_cast<uint8_t>( ( rgba >> 24 ) & 0x000000FF );
+    const uint8_t g = static_cast<uint8_t>( ( rgba >> 16 ) & 0x000000FF );
+    const uint8_t b = static_cast<uint8_t>( ( rgba >> 8 ) & 0x000000FF );
+    const uint8_t a = static_cast<uint8_t>( rgba & 0x000000FF );
 
     return LX_Colour{r, g, b, a};
 }

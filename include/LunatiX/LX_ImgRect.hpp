@@ -48,7 +48,7 @@ struct LX_ImgCoord final
 *   @param p
 *   @return The LX_ImgCoord
 */
-LX_ImgCoord toPixelPosition(const LX_Physics::LX_FloatPosition& p) noexcept;
+LX_ImgCoord toPixelPosition( const LX_Physics::LX_FloatPosition& p ) noexcept;
 
 /**
 *   @ingroup Graphics
@@ -70,7 +70,7 @@ struct LX_ImgRect final
 *   @param b
 *   @return The LX_ImgRect
 */
-LX_ImgRect toImgRect(const LX_Physics::LX_FloatingBox& b) noexcept;
+LX_ImgRect toImgRect( const LX_Physics::LX_FloatingBox& b ) noexcept;
 
 /**
 *   @fn bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept
@@ -81,7 +81,7 @@ LX_ImgRect toImgRect(const LX_Physics::LX_FloatingBox& b) noexcept;
 *   @return TRUE If these points have exactly the same coordinates,
 *          FALSE otherwise
 */
-bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
+bool operator ==( const LX_ImgCoord& a, const LX_ImgCoord& b ) noexcept;
 /**
 *   @fn bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept
 *
@@ -90,7 +90,7 @@ bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
-bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
+bool operator !=( const LX_ImgCoord& a, const LX_ImgCoord& b ) noexcept;
 /**
 *   @fn bool operator ==(const LX_ImgRect& a, const LX_ImgRect& b) noexcept
 *
@@ -100,7 +100,7 @@ bool operator !=(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept;
 *   @return TRUE If these points have exactly the same coordinates,
 *          FALSE otherwise
 */
-bool operator ==(const LX_ImgRect& a, const LX_ImgRect& b) noexcept;
+bool operator ==( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept;
 /**
 *   @fn bool operator !=(const LX_ImgRect& a, const LX_ImgRect& b) noexcept
 *
@@ -109,7 +109,7 @@ bool operator ==(const LX_ImgRect& a, const LX_ImgRect& b) noexcept;
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
-bool operator !=(const LX_ImgRect& a, const LX_ImgRect& b) noexcept;
+bool operator !=( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept;
 
 }
 

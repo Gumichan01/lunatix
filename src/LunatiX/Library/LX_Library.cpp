@@ -39,11 +39,11 @@ const int LX_MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mi
 
 bool LX_Mixer_Init() noexcept
 {
-    if(Mix_Init(MIX_INIT_OGG|MIX_INIT_FLAC|MIX_INIT_MP3) == 0)
+    if ( Mix_Init( MIX_INIT_OGG | MIX_INIT_FLAC | MIX_INIT_MP3 ) == 0 )
         return false;
 
-    if(Mix_OpenAudio(LX_MIX_AUDIO_FREQUENCY, MIX_DEFAULT_FORMAT,
-                     LX_MIX_STEREO_SOUND, LX_MIX_DEFAULT_CHUNKSIZE) == -1)
+    if ( Mix_OpenAudio( LX_MIX_AUDIO_FREQUENCY, MIX_DEFAULT_FORMAT,
+                        LX_MIX_STEREO_SOUND, LX_MIX_DEFAULT_CHUNKSIZE ) == -1 )
     {
         Mix_Quit();
         return false;
@@ -59,36 +59,36 @@ bool loadMainSystem()
     const LX_Configuration& config = LX_Configuration::getInstance();
 
     // Video flag
-    if(config.getVideoFlag())
+    if ( config.getVideoFlag() )
         sdl_flags |= SDL_INIT_VIDEO;
 
     // Audio flag
-    if(config.getAudioFlag())
+    if ( config.getAudioFlag() )
         sdl_flags |= SDL_INIT_AUDIO;
 
     // Gamepad flag
-    if(config.getGamepadFlag())
-        sdl_flags |= SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
+    if ( config.getGamepadFlag() )
+        sdl_flags |= SDL_INIT_GAMECONTROLLER | SDL_INIT_HAPTIC;
 
-    return SDL_Init(sdl_flags|SDL_INIT_TIMER) == 0;
+    return SDL_Init( sdl_flags | SDL_INIT_TIMER ) == 0;
 }
 
 void loadGamepadSubSystem()
 {
     // Load mappings from another configuration file
-    const std::string mappingFile("config/gamecontrollerdb.txt");
+    const std::string mappingFile( "config/gamecontrollerdb.txt" );
 
-    if(SDL_WasInit(SDL_INIT_GAMECONTROLLER) != 0)
-        SDL_GameControllerAddMappingsFromFile(mappingFile.c_str());
+    if ( SDL_WasInit( SDL_INIT_GAMECONTROLLER ) != 0 )
+        SDL_GameControllerAddMappingsFromFile( mappingFile.c_str() );
 }
 
 bool loadImgSubSystem()
 {
-    int img_flags = IMG_INIT_PNG|IMG_INIT_JPG;
+    int img_flags = IMG_INIT_PNG | IMG_INIT_JPG;
 
-    if(LX_Configuration::getInstance().getVideoFlag())
+    if ( LX_Configuration::getInstance().getVideoFlag() )
     {
-        if(IMG_Init(img_flags) != img_flags)
+        if ( IMG_Init( img_flags ) != img_flags )
         {
             SDL_Quit();
             return false;
@@ -100,9 +100,9 @@ bool loadImgSubSystem()
 
 bool loadTrueTypeFontSubSystem()
 {
-    if(LX_Configuration::getInstance().getTTFFlag())
+    if ( LX_Configuration::getInstance().getTTFFlag() )
     {
-        if(TTF_Init() == -1)
+        if ( TTF_Init() == -1 )
         {
             IMG_Quit();
             SDL_Quit();
@@ -115,9 +115,9 @@ bool loadTrueTypeFontSubSystem()
 
 bool loadAudioSubSystem()
 {
-    if(LX_Configuration::getInstance().getAudioFlag())
+    if ( LX_Configuration::getInstance().getAudioFlag() )
     {
-        if(!LX_Mixer_Init())
+        if ( !LX_Mixer_Init() )
         {
             TTF_Quit();
             IMG_Quit();
@@ -131,14 +131,14 @@ bool loadAudioSubSystem()
 
 void loadOpenGLSubSystem()
 {
-    if(LX_Configuration::getInstance().getOpenGLFlag())
+    if ( LX_Configuration::getInstance().getOpenGLFlag() )
     {
-        LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-                                             SDL_GL_CONTEXT_PROFILE_CORE);
-        LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,
-                                             LX_Graphics::LX_OpenGL::MAJOR_VERSION);
-        LX_Graphics::LX_OpenGL::setAttribute(SDL_GL_CONTEXT_MINOR_VERSION,
-                                             LX_Graphics::LX_OpenGL::MINOR_VERSION);
+        LX_Graphics::LX_OpenGL::setAttribute( SDL_GL_CONTEXT_PROFILE_MASK,
+                                              SDL_GL_CONTEXT_PROFILE_CORE );
+        LX_Graphics::LX_OpenGL::setAttribute( SDL_GL_CONTEXT_MAJOR_VERSION,
+                                              LX_Graphics::LX_OpenGL::MAJOR_VERSION );
+        LX_Graphics::LX_OpenGL::setAttribute( SDL_GL_CONTEXT_MINOR_VERSION,
+                                              LX_Graphics::LX_OpenGL::MINOR_VERSION );
     }
 }
 
@@ -147,16 +147,16 @@ void loadOpenGLSubSystem()
 
 bool LX_Init() noexcept
 {
-    if(!loadMainSystem())
+    if ( !loadMainSystem() )
         return false;
 
-    if(!loadImgSubSystem())
+    if ( !loadImgSubSystem() )
         return false;
 
-    if(!loadTrueTypeFontSubSystem())
+    if ( !loadTrueTypeFontSubSystem() )
         return false;
 
-    if(!loadAudioSubSystem())
+    if ( !loadAudioSubSystem() )
         return false;
 
     loadGamepadSubSystem();
@@ -165,15 +165,15 @@ bool LX_Init() noexcept
 }
 
 
-bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value) noexcept
+bool setSDLConfig( const std::string& sdlconfig_name, const std::string& sdlconfig_value ) noexcept
 {
-    return SDL_SetHint(sdlconfig_name.c_str(), sdlconfig_value.c_str()) == SDL_TRUE;
+    return SDL_SetHint( sdlconfig_name.c_str(), sdlconfig_value.c_str() ) == SDL_TRUE;
 }
 
-const std::string getSDLConfig(const std::string& sdlconfig_name) noexcept
+const std::string getSDLConfig( const std::string& sdlconfig_name ) noexcept
 {
-    const char * SDL_CONFIG = SDL_GetHint(sdlconfig_name.c_str());
-    return SDL_CONFIG == nullptr ? "" : std::string(SDL_CONFIG);
+    const char * SDL_CONFIG = SDL_GetHint( sdlconfig_name.c_str() );
+    return SDL_CONFIG == nullptr ? "" : std::string( SDL_CONFIG );
 }
 
 

@@ -45,9 +45,9 @@ class LX_Chunk final : public virtual LX_Sound
     friend class LX_FileIO::LX_FileBuffer_;
     std::unique_ptr<LX_Chunk_> _chkimpl;
 
-    LX_Chunk(Mix_Chunk& chunk);
-    LX_Chunk(const LX_Chunk& m) = delete;
-    LX_Chunk& operator =(const LX_Chunk& m) = delete;
+    LX_Chunk( Mix_Chunk& chunk );
+    LX_Chunk( const LX_Chunk& m ) = delete;
+    LX_Chunk& operator =( const LX_Chunk& m ) = delete;
 
 public:
 
@@ -61,7 +61,7 @@ public:
     *
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Chunk(const std::string& filename);
+    explicit LX_Chunk( const std::string& filename );
 
     /**
     *   @fn LX_Chunk(const UTF8string& filename)
@@ -73,7 +73,7 @@ public:
     *
     *   @exception LX_MixerException On failure
     */
-    explicit LX_Chunk(const UTF8string& filename);
+    explicit LX_Chunk( const UTF8string& filename );
 
     /**
     *   @fn virtual bool play() noexcept override
@@ -95,7 +95,7 @@ public:
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample with no loop
     */
-    bool play(int channel) noexcept;
+    bool play( int channel ) noexcept;
     /**
     *   @fn bool play(int channel, int loops) noexcept
     *
@@ -113,7 +113,7 @@ public:
     *
     *   @note 2 — If loops == -1 → loop forever
     */
-    bool play(int channel, int loops) noexcept;
+    bool play( int channel, int loops ) noexcept;
     /**
     *   @fn bool play(int channel, int loops, int ticks) noexcept
     *
@@ -126,7 +126,7 @@ public:
     *   @return TRUE on success, FALSE otherwise
     *   @note This function plays the sample on with no loop
     */
-    bool play(int channel, int loops, int ticks) noexcept;
+    bool play( int channel, int loops, int ticks ) noexcept;
 
     ~LX_Chunk();
 };

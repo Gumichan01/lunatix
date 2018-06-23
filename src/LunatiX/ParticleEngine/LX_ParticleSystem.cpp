@@ -38,22 +38,22 @@ class LX_ParticleSystem_ final
 
 public:
 
-    explicit LX_ParticleSystem_(const unsigned int nb_part) noexcept
-        : _particles(new std::unique_ptr<LX_Particle>[nb_part]),
-          _NB_PARTICLES(nb_part) {}
+    explicit LX_ParticleSystem_( const unsigned int nb_part ) noexcept
+        : _particles( new std::unique_ptr<LX_Particle>[nb_part] ),
+          _NB_PARTICLES( nb_part ) {}
 
-    bool addParticle(LX_Particle *p) const noexcept
+    bool addParticle( LX_Particle * p ) const noexcept
     {
-        if(_particles == nullptr || p == nullptr)
+        if ( _particles == nullptr || p == nullptr )
             return false;
 
         bool done = false;
 
-        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
+        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
         {
-            if(_particles[i] == nullptr)
+            if ( _particles[i] == nullptr )
             {
-                _particles[i].reset(p);
+                _particles[i].reset( p );
                 done = true;
                 break;
             }
@@ -62,10 +62,10 @@ public:
         return done;
     }
 
-    bool rmParticle(unsigned int index) const noexcept
+    bool rmParticle( unsigned int index ) const noexcept
     {
-        if(index > _NB_PARTICLES || _particles == nullptr
-                || _particles[index] == nullptr)
+        if ( index > _NB_PARTICLES || _particles == nullptr
+                || _particles[index] == nullptr )
             return false;
 
         _particles[index].reset();
@@ -74,15 +74,15 @@ public:
 
     void updateParticles() const noexcept
     {
-        if(_particles == nullptr)
+        if ( _particles == nullptr )
             return;
 
-        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
+        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
         {
-            if(_particles[i] != nullptr)
+            if ( _particles[i] != nullptr )
             {
-                if(_particles[i]->isDead())
-                    rmParticle(i);
+                if ( _particles[i]->isDead() )
+                    rmParticle( i );
                 else
                     _particles[i]->update();
             }
@@ -91,15 +91,15 @@ public:
 
     void displayParticles() const noexcept
     {
-        if(_particles == nullptr)
+        if ( _particles == nullptr )
             return;
 
-        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
+        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
         {
-            if(_particles[i] != nullptr)
+            if ( _particles[i] != nullptr )
             {
                 // Display the particle when the delay is a multiple of 2
-                if(_particles[i]->getDelay()%2 == 0)
+                if ( _particles[i]->getDelay() % 2 == 0 )
                     _particles[i]->draw();
             }
         }
@@ -107,14 +107,14 @@ public:
 
     unsigned int nbEmptyParticles() const noexcept
     {
-        if(_particles == nullptr)
+        if ( _particles == nullptr )
             return 0;
 
         unsigned int nb = 0;
 
-        for(unsigned int i = 0; i < _NB_PARTICLES; i++)
+        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
         {
-            if(_particles[i] == nullptr)
+            if ( _particles[i] == nullptr )
                 nb++;
         }
 
@@ -123,7 +123,7 @@ public:
 
     unsigned int nbActiveParticles() const noexcept
     {
-        return (_particles == nullptr) ? 0 : _NB_PARTICLES - nbEmptyParticles();
+        return ( _particles == nullptr ) ? 0 : _NB_PARTICLES - nbEmptyParticles();
     }
 
     unsigned int nbTotalParticles() const noexcept
@@ -133,9 +133,9 @@ public:
 
     ~LX_ParticleSystem_()
     {
-        if(_particles != nullptr)
+        if ( _particles != nullptr )
         {
-            for(unsigned int i = 0; i < _NB_PARTICLES; i++)
+            for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
             {
                 _particles[i].reset();
             }
@@ -148,8 +148,8 @@ public:
 
 /* Public functions */
 
-LX_ParticleSystem::LX_ParticleSystem(const unsigned int nbPart) noexcept
-    : _psimpl(new LX_ParticleSystem_(nbPart)) {}
+LX_ParticleSystem::LX_ParticleSystem( const unsigned int nbPart ) noexcept
+    : _psimpl( new LX_ParticleSystem_( nbPart ) ) {}
 
 
 LX_ParticleSystem::~LX_ParticleSystem()
@@ -158,9 +158,9 @@ LX_ParticleSystem::~LX_ParticleSystem()
 }
 
 
-bool LX_ParticleSystem::addParticle(LX_Particle *p) noexcept
+bool LX_ParticleSystem::addParticle( LX_Particle * p ) noexcept
 {
-    return _psimpl->addParticle(p);
+    return _psimpl->addParticle( p );
 }
 
 

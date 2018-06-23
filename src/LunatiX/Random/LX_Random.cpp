@@ -19,7 +19,7 @@ namespace
 {
 using uint32 = unsigned int;
 constexpr unsigned long long UINT64_V = 0x2545F4914F6CDD1DULL;
-constexpr float UF_MAX = static_cast<float>(std::numeric_limits<uint32>::max());
+constexpr float UF_MAX = static_cast<float>( std::numeric_limits<uint32>::max() );
 }
 
 namespace LX_Random
@@ -27,7 +27,7 @@ namespace LX_Random
 
 void initRand() noexcept
 {
-    srand(static_cast<unsigned int>(time(nullptr)));
+    srand( static_cast<unsigned int>( time( nullptr ) ) );
 }
 
 // private
@@ -36,10 +36,10 @@ unsigned long long _Prand::rand_() noexcept
     static unsigned long long x = 0;
     static bool first_call = false;
 
-    if(!first_call)
+    if ( !first_call )
     {
         // x must be a nonzero value
-        x = static_cast<unsigned long long>(crand() + 1);
+        x = static_cast<unsigned long long>( crand() + 1 );
         first_call = true;
     }
 
@@ -51,10 +51,10 @@ unsigned long long _Prand::rand_() noexcept
 
 }
 
-float fxrand(float minf, float maxf) noexcept
+float fxrand( float minf, float maxf ) noexcept
 {
-    const float R = static_cast<float>(xrand<unsigned int>());
-    return ( (R / UF_MAX) + minf ) * maxf;
+    const float R = static_cast<float>( xrand<unsigned int>() );
+    return ( ( R / UF_MAX ) + minf ) * maxf;
 }
 
 unsigned long long xorshiftRand() noexcept
