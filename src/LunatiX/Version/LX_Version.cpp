@@ -37,13 +37,18 @@ namespace LX_VersionInfo
 // Constants
 
 const short LX_MAJOR_VERSION = 0;
-const short LX_MINOR_VERSION = 13;
+const short LX_MINOR_VERSION = 14;
 const short LX_PATCH_VERSION = 0;
-const UTF8string LX_STATUS("stable");
+const UTF8string LX_STATUS("nightly");
 const UTF8string LX_COPYRIGHT("Copyright © 2018");
 const UTF8string LX_AUTHOR("Luxon Jean-Pierre");
 
 // Functions
+
+constexpr int cast(const Uint8 v)
+{
+    return static_cast<int>(v);
+}
 
 void info() noexcept
 {
@@ -83,29 +88,29 @@ void dependencies() noexcept
     SDL_MIXER_VERSION(&mix_compiled);
 
     cout << "Dependencies : \n\n"
-         << "Compiled against SDL version " << sdl_compiled.major << "."
-         << sdl_compiled.minor << "." << sdl_compiled.patch << " ...\n\n"
+         << "Compiled against SDL version " << cast(sdl_compiled.major) << "."
+         << cast(sdl_compiled.minor) << "." << cast(sdl_compiled.patch) << " ...\n\n"
 
-         << "Linked against SDL version " << sdl_linked.major << "."
-         << sdl_linked.minor << "." << sdl_linked.patch << " ...\n\n"
+         << "Linked against SDL version " << cast(sdl_linked.major) << "."
+         << cast(sdl_linked.minor) << "." << cast(sdl_linked.patch) << " ...\n\n"
 
-         << "Compiled against SDL_Image version " << img_compiled.major << "."
-         << img_compiled.minor << "." << img_compiled.patch << " ...\n\n"
+         << "Compiled against SDL_Image version " << cast(img_compiled.major) << "."
+         << cast(img_compiled.minor) << "." << cast(img_compiled.patch) << " ...\n\n"
 
-         << "Linked against SDL_Image version " << img_linked->major << "."
-         << img_linked->minor << "." << img_linked->patch << " ...\n\n"
+         << "Linked against SDL_Image version " << cast(img_linked->major) << "."
+         << cast(img_linked->minor) << "." << cast(img_linked->patch) << " ...\n\n"
 
-         << "Compiled against SDL_TTF version " << ttf_compiled.major << "."
-         << ttf_compiled.minor << "." << ttf_compiled.patch << " ...\n\n"
+         << "Compiled against SDL_TTF version " << cast(ttf_compiled.major) << "."
+         << cast(ttf_compiled.minor) << "." << cast(ttf_compiled.patch) << " ...\n\n"
 
-         << "Linked against SDL_TTF version " << ttf_linked->major << "."
-         << ttf_linked->minor << "." << ttf_linked->patch << " ...\n\n"
+         << "Linked against SDL_TTF version " << cast(ttf_linked->major) << "."
+         << cast(ttf_linked->minor) << "." << cast(ttf_linked->patch) << " ...\n\n"
 
-         << "Compiled against SDL_Mixer version " << mix_compiled.major << "."
-         << mix_compiled.minor << "." << mix_compiled.patch << " ...\n\n"
+         << "Compiled against SDL_Mixer version " << cast(mix_compiled.major) << "."
+         << cast(mix_compiled.minor) << "." << cast(mix_compiled.patch) << " ...\n\n"
 
-         << "Linked against SDL_Mixer version " << mix_linked->major << "."
-         << mix_linked->minor << "." << mix_linked->patch << " ...\n\n";
+         << "Linked against SDL_Mixer version " << cast(mix_linked->major) << "."
+         << cast(mix_linked->minor) << "." << cast(mix_linked->patch) << " ...\n\n";
 }
 
 }
