@@ -14,7 +14,7 @@
 #define LX_DEVICE_HPP_INCLUDED
 
 /**
-*   @file LX_Device.hpp
+*   @file Device.hpp
 *   @brief The Device header
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

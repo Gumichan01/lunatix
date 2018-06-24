@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_Text.cpp
+*   @file Text.cpp
 *   @brief The implementation of LX_TextInput
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

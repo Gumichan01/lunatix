@@ -14,7 +14,7 @@
 #define LX_WINDOWMANAGER_HPP_INCLUDED
 
 /**
-*   @file LX_WindowManager.hpp
+*   @file WindowManager.hpp
 *   @brief The window manager
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

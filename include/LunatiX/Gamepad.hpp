@@ -14,7 +14,7 @@
 #define LX_GAMEPAD_HPP_INCLUDED
 
 /**
-*   @file LX_Gamepad.hpp
+*   @file Gamepad.hpp
 *   @brief The gamepad interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

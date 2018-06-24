@@ -10,7 +10,7 @@
 */
 
 /**
-*   @file LX_Window.cpp
+*   @file Window.cpp
 *   @brief The implementation of the window
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

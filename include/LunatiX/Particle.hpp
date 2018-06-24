@@ -14,7 +14,7 @@
 #define PARTICLE_HPP_INCLUDED
 
 /**
-*   @file LX_Particle.hpp
+*   @file Particle.hpp
 *   @brief The Particle file
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

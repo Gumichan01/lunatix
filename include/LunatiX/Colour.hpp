@@ -14,7 +14,7 @@
 #define LX_COLOUR_HPP_INCLUDED
 
 /**
-*   @file LX_Colour.hpp
+*   @file Colour.hpp
 *   @brief The colour representation
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

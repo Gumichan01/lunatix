@@ -14,7 +14,7 @@
 */
 
 /**
-*   @file LX_Error.hpp
+*   @file Error.hpp
 *   @brief The error header.
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

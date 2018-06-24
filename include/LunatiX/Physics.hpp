@@ -14,7 +14,7 @@
 #define PHYSICS_H_INCLUDED
 
 /**
-*   @file LX_Physics.hpp
+*   @file Physics.hpp
 *   @brief The physics Library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

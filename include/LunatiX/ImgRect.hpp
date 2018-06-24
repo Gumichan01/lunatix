@@ -14,7 +14,7 @@
 #define LX_IMGRECT_H_INCLUDED
 
 /**
-*   @file LX_ImgRect.hpp
+*   @file ImgRect.hpp
 *   @brief The definition of LX_ImgRect
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

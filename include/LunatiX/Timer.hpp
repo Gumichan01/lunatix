@@ -14,7 +14,7 @@
 #define LX_TIMER_HPP_INCLUDED
 
 /**
-*   @file LX_Timer.hpp
+*   @file Timer.hpp
 *   @brief The timer interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

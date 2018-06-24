@@ -14,7 +14,7 @@
 #define LX_MESSAGEBOX_HPP_INCLUDED
 
 /**
-*   @file LX_MessageBox.hpp
+*   @file MessageBox.hpp
 *   @brief The message box Library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

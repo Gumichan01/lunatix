@@ -14,7 +14,7 @@
 #define LX_EVENT_HPP_INCLUDED
 
 /**
-*   @file LX_Event.hpp
+*   @file Event.hpp
 *   @brief The Event namespace
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

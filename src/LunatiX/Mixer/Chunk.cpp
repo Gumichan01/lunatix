@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_Chunk.cpp
+*   @file Chunk.cpp
 *   @brief The chunk implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

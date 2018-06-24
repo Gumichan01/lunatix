@@ -14,7 +14,7 @@
 #define LX_MIX_H_INCLUDED
 
 /**
-*   @file LX_Mixer.hpp
+*   @file Mixer.hpp
 *   @brief The mixer library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

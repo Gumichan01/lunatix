@@ -14,7 +14,7 @@
 #define LX_TTF_H_INCLUDED
 
 /**
-*   @file LX_TrueTypeFont.hpp
+*   @file TrueTypeFont.hpp
 *   @brief The True type Font (TTF) library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

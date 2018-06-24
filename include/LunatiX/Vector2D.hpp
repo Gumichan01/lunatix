@@ -14,7 +14,7 @@
 #define LX_VECTOR2D_HPP_INCLUDED
 
 /**
-*   @file LX_Vector2D.hpp
+*   @file Vector2D.hpp
 *   @brief The vector 2D library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

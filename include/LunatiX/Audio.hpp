@@ -14,7 +14,7 @@
 #define LX_AUDIO_HPP_INCLUDED
 
 /**
-*   @file LX_Audio.hpp
+*   @file Audio.hpp
 *   @brief The interface of the audio module
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

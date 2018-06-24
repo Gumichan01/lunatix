@@ -14,7 +14,7 @@
 #define LX_THREAD_HPP_INCLUDED
 
 /**
-*   @file LX_Thread.hpp
+*   @file Thread.hpp
 *   @brief The multithreading API
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

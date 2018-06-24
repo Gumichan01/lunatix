@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_Hitbox.cpp
+*   @file Hitbox.cpp
 *   @brief The Hitbox operators implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

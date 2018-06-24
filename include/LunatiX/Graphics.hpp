@@ -14,7 +14,7 @@
 #define LX_GRAPHICS_HPP_INCLUDED
 
 /**
-*   @file LX_Graphics.hpp
+*   @file Graphics.hpp
 *   @brief The interface of LX_Graphics
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

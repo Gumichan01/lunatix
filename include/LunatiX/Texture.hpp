@@ -14,7 +14,7 @@
 #define LX_IMAGE_H_INCLUDED
 
 /**
-*   @file LX_Texture.hpp
+*   @file Texture.hpp
 *   @brief The Texture header file
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

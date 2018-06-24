@@ -15,7 +15,7 @@
 
 
 /**
-*   @file LX_OpenGL.hpp
+*   @file OpenGL.hpp
 *   @brief The LunatiX/OpenGL interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

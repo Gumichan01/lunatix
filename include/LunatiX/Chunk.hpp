@@ -14,7 +14,7 @@
 #define LX_CHUNK_H_INCLUDED
 
 /**
-*   @file LX_Chunk.hpp
+*   @file Chunk.hpp
 *   @brief The sample header
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

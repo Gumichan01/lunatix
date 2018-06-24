@@ -14,7 +14,7 @@
 #define LX_FILEBUFFER_HPP_INCLUDED
 
 /**
-*   @file LX_FileBuffer.hpp
+*   @file FileBuffer.hpp
 *   @brief The file buffer
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

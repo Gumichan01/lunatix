@@ -14,7 +14,7 @@
 #define LX_FILESYSTEM_HPP_INCLUDED
 
 /**
-*   @file LX_FileSystem.hpp
+*   @file FileSystem.hpp
 *   @brief The File system
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

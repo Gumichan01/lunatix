@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_Texture.cpp
+*   @file Texture.cpp
 *   @brief The implementation of the image
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

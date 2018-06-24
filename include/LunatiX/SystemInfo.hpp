@@ -14,7 +14,7 @@
 #define LX_SYSTEM_INFO_H_INCLUDED
 
 /**
-*   @file LX_SystemInfo.hpp
+*   @file SystemInfo.hpp
 *   @brief The System information library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

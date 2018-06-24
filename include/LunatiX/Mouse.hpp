@@ -14,7 +14,7 @@
 #define LX_MOUSE_HPP_INCLUDED
 
 /**
-*   @file LX_Mouse.hpp
+*   @file Mouse.hpp
 *   @brief The mouse interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

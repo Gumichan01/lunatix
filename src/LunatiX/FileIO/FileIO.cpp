@@ -10,7 +10,7 @@
 */
 
 /**
-*   @file LX_FileIO.cpp
+*   @file FileIO.cpp
 *   @brief The file handling implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

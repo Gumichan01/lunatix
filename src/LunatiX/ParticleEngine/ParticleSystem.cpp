@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_ParticleSystem.cpp
+*   @file ParticleSystem.cpp
 *   @brief The Particle system implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

@@ -14,7 +14,7 @@
 #define LX_RANDOM_HPP_INCLUDED
 
 /**
-*   @file LX_Random.hpp
+*   @file Random.hpp
 *   @brief The Random Number Generator library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

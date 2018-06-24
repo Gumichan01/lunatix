@@ -14,7 +14,7 @@
 #define LX_SOUND_H_INCLUDED
 
 /**
-*   @file LX_Sound.hpp
+*   @file Sound.hpp
 *   @brief The abstract sound class
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

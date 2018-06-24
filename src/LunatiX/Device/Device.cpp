@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_Device.cpp
+*   @file Device.cpp
 *   @brief The implementation of the device
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

@@ -14,7 +14,7 @@
 #define HPP_INCLUDED
 
 /**
-*   @file LX_Log.hpp
+*   @file Log.hpp
 *   @brief The Log file header
 *   @author Luxon Jean-Pierre(Gumichan01)
 */

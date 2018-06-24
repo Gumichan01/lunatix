@@ -11,7 +11,7 @@
 */
 
 /**
-*   @file LX_Log.cpp
+*   @file Log.cpp
 *   @brief The Log file
 *   @author Luxon Jean-Pierre(Gumichan01)
 */

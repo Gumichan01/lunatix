@@ -14,7 +14,7 @@
 #define LX_POLYGON_H_INCLUDED
 
 /**
-*   @file LX_Polygon.hpp
+*   @file Polygon.hpp
 *   @brief The polygon file
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

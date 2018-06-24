@@ -14,7 +14,7 @@
 #define LX_WINDOW_H_INCLUDED
 
 /**
-*   @file LX_Window.hpp
+*   @file Window.hpp
 *   @brief The window library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

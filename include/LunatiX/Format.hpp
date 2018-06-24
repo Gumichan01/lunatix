@@ -14,7 +14,7 @@
 #define LX_FORMAT_H_INCLUDED
 
 /**
-*   @file LX_Format.hpp
+*   @file Format.hpp
 *   @brief The Format
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

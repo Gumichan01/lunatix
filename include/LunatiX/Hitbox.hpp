@@ -14,7 +14,7 @@
 #define HITBOX_H_INCLUDED
 
 /**
-*   @file LX_Hitbox.hpp
+*   @file Hitbox.hpp
 *   @brief The hitbox library
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13
