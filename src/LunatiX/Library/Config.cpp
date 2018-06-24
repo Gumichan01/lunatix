@@ -18,9 +18,9 @@
 *
 */
 
-#include <LunatiX/Config.hpp>
-#include <LunatiX/Error.hpp>
-#include <LunatiX/Log.hpp>
+#include <Lunatix/Config.hpp>
+#include <Lunatix/Error.hpp>
+#include <Lunatix/Log.hpp>
 
 #include <fstream>
 #include <regex>

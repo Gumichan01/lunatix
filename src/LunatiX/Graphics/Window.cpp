@@ -17,14 +17,14 @@
 *
 */
 
-#include <LunatiX/Window.hpp>
-#include <LunatiX/Texture.hpp>
-#include <LunatiX/Config.hpp>
-#include <LunatiX/Error.hpp>
-#include <LunatiX/ImgRect.hpp>
-#include <LunatiX/Hitbox.hpp>
+#include <Lunatix/Window.hpp>
+#include <Lunatix/Texture.hpp>
+#include <Lunatix/Config.hpp>
+#include <Lunatix/Error.hpp>
+#include <Lunatix/ImgRect.hpp>
+#include <Lunatix/Hitbox.hpp>
 /// todo v0.14.0 remove it (impl)
-#include <LunatiX/Vector2D.hpp>
+#include <Lunatix/Vector2D.hpp>
 /// end
 
 #include <SDL2/SDL_image.h>

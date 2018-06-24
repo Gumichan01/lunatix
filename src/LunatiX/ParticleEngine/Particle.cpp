@@ -16,12 +16,12 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Particle.hpp>
-#include <LunatiX/Vector2D.hpp>
-#include <LunatiX/Physics.hpp>
-#include <LunatiX/Hitbox.hpp>
-#include <LunatiX/Random.hpp>
-#include <LunatiX/Texture.hpp>
+#include <Lunatix/Particle.hpp>
+#include <Lunatix/Vector2D.hpp>
+#include <Lunatix/Physics.hpp>
+#include <Lunatix/Hitbox.hpp>
+#include <Lunatix/Random.hpp>
+#include <Lunatix/Texture.hpp>
 
 using namespace LX_Random;
 using namespace LX_Physics;

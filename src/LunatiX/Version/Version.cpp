@@ -18,8 +18,8 @@
 *
 */
 
-#include <LunatiX/Version.hpp>
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/Version.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 
 #include <SDL2/SDL_version.h>
 #include <SDL2/SDL_image.h>

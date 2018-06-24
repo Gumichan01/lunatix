@@ -18,8 +18,8 @@
 *
 */
 
-#include <LunatiX/Device.hpp>
-#include <LunatiX/Error.hpp>
+#include <Lunatix/Device.hpp>
+#include <Lunatix/Error.hpp>
 
 #include <SDL2/SDL_mouse.h>
 #include <sstream>

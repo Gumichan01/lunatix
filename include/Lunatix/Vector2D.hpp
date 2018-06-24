@@ -20,7 +20,7 @@
 *   @version 0.13
 */
 
-#include <LunatiX/utils/float.hpp>
+#include <Lunatix/utils/float.hpp>
 
 namespace LX_Physics
 {

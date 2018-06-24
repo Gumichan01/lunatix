@@ -16,7 +16,7 @@
 *   @author Luxon Jean-Pierre(Gumichan01)
 */
 
-#include <LunatiX/Log.hpp>
+#include <Lunatix/Log.hpp>
 #include <sstream>
 #include <ctime>
 

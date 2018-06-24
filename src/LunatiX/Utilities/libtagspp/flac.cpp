@@ -1,5 +1,5 @@
 /* https://xiph.org/flac/format.html */
-#include <LunatiX/utils/libtagspp/tagspriv.h>
+#include <Lunatix/utils/libtagspp/tagspriv.h>
 
 #define beu3(d)   ((d)[0]<<16 | (d)[1]<<8  | (d)[2]<<0)
 #define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)

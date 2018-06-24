@@ -2,7 +2,7 @@
  * http://en.wikipedia.org/wiki/ID3
  * Space-padded strings are mentioned there. This is wrong and is a lie.
  */
-#include <LunatiX/utils/libtagspp/tagspriv.h>
+#include <Lunatix/utils/libtagspp/tagspriv.h>
 
 enum
 {

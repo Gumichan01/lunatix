@@ -18,10 +18,10 @@
 *
 */
 
-#include <LunatiX/Library.hpp>
-#include <LunatiX/Mixer.hpp>
-#include <LunatiX/WindowManager.hpp>
-#include <LunatiX/OpenGL.hpp>
+#include <Lunatix/Library.hpp>
+#include <Lunatix/Mixer.hpp>
+#include <Lunatix/WindowManager.hpp>
+#include <Lunatix/OpenGL.hpp>
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>

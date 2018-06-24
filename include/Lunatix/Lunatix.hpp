@@ -35,54 +35,54 @@
 #pragma message "Window: Some functions are deprecated, please check the documentation"
 
 // Initialization
-#include <LunatiX/Library.hpp>
-#include <LunatiX/Version.hpp>
+#include <Lunatix/Library.hpp>
+#include <Lunatix/Version.hpp>
 
 // Graphics
-#include <LunatiX/Graphics.hpp>
+#include <Lunatix/Graphics.hpp>
 
 // Audio
-#include <LunatiX/Audio.hpp>
+#include <Lunatix/Audio.hpp>
 
 //Event
-#include <LunatiX/Event.hpp>
+#include <Lunatix/Event.hpp>
 
 // Game controller
-#include <LunatiX/Device.hpp>
-#include <LunatiX/Mouse.hpp>
-#include <LunatiX/Gamepad.hpp>
-#include <LunatiX/Haptic.hpp>
+#include <Lunatix/Device.hpp>
+#include <Lunatix/Mouse.hpp>
+#include <Lunatix/Gamepad.hpp>
+#include <Lunatix/Haptic.hpp>
 
 // Physics
-#include <LunatiX/Particle.hpp>
-#include <LunatiX/ParticleSystem.hpp>
-#include <LunatiX/Physics.hpp>
-#include <LunatiX/Hitbox.hpp>
-#include <LunatiX/Polygon.hpp>
+#include <Lunatix/Particle.hpp>
+#include <Lunatix/ParticleSystem.hpp>
+#include <Lunatix/Physics.hpp>
+#include <Lunatix/Hitbox.hpp>
+#include <Lunatix/Polygon.hpp>
 
 // System
-#include <LunatiX/FileIO.hpp>
-#include <LunatiX/FileBuffer.hpp>
-#include <LunatiX/Log.hpp>
-#include <LunatiX/MessageBox.hpp>
-#include <LunatiX/Random.hpp>
-#include <LunatiX/SystemInfo.hpp>
-#include <LunatiX/FileSystem.hpp>
+#include <Lunatix/FileIO.hpp>
+#include <Lunatix/FileBuffer.hpp>
+#include <Lunatix/Log.hpp>
+#include <Lunatix/MessageBox.hpp>
+#include <Lunatix/Random.hpp>
+#include <Lunatix/SystemInfo.hpp>
+#include <Lunatix/FileSystem.hpp>
 
 // Multithread
-#include <LunatiX/Thread.hpp>
+#include <Lunatix/Thread.hpp>
 
 // Others
-#include <LunatiX/Timer.hpp>
-#include <LunatiX/Text.hpp>
+#include <Lunatix/Timer.hpp>
+#include <Lunatix/Text.hpp>
 
 // Utils
 /**
 *   @defgroup Utils Utilities
 *   @brief Miscellaneous namespaces/classes/functions
 */
-#include <LunatiX/utils/libtagspp/libtagspp.hpp>
-#include <LunatiX/utils/utf8_string.hpp>
-#include <LunatiX/utils/float.hpp>
+#include <Lunatix/utils/libtagspp/libtagspp.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
+#include <Lunatix/utils/float.hpp>
 
 #endif // LUNATIX_H_INCLUDED

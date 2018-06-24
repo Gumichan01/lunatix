@@ -13,13 +13,13 @@
 
 /**
 *   @file OpenGL.cpp
-*   @brief The implementation of the LunatiX/OpenGL interface
+*   @brief The implementation of the Lunatix/OpenGL interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13
 *
 */
 
-#include <LunatiX/OpenGL.hpp>
+#include <Lunatix/OpenGL.hpp>
 #include <SDL2/SDL_render.h>
 
 namespace LX_Graphics

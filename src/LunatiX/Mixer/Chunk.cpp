@@ -18,9 +18,9 @@
 *
 */
 
-#include <LunatiX/Chunk.hpp>
-#include <LunatiX/FileBuffer.hpp>
-#include <LunatiX/Error.hpp>
+#include <Lunatix/Chunk.hpp>
+#include <Lunatix/FileBuffer.hpp>
+#include <Lunatix/Error.hpp>
 
 #include <SDL2/SDL_mixer.h>
 

@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#include <LunatiX/ImgRect.hpp>
-#include <LunatiX/Hitbox.hpp>
+#include <Lunatix/ImgRect.hpp>
+#include <Lunatix/Hitbox.hpp>
 
 
 namespace LX_Graphics

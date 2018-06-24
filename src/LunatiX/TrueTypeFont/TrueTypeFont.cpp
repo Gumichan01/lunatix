@@ -18,11 +18,11 @@
 *
 */
 
-#include <LunatiX/TrueTypeFont.hpp>
-#include <LunatiX/FileBuffer.hpp>
-#include <LunatiX/FileSystem.hpp>
-#include <LunatiX/Window.hpp>
-#include <LunatiX/Config.hpp>
+#include <Lunatix/TrueTypeFont.hpp>
+#include <Lunatix/FileBuffer.hpp>
+#include <Lunatix/FileSystem.hpp>
+#include <Lunatix/Window.hpp>
+#include <Lunatix/Config.hpp>
 
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_render.h>

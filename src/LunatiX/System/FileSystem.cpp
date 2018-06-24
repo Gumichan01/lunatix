@@ -10,7 +10,7 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#include <LunatiX/FileSystem.hpp>
+#include <Lunatix/FileSystem.hpp>
 #include <SDL2/SDL_filesystem.h>
 
 

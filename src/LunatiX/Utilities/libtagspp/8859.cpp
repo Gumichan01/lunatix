@@ -1,5 +1,5 @@
 /* http://en.wikipedia.org/wiki/ISO/IEC_8859-1 */
-#include <LunatiX/utils/libtagspp/tagspriv.h>
+#include <Lunatix/utils/libtagspp/tagspriv.h>
 
 int
 iso88591toutf8( uchar * o, int osz, const uchar * s, int sz )

@@ -18,11 +18,11 @@
 *
 */
 
-#include <LunatiX/Physics.hpp>
-#include <LunatiX/Polygon.hpp>
-#include <LunatiX/Vector2D.hpp>
-#include <LunatiX/Hitbox.hpp>
-#include <LunatiX/Random.hpp>
+#include <Lunatix/Physics.hpp>
+#include <Lunatix/Polygon.hpp>
+#include <Lunatix/Vector2D.hpp>
+#include <Lunatix/Hitbox.hpp>
+#include <Lunatix/Random.hpp>
 #include <stdexcept>
 
 

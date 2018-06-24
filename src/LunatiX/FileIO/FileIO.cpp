@@ -16,8 +16,8 @@
 *   @version 0.13
 */
 
-#include <LunatiX/FileIO.hpp>
-#include <LunatiX/Error.hpp>
+#include <Lunatix/FileIO.hpp>
+#include <Lunatix/Error.hpp>
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_rwops.h>

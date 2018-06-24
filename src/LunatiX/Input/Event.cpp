@@ -18,7 +18,7 @@
 *
 */
 
-#include <LunatiX/Event.hpp>
+#include <Lunatix/Event.hpp>
 #include <SDL2/SDL_events.h>
 
 namespace

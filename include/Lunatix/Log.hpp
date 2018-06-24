@@ -20,7 +20,7 @@
 */
 
 #include <SDL2/SDL_log.h>
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 
 /**
 *   @ingroup System

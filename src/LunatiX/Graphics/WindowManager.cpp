@@ -18,8 +18,8 @@
 *
 */
 
-#include <LunatiX/WindowManager.hpp>
-#include <LunatiX/Window.hpp>
+#include <Lunatix/WindowManager.hpp>
+#include <Lunatix/Window.hpp>
 
 #include <unordered_map>
 

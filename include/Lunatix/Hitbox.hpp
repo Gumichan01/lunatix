@@ -20,7 +20,7 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Vector2D.hpp>
+#include <Lunatix/Vector2D.hpp>
 
 namespace LX_Graphics
 {

@@ -20,7 +20,7 @@
 *   @version 0.13
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 #include <SDL2/SDL_keycode.h>
 
 union SDL_Event;

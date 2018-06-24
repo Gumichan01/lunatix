@@ -19,10 +19,10 @@
 *
 */
 
-#include <LunatiX/Mixer.hpp>
-#include <LunatiX/Music.hpp>
-#include <LunatiX/Chunk.hpp>
-#include <LunatiX/FileBuffer.hpp>
+#include <Lunatix/Mixer.hpp>
+#include <Lunatix/Music.hpp>
+#include <Lunatix/Chunk.hpp>
+#include <Lunatix/FileBuffer.hpp>
 #include <SDL2/SDL_mixer.h>
 
 #include <functional>

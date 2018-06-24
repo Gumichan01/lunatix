@@ -17,11 +17,11 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Gamepad.hpp>
-#include <LunatiX/Haptic.hpp>
-#include <LunatiX/Device.hpp>
-#include <LunatiX/Error.hpp>
-#include <LunatiX/Log.hpp>
+#include <Lunatix/Gamepad.hpp>
+#include <Lunatix/Haptic.hpp>
+#include <Lunatix/Device.hpp>
+#include <Lunatix/Error.hpp>
+#include <Lunatix/Log.hpp>
 
 #include <SDL2/SDL_gamecontroller.h>
 #include <SDL2/SDL_haptic.h>

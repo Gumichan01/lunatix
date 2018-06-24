@@ -34,7 +34,7 @@
 *   It handles operations on bodies (collision, movement, ...)
 */
 
-#include <LunatiX/utils/float.hpp>
+#include <Lunatix/utils/float.hpp>
 
 namespace LX_Physics
 {

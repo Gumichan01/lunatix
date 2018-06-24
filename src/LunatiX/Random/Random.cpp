@@ -11,7 +11,7 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#include <LunatiX/Random.hpp>
+#include <Lunatix/Random.hpp>
 #include <cstdlib>
 #include <ctime>
 

@@ -18,7 +18,7 @@
 *
 */
 
-#include <LunatiX/Sound.hpp>
+#include <Lunatix/Sound.hpp>
 
 namespace LX_Mixer
 {

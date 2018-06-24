@@ -20,8 +20,8 @@
 *   @version 0.13
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
-#include <LunatiX/Hitbox.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
+#include <Lunatix/Hitbox.hpp>
 #include <memory>
 
 namespace LX_Physics
@@ -159,6 +159,6 @@ public:
 
 }
 
-#include <LunatiX/Polygon.tpp>
+#include <Lunatix/Polygon.tpp>
 
 #endif

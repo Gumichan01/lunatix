@@ -17,10 +17,10 @@
 *   @version 0.13
 */
 
-#include <LunatiX/FileBuffer.hpp>
-#include <LunatiX/FileIO.hpp>
-#include <LunatiX/Texture.hpp>
-#include <LunatiX/Chunk.hpp>
+#include <Lunatix/FileBuffer.hpp>
+#include <Lunatix/FileIO.hpp>
+#include <Lunatix/Texture.hpp>
+#include <Lunatix/Chunk.hpp>
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>

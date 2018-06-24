@@ -2,7 +2,7 @@
  * https://xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-810005
  * https://wiki.xiph.org/VorbisComment
  */
-#include <LunatiX/utils/libtagspp/tagspriv.h>
+#include <Lunatix/utils/libtagspp/tagspriv.h>
 
 #define leuint(d) (uint)(((uchar*)(d))[3]<<24 | ((uchar*)(d))[2]<<16 | ((uchar*)(d))[1]<<8 | ((uchar*)(d))[0]<<0)
 

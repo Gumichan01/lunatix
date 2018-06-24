@@ -17,8 +17,8 @@
 *   @version 0.13
 */
 
-#include <LunatiX/SystemInfo.hpp>
-#include <LunatiX/Error.hpp>
+#include <Lunatix/SystemInfo.hpp>
+#include <Lunatix/Error.hpp>
 
 #include <SDL2/SDL_cpuinfo.h>
 #include <SDL2/SDL_video.h>

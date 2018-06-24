@@ -20,10 +20,10 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Colour.hpp>
-#include <LunatiX/Format.hpp>
-#include <LunatiX/ImgRect.hpp>
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/Colour.hpp>
+#include <Lunatix/Format.hpp>
+#include <Lunatix/ImgRect.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 
 #include <utility>
 #include <exception>

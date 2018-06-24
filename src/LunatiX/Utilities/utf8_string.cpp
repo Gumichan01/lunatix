@@ -10,7 +10,7 @@
 *
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 
 #include <unordered_map>
 #include <utility>

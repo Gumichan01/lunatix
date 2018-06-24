@@ -17,9 +17,9 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Polygon.hpp>
-#include <LunatiX/Physics.hpp>
-#include <LunatiX/Vector2D.hpp>
+#include <Lunatix/Polygon.hpp>
+#include <Lunatix/Physics.hpp>
+#include <Lunatix/Vector2D.hpp>
 #include <vector>
 
 using namespace std;

@@ -1,5 +1,5 @@
 /* Horror stories: http://en.wikipedia.org/wiki/UTF-16 */
-#include <LunatiX/utils/libtagspp/tagspriv.h>
+#include <Lunatix/utils/libtagspp/tagspriv.h>
 
 #define rchr(s) (be ? ((s)[0]<<8 | (s)[1]) : ((s)[1]<<8 | (s)[0]))
 

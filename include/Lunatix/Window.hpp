@@ -21,8 +21,8 @@
 *
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
-#include <LunatiX/Colour.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
+#include <Lunatix/Colour.hpp>
 
 #include <memory>
 #include <vector>

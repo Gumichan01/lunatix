@@ -17,11 +17,11 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Music.hpp>
-#include <LunatiX/Error.hpp>
-#include <LunatiX/Texture.hpp>
-#include <LunatiX/FileBuffer.hpp>
-#include <LunatiX/utils/libtagspp/libtagspp.hpp>
+#include <Lunatix/Music.hpp>
+#include <Lunatix/Error.hpp>
+#include <Lunatix/Texture.hpp>
+#include <Lunatix/FileBuffer.hpp>
+#include <Lunatix/utils/libtagspp/libtagspp.hpp>
 #include <SDL2/SDL_mixer.h>
 
 

@@ -16,12 +16,12 @@
 
 /**
 *   @file OpenGL.hpp
-*   @brief The LunatiX/OpenGL interface
+*   @brief The Lunatix/OpenGL interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 #include <SDL2/SDL_video.h>
 
 /**
@@ -254,6 +254,6 @@ bool setAttribute( LX_GLattr attr, int value ) noexcept;
 
 }   // LX_Graphics
 
-#include <LunatiX/OpenGL.tpp>
+#include <Lunatix/OpenGL.tpp>
 
 #endif // LX_OPENGL_H_INCLUDED

@@ -18,8 +18,8 @@
 *
 */
 
-#include <LunatiX/Mouse.hpp>
-#include <LunatiX/Texture.hpp>
+#include <Lunatix/Mouse.hpp>
+#include <Lunatix/Texture.hpp>
 
 #include <SDL2/SDL_mouse.h>
 

@@ -18,7 +18,7 @@
 *
 */
 
-#include <LunatiX/Haptic.hpp>
+#include <Lunatix/Haptic.hpp>
 #include <SDL2/SDL_gamecontroller.h>
 #include <SDL2/SDL_haptic.h>
 

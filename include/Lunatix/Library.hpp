@@ -20,8 +20,8 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Error.hpp>
-#include <LunatiX/Config.hpp>
+#include <Lunatix/Error.hpp>
+#include <Lunatix/Config.hpp>
 #include <SDL2/SDL.h>
 
 

@@ -17,10 +17,10 @@
 *   @version 0.13
 */
 
-#include <LunatiX/ParticleSystem.hpp>
-#include <LunatiX/Particle.hpp>
-#include <LunatiX/Log.hpp>
-#include <LunatiX/Error.hpp>
+#include <Lunatix/ParticleSystem.hpp>
+#include <Lunatix/Particle.hpp>
+#include <Lunatix/Log.hpp>
+#include <Lunatix/Error.hpp>
 
 #include <exception>
 #include <array>

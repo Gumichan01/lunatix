@@ -10,7 +10,7 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#include <LunatiX/Thread.hpp>
+#include <Lunatix/Thread.hpp>
 #include <system_error>
 
 

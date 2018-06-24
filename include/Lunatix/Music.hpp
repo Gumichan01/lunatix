@@ -20,7 +20,7 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Sound.hpp>
+#include <Lunatix/Sound.hpp>
 #include <memory>
 
 

@@ -17,7 +17,7 @@
 *   @version 0.13
 */
 
-#include <LunatiX/MessageBox.hpp>
+#include <Lunatix/MessageBox.hpp>
 #include <SDL2/SDL_messagebox.h>
 
 

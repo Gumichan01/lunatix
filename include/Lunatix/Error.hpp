@@ -21,7 +21,7 @@
 *
 */
 
-#include <LunatiX/utils/utf8_string.hpp>
+#include <Lunatix/utils/utf8_string.hpp>
 #include <SDL2/SDL_error.h>
 
 

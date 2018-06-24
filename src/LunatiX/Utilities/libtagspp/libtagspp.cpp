@@ -1,6 +1,6 @@
 
-#include <LunatiX/utils/libtagspp/libtagspp.hpp>
-#include <LunatiX/utils/libtagspp/tags.h>
+#include <Lunatix/utils/libtagspp/libtagspp.hpp>
+#include <Lunatix/utils/libtagspp/tags.h>
 
 #include <sstream>
 #include <cstdio>

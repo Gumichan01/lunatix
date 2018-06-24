@@ -19,7 +19,7 @@
 *
 */
 
-#include <LunatiX/Vector2D.hpp>
+#include <Lunatix/Vector2D.hpp>
 
 using namespace FloatBox;
 

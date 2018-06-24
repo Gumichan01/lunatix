@@ -20,7 +20,7 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Hitbox.hpp>
+#include <Lunatix/Hitbox.hpp>
 
 namespace LX_Physics
 {

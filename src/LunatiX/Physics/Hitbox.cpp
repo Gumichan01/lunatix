@@ -17,8 +17,8 @@
 *   @version 0.13
 */
 
-#include <LunatiX/Hitbox.hpp>
-#include <LunatiX/ImgRect.hpp>
+#include <Lunatix/Hitbox.hpp>
+#include <Lunatix/ImgRect.hpp>
 
 using namespace FloatBox;
 

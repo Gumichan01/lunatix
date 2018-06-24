@@ -18,10 +18,10 @@
 *
 */
 
-#include <LunatiX/Text.hpp>
-#include <LunatiX/Event.hpp>
-#include <LunatiX/Timer.hpp>
-#include <LunatiX/Log.hpp>
+#include <Lunatix/Text.hpp>
+#include <Lunatix/Event.hpp>
+#include <Lunatix/Timer.hpp>
+#include <Lunatix/Log.hpp>
 
 #include <SDL2/SDL_clipboard.h>
 #include <SDL2/SDL_keyboard.h>
