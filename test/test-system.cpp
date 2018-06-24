@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix.hpp>
+#include <Lunatix/Lunatix.hpp>
 
 using namespace std;
 using namespace LX_SystemInfo;

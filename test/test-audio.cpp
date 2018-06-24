@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix.hpp>
+#include <Lunatix/Lunatix.hpp>
 #include <SDL2/SDL_mixer.h>
 
 #include <iostream>

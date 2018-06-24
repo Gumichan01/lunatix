@@ -1,9 +1,9 @@
 
-#include <LunatiX/Library.hpp>
-#include <LunatiX/Thread.hpp>
-#include <LunatiX/Timer.hpp>
-#include <LunatiX/Random.hpp>
-#include <LunatiX/Log.hpp>
+#include <Lunatix/Library.hpp>
+#include <Lunatix/Thread.hpp>
+#include <Lunatix/Timer.hpp>
+#include <Lunatix/Random.hpp>
+#include <Lunatix/Log.hpp>
 #include <system_error>
 #include <functional>
 #include <sstream>

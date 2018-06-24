@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix.hpp>
+#include <Lunatix/Lunatix.hpp>
 #include <cstring>
 
 using namespace LX_Event;

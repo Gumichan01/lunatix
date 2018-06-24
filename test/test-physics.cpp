@@ -1,6 +1,6 @@
 
 
-#include <LunatiX/Lunatix.hpp>
+#include <Lunatix/Lunatix.hpp>
 #include <cmath>
 #include <sstream>
 #include <stdexcept>

@@ -1,5 +1,5 @@
 
-#include <LunatiX/Lunatix.hpp>
+#include <Lunatix/Lunatix.hpp>
 
 const int N = 8;
 
