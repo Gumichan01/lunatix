@@ -159,6 +159,6 @@ public:
 
 }
 
-#include <LunatiX/LX_Polygon.tpp>
+#include <LunatiX/Polygon.tpp>
 
 #endif

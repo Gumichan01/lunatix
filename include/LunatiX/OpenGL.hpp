@@ -254,6 +254,6 @@ bool setAttribute( LX_GLattr attr, int value ) noexcept;
 
 }   // LX_Graphics
 
-#include <LunatiX/LX_OpenGL.tpp>
+#include <LunatiX/OpenGL.tpp>
 
 #endif // LX_OPENGL_H_INCLUDED

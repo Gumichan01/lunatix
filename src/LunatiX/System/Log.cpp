@@ -65,7 +65,7 @@ std::string getDate() noexcept
     {
         // This error must not happen
         SDL_LogCritical( SDL_LOG_CATEGORY_ERROR,
-                         "Internal error - Cannot get the time: %s" );
+                         "Internal error - Cannot get the time" );
         return std::string();
     }
 

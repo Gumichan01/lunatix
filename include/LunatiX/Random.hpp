@@ -136,7 +136,7 @@ inline int crand100() noexcept
     return LX_Random::crand() % 100;
 }
 
-#include "LX_Random.tpp"
+#include "Random.tpp"
 
 }
 

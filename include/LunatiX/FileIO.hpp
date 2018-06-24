@@ -366,7 +366,7 @@ LX_AbstractFile& operator <<( LX_AbstractFile& f, const T data ) noexcept;
 template <typename T>
 LX_AbstractFile& operator >>( LX_AbstractFile& f, T& data ) noexcept;
 
-#include "LX_FileIO.tpp"
+#include "FileIO.tpp"
 
 }
 

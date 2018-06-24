@@ -153,7 +153,7 @@ public:
     ~LX_ASyncTask() = default;
 };
 
-#include "LX_Thread.tpp"
+#include "Thread.tpp"
 
 }
 

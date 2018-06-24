@@ -1,6 +1,6 @@
 
-#include <LunatiX/LX_Log.hpp>
-#include <LunatiX/LX_Random.hpp>
+#include <LunatiX/Log.hpp>
+#include <LunatiX/Random.hpp>
 
 void rand_unsigned();
 void rand_float();
