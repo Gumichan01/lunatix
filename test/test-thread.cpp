@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     test_async();
 
     LX_Log::log(" ==== END TEST ==== ");
-    LX_Quit();
+    lx::quit();
     return 0;
 }
 

@@ -15,10 +15,10 @@ void test_mouse(void);
 int main(int argc, char **argv)
 {
     Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     test_gamepad();
     test_haptic();
     test_mouse();
-    LX_Quit();
+    lx::quit();
 
     LX_Log::log(" ==== END Test Device ==== ");
     return EXIT_SUCCESS;

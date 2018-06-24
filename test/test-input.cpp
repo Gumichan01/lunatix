@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     LX_Gamepad g[N];
     LX_GamepadID gid;
 
-    LX_Init();
+    lx::init();
     LX_Log::setDebugMode();
 
     LX_Win::LX_WindowInfo winfo;
@@ -173,7 +173,7 @@ int main(int argc, char **argv)
         g[k].close();
     }
 
-    LX_Quit();
+    lx::quit();
     return 0;
 }
 

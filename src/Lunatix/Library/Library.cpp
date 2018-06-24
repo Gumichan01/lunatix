@@ -145,7 +145,7 @@ void loadOpenGLSubSystem()
 }
 
 
-bool LX_Init() noexcept
+bool lx::init() noexcept
 {
     if ( !loadMainSystem() )
         return false;
@@ -177,7 +177,7 @@ const std::string getSDLConfig( const std::string& sdlconfig_name ) noexcept
 }
 
 
-void LX_Quit() noexcept
+void lx::quit() noexcept
 {
     Mix_CloseAudio();
     Mix_Quit();

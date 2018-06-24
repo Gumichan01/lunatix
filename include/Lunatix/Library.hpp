@@ -35,20 +35,20 @@
 *   @{
 */
 
+namespace lx
+{
+
 /**
-*   @fn bool LX_Init() noexcept
+*   @fn bool init() noexcept
 *
 *   Load the library according the configuration file
 *
 *   @return TRUE on success, FALSE otherwise
 *
-*   @note 1 — LX_Init initializes the subsystems defined in
+*   @note 1 — This function initializes the subsystems defined in
 *          the configuration file (lunatix.cfg)
-*   @note 2 — This function automatically calls LX_WindowManager::init()
-*          and LX_Configuration::initConfig()
-*
 */
-bool LX_Init() noexcept;
+bool init() noexcept;
 
 /**
 *   @fn bool setSDLConfig(const std::string& sdlconfig_name, const std::string& sdlconfig_value) noexcept
@@ -73,11 +73,13 @@ bool setSDLConfig( const std::string& sdlconfig_name, const std::string& sdlconf
 const std::string getSDLConfig( const std::string& sdlconfig_name ) noexcept;
 
 /**
-*   @fn void LX_Quit() noexcept
+*   @fn void quit() noexcept
 *   Shut down the library
 *   @note This function automatically calls LX_WindowManager::destroy()
 */
-void LX_Quit() noexcept;
+void quit() noexcept;
+
+}
 
 /** @} */
 

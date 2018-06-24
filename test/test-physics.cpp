@@ -45,10 +45,10 @@ void displayPoly(LX_Polygon& poly);
 
 int main(int argc, char **argv)
 {
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
     test_VectorLambda();
     test_conversion();
 
-    LX_Quit();
+    lx::quit();
     LX_Log::log(" ==== END Physics ==== \n");
     return EXIT_SUCCESS;
 }

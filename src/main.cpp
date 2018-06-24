@@ -18,7 +18,7 @@ int main( int argc, char ** argv )
     UNUSED( argc );
     UNUSED( argv );
 
-    if ( !LX_Init() )
+    if ( !lx::init() )
     {
         LX_Log::log( "Cannot load the library: %s", LX_getError() );
         return -1;
@@ -58,6 +58,6 @@ int main( int argc, char ** argv )
     }
 
     LX_VersionInfo::info();
-    LX_Quit();
+    lx::quit();
     return 0;
 }

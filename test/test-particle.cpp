@@ -119,10 +119,10 @@ int main(int argc, char **argv)
     Dot *dot;
     Uint32 begin_time;
 
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
     delete blue;
     delete green;
     delete red;
-    LX_Quit();
+    lx::quit();
 
     LX_Log::log(" ==== END Particle ==== \n");
     return EXIT_SUCCESS;

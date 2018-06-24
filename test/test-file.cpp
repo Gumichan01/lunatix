@@ -35,10 +35,10 @@ string strbin("./bin_tmpFile");
 
 int main(int argc, char **argv)
 {
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     remove(strbin.c_str());
     LX_Log::log(" ==== End File ==== ");
 
-    LX_Init();
+    lx::init();
     return EXIT_SUCCESS;
 }
 

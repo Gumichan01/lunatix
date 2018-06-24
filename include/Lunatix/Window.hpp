@@ -169,7 +169,7 @@ struct LX_Window_;
 *   @brief The window
 *
 *   @warning The LX_Window class must be defined only after
-*           the initialization of the library (calling LX_Init())
+*           the initialization of the library (calling lx::init())
 *   @warning A LX_WindowException may be occured if the window creation fails
 *
 */

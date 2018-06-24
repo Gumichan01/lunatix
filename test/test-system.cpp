@@ -7,7 +7,7 @@ using namespace LX_SystemInfo;
 
 int main(int argc, char **argv)
 {
-    LX_Init();
+    lx::init();
     LX_Log::setDebugMode();
 
     LX_Log::log(" ==== Test System ==== \n");
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     }
 
     LX_Log::log(" ==== End System ==== ");
-    LX_Quit();
+    lx::quit();
 
     return EXIT_SUCCESS;
 }

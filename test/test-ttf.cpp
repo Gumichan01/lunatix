@@ -23,10 +23,10 @@ const char * fname = "font/AozoraMinchoMedium.ttf";
 
 int main(int argc, char **argv)
 {
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     test_BlendedText();
     LX_Log::log("==== END Test ====");
 
-    LX_Quit();
+    lx::quit();
     return EXIT_SUCCESS;
 }
 

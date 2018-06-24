@@ -114,7 +114,7 @@ int main(int argc, char** argv)
     LX_Win::LX_initWindowInfo(info);
     LX_Win::LX_loadWindowConfig(info);
 
-    LX_Init();
+    lx::init();
     LX_Log::setDebugMode(true);
     LX_Log::log(" ==== TEST the text input ==== ");
 
@@ -140,6 +140,6 @@ int main(int argc, char** argv)
     }
 
     LX_Log::log(" ==== END TEST ==== \n");
-    LX_Quit();
+    lx::quit();
     return EXIT_SUCCESS;
 }

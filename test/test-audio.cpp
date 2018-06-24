@@ -18,10 +18,10 @@ void test_info(const std::string& s);
 
 int main(int argc, char **argv)
 {
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     test_volume2();
     LX_Log::log(" ==== End Audio ==== ");
 
-    LX_Quit();
+    lx::quit();
 
     return EXIT_SUCCESS;
 }

@@ -28,10 +28,10 @@ int main(int argc, char **argv)
 {
     LX_Win::LX_Window *w = nullptr;
 
-    bool err = LX_Init();
+    bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - LX_Init() failed");
+        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
     else
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     test_viewport(w);
     delete win;
 
-    LX_Quit();
+    lx::quit();
     LX_Log::log(" ==== END Window ==== ");
     return EXIT_SUCCESS;
 }
