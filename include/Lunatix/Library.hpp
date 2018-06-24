@@ -31,12 +31,16 @@
 */
 
 /**
+*   @namespace lx
+*   @brief the global namespace
+*/
+namespace lx
+{
+
+/**
 *   @addtogroup Config
 *   @{
 */
-
-namespace lx
-{
 
 /**
 *   @fn bool init() noexcept
@@ -79,8 +83,8 @@ const std::string getSDLConfig( const std::string& sdlconfig_name ) noexcept;
 */
 void quit() noexcept;
 
-}
-
 /** @} */
+
+}
 
 #endif // LX_LIBRARY_H_INCLUDED

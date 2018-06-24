@@ -37,7 +37,7 @@ const int LX_MIX_AUDIO_FREQUENCY = 44100;   /**< The default audio frequency    
 const int LX_MIX_STEREO_SOUND = 2;          /**< The stereo variable for the mix namespace  */
 const int LX_MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mix namespace */
 
-bool LX_Mixer_Init() noexcept
+bool initAudio() noexcept
 {
     if ( Mix_Init( MIX_INIT_OGG | MIX_INIT_FLAC | MIX_INIT_MP3 ) == 0 )
         return false;
@@ -117,7 +117,7 @@ bool loadAudioSubSystem()
 {
     if ( LX_Configuration::getInstance().getAudioFlag() )
     {
-        if ( !LX_Mixer_Init() )
+        if ( !initAudio() )
         {
             TTF_Quit();
             IMG_Quit();
@@ -165,12 +165,12 @@ bool lx::init() noexcept
 }
 
 
-bool setSDLConfig( const std::string& sdlconfig_name, const std::string& sdlconfig_value ) noexcept
+bool lx::setSDLConfig( const std::string& sdlconfig_name, const std::string& sdlconfig_value ) noexcept
 {
     return SDL_SetHint( sdlconfig_name.c_str(), sdlconfig_value.c_str() ) == SDL_TRUE;
 }
 
-const std::string getSDLConfig( const std::string& sdlconfig_name ) noexcept
+const std::string lx::getSDLConfig( const std::string& sdlconfig_name ) noexcept
 {
     const char * SDL_CONFIG = SDL_GetHint( sdlconfig_name.c_str() );
     return SDL_CONFIG == nullptr ? "" : std::string( SDL_CONFIG );
