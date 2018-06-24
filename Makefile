@@ -60,23 +60,23 @@ SRC_LIBTAGSPP_PATH=$(SRC_UTILS_PATH)libtagspp/
 
 # Path to the different sources files
 MAIN_FILE=$(SRC_MAIN_PATH)main.cpp
-SRC_FILES=$(SRC_DEVICE_PATH)LX_Device.cpp $(SRC_DEVICE_PATH)LX_Gamepad.cpp \
-$(SRC_DEVICE_PATH)LX_Haptic.cpp $(SRC_DEVICE_PATH)LX_Mouse.cpp \
-$(SRC_FILEIO_PATH)LX_FileIO.cpp $(SRC_FILEIO_PATH)LX_FileBuffer.cpp \
-$(SRC_GRAPHICS_PATH)LX_OpenGL.cpp $(SRC_GRAPHICS_PATH)LX_Window.cpp \
-$(SRC_GRAPHICS_PATH)LX_WindowManager.cpp $(SRC_GRAPHICS_PATH)LX_Texture.cpp \
-$(SRC_GRAPHICS_PATH)LX_ImgRect.cpp $(SRC_INPUT_PATH)LX_Event.cpp \
-$(SRC_LIBRARY_PATH)LX_Config.cpp $(SRC_LIBRARY_PATH)LX_Library.cpp \
-$(SRC_MIXER_PATH)LX_Sound.cpp $(SRC_MIXER_PATH)LX_Chunk.cpp \
-$(SRC_MIXER_PATH)LX_Music.cpp $(SRC_MIXER_PATH)LX_Mixer.cpp \
-$(SRC_MSG_PATH)LX_MessageBox.cpp $(SRC_MULTITHREAD_PATH)LX_Thread.cpp \
-$(SRC_PARTICLE_PATH)LX_Particle.cpp $(SRC_PARTICLE_PATH)LX_ParticleSystem.cpp \
-$(SRC_PHYSICS_PATH)LX_Hitbox.cpp $(SRC_PHYSICS_PATH)LX_Physics.cpp \
-$(SRC_PHYSICS_PATH)LX_Polygon.cpp $(SRC_PHYSICS_PATH)LX_Vector2D.cpp \
-$(SRC_RANDOM_PATH)LX_Random.cpp $(SRC_SYSTEM_PATH)LX_SystemInfo.cpp \
-$(SRC_SYSTEM_PATH)LX_Log.cpp $(SRC_SYSTEM_PATH)LX_FileSystem.cpp \
-$(SRC_TEXT_PATH)LX_Text.cpp $(SRC_TTF_PATH)LX_TrueTypeFont.cpp \
-$(SRC_VERSION_PATH)LX_Version.cpp \
+SRC_FILES=$(SRC_DEVICE_PATH)Device.cpp $(SRC_DEVICE_PATH)Gamepad.cpp \
+$(SRC_DEVICE_PATH)Haptic.cpp $(SRC_DEVICE_PATH)Mouse.cpp \
+$(SRC_FILEIO_PATH)FileIO.cpp $(SRC_FILEIO_PATH)FileBuffer.cpp \
+$(SRC_GRAPHICS_PATH)OpenGL.cpp $(SRC_GRAPHICS_PATH)Window.cpp \
+$(SRC_GRAPHICS_PATH)WindowManager.cpp $(SRC_GRAPHICS_PATH)Texture.cpp \
+$(SRC_GRAPHICS_PATH)ImgRect.cpp $(SRC_INPUT_PATH)Event.cpp \
+$(SRC_LIBRARY_PATH)Config.cpp $(SRC_LIBRARY_PATH)Library.cpp \
+$(SRC_MIXER_PATH)Sound.cpp $(SRC_MIXER_PATH)Chunk.cpp \
+$(SRC_MIXER_PATH)Music.cpp $(SRC_MIXER_PATH)Mixer.cpp \
+$(SRC_MSG_PATH)MessageBox.cpp $(SRC_MULTITHREAD_PATH)Thread.cpp \
+$(SRC_PARTICLE_PATH)Particle.cpp $(SRC_PARTICLE_PATH)ParticleSystem.cpp \
+$(SRC_PHYSICS_PATH)Hitbox.cpp $(SRC_PHYSICS_PATH)Physics.cpp \
+$(SRC_PHYSICS_PATH)Polygon.cpp $(SRC_PHYSICS_PATH)Vector2D.cpp \
+$(SRC_RANDOM_PATH)Random.cpp $(SRC_SYSTEM_PATH)SystemInfo.cpp \
+$(SRC_SYSTEM_PATH)Log.cpp $(SRC_SYSTEM_PATH)FileSystem.cpp \
+$(SRC_TEXT_PATH)Text.cpp $(SRC_TTF_PATH)TrueTypeFont.cpp \
+$(SRC_VERSION_PATH)Version.cpp \
 $(SRC_UTILS_PATH)utf8_string.cpp $(SRC_UTILS_PATH)utf8_iterator.cpp \
 $(SRC_LIBTAGSPP_PATH)8859.cpp $(SRC_LIBTAGSPP_PATH)flac.cpp \
 $(SRC_LIBTAGSPP_PATH)id3genres.cpp $(SRC_LIBTAGSPP_PATH)id3v1.cpp \
@@ -194,38 +194,38 @@ endif
 
 # Object files (library)
 main.o: $(SRC_MAIN_PATH)main.o
-LX_Device.o: $(SRC_DEVICE_PATH)LX_Device.o
-LX_Gamepad.o: $(SRC_DEVICE_PATH)LX_Gamepad.o
-LX_Haptic.o: $(SRC_DEVICE_PATH)LX_Haptic.o
-LX_Mouse.o: $(SRC_DEVICE_PATH)LX_Mouse.o
-LX_FileIO.o: $(SRC_FILEIO_PATH)LX_FileIO.o
-LX_FileBuffer.o: $(SRC_FILEIO_PATH)LX_FileBuffer.o
-LX_OpenGL.o: $(SRC_GRAPHICS_PATH)LX_OpenGL.o
-LX_Window.o: $(SRC_GRAPHICS_PATH)LX_Window.o
-LX_WindowManager.o: $(SRC_GRAPHICS_PATH)LX_WindowManager.o
-LX_Texture.o: $(SRC_GRAPHICS_PATH)LX_Texture.o
-LX_ImgRect.o: $(SRC_GRAPHICS_PATH)LX_ImgRect.o
-LX_Event.o: $(SRC_INPUT_PATH)LX_Event.o
-LX_Config.o: $(SRC_LIBRARY_PATH)LX_Config.o
-LX_Library.o: $(SRC_LIBRARY_PATH)LX_Library.o
-LX_Sound.o: $(SRC_MIXER_PATH)LX_Sound.o
-LX_Chunk.o: $(SRC_MIXER_PATH)LX_Chunk.o
-LX_Music.o: $(SRC_MIXER_PATH)LX_Music.o
-LX_Mixer.o: $(SRC_MIXER_PATH)LX_Mixer.o
-LX_MessageBox.o: $(SRC_MSG_PATH)LX_MessageBox.o
-LX_Thread.o: $(SRC_MULTITHREAD_PATH)LX_Thread.o
-LX_Particle.o: $(SRC_PARTICLE_PATH)LX_Particle.o
-LX_ParticleSystem.o: $(SRC_PARTICLE_PATH)LX_ParticleSystem.o
-LX_Physics.o: $(SRC_PHYSICS_PATH)LX_Physics.o
-LX_Polygon.o: $(SRC_PHYSICS_PATH)LX_Polygon.o
-LX_Hitbox.o: $(SRC_PHYSICS_PATH)LX_Hitbox.o
-LX_Random.o: $(SRC_RANDOM_PATH)LX_Random.o
-LX_SystemInfo.o: $(SRC_SYSTEM_PATH)LX_SystemInfo.o
-LX_FileSystem.o: $(SRC_SYSTEM_PATH)LX_FileSystem.o
-LX_Log.o: $(SRC_SYSTEM_PATH)LX_Log.o
-LX_Text.o: $(SRC_TEXT_PATH)LX_Text.o
-LX_TrueTypeFont.o: $(SRC_TTF_PATH)LX_TrueTypeFont.o
-LX_Version.o: $(SRC_VERSION_PATH)LX_Version.o
+Device.o: $(SRC_DEVICE_PATH)Device.o
+Gamepad.o: $(SRC_DEVICE_PATH)Gamepad.o
+Haptic.o: $(SRC_DEVICE_PATH)Haptic.o
+Mouse.o: $(SRC_DEVICE_PATH)Mouse.o
+FileIO.o: $(SRC_FILEIO_PATH)FileIO.o
+FileBuffer.o: $(SRC_FILEIO_PATH)FileBuffer.o
+OpenGL.o: $(SRC_GRAPHICS_PATH)OpenGL.o
+Window.o: $(SRC_GRAPHICS_PATH)Window.o
+WindowManager.o: $(SRC_GRAPHICS_PATH)WindowManager.o
+Texture.o: $(SRC_GRAPHICS_PATH)Texture.o
+ImgRect.o: $(SRC_GRAPHICS_PATH)ImgRect.o
+Event.o: $(SRC_INPUT_PATH)Event.o
+Config.o: $(SRC_LIBRARY_PATH)Config.o
+Library.o: $(SRC_LIBRARY_PATH)Library.o
+Sound.o: $(SRC_MIXER_PATH)Sound.o
+Chunk.o: $(SRC_MIXER_PATH)Chunk.o
+Music.o: $(SRC_MIXER_PATH)Music.o
+Mixer.o: $(SRC_MIXER_PATH)Mixer.o
+MessageBox.o: $(SRC_MSG_PATH)MessageBox.o
+Thread.o: $(SRC_MULTITHREAD_PATH)Thread.o
+Particle.o: $(SRC_PARTICLE_PATH)Particle.o
+ParticleSystem.o: $(SRC_PARTICLE_PATH)ParticleSystem.o
+Physics.o: $(SRC_PHYSICS_PATH)Physics.o
+Polygon.o: $(SRC_PHYSICS_PATH)Polygon.o
+Hitbox.o: $(SRC_PHYSICS_PATH)Hitbox.o
+Random.o: $(SRC_RANDOM_PATH)Random.o
+SystemInfo.o: $(SRC_SYSTEM_PATH)SystemInfo.o
+FileSystem.o: $(SRC_SYSTEM_PATH)FileSystem.o
+Log.o: $(SRC_SYSTEM_PATH)Log.o
+Text.o: $(SRC_TEXT_PATH)Text.o
+TrueTypeFont.o: $(SRC_TTF_PATH)TrueTypeFont.o
+Version.o: $(SRC_VERSION_PATH)Version.o
 float.o: $(SRC_UTILS_PATH)float.o
 
 
