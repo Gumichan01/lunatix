@@ -30,51 +30,51 @@
 #error "Not supported system"
 #endif
 
-#pragma message "LX_Random: Some functions are deprecated, please check the documentation"
-#pragma message "LX_Texture: Some functions are deprecated, please check the documentation"
-#pragma message "LX_Window: Some functions are deprecated, please check the documentation"
+#pragma message "Random: Some functions are deprecated, please check the documentation"
+#pragma message "Texture: Some functions are deprecated, please check the documentation"
+#pragma message "Window: Some functions are deprecated, please check the documentation"
 
 // Initialization
-#include <LunatiX/LX_Library.hpp>
-#include <LunatiX/LX_Version.hpp>
+#include <LunatiX/Library.hpp>
+#include <LunatiX/Version.hpp>
 
 // Graphics
-#include <LunatiX/LX_Graphics.hpp>
+#include <LunatiX/Graphics.hpp>
 
 // Audio
-#include <LunatiX/LX_Audio.hpp>
+#include <LunatiX/Audio.hpp>
 
 //Event
-#include <LunatiX/LX_Event.hpp>
+#include <LunatiX/Event.hpp>
 
 // Game controller
-#include <LunatiX/LX_Device.hpp>
-#include <LunatiX/LX_Mouse.hpp>
-#include <LunatiX/LX_Gamepad.hpp>
-#include <LunatiX/LX_Haptic.hpp>
+#include <LunatiX/Device.hpp>
+#include <LunatiX/Mouse.hpp>
+#include <LunatiX/Gamepad.hpp>
+#include <LunatiX/Haptic.hpp>
 
 // Physics
-#include <LunatiX/LX_Particle.hpp>
-#include <LunatiX/LX_ParticleSystem.hpp>
-#include <LunatiX/LX_Physics.hpp>
-#include <LunatiX/LX_Hitbox.hpp>
-#include <LunatiX/LX_Polygon.hpp>
+#include <LunatiX/Particle.hpp>
+#include <LunatiX/ParticleSystem.hpp>
+#include <LunatiX/Physics.hpp>
+#include <LunatiX/Hitbox.hpp>
+#include <LunatiX/Polygon.hpp>
 
 // System
-#include <LunatiX/LX_FileIO.hpp>
-#include <LunatiX/LX_FileBuffer.hpp>
-#include <LunatiX/LX_Log.hpp>
-#include <LunatiX/LX_MessageBox.hpp>
-#include <LunatiX/LX_Random.hpp>
-#include <LunatiX/LX_SystemInfo.hpp>
-#include <LunatiX/LX_FileSystem.hpp>
+#include <LunatiX/FileIO.hpp>
+#include <LunatiX/FileBuffer.hpp>
+#include <LunatiX/Log.hpp>
+#include <LunatiX/MessageBox.hpp>
+#include <LunatiX/Random.hpp>
+#include <LunatiX/SystemInfo.hpp>
+#include <LunatiX/FileSystem.hpp>
 
 // Multithread
-#include <LunatiX/LX_Thread.hpp>
+#include <LunatiX/Thread.hpp>
 
 // Others
-#include <LunatiX/LX_Timer.hpp>
-#include <LunatiX/LX_Text.hpp>
+#include <LunatiX/Timer.hpp>
+#include <LunatiX/Text.hpp>
 
 // Utils
 /**

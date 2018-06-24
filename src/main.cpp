@@ -2,12 +2,12 @@
     Main file for the demo
 */
 
-#include <LunatiX/LX_Library.hpp>
-#include <LunatiX/LX_Graphics.hpp>
-#include <LunatiX/LX_Event.hpp>
-#include <LunatiX/LX_Timer.hpp>
-#include <LunatiX/LX_Log.hpp>
-#include <LunatiX/LX_Version.hpp>
+#include <LunatiX/Library.hpp>
+#include <LunatiX/Graphics.hpp>
+#include <LunatiX/Event.hpp>
+#include <LunatiX/Timer.hpp>
+#include <LunatiX/Log.hpp>
+#include <LunatiX/Version.hpp>
 
 #define UNUSED(X) (void)(X)
 
