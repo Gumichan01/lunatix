@@ -128,6 +128,8 @@ ifeq ($(PREFIX),)
 	PREFIX=/usr/local
 endif
 
+PKG_CONFIG_DIR=$(PREFIX)/lib/pkgconfig
+LUNATIX_PKG=lunatix.pc
 
 # Linking flags
 LFLAGS=`pkg-config --libs sdl2 SDL2_image SDL2_mixer SDL2_ttf gl`
@@ -152,15 +154,18 @@ install-hdrs:
 	install -d $(DESTDIR)/$(PREFIX)/include/
 	cp -R ./include/Lunatix/ $(DESTDIR)/$(PREFIX)/include/
 
-install-libs: library
+install-libs:
 	@rm -f $(DEPENDENCY)
+	cp $(LUNATIX_PKG) $(PKG_CONFIG_DIR)/
 	install -d $(DESTDIR)/$(PREFIX)/lib/
 	install -m 644 $(LUNATIX_STATIC_LIB) $(DESTDIR)/$(PREFIX)/lib/
 	install -m 744 $(LUNATIX_SHARED_LIB) $(DESTDIR)/$(PREFIX)/lib/
 
 uninstall:
-	rm -f $(DESTDIR)/$(PREFIX)/lib/libLunatix.a
-	rm -f $(DESTDIR)/$(PREFIX)/lib/libLunatix.so
+	rm -vf $(PKG_CONFIG_DIR)/$(LUNATIX_PKG)
+	rm -vf $(DESTDIR)/$(PREFIX)/lib/libLunatix.a
+	rm -vf $(DESTDIR)/$(PREFIX)/lib/libLunatix.so
+	rm -rvf $(DESTDIR)/$(PREFIX)/include/Lunatix/
 
 $(LUNATIX_STATIC_LIB): $(OBJ_FILES)
 	@echo -n "Generating the static library → "$@"... "

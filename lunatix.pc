@@ -1,0 +1,14 @@
+# LunatiX pkg-config source file
+
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: lunatix
+Description: A free SDL2-based multimedia library
+Version: 0.14.0-nightly
+Requires:
+Conflicts:
+Libs: -L${libdir} -Wl,-rpath,${libdir} -lLunatix
+Cflags: -I${includedir}/Lunatix -D_REENTRANT
