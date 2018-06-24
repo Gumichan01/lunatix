@@ -30,10 +30,10 @@ LUNATIX_EXE=lunatix-demo
 
 # Path to directories
 SRC_PATH=./src/
-LUNATIX_PATH=./src/LunatiX/
+LUNATIX_PATH=./src/Lunatix/
 OPENGL_DIR=/usr/include/
 LIBRARIES_I_DIR=./include/
-LUNATIX_I_PATH=$(LIBRARIES_I_DIR)LunatiX/
+LUNATIX_I_PATH=$(LIBRARIES_I_DIR)Lunatix/
 UTILS_I_PATH=$(LUNATIX_I_PATH)utils/
 LIBTAGSPP_I_PATH=$(UTILS_I_PATH)libtagspp/
 SDL2_I_PATH=`pkg-config --cflags sdl2 SDL2_image SDL2_mixer SDL2_ttf`
@@ -150,7 +150,7 @@ install: install-hdrs install-libs
 
 install-hdrs:
 	install -d $(DESTDIR)/$(PREFIX)/include/
-	cp -R ./include/LunatiX/ $(DESTDIR)/$(PREFIX)/include/
+	cp -R ./include/Lunatix/ $(DESTDIR)/$(PREFIX)/include/
 
 install-libs: library
 	@rm -f $(DEPENDENCY)
