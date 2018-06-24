@@ -53,7 +53,7 @@
 			<Add library="lib/win32/libSDL2_ttf.dll.a" />
 			<Add directory="lib/win32" />
 		</Linker>
-		<Unit filename="include/Lunatix/Audio.hpp" /> 
+		<Unit filename="include/Lunatix/Audio.hpp" />
 		<Unit filename="include/Lunatix/Chunk.hpp" />
 		<Unit filename="include/Lunatix/Colour.hpp" />
 		<Unit filename="include/Lunatix/Config.hpp" />
@@ -72,6 +72,7 @@
 		<Unit filename="include/Lunatix/ImgRect.hpp" />
 		<Unit filename="include/Lunatix/Library.hpp" />
 		<Unit filename="include/Lunatix/Log.hpp" />
+		<Unit filename="include/Lunatix/Lunatix.hpp" />
 		<Unit filename="include/Lunatix/MessageBox.hpp" />
 		<Unit filename="include/Lunatix/Mixer.hpp" />
 		<Unit filename="include/Lunatix/Mouse.hpp" />
@@ -101,7 +102,6 @@
 		<Unit filename="include/Lunatix/Version.hpp" />
 		<Unit filename="include/Lunatix/Window.hpp" />
 		<Unit filename="include/Lunatix/WindowManager.hpp" />
-		<Unit filename="include/Lunatix/Lunatix.hpp" />
 		<Unit filename="include/Lunatix/utils/float.hpp" />
 		<Unit filename="include/Lunatix/utils/libtagspp/libtagspp.hpp" />
 		<Unit filename="include/Lunatix/utils/libtagspp/tags.h" />
