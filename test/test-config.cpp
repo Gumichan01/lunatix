@@ -13,7 +13,7 @@ string boolState(const bool b)
 
 int main(int argc, char **argv)
 {
-    using namespace LX_Config;
+    using namespace lx::Config;
     const LX_Configuration& configuration  = LX_Config::LX_Configuration::getInstance();
     const LX_Configuration& configuration2 = LX_Config::LX_Configuration::getInstance();
 
