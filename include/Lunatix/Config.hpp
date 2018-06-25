@@ -24,10 +24,13 @@
 
 /**
 *   @ingroup Config
-*   @namespace LX_Config
+*   @namespace lx::Config
 *   @brief The configuration
 */
-namespace LX_Config
+namespace lx
+{
+
+namespace Config
 {
 
 /**
@@ -48,7 +51,6 @@ class LX_Configuration final
     void loadFlags_() noexcept;
 
 public:
-
 
     /**
     *   @fn LX_Configuration& getInstance() noexcept
@@ -95,5 +97,8 @@ public:
     bool getOpenGLFlag() const noexcept;
 };
 
-}
+}   // Config
+
+}   // lx
+
 #endif // LX_CONFIG_H_INCLUDED

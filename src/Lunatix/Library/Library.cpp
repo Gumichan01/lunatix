@@ -28,7 +28,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <GL/gl.h>
 
-using namespace LX_Config;
+using namespace lx::Config;
 
 namespace
 {

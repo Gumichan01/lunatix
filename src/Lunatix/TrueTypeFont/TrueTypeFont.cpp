@@ -29,7 +29,7 @@
 #include <SDL2/SDL_ttf.h>
 
 
-using namespace LX_Config;
+using namespace lx::Config;
 using namespace LX_FileIO;
 
 namespace

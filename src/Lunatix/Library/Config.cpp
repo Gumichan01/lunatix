@@ -25,7 +25,10 @@
 #include <fstream>
 #include <regex>
 
-namespace LX_Config
+namespace lx
+{
+
+namespace
 {
 
 const unsigned int NB_CONFIG = 6;
@@ -166,6 +169,11 @@ void loadFileConfig_( LX_InternalConfig& config ) noexcept
     }
 }
 
+}   // anonymous namespace
+
+
+namespace Config
+{
 
 /* LX_Configuration */
 
@@ -183,7 +191,7 @@ LX_Configuration& LX_Configuration::getInstance() noexcept
 
 void LX_Configuration::loadFlags_() noexcept
 {
-    LX_Config::loadFileConfig_( _conf );
+    loadFileConfig_( _conf );
 }
 
 bool LX_Configuration::getVideoFlag() const noexcept
@@ -216,4 +224,6 @@ bool LX_Configuration::getOpenGLFlag() const noexcept
     return _conf.opengl_flag;
 }
 
-}
+}   // Config
+
+}   // lx

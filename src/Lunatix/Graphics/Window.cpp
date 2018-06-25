@@ -54,7 +54,7 @@ inline constexpr bool hasOpenGLsupport( const LX_Win::LX_WindowInfo& info ) noex
     return ( info.flag & OPENGL_U ) == OPENGL_U;
 }
 
-uint32_t genFlags_( const LX_Config::LX_Configuration& config ) noexcept
+uint32_t genFlags_( const lx::Config::LX_Configuration& config ) noexcept
 {
     uint32_t flag = 0x00000000;
 
@@ -99,7 +99,7 @@ SDL_BlendMode sdlBlend_( const LX_BlendMode& mode ) noexcept
 
 }
 
-using namespace LX_Config;
+using namespace lx::Config;
 
 namespace LX_Win
 {
