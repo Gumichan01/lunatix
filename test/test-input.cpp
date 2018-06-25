@@ -165,7 +165,7 @@ int main(int argc, char **argv)
                 break;
             }
         }
-        LX_Timer::delay(33);
+        lx::time::delay(33);
     }
 
     for(int k = 0; k < N; k++)

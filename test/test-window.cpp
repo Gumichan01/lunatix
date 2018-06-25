@@ -103,7 +103,7 @@ void test_window2(void)
         LX_Log::log("SUCCESS - width: %d",h);
 
     LX_Log::log(" = END TEST = ");
-    LX_Timer::delay(750);
+    lx::time::delay(750);
 }
 
 
@@ -252,7 +252,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             img.draw(box, i);
             win->update();
-            LX_Timer::delay(16);
+            lx::time::delay(16);
         }
 
         LX_Log::logInfo(LX_Log::APPLICATION,"Movement of the sprite");
@@ -264,7 +264,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             img.draw(box);
             win->update();
-            LX_Timer::delay(16);
+            lx::time::delay(16);
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::APPLICATION,"Done in %d ms",t2-t1);
@@ -304,7 +304,7 @@ void test_image(LX_Win::LX_Window *win)
             win->clearWindow();
             img.draw();
             win->update();
-            LX_Timer::delay(16);
+            lx::time::delay(16);
         }
         Uint32 t2 = SDL_GetTicks();
         LX_Log::logInfo(LX_Log::APPLICATION,"Done in %d ms",t2-t1);
@@ -393,7 +393,7 @@ void test_image(LX_Win::LX_Window *win)
                 win->clearWindow();
                 sprite.draw(rect);
                 win->update();
-                LX_Timer::delay(16);
+                lx::time::delay(16);
             }
             win->clearWindow();
         }
@@ -408,22 +408,22 @@ void test_image(LX_Win::LX_Window *win)
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             LX_Log::log("frame delay: %u ms", sprite.getFrameDelay());
 
-            uint32_t t = LX_Timer::getTicks();
+            uint32_t t = lx::time::getTicks();
             for(int j = 0; j <= 1; j++)
             {
-                while((LX_Timer::getTicks() - t) < 2000)
+                while((lx::time::getTicks() - t) < 2000)
                 {
                     win->clearWindow();
                     sprite.draw(rect);
                     win->update();
-                    LX_Timer::delay(16);
+                    lx::time::delay(16);
                 }
 
                 win->clearWindow();
                 sprite.resetAnimation();
                 LX_Log::log("Reset animation");
-                t = LX_Timer::getTicks();
-                LX_Timer::delay(500);
+                t = lx::time::getTicks();
+                lx::time::delay(500);
             }
         }
     }
@@ -480,7 +480,7 @@ void test_viewport(LX_Win::LX_Window *win)
         sprite.draw(rect);
 
         win->update();
-        LX_Timer::delay(16);
+        lx::time::delay(16);
     }
     win->clearWindow();
     LX_Log::log(" = END TEST= ");
@@ -515,7 +515,7 @@ void test_winManager(LX_Win::LX_Window *win)
     LX_Win::getWindowManager().clearWindows();
     img.draw();
     LX_Win::getWindowManager().updateWindows();
-    LX_Timer::delay(512);
+    lx::time::delay(512);
 
     LX_Log::log("Remove the same window");
     bool r2 = LX_Win::getWindowManager().removeWindow(win->getID());
@@ -579,7 +579,7 @@ void test_opengl()
             f(1.0, 0.0, 1.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            LX_Timer::delay(1000);
+            lx::time::delay(1000);
         }
 
         // Red colour
@@ -588,7 +588,7 @@ void test_opengl()
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w.update();
-        LX_Timer::delay(2000);
+        lx::time::delay(2000);
 
         LX_Log::log("Move colours: blue → red");
         for(float i = 1.0f; i > -0.01f; i=i-0.01f)
@@ -597,7 +597,7 @@ void test_opengl()
             glClearColor(1.0f - i, 0.0f, i, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            LX_Timer::delay(16);
+            lx::time::delay(16);
         }
 
         LX_Log::log("Move colours: red → green");
@@ -607,7 +607,7 @@ void test_opengl()
             glClearColor(i, 1.0f - i, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            LX_Timer::delay(16);
+            lx::time::delay(16);
         }
 
         LX_Log::log("Move colours: green → black");
@@ -617,7 +617,7 @@ void test_opengl()
             glClearColor(0.0, i, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w.update();
-            LX_Timer::delay(16);
+            lx::time::delay(16);
         }
 
         LX_Log::log("Window size → Width × Height: %d × %d",w.getWidth(),w.getHeight());
@@ -678,7 +678,7 @@ void test_opengl2()
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w1.update();
-        LX_Timer::delay(1000);
+        lx::time::delay(1000);
 
         LX_Log::log("Red colour on window #2");
         w2.glMakeCurrent();                         // Work on the second window
@@ -686,7 +686,7 @@ void test_opengl2()
         glClearColor(1.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         w2.update();
-        LX_Timer::delay(2000);
+        lx::time::delay(2000);
 
         {
             LX_Graphics::LX_Sprite img(std::string("data/bullet.png"), w1);
@@ -706,7 +706,7 @@ void test_opengl2()
             glClearColor(0.0, 1.0, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             w2.update();
-            LX_Timer::delay(1000);
+            lx::time::delay(1000);
 
             LX_Log::log("Undind the first window → #1");
             b = img.unbind();
@@ -738,13 +738,13 @@ void test_drawing(LX_Win::LX_Window *win)
     win->clearWindow();
     win->drawLine(M, N);
     win->update();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     LX_Log::log("Draw a line with N(64,448) and u⃗(256.0,128.0)");
     win->clearWindow();
     win->drawLine(N,u);
     win->update();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     LX_Log::log("Draw multiple lines (1024) with O(512,256) and v⃗(2048.0,0.0) in red");
     LX_Log::log("From v⃗(2048.0,0.0) to v⃗(2048.0,512.0), step : 64");
@@ -756,10 +756,10 @@ void test_drawing(LX_Win::LX_Window *win)
         win->drawLine(O,v);
         v.vy += j + Float{64.0f};
         win->update();
-        LX_Timer::delay(16);
+        lx::time::delay(16);
     }
 
-    LX_Timer::delay(2048);
+    lx::time::delay(2048);
     LX_Log::log("Draw multiple lines using several points");
     std::vector<LX_ImgCoord> points = {{64,64},{128,32},{256,64},{768,512},
         {512,256},{16,448},{32,512},{256,42}
@@ -770,32 +770,32 @@ void test_drawing(LX_Win::LX_Window *win)
     win->clearWindow();
     win->drawLines(points);
     win->update();
-    LX_Timer::delay(2048);
+    lx::time::delay(2048);
 
     LX_Log::log("Draw a rectangle using a bounding box");
     win->clearWindow();
     win->drawRect(b);
     win->update();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     LX_Log::log("Fill a rectangle using a bounding box");
     win->clearWindow();
     win->fillRect(b);
     win->update();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     LX_Log::log("Draw a rectangle using a point and a vector : N and u⃗");
     win->clearWindow();
     win->drawRect(N,u);
     win->update();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
     win->clearWindow();
 
     LX_Log::log("Fill a rectangle using a point and a vector : N and u⃗");
     win->clearWindow();
     win->fillRect(N,u);
     win->update();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
     win->clearWindow();
 
     LX_Physics::LX_Circle C{LX_Physics::LX_FloatPosition{512.0f,300.0f},0};
@@ -807,7 +807,7 @@ void test_drawing(LX_Win::LX_Window *win)
         win->clearWindow();
         win->drawCircle(C);
         win->update();
-        LX_Timer::delay(16);
+        lx::time::delay(16);
     }
 
     LX_Log::log("Draw filled circles");
@@ -817,7 +817,7 @@ void test_drawing(LX_Win::LX_Window *win)
         win->clearWindow();
         win->fillCircle(C);
         win->update();
-        LX_Timer::delay(16);
+        lx::time::delay(16);
     }
 
     LX_Log::log(" = END TEST = ");

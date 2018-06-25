@@ -114,7 +114,7 @@ void test_thread()
     {
         {
             LX_Multithreading::LX_Thread th4(true, foo2);
-            LX_Timer::delay(128);
+            lx::time::delay(128);
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -130,7 +130,7 @@ void test_thread()
         {
             char s[] = "foo3";
             LX_Multithreading::LX_Thread th5(false, foo3, s);
-            LX_Timer::delay(128);
+            lx::time::delay(128);
             th5.join();
         }
         LX_Log::log("(#%x): SUCCESS - no crash",tid);

@@ -170,7 +170,7 @@ int main(int argc, char **argv)
         LX_Win::getWindowManager().clearWindows();
         dot->update();
         LX_Win::getWindowManager().updateWindows();
-        LX_Timer::delay(16);
+        lx::time::delay(16);
     }
 
     LX_Win::getWindowManager().removeWindow(0);

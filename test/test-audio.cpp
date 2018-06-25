@@ -74,7 +74,7 @@ void test_info(const std::string& s)
             LX_Graphics::LX_ImgRect box{0,0,info.w,info.h};
             cover->draw(box);
             w.update();
-            LX_Timer::delay(2000);
+            lx::time::delay(2000);
             delete cover;
         }
     }
@@ -204,7 +204,7 @@ void test_channels()
     LX_Log::logInfo(LX_Log::APPLICATION,"Available channel (grp 2): %d",
                     LX_Mixer::channelAvailable(2));
 
-    LX_Timer::delay(2000);
+    lx::time::delay(2000);
     LX_Log::logInfo(LX_Log::APPLICATION,"Done");
 
     LX_Log::logInfo(LX_Log::APPLICATION,"Reset");
@@ -250,13 +250,13 @@ void test_music()
         if(music.play())
         {
             LX_Log::logInfo(LX_Log::TEST,"SUCCESS - play music OK");
-            LX_Timer::delay(4000);
+            lx::time::delay(4000);
             music.pause();
             LX_Log::logInfo(LX_Log::TEST,"music paused during 1 second");
-            LX_Timer::delay(1000);
+            lx::time::delay(1000);
             music.pause();
             LX_Log::logInfo(LX_Log::TEST,"music resumed");
-            LX_Timer::delay(2000);
+            lx::time::delay(2000);
             music.stop();
             LX_Log::logInfo(LX_Log::TEST,"music stopped");
         }
@@ -338,21 +338,21 @@ void test_chunk()
         LX_Log::logInfo(LX_Log::TEST,"SUCCESS - chunk launched");
         LX_Log::logInfo(LX_Log::TEST,"play chunk with no loop on any channel");
 
-        LX_Timer::delay(1000);
+        lx::time::delay(1000);
         // play on any channel (no loop)
         if(chunk->play())
             LX_Log::logInfo(LX_Log::TEST,"SUCCESS - play chunk (no loop) OK");
         else
             LX_Log::logInfo(LX_Log::TEST,"FAILURE - play chunk (no loop) KO");
 
-        LX_Timer::delay(2000);
+        lx::time::delay(2000);
 
         // play chunk in 2 loops
         LX_Log::logInfo(LX_Log::TEST,"play chunk with 2 loops on any channel");
         if(chunk->play(-1,1))
         {
             LX_Log::logInfo(LX_Log::TEST,"SUCCESS - play chunk on any channel (2 loop) OK");
-            LX_Timer::delay(4000);
+            lx::time::delay(4000);
         }
         else
             LX_Log::logInfo(LX_Log::TEST,"FAILURE - play chunk (2 loops) KO");
@@ -363,7 +363,7 @@ void test_chunk()
         else
             LX_Log::logInfo(LX_Log::TEST,"FAILURE - play chunk during 8s KO");
 
-        LX_Timer::delay(9000);
+        lx::time::delay(9000);
         delete chunk;
     }
     catch(LX_Mixer::LX_MixerException& se)
@@ -415,7 +415,7 @@ void test_effects()
         while(effect.pan_left < 255)
         {
             LX_Mixer::groupPlayChunk(chunk, 64, effect);
-            LX_Timer::delay(17);
+            lx::time::delay(17);
             effect.pan_left++;
             effect.pan_right--;
         }
@@ -426,7 +426,7 @@ void test_effects()
 
     LX_Log::logInfo(LX_Log::TEST,"music: fade in effect");
     LX_Mixer::fadeInMusic(music,1000);
-    LX_Timer::delay(2000);
+    lx::time::delay(2000);
 
     // play chunk during the music
     int fxv = LX_Mixer::getFXVolume();
@@ -434,83 +434,83 @@ void test_effects()
     LX_Mixer::setFXVolume(fxv/3);
     LX_Mixer::setPanning(chan,255,0);
     chunk.play(chan);
-    LX_Timer::delay(2000);
+    lx::time::delay(2000);
     LX_Mixer::setFXVolume(fxv);
 
     LX_Log::logInfo(LX_Log::TEST,"music: fade out effect");
     LX_Mixer::fadeOutMusic(1000);
-    LX_Timer::delay(2000);
+    lx::time::delay(2000);
 
     LX_Mixer::removePanning();
     LX_Log::logInfo(LX_Log::TEST,"chunk: no effect");
     chunk.play();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     // Left
     LX_Log::logInfo(LX_Log::TEST,"chunk: panning effect: left");
     LX_Mixer::setPanning(255,0);
     chunk.play();
-    LX_Timer::delay(500);
+    lx::time::delay(500);
 
     // Right
     LX_Log::logInfo(LX_Log::TEST,"chunk: panning effect: right");
     LX_Mixer::setPanning(0,255);
     chunk.play();
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
     LX_Mixer::removePanning();
 
     LX_Log::logInfo(LX_Log::TEST,"music: position");
     LX_Log::logInfo(LX_Log::TEST,"music: position 60°, no distance");
     LX_Mixer::setPosition(60);
     music.play();
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
     LX_Log::logInfo(LX_Log::TEST,"music: position 270°, no distance");
     LX_Mixer::setPosition(270);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
 
     LX_Log::logInfo(LX_Log::TEST,"music: position 180°, no distance");
     LX_Mixer::setPosition(180);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
 
     LX_Log::logInfo(LX_Log::TEST,"music: position 60°, distance: 64");
     LX_Mixer::setPosition(60, 64);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
 
     LX_Log::logInfo(LX_Log::TEST,"music: position 270°, distance: 128");
     LX_Mixer::setPosition(270, 128);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
 
     LX_Log::logInfo(LX_Log::TEST,"music: reverseStereo");
     LX_Mixer::reverseStereo(true);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
     LX_Log::logInfo(LX_Log::TEST,"music: reverseStereo (reset)");
     LX_Mixer::reverseStereo(false);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
 
     LX_Log::logInfo(LX_Log::TEST,"music: position 180°, distance: 4");
     LX_Mixer::setPosition(180, 4);
-    LX_Timer::delay(4000);
+    lx::time::delay(4000);
 
     LX_Mixer::resetPosition();
     LX_Log::logInfo(LX_Log::TEST,"music: dynamic position effect");
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     for(Sint16 k = 0; k < 360; k += 2)
     {
         LX_Log::logInfo(LX_Log::TEST,"music: position %d",k);
         LX_Mixer::setPosition(k);
-        LX_Timer::delay(100);
+        lx::time::delay(100);
     }
 
     LX_Mixer::resetPosition();
     LX_Log::logInfo(LX_Log::TEST,"music: dynamic distance effect");
-    LX_Timer::delay(1000);
+    lx::time::delay(1000);
 
     for(Uint8 i = 0; i < 254; i += 2)
     {
         LX_Log::logInfo(LX_Log::TEST,"music: distance %d",i);
         LX_Mixer::setDistance(i);
-        LX_Timer::delay(100);
+        lx::time::delay(100);
     }
 
     uint8_t j = 254;
@@ -519,13 +519,13 @@ void test_effects()
         LX_Log::logInfo(LX_Log::TEST,"music: distance %d",j);
         LX_Mixer::setDistance(j);
         j -= 1;
-        LX_Timer::delay(33);
+        lx::time::delay(33);
     }
     while(j > 0);
 
     LX_Log::logInfo(LX_Log::TEST,"music: fade out effect (again)");
     LX_Mixer::fadeOutMusic(2560);
-    LX_Timer::delay(3000);
+    lx::time::delay(3000);
     music.stop();
 
     LX_Log::logInfo(LX_Log::APPLICATION," = END TEST = ");
@@ -640,26 +640,26 @@ void test_volume2()
     music.play();
 
     LX_Log::logInfo(LX_Log::TEST,"set the position to 128.0 second");
-    LX_Timer::delay(2000);
+    lx::time::delay(2000);
     LX_Mixer::setMusicPosition(128.0);
-    LX_Timer::delay(2000);
+    lx::time::delay(2000);
 
     for(short i = 100; i > 0; i--)
     {
-        LX_Timer::delay(100);
+        lx::time::delay(100);
         LX_Log::logInfo(LX_Log::TEST,"set overall volume to %d",i);
         LX_Mixer::setOverallVolume(static_cast<unsigned short>(i));
     }
 
     for(unsigned short i = 0; i <= 100; i++)
     {
-        LX_Timer::delay(100);
+        lx::time::delay(100);
         LX_Log::logInfo(LX_Log::TEST,"set overall volume to %d",i);
         LX_Mixer::setOverallVolume(i);
     }
 
     LX_Mixer::fadeOutMusic(1000);
-    LX_Timer::delay(1024);
+    lx::time::delay(1024);
     music.stop();
     LX_Log::logInfo(LX_Log::APPLICATION," = END TEST = ");
 }
