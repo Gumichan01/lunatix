@@ -24,11 +24,14 @@
 
 /**
 *   @ingroup System
-*   @namespace LX_Timer
+*   @namespace lx::Time
 *   @brief Very simple namespace for handling time
 *
 */
-namespace LX_Timer
+namespace lx
+{
+
+namespace Time
 {
 /**
 *   @fn inline uint32_t getTicks()
@@ -49,6 +52,8 @@ inline void delay( uint32_t ms )
     SDL_Delay( ms );
 }
 
-}
+}   //Time
+
+}   // lx
 
 #endif // LX_TIMER_HPP_INCLUDED

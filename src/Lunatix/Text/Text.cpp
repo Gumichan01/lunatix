@@ -348,7 +348,7 @@ public:
                 _draw = false;
             }
 
-            LX_Timer::delay( DELAY );
+            lx::Time::delay( DELAY );
         }
     }
 

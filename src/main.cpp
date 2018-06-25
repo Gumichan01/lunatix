@@ -54,7 +54,7 @@ int main( int argc, char ** argv )
         w.clearWindow();
         sprite.draw( position );
         w.update();
-        LX_Timer::delay( 33 );
+        lx::Time::delay( 33 );
     }
 
     lx::VersionInfo::info();
