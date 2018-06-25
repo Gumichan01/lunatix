@@ -82,7 +82,5 @@
 *   @brief Miscellaneous namespaces/classes/functions
 */
 #include <Lunatix/utils/libtagspp/libtagspp.hpp>
-#include <Lunatix/utils/utf8_string.hpp>
-#include <Lunatix/utils/float.hpp>
 
 #endif // LUNATIX_H_INCLUDED
