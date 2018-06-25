@@ -22,12 +22,15 @@
 
 #include <string>
 
+namespace lx
+{
+
 /**
 *   @ingroup Config
-*   @namespace LX_VersionInfo
+*   @namespace lx::VersionInfo
 *   @brief Information about the library
 */
-namespace LX_VersionInfo
+namespace VersionInfo
 {
 
 /**
@@ -62,6 +65,8 @@ const LX_Version getVersion() noexcept;
 */
 void dependencies() noexcept;
 
-}
+}   // VersionInfo
+
+}   // lx
 
 #endif // LX_VERSION_HPP_INCLUDED

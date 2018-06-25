@@ -57,7 +57,7 @@ int main( int argc, char ** argv )
         LX_Timer::delay( 33 );
     }
 
-    LX_VersionInfo::info();
+    lx::VersionInfo::info();
     lx::quit();
     return 0;
 }

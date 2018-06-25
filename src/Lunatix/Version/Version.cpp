@@ -31,7 +31,7 @@
 
 using namespace std;
 
-namespace LX_VersionInfo
+namespace
 {
 
 // Constants
@@ -49,6 +49,14 @@ constexpr int cast( const Uint8 v )
 {
     return static_cast<int>( v );
 }
+
+}   // namespace
+
+namespace lx
+{
+
+namespace VersionInfo
+{
 
 void info() noexcept
 {
@@ -113,4 +121,6 @@ void dependencies() noexcept
          << cast( mix_linked->minor ) << "." << cast( mix_linked->patch ) << " ...\n\n";
 }
 
-}
+}   // VersionInfo
+
+}   // lx
