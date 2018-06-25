@@ -22,12 +22,15 @@
 
 #include <Lunatix/utils/utf8_string.hpp>
 
+namespace lx
+{
+
 /**
 *   @ingroup System
-*   @namespace LX_MSGBox
+*   @namespace lx::MSGBox
 *   @brief The Message Box namespace
 */
-namespace LX_MSGBox
+namespace MSGBox
 {
 
 /**
@@ -55,6 +58,8 @@ enum class LX_MsgType
 *   @param [in] msg The text to display in the box, UTF-8 format
 */
 void showMSG( LX_MsgType flag, std::string title, std::string msg ) noexcept;
+
+}
 
 }
 

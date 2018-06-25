@@ -24,7 +24,7 @@
 namespace
 {
 
-using namespace LX_MSGBox;
+using namespace lx::MSGBox;
 
 inline constexpr uint32_t touint( const LX_MsgType& type ) noexcept
 {
@@ -36,12 +36,17 @@ inline constexpr uint32_t touint( const LX_MsgType& type ) noexcept
 
 }
 
-namespace LX_MSGBox
+namespace lx
+{
+
+namespace MSGBox
 {
 
 void showMSG( LX_MsgType flag, std::string title, std::string msg ) noexcept
 {
     SDL_ShowSimpleMessageBox( touint( flag ), title.c_str(), msg.c_str(), nullptr );
+}
+
 }
 
 }
