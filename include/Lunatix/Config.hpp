@@ -34,30 +34,30 @@ namespace Config
 {
 
 /**
-*   @class lx::Configuration
+*   @class Configuration
 *   @brief The configuration loader of Lunatix
 *
 *   This class is responsible of loading the configuration of the library
 */
-class lx::Configuration final
+class Configuration final
 {
-    lx::Configuration() noexcept;
-    lx::Configuration( lx::Configuration& c ) = delete;
-    lx::Configuration( lx::Configuration&& c ) = delete;
-    lx::Configuration& operator =( lx::Configuration& c ) = delete;
-    lx::Configuration&& operator =( lx::Configuration&& c ) = delete;
-    ~lx::Configuration() = default;
+    Configuration() noexcept;
+    Configuration( Configuration& c ) = delete;
+    Configuration( Configuration&& c ) = delete;
+    Configuration& operator =( Configuration& c ) = delete;
+    Configuration&& operator =( Configuration&& c ) = delete;
+    ~Configuration() = default;
 
     void loadFlags_() noexcept;
 
 public:
 
     /**
-    *   @fn lx::Configuration& getInstance() noexcept
-    *   Get the singleton of the lx::Configuration class
-    *   @return The instance of lx::Configuration
+    *   @fn Configuration& getInstance() noexcept
+    *   Get the singleton of the Configuration class
+    *   @return The instance of Configuration
     */
-    static lx::Configuration& getInstance() noexcept;
+    static Configuration& getInstance() noexcept;
 
     /**
     *   @fn bool getVideoFlag() const noexcept

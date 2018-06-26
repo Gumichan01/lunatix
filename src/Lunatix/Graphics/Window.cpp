@@ -54,7 +54,7 @@ inline constexpr bool hasOpenGLsupport( const LX_Win::LX_WindowInfo& info ) noex
     return ( info.flag & OPENGL_U ) == OPENGL_U;
 }
 
-uint32_t genFlags_( const lx::Config::lx::Configuration& config ) noexcept
+uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
 {
     uint32_t flag = 0x00000000;
 
@@ -134,7 +134,7 @@ void LX_initWindowInfo( LX_WindowInfo& info ) noexcept
 
 void LX_loadWindowConfig( LX_WindowInfo& info ) noexcept
 {
-    const lx::Configuration& config = lx::Configuration::getInstance();
+    const Configuration& config = Configuration::getInstance();
 
     info.id = 0;
     info.title = DEFAULT_TITLE;
@@ -180,7 +180,7 @@ struct LX_Window_ final
         _renderer( nullptr ), _glcontext( nullptr ), _original_width( info.w ),
         _original_height( info.h )
     {
-        const lx::Configuration& config = lx::Configuration::getInstance();
+        const Configuration& config = Configuration::getInstance();
 
         // Video flag and VSync flag actives -> add the option
         if ( config.getVideoFlag() && config.getVSyncFlag() )

@@ -175,51 +175,51 @@ void loadFileConfig_( LX_InternalConfig& config ) noexcept
 namespace Config
 {
 
-/* lx::Configuration */
+/* Configuration */
 
-lx::Configuration::lx::Configuration() noexcept
+Configuration::Configuration() noexcept
 {
     loadFlags_();
 }
 
-lx::Configuration& lx::Configuration::getInstance() noexcept
+Configuration& Configuration::getInstance() noexcept
 {
-    static lx::Configuration singleton;
+    static Configuration singleton;
     return singleton;
 }
 
 
-void lx::Configuration::loadFlags_() noexcept
+void Configuration::loadFlags_() noexcept
 {
     loadFileConfig_( _conf );
 }
 
-bool lx::Configuration::getVideoFlag() const noexcept
+bool Configuration::getVideoFlag() const noexcept
 {
     return _conf.video_flag;
 }
 
-bool lx::Configuration::getVSyncFlag() const noexcept
+bool Configuration::getVSyncFlag() const noexcept
 {
     return _conf.vsync_flag;
 }
 
-bool lx::Configuration::getTTFFlag() const noexcept
+bool Configuration::getTTFFlag() const noexcept
 {
     return _conf.ttf_flag;
 }
 
-bool lx::Configuration::getAudioFlag() const noexcept
+bool Configuration::getAudioFlag() const noexcept
 {
     return _conf.audio_flag;
 }
 
-bool lx::Configuration::getGamepadFlag() const noexcept
+bool Configuration::getGamepadFlag() const noexcept
 {
     return _conf.gamepad_flag;
 }
 
-bool lx::Configuration::getOpenGLFlag() const noexcept
+bool Configuration::getOpenGLFlag() const noexcept
 {
     return _conf.opengl_flag;
 }

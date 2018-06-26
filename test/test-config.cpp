@@ -14,8 +14,8 @@ string boolState(const bool b)
 int main(int argc, char **argv)
 {
     using namespace lx::Config;
-    const lx::Configuration& configuration  = lx::Config::lx::Configuration::getInstance();
-    const lx::Configuration& configuration2 = lx::Config::lx::Configuration::getInstance();
+    const Configuration& configuration  = lx::Config::Configuration::getInstance();
+    const Configuration& configuration2 = lx::Config::Configuration::getInstance();
 
     lx::Log::setDebugMode();
     lx::Log::log(" ==== Test Config ==== ");
