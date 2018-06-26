@@ -315,7 +315,7 @@ void LX_Font::setColour_( const LX_Colour& colour ) noexcept
 
 UTF8string LX_Font::getName( bool with_path ) const noexcept
 {
-    using namespace LX_FileSystem;
+    using namespace lx::FileSystem;
     return with_path ? _fimpl->_font_str : basename( _fimpl->_font_str );
 }
 

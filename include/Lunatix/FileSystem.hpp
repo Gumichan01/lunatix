@@ -22,14 +22,18 @@
 
 #include <Lunatix/utils/utf8_string.hpp>
 
+namespace lx
+{
+
+
 /**
 *   @ingroup System
-*   @namespace LX_FileSystem
+*   @namespace lx::FileSystem
 *   @brief The file system
 *
 *   This namespace is responsible of managing the file system
 */
-namespace LX_FileSystem
+namespace FileSystem
 {
 
 /**
@@ -94,6 +98,8 @@ UTF8string basename( const UTF8string& path ) noexcept;
 */
 UTF8string dirname( const UTF8string& path ) noexcept;
 
-}
+}   // FileSystem
+
+}   // lx
 
 #endif // LX_FILESYSTEM_HPP_INCLUDED

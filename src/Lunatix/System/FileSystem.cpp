@@ -101,8 +101,10 @@ bool dirname_check ( const UTF8string& npath )
 
 }
 
+namespace lx
+{
 
-namespace LX_FileSystem
+namespace FileSystem
 {
 
 UTF8string getWorkingDirectory() noexcept
@@ -220,4 +222,6 @@ UTF8string dirname ( const UTF8string& path ) noexcept
     return npath.utf8_substr ( 0, ( spos == 0 ? spos + 1 : spos ) );
 }
 
-}
+}   // FileSystem
+
+}   // lx

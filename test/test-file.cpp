@@ -556,7 +556,7 @@ void test_fs(void)
     {
         LX_Log::logInfo(LX_Log::TEST," → basename of %s",
                         (it->first.utf8_empty() ? "<empty>" : it->first.utf8_str()) );
-        UTF8string u8got = LX_FileSystem::basename(it->first);
+        UTF8string u8got = lx::FileSystem::basename(it->first);
         if(u8got != it->second)
         {
             LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: %s; got: %s",
@@ -576,7 +576,7 @@ void test_fs(void)
     {
         LX_Log::logInfo(LX_Log::TEST," → dirname of %s",
                         (it->first.utf8_empty() ? "<empty>" : it->first.utf8_str()) );
-        UTF8string u8got = LX_FileSystem::dirname(it->first);
+        UTF8string u8got = lx::FileSystem::dirname(it->first);
         if(u8got != it->second)
         {
             LX_Log::logInfo(LX_Log::TEST,"FAILURE - expected: %s; got: %s",
