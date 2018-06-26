@@ -114,7 +114,7 @@ void test_SolidText()
         lx::Log::log("Draw text");
         simg.draw();
         win.update();
-        lx::time::delay(1024);
+        lx::Time::delay(1024);
 
         simg2.setPosition(100,400);
         simg2.setText(str, 48);
@@ -130,7 +130,7 @@ void test_SolidText()
             simg.draw();
             simg2.draw();
             win.update();
-            lx::time::delay(100);
+            lx::Time::delay(100);
         }
         lx::Log::log("Done");
 
@@ -143,7 +143,7 @@ void test_SolidText()
             win.clearWindow();
             simg.draw(j);
             win.update();
-            lx::time::delay(33);
+            lx::Time::delay(33);
         }
         lx::Log::log("Done");
     }
@@ -180,7 +180,7 @@ void test_ShadedText()
         simg.draw();
         lx::Log::log("Update");
         win.update();
-        lx::time::delay(1024);
+        lx::Time::delay(1024);
 
         simg2.setTextColour({255,0,255,127});
         simg2.setPosition(100,400);
@@ -198,7 +198,7 @@ void test_ShadedText()
             simg.draw();
             simg2.draw();
             win.update();
-            lx::time::delay(100);
+            lx::Time::delay(100);
         }
         lx::Log::log("Done");
 
@@ -211,7 +211,7 @@ void test_ShadedText()
             win.clearWindow();
             simg.draw(j);
             win.update();
-            lx::time::delay(33);
+            lx::Time::delay(33);
         }
         lx::Log::log("Done");
     }
@@ -245,7 +245,7 @@ void test_BlendedText()
         simg.draw();
         lx::Log::log("Update");
         win.update();
-        lx::time::delay(1024);
+        lx::Time::delay(1024);
 
         simg2.setTextColour({255,0,255,127});
         simg2.setPosition(100,400);
@@ -262,7 +262,7 @@ void test_BlendedText()
             simg.draw();
             simg2.draw();
             win.update();
-            lx::time::delay(100);
+            lx::Time::delay(100);
         }
         lx::Log::log("Done");
 
@@ -275,7 +275,7 @@ void test_BlendedText()
             win.clearWindow();
             simg.draw(j);
             win.update();
-            lx::time::delay(33);
+            lx::Time::delay(33);
         }
         lx::Log::log("Done");
     }

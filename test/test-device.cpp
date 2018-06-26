@@ -62,7 +62,7 @@ void test_gamepad(void)
                 lx::Log::log("The device has force feedback");
                 hp->rumbleEffectInit();
                 hp->rumbleEffectPlay(1.0,100);
-                lx::time::delay(500);
+                lx::Time::delay(500);
             }
             else
                 lx::Log::log("No haptic");
@@ -89,7 +89,7 @@ void test_haptic(void)
         {
             lx::Log::log("Play the rumble effect");
             haptic.rumbleEffectPlay(0.5,500);
-            lx::time::delay(1000);
+            lx::Time::delay(1000);
         }
 
         // Effect
@@ -111,7 +111,7 @@ void test_haptic(void)
         {
             lx::Log::log("Run the effect");
             haptic.runEffect(effectid,1);
-            lx::time::delay(5128);                                    // Wait for the effect to finish
+            lx::Time::delay(5128);                                    // Wait for the effect to finish
         }
 
         lx::Log::log("Done");
@@ -182,7 +182,7 @@ void test_mouse(void)
 
         w.clearWindow();
         w.update();
-        lx::time::delay(16);
+        lx::Time::delay(16);
     }
 
     lx::Log::log(" == END TEST == ");

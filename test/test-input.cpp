@@ -165,7 +165,7 @@ int main(int argc, char **argv)
                 break;
             }
         }
-        lx::time::delay(33);
+        lx::Time::delay(33);
     }
 
     for(int k = 0; k < N; k++)

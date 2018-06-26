@@ -70,7 +70,7 @@ int main( int argc, char** argv )
         w.clearWindow();
         sprite.draw( position );
         w.update();
-        lx::time::delay( 33 );
+        lx::Time::delay( 33 );
     }
 
     lx::quit();
