@@ -512,7 +512,7 @@ uint32_t LX_BufferedImage::_convertGrayscalePixel( const uint32_t pixel ) const 
 
     if ( !_retrieveColours( pixel, red, green, blue, alpha ) )
     {
-        LX_Log::logCritical( LX_Log::VIDEO, "convert image: Unrecognized format" );
+        lx::Log::logCritical( lx::Log::VIDEO, "convert image: Unrecognized format" );
         return pixel;
     }
 
@@ -590,7 +590,7 @@ uint32_t LX_BufferedImage::_convertNegativePixel( const uint32_t pixel ) const n
 
     if ( !_retrieveColours( pixel, red, green, blue, alpha ) )
     {
-        LX_Log::logCritical( LX_Log::VIDEO, "convert image: Unrecognized format" );
+        lx::Log::logCritical( lx::Log::VIDEO, "convert image: Unrecognized format" );
         return pixel;
     }
 

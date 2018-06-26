@@ -17,13 +17,13 @@ int main(int argc, char **argv)
     const LX_Configuration& configuration  = LX_Config::LX_Configuration::getInstance();
     const LX_Configuration& configuration2 = LX_Config::LX_Configuration::getInstance();
 
-    LX_Log::setDebugMode();
-    LX_Log::log(" ==== Test Config ==== ");
+    lx::Log::setDebugMode();
+    lx::Log::log(" ==== Test Config ==== ");
 
     if(&configuration != &configuration2)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - The configuration object is not a singleton");
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - The configuration object is not a singleton");
     else
-        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The configuration object is a singleton");
+        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The configuration object is a singleton");
 
     bool video   = configuration.getVideoFlag();
     bool vsync   = configuration.getVSyncFlag();
@@ -32,16 +32,16 @@ int main(int argc, char **argv)
     bool gamepad = configuration.getGamepadFlag();
     bool opengl  = configuration.getOpenGLFlag();
 
-    LX_Log::logInfo(LX_Log::TEST,"======== Configuration ========");
-    LX_Log::logInfo(LX_Log::TEST,"video: %s", boolState(video).c_str());
-    LX_Log::logInfo(LX_Log::TEST,"true type font: %s", boolState(ttfont).c_str());
-    LX_Log::logInfo(LX_Log::TEST,"vsync: %s", boolState(vsync).c_str());
-    LX_Log::logInfo(LX_Log::TEST,"audio: %s", boolState(sound).c_str());
-    LX_Log::logInfo(LX_Log::TEST,"gamepad: %s", boolState(gamepad).c_str());
-    LX_Log::logInfo(LX_Log::TEST,"opengl: %s", boolState(opengl).c_str());
-    LX_Log::logInfo(LX_Log::TEST,"===============================");
+    lx::Log::logInfo(lx::Log::TEST,"======== Configuration ========");
+    lx::Log::logInfo(lx::Log::TEST,"video: %s", boolState(video).c_str());
+    lx::Log::logInfo(lx::Log::TEST,"true type font: %s", boolState(ttfont).c_str());
+    lx::Log::logInfo(lx::Log::TEST,"vsync: %s", boolState(vsync).c_str());
+    lx::Log::logInfo(lx::Log::TEST,"audio: %s", boolState(sound).c_str());
+    lx::Log::logInfo(lx::Log::TEST,"gamepad: %s", boolState(gamepad).c_str());
+    lx::Log::logInfo(lx::Log::TEST,"opengl: %s", boolState(opengl).c_str());
+    lx::Log::logInfo(lx::Log::TEST,"===============================");
 
-    LX_Log::log(" ==== END Test Config ==== \n");
+    lx::Log::log(" ==== END Test Config ==== \n");
 
     return EXIT_SUCCESS;
 }

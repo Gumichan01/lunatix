@@ -214,7 +214,7 @@ bool LX_Gamepad_::gstat_( SDL_Joystick * joy, SDL_GameController * gc,
     }
     else
     {
-        LX_Log::logCritical( LX_Log::APPLICATION,
+        lx::Log::logCritical( lx::Log::APPLICATION,
                              "%s:%d - Internal error: Invalid LX_Gamepad object",
                              __FILENAME__, __LINE__ );
         throw std::runtime_error( "Internal error - Bad LX_Gamepad" );
@@ -245,7 +245,7 @@ bool LX_Gamepad::open( int index ) noexcept
     {
         std::string s = getName();
 
-        LX_Log::logError( LX_Log::SYSTEM,
+        lx::Log::logError( lx::Log::SYSTEM,
                           "Gamepad opened and connected to %s", s.c_str() );
         LX_setError( "Instance of gamepad already connected to another device" );
         return false;

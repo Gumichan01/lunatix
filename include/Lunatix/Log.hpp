@@ -22,9 +22,12 @@
 #include <SDL2/SDL_log.h>
 #include <Lunatix/utils/utf8_string.hpp>
 
+namespace lx
+{
+
 /**
 *   @ingroup System
-*   @namespace LX_Log
+*   @namespace lx::Log
 *   @brief The log namespace
 *
 *   It handles log messages with categories and priorities
@@ -54,7 +57,7 @@
 *      setDebugMode(true);
 *
 */
-namespace LX_Log
+namespace Log
 {
 
 // Category of log
@@ -192,6 +195,8 @@ void logCritical( LX_LogType category, std::string format, ... ) noexcept;
 */
 void log( std::string format, ... ) noexcept;
 
-}
+}   // Log
+
+}   // lx
 
 #endif // HPP_INCLUDED

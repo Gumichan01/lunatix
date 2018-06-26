@@ -110,10 +110,10 @@ int getSystemRAM() noexcept;
 *       LX_DisplayMode modes;
 *       getAvailableDisplayModes(modes);
 *
-*       LX_Log::log("Display modes: ");
+*       lx::Log::log("Display modes: ");
 *       for(auto mode: modes)
 *       {
-*           LX_Log::log("%d × %d @ ~%d Hz", mode->w, mode->h, mode->refresh_rate);
+*           lx::Log::log("%d × %d @ ~%d Hz", mode->w, mode->h, mode->refresh_rate);
 *       }
 *
 */

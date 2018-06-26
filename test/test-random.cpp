@@ -16,35 +16,35 @@ int main(int argc, char * argv[])
 
 void rand_unsigned()
 {
-    LX_Log::log("= Test random - unsigned value =");
-    LX_Log::log("-> %u", LX_Random::xrand<unsigned int>());
-    LX_Log::log("-> %lu", LX_Random::xrand<unsigned long>());
-    LX_Log::log("-> %lu", LX_Random::xrand<unsigned long long>());
-    LX_Log::log("-> %u", LX_Random::xrand<unsigned short>());
+    lx::Log::log("= Test random - unsigned value =");
+    lx::Log::log("-> %u", LX_Random::xrand<unsigned int>());
+    lx::Log::log("-> %lu", LX_Random::xrand<unsigned long>());
+    lx::Log::log("-> %lu", LX_Random::xrand<unsigned long long>());
+    lx::Log::log("-> %u", LX_Random::xrand<unsigned short>());
 
-    LX_Log::log("-> %u", LX_Random::xrand(0U, 100U));
-    LX_Log::log("-> %ul", LX_Random::xrand(0UL, 100UL));
-    LX_Log::log("-> %u", LX_Random::xrand<unsigned short>(5, 10));
-    LX_Log::log("-> %u", LX_Random::xrand<unsigned short>(1, 6));
+    lx::Log::log("-> %u", LX_Random::xrand(0U, 100U));
+    lx::Log::log("-> %ul", LX_Random::xrand(0UL, 100UL));
+    lx::Log::log("-> %u", LX_Random::xrand<unsigned short>(5, 10));
+    lx::Log::log("-> %u", LX_Random::xrand<unsigned short>(1, 6));
 
-    LX_Log::log("= Test random - unsigned value OK =");
+    lx::Log::log("= Test random - unsigned value OK =");
 }
 
 void rand_float()
 {
-    LX_Log::log("= Test random - float value =");
+    lx::Log::log("= Test random - float value =");
 
     for(int i = 0; i < 10; ++i)
     {
-        LX_Log::log("-> %f", LX_Random::fxrand());
+        lx::Log::log("-> %f", LX_Random::fxrand());
     }
 
-    LX_Log::log("--------");
+    lx::Log::log("--------");
 
     for(int i = 0; i < 10; ++i)
     {
-        LX_Log::log("-> %f", LX_Random::fxrand(0.0f, 10000.0f));
+        lx::Log::log("-> %f", LX_Random::fxrand(0.0f, 10000.0f));
     }
 
-    LX_Log::log("= Test random - float value OK =");
+    lx::Log::log("= Test random - float value OK =");
 }

@@ -272,7 +272,7 @@ const int LX_MBUTTONS = 6;
 *              {
 *                  case LX_MOUSEMOTION:
 *                      ...
-*                      LX_Log::log("state → %d %d %d %d %d",
+*                      lx::Log::log("state → %d %d %d %d %d",
 *                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::LBUTTON)],
 *                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::MBUTTON)],
 *                                  evh.getMouseMotion().state[LX_MBIndex(LX_MouseButton::RBUTTON)],

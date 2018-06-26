@@ -26,17 +26,17 @@ int main(int argc, char **argv)
     bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - lx::init() failed");
     else
-        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
-    LX_Log::setDebugMode();
-    LX_Log::log("==== Test True Type Font ====");
+    lx::Log::setDebugMode();
+    lx::Log::log("==== Test True Type Font ====");
     test_font();
     test_SolidText();
     test_ShadedText();
     test_BlendedText();
-    LX_Log::log("==== END Test ====");
+    lx::Log::log("==== END Test ====");
 
     lx::quit();
     return EXIT_SUCCESS;
@@ -48,38 +48,38 @@ void test_font(void)
     LX_Font *font = nullptr;
     LX_Colour colour = {255,255,255,255};
 
-    LX_Log::log("Load an LX_Font object using RAII");
+    lx::Log::log("Load an LX_Font object using RAII");
     {
         LX_Font f1(fname,colour,0);
-        LX_Log::log("SUCCESS - Loaded with success");
-        LX_Log::log("font file: %s",f1.getName().utf8_str());
-        LX_Log::log("font file with path: %s",f1.getName(true).utf8_str());
+        lx::Log::log("SUCCESS - Loaded with success");
+        lx::Log::log("font file: %s",f1.getName().utf8_str());
+        lx::Log::log("font file with path: %s",f1.getName(true).utf8_str());
     }
 
-    LX_Log::log("Load another LX_Font object using RAII");
+    lx::Log::log("Load another LX_Font object using RAII");
     {
         LX_Font f2(fname,colour,0);
-        LX_Log::log("SUCCESS - Loaded with success");
+        lx::Log::log("SUCCESS - Loaded with success");
     }
 
     {
         try
         {
             LX_Font ferror("invalid_file",colour,0);
-            LX_Log::log("FAILURE - o_O. Expected: IOException, got: a valid object");
+            lx::Log::log("FAILURE - o_O. Expected: IOException, got: a valid object");
         }
         catch(IOException &)
         {
-            LX_Log::log("SUCCESS - IOException occured. It was expected");
+            lx::Log::log("SUCCESS - IOException occured. It was expected");
         }
     }
 
     font = new LX_Font(fname,colour,0);
 
     if(font == nullptr)
-        LX_Log::log("FAILURE - Font not null");
+        lx::Log::log("FAILURE - Font not null");
     else
-        LX_Log::log("SUCCESS - Font defined");
+        lx::Log::log("SUCCESS - Font defined");
 
     delete font;
 }
@@ -97,21 +97,21 @@ void test_SolidText()
     winfo.w = 1000;
     LX_Win::LX_Window win(winfo);
 
-    LX_Log::log("Load a solid text image and display it");
+    lx::Log::log("Load a solid text image and display it");
 
     {
         LX_Font font(fname, dcolour, 32);
         LX_Graphics::LX_SolidTextTexture simg(str,font,win);
         LX_Graphics::LX_SolidTextTexture simg2(font,win);
-        LX_Log::log("SUCCESS - Image loaded");
-        LX_Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
-        LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
+        lx::Log::log("SUCCESS - Image loaded");
+        lx::Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
+        lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setTextColour(bcolour);
         simg.setPosition(100,100);
-        LX_Log::log("Done");
-        LX_Log::log("text: %s", simg.getText().utf8_str());
+        lx::Log::log("Done");
+        lx::Log::log("text: %s", simg.getText().utf8_str());
         win.clearWindow();
-        LX_Log::log("Draw text");
+        lx::Log::log("Draw text");
         simg.draw();
         win.update();
         lx::time::delay(1024);
@@ -119,25 +119,25 @@ void test_SolidText()
         simg2.setPosition(100,400);
         simg2.setText(str, 48);
 
-        LX_Log::log("Size: 32 → 72");
+        lx::Log::log("Size: 32 → 72");
         for(unsigned int j = 32; j < 74; j += 2)
         {
             int w, h;
             simg.setTextSize(j);
             simg.getTextDimension(w, h);
-            LX_Log::log("Dimension: %d × %d", w,h);
+            lx::Log::log("Dimension: %d × %d", w,h);
             win.clearWindow();
             simg.draw();
             simg2.draw();
             win.update();
             lx::time::delay(100);
         }
-        LX_Log::log("Done");
+        lx::Log::log("Done");
 
         simg.setPosition(256,256);
         simg.setTextSize(32);
 
-        LX_Log::log("Rotation");
+        lx::Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
             win.clearWindow();
@@ -145,7 +145,7 @@ void test_SolidText()
             win.update();
             lx::time::delay(33);
         }
-        LX_Log::log("Done");
+        lx::Log::log("Done");
     }
 }
 
@@ -164,21 +164,21 @@ void test_ShadedText()
     LX_Win::LX_Window win(winfo);
     LX_Font font(fname,colour,32);
 
-    LX_Log::log("Load a shaded text image and display it");
+    lx::Log::log("Load a shaded text image and display it");
 
     {
         LX_Graphics::LX_ShadedTextTexture simg(str,font,bg,win);
         LX_Graphics::LX_ShadedTextTexture simg2(font,win);
-        LX_Log::log("SUCCESS - Image loaded");
-        LX_Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
-        LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
+        lx::Log::log("SUCCESS - Image loaded");
+        lx::Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
+        lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setPosition(100,100);
-        LX_Log::log("Done");
-        LX_Log::log("text: %s", simg.getText().utf8_str());
+        lx::Log::log("Done");
+        lx::Log::log("text: %s", simg.getText().utf8_str());
         win.clearWindow();
-        LX_Log::log("Draw the text");
+        lx::Log::log("Draw the text");
         simg.draw();
-        LX_Log::log("Update");
+        lx::Log::log("Update");
         win.update();
         lx::time::delay(1024);
 
@@ -187,25 +187,25 @@ void test_ShadedText()
         simg2.setBgColour(bg2);
         simg2.setText(str);
 
-        LX_Log::log("Size: 32 → 72");
+        lx::Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
             int w, h;
             simg.setTextSize(j);
             simg.getTextDimension(w, h);
-            LX_Log::log("Dimension: %d × %d", w,h);
+            lx::Log::log("Dimension: %d × %d", w,h);
             win.clearWindow();
             simg.draw();
             simg2.draw();
             win.update();
             lx::time::delay(100);
         }
-        LX_Log::log("Done");
+        lx::Log::log("Done");
 
         simg.setPosition(256,256);
         simg.setTextSize(32);
 
-        LX_Log::log("Rotation");
+        lx::Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
             win.clearWindow();
@@ -213,7 +213,7 @@ void test_ShadedText()
             win.update();
             lx::time::delay(33);
         }
-        LX_Log::log("Done");
+        lx::Log::log("Done");
     }
 }
 
@@ -230,20 +230,20 @@ void test_BlendedText()
     LX_Win::LX_Window win(winfo);
     LX_Font font(fname,colour, 32);
 
-    LX_Log::log("Load a blended text image and display it");
+    lx::Log::log("Load a blended text image and display it");
 
     {
         LX_Graphics::LX_BlendedTextTexture simg(str,font,win);
         LX_Graphics::LX_BlendedTextTexture simg2(font,win);
-        LX_Log::log("SUCCESS - Image loaded");
-        LX_Log::log("Set the following text: %s; size: 32",str.utf8_str());
+        lx::Log::log("SUCCESS - Image loaded");
+        lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setPosition(100,100);
-        LX_Log::log("Done");
-        LX_Log::log("text: %s", simg.getText().utf8_str());
+        lx::Log::log("Done");
+        lx::Log::log("text: %s", simg.getText().utf8_str());
         win.clearWindow();
-        LX_Log::log("Draw the text");
+        lx::Log::log("Draw the text");
         simg.draw();
-        LX_Log::log("Update");
+        lx::Log::log("Update");
         win.update();
         lx::time::delay(1024);
 
@@ -251,25 +251,25 @@ void test_BlendedText()
         simg2.setPosition(100,400);
         simg2.setText(str,48);
 
-        LX_Log::log("Size: 32 → 72");
+        lx::Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
             int w, h;
             simg.setTextSize(j);
             simg.getTextDimension(w, h);
-            LX_Log::log("Dimension: %d × %d", w,h);
+            lx::Log::log("Dimension: %d × %d", w,h);
             win.clearWindow();
             simg.draw();
             simg2.draw();
             win.update();
             lx::time::delay(100);
         }
-        LX_Log::log("Done");
+        lx::Log::log("Done");
 
         simg.setPosition(256,256);
         simg.setTextSize(32);
 
-        LX_Log::log("Rotation");
+        lx::Log::log("Rotation");
         for(double j = 0.0; j < 3.14 * 2; j += 0.1)
         {
             win.clearWindow();
@@ -277,6 +277,6 @@ void test_BlendedText()
             win.update();
             lx::time::delay(33);
         }
-        LX_Log::log("Done");
+        lx::Log::log("Done");
     }
 }

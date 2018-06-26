@@ -18,34 +18,34 @@ int main(int argc, char **argv)
     bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - lx::init() failed");
     else
-        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
-    LX_Log::setDebugMode();
-    LX_Log::log(" ==== Test Device ==== ");
+    lx::Log::setDebugMode();
+    lx::Log::log(" ==== Test Device ==== ");
 
     if(SDL_WasInit(flag) != flag)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - The device subsystem has not been initialized");
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - The device subsystem has not been initialized");
     else
-        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The device subsystem has been initialized");
+        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The device subsystem has been initialized");
 
     // Joystick and Game controller
-    LX_Log::logInfo(LX_Log::TEST,"You have %d gamepad(s) connected", numberOfDevices());
+    lx::Log::logInfo(lx::Log::TEST,"You have %d gamepad(s) connected", numberOfDevices());
 
     test_gamepad();
     test_haptic();
     test_mouse();
     lx::quit();
 
-    LX_Log::log(" ==== END Test Device ==== ");
+    lx::Log::log(" ==== END Test Device ==== ");
     return EXIT_SUCCESS;
 }
 
 
 void test_gamepad(void)
 {
-    LX_Log::log(" == Test Gamepad == ");
+    lx::Log::log(" == Test Gamepad == ");
 
     {
         LX_Gamepad gp;
@@ -53,23 +53,23 @@ void test_gamepad(void)
 
         if(gp.isConnected())
         {
-            LX_Log::log("Name: %s",gp.getName());
-            LX_Log::log("\n%s\n",gp.toString().utf8_str());
+            lx::Log::log("Name: %s",gp.getName());
+            lx::Log::log("\n%s\n",gp.toString().utf8_str());
             LX_Haptic *hp = gp.getHaptic();
 
             if(hp != nullptr)
             {
-                LX_Log::log("The device has force feedback");
+                lx::Log::log("The device has force feedback");
                 hp->rumbleEffectInit();
                 hp->rumbleEffectPlay(1.0,100);
                 lx::time::delay(500);
             }
             else
-                LX_Log::log("No haptic");
+                lx::Log::log("No haptic");
         }
         gp .close();
     }
-    LX_Log::log(" == END TEST == ");
+    lx::Log::log(" == END TEST == ");
 }
 
 
@@ -78,16 +78,16 @@ void test_haptic(void)
     LX_Haptic haptic(0);
     SDL_HapticEffect effect;
 
-    LX_Log::log(" == Test Haptic == ");
+    lx::Log::log(" == Test Haptic == ");
     memset(&effect,0,sizeof(SDL_HapticEffect));
 
     if(haptic.isOpened())
     {
-        LX_Log::log("Haptic device detected");
+        lx::Log::log("Haptic device detected");
 
         if(haptic.rumbleEffectInit())
         {
-            LX_Log::log("Play the rumble effect");
+            lx::Log::log("Play the rumble effect");
             haptic.rumbleEffectPlay(0.5,500);
             lx::time::delay(1000);
         }
@@ -102,30 +102,30 @@ void test_haptic(void)
         effect.periodic.attack_length = 1000;                   // Takes 1 second to get max strength
         effect.periodic.fade_length = 1000;                     // Takes 1 second to fade away
 
-        LX_Log::log("Add a custom effect");
+        lx::Log::log("Add a custom effect");
         int effectid = haptic.newEffect(effect);
 
         if(effectid < 0)
-            LX_Log::logError(LX_Log::TEST,"Cannot add effect: %s",LX_getError());
+            lx::Log::logError(lx::Log::TEST,"Cannot add effect: %s",LX_getError());
         else
         {
-            LX_Log::log("Run the effect");
+            lx::Log::log("Run the effect");
             haptic.runEffect(effectid,1);
             lx::time::delay(5128);                                    // Wait for the effect to finish
         }
 
-        LX_Log::log("Done");
+        lx::Log::log("Done");
     }
     else
-        LX_Log::log("No haptic device");
+        lx::Log::log("No haptic device");
 
-    LX_Log::log(" == END TEST == ");
+    lx::Log::log(" == END TEST == ");
 }
 
 
 void test_mouse(void)
 {
-    LX_Log::log(" == Test Gamepad == ");
+    lx::Log::log(" == Test Gamepad == ");
     LX_Win::LX_WindowInfo info;
     LX_Win::LX_initWindowInfo(info);
     info.w = 800;
@@ -133,31 +133,31 @@ void test_mouse(void)
     LX_Win::LX_Window w(info);
 
     std::string s = "data/bullet.png";
-    LX_Log::log("Define %s as the mouse cursor",s.c_str());
+    lx::Log::log("Define %s as the mouse cursor",s.c_str());
     LX_Device::LX_Mouse c(LX_Graphics::LX_BufferedImage(s),0,0);
 
     if(c.isOpen())
-        LX_Log::logDebug(LX_Log::TEST,"SUCCESS - the mouse cursor was loaded");
+        lx::Log::logDebug(lx::Log::TEST,"SUCCESS - the mouse cursor was loaded");
     else
-        LX_Log::logDebug(LX_Log::TEST,"FAILURE - not loaded; expeected: OK");
+        lx::Log::logDebug(lx::Log::TEST,"FAILURE - not loaded; expeected: OK");
 
     c.setMouse();
 
-    LX_Log::log("Try to get the haptic feedback of the mouse, if possible");
+    lx::Log::log("Try to get the haptic feedback of the mouse, if possible");
 
     if(LX_Device::mouseIsHaptic())
     {
-        LX_Log::log("Haptic feedback supported by the mouse");
+        lx::Log::log("Haptic feedback supported by the mouse");
         LX_MouseHaptic h;
 
         if(h.isOpened())
-            LX_Log::log("FAILURE - The haptic feedback does not seem to be supported");
+            lx::Log::log("FAILURE - The haptic feedback does not seem to be supported");
         else
-            LX_Log::log("SUCCESS - OK");
+            lx::Log::log("SUCCESS - OK");
     }
     else
     {
-        LX_Log::log("Haptic feedback not supported by the mouse");
+        lx::Log::log("Haptic feedback not supported by the mouse");
     }
 
     Uint32 t = SDL_GetTicks();
@@ -185,5 +185,5 @@ void test_mouse(void)
         lx::time::delay(16);
     }
 
-    LX_Log::log(" == END TEST == ");
+    lx::Log::log(" == END TEST == ");
 }

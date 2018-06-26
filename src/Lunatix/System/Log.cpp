@@ -88,7 +88,10 @@ std::string getDate() noexcept
 
 }   // namespace
 
-namespace LX_Log
+namespace lx
+{
+
+namespace Log
 {
 // Debug
 bool debug_mode = false;
@@ -209,4 +212,6 @@ void log( std::string format, ... ) noexcept
     va_end( args );
 }
 
-}
+}   // Log
+
+}   // lx

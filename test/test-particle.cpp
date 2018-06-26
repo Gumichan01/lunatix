@@ -122,12 +122,12 @@ int main(int argc, char **argv)
     bool err = lx::init();
 
     if(!err)
-        LX_Log::logInfo(LX_Log::TEST,"FAILURE - lx::init() failed");
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - lx::init() failed");
     else
-        LX_Log::logInfo(LX_Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
 
-    LX_Log::setDebugMode();
-    LX_Log::log(" ==== Test Particle ==== \n");
+    lx::Log::setDebugMode();
+    lx::Log::log(" ==== Test Particle ==== \n");
 
     LX_Win::LX_WindowInfo winfo;
     LX_Win::LX_loadWindowConfig(winfo);
@@ -141,23 +141,23 @@ int main(int argc, char **argv)
         red = new LX_Sprite(std::string("test/asset/red.bmp"), w);
         green = new LX_Sprite(std::string("test/asset/green.bmp"), w);
         blue = new LX_Sprite(std::string("test/asset/blue.bmp"), w);
-        LX_Log::log("SUCCESS - The three assets were successfully loaded");
+        lx::Log::log("SUCCESS - The three assets were successfully loaded");
     }
     catch(LX_Graphics::LX_ImageException& ie)
     {
-        LX_Log::log("FAILURE - (At least) One of the three assets was not loaded");
-        LX_Log::log("%s", ie.what());
+        lx::Log::log("FAILURE - (At least) One of the three assets was not loaded");
+        lx::Log::log("%s", ie.what());
     }
 
-    LX_Log::log("Loading the dot");
+    lx::Log::log("Loading the dot");
     dot = new Dot();
-    LX_Log::log("Dot loaded");
+    lx::Log::log("Dot loaded");
 
     LX_EventHandler e;
     int go = 1;
     begin_time = SDL_GetTicks();
 
-    LX_Log::log("The programm is running ...");
+    lx::Log::log("The programm is running ...");
 
     while(go == 1 &&  ((SDL_GetTicks() - begin_time) < 4000))
     {
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
     }
 
     LX_Win::getWindowManager().removeWindow(0);
-    LX_Log::log("End of program");
+    lx::Log::log("End of program");
 
     delete dot;
     delete blue;
@@ -182,6 +182,6 @@ int main(int argc, char **argv)
     delete red;
     lx::quit();
 
-    LX_Log::log(" ==== END Particle ==== \n");
+    lx::Log::log(" ==== END Particle ==== \n");
     return EXIT_SUCCESS;
 }

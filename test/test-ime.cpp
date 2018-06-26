@@ -25,7 +25,7 @@ public:
     {
         if(update)
         {
-            LX_Log::log("cursor → prev: %d; cur: %d\n",prev_cur,cursor);
+            lx::Log::log("cursor → prev: %d; cur: %d\n",prev_cur,cursor);
             _w.clearWindow();
 
             if(!u8str.utf8_empty())
@@ -115,8 +115,8 @@ int main(int argc, char** argv)
     LX_Win::LX_loadWindowConfig(info);
 
     lx::init();
-    LX_Log::setDebugMode(true);
-    LX_Log::log(" ==== TEST the text input ==== ");
+    lx::Log::setDebugMode(true);
+    lx::Log::log(" ==== TEST the text input ==== ");
 
     try
     {
@@ -131,15 +131,15 @@ int main(int argc, char** argv)
             input.eventLoop(callbck);
         }
 
-        LX_Log::log("SUCCESS - The input text module is well-implemented!");
+        lx::Log::log("SUCCESS - The input text module is well-implemented!");
     }
     catch(...)
     {
-        LX_Log::logError(LX_Log::LX_LogType::TEST,
+        lx::Log::logError(lx::Log::LX_LogType::TEST,
                          "FAILURE - Unexpected exception!");
     }
 
-    LX_Log::log(" ==== END TEST ==== \n");
+    lx::Log::log(" ==== END TEST ==== \n");
     lx::quit();
     return EXIT_SUCCESS;
 }
