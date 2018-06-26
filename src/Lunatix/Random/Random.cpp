@@ -22,7 +22,10 @@ constexpr unsigned long long UINT64_V = 0x2545F4914F6CDD1DULL;
 constexpr float UF_MAX = static_cast<float>( std::numeric_limits<uint32>::max() );
 }
 
-namespace LX_Random
+namespace lx
+{
+
+namespace Random
 {
 
 void initRand() noexcept
@@ -67,4 +70,6 @@ int crand() noexcept
     return rand();
 }
 
-}
+}   // Random
+
+}   // lx

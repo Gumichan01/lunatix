@@ -284,8 +284,8 @@ bool collisionPointPoly( const LX_FloatPosition& P, const LX_Polygon& poly )
 {
     const int v = 10000;
     const unsigned long N = poly.numberOfEdges();
-    const float RIX = LX_Random::fxrand( 0.0f, 100.0f );
-    const float RIY = LX_Random::fxrand( 0.0f, 100.0f );
+    const float RIX = lx::Random::fxrand( 0.0f, 100.0f );
+    const float RIY = lx::Random::fxrand( 0.0f, 100.0f );
 
     LX_FloatPosition I{v + RIX, v + RIY};
     unsigned long nb_intersections = 0;

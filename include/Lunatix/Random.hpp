@@ -23,16 +23,18 @@
 #include <type_traits>
 #include <limits>
 
+namespace lx
+{
 
 /**
 *   @ingroup System
-*   @namespace LX_Random
+*   @namespace lx::Random
 *   @brief The Random Number Generator (RNG) namespace
 *
 *   This random number generator can be used using the Xorshift* generator,
 *   or the standard C generator.
 */
-namespace LX_Random
+namespace Random
 {
 
 /**
@@ -120,7 +122,7 @@ int crand() noexcept;
 */
 inline unsigned long long xorshiftRand100() noexcept
 {
-    return LX_Random::xorshiftRand() % 100;
+    return xorshiftRand() % 100;
 }
 
 /**
@@ -133,11 +135,13 @@ inline unsigned long long xorshiftRand100() noexcept
 */
 inline int crand100() noexcept
 {
-    return LX_Random::crand() % 100;
+    return crand() % 100;
 }
 
 #include "Random.tpp"
 
-}
+}   // Random
+
+}   // lx
 
 #endif // LX_RANDOM_HPP_INCLUDED

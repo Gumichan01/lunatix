@@ -23,7 +23,7 @@
 #include <Lunatix/Random.hpp>
 #include <Lunatix/Texture.hpp>
 
-using namespace LX_Random;
+using namespace lx::Random;
 using namespace LX_Physics;
 
 

@@ -35,7 +35,7 @@ public:
     Dot()
     {
         LX_Particle *p = nullptr;
-        LX_Random::initRand();
+        lx::Random::initRand();
 
         sys = new LX_ParticleSystem(N);
         box = LX_FloatingBox{LX_FloatPosition{100.0f, 100.0f}, 20, 20};

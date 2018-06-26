@@ -984,7 +984,7 @@ void test_collision2Polygon(void)
 
 void test_collision2PolygonAgain(void)
 {
-#define FP(x) LX_Random::fxrand() * x
+#define FP(x) lx::Random::fxrand() * x
 
     const float N = 100000.0f;
     const float M = 1000.0f;
@@ -993,7 +993,7 @@ void test_collision2PolygonAgain(void)
     unsigned int t1,t2;
 
     lx::Log::log(" = TEST Collision BIG Polygon/Polygon = ");
-    LX_Random::initRand();
+    lx::Random::initRand();
 
     lx::Log::log("Generate two random polygons with %d sides",N);
     for(unsigned long i = 0L; i < N; ++i)
