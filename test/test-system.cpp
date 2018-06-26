@@ -2,7 +2,7 @@
 #include <Lunatix/Lunatix.hpp>
 
 using namespace std;
-using namespace LX_SystemInfo;
+using namespace lx::SystemInfo;
 
 
 int main(int argc, char **argv)

@@ -28,15 +28,18 @@
 *   @brief System module (File system, Multithreading, ...)
 */
 
+namespace lx
+{
+
 /**
 *   @ingroup System
-*   @namespace LX_SystemInfo
+*   @namespace lx::SystemInfo
 *   @brief The System information namespace
 *
 *   This namespace provides information about the system
 *   (Platform, CPU, RAM)
 */
-namespace LX_SystemInfo
+namespace SystemInfo
 {
 /**
 *   @struct LX_DisplayMode
@@ -54,7 +57,7 @@ struct LX_DisplayMode final
 *   @typedef LX_DisplayModes
 *   @brief Array of modes
 */
-using LX_DisplayModes = std::vector<LX_SystemInfo::LX_DisplayMode>;
+using LX_DisplayModes = std::vector<lx::SystemInfo::LX_DisplayMode>;
 
 /**
 *   @fn const UTF8string getPlatform()
@@ -119,6 +122,8 @@ int getSystemRAM() noexcept;
 */
 void getAvailableDisplayModes( LX_DisplayModes& modes );
 
-}
+}   // SystemInfo
+
+}   // lx
 
 #endif // LX_SYSTEM_INFO_H_INCLUDED
