@@ -56,7 +56,7 @@ bool loadMainSystem()
 {
     uint32_t sdl_flags = 0;
 
-    const LX_Configuration& config = LX_Configuration::getInstance();
+    const lx::Configuration& config = lx::Configuration::getInstance();
 
     // Video flag
     if ( config.getVideoFlag() )
@@ -86,7 +86,7 @@ bool loadImgSubSystem()
 {
     int img_flags = IMG_INIT_PNG | IMG_INIT_JPG;
 
-    if ( LX_Configuration::getInstance().getVideoFlag() )
+    if ( lx::Configuration::getInstance().getVideoFlag() )
     {
         if ( IMG_Init( img_flags ) != img_flags )
         {
@@ -100,7 +100,7 @@ bool loadImgSubSystem()
 
 bool loadTrueTypeFontSubSystem()
 {
-    if ( LX_Configuration::getInstance().getTTFFlag() )
+    if ( lx::Configuration::getInstance().getTTFFlag() )
     {
         if ( TTF_Init() == -1 )
         {
@@ -115,7 +115,7 @@ bool loadTrueTypeFontSubSystem()
 
 bool loadAudioSubSystem()
 {
-    if ( LX_Configuration::getInstance().getAudioFlag() )
+    if ( lx::Configuration::getInstance().getAudioFlag() )
     {
         if ( !initAudio() )
         {
@@ -131,7 +131,7 @@ bool loadAudioSubSystem()
 
 void loadOpenGLSubSystem()
 {
-    if ( LX_Configuration::getInstance().getOpenGLFlag() )
+    if ( lx::Configuration::getInstance().getOpenGLFlag() )
     {
         LX_Graphics::LX_OpenGL::setAttribute( SDL_GL_CONTEXT_PROFILE_MASK,
                                               SDL_GL_CONTEXT_PROFILE_CORE );

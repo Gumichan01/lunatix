@@ -33,7 +33,7 @@ namespace
 
 const unsigned int NB_CONFIG = 6;
 
-/* LX_ConfigLoader */
+/* lx::ConfigLoader */
 
 struct LX_InternalConfig final
 {
@@ -175,51 +175,51 @@ void loadFileConfig_( LX_InternalConfig& config ) noexcept
 namespace Config
 {
 
-/* LX_Configuration */
+/* lx::Configuration */
 
-LX_Configuration::LX_Configuration() noexcept
+lx::Configuration::lx::Configuration() noexcept
 {
     loadFlags_();
 }
 
-LX_Configuration& LX_Configuration::getInstance() noexcept
+lx::Configuration& lx::Configuration::getInstance() noexcept
 {
-    static LX_Configuration singleton;
+    static lx::Configuration singleton;
     return singleton;
 }
 
 
-void LX_Configuration::loadFlags_() noexcept
+void lx::Configuration::loadFlags_() noexcept
 {
     loadFileConfig_( _conf );
 }
 
-bool LX_Configuration::getVideoFlag() const noexcept
+bool lx::Configuration::getVideoFlag() const noexcept
 {
     return _conf.video_flag;
 }
 
-bool LX_Configuration::getVSyncFlag() const noexcept
+bool lx::Configuration::getVSyncFlag() const noexcept
 {
     return _conf.vsync_flag;
 }
 
-bool LX_Configuration::getTTFFlag() const noexcept
+bool lx::Configuration::getTTFFlag() const noexcept
 {
     return _conf.ttf_flag;
 }
 
-bool LX_Configuration::getAudioFlag() const noexcept
+bool lx::Configuration::getAudioFlag() const noexcept
 {
     return _conf.audio_flag;
 }
 
-bool LX_Configuration::getGamepadFlag() const noexcept
+bool lx::Configuration::getGamepadFlag() const noexcept
 {
     return _conf.gamepad_flag;
 }
 
-bool LX_Configuration::getOpenGLFlag() const noexcept
+bool lx::Configuration::getOpenGLFlag() const noexcept
 {
     return _conf.opengl_flag;
 }
