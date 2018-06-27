@@ -30,8 +30,6 @@ The library works on Windows and Linux (maybe on Mac OS X).
 ```cpp
 #include <Lunatix/Lunatix.hpp>
 
-using namespace LX_Event;
-
 int main( int argc, char** argv )
 {
 	if ( !lx::init() )
@@ -50,7 +48,7 @@ int main( int argc, char** argv )
     const std::string s = "data/bullet.png";
     LX_Graphics::LX_Sprite sprite( s, w );
     const LX_Graphics::LX_ImgRect position = { { 0, 0 }, 256, 256 };
-    LX_EventHandler ev;
+    lx::Event::LX_EventHandler ev;
     bool go = true;
 
     while ( go )
@@ -59,7 +57,7 @@ int main( int argc, char** argv )
         {
             switch ( ev.getEventType() )
             {
-            case LX_EventType::QUIT:
+            case lx::Event::LX_EventType::QUIT:
                 go = false;
                 break;
             default:
