@@ -26,7 +26,6 @@
 #include <SDL2/SDL_clipboard.h>
 #include <SDL2/SDL_keyboard.h>
 
-//using namespace LX_Event;
 
 // Anonymous
 namespace

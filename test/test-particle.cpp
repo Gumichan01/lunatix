@@ -3,7 +3,7 @@
 #include <Lunatix/Lunatix.hpp>
 
 using namespace std;
-using namespace LX_Event;
+using namespace lx::Event;
 using namespace FloatBox;
 
 using namespace LX_Graphics;

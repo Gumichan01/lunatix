@@ -2,7 +2,7 @@
 #include <Lunatix/Lunatix.hpp>
 #include <cstring>
 
-using namespace LX_Event;
+using namespace lx::Event;
 
 const char * fname = "font/AozoraMinchoMedium.ttf";
 constexpr LX_Colour COLOUR = {255,255,255,255};
