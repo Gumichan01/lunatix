@@ -43,9 +43,14 @@ class LX_ImgCoord;
 class LX_ImgRect;
 }
 
-namespace LX_TrueTypeFont
+namespace lx
+{
+
+namespace TrueTypeFont
 {
 class LX_Font;
+}
+
 }
 
 namespace LX_Physics
@@ -181,7 +186,7 @@ class LX_Window final
     friend class LX_Graphics::LX_StreamingTexture;
     friend class LX_Graphics::LX_AnimatedSprite;
     friend class LX_Graphics::LX_TextTexture;
-    friend class LX_TrueTypeFont::LX_Font;
+    friend class lx::TrueTypeFont::LX_Font;
 
     std::unique_ptr<LX_Window_> _wimpl;
 

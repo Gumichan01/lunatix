@@ -47,16 +47,19 @@ class LX_BlendedTextTexture;
 }
 
 
+namespace lx
+{
+
 /**
 *   @ingroup Graphics
-*   @namespace LX_TrueTypeFont
+*   @namespace lx::TrueTypeFont
 *   @brief The True Type Font (TTF) namespace.
 *
 *   @warning In order to use this namespace, the *ttf* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 */
-namespace LX_TrueTypeFont
+namespace TrueTypeFont
 {
 
 const unsigned int LX_TTF_DEFAULT_SIZE = 24;   /**< The default value of the font size */
@@ -146,6 +149,8 @@ public:
     ~LX_Font();
 };
 
-}
+}   // TrueTypeFont
+
+}   // lx
 
 #endif // LX_TTF_H_INCLUDED

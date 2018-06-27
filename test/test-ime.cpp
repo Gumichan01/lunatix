@@ -13,7 +13,7 @@ void generateInput();
 class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 {
     LX_Win::LX_Window& _w;
-    LX_TrueTypeFont::LX_Font _font;
+    lx::TrueTypeFont::LX_Font _font;
 
 public:
 

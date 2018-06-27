@@ -107,7 +107,7 @@ class LX_TextInput_;
 *       class FuncDraw : public LX_RedrawCallback
 *       {
 *           LX_Win::LX_Window& _w;
-*           LX_TrueTypeFont::LX_Font _font;
+*           lx::TrueTypeFont::LX_Font _font;
 *
 *       public:
 *

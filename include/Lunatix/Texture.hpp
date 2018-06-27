@@ -48,9 +48,14 @@ namespace LX_Device
 class LX_Mouse;
 }
 
-namespace LX_TrueTypeFont
+namespace lx
+{
+
+namespace TrueTypeFont
 {
 class LX_Font;
+}
+
 }
 
 
@@ -523,30 +528,30 @@ class LX_TextTexture: public LX_Texture
 protected:
 
     UTF8string _text;
-    LX_TrueTypeFont::LX_Font& _font;
+    lx::TrueTypeFont::LX_Font& _font;
     unsigned int _size;
     LX_Colour _colour;
     LX_ImgRect _dimension;
 
     virtual void updateTexture_() noexcept = 0;
 
-    LX_TextTexture( LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_TextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
-    LX_TextTexture( const std::string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_TextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
                     LX_Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
-    LX_TextTexture( const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_TextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
                     LX_Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     LX_TextTexture( const std::string& text, unsigned int sz,
-                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     LX_TextTexture( const UTF8string& text, unsigned int sz,
-                    LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
 public:
@@ -716,31 +721,31 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_SolidTextTexture( LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_SolidTextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_SolidTextTexture( const std::string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_SolidTextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
                          LX_Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_SolidTextTexture( const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_SolidTextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
                          LX_Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_SolidTextTexture( const std::string& text, unsigned int sz,
-                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                         lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_SolidTextTexture( const UTF8string& text, unsigned int sz,
-                         LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                         lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     ~LX_SolidTextTexture() = default;
@@ -778,32 +783,32 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_ShadedTextTexture( LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_ShadedTextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_ShadedTextTexture( const std::string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_ShadedTextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
                           const LX_Colour& bg, LX_Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_ShadedTextTexture( const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_ShadedTextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
                           const LX_Colour& bg, LX_Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_ShadedTextTexture( const std::string& text, unsigned int sz,
-                          LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
+                          lx::TrueTypeFont::LX_Font& font, const LX_Colour& bg,
                           LX_Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_ShadedTextTexture( const UTF8string& text, unsigned int sz,
-                          LX_TrueTypeFont::LX_Font& font, const LX_Colour& bg,
+                          lx::TrueTypeFont::LX_Font& font, const LX_Colour& bg,
                           LX_Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
@@ -849,31 +854,31 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_BlendedTextTexture( LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_BlendedTextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_BlendedTextTexture( const std::string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_BlendedTextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
                            LX_Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_BlendedTextTexture( const UTF8string& text, LX_TrueTypeFont::LX_Font& font,
+    LX_BlendedTextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
                            LX_Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_BlendedTextTexture( const std::string& text, unsigned int sz,
-                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_BlendedTextTexture( const UTF8string& text, unsigned int sz,
-                           LX_TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     ~LX_BlendedTextTexture() = default;

@@ -36,9 +36,14 @@ namespace LX_Graphics
 class LX_BufferedImage;
 }
 
-namespace LX_TrueTypeFont
+namespace lx
+{
+
+namespace TrueTypeFont
 {
 struct LX_Font_;
+}
+
 }
 
 namespace LX_FileIO
@@ -55,14 +60,14 @@ class LX_FileBuffer_;
 */
 class LX_FileBuffer final
 {
-    friend struct LX_TrueTypeFont::LX_Font_;
+    friend struct lx::TrueTypeFont::LX_Font_;
     std::unique_ptr<LX_FileBuffer_> _bimpl;
 
     LX_FileBuffer( LX_FileBuffer& fb );
     LX_FileBuffer& operator =( LX_FileBuffer& fb );
 
     // private function
-    void * getFontFromBuffer_( int size ) const noexcept; // used by LX_TrueTypeFont::LX_Font
+    void * getFontFromBuffer_( int size ) const noexcept; // used by lx::TrueTypeFont::LX_Font
 
 public:
 

@@ -52,7 +52,10 @@ inline int sizeOfText( TTF_Font * ttf, const std::string& text, int& w, int& h )
 }
 
 
-namespace LX_TrueTypeFont
+namespace lx
+{
+
+namespace TrueTypeFont
 {
 
 enum class LX_TTF_TypeText
@@ -329,4 +332,6 @@ LX_Font::~LX_Font()
     _fimpl->_font_buffer.reset();
 }
 
-}
+}   // TrueTypeFont
+
+}   // lx
