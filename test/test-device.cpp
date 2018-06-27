@@ -161,15 +161,15 @@ void test_mouse(void)
     }
 
     Uint32 t = SDL_GetTicks();
-    LX_Event::LX_EventHandler ev;
+    lx::Event::LX_EventHandler ev;
     while(SDL_GetTicks() - t < 4000)
     {
         while(ev.pollEvent())
         {
             switch(ev.getEventType())
             {
-            case LX_Event::LX_EventType::MOUSEBUTTONUP:
-                if(ev.getMouseButton().button == LX_Event::LX_MouseButton::LBUTTON)
+            case lx::Event::LX_EventType::MOUSEBUTTONUP:
+                if(ev.getMouseButton().button == lx::Event::LX_MouseButton::LBUTTON)
                     LX_Device::mouseCursorDisplay(LX_Device::LX_MouseToggle::HIDE);
                 else
                     LX_Device::mouseCursorDisplay(LX_Device::LX_MouseToggle::SHOW);

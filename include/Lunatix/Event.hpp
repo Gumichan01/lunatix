@@ -31,9 +31,12 @@ union SDL_Event;
 *   @brief Event handling module
 */
 
+namespace lx
+{
+
 /**
 *   @ingroup Event
-*   @namespace LX_Event
+*   @namespace lx::Event
 *   @brief The event namespace
 *
 *   It handles every events (user input, window,...)
@@ -43,7 +46,7 @@ union SDL_Event;
 *   the library is undefined.
 *
 */
-namespace LX_Event
+namespace Event
 {
 using LX_KeyCode   = SDL_Keycode;   /**< Virtual key representation     */
 using LX_ScanCode  = SDL_Scancode;  /**< Physical key representation    */
@@ -644,6 +647,8 @@ UTF8string stringOfButton( LX_GamepadButton button ) noexcept;
 */
 UTF8string stringOfAxis( LX_GamepadAxis axis ) noexcept;
 
-}
+}   // Event
+
+}   // lx
 
 #endif // LX_EVENT_HPP_INCLUDED

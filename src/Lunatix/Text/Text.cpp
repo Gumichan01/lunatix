@@ -26,7 +26,7 @@
 #include <SDL2/SDL_clipboard.h>
 #include <SDL2/SDL_keyboard.h>
 
-using namespace LX_Event;
+//using namespace LX_Event;
 
 // Anonymous
 namespace
@@ -63,7 +63,7 @@ class LX_TextInput_ final
     // Save a text in the clipboard get it from it
     void save_() noexcept
     {
-        static const uint8_t * KEYS = LX_EventHandler::getKeyboardState().state;
+        static const uint8_t * KEYS = lx::Event::LX_EventHandler::getKeyboardState().state;
 
         if ( KEYS[SDL_SCANCODE_LCTRL] )
         {
@@ -85,7 +85,7 @@ class LX_TextInput_ final
 
     void paste_() noexcept
     {
-        static const uint8_t * KEYS = LX_EventHandler::getKeyboardState().state;
+        static const uint8_t * KEYS = lx::Event::LX_EventHandler::getKeyboardState().state;
 
         if ( KEYS[SDL_SCANCODE_LCTRL] )
         {
@@ -119,7 +119,7 @@ class LX_TextInput_ final
     }
 
     // Input
-    void keyCode( const LX_Event::LX_EventHandler& ev )
+    void keyCode( const lx::Event::LX_EventHandler& ev )
     {
         switch ( ev.getKeyCode() )
         {
@@ -155,7 +155,7 @@ class LX_TextInput_ final
         }
     }
 
-    void keyboardInput_( const LX_Event::LX_EventHandler& ev ) noexcept
+    void keyboardInput_( const lx::Event::LX_EventHandler& ev ) noexcept
     {
         const size_t old_cursor = _cursor;
 
@@ -169,7 +169,7 @@ class LX_TextInput_ final
             return;
 
         keyCode( ev );
-        LX_Event::LX_ScanCode sc = ev.getScanCode();
+        lx::Event::LX_ScanCode sc = ev.getScanCode();
 
         if ( sc == SDL_SCANCODE_C )
             save_();
@@ -185,9 +185,9 @@ class LX_TextInput_ final
                               "Input - _cursor at %d", _cursor );
     }
 
-    void textInput_( const LX_Event::LX_EventHandler& ev ) noexcept
+    void textInput_( const lx::Event::LX_EventHandler& ev ) noexcept
     {
-        const LX_Event::LX_TextEvent tev = ev.getTextEvent();
+        const lx::Event::LX_TextEvent tev = ev.getTextEvent();
 
         if ( tev.text[0] == '\0' || isEOL( tev.text ) )
             return;
@@ -209,7 +209,7 @@ class LX_TextInput_ final
         }
     }
 
-    void textEdit_( const LX_Event::LX_EventHandler& ev ) noexcept
+    void textEdit_( const lx::Event::LX_EventHandler& ev ) noexcept
     {
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT, "Edit the text" );
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT, "New edition: %s",
@@ -321,7 +321,7 @@ public:
     void eventLoop_( LX_RedrawCallback& redraw ) noexcept
     {
         size_t prev_cur = _cursor;
-        LX_EventHandler ev;
+        lx::Event::LX_EventHandler ev;
         _done = false;
         _draw = false;
 
@@ -331,15 +331,15 @@ public:
             {
                 switch ( ev.getEventType() )
                 {
-                case LX_EventType::KEYDOWN:
+                case lx::Event::LX_EventType::KEYDOWN:
                     keyboardInput_( ev );
                     break;
 
-                case LX_EventType::TEXTINPUT:
+                case lx::Event::LX_EventType::TEXTINPUT:
                     textInput_( ev );
                     break;
 
-                case LX_EventType::TEXTEDITING:
+                case lx::Event::LX_EventType::TEXTEDITING:
                     textEdit_( ev );
                     break;
 
