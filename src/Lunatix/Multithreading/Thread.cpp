@@ -14,7 +14,10 @@
 #include <system_error>
 
 
-namespace LX_Multithreading
+namespace lx
+{
+
+namespace Multithreading
 {
 
 size_t getCurrentThreadID() noexcept
@@ -37,4 +40,6 @@ size_t LX_Thread::getID() const noexcept
     return std::hash<std::thread::id>()( _thread.get_id() );
 }
 
-}
+}   // Multithreading
+
+}   // lx

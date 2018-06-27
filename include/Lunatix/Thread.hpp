@@ -30,15 +30,18 @@
 *   @brief Multithreading and synchronization
 */
 
+namespace lx
+{
+
 /**
     @ingroup Multithread
-*   @namespace LX_Multithreading
+*   @namespace lx::Multithreading
 *   @brief The Multithreading namespace
 *
 *   It handles multithreading and threadsynchronization primitives
 *   (mutexes, condition variables, channels)
 */
-namespace LX_Multithreading
+namespace Multithreading
 {
 
 /**
@@ -155,6 +158,8 @@ public:
 
 #include "Thread.tpp"
 
-}
+}   // Multithreading
+
+}   // lx
 
 #endif  // LX_THREAD_HPP_INCLUDED
