@@ -39,7 +39,10 @@ struct LX_Vector2D;
 struct LX_FloatingBox;
 }
 
-namespace LX_ParticleEngine
+namespace lx
+{
+
+namespace ParticleEngine
 {
 
 class LX_Particle_;
@@ -102,6 +105,8 @@ public:
     ~LX_Particle();
 };
 
-}
+}   // ParticleEngine
+
+}   // lx
 
 #endif // PARTICLE_HPP_INCLUDED

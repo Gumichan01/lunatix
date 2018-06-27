@@ -27,8 +27,12 @@ using namespace lx::Random;
 using namespace LX_Physics;
 
 
-namespace LX_ParticleEngine
+namespace lx
 {
+
+namespace ParticleEngine
+{
+
 using FloatBox::FNIL;
 const unsigned int DELAY = 16;
 constexpr LX_Vector2D VNULL = {FNIL, FNIL};
@@ -115,4 +119,6 @@ LX_Particle::~LX_Particle()
     _pimpl.reset();
 }
 
-}
+}   // ParticleEngine
+
+}   // lx

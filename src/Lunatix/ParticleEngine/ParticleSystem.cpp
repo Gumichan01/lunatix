@@ -26,7 +26,10 @@
 #include <array>
 
 
-namespace LX_ParticleEngine
+namespace lx
+{
+
+namespace ParticleEngine
 {
 
 /* Private implementation */
@@ -193,4 +196,6 @@ unsigned int LX_ParticleSystem::nbTotalParticles() const noexcept
     return _psimpl->nbTotalParticles();
 }
 
-}
+}   // ParticleEngine
+
+}   // lx

@@ -22,14 +22,17 @@
 
 #include <memory>
 
+namespace lx
+{
+
 /**
 *   @ingroup Graphics
-*   @namespace LX_ParticleEngine
+*   @namespace lx::ParticleEngine
 *   @brief The particle engine
 *
 *   It handles a basic particle system
 */
-namespace LX_ParticleEngine
+namespace ParticleEngine
 {
 
 class LX_Particle;
@@ -95,6 +98,8 @@ public:
     ~LX_ParticleSystem();
 };
 
-}
+}   // ParticleEngine
+
+}   // lx
 
 #endif // LX_PARTICLESYSTEM_HPP_INCLUDED
