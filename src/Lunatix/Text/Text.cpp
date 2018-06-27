@@ -40,7 +40,11 @@ inline bool isEOL( const std::string& text ) noexcept
 
 }
 
-namespace LX_Text
+
+namespace lx
+{
+
+namespace Text
 {
 
 const uint32_t DELAY = 33;
@@ -380,4 +384,6 @@ LX_TextInput::~LX_TextInput() noexcept
     _timpl.reset();
 }
 
-}
+}   // Text
+
+}   // lx

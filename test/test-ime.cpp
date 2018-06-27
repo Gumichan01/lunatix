@@ -10,7 +10,7 @@ constexpr LX_Colour COLOUR = {255,255,255,255};
 void generateInput();
 
 
-class FuncDraw : public virtual LX_Text::LX_RedrawCallback
+class FuncDraw : public virtual lx::Text::LX_RedrawCallback
 {
     LX_Win::LX_Window& _w;
     lx::TrueTypeFont::LX_Font _font;
@@ -18,7 +18,7 @@ class FuncDraw : public virtual LX_Text::LX_RedrawCallback
 public:
 
     explicit FuncDraw(LX_Win::LX_Window& win)
-        : LX_Text::LX_RedrawCallback(), _w(win), _font(fname, COLOUR, 32) {}
+        : lx::Text::LX_RedrawCallback(), _w(win), _font(fname, COLOUR, 32) {}
 
     void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
                      size_t cursor, size_t prev_cur) noexcept
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
         {
             FuncDraw callbck(win);
             generateInput();            // Remove it in order to use the manual input
-            LX_Text::LX_TextInput input;
+            lx::Text::LX_TextInput input;
             input.eventLoop(callbck);
         }
 

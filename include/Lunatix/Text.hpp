@@ -29,13 +29,15 @@ namespace LX_Event
 class LX_EventHandler;
 }
 
+namespace lx
+{
 
 /**
 *   @ingroup Event
-*   @namespace LX_Text
+*   @namespace lx::Text
 *   @brief The Text input namespace
 */
-namespace LX_Text
+namespace Text
 {
 
 /**
@@ -167,6 +169,8 @@ public:
     ~LX_TextInput() noexcept;
 };
 
-}
+}   // Text
+
+}   // lx
 
 #endif // LX_TEXT_HPP_INCLUDED
