@@ -129,7 +129,7 @@ public:
     *   @warning It is necessary to initialize the SDL_TTF library setting
     *           the ttf flag to 1 in lunatix.cfg.
     *
-    *   @exception LX_FileIO::IOException if the file cannot be loaded
+    *   @exception lx::FileIO::IOException if the file cannot be loaded
     */
     LX_Font( const std::string& font_file, const LX_Colour& colour, unsigned int size );
 

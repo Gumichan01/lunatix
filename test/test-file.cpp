@@ -453,7 +453,7 @@ void test_tmp(void)
     try
     {
         char buf[1024] = {'\0'};
-        LX_FileIO::LX_TmpFile tmp;
+        lx::FileIO::LX_TmpFile tmp;
 
         lx::Log::log("File created. writing \"→ Gumichan01 ←\" ...");
         tmp << "→ Gumichan01 ←";
@@ -464,7 +464,7 @@ void test_tmp(void)
         lx::Log::log("got: %s",buf);
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - temporary file done",buf);
     }
-    catch(LX_FileIO::IOException &ioe)
+    catch(lx::FileIO::IOException &ioe)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - %s",ioe.what());
     }

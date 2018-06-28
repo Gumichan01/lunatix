@@ -133,7 +133,7 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a image file using the file buffer");
-        LX_FileIO::LX_FileBuffer b(name);
+        lx::FileIO::LX_FileBuffer b(name);
         LX_Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
         LX_Graphics::LX_Sprite *img = bf->generateSprite(*win);
         delete bf;
@@ -196,7 +196,7 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"FileBuffer argument");
-        LX_FileIO::LX_FileBuffer b(name);
+        lx::FileIO::LX_FileBuffer b(name);
         LX_BufferedImage *data = b.loadBufferedImage();
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
