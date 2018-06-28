@@ -5,20 +5,20 @@
 using namespace lx::Event;
 
 const char * fname = "font/AozoraMinchoMedium.ttf";
-constexpr LX_Colour COLOUR = {255,255,255,255};
+constexpr Colour COLOUR = {255,255,255,255};
 
 void generateInput();
 
 
-class FuncDraw : public virtual lx::Text::LX_RedrawCallback
+class FuncDraw : public virtual lx::Text::RedrawCallback
 {
-    lx::Win::LX_Window& _w;
-    lx::TrueTypeFont::LX_Font _font;
+    lx::Win::Window& _w;
+    lx::TrueTypeFont::Font _font;
 
 public:
 
-    explicit FuncDraw(lx::Win::LX_Window& win)
-        : lx::Text::LX_RedrawCallback(), _w(win), _font(fname, COLOUR, 32) {}
+    explicit FuncDraw(lx::Win::Window& win)
+        : lx::Text::RedrawCallback(), _w(win), _font(fname, COLOUR, 32) {}
 
     void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
                      size_t cursor, size_t prev_cur) noexcept
@@ -30,7 +30,7 @@ public:
 
             if(!u8str.utf8_empty())
             {
-                lx::Graphics::LX_BlendedTextTexture img(_font,_w);
+                lx::Graphics::BlendedTextTexture img(_font,_w);
                 img.setText(u8str,24);
                 img.setPosition(100,100);
                 img.draw();
@@ -38,8 +38,8 @@ public:
 
             if(!u8comp.utf8_empty())
             {
-                LX_Colour colour = {127,127,127,255};
-                lx::Graphics::LX_ShadedTextTexture im(u8comp,18,_font,colour,_w);
+                Colour colour = {127,127,127,255};
+                lx::Graphics::ShadedTextTexture im(u8comp,18,_font,colour,_w);
                 im.setPosition(100,124);
                 im.draw();
             }
@@ -110,9 +110,9 @@ void generateInput()
 
 int main(int argc, char** argv)
 {
-    lx::Win::LX_WindowInfo info;
-    lx::Win::LX_initWindowInfo(info);
-    lx::Win::LX_loadWindowConfig(info);
+    lx::Win::WindowInfo info;
+    lx::Win::initWindowInfo(info);
+    lx::Win::loadWindowConfig(info);
 
     lx::init();
     lx::Log::setDebugMode(true);
@@ -120,14 +120,14 @@ int main(int argc, char** argv)
 
     try
     {
-        lx::Win::LX_Window win(info);
+        lx::Win::Window win(info);
         win.clearWindow();
         win.update();
         // Text input
         {
             FuncDraw callbck(win);
             generateInput();            // Remove it in order to use the manual input
-            lx::Text::LX_TextInput input;
+            lx::Text::TextInput input;
             input.eventLoop(callbck);
         }
 
@@ -135,7 +135,7 @@ int main(int argc, char** argv)
     }
     catch(...)
     {
-        lx::Log::logError(lx::Log::LX_LogType::TEST,
+        lx::Log::logError(lx::Log::LogType::TEST,
                          "FAILURE - Unexpected exception!");
     }
 

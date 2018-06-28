@@ -29,16 +29,16 @@ namespace lx
 namespace Device
 {
 
-class LX_Mouse_ final
+class Mouse_ final
 {
     SDL_Cursor * _cursor = nullptr;
 
 public:
 
-    LX_Mouse_( const LX_Mouse_& ) = delete;
-    LX_Mouse_& operator =( const LX_Mouse_& ) = delete;
+    Mouse_( const Mouse_& ) = delete;
+    Mouse_& operator =( const Mouse_& ) = delete;
 
-    LX_Mouse_( SDL_Surface * surface, int hot_x, int hot_y ) noexcept
+    Mouse_( SDL_Surface * surface, int hot_x, int hot_y ) noexcept
         : _cursor( SDL_CreateColorCursor( surface, hot_x, hot_y ) ) {}
 
     bool isOpen() const noexcept
@@ -51,28 +51,28 @@ public:
         SDL_SetCursor( _cursor );
     }
 
-    ~LX_Mouse_()
+    ~Mouse_()
     {
         SDL_FreeCursor( _cursor );
     }
 };
 
 
-LX_Mouse::LX_Mouse( const lx::Graphics::LX_BufferedImage& surface,
+Mouse::Mouse( const lx::Graphics::BufferedImage& surface,
                     int hot_x, int hot_y ) noexcept
-    : _mimpl( new LX_Mouse_( surface._surface, hot_x, hot_y ) ) {}
+    : _mimpl( new Mouse_( surface._surface, hot_x, hot_y ) ) {}
 
-bool LX_Mouse::isOpen() const noexcept
+bool Mouse::isOpen() const noexcept
 {
     return _mimpl->isOpen();
 }
 
-void LX_Mouse::setMouse() noexcept
+void Mouse::setMouse() noexcept
 {
     _mimpl->setMouse();
 }
 
-LX_Mouse::~LX_Mouse()
+Mouse::~Mouse()
 {
     _mimpl.reset();
 }

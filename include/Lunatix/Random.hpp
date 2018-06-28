@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_RANDOM_HPP_INCLUDED
-#define LX_RANDOM_HPP_INCLUDED
+#ifndef RANDOM_HPP_INCLUDED
+#define RANDOM_HPP_INCLUDED
 
 /**
 *   @file Random.hpp
@@ -45,19 +45,19 @@ namespace Random
 void initRand() noexcept;
 
 /**
-*   @typedef template <typename Num> LX_Num
+*   @typedef template <typename N> Num
 *   @brief Statically define a positive Number
 *   @param Num
 */
 template <typename N>
-using LX_Num =
+using Num =
     typename std::enable_if < std::is_integral< N >::value &&
     std::is_unsigned< N >::value &&
     !std::is_same< N, bool >::value &&
     !std::is_same< N, unsigned char >::value, N >::type;
 
 /**
-*   @fn template <typename T> LX_Num<T> xrand(T min = 0, T max = std::numeric_limits<T>::max()) noexcept
+*   @fn template <typename T> Num<T> xrand(T min = 0, T max = std::numeric_limits<T>::max()) noexcept
 *   Returns a pseudorandom number between min and max
 *
 *   @param min
@@ -70,7 +70,7 @@ using LX_Num =
 *   @note This function uses the Xorshift* Random Number generator
 */
 template <typename T>
-LX_Num<T> xrand( T min = 0U, T max = std::numeric_limits< T >::max() ) noexcept;
+Num<T> xrand( T min = 0U, T max = std::numeric_limits< T >::max() ) noexcept;
 
 
 /**
@@ -144,4 +144,4 @@ inline int crand100() noexcept
 
 }   // lx
 
-#endif // LX_RANDOM_HPP_INCLUDED
+#endif // RANDOM_HPP_INCLUDED

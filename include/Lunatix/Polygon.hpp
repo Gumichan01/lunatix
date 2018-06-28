@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_POLYGON_H_INCLUDED
-#define LX_POLYGON_H_INCLUDED
+#ifndef POLYGON_H_INCLUDED
+#define POLYGON_H_INCLUDED
 
 /**
 *   @file Polygon.hpp
@@ -30,52 +30,52 @@ namespace lx
 namespace Physics
 {
 
-struct LX_Vector2D;
-struct LX_FloatPosition;
+struct Vector2D;
+struct FloatPosition;
 
 /**
-*   @class LX_PolygonException
-*   @brief The exception class of LX_Window
+*   @class PolygonException
+*   @brief The exception class of Window
 *
 *   This class describes the exception occured when
 *   the polygon cannot be loaded.
 */
-class LX_PolygonException final : public std::exception
+class PolygonException final : public std::exception
 {
     std::string _string_error;
 
 public:
 
-    explicit LX_PolygonException( std::string err );
-    LX_PolygonException( const LX_PolygonException& pex );
-    LX_PolygonException& operator =( const LX_PolygonException& pex );
+    explicit PolygonException( std::string err );
+    PolygonException( const PolygonException& pex );
+    PolygonException& operator =( const PolygonException& pex );
     const char * what() const noexcept override;
-    ~LX_PolygonException() noexcept;
+    ~PolygonException() noexcept;
 };
 
 
-class LX_Polygon_;
+class Polygon_;
 
 /**
-*   @class LX_Polygon
+*   @class Polygon
 *   @brief The polygon
 */
-class LX_Polygon final
+class Polygon final
 {
-    std::unique_ptr<LX_Polygon_> _polyimpl;
+    std::unique_ptr<Polygon_> _polyimpl;
 
-    LX_Polygon( LX_Polygon& p ) = delete;
-    LX_Polygon& operator =( LX_Polygon& p ) = delete;
+    Polygon( Polygon& p ) = delete;
+    Polygon& operator =( Polygon& p ) = delete;
 
     void convexity_() noexcept;
-    void addPoint_( const LX_FloatPosition& p );
+    void addPoint_( const FloatPosition& p );
 
 public:
 
-    LX_Polygon() noexcept;
+    Polygon() noexcept;
 
     /**
-    *   @fn void LX_Polygon::addPoint(const LX_FloatPosition& p)
+    *   @fn void Polygon::addPoint(const FloatPosition& p)
     *   Set a new point into the polygon
     *   @param [in] p The new edge to add
     *
@@ -85,7 +85,7 @@ public:
     *   @note 2 - Complexity: O(n) if n >= 3, O(1) otherwise,
     *             **n** is the number of edges of the polygon.
     */
-    void addPoint( const LX_FloatPosition& p );
+    void addPoint( const FloatPosition& p );
     /**
     *   @fn template <typename Iterator> void addPoints(Iterator first, Iterator last)
     *
@@ -104,22 +104,22 @@ public:
     void addPoints( Iterator first, Iterator last );
 
     /**
-    *   @fn unsigned long LX_Polygon::numberOfEdges() const noexcept
+    *   @fn unsigned long Polygon::numberOfEdges() const noexcept
     *   @return The number of edges of the polygon
     */
     unsigned long numberOfEdges() const noexcept;
     /**
-    *   @fn LX_FloatPosition LX_Polygon::getPoint(const unsigned long index) const
+    *   @fn FloatPosition Polygon::getPoint(const unsigned long index) const
     *
     *   @param [in] index The index of the point
     *
     *   @return A copy of the point
     *
-    *   @exception  LX_PolygonException If the index is out of bounds
+    *   @exception  PolygonException If the index is out of bounds
     */
-    LX_FloatPosition getPoint( const unsigned long index ) const;
+    FloatPosition getPoint( const unsigned long index ) const;
     /**
-    *   @fn LX_FloatingBox getEnclosingBox() const
+    *   @fn FloatingBox getEnclosingBox() const
     *
     *   Get the axis-aligned minimum bounding box (AABB) that enclose the polygon
     *   See — https://en.wikipedia.org/wiki/Minimum_bounding_box
@@ -127,11 +127,11 @@ public:
     *   @return The enclosing box
     *
     *   @note Complexity: O(n) with n > 2. n is the number of vertices in the polygon
-    *   @exception  LX_PolygonException If the polygon has less than 3 sides
+    *   @exception  PolygonException If the polygon has less than 3 sides
     */
-    LX_FloatingBox getEnclosingBox() const;
+    FloatingBox getEnclosingBox() const;
     /**
-    *   @fn bool LX_Polygon::isConvex() const noexcept
+    *   @fn bool Polygon::isConvex() const noexcept
     *
     *   Check the convexity of the polygon
     *
@@ -144,20 +144,20 @@ public:
     bool isConvex() const noexcept;
 
     /**
-    *   @fn void LX_Polygon::move(const LX_Vector2D& v) noexcept
+    *   @fn void Polygon::move(const Vector2D& v) noexcept
     *   @param [in] v The vector that indicates the direction
     *   @note Complexity: O(n), n the number of vertices of the polygon
     */
-    void move( const LX_Vector2D& v ) noexcept;
+    void move( const Vector2D& v ) noexcept;
     /**
-    *   @fn void moveTo(const LX_FloatPosition& p)
+    *   @fn void moveTo(const FloatPosition& p)
     *   @param [in] p The new position
     *   @note Complexity: O(n), n is the number of vertices of the polygon
-    *   @exception  LX_PolygonException If the polygon has less than 3 sides
+    *   @exception  PolygonException If the polygon has less than 3 sides
     */
-    void moveTo( const LX_FloatPosition& p );
+    void moveTo( const FloatPosition& p );
 
-    ~LX_Polygon();
+    ~Polygon();
 };
 
 }   // Physics

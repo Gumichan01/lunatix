@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     lx::Log::log("Number of CPU cores: %d",getCPUCount());
     lx::Log::log("RAM: %d MB\n ",getSystemRAM());
 
-    LX_DisplayModes modes;
+    DisplayModes modes;
     getAvailableDisplayModes(modes);
 
     lx::Log::log("Display modes: ");

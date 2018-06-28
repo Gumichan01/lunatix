@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_OPENGL_H_INCLUDED
-#define LX_OPENGL_H_INCLUDED
+#ifndef OPENGL_H_INCLUDED
+#define OPENGL_H_INCLUDED
 
 
 /**
@@ -52,27 +52,27 @@ namespace Graphics
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 *
-*   @sa LX_Graphics
+*   @sa Graphics
 */
 namespace OpenGL
 {
 /**
-*   @typedef LX_GLattr
+*   @typedef GLattr
 */
-using LX_GLattr = SDL_GLattr;
+using GLattr = SDL_GLattr;
 /**
-*   @typedef LX_GLContext
+*   @typedef GLContext
 */
-using LX_GLContext = SDL_GLContext;
+using GLContext = SDL_GLContext;
 
 const int MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by the library */
 const int MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the library */
 
 /**
-*   @enum LX_GL_SwapInterval
+*   @enum GL_SwapInterval
 *   @brief The enumeration used to define the swap interval
 */
-enum class LX_GL_SwapInterval
+enum class GL_SwapInterval
 {
     NO_VSYNC      =  0,     /**< No VSync               */
     VSYNC         =  1,     /**< VSync                  */
@@ -96,7 +96,7 @@ bool extensionSupported( std::string extension ) noexcept;
 *   Load the default OpenGL library
 *
 *   @return TRUE on success or FALSE on FAILURE.
-*          Call LX_getError() for more information
+*          Call getError() for more information
 *
 *   @note See ::loadLibrary
 */
@@ -108,7 +108,7 @@ bool loadDefaultLibrary() noexcept;
 *
 *   @param [in] path The platform dependent library name
 *   @return TRUE on success or FALSE on FAILURE.
-*          Call LX_getError() for more information
+*          Call getError() for more information
 *
 *   @note 1 - This function should be called after initializing the video subsystem,
 *            but before creating any OpenGL windows.
@@ -125,7 +125,7 @@ bool loadLibrary( std::string path ) noexcept;
 *   *::loadDefaultLibrary()* or ::loadLibrary()*
 *
 *   @return TRUE on success or FALSE on FAILURE.
-*          Call LX_getError() for more information
+*          Call getError() for more information
 */
 void UnloadLibrary() noexcept;
 
@@ -164,58 +164,58 @@ T getProcAddress( const std::string proc ) noexcept;
 
 
 /**
-*   @fn LX_GLContext getCurrentContext() noexcept
+*   @fn GLContext getCurrentContext() noexcept
 *
 *   Get the current context
 *
 *   @return The current active OpenGL context or NULL on failure.
-*          Call LX_getError() for more information
+*          Call getError() for more information
 */
-LX_GLContext getCurrentContext() noexcept;
+GLContext getCurrentContext() noexcept;
 
 /**
-*   @fn LX_GL_SwapInterval getSwapInterval() noexcept
+*   @fn GL_SwapInterval getSwapInterval() noexcept
 *
 *   Get the swap interval for the current OpenGL context
 *
 *   @return
-*          - LX_GL_SwapInterval::NO_VSYNC if there is no Vertical synchronization
-*          - LX_GL_SwapInterval::VSYNC if the swap is synchonized with the vertical retrace
-*          - LX_GL_SwapInterval::NOT_SUPPORTED if the swap interval is not supported.
-*            Call LX_getError() for more information
+*          - GL_SwapInterval::NO_VSYNC if there is no Vertical synchronization
+*          - GL_SwapInterval::VSYNC if the swap is synchonized with the vertical retrace
+*          - GL_SwapInterval::NOT_SUPPORTED if the swap interval is not supported.
+*            Call getError() for more information
 *
 *   @sa setSwapInterval
 */
-LX_GL_SwapInterval getSwapInterval() noexcept;
+GL_SwapInterval getSwapInterval() noexcept;
 /**
-*   @fn bool setSwapInterval(const LX_GL_SwapInterval& interval) noexcept
+*   @fn bool setSwapInterval(const GL_SwapInterval& interval) noexcept
 *
 *   Set the swap interval for the current OpenGL context
 *
 *   @param [in] interval One of the following values:
-*          - LX_GL_SwapInterval::NO_VSYNC : for immediate updates
-*          - LX_GL_SwapInterval::VSYNC    : for Vertical Synchronization (VSync)
-*          - LX_GL_SwapInterval::TEARING  : for late swap tearing
+*          - GL_SwapInterval::NO_VSYNC : for immediate updates
+*          - GL_SwapInterval::VSYNC    : for Vertical Synchronization (VSync)
+*          - GL_SwapInterval::TEARING  : for late swap tearing
 *
 *   @return TRUE on success. FALSE if the setting is not supported.
-*          Call LX_getError() for more information
+*          Call getError() for more information
 *
-*   @note Some systems allow specifying -1 (LX_GL_TEARING)
+*   @note Some systems allow specifying -1 (GL_TEARING)
 *        for the interval in order to enable late swap tearing.
-*        Late swap tearing (LX_GL_TEARING) works the same as vsync (LX_GL_VSYNC),
+*        Late swap tearing (GL_TEARING) works the same as vsync (GL_VSYNC),
 *        but if you've already missed the vertical retrace for a given frame,
 *        it swaps buffers immediately, which might be less jarring
 *        for the user during occasional framerate drops.
 *        If application requests late swap tearing and the system does not support it,
 *        this function will fail and return FALSE.
-*        In such a case, you should probably retry the call with LX_GL_VSYNC for the interval.
+*        In such a case, you should probably retry the call with GL_VSYNC for the interval.
 *
 *   @sa getSwapInterval
 */
-bool setSwapInterval( const LX_GL_SwapInterval& interval ) noexcept;
+bool setSwapInterval( const GL_SwapInterval& interval ) noexcept;
 
 /**
-*   @fn bool getAttribute(LX_GLattr attr, int& value) noexcept
+*   @fn bool getAttribute(GLattr attr, int& value) noexcept
 *
 *   Get the actual value for an attribute from the current context
 *
@@ -225,16 +225,16 @@ bool setSwapInterval( const LX_GL_SwapInterval& interval ) noexcept;
 *
 *   @return TRUE on success, and value is set with the value odf the attribute,
 *          FALSE otherwise.
-*          Call LX_getError() for more information.
+*          Call getError() for more information.
 *
 *   @note the value the attribute are exactly the same with the attribute
 *   defined in SDL2 (as of SDL 2.0.3)
 *
 *   @sa setAttribute
 */
-bool getAttribute( LX_GLattr attr, int& value ) noexcept;
+bool getAttribute( GLattr attr, int& value ) noexcept;
 /**
-*   @fn bool setAttribute(LX_GLattr attr, int value) noexcept
+*   @fn bool setAttribute(GLattr attr, int value) noexcept
 *
 *   Set an OpenGL attribute before te creation of a window
 *
@@ -242,7 +242,7 @@ bool getAttribute( LX_GLattr attr, int& value ) noexcept;
 *   @param [in] value The desired value for the attribute
 *
 *   @return TRUE on success. FALSE otherwise.
-*          Call LX_getError() for more information
+*          Call getError() for more information
 *
 *   @note This function sets the OpenGL attribute *attr* to *value*.
 *        The requested attributes should be set before creating an OpenGL window.
@@ -252,7 +252,7 @@ bool getAttribute( LX_GLattr attr, int& value ) noexcept;
 *
 *   @sa getAttribute
 */
-bool setAttribute( LX_GLattr attr, int value ) noexcept;
+bool setAttribute( GLattr attr, int value ) noexcept;
 
 }   // OpenGL
 
@@ -262,4 +262,4 @@ bool setAttribute( LX_GLattr attr, int value ) noexcept;
 
 #include <Lunatix/OpenGL.tpp>
 
-#endif // LX_OPENGL_H_INCLUDED
+#endif // OPENGL_H_INCLUDED

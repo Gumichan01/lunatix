@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_MOUSE_HPP_INCLUDED
-#define LX_MOUSE_HPP_INCLUDED
+#ifndef MOUSE_HPP_INCLUDED
+#define MOUSE_HPP_INCLUDED
 
 /**
 *   @file Mouse.hpp
@@ -28,36 +28,36 @@ namespace lx
 
 namespace Graphics
 {
-class LX_BufferedImage;
+class BufferedImage;
 }
 
 namespace Device
 {
 
-class LX_Mouse_;
+class Mouse_;
 
 /**
-*   @class LX_Mouse
+*   @class Mouse
 *   @brief The mouse cursor
 *   It handles a user-defined mouse (with custom cursor)
 */
-class LX_Mouse final
+class Mouse final
 {
-    std::unique_ptr<LX_Mouse_> _mimpl;
+    std::unique_ptr<Mouse_> _mimpl;
 
-    LX_Mouse( const LX_Mouse& ) = delete;
-    LX_Mouse& operator =( const LX_Mouse& ) = delete;
+    Mouse( const Mouse& ) = delete;
+    Mouse& operator =( const Mouse& ) = delete;
 
 public:
 
     /**
-    *   @fn LX_Mouse(const lx::Graphics::LX_BufferedImage& surface, int hot_x, int hot_y) noexcept
+    *   @fn Mouse(const lx::Graphics::BufferedImage& surface, int hot_x, int hot_y) noexcept
     *
     *   @param [in] surface The buffered image to load the cursor from
     *   @param [in] hot_x The x hot spot position
     *   @param [in] hot_y The y hot spot position
     */
-    LX_Mouse( const lx::Graphics::LX_BufferedImage& surface, int hot_x, int hot_y ) noexcept;
+    Mouse( const lx::Graphics::BufferedImage& surface, int hot_x, int hot_y ) noexcept;
     /**
     *   @fn bool isOpen() const noexcept
     *   Check if the mouse is loaded without issues
@@ -70,11 +70,11 @@ public:
     */
     void setMouse() noexcept;
 
-    ~LX_Mouse();
+    ~Mouse();
 };
 
 }   // Device
 
 }   // lx
 
-#endif // LX_MOUSE_HPP_INCLUDED
+#endif // MOUSE_HPP_INCLUDED

@@ -33,9 +33,9 @@ namespace lx
 namespace FileIO
 {
 
-/* LX_fileBuffer — private implementation */
+/* fileBuffer — private implementation */
 
-class LX_FileBuffer_ final
+class FileBuffer_ final
 {
     std::string _name;                      /* The name of the file refered by the buffer */
     std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */
@@ -49,13 +49,13 @@ class LX_FileBuffer_ final
 
 public:
 
-    explicit LX_FileBuffer_( const std::string& filename, size_t offset, size_t sz )
+    explicit FileBuffer_( const std::string& filename, size_t offset, size_t sz )
         : _name( filename ), _buffer( nullptr ), _bufsize( 0 )
     {
-        std::string str( "LX_FileBuffer: " + _name + " - " );
+        std::string str( "FileBuffer: " + _name + " - " );
         size_t r = 0, fsize = 0;
 
-        LX_File reader( _name, LX_FileMode::RDONLY );
+        File reader( _name, FileMode::RDONLY );
 
         if ( ( fsize = reader.size() ) == static_cast<size_t>( -1 ) )
             throw IOException( str + "cannot get the size of the file" );
@@ -69,7 +69,7 @@ public:
         else
             _bufsize = sz;
 
-        reader.seek( static_cast<long>( offset ), LX_FileWhence::SET );
+        reader.seek( static_cast<long>( offset ), FileWhence::SET );
         _buffer.reset( new ( std::nothrow ) int8_t[_bufsize] );
 
         if ( _buffer == nullptr )
@@ -82,14 +82,14 @@ public:
     }
 
 
-    lx::Mixer::LX_Chunk * loadSample() const
+    lx::Mixer::Chunk * loadSample() const
     {
         Mix_Chunk * ch = getChunkFromBuffer_();
 
         if ( ch == nullptr )
             return nullptr;
 
-        return new lx::Mixer::LX_Chunk( *ch );
+        return new lx::Mixer::Chunk( *ch );
     }
 
     inline SDL_Surface * getSurfaceFromBuffer() const noexcept
@@ -109,45 +109,45 @@ public:
         return _name.c_str();
     }
 
-    ~LX_FileBuffer_() = default;
+    ~FileBuffer_() = default;
 };
 
 
-// Used by LX_Font
-void * LX_FileBuffer::getFontFromBuffer_( int size ) const noexcept
+// Used by Font
+void * FileBuffer::getFontFromBuffer_( int size ) const noexcept
 {
     return _bimpl->getFontFromBuffer( size );
 }
 
 
-/** LX_Filebuffer — public functions */
-LX_FileBuffer::LX_FileBuffer( const std::string& filename, size_t offset,
+/** Filebuffer — public functions */
+FileBuffer::FileBuffer( const std::string& filename, size_t offset,
                               size_t sz )
-    : _bimpl( new LX_FileBuffer_( filename, offset, sz ) ) {}
+    : _bimpl( new FileBuffer_( filename, offset, sz ) ) {}
 
-LX_FileBuffer::LX_FileBuffer( const UTF8string& filename, size_t offset,
+FileBuffer::FileBuffer( const UTF8string& filename, size_t offset,
                               size_t sz )
-    : _bimpl( new LX_FileBuffer_( filename.utf8_sstring(), offset, sz ) ) {}
+    : _bimpl( new FileBuffer_( filename.utf8_sstring(), offset, sz ) ) {}
 
 
-lx::Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage( lx::Graphics::LX_PixelFormat format ) const
+lx::Graphics::BufferedImage * FileBuffer::loadBufferedImage( lx::Graphics::PixelFormat format ) const
 {
-    return new lx::Graphics::LX_BufferedImage( _bimpl->getSurfaceFromBuffer(), getFilename(), format );
+    return new lx::Graphics::BufferedImage( _bimpl->getSurfaceFromBuffer(), getFilename(), format );
 }
 
 
-lx::Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
+lx::Mixer::Chunk * FileBuffer::loadSample() const
 {
     return _bimpl->loadSample();
 }
 
 
-const char * LX_FileBuffer::getFilename() const noexcept
+const char * FileBuffer::getFilename() const noexcept
 {
     return _bimpl->getFilename();
 }
 
-LX_FileBuffer::~LX_FileBuffer()
+FileBuffer::~FileBuffer()
 {
     _bimpl.reset();
 }

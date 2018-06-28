@@ -34,18 +34,18 @@ namespace ParticleEngine
 
 /* Private implementation */
 
-class LX_ParticleSystem_ final
+class ParticleSystem_ final
 {
-    std::unique_ptr<std::unique_ptr<LX_Particle>[]> _particles;
+    std::unique_ptr<std::unique_ptr<Particle>[]> _particles;
     const unsigned int _NB_PARTICLES;
 
 public:
 
-    explicit LX_ParticleSystem_( const unsigned int nb_part ) noexcept
-        : _particles( new std::unique_ptr<LX_Particle>[nb_part] ),
+    explicit ParticleSystem_( const unsigned int nb_part ) noexcept
+        : _particles( new std::unique_ptr<Particle>[nb_part] ),
           _NB_PARTICLES( nb_part ) {}
 
-    bool addParticle( LX_Particle * p ) const noexcept
+    bool addParticle( Particle * p ) const noexcept
     {
         if ( _particles == nullptr || p == nullptr )
             return false;
@@ -134,7 +134,7 @@ public:
         return _NB_PARTICLES;
     }
 
-    ~LX_ParticleSystem_()
+    ~ParticleSystem_()
     {
         if ( _particles != nullptr )
         {
@@ -151,47 +151,47 @@ public:
 
 /* Public functions */
 
-LX_ParticleSystem::LX_ParticleSystem( const unsigned int nbPart ) noexcept
-    : _psimpl( new LX_ParticleSystem_( nbPart ) ) {}
+ParticleSystem::ParticleSystem( const unsigned int nbPart ) noexcept
+    : _psimpl( new ParticleSystem_( nbPart ) ) {}
 
 
-LX_ParticleSystem::~LX_ParticleSystem()
+ParticleSystem::~ParticleSystem()
 {
     _psimpl.reset();
 }
 
 
-bool LX_ParticleSystem::addParticle( LX_Particle * p ) noexcept
+bool ParticleSystem::addParticle( Particle * p ) noexcept
 {
     return _psimpl->addParticle( p );
 }
 
 
-void LX_ParticleSystem::updateParticles() noexcept
+void ParticleSystem::updateParticles() noexcept
 {
     _psimpl->updateParticles();
 }
 
 
-void LX_ParticleSystem::displayParticles() const noexcept
+void ParticleSystem::displayParticles() const noexcept
 {
     _psimpl->displayParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbEmptyParticles() const noexcept
+unsigned int ParticleSystem::nbEmptyParticles() const noexcept
 {
     return _psimpl->nbEmptyParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbActiveParticles() const noexcept
+unsigned int ParticleSystem::nbActiveParticles() const noexcept
 {
     return _psimpl->nbActiveParticles();
 }
 
 
-unsigned int LX_ParticleSystem::nbTotalParticles() const noexcept
+unsigned int ParticleSystem::nbTotalParticles() const noexcept
 {
     return _psimpl->nbTotalParticles();
 }

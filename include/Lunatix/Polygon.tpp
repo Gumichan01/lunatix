@@ -19,9 +19,9 @@ namespace Physics
 {
 
 template <typename Iterator>
-void LX_Polygon::addPoints(Iterator beg, Iterator last)
+void Polygon::addPoints(Iterator beg, Iterator last)
 {
-    std::for_each(beg, last,[this](const LX_FloatPosition& p)
+    std::for_each(beg, last,[this](const FloatPosition& p)
     {
         addPoint_(p);
     });

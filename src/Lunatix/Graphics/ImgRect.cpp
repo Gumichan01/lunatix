@@ -20,32 +20,32 @@ namespace lx
 namespace Graphics
 {
 
-LX_ImgCoord toPixelPosition( const lx::Physics::LX_FloatPosition& p ) noexcept
+ImgCoord toPixelPosition( const lx::Physics::FloatPosition& p ) noexcept
 {
-    return LX_ImgCoord{static_cast<int>( p.x.v ), static_cast<int>( p.y.v )};
+    return ImgCoord{static_cast<int>( p.x.v ), static_cast<int>( p.y.v )};
 }
 
-LX_ImgRect toImgRect( const lx::Physics::LX_FloatingBox& b ) noexcept
+ImgRect toImgRect( const lx::Physics::FloatingBox& b ) noexcept
 {
-    return LX_ImgRect{toPixelPosition( b.p ), b.w, b.h};
+    return ImgRect{toPixelPosition( b.p ), b.w, b.h};
 }
 
-bool operator ==( const LX_ImgCoord& a, const LX_ImgCoord& b ) noexcept
+bool operator ==( const ImgCoord& a, const ImgCoord& b ) noexcept
 {
     return a.x == b.x && a.y == b.y;
 }
 
-bool operator !=( const LX_ImgCoord& a, const LX_ImgCoord& b ) noexcept
+bool operator !=( const ImgCoord& a, const ImgCoord& b ) noexcept
 {
     return !( a == b );
 }
 
-bool operator ==( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept
+bool operator ==( const ImgRect& a, const ImgRect& b ) noexcept
 {
     return a.p == b.p && a.w == b.w && a.h == b.h;
 }
 
-bool operator !=( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept
+bool operator !=( const ImgRect& a, const ImgRect& b ) noexcept
 {
     return !( a == b );
 }

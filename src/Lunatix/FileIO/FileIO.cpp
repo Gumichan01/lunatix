@@ -44,52 +44,52 @@ const char * IOException::what() const noexcept
 IOException::~IOException() noexcept {}
 
 
-/// LX_File
+/// File
 
 /* Private implementation */
 
-class LX_File_ final
+class File_ final
 {
     UTF8string _name{""};
     std::FILE * _file = nullptr;
 
-    LX_File_( const LX_File_& ) = delete;
-    LX_File_& operator =( const LX_File_& ) = delete;
+    File_( const File_& ) = delete;
+    File_& operator =( const File_& ) = delete;
 
-    void open_( const LX_FileMode mode )
+    void open_( const FileMode mode )
     {
         switch ( mode )
         {
-        case LX_FileMode::RDONLY:
+        case FileMode::RDONLY:
             _file = std::fopen( _name.utf8_str(), "rb" );
             break;
-        case LX_FileMode::WRONLY:
+        case FileMode::WRONLY:
             _file = std::fopen( _name.utf8_str(), "wb" );
             break;
-        case LX_FileMode::APPEND:
+        case FileMode::APPEND:
             _file = std::fopen( _name.utf8_str(), "ab" );
             break;
-        case LX_FileMode::RDWR:
+        case FileMode::RDWR:
             _file = std::fopen( _name.utf8_str(), "rb+" );
             break;
-        case LX_FileMode::RDAP:
+        case FileMode::RDAP:
             _file = std::fopen( _name.utf8_str(), "ab+" );
             break;
-        case LX_FileMode::WRTR:
+        case FileMode::WRTR:
             _file = std::fopen( _name.utf8_str(), "wb+" );
             break;
         default:
-            throw IOException( "LX_File: Unrecognized mode" );
+            throw IOException( "File: Unrecognized mode" );
             break;
         }
 
         if ( _file == nullptr )
-            throw IOException( LX_getError() );
+            throw IOException( getError() );
     }
 
 public:
 
-    LX_File_( const UTF8string& filename, const LX_FileMode mode )
+    File_( const UTF8string& filename, const FileMode mode )
         : _name( filename ), _file( nullptr )
     {
         open_( mode );
@@ -128,7 +128,7 @@ public:
         return write( reinterpret_cast<const void *>( str.c_str() ), sizeof( char ), len );
     }
 
-    bool seek( long offset, LX_FileWhence whence ) noexcept
+    bool seek( long offset, FileWhence whence ) noexcept
     {
         return std::fseek( _file, offset, static_cast<int>( whence ) ) == 0;
     }
@@ -142,12 +142,12 @@ public:
     {
         size_t fsize = static_cast<size_t>( -1 );
         size_t old_pos = tell();
-        bool ok = seek( 0, LX_FileWhence::END );
+        bool ok = seek( 0, FileWhence::END );
 
         if ( ok )
             fsize = tell();
 
-        ok = seek( static_cast<long>( old_pos ), LX_FileWhence::SET );
+        ok = seek( static_cast<long>( old_pos ), FileWhence::SET );
 
         if ( !ok )
             return static_cast<size_t>( -1 );
@@ -169,7 +169,7 @@ public:
         }
     }
 
-    ~LX_File_()
+    ~File_()
     {
         close();
     }
@@ -178,83 +178,83 @@ public:
 
 /* Public functions */
 
-LX_File::LX_File( const std::string& filename, const LX_FileMode mode )
-    : LX_File( UTF8string( filename ), mode ) {}
+File::File( const std::string& filename, const FileMode mode )
+    : File( UTF8string( filename ), mode ) {}
 
-LX_File::LX_File( const UTF8string& filename, const LX_FileMode mode )
-    : _fimpl( new LX_File_( filename, mode ) ) {}
+File::File( const UTF8string& filename, const FileMode mode )
+    : _fimpl( new File_( filename, mode ) ) {}
 
 
-size_t LX_File::read( void * buffer, size_t dsize, size_t count ) noexcept
+size_t File::read( void * buffer, size_t dsize, size_t count ) noexcept
 {
     return _fimpl->read( buffer, dsize, count );
 }
 
-size_t LX_File::readExactly( void * buffer, size_t dsize, size_t count ) noexcept
+size_t File::readExactly( void * buffer, size_t dsize, size_t count ) noexcept
 {
     return _fimpl->readExactly( buffer, dsize, count );
 }
 
 
-size_t LX_File::write( const void * buffer, size_t dsize, size_t count ) noexcept
+size_t File::write( const void * buffer, size_t dsize, size_t count ) noexcept
 {
     return _fimpl->write( buffer, dsize, count );
 }
 
-size_t LX_File::write( const std::string& str ) noexcept
+size_t File::write( const std::string& str ) noexcept
 {
     return _fimpl->write( str );
 }
 
 
-bool LX_File::seek( long offset, LX_FileWhence whence ) noexcept
+bool File::seek( long offset, FileWhence whence ) noexcept
 {
     return _fimpl->seek( offset, whence );
 }
 
-size_t LX_File::tell() const noexcept
+size_t File::tell() const noexcept
 {
     return _fimpl->tell();
 }
 
-size_t LX_File::size() noexcept
+size_t File::size() noexcept
 {
     return _fimpl->size();
 }
 
 
-const char * LX_File::getFilename() const noexcept
+const char * File::getFilename() const noexcept
 {
     return _fimpl->getFilename();
 }
 
-void LX_File::close() noexcept
+void File::close() noexcept
 {
     _fimpl->close();
 }
 
 
 
-LX_File::~LX_File()
+File::~File()
 {
     _fimpl->close();
 }
 
 
-/// LX_TmpFile
+/// TmpFile
 
 /* Private implementation */
 
-class LX_TmpFile_ final
+class TmpFile_ final
 {
     FILE * _f = nullptr;
 
-    LX_TmpFile_( const LX_TmpFile_& ) = delete;
-    LX_TmpFile_& operator =( const LX_TmpFile_& ) = delete;
+    TmpFile_( const TmpFile_& ) = delete;
+    TmpFile_& operator =( const TmpFile_& ) = delete;
 
 public:
 
-    LX_TmpFile_() : _f( tmpfile() )
+    TmpFile_() : _f( tmpfile() )
     {
         if ( _f == nullptr )
             throw IOException( strerror( errno ) );
@@ -266,7 +266,7 @@ public:
         char * err = std::strerror( errno );
 
         if ( std::ferror( _f ) )
-            LX_setError( err );
+            setError( err );
 
         return sz;
     }
@@ -298,7 +298,7 @@ public:
         char * err = strerror( errno );
 
         if ( ferror( _f ) )
-            LX_setError( err );
+            setError( err );
 
         return sz;
     }
@@ -309,7 +309,7 @@ public:
         return write( reinterpret_cast<const void *>( str.c_str() ), sizeof( char ), len );
     }
 
-    bool seek( long offset, LX_FileWhence whence ) noexcept
+    bool seek( long offset, FileWhence whence ) noexcept
     {
         return std::fseek( _f, offset, static_cast<int>( whence ) ) == 0;
     }
@@ -319,7 +319,7 @@ public:
         return static_cast<size_t>( std::ftell( _f ) );
     }
 
-    ~LX_TmpFile_()
+    ~TmpFile_()
     {
         fclose( _f );
         _f = nullptr;
@@ -329,60 +329,60 @@ public:
 
 /* Public functions */
 
-LX_TmpFile::LX_TmpFile(): _timpl( new LX_TmpFile_() ) {}
+TmpFile::TmpFile(): _timpl( new TmpFile_() ) {}
 
 
-size_t LX_TmpFile::read( void * buffer, size_t dsize, size_t count ) noexcept
+size_t TmpFile::read( void * buffer, size_t dsize, size_t count ) noexcept
 {
     return _timpl->read( buffer, dsize, count );
 }
 
-size_t LX_TmpFile::readExactly( void * buffer, size_t dsize, size_t count ) noexcept
+size_t TmpFile::readExactly( void * buffer, size_t dsize, size_t count ) noexcept
 {
     return _timpl->readExactly( buffer, dsize, count );
 }
 
 
-size_t LX_TmpFile::write( const void * buffer, size_t dsize, size_t count ) noexcept
+size_t TmpFile::write( const void * buffer, size_t dsize, size_t count ) noexcept
 {
     return _timpl->write( buffer, dsize, count );
 }
 
-size_t LX_TmpFile::write( const std::string& str ) noexcept
+size_t TmpFile::write( const std::string& str ) noexcept
 {
     return _timpl->write( str );
 }
 
 
-bool LX_TmpFile::seek( long offset, LX_FileWhence whence ) noexcept
+bool TmpFile::seek( long offset, FileWhence whence ) noexcept
 {
     return _timpl->seek( offset, whence );
 }
 
-size_t LX_TmpFile::tell() const noexcept
+size_t TmpFile::tell() const noexcept
 {
     return _timpl->tell();
 }
 
-LX_TmpFile::~LX_TmpFile()
+TmpFile::~TmpFile()
 {
     _timpl.reset();
 }
 
 /// Stream
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const char s[] ) noexcept
+AbstractFile& operator <<( AbstractFile& f, const char s[] ) noexcept
 {
     f.write( s, sizeof( char ), strlen( s ) );
     return f;
 }
 
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const std::string& s ) noexcept
+AbstractFile& operator <<( AbstractFile& f, const std::string& s ) noexcept
 {
     f.write( s );
     return f;
 }
 
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const UTF8string& u8s ) noexcept
+AbstractFile& operator <<( AbstractFile& f, const UTF8string& u8s ) noexcept
 {
     f.write( u8s.utf8_sstring() );
     return f;

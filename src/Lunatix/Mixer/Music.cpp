@@ -28,12 +28,12 @@
 namespace
 {
 
-const int LX_NOLOOP  = 0;
-const int LX_INFLOOP = -1;
+const int NOLOOP  = 0;
+const int INFLOOP = -1;
 
 
 lx::Graphics::
-LX_BufferedImage * _loadImage( const std::string& file,
+BufferedImage * _loadImage( const std::string& file,
                                const libtagpp::ImgMetaData& imgdata )
 {
     if ( imgdata._img_offset <= 0 && imgdata._img_size <= 0 )
@@ -42,7 +42,7 @@ LX_BufferedImage * _loadImage( const std::string& file,
     const size_t IMG_OFFSET = static_cast<size_t>( imgdata._img_offset );
     const size_t IMG_SZ     = static_cast<size_t>( imgdata._img_size );
 
-    return lx::FileIO::LX_FileBuffer( file, IMG_OFFSET, IMG_SZ ).loadBufferedImage();
+    return lx::FileIO::FileBuffer( file, IMG_OFFSET, IMG_SZ ).loadBufferedImage();
 }
 
 }   // namespace
@@ -56,24 +56,24 @@ namespace Mixer
 
 /* Music tag */
 
-LX_MusicTag::~LX_MusicTag()
+MusicTag::~MusicTag()
 {
     delete img;
 }
 
 
-const LX_MusicTag getMusicInfoFrom( const UTF8string& u8file ) noexcept
+const MusicTag getMusicInfoFrom( const UTF8string& u8file ) noexcept
 {
     return getMusicInfoFrom( u8file.utf8_sstring() );
 }
 
-const LX_MusicTag getMusicInfoFrom( const std::string& file ) noexcept
+const MusicTag getMusicInfoFrom( const std::string& file ) noexcept
 {
     libtagpp::Tag tag;
-    LX_MusicTag mtag;
+    MusicTag mtag;
 
     if ( !tag.readTag( file ) )
-        LX_setError( std::string( "Cannot get metadata from " ) + file );
+        setError( std::string( "Cannot get metadata from " ) + file );
 
     mtag.title    = tag.title();
     mtag.artist   = tag.artist();
@@ -89,18 +89,18 @@ const LX_MusicTag getMusicInfoFrom( const std::string& file ) noexcept
 }
 
 
-/* LX_music: private implementation */
+/* music: private implementation */
 
-class LX_Music_
+class Music_
 {
     Mix_Music * _music = nullptr;
     std::string _filename{};
     libtagpp::Tag _tag;
-    LX_MusicTag _mtag;
+    MusicTag _mtag;
     bool mtag_set = false;
 
-    LX_Music_( const LX_Music_& m ) = delete;
-    LX_Music_& operator =( const LX_Music_& m ) = delete;
+    Music_( const Music_& m ) = delete;
+    Music_& operator =( const Music_& m ) = delete;
 
     void load_( const std::string& filename )
     {
@@ -108,28 +108,28 @@ class LX_Music_
         _music = Mix_LoadMUS( filename.c_str() );
 
         if ( _music == nullptr )
-            throw LX_MixerException( "LX_Music — Cannot load " + filename );
+            throw MixerException( "Music — Cannot load " + filename );
     }
 
 public:
 
-    explicit LX_Music_( const std::string& filename )
+    explicit Music_( const std::string& filename )
         : _music( nullptr ), _filename( filename ), _tag(), _mtag(), mtag_set( false )
     {
         load_( filename );
     }
 
-    explicit LX_Music_( const UTF8string& filename )
-        : LX_Music_( filename.utf8_sstring() ) {}
+    explicit Music_( const UTF8string& filename )
+        : Music_( filename.utf8_sstring() ) {}
 
     void fadeIn( int ms ) noexcept
     {
-        Mix_FadeInMusic( _music, LX_NOLOOP, ms );
+        Mix_FadeInMusic( _music, NOLOOP, ms );
     }
 
     void fadeInPos( int ms, int pos ) noexcept
     {
-        Mix_FadeInMusicPos( _music, LX_NOLOOP, ms, pos );
+        Mix_FadeInMusicPos( _music, NOLOOP, ms, pos );
     }
 
     bool play() noexcept
@@ -139,7 +139,7 @@ public:
 
     bool play( bool infinite ) noexcept
     {
-        return Mix_PlayMusic( _music, infinite ? LX_INFLOOP : LX_NOLOOP ) == 0;
+        return Mix_PlayMusic( _music, infinite ? INFLOOP : NOLOOP ) == 0;
     }
 
     bool play( unsigned int loops ) noexcept
@@ -150,12 +150,12 @@ public:
     const libtagpp::Tag& getInfo() noexcept
     {
         if ( !_tag.readTag( _filename.c_str() ) )
-            LX_setError( "Cannot get metadata" );
+            setError( "Cannot get metadata" );
 
         return _tag;
     }
 
-    const LX_MusicTag& metaData() noexcept
+    const MusicTag& metaData() noexcept
     {
         if ( !mtag_set )
         {
@@ -175,53 +175,53 @@ public:
         return _mtag;
     }
 
-    ~LX_Music_()
+    ~Music_()
     {
         Mix_FreeMusic( _music );
     }
 };
 
-/* LX_Music: public functions */
-LX_Music::LX_Music( const std::string& filename )
-    : _mimpl( new LX_Music_( filename ) ) {}
+/* Music: public functions */
+Music::Music( const std::string& filename )
+    : _mimpl( new Music_( filename ) ) {}
 
-LX_Music::LX_Music( const UTF8string& filename )
-    : _mimpl( new LX_Music_( filename ) ) {}
+Music::Music( const UTF8string& filename )
+    : _mimpl( new Music_( filename ) ) {}
 
 
-void LX_Music::fadeIn( int ms ) noexcept
+void Music::fadeIn( int ms ) noexcept
 {
     _mimpl->fadeIn( ms );
 }
 
-void LX_Music::fadeInPos( int ms, int pos ) noexcept
+void Music::fadeInPos( int ms, int pos ) noexcept
 {
     _mimpl->fadeInPos( ms, pos );
 }
 
-void LX_Music::fadeOut( int ms ) noexcept
+void Music::fadeOut( int ms ) noexcept
 {
     Mix_FadeOutMusic( ms );
 }
 
 
-bool LX_Music::play() noexcept
+bool Music::play() noexcept
 {
     return _mimpl->play();
 }
 
-bool LX_Music::play( bool infinite_loop ) noexcept
+bool Music::play( bool infinite_loop ) noexcept
 {
     return _mimpl->play( infinite_loop );
 }
 
-bool LX_Music::play( unsigned int loops ) noexcept
+bool Music::play( unsigned int loops ) noexcept
 {
     return _mimpl->play( loops );
 }
 
 
-void LX_Music::pause() noexcept
+void Music::pause() noexcept
 {
     if ( Mix_PausedMusic() )
         Mix_ResumeMusic();
@@ -229,24 +229,24 @@ void LX_Music::pause() noexcept
         Mix_PauseMusic();
 }
 
-void LX_Music::stop() noexcept
+void Music::stop() noexcept
 {
     if ( Mix_PlayingMusic() )
         Mix_HaltMusic();
 }
 
 
-const libtagpp::Tag& LX_Music::getInfo() noexcept
+const libtagpp::Tag& Music::getInfo() noexcept
 {
     return _mimpl->getInfo();
 }
 
-const LX_MusicTag& LX_Music::metaData() noexcept
+const MusicTag& Music::metaData() noexcept
 {
     return _mimpl->metaData();
 }
 
-LX_Music::~LX_Music()
+Music::~Music()
 {
     _mimpl.reset();
 }

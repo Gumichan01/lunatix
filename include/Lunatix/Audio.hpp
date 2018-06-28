@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_AUDIO_HPP_INCLUDED
-#define LX_AUDIO_HPP_INCLUDED
+#ifndef AUDIO_HPP_INCLUDED
+#define AUDIO_HPP_INCLUDED
 
 /**
 *   @file Audio.hpp
@@ -30,4 +30,4 @@
 #include "Mixer.hpp"
 #include "Music.hpp"
 
-#endif // LX_AUDIO_HPP_INCLUDED
+#endif // AUDIO_HPP_INCLUDED

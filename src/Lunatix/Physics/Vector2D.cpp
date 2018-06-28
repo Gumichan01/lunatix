@@ -29,51 +29,51 @@ namespace lx
 namespace Physics
 {
 
-bool operator ==( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+bool operator ==( const Vector2D& u, const Vector2D& v ) noexcept
 {
     return u.vx == v.vx && u.vy == v.vy;
 }
 
 
-bool operator !=( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+bool operator !=( const Vector2D& u, const Vector2D& v ) noexcept
 {
     return !( u == v );
 }
 
 
-LX_Vector2D operator +( const LX_Vector2D u, const LX_Vector2D v ) noexcept
+Vector2D operator +( const Vector2D u, const Vector2D v ) noexcept
 {
-    return LX_Vector2D{u.vx + v.vx, u.vy + v.vy};
+    return Vector2D{u.vx + v.vx, u.vy + v.vy};
 }
 
 
-LX_Vector2D& operator +=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+Vector2D& operator +=( Vector2D& u, const Vector2D& v ) noexcept
 {
     u = u + v;
     return u;
 }
 
 
-LX_Vector2D operator -( const LX_Vector2D u, const LX_Vector2D v ) noexcept
+Vector2D operator -( const Vector2D u, const Vector2D v ) noexcept
 {
-    return LX_Vector2D{u.vx - v.vx, u.vy - v.vy};
+    return Vector2D{u.vx - v.vx, u.vy - v.vy};
 }
 
 
-LX_Vector2D& operator -=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+Vector2D& operator -=( Vector2D& u, const Vector2D& v ) noexcept
 {
     u = u - v;
     return u;
 }
 
 
-LX_Vector2D operator -( const LX_Vector2D& v ) noexcept
+Vector2D operator -( const Vector2D& v ) noexcept
 {
-    return LX_Vector2D{ -v.vx, -v.vy};
+    return Vector2D{ -v.vx, -v.vy};
 }
 
 
-LX_Vector2D& operator ++( LX_Vector2D& v ) noexcept
+Vector2D& operator ++( Vector2D& v ) noexcept
 {
     v.vx += fbox( 1.0f );
     v.vy += fbox( 1.0f );
@@ -81,15 +81,15 @@ LX_Vector2D& operator ++( LX_Vector2D& v ) noexcept
 }
 
 
-LX_Vector2D operator ++( LX_Vector2D& v, int ) noexcept
+Vector2D operator ++( Vector2D& v, int ) noexcept
 {
-    LX_Vector2D t = v;
+    Vector2D t = v;
     ++v;
     return t;
 }
 
 
-LX_Vector2D& operator --( LX_Vector2D& v ) noexcept
+Vector2D& operator --( Vector2D& v ) noexcept
 {
     v.vx -= fbox( 1.0f );
     v.vy -= fbox( 1.0f );
@@ -97,69 +97,69 @@ LX_Vector2D& operator --( LX_Vector2D& v ) noexcept
 }
 
 
-LX_Vector2D operator --( LX_Vector2D& v, int ) noexcept
+Vector2D operator --( Vector2D& v, int ) noexcept
 {
-    LX_Vector2D t = v;
+    Vector2D t = v;
     --v;
     return t;
 }
 
 
-LX_Vector2D operator *( LX_Vector2D v, float lambda ) noexcept
+Vector2D operator *( Vector2D v, float lambda ) noexcept
 {
-    return LX_Vector2D{v.vx * lambda, v.vy * lambda};
+    return Vector2D{v.vx * lambda, v.vy * lambda};
 }
 
-LX_Vector2D& operator *=( LX_Vector2D& v, float lambda ) noexcept
+Vector2D& operator *=( Vector2D& v, float lambda ) noexcept
 {
     v.vx *= fbox( lambda );
     v.vy *= fbox( lambda );
     return v;
 }
 
-LX_Vector2D operator /( LX_Vector2D v, float lambda ) noexcept
+Vector2D operator /( Vector2D v, float lambda ) noexcept
 {
-    return LX_Vector2D{v.vx / lambda, v.vy / lambda};
+    return Vector2D{v.vx / lambda, v.vy / lambda};
 }
 
-LX_Vector2D& operator /=( LX_Vector2D& v, float lambda ) noexcept
+Vector2D& operator /=( Vector2D& v, float lambda ) noexcept
 {
     v.vx /= fbox( lambda );
     v.vy /= fbox( lambda );
     return v;
 }
 
-Float scalar_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+Float scalar_product( const Vector2D& u, const Vector2D& v ) noexcept
 {
     return ( u.vx * v.vx ) + ( u.vy * v.vy );
 }
 
 
-Float vector_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+Float vector_product( const Vector2D& u, const Vector2D& v ) noexcept
 {
     return ( u.vx * v.vy ) - ( v.vx * u.vy );
 }
 
 
-Float vector_norm( const LX_Vector2D& v ) noexcept
+Float vector_norm( const Vector2D& v ) noexcept
 {
     Float tmp = scalar_product( v, v );
     return FloatMath::sqrt( tmp );
 }
 
 
-bool isNullVector( const LX_Vector2D& v ) noexcept
+bool isNullVector( const Vector2D& v ) noexcept
 {
     return v.vx == FNIL && v.vy == FNIL;
 }
 
 
-bool collinear( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept
+bool collinear( const Vector2D& u, const Vector2D& v ) noexcept
 {
     return vector_product( u, v ) == FNIL;
 }
 
-LX_Vector2D& normalize( LX_Vector2D& v ) noexcept
+Vector2D& normalize( Vector2D& v ) noexcept
 {
     if ( isNullVector( v ) )
         return v;

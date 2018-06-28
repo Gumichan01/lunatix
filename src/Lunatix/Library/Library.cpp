@@ -33,17 +33,17 @@ using namespace lx::Config;
 namespace
 {
 
-const int LX_MIX_AUDIO_FREQUENCY = 44100;   /**< The default audio frequency                */
-const int LX_MIX_STEREO_SOUND = 2;          /**< The stereo variable for the mix namespace  */
-const int LX_MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mix namespace */
+const int MIX_AUDIO_FREQUENCY = 44100;   /**< The default audio frequency                */
+const int MIX_STEREO_SOUND = 2;          /**< The stereo variable for the mix namespace  */
+const int MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mix namespace */
 
 bool initAudio() noexcept
 {
     if ( Mix_Init( MIX_INIT_OGG | MIX_INIT_FLAC | MIX_INIT_MP3 ) == 0 )
         return false;
 
-    if ( Mix_OpenAudio( LX_MIX_AUDIO_FREQUENCY, MIX_DEFAULT_FORMAT,
-                        LX_MIX_STEREO_SOUND, LX_MIX_DEFAULT_CHUNKSIZE ) == -1 )
+    if ( Mix_OpenAudio( MIX_AUDIO_FREQUENCY, MIX_DEFAULT_FORMAT,
+                        MIX_STEREO_SOUND, MIX_DEFAULT_CHUNKSIZE ) == -1 )
     {
         Mix_Quit();
         return false;

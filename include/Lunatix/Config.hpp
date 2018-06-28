@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_CONFIG_H_INCLUDED
-#define LX_CONFIG_H_INCLUDED
+#ifndef CONFIG_H_INCLUDED
+#define CONFIG_H_INCLUDED
 
 /**
 *   @file Config.hpp
@@ -101,4 +101,4 @@ public:
 
 }   // lx
 
-#endif // LX_CONFIG_H_INCLUDED
+#endif // CONFIG_H_INCLUDED

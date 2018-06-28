@@ -10,12 +10,12 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_GRAPHICS_HPP_INCLUDED
-#define LX_GRAPHICS_HPP_INCLUDED
+#ifndef GRAPHICS_HPP_INCLUDED
+#define GRAPHICS_HPP_INCLUDED
 
 /**
 *   @file Graphics.hpp
-*   @brief The interface of LX_Graphics
+*   @brief The interface of Graphics
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13
 *
@@ -32,4 +32,4 @@
 #include "Window.hpp"
 #include "WindowManager.hpp"
 
-#endif // LX_GRAPHICS_HPP_INCLUDED
+#endif // GRAPHICS_HPP_INCLUDED

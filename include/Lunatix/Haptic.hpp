@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_HAPTIC_HPP_INCLUDED
-#define LX_HAPTIC_HPP_INCLUDED
+#ifndef HAPTIC_HPP_INCLUDED
+#define HAPTIC_HPP_INCLUDED
 
 /**
 *   @file Haptic.hpp
@@ -33,13 +33,13 @@ namespace lx
 namespace Device
 {
 
-struct LX_Haptic_;
-struct LX_Haptic_common;
-class LX_Gamepad;
+struct Haptic_;
+struct Haptic_common;
+class Gamepad;
 
-using LX_Joystick = _SDL_Joystick;
-using LX_GameController = _SDL_GameController;
-using LX_HapticEffect = SDL_HapticEffect;
+using Joystick = _SDL_Joystick;
+using GameController = _SDL_GameController;
+using HapticEffect = SDL_HapticEffect;
 
 
 /**
@@ -57,35 +57,35 @@ bool mouseIsHaptic() noexcept;
 
 
 /**
-*   @class LX_Haptic
+*   @class Haptic
 *   @brief The haptic device
 *
 *   This class describes the force feedback system related to a device.
 */
-class LX_Haptic
+class Haptic
 {
-    friend class lx::Device::LX_Gamepad;
-    std::unique_ptr<LX_Haptic_> _himpl;
+    friend class lx::Device::Gamepad;
+    std::unique_ptr<Haptic_> _himpl;
 
-    LX_Haptic( LX_Haptic& h ) = delete;
-    LX_Haptic& operator =( LX_Haptic& h ) = delete;
+    Haptic( Haptic& h ) = delete;
+    Haptic& operator =( Haptic& h ) = delete;
 
-    // Used by LX_Gamepad
-    explicit LX_Haptic( LX_Joystick * joy ) noexcept;
-    explicit LX_Haptic( LX_GameController * gc ) noexcept;
+    // Used by Gamepad
+    explicit Haptic( Joystick * joy ) noexcept;
+    explicit Haptic( GameController * gc ) noexcept;
 
 protected:
 
-    std::unique_ptr<LX_Haptic_common> _hcimpl;
-    LX_Haptic() noexcept;
+    std::unique_ptr<Haptic_common> _hcimpl;
+    Haptic() noexcept;
 
 public:
 
     /**
-    *   @fn LX_Haptic(int index) noexcept
+    *   @fn Haptic(int index) noexcept
     *   @param [in] index The index of the device to open
     */
-    explicit LX_Haptic( int index ) noexcept;
+    explicit Haptic( int index ) noexcept;
 
     /**
     *   @fn virtual bool isOpened() const noexcept
@@ -116,7 +116,7 @@ public:
     virtual void rumbleEffectPlay( float strength, uint32_t length ) noexcept;
 
     /**
-    *   @fn virtual bool effectSupported(LX_HapticEffect& effect) const
+    *   @fn virtual bool effectSupported(HapticEffect& effect) const
     *
     *   Check if an effect is supported by the current device
     *
@@ -125,9 +125,9 @@ public:
     *
     *   @sa newEffect
     */
-    virtual bool effectSupported( LX_HapticEffect& effect ) const noexcept;
+    virtual bool effectSupported( HapticEffect& effect ) const noexcept;
     /**
-    *   @fn virtual int newEffect(LX_HapticEffect& effect)
+    *   @fn virtual int newEffect(HapticEffect& effect)
     *
     *   Add a new effect
     *
@@ -137,7 +137,7 @@ public:
     *   @sa runEffect
     *   @sa stopEffect
     */
-    virtual int newEffect( LX_HapticEffect& effect ) noexcept;
+    virtual int newEffect( HapticEffect& effect ) noexcept;
     /**
     *   @fn virtual void runEffect(int effect_id, uint32_t iterations)
     *
@@ -172,28 +172,28 @@ public:
     */
     virtual int numberOfEffects() const noexcept;
 
-    virtual ~LX_Haptic();
+    virtual ~Haptic();
 };
 
 /**
-*   @class LX_MouseHaptic
+*   @class MouseHaptic
 *   @brief The mouse haptic device
 *   This class describes the force feedback system related to the mouse.
 */
-class LX_MouseHaptic final : public LX_Haptic
+class MouseHaptic final : public Haptic
 {
-    LX_MouseHaptic( LX_Haptic& h ) = delete;
-    LX_MouseHaptic& operator =( LX_MouseHaptic& h ) = delete;
+    MouseHaptic( Haptic& h ) = delete;
+    MouseHaptic& operator =( MouseHaptic& h ) = delete;
 
 public:
 
-    LX_MouseHaptic() noexcept;
+    MouseHaptic() noexcept;
     virtual bool isOpened() const noexcept override;
-    ~LX_MouseHaptic() = default;
+    ~MouseHaptic() = default;
 };
 
 }   // Device
 
 }   // lx
 
-#endif // LX_HAPTIC_HPP_INCLUDED
+#endif // HAPTIC_HPP_INCLUDED

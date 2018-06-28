@@ -36,7 +36,7 @@ int numberOfDevices() noexcept
     return SDL_NumJoysticks();
 }
 
-UTF8string gamepadToString( LX_GamepadInfo& info ) noexcept
+UTF8string gamepadToString( GamepadInfo& info ) noexcept
 {
     const int GUID_SIZE = 33;       // Size of the data in SDL_JoystickGUID
     char guid[GUID_SIZE] = {'\0'};
@@ -56,9 +56,9 @@ UTF8string gamepadToString( LX_GamepadInfo& info ) noexcept
     return UTF8string( stream.str() );
 }
 
-LX_MouseToggle mouseCursorDisplay( const LX_MouseToggle& toggle ) noexcept
+MouseToggle mouseCursorDisplay( const MouseToggle& toggle ) noexcept
 {
-    return static_cast<LX_MouseToggle>( SDL_ShowCursor( static_cast<int>( toggle ) ) );
+    return static_cast<MouseToggle>( SDL_ShowCursor( static_cast<int>( toggle ) ) );
 }
 
 }   // Device

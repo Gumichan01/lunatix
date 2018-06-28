@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_CHUNK_H_INCLUDED
-#define LX_CHUNK_H_INCLUDED
+#ifndef CHUNK_H_INCLUDED
+#define CHUNK_H_INCLUDED
 
 /**
 *   @file Chunk.hpp
@@ -30,7 +30,7 @@ namespace lx
 
 namespace FileIO
 {
-class LX_FileBuffer_;
+class FileBuffer_;
 }
 
 }
@@ -41,46 +41,46 @@ namespace lx
 namespace Mixer
 {
 
-class LX_Chunk_;
+class Chunk_;
 
 /**
-*   @class LX_Chunk
+*   @class Chunk
 *   @brief The sample class
 */
-class LX_Chunk final : public virtual LX_Sound
+class Chunk final : public virtual Sound
 {
-    friend class lx::FileIO::LX_FileBuffer_;
-    std::unique_ptr<LX_Chunk_> _chkimpl;
+    friend class lx::FileIO::FileBuffer_;
+    std::unique_ptr<Chunk_> _chkimpl;
 
-    LX_Chunk( Mix_Chunk& chunk );
-    LX_Chunk( const LX_Chunk& m ) = delete;
-    LX_Chunk& operator =( const LX_Chunk& m ) = delete;
+    Chunk( Mix_Chunk& chunk );
+    Chunk( const Chunk& m ) = delete;
+    Chunk& operator =( const Chunk& m ) = delete;
 
 public:
 
     /**
-    *   @fn LX_Chunk(const std::string& filename)
+    *   @fn Chunk(const std::string& filename)
     *   @brief Load a sample from a file
     *   @param filename
     *   @note It is better to give a .wav file to the constructor.
     *        The sample was optimized for this format. But it can work with
     *        an other file type.
     *
-    *   @exception LX_MixerException On failure
+    *   @exception MixerException On failure
     */
-    explicit LX_Chunk( const std::string& filename );
+    explicit Chunk( const std::string& filename );
 
     /**
-    *   @fn LX_Chunk(const UTF8string& filename)
+    *   @fn Chunk(const UTF8string& filename)
     *   @brief Load a sample from a file
     *   @param filename
     *   @note It is better to give a .wav file to the constructor.
     *          The sample was optimized for this format. But it can work with
     *          an other file type.
     *
-    *   @exception LX_MixerException On failure
+    *   @exception MixerException On failure
     */
-    explicit LX_Chunk( const UTF8string& filename );
+    explicit Chunk( const UTF8string& filename );
 
     /**
     *   @fn virtual bool play() noexcept override
@@ -135,11 +135,11 @@ public:
     */
     bool play( int channel, int loops, int ticks ) noexcept;
 
-    ~LX_Chunk();
+    ~Chunk();
 };
 
 }   // Mixer
 
 }   // lx
 
-#endif // LX_CHUNK_H_INCLUDED
+#endif // CHUNK_H_INCLUDED

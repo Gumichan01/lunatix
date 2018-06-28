@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_VECTOR2D_HPP_INCLUDED
-#define LX_VECTOR2D_HPP_INCLUDED
+#ifndef VECTOR2D_HPP_INCLUDED
+#define VECTOR2D_HPP_INCLUDED
 
 /**
 *   @file Vector2D.hpp
@@ -29,19 +29,19 @@ namespace Physics
 {
 
 /**
-*   @struct LX_Vector2D
+*   @struct Vector2D
 *   @brief The vector2D structure
 *
 *   This structure describes a 2-dimension vector
 */
-struct LX_Vector2D final
+struct Vector2D final
 {
     Float vx;   /**< X velocity */
     Float vy;   /**< Y velocity */
 };
 
 /**
-*   @fn bool operator ==(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn bool operator ==(const Vector2D& u, const Vector2D& v) noexcept
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
@@ -49,18 +49,18 @@ struct LX_Vector2D final
 *   @return TRUE if they are equal, FALSE otherwise
 
 */
-bool operator ==( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+bool operator ==( const Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn bool operator !=(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn bool operator !=(const Vector2D& u, const Vector2D& v) noexcept
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
 *
 *   @return TRUE if they are not equal, FALSE otherwise
 */
-bool operator !=( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+bool operator !=( const Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D operator +(const LX_Vector2D u,const LX_Vector2D v) noexcept
+*   @fn Vector2D operator +(const Vector2D u,const Vector2D v) noexcept
 *
 *   Addition between two vectors
 *
@@ -69,9 +69,9 @@ bool operator !=( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D operator +( const LX_Vector2D u, const LX_Vector2D v ) noexcept;
+Vector2D operator +( const Vector2D u, const Vector2D v ) noexcept;
 /**
-*   @fn LX_Vector2D& operator +=(LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn Vector2D& operator +=(Vector2D& u, const Vector2D& v) noexcept
 *
 *   Addition between two vectors -> 'u += v' <=> 'u = u + v'
 *
@@ -80,9 +80,9 @@ LX_Vector2D operator +( const LX_Vector2D u, const LX_Vector2D v ) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D& operator +=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+Vector2D& operator +=( Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D operator -(const LX_Vector2D u, const LX_Vector2D v) noexcept
+*   @fn Vector2D operator -(const Vector2D u, const Vector2D v) noexcept
 *
 *   Substraction between two vectors
 *
@@ -91,9 +91,9 @@ LX_Vector2D& operator +=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D operator -( const LX_Vector2D u, const LX_Vector2D v ) noexcept;
+Vector2D operator -( const Vector2D u, const Vector2D v ) noexcept;
 /**
-*   @fn LX_Vector2D& operator -=(LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn Vector2D& operator -=(Vector2D& u, const Vector2D& v) noexcept
 *
 *   Substraction between two vectors -> 'u -= v' <=> 'u = u - v'
 *
@@ -102,9 +102,9 @@ LX_Vector2D operator -( const LX_Vector2D u, const LX_Vector2D v ) noexcept;
 *
 *   @return The resulting vector
 */
-LX_Vector2D& operator -=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+Vector2D& operator -=( Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D operator -(const LX_Vector2D& v) noexcept
+*   @fn Vector2D operator -(const Vector2D& v) noexcept
 *
 *   The opposite of the vector
 *
@@ -112,9 +112,9 @@ LX_Vector2D& operator -=( LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 *
 *   @return The opposite vector
 */
-LX_Vector2D operator -( const LX_Vector2D& v ) noexcept;
+Vector2D operator -( const Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D& operator ++(LX_Vector2D& v) noexcept
+*   @fn Vector2D& operator ++(Vector2D& v) noexcept
 *
 *   Prefix increment
 *
@@ -122,9 +122,9 @@ LX_Vector2D operator -( const LX_Vector2D& v ) noexcept;
 *
 *   @return The incremented vector
 */
-LX_Vector2D& operator ++( LX_Vector2D& v ) noexcept;
+Vector2D& operator ++( Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D operator ++(LX_Vector2D& v,int) noexcept
+*   @fn Vector2D operator ++(Vector2D& v,int) noexcept
 *
 *   Postfix increment
 *
@@ -132,9 +132,9 @@ LX_Vector2D& operator ++( LX_Vector2D& v ) noexcept;
 *
 *   @return The vector before the incrementation
 */
-LX_Vector2D operator ++( LX_Vector2D& v, int ) noexcept;
+Vector2D operator ++( Vector2D& v, int ) noexcept;
 /**
-*   @fn LX_Vector2D& operator --(LX_Vector2D& v) noexcept
+*   @fn Vector2D& operator --(Vector2D& v) noexcept
 *
 *   Prefix decrement
 *
@@ -142,9 +142,9 @@ LX_Vector2D operator ++( LX_Vector2D& v, int ) noexcept;
 *
 *   @return The incremented vector
 */
-LX_Vector2D& operator --( LX_Vector2D& v ) noexcept;
+Vector2D& operator --( Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D operator --(LX_Vector2D& v, int) noexcept
+*   @fn Vector2D operator --(Vector2D& v, int) noexcept
 *
 *   Postfix decrement
 *
@@ -152,9 +152,9 @@ LX_Vector2D& operator --( LX_Vector2D& v ) noexcept;
 *
 *   @return The vector before the incrementation
 */
-LX_Vector2D operator --( LX_Vector2D& v, int ) noexcept;
+Vector2D operator --( Vector2D& v, int ) noexcept;
 /**
-*   @fn LX_Vector2D operator *(LX_Vector2D v, float lambda) noexcept
+*   @fn Vector2D operator *(Vector2D v, float lambda) noexcept
 *
 *   Scalar multiplication
 *
@@ -163,9 +163,9 @@ LX_Vector2D operator --( LX_Vector2D& v, int ) noexcept;
 *
 *   @return A new vector after the multiplication
 */
-LX_Vector2D operator *( LX_Vector2D v, float lambda ) noexcept;
+Vector2D operator *( Vector2D v, float lambda ) noexcept;
 /**
-*   @fn LX_Vector2D& operator *=(LX_Vector2D& v, float lambda) noexcept
+*   @fn Vector2D& operator *=(Vector2D& v, float lambda) noexcept
 *
 *   Scalar multiplication -> 'u *= λ' <=> 'u = u * λ'
 *
@@ -174,9 +174,9 @@ LX_Vector2D operator *( LX_Vector2D v, float lambda ) noexcept;
 *
 *   @return A new vector after the multiplication
 */
-LX_Vector2D& operator *=( LX_Vector2D& v, float lambda ) noexcept;
+Vector2D& operator *=( Vector2D& v, float lambda ) noexcept;
 /**
-*   @fn LX_Vector2D& operator /(LX_Vector2D v, float lambda) noexcept
+*   @fn Vector2D& operator /(Vector2D v, float lambda) noexcept
 *
 *   Scalar division
 *
@@ -185,9 +185,9 @@ LX_Vector2D& operator *=( LX_Vector2D& v, float lambda ) noexcept;
 *
 *   @return The vector after the division
 */
-LX_Vector2D operator /( LX_Vector2D v, float lambda ) noexcept;
+Vector2D operator /( Vector2D v, float lambda ) noexcept;
 /**
-*   @fn LX_Vector2D& operator /=(LX_Vector2D& v, float lambda) noexcept
+*   @fn Vector2D& operator /=(Vector2D& v, float lambda) noexcept
 *
 *   Scalar division -> 'u /= λ' <=> 'u = u / λ'
 *
@@ -196,10 +196,10 @@ LX_Vector2D operator /( LX_Vector2D v, float lambda ) noexcept;
 *
 *   @return The vector after the division
 */
-LX_Vector2D& operator /=( LX_Vector2D& v, float lambda ) noexcept;
+Vector2D& operator /=( Vector2D& v, float lambda ) noexcept;
 
 /**
-*   @fn Float scalar_product(const LX_Vector2D& u,const LX_Vector2D& v) noexcept
+*   @fn Float scalar_product(const Vector2D& u,const Vector2D& v) noexcept
 *
 *   Calculate the scalar product of 2 vectors
 *
@@ -208,9 +208,9 @@ LX_Vector2D& operator /=( LX_Vector2D& v, float lambda ) noexcept;
 *
 *   @return The scalar product
 */
-Float scalar_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+Float scalar_product( const Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn Float vector_product(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn Float vector_product(const Vector2D& u, const Vector2D& v) noexcept
 *
 *   Calculate the vector product of 2 vectors
 *
@@ -219,35 +219,35 @@ Float scalar_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 *
 *   @return The vector product
 */
-Float vector_product( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+Float vector_product( const Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn Float vector_norm(const LX_Vector2D& v) noexcept
+*   @fn Float vector_norm(const Vector2D& v) noexcept
 *
 *   @param [in] v The vector
 *
 *   @return The norm of the vector
 */
-Float vector_norm( const LX_Vector2D& v ) noexcept;
+Float vector_norm( const Vector2D& v ) noexcept;
 
 /**
-*   @fn bool isNullVector(const LX_Vector2D& v) noexcept
+*   @fn bool isNullVector(const Vector2D& v) noexcept
 *
 *   @param [in] v The vector
 *
 *   @return True if the vector has coordinates equal to 0, False otherwise
 */
-bool isNullVector( const LX_Vector2D& v ) noexcept;
+bool isNullVector( const Vector2D& v ) noexcept;
 /**
-*   @fn bool collinear(const LX_Vector2D& u, const LX_Vector2D& v) noexcept
+*   @fn bool collinear(const Vector2D& u, const Vector2D& v) noexcept
 *
 *   @param [in] u The first vector
 *   @param [in] v The second vector
 *
 *   @return True if they are colinear, False otherwise
 */
-bool collinear( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
+bool collinear( const Vector2D& u, const Vector2D& v ) noexcept;
 /**
-*   @fn LX_Vector2D& normalize(LX_Vector2D& v) noexcept
+*   @fn Vector2D& normalize(Vector2D& v) noexcept
 *
 *   @param [in, out] v The vector
 *
@@ -255,10 +255,10 @@ bool collinear( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 *
 *   @note If the vector is a null vector, then the same vector is returned
 */
-LX_Vector2D& normalize( LX_Vector2D& v ) noexcept;
+Vector2D& normalize( Vector2D& v ) noexcept;
 
 }   // Physics
 
 }   // lx
 
-#endif // LX_VECTOR2D_HPP_INCLUDED
+#endif // VECTOR2D_HPP_INCLUDED

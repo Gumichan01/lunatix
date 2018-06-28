@@ -35,7 +35,7 @@ const unsigned int NB_CONFIG = 6;
 
 /* lx::ConfigLoader */
 
-struct LX_InternalConfig final
+struct InternalConfig final
 {
     bool video_flag;        // Video flag
     bool vsync_flag;        // VSync flag
@@ -45,17 +45,17 @@ struct LX_InternalConfig final
     bool opengl_flag;       // OpenGL flag
 };
 
-static LX_InternalConfig _conf;
+static InternalConfig _conf;
 
-unsigned int checkLine_( unsigned int cpt, LX_InternalConfig& config,
+unsigned int checkLine_( unsigned int cpt, InternalConfig& config,
                          const std::string& line, const std::string& sub ) noexcept;
-void readFile_( std::ifstream& f, LX_InternalConfig& config ) noexcept;
-void loadFileConfig_( LX_InternalConfig& config ) noexcept;
+void readFile_( std::ifstream& f, InternalConfig& config ) noexcept;
+void loadFileConfig_( InternalConfig& config ) noexcept;
 
 /*
     Return 1 if a configuration has been found, 0 otherwise
 */
-unsigned int checkLine_( unsigned int cpt, LX_InternalConfig& config,
+unsigned int checkLine_( unsigned int cpt, InternalConfig& config,
                          const std::string& line, const std::string& sub ) noexcept
 {
     if ( cpt >= NB_CONFIG )
@@ -129,7 +129,7 @@ unsigned int checkLine_( unsigned int cpt, LX_InternalConfig& config,
     return ret;
 }
 
-void readFile_( std::ifstream& f, LX_InternalConfig& config ) noexcept
+void readFile_( std::ifstream& f, InternalConfig& config ) noexcept
 {
     const char SHARP = '#';
     const std::string EQUAL( "=" );
@@ -151,10 +151,10 @@ void readFile_( std::ifstream& f, LX_InternalConfig& config ) noexcept
     }
 }
 
-void loadFileConfig_( LX_InternalConfig& config ) noexcept
+void loadFileConfig_( InternalConfig& config ) noexcept
 {
-    const std::string LX_CFG_FILE( "config/lunatix.cfg" );
-    std::ifstream f( LX_CFG_FILE, std::ios::in );
+    const std::string CFG_FILE( "config/lunatix.cfg" );
+    std::ifstream f( CFG_FILE, std::ios::in );
 
     if ( f.is_open() )
     {
@@ -165,7 +165,7 @@ void loadFileConfig_( LX_InternalConfig& config ) noexcept
     else
     {
         lx::Log::logCritical( lx::Log::SYSTEM, "config - Cannot open %s",
-                              LX_CFG_FILE.c_str() );
+                              CFG_FILE.c_str() );
     }
 }
 

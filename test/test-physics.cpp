@@ -41,7 +41,7 @@ void test_conversion(void);
 
 using namespace lx::Physics;
 
-void displayPoly(LX_Polygon& poly);
+void displayPoly(Polygon& poly);
 
 int main(int argc, char **argv)
 {
@@ -93,10 +93,10 @@ int main(int argc, char **argv)
 // Test the euclidean functions
 void test_euclide(void)
 {
-    LX_FloatPosition A = {1,1};
-    LX_FloatPosition B = {10,1};
-    LX_FloatPosition C = {0,0};
-    LX_FloatPosition D = {10,10};
+    FloatPosition A = {1,1};
+    FloatPosition B = {10,1};
+    FloatPosition C = {0,0};
+    FloatPosition D = {10,10};
 
     lx::Log::log(" = TEST EUCLIDE = ");
     lx::Log::log("A(%d,%d)",A.x,A.y);
@@ -144,12 +144,12 @@ void test_euclide(void)
 
 void test_collisionPointCircle(void)
 {
-    LX_Circle circle{LX_FloatPosition{100,100},10};
+    Circle circle{FloatPosition{100,100},10};
 
-    LX_FloatPosition A{100,100};
-    LX_FloatPosition B{50,50};
-    LX_FloatPosition C{105,105};
-    LX_FloatPosition D{100,125};
+    FloatPosition A{100,100};
+    FloatPosition B{50,50};
+    FloatPosition C{105,105};
+    FloatPosition D{100,125};
 
     lx::Log::log(" = TEST POINT/CIRCLE = ");
     lx::Log::log("A(%d,%d)",A.x.v, A.y.v);
@@ -195,8 +195,8 @@ void test_collisionPointCircle(void)
 
 void test_collisionPointBox(void)
 {
-    LX_FloatPosition A{100,100}, B{50,50};
-    LX_FloatingBox aabb{LX_FloatPosition{40.0f, 40.0f}, 30, 30};
+    FloatPosition A{100,100}, B{50,50};
+    FloatingBox aabb{FloatPosition{40.0f, 40.0f}, 30, 30};
 
     lx::Log::log(" = TEST POINT/AABB = ");
     lx::Log::log("A(%f,%f)", A.x.v, A.y.v);
@@ -225,9 +225,9 @@ void test_collisionPointBox(void)
 
 void test_collision2Circle(void)
 {
-    LX_Circle A{LX_FloatPosition{10.f, 10.0f}, 5};
-    LX_Circle B{LX_FloatPosition{13.0f, 12.0f}, 3};
-    LX_Circle C{LX_FloatPosition{100.0f, 100.0f}, 50};
+    Circle A{FloatPosition{10.f, 10.0f}, 5};
+    Circle B{FloatPosition{13.0f, 12.0f}, 3};
+    Circle C{FloatPosition{100.0f, 100.0f}, 50};
 
     lx::Log::log(" = TEST CIRCLE/CIRCLE = ");
     lx::Log::log("A{(%d,%d),%d}", A.center.x.v, A.center.y.v, A.radius);
@@ -264,9 +264,9 @@ void test_collision2Circle(void)
 
 void test_collision2Box(void)
 {
-    const LX_FloatingBox R1{LX_FloatPosition{0.0f, 0.0f},50,25};
-    const LX_FloatingBox R2{LX_FloatPosition{40.0f, 21.0f},32,25};
-    const LX_FloatingBox R3{LX_FloatPosition{64.0f, 32.0f},10,100};
+    const FloatingBox R1{FloatPosition{0.0f, 0.0f},50,25};
+    const FloatingBox R2{FloatPosition{40.0f, 21.0f},32,25};
+    const FloatingBox R3{FloatPosition{64.0f, 32.0f},10,100};
 
     lx::Log::log(" = TEST RECT/RECT = ");
     lx::Log::log("R1{(%d,%d),%d,%d}", R1.p.x.v, R1.p.y.v, R1.w, R1.h);
@@ -303,10 +303,10 @@ void test_collision2Box(void)
 
 void test_collisionBoxCircle(void)
 {
-    LX_FloatingBox R1{LX_FloatPosition{0.0f, 0.0f},50,25};
-    LX_Circle A{LX_FloatPosition{10.0f,10.0f}, 5};
-    LX_Circle B{LX_FloatPosition{51.0f,26.0f}, 15};
-    LX_Circle C{LX_FloatPosition{100.0f,100.0f}, 40};
+    FloatingBox R1{FloatPosition{0.0f, 0.0f},50,25};
+    Circle A{FloatPosition{10.0f,10.0f}, 5};
+    Circle B{FloatPosition{51.0f,26.0f}, 15};
+    Circle C{FloatPosition{100.0f,100.0f}, 40};
 
     lx::Log::log(" = TEST RECT/CIRCLE = ");
     lx::Log::log("R1{(%d,%d),%d,%d}", R1.p.x.v, R1.p.y.v, R1.w, R1.h);
@@ -344,10 +344,10 @@ void test_collisionBoxCircle(void)
 
 void testPolygon(void)
 {
-    LX_Polygon poly;
-    poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    poly.addPoint(LX_FloatPosition{5.0f, 5.0f});
+    Polygon poly;
+    poly.addPoint(FloatPosition{10.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 10.0f});
+    poly.addPoint(FloatPosition{5.0f, 5.0f});
 
     lx::Log::log(" = TEST POLYGON = ");
     lx::Log::log("Number of edges");
@@ -361,7 +361,7 @@ void testPolygon(void)
 
     displayPoly(poly);
 
-    LX_FloatPosition p = poly.getPoint(0);
+    FloatPosition p = poly.getPoint(0);
     lx::Log::log("poly.getPoint(0): (%d,%d)", p.x.v, p.y.v);
 
     if(p.x != fbox(10.0f))
@@ -384,13 +384,13 @@ void testPolygon(void)
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The triangle is a convex polygon, well done !");
 
     {
-        const LX_FloatingBox& b = poly.getEnclosingBox();
+        const FloatingBox& b = poly.getEnclosingBox();
         lx::Log::log("enclosing box {%d, %d, %d, %d}", b.p.x.v, b.p.y.v,
                     b.w, b.h);
     }
 
     // Now we have a polygon with 4 edges
-    LX_FloatPosition q{7.0f, 2.0f};
+    FloatPosition q{7.0f, 2.0f};
     lx::Log::log("add point p(%d,%d)", q.x.v, q.y.v);
     poly.addPoint(q);
 
@@ -402,7 +402,7 @@ void testPolygon(void)
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Added (7,2). This is still a convex polygon, well done !");
 
     // New edge
-    LX_FloatPosition r{6.0f, 5.0f};
+    FloatPosition r{6.0f, 5.0f};
     lx::Log::log("add point p(%d,%d)", r.x.v, r.y.v);
     poly.addPoint(r);
 
@@ -414,7 +414,7 @@ void testPolygon(void)
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Added (6,5). This is not a convex polygon");
 
     {
-        const LX_FloatingBox& b = poly.getEnclosingBox();
+        const FloatingBox& b = poly.getEnclosingBox();
         lx::Log::log("enclosing box {%d, %d, %d, %d}", b.p.x.v, b.p.y.v,
                     b.w, b.h);
     }
@@ -427,12 +427,12 @@ void testLine()
 {
     lx::Log::log("= TEST Vector2D =");
 
-    LX_Vector2D v{0.0f,4.0f};
-    LX_Vector2D u{0.0f,42.0f};
-    LX_Vector2D w{21.0f,0.0f};
-    LX_Line l1{LX_FloatPosition{1.0f, 1.0f}, v};
-    LX_Line l2{LX_FloatPosition{5.0f, 21.0f}, u};
-    LX_Line l3{LX_FloatPosition{1.0f, 1.0f}, w};
+    Vector2D v{0.0f,4.0f};
+    Vector2D u{0.0f,42.0f};
+    Vector2D w{21.0f,0.0f};
+    Line l1{FloatPosition{1.0f, 1.0f}, v};
+    Line l2{FloatPosition{5.0f, 21.0f}, u};
+    Line l3{FloatPosition{1.0f, 1.0f}, w};
 
     lx::Log::log("line #1: (%d, %d) - (%f, %f)", l1.o.x, l1.o.y, l1.v.vx.v, l1.v.vy.v);
     lx::Log::log("line #2: (%d, %d) - (%f, %f)", l2.o.x, l2.o.y, l2.v.vx.v, l2.v.vy.v);
@@ -474,12 +474,12 @@ void testLine()
 
 void test_Vector2D(void)
 {
-    LX_FloatPosition p{1.0f, 2.0f}, q{2.0f, -1.0f};
+    FloatPosition p{1.0f, 2.0f}, q{2.0f, -1.0f};
 
-    LX_Vector2D v{1.0f, 2.0f};
-    LX_Vector2D u{2.0f, -1.0f};
-    LX_Vector2D z{0.0f, 0.0f};
-    LX_Vector2D w{q.x - p.x, q.y - p.y};
+    Vector2D v{1.0f, 2.0f};
+    Vector2D u{2.0f, -1.0f};
+    Vector2D z{0.0f, 0.0f};
+    Vector2D w{q.x - p.x, q.y - p.y};
 
     lx::Log::log(" = TEST Vector2D = ");
     lx::Log::log("v(%f,%f)", v.vx.v, v.vy.v);
@@ -551,15 +551,15 @@ void test_Vector2D(void)
 
 void test_collisionSeg(void)
 {
-    LX_FloatPosition A{5.0f, 5.0f}, B{10.0f, 10.0f}, C{5.0f, 10.0f};
-    LX_FloatPosition D{10.0f, 5.0f}, E{20.0f, 5.0f}, F{15.0f,5.0f};
-    const LX_Segment AB{A, B};
-    const LX_Segment AC{A, C};
-    const LX_Segment AD{A, D};
-    const LX_Segment AE{A, E};
-    const LX_Segment FE{F, E};
-    const LX_Segment BD{B, D};
-    const LX_Segment CD{C, D};
+    FloatPosition A{5.0f, 5.0f}, B{10.0f, 10.0f}, C{5.0f, 10.0f};
+    FloatPosition D{10.0f, 5.0f}, E{20.0f, 5.0f}, F{15.0f,5.0f};
+    const Segment AB{A, B};
+    const Segment AC{A, C};
+    const Segment AD{A, D};
+    const Segment AE{A, E};
+    const Segment FE{F, E};
+    const Segment BD{B, D};
+    const Segment CD{C, D};
 
     lx::Log::log(" = TEST Collision Segment = ");
     lx::Log::log("A(%d,%d)", A.x.v, A.y.v);
@@ -620,26 +620,26 @@ void test_collisionPointPolygon(void)
         Be careful, if the coordinates of a point
         are to high, you will have incorrect results
     */
-    LX_Polygon poly, polyc2;
+    Polygon poly, polyc2;
 
-    LX_FloatPosition N{12.0f, 7.0f};
-    LX_FloatPosition O{9.0f, 7.0f};
-    LX_FloatPosition P{6.0f, 5.0f};
-    LX_FloatPosition Q{6.0f, 4.0f};
-    LX_FloatPosition R{1024.0f, 2048.0f};
-    LX_FloatPosition S{2.0f, 2.0f};
-    LX_FloatPosition T{10.0f, 5.0f};
+    FloatPosition N{12.0f, 7.0f};
+    FloatPosition O{9.0f, 7.0f};
+    FloatPosition P{6.0f, 5.0f};
+    FloatPosition Q{6.0f, 4.0f};
+    FloatPosition R{1024.0f, 2048.0f};
+    FloatPosition S{2.0f, 2.0f};
+    FloatPosition T{10.0f, 5.0f};
 
-    poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    poly.addPoint(LX_FloatPosition{5.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{7.0f, 2.0f});
-    poly.addPoint(LX_FloatPosition{66.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 10.0f});
+    poly.addPoint(FloatPosition{5.0f, 5.0f});
+    poly.addPoint(FloatPosition{7.0f, 2.0f});
+    poly.addPoint(FloatPosition{66.0f, 5.0f});
 
-    polyc2.addPoint(LX_FloatPosition{12.0f, 5.0f});
-    polyc2.addPoint(LX_FloatPosition{12.0f, 12.0f});
-    polyc2.addPoint(LX_FloatPosition{4.0f, 5.0f});
-    polyc2.addPoint(LX_FloatPosition{7.0f, 0.0f});
+    polyc2.addPoint(FloatPosition{12.0f, 5.0f});
+    polyc2.addPoint(FloatPosition{12.0f, 12.0f});
+    polyc2.addPoint(FloatPosition{4.0f, 5.0f});
+    polyc2.addPoint(FloatPosition{7.0f, 0.0f});
 
     lx::Log::log(" = TEST Collision Point/Polygon = ");
     displayPoly(poly);
@@ -713,17 +713,17 @@ void test_collisionPointPolygon(void)
 
 void test_collisionCirclePolygon(void)
 {
-    LX_Circle M{LX_FloatPosition{12.0f, 7.0f}, 1};
-    LX_Circle N{LX_FloatPosition{7.0f, 2.0f}, 2};
-    LX_Circle O{LX_FloatPosition{9.0f, 7.0f}, 10};
-    LX_Circle S{LX_FloatPosition{2.0f, 2.0f}, 2};
-    LX_Polygon poly;
+    Circle M{FloatPosition{12.0f, 7.0f}, 1};
+    Circle N{FloatPosition{7.0f, 2.0f}, 2};
+    Circle O{FloatPosition{9.0f, 7.0f}, 10};
+    Circle S{FloatPosition{2.0f, 2.0f}, 2};
+    Polygon poly;
 
-    poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    poly.addPoint(LX_FloatPosition{5.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{7.0f, 2.0f});
-    poly.addPoint(LX_FloatPosition{6.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 10.0f});
+    poly.addPoint(FloatPosition{5.0f, 5.0f});
+    poly.addPoint(FloatPosition{7.0f, 2.0f});
+    poly.addPoint(FloatPosition{6.0f, 5.0f});
 
     lx::Log::log(" = TEST Collision Circle/Polygon = ");
 
@@ -771,19 +771,19 @@ void test_collisionCirclePolygon(void)
 
 void test_collisionBoxPolygon(void)
 {
-    const LX_FloatingBox R1{LX_FloatPosition{1.0f, 1.0f},2,2};
-    const LX_FloatingBox R2{LX_FloatPosition{8.0f, 3.0f},10,4};
-    const LX_FloatingBox R3{LX_FloatPosition{2.0f, 7.0f},20,2};
-    const LX_FloatingBox R4{LX_FloatPosition{8.0f, 6.0f},1,1};
-    const LX_FloatingBox R5{LX_FloatPosition{2.0f, 0.0f},16,16};
+    const FloatingBox R1{FloatPosition{1.0f, 1.0f},2,2};
+    const FloatingBox R2{FloatPosition{8.0f, 3.0f},10,4};
+    const FloatingBox R3{FloatPosition{2.0f, 7.0f},20,2};
+    const FloatingBox R4{FloatPosition{8.0f, 6.0f},1,1};
+    const FloatingBox R5{FloatPosition{2.0f, 0.0f},16,16};
 
-    LX_Polygon poly;
+    Polygon poly;
 
-    poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    poly.addPoint(LX_FloatPosition{5.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{7.0f, 2.0f});
-    poly.addPoint(LX_FloatPosition{6.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 10.0f});
+    poly.addPoint(FloatPosition{5.0f, 5.0f});
+    poly.addPoint(FloatPosition{7.0f, 2.0f});
+    poly.addPoint(FloatPosition{6.0f, 5.0f});
 
     lx::Log::log(" = TEST Collision Box/Polygon = ");
     lx::Log::log("R1{(%d,%d),%d,%d}", R1.p.x.v, R1.p.y.v, R1.w, R1.h);
@@ -837,54 +837,54 @@ void test_collisionBoxPolygon(void)
 
 void test_collision2Polygon(void)
 {
-    LX_Polygon poly_empty1, poly_empty2;
-    LX_Polygon polyc, polyc2, polync, polync2;
-    LX_Polygon poly, poly2, poly3, poly4;
+    Polygon poly_empty1, poly_empty2;
+    Polygon polyc, polyc2, polync, polync2;
+    Polygon poly, poly2, poly3, poly4;
 
     // Convex polygon
-    polyc.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    polyc.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    polyc.addPoint(LX_FloatPosition{5.0f, 5.0f});
-    polyc.addPoint(LX_FloatPosition{7.0f, 2.0f});
+    polyc.addPoint(FloatPosition{10.0f, 5.0f});
+    polyc.addPoint(FloatPosition{10.0f, 10.0f});
+    polyc.addPoint(FloatPosition{5.0f, 5.0f});
+    polyc.addPoint(FloatPosition{7.0f, 2.0f});
 
     // Non-convex polygon
-    polync.addPoint(LX_FloatPosition{1000.0f, 500.0f});
-    polync.addPoint(LX_FloatPosition{1000.0f, 1000.0f});
-    polync.addPoint(LX_FloatPosition{500.0f, 500.0f});
-    polync.addPoint(LX_FloatPosition{700.0f, 200.0f});
-    polync.addPoint(LX_FloatPosition{600.0f, 500.0f});
+    polync.addPoint(FloatPosition{1000.0f, 500.0f});
+    polync.addPoint(FloatPosition{1000.0f, 1000.0f});
+    polync.addPoint(FloatPosition{500.0f, 500.0f});
+    polync.addPoint(FloatPosition{700.0f, 200.0f});
+    polync.addPoint(FloatPosition{600.0f, 500.0f});
 
     // Non-convex polygon (again)
-    polync2.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    polync2.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    polync2.addPoint(LX_FloatPosition{5.0f, 5.0f});
-    polync2.addPoint(LX_FloatPosition{7.0f, 2.0f});
-    polync2.addPoint(LX_FloatPosition{6.0f, 5.0f});
+    polync2.addPoint(FloatPosition{10.0f, 5.0f});
+    polync2.addPoint(FloatPosition{10.0f, 10.0f});
+    polync2.addPoint(FloatPosition{5.0f, 5.0f});
+    polync2.addPoint(FloatPosition{7.0f, 2.0f});
+    polync2.addPoint(FloatPosition{6.0f, 5.0f});
 
-    polyc2.addPoint(LX_FloatPosition{12.0f, 5.0f});
-    polyc2.addPoint(LX_FloatPosition{12.0f, 12.0f});
-    polyc2.addPoint(LX_FloatPosition{4.0f, 5.0f});
-    polyc2.addPoint(LX_FloatPosition{7.0f, 0.0f});
+    polyc2.addPoint(FloatPosition{12.0f, 5.0f});
+    polyc2.addPoint(FloatPosition{12.0f, 12.0f});
+    polyc2.addPoint(FloatPosition{4.0f, 5.0f});
+    polyc2.addPoint(FloatPosition{7.0f, 0.0f});
 
-    poly.addPoint(LX_FloatPosition{10.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{10.0f, 10.0f});
-    poly.addPoint(LX_FloatPosition{5.0f, 5.0f});
-    poly.addPoint(LX_FloatPosition{7.0f, 2.0f});
-    poly.addPoint(LX_FloatPosition{6.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 5.0f});
+    poly.addPoint(FloatPosition{10.0f, 10.0f});
+    poly.addPoint(FloatPosition{5.0f, 5.0f});
+    poly.addPoint(FloatPosition{7.0f, 2.0f});
+    poly.addPoint(FloatPosition{6.0f, 5.0f});
 
-    poly2.addPoint(LX_FloatPosition{9.0f, 6.0f});
-    poly2.addPoint(LX_FloatPosition{9.0f, 9.0f});
-    poly2.addPoint(LX_FloatPosition{6.0f, 4.0f});
-    poly2.addPoint(LX_FloatPosition{6.0f, 3.0f});
-    poly2.addPoint(LX_FloatPosition{5.0f, 6.0f});
+    poly2.addPoint(FloatPosition{9.0f, 6.0f});
+    poly2.addPoint(FloatPosition{9.0f, 9.0f});
+    poly2.addPoint(FloatPosition{6.0f, 4.0f});
+    poly2.addPoint(FloatPosition{6.0f, 3.0f});
+    poly2.addPoint(FloatPosition{5.0f, 6.0f});
 
-    poly3.addPoint(LX_FloatPosition{0.0f, 0.0f});
-    poly3.addPoint(LX_FloatPosition{32.0f, 32.0f});
-    poly3.addPoint(LX_FloatPosition{0.0f, 32.0f});
+    poly3.addPoint(FloatPosition{0.0f, 0.0f});
+    poly3.addPoint(FloatPosition{32.0f, 32.0f});
+    poly3.addPoint(FloatPosition{0.0f, 32.0f});
 
-    poly4.addPoint(LX_FloatPosition{2.0f, 2.0f});
-    poly4.addPoint(LX_FloatPosition{2.0f, 3.0f});
-    poly4.addPoint(LX_FloatPosition{3.0f, 4.0f});
+    poly4.addPoint(FloatPosition{2.0f, 2.0f});
+    poly4.addPoint(FloatPosition{2.0f, 3.0f});
+    poly4.addPoint(FloatPosition{3.0f, 4.0f});
 
     lx::Log::log(" = TEST Collision Polygon/Polygon = ");
 
@@ -988,8 +988,8 @@ void test_collision2PolygonAgain(void)
 
     const float N = 100000.0f;
     const float M = 1000.0f;
-    LX_Polygon poly1, poly2;
-    LX_Polygon poly3, poly4;
+    Polygon poly1, poly2;
+    Polygon poly3, poly4;
     unsigned int t1,t2;
 
     lx::Log::log(" = TEST Collision BIG Polygon/Polygon = ");
@@ -998,8 +998,8 @@ void test_collision2PolygonAgain(void)
     lx::Log::log("Generate two random polygons with %d sides",N);
     for(unsigned long i = 0L; i < N; ++i)
     {
-        poly1.addPoint(LX_FloatPosition{FP(M), FP(M)});
-        poly2.addPoint(LX_FloatPosition{FP(M), FP(M)});
+        poly1.addPoint(FloatPosition{FP(M), FP(M)});
+        poly2.addPoint(FloatPosition{FP(M), FP(M)});
     }
 
     lx::Log::log("Calculate the collision #1");
@@ -1012,8 +1012,8 @@ void test_collision2PolygonAgain(void)
     lx::Log::log("Generate two other random polygons with %d sides in two different areas",N);
     for(unsigned long i = 0; i < N; ++i)
     {
-        poly3.addPoint(LX_FloatPosition{FP(M), FP(M)});
-        poly4.addPoint(LX_FloatPosition{FP(M + N), FP(M + N)});
+        poly3.addPoint(FloatPosition{FP(M), FP(M)});
+        poly4.addPoint(FloatPosition{FP(M + N), FP(M + N)});
     }
 
     lx::Log::log("Calculate the collision #2");
@@ -1030,26 +1030,26 @@ void test_collision2PolygonAgain(void)
 
 void test_move(void)
 {
-    LX_FloatPosition P{{1.0f}, {2.0f}};
-    LX_FloatingBox R{LX_FloatPosition{8.f, 4.0f},10,10};
+    FloatPosition P{{1.0f}, {2.0f}};
+    FloatingBox R{FloatPosition{8.f, 4.0f},10,10};
 
     const float X = {-4.0f};
     const float Y = {8.0f};
 
-    LX_Polygon poly;
-    LX_Polygon expoly;
+    Polygon poly;
+    Polygon expoly;
 
-    poly.addPoint(LX_FloatPosition{24.0f, 32.0f});
-    poly.addPoint(LX_FloatPosition{48.0f, 32.0f});
-    poly.addPoint(LX_FloatPosition{128.0f, 64.0f});
-    poly.addPoint(LX_FloatPosition{64.0f, 64.0f});
-    poly.addPoint(LX_FloatPosition{32.0f, 32.0f});
+    poly.addPoint(FloatPosition{24.0f, 32.0f});
+    poly.addPoint(FloatPosition{48.0f, 32.0f});
+    poly.addPoint(FloatPosition{128.0f, 64.0f});
+    poly.addPoint(FloatPosition{64.0f, 64.0f});
+    poly.addPoint(FloatPosition{32.0f, 32.0f});
     // expected polygon
-    expoly.addPoint(LX_FloatPosition{24.0f + X, 32.0f + Y});
-    expoly.addPoint(LX_FloatPosition{48.0f + X, 32.0f + Y});
-    expoly.addPoint(LX_FloatPosition{128.0f + X, 64.0f + Y});
-    expoly.addPoint(LX_FloatPosition{64.0f + X, 64.0f + Y});
-    expoly.addPoint(LX_FloatPosition{32.0f + X, 32.0f + Y});
+    expoly.addPoint(FloatPosition{24.0f + X, 32.0f + Y});
+    expoly.addPoint(FloatPosition{48.0f + X, 32.0f + Y});
+    expoly.addPoint(FloatPosition{128.0f + X, 64.0f + Y});
+    expoly.addPoint(FloatPosition{64.0f + X, 64.0f + Y});
+    expoly.addPoint(FloatPosition{32.0f + X, 32.0f + Y});
 
     lx::Log::log(" = TEST Move = ");
 
@@ -1062,8 +1062,8 @@ void test_move(void)
 
     lx::Log::log("Point");
 
-    LX_FloatPosition expected_point{P.x.v + 1.0f, P.y.v + 1.0f};
-    movePoint(P, LX_Vector2D{{1.0f}, {1.0f}});
+    FloatPosition expected_point{P.x.v + 1.0f, P.y.v + 1.0f};
+    movePoint(P, Vector2D{{1.0f}, {1.0f}});
 
     if(P.x == expected_point.x && P.y == expected_point.y)
         lx::Log::log("Point P(%d,%d)", P.x.v, P.y.v);
@@ -1072,8 +1072,8 @@ void test_move(void)
 
     lx::Log::log("Rectangle");
 
-    const LX_FloatingBox expected_aabb{R.p.x + 2, R.p.y + 3, R.w, R.h};
-    moveBox(R, LX_Vector2D{{2.0f}, {3.0f}});
+    const FloatingBox expected_aabb{R.p.x + 2, R.p.y + 3, R.w, R.h};
+    moveBox(R, Vector2D{{2.0f}, {3.0f}});
 
     if(R.p == expected_aabb.p)
         lx::Log::log("SUCCESS - Rectangle R{(%d,%d),%d,%d}", R.p.x.v, R.p.y.v, R.w, R.h);
@@ -1081,7 +1081,7 @@ void test_move(void)
         lx::Log::log("FAILURE - expected : Rectangle R(3,6,10,10); got: R{(%d,%d),%d,%d}",
                     R.p.x.v, R.p.y.v, R.w, R.h);
 
-    movePoly(poly, LX_Vector2D{X, Y});
+    movePoly(poly, Vector2D{X, Y});
     const unsigned long n = poly.numberOfEdges();
     const unsigned long m = expoly.numberOfEdges();
 
@@ -1100,8 +1100,8 @@ void test_move(void)
         bool ok = true;
         for(unsigned long j = 0; j < n; j++)
         {
-            LX_FloatPosition p1 = poly.getPoint(j);
-            LX_FloatPosition p2 = expoly.getPoint(j);
+            FloatPosition p1 = poly.getPoint(j);
+            FloatPosition p2 = expoly.getPoint(j);
             if(p1 != p2)
             {
                 lx::Log::logInfo(lx::Log::TEST,
@@ -1121,13 +1121,13 @@ void test_move(void)
     }
 
     // reset
-    movePoly(poly, LX_Vector2D{-X, -Y});
-    const LX_FloatingBox& box = expoly.getEnclosingBox();
-    const LX_FloatPosition q{box.p.x + box.w / 2.0f, box.p.y + box.h / 2.0f};
+    movePoly(poly, Vector2D{-X, -Y});
+    const FloatingBox& box = expoly.getEnclosingBox();
+    const FloatPosition q{box.p.x + box.w / 2.0f, box.p.y + box.h / 2.0f};
 
     movePolyTo(poly, q);
-    const LX_FloatingBox& b = poly.getEnclosingBox();
-    LX_FloatPosition s{b.p.x + b.w / 2.0f, b.p.y + b.h / 2.0f};
+    const FloatingBox& b = poly.getEnclosingBox();
+    FloatPosition s{b.p.x + b.w / 2.0f, b.p.y + b.h / 2.0f};
     lx::Log::log("centroid of poly: s(%d,%d)", s.x.v, s.y.v);
     lx::Log::log("centroid of expoly: q(%d,%d)", q.x.v, q.y.v);
 
@@ -1139,8 +1139,8 @@ void test_assignment(void)
 {
     lx::Log::log(" = TEST Assignement = ");
 
-    LX_FloatPosition P{1.0f, 2.0f};
-    LX_FloatPosition Q = P;
+    FloatPosition P{1.0f, 2.0f};
+    FloatPosition Q = P;
 
     lx::Log::log("P(%d,%d)", P.x.v, P.y.v);
 
@@ -1149,11 +1149,11 @@ void test_assignment(void)
     else
         lx::Log::log("FAILURE - expected: Q(1,2); Got: Q(%d,%d)", Q.x.v, Q.y.v);
 
-    LX_Circle C{LX_FloatPosition{4.0f, 9.0f},10};
+    Circle C{FloatPosition{4.0f, 9.0f},10};
 
     lx::Log::log("C{(%d,%d),%d}", C.center.x.v, C.center.y.v, C.radius);
 
-    LX_Circle D = C;  // assignment
+    Circle D = C;  // assignment
 
     if(D == C)
         lx::Log::log("SUCCESS - Circle D{(%d,%d),%d}", D.center.x.v,
@@ -1162,17 +1162,17 @@ void test_assignment(void)
         lx::Log::log("FAILURE - expected: Circle D{{4,9},10}; Got: D{(%d,%d),%d}",
                     D.center.x.v, D.center.y.v, D.radius);
 
-    LX_Vector2D v{3.14f,1.59f};
+    Vector2D v{3.14f,1.59f};
     lx::Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
 
-    LX_Vector2D u = v;  // assignment
+    Vector2D u = v;  // assignment
 
     if(u == v)
         lx::Log::log("SUCCESS - Vector2D v(%f,%f)", u.vx.v, u.vy.v);
     else
         lx::Log::log("FAILURE - expected: u(3.14,1.59); Got: u(%f,%f)", u.vx.v, u.vy.v);
 
-    LX_Vector2D t{0.0f,0.0f}, w{0.0f,0.0f};
+    Vector2D t{0.0f,0.0f}, w{0.0f,0.0f};
 
     if(t == w)
         lx::Log::log("SUCCESS - Vector2D t(%f,%f)", t.vx.v, t.vy.v);
@@ -1185,15 +1185,15 @@ void test_assignment(void)
 
 void test_operator(void)
 {
-    LX_Circle C{LX_FloatPosition{2.0f, 3.0f}, 10};
-    LX_Circle E{LX_FloatPosition{4.0f, 9.0f}, 32};
-    LX_Circle F{LX_FloatPosition{8.0f, 21.0f}, 10};
+    Circle C{FloatPosition{2.0f, 3.0f}, 10};
+    Circle E{FloatPosition{4.0f, 9.0f}, 32};
+    Circle F{FloatPosition{8.0f, 21.0f}, 10};
 
-    LX_Vector2D v{-3.14f, 1.59f};
-    LX_Vector2D u = v;
-    LX_Vector2D w{3.140001f, 1.590001f};
-    LX_Vector2D i{2.56f, 1.59f};
-    LX_Vector2D j{-0.14f, -1.28f};
+    Vector2D v{-3.14f, 1.59f};
+    Vector2D u = v;
+    Vector2D w{3.140001f, 1.590001f};
+    Vector2D i{2.56f, 1.59f};
+    Vector2D j{-0.14f, -1.28f};
 
     lx::Log::log(" = TEST operators = ");
 
@@ -1284,19 +1284,19 @@ void test_operator(void)
 
 void test_VectorPlusMinusOp(void)
 {
-    LX_Vector2D u{3.14f, 1.59f};
-    LX_Vector2D v{-1.28f, 5.12f};
-    LX_Vector2D z{-2.56f, 10.24f};
+    Vector2D u{3.14f, 1.59f};
+    Vector2D v{-1.28f, 5.12f};
+    Vector2D z{-2.56f, 10.24f};
 
-    LX_Vector2D a{3.14f, 2.048f};
-    LX_Vector2D b{1.28f, 0.64f};
-    LX_Vector2D c{-2.56f, 10.24f};
+    Vector2D a{3.14f, 2.048f};
+    Vector2D b{1.28f, 0.64f};
+    Vector2D c{-2.56f, 10.24f};
 
-    LX_Vector2D exp_sum_vec = {u.vx + v.vx, u.vy + v.vy};
-    LX_Vector2D exp_add_vec = {u.vx + z.vx, u.vy + z.vy};
+    Vector2D exp_sum_vec = {u.vx + v.vx, u.vy + v.vy};
+    Vector2D exp_add_vec = {u.vx + z.vx, u.vy + z.vy};
 
-    LX_Vector2D exp_diff_vec = {a.vx - b.vx, a.vy - b.vy};
-    LX_Vector2D exp_sub_vec = {a.vx - c.vx, a.vy - c.vy};
+    Vector2D exp_diff_vec = {a.vx - b.vx, a.vy - b.vy};
+    Vector2D exp_sub_vec = {a.vx - c.vx, a.vy - c.vy};
 
     lx::Log::log(" = TEST Vector arithmetic = ");
     lx::Log::log(" '+','+=','-','-='");
@@ -1305,13 +1305,13 @@ void test_VectorPlusMinusOp(void)
     lx::Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
     lx::Log::log("w = u + v;");
 
-    LX_Vector2D w = u + v;
+    Vector2D w = u + v;
     lx::Log::log("Vector2D w(%f,%f)", w.vx.v, w.vy.v);
 
     if(w == exp_sum_vec)
         lx::Log::log("SUCCESS - w(%f,%f) as expected", w.vx.v, w.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: w(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: w(%f,%f)",
                     exp_sum_vec.vx.v, exp_sum_vec.vy.v, w.vx.v, w.vy.v);
 
     lx::Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
@@ -1325,21 +1325,21 @@ void test_VectorPlusMinusOp(void)
     if(u == exp_add_vec)
         lx::Log::log("SUCCESS - u(%f,%f) as expected", u.vx.v, u.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: u(%f,%f)",
                     exp_add_vec.vx.v, exp_add_vec.vy.v, u.vx.v, u.vy.v);
 
     lx::Log::log("Vector2D a(%f,%f)", a.vx.v, a.vy.v);
     lx::Log::log("Vector2D b(%f,%f)", b.vx.v, b.vy.v);
     lx::Log::log("d = a - b;");
 
-    LX_Vector2D d = a - b;
+    Vector2D d = a - b;
 
     lx::Log::log("Vector2D d(%f,%f)", d.vx.v, d.vy.v);
 
     if(d == exp_diff_vec)
         lx::Log::log("SUCCESS - d(%f,%f) as expected", d.vx.v, d.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: d(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: d(%f,%f)",
                     exp_diff_vec.vx.v, exp_diff_vec.vy.v, d.vx.v, d.vy.v);
 
     lx::Log::log("Vector2D a(%f,%f)", a.vx.v, a.vy.v);
@@ -1351,7 +1351,7 @@ void test_VectorPlusMinusOp(void)
     if(a == exp_sub_vec)
         lx::Log::log("SUCCESS - a(%f,%f) as expected", a.vx.v, a.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: a(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: a(%f,%f)",
                     exp_sub_vec.vx.v, exp_sub_vec.vy.v, a.vx.v, a.vy.v);
 
     lx::Log::log(" = END TEST = ");
@@ -1362,8 +1362,8 @@ void test_VectorOpposite(void)
 {
     lx::Log::log(" = TEST Vector Opposite = ");
 
-    LX_Vector2D u = {3.14f,-2.56f};
-    LX_Vector2D expected_vec = {-u.vx.v,-u.vy};
+    Vector2D u = {3.14f,-2.56f};
+    Vector2D expected_vec = {-u.vx.v,-u.vy};
 
     lx::Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
     lx::Log::log("-u;");
@@ -1371,7 +1371,7 @@ void test_VectorOpposite(void)
     if(expected_vec == (-u) )
         lx::Log::log("SUCCESS - u(%f,%f) as expected", (-u).vx.v, (-u).vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: u(%f,%f)",
                     expected_vec.vx.v, expected_vec.vy.v, (-u).vx.v, (-u).vy.v);
 
     lx::Log::log(" = END TEST = ");
@@ -1382,12 +1382,12 @@ void test_VectorIncDec(void)
 {
     lx::Log::log(" = TEST Vector Increment and decrement = ");
 
-    LX_Vector2D u{1.41f,-5.92f};
-    LX_Vector2D v = u;
-    LX_Vector2D exp_inc_pre_vec{u.vx + 1.0f,u.vy + 1.0f};
-    LX_Vector2D exp_inc_post_vec{u.vx + 1.0f,u.vy + 1.0f};
-    LX_Vector2D exp_dec_pre_vec{u.vx - 1.0f,u.vy - 1.0f};
-    LX_Vector2D exp_dec_post_vec{u.vx - 1.0f,u.vy - 1.0f};
+    Vector2D u{1.41f,-5.92f};
+    Vector2D v = u;
+    Vector2D exp_inc_pre_vec{u.vx + 1.0f,u.vy + 1.0f};
+    Vector2D exp_inc_post_vec{u.vx + 1.0f,u.vy + 1.0f};
+    Vector2D exp_dec_pre_vec{u.vx - 1.0f,u.vy - 1.0f};
+    Vector2D exp_dec_post_vec{u.vx - 1.0f,u.vy - 1.0f};
 
     lx::Log::log("Increment");
     lx::Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
@@ -1398,7 +1398,7 @@ void test_VectorIncDec(void)
     if(u == exp_inc_pre_vec)
         lx::Log::log("SUCCESS - u(%f,%f) as expected", u.vx.v, u.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: u(%f,%f)",
                     exp_inc_pre_vec.vx.v, exp_inc_pre_vec.vy.v, u.vx.v, u.vy.v);
 
     lx::Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
@@ -1409,7 +1409,7 @@ void test_VectorIncDec(void)
     if(v == exp_inc_post_vec)
         lx::Log::log("SUCCESS - v(%f,%f) as expected", v.vx.v, v.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: v(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: v(%f,%f)",
                     exp_inc_post_vec.vx.v, exp_inc_post_vec.vy.v, v.vx.v, v.vy.v);
 
     u = {1.41f, -5.92f};
@@ -1424,7 +1424,7 @@ void test_VectorIncDec(void)
     if(u == exp_dec_pre_vec)
         lx::Log::log("SUCCESS - u(%f,%f) as expected", u.vx.v, u.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: u(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: u(%f,%f)",
                     exp_dec_pre_vec.vx.v, exp_dec_pre_vec.vy.v, u.vx.v, u.vy.v);
 
     lx::Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
@@ -1435,7 +1435,7 @@ void test_VectorIncDec(void)
     if(v == exp_dec_post_vec)
         lx::Log::log("SUCCESS - v(%f,%f) as expected", v.vx.v, v.vy.v);
     else
-        lx::Log::log("FAILURE - expected: LX_Vector2D(%f,%f) Got: v(%f,%f)",
+        lx::Log::log("FAILURE - expected: Vector2D(%f,%f) Got: v(%f,%f)",
                     exp_dec_post_vec.vx.v, exp_dec_post_vec.vy.v, v.vx.v, v.vy.v);
 
     lx::Log::log(" = END TEST = ");
@@ -1446,11 +1446,11 @@ void test_VectorCollinear(void)
 {
     lx::Log::log(" = TEST Vector collinearity = ");
 
-    LX_Vector2D u = {1.41f, -2.48f};
-    LX_Vector2D v = {u.vx *2.0f, u.vy *2.0f};
-    LX_Vector2D w = u;
-    LX_Vector2D o = {0.0f, 0.0f};
-    LX_Vector2D t = {2.01f, 4.12f};
+    Vector2D u = {1.41f, -2.48f};
+    Vector2D v = {u.vx *2.0f, u.vy *2.0f};
+    Vector2D w = u;
+    Vector2D o = {0.0f, 0.0f};
+    Vector2D t = {2.01f, 4.12f};
 
     lx::Log::log("Vector2D u(%f,%f)", u.vx.v, u.vy.v);
     lx::Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
@@ -1513,9 +1513,9 @@ void test_VectorLambda(void)
 
     float lambda1 = 2.0f;
     float lambda2 = 0.0f;
-    LX_Vector2D v{3.14f,1.59f};
-    LX_Vector2D w{v.vx * lambda1,v.vy * lambda1};
-    LX_Vector2D t{0.0f, 0.0f};
+    Vector2D v{3.14f,1.59f};
+    Vector2D w{v.vx * lambda1,v.vy * lambda1};
+    Vector2D t{0.0f, 0.0f};
 
     lx::Log::log("Vector2D v(%f,%f)", v.vx.v, v.vy.v);
 
@@ -1573,13 +1573,13 @@ void test_conversion(void)
 {
     lx::Log::log(" = TEST conversion = ");
 
-    LX_FloatPosition fp1{0.0f, 0.0f};
-    LX_FloatPosition fp2{64.0f, 128.0f};
-    lx::Graphics::LX_ImgCoord exp1{i32(fp1.x.v), i32(fp1.y.v)};
-    lx::Graphics::LX_ImgCoord exp2{i32(fp2.x.v), i32(fp2.y.v)};
+    FloatPosition fp1{0.0f, 0.0f};
+    FloatPosition fp2{64.0f, 128.0f};
+    lx::Graphics::ImgCoord exp1{i32(fp1.x.v), i32(fp1.y.v)};
+    lx::Graphics::ImgCoord exp2{i32(fp2.x.v), i32(fp2.y.v)};
 
-    lx::Graphics::LX_ImgCoord p1 = lx::Graphics::toPixelPosition(fp1);
-    lx::Graphics::LX_ImgCoord p2 = lx::Graphics::toPixelPosition(fp2);
+    lx::Graphics::ImgCoord p1 = lx::Graphics::toPixelPosition(fp1);
+    lx::Graphics::ImgCoord p2 = lx::Graphics::toPixelPosition(fp2);
 
     if(p1 == exp1)
         lx::Log::log("SUCCESS - p1(%d, %d)", p1.x, p1.y);
@@ -1594,7 +1594,7 @@ void test_conversion(void)
     lx::Log::log(" = END TEST = ");
 }
 
-void displayPoly(LX_Polygon& poly)
+void displayPoly(Polygon& poly)
 {
     ostringstream os;
     os << "{";

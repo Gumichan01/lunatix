@@ -45,27 +45,27 @@ int main(int argc, char **argv)
 
 void test_font(void)
 {
-    LX_Font *font = nullptr;
-    LX_Colour colour = {255,255,255,255};
+    Font *font = nullptr;
+    Colour colour = {255,255,255,255};
 
-    lx::Log::log("Load an LX_Font object using RAII");
+    lx::Log::log("Load an Font object using RAII");
     {
-        LX_Font f1(fname,colour,0);
+        Font f1(fname,colour,0);
         lx::Log::log("SUCCESS - Loaded with success");
         lx::Log::log("font file: %s",f1.getName().utf8_str());
         lx::Log::log("font file with path: %s",f1.getName(true).utf8_str());
     }
 
-    lx::Log::log("Load another LX_Font object using RAII");
+    lx::Log::log("Load another Font object using RAII");
     {
-        LX_Font f2(fname,colour,0);
+        Font f2(fname,colour,0);
         lx::Log::log("SUCCESS - Loaded with success");
     }
 
     {
         try
         {
-            LX_Font ferror("invalid_file",colour,0);
+            Font ferror("invalid_file",colour,0);
             lx::Log::log("FAILURE - o_O. Expected: IOException, got: a valid object");
         }
         catch(IOException &)
@@ -74,7 +74,7 @@ void test_font(void)
         }
     }
 
-    font = new LX_Font(fname,colour,0);
+    font = new Font(fname,colour,0);
 
     if(font == nullptr)
         lx::Log::log("FAILURE - Font not null");
@@ -87,22 +87,22 @@ void test_font(void)
 
 void test_SolidText()
 {
-    LX_Colour dcolour = {255,0,255,127};
-    LX_Colour bcolour = {255,255,255, 127};
+    Colour dcolour = {255,0,255,127};
+    Colour bcolour = {255,255,255, 127};
 
     UTF8string str("がんばつて Gumichan01");
-    lx::Win::LX_WindowInfo winfo;
-    lx::Win::LX_initWindowInfo(winfo);
+    lx::Win::WindowInfo winfo;
+    lx::Win::initWindowInfo(winfo);
     winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
-    lx::Win::LX_Window win(winfo);
+    lx::Win::Window win(winfo);
 
     lx::Log::log("Load a solid text image and display it");
 
     {
-        LX_Font font(fname, dcolour, 32);
-        lx::Graphics::LX_SolidTextTexture simg(str,font,win);
-        lx::Graphics::LX_SolidTextTexture simg2(font,win);
+        Font font(fname, dcolour, 32);
+        lx::Graphics::SolidTextTexture simg(str,font,win);
+        lx::Graphics::SolidTextTexture simg2(font,win);
         lx::Log::log("SUCCESS - Image loaded");
         lx::Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
         lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
@@ -152,23 +152,23 @@ void test_SolidText()
 
 void test_ShadedText()
 {
-    LX_Colour colour = {0,0,0,240};
-    LX_Colour bg = {255,200,127,127};
-    LX_Colour bg2 = {64,40,4,164};
+    Colour colour = {0,0,0,240};
+    Colour bg = {255,200,127,127};
+    Colour bg2 = {64,40,4,164};
 
     UTF8string str("がんばつて Gumichan01");
-    lx::Win::LX_WindowInfo winfo;
-    lx::Win::LX_initWindowInfo(winfo);
+    lx::Win::WindowInfo winfo;
+    lx::Win::initWindowInfo(winfo);
     winfo.title = "LunatiX - Test True Type Font - Shaded text";
     winfo.w = 1000;
-    lx::Win::LX_Window win(winfo);
-    LX_Font font(fname,colour,32);
+    lx::Win::Window win(winfo);
+    Font font(fname,colour,32);
 
     lx::Log::log("Load a shaded text image and display it");
 
     {
-        lx::Graphics::LX_ShadedTextTexture simg(str,font,bg,win);
-        lx::Graphics::LX_ShadedTextTexture simg2(font,win);
+        lx::Graphics::ShadedTextTexture simg(str,font,bg,win);
+        lx::Graphics::ShadedTextTexture simg2(font,win);
         lx::Log::log("SUCCESS - Image loaded");
         lx::Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
         lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
@@ -220,21 +220,21 @@ void test_ShadedText()
 
 void test_BlendedText()
 {
-    LX_Colour colour = {255,255,255,127};
+    Colour colour = {255,255,255,127};
 
     UTF8string str("がんばつて Gumichan01");
-    lx::Win::LX_WindowInfo winfo;
-    lx::Win::LX_initWindowInfo(winfo);
+    lx::Win::WindowInfo winfo;
+    lx::Win::initWindowInfo(winfo);
     winfo.title = "LunatiX - Test True Type Font - Blended text";
     winfo.w = 1000;
-    lx::Win::LX_Window win(winfo);
-    LX_Font font(fname,colour, 32);
+    lx::Win::Window win(winfo);
+    Font font(fname,colour, 32);
 
     lx::Log::log("Load a blended text image and display it");
 
     {
-        lx::Graphics::LX_BlendedTextTexture simg(str,font,win);
-        lx::Graphics::LX_BlendedTextTexture simg2(font,win);
+        lx::Graphics::BlendedTextTexture simg(str,font,win);
+        lx::Graphics::BlendedTextTexture simg2(font,win);
         lx::Log::log("SUCCESS - Image loaded");
         lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setPosition(100,100);

@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_FILEBUFFER_HPP_INCLUDED
-#define LX_FILEBUFFER_HPP_INCLUDED
+#ifndef FILEBUFFER_HPP_INCLUDED
+#define FILEBUFFER_HPP_INCLUDED
 
 /**
 *   @file FileBuffer.hpp
@@ -31,47 +31,47 @@ namespace lx
 
 namespace Graphics
 {
-class LX_BufferedImage;
+class BufferedImage;
 }
 
 namespace Mixer
 {
-class LX_Chunk;
+class Chunk;
 }
 
 namespace TrueTypeFont
 {
-struct LX_Font_;
+struct Font_;
 }
 
 
 namespace FileIO
 {
 
-class LX_FileBuffer_;
+class FileBuffer_;
 
 /**
-*   @class LX_FileBuffer
+*   @class FileBuffer
 *   @brief The file buffer class
 *
 *   This class contains information about a file buffer.
 *   It stores a memory copy of a file content into a buffer.
 */
-class LX_FileBuffer final
+class FileBuffer final
 {
-    friend struct lx::TrueTypeFont::LX_Font_;
-    std::unique_ptr<LX_FileBuffer_> _bimpl;
+    friend struct lx::TrueTypeFont::Font_;
+    std::unique_ptr<FileBuffer_> _bimpl;
 
-    LX_FileBuffer( LX_FileBuffer& fb );
-    LX_FileBuffer& operator =( LX_FileBuffer& fb );
+    FileBuffer( FileBuffer& fb );
+    FileBuffer& operator =( FileBuffer& fb );
 
     // private function
-    void * getFontFromBuffer_( int size ) const noexcept; // used by lx::TrueTypeFont::LX_Font
+    void * getFontFromBuffer_( int size ) const noexcept; // used by lx::TrueTypeFont::Font
 
 public:
 
     /**
-    *   @fn LX_FileBuffer(const std::string& filename, size_t offset = 0, size_t sz = 0)
+    *   @fn FileBuffer(const std::string& filename, size_t offset = 0, size_t sz = 0)
     *
     *   @param [in] filename The file to read
     *   @param [in] offset The position in the file to start reading (default value: 0)
@@ -88,9 +88,9 @@ public:
     *   @exception std::logic_error If the filename is not defined
     *   @exception IOException If the file cannot be read
     */
-    LX_FileBuffer( const std::string& filename, size_t offset = 0, size_t sz = 0 );
+    FileBuffer( const std::string& filename, size_t offset = 0, size_t sz = 0 );
     /**
-    *   @fn explicit LX_FileBuffer(const UTF8string& filename, size_t offset = 0, size_t sz = 0)
+    *   @fn explicit FileBuffer(const UTF8string& filename, size_t offset = 0, size_t sz = 0)
     *
     *   @param [in] filename The file to read
     *   @param [in] offset The position in the file to start reading (default value: 0)
@@ -108,25 +108,25 @@ public:
     *   @exception IOException If the file cannot be read by the instance
     *
     */
-    explicit LX_FileBuffer( const UTF8string& filename, size_t offset = 0, size_t sz = 0 );
+    explicit FileBuffer( const UTF8string& filename, size_t offset = 0, size_t sz = 0 );
 
     /**
-    *   @fn lx::Graphics::LX_BufferedImage * loadBufferedImage(lx::Graphics::LX_PixelFormat format = lx::Graphics::LX_PixelFormat::RGBA8888) const
+    *   @fn lx::Graphics::BufferedImage * loadBufferedImage(lx::Graphics::PixelFormat format = lx::Graphics::PixelFormat::RGBA8888) const
     *
     *   @param [in] format Optional argument that specified the format of the image
     *
     *   @return A pointer to an allocated buffered image on success,
     *
-    *   @exception lx::Graphics::LX_ImageException if the buffered image cannot be created
+    *   @exception lx::Graphics::ImageException if the buffered image cannot be created
     */
-    lx::Graphics::LX_BufferedImage * loadBufferedImage( lx::Graphics::LX_PixelFormat format = lx::Graphics::LX_PixelFormat::RGBA8888 ) const;
+    lx::Graphics::BufferedImage * loadBufferedImage( lx::Graphics::PixelFormat format = lx::Graphics::PixelFormat::RGBA8888 ) const;
     /**
-    *   @fn lx::Mixer::LX_Chunk * loadSample() const
+    *   @fn lx::Mixer::Chunk * loadSample() const
     *
-    *   @return A pointer to an allocated LX_Chunk object,
+    *   @return A pointer to an allocated Chunk object,
     *          *nullptr* if the file buffer is not a sample to load
     */
-    lx::Mixer::LX_Chunk * loadSample() const;
+    lx::Mixer::Chunk * loadSample() const;
 
     /**
     *   @fn const char * getFilename() const
@@ -134,11 +134,11 @@ public:
     */
     const char * getFilename() const noexcept;
 
-    ~LX_FileBuffer();
+    ~FileBuffer();
 };
 
 }   // FileIO
 
 }   // lx
 
-#endif // LX_FILEBUFFER_HPP_INCLUDED
+#endif // FILEBUFFER_HPP_INCLUDED

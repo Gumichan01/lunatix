@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_DEVICE_HPP_INCLUDED
-#define LX_DEVICE_HPP_INCLUDED
+#ifndef DEVICE_HPP_INCLUDED
+#define DEVICE_HPP_INCLUDED
 
 /**
 *   @file Device.hpp
@@ -40,7 +40,7 @@ namespace lx
 *   This namespaces handles several types of device (gamepad, mouse)
 *   and the haptic system
 *
-*   @warning In order to use any gamepad in LX_Device, the *gamepad* flag
+*   @warning In order to use any gamepad in Device, the *gamepad* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 *
@@ -49,27 +49,27 @@ namespace Device
 {
 
 /**
-*   @enum LX_MouseToggle
+*   @enum MouseToggle
 *   @brief State of the mouse (display)
 */
-enum class LX_MouseToggle
+enum class MouseToggle
 {
     SHOW  = 1,      /**< Enable the mouse display   */
     HIDE  = 0,      /**< Disable the mouse display  */
     QUERY = -1      /**< Get the mouse status       */
 };
 
-using LX_DeviceID = int32_t;
-using LX_DeviceGUID = SDL_JoystickGUID;
+using DeviceID = int32_t;
+using DeviceGUID = SDL_JoystickGUID;
 
 /**
-*   @struct LX_GamepadInfo
+*   @struct GamepadInfo
 *   @brief Information about gamepad
 */
-struct LX_GamepadInfo final
+struct GamepadInfo final
 {
-    LX_DeviceID id = 0;         /**< The joystick ID            */
-    LX_DeviceGUID uid{{0}};     /**< The joystick UID           */
+    DeviceID id = 0;         /**< The joystick ID            */
+    DeviceGUID uid{{0}};     /**< The joystick UID           */
     UTF8string name{""};        /**< The name of the joystick   */
     UTF8string is_haptic{""};   /**< Haptic joystick or not     */
     int nb_axis = 0;            /**< The number of axes         */
@@ -87,7 +87,7 @@ struct LX_GamepadInfo final
 int numberOfDevices() noexcept;
 
 /**
-*   @fn UTF8string gamepadToString(LX_GamepadInfo& info) noexcept
+*   @fn UTF8string gamepadToString(GamepadInfo& info) noexcept
 *
 *   Get the string format of the information structure
 *
@@ -97,10 +97,10 @@ int numberOfDevices() noexcept;
 *   @post The returned string is valid
 *   @sa statGamepad
 */
-UTF8string gamepadToString( LX_GamepadInfo& info ) noexcept;
+UTF8string gamepadToString( GamepadInfo& info ) noexcept;
 
 /**
-*   @fn LX_MouseToggle mouseCursorDisplay(const LX_MouseToggle& toggle) noexcept
+*   @fn MouseToggle mouseCursorDisplay(const MouseToggle& toggle) noexcept
 *
 *   Define if the cursor will be shown or not
 *
@@ -108,10 +108,10 @@ UTF8string gamepadToString( LX_GamepadInfo& info ) noexcept;
 *
 *   @return The status of the mouse.
 */
-LX_MouseToggle mouseCursorDisplay( const LX_MouseToggle& toggle ) noexcept;
+MouseToggle mouseCursorDisplay( const MouseToggle& toggle ) noexcept;
 
 }   // Device
 
 }   // lx
 
-#endif // LX_DEVICE_HPP_INCLUDED
+#endif // DEVICE_HPP_INCLUDED

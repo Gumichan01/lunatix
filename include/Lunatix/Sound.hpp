@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_SOUND_H_INCLUDED
-#define LX_SOUND_H_INCLUDED
+#ifndef SOUND_H_INCLUDED
+#define SOUND_H_INCLUDED
 
 /**
 *   @file Sound.hpp
@@ -31,26 +31,26 @@ namespace Mixer
 {
 
 /**
-*   @class LX_MixerException
+*   @class MixerException
 *   @brief Exception class of the Audio module
 */
-class LX_MixerException final : public std::exception
+class MixerException final : public std::exception
 {
     std::string _string_error;
 
 public:
 
-    explicit LX_MixerException( std::string err );
-    LX_MixerException( const LX_MixerException& me );
+    explicit MixerException( std::string err );
+    MixerException( const MixerException& me );
     virtual const char * what() const noexcept override;
-    ~LX_MixerException() = default;
+    ~MixerException() = default;
 };
 
 /**
-*   @class LX_Sound
+*   @class Sound
 *   @brief The sound interface
 */
-class LX_Sound
+class Sound
 {
 
 public:
@@ -58,11 +58,11 @@ public:
     *   @fn virtual bool play() noexcept = 0
     */
     virtual bool play() noexcept = 0;
-    virtual ~LX_Sound() = default;
+    virtual ~Sound() = default;
 };
 
 }   // Mixer
 
 }   // lx
 
-#endif // LX_SOUND_H_INCLUDED
+#endif // SOUND_H_INCLUDED

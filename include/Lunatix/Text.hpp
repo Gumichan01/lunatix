@@ -10,12 +10,12 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_TEXT_HPP_INCLUDED
-#define LX_TEXT_HPP_INCLUDED
+#ifndef TEXT_HPP_INCLUDED
+#define TEXT_HPP_INCLUDED
 
 /**
 *   @file Text.hpp
-*   @brief The interface of LX_TextInput
+*   @brief The interface of TextInput
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13
 */
@@ -24,9 +24,9 @@
 #include <memory>
 
 
-namespace LX_Event
+namespace Event
 {
-class LX_EventHandler;
+class EventHandler;
 }
 
 namespace lx
@@ -41,21 +41,21 @@ namespace Text
 {
 
 /**
-*   @class LX_RedrawCallback
+*   @class RedrawCallback
 *   @brief Function object
 *
 *   This class defines a callback function as a function object
 *
 */
-class LX_RedrawCallback
+class RedrawCallback
 {
 
-    LX_RedrawCallback( LX_RedrawCallback& ) = delete;
-    LX_RedrawCallback& operator =( LX_RedrawCallback& ) = delete;
+    RedrawCallback( RedrawCallback& ) = delete;
+    RedrawCallback& operator =( RedrawCallback& ) = delete;
 
 public:
 
-    LX_RedrawCallback() noexcept = default;
+    RedrawCallback() noexcept = default;
     /**
     *   @fn virtual void operator ()(UTF8string& u8str, UTF8string& u8comp,
     *                               const bool update, size_t cursor,
@@ -77,39 +77,39 @@ public:
     virtual void operator ()( UTF8string& u8str, UTF8string& u8comp, const bool update,
                               size_t cursor, size_t prev_cur ) noexcept = 0;
 
-    virtual ~LX_RedrawCallback() = default;
+    virtual ~RedrawCallback() = default;
 };
 
-class LX_TextInput_;
+class TextInput_;
 
 /**
-*   @class LX_TextInput
+*   @class TextInput
 *   @brief Text input class
 *
-*   LX_TextInput is a class that handles text input. The text input is activated
+*   TextInput is a class that handles text input. The text input is activated
 *   at class intantiation and unactivated at class destruction.
 *   This class can handle Unicode string in UTF-8 thanks to
 *   [UTF8string](https://github.com/Gumichan01/utf8_string).
 *
-*   The API provides a callback (*LX_RedrawCallback*) function defined as a function object.
+*   The API provides a callback (*RedrawCallback*) function defined as a function object.
 *   This callback was designed to redraw the current window that displays
 *   the user-typed text at each user input.
-*   It is not necessary to handle text input events, because *LX_TextInput* does that properly.
+*   It is not necessary to handle text input events, because *TextInput* does that properly.
 *
-*   So, in order to use LX_TextInput, you need to:
-*   - Define a class as a subclass of the pure virtual class *LX_RedrawCallback*.
-*   - Define the operator () provided by *LX_RedrawCallback*.
-*   - Declare an object of type *LX_TextInput*.
-*   - Call the function **LX_TextInput::eventLoop** of this object by giving
+*   So, in order to use TextInput, you need to:
+*   - Define a class as a subclass of the pure virtual class *RedrawCallback*.
+*   - Define the operator () provided by *RedrawCallback*.
+*   - Declare an object of type *TextInput*.
+*   - Call the function **TextInput::eventLoop** of this object by giving
 *     the callback function in argument.
 *
 *   Example of code :
 *
-*       // Define and implement a subclass of LX_RedrawCallback
-*       class FuncDraw : public LX_RedrawCallback
+*       // Define and implement a subclass of RedrawCallback
+*       class FuncDraw : public RedrawCallback
 *       {
-*           lx::Win::LX_Window& _w;
-*           lx::TrueTypeFont::LX_Font _font;
+*           lx::Win::Window& _w;
+*           lx::TrueTypeFont::Font _font;
 *
 *       public:
 *
@@ -117,7 +117,7 @@ class LX_TextInput_;
 *
 *           void operator ()(UTF8String& u8str)
 *           {
-*               lx::Graphics::LX_BlendedTextTexture img(_font, _w);
+*               lx::Graphics::BlendedTextTexture img(_font, _w);
 *
 *               _w.clearWindow();
 *
@@ -143,34 +143,34 @@ class LX_TextInput_;
 *       void textInput()
 *       {
 *           FuncDraw callbck;
-*           LX_TextInput input;
+*           TextInput input;
 *           input.eventLoop(callbck);
 *       }
 *
-*   LX_TextInput also support clipboard handling.
+*   TextInput also support clipboard handling.
 */
-class LX_TextInput final
+class TextInput final
 {
-    std::unique_ptr<LX_TextInput_> _timpl;
+    std::unique_ptr<TextInput_> _timpl;
 
-    LX_TextInput( LX_TextInput& t ) = delete;
-    LX_TextInput( LX_TextInput&& t ) = delete;
-    LX_TextInput& operator =( LX_TextInput t ) = delete;
+    TextInput( TextInput& t ) = delete;
+    TextInput( TextInput&& t ) = delete;
+    TextInput& operator =( TextInput t ) = delete;
 
 public:
 
-    LX_TextInput() noexcept;
+    TextInput() noexcept;
     /**
-    *   @fn void eventLoop(LX_RedrawCallback& redraw) noexcept
+    *   @fn void eventLoop(RedrawCallback& redraw) noexcept
     *   Launch the event loop
     *   @param [in] redraw Callback function to call
     */
-    void eventLoop( LX_RedrawCallback& redraw ) noexcept;
-    ~LX_TextInput() noexcept;
+    void eventLoop( RedrawCallback& redraw ) noexcept;
+    ~TextInput() noexcept;
 };
 
 }   // Text
 
 }   // lx
 
-#endif // LX_TEXT_HPP_INCLUDED
+#endif // TEXT_HPP_INCLUDED

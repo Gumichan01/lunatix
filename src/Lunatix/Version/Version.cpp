@@ -36,12 +36,12 @@ namespace
 
 // Constants
 
-const short LX_MAJOR_VERSION = 0;
-const short LX_MINOR_VERSION = 14;
-const short LX_PATCH_VERSION = 0;
-const UTF8string LX_STATUS( "nightly" );
-const UTF8string LX_COPYRIGHT( "Copyright © 2018" );
-const UTF8string LX_AUTHOR( "Luxon Jean-Pierre" );
+const short MAJOR_VERSION = 0;
+const short MINOR_VERSION = 14;
+const short PATCH_VERSION = 0;
+const UTF8string STATUS( "nightly" );
+const UTF8string COPYRIGHT( "Copyright © 2018" );
+const UTF8string AUTHOR( "Luxon Jean-Pierre" );
 
 // Functions
 
@@ -60,18 +60,18 @@ namespace VersionInfo
 
 void info() noexcept
 {
-    const LX_Version& luna = getVersion();
+    const Version& luna = getVersion();
 
     cout << "\nLunatiX v" << luna.major << "."  << luna.minor << "."
          <<  luna.patch << "-" << luna.status << "\n"
-         << LX_COPYRIGHT << " " << LX_AUTHOR << "\n";
+         << COPYRIGHT << " " << AUTHOR << "\n";
 }
 
 
-const LX_Version getVersion() noexcept
+const Version getVersion() noexcept
 {
-    return LX_Version{LX_MAJOR_VERSION, LX_MINOR_VERSION,
-                      LX_PATCH_VERSION, LX_STATUS.utf8_sstring()};
+    return Version{MAJOR_VERSION, MINOR_VERSION,
+                      PATCH_VERSION, STATUS.utf8_sstring()};
 }
 
 

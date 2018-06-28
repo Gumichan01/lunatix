@@ -30,13 +30,13 @@ namespace lx
 
 namespace Graphics
 {
-class LX_Sprite;
+class Sprite;
 }
 
 namespace Physics
 {
-struct LX_Vector2D;
-struct LX_FloatingBox;
+struct Vector2D;
+struct FloatingBox;
 }
 
 //  Forward declarations (END)
@@ -44,38 +44,38 @@ struct LX_FloatingBox;
 namespace ParticleEngine
 {
 
-class LX_Particle_;
+class Particle_;
 
 /**
-*   @class LX_Particle
+*   @class Particle
 *   @brief The particle
 */
-class LX_Particle final
+class Particle final
 {
-    std::unique_ptr<LX_Particle_> _pimpl;
+    std::unique_ptr<Particle_> _pimpl;
 
-    LX_Particle( LX_Particle& p ) = delete;
-    LX_Particle& operator =( LX_Particle& p ) = delete;
+    Particle( Particle& p ) = delete;
+    Particle& operator =( Particle& p ) = delete;
 
 
 public:
 
     /**
-    *   @fn LX_Particle(lx::Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b) noexcept
+    *   @fn Particle(lx::Graphics::Sprite& sp, const lx::Physics::FloatingBox& b) noexcept
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     */
-    LX_Particle( lx::Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b ) noexcept;
+    Particle( lx::Graphics::Sprite& sp, const lx::Physics::FloatingBox& b ) noexcept;
     /**
-    *   @fn LX_Particle(lx::Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b,
-    *                  const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn Particle(lx::Graphics::Sprite& sp, const lx::Physics::FloatingBox& b,
+    *                  const lx::Physics::Vector2D& v) noexcept
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     *   @param [in] v The vector that store the velocity
     */
-    LX_Particle( lx::Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b,
-                 const lx::Physics::LX_Vector2D& v ) noexcept;
+    Particle( lx::Graphics::Sprite& sp, const lx::Physics::FloatingBox& b,
+                 const lx::Physics::Vector2D& v ) noexcept;
 
     /**
     *   @fn void update() noexcept
@@ -101,7 +101,7 @@ public:
     */
     unsigned int getDelay() const noexcept;
 
-    ~LX_Particle();
+    ~Particle();
 };
 
 }   // ParticleEngine

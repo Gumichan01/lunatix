@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_TIMER_HPP_INCLUDED
-#define LX_TIMER_HPP_INCLUDED
+#ifndef TIMER_HPP_INCLUDED
+#define TIMER_HPP_INCLUDED
 
 /**
 *   @file Timer.hpp
@@ -56,4 +56,4 @@ inline void delay( uint32_t ms )
 
 }   // lx
 
-#endif // LX_TIMER_HPP_INCLUDED
+#endif // TIMER_HPP_INCLUDED

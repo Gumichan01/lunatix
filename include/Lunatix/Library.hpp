@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_LIBRARY_H_INCLUDED
-#define LX_LIBRARY_H_INCLUDED
+#ifndef LIBRARY_H_INCLUDED
+#define LIBRARY_H_INCLUDED
 
 /**
 *   @file Library.hpp
@@ -79,7 +79,7 @@ const std::string getSDLConfig( const std::string& sdlconfig_name ) noexcept;
 /**
 *   @fn void quit() noexcept
 *   Shut down the library
-*   @note This function automatically calls LX_WindowManager::destroy()
+*   @note This function automatically calls WindowManager::destroy()
 */
 void quit() noexcept;
 
@@ -87,4 +87,4 @@ void quit() noexcept;
 
 }
 
-#endif // LX_LIBRARY_H_INCLUDED
+#endif // LIBRARY_H_INCLUDED

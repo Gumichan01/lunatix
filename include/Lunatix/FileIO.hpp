@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_FILEIO_H_INCLUDED
-#define LX_FILEIO_H_INCLUDED
+#ifndef FILEIO_H_INCLUDED
+#define FILEIO_H_INCLUDED
 
 /**
 *   @file FileIO.hpp
@@ -47,10 +47,10 @@ namespace FileIO
 {
 
 /**
-*   @enum LX_FileMode
+*   @enum FileMode
 *   @brief The file access mode
 */
-enum class LX_FileMode
+enum class FileMode
 {
     RDONLY = 0x00000001,            /**< Read only mode (r)             */
     WRONLY = 0x00000010,            /**< Write only mode (w)            */
@@ -61,10 +61,10 @@ enum class LX_FileMode
 };
 
 /**
-*   @enum LX_FileWhence
+*   @enum FileWhence
 *   @brief The position used as reference in the file
 */
-enum class LX_FileWhence
+enum class FileWhence
 {
     SET = SEEK_SET,     /**< Beginning of data      */
     CUR = SEEK_CUR,     /**< The current read point */
@@ -77,7 +77,7 @@ enum class LX_FileWhence
 *   @brief The Input/Output file exception
 *
 *   This exception class occured when
-*   there is a problem on the LX_File constructor
+*   there is a problem on the File constructor
 *
 */
 class IOException final : public std::exception
@@ -96,17 +96,17 @@ public:
 
 
 /**
-*   @class LX_AbstractFile
+*   @class AbstractFile
 *   @brief The abstract file interface
 */
-class LX_AbstractFile
+class AbstractFile
 {
-    LX_AbstractFile( const LX_AbstractFile& ) = delete;
-    LX_AbstractFile& operator =( const LX_AbstractFile& ) = delete;
+    AbstractFile( const AbstractFile& ) = delete;
+    AbstractFile& operator =( const AbstractFile& ) = delete;
 
 public:
 
-    LX_AbstractFile() = default;
+    AbstractFile() = default;
 
     /**
     *   @fn virtual size_t read(void *buffer, size_t dsize, size_t count = 1) noexcept
@@ -156,7 +156,7 @@ public:
 
     // TODO refactor seek() -> long instead of size_t
     /**
-    *   @fn virtual bool seek(long offset, LX_FileWhence whence) noexcept
+    *   @fn virtual bool seek(long offset, FileWhence whence) noexcept
     *
     *   Seek for a position the file
     *
@@ -167,7 +167,7 @@ public:
     *
     *   @sa read
     */
-    virtual bool seek( long offset, LX_FileWhence whence ) noexcept = 0;
+    virtual bool seek( long offset, FileWhence whence ) noexcept = 0;
 
     // TODO refactor tell() -> long instead of size_t
     /**
@@ -182,27 +182,27 @@ public:
     */
     virtual size_t tell() const noexcept = 0;
 
-    virtual ~LX_AbstractFile() = default;
+    virtual ~AbstractFile() = default;
 };
 
 
-class LX_File_;
+class File_;
 
 /**
-*   @class LX_File
+*   @class File
 *   @brief The file handler
 */
-class LX_File final : public virtual LX_AbstractFile
+class File final : public virtual AbstractFile
 {
-    std::unique_ptr<LX_File_> _fimpl;
+    std::unique_ptr<File_> _fimpl;
 
-    LX_File( LX_File& f ) = delete;
-    LX_File& operator =( LX_File& f ) = delete;
+    File( File& f ) = delete;
+    File& operator =( File& f ) = delete;
 
 public:
 
     /**
-    *   @fn LX_File(const std::string& filename, const LX_FileMode mode)
+    *   @fn File(const std::string& filename, const FileMode mode)
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -219,9 +219,9 @@ public:
     *   @exception IOException If one of these aruguments are invalid
     *             or the file is not openable
     */
-    LX_File( const std::string& filename, const LX_FileMode mode );
+    File( const std::string& filename, const FileMode mode );
     /**
-    *   @fn LX_File(const UTF8string& filename, const LX_FileMode mode)
+    *   @fn File(const UTF8string& filename, const FileMode mode)
     *
     *   Open the file given in argument according to the mode requested
     *
@@ -238,7 +238,7 @@ public:
     *   @exception IOException If one of these aruguments are invalid
     *             or the file is not openable
     */
-    LX_File( const UTF8string& filename, const LX_FileMode mode );
+    File( const UTF8string& filename, const FileMode mode );
 
     virtual size_t read( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
     virtual size_t readExactly( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
@@ -246,7 +246,7 @@ public:
     virtual size_t write( const void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
     virtual size_t write( const std::string& str ) noexcept override;
 
-    virtual bool seek( long offset, LX_FileWhence whence ) noexcept;
+    virtual bool seek( long offset, FileWhence whence ) noexcept;
     virtual size_t tell() const noexcept;
     /**
     *   @fn size_t size()
@@ -266,26 +266,26 @@ public:
     */
     void close() noexcept;
 
-    virtual ~LX_File();
+    virtual ~File();
 };
 
 
-class LX_TmpFile_;
+class TmpFile_;
 
 /**
-*   @class LX_TmpFile
+*   @class TmpFile
 *   @brief The temporary file
 */
-class LX_TmpFile final : public virtual LX_AbstractFile
+class TmpFile final : public virtual AbstractFile
 {
-    std::unique_ptr<LX_TmpFile_> _timpl;
+    std::unique_ptr<TmpFile_> _timpl;
 
-    LX_TmpFile( const LX_TmpFile& ) = delete;
-    LX_TmpFile& operator =( const LX_TmpFile& ) = delete;
+    TmpFile( const TmpFile& ) = delete;
+    TmpFile& operator =( const TmpFile& ) = delete;
 
 public:
 
-    LX_TmpFile();
+    TmpFile();
 
     virtual size_t read( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
     virtual size_t readExactly( void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
@@ -293,15 +293,15 @@ public:
     virtual size_t write( const void * buffer, size_t dsize, size_t count = 1 ) noexcept override;
     virtual size_t write( const std::string& str ) noexcept override;
 
-    virtual bool seek( long offset, LX_FileWhence whence ) noexcept override;
+    virtual bool seek( long offset, FileWhence whence ) noexcept override;
     virtual size_t tell() const noexcept;
 
-    virtual ~LX_TmpFile();
+    virtual ~TmpFile();
 };
 
 
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const char s[]) noexcept
+*   @fn AbstractFile& operator <<(AbstractFile& f, const char s[]) noexcept
 *
 *   Write a string into the file
 *
@@ -313,10 +313,10 @@ public:
 *   @warning If s is not a null-terminated string (it has not the final '\0'),
 *            the behaviour of the function is undefined
 */
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const char s[] ) noexcept;
+AbstractFile& operator <<( AbstractFile& f, const char s[] ) noexcept;
 
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, const std::string& s) noexcept
+*   @fn AbstractFile& operator <<(AbstractFile& f, const std::string& s) noexcept
 *
 *   Write a string into the file
 *
@@ -325,9 +325,9 @@ LX_AbstractFile& operator <<( LX_AbstractFile& f, const char s[] ) noexcept;
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const std::string& s ) noexcept;
+AbstractFile& operator <<( AbstractFile& f, const std::string& s ) noexcept;
 /**
-*   @fn LX_AbstractFile& operator <<(LX_AbstractFile& f, UTF8string& u8s) noexcept
+*   @fn AbstractFile& operator <<(AbstractFile& f, UTF8string& u8s) noexcept
 *
 *   Write a utf-8 string into the file
 *
@@ -336,15 +336,15 @@ LX_AbstractFile& operator <<( LX_AbstractFile& f, const std::string& s ) noexcep
 *
 *   @return The updated file
 */
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const UTF8string& u8s ) noexcept;
+AbstractFile& operator <<( AbstractFile& f, const UTF8string& u8s ) noexcept;
 
 // Those functions are not defined
-LX_AbstractFile& operator >>( LX_AbstractFile& f, char s[] ) noexcept = delete;
-LX_AbstractFile& operator >>( LX_AbstractFile& f, std::string& s ) noexcept  = delete;
-LX_AbstractFile& operator >>( LX_AbstractFile& f, UTF8string& u8s ) noexcept = delete;
+AbstractFile& operator >>( AbstractFile& f, char s[] ) noexcept = delete;
+AbstractFile& operator >>( AbstractFile& f, std::string& s ) noexcept  = delete;
+AbstractFile& operator >>( AbstractFile& f, UTF8string& u8s ) noexcept = delete;
 
 /**
-*   @fn template <typename T> LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept
+*   @fn template <typename T> AbstractFile& operator <<(AbstractFile& f, const T data) noexcept
 *
 *   Write data into the file
 *
@@ -354,10 +354,10 @@ LX_AbstractFile& operator >>( LX_AbstractFile& f, UTF8string& u8s ) noexcept = d
 *   @return The updated file
 */
 template <typename T>
-LX_AbstractFile& operator <<( LX_AbstractFile& f, const T data ) noexcept;
+AbstractFile& operator <<( AbstractFile& f, const T data ) noexcept;
 
 /**
-*   @fn template <typename T> LX_AbstractFile& operator >>(LX_AbstractFile& f, T& data) noexcept
+*   @fn template <typename T> AbstractFile& operator >>(AbstractFile& f, T& data) noexcept
 *
 *   Read data from the file
 *
@@ -367,7 +367,7 @@ LX_AbstractFile& operator <<( LX_AbstractFile& f, const T data ) noexcept;
 *   @return The updated file
 */
 template <typename T>
-LX_AbstractFile& operator >>( LX_AbstractFile& f, T& data ) noexcept;
+AbstractFile& operator >>( AbstractFile& f, T& data ) noexcept;
 
 #include "FileIO.tpp"
 
@@ -375,4 +375,4 @@ LX_AbstractFile& operator >>( LX_AbstractFile& f, T& data ) noexcept;
 
 }   // lx
 
-#endif // LX_FILEIO_H_INCLUDED
+#endif // FILEIO_H_INCLUDED

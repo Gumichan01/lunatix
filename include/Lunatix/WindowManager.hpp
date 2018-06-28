@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_WINDOWMANAGER_HPP_INCLUDED
-#define LX_WINDOWMANAGER_HPP_INCLUDED
+#ifndef WINDOWMANAGER_HPP_INCLUDED
+#define WINDOWMANAGER_HPP_INCLUDED
 
 /**
 *   @file WindowManager.hpp
@@ -30,53 +30,53 @@ namespace lx
 namespace Win
 {
 
-class LX_Window;
-class LX_WM_;
+class Window;
+class WM_;
 
 
-class LX_WindowNotFoundException final : public std::exception
+class WindowNotFoundException final : public std::exception
 {
     std::string _string_error;
 
-    LX_WindowNotFoundException& operator =( const LX_WindowNotFoundException& w ) = delete;
+    WindowNotFoundException& operator =( const WindowNotFoundException& w ) = delete;
 
 public:
 
-    explicit LX_WindowNotFoundException( const std::string& err );
+    explicit WindowNotFoundException( const std::string& err );
     const char * what() const noexcept override;
-    ~LX_WindowNotFoundException() noexcept = default;
+    ~WindowNotFoundException() noexcept = default;
 
 };
 
 /**
-*   @class LX_WindowManager
+*   @class WindowManager
 *   @brief The windows manager
 *
-*   LX_WindowManager allows the user to handle several windows
+*   WindowManager allows the user to handle several windows
 *   inside an application.
 */
-class LX_WindowManager final
+class WindowManager final
 {
-    std::unique_ptr<LX_WM_> _wmpimpl;
+    std::unique_ptr<WM_> _wmpimpl;
 
-    LX_WindowManager();
-    ~LX_WindowManager();
+    WindowManager();
+    ~WindowManager();
 
-    LX_WindowManager( const LX_WindowManager& )  = delete;
-    LX_WindowManager( const LX_WindowManager&& ) = delete;
-    LX_WindowManager& operator =( const LX_WindowManager& )   = delete;
-    LX_WindowManager&& operator =( const LX_WindowManager&& ) = delete;
+    WindowManager( const WindowManager& )  = delete;
+    WindowManager( const WindowManager&& ) = delete;
+    WindowManager& operator =( const WindowManager& )   = delete;
+    WindowManager&& operator =( const WindowManager&& ) = delete;
 
 public:
 
     /**
-    *   @fn LX_WindowManager& LX_WindowManager::getInstance() noexcept
+    *   @fn WindowManager& WindowManager::getInstance() noexcept
     *   Return a unique instance of the window manager
     *   @return The windo manager
     */
-    static LX_WindowManager& getInstance() noexcept;
+    static WindowManager& getInstance() noexcept;
     /**
-    *   @fn bool LX_WindowManager::addWindow(LX_Window& w) noexcept
+    *   @fn bool WindowManager::addWindow(Window& w) noexcept
     *
     *   Add a window in the manager
     *
@@ -84,12 +84,12 @@ public:
     *
     *   @return true on success, false otherwise
     *
-    *   @sa LX_Window
+    *   @sa Window
     *   @sa removeWindow
     */
-    bool addWindow( LX_Window& w ) noexcept;
+    bool addWindow( Window& w ) noexcept;
     /**
-    *   @fn bool LX_WindowManager::removeWindow(const uint32_t id) noexcept
+    *   @fn bool WindowManager::removeWindow(const uint32_t id) noexcept
     *
     *   Delete a window from the list acording to its ID
     *   and returns the pointer to it.
@@ -106,47 +106,47 @@ public:
     */
     bool removeWindow( const uint32_t id ) noexcept;
     /**
-    *   @fn LX_Window& LX_WindowManager::getWindow(const uint32_t id) const
+    *   @fn Window& WindowManager::getWindow(const uint32_t id) const
     *
     *   Get a window according to its ID
     *
     *   @param [in] id The id of the window
     *
-    *   @return A valid pointer to a LX_Window instance if it exists,
+    *   @return A valid pointer to a Window instance if it exists,
     *          a null pointer otherwise
     */
-    LX_Window& getWindow( const uint32_t id ) const;
+    Window& getWindow( const uint32_t id ) const;
     /**
-    *   @fn std::size_t LX_WindowManager::nbWindows() noexcept
+    *   @fn std::size_t WindowManager::nbWindows() noexcept
     *   Count the number of windows
     *   @return The number of registered windows
     */
     std::size_t nbWindows() const noexcept;
 
     /**
-    *   @fn void LX_WindowManager::updateWindows() noexcept
+    *   @fn void WindowManager::updateWindows() noexcept
     *   Update the windows
     */
     void updateWindows() noexcept;
     /**
-    *   @fn void LX_WindowManager::clearWindows() noexcept
+    *   @fn void WindowManager::clearWindows() noexcept
     *   Clear the content of the windows
     */
     void clearWindows() noexcept;
 };
 
 /**
-*   @fn LX_WindowManager& getWindowManager() noexcept
+*   @fn WindowManager& getWindowManager() noexcept
 *
 *   Return the singleton, if allocated
 *
-*   @return The unique instance of LX_WindowManager
-*   @note This function is equivalent to LX_WindowManager::getInstance
+*   @return The unique instance of WindowManager
+*   @note This function is equivalent to WindowManager::getInstance
 */
-LX_WindowManager& getWindowManager() noexcept;
+WindowManager& getWindowManager() noexcept;
 
 }   // Win
 
 }   // lx
 
-#endif // LX_WINDOWMANAGER_HPP_INCLUDED
+#endif // WINDOWMANAGER_HPP_INCLUDED

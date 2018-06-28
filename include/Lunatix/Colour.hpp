@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_COLOUR_HPP_INCLUDED
-#define LX_COLOUR_HPP_INCLUDED
+#ifndef COLOUR_HPP_INCLUDED
+#define COLOUR_HPP_INCLUDED
 
 /**
 *   @file Colour.hpp
@@ -24,7 +24,7 @@
 
 /**
 *   @ingroup Graphics
-*   @typedef LX_Colour
+*   @typedef Colour
 *   @brief Colour representation (in 8-bit notation)
 *
 *   Internal structure:
@@ -39,18 +39,18 @@
 *   Orange (decimal value)
 *
 *       R,G,B: 255,165,0
-*       ⇒ LX_Colour: { r = 255, g = 165, b = 0, a = 255 }
+*       ⇒ Colour: { r = 255, g = 165, b = 0, a = 255 }
 *
 *   Orange (hexadecimal value)
 *
 *       #FFA500
-*       ⇒ LX_Colour: { r = 0xFF, g = 0xA5, b = 0x00, a = 0xFF }
+*       ⇒ Colour: { r = 0xFF, g = 0xA5, b = 0x00, a = 0xFF }
 */
-using LX_Colour = SDL_Colour;
+using Colour = SDL_Colour;
 
 /**
 *   @ingroup Graphics
-*   @struct LX_glColour
+*   @struct glColour
 *   @brief Colour representation (in OpenGL format)
 *
 *   This representation defines the colour as three floating-point values
@@ -60,10 +60,10 @@ using LX_Colour = SDL_Colour;
 *
 *   Orange colour
 *
-*      ⇒ LX_Colour: { r = 1.0f, g = 0.647058f, b = 1.0f, a = 1.0f }
+*      ⇒ Colour: { r = 1.0f, g = 0.647058f, b = 1.0f, a = 1.0f }
 *
 */
-struct LX_glColour final
+struct glColour final
 {
     float r;    /**< Red      */
     float g;    /**< Green    */
@@ -74,7 +74,7 @@ struct LX_glColour final
 
 /**
 *   @ingroup Graphics
-*   @fn inline constexpr bool operator ==(const LX_Colour& a, const LX_Colour& b) noexcept
+*   @fn inline constexpr bool operator ==(const Colour& a, const Colour& b) noexcept
 *
 *   Check if two colors are identical
 *
@@ -83,14 +83,14 @@ struct LX_glColour final
 *   @return TRUE if they are identical, FALSE otherwise
 *
 */
-inline constexpr bool operator ==( const LX_Colour& a, const LX_Colour& b ) noexcept
+inline constexpr bool operator ==( const Colour& a, const Colour& b ) noexcept
 {
     return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 }
 
 /**
 *   @ingroup Graphics
-*   @fn inline constexpr bool operator !=(const LX_Colour& a, const LX_Colour& b) noexcept
+*   @fn inline constexpr bool operator !=(const Colour& a, const Colour& b) noexcept
 *
 *   Check if two colors are different
 *
@@ -99,14 +99,14 @@ inline constexpr bool operator ==( const LX_Colour& a, const LX_Colour& b ) noex
 *   @return TRUE if they are different, FALSE otherwise
 *
 */
-inline constexpr bool operator !=( const LX_Colour& a, const LX_Colour& b ) noexcept
+inline constexpr bool operator !=( const Colour& a, const Colour& b ) noexcept
 {
     return !( a == b );
 }
 
 /**
 *   @ingroup Graphics
-*   @fn inline constexpr LX_glColour from8BitColour(const LX_Colour& colour) noexcept
+*   @fn inline constexpr glColour from8BitColour(const Colour& colour) noexcept
 *
 *   Convert a colour in 8-bit notation to a colour in floating-point notation
 *
@@ -118,10 +118,10 @@ inline constexpr bool operator !=( const LX_Colour& a, const LX_Colour& b ) noex
 *
 *   @sa fromGLColour
 */
-inline constexpr LX_glColour from8BitColour( const LX_Colour& colour ) noexcept
+inline constexpr glColour from8BitColour( const Colour& colour ) noexcept
 {
     // 255.0f is the max Max 8-bit colour
-    return LX_glColour{static_cast<float>( colour.r ) / 255.0f,
+    return glColour{static_cast<float>( colour.r ) / 255.0f,
                        static_cast<float>( colour.g ) / 255.0f,
                        static_cast<float>( colour.b ) / 255.0f,
                        static_cast<float>( colour.a ) / 255.0f
@@ -129,7 +129,7 @@ inline constexpr LX_glColour from8BitColour( const LX_Colour& colour ) noexcept
 }
 /**
 *   @ingroup Graphics
-*   @fn inline constexpr LX_Colour fromGLColour(const LX_glColour& colour) noexcept
+*   @fn inline constexpr Colour fromGLColour(const glColour& colour) noexcept
 *
 *   Convert a colour in floating-point notation to a colour in 8-bit notation
 *
@@ -141,10 +141,10 @@ inline constexpr LX_glColour from8BitColour( const LX_Colour& colour ) noexcept
 *
 *   @sa from8BitColour
 */
-inline constexpr LX_Colour fromGLColour( const LX_glColour& colour ) noexcept
+inline constexpr Colour fromGLColour( const glColour& colour ) noexcept
 {
     // 255.0f is the max Max 8-bit colour
-    return LX_Colour{static_cast<uint8_t>( colour.r * 255.0f ),
+    return Colour{static_cast<uint8_t>( colour.r * 255.0f ),
                      static_cast<uint8_t>( colour.g * 255.0f ),
                      static_cast<uint8_t>( colour.b * 255.0f ),
                      static_cast<uint8_t>( colour.a * 255.0f )
@@ -153,35 +153,35 @@ inline constexpr LX_Colour fromGLColour( const LX_glColour& colour ) noexcept
 
 /**
 *   @ingroup Graphics
-*   @fn inline constexpr uint32_t toRGBAvalue(const LX_Colour& colour) noexcept
+*   @fn inline constexpr uint32_t toRGBAvalue(const Colour& colour) noexcept
 *
 *   Get the colour value in one unsigned integer value
 *
 *   @param [in] colour Colour in 8-bit notation
 *   @return The colour in RGBA notation in one integer value
 */
-inline constexpr uint32_t toRGBAvalue( const LX_Colour& colour ) noexcept
+inline constexpr uint32_t toRGBAvalue( const Colour& colour ) noexcept
 {
     return static_cast<uint32_t>( ( colour.r << 24 ) | ( colour.g << 16 ) |
                                   ( colour.b << 8 ) | colour.a );
 }
 /**
 *   @ingroup Graphics
-*   @fn inline LX_Colour fromRGBAvalue(const uint32_t rgba) noexcept
+*   @fn inline Colour fromRGBAvalue(const uint32_t rgba) noexcept
 *
 *   Get the colour structure from an integer value
 *
 *   @param [in] rgba The colour in one unsigned integer value
 *   @return The colour structure
 */
-inline LX_Colour fromRGBAvalue( const uint32_t rgba ) noexcept
+inline Colour fromRGBAvalue( const uint32_t rgba ) noexcept
 {
     const uint8_t r = static_cast<uint8_t>( ( rgba >> 24 ) & 0x000000FF );
     const uint8_t g = static_cast<uint8_t>( ( rgba >> 16 ) & 0x000000FF );
     const uint8_t b = static_cast<uint8_t>( ( rgba >> 8 ) & 0x000000FF );
     const uint8_t a = static_cast<uint8_t>( rgba & 0x000000FF );
 
-    return LX_Colour{r, g, b, a};
+    return Colour{r, g, b, a};
 }
 
-#endif // LX_COLOUR_HPP_INCLUDED
+#endif // COLOUR_HPP_INCLUDED

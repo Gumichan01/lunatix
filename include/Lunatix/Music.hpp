@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_MUSIC_H_INCLUDED
-#define LX_MUSIC_H_INCLUDED
+#ifndef MUSIC_H_INCLUDED
+#define MUSIC_H_INCLUDED
 
 /**
 *   @file Music.hpp
@@ -35,14 +35,14 @@ namespace lx
 
 namespace Graphics
 {
-class LX_BufferedImage;
+class BufferedImage;
 }
 
 namespace Mixer
 {
 
 /**
-*   @struct LX_MusicTag
+*   @struct MusicTag
 *   @brief High-level music metadata
 *
 *   MusicTag is a metadata structure that contains essential information
@@ -52,7 +52,7 @@ namespace Mixer
 *   low-level contents (track-gain, album-gain, bitrate, ...), but have
 *   an image loaded from the audio file if it exists.
 */
-struct LX_MusicTag
+struct MusicTag
 {
     UTF8string title{""};                   /**< Title  */
     UTF8string artist{""};                  /**< Artist */
@@ -62,59 +62,59 @@ struct LX_MusicTag
     UTF8string genre{""};                   /**< Genre  */
     UTF8string format{""};                  /**< Format (MP3, OGG, FLAC, M4A)    */
     UTF8string duration{""};                /**< Duration, in HH:MM:SS format    */
-    lx::Graphics::LX_BufferedImage * img = nullptr;  /**< Album cover, if it exists  */
+    lx::Graphics::BufferedImage * img = nullptr;  /**< Album cover, if it exists  */
 
-    //LX_MusicTag() noexcept;
-    ~LX_MusicTag();
+    //MusicTag() noexcept;
+    ~MusicTag();
 };
 
 /**
-*   @fn const LX_MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept
+*   @fn const MusicTag getMusicInfoFrom(const UTF8string& u8file) noexcept
 *   Get information about the music file
 *   @param [in] u8file the music file to get metadata from
 *   @return The metadata
 *
-*   @sa LX_MusicTag
+*   @sa MusicTag
 */
-const LX_MusicTag getMusicInfoFrom( const UTF8string& u8file ) noexcept;
+const MusicTag getMusicInfoFrom( const UTF8string& u8file ) noexcept;
 /**
-*   @fn const LX_MusicTag getMusicInfoFrom(const std::string& file) noexcept;
+*   @fn const MusicTag getMusicInfoFrom(const std::string& file) noexcept;
 *   Get information about the music file
 *   @param [in] file the music file to get metadata from
 *   @return The metadata
 *
-*   @sa LX_MusicTag
+*   @sa MusicTag
 */
-const LX_MusicTag getMusicInfoFrom( const std::string& file ) noexcept;
+const MusicTag getMusicInfoFrom( const std::string& file ) noexcept;
 
 
-class LX_Music_;
+class Music_;
 
 /**
-*   @class LX_Music
+*   @class Music
 *   @brief The music class
 */
-class LX_Music : public virtual LX_Sound
+class Music : public virtual Sound
 {
-    std::unique_ptr<LX_Music_> _mimpl;
+    std::unique_ptr<Music_> _mimpl;
 
-    LX_Music( const LX_Music& m ) = delete;
-    LX_Music& operator =( const LX_Music& m ) = delete;
+    Music( const Music& m ) = delete;
+    Music& operator =( const Music& m ) = delete;
 
 public:
 
     /**
-    *   @fn LX_Music(const std::string& filename)
+    *   @fn Music(const std::string& filename)
     *   @param filename
-    *   @exception LX_MixerException On failure
+    *   @exception MixerException On failure
     */
-    LX_Music( const std::string& filename );
+    Music( const std::string& filename );
     /**
-    *   @fn LX_Music(const UTF8string& filename)
+    *   @fn Music(const UTF8string& filename)
     *   @param filename
-    *   @exception LX_MixerException On failure
+    *   @exception MixerException On failure
     */
-    LX_Music( const UTF8string& filename );
+    Music( const UTF8string& filename );
 
     /**
     *   @fn void fadeIn(int ms) noexcept
@@ -124,7 +124,7 @@ public:
     *   @param [in] ms Milliseconds for the fade-in effect to complete
     *
     *   @note fadeIn starts playing the music with the fade-in effect.
-    *         It is not necessary to call LX_Music::play() if this function is called
+    *         It is not necessary to call Music::play() if this function is called
     *
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
@@ -139,7 +139,7 @@ public:
     *   @param [in] pos The position to start the music
     *
     *   @note fadeInPos starts playing the music with the fade-in effect.
-    *         It is not necessary to call LX_Music::play() if this function is called
+    *         It is not necessary to call Music::play() if this function is called
     *
     *   @note Any previous music will be halted, or if it is fading out
     *         it will wait (blocking) for the fade to complete
@@ -172,7 +172,7 @@ public:
     bool play( bool infinite_loop ) noexcept;
     /**
     *   @fn bool play(unsigned int loops) noexcept
-    *   Play the music specified in the LX_Music class
+    *   Play the music specified in the Music class
     *   @param [in] loops The loop constant
     *   @return TRUE on success,FALSE otherwise
     */
@@ -200,20 +200,20 @@ public:
     */
     const libtagpp::Tag& getInfo() noexcept;
     /**
-    *   @fn const LX_MusicTag& metaData() noexcept
+    *   @fn const MusicTag& metaData() noexcept
     *   Get essential information about the current music
     *   @return The metadata
     *
-    *   @sa LX_MusicTag
+    *   @sa MusicTag
     *   @sa getInfo()
     */
-    const LX_MusicTag& metaData() noexcept;
+    const MusicTag& metaData() noexcept;
 
-    ~LX_Music();
+    ~Music();
 };
 
 }   // Mixer
 
 }   // lx
 
-#endif // LX_MUSIC_H_INCLUDED
+#endif // MUSIC_H_INCLUDED

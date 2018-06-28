@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_WINDOW_H_INCLUDED
-#define LX_WINDOW_H_INCLUDED
+#ifndef WINDOW_H_INCLUDED
+#define WINDOW_H_INCLUDED
 
 /**
 *   @file Window.hpp
@@ -37,26 +37,26 @@ namespace lx
 
 namespace Graphics
 {
-class LX_Texture;
-class LX_Sprite;
-class LX_StreamingTexture;
-class LX_AnimatedSprite;
-class LX_TextTexture;
-class LX_BufferedImage;
-class LX_ImgCoord;
-class LX_ImgRect;
+class Texture;
+class Sprite;
+class StreamingTexture;
+class AnimatedSprite;
+class TextTexture;
+class BufferedImage;
+class ImgCoord;
+class ImgRect;
 }
 
 namespace TrueTypeFont
 {
-class LX_Font;
+class Font;
 }
 
 namespace Physics
 {
-struct LX_Circle;
+struct Circle;
 /// todo version 0.14.0 remove it
-struct LX_Vector2D;
+struct Vector2D;
 /// end
 }
 
@@ -73,7 +73,7 @@ struct LX_Vector2D;
 namespace Win
 {
 
-enum class LX_WinMode
+enum class WinMode
 {
     FULLSCREEN = 0x00000001,                        /**< Fullscreen mode with original resolution   */
     FULLSCREEN_DESKTOP = ( FULLSCREEN | 0x00001000 ), /**< Fullscreen with the current desktop size   */
@@ -89,30 +89,30 @@ enum class LX_WinMode
 
 
 /**
-*   @enum LX_BlendMode
+*   @enum BlendMode
 *   @brief Define the blend mode for drawing operations
 *
 */
-enum class LX_BlendMode
+enum class BlendMode
 {
-    LX_BLENDMODE_NONE,     /**< no blending dstRGBA = srcRGBA */
+    BLENDMODE_NONE,     /**< no blending dstRGBA = srcRGBA */
 
-    LX_BLENDMODE_BLEND,    /**< alpha blending
+    BLENDMODE_BLEND,    /**< alpha blending
                                 dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
                                 dstA = srcA + (dstA * (1-srcA)) */
-    LX_BLENDMODE_ADD,      /**< additive blending
+    BLENDMODE_ADD,      /**< additive blending
                                 dstRGB = (srcRGB * srcA) + dstRGB
                                 dstA = dstA */
-    LX_BLENDMODE_MOD       /**< colour modulate
+    BLENDMODE_MOD       /**< colour modulate
                                 dstRGB = srcRGB * dstRGB
                                 dstA = dstA */
 };
 
 /**
-*   @struct LX_WindowInfo
+*   @struct WindowInfo
 *   @brief Information about the window
 */
-struct LX_WindowInfo final
+struct WindowInfo final
 {
     uint32_t id = 0;            /**< Id of the window (read-only)   */
     std::string title = {""};   /**< Title                          */
@@ -129,80 +129,80 @@ struct LX_WindowInfo final
 
 
 /**
-*   @fn void LX_initWindowInfo(LX_WindowInfo &info) noexcept
+*   @fn void initWindowInfo(WindowInfo &info) noexcept
 *   Get the default configuration of window that will be created
 *   @param [out] info The structure to fill information in
 */
-void LX_initWindowInfo( LX_WindowInfo& info ) noexcept;
+void initWindowInfo( WindowInfo& info ) noexcept;
 /**
-*   @fn void LX_loadWindowConfig(LX_WindowInfo &info) noexcept
+*   @fn void loadWindowConfig(WindowInfo &info) noexcept
 *   Get the configuration of window from the configuration file
 *   @param [out] info The structure to fill information in
 */
-void LX_loadWindowConfig( LX_WindowInfo& info ) noexcept;
+void loadWindowConfig( WindowInfo& info ) noexcept;
 
 
 /**
-*   @class LX_WindowException
-*   @brief The exception class of LX_Window
+*   @class WindowException
+*   @brief The exception class of Window
 *
 *   This class describes the exception occured when
 *   the SDL_Window instance cannot be loaded.
 *
 */
-class LX_WindowException final : public std::exception
+class WindowException final : public std::exception
 {
     std::string _string_error;
 
-    LX_WindowException& operator =( const LX_WindowException& w );
+    WindowException& operator =( const WindowException& w );
 
 public:
 
-    explicit LX_WindowException( std::string err );
-    LX_WindowException( const LX_WindowException& w );
+    explicit WindowException( std::string err );
+    WindowException( const WindowException& w );
     const char * what() const noexcept;
 
-    ~LX_WindowException() noexcept = default;
+    ~WindowException() noexcept = default;
 };
 
 
-struct LX_Window_;
+struct Window_;
 
 /**
-*   @class LX_Window
+*   @class Window
 *   @brief The window
 *
-*   @warning The LX_Window class must be defined only after
+*   @warning The Window class must be defined only after
 *           the initialization of the library (calling lx::init())
-*   @warning A LX_WindowException may be occured if the window creation fails
+*   @warning A WindowException may be occured if the window creation fails
 *
 */
-class LX_Window final
+class Window final
 {
-    friend class lx::Graphics::LX_Texture;
-    friend class lx::Graphics::LX_Sprite;
-    friend class lx::Graphics::LX_BufferedImage;
-    friend class lx::Graphics::LX_StreamingTexture;
-    friend class lx::Graphics::LX_AnimatedSprite;
-    friend class lx::Graphics::LX_TextTexture;
-    friend class lx::TrueTypeFont::LX_Font;
+    friend class lx::Graphics::Texture;
+    friend class lx::Graphics::Sprite;
+    friend class lx::Graphics::BufferedImage;
+    friend class lx::Graphics::StreamingTexture;
+    friend class lx::Graphics::AnimatedSprite;
+    friend class lx::Graphics::TextTexture;
+    friend class lx::TrueTypeFont::Font;
 
-    std::unique_ptr<LX_Window_> _wimpl;
+    std::unique_ptr<Window_> _wimpl;
 
-    LX_Window( LX_Window& w ) = delete;
-    LX_Window& operator =( LX_Window& w ) = delete;
+    Window( Window& w ) = delete;
+    Window& operator =( Window& w ) = delete;
 
     void * getRenderingSys() const noexcept;
 
 public:
 
     /**
-    *   @fn LX_Window(LX_WindowInfo &info)
+    *   @fn Window(WindowInfo &info)
     *   @param [in, out] info The structure that contains information about the window
     *   @note The structure is updated when the window is created
-    *   @exception LX_WindowException if the window cannot be created
+    *   @exception WindowException if the window cannot be created
     */
-    explicit LX_Window( LX_WindowInfo& info );
+    explicit Window( WindowInfo& info );
 
     /**
     *   @fn void setIcon(const std::string& ficon) noexcept
@@ -212,38 +212,38 @@ public:
     void setIcon( const std::string& ficon ) noexcept;
 
     /**
-    *   @fn void drawLine(const lx::Graphics::LX_ImgCoord& p, const lx::Graphics::LX_ImgCoord& q) noexcept
+    *   @fn void drawLine(const lx::Graphics::ImgCoord& p, const lx::Graphics::ImgCoord& q) noexcept
     *
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
-    void drawLine( const lx::Graphics::LX_ImgCoord& p, const lx::Graphics::LX_ImgCoord& q ) noexcept;
+    void drawLine( const lx::Graphics::ImgCoord& p, const lx::Graphics::ImgCoord& q ) noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
     *   Please use the alternative version that takes an std::vector
     *
-    *   @fn void drawLines(const lx::Graphics::LX_ImgCoord * p, const int count) noexcept
+    *   @fn void drawLines(const lx::Graphics::ImgCoord * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
     *
     *   @param [in] p An array of points
     *   @param [in] count The number of points, drawing count-1 segments
     */
-    void drawLines( const lx::Graphics::LX_ImgCoord * p, const int count ) noexcept;
+    void drawLines( const lx::Graphics::ImgCoord * p, const int count ) noexcept;
     /**
-    *   @fn void drawLines(const std::vector<lx::Graphics::LX_ImgCoord>& vpoints) noexcept;
+    *   @fn void drawLines(const std::vector<lx::Graphics::ImgCoord>& vpoints) noexcept;
     *
     *   Draw several connected segments on the window
     *
     *   @param [in] vpoints An array of points
     *   @note pre-condition: *vpoints.size()* > 0
     */
-    void drawLines( const std::vector<lx::Graphics::LX_ImgCoord>& vpoints ) noexcept;
+    void drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noexcept;
     /**
     *   @deprecated This signature of DrawLine is deprecated and will be removed in v0.14.0
     *   Please use the version that takes two coordinates instead.
     *
-    *   @fn void drawLine(const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawLine(const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v) noexcept
     *
     *   @param [in] p The point
     *   @param [in] v The direction vector
@@ -251,89 +251,89 @@ public:
     *   @note The length of a line depends on the norm of the direction vector
     *        The length is calculating according to this formula: ||v||*2
     */
-    void drawLine( const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
+    void drawLine( const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v ) noexcept;
     /**
-    *   @fn void drawRect(const lx::Graphics::LX_ImgRect& box) noexcept
+    *   @fn void drawRect(const lx::Graphics::ImgRect& box) noexcept
     *   @param [in] box The rectangle
     */
-    void drawRect( const lx::Graphics::LX_ImgRect& box ) noexcept;
+    void drawRect( const lx::Graphics::ImgRect& box ) noexcept;
     /**
     *   @deprecated This signature of DrawRect is deprecated and will be removed in v0.14.0
-    *   Please use the version that takes a box (LX_ImgRect).
+    *   Please use the version that takes a box (ImgRect).
     *
-    *   @fn void drawRect(const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawRect(const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v) noexcept
     *   @param [in] p The point
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *
     */
-    void drawRect( const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
+    void drawRect( const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v ) noexcept;
     /**
-    *   @fn void drawCircle(const lx::Physics::LX_Circle& c) noexcept
+    *   @fn void drawCircle(const lx::Physics::Circle& c) noexcept
     *   Draw a circle on a window
     *   @param [in] c The circle to draw
     */
-    void drawCircle( const lx::Physics::LX_Circle& c ) noexcept;
+    void drawCircle( const lx::Physics::Circle& c ) noexcept;
 
     /**
-    *   @fn void fillRect(const lx::Graphics::LX_ImgRect& box) noexcept
+    *   @fn void fillRect(const lx::Graphics::ImgRect& box) noexcept
     *   Fill a rectangle on a window
     *   @param [in] box The rectangle to fill
     */
-    void fillRect( const lx::Graphics::LX_ImgRect& box ) noexcept;
+    void fillRect( const lx::Graphics::ImgRect& box ) noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
     *   Please use the version that takes the rect instead..
     *
-    *   @fn void fillRect(const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn void fillRect(const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v) noexcept
     *
     *   Fill a rectangle using a point and a 2D vector
     *
     *   @param [in] p The point
     *   @param [in] v The vector
     */
-    void fillRect( const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
+    void fillRect( const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v ) noexcept;
     /**
-    *   @fn void fillCircle(const lx::Physics::LX_Circle& c) noexcept
+    *   @fn void fillCircle(const lx::Physics::Circle& c) noexcept
     *   Fill a circle on a window
     *   @param [in] c The circle to draw
     */
-    void fillCircle( const lx::Physics::LX_Circle& c ) noexcept;
+    void fillCircle( const lx::Physics::Circle& c ) noexcept;
 
     /**
-    *   @fn void setDrawColour(const LX_Colour& colour) noexcept
+    *   @fn void setDrawColour(const Colour& colour) noexcept
     *   Set the colour used for drawing operations (Lines, Rectangles, Circles)
     *   @param [in] colour The colour (RGBA)
     */
-    void setDrawColour( const LX_Colour& colour ) noexcept;
+    void setDrawColour( const Colour& colour ) noexcept;
     /**
-    *   @fn void setDrawBlendMode(const LX_BlendMode mode) noexcept
+    *   @fn void setDrawBlendMode(const BlendMode mode) noexcept
     *
     *   Set the blend mode for drawing operations (Fill, Line)
     *
     *   @param [in] mode The blend mode to use for blending:
     *   |        Value        |                      Meaning                     |
     *   |         ---         |                        ---                       |
-    *   |  LX_BLENDMODE_NONE  | no blending                                      |
+    *   |  BLENDMODE_NONE  | no blending                                      |
     *   |                     | destRGBA = srcRGBA                               |
-    *   |  LX_BLENDMODE_BLEND | alpha blending                                   |
+    *   |  BLENDMODE_BLEND | alpha blending                                   |
     *   |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
     *   |                     | destA = srcA + (destA * (1-srcA))                |
-    *   |  LX_BLENDMODE_ADD   | additive blending                                |
+    *   |  BLENDMODE_ADD   | additive blending                                |
     *   |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *   |                     | destA = destA                                    |
-    *   |  LX_BLENDMODE_MOD   | colour modulate                                  |
+    *   |  BLENDMODE_MOD   | colour modulate                                  |
     *   |                     | destRGB = srcRGB * destRGB                       |
     *   |                     | destA = destA                                    |
     */
-    void setDrawBlendMode( const LX_BlendMode mode ) noexcept;
+    void setDrawBlendMode( const BlendMode mode ) noexcept;
     /**
-    *   @fn void getDrawColour(const LX_Colour& colour) const noexcept
+    *   @fn void getDrawColour(const Colour& colour) const noexcept
     *   Get the colour used for drawing operations (Lines, Rectangles, Circles)
     *   @param [out] colour The colour (RGBA) to get
     */
-    void getDrawColour( LX_Colour& colour ) const noexcept;
+    void getDrawColour( Colour& colour ) const noexcept;
     /**
-    *   @fn void getDrawBlendMode(LX_BlendMode& mode) const noexcept
+    *   @fn void getDrawBlendMode(BlendMode& mode) const noexcept
     *
     *   Get the blend mode for drawing operations (Fill, Line)
     *
@@ -342,19 +342,19 @@ public:
     *   @return The blend mode used for blending:
     *   |        Value        |                      Meaning                     |
     *   |         ---         |                        ---                       |
-    *   |  LX_BLENDMODE_NONE  | no blending                                      |
+    *   |  BLENDMODE_NONE  | no blending                                      |
     *   |                     | destRGBA = srcRGBA                               |
-    *   |  LX_BLENDMODE_BLEND | alpha blending                                   |
+    *   |  BLENDMODE_BLEND | alpha blending                                   |
     *   |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
     *   |                     | destA = srcA + (destA * (1-srcA))                |
-    *   |  LX_BLENDMODE_ADD   | additive blending                                |
+    *   |  BLENDMODE_ADD   | additive blending                                |
     *   |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *   |                     | destA = destA                                    |
-    *   |  LX_BLENDMODE_MOD   | colour modulate                                  |
+    *   |  BLENDMODE_MOD   | colour modulate                                  |
     *   |                     | destRGB = srcRGB * destRGB                       |
     *   |                     | destA = destA                                    |
     */
-    void getDrawBlendMode( LX_BlendMode& mode ) const noexcept;
+    void getDrawBlendMode( BlendMode& mode ) const noexcept;
 
     /**
     *   @fn void setTitle(const std::string& title) noexcept
@@ -376,42 +376,42 @@ public:
     */
     void setWindowSize( int w, int h ) noexcept;
     /**
-    *   @fn bool setViewPort(const lx::Graphics::LX_ImgRect& viewport) noexcept
+    *   @fn bool setViewPort(const lx::Graphics::ImgRect& viewport) noexcept
     *
     *   Set a specific drawing area (viewport) for rendering
     *
     *   @param [in] viewport The drawing area to set.
     */
-    void setViewPort( const lx::Graphics::LX_ImgRect& viewport ) noexcept;
+    void setViewPort( const lx::Graphics::ImgRect& viewport ) noexcept;
     /**
     *   @fn void resetViewPort() noexcept
     */
     void resetViewPort() noexcept;
     /**
-    *   @fn void getViewPort(lx::Graphics::LX_ImgRect& viewport) const noexcept
+    *   @fn void getViewPort(lx::Graphics::ImgRect& viewport) const noexcept
     *
     *   Get the drawing area (viewport) for rendering
     *
     *   @param [out] viewport The drawing area to fill
     *
     */
-    void getViewPort( lx::Graphics::LX_ImgRect& viewport ) const noexcept;
+    void getViewPort( lx::Graphics::ImgRect& viewport ) const noexcept;
 
     /**
-    *   @fn void toggleFullscreen(const LX_WinMode flag) noexcept
+    *   @fn void toggleFullscreen(const WinMode flag) noexcept
     *
     *   Set the window's fullscreen state
     *
     *   @param [in] flag
     *
     *   @pre The flag to use in this function is on of the following:
-    *          - LX_WinMode::FULLSCREEN_DESKTOP
-    *          - LX_WinMode::FULLSCREEN
-    *          - LX_WinMode::NO_FULLSCREEN
+    *          - WinMode::FULLSCREEN_DESKTOP
+    *          - WinMode::FULLSCREEN
+    *          - WinMode::NO_FULLSCREEN
     *
     *   @note Using another flag has no effect
     */
-    void toggleFullscreen( const LX_WinMode flag ) noexcept;
+    void toggleFullscreen( const WinMode flag ) noexcept;
 
     /**
     *   @fn void show() noexcept
@@ -453,11 +453,11 @@ public:
     */
     uint32_t getID() const noexcept;
     /**
-    *   @fn void getInfo(LX_WindowInfo &info) const
+    *   @fn void getInfo(WindowInfo &info) const
     *   Get information of the current window
     *   @param [out] info The information structure to fill in
     */
-    void getInfo( LX_WindowInfo& info ) const noexcept;
+    void getInfo( WindowInfo& info ) const noexcept;
     /**
     *   @fn int getWidth() const noexcept
     *   Get the width of the window
@@ -504,11 +504,11 @@ public:
     */
     bool glMakeCurrent() noexcept;
 
-    ~LX_Window();
+    ~Window();
 };
 
 }   // Window
 
 }   // lx
 
-#endif // LX_WINDOW_H_INCLUDED
+#endif // WINDOW_H_INCLUDED

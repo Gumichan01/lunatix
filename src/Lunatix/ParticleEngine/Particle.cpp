@@ -35,21 +35,21 @@ namespace ParticleEngine
 
 using FloatBox::FNIL;
 const unsigned int DELAY = 16;
-constexpr LX_Vector2D VNULL = {FNIL, FNIL};
+constexpr Vector2D VNULL = {FNIL, FNIL};
 
-/* LX_Particle — private implementation */
+/* Particle — private implementation */
 
-class LX_Particle_ final
+class Particle_ final
 {
-    LX_FloatingBox _box;
+    FloatingBox _box;
     unsigned int _lifetime;             /* The delay to stay displayable */
-    lx::Physics::LX_Vector2D _velocity;
-    lx::Graphics::LX_Sprite& _texture;
+    lx::Physics::Vector2D _velocity;
+    lx::Graphics::Sprite& _texture;
 
 public:
 
-    LX_Particle_( lx::Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
-                  const lx::Physics::LX_Vector2D& v ) noexcept
+    Particle_( lx::Graphics::Sprite& sp, const FloatingBox& b,
+                  const lx::Physics::Vector2D& v ) noexcept
         : _box( b ), _lifetime( xrand<unsigned int>( 0, DELAY ) ), _velocity( v ),
           _texture( sp ) {}
 
@@ -77,44 +77,44 @@ public:
         return _lifetime;
     }
 
-    ~LX_Particle_() = default;
+    ~Particle_() = default;
 };
 
-/* LX_Particle — public interface */
+/* Particle — public interface */
 
-LX_Particle::LX_Particle( lx::Graphics::LX_Sprite& sp, const LX_FloatingBox& b ) noexcept
-    : _pimpl( new LX_Particle_( sp, b, VNULL ) ) {}
-
-
-LX_Particle::LX_Particle( lx::Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
-                          const lx::Physics::LX_Vector2D& v ) noexcept
-    : _pimpl( new LX_Particle_( sp, b, v ) ) {}
+Particle::Particle( lx::Graphics::Sprite& sp, const FloatingBox& b ) noexcept
+    : _pimpl( new Particle_( sp, b, VNULL ) ) {}
 
 
-void LX_Particle::update() noexcept
+Particle::Particle( lx::Graphics::Sprite& sp, const FloatingBox& b,
+                          const lx::Physics::Vector2D& v ) noexcept
+    : _pimpl( new Particle_( sp, b, v ) ) {}
+
+
+void Particle::update() noexcept
 {
     _pimpl->update();
 }
 
 
-void LX_Particle::draw() noexcept
+void Particle::draw() noexcept
 {
     _pimpl->draw();
 }
 
 
-bool LX_Particle::isDead() const noexcept
+bool Particle::isDead() const noexcept
 {
     return _pimpl->isDead();
 }
 
 
-unsigned int LX_Particle::getDelay() const noexcept
+unsigned int Particle::getDelay() const noexcept
 {
     return _pimpl->getDelay();
 }
 
-LX_Particle::~LX_Particle()
+Particle::~Particle()
 {
     _pimpl.reset();
 }

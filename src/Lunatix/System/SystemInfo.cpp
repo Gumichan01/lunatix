@@ -27,7 +27,7 @@
 namespace
 {
 
-lx::SystemInfo::LX_DisplayMode fromSDL_DisplayMode( SDL_DisplayMode& sdlmode )
+lx::SystemInfo::DisplayMode fromSDL_DisplayMode( SDL_DisplayMode& sdlmode )
 {
     return { sdlmode.w, sdlmode.h, sdlmode.refresh_rate };
 }
@@ -60,19 +60,19 @@ int getSystemRAM() noexcept
     return SDL_GetSystemRAM();
 }
 
-void getAvailableDisplayModes( LX_DisplayModes& modes )
+void getAvailableDisplayModes( DisplayModes& modes )
 {
     const int NB_DISPLAYS = SDL_GetNumDisplayModes( 0 );
     modes.clear();
 
     if ( NB_DISPLAYS == 0 )
     {
-        LX_setError( "No display available" );
+        setError( "No display available" );
         return;
     }
     else if ( NB_DISPLAYS < 0 )
     {
-        LX_setError( "Cannot get the number of display modes" );
+        setError( "Cannot get the number of display modes" );
         return;
     }
 

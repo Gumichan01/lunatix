@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_VERSION_HPP_INCLUDED
-#define LX_VERSION_HPP_INCLUDED
+#ifndef VERSION_HPP_INCLUDED
+#define VERSION_HPP_INCLUDED
 
 /**
 *   @file Version.hpp
@@ -34,11 +34,11 @@ namespace VersionInfo
 {
 
 /**
-*   @struct LX_Version
+*   @struct Version
 *   @brief The version structure
 *   The current version of the library
 */
-struct LX_Version final
+struct Version final
 {
     short major;        /**< Major version  */
     short minor;        /**< Minor version  */
@@ -53,11 +53,11 @@ struct LX_Version final
 void info() noexcept;
 
 /**
-*   @fn const LX_Version getVersion() noexcept
+*   @fn const Version getVersion() noexcept
 *   Get the version of the library
 *   @return Information about the version
 */
-const LX_Version getVersion() noexcept;
+const Version getVersion() noexcept;
 
 /**
 *   @fn void dependencies() noexcept
@@ -69,4 +69,4 @@ void dependencies() noexcept;
 
 }   // lx
 
-#endif // LX_VERSION_HPP_INCLUDED
+#endif // VERSION_HPP_INCLUDED

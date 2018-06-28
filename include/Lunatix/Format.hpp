@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_FORMAT_H_INCLUDED
-#define LX_FORMAT_H_INCLUDED
+#ifndef FORMAT_H_INCLUDED
+#define FORMAT_H_INCLUDED
 
 /**
 *   @file Format.hpp
@@ -30,10 +30,10 @@ namespace Graphics
 {
 
 /**
-*   @enum LX_PixelFormat
+*   @enum PixelFormat
 *   @brief Enumerate values related to the pixel format
 */
-enum class LX_PixelFormat
+enum class PixelFormat
 {
     UNKNOWN     = SDL_PIXELFORMAT_UNKNOWN,
     INDEX1LSB   = SDL_PIXELFORMAT_INDEX1LSB,
@@ -77,4 +77,4 @@ enum class LX_PixelFormat
 
 }   // lx
 
-#endif  // LX_IMAGE_H_INCLUDED
+#endif  // IMAGE_H_INCLUDED

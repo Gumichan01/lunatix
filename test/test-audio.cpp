@@ -44,15 +44,15 @@ int main(int argc, char **argv)
 
 void test_info(const std::string& s)
 {
-    const lx::Mixer::LX_MusicTag tag = lx::Mixer::getMusicInfoFrom(s);
+    const lx::Mixer::MusicTag tag = lx::Mixer::getMusicInfoFrom(s);
 
     try
     {
-        lx::Win::LX_WindowInfo info;
-        lx::Win::LX_initWindowInfo(info);
+        lx::Win::WindowInfo info;
+        lx::Win::initWindowInfo(info);
         info.w = 256;
         info.h = 256;
-        lx::Win::LX_Window w(info);
+        lx::Win::Window w(info);
 
         if(tag.img != nullptr)
         {
@@ -67,18 +67,18 @@ void test_info(const std::string& s)
             lx::Log::log("Format - %s", tag.format.utf8_str());
             lx::Log::log("================================");
 
-            lx::Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
+            lx::Graphics::Sprite * cover = tag.img->generateSprite(w);
             lx::Log::logInfo(lx::Log::TEST,"cover opened");
 
             w.clearWindow();
-            lx::Graphics::LX_ImgRect box{0,0,info.w,info.h};
+            lx::Graphics::ImgRect box{0,0,info.w,info.h};
             cover->draw(box);
             w.update();
             lx::Time::delay(2000);
             delete cover;
         }
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - %s", ie.what());
     }
@@ -188,7 +188,7 @@ void test_channels()
 
     // PLay a chunk in a specific channel
     std::string sc = "data/explosion.wav";
-    lx::Mixer::LX_Chunk chunk(sc);
+    lx::Mixer::Chunk chunk(sc);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Available channel before playing: %d",
                     lx::Mixer::channelAvailable(1));
@@ -229,9 +229,9 @@ void test_music()
 
     try
     {
-        lx::Mixer::LX_Music music(s);
+        lx::Mixer::Music music(s);
     }
-    catch(lx::Mixer::LX_MixerException& se)
+    catch(lx::Mixer::MixerException& se)
     {
         lx::Log::log("mp3 file not loaded");
         lx::Log::log("%s", se.what());
@@ -241,7 +241,7 @@ void test_music()
 
     try
     {
-        lx::Mixer::LX_Music music(sm);
+        lx::Mixer::Music music(sm);
         lx::Log::log("SUCCESS - Loaded");
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - music loaded");
@@ -298,7 +298,7 @@ void test_music()
         music.fadeOut(1000);
         lx::Log::logCritical(lx::Log::APPLICATION,"DANGER ZONE OUT");
     }
-    catch(lx::Mixer::LX_MixerException& se)
+    catch(lx::Mixer::MixerException& se)
     {
         lx::Log::log("FAILURE - not loaded");
         lx::Log::log("%s", se.what());
@@ -308,11 +308,11 @@ void test_music()
 
     try
     {
-        lx::Mixer::LX_Music *mus = new lx::Mixer::LX_Music(std::string());
+        lx::Mixer::Music *mus = new lx::Mixer::Music(std::string());
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - music launched, it should not");
         delete mus;
     }
-    catch(lx::Mixer::LX_MixerException& se)
+    catch(lx::Mixer::MixerException& se)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - music: not launched as expected");
         lx::Log::log("%s", se.what());
@@ -326,13 +326,13 @@ void test_chunk()
     lx::Log::logInfo(lx::Log::APPLICATION," = TEST chunk = ");
 
     std::string s = "data/explosion.wav";
-    lx::Mixer::LX_Chunk *chunk = nullptr;
+    lx::Mixer::Chunk *chunk = nullptr;
 
     lx::Log::logInfo(lx::Log::TEST,"Launch music: %s",s.c_str());
 
     try
     {
-        chunk = new lx::Mixer::LX_Chunk(s);
+        chunk = new lx::Mixer::Chunk(s);
         lx::Log::log("SUCCESS - Loaded");
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - chunk launched");
@@ -366,7 +366,7 @@ void test_chunk()
         lx::Time::delay(9000);
         delete chunk;
     }
-    catch(lx::Mixer::LX_MixerException& se)
+    catch(lx::Mixer::MixerException& se)
     {
         lx::Log::log("FAILURE - not loaded");
         lx::Log::log("%s", se.what());
@@ -376,11 +376,11 @@ void test_chunk()
 
     try
     {
-        chunk = new lx::Mixer::LX_Chunk(std::string());
+        chunk = new lx::Mixer::Chunk(std::string());
         lx::Log::log("FAILURE - loaded, but it should not be");
         delete chunk;
     }
-    catch(lx::Mixer::LX_MixerException& se)
+    catch(lx::Mixer::MixerException& se)
     {
         lx::Log::log("SUCCESS - not loaded, as expected");
         lx::Log::log("%s", se.what());
@@ -395,14 +395,14 @@ void test_effects()
     std::string sm = "data/01.ogg";
     std::string sc = "data/explosion.wav";
     int chan = 5;
-    lx::Mixer::LX_Music music(sm);
-    lx::Mixer::LX_Chunk chunk(sc);
+    lx::Mixer::Music music(sm);
+    lx::Mixer::Chunk chunk(sc);
 
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"combine effects in a group");
         lx::Mixer::allocateChannels(255);
         lx::Mixer::groupChannels(1, 32, 64);
-        lx::Mixer::LX_MixerEffect effect;
+        lx::Mixer::MixerEffect effect;
         effect.type.panning = true;
         effect.type.distance = true;
         effect.type.reverse_stereo = true;
@@ -636,7 +636,7 @@ void test_volume2()
     lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",lx::Mixer::getFXVolume());
 
     std::string str = "data/01.ogg";
-    lx::Mixer::LX_Music music(str);
+    lx::Mixer::Music music(str);
     music.play();
 
     lx::Log::logInfo(lx::Log::TEST,"set the position to 128.0 second");

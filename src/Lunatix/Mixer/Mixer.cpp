@@ -32,22 +32,22 @@ using namespace lx::FileIO;
 namespace
 {
 
-const uint8_t LX_MIX_FX_LOUD = 255;         /**< Loud (for effect functions)    */
-const uint8_t LX_MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) */
-const uint8_t LX_MIX_FX_NO_distance = 0;    /**< The distance between the source and the listener */
-const uint16_t LX_MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
+const uint8_t MIX_FX_LOUD = 255;         /**< Loud (for effect functions)    */
+const uint8_t MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) */
+const uint8_t MIX_FX_NO_distance = 0;    /**< The distance between the source and the listener */
+const uint16_t MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
 
-constexpr struct lx::Mixer::LX_MixerEffectType LX_EFFECT_NONE;
+constexpr struct lx::Mixer::MixerEffectType EFFECT_NONE;
 
-constexpr bool operator ==( const lx::Mixer::LX_MixerEffectType& t,
-                            const lx::Mixer::LX_MixerEffectType& u )
+constexpr bool operator ==( const lx::Mixer::MixerEffectType& t,
+                            const lx::Mixer::MixerEffectType& u )
 {
     return t.distance == u.distance && t.panning == u.panning
            && t.position == u.position && t.reverse_stereo == u.reverse_stereo;
 }
 
-constexpr bool operator !=( const lx::Mixer::LX_MixerEffectType& t,
-                            const lx::Mixer::LX_MixerEffectType& u )
+constexpr bool operator !=( const lx::Mixer::MixerEffectType& t,
+                            const lx::Mixer::MixerEffectType& u )
 {
     return !( t == u );
 }
@@ -71,25 +71,25 @@ namespace lx
 namespace Mixer
 {
 
-const unsigned short LX_MAX_VOLUME = 100;
-const unsigned short LX_DEFAULT_VOLUME = 100;
+const unsigned short MAX_VOLUME = 100;
+const unsigned short DEFAULT_VOLUME = 100;
 // Overall volume in volume unit [0-100]
-unsigned short overall_volume = LX_DEFAULT_VOLUME;
+unsigned short overall_volume = DEFAULT_VOLUME;
 // Music volume in volume unit [0-100]
-unsigned short music_volume = LX_DEFAULT_VOLUME;
+unsigned short music_volume = DEFAULT_VOLUME;
 // Effects volume in volume unit [0-100]
-unsigned short fx_volume = LX_DEFAULT_VOLUME;
+unsigned short fx_volume = DEFAULT_VOLUME;
 
 // Music volume in percentage
-unsigned short music_pvolume = LX_DEFAULT_VOLUME;
+unsigned short music_pvolume = DEFAULT_VOLUME;
 // Effects volume in percentage
-unsigned short fx_pvolume = LX_DEFAULT_VOLUME;
+unsigned short fx_pvolume = DEFAULT_VOLUME;
 
 
 void setOverallVolume( unsigned short volume ) noexcept
 {
-    if ( volume > LX_MAX_VOLUME )
-        overall_volume = LX_MAX_VOLUME;
+    if ( volume > MAX_VOLUME )
+        overall_volume = MAX_VOLUME;
     else
         overall_volume = volume;
 
@@ -99,13 +99,13 @@ void setOverallVolume( unsigned short volume ) noexcept
 
 void setMusicVolume( unsigned short pvolume ) noexcept
 {
-    if ( pvolume > LX_MAX_VOLUME )
-        pvolume = LX_MAX_VOLUME;
+    if ( pvolume > MAX_VOLUME )
+        pvolume = MAX_VOLUME;
 
     if ( overall_volume == 0 )
         music_volume = 0;
     else
-        music_volume = adaptVolume_( pvolume, overall_volume, LX_MAX_VOLUME );
+        music_volume = adaptVolume_( pvolume, overall_volume, MAX_VOLUME );
 
     Mix_VolumeMusic( music_volume );
     music_pvolume = pvolume;
@@ -113,13 +113,13 @@ void setMusicVolume( unsigned short pvolume ) noexcept
 
 void setFXVolume( unsigned short pvolume ) noexcept
 {
-    if ( pvolume > LX_MAX_VOLUME )
-        pvolume = LX_MAX_VOLUME;
+    if ( pvolume > MAX_VOLUME )
+        pvolume = MAX_VOLUME;
 
     if ( overall_volume == 0 )
         fx_volume = 0;
     else
-        fx_volume = adaptVolume_( pvolume, overall_volume, LX_MAX_VOLUME );
+        fx_volume = adaptVolume_( pvolume, overall_volume, MAX_VOLUME );
 
     if ( allocateChannels( -1 ) > 0 )
         Mix_Volume( -1, fx_volume );
@@ -143,7 +143,7 @@ unsigned short getFXVolume() noexcept
 }
 
 
-LX_Chunk * loadSample( lx::FileIO::LX_FileBuffer& file )
+Chunk * loadSample( lx::FileIO::FileBuffer& file )
 {
     return file.loadSample();
 }
@@ -197,7 +197,7 @@ int channelAvailable( int tag ) noexcept
 }
 
 
-bool groupPlayChunk( LX_Chunk& chunk, int tag, int loops ) noexcept
+bool groupPlayChunk( Chunk& chunk, int tag, int loops ) noexcept
 {
     if ( groupCount( tag ) == 0 )
         return chunk.play( -1, loops );
@@ -216,7 +216,7 @@ bool groupPlayChunk( LX_Chunk& chunk, int tag, int loops ) noexcept
     return chunk.play( chan, loops );
 }
 
-bool groupPlayChunk( LX_Chunk& chunk, int tag, const LX_MixerEffect effect ) noexcept
+bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept
 {
     int chan = -1;
     int _tag = -1;
@@ -236,7 +236,7 @@ bool groupPlayChunk( LX_Chunk& chunk, int tag, const LX_MixerEffect effect ) noe
 
     Mix_UnregisterAllEffects( chan );
 
-    if ( effect.type != LX_EFFECT_NONE )
+    if ( effect.type != EFFECT_NONE )
     {
         if ( effect.type.panning )
             setPanning( chan, effect.pan_left, effect.pan_right );
@@ -290,13 +290,13 @@ int isPaused( int channel ) noexcept
 }
 
 
-void fadeInMusic( LX_Music& music, int ms ) noexcept
+void fadeInMusic( Music& music, int ms ) noexcept
 {
     music.fadeIn( ms );
 }
 
 
-void fadeInMusicPos( LX_Music& music, int ms, int pos ) noexcept
+void fadeInMusicPos( Music& music, int ms, int pos ) noexcept
 {
     music.fadeInPos( ms, pos );
 }
@@ -320,17 +320,17 @@ void setPanning( int chan, uint8_t left, uint8_t right ) noexcept
 
 void removePanning() noexcept
 {
-    setPanning( LX_MIX_FX_LOUD, LX_MIX_FX_LOUD );
+    setPanning( MIX_FX_LOUD, MIX_FX_LOUD );
 }
 
 void removePanning( int chan ) noexcept
 {
-    setPanning( chan, LX_MIX_FX_LOUD, LX_MIX_FX_LOUD );
+    setPanning( chan, MIX_FX_LOUD, MIX_FX_LOUD );
 }
 
 void setPosition( int16_t angle ) noexcept
 {
-    setPosition( angle, LX_MIX_FX_NO_distance );
+    setPosition( angle, MIX_FX_NO_distance );
 }
 
 
@@ -347,13 +347,13 @@ void setPosition( int chan, int16_t angle, uint8_t distance ) noexcept
 
 void resetPosition() noexcept
 {
-    Mix_SetPosition( MIX_CHANNEL_POST, LX_MIX_FX_NO_ANGLE,
-                     LX_MIX_FX_NO_distance );
+    Mix_SetPosition( MIX_CHANNEL_POST, MIX_FX_NO_ANGLE,
+                     MIX_FX_NO_distance );
 }
 
 void resetPosition( int chan ) noexcept
 {
-    Mix_SetPosition( chan, LX_MIX_FX_NO_ANGLE, LX_MIX_FX_NO_distance );
+    Mix_SetPosition( chan, MIX_FX_NO_ANGLE, MIX_FX_NO_distance );
 }
 
 void reverseStereo( bool flip ) noexcept
@@ -377,7 +377,7 @@ void setDistance( int chan, uint8_t distance ) noexcept
     Mix_SetDistance( chan, distance );
 }
 
-LX_MixerEffect::LX_MixerEffect() : type() {}
+MixerEffect::MixerEffect() : type() {}
 
 }   // Mixer
 

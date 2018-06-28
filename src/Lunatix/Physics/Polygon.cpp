@@ -29,20 +29,20 @@ using namespace FloatBox;
 namespace
 {
 
-inline constexpr Float sumx_( const lx::Physics::LX_FloatPosition& p,
-                              const lx::Physics::LX_FloatPosition& q ) noexcept
+inline constexpr Float sumx_( const lx::Physics::FloatPosition& p,
+                              const lx::Physics::FloatPosition& q ) noexcept
 {
     return p.x + q.x;
 }
 
-inline constexpr Float sumy_( const lx::Physics::LX_FloatPosition& p,
-                              const lx::Physics::LX_FloatPosition& q ) noexcept
+inline constexpr Float sumy_( const lx::Physics::FloatPosition& p,
+                              const lx::Physics::FloatPosition& q ) noexcept
 {
     return p.y + q.y;
 }
 
-inline constexpr Float cross_( const lx::Physics::LX_FloatPosition& p,
-                               const lx::Physics::LX_FloatPosition& q ) noexcept
+inline constexpr Float cross_( const lx::Physics::FloatPosition& p,
+                               const lx::Physics::FloatPosition& q ) noexcept
 {
     return p.x * q.y - p.y * q.x;
 }
@@ -57,26 +57,26 @@ namespace Physics
 
 const unsigned long TRIANGLE_SIDES = 3UL;
 
-LX_PolygonException::LX_PolygonException( std::string err ) : _string_error( err ) {}
+PolygonException::PolygonException( std::string err ) : _string_error( err ) {}
 
-LX_PolygonException::LX_PolygonException( const LX_PolygonException& pex )
+PolygonException::PolygonException( const PolygonException& pex )
     : _string_error( pex._string_error ) {}
 
-const char * LX_PolygonException::what() const noexcept
+const char * PolygonException::what() const noexcept
 {
     return _string_error.c_str();
 }
 
-LX_PolygonException::~LX_PolygonException() noexcept {}
+PolygonException::~PolygonException() noexcept {}
 
 
 /* Polygon - private implementation */
 
-using LX_FloatPositions_ = std::vector<LX_FloatPosition>;
+using FloatPositions_ = std::vector<FloatPosition>;
 
-class LX_Polygon_ final
+class Polygon_ final
 {
-    LX_FloatPositions_ _points;     /* A sequence of LX_FloatPosition objects   */
+    FloatPositions_ _points;     /* A sequence of FloatPosition objects   */
     bool _convex;                   /* If the polygon is convex                 */
 
     Float area_() const noexcept
@@ -92,7 +92,7 @@ class LX_Polygon_ final
         return sum / fbox( 2.0f );
     }
 
-    bool calculateCentroid_( LX_FloatPosition& p ) const noexcept
+    bool calculateCentroid_( FloatPosition& p ) const noexcept
     {
         const Float CMULT = fbox( 6.0f );
         const auto pbeg = _points.begin();
@@ -105,7 +105,7 @@ class LX_Polygon_ final
 
         for ( auto it = pbeg; it != pend; ++it )
         {
-            const LX_FloatPosition& next_fpos = ( it == pend - 1 ) ? *pbeg : *( it + 1 );
+            const FloatPosition& next_fpos = ( it == pend - 1 ) ? *pbeg : *( it + 1 );
             sum_x += sumx_( *it, next_fpos ) * cross_( *it, next_fpos );
             sum_y += sumy_( *it, next_fpos ) * cross_( *it, next_fpos );
         }
@@ -117,7 +117,7 @@ class LX_Polygon_ final
 
 public:
 
-    LX_Polygon_() : _points(), _convex( false ) {}
+    Polygon_() : _points(), _convex( false ) {}
 
     void convexity_() noexcept
     {
@@ -129,13 +129,13 @@ public:
 
         for ( auto it = pbeg; it != pend; ++it )
         {
-            const LX_FloatPosition& ori1 = *it;
-            const LX_FloatPosition& img1 = ( it == pbeg ? * ( pend - 1 ) : * ( it - 1 ) );
-            const LX_FloatPosition& ori2 = ( it == pend - 1 ? *pbeg : * ( it + 1 ) );
-            const LX_FloatPosition& img2 = ori1;
+            const FloatPosition& ori1 = *it;
+            const FloatPosition& img1 = ( it == pbeg ? * ( pend - 1 ) : * ( it - 1 ) );
+            const FloatPosition& ori2 = ( it == pend - 1 ? *pbeg : * ( it + 1 ) );
+            const FloatPosition& img2 = ori1;
 
-            LX_Vector2D AO = LX_Vector2D{img1.x - ori1.x, img1.y - ori1.y};
-            LX_Vector2D OB = LX_Vector2D{img2.x - ori2.x, img2.y - ori2.y};
+            Vector2D AO = Vector2D{img1.x - ori1.x, img1.y - ori1.y};
+            Vector2D OB = Vector2D{img2.x - ori2.x, img2.y - ori2.y};
             Float cross_product = vector_product( AO, OB );
 
             if ( !have_sign )
@@ -167,7 +167,7 @@ public:
     }
 
 
-    inline void addPoint( const LX_FloatPosition& p )
+    inline void addPoint( const FloatPosition& p )
     {
         _points.push_back( p );
     }
@@ -178,20 +178,20 @@ public:
     }
 
 
-    inline LX_FloatPosition getPoint( const unsigned long index ) const
+    inline FloatPosition getPoint( const unsigned long index ) const
     {
         return _points.at( index );
     }
 
-    LX_FloatingBox getEnclosingBox() const
+    FloatingBox getEnclosingBox() const
     {
         if ( _points.size() < TRIANGLE_SIDES )
-            throw LX_PolygonException( "LX_Polygon: Cannot get the enclosing bounding box" );
+            throw PolygonException( "Polygon: Cannot get the enclosing bounding box" );
 
-        LX_FloatPosition p0 = _points.at( 0 );
-        LX_FloatingBox box{p0, 0, 0}; ;
+        FloatPosition p0 = _points.at( 0 );
+        FloatingBox box{p0, 0, 0}; ;
 
-        for ( const LX_FloatPosition& p : _points )
+        for ( const FloatPosition& p : _points )
         {
             // X
             if ( p.x < box.p.x )
@@ -219,46 +219,46 @@ public:
         return _convex;
     }
 
-    void _move( const LX_Vector2D& v ) noexcept
+    void _move( const Vector2D& v ) noexcept
     {
-        std::for_each( _points.begin(), _points.end(), [&v] ( LX_FloatPosition & p )
+        std::for_each( _points.begin(), _points.end(), [&v] ( FloatPosition & p )
         {
             movePoint( p, v );
         } );
     }
 
-    void moveTo( const LX_FloatPosition& p )
+    void moveTo( const FloatPosition& p )
     {
-        LX_FloatPosition centroid;
+        FloatPosition centroid;
 
         if ( !calculateCentroid_( centroid ) )
         {
             // self-intersecting polygon. The movement is less accurate
             constexpr Float TWO{2.0f};
-            const LX_FloatingBox& box = getEnclosingBox();
+            const FloatingBox& box = getEnclosingBox();
             const Float FW = fbox<decltype( box.w )>( box.w );
             const Float FH = fbox<decltype( box.h )>( box.h );
-            const LX_FloatPosition q{box.p.x + FW / TWO, box.p.y + FH / TWO};
-            _move( LX_Vector2D{p.x - q.x, p.y - q.y} );
+            const FloatPosition q{box.p.x + FW / TWO, box.p.y + FH / TWO};
+            _move( Vector2D{p.x - q.x, p.y - q.y} );
         }
         else // Normal case.→ accurate movement
-            _move( LX_Vector2D{p.x - centroid.x, p.y - centroid.y} );
+            _move( Vector2D{p.x - centroid.x, p.y - centroid.y} );
     }
 
-    ~LX_Polygon_() = default;
+    ~Polygon_() = default;
 };
 
 
 /* Polygon, public functions */
 
-LX_Polygon::LX_Polygon() noexcept: _polyimpl( new LX_Polygon_() ) {}
+Polygon::Polygon() noexcept: _polyimpl( new Polygon_() ) {}
 
-LX_Polygon::~LX_Polygon()
+Polygon::~Polygon()
 {
     _polyimpl.reset();
 }
 
-void LX_Polygon::convexity_() noexcept
+void Polygon::convexity_() noexcept
 {
     // Update the convexity when the polygon has at least 3 edges
     if ( _polyimpl->numberOfEdges() >= TRIANGLE_SIDES )
@@ -266,43 +266,43 @@ void LX_Polygon::convexity_() noexcept
 }
 
 // It is used by the function template
-void LX_Polygon::addPoint_( const LX_FloatPosition& p )
+void Polygon::addPoint_( const FloatPosition& p )
 {
     _polyimpl->addPoint( p );
 }
 
-void LX_Polygon::addPoint( const LX_FloatPosition& p )
+void Polygon::addPoint( const FloatPosition& p )
 {
     _polyimpl->addPoint( p );
     convexity_();
 }
 
-unsigned long LX_Polygon::numberOfEdges() const noexcept
+unsigned long Polygon::numberOfEdges() const noexcept
 {
     return _polyimpl->numberOfEdges();
 }
 
-LX_FloatPosition LX_Polygon::getPoint( const unsigned long index ) const
+FloatPosition Polygon::getPoint( const unsigned long index ) const
 {
     return _polyimpl->getPoint( index );
 }
 
-LX_FloatingBox LX_Polygon::getEnclosingBox() const
+FloatingBox Polygon::getEnclosingBox() const
 {
     return _polyimpl->getEnclosingBox();
 }
 
-bool LX_Polygon::isConvex() const noexcept
+bool Polygon::isConvex() const noexcept
 {
     return _polyimpl->isConvex();
 }
 
-void LX_Polygon::move( const LX_Vector2D& v ) noexcept
+void Polygon::move( const Vector2D& v ) noexcept
 {
     _polyimpl->_move( v );
 }
 
-void LX_Polygon::moveTo( const LX_FloatPosition& p )
+void Polygon::moveTo( const FloatPosition& p )
 {
     _polyimpl->moveTo( p );
 }

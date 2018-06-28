@@ -12,14 +12,14 @@
 
 
 template <typename T>
-LX_AbstractFile& operator <<(LX_AbstractFile& f, const T data) noexcept
+AbstractFile& operator <<(AbstractFile& f, const T data) noexcept
 {
     f.write(&data, sizeof(T));
     return f;
 }
 
 template <typename T>
-LX_AbstractFile& operator >>(LX_AbstractFile& f, T& data) noexcept
+AbstractFile& operator >>(AbstractFile& f, T& data) noexcept
 {
     f.read(&data, sizeof(T));
     return f;

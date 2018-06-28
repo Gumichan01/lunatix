@@ -17,15 +17,15 @@ using namespace lx::FileIO;
 
 namespace
 {
-LX_Sprite *red;
-LX_Sprite *green;
-LX_Sprite *blue;
+Sprite *red;
+Sprite *green;
+Sprite *blue;
 }
 
 class Dot
 {
-    LX_ParticleSystem *sys;
-    LX_FloatingBox box;
+    ParticleSystem *sys;
+    FloatingBox box;
 
     Dot(Dot& d);
 
@@ -33,33 +33,33 @@ public:
 
     Dot()
     {
-        LX_Particle *p = nullptr;
+        Particle *p = nullptr;
         lx::Random::initRand();
 
-        sys = new LX_ParticleSystem(N);
-        box = LX_FloatingBox{LX_FloatPosition{100.0f, 100.0f}, 20, 20};
+        sys = new ParticleSystem(N);
+        box = FloatingBox{FloatPosition{100.0f, 100.0f}, 20, 20};
 
         for(int i = 0; i < N; i++)
         {
-            LX_FloatingBox hitbox{LX_FloatPosition{box.p.x - fbox(5.0f) + fbox(rand()%25),
+            FloatingBox hitbox{FloatPosition{box.p.x - fbox(5.0f) + fbox(rand()%25),
                                                    box.p.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
             case 0 :
-                p = new LX_Particle(*red, hitbox);
+                p = new Particle(*red, hitbox);
                 break;
 
             case 1 :
-                p = new LX_Particle(*blue, hitbox);
+                p = new Particle(*blue, hitbox);
                 break;
 
             case 2 :
-                p = new LX_Particle(*green, hitbox);
+                p = new Particle(*green, hitbox);
                 break;
 
             default :
-                p = new LX_Particle(*red, hitbox);
+                p = new Particle(*red, hitbox);
                 break;
             }
 
@@ -69,31 +69,31 @@ public:
 
     void update()
     {
-        LX_Particle *p = nullptr;
+        Particle *p = nullptr;
         sys->updateParticles();
-        moveBox(box, LX_Vector2D{10.0f, 0.0f});
+        moveBox(box, Vector2D{10.0f, 0.0f});
 
         for(int i = 0; i < N; i++)
         {
-            LX_FloatingBox hitbox{LX_FloatPosition{box.p.x - fbox(5.0f) + fbox(rand()%25),
+            FloatingBox hitbox{FloatPosition{box.p.x - fbox(5.0f) + fbox(rand()%25),
                                                    box.p.y - fbox(5.0f) + fbox(rand()%25)}, 5, 5};
 
             switch(rand()%3)
             {
             case 0 :
-                p = new LX_Particle(*red, hitbox);
+                p = new Particle(*red, hitbox);
                 break;
 
             case 1 :
-                p = new LX_Particle(*blue, hitbox);
+                p = new Particle(*blue, hitbox);
                 break;
 
             case 2 :
-                p = new LX_Particle(*green, hitbox);
+                p = new Particle(*green, hitbox);
                 break;
 
             default :
-                p = new LX_Particle(*red, hitbox);
+                p = new Particle(*red, hitbox);
                 break;
             }
 
@@ -128,21 +128,21 @@ int main(int argc, char **argv)
     lx::Log::setDebugMode();
     lx::Log::log(" ==== Test Particle ==== \n");
 
-    lx::Win::LX_WindowInfo winfo;
-    lx::Win::LX_loadWindowConfig(winfo);
+    lx::Win::WindowInfo winfo;
+    lx::Win::loadWindowConfig(winfo);
     winfo.title = "Test particle";
 
-    lx::Win::LX_Window w(winfo);
+    lx::Win::Window w(winfo);
     lx::Win::getWindowManager().addWindow(w);
 
     try
     {
-        red = new LX_Sprite(std::string("test/asset/red.bmp"), w);
-        green = new LX_Sprite(std::string("test/asset/green.bmp"), w);
-        blue = new LX_Sprite(std::string("test/asset/blue.bmp"), w);
+        red = new Sprite(std::string("test/asset/red.bmp"), w);
+        green = new Sprite(std::string("test/asset/green.bmp"), w);
+        blue = new Sprite(std::string("test/asset/blue.bmp"), w);
         lx::Log::log("SUCCESS - The three assets were successfully loaded");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::log("FAILURE - (At least) One of the three assets was not loaded");
         lx::Log::log("%s", ie.what());
@@ -152,7 +152,7 @@ int main(int argc, char **argv)
     dot = new Dot();
     lx::Log::log("Dot loaded");
 
-    LX_EventHandler e;
+    EventHandler e;
     int go = 1;
     begin_time = SDL_GetTicks();
 
@@ -162,7 +162,7 @@ int main(int argc, char **argv)
     {
         while(e.pollEvent())
         {
-            if(e.getEventType() == LX_EventType::QUIT)
+            if(e.getEventType() == EventType::QUIT)
                 go = 0;
         }
 

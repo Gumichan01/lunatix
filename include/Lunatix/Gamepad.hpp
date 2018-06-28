@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_GAMEPAD_HPP_INCLUDED
-#define LX_GAMEPAD_HPP_INCLUDED
+#ifndef GAMEPAD_HPP_INCLUDED
+#define GAMEPAD_HPP_INCLUDED
 
 /**
 *   @file Gamepad.hpp
@@ -29,24 +29,24 @@ namespace lx
 namespace Device
 {
 
-class LX_Haptic;
-struct LX_Gamepad_;
-struct LX_GamepadInfo;
+class Haptic;
+struct Gamepad_;
+struct GamepadInfo;
 
 /**
-*   @class LX_Gamepad
+*   @class Gamepad
 *   @brief The gamepad
 */
-class LX_Gamepad final
+class Gamepad final
 {
-    std::unique_ptr<LX_Gamepad_> _gpimpl;
+    std::unique_ptr<Gamepad_> _gpimpl;
 
-    LX_Gamepad( const LX_Gamepad& g ) = delete;
-    LX_Gamepad& operator =( const LX_Gamepad& ) = delete;
+    Gamepad( const Gamepad& g ) = delete;
+    Gamepad& operator =( const Gamepad& ) = delete;
 
 public:
 
-    LX_Gamepad() noexcept;
+    Gamepad() noexcept;
 
     /**
     *   @fn bool open(int index)
@@ -99,10 +99,10 @@ public:
     */
     int32_t getID() const noexcept;
     /**
-    *   @fn LX_Haptic * getHaptic() const noexcept
+    *   @fn Haptic * getHaptic() const noexcept
     *   @return The haptic system if the gamepad support it, nullptr otherwise
     */
-    LX_Haptic * getHaptic() const noexcept;
+    Haptic * getHaptic() const noexcept;
     /**
     *   @fn const char * getName() const noexcept
     *   @return The name of the gamepad, a null pointer otherwise
@@ -110,15 +110,15 @@ public:
     */
     const char * getName() const noexcept;
     /**
-    *   @fn bool stat(LX_GamepadInfo& info) const noexcept
+    *   @fn bool stat(GamepadInfo& info) const noexcept
     *
     *   Get information about the gamepad
     *
     *   @param [out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
-    *          Call LX_getError() to get the error message
+    *          Call getError() to get the error message
     */
-    bool stat( LX_GamepadInfo& info ) const noexcept;
+    bool stat( GamepadInfo& info ) const noexcept;
 
     /**
     *   @fn UTF8string toString() const noexcept
@@ -127,11 +127,11 @@ public:
     */
     UTF8string toString() const noexcept;
 
-    ~LX_Gamepad();
+    ~Gamepad();
 };
 
 }   // Device
 
 }   // lx
 
-#endif  // LX_GAMEPAD_HPP_INCLUDED
+#endif  // GAMEPAD_HPP_INCLUDED

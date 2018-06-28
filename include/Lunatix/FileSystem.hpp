@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_FILESYSTEM_HPP_INCLUDED
-#define LX_FILESYSTEM_HPP_INCLUDED
+#ifndef FILESYSTEM_HPP_INCLUDED
+#define FILESYSTEM_HPP_INCLUDED
 
 /**
 *   @file FileSystem.hpp
@@ -102,4 +102,4 @@ UTF8string dirname( const UTF8string& path ) noexcept;
 
 }   // lx
 
-#endif // LX_FILESYSTEM_HPP_INCLUDED
+#endif // FILESYSTEM_HPP_INCLUDED

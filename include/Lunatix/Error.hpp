@@ -1,5 +1,5 @@
-#ifndef LX_ERROR_HPP_INCLUDED
-#define LX_ERROR_HPP_INCLUDED
+#ifndef ERROR_HPP_INCLUDED
+#define ERROR_HPP_INCLUDED
 
 
 /*
@@ -26,44 +26,44 @@
 
 
 /**
-*   @fn inline const char * LX_getError()
-*   Get the error message set by LX_setError
+*   @fn inline const char * getError()
+*   Get the error message set by setError
 *   @return The error message
 */
-inline const char * LX_getError()
+inline const char * getError()
 {
     return SDL_GetError();
 }
 
 /**
-*   @fn inline void LX_setError(const char * str) noexcept
+*   @fn inline void setError(const char * str) noexcept
 *   Set an error message
 *   @param [in] str The error string
 */
-inline void LX_setError( const char * str )
+inline void setError( const char * str )
 {
     SDL_SetError( str );
 }
 
 /**
-*   @fn inline void LX_setError(const std::string str) noexcept
+*   @fn inline void setError(const std::string str) noexcept
 *   Set an error message
 *   @param [in] str The error string
 */
-inline void LX_setError( const std::string& str ) noexcept
+inline void setError( const std::string& str ) noexcept
 {
-    LX_setError( str.c_str() );
+    setError( str.c_str() );
 }
 
 /**
-*   @fn inline void LX_setError(const UTF8string u8str) noexcept
+*   @fn inline void setError(const UTF8string u8str) noexcept
 *   Set an error message (utf-8)
 *   @param [in] u8str The error utf-8 string
 */
-inline void LX_setError( const UTF8string& u8str ) noexcept
+inline void setError( const UTF8string& u8str ) noexcept
 {
-    LX_setError( u8str.utf8_sstring() );
+    setError( u8str.utf8_sstring() );
 }
 
 
-#endif // LX_ERROR_HPP_INCLUDED
+#endif // ERROR_HPP_INCLUDED

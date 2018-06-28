@@ -8,25 +8,25 @@
 using namespace std;
 using namespace lx::Graphics;
 
-void test_window1(lx::Win::LX_Window *win);
+void test_window1(lx::Win::Window *win);
 void test_window2(void);
-void test_rendering(lx::Win::LX_Window *win);
-void test_image(lx::Win::LX_Window *win);
-void test_winManager(lx::Win::LX_Window *win);
-void test_winInfo(lx::Win::LX_Window *win);
+void test_rendering(lx::Win::Window *win);
+void test_image(lx::Win::Window *win);
+void test_winManager(lx::Win::Window *win);
+void test_winInfo(lx::Win::Window *win);
 void test_opengl();
 void test_opengl2();
-void test_drawing(lx::Win::LX_Window *win);
-void test_viewport(lx::Win::LX_Window *win);
+void test_drawing(lx::Win::Window *win);
+void test_viewport(lx::Win::Window *win);
 
-string winInfoToString(lx::Win::LX_WindowInfo &winfo);
-bool winInfoEqual(lx::Win::LX_WindowInfo &info1, lx::Win::LX_WindowInfo &info2);
+string winInfoToString(lx::Win::WindowInfo &winfo);
+bool winInfoEqual(lx::Win::WindowInfo &info1, lx::Win::WindowInfo &info2);
 
-lx::Win::LX_WindowInfo info;
+lx::Win::WindowInfo info;
 
 int main(int argc, char **argv)
 {
-    lx::Win::LX_Window *w = nullptr;
+    lx::Win::Window *w = nullptr;
 
     bool err = lx::init();
 
@@ -37,12 +37,12 @@ int main(int argc, char **argv)
 
     lx::Log::setDebugMode();
     lx::Log::log(" ==== Test Window ==== ");
-    LX_loadWindowConfig(info);
+    loadWindowConfig(info);
     info.w = 1000;
     info.h = 600;
     lx::Log::log("Info configuration:\n%s",winInfoToString(info).c_str());
     info.title = "Hello #1";
-    lx::Win::LX_Window *win = new lx::Win::LX_Window(info);
+    lx::Win::Window *win = new lx::Win::Window(info);
     w = win;
 
     test_winInfo(win);
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 }
 
 
-void test_window1(lx::Win::LX_Window *win)
+void test_window1(lx::Win::Window *win)
 {
     lx::Log::log(" = TEST main window = ");
 
@@ -80,15 +80,15 @@ void test_window2(void)
     const int w = 256;
     const int h = 256;
 
-    lx::Win::LX_WindowInfo wi;
-    lx::Win::LX_initWindowInfo(wi);
+    lx::Win::WindowInfo wi;
+    lx::Win::initWindowInfo(wi);
     wi.title = "Hello #2";
     wi.x = 12;
     wi.y = 128;
     wi.w = w;
     wi.h = h;
     wi.flag = SDL_WINDOW_SHOWN;
-    lx::Win::LX_Window win2(wi);
+    lx::Win::Window win2(wi);
 
     lx::Log::log(" = TEST 2 window = ");
 
@@ -107,24 +107,24 @@ void test_window2(void)
 }
 
 
-void test_image(lx::Win::LX_Window *win)
+void test_image(lx::Win::Window *win)
 {
-    lx::Log::log(" = TEST LX_Texture = ");
+    lx::Log::log(" = TEST Texture = ");
     std::string sp_str = "data/boss.png";
     std::string name = "data/bullet.png";
     std::string mname = "data/01.ogg";
     UTF8string u8name("data/bullet.png");
 
-    lx::Log::log("|> LX_Sprite");
+    lx::Log::log("|> Sprite");
     lx::Log::logInfo(lx::Log::APPLICATION,"open new image: %s",name.c_str());
 
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"UTF8string argument");
-        lx::Graphics::LX_Sprite img(u8name,*win);
+        lx::Graphics::Sprite img(u8name,*win);
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - image loaded");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - image from file: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -133,16 +133,16 @@ void test_image(lx::Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a image file using the file buffer");
-        lx::FileIO::LX_FileBuffer b(name);
-        lx::Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
-        lx::Graphics::LX_Sprite *img = bf->generateSprite(*win);
+        lx::FileIO::FileBuffer b(name);
+        lx::Graphics::BufferedImage *bf =  b.loadBufferedImage();
+        lx::Graphics::Sprite *img = bf->generateSprite(*win);
         delete bf;
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - image loaded from memory");
 
         delete img;
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - image from memory: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -151,30 +151,30 @@ void test_image(lx::Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a file that is not an image from memory");
-        lx::Graphics::LX_Sprite *img = lx::Graphics::LX_BufferedImage(mname).generateSprite(*win);
+        lx::Graphics::Sprite *img = lx::Graphics::BufferedImage(mname).generateSprite(*win);
 
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - should not be loaded");
         delete img;
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - failure expected");
         lx::Log::log("%s", ie.what());
     }
 
-    lx::Log::log("|> LX_StreamingTexture");
-    lx::Log::log("||> LX_BufferedImage");
+    lx::Log::log("|> StreamingTexture");
+    lx::Log::log("||> BufferedImage");
 
     /// NORMAL CASE
     lx::Log::logInfo(lx::Log::APPLICATION,"create a surface");
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"std::string argument");
-        LX_BufferedImage data(name);
+        BufferedImage data(name);
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface; it should be created");
         lx::Log::log("%s", ie.what());
@@ -183,11 +183,11 @@ void test_image(lx::Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"UTF8string argument");
-        LX_BufferedImage data(u8name);
+        BufferedImage data(u8name);
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface; it should be created");
         lx::Log::log("%s", ie.what());
@@ -196,13 +196,13 @@ void test_image(lx::Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"FileBuffer argument");
-        lx::FileIO::LX_FileBuffer b(name);
-        LX_BufferedImage *data = b.loadBufferedImage();
+        lx::FileIO::FileBuffer b(name);
+        BufferedImage *data = b.loadBufferedImage();
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
         delete data;
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface; it should be created");
         lx::Log::log("%s", ie.what());
@@ -213,10 +213,10 @@ void test_image(lx::Win::LX_Window *win)
 
     try
     {
-        LX_BufferedImage data(std::string("<invalid>"));
+        BufferedImage data(std::string("<invalid>"));
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface created. It must not");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - expected");
         lx::Log::log("%s", ie.what());
@@ -226,10 +226,10 @@ void test_image(lx::Win::LX_Window *win)
 
     try
     {
-        LX_BufferedImage data(mname);
+        BufferedImage data(mname);
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface created. It must not");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - expected");
         lx::Log::log("%s", ie.what());
@@ -238,11 +238,11 @@ void test_image(lx::Win::LX_Window *win)
     // Display a bullet
     try
     {
-        lx::Graphics::LX_Sprite img(name,*win);
-        LX_ImgRect box{64,64,256,128};
+        lx::Graphics::Sprite img(name,*win);
+        ImgRect box{64,64,256,128};
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - image loaded");
-        lx::Log::logInfo(lx::Log::APPLICATION,"LX_Sprite example");
+        lx::Log::logInfo(lx::Log::APPLICATION,"Sprite example");
         lx::Log::logInfo(lx::Log::APPLICATION,"Draw the image (angle: 0 → 2π)");
 
         const double PI2 = M_PI * 2;
@@ -269,7 +269,7 @@ void test_image(lx::Win::LX_Window *win)
         Uint32 t2 = SDL_GetTicks();
         lx::Log::logInfo(lx::Log::APPLICATION,"Done in %d ms",t2-t1);
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - image from file: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -280,9 +280,9 @@ void test_image(lx::Win::LX_Window *win)
 
     try
     {
-        LX_StreamingTexture img(*win);
-        LX_BufferedImage data(name);
-        LX_ImgRect box{256,256,256,128};
+        StreamingTexture img(*win);
+        BufferedImage data(name);
+        ImgRect box{256,256,256,128};
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Streaming image created");
         lx::Log::logInfo(lx::Log::APPLICATION,"put a surface in a streaming image");
@@ -293,7 +293,7 @@ void test_image(lx::Win::LX_Window *win)
             lx::Log::logInfo(lx::Log::TEST,"FAILURE - expected: TRUE; got: FALSE");
 
         lx::Log::logInfo(lx::Log::APPLICATION,"Update the stream");
-        lx::Log::logInfo(lx::Log::APPLICATION,"LX_StreamingTexture example, with LX_BufferedImage");
+        lx::Log::logInfo(lx::Log::APPLICATION,"StreamingTexture example, with BufferedImage");
 
         Uint32 t1 = SDL_GetTicks();
         for(int i = 0; i < 64; i++)
@@ -309,24 +309,24 @@ void test_image(lx::Win::LX_Window *win)
         Uint32 t2 = SDL_GetTicks();
         lx::Log::logInfo(lx::Log::APPLICATION,"Done in %d ms",t2-t1);
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Streaming image; it should be created");
         lx::Log::log("%s", ie.what());
     }
 
-    lx::Log::log("|> LX_AnimatedSprite");
+    lx::Log::log("|> AnimatedSprite");
     lx::Log::logInfo(lx::Log::APPLICATION,"open new image: %s",name.c_str());
     lx::Log::logInfo(lx::Log::APPLICATION,"UTF8string argument");
     UTF8string u8_str(sp_str);
-    std::vector<LX_ImgRect> c;
+    std::vector<ImgRect> c;
 
     try
     {
-        lx::Graphics::LX_AnimatedSprite img(u8_str,*win,c,0,false);
+        lx::Graphics::AnimatedSprite img(u8_str,*win,c,0,false);
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - animated sprite loaded");
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - animated sprite from file: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -335,12 +335,12 @@ void test_image(lx::Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a sprite sheet file using the bufered image");
-        lx::Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0, false);
+        lx::Graphics::AnimatedSprite *img = BufferedImage(sp_str).generateAnimatedSprite(*win,c,0, false);
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - animated sprite loaded from memory");
         delete img;
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - animated sprite from memory: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -349,12 +349,12 @@ void test_image(lx::Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a file that is not an image from memory");
-        lx::Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0,false);
+        lx::Graphics::AnimatedSprite *img = BufferedImage(mname).generateAnimatedSprite(*win,c,0,false);
 
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - should not be loaded");
         delete img;
     }
-    catch(lx::Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - animated sprite failure expected");
         lx::Log::log("%s", ie.what());
@@ -363,7 +363,7 @@ void test_image(lx::Win::LX_Window *win)
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"Animation");
         Uint32 delay = 125;
-        std::vector<LX_ImgRect> coordinates;
+        std::vector<ImgRect> coordinates;
         coordinates.push_back({212,0,211,448});
         coordinates.push_back({424,0,211,448});
         coordinates.push_back({636,0,211,448});
@@ -382,8 +382,8 @@ void test_image(lx::Win::LX_Window *win)
 
         {
             // Infinite animation
-            LX_ImgRect rect{256,64,211,448};
-            lx::Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
+            ImgRect rect{256,64,211,448};
+            lx::Graphics::AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
             lx::Log::logInfo(lx::Log::TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             lx::Log::log("frame delay: %u ms", sprite.getFrameDelay());
@@ -402,8 +402,8 @@ void test_image(lx::Win::LX_Window *win)
 
         {
             // Animation
-            LX_ImgRect rect{420,100,211,448};
-            lx::Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
+            ImgRect rect{420,100,211,448};
+            lx::Graphics::AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
             lx::Log::logInfo(lx::Log::TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             lx::Log::log("frame delay: %u ms", sprite.getFrameDelay());
@@ -431,7 +431,7 @@ void test_image(lx::Win::LX_Window *win)
     lx::Log::log(" = END TEST= ");
 }
 
-void test_viewport(lx::Win::LX_Window *win)
+void test_viewport(lx::Win::Window *win)
 {
     lx::Log::log(" = TEST Viewport = ");
 
@@ -439,8 +439,8 @@ void test_viewport(lx::Win::LX_Window *win)
     std::string name = "data/bullet.png";
 
     Uint32 delay = 125;
-    LX_ImgRect rect{0, 0,win->getWidth()/4,win->getHeight()/2};
-    std::vector<LX_ImgRect> coordinates;
+    ImgRect rect{0, 0,win->getWidth()/4,win->getHeight()/2};
+    std::vector<ImgRect> coordinates;
     coordinates.push_back({212,0,211,448});
     coordinates.push_back({424,0,211,448});
     coordinates.push_back({636,0,211,448});
@@ -457,16 +457,16 @@ void test_viewport(lx::Win::LX_Window *win)
     coordinates.push_back({1272,449,211,448});
     coordinates.push_back({1484,449,211,448});
 
-    lx::Graphics::LX_Sprite img(name, *win);
-    lx::Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
+    lx::Graphics::Sprite img(name, *win);
+    lx::Graphics::AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
 
-    LX_ImgRect viewport{{win->getWidth()/2, 0}, win->getWidth()/2, win->getHeight()/2};
+    ImgRect viewport{{win->getWidth()/2, 0}, win->getWidth()/2, win->getHeight()/2};
     lx::Log::logInfo(lx::Log::APPLICATION,"Viewport: {%d,%d,%d,%d}",
                     viewport.p.x, viewport.p.y, viewport.w, viewport.h);
 
     Uint32 b = SDL_GetTicks();
-    LX_ImgRect brect{0, 0, win->getWidth()/2, win->getHeight()/2};
-    LX_Colour bcolour{0, 0, 0, 255};
+    ImgRect brect{0, 0, win->getWidth()/2, win->getHeight()/2};
+    Colour bcolour{0, 0, 0, 255};
 
     while(SDL_GetTicks() - b < 4096)
     {
@@ -486,11 +486,11 @@ void test_viewport(lx::Win::LX_Window *win)
     lx::Log::log(" = END TEST= ");
 }
 
-void test_winManager(lx::Win::LX_Window *win)
+void test_winManager(lx::Win::Window *win)
 {
     lx::Log::log(" = TEST WinManager = ");
     std::string name = "data/bullet.png";
-    lx::Graphics::LX_Sprite img(name,*win);
+    lx::Graphics::Sprite img(name,*win);
 
     if(win == nullptr)
         lx::Log::log("FAILURE - The window was not initialized");
@@ -500,12 +500,12 @@ void test_winManager(lx::Win::LX_Window *win)
     bool r = lx::Win::getWindowManager().addWindow(*win);
 
     if(r == false)
-        lx::Log::log("FAILURE - cannot add a window: %s", LX_getError());
+        lx::Log::log("FAILURE - cannot add a window: %s", getError());
     else
         lx::Log::log("SUCCESS - the window was added into the window manager");
 
 
-    lx::Win::LX_Window& lxw = lx::Win::getWindowManager().getWindow(win->getID());
+    lx::Win::Window& lxw = lx::Win::getWindowManager().getWindow(win->getID());
 
     if(&lxw == win)
         lx::Log::log("SUCCESS - (getWindow) the window is exactly what we added");
@@ -537,10 +537,10 @@ void test_winManager(lx::Win::LX_Window *win)
 }
 
 
-void test_winInfo(lx::Win::LX_Window *win)
+void test_winInfo(lx::Win::Window *win)
 {
     lx::Log::log(" = TEST window information = ");
-    lx::Win::LX_WindowInfo info_g;
+    lx::Win::WindowInfo info_g;
     lx::Log::log("Get information");
     win->getInfo(info_g);
 
@@ -558,18 +558,18 @@ void test_winInfo(lx::Win::LX_Window *win)
 void test_opengl()
 {
     lx::Log::log(" = TEST OpenGL #1 = ");
-    lx::Win::LX_WindowInfo winfo;
-    lx::Win::LX_initWindowInfo(winfo);
+    lx::Win::WindowInfo winfo;
+    lx::Win::initWindowInfo(winfo);
     info.title = "OpenGL window #0";
     info.flag = SDL_WINDOW_OPENGL;
 
     {
-        lx::Win::LX_Window w(info);
+        lx::Win::Window w(info);
 
         {
             lx::Log::log("Get an OpengGL function: glClearColor");
-            typedef void (APIENTRY * LX_Fun)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-            LX_Fun f = lx::Graphics::OpenGL::getProcAddress<LX_Fun>("glClearColor");
+            typedef void (APIENTRY * Fun)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+            Fun f = lx::Graphics::OpenGL::getProcAddress<Fun>("glClearColor");
 
             if(f == nullptr)
                 lx::Log::log("This function is not available ×");
@@ -634,10 +634,10 @@ void test_opengl2()
 {
     lx::Log::log(" = TEST OpenGL #2 = ");
 
-    lx::Win::LX_WindowInfo winfo1;
-    lx::Win::LX_WindowInfo winfo2;
-    lx::Win::LX_initWindowInfo(winfo1);
-    lx::Win::LX_initWindowInfo(winfo2);
+    lx::Win::WindowInfo winfo1;
+    lx::Win::WindowInfo winfo2;
+    lx::Win::initWindowInfo(winfo1);
+    lx::Win::initWindowInfo(winfo2);
 
     // Window #1
     winfo1.title = "OpenGL window #1";
@@ -656,20 +656,20 @@ void test_opengl2()
     winfo2.h = 256;
 
     {
-        lx::Win::LX_Window w1(winfo1);
-        lx::Win::LX_Window w2(winfo2);
+        lx::Win::Window w1(winfo1);
+        lx::Win::Window w2(winfo2);
 
         lx::Log::log("Define window #1 as the current OpenGL window");
         if(w1.glMakeCurrent())
             lx::Log::log("SUCCESS - OpenGl window #1 OK → current context defined");
         else
-            lx::Log::log("FAILURE - %s",LX_getError());
+            lx::Log::log("FAILURE - %s",getError());
 
         lx::Log::log("Define window #2 as the current OpenGL window");
         if(w2.glMakeCurrent())
             lx::Log::log("SUCCESS - OpenGl window #2 OK → current context defined");
         else
-            lx::Log::log("FAILURE - %s",LX_getError());
+            lx::Log::log("FAILURE - %s",getError());
 
 
         lx::Log::log("Blue colour on window #1");
@@ -689,7 +689,7 @@ void test_opengl2()
         lx::Time::delay(2000);
 
         {
-            lx::Graphics::LX_Sprite img(std::string("data/bullet.png"), w1);
+            lx::Graphics::Sprite img(std::string("data/bullet.png"), w1);
             lx::Log::log("Bind the sprite to the first window → #1");
             float w, h;
             bool b = img.bind(&w,&h);
@@ -697,7 +697,7 @@ void test_opengl2()
             if(b)
                 lx::Log::log("OK");
             else
-                lx::Log::log("KO: %s",LX_getError());
+                lx::Log::log("KO: %s",getError());
 
 
             lx::Log::log("Green colour on window #2");
@@ -714,7 +714,7 @@ void test_opengl2()
             if(b)
                 lx::Log::log("OK");
             else
-                lx::Log::log("KO: %s",LX_getError());
+                lx::Log::log("KO: %s",getError());
         }
 
     }
@@ -722,17 +722,17 @@ void test_opengl2()
     lx::Log::log(" = END TEST = ");
 }
 
-void test_drawing(lx::Win::LX_Window *win)
+void test_drawing(lx::Win::Window *win)
 {
     lx::Log::log(" = TEST draw = ");
     lx::Log::log("Draw a segment with M(32,32) and N(64,448)");
-    LX_ImgCoord M{32,32};
-    LX_ImgCoord N{64,448};
-    LX_ImgCoord O{512,256};
-    lx::Physics::LX_Vector2D u{256.0f,128.0f};
-    lx::Physics::LX_Vector2D v{2048.0f,0.0f};
-    LX_ImgRect b{128,128,512,100};
-    LX_Colour c = {255,0,0,255};
+    ImgCoord M{32,32};
+    ImgCoord N{64,448};
+    ImgCoord O{512,256};
+    lx::Physics::Vector2D u{256.0f,128.0f};
+    lx::Physics::Vector2D v{2048.0f,0.0f};
+    ImgRect b{128,128,512,100};
+    Colour c = {255,0,0,255};
 
     win->setDrawColour(c);
     win->clearWindow();
@@ -761,7 +761,7 @@ void test_drawing(lx::Win::LX_Window *win)
 
     lx::Time::delay(2048);
     lx::Log::log("Draw multiple lines using several points");
-    std::vector<LX_ImgCoord> points = {{64,64},{128,32},{256,64},{768,512},
+    std::vector<ImgCoord> points = {{64,64},{128,32},{256,64},{768,512},
         {512,256},{16,448},{32,512},{256,42}
     };
 
@@ -798,7 +798,7 @@ void test_drawing(lx::Win::LX_Window *win)
     lx::Time::delay(1000);
     win->clearWindow();
 
-    lx::Physics::LX_Circle C{lx::Physics::LX_FloatPosition{512.0f,300.0f},0};
+    lx::Physics::Circle C{lx::Physics::FloatPosition{512.0f,300.0f},0};
 
     lx::Log::log("Draw circles");
     for(unsigned int i = 0; i < 300; i++)
@@ -824,7 +824,7 @@ void test_drawing(lx::Win::LX_Window *win)
 }
 
 
-string winInfoToString(lx::Win::LX_WindowInfo &winfo)
+string winInfoToString(lx::Win::WindowInfo &winfo)
 {
     ostringstream ss;
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
@@ -835,7 +835,7 @@ string winInfoToString(lx::Win::LX_WindowInfo &winfo)
     return ss.str();
 }
 
-bool winInfoEqual(lx::Win::LX_WindowInfo &info1, lx::Win::LX_WindowInfo &info2)
+bool winInfoEqual(lx::Win::WindowInfo &info1, lx::Win::WindowInfo &info2)
 {
     return (info1.id == info2.id)
            && (info1.title == info2.title)

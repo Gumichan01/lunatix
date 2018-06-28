@@ -28,8 +28,8 @@ namespace lx
 
 namespace Graphics
 {
-struct LX_ImgCoord;
-struct LX_ImgRect;
+struct ImgCoord;
+struct ImgRect;
 }
 
 
@@ -37,95 +37,95 @@ namespace Physics
 {
 
 /**
-*   @struct LX_FloatPosition
+*   @struct FloatPosition
 *   @brief The position in floating-point value
 */
-struct LX_FloatPosition final
+struct FloatPosition final
 {
     Float x;    /**< X coordinates  */
     Float y;    /**< Y coordinates  */
 };
 
 /**
-*   @struct LX_FloatingBox
+*   @struct FloatingBox
 *   @brief The logical hitbox (Axis-Aligned Bounding Box)
 *
 *   @note If you want to use an Oriented Bounding Box (OBB),
-*         you need to use LX_Polygon instead
+*         you need to use Polygon instead
 */
-struct LX_FloatingBox final
+struct FloatingBox final
 {
-    LX_FloatPosition p;         /**< Position   */
+    FloatPosition p;         /**< Position   */
     int w;                      /**< Width      */
     int h;                      /**< Height     */
 };
 
 
 /**
-*   @fn LX_FloatPosition toFloatPosition(const lx::Graphics::LX_ImgCoord& coord) noexcept
+*   @fn FloatPosition toFloatPosition(const lx::Graphics::ImgCoord& coord) noexcept
 *   @param coord
 *   @return The float position
 */
-LX_FloatPosition toFloatPosition( const lx::Graphics::LX_ImgCoord& coord ) noexcept;
+FloatPosition toFloatPosition( const lx::Graphics::ImgCoord& coord ) noexcept;
 /**
-*   @fn LX_FloatingBox toFloatingBox(const lx::Graphics::LX_ImgRect& rect) noexcept
+*   @fn FloatingBox toFloatingBox(const lx::Graphics::ImgRect& rect) noexcept
 *   @param rect
 *   @return The floating box
 */
-LX_FloatingBox toFloatingBox( const lx::Graphics::LX_ImgRect& rect ) noexcept;
+FloatingBox toFloatingBox( const lx::Graphics::ImgRect& rect ) noexcept;
 
 /**
-*   @struct LX_Segment
+*   @struct Segment
 *   @brief The segment
 *
-*   @note If you want to use an inifinite line, use LX_Line instead
+*   @note If you want to use an inifinite line, use Line instead
 */
-struct LX_Segment final
+struct Segment final
 {
-    LX_FloatPosition p;     /**< First point    */
-    LX_FloatPosition q;     /**< Second point   */
+    FloatPosition p;     /**< First point    */
+    FloatPosition q;     /**< Second point   */
 };
 
 /**
-*   @struct LX_Line
+*   @struct Line
 *   @brief The line
 */
-struct LX_Line final
+struct Line final
 {
-    LX_FloatPosition o; /**< Origin point       */
-    LX_Vector2D v;      /**< Direction vector   */
+    FloatPosition o; /**< Origin point       */
+    Vector2D v;      /**< Direction vector   */
 
     /**
-    *   @fn bool isParralelWith(const LX_Line& l) const noexcept
+    *   @fn bool isParralelWith(const Line& l) const noexcept
     *
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are parralel, FALSE otherwise
     */
-    bool isParralelWith( const LX_Line& l ) const noexcept;
+    bool isParralelWith( const Line& l ) const noexcept;
     /**
-    *   @fn bool isPerpendicularTo(const LX_Line& l) const noexcept
+    *   @fn bool isPerpendicularTo(const Line& l) const noexcept
     *
     *   @param [in] l The line to compare
     *   @return TRUE if the two lines are perpendicular, FALSE otherwise
     */
-    bool isPerpendicularTo( const LX_Line& l ) const noexcept;
+    bool isPerpendicularTo( const Line& l ) const noexcept;
 };
 
 
 /**
-*   @struct LX_Circle
+*   @struct Circle
 *   @brief The circle structure
 */
-struct LX_Circle final
+struct Circle final
 {
-    LX_FloatPosition center;    /**< The point that represents the center   */
+    FloatPosition center;    /**< The point that represents the center   */
     unsigned int radius;        /**< The circle radius                      */
 };
 
 
 // Operators of points and circles
 /**
-*   @fn bool operator ==(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
+*   @fn bool operator ==(const FloatPosition& a, const FloatPosition& b) noexcept
 
 *   @param [in] a The first point
 *   @param [in] b The second point
@@ -133,18 +133,18 @@ struct LX_Circle final
 *   @return TRUE If these points have exactly the same coordinates,
 *          FALSE otherwise
 */
-bool operator ==( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcept;
+bool operator ==( const FloatPosition& a, const FloatPosition& b ) noexcept;
 /**
-*   @fn bool operator !=(const LX_FloatPosition& a, const LX_FloatPosition& b) noexcept
+*   @fn bool operator !=(const FloatPosition& a, const FloatPosition& b) noexcept
 *
 *   @param [in] a The first point
 *   @param [in] b The second point
 *
 *   @return TRUE If these points have not the same coordinates, FALSE otherwise
 */
-bool operator !=( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcept;
+bool operator !=( const FloatPosition& a, const FloatPosition& b ) noexcept;
 /**
-*   @fn bool operator ==(const LX_Circle& a, const LX_Circle& b) noexcept
+*   @fn bool operator ==(const Circle& a, const Circle& b) noexcept
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
@@ -153,9 +153,9 @@ bool operator !=( const LX_FloatPosition& a, const LX_FloatPosition& b ) noexcep
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 */
-bool operator ==( const LX_Circle& a, const LX_Circle& b ) noexcept;
+bool operator ==( const Circle& a, const Circle& b ) noexcept;
 /**
-*   @fn bool operator !=(const LX_Circle& a, const LX_Circle& b) noexcept
+*   @fn bool operator !=(const Circle& a, const Circle& b) noexcept
 *
 *   Check If two circles are exactly identical (same coordinates and same radius)
 *
@@ -164,9 +164,9 @@ bool operator ==( const LX_Circle& a, const LX_Circle& b ) noexcept;
 *
 *   @return TRUE If these circles are idendital, FALSE otherwise
 */
-bool operator !=( const LX_Circle& a, const LX_Circle& b ) noexcept;
+bool operator !=( const Circle& a, const Circle& b ) noexcept;
 /**
-*   @fn bool operator >(const LX_Circle& a, const LX_Circle& b) noexcept
+*   @fn bool operator >(const Circle& a, const Circle& b) noexcept
 *
 *   Check If the first circle has a greater radius than the second one
 *
@@ -176,9 +176,9 @@ bool operator !=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 *   @return TRUE If the first circle is greater than the second circle,
 *          FALSE otherwise
 */
-bool operator >( const LX_Circle& a, const LX_Circle& b ) noexcept;
+bool operator >( const Circle& a, const Circle& b ) noexcept;
 /**
-*   @fn bool operator <(const LX_Circle& a, const LX_Circle& b) noexcept
+*   @fn bool operator <(const Circle& a, const Circle& b) noexcept
 *
 *   Check If the first circle radius is smaller than the second one
 *
@@ -188,9 +188,9 @@ bool operator >( const LX_Circle& a, const LX_Circle& b ) noexcept;
 *   @return TRUE If the first circle is smaller than the second circle,
 *          FALSE otherwise
 */
-bool operator <( const LX_Circle& a, const LX_Circle& b ) noexcept;
+bool operator <( const Circle& a, const Circle& b ) noexcept;
 /**
-*   @fn bool operator >=(const LX_Circle& a, const LX_Circle& b) noexcept
+*   @fn bool operator >=(const Circle& a, const Circle& b) noexcept
 *
 *   Check If the first circle has a greater radius than the second one
 *   or if they have the same radius length
@@ -202,9 +202,9 @@ bool operator <( const LX_Circle& a, const LX_Circle& b ) noexcept;
 *          or if have the same radius length, FALSE otherwise
 *
 */
-bool operator >=( const LX_Circle& a, const LX_Circle& b ) noexcept;
+bool operator >=( const Circle& a, const Circle& b ) noexcept;
 /**
-*   @fn bool operator <=(const LX_Circle& a, const LX_Circle& b) noexcept
+*   @fn bool operator <=(const Circle& a, const Circle& b) noexcept
 *
 *   Check If the first circle radius is smaller than the second one
 *   or if they have the same radius length
@@ -215,7 +215,7 @@ bool operator >=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 *   @return TRUE If the first circle is smaller than the second circle,
 *          or if the two circles have the same radius length, FALSE otherwise
 */
-bool operator <=( const LX_Circle& a, const LX_Circle& b ) noexcept;
+bool operator <=( const Circle& a, const Circle& b ) noexcept;
 
 }   // Physics
 

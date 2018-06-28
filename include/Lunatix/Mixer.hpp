@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_MIX_H_INCLUDED
-#define LX_MIX_H_INCLUDED
+#ifndef MIX_H_INCLUDED
+#define MIX_H_INCLUDED
 
 /**
 *   @file Mixer.hpp
@@ -29,7 +29,7 @@ namespace lx
 
 namespace FileIO
 {
-class LX_FileBuffer;
+class FileBuffer;
 }
 
 }
@@ -61,7 +61,7 @@ namespace lx
 *   Example:
 *
 *               int chan = 5;                           // channel number
-*               lx::Mixer::LX_Chunk chunk("test.wav");
+*               lx::Mixer::Chunk chunk("test.wav");
 *               lx::Mixer::setDistance(100);             // distance as post-processing effect
 *               lx::Mixer::setPanning(55,200);           // panning as post-processing effect
 *               lx::Mixer::setPanning(chan,255,0);       // panning on a specific channel
@@ -80,33 +80,33 @@ namespace lx
 namespace Mixer
 {
 
-class LX_Music;
-class LX_Chunk;
+class Music;
+class Chunk;
 
 /**
-*   @struct LX_MixerEffectType
+*   @struct MixerEffectType
 *   @brief Type of effect
 */
-struct LX_MixerEffectType final
+struct MixerEffectType final
 {
     bool panning = false;           /**< Panning        */
     bool position = false;          /**< Position       */
     bool distance = false;          /**< Distance       */
     bool reverse_stereo = false;    /**< Reverse Stereo */
 
-    LX_MixerEffectType() = default;
-    LX_MixerEffectType( const LX_MixerEffectType& ) = default;
-    LX_MixerEffectType& operator =( const LX_MixerEffectType& ) = default;
+    MixerEffectType() = default;
+    MixerEffectType( const MixerEffectType& ) = default;
+    MixerEffectType& operator =( const MixerEffectType& ) = default;
 };
 
 
 /**
-*   @struct LX_MixerEffect
+*   @struct MixerEffect
 *   @brief Mixer effect
 */
-struct LX_MixerEffect final
+struct MixerEffect final
 {
-    LX_MixerEffectType type;        /**< Effect type            */
+    MixerEffectType type;        /**< Effect type            */
     uint8_t pan_left = 0;           /**< Left panning           */
     uint8_t pan_right = 0;          /**< Right panning          */
     int16_t pos_angle = 0;          /**< Angle (position)       */
@@ -115,7 +115,7 @@ struct LX_MixerEffect final
     bool rev_stereo = false;        /**< Reverse stereo         */
     int loops = 0;                  /**< Loops                  */
 
-    LX_MixerEffect();
+    MixerEffect();
 };
 
 /* == Volume == */
@@ -179,21 +179,21 @@ unsigned short getFXVolume() noexcept;
 /* == Music and chunk == */
 
 /**
-*   @fn LX_Chunk * loadSample(lx::FileIO::LX_FileBuffer& file)
+*   @fn Chunk * loadSample(lx::FileIO::FileBuffer& file)
 *
-*   Create a new LX_Chunk instance from a file buffer
+*   Create a new Chunk instance from a file buffer
 *
 *   @param [in] file The file buffer
 *
-*   @return A valid instance of LX_Chunk if the file buffer is valid
+*   @return A valid instance of Chunk if the file buffer is valid
 *          a null pointer otherwise
 *
-*   @note   This function creates a new instance of LX_Chunk.
+*   @note   This function creates a new instance of Chunk.
 *          So do not forget to destroy it.
 *
-*   @exception LX_MixerException On failure
+*   @exception MixerException On failure
 */
-LX_Chunk * loadSample( lx::FileIO::LX_FileBuffer& file );
+Chunk * loadSample( lx::FileIO::FileBuffer& file );
 
 /**
 *   @fn void setMusicPosition(double pos) noexcept
@@ -290,7 +290,7 @@ int channelAvailable( int tag ) noexcept;
 *   @deprecated This function will be removed in LunatiX v0.14.0.
 *   You must use the second signature instead
 *
-*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, int loops = 0) noexcept
+*   @fn bool groupPlayChunk(Chunk& chunk, int tag, int loops = 0) noexcept
 *
 *   Play the chunk on a channel of the group specified by the tag
 *
@@ -305,9 +305,9 @@ int channelAvailable( int tag ) noexcept;
 *   @note If no channel of the group is available for playing, the oldest
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
-bool groupPlayChunk( LX_Chunk& chunk, int tag, int loops = 0 ) noexcept;
+bool groupPlayChunk( Chunk& chunk, int tag, int loops = 0 ) noexcept;
 /**
-*   @fn bool groupPlayChunk(LX_Chunk& chunk, int tag, const LX_MixerEffect effect) noexcept
+*   @fn bool groupPlayChunk(Chunk& chunk, int tag, const MixerEffect effect) noexcept
 *
 *   Play the chunk on a channel of the group specified by the tag
 *
@@ -322,7 +322,7 @@ bool groupPlayChunk( LX_Chunk& chunk, int tag, int loops = 0 ) noexcept;
 *   @note If no channel of the group is available for playing, the oldest
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
-bool groupPlayChunk( LX_Chunk& chunk, int tag, const LX_MixerEffect effect ) noexcept;
+bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept;
 
 /**
 *   @fn void pause(int channel) noexcept
@@ -392,7 +392,7 @@ int isPaused( int channel ) noexcept;
 /* == Effects == */
 
 /**
-*   @fn void fadeInMusic(LX_Music& music, int ms) noexcept
+*   @fn void fadeInMusic(Music& music, int ms) noexcept
 *
 *   Fade in the loaded Music over some milliseconds of time
 *
@@ -400,14 +400,14 @@ int isPaused( int channel ) noexcept;
 *   @param [in] ms Milliseconds for the fade-in effect to complete
 *
 *   @note fadeInMusic starts playing the music with the fade-in effect.
-*        It is not necessary to call LX_Music::play() if this function is called
+*        It is not necessary to call Music::play() if this function is called
 *
 *   @note Any previous music will be halted, or if it is fading out
 *          it will wait (blocking) for the fade to complete
 */
-void fadeInMusic( LX_Music& music, int ms ) noexcept;
+void fadeInMusic( Music& music, int ms ) noexcept;
 /**
-*   @fn void void fadeInMusicPos(LX_Music& music,int ms, int pos) noexcept
+*   @fn void void fadeInMusicPos(Music& music,int ms, int pos) noexcept
 *
 *   Fade in the loaded Music over some milliseconds of time from the position
 *
@@ -416,12 +416,12 @@ void fadeInMusic( LX_Music& music, int ms ) noexcept;
 *   @param [in] pos The position to start the music
 *
 *   @note fadeInMusicPos starts playing the music with the fade-in effect.
-*        It is not necessary to call LX_Music::play() if this function is called
+*        It is not necessary to call Music::play() if this function is called
 *
 *   @note Any previous music will be halted, or if it is fading out
 *          it will wait (blocking) for the fade to complete
 */
-void fadeInMusicPos( LX_Music& music, int ms, int pos ) noexcept;
+void fadeInMusicPos( Music& music, int ms, int pos ) noexcept;
 /**
 *   @fn void fadeOutMusic(int ms) noexcept
 *
@@ -492,7 +492,7 @@ void removePanning( int chan ) noexcept;
 *   Set the virtual position of the audio source.
 *
 *   @param [in] angle The angle between 0 and 360, larger angles are reduced using angle % 360
-*   @note This function call setPosition(angle, LX_MIX_FX_NO_distance)
+*   @note This function call setPosition(angle, MIX_FX_NO_distance)
 */
 void setPosition( int16_t angle ) noexcept;
 /**
@@ -568,4 +568,4 @@ void setDistance( int chan, uint8_t distance ) noexcept;
 
 }   // lx
 
-#endif // LX_MIX_H_INCLUDED
+#endif // MIX_H_INCLUDED

@@ -48,14 +48,14 @@ void test_gamepad(void)
     lx::Log::log(" == Test Gamepad == ");
 
     {
-        LX_Gamepad gp;
+        Gamepad gp;
         gp.open(0);
 
         if(gp.isConnected())
         {
             lx::Log::log("Name: %s",gp.getName());
             lx::Log::log("\n%s\n",gp.toString().utf8_str());
-            LX_Haptic *hp = gp.getHaptic();
+            Haptic *hp = gp.getHaptic();
 
             if(hp != nullptr)
             {
@@ -75,7 +75,7 @@ void test_gamepad(void)
 
 void test_haptic(void)
 {
-    LX_Haptic haptic(0);
+    Haptic haptic(0);
     SDL_HapticEffect effect;
 
     lx::Log::log(" == Test Haptic == ");
@@ -106,7 +106,7 @@ void test_haptic(void)
         int effectid = haptic.newEffect(effect);
 
         if(effectid < 0)
-            lx::Log::logError(lx::Log::TEST,"Cannot add effect: %s",LX_getError());
+            lx::Log::logError(lx::Log::TEST,"Cannot add effect: %s",getError());
         else
         {
             lx::Log::log("Run the effect");
@@ -126,15 +126,15 @@ void test_haptic(void)
 void test_mouse(void)
 {
     lx::Log::log(" == Test Gamepad == ");
-    lx::Win::LX_WindowInfo info;
-    lx::Win::LX_initWindowInfo(info);
+    lx::Win::WindowInfo info;
+    lx::Win::initWindowInfo(info);
     info.w = 800;
     info.h = 600;
-    lx::Win::LX_Window w(info);
+    lx::Win::Window w(info);
 
     std::string s = "data/bullet.png";
     lx::Log::log("Define %s as the mouse cursor",s.c_str());
-    lx::Device::LX_Mouse c(lx::Graphics::LX_BufferedImage(s),0,0);
+    lx::Device::Mouse c(lx::Graphics::BufferedImage(s),0,0);
 
     if(c.isOpen())
         lx::Log::logDebug(lx::Log::TEST,"SUCCESS - the mouse cursor was loaded");
@@ -148,7 +148,7 @@ void test_mouse(void)
     if(lx::Device::mouseIsHaptic())
     {
         lx::Log::log("Haptic feedback supported by the mouse");
-        LX_MouseHaptic h;
+        MouseHaptic h;
 
         if(h.isOpened())
             lx::Log::log("FAILURE - The haptic feedback does not seem to be supported");
@@ -161,18 +161,18 @@ void test_mouse(void)
     }
 
     Uint32 t = SDL_GetTicks();
-    lx::Event::LX_EventHandler ev;
+    lx::Event::EventHandler ev;
     while(SDL_GetTicks() - t < 4000)
     {
         while(ev.pollEvent())
         {
             switch(ev.getEventType())
             {
-            case lx::Event::LX_EventType::MOUSEBUTTONUP:
-                if(ev.getMouseButton().button == lx::Event::LX_MouseButton::LBUTTON)
-                    lx::Device::mouseCursorDisplay(lx::Device::LX_MouseToggle::HIDE);
+            case lx::Event::EventType::MOUSEBUTTONUP:
+                if(ev.getMouseButton().button == lx::Event::MouseButton::LBUTTON)
+                    lx::Device::mouseCursorDisplay(lx::Device::MouseToggle::HIDE);
                 else
-                    lx::Device::mouseCursorDisplay(lx::Device::LX_MouseToggle::SHOW);
+                    lx::Device::mouseCursorDisplay(lx::Device::MouseToggle::SHOW);
                 break;
 
             default:

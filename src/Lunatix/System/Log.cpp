@@ -118,38 +118,38 @@ void setDefaultPriority() noexcept
     SDL_LogResetPriorities();
 }
 
-void setVerbosePriority( LX_LogType category ) noexcept
+void setVerbosePriority( LogType category ) noexcept
 {
     SDL_LogSetPriority( category, SDL_LOG_PRIORITY_VERBOSE );
 }
 
-void setDebugPriority( LX_LogType category ) noexcept
+void setDebugPriority( LogType category ) noexcept
 {
     SDL_LogSetPriority( category, SDL_LOG_PRIORITY_DEBUG );
 }
 
-void setInfoPriority( LX_LogType category ) noexcept
+void setInfoPriority( LogType category ) noexcept
 {
     SDL_LogSetPriority( category, SDL_LOG_PRIORITY_INFO );
 }
 
-void setWarningPriority( LX_LogType category ) noexcept
+void setWarningPriority( LogType category ) noexcept
 {
     SDL_LogSetPriority( category, SDL_LOG_PRIORITY_WARN );
 }
 
-void setErrorPriority( LX_LogType category ) noexcept
+void setErrorPriority( LogType category ) noexcept
 {
     SDL_LogSetPriority( category, SDL_LOG_PRIORITY_ERROR );
 }
 
-void setCriticalPriority( LX_LogType category ) noexcept
+void setCriticalPriority( LogType category ) noexcept
 {
     SDL_LogSetPriority( category, SDL_LOG_PRIORITY_CRITICAL );
 }
 
 
-void logVerbose( LX_LogType category, std::string format, ... ) noexcept
+void logVerbose( LogType category, std::string format, ... ) noexcept
 {
     va_list args;
     va_start( args, format );
@@ -158,7 +158,7 @@ void logVerbose( LX_LogType category, std::string format, ... ) noexcept
     va_end( args );
 }
 
-void logDebug( LX_LogType category, std::string format, ... ) noexcept
+void logDebug( LogType category, std::string format, ... ) noexcept
 {
     va_list args;
     va_start( args, format );
@@ -167,7 +167,7 @@ void logDebug( LX_LogType category, std::string format, ... ) noexcept
     va_end( args );
 }
 
-void logInfo( LX_LogType category, std::string format, ... ) noexcept
+void logInfo( LogType category, std::string format, ... ) noexcept
 {
     va_list args;
     va_start( args, format );
@@ -176,7 +176,7 @@ void logInfo( LX_LogType category, std::string format, ... ) noexcept
     va_end( args );
 }
 
-void logWarning( LX_LogType category, std::string format, ... ) noexcept
+void logWarning( LogType category, std::string format, ... ) noexcept
 {
     va_list args;
     va_start( args, format );
@@ -185,7 +185,7 @@ void logWarning( LX_LogType category, std::string format, ... ) noexcept
     va_end( args );
 }
 
-void logError( LX_LogType category, std::string format, ... ) noexcept
+void logError( LogType category, std::string format, ... ) noexcept
 {
     va_list args;
     va_start( args, format );
@@ -194,7 +194,7 @@ void logError( LX_LogType category, std::string format, ... ) noexcept
     va_end( args );
 }
 
-void logCritical( LX_LogType category, std::string format, ... ) noexcept
+void logCritical( LogType category, std::string format, ... ) noexcept
 {
     va_list args;
     va_start( args, format );

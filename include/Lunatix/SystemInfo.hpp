@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_SYSTEM_INFO_H_INCLUDED
-#define LX_SYSTEM_INFO_H_INCLUDED
+#ifndef SYSTEM_INFO_H_INCLUDED
+#define SYSTEM_INFO_H_INCLUDED
 
 /**
 *   @file SystemInfo.hpp
@@ -42,10 +42,10 @@ namespace lx
 namespace SystemInfo
 {
 /**
-*   @struct LX_DisplayMode
+*   @struct DisplayMode
 *   @brief Information about a display mode
 */
-struct LX_DisplayMode final
+struct DisplayMode final
 {
     int w;              /**< width */
     int h;              /**< height */
@@ -54,10 +54,10 @@ struct LX_DisplayMode final
 };
 
 /**
-*   @typedef LX_DisplayModes
+*   @typedef DisplayModes
 *   @brief Array of modes
 */
-using LX_DisplayModes = std::vector<lx::SystemInfo::LX_DisplayMode>;
+using DisplayModes = std::vector<lx::SystemInfo::DisplayMode>;
 
 /**
 *   @fn const UTF8string getPlatform()
@@ -99,18 +99,18 @@ int getCPUCount() noexcept;
 int getSystemRAM() noexcept;
 
 /**
-*   @fn void getAvailableDisplayModes(LX_DisplayModes& modes)
+*   @fn void getAvailableDisplayModes(DisplayModes& modes)
 *
 *   Get the list of available display modes on the screen
 *
 *   @param [in,out] modes the different modes of display to fill in
 *
-*   @note LX_DisplayMode is a struture that contains every available
+*   @note DisplayMode is a struture that contains every available
 *        display modes. In order to get these following modes, you should
 *        use iterators.
 *   @note Example
 *
-*       LX_DisplayMode modes;
+*       DisplayMode modes;
 *       getAvailableDisplayModes(modes);
 *
 *       lx::Log::log("Display modes: ");
@@ -120,10 +120,10 @@ int getSystemRAM() noexcept;
 *       }
 *
 */
-void getAvailableDisplayModes( LX_DisplayModes& modes );
+void getAvailableDisplayModes( DisplayModes& modes );
 
 }   // SystemInfo
 
 }   // lx
 
-#endif // LX_SYSTEM_INFO_H_INCLUDED
+#endif // SYSTEM_INFO_H_INCLUDED

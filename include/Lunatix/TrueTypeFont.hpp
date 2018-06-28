@@ -10,8 +10,8 @@
 *   luxon.jean.pierre@gmail.com
 */
 
-#ifndef LX_TTF_H_INCLUDED
-#define LX_TTF_H_INCLUDED
+#ifndef TTF_H_INCLUDED
+#define TTF_H_INCLUDED
 
 /**
 *   @file TrueTypeFont.hpp
@@ -34,21 +34,21 @@ namespace lx
 
 namespace Win
 {
-class LX_Window;
+class Window;
 }
 
 namespace FileIO
 {
-class LX_FileBuffer;
+class FileBuffer;
 }
 
 
 namespace Graphics
 {
-class LX_TextTexture;
-class LX_SolidTextTexture;
-class LX_ShadedTextTexture;
-class LX_BlendedTextTexture;
+class TextTexture;
+class SolidTextTexture;
+class ShadedTextTexture;
+class BlendedTextTexture;
 }
 
 /**
@@ -63,28 +63,28 @@ class LX_BlendedTextTexture;
 namespace TrueTypeFont
 {
 
-const unsigned int LX_TTF_DEFAULT_SIZE = 24;   /**< The default value of the font size */
+const unsigned int TTF_DEFAULT_SIZE = 24;   /**< The default value of the font size */
 
-struct LX_Font_;
-enum class LX_TTF_TypeText;
+struct Font_;
+enum class TTF_TypeText;
 
 /**
-*   @class LX_Font
+*   @class Font
 *   @brief The Font class
 *
 *   This class describes the font.
 *   @note It supports the UTF-8 format
 */
-class LX_Font final
+class Font final
 {
-    friend class lx::Graphics::LX_TextTexture;
-    friend class lx::Graphics::LX_SolidTextTexture;
-    friend class lx::Graphics::LX_ShadedTextTexture;
-    friend class lx::Graphics::LX_BlendedTextTexture;
-    std::unique_ptr<LX_Font_> _fimpl;
+    friend class lx::Graphics::TextTexture;
+    friend class lx::Graphics::SolidTextTexture;
+    friend class lx::Graphics::ShadedTextTexture;
+    friend class lx::Graphics::BlendedTextTexture;
+    std::unique_ptr<Font_> _fimpl;
 
-    LX_Font( LX_Font& f ) = delete;
-    LX_Font& operator =( LX_Font& f ) = delete;
+    Font( Font& f ) = delete;
+    Font& operator =( Font& f ) = delete;
 
     /* Private functions */
     int sizeOfText_( const std::string& text, int& w, int& h ) const noexcept;
@@ -94,28 +94,28 @@ class LX_Font final
                      int& w, int& h ) const noexcept;
 
     SDL_Texture * drawSolidText_( const std::string& text, unsigned int size,
-                                  lx::Win::LX_Window& w ) noexcept;
+                                  lx::Win::Window& w ) noexcept;
     SDL_Texture * drawSolidText_( const UTF8string& text, unsigned int size,
-                                  lx::Win::LX_Window& w ) noexcept;
+                                  lx::Win::Window& w ) noexcept;
 
     SDL_Texture * drawShadedText_( const std::string& text, unsigned int size,
-                                   const LX_Colour& bg, lx::Win::LX_Window& w ) noexcept;
+                                   const Colour& bg, lx::Win::Window& w ) noexcept;
     SDL_Texture * drawShadedText_( const UTF8string& text, unsigned int size,
-                                   const LX_Colour& bg, lx::Win::LX_Window& w ) noexcept;
+                                   const Colour& bg, lx::Win::Window& w ) noexcept;
 
     SDL_Texture * drawBlendedText_( const std::string& text, unsigned int size,
-                                    lx::Win::LX_Window& w ) noexcept;
+                                    lx::Win::Window& w ) noexcept;
     SDL_Texture * drawBlendedText_( const UTF8string& text, unsigned int size,
-                                    lx::Win::LX_Window& w ) noexcept;
+                                    lx::Win::Window& w ) noexcept;
 
-    const LX_Colour getColour_() const noexcept;
+    const Colour getColour_() const noexcept;
     unsigned int getSize_() const noexcept;
-    void setColour_( const LX_Colour& colour ) noexcept;
+    void setColour_( const Colour& colour ) noexcept;
 
 public:
 
     /**
-    *   @fn LX_Font(const std::string& font_file, const LX_Colour& colour,
+    *   @fn Font(const std::string& font_file, const Colour& colour,
     *               unsigned int size)
     *
     *   @param [in] font_file The font file to load
@@ -127,7 +127,7 @@ public:
     *
     *   @exception lx::FileIO::IOException if the file cannot be loaded
     */
-    LX_Font( const std::string& font_file, const LX_Colour& colour, unsigned int size );
+    Font( const std::string& font_file, const Colour& colour, unsigned int size );
 
     /**
     *   @fn UTF8string getName(bool with_path = false) noexcept
@@ -141,17 +141,17 @@ public:
     */
     UTF8string getName( bool with_path = false ) const noexcept;
     /**
-    *   @fn LX_Colour getColour()
+    *   @fn Colour getColour()
     *   Get the default colour for text rendering
     *   @return The colour
     */
-    LX_Colour getColour()const noexcept;
+    Colour getColour()const noexcept;
 
-    ~LX_Font();
+    ~Font();
 };
 
 }   // TrueTypeFont
 
 }   // lx
 
-#endif // LX_TTF_H_INCLUDED
+#endif // TTF_H_INCLUDED
