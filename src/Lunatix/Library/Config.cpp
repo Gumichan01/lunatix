@@ -165,7 +165,7 @@ void loadFileConfig_( LX_InternalConfig& config ) noexcept
     else
     {
         lx::Log::logCritical( lx::Log::SYSTEM, "config - Cannot open %s",
-                             LX_CFG_FILE.c_str() );
+                              LX_CFG_FILE.c_str() );
     }
 }
 

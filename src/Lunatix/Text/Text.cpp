@@ -72,12 +72,12 @@ class LX_TextInput_ final
             {
                 UTF8string s( "Cannot set " + _u8text + "in the clipboard" + SDL_GetError() );
                 lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                                  "Cannot set %s in the clipboard.", s.utf8_str() );
+                                   "Cannot set %s in the clipboard.", s.utf8_str() );
             }
             else
             {
                 lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                                  "Copy %s into the clipboard.", _u8text.utf8_str() );
+                                   "Copy %s into the clipboard.", _u8text.utf8_str() );
             }
         }
     }
@@ -99,7 +99,7 @@ class LX_TextInput_ final
             if ( s == nullptr )
             {
                 lx::Log::logError( lx::Log::LX_LogType::SYSTEM,
-                                  "Cannot get the string from the clipboard" );
+                                   "Cannot get the string from the clipboard" );
                 return;
             }
 
@@ -110,7 +110,7 @@ class LX_TextInput_ final
             catch ( ... )
             {
                 lx::Log::logError( lx::Log::LX_LogType::INPUT,
-                                  "Invalid UTF-8 string from the clipboard." );
+                                   "Invalid UTF-8 string from the clipboard." );
             }
 
             lx::Log::logDebug( lx::Log::LX_LogType::INPUT, "Paste %s", s );
@@ -181,7 +181,7 @@ class LX_TextInput_ final
 
         if ( old_cursor != _cursor )
             lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                              "Input - _cursor at %d", _cursor );
+                               "Input - _cursor at %d", _cursor );
     }
 
     void textInput_( const lx::Event::LX_EventHandler& ev ) noexcept
@@ -192,8 +192,8 @@ class LX_TextInput_ final
             return;
 
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                          "New input : '%s' of length (in bytes) %d",
-                          tev.text.c_str(), tev.text.length() );
+                           "New input : '%s' of length (in bytes) %d",
+                           tev.text.c_str(), tev.text.length() );
 
         try
         {
@@ -204,7 +204,7 @@ class LX_TextInput_ final
         catch ( ... )
         {
             lx::Log::logError( lx::Log::LX_LogType::INPUT,
-                              "Invalid UTF-8 string: %s", tev.text.c_str() );
+                               "Invalid UTF-8 string: %s", tev.text.c_str() );
         }
     }
 
@@ -212,10 +212,10 @@ class LX_TextInput_ final
     {
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT, "Edit the text" );
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT, "New edition: %s",
-                          ev.getTextEvent().text.c_str() );
+                           ev.getTextEvent().text.c_str() );
 
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT, "start: %d; len: %d",
-                          ev.getTextEvent().start, ev.getTextEvent().length );
+                           ev.getTextEvent().start, ev.getTextEvent().length );
         _u8comp = ev.getTextEvent().text.c_str();
 
         if ( _u8comp.utf8_empty() )
@@ -248,7 +248,7 @@ class LX_TextInput_ final
     void utf8Pop_() noexcept
     {
         lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                          "Remove the last codepoint (utf8 character)" );
+                           "Remove the last codepoint (utf8 character)" );
 
         try
         {
@@ -257,7 +257,7 @@ class LX_TextInput_ final
         catch ( ... )
         {
             lx::Log::logError( lx::Log::LX_LogType::INPUT,
-                              "Empty UTF-8 string: cannot remove the character" );
+                               "Empty UTF-8 string: cannot remove the character" );
         }
     }
 
@@ -266,8 +266,8 @@ class LX_TextInput_ final
         if ( _cursor > 0U )
         {
             lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                              "Backslash key - Remove the following codepoint at %d: %s",
-                              _cursor - 1, _u8text.utf8_at( _cursor - 1 ).c_str() );
+                               "Backslash key - Remove the following codepoint at %d: %s",
+                               _cursor - 1, _u8text.utf8_at( _cursor - 1 ).c_str() );
 
             if ( _cursor == _u8text.utf8_length() )
             {
@@ -290,8 +290,8 @@ class LX_TextInput_ final
         if ( _cursor < U8LEN )
         {
             lx::Log::logDebug( lx::Log::LX_LogType::INPUT,
-                              "Delete key - Remove the following codepoint at %d: %s",
-                              _cursor, _u8text.utf8_at( _cursor ).c_str() );
+                               "Delete key - Remove the following codepoint at %d: %s",
+                               _cursor, _u8text.utf8_at( _cursor ).c_str() );
         }
 
         if ( _cursor > 0U && _cursor < U8LEN )
