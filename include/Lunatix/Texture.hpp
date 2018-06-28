@@ -33,11 +33,6 @@
 struct SDL_Surface;
 struct SDL_Texture;
 
-namespace LX_FileIO
-{
-class LX_FileBuffer;
-}
-
 namespace LX_Win
 {
 class LX_Window;
@@ -54,6 +49,11 @@ namespace lx
 namespace TrueTypeFont
 {
 class LX_Font;
+}
+
+namespace FileIO
+{
+class LX_FileBuffer;
 }
 
 }
@@ -380,7 +380,7 @@ class LX_BufferedImage final
 {
     friend class LX_StreamingTexture;
     friend class LX_Device::LX_Mouse;
-    friend class LX_FileIO::LX_FileBuffer;
+    friend class lx::FileIO::LX_FileBuffer;
     friend class LX_Win::LX_Window;
 
     SDL_Surface * _surface = nullptr;

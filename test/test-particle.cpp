@@ -12,7 +12,7 @@ using namespace LX_Device;
 using namespace LX_Mixer;
 using namespace LX_Physics;
 using namespace LX_ParticleEngine;
-using namespace LX_FileIO;
+using namespace lx::FileIO;
 
 #define N 20
 

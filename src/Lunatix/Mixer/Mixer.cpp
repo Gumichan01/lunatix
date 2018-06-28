@@ -27,7 +27,7 @@
 
 #include <functional>
 
-using namespace LX_FileIO;
+using namespace lx::FileIO;
 
 namespace
 {
@@ -139,7 +139,7 @@ unsigned short getFXVolume() noexcept
 }
 
 
-LX_Chunk * loadSample( LX_FileIO::LX_FileBuffer& file )
+LX_Chunk * loadSample( lx::FileIO::LX_FileBuffer& file )
 {
     return file.loadSample();
 }

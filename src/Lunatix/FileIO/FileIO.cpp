@@ -26,8 +26,10 @@
 #include <cstdio>
 #include <cerrno>
 
+namespace lx
+{
 
-namespace LX_FileIO
+namespace FileIO
 {
 
 IOException::IOException( const std::string& err ) : _string_error( err ) {}
@@ -386,4 +388,6 @@ LX_AbstractFile& operator <<( LX_AbstractFile& f, const UTF8string& u8s ) noexce
     return f;
 }
 
-}
+}   // FileIO
+
+}   // lx

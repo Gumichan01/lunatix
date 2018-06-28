@@ -27,9 +27,10 @@
 #include <SDL2/SDL_ttf.h>
 #include <new>
 
+namespace lx
+{
 
-
-namespace LX_FileIO
+namespace FileIO
 {
 
 /* LX_fileBuffer — private implementation */
@@ -151,4 +152,6 @@ LX_FileBuffer::~LX_FileBuffer()
     _bimpl.reset();
 }
 
-}
+}   // FileIO
+
+}   // lx

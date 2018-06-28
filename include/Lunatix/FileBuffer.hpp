@@ -46,7 +46,10 @@ struct LX_Font_;
 
 }
 
-namespace LX_FileIO
+namespace lx
+{
+
+namespace FileIO
 {
 
 class LX_FileBuffer_;
@@ -138,6 +141,8 @@ public:
     ~LX_FileBuffer();
 };
 
-}
+}   // FileIO
+
+}   // lx
 
 #endif // LX_FILEBUFFER_HPP_INCLUDED

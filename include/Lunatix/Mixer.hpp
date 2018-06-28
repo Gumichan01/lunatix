@@ -24,11 +24,15 @@
 #include <Lunatix/utils/utf8_string.hpp>
 
 
-namespace LX_FileIO
+namespace lx
+{
+
+namespace FileIO
 {
 class LX_FileBuffer;
 }
 
+}
 
 /**
 *   @ingroup Audio
@@ -171,7 +175,7 @@ unsigned short getFXVolume() noexcept;
 /* == Music and chunk == */
 
 /**
-*   @fn LX_Chunk * loadSample(LX_FileIO::LX_FileBuffer& file)
+*   @fn LX_Chunk * loadSample(lx::FileIO::LX_FileBuffer& file)
 *
 *   Create a new LX_Chunk instance from a file buffer
 *
@@ -185,7 +189,7 @@ unsigned short getFXVolume() noexcept;
 *
 *   @exception LX_MixerException On failure
 */
-LX_Chunk * loadSample( LX_FileIO::LX_FileBuffer& file );
+LX_Chunk * loadSample( lx::FileIO::LX_FileBuffer& file );
 
 /**
 *   @fn void setMusicPosition(double pos) noexcept

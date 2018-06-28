@@ -25,11 +25,15 @@
 
 struct Mix_Chunk;
 
-namespace LX_FileIO
+namespace lx
+{
+
+namespace FileIO
 {
 class LX_FileBuffer_;
 }
 
+}
 
 namespace LX_Mixer
 {
@@ -42,7 +46,7 @@ class LX_Chunk_;
 */
 class LX_Chunk final : public virtual LX_Sound
 {
-    friend class LX_FileIO::LX_FileBuffer_;
+    friend class lx::FileIO::LX_FileBuffer_;
     std::unique_ptr<LX_Chunk_> _chkimpl;
 
     LX_Chunk( Mix_Chunk& chunk );

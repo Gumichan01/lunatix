@@ -42,7 +42,7 @@ LX_BufferedImage * _loadImage( const std::string& file,
     const size_t IMG_OFFSET = static_cast<size_t>( imgdata._img_offset );
     const size_t IMG_SZ     = static_cast<size_t>( imgdata._img_size );
 
-    return LX_FileIO::LX_FileBuffer( file, IMG_OFFSET, IMG_SZ ).loadBufferedImage();
+    return lx::FileIO::LX_FileBuffer( file, IMG_OFFSET, IMG_SZ ).loadBufferedImage();
 }
 
 }   // namespace

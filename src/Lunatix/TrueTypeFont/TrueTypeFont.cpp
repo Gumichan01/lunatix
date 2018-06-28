@@ -30,7 +30,7 @@
 
 
 using namespace lx::Config;
-using namespace LX_FileIO;
+using namespace lx::FileIO;
 
 namespace
 {
@@ -70,7 +70,7 @@ struct LX_Font_ final
     UTF8string _font_str;                    /* The font file       */
     unsigned int _font_size;                 /* The font size       */
     LX_Colour _font_colour;                  /* The font colour     */
-    std::unique_ptr<LX_FileIO::LX_FileBuffer> _font_buffer;
+    std::unique_ptr<lx::FileIO::LX_FileBuffer> _font_buffer;
 
 
     LX_Font_( const std::string& s, unsigned int sz, LX_Colour c )

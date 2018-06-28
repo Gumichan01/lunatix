@@ -33,9 +33,14 @@ namespace LX_Win
 class LX_Window;
 }
 
-namespace LX_FileIO
+namespace lx
+{
+
+namespace FileIO
 {
 class LX_FileBuffer;
+}
+
 }
 
 namespace LX_Graphics

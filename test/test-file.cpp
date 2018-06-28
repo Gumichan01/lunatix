@@ -9,7 +9,7 @@
 #define N 64
 
 using namespace std;
-using namespace LX_FileIO;
+using namespace lx::FileIO;
 
 void test_open(void);
 void test_read(void);

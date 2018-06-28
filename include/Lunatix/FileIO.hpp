@@ -33,14 +33,17 @@ struct SDL_RWops;
 *   @brief File manipulation (Input/Output, file buffering)
 */
 
+namespace lx
+{
+
 /**
 *   @ingroup File
-*   @namespace LX_FileIO
+*   @namespace lx::FileIO
 *   @brief The file Input/Output namespace
 *
 *   This provides an interface for manipulating files
 */
-namespace LX_FileIO
+namespace FileIO
 {
 
 /**
@@ -368,6 +371,8 @@ LX_AbstractFile& operator >>( LX_AbstractFile& f, T& data ) noexcept;
 
 #include "FileIO.tpp"
 
-}
+}   // FileIO
+
+}   // lx
 
 #endif // LX_FILEIO_H_INCLUDED
