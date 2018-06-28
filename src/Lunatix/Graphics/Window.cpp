@@ -34,22 +34,22 @@
 namespace
 {
 
-using LX_Win::LX_WinMode;
-using LX_Win::LX_BlendMode;
+using lx::Win::LX_WinMode;
+using lx::Win::LX_BlendMode;
 
-constexpr uint32_t OPENGL_U = static_cast<uint32_t>( LX_Win::LX_WinMode::OPENGL );
+constexpr uint32_t OPENGL_U = static_cast<uint32_t>( lx::Win::LX_WinMode::OPENGL );
 
 inline constexpr uint32_t openglFlag() noexcept
 {
     return static_cast<uint32_t>( LX_WinMode::SHOWN ) | OPENGL_U;
 }
 
-inline constexpr uint32_t renderFlag( const LX_Win::LX_WindowInfo& info ) noexcept
+inline constexpr uint32_t renderFlag( const lx::Win::LX_WindowInfo& info ) noexcept
 {
     return info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
 }
 
-inline constexpr bool hasOpenGLsupport( const LX_Win::LX_WindowInfo& info ) noexcept
+inline constexpr bool hasOpenGLsupport( const lx::Win::LX_WindowInfo& info ) noexcept
 {
     return ( info.flag & OPENGL_U ) == OPENGL_U;
 }
@@ -101,7 +101,10 @@ SDL_BlendMode sdlBlend_( const LX_BlendMode& mode ) noexcept
 
 using namespace lx::Config;
 
-namespace LX_Win
+namespace lx
+{
+
+namespace Win
 {
 // Pixel depth (in bits)
 const int LX_ARGB_DEPTH = 32;
@@ -597,4 +600,6 @@ LX_Window::~LX_Window()
     _wimpl.reset();
 }
 
-}
+}   // Win
+
+}   // lx

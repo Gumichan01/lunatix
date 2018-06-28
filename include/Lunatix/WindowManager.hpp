@@ -24,7 +24,10 @@
 #include <cinttypes>
 #include <memory>
 
-namespace LX_Win
+namespace lx
+{
+
+namespace Win
 {
 
 class LX_Window;
@@ -142,6 +145,8 @@ public:
 */
 LX_WindowManager& getWindowManager() noexcept;
 
-}
+}   // Win
+
+}   // lx
 
 #endif // LX_WINDOWMANAGER_HPP_INCLUDED

@@ -23,12 +23,12 @@ int main( int argc, char ** argv )
     }
 
     // Information about how to build the window
-    LX_Win::LX_WindowInfo info;
-    LX_Win::LX_loadWindowConfig( info );
+    lx::Win::LX_WindowInfo info;
+    lx::Win::LX_loadWindowConfig( info );
     info.w = 256;
     info.h = 256;
 
-    LX_Win::LX_Window w( info );
+    lx::Win::LX_Window w( info );
     const std::string s = "data/bullet.png";
     const lx::Graphics::LX_ImgRect position = { { 0, 0 }, 256, 256 };
     lx::Graphics::LX_Sprite sprite( s, w );

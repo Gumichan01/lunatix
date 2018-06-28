@@ -216,7 +216,7 @@ int LX_Font::sizeOfText_( const UTF8string& text, const unsigned int size, int& 
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_( const std::string& text, unsigned int size,
-                                       LX_Win::LX_Window& w ) noexcept
+                                       lx::Win::LX_Window& w ) noexcept
 {
     return drawSolidText_( UTF8string( text ), size, w );
 }
@@ -226,7 +226,7 @@ SDL_Texture * LX_Font::drawSolidText_( const std::string& text, unsigned int siz
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawSolidText_( const UTF8string& text, unsigned int size,
-                                       LX_Win::LX_Window& w ) noexcept
+                                       lx::Win::LX_Window& w ) noexcept
 {
     SDL_Surface * s = _fimpl->drawText_( LX_TTF_TypeText::LX_TTF_SOLID, text, size );
 
@@ -244,7 +244,7 @@ SDL_Texture * LX_Font::drawSolidText_( const UTF8string& text, unsigned int size
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_( const std::string& text, unsigned int size,
-                                        const LX_Colour& bg, LX_Win::LX_Window& w ) noexcept
+                                        const LX_Colour& bg, lx::Win::LX_Window& w ) noexcept
 {
     return drawShadedText_( UTF8string( text ), size, bg, w );
 }
@@ -254,7 +254,7 @@ SDL_Texture * LX_Font::drawShadedText_( const std::string& text, unsigned int si
 *   @return An valid pointer to a texture, NULL otherwise.
 */
 SDL_Texture * LX_Font::drawShadedText_( const UTF8string& text, unsigned int size,
-                                        const LX_Colour& bg, LX_Win::LX_Window& w ) noexcept
+                                        const LX_Colour& bg, lx::Win::LX_Window& w ) noexcept
 {
     SDL_Surface * s = _fimpl->drawText_( LX_TTF_TypeText::LX_TTF_SHADED, text, size, bg );
 
@@ -272,7 +272,7 @@ SDL_Texture * LX_Font::drawShadedText_( const UTF8string& text, unsigned int siz
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_( const std::string& text, unsigned int size,
-        LX_Win::LX_Window& w ) noexcept
+        lx::Win::LX_Window& w ) noexcept
 {
     return drawBlendedText_( UTF8string( text ), size, w );
 }
@@ -282,7 +282,7 @@ SDL_Texture * LX_Font::drawBlendedText_( const std::string& text, unsigned int s
 *   @return An valid pointer to a texture, *nullptr* otherwise.
 */
 SDL_Texture * LX_Font::drawBlendedText_( const UTF8string& text, unsigned int size,
-        LX_Win::LX_Window& w ) noexcept
+        lx::Win::LX_Window& w ) noexcept
 {
     SDL_Surface * s = _fimpl->drawText_( LX_TTF_TypeText::LX_TTF_BLENDED, text, size );
 

@@ -108,7 +108,7 @@ class LX_TextInput_;
 *       // Define and implement a subclass of LX_RedrawCallback
 *       class FuncDraw : public LX_RedrawCallback
 *       {
-*           LX_Win::LX_Window& _w;
+*           lx::Win::LX_Window& _w;
 *           lx::TrueTypeFont::LX_Font _font;
 *
 *       public:

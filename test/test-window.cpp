@@ -8,25 +8,25 @@
 using namespace std;
 using namespace lx::Graphics;
 
-void test_window1(LX_Win::LX_Window *win);
+void test_window1(lx::Win::LX_Window *win);
 void test_window2(void);
-void test_rendering(LX_Win::LX_Window *win);
-void test_image(LX_Win::LX_Window *win);
-void test_winManager(LX_Win::LX_Window *win);
-void test_winInfo(LX_Win::LX_Window *win);
+void test_rendering(lx::Win::LX_Window *win);
+void test_image(lx::Win::LX_Window *win);
+void test_winManager(lx::Win::LX_Window *win);
+void test_winInfo(lx::Win::LX_Window *win);
 void test_opengl();
 void test_opengl2();
-void test_drawing(LX_Win::LX_Window *win);
-void test_viewport(LX_Win::LX_Window *win);
+void test_drawing(lx::Win::LX_Window *win);
+void test_viewport(lx::Win::LX_Window *win);
 
-string winInfoToString(LX_Win::LX_WindowInfo &winfo);
-bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2);
+string winInfoToString(lx::Win::LX_WindowInfo &winfo);
+bool winInfoEqual(lx::Win::LX_WindowInfo &info1, lx::Win::LX_WindowInfo &info2);
 
-LX_Win::LX_WindowInfo info;
+lx::Win::LX_WindowInfo info;
 
 int main(int argc, char **argv)
 {
-    LX_Win::LX_Window *w = nullptr;
+    lx::Win::LX_Window *w = nullptr;
 
     bool err = lx::init();
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     info.h = 600;
     lx::Log::log("Info configuration:\n%s",winInfoToString(info).c_str());
     info.title = "Hello #1";
-    LX_Win::LX_Window *win = new LX_Win::LX_Window(info);
+    lx::Win::LX_Window *win = new lx::Win::LX_Window(info);
     w = win;
 
     test_winInfo(win);
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 }
 
 
-void test_window1(LX_Win::LX_Window *win)
+void test_window1(lx::Win::LX_Window *win)
 {
     lx::Log::log(" = TEST main window = ");
 
@@ -80,15 +80,15 @@ void test_window2(void)
     const int w = 256;
     const int h = 256;
 
-    LX_Win::LX_WindowInfo wi;
-    LX_Win::LX_initWindowInfo(wi);
+    lx::Win::LX_WindowInfo wi;
+    lx::Win::LX_initWindowInfo(wi);
     wi.title = "Hello #2";
     wi.x = 12;
     wi.y = 128;
     wi.w = w;
     wi.h = h;
     wi.flag = SDL_WINDOW_SHOWN;
-    LX_Win::LX_Window win2(wi);
+    lx::Win::LX_Window win2(wi);
 
     lx::Log::log(" = TEST 2 window = ");
 
@@ -107,7 +107,7 @@ void test_window2(void)
 }
 
 
-void test_image(LX_Win::LX_Window *win)
+void test_image(lx::Win::LX_Window *win)
 {
     lx::Log::log(" = TEST LX_Texture = ");
     std::string sp_str = "data/boss.png";
@@ -431,7 +431,7 @@ void test_image(LX_Win::LX_Window *win)
     lx::Log::log(" = END TEST= ");
 }
 
-void test_viewport(LX_Win::LX_Window *win)
+void test_viewport(lx::Win::LX_Window *win)
 {
     lx::Log::log(" = TEST Viewport = ");
 
@@ -486,7 +486,7 @@ void test_viewport(LX_Win::LX_Window *win)
     lx::Log::log(" = END TEST= ");
 }
 
-void test_winManager(LX_Win::LX_Window *win)
+void test_winManager(lx::Win::LX_Window *win)
 {
     lx::Log::log(" = TEST WinManager = ");
     std::string name = "data/bullet.png";
@@ -497,7 +497,7 @@ void test_winManager(LX_Win::LX_Window *win)
     else
         lx::Log::log("SUCCESS - The window exists");
 
-    bool r = LX_Win::getWindowManager().addWindow(*win);
+    bool r = lx::Win::getWindowManager().addWindow(*win);
 
     if(r == false)
         lx::Log::log("FAILURE - cannot add a window: %s", LX_getError());
@@ -505,20 +505,20 @@ void test_winManager(LX_Win::LX_Window *win)
         lx::Log::log("SUCCESS - the window was added into the window manager");
 
 
-    LX_Win::LX_Window& lxw = LX_Win::getWindowManager().getWindow(win->getID());
+    lx::Win::LX_Window& lxw = lx::Win::getWindowManager().getWindow(win->getID());
 
     if(&lxw == win)
         lx::Log::log("SUCCESS - (getWindow) the window is exactly what we added");
     else
         lx::Log::log("FAILURE - (getWindow) the window is not exactly what we added");
 
-    LX_Win::getWindowManager().clearWindows();
+    lx::Win::getWindowManager().clearWindows();
     img.draw();
-    LX_Win::getWindowManager().updateWindows();
+    lx::Win::getWindowManager().updateWindows();
     lx::Time::delay(512);
 
     lx::Log::log("Remove the same window");
-    bool r2 = LX_Win::getWindowManager().removeWindow(win->getID());
+    bool r2 = lx::Win::getWindowManager().removeWindow(win->getID());
 
     if(r2)
         lx::Log::log("SUCCESS - The removed window is exactly what we added");
@@ -526,7 +526,7 @@ void test_winManager(LX_Win::LX_Window *win)
         lx::Log::log("FAILURE - The removed window is not exactly what we added");
 
     lx::Log::log("Remove the same window (again)");
-    bool r3 = LX_Win::getWindowManager().removeWindow(win->getID());
+    bool r3 = lx::Win::getWindowManager().removeWindow(win->getID());
 
     if(!r3)
         lx::Log::log("SUCCESS - false expected");
@@ -537,10 +537,10 @@ void test_winManager(LX_Win::LX_Window *win)
 }
 
 
-void test_winInfo(LX_Win::LX_Window *win)
+void test_winInfo(lx::Win::LX_Window *win)
 {
     lx::Log::log(" = TEST window information = ");
-    LX_Win::LX_WindowInfo info_g;
+    lx::Win::LX_WindowInfo info_g;
     lx::Log::log("Get information");
     win->getInfo(info_g);
 
@@ -558,13 +558,13 @@ void test_winInfo(LX_Win::LX_Window *win)
 void test_opengl()
 {
     lx::Log::log(" = TEST OpenGL #1 = ");
-    LX_Win::LX_WindowInfo winfo;
-    LX_Win::LX_initWindowInfo(winfo);
+    lx::Win::LX_WindowInfo winfo;
+    lx::Win::LX_initWindowInfo(winfo);
     info.title = "OpenGL window #0";
     info.flag = SDL_WINDOW_OPENGL;
 
     {
-        LX_Win::LX_Window w(info);
+        lx::Win::LX_Window w(info);
 
         {
             lx::Log::log("Get an OpengGL function: glClearColor");
@@ -634,10 +634,10 @@ void test_opengl2()
 {
     lx::Log::log(" = TEST OpenGL #2 = ");
 
-    LX_Win::LX_WindowInfo winfo1;
-    LX_Win::LX_WindowInfo winfo2;
-    LX_Win::LX_initWindowInfo(winfo1);
-    LX_Win::LX_initWindowInfo(winfo2);
+    lx::Win::LX_WindowInfo winfo1;
+    lx::Win::LX_WindowInfo winfo2;
+    lx::Win::LX_initWindowInfo(winfo1);
+    lx::Win::LX_initWindowInfo(winfo2);
 
     // Window #1
     winfo1.title = "OpenGL window #1";
@@ -656,8 +656,8 @@ void test_opengl2()
     winfo2.h = 256;
 
     {
-        LX_Win::LX_Window w1(winfo1);
-        LX_Win::LX_Window w2(winfo2);
+        lx::Win::LX_Window w1(winfo1);
+        lx::Win::LX_Window w2(winfo2);
 
         lx::Log::log("Define window #1 as the current OpenGL window");
         if(w1.glMakeCurrent())
@@ -722,7 +722,7 @@ void test_opengl2()
     lx::Log::log(" = END TEST = ");
 }
 
-void test_drawing(LX_Win::LX_Window *win)
+void test_drawing(lx::Win::LX_Window *win)
 {
     lx::Log::log(" = TEST draw = ");
     lx::Log::log("Draw a segment with M(32,32) and N(64,448)");
@@ -824,7 +824,7 @@ void test_drawing(LX_Win::LX_Window *win)
 }
 
 
-string winInfoToString(LX_Win::LX_WindowInfo &winfo)
+string winInfoToString(lx::Win::LX_WindowInfo &winfo)
 {
     ostringstream ss;
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
@@ -835,7 +835,7 @@ string winInfoToString(LX_Win::LX_WindowInfo &winfo)
     return ss.str();
 }
 
-bool winInfoEqual(LX_Win::LX_WindowInfo &info1, LX_Win::LX_WindowInfo &info2)
+bool winInfoEqual(lx::Win::LX_WindowInfo &info1, lx::Win::LX_WindowInfo &info2)
 {
     return (info1.id == info2.id)
            && (info1.title == info2.title)

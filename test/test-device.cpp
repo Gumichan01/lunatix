@@ -126,11 +126,11 @@ void test_haptic(void)
 void test_mouse(void)
 {
     lx::Log::log(" == Test Gamepad == ");
-    LX_Win::LX_WindowInfo info;
-    LX_Win::LX_initWindowInfo(info);
+    lx::Win::LX_WindowInfo info;
+    lx::Win::LX_initWindowInfo(info);
     info.w = 800;
     info.h = 600;
-    LX_Win::LX_Window w(info);
+    lx::Win::LX_Window w(info);
 
     std::string s = "data/bullet.png";
     lx::Log::log("Define %s as the mouse cursor",s.c_str());

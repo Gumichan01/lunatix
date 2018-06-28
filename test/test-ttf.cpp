@@ -91,11 +91,11 @@ void test_SolidText()
     LX_Colour bcolour = {255,255,255, 127};
 
     UTF8string str("がんばつて Gumichan01");
-    LX_Win::LX_WindowInfo winfo;
-    LX_Win::LX_initWindowInfo(winfo);
+    lx::Win::LX_WindowInfo winfo;
+    lx::Win::LX_initWindowInfo(winfo);
     winfo.title = "LunatiX - Test True Type Font - Solid text";
     winfo.w = 1000;
-    LX_Win::LX_Window win(winfo);
+    lx::Win::LX_Window win(winfo);
 
     lx::Log::log("Load a solid text image and display it");
 
@@ -157,11 +157,11 @@ void test_ShadedText()
     LX_Colour bg2 = {64,40,4,164};
 
     UTF8string str("がんばつて Gumichan01");
-    LX_Win::LX_WindowInfo winfo;
-    LX_Win::LX_initWindowInfo(winfo);
+    lx::Win::LX_WindowInfo winfo;
+    lx::Win::LX_initWindowInfo(winfo);
     winfo.title = "LunatiX - Test True Type Font - Shaded text";
     winfo.w = 1000;
-    LX_Win::LX_Window win(winfo);
+    lx::Win::LX_Window win(winfo);
     LX_Font font(fname,colour,32);
 
     lx::Log::log("Load a shaded text image and display it");
@@ -223,11 +223,11 @@ void test_BlendedText()
     LX_Colour colour = {255,255,255,127};
 
     UTF8string str("がんばつて Gumichan01");
-    LX_Win::LX_WindowInfo winfo;
-    LX_Win::LX_initWindowInfo(winfo);
+    lx::Win::LX_WindowInfo winfo;
+    lx::Win::LX_initWindowInfo(winfo);
     winfo.title = "LunatiX - Test True Type Font - Blended text";
     winfo.w = 1000;
-    LX_Win::LX_Window win(winfo);
+    lx::Win::LX_Window win(winfo);
     LX_Font font(fname,colour, 32);
 
     lx::Log::log("Load a blended text image and display it");

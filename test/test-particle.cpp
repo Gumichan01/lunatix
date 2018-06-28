@@ -128,12 +128,12 @@ int main(int argc, char **argv)
     lx::Log::setDebugMode();
     lx::Log::log(" ==== Test Particle ==== \n");
 
-    LX_Win::LX_WindowInfo winfo;
-    LX_Win::LX_loadWindowConfig(winfo);
+    lx::Win::LX_WindowInfo winfo;
+    lx::Win::LX_loadWindowConfig(winfo);
     winfo.title = "Test particle";
 
-    LX_Win::LX_Window w(winfo);
-    LX_Win::getWindowManager().addWindow(w);
+    lx::Win::LX_Window w(winfo);
+    lx::Win::getWindowManager().addWindow(w);
 
     try
     {
@@ -166,13 +166,13 @@ int main(int argc, char **argv)
                 go = 0;
         }
 
-        LX_Win::getWindowManager().clearWindows();
+        lx::Win::getWindowManager().clearWindows();
         dot->update();
-        LX_Win::getWindowManager().updateWindows();
+        lx::Win::getWindowManager().updateWindows();
         lx::Time::delay(16);
     }
 
-    LX_Win::getWindowManager().removeWindow(0);
+    lx::Win::getWindowManager().removeWindow(0);
     lx::Log::log("End of program");
 
     delete dot;

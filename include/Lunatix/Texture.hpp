@@ -33,13 +33,25 @@
 struct SDL_Surface;
 struct SDL_Texture;
 
-namespace LX_Win
-{
-class LX_Window;
-}
+
 
 namespace lx
 {
+
+
+
+}
+
+
+namespace lx
+{
+
+//  Forward declaration
+
+namespace Win
+{
+class LX_Window;
+}
 
 namespace Device
 {
@@ -56,11 +68,7 @@ namespace FileIO
 class LX_FileBuffer;
 }
 
-}
-
-
-namespace lx
-{
+//  Forward declaration (END)
 
 namespace Graphics
 {
@@ -114,17 +122,17 @@ class LX_Texture
 protected:
 
     SDL_Texture * _texture;
-    LX_Win::LX_Window& _win;
+    lx::Win::LX_Window& _win;
     LX_PixelFormat _format;
 
-    LX_Texture( LX_Win::LX_Window& w, LX_PixelFormat format );
-    LX_Texture( SDL_Texture * t, LX_Win::LX_Window& w,
+    LX_Texture( lx::Win::LX_Window& w, LX_PixelFormat format );
+    LX_Texture( SDL_Texture * t, lx::Win::LX_Window& w,
                 LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
-    LX_Texture( const std::string& filename, LX_Win::LX_Window& w,
+    LX_Texture( const std::string& filename, lx::Win::LX_Window& w,
                 LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
-    LX_Texture( const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_Texture( const UTF8string& filename, lx::Win::LX_Window& w,
                 LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 public:
 
@@ -172,11 +180,11 @@ public:
     bool unbind() noexcept;
 
     /**
-    *   @fn LX_Win::LX_Window& getWindow() const noexcept
+    *   @fn lx::Win::LX_Window& getWindow() const noexcept
     *   Get the window where the texture is drawn on
     *   @return The window
     */
-    LX_Win::LX_Window& getWindow() const noexcept;
+    lx::Win::LX_Window& getWindow() const noexcept;
     /**
     *   @fn LX_PixelFormat getFormat() const noexcept
     *   Get the format of the texture
@@ -201,7 +209,7 @@ class LX_Sprite: public LX_Texture
 
 protected:
 
-    LX_Sprite( SDL_Texture * t, LX_Win::LX_Window& w, const UTF8string& filename,
+    LX_Sprite( SDL_Texture * t, lx::Win::LX_Window& w, const UTF8string& filename,
                const LX_ImgRect& img_rect,
                LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
@@ -210,23 +218,23 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite( const std::string& filename, LX_Win::LX_Window& w,
+    LX_Sprite( const std::string& filename, lx::Win::LX_Window& w,
                LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite( const std::string& filename, LX_Win::LX_Window& w,
+    LX_Sprite( const std::string& filename, lx::Win::LX_Window& w,
                const LX_ImgRect& img_rect,
                LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite( const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_Sprite( const UTF8string& filename, lx::Win::LX_Window& w,
                LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite( const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_Sprite( const UTF8string& filename, lx::Win::LX_Window& w,
                const LX_ImgRect& img_rect,
                LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
@@ -305,7 +313,7 @@ class LX_AnimatedSprite final : public LX_Sprite
     bool _loop;         // TRUE: Infinite loop - FALSE: one loop
     bool _drawable;
 
-    LX_AnimatedSprite( SDL_Texture * t, LX_Win::LX_Window& w,
+    LX_AnimatedSprite( SDL_Texture * t, lx::Win::LX_Window& w,
                        const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                        bool loop, const UTF8string& filename,
                        LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
@@ -313,7 +321,7 @@ class LX_AnimatedSprite final : public LX_Sprite
 public:
 
     /**
-    *   @fn LX_AnimatedSprite(const std::string& filename, LX_Win::LX_Window& w,
+    *   @fn LX_AnimatedSprite(const std::string& filename, lx::Win::LX_Window& w,
     *                        const std::vector<LX_ImgRect>& coord, const uint32_t delay,
     *                        bool loop, LX_PixelFormat format = LX_PixelFormat::RGBA8888)
     *
@@ -331,13 +339,13 @@ public:
     *   @sa LX_Sprite
     *   @sa LX_Texture
     */
-    LX_AnimatedSprite( const std::string& filename, LX_Win::LX_Window& w,
+    LX_AnimatedSprite( const std::string& filename, lx::Win::LX_Window& w,
                        const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                        bool loop, LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_AnimatedSprite( const UTF8string& filename, LX_Win::LX_Window& w,
+    LX_AnimatedSprite( const UTF8string& filename, lx::Win::LX_Window& w,
                        const std::vector<LX_ImgRect>& coord, const uint32_t delay,
                        bool loop, LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
@@ -384,7 +392,7 @@ class LX_BufferedImage final
     friend class LX_StreamingTexture;
     friend class lx::Device::LX_Mouse;
     friend class lx::FileIO::LX_FileBuffer;
-    friend class LX_Win::LX_Window;
+    friend class lx::Win::LX_Window;
 
     SDL_Surface * _surface = nullptr;
     UTF8string _filename{""};
@@ -430,7 +438,7 @@ public:
     LX_BufferedImage& convertNegative() noexcept;
 
     /**
-    *   @fn LX_Sprite * generateSprite(LX_Win::LX_Window& w, const LX_ImgRect& area) const
+    *   @fn LX_Sprite * generateSprite(lx::Win::LX_Window& w, const LX_ImgRect& area) const
     *   Create a sprite from the current buffered image
     *
     *   @param [in] w The window to link the sprite to → see *draw()*
@@ -438,10 +446,10 @@ public:
     *   @return A new fresh allocated sprite on success, *nullptr* otherwise
     *   @exception LX_ImageException On failure
     */
-    LX_Sprite * generateSprite( LX_Win::LX_Window& w,
+    LX_Sprite * generateSprite( lx::Win::LX_Window& w,
                                 const LX_ImgRect& area = RNULL ) const;
     /**
-    *   @fn LX_AnimatedSprite * generateAnimatedSprite(LX_Win::LX_Window& w,
+    *   @fn LX_AnimatedSprite * generateAnimatedSprite(lx::Win::LX_Window& w,
     *                                   const std::vector<LX_ImgRect>& coord,
     *                                   const uint32_t delay) const
     *
@@ -456,7 +464,7 @@ public:
     *   @exception LX_ImageException On failure
     */
     LX_AnimatedSprite *
-    generateAnimatedSprite( LX_Win::LX_Window& w,
+    generateAnimatedSprite( lx::Win::LX_Window& w,
                             const std::vector<LX_ImgRect>& coord,
                             const uint32_t delay, bool loop ) const;
 
@@ -490,7 +498,7 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_StreamingTexture( LX_Win::LX_Window& w,
+    LX_StreamingTexture( lx::Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     /**
@@ -538,23 +546,23 @@ protected:
 
     virtual void updateTexture_() noexcept = 0;
 
-    LX_TextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_TextTexture( lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     LX_TextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
-                    LX_Win::LX_Window& w,
+                    lx::Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     LX_TextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
-                    LX_Win::LX_Window& w,
+                    lx::Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     LX_TextTexture( const std::string& text, unsigned int sz,
-                    lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     LX_TextTexture( const UTF8string& text, unsigned int sz,
-                    lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                    lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                     LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
 public:
@@ -724,31 +732,31 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_SolidTextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_SolidTextTexture( lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_SolidTextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
-                         LX_Win::LX_Window& w,
+                         lx::Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_SolidTextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
-                         LX_Win::LX_Window& w,
+                         lx::Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_SolidTextTexture( const std::string& text, unsigned int sz,
-                         lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                         lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_SolidTextTexture( const UTF8string& text, unsigned int sz,
-                         lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                         lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                          LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     ~LX_SolidTextTexture() = default;
@@ -786,33 +794,33 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_ShadedTextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_ShadedTextTexture( lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_ShadedTextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
-                          const LX_Colour& bg, LX_Win::LX_Window& w,
+                          const LX_Colour& bg, lx::Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_ShadedTextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
-                          const LX_Colour& bg, LX_Win::LX_Window& w,
+                          const LX_Colour& bg, lx::Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_ShadedTextTexture( const std::string& text, unsigned int sz,
                           lx::TrueTypeFont::LX_Font& font, const LX_Colour& bg,
-                          LX_Win::LX_Window& w,
+                          lx::Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_ShadedTextTexture( const UTF8string& text, unsigned int sz,
                           lx::TrueTypeFont::LX_Font& font, const LX_Colour& bg,
-                          LX_Win::LX_Window& w,
+                          lx::Win::LX_Window& w,
                           LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     /**
@@ -857,31 +865,31 @@ public:
     /**
     *   @exception LX_ImageException On failure
     */
-    LX_BlendedTextTexture( lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+    LX_BlendedTextTexture( lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_BlendedTextTexture( const std::string& text, lx::TrueTypeFont::LX_Font& font,
-                           LX_Win::LX_Window& w,
+                           lx::Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_BlendedTextTexture( const UTF8string& text, lx::TrueTypeFont::LX_Font& font,
-                           LX_Win::LX_Window& w,
+                           lx::Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_BlendedTextTexture( const std::string& text, unsigned int sz,
-                           lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
     /**
     *   @exception LX_ImageException On failure
     */
     LX_BlendedTextTexture( const UTF8string& text, unsigned int sz,
-                           lx::TrueTypeFont::LX_Font& font, LX_Win::LX_Window& w,
+                           lx::TrueTypeFont::LX_Font& font, lx::Win::LX_Window& w,
                            LX_PixelFormat format = LX_PixelFormat::RGBA8888 );
 
     ~LX_BlendedTextTexture() = default;

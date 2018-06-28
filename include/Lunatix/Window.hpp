@@ -60,19 +60,17 @@ struct LX_Vector2D;
 /// end
 }
 
-}
-
 
 /**
 *   @ingroup Graphics
-*   @namespace LX_Win
+*   @namespace lx::Win
 *   @brief The window namespace
 *
 *   @warning In order to use this namespace, the *video* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 */
-namespace LX_Win
+namespace Win
 {
 
 enum class LX_WinMode
@@ -509,6 +507,8 @@ public:
     ~LX_Window();
 };
 
-}
+}   // Window
+
+}   // lx
 
 #endif // LX_WINDOW_H_INCLUDED

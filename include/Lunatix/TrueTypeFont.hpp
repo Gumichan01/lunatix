@@ -28,19 +28,20 @@
 struct SDL_Surface;
 struct SDL_Texture;
 
-namespace LX_Win
-{
-class LX_Window;
-}
-
 
 namespace lx
 {
+
+namespace Win
+{
+class LX_Window;
+}
 
 namespace FileIO
 {
 class LX_FileBuffer;
 }
+
 
 namespace Graphics
 {
@@ -93,19 +94,19 @@ class LX_Font final
                      int& w, int& h ) const noexcept;
 
     SDL_Texture * drawSolidText_( const std::string& text, unsigned int size,
-                                  LX_Win::LX_Window& w ) noexcept;
+                                  lx::Win::LX_Window& w ) noexcept;
     SDL_Texture * drawSolidText_( const UTF8string& text, unsigned int size,
-                                  LX_Win::LX_Window& w ) noexcept;
+                                  lx::Win::LX_Window& w ) noexcept;
 
     SDL_Texture * drawShadedText_( const std::string& text, unsigned int size,
-                                   const LX_Colour& bg, LX_Win::LX_Window& w ) noexcept;
+                                   const LX_Colour& bg, lx::Win::LX_Window& w ) noexcept;
     SDL_Texture * drawShadedText_( const UTF8string& text, unsigned int size,
-                                   const LX_Colour& bg, LX_Win::LX_Window& w ) noexcept;
+                                   const LX_Colour& bg, lx::Win::LX_Window& w ) noexcept;
 
     SDL_Texture * drawBlendedText_( const std::string& text, unsigned int size,
-                                    LX_Win::LX_Window& w ) noexcept;
+                                    lx::Win::LX_Window& w ) noexcept;
     SDL_Texture * drawBlendedText_( const UTF8string& text, unsigned int size,
-                                    LX_Win::LX_Window& w ) noexcept;
+                                    lx::Win::LX_Window& w ) noexcept;
 
     const LX_Colour getColour_() const noexcept;
     unsigned int getSize_() const noexcept;

@@ -17,9 +17,9 @@ int main(int argc, char **argv)
     lx::init();
     lx::Log::setDebugMode();
 
-    LX_Win::LX_WindowInfo winfo;
-    LX_Win::LX_initWindowInfo(winfo);
-    LX_Win::LX_Window w(winfo);
+    lx::Win::LX_WindowInfo winfo;
+    lx::Win::LX_initWindowInfo(winfo);
+    lx::Win::LX_Window w(winfo);
 
     int pads = numberOfDevices();
 

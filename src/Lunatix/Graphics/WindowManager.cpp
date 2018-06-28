@@ -23,8 +23,10 @@
 
 #include <unordered_map>
 
+namespace lx
+{
 
-namespace LX_Win
+namespace Win
 {
 
 LX_WindowNotFoundException::LX_WindowNotFoundException( const std::string& err )
@@ -40,7 +42,7 @@ const char * LX_WindowNotFoundException::what() const noexcept
 
 struct LX_WM_ final
 {
-    std::unordered_map<uint32_t, LX_Win::LX_Window&> windows{};
+    std::unordered_map<uint32_t, LX_Window&> windows{};
 };
 
 LX_WindowManager& getWindowManager() noexcept
@@ -120,4 +122,6 @@ LX_Window& LX_WindowManager::getWindow( const uint32_t id ) const
     return it->second;
 }
 
-}
+}   // Win
+
+}  // lx

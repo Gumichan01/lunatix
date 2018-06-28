@@ -12,12 +12,12 @@ void generateInput();
 
 class FuncDraw : public virtual lx::Text::LX_RedrawCallback
 {
-    LX_Win::LX_Window& _w;
+    lx::Win::LX_Window& _w;
     lx::TrueTypeFont::LX_Font _font;
 
 public:
 
-    explicit FuncDraw(LX_Win::LX_Window& win)
+    explicit FuncDraw(lx::Win::LX_Window& win)
         : lx::Text::LX_RedrawCallback(), _w(win), _font(fname, COLOUR, 32) {}
 
     void operator ()(UTF8string& u8str, UTF8string& u8comp, bool update,
@@ -110,9 +110,9 @@ void generateInput()
 
 int main(int argc, char** argv)
 {
-    LX_Win::LX_WindowInfo info;
-    LX_Win::LX_initWindowInfo(info);
-    LX_Win::LX_loadWindowConfig(info);
+    lx::Win::LX_WindowInfo info;
+    lx::Win::LX_initWindowInfo(info);
+    lx::Win::LX_loadWindowConfig(info);
 
     lx::init();
     lx::Log::setDebugMode(true);
@@ -120,7 +120,7 @@ int main(int argc, char** argv)
 
     try
     {
-        LX_Win::LX_Window win(info);
+        lx::Win::LX_Window win(info);
         win.clearWindow();
         win.update();
         // Text input

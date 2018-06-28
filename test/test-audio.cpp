@@ -48,11 +48,11 @@ void test_info(const std::string& s)
 
     try
     {
-        LX_Win::LX_WindowInfo info;
-        LX_Win::LX_initWindowInfo(info);
+        lx::Win::LX_WindowInfo info;
+        lx::Win::LX_initWindowInfo(info);
         info.w = 256;
         info.h = 256;
-        LX_Win::LX_Window w(info);
+        lx::Win::LX_Window w(info);
 
         if(tag.img != nullptr)
         {
