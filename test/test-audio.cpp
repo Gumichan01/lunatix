@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
 void test_info(const std::string& s)
 {
-    const LX_Mixer::LX_MusicTag tag = LX_Mixer::getMusicInfoFrom(s);
+    const lx::Mixer::LX_MusicTag tag = lx::Mixer::getMusicInfoFrom(s);
 
     try
     {
@@ -149,7 +149,7 @@ void test_audioInit()
                             j,Mix_GetMusicDecoder(j));
         }
 
-        lx::Log::logInfo(lx::Log::TEST,"Allocated channel(s): %d",LX_Mixer::allocateChannels(-1));
+        lx::Log::logInfo(lx::Log::TEST,"Allocated channel(s): %d",lx::Mixer::allocateChannels(-1));
     }
 
     lx::Log::logInfo(lx::Log::APPLICATION," = END TEST = ");
@@ -159,63 +159,63 @@ void test_channels()
 {
     const int N = 32;
     lx::Log::logInfo(lx::Log::APPLICATION," = TEST channels = ");
-    lx::Log::logInfo(lx::Log::APPLICATION,"%d channel(s)",LX_Mixer::allocateChannels(-1));
+    lx::Log::logInfo(lx::Log::APPLICATION,"%d channel(s)",lx::Mixer::allocateChannels(-1));
     lx::Log::logInfo(lx::Log::APPLICATION,"Trying to get %d channels",N);
 
-    int res = LX_Mixer::allocateChannels(N);
+    int res = lx::Mixer::allocateChannels(N);
 
     if(res == N)
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - %d channel(s)",
-                        LX_Mixer::allocateChannels(-1));
+                        lx::Mixer::allocateChannels(-1));
     else
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - expected: %d; got: %d",
                         N,res);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Trying to reserve channels from 0 to 7 in group 1");
-    LX_Mixer::groupChannels(0,7,1);
+    lx::Mixer::groupChannels(0,7,1);
     lx::Log::logInfo(lx::Log::APPLICATION,"Trying to reserve channels from 9 to 15 in group 2");
-    LX_Mixer::groupChannels(8,15,2);
-    int g1 = LX_Mixer::groupCount(1);
-    int g2 = LX_Mixer::groupCount(2);
+    lx::Mixer::groupChannels(8,15,2);
+    int g1 = lx::Mixer::groupCount(1);
+    int g2 = lx::Mixer::groupCount(2);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"In group 1: %d channel(s)",g1);
     lx::Log::logInfo(lx::Log::APPLICATION,"In group 2: %d channel(s)",g2);
 
     const int M = 24;
     lx::Log::logInfo(lx::Log::APPLICATION,"Try to reserve %d channel(s)",M);
-    int r1 = LX_Mixer::reserveChannels(M);
+    int r1 = lx::Mixer::reserveChannels(M);
     lx::Log::logInfo(lx::Log::APPLICATION,"Reserved: %d channel(s)",r1);
 
     // PLay a chunk in a specific channel
     std::string sc = "data/explosion.wav";
-    LX_Mixer::LX_Chunk chunk(sc);
+    lx::Mixer::LX_Chunk chunk(sc);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Available channel before playing: %d",
-                    LX_Mixer::channelAvailable(1));
+                    lx::Mixer::channelAvailable(1));
     lx::Log::logInfo(lx::Log::APPLICATION,"Available channel before playing: %d",
-                    LX_Mixer::channelAvailable(2));
+                    lx::Mixer::channelAvailable(2));
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Playing a chunk in the 2 groups");
-    LX_Mixer::groupPlayChunk(chunk,1);
-    LX_Mixer::groupPlayChunk(chunk,2);
+    lx::Mixer::groupPlayChunk(chunk,1);
+    lx::Mixer::groupPlayChunk(chunk,2);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Available channel (grp 1): %d",
-                    LX_Mixer::channelAvailable(1));
+                    lx::Mixer::channelAvailable(1));
     lx::Log::logInfo(lx::Log::APPLICATION,"Available channel (grp 2): %d",
-                    LX_Mixer::channelAvailable(2));
+                    lx::Mixer::channelAvailable(2));
 
     lx::Time::delay(2000);
     lx::Log::logInfo(lx::Log::APPLICATION,"Done");
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Reset");
-    r1 = LX_Mixer::reserveChannels(0);
+    r1 = lx::Mixer::reserveChannels(0);
     lx::Log::logInfo(lx::Log::APPLICATION,"Reserved: %d channel(s)",r1);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Reset the groups");
-    int g3 = LX_Mixer::groupChannels(0,15,-1);
+    int g3 = lx::Mixer::groupChannels(0,15,-1);
     lx::Log::logInfo(lx::Log::APPLICATION,"Reset: %d channel(s)",g3);
 
-    LX_Mixer::allocateChannels(8);
+    lx::Mixer::allocateChannels(8);
     lx::Log::logInfo(lx::Log::APPLICATION," = END TEST = ");
 }
 
@@ -229,9 +229,9 @@ void test_music()
 
     try
     {
-        LX_Mixer::LX_Music music(s);
+        lx::Mixer::LX_Music music(s);
     }
-    catch(LX_Mixer::LX_MixerException& se)
+    catch(lx::Mixer::LX_MixerException& se)
     {
         lx::Log::log("mp3 file not loaded");
         lx::Log::log("%s", se.what());
@@ -241,7 +241,7 @@ void test_music()
 
     try
     {
-        LX_Mixer::LX_Music music(sm);
+        lx::Mixer::LX_Music music(sm);
         lx::Log::log("SUCCESS - Loaded");
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - music loaded");
@@ -298,7 +298,7 @@ void test_music()
         music.fadeOut(1000);
         lx::Log::logCritical(lx::Log::APPLICATION,"DANGER ZONE OUT");
     }
-    catch(LX_Mixer::LX_MixerException& se)
+    catch(lx::Mixer::LX_MixerException& se)
     {
         lx::Log::log("FAILURE - not loaded");
         lx::Log::log("%s", se.what());
@@ -308,11 +308,11 @@ void test_music()
 
     try
     {
-        LX_Mixer::LX_Music *mus = new LX_Mixer::LX_Music(std::string());
+        lx::Mixer::LX_Music *mus = new lx::Mixer::LX_Music(std::string());
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - music launched, it should not");
         delete mus;
     }
-    catch(LX_Mixer::LX_MixerException& se)
+    catch(lx::Mixer::LX_MixerException& se)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - music: not launched as expected");
         lx::Log::log("%s", se.what());
@@ -326,13 +326,13 @@ void test_chunk()
     lx::Log::logInfo(lx::Log::APPLICATION," = TEST chunk = ");
 
     std::string s = "data/explosion.wav";
-    LX_Mixer::LX_Chunk *chunk = nullptr;
+    lx::Mixer::LX_Chunk *chunk = nullptr;
 
     lx::Log::logInfo(lx::Log::TEST,"Launch music: %s",s.c_str());
 
     try
     {
-        chunk = new LX_Mixer::LX_Chunk(s);
+        chunk = new lx::Mixer::LX_Chunk(s);
         lx::Log::log("SUCCESS - Loaded");
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - chunk launched");
@@ -366,7 +366,7 @@ void test_chunk()
         lx::Time::delay(9000);
         delete chunk;
     }
-    catch(LX_Mixer::LX_MixerException& se)
+    catch(lx::Mixer::LX_MixerException& se)
     {
         lx::Log::log("FAILURE - not loaded");
         lx::Log::log("%s", se.what());
@@ -376,11 +376,11 @@ void test_chunk()
 
     try
     {
-        chunk = new LX_Mixer::LX_Chunk(std::string());
+        chunk = new lx::Mixer::LX_Chunk(std::string());
         lx::Log::log("FAILURE - loaded, but it should not be");
         delete chunk;
     }
-    catch(LX_Mixer::LX_MixerException& se)
+    catch(lx::Mixer::LX_MixerException& se)
     {
         lx::Log::log("SUCCESS - not loaded, as expected");
         lx::Log::log("%s", se.what());
@@ -395,14 +395,14 @@ void test_effects()
     std::string sm = "data/01.ogg";
     std::string sc = "data/explosion.wav";
     int chan = 5;
-    LX_Mixer::LX_Music music(sm);
-    LX_Mixer::LX_Chunk chunk(sc);
+    lx::Mixer::LX_Music music(sm);
+    lx::Mixer::LX_Chunk chunk(sc);
 
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"combine effects in a group");
-        LX_Mixer::allocateChannels(255);
-        LX_Mixer::groupChannels(1, 32, 64);
-        LX_Mixer::LX_MixerEffect effect;
+        lx::Mixer::allocateChannels(255);
+        lx::Mixer::groupChannels(1, 32, 64);
+        lx::Mixer::LX_MixerEffect effect;
         effect.type.panning = true;
         effect.type.distance = true;
         effect.type.reverse_stereo = true;
@@ -414,102 +414,102 @@ void test_effects()
 
         while(effect.pan_left < 255)
         {
-            LX_Mixer::groupPlayChunk(chunk, 64, effect);
+            lx::Mixer::groupPlayChunk(chunk, 64, effect);
             lx::Time::delay(17);
             effect.pan_left++;
             effect.pan_right--;
         }
 
-        LX_Mixer::groupChannels(1, 32, -1);
-        LX_Mixer::allocateChannels(8);
+        lx::Mixer::groupChannels(1, 32, -1);
+        lx::Mixer::allocateChannels(8);
     }
 
     lx::Log::logInfo(lx::Log::TEST,"music: fade in effect");
-    LX_Mixer::fadeInMusic(music,1000);
+    lx::Mixer::fadeInMusic(music,1000);
     lx::Time::delay(2000);
 
     // play chunk during the music
-    int fxv = LX_Mixer::getFXVolume();
+    int fxv = lx::Mixer::getFXVolume();
     lx::Log::logInfo(lx::Log::TEST,"chunk: left on channel %d", chan);
-    LX_Mixer::setFXVolume(fxv/3);
-    LX_Mixer::setPanning(chan,255,0);
+    lx::Mixer::setFXVolume(fxv/3);
+    lx::Mixer::setPanning(chan,255,0);
     chunk.play(chan);
     lx::Time::delay(2000);
-    LX_Mixer::setFXVolume(fxv);
+    lx::Mixer::setFXVolume(fxv);
 
     lx::Log::logInfo(lx::Log::TEST,"music: fade out effect");
-    LX_Mixer::fadeOutMusic(1000);
+    lx::Mixer::fadeOutMusic(1000);
     lx::Time::delay(2000);
 
-    LX_Mixer::removePanning();
+    lx::Mixer::removePanning();
     lx::Log::logInfo(lx::Log::TEST,"chunk: no effect");
     chunk.play();
     lx::Time::delay(1000);
 
     // Left
     lx::Log::logInfo(lx::Log::TEST,"chunk: panning effect: left");
-    LX_Mixer::setPanning(255,0);
+    lx::Mixer::setPanning(255,0);
     chunk.play();
     lx::Time::delay(500);
 
     // Right
     lx::Log::logInfo(lx::Log::TEST,"chunk: panning effect: right");
-    LX_Mixer::setPanning(0,255);
+    lx::Mixer::setPanning(0,255);
     chunk.play();
     lx::Time::delay(1000);
-    LX_Mixer::removePanning();
+    lx::Mixer::removePanning();
 
     lx::Log::logInfo(lx::Log::TEST,"music: position");
     lx::Log::logInfo(lx::Log::TEST,"music: position 60°, no distance");
-    LX_Mixer::setPosition(60);
+    lx::Mixer::setPosition(60);
     music.play();
     lx::Time::delay(4000);
     lx::Log::logInfo(lx::Log::TEST,"music: position 270°, no distance");
-    LX_Mixer::setPosition(270);
+    lx::Mixer::setPosition(270);
     lx::Time::delay(4000);
 
     lx::Log::logInfo(lx::Log::TEST,"music: position 180°, no distance");
-    LX_Mixer::setPosition(180);
+    lx::Mixer::setPosition(180);
     lx::Time::delay(4000);
 
     lx::Log::logInfo(lx::Log::TEST,"music: position 60°, distance: 64");
-    LX_Mixer::setPosition(60, 64);
+    lx::Mixer::setPosition(60, 64);
     lx::Time::delay(4000);
 
     lx::Log::logInfo(lx::Log::TEST,"music: position 270°, distance: 128");
-    LX_Mixer::setPosition(270, 128);
+    lx::Mixer::setPosition(270, 128);
     lx::Time::delay(4000);
 
     lx::Log::logInfo(lx::Log::TEST,"music: reverseStereo");
-    LX_Mixer::reverseStereo(true);
+    lx::Mixer::reverseStereo(true);
     lx::Time::delay(4000);
     lx::Log::logInfo(lx::Log::TEST,"music: reverseStereo (reset)");
-    LX_Mixer::reverseStereo(false);
+    lx::Mixer::reverseStereo(false);
     lx::Time::delay(4000);
 
     lx::Log::logInfo(lx::Log::TEST,"music: position 180°, distance: 4");
-    LX_Mixer::setPosition(180, 4);
+    lx::Mixer::setPosition(180, 4);
     lx::Time::delay(4000);
 
-    LX_Mixer::resetPosition();
+    lx::Mixer::resetPosition();
     lx::Log::logInfo(lx::Log::TEST,"music: dynamic position effect");
     lx::Time::delay(1000);
 
     for(Sint16 k = 0; k < 360; k += 2)
     {
         lx::Log::logInfo(lx::Log::TEST,"music: position %d",k);
-        LX_Mixer::setPosition(k);
+        lx::Mixer::setPosition(k);
         lx::Time::delay(100);
     }
 
-    LX_Mixer::resetPosition();
+    lx::Mixer::resetPosition();
     lx::Log::logInfo(lx::Log::TEST,"music: dynamic distance effect");
     lx::Time::delay(1000);
 
     for(Uint8 i = 0; i < 254; i += 2)
     {
         lx::Log::logInfo(lx::Log::TEST,"music: distance %d",i);
-        LX_Mixer::setDistance(i);
+        lx::Mixer::setDistance(i);
         lx::Time::delay(100);
     }
 
@@ -517,14 +517,14 @@ void test_effects()
     do
     {
         lx::Log::logInfo(lx::Log::TEST,"music: distance %d",j);
-        LX_Mixer::setDistance(j);
+        lx::Mixer::setDistance(j);
         j -= 1;
         lx::Time::delay(33);
     }
     while(j > 0);
 
     lx::Log::logInfo(lx::Log::TEST,"music: fade out effect (again)");
-    LX_Mixer::fadeOutMusic(2560);
+    lx::Mixer::fadeOutMusic(2560);
     lx::Time::delay(3000);
     music.stop();
 
@@ -542,16 +542,16 @@ void test_volume()
     test_volume_(XVOLUME);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"set overall volume to %d",XVOLUME2);
-    LX_Mixer::setOverallVolume(XVOLUME2);
+    lx::Mixer::setOverallVolume(XVOLUME2);
     test_volume_(XVOLUME2);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"set music volume to %d%%",XVOLUME3);
-    LX_Mixer::setMusicVolume(XVOLUME3);
-    lx::Log::logInfo(lx::Log::TEST,"overall volume: %d",LX_Mixer::getOverallVolume());
-    lx::Log::logInfo(lx::Log::TEST,"music volume: %d",LX_Mixer::getMusicVolume());
-    lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",LX_Mixer::getFXVolume());
+    lx::Mixer::setMusicVolume(XVOLUME3);
+    lx::Log::logInfo(lx::Log::TEST,"overall volume: %d",lx::Mixer::getOverallVolume());
+    lx::Log::logInfo(lx::Log::TEST,"music volume: %d",lx::Mixer::getMusicVolume());
+    lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",lx::Mixer::getFXVolume());
 
-    unsigned short mv = LX_Mixer::getMusicVolume();
+    unsigned short mv = lx::Mixer::getMusicVolume();
     unsigned short ex = XVOLUME2 / XVOLUME3;
     if(mv != ex)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - music volume expected: %d; got: %d",
@@ -560,12 +560,12 @@ void test_volume()
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - music volume: %d",ex);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"set fx volume to %d%%",XVOLUME4);
-    LX_Mixer::setFXVolume(XVOLUME4);
-    lx::Log::logInfo(lx::Log::TEST,"overall volume: %d",LX_Mixer::getOverallVolume());
-    lx::Log::logInfo(lx::Log::TEST,"music volume: %d",LX_Mixer::getMusicVolume());
-    lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",LX_Mixer::getFXVolume());
+    lx::Mixer::setFXVolume(XVOLUME4);
+    lx::Log::logInfo(lx::Log::TEST,"overall volume: %d",lx::Mixer::getOverallVolume());
+    lx::Log::logInfo(lx::Log::TEST,"music volume: %d",lx::Mixer::getMusicVolume());
+    lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",lx::Mixer::getFXVolume());
 
-    unsigned short fxv = LX_Mixer::getFXVolume();
+    unsigned short fxv = lx::Mixer::getFXVolume();
     unsigned short ex2 = XVOLUME2 / 2;
     if(fxv != ex2)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - FX volume expected: %d; got: %d",
@@ -574,10 +574,10 @@ void test_volume()
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - FX volume: %d",ex2);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"set overall volume to %d",XVOLUME);
-    LX_Mixer::setOverallVolume(XVOLUME);
+    lx::Mixer::setOverallVolume(XVOLUME);
 
-    mv  = LX_Mixer::getMusicVolume();
-    fxv = LX_Mixer::getFXVolume();
+    mv  = lx::Mixer::getMusicVolume();
+    fxv = lx::Mixer::getFXVolume();
     ex  *= 2;
     ex2 *= 2;
 
@@ -598,9 +598,9 @@ void test_volume()
 
 void test_volume_(const unsigned ex)
 {
-    unsigned short ov = LX_Mixer::getOverallVolume();
-    unsigned short mv = LX_Mixer::getMusicVolume();
-    unsigned short fxv = LX_Mixer::getFXVolume();
+    unsigned short ov = lx::Mixer::getOverallVolume();
+    unsigned short mv = lx::Mixer::getMusicVolume();
+    unsigned short fxv = lx::Mixer::getFXVolume();
 
     // Overall
     if(ov != ex)
@@ -628,37 +628,37 @@ void test_volume2()
 {
     lx::Log::logInfo(lx::Log::APPLICATION," = TEST volume 2 = ");
 
-    LX_Mixer::setOverallVolume(100);
-    LX_Mixer::setMusicVolume(100);
-    LX_Mixer::setFXVolume(100);
-    lx::Log::logInfo(lx::Log::TEST,"overall volume: %d",LX_Mixer::getOverallVolume());
-    lx::Log::logInfo(lx::Log::TEST,"music volume: %d",LX_Mixer::getMusicVolume());
-    lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",LX_Mixer::getFXVolume());
+    lx::Mixer::setOverallVolume(100);
+    lx::Mixer::setMusicVolume(100);
+    lx::Mixer::setFXVolume(100);
+    lx::Log::logInfo(lx::Log::TEST,"overall volume: %d",lx::Mixer::getOverallVolume());
+    lx::Log::logInfo(lx::Log::TEST,"music volume: %d",lx::Mixer::getMusicVolume());
+    lx::Log::logInfo(lx::Log::TEST,"FX volume: %d",lx::Mixer::getFXVolume());
 
     std::string str = "data/01.ogg";
-    LX_Mixer::LX_Music music(str);
+    lx::Mixer::LX_Music music(str);
     music.play();
 
     lx::Log::logInfo(lx::Log::TEST,"set the position to 128.0 second");
     lx::Time::delay(2000);
-    LX_Mixer::setMusicPosition(128.0);
+    lx::Mixer::setMusicPosition(128.0);
     lx::Time::delay(2000);
 
     for(short i = 100; i > 0; i--)
     {
         lx::Time::delay(100);
         lx::Log::logInfo(lx::Log::TEST,"set overall volume to %d",i);
-        LX_Mixer::setOverallVolume(static_cast<unsigned short>(i));
+        lx::Mixer::setOverallVolume(static_cast<unsigned short>(i));
     }
 
     for(unsigned short i = 0; i <= 100; i++)
     {
         lx::Time::delay(100);
         lx::Log::logInfo(lx::Log::TEST,"set overall volume to %d",i);
-        LX_Mixer::setOverallVolume(i);
+        lx::Mixer::setOverallVolume(i);
     }
 
-    LX_Mixer::fadeOutMusic(1000);
+    lx::Mixer::fadeOutMusic(1000);
     lx::Time::delay(1024);
     music.stop();
     lx::Log::logInfo(lx::Log::APPLICATION," = END TEST = ");

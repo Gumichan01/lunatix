@@ -9,7 +9,6 @@ using namespace FloatBox;
 using namespace LX_Graphics;
 using namespace lx::TrueTypeFont;
 using namespace lx::Device;
-using namespace LX_Mixer;
 using namespace LX_Physics;
 using namespace lx::ParticleEngine;
 using namespace lx::FileIO;

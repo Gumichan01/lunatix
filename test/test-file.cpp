@@ -596,7 +596,7 @@ void test_fs(void)
 
 void test_getChunk(void)
 {
-    LX_Mixer::LX_Chunk * lxmix = nullptr;
+    lx::Mixer::LX_Chunk * lxmix = nullptr;
     const std::string fname("data/explosion.wav");
 
     lx::Log::log(" = TEST Chunk from buffer = ");
@@ -605,7 +605,7 @@ void test_getChunk(void)
 
     try
     {
-        LX_Mixer::LX_Chunk *dump = f.loadSample();
+        lx::Mixer::LX_Chunk *dump = f.loadSample();
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - LX_Chunk instanciation done.");
         delete dump;
     }
@@ -614,7 +614,7 @@ void test_getChunk(void)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Cannot instanciate LX_Chunk with a file buffer as argument");
     }
 
-    lxmix = LX_Mixer::loadSample(f);
+    lxmix = lx::Mixer::loadSample(f);
 
     if(lxmix == nullptr)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - nullptr -> %s",LX_getError());

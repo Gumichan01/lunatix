@@ -34,7 +34,11 @@ namespace LX_Graphics
 class LX_BufferedImage;
 }
 
-namespace LX_Mixer
+
+namespace lx
+{
+
+namespace Mixer
 {
 
 /**
@@ -208,6 +212,8 @@ public:
     ~LX_Music();
 };
 
-}
+}   // Mixer
+
+}   // lx
 
 #endif // LX_MUSIC_H_INCLUDED

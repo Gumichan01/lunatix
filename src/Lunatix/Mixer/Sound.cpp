@@ -20,7 +20,10 @@
 
 #include <Lunatix/Sound.hpp>
 
-namespace LX_Mixer
+namespace lx
+{
+
+namespace Mixer
 {
 
 LX_MixerException::LX_MixerException( std::string err ) : _string_error( err ) {}
@@ -33,4 +36,6 @@ const char * LX_MixerException::what() const noexcept
     return _string_error.c_str();
 }
 
-}
+}   // Mixer
+
+}   // lx

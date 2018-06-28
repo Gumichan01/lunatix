@@ -34,9 +34,13 @@ class LX_FileBuffer;
 
 }
 
+
+namespace lx
+{
+
 /**
 *   @ingroup Audio
-*   @namespace LX_Mixer
+*   @namespace lx::Mixer
 *   @brief The audio namespace
 *
 *   It handles sound mixing and effect processing
@@ -57,10 +61,10 @@ class LX_FileBuffer;
 *   Example:
 *
 *               int chan = 5;                           // channel number
-*               LX_Mixer::LX_Chunk chunk("test.wav");
-*               LX_Mixer::setDistance(100);             // distance as post-processing effect
-*               LX_Mixer::setPanning(55,200);           // panning as post-processing effect
-*               LX_Mixer::setPanning(chan,255,0);       // panning on a specific channel
+*               lx::Mixer::LX_Chunk chunk("test.wav");
+*               lx::Mixer::setDistance(100);             // distance as post-processing effect
+*               lx::Mixer::setPanning(55,200);           // panning as post-processing effect
+*               lx::Mixer::setPanning(chan,255,0);       // panning on a specific channel
 *               chunk.play(chan);
 *               //  So the order of post-mix processing is:
 *               //    ① panning on channel #5
@@ -73,7 +77,7 @@ class LX_FileBuffer;
 *   the library is undefined.
 *
 */
-namespace LX_Mixer
+namespace Mixer
 {
 
 class LX_Music;
@@ -446,7 +450,7 @@ void fadeOutMusic( int ms ) noexcept;
 *        the maximum volume to be 127 per channel for center,
 *        or 254 max for left, this works, but about halves the effective volume.
 *   @note 3 — To unregister this effect, use this function with 255 as left and right value
-*        or simply use LX_Mixer::removePanning().
+*        or simply use lx::Mixer::removePanning().
 */
 void setPanning( uint8_t left, uint8_t right ) noexcept;
 /**
@@ -464,7 +468,7 @@ void setPanning( uint8_t left, uint8_t right ) noexcept;
 *        the maximum volume to be 127 per channel for center,
 *        or 254 max for left, this works, but about halves the effective volume.
 *   @note 2 — To unregister this effect, use this function with 255 as left and right value
-*        or simply use LX_Mixer::removePanning(int chan).
+*        or simply use lx::Mixer::removePanning(int chan).
 */
 void setPanning( int chan, uint8_t left, uint8_t right ) noexcept;
 /**
@@ -560,6 +564,8 @@ void setDistance( uint8_t distance ) noexcept;
 */
 void setDistance( int chan, uint8_t distance ) noexcept;
 
-}
+}   // Mixer
+
+}   // lx
 
 #endif // LX_MIX_H_INCLUDED

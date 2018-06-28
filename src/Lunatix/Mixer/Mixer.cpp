@@ -37,17 +37,17 @@ const uint8_t LX_MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) 
 const uint8_t LX_MIX_FX_NO_distance = 0;    /**< The distance between the source and the listener */
 const uint16_t LX_MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
 
-constexpr struct LX_Mixer::LX_MixerEffectType LX_EFFECT_NONE;
+constexpr struct lx::Mixer::LX_MixerEffectType LX_EFFECT_NONE;
 
-constexpr bool operator ==( const LX_Mixer::LX_MixerEffectType& t,
-                            const LX_Mixer::LX_MixerEffectType& u )
+constexpr bool operator ==( const lx::Mixer::LX_MixerEffectType& t,
+                            const lx::Mixer::LX_MixerEffectType& u )
 {
     return t.distance == u.distance && t.panning == u.panning
            && t.position == u.position && t.reverse_stereo == u.reverse_stereo;
 }
 
-constexpr bool operator !=( const LX_Mixer::LX_MixerEffectType& t,
-                            const LX_Mixer::LX_MixerEffectType& u )
+constexpr bool operator !=( const lx::Mixer::LX_MixerEffectType& t,
+                            const lx::Mixer::LX_MixerEffectType& u )
 {
     return !( t == u );
 }
@@ -64,7 +64,11 @@ inline unsigned short adaptVolume_( unsigned short pvol, unsigned short ov, unsi
 
 }
 
-namespace LX_Mixer
+
+namespace lx
+{
+
+namespace Mixer
 {
 
 const unsigned short LX_MAX_VOLUME = 100;
@@ -375,4 +379,6 @@ void setDistance( int chan, uint8_t distance ) noexcept
 
 LX_MixerEffect::LX_MixerEffect() : type() {}
 
-}
+}   // Mixer
+
+}   // lx

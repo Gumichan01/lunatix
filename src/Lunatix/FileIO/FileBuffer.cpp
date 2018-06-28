@@ -82,14 +82,14 @@ public:
     }
 
 
-    LX_Mixer::LX_Chunk * loadSample() const
+    lx::Mixer::LX_Chunk * loadSample() const
     {
         Mix_Chunk * ch = getChunkFromBuffer_();
 
         if ( ch == nullptr )
             return nullptr;
 
-        return new LX_Mixer::LX_Chunk( *ch );
+        return new lx::Mixer::LX_Chunk( *ch );
     }
 
     inline SDL_Surface * getSurfaceFromBuffer() const noexcept
@@ -136,7 +136,7 @@ LX_Graphics::LX_BufferedImage * LX_FileBuffer::loadBufferedImage( LX_Graphics::L
 }
 
 
-LX_Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
+lx::Mixer::LX_Chunk * LX_FileBuffer::loadSample() const
 {
     return _bimpl->loadSample();
 }

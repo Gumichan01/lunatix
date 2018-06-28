@@ -26,11 +26,6 @@
 #include <memory>
 
 
-namespace LX_Mixer
-{
-class LX_Chunk;
-}
-
 namespace LX_Graphics
 {
 class LX_BufferedImage;
@@ -38,6 +33,11 @@ class LX_BufferedImage;
 
 namespace lx
 {
+
+namespace Mixer
+{
+class LX_Chunk;
+}
 
 namespace TrueTypeFont
 {
@@ -125,12 +125,12 @@ public:
     */
     LX_Graphics::LX_BufferedImage * loadBufferedImage( LX_Graphics::LX_PixelFormat format = LX_Graphics::LX_PixelFormat::RGBA8888 ) const;
     /**
-    *   @fn LX_Mixer::LX_Chunk * loadSample() const
+    *   @fn lx::Mixer::LX_Chunk * loadSample() const
     *
     *   @return A pointer to an allocated LX_Chunk object,
     *          *nullptr* if the file buffer is not a sample to load
     */
-    LX_Mixer::LX_Chunk * loadSample() const;
+    lx::Mixer::LX_Chunk * loadSample() const;
 
     /**
     *   @fn const char * getFilename() const

@@ -24,7 +24,10 @@
 
 #include <exception>
 
-namespace LX_Mixer
+namespace lx
+{
+
+namespace Mixer
 {
 
 /**
@@ -58,6 +61,8 @@ public:
     virtual ~LX_Sound() = default;
 };
 
-}
+}   // Mixer
+
+}   // lx
 
 #endif // LX_SOUND_H_INCLUDED

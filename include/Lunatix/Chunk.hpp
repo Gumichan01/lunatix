@@ -35,7 +35,10 @@ class LX_FileBuffer_;
 
 }
 
-namespace LX_Mixer
+namespace lx
+{
+
+namespace Mixer
 {
 
 class LX_Chunk_;
@@ -135,6 +138,8 @@ public:
     ~LX_Chunk();
 };
 
-}
+}   // Mixer
+
+}   // lx
 
 #endif // LX_CHUNK_H_INCLUDED

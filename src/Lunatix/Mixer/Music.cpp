@@ -47,7 +47,11 @@ LX_BufferedImage * _loadImage( const std::string& file,
 
 }   // namespace
 
-namespace LX_Mixer
+
+namespace lx
+{
+
+namespace Mixer
 {
 
 /* Music tag */
@@ -247,4 +251,6 @@ LX_Music::~LX_Music()
     _mimpl.reset();
 }
 
-}
+}   // Mixer
+
+}   // lx

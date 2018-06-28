@@ -24,7 +24,11 @@
 
 #include <SDL2/SDL_mixer.h>
 
-namespace LX_Mixer
+
+namespace lx
+{
+
+namespace Mixer
 {
 
 /* LX_Chunk (private implementation) */
@@ -121,4 +125,6 @@ LX_Chunk::~LX_Chunk()
     _chkimpl.reset();
 }
 
-}
+}   // Mixer
+
+}   // lx
