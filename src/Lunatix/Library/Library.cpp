@@ -134,11 +134,11 @@ void loadOpenGLSubSystem()
     if ( Configuration::getInstance().getOpenGLFlag() )
     {
         lx::Graphics::OpenGL::setAttribute( SDL_GL_CONTEXT_PROFILE_MASK,
-                                              SDL_GL_CONTEXT_PROFILE_CORE );
+                                            SDL_GL_CONTEXT_PROFILE_CORE );
         lx::Graphics::OpenGL::setAttribute( SDL_GL_CONTEXT_MAJOR_VERSION,
-                                              lx::Graphics::OpenGL::MAJOR_VERSION );
+                                            lx::Graphics::OpenGL::MAJOR_VERSION );
         lx::Graphics::OpenGL::setAttribute( SDL_GL_CONTEXT_MINOR_VERSION,
-                                              lx::Graphics::OpenGL::MINOR_VERSION );
+                                            lx::Graphics::OpenGL::MINOR_VERSION );
     }
 }
 

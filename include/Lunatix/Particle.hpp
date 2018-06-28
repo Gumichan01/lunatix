@@ -75,7 +75,7 @@ public:
     *   @param [in] v The vector that store the velocity
     */
     Particle( lx::Graphics::Sprite& sp, const lx::Physics::FloatingBox& b,
-                 const lx::Physics::Vector2D& v ) noexcept;
+              const lx::Physics::Vector2D& v ) noexcept;
 
     /**
     *   @fn void update() noexcept

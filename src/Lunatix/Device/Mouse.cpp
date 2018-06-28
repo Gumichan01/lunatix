@@ -59,7 +59,7 @@ public:
 
 
 Mouse::Mouse( const lx::Graphics::BufferedImage& surface,
-                    int hot_x, int hot_y ) noexcept
+              int hot_x, int hot_y ) noexcept
     : _mimpl( new Mouse_( surface._surface, hot_x, hot_y ) ) {}
 
 bool Mouse::isOpen() const noexcept

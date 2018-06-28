@@ -49,7 +49,7 @@ class Particle_ final
 public:
 
     Particle_( lx::Graphics::Sprite& sp, const FloatingBox& b,
-                  const lx::Physics::Vector2D& v ) noexcept
+               const lx::Physics::Vector2D& v ) noexcept
         : _box( b ), _lifetime( xrand<unsigned int>( 0, DELAY ) ), _velocity( v ),
           _texture( sp ) {}
 
@@ -87,7 +87,7 @@ Particle::Particle( lx::Graphics::Sprite& sp, const FloatingBox& b ) noexcept
 
 
 Particle::Particle( lx::Graphics::Sprite& sp, const FloatingBox& b,
-                          const lx::Physics::Vector2D& v ) noexcept
+                    const lx::Physics::Vector2D& v ) noexcept
     : _pimpl( new Particle_( sp, b, v ) ) {}
 
 

@@ -122,10 +122,10 @@ inline constexpr glColour from8BitColour( const Colour& colour ) noexcept
 {
     // 255.0f is the max Max 8-bit colour
     return glColour{static_cast<float>( colour.r ) / 255.0f,
-                       static_cast<float>( colour.g ) / 255.0f,
-                       static_cast<float>( colour.b ) / 255.0f,
-                       static_cast<float>( colour.a ) / 255.0f
-                      };
+                    static_cast<float>( colour.g ) / 255.0f,
+                    static_cast<float>( colour.b ) / 255.0f,
+                    static_cast<float>( colour.a ) / 255.0f
+                   };
 }
 /**
 *   @ingroup Graphics
@@ -145,10 +145,10 @@ inline constexpr Colour fromGLColour( const glColour& colour ) noexcept
 {
     // 255.0f is the max Max 8-bit colour
     return Colour{static_cast<uint8_t>( colour.r * 255.0f ),
-                     static_cast<uint8_t>( colour.g * 255.0f ),
-                     static_cast<uint8_t>( colour.b * 255.0f ),
-                     static_cast<uint8_t>( colour.a * 255.0f )
-                    };
+                  static_cast<uint8_t>( colour.g * 255.0f ),
+                  static_cast<uint8_t>( colour.b * 255.0f ),
+                  static_cast<uint8_t>( colour.a * 255.0f )
+                 };
 }
 
 /**

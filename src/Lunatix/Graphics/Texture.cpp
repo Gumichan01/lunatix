@@ -128,7 +128,7 @@ Texture::Texture( SDL_Texture * t, lx::Win::Window& w, PixelFormat format )
 
 
 Texture::Texture( const std::string& filename, lx::Win::Window& w,
-                        PixelFormat format )
+                  PixelFormat format )
     : _texture( nullptr ), _win( w ), _format( format )
 {
     _texture = loadTexture_( filename, format, render( w.getRenderingSys() ) );
@@ -139,7 +139,7 @@ Texture::Texture( const std::string& filename, lx::Win::Window& w,
 
 
 Texture::Texture( const UTF8string& filename, lx::Win::Window& w,
-                        PixelFormat format )
+                  PixelFormat format )
     : Texture( filename.utf8_sstring(), w, format ) {}
 
 
@@ -176,25 +176,25 @@ Texture::~Texture()
 
 // protected constructor
 Sprite::Sprite( SDL_Texture * t, lx::Win::Window& w,
-                      const UTF8string& filename,
-                      const ImgRect& img_rect, PixelFormat format )
+                const UTF8string& filename,
+                const ImgRect& img_rect, PixelFormat format )
     : Texture( t, w, format ), _img_rect( img_rect ), _filename( filename ) {}
 
 Sprite::Sprite( const std::string& filename, lx::Win::Window& w,
-                      PixelFormat format )
+                PixelFormat format )
     : Texture( filename, w, format ), _img_rect(), _filename( filename ) {}
 
 Sprite::Sprite( const std::string& filename, lx::Win::Window& w,
-                      const ImgRect& img_rect, PixelFormat format )
+                const ImgRect& img_rect, PixelFormat format )
     : Texture( filename, w, format ), _img_rect( img_rect ),
       _filename( filename ) {}
 
 Sprite::Sprite( const UTF8string& filename, lx::Win::Window& w,
-                      PixelFormat format )
+                PixelFormat format )
     : Texture( filename, w, format ), _img_rect(), _filename( filename ) {}
 
 Sprite::Sprite( const UTF8string& filename, lx::Win::Window& w,
-                      const ImgRect& img_rect, PixelFormat format )
+                const ImgRect& img_rect, PixelFormat format )
     : Texture( filename, w, format ), _img_rect( img_rect ),
       _filename( filename ) {}
 
@@ -238,26 +238,26 @@ UTF8string Sprite::getFileName() noexcept
 
 // protected constructor
 AnimatedSprite::AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
-                                      const std::vector<ImgRect>& coord,
-                                      const uint32_t delay, bool loop,
-                                      const UTF8string& filename, PixelFormat format )
+                                const std::vector<ImgRect>& coord,
+                                const uint32_t delay, bool loop,
+                                const UTF8string& filename, PixelFormat format )
     : Sprite( t, w, filename, ImgRect{0, 0, 0, 0}, format ),
       _coordinates( coord ), _SZ( coord.size() ), _delay( delay ), _btime( 0 ),
       _frame( 0 ), _started( false ), _loop( loop ), _drawable( true ) {}
 
 // public constructor
 AnimatedSprite::AnimatedSprite( const std::string& filename,
-                                      lx::Win::Window& w,
-                                      const std::vector<ImgRect>& coord,
-                                      const uint32_t delay, bool loop,
-                                      PixelFormat format )
+                                lx::Win::Window& w,
+                                const std::vector<ImgRect>& coord,
+                                const uint32_t delay, bool loop,
+                                PixelFormat format )
     : AnimatedSprite( UTF8string( filename ), w, coord, delay, loop, format ) {}
 
 
 AnimatedSprite::AnimatedSprite( const UTF8string& filename, lx::Win::Window& w,
-                                      const std::vector<ImgRect>& coord,
-                                      const uint32_t delay, bool loop,
-                                      PixelFormat format )
+                                const std::vector<ImgRect>& coord,
+                                const uint32_t delay, bool loop,
+                                PixelFormat format )
     : Sprite( filename, w, format ), _coordinates( coord ),
       _SZ( coord.size() ), _delay( delay ), _btime( 0 ), _frame( 0 ),
       _started( false ), _loop( loop ), _drawable( true ) {}
@@ -334,7 +334,7 @@ BufferedImage::BufferedImage( SDL_Surface * s, PixelFormat format )
 
 
 BufferedImage::BufferedImage( SDL_Surface * s, const std::string& filename,
-                                    PixelFormat format )
+                              PixelFormat format )
     : _surface( s ), _filename( filename )
 {
     uint32_t tmpf = u32( format );
@@ -362,7 +362,7 @@ BufferedImage::BufferedImage( const UTF8string& filename, PixelFormat format )
 
 
 bool BufferedImage::_retrieveColours( const uint32_t pixel, Uint8& r, Uint8& g,
-        Uint8& b, Uint8& a ) const noexcept
+                                      Uint8& b, Uint8& a ) const noexcept
 {
     const PixelFormat fmt = static_cast<PixelFormat>( _surface->format->format );
     uint32_t tmp_r, tmp_g, tmp_b, tmp_a;
@@ -531,7 +531,7 @@ uint32_t BufferedImage::_convertGrayscalePixel( const uint32_t pixel ) const noe
 
 uint32_t
 BufferedImage::_updateNegativeColour( const Uint8 r, const Uint8 g,
-        const Uint8 b, const Uint8 a ) const noexcept
+                                      const Uint8 b, const Uint8 a ) const noexcept
 {
     uint32_t npixel = 0;
     PixelFormat fmt = static_cast<PixelFormat>( _surface->format->format );
@@ -639,7 +639,7 @@ BufferedImage& BufferedImage::convertNegative() noexcept
 Sprite * BufferedImage::generateSprite( lx::Win::Window& w, const ImgRect& area ) const
 {
     return new Sprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ),
-                          _surface ), w, _filename, area );
+                       _surface ), w, _filename, area );
 }
 
 AnimatedSprite * BufferedImage::
@@ -647,7 +647,7 @@ generateAnimatedSprite( lx::Win::Window& w, const std::vector<ImgRect>& coord,
                         const uint32_t delay, bool loop ) const
 {
     return new AnimatedSprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), _surface ),
-                                  w, coord, delay, loop, _filename );
+                               w, coord, delay, loop, _filename );
 }
 
 
@@ -739,7 +739,7 @@ StreamingTexture::~StreamingTexture()
 /** TextTexture */
 
 TextTexture::TextTexture( lx::TrueTypeFont::Font& font,
-                                lx::Win::Window& w, PixelFormat format )
+                          lx::Win::Window& w, PixelFormat format )
     : Texture( w, format ), _text( "" ), _font( font ), _size( 0 ), _colour( CNULL ),
       _dimension( RNULL )
 {
@@ -749,24 +749,24 @@ TextTexture::TextTexture( lx::TrueTypeFont::Font& font,
 
 
 TextTexture::TextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                                lx::Win::Window& w, PixelFormat format )
+                          lx::Win::Window& w, PixelFormat format )
     : TextTexture( UTF8string( text ), font.getSize_(), font, w, format ) {}
 
 
 TextTexture::TextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                                lx::Win::Window& w, PixelFormat format )
+                          lx::Win::Window& w, PixelFormat format )
     : TextTexture( text, font.getSize_(), font, w, format ) {}
 
 
 TextTexture::TextTexture( const std::string& text, unsigned int sz,
-                                lx::TrueTypeFont::Font& font,
-                                lx::Win::Window& w, PixelFormat format )
+                          lx::TrueTypeFont::Font& font,
+                          lx::Win::Window& w, PixelFormat format )
     : TextTexture( UTF8string( text ), sz, font, w, format ) {}
 
 
 TextTexture::TextTexture( const UTF8string& text, unsigned int sz,
-                                lx::TrueTypeFont::Font& font,
-                                lx::Win::Window& w, PixelFormat format )
+                          lx::TrueTypeFont::Font& font,
+                          lx::Win::Window& w, PixelFormat format )
     : Texture( w, format ), _text( text ), _font( font ), _size( sz ),
       _colour( _font.getColour_() ), _dimension( RNULL )
 {
@@ -900,33 +900,33 @@ TextTexture::~TextTexture() {}
 
 SolidTextTexture::
 SolidTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                     PixelFormat format )
+                  PixelFormat format )
     : TextTexture( font, w, format ) {}
 
 
 SolidTextTexture::
 SolidTextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                     lx::Win::Window& w, PixelFormat format )
+                  lx::Win::Window& w, PixelFormat format )
     : SolidTextTexture( UTF8string( text ), font, w, format ) {}
 
 
 SolidTextTexture::
 SolidTextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                     lx::Win::Window& w, PixelFormat format )
+                  lx::Win::Window& w, PixelFormat format )
     : SolidTextTexture( text, font.getSize_(), font, w, format ) {}
 
 
 SolidTextTexture::
 SolidTextTexture( const std::string& text, unsigned int sz,
-                     lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                     PixelFormat format )
+                  lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                  PixelFormat format )
     : SolidTextTexture( UTF8string( text ), sz, font, w, format ) {}
 
 
 SolidTextTexture::
 SolidTextTexture( const UTF8string& text, unsigned int sz,
-                     lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                     PixelFormat format )
+                  lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                  PixelFormat format )
     : TextTexture( text, sz, font, w, format )
 {
     _texture = _font.drawSolidText_( _text, _size, _win );
@@ -934,7 +934,7 @@ SolidTextTexture( const UTF8string& text, unsigned int sz,
 
     if ( _texture == nullptr )
         throw ImageException( "SolidTextTexture — Cannot create the texture " +
-                                 text.utf8_sstring() );
+                              text.utf8_sstring() );
 }
 
 
@@ -960,33 +960,33 @@ void SolidTextTexture::updateTexture_() noexcept
 
 ShadedTextTexture::
 ShadedTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                      PixelFormat format )
+                   PixelFormat format )
     : TextTexture( font, w, format ), _bgcolour( CNULL ) {}
 
 
 ShadedTextTexture::
 ShadedTextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                      const Colour& bg, lx::Win::Window& w, PixelFormat format )
+                   const Colour& bg, lx::Win::Window& w, PixelFormat format )
     : ShadedTextTexture( UTF8string( text ), font, bg, w, format ) {}
 
 
 ShadedTextTexture::
 ShadedTextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                      const Colour& bg, lx::Win::Window& w, PixelFormat format )
+                   const Colour& bg, lx::Win::Window& w, PixelFormat format )
     : ShadedTextTexture( text, font.getSize_(), font, bg, w, format ) {}
 
 
 ShadedTextTexture::
 ShadedTextTexture( const std::string& text, unsigned int sz,
-                      lx::TrueTypeFont::Font& font, const Colour& bg,
-                      lx::Win::Window& w, PixelFormat format )
+                   lx::TrueTypeFont::Font& font, const Colour& bg,
+                   lx::Win::Window& w, PixelFormat format )
     : ShadedTextTexture( UTF8string( text ), sz, font, bg, w, format ) {}
 
 
 ShadedTextTexture::
 ShadedTextTexture( const UTF8string& text, unsigned int sz,
-                      lx::TrueTypeFont::Font& font, const Colour& bg,
-                      lx::Win::Window& w, PixelFormat format )
+                   lx::TrueTypeFont::Font& font, const Colour& bg,
+                   lx::Win::Window& w, PixelFormat format )
     : TextTexture( text, sz, font, w, format ), _bgcolour( bg )
 {
     _texture = _font.drawShadedText_( _text, _size, _bgcolour, _win );
@@ -995,7 +995,7 @@ ShadedTextTexture( const UTF8string& text, unsigned int sz,
 
     if ( _texture == nullptr )
         throw ImageException( "ShadedTextTexture — Cannot create the texture: " +
-                                 text.utf8_sstring() );
+                              text.utf8_sstring() );
 }
 
 /*
@@ -1040,33 +1040,33 @@ void ShadedTextTexture::setBgColour( const Colour& bg ) noexcept
 
 BlendedTextTexture::
 BlendedTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                       PixelFormat format )
+                    PixelFormat format )
     : TextTexture( font, w, format ) {}
 
 
 BlendedTextTexture::
 BlendedTextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                       lx::Win::Window& w, PixelFormat format )
+                    lx::Win::Window& w, PixelFormat format )
     : BlendedTextTexture( UTF8string( text ), font, w, format ) {}
 
 
 BlendedTextTexture::
 BlendedTextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                       lx::Win::Window& w, PixelFormat format )
+                    lx::Win::Window& w, PixelFormat format )
     : BlendedTextTexture( text, font.getSize_(), font, w, format ) {}
 
 
 BlendedTextTexture::
 BlendedTextTexture( const std::string& text, unsigned int sz,
-                       lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                       PixelFormat format )
+                    lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                    PixelFormat format )
     : BlendedTextTexture( UTF8string( text ), sz, font, w, format ) {}
 
 
 BlendedTextTexture::
 BlendedTextTexture( const UTF8string& text, unsigned int sz,
-                       lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                       PixelFormat format )
+                    lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                    PixelFormat format )
     : TextTexture( text, sz, font, w, format )
 {
     _texture = _font.drawBlendedText_( _text, _size, _win );
@@ -1074,7 +1074,7 @@ BlendedTextTexture( const UTF8string& text, unsigned int sz,
 
     if ( _texture == nullptr )
         throw ImageException( "BlendedTextTexture — Cannot create the texture: " +
-                                 text.utf8_sstring() );
+                              text.utf8_sstring() );
 }
 
 

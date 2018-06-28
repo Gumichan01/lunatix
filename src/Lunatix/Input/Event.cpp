@@ -561,9 +561,9 @@ const WEvent EventHandler::getWindowEvent() const noexcept
 {
     const SDL_WindowEvent WIN_EVENT = ( *event ).window;
     return WEvent{ WIN_EVENT.windowID,
-                      toWinEvent( WIN_EVENT.event ), WIN_EVENT.data1,
-                      WIN_EVENT.data2
-                    };
+                   toWinEvent( WIN_EVENT.event ), WIN_EVENT.data1,
+                   WIN_EVENT.data2
+                 };
 }
 
 const UserEvent EventHandler::getUserEvent() const noexcept

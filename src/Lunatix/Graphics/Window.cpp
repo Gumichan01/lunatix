@@ -284,7 +284,7 @@ void Window::setIcon( const std::string& ficon ) noexcept
 
 
 void Window::drawLine( const lx::Graphics::ImgCoord& p,
-                          const lx::Graphics::ImgCoord& q ) noexcept
+                       const lx::Graphics::ImgCoord& q ) noexcept
 {
     SDL_RenderDrawLine( _wimpl->_renderer, p.x, p.y, q.x, q.y );
 }
@@ -303,7 +303,7 @@ void Window::drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noe
 }
 
 void Window::drawLine( const lx::Graphics::ImgCoord& p,
-                          const lx::Physics::Vector2D& v ) noexcept
+                       const lx::Physics::Vector2D& v ) noexcept
 {
     const int vx = static_cast<int>( v.vx );
     const int vy = static_cast<int>( v.vy );
@@ -319,7 +319,7 @@ void Window::drawRect( const lx::Graphics::ImgRect& box ) noexcept
 }
 
 void Window::drawRect( const lx::Graphics::ImgCoord& p,
-                          const lx::Physics::Vector2D& v ) noexcept
+                       const lx::Physics::Vector2D& v ) noexcept
 {
     using lx::Graphics::ImgCoord;
     int w = static_cast<int>( v.vx );
@@ -373,7 +373,7 @@ void Window::fillRect( const lx::Graphics::ImgRect& box ) noexcept
 }
 
 void Window::fillRect( const lx::Graphics::ImgCoord& p,
-                          const lx::Physics::Vector2D& v ) noexcept
+                       const lx::Physics::Vector2D& v ) noexcept
 {
     int w = static_cast<int>( v.vx );
     int h = static_cast<int>( v.vy );

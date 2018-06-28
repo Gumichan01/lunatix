@@ -204,7 +204,7 @@ bool Gamepad_::lx_stat_( SDL_Joystick * joy, GamepadInfo& info ) const
 
 
 bool Gamepad_::gstat_( SDL_Joystick * joy, SDL_GameController * gc,
-                          GamepadInfo& info ) const
+                       GamepadInfo& info ) const
 {
     if ( joy != nullptr )
     {

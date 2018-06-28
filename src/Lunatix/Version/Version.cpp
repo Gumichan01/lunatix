@@ -71,7 +71,7 @@ void info() noexcept
 const Version getVersion() noexcept
 {
     return Version{MAJOR_VERSION, MINOR_VERSION,
-                      PATCH_VERSION, STATUS.utf8_sstring()};
+                   PATCH_VERSION, STATUS.utf8_sstring()};
 }
 
 

@@ -122,11 +122,11 @@ void * FileBuffer::getFontFromBuffer_( int size ) const noexcept
 
 /** Filebuffer — public functions */
 FileBuffer::FileBuffer( const std::string& filename, size_t offset,
-                              size_t sz )
+                        size_t sz )
     : _bimpl( new FileBuffer_( filename, offset, sz ) ) {}
 
 FileBuffer::FileBuffer( const UTF8string& filename, size_t offset,
-                              size_t sz )
+                        size_t sz )
     : _bimpl( new FileBuffer_( filename.utf8_sstring(), offset, sz ) ) {}
 
 

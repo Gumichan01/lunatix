@@ -34,7 +34,7 @@ const int INFLOOP = -1;
 
 lx::Graphics::
 BufferedImage * _loadImage( const std::string& file,
-                               const libtagpp::ImgMetaData& imgdata )
+                            const libtagpp::ImgMetaData& imgdata )
 {
     if ( imgdata._img_offset <= 0 && imgdata._img_size <= 0 )
         return nullptr;

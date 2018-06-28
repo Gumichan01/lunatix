@@ -127,13 +127,13 @@ protected:
 
     Texture( lx::Win::Window& w, PixelFormat format );
     Texture( SDL_Texture * t, lx::Win::Window& w,
-                PixelFormat format = PixelFormat::RGBA8888 );
+             PixelFormat format = PixelFormat::RGBA8888 );
 
     Texture( const std::string& filename, lx::Win::Window& w,
-                PixelFormat format = PixelFormat::RGBA8888 );
+             PixelFormat format = PixelFormat::RGBA8888 );
 
     Texture( const UTF8string& filename, lx::Win::Window& w,
-                PixelFormat format = PixelFormat::RGBA8888 );
+             PixelFormat format = PixelFormat::RGBA8888 );
 public:
 
     virtual void draw() noexcept = 0;
@@ -210,8 +210,8 @@ class Sprite: public Texture
 protected:
 
     Sprite( SDL_Texture * t, lx::Win::Window& w, const UTF8string& filename,
-               const ImgRect& img_rect,
-               PixelFormat format = PixelFormat::RGBA8888 );
+            const ImgRect& img_rect,
+            PixelFormat format = PixelFormat::RGBA8888 );
 
 public:
 
@@ -219,24 +219,24 @@ public:
     *   @exception ImageException On failure
     */
     Sprite( const std::string& filename, lx::Win::Window& w,
-               PixelFormat format = PixelFormat::RGBA8888 );
+            PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     Sprite( const std::string& filename, lx::Win::Window& w,
-               const ImgRect& img_rect,
-               PixelFormat format = PixelFormat::RGBA8888 );
+            const ImgRect& img_rect,
+            PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     Sprite( const UTF8string& filename, lx::Win::Window& w,
-               PixelFormat format = PixelFormat::RGBA8888 );
+            PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     Sprite( const UTF8string& filename, lx::Win::Window& w,
-               const ImgRect& img_rect,
-               PixelFormat format = PixelFormat::RGBA8888 );
+            const ImgRect& img_rect,
+            PixelFormat format = PixelFormat::RGBA8888 );
 
     virtual void draw() noexcept override;
     /**
@@ -314,9 +314,9 @@ class AnimatedSprite final : public Sprite
     bool _drawable;
 
     AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
-                       const std::vector<ImgRect>& coord, const uint32_t delay,
-                       bool loop, const UTF8string& filename,
-                       PixelFormat format = PixelFormat::RGBA8888 );
+                    const std::vector<ImgRect>& coord, const uint32_t delay,
+                    bool loop, const UTF8string& filename,
+                    PixelFormat format = PixelFormat::RGBA8888 );
 
 public:
 
@@ -340,14 +340,14 @@ public:
     *   @sa Texture
     */
     AnimatedSprite( const std::string& filename, lx::Win::Window& w,
-                       const std::vector<ImgRect>& coord, const uint32_t delay,
-                       bool loop, PixelFormat format = PixelFormat::RGBA8888 );
+                    const std::vector<ImgRect>& coord, const uint32_t delay,
+                    bool loop, PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     AnimatedSprite( const UTF8string& filename, lx::Win::Window& w,
-                       const std::vector<ImgRect>& coord, const uint32_t delay,
-                       bool loop, PixelFormat format = PixelFormat::RGBA8888 );
+                    const std::vector<ImgRect>& coord, const uint32_t delay,
+                    bool loop, PixelFormat format = PixelFormat::RGBA8888 );
 
     using Sprite::draw;
     virtual void draw( const ImgRect& box ) noexcept override;
@@ -401,9 +401,9 @@ class BufferedImage final
     BufferedImage& operator =( const BufferedImage& ) = delete;
 
     BufferedImage( SDL_Surface * s,
-                      PixelFormat format = PixelFormat::RGBA8888 );
+                   PixelFormat format = PixelFormat::RGBA8888 );
     BufferedImage( SDL_Surface * s, const std::string& filename,
-                      PixelFormat format = PixelFormat::RGBA8888 );
+                   PixelFormat format = PixelFormat::RGBA8888 );
 
     bool _retrieveColours( const uint32_t pixel, Uint8& r, Uint8& g, Uint8& b, Uint8& a ) const noexcept;
 
@@ -419,13 +419,13 @@ public:
     *   @exception ImageException On failure
     */
     BufferedImage( const std::string& filename,
-                      PixelFormat format = PixelFormat::RGBA8888 );
+                   PixelFormat format = PixelFormat::RGBA8888 );
 
     /**
     *   @exception ImageException On failure
     */
     BufferedImage( const UTF8string& filename,
-                      PixelFormat format = PixelFormat::RGBA8888 );
+                   PixelFormat format = PixelFormat::RGBA8888 );
 
     /**
     *   @fn void convertGrayscale() noexcept
@@ -447,7 +447,7 @@ public:
     *   @exception ImageException On failure
     */
     Sprite * generateSprite( lx::Win::Window& w,
-                                const ImgRect& area = RNULL ) const;
+                             const ImgRect& area = RNULL ) const;
     /**
     *   @fn AnimatedSprite * generateAnimatedSprite(lx::Win::Window& w,
     *                                   const std::vector<ImgRect>& coord,
@@ -499,7 +499,7 @@ public:
     *   @exception ImageException On failure
     */
     StreamingTexture( lx::Win::Window& w,
-                         PixelFormat format = PixelFormat::RGBA8888 );
+                      PixelFormat format = PixelFormat::RGBA8888 );
 
     /**
     *   @fn bool blit(BufferedImage& s, const ImgRect& rect) noexcept
@@ -547,23 +547,23 @@ protected:
     virtual void updateTexture_() noexcept = 0;
 
     TextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                    PixelFormat format = PixelFormat::RGBA8888 );
+                 PixelFormat format = PixelFormat::RGBA8888 );
 
     TextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                    lx::Win::Window& w,
-                    PixelFormat format = PixelFormat::RGBA8888 );
+                 lx::Win::Window& w,
+                 PixelFormat format = PixelFormat::RGBA8888 );
 
     TextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                    lx::Win::Window& w,
-                    PixelFormat format = PixelFormat::RGBA8888 );
+                 lx::Win::Window& w,
+                 PixelFormat format = PixelFormat::RGBA8888 );
 
     TextTexture( const std::string& text, unsigned int sz,
-                    lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                    PixelFormat format = PixelFormat::RGBA8888 );
+                 lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                 PixelFormat format = PixelFormat::RGBA8888 );
 
     TextTexture( const UTF8string& text, unsigned int sz,
-                    lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                    PixelFormat format = PixelFormat::RGBA8888 );
+                 lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                 PixelFormat format = PixelFormat::RGBA8888 );
 
 public:
 
@@ -733,31 +733,31 @@ public:
     *   @exception ImageException On failure
     */
     SolidTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                         PixelFormat format = PixelFormat::RGBA8888 );
+                      PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     SolidTextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                         lx::Win::Window& w,
-                         PixelFormat format = PixelFormat::RGBA8888 );
+                      lx::Win::Window& w,
+                      PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     SolidTextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                         lx::Win::Window& w,
-                         PixelFormat format = PixelFormat::RGBA8888 );
+                      lx::Win::Window& w,
+                      PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     SolidTextTexture( const std::string& text, unsigned int sz,
-                         lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                         PixelFormat format = PixelFormat::RGBA8888 );
+                      lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                      PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     SolidTextTexture( const UTF8string& text, unsigned int sz,
-                         lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                         PixelFormat format = PixelFormat::RGBA8888 );
+                      lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                      PixelFormat format = PixelFormat::RGBA8888 );
 
     ~SolidTextTexture() = default;
 };
@@ -795,33 +795,33 @@ public:
     *   @exception ImageException On failure
     */
     ShadedTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                          PixelFormat format = PixelFormat::RGBA8888 );
+                       PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     ShadedTextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                          const Colour& bg, lx::Win::Window& w,
-                          PixelFormat format = PixelFormat::RGBA8888 );
+                       const Colour& bg, lx::Win::Window& w,
+                       PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     ShadedTextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                          const Colour& bg, lx::Win::Window& w,
-                          PixelFormat format = PixelFormat::RGBA8888 );
+                       const Colour& bg, lx::Win::Window& w,
+                       PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     ShadedTextTexture( const std::string& text, unsigned int sz,
-                          lx::TrueTypeFont::Font& font, const Colour& bg,
-                          lx::Win::Window& w,
-                          PixelFormat format = PixelFormat::RGBA8888 );
+                       lx::TrueTypeFont::Font& font, const Colour& bg,
+                       lx::Win::Window& w,
+                       PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     ShadedTextTexture( const UTF8string& text, unsigned int sz,
-                          lx::TrueTypeFont::Font& font, const Colour& bg,
-                          lx::Win::Window& w,
-                          PixelFormat format = PixelFormat::RGBA8888 );
+                       lx::TrueTypeFont::Font& font, const Colour& bg,
+                       lx::Win::Window& w,
+                       PixelFormat format = PixelFormat::RGBA8888 );
 
     /**
     *   @fn Colour getBgColour() noexcept
@@ -866,31 +866,31 @@ public:
     *   @exception ImageException On failure
     */
     BlendedTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                           PixelFormat format = PixelFormat::RGBA8888 );
+                        PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     BlendedTextTexture( const std::string& text, lx::TrueTypeFont::Font& font,
-                           lx::Win::Window& w,
-                           PixelFormat format = PixelFormat::RGBA8888 );
+                        lx::Win::Window& w,
+                        PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     BlendedTextTexture( const UTF8string& text, lx::TrueTypeFont::Font& font,
-                           lx::Win::Window& w,
-                           PixelFormat format = PixelFormat::RGBA8888 );
+                        lx::Win::Window& w,
+                        PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     BlendedTextTexture( const std::string& text, unsigned int sz,
-                           lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                           PixelFormat format = PixelFormat::RGBA8888 );
+                        lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                        PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
     */
     BlendedTextTexture( const UTF8string& text, unsigned int sz,
-                           lx::TrueTypeFont::Font& font, lx::Win::Window& w,
-                           PixelFormat format = PixelFormat::RGBA8888 );
+                        lx::TrueTypeFont::Font& font, lx::Win::Window& w,
+                        PixelFormat format = PixelFormat::RGBA8888 );
 
     ~BlendedTextTexture() = default;
 };
