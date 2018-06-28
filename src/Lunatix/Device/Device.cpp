@@ -25,7 +25,10 @@
 #include <sstream>
 
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 
 int numberOfDevices() noexcept
@@ -58,4 +61,6 @@ LX_MouseToggle mouseCursorDisplay( const LX_MouseToggle& toggle ) noexcept
     return static_cast<LX_MouseToggle>( SDL_ShowCursor( static_cast<int>( toggle ) ) );
 }
 
-}
+}   // Device
+
+}   // lx

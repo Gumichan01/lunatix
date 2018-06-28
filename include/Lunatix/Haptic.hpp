@@ -27,7 +27,10 @@ struct _SDL_Joystick;
 struct _SDL_GameController;
 union SDL_HapticEffect;
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 
 struct LX_Haptic_;
@@ -61,7 +64,7 @@ bool mouseIsHaptic() noexcept;
 */
 class LX_Haptic
 {
-    friend class LX_Device::LX_Gamepad;
+    friend class lx::Device::LX_Gamepad;
     std::unique_ptr<LX_Haptic_> _himpl;
 
     LX_Haptic( LX_Haptic& h ) = delete;
@@ -189,6 +192,8 @@ public:
     ~LX_MouseHaptic() = default;
 };
 
-}
+}   // Device
+
+}   // lx
 
 #endif // LX_HAPTIC_HPP_INCLUDED

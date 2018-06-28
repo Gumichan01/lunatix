@@ -3,7 +3,7 @@
 
 const int N = 8;
 
-using namespace LX_Device;
+using namespace lx::Device;
 using namespace lx::Event;
 
 void printEvent(const LX_WEvent& event);

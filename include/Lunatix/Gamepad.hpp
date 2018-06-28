@@ -23,7 +23,10 @@
 #include <Lunatix/utils/utf8_string.hpp>
 #include <memory>
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 
 class LX_Haptic;
@@ -127,6 +130,8 @@ public:
     ~LX_Gamepad();
 };
 
-}
+}   // Device
+
+}   // lx
 
 #endif  // LX_GAMEPAD_HPP_INCLUDED

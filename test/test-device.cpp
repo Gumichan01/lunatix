@@ -5,7 +5,7 @@
 
 
 using namespace std;
-using namespace LX_Device;
+using namespace lx::Device;
 
 void test_gamepad(void);
 void test_haptic(void);
@@ -134,7 +134,7 @@ void test_mouse(void)
 
     std::string s = "data/bullet.png";
     lx::Log::log("Define %s as the mouse cursor",s.c_str());
-    LX_Device::LX_Mouse c(LX_Graphics::LX_BufferedImage(s),0,0);
+    lx::Device::LX_Mouse c(LX_Graphics::LX_BufferedImage(s),0,0);
 
     if(c.isOpen())
         lx::Log::logDebug(lx::Log::TEST,"SUCCESS - the mouse cursor was loaded");
@@ -145,7 +145,7 @@ void test_mouse(void)
 
     lx::Log::log("Try to get the haptic feedback of the mouse, if possible");
 
-    if(LX_Device::mouseIsHaptic())
+    if(lx::Device::mouseIsHaptic())
     {
         lx::Log::log("Haptic feedback supported by the mouse");
         LX_MouseHaptic h;
@@ -170,9 +170,9 @@ void test_mouse(void)
             {
             case lx::Event::LX_EventType::MOUSEBUTTONUP:
                 if(ev.getMouseButton().button == lx::Event::LX_MouseButton::LBUTTON)
-                    LX_Device::mouseCursorDisplay(LX_Device::LX_MouseToggle::HIDE);
+                    lx::Device::mouseCursorDisplay(lx::Device::LX_MouseToggle::HIDE);
                 else
-                    LX_Device::mouseCursorDisplay(LX_Device::LX_MouseToggle::SHOW);
+                    lx::Device::mouseCursorDisplay(lx::Device::LX_MouseToggle::SHOW);
                 break;
 
             default:

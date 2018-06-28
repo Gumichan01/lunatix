@@ -38,13 +38,13 @@ namespace LX_Win
 class LX_Window;
 }
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 class LX_Mouse;
 }
-
-namespace lx
-{
 
 namespace TrueTypeFont
 {
@@ -379,7 +379,7 @@ public:
 class LX_BufferedImage final
 {
     friend class LX_StreamingTexture;
-    friend class LX_Device::LX_Mouse;
+    friend class lx::Device::LX_Mouse;
     friend class lx::FileIO::LX_FileBuffer;
     friend class LX_Win::LX_Window;
 

@@ -23,7 +23,10 @@
 #include <SDL2/SDL_haptic.h>
 
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 
 int numberOfHapticDevices() noexcept
@@ -169,4 +172,6 @@ bool LX_MouseHaptic::isOpened() const noexcept
     return _hcimpl != nullptr;
 }
 
-}
+}   // Device
+
+}   // lx

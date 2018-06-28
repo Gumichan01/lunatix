@@ -29,9 +29,12 @@
 *   @brief Device handling (gamepad, mouse, force feedback)
 */
 
+namespace lx
+{
+
 /**
 *   @ingroup Device
-*   @namespace LX_Device
+*   @namespace lx::Device
 *   @brief The device namespace
 *
 *   This namespaces handles several types of device (gamepad, mouse)
@@ -42,7 +45,7 @@
 *   the library is undefined.
 *
 */
-namespace LX_Device
+namespace Device
 {
 
 /**
@@ -107,6 +110,8 @@ UTF8string gamepadToString( LX_GamepadInfo& info ) noexcept;
 */
 LX_MouseToggle mouseCursorDisplay( const LX_MouseToggle& toggle ) noexcept;
 
-}
+}   // Device
+
+}   // lx
 
 #endif // LX_DEVICE_HPP_INCLUDED

@@ -23,7 +23,10 @@
 
 #include <SDL2/SDL_mouse.h>
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 
 class LX_Mouse_ final
@@ -74,4 +77,6 @@ LX_Mouse::~LX_Mouse()
     _mimpl.reset();
 }
 
-}
+}   // Device
+
+}   // lx

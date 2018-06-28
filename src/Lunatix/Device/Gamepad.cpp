@@ -29,7 +29,11 @@
 #include <stdexcept>
 #include <cstring>
 
-namespace LX_Device
+
+namespace lx
+{
+
+namespace Device
 {
 
 #ifdef __WIN32__
@@ -324,4 +328,6 @@ LX_Gamepad::~LX_Gamepad()
     _gpimpl.reset();
 }
 
-}
+}   // Device
+
+}   // lx

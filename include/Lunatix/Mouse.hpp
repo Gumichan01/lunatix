@@ -27,7 +27,10 @@ namespace LX_Graphics
 class LX_BufferedImage;
 }
 
-namespace LX_Device
+namespace lx
+{
+
+namespace Device
 {
 
 class LX_Mouse_;
@@ -69,6 +72,8 @@ public:
     ~LX_Mouse();
 };
 
-}
+}   // Device
+
+}   // lx
 
 #endif // LX_MOUSE_HPP_INCLUDED
