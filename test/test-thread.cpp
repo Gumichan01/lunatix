@@ -68,22 +68,22 @@ int main(int argc, char **argv)
 
 void foo0()
 {
-    lx::Log::log("(#%x) Hello World! from foo0", LX_Multithreading::getCurrentThreadID());
+    lx::Log::log("(#%x) Hello World! from foo0", lx::Multithreading::getCurrentThreadID());
 }
 
 void foo1()
 {
-    lx::Log::log("(#%x) Hello World! from foo1", LX_Multithreading::getCurrentThreadID());
+    lx::Log::log("(#%x) Hello World! from foo1", lx::Multithreading::getCurrentThreadID());
 }
 
 void foo2()
 {
-    lx::Log::log("(#%x) Hello World!", LX_Multithreading::getCurrentThreadID());
+    lx::Log::log("(#%x) Hello World!", lx::Multithreading::getCurrentThreadID());
 }
 
 void foo3(char * data)
 {
-    lx::Log::log("Thread <%s>#%x: Hello World!", data, LX_Multithreading::getCurrentThreadID());
+    lx::Log::log("Thread <%s>#%x: Hello World!", data, lx::Multithreading::getCurrentThreadID());
 }
 
 
@@ -91,15 +91,15 @@ void test_thread()
 {
     lx::Log::log("   == TEST thread #1 ==   ");
 
-    const size_t tid = LX_Multithreading::getCurrentThreadID();
+    const size_t tid = lx::Multithreading::getCurrentThreadID();
 
     lx::Log::log("(#%x): Basic thread #1 (create a joinable thread)",
                 tid);
     try
     {
         {
-            LX_Multithreading::LX_Thread(false, foo0).join();
-            LX_Multithreading::LX_Thread(false, foo1).join();
+            lx::Multithreading::LX_Thread(false, foo0).join();
+            lx::Multithreading::LX_Thread(false, foo1).join();
         }
         lx::Log::log("(#%x): SUCCESS - no crash",tid);
     }
@@ -113,7 +113,7 @@ void test_thread()
     try
     {
         {
-            LX_Multithreading::LX_Thread th4(true, foo2);
+            lx::Multithreading::LX_Thread th4(true, foo2);
             lx::Time::delay(128);
         }
         lx::Log::log("(#%x): SUCCESS - no crash",tid);
@@ -129,7 +129,7 @@ void test_thread()
     {
         {
             char s[] = "foo3";
-            LX_Multithreading::LX_Thread th5(false, foo3, s);
+            lx::Multithreading::LX_Thread th5(false, foo3, s);
             lx::Time::delay(128);
             th5.join();
         }
@@ -148,14 +148,14 @@ void test_thread_fail()
 {
     lx::Log::log("   == TEST thread #2 ==   ");
 
-    const size_t tid = LX_Multithreading::getCurrentThreadID();
+    const size_t tid = lx::Multithreading::getCurrentThreadID();
 
     lx::Log::log("(#%x): fail thread #1 (join a thread that was already joined)",
                 tid);
     try
     {
         {
-            LX_Multithreading::LX_Thread th4(false, foo2);
+            lx::Multithreading::LX_Thread th4(false, foo2);
             th4.join();
             th4.join();
         }
@@ -176,7 +176,7 @@ void test_thread_fail()
     try
     {
         {
-            LX_Multithreading::LX_Thread th5(true,foo2);
+            lx::Multithreading::LX_Thread th5(true,foo2);
             th5.join();
         }
         lx::Log::log("(#%x): FAILURE - should crash → #5",tid);
@@ -198,7 +198,7 @@ void test_async()
 {
     lx::Log::log("   == TEST async task ==   ");
 
-    const size_t tid = LX_Multithreading::getCurrentThreadID();
+    const size_t tid = lx::Multithreading::getCurrentThreadID();
     lx::Log::log("(#%x): AsyncTask - normal case", tid);
 
     lx::Random::initRand();
@@ -207,10 +207,10 @@ void test_async()
     unsigned long expected1 = fact(param1);
     unsigned long expected2 = fact(param2);
 
-    LX_Multithreading::LX_ASyncTask<unsigned long> async(fact, param1);
+    lx::Multithreading::LX_ASyncTask<unsigned long> async(fact, param1);
 
     lx::Log::log("(#%x): AsyncTask - simulate synchonous", tid);
-    unsigned long r = LX_Multithreading::LX_ASyncTask<unsigned long>(fact, param2).getResult();
+    unsigned long r = lx::Multithreading::LX_ASyncTask<unsigned long>(fact, param2).getResult();
 
     lx::Log::log("(#%x): AsyncTask - simulate synchonous DONE", tid);
     lx::Log::log("(#%x): sync -  %u | %u", tid, r, expected2);
@@ -232,7 +232,7 @@ void test_async()
 
     try
     {
-        LX_Multithreading::LX_ASyncTask<unsigned long>(fact, -1L).getResult();
+        lx::Multithreading::LX_ASyncTask<unsigned long>(fact, -1L).getResult();
         lx::Log::log("(#%x): FAILURE - an exception should occur", tid);
     }
     catch(const std::invalid_argument& inv)
