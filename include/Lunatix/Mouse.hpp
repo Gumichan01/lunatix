@@ -22,13 +22,14 @@
 
 #include <memory>
 
-namespace LX_Graphics
-{
-class LX_BufferedImage;
-}
 
 namespace lx
 {
+
+namespace Graphics
+{
+class LX_BufferedImage;
+}
 
 namespace Device
 {
@@ -50,13 +51,13 @@ class LX_Mouse final
 public:
 
     /**
-    *   @fn LX_Mouse(const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y) noexcept
+    *   @fn LX_Mouse(const lx::Graphics::LX_BufferedImage& surface, int hot_x, int hot_y) noexcept
     *
     *   @param [in] surface The buffered image to load the cursor from
     *   @param [in] hot_x The x hot spot position
     *   @param [in] hot_y The y hot spot position
     */
-    LX_Mouse( const LX_Graphics::LX_BufferedImage& surface, int hot_x, int hot_y ) noexcept;
+    LX_Mouse( const lx::Graphics::LX_BufferedImage& surface, int hot_x, int hot_y ) noexcept;
     /**
     *   @fn bool isOpen() const noexcept
     *   Check if the mouse is loaded without issues

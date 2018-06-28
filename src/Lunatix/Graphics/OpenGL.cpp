@@ -22,10 +22,13 @@
 #include <Lunatix/OpenGL.hpp>
 #include <SDL2/SDL_render.h>
 
-namespace LX_Graphics
+namespace lx
 {
 
-namespace LX_OpenGL
+namespace Graphics
+{
+
+namespace OpenGL
 {
 
 bool extensionSupported( std::string extension ) noexcept
@@ -84,6 +87,8 @@ bool setAttribute( LX_GLattr attr, int value ) noexcept
     return SDL_GL_SetAttribute( attr, value ) == 0;
 }
 
-}   // LX_OpenGL::
+}   // OpenGL
 
-}   // LX_Graphics::
+}   // Graphics
+
+}   // lx

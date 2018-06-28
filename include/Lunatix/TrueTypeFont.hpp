@@ -33,6 +33,7 @@ namespace LX_Win
 class LX_Window;
 }
 
+
 namespace lx
 {
 
@@ -41,19 +42,13 @@ namespace FileIO
 class LX_FileBuffer;
 }
 
-}
-
-namespace LX_Graphics
+namespace Graphics
 {
 class LX_TextTexture;
 class LX_SolidTextTexture;
 class LX_ShadedTextTexture;
 class LX_BlendedTextTexture;
 }
-
-
-namespace lx
-{
 
 /**
 *   @ingroup Graphics
@@ -81,10 +76,10 @@ enum class LX_TTF_TypeText;
 */
 class LX_Font final
 {
-    friend class LX_Graphics::LX_TextTexture;
-    friend class LX_Graphics::LX_SolidTextTexture;
-    friend class LX_Graphics::LX_ShadedTextTexture;
-    friend class LX_Graphics::LX_BlendedTextTexture;
+    friend class lx::Graphics::LX_TextTexture;
+    friend class lx::Graphics::LX_SolidTextTexture;
+    friend class lx::Graphics::LX_ShadedTextTexture;
+    friend class lx::Graphics::LX_BlendedTextTexture;
     std::unique_ptr<LX_Font_> _fimpl;
 
     LX_Font( LX_Font& f ) = delete;

@@ -6,7 +6,7 @@ using namespace std;
 using namespace lx::Event;
 using namespace FloatBox;
 
-using namespace LX_Graphics;
+using namespace lx::Graphics;
 using namespace lx::TrueTypeFont;
 using namespace lx::Device;
 using namespace lx::Physics;
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
         blue = new LX_Sprite(std::string("test/asset/blue.bmp"), w);
         lx::Log::log("SUCCESS - The three assets were successfully loaded");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::log("FAILURE - (At least) One of the three assets was not loaded");
         lx::Log::log("%s", ie.what());

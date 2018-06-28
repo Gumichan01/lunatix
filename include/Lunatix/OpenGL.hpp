@@ -24,9 +24,13 @@
 #include <Lunatix/utils/utf8_string.hpp>
 #include <SDL2/SDL_video.h>
 
+
+namespace lx
+{
+
 /**
 *   @ingroup Graphics
-*   @namespace LX_Graphics
+*   @namespace lx::Graphics
 *   @brief The graphics namespace
 *
 *   It handlles rendering and operations (images, texture streaming,...)
@@ -35,11 +39,11 @@
 *   in the configuration file must be set to 1, otherwise the behaviour of
 *   the library is undefined.
 */
-namespace LX_Graphics
+namespace Graphics
 {
 
 /**
-*   @namespace LX_Graphics::LX_OpenGL
+*   @namespace lx::Graphics::OpenGL
 *   @brief The OpenGL interface namespace
 *
 *   It provides functions for using OpenGL with LunatiX
@@ -50,7 +54,7 @@ namespace LX_Graphics
 *
 *   @sa LX_Graphics
 */
-namespace LX_OpenGL
+namespace OpenGL
 {
 /**
 *   @typedef LX_GLattr
@@ -146,7 +150,7 @@ void UnloadLibrary() noexcept;
 *
 *      typedef void (APIENTRY * GL_ActiveTextureARB_Func)(unsigned int);
 *      GL_ActiveTextureARB_Func glActiveTextureARB_ptr = 0;
-*      glActiveTextureARB_ptr = LX_Graphics::LX_OpenGL::getProcAddress<GL_ActiveTextureARB_Func>("glActiveTextureARB");
+*      glActiveTextureARB_ptr = lx::Graphics::OpenGL::getProcAddress<GL_ActiveTextureARB_Func>("glActiveTextureARB");
 *
 *   @note 2 - It is very important to set the type parameter of *getProcAddress* → *getProcAddress<**type**>()* .
 *      Otherwise, the code will not compile.
@@ -250,9 +254,11 @@ bool getAttribute( LX_GLattr attr, int& value ) noexcept;
 */
 bool setAttribute( LX_GLattr attr, int value ) noexcept;
 
-}   // LX_OpenGL
+}   // OpenGL
 
-}   // LX_Graphics
+}   // Graphics
+
+}   // lx
 
 #include <Lunatix/OpenGL.tpp>
 

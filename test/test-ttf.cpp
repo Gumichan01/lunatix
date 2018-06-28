@@ -101,8 +101,8 @@ void test_SolidText()
 
     {
         LX_Font font(fname, dcolour, 32);
-        LX_Graphics::LX_SolidTextTexture simg(str,font,win);
-        LX_Graphics::LX_SolidTextTexture simg2(font,win);
+        lx::Graphics::LX_SolidTextTexture simg(str,font,win);
+        lx::Graphics::LX_SolidTextTexture simg2(font,win);
         lx::Log::log("SUCCESS - Image loaded");
         lx::Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
         lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
@@ -167,8 +167,8 @@ void test_ShadedText()
     lx::Log::log("Load a shaded text image and display it");
 
     {
-        LX_Graphics::LX_ShadedTextTexture simg(str,font,bg,win);
-        LX_Graphics::LX_ShadedTextTexture simg2(font,win);
+        lx::Graphics::LX_ShadedTextTexture simg(str,font,bg,win);
+        lx::Graphics::LX_ShadedTextTexture simg2(font,win);
         lx::Log::log("SUCCESS - Image loaded");
         lx::Log::log("sizes: %u %u", simg.getTextSize(), simg2.getTextSize());
         lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
@@ -233,8 +233,8 @@ void test_BlendedText()
     lx::Log::log("Load a blended text image and display it");
 
     {
-        LX_Graphics::LX_BlendedTextTexture simg(str,font,win);
-        LX_Graphics::LX_BlendedTextTexture simg2(font,win);
+        lx::Graphics::LX_BlendedTextTexture simg(str,font,win);
+        lx::Graphics::LX_BlendedTextTexture simg2(font,win);
         lx::Log::log("SUCCESS - Image loaded");
         lx::Log::log("Set the following text: %s; size: 32",str.utf8_str());
         simg.setPosition(100,100);

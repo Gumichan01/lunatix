@@ -22,15 +22,16 @@
 
 #include <Lunatix/Vector2D.hpp>
 
-namespace LX_Graphics
+
+namespace lx
+{
+
+namespace Graphics
 {
 struct LX_ImgCoord;
 struct LX_ImgRect;
 }
 
-
-namespace lx
-{
 
 namespace Physics
 {
@@ -61,17 +62,17 @@ struct LX_FloatingBox final
 
 
 /**
-*   @fn LX_FloatPosition toFloatPosition(const LX_Graphics::LX_ImgCoord& coord) noexcept
+*   @fn LX_FloatPosition toFloatPosition(const lx::Graphics::LX_ImgCoord& coord) noexcept
 *   @param coord
 *   @return The float position
 */
-LX_FloatPosition toFloatPosition( const LX_Graphics::LX_ImgCoord& coord ) noexcept;
+LX_FloatPosition toFloatPosition( const lx::Graphics::LX_ImgCoord& coord ) noexcept;
 /**
-*   @fn LX_FloatingBox toFloatingBox(const LX_Graphics::LX_ImgRect& rect) noexcept
+*   @fn LX_FloatingBox toFloatingBox(const lx::Graphics::LX_ImgRect& rect) noexcept
 *   @param rect
 *   @return The floating box
 */
-LX_FloatingBox toFloatingBox( const LX_Graphics::LX_ImgRect& rect ) noexcept;
+LX_FloatingBox toFloatingBox( const lx::Graphics::LX_ImgRect& rect ) noexcept;
 
 /**
 *   @struct LX_Segment

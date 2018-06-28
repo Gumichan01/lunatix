@@ -29,14 +29,14 @@ namespace libtagpp
 class Tag;
 }
 
-namespace LX_Graphics
-{
-class LX_BufferedImage;
-}
-
 
 namespace lx
 {
+
+namespace Graphics
+{
+class LX_BufferedImage;
+}
 
 namespace Mixer
 {
@@ -62,7 +62,7 @@ struct LX_MusicTag
     UTF8string genre{""};                   /**< Genre  */
     UTF8string format{""};                  /**< Format (MP3, OGG, FLAC, M4A)    */
     UTF8string duration{""};                /**< Duration, in HH:MM:SS format    */
-    LX_Graphics::LX_BufferedImage * img = nullptr;  /**< Album cover, if it exists  */
+    lx::Graphics::LX_BufferedImage * img = nullptr;  /**< Album cover, if it exists  */
 
     //LX_MusicTag() noexcept;
     ~LX_MusicTag();

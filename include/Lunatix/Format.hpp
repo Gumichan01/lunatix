@@ -23,7 +23,10 @@
 #include <SDL2/SDL_pixels.h>
 
 
-namespace LX_Graphics
+namespace lx
+{
+
+namespace Graphics
 {
 
 /**
@@ -70,6 +73,8 @@ enum class LX_PixelFormat
     YVYU        = SDL_PIXELFORMAT_YVYU      /**<      packed mode: Y0+V0+Y1+U0 (1 plane)      */
 };
 
-}
+}   // Graphics
+
+}   // lx
 
 #endif  // LX_IMAGE_H_INCLUDED

@@ -28,13 +28,13 @@ namespace lx
 namespace Physics
 {
 
-LX_FloatPosition toFloatPosition( const LX_Graphics::LX_ImgCoord& coord ) noexcept
+LX_FloatPosition toFloatPosition( const lx::Graphics::LX_ImgCoord& coord ) noexcept
 {
     return LX_FloatPosition{ fbox<decltype( coord.x )>( coord.x ), fbox<decltype( coord.x )>( coord.y ) };
 }
 
 
-LX_FloatingBox toFloatingBox( const LX_Graphics::LX_ImgRect& rect ) noexcept
+LX_FloatingBox toFloatingBox( const lx::Graphics::LX_ImgRect& rect ) noexcept
 {
     return LX_FloatingBox{ toFloatPosition( rect.p ), rect.w, rect.h };
 }

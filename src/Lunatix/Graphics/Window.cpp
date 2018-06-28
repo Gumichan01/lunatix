@@ -171,7 +171,7 @@ struct LX_Window_ final
     SDL_GLContext _glcontext = nullptr;             /* The context (only used in OpenGL)    */
     int _original_width      = DEFAULT_WIN_WIDTH;   /* The width of the window              */
     int _original_height     = DEFAULT_WIN_WIDTH;   /* The height of the window             */
-    LX_Graphics::LX_ImgRect _viewport     = { { 0, 0 }, 0, 0 };
+    lx::Graphics::LX_ImgRect _viewport     = { { 0, 0 }, 0, 0 };
 
     LX_Window_( const LX_Window_& ) = delete;
     LX_Window_& operator =( const LX_Window_& ) = delete;
@@ -276,57 +276,57 @@ void * LX_Window::getRenderingSys() const noexcept
 
 void LX_Window::setIcon( const std::string& ficon ) noexcept
 {
-    SDL_SetWindowIcon( _wimpl->_window, LX_Graphics::LX_BufferedImage( ficon )._surface );
+    SDL_SetWindowIcon( _wimpl->_window, lx::Graphics::LX_BufferedImage( ficon )._surface );
 }
 
 
-void LX_Window::drawLine( const LX_Graphics::LX_ImgCoord& p,
-                          const LX_Graphics::LX_ImgCoord& q ) noexcept
+void LX_Window::drawLine( const lx::Graphics::LX_ImgCoord& p,
+                          const lx::Graphics::LX_ImgCoord& q ) noexcept
 {
     SDL_RenderDrawLine( _wimpl->_renderer, p.x, p.y, q.x, q.y );
 }
 
-void LX_Window::drawLines( const LX_Graphics::LX_ImgCoord * p, const int count ) noexcept
+void LX_Window::drawLines( const lx::Graphics::LX_ImgCoord * p, const int count ) noexcept
 {
     SDL_RenderDrawLines( _wimpl->_renderer,
                          reinterpret_cast<const SDL_Point *>( p ), count );
 }
 
-void LX_Window::drawLines( const std::vector<LX_Graphics::LX_ImgCoord>& vpoints ) noexcept
+void LX_Window::drawLines( const std::vector<lx::Graphics::LX_ImgCoord>& vpoints ) noexcept
 {
     SDL_RenderDrawLines( _wimpl->_renderer,
                          reinterpret_cast<const SDL_Point *>( &vpoints[0] ),
                          static_cast<int>( vpoints.size() ) );
 }
 
-void LX_Window::drawLine( const LX_Graphics::LX_ImgCoord& p,
+void LX_Window::drawLine( const lx::Graphics::LX_ImgCoord& p,
                           const lx::Physics::LX_Vector2D& v ) noexcept
 {
     const int vx = static_cast<int>( v.vx );
     const int vy = static_cast<int>( v.vy );
-    drawLine( p, LX_Graphics::LX_ImgCoord{p.x + vx, p.y + vy} );
-    drawLine( p, LX_Graphics::LX_ImgCoord{p.x - vx, p.y - vy} );
+    drawLine( p, lx::Graphics::LX_ImgCoord{p.x + vx, p.y + vy} );
+    drawLine( p, lx::Graphics::LX_ImgCoord{p.x - vx, p.y - vy} );
 }
 
 
-void LX_Window::drawRect( const LX_Graphics::LX_ImgRect& box ) noexcept
+void LX_Window::drawRect( const lx::Graphics::LX_ImgRect& box ) noexcept
 {
     const SDL_Rect SDL_BOX{box.p.x, box.p.y, box.w, box.h};
     SDL_RenderDrawRect( _wimpl->_renderer, &SDL_BOX );
 }
 
-void LX_Window::drawRect( const LX_Graphics::LX_ImgCoord& p,
+void LX_Window::drawRect( const lx::Graphics::LX_ImgCoord& p,
                           const lx::Physics::LX_Vector2D& v ) noexcept
 {
-    using LX_Graphics::LX_ImgCoord;
+    using lx::Graphics::LX_ImgCoord;
     int w = static_cast<int>( v.vx );
     int h = static_cast<int>( v.vy );
-    drawRect( LX_Graphics::LX_ImgRect{LX_ImgCoord{p.x, p.y}, w, h} );
+    drawRect( lx::Graphics::LX_ImgRect{LX_ImgCoord{p.x, p.y}, w, h} );
 }
 
 void LX_Window::drawCircle( const lx::Physics::LX_Circle& c ) noexcept
 {
-    const LX_Graphics::LX_ImgCoord& P = LX_Graphics::toPixelPosition( c.center );
+    const lx::Graphics::LX_ImgCoord& P = lx::Graphics::toPixelPosition( c.center );
     const int R = static_cast<int>( c.radius );
     int x = 0;
     int y = R;
@@ -363,23 +363,23 @@ void LX_Window::drawCircle( const lx::Physics::LX_Circle& c ) noexcept
 }
 
 
-void LX_Window::fillRect( const LX_Graphics::LX_ImgRect& box ) noexcept
+void LX_Window::fillRect( const lx::Graphics::LX_ImgRect& box ) noexcept
 {
     const SDL_Rect SDL_BOX{box.p.x, box.p.y, box.w, box.h};
     SDL_RenderFillRect( _wimpl->_renderer, &SDL_BOX );
 }
 
-void LX_Window::fillRect( const LX_Graphics::LX_ImgCoord& p,
+void LX_Window::fillRect( const lx::Graphics::LX_ImgCoord& p,
                           const lx::Physics::LX_Vector2D& v ) noexcept
 {
     int w = static_cast<int>( v.vx );
     int h = static_cast<int>( v.vy );
-    fillRect( LX_Graphics::LX_ImgRect{p.x, p.y, w, h} );
+    fillRect( lx::Graphics::LX_ImgRect{p.x, p.y, w, h} );
 }
 
 void LX_Window::fillCircle( const lx::Physics::LX_Circle& c ) noexcept
 {
-    const LX_Graphics::LX_ImgCoord& P = LX_Graphics::toPixelPosition( c.center );
+    const lx::Graphics::LX_ImgCoord& P = lx::Graphics::toPixelPosition( c.center );
     const int R = static_cast<int>( c.radius );
     int x = 0;
     int y = R;
@@ -387,14 +387,14 @@ void LX_Window::fillCircle( const lx::Physics::LX_Circle& c ) noexcept
 
     while ( y >= x )
     {
-        drawLine( LX_Graphics::LX_ImgCoord{P.x - y, P.y + x},
-                  LX_Graphics::LX_ImgCoord{P.x + y, P.y + x} );
-        drawLine( LX_Graphics::LX_ImgCoord{P.x - x, P.y + y},
-                  LX_Graphics::LX_ImgCoord{P.x + x, P.y + y} );
-        drawLine( LX_Graphics::LX_ImgCoord{P.x - x, P.y - y},
-                  LX_Graphics::LX_ImgCoord{P.x + x, P.y - y} );
-        drawLine( LX_Graphics::LX_ImgCoord{P.x - y, P.y - x},
-                  LX_Graphics::LX_ImgCoord{P.x + y, P.y - x} );
+        drawLine( lx::Graphics::LX_ImgCoord{P.x - y, P.y + x},
+                  lx::Graphics::LX_ImgCoord{P.x + y, P.y + x} );
+        drawLine( lx::Graphics::LX_ImgCoord{P.x - x, P.y + y},
+                  lx::Graphics::LX_ImgCoord{P.x + x, P.y + y} );
+        drawLine( lx::Graphics::LX_ImgCoord{P.x - x, P.y - y},
+                  lx::Graphics::LX_ImgCoord{P.x + x, P.y - y} );
+        drawLine( lx::Graphics::LX_ImgCoord{P.x - y, P.y - x},
+                  lx::Graphics::LX_ImgCoord{P.x + y, P.y - x} );
 
         if ( d >= 2 * x )
         {
@@ -453,7 +453,7 @@ void LX_Window::setWindowSize( int w, int h ) noexcept
 }
 
 
-void LX_Window::setViewPort( const LX_Graphics::LX_ImgRect& viewport ) noexcept
+void LX_Window::setViewPort( const lx::Graphics::LX_ImgRect& viewport ) noexcept
 {
     const SDL_Rect VPORT{viewport.p.x, viewport.p.y, viewport.w, viewport.h};
     SDL_RenderSetViewport( _wimpl->_renderer, &VPORT );
@@ -464,7 +464,7 @@ void LX_Window::resetViewPort() noexcept
     setViewPort( _wimpl->_viewport );
 }
 
-void LX_Window::getViewPort( LX_Graphics::LX_ImgRect& viewport ) const noexcept
+void LX_Window::getViewPort( lx::Graphics::LX_ImgRect& viewport ) const noexcept
 {
     SDL_Rect rect;
     SDL_RenderGetViewport( _wimpl->_renderer, &rect );

@@ -1575,11 +1575,11 @@ void test_conversion(void)
 
     LX_FloatPosition fp1{0.0f, 0.0f};
     LX_FloatPosition fp2{64.0f, 128.0f};
-    LX_Graphics::LX_ImgCoord exp1{i32(fp1.x.v), i32(fp1.y.v)};
-    LX_Graphics::LX_ImgCoord exp2{i32(fp2.x.v), i32(fp2.y.v)};
+    lx::Graphics::LX_ImgCoord exp1{i32(fp1.x.v), i32(fp1.y.v)};
+    lx::Graphics::LX_ImgCoord exp2{i32(fp2.x.v), i32(fp2.y.v)};
 
-    LX_Graphics::LX_ImgCoord p1 = LX_Graphics::toPixelPosition(fp1);
-    LX_Graphics::LX_ImgCoord p2 = LX_Graphics::toPixelPosition(fp2);
+    lx::Graphics::LX_ImgCoord p1 = lx::Graphics::toPixelPosition(fp1);
+    lx::Graphics::LX_ImgCoord p2 = lx::Graphics::toPixelPosition(fp2);
 
     if(p1 == exp1)
         lx::Log::log("SUCCESS - p1(%d, %d)", p1.x, p1.y);

@@ -32,7 +32,7 @@ const int LX_NOLOOP  = 0;
 const int LX_INFLOOP = -1;
 
 
-LX_Graphics::
+lx::Graphics::
 LX_BufferedImage * _loadImage( const std::string& file,
                                const libtagpp::ImgMetaData& imgdata )
 {

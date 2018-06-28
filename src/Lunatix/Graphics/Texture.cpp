@@ -33,7 +33,7 @@ namespace
 {
 
 constexpr double DEGREE_180 = 180.0;
-const LX_Graphics::LX_ImgRect RNULL{{0, 0}, 0, 0};
+const lx::Graphics::LX_ImgRect RNULL{{0, 0}, 0, 0};
 const LX_Colour CNULL{0, 0, 0, 0};
 
 
@@ -42,12 +42,12 @@ inline constexpr SDL_Renderer * render( void * r )
     return static_cast<SDL_Renderer *>( r );
 }
 
-inline constexpr uint32_t u32( LX_Graphics::LX_PixelFormat& x )
+inline constexpr uint32_t u32( lx::Graphics::LX_PixelFormat& x )
 {
     return static_cast<uint32_t>( x );
 }
 
-inline constexpr SDL_RendererFlip shortToFlip_( const LX_Graphics::LX_MIRROR& mirror ) noexcept
+inline constexpr SDL_RendererFlip shortToFlip_( const lx::Graphics::LX_MIRROR& mirror ) noexcept
 {
     return static_cast<SDL_RendererFlip>( mirror );
 }
@@ -59,7 +59,7 @@ inline constexpr double radianToDegree( const double angle ) noexcept
 
 // Load a image from a file
 SDL_Surface * loadSurface_( const std::string& filename,
-                            LX_Graphics::LX_PixelFormat& format ) noexcept
+                            lx::Graphics::LX_PixelFormat& format ) noexcept
 {
     SDL_Surface * loaded = IMG_Load( filename.c_str() );
 
@@ -73,7 +73,7 @@ SDL_Surface * loadSurface_( const std::string& filename,
 
 // Load a texture from a file
 SDL_Texture * loadTexture_( const std::string& filename,
-                            LX_Graphics::LX_PixelFormat& format,
+                            lx::Graphics::LX_PixelFormat& format,
                             SDL_Renderer * r ) noexcept
 {
     SDL_Surface * tmp_s = loadSurface_( filename, format );
@@ -86,7 +86,7 @@ SDL_Texture * loadTexture_( const std::string& filename,
     return tmp_t;
 }
 
-inline constexpr SDL_Rect sdl_rect_( const LX_Graphics::LX_ImgRect& imgr )
+inline constexpr SDL_Rect sdl_rect_( const lx::Graphics::LX_ImgRect& imgr )
 {
     return SDL_Rect{imgr.p.x, imgr.p.y, imgr.w, imgr.h};
 }
@@ -98,7 +98,11 @@ inline constexpr bool isNull_( const SDL_Rect& rect )
 
 }
 
-namespace LX_Graphics
+
+namespace lx
+{
+
+namespace Graphics
 {
 
 LX_ImageException::LX_ImageException( std::string err ) : _string_error( err ) {}
@@ -860,7 +864,7 @@ void LX_TextTexture::setPosition( int x, int y ) noexcept
     _dimension.p.y = y;
 }
 
-void LX_TextTexture::setPosition( const LX_Graphics::LX_ImgCoord& pos ) noexcept
+void LX_TextTexture::setPosition( const lx::Graphics::LX_ImgCoord& pos ) noexcept
 {
     _dimension.p = pos;
 }
@@ -1088,4 +1092,6 @@ void LX_BlendedTextTexture::updateTexture_() noexcept
     _font.setColour_( tmp );
 }
 
-}
+}   // Graphics
+
+}   // lx

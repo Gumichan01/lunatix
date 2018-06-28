@@ -28,7 +28,10 @@ struct LX_FloatPosition;
 struct LX_FloatingBox;
 }
 
-namespace LX_Graphics
+namespace lx
+{
+
+namespace Graphics
 {
 
 /**
@@ -111,6 +114,8 @@ bool operator ==( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept;
 */
 bool operator !=( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept;
 
-}
+}   // Graphics
+
+}   // lx
 
 #endif  /* LX_IMGRECT_H_INCLUDED */

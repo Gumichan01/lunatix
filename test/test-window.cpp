@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-using namespace LX_Graphics;
+using namespace lx::Graphics;
 
 void test_window1(LX_Win::LX_Window *win);
 void test_window2(void);
@@ -121,10 +121,10 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"UTF8string argument");
-        LX_Graphics::LX_Sprite img(u8name,*win);
+        lx::Graphics::LX_Sprite img(u8name,*win);
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - image loaded");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - image from file: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -134,15 +134,15 @@ void test_image(LX_Win::LX_Window *win)
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a image file using the file buffer");
         lx::FileIO::LX_FileBuffer b(name);
-        LX_Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
-        LX_Graphics::LX_Sprite *img = bf->generateSprite(*win);
+        lx::Graphics::LX_BufferedImage *bf =  b.loadBufferedImage();
+        lx::Graphics::LX_Sprite *img = bf->generateSprite(*win);
         delete bf;
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - image loaded from memory");
 
         delete img;
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - image from memory: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -151,12 +151,12 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a file that is not an image from memory");
-        LX_Graphics::LX_Sprite *img = LX_Graphics::LX_BufferedImage(mname).generateSprite(*win);
+        lx::Graphics::LX_Sprite *img = lx::Graphics::LX_BufferedImage(mname).generateSprite(*win);
 
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - should not be loaded");
         delete img;
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - failure expected");
         lx::Log::log("%s", ie.what());
@@ -174,7 +174,7 @@ void test_image(LX_Win::LX_Window *win)
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface; it should be created");
         lx::Log::log("%s", ie.what());
@@ -187,7 +187,7 @@ void test_image(LX_Win::LX_Window *win)
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface; it should be created");
         lx::Log::log("%s", ie.what());
@@ -202,7 +202,7 @@ void test_image(LX_Win::LX_Window *win)
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Surface created");
         delete data;
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface; it should be created");
         lx::Log::log("%s", ie.what());
@@ -216,7 +216,7 @@ void test_image(LX_Win::LX_Window *win)
         LX_BufferedImage data(std::string("<invalid>"));
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface created. It must not");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - expected");
         lx::Log::log("%s", ie.what());
@@ -229,7 +229,7 @@ void test_image(LX_Win::LX_Window *win)
         LX_BufferedImage data(mname);
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Surface created. It must not");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - expected");
         lx::Log::log("%s", ie.what());
@@ -238,7 +238,7 @@ void test_image(LX_Win::LX_Window *win)
     // Display a bullet
     try
     {
-        LX_Graphics::LX_Sprite img(name,*win);
+        lx::Graphics::LX_Sprite img(name,*win);
         LX_ImgRect box{64,64,256,128};
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - image loaded");
@@ -269,7 +269,7 @@ void test_image(LX_Win::LX_Window *win)
         Uint32 t2 = SDL_GetTicks();
         lx::Log::logInfo(lx::Log::APPLICATION,"Done in %d ms",t2-t1);
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - image from file: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -309,7 +309,7 @@ void test_image(LX_Win::LX_Window *win)
         Uint32 t2 = SDL_GetTicks();
         lx::Log::logInfo(lx::Log::APPLICATION,"Done in %d ms",t2-t1);
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Streaming image; it should be created");
         lx::Log::log("%s", ie.what());
@@ -323,10 +323,10 @@ void test_image(LX_Win::LX_Window *win)
 
     try
     {
-        LX_Graphics::LX_AnimatedSprite img(u8_str,*win,c,0,false);
+        lx::Graphics::LX_AnimatedSprite img(u8_str,*win,c,0,false);
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - animated sprite loaded");
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - animated sprite from file: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -335,12 +335,12 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a sprite sheet file using the bufered image");
-        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0, false);
+        lx::Graphics::LX_AnimatedSprite *img = LX_BufferedImage(sp_str).generateAnimatedSprite(*win,c,0, false);
 
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - animated sprite loaded from memory");
         delete img;
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - animated sprite from memory: should be loaded");
         lx::Log::log("%s", ie.what());
@@ -349,12 +349,12 @@ void test_image(LX_Win::LX_Window *win)
     try
     {
         lx::Log::logInfo(lx::Log::APPLICATION,"open a file that is not an image from memory");
-        LX_Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0,false);
+        lx::Graphics::LX_AnimatedSprite *img = LX_BufferedImage(mname).generateAnimatedSprite(*win,c,0,false);
 
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - should not be loaded");
         delete img;
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - animated sprite failure expected");
         lx::Log::log("%s", ie.what());
@@ -383,7 +383,7 @@ void test_image(LX_Win::LX_Window *win)
         {
             // Infinite animation
             LX_ImgRect rect{256,64,211,448};
-            LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
+            lx::Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, true);
             lx::Log::logInfo(lx::Log::TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             lx::Log::log("frame delay: %u ms", sprite.getFrameDelay());
@@ -403,7 +403,7 @@ void test_image(LX_Win::LX_Window *win)
         {
             // Animation
             LX_ImgRect rect{420,100,211,448};
-            LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
+            lx::Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay, false);
             lx::Log::logInfo(lx::Log::TEST,"animated sprite — infinitely looped: %s",
                             sprite.isInfinitelyLooped() ? "Yes" : "No");
             lx::Log::log("frame delay: %u ms", sprite.getFrameDelay());
@@ -457,8 +457,8 @@ void test_viewport(LX_Win::LX_Window *win)
     coordinates.push_back({1272,449,211,448});
     coordinates.push_back({1484,449,211,448});
 
-    LX_Graphics::LX_Sprite img(name, *win);
-    LX_Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
+    lx::Graphics::LX_Sprite img(name, *win);
+    lx::Graphics::LX_AnimatedSprite sprite(sp_str,*win,coordinates,delay,true);
 
     LX_ImgRect viewport{{win->getWidth()/2, 0}, win->getWidth()/2, win->getHeight()/2};
     lx::Log::logInfo(lx::Log::APPLICATION,"Viewport: {%d,%d,%d,%d}",
@@ -490,7 +490,7 @@ void test_winManager(LX_Win::LX_Window *win)
 {
     lx::Log::log(" = TEST WinManager = ");
     std::string name = "data/bullet.png";
-    LX_Graphics::LX_Sprite img(name,*win);
+    lx::Graphics::LX_Sprite img(name,*win);
 
     if(win == nullptr)
         lx::Log::log("FAILURE - The window was not initialized");
@@ -569,7 +569,7 @@ void test_opengl()
         {
             lx::Log::log("Get an OpengGL function: glClearColor");
             typedef void (APIENTRY * LX_Fun)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-            LX_Fun f = LX_Graphics::LX_OpenGL::getProcAddress<LX_Fun>("glClearColor");
+            LX_Fun f = lx::Graphics::OpenGL::getProcAddress<LX_Fun>("glClearColor");
 
             if(f == nullptr)
                 lx::Log::log("This function is not available ×");
@@ -689,7 +689,7 @@ void test_opengl2()
         lx::Time::delay(2000);
 
         {
-            LX_Graphics::LX_Sprite img(std::string("data/bullet.png"), w1);
+            lx::Graphics::LX_Sprite img(std::string("data/bullet.png"), w1);
             lx::Log::log("Bind the sprite to the first window → #1");
             float w, h;
             bool b = img.bind(&w,&h);

@@ -58,7 +58,7 @@ public:
 };
 
 
-LX_Mouse::LX_Mouse( const LX_Graphics::LX_BufferedImage& surface,
+LX_Mouse::LX_Mouse( const lx::Graphics::LX_BufferedImage& surface,
                     int hot_x, int hot_y ) noexcept
     : _mimpl( new LX_Mouse_( surface._surface, hot_x, hot_y ) ) {}
 

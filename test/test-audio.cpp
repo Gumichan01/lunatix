@@ -67,18 +67,18 @@ void test_info(const std::string& s)
             lx::Log::log("Format - %s", tag.format.utf8_str());
             lx::Log::log("================================");
 
-            LX_Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
+            lx::Graphics::LX_Sprite * cover = tag.img->generateSprite(w);
             lx::Log::logInfo(lx::Log::TEST,"cover opened");
 
             w.clearWindow();
-            LX_Graphics::LX_ImgRect box{0,0,info.w,info.h};
+            lx::Graphics::LX_ImgRect box{0,0,info.w,info.h};
             cover->draw(box);
             w.update();
             lx::Time::delay(2000);
             delete cover;
         }
     }
-    catch(LX_Graphics::LX_ImageException& ie)
+    catch(lx::Graphics::LX_ImageException& ie)
     {
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - %s", ie.what());
     }

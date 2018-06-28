@@ -14,7 +14,10 @@
 #include <Lunatix/Hitbox.hpp>
 
 
-namespace LX_Graphics
+namespace lx
+{
+
+namespace Graphics
 {
 
 LX_ImgCoord toPixelPosition( const lx::Physics::LX_FloatPosition& p ) noexcept
@@ -47,4 +50,6 @@ bool operator !=( const LX_ImgRect& a, const LX_ImgRect& b ) noexcept
     return !( a == b );
 }
 
-}
+}   // Graphics
+
+}   // lx

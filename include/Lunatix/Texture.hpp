@@ -59,7 +59,10 @@ class LX_FileBuffer;
 }
 
 
-namespace LX_Graphics
+namespace lx
+{
+
+namespace Graphics
 {
 
 enum class LX_MIRROR
@@ -637,10 +640,10 @@ public:
     */
     void setPosition( int x, int y ) noexcept;
     /**
-    *   @fn void setPosition(const LX_Graphics::LX_ImgCoord& pos) noexcept
+    *   @fn void setPosition(const lx::Graphics::LX_ImgCoord& pos) noexcept
     *   @param [in] pos
     */
-    void setPosition( const LX_Graphics::LX_ImgCoord& pos ) noexcept;
+    void setPosition( const lx::Graphics::LX_ImgCoord& pos ) noexcept;
     /**
     *   @fn virtual void setText(const std::string& text) noexcept
     *
@@ -884,6 +887,8 @@ public:
     ~LX_BlendedTextTexture() = default;
 };
 
-}
+}   // Graphics
+
+}  // lx
 
 #endif  // LX_IMAGE_H_INCLUDED

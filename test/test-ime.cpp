@@ -30,7 +30,7 @@ public:
 
             if(!u8str.utf8_empty())
             {
-                LX_Graphics::LX_BlendedTextTexture img(_font,_w);
+                lx::Graphics::LX_BlendedTextTexture img(_font,_w);
                 img.setText(u8str,24);
                 img.setPosition(100,100);
                 img.draw();
@@ -39,7 +39,7 @@ public:
             if(!u8comp.utf8_empty())
             {
                 LX_Colour colour = {127,127,127,255};
-                LX_Graphics::LX_ShadedTextTexture im(u8comp,18,_font,colour,_w);
+                lx::Graphics::LX_ShadedTextTexture im(u8comp,18,_font,colour,_w);
                 im.setPosition(100,124);
                 im.draw();
             }

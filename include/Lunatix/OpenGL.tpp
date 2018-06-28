@@ -12,9 +12,12 @@
 
 #include <SDL2/SDL_video.h>
 
-namespace LX_Graphics
+namespace lx
 {
-namespace LX_OpenGL
+
+namespace Graphics
+{
+namespace OpenGL
 {
 
 template<typename T>
@@ -24,5 +27,8 @@ T getProcAddress(const std::string proc) noexcept
     return t;
 }
 
-}
-}
+}   // OpenGL
+
+}   // Graphics
+
+}   // lx

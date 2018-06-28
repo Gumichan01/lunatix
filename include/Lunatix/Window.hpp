@@ -31,7 +31,11 @@
 struct SDL_Window;
 struct SDL_Renderer;
 
-namespace LX_Graphics
+
+namespace lx
+{
+
+namespace Graphics
 {
 class LX_Texture;
 class LX_Sprite;
@@ -42,9 +46,6 @@ class LX_BufferedImage;
 class LX_ImgCoord;
 class LX_ImgRect;
 }
-
-namespace lx
-{
 
 namespace TrueTypeFont
 {
@@ -180,12 +181,12 @@ struct LX_Window_;
 */
 class LX_Window final
 {
-    friend class LX_Graphics::LX_Texture;
-    friend class LX_Graphics::LX_Sprite;
-    friend class LX_Graphics::LX_BufferedImage;
-    friend class LX_Graphics::LX_StreamingTexture;
-    friend class LX_Graphics::LX_AnimatedSprite;
-    friend class LX_Graphics::LX_TextTexture;
+    friend class lx::Graphics::LX_Texture;
+    friend class lx::Graphics::LX_Sprite;
+    friend class lx::Graphics::LX_BufferedImage;
+    friend class lx::Graphics::LX_StreamingTexture;
+    friend class lx::Graphics::LX_AnimatedSprite;
+    friend class lx::Graphics::LX_TextTexture;
     friend class lx::TrueTypeFont::LX_Font;
 
     std::unique_ptr<LX_Window_> _wimpl;
@@ -213,38 +214,38 @@ public:
     void setIcon( const std::string& ficon ) noexcept;
 
     /**
-    *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q) noexcept
+    *   @fn void drawLine(const lx::Graphics::LX_ImgCoord& p, const lx::Graphics::LX_ImgCoord& q) noexcept
     *
     *   @param [in] p The first point
     *   @param [in] q The second point
     */
-    void drawLine( const LX_Graphics::LX_ImgCoord& p, const LX_Graphics::LX_ImgCoord& q ) noexcept;
+    void drawLine( const lx::Graphics::LX_ImgCoord& p, const lx::Graphics::LX_ImgCoord& q ) noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
     *   Please use the alternative version that takes an std::vector
     *
-    *   @fn void drawLines(const LX_Graphics::LX_ImgCoord * p, const int count) noexcept
+    *   @fn void drawLines(const lx::Graphics::LX_ImgCoord * p, const int count) noexcept
     *
     *   Draw several connected segments on the window
     *
     *   @param [in] p An array of points
     *   @param [in] count The number of points, drawing count-1 segments
     */
-    void drawLines( const LX_Graphics::LX_ImgCoord * p, const int count ) noexcept;
+    void drawLines( const lx::Graphics::LX_ImgCoord * p, const int count ) noexcept;
     /**
-    *   @fn void drawLines(const std::vector<LX_Graphics::LX_ImgCoord>& vpoints) noexcept;
+    *   @fn void drawLines(const std::vector<lx::Graphics::LX_ImgCoord>& vpoints) noexcept;
     *
     *   Draw several connected segments on the window
     *
     *   @param [in] vpoints An array of points
     *   @note pre-condition: *vpoints.size()* > 0
     */
-    void drawLines( const std::vector<LX_Graphics::LX_ImgCoord>& vpoints ) noexcept;
+    void drawLines( const std::vector<lx::Graphics::LX_ImgCoord>& vpoints ) noexcept;
     /**
     *   @deprecated This signature of DrawLine is deprecated and will be removed in v0.14.0
     *   Please use the version that takes two coordinates instead.
     *
-    *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawLine(const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] p The point
     *   @param [in] v The direction vector
@@ -252,22 +253,22 @@ public:
     *   @note The length of a line depends on the norm of the direction vector
     *        The length is calculating according to this formula: ||v||*2
     */
-    void drawLine( const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
+    void drawLine( const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
     /**
-    *   @fn void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept
+    *   @fn void drawRect(const lx::Graphics::LX_ImgRect& box) noexcept
     *   @param [in] box The rectangle
     */
-    void drawRect( const LX_Graphics::LX_ImgRect& box ) noexcept;
+    void drawRect( const lx::Graphics::LX_ImgRect& box ) noexcept;
     /**
     *   @deprecated This signature of DrawRect is deprecated and will be removed in v0.14.0
     *   Please use the version that takes a box (LX_ImgRect).
     *
-    *   @fn void drawRect(const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawRect(const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
     *   @param [in] p The point
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *
     */
-    void drawRect( const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
+    void drawRect( const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
     /**
     *   @fn void drawCircle(const lx::Physics::LX_Circle& c) noexcept
     *   Draw a circle on a window
@@ -276,23 +277,23 @@ public:
     void drawCircle( const lx::Physics::LX_Circle& c ) noexcept;
 
     /**
-    *   @fn void fillRect(const LX_Graphics::LX_ImgRect& box) noexcept
+    *   @fn void fillRect(const lx::Graphics::LX_ImgRect& box) noexcept
     *   Fill a rectangle on a window
     *   @param [in] box The rectangle to fill
     */
-    void fillRect( const LX_Graphics::LX_ImgRect& box ) noexcept;
+    void fillRect( const lx::Graphics::LX_ImgRect& box ) noexcept;
     /**
     *   @deprecated This signature will be removed in v0.14.0
     *   Please use the version that takes the rect instead..
     *
-    *   @fn void fillRect(const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
+    *   @fn void fillRect(const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
     *
     *   Fill a rectangle using a point and a 2D vector
     *
     *   @param [in] p The point
     *   @param [in] v The vector
     */
-    void fillRect( const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
+    void fillRect( const lx::Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
     /**
     *   @fn void fillCircle(const lx::Physics::LX_Circle& c) noexcept
     *   Fill a circle on a window
@@ -377,26 +378,26 @@ public:
     */
     void setWindowSize( int w, int h ) noexcept;
     /**
-    *   @fn bool setViewPort(const LX_Graphics::LX_ImgRect& viewport) noexcept
+    *   @fn bool setViewPort(const lx::Graphics::LX_ImgRect& viewport) noexcept
     *
     *   Set a specific drawing area (viewport) for rendering
     *
     *   @param [in] viewport The drawing area to set.
     */
-    void setViewPort( const LX_Graphics::LX_ImgRect& viewport ) noexcept;
+    void setViewPort( const lx::Graphics::LX_ImgRect& viewport ) noexcept;
     /**
     *   @fn void resetViewPort() noexcept
     */
     void resetViewPort() noexcept;
     /**
-    *   @fn void getViewPort(LX_Graphics::LX_ImgRect& viewport) const noexcept
+    *   @fn void getViewPort(lx::Graphics::LX_ImgRect& viewport) const noexcept
     *
     *   Get the drawing area (viewport) for rendering
     *
     *   @param [out] viewport The drawing area to fill
     *
     */
-    void getViewPort( LX_Graphics::LX_ImgRect& viewport ) const noexcept;
+    void getViewPort( lx::Graphics::LX_ImgRect& viewport ) const noexcept;
 
     /**
     *   @fn void toggleFullscreen(const LX_WinMode flag) noexcept
