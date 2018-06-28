@@ -23,7 +23,10 @@
 
 using namespace FloatBox;
 
-namespace LX_Physics
+namespace lx
+{
+
+namespace Physics
 {
 
 bool operator ==( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept
@@ -165,4 +168,6 @@ LX_Vector2D& normalize( LX_Vector2D& v ) noexcept
     return v;
 }
 
-}
+}   // Physics
+
+}   // lx

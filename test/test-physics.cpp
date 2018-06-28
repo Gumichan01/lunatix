@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 using namespace std;
-using namespace LX_Physics;
+using namespace lx::Physics;
 using namespace FloatBox;
 
 void test_euclide(void);
@@ -39,7 +39,7 @@ void test_VectorLambda(void);
 
 void test_conversion(void);
 
-using namespace LX_Physics;
+using namespace lx::Physics;
 
 void displayPoly(LX_Polygon& poly);
 

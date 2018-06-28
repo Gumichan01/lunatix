@@ -51,14 +51,14 @@ namespace TrueTypeFont
 class LX_Font;
 }
 
-}
-
-namespace LX_Physics
+namespace Physics
 {
 struct LX_Circle;
 /// todo version 0.14.0 remove it
 struct LX_Vector2D;
 /// end
+}
+
 }
 
 
@@ -244,7 +244,7 @@ public:
     *   @deprecated This signature of DrawLine is deprecated and will be removed in v0.14.0
     *   Please use the version that takes two coordinates instead.
     *
-    *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawLine(const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] p The point
     *   @param [in] v The direction vector
@@ -252,7 +252,7 @@ public:
     *   @note The length of a line depends on the norm of the direction vector
     *        The length is calculating according to this formula: ||v||*2
     */
-    void drawLine( const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v ) noexcept;
+    void drawLine( const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
     /**
     *   @fn void drawRect(const LX_Graphics::LX_ImgRect& box) noexcept
     *   @param [in] box The rectangle
@@ -262,18 +262,18 @@ public:
     *   @deprecated This signature of DrawRect is deprecated and will be removed in v0.14.0
     *   Please use the version that takes a box (LX_ImgRect).
     *
-    *   @fn void drawRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
+    *   @fn void drawRect(const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
     *   @param [in] p The point
     *   @param [in] v The vector that defines how to draw the rectangle (width height)
     *
     */
-    void drawRect( const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v ) noexcept;
+    void drawRect( const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
     /**
-    *   @fn void drawCircle(const LX_Physics::LX_Circle& c) noexcept
+    *   @fn void drawCircle(const lx::Physics::LX_Circle& c) noexcept
     *   Draw a circle on a window
     *   @param [in] c The circle to draw
     */
-    void drawCircle( const LX_Physics::LX_Circle& c ) noexcept;
+    void drawCircle( const lx::Physics::LX_Circle& c ) noexcept;
 
     /**
     *   @fn void fillRect(const LX_Graphics::LX_ImgRect& box) noexcept
@@ -285,20 +285,20 @@ public:
     *   @deprecated This signature will be removed in v0.14.0
     *   Please use the version that takes the rect instead..
     *
-    *   @fn void fillRect(const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v) noexcept
+    *   @fn void fillRect(const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v) noexcept
     *
     *   Fill a rectangle using a point and a 2D vector
     *
     *   @param [in] p The point
     *   @param [in] v The vector
     */
-    void fillRect( const LX_Graphics::LX_ImgCoord& p, const LX_Physics::LX_Vector2D& v ) noexcept;
+    void fillRect( const LX_Graphics::LX_ImgCoord& p, const lx::Physics::LX_Vector2D& v ) noexcept;
     /**
-    *   @fn void fillCircle(const LX_Physics::LX_Circle& c) noexcept
+    *   @fn void fillCircle(const lx::Physics::LX_Circle& c) noexcept
     *   Fill a circle on a window
     *   @param [in] c The circle to draw
     */
-    void fillCircle( const LX_Physics::LX_Circle& c ) noexcept;
+    void fillCircle( const lx::Physics::LX_Circle& c ) noexcept;
 
     /**
     *   @fn void setDrawColour(const LX_Colour& colour) noexcept

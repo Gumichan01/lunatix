@@ -51,16 +51,16 @@ constexpr bool intersetInterval( const Float& min1, const Float& max1,
 *   Complexity: O(m + n) — m > 3 is the number of vertices in poly1,
 *                          n > 3 is the number of vertices in poly2
 */
-bool collisionPolySAT( const LX_Physics::LX_Polygon& poly1,
-                       const LX_Physics::LX_Polygon& poly2 ) noexcept
+bool collisionPolySAT( const lx::Physics::LX_Polygon& poly1,
+                       const lx::Physics::LX_Polygon& poly2 ) noexcept
 {
-    const LX_Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
-    const LX_Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
+    const lx::Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
+    const lx::Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
 
-    LX_Physics::LX_FloatPosition P1_min = box1.p;
-    LX_Physics::LX_FloatPosition P2_min = box2.p;
-    LX_Physics::LX_FloatPosition P1_max = box1.p;
-    LX_Physics::LX_FloatPosition P2_max = box2.p;
+    lx::Physics::LX_FloatPosition P1_min = box1.p;
+    lx::Physics::LX_FloatPosition P2_min = box2.p;
+    lx::Physics::LX_FloatPosition P1_max = box1.p;
+    lx::Physics::LX_FloatPosition P2_max = box2.p;
 
     P1_max.x += fbox<decltype( box1.w )>( box1.w );
     P1_max.y += fbox<decltype( box1.h )>( box1.h );
@@ -84,12 +84,12 @@ bool collisionPolySAT( const LX_Physics::LX_Polygon& poly1,
 *   Complexity: O(m + n) — m >= 3 is the number of vertices in poly1,
 *                          n >= 3 is the number of vertices in poly2
 */
-bool approximativeCollisionPoly( const LX_Physics::LX_Polygon& poly1,
-                                 const LX_Physics::LX_Polygon& poly2 )
+bool approximativeCollisionPoly( const lx::Physics::LX_Polygon& poly1,
+                                 const lx::Physics::LX_Polygon& poly2 )
 {
-    const LX_Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
-    const LX_Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
-    return LX_Physics::collisionBox( box1, box2 );
+    const lx::Physics::LX_FloatingBox& box1 = poly1.getEnclosingBox();
+    const lx::Physics::LX_FloatingBox& box2 = poly2.getEnclosingBox();
+    return lx::Physics::collisionBox( box1, box2 );
 }
 
 /*
@@ -103,11 +103,11 @@ bool approximativeCollisionPoly( const LX_Physics::LX_Polygon& poly1,
 *               m is the number of vertices in poly1,
 *               n is the number of vertices in poly2
 */
-bool basicCollisionPoly( const LX_Physics::LX_Polygon& poly1,
-                         const LX_Physics::LX_Polygon& poly2 )
+bool basicCollisionPoly( const lx::Physics::LX_Polygon& poly1,
+                         const lx::Physics::LX_Polygon& poly2 )
 {
-    using LX_Physics::LX_FloatPosition;
-    using LX_Physics::LX_Segment;
+    using lx::Physics::LX_FloatPosition;
+    using lx::Physics::LX_Segment;
     const unsigned long S1 = poly1.numberOfEdges();
     const unsigned long S2 = poly2.numberOfEdges();
 
@@ -134,22 +134,24 @@ bool basicCollisionPoly( const LX_Physics::LX_Polygon& poly1,
              || collisionPointPoly( origin2, poly1 ) );
 }
 
-bool intersectSeg_( const LX_Physics::LX_FloatPosition& A,
-                    const LX_Physics::LX_FloatPosition& B,
-                    const LX_Physics::LX_FloatPosition& C,
-                    const LX_Physics::LX_FloatPosition& D ) noexcept
+bool intersectSeg_( const lx::Physics::LX_FloatPosition& A,
+                    const lx::Physics::LX_FloatPosition& B,
+                    const lx::Physics::LX_FloatPosition& C,
+                    const lx::Physics::LX_FloatPosition& D ) noexcept
 {
-    LX_Physics::LX_Vector2D AB{B.x - A.x, B.y - A.y};
-    LX_Physics::LX_Vector2D AC{C.x - A.x, C.y - A.y};
-    LX_Physics::LX_Vector2D AD{D.x - A.x, D.y - A.y};
+    lx::Physics::LX_Vector2D AB{B.x - A.x, B.y - A.y};
+    lx::Physics::LX_Vector2D AC{C.x - A.x, C.y - A.y};
+    lx::Physics::LX_Vector2D AD{D.x - A.x, D.y - A.y};
 
     return ( vector_product( AB, AD ) * vector_product( AB, AC ) ) <= FNIL;
 }
 
 }
 
+namespace lx
+{
 
-namespace LX_Physics
+namespace Physics
 {
 
 Float euclide_square_distance( const LX_FloatPosition& p1,
@@ -424,4 +426,6 @@ void movePolyTo( LX_Polygon& poly, const LX_FloatPosition& P ) noexcept
     poly.moveTo( P );
 }
 
-}
+}   // Physics
+
+}   // lx

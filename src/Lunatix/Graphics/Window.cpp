@@ -300,7 +300,7 @@ void LX_Window::drawLines( const std::vector<LX_Graphics::LX_ImgCoord>& vpoints 
 }
 
 void LX_Window::drawLine( const LX_Graphics::LX_ImgCoord& p,
-                          const LX_Physics::LX_Vector2D& v ) noexcept
+                          const lx::Physics::LX_Vector2D& v ) noexcept
 {
     const int vx = static_cast<int>( v.vx );
     const int vy = static_cast<int>( v.vy );
@@ -316,7 +316,7 @@ void LX_Window::drawRect( const LX_Graphics::LX_ImgRect& box ) noexcept
 }
 
 void LX_Window::drawRect( const LX_Graphics::LX_ImgCoord& p,
-                          const LX_Physics::LX_Vector2D& v ) noexcept
+                          const lx::Physics::LX_Vector2D& v ) noexcept
 {
     using LX_Graphics::LX_ImgCoord;
     int w = static_cast<int>( v.vx );
@@ -324,7 +324,7 @@ void LX_Window::drawRect( const LX_Graphics::LX_ImgCoord& p,
     drawRect( LX_Graphics::LX_ImgRect{LX_ImgCoord{p.x, p.y}, w, h} );
 }
 
-void LX_Window::drawCircle( const LX_Physics::LX_Circle& c ) noexcept
+void LX_Window::drawCircle( const lx::Physics::LX_Circle& c ) noexcept
 {
     const LX_Graphics::LX_ImgCoord& P = LX_Graphics::toPixelPosition( c.center );
     const int R = static_cast<int>( c.radius );
@@ -370,14 +370,14 @@ void LX_Window::fillRect( const LX_Graphics::LX_ImgRect& box ) noexcept
 }
 
 void LX_Window::fillRect( const LX_Graphics::LX_ImgCoord& p,
-                          const LX_Physics::LX_Vector2D& v ) noexcept
+                          const lx::Physics::LX_Vector2D& v ) noexcept
 {
     int w = static_cast<int>( v.vx );
     int h = static_cast<int>( v.vy );
     fillRect( LX_Graphics::LX_ImgRect{p.x, p.y, w, h} );
 }
 
-void LX_Window::fillCircle( const LX_Physics::LX_Circle& c ) noexcept
+void LX_Window::fillCircle( const lx::Physics::LX_Circle& c ) noexcept
 {
     const LX_Graphics::LX_ImgCoord& P = LX_Graphics::toPixelPosition( c.center );
     const int R = static_cast<int>( c.radius );

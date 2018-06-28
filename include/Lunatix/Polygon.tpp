@@ -12,7 +12,10 @@
 
 #include <algorithm>
 
-namespace LX_Physics
+namespace lx
+{
+
+namespace Physics
 {
 
 template <typename Iterator>
@@ -25,4 +28,6 @@ void LX_Polygon::addPoints(Iterator beg, Iterator last)
     convexity_();
 }
 
-}
+}   // Physics
+
+}   // lx

@@ -29,28 +29,30 @@ using namespace FloatBox;
 namespace
 {
 
-inline constexpr Float sumx_( const LX_Physics::LX_FloatPosition& p,
-                              const LX_Physics::LX_FloatPosition& q ) noexcept
+inline constexpr Float sumx_( const lx::Physics::LX_FloatPosition& p,
+                              const lx::Physics::LX_FloatPosition& q ) noexcept
 {
     return p.x + q.x;
 }
 
-inline constexpr Float sumy_( const LX_Physics::LX_FloatPosition& p,
-                              const LX_Physics::LX_FloatPosition& q ) noexcept
+inline constexpr Float sumy_( const lx::Physics::LX_FloatPosition& p,
+                              const lx::Physics::LX_FloatPosition& q ) noexcept
 {
     return p.y + q.y;
 }
 
-inline constexpr Float cross_( const LX_Physics::LX_FloatPosition& p,
-                               const LX_Physics::LX_FloatPosition& q ) noexcept
+inline constexpr Float cross_( const lx::Physics::LX_FloatPosition& p,
+                               const lx::Physics::LX_FloatPosition& q ) noexcept
 {
     return p.x * q.y - p.y * q.x;
 }
 
 }
 
+namespace lx
+{
 
-namespace LX_Physics
+namespace Physics
 {
 
 const unsigned long TRIANGLE_SIDES = 3UL;
@@ -305,4 +307,6 @@ void LX_Polygon::moveTo( const LX_FloatPosition& p )
     _polyimpl->moveTo( p );
 }
 
-}
+}   // physics
+
+}   // lx

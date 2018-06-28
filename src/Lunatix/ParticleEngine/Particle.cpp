@@ -24,7 +24,7 @@
 #include <Lunatix/Texture.hpp>
 
 using namespace lx::Random;
-using namespace LX_Physics;
+using namespace lx::Physics;
 
 
 namespace lx
@@ -43,13 +43,13 @@ class LX_Particle_ final
 {
     LX_FloatingBox _box;
     unsigned int _lifetime;             /* The delay to stay displayable */
-    LX_Physics::LX_Vector2D _velocity;
+    lx::Physics::LX_Vector2D _velocity;
     LX_Graphics::LX_Sprite& _texture;
 
 public:
 
     LX_Particle_( LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
-                  const LX_Physics::LX_Vector2D& v ) noexcept
+                  const lx::Physics::LX_Vector2D& v ) noexcept
         : _box( b ), _lifetime( xrand<unsigned int>( 0, DELAY ) ), _velocity( v ),
           _texture( sp ) {}
 
@@ -57,7 +57,7 @@ public:
     {
         if ( _lifetime > 0 )
         {
-            LX_Physics::moveBox( _box, _velocity );
+            lx::Physics::moveBox( _box, _velocity );
             _lifetime--;
         }
     }
@@ -87,7 +87,7 @@ LX_Particle::LX_Particle( LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b ) 
 
 
 LX_Particle::LX_Particle( LX_Graphics::LX_Sprite& sp, const LX_FloatingBox& b,
-                          const LX_Physics::LX_Vector2D& v ) noexcept
+                          const lx::Physics::LX_Vector2D& v ) noexcept
     : _pimpl( new LX_Particle_( sp, b, v ) ) {}
 
 

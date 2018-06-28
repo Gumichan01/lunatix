@@ -22,7 +22,10 @@
 
 using namespace FloatBox;
 
-namespace LX_Physics
+namespace lx
+{
+
+namespace Physics
 {
 
 LX_FloatPosition toFloatPosition( const LX_Graphics::LX_ImgCoord& coord ) noexcept
@@ -89,4 +92,6 @@ bool operator <=( const LX_Circle& a, const LX_Circle& b ) noexcept
     return a.radius <= b.radius;
 }
 
-}
+}   // Physics
+
+}   // lx

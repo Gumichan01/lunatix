@@ -22,7 +22,10 @@
 
 #include <Lunatix/utils/float.hpp>
 
-namespace LX_Physics
+namespace lx
+{
+
+namespace Physics
 {
 
 /**
@@ -254,6 +257,8 @@ bool collinear( const LX_Vector2D& u, const LX_Vector2D& v ) noexcept;
 */
 LX_Vector2D& normalize( LX_Vector2D& v ) noexcept;
 
-}
+}   // Physics
+
+}   // lx
 
 #endif // LX_VECTOR2D_HPP_INCLUDED

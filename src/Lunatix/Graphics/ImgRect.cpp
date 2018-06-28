@@ -17,12 +17,12 @@
 namespace LX_Graphics
 {
 
-LX_ImgCoord toPixelPosition( const LX_Physics::LX_FloatPosition& p ) noexcept
+LX_ImgCoord toPixelPosition( const lx::Physics::LX_FloatPosition& p ) noexcept
 {
     return LX_ImgCoord{static_cast<int>( p.x.v ), static_cast<int>( p.y.v )};
 }
 
-LX_ImgRect toImgRect( const LX_Physics::LX_FloatingBox& b ) noexcept
+LX_ImgRect toImgRect( const lx::Physics::LX_FloatingBox& b ) noexcept
 {
     return LX_ImgRect{toPixelPosition( b.p ), b.w, b.h};
 }

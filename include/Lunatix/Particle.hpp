@@ -33,14 +33,18 @@ namespace LX_Graphics
 class LX_Sprite;
 }
 
-namespace LX_Physics
+namespace lx
+{
+
+// Forward declarations
+
+namespace Physics
 {
 struct LX_Vector2D;
 struct LX_FloatingBox;
 }
 
-namespace lx
-{
+//  Forward declarations (END)
 
 namespace ParticleEngine
 {
@@ -62,21 +66,21 @@ class LX_Particle final
 public:
 
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b) noexcept
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b) noexcept
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     */
-    LX_Particle( LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b ) noexcept;
+    LX_Particle( LX_Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b ) noexcept;
     /**
-    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b,
-    *                  const LX_Physics::LX_Vector2D& v) noexcept
+    *   @fn LX_Particle(LX_Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b,
+    *                  const lx::Physics::LX_Vector2D& v) noexcept
     *
     *   @param [in] sp The sprite of the particle
     *   @param [in] b The AABB that contains the coordinates, the width and the height
     *   @param [in] v The vector that store the velocity
     */
-    LX_Particle( LX_Graphics::LX_Sprite& sp, const LX_Physics::LX_FloatingBox& b,
-                 const LX_Physics::LX_Vector2D& v ) noexcept;
+    LX_Particle( LX_Graphics::LX_Sprite& sp, const lx::Physics::LX_FloatingBox& b,
+                 const lx::Physics::LX_Vector2D& v ) noexcept;
 
     /**
     *   @fn void update() noexcept

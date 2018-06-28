@@ -28,7 +28,11 @@ struct LX_ImgCoord;
 struct LX_ImgRect;
 }
 
-namespace LX_Physics
+
+namespace lx
+{
+
+namespace Physics
 {
 
 /**
@@ -212,6 +216,8 @@ bool operator >=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 */
 bool operator <=( const LX_Circle& a, const LX_Circle& b ) noexcept;
 
-}
+}   // Physics
+
+}   // lx
 
 #endif // HITBOX_H_INCLUDED

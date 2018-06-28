@@ -43,12 +43,12 @@ struct LX_ImgCoord final
 };
 
 /**
-*   @fn LX_ImgCoord toPixelPosition(const LX_Physics::LX_FloatPosition& p) noexcept
+*   @fn LX_ImgCoord toPixelPosition(const lx::Physics::LX_FloatPosition& p) noexcept
 *
 *   @param p
 *   @return The LX_ImgCoord
 */
-LX_ImgCoord toPixelPosition( const LX_Physics::LX_FloatPosition& p ) noexcept;
+LX_ImgCoord toPixelPosition( const lx::Physics::LX_FloatPosition& p ) noexcept;
 
 /**
 *   @ingroup Graphics
@@ -65,12 +65,12 @@ struct LX_ImgRect final
 };
 
 /**
-*   @fn LX_ImgRect toImgRect(const LX_Physics::LX_FloatingBox& b) noexcept
+*   @fn LX_ImgRect toImgRect(const lx::Physics::LX_FloatingBox& b) noexcept
 *
 *   @param b
 *   @return The LX_ImgRect
 */
-LX_ImgRect toImgRect( const LX_Physics::LX_FloatingBox& b ) noexcept;
+LX_ImgRect toImgRect( const lx::Physics::LX_FloatingBox& b ) noexcept;
 
 /**
 *   @fn bool operator ==(const LX_ImgCoord& a, const LX_ImgCoord& b) noexcept

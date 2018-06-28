@@ -24,7 +24,10 @@
 #include <Lunatix/Hitbox.hpp>
 #include <memory>
 
-namespace LX_Physics
+namespace lx
+{
+
+namespace Physics
 {
 
 struct LX_Vector2D;
@@ -157,7 +160,9 @@ public:
     ~LX_Polygon();
 };
 
-}
+}   // Physics
+
+}   // lx
 
 #include <Lunatix/Polygon.tpp>
 

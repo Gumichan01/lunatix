@@ -28,7 +28,7 @@
 
 /**
 *   @ingroup Physics
-*   @namespace LX_Physics
+*   @namespace lx::Physics
 *   @brief The physics namespace
 *
 *   It handles operations on bodies (collision, movement, ...)
@@ -36,7 +36,10 @@
 
 #include <Lunatix/utils/float.hpp>
 
-namespace LX_Physics
+namespace lx
+{
+
+namespace Physics
 {
 
 struct LX_FloatPosition;
@@ -302,6 +305,8 @@ void moveCircleTo( LX_Circle& C, const LX_FloatPosition& P ) noexcept;
 */
 void movePolyTo( LX_Polygon& poly, const LX_FloatPosition& P ) noexcept;
 
-}
+}   // Physics
+
+}   // lx
 
 #endif // PHYSICS_H_INCLUDED

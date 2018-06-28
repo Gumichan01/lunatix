@@ -729,8 +729,8 @@ void test_drawing(LX_Win::LX_Window *win)
     LX_ImgCoord M{32,32};
     LX_ImgCoord N{64,448};
     LX_ImgCoord O{512,256};
-    LX_Physics::LX_Vector2D u{256.0f,128.0f};
-    LX_Physics::LX_Vector2D v{2048.0f,0.0f};
+    lx::Physics::LX_Vector2D u{256.0f,128.0f};
+    lx::Physics::LX_Vector2D v{2048.0f,0.0f};
     LX_ImgRect b{128,128,512,100};
     LX_Colour c = {255,0,0,255};
 
@@ -798,7 +798,7 @@ void test_drawing(LX_Win::LX_Window *win)
     lx::Time::delay(1000);
     win->clearWindow();
 
-    LX_Physics::LX_Circle C{LX_Physics::LX_FloatPosition{512.0f,300.0f},0};
+    lx::Physics::LX_Circle C{lx::Physics::LX_FloatPosition{512.0f,300.0f},0};
 
     lx::Log::log("Draw circles");
     for(unsigned int i = 0; i < 300; i++)
