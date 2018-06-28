@@ -3,7 +3,7 @@
 #include <Lunatix/Lunatix.hpp>
 
 using namespace std;
-using namespace LX_TrueTypeFont;
+using namespace lx::TrueTypeFont;
 using namespace lx::FileIO;
 using namespace lx::Config;
 

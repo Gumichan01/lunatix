@@ -7,7 +7,7 @@ using namespace lx::Event;
 using namespace FloatBox;
 
 using namespace LX_Graphics;
-using namespace LX_TrueTypeFont;
+using namespace lx::TrueTypeFont;
 using namespace LX_Device;
 using namespace LX_Mixer;
 using namespace LX_Physics;
