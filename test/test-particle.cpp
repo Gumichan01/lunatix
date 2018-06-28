@@ -11,7 +11,7 @@ using namespace lx::TrueTypeFont;
 using namespace LX_Device;
 using namespace LX_Mixer;
 using namespace LX_Physics;
-using namespace LX_ParticleEngine;
+using namespace lx::ParticleEngine;
 using namespace lx::FileIO;
 
 #define N 20
