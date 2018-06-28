@@ -34,21 +34,21 @@ int main( int argc, char** argv )
 {
 	if ( !lx::init() )
 	{
-		lx::Log::log( "Cannot load the library: %s", LX_getError() );
+		lx::Log::log( "Cannot load the library: %s", getError() );
 		return -1;
 	}
 
     // Information about how to build the window
-    lx::Win::LX_WindowInfo info;
-    lx::Win::LX_loadWindowConfig( info );
+    lx::Win::WindowInfo info;
+    lx::Win::loadWindowConfig( info );
     info.w = 256;
     info.h = 256;
 
-    lx::Win::LX_Window w( info );
+    lx::Win::Window w( info );
     const std::string s = "data/bullet.png";
-    lx::Graphics::LX_Sprite sprite( s, w );
-    const lx::Graphics::LX_ImgRect position = { { 0, 0 }, 256, 256 };
-    lx::Event::LX_EventHandler ev;
+    lx::Graphics::Sprite sprite( s, w );
+    const lx::Graphics::ImgRect position = { { 0, 0 }, 256, 256 };
+    lx::Event::EventHandler ev;
     bool go = true;
 
     while ( go )
@@ -57,7 +57,7 @@ int main( int argc, char** argv )
         {
             switch ( ev.getEventType() )
             {
-            case lx::Event::LX_EventType::QUIT:
+            case lx::Event::EventType::QUIT:
                 go = false;
                 break;
             default:
