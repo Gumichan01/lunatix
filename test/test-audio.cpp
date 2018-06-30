@@ -196,8 +196,9 @@ void test_channels()
                     lx::Mixer::channelAvailable(2));
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Playing a chunk in the 2 groups");
-    lx::Mixer::groupPlayChunk(chunk,1);
-    lx::Mixer::groupPlayChunk(chunk,2);
+    lx::Mixer::MixerEffect me;
+    lx::Mixer::groupPlayChunk(chunk, 1, me);
+    lx::Mixer::groupPlayChunk(chunk, 2, me);
 
     lx::Log::logInfo(lx::Log::APPLICATION,"Available channel (grp 1): %d",
                     lx::Mixer::channelAvailable(1));
