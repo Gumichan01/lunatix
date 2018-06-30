@@ -67,12 +67,12 @@ void getAvailableDisplayModes( DisplayModes& modes )
 
     if ( NB_DISPLAYS == 0 )
     {
-        setError( "No display available" );
+        lx::setError( "No display available" );
         return;
     }
     else if ( NB_DISPLAYS < 0 )
     {
-        setError( "Cannot get the number of display modes" );
+        lx::setError( "Cannot get the number of display modes" );
         return;
     }
 

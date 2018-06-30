@@ -266,7 +266,7 @@ public:
         char * err = std::strerror( errno );
 
         if ( std::ferror( _f ) )
-            setError( err );
+            lx::setError( err );
 
         return sz;
     }
@@ -298,7 +298,7 @@ public:
         char * err = strerror( errno );
 
         if ( ferror( _f ) )
-            setError( err );
+            lx::setError( err );
 
         return sz;
     }

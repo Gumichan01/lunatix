@@ -127,7 +127,7 @@ public:
             res = statGamepad_( _joy, info );
 
         if ( !res )
-            setError( std::string( "Gamepad::stat: " ) + lx::getError() );
+            lx::setError( std::string( "Gamepad::stat: " ) + lx::getError() );
 
         return res;
     }
@@ -179,7 +179,7 @@ bool Gamepad_::lx_stat_( SDL_Joystick * joy, GamepadInfo& info ) const
 {
     if ( joy == nullptr )
     {
-        setError( "Invalid joystick\n" );
+        lx::setError( "Invalid joystick\n" );
         return false;
     }
 
@@ -195,7 +195,7 @@ bool Gamepad_::lx_stat_( SDL_Joystick * joy, GamepadInfo& info ) const
     if ( info.id == -1 || info.nb_axis == -1 || info.nb_balls == -1
             || info.nb_buttons == -1 || info.nb_hats == -1 )
     {
-        setError( "Cannot get information\n" );
+        lx::setError( "Cannot get information\n" );
         return false;
     }
 
@@ -251,7 +251,7 @@ bool Gamepad::open( int index ) noexcept
 
         lx::Log::logError( lx::Log::SYSTEM,
                            "Gamepad opened and connected to %s", s.c_str() );
-        setError( "Instance of gamepad already connected to another device" );
+        lx::setError( "Instance of gamepad already connected to another device" );
         return false;
     }
 
