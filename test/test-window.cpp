@@ -687,35 +687,6 @@ void test_opengl2()
         glClear(GL_COLOR_BUFFER_BIT);
         w2.update();
         lx::Time::delay(2000);
-
-        {
-            lx::Graphics::Sprite img(std::string("data/bullet.png"), w1);
-            lx::Log::log("Bind the sprite to the first window → #1");
-            float w, h;
-            bool b = img.bind(&w,&h);
-
-            if(b)
-                lx::Log::log("OK");
-            else
-                lx::Log::log("KO: %s",lx::getError());
-
-
-            lx::Log::log("Green colour on window #2");
-            w2.glMakeCurrent();                         // Work on the first window
-            w2.clearWindow();
-            glClearColor(0.0, 1.0, 0.0, 1.0);
-            glClear(GL_COLOR_BUFFER_BIT);
-            w2.update();
-            lx::Time::delay(1000);
-
-            lx::Log::log("Undind the first window → #1");
-
-            if(b)
-                lx::Log::log("OK");
-            else
-                lx::Log::log("KO: %s",lx::getError());
-        }
-
     }
 
     lx::Log::log(" = END TEST = ");
