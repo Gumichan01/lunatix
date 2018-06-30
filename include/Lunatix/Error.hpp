@@ -44,7 +44,7 @@ inline const char * getError()
 */
 inline void setError( const char * str )
 {
-    SDL_SetError( str );
+    SDL_SetError( "%s", str );
 }
 
 /**
