@@ -24,6 +24,8 @@
 #include <Lunatix/utils/utf8_string.hpp>
 #include <SDL2/SDL_error.h>
 
+namespace lx
+{
 
 /**
 *   @fn inline const char * getError()
@@ -65,5 +67,6 @@ inline void setError( const UTF8string& u8str ) noexcept
     setError( u8str.utf8_sstring() );
 }
 
+}   // lx
 
 #endif // ERROR_HPP_INCLUDED

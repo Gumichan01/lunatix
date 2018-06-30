@@ -127,7 +127,7 @@ public:
             res = statGamepad_( _joy, info );
 
         if ( !res )
-            setError( std::string( "Gamepad::stat: " ) + getError() );
+            setError( std::string( "Gamepad::stat: " ) + lx::getError() );
 
         return res;
     }

@@ -116,7 +116,7 @@ public:
     *
     *   @param [out] info The information structure to fill
     *   @return TRUE on success, FALSE otherwise.
-    *          Call getError() to get the error message
+    *          Call lx::getError() to get the error message
     */
     bool stat( GamepadInfo& info ) const noexcept;
 

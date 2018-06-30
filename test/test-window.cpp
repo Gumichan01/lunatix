@@ -500,7 +500,7 @@ void test_winManager(lx::Win::Window *win)
     bool r = lx::Win::getWindowManager().addWindow(*win);
 
     if(r == false)
-        lx::Log::log("FAILURE - cannot add a window: %s", getError());
+        lx::Log::log("FAILURE - cannot add a window: %s", lx::getError());
     else
         lx::Log::log("SUCCESS - the window was added into the window manager");
 
@@ -663,13 +663,13 @@ void test_opengl2()
         if(w1.glMakeCurrent())
             lx::Log::log("SUCCESS - OpenGl window #1 OK → current context defined");
         else
-            lx::Log::log("FAILURE - %s",getError());
+            lx::Log::log("FAILURE - %s",lx::getError());
 
         lx::Log::log("Define window #2 as the current OpenGL window");
         if(w2.glMakeCurrent())
             lx::Log::log("SUCCESS - OpenGl window #2 OK → current context defined");
         else
-            lx::Log::log("FAILURE - %s",getError());
+            lx::Log::log("FAILURE - %s",lx::getError());
 
 
         lx::Log::log("Blue colour on window #1");
@@ -697,7 +697,7 @@ void test_opengl2()
             if(b)
                 lx::Log::log("OK");
             else
-                lx::Log::log("KO: %s",getError());
+                lx::Log::log("KO: %s",lx::getError());
 
 
             lx::Log::log("Green colour on window #2");
@@ -714,7 +714,7 @@ void test_opengl2()
             if(b)
                 lx::Log::log("OK");
             else
-                lx::Log::log("KO: %s",getError());
+                lx::Log::log("KO: %s",lx::getError());
         }
 
     }

@@ -84,7 +84,7 @@ class File_ final
         }
 
         if ( _file == nullptr )
-            throw IOException( getError() );
+            throw IOException( lx::getError() );
     }
 
 public:

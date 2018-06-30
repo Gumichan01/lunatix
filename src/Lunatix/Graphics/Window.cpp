@@ -193,7 +193,7 @@ struct Window_ final
                                     info.h, info.flag );
 
         if ( _window == nullptr )
-            throw WindowException( getError() );
+            throw WindowException( lx::getError() );
 
         if ( hasOpenGLsupport( info ) )
             _glcontext = SDL_GL_CreateContext( _window );
@@ -204,7 +204,7 @@ struct Window_ final
         if ( _renderer == nullptr )
         {
             std::string err_msg = "Rendering creation: ";
-            err_msg = err_msg + getError();
+            err_msg = err_msg + lx::getError();
 
             SDL_GL_DeleteContext( _glcontext );
             SDL_DestroyWindow( _window );

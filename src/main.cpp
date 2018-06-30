@@ -18,7 +18,7 @@ int main( int argc, char ** argv )
 
     if ( !lx::init() )
     {
-        lx::Log::log( "Cannot load the library: %s", getError() );
+        lx::Log::log( "Cannot load the library: %s", lx::getError() );
         return -1;
     }
 

@@ -617,7 +617,7 @@ void test_getChunk(void)
     lxmix = lx::Mixer::loadSample(f);
 
     if(lxmix == nullptr)
-        lx::Log::logInfo(lx::Log::TEST,"FAILURE - nullptr -> %s",getError());
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - nullptr -> %s",lx::getError());
     else
     {
         lx::Log::logInfo(lx::Log::TEST,"SUCCESS - loaded from %s",f.getFilename());

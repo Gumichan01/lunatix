@@ -434,7 +434,7 @@ public:
     *   @param uevent The user event to push
     *
     *   @return TRUE on success, FALSE otherwise.
-    *   Use getError() for more information on failure.
+    *   Use lx::getError() for more information on failure.
     */
     bool pushUserEvent( UserEvent& uevent ) noexcept;
 
