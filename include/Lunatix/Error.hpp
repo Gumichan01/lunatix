@@ -44,7 +44,6 @@ inline const char * getError()
 */
 inline void setError( const std::string& str ) noexcept
 {
-    //setError( str.c_str() );
     SDL_SetError( "%s", str.c_str() );
 }
 
@@ -67,7 +66,7 @@ inline void setError( const UTF8string& u8str ) noexcept
 */
 inline void setError( const char * str )
 {
-    setError( std::string(str) );
+    setError( std::string( str ) );
 }
 
 }   // lx
