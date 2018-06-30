@@ -38,23 +38,14 @@ inline const char * getError()
 }
 
 /**
-*   @fn inline void setError(const char * str) noexcept
-*   Set an error message
-*   @param [in] str The error string
-*/
-inline void setError( const char * str )
-{
-    SDL_SetError( "%s", str );
-}
-
-/**
 *   @fn inline void setError(const std::string& str) noexcept
 *   Set an error message
 *   @param [in] str The error string
 */
 inline void setError( const std::string& str ) noexcept
 {
-    setError( str.c_str() );
+    //setError( str.c_str() );
+    SDL_SetError( "%s", str.c_str() );
 }
 
 /**
@@ -65,6 +56,18 @@ inline void setError( const std::string& str ) noexcept
 inline void setError( const UTF8string& u8str ) noexcept
 {
     setError( u8str.utf8_sstring() );
+}
+
+/**
+*   @fn inline void setError(const char * str) noexcept
+*   Set an error message
+*   @param [in] str A null-terminated error string
+*   @warning The behaviour is undefined if the string is not null-terminated
+*   or if *str* is a null pointer.
+*/
+inline void setError( const char * str )
+{
+    setError( std::string(str) );
 }
 
 }   // lx
