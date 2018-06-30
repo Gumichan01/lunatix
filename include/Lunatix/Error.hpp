@@ -48,7 +48,7 @@ inline void setError( const char * str )
 }
 
 /**
-*   @fn inline void setError(const std::string str) noexcept
+*   @fn inline void setError(const std::string& str) noexcept
 *   Set an error message
 *   @param [in] str The error string
 */
@@ -58,7 +58,7 @@ inline void setError( const std::string& str ) noexcept
 }
 
 /**
-*   @fn inline void setError(const UTF8string u8str) noexcept
+*   @fn inline void setError(const UTF8string& u8str) noexcept
 *   Set an error message (utf-8)
 *   @param [in] u8str The error utf-8 string
 */
