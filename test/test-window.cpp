@@ -728,9 +728,9 @@ void test_drawing(lx::Win::Window *win)
     lx::Log::log("Draw a segment with M(32,32) and N(64,448)");
     ImgCoord M{32,32};
     ImgCoord N{64,448};
+    ImgCoord NO{N.x + 256, N.y + 128};
     ImgCoord O{512,256};
-    lx::Physics::Vector2D u{256.0f,128.0f};
-    lx::Physics::Vector2D v{2048.0f,0.0f};
+    ImgCoord OO{O.x + 2048, O.y + 0};
     ImgRect b{128,128,512,100};
     lx::Graphics::Colour c = {255,0,0,255};
 
@@ -740,9 +740,9 @@ void test_drawing(lx::Win::Window *win)
     win->update();
     lx::Time::delay(1000);
 
-    lx::Log::log("Draw a line with N(64,448) and u⃗(256.0,128.0)");
+    lx::Log::log("Draw a line with two points");
     win->clearWindow();
-    win->drawLine(N,u);
+    win->drawLine(N, NO);
     win->update();
     lx::Time::delay(1000);
 
@@ -753,8 +753,8 @@ void test_drawing(lx::Win::Window *win)
 
     for(Float j{0.0f}; j < fend; ++j)
     {
-        win->drawLine(O,v);
-        v.vy += j + Float{64.0f};
+        win->drawLine(O, OO);
+        OO.y += j + 64;
         win->update();
         lx::Time::delay(16);
     }
@@ -783,20 +783,6 @@ void test_drawing(lx::Win::Window *win)
     win->fillRect(b);
     win->update();
     lx::Time::delay(1000);
-
-    lx::Log::log("Draw a rectangle using a point and a vector : N and u⃗");
-    win->clearWindow();
-    win->drawRect(N,u);
-    win->update();
-    lx::Time::delay(1000);
-    win->clearWindow();
-
-    lx::Log::log("Fill a rectangle using a point and a vector : N and u⃗");
-    win->clearWindow();
-    win->fillRect(N,u);
-    win->update();
-    lx::Time::delay(1000);
-    win->clearWindow();
 
     lx::Physics::Circle C{lx::Physics::FloatPosition{512.0f,300.0f},0};
 
