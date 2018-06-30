@@ -122,10 +122,9 @@ void test_SolidText()
         lx::Log::log("Size: 32 → 72");
         for(unsigned int j = 32; j < 74; j += 2)
         {
-            int w, h;
             simg.setTextSize(j);
-            simg.getTextDimension(w, h);
-            lx::Log::log("Dimension: %d × %d", w,h);
+            const std::pair< int, int> DIMENSION = simg.getTextDimension();
+            lx::Log::log("Dimension: %d × %d", DIMENSION.first, DIMENSION.second);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -190,10 +189,9 @@ void test_ShadedText()
         lx::Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
-            int w, h;
             simg.setTextSize(j);
-            simg.getTextDimension(w, h);
-            lx::Log::log("Dimension: %d × %d", w,h);
+            const std::pair< int, int> DIMENSION = simg.getTextDimension();
+            lx::Log::log("Dimension: %d × %d", DIMENSION.first, DIMENSION.second);
             win.clearWindow();
             simg.draw();
             simg2.draw();
@@ -254,10 +252,9 @@ void test_BlendedText()
         lx::Log::log("Size: 32 → 72");
         for(int j = 34; j < 74; j += 2)
         {
-            int w, h;
             simg.setTextSize(j);
-            simg.getTextDimension(w, h);
-            lx::Log::log("Dimension: %d × %d", w,h);
+            const std::pair< int, int> DIMENSION = simg.getTextDimension();
+            lx::Log::log("Dimension: %d × %d", DIMENSION.first, DIMENSION.second);
             win.clearWindow();
             simg.draw();
             simg2.draw();
