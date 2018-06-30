@@ -57,7 +57,6 @@
 #include <Lunatix/Particle.hpp>
 #include <Lunatix/ParticleSystem.hpp>
 #include <Lunatix/Physics.hpp>
-#include <Lunatix/Hitbox.hpp>
 #include <Lunatix/Polygon.hpp>
 
 // System
