@@ -286,26 +286,7 @@ int groupCount( int tag ) noexcept;
 */
 int channelAvailable( int tag ) noexcept;
 
-/**
-*   @deprecated This function will be removed in LunatiX v0.14.0.
-*   You must use the second signature instead
-*
-*   @fn bool groupPlayChunk(Chunk& chunk, int tag, int loops = 0) noexcept
-*
-*   Play the chunk on a channel of the group specified by the tag
-*
-*   @param [in] chunk The chunk to play
-*   @param [in] tag The group id to look for the channel for playing the chunk on
-*   @param [in] loops Optional argument that specified the number of loop (default value = 0)
-*
-*   @return TRUE if the chunk can be played, FALSE if no channel is available
-*
-*   @note If the group is empty, any unreserved channels in the default
-*        group is selected and the chunk is played on it
-*   @note If no channel of the group is available for playing, the oldest
-*        playing channel is chosen. So, it is halted, and is used to play the chunk on
-*/
-bool groupPlayChunk( Chunk& chunk, int tag, int loops = 0 ) noexcept;
+
 /**
 *   @fn bool groupPlayChunk(Chunk& chunk, int tag, const MixerEffect effect) noexcept
 *

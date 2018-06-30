@@ -196,26 +196,6 @@ int channelAvailable( int tag ) noexcept
     return Mix_GroupAvailable( tag );
 }
 
-
-bool groupPlayChunk( Chunk& chunk, int tag, int loops ) noexcept
-{
-    if ( groupCount( tag ) == 0 )
-        return chunk.play( -1, loops );
-
-    int chan = channelAvailable( tag );
-
-    if ( chan == -1 )
-    {
-        chan = Mix_GroupOldest( tag );
-
-        if ( chan > -1 )
-            haltChannel( chan );
-    }
-
-    Mix_UnregisterAllEffects( chan );
-    return chunk.play( chan, loops );
-}
-
 bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept
 {
     int chan = -1;
