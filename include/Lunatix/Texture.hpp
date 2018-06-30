@@ -597,16 +597,6 @@ public:
     */
     unsigned int getTextSize() const noexcept;
     /**
-    *   @deprecated This signature will be removed in v0.14.0
-    *   Please use the other version that returns a pair
-    *
-    *   @fn void getTextDimension(int& w, int& h) const noexcept
-    *
-    *   @param [out] w Width value returned by this function
-    *   @param [out] h Height value returned by this function
-    */
-    void getTextDimension( int& w, int& h ) const noexcept;
-    /**
     *   @fn std::pair<int, int> getTextDimension() const noexcept
     *   @return The dimension — a pair of integers
     */

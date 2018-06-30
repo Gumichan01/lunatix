@@ -804,12 +804,6 @@ unsigned int TextTexture::getTextSize() const noexcept
     return _size;
 }
 
-void TextTexture::getTextDimension( int& w, int& h ) const noexcept
-{
-    w = _dimension.w;
-    h = _dimension.h;
-}
-
 std::pair<int, int> TextTexture::getTextDimension() const noexcept
 {
     return std::make_pair( _dimension.w, _dimension.h );
