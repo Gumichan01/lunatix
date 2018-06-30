@@ -21,7 +21,10 @@
 #include <cmath>
 #include <type_traits>
 
-
+/**
+*   @struct Float
+*   @brief Floating-point value
+*/
 struct Float final
 {
     float v;
