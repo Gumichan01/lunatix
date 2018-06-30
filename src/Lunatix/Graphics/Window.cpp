@@ -289,26 +289,11 @@ void Window::drawLine( const lx::Graphics::ImgCoord& p,
     SDL_RenderDrawLine( _wimpl->_renderer, p.x, p.y, q.x, q.y );
 }
 
-void Window::drawLines( const lx::Graphics::ImgCoord * p, const int count ) noexcept
-{
-    SDL_RenderDrawLines( _wimpl->_renderer,
-                         reinterpret_cast<const SDL_Point *>( p ), count );
-}
-
 void Window::drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noexcept
 {
     SDL_RenderDrawLines( _wimpl->_renderer,
                          reinterpret_cast<const SDL_Point *>( &vpoints[0] ),
                          static_cast<int>( vpoints.size() ) );
-}
-
-void Window::drawLine( const lx::Graphics::ImgCoord& p,
-                       const lx::Physics::Vector2D& v ) noexcept
-{
-    const int vx = static_cast<int>( v.vx );
-    const int vy = static_cast<int>( v.vy );
-    drawLine( p, lx::Graphics::ImgCoord{p.x + vx, p.y + vy} );
-    drawLine( p, lx::Graphics::ImgCoord{p.x - vx, p.y - vy} );
 }
 
 
@@ -318,14 +303,6 @@ void Window::drawRect( const lx::Graphics::ImgRect& box ) noexcept
     SDL_RenderDrawRect( _wimpl->_renderer, &SDL_BOX );
 }
 
-void Window::drawRect( const lx::Graphics::ImgCoord& p,
-                       const lx::Physics::Vector2D& v ) noexcept
-{
-    using lx::Graphics::ImgCoord;
-    int w = static_cast<int>( v.vx );
-    int h = static_cast<int>( v.vy );
-    drawRect( lx::Graphics::ImgRect{ImgCoord{p.x, p.y}, w, h} );
-}
 
 void Window::drawCircle( const lx::Physics::Circle& c ) noexcept
 {
@@ -372,13 +349,6 @@ void Window::fillRect( const lx::Graphics::ImgRect& box ) noexcept
     SDL_RenderFillRect( _wimpl->_renderer, &SDL_BOX );
 }
 
-void Window::fillRect( const lx::Graphics::ImgCoord& p,
-                       const lx::Physics::Vector2D& v ) noexcept
-{
-    int w = static_cast<int>( v.vx );
-    int h = static_cast<int>( v.vy );
-    fillRect( lx::Graphics::ImgRect{p.x, p.y, w, h} );
-}
 
 void Window::fillCircle( const lx::Physics::Circle& c ) noexcept
 {

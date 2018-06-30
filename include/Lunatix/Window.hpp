@@ -219,18 +219,6 @@ public:
     */
     void drawLine( const lx::Graphics::ImgCoord& p, const lx::Graphics::ImgCoord& q ) noexcept;
     /**
-    *   @deprecated This signature will be removed in v0.14.0
-    *   Please use the alternative version that takes an std::vector
-    *
-    *   @fn void drawLines(const lx::Graphics::ImgCoord * p, const int count) noexcept
-    *
-    *   Draw several connected segments on the window
-    *
-    *   @param [in] p An array of points
-    *   @param [in] count The number of points, drawing count-1 segments
-    */
-    void drawLines( const lx::Graphics::ImgCoord * p, const int count ) noexcept;
-    /**
     *   @fn void drawLines(const std::vector<lx::Graphics::ImgCoord>& vpoints) noexcept;
     *
     *   Draw several connected segments on the window
@@ -240,33 +228,10 @@ public:
     */
     void drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noexcept;
     /**
-    *   @deprecated This signature of DrawLine is deprecated and will be removed in v0.14.0
-    *   Please use the version that takes two coordinates instead.
-    *
-    *   @fn void drawLine(const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v) noexcept
-    *
-    *   @param [in] p The point
-    *   @param [in] v The direction vector
-    *
-    *   @note The length of a line depends on the norm of the direction vector
-    *        The length is calculating according to this formula: ||v||*2
-    */
-    void drawLine( const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v ) noexcept;
-    /**
     *   @fn void drawRect(const lx::Graphics::ImgRect& box) noexcept
     *   @param [in] box The rectangle
     */
     void drawRect( const lx::Graphics::ImgRect& box ) noexcept;
-    /**
-    *   @deprecated This signature of DrawRect is deprecated and will be removed in v0.14.0
-    *   Please use the version that takes a box (ImgRect).
-    *
-    *   @fn void drawRect(const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v) noexcept
-    *   @param [in] p The point
-    *   @param [in] v The vector that defines how to draw the rectangle (width height)
-    *
-    */
-    void drawRect( const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v ) noexcept;
     /**
     *   @fn void drawCircle(const lx::Physics::Circle& c) noexcept
     *   Draw a circle on a window
@@ -280,18 +245,6 @@ public:
     *   @param [in] box The rectangle to fill
     */
     void fillRect( const lx::Graphics::ImgRect& box ) noexcept;
-    /**
-    *   @deprecated This signature will be removed in v0.14.0
-    *   Please use the version that takes the rect instead..
-    *
-    *   @fn void fillRect(const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v) noexcept
-    *
-    *   Fill a rectangle using a point and a 2D vector
-    *
-    *   @param [in] p The point
-    *   @param [in] v The vector
-    */
-    void fillRect( const lx::Graphics::ImgCoord& p, const lx::Physics::Vector2D& v ) noexcept;
     /**
     *   @fn void fillCircle(const lx::Physics::Circle& c) noexcept
     *   Fill a circle on a window
