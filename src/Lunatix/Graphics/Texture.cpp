@@ -33,8 +33,8 @@ namespace
 {
 
 constexpr double DEGREE_180 = 180.0;
-const lx::Graphics::ImgRect RNULL{{0, 0}, 0, 0};
-const Colour CNULL{0, 0, 0, 0};
+const lx::Graphics::ImgRect RNULL = { {0, 0}, 0, 0 };
+const lx::Graphics::Colour CNULL = { 0, 0, 0, 0 };
 
 
 inline constexpr SDL_Renderer * render( void * r )

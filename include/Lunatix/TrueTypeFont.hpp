@@ -99,23 +99,23 @@ class Font final
                                   lx::Win::Window& w ) noexcept;
 
     SDL_Texture * drawShadedText_( const std::string& text, unsigned int size,
-                                   const Colour& bg, lx::Win::Window& w ) noexcept;
+                                   const Graphics::Colour& bg, lx::Win::Window& w ) noexcept;
     SDL_Texture * drawShadedText_( const UTF8string& text, unsigned int size,
-                                   const Colour& bg, lx::Win::Window& w ) noexcept;
+                                   const Graphics::Colour& bg, lx::Win::Window& w ) noexcept;
 
     SDL_Texture * drawBlendedText_( const std::string& text, unsigned int size,
                                     lx::Win::Window& w ) noexcept;
     SDL_Texture * drawBlendedText_( const UTF8string& text, unsigned int size,
                                     lx::Win::Window& w ) noexcept;
 
-    const Colour getColour_() const noexcept;
+    const Graphics::Colour getColour_() const noexcept;
     unsigned int getSize_() const noexcept;
-    void setColour_( const Colour& colour ) noexcept;
+    void setColour_( const Graphics::Colour& colour ) noexcept;
 
 public:
 
     /**
-    *   @fn Font(const std::string& font_file, const Colour& colour,
+    *   @fn Font(const std::string& font_file, const Graphics::Colour& colour,
     *               unsigned int size)
     *
     *   @param [in] font_file The font file to load
@@ -127,7 +127,7 @@ public:
     *
     *   @exception lx::FileIO::IOException if the file cannot be loaded
     */
-    Font( const std::string& font_file, const Colour& colour, unsigned int size );
+    Font( const std::string& font_file, const Graphics::Colour& colour, unsigned int size );
 
     /**
     *   @fn UTF8string getName(bool with_path = false) noexcept
@@ -141,11 +141,11 @@ public:
     */
     UTF8string getName( bool with_path = false ) const noexcept;
     /**
-    *   @fn Colour getColour()
+    *   @fn Graphics::Colour getColour()
     *   Get the default colour for text rendering
     *   @return The colour
     */
-    Colour getColour()const noexcept;
+    Graphics::Colour getColour()const noexcept;
 
     ~Font();
 };

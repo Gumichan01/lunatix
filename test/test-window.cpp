@@ -466,7 +466,7 @@ void test_viewport(lx::Win::Window *win)
 
     Uint32 b = SDL_GetTicks();
     ImgRect brect{0, 0, win->getWidth()/2, win->getHeight()/2};
-    Colour bcolour{0, 0, 0, 255};
+    lx::Graphics::Colour bcolour{0, 0, 0, 255};
 
     while(SDL_GetTicks() - b < 4096)
     {
@@ -732,7 +732,7 @@ void test_drawing(lx::Win::Window *win)
     lx::Physics::Vector2D u{256.0f,128.0f};
     lx::Physics::Vector2D v{2048.0f,0.0f};
     ImgRect b{128,128,512,100};
-    Colour c = {255,0,0,255};
+    lx::Graphics::Colour c = {255,0,0,255};
 
     win->setDrawColour(c);
     win->clearWindow();

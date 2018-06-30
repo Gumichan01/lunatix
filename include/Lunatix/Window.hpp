@@ -300,11 +300,11 @@ public:
     void fillCircle( const lx::Physics::Circle& c ) noexcept;
 
     /**
-    *   @fn void setDrawColour(const Colour& colour) noexcept
+    *   @fn void setDrawColour(const Graphics::Colour& colour) noexcept
     *   Set the colour used for drawing operations (Lines, Rectangles, Circles)
     *   @param [in] colour The colour (RGBA)
     */
-    void setDrawColour( const Colour& colour ) noexcept;
+    void setDrawColour( const Graphics::Colour& colour ) noexcept;
     /**
     *   @fn void setDrawBlendMode(const BlendMode mode) noexcept
     *
@@ -327,11 +327,11 @@ public:
     */
     void setDrawBlendMode( const BlendMode mode ) noexcept;
     /**
-    *   @fn void getDrawColour(const Colour& colour) const noexcept
+    *   @fn void getDrawColour(const Graphics::Colour& colour) const noexcept
     *   Get the colour used for drawing operations (Lines, Rectangles, Circles)
     *   @param [out] colour The colour (RGBA) to get
     */
-    void getDrawColour( Colour& colour ) const noexcept;
+    void getDrawColour( Graphics::Colour& colour ) const noexcept;
     /**
     *   @fn void getDrawBlendMode(BlendMode& mode) const noexcept
     *

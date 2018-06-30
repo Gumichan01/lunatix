@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 void test_font(void)
 {
     Font *font = nullptr;
-    Colour colour = {255,255,255,255};
+    lx::Graphics::Colour colour = {255,255,255,255};
 
     lx::Log::log("Load an Font object using RAII");
     {
@@ -87,8 +87,8 @@ void test_font(void)
 
 void test_SolidText()
 {
-    Colour dcolour = {255,0,255,127};
-    Colour bcolour = {255,255,255, 127};
+    lx::Graphics::Colour dcolour = {255,0,255,127};
+    lx::Graphics::Colour bcolour = {255,255,255, 127};
 
     UTF8string str("がんばつて Gumichan01");
     lx::Win::WindowInfo winfo;
@@ -152,9 +152,9 @@ void test_SolidText()
 
 void test_ShadedText()
 {
-    Colour colour = {0,0,0,240};
-    Colour bg = {255,200,127,127};
-    Colour bg2 = {64,40,4,164};
+    lx::Graphics::Colour colour = {0,0,0,240};
+    lx::Graphics::Colour bg = {255,200,127,127};
+    lx::Graphics::Colour bg2 = {64,40,4,164};
 
     UTF8string str("がんばつて Gumichan01");
     lx::Win::WindowInfo winfo;
@@ -220,7 +220,7 @@ void test_ShadedText()
 
 void test_BlendedText()
 {
-    Colour colour = {255,255,255,127};
+    lx::Graphics::Colour colour = {255,255,255,127};
 
     UTF8string str("がんばつて Gumichan01");
     lx::Win::WindowInfo winfo;

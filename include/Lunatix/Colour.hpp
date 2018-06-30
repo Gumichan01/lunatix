@@ -22,6 +22,12 @@
 
 #include <SDL2/SDL_pixels.h>
 
+namespace lx
+{
+
+namespace Graphics
+{
+
 /**
 *   @ingroup Graphics
 *   @typedef Colour
@@ -183,5 +189,9 @@ inline Colour fromRGBAvalue( const uint32_t rgba ) noexcept
 
     return Colour{r, g, b, a};
 }
+
+}   // Graphics
+
+}   // lx
 
 #endif // COLOUR_HPP_INCLUDED

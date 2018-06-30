@@ -419,12 +419,12 @@ void Window::fillCircle( const lx::Physics::Circle& c ) noexcept
 }
 
 
-void Window::setDrawColour( const Colour& colour ) noexcept
+void Window::setDrawColour( const Graphics::Colour& colour ) noexcept
 {
     SDL_SetRenderDrawColor( _wimpl->_renderer, colour.r, colour.g, colour.b, colour.a );
 }
 
-void Window::getDrawColour( Colour& colour ) const noexcept
+void Window::getDrawColour( Graphics::Colour& colour ) const noexcept
 {
     SDL_GetRenderDrawColor( _wimpl->_renderer, &colour.r, &colour.g, &colour.b, &colour.a );
 }
