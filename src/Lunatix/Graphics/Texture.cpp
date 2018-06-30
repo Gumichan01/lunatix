@@ -143,17 +143,6 @@ Texture::Texture( const UTF8string& filename, lx::Win::Window& w,
     : Texture( filename.utf8_sstring(), w, format ) {}
 
 
-bool Texture::bind( float * iw, float * ih ) noexcept
-{
-    return _win.glMakeCurrent() && SDL_GL_BindTexture( _texture, iw, ih ) == 0;
-}
-
-bool Texture::unbind() noexcept
-{
-    return SDL_GL_UnbindTexture( _texture ) == 0;
-}
-
-
 lx::Win::Window& Texture::getWindow() const noexcept
 {
     return _win;

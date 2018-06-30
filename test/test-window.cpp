@@ -709,7 +709,6 @@ void test_opengl2()
             lx::Time::delay(1000);
 
             lx::Log::log("Undind the first window → #1");
-            b = img.unbind();
 
             if(b)
                 lx::Log::log("OK");
