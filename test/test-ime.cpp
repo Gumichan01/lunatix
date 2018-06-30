@@ -5,7 +5,7 @@
 using namespace lx::Event;
 
 const char * fname = "font/AozoraMinchoMedium.ttf";
-constexpr Colour COLOUR = {255,255,255,255};
+constexpr lx::Graphics::Colour COLOUR = { 255, 255, 255, 255 };
 
 void generateInput();
 
@@ -38,7 +38,7 @@ public:
 
             if(!u8comp.utf8_empty())
             {
-                Colour colour = {127,127,127,255};
+                lx::Graphics::Colour colour = { 127, 127, 127, 255 };
                 lx::Graphics::ShadedTextTexture im(u8comp,18,_font,colour,_w);
                 im.setPosition(100,124);
                 im.draw();
