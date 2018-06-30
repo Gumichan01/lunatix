@@ -34,15 +34,6 @@ struct SDL_Surface;
 struct SDL_Texture;
 
 
-
-namespace lx
-{
-
-
-
-}
-
-
 namespace lx
 {
 
