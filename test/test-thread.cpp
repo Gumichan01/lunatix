@@ -202,8 +202,8 @@ void test_async()
     lx::Log::log("(#%x): AsyncTask - normal case", tid);
 
     lx::Random::initRand();
-    long param1 = static_cast<long>(lx::Random::crand() % 10);
-    long param2 = static_cast<long>(lx::Random::crand() % 10);
+    long param1 = static_cast<long>(lx::Random::xrand<unsigned long>(0U, 10U));
+    long param2 = static_cast<long>(lx::Random::xrand<unsigned long>(0U, 10U));
     unsigned long expected1 = fact(param1);
     unsigned long expected2 = fact(param2);
 

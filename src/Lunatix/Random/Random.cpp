@@ -42,7 +42,7 @@ unsigned long long _Prand::rand_() noexcept
     if ( !first_call )
     {
         // x must be a nonzero value
-        x = static_cast<unsigned long long>( crand() + 1 );
+        x = static_cast<unsigned long long>( rand() + 1 );
         first_call = true;
     }
 
@@ -58,16 +58,6 @@ float fxrand( float minf, float maxf ) noexcept
 {
     const float R = static_cast<float>( xrand<unsigned int>() );
     return ( ( R / UF_MAX ) + minf ) * maxf;
-}
-
-unsigned long long xorshiftRand() noexcept
-{
-    return _Prand::rand_();
-}
-
-int crand() noexcept
-{
-    return rand();
 }
 
 }   // Random
