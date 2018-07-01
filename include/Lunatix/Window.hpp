@@ -23,13 +23,14 @@
 
 #include <Lunatix/utils/utf8_string.hpp>
 #include <Lunatix/Colour.hpp>
+#include <SDL2/SDL_video.h>
 
 #include <memory>
 #include <vector>
 
 
-struct SDL_Window;
-struct SDL_Renderer;
+//struct SDL_Window;
+//struct SDL_Renderer;
 
 
 namespace lx
@@ -72,16 +73,16 @@ namespace Win
 
 enum class WinMode
 {
-    FULLSCREEN = 0x00000001,                        /**< Fullscreen mode with original resolution   */
-    FULLSCREEN_DESKTOP = ( FULLSCREEN | 0x00001000 ), /**< Fullscreen with the current desktop size   */
-    NO_FULLSCREEN = 0x00000000,                     /**< Original resolution in window              */
-    OPENGL = 0x00000002,                            /**< Window usable with OpenGL context          */
-    SHOWN  = 0x00000004,                            /**< Window is visible                          */
-    HIDDEN = 0x00000008,                            /**< Window is not visible                      */
-    BORDERLESS = 0x00000010,                        /**< No window decoration                       */
-    RESIZABLE  = 0x00000020,                        /**< Window can be resized                      */
-    MINIMIZED  = 0x00000040,                        /**< Window is minimized                        */
-    MAXIMIZED  = 0x00000080                         /**< Window is maximized                        */
+    NO_FULLSCREEN = 0x00000000,                         /**< Original resolution in window              */
+    FULLSCREEN = SDL_WINDOW_FULLSCREEN,                 /**< Fullscreen mode with original resolution   */
+    FULLSCREEN_DESKTOP = ( FULLSCREEN | 0x00001000 ),   /**< Fullscreen with the current desktop size   */
+    OPENGL = SDL_WINDOW_OPENGL,                         /**< Window usable with OpenGL context          */
+    SHOWN  = SDL_WINDOW_SHOWN,                          /**< Window is visible                          */
+    HIDDEN = SDL_WINDOW_HIDDEN,                         /**< Window is not visible                      */
+    BORDERLESS = SDL_WINDOW_BORDERLESS,                 /**< No window decoration                       */
+    RESIZABLE  = SDL_WINDOW_RESIZABLE,                  /**< Window can be resized                      */
+    MINIMIZED  = SDL_WINDOW_MINIMIZED,                  /**< Window is minimized                        */
+    MAXIMIZED  = SDL_WINDOW_MAXIMIZED                   /**< Window is maximized                        */
 };
 
 
