@@ -138,7 +138,7 @@ void test_read2(void)
     lx::Log::log(" = TEST read #2 = ");
     const std::string strex("data/bullet.png");
 
-    Sint64 beg, end;
+    bool beg, end;
     size_t read_data = 0;
     char *buff = nullptr;
     File f(strex, FileMode::RDONLY);
@@ -146,30 +146,38 @@ void test_read2(void)
     lx::Log::log("%s is opened. Its size is %ld byte(s)", f.getFilename(),f.size());
     end = f.seek(0, FileWhence::END);
 
-    if(end == -1)
+    if(!end)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Cannot go at the end of the file");
 
-    Sint64 size = f.tell();
+    long size = f.tell();
 
-    if(size == -1)
+    if(size == -1L)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Cannot get the size of the file");
 
     beg = f.seek(0, FileWhence::SET);
 
-    if(beg == -1)
+    if(!beg)
         lx::Log::logInfo(lx::Log::TEST,"FAILURE - Cannot go at the beginning of the file");
 
-    buff = new char[size];
+    try
+    {
+        buff = new char[size];
+        read_data = f.read(buff,sizeof(char),static_cast<size_t>(size));
 
-    read_data = f.read(buff,sizeof(char),static_cast<size_t>(size));
+        if(read_data == 0)
+            lx::Log::logInfo(lx::Log::TEST,"FAILURE - Expected: non-zero value; got : 0");
+        else
+            lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Received %u bytes from %s",
+                            read_data, strex.c_str());
 
-    if(read_data == 0)
-        lx::Log::logInfo(lx::Log::TEST,"FAILURE - Expected: non-zero value; got : 0");
-    else
-        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - Received %u bytes from %s",
-                        read_data, strex.c_str());
+        delete [] buff;
 
-    delete [] buff;
+    }
+    catch( ... )
+    {
+        lx::Log::logInfo(lx::Log::TEST,"FAILURE - Exception occured - size: %ld", size);
+    }
+
     lx::Log::log(" = END TEST = ");
 }
 
