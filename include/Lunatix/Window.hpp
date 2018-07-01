@@ -82,7 +82,17 @@ enum class WinMode
     BORDERLESS = SDL_WINDOW_BORDERLESS,                 /**< No window decoration                       */
     RESIZABLE  = SDL_WINDOW_RESIZABLE,                  /**< Window can be resized                      */
     MINIMIZED  = SDL_WINDOW_MINIMIZED,                  /**< Window is minimized                        */
-    MAXIMIZED  = SDL_WINDOW_MAXIMIZED                   /**< Window is maximized                        */
+    MAXIMIZED  = SDL_WINDOW_MAXIMIZED,                  /**< Window is maximized                        */
+    INPUT_GRABBED = SDL_WINDOW_INPUT_GRABBED,           /**< Window has grabbed input focus             */
+    INPUT_FOCUS = SDL_WINDOW_INPUT_FOCUS,               /**< Window has input focus                     */
+    MOUSE_FOCUS = SDL_WINDOW_MOUSE_FOCUS,               /**< Window has mouse focus                     */
+    HIGHDPI = SDL_WINDOW_ALLOW_HIGHDPI,                 /**< Window should be created in high-DPI mode if supported     */
+    MOUSE_CAPTURE = SDL_WINDOW_MOUSE_CAPTURE,           /**< Window has mouse captured (unrelated to ::INPUT_GRABBED)   */
+    X11_TOP = SDL_WINDOW_ALWAYS_ON_TOP,                 /**< Window should always be above others           */
+    X11_SKIP_TASKBAR = SDL_WINDOW_SKIP_TASKBAR,         /**< Window should not be added to the taskbar      */
+    X11_UTILITY = SDL_WINDOW_UTILITY,                   /**< Window should be treated as a utility window   */
+    X11_TOOLTIP = SDL_WINDOW_TOOLTIP,                   /**< Window should be treated as a tooltip          */
+    X11_POPUP = SDL_WINDOW_POPUP_MENU,                  /**< Window should be treated as a popup menu       */
 };
 
 
