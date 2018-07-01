@@ -338,6 +338,7 @@ public:
     void setViewPort( const lx::Graphics::ImgRect& viewport ) noexcept;
     /**
     *   @fn void resetViewPort() noexcept
+    *   Reset the drawing area (viewport)
     */
     void resetViewPort() noexcept;
     /**
