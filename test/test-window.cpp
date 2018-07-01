@@ -43,6 +43,7 @@ int main(int argc, char **argv)
     lx::Log::log("Info configuration:\n%s",winInfoToString(info).c_str());
     info.title = "Hello #1";
     lx::Win::Window *win = new lx::Win::Window(info);
+    lx::Log::log( "Window: %s", win->getTitle().c_str() );
     w = win;
 
     test_winInfo(win);
@@ -89,6 +90,7 @@ void test_window2(void)
     wi.h = h;
     wi.flag = SDL_WINDOW_SHOWN;
     lx::Win::Window win2(wi);
+    lx::Log::log( "Window: %s", win2.getTitle().c_str() );
 
     lx::Log::log(" = TEST 2 window = ");
 
@@ -565,6 +567,7 @@ void test_opengl()
 
     {
         lx::Win::Window w(info);
+        lx::Log::log( "Window: %s", w.getTitle().c_str() );
 
         {
             lx::Log::log("Get an OpengGL function: glClearColor");
@@ -658,6 +661,8 @@ void test_opengl2()
     {
         lx::Win::Window w1(winfo1);
         lx::Win::Window w2(winfo2);
+        lx::Log::log( "Window: %s", w1.getTitle().c_str() );
+        lx::Log::log( "Window: %s", w2.getTitle().c_str() );
 
         lx::Log::log("Define window #1 as the current OpenGL window");
         if(w1.glMakeCurrent())

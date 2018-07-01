@@ -414,6 +414,13 @@ void Window::setTitle( const std::string& title ) noexcept
     SDL_SetWindowTitle( _wimpl->_window, title.c_str() );
 }
 
+
+std::string Window::getTitle() noexcept
+{
+    const char * TITLE = SDL_GetWindowTitle( _wimpl->_window );
+    return std::string( ( TITLE == nullptr ) ? "" : TITLE );
+}
+
 void Window::setWindowSize( int w, int h ) noexcept
 {
     SDL_SetWindowSize( _wimpl->_window, w, h );

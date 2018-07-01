@@ -316,6 +316,12 @@ public:
     */
     void setTitle( const std::string& title ) noexcept;
     /**
+    *   @fn std::string setTitle() noexcept
+    *   Get the title of the window
+    */
+    std::string getTitle() noexcept;
+
+    /**
     *   @fn void setWindowSize(int w, int h) noexcept
     *
     *   Set the size of the window
