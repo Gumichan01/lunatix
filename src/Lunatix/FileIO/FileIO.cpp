@@ -150,7 +150,7 @@ public:
         ok = seek( old_pos, FileWhence::SET );
 
         if ( !ok )
-            return static_cast<size_t>( -1 );
+            return -1L;
 
         return fsize;
     }
