@@ -108,9 +108,9 @@ void test_window2(void)
     win2.setOpacity(50.0f);
     lx::Log::log( "Cannot load the library: %s", win2.getOpacity() );
 
-    w.clearWindow();
-    w.show();
-    w.update();
+    win2.clearWindow();
+    win2.show();
+    win2.update();
     lx::Time::delay(1512);
 
     lx::Log::log(" = END TEST = ");
