@@ -206,7 +206,6 @@ size_t File::write( const std::string& str ) noexcept
     return _fimpl->write( str );
 }
 
-
 bool File::seek( long offset, FileWhence whence ) noexcept
 {
     return _fimpl->seek( offset, whence );
@@ -222,7 +221,6 @@ long File::size() noexcept
     return _fimpl->size();
 }
 
-
 const char * File::getFilename() const noexcept
 {
     return _fimpl->getFilename();
@@ -232,8 +230,6 @@ void File::close() noexcept
 {
     _fimpl->close();
 }
-
-
 
 File::~File()
 {
