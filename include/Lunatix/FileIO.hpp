@@ -168,9 +168,8 @@ public:
     */
     virtual bool seek( long offset, FileWhence whence ) noexcept = 0;
 
-    // TODO refactor tell() -> long instead of size_t
     /**
-    *   @fn virtual size_t tell() const noexcept
+    *   @fn virtual long tell() const noexcept
     *
     *   Get the position in a file
     *
@@ -248,11 +247,11 @@ public:
     virtual bool seek( long offset, FileWhence whence ) noexcept;
     virtual long tell() const noexcept;
     /**
-    *   @fn size_t size()
+    *   @fn long size()
     *   Get the size of a file
     *   @return The size of the file on success. -1 on failure
     */
-    size_t size() noexcept;
+    long size() noexcept;
     /**
     *   @fn const char * getFilename()
     *   Get the name of the file

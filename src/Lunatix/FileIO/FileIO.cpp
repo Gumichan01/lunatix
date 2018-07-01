@@ -138,7 +138,7 @@ public:
         return std::ftell( _file );
     }
 
-    size_t size() noexcept
+    long size() noexcept
     {
         long fsize = -1L;
         long old_pos = tell();
@@ -217,7 +217,7 @@ long File::tell() const noexcept
     return _fimpl->tell();
 }
 
-size_t File::size() noexcept
+long File::size() noexcept
 {
     return _fimpl->size();
 }
