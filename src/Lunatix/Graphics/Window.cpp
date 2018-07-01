@@ -429,6 +429,29 @@ void Window::setWindowSize( int w, int h ) noexcept
     getViewPort( _wimpl->_viewport );
 }
 
+void Window::setPosition( int x, int y ) noexcept
+{
+    WindowInfo winfo;
+    getInfo( winfo );
+
+    if ( ( winfo.flag & SDL_WINDOW_FULLSCREEN ) != SDL_WINDOW_FULLSCREEN )
+        SDL_SetWindowPosition( _wimpl->_window, x, y );
+
+}
+
+int Window::getXPosition() noexcept
+{
+    int x;
+    SDL_GetWindowPosition(_wimpl->_window, &x, nullptr);
+    return x;
+}
+
+int Window::getYPosition() noexcept
+{
+    int y;
+    SDL_GetWindowPosition(_wimpl->_window, nullptr, &y);
+    return y;
+}
 
 void Window::setViewPort( const lx::Graphics::ImgRect& viewport ) noexcept
 {

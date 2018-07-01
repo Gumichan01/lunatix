@@ -312,12 +312,13 @@ public:
     *   Set the title of the window
     *
     *   @param [in] title The title
-    *   @sa setWindowSize
+    *   @sa getTitle
     */
     void setTitle( const std::string& title ) noexcept;
     /**
     *   @fn std::string getTitle() noexcept
     *   Get the title of the window
+    *   @sa setTitle
     */
     std::string getTitle() noexcept;
 
@@ -331,6 +332,29 @@ public:
     *   @sa setTitle
     */
     void setWindowSize( int w, int h ) noexcept;
+
+    /**
+    *   @fn void setPosition(int x, int y) noexcept
+    *
+    *   Set the position of the window
+    *
+    *   @param [in] x
+    *   @param [in] y
+    */
+    void setPosition(int x, int y) noexcept;
+    /**
+    *   @fn int getXPosition() noexcept
+    *   Get the X position of the window
+    *   @return The X position
+    */
+    int getXPosition() noexcept;
+    /**
+    *   @fn int getYPosition() noexcept
+    *   Get the Y position of the window
+    *   @return The Y position
+    */
+    int getYPosition() noexcept;
+
     /**
     *   @fn bool setViewPort(const lx::Graphics::ImgRect& viewport) noexcept
     *
