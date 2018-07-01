@@ -23,9 +23,6 @@
 #include <Lunatix/Error.hpp>
 #include <Lunatix/ImgRect.hpp>
 #include <Lunatix/Hitbox.hpp>
-/// todo v0.14.0 remove it (impl)
-#include <Lunatix/Vector2D.hpp>
-/// end
 
 #include <SDL2/SDL_image.h>
 #include <GL/gl.h>
@@ -68,7 +65,6 @@ bool fullscreenValidMode_( const WinMode& mode )
 {
     return mode == WinMode::FULLSCREEN || mode == WinMode::NO_FULLSCREEN
            || mode == WinMode::FULLSCREEN_DESKTOP;
-
 }
 
 
@@ -217,8 +213,9 @@ struct Window_ final
     void clearRenderer_() noexcept
     {
         uint8_t r, g, b, a;
+        const lx::Graphics::Colour C = { 0, 0, 0, 255 };
         SDL_GetRenderDrawColor( _renderer, &r, &g, &b, &a );
-        SDL_SetRenderDrawColor( _renderer, 0, 0, 0, 255 );
+        SDL_SetRenderDrawColor( _renderer, C.r, C.g, C.b, C.a );
         SDL_RenderClear( _renderer );
         SDL_SetRenderDrawColor( _renderer, r, g, b, a );
     }
@@ -299,7 +296,7 @@ void Window::drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noe
 
 void Window::drawRect( const lx::Graphics::ImgRect& box ) noexcept
 {
-    const SDL_Rect SDL_BOX{box.p.x, box.p.y, box.w, box.h};
+    const SDL_Rect SDL_BOX = { box.p.x, box.p.y, box.w, box.h };
     SDL_RenderDrawRect( _wimpl->_renderer, &SDL_BOX );
 }
 
@@ -360,14 +357,14 @@ void Window::fillCircle( const lx::Physics::Circle& c ) noexcept
 
     while ( y >= x )
     {
-        drawLine( lx::Graphics::ImgCoord{P.x - y, P.y + x},
-                  lx::Graphics::ImgCoord{P.x + y, P.y + x} );
-        drawLine( lx::Graphics::ImgCoord{P.x - x, P.y + y},
-                  lx::Graphics::ImgCoord{P.x + x, P.y + y} );
-        drawLine( lx::Graphics::ImgCoord{P.x - x, P.y - y},
-                  lx::Graphics::ImgCoord{P.x + x, P.y - y} );
-        drawLine( lx::Graphics::ImgCoord{P.x - y, P.y - x},
-                  lx::Graphics::ImgCoord{P.x + y, P.y - x} );
+        drawLine( lx::Graphics::ImgCoord{ P.x - y, P.y + x },
+                  lx::Graphics::ImgCoord{ P.x + y, P.y + x } );
+        drawLine( lx::Graphics::ImgCoord{ P.x - x, P.y + y },
+                  lx::Graphics::ImgCoord{ P.x + x, P.y + y } );
+        drawLine( lx::Graphics::ImgCoord{ P.x - x, P.y - y },
+                  lx::Graphics::ImgCoord{ P.x + x, P.y - y } );
+        drawLine( lx::Graphics::ImgCoord{ P.x - y, P.y - x },
+                  lx::Graphics::ImgCoord{ P.x + y, P.y - x } );
 
         if ( d >= 2 * x )
         {
@@ -428,7 +425,7 @@ void Window::setWindowSize( int w, int h ) noexcept
 
 void Window::setViewPort( const lx::Graphics::ImgRect& viewport ) noexcept
 {
-    const SDL_Rect VPORT{viewport.p.x, viewport.p.y, viewport.w, viewport.h};
+    const SDL_Rect VPORT = { viewport.p.x, viewport.p.y, viewport.w, viewport.h };
     SDL_RenderSetViewport( _wimpl->_renderer, &VPORT );
 }
 
@@ -487,7 +484,8 @@ void Window::clearWindow() noexcept
 {
     if ( _wimpl->_glcontext != nullptr )
     {
-        glClearColor( 0.0, 0.0, 0.0, 1.0 );
+        const lx::Graphics::glColour GLC = { 0.0f, 0.0f, 0.0f, 1.0f };
+        glClearColor( GLC.r, GLC.g, GLC.b, GLC.a );
         glClear( GL_COLOR_BUFFER_BIT );
     }
     else

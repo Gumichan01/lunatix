@@ -55,9 +55,6 @@ class Font;
 namespace Physics
 {
 struct Circle;
-/// todo version 0.14.0 remove it
-struct Vector2D;
-/// end
 }
 
 
