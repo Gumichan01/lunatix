@@ -1,18 +1,4 @@
 
-build-sdl2.0.3:
-
-    before_script:
-    - .gitlab-ci-gumi/.gitlab-ci.sh
-    - .gitlab-ci-gumi/.gitlab-ci-sdl2.0.3.sh
-
-    script:
-    - git clone https://github.com/Gumichan01/lunatix.git
-    - cd lunatix/
-    - git-lfs pull
-    - make lunatix-demo
-    - make test
-    - make
-
 build-sdl2.0.5:
     before_script:
     - .gitlab-ci-gumi/.gitlab-ci.sh
