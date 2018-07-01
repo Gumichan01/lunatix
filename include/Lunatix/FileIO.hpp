@@ -154,7 +154,6 @@ public:
     */
     virtual size_t write( const std::string& str ) noexcept = 0;
 
-    // TODO refactor seek() -> long instead of size_t
     /**
     *   @fn virtual bool seek(long offset, FileWhence whence) noexcept
     *
@@ -180,7 +179,7 @@ public:
     *
     *   @sa seek
     */
-    virtual size_t tell() const noexcept = 0;
+    virtual long tell() const noexcept = 0;
 
     virtual ~AbstractFile() = default;
 };
@@ -247,7 +246,7 @@ public:
     virtual size_t write( const std::string& str ) noexcept override;
 
     virtual bool seek( long offset, FileWhence whence ) noexcept;
-    virtual size_t tell() const noexcept;
+    virtual long tell() const noexcept;
     /**
     *   @fn size_t size()
     *   Get the size of a file
@@ -294,7 +293,7 @@ public:
     virtual size_t write( const std::string& str ) noexcept override;
 
     virtual bool seek( long offset, FileWhence whence ) noexcept override;
-    virtual size_t tell() const noexcept;
+    virtual long tell() const noexcept;
 
     virtual ~TmpFile();
 };

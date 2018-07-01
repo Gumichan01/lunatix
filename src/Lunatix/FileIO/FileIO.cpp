@@ -133,21 +133,21 @@ public:
         return std::fseek( _file, offset, static_cast<int>( whence ) ) == 0;
     }
 
-    size_t tell() const noexcept
+    long tell() const noexcept
     {
-        return static_cast<size_t>( std::ftell( _file ) );
+        return std::ftell( _file );
     }
 
     size_t size() noexcept
     {
-        size_t fsize = static_cast<size_t>( -1 );
-        size_t old_pos = tell();
+        long fsize = -1L;
+        long old_pos = tell();
         bool ok = seek( 0, FileWhence::END );
 
         if ( ok )
             fsize = tell();
 
-        ok = seek( static_cast<long>( old_pos ), FileWhence::SET );
+        ok = seek( old_pos, FileWhence::SET );
 
         if ( !ok )
             return static_cast<size_t>( -1 );
@@ -212,7 +212,7 @@ bool File::seek( long offset, FileWhence whence ) noexcept
     return _fimpl->seek( offset, whence );
 }
 
-size_t File::tell() const noexcept
+long File::tell() const noexcept
 {
     return _fimpl->tell();
 }
@@ -314,9 +314,9 @@ public:
         return std::fseek( _f, offset, static_cast<int>( whence ) ) == 0;
     }
 
-    size_t tell() const noexcept
+    long tell() const noexcept
     {
-        return static_cast<size_t>( std::ftell( _f ) );
+        return std::ftell( _f );
     }
 
     ~TmpFile_()
@@ -359,7 +359,7 @@ bool TmpFile::seek( long offset, FileWhence whence ) noexcept
     return _timpl->seek( offset, whence );
 }
 
-size_t TmpFile::tell() const noexcept
+long TmpFile::tell() const noexcept
 {
     return _timpl->tell();
 }
