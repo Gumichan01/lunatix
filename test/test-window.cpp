@@ -105,7 +105,7 @@ void test_window2(void)
         lx::Log::log("SUCCESS - width: %d",h);
 
     lx::Log::log( "Cannot load the library: %s", win2.getOpacity() );
-    win2.setOpacity(50.0f)
+    win2.setOpacity(50.0f);
     lx::Log::log( "Cannot load the library: %s", win2.getOpacity() );
 
     w.clearWindow();
