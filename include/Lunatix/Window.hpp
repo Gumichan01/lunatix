@@ -354,6 +354,24 @@ public:
     *   @return The Y position
     */
     int getYPosition() noexcept;
+    /**
+    *   @fn void setOpacity(const float percent) noexcept
+    *   Set the opacity of the window
+    *   @param [in] percent The opacity (in percentage), between 0 and 100
+    *
+    *   @pre 0 ≤ percent ≤ 100
+    *   @note   0 % — transparent
+    *   @note 100 % — opaque
+    *   @note Values < 0 are processed as 0
+    *   @note Values > 100 are processed as 100
+    */
+    void setOpacity(const float percent) noexcept;
+    /**
+    *   @fn float getOpacity() noexcept
+    *   Get the opacity of the window
+    *   @return The opacity, in percentage (%)
+    */
+    float getOpacity() noexcept;
 
     /**
     *   @fn bool setViewPort(const lx::Graphics::ImgRect& viewport) noexcept

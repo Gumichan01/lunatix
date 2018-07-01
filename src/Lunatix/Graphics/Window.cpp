@@ -453,6 +453,32 @@ int Window::getYPosition() noexcept
     return y;
 }
 
+void Window::setOpacity(const float percent) noexcept
+{
+    const float MAX_PERCENT = 100.0f;
+    const float MIN_PERCENT = 0.0f;
+    float real_percent = 0.0f;
+
+    if ( percent > MAX_PERCENT )
+        real_percent = MAX_PERCENT;
+
+    else if ( percent < MIN_PERCENT )
+        real_percent = MIN_PERCENT;
+
+    else
+        real_percent = percent;
+
+    float opacity = real_percent / MAX_PERCENT;
+    SDL_SetWindowOpacity( _wimpl->_window, opacity);
+}
+
+float Window::getOpacity() noexcept
+{
+    float opacity;
+    SDL_GetWindowOpacity( _wimpl->_window, &opacity);
+    return opacity;
+}
+
 void Window::setViewPort( const lx::Graphics::ImgRect& viewport ) noexcept
 {
     const SDL_Rect VPORT = { viewport.p.x, viewport.p.y, viewport.w, viewport.h };
