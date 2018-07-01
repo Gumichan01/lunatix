@@ -292,15 +292,15 @@ public:
     *   @return The blend mode used for blending:
     *   |        Value        |                      Meaning                     |
     *   |         ---         |                        ---                       |
-    *   |  BLENDMODE_NONE  | no blending                                      |
+    *   |  BLENDMODE_NONE     | no blending                                      |
     *   |                     | destRGBA = srcRGBA                               |
-    *   |  BLENDMODE_BLEND | alpha blending                                   |
+    *   |  BLENDMODE_BLEND    | alpha blending                                   |
     *   |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
     *   |                     | destA = srcA + (destA * (1-srcA))                |
-    *   |  BLENDMODE_ADD   | additive blending                                |
+    *   |  BLENDMODE_ADD      | additive blending                                |
     *   |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *   |                     | destA = destA                                    |
-    *   |  BLENDMODE_MOD   | colour modulate                                  |
+    *   |  BLENDMODE_MOD      | colour modulate                                  |
     *   |                     | destRGB = srcRGB * destRGB                       |
     *   |                     | destA = destA                                    |
     */
