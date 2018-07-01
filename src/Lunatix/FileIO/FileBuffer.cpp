@@ -50,26 +50,27 @@ class FileBuffer_ final
 public:
 
     explicit FileBuffer_( const std::string& filename, size_t offset, size_t sz )
-        : _name( filename ), _buffer( nullptr ), _bufsize( 0 )
+        : _name( filename ), _buffer( nullptr ), _bufsize( 0U )
     {
+        size_t r = 0;
+        long fsize = 0L;
+        const long LOFFSET = static_cast<long>( offset );
         std::string str( "FileBuffer: " + _name + " - " );
-        size_t r = 0, fsize = 0;
-
         File reader( _name, FileMode::RDONLY );
 
-        if ( ( fsize = reader.size() ) == static_cast<size_t>( -1 ) )
+        if ( ( fsize = reader.size() ) == -1L )
             throw IOException( str + "cannot get the size of the file" );
 
         // If offset > size of the file → failure
-        if ( offset > fsize )
+        if ( LOFFSET > fsize )
             throw IOException( str + "invalid offset: offset > size of the file" );
 
         if ( sz == 0 )
-            _bufsize = fsize - offset;
+            _bufsize = static_cast<size_t>( fsize - LOFFSET );
         else
             _bufsize = sz;
 
-        reader.seek( static_cast<long>( offset ), FileWhence::SET );
+        reader.seek( LOFFSET, FileWhence::SET );
         _buffer.reset( new ( std::nothrow ) int8_t[_bufsize] );
 
         if ( _buffer == nullptr )
