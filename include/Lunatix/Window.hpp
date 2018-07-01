@@ -316,7 +316,7 @@ public:
     */
     void setTitle( const std::string& title ) noexcept;
     /**
-    *   @fn std::string setTitle() noexcept
+    *   @fn std::string getTitle() noexcept
     *   Get the title of the window
     */
     std::string getTitle() noexcept;
