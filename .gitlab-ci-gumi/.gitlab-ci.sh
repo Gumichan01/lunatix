@@ -12,5 +12,3 @@ apt-get install -y libjpeg-dev libpng-dev libwebp-dev libtiff5-dev libtiff-openg
 apt-get install -y libfreetype6-dev
 apt-get install -y libflac-dev libflac++-dev libogg0 libogg-dev libvorbis-dev liboggz2-dev libmodplug1
 apt-get install -y libmodplug-dev fluidsynth libfluidsynth* libsmpeg*
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
-apt-get install -y git git-lfs
