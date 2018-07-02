@@ -7,7 +7,6 @@ build-sdl2.0.5:
     script:
     - git clone https://github.com/Gumichan01/lunatix.git
     - cd lunatix/
-    - git-lfs pull
     - make lunatix-demo
     - make test
     - make
@@ -20,7 +19,6 @@ build-sdl2.0.6:
     script:
     - git clone https://github.com/Gumichan01/lunatix.git
     - cd lunatix/
-    - git-lfs pull
     - make lunatix-demo
     - make test
     - make
@@ -33,7 +31,6 @@ build-sdl2.0.7:
     script:
     - git clone https://github.com/Gumichan01/lunatix.git
     - cd lunatix/
-    - git-lfs pull
     - make lunatix-demo
     - make test
     - make
@@ -46,7 +43,6 @@ build-sdl2.0.8:
     script:
     - git clone https://github.com/Gumichan01/lunatix.git
     - cd lunatix/
-    - git-lfs pull
     - make lunatix-demo
     - make test
     - make
