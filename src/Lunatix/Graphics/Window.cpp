@@ -32,29 +32,29 @@ namespace
 {
 
 
-uint32_t toSDL2VideoFlags_(const lx::Win::WinFlags& wflags) noexcept
+uint32_t toSDL2VideoFlags_( const lx::Win::WinFlags& wflags ) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.fullscreen)
+    if ( wflags.fullscreen )
     {
         flag |= SDL_WINDOW_FULLSCREEN;
     }
-    else if(wflags.fullscreen_desktop)
+    else if ( wflags.fullscreen_desktop )
     {
         flag |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
-    if(wflags.opengl)
+    if ( wflags.opengl )
     {
         flag |= SDL_WINDOW_OPENGL;
     }
 
-    if(wflags.shown)
+    if ( wflags.shown )
     {
         flag |= SDL_WINDOW_SHOWN;
     }
-    else if(wflags.hidden)
+    else if ( wflags.hidden )
     {
         flag |= SDL_WINDOW_HIDDEN;
     }
@@ -62,26 +62,26 @@ uint32_t toSDL2VideoFlags_(const lx::Win::WinFlags& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2WinFlags_(const lx::Win::WinFlags& wflags) noexcept
+uint32_t toSDL2WinFlags_( const lx::Win::WinFlags& wflags ) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.borderless)
+    if ( wflags.borderless )
     {
         flag |= SDL_WINDOW_BORDERLESS;
     }
 
-    if(wflags.resizable)
+    if ( wflags.resizable )
     {
         flag |= SDL_WINDOW_RESIZABLE;
     }
 
-    if(wflags.minimized)
+    if ( wflags.minimized )
     {
         flag |= SDL_WINDOW_MINIMIZED;
     }
 
-    if(wflags.maximized)
+    if ( wflags.maximized )
     {
         flag |= SDL_WINDOW_MAXIMIZED;
     }
@@ -89,31 +89,31 @@ uint32_t toSDL2WinFlags_(const lx::Win::WinFlags& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2InputFlags_(const lx::Win::WinFlags& wflags) noexcept
+uint32_t toSDL2InputFlags_( const lx::Win::WinFlags& wflags ) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.input_grabbed)
+    if ( wflags.input_grabbed )
     {
         flag |= SDL_WINDOW_INPUT_GRABBED;
     }
 
-    if(wflags.input_focus)
+    if ( wflags.input_focus )
     {
         flag |= SDL_WINDOW_INPUT_FOCUS;
     }
 
-    if(wflags.mouse_focus)
+    if ( wflags.mouse_focus )
     {
         flag |= SDL_WINDOW_MOUSE_FOCUS;
     }
 
-    if(wflags.high_dpi)
+    if ( wflags.high_dpi )
     {
         flag |= SDL_WINDOW_ALLOW_HIGHDPI;
     }
 
-    if(wflags.mouse_capture)
+    if ( wflags.mouse_capture )
     {
         flag |= SDL_WINDOW_MOUSE_CAPTURE;
     }
@@ -121,31 +121,31 @@ uint32_t toSDL2InputFlags_(const lx::Win::WinFlags& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2X11Flags_(const lx::Win::WinFlags& wflags) noexcept
+uint32_t toSDL2X11Flags_( const lx::Win::WinFlags& wflags ) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.x11_top)
+    if ( wflags.x11_top )
     {
         flag |= SDL_WINDOW_ALWAYS_ON_TOP;
     }
 
-    if(wflags.x11_skip_taskbar)
+    if ( wflags.x11_skip_taskbar )
     {
         flag |= SDL_WINDOW_SKIP_TASKBAR;
     }
 
-    if(wflags.x11_utility)
+    if ( wflags.x11_utility )
     {
         flag |= SDL_WINDOW_UTILITY;
     }
 
-    if(wflags.x11_tooltip)
+    if ( wflags.x11_tooltip )
     {
         flag |= SDL_WINDOW_TOOLTIP;
     }
 
-    if(wflags.x11_popup)
+    if ( wflags.x11_popup )
     {
         flag |= SDL_WINDOW_POPUP_MENU;
     }
@@ -153,22 +153,22 @@ uint32_t toSDL2X11Flags_(const lx::Win::WinFlags& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2Flags_(const lx::Win::WinFlags& wflags) noexcept
+uint32_t toSDL2Flags_( const lx::Win::WinFlags& wflags ) noexcept
 {
     uint32_t flag = 0x0000000;
-    flag |= toSDL2VideoFlags_(wflags);
-    flag |= toSDL2WinFlags_(wflags);
-    flag |= toSDL2InputFlags_(wflags);
-    flag |= toSDL2X11Flags_(wflags);
+    flag |= toSDL2VideoFlags_( wflags );
+    flag |= toSDL2WinFlags_( wflags );
+    flag |= toSDL2InputFlags_( wflags );
+    flag |= toSDL2X11Flags_( wflags );
     return flag;
 }
 
-inline constexpr uint32_t toSDL2Flags_(const lx::Win::ScreenMode smode) noexcept
+inline constexpr uint32_t toSDL2Flags_( const lx::Win::ScreenMode smode ) noexcept
 {
-    return static_cast<uint32_t>(smode);
+    return static_cast<uint32_t>( smode );
 }
 
-lx::Win::WinFlags fromSDL2Flags_(const uint32_t flags) noexcept
+lx::Win::WinFlags fromSDL2Flags_( const uint32_t flags ) noexcept
 {
     lx::Win::WinFlags wflags;
 
@@ -291,7 +291,7 @@ void loadWindowConfig( WindowInfo& info ) noexcept
     info.h = DEFAULT_WIN_HEIGHT;
     info.lw = 0;
     info.lh = 0;
-    info.wflags = fromSDL2Flags_(genFlags_( config ));
+    info.wflags = fromSDL2Flags_( genFlags_( config ) );
     info.accel = true;
 }
 
@@ -334,7 +334,7 @@ struct Window_ final
             SDL_SetHint( SDL_HINT_RENDER_VSYNC, "1" );
 
         _window = SDL_CreateWindow( info.title.c_str(), info.x, info.y, info.w,
-                                    info.h, toSDL2Flags_(info.wflags) );
+                                    info.h, toSDL2Flags_( info.wflags ) );
 
         if ( _window == nullptr )
             throw WindowException( lx::getError() );
@@ -590,18 +590,18 @@ void Window::setPosition( int x, int y ) noexcept
 int Window::getXPosition() noexcept
 {
     int x;
-    SDL_GetWindowPosition(_wimpl->_window, &x, nullptr);
+    SDL_GetWindowPosition( _wimpl->_window, &x, nullptr );
     return x;
 }
 
 int Window::getYPosition() noexcept
 {
     int y;
-    SDL_GetWindowPosition(_wimpl->_window, nullptr, &y);
+    SDL_GetWindowPosition( _wimpl->_window, nullptr, &y );
     return y;
 }
 
-void Window::setOpacity(const float percent) noexcept
+void Window::setOpacity( const float percent ) noexcept
 {
     const float MAX_PERCENT = 100.0f;
     const float MIN_PERCENT = 0.0f;
@@ -617,13 +617,13 @@ void Window::setOpacity(const float percent) noexcept
         real_percent = percent;
 
     float opacity = real_percent / MAX_PERCENT;
-    SDL_SetWindowOpacity( _wimpl->_window, opacity);
+    SDL_SetWindowOpacity( _wimpl->_window, opacity );
 }
 
 float Window::getOpacity() noexcept
 {
     float opacity;
-    SDL_GetWindowOpacity( _wimpl->_window, &opacity);
+    SDL_GetWindowOpacity( _wimpl->_window, &opacity );
     return opacity;
 }
 
@@ -648,7 +648,7 @@ void Window::getViewPort( lx::Graphics::ImgRect& viewport ) const noexcept
 
 void Window::toggleFullscreen( const ScreenMode flag ) noexcept
 {
-    SDL_SetWindowFullscreen( _wimpl->_window, toSDL2Flags_(flag) );
+    SDL_SetWindowFullscreen( _wimpl->_window, toSDL2Flags_( flag ) );
 
     if ( flag == ScreenMode::NO_FULLSCREEN )
     {
@@ -708,7 +708,7 @@ void Window::getInfo( WindowInfo& info ) const noexcept
 {
     info.id = getID();
     info.title = SDL_GetWindowTitle( _wimpl->_window );
-    info.wflags = fromSDL2Flags_(SDL_GetWindowFlags( _wimpl->_window ));
+    info.wflags = fromSDL2Flags_( SDL_GetWindowFlags( _wimpl->_window ) );
 
     SDL_GetWindowPosition( _wimpl->_window, &info.x, &info.y );
     SDL_GetWindowSize( _wimpl->_window, &info.w, &info.h );

@@ -141,7 +141,7 @@ struct WindowInfo final
     int h  = 0;                 /**< Window Height                  */
     int lw = 0;                 /**< Independant device width       */
     int lh = 0;                 /**< Independant device height      */
-    WinFlags wflags= {};         /**< Flags                          */
+    WinFlags wflags = {};        /**< Flags                          */
     bool accel = false;         /**< Hardware acceleration          */
 
 };
