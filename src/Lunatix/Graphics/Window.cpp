@@ -34,11 +34,29 @@ namespace
 using lx::Win::WinMode;
 using lx::Win::BlendMode;
 
-constexpr uint32_t OPENGL_U = static_cast<uint32_t>( lx::Win::WinMode::OPENGL );
+const lx::Win::WinMode EMPTY_FLAG;
+
+uint32_t toSDL2Flags_(const lx::Win::WinMode& mode)
+{
+    uint32_t flag = 0x0000000;
+
+    /// @todo toSDL2Flags_()
+
+    return flag;
+}
+
+lx::Win::WinMode fromSDL2Flags_(const uint32_t flags)
+{
+    /// @todo fromSDL2Flags_()
+    return EMPTY_FLAG;
+}
+
+//constexpr uint32_t OPENGL_U = static_cast<uint32_t>( lx::Win::WinMode::OPENGL );
 
 inline constexpr uint32_t openglFlag() noexcept
 {
-    return static_cast<uint32_t>( WinMode::SHOWN ) | OPENGL_U;
+    /// @todo Remove openglFlag()
+    return 0;
 }
 
 inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
@@ -48,7 +66,8 @@ inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
 
 inline constexpr bool hasOpenGLsupport( const lx::Win::WindowInfo& info ) noexcept
 {
-    return ( info.flag & OPENGL_U ) == OPENGL_U;
+    /// @todo hasOpenGLsupport_()
+    return false;
 }
 
 uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
@@ -63,8 +82,10 @@ uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
 
 bool fullscreenValidMode_( const WinMode& mode )
 {
-    return mode == WinMode::FULLSCREEN || mode == WinMode::NO_FULLSCREEN
-           || mode == WinMode::FULLSCREEN_DESKTOP;
+    /// @todo fullscreenValidMode_() - refactorize
+    return false;
+    //return mode == WinMode::FULLSCREEN || mode == WinMode::NO_FULLSCREEN
+    //|| mode == WinMode::FULLSCREEN_DESKTOP;
 }
 
 
@@ -96,6 +117,8 @@ SDL_BlendMode sdlBlend_( const BlendMode& mode ) noexcept
 }
 
 using namespace lx::Config;
+
+/// @todo lx::Win - refactorize
 
 namespace lx
 {
@@ -502,13 +525,13 @@ void Window::toggleFullscreen( const WinMode flag ) noexcept
 {
     if ( fullscreenValidMode_( flag ) )
     {
-        SDL_SetWindowFullscreen( _wimpl->_window, static_cast<uint32_t>( flag ) );
+        SDL_SetWindowFullscreen( _wimpl->_window, toSDL2Flags_(flag) );
 
-        if ( flag == WinMode::NO_FULLSCREEN )
+        if ( flag.NO_FULLSCREEN )
         {
             setWindowSize( _wimpl->_original_width, _wimpl->_original_height );
         }
-        else if ( flag == WinMode::FULLSCREEN )
+        else if ( flag.FULLSCREEN )
         {
             SDL_RenderSetLogicalSize( _wimpl->_renderer, _wimpl->_original_width,
                                       _wimpl->_original_height );

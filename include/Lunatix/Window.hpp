@@ -71,28 +71,28 @@ struct Circle;
 namespace Win
 {
 
-enum class WinMode
+struct WinMode
 {
-    NO_FULLSCREEN = 0x00000000,                         /**< Original resolution in window              */
-    FULLSCREEN = SDL_WINDOW_FULLSCREEN,                 /**< Fullscreen mode with original resolution   */
-    FULLSCREEN_DESKTOP = ( FULLSCREEN | 0x00001000 ),   /**< Fullscreen with the current desktop size   */
-    OPENGL = SDL_WINDOW_OPENGL,                         /**< Window usable with OpenGL context          */
-    SHOWN  = SDL_WINDOW_SHOWN,                          /**< Window is visible                          */
-    HIDDEN = SDL_WINDOW_HIDDEN,                         /**< Window is not visible                      */
-    BORDERLESS = SDL_WINDOW_BORDERLESS,                 /**< No window decoration                       */
-    RESIZABLE  = SDL_WINDOW_RESIZABLE,                  /**< Window can be resized                      */
-    MINIMIZED  = SDL_WINDOW_MINIMIZED,                  /**< Window is minimized                        */
-    MAXIMIZED  = SDL_WINDOW_MAXIMIZED,                  /**< Window is maximized                        */
-    INPUT_GRABBED = SDL_WINDOW_INPUT_GRABBED,           /**< Window has grabbed input focus             */
-    INPUT_FOCUS = SDL_WINDOW_INPUT_FOCUS,               /**< Window has input focus                     */
-    MOUSE_FOCUS = SDL_WINDOW_MOUSE_FOCUS,               /**< Window has mouse focus                     */
-    HIGHDPI = SDL_WINDOW_ALLOW_HIGHDPI,                 /**< Window should be created in high-DPI mode if supported     */
-    MOUSE_CAPTURE = SDL_WINDOW_MOUSE_CAPTURE,           /**< Window has mouse captured (unrelated to ::INPUT_GRABBED)   */
-    X11_TOP = SDL_WINDOW_ALWAYS_ON_TOP,                 /**< Window should always be above others           */
-    X11_SKIP_TASKBAR = SDL_WINDOW_SKIP_TASKBAR,         /**< Window should not be added to the taskbar      */
-    X11_UTILITY = SDL_WINDOW_UTILITY,                   /**< Window should be treated as a utility window   */
-    X11_TOOLTIP = SDL_WINDOW_TOOLTIP,                   /**< Window should be treated as a tooltip          */
-    X11_POPUP = SDL_WINDOW_POPUP_MENU,                  /**< Window should be treated as a popup menu       */
+    bool NO_FULLSCREEN = false;         /**< Original resolution in window              */
+    bool FULLSCREEN = false;            /**< Fullscreen mode with original resolution   */
+    bool FULLSCREEN_DESKTOP = false;    /**< Fullscreen with the current desktop size   */
+    bool OPENGL = false;                /**< Window usable with OpenGL context          */
+    bool SHOWN = false;                 /**< Window is visible                          */
+    bool HIDDEN = false;                /**< Window is not visible                      */
+    bool BORDERLESS = false;            /**< No window decoration                       */
+    bool RESIZABLE = false;             /**< Window can be resized                      */
+    bool MINIMIZED = false;             /**< Window is minimized                        */
+    bool MAXIMIZED = false;             /**< Window is maximized                        */
+    bool INPUT_GRABBED = false;         /**< Window has grabbed input focus             */
+    bool INPUT_FOCUS = false;           /**< Window has input focus                     */
+    bool MOUSE_FOCUS = false;           /**< Window has mouse focus                     */
+    bool HIGHDPI = false;               /**< Window should be created in high-DPI mode if supported     */
+    bool MOUSE_CAPTURE = false;         /**< Window has mouse captured (unrelated to ::INPUT_GRABBED)   */
+    bool X11_TOP = false;               /**< Window should always be above others           */
+    bool X11_SKIP_TASKBAR = false;      /**< Window should not be added to the taskbar      */
+    bool X11_UTILITY = false;           /**< Window should be treated as a utility window   */
+    bool X11_TOOLTIP = false;           /**< Window should be treated as a tooltip          */
+    bool X11_POPUP = false;             /**< Window should be treated as a popup menu       */
 };
 
 
@@ -352,7 +352,7 @@ public:
     *   @param [in] x
     *   @param [in] y
     */
-    void setPosition(int x, int y) noexcept;
+    void setPosition( int x, int y ) noexcept;
     /**
     *   @fn int getXPosition() noexcept
     *   Get the X position of the window
@@ -376,7 +376,7 @@ public:
     *   @note Values < 0 are processed as 0
     *   @note Values > 100 are processed as 100
     */
-    void setOpacity(const float percent) noexcept;
+    void setOpacity( const float percent ) noexcept;
     /**
     *   @fn float getOpacity() noexcept
     *   Get the opacity of the window
