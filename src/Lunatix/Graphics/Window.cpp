@@ -36,7 +36,7 @@ using lx::Win::BlendMode;
 
 const lx::Win::WinMode EMPTY_FLAG;
 
-uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags)
+uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -66,7 +66,7 @@ uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags)
     return flag;
 }
 
-uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags)
+uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -93,7 +93,7 @@ uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags)
     return flag;
 }
 
-uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags)
+uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -125,7 +125,7 @@ uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags)
     return flag;
 }
 
-uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags)
+uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -157,7 +157,7 @@ uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags)
     return flag;
 }
 
-uint32_t toSDL2Flags_(const lx::Win::WinMode& wflags)
+uint32_t toSDL2Flags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
     flag |= toSDL2VideoFlags_(wflags);
@@ -172,7 +172,7 @@ inline constexpr uint32_t toSDL2Flags_(const lx::Win::ScreenMode smode) noexcept
     return static_cast<uint32_t>(smode);
 }
 
-lx::Win::WinMode fromSDL2Flags_(const uint32_t flags)
+lx::Win::WinMode fromSDL2Flags_(const uint32_t flags) noexcept
 {
     /// @todo fromSDL2Flags_()
     return EMPTY_FLAG;
@@ -183,10 +183,9 @@ inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
     return info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
 }
 
-inline constexpr bool hasOpenGLsupport( const lx::Win::WindowInfo& info ) noexcept
+inline bool hasOpenGLsupport_( const lx::Win::WindowInfo& info ) noexcept
 {
-    /// @todo hasOpenGLsupport_()
-    return false;
+    return fromSDL2Flags_(info.flag).OPENGL;
 }
 
 uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
@@ -325,7 +324,7 @@ struct Window_ final
         if ( _window == nullptr )
             throw WindowException( lx::getError() );
 
-        if ( hasOpenGLsupport( info ) )
+        if ( hasOpenGLsupport_( info ) )
             _glcontext = SDL_GL_CreateContext( _window );
 
         // Hardware acceleration or software rendering
