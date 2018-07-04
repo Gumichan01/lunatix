@@ -97,6 +97,18 @@ struct WinMode
 
 
 /**
+*   @enum ScreenMode
+*   @brief Define if the window must be set in fullscreen or not
+*   @note Used in Window::toggleFullscreen()
+*/
+enum class ScreenMode
+{
+    NO_FULLSCREEN = 0,
+    FULLSCREEN = SDL_WINDOW_FULLSCREEN,
+    FULLSCREEN_DESKTOP = SDL_WINDOW_FULLSCREEN_DESKTOP,
+};
+
+/**
 *   @enum BlendMode
 *   @brief Define the blend mode for drawing operations
 *
