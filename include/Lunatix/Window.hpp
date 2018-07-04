@@ -71,7 +71,7 @@ struct Circle;
 namespace Win
 {
 
-struct WinMode
+struct WinFlags
 {
     bool fullscreen = false;            /**< Fullscreen mode with original resolution   */
     bool fullscreen_desktop = false;    /**< Fullscreen with the current desktop size   */
@@ -141,7 +141,7 @@ struct WindowInfo final
     int h  = 0;                 /**< Window Height                  */
     int lw = 0;                 /**< Independant device width       */
     int lh = 0;                 /**< Independant device height      */
-    WinMode wflags= {};         /**< Flags                          */
+    WinFlags wflags= {};         /**< Flags                          */
     bool accel = false;         /**< Hardware acceleration          */
 
 };

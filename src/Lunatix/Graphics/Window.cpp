@@ -31,10 +31,8 @@
 namespace
 {
 
-using lx::Win::WinMode;
-using lx::Win::BlendMode;
 
-uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags) noexcept
+uint32_t toSDL2VideoFlags_(const lx::Win::WinFlags& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -64,7 +62,7 @@ uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags) noexcept
+uint32_t toSDL2WinFlags_(const lx::Win::WinFlags& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -91,7 +89,7 @@ uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags) noexcept
+uint32_t toSDL2InputFlags_(const lx::Win::WinFlags& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -123,7 +121,7 @@ uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags) noexcept
+uint32_t toSDL2X11Flags_(const lx::Win::WinFlags& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
@@ -155,7 +153,7 @@ uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags) noexcept
     return flag;
 }
 
-uint32_t toSDL2Flags_(const lx::Win::WinMode& wflags) noexcept
+uint32_t toSDL2Flags_(const lx::Win::WinFlags& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
     flag |= toSDL2VideoFlags_(wflags);
@@ -170,9 +168,9 @@ inline constexpr uint32_t toSDL2Flags_(const lx::Win::ScreenMode smode) noexcept
     return static_cast<uint32_t>(smode);
 }
 
-lx::Win::WinMode fromSDL2Flags_(const uint32_t flags) noexcept
+lx::Win::WinFlags fromSDL2Flags_(const uint32_t flags) noexcept
 {
-    lx::Win::WinMode wflags;
+    lx::Win::WinFlags wflags;
 
     wflags.fullscreen = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN );
     wflags.fullscreen_desktop = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN_DESKTOP );
@@ -218,21 +216,21 @@ uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
 }
 
 
-SDL_BlendMode sdlBlend_( const BlendMode& mode ) noexcept
+SDL_BlendMode sdlBlend_( const lx::Win::BlendMode& mode ) noexcept
 {
     SDL_BlendMode m;
 
     switch ( mode )
     {
-    case BlendMode::BLENDMODE_BLEND:
+    case lx::Win::BlendMode::BLENDMODE_BLEND:
         m = SDL_BLENDMODE_BLEND;
         break;
 
-    case BlendMode::BLENDMODE_ADD:
+    case lx::Win::BlendMode::BLENDMODE_ADD:
         m = SDL_BLENDMODE_ADD;
         break;
 
-    case BlendMode::BLENDMODE_MOD:
+    case lx::Win::BlendMode::BLENDMODE_MOD:
         m = SDL_BLENDMODE_MOD;
         break;
     default:
@@ -245,9 +243,8 @@ SDL_BlendMode sdlBlend_( const BlendMode& mode ) noexcept
 
 }
 
-using namespace lx::Config;
+//using namespace lx::Config;
 
-/// @todo lx::Win - refactorize
 
 namespace lx
 {
@@ -284,7 +281,7 @@ void initWindowInfo( WindowInfo& info ) noexcept
 
 void loadWindowConfig( WindowInfo& info ) noexcept
 {
-    const Configuration& config = Configuration::getInstance();
+    const lx::Config::Configuration& config = lx::Config::Configuration::getInstance();
 
     info.id = 0;
     info.title = DEFAULT_TITLE;
@@ -330,7 +327,7 @@ struct Window_ final
         _renderer( nullptr ), _glcontext( nullptr ), _original_width( info.w ),
         _original_height( info.h )
     {
-        const Configuration& config = Configuration::getInstance();
+        const lx::Config::Configuration& config = lx::Config::Configuration::getInstance();
 
         // Video flag and VSync flag actives -> add the option
         if ( config.getVideoFlag() && config.getVSyncFlag() )
