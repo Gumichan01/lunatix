@@ -51,14 +51,6 @@ lx::Win::WinMode fromSDL2Flags_(const uint32_t flags)
     return EMPTY_FLAG;
 }
 
-//constexpr uint32_t OPENGL_U = static_cast<uint32_t>( lx::Win::WinMode::OPENGL );
-
-inline constexpr uint32_t openglFlag() noexcept
-{
-    /// @todo Remove openglFlag()
-    return 0;
-}
-
 inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
 {
     return info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
@@ -75,7 +67,7 @@ uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
     uint32_t flag = 0x00000000;
 
     if ( config.getVideoFlag() && config.getOpenGLFlag() )
-        flag |= openglFlag();
+        flag |= SDL_WINDOW_OPENGL;
 
     return flag;
 }
