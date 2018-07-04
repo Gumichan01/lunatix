@@ -420,20 +420,20 @@ public:
     void getViewPort( lx::Graphics::ImgRect& viewport ) const noexcept;
 
     /**
-    *   @fn void toggleFullscreen(const WinMode flag) noexcept
+    *   @fn void toggleFullscreen(const ScreenMode flag) noexcept
     *
     *   Set the window's fullscreen state
     *
     *   @param [in] flag
     *
     *   @pre The flag to use in this function is on of the following:
-    *          - WinMode::FULLSCREEN_DESKTOP
-    *          - WinMode::FULLSCREEN
-    *          - WinMode::NO_FULLSCREEN
+    *          - ScreenMode::FULLSCREEN_DESKTOP
+    *          - ScreenMode::FULLSCREEN
+    *          - ScreenMode::NO_FULLSCREEN
     *
     *   @note Using another flag has no effect
     */
-    void toggleFullscreen( const WinMode flag ) noexcept;
+    void toggleFullscreen( const ScreenMode flag ) noexcept;
 
     /**
     *   @fn void show() noexcept

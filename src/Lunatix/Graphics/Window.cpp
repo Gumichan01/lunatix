@@ -167,6 +167,11 @@ uint32_t toSDL2Flags_(const lx::Win::WinMode& wflags)
     return flag;
 }
 
+inline constexpr uint32_t toSDL2Flags_(const lx::Win::ScreenMode smode) noexcept
+{
+    return static_cast<uint32_t>(smode);
+}
+
 lx::Win::WinMode fromSDL2Flags_(const uint32_t flags)
 {
     /// @todo fromSDL2Flags_()
@@ -635,24 +640,21 @@ void Window::getViewPort( lx::Graphics::ImgRect& viewport ) const noexcept
 }
 
 
-void Window::toggleFullscreen( const WinMode flag ) noexcept
+void Window::toggleFullscreen( const ScreenMode flag ) noexcept
 {
-    if ( fullscreenValidMode_( flag ) )
+    SDL_SetWindowFullscreen( _wimpl->_window, toSDL2Flags_(flag) );
+
+    if ( flag == ScreenMode::NO_FULLSCREEN )
     {
-        SDL_SetWindowFullscreen( _wimpl->_window, toSDL2Flags_(flag) );
-
-        if ( flag.NO_FULLSCREEN )
-        {
-            setWindowSize( _wimpl->_original_width, _wimpl->_original_height );
-        }
-        else if ( flag.FULLSCREEN )
-        {
-            SDL_RenderSetLogicalSize( _wimpl->_renderer, _wimpl->_original_width,
-                                      _wimpl->_original_height );
-        }
-
-        getViewPort( _wimpl->_viewport );
+        setWindowSize( _wimpl->_original_width, _wimpl->_original_height );
     }
+    else if ( flag == ScreenMode::FULLSCREEN )
+    {
+        SDL_RenderSetLogicalSize( _wimpl->_renderer, _wimpl->_original_width,
+                                  _wimpl->_original_height );
+    }
+
+    getViewPort( _wimpl->_viewport );
 }
 
 void Window::show() noexcept
