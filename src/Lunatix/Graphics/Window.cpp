@@ -34,8 +34,6 @@ namespace
 using lx::Win::WinMode;
 using lx::Win::BlendMode;
 
-const lx::Win::WinMode EMPTY_FLAG;
-
 uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
@@ -174,8 +172,29 @@ inline constexpr uint32_t toSDL2Flags_(const lx::Win::ScreenMode smode) noexcept
 
 lx::Win::WinMode fromSDL2Flags_(const uint32_t flags) noexcept
 {
-    /// @todo fromSDL2Flags_()
-    return EMPTY_FLAG;
+    lx::Win::WinMode wflags;
+
+    wflags.FULLSCREEN = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN );
+    wflags.FULLSCREEN_DESKTOP = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN_DESKTOP );
+    wflags.OPENGL = ( ( flags & SDL_WINDOW_OPENGL ) == SDL_WINDOW_OPENGL );
+    wflags.SHOWN = ( ( flags & SDL_WINDOW_SHOWN ) == SDL_WINDOW_SHOWN );
+    wflags.HIDDEN = ( ( flags & SDL_WINDOW_HIDDEN ) == SDL_WINDOW_HIDDEN );
+    wflags.BORDERLESS = ( ( flags & SDL_WINDOW_BORDERLESS ) == SDL_WINDOW_BORDERLESS );
+    wflags.RESIZABLE = ( ( flags & SDL_WINDOW_RESIZABLE ) == SDL_WINDOW_RESIZABLE );
+    wflags.MINIMIZED = ( ( flags & SDL_WINDOW_MINIMIZED ) == SDL_WINDOW_MINIMIZED );
+    wflags.MAXIMIZED = ( ( flags & SDL_WINDOW_MAXIMIZED ) == SDL_WINDOW_MAXIMIZED );
+    wflags.INPUT_GRABBED = ( ( flags & SDL_WINDOW_INPUT_GRABBED ) == SDL_WINDOW_INPUT_GRABBED );
+    wflags.INPUT_FOCUS = ( ( flags & SDL_WINDOW_INPUT_FOCUS ) == SDL_WINDOW_INPUT_FOCUS );
+    wflags.MOUSE_FOCUS = ( ( flags & SDL_WINDOW_MOUSE_FOCUS ) == SDL_WINDOW_MOUSE_FOCUS );
+    wflags.HIGHDPI = ( ( flags & SDL_WINDOW_ALLOW_HIGHDPI ) == SDL_WINDOW_ALLOW_HIGHDPI );
+    wflags.MOUSE_CAPTURE = ( ( flags & SDL_WINDOW_MOUSE_CAPTURE ) == SDL_WINDOW_MOUSE_CAPTURE );
+    wflags.X11_TOP = ( ( flags & SDL_WINDOW_ALWAYS_ON_TOP ) == SDL_WINDOW_ALWAYS_ON_TOP );
+    wflags.X11_SKIP_TASKBAR = ( ( flags & SDL_WINDOW_SKIP_TASKBAR ) == SDL_WINDOW_SKIP_TASKBAR );
+    wflags.X11_UTILITY = ( ( flags & SDL_WINDOW_UTILITY ) == SDL_WINDOW_UTILITY );
+    wflags.X11_TOOLTIP = ( ( flags & SDL_WINDOW_TOOLTIP ) == SDL_WINDOW_TOOLTIP );
+    wflags.X11_POPUP = ( ( flags & SDL_WINDOW_POPUP_MENU ) == SDL_WINDOW_POPUP_MENU );
+
+    return wflags;
 }
 
 inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
