@@ -199,14 +199,6 @@ uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
     return flag;
 }
 
-bool fullscreenValidMode_( const WinMode& mode )
-{
-    /// @todo fullscreenValidMode_() - refactorize
-    return false;
-    //return mode == WinMode::FULLSCREEN || mode == WinMode::NO_FULLSCREEN
-    //|| mode == WinMode::FULLSCREEN_DESKTOP;
-}
-
 
 SDL_BlendMode sdlBlend_( const BlendMode& mode ) noexcept
 {
