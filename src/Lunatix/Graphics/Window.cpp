@@ -204,7 +204,7 @@ inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
 
 inline bool hasOpenGLsupport_( const lx::Win::WindowInfo& info ) noexcept
 {
-    return fromSDL2Flags_(info.flag).OPENGL;
+    return info.wflags.OPENGL;
 }
 
 uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
@@ -278,7 +278,6 @@ void initWindowInfo( WindowInfo& info ) noexcept
     info.h = DEFAULT_WIN_HEIGHT;
     info.lw = 0;
     info.lh = 0;
-    info.flag = 0;
     info.accel = true;
 }
 
@@ -295,7 +294,7 @@ void loadWindowConfig( WindowInfo& info ) noexcept
     info.h = DEFAULT_WIN_HEIGHT;
     info.lw = 0;
     info.lh = 0;
-    info.flag = genFlags_( config );
+    info.wflags = fromSDL2Flags_(genFlags_( config ));
     info.accel = true;
 }
 
@@ -338,7 +337,7 @@ struct Window_ final
             SDL_SetHint( SDL_HINT_RENDER_VSYNC, "1" );
 
         _window = SDL_CreateWindow( info.title.c_str(), info.x, info.y, info.w,
-                                    info.h, info.flag );
+                                    info.h, toSDL2Flags_(info.wflags) );
 
         if ( _window == nullptr )
             throw WindowException( lx::getError() );
@@ -586,7 +585,7 @@ void Window::setPosition( int x, int y ) noexcept
     WindowInfo winfo;
     getInfo( winfo );
 
-    if ( ( winfo.flag & SDL_WINDOW_FULLSCREEN ) != SDL_WINDOW_FULLSCREEN )
+    if ( !winfo.wflags.FULLSCREEN )
         SDL_SetWindowPosition( _wimpl->_window, x, y );
 
 }
@@ -712,7 +711,7 @@ void Window::getInfo( WindowInfo& info ) const noexcept
 {
     info.id = getID();
     info.title = SDL_GetWindowTitle( _wimpl->_window );
-    info.flag = SDL_GetWindowFlags( _wimpl->_window );
+    info.wflags = fromSDL2Flags_(SDL_GetWindowFlags( _wimpl->_window ));
 
     SDL_GetWindowPosition( _wimpl->_window, &info.x, &info.y );
     SDL_GetWindowSize( _wimpl->_window, &info.w, &info.h );
