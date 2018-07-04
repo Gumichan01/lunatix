@@ -38,25 +38,25 @@ uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.FULLSCREEN)
+    if(wflags.fullscreen)
     {
         flag |= SDL_WINDOW_FULLSCREEN;
     }
-    else if(wflags.FULLSCREEN_DESKTOP)
+    else if(wflags.fullscreen_desktop)
     {
         flag |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
-    if(wflags.OPENGL)
+    if(wflags.opengl)
     {
         flag |= SDL_WINDOW_OPENGL;
     }
 
-    if(wflags.SHOWN)
+    if(wflags.shown)
     {
         flag |= SDL_WINDOW_SHOWN;
     }
-    else if(wflags.HIDDEN)
+    else if(wflags.hidden)
     {
         flag |= SDL_WINDOW_HIDDEN;
     }
@@ -68,22 +68,22 @@ uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.BORDERLESS)
+    if(wflags.borderless)
     {
         flag |= SDL_WINDOW_BORDERLESS;
     }
 
-    if(wflags.RESIZABLE)
+    if(wflags.resizable)
     {
         flag |= SDL_WINDOW_RESIZABLE;
     }
 
-    if(wflags.MINIMIZED)
+    if(wflags.minimized)
     {
         flag |= SDL_WINDOW_MINIMIZED;
     }
 
-    if(wflags.MAXIMIZED)
+    if(wflags.maximized)
     {
         flag |= SDL_WINDOW_MAXIMIZED;
     }
@@ -95,27 +95,27 @@ uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.INPUT_GRABBED)
+    if(wflags.input_grabbed)
     {
         flag |= SDL_WINDOW_INPUT_GRABBED;
     }
 
-    if(wflags.INPUT_FOCUS)
+    if(wflags.input_focus)
     {
         flag |= SDL_WINDOW_INPUT_FOCUS;
     }
 
-    if(wflags.MOUSE_FOCUS)
+    if(wflags.mouse_focus)
     {
         flag |= SDL_WINDOW_MOUSE_FOCUS;
     }
 
-    if(wflags.HIGHDPI)
+    if(wflags.high_dpi)
     {
         flag |= SDL_WINDOW_ALLOW_HIGHDPI;
     }
 
-    if(wflags.MOUSE_CAPTURE)
+    if(wflags.mouse_capture)
     {
         flag |= SDL_WINDOW_MOUSE_CAPTURE;
     }
@@ -127,27 +127,27 @@ uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags) noexcept
 {
     uint32_t flag = 0x0000000;
 
-    if(wflags.X11_TOP)
+    if(wflags.x11_top)
     {
         flag |= SDL_WINDOW_ALWAYS_ON_TOP;
     }
 
-    if(wflags.X11_SKIP_TASKBAR)
+    if(wflags.x11_skip_taskbar)
     {
         flag |= SDL_WINDOW_SKIP_TASKBAR;
     }
 
-    if(wflags.X11_UTILITY)
+    if(wflags.x11_utility)
     {
         flag |= SDL_WINDOW_UTILITY;
     }
 
-    if(wflags.X11_TOOLTIP)
+    if(wflags.x11_tooltip)
     {
         flag |= SDL_WINDOW_TOOLTIP;
     }
 
-    if(wflags.X11_POPUP)
+    if(wflags.x11_popup)
     {
         flag |= SDL_WINDOW_POPUP_MENU;
     }
@@ -174,25 +174,25 @@ lx::Win::WinMode fromSDL2Flags_(const uint32_t flags) noexcept
 {
     lx::Win::WinMode wflags;
 
-    wflags.FULLSCREEN = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN );
-    wflags.FULLSCREEN_DESKTOP = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN_DESKTOP );
-    wflags.OPENGL = ( ( flags & SDL_WINDOW_OPENGL ) == SDL_WINDOW_OPENGL );
-    wflags.SHOWN = ( ( flags & SDL_WINDOW_SHOWN ) == SDL_WINDOW_SHOWN );
-    wflags.HIDDEN = ( ( flags & SDL_WINDOW_HIDDEN ) == SDL_WINDOW_HIDDEN );
-    wflags.BORDERLESS = ( ( flags & SDL_WINDOW_BORDERLESS ) == SDL_WINDOW_BORDERLESS );
-    wflags.RESIZABLE = ( ( flags & SDL_WINDOW_RESIZABLE ) == SDL_WINDOW_RESIZABLE );
-    wflags.MINIMIZED = ( ( flags & SDL_WINDOW_MINIMIZED ) == SDL_WINDOW_MINIMIZED );
-    wflags.MAXIMIZED = ( ( flags & SDL_WINDOW_MAXIMIZED ) == SDL_WINDOW_MAXIMIZED );
-    wflags.INPUT_GRABBED = ( ( flags & SDL_WINDOW_INPUT_GRABBED ) == SDL_WINDOW_INPUT_GRABBED );
-    wflags.INPUT_FOCUS = ( ( flags & SDL_WINDOW_INPUT_FOCUS ) == SDL_WINDOW_INPUT_FOCUS );
-    wflags.MOUSE_FOCUS = ( ( flags & SDL_WINDOW_MOUSE_FOCUS ) == SDL_WINDOW_MOUSE_FOCUS );
-    wflags.HIGHDPI = ( ( flags & SDL_WINDOW_ALLOW_HIGHDPI ) == SDL_WINDOW_ALLOW_HIGHDPI );
-    wflags.MOUSE_CAPTURE = ( ( flags & SDL_WINDOW_MOUSE_CAPTURE ) == SDL_WINDOW_MOUSE_CAPTURE );
-    wflags.X11_TOP = ( ( flags & SDL_WINDOW_ALWAYS_ON_TOP ) == SDL_WINDOW_ALWAYS_ON_TOP );
-    wflags.X11_SKIP_TASKBAR = ( ( flags & SDL_WINDOW_SKIP_TASKBAR ) == SDL_WINDOW_SKIP_TASKBAR );
-    wflags.X11_UTILITY = ( ( flags & SDL_WINDOW_UTILITY ) == SDL_WINDOW_UTILITY );
-    wflags.X11_TOOLTIP = ( ( flags & SDL_WINDOW_TOOLTIP ) == SDL_WINDOW_TOOLTIP );
-    wflags.X11_POPUP = ( ( flags & SDL_WINDOW_POPUP_MENU ) == SDL_WINDOW_POPUP_MENU );
+    wflags.fullscreen = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN );
+    wflags.fullscreen_desktop = ( ( flags & SDL_WINDOW_FULLSCREEN ) == SDL_WINDOW_FULLSCREEN_DESKTOP );
+    wflags.opengl = ( ( flags & SDL_WINDOW_OPENGL ) == SDL_WINDOW_OPENGL );
+    wflags.shown = ( ( flags & SDL_WINDOW_SHOWN ) == SDL_WINDOW_SHOWN );
+    wflags.hidden = ( ( flags & SDL_WINDOW_HIDDEN ) == SDL_WINDOW_HIDDEN );
+    wflags.borderless = ( ( flags & SDL_WINDOW_BORDERLESS ) == SDL_WINDOW_BORDERLESS );
+    wflags.resizable = ( ( flags & SDL_WINDOW_RESIZABLE ) == SDL_WINDOW_RESIZABLE );
+    wflags.minimized = ( ( flags & SDL_WINDOW_MINIMIZED ) == SDL_WINDOW_MINIMIZED );
+    wflags.maximized = ( ( flags & SDL_WINDOW_MAXIMIZED ) == SDL_WINDOW_MAXIMIZED );
+    wflags.input_grabbed = ( ( flags & SDL_WINDOW_INPUT_GRABBED ) == SDL_WINDOW_INPUT_GRABBED );
+    wflags.input_focus = ( ( flags & SDL_WINDOW_INPUT_FOCUS ) == SDL_WINDOW_INPUT_FOCUS );
+    wflags.mouse_focus = ( ( flags & SDL_WINDOW_MOUSE_FOCUS ) == SDL_WINDOW_MOUSE_FOCUS );
+    wflags.high_dpi = ( ( flags & SDL_WINDOW_ALLOW_HIGHDPI ) == SDL_WINDOW_ALLOW_HIGHDPI );
+    wflags.mouse_capture = ( ( flags & SDL_WINDOW_MOUSE_CAPTURE ) == SDL_WINDOW_MOUSE_CAPTURE );
+    wflags.x11_top = ( ( flags & SDL_WINDOW_ALWAYS_ON_TOP ) == SDL_WINDOW_ALWAYS_ON_TOP );
+    wflags.x11_skip_taskbar = ( ( flags & SDL_WINDOW_SKIP_TASKBAR ) == SDL_WINDOW_SKIP_TASKBAR );
+    wflags.x11_utility = ( ( flags & SDL_WINDOW_UTILITY ) == SDL_WINDOW_UTILITY );
+    wflags.x11_tooltip = ( ( flags & SDL_WINDOW_TOOLTIP ) == SDL_WINDOW_TOOLTIP );
+    wflags.x11_popup = ( ( flags & SDL_WINDOW_POPUP_MENU ) == SDL_WINDOW_POPUP_MENU );
 
     return wflags;
 }
@@ -204,7 +204,7 @@ inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
 
 inline bool hasOpenGLsupport_( const lx::Win::WindowInfo& info ) noexcept
 {
-    return info.wflags.OPENGL;
+    return info.wflags.opengl;
 }
 
 uint32_t genFlags_( const lx::Config::Configuration& config ) noexcept
@@ -585,7 +585,7 @@ void Window::setPosition( int x, int y ) noexcept
     WindowInfo winfo;
     getInfo( winfo );
 
-    if ( !winfo.wflags.FULLSCREEN )
+    if ( !winfo.wflags.fullscreen )
         SDL_SetWindowPosition( _wimpl->_window, x, y );
 
 }

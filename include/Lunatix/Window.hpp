@@ -73,26 +73,25 @@ namespace Win
 
 struct WinMode
 {
-    bool NO_FULLSCREEN = false;         /**< Original resolution in window              */
-    bool FULLSCREEN = false;            /**< Fullscreen mode with original resolution   */
-    bool FULLSCREEN_DESKTOP = false;    /**< Fullscreen with the current desktop size   */
-    bool OPENGL = false;                /**< Window usable with OpenGL context          */
-    bool SHOWN = false;                 /**< Window is visible                          */
-    bool HIDDEN = false;                /**< Window is not visible                      */
-    bool BORDERLESS = false;            /**< No window decoration                       */
-    bool RESIZABLE = false;             /**< Window can be resized                      */
-    bool MINIMIZED = false;             /**< Window is minimized                        */
-    bool MAXIMIZED = false;             /**< Window is maximized                        */
-    bool INPUT_GRABBED = false;         /**< Window has grabbed input focus             */
-    bool INPUT_FOCUS = false;           /**< Window has input focus                     */
-    bool MOUSE_FOCUS = false;           /**< Window has mouse focus                     */
-    bool HIGHDPI = false;               /**< Window should be created in high-DPI mode if supported     */
-    bool MOUSE_CAPTURE = false;         /**< Window has mouse captured (unrelated to ::INPUT_GRABBED)   */
-    bool X11_TOP = false;               /**< Window should always be above others           */
-    bool X11_SKIP_TASKBAR = false;      /**< Window should not be added to the taskbar      */
-    bool X11_UTILITY = false;           /**< Window should be treated as a utility window   */
-    bool X11_TOOLTIP = false;           /**< Window should be treated as a tooltip          */
-    bool X11_POPUP = false;             /**< Window should be treated as a popup menu       */
+    bool fullscreen = false;            /**< Fullscreen mode with original resolution   */
+    bool fullscreen_desktop = false;    /**< Fullscreen with the current desktop size   */
+    bool opengl = false;                /**< Window usable with OpenGL context          */
+    bool shown = false;                 /**< Window is visible                          */
+    bool hidden = false;                /**< Window is not visible                      */
+    bool borderless = false;            /**< No window decoration                       */
+    bool resizable = false;             /**< Window can be resized                      */
+    bool minimized = false;             /**< Window is minimized                        */
+    bool maximized = false;             /**< Window is maximized                        */
+    bool input_grabbed = false;         /**< Window has grabbed input focus             */
+    bool input_focus = false;           /**< Window has input focus                     */
+    bool mouse_focus = false;           /**< Window has mouse focus                     */
+    bool high_dpi = false;               /**< Window should be created in high-DPI mode if supported     */
+    bool mouse_capture = false;         /**< Window has mouse captured (unrelated to ::input_grabbed)   */
+    bool x11_top = false;               /**< Window should always be above others           */
+    bool x11_skip_taskbar = false;      /**< Window should not be added to the taskbar      */
+    bool x11_utility = false;           /**< Window should be treated as a utility window   */
+    bool x11_tooltip = false;           /**< Window should be treated as a tooltip          */
+    bool x11_popup = false;             /**< Window should be treated as a popup menu       */
 };
 
 
@@ -142,7 +141,7 @@ struct WindowInfo final
     int h  = 0;                 /**< Window Height                  */
     int lw = 0;                 /**< Independant device width       */
     int lh = 0;                 /**< Independant device height      */
-    WinMode wflags;            /**< Flags                          */
+    WinMode wflags= {};         /**< Flags                          */
     bool accel = false;         /**< Hardware acceleration          */
 
 };
