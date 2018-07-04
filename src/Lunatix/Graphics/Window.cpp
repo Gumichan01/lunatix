@@ -36,12 +36,134 @@ using lx::Win::BlendMode;
 
 const lx::Win::WinMode EMPTY_FLAG;
 
-uint32_t toSDL2Flags_(const lx::Win::WinMode& mode)
+uint32_t toSDL2VideoFlags_(const lx::Win::WinMode& wflags)
 {
     uint32_t flag = 0x0000000;
 
-    /// @todo toSDL2Flags_()
+    if(wflags.FULLSCREEN)
+    {
+        flag |= SDL_WINDOW_FULLSCREEN;
+    }
+    else if(wflags.FULLSCREEN_DESKTOP)
+    {
+        flag |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    }
 
+    if(wflags.OPENGL)
+    {
+        flag |= SDL_WINDOW_OPENGL;
+    }
+
+    if(wflags.SHOWN)
+    {
+        flag |= SDL_WINDOW_SHOWN;
+    }
+    else if(wflags.HIDDEN)
+    {
+        flag |= SDL_WINDOW_HIDDEN;
+    }
+
+    return flag;
+}
+
+uint32_t toSDL2WinFlags_(const lx::Win::WinMode& wflags)
+{
+    uint32_t flag = 0x0000000;
+
+    if(wflags.BORDERLESS)
+    {
+        flag |= SDL_WINDOW_BORDERLESS;
+    }
+
+    if(wflags.RESIZABLE)
+    {
+        flag |= SDL_WINDOW_RESIZABLE;
+    }
+
+    if(wflags.MINIMIZED)
+    {
+        flag |= SDL_WINDOW_MINIMIZED;
+    }
+
+    if(wflags.MAXIMIZED)
+    {
+        flag |= SDL_WINDOW_MAXIMIZED;
+    }
+
+    return flag;
+}
+
+uint32_t toSDL2InputFlags_(const lx::Win::WinMode& wflags)
+{
+    uint32_t flag = 0x0000000;
+
+    if(wflags.INPUT_GRABBED)
+    {
+        flag |= SDL_WINDOW_INPUT_GRABBED;
+    }
+
+    if(wflags.INPUT_FOCUS)
+    {
+        flag |= SDL_WINDOW_INPUT_FOCUS;
+    }
+
+    if(wflags.MOUSE_FOCUS)
+    {
+        flag |= SDL_WINDOW_MOUSE_FOCUS;
+    }
+
+    if(wflags.HIGHDPI)
+    {
+        flag |= SDL_WINDOW_ALLOW_HIGHDPI;
+    }
+
+    if(wflags.MOUSE_CAPTURE)
+    {
+        flag |= SDL_WINDOW_MOUSE_CAPTURE;
+    }
+
+    return flag;
+}
+
+uint32_t toSDL2X11Flags_(const lx::Win::WinMode& wflags)
+{
+    uint32_t flag = 0x0000000;
+
+    if(wflags.X11_TOP)
+    {
+        flag |= SDL_WINDOW_ALWAYS_ON_TOP;
+    }
+
+    if(wflags.X11_SKIP_TASKBAR)
+    {
+        flag |= SDL_WINDOW_SKIP_TASKBAR;
+    }
+
+    if(wflags.X11_UTILITY)
+    {
+        flag |= SDL_WINDOW_UTILITY;
+    }
+
+    if(wflags.X11_TOOLTIP)
+    {
+        flag |= SDL_WINDOW_TOOLTIP;
+    }
+
+    if(wflags.X11_POPUP)
+    {
+        flag |= SDL_WINDOW_POPUP_MENU;
+    }
+
+    return flag;
+}
+
+uint32_t toSDL2Flags_(const lx::Win::WinMode& wflags)
+{
+    uint32_t flag = 0x0000000;
+    flag |= toSDL2VideoFlags_(wflags);
+    flag |= toSDL2WinFlags_(wflags);
+    flag |= toSDL2InputFlags_(wflags);
+    flag |= toSDL2X11Flags_(wflags);
     return flag;
 }
 
