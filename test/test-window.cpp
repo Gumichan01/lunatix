@@ -88,7 +88,7 @@ void test_window2(void)
     wi.y = 128;
     wi.w = w;
     wi.h = h;
-    wi.flag = SDL_WINDOW_SHOWN;
+    wi.wflags.shown = true;
     lx::Win::Window win2(wi);
     lx::Log::log( "Window: %s", win2.getTitle().c_str() );
 
@@ -572,7 +572,7 @@ void test_opengl()
     lx::Win::WindowInfo winfo;
     lx::Win::initWindowInfo(winfo);
     info.title = "OpenGL window #0";
-    info.flag = SDL_WINDOW_OPENGL;
+    info.wflags.opengl = true;
 
     {
         lx::Win::Window w(info);
@@ -653,7 +653,7 @@ void test_opengl2()
 
     // Window #1
     winfo1.title = "OpenGL window #1";
-    winfo1.flag = SDL_WINDOW_OPENGL;
+    winfo1.wflags.opengl = true;
     winfo1.x = 128;
     winfo1.y = 128;
     winfo1.w = 256;
@@ -661,7 +661,7 @@ void test_opengl2()
 
     // Window #2
     winfo2.title = "OpenGL window #2";
-    winfo2.flag = SDL_WINDOW_OPENGL;
+    winfo2.wflags.opengl = true;
     winfo2.x = 512;
     winfo2.y = 128;
     winfo2.w = 256;
@@ -800,7 +800,7 @@ string winInfoToString(lx::Win::WindowInfo &winfo)
     ss << "(" << winfo.title << "," << winfo.x << "," << winfo.y
        << ",w: " << winfo.w << ",h: " << winfo.h
        << ",lw: " << winfo.w << ",lh: " << winfo.h
-       << winfo.flag << "," << (winfo.accel ? 1:0) << ")";
+       << /*winfo.wflags << "," <<*/ (winfo.accel ? 1:0) << ")";
 
     return ss.str();
 }
@@ -812,5 +812,5 @@ bool winInfoEqual(lx::Win::WindowInfo &info1, lx::Win::WindowInfo &info2)
            && (info1.x == info2.x) && (info1.y == info2.y)
            && (info1.w == info2.w) && (info1.h == info2.h)
            && (info1.lw == info2.lw) && (info1.lh == info2.lh)
-           && (info1.flag == info2.flag) && (info1.accel == info2.accel);
+           /*&& (info1.wflags == info2.wflags)*/ && (info1.accel == info2.accel);
 }
