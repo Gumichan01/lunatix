@@ -440,6 +440,11 @@ EventType EventHandler::getEventType() const noexcept
         ty = EventType::CONTROLLERDEVICEREMOVED;
         break;
 
+    /* Clipboard events */
+    case SDL_CLIPBOARDUPDATE:
+    ty = EventType::CLIPBOARD_UPDATE;
+    break;
+
     /* Drag and drop events */
     case SDL_DROPFILE:
         ty = EventType::DROPFILE;

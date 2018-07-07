@@ -153,6 +153,9 @@ enum class EventType
     CONTROLLERDEVICEADDED,       /**< A new Game controller has been inserted into the system    */
     CONTROLLERDEVICEREMOVED,     /**< An opened Game controller has been removed                 */
 
+    /* Clipboard events */
+    CLIPBOARD_UPDATE,           /**< The clipboard changed */
+
     /* Drag and drop events */
     DROPFILE,                    /**< The system requests a file open    */
     USEREVENT                    /**< User-defined event                 */
