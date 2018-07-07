@@ -67,7 +67,7 @@ void test_gamepad(void)
             else
                 lx::Log::log("No haptic");
         }
-        gp .close();
+        gp.close();
     }
     lx::Log::log(" == END TEST == ");
 }
