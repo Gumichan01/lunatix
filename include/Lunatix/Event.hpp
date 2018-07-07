@@ -157,8 +157,11 @@ enum class EventType
     CLIPBOARD_UPDATE,           /**< The clipboard changed */
 
     /* Drag and drop events */
-    DROPFILE,                    /**< The system requests a file open    */
-    USEREVENT                    /**< User-defined event                 */
+    DROPFILE,                    /**< The system requests a file open       */
+    DROPTEXT,                    /**< Text/plain drag-and-drop event        */
+    DROPBEGIN,                   /**< A new set of drops is beginning       */
+    DROPCOMPLETE,                /**< Current set of drops is now complete  */
+    USEREVENT                    /**< User-defined event                    */
 };
 
 /**

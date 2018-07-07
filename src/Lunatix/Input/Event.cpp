@@ -239,6 +239,18 @@ void eventState( const lx::Event::EventType ty, bool process ) noexcept
         sdl_ev_ty = SDL_DROPFILE;
         break;
 
+    case lx::Event::EventType::DROPTEXT:
+        sdl_ev_ty = SDL_DROPTEXT;
+        break;
+
+    case lx::Event::EventType::DROPBEGIN:
+        sdl_ev_ty = SDL_DROPBEGIN;
+        break;
+
+    case lx::Event::EventType::DROPCOMPLETE:
+        sdl_ev_ty = SDL_DROPCOMPLETE;
+        break;
+
     default:
         break;
     }
@@ -449,6 +461,22 @@ EventType EventHandler::getEventType() const noexcept
     case SDL_DROPFILE:
         ty = EventType::DROPFILE;
         break;
+
+    case SDL_DROPTEXT:
+        ty = EventType::DROPTEXT;
+        break;
+
+    case SDL_DROPBEGIN:
+        ty = EventType::DROPBEGIN;
+        break;
+
+    case SDL_DROPCOMPLETE:
+        ty = EventType::DROPCOMPLETE;
+        break;
+
+
+
+    /* Other events */
     case SDL_USEREVENT:
         ty = EventType::USEREVENT;
         break;
