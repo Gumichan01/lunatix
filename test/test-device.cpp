@@ -7,89 +7,89 @@
 using namespace std;
 using namespace lx::Device;
 
-void test_gamepad(void);
-void test_haptic(void);
-void test_mouse(void);
+void test_gamepad( void );
+void test_haptic( void );
+void test_mouse( void );
 
 
-int main(int argc, char **argv)
+int main( int argc, char ** argv )
 {
-    Uint32 flag = SDL_INIT_JOYSTICK|SDL_INIT_GAMECONTROLLER|SDL_INIT_HAPTIC;
+    Uint32 flag = SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_HAPTIC;
     bool err = lx::init();
 
-    if(!err)
-        lx::Log::logInfo(lx::Log::TEST,"FAILURE - lx::init() failed");
+    if ( !err )
+        lx::Log::logInfo( lx::Log::TEST, "FAILURE - lx::init() failed" );
     else
-        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The LunatiX library has been initialized with success");
+        lx::Log::logInfo( lx::Log::TEST, "SUCCESS - The LunatiX library has been initialized with success" );
 
     lx::Log::setDebugMode();
-    lx::Log::log(" ==== Test Device ==== ");
+    lx::Log::log( " ==== Test Device ==== " );
 
-    if(SDL_WasInit(flag) != flag)
-        lx::Log::logInfo(lx::Log::TEST,"FAILURE - The device subsystem has not been initialized");
+    if ( SDL_WasInit( flag ) != flag )
+        lx::Log::logInfo( lx::Log::TEST, "FAILURE - The device subsystem has not been initialized" );
     else
-        lx::Log::logInfo(lx::Log::TEST,"SUCCESS - The device subsystem has been initialized");
+        lx::Log::logInfo( lx::Log::TEST, "SUCCESS - The device subsystem has been initialized" );
 
     // Joystick and Game controller
-    lx::Log::logInfo(lx::Log::TEST,"You have %d gamepad(s) connected", numberOfDevices());
+    lx::Log::logInfo( lx::Log::TEST, "You have %d gamepad(s) connected", numberOfDevices() );
 
     test_gamepad();
     test_haptic();
     test_mouse();
     lx::quit();
 
-    lx::Log::log(" ==== END Test Device ==== ");
+    lx::Log::log( " ==== END Test Device ==== " );
     return EXIT_SUCCESS;
 }
 
 
-void test_gamepad(void)
+void test_gamepad( void )
 {
-    lx::Log::log(" == Test Gamepad == ");
+    lx::Log::log( " == Test Gamepad == " );
 
     {
         Gamepad gp;
-        gp.open(0);
+        gp.open( 0 );
 
-        if(gp.isConnected())
+        if ( gp.isConnected() )
         {
-            lx::Log::log("Name: %s",gp.getName());
-            lx::Log::log("\n%s\n",gp.toString().utf8_str());
-            Haptic *hp = gp.getHaptic();
+            lx::Log::log( "Name: %s", gp.getName() );
+            lx::Log::log( "\n%s\n", gp.toString().utf8_str() );
+            Haptic * hp = gp.getHaptic();
 
-            if(hp != nullptr)
+            if ( hp != nullptr )
             {
-                lx::Log::log("The device has force feedback");
+                lx::Log::log( "The device has force feedback" );
                 hp->rumbleEffectInit();
-                hp->rumbleEffectPlay(1.0,100);
-                lx::Time::delay(500);
+                hp->rumbleEffectPlay( 1.0, 100 );
+                lx::Time::delay( 500 );
             }
             else
-                lx::Log::log("No haptic");
+                lx::Log::log( "No haptic" );
         }
         gp.close();
     }
-    lx::Log::log(" == END TEST == ");
+    lx::Log::log( " == END TEST == " );
 }
 
 
-void test_haptic(void)
+void test_haptic( void )
 {
-    Haptic haptic(0);
+    Haptic haptic( 0 );
     SDL_HapticEffect effect;
 
-    lx::Log::log(" == Test Haptic == ");
-    memset(&effect,0,sizeof(SDL_HapticEffect));
+    lx::Log::log( " == Test Haptic == " );
+    memset( &effect, 0, sizeof( SDL_HapticEffect ) );
 
-    if(haptic.isOpened())
+    if ( haptic.isOpened() )
     {
-        lx::Log::log("Haptic device detected");
+        lx::Log::log( "Haptic device detected" );
 
-        if(haptic.rumbleEffectInit())
+        if ( haptic.rumbleEffectInit() )
         {
-            lx::Log::log("Play the rumble effect");
-            haptic.rumbleEffectPlay(0.5,500);
-            lx::Time::delay(1000);
+            lx::Log::log( "Play the rumble effect" );
+            haptic.rumbleEffectPlay( 0.5, 500 );
+            lx::Time::delay( 1000 );
         }
 
         // Effect
@@ -102,77 +102,77 @@ void test_haptic(void)
         effect.periodic.attack_length = 1000;                   // Takes 1 second to get max strength
         effect.periodic.fade_length = 1000;                     // Takes 1 second to fade away
 
-        lx::Log::log("Add a custom effect");
-        int effectid = haptic.newEffect(effect);
+        lx::Log::log( "Add a custom effect" );
+        int effectid = haptic.newEffect( effect );
 
-        if(effectid < 0)
-            lx::Log::logError(lx::Log::TEST,"Cannot add effect: %s",lx::getError());
+        if ( effectid < 0 )
+            lx::Log::logError( lx::Log::TEST, "Cannot add effect: %s", lx::getError() );
         else
         {
-            lx::Log::log("Run the effect");
-            haptic.runEffect(effectid,1);
-            lx::Time::delay(5128);                                    // Wait for the effect to finish
+            lx::Log::log( "Run the effect" );
+            haptic.runEffect( effectid, 1 );
+            lx::Time::delay( 5128 );                                  // Wait for the effect to finish
         }
 
-        lx::Log::log("Done");
+        lx::Log::log( "Done" );
     }
     else
-        lx::Log::log("No haptic device");
+        lx::Log::log( "No haptic device" );
 
-    lx::Log::log(" == END TEST == ");
+    lx::Log::log( " == END TEST == " );
 }
 
 
-void test_mouse(void)
+void test_mouse( void )
 {
-    lx::Log::log(" == Test Gamepad == ");
+    lx::Log::log( " == Test Gamepad == " );
     lx::Win::WindowInfo info;
-    lx::Win::initWindowInfo(info);
+    lx::Win::initWindowInfo( info );
     info.w = 800;
     info.h = 600;
-    lx::Win::Window w(info);
+    lx::Win::Window w( info );
 
     std::string s = "data/bullet.png";
-    lx::Log::log("Define %s as the mouse cursor",s.c_str());
-    lx::Device::Mouse c(lx::Graphics::BufferedImage(s),0,0);
+    lx::Log::log( "Define %s as the mouse cursor", s.c_str() );
+    lx::Device::Mouse c( lx::Graphics::BufferedImage( s ), 0, 0 );
 
-    if(c.isOpen())
-        lx::Log::logDebug(lx::Log::TEST,"SUCCESS - the mouse cursor was loaded");
+    if ( c.isOpen() )
+        lx::Log::logDebug( lx::Log::TEST, "SUCCESS - the mouse cursor was loaded" );
     else
-        lx::Log::logDebug(lx::Log::TEST,"FAILURE - not loaded; expeected: OK");
+        lx::Log::logDebug( lx::Log::TEST, "FAILURE - not loaded; expeected: OK" );
 
     c.setMouse();
 
-    lx::Log::log("Try to get the haptic feedback of the mouse, if possible");
+    lx::Log::log( "Try to get the haptic feedback of the mouse, if possible" );
 
-    if(lx::Device::mouseIsHaptic())
+    if ( lx::Device::mouseIsHaptic() )
     {
-        lx::Log::log("Haptic feedback supported by the mouse");
+        lx::Log::log( "Haptic feedback supported by the mouse" );
         MouseHaptic h;
 
-        if(h.isOpened())
-            lx::Log::log("FAILURE - The haptic feedback does not seem to be supported");
+        if ( h.isOpened() )
+            lx::Log::log( "FAILURE - The haptic feedback does not seem to be supported" );
         else
-            lx::Log::log("SUCCESS - OK");
+            lx::Log::log( "SUCCESS - OK" );
     }
     else
     {
-        lx::Log::log("Haptic feedback not supported by the mouse");
+        lx::Log::log( "Haptic feedback not supported by the mouse" );
     }
 
     Uint32 t = SDL_GetTicks();
     lx::Event::EventHandler ev;
-    while(SDL_GetTicks() - t < 4000)
+    while ( SDL_GetTicks() - t < 4000 )
     {
-        while(ev.pollEvent())
+        while ( ev.pollEvent() )
         {
-            switch(ev.getEventType())
+            switch ( ev.getEventType() )
             {
             case lx::Event::EventType::MOUSEBUTTONUP:
-                if(ev.getMouseButton().button == lx::Event::MouseButton::LBUTTON)
-                    lx::Device::mouseCursorDisplay(lx::Device::MouseToggle::HIDE);
+                if ( ev.getMouseButton().button == lx::Event::MouseButton::LBUTTON )
+                    lx::Device::mouseCursorDisplay( lx::Device::MouseToggle::HIDE );
                 else
-                    lx::Device::mouseCursorDisplay(lx::Device::MouseToggle::SHOW);
+                    lx::Device::mouseCursorDisplay( lx::Device::MouseToggle::SHOW );
                 break;
 
             default:
@@ -182,8 +182,8 @@ void test_mouse(void)
 
         w.clearWindow();
         w.update();
-        lx::Time::delay(16);
+        lx::Time::delay( 16 );
     }
 
-    lx::Log::log(" == END TEST == ");
+    lx::Log::log( " == END TEST == " );
 }
