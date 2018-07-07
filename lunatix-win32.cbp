@@ -96,7 +96,7 @@
 		<Unit filename="include/Lunatix/Thread.tpp">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="include/Lunatix/Timer.hpp" />
+		<Unit filename="include/Lunatix/Time.hpp" />
 		<Unit filename="include/Lunatix/TrueTypeFont.hpp" />
 		<Unit filename="include/Lunatix/Vector2D.hpp" />
 		<Unit filename="include/Lunatix/Version.hpp" />
