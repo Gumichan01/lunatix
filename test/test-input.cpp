@@ -146,6 +146,13 @@ int main(int argc, char **argv)
                 printEvent(evh.getWindowEvent());
                 break;
 
+
+            /// ---------------- Clipboard -----------------
+
+            case EventType::CLIPBOARD_UPDATE:
+                lx::Log::log("Clipboard update");
+                break;
+
             /// ---------------- User Event ----------------
 
             case EventType::USEREVENT:
@@ -157,7 +164,22 @@ int main(int argc, char **argv)
             /// ---------------- Drag and drop ----------------
 
             case EventType::DROPFILE:
-                lx::Log::log("DRAG & DROP EVENT");
+                lx::Log::log("DRAG & DROP EVENT - file");
+                lx::Log::log("file → %s",evh.getDropEvent().file.c_str());
+                break;
+
+            case EventType::DROPTEXT:
+                lx::Log::log("DRAG & DROP EVENT - text");
+                lx::Log::log("file → %s",evh.getDropEvent().file.c_str());
+                break;
+
+            case EventType::DROPBEGIN:
+                lx::Log::log("DRAG & DROP EVENT - begin");
+                lx::Log::log("file → %s",evh.getDropEvent().file.c_str());
+                break;
+
+            case EventType::DROPCOMPLETE:
+                lx::Log::log("DRAG & DROP EVENT - end");
                 lx::Log::log("file → %s",evh.getDropEvent().file.c_str());
                 break;
 
