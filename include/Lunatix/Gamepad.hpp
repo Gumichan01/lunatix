@@ -58,14 +58,15 @@ using DeviceGUID = SDL_JoystickGUID;
 */
 struct GamepadInfo final
 {
-    DeviceID id = 0;         /**< The joystick ID            */
-    DeviceGUID uid{{0}};     /**< The joystick UID           */
-    UTF8string name{""};        /**< The name of the joystick   */
-    UTF8string is_haptic{""};   /**< Haptic joystick or not     */
-    int nb_axis = 0;            /**< The number of axes         */
-    int nb_balls = 0;           /**< The number of balls        */
-    int nb_buttons = 0;         /**< The number of buttons      */
-    int nb_hats = 0;            /**< The number of hats         */
+    DeviceID id = 0;                /**< The joystick ID            */
+    DeviceGUID uid = {{0}};         /**< The joystick UID           */
+    UTF8string name = {""};         /**< The name of the joystick   */
+    UTF8string is_haptic = {""};    /**< Haptic joystick or not     */
+    BatteryLevel battery = {};      /**< Battery level              */
+    int nb_axis = 0;                /**< The number of axes         */
+    int nb_balls = 0;               /**< The number of balls        */
+    int nb_buttons = 0;             /**< The number of buttons      */
+    int nb_hats = 0;                /**< The number of hats         */
 };
 
 

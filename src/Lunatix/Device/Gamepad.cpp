@@ -64,6 +64,38 @@ SDL_JoystickPowerLevel powerLevelOf_( SDL_Joystick * joy ) noexcept
     return SDL_JoystickCurrentPowerLevel( joy );
 }
 
+UTF8string batteryLevelToString( BatteryLevel bl )
+{
+    UTF8string battery_level_str;
+
+    switch( bl )
+    {
+    case BatteryLevel::UNKNOWN:
+    battery_level_str = "Unknown";
+    break;
+    case BatteryLevel::EMPTY:
+    battery_level_str = "Empty";
+    break;
+    case BatteryLevel::LOW:
+    battery_level_str = "Low";
+    break;
+    case BatteryLevel::MEDIUM:
+    battery_level_str = "Medium";
+    break;
+    case BatteryLevel::FULL:
+    battery_level_str = "Full";
+    break;
+    case BatteryLevel::WIRED:
+    battery_level_str = "Wired";
+    break;
+    case BatteryLevel::MAX:
+    battery_level_str = "Maximum";
+    break;
+    }
+
+    return battery_level_str;
+}
+
 }
 
 
@@ -75,14 +107,15 @@ UTF8string gamepadToString( GamepadInfo& info ) noexcept
 
     std::ostringstream stream;
     stream << "\n ==== Gamepad Information ==== "
-           << "\nGamepad - ID : "                << info.id
-           << "\nGamepad - UID : "               << guid
-           << "\nGamepad - Name : "              << info.name
-           << "\nGamepad - Is haptic : "         << info.is_haptic
-           << "\nGamepad - Number of Axes : "    << info.nb_axis
-           << "\nGamepad - Number of Balls : "   << info.nb_balls
-           << "\nGamepad - Number of Buttons : " << info.nb_buttons
-           << "\nGamepad - Number of Hats : "    << info.nb_hats << "\n";
+           << "\nGamepad - ID: "                << info.id
+           << "\nGamepad - UID: "               << guid
+           << "\nGamepad - Name: "              << info.name
+           << "\nGamepad - Is haptic: "         << info.is_haptic
+           << "\nGamepad - Battery level: "     << batteryLevelToString(info.battery)
+           << "\nGamepad - Number of Axes: "    << info.nb_axis
+           << "\nGamepad - Number of Balls: "   << info.nb_balls
+           << "\nGamepad - Number of Buttons: " << info.nb_buttons
+           << "\nGamepad - Number of Hats: "    << info.nb_hats << "\n";
 
     return UTF8string( stream.str() );
 }
@@ -137,7 +170,7 @@ public:
         return _haptic.get();
     }
 
-    BatteryLevel getBatteryLevel() noexcept
+    BatteryLevel getBatteryLevel() const noexcept
     {
         if ( _gc != nullptr )
             return static_cast<BatteryLevel>( powerLevelOf_( SDL_GameControllerGetJoystick( _gc ) ) );
@@ -223,6 +256,7 @@ bool Gamepad_::lx_stat_( SDL_Joystick * joy, GamepadInfo& info ) const
     info.id = SDL_JoystickInstanceID( joy );
     info.uid = SDL_JoystickGetGUID( joy );
     info.is_haptic = isHaptic() ? "Yes" : "No";
+    info.battery = getBatteryLevel();
     info.nb_axis = SDL_JoystickNumAxes( joy );
     info.nb_balls = SDL_JoystickNumBalls( joy );
     info.nb_buttons = SDL_JoystickNumButtons( joy );
