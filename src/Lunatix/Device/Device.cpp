@@ -22,7 +22,6 @@
 #include <Lunatix/Error.hpp>
 
 #include <SDL2/SDL_mouse.h>
-#include <sstream>
 
 
 namespace lx
@@ -34,26 +33,6 @@ namespace Device
 int numberOfDevices() noexcept
 {
     return SDL_NumJoysticks();
-}
-
-UTF8string gamepadToString( GamepadInfo& info ) noexcept
-{
-    const int GUID_SIZE = 33;       // Size of the data in SDL_JoystickGUID
-    char guid[GUID_SIZE] = {'\0'};
-    SDL_JoystickGetGUIDString( info.uid, guid, GUID_SIZE );
-
-    std::ostringstream stream;
-    stream << "\n ==== Gamepad Information ==== "
-           << "\nGamepad - ID : "                << info.id
-           << "\nGamepad - UID : "               << guid
-           << "\nGamepad - Name : "              << info.name
-           << "\nGamepad - Is haptic : "         << info.is_haptic
-           << "\nGamepad - Number of Axes : "    << info.nb_axis
-           << "\nGamepad - Number of Balls : "   << info.nb_balls
-           << "\nGamepad - Number of Buttons : " << info.nb_buttons
-           << "\nGamepad - Number of Hats : "    << info.nb_hats << "\n";
-
-    return UTF8string( stream.str() );
 }
 
 MouseToggle mouseCursorDisplay( const MouseToggle& toggle ) noexcept

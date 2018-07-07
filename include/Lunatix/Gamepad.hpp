@@ -49,6 +49,40 @@ enum class BatteryLevel
     MAX     = SDL_JOYSTICK_POWER_MAX
 };
 
+using DeviceID = int32_t;
+using DeviceGUID = SDL_JoystickGUID;
+
+/**
+*   @struct GamepadInfo
+*   @brief Information about gamepad
+*/
+struct GamepadInfo final
+{
+    DeviceID id = 0;         /**< The joystick ID            */
+    DeviceGUID uid{{0}};     /**< The joystick UID           */
+    UTF8string name{""};        /**< The name of the joystick   */
+    UTF8string is_haptic{""};   /**< Haptic joystick or not     */
+    int nb_axis = 0;            /**< The number of axes         */
+    int nb_balls = 0;           /**< The number of balls        */
+    int nb_buttons = 0;         /**< The number of buttons      */
+    int nb_hats = 0;            /**< The number of hats         */
+};
+
+
+/**
+*   @fn UTF8string gamepadToString(GamepadInfo& info) noexcept
+*
+*   Get the string format of the information structure
+*
+*   @param [in] info The information structure
+*   @return Always returns a valid string
+*
+*   @post The returned string is valid
+*   @sa statGamepad
+*/
+UTF8string gamepadToString( GamepadInfo& info ) noexcept;
+
+
 /**
 *   @class Gamepad
 *   @brief The gamepad
