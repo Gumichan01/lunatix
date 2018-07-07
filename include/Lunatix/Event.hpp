@@ -130,38 +130,38 @@ enum class GamepadButton
 */
 enum class EventType
 {
-    UNKNOWN,                     /**< Unknown type           */
-    QUIT,                        /**< User-requested quit    */
-    WINDOWEVENT,                 /**< Window state change    */
+    UNKNOWN,                    /**< Unknown type           */
+    QUIT,                       /**< User-requested quit    */
+    WINDOWEVENT,                /**< Window state change    */
 
     /* Keyboard events */
-    KEYDOWN,                     /**< Key pressed                            */
-    KEYUP,                       /**< Key released                           */
-    TEXTEDITING,                 /**< Keyboard text editing (composition)    */
-    TEXTINPUT,                   /**< Keyboard text input                    */
+    KEYDOWN,                    /**< Key pressed                            */
+    KEYUP,                      /**< Key released                           */
+    TEXTEDITING,                /**< Keyboard text editing (composition)    */
+    TEXTINPUT,                  /**< Keyboard text input                    */
 
     /* Mouse events */
-    MOUSEMOTION,                 /**< Mouse moved            */
-    MOUSEBUTTONDOWN,             /**< Mouse button pressed   */
-    MOUSEBUTTONUP,               /**< Mouse button released  */
-    MOUSEWHEEL,                  /**< Mouse wheel motion     */
+    MOUSEMOTION,                /**< Mouse moved            */
+    MOUSEBUTTONDOWN,            /**< Mouse button pressed   */
+    MOUSEBUTTONUP,              /**< Mouse button released  */
+    MOUSEWHEEL,                 /**< Mouse wheel motion     */
 
     /* Game controller events */
-    CONTROLLERAXISMOTION,        /**< Game controller axis motion        */
-    CONTROLLERBUTTONDOWN,        /**< Game controller button pressed     */
-    CONTROLLERBUTTONUP,          /**< Game controller button released    */
-    CONTROLLERDEVICEADDED,       /**< A new Game controller has been inserted into the system    */
-    CONTROLLERDEVICEREMOVED,     /**< An opened Game controller has been removed                 */
+    CONTROLLERAXISMOTION,       /**< Game controller axis motion        */
+    CONTROLLERBUTTONDOWN,       /**< Game controller button pressed     */
+    CONTROLLERBUTTONUP,         /**< Game controller button released    */
+    CONTROLLERDEVICEADDED,      /**< A new Game controller has been inserted into the system    */
+    CONTROLLERDEVICEREMOVED,    /**< An opened Game controller has been removed                 */
 
     /* Clipboard events */
     CLIPBOARD_UPDATE,           /**< The clipboard changed */
 
     /* Drag and drop events */
-    DROPFILE,                    /**< The system requests a file open       */
-    DROPTEXT,                    /**< Text/plain drag-and-drop event        */
-    DROPBEGIN,                   /**< A new set of drops is beginning       */
-    DROPCOMPLETE,                /**< Current set of drops is now complete  */
-    USEREVENT                    /**< User-defined event                    */
+    DROPFILE,                   /**< The system requests a file open       */
+    DROPTEXT,                   /**< Text/plain drag-and-drop event        */
+    DROPBEGIN,                  /**< A new set of drops is beginning       */
+    DROPCOMPLETE,               /**< Current set of drops is now complete  */
+    USEREVENT                   /**< User-defined event                    */
 };
 
 /**
@@ -225,9 +225,9 @@ enum class State
 */
 struct GAxis final
 {
-    GamepadID id;        /**< ID of the gamepad        */
-    GamepadAxis axis;    /**< Axis type                */
-    int16_t value;          /**< Value [-32768 ↔ 32768]   */
+    GamepadID id;       /**< ID of the gamepad        */
+    GamepadAxis axis;   /**< Axis type                */
+    int16_t value;      /**< Value [-32768 ↔ 32768]   */
 };
 
 
@@ -249,8 +249,8 @@ struct GButton final
 struct MButton final
 {
     uint32_t wid;           /**< Identifier of the window where the event occured           */
-    MouseButton button;  /**< Type of button                                             */
-    State state;         /**< Button state                                               */
+    MouseButton button;     /**< Type of button                                             */
+    State state;            /**< Button state                                               */
     uint8_t clicks;         /**< Number of clicks (1: single-click, 2: double-click, ...)   */
     int x;                  /**< X position of the mouse                                    */
     int y;                  /**< Y position of the mouse                                    */
@@ -282,11 +282,11 @@ const int MBUTTONS = 6;
 *                  case MOUSEMOTION:
 *                      ...
 *                      lx::Log::log("state → %d %d %d %d %d",
-*                                  evh.getMouseMotion().state[MBIndex(MouseButton::LBUTTON)],
-*                                  evh.getMouseMotion().state[MBIndex(MouseButton::MBUTTON)],
-*                                  evh.getMouseMotion().state[MBIndex(MouseButton::RBUTTON)],
-*                                  evh.getMouseMotion().state[MBIndex(MouseButton::X1)],
-*                                  evh.getMouseMotion().state[MBIndex(MouseButton::X2)]);
+*                                   evh.getMouseMotion().state[MBIndex(MouseButton::LBUTTON)],
+*                                   evh.getMouseMotion().state[MBIndex(MouseButton::MBUTTON)],
+*                                   evh.getMouseMotion().state[MBIndex(MouseButton::RBUTTON)],
+*                                   evh.getMouseMotion().state[MBIndex(MouseButton::X1)],
+*                                   evh.getMouseMotion().state[MBIndex(MouseButton::X2)]);
 *                      ...
 *                      break;
 *              }
@@ -297,7 +297,7 @@ const int MBUTTONS = 6;
 struct MMotion final
 {
     uint32_t wid;               /**< Identifier of the window where the event occured   */
-    bool state[MBUTTONS];    /**< The state of each button of the mouse              */
+    bool state[MBUTTONS];       /**< The state of each button of the mouse              */
     int x;                      /**< X position of the mouse                            */
     int y;                      /**< Y position of the mouse                            */
     int xrel;                   /**< X relative position of the mouse                   */
@@ -324,7 +324,7 @@ struct MWheel final
 struct WEvent final
 {
     uint32_t wid;           /**< Identifier of the window where the event occured   */
-    WinEventType evid;   /**< Type of window event                               */
+    WinEventType evid;      /**< Type of window event                               */
     int data1;              /**< Event dependant data                               */
     int data2;              /**< Event dependant data                               */
 };

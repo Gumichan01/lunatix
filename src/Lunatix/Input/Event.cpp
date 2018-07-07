@@ -324,7 +324,9 @@ bool EventHandler::pushUserEvent( UserEvent& uevent ) noexcept
 
     uevent.type = utype;
     user_event.type = SDL_USEREVENT;
-    user_event.user = {uevent.type, 0, uevent.wid, uevent.code, uevent.data1, uevent.data2};
+    user_event.user = { uevent.type, 0, uevent.wid, uevent.code,
+                        uevent.data1, uevent.data2
+                      };
 
     return SDL_PushEvent( &user_event ) == 1;
 }
@@ -454,8 +456,8 @@ EventType EventHandler::getEventType() const noexcept
 
     /* Clipboard events */
     case SDL_CLIPBOARDUPDATE:
-    ty = EventType::CLIPBOARD_UPDATE;
-    break;
+        ty = EventType::CLIPBOARD_UPDATE;
+        break;
 
     /* Drag and drop events */
     case SDL_DROPFILE:
@@ -588,7 +590,7 @@ const MMotion EventHandler::getMouseMotion() const noexcept
 const MWheel EventHandler::getMouseWheel() const noexcept
 {
     const SDL_MouseWheelEvent MOUSE_WHEEL_EVENT = ( *event ).wheel;
-    return MWheel{MOUSE_WHEEL_EVENT.windowID, MOUSE_WHEEL_EVENT.x, MOUSE_WHEEL_EVENT.y};
+    return MWheel{ MOUSE_WHEEL_EVENT.windowID, MOUSE_WHEEL_EVENT.x, MOUSE_WHEEL_EVENT.y };
 }
 
 const WEvent EventHandler::getWindowEvent() const noexcept
