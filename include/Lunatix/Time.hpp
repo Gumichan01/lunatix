@@ -14,7 +14,7 @@
 #define TIMER_HPP_INCLUDED
 
 /**
-*   @file Timer.hpp
+*   @file Time.hpp
 *   @brief The timer interface
 *   @author Luxon Jean-Pierre(Gumichan01)
 *   @version 0.13

@@ -72,7 +72,7 @@
 #include <Lunatix/Thread.hpp>
 
 // Others
-#include <Lunatix/Timer.hpp>
+#include <Lunatix/Time.hpp>
 #include <Lunatix/Text.hpp>
 
 // Utils

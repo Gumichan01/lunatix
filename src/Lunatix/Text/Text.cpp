@@ -20,7 +20,7 @@
 
 #include <Lunatix/Text.hpp>
 #include <Lunatix/Event.hpp>
-#include <Lunatix/Timer.hpp>
+#include <Lunatix/Time.hpp>
 #include <Lunatix/Log.hpp>
 
 #include <SDL2/SDL_clipboard.h>

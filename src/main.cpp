@@ -5,7 +5,7 @@
 #include <Lunatix/Library.hpp>
 #include <Lunatix/Graphics.hpp>
 #include <Lunatix/Event.hpp>
-#include <Lunatix/Timer.hpp>
+#include <Lunatix/Time.hpp>
 #include <Lunatix/Log.hpp>
 #include <Lunatix/Version.hpp>
 
