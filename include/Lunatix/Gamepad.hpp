@@ -34,7 +34,7 @@ class Haptic;
 struct Gamepad_;
 struct GamepadInfo;
 
-/***
+/**
 *   @enum BatteryLevel
 *   @brief Battery level of a gamepad
 */
@@ -119,6 +119,11 @@ public:
     *   @return The haptic system if the gamepad support it, nullptr otherwise
     */
     Haptic * getHaptic() const noexcept;
+    /**
+    *   @fn BatteryLevel getBatteryLevel() noexcept
+    *   @return The battery level
+    */
+    BatteryLevel getBatteryLevel() noexcept;
     /**
     *   @fn const char * getName() const noexcept
     *   @return The name of the gamepad, a null pointer otherwise

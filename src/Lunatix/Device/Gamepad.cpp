@@ -58,6 +58,11 @@ const char * nameOf_( SDL_GameController * controller ) noexcept
     return SDL_GameControllerName( controller );
 }
 
+SDL_JoystickPowerLevel powerLevelOf_( SDL_Joystick * joy ) noexcept
+{
+    return SDL_JoystickCurrentPowerLevel( joy );
+}
+
 }
 
 // Private implementation
@@ -107,6 +112,14 @@ public:
     Haptic * getHaptic() const
     {
         return _haptic.get();
+    }
+
+    BatteryLevel getBatteryLevel() noexcept
+    {
+        if ( _gc != nullptr )
+            return static_cast<BatteryLevel>( powerLevelOf_( SDL_GameControllerGetJoystick( _gc ) ) );
+        else
+            return static_cast<BatteryLevel>( powerLevelOf_( _joy ) );
     }
 
     const char * getName() const noexcept
@@ -303,6 +316,12 @@ int32_t Gamepad::getID() const noexcept
 Haptic * Gamepad::getHaptic() const noexcept
 {
     return _gpimpl->getHaptic();
+}
+
+
+BatteryLevel Gamepad::getBatteryLevel() noexcept
+{
+    return _gpimpl->getBatteryLevel();
 }
 
 
