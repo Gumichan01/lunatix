@@ -21,6 +21,7 @@
 */
 
 #include <Lunatix/utils/utf8_string.hpp>
+#include <SDL2/SDL_joystick.h>
 #include <memory>
 
 namespace lx
@@ -32,6 +33,21 @@ namespace Device
 class Haptic;
 struct Gamepad_;
 struct GamepadInfo;
+
+/***
+*   @enum BatteryLevel
+*   @brief Battery level of a gamepad
+*/
+enum class BatteryLevel
+{
+    UNKNOWN = SDL_JOYSTICK_POWER_UNKNOWN,
+    EMPTY   = SDL_JOYSTICK_POWER_EMPTY,
+    LOW     = SDL_JOYSTICK_POWER_LOW,
+    MEDIUM  = SDL_JOYSTICK_POWER_MEDIUM,
+    FULL    = SDL_JOYSTICK_POWER_FULL,
+    WIRED   = SDL_JOYSTICK_POWER_WIRED,
+    MAX     = SDL_JOYSTICK_POWER_MAX
+};
 
 /**
 *   @class Gamepad
