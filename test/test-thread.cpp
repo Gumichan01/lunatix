@@ -1,7 +1,7 @@
 
 #include <Lunatix/Library.hpp>
 #include <Lunatix/Thread.hpp>
-#include <Lunatix/Timer.hpp>
+#include <Lunatix/Time.hpp>
 #include <Lunatix/Random.hpp>
 #include <Lunatix/Log.hpp>
 #include <system_error>
