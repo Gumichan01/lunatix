@@ -30,10 +30,6 @@
 #error "Not supported system"
 #endif
 
-#pragma message "Random: Some functions are deprecated, please check the documentation"
-#pragma message "Texture: Some functions are deprecated, please check the documentation"
-#pragma message "Window: Some functions are deprecated, please check the documentation"
-
 // Initialization
 #include <Lunatix/Library.hpp>
 #include <Lunatix/Version.hpp>
