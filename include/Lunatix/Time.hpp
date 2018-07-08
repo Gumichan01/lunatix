@@ -52,6 +52,31 @@ inline void delay( uint32_t ms )
     SDL_Delay( ms );
 }
 
+/**
+*   @class Timer
+*   @brief The timer
+*/
+class Timer final
+{
+    uint32_t m_start = 0U;
+    uint32_t m_pause = 0U;
+    uint32_t m_tradeoff = 0U;
+    bool m_stopped = true;
+    bool m_paused  = false;
+
+public:
+
+    Timer() = default;
+    void start();
+    void pause();
+    void resume();
+    uint32_t lap();
+    void stop();
+    void reset();
+    uint32_t getTicks();
+    ~Timer() = default;
+};
+
 }   //Time
 
 }   // lx
