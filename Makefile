@@ -75,8 +75,8 @@ $(SRC_PHYSICS_PATH)Hitbox.cpp $(SRC_PHYSICS_PATH)Physics.cpp \
 $(SRC_PHYSICS_PATH)Polygon.cpp $(SRC_PHYSICS_PATH)Vector2D.cpp \
 $(SRC_RANDOM_PATH)Random.cpp $(SRC_SYSTEM_PATH)SystemInfo.cpp \
 $(SRC_SYSTEM_PATH)Log.cpp $(SRC_SYSTEM_PATH)FileSystem.cpp \
+$(SRC_SYSTEM_PATH)Time.cpp $(SRC_VERSION_PATH)Version.cpp \
 $(SRC_TEXT_PATH)Text.cpp $(SRC_TTF_PATH)TrueTypeFont.cpp \
-$(SRC_VERSION_PATH)Version.cpp \
 $(SRC_UTILS_PATH)utf8_string.cpp $(SRC_UTILS_PATH)utf8_iterator.cpp \
 $(SRC_LIBTAGSPP_PATH)8859.cpp $(SRC_LIBTAGSPP_PATH)flac.cpp \
 $(SRC_LIBTAGSPP_PATH)id3genres.cpp $(SRC_LIBTAGSPP_PATH)id3v1.cpp \
@@ -225,6 +225,7 @@ Physics.o: $(SRC_PHYSICS_PATH)Physics.o
 Polygon.o: $(SRC_PHYSICS_PATH)Polygon.o
 Hitbox.o: $(SRC_PHYSICS_PATH)Hitbox.o
 Random.o: $(SRC_RANDOM_PATH)Random.o
+Time.o: $(SRC_SYSTEM_PATH)Time.o
 SystemInfo.o: $(SRC_SYSTEM_PATH)SystemInfo.o
 FileSystem.o: $(SRC_SYSTEM_PATH)FileSystem.o
 Log.o: $(SRC_SYSTEM_PATH)Log.o
