@@ -41,36 +41,62 @@ namespace lx
 /**
 *   @ingroup Audio
 *   @namespace lx::Mixer
-*   @brief The audio namespace
+*   @brief The audio mixer library
 *
-*   It handles sound mixing and effect processing
+*   The mixer handles sound mixing and sound effect processing.
+*   It is possible to play several samples and music.
 *
-*   @note The effect defined in these following functions:
+*   ## Types of sound ##
 *
-*               - setPanning()
-*               - setPosition()
-*               - setDistance()
-*               - reverseStereo()
+*   There are two classes that handles each type of sound:
+*   - The lx::Mixer::Chunk structure represents a sample.
+*   - The lx::Mixer::Music structure represents a piece of music,
+*     something that can be played for an extended period of time, usually repeated.
 *
+*   It's important to remember that you can play multiple samples at once,
+*   but you can only play one music at a time.
+*
+*
+*   ## Effects ##
+*
+*   Different sound effects can be applied on one or sereval channels
+*   The effect defined in these following functions:
+*   ```
+*   - setPanning()
+*   - setPosition()
+*   - setDistance()
+*   - reverseStereo()
+*   ```
 *   is set as a post-mix processing, i.e. the post-mix processor runs
 *   after every specific post-mixers set by the functions listed before.
-*
 *   If a mix processor has been defined for a specific channel
 *   for one of these functions, so this processor is run before every post-mixers.
 *
 *   Example:
+*   ```
+*   int chan = 5;                           // channel number
+*   lx::Mixer::Chunk chunk("test.wav");
+*   lx::Mixer::setDistance(100);             // distance as post-processing effect
+*   lx::Mixer::setPanning(55,200);           // panning as post-processing effect
+*   lx::Mixer::setPanning(chan,255,0);       // panning on a specific channel
+*   chunk.play(chan);
+*   //  So the order of post-mix processing is:
+*   //    ① panning on channel #5
+*   //    ② panning (post-processing)
+*   //    ③ distance (post-processing)
+*   ```
 *
-*               int chan = 5;                           // channel number
-*               lx::Mixer::Chunk chunk("test.wav");
-*               lx::Mixer::setDistance(100);             // distance as post-processing effect
-*               lx::Mixer::setPanning(55,200);           // panning as post-processing effect
-*               lx::Mixer::setPanning(chan,255,0);       // panning on a specific channel
-*               chunk.play(chan);
-*               //  So the order of post-mix processing is:
-*               //    ① panning on channel #5
-*               //    ② panning (post-processing)
-*               //    ③ distance (post-processing)
+*   ## Supported formats ##
 *
+*   It supports playing music and sound samples from the following formats:
+*   - WAVE/RIFF (.wav)
+*   - AIFF (.aiff)
+*   - VOC (.voc)
+*   - MOD (.mod .xm .s3m .669 .it .med and more) requiring libmikmod on system
+*   - MIDI (.mid) using timidity or native midi hardware
+*   - OggVorbis (.ogg) requiring ogg/vorbis libraries on system
+*   - MP3 (.mp3) requiring SMPEG or MAD library on system
+*   - FLAC (.flac) requiring the FLAC library on system
 *
 *   @warning In order to use this namespace, the *audio* flag
 *   in the configuration file must be set to 1, otherwise the behaviour of
@@ -106,7 +132,7 @@ struct MixerEffectType final
 */
 struct MixerEffect final
 {
-    MixerEffectType type;        /**< Effect type            */
+    MixerEffectType type;           /**< Effect type            */
     uint8_t pan_left = 0;           /**< Left panning           */
     uint8_t pan_right = 0;          /**< Right panning          */
     int16_t pos_angle = 0;          /**< Angle (position)       */
