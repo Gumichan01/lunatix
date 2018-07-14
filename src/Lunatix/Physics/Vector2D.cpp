@@ -26,6 +26,8 @@ using namespace FloatBox;
 namespace lx
 {
 
+constexpr Float ONE = fbox( 1.0f );
+
 namespace Physics
 {
 
@@ -75,8 +77,8 @@ Vector2D operator -( const Vector2D& v ) noexcept
 
 Vector2D& operator ++( Vector2D& v ) noexcept
 {
-    v.vx += fbox( 1.0f );
-    v.vy += fbox( 1.0f );
+    v.vx += ONE;
+    v.vy += ONE;
     return v;
 }
 
@@ -91,8 +93,8 @@ Vector2D operator ++( Vector2D& v, int ) noexcept
 
 Vector2D& operator --( Vector2D& v ) noexcept
 {
-    v.vx -= fbox( 1.0f );
-    v.vy -= fbox( 1.0f );
+    v.vx -= ONE;
+    v.vy -= ONE;
     return v;
 }
 
@@ -164,7 +166,7 @@ Vector2D& normalize( Vector2D& v ) noexcept
     if ( isNullVector( v ) )
         return v;
 
-    v *= ( fbox( 1.0f ) / vector_norm( v ) );
+    v *= ( ONE / vector_norm( v ) );
     return v;
 }
 
