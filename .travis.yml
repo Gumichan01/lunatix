@@ -13,8 +13,8 @@ install:
   - if [ "$CC" == "g++" ]; then export CC="g++-4.9"; fi
 
 before_script:
-  - .gitlab-ci-gumi/.gitlab-ci.sh
-  - .gitlab-ci-gumi/.gitlab-ci-sdl2.0.5.sh
+  - sudo .gitlab-ci-gumi/.gitlab-ci.sh
+  - sudo .gitlab-ci-gumi/.gitlab-ci-sdl2.0.5.sh
 
 script:
   - make lunatix-demo
