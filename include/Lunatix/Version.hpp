@@ -51,14 +51,12 @@ struct Version final
 *   Display information about the library
 */
 void info() noexcept;
-
 /**
 *   @fn const Version getVersion() noexcept
 *   Get the version of the library
 *   @return Information about the version
 */
 const Version getVersion() noexcept;
-
 /**
 *   @fn void dependencies() noexcept
 *   Display information about the library and its dependencies
