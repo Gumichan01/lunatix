@@ -45,35 +45,31 @@ bool mouseIsHaptic() noexcept
 // Specific to Haptic
 struct Haptic_ final
 {
-    int _instanceID = -1;
+    int instance_id = -1;
 
     Haptic_( const Haptic_& ) = delete;
     Haptic_& operator =( const Haptic_& ) = delete;
 
-    explicit Haptic_( int i ) noexcept
-    {
-        _instanceID = i;
-    }
-
+    explicit Haptic_( int i ) noexcept : instance_id( i ) {}
     ~Haptic_() = default;
 };
 
 // Common data
 struct Haptic_common final
 {
-    SDL_Haptic * _haptic = nullptr;
+    SDL_Haptic * haptic = nullptr;
 
     Haptic_common( const Haptic_common& ) = delete;
     Haptic_common& operator =( const Haptic_common& ) = delete;
 
     explicit Haptic_common( SDL_Haptic * h ) noexcept
     {
-        _haptic = h;
+        haptic = h;
     }
 
     ~Haptic_common()
     {
-        SDL_HapticClose( _haptic );
+        SDL_HapticClose( haptic );
     }
 };
 
@@ -81,16 +77,16 @@ struct Haptic_common final
 /* Haptic */
 
 Haptic::Haptic() noexcept
-    : _himpl( new Haptic_( -1 ) ), _hcimpl( new Haptic_common( nullptr ) ) {}
+    : m_himpl( new Haptic_( -1 ) ), _hcimpl( new Haptic_common( nullptr ) ) {}
 
 
 Haptic::Haptic( int index ) noexcept
-    : _himpl( new Haptic_( index ) ),
+    : m_himpl( new Haptic_( index ) ),
       _hcimpl( new Haptic_common( SDL_HapticOpen( index ) ) ) {}
 
 
 Haptic::Haptic( Joystick * joy ) noexcept
-    : _himpl( new Haptic_( SDL_JoystickInstanceID( joy ) ) ),
+    : m_himpl( new Haptic_( SDL_JoystickInstanceID( joy ) ) ),
       _hcimpl( new Haptic_common( SDL_HapticOpenFromJoystick( joy ) ) ) {}
 
 
@@ -101,14 +97,14 @@ Haptic::Haptic( GameController * gc ) noexcept
 
 bool Haptic::isOpened() const noexcept
 {
-    return SDL_HapticOpened( _himpl->_instanceID ) == 1;
+    return SDL_HapticOpened( m_himpl->instance_id ) == 1;
 }
 
 
 bool Haptic::rumbleEffectInit() noexcept
 {
-    if ( SDL_HapticRumbleSupported( _hcimpl->_haptic ) == SDL_TRUE )
-        return SDL_HapticRumbleInit( _hcimpl->_haptic ) == 0;
+    if ( SDL_HapticRumbleSupported( _hcimpl->haptic ) == SDL_TRUE )
+        return SDL_HapticRumbleInit( _hcimpl->haptic ) == 0;
 
     return false;
 }
@@ -125,34 +121,34 @@ void Haptic::rumbleEffectPlay( float strength, uint32_t length ) noexcept
     else if ( strength > 1.0f )
         strength = 1.0f;
 
-    SDL_HapticRumblePlay( _hcimpl->_haptic, strength, length );
+    SDL_HapticRumblePlay( _hcimpl->haptic, strength, length );
 }
 
 
 bool Haptic::effectSupported( HapticEffect& effect ) const noexcept
 {
-    return SDL_HapticEffectSupported( _hcimpl->_haptic, &effect ) == SDL_TRUE;
+    return SDL_HapticEffectSupported( _hcimpl->haptic, &effect ) == SDL_TRUE;
 }
 
 int Haptic::newEffect( HapticEffect& effect ) noexcept
 {
-    return SDL_HapticNewEffect( _hcimpl->_haptic, &effect );
+    return SDL_HapticNewEffect( _hcimpl->haptic, &effect );
 }
 
 void Haptic::runEffect( int effect_id, uint32_t iterations ) noexcept
 {
-    SDL_HapticRunEffect( _hcimpl->_haptic, effect_id, iterations );
+    SDL_HapticRunEffect( _hcimpl->haptic, effect_id, iterations );
 }
 
 void Haptic::stopEffect( int effect_id ) noexcept
 {
-    SDL_HapticStopEffect( _hcimpl->_haptic, effect_id );
+    SDL_HapticStopEffect( _hcimpl->haptic, effect_id );
 }
 
 
 int Haptic::numberOfEffects() const noexcept
 {
-    return SDL_HapticNumEffects( _hcimpl->_haptic );
+    return SDL_HapticNumEffects( _hcimpl->haptic );
 }
 
 Haptic::~Haptic()

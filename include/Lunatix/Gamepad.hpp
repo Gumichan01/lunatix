@@ -90,7 +90,7 @@ UTF8string gamepadToString( GamepadInfo& info ) noexcept;
 */
 class Gamepad final
 {
-    std::unique_ptr<Gamepad_> _gpimpl;
+    std::unique_ptr<Gamepad_> m_gpimpl;
 
     Gamepad( const Gamepad& g ) = delete;
     Gamepad& operator =( const Gamepad& ) = delete;

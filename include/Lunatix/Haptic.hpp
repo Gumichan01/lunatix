@@ -65,7 +65,7 @@ bool mouseIsHaptic() noexcept;
 class Haptic
 {
     friend class lx::Device::Gamepad;
-    std::unique_ptr<Haptic_> _himpl;
+    std::unique_ptr<Haptic_> m_himpl;
 
     Haptic( Haptic& h ) = delete;
     Haptic& operator =( Haptic& h ) = delete;
