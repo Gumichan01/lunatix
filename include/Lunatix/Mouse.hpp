@@ -43,7 +43,7 @@ class Mouse_;
 */
 class Mouse final
 {
-    std::unique_ptr<Mouse_> _mimpl;
+    std::unique_ptr<Mouse_> m_mimpl;
 
     Mouse( const Mouse& ) = delete;
     Mouse& operator =( const Mouse& ) = delete;

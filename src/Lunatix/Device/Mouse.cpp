@@ -31,7 +31,7 @@ namespace Device
 
 class Mouse_ final
 {
-    SDL_Cursor * _cursor = nullptr;
+    SDL_Cursor * m_cursor = nullptr;
 
 public:
 
@@ -39,42 +39,42 @@ public:
     Mouse_& operator =( const Mouse_& ) = delete;
 
     Mouse_( SDL_Surface * surface, int hot_x, int hot_y ) noexcept
-        : _cursor( SDL_CreateColorCursor( surface, hot_x, hot_y ) ) {}
+        : m_cursor( SDL_CreateColorCursor( surface, hot_x, hot_y ) ) {}
 
     bool isOpen() const noexcept
     {
-        return _cursor != nullptr;
+        return m_cursor != nullptr;
     }
 
     void setMouse() noexcept
     {
-        SDL_SetCursor( _cursor );
+        SDL_SetCursor( m_cursor );
     }
 
     ~Mouse_()
     {
-        SDL_FreeCursor( _cursor );
+        SDL_FreeCursor( m_cursor );
     }
 };
 
 
 Mouse::Mouse( const lx::Graphics::BufferedImage& surface,
               int hot_x, int hot_y ) noexcept
-    : _mimpl( new Mouse_( surface._surface, hot_x, hot_y ) ) {}
+    : m_mimpl( new Mouse_( surface._surface, hot_x, hot_y ) ) {}
 
 bool Mouse::isOpen() const noexcept
 {
-    return _mimpl->isOpen();
+    return m_mimpl->isOpen();
 }
 
 void Mouse::setMouse() noexcept
 {
-    _mimpl->setMouse();
+    m_mimpl->setMouse();
 }
 
 Mouse::~Mouse()
 {
-    _mimpl.reset();
+    m_mimpl.reset();
 }
 
 }   // Device
