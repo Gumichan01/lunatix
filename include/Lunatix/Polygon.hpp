@@ -62,7 +62,7 @@ class Polygon_;
 */
 class Polygon final
 {
-    std::unique_ptr<Polygon_> _polyimpl;
+    std::unique_ptr<Polygon_> m_polyimpl;
 
     Polygon( Polygon& p ) = delete;
     Polygon& operator =( Polygon& p ) = delete;
