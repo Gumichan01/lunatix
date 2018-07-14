@@ -49,22 +49,21 @@ namespace Mixer
 *   about a music (title, author, album, year, ...)
 *
 *   In comparison with *libtagpp::Tag*, MusicTag does not contain
-*   low-level contents (track-gain, album-gain, bitrate, ...), but have
+*   low-level contents (track-gain, album-gain, bitrate, ...), but has
 *   an image loaded from the audio file if it exists.
 */
 struct MusicTag
 {
-    UTF8string title{""};                   /**< Title  */
-    UTF8string artist{""};                  /**< Artist */
-    UTF8string album{""};                   /**< Album  */
-    UTF8string year{""};                    /**< Year (2016, 2014/02/01)         */
-    UTF8string track{""};                   /**< Track number ("1", "01", "1/4") */
-    UTF8string genre{""};                   /**< Genre  */
-    UTF8string format{""};                  /**< Format (MP3, OGG, FLAC, M4A)    */
-    UTF8string duration{""};                /**< Duration, in HH:MM:SS format    */
-    lx::Graphics::BufferedImage * img = nullptr;  /**< Album cover, if it exists  */
+    UTF8string title{""};                           /**< Title  */
+    UTF8string artist{""};                          /**< Artist */
+    UTF8string album{""};                           /**< Album  */
+    UTF8string year{""};                            /**< Year (2016, 2014/02/01)         */
+    UTF8string track{""};                           /**< Track number ("1", "01", "1/4") */
+    UTF8string genre{""};                           /**< Genre  */
+    UTF8string format{""};                          /**< Format (MP3, OGG, FLAC, M4A)    */
+    UTF8string duration{""};                        /**< Duration, in HH:MM:SS format    */
+    lx::Graphics::BufferedImage * img = nullptr;    /**< Album cover, if it exists  */
 
-    //MusicTag() noexcept;
     ~MusicTag();
 };
 
@@ -96,7 +95,7 @@ class Music_;
 */
 class Music : public virtual Sound
 {
-    std::unique_ptr<Music_> _mimpl;
+    std::unique_ptr<Music_> m_mimpl;
 
     Music( const Music& m ) = delete;
     Music& operator =( const Music& m ) = delete;

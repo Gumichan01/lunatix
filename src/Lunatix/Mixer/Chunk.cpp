@@ -35,30 +35,30 @@ namespace Mixer
 
 class Chunk_ final
 {
-    Mix_Chunk * _chunk = nullptr;
+    Mix_Chunk * m_chunk = nullptr;
 
     Chunk_( const Chunk_& m ) = delete;
     Chunk_& operator =( const Chunk_& m ) = delete;
 
     void load_( const std::string& filename )
     {
-        Mix_FreeChunk( _chunk );
-        _chunk = Mix_LoadWAV( filename.c_str() );
+        Mix_FreeChunk( m_chunk );
+        m_chunk = Mix_LoadWAV( filename.c_str() );
 
-        if ( _chunk == nullptr )
+        if ( m_chunk == nullptr )
             throw MixerException( "Chunk — Cannot load " + filename );
     }
 
 public:
 
-    explicit Chunk_( Mix_Chunk& chunk ): _chunk( &chunk ) {}
+    explicit Chunk_( Mix_Chunk& chunk ): m_chunk( &chunk ) {}
 
-    explicit Chunk_( const std::string& filename ) : _chunk( nullptr )
+    explicit Chunk_( const std::string& filename ) : m_chunk( nullptr )
     {
         load_( filename );
     }
 
-    explicit Chunk_( const UTF8string& filename ) : _chunk( nullptr )
+    explicit Chunk_( const UTF8string& filename ) : m_chunk( nullptr )
     {
         load_( filename.utf8_sstring() );
     }
@@ -75,54 +75,54 @@ public:
 
     bool play( int channel, int loops ) noexcept
     {
-        return Mix_PlayChannel( channel, _chunk, loops ) == 0;
+        return Mix_PlayChannel( channel, m_chunk, loops ) == 0;
     }
 
     bool play( int channel, int loops, int ticks ) noexcept
     {
-        return Mix_PlayChannelTimed( channel, _chunk, loops, ticks ) == 0;
+        return Mix_PlayChannelTimed( channel, m_chunk, loops, ticks ) == 0;
     }
 
     ~Chunk_()
     {
-        Mix_FreeChunk( _chunk );
+        Mix_FreeChunk( m_chunk );
     }
 };
 
 /* Chunk */
 
 // Private constructor used for internal uses
-Chunk::Chunk( Mix_Chunk& chunk ) : _chkimpl( new Chunk_( chunk ) ) {}
+Chunk::Chunk( Mix_Chunk& chunk ) : m_chkimpl( new Chunk_( chunk ) ) {}
 
 // Public constructors
-Chunk::Chunk( const std::string& filename ) : _chkimpl( new Chunk_( filename ) ) {}
+Chunk::Chunk( const std::string& filename ) : m_chkimpl( new Chunk_( filename ) ) {}
 
-Chunk::Chunk( const UTF8string& filename ) : _chkimpl( new Chunk_( filename ) ) {}
+Chunk::Chunk( const UTF8string& filename ) : m_chkimpl( new Chunk_( filename ) ) {}
 
 
 bool Chunk::play() noexcept
 {
-    return _chkimpl->play();
+    return m_chkimpl->play();
 }
 
 bool Chunk::play( int channel ) noexcept
 {
-    return _chkimpl->play( channel );
+    return m_chkimpl->play( channel );
 }
 
 bool Chunk::play( int channel, int loops ) noexcept
 {
-    return _chkimpl->play( channel, loops );
+    return m_chkimpl->play( channel, loops );
 }
 
 bool Chunk::play( int channel, int loops, int ticks ) noexcept
 {
-    return _chkimpl->play( channel, loops, ticks );
+    return m_chkimpl->play( channel, loops, ticks );
 }
 
 Chunk::~Chunk()
 {
-    _chkimpl.reset();
+    m_chkimpl.reset();
 }
 
 }   // Mixer

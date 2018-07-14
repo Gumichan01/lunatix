@@ -50,7 +50,7 @@ class Chunk_;
 class Chunk final : public virtual Sound
 {
     friend class lx::FileIO::FileBuffer_;
-    std::unique_ptr<Chunk_> _chkimpl;
+    std::unique_ptr<Chunk_> m_chkimpl;
 
     Chunk( Mix_Chunk& chunk );
     Chunk( const Chunk& m ) = delete;

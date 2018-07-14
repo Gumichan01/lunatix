@@ -93,28 +93,28 @@ const MusicTag getMusicInfoFrom( const std::string& file ) noexcept
 
 class Music_
 {
-    Mix_Music * _music = nullptr;
-    std::string _filename{};
-    libtagpp::Tag _tag;
-    MusicTag _mtag;
-    bool mtag_set = false;
+    Mix_Music * m_music = nullptr;
+    std::string m_filename;
+    libtagpp::Tag m_tag;
+    MusicTag m_musictag;
+    bool m_mtag_set = false;
 
     Music_( const Music_& m ) = delete;
     Music_& operator =( const Music_& m ) = delete;
 
     void load_( const std::string& filename )
     {
-        Mix_FreeMusic( _music );
-        _music = Mix_LoadMUS( filename.c_str() );
+        Mix_FreeMusic( m_music );
+        m_music = Mix_LoadMUS( filename.c_str() );
 
-        if ( _music == nullptr )
+        if ( m_music == nullptr )
             throw MixerException( "Music — Cannot load " + filename );
     }
 
 public:
 
     explicit Music_( const std::string& filename )
-        : _music( nullptr ), _filename( filename ), _tag(), _mtag(), mtag_set( false )
+        : m_music( nullptr ), m_filename( filename ), m_tag(), m_musictag(), m_mtag_set( false )
     {
         load_( filename );
     }
@@ -124,12 +124,12 @@ public:
 
     void fadeIn( int ms ) noexcept
     {
-        Mix_FadeInMusic( _music, NOLOOP, ms );
+        Mix_FadeInMusic( m_music, NOLOOP, ms );
     }
 
     void fadeInPos( int ms, int pos ) noexcept
     {
-        Mix_FadeInMusicPos( _music, NOLOOP, ms, pos );
+        Mix_FadeInMusicPos( m_music, NOLOOP, ms, pos );
     }
 
     bool play() noexcept
@@ -139,64 +139,64 @@ public:
 
     bool play( bool infinite ) noexcept
     {
-        return Mix_PlayMusic( _music, infinite ? INFLOOP : NOLOOP ) == 0;
+        return Mix_PlayMusic( m_music, infinite ? INFLOOP : NOLOOP ) == 0;
     }
 
     bool play( unsigned int loops ) noexcept
     {
-        return Mix_PlayMusic( _music, static_cast<int>( loops ) ) == 0;
+        return Mix_PlayMusic( m_music, static_cast<int>( loops ) ) == 0;
     }
 
     const libtagpp::Tag& getInfo() noexcept
     {
-        if ( !_tag.readTag( _filename.c_str() ) )
+        if ( !m_tag.readTag( m_filename.c_str() ) )
             lx::setError( "Cannot get metadata" );
 
-        return _tag;
+        return m_tag;
     }
 
     const MusicTag& metaData() noexcept
     {
-        if ( !mtag_set )
+        if ( !m_mtag_set )
         {
             getInfo();
-            _mtag.title    = _tag.title();
-            _mtag.artist   = _tag.artist();
-            _mtag.album    = _tag.album();
-            _mtag.year     = _tag.year();
-            _mtag.track    = _tag.track();
-            _mtag.genre    = _tag.genre();
-            _mtag.format   = _tag.properties().format;
-            _mtag.duration = _tag.properties().duration;
-            _mtag.img      = _loadImage( _filename, _tag.getImageMetaData() );
-            mtag_set       = true;
+            m_musictag.title    = m_tag.title();
+            m_musictag.artist   = m_tag.artist();
+            m_musictag.album    = m_tag.album();
+            m_musictag.year     = m_tag.year();
+            m_musictag.track    = m_tag.track();
+            m_musictag.genre    = m_tag.genre();
+            m_musictag.format   = m_tag.properties().format;
+            m_musictag.duration = m_tag.properties().duration;
+            m_musictag.img      = _loadImage( m_filename, m_tag.getImageMetaData() );
+            m_mtag_set       = true;
         }
 
-        return _mtag;
+        return m_musictag;
     }
 
     ~Music_()
     {
-        Mix_FreeMusic( _music );
+        Mix_FreeMusic( m_music );
     }
 };
 
 /* Music: public functions */
 Music::Music( const std::string& filename )
-    : _mimpl( new Music_( filename ) ) {}
+    : m_mimpl( new Music_( filename ) ) {}
 
 Music::Music( const UTF8string& filename )
-    : _mimpl( new Music_( filename ) ) {}
+    : m_mimpl( new Music_( filename ) ) {}
 
 
 void Music::fadeIn( int ms ) noexcept
 {
-    _mimpl->fadeIn( ms );
+    m_mimpl->fadeIn( ms );
 }
 
 void Music::fadeInPos( int ms, int pos ) noexcept
 {
-    _mimpl->fadeInPos( ms, pos );
+    m_mimpl->fadeInPos( ms, pos );
 }
 
 void Music::fadeOut( int ms ) noexcept
@@ -207,17 +207,17 @@ void Music::fadeOut( int ms ) noexcept
 
 bool Music::play() noexcept
 {
-    return _mimpl->play();
+    return m_mimpl->play();
 }
 
 bool Music::play( bool infinite_loop ) noexcept
 {
-    return _mimpl->play( infinite_loop );
+    return m_mimpl->play( infinite_loop );
 }
 
 bool Music::play( unsigned int loops ) noexcept
 {
-    return _mimpl->play( loops );
+    return m_mimpl->play( loops );
 }
 
 
@@ -238,17 +238,17 @@ void Music::stop() noexcept
 
 const libtagpp::Tag& Music::getInfo() noexcept
 {
-    return _mimpl->getInfo();
+    return m_mimpl->getInfo();
 }
 
 const MusicTag& Music::metaData() noexcept
 {
-    return _mimpl->metaData();
+    return m_mimpl->metaData();
 }
 
 Music::~Music()
 {
-    _mimpl.reset();
+    m_mimpl.reset();
 }
 
 }   // Mixer
