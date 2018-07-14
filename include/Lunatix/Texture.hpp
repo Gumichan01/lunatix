@@ -99,7 +99,40 @@ public:
 *   @class Texture
 *   @brief The texture object
 *
-*   This class describes a texture.
+*   Since the texture is based on SDL_Texture and internally uses SDL_Image,
+*   it supports loading and decoding images from the following formats:
+*
+*   * TGA
+*       : TrueVision Targa (MUST have .tga)
+*   * BMP
+*       : Windows Bitmap(.bmp)
+*   * PNM
+*       : Portable Anymap (.pnm)
+*       - .pbm = Portable BitMap (mono)
+*       - .pgm = Portable GreyMap (256 greys)
+*       - .ppm = Portable PixMap (full color)
+*   * XPM
+*       : X11 Pixmap (.xpm) can be included directly in code.
+*       This is NOT the same as XBM(X11 Bitmap) format, which is for monocolor images.
+*   * XCF
+*       : GIMP native (.xcf) (XCF = eXperimental Computing Facility)
+*       This format is frequently changing, and since there's no library supplied by the GIMP project to load XCF,
+*       the loader may frequently fail to load much of any image from an XCF file.
+*       It's better to load this in GIMP and convert to a better supported image format.
+*   * PCX
+*       : ZSoft IBM PC Paintbrush (.pcx)
+*   * GIF
+*       : CompuServe Graphics Interchange Format (.gif)
+*   * JPG
+*       : Joint Photographic Experts Group JFIF format (.jpg or .jpeg)
+*   * TIF
+*       : Tagged Image File Format (.tif or .tiff)
+*   * LBM
+*       : Interleaved Bitmap (.lbm or .iff) FORM : ILBM or PBM(packed bitmap)
+*       HAM6, HAM8, and 24bit types are not supported.
+*   * PNG
+*       : Portable Network Graphics (.png)
+*
 */
 class Texture
 {
