@@ -64,13 +64,13 @@ class FileBuffer;
 namespace Graphics
 {
 
-enum class MIRROR
+enum class MirrorEffect
 {
-    /// Flag to define no mirror while drawing a texture
+    /// Flag to define no MirrorEffect while drawing a texture
     NONE       = 0,
-    /// Flag to define horizontal mirror while drawing a texture
+    /// Flag to define horizontal MirrorEffect while drawing a texture
     HORIZONTAL = 1,
-    /// Flag to define vertical mirror while drawing a texture
+    /// Flag to define vertical MirrorEffect while drawing a texture
     VERTICAL   = 2,
 };
 
@@ -216,7 +216,7 @@ public:
     */
     virtual void draw( const ImgRect& box, const double angle ) noexcept;
     /**
-    *   @fn virtual void draw(const ImgRect& box, const double angle, const MIRROR mirror) noexcept
+    *   @fn virtual void draw(const ImgRect& box, const double angle, const MirrorEffect MirrorEffect) noexcept
     *
     *   Draw the current sprite on the window with rotation
     *
@@ -225,14 +225,14 @@ public:
     *         then the sprite is drawn on the entire screen
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
-    *   @param [in] mirror The flag that set the mirror effect:
-    *         - MIRROR_NONE: No mirror effect
-    *         - MIRROR_HORIZONTAL: Horizontal mirror
-    *         - MIRROR_VERTICAL: Vertical mirror
+    *   @param [in] MirrorEffect The flag that set the MirrorEffect effect:
+    *         - MirrorEffect_NONE: No MirrorEffect effect
+    *         - MirrorEffect_HORIZONTAL: Horizontal MirrorEffect
+    *         - MirrorEffect_VERTICAL: Vertical MirrorEffect
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw( const ImgRect& box, const double angle, const MIRROR mirror ) noexcept;
+    virtual void draw( const ImgRect& box, const double angle, const MirrorEffect MirrorEffect ) noexcept;
 
     /**
     *   @fn UTF8string getFileName() noexcept
@@ -303,7 +303,7 @@ public:
     virtual void draw( const ImgRect& box ) noexcept override;
     virtual void draw( const ImgRect& box, const double angle ) noexcept override;
     virtual void draw( const ImgRect& box, const double angle,
-                       const MIRROR mirror ) noexcept override;
+                       const MirrorEffect MirrorEffect ) noexcept override;
 
     /**
     *   @fn void resetAnimation() noexcept
@@ -521,7 +521,7 @@ public:
     /**
     *   @fn virtual void draw(const double angle) noexcept
     *
-    *   Draw the current text on the window with rotation and mirror effect
+    *   Draw the current text on the window with rotation and MirrorEffect effect
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
     *
@@ -529,19 +529,19 @@ public:
     */
     virtual void draw( const double angle ) noexcept;
     /**
-    *   @fn virtual void draw(const double angle, const MIRROR mirror) noexcept
+    *   @fn virtual void draw(const double angle, const MirrorEffect MirrorEffect) noexcept
     *
-    *   Draw the current text on the window with rotation and mirror effect
+    *   Draw the current text on the window with rotation and MirrorEffect effect
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
-    *   @param [in] mirror The flag that set the mirror effect:
-    *         - DRAW_MIRROR_NONE: No mirror effect
-    *         - MIRROR_HORIZONTAL: Horizontal mirror
-    *         - MIRROR_VERTICAL: Vertical mirror
+    *   @param [in] MirrorEffect The flag that set the MirrorEffect effect:
+    *         - DRAW_MirrorEffect_NONE: No MirrorEffect effect
+    *         - MirrorEffect_HORIZONTAL: Horizontal MirrorEffect
+    *         - MirrorEffect_VERTICAL: Vertical MirrorEffect
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw( const double angle, const MIRROR mirror ) noexcept;
+    virtual void draw( const double angle, const MirrorEffect MirrorEffect ) noexcept;
 
     /**
     *   @fn const UTF8string getText() const noexcept
