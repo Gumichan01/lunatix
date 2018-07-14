@@ -195,7 +195,7 @@ lx::Win::WinFlags fromSDL2Flags_( const uint32_t flags ) noexcept
     return wflags;
 }
 
-inline constexpr uint32_t renderFlag( const lx::Win::WindowInfo& info ) noexcept
+inline constexpr uint32_t setRendering_( const lx::Win::WindowInfo& info ) noexcept
 {
     return info.accel ? SDL_RENDERER_ACCELERATED : SDL_RENDERER_SOFTWARE;
 }
@@ -313,45 +313,45 @@ const char * WindowException::what() const noexcept
 
 struct Window_ final
 {
-    SDL_Window * _window      = nullptr;            /* The internal window structure        */
-    SDL_Renderer * _renderer  = nullptr;            /* The main renderer                    */
-    SDL_GLContext _glcontext = nullptr;             /* The context (only used in OpenGL)    */
-    int _original_width      = DEFAULT_WIN_WIDTH;   /* The width of the window              */
-    int _original_height     = DEFAULT_WIN_WIDTH;   /* The height of the window             */
-    lx::Graphics::ImgRect _viewport     = { { 0, 0 }, 0, 0 };
+    SDL_Window * window      = nullptr;             /* Innternal window structure           */
+    SDL_Renderer * renderer  = nullptr;
+    SDL_GLContext glcontext  = nullptr;             /* The context (only used in OpenGL)    */
+    int original_width       = DEFAULT_WIN_WIDTH;
+    int original_height      = DEFAULT_WIN_WIDTH;
+    lx::Graphics::ImgRect viewport = { { 0, 0 }, 0, 0 };
 
     Window_( const Window_& ) = delete;
     Window_& operator =( const Window_& ) = delete;
 
-    explicit Window_( const WindowInfo& info ): _window( nullptr ),
-        _renderer( nullptr ), _glcontext( nullptr ), _original_width( info.w ),
-        _original_height( info.h )
+    explicit Window_( const WindowInfo& info ): window( nullptr ),
+        renderer( nullptr ), glcontext( nullptr ), original_width( info.w ),
+        original_height( info.h )
     {
         const lx::Config::Configuration& config = lx::Config::Configuration::getInstance();
 
-        // Video flag and VSync flag actives -> add the option
+        // The VSync flag is used in order to prevent screen tearing
         if ( config.getVideoFlag() && config.getVSyncFlag() )
             SDL_SetHint( SDL_HINT_RENDER_VSYNC, "1" );
 
-        _window = SDL_CreateWindow( info.title.c_str(), info.x, info.y, info.w,
+        window = SDL_CreateWindow( info.title.c_str(), info.x, info.y, info.w,
                                     info.h, toSDL2Flags_( info.wflags ) );
 
-        if ( _window == nullptr )
+        if ( window == nullptr )
             throw WindowException( lx::getError() );
 
         if ( hasOpenGLsupport_( info ) )
-            _glcontext = SDL_GL_CreateContext( _window );
+            glcontext = SDL_GL_CreateContext( window );
 
         // Hardware acceleration or software rendering
-        _renderer = SDL_CreateRenderer( _window, -1, renderFlag( info ) );
+        renderer = SDL_CreateRenderer( window, -1, setRendering_( info ) );
 
-        if ( _renderer == nullptr )
+        if ( renderer == nullptr )
         {
             std::string err_msg = "Rendering creation: ";
             err_msg = err_msg + lx::getError();
 
-            SDL_GL_DeleteContext( _glcontext );
-            SDL_DestroyWindow( _window );
+            SDL_GL_DeleteContext( glcontext );
+            SDL_DestroyWindow( window );
             throw WindowException( err_msg );
         }
 
@@ -362,37 +362,37 @@ struct Window_ final
     {
         uint8_t r, g, b, a;
         const lx::Graphics::Colour C = { 0, 0, 0, 255 };
-        SDL_GetRenderDrawColor( _renderer, &r, &g, &b, &a );
-        SDL_SetRenderDrawColor( _renderer, C.r, C.g, C.b, C.a );
-        SDL_RenderClear( _renderer );
-        SDL_SetRenderDrawColor( _renderer, r, g, b, a );
+        SDL_GetRenderDrawColor( renderer, &r, &g, &b, &a );
+        SDL_SetRenderDrawColor( renderer, C.r, C.g, C.b, C.a );
+        SDL_RenderClear( renderer );
+        SDL_SetRenderDrawColor( renderer, r, g, b, a );
     }
 
     bool screenshot_( const std::string& filename ) noexcept
     {
         int err = 0;
         int w, h;
-        SDL_Surface * sshot;
+        SDL_Surface * screenchot_surface;
 
-        SDL_GetWindowSize( _window, &w, &h );
-        sshot = SDL_CreateRGBSurface( 0, w, h, ARGB_DEPTH,
+        SDL_GetWindowSize( window, &w, &h );
+        screenchot_surface = SDL_CreateRGBSurface( 0, w, h, ARGB_DEPTH,
                                       RMASK, GMASK, BMASK, AMASK );
 
-        if ( sshot == nullptr )
+        if ( screenchot_surface == nullptr )
             return false;
 
-        err = SDL_RenderReadPixels( _renderer, nullptr, SDL_PIXELFORMAT_RGBA8888,
-                                    sshot->pixels, sshot->pitch );
+        err = SDL_RenderReadPixels( renderer, nullptr, SDL_PIXELFORMAT_RGBA8888,
+                                    screenchot_surface->pixels, screenchot_surface->pitch );
 
         if ( err == -1 )
         {
             // Cannot read the pixels from the renderer
-            SDL_FreeSurface( sshot );
+            SDL_FreeSurface( screenchot_surface );
             return false;
         }
 
-        err = IMG_SavePNG( sshot, filename.c_str() );
-        SDL_FreeSurface( sshot );
+        err = IMG_SavePNG( screenchot_surface, filename.c_str() );
+        SDL_FreeSurface( screenchot_surface );
 
         return err == 0;
     }
@@ -400,9 +400,9 @@ struct Window_ final
 
     ~Window_()
     {
-        SDL_GL_DeleteContext( _glcontext );
-        SDL_DestroyRenderer( _renderer );
-        SDL_DestroyWindow( _window );
+        SDL_GL_DeleteContext( glcontext );
+        SDL_DestroyRenderer( renderer );
+        SDL_DestroyWindow( window );
     }
 };
 
@@ -410,33 +410,33 @@ struct Window_ final
 /* Window */
 
 Window::Window( WindowInfo& info )
-    : _wimpl( new Window_( info ) )
+    : m_wimpl( new Window_( info ) )
 {
     getInfo( info );
-    getViewPort( _wimpl->_viewport );
+    getViewPort( m_wimpl->viewport );
 }
 
 // private function
-void * Window::getRenderingSys() const noexcept
+void * Window::getRenderingSys_() const noexcept
 {
-    return _wimpl->_renderer;
+    return m_wimpl->renderer;
 }
 
 void Window::setIcon( const std::string& ficon ) noexcept
 {
-    SDL_SetWindowIcon( _wimpl->_window, lx::Graphics::BufferedImage( ficon ).m_surface );
+    SDL_SetWindowIcon( m_wimpl->window, lx::Graphics::BufferedImage( ficon ).m_surface );
 }
 
 
 void Window::drawLine( const lx::Graphics::ImgCoord& p,
                        const lx::Graphics::ImgCoord& q ) noexcept
 {
-    SDL_RenderDrawLine( _wimpl->_renderer, p.x, p.y, q.x, q.y );
+    SDL_RenderDrawLine( m_wimpl->renderer, p.x, p.y, q.x, q.y );
 }
 
 void Window::drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noexcept
 {
-    SDL_RenderDrawLines( _wimpl->_renderer,
+    SDL_RenderDrawLines( m_wimpl->renderer,
                          reinterpret_cast<const SDL_Point *>( &vpoints[0] ),
                          static_cast<int>( vpoints.size() ) );
 }
@@ -445,7 +445,7 @@ void Window::drawLines( const std::vector<lx::Graphics::ImgCoord>& vpoints ) noe
 void Window::drawRect( const lx::Graphics::ImgRect& box ) noexcept
 {
     const SDL_Rect SDL_BOX = { box.p.x, box.p.y, box.w, box.h };
-    SDL_RenderDrawRect( _wimpl->_renderer, &SDL_BOX );
+    SDL_RenderDrawRect( m_wimpl->renderer, &SDL_BOX );
 }
 
 
@@ -459,14 +459,14 @@ void Window::drawCircle( const lx::Physics::Circle& c ) noexcept
 
     while ( y >= x )
     {
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x + x, P.y + y );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x + y, P.y + x );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x - x, P.y + y );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x - y, P.y + x );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x + x, P.y - y );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x + y, P.y - x );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x - x, P.y - y );
-        SDL_RenderDrawPoint( _wimpl->_renderer, P.x - y, P.y - x );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x + x, P.y + y );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x + y, P.y + x );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x - x, P.y + y );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x - y, P.y + x );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x + x, P.y - y );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x + y, P.y - x );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x - x, P.y - y );
+        SDL_RenderDrawPoint( m_wimpl->renderer, P.x - y, P.y - x );
 
         if ( d >= 2 * x )
         {
@@ -491,7 +491,7 @@ void Window::drawCircle( const lx::Physics::Circle& c ) noexcept
 void Window::fillRect( const lx::Graphics::ImgRect& box ) noexcept
 {
     const SDL_Rect SDL_BOX{box.p.x, box.p.y, box.w, box.h};
-    SDL_RenderFillRect( _wimpl->_renderer, &SDL_BOX );
+    SDL_RenderFillRect( m_wimpl->renderer, &SDL_BOX );
 }
 
 
@@ -536,45 +536,45 @@ void Window::fillCircle( const lx::Physics::Circle& c ) noexcept
 
 void Window::setDrawColour( const Graphics::Colour& colour ) noexcept
 {
-    SDL_SetRenderDrawColor( _wimpl->_renderer, colour.r, colour.g, colour.b, colour.a );
+    SDL_SetRenderDrawColor( m_wimpl->renderer, colour.r, colour.g, colour.b, colour.a );
 }
 
 void Window::getDrawColour( Graphics::Colour& colour ) const noexcept
 {
-    SDL_GetRenderDrawColor( _wimpl->_renderer, &colour.r, &colour.g, &colour.b, &colour.a );
+    SDL_GetRenderDrawColor( m_wimpl->renderer, &colour.r, &colour.g, &colour.b, &colour.a );
 }
 
 
 void Window::setDrawBlendMode( const BlendMode mode ) noexcept
 {
-    SDL_SetRenderDrawBlendMode( _wimpl->_renderer, sdlBlend_( mode ) );
+    SDL_SetRenderDrawBlendMode( m_wimpl->renderer, sdlBlend_( mode ) );
 }
 
 void Window::getDrawBlendMode( BlendMode& mode ) const noexcept
 {
     SDL_BlendMode sdlm = sdlBlend_( mode );
-    SDL_GetRenderDrawBlendMode( _wimpl->_renderer, &sdlm );
+    SDL_GetRenderDrawBlendMode( m_wimpl->renderer, &sdlm );
 }
 
 
 void Window::setTitle( const std::string& title ) noexcept
 {
-    SDL_SetWindowTitle( _wimpl->_window, title.c_str() );
+    SDL_SetWindowTitle( m_wimpl->window, title.c_str() );
 }
 
 
 std::string Window::getTitle() noexcept
 {
-    const char * TITLE = SDL_GetWindowTitle( _wimpl->_window );
+    const char * TITLE = SDL_GetWindowTitle( m_wimpl->window );
     return std::string( ( TITLE == nullptr ) ? "" : TITLE );
 }
 
 void Window::setWindowSize( int w, int h ) noexcept
 {
-    SDL_SetWindowSize( _wimpl->_window, w, h );
-    _wimpl->_original_width = w;
-    _wimpl->_original_height = h;
-    getViewPort( _wimpl->_viewport );
+    SDL_SetWindowSize( m_wimpl->window, w, h );
+    m_wimpl->original_width = w;
+    m_wimpl->original_height = h;
+    getViewPort( m_wimpl->viewport );
 }
 
 void Window::setPosition( int x, int y ) noexcept
@@ -583,21 +583,21 @@ void Window::setPosition( int x, int y ) noexcept
     getInfo( winfo );
 
     if ( !winfo.wflags.fullscreen )
-        SDL_SetWindowPosition( _wimpl->_window, x, y );
+        SDL_SetWindowPosition( m_wimpl->window, x, y );
 
 }
 
 int Window::getXPosition() noexcept
 {
     int x;
-    SDL_GetWindowPosition( _wimpl->_window, &x, nullptr );
+    SDL_GetWindowPosition( m_wimpl->window, &x, nullptr );
     return x;
 }
 
 int Window::getYPosition() noexcept
 {
     int y;
-    SDL_GetWindowPosition( _wimpl->_window, nullptr, &y );
+    SDL_GetWindowPosition( m_wimpl->window, nullptr, &y );
     return y;
 }
 
@@ -617,156 +617,156 @@ void Window::setOpacity( const float percent ) noexcept
         real_percent = percent;
 
     float opacity = real_percent / MAX_PERCENT;
-    SDL_SetWindowOpacity( _wimpl->_window, opacity );
+    SDL_SetWindowOpacity( m_wimpl->window, opacity );
 }
 
 float Window::getOpacity() noexcept
 {
     float opacity;
-    SDL_GetWindowOpacity( _wimpl->_window, &opacity );
+    SDL_GetWindowOpacity( m_wimpl->window, &opacity );
     return opacity;
 }
 
 void Window::setViewPort( const lx::Graphics::ImgRect& viewport ) noexcept
 {
     const SDL_Rect VPORT = { viewport.p.x, viewport.p.y, viewport.w, viewport.h };
-    SDL_RenderSetViewport( _wimpl->_renderer, &VPORT );
+    SDL_RenderSetViewport( m_wimpl->renderer, &VPORT );
 }
 
 void Window::resetViewPort() noexcept
 {
-    setViewPort( _wimpl->_viewport );
+    setViewPort( m_wimpl->viewport );
 }
 
 void Window::getViewPort( lx::Graphics::ImgRect& viewport ) const noexcept
 {
     SDL_Rect rect;
-    SDL_RenderGetViewport( _wimpl->_renderer, &rect );
+    SDL_RenderGetViewport( m_wimpl->renderer, &rect );
     viewport = { { rect.x, rect.y }, rect.w, rect.h };
 }
 
 
 void Window::toggleFullscreen( const ScreenMode flag ) noexcept
 {
-    SDL_SetWindowFullscreen( _wimpl->_window, toSDL2Flags_( flag ) );
+    SDL_SetWindowFullscreen( m_wimpl->window, toSDL2Flags_( flag ) );
 
     if ( flag == ScreenMode::NO_FULLSCREEN )
     {
-        setWindowSize( _wimpl->_original_width, _wimpl->_original_height );
+        setWindowSize( m_wimpl->original_width, m_wimpl->original_height );
     }
     else if ( flag == ScreenMode::FULLSCREEN )
     {
-        SDL_RenderSetLogicalSize( _wimpl->_renderer, _wimpl->_original_width,
-                                  _wimpl->_original_height );
+        SDL_RenderSetLogicalSize( m_wimpl->renderer, m_wimpl->original_width,
+                                  m_wimpl->original_height );
     }
 
-    getViewPort( _wimpl->_viewport );
+    getViewPort( m_wimpl->viewport );
 }
 
 void Window::show() noexcept
 {
-    SDL_ShowWindow( _wimpl->_window );
+    SDL_ShowWindow( m_wimpl->window );
 }
 
 void Window::hide() noexcept
 {
-    SDL_HideWindow( _wimpl->_window );
+    SDL_HideWindow( m_wimpl->window );
 }
 
 void Window::update() noexcept
 {
-    if ( _wimpl->_glcontext != nullptr )
-        SDL_GL_SwapWindow( _wimpl->_window );
+    if ( m_wimpl->glcontext != nullptr )
+        SDL_GL_SwapWindow( m_wimpl->window );
     else
-        SDL_RenderPresent( _wimpl->_renderer );
+        SDL_RenderPresent( m_wimpl->renderer );
 }
 
 void Window::clearWindow() noexcept
 {
-    if ( _wimpl->_glcontext != nullptr )
+    if ( m_wimpl->glcontext != nullptr )
     {
         const lx::Graphics::glColour GLC = { 0.0f, 0.0f, 0.0f, 1.0f };
         glClearColor( GLC.r, GLC.g, GLC.b, GLC.a );
         glClear( GL_COLOR_BUFFER_BIT );
     }
     else
-        _wimpl->clearRenderer_();
+        m_wimpl->clearRenderer_();
 }
 
 
 bool Window::screenshot( const std::string& filename ) noexcept
 {
-    return _wimpl->screenshot_( filename );
+    return m_wimpl->screenshot_( filename );
 }
 
 uint32_t Window::getID() const noexcept
 {
-    return SDL_GetWindowID( _wimpl->_window );
+    return SDL_GetWindowID( m_wimpl->window );
 }
 
 void Window::getInfo( WindowInfo& info ) const noexcept
 {
     info.id = getID();
-    info.title = SDL_GetWindowTitle( _wimpl->_window );
-    info.wflags = fromSDL2Flags_( SDL_GetWindowFlags( _wimpl->_window ) );
+    info.title = SDL_GetWindowTitle( m_wimpl->window );
+    info.wflags = fromSDL2Flags_( SDL_GetWindowFlags( m_wimpl->window ) );
 
-    SDL_GetWindowPosition( _wimpl->_window, &info.x, &info.y );
-    SDL_GetWindowSize( _wimpl->_window, &info.w, &info.h );
+    SDL_GetWindowPosition( m_wimpl->window, &info.x, &info.y );
+    SDL_GetWindowSize( m_wimpl->window, &info.w, &info.h );
     info.lw = getLogicalWidth();
     info.lh = getLogicalHeight();
 
     SDL_RendererInfo rinfo;
-    SDL_GetRendererInfo( _wimpl->_renderer, &rinfo );
+    SDL_GetRendererInfo( m_wimpl->renderer, &rinfo );
     info.accel = ( ( rinfo.flags & SDL_RENDERER_ACCELERATED ) != 0 );
 }
 
 int Window::getWidth() const noexcept
 {
     int w;
-    SDL_GetWindowSize( _wimpl->_window, &w, nullptr );
+    SDL_GetWindowSize( m_wimpl->window, &w, nullptr );
     return w;
 }
 
 int Window::getHeight() const noexcept
 {
     int h;
-    SDL_GetWindowSize( _wimpl->_window, nullptr, &h );
+    SDL_GetWindowSize( m_wimpl->window, nullptr, &h );
     return h;
 }
 
 int Window::getLogicalWidth() const noexcept
 {
     int w;
-    SDL_RenderGetLogicalSize( _wimpl->_renderer, &w, nullptr );
+    SDL_RenderGetLogicalSize( m_wimpl->renderer, &w, nullptr );
     return w == 0 ? getWidth() : w;
 }
 
 int Window::getLogicalHeight() const noexcept
 {
     int h;
-    SDL_RenderGetLogicalSize( _wimpl->_renderer, nullptr, &h );
+    SDL_RenderGetLogicalSize( m_wimpl->renderer, nullptr, &h );
     return h == 0 ? getHeight() : h;
 }
 
 void Window::glGetDrawableSize( int& w, int& h ) const noexcept
 {
-    SDL_GL_GetDrawableSize( _wimpl->_window, &w, &h );
+    SDL_GL_GetDrawableSize( m_wimpl->window, &w, &h );
 }
 
 bool Window::glMakeCurrent() noexcept
 {
-    if ( _wimpl->_glcontext == nullptr )
+    if ( m_wimpl->glcontext == nullptr )
     {
         lx::setError( "The current window is not an OpenGL window" );
         return false;
     }
 
-    return SDL_GL_MakeCurrent( _wimpl->_window, _wimpl->_glcontext ) == 0;
+    return SDL_GL_MakeCurrent( m_wimpl->window, m_wimpl->glcontext ) == 0;
 }
 
 Window::~Window()
 {
-    _wimpl.reset();
+    m_wimpl.reset();
 }
 
 }   // Win

@@ -85,7 +85,7 @@ struct WinFlags
     bool input_grabbed = false;         /**< Window has grabbed input focus             */
     bool input_focus = false;           /**< Window has input focus                     */
     bool mouse_focus = false;           /**< Window has mouse focus                     */
-    bool high_dpi = false;               /**< Window should be created in high-DPI mode if supported     */
+    bool high_dpi = false;              /**< Window should be created in high-DPI mode if supported     */
     bool mouse_capture = false;         /**< Window has mouse captured (unrelated to ::input_grabbed)   */
     bool x11_top = false;               /**< Window should always be above others           */
     bool x11_skip_taskbar = false;      /**< Window should not be added to the taskbar      */
@@ -114,17 +114,17 @@ enum class ScreenMode
 */
 enum class BlendMode
 {
-    BLENDMODE_NONE,     /**< no blending dstRGBA = srcRGBA */
+    BLENDMODE_NONE,     /**< no blending - dstRGBA = srcRGBA */
 
     BLENDMODE_BLEND,    /**< alpha blending
-                                dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
-                                dstA = srcA + (dstA * (1-srcA)) */
+                                - dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                                - dstA = srcA + (dstA * (1-srcA)) */
     BLENDMODE_ADD,      /**< additive blending
-                                dstRGB = (srcRGB * srcA) + dstRGB
-                                dstA = dstA */
+                                - dstRGB = (srcRGB * srcA) + dstRGB
+                                - dstA = dstA */
     BLENDMODE_MOD       /**< colour modulate
-                                dstRGB = srcRGB * dstRGB
-                                dstA = dstA */
+                                - dstRGB = srcRGB * dstRGB
+                                - dstA = dstA */
 };
 
 /**
@@ -141,7 +141,7 @@ struct WindowInfo final
     int h  = 0;                 /**< Window Height                  */
     int lw = 0;                 /**< Independant device width       */
     int lh = 0;                 /**< Independant device height      */
-    WinFlags wflags = {};        /**< Flags                          */
+    WinFlags wflags = {};       /**< Flags                          */
     bool accel = false;         /**< Hardware acceleration          */
 
 };
@@ -206,12 +206,12 @@ class Window final
     friend class lx::Graphics::TextTexture;
     friend class lx::TrueTypeFont::Font;
 
-    std::unique_ptr<Window_> _wimpl;
+    std::unique_ptr<Window_> m_wimpl;
 
     Window( Window& w ) = delete;
     Window& operator =( Window& w ) = delete;
 
-    void * getRenderingSys() const noexcept;
+    void * getRenderingSys_() const noexcept;
 
 public:
 
@@ -285,15 +285,15 @@ public:
     *   @param [in] mode The blend mode to use for blending:
     *   |        Value        |                      Meaning                     |
     *   |         ---         |                        ---                       |
-    *   |  BLENDMODE_NONE  | no blending                                      |
+    *   |  BLENDMODE_NONE     | no blending                                      |
     *   |                     | destRGBA = srcRGBA                               |
-    *   |  BLENDMODE_BLEND | alpha blending                                   |
+    *   |  BLENDMODE_BLEND    | alpha blending                                   |
     *   |                     | destRGB = (srcRGB * srcA) + (destRGB * (1-srcA)) |
     *   |                     | destA = srcA + (destA * (1-srcA))                |
-    *   |  BLENDMODE_ADD   | additive blending                                |
+    *   |  BLENDMODE_ADD      | additive blending                                |
     *   |                     | destRGB = (srcRGB * srcA) + destRGB              |
     *   |                     | destA = destA                                    |
-    *   |  BLENDMODE_MOD   | colour modulate                                  |
+    *   |  BLENDMODE_MOD      | colour modulate                                  |
     *   |                     | destRGB = srcRGB * destRGB                       |
     *   |                     | destA = destA                                    |
     */

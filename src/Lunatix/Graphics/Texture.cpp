@@ -131,7 +131,7 @@ Texture::Texture( const std::string& filename, lx::Win::Window& w,
                   PixelFormat format )
     : _texture( nullptr ), _win( w ), _format( format )
 {
-    _texture = loadTexture_( filename, format, render( w.getRenderingSys() ) );
+    _texture = loadTexture_( filename, format, render( w.getRenderingSys_() ) );
 
     if ( _texture == nullptr )
         throw ImageException( "Texture — Cannot load " + filename );
@@ -192,7 +192,7 @@ void Sprite::draw() noexcept
 {
     const SDL_Rect SRC_RECT = sdl_rect_( m_area );
     const SDL_Rect * SRC_AREA = isNull_( SRC_RECT ) ? nullptr : &SRC_RECT;
-    SDL_RenderCopy( render( _win.getRenderingSys() ), _texture, SRC_AREA, nullptr );
+    SDL_RenderCopy( render( _win.getRenderingSys_() ), _texture, SRC_AREA, nullptr );
 }
 
 void Sprite::draw( const ImgRect& box ) noexcept
@@ -212,7 +212,7 @@ void Sprite::draw( const ImgRect& box, const double angle, const MirrorEffect Mi
     const SDL_Rect SRC_RECT = sdl_rect_( m_area );
     const SDL_Rect * SRC_AREA = isNull_( SRC_RECT ) ? nullptr : &SRC_RECT;
 
-    SDL_RenderCopyEx( render( _win.getRenderingSys() ), _texture, SRC_AREA, &SDL_RECT,
+    SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture, SRC_AREA, &SDL_RECT,
                       ( -radianToDegree( angle ) ), nullptr, shortToFlip_( MirrorEffect ) );
 }
 
@@ -290,7 +290,7 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
         const SDL_Rect SDL_RECT = sdl_rect_( box );
         const SDL_Rect COORD = sdl_rect_( m_coordinates[m_frame] );
 
-        SDL_RenderCopyEx( render( _win.getRenderingSys() ), _texture,
+        SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture,
                           &COORD, &SDL_RECT, ( -radianToDegree( angle ) ),
                           nullptr, shortToFlip_( MirrorEffect ) );
     }
@@ -627,7 +627,7 @@ BufferedImage& BufferedImage::convertNegative() noexcept
 
 Sprite * BufferedImage::generateSprite( lx::Win::Window& w, const ImgRect& area ) const
 {
-    return new Sprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ),
+    return new Sprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys_() ),
                        m_surface ), w, m_filename, area );
 }
 
@@ -635,7 +635,7 @@ AnimatedSprite * BufferedImage::
 generateAnimatedSprite( lx::Win::Window& w, const std::vector<ImgRect>& coord,
                         const uint32_t delay, bool loop ) const
 {
-    return new AnimatedSprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), m_surface ),
+    return new AnimatedSprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys_() ), m_surface ),
                                w, coord, delay, loop, m_filename );
 }
 
@@ -686,7 +686,7 @@ StreamingTexture::StreamingTexture( lx::Win::Window& w, PixelFormat format )
     else
     {
         m_screen  = SDL_CreateRGBSurface( 0, width, height, bpp, r, g, b, a );
-        _texture = SDL_CreateTexture( render( w.getRenderingSys() ), u32( _format ),
+        _texture = SDL_CreateTexture( render( w.getRenderingSys_() ), u32( _format ),
                                       SDL_TEXTUREACCESS_STREAMING, width, height );
     }
 }
@@ -715,7 +715,7 @@ void StreamingTexture::update() noexcept
 
 void StreamingTexture::draw() noexcept
 {
-    SDL_RenderCopy( render( _win.getRenderingSys() ), _texture, nullptr, nullptr );
+    SDL_RenderCopy( render( _win.getRenderingSys_() ), _texture, nullptr, nullptr );
 }
 
 StreamingTexture::~StreamingTexture()
@@ -778,7 +778,7 @@ void TextTexture::draw( const double angle ) noexcept
 void TextTexture::draw( const double angle, const MirrorEffect MirrorEffect ) noexcept
 {
     const SDL_Rect DIM = sdl_rect_( _dimension );
-    SDL_RenderCopyEx( render( _win.getRenderingSys() ), _texture, nullptr,
+    SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture, nullptr,
                       &DIM, ( -radianToDegree( angle ) ), nullptr,
                       shortToFlip_( MirrorEffect ) );
 }

@@ -233,7 +233,7 @@ SDL_Texture * Font::drawSolidText_( const UTF8string& text, unsigned int size,
     if ( s == nullptr )
         return nullptr;
 
-    SDL_Texture * t = SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), s );
+    SDL_Texture * t = SDL_CreateTextureFromSurface( render( w.getRenderingSys_() ), s );
     SDL_FreeSurface( s );
 
     return t;
@@ -261,7 +261,7 @@ SDL_Texture * Font::drawShadedText_( const UTF8string& text, unsigned int size,
     if ( s == nullptr )
         return nullptr;
 
-    SDL_Texture * t = SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), s );
+    SDL_Texture * t = SDL_CreateTextureFromSurface( render( w.getRenderingSys_() ), s );
     SDL_FreeSurface( s );
 
     return t;
@@ -289,7 +289,7 @@ SDL_Texture * Font::drawBlendedText_( const UTF8string& text, unsigned int size,
     if ( s == nullptr )
         return nullptr;
 
-    SDL_Texture * t = SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), s );
+    SDL_Texture * t = SDL_CreateTextureFromSurface( render( w.getRenderingSys_() ), s );
     SDL_FreeSurface( s );
 
     return t;
