@@ -1,0 +1,48 @@
+
+build-sdl2.0.5:
+    before_script:
+    - .gitlab-ci-gumi/.gitlab-ci.sh
+    - .gitlab-ci-gumi/.gitlab-ci-sdl2.0.5.sh
+
+    script:
+    - git clone https://github.com/Gumichan01/lunatix.git
+    - cd lunatix/
+    - make lunatix-demo
+    - make test
+    - make
+
+build-sdl2.0.6:
+    before_script:
+    - .gitlab-ci-gumi/.gitlab-ci.sh
+    - .gitlab-ci-gumi/.gitlab-ci-sdl2.0.6.sh
+
+    script:
+    - git clone https://github.com/Gumichan01/lunatix.git
+    - cd lunatix/
+    - make lunatix-demo
+    - make test
+    - make
+
+build-sdl2.0.7:
+    before_script:
+    - .gitlab-ci-gumi/.gitlab-ci.sh
+    - .gitlab-ci-gumi/.gitlab-ci-sdl2.0.7.sh
+
+    script:
+    - git clone https://github.com/Gumichan01/lunatix.git
+    - cd lunatix/
+    - make lunatix-demo
+    - make test
+    - make
+
+build-sdl2.0.8:
+    before_script:
+    - .gitlab-ci-gumi/.gitlab-ci.sh
+    - .gitlab-ci-gumi/.gitlab-ci-sdl2.0.8.sh
+
+    script:
+    - git clone https://github.com/Gumichan01/lunatix.git
+    - cd lunatix/
+    - make lunatix-demo
+    - make test
+    - make
