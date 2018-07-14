@@ -158,7 +158,7 @@ void loadFileConfig_( InternalConfig& config ) noexcept
 
     if ( f.is_open() )
     {
-        _conf = {0, 0, 0, 0, 0, 0};
+        _conf = { 0, 0, 0, 0, 0, 0 };
         readFile_( f, config );
         f.close();
     }

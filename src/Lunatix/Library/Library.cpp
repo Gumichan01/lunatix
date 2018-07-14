@@ -37,6 +37,8 @@ const int MIX_AUDIO_FREQUENCY = 44100;   /**< The default audio frequency       
 const int MIX_STEREO_SOUND = 2;          /**< The stereo variable for the mix namespace  */
 const int MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mix namespace */
 
+const std::string GAMECONTROLLER_DB( "config/gamecontrollerdb.txt" );
+
 bool initAudio() noexcept
 {
     if ( Mix_Init( MIX_INIT_OGG | MIX_INIT_FLAC | MIX_INIT_MP3 ) == 0 )
@@ -75,11 +77,8 @@ bool loadMainSystem()
 
 void loadGamepadSubSystem()
 {
-    // Load mappings from another configuration file
-    const std::string mappingFile( "config/gamecontrollerdb.txt" );
-
     if ( SDL_WasInit( SDL_INIT_GAMECONTROLLER ) != 0 )
-        SDL_GameControllerAddMappingsFromFile( mappingFile.c_str() );
+        SDL_GameControllerAddMappingsFromFile( GAMECONTROLLER_DB.c_str() );
 }
 
 bool loadImgSubSystem()
