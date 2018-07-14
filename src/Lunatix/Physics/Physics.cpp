@@ -202,10 +202,10 @@ bool collisionSegCircle( const Circle& circle, const Segment& S ) noexcept
     return collisionLineCircle( circle, Line{ S.p, V } );
 }
 
-bool collisionLineCircle( const Circle& circle, const Line& L ) noexcept
+bool collisionLineCircle( const Circle& circle, const Line& l ) noexcept
 {
-    const FloatPosition A = L.o;
-    const FloatPosition B = { L.o.x + L.v.vx, L.o.y + L.v.vy };
+    const FloatPosition A = l.o;
+    const FloatPosition B = { l.o.x + l.v.vx, l.o.y + l.v.vy };
 
     if ( collisionPointCircle( A, circle ) || collisionPointCircle( B, circle ) )
         return true;

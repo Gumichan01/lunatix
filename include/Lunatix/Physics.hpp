@@ -135,24 +135,24 @@ bool collisionCircle( const Circle& circle1, const Circle& circle2 ) noexcept;
 *   Check the collision between a circle and the [AB] segment
 *
 *   @param [in] circle The circle
-*   @param [in] S The segment
+*   @param [in] s The segment
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
 bool collisionSegCircle( const Circle& circle, const Segment& s ) noexcept;
 /**
-*   @fn bool collisionLineCircle(const Circle& circle, const Line& L)
+*   @fn bool collisionLineCircle(const Circle& circle, const Line& l)
 *
 *   Check the collision between a circle and the [AB] segment
 *
 *   @param [in] circle The circle
-*   @param [in] s The segment
+*   @param [in] l The line
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionLineCircle( const Circle& circle, const Line& L ) noexcept;
+bool collisionLineCircle( const Circle& circle, const Line& l ) noexcept;
 /**
 *   @fn bool collisionCircleBox(const Circle& circle, const FloatingBox& box) noexcept
 *
