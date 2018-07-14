@@ -63,7 +63,7 @@ ImgCoord toPixelPosition( const lx::Physics::FloatPosition& p ) noexcept;
 */
 struct ImgRect final
 {
-    ImgCoord p;  /**< Position   */
+    ImgCoord p;     /**< Position   */
     int w, h;       /**< Dimension  */
 };
 

@@ -65,8 +65,8 @@ using GLattr = SDL_GLattr;
 */
 using GLContext = SDL_GLContext;
 
-const int MAJOR_VERSION = 3;  /**< Major version of OpenGL supported by the library */
-const int MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the library */
+const int MAJOR_VERSION = 3;    /**< Major version of OpenGL supported by the library */
+const int MINOR_VERSION = 1;    /**< Minor version of OpenGL supported by the library */
 
 /**
 *   @enum GL_SwapInterval
@@ -74,10 +74,10 @@ const int MINOR_VERSION = 1;  /**< Minor version of OpenGL supported by the libr
 */
 enum class GL_SwapInterval
 {
-    NO_VSYNC      =  0,     /**< No VSync               */
-    VSYNC         =  1,     /**< VSync                  */
-    TEARING       = -1,     /**< Late swap Tearing      */
-    NOT_SUPPORTED = -2      /**< Unsuported operation   */
+    NO_VSYNC      =  0,         /**< No VSync               */
+    VSYNC         =  1,         /**< VSync                  */
+    TEARING       = -1,         /**< Late swap Tearing      */
+    NOT_SUPPORTED = -2          /**< Unsuported operation   */
 };
 
 /**
