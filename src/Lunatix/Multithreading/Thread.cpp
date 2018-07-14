@@ -27,17 +27,17 @@ size_t getCurrentThreadID() noexcept
 
 bool Thread::joinable() const noexcept
 {
-    return _thread.joinable();
+    return m_thread.joinable();
 }
 
 void Thread::join()
 {
-    _thread.join();
+    m_thread.join();
 }
 
 size_t Thread::getID() const noexcept
 {
-    return std::hash<std::thread::id>()( _thread.get_id() );
+    return std::hash<std::thread::id>()( m_thread.get_id() );
 }
 
 }   // Multithreading

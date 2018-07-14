@@ -59,7 +59,7 @@ size_t getCurrentThreadID() noexcept;
 */
 class Thread final
 {
-    std::thread _thread;
+    std::thread m_thread;
 
     Thread() = delete;
     Thread( const Thread& ) = delete;
@@ -122,7 +122,7 @@ public:
 template <class ReturnValue>
 class ASyncTask final
 {
-    std::future<ReturnValue> _future;
+    std::future<ReturnValue> m_future;
 
     ASyncTask() = delete;
     ASyncTask( const ASyncTask& ) = delete;

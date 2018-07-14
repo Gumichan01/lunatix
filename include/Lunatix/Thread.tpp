@@ -11,20 +11,20 @@
 */
 
 template <class Fun, class... Args >
-Thread::Thread(bool detach, Fun&& fun, Args&&... args)
-    : _thread(fun, args...)
+Thread::Thread( bool detach, Fun&& fun, Args&& ... args )
+    : m_thread( fun, args... )
 {
-    if(detach)
-        _thread.detach();
+    if ( detach )
+        m_thread.detach();
 }
 
 template <class ReturnValue>
 template <class Fun, class... Args>
-ASyncTask<ReturnValue>::ASyncTask(Fun&& fun, Args&&... args)
-    : _future(std::async(std::launch::async, fun, args...)) {}
+ASyncTask<ReturnValue>::ASyncTask( Fun&& fun, Args&& ... args )
+    : m_future( std::async( std::launch::async, fun, args... ) ) {}
 
 template <class ReturnValue>
 ReturnValue ASyncTask<ReturnValue>::getResult()
 {
-    return _future.get();
+    return m_future.get();
 }
