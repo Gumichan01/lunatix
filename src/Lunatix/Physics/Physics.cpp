@@ -87,9 +87,9 @@ bool collisionPolySAT( const lx::Physics::Polygon& poly1,
 bool approximativeCollisionPoly( const lx::Physics::Polygon& poly1,
                                  const lx::Physics::Polygon& poly2 )
 {
-    const lx::Physics::FloatingBox& box1 = poly1.getEnclosingBox();
-    const lx::Physics::FloatingBox& box2 = poly2.getEnclosingBox();
-    return lx::Physics::collisionBox( box1, box2 );
+    const lx::Physics::FloatingBox& BOX1 = poly1.getEnclosingBox();
+    const lx::Physics::FloatingBox& BOX2 = poly2.getEnclosingBox();
+    return lx::Physics::collisionBox( BOX1, BOX2 );
 }
 
 /*
@@ -139,9 +139,9 @@ bool intersectSeg_( const lx::Physics::FloatPosition& A,
                     const lx::Physics::FloatPosition& C,
                     const lx::Physics::FloatPosition& D ) noexcept
 {
-    lx::Physics::Vector2D AB{B.x - A.x, B.y - A.y};
-    lx::Physics::Vector2D AC{C.x - A.x, C.y - A.y};
-    lx::Physics::Vector2D AD{D.x - A.x, D.y - A.y};
+    const lx::Physics::Vector2D AB = { B.x - A.x, B.y - A.y };
+    const lx::Physics::Vector2D AC = { C.x - A.x, C.y - A.y };
+    const lx::Physics::Vector2D AD = { D.x - A.x, D.y - A.y };
 
     return ( vector_product( AB, AD ) * vector_product( AB, AC ) ) <= FNIL;
 }
@@ -198,22 +198,22 @@ bool collisionCircle( const Circle& circle1, const Circle& circle2 ) noexcept
 
 bool collisionSegCircle( const Circle& circle, const Segment& S ) noexcept
 {
-    const Vector2D V{ S.q.x - S.p.x, S.q.y - S.p.y };
+    const Vector2D V = { S.q.x - S.p.x, S.q.y - S.p.y };
     return collisionLineCircle( circle, Line{ S.p, V } );
 }
 
 bool collisionLineCircle( const Circle& circle, const Line& L ) noexcept
 {
     const FloatPosition A = L.o;
-    const FloatPosition B{L.o.x + L.v.vx, L.o.y + L.v.vy};
+    const FloatPosition B = { L.o.x + L.v.vx, L.o.y + L.v.vy };
 
     if ( collisionPointCircle( A, circle ) || collisionPointCircle( B, circle ) )
         return true;
 
     const FloatPosition O = circle.center;
-    Vector2D AB{B.x - A.x, B.y - A.y};
-    Vector2D AO{O.x - A.x, O.y - A.y};
-    Vector2D BO{O.x - B.x, O.y - B.y};
+    const Vector2D AB = {B.x - A.x, B.y - A.y};
+    const Vector2D AO = {O.x - A.x, O.y - A.y};
+    const Vector2D BO = {O.x - B.x, O.y - B.y};
 
     // Using the opposite value of vx for scal2
     const Float& scal_ab_ao  = scalar_product( AB, AO );
@@ -239,9 +239,9 @@ bool collisionLineCircle( const Circle& circle, const Line& L ) noexcept
 
 bool collisionCircleBox( const Circle& circle, const FloatingBox& box ) noexcept
 {
-    // Check if the center of the circle is in the AABB
     if ( collisionPointBox( circle.center, box ) )
         return true;
+
     const Float BOX_W = fbox<decltype( box.w )>( box.w );
     const Float BOX_H = fbox<decltype( box.h )>( box.h );
     const Line sides[] =
@@ -271,25 +271,25 @@ bool collisionCircleBox( const Circle& circle, const FloatingBox& box ) noexcept
 }
 
 
-bool intersectSegment( const Segment& S, const Segment& T ) noexcept
+bool intersectSegment( const Segment& s, const Segment& T ) noexcept
 {
-    return intersectSeg_( S.p, S.q, T.p, T.q ) && intersectSeg_( T.p, T.q, S.p, S.q );
+    return intersectSeg_( s.p, s.q, T.p, T.q ) && intersectSeg_( T.p, T.q, s.p, s.q );
 }
 
-bool intersectLine( const Line& L1, const Line& L2 ) noexcept
+bool intersectLine( const Line& l1, const Line& l2 ) noexcept
 {
-    return !L1.isParralelWith( L2 ) && !L2.isParralelWith( L1 );
+    return !l1.isParralelWith( l2 ) && !l2.isParralelWith( l1 );
 }
 
 
-bool collisionPointPoly( const FloatPosition& P, const Polygon& poly )
+bool collisionPointPoly( const FloatPosition& p, const Polygon& poly )
 {
-    const int v = 10000;
+    const int V = 10000;
     const unsigned long N = poly.numberOfEdges();
     const float RIX = lx::Random::fxrand( 0.0f, 100.0f );
     const float RIY = lx::Random::fxrand( 0.0f, 100.0f );
 
-    FloatPosition I{v + RIX, v + RIY};
+    FloatPosition I{ V + RIX, V + RIY };
     unsigned long nb_intersections = 0;
 
     for ( unsigned long i = 0UL; i < N; ++i )
@@ -297,10 +297,10 @@ bool collisionPointPoly( const FloatPosition& P, const Polygon& poly )
         const FloatPosition& A = poly.getPoint( i );
         const FloatPosition& B = poly.getPoint( ( i == N - 1UL ) ? 0UL : i + 1UL );
 
-        if ( P == A )
+        if ( p == A )
             return true;
 
-        if ( intersectSegment( Segment{P, I}, Segment{A, B} ) )
+        if ( intersectSegment( Segment{ p, I }, Segment{ A, B } ) )
             nb_intersections++;
     }
 
@@ -308,12 +308,12 @@ bool collisionPointPoly( const FloatPosition& P, const Polygon& poly )
 }
 
 
-bool collisionCirclePoly( const Circle& C, const Polygon& poly )
+bool collisionCirclePoly( const Circle& c, const Polygon& poly )
 {
-    const FloatPosition P = C.center;
+    const FloatPosition FOLAT_POS = c.center;
     const unsigned long N = poly.numberOfEdges();
 
-    if ( collisionPointPoly( P, poly ) )
+    if ( collisionPointPoly( FOLAT_POS, poly ) )
         return true;
 
     for ( unsigned long i = 0UL; i < N; ++i )
@@ -321,7 +321,7 @@ bool collisionCirclePoly( const Circle& C, const Polygon& poly )
         const FloatPosition& A = poly.getPoint( i );
         const FloatPosition& B = poly.getPoint( ( i == N - 1UL ) ? 0UL : i + 1UL );
 
-        if ( collisionSegCircle( C, Segment{A, B} ) )
+        if ( collisionSegCircle( c, Segment{A, B} ) )
             return true;
     }
 
@@ -384,10 +384,10 @@ bool collisionPoly( const Polygon& poly1, const Polygon& poly2 )
 }
 
 
-void movePoint( FloatPosition& P, const Vector2D& v ) noexcept
+void movePoint( FloatPosition& p, const Vector2D& v ) noexcept
 {
-    P.x += v.vx;
-    P.y += v.vy;
+    p.x += v.vx;
+    p.y += v.vy;
 }
 
 void moveBox( FloatingBox& box, const Vector2D& v ) noexcept
@@ -396,9 +396,9 @@ void moveBox( FloatingBox& box, const Vector2D& v ) noexcept
     box.p.y += v.vy;
 }
 
-void moveCircle( Circle& C, const Vector2D& v ) noexcept
+void moveCircle( Circle& c, const Vector2D& v ) noexcept
 {
-    movePoint( C.center, v );
+    movePoint( c.center, v );
 }
 
 void movePoly( Polygon& poly, const Vector2D& v ) noexcept
@@ -406,24 +406,24 @@ void movePoly( Polygon& poly, const Vector2D& v ) noexcept
     poly.move( v );
 }
 
-void movePointTo( FloatPosition& P, const FloatPosition& dest ) noexcept
+void movePointTo( FloatPosition& p, const FloatPosition& dest ) noexcept
 {
-    P = dest;
+    p = dest;
 }
 
-void moveBoxTo( FloatingBox& box, const FloatPosition& P ) noexcept
+void moveBoxTo( FloatingBox& box, const FloatPosition& p ) noexcept
 {
-    box.p = P;
+    box.p = p;
 }
 
-void moveCircleTo( Circle& C, const FloatPosition& P ) noexcept
+void moveCircleTo( Circle& c, const FloatPosition& p ) noexcept
 {
-    movePointTo( C.center, P );
+    movePointTo( c.center, p );
 }
 
-void movePolyTo( Polygon& poly, const FloatPosition& P ) noexcept
+void movePolyTo( Polygon& poly, const FloatPosition& p ) noexcept
 {
-    poly.moveTo( P );
+    poly.moveTo( p );
 }
 
 }   // Physics

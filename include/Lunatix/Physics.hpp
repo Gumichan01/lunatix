@@ -71,13 +71,13 @@ Float euclide_square_distance( const FloatPosition& p1, const FloatPosition& p2 
 Float euclide_distance( const FloatPosition& p1, const FloatPosition& p2 ) noexcept;
 
 /**
-*   @fn Float segLength(const Segment& S) noexcept
+*   @fn Float segLength(const Segment& s) noexcept
 *
-*   @param [in] S The segment
+*   @param [in] s The segment
 *
 *   @return The length of the segment (the euclidean distance betwwen its two points)
 */
-Float segLength( const Segment& S ) noexcept;
+Float segLength( const Segment& s ) noexcept;
 
 /* Collision detection */
 
@@ -130,7 +130,7 @@ bool collisionBox( const FloatingBox& rect1, const FloatingBox& rect2 ) noexcept
 */
 bool collisionCircle( const Circle& circle1, const Circle& circle2 ) noexcept;
 /**
-*   @fn bool collisionSegCircle(const Circle& circle, const Segment& S) noexcept
+*   @fn bool collisionSegCircle(const Circle& circle, const Segment& s) noexcept
 *
 *   Check the collision between a circle and the [AB] segment
 *
@@ -140,14 +140,14 @@ bool collisionCircle( const Circle& circle1, const Circle& circle2 ) noexcept;
 *   @return TRUE if there is a collision, FALSE otherwise
 *
 */
-bool collisionSegCircle( const Circle& circle, const Segment& S ) noexcept;
+bool collisionSegCircle( const Circle& circle, const Segment& s ) noexcept;
 /**
 *   @fn bool collisionLineCircle(const Circle& circle, const Line& L)
 *
 *   Check the collision between a circle and the [AB] segment
 *
 *   @param [in] circle The circle
-*   @param [in] L The line
+*   @param [in] s The segment
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 *
@@ -167,48 +167,48 @@ bool collisionLineCircle( const Circle& circle, const Line& L ) noexcept;
 bool collisionCircleBox( const Circle& circle, const FloatingBox& box ) noexcept;
 
 /**
-*   @fn bool intersectSegment(const Segment& S, const Segment& T) noexcept
+*   @fn bool intersectSegment(const Segment& s, const Segment& t) noexcept
 *
 *   Test the intersection between 2 segments
 *
-*   @param [in] S The first segment
-*   @param [in] T The second segment
+*   @param [in] s The first segment
+*   @param [in] t The second segment
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
-bool intersectSegment( const Segment& S, const Segment& T ) noexcept;
+bool intersectSegment( const Segment& s, const Segment& t ) noexcept;
 /**
-*   @fn bool intersectLine(const Line& L1, const Line& L2)
+*   @fn bool intersectLine(const Line& l1, const Line& l2)
 *
-*   @param [in] L1 the first line
-*   @param [in] L2 the second line
+*   @param [in] l1 the first line
+*   @param [in] l2 the second line
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 *
 *   @note Actually, it just checks if the two lines are not parralel
 */
-bool intersectLine( const Line& L1, const Line& L2 ) noexcept;
+bool intersectLine( const Line& l1, const Line& l2 ) noexcept;
 
 /**
-*   @fn bool collisionPointPoly(const FloatPosition& P, const Polygon& poly)
+*   @fn bool collisionPointPoly(const FloatPosition& p, const Polygon& poly)
 *
 *   Check if a point is in a polygon
 *
-*   @param [in] P The point to test
+*   @param [in] p The point to test
 *   @param [in] poly The polygon
 *
 *   @return TRUE if there is an intersection, FALSE otherwise
 */
-bool collisionPointPoly( const FloatPosition& P, const Polygon& poly );
+bool collisionPointPoly( const FloatPosition& p, const Polygon& poly );
 /**
-*   @fn bool collisionCirclePoly(const Circle& C, const Polygon& poly)
+*   @fn bool collisionCirclePoly(const Circle& c, const Polygon& poly)
 *
-*   @param [in] C The circular hitbox
+*   @param [in] c The circular hitbox
 *   @param [in] poly The polygon
 *
 *   @return TRUE if there is a collision, FALSE otherwise
 */
-bool collisionCirclePoly( const Circle& C, const Polygon& poly );
+bool collisionCirclePoly( const Circle& c, const Polygon& poly );
 /**
 *   @fn bool collisionBoxPoly(const FloatingBox& box, const Polygon& poly)
 *
@@ -232,14 +232,14 @@ bool collisionBoxPoly( const FloatingBox& box, const Polygon& poly );
 bool collisionPoly( const Polygon& poly1, const Polygon& poly2 );
 
 /**
-*   @fn void movePoint(FloatPosition& P, const Vector2D& v) noexcept
+*   @fn void movePoint(FloatPosition& p, const Vector2D& v) noexcept
 *
 *   Move a point to a direction using the vector
 *
-*   @param [in] P The point to move
+*   @param [in] p The point to move
 *   @param [in] v The vector that indicates the direction
 */
-void movePoint( FloatPosition& P, const Vector2D& v ) noexcept;
+void movePoint( FloatPosition& p, const Vector2D& v ) noexcept;
 /**
 *   @fn void moveBox(FloatingBox& box, const Vector2D& v) noexcept
 *
@@ -250,14 +250,14 @@ void movePoint( FloatPosition& P, const Vector2D& v ) noexcept;
 */
 void moveBox( FloatingBox& box, const Vector2D& v ) noexcept;
 /**
-*   @fn void moveCircle(Circle& C, const Vector2D& v) noexcept
+*   @fn void moveCircle(Circle& c, const Vector2D& v) noexcept
 *
 *   Move the circle to a direction using the vector
 *
-*   @param [in] C The circle to move
+*   @param [in] c The circle to move
 *   @param [in] v The vector that indicates the direction
 */
-void moveCircle( Circle& C, const Vector2D& v ) noexcept;
+void moveCircle( Circle& c, const Vector2D& v ) noexcept;
 /**
 *   @fn void movePoly(Polygon& poly, const Vector2D& v) noexcept
 *
@@ -269,41 +269,41 @@ void moveCircle( Circle& C, const Vector2D& v ) noexcept;
 void movePoly( Polygon& poly, const Vector2D& v ) noexcept;
 
 /**
-*   @fn void movePointTo(FloatPosition& P, const FloatPosition& dest) noexcept
+*   @fn void movePointTo(FloatPosition& p, const FloatPosition& dest) noexcept
 *
 *   Move a point to an absolute position
 *
-*   @param [in] P The point to move
+*   @param [in] p The point to move
 *   @param [in] dest The position
 */
-void movePointTo( FloatPosition& P, const FloatPosition& dest ) noexcept;
+void movePointTo( FloatPosition& p, const FloatPosition& dest ) noexcept;
 /**
-*   @fn void moveBoxTo(FloatingBox& box, const FloatPosition& P) noexcept
+*   @fn void moveBoxTo(FloatingBox& box, const FloatPosition& p) noexcept
 *
 *   Move an AABB to an absolute position
 *
 *   @param [in] box The AABB to move
-*   @param [in] P The new position
+*   @param [in] p The new position
 */
-void moveBoxTo( FloatingBox& box, const FloatPosition& P ) noexcept;
+void moveBoxTo( FloatingBox& box, const FloatPosition& p ) noexcept;
 /**
-*   @fn void moveCircleTo(Circle& C, const FloatPosition& P) noexcept
+*   @fn void moveCircleTo(Circle& c, const FloatPosition& p) noexcept
 *
 *   Move a circle to an absolute position
 *
-*   @param [in] C The circle to move
-*   @param [in] P The new position
+*   @param [in] c The circle to move
+*   @param [in] p The new position
 */
-void moveCircleTo( Circle& C, const FloatPosition& P ) noexcept;
+void moveCircleTo( Circle& c, const FloatPosition& p ) noexcept;
 /**
-*   @fn void movePolyTo(Polygon& poly, const FloatPosition& P) noexcept
+*   @fn void movePolyTo(Polygon& poly, const FloatPosition& p) noexcept
 *
 *   Move a polygon to an absolute position
 *
 *   @param [in] poly The polygon to move
-*   @param [in] P The new position
+*   @param [in] p The new position
 */
-void movePolyTo( Polygon& poly, const FloatPosition& P ) noexcept;
+void movePolyTo( Polygon& poly, const FloatPosition& p ) noexcept;
 
 }   // Physics
 
