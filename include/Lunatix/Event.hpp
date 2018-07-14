@@ -387,7 +387,7 @@ struct KeyboardState final
 */
 class EventHandler final
 {
-    SDL_Event * event;
+    SDL_Event * m_event;
 
     EventHandler( const EventHandler& ) = delete;
     EventHandler& operator =( const EventHandler& ) = delete;

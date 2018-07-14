@@ -285,32 +285,32 @@ uint32_t utype = UTYPE_ERR;
 
 // Event
 
-EventHandler::EventHandler() noexcept: event( new SDL_Event() )
+EventHandler::EventHandler() noexcept: m_event( new SDL_Event() )
 {
-    SDL_zerop( event );
+    SDL_zerop( m_event );
 }
 
 EventHandler::~EventHandler()
 {
-    delete event;
+    delete m_event;
 }
 
 
 bool EventHandler::pollEvent() noexcept
 {
-    return SDL_PollEvent( event ) == 1;
+    return SDL_PollEvent( m_event ) == 1;
 }
 
 
 bool EventHandler::waitEvent() noexcept
 {
-    return SDL_WaitEvent( event ) == 1;
+    return SDL_WaitEvent( m_event ) == 1;
 }
 
 
 bool EventHandler::waitEventTimeout( int timeout ) noexcept
 {
-    return SDL_WaitEventTimeout( event, timeout ) == 1;
+    return SDL_WaitEventTimeout( m_event, timeout ) == 1;
 }
 
 
@@ -347,7 +347,7 @@ void EventHandler::ignoreEvent( const EventType ty ) noexcept
 uint32_t EventHandler::getWindowID() const noexcept
 {
     uint32_t id = 0;
-    const SDL_Event& EV = ( *event );
+    const SDL_Event& EV = ( *m_event );
 
     switch ( EV.type )
     {
@@ -396,7 +396,7 @@ uint32_t EventHandler::getWindowID() const noexcept
 EventType EventHandler::getEventType() const noexcept
 {
     EventType ty;
-    const SDL_Event& EV = ( *event );
+    const SDL_Event& EV = ( *m_event );
 
     switch ( EV.type )
     {
@@ -501,18 +501,18 @@ const KeyboardState EventHandler::getKeyboardState() noexcept
 
 KeyCode EventHandler::getKeyCode() const noexcept
 {
-    return ( *event ).key.keysym.sym;
+    return ( *m_event ).key.keysym.sym;
 }
 
 ScanCode EventHandler::getScanCode() const noexcept
 {
-    return ( *event ).key.keysym.scancode;
+    return ( *m_event ).key.keysym.scancode;
 }
 
 GamepadID EventHandler::getGamepadID() const noexcept
 {
     GamepadID id;
-    const SDL_Event& EVENT = ( *event );
+    const SDL_Event& EVENT = ( *m_event );
 
     switch ( EVENT.type )
     {
@@ -547,21 +547,21 @@ GamepadID EventHandler::getGamepadID() const noexcept
 
 const GAxis EventHandler::getAxis() const noexcept
 {
-    const SDL_ControllerAxisEvent AX = ( *event ).caxis;
+    const SDL_ControllerAxisEvent AX = ( *m_event ).caxis;
     const GAxis GAX = { AX.which, static_cast<GamepadAxis>( AX.axis ), AX.value };
     return GAX;
 }
 
 const GButton EventHandler::getButton() const noexcept
 {
-    const SDL_ControllerButtonEvent BU = ( *event ).cbutton;
+    const SDL_ControllerButtonEvent BU = ( *m_event ).cbutton;
     const GButton GBUTTON = { BU.which, static_cast<GamepadButton>( BU.button ), u8st( BU.state ) };
     return GBUTTON;
 }
 
 const MButton EventHandler::getMouseButton() const noexcept
 {
-    const SDL_MouseButtonEvent MB = ( *event ).button;
+    const SDL_MouseButtonEvent MB = ( *m_event ).button;
     const MouseButton B = toMouseButton( MB.button );
     const MButton MBUTTON = { MB.windowID, B, u8st( MB.state ), MB.clicks, MB.x, MB.y };
     return MBUTTON;
@@ -570,7 +570,7 @@ const MButton EventHandler::getMouseButton() const noexcept
 const MMotion EventHandler::getMouseMotion() const noexcept
 {
     MMotion mmotion;
-    const SDL_MouseMotionEvent MOUSE_MOTION_EVENT = ( *event ).motion;
+    const SDL_MouseMotionEvent MOUSE_MOTION_EVENT = ( *m_event ).motion;
 
     for ( int i = 0; i < MBUTTONS; i++ )
     {
@@ -589,13 +589,13 @@ const MMotion EventHandler::getMouseMotion() const noexcept
 
 const MWheel EventHandler::getMouseWheel() const noexcept
 {
-    const SDL_MouseWheelEvent MOUSE_WHEEL_EVENT = ( *event ).wheel;
+    const SDL_MouseWheelEvent MOUSE_WHEEL_EVENT = ( *m_event ).wheel;
     return MWheel{ MOUSE_WHEEL_EVENT.windowID, MOUSE_WHEEL_EVENT.x, MOUSE_WHEEL_EVENT.y };
 }
 
 const WEvent EventHandler::getWindowEvent() const noexcept
 {
-    const SDL_WindowEvent WIN_EVENT = ( *event ).window;
+    const SDL_WindowEvent WIN_EVENT = ( *m_event ).window;
     return WEvent{ WIN_EVENT.windowID,
                    toWinEvent( WIN_EVENT.event ), WIN_EVENT.data1,
                    WIN_EVENT.data2
@@ -604,13 +604,13 @@ const WEvent EventHandler::getWindowEvent() const noexcept
 
 const UserEvent EventHandler::getUserEvent() const noexcept
 {
-    const SDL_UserEvent USR = ( *event ).user;
+    const SDL_UserEvent USR = ( *m_event ).user;
     return UserEvent{USR.type, USR.windowID, USR.code, USR.data1, USR.data2};
 }
 
 const TextEvent EventHandler::getTextEvent() const noexcept
 {
-    const SDL_Event EVENT = ( *event );
+    const SDL_Event EVENT = ( *m_event );
 
     if ( EVENT.type == SDL_TEXTINPUT )
     {
@@ -627,9 +627,9 @@ const TextEvent EventHandler::getTextEvent() const noexcept
 const DropEvent EventHandler::getDropEvent() const noexcept
 {
     DropEvent drop = {""};
-    const SDL_DropEvent DROP_EVENT = ( *event ).drop;
+    const SDL_DropEvent DROP_EVENT = ( *m_event ).drop;
 
-    if ( ( *event ).type == SDL_DROPFILE && DROP_EVENT.file != nullptr )
+    if ( ( *m_event ).type == SDL_DROPFILE && DROP_EVENT.file != nullptr )
     {
         drop.file = DROP_EVENT.file;
         SDL_free( DROP_EVENT.file );
