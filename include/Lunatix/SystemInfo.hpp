@@ -47,7 +47,7 @@ namespace SystemInfo
 */
 struct DisplayMode final
 {
-    int w;              /**< width */
+    int w;              /**< width  */
     int h;              /**< height */
     int refresh_rate;   /**< refresh rate (or zero for unspecified) */
 

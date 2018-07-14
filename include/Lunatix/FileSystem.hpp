@@ -25,7 +25,6 @@
 namespace lx
 {
 
-
 /**
 *   @ingroup System
 *   @namespace lx::FileSystem
