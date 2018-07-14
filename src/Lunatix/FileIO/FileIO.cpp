@@ -51,7 +51,7 @@ IOException::~IOException() noexcept {}
 class File_ final
 {
     UTF8string _name{""};
-    std::FILE * _file = nullptr;
+    std::FILE * m_file = nullptr;
 
     File_( const File_& ) = delete;
     File_& operator =( const File_& ) = delete;
@@ -61,43 +61,43 @@ class File_ final
         switch ( mode )
         {
         case FileMode::RDONLY:
-            _file = std::fopen( _name.utf8_str(), "rb" );
+            m_file = std::fopen( _name.utf8_str(), "rb" );
             break;
         case FileMode::WRONLY:
-            _file = std::fopen( _name.utf8_str(), "wb" );
+            m_file = std::fopen( _name.utf8_str(), "wb" );
             break;
         case FileMode::APPEND:
-            _file = std::fopen( _name.utf8_str(), "ab" );
+            m_file = std::fopen( _name.utf8_str(), "ab" );
             break;
         case FileMode::RDWR:
-            _file = std::fopen( _name.utf8_str(), "rb+" );
+            m_file = std::fopen( _name.utf8_str(), "rb+" );
             break;
         case FileMode::RDAP:
-            _file = std::fopen( _name.utf8_str(), "ab+" );
+            m_file = std::fopen( _name.utf8_str(), "ab+" );
             break;
         case FileMode::WRTR:
-            _file = std::fopen( _name.utf8_str(), "wb+" );
+            m_file = std::fopen( _name.utf8_str(), "wb+" );
             break;
         default:
             throw IOException( "File: Unrecognized mode" );
             break;
         }
 
-        if ( _file == nullptr )
+        if ( m_file == nullptr )
             throw IOException( lx::getError() );
     }
 
 public:
 
     File_( const UTF8string& filename, const FileMode mode )
-        : _name( filename ), _file( nullptr )
+        : _name( filename ), m_file( nullptr )
     {
         open_( mode );
     }
 
     size_t read( void * buffer, size_t dsize, size_t count ) noexcept
     {
-        return std::fread( buffer, dsize, count, _file );
+        return std::fread( buffer, dsize, count, m_file );
     }
 
     size_t readExactly( void * buffer, size_t dsize, size_t count ) noexcept
@@ -119,7 +119,7 @@ public:
 
     size_t write( const void * buffer, size_t dsize, size_t count ) noexcept
     {
-        return std::fwrite( buffer, dsize, count, _file );
+        return std::fwrite( buffer, dsize, count, m_file );
     }
 
     size_t write( const std::string& str ) noexcept
@@ -130,12 +130,12 @@ public:
 
     bool seek( long offset, FileWhence whence ) noexcept
     {
-        return std::fseek( _file, offset, static_cast<int>( whence ) ) == 0;
+        return std::fseek( m_file, offset, static_cast<int>( whence ) ) == 0;
     }
 
     long tell() const noexcept
     {
-        return std::ftell( _file );
+        return std::ftell( m_file );
     }
 
     long size() noexcept
@@ -162,10 +162,10 @@ public:
 
     void close() noexcept
     {
-        if ( _file != nullptr )
+        if ( m_file != nullptr )
         {
-            std::fclose( _file );
-            _file = nullptr;
+            std::fclose( m_file );
+            m_file = nullptr;
         }
     }
 
@@ -182,58 +182,58 @@ File::File( const std::string& filename, const FileMode mode )
     : File( UTF8string( filename ), mode ) {}
 
 File::File( const UTF8string& filename, const FileMode mode )
-    : _fimpl( new File_( filename, mode ) ) {}
+    : m_fimpl( new File_( filename, mode ) ) {}
 
 
 size_t File::read( void * buffer, size_t dsize, size_t count ) noexcept
 {
-    return _fimpl->read( buffer, dsize, count );
+    return m_fimpl->read( buffer, dsize, count );
 }
 
 size_t File::readExactly( void * buffer, size_t dsize, size_t count ) noexcept
 {
-    return _fimpl->readExactly( buffer, dsize, count );
+    return m_fimpl->readExactly( buffer, dsize, count );
 }
 
 
 size_t File::write( const void * buffer, size_t dsize, size_t count ) noexcept
 {
-    return _fimpl->write( buffer, dsize, count );
+    return m_fimpl->write( buffer, dsize, count );
 }
 
 size_t File::write( const std::string& str ) noexcept
 {
-    return _fimpl->write( str );
+    return m_fimpl->write( str );
 }
 
 bool File::seek( long offset, FileWhence whence ) noexcept
 {
-    return _fimpl->seek( offset, whence );
+    return m_fimpl->seek( offset, whence );
 }
 
 long File::tell() const noexcept
 {
-    return _fimpl->tell();
+    return m_fimpl->tell();
 }
 
 long File::size() noexcept
 {
-    return _fimpl->size();
+    return m_fimpl->size();
 }
 
 const char * File::getFilename() const noexcept
 {
-    return _fimpl->getFilename();
+    return m_fimpl->getFilename();
 }
 
 void File::close() noexcept
 {
-    _fimpl->close();
+    m_fimpl->close();
 }
 
 File::~File()
 {
-    _fimpl->close();
+    m_fimpl->close();
 }
 
 
@@ -243,25 +243,25 @@ File::~File()
 
 class TmpFile_ final
 {
-    FILE * _f = nullptr;
+    FILE * m_file = nullptr;
 
     TmpFile_( const TmpFile_& ) = delete;
     TmpFile_& operator =( const TmpFile_& ) = delete;
 
 public:
 
-    TmpFile_() : _f( tmpfile() )
+    TmpFile_() : m_file( tmpfile() )
     {
-        if ( _f == nullptr )
+        if ( m_file == nullptr )
             throw IOException( strerror( errno ) );
     }
 
     size_t read( void * buffer, size_t dsize, size_t count ) noexcept
     {
-        size_t sz = std::fread( buffer, dsize, count, _f );
+        size_t sz = std::fread( buffer, dsize, count, m_file );
         char * err = std::strerror( errno );
 
-        if ( std::ferror( _f ) )
+        if ( std::ferror( m_file ) )
             lx::setError( err );
 
         return sz;
@@ -290,10 +290,10 @@ public:
 
     size_t write( const void * buffer, size_t dsize, size_t count ) noexcept
     {
-        size_t sz = fwrite( buffer, dsize, count, _f );
+        size_t sz = fwrite( buffer, dsize, count, m_file );
         char * err = strerror( errno );
 
-        if ( ferror( _f ) )
+        if ( ferror( m_file ) )
             lx::setError( err );
 
         return sz;
@@ -307,62 +307,62 @@ public:
 
     bool seek( long offset, FileWhence whence ) noexcept
     {
-        return std::fseek( _f, offset, static_cast<int>( whence ) ) == 0;
+        return std::fseek( m_file, offset, static_cast<int>( whence ) ) == 0;
     }
 
     long tell() const noexcept
     {
-        return std::ftell( _f );
+        return std::ftell( m_file );
     }
 
     ~TmpFile_()
     {
-        fclose( _f );
-        _f = nullptr;
+        fclose( m_file );
+        m_file = nullptr;
     }
 };
 
 
 /* Public functions */
 
-TmpFile::TmpFile(): _timpl( new TmpFile_() ) {}
+TmpFile::TmpFile(): m_timpl( new TmpFile_() ) {}
 
 
 size_t TmpFile::read( void * buffer, size_t dsize, size_t count ) noexcept
 {
-    return _timpl->read( buffer, dsize, count );
+    return m_timpl->read( buffer, dsize, count );
 }
 
 size_t TmpFile::readExactly( void * buffer, size_t dsize, size_t count ) noexcept
 {
-    return _timpl->readExactly( buffer, dsize, count );
+    return m_timpl->readExactly( buffer, dsize, count );
 }
 
 
 size_t TmpFile::write( const void * buffer, size_t dsize, size_t count ) noexcept
 {
-    return _timpl->write( buffer, dsize, count );
+    return m_timpl->write( buffer, dsize, count );
 }
 
 size_t TmpFile::write( const std::string& str ) noexcept
 {
-    return _timpl->write( str );
+    return m_timpl->write( str );
 }
 
 
 bool TmpFile::seek( long offset, FileWhence whence ) noexcept
 {
-    return _timpl->seek( offset, whence );
+    return m_timpl->seek( offset, whence );
 }
 
 long TmpFile::tell() const noexcept
 {
-    return _timpl->tell();
+    return m_timpl->tell();
 }
 
 TmpFile::~TmpFile()
 {
-    _timpl.reset();
+    m_timpl.reset();
 }
 
 /// Stream

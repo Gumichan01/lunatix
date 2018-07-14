@@ -167,7 +167,6 @@ public:
     *   @sa read
     */
     virtual bool seek( long offset, FileWhence whence ) noexcept = 0;
-
     /**
     *   @fn virtual long tell() const noexcept
     *
@@ -192,7 +191,7 @@ class File_;
 */
 class File final : public virtual AbstractFile
 {
-    std::unique_ptr<File_> _fimpl;
+    std::unique_ptr<File_> m_fimpl;
 
     File( File& f ) = delete;
     File& operator =( File& f ) = delete;
@@ -276,7 +275,7 @@ class TmpFile_;
 */
 class TmpFile final : public virtual AbstractFile
 {
-    std::unique_ptr<TmpFile_> _timpl;
+    std::unique_ptr<TmpFile_> m_timpl;
 
     TmpFile( const TmpFile& ) = delete;
     TmpFile& operator =( const TmpFile& ) = delete;
