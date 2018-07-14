@@ -2,6 +2,8 @@
 
 ![LunatiX Logo][]
 
+[![Build Status](https://travis-ci.org/Gumichan01/lunatix.svg?branch=master)](https://travis-ci.org/Gumichan01/lunatix)
+
 LunatiX is a free SDL2-based library. It can be used for open-source or
 commercial games thanks to the zlib/libpng license.
 
