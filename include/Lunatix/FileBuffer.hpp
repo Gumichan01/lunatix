@@ -60,7 +60,7 @@ class FileBuffer_;
 class FileBuffer final
 {
     friend struct lx::TrueTypeFont::Font_;
-    std::unique_ptr<FileBuffer_> _bimpl;
+    std::unique_ptr<FileBuffer_> m_bimpl;
 
     FileBuffer( FileBuffer& fb );
     FileBuffer& operator =( FileBuffer& fb );

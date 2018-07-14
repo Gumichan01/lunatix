@@ -38,19 +38,19 @@ namespace FileIO
 class FileBuffer_ final
 {
     std::string _name;                      /* The name of the file refered by the buffer */
-    std::unique_ptr<int8_t[]> _buffer;      /* The read-only buffer                       */
-    size_t _bufsize;                        /* The size of the buffer                     */
+    std::unique_ptr<int8_t[]> m_buffer;     /* The read-only buffer                       */
+    size_t m_bufsize;                       /* The size of the buffer                     */
 
     Mix_Chunk * getChunkFromBuffer_() const noexcept
     {
-        SDL_RWops * rw = SDL_RWFromConstMem( _buffer.get(), static_cast<int>( _bufsize ) );
+        SDL_RWops * rw = SDL_RWFromConstMem( m_buffer.get(), static_cast<int>( m_bufsize ) );
         return ( rw == nullptr ) ? nullptr : Mix_LoadWAV_RW( rw, 1 );
     }
 
 public:
 
     explicit FileBuffer_( const std::string& filename, size_t offset, size_t sz )
-        : _name( filename ), _buffer( nullptr ), _bufsize( 0U )
+        : _name( filename ), m_buffer( nullptr ), m_bufsize( 0U )
     {
         size_t r = 0;
         long fsize = 0L;
@@ -66,17 +66,17 @@ public:
             throw IOException( str + "invalid offset: offset > size of the file" );
 
         if ( sz == 0 )
-            _bufsize = static_cast<size_t>( fsize - LOFFSET );
+            m_bufsize = static_cast<size_t>( fsize - LOFFSET );
         else
-            _bufsize = sz;
+            m_bufsize = sz;
 
         reader.seek( LOFFSET, FileWhence::SET );
-        _buffer.reset( new ( std::nothrow ) int8_t[_bufsize] );
+        m_buffer.reset( new ( std::nothrow ) int8_t[m_bufsize] );
 
-        if ( _buffer == nullptr )
+        if ( m_buffer == nullptr )
             throw IOException( str + "not enough memory to store the file content" );
 
-        r = reader.readExactly( _buffer.get(), sizeof( int8_t ), _bufsize );
+        r = reader.readExactly( m_buffer.get(), sizeof( int8_t ), m_bufsize );
 
         if ( r == static_cast<size_t>( -1 ) )
             throw IOException( str + "cannot read the entire file" );
@@ -95,13 +95,13 @@ public:
 
     inline SDL_Surface * getSurfaceFromBuffer() const noexcept
     {
-        SDL_RWops * rw = SDL_RWFromConstMem( _buffer.get(), static_cast<int>( _bufsize ) );
+        SDL_RWops * rw = SDL_RWFromConstMem( m_buffer.get(), static_cast<int>( m_bufsize ) );
         return ( rw == nullptr ) ? nullptr : IMG_Load_RW( rw, 1 );
     }
 
     inline TTF_Font * getFontFromBuffer( int size ) const noexcept
     {
-        SDL_RWops * rw = SDL_RWFromConstMem( _buffer.get(), static_cast<int>( _bufsize ) );
+        SDL_RWops * rw = SDL_RWFromConstMem( m_buffer.get(), static_cast<int>( m_bufsize ) );
         return ( rw == nullptr ) ? nullptr : TTF_OpenFontRW( rw, 1, size );
     }
 
@@ -117,40 +117,40 @@ public:
 // Used by Font
 void * FileBuffer::getFontFromBuffer_( int size ) const noexcept
 {
-    return _bimpl->getFontFromBuffer( size );
+    return m_bimpl->getFontFromBuffer( size );
 }
 
 
 /** Filebuffer — public functions */
 FileBuffer::FileBuffer( const std::string& filename, size_t offset,
                         size_t sz )
-    : _bimpl( new FileBuffer_( filename, offset, sz ) ) {}
+    : m_bimpl( new FileBuffer_( filename, offset, sz ) ) {}
 
 FileBuffer::FileBuffer( const UTF8string& filename, size_t offset,
                         size_t sz )
-    : _bimpl( new FileBuffer_( filename.utf8_sstring(), offset, sz ) ) {}
+    : m_bimpl( new FileBuffer_( filename.utf8_sstring(), offset, sz ) ) {}
 
 
 lx::Graphics::BufferedImage * FileBuffer::loadBufferedImage( lx::Graphics::PixelFormat format ) const
 {
-    return new lx::Graphics::BufferedImage( _bimpl->getSurfaceFromBuffer(), getFilename(), format );
+    return new lx::Graphics::BufferedImage( m_bimpl->getSurfaceFromBuffer(), getFilename(), format );
 }
 
 
 lx::Mixer::Chunk * FileBuffer::loadSample() const
 {
-    return _bimpl->loadSample();
+    return m_bimpl->loadSample();
 }
 
 
 const char * FileBuffer::getFilename() const noexcept
 {
-    return _bimpl->getFilename();
+    return m_bimpl->getFilename();
 }
 
 FileBuffer::~FileBuffer()
 {
-    _bimpl.reset();
+    m_bimpl.reset();
 }
 
 }   // FileIO
