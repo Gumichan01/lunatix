@@ -81,7 +81,7 @@ class Font final
     friend class lx::Graphics::SolidTextTexture;
     friend class lx::Graphics::ShadedTextTexture;
     friend class lx::Graphics::BlendedTextTexture;
-    std::unique_ptr<Font_> _fimpl;
+    std::unique_ptr<Font_> m_fimpl;
 
     Font( Font& f ) = delete;
     Font& operator =( Font& f ) = delete;

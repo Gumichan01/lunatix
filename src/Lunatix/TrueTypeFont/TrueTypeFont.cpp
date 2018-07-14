@@ -41,8 +41,8 @@ inline constexpr SDL_Renderer * render( void * renderer )
 }
 
 /*
-*   Calculation of the resulting surface size of the text
-*   in order to display using the font given in parameter
+*   Calculation of the resulting size of the text
+*   in order to display it by using the font given in parameter
 */
 inline int sizeOfText( TTF_Font * ttf, const std::string& text, int& w, int& h ) noexcept
 {
@@ -50,6 +50,46 @@ inline int sizeOfText( TTF_Font * ttf, const std::string& text, int& w, int& h )
 }
 
 }
+
+/*
+    # About text rendering # (https://www.libsdl.org/projects/SDL_ttf/docs/SDL_ttf_frame.html)
+
+    There are three modes of rendering:
+
+    - Solid
+    **Quick and Dirty**
+
+    Create an 8-bit palettized surface and render the given text at fast quality with the given font and color.
+    The pixel value of 0 is the colorkey, giving a transparent background when blitted.
+    Pixel and colormap value 1 is set to the text foreground color.
+    This allows you to change the color without having to render the text again.
+    Palette index 0 is of course not drawn when blitted to another surface, since it is the colorkey,
+    and thus transparent, though its actual color is 255 minus each of the RGB components of the foreground color.
+    This is the fastest rendering speed of all the rendering modes. This results in no box around the text,
+    but the text is not as smooth. The resulting surface should blit faster than the Blended one.
+    Use this mode for FPS and other fast changing updating text displays.
+
+    - Shaded
+    **Slow and Nice, but with a Solid Box**
+
+    Create an 8-bit palettized surface and render the given text at high quality with the given font and colors.
+    The 0 pixel value is background, while other pixels have varying degrees of the foreground color
+    from the background color. This results in a box of the background color around the text in the foreground color.
+    The text is antialiased. This will render slower than Solid, but in about the same time as Blended mode.
+    The resulting surface should blit as fast as Solid, once it is made. Use this when you need nice text,
+    and can live with a box.
+
+    - Blended
+    **Slow Slow Slow, but Ultra Nice over another image**
+
+    Create a 32-bit ARGB surface and render the given text at high quality,
+    using alpha blending to dither the font with the given color. This results in a surface with alpha transparency,
+    so you don't have a solid colored box around the text. The text is antialiased.
+    This will render slower than Solid, but in about the same time as Shaded mode.
+    The resulting surface will blit slower than if you had used Solid or Shaded.
+    Use this when you want high quality, and the text isn't changing too fast.
+
+*/
 
 
 namespace lx
@@ -67,22 +107,22 @@ enum class TTF_TypeText
 
 struct Font_ final
 {
-    UTF8string _font_str;                    /* The font file       */
-    unsigned int _font_size;                 /* The font size       */
-    Graphics::Colour _font_colour;                  /* The font colour     */
-    std::unique_ptr<lx::FileIO::FileBuffer> _font_buffer;
+    UTF8string m_filename;
+    unsigned int m_fsize;
+    Graphics::Colour m_fcolour;
+    std::unique_ptr<lx::FileIO::FileBuffer> m_fbuffer;
 
 
     Font_( const std::string& s, unsigned int sz, Graphics::Colour c )
-        : _font_str( s ), _font_size( sz ), _font_colour( c ), _font_buffer( nullptr ) {}
+        : m_filename( s ), m_fsize( sz ), m_fcolour( c ), m_fbuffer( nullptr ) {}
 
     /*
-    *   This function creates a file buffer from _font_str.
+    *   This function creates a file buffer from the font file name.
     *   It can throw an IOException if the buffer cannot be loaded.
     */
     inline void createBuffer_()
     {
-        _font_buffer.reset( new FileBuffer( _font_str ) );
+        m_fbuffer.reset( new FileBuffer( m_filename ) );
     }
 
     /*
@@ -90,13 +130,13 @@ struct Font_ final
     *   according to the font file in the class or the file buffer if it exists
     *
     *   note:
-    *   getFontFromBuffer() returns a void pointer in order to hide
+    *   createInternalFont_() returns a void pointer in order to hide
     *   the real type (TTF_Font*) in the public interface.
     *   So, the static cast was necessary to get the real type
     */
     inline TTF_Font * createInternalFont_( int size ) const noexcept
     {
-        return static_cast<TTF_Font *>( _font_buffer->getFontFromBuffer_( size ) );
+        return static_cast<TTF_Font *>( m_fbuffer->getFontFromBuffer_( size ) );
     }
 
     /*
@@ -108,13 +148,13 @@ struct Font_ final
     *
     */
     SDL_Surface * drawText_( TTF_TypeText type, const UTF8string& text,
-                             unsigned int sz = 0, Graphics::Colour bg = {0, 0, 0, 0} ) noexcept
+                             unsigned int sz = 0, Graphics::Colour bg = { 0, 0, 0, 0 } ) noexcept
     {
         TTF_Font * ttf;
         SDL_Surface * loaded = nullptr;
 
         if ( sz == 0 )
-            sz = _font_size;
+            sz = m_fsize;
 
         ttf = createInternalFont_( static_cast<int>( sz ) );
 
@@ -125,16 +165,16 @@ struct Font_ final
         switch ( type )
         {
         case TTF_TypeText::TTF_SOLID:
-            loaded = TTF_RenderUTF8_Solid( ttf, text.utf8_str(), _font_colour );
+            loaded = TTF_RenderUTF8_Solid( ttf, text.utf8_str(), m_fcolour );
             break;
 
         case TTF_TypeText::TTF_SHADED:
-            loaded = TTF_RenderUTF8_Shaded( ttf, text.utf8_str(), _font_colour, bg );
+            loaded = TTF_RenderUTF8_Shaded( ttf, text.utf8_str(), m_fcolour, bg );
             SDL_SetSurfaceBlendMode( loaded, SDL_BLENDMODE_BLEND );
             break;
 
         case TTF_TypeText::TTF_BLENDED:
-            loaded = TTF_RenderUTF8_Blended( ttf, text.utf8_str(), _font_colour );
+            loaded = TTF_RenderUTF8_Blended( ttf, text.utf8_str(), m_fcolour );
             SDL_SetSurfaceBlendMode( loaded, SDL_BLENDMODE_BLEND );
             break;
 
@@ -148,15 +188,15 @@ struct Font_ final
 
     ~Font_()
     {
-        _font_buffer.reset();
+        m_fbuffer.reset();
     }
 };
 
 
 Font::Font( const std::string& font_file, const Graphics::Colour& colour, unsigned int size )
-    : _fimpl( new Font_( font_file, size, colour ) )
+    : m_fimpl( new Font_( font_file, size, colour ) )
 {
-    _fimpl->createBuffer_();
+    m_fimpl->createBuffer_();
 }
 
 /*
@@ -171,7 +211,7 @@ Font::Font( const std::string& font_file, const Graphics::Colour& colour, unsign
 */
 int Font::sizeOfText_( const std::string& text, int& w, int& h ) const noexcept
 {
-    return sizeOfText_( text, _fimpl->_font_size, w, h );
+    return sizeOfText_( text, m_fimpl->m_fsize, w, h );
 }
 
 /*
@@ -188,7 +228,7 @@ int Font::sizeOfText_( const std::string& text, int& w, int& h ) const noexcept
 int Font::sizeOfText_( const std::string& text, const unsigned int size, int& w, int& h ) const noexcept
 {
     int sz;
-    TTF_Font * ttf = _fimpl->createInternalFont_( static_cast<int>( size ) );
+    TTF_Font * ttf = m_fimpl->createInternalFont_( static_cast<int>( size ) );
 
     if ( ttf == nullptr )
         return -1;
@@ -228,7 +268,7 @@ SDL_Texture * Font::drawSolidText_( const std::string& text, unsigned int size,
 SDL_Texture * Font::drawSolidText_( const UTF8string& text, unsigned int size,
                                     lx::Win::Window& w ) noexcept
 {
-    SDL_Surface * s = _fimpl->drawText_( TTF_TypeText::TTF_SOLID, text, size );
+    SDL_Surface * s = m_fimpl->drawText_( TTF_TypeText::TTF_SOLID, text, size );
 
     if ( s == nullptr )
         return nullptr;
@@ -256,7 +296,7 @@ SDL_Texture * Font::drawShadedText_( const std::string& text, unsigned int size,
 SDL_Texture * Font::drawShadedText_( const UTF8string& text, unsigned int size,
                                      const Graphics::Colour& bg, lx::Win::Window& w ) noexcept
 {
-    SDL_Surface * s = _fimpl->drawText_( TTF_TypeText::TTF_SHADED, text, size, bg );
+    SDL_Surface * s = m_fimpl->drawText_( TTF_TypeText::TTF_SHADED, text, size, bg );
 
     if ( s == nullptr )
         return nullptr;
@@ -284,7 +324,7 @@ SDL_Texture * Font::drawBlendedText_( const std::string& text, unsigned int size
 SDL_Texture * Font::drawBlendedText_( const UTF8string& text, unsigned int size,
                                       lx::Win::Window& w ) noexcept
 {
-    SDL_Surface * s = _fimpl->drawText_( TTF_TypeText::TTF_BLENDED, text, size );
+    SDL_Surface * s = m_fimpl->drawText_( TTF_TypeText::TTF_BLENDED, text, size );
 
     if ( s == nullptr )
         return nullptr;
@@ -295,16 +335,14 @@ SDL_Texture * Font::drawBlendedText_( const UTF8string& text, unsigned int size,
     return t;
 }
 
-
 const Graphics::Colour Font::getColour_() const noexcept
 {
-    return _fimpl->_font_colour;
+    return m_fimpl->m_fcolour;
 }
-
 
 unsigned int Font::getSize_() const noexcept
 {
-    return _fimpl->_font_size;
+    return m_fimpl->m_fsize;
 }
 
 
@@ -313,23 +351,23 @@ unsigned int Font::getSize_() const noexcept
 */
 void Font::setColour_( const Graphics::Colour& colour ) noexcept
 {
-    _fimpl->_font_colour = colour;
+    m_fimpl->m_fcolour = colour;
 }
 
 UTF8string Font::getName( bool with_path ) const noexcept
 {
     using namespace lx::FileSystem;
-    return with_path ? _fimpl->_font_str : basename( _fimpl->_font_str );
+    return with_path ? m_fimpl->m_filename : basename( m_fimpl->m_filename );
 }
 
 Graphics::Colour Font::getColour() const noexcept
 {
-    return _fimpl->_font_colour;
+    return m_fimpl->m_fcolour;
 }
 
 Font::~Font()
 {
-    _fimpl->_font_buffer.reset();
+    m_fimpl->m_fbuffer.reset();
 }
 
 }   // TrueTypeFont
