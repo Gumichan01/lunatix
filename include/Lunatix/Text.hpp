@@ -151,7 +151,7 @@ class TextInput_;
 */
 class TextInput final
 {
-    std::unique_ptr<TextInput_> _timpl;
+    std::unique_ptr<TextInput_> m_timpl;
 
     TextInput( TextInput& t ) = delete;
     TextInput( TextInput&& t ) = delete;

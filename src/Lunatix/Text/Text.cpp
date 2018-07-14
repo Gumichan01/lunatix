@@ -52,12 +52,12 @@ const uint32_t DELAY = 33;
 
 class TextInput_ final
 {
-    UTF8string _u8text;
-    UTF8string _u8comp;
-    size_t _cursor;
-    bool _done;
-    bool _draw;
-    bool _composing;
+    UTF8string m_u8text;
+    UTF8string m_u8comp;
+    size_t m_cursor;
+    bool m_done;
+    bool m_draw;
+    bool m_composing;
 
     // Save a text in the clipboard get it from it
     void save_() noexcept
@@ -66,18 +66,18 @@ class TextInput_ final
 
         if ( KEYS[SDL_SCANCODE_LCTRL] )
         {
-            int err = SDL_SetClipboardText( _u8text.utf8_str() );
+            int err = SDL_SetClipboardText( m_u8text.utf8_str() );
 
             if ( err == -1 )
             {
-                UTF8string s( "Cannot set " + _u8text + "in the clipboard" + SDL_GetError() );
+                UTF8string s( "Cannot set " + m_u8text + "in the clipboard" + SDL_GetError() );
                 lx::Log::logDebug( lx::Log::LogType::INPUT,
                                    "Cannot set %s in the clipboard.", s.utf8_str() );
             }
             else
             {
                 lx::Log::logDebug( lx::Log::LogType::INPUT,
-                                   "Copy %s into the clipboard.", _u8text.utf8_str() );
+                                   "Copy %s into the clipboard.", m_u8text.utf8_str() );
             }
         }
     }
@@ -94,26 +94,26 @@ class TextInput_ final
                 return;
             }
 
-            char * s = SDL_GetClipboardText();
+            const char * CLIPBOARD_TXT = SDL_GetClipboardText();
 
-            if ( s == nullptr )
+            if ( CLIPBOARD_TXT == nullptr )
             {
                 lx::Log::logError( lx::Log::LogType::SYSTEM,
-                                   "Cannot get the string from the clipboard" );
+                                   "Cannot get the text from the clipboard" );
                 return;
             }
 
+            lx::Log::logDebug( lx::Log::LogType::INPUT, "Paste %s", CLIPBOARD_TXT );
+
             try
             {
-                u8stringInput_( UTF8string( s ) );
+                u8stringInput_( UTF8string( CLIPBOARD_TXT ) );
             }
             catch ( ... )
             {
                 lx::Log::logError( lx::Log::LogType::INPUT,
                                    "Invalid UTF-8 string from the clipboard." );
             }
-
-            lx::Log::logDebug( lx::Log::LogType::INPUT, "Paste %s", s );
         }
     }
 
@@ -132,21 +132,21 @@ class TextInput_ final
             break;
 
         case SDLK_LEFT:
-            if ( _cursor > 0U )
-                _cursor -= 1U;
+            if ( m_cursor > 0U )
+                m_cursor -= 1U;
             break;
 
         case SDLK_RIGHT:
-            if ( _cursor < _u8text.utf8_length() )
-                _cursor += 1U;
+            if ( m_cursor < m_u8text.utf8_length() )
+                m_cursor += 1U;
             break;
 
         case SDLK_HOME:
-            _cursor = 0U;
+            m_cursor = 0U;
             break;
 
         case SDLK_END:
-            _cursor = _u8text.utf8_length();
+            m_cursor = m_u8text.utf8_length();
             break;
 
         default:
@@ -156,15 +156,15 @@ class TextInput_ final
 
     void keyboardInput_( const lx::Event::EventHandler& ev ) noexcept
     {
-        const size_t old_cursor = _cursor;
+        const size_t OLD_CURSOR = m_cursor;
 
         if ( ev.getKeyCode() == SDLK_ESCAPE )
         {
-            _done = true;
+            m_done = true;
             return;
         }
 
-        if ( _composing )
+        if ( m_composing )
             return;
 
         keyCode( ev );
@@ -176,35 +176,35 @@ class TextInput_ final
         else if ( sc == SDL_SCANCODE_V )
         {
             paste_();
-            _draw = true;
+            m_draw = true;
         }
 
-        if ( old_cursor != _cursor )
+        if ( OLD_CURSOR != m_cursor )
             lx::Log::logDebug( lx::Log::LogType::INPUT,
-                               "Input - _cursor at %d", _cursor );
+                               "Input - m_cursor at %d", m_cursor );
     }
 
     void textInput_( const lx::Event::EventHandler& ev ) noexcept
     {
-        const lx::Event::TextEvent tev = ev.getTextEvent();
+        const lx::Event::TextEvent TEXTEV = ev.getTextEvent();
 
-        if ( tev.text[0] == '\0' || isEOL( tev.text ) )
+        if ( TEXTEV.text[0] == '\0' || isEOL( TEXTEV.text ) )
             return;
 
         lx::Log::logDebug( lx::Log::LogType::INPUT,
                            "New input : '%s' of length (in bytes) %d",
-                           tev.text.c_str(), tev.text.length() );
+                           TEXTEV.text.c_str(), TEXTEV.text.length() );
 
         try
         {
-            u8stringInput_( UTF8string( tev.text ) );
-            _draw = true;
-            _u8comp = "";
+            u8stringInput_( UTF8string( TEXTEV.text ) );
+            m_draw = true;
+            m_u8comp = "";
         }
         catch ( ... )
         {
             lx::Log::logError( lx::Log::LogType::INPUT,
-                               "Invalid UTF-8 string: %s", tev.text.c_str() );
+                               "Invalid UTF-8 string: %s", TEXTEV.text.c_str() );
         }
     }
 
@@ -216,33 +216,33 @@ class TextInput_ final
 
         lx::Log::logDebug( lx::Log::LogType::INPUT, "start: %d; len: %d",
                            ev.getTextEvent().start, ev.getTextEvent().length );
-        _u8comp = ev.getTextEvent().text.c_str();
+        m_u8comp = ev.getTextEvent().text;
 
-        if ( _u8comp.utf8_empty() )
-            _composing = false;
+        if ( m_u8comp.utf8_empty() )
+            m_composing = false;
         else
-            _composing = true;
+            m_composing = true;
 
-        _draw = true;
+        m_draw = true;
     }
 
     // Operation on the string
     void u8stringInput_( const UTF8string& ntext ) noexcept
     {
-        const size_t U8LEN = _u8text.utf8_length();
+        const size_t U8LEN = m_u8text.utf8_length();
 
-        if ( _cursor == U8LEN )
+        if ( m_cursor == U8LEN )
         {
-            _u8text += ntext;
+            m_u8text += ntext;
         }
         else
         {
-            const UTF8string& RTMP = _u8text.utf8_substr( _cursor );
-            const UTF8string& LTMP = _u8text.utf8_substr( 0, _cursor );
-            _u8text = LTMP + ntext + RTMP;
+            const UTF8string& RTMP = m_u8text.utf8_substr( m_cursor );
+            const UTF8string& LTMP = m_u8text.utf8_substr( 0, m_cursor );
+            m_u8text = LTMP + ntext + RTMP;
         }
 
-        _cursor += ntext.utf8_length();
+        m_cursor += ntext.utf8_length();
     }
 
     void utf8Pop_() noexcept
@@ -252,7 +252,7 @@ class TextInput_ final
 
         try
         {
-            _u8text.utf8_pop();
+            m_u8text.utf8_pop();
         }
         catch ( ... )
         {
@@ -263,54 +263,54 @@ class TextInput_ final
 
     void backslashKey_() noexcept
     {
-        if ( _cursor > 0U )
+        if ( m_cursor > 0U )
         {
             lx::Log::logDebug( lx::Log::LogType::INPUT,
                                "Backslash key - Remove the following codepoint at %d: %s",
-                               _cursor - 1, _u8text.utf8_at( _cursor - 1 ).c_str() );
+                               m_cursor - 1, m_u8text.utf8_at( m_cursor - 1 ).c_str() );
 
-            if ( _cursor == _u8text.utf8_length() )
+            if ( m_cursor == m_u8text.utf8_length() )
             {
                 utf8Pop_();
             }
             else
             {
-                _u8text.utf8_erase( _u8text.utf8_begin() + _cursor - 1U );
+                m_u8text.utf8_erase( m_u8text.utf8_begin() + m_cursor - 1U );
             }
 
-            _cursor -= 1U;
-            _draw = true;
+            m_cursor -= 1U;
+            m_draw = true;
         }
     }
 
     void deleteKey_() noexcept
     {
-        const size_t U8LEN = _u8text.utf8_length();
+        const size_t U8LEN = m_u8text.utf8_length();
 
-        if ( _cursor < U8LEN )
+        if ( m_cursor < U8LEN )
         {
             lx::Log::logDebug( lx::Log::LogType::INPUT,
                                "Delete key - Remove the following codepoint at %d: %s",
-                               _cursor, _u8text.utf8_at( _cursor ).c_str() );
+                               m_cursor, m_u8text.utf8_at( m_cursor ).c_str() );
         }
 
-        if ( _cursor > 0U && _cursor < U8LEN )
+        if ( m_cursor > 0U && m_cursor < U8LEN )
         {
-            _u8text.utf8_erase( _u8text.utf8_begin() + _cursor );
-            _draw = true;
+            m_u8text.utf8_erase( m_u8text.utf8_begin() + m_cursor );
+            m_draw = true;
         }
-        else if ( _cursor == 0 )
+        else if ( m_cursor == 0 )
         {
-            _u8text = _u8text.utf8_substr( _cursor + 1U );
-            _draw = true;
+            m_u8text = m_u8text.utf8_substr( m_cursor + 1U );
+            m_draw = true;
         }
     }
 
 public:
 
     TextInput_() noexcept
-        : _u8text(), _u8comp(), _cursor( 0 ), _done( false ), _draw( false ),
-          _composing( false )
+        : m_u8text(), m_u8comp(), m_cursor( 0 ), m_done( false ), m_draw( false ),
+          m_composing( false )
     {
         lx::Log::logDebug( lx::Log::LogType::INPUT, "Start the input." );
         SDL_StartTextInput();
@@ -319,12 +319,12 @@ public:
 
     void eventLoop_( RedrawCallback& redraw ) noexcept
     {
-        size_t prev_cur = _cursor;
+        size_t prev_cur = m_cursor;
         lx::Event::EventHandler ev;
-        _done = false;
-        _draw = false;
+        m_done = false;
+        m_draw = false;
 
-        while ( !_done )
+        while ( !m_done )
         {
             while ( ev.pollEvent() )
             {
@@ -346,9 +346,9 @@ public:
                     break;
                 }
 
-                redraw( _u8text, _u8comp, _draw, _cursor, prev_cur );
-                prev_cur = _cursor;
-                _draw = false;
+                redraw( m_u8text, m_u8comp, m_draw, m_cursor, prev_cur );
+                prev_cur = m_cursor;
+                m_draw = false;
             }
 
             lx::Time::delay( DELAY );
@@ -365,22 +365,19 @@ public:
 
 /* Text input, public functions         */
 
-TextInput::TextInput() noexcept : _timpl( new TextInput_() ) {}
+TextInput::TextInput() noexcept : m_timpl( new TextInput_() ) {}
 
 /*
 *   Handle the event loop and the internal text input.
-*
-*   This function updates an internal string on each text input and
-*   send it to the callback function given by the user to something with that.
 */
 void TextInput::eventLoop( RedrawCallback& redraw ) noexcept
 {
-    _timpl->eventLoop_( redraw );
+    m_timpl->eventLoop_( redraw );
 }
 
 TextInput::~TextInput() noexcept
 {
-    _timpl.reset();
+    m_timpl.reset();
 }
 
 }   // Text
