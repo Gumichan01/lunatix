@@ -91,7 +91,8 @@ class Music_;
 
 /**
 *   @class Music
-*   @brief The music class
+*   @brief Class representing music
+*   @note This can load WAVE, MOD, MIDI, OGG, MP3, FLAC files.
 */
 class Music : public virtual Sound
 {
@@ -104,13 +105,13 @@ public:
 
     /**
     *   @fn Music(const std::string& filename)
-    *   @param filename
+    *   @param [in] filename
     *   @exception MixerException On failure
     */
     Music( const std::string& filename );
     /**
     *   @fn Music(const UTF8string& filename)
-    *   @param filename
+    *   @param [in] filename
     *   @exception MixerException On failure
     */
     Music( const UTF8string& filename );

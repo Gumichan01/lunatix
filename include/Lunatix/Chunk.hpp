@@ -45,7 +45,8 @@ class Chunk_;
 
 /**
 *   @class Chunk
-*   @brief The sample class
+*   @brief The sample
+*   @note This can handle WAVE, AIFF, RIFF, OGG, and VOC files
 */
 class Chunk final : public virtual Sound
 {
@@ -61,10 +62,7 @@ public:
     /**
     *   @fn Chunk(const std::string& filename)
     *   @brief Load a sample from a file
-    *   @param filename
-    *   @note It is better to give a .wav file to the constructor.
-    *        The sample was optimized for this format. But it can work with
-    *        an other file type.
+    *   @param [in] filename
     *
     *   @exception MixerException On failure
     */
@@ -73,10 +71,7 @@ public:
     /**
     *   @fn Chunk(const UTF8string& filename)
     *   @brief Load a sample from a file
-    *   @param filename
-    *   @note It is better to give a .wav file to the constructor.
-    *          The sample was optimized for this format. But it can work with
-    *          an other file type.
+    *   @param [in] filename
     *
     *   @exception MixerException On failure
     */
