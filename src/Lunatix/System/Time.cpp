@@ -27,7 +27,7 @@ namespace lx
 namespace Time
 {
 
-void Timer::start()
+void Timer::start() noexcept
 {
     if ( m_stopped )
     {
@@ -36,7 +36,7 @@ void Timer::start()
     }
 }
 
-void Timer::pause()
+void Timer::pause() noexcept
 {
     if ( !m_stopped && !m_paused )
     {
@@ -46,7 +46,7 @@ void Timer::pause()
 }
 
 
-void Timer::resume()
+void Timer::resume() noexcept
 {
     if ( !m_stopped && m_paused )
     {
@@ -55,7 +55,7 @@ void Timer::resume()
     }
 }
 
-uint32_t Timer::lap()
+uint32_t Timer::lap() noexcept
 {
     uint32_t t = getTicks();
     stop();
@@ -64,7 +64,7 @@ uint32_t Timer::lap()
     return t;
 }
 
-uint32_t Timer::getTicks()
+uint32_t Timer::getTicks() noexcept
 {
     if ( m_stopped || m_paused )
         return m_pause;
@@ -72,14 +72,14 @@ uint32_t Timer::getTicks()
     return SDL_GetTicks() - m_start - m_tradeoff;
 }
 
-void Timer::stop()
+void Timer::stop() noexcept
 {
     pause();
     m_stopped = true;
     m_paused  = false;
 }
 
-void Timer::reset()
+void Timer::reset() noexcept
 {
     m_start    = 0U;
     m_pause    = 0U;

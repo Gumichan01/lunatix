@@ -38,7 +38,7 @@ namespace Time
 *   Get the number of milliseconds since the initialization of the engine
 *   @return The tick
 */
-inline uint32_t getTicks()
+inline uint32_t getTicks() noexcept
 {
     return SDL_GetTicks();
 }
@@ -47,7 +47,7 @@ inline uint32_t getTicks()
 *   Wait for a certain number of milliseconds before returning
 *   @param ms The delay
 */
-inline void delay( uint32_t ms )
+inline void delay( uint32_t ms ) noexcept
 {
     SDL_Delay( ms );
 }
@@ -67,13 +67,13 @@ class Timer final
 public:
 
     Timer() = default;
-    void start();
-    void pause();
-    void resume();
-    uint32_t lap();
-    void stop();
-    void reset();
-    uint32_t getTicks();
+    void start() noexcept;
+    void pause() noexcept;
+    void resume() noexcept;
+    uint32_t lap() noexcept;
+    void stop() noexcept;
+    void reset() noexcept;
+    uint32_t getTicks() noexcept;
     ~Timer() = default;
 };
 
