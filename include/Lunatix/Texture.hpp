@@ -253,8 +253,8 @@ public:
 class AnimatedSprite final : public Sprite
 {
     friend class BufferedImage;
-    const std::vector<ImgRect> m_coordinates;
-    const size_t m_nbcoordinates;
+    const std::vector<ImgRect> M_COORDINATES;
+    const size_t M_NBCOORDINATES;
     uint32_t m_delay;               // Delay to display a part of the sprite sheet
     uint32_t m_btime;
     size_t m_frame;

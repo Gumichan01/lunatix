@@ -231,7 +231,7 @@ AnimatedSprite::AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
                                 const uint32_t delay, bool loop,
                                 const UTF8string& filename, PixelFormat format )
     : Sprite( t, w, filename, ImgRect{0, 0, 0, 0}, format ),
-      m_coordinates( coord ), m_nbcoordinates( coord.size() ), m_delay( delay ), m_btime( 0 ),
+      M_COORDINATES( coord ), M_NBCOORDINATES( coord.size() ), m_delay( delay ), m_btime( 0 ),
       m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
 // public constructor
@@ -247,8 +247,8 @@ AnimatedSprite::AnimatedSprite( const UTF8string& filename, lx::Win::Window& w,
                                 const std::vector<ImgRect>& coord,
                                 const uint32_t delay, bool loop,
                                 PixelFormat format )
-    : Sprite( filename, w, format ), m_coordinates( coord ),
-      m_nbcoordinates( coord.size() ), m_delay( delay ), m_btime( 0 ), m_frame( 0 ),
+    : Sprite( filename, w, format ), M_COORDINATES( coord ),
+      M_NBCOORDINATES( coord.size() ), m_delay( delay ), m_btime( 0 ), m_frame( 0 ),
       m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
 
@@ -274,7 +274,7 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
     {
         m_btime = SDL_GetTicks();
 
-        if ( m_frame == m_nbcoordinates - 1 )
+        if ( m_frame == M_NBCOORDINATES - 1 )
         {
             if ( m_loop )
                 m_frame = 0;
@@ -288,7 +288,7 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
     if ( m_drawable )
     {
         const SDL_Rect SDL_RECT = sdl_rect_( box );
-        const SDL_Rect COORD = sdl_rect_( m_coordinates[m_frame] );
+        const SDL_Rect COORD = sdl_rect_( M_COORDINATES[m_frame] );
 
         SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture,
                           &COORD, &SDL_RECT, ( -radianToDegree( angle ) ),
