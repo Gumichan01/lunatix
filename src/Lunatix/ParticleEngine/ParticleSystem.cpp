@@ -36,27 +36,27 @@ namespace ParticleEngine
 
 class ParticleSystem_ final
 {
-    std::unique_ptr<std::unique_ptr<Particle>[]> _particles;
-    const unsigned int _NB_PARTICLES;
+    std::unique_ptr<std::unique_ptr<Particle>[]> m_particles;
+    const unsigned int M_NB_PARTICLES;
 
 public:
 
     explicit ParticleSystem_( const unsigned int nb_part ) noexcept
-        : _particles( new std::unique_ptr<Particle>[nb_part] ),
-          _NB_PARTICLES( nb_part ) {}
+        : m_particles( new std::unique_ptr<Particle>[nb_part] ),
+          M_NB_PARTICLES( nb_part ) {}
 
     bool addParticle( Particle * p ) const noexcept
     {
-        if ( _particles == nullptr || p == nullptr )
+        if ( m_particles == nullptr || p == nullptr )
             return false;
 
         bool done = false;
 
-        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
+        for ( unsigned int i = 0; i < M_NB_PARTICLES; i++ )
         {
-            if ( _particles[i] == nullptr )
+            if ( m_particles[i] == nullptr )
             {
-                _particles[i].reset( p );
+                m_particles[i].reset( p );
                 done = true;
                 break;
             }
@@ -67,57 +67,57 @@ public:
 
     bool rmParticle( unsigned int index ) const noexcept
     {
-        if ( index > _NB_PARTICLES || _particles == nullptr
-                || _particles[index] == nullptr )
+        if ( index > M_NB_PARTICLES || m_particles == nullptr
+                || m_particles[index] == nullptr )
             return false;
 
-        _particles[index].reset();
+        m_particles[index].reset();
         return true;
     }
 
     void updateParticles() const noexcept
     {
-        if ( _particles == nullptr )
+        if ( m_particles == nullptr )
             return;
 
-        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
+        for ( unsigned int i = 0; i < M_NB_PARTICLES; i++ )
         {
-            if ( _particles[i] != nullptr )
+            if ( m_particles[i] != nullptr )
             {
-                if ( _particles[i]->isDead() )
+                if ( m_particles[i]->isDead() )
                     rmParticle( i );
                 else
-                    _particles[i]->update();
+                    m_particles[i]->update();
             }
         }
     }
 
     void displayParticles() const noexcept
     {
-        if ( _particles == nullptr )
+        if ( m_particles == nullptr )
             return;
 
-        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
+        for ( unsigned int i = 0; i < M_NB_PARTICLES; i++ )
         {
-            if ( _particles[i] != nullptr )
+            if ( m_particles[i] != nullptr )
             {
                 // Display the particle when the delay is a multiple of 2
-                if ( _particles[i]->getDelay() % 2 == 0 )
-                    _particles[i]->draw();
+                if ( m_particles[i]->getDelay() % 2 == 0 )
+                    m_particles[i]->draw();
             }
         }
     }
 
     unsigned int nbEmptyParticles() const noexcept
     {
-        if ( _particles == nullptr )
+        if ( m_particles == nullptr )
             return 0;
 
         unsigned int nb = 0;
 
-        for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
+        for ( unsigned int i = 0; i < M_NB_PARTICLES; i++ )
         {
-            if ( _particles[i] == nullptr )
+            if ( m_particles[i] == nullptr )
                 nb++;
         }
 
@@ -126,25 +126,25 @@ public:
 
     unsigned int nbActiveParticles() const noexcept
     {
-        return ( _particles == nullptr ) ? 0 : _NB_PARTICLES - nbEmptyParticles();
+        return ( m_particles == nullptr ) ? 0 : M_NB_PARTICLES - nbEmptyParticles();
     }
 
     unsigned int nbTotalParticles() const noexcept
     {
-        return _NB_PARTICLES;
+        return M_NB_PARTICLES;
     }
 
     ~ParticleSystem_()
     {
-        if ( _particles != nullptr )
+        if ( m_particles != nullptr )
         {
-            for ( unsigned int i = 0; i < _NB_PARTICLES; i++ )
+            for ( unsigned int i = 0; i < M_NB_PARTICLES; i++ )
             {
-                _particles[i].reset();
+                m_particles[i].reset();
             }
         }
 
-        _particles.reset();
+        m_particles.reset();
     }
 };
 
@@ -152,48 +152,48 @@ public:
 /* Public functions */
 
 ParticleSystem::ParticleSystem( const unsigned int nbPart ) noexcept
-    : _psimpl( new ParticleSystem_( nbPart ) ) {}
+    : m_psimpl( new ParticleSystem_( nbPart ) ) {}
 
 
 ParticleSystem::~ParticleSystem()
 {
-    _psimpl.reset();
+    m_psimpl.reset();
 }
 
 
 bool ParticleSystem::addParticle( Particle * p ) noexcept
 {
-    return _psimpl->addParticle( p );
+    return m_psimpl->addParticle( p );
 }
 
 
 void ParticleSystem::updateParticles() noexcept
 {
-    _psimpl->updateParticles();
+    m_psimpl->updateParticles();
 }
 
 
 void ParticleSystem::displayParticles() const noexcept
 {
-    _psimpl->displayParticles();
+    m_psimpl->displayParticles();
 }
 
 
 unsigned int ParticleSystem::nbEmptyParticles() const noexcept
 {
-    return _psimpl->nbEmptyParticles();
+    return m_psimpl->nbEmptyParticles();
 }
 
 
 unsigned int ParticleSystem::nbActiveParticles() const noexcept
 {
-    return _psimpl->nbActiveParticles();
+    return m_psimpl->nbActiveParticles();
 }
 
 
 unsigned int ParticleSystem::nbTotalParticles() const noexcept
 {
-    return _psimpl->nbTotalParticles();
+    return m_psimpl->nbTotalParticles();
 }
 
 }   // ParticleEngine

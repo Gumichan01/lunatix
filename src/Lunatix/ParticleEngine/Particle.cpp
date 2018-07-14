@@ -41,40 +41,40 @@ constexpr Vector2D VNULL = {FNIL, FNIL};
 
 class Particle_ final
 {
-    FloatingBox _box;
-    unsigned int _lifetime;             /* The delay to stay displayable */
-    lx::Physics::Vector2D _velocity;
-    lx::Graphics::Sprite& _texture;
+    FloatingBox m_fbox;
+    unsigned int m_lifetime;             /* The delay to stay displayable */
+    lx::Physics::Vector2D m_velocity;
+    lx::Graphics::Sprite& m_texture;
 
 public:
 
     Particle_( lx::Graphics::Sprite& sp, const FloatingBox& b,
                const lx::Physics::Vector2D& v ) noexcept
-        : _box( b ), _lifetime( xrand<unsigned int>( 0, DELAY ) ), _velocity( v ),
-          _texture( sp ) {}
+        : m_fbox( b ), m_lifetime( xrand<unsigned int>( 0, DELAY ) ), m_velocity( v ),
+          m_texture( sp ) {}
 
     void update() noexcept
     {
-        if ( _lifetime > 0 )
+        if ( m_lifetime > 0 )
         {
-            lx::Physics::moveBox( _box, _velocity );
-            _lifetime--;
+            lx::Physics::moveBox( m_fbox, m_velocity );
+            m_lifetime--;
         }
     }
 
     void draw() noexcept
     {
-        _texture.draw( lx::Graphics::toImgRect( _box ) );
+        m_texture.draw( lx::Graphics::toImgRect( m_fbox ) );
     }
 
     bool isDead() const noexcept
     {
-        return _lifetime == 0;
+        return m_lifetime == 0;
     }
 
     unsigned int getDelay() const noexcept
     {
-        return _lifetime;
+        return m_lifetime;
     }
 
     ~Particle_() = default;
@@ -83,40 +83,40 @@ public:
 /* Particle — public interface */
 
 Particle::Particle( lx::Graphics::Sprite& sp, const FloatingBox& b ) noexcept
-    : _pimpl( new Particle_( sp, b, VNULL ) ) {}
+    : m_pimpl( new Particle_( sp, b, VNULL ) ) {}
 
 
 Particle::Particle( lx::Graphics::Sprite& sp, const FloatingBox& b,
                     const lx::Physics::Vector2D& v ) noexcept
-    : _pimpl( new Particle_( sp, b, v ) ) {}
+    : m_pimpl( new Particle_( sp, b, v ) ) {}
 
 
 void Particle::update() noexcept
 {
-    _pimpl->update();
+    m_pimpl->update();
 }
 
 
 void Particle::draw() noexcept
 {
-    _pimpl->draw();
+    m_pimpl->draw();
 }
 
 
 bool Particle::isDead() const noexcept
 {
-    return _pimpl->isDead();
+    return m_pimpl->isDead();
 }
 
 
 unsigned int Particle::getDelay() const noexcept
 {
-    return _pimpl->getDelay();
+    return m_pimpl->getDelay();
 }
 
 Particle::~Particle()
 {
-    _pimpl.reset();
+    m_pimpl.reset();
 }
 
 }   // ParticleEngine

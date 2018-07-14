@@ -44,7 +44,7 @@ class ParticleSystem_;
 */
 class ParticleSystem final
 {
-    std::unique_ptr<ParticleSystem_> _psimpl;
+    std::unique_ptr<ParticleSystem_> m_psimpl;
 
     ParticleSystem( ParticleSystem& ps ) = delete;
     ParticleSystem& operator =( ParticleSystem& ps ) = delete;

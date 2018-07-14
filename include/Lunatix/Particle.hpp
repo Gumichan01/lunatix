@@ -52,7 +52,7 @@ class Particle_;
 */
 class Particle final
 {
-    std::unique_ptr<Particle_> _pimpl;
+    std::unique_ptr<Particle_> m_pimpl;
 
     Particle( Particle& p ) = delete;
     Particle& operator =( Particle& p ) = delete;
@@ -87,7 +87,6 @@ public:
     *   Draw the particle
     */
     void draw() noexcept;
-
     /**
     *   @fn bool isDead() const noexcept
     *   Check if the particle is dead and must be destroyed
