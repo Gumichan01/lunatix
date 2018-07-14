@@ -31,7 +31,7 @@ namespace Win
 {
 
 class Window;
-class WM_;
+class WinManager_;
 
 
 class WindowNotFoundException final : public std::exception
@@ -57,7 +57,7 @@ public:
 */
 class WindowManager final
 {
-    std::unique_ptr<WM_> _wmpimpl;
+    std::unique_ptr<WinManager_> m_wmpimpl;
 
     WindowManager();
     ~WindowManager();

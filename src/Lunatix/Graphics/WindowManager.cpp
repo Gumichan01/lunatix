@@ -40,7 +40,7 @@ const char * WindowNotFoundException::what() const noexcept
 
 /* Window implementation */
 
-struct WM_ final
+struct WinManager_ final
 {
     std::unordered_map<uint32_t, Window&> windows{};
 };
@@ -50,11 +50,11 @@ WindowManager& getWindowManager() noexcept
     return WindowManager::getInstance();
 }
 
-WindowManager::WindowManager(): _wmpimpl( new WM_() ) {}
+WindowManager::WindowManager(): m_wmpimpl( new WinManager_() ) {}
 
 WindowManager::~WindowManager()
 {
-    _wmpimpl->windows.clear();
+    m_wmpimpl->windows.clear();
 }
 
 WindowManager& WindowManager::getInstance() noexcept
@@ -66,18 +66,18 @@ WindowManager& WindowManager::getInstance() noexcept
 
 bool WindowManager::addWindow( Window& w ) noexcept
 {
-    _wmpimpl->windows.insert( {w.getID(), w} );
+    m_wmpimpl->windows.insert( { w.getID(), w } );
     return true;
 }
 
 
 bool WindowManager::removeWindow( const uint32_t id ) noexcept
 {
-    auto it = _wmpimpl->windows.find( id );
+    auto it = m_wmpimpl->windows.find( id );
 
-    if ( it != _wmpimpl->windows.end() )
+    if ( it != m_wmpimpl->windows.end() )
     {
-        _wmpimpl->windows.erase( it );
+        m_wmpimpl->windows.erase( it );
         return true;
     }
 
@@ -87,13 +87,13 @@ bool WindowManager::removeWindow( const uint32_t id ) noexcept
 
 std::size_t WindowManager::nbWindows() const noexcept
 {
-    return _wmpimpl->windows.size();
+    return m_wmpimpl->windows.size();
 }
 
 
 void WindowManager::updateWindows() noexcept
 {
-    for ( auto& it : _wmpimpl->windows )
+    for ( auto& it : m_wmpimpl->windows )
     {
         it.second.update();
     }
@@ -102,7 +102,7 @@ void WindowManager::updateWindows() noexcept
 
 void WindowManager::clearWindows() noexcept
 {
-    for ( auto& it : _wmpimpl->windows )
+    for ( auto& it : m_wmpimpl->windows )
     {
         it.second.clearWindow();
     }
@@ -111,9 +111,9 @@ void WindowManager::clearWindows() noexcept
 
 Window& WindowManager::getWindow( const uint32_t id ) const
 {
-    auto it = _wmpimpl->windows.find( id );
+    auto it = m_wmpimpl->windows.find( id );
 
-    if ( it == _wmpimpl->windows.end() )
+    if ( it == m_wmpimpl->windows.end() )
     {
         const std::string errstr( "Not found window with identifer: " + id );
         throw WindowNotFoundException( errstr );
