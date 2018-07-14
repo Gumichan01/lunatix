@@ -55,9 +55,9 @@ struct FloatPosition final
 */
 struct FloatingBox final
 {
-    FloatPosition p;         /**< Position   */
-    int w;                      /**< Width      */
-    int h;                      /**< Height     */
+    FloatPosition p;        /**< Position   */
+    int w;                  /**< Width      */
+    int h;                  /**< Height     */
 };
 
 
