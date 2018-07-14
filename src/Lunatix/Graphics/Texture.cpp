@@ -88,7 +88,7 @@ SDL_Texture * loadTexture_( const std::string& filename,
 
 inline constexpr SDL_Rect sdl_rect_( const lx::Graphics::ImgRect& imgr )
 {
-    return SDL_Rect{imgr.p.x, imgr.p.y, imgr.w, imgr.h};
+    return SDL_Rect{ imgr.p.x, imgr.p.y, imgr.w, imgr.h };
 }
 
 inline constexpr bool isNull_( const SDL_Rect& rect )
@@ -166,33 +166,33 @@ Texture::~Texture()
 // protected constructor
 Sprite::Sprite( SDL_Texture * t, lx::Win::Window& w,
                 const UTF8string& filename,
-                const ImgRect& img_rect, PixelFormat format )
-    : Texture( t, w, format ), _img_rect( img_rect ), _filename( filename ) {}
+                const ImgRect& area, PixelFormat format )
+    : Texture( t, w, format ), m_area( area ), m_filename( filename ) {}
 
 Sprite::Sprite( const std::string& filename, lx::Win::Window& w,
                 PixelFormat format )
-    : Texture( filename, w, format ), _img_rect(), _filename( filename ) {}
+    : Texture( filename, w, format ), m_area(), m_filename( filename ) {}
 
 Sprite::Sprite( const std::string& filename, lx::Win::Window& w,
-                const ImgRect& img_rect, PixelFormat format )
-    : Texture( filename, w, format ), _img_rect( img_rect ),
-      _filename( filename ) {}
+                const ImgRect& area, PixelFormat format )
+    : Texture( filename, w, format ), m_area( area ),
+      m_filename( filename ) {}
 
 Sprite::Sprite( const UTF8string& filename, lx::Win::Window& w,
                 PixelFormat format )
-    : Texture( filename, w, format ), _img_rect(), _filename( filename ) {}
+    : Texture( filename, w, format ), m_area(), m_filename( filename ) {}
 
 Sprite::Sprite( const UTF8string& filename, lx::Win::Window& w,
-                const ImgRect& img_rect, PixelFormat format )
-    : Texture( filename, w, format ), _img_rect( img_rect ),
-      _filename( filename ) {}
+                const ImgRect& area, PixelFormat format )
+    : Texture( filename, w, format ), m_area( area ),
+      m_filename( filename ) {}
 
 
 void Sprite::draw() noexcept
 {
-    const SDL_Rect SDL_SRC = sdl_rect_( _img_rect );
-    const SDL_Rect * SDL_SRCP = isNull_( SDL_SRC ) ? nullptr : &SDL_SRC;
-    SDL_RenderCopy( render( _win.getRenderingSys() ), _texture, SDL_SRCP, nullptr );
+    const SDL_Rect SRC_RECT = sdl_rect_( m_area );
+    const SDL_Rect * SRC_AREA = isNull_( SRC_RECT ) ? nullptr : &SRC_RECT;
+    SDL_RenderCopy( render( _win.getRenderingSys() ), _texture, SRC_AREA, nullptr );
 }
 
 void Sprite::draw( const ImgRect& box ) noexcept
@@ -209,17 +209,17 @@ void Sprite::draw( const ImgRect& box, const double angle ) noexcept
 void Sprite::draw( const ImgRect& box, const double angle, const MirrorEffect MirrorEffect ) noexcept
 {
     const SDL_Rect SDL_RECT = sdl_rect_( box );
-    const SDL_Rect SDL_SRC = sdl_rect_( _img_rect );
-    const SDL_Rect * SDL_SRCP = isNull_( SDL_SRC ) ? nullptr : &SDL_SRC;
+    const SDL_Rect SRC_RECT = sdl_rect_( m_area );
+    const SDL_Rect * SRC_AREA = isNull_( SRC_RECT ) ? nullptr : &SRC_RECT;
 
-    SDL_RenderCopyEx( render( _win.getRenderingSys() ), _texture, SDL_SRCP, &SDL_RECT,
+    SDL_RenderCopyEx( render( _win.getRenderingSys() ), _texture, SRC_AREA, &SDL_RECT,
                       ( -radianToDegree( angle ) ), nullptr, shortToFlip_( MirrorEffect ) );
 }
 
 
 UTF8string Sprite::getFileName() noexcept
 {
-    return _filename;
+    return m_filename;
 }
 
 
@@ -231,8 +231,8 @@ AnimatedSprite::AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
                                 const uint32_t delay, bool loop,
                                 const UTF8string& filename, PixelFormat format )
     : Sprite( t, w, filename, ImgRect{0, 0, 0, 0}, format ),
-      _coordinates( coord ), _SZ( coord.size() ), _delay( delay ), _btime( 0 ),
-      _frame( 0 ), _started( false ), _loop( loop ), _drawable( true ) {}
+      m_coordinates( coord ), m_nbcoordinates( coord.size() ), m_delay( delay ), m_btime( 0 ),
+      m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
 // public constructor
 AnimatedSprite::AnimatedSprite( const std::string& filename,
@@ -247,9 +247,9 @@ AnimatedSprite::AnimatedSprite( const UTF8string& filename, lx::Win::Window& w,
                                 const std::vector<ImgRect>& coord,
                                 const uint32_t delay, bool loop,
                                 PixelFormat format )
-    : Sprite( filename, w, format ), _coordinates( coord ),
-      _SZ( coord.size() ), _delay( delay ), _btime( 0 ), _frame( 0 ),
-      _started( false ), _loop( loop ), _drawable( true ) {}
+    : Sprite( filename, w, format ), m_coordinates( coord ),
+      m_nbcoordinates( coord.size() ), m_delay( delay ), m_btime( 0 ), m_frame( 0 ),
+      m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
 
 void AnimatedSprite::draw( const ImgRect& box ) noexcept
@@ -265,30 +265,30 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle ) noexcept
 
 void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorEffect MirrorEffect ) noexcept
 {
-    if ( !_started )
+    if ( !m_started )
     {
-        _started = true;
-        _btime = SDL_GetTicks();
+        m_started = true;
+        m_btime = SDL_GetTicks();
     }
-    else if ( SDL_GetTicks() - _btime > _delay )
+    else if ( SDL_GetTicks() - m_btime > m_delay )
     {
-        _btime = SDL_GetTicks();
+        m_btime = SDL_GetTicks();
 
-        if ( _frame == _SZ - 1 )
+        if ( m_frame == m_nbcoordinates - 1 )
         {
-            if ( _loop )
-                _frame = 0;
+            if ( m_loop )
+                m_frame = 0;
             else
-                _drawable = false;
+                m_drawable = false;
         }
         else
-            _frame += 1;
+            m_frame += 1;
     }
 
-    if ( _drawable )
+    if ( m_drawable )
     {
         const SDL_Rect SDL_RECT = sdl_rect_( box );
-        const SDL_Rect COORD = sdl_rect_( _coordinates[_frame] );
+        const SDL_Rect COORD = sdl_rect_( m_coordinates[m_frame] );
 
         SDL_RenderCopyEx( render( _win.getRenderingSys() ), _texture,
                           &COORD, &SDL_RECT, ( -radianToDegree( angle ) ),
@@ -299,20 +299,20 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
 
 void AnimatedSprite::resetAnimation() noexcept
 {
-    _started = false;
-    _drawable = true;
-    _frame = 0;
+    m_started = false;
+    m_drawable = true;
+    m_frame = 0;
 }
 
 
 uint32_t AnimatedSprite::getFrameDelay() const noexcept
 {
-    return _delay;
+    return m_delay;
 }
 
 bool AnimatedSprite::isInfinitelyLooped() const noexcept
 {
-    return _loop;
+    return m_loop;
 }
 
 
@@ -324,24 +324,24 @@ BufferedImage::BufferedImage( SDL_Surface * s, PixelFormat format )
 
 BufferedImage::BufferedImage( SDL_Surface * s, const std::string& filename,
                               PixelFormat format )
-    : _surface( s ), _filename( filename )
+    : m_surface( s ), m_filename( filename )
 {
     uint32_t tmpf = u32( format );
 
     if ( s->format->format != tmpf )
     {
-        _surface = SDL_ConvertSurfaceFormat( s, tmpf, 0 );
+        m_surface = SDL_ConvertSurfaceFormat( s, tmpf, 0 );
         SDL_FreeSurface( s );
     }
 }
 
 
 BufferedImage::BufferedImage( const std::string& filename, PixelFormat format )
-    : _surface( nullptr ), _filename( filename )
+    : m_surface( nullptr ), m_filename( filename )
 {
-    _surface = loadSurface_( filename, format );
+    m_surface = loadSurface_( filename, format );
 
-    if ( _surface == nullptr )
+    if ( m_surface == nullptr )
         throw ImageException( "BufferedImage — Cannot load " + filename );
 }
 
@@ -350,10 +350,10 @@ BufferedImage::BufferedImage( const UTF8string& filename, PixelFormat format )
     : BufferedImage( filename.utf8_sstring(), format ) {}
 
 
-bool BufferedImage::_retrieveColours( const uint32_t pixel, Uint8& r, Uint8& g,
+bool BufferedImage::retrieveColours_( const uint32_t pixel, Uint8& r, Uint8& g,
                                       Uint8& b, Uint8& a ) const noexcept
 {
-    const PixelFormat fmt = static_cast<PixelFormat>( _surface->format->format );
+    const PixelFormat fmt = static_cast<PixelFormat>( m_surface->format->format );
     uint32_t tmp_r, tmp_g, tmp_b, tmp_a;
 
     switch ( fmt )
@@ -441,10 +441,10 @@ bool BufferedImage::_retrieveColours( const uint32_t pixel, Uint8& r, Uint8& g,
 }
 
 
-uint32_t BufferedImage::_updateGrayscaleColour( const Uint8 alpha, const Uint8 v ) const noexcept
+uint32_t BufferedImage::updateGrayscaleColour_( const Uint8 alpha, const Uint8 v ) const noexcept
 {
     uint32_t npixel = 0;
-    PixelFormat fmt = static_cast<PixelFormat>( _surface->format->format );
+    PixelFormat fmt = static_cast<PixelFormat>( m_surface->format->format );
 
     switch ( fmt )
     {
@@ -495,7 +495,7 @@ uint32_t BufferedImage::_updateGrayscaleColour( const Uint8 alpha, const Uint8 v
 }
 
 
-uint32_t BufferedImage::_convertGrayscalePixel( const uint32_t pixel ) const noexcept
+uint32_t BufferedImage::convertGrayscalePixel_( const uint32_t pixel ) const noexcept
 {
     const float RED_RATIO   = 0.212671f;
     const float GREEN_RATIO = 0.715160f;
@@ -503,7 +503,7 @@ uint32_t BufferedImage::_convertGrayscalePixel( const uint32_t pixel ) const noe
 
     Uint8 red = 0, green = 0, blue = 0, alpha = 0;
 
-    if ( !_retrieveColours( pixel, red, green, blue, alpha ) )
+    if ( !retrieveColours_( pixel, red, green, blue, alpha ) )
     {
         lx::Log::logCritical( lx::Log::VIDEO, "convert image: Unrecognized format" );
         return pixel;
@@ -514,16 +514,16 @@ uint32_t BufferedImage::_convertGrayscalePixel( const uint32_t pixel ) const noe
     const float B = static_cast<float>( blue );
 
     const Uint8 V = static_cast<Uint8>( RED_RATIO * R + GREEN_RATIO * G + BLUE_RATIO * B );
-    return _updateGrayscaleColour( alpha, V );
+    return updateGrayscaleColour_( alpha, V );
 }
 
 
 uint32_t
-BufferedImage::_updateNegativeColour( const Uint8 r, const Uint8 g,
+BufferedImage::updateNegativeColour_( const Uint8 r, const Uint8 g,
                                       const Uint8 b, const Uint8 a ) const noexcept
 {
     uint32_t npixel = 0;
-    PixelFormat fmt = static_cast<PixelFormat>( _surface->format->format );
+    PixelFormat fmt = static_cast<PixelFormat>( m_surface->format->format );
 
     switch ( fmt )
     {
@@ -577,11 +577,11 @@ BufferedImage::_updateNegativeColour( const Uint8 r, const Uint8 g,
 }
 
 
-uint32_t BufferedImage::_convertNegativePixel( const uint32_t pixel ) const noexcept
+uint32_t BufferedImage::convertNegativePixel_( const uint32_t pixel ) const noexcept
 {
     Uint8 red = 0, green = 0, blue = 0, alpha = 0;
 
-    if ( !_retrieveColours( pixel, red, green, blue, alpha ) )
+    if ( !retrieveColours_( pixel, red, green, blue, alpha ) )
     {
         lx::Log::logCritical( lx::Log::VIDEO, "convert image: Unrecognized format" );
         return pixel;
@@ -593,19 +593,19 @@ uint32_t BufferedImage::_convertNegativePixel( const uint32_t pixel ) const noex
     const Uint8 G = MINUS( MAX_UINT, green );
     const Uint8 B = MINUS( MAX_UINT, blue );
 
-    return _updateNegativeColour( R, G, B, alpha );
+    return updateNegativeColour_( R, G, B, alpha );
 }
 
 
 BufferedImage& BufferedImage::convertGrayscale() noexcept
 {
-    const long NBPIXELS = _surface->w * _surface->h;
-    uint32_t * pixels = static_cast<uint32_t *>( _surface->pixels );
+    const long NBPIXELS = m_surface->w * m_surface->h;
+    uint32_t * pixels = static_cast<uint32_t *>( m_surface->pixels );
 
     for ( long i = 0; i < NBPIXELS; ++i )
     {
         const uint32_t pixel = pixels[i];
-        pixels[i] = _convertGrayscalePixel( pixel );
+        pixels[i] = convertGrayscalePixel_( pixel );
     }
 
     return *this;
@@ -613,13 +613,13 @@ BufferedImage& BufferedImage::convertGrayscale() noexcept
 
 BufferedImage& BufferedImage::convertNegative() noexcept
 {
-    const long NBPIXELS = _surface->w * _surface->h;
-    uint32_t * pixels = static_cast<uint32_t *>( _surface->pixels );
+    const long NBPIXELS = m_surface->w * m_surface->h;
+    uint32_t * pixels = static_cast<uint32_t *>( m_surface->pixels );
 
     for ( long i = 0; i < NBPIXELS; ++i )
     {
         const uint32_t pixel = pixels[i];
-        pixels[i] = _convertNegativePixel( pixel );
+        pixels[i] = convertNegativePixel_( pixel );
     }
 
     return *this;
@@ -628,27 +628,27 @@ BufferedImage& BufferedImage::convertNegative() noexcept
 Sprite * BufferedImage::generateSprite( lx::Win::Window& w, const ImgRect& area ) const
 {
     return new Sprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ),
-                       _surface ), w, _filename, area );
+                       m_surface ), w, m_filename, area );
 }
 
 AnimatedSprite * BufferedImage::
 generateAnimatedSprite( lx::Win::Window& w, const std::vector<ImgRect>& coord,
                         const uint32_t delay, bool loop ) const
 {
-    return new AnimatedSprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), _surface ),
-                               w, coord, delay, loop, _filename );
+    return new AnimatedSprite( SDL_CreateTextureFromSurface( render( w.getRenderingSys() ), m_surface ),
+                               w, coord, delay, loop, m_filename );
 }
 
 
 UTF8string BufferedImage::getFileName() noexcept
 {
-    return _filename;
+    return m_filename;
 }
 
 
 BufferedImage::~BufferedImage()
 {
-    SDL_FreeSurface( _surface );
+    SDL_FreeSurface( m_surface );
 }
 
 
@@ -656,7 +656,7 @@ BufferedImage::~BufferedImage()
 /** StreamingTexture */
 
 StreamingTexture::StreamingTexture( lx::Win::Window& w, PixelFormat format )
-    : Texture( w, format ), _screen( nullptr ), _update( false )
+    : Texture( w, format ), m_screen( nullptr ), m_update( false )
 {
     int bpp, width, height;
     uint32_t r, g, b, a;
@@ -685,7 +685,7 @@ StreamingTexture::StreamingTexture( lx::Win::Window& w, PixelFormat format )
         throw ImageException( "StreamingTexture - bad dimensions" );
     else
     {
-        _screen  = SDL_CreateRGBSurface( 0, width, height, bpp, r, g, b, a );
+        m_screen  = SDL_CreateRGBSurface( 0, width, height, bpp, r, g, b, a );
         _texture = SDL_CreateTexture( render( w.getRenderingSys() ), u32( _format ),
                                       SDL_TEXTUREACCESS_STREAMING, width, height );
     }
@@ -695,21 +695,21 @@ StreamingTexture::StreamingTexture( lx::Win::Window& w, PixelFormat format )
 bool StreamingTexture::blit( BufferedImage& s, const ImgRect& rect ) noexcept
 {
     SDL_Rect SDL_RECT = sdl_rect_( rect );
-    bool b = ( SDL_BlitScaled( s._surface, nullptr, _screen, &SDL_RECT ) == 0 );
+    bool b = ( SDL_BlitScaled( s.m_surface, nullptr, m_screen, &SDL_RECT ) == 0 );
 
-    if ( !_update )
-        _update = b;
+    if ( !m_update )
+        m_update = b;
 
     return b;
 }
 
 void StreamingTexture::update() noexcept
 {
-    if ( _update )
+    if ( m_update )
     {
-        SDL_UpdateTexture( _texture, nullptr, _screen->pixels, _screen->pitch );
-        SDL_FillRect( _screen, nullptr, SDL_MapRGBA( _screen->format, 0, 0, 0, 0 ) );
-        _update = false;
+        SDL_UpdateTexture( _texture, nullptr, m_screen->pixels, m_screen->pitch );
+        SDL_FillRect( m_screen, nullptr, SDL_MapRGBA( m_screen->format, 0, 0, 0, 0 ) );
+        m_update = false;
     }
 }
 
@@ -721,7 +721,7 @@ void StreamingTexture::draw() noexcept
 StreamingTexture::~StreamingTexture()
 {
     SDL_DestroyTexture( _texture );
-    SDL_FreeSurface( _screen );
+    SDL_FreeSurface( m_screen );
 }
 
 
@@ -944,7 +944,7 @@ void SolidTextTexture::updateTexture_() noexcept
 ShadedTextTexture::
 ShadedTextTexture( lx::TrueTypeFont::Font& font, lx::Win::Window& w,
                    PixelFormat format )
-    : TextTexture( font, w, format ), _bgcolour( CNULL ) {}
+    : TextTexture( font, w, format ), m_bgcolour( CNULL ) {}
 
 
 ShadedTextTexture::
@@ -970,9 +970,9 @@ ShadedTextTexture::
 ShadedTextTexture( const UTF8string& text, unsigned int sz,
                    lx::TrueTypeFont::Font& font, const Colour& bg,
                    lx::Win::Window& w, PixelFormat format )
-    : TextTexture( text, sz, font, w, format ), _bgcolour( bg )
+    : TextTexture( text, sz, font, w, format ), m_bgcolour( bg )
 {
-    _texture = _font.drawShadedText_( _text, _size, _bgcolour, _win );
+    _texture = _font.drawShadedText_( _text, _size, m_bgcolour, _win );
 
     SDL_SetTextureAlphaMod( _texture, alpha_() );
 
@@ -987,7 +987,7 @@ ShadedTextTexture( const UTF8string& text, unsigned int sz,
 uint8_t ShadedTextTexture::alpha_()
 {
     const std::divides<Uint8> DIV;
-    return std::plus<Uint8>()( DIV( _colour.a, 2 ), DIV( _bgcolour.a, 2 ) );
+    return std::plus<Uint8>()( DIV( _colour.a, 2 ), DIV( m_bgcolour.a, 2 ) );
 }
 
 
@@ -999,7 +999,7 @@ void ShadedTextTexture::updateTexture_() noexcept
         SDL_DestroyTexture( _texture );
 
     _font.setColour_( _colour );
-    _texture = _font.drawShadedText_( _text, _size, _bgcolour, _win );
+    _texture = _font.drawShadedText_( _text, _size, m_bgcolour, _win );
 
     SDL_SetTextureAlphaMod( _texture, alpha_() );
     _font.sizeOfText_( _text, _size, _dimension.w, _dimension.h );
@@ -1009,9 +1009,9 @@ void ShadedTextTexture::updateTexture_() noexcept
 
 void ShadedTextTexture::setBgColour( const Colour& bg ) noexcept
 {
-    if ( _bgcolour != bg )
+    if ( m_bgcolour != bg )
     {
-        _bgcolour = bg;
+        m_bgcolour = bg;
 
         if ( !_text.utf8_empty() )
             updateTexture_();

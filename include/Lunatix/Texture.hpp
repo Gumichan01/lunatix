@@ -75,7 +75,7 @@ enum class MirrorEffect
 };
 
 /// Not supposed to be used
-static constexpr ImgRect RNULL = {{0, 0}, 0, 0};
+static constexpr ImgRect RNULL = { { 0, 0 }, 0, 0 };
 
 /**
 *   @class ImageException
@@ -142,7 +142,6 @@ public:
     */
     PixelFormat getFormat() const noexcept;
 
-
     virtual ~Texture();
 };
 
@@ -154,13 +153,13 @@ public:
 class Sprite: public Texture
 {
     friend class BufferedImage;
-    ImgRect _img_rect;
-    UTF8string _filename;
+    ImgRect m_area;
+    UTF8string m_filename;
 
 protected:
 
     Sprite( SDL_Texture * t, lx::Win::Window& w, const UTF8string& filename,
-            const ImgRect& img_rect,
+            const ImgRect& area,
             PixelFormat format = PixelFormat::RGBA8888 );
 
 public:
@@ -174,7 +173,7 @@ public:
     *   @exception ImageException On failure
     */
     Sprite( const std::string& filename, lx::Win::Window& w,
-            const ImgRect& img_rect,
+            const ImgRect& area,
             PixelFormat format = PixelFormat::RGBA8888 );
     /**
     *   @exception ImageException On failure
@@ -185,7 +184,7 @@ public:
     *   @exception ImageException On failure
     */
     Sprite( const UTF8string& filename, lx::Win::Window& w,
-            const ImgRect& img_rect,
+            const ImgRect& area,
             PixelFormat format = PixelFormat::RGBA8888 );
 
     virtual void draw() noexcept override;
@@ -254,14 +253,14 @@ public:
 class AnimatedSprite final : public Sprite
 {
     friend class BufferedImage;
-    const std::vector<ImgRect> _coordinates;
-    const size_t _SZ;
-    uint32_t _delay;    // Delay to display a part of the sprite sheet
-    uint32_t _btime;
-    size_t _frame;
-    bool _started;
-    bool _loop;         // TRUE: Infinite loop - FALSE: one loop
-    bool _drawable;
+    const std::vector<ImgRect> m_coordinates;
+    const size_t m_nbcoordinates;
+    uint32_t m_delay;               // Delay to display a part of the sprite sheet
+    uint32_t m_btime;
+    size_t m_frame;
+    bool m_started;
+    bool m_loop;                    // TRUE: Infinite loop - FALSE: one loop
+    bool m_drawable;
 
     AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
                     const std::vector<ImgRect>& coord, const uint32_t delay,
@@ -344,8 +343,8 @@ class BufferedImage final
     friend class lx::FileIO::FileBuffer;
     friend class lx::Win::Window;
 
-    SDL_Surface * _surface = nullptr;
-    UTF8string _filename{""};
+    SDL_Surface * m_surface = nullptr;
+    UTF8string m_filename;
 
     BufferedImage( const BufferedImage& ) = delete;
     BufferedImage& operator =( const BufferedImage& ) = delete;
@@ -355,13 +354,13 @@ class BufferedImage final
     BufferedImage( SDL_Surface * s, const std::string& filename,
                    PixelFormat format = PixelFormat::RGBA8888 );
 
-    bool _retrieveColours( const uint32_t pixel, Uint8& r, Uint8& g, Uint8& b, Uint8& a ) const noexcept;
+    bool retrieveColours_( const uint32_t pixel, Uint8& r, Uint8& g, Uint8& b, Uint8& a ) const noexcept;
 
-    uint32_t _updateGrayscaleColour( const Uint8 alpha, Uint8 v ) const noexcept;
-    uint32_t _updateNegativeColour( const Uint8 r, const Uint8 g, const Uint8 b, const Uint8 a ) const noexcept;
+    uint32_t updateGrayscaleColour_( const Uint8 alpha, Uint8 v ) const noexcept;
+    uint32_t updateNegativeColour_( const Uint8 r, const Uint8 g, const Uint8 b, const Uint8 a ) const noexcept;
 
-    uint32_t _convertGrayscalePixel( const uint32_t pixel ) const noexcept;
-    uint32_t _convertNegativePixel( const uint32_t pixel ) const noexcept;
+    uint32_t convertGrayscalePixel_( const uint32_t pixel ) const noexcept;
+    uint32_t convertNegativePixel_( const uint32_t pixel ) const noexcept;
 
 public:
 
@@ -437,8 +436,8 @@ public:
 */
 class StreamingTexture final : public Texture
 {
-    SDL_Surface * _screen;
-    bool _update;
+    SDL_Surface * m_screen;
+    bool m_update;
 
     StreamingTexture( const StreamingTexture& ) = delete;
     StreamingTexture& operator =( const StreamingTexture& ) = delete;
@@ -721,7 +720,7 @@ public:
 */
 class ShadedTextTexture final : public TextTexture
 {
-    Colour _bgcolour;
+    Colour m_bgcolour;
 
     uint8_t alpha_();
 

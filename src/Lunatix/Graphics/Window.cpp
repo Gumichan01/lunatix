@@ -424,7 +424,7 @@ void * Window::getRenderingSys() const noexcept
 
 void Window::setIcon( const std::string& ficon ) noexcept
 {
-    SDL_SetWindowIcon( _wimpl->_window, lx::Graphics::BufferedImage( ficon )._surface );
+    SDL_SetWindowIcon( _wimpl->_window, lx::Graphics::BufferedImage( ficon ).m_surface );
 }
 
 
