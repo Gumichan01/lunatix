@@ -97,20 +97,21 @@ bin/
 obj/
 
 ### Others (custom) ###
-*.log
-win-*
 html/
-*Doxyfile*
 lib/
 include/SDL2/
 include/GL/
+*.log
+win-*
+*Doxyfile*
 *.cppcheck
 Makefile.depend
 cscope*
 lunatix.cbp
 *log.txt
 lx-package-win32.sh
-./test-*
 lunatix-demo
+*
+!*.cpp
 
 # End of https://www.gitignore.io/api/vim,c++,linux,macos
