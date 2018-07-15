@@ -110,5 +110,7 @@ cscope*
 lunatix.cbp
 *log.txt
 lx-package-win32.sh
+test-*
+lunatix-demo
 
 # End of https://www.gitignore.io/api/vim,c++,linux,macos
