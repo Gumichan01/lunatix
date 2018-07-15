@@ -291,9 +291,7 @@ class AnimatedSprite final : public Sprite
     const size_t M_NBCOORDINATES;
     lx::Time::Timer m_timer;
     uint32_t m_delay;               // Delay to display a part of the sprite sheet
-    uint32_t m_btime;
     size_t m_frame;
-    bool m_started;
     bool m_loop;                    // TRUE: Infinite loop - FALSE: one loop
     bool m_drawable;
 

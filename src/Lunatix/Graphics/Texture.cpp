@@ -232,7 +232,7 @@ AnimatedSprite::AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
                                 const UTF8string& filename, PixelFormat format )
     : Sprite( t, w, filename, RNULL, format ), M_COORDINATES( coord ),
       M_NBCOORDINATES( coord.size() ), m_timer(), m_delay( delay ),
-      m_btime( 0 ), m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
+      m_frame( 0 ), m_loop( loop ), m_drawable( true ) {}
 
 // public constructor
 AnimatedSprite::AnimatedSprite( const std::string& filename,
@@ -249,7 +249,7 @@ AnimatedSprite::AnimatedSprite( const UTF8string& filename, lx::Win::Window& w,
                                 PixelFormat format )
     : Sprite( filename, w, format ), M_COORDINATES( coord ),
       M_NBCOORDINATES( coord.size() ), m_timer(), m_delay( delay ),
-      m_btime( 0 ), m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
+      m_frame( 0 ), m_loop( loop ), m_drawable( true ) {}
 
 
 void AnimatedSprite::draw( const ImgRect& box ) noexcept
@@ -268,14 +268,9 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
     if ( m_timer.isStopped() )
     {
         m_timer.start();
-        //m_started = true;
-        //m_btime = SDL_GetTicks();
     }
     else if ( m_timer.getTicks() > m_delay )
-    //else if ( SDL_GetTicks() - m_btime > m_delay )
     {
-        //m_btime = SDL_GetTicks();
-
         if ( m_frame == M_NBCOORDINATES - 1 )
         {
             if ( m_loop )
@@ -287,7 +282,7 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
             m_frame += 1;
 
         // I need to restart the timer, so I can calculate the new delay
-        // of the new frame ()
+        // of the new frame.
         m_timer.lap();
     }
 
@@ -305,7 +300,6 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
 
 void AnimatedSprite::resetAnimation() noexcept
 {
-    m_started = false;
     m_drawable = true;
     m_frame = 0;
 }
