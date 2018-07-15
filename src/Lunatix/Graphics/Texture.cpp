@@ -265,14 +265,16 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle ) noexcept
 
 void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorEffect mirror ) noexcept
 {
-    if ( !m_started )
+    if ( m_timer.isStopped() )
     {
-        m_started = true;
-        m_btime = SDL_GetTicks();
+        m_timer.start();
+        //m_started = true;
+        //m_btime = SDL_GetTicks();
     }
-    else if ( SDL_GetTicks() - m_btime > m_delay )
+    else if ( m_timer.getTicks() > m_delay )
+    //else if ( SDL_GetTicks() - m_btime > m_delay )
     {
-        m_btime = SDL_GetTicks();
+        //m_btime = SDL_GetTicks();
 
         if ( m_frame == M_NBCOORDINATES - 1 )
         {
@@ -283,6 +285,10 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
         }
         else
             m_frame += 1;
+
+        // I need to restart the timer, so I can calculate the new delay
+        // of the new frame ()
+        m_timer.lap();
     }
 
     if ( m_drawable )
