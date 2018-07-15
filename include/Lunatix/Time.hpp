@@ -27,6 +27,15 @@
 *   @namespace lx::Time
 *   @brief Very simple namespace for handling time
 *
+*   LunatiX has a global timer, based on SDL timer. This timer is launched at the library
+*   initialization. It is possible to the elapsed time since LunatiX has been
+*   initialized by calling ::getTicks().
+*
+*   It is also possible to use a local timer (see Timer). It can be used as a stopwatch
+*   for specific needs.
+*
+*   @note Every measures are in millisecond (ms)
+*
 */
 namespace lx
 {
@@ -49,8 +58,6 @@ void delay( uint32_t ms ) noexcept;
 /**
 *   @class Timer
 *   @brief The chronograph/stopwatch
-*
-*   Unit : milliseconds (ms)
 */
 class Timer final
 {
