@@ -47,9 +47,9 @@ inline constexpr uint32_t u32( lx::Graphics::PixelFormat& x )
     return static_cast<uint32_t>( x );
 }
 
-inline constexpr SDL_RendererFlip shortToFlip_( const lx::Graphics::MirrorEffect& MirrorEffect ) noexcept
+inline constexpr SDL_RendererFlip cast_( const lx::Graphics::MirrorEffect& mirror ) noexcept
 {
-    return static_cast<SDL_RendererFlip>( MirrorEffect );
+    return static_cast<SDL_RendererFlip>( mirror );
 }
 
 inline constexpr double radianToDegree( const double angle ) noexcept
@@ -206,14 +206,14 @@ void Sprite::draw( const ImgRect& box, const double angle ) noexcept
     draw( box, angle, MirrorEffect::NONE );
 }
 
-void Sprite::draw( const ImgRect& box, const double angle, const MirrorEffect MirrorEffect ) noexcept
+void Sprite::draw( const ImgRect& box, const double angle, const MirrorEffect mirror ) noexcept
 {
     const SDL_Rect SDL_RECT = sdl_rect_( box );
     const SDL_Rect SRC_RECT = sdl_rect_( m_area );
     const SDL_Rect * SRC_AREA = isNull_( SRC_RECT ) ? nullptr : &SRC_RECT;
 
     SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture, SRC_AREA, &SDL_RECT,
-                      ( -radianToDegree( angle ) ), nullptr, shortToFlip_( MirrorEffect ) );
+                      ( -radianToDegree( angle ) ), nullptr, cast_( mirror ) );
 }
 
 
@@ -263,7 +263,7 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle ) noexcept
 }
 
 
-void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorEffect MirrorEffect ) noexcept
+void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorEffect mirror ) noexcept
 {
     if ( !m_started )
     {
@@ -292,7 +292,7 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
 
         SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture,
                           &COORD, &SDL_RECT, ( -radianToDegree( angle ) ),
-                          nullptr, shortToFlip_( MirrorEffect ) );
+                          nullptr, cast_( mirror ) );
     }
 }
 
@@ -775,12 +775,12 @@ void TextTexture::draw( const double angle ) noexcept
 }
 
 
-void TextTexture::draw( const double angle, const MirrorEffect MirrorEffect ) noexcept
+void TextTexture::draw( const double angle, const MirrorEffect mirror ) noexcept
 {
     const SDL_Rect DIM = sdl_rect_( _dimension );
     SDL_RenderCopyEx( render( _win.getRenderingSys_() ), _texture, nullptr,
                       &DIM, ( -radianToDegree( angle ) ), nullptr,
-                      shortToFlip_( MirrorEffect ) );
+                      cast_( mirror ) );
 }
 
 const UTF8string TextTexture::getText() const noexcept

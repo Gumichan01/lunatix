@@ -66,11 +66,11 @@ namespace Graphics
 
 enum class MirrorEffect
 {
-    /// Flag to define no MirrorEffect while drawing a texture
+    /// Flag to define no mirror while drawing a texture
     NONE       = 0,
-    /// Flag to define horizontal MirrorEffect while drawing a texture
+    /// Flag to define horizontal mirror while drawing a texture
     HORIZONTAL = 1,
-    /// Flag to define vertical MirrorEffect while drawing a texture
+    /// Flag to define vertical mirror while drawing a texture
     VERTICAL   = 2,
 };
 
@@ -248,7 +248,7 @@ public:
     */
     virtual void draw( const ImgRect& box, const double angle ) noexcept;
     /**
-    *   @fn virtual void draw(const ImgRect& box, const double angle, const MirrorEffect MirrorEffect) noexcept
+    *   @fn virtual void draw(const ImgRect& box, const double angle, const MirrorEffect mirror) noexcept
     *
     *   Draw the current sprite on the window with rotation
     *
@@ -257,14 +257,14 @@ public:
     *         then the sprite is drawn on the entire screen
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
-    *   @param [in] MirrorEffect The flag that set the MirrorEffect effect:
-    *         - MirrorEffect_NONE: No MirrorEffect effect
-    *         - MirrorEffect_HORIZONTAL: Horizontal MirrorEffect
-    *         - MirrorEffect_VERTICAL: Vertical MirrorEffect
+    *   @param [in] mirror The flag that set the mirror effect:
+    *         - MirrorEffect::NONE: No mirror effect
+    *         - MirrorEffect::HORIZONTAL: Horizontal mirror
+    *         - MirrorEffect::VERTICAL: Vertical mirror
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw( const ImgRect& box, const double angle, const MirrorEffect MirrorEffect ) noexcept;
+    virtual void draw( const ImgRect& box, const double angle, const MirrorEffect mirror ) noexcept;
 
     /**
     *   @fn UTF8string getFileName() noexcept
@@ -310,7 +310,7 @@ public:
     *   Build an animated sprite from a sprite sheet
     *
     *   @param [in] filename The sprite sheet file to load
-    *   @param [in] w The window the animated sprite will be drawn on → see *draw()*
+    *   @param [in] w The window to draw the animated sprite on → see *draw()*
     *   @param [in] coord The list of coordinates for each sprite on the sprite sheet
     *   @param [in] delay The delay to display each sprite of the sprite sheet
     *   @param [in] loop Boolean value that specify if the animation must be looped infinitely
@@ -335,7 +335,7 @@ public:
     virtual void draw( const ImgRect& box ) noexcept override;
     virtual void draw( const ImgRect& box, const double angle ) noexcept override;
     virtual void draw( const ImgRect& box, const double angle,
-                       const MirrorEffect MirrorEffect ) noexcept override;
+                       const MirrorEffect mirror ) noexcept override;
 
     /**
     *   @fn void resetAnimation() noexcept
@@ -553,7 +553,7 @@ public:
     /**
     *   @fn virtual void draw(const double angle) noexcept
     *
-    *   Draw the current text on the window with rotation and MirrorEffect effect
+    *   Draw the current text on the window with rotation and mirror effect
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
     *
@@ -561,19 +561,19 @@ public:
     */
     virtual void draw( const double angle ) noexcept;
     /**
-    *   @fn virtual void draw(const double angle, const MirrorEffect MirrorEffect) noexcept
+    *   @fn virtual void draw(const double angle, const MirrorEffect mirror) noexcept
     *
-    *   Draw the current text on the window with rotation and MirrorEffect effect
+    *   Draw the current text on the window with rotation and mirror effect
     *
     *   @param [in] angle The angle to rotate the sprite (in radian)
-    *   @param [in] MirrorEffect The flag that set the MirrorEffect effect:
-    *         - DRAW_MirrorEffect_NONE: No MirrorEffect effect
-    *         - MirrorEffect_HORIZONTAL: Horizontal MirrorEffect
-    *         - MirrorEffect_VERTICAL: Vertical MirrorEffect
+    *   @param [in] mirror The flag that set the mirror effect:
+    *         - MirrorEffect::NONE: No mirror effect
+    *         - MirrorEffect::HORIZONTAL: Horizontal mirror
+    *         - MirrorEffect::VERTICAL: Vertical mirror
     *
     *   @note The window is specified at object construction
     */
-    virtual void draw( const double angle, const MirrorEffect MirrorEffect ) noexcept;
+    virtual void draw( const double angle, const MirrorEffect mirror ) noexcept;
 
     /**
     *   @fn const UTF8string getText() const noexcept
