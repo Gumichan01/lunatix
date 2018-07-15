@@ -19,13 +19,24 @@
 */
 
 #include <Lunatix/Time.hpp>
-
+#include <SDL2/SDL_timer.h>
 
 namespace lx
 {
 
 namespace Time
 {
+
+uint32_t getTicks() noexcept
+{
+    return SDL_GetTicks();
+}
+
+void delay( uint32_t ms ) noexcept
+{
+    SDL_Delay( ms );
+}
+
 
 void Timer::start() noexcept
 {

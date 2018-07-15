@@ -20,7 +20,7 @@
 *   @version 0.13
 */
 
-#include <SDL2/SDL_timer.h>
+#include <cstdint>
 
 /**
 *   @ingroup System
@@ -34,23 +34,17 @@ namespace lx
 namespace Time
 {
 /**
-*   @fn inline uint32_t getTicks()
-*   Get the number of milliseconds since the initialization of the engine
-*   @return The tick
+*   @fn uint32_t getTicks()
+*   Get the elapsed time since the initialization of the Library (ms)
+*   @return 32-bit unsinged value
 */
-inline uint32_t getTicks() noexcept
-{
-    return SDL_GetTicks();
-}
+uint32_t getTicks() noexcept;
 /**
-*   @fn inline void delay(uint32_t ms)
+*   @fn void delay(uint32_t ms)
 *   Wait for a certain number of milliseconds before returning
-*   @param ms The delay
+*   @param ms The delay, in millisecond (ms)
 */
-inline void delay( uint32_t ms ) noexcept
-{
-    SDL_Delay( ms );
-}
+void delay( uint32_t ms ) noexcept;
 
 /**
 *   @class Timer
