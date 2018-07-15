@@ -268,7 +268,8 @@ void test_image( lx::Win::Window * win )
 
         lx::Log::logInfo( lx::Log::APPLICATION, "Movement of the sprite" );
 
-        Uint32 t1 = SDL_GetTicks();
+        lx::Time::Timer timer0;
+        timer0.start();
         for ( int i = 0; i < 512; i++ )
         {
             box.p.x += 1;
@@ -277,8 +278,9 @@ void test_image( lx::Win::Window * win )
             win->update();
             lx::Time::delay( 16 );
         }
-        Uint32 t2 = SDL_GetTicks();
-        lx::Log::logInfo( lx::Log::APPLICATION, "Done in %d ms", t2 - t1 );
+        timer0.pause();
+        lx::Log::logInfo( lx::Log::APPLICATION, "Done in %d ms", timer0.getTicks() );
+        timer0.stop();
     }
     catch ( lx::Graphics::ImageException& ie )
     {
@@ -306,7 +308,8 @@ void test_image( lx::Win::Window * win )
         lx::Log::logInfo( lx::Log::APPLICATION, "Update the stream" );
         lx::Log::logInfo( lx::Log::APPLICATION, "StreamingTexture example, with BufferedImage" );
 
-        Uint32 t1 = SDL_GetTicks();
+        lx::Time::Timer timer0;
+        timer0.start();
         for ( int i = 0; i < 64; i++ )
         {
             box.p.x += 4;
@@ -317,8 +320,9 @@ void test_image( lx::Win::Window * win )
             win->update();
             lx::Time::delay( 16 );
         }
-        Uint32 t2 = SDL_GetTicks();
-        lx::Log::logInfo( lx::Log::APPLICATION, "Done in %d ms", t2 - t1 );
+        timer0.pause();
+        lx::Log::logInfo( lx::Log::APPLICATION, "Done in %d ms", timer0.getTicks() );
+        timer0.stop();
     }
     catch ( lx::Graphics::ImageException& ie )
     {
@@ -373,7 +377,7 @@ void test_image( lx::Win::Window * win )
 
     {
         lx::Log::logInfo( lx::Log::APPLICATION, "Animation" );
-        Uint32 delay = 125;
+        Uint32 delay = 100;
         std::vector<ImgRect> coordinates;
         coordinates.push_back( {212, 0, 211, 448} );
         coordinates.push_back( {424, 0, 211, 448} );
@@ -419,10 +423,11 @@ void test_image( lx::Win::Window * win )
                               sprite.isInfinitelyLooped() ? "Yes" : "No" );
             lx::Log::log( "frame delay: %u ms", sprite.getFrameDelay() );
 
-            uint32_t t = lx::Time::getTicks();
+            lx::Time::Timer timer;
+            timer.start();
             for ( int j = 0; j <= 1; j++ )
             {
-                while ( ( lx::Time::getTicks() - t ) < 2000 )
+                while ( timer.getTicks() < 1512 )
                 {
                     win->clearWindow();
                     sprite.draw( rect );
@@ -430,12 +435,12 @@ void test_image( lx::Win::Window * win )
                     lx::Time::delay( 16 );
                 }
 
-                win->clearWindow();
+                lx::Log::log( "Out of the loop" );
                 sprite.resetAnimation();
                 lx::Log::log( "Reset animation" );
-                t = lx::Time::getTicks();
-                lx::Time::delay( 500 );
+                timer.lap();
             }
+            timer.stop();
         }
     }
 
@@ -475,11 +480,12 @@ void test_viewport( lx::Win::Window * win )
     lx::Log::logInfo( lx::Log::APPLICATION, "Viewport: {%d,%d,%d,%d}",
                       viewport.p.x, viewport.p.y, viewport.w, viewport.h );
 
-    Uint32 b = SDL_GetTicks();
+    lx::Time::Timer tm;
     ImgRect brect{0, 0, win->getWidth() / 2, win->getHeight() / 2};
     lx::Graphics::Colour bcolour{0, 0, 0, 255};
+    tm.start();
 
-    while ( SDL_GetTicks() - b < 4096 )
+    while ( tm.getTicks() < 4096 )
     {
         win->clearWindow();
         win->resetViewPort();
@@ -493,6 +499,8 @@ void test_viewport( lx::Win::Window * win )
         win->update();
         lx::Time::delay( 16 );
     }
+
+    tm.stop();
     win->clearWindow();
     lx::Log::log( " = END TEST= " );
 }
