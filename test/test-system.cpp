@@ -10,10 +10,13 @@ void testTime1() noexcept;
 void testTime2() noexcept;
 void testTime3() noexcept;
 void testTime4() noexcept;
+void testConversion() noexcept;
 
 int main( int argc, char ** argv )
 {
+    lx::Log::log( "global time prologue - value: %u ms", lx::Time::getTicks() );
     lx::init();
+    lx::Log::log( "global time beginning - value: %u ms", lx::Time::getTicks() );
     lx::Log::setDebugMode();
 
     testSys();
@@ -21,6 +24,8 @@ int main( int argc, char ** argv )
     testTime2();
     testTime3();
     testTime4();
+    testConversion();
+    lx::Log::log( "global time end - value: %u ms", lx::Time::getTicks() );
     lx::quit();
 
     return EXIT_SUCCESS;
@@ -163,4 +168,51 @@ void testTime4() noexcept
     timer.stop();
 
     lx::Log::log( " ==== End Time 4 ==== \n" );
+}
+
+void testConversion() noexcept
+{
+    lx::Log::log( " ==== Test Conversion ==== \n" );
+
+    const uint32_t ONE_SEC = 1000U;
+    const uint32_t ONE_MINUTE = 1000U * 60U;
+    const uint32_t ONE_HOUR = 1000U * 3600U;
+
+    const uint32_t ONE_SEC_X = 1U;
+    const uint32_t ONE_MINUTE_X = 1U;
+    const uint32_t ONE_HOUR_X = 1U;
+    uint32_t v = lx::Time::seconds(ONE_SEC);
+
+    if( v == ONE_SEC_X )
+        lx::Log::logInfo( lx::Log::TEST, "SUCCESS - conversion millisecond to second" );
+    else
+        lx::Log::logInfo( lx::Log::TEST, "FAILURE - expected: %u; got: %u", ONE_SEC_X, v );
+
+    v = lx::Time::minutes(ONE_MINUTE);
+
+    if( v == ONE_MINUTE_X )
+        lx::Log::logInfo( lx::Log::TEST, "SUCCESS - conversion millisecond to minute" );
+    else
+        lx::Log::logInfo( lx::Log::TEST, "FAILURE - expected: %u; got: %u", ONE_MINUTE_X, v );
+
+    v = lx::Time::hours(ONE_HOUR);
+
+    if( v == ONE_HOUR_X )
+        lx::Log::logInfo( lx::Log::TEST, "SUCCESS - conversion millisecond to hour" );
+    else
+        lx::Log::logInfo( lx::Log::TEST, "FAILURE - expected: %u; got: %u", ONE_HOUR_X, v );
+
+    lx::Random::initRand();
+    uint32_t rv = lx::Random::xrand<uint32_t>( 1000U, 1000000000U );
+    uint32_t s = lx::Time::seconds(rv);
+    uint32_t m = lx::Time::minutes(rv);
+    uint32_t h = lx::Time::hours(rv);
+
+    lx::Log::log( "value (ms): %u ms", rv );
+    lx::Log::log( "value (s): %u seconds", s );
+    lx::Log::log( "value (m): %u minutes", m );
+    lx::Log::log( "value (h): %u hours", h );
+
+    lx::Log::log( " ==== End Conversion ==== \n" );
+
 }

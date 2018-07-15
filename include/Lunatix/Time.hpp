@@ -51,9 +51,35 @@ uint32_t getTicks() noexcept;
 /**
 *   @fn void delay(uint32_t ms)
 *   Wait for a certain number of milliseconds before returning
-*   @param ms The delay, in millisecond (ms)
+*   @param [in] ms The delay, in millisecond (ms)
 */
 void delay( uint32_t ms ) noexcept;
+
+/**
+*   @fn uint32_t seconds( uint32_t ms ) noexcept
+*   Conversion, millisecond to second
+*
+*   @param [in] ms value in millisecond (ms)
+*   @return The value in second
+*/
+uint32_t seconds( uint32_t ms ) noexcept;
+/**
+*   @fn uint32_t minutes( uint32_t ms ) noexcept
+*   Conversion, millisecond to minute
+*
+*   @param [in] ms value in millisecond (ms)
+*   @return The value in minute
+*/
+uint32_t minutes( uint32_t ms ) noexcept;
+/**
+*   @fn uint32_t hours( uint32_t ms ) noexcept
+*   Conversion, millisecond to hour
+*
+*   @param [in] ms value to convert
+*   @return The value in hour
+*/
+uint32_t hours( uint32_t ms ) noexcept;
+
 
 /**
 *   @class Timer

@@ -27,6 +27,13 @@ namespace lx
 namespace Time
 {
 
+// 1 second in millisecond
+constexpr uint32_t SECOND = 1000;
+// 1 minute in millisecond
+constexpr uint32_t MINUTE = 60 * SECOND;
+// 1 hour in millisecond
+constexpr uint32_t HOUR = 60 * MINUTE;
+
 uint32_t getTicks() noexcept
 {
     return SDL_GetTicks();
@@ -37,6 +44,20 @@ void delay( uint32_t ms ) noexcept
     SDL_Delay( ms );
 }
 
+uint32_t seconds( uint32_t ms ) noexcept
+{
+    return ms / SECOND;
+}
+
+uint32_t minutes( uint32_t ms ) noexcept
+{
+    return ms / MINUTE;
+}
+
+uint32_t hours( uint32_t ms ) noexcept
+{
+    return ms / HOUR;
+}
 
 void Timer::start() noexcept
 {
