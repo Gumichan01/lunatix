@@ -57,14 +57,14 @@ namespace Physics
 
 const unsigned long TRIANGLE_SIDES = 3UL;
 
-PolygonException::PolygonException( std::string err ) : _string_error( err ) {}
+PolygonException::PolygonException( std::string err ) : m_msg( err ) {}
 
 PolygonException::PolygonException( const PolygonException& pex )
-    : _string_error( pex._string_error ) {}
+    : m_msg( pex.m_msg ) {}
 
 const char * PolygonException::what() const noexcept
 {
-    return _string_error.c_str();
+    return m_msg.c_str();
 }
 
 PolygonException::~PolygonException() noexcept {}

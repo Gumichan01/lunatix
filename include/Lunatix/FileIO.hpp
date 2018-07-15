@@ -82,7 +82,7 @@ enum class FileWhence
 */
 class IOException final : public std::exception
 {
-    std::string _string_error;
+    std::string m_msg;
 
     IOException& operator =( const IOException& io );
 

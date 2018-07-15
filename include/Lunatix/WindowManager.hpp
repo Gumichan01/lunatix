@@ -36,7 +36,7 @@ class WinManager_;
 
 class WindowNotFoundException final : public std::exception
 {
-    std::string _string_error;
+    std::string m_msg;
 
     WindowNotFoundException& operator =( const WindowNotFoundException& w ) = delete;
 

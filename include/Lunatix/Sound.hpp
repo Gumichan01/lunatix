@@ -36,7 +36,7 @@ namespace Mixer
 */
 class MixerException final : public std::exception
 {
-    std::string _string_error;
+    std::string m_msg;
 
 public:
 

@@ -171,7 +171,7 @@ void loadWindowConfig( WindowInfo& info ) noexcept;
 */
 class WindowException final : public std::exception
 {
-    std::string _string_error;
+    std::string m_msg;
 
     WindowException& operator =( const WindowException& w );
 

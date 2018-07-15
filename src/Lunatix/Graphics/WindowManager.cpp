@@ -30,11 +30,11 @@ namespace Win
 {
 
 WindowNotFoundException::WindowNotFoundException( const std::string& err )
-    : _string_error( err ) {}
+    : m_msg( err ) {}
 
 const char * WindowNotFoundException::what() const noexcept
 {
-    return _string_error.c_str();
+    return m_msg.c_str();
 }
 
 

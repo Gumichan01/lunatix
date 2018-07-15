@@ -105,14 +105,14 @@ namespace lx
 namespace Graphics
 {
 
-ImageException::ImageException( std::string err ) : _string_error( err ) {}
+ImageException::ImageException( std::string err ) : m_msg( err ) {}
 
 ImageException::ImageException( const ImageException& me )
-    : _string_error( me._string_error ) {}
+    : m_msg( me.m_msg ) {}
 
 const char * ImageException::what() const noexcept
 {
-    return _string_error.c_str();
+    return m_msg.c_str();
 }
 
 

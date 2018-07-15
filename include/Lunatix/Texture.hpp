@@ -84,7 +84,7 @@ static constexpr ImgRect RNULL = { { 0, 0 }, 0, 0 };
 */
 class ImageException final : public std::exception
 {
-    std::string _string_error;
+    std::string m_msg;
 
 public:
 

@@ -298,14 +298,14 @@ void loadWindowConfig( WindowInfo& info ) noexcept
 
 /* Exception */
 
-WindowException::WindowException( std::string err ) : _string_error( err ) {}
+WindowException::WindowException( std::string err ) : m_msg( err ) {}
 
 WindowException::WindowException( const WindowException& w )
-    : _string_error( w._string_error ) {}
+    : m_msg( w.m_msg ) {}
 
 const char * WindowException::what() const noexcept
 {
-    return _string_error.c_str();
+    return m_msg.c_str();
 }
 
 

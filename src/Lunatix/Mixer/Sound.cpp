@@ -26,14 +26,14 @@ namespace lx
 namespace Mixer
 {
 
-MixerException::MixerException( std::string err ) : _string_error( err ) {}
+MixerException::MixerException( std::string err ) : m_msg( err ) {}
 
 MixerException::MixerException( const MixerException& me )
-    : _string_error( me._string_error ) {}
+    : m_msg( me.m_msg ) {}
 
 const char * MixerException::what() const noexcept
 {
-    return _string_error.c_str();
+    return m_msg.c_str();
 }
 
 }   // Mixer

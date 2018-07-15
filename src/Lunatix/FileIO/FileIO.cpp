@@ -32,13 +32,13 @@ namespace lx
 namespace FileIO
 {
 
-IOException::IOException( const std::string& err ) : _string_error( err ) {}
+IOException::IOException( const std::string& err ) : m_msg( err ) {}
 
-IOException::IOException( const IOException& io ) : _string_error( io._string_error ) {}
+IOException::IOException( const IOException& io ) : m_msg( io.m_msg ) {}
 
 const char * IOException::what() const noexcept
 {
-    return _string_error.c_str();
+    return m_msg.c_str();
 }
 
 IOException::~IOException() noexcept {}
