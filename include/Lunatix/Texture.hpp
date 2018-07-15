@@ -23,6 +23,7 @@
 #include <Lunatix/Colour.hpp>
 #include <Lunatix/Format.hpp>
 #include <Lunatix/ImgRect.hpp>
+#include <Lunatix/Time.hpp>
 #include <Lunatix/utils/utf8_string.hpp>
 
 #include <utility>
@@ -288,6 +289,7 @@ class AnimatedSprite final : public Sprite
     friend class BufferedImage;
     const std::vector<ImgRect> M_COORDINATES;
     const size_t M_NBCOORDINATES;
+    lx::Time::Timer m_timer;
     uint32_t m_delay;               // Delay to display a part of the sprite sheet
     uint32_t m_btime;
     size_t m_frame;

@@ -230,9 +230,9 @@ AnimatedSprite::AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
                                 const std::vector<ImgRect>& coord,
                                 const uint32_t delay, bool loop,
                                 const UTF8string& filename, PixelFormat format )
-    : Sprite( t, w, filename, RNULL, format ),
-      M_COORDINATES( coord ), M_NBCOORDINATES( coord.size() ), m_delay( delay ), m_btime( 0 ),
-      m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
+    : Sprite( t, w, filename, RNULL, format ), M_COORDINATES( coord ),
+      M_NBCOORDINATES( coord.size() ), m_timer(), m_delay( delay ),
+      m_btime( 0 ), m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
 // public constructor
 AnimatedSprite::AnimatedSprite( const std::string& filename,
@@ -248,8 +248,8 @@ AnimatedSprite::AnimatedSprite( const UTF8string& filename, lx::Win::Window& w,
                                 const uint32_t delay, bool loop,
                                 PixelFormat format )
     : Sprite( filename, w, format ), M_COORDINATES( coord ),
-      M_NBCOORDINATES( coord.size() ), m_delay( delay ), m_btime( 0 ), m_frame( 0 ),
-      m_started( false ), m_loop( loop ), m_drawable( true ) {}
+      M_NBCOORDINATES( coord.size() ), m_timer(), m_delay( delay ),
+      m_btime( 0 ), m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
 
 void AnimatedSprite::draw( const ImgRect& box ) noexcept
