@@ -276,7 +276,10 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
             if ( m_loop )
                 m_frame = 0;
             else
+            {
+                m_timer.pause();
                 m_drawable = false;
+            }
         }
         else
             m_frame += 1;
@@ -300,6 +303,8 @@ void AnimatedSprite::draw( const ImgRect& box, const double angle, const MirrorE
 
 void AnimatedSprite::resetAnimation() noexcept
 {
+    m_timer.stop();
+    m_timer.reset();
     m_drawable = true;
     m_frame = 0;
 }
