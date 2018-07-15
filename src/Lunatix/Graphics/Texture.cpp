@@ -33,7 +33,7 @@ namespace
 {
 
 constexpr double DEGREE_180 = 180.0;
-const lx::Graphics::ImgRect RNULL = { {0, 0}, 0, 0 };
+const lx::Graphics::ImgRect RNULL = { { 0, 0 }, 0, 0 };
 const lx::Graphics::Colour CNULL = { 0, 0, 0, 0 };
 
 
@@ -230,7 +230,7 @@ AnimatedSprite::AnimatedSprite( SDL_Texture * t, lx::Win::Window& w,
                                 const std::vector<ImgRect>& coord,
                                 const uint32_t delay, bool loop,
                                 const UTF8string& filename, PixelFormat format )
-    : Sprite( t, w, filename, ImgRect{0, 0, 0, 0}, format ),
+    : Sprite( t, w, filename, RNULL, format ),
       M_COORDINATES( coord ), M_NBCOORDINATES( coord.size() ), m_delay( delay ), m_btime( 0 ),
       m_frame( 0 ), m_started( false ), m_loop( loop ), m_drawable( true ) {}
 
