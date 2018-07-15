@@ -72,6 +72,16 @@ uint32_t Timer::getTicks() noexcept
     return SDL_GetTicks() - m_start - m_tradeoff;
 }
 
+bool Timer::isStopped() noexcept
+{
+    return m_stopped;
+}
+
+bool Timer::isPaused() noexcept
+{
+    return m_paused;
+}
+
 void Timer::stop() noexcept
 {
     pause();

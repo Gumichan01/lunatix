@@ -74,6 +74,8 @@ public:
     void stop() noexcept;
     void reset() noexcept;
     uint32_t getTicks() noexcept;
+    bool isStopped() noexcept;
+    bool isPaused() noexcept;
     ~Timer() = default;
 };
 
