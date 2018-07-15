@@ -54,7 +54,9 @@ inline void delay( uint32_t ms ) noexcept
 
 /**
 *   @class Timer
-*   @brief The timer
+*   @brief The chronograph/stopwatch
+*
+*   Unit : milliseconds (ms)
 */
 class Timer final
 {
@@ -67,14 +69,84 @@ class Timer final
 public:
 
     Timer() = default;
+
+    /**
+    *   @fn void start() noexcept
+    *   Start the timer
+    *
+    *   @note This function has no effect if the timer has already been started
+    *
+    *   @sa isStopped
+    *   @sa isPaused
+    */
     void start() noexcept;
+    /**
+    *   @fn void pause() noexcept
+    *   Pause the timer
+    *
+    *   @note This function has no effect if the timer is in pause or has been stopped
+    */
     void pause() noexcept;
+    /**
+    *   @fn void resume() noexcept
+    *   Resume the timer that has been paused
+    *
+    *   @note This function has no effect if the timer has been stopped
+    */
     void resume() noexcept;
+    /**
+    *   @fn uint32_t lap() noexcept
+    *   Return the time in a lap and restart the timer
+    *
+    *   @return the current time since the timer started, in millisecond (ms)
+    *
+    *   @note This behaviour is equivalent to this piece of code:
+    *   ```
+    *   uint32_t t = getTicks();
+    *   stop();
+    *   reset();
+    *   start();
+    *   ```
+    */
     uint32_t lap() noexcept;
+    /**
+    *   @fn void stop() noexcept
+    *   Stop the timer
+    *
+    *   @note This function has no effect if the timer has already been stopped
+    */
     void stop() noexcept;
+    /**
+    *   @fn void reset() noexcept
+    *   Reset the timer.
+    *   This operation can be done even if the timer is still running.
+    *
+    *   @note It is strongly recommended to stop() or pause() the timer before resetting
+    *   the timer
+    */
     void reset() noexcept;
+    /**
+    *   @fn uint32_t getTicks() noexcept
+    *   Return the time.
+    *
+    *   @return The current time since the timer started, in millisecond (ms)
+    *
+    *   @note This function can be called at any moment.
+    */
     uint32_t getTicks() noexcept;
+    /**
+    *   @fn bool isStopped() noexcept
+    *   Check if the timer is stopped
+    *
+    *   @return boolean
+    */
     bool isStopped() noexcept;
+    /**
+    *   @fn bool isPaused() noexcept
+    *   Check if the timer is paused
+    *
+    *   @return boolean
+    */
     bool isPaused() noexcept;
     ~Timer() = default;
 };
