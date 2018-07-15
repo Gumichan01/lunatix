@@ -64,6 +64,22 @@ uint32_t Timer::lap() noexcept
     return t;
 }
 
+void Timer::stop() noexcept
+{
+    pause();
+    m_stopped = true;
+    m_paused  = false;
+}
+
+void Timer::reset() noexcept
+{
+    m_start    = 0U;
+    m_pause    = 0U;
+    m_tradeoff = 0U;
+    m_stopped  = true;
+    m_paused   = false;
+}
+
 uint32_t Timer::getTicks() noexcept
 {
     if ( m_stopped || m_paused )
@@ -80,22 +96,6 @@ bool Timer::isStopped() noexcept
 bool Timer::isPaused() noexcept
 {
     return m_paused;
-}
-
-void Timer::stop() noexcept
-{
-    pause();
-    m_stopped = true;
-    m_paused  = false;
-}
-
-void Timer::reset() noexcept
-{
-    m_start    = 0U;
-    m_pause    = 0U;
-    m_tradeoff = 0U;
-    m_stopped  = true;
-    m_paused   = false;
 }
 
 }   // Time
