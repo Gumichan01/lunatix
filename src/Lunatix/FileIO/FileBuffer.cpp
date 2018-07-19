@@ -14,7 +14,7 @@
 *   @file FileBuffer.cpp
 *   @brief The file buffer implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/FileBuffer.hpp>

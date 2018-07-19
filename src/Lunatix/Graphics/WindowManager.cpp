@@ -14,8 +14,6 @@
 *   @file WindowManager.cpp
 *   @brief The window manager implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/WindowManager.hpp>

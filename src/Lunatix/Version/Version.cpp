@@ -14,7 +14,7 @@
 *   @file Version.cpp
 *   @brief The version implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 *
 */
 

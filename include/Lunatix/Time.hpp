@@ -17,7 +17,7 @@
 *   @file Time.hpp
 *   @brief The timer interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <cstdint>

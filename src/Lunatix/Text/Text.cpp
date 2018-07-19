@@ -14,8 +14,6 @@
 *   @file Text.cpp
 *   @brief The implementation of TextInput
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/Text.hpp>

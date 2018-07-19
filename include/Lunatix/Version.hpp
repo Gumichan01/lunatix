@@ -17,7 +17,7 @@
 *   @file Version.hpp
 *   @brief The version library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <string>

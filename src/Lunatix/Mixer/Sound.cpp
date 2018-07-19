@@ -14,7 +14,7 @@
 *   @file Sound.cpp
 *   @brief The abstract sound class definition
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 *
 */
 

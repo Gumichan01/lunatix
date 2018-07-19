@@ -17,7 +17,7 @@
 *   @file Library.hpp
 *   @brief Library ressource manager (load and shut down)
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Error.hpp>

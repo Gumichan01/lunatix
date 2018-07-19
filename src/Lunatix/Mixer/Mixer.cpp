@@ -15,7 +15,7 @@
 *   @file Mixer.cpp
 *   @brief The implementation of the mixer library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 *
 */
 

@@ -17,7 +17,7 @@
 *   @file Random.hpp
 *   @brief The Random Number Generator library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <type_traits>

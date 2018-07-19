@@ -17,7 +17,7 @@
 *   @file Chunk.hpp
 *   @brief The sample header
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Sound.hpp>

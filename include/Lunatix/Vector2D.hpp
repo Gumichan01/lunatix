@@ -17,7 +17,7 @@
 *   @file Vector2D.hpp
 *   @brief The vector 2D library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/utils/float.hpp>

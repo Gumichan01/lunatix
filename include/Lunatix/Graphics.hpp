@@ -17,8 +17,6 @@
 *   @file Graphics.hpp
 *   @brief The interface of Graphics
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 /**

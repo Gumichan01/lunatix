@@ -17,7 +17,7 @@
 *   @file ImgRect.hpp
 *   @brief The definition of ImgRect
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Hitbox.hpp>

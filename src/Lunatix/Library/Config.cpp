@@ -14,8 +14,6 @@
 *   @file Config.cpp
 *   @brief The configuration class implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/Config.hpp>

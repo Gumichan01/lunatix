@@ -15,8 +15,6 @@
 *   @file Vector2D.cpp
 *   @brief The vector 2D implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/Vector2D.hpp>

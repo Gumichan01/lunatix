@@ -14,8 +14,6 @@
 *   @file Physics.cpp
 *   @brief The implementation of the physics library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/Physics.hpp>

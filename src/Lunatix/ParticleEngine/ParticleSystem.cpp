@@ -14,7 +14,7 @@
 *   @file ParticleSystem.cpp
 *   @brief The Particle system implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/ParticleSystem.hpp>
