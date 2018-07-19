@@ -332,7 +332,7 @@ struct Window_ final
             SDL_SetHint( SDL_HINT_RENDER_VSYNC, "1" );
 
         window = SDL_CreateWindow( info.title.c_str(), info.x, info.y, info.w,
-                                    info.h, toSDL2Flags_( info.wflags ) );
+                                   info.h, toSDL2Flags_( info.wflags ) );
 
         if ( window == nullptr )
             throw WindowException( lx::getError() );
@@ -370,27 +370,28 @@ struct Window_ final
     {
         int err = 0;
         int w, h;
-        SDL_Surface * screenchot_surface;
+        SDL_Surface * sshot_surface;
 
         SDL_GetWindowSize( window, &w, &h );
-        screenchot_surface = SDL_CreateRGBSurface( 0, w, h, ARGB_DEPTH,
-                                      RMASK, GMASK, BMASK, AMASK );
+        sshot_surface = SDL_CreateRGBSurface( 0, w, h, ARGB_DEPTH,
+                                              RMASK, GMASK,
+                                              BMASK, AMASK );
 
-        if ( screenchot_surface == nullptr )
+        if ( sshot_surface == nullptr )
             return false;
 
         err = SDL_RenderReadPixels( renderer, nullptr, SDL_PIXELFORMAT_RGBA8888,
-                                    screenchot_surface->pixels, screenchot_surface->pitch );
+                                    sshot_surface->pixels, sshot_surface->pitch );
 
         if ( err == -1 )
         {
             // Cannot read the pixels from the renderer
-            SDL_FreeSurface( screenchot_surface );
+            SDL_FreeSurface( sshot_surface );
             return false;
         }
 
-        err = IMG_SavePNG( screenchot_surface, filename.c_str() );
-        SDL_FreeSurface( screenchot_surface );
+        err = IMG_SavePNG( sshot_surface, filename.c_str() );
+        SDL_FreeSurface( sshot_surface );
 
         return err == 0;
     }
