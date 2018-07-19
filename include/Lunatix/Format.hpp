@@ -35,12 +35,12 @@ namespace Graphics
 */
 enum class PixelFormat
 {
-    UNKNOWN     = SDL_PIXELFORMAT_UNKNOWN,
-    INDEX1LSB   = SDL_PIXELFORMAT_INDEX1LSB,
-    INDEX1MSB   = SDL_PIXELFORMAT_INDEX1MSB,
-    INDEX4LSB   = SDL_PIXELFORMAT_INDEX4LSB,
-    INDEX4MSB   = SDL_PIXELFORMAT_INDEX4MSB,
-    INDEX8      = SDL_PIXELFORMAT_INDEX8,
+    UNKNOWN     = SDL_PIXELFORMAT_UNKNOWN,      /**<  ---  */
+    INDEX1LSB   = SDL_PIXELFORMAT_INDEX1LSB,    /**<  ---  */
+    INDEX1MSB   = SDL_PIXELFORMAT_INDEX1MSB,    /**<  ---  */
+    INDEX4LSB   = SDL_PIXELFORMAT_INDEX4LSB,    /**<  ---  */
+    INDEX4MSB   = SDL_PIXELFORMAT_INDEX4MSB,    /**<  ---  */
+    INDEX8      = SDL_PIXELFORMAT_INDEX8,   /**<   ---   */
     RGB332      = SDL_PIXELFORMAT_RGB332,   /**<  RGB: 2 bit for blue, 3 bits for the others  */
     RGB444      = SDL_PIXELFORMAT_RGB444,   /**<         RGB : 4 bits per channel             */
     RGB555      = SDL_PIXELFORMAT_RGB555,   /**<         RGB : 5 bits per channel             */
@@ -55,8 +55,8 @@ enum class PixelFormat
     BGRA5551    = SDL_PIXELFORMAT_BGRA5551, /**< BGRA: 1 bit for alpha, 5 bits for the others */
     RGB565      = SDL_PIXELFORMAT_RGB565,   /**< RGB: 6 bits for green, 5 bits for the others */
     BGR565      = SDL_PIXELFORMAT_BGR565,   /**< BGR: 6 bits for green, 5 bits for the others */
-    RGB24       = SDL_PIXELFORMAT_RGB24,
-    BGR24       = SDL_PIXELFORMAT_BGR24,
+    RGB24       = SDL_PIXELFORMAT_RGB24,    /**< RGB on 24 bits,                              */
+    BGR24       = SDL_PIXELFORMAT_BGR24,    /**< BGR on 24 bits,                              */
     RGB888      = SDL_PIXELFORMAT_RGB888,   /**<          RGB: 8 bits per channel             */
     RGBX8888    = SDL_PIXELFORMAT_RGBX8888, /**<          RGBX: 8 bits per channel            */
     BGR888      = SDL_PIXELFORMAT_BGR888,   /**<          BGR: 8 bits per channel             */
@@ -65,7 +65,7 @@ enum class PixelFormat
     RGBA8888    = SDL_PIXELFORMAT_RGBA8888, /**<          RGBA: 8 bits per channel            */
     ABGR8888    = SDL_PIXELFORMAT_ABGR8888, /**<          ABGR: 8 bits per channel            */
     BGRA8888    = SDL_PIXELFORMAT_BGRA8888, /**<          BGRA: 8 bits per channel            */
-    ARGB2101010 = SDL_PIXELFORMAT_ARGB2101010,
+    ARGB2101010 = SDL_PIXELFORMAT_ARGB2101010,  /**<  ---  */
     YV12        = SDL_PIXELFORMAT_YV12,     /**<      planar mode: Y + V + U (3 planes)       */
     IYUV        = SDL_PIXELFORMAT_IYUV,     /**<      planar mode: Y + U + V (3 planes)       */
     YUY2        = SDL_PIXELFORMAT_YUY2,     /**<      packed mode: Y0+U0+Y1+V0 (1 plane)      */
