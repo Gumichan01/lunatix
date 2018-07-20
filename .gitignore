@@ -111,7 +111,5 @@ lunatix.cbp
 *log.txt
 lx-package-win32.sh
 lunatix-demo
-*
-!*.cpp
 
 # End of https://www.gitignore.io/api/vim,c++,linux,macos
