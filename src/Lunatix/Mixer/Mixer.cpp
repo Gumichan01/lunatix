@@ -85,6 +85,8 @@ unsigned short music_pvolume = DEFAULT_VOLUME;
 // Effects volume in percentage
 unsigned short fx_pvolume = DEFAULT_VOLUME;
 
+int selectChannel( int tag ) noexcept;
+void applyEffect( int chan, const MixerEffect& effect ) noexcept;
 
 void setOverallVolume( unsigned short volume ) noexcept
 {
@@ -194,6 +196,41 @@ int groupCount( int tag ) noexcept
 int channelAvailable( int tag ) noexcept
 {
     return Mix_GroupAvailable( tag );
+}
+
+// private function
+int selectChannel( int tag ) noexcept
+{
+    int chan = channelAvailable( tag );
+
+    if ( chan == -1 )
+    {
+        chan = Mix_GroupOldest( tag );
+
+        if ( chan > -1 )
+            haltChannel( chan );
+    }
+
+    return chan;
+}
+
+// private function
+void applyEffect( int chan, const MixerEffect& effect ) noexcept
+{
+    if ( effect.type != EFFECT_NONE )
+    {
+        if ( effect.type.panning )
+            setPanning( chan, effect.pan_left, effect.pan_right );
+
+        if ( effect.type.position )
+            setPosition( chan, effect.pos_angle, effect.pos_distance );
+
+        if ( effect.type.distance )
+            setDistance( chan, effect.distance );
+
+        if ( effect.type.reverse_stereo )
+            reverseStereo( chan, effect.rev_stereo );
+    }
 }
 
 bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept
