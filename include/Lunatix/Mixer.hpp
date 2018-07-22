@@ -311,11 +311,26 @@ int groupCount( int tag ) noexcept;
 */
 int channelAvailable( int tag ) noexcept;
 
-
 /**
-*   @fn bool groupPlayChunk(Chunk& chunk, int tag, const MixerEffect effect) noexcept
+*   @fn bool groupPlayChunk( Chunk& chunk, int tag ) noexcept
 *
 *   Play the chunk on a channel of the group specified by the tag
+*
+*   @param [in] chunk The chunk to play
+*   @param [in] tag The group id to look for the channel for playing the chunk on
+*
+*   @return TRUE if the chunk can be played, FALSE if no channel is available
+*
+*   @note If the group is empty, any unreserved channels in the default
+*        group is selected and the chunk is played on it
+*   @note If no channel of the group is available for playing, the oldest
+*        playing channel is chosen. So, it is halted, and is used to play the chunk on
+*/
+bool groupPlayChunk( Chunk& chunk, int tag ) noexcept;
+/**
+*   @fn bool groupPlayChunk(Chunk& chunk, int tag, const MixerEffect& effect) noexcept
+*
+*   Play the chunk on a channel of the group specified by the tag, with an effect to apply
 *
 *   @param [in] chunk The chunk to play
 *   @param [in] tag The group id to look for the channel for playing the chunk on
@@ -328,7 +343,7 @@ int channelAvailable( int tag ) noexcept;
 *   @note If no channel of the group is available for playing, the oldest
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
-bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept;
+bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept;
 
 /**
 *   @fn void pause(int channel) noexcept

@@ -37,7 +37,8 @@ const uint8_t MIX_FX_SILENCE = 0;        /**< Silence (for effect functions) */
 const uint8_t MIX_FX_NO_distance = 0;    /**< The distance between the source and the listener */
 const uint16_t MIX_FX_NO_ANGLE = 0;      /**< The angle between the source and the front */
 
-constexpr struct lx::Mixer::MixerEffectType EFFECT_NONE;
+constexpr struct lx::Mixer::MixerEffectType EFFECT_TYPE_NONE;
+const struct lx::Mixer::MixerEffect EFFECT_NONE;
 
 constexpr bool operator ==( const lx::Mixer::MixerEffectType& t,
                             const lx::Mixer::MixerEffectType& u )
@@ -219,7 +220,7 @@ void applyEffect( int chan, const MixerEffect& effect ) noexcept
 {
     Mix_UnregisterAllEffects( chan );
 
-    if ( effect.type != EFFECT_NONE )
+    if ( effect.type != EFFECT_TYPE_NONE )
     {
         if ( effect.type.panning )
             setPanning( chan, effect.pan_left, effect.pan_right );
@@ -235,7 +236,12 @@ void applyEffect( int chan, const MixerEffect& effect ) noexcept
     }
 }
 
-bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept
+bool groupPlayChunk( Chunk& chunk, int tag ) noexcept
+{
+    return groupPlayChunk( chunk, tag, EFFECT_NONE );
+}
+
+bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept
 {
     if ( groupCount( tag ) != 0 )
         tag = -1;
