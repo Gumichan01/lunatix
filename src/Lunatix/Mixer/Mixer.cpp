@@ -217,6 +217,8 @@ int selectChannel( int tag ) noexcept
 // private function
 void applyEffect( int chan, const MixerEffect& effect ) noexcept
 {
+    Mix_UnregisterAllEffects( chan );
+
     if ( effect.type != EFFECT_NONE )
     {
         if ( effect.type.panning )
@@ -235,39 +237,11 @@ void applyEffect( int chan, const MixerEffect& effect ) noexcept
 
 bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept
 {
-    int chan = -1;
-    int _tag = -1;
-
     if ( groupCount( tag ) != 0 )
-        _tag = tag;
+        tag = -1;
 
-    chan = channelAvailable( _tag );
-
-    if ( chan == -1 )
-    {
-        chan = Mix_GroupOldest( _tag );
-
-        if ( chan > -1 )
-            haltChannel( chan );
-    }
-
-    Mix_UnregisterAllEffects( chan );
-
-    if ( effect.type != EFFECT_NONE )
-    {
-        if ( effect.type.panning )
-            setPanning( chan, effect.pan_left, effect.pan_right );
-
-        if ( effect.type.position )
-            setPosition( chan, effect.pos_angle, effect.pos_distance );
-
-        if ( effect.type.distance )
-            setDistance( chan, effect.distance );
-
-        if ( effect.type.reverse_stereo )
-            reverseStereo( chan, effect.rev_stereo );
-    }
-
+    int chan = selectChannel( tag );
+    applyEffect( chan, effect );
     return chunk.play( chan, effect.loops );
 }
 
