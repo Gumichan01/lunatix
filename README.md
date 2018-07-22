@@ -34,11 +34,11 @@ The library works on Windows and Linux (maybe on Mac OS X).
 
 int main( int argc, char** argv )
 {
-	if ( !lx::init() )
-	{
-		lx::Log::log( "Cannot load the library: %s", lx::getError() );
-		return -1;
-	}
+    if ( !lx::init() )
+    {
+        lx::Log::log( "Cannot load the library: %s", lx::getError() );
+        return -1;
+    }
 
     // Information about how to build the window
     lx::Win::WindowInfo info;
