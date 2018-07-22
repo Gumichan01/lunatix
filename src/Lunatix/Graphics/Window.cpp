@@ -220,15 +220,15 @@ SDL_BlendMode sdlBlend_( const lx::Win::BlendMode& mode ) noexcept
 
     switch ( mode )
     {
-    case lx::Win::BlendMode::BLENDMODE_BLEND:
+    case lx::Win::BlendMode::BLEND:
         m = SDL_BLENDMODE_BLEND;
         break;
 
-    case lx::Win::BlendMode::BLENDMODE_ADD:
+    case lx::Win::BlendMode::ADD:
         m = SDL_BLENDMODE_ADD;
         break;
 
-    case lx::Win::BlendMode::BLENDMODE_MOD:
+    case lx::Win::BlendMode::MOD:
         m = SDL_BLENDMODE_MOD;
         break;
     default:
