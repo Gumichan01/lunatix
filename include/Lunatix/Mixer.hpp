@@ -307,6 +307,7 @@ int groupCount( int tag ) noexcept;
 *   @param [in] tag The group id to look for the available channel
 *
 *   @return The channel id on success. -1 if no channel is available.
+*   @note Setting -1 in *tag* will search all channels
 */
 int channelAvailable( int tag ) noexcept;
 
