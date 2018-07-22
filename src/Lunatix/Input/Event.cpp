@@ -474,8 +474,6 @@ EventType EventHandler::getEventType() const noexcept
         ty = EventType::DROPCOMPLETE;
         break;
 
-
-
     /* Other events */
     case SDL_USEREVENT:
         ty = EventType::USEREVENT;
