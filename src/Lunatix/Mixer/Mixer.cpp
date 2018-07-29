@@ -275,15 +275,15 @@ void expireChannel( int channel, int ticks ) noexcept
 }
 
 
-int isPlaying( int channel ) noexcept
+bool isPlaying( int channel ) noexcept
 {
-    return Mix_Playing( channel );
+    return Mix_Playing( channel ) == SDL_TRUE;
 }
 
 
-int isPaused( int channel ) noexcept
+bool isPaused( int channel ) noexcept
 {
-    return Mix_Paused( channel );
+    return Mix_Paused( channel ) == SDL_TRUE;
 }
 
 

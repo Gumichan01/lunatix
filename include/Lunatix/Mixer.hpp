@@ -385,7 +385,7 @@ void haltChannel( int channel ) noexcept;
 void expireChannel( int channel, int ticks ) noexcept;
 
 /**
-*   @fn int isPlaying(int channel) noexcept
+*   @fn bool isPlaying(int channel) noexcept
 *
 *   Check if the channel is playing
 *
@@ -395,9 +395,9 @@ void expireChannel( int channel, int ticks ) noexcept;
 *   @note If channel is -1, then all channels will be tested
 *          and the number of channels playing is returned
 */
-int isPlaying( int channel ) noexcept;
+bool isPlaying( int channel ) noexcept;
 /**
-*   @fn int isPaused(int channel) noexcept
+*   @fn bool isPaused(int channel) noexcept
 *
 *   Check if the channel is paused
 *
@@ -407,7 +407,7 @@ int isPlaying( int channel ) noexcept;
 *   @note If channel is -1, then all channels will be tested
 *          and the number of aused channels is returned
 */
-int isPaused( int channel ) noexcept;
+bool isPaused( int channel ) noexcept;
 
 
 /* == Effects == */
