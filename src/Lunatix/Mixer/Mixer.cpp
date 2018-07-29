@@ -145,19 +145,16 @@ unsigned short getFXVolume() noexcept
     return fx_volume;
 }
 
-
 Chunk * loadSample( lx::FileIO::FileBuffer& file )
 {
     return file.loadSample();
 }
-
 
 void setMusicPosition( double pos ) noexcept
 {
     Mix_RewindMusic();
     Mix_SetMusicPosition( pos );
 }
-
 
 int allocateChannels( int num ) noexcept
 {
@@ -170,18 +167,15 @@ int allocateChannels( int num ) noexcept
     return n;
 }
 
-
 int reserveChannels( int numchans ) noexcept
 {
     return Mix_ReserveChannels( numchans );
 }
 
-
 bool groupChannel( int chan, int tag ) noexcept
 {
     return Mix_GroupChannel( chan, tag ) == 1;
 }
-
 
 int groupChannels( int from, int to, int tag ) noexcept
 {
@@ -192,7 +186,6 @@ int groupCount( int tag ) noexcept
 {
     return Mix_GroupCount( tag );
 }
-
 
 int channelAvailable( int tag ) noexcept
 {
@@ -256,54 +249,45 @@ void pause( int channel ) noexcept
     Mix_Pause( channel );
 }
 
-
 void resume( int channel ) noexcept
 {
     Mix_Resume( channel );
 }
-
 
 void haltChannel( int channel ) noexcept
 {
     Mix_HaltChannel( channel );
 }
 
-
 void expireChannel( int channel, int ticks ) noexcept
 {
     Mix_ExpireChannel( channel, ticks );
 }
-
 
 bool isPlaying( int channel ) noexcept
 {
     return Mix_Playing( channel ) == SDL_TRUE;
 }
 
-
 bool isPaused( int channel ) noexcept
 {
     return Mix_Paused( channel ) == SDL_TRUE;
 }
-
 
 void fadeInMusic( Music& music, int ms ) noexcept
 {
     music.fadeIn( ms );
 }
 
-
 void fadeInMusicPos( Music& music, int ms, int pos ) noexcept
 {
     music.fadeInPos( ms, pos );
 }
 
-
 void fadeOutMusic( int ms ) noexcept
 {
     Mix_FadeOutMusic( ms );
 }
-
 
 void setPanning( uint8_t left, uint8_t right ) noexcept
 {
@@ -330,7 +314,6 @@ void setPosition( int16_t angle ) noexcept
     setPosition( angle, MIX_FX_NO_distance );
 }
 
-
 void setPosition( int16_t angle, uint8_t distance ) noexcept
 {
     Mix_SetPosition( MIX_CHANNEL_POST, angle, distance );
@@ -340,7 +323,6 @@ void setPosition( int chan, int16_t angle, uint8_t distance ) noexcept
 {
     Mix_SetPosition( chan, angle, distance );
 }
-
 
 void resetPosition() noexcept
 {
