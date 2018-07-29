@@ -421,6 +421,8 @@ void test_effects()
             effect.pan_right--;
         }
 
+        lx::Log::logInfo( lx::Log::TEST, "playing channels : %d", lx::Mixer::playingChannels() );
+        lx::Log::logInfo( lx::Log::TEST, "paused channels : %d", lx::Mixer::pausedChannels() );
         lx::Mixer::groupChannels( 1, 32, -1 );
         lx::Mixer::allocateChannels( 8 );
     }
