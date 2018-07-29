@@ -390,10 +390,10 @@ void expireChannel( int channel, int ticks ) noexcept;
 *   Check if the channel is playing
 *
 *   @param [in] channel The channel to test
-*   @return 0 If the channel is not playing, 1 otherwise
+*   @return True If the channel is playing, False otherwise
 *
-*   @note If channel is -1, then all channels will be tested
-*          and the number of channels playing is returned
+*   @pre channel != -1
+*   @note If channel is -1, then the behaviour is undefined
 */
 bool isPlaying( int channel ) noexcept;
 /**
@@ -402,13 +402,12 @@ bool isPlaying( int channel ) noexcept;
 *   Check if the channel is paused
 *
 *   @param [in] channel The channel to test
-*   @return 0 If the channel is not paused, 1 otherwise
+*   @return True If the channel is paused, False otherwise
 *
-*   @note If channel is -1, then all channels will be tested
-*          and the number of aused channels is returned
+*   @pre channel != -1
+*   @note If channel is -1, then the behaviour is undefined
 */
 bool isPaused( int channel ) noexcept;
-
 
 /* == Effects == */
 
