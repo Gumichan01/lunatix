@@ -274,6 +274,16 @@ bool isPaused( int channel ) noexcept
     return Mix_Paused( channel ) == SDL_TRUE;
 }
 
+int playingChannels() noexcept
+{
+    return Mix_Playing( -1 );
+}
+
+int pausedChannels() noexcept
+{
+    return Mix_Paused( -1 );
+}
+
 void fadeInMusic( Music& music, int ms ) noexcept
 {
     music.fadeIn( ms );

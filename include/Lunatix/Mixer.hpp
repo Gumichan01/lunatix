@@ -394,6 +394,7 @@ void expireChannel( int channel, int ticks ) noexcept;
 *
 *   @pre channel != -1
 *   @note If channel is -1, then the behaviour is undefined
+*   @sa playingChannels
 */
 bool isPlaying( int channel ) noexcept;
 /**
@@ -406,8 +407,25 @@ bool isPlaying( int channel ) noexcept;
 *
 *   @pre channel != -1
 *   @note If channel is -1, then the behaviour is undefined
+*   @sa pausedChannels
 */
 bool isPaused( int channel ) noexcept;
+/**
+*   @fn int playingChannels() noexcept
+*
+*   Get the number of channel used to play a sample
+*
+*   @return The number of channels playing
+*/
+int playingChannels() noexcept;
+/**
+*   @fn int pausedChannels() noexcept
+*
+*   Get the number of paused channel
+*
+*   @return The number of paused channels
+*/
+int pausedChannels() noexcept;
 
 /* == Effects == */
 
