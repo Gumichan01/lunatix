@@ -230,6 +230,7 @@ Chunk * loadSample( lx::FileIO::FileBuffer& file );
 *        - MOD
 *        - OGG
 *        - MP3
+*   @todo
 */
 void setMusicPosition( double pos ) noexcept;
 
@@ -344,6 +345,18 @@ bool groupPlayChunk( Chunk& chunk, int tag ) noexcept;
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
 bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept;
+
+/**
+*   @fn void haltGroup( int tag ) noexcept
+*
+*   Play the chunk on a channel of the group specified by the tag,
+*   with an effect to apply
+*
+*   @param [in] tag The group
+*
+*   @pre tag != -1
+*/
+void haltGroup( int tag ) noexcept;
 
 /**
 *   @fn void pause(int channel) noexcept

@@ -244,6 +244,14 @@ bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept
     return chunk.play( chan, effect.loops );
 }
 
+void haltGroup( int tag ) noexcept
+{
+    if( tag != -1 )
+    {
+        Mix_HaltGroup( tag );
+    }
+}
+
 void pause( int channel ) noexcept
 {
     Mix_Pause( channel );
