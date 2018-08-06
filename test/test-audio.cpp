@@ -185,10 +185,15 @@ void test_channels()
     lx::Log::logInfo( lx::Log::APPLICATION, "Try to reserve %d channel(s)", M );
     int r1 = lx::Mixer::reserveChannels( M );
     lx::Log::logInfo( lx::Log::APPLICATION, "Reserved: %d channel(s)", r1 );
+    lx::Log::logInfo( lx::Log::APPLICATION, "Done" );
+    r1 = lx::Mixer::reserveChannels( 0 );
+    lx::Log::logInfo( lx::Log::APPLICATION, "Reserved: %d channel(s)", r1 );
 
-    // PLay a chunk in a specific channel
-    std::string sc = "data/explosion.wav";
-    lx::Mixer::Chunk chunk( sc );
+    // Play a chunk in a specific channel
+    std::string sc0 = "data/explosion.wav";
+    std::string sc = "data/01.ogg";
+    lx::Mixer::Chunk chunk( sc0 );
+    lx::Mixer::Chunk chunk0( sc );
 
     lx::Log::logInfo( lx::Log::APPLICATION, "Available channel before playing: %d",
                       lx::Mixer::channelAvailable( 1 ) );
@@ -197,7 +202,7 @@ void test_channels()
 
     lx::Log::logInfo( lx::Log::APPLICATION, "Playing a chunk in the 2 groups" );
     lx::Mixer::MixerEffect me;
-    lx::Mixer::groupPlayChunk( chunk, 1, me );
+    lx::Mixer::groupPlayChunk( chunk0, 1, me );
     lx::Mixer::groupPlayChunk( chunk, 2, me );
 
     lx::Log::logInfo( lx::Log::APPLICATION, "Available channel (grp 1): %d",
@@ -206,11 +211,21 @@ void test_channels()
                       lx::Mixer::channelAvailable( 2 ) );
 
     lx::Time::delay( 2000 );
+    lx::Mixer::groupPlayChunk( chunk0, 1, me );
+    lx::Time::delay( 500 );
+    lx::Mixer::groupPlayChunk( chunk, 2, me );
+    lx::Time::delay( 200 );
+    lx::Mixer::groupPlayChunk( chunk, 2, me );
+    lx::Time::delay( 200 );
+    lx::Mixer::groupPlayChunk( chunk, 2, me );
+    lx::Time::delay( 200 );
+    lx::Mixer::groupPlayChunk( chunk, 2, me );
+    lx::Time::delay( 200 );
+    lx::Mixer::groupPlayChunk( chunk, 2, me );
+    lx::Time::delay( 1000 );
+    lx::Log::logInfo( lx::Log::APPLICATION, "Halt group 1" );
+    lx::Mixer::haltGroup( 1 );
     lx::Log::logInfo( lx::Log::APPLICATION, "Done" );
-
-    lx::Log::logInfo( lx::Log::APPLICATION, "Reset" );
-    r1 = lx::Mixer::reserveChannels( 0 );
-    lx::Log::logInfo( lx::Log::APPLICATION, "Reserved: %d channel(s)", r1 );
 
     lx::Log::logInfo( lx::Log::APPLICATION, "Reset the groups" );
     int g3 = lx::Mixer::groupChannels( 0, 15, -1 );
