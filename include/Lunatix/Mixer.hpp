@@ -355,6 +355,8 @@ bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept
 *   @param [in] tag The group
 *
 *   @pre tag != -1
+*   @note If the group specified by the tag has no channel,
+*   this function has no effect
 */
 void haltGroup( int tag ) noexcept;
 
