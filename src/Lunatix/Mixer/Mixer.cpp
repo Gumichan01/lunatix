@@ -236,7 +236,7 @@ bool groupPlayChunk( Chunk& chunk, int tag ) noexcept
 
 bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept
 {
-    if ( groupCount( tag ) != 0 )
+    if ( groupCount( tag ) == 0 )
         tag = -1;
 
     int chan = selectChannel( tag );
