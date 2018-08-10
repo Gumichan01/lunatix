@@ -29,11 +29,11 @@ int main( int argc, char ** argv )
     lx::Log::log( " ==== Test Audio ==== " );
     test_audioInit();
     test_channels();
-    /*test_music();
+    test_music();
     test_chunk();
     test_effects();
     test_volume();
-    test_volume2();*/
+    test_volume2();
     lx::Log::log( " ==== End Audio ==== " );
 
     lx::quit();
