@@ -14,8 +14,6 @@
 *   @file Mouse.cpp
 *   @brief The implementation of the mouse
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/Mouse.hpp>

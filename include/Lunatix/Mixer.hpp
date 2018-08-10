@@ -17,8 +17,6 @@
 *   @file Mixer.hpp
 *   @brief The mixer library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/utils/utf8_string.hpp>
@@ -232,6 +230,7 @@ Chunk * loadSample( lx::FileIO::FileBuffer& file );
 *        - MOD
 *        - OGG
 *        - MP3
+*   @todo
 */
 void setMusicPosition( double pos ) noexcept;
 
@@ -309,14 +308,30 @@ int groupCount( int tag ) noexcept;
 *   @param [in] tag The group id to look for the available channel
 *
 *   @return The channel id on success. -1 if no channel is available.
+*   @note Setting -1 in *tag* will search all channels
 */
 int channelAvailable( int tag ) noexcept;
 
-
 /**
-*   @fn bool groupPlayChunk(Chunk& chunk, int tag, const MixerEffect effect) noexcept
+*   @fn bool groupPlayChunk( Chunk& chunk, int tag ) noexcept
 *
 *   Play the chunk on a channel of the group specified by the tag
+*
+*   @param [in] chunk The chunk to play
+*   @param [in] tag The group id to look for the channel for playing the chunk on
+*
+*   @return TRUE if the chunk can be played, FALSE if no channel is available
+*
+*   @note If the group is empty, any unreserved channels in the default
+*        group is selected and the chunk is played on it
+*   @note If no channel of the group is available for playing, the oldest
+*        playing channel is chosen. So, it is halted, and is used to play the chunk on
+*/
+bool groupPlayChunk( Chunk& chunk, int tag ) noexcept;
+/**
+*   @fn bool groupPlayChunk(Chunk& chunk, int tag, const MixerEffect& effect) noexcept
+*
+*   Play the chunk on a channel of the group specified by the tag, with an effect to apply
 *
 *   @param [in] chunk The chunk to play
 *   @param [in] tag The group id to look for the channel for playing the chunk on
@@ -329,7 +344,21 @@ int channelAvailable( int tag ) noexcept;
 *   @note If no channel of the group is available for playing, the oldest
 *        playing channel is chosen. So, it is halted, and is used to play the chunk on
 */
-bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect effect ) noexcept;
+bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept;
+
+/**
+*   @fn void haltGroup( int tag ) noexcept
+*
+*   Play the chunk on a channel of the group specified by the tag,
+*   with an effect to apply
+*
+*   @param [in] tag The group
+*
+*   @pre tag != -1
+*   @note If the group specified by the tag has no channel,
+*   this function has no effect
+*/
+void haltGroup( int tag ) noexcept;
 
 /**
 *   @fn void pause(int channel) noexcept
@@ -371,30 +400,47 @@ void haltChannel( int channel ) noexcept;
 void expireChannel( int channel, int ticks ) noexcept;
 
 /**
-*   @fn int isPlaying(int channel) noexcept
+*   @fn bool isPlaying(int channel) noexcept
 *
 *   Check if the channel is playing
 *
 *   @param [in] channel The channel to test
-*   @return 0 If the channel is not playing, 1 otherwise
+*   @return True If the channel is playing, False otherwise
 *
-*   @note If channel is -1, then all channels will be tested
-*          and the number of channels playing is returned
+*   @pre channel != -1
+*   @note If channel is -1, then the behaviour is undefined
+*   @sa playingChannels
 */
-int isPlaying( int channel ) noexcept;
+bool isPlaying( int channel ) noexcept;
 /**
-*   @fn int isPaused(int channel) noexcept
+*   @fn bool isPaused(int channel) noexcept
 *
 *   Check if the channel is paused
 *
 *   @param [in] channel The channel to test
-*   @return 0 If the channel is not paused, 1 otherwise
+*   @return True If the channel is paused, False otherwise
 *
-*   @note If channel is -1, then all channels will be tested
-*          and the number of aused channels is returned
+*   @pre channel != -1
+*   @note If channel is -1, then the behaviour is undefined
+*   @sa pausedChannels
 */
-int isPaused( int channel ) noexcept;
-
+bool isPaused( int channel ) noexcept;
+/**
+*   @fn int playingChannels() noexcept
+*
+*   Get the number of channel used to play a sample
+*
+*   @return The number of channels playing
+*/
+int playingChannels() noexcept;
+/**
+*   @fn int pausedChannels() noexcept
+*
+*   Get the number of paused channel
+*
+*   @return The number of paused channels
+*/
+int pausedChannels() noexcept;
 
 /* == Effects == */
 

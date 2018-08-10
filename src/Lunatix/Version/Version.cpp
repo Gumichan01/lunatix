@@ -14,7 +14,7 @@
 *   @file Version.cpp
 *   @brief The version implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 *
 */
 
@@ -39,7 +39,7 @@ namespace
 const short MAJOR_VERSION = 0;
 const short MINOR_VERSION = 14;
 const short PATCH_VERSION = 0;
-const UTF8string STATUS( "nightly" );
+const UTF8string STATUS( "alpha" );
 const UTF8string COPYRIGHT( "Copyright © 2018" );
 const UTF8string AUTHOR( "Luxon Jean-Pierre" );
 

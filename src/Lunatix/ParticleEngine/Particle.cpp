@@ -13,7 +13,7 @@
 *   @file Particle.cpp
 *   @brief The particle implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Particle.hpp>

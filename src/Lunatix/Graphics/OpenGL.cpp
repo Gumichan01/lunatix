@@ -15,8 +15,6 @@
 *   @file OpenGL.cpp
 *   @brief The implementation of the Lunatix/OpenGL interface
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/OpenGL.hpp>

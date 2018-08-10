@@ -14,8 +14,6 @@
 *   @file Event.cpp
 *   @brief The Implementation of the event odule
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 #include <Lunatix/Event.hpp>
@@ -475,8 +473,6 @@ EventType EventHandler::getEventType() const noexcept
     case SDL_DROPCOMPLETE:
         ty = EventType::DROPCOMPLETE;
         break;
-
-
 
     /* Other events */
     case SDL_USEREVENT:

@@ -17,7 +17,7 @@
 *   @file Window.hpp
 *   @brief The window library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 *
 */
 
@@ -114,17 +114,17 @@ enum class ScreenMode
 */
 enum class BlendMode
 {
-    BLENDMODE_NONE,     /**< no blending - dstRGBA = srcRGBA */
+    NONE,     /**< no blending - dstRGBA = srcRGBA */
 
-    BLENDMODE_BLEND,    /**< alpha blending
-                                - dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
-                                - dstA = srcA + (dstA * (1-srcA)) */
-    BLENDMODE_ADD,      /**< additive blending
-                                - dstRGB = (srcRGB * srcA) + dstRGB
-                                - dstA = dstA */
-    BLENDMODE_MOD       /**< colour modulate
-                                - dstRGB = srcRGB * dstRGB
-                                - dstA = dstA */
+    BLEND,    /**< alpha blending
+                   - dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                   - dstA = srcA + (dstA * (1-srcA)) */
+    ADD,      /**< additive blending
+                   - dstRGB = (srcRGB * srcA) + dstRGB
+                   - dstA = dstA */
+    MOD       /**< colour modulate
+                   - dstRGB = srcRGB * dstRGB
+                   - dstA = dstA */
 };
 
 /**

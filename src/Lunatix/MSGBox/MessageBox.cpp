@@ -14,7 +14,7 @@
 *   @file MessageBox.cpp
 *   @brief The message box Library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/MessageBox.hpp>

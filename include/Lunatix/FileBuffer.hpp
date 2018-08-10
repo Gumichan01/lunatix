@@ -17,7 +17,7 @@
 *   @file FileBuffer.hpp
 *   @brief The file buffer
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Colour.hpp>

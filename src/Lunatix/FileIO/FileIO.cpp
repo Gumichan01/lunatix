@@ -13,7 +13,7 @@
 *   @file FileIO.cpp
 *   @brief The file handling implementation
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/FileIO.hpp>

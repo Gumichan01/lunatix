@@ -17,7 +17,7 @@
 *   @file Music.hpp
 *   @brief The music library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Sound.hpp>

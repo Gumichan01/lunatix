@@ -62,7 +62,13 @@ int main( int argc, char ** argv )
             /// ---------------- Keyboard ----------------
 
             case EventType::KEYUP:
-                lx::Log::log( "KEYBOARD INPUT" );
+                lx::Log::log( "KEYBOARD INPUT → UP " );
+                lx::Log::log( "physical key → %s", stringOfScanCode( evh.getScanCode() ).utf8_str() );
+                lx::Log::log( "virtual key  → %s", stringOfKeyCode( evh.getKeyCode() ).utf8_str() );
+                break;
+
+            case EventType::KEYDOWN:
+                lx::Log::log( "KEYBOARD INPUT → DOWN " );
                 lx::Log::log( "physical key → %s", stringOfScanCode( evh.getScanCode() ).utf8_str() );
                 lx::Log::log( "virtual key  → %s", stringOfKeyCode( evh.getKeyCode() ).utf8_str() );
                 break;

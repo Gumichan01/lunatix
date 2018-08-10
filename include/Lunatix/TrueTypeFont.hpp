@@ -17,7 +17,7 @@
 *   @file TrueTypeFont.hpp
 *   @brief The True type Font (TTF) library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/utils/utf8_string.hpp>

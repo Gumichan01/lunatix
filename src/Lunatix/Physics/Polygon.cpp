@@ -14,7 +14,7 @@
 *   @file Polygon.cpp
 *   @brief The Implementation of the polygon
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Polygon.hpp>

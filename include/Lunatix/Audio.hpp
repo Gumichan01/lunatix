@@ -17,8 +17,6 @@
 *   @file Audio.hpp
 *   @brief The interface of the audio module
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
-*
 */
 
 /**

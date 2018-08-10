@@ -14,7 +14,7 @@
 *   @file Music.cpp
 *   @brief The implementation of the music library
 *   @author Luxon Jean-Pierre(Gumichan01)
-*   @version 0.13
+*
 */
 
 #include <Lunatix/Music.hpp>
