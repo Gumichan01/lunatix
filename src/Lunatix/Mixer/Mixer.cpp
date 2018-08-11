@@ -246,7 +246,7 @@ bool groupPlayChunk( Chunk& chunk, int tag, const MixerEffect& effect ) noexcept
 
 void haltGroup( int tag ) noexcept
 {
-    if( tag != -1 || groupCount(tag) == 0 )
+    if ( tag != -1 || groupCount( tag ) == 0 )
     {
         Mix_HaltGroup( tag );
     }
