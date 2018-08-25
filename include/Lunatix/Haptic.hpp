@@ -39,6 +39,11 @@ class Gamepad;
 
 using Joystick = _SDL_Joystick;
 using GameController = _SDL_GameController;
+
+/**
+*   @typedef HapticEffect
+*   @brief Alias of [SDL_HapticEffect](https://wiki.libsdl.org/SDL_HapticEffect)
+*/
 using HapticEffect = SDL_HapticEffect;
 
 

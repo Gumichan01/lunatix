@@ -40,13 +40,13 @@ struct GamepadInfo;
 */
 enum class BatteryLevel
 {
-    UNKNOWN = SDL_JOYSTICK_POWER_UNKNOWN,
-    EMPTY   = SDL_JOYSTICK_POWER_EMPTY,
-    LOW     = SDL_JOYSTICK_POWER_LOW,
-    MEDIUM  = SDL_JOYSTICK_POWER_MEDIUM,
-    FULL    = SDL_JOYSTICK_POWER_FULL,
-    WIRED   = SDL_JOYSTICK_POWER_WIRED,
-    MAX     = SDL_JOYSTICK_POWER_MAX
+    UNKNOWN = SDL_JOYSTICK_POWER_UNKNOWN,   /**< Unknown level   */
+    EMPTY   = SDL_JOYSTICK_POWER_EMPTY,     /**< Empty battery   */
+    LOW     = SDL_JOYSTICK_POWER_LOW,       /**< Low level       */
+    MEDIUM  = SDL_JOYSTICK_POWER_MEDIUM,    /**< Medium level    */
+    FULL    = SDL_JOYSTICK_POWER_FULL,      /**< Full battery   */
+    WIRED   = SDL_JOYSTICK_POWER_WIRED,     /**< Wired           */
+    MAX     = SDL_JOYSTICK_POWER_MAX        /**< Max             */
 };
 
 using DeviceID = int32_t;
