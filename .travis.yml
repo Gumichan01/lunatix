@@ -20,4 +20,3 @@ script:
   - make lunatix-demo
   - make test
   - make
-  - ./test-ime
