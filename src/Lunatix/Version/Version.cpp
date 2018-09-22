@@ -44,7 +44,6 @@ const UTF8string COPYRIGHT( "Copyright © 2018" );
 const UTF8string AUTHOR( "Luxon Jean-Pierre" );
 
 // Functions
-
 constexpr int cast( const Uint8 v )
 {
     return static_cast<int>( v );
@@ -89,19 +88,27 @@ const SDLVersion getSDLVersion() noexcept
                                 sdl_linked.patch, "" }, "" };
 }
 
-/*const SDLVersion getSDLImageVersion() noexcept
+const SDLVersion getSDLImageVersion() noexcept
 {
+    const std::string SDL2_IMAGE( "sdl2_image" );
+    const SDL_version * img_linked = IMG_Linked_Version();
+    SDL_version img_compiled;
+    SDL_IMAGE_VERSION( &img_compiled );
 
+    return SDLVersion{ Version{ img_compiled.major, img_compiled.minor,
+                                img_compiled.patch, "" },
+                       Version{ img_linked->major, img_linked->minor,
+                                img_linked->patch, "" }, SDL2_IMAGE };
 }
 
-const SDLVersion getSDLTTFVersion() noexcept
+/*const SDLVersion getSDLTTFVersion() noexcept
 {
-
+    const std::string SDL2_TTF( "sdl2_ttf" );
 }
 
 const SDLVersion getSDLMixerVersion() noexcept
 {
-
+    const std::string SDL2_MIXER( "sdl2_mixer" );
 }*/
 
 
