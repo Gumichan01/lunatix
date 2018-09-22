@@ -114,10 +114,18 @@ const SDLVersion getSDLTTFVersion() noexcept
                                 ttf_linked->patch, "" }, SDL2_TTF };
 }
 
-/*const SDLVersion getSDLMixerVersion() noexcept
+const SDLVersion getSDLMixerVersion() noexcept
 {
     const std::string SDL2_MIXER( "sdl2_mixer" );
-}*/
+    const SDL_version * mix_linked = Mix_Linked_Version();
+    SDL_version mix_compiled;
+    SDL_MIXER_VERSION( &mix_compiled );
+
+    return SDLVersion{ Version{ mix_compiled.major, mix_compiled.minor,
+                                mix_compiled.patch, "" },
+                       Version{ mix_linked->major, mix_linked->minor,
+                                mix_linked->patch, "" }, SDL2_MIXER };
+}
 
 
 void dependencies() noexcept
