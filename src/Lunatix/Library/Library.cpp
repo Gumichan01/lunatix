@@ -19,7 +19,9 @@
 #include <Lunatix/Library.hpp>
 #include <Lunatix/Mixer.hpp>
 #include <Lunatix/WindowManager.hpp>
+#include <Lunatix/Version.hpp>
 #include <Lunatix/OpenGL.hpp>
+#include <Lunatix/Log.hpp>
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -36,6 +38,7 @@ const int MIX_STEREO_SOUND = 2;          /**< The stereo variable for the mix na
 const int MIX_DEFAULT_CHUNKSIZE = 1024;  /**< The default chunsize for the mix namespace */
 
 const std::string GAMECONTROLLER_DB( "config/gamecontrollerdb.txt" );
+const std::string GAMECONTROLLER_DB_LEGACY( "config/gamecontrollerdb_205.txt" );
 
 bool initAudio() noexcept
 {
@@ -75,8 +78,38 @@ bool loadMainSystem()
 
 void loadGamepadSubSystem()
 {
+    const lx::VersionInfo::Version sdl2_min_version{ 2, 0, 5, ""};
+
     if ( SDL_WasInit( SDL_INIT_GAMECONTROLLER ) != 0 )
-        SDL_GameControllerAddMappingsFromFile( GAMECONTROLLER_DB.c_str() );
+    {
+        const lx::VersionInfo::SDLVersion v = lx::VersionInfo::getSDLVersion();
+
+        if ( v.compiled.major == sdl2_min_version.major )
+        {
+            if ( v.compiled.minor == sdl2_min_version.minor )
+            {
+                if ( v.compiled.patch > sdl2_min_version.patch )
+                {
+                    SDL_GameControllerAddMappingsFromFile( GAMECONTROLLER_DB.c_str() );
+                }
+                else if ( v.compiled.patch == sdl2_min_version.patch )
+                {
+                    SDL_GameControllerAddMappingsFromFile( GAMECONTROLLER_DB_LEGACY.c_str() );
+                }
+                else    // This line must not be reachable
+                {
+                    lx::Log::logCritical( lx::Log::LogType::APPLICATION, "/!\\ Old SDL2 version /!\\" );
+                    lx::Log::logCritical( lx::Log::LogType::APPLICATION,
+                                          "/!\\ Minimal required version: %d.%d.%d /!\\",
+                                          sdl2_min_version.major,
+                                          sdl2_min_version.minor,
+                                          sdl2_min_version.patch );
+                    lx::quit();
+                    std::terminate();
+                }
+            }
+        }
+    }
 }
 
 bool loadImgSubSystem()
