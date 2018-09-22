@@ -20,12 +20,10 @@
 #include <sstream>
 #include <ctime>
 
-#if defined(__WIN32__)
+#if defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
 #include <Windows.h>
-#elif defined(__linux__)
-#include <cmath>
 #else
-#error "Not supported system"
+#include <cmath>
 #endif
 
 namespace
@@ -36,13 +34,13 @@ long getMillisTime() noexcept
 {
     long ms;
 
-#if defined(__WIN32__)  // Windows
+#if defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)  // Windows
 
     SYSTEMTIME st;
     GetSystemTime( &st );
     ms = static_cast<long>( st.wMilliseconds );
 
-#elif defined(linux) || defined(__linux) || defined(__linux__)  // Unix/Linux
+#elif defined(__linux__)  // Unix/Linux
 
     struct timespec t;
     clock_gettime( CLOCK_REALTIME, &t );
