@@ -70,12 +70,12 @@ void info() noexcept;
 */
 const Version getVersion() noexcept;
 /**
-*   @fn const SDLVersion getSDLVersion noexcept
+*   @fn const SDLVersion getSDLVersion() noexcept
 *   @return Information about the version
 */
 const SDLVersion getSDLVersion() noexcept;
 /**
-*   @fn const SDLVersion getSDLImageVersion noexcept
+*   @fn const SDLVersion getSDLImageVersion() noexcept
 *   @return Information about the version
 */
 const SDLVersion getSDLImageVersion() noexcept;
@@ -85,7 +85,7 @@ const SDLVersion getSDLImageVersion() noexcept;
 */
 const SDLVersion getSDLTTFVersion() noexcept;
 /**
-*   @fn const SDLVersion getSDLMixerVersion noexcept
+*   @fn const SDLVersion getSDLMixerVersion() noexcept
 *   @return Information about the version
 */
 const SDLVersion getSDLMixerVersion() noexcept;
