@@ -101,12 +101,20 @@ const SDLVersion getSDLImageVersion() noexcept
                                 img_linked->patch, "" }, SDL2_IMAGE };
 }
 
-/*const SDLVersion getSDLTTFVersion() noexcept
+const SDLVersion getSDLTTFVersion() noexcept
 {
     const std::string SDL2_TTF( "sdl2_ttf" );
+    const SDL_version * ttf_linked = TTF_Linked_Version();
+    SDL_version ttf_compiled;
+    SDL_TTF_VERSION( &ttf_compiled );
+
+    return SDLVersion{ Version{ ttf_compiled.major, ttf_compiled.minor,
+                                ttf_compiled.patch, "" },
+                       Version{ ttf_linked->major, ttf_linked->minor,
+                                ttf_linked->patch, "" }, SDL2_TTF };
 }
 
-const SDLVersion getSDLMixerVersion() noexcept
+/*const SDLVersion getSDLMixerVersion() noexcept
 {
     const std::string SDL2_MIXER( "sdl2_mixer" );
 }*/
