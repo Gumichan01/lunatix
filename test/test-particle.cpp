@@ -1,6 +1,7 @@
 
-#include <iostream>
 #include <Lunatix/Lunatix.hpp>
+#include <SDL2/SDL.h>
+#include <iostream>
 
 using namespace std;
 using namespace lx::Event;
