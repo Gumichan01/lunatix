@@ -70,9 +70,39 @@ void info() noexcept
 
 const Version getVersion() noexcept
 {
-    return Version{MAJOR_VERSION, MINOR_VERSION,
-                   PATCH_VERSION, STATUS.utf8_sstring()};
+    return Version{ MAJOR_VERSION, MINOR_VERSION,
+                    PATCH_VERSION, STATUS.utf8_sstring() };
 }
+
+
+const SDLVersion getSDLVersion() noexcept
+{
+    SDL_version sdl_compiled;
+    SDL_version sdl_linked;
+
+    SDL_VERSION( &sdl_compiled );
+    SDL_GetVersion( &sdl_linked );
+
+    return SDLVersion{ Version{ sdl_compiled.major, sdl_compiled.minor,
+                                sdl_compiled.patch, "" },
+                       Version{ sdl_linked.major, sdl_linked.minor,
+                                sdl_linked.patch, "" }, "" };
+}
+
+/*const SDLVersion getSDLImageVersion() noexcept
+{
+
+}
+
+const SDLVersion getSDLTTFVersion() noexcept
+{
+
+}
+
+const SDLVersion getSDLMixerVersion() noexcept
+{
+
+}*/
 
 
 void dependencies() noexcept

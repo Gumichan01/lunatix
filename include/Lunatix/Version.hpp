@@ -47,6 +47,18 @@ struct Version final
 };
 
 /**
+*   @struct SDLVersion
+*   @brief Information about SDL (main version or plugin)
+*   The current version of the library
+*/
+struct SDLVersion final
+{
+    Version compiled;
+    Version linked;
+    std::string plugin_name;    /**< Plugin name (optionnal)    */
+};
+
+/**
 *   @fn void info() noexcept
 *   Display information about the library
 */
@@ -57,6 +69,27 @@ void info() noexcept;
 *   @return Information about the version
 */
 const Version getVersion() noexcept;
+/**
+*   @fn const SDLVersion getSDLVersion noexcept
+*   @return Information about the version
+*/
+const SDLVersion getSDLVersion() noexcept;
+/**
+*   @fn const SDLVersion getSDLImageVersion noexcept
+*   @return Information about the version
+*/
+const SDLVersion getSDLImageVersion() noexcept;
+/**
+*   @fn const SDLVersion getSDLTTFVersion() noexcept
+*   @return Information about the version
+*/
+const SDLVersion getSDLTTFVersion() noexcept;
+/**
+*   @fn const SDLVersion getSDLMixerVersion noexcept
+*   @return Information about the version
+*/
+const SDLVersion getSDLMixerVersion() noexcept;
+
 /**
 *   @fn void dependencies() noexcept
 *   Display information about the library and its dependencies
