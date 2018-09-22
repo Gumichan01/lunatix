@@ -1,6 +1,8 @@
 
 #include <Lunatix/Lunatix.hpp>
+#include <SDL2/SDL.h>
 #include <cstring>
+
 
 using namespace lx::Event;
 
