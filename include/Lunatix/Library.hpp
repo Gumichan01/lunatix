@@ -22,7 +22,6 @@
 
 #include <Lunatix/Error.hpp>
 #include <Lunatix/Config.hpp>
-#include <SDL2/SDL.h>
 
 
 /**
