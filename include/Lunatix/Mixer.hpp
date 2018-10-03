@@ -230,7 +230,6 @@ Chunk * loadSample( lx::FileIO::FileBuffer& file );
 *        - MOD
 *        - OGG
 *        - MP3
-*   @todo
 */
 void setMusicPosition( double pos ) noexcept;
 
