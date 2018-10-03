@@ -27,20 +27,20 @@ int tagid3v1( Tagctx * ctx )
         return -1;
 
     if ( ( ctx->found & 1 << Ttitle ) == 0 && iso88591toutf8( out, Outsz, &in[3], 30 ) > 0 )
-        txtcb( ctx, Ttitle, out );
+        txtcb( ctx, Ttitle, ( char * )out );
     if ( ( ctx->found & 1 << Tartist ) == 0 && iso88591toutf8( out, Outsz, &in[33], 30 ) > 0 )
-        txtcb( ctx, Tartist, out );
+        txtcb( ctx, Tartist, ( char * )out );
     if ( ( ctx->found & 1 << Talbum ) == 0 && iso88591toutf8( out, Outsz, &in[63], 30 ) > 0 )
-        txtcb( ctx, Talbum, out );
+        txtcb( ctx, Talbum, ( char * )out );
 
     in[93 + 4] = 0;
     if ( ( ctx->found & 1 << Tdate ) == 0 && in[93] != 0 )
-        txtcb( ctx, Tdate, &in[93] );
+        txtcb( ctx, Tdate, ( char * )&in[93] );
 
     if ( ( ctx->found & 1 << Ttrack ) == 0 && in[125] == 0 && in[126] > 0 )
     {
         snprint( ( char * )out, Outsz, "%d", in[126] );
-        txtcb( ctx, Ttrack, out );
+        txtcb( ctx, Ttrack, ( char * )out );
     }
 
     if ( ( ctx->found & 1 << Tgenre ) == 0 && in[127] < Numgenre )

@@ -115,12 +115,12 @@ static int rva2( Tagctx * ctx, char * tag, int sz )
             vas[sizeof( vas ) - 1] = 0;
             peaks[sizeof( peaks ) - 1] = 0;
 
-            if ( std::strcmp( ( char * )tag, "track" ) == 0 )
+            if ( std::strcmp( tag, "track" ) == 0 )
             {
                 txtcb( ctx, Ttrackgain, vas );
                 txtcb( ctx, Ttrackpeak, peaks );
             }
-            else if ( std::strcmp( ( char * )tag, "album" ) == 0 )
+            else if ( std::strcmp( tag, "album" ) == 0 )
             {
                 txtcb( ctx, Talbumgain, vas );
                 txtcb( ctx, Talbumpeak, peaks );

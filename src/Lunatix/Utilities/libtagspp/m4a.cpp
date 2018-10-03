@@ -142,7 +142,7 @@ int tagm4a( Tagctx * ctx )
                 return -1;
             sz -= 4;
             snprint( ( char * )d, ctx->bufsz, "%u", beuint( d ) );
-            txtcb( ctx, type, d );
+            txtcb( ctx, type, ( char * )d );
         }
         else if ( type == Tgenre )
         {
@@ -159,7 +159,7 @@ int tagm4a( Tagctx * ctx )
             if ( ctx->read( ctx, d, sz ) != sz )
                 return -1;
             d[sz] = 0;
-            txtcb( ctx, type, d );
+            txtcb( ctx, type, ( char * )d );
             sz = 0;
         }
         else if ( type == Timage && dtype == 13 ) /* jpeg cover image */
