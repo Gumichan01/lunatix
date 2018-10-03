@@ -25,7 +25,7 @@ namespace libtagpp
 class Tag;
 
 /**
-*   @class Properties
+*   @class Properties final
 *   @brief Set of music properties (duration, format, ...)
 */
 struct Properties final
@@ -41,7 +41,7 @@ struct Properties final
 };
 
 /**
-*   @struct ImgMetaData
+*   @struct ImgMetaData final
 *   @brief Information about an image
 */
 struct ImgMetaData final
@@ -51,7 +51,7 @@ struct ImgMetaData final
 };
 
 /**
-*   @class Tag
+*   @class Tag final
 *   @brief Metadata of the music
 */
 class Tag final

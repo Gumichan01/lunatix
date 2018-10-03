@@ -8,7 +8,7 @@ static const uchar mark[] = {0x00, 0x00, 0xc0, 0xe0, 0xf0};
 int
 utf16to8( uchar * o, int osz, const uchar * s, int sz )
 {
-    int i, be, c, c2, wr, j;
+    int i, be, c2, wr, j;
 
     i = 0;
     be = 1;
@@ -22,7 +22,7 @@ utf16to8( uchar * o, int osz, const uchar * s, int sz )
 
     for ( ; i < sz - 1 && osz > 1; )
     {
-        c = rchr( &s[i] );
+        int c = rchr( &s[i] );
         i += 2;
         if ( c >= 0xd800 && c <= 0xdbff && i < sz - 1 )
         {

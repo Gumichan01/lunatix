@@ -141,7 +141,7 @@ int tagm4a( Tagctx * ctx )
             if ( ctx->read( ctx, d, 4 ) != 4 )
                 return -1;
             sz -= 4;
-            snprint( ( char * )d, ctx->bufsz, "%d", beuint( d ) );
+            snprint( ( char * )d, ctx->bufsz, "%u", beuint( d ) );
             txtcb( ctx, type, d );
         }
         else if ( type == Tgenre )

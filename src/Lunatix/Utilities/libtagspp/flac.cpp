@@ -3,7 +3,6 @@
 
 #define beu3(d)   ((d)[0]<<16 | (d)[1]<<8  | (d)[2]<<0)
 #define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
-#define leuint(d) (uint)((d)[3]<<24 | (d)[2]<<16 | (d)[1]<<8 | (d)[0]<<0)
 
 int tagflac( Tagctx * ctx );
 
@@ -58,7 +57,7 @@ int tagflac( Tagctx * ctx )
         }
         else if ( ( d[0] & 0x7f ) == 4 ) /* 4 = vorbis comment */
         {
-            int i, numtags, tagsz, vensz;
+            int i, numtags, vensz;
             char * k, *v;
 
             if ( sz < 12 || ctx->read( ctx, d, 4 ) != 4 )
@@ -66,8 +65,10 @@ int tagflac( Tagctx * ctx )
 
             sz -= 4;
             vensz = leuint( d );
+
             if ( vensz < 0 || vensz > sz - 8 )
                 return -1;
+
             /* skip vendor, read the number of tags */
             if ( ctx->seek( ctx, vensz, 1 ) < 0 || ctx->read( ctx, d, 4 ) != 4 )
                 return -1;
@@ -78,8 +79,10 @@ int tagflac( Tagctx * ctx )
             {
                 if ( ctx->read( ctx, d, 4 ) != 4 )
                     return -1;
-                tagsz = leuint( d );
+
+                int tagsz = leuint( d );
                 sz -= 4;
+
                 if ( tagsz > sz )
                     return -1;
 
@@ -92,11 +95,13 @@ int tagflac( Tagctx * ctx )
                 }
 
                 k = ctx->buf;
+
                 if ( ctx->read( ctx, k, tagsz ) != tagsz )
                     return -1;
                 /* some tags have a stupid '\r'; ignore */
                 if ( k[tagsz - 1] == '\r' )
                     k[tagsz - 1] = 0;
+
                 k[tagsz] = 0;
 
                 if ( ( v = strchr( k, '=' ) ) != nil )

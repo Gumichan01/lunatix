@@ -9,8 +9,8 @@
 inline int cistrcmp( const char * s1, const char * s2 )
 {
     while ( *s1 != '\0' && ( std::toupper( *s1++ ) == std::toupper( *s2++ ) ) );
-    const char su1 = std::toupper( *( ( unsigned char * )--s1 ) );
-    const char su2 = std::toupper( *( ( unsigned char * )--s2 ) );
+    const char su1 = static_cast<char>( std::toupper( *( ( unsigned char * )--s1 ) ) );
+    const char su2 = static_cast<char>( std::toupper( *( ( unsigned char * )--s2 ) ) );
     return ( su1 < su2 ) ? -1 : ( su1 != su2 );
 }
 

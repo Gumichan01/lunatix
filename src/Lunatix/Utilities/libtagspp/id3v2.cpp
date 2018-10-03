@@ -342,10 +342,9 @@ static const int samplesframe[4][4] =
 
 static void getduration( Tagctx * ctx, int offset )
 {
-    uvlong n, framelen, samplespf;
-    uchar * b;
     uint x;
     int xversion, xlayer, xbitrate;
+    uvlong samplespf;
 
     if ( ctx->read( ctx, ctx->buf, 64 ) != 64 )
         return;
@@ -362,13 +361,15 @@ static void getduration( Tagctx * ctx, int offset )
 
     if ( ctx->samplerate > 0 )
     {
-        framelen = ( uvlong )144 * ctx->bitrate / ctx->samplerate;
+        uvlong n;
+        uvlong framelen = ( uvlong )144 * ctx->bitrate / ctx->samplerate;
+
         if ( ( x & ( 1 << 9 ) ) != 0 ) /* padding */
             framelen += xlayer == 3 ? 4 : 1; /* for I it's 4 bytes */
 
         if ( memcmp( &ctx->buf[0x24], "Info", 4 ) == 0 || memcmp( &ctx->buf[0x24], "Xing", 4 ) == 0 )
         {
-            b = ( uchar * )ctx->buf + 0x28;
+            uchar * b = ( uchar * )ctx->buf + 0x28;
             x = beuint( b );
             b += 4;
             if ( ( x & 1 ) != 0 ) /* number of frames is set */
