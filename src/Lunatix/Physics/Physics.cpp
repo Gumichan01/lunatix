@@ -22,6 +22,7 @@
 #include <Lunatix/Hitbox.hpp>
 #include <Lunatix/Random.hpp>
 #include <stdexcept>
+#include <algorithm>
 
 
 using namespace FloatBox;
@@ -259,13 +260,10 @@ bool collisionCircleBox( const Circle& circle, const FloatingBox& box ) noexcept
         Line{ box.p, Vector2D{ BOX_W, FNIL } }
     };
 
-    for ( const Line& l : sides )
+    return std::any_of( std::begin( sides ), std::end( sides ), [&circle]( const Line & l )
     {
-        if ( collisionLineCircle( circle, l ) )
-            return true;
-    }
-
-    return false;
+        return collisionLineCircle( circle, l );
+    } );
 }
 
 
