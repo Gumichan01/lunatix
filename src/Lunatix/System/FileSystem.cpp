@@ -12,6 +12,7 @@
 
 #include <Lunatix/FileSystem.hpp>
 #include <SDL2/SDL_filesystem.h>
+#include <algorithm>
 
 
 namespace
@@ -61,16 +62,9 @@ UTF8string removeTrailingSep ( const UTF8string& u8str ) noexcept
 
 size_t countSeparator ( const UTF8string& u8str ) noexcept
 {
-    size_t counter = 0;
-    const std::string& SEP = SEPARATOR.utf8_sstring();
-
-    for ( const std::string& s : u8str )
-    {
-        if ( s == SEP )
-            ++counter;
-    }
-
-    return counter;
+    const char SEP = SEPARATOR.utf8_sstring()[0];
+    const std::string& u8string = u8str.utf8_sstring();
+    return static_cast<size_t>( std::count( u8string.begin(), u8string.end(), SEP ) );
 }
 
 bool basename_check ( const UTF8string& npath )
